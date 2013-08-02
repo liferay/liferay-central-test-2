@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,7 +15,6 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.SortedArrayList;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -29,12 +28,15 @@ import java.io.FileInputStream;
 import java.io.FilenameFilter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.oro.io.GlobFilenameFilter;
 import org.apache.tools.ant.DirectoryScanner;
@@ -57,36 +59,55 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	public PluginsEnvironmentBuilder(File dir) throws Exception {
-		DirectoryScanner ds = new DirectoryScanner();
+		DirectoryScanner directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(dir);
-		ds.setIncludes(new String[] {"**\\liferay-plugin-package.properties"});
+		directoryScanner.setBasedir(dir);
+		directoryScanner.setIncludes(
+			new String[] {"**\\liferay-plugin-package.properties"});
 
-		ds.scan();
+		directoryScanner.scan();
 
 		String dirName = dir.getCanonicalPath();
 
-		for (String fileName : ds.getIncludedFiles()) {
+		for (String fileName : directoryScanner.getIncludedFiles()) {
 			setupWarProject(dirName, fileName);
 		}
 
-		ds = new DirectoryScanner();
+		directoryScanner = new DirectoryScanner();
 
-		ds.setBasedir(dir);
-		ds.setIncludes(new String[] {"**\\build.xml"});
+		directoryScanner.setBasedir(dir);
+		directoryScanner.setIncludes(new String[] {"**\\build.xml"});
 
-		ds.scan();
+		directoryScanner.scan();
 
-		for (String fileName : ds.getIncludedFiles()) {
+		for (String fileName : directoryScanner.getIncludedFiles()) {
 			String content = _fileUtil.read(dirName + "/" + fileName);
 
-			if (!content.contains(
-					"<import file=\"../build-common-shared.xml\" />")) {
+			boolean osgiProject = content.contains(
+				"<import file=\"../../build-common-osgi-plugin.xml\" />");
+			boolean sharedProject = content.contains(
+				"<import file=\"../build-common-shared.xml\" />");
 
-				continue;
+			List<String> dependencyJars = Collections.emptyList();
+
+			if (osgiProject) {
+				int x = content.indexOf("osgi.plugin.portal.lib.jars");
+
+				if (x != -1) {
+					x = content.indexOf("value=\"", x);
+					x = content.indexOf("\"", x);
+
+					int y = content.indexOf("\"", x + 1);
+
+					dependencyJars = Arrays.asList(
+						StringUtil.split(content.substring(x + 1, y)));
+				}
 			}
 
-			setupJarProject(dirName, fileName);
+			if (osgiProject || sharedProject) {
+				setupJarProject(
+					dirName, fileName, dependencyJars, sharedProject);
+			}
 		}
 	}
 
@@ -146,7 +167,7 @@ public class PluginsEnvironmentBuilder {
 		int x = content.indexOf("import.shared");
 
 		if (x == -1) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		x = content.indexOf("value=\"", x);
@@ -155,13 +176,13 @@ public class PluginsEnvironmentBuilder {
 		int y = content.indexOf("\" />", x);
 
 		if ((x == -1) || (y == -1)) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		String[] importShared = StringUtil.split(content.substring(x + 1, y));
 
 		if (importShared.length == 0) {
-			return Collections.emptyList();
+			return new ArrayList<String>();
 		}
 
 		List<String> jars = new ArrayList<String>();
@@ -176,8 +197,8 @@ public class PluginsEnvironmentBuilder {
 				continue;
 			}
 
-			for (File f : currentImportSharedLibDir.listFiles()) {
-				jars.add(f.getName());
+			for (File file : currentImportSharedLibDir.listFiles()) {
+				jars.add(file.getName());
 			}
 		}
 
@@ -214,7 +235,9 @@ public class PluginsEnvironmentBuilder {
 		return jars;
 	}
 
-	protected void setupJarProject(String dirName, String fileName)
+	protected void setupJarProject(
+			String dirName, String fileName, List<String> dependencyJars,
+			boolean sharedProject)
 		throws Exception {
 
 		File buildFile = new File(dirName + "/" + fileName);
@@ -223,9 +246,35 @@ public class PluginsEnvironmentBuilder {
 
 		File libDir = new File(projectDir, "lib");
 
-		List<String> dependencyJars = Collections.emptyList();
-
 		writeEclipseFiles(libDir, projectDir, dependencyJars);
+
+		List<String> importSharedJars = getImportSharedJars(projectDir);
+
+		if (sharedProject) {
+			if (!importSharedJars.contains("portal-compat-shared.jar")) {
+				importSharedJars.add("portal-compat-shared.jar");
+			}
+		}
+
+		File gitignoreFile = new File(
+			projectDir.getCanonicalPath() + "/.gitignore");
+
+		String[] gitIgnores = importSharedJars.toArray(
+			new String[importSharedJars.size()]);
+
+		for (int i = 0; i < gitIgnores.length; i++) {
+			String gitIgnore = gitIgnores[i];
+
+			gitIgnore = "/lib/" + gitIgnore;
+
+			gitIgnores[i] = gitIgnore;
+		}
+
+		if (gitIgnores.length > 0) {
+			System.out.println("Updating " + gitignoreFile);
+
+			_fileUtil.write(gitignoreFile, StringUtil.merge(gitIgnores, "\n"));
+		}
 	}
 
 	protected void setupWarProject(String dirName, String fileName)
@@ -237,7 +286,7 @@ public class PluginsEnvironmentBuilder {
 
 		properties.load(new FileInputStream(propertiesFile));
 
-		List<String> jars = new SortedArrayList<String>();
+		Set<String> jars = new TreeSet<String>();
 
 		jars.addAll(getCommonJars());
 
@@ -261,26 +310,26 @@ public class PluginsEnvironmentBuilder {
 		List<String> ignores = ListUtil.fromFile(
 			libDir.getCanonicalPath() + "/../.gitignore");
 
-		if (!libDirPath.contains("/ext/") && !ignores.contains("/lib")) {
-			File gitignoreFile = new File(
-				libDir.getCanonicalPath() + "/.gitignore");
-
-			System.out.println("Updating " + gitignoreFile);
-
-			String[] gitIgnores = jars.toArray(new String[jars.size()]);
-
-			for (int i = 0; i < gitIgnores.length; i++) {
-				String gitIgnore = gitIgnores[i];
-
-				if (Validator.isNotNull(gitIgnore) &&
-					!gitIgnore.startsWith("/")) {
-
-					gitIgnores[i] = "/" + gitIgnore;
-				}
-			}
-
-			_fileUtil.write(gitignoreFile, StringUtil.merge(gitIgnores, "\n"));
+		if (libDirPath.contains("/ext/") || ignores.contains("/lib")) {
+			return;
 		}
+
+		File gitignoreFile = new File(
+			libDir.getCanonicalPath() + "/.gitignore");
+
+		System.out.println("Updating " + gitignoreFile);
+
+		String[] gitIgnores = jars.toArray(new String[jars.size()]);
+
+		for (int i = 0; i < gitIgnores.length; i++) {
+			String gitIgnore = gitIgnores[i];
+
+			if (Validator.isNotNull(gitIgnore) && !gitIgnore.startsWith("/")) {
+				gitIgnores[i] = "/" + gitIgnore;
+			}
+		}
+
+		_fileUtil.write(gitignoreFile, StringUtil.merge(gitIgnores, "\n"));
 	}
 
 	protected void writeClasspathFile(
@@ -400,6 +449,10 @@ public class PluginsEnvironmentBuilder {
 
 		if (addJunitJars) {
 			addClasspathEntry(sb, "/portal/lib/development/junit.jar");
+			addClasspathEntry(sb, "/portal/lib/development/mockito.jar");
+			addClasspathEntry(
+				sb, "/portal/lib/development/powermock-mockito.jar");
+			addClasspathEntry(sb, "/portal/lib/development/spring-test.jar");
 			addClasspathEntry(sb, "/portal/lib/portal/commons-io.jar");
 		}
 
@@ -420,12 +473,19 @@ public class PluginsEnvironmentBuilder {
 		}
 
 		for (String jar : portalJars) {
-			addClasspathEntry(sb, "/portal/lib/portal/" + jar, attributes);
+			if (!jar.equals("util-slf4j.jar")) {
+				addClasspathEntry(sb, "/portal/lib/portal/" + jar, attributes);
+			}
 		}
 
 		addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
 		addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
 		addClasspathEntry(sb, "/portal/util-java/util-java.jar");
+
+		if (portalJars.contains("util-slf4j.jar")) {
+			addClasspathEntry(sb, "/portal/util-slf4j/util-slf4j.jar");
+		}
+
 		addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
 
 		for (String jar : extGlobalJars) {

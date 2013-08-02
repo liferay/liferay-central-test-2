@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -283,16 +283,103 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		}
 	}
 
-	protected void clearUniqueFindersCache(Role role) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] { Long.valueOf(role.getCompanyId()), role.getName() });
+	protected void cacheUniqueFindersCache(Role role) {
+		if (role.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(role.getCompanyId()),
+					
+					role.getName()
+				};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C,
-			new Object[] {
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args, role);
+
+			args = new Object[] {
+					Long.valueOf(role.getCompanyId()),
+					Long.valueOf(role.getClassNameId()),
+					Long.valueOf(role.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C, args, role);
+		}
+		else {
+			RoleModelImpl roleModelImpl = (RoleModelImpl)role;
+
+			if ((roleModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(role.getCompanyId()),
+						
+						role.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args, role);
+			}
+
+			if ((roleModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(role.getCompanyId()),
+						Long.valueOf(role.getClassNameId()),
+						Long.valueOf(role.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C, args, role);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Role role) {
+		RoleModelImpl roleModelImpl = (RoleModelImpl)role;
+
+		Object[] args = new Object[] {
+				Long.valueOf(role.getCompanyId()),
+				
+				role.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+
+		if ((roleModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(roleModelImpl.getOriginalCompanyId()),
+					
+					roleModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(role.getCompanyId()),
 				Long.valueOf(role.getClassNameId()),
 				Long.valueOf(role.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
+
+		if ((roleModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(roleModelImpl.getOriginalCompanyId()),
+					Long.valueOf(roleModelImpl.getOriginalClassNameId()),
+					Long.valueOf(roleModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
+		}
 	}
 
 	/**
@@ -523,59 +610,8 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 		EntityCacheUtil.putResult(RoleModelImpl.ENTITY_CACHE_ENABLED,
 			RoleImpl.class, role.getPrimaryKey(), role);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-				new Object[] { Long.valueOf(role.getCompanyId()), role.getName() },
-				role);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-				new Object[] {
-					Long.valueOf(role.getCompanyId()),
-					Long.valueOf(role.getClassNameId()),
-					Long.valueOf(role.getClassPK())
-				}, role);
-		}
-		else {
-			if ((roleModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(roleModelImpl.getOriginalCompanyId()),
-						
-						roleModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-					new Object[] {
-						Long.valueOf(role.getCompanyId()),
-						
-					role.getName()
-					}, role);
-			}
-
-			if ((roleModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(roleModelImpl.getOriginalCompanyId()),
-						Long.valueOf(roleModelImpl.getOriginalClassNameId()),
-						Long.valueOf(roleModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C_C,
-					new Object[] {
-						Long.valueOf(role.getCompanyId()),
-						Long.valueOf(role.getClassNameId()),
-						Long.valueOf(role.getClassPK())
-					}, role);
-			}
-		}
+		clearUniqueFindersCache(role);
+		cacheUniqueFindersCache(role);
 
 		return role;
 	}
@@ -6238,8 +6274,10 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 				List<ModelListener<Role>> listenersList = new ArrayList<ModelListener<Role>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Role>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

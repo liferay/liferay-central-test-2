@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -83,7 +83,7 @@ if (assetCategoryId != 0) {
 		<%
 		AssetUtil.addPortletBreadcrumbEntries(assetCategoryId, request, portletURL);
 
-		AssetUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
+		PortalUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
 
 		PortalUtil.addPageKeywords(assetCategoryTitle, request);
 		PortalUtil.addPageKeywords(assetTagName, request);
@@ -108,7 +108,7 @@ if (assetCategoryId != 0) {
 	<c:when test="<%= Validator.isNotNull(assetTagName) %>">
 
 		<%
-		AssetUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
+		PortalUtil.addPortletBreadcrumbEntry(request, assetTagName, currentURL);
 
 		PortalUtil.addPageKeywords(assetTagName, request);
 		%>

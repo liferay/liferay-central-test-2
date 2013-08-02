@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -222,11 +222,55 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Repository repository) {
+		if (repository.isNew()) {
+			Object[] args = new Object[] {
+					repository.getUuid(), Long.valueOf(repository.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				repository);
+		}
+		else {
+			RepositoryModelImpl repositoryModelImpl = (RepositoryModelImpl)repository;
+
+			if ((repositoryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						repository.getUuid(),
+						Long.valueOf(repository.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					repository);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Repository repository) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		RepositoryModelImpl repositoryModelImpl = (RepositoryModelImpl)repository;
+
+		Object[] args = new Object[] {
 				repository.getUuid(), Long.valueOf(repository.getGroupId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((repositoryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					repositoryModelImpl.getOriginalUuid(),
+					Long.valueOf(repositoryModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -405,31 +449,8 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 		EntityCacheUtil.putResult(RepositoryModelImpl.ENTITY_CACHE_ENABLED,
 			RepositoryImpl.class, repository.getPrimaryKey(), repository);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					repository.getUuid(), Long.valueOf(repository.getGroupId())
-				}, repository);
-		}
-		else {
-			if ((repositoryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						repositoryModelImpl.getOriginalUuid(),
-						Long.valueOf(repositoryModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						repository.getUuid(),
-						Long.valueOf(repository.getGroupId())
-					}, repository);
-			}
-		}
+		clearUniqueFindersCache(repository);
+		cacheUniqueFindersCache(repository);
 
 		return repository;
 	}
@@ -1892,8 +1913,10 @@ public class RepositoryPersistenceImpl extends BasePersistenceImpl<Repository>
 				List<ModelListener<Repository>> listenersList = new ArrayList<ModelListener<Repository>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Repository>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

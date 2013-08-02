@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.DirectRequestDispatcherFactoryUtil;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.TrackedServletRequest;
 import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
+import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -205,8 +206,7 @@ public class IncludeTag extends AttributesTagSupport {
 
 		_calledSetAttributes = true;
 
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+		HttpServletRequest request = getOriginalServletRequest();
 
 		if (isCleanUpSetAttributes()) {
 			_trackedRequest = new TrackedServletRequest(request);
@@ -283,7 +283,14 @@ public class IncludeTag extends AttributesTagSupport {
 			return null;
 		}
 
-		Group group = themeDisplay.getScopeGroup();
+		Group group = null;
+
+		try {
+			group = StagingUtil.getLiveGroup(themeDisplay.getScopeGroupId());
+		}
+		catch (Exception e) {
+			return null;
+		}
 
 		UnicodeProperties typeSettingsProperties =
 			group.getTypeSettingsProperties();
@@ -317,6 +324,10 @@ public class IncludeTag extends AttributesTagSupport {
 
 	protected String getEndPage() {
 		return null;
+	}
+
+	protected HttpServletRequest getOriginalServletRequest() {
+		return (HttpServletRequest)pageContext.getRequest();
 	}
 
 	protected String getPage() {
@@ -383,6 +394,19 @@ public class IncludeTag extends AttributesTagSupport {
 		HttpServletRequest request = getServletRequest();
 
 		Theme theme = (Theme)request.getAttribute(WebKeys.THEME);
+
+		if (theme == null) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			if (themeDisplay != null) {
+				theme = themeDisplay.getTheme();
+			}
+		}
+
+		if (theme == null) {
+			return false;
+		}
 
 		String portletId = ThemeUtil.getPortletId(request);
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -166,17 +166,24 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 		AnnotationChainableMethodAdvice.registerAnnotationClass(Skip.class);
 	}
 
+	@Override
 	public Object getProxy() {
 		return getProxy(ClassUtils.getDefaultClassLoader());
 	}
 
+	@Override
 	public Object getProxy(ClassLoader classLoader) {
 		Class<?>[] proxiedInterfaces = AopProxyUtils.completeProxiedInterfaces(
 			_advisedSupport);
 
-		return ProxyUtil.newProxyInstance(classLoader, proxiedInterfaces, this);
+		InvocationHandler invocationHandler = _pacl.getInvocationHandler(
+			this, _advisedSupport);
+
+		return ProxyUtil.newProxyInstance(
+			classLoader, proxiedInterfaces, invocationHandler);
 	}
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
@@ -287,6 +294,7 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 	private static Map <ServiceBeanMethodInvocation, MethodInterceptorsBag>
 		_methodInterceptorBags = new ConcurrentHashMap
 			<ServiceBeanMethodInvocation, MethodInterceptorsBag>();
+	private static PACL _pacl = new NoPACL();
 
 	private AdvisedSupport _advisedSupport;
 	private AdvisorChainFactory _advisorChainFactory;
@@ -306,6 +314,25 @@ public class ServiceBeanAopProxy implements AopProxy, InvocationHandler {
 
 		private List<MethodInterceptor> _classLevelMethodInterceptors;
 		private List<MethodInterceptor> _mergedMethodInterceptors;
+
+	}
+
+	private static class NoPACL implements PACL {
+
+		@Override
+		public InvocationHandler getInvocationHandler(
+			InvocationHandler invocationHandler,
+			AdvisedSupport advisedSupport) {
+
+			return invocationHandler;
+		}
+
+	}
+
+	public static interface PACL {
+
+		public InvocationHandler getInvocationHandler(
+			InvocationHandler invocationHandler, AdvisedSupport advisedSupport);
 
 	}
 

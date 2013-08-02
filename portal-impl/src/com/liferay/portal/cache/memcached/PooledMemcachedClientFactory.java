@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,10 +23,12 @@ import org.apache.commons.pool.ObjectPool;
  */
 public class PooledMemcachedClientFactory implements MemcachedClientFactory {
 
+	@Override
 	public void clear() throws Exception {
 		_memcachedClientPool.clear();
 	}
 
+	@Override
 	public void close() throws Exception {
 		_memcachedClientPool.close();
 	}
@@ -39,24 +41,29 @@ public class PooledMemcachedClientFactory implements MemcachedClientFactory {
 		}
 	}
 
+	@Override
 	public MemcachedClientIF getMemcachedClient() throws Exception {
 		return (MemcachedClientIF)_memcachedClientPool.borrowObject();
 	}
 
+	@Override
 	public int getNumActive() {
 		return _memcachedClientPool.getNumActive();
 	}
 
+	@Override
 	public int getNumIdle() {
 		return _memcachedClientPool.getNumIdle();
 	}
 
+	@Override
 	public void invalidateMemcachedClient(MemcachedClientIF memcachedClient)
 		throws Exception {
 
 		_memcachedClientPool.invalidateObject(memcachedClient);
 	}
 
+	@Override
 	public void returnMemcachedObject(MemcachedClientIF memcachedClient)
 		throws Exception {
 

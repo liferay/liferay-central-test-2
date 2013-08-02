@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,7 +23,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 JournalArticle article = null;
 
-String type = StringPool.BLANK;
+groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getScopeGroupId());
+
+String type = ParamUtil.getString(request, "type");
 
 try {
 	if (Validator.isNotNull(articleId)) {
@@ -37,9 +39,6 @@ try {
 }
 catch (NoSuchArticleException nsae) {
 }
-
-groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getScopeGroupId());
-type = ParamUtil.getString(request, "type", type);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
@@ -152,6 +151,16 @@ type = ParamUtil.getString(request, "type", type);
 	dynamicRenderRequest.setParameter("groupId", String.valueOf(groupId));
 
 	ArticleSearch searchContainer = new ArticleSearch(dynamicRenderRequest, configurationRenderURL);
+
+	List<String> headerNames = searchContainer.getHeaderNames();
+
+	headerNames.clear();
+
+	headerNames.add("id");
+	headerNames.add("title");
+	headerNames.add("modified-date");
+	headerNames.add("display-date");
+	headerNames.add("author");
 	%>
 
 	<liferay-ui:search-form
@@ -159,14 +168,12 @@ type = ParamUtil.getString(request, "type", type);
 		searchContainer="<%= searchContainer %>"
 	>
 		<liferay-ui:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-		<liferay-ui:param name="type" value="<%= type %>" />
+		<liferay-ui:param name="type" value="<%= HtmlUtil.escape(type) %>" />
 	</liferay-ui:search-form>
 
 	<br />
 
 	<%
-	OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(searchContainer.getOrderByCol(), searchContainer.getOrderByType());
-
 	ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
 	searchTerms.setVersion(-1);
@@ -216,7 +223,7 @@ type = ParamUtil.getString(request, "type", type);
 
 		// Author
 
-		row.addText(HtmlUtil.escape(PortalUtil.getUserName(curArticle.getUserId(), curArticle.getUserName())), rowHREF);
+		row.addText(PortalUtil.getUserName(curArticle), rowHREF);
 
 		// Add result row
 
@@ -236,7 +243,7 @@ type = ParamUtil.getString(request, "type", type);
 
 	<aui:fieldset cssClass="aui-helper-hidden">
 		<aui:field-wrapper label="portlet-id">
-			<%= portletResource %>
+			<%= HtmlUtil.escape(portletResource) %>
 		</aui:field-wrapper>
 	</aui:fieldset>
 

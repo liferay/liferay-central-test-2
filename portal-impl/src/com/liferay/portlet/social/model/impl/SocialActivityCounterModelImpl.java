@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -438,13 +438,16 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public SocialActivityCounter toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (SocialActivityCounter)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (SocialActivityCounter)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public SocialActivityCounter toUnescapedModel() {
+		return (SocialActivityCounter)this;
 	}
 
 	@Override
@@ -485,18 +488,15 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivityCounter)) {
 			return false;
 		}
 
-		SocialActivityCounter socialActivityCounter = null;
-
-		try {
-			socialActivityCounter = (SocialActivityCounter)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivityCounter socialActivityCounter = (SocialActivityCounter)obj;
 
 		long primaryKey = socialActivityCounter.getPrimaryKey();
 
@@ -678,7 +678,7 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 	}
 
 	private static ClassLoader _classLoader = SocialActivityCounter.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			SocialActivityCounter.class
 		};
 	private long _activityCounterId;
@@ -707,5 +707,5 @@ public class SocialActivityCounterModelImpl extends BaseModelImpl<SocialActivity
 	private int _originalEndPeriod;
 	private boolean _setOriginalEndPeriod;
 	private long _columnBitmask;
-	private SocialActivityCounter _escapedModelProxy;
+	private SocialActivityCounter _escapedModel;
 }

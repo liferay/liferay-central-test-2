@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -276,6 +276,15 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getCanonicalURL(completeURL, themeDisplay, layout);
+	}
+
+	public static String getCanonicalURL(
+			String completeURL, ThemeDisplay themeDisplay, Layout layout,
+			boolean forceLayoutFriendlyURL)
+		throws PortalException, SystemException {
+
+		return getPortal().getCanonicalURL(
+			completeURL, themeDisplay, layout, forceLayoutFriendlyURL);
 	}
 
 	/**
@@ -583,20 +592,53 @@ public class PortalUtil {
 			group, privateLayoutSet, themeDisplay);
 	}
 
+	public static String getGroupFriendlyURL(
+			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay,
+			Locale locale)
+		throws PortalException, SystemException {
+
+		return getPortal().getGroupFriendlyURL(
+			group, privateLayoutSet, themeDisplay, locale);
+	}
+
 	public static String[] getGroupPermissions(HttpServletRequest request) {
 		return getPortal().getGroupPermissions(request);
+	}
+
+	public static String[] getGroupPermissions(
+		HttpServletRequest request, String className) {
+
+		return getPortal().getGroupPermissions(request, className);
 	}
 
 	public static String[] getGroupPermissions(PortletRequest portletRequest) {
 		return getPortal().getGroupPermissions(portletRequest);
 	}
 
+	public static String[] getGroupPermissions(
+		PortletRequest portletRequest, String className) {
+
+		return getPortal().getGroupPermissions(portletRequest, className);
+	}
+
 	public static String[] getGuestPermissions(HttpServletRequest request) {
 		return getPortal().getGuestPermissions(request);
 	}
 
+	public static String[] getGuestPermissions(
+		HttpServletRequest request, String className) {
+
+		return getPortal().getGuestPermissions(request, className);
+	}
+
 	public static String[] getGuestPermissions(PortletRequest portletRequest) {
 		return getPortal().getGuestPermissions(portletRequest);
+	}
+
+	public static String[] getGuestPermissions(
+		PortletRequest portletRequest, String className) {
+
+		return getPortal().getGuestPermissions(portletRequest, className);
 	}
 
 	public static String getHomeURL(HttpServletRequest request)
@@ -626,12 +668,14 @@ public class PortalUtil {
 	}
 
 	public static String getJournalArticleActualURL(
-			long groupId, String mainPath, String friendlyURL,
-			Map<String, String[]> params, Map<String, Object> requestContext)
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
 		throws PortalException, SystemException {
 
 		return getPortal().getJournalArticleActualURL(
-			groupId, mainPath, friendlyURL, params, requestContext);
+			groupId, privateLayout, mainPath, friendlyURL, params,
+			requestContext);
 	}
 
 	public static String getJsSafePortletId(String portletId) {
@@ -775,6 +819,13 @@ public class PortalUtil {
 		return getPortal().getLocale(request);
 	}
 
+	public static Locale getLocale(
+		HttpServletRequest request, HttpServletResponse response,
+		boolean initialize) {
+
+		return getPortal().getLocale(request, response, initialize);
+	}
+
 	public static Locale getLocale(RenderRequest renderRequest) {
 		return getPortal().getLocale(renderRequest);
 	}
@@ -830,10 +881,6 @@ public class PortalUtil {
 		HttpServletRequest request) {
 
 		return getPortal().getOriginalServletRequest(request);
-	}
-
-	public static String getOuterPortletId(HttpServletRequest request) {
-		return getPortal().getOuterPortletId(request);
 	}
 
 	public static long getParentGroupId(long scopeGroupId)
@@ -1293,6 +1340,10 @@ public class PortalUtil {
 		return getPortal().getUserId(portletRequest);
 	}
 
+	public static String getUserName(BaseModel<?> baseModel) {
+		return getPortal().getUserName(baseModel);
+	}
+
 	public static String getUserName(long userId, String defaultUserName) {
 		return getPortal().getUserName(userId, defaultUserName);
 	}
@@ -1364,6 +1415,10 @@ public class PortalUtil {
 		getPortal().initCustomSQL();
 	}
 
+	public static User initUser(HttpServletRequest request) throws Exception {
+		return getPortal().initUser(request);
+	}
+
 	public static boolean isAllowAddPortletDefaultResource(
 			HttpServletRequest request, Portlet portlet)
 		throws PortalException, SystemException {
@@ -1383,7 +1438,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupAdmin(User, long)}
 	 */
 	public static boolean isCommunityAdmin(User user, long groupId)
 		throws Exception {
@@ -1392,7 +1447,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupOwner(User, long)}
 	 */
 	public static boolean isCommunityOwner(User user, long groupId)
 		throws Exception {
@@ -1443,13 +1498,20 @@ public class PortalUtil {
 	}
 
 	public static boolean isGroupAdmin(User user, long groupId)
-			throws Exception {
+		throws Exception {
 
 		return getPortal().isGroupAdmin(user, groupId);
 	}
 
+	public static boolean isGroupFriendlyURL(
+		String fullURL, String groupFriendlyURL, String layoutFriendlyURL) {
+
+		return getPortal().isGroupFriendlyURL(
+			fullURL, groupFriendlyURL, layoutFriendlyURL);
+	}
+
 	public static boolean isGroupOwner(User user, long groupId)
-			throws Exception {
+		throws Exception {
 
 		return getPortal().isGroupOwner(user, groupId);
 	}
@@ -1680,6 +1742,10 @@ public class PortalUtil {
 
 	public static String transformCustomSQL(String sql) {
 		return getPortal().transformCustomSQL(sql);
+	}
+
+	public static String transformSQL(String sql) {
+		return getPortal().transformSQL(sql);
 	}
 
 	public static PortletMode updatePortletMode(

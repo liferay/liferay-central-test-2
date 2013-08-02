@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,13 +38,16 @@ if (showPortletBreadcrumb) {
 String breadcrumbString = sb.toString();
 
 if (Validator.isNotNull(breadcrumbString)) {
-	int pos = breadcrumbString.indexOf("<li");
+	int x = breadcrumbString.indexOf("<li");
+	int y = breadcrumbString.lastIndexOf("<li");
 
-	breadcrumbString = StringUtil.insert(breadcrumbString, " class=\"first\"", pos + 3);
-
-	pos = breadcrumbString.lastIndexOf("<li");
-
-	breadcrumbString = StringUtil.insert(breadcrumbString, " class=\"last\"", pos + 3);
+	if (x == y) {
+		breadcrumbString = StringUtil.insert(breadcrumbString, " class=\"only\"", x + 3);
+	}
+	else {
+		breadcrumbString = StringUtil.insert(breadcrumbString, " class=\"last\"", y + 3);
+		breadcrumbString = StringUtil.insert(breadcrumbString, " class=\"first\"", x + 3);
+	}
 }
 %>
 

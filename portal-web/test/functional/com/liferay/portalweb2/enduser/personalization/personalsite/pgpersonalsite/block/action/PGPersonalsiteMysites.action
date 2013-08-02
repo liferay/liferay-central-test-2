@@ -1,0 +1,7 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="MY_SITES_AVAILABLE_SITES">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

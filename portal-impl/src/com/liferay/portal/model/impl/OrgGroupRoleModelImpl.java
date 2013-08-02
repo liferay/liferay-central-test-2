@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -190,13 +190,16 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	@Override
 	public OrgGroupRole toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (OrgGroupRole)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (OrgGroupRole)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public OrgGroupRole toUnescapedModel() {
+		return (OrgGroupRole)this;
 	}
 
 	@Override
@@ -220,18 +223,15 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgGroupRole)) {
 			return false;
 		}
 
-		OrgGroupRole orgGroupRole = null;
-
-		try {
-			orgGroupRole = (OrgGroupRole)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		OrgGroupRole orgGroupRole = (OrgGroupRole)obj;
 
 		OrgGroupRolePK primaryKey = orgGroupRole.getPrimaryKey();
 
@@ -317,7 +317,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	}
 
 	private static ClassLoader _classLoader = OrgGroupRole.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			OrgGroupRole.class
 		};
 	private long _organizationId;
@@ -328,5 +328,5 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	private long _originalRoleId;
 	private boolean _setOriginalRoleId;
 	private long _columnBitmask;
-	private OrgGroupRole _escapedModelProxy;
+	private OrgGroupRole _escapedModel;
 }

@@ -44,7 +44,9 @@ AUI.add(
 							prevSelectVal
 						);
 
-						select.attr('name', id);
+						if (!select.attr('name')) {
+							select.attr('name', id);
+						}
 
 						select.on(
 							'change',

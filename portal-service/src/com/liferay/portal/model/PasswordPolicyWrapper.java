@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -1029,6 +1031,10 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 		return new PasswordPolicyWrapper(_passwordPolicy.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.PasswordPolicy toUnescapedModel() {
+		return new PasswordPolicyWrapper(_passwordPolicy.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _passwordPolicy.toString();
@@ -1041,6 +1047,26 @@ public class PasswordPolicyWrapper implements PasswordPolicy,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_passwordPolicy.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PasswordPolicyWrapper)) {
+			return false;
+		}
+
+		PasswordPolicyWrapper passwordPolicyWrapper = (PasswordPolicyWrapper)obj;
+
+		if (Validator.equals(_passwordPolicy,
+					passwordPolicyWrapper._passwordPolicy)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

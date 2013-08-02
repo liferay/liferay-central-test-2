@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,7 @@ import java.util.Date;
 public class WebDAVPropsLocalServiceImpl
 	extends WebDAVPropsLocalServiceBaseImpl {
 
+	@Override
 	public void deleteWebDAVProps(String className, long classPK)
 		throws SystemException {
 
@@ -42,6 +43,7 @@ public class WebDAVPropsLocalServiceImpl
 		}
 	}
 
+	@Override
 	public WebDAVProps getWebDAVProps(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -63,12 +65,13 @@ public class WebDAVPropsLocalServiceImpl
 			webDavProps.setClassNameId(classNameId);
 			webDavProps.setClassPK(classPK);
 
-			webDAVPropsPersistence.update(webDavProps, false);
+			webDAVPropsLocalService.updateWebDAVProps(webDavProps);
 		}
 
 		return webDavProps;
 	}
 
+	@Override
 	public void storeWebDAVProps(WebDAVProps webDavProps)
 		throws PortalException, SystemException {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,7 @@ public class ParamAndPropertyAncestorTagImpl
 	extends BaseBodyTagSupport
 	implements ParamAncestorTag, PropertyAncestorTag {
 
+	@Override
 	public void addParam(String name, String value) {
 		if (_params == null) {
 			_params = new LinkedHashMap<String, String[]>();
@@ -72,6 +73,7 @@ public class ParamAndPropertyAncestorTagImpl
 		_params.put(name, values);
 	}
 
+	@Override
 	public void addProperty(String name, String value) {
 		if (_properties == null) {
 			_properties = new LinkedHashMap<String, String[]>();

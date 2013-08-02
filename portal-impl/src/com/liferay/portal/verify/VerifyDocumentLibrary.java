@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,11 @@
 package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Criterion;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -25,6 +30,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
@@ -36,9 +42,12 @@ import com.liferay.portlet.documentlibrary.service.DLAppHelperLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryActionableDynamicQuery;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionActionableDynamicQuery;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.comparator.FileVersionVersionComparator;
+import com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl;
 
 import java.io.InputStream;
 
@@ -119,41 +128,98 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		DLFileEntryTypeLocalServiceUtil.updateDLFileEntryType(dlFileEntryType);
 	}
 
-	protected void checkMimeTypes() throws Exception {
-		List<DLFileEntry> dlFileEntries =
-			DLFileEntryLocalServiceUtil.getFileEntriesByMimeType(
-				ContentTypes.APPLICATION_OCTET_STREAM);
+	protected void checkFileEntryMimeTypes(final String originalMimeType)
+		throws Exception {
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + dlFileEntries.size() + " file entries with " +
-					ContentTypes.APPLICATION_OCTET_STREAM);
-		}
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DLFileEntryActionableDynamicQuery() {
 
-		for (DLFileEntry dlFileEntry : dlFileEntries) {
-			InputStream inputStream =
-				DLFileEntryLocalServiceUtil.getFileAsStream(
-					dlFileEntry.getUserId(), dlFileEntry.getFileEntryId(),
-					dlFileEntry.getVersion(), false);
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-			String title = DLUtil.getTitleWithExtension(
-				dlFileEntry.getTitle(), dlFileEntry.getExtension());
+				DLFileEntry dlFileEntry = (DLFileEntry)object;
 
-			String mimeType = MimeTypesUtil.getContentType(inputStream, title);
+				InputStream inputStream =
+					DLFileEntryLocalServiceUtil.getFileAsStream(
+						dlFileEntry.getUserId(), dlFileEntry.getFileEntryId(),
+						dlFileEntry.getVersion(), false);
 
-			if (mimeType.equals(ContentTypes.APPLICATION_OCTET_STREAM)) {
-				continue;
+				String title = DLUtil.getTitleWithExtension(
+					dlFileEntry.getTitle(), dlFileEntry.getExtension());
+
+				String mimeType = MimeTypesUtil.getContentType(
+					inputStream, title);
+
+				if (mimeType.equals(originalMimeType)) {
+					return;
+				}
+
+				dlFileEntry.setMimeType(mimeType);
+
+				DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
+
+				DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+
+				dlFileVersion.setMimeType(mimeType);
+
+				DLFileVersionLocalServiceUtil.updateDLFileVersion(
+					dlFileVersion);
 			}
 
-			dlFileEntry.setMimeType(mimeType);
+		};
 
-			DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
+		actionableDynamicQuery.performActions();
+	}
 
-			DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+	protected void checkFileVersionMimeTypes(final String originalMimeType)
+		throws Exception {
 
-			dlFileVersion.setMimeType(mimeType);
+		ActionableDynamicQuery actionableDynamicQuery =
+			new DLFileVersionActionableDynamicQuery() {
 
-			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
+
+				DLFileVersion dlFileVersion = (DLFileVersion)object;
+
+				InputStream inputStream =
+					DLFileEntryLocalServiceUtil.getFileAsStream(
+						dlFileVersion.getUserId(),
+						dlFileVersion.getFileEntryId(),
+						dlFileVersion.getVersion(), false);
+
+				String title = DLUtil.getTitleWithExtension(
+					dlFileVersion.getTitle(), dlFileVersion.getExtension());
+
+				String mimeType = MimeTypesUtil.getContentType(
+					inputStream, title);
+
+				if (mimeType.equals(originalMimeType)) {
+					return;
+				}
+
+				dlFileVersion.setMimeType(mimeType);
+
+				DLFileVersionLocalServiceUtil.updateDLFileVersion(
+					dlFileVersion);
+			}
+
+		};
+
+		actionableDynamicQuery.performActions();
+	}
+
+	protected void checkMimeTypes() throws Exception {
+		String[] mimeTypes = {
+			ContentTypes.APPLICATION_OCTET_STREAM,
+			DLWebDAVStorageImpl.MS_OFFICE_2010_TEXT_XML_UTF8
+		};
+
+		for (String mimeType : mimeTypes) {
+			checkFileEntryMimeTypes(mimeType);
+			checkFileVersionMimeTypes(mimeType);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -168,7 +234,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Processing " + dlFileEntries.size() +
-					" file entries with invalid version");
+					" misversioned file entries");
 		}
 
 		for (DLFileEntry dlFileEntry : dlFileEntries) {
@@ -179,6 +245,44 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Fixed misversioned file entries");
+		}
+	}
+
+	protected void checkTitles() throws Exception {
+		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
+			DLFileEntry.class);
+
+		Criterion criterion1 = RestrictionsFactoryUtil.like("title", "%/%");
+		Criterion criterion2 = RestrictionsFactoryUtil.like("title", "%\\\\%");
+
+		dynamicQuery.add(RestrictionsFactoryUtil.or(criterion1, criterion2));
+
+		List<DLFileEntry> dlFileEntries =
+			DLFileEntryLocalServiceUtil.dynamicQuery(dynamicQuery);
+
+		for (DLFileEntry dlFileEntry : dlFileEntries) {
+			String title = dlFileEntry.getTitle();
+
+			String newTitle = title.replace(StringPool.SLASH, StringPool.BLANK);
+
+			newTitle = newTitle.replace(
+				StringPool.BACK_SLASH, StringPool.UNDERLINE);
+
+			dlFileEntry.setTitle(newTitle);
+
+			DLFileEntryLocalServiceUtil.updateDLFileEntry(dlFileEntry);
+
+			DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+
+			dlFileVersion.setTitle(newTitle);
+
+			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Invalid document title " + title + "renamed to " +
+						newTitle);
+			}
 		}
 	}
 
@@ -228,6 +332,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 
 		checkDLFileEntryType();
 		checkMimeTypes();
+		checkTitles();
 		removeOrphanedDLFileEntries();
 		updateAssets();
 	}

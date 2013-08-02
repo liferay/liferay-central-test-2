@@ -2255,6 +2255,8 @@
 			<transient name="descriptionCurrentLanguageId" />
 			<transient name="descriptionMap" />
 			<transient name="document" />
+			<transient name="localizedFieldsMap" />
+			<transient name="localizedTransientFieldsMap" />
 			<transient name="modelAttributes" />
 			<transient name="nameCurrentLanguageId" />
 			<transient name="nameMap" />
@@ -4098,6 +4100,7 @@
 	<entity class="com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl" name="DLFileVersion">
 		<table name="DLFileVersion" />
 		<attributes>
+			<transient name="checksum" />
 			<transient name="extraSettingsProperties" />
 		</attributes>
 	</entity>

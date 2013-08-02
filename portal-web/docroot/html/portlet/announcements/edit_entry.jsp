@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,12 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNO
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 String content = BeanParamUtil.getString(entry, request, "content");
+
+boolean autoDisplayDate = ParamUtil.getBoolean(request, "autoDisplayDate");
+
+if (entry == null) {
+	autoDisplayDate = true;
+}
 %>
 
 <aui:form method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveEntry();" %>'>
@@ -108,7 +114,16 @@ String content = BeanParamUtil.getString(entry, request, "content");
 			<aui:option label="important" value="1" />
 		</aui:select>
 
-		<aui:input name="displayDate" />
+		<aui:input disabled="<%= autoDisplayDate %>" name="displayDate" />
+
+		<c:if test="<%= autoDisplayDate %>">
+
+			<%
+			String taglibAutoDisplayDateOnClick = renderResponse.getNamespace() + "toggleDisplayDate('displayDate', this.checked);";
+			%>
+
+			<aui:input label="display-immediately" name="autoDisplayDate" onClick="<%= taglibAutoDisplayDateOnClick %>" type="checkbox" value="<%= autoDisplayDate %>" />
+		</c:if>
 
 		<aui:input name="expirationDate" />
 	</aui:fieldset>
@@ -146,6 +161,25 @@ String content = BeanParamUtil.getString(entry, request, "content");
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getContent();
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	Liferay.provide(
+		window,
+		'<portlet:namespace />toggleDisplayDate',
+		function(date, checked) {
+			var A = AUI();
+
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Hour"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "Minute"].disabled = checked;
+			document.<portlet:namespace />fm["<portlet:namespace />" + date + "AmPm"].disabled = checked;
+
+			var calendarWidget = A.Widget.getByNode(document.<portlet:namespace />fm["<portlet:namespace />" + date + "Month"]);
+
+			if (calendarWidget) {
+				calendarWidget.set('disabled', checked);
+			}
+		},
+		['aui-base']
+	);
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);

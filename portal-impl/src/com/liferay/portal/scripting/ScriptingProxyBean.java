@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,16 +31,19 @@ import javax.portlet.PortletResponse;
  */
 public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 
-	public void addScriptionExecutor(
+	@Override
+	public void addScriptingExecutor(
 		String language, ScriptingExecutor scriptingExecutor) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void clearCache(String language) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> eval(
 		Set<String> allowedClasses, Map<String, Object> inputObjects,
 		Set<String> outputNames, String language, String script,
@@ -49,6 +52,7 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void exec(
 		Set<String> allowedClasses, Map<String, Object> inputObjects,
 		String language, String script, ClassLoader... classLoaders) {
@@ -56,6 +60,7 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getPortletObjects(
 		PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
@@ -63,10 +68,12 @@ public class ScriptingProxyBean extends BaseProxyBean implements Scripting {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Set<String> getSupportedLanguages() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setScriptingExecutors(
 		Map<String, ScriptingExecutor> scriptingExecutors) {
 

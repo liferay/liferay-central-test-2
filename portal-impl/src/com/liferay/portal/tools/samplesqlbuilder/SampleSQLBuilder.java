@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -274,12 +274,14 @@ public class SampleSQLBuilder {
 		processTemplate(_tplBlogsEntry, context);
 	}
 
-	public void insertDDLRecord(DDLRecord ddlRecord, DDLRecordSet ddlRecordSet)
+	public void insertDDLRecord(
+			DDLRecord ddlRecord, DDLRecordSet ddlRecordSet, int ddlRecordCount)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
 
 		put(context, "ddlRecord", ddlRecord);
+		put(context, "ddlRecordCount", ddlRecordCount);
 		put(context, "ddlRecordSet", ddlRecordSet);
 
 		processTemplate(_tplDDLRecord, context);
@@ -343,24 +345,6 @@ public class SampleSQLBuilder {
 		processTemplate(_tplGroup, context);
 	}
 
-	public void insertJournalArticle(
-			long groupId, List<Layout> journalArticleLayouts)
-		throws Exception {
-
-		if ((journalArticleLayouts == null) ||
-			journalArticleLayouts.isEmpty()) {
-
-			return;
-		}
-
-		Map<String, Object> context = getContext();
-
-		put(context, "groupId", groupId);
-		put(context, "journalArticleLayouts", journalArticleLayouts);
-
-		processTemplate(_tplJournalArticle, context);
-	}
-
 	public void insertMBCategory(MBCategory mbCategory) throws Exception {
 		Map<String, Object> context = getContext();
 
@@ -407,19 +391,15 @@ public class SampleSQLBuilder {
 	}
 
 	public void insertUser(
-			Contact contact, Group group, List<Long> groupIds,
-			List<Long> organizationIds, List<Layout> privateLayouts,
-			List<Layout> publicLayouts, List<Role> roleIds, User user)
+			Contact contact, List<Long> groupIds, List<Long> organizationIds,
+			List<Role> roleIds, User user)
 		throws Exception {
 
 		Map<String, Object> context = getContext();
 
 		put(context, "contact", contact);
-		put(context, "group", group);
 		put(context, "groupIds", groupIds);
 		put(context, "organizationIds", organizationIds);
-		put(context, "privateLayouts", privateLayouts);
-		put(context, "publicLayouts", publicLayouts);
 		put(context, "roleIds", roleIds);
 		put(context, "user", user);
 
@@ -780,7 +760,6 @@ public class SampleSQLBuilder {
 	private String _tplDLFolder = _TPL_ROOT + "dl_folder.ftl";
 	private String _tplDLFolders = _TPL_ROOT + "dl_folders.ftl";
 	private String _tplGroup = _TPL_ROOT + "group.ftl";
-	private String _tplJournalArticle = _TPL_ROOT + "journal_article.ftl";
 	private String _tplMBCategory = _TPL_ROOT + "mb_category.ftl";
 	private String _tplMBMessage = _TPL_ROOT + "mb_message.ftl";;
 	private String _tplResourcePermission =

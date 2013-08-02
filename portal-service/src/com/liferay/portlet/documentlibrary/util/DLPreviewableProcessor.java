@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,7 +48,7 @@ import java.io.InputStream;
 /**
  * @author Alexander Chow
  */
-public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
+public abstract class DLPreviewableProcessor implements DLProcessor {
 
 	public static final String PREVIEW_PATH = "document_preview/";
 
@@ -105,14 +105,17 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 			thumbnailType);
 	}
 
+	@Override
 	public void cleanUp(FileEntry fileEntry) {
 		deleteFiles(fileEntry, getThumbnailType());
 	}
 
+	@Override
 	public void cleanUp(FileVersion fileVersion) {
 		deleteFiles(fileVersion, getThumbnailType());
 	}
 
+	@Override
 	public void exportGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			Element fileEntryElement)
@@ -121,6 +124,7 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 		doExportGeneratedFiles(portletDataContext, fileEntry, fileEntryElement);
 	}
 
+	@Override
 	public void importGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			FileEntry importedFileEntry, Element fileEntryElement)
@@ -132,6 +136,7 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 			portletDataContext, fileEntry, importedFileEntry, fileEntryElement);
 	}
 
+	@Override
 	public boolean isSupported(FileVersion fileVersion) {
 		if (fileVersion == null) {
 			return false;
@@ -790,7 +795,7 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 		if (!portletDataContext.isPerformDirectBinaryImport()) {
 			importPreviewFromLAR(
 				portletDataContext, importedFileEntry, fileEntryElement,
-				binPathSuffix, fileIndex);
+				binPathSuffix, previewType, fileIndex);
 		}
 		else {
 			FileVersion importedFileVersion =
@@ -824,7 +829,8 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 
 	protected void importPreviewFromLAR(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
-			Element fileEntryElement, String binPathSuffix, int fileIndex)
+			Element fileEntryElement, String binPathSuffix, String previewType,
+			int fileIndex)
 		throws Exception {
 
 		FileVersion fileVersion = fileEntry.getFileVersion();
@@ -832,7 +838,7 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 		String binPathSegment = null;
 
 		if (fileIndex < 0) {
-			binPathSegment = getPreviewType(fileVersion);
+			binPathSegment = previewType;
 		}
 		else {
 			binPathSegment = Integer.toString(fileIndex + 1);
@@ -861,8 +867,7 @@ public abstract class DLPreviewableProcessor extends BaseDLProcessorImpl {
 			String previewFilePath = null;
 
 			if (fileIndex < 0) {
-				previewFilePath = getPreviewFilePath(
-					fileVersion, getPreviewType(fileVersion));
+				previewFilePath = getPreviewFilePath(fileVersion, previewType);
 			}
 			else {
 				previewFilePath = getPreviewFilePath(

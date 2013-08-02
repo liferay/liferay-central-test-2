@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,12 +14,20 @@
  */
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBThreadConstants" %>
+
+<%@ page import="java.util.Locale" %>
 
 <%
+String contentsLanguageId = ParamUtil.getString(request, "contentsLanguageId");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String imagesPath = ParamUtil.getString(request, "imagesPath");
@@ -58,12 +66,22 @@ CKEDITOR.config.toolbar_bbcode = [
 	['Image', 'Smiley', '-', 'TextColor', '-', 'NumberedList', 'BulletedList'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'Blockquote', '-', 'Code'],
 	'/',
-	['Font', 'FontSize', '-', 'Format', '-', 'Table', '-', 'Undo', 'Redo', '-', 'Source']
+	['Font', 'FontSize', '-', 'Format', '-', 'Undo', 'Redo', '-', 'Source']
 ];
 
 CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escapeJS(cssPath) %>/main.css';
+
+<%
+Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
+
+String contentsLanguageDir = LanguageUtil.get(contentsLocale, "lang.dir");
+%>
+
+CKEDITOR.config.contentsLangDirection = '<%= HtmlUtil.escapeJS(contentsLanguageDir) %>';
+
+CKEDITOR.config.contentsLanguage = '<%= HtmlUtil.escapeJS(contentsLanguageId.replace("iw_", "he_")) %>';
 
 CKEDITOR.config.enterMode = CKEDITOR.ENTER_BR;
 
@@ -85,11 +103,15 @@ CKEDITOR.config.format_tags = 'p;pre';
 
 CKEDITOR.config.imagesPath = '<%= HtmlUtil.escapeJS(imagesPath) %>/message_boards/';
 
-CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
+CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId.replace("iw_", "he_")) %>';
 
-CKEDITOR.config.newThreadURL = '<%= BBCodeTranslatorUtil.NEW_THREAD_URL %>';
+CKEDITOR.config.newThreadURL = '<%= MBThreadConstants.NEW_THREAD_URL %>';
 
-CKEDITOR.config.resize_enabled = '<%= resizable %>';
+<c:if test="<%= resizable %>">
+	CKEDITOR.config.resize_dir = 'vertical';
+</c:if>
+
+CKEDITOR.config.resize_enabled = <%= resizable %>;
 
 CKEDITOR.config.smiley_descriptions = ['<%= StringUtil.merge(BBCodeTranslatorUtil.getEmoticonDescriptions(), "','") %>'];
 

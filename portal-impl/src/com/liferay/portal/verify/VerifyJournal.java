@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,8 +19,10 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -160,18 +162,60 @@ public class VerifyJournal extends VerifyProcess {
 		// Content searches
 
 		verifyContentSearch();
+
+		// URL title
+
+		verifyURLTitle();
 	}
 
-	protected void verifyContentSearch() throws Exception {
-		List<JournalContentSearch> contentSearches =
-			JournalContentSearchLocalServiceUtil.getArticleContentSearches();
+	protected void updateURLTitle(String urlTitle) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
 
-		for (JournalContentSearch contentSearch : contentSearches) {
-			verifyContentSearch(contentSearch);
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update JournalArticle set urlTitle = ? where urlTitle = ?");
+
+			ps.setString(1, FriendlyURLNormalizerUtil.normalize(urlTitle));
+			ps.setString(2, urlTitle);
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
-	protected void verifyContentSearch(JournalContentSearch contentSearch)
+	protected void verifyContentSearch() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select groupId, portletId from JournalContentSearch group " +
+					"by groupId, portletId having count(groupId) > 1 and " +
+						"count(portletId) > 1");
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long groupId = rs.getLong("groupId");
+				String portletId = rs.getString("portletId");
+
+				verifyContentSearch(groupId, portletId);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void verifyContentSearch(long groupId, String portletId)
 		throws Exception {
 
 		Connection con = null;
@@ -182,10 +226,12 @@ public class VerifyJournal extends VerifyProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select preferences from PortletPreferences where portletId " +
-					"= ?");
+				"select preferences from PortletPreferences inner join " +
+					"Layout on PortletPreferences.plid = Layout.plid where " +
+						"groupId = ? and portletId = ?");
 
-			ps.setString(1, contentSearch.getPortletId());
+			ps.setLong(1, groupId);
+			ps.setString(2, portletId);
 
 			rs = ps.executeQuery();
 
@@ -197,6 +243,16 @@ public class VerifyJournal extends VerifyProcess {
 
 				String articleId = portletPreferences.getValue(
 					"articleId", null);
+
+				List<JournalContentSearch> contentSearches =
+					JournalContentSearchLocalServiceUtil.
+						getArticleContentSearches(groupId, articleId);
+
+				if (contentSearches.isEmpty()) {
+					continue;
+				}
+
+				JournalContentSearch contentSearch = contentSearches.get(0);
 
 				JournalContentSearchLocalServiceUtil.updateContentSearch(
 					contentSearch.getGroupId(), contentSearch.isPrivateLayout(),
@@ -233,7 +289,7 @@ public class VerifyJournal extends VerifyProcess {
 		for (JournalArticle article : articles) {
 			String content = article.getContent();
 
-			if ((content != null) && (content.indexOf("\\n") != -1)) {
+			if ((content != null) && content.contains("\\n")) {
 				articles = JournalArticleLocalServiceUtil.getArticles(
 					DEFAULT_GROUP_ID);
 
@@ -255,7 +311,7 @@ public class VerifyJournal extends VerifyProcess {
 
 		if (!checkNewLine) {
 			if (_log.isInfoEnabled()) {
-				_log.debug("Do not fix oracle new line");
+				_log.info("Do not fix oracle new line");
 			}
 
 			return;
@@ -275,7 +331,7 @@ public class VerifyJournal extends VerifyProcess {
 
 			String xsd = structure.getXsd();
 
-			if ((xsd != null) && (xsd.indexOf("\\n") != -1)) {
+			if ((xsd != null) && xsd.contains("\\n")) {
 				structures = JournalStructureLocalServiceUtil.getStructures(
 					DEFAULT_GROUP_ID);
 
@@ -297,7 +353,7 @@ public class VerifyJournal extends VerifyProcess {
 
 			String xsl = template.getXsl();
 
-			if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
+			if ((xsl != null) && xsl.contains("\\n")) {
 				templates = JournalTemplateLocalServiceUtil.getTemplates(
 					DEFAULT_GROUP_ID);
 
@@ -308,6 +364,36 @@ public class VerifyJournal extends VerifyProcess {
 						template.getGroupId(), template.getTemplateId());
 				}
 			}
+		}
+	}
+
+	protected void verifyURLTitle() throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler();
+
+			sb.append("select distinct urlTitle from JournalArticle where ");
+			sb.append("urlTitle like '%\u00a3%' or urlTitle like '%\u2018%' ");
+			sb.append("or urlTitle like '%\u2019%' or urlTitle like ");
+			sb.append("'%\u201c%' or urlTitle like '%\u201d%'");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				String urlTitle = rs.getString("urlTitle");
+
+				updateURLTitle(urlTitle);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 

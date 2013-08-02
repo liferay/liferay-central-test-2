@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,6 +48,7 @@ import java.util.TreeMap;
 public class ShoppingCartLocalServiceImpl
 	extends ShoppingCartLocalServiceBaseImpl {
 
+	@Override
 	public void deleteGroupCarts(long groupId) throws SystemException {
 		List<ShoppingCart> carts = shoppingCartPersistence.findByGroupId(
 			groupId);
@@ -57,6 +58,7 @@ public class ShoppingCartLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteUserCarts(long userId) throws SystemException {
 		List<ShoppingCart> shoppingCarts = shoppingCartPersistence.findByUserId(
 			userId);
@@ -66,12 +68,14 @@ public class ShoppingCartLocalServiceImpl
 		}
 	}
 
+	@Override
 	public ShoppingCart getCart(long userId, long groupId)
 		throws PortalException, SystemException {
 
 		return shoppingCartPersistence.findByG_U(groupId, userId);
 	}
 
+	@Override
 	public Map<ShoppingCartItem, Integer> getItems(long groupId, String itemIds)
 		throws SystemException {
 
@@ -111,6 +115,7 @@ public class ShoppingCartLocalServiceImpl
 		return items;
 	}
 
+	@Override
 	public ShoppingCart updateCart(
 			long userId, long groupId, String itemIds, String couponCodes,
 			int altShipping, boolean insure)
@@ -120,8 +125,8 @@ public class ShoppingCartLocalServiceImpl
 
 		Map<ShoppingCartItem, Integer> items = getItems(groupId, itemIds);
 
-		boolean minQtyMultiple = GetterUtil.getBoolean(PropsUtil.get(
-			PropsKeys.SHOPPING_CART_MIN_QTY_MULTIPLE));
+		boolean minQtyMultiple = GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SHOPPING_CART_MIN_QTY_MULTIPLE));
 
 		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
 			items.entrySet().iterator();
@@ -153,8 +158,9 @@ public class ShoppingCartLocalServiceImpl
 		}
 
 		if (badItemIds.size() > 0) {
-			throw new CartMinQuantityException(StringUtil.merge(
-				badItemIds.toArray(new Long[badItemIds.size()])));
+			throw new CartMinQuantityException(
+				StringUtil.merge(
+					badItemIds.toArray(new Long[badItemIds.size()])));
 		}
 
 		String[] couponCodesArray = StringUtil.split(couponCodes);

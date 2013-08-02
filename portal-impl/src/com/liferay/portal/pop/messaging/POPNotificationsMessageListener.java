@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -87,36 +87,38 @@ public class POPNotificationsMessageListener
 	}
 
 	protected void initStore() throws Exception {
-		if ((_store == null) || !_store.isConnected()) {
-			Session session = MailEngine.getSession();
-
-			String storeProtocol = GetterUtil.getString(
-				session.getProperty("mail.store.protocol"));
-
-			if (!storeProtocol.equals(Account.PROTOCOL_POPS)) {
-				storeProtocol = Account.PROTOCOL_POP;
-			}
-
-			_store = session.getStore(storeProtocol);
-
-			String prefix = "mail." + storeProtocol + ".";
-
-			String host = session.getProperty(prefix + "host");
-
-			String user = session.getProperty(prefix + "user");
-
-			if (Validator.isNull(user)) {
-				user = session.getProperty("mail.smtp.user");
-			}
-
-			String password = session.getProperty(prefix + "password");
-
-			if (Validator.isNull(password)) {
-				password = session.getProperty("mail.smtp.password");
-			}
-
-			_store.connect(host, user, password);
+		if ((_store != null) && _store.isConnected()) {
+			return;
 		}
+
+		Session session = MailEngine.getSession();
+
+		String storeProtocol = GetterUtil.getString(
+			session.getProperty("mail.store.protocol"));
+
+		if (!storeProtocol.equals(Account.PROTOCOL_POPS)) {
+			storeProtocol = Account.PROTOCOL_POP;
+		}
+
+		_store = session.getStore(storeProtocol);
+
+		String prefix = "mail." + storeProtocol + ".";
+
+		String host = session.getProperty(prefix + "host");
+
+		String user = session.getProperty(prefix + "user");
+
+		if (Validator.isNull(user)) {
+			user = session.getProperty("mail.smtp.user");
+		}
+
+		String password = session.getProperty(prefix + "password");
+
+		if (Validator.isNull(password)) {
+			password = session.getProperty("mail.smtp.password");
+		}
+
+		_store.connect(host, user, password);
 	}
 
 	protected void nostifyListeners(

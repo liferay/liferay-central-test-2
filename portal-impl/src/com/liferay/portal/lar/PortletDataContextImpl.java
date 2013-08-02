@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,7 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchTeamException;
+import com.liferay.portal.kernel.bean.BeanPropertiesUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -34,12 +35,15 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipWriter;
+import com.liferay.portal.model.AttachedModel;
 import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.ClassedModel;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.ResourcedModel;
@@ -82,16 +86,13 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadFlagImpl;
-import com.liferay.portlet.messageboards.service.MBDiscussionLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
@@ -112,6 +113,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -119,6 +121,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import jodd.bean.BeanUtil;
 
 /**
  * <p>
@@ -142,6 +146,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 		validateDateRange(startDate, endDate);
 
 		_companyId = companyId;
+
+		try {
+			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+				_companyId);
+
+			_companyGroupId = companyGroup.getGroupId();
+		}
+		catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+
 		_groupId = groupId;
 		_scopeGroupId = groupId;
 		_parameterMap = parameterMap;
@@ -162,6 +177,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 		ZipReader zipReader) {
 
 		_companyId = companyId;
+
+		try {
+			Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
+				_companyId);
+
+			_companyGroupId = companyGroup.getGroupId();
+		}
+		catch (Exception e) {
+			throw new IllegalStateException(e);
+		}
+
 		_groupId = groupId;
 		_scopeGroupId = groupId;
 		_parameterMap = parameterMap;
@@ -176,6 +202,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		initXStream();
 	}
 
+	@Override
 	public void addAssetCategories(Class<?> clazz, long classPK)
 		throws SystemException {
 
@@ -195,6 +222,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 					assetCategories, AssetCategory.CATEGORY_ID_ACCESSOR), 0L));
 	}
 
+	@Override
 	public void addAssetCategories(
 		String className, long classPK, long[] assetCategoryIds) {
 
@@ -265,6 +293,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addAssetTags(Class<?> clazz, long classPK)
 		throws SystemException {
 
@@ -274,6 +303,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_assetTagNamesMap.put(getPrimaryKeyString(clazz, classPK), tagNames);
 	}
 
+	@Override
 	public void addAssetTags(
 		String className, long classPK, String[] assetTagNames) {
 
@@ -281,6 +311,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), assetTagNames);
 	}
 
+	@Override
 	public void addClassedModel(
 			Element element, String path, ClassedModel classedModel,
 			String namespace)
@@ -288,50 +319,65 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		element.addAttribute("path", path);
 
+		if (classedModel instanceof AttachedModel) {
+			AttachedModel attachedModel = (AttachedModel)classedModel;
+
+			element.addAttribute("class-name", attachedModel.getClassName());
+		}
+		else if (BeanUtil.hasProperty(classedModel, "className")) {
+			String className = BeanPropertiesUtil.getStringSilent(
+				classedModel, "className");
+
+			if (className != null) {
+				element.addAttribute("class-name", className);
+			}
+		}
+
 		if (classedModel instanceof AuditedModel) {
 			AuditedModel auditedModel = (AuditedModel)classedModel;
 
 			auditedModel.setUserUuid(auditedModel.getUserUuid());
 		}
 
-		if (isResourceMain(classedModel)) {
-			Class<?> clazz = classedModel.getModelClass();
-			long classPK = getClassPK(classedModel);
+		if (!isResourceMain(classedModel)) {
+			addZipEntry(path, classedModel);
 
-			addAssetLinks(clazz, classPK);
-			addExpando(element, path, classedModel);
-			addLocks(clazz, String.valueOf(classPK));
-			addPermissions(clazz, classPK);
+			return;
+		}
 
-			boolean portletMetadataAll = getBooleanParameter(
-				namespace, PortletDataHandlerKeys.PORTLET_METADATA_ALL);
+		Class<?> clazz = classedModel.getModelClass();
+		long classPK = getClassPK(classedModel);
 
-			if (portletMetadataAll ||
-				getBooleanParameter(namespace, "categories")) {
+		addAssetLinks(clazz, classPK);
+		addExpando(element, path, classedModel);
+		addLocks(clazz, String.valueOf(classPK));
+		addPermissions(clazz, classPK);
 
-				addAssetCategories(clazz, classPK);
-			}
+		boolean portletMetadataAll = getBooleanParameter(
+			namespace, PortletDataHandlerKeys.PORTLET_METADATA_ALL);
 
-			if (portletMetadataAll ||
-				getBooleanParameter(namespace, "comments")) {
+		if (portletMetadataAll ||
+			getBooleanParameter(namespace, "categories")) {
 
-				addComments(clazz, classPK);
-			}
+			addAssetCategories(clazz, classPK);
+		}
 
-			if (portletMetadataAll ||
-				getBooleanParameter(namespace, "ratings")) {
+		if (portletMetadataAll || getBooleanParameter(namespace, "comments")) {
+			addComments(clazz, classPK);
+		}
 
-				addRatingsEntries(clazz, classPK);
-			}
+		if (portletMetadataAll || getBooleanParameter(namespace, "ratings")) {
+			addRatingsEntries(clazz, classPK);
+		}
 
-			if (portletMetadataAll || getBooleanParameter(namespace, "tags")) {
-				addAssetTags(clazz, classPK);
-			}
+		if (portletMetadataAll || getBooleanParameter(namespace, "tags")) {
+			addAssetTags(clazz, classPK);
 		}
 
 		addZipEntry(path, classedModel);
 	}
 
+	@Override
 	public void addComments(Class<?> clazz, long classPK)
 		throws SystemException {
 
@@ -347,7 +393,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 		List<MBMessage> messages = MBMessageLocalServiceUtil.getThreadMessages(
 			discussion.getThreadId(), WorkflowConstants.STATUS_APPROVED);
 
-		if (messages.size() == 0) {
+		if (messages.isEmpty()) {
+			return;
+		}
+
+		MBMessage firstMessage = messages.get(0);
+
+		if ((messages.size() == 1) && firstMessage.isRoot()) {
 			return;
 		}
 
@@ -364,24 +416,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_commentsMap.put(getPrimaryKeyString(clazz, classPK), messages);
 	}
 
+	@Override
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages) {
 
 		_commentsMap.put(getPrimaryKeyString(className, classPK), messages);
 	}
 
-	public void addCompanyReference(Class<?> clazz, String key) {
-		List<String> keys = _companyReferences.get(clazz.getName());
-
-		if (keys == null) {
-			keys = new ArrayList<String>();
-
-			_companyReferences.put(clazz.getName(), keys);
-		}
-
-		keys.add(key);
-	}
-
+	@Override
 	public void addExpando(
 			Element element, String path, ClassedModel classedModel)
 		throws PortalException, SystemException {
@@ -417,6 +459,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addLocks(Class<?> clazz, String key)
 		throws PortalException, SystemException {
 
@@ -429,23 +472,26 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addLocks(String className, String key, Lock lock) {
 		_locksMap.put(getPrimaryKeyString(className, key), lock);
 	}
 
+	@Override
 	public void addPermissions(Class<?> clazz, long classPK)
 		throws PortalException, SystemException {
 
 		addPermissions(clazz.getName(), classPK);
 	}
 
+	@Override
 	public void addPermissions(String resourceName, long resourcePK)
 		throws PortalException, SystemException {
 
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
-			(!MapUtil.getBoolean(
-				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
+			!MapUtil.getBoolean(
+				_parameterMap, PortletDataHandlerKeys.PERMISSIONS)) {
 
 			return;
 		}
@@ -466,7 +512,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 				((type == RoleConstants.TYPE_ORGANIZATION) &&
 				 group.isOrganization()) ||
 				((type == RoleConstants.TYPE_SITE) &&
-				 (group.isLayoutSetPrototype() || group.isSite()))) {
+				 (group.isLayout() || group.isLayoutSetPrototype() ||
+				  group.isSite()))) {
 
 				String name = role.getName();
 
@@ -516,10 +563,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 				Set<String> availableActionIds = roleIdsToActionIds.get(roleId);
 
-				if ((availableActionIds == null) ||
-					availableActionIds.isEmpty()) {
-
-					continue;
+				if (availableActionIds == null) {
+					availableActionIds = Collections.emptySet();
 				}
 
 				KeyValuePair permission = new KeyValuePair(
@@ -533,6 +578,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(resourceName, resourcePK), permissions);
 	}
 
+	@Override
 	public void addPermissions(
 		String resourceName, long resourcePK, List<KeyValuePair> permissions) {
 
@@ -546,6 +592,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(resourceName, resourcePK), permissions);
 	}
 
+	@Override
 	public boolean addPrimaryKey(Class<?> clazz, String primaryKey) {
 		boolean value = hasPrimaryKey(clazz, primaryKey);
 
@@ -556,6 +603,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return value;
 	}
 
+	@Override
 	public void addRatingsEntries(Class<?> clazz, long classPK)
 		throws SystemException {
 
@@ -578,6 +626,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(clazz, classPK), ratingsEntries);
 	}
 
+	@Override
 	public void addRatingsEntries(
 		String className, long classPK, List<RatingsEntry> ratingsEntries) {
 
@@ -585,6 +634,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 			getPrimaryKeyString(className, classPK), ratingsEntries);
 	}
 
+	@Override
 	public void addZipEntry(String path, byte[] bytes) throws SystemException {
 		if (_portletDataContextListener != null) {
 			_portletDataContextListener.onAddZipEntry(path);
@@ -600,6 +650,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addZipEntry(String path, InputStream is)
 		throws SystemException {
 
@@ -617,10 +668,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addZipEntry(String path, Object object) throws SystemException {
 		addZipEntry(path, toXML(object));
 	}
 
+	@Override
 	public void addZipEntry(String path, String s) throws SystemException {
 		if (_portletDataContextListener != null) {
 			_portletDataContextListener.onAddZipEntry(path);
@@ -636,6 +689,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void addZipEntry(String path, StringBuilder sb)
 		throws SystemException {
 
@@ -653,18 +707,21 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public ServiceContext createServiceContext(
 		Element element, ClassedModel classedModel, String namespace) {
 
 		return createServiceContext(element, null, classedModel, namespace);
 	}
 
+	@Override
 	public ServiceContext createServiceContext(
 		String path, ClassedModel classedModel, String namespace) {
 
 		return createServiceContext(null, path, classedModel, namespace);
 	}
 
+	@Override
 	public Object fromXML(byte[] bytes) {
 		if ((bytes == null) || (bytes.length == 0)) {
 			return null;
@@ -673,6 +730,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.fromXML(new String(bytes));
 	}
 
+	@Override
 	public Object fromXML(String xml) {
 		if (Validator.isNull(xml)) {
 			return null;
@@ -681,34 +739,42 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _xStream.fromXML(xml);
 	}
 
+	@Override
 	public long[] getAssetCategoryIds(Class<?> clazz, long classPK) {
 		return _assetCategoryIdsMap.get(getPrimaryKeyString(clazz, classPK));
 	}
 
+	@Override
 	public Map<String, long[]> getAssetCategoryIdsMap() {
 		return _assetCategoryIdsMap;
 	}
 
+	@Override
 	public Map<String, String[]> getAssetCategoryUuidsMap() {
 		return _assetCategoryUuidsMap;
 	}
 
+	@Override
 	public Map<String, String[]> getAssetLinkUuidsMap() {
 		return _assetLinkUuidsMap;
 	}
 
+	@Override
 	public String[] getAssetTagNames(Class<?> clazz, long classPK) {
 		return _assetTagNamesMap.get(getPrimaryKeyString(clazz, classPK));
 	}
 
+	@Override
 	public String[] getAssetTagNames(String className, long classPK) {
 		return _assetTagNamesMap.get(getPrimaryKeyString(className, classPK));
 	}
 
+	@Override
 	public Map<String, String[]> getAssetTagNamesMap() {
 		return _assetTagNamesMap;
 	}
 
+	@Override
 	public boolean getBooleanParameter(String namespace, String name) {
 		boolean defaultValue = MapUtil.getBoolean(
 			getParameterMap(),
@@ -720,46 +786,62 @@ public class PortletDataContextImpl implements PortletDataContext {
 			defaultValue);
 	}
 
+	@Override
 	public ClassLoader getClassLoader() {
 		return _xStream.getClassLoader();
 	}
 
+	@Override
 	public Map<String, List<MBMessage>> getComments() {
 		return _commentsMap;
 	}
 
+	@Override
+	public long getCompanyGroupId() {
+		return _companyGroupId;
+	}
+
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
+	@Override
 	public String getDataStrategy() {
 		return _dataStrategy;
 	}
 
+	@Override
 	public Date getEndDate() {
 		return _endDate;
 	}
 
+	@Override
 	public Map<String, List<ExpandoColumn>> getExpandoColumns() {
 		return _expandoColumnsMap;
 	}
 
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
+	@Override
 	public String getLayoutPath(long layoutId) {
 		return getRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
 
+	@Override
 	public Map<String, Lock> getLocks() {
 		return _locksMap;
 	}
 
+	@Override
 	public Map<?, ?> getNewPrimaryKeysMap(Class<?> clazz) {
 		return getNewPrimaryKeysMap(clazz.getName());
 	}
 
+	@Override
 	public Map<?, ?> getNewPrimaryKeysMap(String className) {
 		Map<?, ?> map = _newPrimaryKeysMaps.get(className);
 
@@ -772,84 +854,109 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return map;
 	}
 
+	@Override
 	public long getOldPlid() {
 		return _oldPlid;
 	}
 
+	@Override
 	public Map<String, String[]> getParameterMap() {
 		return _parameterMap;
 	}
 
+	@Override
 	public Map<String, List<KeyValuePair>> getPermissions() {
 		return _permissionsMap;
 	}
 
+	@Override
 	public long getPlid() {
 		return _plid;
 	}
 
+	@Override
 	public String getPortletPath(String portletId) {
 		return getRootPath() + ROOT_PATH_PORTLETS + portletId;
 	}
 
+	@Override
 	public Set<String> getPrimaryKeys() {
 		return _primaryKeys;
 	}
 
+	@Override
 	public Map<String, List<RatingsEntry>> getRatingsEntries() {
 		return _ratingsEntriesMap;
 	}
 
+	@Override
 	public String getRootPath() {
 		return ROOT_PATH_GROUPS + getScopeGroupId();
 	}
 
+	@Override
 	public long getScopeGroupId() {
 		return _scopeGroupId;
 	}
 
+	@Override
 	public String getScopeLayoutUuid() {
 		return _scopeLayoutUuid;
 	}
 
+	@Override
 	public String getScopeType() {
 		return _scopeType;
 	}
 
+	@Override
+	public long getSourceCompanyGroupId() {
+		return _sourceCompanyGroupId;
+	}
+
+	@Override
 	public long getSourceGroupId() {
 		return _sourceGroupId;
 	}
 
+	@Override
 	public String getSourceLayoutPath(long layoutId) {
 		return getSourceRootPath() + ROOT_PATH_LAYOUTS + layoutId;
 	}
 
+	@Override
 	public String getSourcePortletPath(String portletId) {
 		return getSourceRootPath() + ROOT_PATH_PORTLETS + portletId;
 	}
 
+	@Override
 	public String getSourceRootPath() {
 		return ROOT_PATH_GROUPS + getSourceGroupId();
 	}
 
+	@Override
 	public Date getStartDate() {
 		return _startDate;
 	}
 
+	@Override
 	public long getUserId(String userUuid) throws SystemException {
 		return _userIdStrategy.getUserId(userUuid);
 	}
 
+	@Override
 	public UserIdStrategy getUserIdStrategy() {
 		return _userIdStrategy;
 	}
 
+	@Override
 	public List<String> getZipEntries() {
 		return getZipReader().getEntries();
 	}
 
+	@Override
 	public byte[] getZipEntryAsByteArray(String path) {
-		if (!isValidPath(path)) {
+		if (!Validator.isFilePath(path, false)) {
 			return null;
 		}
 
@@ -860,8 +967,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getZipReader().getEntryAsByteArray(path);
 	}
 
+	@Override
 	public InputStream getZipEntryAsInputStream(String path) {
-		if (!isValidPath(path)) {
+		if (!Validator.isFilePath(path, false)) {
 			return null;
 		}
 
@@ -872,12 +980,28 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getZipReader().getEntryAsInputStream(path);
 	}
 
+	@Override
+	public Object getZipEntryAsObject(Element element, String path) {
+		Object object = fromXML(getZipEntryAsString(path));
+
+		Attribute classNameAttribute = element.attribute("class-name");
+
+		if (classNameAttribute != null) {
+			BeanPropertiesUtil.setProperty(
+				object, "className", classNameAttribute.getText());
+		}
+
+		return object;
+	}
+
+	@Override
 	public Object getZipEntryAsObject(String path) {
 		return fromXML(getZipEntryAsString(path));
 	}
 
+	@Override
 	public String getZipEntryAsString(String path) {
-		if (!isValidPath(path)) {
+		if (!Validator.isFilePath(path, false)) {
 			return null;
 		}
 
@@ -888,26 +1012,31 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return getZipReader().getEntryAsString(path);
 	}
 
+	@Override
 	public List<String> getZipFolderEntries() {
 		return getZipFolderEntries(StringPool.SLASH);
 	}
 
+	@Override
 	public List<String> getZipFolderEntries(String path) {
-		if (!isValidPath(path)) {
+		if (!Validator.isFilePath(path, false)) {
 			return null;
 		}
 
 		return getZipReader().getFolderEntries(path);
 	}
 
+	@Override
 	public ZipReader getZipReader() {
 		return _zipReader;
 	}
 
+	@Override
 	public ZipWriter getZipWriter() {
 		return _zipWriter;
 	}
 
+	@Override
 	public boolean hasDateRange() {
 		if (_startDate != null) {
 			return true;
@@ -917,14 +1046,17 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public boolean hasNotUniquePerLayout(String dataKey) {
 		return _notUniquePerLayout.contains(dataKey);
 	}
 
+	@Override
 	public boolean hasPrimaryKey(Class<?> clazz, String primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(clazz, primaryKey));
 	}
 
+	@Override
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
 			String namespace)
@@ -959,6 +1091,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void importComments(
 			Class<?> clazz, long classPK, long newClassPK, long groupId)
 		throws PortalException, SystemException {
@@ -973,14 +1106,16 @@ public class PortletDataContextImpl implements PortletDataContext {
 			return;
 		}
 
-		MBDiscussion discussion = null;
+		MBMessage firstMessage = messages.get(0);
 
-		try {
-			discussion = MBDiscussionLocalServiceUtil.getDiscussion(
-				clazz.getName(), newClassPK);
+		if ((messages.size() == 1) && firstMessage.isRoot()) {
+			return;
 		}
-		catch (NoSuchDiscussionException nsde) {
-		}
+
+		long classNameId = PortalUtil.getClassNameId(clazz);
+
+		MBDiscussion discussion = MBDiscussionUtil.fetchByC_C(
+			classNameId, newClassPK);
 
 		for (MBMessage message : messages) {
 			long userId = getUserId(message.getUserUuid());
@@ -990,17 +1125,28 @@ public class PortletDataContextImpl implements PortletDataContext {
 			long threadId = MapUtil.getLong(
 				threadPKs, message.getThreadId(), message.getThreadId());
 
-			if ((message.getParentMessageId() ==
-					MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) &&
-				(discussion != null)) {
+			if (message.isRoot()) {
+				if (discussion != null) {
+					MBThread thread = MBThreadLocalServiceUtil.getThread(
+						discussion.getThreadId());
 
-				MBThread thread = MBThreadLocalServiceUtil.getThread(
-					discussion.getThreadId());
+					long rootMessageId = thread.getRootMessageId();
 
-				long rootMessageId = thread.getRootMessageId();
+					messagePKs.put(message.getMessageId(), rootMessageId);
+					threadPKs.put(message.getThreadId(), thread.getThreadId());
+				}
+				else if (clazz == Layout.class) {
+					MBMessage importedMessage =
+						MBMessageLocalServiceUtil.addDiscussionMessage(
+							userId, message.getUserName(), groupId,
+							clazz.getName(), newClassPK,
+							WorkflowConstants.ACTION_PUBLISH);
 
-				messagePKs.put(message.getMessageId(), rootMessageId);
-				threadPKs.put(message.getThreadId(), thread.getThreadId());
+					messagePKs.put(
+						message.getMessageId(), importedMessage.getMessageId());
+					threadPKs.put(
+						message.getThreadId(), importedMessage.getThreadId());
+				}
 			}
 			else {
 				ServiceContext serviceContext = new ServiceContext();
@@ -1063,6 +1209,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void importLocks(Class<?> clazz, String key, String newKey)
 		throws PortalException, SystemException {
 
@@ -1087,20 +1234,22 @@ public class PortletDataContextImpl implements PortletDataContext {
 			lock.isInheritable(), expirationTime);
 	}
 
+	@Override
 	public void importPermissions(Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException {
 
 		importPermissions(clazz.getName(), classPK, newClassPK);
 	}
 
+	@Override
 	public void importPermissions(
 			String resourceName, long resourcePK, long newResourcePK)
 		throws PortalException, SystemException {
 
 		if (((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) &&
 			 (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6)) ||
-			(!MapUtil.getBoolean(
-				_parameterMap, PortletDataHandlerKeys.PERMISSIONS))) {
+			!MapUtil.getBoolean(
+				_parameterMap, PortletDataHandlerKeys.PERMISSIONS)) {
 
 			return;
 		}
@@ -1184,6 +1333,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void importRatingsEntries(
 			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException {
@@ -1209,16 +1359,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public boolean isCompanyReference(Class<?> clazz, String key) {
-		List<String> keys = _companyReferences.get(clazz.getName());
-
-		if ((keys != null) && keys.contains(key)) {
-			return true;
-		}
-
-		return false;
-	}
-
+	@Override
 	public boolean isDataStrategyMirror() {
 		if (_dataStrategy.equals(PortletDataHandlerKeys.DATA_STRATEGY_MIRROR) ||
 			_dataStrategy.equals(
@@ -1231,6 +1372,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public boolean isDataStrategyMirrorWithOverwriting() {
 		if (_dataStrategy.equals(
 				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR_OVERWRITE)) {
@@ -1242,19 +1384,23 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public boolean isPathNotProcessed(String path) {
 		return !addPrimaryKey(String.class, path);
 	}
 
+	@Override
 	public boolean isPerformDirectBinaryImport() {
 		return MapUtil.getBoolean(
 			_parameterMap, PortletDataHandlerKeys.PERFORM_DIRECT_BINARY_IMPORT);
 	}
 
+	@Override
 	public boolean isPrivateLayout() {
 		return _privateLayout;
 	}
 
+	@Override
 	public boolean isWithinDateRange(Date modifiedDate) {
 		if (!hasDateRange()) {
 			return true;
@@ -1269,56 +1415,74 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	@Override
 	public void putNotUniquePerLayout(String dataKey) {
 		_notUniquePerLayout.add(dataKey);
 	}
 
+	@Override
 	public void setClassLoader(ClassLoader classLoader) {
 		_xStream.setClassLoader(classLoader);
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
+	@Override
 	public void setOldPlid(long oldPlid) {
 		_oldPlid = oldPlid;
 	}
 
+	@Override
 	public void setPlid(long plid) {
 		_plid = plid;
 	}
 
+	@Override
 	public void setPortetDataContextListener(
 		PortletDataContextListener portletDataContextListener) {
 
 		_portletDataContextListener = portletDataContextListener;
 	}
 
+	@Override
 	public void setPrivateLayout(boolean privateLayout) {
 		_privateLayout = privateLayout;
 	}
 
+	@Override
 	public void setScopeGroupId(long scopeGroupId) {
 		_scopeGroupId = scopeGroupId;
 	}
 
+	@Override
 	public void setScopeLayoutUuid(String scopeLayoutUuid) {
 		_scopeLayoutUuid = scopeLayoutUuid;
 	}
 
+	@Override
 	public void setScopeType(String scopeType) {
 		_scopeType = scopeType;
 	}
 
+	@Override
+	public void setSourceCompanyGroupId(long sourceCompanyGroupId) {
+		_sourceCompanyGroupId = sourceCompanyGroupId;
+	}
+
+	@Override
 	public void setSourceGroupId(long sourceGroupId) {
 		_sourceGroupId = sourceGroupId;
 	}
 
+	@Override
 	public void setStartDate(Date startDate) {
 		_startDate = startDate;
 	}
 
+	@Override
 	public String toXML(Object object) {
 		return _xStream.toXML(object);
 	}
@@ -1455,7 +1619,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected String getExpandoPath(String path) {
-		if (!isValidPath(path)) {
+		if (!Validator.isFilePath(path, false)) {
 			throw new IllegalArgumentException(
 				path + " is located outside of the lar");
 		}
@@ -1513,6 +1677,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_xStream.alias("RatingsEntry", RatingsEntryImpl.class);
 		_xStream.alias("WikiNode", WikiNodeImpl.class);
 		_xStream.alias("WikiPage", WikiPageImpl.class);
+
+		_xStream.omitField(HashMap.class, "cache_bitmask");
 	}
 
 	protected boolean isResourceMain(ClassedModel classedModel) {
@@ -1520,14 +1686,6 @@ public class PortletDataContextImpl implements PortletDataContext {
 			ResourcedModel resourcedModel = (ResourcedModel)classedModel;
 
 			return resourcedModel.isResourceMain();
-		}
-
-		return true;
-	}
-
-	protected boolean isValidPath(String path) {
-		if ((path == null) || path.contains(StringPool.DOUBLE_PERIOD)) {
-			return false;
 		}
 
 		return true;
@@ -1578,9 +1736,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 		new HashMap<String, String[]>();
 	private Map<String, List<MBMessage>> _commentsMap =
 		new HashMap<String, List<MBMessage>>();
+	private long _companyGroupId;
 	private long _companyId;
-	private Map<String, List<String>> _companyReferences =
-		new HashMap<String, List<String>>();
 	private String _dataStrategy;
 	private Date _endDate;
 	private Map<String, List<ExpandoColumn>> _expandoColumnsMap =
@@ -1603,6 +1760,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _scopeGroupId;
 	private String _scopeLayoutUuid;
 	private String _scopeType;
+	private long _sourceCompanyGroupId;
 	private long _sourceGroupId;
 	private Date _startDate;
 	private UserIdStrategy _userIdStrategy;

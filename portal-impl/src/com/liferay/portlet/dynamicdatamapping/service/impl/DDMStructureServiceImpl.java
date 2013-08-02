@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,6 +36,7 @@ import java.util.Map;
  */
 public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 
+	@Override
 	public DDMStructure addStructure(
 			long groupId, long classNameId, String structureKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -54,6 +55,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			descriptionMap, xsd, storageType, type, serviceContext);
 	}
 
+	@Override
 	public DDMStructure copyStructure(
 			long structureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, ServiceContext serviceContext)
@@ -69,6 +71,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			getUserId(), structureId, nameMap, descriptionMap, serviceContext);
 	}
 
+	@Override
 	public void deleteStructure(long structureId)
 		throws PortalException, SystemException {
 
@@ -78,6 +81,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 		ddmStructureLocalService.deleteStructure(structureId);
 	}
 
+	@Override
 	public DDMStructure fetchStructure(long groupId, String structureKey)
 		throws PortalException, SystemException {
 
@@ -92,6 +96,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 		return ddmStructure;
 	}
 
+	@Override
 	public DDMStructure getStructure(long structureId)
 		throws PortalException, SystemException {
 
@@ -101,6 +106,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 		return ddmStructurePersistence.findByPrimaryKey(structureId);
 	}
 
+	@Override
 	public List<DDMStructure> search(
 			long companyId, long[] groupIds, long[] classNameIds,
 			String keywords, int start, int end,
@@ -112,6 +118,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			orderByComparator);
 	}
 
+	@Override
 	public List<DDMStructure> search(
 			long companyId, long[] groupIds, long[] classNameIds, String name,
 			String description, String storageType, int type,
@@ -124,6 +131,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			type, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long[] groupIds, long[] classNameIds,
 			String keywords)
@@ -133,6 +141,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			companyId, groupIds, classNameIds, keywords);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long[] groupIds, long[] classNameIds, String name,
 			String description, String storageType, int type,
@@ -144,6 +153,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			type, andOperator);
 	}
 
+	@Override
 	public DDMStructure updateStructure(
 			long structureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String xsd,
@@ -157,6 +167,7 @@ public class DDMStructureServiceImpl extends DDMStructureServiceBaseImpl {
 			structureId, nameMap, descriptionMap, xsd, serviceContext);
 	}
 
+	@Override
 	public DDMStructure updateStructure(
 			long groupId, String structureKey, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String xsd,

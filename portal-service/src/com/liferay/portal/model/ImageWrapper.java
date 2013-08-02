@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -301,6 +303,10 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 		return new ImageWrapper(_image.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Image toUnescapedModel() {
+		return new ImageWrapper(_image.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _image.toString();
@@ -321,6 +327,25 @@ public class ImageWrapper implements Image, ModelWrapper<Image> {
 
 	public void setTextObj(byte[] textObj) {
 		_image.setTextObj(textObj);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ImageWrapper)) {
+			return false;
+		}
+
+		ImageWrapper imageWrapper = (ImageWrapper)obj;
+
+		if (Validator.equals(_image, imageWrapper._image)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

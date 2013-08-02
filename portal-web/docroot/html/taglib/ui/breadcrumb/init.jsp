@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,7 +30,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:breadcrumb:
 
 String displayStyle = GetterUtil.getString((String)request.getAttribute("liferay-ui:breadcrumb:displayStyle"), "horizontal");
 
-if (!ArrayUtil.contains(PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS, displayStyle)){
+if (!ArrayUtil.contains(PropsValues.BREADCRUMB_DISPLAY_STYLE_OPTIONS, displayStyle)) {
 	displayStyle = "horizontal";
 }
 
@@ -104,9 +104,9 @@ private void _buildLayoutBreadcrumb(Layout selLayout, String selLayoutParam, boo
 
 	breadcrumbSB.append("</a></span></li>");
 
-	Layout parentLayout = null;
-
 	if (selLayout.getParentLayoutId() != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+		Layout parentLayout = null;
+
 		if (selLayout instanceof VirtualLayout) {
 			VirtualLayout virtualLayout = (VirtualLayout)selLayout;
 

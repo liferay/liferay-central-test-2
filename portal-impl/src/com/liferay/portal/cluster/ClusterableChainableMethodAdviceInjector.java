@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,24 +24,20 @@ import com.liferay.portal.util.PropsValues;
 public class ClusterableChainableMethodAdviceInjector
 	extends ChainableMethodAdviceInjector {
 
+	/**
+	 * @deprecated
+	 */
 	public void setServletContextName(String servletContextName) {
-		_servletContextName = servletContextName;
 	}
 
 	@Override
 	protected ChainableMethodAdvice getNewChainableMethodAdvice() {
-		ClusterableAdvice clusterableAdvice = new ClusterableAdvice();
-
-		clusterableAdvice.setServletContextName(_servletContextName);
-
-		return clusterableAdvice;
+		return new ClusterableAdvice();
 	}
 
 	@Override
 	protected boolean isInjectCondition() {
 		return PropsValues.CLUSTER_LINK_ENABLED;
 	}
-
-	private String _servletContextName;
 
 }

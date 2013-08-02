@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,17 +17,15 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-String backURL = ParamUtil.getString(request, "backURL");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
+long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
 long structureId = ParamUtil.getLong(request, "structureId");
 %>
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewTemplatesURL">
 		<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
-		<portlet:param name="backURL" value="<%= backURL %>" />
 		<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 	</portlet:renderURL>
 
@@ -43,8 +41,7 @@ long structureId = ParamUtil.getLong(request, "structureId");
 		<portlet:renderURL var="addTemplateURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 			<portlet:param name="redirect" value="<%= viewTemplatesURL %>" />
-			<portlet:param name="backURL" value="<%= viewTemplatesURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 			<portlet:param name="structureAvailableFields" value='<%= renderResponse.getNamespace() + "structureAvailableFields" %>' />
 		</portlet:renderURL>
@@ -64,8 +61,7 @@ long structureId = ParamUtil.getLong(request, "structureId");
 		<portlet:renderURL var="addTemplateURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 			<portlet:param name="redirect" value="<%= viewTemplatesURL %>" />
-			<portlet:param name="backURL" value="<%= viewTemplatesURL %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(scopeGroupId) %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 			<portlet:param name="structureId" value="<%= String.valueOf(structureId) %>" />
 			<portlet:param name="type" value="list" />
 		</portlet:renderURL>

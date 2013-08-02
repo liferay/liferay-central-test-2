@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.CamelCaseUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodParameter;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 
 import java.lang.reflect.Method;
@@ -54,10 +55,12 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		_jsonWebServiceActionParameters = jsonWebServiceActionParameters;
 	}
 
+	@Override
 	public JSONWebServiceActionMapping getJSONWebServiceActionMapping() {
 		return _jsonWebServiceActionConfig;
 	}
 
+	@Override
 	public Object invoke() throws Exception {
 		JSONRPCRequest jsonRPCRequest =
 			_jsonWebServiceActionParameters.getJSONRPCRequest();
@@ -239,13 +242,13 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
 					calendar.setLenient(false);
 					calendar.setTimeInMillis(
-						GetterUtil.getLong(value.toString()));
+						GetterUtil.getLong(_valueToString(value)));
 
 					parameterValue = calendar;
 				}
 				else if (parameterType.equals(List.class)) {
 					List<?> list = JSONFactoryUtil.looseDeserializeSafe(
-						value.toString(), ArrayList.class);
+						_valueToString(value), ArrayList.class);
 
 					list = _generifyList(
 						list, methodParameters[i].getGenericTypes());
@@ -254,11 +257,11 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 				}
 				else if (parameterType.equals(Locale.class)) {
 					parameterValue = LocaleUtil.fromLanguageId(
-						value.toString());
+						_valueToString(value));
 				}
 				else if (parameterType.equals(Map.class)) {
 					Map<?, ?> map = JSONFactoryUtil.looseDeserializeSafe(
-						value.toString(), HashMap.class);
+						_valueToString(value), HashMap.class);
 
 					map = _generifyMap(
 						map, methodParameters[i].getGenericTypes());
@@ -277,6 +280,16 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		}
 
 		return parameters;
+	}
+
+	private String _valueToString(Object value) {
+		Class<?> valueType = value.getClass();
+
+		if (valueType.isArray()) {
+			return StringUtil.merge((Object[])value);
+		}
+
+		return value.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -25,6 +26,7 @@ import com.liferay.portal.kernel.util.Validator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import net.htmlparser.jericho.Renderer;
 import net.htmlparser.jericho.Source;
 import net.htmlparser.jericho.TextExtractor;
 
@@ -36,6 +38,7 @@ import net.htmlparser.jericho.TextExtractor;
  * @author Connor McKay
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class HtmlImpl implements Html {
 
 	public static final int ESCAPE_MODE_ATTRIBUTE = 1;
@@ -48,6 +51,7 @@ public class HtmlImpl implements Html {
 
 	public static final int ESCAPE_MODE_URL = 5;
 
+	@Override
 	public String escape(String text) {
 		if (text == null) {
 			return null;
@@ -139,6 +143,7 @@ public class HtmlImpl implements Html {
 		}
 	}
 
+	@Override
 	public String escape(String text, int type) {
 		if (text == null) {
 			return null;
@@ -200,14 +205,17 @@ public class HtmlImpl implements Html {
 		}
 	}
 
+	@Override
 	public String escapeAttribute(String attribute) {
 		return escape(attribute, ESCAPE_MODE_ATTRIBUTE);
 	}
 
+	@Override
 	public String escapeCSS(String css) {
 		return escape(css, ESCAPE_MODE_CSS);
 	}
 
+	@Override
 	public String escapeHREF(String href) {
 		if (href == null) {
 			return null;
@@ -221,21 +229,24 @@ public class HtmlImpl implements Html {
 			String protocol = href.substring(0, 10).toLowerCase();
 
 			if (protocol.equals("javascript")) {
-				return StringUtil.replaceFirst(href, StringPool.COLON, "%3a");
+				href = StringUtil.replaceFirst(href, StringPool.COLON, "%3a");
 			}
 		}
 
-		return href;
+		return escapeAttribute(href);
 	}
 
+	@Override
 	public String escapeJS(String js) {
 		return escape(js, ESCAPE_MODE_JS);
 	}
 
+	@Override
 	public String escapeURL(String url) {
 		return escape(url, ESCAPE_MODE_URL);
 	}
 
+	@Override
 	public String escapeXPath(String xPath) {
 		if (Validator.isNull(xPath)) {
 			return xPath;
@@ -267,6 +278,7 @@ public class HtmlImpl implements Html {
 		return sb.toString();
 	}
 
+	@Override
 	public String escapeXPathAttribute(String xPathAttribute) {
 		boolean hasApostrophe = xPathAttribute.contains(StringPool.APOSTROPHE);
 		boolean hasQuote = xPathAttribute.contains(StringPool.QUOTE);
@@ -286,6 +298,7 @@ public class HtmlImpl implements Html {
 		return StringPool.QUOTE.concat(xPathAttribute).concat(StringPool.QUOTE);
 	}
 
+	@Override
 	public String extractText(String html) {
 		if (html == null) {
 			return null;
@@ -298,22 +311,40 @@ public class HtmlImpl implements Html {
 		return textExtractor.toString();
 	}
 
+	@Override
 	public String fromInputSafe(String text) {
 		return StringUtil.replace(text, "&amp;", "&");
 	}
 
+	@Override
+	public String render(String html) {
+		if (html == null) {
+			return null;
+		}
+
+		Source source = new Source(html);
+
+		Renderer renderer = source.getRenderer();
+
+		return renderer.toString();
+	}
+
+	@Override
 	public String replaceMsWordCharacters(String text) {
 		return StringUtil.replace(text, _MS_WORD_UNICODE, _MS_WORD_HTML);
 	}
 
+	@Override
 	public String stripBetween(String text, String tag) {
 		return StringUtil.stripBetween(text, "<" + tag, "</" + tag + ">");
 	}
 
+	@Override
 	public String stripComments(String text) {
 		return StringUtil.stripBetween(text, "<!--", "-->");
 	}
 
+	@Override
 	public String stripHtml(String text) {
 		if (text == null) {
 			return null;
@@ -330,48 +361,13 @@ public class HtmlImpl implements Html {
 			sb.append(text.substring(x, y));
 			sb.append(StringPool.SPACE);
 
-			// Look for text enclosed by <script></script>
+			// Look for text enclosed by <abc></abc>
 
-			boolean scriptFound = isScriptTag(text, y + 1);
-
-			if (scriptFound) {
-				int pos = y + _TAG_SCRIPT.length;
-
-				// Find end of the tag
-
-				pos = text.indexOf(">", pos);
-
-				if (pos >= 0) {
-
-					// Check if preceding character is / (i.e. is this instance
-					// of <script/>)
-
-					if (text.charAt(pos-1) != '/') {
-
-						// Search for the ending </script> tag
-
-						for (;;) {
-							pos = text.indexOf("</", pos);
-
-							if (pos >= 0) {
-								if (isScriptTag(text, pos + 2)) {
-									y = pos;
-
-									break;
-								}
-								else {
-
-									// Skip past "</"
-
-									pos += 2;
-								}
-							}
-							else {
-								break;
-							}
-						}
-					}
-				}
+			if (isTag(_TAG_SCRIPT, text, y + 1)) {
+				y = stripTag(_TAG_SCRIPT, text, y);
+			}
+			else if (isTag(_TAG_STYLE, text, y + 1)) {
+				y = stripTag(_TAG_STYLE, text, y);
 			}
 
 			x = text.indexOf(">", y);
@@ -399,6 +395,7 @@ public class HtmlImpl implements Html {
 		return sb.toString();
 	}
 
+	@Override
 	public String toInputSafe(String text) {
 		return StringUtil.replace(
 			text,
@@ -406,6 +403,7 @@ public class HtmlImpl implements Html {
 			new String[] {"&amp;", "&quot;"});
 	}
 
+	@Override
 	public String unescape(String text) {
 		if (text == null) {
 			return null;
@@ -435,6 +433,7 @@ public class HtmlImpl implements Html {
 		return text;
 	}
 
+	@Override
 	public String unescapeCDATA(String text) {
 		if (text == null) {
 			return null;
@@ -450,6 +449,7 @@ public class HtmlImpl implements Html {
 		return text;
 	}
 
+	@Override
 	public String wordBreak(String text, int columns) {
 		StringBundler sb = new StringBundler();
 
@@ -514,27 +514,70 @@ public class HtmlImpl implements Html {
 		return sb.toString();
 	}
 
-	protected boolean isScriptTag(String text, int pos) {
-		if ((pos + _TAG_SCRIPT.length + 1) <= text.length()) {
+	protected boolean isTag(char[] tag, String text, int pos) {
+		if ((pos + tag.length + 1) <= text.length()) {
 			char item;
 
-			for (int i = 0; i < _TAG_SCRIPT.length; i++) {
+			for (int i = 0; i < tag.length; i++) {
 				item = text.charAt(pos++);
 
-				if (Character.toLowerCase(item) != _TAG_SCRIPT[i]) {
+				if (Character.toLowerCase(item) != tag[i]) {
 					return false;
 				}
 			}
 
 			item = text.charAt(pos);
 
-			// Check that char after "script" is not a letter (i.e. another tag)
+			// Check that char after tag is not a letter (i.e. another tag)
 
 			return !Character.isLetter(item);
 		}
 		else {
 			return false;
 		}
+	}
+
+	protected int stripTag(char[] tag, String text, int pos) {
+		int x = pos + _TAG_SCRIPT.length;
+
+		// Find end of the tag
+
+		x = text.indexOf(">", x);
+
+		if (x < 0) {
+			return pos;
+		}
+
+		// Check if preceding character is / (i.e. is this instance of <abc/>)
+
+		if (text.charAt(x-1) == '/') {
+			return pos;
+		}
+
+		// Search for the ending </abc> tag
+
+		for (;;) {
+			x = text.indexOf("</", x);
+
+			if (x >= 0) {
+				if (isTag(tag, text, x + 2)) {
+					pos = x;
+
+					break;
+				}
+				else {
+
+					// Skip past "</"
+
+					x += 2;
+				}
+			}
+			else {
+				break;
+			}
+		}
+
+		return pos;
 	}
 
 	private static final String[] _MS_WORD_HTML = new String[] {
@@ -546,6 +589,8 @@ public class HtmlImpl implements Html {
 	};
 
 	private static final char[] _TAG_SCRIPT = {'s', 'c', 'r', 'i', 'p', 't'};
+
+	private static final char[] _TAG_STYLE = {'s', 't', 'y', 'l', 'e'};
 
 	// See http://www.w3.org/TR/xpath20/#lexical-structure
 

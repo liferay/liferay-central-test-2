@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsValues;
 @JSONWebService(mode = JSONWebServiceMode.MANUAL)
 public class PortalServiceImpl extends PortalServiceBaseImpl {
 
+	@Override
 	public String getAutoDeployDirectory() throws SystemException {
 		return PrefsPropsUtil.getString(
 			PropsKeys.AUTO_DEPLOY_DEPLOY_DIR,
@@ -46,10 +47,12 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 	}
 
 	@JSONWebService
+	@Override
 	public int getBuildNumber() {
 		return ReleaseInfo.getBuildNumber();
 	}
 
+	@Override
 	public void testAddClassName_Rollback(String classNameValue)
 		throws SystemException {
 
@@ -58,12 +61,14 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		throw new SystemException();
 	}
 
+	@Override
 	public void testAddClassName_Success(String classNameValue)
 		throws SystemException {
 
 		addClassName(classNameValue);
 	}
 
+	@Override
 	public void testAddClassNameAndTestTransactionPortletBar_PortalRollback(
 			String transactionPortletBarText)
 		throws SystemException {
@@ -75,6 +80,7 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		throw new SystemException();
 	}
 
+	@Override
 	public void testAddClassNameAndTestTransactionPortletBar_PortletRollback(
 			String transactionPortletBarText)
 		throws SystemException {
@@ -84,6 +90,7 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		addTransactionPortletBar(transactionPortletBarText, true);
 	}
 
+	@Override
 	public void testAddClassNameAndTestTransactionPortletBar_Success(
 			String transactionPortletBarText)
 		throws SystemException {
@@ -93,24 +100,17 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		addTransactionPortletBar(transactionPortletBarText, false);
 	}
 
-	public void testCounterIncrement_Rollback() throws SystemException {
-		int counterIncrement = PropsValues.COUNTER_INCREMENT;
-
-		for (int i = 0; i < counterIncrement * 2; i++) {
-			counterLocalService.increment();
-		}
-
-		throw new SystemException();
-	}
-
+	@Override
 	public void testDeleteClassName() throws PortalException, SystemException {
 		classNamePersistence.removeByValue(PortalService.class.getName());
 	}
 
+	@Override
 	public int testGetBuildNumber() {
 		return portalService.getBuildNumber();
 	}
 
+	@Override
 	public void testGetUserId() {
 		long userId = 0;
 
@@ -126,6 +126,7 @@ public class PortalServiceImpl extends PortalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public boolean testHasClassName() throws SystemException {
 		int count = classNamePersistence.countByValue(
 			PortalService.class.getName());

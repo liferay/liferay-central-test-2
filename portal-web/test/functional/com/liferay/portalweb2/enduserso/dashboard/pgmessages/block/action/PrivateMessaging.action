@@ -1,0 +1,7 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="NEW_MESSAGE_BUTTON">
+			<execute function="AssertClick#assertValueClickAt" value1="New Message" />
+		</case>
+	</command>
+</definition>

@@ -1,0 +1,206 @@
+<html>
+<head>
+<title>CPWebcontent</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPWebcontent</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPWebcontent</td>
+</tr>
+<!---->
+<tr>
+	<td>OPTIONS_WRENCH_ICON</td>
+	<td>//span[@title='Options']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_BUTTON</td>
+	<td>//input[@value='Add']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_DROPDOWN</td>
+	<td>//span[@title='Add']/ul/li/strong/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DELETE_BUTTON</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NAVIGATION-->
+<tr>
+	<td>NAVIGATION_WEB_CONTENT</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Web Content')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_STRUCTURES</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Structures')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_TEMPLATES</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Templates')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_FEEDS</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Feeds')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_RECENT</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Recent')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--BASIC_SEARCH-->
+<tr>
+	<td>BASIC_SEARCH_FIELD</td>
+	<td>//input[@name='_15_keywords']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>BASIC_SEARCH_BUTTON</td>
+	<td>xpath=(//input[@value='Search'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ADD_MENULIST-->
+<tr>
+	<td>ADD_MENULIST_BASIC_WEB_CONTENT</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Basic Web Content')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--OPTIONS_MENULIST-->
+<tr>
+	<td>OPTIONS_MENULIST_CONFIGURATION</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Configuration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_EXPORT_IMPORT</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Export / Import')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WEB_CONTENT_TABLE-->
+<tr>
+	<td>WEB_CONTENT_TABLE_ALL_CHECKBOX</td>
+	<td>//th/input[@name='_15_allRowIds']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_CHECKBOX</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]/td/input[@name='_15_rowIds'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_ID</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]/td[2]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_TITLE</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]/td[3]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_STATUS</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]/td[4]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_VERSION</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]/td[5]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_TABLE_ACTIONS</td>
+	<td>xpath=(//tbody/tr[contains(.,'${key_webContentTitle}')]//span[@title='Actions']/ul/li/strong/a/span)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WEB_CONTENT_MENULIST-->
+<tr>
+	<td>WEB_CONTENT_MENULIST_EDIT</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Edit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_MENULIST_PERMISSIONS</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Permissions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_MENULIST_VIEW</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'View')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_MENULIST_COPY</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Copy')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_MENULIST_EXPIRE</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Expire')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WEB_CONTENT_MENULIST_DELETE</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Delete')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

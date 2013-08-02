@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -285,6 +287,10 @@ public class PluginSettingWrapper implements PluginSetting,
 		return new PluginSettingWrapper(_pluginSetting.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.PluginSetting toUnescapedModel() {
+		return new PluginSettingWrapper(_pluginSetting.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _pluginSetting.toString();
@@ -316,8 +322,9 @@ public class PluginSettingWrapper implements PluginSetting,
 	}
 
 	/**
-	* Returns <code>true</code> if the user has permission to use this plugin
+	* Returns <code>true</code> if the user has permission to use this plugin.
 	*
+	* @param userId the primary key of the user
 	* @return <code>true</code> if the user has permission to use this plugin
 	*/
 	public boolean hasPermission(long userId) {
@@ -328,6 +335,7 @@ public class PluginSettingWrapper implements PluginSetting,
 	* Returns <code>true</code> if the plugin has a role with the specified
 	* name.
 	*
+	* @param roleName the role name
 	* @return <code>true</code> if the plugin has a role with the specified
 	name
 	*/
@@ -340,6 +348,25 @@ public class PluginSettingWrapper implements PluginSetting,
 	*/
 	public void setRolesArray(java.lang.String[] rolesArray) {
 		_pluginSetting.setRolesArray(rolesArray);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PluginSettingWrapper)) {
+			return false;
+		}
+
+		PluginSettingWrapper pluginSettingWrapper = (PluginSettingWrapper)obj;
+
+		if (Validator.equals(_pluginSetting, pluginSettingWrapper._pluginSetting)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

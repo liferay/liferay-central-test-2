@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,7 +34,7 @@ public class LiferayPersistenceIntegrationJUnitTestRunner
 	}
 
 	@Override
-	protected void loadSpringContext() {
+	public void initApplicationContext() {
 		List<String> extraConfigLocations = new ArrayList<String>(1);
 
 		extraConfigLocations.add("META-INF/test-persistence-spring.xml");

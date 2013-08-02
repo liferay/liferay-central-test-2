@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,6 +36,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ClassNameLocalServiceImpl
 	extends ClassNameLocalServiceBaseImpl implements CacheRegistryItem {
 
+	@Override
 	public ClassName addClassName(String value) throws SystemException {
 		ClassName className = classNamePersistence.fetchByValue(value);
 
@@ -59,6 +60,7 @@ public class ClassNameLocalServiceImpl
 		CacheRegistryUtil.register(this);
 	}
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkClassNames() throws SystemException {
 		List<ClassName> classNames = classNamePersistence.findAll();
@@ -74,6 +76,7 @@ public class ClassNameLocalServiceImpl
 		}
 	}
 
+	@Override
 	@Skip
 	public ClassName fetchClassName(String value) throws SystemException {
 		if (Validator.isNull(value)) {
@@ -95,11 +98,13 @@ public class ClassNameLocalServiceImpl
 		return className;
 	}
 
+	@Override
 	@Skip
 	public long fetchClassNameId(Class<?> clazz) {
 		return fetchClassNameId(clazz.getName());
 	}
 
+	@Override
 	@Skip
 	public long fetchClassNameId(String value) {
 		try {
@@ -113,6 +118,7 @@ public class ClassNameLocalServiceImpl
 		}
 	}
 
+	@Override
 	@Skip
 	public ClassName getClassName(String value) throws SystemException {
 		if (Validator.isNull(value)) {
@@ -133,11 +139,13 @@ public class ClassNameLocalServiceImpl
 		return className;
 	}
 
+	@Override
 	@Skip
 	public long getClassNameId(Class<?> clazz) {
 		return getClassNameId(clazz.getName());
 	}
 
+	@Override
 	@Skip
 	public long getClassNameId(String value) {
 		try {
@@ -151,10 +159,12 @@ public class ClassNameLocalServiceImpl
 		}
 	}
 
+	@Override
 	public String getRegistryName() {
 		return ClassNameLocalServiceImpl.class.getName();
 	}
 
+	@Override
 	public void invalidate() {
 		_classNames.clear();
 	}

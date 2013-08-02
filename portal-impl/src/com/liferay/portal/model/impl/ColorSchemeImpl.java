@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,24 +61,22 @@ public class ColorSchemeImpl implements ColorScheme {
 		_cssClass = cssClass;
 	}
 
+	@Override
 	public int compareTo(ColorScheme colorScheme) {
 		return getName().compareTo(colorScheme.getName());
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ColorScheme)) {
 			return false;
 		}
 
-		ColorScheme colorScheme = null;
-
-		try {
-			colorScheme = (ColorScheme)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ColorScheme colorScheme = (ColorScheme)obj;
 
 		String colorSchemeId = colorScheme.getColorSchemeId();
 
@@ -90,14 +88,17 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
+	@Override
 	public String getColorSchemeId() {
 		return _colorSchemeId;
 	}
 
+	@Override
 	public String getColorSchemeImagesPath() {
 		return _colorSchemeImagesPath;
 	}
 
+	@Override
 	public String getColorSchemeThumbnailPath() {
 
 		// LEP-5270
@@ -122,14 +123,17 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _colorSchemeImagesPath;
 	}
 
+	@Override
 	public String getCssClass() {
 		return _cssClass;
 	}
 
+	@Override
 	public boolean getDefaultCs() {
 		return _defaultCs;
 	}
 
+	@Override
 	public String getName() {
 		if (Validator.isNull(_name)) {
 			return _colorSchemeId;
@@ -139,6 +143,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
+	@Override
 	public String getSetting(String key) {
 		//return _settingsProperties.getProperty(key);
 
@@ -152,10 +157,12 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
+	@Override
 	public String getSettings() {
 		return PropertiesUtil.toString(_settingsProperties);
 	}
 
+	@Override
 	public Properties getSettingsProperties() {
 		return _settingsProperties;
 	}
@@ -165,26 +172,32 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _colorSchemeId.hashCode();
 	}
 
+	@Override
 	public boolean isDefaultCs() {
 		return _defaultCs;
 	}
 
+	@Override
 	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
 		_colorSchemeImagesPath = colorSchemeImagesPath;
 	}
 
+	@Override
 	public void setCssClass(String cssClass) {
 		_cssClass = cssClass;
 	}
 
+	@Override
 	public void setDefaultCs(boolean defaultCs) {
 		_defaultCs = defaultCs;
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public void setSettings(String settings) {
 		_settingsProperties.clear();
 
@@ -197,11 +210,12 @@ public class ColorSchemeImpl implements ColorScheme {
 		}
 	}
 
+	@Override
 	public void setSettingsProperties(Properties settingsProperties) {
 		_settingsProperties = settingsProperties;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ColorScheme.class);
+	private static Log _log = LogFactoryUtil.getLog(ColorSchemeImpl.class);
 
 	private String _colorSchemeId;
 	private String _colorSchemeImagesPath =

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -41,6 +42,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
@@ -81,6 +83,7 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -103,8 +106,9 @@ public class EditArticleAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -161,48 +165,53 @@ public class EditArticleAction extends PortletAction {
 				actionRequest, "workflowAction",
 				WorkflowConstants.ACTION_PUBLISH);
 
-			if ((article != null) &&
-				(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+			if (Validator.isNotNull(oldUrlTitle)) {
+				String portletId = HttpUtil.getParameter(
+					redirect, "p_p_id", false);
 
-				redirect = getSaveAndContinueRedirect(
-					portletConfig, actionRequest, article, redirect);
+				String oldRedirectParam =
+					PortalUtil.getPortletNamespace(portletId) + "redirect";
+
+				String oldRedirect = HttpUtil.getParameter(
+					redirect, oldRedirectParam, false);
+
+				if (Validator.isNotNull(oldRedirect)) {
+					String newRedirect = HttpUtil.decodeURL(oldRedirect);
+
+					newRedirect = StringUtil.replace(
+						newRedirect, oldUrlTitle, article.getUrlTitle());
+					newRedirect = StringUtil.replace(
+						newRedirect, oldRedirectParam, "redirect");
+
+					redirect = StringUtil.replace(
+						redirect, oldRedirect, newRedirect);
+				}
 			}
-
-			if (redirect.contains("/content/" + oldUrlTitle + "?")) {
-				int pos = redirect.indexOf("?");
-
-				if (pos == -1) {
-					pos = redirect.length();
-				}
-
-				String newRedirect = redirect.substring(
-					0, pos - oldUrlTitle.length());
-
-				newRedirect += article.getUrlTitle();
-
-				if (oldUrlTitle.contains("/maximized")) {
-					newRedirect += "/maximized";
-				}
-
-				if (pos < redirect.length()) {
-					newRedirect += "?" + redirect.substring(pos + 1);
-				}
-
-				redirect = newRedirect;
-			}
-
-			WindowState windowState = actionRequest.getWindowState();
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Layout layout = themeDisplay.getLayout();
+			if ((cmd.equals(Constants.DELETE) ||
+				 cmd.equals(Constants.DELETE_VERSIONS)) &&
+				!hasArticle(actionRequest)) {
 
-			if (cmd.equals(Constants.DELETE_VERSIONS) &&
-				hasArticle(actionRequest)) {
+				String referringPortletResource = ParamUtil.getString(
+					actionRequest, "referringPortletResource");
 
-				redirect = ParamUtil.getString(
-					actionRequest, "originalRedirect");
+				if (Validator.isNotNull(referringPortletResource)) {
+					setForward(
+						actionRequest,
+						"portlet.journal.asset.add_asset_redirect");
+
+					return;
+				}
+				else {
+					PortletURL portletURL = PortletURLFactoryUtil.create(
+						actionRequest, portletConfig.getPortletName(),
+						themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+					redirect = portletURL.toString();
+				}
 			}
 
 			if (cmd.equals(Constants.DELETE_TRANSLATION) ||
@@ -212,16 +221,30 @@ public class EditArticleAction extends PortletAction {
 					actionRequest,
 					"portlet.journal.update_translation_redirect");
 			}
-			else if (!windowState.equals(LiferayWindowState.POP_UP) &&
-					 layout.isTypeControlPanel()) {
+			else if ((article != null) &&
+					 (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+
+				redirect = getSaveAndContinueRedirect(
+					portletConfig, actionRequest, article, redirect);
 
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
-				redirect = PortalUtil.escapeRedirect(redirect);
+				WindowState windowState = actionRequest.getWindowState();
 
-				if (Validator.isNotNull(redirect)) {
-					actionResponse.sendRedirect(redirect);
+				Layout layout = themeDisplay.getLayout();
+
+				if (!windowState.equals(LiferayWindowState.POP_UP) &&
+					layout.isTypeControlPanel()) {
+
+					sendRedirect(actionRequest, actionResponse, redirect);
+				}
+				else {
+					redirect = PortalUtil.escapeRedirect(redirect);
+
+					if (Validator.isNotNull(redirect)) {
+						actionResponse.sendRedirect(redirect);
+					}
 				}
 			}
 		}
@@ -263,8 +286,9 @@ public class EditArticleAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -282,21 +306,22 @@ public class EditArticleAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.journal.error");
+				return actionMapping.findForward("portlet.journal.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.journal.edit_article"));
 	}
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
@@ -419,8 +444,8 @@ public class EditArticleAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String originalRedirect = ParamUtil.getString(
-			actionRequest, "originalRedirect");
+		String referringPortletResource = ParamUtil.getString(
+			actionRequest, "referringPortletResource");
 
 		String languageId = ParamUtil.getString(actionRequest, "languageId");
 
@@ -428,18 +453,18 @@ public class EditArticleAction extends PortletAction {
 			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(actionRequest.getWindowState());
-
 		portletURL.setParameter("struts_action", "/journal/edit_article");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"referringPortletResource", referringPortletResource, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(article.getGroupId()), false);
 		portletURL.setParameter("articleId", article.getArticleId(), false);
 		portletURL.setParameter(
 			"version", String.valueOf(article.getVersion()), false);
 		portletURL.setParameter("languageId", languageId, false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}
@@ -452,10 +477,10 @@ public class EditArticleAction extends PortletAction {
 			JournalArticleLocalServiceUtil.getArticle(groupId, articleId);
 		}
 		catch (NoSuchArticleException nsae) {
-			return true;
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	protected void removeArticlesLocale(ActionRequest actionRequest)
@@ -508,7 +533,6 @@ public class EditArticleAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadPortletRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
-
 		long classNameId = ParamUtil.getLong(
 			uploadPortletRequest, "classNameId");
 		long classPK = ParamUtil.getLong(uploadPortletRequest, "classPK");
@@ -554,8 +578,8 @@ public class EditArticleAction extends PortletAction {
 		String content = ParamUtil.getString(uploadPortletRequest, "content");
 
 		Boolean fileItemThresholdSizeExceeded =
-				(Boolean)uploadPortletRequest.getAttribute(
-			WebKeys.FILE_ITEM_THRESHOLD_SIZE_EXCEEDED);
+			(Boolean)uploadPortletRequest.getAttribute(
+				WebKeys.FILE_ITEM_THRESHOLD_SIZE_EXCEEDED);
 
 		if ((fileItemThresholdSizeExceeded != null) &&
 			fileItemThresholdSizeExceeded.booleanValue()) {
@@ -575,7 +599,13 @@ public class EditArticleAction extends PortletAction {
 
 		Layout targetLayout =
 			LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
-				layoutUuid, groupId);
+				layoutUuid, groupId, false);
+
+		if (targetLayout == null) {
+			targetLayout =
+				LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
+					layoutUuid, groupId, true);
+		}
 
 		if (targetLayout == null) {
 			layoutUuid = null;

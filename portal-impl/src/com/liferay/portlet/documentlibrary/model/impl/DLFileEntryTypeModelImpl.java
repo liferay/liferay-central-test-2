@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -161,7 +161,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 			{ "structureId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_DLFILEENTRYTYPES_DDMSTRUCTURES_SQL_CREATE =
-		"create table DLFileEntryTypes_DDMStructures (fileEntryTypeId LONG not null,structureId LONG not null,primary key (fileEntryTypeId, structureId))";
+		"create table DLFileEntryTypes_DDMStructures (structureId LONG not null,fileEntryTypeId LONG not null,primary key (structureId, fileEntryTypeId))";
 	public static final boolean FINDER_CACHE_ENABLED_DLFILEENTRYTYPES_DDMSTRUCTURES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.DLFileEntryTypes_DDMStructures"),
@@ -444,13 +444,16 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 	@Override
 	public DLFileEntryType toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DLFileEntryType)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DLFileEntryType)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DLFileEntryType toUnescapedModel() {
+		return (DLFileEntryType)this;
 	}
 
 	@Override
@@ -489,18 +492,15 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileEntryType)) {
 			return false;
 		}
 
-		DLFileEntryType dlFileEntryType = null;
-
-		try {
-			dlFileEntryType = (DLFileEntryType)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileEntryType dlFileEntryType = (DLFileEntryType)obj;
 
 		long primaryKey = dlFileEntryType.getPrimaryKey();
 
@@ -680,7 +680,7 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	private static ClassLoader _classLoader = DLFileEntryType.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DLFileEntryType.class
 		};
 	private String _uuid;
@@ -699,5 +699,5 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	private String _originalName;
 	private String _description;
 	private long _columnBitmask;
-	private DLFileEntryType _escapedModelProxy;
+	private DLFileEntryType _escapedModel;
 }

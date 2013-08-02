@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,8 @@
 
 package com.liferay.util.bridges.php;
 
+import com.caucho.quercus.servlet.QuercusServlet;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.DynamicServletConfig;
@@ -21,7 +23,9 @@ import com.liferay.portal.kernel.servlet.PortletServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.ServletObjectsFactory;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.bridges.common.ScriptPostProcess;
 
 import java.io.IOException;
@@ -41,7 +45,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -129,7 +132,8 @@ public class PHPPortlet extends GenericPortlet {
 
 	@Override
 	public void processAction(
-			ActionRequest actionRequest, ActionResponse actionResponse) {
+		ActionRequest actionRequest, ActionResponse actionResponse) {
+
 		String phpURI = actionRequest.getParameter(_PHP_URI_PARAM);
 
 		if (phpURI != null) {
@@ -140,30 +144,39 @@ public class PHPPortlet extends GenericPortlet {
 	protected synchronized void initQuercus(ServletConfig servletConfig)
 		throws PortletException {
 
-		if (quercusServlet == null) {
-			try {
-				quercusServlet = (HttpServlet)Class.forName(
-					_QUERCUS_SERVLET).newInstance();
+		if (quercusServlet != null) {
+			return;
+		}
 
-				Map<String, String> params = new HashMap<String, String>();
+		try {
+			quercusServlet = (QuercusServlet)InstanceFactory.newInstance(
+				_QUERCUS_SERVLET);
 
-				Enumeration<String> enu = servletConfig.getInitParameterNames();
+			Map<String, String> params = new HashMap<String, String>();
 
-				while (enu.hasMoreElements()) {
-					String name = enu.nextElement();
+			Enumeration<String> enu = servletConfig.getInitParameterNames();
 
-					if (!name.equals("portlet-class")) {
-						params.put(name, servletConfig.getInitParameter(name));
-					}
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
+
+				if (!name.equals("portlet-class")) {
+					params.put(name, servletConfig.getInitParameter(name));
 				}
-
-				servletConfig = new DynamicServletConfig(servletConfig, params);
-
-				quercusServlet.init(servletConfig);
 			}
-			catch (Exception e) {
-				throw new PortletException(e);
-			}
+
+			servletConfig = new DynamicServletConfig(servletConfig, params);
+
+			QuercusServlet.PhpIni phpIni = quercusServlet.createPhpIni();
+
+			phpIni.setProperty("unicode.http_input_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.output_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.runtime_encoding", StringPool.UTF8);
+			phpIni.setProperty("unicode.semantics", Boolean.TRUE.toString());
+
+			quercusServlet.init(servletConfig);
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
 		}
 	}
 
@@ -223,7 +236,7 @@ public class PHPPortlet extends GenericPortlet {
 	protected boolean addPortletParams;
 	protected String editUri;
 	protected String helpUri;
-	protected HttpServlet quercusServlet;
+	protected QuercusServlet quercusServlet;
 	protected ServletObjectsFactory servletObjectsFactory;
 	protected String viewUri;
 

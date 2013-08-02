@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -225,13 +225,64 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		}
 	}
 
+	protected void cacheUniqueFindersCache(ResourceCode resourceCode) {
+		if (resourceCode.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(resourceCode.getCompanyId()),
+					
+					resourceCode.getName(),
+					Integer.valueOf(resourceCode.getScope())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N_S, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S, args,
+				resourceCode);
+		}
+		else {
+			ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
+
+			if ((resourceCodeModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_N_S.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(resourceCode.getCompanyId()),
+						
+						resourceCode.getName(),
+						Integer.valueOf(resourceCode.getScope())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N_S, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S, args,
+					resourceCode);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(ResourceCode resourceCode) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S,
-			new Object[] {
+		ResourceCodeModelImpl resourceCodeModelImpl = (ResourceCodeModelImpl)resourceCode;
+
+		Object[] args = new Object[] {
 				Long.valueOf(resourceCode.getCompanyId()),
 				
-			resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
-			});
+				resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N_S, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S, args);
+
+		if ((resourceCodeModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_N_S.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(resourceCodeModelImpl.getOriginalCompanyId()),
+					
+					resourceCodeModelImpl.getOriginalName(),
+					Integer.valueOf(resourceCodeModelImpl.getOriginalScope())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N_S, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S, args);
+		}
 	}
 
 	/**
@@ -402,37 +453,8 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 		EntityCacheUtil.putResult(ResourceCodeModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceCodeImpl.class, resourceCode.getPrimaryKey(), resourceCode);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
-				new Object[] {
-					Long.valueOf(resourceCode.getCompanyId()),
-					
-				resourceCode.getName(), Integer.valueOf(resourceCode.getScope())
-				}, resourceCode);
-		}
-		else {
-			if ((resourceCodeModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_N_S.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(resourceCodeModelImpl.getOriginalCompanyId()),
-						
-						resourceCodeModelImpl.getOriginalName(),
-						Integer.valueOf(resourceCodeModelImpl.getOriginalScope())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N_S, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N_S, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N_S,
-					new Object[] {
-						Long.valueOf(resourceCode.getCompanyId()),
-						
-					resourceCode.getName(),
-						Integer.valueOf(resourceCode.getScope())
-					}, resourceCode);
-			}
-		}
+		clearUniqueFindersCache(resourceCode);
+		cacheUniqueFindersCache(resourceCode);
 
 		return resourceCode;
 	}
@@ -1907,8 +1929,10 @@ public class ResourceCodePersistenceImpl extends BasePersistenceImpl<ResourceCod
 				List<ModelListener<ResourceCode>> listenersList = new ArrayList<ModelListener<ResourceCode>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<ResourceCode>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,11 +27,10 @@ import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
-import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
@@ -60,9 +59,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
+		PortletPreferences preferences = actionRequest.getPreferences();
 
 		if (cmd.equals(Constants.UPDATE)) {
 			updateDisplaySettings(actionRequest);
@@ -136,7 +133,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 	}
 
 	protected String[] getClassTypeIds(
-		ActionRequest actionRequest, String[] classNameIds) throws Exception {
+			ActionRequest actionRequest, String[] classNameIds)
+		throws Exception {
 
 		String anyAssetTypeString = getParameter(actionRequest, "anyAssetType");
 
@@ -351,7 +349,7 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			}
 		}
 
-		layout = LayoutServiceUtil.updateLayout(
+		layout = LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 	}
@@ -398,14 +396,16 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			String[] values = null;
 
 			if (name.equals("assetTags")) {
-				values = StringUtil.split(ParamUtil.getString(
-					actionRequest, "queryTagNames" + queryRulesIndex));
+				values = StringUtil.split(
+					ParamUtil.getString(
+						actionRequest, "queryTagNames" + queryRulesIndex));
 
 				AssetTagLocalServiceUtil.checkTags(userId, groupId, values);
 			}
 			else {
-				values = StringUtil.split(ParamUtil.getString(
-					actionRequest, "queryCategoryIds" + queryRulesIndex));
+				values = StringUtil.split(
+					ParamUtil.getString(
+						actionRequest, "queryCategoryIds" + queryRulesIndex));
 			}
 
 			setPreference(

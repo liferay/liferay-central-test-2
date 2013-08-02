@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence;
 
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -34,6 +35,10 @@ public class BookmarksEntryFinderImpl
 	public static final String FIND_BY_NO_ASSETS =
 		BookmarksEntryFinder.class.getName() + ".findByNoAssets";
 
+	public static final String FIND_BY_NO_RESOURCE_BLOCKS =
+		BookmarksEntryFinder.class.getName() + ".findByNoResourceBlocks";
+
+	@Override
 	public List<BookmarksEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -45,6 +50,35 @@ public class BookmarksEntryFinderImpl
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
+
+			return q.list(true);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	@Override
+	public List<BookmarksEntry> findByNoResourceBlocks()
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_RESOURCE_BLOCKS);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(BookmarksEntry.class.getName());
 
 			return q.list(true);
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -734,13 +734,16 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 
 	@Override
 	public DDMTemplate toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DDMTemplate)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DDMTemplate)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DDMTemplate toUnescapedModel() {
+		return (DDMTemplate)this;
 	}
 
 	@Override
@@ -784,18 +787,15 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMTemplate)) {
 			return false;
 		}
 
-		DDMTemplate ddmTemplate = null;
-
-		try {
-			ddmTemplate = (DDMTemplate)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMTemplate ddmTemplate = (DDMTemplate)obj;
 
 		long primaryKey = ddmTemplate.getPrimaryKey();
 
@@ -1047,7 +1047,7 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	private static ClassLoader _classLoader = DDMTemplate.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DDMTemplate.class
 		};
 	private String _uuid;
@@ -1077,5 +1077,5 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	private String _originalLanguage;
 	private String _script;
 	private long _columnBitmask;
-	private DDMTemplate _escapedModelProxy;
+	private DDMTemplate _escapedModel;
 }

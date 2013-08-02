@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,7 @@ package com.liferay.portlet.messageboards.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -48,18 +49,32 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		_message = message;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _message.getMessageId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _message.getGroupId();
 	}
 
-	public String getSummary(Locale locale) {
-		return HtmlUtil.stripHtml(_message.getBody());
+	@Override
+	public String getSearchSummary(Locale locale) {
+		if (_message.isFormatBBCode()) {
+			return HtmlUtil.extractText(
+				BBCodeTranslatorUtil.getHTML(_message.getBody()));
+		}
+
+		return getSummary(locale);
 	}
 
+	@Override
+	public String getSummary(Locale locale) {
+		return HtmlUtil.extractText(_message.getBody());
+	}
+
+	@Override
 	public String getTitle(Locale locale) {
 		return _message.getSubject();
 	}
@@ -91,12 +106,11 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
 			PortletKeys.MESSAGE_BOARDS, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(windowState);
-
 		portletURL.setParameter(
 			"struts_action", "/message_boards/view_message");
 		portletURL.setParameter(
 			"messageId", String.valueOf(_message.getMessageId()));
+		portletURL.setWindowState(windowState);
 
 		return portletURL;
 	}
@@ -113,14 +127,17 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 			_message.getMessageId());
 	}
 
+	@Override
 	public long getUserId() {
 		return _message.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _message.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _message.getUuid();
 	}
@@ -164,6 +181,7 @@ public class MBMessageAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -253,13 +253,16 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 	@Override
 	public UserGroupGroupRole toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (UserGroupGroupRole)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (UserGroupGroupRole)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public UserGroupGroupRole toUnescapedModel() {
+		return (UserGroupGroupRole)this;
 	}
 
 	@Override
@@ -283,18 +286,15 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroupGroupRole)) {
 			return false;
 		}
 
-		UserGroupGroupRole userGroupGroupRole = null;
-
-		try {
-			userGroupGroupRole = (UserGroupGroupRole)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserGroupGroupRole userGroupGroupRole = (UserGroupGroupRole)obj;
 
 		UserGroupGroupRolePK primaryKey = userGroupGroupRole.getPrimaryKey();
 
@@ -384,7 +384,7 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	}
 
 	private static ClassLoader _classLoader = UserGroupGroupRole.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			UserGroupGroupRole.class
 		};
 	private long _userGroupId;
@@ -397,5 +397,5 @@ public class UserGroupGroupRoleModelImpl extends BaseModelImpl<UserGroupGroupRol
 	private long _originalRoleId;
 	private boolean _setOriginalRoleId;
 	private long _columnBitmask;
-	private UserGroupGroupRole _escapedModelProxy;
+	private UserGroupGroupRole _escapedModel;
 }

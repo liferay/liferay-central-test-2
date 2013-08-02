@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl;
 
@@ -102,6 +103,9 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 				BlogsPortletDataHandlerImpl.class, "deleteData")) {
 
 			BlogsEntryLocalServiceUtil.deleteEntries(
+				portletDataContext.getScopeGroupId());
+
+			BlogsStatsUserLocalServiceUtil.deleteStatsUserByGroupId(
 				portletDataContext.getScopeGroupId());
 		}
 
@@ -239,18 +243,32 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		entryElement.addAttribute("image-path", imagePath);
 
-		Image smallImage = ImageUtil.fetchByPrimaryKey(entry.getSmallImageId());
+		if (entry.isSmallImage()) {
+			Image smallImage = ImageUtil.fetchByPrimaryKey(
+				entry.getSmallImageId());
 
-		if (entry.isSmallImage() && (smallImage != null)) {
-			String smallImagePath = getEntrySmallImagePath(
-				portletDataContext, entry);
+			if (Validator.isNotNull(entry.getSmallImageURL())) {
+				String smallImageURL =
+					JournalPortletDataHandlerImpl.exportReferencedContent(
+						portletDataContext, dlFileEntryTypesElement,
+						dlFoldersElement, dlFileEntriesElement,
+						dlFileRanksElement, dlRepositoriesElement,
+						dlRepositoryEntriesElement, entryElement,
+						entry.getSmallImageURL().concat(StringPool.SPACE));
 
-			entryElement.addAttribute("small-image-path", smallImagePath);
+				entry.setSmallImageURL(smallImageURL);
+			}
+			else if (smallImage != null) {
+				String smallImagePath = getEntrySmallImagePath(
+					portletDataContext, entry);
 
-			entry.setSmallImageType(smallImage.getType());
+				entryElement.addAttribute("small-image-path", smallImagePath);
 
-			portletDataContext.addZipEntry(
-				smallImagePath, smallImage.getTextObj());
+				entry.setSmallImageType(smallImage.getType());
+
+				portletDataContext.addZipEntry(
+					smallImagePath, smallImage.getTextObj());
+			}
 		}
 
 		portletDataContext.addClassedModel(
@@ -343,20 +361,34 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 		InputStream smallImageInputStream = null;
 
 		try {
-			String smallImagePath = entryElement.attributeValue(
-				"small-image-path");
+			if (entry.isSmallImage()) {
+				String smallImagePath = entryElement.attributeValue(
+					"small-image-path");
 
-			if (entry.isSmallImage() && Validator.isNotNull(smallImagePath)) {
-				smallImageFileName = String.valueOf(
-					entry.getSmallImageId()).concat(
-						StringPool.PERIOD).concat(entry.getSmallImageType());
-				smallImageInputStream =
-					portletDataContext.getZipEntryAsInputStream(smallImagePath);
+				if (Validator.isNotNull(entry.getSmallImageURL())) {
+					String smallImageURL =
+						JournalPortletDataHandlerImpl.importReferencedContent(
+							portletDataContext, entryElement,
+							entry.getSmallImageURL());
+
+					entry.setSmallImageURL(smallImageURL);
+				}
+				else if (Validator.isNotNull(smallImagePath)) {
+					smallImageFileName = String.valueOf(
+						entry.getSmallImageId()).concat(
+							StringPool.PERIOD).concat(
+								entry.getSmallImageType());
+					smallImageInputStream =
+						portletDataContext.getZipEntryAsInputStream(
+							smallImagePath);
+				}
 			}
 
 			BlogsEntry importedEntry = null;
 
 			if (portletDataContext.isDataStrategyMirror()) {
+				serviceContext.setAttribute("urlTitle", entry.getUrlTitle());
+
 				BlogsEntry existingEntry = BlogsEntryUtil.fetchByUUID_G(
 					entry.getUuid(), portletDataContext.getScopeGroupId());
 
@@ -408,7 +440,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _entries =
 		new PortletDataHandlerBoolean(_NAMESPACE, "entries", true, true);
-
 	private static PortletDataHandlerControl[] _metadataControls =
 		new PortletDataHandlerControl[] {
 			new PortletDataHandlerBoolean(_NAMESPACE, "categories"),
@@ -416,7 +447,6 @@ public class BlogsPortletDataHandlerImpl extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(_NAMESPACE, "ratings"),
 			new PortletDataHandlerBoolean(_NAMESPACE, "tags")
 		};
-
 	private static PortletDataHandlerBoolean _wordpress =
 		new PortletDataHandlerBoolean(_NAMESPACE, "wordpress");
 

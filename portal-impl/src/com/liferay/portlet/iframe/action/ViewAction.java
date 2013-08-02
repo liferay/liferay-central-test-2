@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,8 +45,9 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		String src = transformSrc(renderRequest, renderResponse);
@@ -54,12 +55,12 @@ public class ViewAction extends PortletAction {
 		if (Validator.isNull(src) || src.equals(Http.HTTP_WITH_SLASH) ||
 			src.equals(Http.HTTPS_WITH_SLASH)) {
 
-			return mapping.findForward("/portal/portlet_not_setup");
+			return actionMapping.findForward("/portal/portlet_not_setup");
 		}
 
 		renderRequest.setAttribute(WebKeys.IFRAME_SRC, src);
 
-		return mapping.findForward("portlet.iframe.view");
+		return actionMapping.findForward("portlet.iframe.view");
 	}
 
 	protected String getPassword(
@@ -109,36 +110,36 @@ public class ViewAction extends PortletAction {
 		boolean auth = GetterUtil.getBoolean(
 			preferences.getValue("auth", StringPool.BLANK));
 
-		if (auth) {
-			String authType = preferences.getValue(
-				"authType", StringPool.BLANK);
+		if (!auth) {
+			return src;
+		}
 
-			if (authType.equals("basic")) {
-				String userName = getUserName(renderRequest, renderResponse);
-				String password = getPassword(renderRequest, renderResponse);
+		String authType = preferences.getValue("authType", StringPool.BLANK);
 
-				int pos = src.indexOf("://");
+		if (authType.equals("basic")) {
+			String userName = getUserName(renderRequest, renderResponse);
+			String password = getPassword(renderRequest, renderResponse);
 
-				String protocol = src.substring(0, pos + 3);
-				String url = src.substring(pos + 3);
+			int pos = src.indexOf("://");
 
-				src = protocol + userName + ":" + password + "@" + url;
-			}
-			else {
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)renderRequest.getAttribute(
-						WebKeys.THEME_DISPLAY);
+			String protocol = src.substring(0, pos + 3);
+			String url = src.substring(pos + 3);
 
-				String portletId = PortalUtil.getPortletId(renderRequest);
+			src = protocol + userName + ":" + password + "@" + url;
+		}
+		else {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					themeDisplay.getCompanyId(), portletId);
+			String portletId = PortalUtil.getPortletId(renderRequest);
 
-				src =
-					themeDisplay.getPathMain() + "/" + portlet.getStrutsPath() +
-						"/proxy?p_l_id=" + themeDisplay.getPlid() + "&p_p_id=" +
-							portletId;
-			}
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				themeDisplay.getCompanyId(), portletId);
+
+			src =
+				themeDisplay.getPathMain() + "/" + portlet.getStrutsPath() +
+					"/proxy?p_l_id=" + themeDisplay.getPlid() + "&p_p_id=" +
+						portletId;
 		}
 
 		return src;

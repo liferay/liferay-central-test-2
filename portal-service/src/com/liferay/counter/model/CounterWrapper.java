@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.counter.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -177,6 +178,10 @@ public class CounterWrapper implements Counter, ModelWrapper<Counter> {
 		return new CounterWrapper(_counter.toEscapedModel());
 	}
 
+	public com.liferay.counter.model.Counter toUnescapedModel() {
+		return new CounterWrapper(_counter.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _counter.toString();
@@ -189,6 +194,25 @@ public class CounterWrapper implements Counter, ModelWrapper<Counter> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_counter.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof CounterWrapper)) {
+			return false;
+		}
+
+		CounterWrapper counterWrapper = (CounterWrapper)obj;
+
+		if (Validator.equals(_counter, counterWrapper._counter)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

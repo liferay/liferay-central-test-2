@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -302,8 +302,6 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletDataContext portletDataContext, PollsVote vote)
 		throws Exception {
 
-		long userId = portletDataContext.getUserId(vote.getUserUuid());
-
 		Map<Long, Long> questionIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				PollsQuestion.class);
@@ -324,7 +322,7 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		try {
 			PollsVoteLocalServiceUtil.addVote(
-				userId, questionId, choiceId, serviceContext);
+				vote.getUserId(), questionId, choiceId, serviceContext);
 		}
 		catch (DuplicateVoteException dve) {
 		}
@@ -450,7 +448,6 @@ public class PollsPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _questions =
 		new PortletDataHandlerBoolean(_NAMESPACE, "questions", true, true);
-
 	private static PortletDataHandlerBoolean _votes =
 		new PortletDataHandlerBoolean(_NAMESPACE, "votes");
 

@@ -1,0 +1,78 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="AddMicroblogsEntryViewableByEveryone">
+		<var name="microblogsEntryAuthorFirstName" value="Joe" />
+		<var name="microblogsEntryAuthorLastName" value="Bloggs" />
+		<var name="microblogsEntryAuthorScreenName" value="joebloggs" />
+		<var name="microblogsEntryContent" value="Microblogs Post" />
+		<var name="microblogsEntryCharacterCountdown" value="135" />
+		<var name="microblogsEntryViewableBy" value="Everyone" />
+		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+		<var name="userFirstName" value="Social01" />
+		<var name="userMiddleName" value="Office01" />
+		<var name="userLastName" value="User01" />
+		<var name="userScreenName" value="socialoffice01" />
+
+		<execute macro="SOUser#addUserWithSORole">
+			<var name="adminEmailAddress" value="test@liferay.com" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+			<var name="userFirstName" value="Social01" />
+			<var name="userMiddleName" value="Office01" />
+			<var name="userLastName" value="User01" />
+			<var name="userScreenName" value="socialoffice01" />
+		</execute>
+
+		<execute macro="SOMicroblogs#addMicroblogsEntry">
+			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
+			<var name="microblogsEntryCharacterCountdown" value="${microblogsEntryCharacterCountdown}" />
+			<var name="microblogsEntryViewableBy" value="${microblogsEntryViewableBy}" />
+		</execute>
+
+		<execute macro="SOMicroblogs#viewOwnMicroblogsEntry">
+			<var name="microblogsEntryAuthorFirstName" value="${microblogsEntryAuthorFirstName}" />
+			<var name="microblogsEntryAuthorLastName" value="${microblogsEntryAuthorLastName}" />
+			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
+		</execute>
+
+		<execute macro="SOUser#logoutPG" />
+
+		<execute macro="SOUser#loginPG">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="password" value="test" />
+		</execute>
+
+		<execute macro="SOMicroblogs#viewMicroblogsEntryViewableByEveryone">
+			<var name="microblogsEntryAuthor" value="${microblogsEntryAuthor}" />
+			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
+		</execute>
+	</command>
+
+	<command name="DeleteMicroblogsEntry">
+		<var name="microblogsEntryAuthorFirstName" value="Joe" />
+		<var name="microblogsEntryAuthorLastName" value="Bloggs" />
+		<var name="microblogsEntryAuthorScreenName" value="joebloggs" />
+		<var name="microblogsEntryContent" value="Microblogs Post" />
+		<var name="microblogsEntryCharacterCountdown" value="135" />
+		<var name="microblogsEntryViewableBy" value="Everyone" />
+
+		<execute macro="SOMicroblogs#addMicroblogsEntry">
+			<var name="microblogsEntryContent" value="${microblogsEntryContent}" />
+			<var name="microblogsEntryCharacterCountdown" value="${microblogsEntryCharacterCountdown}" />
+			<var name="microblogsEntryViewableBy" value="${microblogsEntryViewableBy}" />
+		</execute>
+
+		<execute macro="SOMicroblogs#deleteMicroblogsEntry" />
+		<execute action="PGMicroblogs#assertTextEquals" locator-key1="INFO_MESSAGE" value1="You do not have any microblog entries." />
+		<execute action="PGMicroblogs#assertElementNotPresent" locator-key1="MICROBLOGS_ENTRY_CONTENT" value1="${microblogsEntryContent}" />
+	</command>
+
+	<tear-down>
+		<execute macro="SOMicroblogs#tearDownMicroblogsEntry" />
+
+		<execute macro="SOUser#tearDownCP" />
+	</tear-down>
+</definition>

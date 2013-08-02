@@ -1,0 +1,69 @@
+<definition>
+	<var name="pageName" value="Calendar Page" />
+	<var name="portletName" value="Calendar" />
+
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+	</set-up>
+
+	<command name="AddCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addPG">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+	</command>
+
+	<command name="DeleteCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addPG">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+
+		<execute macro="Event#deletePG">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+	</command>
+
+	<command name="EditCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="eventTitleEdit" value="Calendar Event Title Edit" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addPG">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+
+		<execute macro="Event#editPG">
+			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventTitleEdit" value="${eventTitleEdit}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="Event#tearDownCP" />
+
+		<execute macro="Page#tearDownPG" />
+	</tear-down>
+</definition>

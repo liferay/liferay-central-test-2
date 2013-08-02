@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -213,15 +213,69 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		}
 	}
 
+	protected void cacheUniqueFindersCache(PluginSetting pluginSetting) {
+		if (pluginSetting.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(pluginSetting.getCompanyId()),
+					
+					pluginSetting.getPluginId(),
+					
+					pluginSetting.getPluginType()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_I_T, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T, args,
+				pluginSetting);
+		}
+		else {
+			PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
+
+			if ((pluginSettingModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_I_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(pluginSetting.getCompanyId()),
+						
+						pluginSetting.getPluginId(),
+						
+						pluginSetting.getPluginType()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_I_T, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T, args,
+					pluginSetting);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(PluginSetting pluginSetting) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T,
-			new Object[] {
+		PluginSettingModelImpl pluginSettingModelImpl = (PluginSettingModelImpl)pluginSetting;
+
+		Object[] args = new Object[] {
 				Long.valueOf(pluginSetting.getCompanyId()),
 				
-			pluginSetting.getPluginId(),
+				pluginSetting.getPluginId(),
 				
-			pluginSetting.getPluginType()
-			});
+				pluginSetting.getPluginType()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_I_T, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T, args);
+
+		if ((pluginSettingModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_I_T.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(pluginSettingModelImpl.getOriginalCompanyId()),
+					
+					pluginSettingModelImpl.getOriginalPluginId(),
+					
+					pluginSettingModelImpl.getOriginalPluginType()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_I_T, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T, args);
+		}
 	}
 
 	/**
@@ -376,41 +430,8 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 			PluginSettingImpl.class, pluginSetting.getPrimaryKey(),
 			pluginSetting);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
-				new Object[] {
-					Long.valueOf(pluginSetting.getCompanyId()),
-					
-				pluginSetting.getPluginId(),
-					
-				pluginSetting.getPluginType()
-				}, pluginSetting);
-		}
-		else {
-			if ((pluginSettingModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_I_T.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(pluginSettingModelImpl.getOriginalCompanyId()),
-						
-						pluginSettingModelImpl.getOriginalPluginId(),
-						
-						pluginSettingModelImpl.getOriginalPluginType()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_I_T, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_I_T, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_I_T,
-					new Object[] {
-						Long.valueOf(pluginSetting.getCompanyId()),
-						
-					pluginSetting.getPluginId(),
-						
-					pluginSetting.getPluginType()
-					}, pluginSetting);
-			}
-		}
+		clearUniqueFindersCache(pluginSetting);
+		cacheUniqueFindersCache(pluginSetting);
 
 		return pluginSetting;
 	}
@@ -1444,8 +1465,10 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 				List<ModelListener<PluginSetting>> listenersList = new ArrayList<ModelListener<PluginSetting>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<PluginSetting>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

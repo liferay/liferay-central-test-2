@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -103,8 +103,9 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 				"value.object.column.bitmask.enabled.com.liferay.portal.model.LayoutSetBranch"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long NAME_COLUMN_BITMASK = 2L;
-	public static long PRIVATELAYOUT_COLUMN_BITMASK = 4L;
+	public static long MASTER_COLUMN_BITMASK = 2L;
+	public static long NAME_COLUMN_BITMASK = 4L;
+	public static long PRIVATELAYOUT_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -517,7 +518,19 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	public void setMaster(boolean master) {
+		_columnBitmask |= MASTER_COLUMN_BITMASK;
+
+		if (!_setOriginalMaster) {
+			_setOriginalMaster = true;
+
+			_originalMaster = _master;
+		}
+
 		_master = master;
+	}
+
+	public boolean getOriginalMaster() {
+		return _originalMaster;
 	}
 
 	@JSON
@@ -673,13 +686,16 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 	@Override
 	public LayoutSetBranch toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (LayoutSetBranch)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (LayoutSetBranch)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public LayoutSetBranch toUnescapedModel() {
+		return (LayoutSetBranch)this;
 	}
 
 	@Override
@@ -727,18 +743,15 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutSetBranch)) {
 			return false;
 		}
 
-		LayoutSetBranch layoutSetBranch = null;
-
-		try {
-			layoutSetBranch = (LayoutSetBranch)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		LayoutSetBranch layoutSetBranch = (LayoutSetBranch)obj;
 
 		long primaryKey = layoutSetBranch.getPrimaryKey();
 
@@ -768,6 +781,10 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 		layoutSetBranchModelImpl._setOriginalPrivateLayout = false;
 
 		layoutSetBranchModelImpl._originalName = layoutSetBranchModelImpl._name;
+
+		layoutSetBranchModelImpl._originalMaster = layoutSetBranchModelImpl._master;
+
+		layoutSetBranchModelImpl._setOriginalMaster = false;
 
 		layoutSetBranchModelImpl._columnBitmask = 0;
 	}
@@ -1045,7 +1062,7 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	}
 
 	private static ClassLoader _classLoader = LayoutSetBranch.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			LayoutSetBranch.class
 		};
 	private long _layoutSetBranchId;
@@ -1065,6 +1082,8 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	private String _originalName;
 	private String _description;
 	private boolean _master;
+	private boolean _originalMaster;
+	private boolean _setOriginalMaster;
 	private boolean _logo;
 	private long _logoId;
 	private String _themeId;
@@ -1076,5 +1095,5 @@ public class LayoutSetBranchModelImpl extends BaseModelImpl<LayoutSetBranch>
 	private String _layoutSetPrototypeUuid;
 	private boolean _layoutSetPrototypeLinkEnabled;
 	private long _columnBitmask;
-	private LayoutSetBranch _escapedModelProxy;
+	private LayoutSetBranch _escapedModel;
 }

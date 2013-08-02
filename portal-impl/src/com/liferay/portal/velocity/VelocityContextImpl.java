@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,6 +32,12 @@ public class VelocityContextImpl implements VelocityContext {
 			velocityContext);
 	}
 
+	public VelocityContextImpl(VelocityContextImpl velocityContextImpl) {
+		_velocityContext = new org.apache.velocity.VelocityContext(
+			velocityContextImpl.getWrappedVelocityContext());
+	}
+
+	@Override
 	public Object get(String key) {
 		return _velocityContext.get(key);
 	}
@@ -40,6 +46,7 @@ public class VelocityContextImpl implements VelocityContext {
 		return _velocityContext;
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		_velocityContext.put(key, value);
 	}

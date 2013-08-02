@@ -14,3 +14,9 @@
 	color: #555;
 	margin-bottom: 1em;
 }
+
+/* ---------- RTL ---------- */
+
+.rtl .taglib-header .header-back-to a {
+	float: left;
+}

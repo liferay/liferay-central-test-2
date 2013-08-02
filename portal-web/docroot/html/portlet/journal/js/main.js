@@ -25,7 +25,7 @@ AUI.add(
 
 		var TPL_EDITOR_ELEMENT = '<div id="{name}" name="{name}"></div>';
 
-		var TPL_FIELD_CONTAINER = '<div><li class="structure-field">' +
+		var TPL_FIELD_CONTAINER = '<div><li class="structure-field {cssClass}">' +
 				'<span class="journal-article-close"></span>' +
 				'<span class="folder">' +
 					'<div class="field-container">' +
@@ -677,6 +677,7 @@ AUI.add(
 
 					instance._saveDialog = new A.Dialog(
 						{
+							align: Liferay.Util.Window.ALIGN_CENTER,
 							bodyContent: htmlTemplate,
 							buttons: [
 								{
@@ -690,7 +691,6 @@ AUI.add(
 									label: Liferay.Language.get('cancel')
 								}
 							],
-							centered: true,
 							modal: true,
 							title: title,
 							width: 550
@@ -1127,17 +1127,48 @@ AUI.add(
 					fieldInstance.set('source', newSource);
 					fieldInstance.set('instanceId', instanceId);
 
+					var localizedCheckbox = newSource.one('.journal-article-localized-checkbox');
+
+					if (localizedCheckbox) {
+						var inputCheckbox = localizedCheckbox.one('.aui-field-input');
+						var inputLabel = localizedCheckbox.one('.aui-choice-label');
+
+						var newInputId = newId + inputCheckbox.attr('id');
+
+						inputCheckbox.attr('id', newInputId);
+						inputLabel.attr('for', newInputId);
+
+						inputCheckbox.attr('checked', false);
+					}
+
 					var fieldType = fieldInstance.get('fieldType');
 
-					if (fieldType == 'text_area') {
+					var componentContainer;
+
+					if (fieldType == 'boolean') {
+						componentContainer = newSource.one('.journal-article-component-container');
+
+						componentContainer.one('.aui-field-input').attr('checked', false);
+					}
+					else if (fieldType == 'document_library' || fieldType == 'text') {
+						componentContainer = newSource.one('.journal-article-component-container');
+
+						componentContainer.one('.aui-field-input').val('');
+					}
+					else if (fieldType == 'image') {
+						newSource.all('.journal-image-preview, .journal-image-show-hide').remove(true);
+					}
+					else if (fieldType == 'text_area') {
 						var html = instance.buildHTMLEditor(fieldInstance);
 
-						var componentContainer = newSource.one('.journal-article-component-container');
+						componentContainer = newSource.one('.journal-article-component-container');
 
 						componentContainer.html(html);
 					}
-					else if (fieldType == 'image') {
-						newSource.all('.journal-image-show-hide,.journal-image-preview').remove();
+					else if (fieldType == 'text_box') {
+						componentContainer = newSource.one('.journal-article-component-container');
+
+						componentContainer.one('.aui-field-input').html('');
 					}
 
 					return fieldInstance;
@@ -1345,17 +1376,23 @@ AUI.add(
 
 				var form = instance.getPrincipalForm();
 
+				var classNameIdInput = instance.getByName(form, 'classNameId');
 				var cmdInput = instance.getByName(form, 'cmd');
-
-				cmdInput.val('translate');
-
 				var contentInput = instance.getByName(form, 'content');
 
-				var content = instance.getArticleContentXML();
+				var classNameId = Liferay.Util.toNumber(classNameIdInput.val());
 
-				contentInput.val(content);
+				var canSubmit = classNameId || instance.validateRequiredFields();
 
-				submitForm(form);
+				if (canSubmit) {
+					cmdInput.val('translate');
+
+					var content = instance.getArticleContentXML();
+
+					contentInput.val(content);
+
+					submitForm(form);
+				}
 			},
 
 			unselectFields: function() {
@@ -1500,6 +1537,15 @@ AUI.add(
 				);
 
 				if (firstEmptyField) {
+					var formSection = firstEmptyField.ancestors('.form-section');
+
+					Liferay.fire(
+						'requiredFieldError',
+						{
+							sectionId: '#' + formSection.attr('id')
+						}
+					);
+
 					firstEmptyField.focus();
 				}
 
@@ -1967,7 +2013,7 @@ AUI.add(
 				if (editContainerWrapper) {
 					var editContainerSaveMode = instance.editContainerSaveMode;
 
-					editContainerWrapper.delegate('click', editContainerSaveMode,'input[type=checkbox]', instance);
+					editContainerWrapper.delegate('click', editContainerSaveMode, 'input[type=checkbox]', instance);
 
 					var closeEditField = instance.closeEditFieldOptions;
 
@@ -2392,39 +2438,6 @@ AUI.add(
 						'click',
 						function() {
 							instance.previewArticle();
-						}
-					);
-				}
-
-				if (publishButton) {
-					publishButton.detach('click');
-
-					publishButton.on(
-						'click',
-						function() {
-							instance.saveArticle('publish');
-						}
-					);
-				}
-
-				if (saveButton) {
-					saveButton.detach('click');
-
-					saveButton.on(
-						'click',
-						function() {
-							instance.saveArticle();
-						}
-					);
-				}
-
-				if (translateButton) {
-					translateButton.detach('click');
-
-					translateButton.on(
-						'click',
-						function() {
-							instance.translateArticle();
 						}
 					);
 				}
@@ -3013,7 +3026,9 @@ AUI.add(
 						A.each(
 							instance.cloneableAttrs,
 							function(item, index, collection) {
-								instance.after(item + 'Change', propagateAttr);
+								if (item != 'localized') {
+									instance.after(item + 'Change', propagateAttr);
+								}
 							}
 						);
 					},
@@ -3163,7 +3178,7 @@ AUI.add(
 									content = imageInputValue;
 								}
 								else {
-									var imageContent = instance.getByName(componentContainer, 'journalImageContent');
+									var imageContent = componentContainer.one('.journal-image-preview input.journal-image-preview-content');
 
 									if (imageContent) {
 										content = imageContent.val();
@@ -3227,6 +3242,7 @@ AUI.add(
 								TPL_FIELD_CONTAINER,
 								{
 									articleButtonsRowCSSClass: articleButtonsRowCSSClass,
+									cssClass: 'journal-structure-' + fieldType.replace(/_/g, '-'),
 									editButtonTemplateHTML: editButtonTemplateHTML,
 									fieldLabel: fieldLabel,
 									localizedLabelLanguage: localizedLabelLanguage,
@@ -3331,9 +3347,11 @@ AUI.add(
 							value = instance.get('variableName');
 						}
 
-						fieldLabel.one('span').html(value);
+						if (fieldLabel) {
+							fieldLabel.one('span').html(value);
 
-						instance.setAttribute('fieldLabel', value);
+							instance.setAttribute('fieldLabel', value);
+						}
 
 						return value;
 					},
@@ -3394,7 +3412,9 @@ AUI.add(
 										requiredMessage.placeAfter(instructionsMessage);
 									}
 									else {
-										label.append(fieldInstance.createTooltipImage());
+										if (label) {
+											label.append(fieldInstance.createTooltipImage());
+										}
 									}
 								}
 							}
@@ -3445,15 +3465,18 @@ AUI.add(
 						var instance = this;
 
 						var fieldLabel = instance.getFieldLabelElement();
-						var input = fieldLabel.get('parentNode').one('.journal-article-component-container .aui-field-input');
 
-						if (input) {
-							input.attr('id', value);
+						if (fieldLabel) {
+							var input = fieldLabel.get('parentNode').one('.journal-article-component-container .aui-field-input');
 
-							fieldLabel.setAttribute('for', value);
+							if (input) {
+								input.attr('id', value);
+
+								fieldLabel.setAttribute('for', value);
+							}
+
+							instance.setAttribute('name', value);
 						}
-
-						instance.setAttribute('name', value);
 
 						return value;
 					},

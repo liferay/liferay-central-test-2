@@ -108,6 +108,10 @@ AUI.add(
 											cssClassBuffer.push('lfr-nav-deletable');
 										}
 
+										if (layoutConfig.sortable) {
+											cssClassBuffer.push('lfr-nav-sortable');
+										}
+
 										if (layoutConfig.updateable) {
 											cssClassBuffer.push('lfr-nav-updateable');
 										}
@@ -374,9 +378,11 @@ AUI.add(
 			function(listItem, options) {
 				var instance = this;
 
+				var id = A.guid();
+
 				var prototypeTemplate = instance._prototypeMenuTemplate || '';
 
-				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + A.guid() + '_template"');
+				prototypeTemplate = prototypeTemplate.replace(/name=\"template\"/g, 'name="' + id + 'Template"');
 
 				var prevVal = options.prevVal;
 
@@ -409,7 +415,7 @@ AUI.add(
 							comboBox.fire('savePage', options);
 						},
 						icon: 'check',
-						id: 'save'
+						id: id + 'Save'
 					}
 				];
 
@@ -418,25 +424,17 @@ AUI.add(
 						{
 							activeState: true,
 							handler: function(event) {
-								var toolItem = this;
-
 								event.halt();
 
-								var action = 'show';
-
-								if (toolItem.StateInteraction.get('active')) {
-									action = 'hide';
-								}
-
-								comboBox._optionsOverlay[action]();
+								comboBox._optionsOverlay.toggle(this.StateInteraction.get('active'));
 							},
 							icon: 'gear',
-							id: 'options'
+							id: id + 'Options'
 						}
 					);
 				}
 
-				var optionsOverlay = new A.Overlay(
+				var optionsOverlay = new A.OverlayBase(
 					{
 						bodyContent: prototypeTemplate,
 						align: {
@@ -470,6 +468,7 @@ AUI.add(
 								instance.fire('startEditing');
 							}
 						},
+						boundingBox: A.Node.create('<div />').prependTo(listItem),
 						field: {
 							value: prevVal
 						},
@@ -484,10 +483,10 @@ AUI.add(
 							}
 						}
 					}
-				).render(listItem);
+				).render();
 
 				if (prototypeTemplate && instance._optionsOpen && !prevVal) {
-					var optionItem = comboBox.icons.item('options');
+					var optionItem = comboBox.icons.item(id + 'Options');
 
 					optionItem.StateInteraction.set('active', true);
 					optionsOverlay.show();
@@ -531,7 +530,7 @@ AUI.add(
 					instance.fire('editPage');
 				}
 			},
-			['aui-form-combobox', 'overlay'],
+			['aui-form-combobox', 'aui-overlay'],
 			true
 		);
 
@@ -548,7 +547,7 @@ AUI.add(
 						{
 							container: navBlock,
 							moveType: 'move',
-							nodes: '.lfr-nav-updateable',
+							nodes: '.lfr-nav-sortable',
 							opacity: '.5',
 							opacityNode: 'currentNode'
 						}
@@ -732,8 +731,12 @@ AUI.add(
 
 							comboBox.destroy();
 
+							if (data.sortable) {
+								listItem.addClass('sortable-item lfr-nav-sortable');
+							}
+
 							if (data.updateable) {
-								listItem.addClass('sortable-item lfr-nav-updateable');
+								listItem.addClass('lfr-nav-updateable');
 							}
 
 							if (data.deletable) {

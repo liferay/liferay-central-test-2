@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -255,13 +255,16 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	@Override
 	public DDMStructureLink toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DDMStructureLink)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DDMStructureLink)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DDMStructureLink toUnescapedModel() {
+		return (DDMStructureLink)this;
 	}
 
 	@Override
@@ -294,18 +297,15 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStructureLink)) {
 			return false;
 		}
 
-		DDMStructureLink ddmStructureLink = null;
-
-		try {
-			ddmStructureLink = (DDMStructureLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMStructureLink ddmStructureLink = (DDMStructureLink)obj;
 
 		long primaryKey = ddmStructureLink.getPrimaryKey();
 
@@ -404,7 +404,7 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	}
 
 	private static ClassLoader _classLoader = DDMStructureLink.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DDMStructureLink.class
 		};
 	private long _structureLinkId;
@@ -418,5 +418,5 @@ public class DDMStructureLinkModelImpl extends BaseModelImpl<DDMStructureLink>
 	private long _originalStructureId;
 	private boolean _setOriginalStructureId;
 	private long _columnBitmask;
-	private DDMStructureLink _escapedModelProxy;
+	private DDMStructureLink _escapedModel;
 }

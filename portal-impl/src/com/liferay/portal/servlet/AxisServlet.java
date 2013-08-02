@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,11 +20,11 @@ import com.liferay.portal.kernel.servlet.PluginContextListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PortalInstances;
 
 import java.io.IOException;
@@ -52,15 +52,15 @@ public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 		}
 		else {
 			ClassLoader contextClassLoader =
-				PACLClassLoaderUtil.getContextClassLoader();
+				ClassLoaderUtil.getContextClassLoader();
 
 			try {
-				PACLClassLoaderUtil.setContextClassLoader(_pluginClassLoader);
+				ClassLoaderUtil.setContextClassLoader(_pluginClassLoader);
 
 				super.init(servletConfig);
 			}
 			finally {
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -97,17 +97,15 @@ public class AxisServlet extends com.liferay.util.axis.AxisServlet {
 			}
 			else {
 				ClassLoader contextClassLoader =
-					PACLClassLoaderUtil.getContextClassLoader();
+					ClassLoaderUtil.getContextClassLoader();
 
 				try {
-					PACLClassLoaderUtil.setContextClassLoader(
-						_pluginClassLoader);
+					ClassLoaderUtil.setContextClassLoader(_pluginClassLoader);
 
 					super.service(request, response);
 				}
 				finally {
-					PACLClassLoaderUtil.setContextClassLoader(
-						contextClassLoader);
+					ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 				}
 			}
 		}

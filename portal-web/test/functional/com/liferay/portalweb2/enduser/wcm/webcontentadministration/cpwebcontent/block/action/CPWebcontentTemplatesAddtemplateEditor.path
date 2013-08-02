@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>CPWebcontentTemplatesAddtemplateEditor</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPWebcontentTemplatesAddtemplateEditor</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPWebcontentTemplatesAddtemplateEditor</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>EDITOR_IFRAME</td>
+	<td>//iframe[@id='_15_xslContentIFrame']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EDITOR_TYPE_SELECT</td>
+	<td>//select[@id='_15_editorType']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>EDITOR_FIELD</td>
+	<td>//textarea[@id='_15_plainEditorField']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>UPDATE_BUTTON</td>
+	<td>//input[@value='Update']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

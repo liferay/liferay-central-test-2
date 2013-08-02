@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -77,7 +77,7 @@ public interface Group extends GroupModel, PersistedModel {
 	public boolean hasStagingGroup();
 
 	/**
-	* @deprecated As of 6.1, renamed to {@link #isRegularSite}
+	* @deprecated As of 6.1.0, renamed to {@link #isRegularSite}
 	*/
 	public boolean isCommunity();
 
@@ -86,6 +86,8 @@ public interface Group extends GroupModel, PersistedModel {
 	public boolean isControlPanel();
 
 	public boolean isGuest();
+
+	public boolean isInStagingPortlet(java.lang.String portletId);
 
 	public boolean isLayout();
 
@@ -96,6 +98,12 @@ public interface Group extends GroupModel, PersistedModel {
 	public boolean isOrganization();
 
 	public boolean isRegularSite();
+
+	public boolean isShowSite(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		boolean privateSite)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 
 	public boolean isStaged();
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -168,7 +168,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 			{ "categoryId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_SQL_CREATE =
-		"create table AssetEntries_AssetCategories (entryId LONG not null,categoryId LONG not null,primary key (entryId, categoryId))";
+		"create table AssetEntries_AssetCategories (categoryId LONG not null,entryId LONG not null,primary key (categoryId, entryId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.AssetEntries_AssetCategories"),
@@ -724,13 +724,16 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 	@Override
 	public AssetCategory toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetCategory)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetCategory)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetCategory toUnescapedModel() {
+		return (AssetCategory)this;
 	}
 
 	@Override
@@ -772,18 +775,15 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetCategory)) {
 			return false;
 		}
 
-		AssetCategory assetCategory = null;
-
-		try {
-			assetCategory = (AssetCategory)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetCategory assetCategory = (AssetCategory)obj;
 
 		long primaryKey = assetCategory.getPrimaryKey();
 
@@ -1017,7 +1017,7 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	}
 
 	private static ClassLoader _classLoader = AssetCategory.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetCategory.class
 		};
 	private String _uuid;
@@ -1047,5 +1047,5 @@ public class AssetCategoryModelImpl extends BaseModelImpl<AssetCategory>
 	private long _originalVocabularyId;
 	private boolean _setOriginalVocabularyId;
 	private long _columnBitmask;
-	private AssetCategory _escapedModelProxy;
+	private AssetCategory _escapedModel;
 }

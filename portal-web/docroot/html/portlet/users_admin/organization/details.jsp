@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,8 +34,6 @@ if (parentOrganizationId <= 0) {
 String type = BeanParamUtil.getString(organization, request, "type", PropsValues.ORGANIZATIONS_TYPES[0]);
 long regionId = BeanParamUtil.getLong(organization, request, "regionId");
 long countryId = BeanParamUtil.getLong(organization, request, "countryId");
-
-boolean deleteLogo = ParamUtil.getBoolean(request, "deleteLogo");
 
 long groupId = 0;
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,6 +32,7 @@ import java.util.List;
  */
 public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
+	@Override
 	public DLFileRank addFileRank(
 			long groupId, long companyId, long userId, long fileEntryId,
 			ServiceContext serviceContext)
@@ -68,6 +69,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		return dlFileRank;
 	}
 
+	@Override
 	public void checkFileRanks() throws SystemException {
 		List<Object[]> staleFileRanks = dlFileRankFinder.findByStaleRanks(
 			PropsValues.DL_FILE_RANK_MAX_SIZE);
@@ -95,10 +97,12 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteFileRank(DLFileRank dlFileRank) throws SystemException {
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 
+	@Override
 	public void deleteFileRank(long fileRankId)
 		throws PortalException, SystemException {
 
@@ -108,6 +112,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		deleteFileRank(dlFileRank);
 	}
 
+	@Override
 	public void deleteFileRanksByFileEntryId(long fileEntryId)
 		throws SystemException {
 
@@ -119,6 +124,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteFileRanksByUserId(long userId) throws SystemException {
 		List<DLFileRank> dlFileRanks = dlFileRankPersistence.findByUserId(
 			userId);
@@ -128,6 +134,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<DLFileRank> getFileRanks(long groupId, long userId)
 		throws SystemException {
 
@@ -136,6 +143,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 			new FileRankCreateDateComparator());
 	}
 
+	@Override
 	public DLFileRank updateFileRank(
 			long groupId, long companyId, long userId, long fileEntryId,
 			ServiceContext serviceContext)

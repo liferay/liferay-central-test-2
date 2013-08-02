@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -270,7 +270,7 @@ public class ThemeUtil {
 			writer = new UnsyncStringWriter();
 		}
 
-		VelocityTaglib velocityTaglib = new VelocityTaglib(
+		VelocityTaglib velocityTaglib = new VelocityTaglibImpl(
 			servletContext, request,
 			new PipingServletResponse(response, writer), pageContext);
 
@@ -302,7 +302,7 @@ public class ThemeUtil {
 		GenericServlet genericServlet = null;
 
 		if (servlet instanceof GenericServlet) {
-			genericServlet = (GenericServlet) servlet;
+			genericServlet = (GenericServlet)servlet;
 		}
 		else {
 			genericServlet = new GenericServlet() {
@@ -479,7 +479,7 @@ public class ThemeUtil {
 			writer = new UnsyncStringWriter();
 		}
 
-		VelocityTaglib velocityTaglib = new VelocityTaglib(
+		VelocityTaglib velocityTaglib = new VelocityTaglibImpl(
 			servletContext, request,
 			new PipingServletResponse(response, writer), pageContext);
 

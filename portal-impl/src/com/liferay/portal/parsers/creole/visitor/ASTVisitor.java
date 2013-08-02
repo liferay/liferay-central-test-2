@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,6 +23,7 @@ import com.liferay.portal.parsers.creole.ast.HorizontalNode;
 import com.liferay.portal.parsers.creole.ast.ImageNode;
 import com.liferay.portal.parsers.creole.ast.ItalicTextNode;
 import com.liferay.portal.parsers.creole.ast.LineNode;
+import com.liferay.portal.parsers.creole.ast.ListNode;
 import com.liferay.portal.parsers.creole.ast.NoWikiSectionNode;
 import com.liferay.portal.parsers.creole.ast.OrderedListItemNode;
 import com.liferay.portal.parsers.creole.ast.OrderedListNode;
@@ -62,6 +63,8 @@ public interface ASTVisitor {
 	public void visit(LineNode lineNode);
 
 	public void visit(LinkNode linkNode);
+
+	public void visit(ListNode linkNode);
 
 	public void visit(NoWikiSectionNode noWikiSectionNode);
 

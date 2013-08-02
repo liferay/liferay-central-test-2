@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -56,6 +56,7 @@ public class BlogsEntryFinderImpl
 	public static final String FIND_BY_NO_ASSETS =
 		BlogsEntryFinder.class.getName() + ".findByNoAssets";
 
+	@Override
 	public int countByOrganizationId(
 			long organizationId, Date displayDate, int status)
 		throws SystemException {
@@ -67,6 +68,7 @@ public class BlogsEntryFinderImpl
 		return countByOrganizationIds(organizationIds, displayDate, status);
 	}
 
+	@Override
 	public int countByOrganizationIds(
 			List<Long> organizationIds, Date displayDate, int status)
 		throws SystemException {
@@ -127,6 +129,7 @@ public class BlogsEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<BlogsEntry> findByGroupIds(
 			long companyId, long groupId, Date displayDate, int status,
 			int start, int end)
@@ -171,6 +174,7 @@ public class BlogsEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<BlogsEntry> findByOrganizationId(
 			long organizationId, Date displayDate, int status, int start,
 			int end, OrderByComparator obc)
@@ -184,6 +188,7 @@ public class BlogsEntryFinderImpl
 			organizationIds, displayDate, status, start, end, obc);
 	}
 
+	@Override
 	public List<BlogsEntry> findByOrganizationIds(
 			List<Long> organizationIds, Date displayDate, int status, int start,
 			int end, OrderByComparator obc)
@@ -237,6 +242,7 @@ public class BlogsEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<BlogsEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 

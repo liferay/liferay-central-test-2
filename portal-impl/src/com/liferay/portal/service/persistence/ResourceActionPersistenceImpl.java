@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -200,9 +200,61 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 		}
 	}
 
+	protected void cacheUniqueFindersCache(ResourceAction resourceAction) {
+		if (resourceAction.isNew()) {
+			Object[] args = new Object[] {
+					resourceAction.getName(),
+					
+					resourceAction.getActionId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_A, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A, args,
+				resourceAction);
+		}
+		else {
+			ResourceActionModelImpl resourceActionModelImpl = (ResourceActionModelImpl)resourceAction;
+
+			if ((resourceActionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_N_A.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						resourceAction.getName(),
+						
+						resourceAction.getActionId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_A, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A, args,
+					resourceAction);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(ResourceAction resourceAction) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A,
-			new Object[] { resourceAction.getName(), resourceAction.getActionId() });
+		ResourceActionModelImpl resourceActionModelImpl = (ResourceActionModelImpl)resourceAction;
+
+		Object[] args = new Object[] {
+				resourceAction.getName(),
+				
+				resourceAction.getActionId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_A, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A, args);
+
+		if ((resourceActionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_N_A.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					resourceActionModelImpl.getOriginalName(),
+					
+					resourceActionModelImpl.getOriginalActionId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_A, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A, args);
+		}
 	}
 
 	/**
@@ -353,35 +405,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 			ResourceActionImpl.class, resourceAction.getPrimaryKey(),
 			resourceAction);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
-				new Object[] {
-					resourceAction.getName(),
-					
-				resourceAction.getActionId()
-				}, resourceAction);
-		}
-		else {
-			if ((resourceActionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_N_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						resourceActionModelImpl.getOriginalName(),
-						
-						resourceActionModelImpl.getOriginalActionId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_A, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_A, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_A,
-					new Object[] {
-						resourceAction.getName(),
-						
-					resourceAction.getActionId()
-					}, resourceAction);
-			}
-		}
+		clearUniqueFindersCache(resourceAction);
+		cacheUniqueFindersCache(resourceAction);
 
 		return resourceAction;
 	}
@@ -1436,8 +1461,10 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 				List<ModelListener<ResourceAction>> listenersList = new ArrayList<ModelListener<ResourceAction>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<ResourceAction>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
@@ -1592,8 +1619,8 @@ public class ResourceActionPersistenceImpl extends BasePersistenceImpl<ResourceA
 	private static final String _FINDER_COLUMN_NAME_NAME_2 = "resourceAction.name = ?";
 	private static final String _FINDER_COLUMN_NAME_NAME_3 = "(resourceAction.name IS NULL OR resourceAction.name = ?)";
 	private static final String _FINDER_COLUMN_N_A_NAME_1 = "resourceAction.name IS NULL AND ";
-	private static final String _FINDER_COLUMN_N_A_NAME_2 = "lower(resourceAction.name) = lower(CAST_TEXT(?)) AND ";
-	private static final String _FINDER_COLUMN_N_A_NAME_3 = "(resourceAction.name IS NULL OR lower(resourceAction.name) = lower(CAST_TEXT(?))) AND ";
+	private static final String _FINDER_COLUMN_N_A_NAME_2 = "resourceAction.name = ? AND ";
+	private static final String _FINDER_COLUMN_N_A_NAME_3 = "(resourceAction.name IS NULL OR resourceAction.name = ?) AND ";
 	private static final String _FINDER_COLUMN_N_A_ACTIONID_1 = "resourceAction.actionId IS NULL";
 	private static final String _FINDER_COLUMN_N_A_ACTIONID_2 = "resourceAction.actionId = ?";
 	private static final String _FINDER_COLUMN_N_A_ACTIONID_3 = "(resourceAction.actionId IS NULL OR resourceAction.actionId = ?)";

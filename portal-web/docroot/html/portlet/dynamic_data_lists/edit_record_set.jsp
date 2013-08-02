@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -157,6 +157,7 @@ if (Validator.isNotNull(ddmStructureId)) {
 				dialog: {
 					width:820
 				},
+				groupId: <%= groupId %>,
 				saveCallback: '<portlet:namespace />selectDDMStructure',
 				storageType: '<%= PropsValues.DYNAMIC_DATA_LISTS_STORAGE_TYPE %>',
 				structureId: ddmStructureId,

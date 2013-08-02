@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,8 +25,8 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.upgrade.UpgradeProcessUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcessUtil;
@@ -39,33 +39,6 @@ import java.sql.Connection;
  * @author Raymond Augé
  */
 public class StartupHelper {
-
-	public static void updateIndexes(
-		DB db, Connection con, boolean dropIndexes) {
-
-		try {
-			ClassLoader classLoader =
-				PACLClassLoaderUtil.getContextClassLoader();
-
-			String tablesSQL = StringUtil.read(
-				classLoader,
-				"com/liferay/portal/tools/sql/dependencies/portal-tables.sql");
-
-			String indexesSQL = StringUtil.read(
-				classLoader,
-				"com/liferay/portal/tools/sql/dependencies/indexes.sql");
-
-			String indexesProperties = StringUtil.read(
-				classLoader,
-				"com/liferay/portal/tools/sql/dependencies/indexes.properties");
-
-			db.updateIndexes(
-				con, tablesSQL, indexesSQL, indexesProperties, dropIndexes);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
 
 	public boolean isUpgraded() {
 		return _upgraded;
@@ -80,20 +53,55 @@ public class StartupHelper {
 	}
 
 	public void updateIndexes() {
+		updateIndexes(_dropIndexes);
+	}
+
+	public void updateIndexes(boolean dropIndexes) {
 		DB db = DBFactoryUtil.getDB();
 
-		Connection con = null;
+		Connection connection = null;
 
 		try {
-			con = DataAccess.getConnection();
+			connection = DataAccess.getConnection();
 
-			updateIndexes(db, con, _dropIndexes);
+			updateIndexes(db, connection, dropIndexes);
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 		finally {
-			DataAccess.cleanUp(con);
+			DataAccess.cleanUp(connection);
+		}
+	}
+
+	public void updateIndexes(
+		DB db, Connection connection, boolean dropIndexes) {
+
+		try {
+			ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
+
+			String tablesSQL = StringUtil.read(
+				classLoader,
+				"com/liferay/portal/tools/sql/dependencies/portal-tables.sql");
+
+			String indexesSQL = StringUtil.read(
+				classLoader,
+				"com/liferay/portal/tools/sql/dependencies/indexes.sql");
+
+			String indexesProperties = StringUtil.read(
+				classLoader,
+				"com/liferay/portal/tools/sql/dependencies/indexes.properties");
+
+			db.updateIndexes(
+				connection, tablesSQL, indexesSQL, indexesProperties,
+				dropIndexes);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 	}
 
@@ -129,7 +137,7 @@ public class StartupHelper {
 
 		_upgraded = UpgradeProcessUtil.upgradeProcess(
 			buildNumber, upgradeProcessClassNames,
-			PACLClassLoaderUtil.getPortalClassLoader());
+			ClassLoaderUtil.getPortalClassLoader());
 	}
 
 	public void verifyProcess(boolean verified) throws VerifyException {

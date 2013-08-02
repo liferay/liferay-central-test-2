@@ -1,0 +1,7 @@
+<definition>
+	<execute test-case="SocialOfficeSmoke" />
+
+	<execute test-case="SOMyAccountAcceptance" />
+
+	<execute test-case="SOProfileAcceptance" />
+</definition>

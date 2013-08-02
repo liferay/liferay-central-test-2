@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TempFileUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -48,6 +49,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -80,6 +82,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -97,16 +100,20 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
  * @author Sergio González
+ * @author Kenneth Chang
  */
 public class EditFileEntryAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
+
+		FileEntry fileEntry = null;
 
 		try {
 			if (Validator.isNull(cmd)) {
@@ -126,7 +133,8 @@ public class EditFileEntryAction extends PortletAction {
 					 cmd.equals(Constants.UPDATE) ||
 					 cmd.equals(Constants.UPDATE_AND_CHECKIN)) {
 
-				updateFileEntry(portletConfig, actionRequest, actionResponse);
+				fileEntry = updateFileEntry(
+					portletConfig, actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.ADD_MULTIPLE)) {
 				addMultipleFileEntries(actionRequest, actionResponse);
@@ -156,8 +164,6 @@ public class EditFileEntryAction extends PortletAction {
 				revertFileEntry(actionRequest);
 			}
 
-			WindowState windowState = actionRequest.getWindowState();
-
 			if (cmd.equals(Constants.ADD_TEMP) ||
 				cmd.equals(Constants.DELETE_TEMP)) {
 
@@ -165,15 +171,35 @@ public class EditFileEntryAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.PREVIEW)) {
 			}
-			else if (!windowState.equals(LiferayWindowState.POP_UP)) {
-				sendRedirect(actionRequest, actionResponse);
-			}
 			else {
-				String redirect = PortalUtil.escapeRedirect(
-					ParamUtil.getString(actionRequest, "redirect"));
+				String redirect = ParamUtil.getString(
+					actionRequest, "redirect");
+				int workflowAction = ParamUtil.getInteger(
+					actionRequest, "workflowAction",
+					WorkflowConstants.ACTION_SAVE_DRAFT);
 
-				if (Validator.isNotNull(redirect)) {
-					actionResponse.sendRedirect(redirect);
+				if ((fileEntry != null) &&
+					(workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT)) {
+
+					redirect = getSaveAndContinueRedirect(
+						portletConfig, actionRequest, fileEntry, redirect);
+
+					sendRedirect(actionRequest, actionResponse, redirect);
+				}
+				else {
+					WindowState windowState = actionRequest.getWindowState();
+
+					if (!windowState.equals(LiferayWindowState.POP_UP)) {
+						sendRedirect(actionRequest, actionResponse);
+					}
+					else {
+						redirect = PortalUtil.escapeRedirect(
+							ParamUtil.getString(actionRequest, "redirect"));
+
+						if (Validator.isNotNull(redirect)) {
+							actionResponse.sendRedirect(redirect);
+						}
+					}
 				}
 			}
 		}
@@ -257,8 +283,9 @@ public class EditFileEntryAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -271,7 +298,8 @@ public class EditFileEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.document_library.error");
+				return actionMapping.findForward(
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -280,13 +308,14 @@ public class EditFileEntryAction extends PortletAction {
 
 		String forward = "portlet.document_library.edit_file_entry";
 
-		return mapping.findForward(getForward(renderRequest, forward));
+		return actionMapping.findForward(getForward(renderRequest, forward));
 	}
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
@@ -608,6 +637,40 @@ public class EditFileEntryAction extends PortletAction {
 		return errorMessage;
 	}
 
+	protected String getSaveAndContinueRedirect(
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			FileEntry fileEntry, String redirect)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			actionRequest, portletConfig.getPortletName(),
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
+
+		portletURL.setParameter(
+			"struts_action", "/document_library/edit_file_entry");
+		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
+		portletURL.setParameter("redirect", redirect, false);
+
+		String referringPortletResource = ParamUtil.getString(
+			actionRequest, "referringPortletResource");
+
+		portletURL.setParameter(
+			"referringPortletResource", referringPortletResource, false);
+
+		portletURL.setParameter(
+			"groupId", String.valueOf(fileEntry.getGroupId()), false);
+		portletURL.setParameter(
+			"fileEntryId", String.valueOf(fileEntry.getFileEntryId()), false);
+		portletURL.setParameter(
+			"version", String.valueOf(fileEntry.getVersion()), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
+
+		return portletURL.toString();
+	}
+
 	protected void moveFileEntries(ActionRequest actionRequest)
 		throws Exception {
 
@@ -644,7 +707,7 @@ public class EditFileEntryAction extends PortletAction {
 		DLAppServiceUtil.revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
-	protected void updateFileEntry(
+	protected FileEntry updateFileEntry(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
 		throws Exception {
@@ -757,6 +820,8 @@ public class EditFileEntryAction extends PortletAction {
 
 			AssetPublisherUtil.addRecentFolderId(
 				actionRequest, DLFileEntry.class.getName(), folderId);
+
+			return fileEntry;
 		}
 		finally {
 			StreamUtil.cleanUp(inputStream);

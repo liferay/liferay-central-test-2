@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -131,6 +131,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	public boolean awaitTermination(long timeout, TimeUnit timeUnit)
 		throws InterruptedException {
 
@@ -156,6 +157,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	public void execute(Runnable runnable) {
 		if (runnable == null) {
 			throw new NullPointerException();
@@ -285,6 +287,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		return _allowCoreThreadTimeout;
 	}
 
+	@Override
 	public boolean isShutdown() {
 		if (_runState != _RUNNING) {
 			return true;
@@ -294,6 +297,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	public boolean isTerminated() {
 		if (_runState == _TERMINATED) {
 			return true;
@@ -350,6 +354,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		_threadPoolHandler = threadPoolHandler;
 	}
 
+	@Override
 	public void shutdown() {
 		_mainLock.lock();
 
@@ -371,6 +376,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 		}
 	}
 
+	@Override
 	public List<Runnable> shutdownNow() {
 		_mainLock.lock();
 
@@ -569,6 +575,7 @@ public class ThreadPoolExecutor extends AbstractExecutorService {
 			_runnable = runnable;
 		}
 
+		@Override
 		public void run() {
 			boolean[] cleanUpMarker = new boolean[1];
 

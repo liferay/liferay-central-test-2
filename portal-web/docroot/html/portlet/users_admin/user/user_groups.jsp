@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -88,13 +88,13 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 
 			var rowColumns = [];
 
-			rowColumns.push(name);
+			rowColumns.push(A.Escape.html(name));
 			rowColumns.push('<a class="modify-link" data-rowId="' + userGroupId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeUserGroupIcon) %></a>');
 
 			searchContainer.addRow(rowColumns, userGroupId);
 			searchContainer.updateDataStore();
 		},
-		['liferay-search-container']
+		['liferay-search-container', 'escape']
 	);
 </aui:script>
 

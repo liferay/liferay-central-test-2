@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ import java.util.List;
  */
 public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 
+	@Override
 	public BookmarksFolder addFolder(
 			long parentFolderId, String name, String description,
 			ServiceContext serviceContext)
@@ -42,6 +43,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			getUserId(), parentFolderId, name, description, serviceContext);
 	}
 
+	@Override
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -54,6 +56,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		bookmarksFolderLocalService.deleteFolder(folderId);
 	}
 
+	@Override
 	public BookmarksFolder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -66,12 +69,14 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		return folder;
 	}
 
+	@Override
 	public List<BookmarksFolder> getFolders(long groupId)
 		throws SystemException {
 
 		return bookmarksFolderPersistence.filterFindByGroupId(groupId);
 	}
 
+	@Override
 	public List<BookmarksFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
@@ -79,6 +84,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			groupId, parentFolderId);
 	}
 
+	@Override
 	public List<BookmarksFolder> getFolders(
 			long groupId, long parentFolderId, int start, int end)
 		throws SystemException {
@@ -87,6 +93,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			groupId, parentFolderId, start, end);
 	}
 
+	@Override
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws SystemException {
 
@@ -94,6 +101,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 			groupId, parentFolderId);
 	}
 
+	@Override
 	public void getSubfolderIds(
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
@@ -109,6 +117,7 @@ public class BookmarksFolderServiceImpl extends BookmarksFolderServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public BookmarksFolder updateFolder(
 			long folderId, long parentFolderId, String name, String description,
 			boolean mergeWithParentFolder, ServiceContext serviceContext)

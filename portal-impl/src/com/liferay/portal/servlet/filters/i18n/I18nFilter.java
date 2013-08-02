@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portal.servlet.filters.i18n;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -24,6 +25,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.User;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -52,6 +54,8 @@ public class I18nFilter extends BasePortalFilter {
 	}
 
 	public static void setLanguageIds(Set<String> languageIds) {
+		_languageIds = new HashSet<String>();
+
 		for (String languageId : languageIds) {
 			languageId = languageId.substring(1);
 
@@ -78,12 +82,18 @@ public class I18nFilter extends BasePortalFilter {
 			return null;
 		}
 
+		String method = request.getMethod();
+
+		if (method.equals(HttpMethods.POST)) {
+			return null;
+		}
+
 		String contextPath = PortalUtil.getPathContext();
 
 		String requestURI = request.getRequestURI();
 
 		if (Validator.isNotNull(contextPath) &&
-			(requestURI.indexOf(contextPath) != -1)) {
+			requestURI.contains(contextPath)) {
 
 			requestURI = requestURI.substring(contextPath.length());
 		}
@@ -103,11 +113,21 @@ public class I18nFilter extends BasePortalFilter {
 			return null;
 		}
 
+		String guestLanguageId = null;
+
+		User user = (User)request.getAttribute(WebKeys.USER);
+
+		if (user != null) {
+			guestLanguageId = user.getLanguageId();
+		}
+
+		if (Validator.isNull(guestLanguageId)) {
+			guestLanguageId = CookieKeys.getCookie(
+				request, CookieKeys.GUEST_LANGUAGE_ID, false);
+		}
+
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
-
-		String guestLanguageId = CookieKeys.getCookie(
-			request, CookieKeys.GUEST_LANGUAGE_ID, false);
 
 		if (Validator.isNull(guestLanguageId)) {
 			guestLanguageId = defaultLanguageId;
@@ -122,16 +142,21 @@ public class I18nFilter extends BasePortalFilter {
 			}
 		}
 		else if (PropsValues.LOCALE_PREPEND_FRIENDLY_URL_STYLE == 2) {
-			i18nLanguageId = guestLanguageId;
+			i18nLanguageId = LocaleUtil.toLanguageId(
+				PortalUtil.getLocale(request));
 		}
 
 		if (i18nLanguageId == null) {
 			return null;
 		}
 
-		String i18nPathLanguageId = i18nLanguageId;
-
 		Locale locale = LocaleUtil.fromLanguageId(i18nLanguageId);
+
+		if (!LanguageUtil.isAvailableLocale(locale)) {
+			return null;
+		}
+
+		String i18nPathLanguageId = i18nLanguageId;
 
 		if (!LanguageUtil.isDuplicateLanguageCode(locale.getLanguage())) {
 			i18nPathLanguageId = locale.getLanguage();
@@ -143,12 +168,6 @@ public class I18nFilter extends BasePortalFilter {
 			if (locale.equals(priorityLocale)) {
 				i18nPathLanguageId = locale.getLanguage();
 			}
-		}
-
-		Locale i18nPathLocale = LocaleUtil.fromLanguageId(i18nPathLanguageId);
-
-		if (!LanguageUtil.isAvailableLocale(i18nPathLocale)) {
-			return null;
 		}
 
 		String i18nPath = StringPool.SLASH.concat(i18nPathLanguageId);
@@ -261,6 +280,6 @@ public class I18nFilter extends BasePortalFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(I18nFilter.class);
 
-	private static Set<String> _languageIds = new HashSet<String>();
+	private static Set<String> _languageIds;
 
 }

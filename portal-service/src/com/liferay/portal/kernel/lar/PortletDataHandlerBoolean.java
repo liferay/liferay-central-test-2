@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,19 +38,19 @@ public class PortletDataHandlerBoolean extends PortletDataHandlerControl {
 
 	public PortletDataHandlerBoolean(
 		String namespace, String controlName, boolean defaultState,
-		PortletDataHandlerControl[] children) {
-
-		this(namespace, controlName, defaultState, false, children);
-	}
-
-	public PortletDataHandlerBoolean(
-		String namespace, String controlName, boolean defaultState,
 		boolean disabled, PortletDataHandlerControl[] children) {
 
 		super(namespace, controlName, disabled);
 
 		_children = children;
 		_defaultState = defaultState;
+	}
+
+	public PortletDataHandlerBoolean(
+		String namespace, String controlName, boolean defaultState,
+		PortletDataHandlerControl[] children) {
+
+		this(namespace, controlName, defaultState, false, children);
 	}
 
 	public PortletDataHandlerControl[] getChildren() {

@@ -1,0 +1,19 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="COMMENTS_ADD">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="COMMENTS_REPLY_BUTTON">
+			<execute function="AssertClick#assertValueClickAt" />
+		</case>
+	</command>
+
+	<command name="assertTextEquals">
+		<case locator-key1="ENTRY_VIEW_COUNT">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+		<case locator-key1="ENTRY_YOUR_RATING">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+</definition>

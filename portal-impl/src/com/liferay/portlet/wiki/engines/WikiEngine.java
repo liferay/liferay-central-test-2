@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,7 +30,13 @@ public interface WikiEngine {
 	 * Convert the content of the given page to HTML using the view and edit
 	 * URLs to build links.
 	 *
+	 * @param  page the wiki page
+	 * @param  viewPageURL the URL to view the page
+	 * @param  editPageURL the URL to edit the page
+	 * @param  attachmentURLPrefix the URL prefix to use for attachments to the
+	 *         page
 	 * @return HTML string
+	 * @throws PageContentException if a page content exception occurred
 	 */
 	public String convert(
 			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
@@ -42,7 +48,9 @@ public interface WikiEngine {
 	 * entry is the title of the linked page. The value is a Boolean object that
 	 * indicates if the linked page exists or not.
 	 *
+	 * @param  page the page
 	 * @return a map of links
+	 * @throws PageContentException if a page content exception occurred
 	 */
 	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
 		throws PageContentException;
@@ -62,6 +70,8 @@ public interface WikiEngine {
 	/**
 	 * Validate the content of a wiki page for this engine.
 	 *
+	 * @param  nodeId the ID of the wiki page node
+	 * @param  content the page content
 	 * @return <code>true</code> if the content is valid
 	 */
 	public boolean validate(long nodeId, String content);

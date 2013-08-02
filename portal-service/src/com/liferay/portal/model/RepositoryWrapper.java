@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -509,6 +511,10 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 		return new RepositoryWrapper(_repository.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Repository toUnescapedModel() {
+		return new RepositoryWrapper(_repository.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _repository.toString();
@@ -530,6 +536,25 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_repository.setTypeSettingsProperties(typeSettingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RepositoryWrapper)) {
+			return false;
+		}
+
+		RepositoryWrapper repositoryWrapper = (RepositoryWrapper)obj;
+
+		if (Validator.equals(_repository, repositoryWrapper._repository)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

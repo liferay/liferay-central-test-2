@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -283,6 +283,13 @@ public class AssetVocabularyLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetVocabulary addDefaultVocabulary(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addDefaultVocabulary(groupId);
+	}
+
 	/**
 	* @deprecated
 	*/
@@ -310,6 +317,14 @@ public class AssetVocabularyLocalServiceUtil {
 		return getService()
 				   .addVocabulary(userId, title, titleMap, descriptionMap,
 			settings, serviceContext);
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		long userId, java.lang.String title,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().addVocabulary(userId, title, serviceContext);
 	}
 
 	public static void addVocabularyResources(
@@ -379,11 +394,10 @@ public class AssetVocabularyLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		long groupId, boolean createDefaultVocabulary)
+		long groupId, boolean addDefaultVocabulary)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .getGroupVocabularies(groupId, createDefaultVocabulary);
+		return getService().getGroupVocabularies(groupId, addDefaultVocabulary);
 	}
 
 	public static java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,6 +36,7 @@ import java.util.Map;
  */
 public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
+	@Override
 	public DDMTemplate addTemplate(
 			long groupId, long structureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String type, String mode,
@@ -53,6 +54,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			mode, language, script, serviceContext);
 	}
 
+	@Override
 	public List<DDMTemplate> copyTemplates(
 			long structureId, long newStructureId, String type,
 			ServiceContext serviceContext)
@@ -68,6 +70,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			getUserId(), structureId, newStructureId, type, serviceContext);
 	}
 
+	@Override
 	public void deleteTemplate(long templateId)
 		throws PortalException, SystemException {
 
@@ -77,6 +80,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		ddmTemplateLocalService.deleteTemplate(templateId);
 	}
 
+	@Override
 	public DDMTemplate getTemplate(long templateId)
 		throws PortalException, SystemException {
 
@@ -86,6 +90,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		return ddmTemplateLocalService.getTemplate(templateId);
 	}
 
+	@Override
 	public List<DDMTemplate> getTemplates(
 			long structureId, String type, String mode)
 		throws SystemException {
@@ -93,6 +98,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 		return ddmTemplatePersistence.findByS_T_M(structureId, type, mode);
 	}
 
+	@Override
 	public List<DDMTemplate> search(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode, int start, int end,
@@ -104,6 +110,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> search(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -116,6 +123,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			language, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode)
@@ -125,6 +133,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			companyId, groupId, structureId, keywords, type, mode);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -136,6 +145,7 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 			language, andOperator);
 	}
 
+	@Override
 	public DDMTemplate updateTemplate(
 			long templateId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String type, String mode,

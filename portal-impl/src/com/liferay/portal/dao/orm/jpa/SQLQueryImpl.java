@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,6 +47,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		sqlQuery = true;
 	}
 
+	@Override
 	public SQLQuery addEntity(String alias, Class<?> entityClass) {
 		String columnAliases = null;
 
@@ -90,6 +91,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		return this;
 	}
 
+	@Override
 	public SQLQuery addScalar(String columnAlias, Type type) {
 		columnAlias = columnAlias.toLowerCase();
 
@@ -108,7 +110,7 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 		for (int pos = 0; pos < selectTokens.length; pos++) {
 			String s = selectTokens[pos];
 
-			if (s.indexOf(columnAlias) != -1) {
+			if (s.contains(columnAlias)) {
 				_scalars.add(pos);
 
 				_scalarTypes.add(type);

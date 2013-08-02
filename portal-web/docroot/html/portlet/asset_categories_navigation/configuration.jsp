@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -94,7 +94,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	Liferay.provide(
 		window,
 		'<portlet:namespace />saveConfiguration',
-		function(){
+		function() {
 			if (document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds) {
 				document.<portlet:namespace />fm.<portlet:namespace />assetVocabularyIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentAssetVocabularyIds);
 			}

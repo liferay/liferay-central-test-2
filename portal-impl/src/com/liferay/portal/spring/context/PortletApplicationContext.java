@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,19 +21,15 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.PreloadClassLoader;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
+import com.liferay.portal.security.lang.DoPrivilegedFactory;
 import com.liferay.portal.spring.util.FilterClassLoader;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.io.FileNotFoundException;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -46,34 +42,12 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @see    PortletContextLoader
  * @see    PortletContextLoaderListener
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	public static ClassLoader getBeanClassLoader() {
-		if (_isUseRestrictedClassLoader()) {
-			boolean enabled = PortalSecurityManagerThreadLocal.isEnabled();
-
-			try {
-				PortalSecurityManagerThreadLocal.setEnabled(false);
-
-				return new PreloadClassLoader(
-					PortletClassLoaderUtil.getClassLoader(), _classes);
-			}
-			finally {
-				PortalSecurityManagerThreadLocal.setEnabled(enabled);
-			}
-		}
-
-		ClassLoader beanClassLoader =
-			AggregateClassLoader.getAggregateClassLoader(
-				new ClassLoader[] {
-					PortletClassLoaderUtil.getClassLoader(),
-					PACLClassLoaderUtil.getPortalClassLoader()
-				});
-
-		return new FilterClassLoader(beanClassLoader);
+		return _pacl.getBeanClassLoader();
 	}
 
 	@Override
@@ -114,6 +88,19 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		xmlBeanDefinitionReader.setBeanClassLoader(getBeanClassLoader());
 	}
 
+	protected void injectExplicitBean(
+		Class<?> clazz, BeanDefinitionRegistry beanDefinitionRegistry) {
+
+		beanDefinitionRegistry.registerBeanDefinition(
+			clazz.getName(), new RootBeanDefinition(clazz));
+	}
+
+	protected void injectExplicitBeans(
+		BeanDefinitionRegistry beanDefinitionRegistry) {
+
+		injectExplicitBean(DoPrivilegedFactory.class, beanDefinitionRegistry);
+	}
+
 	@Override
 	protected void loadBeanDefinitions(
 		XmlBeanDefinitionReader xmlBeanDefinitionReader) {
@@ -124,13 +111,13 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 			return;
 		}
 
+		BeanDefinitionRegistry beanDefinitionRegistry =
+			xmlBeanDefinitionReader.getBeanFactory();
+
+		injectExplicitBeans(beanDefinitionRegistry);
+
 		for (String configLocation : configLocations) {
-			boolean checkReadFile =
-				PortalSecurityManagerThreadLocal.isCheckReadFile();
-
 			try {
-				PortalSecurityManagerThreadLocal.setCheckReadFile(false);
-
 				xmlBeanDefinitionReader.loadBeanDefinitions(configLocation);
 			}
 			catch (Exception e) {
@@ -145,39 +132,34 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 					_log.error(e, e);
 				}
 			}
-			finally {
-				PortalSecurityManagerThreadLocal.setCheckReadFile(
-					checkReadFile);
-			}
 		}
-	}
-
-	private static boolean _isUseRestrictedClassLoader() {
-		return PACLPolicyManager.isActive();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletApplicationContext.class);
 
-	private static Map<String, Class<?>> _classes =
-		new HashMap<String, Class<?>>();
+	private static PACL _pacl = new NoPACL();
 
-	static {
-		for (String className :
-				PropsValues.
-					PORTAL_SECURITY_MANAGER_PRELOAD_CLASSLOADER_CLASSES) {
+	private static class NoPACL implements PACL {
 
-			Class<?> clazz = null;
+		@Override
+		public ClassLoader getBeanClassLoader() {
+			ClassLoader beanClassLoader =
+				AggregateClassLoader.getAggregateClassLoader(
+					new ClassLoader[] {
+						PortletClassLoaderUtil.getClassLoader(),
+						ClassLoaderUtil.getPortalClassLoader()
+					});
 
-			try {
-				clazz = Class.forName(className);
-			}
-			catch (ClassNotFoundException e) {
-				_log.error(e, e);
-			}
-
-			_classes.put(clazz.getName(), clazz);
+			return new FilterClassLoader(beanClassLoader);
 		}
+
+	}
+
+	public static interface PACL {
+
+		public ClassLoader getBeanClassLoader();
+
 	}
 
 }

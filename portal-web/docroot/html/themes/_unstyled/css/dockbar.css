@@ -116,7 +116,7 @@ html > .lfr-dockbar-pinned {
 .aui-dockbarmenu-hidden {
 }
 
-.dockbar .aui-toolbar {
+.dockbar .admin-toolbar {
 }
 
 .dockbar .user-toolbar {
@@ -281,4 +281,24 @@ html > .lfr-dockbar-pinned {
 }
 
 .page-customization-bar .page-customization-actions a {
+}
+
+/* ---------- RTL ---------- */
+
+.rtl .dockbar .admin-toolbar {
+}
+
+.rtl .dockbar .user-toolbar {
+}
+
+.rtl .dockbar .menu-button {
+}
+
+.rtl .dockbar .menu-button span {
+}
+
+.rtl .my-sites-menu .site-name {
+}
+
+.rtl .my-sites-menu .control-panel a {
 }

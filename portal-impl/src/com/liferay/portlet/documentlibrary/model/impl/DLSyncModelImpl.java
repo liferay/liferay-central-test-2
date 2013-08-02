@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -493,13 +493,16 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 
 	@Override
 	public DLSync toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DLSync)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DLSync)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DLSync toUnescapedModel() {
+		return (DLSync)this;
 	}
 
 	@Override
@@ -567,18 +570,15 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLSync)) {
 			return false;
 		}
 
-		DLSync dlSync = null;
-
-		try {
-			dlSync = (DLSync)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLSync dlSync = (DLSync)obj;
 
 		long primaryKey = dlSync.getPrimaryKey();
 
@@ -800,9 +800,7 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	}
 
 	private static ClassLoader _classLoader = DLSync.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			DLSync.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { DLSync.class };
 	private long _syncId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -824,5 +822,5 @@ public class DLSyncModelImpl extends BaseModelImpl<DLSync>
 	private String _type;
 	private String _version;
 	private long _columnBitmask;
-	private DLSync _escapedModelProxy;
+	private DLSync _escapedModel;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,6 +54,7 @@ import org.springframework.core.annotation.Order;
 public class LayoutLocalServiceVirtualLayoutsAdvice
 	implements MethodInterceptor {
 
+	@Override
 	public Object invoke(MethodInvocation methodInvocation) throws Throwable {
 		if (MergeLayoutPrototypesThreadLocal.isInProgress()) {
 			return methodInvocation.proceed();
@@ -66,6 +67,12 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		Object[] arguments = methodInvocation.getArguments();
 
 		Class<?>[] parameterTypes = method.getParameterTypes();
+
+		if (MergeLayoutPrototypesThreadLocal.isMergeComplete(
+				methodName, arguments, parameterTypes)) {
+
+			return methodInvocation.proceed();
+		}
 
 		boolean workflowEnabled = WorkflowThreadLocal.isEnabled();
 
@@ -88,19 +95,17 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				MergeLayoutPrototypesThreadLocal.setInProgress(true);
 				WorkflowThreadLocal.setEnabled(false);
 
-				SitesUtil.mergeLayoutProtypeLayout(group, layout);
+				SitesUtil.mergeLayoutPrototypeLayout(group, layout);
 
 				if (Validator.isNotNull(
 						layout.getSourcePrototypeLayoutUuid())) {
 
-					if (!SitesUtil.isLayoutModifiedSinceLastMerge(layout)) {
-						SitesUtil.mergeLayoutSetProtypeLayouts(
-							group, layoutSet);
-					}
+					SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
 				}
 			}
 			finally {
-				MergeLayoutPrototypesThreadLocal.setInProgress(false);
+				MergeLayoutPrototypesThreadLocal.setMergeComplete(
+					methodName, arguments, parameterTypes);
 				WorkflowThreadLocal.setEnabled(workflowEnabled);
 			}
 		}
@@ -118,37 +123,9 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					groupId, privateLayout);
 
-				try {
-					MergeLayoutPrototypesThreadLocal.setInProgress(true);
-					WorkflowThreadLocal.setEnabled(false);
-
-					List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-						groupId, privateLayout);
-
-					if (layouts.isEmpty()) {
-						SitesUtil.mergeLayoutSetProtypeLayouts(
-							group, layoutSet);
-					}
-
-					boolean modified = false;
-
-					for (Layout layout : layouts) {
-						if (SitesUtil.isLayoutModifiedSinceLastMerge(layout)) {
-							modified = true;
-
-							break;
-						}
-					}
-
-					if (!modified) {
-						SitesUtil.mergeLayoutSetProtypeLayouts(
-							group, layoutSet);
-					}
-				}
-				finally {
-					MergeLayoutPrototypesThreadLocal.setInProgress(false);
-					WorkflowThreadLocal.setEnabled(workflowEnabled);
-				}
+				mergeLayoutSetPrototypeLayouts(
+					methodName, arguments, parameterTypes, group, layoutSet,
+					privateLayout, workflowEnabled);
 
 				List<Layout> layouts = (List<Layout>)methodInvocation.proceed();
 
@@ -246,6 +223,33 @@ public class LayoutLocalServiceVirtualLayoutsAdvice
 		}
 
 		return layouts;
+	}
+
+	protected void mergeLayoutSetPrototypeLayouts(
+		String methodName, Object[] arguments, Class<?>[] parameterTypes,
+		Group group, LayoutSet layoutSet, boolean privateLayout,
+		boolean workflowEnabled) {
+
+		try {
+			if (!SitesUtil.isLayoutSetMergeable(group, layoutSet)) {
+				return;
+			}
+
+			MergeLayoutPrototypesThreadLocal.setInProgress(true);
+			WorkflowThreadLocal.setEnabled(false);
+
+			SitesUtil.mergeLayoutSetPrototypeLayouts(group, layoutSet);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to merge layouts for site template", e);
+			}
+		}
+		finally {
+			MergeLayoutPrototypesThreadLocal.setMergeComplete(
+				methodName, arguments, parameterTypes);
+			WorkflowThreadLocal.setEnabled(workflowEnabled);
+		}
 	}
 
 	private static final Class<?>[] _TYPES_L = {Long.TYPE};

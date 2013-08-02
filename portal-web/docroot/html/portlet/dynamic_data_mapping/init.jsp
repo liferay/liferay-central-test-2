@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,6 +39,7 @@ page import="com.liferay.portlet.dynamicdatamapping.search.StructureSearchTerms"
 page import="com.liferay.portlet.dynamicdatamapping.search.TemplateDisplayTerms" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.search.TemplateSearch" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.search.TemplateSearchTerms" %><%@
+page import="com.liferay.portlet.dynamicdatamapping.service.DDMStorageLinkLocalServiceUtil" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.DDMStructureServiceUtil" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.DDMTemplateServiceUtil" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.service.permission.DDMPermission" %><%@
@@ -48,8 +49,6 @@ page import="com.liferay.portlet.dynamicdatamapping.storage.StorageType" %><%@
 page import="com.liferay.portlet.dynamicdatamapping.util.DDMXSDUtil" %>
 
 <%
-PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
 String chooseCallback = ParamUtil.getString(request, "chooseCallback");
 String ddmResource = ParamUtil.getString(request, "ddmResource");
 String saveCallback = ParamUtil.getString(request, "saveCallback");
@@ -81,7 +80,7 @@ String templateTypeValue = StringPool.BLANK;
 if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_DETAIL)) {
 	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_DETAIL;
 }
-else if (scopeStorageType.equals(DDMTemplateConstants.TEMPLATE_TYPE_LIST)) {
+else if (scopeTemplateType.equals(DDMTemplateConstants.TEMPLATE_TYPE_LIST)) {
 	templateTypeValue = DDMTemplateConstants.TEMPLATE_TYPE_LIST;
 }
 

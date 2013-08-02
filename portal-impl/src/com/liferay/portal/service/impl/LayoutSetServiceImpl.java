@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,6 +34,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 	 * @deprecated {@link #updateLayoutSetPrototypeLinkEnabled(long, boolean,
 	 *             boolean, String)}
 	 */
+	@Override
 	public void updateLayoutSetPrototypeLinkEnabled(
 			long groupId, boolean privateLayout,
 			boolean layoutSetPrototypeLinkEnabled)
@@ -63,6 +64,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void updateLayoutSetPrototypeLinkEnabled(
 			long groupId, boolean privateLayout,
 			boolean layoutSetPrototypeLinkEnabled,
@@ -87,6 +89,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			layoutSetPrototypeUuid);
 	}
 
+	@Override
 	public void updateLogo(
 			long groupId, boolean privateLayout, boolean logo,
 			InputStream inputStream)
@@ -95,6 +98,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 		updateLogo(groupId, privateLayout, logo, inputStream, true);
 	}
 
+	@Override
 	public void updateLogo(
 			long groupId, boolean privateLayout, boolean logo,
 			InputStream inputStream, boolean cleanUpStream)
@@ -107,6 +111,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			groupId, privateLayout, logo, inputStream, cleanUpStream);
 	}
 
+	@Override
 	public LayoutSet updateLookAndFeel(
 			long groupId, boolean privateLayout, String themeId,
 			String colorSchemeId, String css, boolean wapTheme)
@@ -122,6 +127,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 	}
 
+	@Override
 	public LayoutSet updateSettings(
 			long groupId, boolean privateLayout, String settings)
 		throws PortalException, SystemException {
@@ -133,6 +139,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			groupId, privateLayout, settings);
 	}
 
+	@Override
 	public LayoutSet updateVirtualHost(
 			long groupId, boolean privateLayout, String virtualHost)
 		throws PortalException, SystemException {

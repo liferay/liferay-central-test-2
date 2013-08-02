@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,7 +16,7 @@
 
 <%@ include file="/html/taglib/aui/input/init.jsp" %>
 
-<c:if test='<%= !type.equals("hidden") && !type.equals("assetCategories") %>'>
+<c:if test='<%= !type.equals("assetCategories") && !type.equals("hidden") %>'>
 	<span class="<%= fieldCss %>">
 		<span class="aui-field-content">
 			<c:if test='<%= Validator.isNotNull(label) && !inlineLabel.equals("right") %>'>
@@ -68,7 +68,7 @@
 			defaultValue="<%= value %>"
 			disabled="<%= disabled %>"
 			field="<%= field %>"
-			fieldParam='<%= fieldParam %>'
+			fieldParam="<%= fieldParam %>"
 			formName="<%= formName %>"
 			format='<%= (Format)dynamicAttributes.get("format") %>'
 			id="<%= id %>"
@@ -124,7 +124,7 @@
 		}
 		%>
 
-		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= namespace + id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="radio" value="<%= valueString %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+		<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= inputCss %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= namespace + id %>" name="<%= namespace + name %>" <%= Validator.isNotNull(onChange) ? "onChange=\"" + onChange + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %> <%= Validator.isNotNull(title) ? "title=\"" + title + "\"" : StringPool.BLANK %> type="radio" value="<%= HtmlUtil.escapeAttribute(valueString) %>" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 	</c:when>
 	<c:when test='<%= type.equals("timeZone") %>'>
 		<span class="<%= fieldCss %>">
@@ -181,7 +181,7 @@
 	</c:otherwise>
 </c:choose>
 
-<c:if test='<%= !type.equals("hidden") && !type.equals("assetCategories") %>'>
+<c:if test='<%= !type.equals("assetCategories") && !type.equals("hidden") %>'>
 			</span>
 
 			<c:if test='<%= Validator.isNotNull(suffix) && !inlineLabel.equals("right") %>'>
@@ -192,7 +192,7 @@
 				<label <%= labelTag %>>
 					<liferay-ui:message key="<%= label %>" />
 
-					<c:if test="<%= required && showRequiredLabel %>">
+					<c:if test='<%= required && showRequiredLabel && !type.equals("radio") %>'>
 						<span class="aui-label-required">(<liferay-ui:message key="required" />)</span>
 					</c:if>
 

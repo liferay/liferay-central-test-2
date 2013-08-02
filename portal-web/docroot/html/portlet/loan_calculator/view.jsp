@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,8 +36,6 @@ NumberFormat integerFormat = NumberFormat.getNumberInstance(locale);
 
 integerFormat.setMaximumFractionDigits(0);
 integerFormat.setMinimumFractionDigits(0);
-
-NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 %>
 
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/loan_calculator/view" /></liferay-portlet:renderURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">

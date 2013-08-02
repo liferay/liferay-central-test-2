@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.ratings.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -388,6 +389,10 @@ public class RatingsEntryWrapper implements RatingsEntry,
 		return new RatingsEntryWrapper(_ratingsEntry.toEscapedModel());
 	}
 
+	public com.liferay.portlet.ratings.model.RatingsEntry toUnescapedModel() {
+		return new RatingsEntryWrapper(_ratingsEntry.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _ratingsEntry.toString();
@@ -400,6 +405,25 @@ public class RatingsEntryWrapper implements RatingsEntry,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_ratingsEntry.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RatingsEntryWrapper)) {
+			return false;
+		}
+
+		RatingsEntryWrapper ratingsEntryWrapper = (RatingsEntryWrapper)obj;
+
+		if (Validator.equals(_ratingsEntry, ratingsEntryWrapper._ratingsEntry)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

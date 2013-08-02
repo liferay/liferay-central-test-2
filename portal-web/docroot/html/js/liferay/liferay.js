@@ -142,17 +142,6 @@ Liferay = window.Liferay || {};
 			throw 'You must specify a service.';
 		}
 
-		var pieces = service.split('#');
-
-		var url;
-
-		if (pieces.length > 1) {
-			url = Lang.sub(Service.PLUGIN_URL_BASE, pieces);
-		}
-		else {
-			url = Service.URL_BASE + service;
-		}
-
 		if (String(method).toUpperCase() == 'GET') {
 			config.cache = false;
 		}
@@ -174,7 +163,7 @@ Liferay = window.Liferay || {};
 
 		config.data = prefixedData;
 
-		return Service._ioRequest(url, config);
+		return Service._ioRequest(Service.URL_BASE + service, config);
 	};
 
 	Service.PLUGIN_URL_BASE = CONTEXT + '/{0}/api/jsonws/{1}';
@@ -373,6 +362,35 @@ Liferay = window.Liferay || {};
 	);
 
 	Liferay.Service = Service;
+
+	var components = {};
+	var componentsFn = {};
+
+	Liferay.component = function(id, value) {
+		var retVal;
+
+		if (arguments.length == 1) {
+			var component = components[id];
+
+			if (component && Lang.isFunction(component)) {
+				componentsFn[id] = component;
+
+				component = component();
+
+				components[id] = component;
+			}
+
+			retVal = component;
+		}
+		else {
+			retVal = (components[id] = value);
+		}
+
+		return retVal;
+	};
+
+	Liferay._components = components;
+	Liferay._componentsFn = components;
 
 	Liferay.Template = {
 		PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'

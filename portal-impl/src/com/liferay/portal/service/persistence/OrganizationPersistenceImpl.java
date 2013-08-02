@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -251,13 +251,61 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Organization organization) {
+		if (organization.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(organization.getCompanyId()),
+					
+					organization.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args,
+				organization);
+		}
+		else {
+			OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organization;
+
+			if ((organizationModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(organization.getCompanyId()),
+						
+						organization.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args,
+					organization);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Organization organization) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] {
+		OrganizationModelImpl organizationModelImpl = (OrganizationModelImpl)organization;
+
+		Object[] args = new Object[] {
 				Long.valueOf(organization.getCompanyId()),
 				
-			organization.getName()
-			});
+				organization.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+
+		if ((organizationModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(organizationModelImpl.getOriginalCompanyId()),
+					
+					organizationModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+		}
 	}
 
 	/**
@@ -473,35 +521,8 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 		EntityCacheUtil.putResult(OrganizationModelImpl.ENTITY_CACHE_ENABLED,
 			OrganizationImpl.class, organization.getPrimaryKey(), organization);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-				new Object[] {
-					Long.valueOf(organization.getCompanyId()),
-					
-				organization.getName()
-				}, organization);
-		}
-		else {
-			if ((organizationModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(organizationModelImpl.getOriginalCompanyId()),
-						
-						organizationModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-					new Object[] {
-						Long.valueOf(organization.getCompanyId()),
-						
-					organization.getName()
-					}, organization);
-			}
-		}
+		clearUniqueFindersCache(organization);
+		cacheUniqueFindersCache(organization);
 
 		return organization;
 	}
@@ -4486,8 +4507,10 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 				List<ModelListener<Organization>> listenersList = new ArrayList<ModelListener<Organization>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Organization>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

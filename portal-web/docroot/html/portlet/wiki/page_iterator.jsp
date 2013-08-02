@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -112,7 +112,10 @@ if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals(
 
 String emptyResultsMessage = null;
 
-if (type.equals("categorized_pages")) {
+if (type.equals("all_pages")) {
+	emptyResultsMessage = "there-are-no-pages";
+}
+else if (type.equals("categorized_pages")) {
 	emptyResultsMessage = "there-are-no-pages-with-this-category";
 }
 else if (type.equals("draft_pages")) {
@@ -120,6 +123,9 @@ else if (type.equals("draft_pages")) {
 }
 else if (type.equals("incoming_links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
+}
+else if (type.equals("orphan_pages")) {
+	emptyResultsMessage = "there-are-no-orphan-pages";
 }
 else if (type.equals("outgoing_links")) {
 	emptyResultsMessage = "this-page-has-no-links";
@@ -162,14 +168,16 @@ if (type.equals("all_pages")) {
 	orderableHeaders.put("page", "title");
 	orderableHeaders.put("date", "modifiedDate");
 
-	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
-	results = WikiPageLocalServiceUtil.getPages(node.getNodeId(), true, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+	total = WikiPageServiceUtil.getPagesCount(themeDisplay.getScopeGroupId(), node.getNodeId(), true);
+	results = WikiPageServiceUtil.getPages(themeDisplay.getScopeGroupId(), node.getNodeId(), true, WorkflowConstants.STATUS_APPROVED, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 }
 else if (type.equals("categorized_pages") || type.equals("tagged_pages")) {
 	orderableHeaders.put("page", "title");
 	orderableHeaders.put("date", "modifiedDate");
 
 	AssetEntryQuery assetEntryQuery = new AssetEntryQuery(WikiPage.class.getName(), searchContainer);
+
+	assetEntryQuery.setEnablePermissions(true);
 
 	total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
 	List<AssetEntry> assetEntries = AssetEntryServiceUtil.getEntries(assetEntryQuery);
@@ -197,11 +205,11 @@ else if (type.equals("draft_pages") || type.equals("pending_pages")) {
 		status = WorkflowConstants.STATUS_PENDING;
 	}
 
-	total = WikiPageLocalServiceUtil.getPagesCount(draftUserId, node.getNodeId(), status);
-	results = WikiPageLocalServiceUtil.getPages(draftUserId, node.getNodeId(), status, searchContainer.getStart(), searchContainer.getEnd());
+	total = WikiPageServiceUtil.getPagesCount(themeDisplay.getScopeGroupId(), draftUserId, node.getNodeId(), status);
+	results = WikiPageServiceUtil.getPages(themeDisplay.getScopeGroupId(), draftUserId, node.getNodeId(), status, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("orphan_pages")) {
-	List<WikiPage> orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
+	List<WikiPage> orphans = WikiPageServiceUtil.getOrphans(themeDisplay.getScopeGroupId(), node.getNodeId());
 
 	total = orphans.size();
 	results = ListUtil.subList(orphans, searchContainer.getStart(), searchContainer.getEnd());
@@ -223,8 +231,8 @@ else if (type.equals("outgoing_links")) {
 	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("recent_changes")) {
-	total = WikiPageLocalServiceUtil.getRecentChangesCount(node.getNodeId());
-	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
+	total = WikiPageServiceUtil.getRecentChangesCount(themeDisplay.getScopeGroupId(), node.getNodeId());
+	results = WikiPageServiceUtil.getRecentChanges(themeDisplay.getScopeGroupId(), node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setTotal(total);
@@ -242,11 +250,19 @@ for (int i = 0; i < results.size(); i++) {
 	PortletURL rowURL = renderResponse.createRenderURL();
 
 	if (!curWikiPage.isNew() && !type.equals("draft_pages") && !type.equals("pending_pages")) {
-		rowURL.setParameter("struts_action", "/wiki/view");
+		if (portletName.equals(PortletKeys.WIKI)) {
+			rowURL.setParameter("struts_action", "/wiki/view");
+		}
+		else {
+			rowURL.setParameter("struts_action", "/wiki/view_page");
+		}
+
+		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("nodeName", curWikiPage.getNode().getName());
 	}
 	else {
 		rowURL.setParameter("struts_action", "/wiki/edit_page");
+		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	}
 
@@ -282,7 +298,7 @@ for (int i = 0; i < results.size(); i++) {
 	// User
 
 	if (!curWikiPage.isNew()) {
-		row.addText(HtmlUtil.escape(PortalUtil.getUserName(curWikiPage.getUserId(), curWikiPage.getUserName())), rowURL);
+		row.addText(PortalUtil.getUserName(curWikiPage), rowURL);
 	}
 	else {
 		row.addText(StringPool.BLANK);
@@ -319,7 +335,7 @@ for (int i = 0; i < results.size(); i++) {
 		}
 	}
 
-	if (type.equals("all_pages") || type.equals("draft_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
+	if (type.equals("all_pages") || type.equals("categorized_pages") || type.equals("draft_pages") || type.equals("orphan_pages") || type.equals("recent_changes") || type.equals("tagged_pages")) {
 		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/wiki/page_action.jsp");
 	}
 
@@ -333,11 +349,11 @@ for (int i = 0; i < results.size(); i++) {
 
 	<%
 	WikiPage latestWikiPage = (WikiPage)results.get(1);
-	%>
 
-	<portlet:renderURL var="compareVersionsURL">
-		<portlet:param name="struts_action" value="/wiki/compare_versions" />
-	</portlet:renderURL>
+	PortletURL compareVersionsURL = renderResponse.createRenderURL();
+
+	compareVersionsURL.setParameter("struts_action", "/wiki/compare_versions");
+	%>
 
 	<aui:form action="<%= compareVersionsURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "compare();" %>'>
 		<aui:input name="backURL" type="hidden" value="<%= currentURL %>" />

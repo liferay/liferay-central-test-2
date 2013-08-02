@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -107,7 +107,7 @@ public class LangBuilder {
 			new File(_langDir + "/" + _langFile + ".properties"));
 
 		// Locales that are not invoked by _createProperties should still be
-		// rewritten to use the rignt line separator
+		// rewritten to use the right line separator
 
 		_orderProperties(
 			new File(_langDir + "/" + _langFile + "_en_GB.properties"));
@@ -265,8 +265,15 @@ public class LangBuilder {
 
 						String baseKey = line.substring(0, pos);
 
-						translatedText =
-							properties.getProperty(baseKey) + AUTOMATIC_COPY;
+						String translatedBaseKey = properties.getProperty(
+							baseKey);
+
+						if (Validator.isNotNull(translatedBaseKey)) {
+							translatedText = translatedBaseKey + AUTOMATIC_COPY;
+						}
+						else {
+							translatedText = value + AUTOMATIC_COPY;
+						}
 					}
 					else if (key.equals("lang.dir")) {
 						translatedText = "ltr";
@@ -413,6 +420,10 @@ public class LangBuilder {
 	}
 
 	private String _fixEnglishTranslation(String key, String value) {
+
+		// http://en.wikibooks.org/wiki/Basic_Book_Design/Capitalizing_Words_in_Titles
+		// http://www.imdb.com
+
 		if (value.contains(" this ")) {
 			if (value.contains(".") || value.contains("?") ||
 				value.contains(":") ||
@@ -434,11 +445,11 @@ public class LangBuilder {
 			value.trim(),
 			new String[] {
 				"  ", "<b>", "</b>", "<i>", "</i>", " url ", "&#39;", "&#39 ;",
-				"&quot;", "&quot ;"
+				"&quot;", "&quot ;", "ReCaptcha", "Captcha"
 			},
 			new String[] {
 				" ", "<strong>", "</strong>", "<em>", "</em>", " URL ", "\'",
-				"\'", "\"", "\""
+				"\'", "\"", "\"", "reCAPTCHA", "CAPTCHA"
 			});
 
 		return value;
@@ -486,11 +497,11 @@ public class LangBuilder {
 				messages.add(key + "=" + value);
 			}
 			else {
-				if (begin && line.equals("")) {
+				if (begin && line.equals(StringPool.BLANK)) {
 					_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 				}
 
-				if (line.equals("")) {
+				if (line.equals(StringPool.BLANK)) {
 					begin = !begin;
 				}
 

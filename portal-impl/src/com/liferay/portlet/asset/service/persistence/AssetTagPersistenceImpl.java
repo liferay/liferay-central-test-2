@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -209,9 +209,60 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(AssetTag assetTag) {
+		if (assetTag.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(assetTag.getGroupId()),
+					
+					assetTag.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args, assetTag);
+		}
+		else {
+			AssetTagModelImpl assetTagModelImpl = (AssetTagModelImpl)assetTag;
+
+			if ((assetTagModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(assetTag.getGroupId()),
+						
+						assetTag.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args,
+					assetTag);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(AssetTag assetTag) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { Long.valueOf(assetTag.getGroupId()), assetTag.getName() });
+		AssetTagModelImpl assetTagModelImpl = (AssetTagModelImpl)assetTag;
+
+		Object[] args = new Object[] {
+				Long.valueOf(assetTag.getGroupId()),
+				
+				assetTag.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+
+		if ((assetTagModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(assetTagModelImpl.getOriginalGroupId()),
+					
+					assetTagModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+		}
 	}
 
 	/**
@@ -370,35 +421,8 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 		EntityCacheUtil.putResult(AssetTagModelImpl.ENTITY_CACHE_ENABLED,
 			AssetTagImpl.class, assetTag.getPrimaryKey(), assetTag);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-				new Object[] {
-					Long.valueOf(assetTag.getGroupId()),
-					
-				assetTag.getName()
-				}, assetTag);
-		}
-		else {
-			if ((assetTagModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(assetTagModelImpl.getOriginalGroupId()),
-						
-						assetTagModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-					new Object[] {
-						Long.valueOf(assetTag.getGroupId()),
-						
-					assetTag.getName()
-					}, assetTag);
-			}
-		}
+		clearUniqueFindersCache(assetTag);
+		cacheUniqueFindersCache(assetTag);
 
 		return assetTag;
 	}
@@ -2234,8 +2258,10 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 				List<ModelListener<AssetTag>> listenersList = new ArrayList<ModelListener<AssetTag>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<AssetTag>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,18 +20,12 @@
 <%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
 <%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
-<%@ page import="com.liferay.util.RSSUtil" %>
-
-<%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
-<%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
-<%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:social-activities:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:social-activities:classPK"));
 List<SocialActivity> activities = (List<SocialActivity>)request.getAttribute("liferay-ui:social-activities:activities");
 boolean feedEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:social-activities:feedEnabled"));
-String feedTitle = (String)request.getAttribute("liferay-ui:social-activities:feedTitle");
 String feedLink = (String)request.getAttribute("liferay-ui:social-activities:feedLink");
 String feedLinkMessage = (String)request.getAttribute("liferay-ui:social-activities:feedLinkMessage");
 
@@ -48,8 +42,6 @@ Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 
 	<%
 	boolean hasActivities = false;
-
-	boolean firstDaySeparator = true;
 
 	Date now = new Date();
 
@@ -133,7 +125,3 @@ Format timeFormatDate = FastDateFormatFactoryUtil.getTime(locale, timeZone);
 		url="<%= feedLink %>"
 	/>
 </c:if>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.taglib.ui.social_activities.page_jsp");
-%>

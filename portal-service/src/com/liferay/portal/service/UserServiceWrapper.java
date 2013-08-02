@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -52,6 +52,8 @@ public class UserServiceWrapper implements UserService,
 	*
 	* @param groupId the primary key of the group
 	* @param userIds the primary keys of the users
+	* @param serviceContext the service context to be applied (optionally
+	<code>null</code>)
 	* @throws PortalException if a group or user with the primary key could not
 	be found, or if the user did not have permission to assign group
 	members
@@ -696,6 +698,8 @@ public class UserServiceWrapper implements UserService,
 	* @param userId the primary key of the user
 	* @return <code>true</code> if the user is a member of the group;
 	<code>false</code> otherwise
+	* @throws PortalException if the current user did not have permission to
+	view the user or group members
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean hasGroupUser(long groupId, long userId)
@@ -711,6 +715,8 @@ public class UserServiceWrapper implements UserService,
 	* @param userId the primary key of the user
 	* @return <code>true</code> if the user is a member of the role;
 	<code>false</code> otherwise
+	* @throws PortalException if the current user did not have permission to
+	view the user or role members
 	* @throws SystemException if a system exception occurred
 	*/
 	public boolean hasRoleUser(long roleId, long userId)
@@ -793,6 +799,8 @@ public class UserServiceWrapper implements UserService,
 	*
 	* @param groupId the primary key of the group
 	* @param userIds the primary keys of the users
+	* @param serviceContext the service context to be applied (optionally
+	<code>null</code>)
 	* @throws PortalException if the current user did not have permission to
 	modify group assignments
 	* @throws SystemException if a system exception occurred
@@ -903,6 +911,9 @@ public class UserServiceWrapper implements UserService,
 	* @param password the user's password
 	* @param emailAddress1 the user's new email address
 	* @param emailAddress2 the user's new email address confirmation
+	* @param serviceContext the service context to be applied. Must set the
+	portal URL, main path, primary key of the layout, remote address,
+	remote host, and agent for the user.
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be found
 	or if the current user did not have permission to update the user
@@ -1017,6 +1028,8 @@ public class UserServiceWrapper implements UserService,
 	*
 	* @param userId the primary key of the user
 	* @param organizationIds the primary keys of the organizations
+	* @param serviceContext the service context to be applied. Must set
+	whether user indexing is enabled.
 	* @throws PortalException if a user with the primary key could not be found
 	or if the current user did not have permission to update the user
 	* @throws SystemException if a system exception occurred

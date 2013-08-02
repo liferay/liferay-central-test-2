@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,7 +28,18 @@ String uploadProgressId = "dlFileEntryUploadProgress";
 FileEntry fileEntry = (FileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
 
 long fileEntryId = fileEntry.getFileEntryId();
+
 long folderId = fileEntry.getFolderId();
+
+if (Validator.isNull(redirect)) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/document_library/view");
+	portletURL.setParameter("folderId", String.valueOf(folderId));
+
+	redirect = portletURL.toString();
+}
+
 String extension = fileEntry.getExtension();
 String title = fileEntry.getTitle();
 
@@ -61,7 +72,7 @@ Lock lock = fileEntry.getLock();
 
 String[] conversions = new String[0];
 
-if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
+if (PropsValues.DL_FILE_ENTRY_CONVERSIONS_ENABLED && PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED)) {
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
@@ -178,9 +189,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					<span class="document-thumbnail">
 
 						<%
-						DLFileShortcut dlFileShortcut = null;
-
-						String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileVersion, dlFileShortcut, themeDisplay);
+						String thumbnailSrc = DLUtil.getThumbnailSrc(fileEntry, fileVersion, null, themeDisplay);
 
 						if (layoutAssetEntry != null) {
 							AssetEntry incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(layoutAssetEntry.getClassName(), fileEntry.getFileEntryId());
@@ -499,11 +508,12 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 					</span>
 
 					<div class="lfr-asset-field url-file-container aui-helper-hidden">
-						<label><liferay-ui:message key="url" /></label>
-
-						<liferay-ui:input-resource
-							url="<%= DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, true) %>"
-						/>
+						<aui:field-wrapper name="url">
+							<liferay-ui:input-resource
+								id="url"
+								url="<%= DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, true) %>"
+							/>
+						</aui:field-wrapper>
 					</div>
 
 					<c:if test="<%= portletDisplay.isWebDAVEnabled() && fileEntry.isSupportsSocial() %>">
@@ -520,8 +530,11 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 							}
 							%>
 
-							<aui:field-wrapper helpMessage="<%= webDavHelpMessage %>" label="webdav-url">
-								<liferay-ui:input-resource url="<%= webDavUrl %>" />
+							<aui:field-wrapper helpMessage="<%= webDavHelpMessage %>" name="webdavUrl">
+								<liferay-ui:input-resource
+									id="webdavUrl"
+									url="<%= webDavUrl %>"
+								/>
 							</aui:field-wrapper>
 						</div>
 					</c:if>
@@ -580,7 +593,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 						<%
 						try {
-							List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getClassStructures(PortalUtil.getClassNameId(DLFileEntry.class), new StructureStructureKeyComparator(true));
+							List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getClassStructures(company.getCompanyId(), PortalUtil.getClassNameId(DLFileEntry.class), new StructureStructureKeyComparator(true));
 
 							for (DDMStructure ddmStructure : ddmStructures) {
 								Fields fields = null;
@@ -856,7 +869,7 @@ request.setAttribute("view_file_entry.jsp-fileEntry", fileEntry);
 
 				<portlet:renderURL var="moveURL">
 					<portlet:param name="struts_action" value="/document_library/move_file_entry" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="redirect" value="<%= redirect %>" />
 					<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 				</portlet:renderURL>
 

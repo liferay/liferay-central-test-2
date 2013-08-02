@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,9 @@ import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSetBranch;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.ResourceConstants;
@@ -39,8 +41,6 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
@@ -76,6 +76,10 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			return;
 		}
 
+		for (String[] portletAndActionId : _PORTLET_ACTION_IDS) {
+			verifyActionIds(portletAndActionId[0], portletAndActionId[1]);
+		}
+
 		long[] companyIds = PortalInstances.getCompanyIdsBySQL();
 
 		for (long companyId : companyIds) {
@@ -85,6 +89,31 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			for (String[] model : _MODELS) {
 				verifyModel(role, model[0], model[1], model[2]);
 			}
+		}
+	}
+
+	protected void verifyActionIds(String portlet, String actionId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update ResourcePermission set actionIds = ? where name = ? " +
+					"and roleId in (select roleId from Role_ where name = ?) " +
+						"and primKey != '0'");
+
+			ps.setLong(1, GetterUtil.getLong(actionId));
+			ps.setString(2, portlet);
+			ps.setString(3, "Site Member");
+
+			ps.executeUpdate();
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
 		}
 	}
 
@@ -159,10 +188,18 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(
-				"select " + pkColumnName + ", userId AS ownerId " +
-					"from " + modelName + " where companyId = " +
-						role.getCompanyId());
+			if (modelName.equals("Layout")) {
+				ps = con.prepareStatement(
+					"select " + pkColumnName + ", 0 AS ownerId " +
+						"from " + modelName + " where companyId = " +
+							role.getCompanyId());
+			}
+			else {
+				ps = con.prepareStatement(
+					"select " + pkColumnName + ", userId AS ownerId " +
+						"from " + modelName + " where companyId = " +
+							role.getCompanyId());
+			}
 
 			rs = ps.executeQuery();
 
@@ -195,12 +232,6 @@ public class VerifyResourcePermissions extends VerifyProcess {
 			BlogsEntry.class.getName(), "BlogsEntry", "entryId"
 		},
 		new String[] {
-			BookmarksEntry.class.getName(), "BookmarksEntry", "entryId"
-		},
-		new String[] {
-			BookmarksFolder.class.getName(), "BookmarksFolder", "folderId"
-		},
-		new String[] {
 			CalEvent.class.getName(), "CalEvent", "eventId"
 		},
 		new String[] {
@@ -229,6 +260,9 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		},
 		new String[] {
 			JournalTemplate.class.getName(), "JournalTemplate", "id_"
+		},
+		new String[] {
+			Layout.class.getName(), "Layout", "plid"
 		},
 		new String[] {
 			LayoutSetBranch.class.getName(), "LayoutSetBranch",
@@ -271,6 +305,15 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		new String[] {
 			WikiPage.class.getName(), "WikiPage", "resourcePrimKey"
 		}
+	};
+
+	private static final String[][] _PORTLET_ACTION_IDS = new String[][] {
+		new String[] {
+			"com.liferay.portlet.bookmarks", "17"
+		},
+		new String[] {
+			"com.liferay.portlet.documentlibrary", "513"
+		},
 	};
 
 	private static Log _log = LogFactoryUtil.getLog(

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -317,6 +317,11 @@ public class LayoutExporter {
 				"end-date", String.valueOf(portletDataContext.getEndDate()));
 		}
 
+		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(companyId);
+
+		headerElement.addAttribute(
+			"company-group-id", String.valueOf(companyGroup.getGroupId()));
+
 		headerElement.addAttribute("group-id", String.valueOf(groupId));
 		headerElement.addAttribute(
 			"private-layout", String.valueOf(privateLayout));
@@ -515,7 +520,7 @@ public class LayoutExporter {
 			portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
 
 			boolean[] exportPortletControls = getExportPortletControls(
-				companyId, portletId, portletDataContext, parameterMap);
+				companyId, portletId, portletDataContext, parameterMap, type);
 
 			_portletExporter.exportPortlet(
 				portletDataContext, layoutCache, portletId, layout,
@@ -668,7 +673,7 @@ public class LayoutExporter {
 			portletDataContext, layoutElement, layoutElement, layoutElement,
 			dlFileEntryTypesElement, dlFoldersElement, dlFilesElement,
 			dlFileRanksElement, dlRepositoriesElement,
-			dlRepositoryEntriesElement, article, null, false);
+			dlRepositoryEntriesElement, article, false);
 	}
 
 	protected void exportLayout(
@@ -866,10 +871,11 @@ public class LayoutExporter {
 					else if (scopeType.equals("layout")) {
 						Layout scopeLayout = null;
 
-						scopeLayout = LayoutLocalServiceUtil.
-							fetchLayoutByUuidAndGroupId(
+						scopeLayout =
+							LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(
 								scopeLayoutUuid,
-								portletDataContext.getGroupId());
+								portletDataContext.getGroupId(),
+								portletDataContext.isPrivateLayout());
 
 						if (scopeLayout == null) {
 							continue;
@@ -1060,7 +1066,7 @@ public class LayoutExporter {
 	protected boolean[] getExportPortletControls(
 			long companyId, String portletId,
 			PortletDataContext portletDataContext,
-			Map<String, String[]> parameterMap)
+			Map<String, String[]> parameterMap, String type)
 		throws Exception {
 
 		boolean exportPortletData = MapUtil.getBoolean(
@@ -1106,8 +1112,8 @@ public class LayoutExporter {
 					String rootPortletId = PortletConstants.getRootPortletId(
 						portletId);
 
-					// PORTLET_DATA and the PORTLET_DATA for this specific
-					// data handler must be true
+					// PORTLET_DATA and the PORTLET_DATA for this specific data
+					// handler must be true
 
 					exportCurPortletData =
 						exportPortletData &&
@@ -1129,7 +1135,9 @@ public class LayoutExporter {
 			}
 		}
 
-		if (exportPortletSetupAll) {
+		if (exportPortletSetupAll ||
+			(exportPortletSetup && type.equals("layout-prototype"))) {
+
 			exportCurPortletSetup = true;
 		}
 

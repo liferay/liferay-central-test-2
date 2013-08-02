@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,24 +58,25 @@ public class FacebookConnectAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		if (!FacebookConnectUtil.isEnabled(themeDisplay.getCompanyId())) {
-			return mapping.findForward("portlet.login.login");
+			return actionMapping.findForward("portlet.login.login");
 		}
 
-		return mapping.findForward("portlet.login.facebook_login");
+		return actionMapping.findForward("portlet.login.facebook_login");
 	}
 
 	@Override
 	public ActionForward strutsExecute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -100,7 +101,8 @@ public class FacebookConnectAction extends PortletAction {
 			setFacebookCredentials(session, themeDisplay.getCompanyId(), token);
 		}
 		else {
-			return mapping.findForward(ActionConstants.COMMON_REFERER_JSP);
+			return actionMapping.findForward(
+				ActionConstants.COMMON_REFERER_JSP);
 		}
 
 		response.sendRedirect(redirect);

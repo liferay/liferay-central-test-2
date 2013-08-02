@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,7 +46,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 		<%
 		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-		LinkedHashMap groupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> groupParams = new LinkedHashMap<String, Object>();
 
 		groupParams.put("site", Boolean.TRUE);
 
@@ -98,7 +98,6 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.Group"
-			escapedModel="<%= true %>"
 			keyProperty="groupId"
 			modelVar="group"
 			rowIdProperty="friendlyURL"
@@ -110,22 +109,20 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 			if (group.getPublicLayoutsPageCount() > 0) {
 				rowURL = renderResponse.createActionURL();
 
-				rowURL.setWindowState(WindowState.NORMAL);
-
 				rowURL.setParameter("struts_action", "/sites_admin/page");
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.FALSE.toString());
+				rowURL.setWindowState(WindowState.NORMAL);
 			}
 			else if (tabs1.equals("my-sites") && (group.getPrivateLayoutsPageCount() > 0)) {
 				rowURL = renderResponse.createActionURL();
-
-				rowURL.setWindowState(WindowState.NORMAL);
 
 				rowURL.setParameter("struts_action", "/sites_admin/page");
 				rowURL.setParameter("redirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("privateLayout", Boolean.TRUE.toString());
+				rowURL.setWindowState(WindowState.NORMAL);
 			}
 			%>
 
@@ -151,7 +148,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 
 			if (!tabs1.equals("my-sites") && Validator.isNotNull(group.getDescription())) {
 				buffer.append("<br /><em>");
-				buffer.append(group.getDescription());
+				buffer.append(HtmlUtil.escape(group.getDescription()));
 				buffer.append("</em>");
 			}
 			%>
@@ -159,7 +156,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 			</liferay-ui:search-container-column-text>
 
 			<%
-			LinkedHashMap userParams = new LinkedHashMap();
+			LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 			userParams.put("inherit", true);
 			userParams.put("usersGroups", new Long(group.getGroupId()));

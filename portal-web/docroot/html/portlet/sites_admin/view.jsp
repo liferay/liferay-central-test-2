@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,7 +44,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 		groupParams.put("site", Boolean.TRUE);
 
-		if (!permissionChecker.isCompanyAdmin()) {
+		if (!permissionChecker.isCompanyAdmin() && !GroupPermissionUtil.contains(permissionChecker, ActionKeys.VIEW)) {
 			groupParams.put("usersGroups", new Long(user.getUserId()));
 			//groupParams.put("active", Boolean.TRUE);
 		}
@@ -109,7 +109,7 @@ pageContext.setAttribute("portletURL", portletURL);
 			</liferay-portlet:renderURL>
 
 			<%
-			if (!GroupPermissionUtil.contains(permissionChecker, group, ActionKeys.UPDATE)) {
+			if (!GroupPermissionUtil.contains(permissionChecker, group, ActionKeys.VIEW)) {
 				rowURL = null;
 			}
 			%>

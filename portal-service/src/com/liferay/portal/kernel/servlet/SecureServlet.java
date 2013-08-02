@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,40 +34,49 @@ import javax.servlet.ServletResponse;
 public class SecureServlet
 	extends BasePortalLifecycle implements ServletConfig, Servlet {
 
+	@Override
 	public void destroy() {
 		portalDestroy();
 	}
 
+	@Override
 	public String getInitParameter(String name) {
 		return _servletConfig.getInitParameter(name);
 	}
 
+	@Override
 	public Enumeration<String> getInitParameterNames() {
 		return _servletConfig.getInitParameterNames();
 	}
 
+	@Override
 	public ServletConfig getServletConfig() {
 		return _servletConfig;
 	}
 
+	@Override
 	public ServletContext getServletContext() {
 		return _servletConfig.getServletContext();
 	}
 
+	@Override
 	public String getServletInfo() {
 		return _servlet.getServletInfo();
 	}
 
+	@Override
 	public String getServletName() {
 		return _servletConfig.getServletName();
 	}
 
+	@Override
 	public void init(ServletConfig servletConfig) {
 		_servletConfig = servletConfig;
 
 		registerPortalLifecycle();
 	}
 
+	@Override
 	public void service(
 			ServletRequest servletRequest, ServletResponse servletResponse)
 		throws IOException, ServletException {

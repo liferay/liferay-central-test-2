@@ -1,0 +1,29 @@
+<html>
+<head>
+<title>PGSOBlogs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGSOBlogs</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGSOBlogs</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPEN_SITE_NAME_BLOGS_RSS_URL</td>
+	<td>/web/open-site-name/blogs/-/blogs/rss</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

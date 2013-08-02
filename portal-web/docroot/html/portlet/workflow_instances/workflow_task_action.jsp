@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -104,6 +104,7 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 
 		var dialog = new A.Dialog(
 			{
+				align: Liferay.Util.Window.ALIGN_CENTER,
 				bodyContent: form,
 				buttons: [
 					{
@@ -119,7 +120,6 @@ WorkflowTask workflowTask = (WorkflowTask)row.getObject();
 						label: '<%= UnicodeLanguageUtil.get(pageContext, "cancel") %>'
 					}
 				],
-				centered: true,
 				modal: true,
 				title: title,
 				width: 400

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -445,7 +445,6 @@ public class BookmarksPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static PortletDataHandlerBoolean _foldersAndEntries =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-entries", true, true);
-
 	private static PortletDataHandlerControl[] _metadataControls =
 		new PortletDataHandlerControl[] {
 			new PortletDataHandlerBoolean(_NAMESPACE, "categories"),

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,6 +38,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ResourceCodeLocalServiceImpl
 	extends ResourceCodeLocalServiceBaseImpl {
 
+	@Override
 	public ResourceCode addResourceCode(long companyId, String name, int scope)
 		throws SystemException {
 
@@ -71,6 +72,7 @@ public class ResourceCodeLocalServiceImpl
 		return resourceCode;
 	}
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceCodes() throws SystemException {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) {
@@ -91,6 +93,7 @@ public class ResourceCodeLocalServiceImpl
 		}
 	}
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceCodes(long companyId, String name)
 		throws SystemException {
@@ -106,6 +109,7 @@ public class ResourceCodeLocalServiceImpl
 		getResourceCode(companyId, name, ResourceConstants.SCOPE_INDIVIDUAL);
 	}
 
+	@Override
 	public ResourceCode getResourceCode(long companyId, String name, int scope)
 		throws SystemException {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,7 +42,6 @@ import com.liferay.portlet.social.model.SocialActivityCounterDefinition;
 import com.liferay.portlet.social.model.SocialActivityDefinition;
 import com.liferay.portlet.social.model.SocialActivityLimit;
 import com.liferay.portlet.social.model.SocialActivityProcessor;
-import com.liferay.portlet.social.service.SocialActivityCounterLocalService;
 import com.liferay.portlet.social.service.base.SocialActivityCounterLocalServiceBaseImpl;
 import com.liferay.portlet.social.service.persistence.SocialActivityCounterFinderUtil;
 import com.liferay.portlet.social.util.SocialCounterPeriodUtil;
@@ -61,6 +60,7 @@ import java.util.Map;
 public class SocialActivityCounterLocalServiceImpl
 	extends SocialActivityCounterLocalServiceBaseImpl {
 
+	@Override
 	public SocialActivityCounter addActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int currentValue, int totalValue, int startPeriod,
@@ -72,6 +72,7 @@ public class SocialActivityCounterLocalServiceImpl
 			totalValue, startPeriod, endPeriod, 0, 0);
 	}
 
+	@Override
 	public SocialActivityCounter addActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int currentValue, int totalValue, int startPeriod,
@@ -167,6 +168,7 @@ public class SocialActivityCounterLocalServiceImpl
 		return activityCounter;
 	}
 
+	@Override
 	public void addActivityCounters(SocialActivity activity)
 		throws PortalException, SystemException {
 
@@ -242,6 +244,7 @@ public class SocialActivityCounterLocalServiceImpl
 	 * @deprecated {@link #createActivityCounter(long, long, long, String, int,
 	 *             int, int, int, int, long, int)}
 	 */
+	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter createActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
@@ -254,6 +257,7 @@ public class SocialActivityCounterLocalServiceImpl
 			totalValue, startPeriod, endPeriod, 0, 0);
 	}
 
+	@Override
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public SocialActivityCounter createActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
@@ -311,6 +315,7 @@ public class SocialActivityCounterLocalServiceImpl
 		return activityCounter;
 	}
 
+	@Override
 	public void deleteActivityCounters(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
@@ -377,12 +382,14 @@ public class SocialActivityCounterLocalServiceImpl
 			assetEntry.getClassNameId(), assetEntry.getClassPK());
 	}
 
+	@Override
 	public void deleteActivityCounters(long classNameId, long classPK)
 		throws SystemException {
 
 		socialActivityCounterPersistence.removeByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public SocialActivityCounter fetchActivityCounterByEndPeriod(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int endPeriod)
@@ -392,6 +399,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, classNameId, classPK, name, ownerType, endPeriod);
 	}
 
+	@Override
 	public SocialActivityCounter fetchActivityCounterByStartPeriod(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType, int startPeriod)
@@ -401,6 +409,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, classNameId, classPK, name, ownerType, startPeriod);
 	}
 
+	@Override
 	public SocialActivityCounter fetchLatestActivityCounter(
 			long groupId, long classNameId, long classPK, String name,
 			int ownerType)
@@ -411,6 +420,7 @@ public class SocialActivityCounterLocalServiceImpl
 			SocialActivityCounterConstants.END_PERIOD_UNDEFINED);
 	}
 
+	@Override
 	public List<SocialActivityCounter> getOffsetActivityCounters(
 			long groupId, String name, int startOffset, int endOffset)
 		throws SystemException {
@@ -421,6 +431,7 @@ public class SocialActivityCounterLocalServiceImpl
 		return getPeriodActivityCounters(groupId, name, startPeriod, endPeriod);
 	}
 
+	@Override
 	public List<SocialActivityCounter> getOffsetDistributionActivityCounters(
 			long groupId, String name, int startOffset, int endOffset)
 		throws SystemException {
@@ -432,6 +443,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, name, startPeriod, endPeriod);
 	}
 
+	@Override
 	public List<SocialActivityCounter> getPeriodActivityCounters(
 			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
@@ -444,6 +456,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, name, startPeriod, endPeriod, periodLength);
 	}
 
+	@Override
 	public List<SocialActivityCounter> getPeriodDistributionActivityCounters(
 			long groupId, String name, int startPeriod, int endPeriod)
 		throws SystemException {
@@ -456,6 +469,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, name, startPeriod, endPeriod, periodLength);
 	}
 
+	@Override
 	public List<Tuple> getUserActivityCounters(
 			long groupId, String[] rankingNames, String[] selectedNames,
 			int start, int end)
@@ -504,6 +518,7 @@ public class SocialActivityCounterLocalServiceImpl
 		return Arrays.asList(userActivityCounters);
 	}
 
+	@Override
 	public int getUserActivityCountersCount(long groupId, String[] rankingNames)
 		throws SystemException {
 
@@ -511,6 +526,7 @@ public class SocialActivityCounterLocalServiceImpl
 			groupId, rankingNames);
 	}
 
+	@Override
 	public void incrementUserAchievementCounter(long userId, long groupId)
 		throws PortalException, SystemException {
 
@@ -705,6 +721,6 @@ public class SocialActivityCounterLocalServiceImpl
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		SocialActivityCounterLocalService.class);
+		SocialActivityCounterLocalServiceImpl.class);
 
 }

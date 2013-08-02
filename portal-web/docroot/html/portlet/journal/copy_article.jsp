@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,12 +41,12 @@ double version = ParamUtil.getDouble(request, "version");
 		title="web-content"
 	/>
 
-	<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 	<liferay-ui:error exception="<%= ArticleIdException.class %>" message="please-enter-a-valid-id" />
+	<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 
 	<aui:fieldset>
 		<aui:field-wrapper label="id">
-			<%= oldArticleId %>
+			<%= HtmlUtil.escape(oldArticleId) %>
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="new-id">

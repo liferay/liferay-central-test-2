@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ public class ThemeModificationActionHandler implements ActionHandler {
 		return ThemeModificationActionHandler.class.getName();
 	}
 
+	@Override
 	public void applyAction(
 		MDRAction mdrAction, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -81,10 +82,12 @@ public class ThemeModificationActionHandler implements ActionHandler {
 		themeDisplay.setLookAndFeel(theme, colorScheme);
 	}
 
+	@Override
 	public Collection<String> getPropertyNames() {
 		return _propertyNames;
 	}
 
+	@Override
 	public String getType() {
 		return getHandlerType();
 	}

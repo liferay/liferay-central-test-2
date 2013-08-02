@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -367,13 +367,16 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	@Override
 	public JournalArticleImage toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (JournalArticleImage)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (JournalArticleImage)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public JournalArticleImage toUnescapedModel() {
+		return (JournalArticleImage)this;
 	}
 
 	@Override
@@ -410,18 +413,15 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalArticleImage)) {
 			return false;
 		}
 
-		JournalArticleImage journalArticleImage = null;
-
-		try {
-			journalArticleImage = (JournalArticleImage)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		JournalArticleImage journalArticleImage = (JournalArticleImage)obj;
 
 		long primaryKey = journalArticleImage.getPrimaryKey();
 
@@ -583,7 +583,7 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	}
 
 	private static ClassLoader _classLoader = JournalArticleImage.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			JournalArticleImage.class
 		};
 	private long _articleImageId;
@@ -605,5 +605,5 @@ public class JournalArticleImageModelImpl extends BaseModelImpl<JournalArticleIm
 	private boolean _originalTempImage;
 	private boolean _setOriginalTempImage;
 	private long _columnBitmask;
-	private JournalArticleImage _escapedModelProxy;
+	private JournalArticleImage _escapedModel;
 }

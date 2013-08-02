@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,6 +42,7 @@ import java.util.List;
 public class MembershipRequestLocalServiceImpl
 	extends MembershipRequestLocalServiceBaseImpl {
 
+	@Override
 	public MembershipRequest addMembershipRequest(
 			long userId, long groupId, String comments,
 			ServiceContext serviceContext)
@@ -72,6 +73,7 @@ public class MembershipRequestLocalServiceImpl
 		return membershipRequest;
 	}
 
+	@Override
 	public void deleteMembershipRequests(long groupId) throws SystemException {
 		List<MembershipRequest> membershipRequests =
 			membershipRequestPersistence.findByGroupId(groupId);
@@ -81,6 +83,7 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteMembershipRequests(long groupId, int statusId)
 		throws SystemException {
 
@@ -92,6 +95,7 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteMembershipRequestsByUserId(long userId)
 		throws SystemException {
 
@@ -103,6 +107,7 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<MembershipRequest> getMembershipRequests(
 			long userId, long groupId, int statusId)
 		throws SystemException {
@@ -111,6 +116,7 @@ public class MembershipRequestLocalServiceImpl
 			groupId, userId, statusId);
 	}
 
+	@Override
 	public boolean hasMembershipRequest(long userId, long groupId, int statusId)
 		throws SystemException {
 
@@ -125,6 +131,7 @@ public class MembershipRequestLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<MembershipRequest> search(
 			long groupId, int status, int start, int end)
 		throws SystemException {
@@ -133,10 +140,12 @@ public class MembershipRequestLocalServiceImpl
 			groupId, status, start, end);
 	}
 
+	@Override
 	public int searchCount(long groupId, int status) throws SystemException {
 		return membershipRequestPersistence.countByG_S(groupId, status);
 	}
 
+	@Override
 	public void updateStatus(
 			long replierUserId, long membershipRequestId, String replyComments,
 			int statusId, boolean addUserToGroup, ServiceContext serviceContext)

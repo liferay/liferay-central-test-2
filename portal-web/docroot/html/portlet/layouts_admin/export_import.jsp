@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,8 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-String redirectWindowState = ParamUtil.getString(request, "redirectWindowState");
 
 String cmd = ParamUtil.getString(request, Constants.CMD, Constants.EXPORT);
 
@@ -86,8 +84,6 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 %>
 
 <aui:form cssClass="lfr-export-dialog" method="post" name="fm1">
-	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
-
 	<c:choose>
 		<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
 			<%@ include file="/html/portlet/layouts_admin/export_import_options.jspf" %>
@@ -98,6 +94,11 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 		</c:when>
 		<c:when test="<%= cmd.equals(Constants.IMPORT) %>">
 			<liferay-ui:error exception="<%= LARFileException.class %>" message="please-specify-a-lar-file-to-import" />
+
+			<liferay-ui:error exception="<%= LARFileSizeException.class %>">
+				<liferay-ui:message arguments="<%= PrefsPropsUtil.getLong(PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE) / 1024 %>" key="please-enter-a-file-with-a-valid-file-size-no-larger-than-x" />
+			</liferay-ui:error>
+
 			<liferay-ui:error exception="<%= LARTypeException.class %>" message="please-import-a-lar-file-of-the-correct-type" />
 			<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />
 
@@ -138,6 +139,24 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				%>
 
 				<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales(), StringPool.COMMA_AND_SPACE), StringUtil.merge(le.getTargetAvailableLocales(), StringPool.COMMA_AND_SPACE)} %>" key="the-available-languages-in-the-lar-file-x-do-not-match-the-portal's-available-languages-x" />
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= RecordSetDuplicateRecordSetKeyException.class %>">
+
+				<%
+				RecordSetDuplicateRecordSetKeyException rsdrske = (RecordSetDuplicateRecordSetKeyException)errorException;
+				%>
+
+				<liferay-ui:message arguments="<%= rsdrske.getRecordSetKey() %>" key="dynamic-data-list-record-set-with-record-set-key-x-already-exists" />
+			</liferay-ui:error>
+
+			<liferay-ui:error exception="<%= StructureDuplicateStructureKeyException.class %>">
+
+				<%
+				StructureDuplicateStructureKeyException sdske = (StructureDuplicateStructureKeyException)errorException;
+				%>
+
+				<liferay-ui:message arguments="<%= sdske.getStructureKey() %>" key="dynamic-data-mapping-structure-with-structure-key-x-already-exists" />
 			</liferay-ui:error>
 
 			<c:choose>
@@ -185,6 +204,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				<c:when test="<%= cmd.equals(Constants.EXPORT) %>">
 					<portlet:actionURL var="exportPagesURL">
 						<portlet:param name="struts_action" value="/layouts_admin/export_layouts" />
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 						<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 						<portlet:param name="layoutIds" value="<%= StringUtil.merge(layoutIds) %>" />
@@ -196,6 +216,7 @@ portletsList = ListUtil.sort(portletsList, new PortletTitleComparator(applicatio
 				<c:otherwise>
 					<portlet:actionURL var="importPagesURL">
 						<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
+						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.IMPORT %>" />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 						<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 					</portlet:actionURL>

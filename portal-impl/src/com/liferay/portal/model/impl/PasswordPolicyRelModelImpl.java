@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -254,13 +254,16 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	@Override
 	public PasswordPolicyRel toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PasswordPolicyRel)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PasswordPolicyRel)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PasswordPolicyRel toUnescapedModel() {
+		return (PasswordPolicyRel)this;
 	}
 
 	@Override
@@ -293,18 +296,15 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PasswordPolicyRel)) {
 			return false;
 		}
 
-		PasswordPolicyRel passwordPolicyRel = null;
-
-		try {
-			passwordPolicyRel = (PasswordPolicyRel)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PasswordPolicyRel passwordPolicyRel = (PasswordPolicyRel)obj;
 
 		long primaryKey = passwordPolicyRel.getPrimaryKey();
 
@@ -402,7 +402,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	}
 
 	private static ClassLoader _classLoader = PasswordPolicyRel.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PasswordPolicyRel.class
 		};
 	private long _passwordPolicyRelId;
@@ -416,5 +416,5 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl<PasswordPolicyRel>
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _columnBitmask;
-	private PasswordPolicyRel _escapedModelProxy;
+	private PasswordPolicyRel _escapedModel;
 }

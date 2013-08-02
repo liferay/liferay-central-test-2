@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -267,13 +267,16 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 	@Override
 	public RepositoryEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (RepositoryEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (RepositoryEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public RepositoryEntry toUnescapedModel() {
+		return (RepositoryEntry)this;
 	}
 
 	@Override
@@ -307,18 +310,15 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RepositoryEntry)) {
 			return false;
 		}
 
-		RepositoryEntry repositoryEntry = null;
-
-		try {
-			repositoryEntry = (RepositoryEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		RepositoryEntry repositoryEntry = (RepositoryEntry)obj;
 
 		long primaryKey = repositoryEntry.getPrimaryKey();
 
@@ -436,7 +436,7 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	}
 
 	private static ClassLoader _classLoader = RepositoryEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			RepositoryEntry.class
 		};
 	private String _uuid;
@@ -451,5 +451,5 @@ public class RepositoryEntryModelImpl extends BaseModelImpl<RepositoryEntry>
 	private String _mappedId;
 	private String _originalMappedId;
 	private long _columnBitmask;
-	private RepositoryEntry _escapedModelProxy;
+	private RepositoryEntry _escapedModel;
 }

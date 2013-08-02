@@ -123,3 +123,23 @@
 .ie6 .taglib-page-iterator .search-pages .page-selector .aui-field-content, .ie6 .taglib-page-iterator .search-pages .delta-selector .aui-field-content {
 	display: inline;
 }
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.taglib-search-iterator {
+		td {
+			&.align-left {
+				text-align: right;
+			}
+
+			&.align-right {
+				text-align: left;
+			}
+		}
+
+		.search-results {
+			float: right;
+		}
+	}
+}

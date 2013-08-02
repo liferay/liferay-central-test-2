@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -343,13 +343,16 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	@Override
 	public PortletPreferences toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PortletPreferences)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PortletPreferences)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PortletPreferences toUnescapedModel() {
+		return (PortletPreferences)this;
 	}
 
 	@Override
@@ -384,18 +387,15 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortletPreferences)) {
 			return false;
 		}
 
-		PortletPreferences portletPreferences = null;
-
-		try {
-			portletPreferences = (PortletPreferences)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PortletPreferences portletPreferences = (PortletPreferences)obj;
 
 		long primaryKey = portletPreferences.getPrimaryKey();
 
@@ -523,7 +523,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	}
 
 	private static ClassLoader _classLoader = PortletPreferences.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PortletPreferences.class
 		};
 	private long _portletPreferencesId;
@@ -540,5 +540,5 @@ public class PortletPreferencesModelImpl extends BaseModelImpl<PortletPreference
 	private String _originalPortletId;
 	private String _preferences;
 	private long _columnBitmask;
-	private PortletPreferences _escapedModelProxy;
+	private PortletPreferences _escapedModel;
 }

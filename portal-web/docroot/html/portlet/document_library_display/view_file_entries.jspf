@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,14 +21,16 @@
 <aui:form action="<%= deleteURL.toString() %>" method="get" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
-	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+	<aui:input name="redirect" type="hidden" value="<%= currentURL %>" />
 	<aui:input name="fileEntryIds" type="hidden" />
 	<aui:input name="fileShortcutIds" type="hidden" />
 
 	<%
 	EntriesChecker entriesChecker = null;
 
-	if (showActions) {
+	boolean showDeleteButton = permissionChecker.hasPermission(scopeGroupId, DLFileEntryConstants.getClassName(), scopeGroupId, ActionKeys.DELETE);
+
+	if (showActions && showDeleteButton) {
 		entriesChecker = new EntriesChecker(liferayPortletRequest, liferayPortletResponse);
 	}
 	%>
@@ -52,22 +54,29 @@
 
 				assetEntryQuery.setExcludeZeroViewCount(false);
 
-				results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
 				total = AssetEntryServiceUtil.getEntriesCount(assetEntryQuery);
-			}
-			else {
-				if (mergedView) {
-					results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, true, searchContainer.getStart(), searchContainer.getEnd());
-				}
-				else {
-					results = DLAppServiceUtil.getFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
+
+				if (searchContainer.recalculateCur(total)) {
+					assetEntryQuery = new AssetEntryQuery(classNameIds, searchContainer);
 				}
 
+				results = AssetEntryServiceUtil.getEntries(assetEntryQuery);
+			}
+			else {
 				if (mergedView) {
 					total = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcutsCount(repositoryId, folderId, status, true);
 				}
 				else {
 					total = DLAppServiceUtil.getFileEntriesAndFileShortcutsCount(repositoryId, folderId, status);
+				}
+
+				searchContainer.setTotal(total);
+
+				if (mergedView) {
+					results = DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(repositoryId, folderId, status, true, searchContainer.getStart(), searchContainer.getEnd());
+				}
+				else {
+					results = DLAppServiceUtil.getFileEntriesAndFileShortcuts(repositoryId, folderId, status, searchContainer.getStart(), searchContainer.getEnd());
 				}
 			}
 
@@ -127,7 +136,7 @@
 
 		</liferay-ui:search-container-row>
 
-		<c:if test="<%= (total > 0) && showActions %>">
+		<c:if test="<%= (total > 0) && showActions && showDeleteButton %>">
 			<aui:button onClick='<%= renderResponse.getNamespace() + "deleteEntries();" %>' value="delete" />
 		</c:if>
 

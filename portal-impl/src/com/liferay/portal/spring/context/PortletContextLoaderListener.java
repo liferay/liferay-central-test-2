@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,9 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.MethodCache;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
 
 import java.lang.reflect.Method;
 
@@ -31,7 +28,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.ContextLoader;
+import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -39,7 +36,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 /**
  * @author Brian Wing Shun Chan
  * @see    PortletApplicationContext
- * @see    PortletContextLoader
  */
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
@@ -86,20 +82,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
-		PACLPolicy previousPACLPolicy =
-			PortalSecurityManagerThreadLocal.getPACLPolicy();
-
-		try {
-			PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
-				classLoader);
-
-			PortalSecurityManagerThreadLocal.setPACLPolicy(paclPolicy);
-
-			super.contextInitialized(servletContextEvent);
-		}
-		finally {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(previousPACLPolicy);
-		}
+		super.contextInitialized(servletContextEvent);
 
 		PortletBeanFactoryCleaner.readBeans();
 
@@ -142,9 +125,33 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	}
 
 	@Override
-	protected ContextLoader createContextLoader() {
-		return new PortletContextLoader();
+	protected void customizeContext(
+		ServletContext servletContext,
+		ConfigurableWebApplicationContext configurableWebApplicationContext) {
+
+		String configLocation = servletContext.getInitParameter(
+			_PORTAL_CONFIG_LOCATION_PARAM);
+
+		configurableWebApplicationContext.setConfigLocation(configLocation);
+
+		configurableWebApplicationContext.addBeanFactoryPostProcessor(
+			new PortletBeanFactoryPostProcessor());
 	}
+
+	@Override
+	protected Class<?> determineContextClass(ServletContext servletContext) {
+		return PortletApplicationContext.class;
+	}
+
+	@Override
+	protected ApplicationContext loadParentContext(
+		ServletContext servletContext) {
+
+		return null;
+	}
+
+	private static final String _PORTAL_CONFIG_LOCATION_PARAM =
+		"portalContextConfigLocation";
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortletContextLoaderListener.class);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -550,6 +552,10 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 		return new OrgLaborWrapper(_orgLabor.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.OrgLabor toUnescapedModel() {
+		return new OrgLaborWrapper(_orgLabor.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _orgLabor.toString();
@@ -568,6 +574,25 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _orgLabor.getType();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgLaborWrapper)) {
+			return false;
+		}
+
+		OrgLaborWrapper orgLaborWrapper = (OrgLaborWrapper)obj;
+
+		if (Validator.equals(_orgLabor, orgLaborWrapper._orgLabor)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.shopping.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -1082,6 +1083,10 @@ public class ShoppingItemWrapper implements ShoppingItem,
 		return new ShoppingItemWrapper(_shoppingItem.toEscapedModel());
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingItem toUnescapedModel() {
+		return new ShoppingItemWrapper(_shoppingItem.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _shoppingItem.toString();
@@ -1113,6 +1118,25 @@ public class ShoppingItemWrapper implements ShoppingItem,
 	public void setFieldsQuantitiesArray(
 		java.lang.String[] fieldsQuantitiesArray) {
 		_shoppingItem.setFieldsQuantitiesArray(fieldsQuantitiesArray);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingItemWrapper)) {
+			return false;
+		}
+
+		ShoppingItemWrapper shoppingItemWrapper = (ShoppingItemWrapper)obj;
+
+		if (Validator.equals(_shoppingItem, shoppingItemWrapper._shoppingItem)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

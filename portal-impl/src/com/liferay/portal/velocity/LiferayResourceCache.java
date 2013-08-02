@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,23 +25,28 @@ import org.apache.velocity.runtime.resource.ResourceCache;
  */
 public class LiferayResourceCache implements ResourceCache {
 
+	@Override
 	public Iterator<Object> enumerateKeys() {
 		throw new RuntimeException("enumerateKeys is not implemented");
 	}
 
+	@Override
 	public Resource get(Object key) {
 		return LiferayResourceCacheUtil.get(key.toString());
 	}
 
+	@Override
 	public void initialize(RuntimeServices rs) {
 	}
 
+	@Override
 	public Resource put(Object key, Resource resource) {
 		LiferayResourceCacheUtil.put(key.toString(), resource);
 
 		return resource;
 	}
 
+	@Override
 	public Resource remove(Object key) {
 		Resource resource = get(key);
 

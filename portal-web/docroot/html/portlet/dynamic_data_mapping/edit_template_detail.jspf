@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,8 +15,6 @@
 --%>
 
 <%
-String languageId = LanguageUtil.getLanguageId(request);
-
 if (Validator.isNull(script)) {
 	script = structure.getXsd();
 	scriptJSONArray = DDMXSDUtil.getJSONArray(script);
@@ -28,7 +26,7 @@ if (scriptJSONArray != null) {
 
 String namespace = renderResponse.getNamespace();
 
-if (Validator.isNotNull(portletResourceNamespace)){
+if (Validator.isNotNull(portletResourceNamespace)) {
 	namespace = portletResourceNamespace;
 }
 %>

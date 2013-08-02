@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,20 +29,24 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AssetRendererFactoryRegistryImpl
 	implements AssetRendererFactoryRegistry {
 
+	@Override
 	public List<AssetRendererFactory> getAssetRendererFactories() {
 		return ListUtil.fromMapValues(_assetRenderFactoriesMapByClassName);
 	}
 
+	@Override
 	public AssetRendererFactory getAssetRendererFactoryByClassName(
 		String className) {
 
 		return _assetRenderFactoriesMapByClassName.get(className);
 	}
 
+	@Override
 	public AssetRendererFactory getAssetRendererFactoryByType(String type) {
 		return _assetRenderFactoriesMapByClassType.get(type);
 	}
 
+	@Override
 	public long[] getClassNameIds() {
 		long[] classNameIds = new long[
 			_assetRenderFactoriesMapByClassName.size()];
@@ -60,6 +64,7 @@ public class AssetRendererFactoryRegistryImpl
 		return classNameIds;
 	}
 
+	@Override
 	public void register(AssetRendererFactory assetRendererFactory) {
 		_assetRenderFactoriesMapByClassName.put(
 			assetRendererFactory.getClassName(), assetRendererFactory);
@@ -67,6 +72,7 @@ public class AssetRendererFactoryRegistryImpl
 			assetRendererFactory.getType(), assetRendererFactory);
 	}
 
+	@Override
 	public void unregister(AssetRendererFactory assetRendererFactory) {
 		_assetRenderFactoriesMapByClassName.remove(
 			assetRendererFactory.getClassName());

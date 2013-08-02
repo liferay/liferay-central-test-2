@@ -15,24 +15,30 @@ Liferay.Language = {
 
 		var value = instance._cache[url];
 
-		if (value) {
-			return value;
+		var authUrl = url;
+
+		var authToken = Liferay.authToken;
+
+		if (authToken) {
+			authUrl = Liferay.Util.addParams('p_auth=' + authToken, url);
 		}
 
-		AUI().use('aui-io').io(
-			url,
-			{
-				sync: true,
-				on: {
-					complete: function(i, o) {
-						value = o.responseText;
-					}
-				},
-				type: 'GET'
-			}
-		);
+		if (!value) {
+			AUI().use('io-base').io(
+				authUrl,
+				{
+					on: {
+						complete: function(i, o) {
+							value = o.responseText;
+						}
+					},
+					sync: true,
+					type: 'GET'
+				}
+			);
 
-		instance._cache[url] = value;
+			instance._cache[url] = value;
+		}
 
 		return value;
 	},

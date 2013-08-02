@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -62,8 +62,8 @@ public class GetArticlesAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		try {
@@ -189,7 +189,7 @@ public class GetArticlesAction extends Action {
 			resultEl = resultEl.element("root");
 
 			JournalUtil.addAllReservedEls(
-				resultEl, tokens, article, languageId);
+				resultEl, tokens, article, languageId, themeDisplay);
 		}
 
 		return DDMXMLUtil.formatXML(resultsDoc).getBytes(StringPool.UTF8);

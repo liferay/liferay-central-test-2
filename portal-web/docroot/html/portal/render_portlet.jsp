@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,7 +58,21 @@ PortletPreferencesIds portletPreferencesIds = PortletPreferencesFactoryUtil.getP
 
 PortletPreferences portletPreferences = null;
 
-Group group = layout.getGroup();
+Group group = null;
+boolean privateLayout = false;
+
+if (layout instanceof VirtualLayout) {
+	VirtualLayout virtualLayout = (VirtualLayout)layout;
+
+	Layout sourceLayout = virtualLayout.getSourceLayout();
+
+	group = sourceLayout.getGroup();
+	privateLayout = sourceLayout.isPrivateLayout();
+}
+else {
+	group = layout.getGroup();
+	privateLayout = layout.isPrivateLayout();
+}
 
 if (allowAddPortletDefaultResource) {
 	portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
@@ -66,11 +80,13 @@ if (allowAddPortletDefaultResource) {
 	String scopeLayoutUuid = portletPreferences.getValue("lfrScopeLayoutUuid", null);
 
 	if (Validator.isNotNull(scopeLayoutUuid)) {
-		Layout scopeLayout = LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(scopeLayoutUuid, group.getGroupId());
+		Layout scopeLayout = LayoutLocalServiceUtil.fetchLayoutByUuidAndGroupId(scopeLayoutUuid, group.getGroupId(), privateLayout);
 
-		portletPreferencesIds = PortletPreferencesFactoryUtil.getPortletPreferencesIds(request, scopeLayout, portletId);
+		if (scopeLayout != null) {
+			portletPreferencesIds = PortletPreferencesFactoryUtil.getPortletPreferencesIds(request, scopeLayout, portletId);
 
-		portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
+			portletPreferences = PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
+		}
 	}
 }
 else {
@@ -323,7 +339,7 @@ if (portlet.isStatic()) {
 
 // Portlets in a layout linked to a layout prototype cannot be moved
 
-if (Validator.isNotNull(layout.getLayoutPrototypeUuid()) && layout.isLayoutPrototypeLinkEnabled()) {
+if (layout.isLayoutPrototypeLinkActive()) {
 	showCloseIcon = false;
 	showConfigurationIcon = false;
 	showMoveIcon = false;
@@ -709,7 +725,6 @@ else if (portletDisplay.isStateMax()) {
 	}
 	else {
 		urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
-		urlBack = HtmlUtil.stripHtml(urlBack);
 		urlBack = PortalUtil.escapeRedirect(urlBack);
 	}
 
@@ -940,9 +955,9 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 				}
 		%>
 
-				<tiles:insert flush="false" template="<%= templatePath %>">
-					<tiles:put name="portlet_content" value="<%= portletContent %>" />
-				</tiles:insert>
+				<liferay-util:include page="<%= templatePath %>">
+					<liferay-util:param name="portlet_content" value="<%= portletContent %>" />
+				</liferay-util:include>
 
 		<%
 			}
@@ -951,9 +966,9 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringResponse.getString());
 		%>
 
-					<tiles:insert flush="false" template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>'>
-						<tiles:put name="portlet_content" value="<%= StringPool.BLANK %>" />
-					</tiles:insert>
+					<liferay-util:include page='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>'>
+						<liferay-util:param name="portlet_content" value="<%= StringPool.BLANK %>" />
+					</liferay-util:include>
 
 		<%
 				}
@@ -986,9 +1001,9 @@ if ((layout.isTypePanel() || layout.isTypeControlPanel()) && !portletDisplay.get
 
 			<c:choose>
 				<c:when test="<%= useDefaultTemplate || portletException || addNotAjaxablePortlet %>">
-					<tiles:insert flush="false" template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>'>
-						<tiles:put name="portlet_content" value="<%= portletContent %>" />
-					</tiles:insert>
+					<liferay-util:include page='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>'>
+						<liferay-util:param name="portlet_content" value="<%= portletContent %>" />
+					</liferay-util:include>
 				</c:when>
 				<c:otherwise>
 					<%= renderRequestImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>

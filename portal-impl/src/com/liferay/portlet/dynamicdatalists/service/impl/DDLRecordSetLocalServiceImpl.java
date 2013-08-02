@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,6 +42,7 @@ import java.util.Map;
 public class DDLRecordSetLocalServiceImpl
 	extends DDLRecordSetLocalServiceBaseImpl {
 
+	@Override
 	public DDLRecordSet addRecordSet(
 			long userId, long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -105,6 +106,7 @@ public class DDLRecordSetLocalServiceImpl
 		return recordSet;
 	}
 
+	@Override
 	public void addRecordSetResources(
 			DDLRecordSet recordSet, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -117,6 +119,7 @@ public class DDLRecordSetLocalServiceImpl
 			addGuestPermissions);
 	}
 
+	@Override
 	public void addRecordSetResources(
 			DDLRecordSet recordSet, String[] groupPermissions,
 			String[] guestPermissions)
@@ -128,6 +131,7 @@ public class DDLRecordSetLocalServiceImpl
 			recordSet.getRecordSetId(), groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void deleteRecordSet(DDLRecordSet recordSet)
 		throws PortalException, SystemException {
 
@@ -149,8 +153,15 @@ public class DDLRecordSetLocalServiceImpl
 
 		ddmStructureLinkLocalService.deleteClassStructureLink(
 			recordSet.getRecordSetId());
+
+		// Workflow
+
+		workflowDefinitionLinkLocalService.deleteWorkflowDefinitionLink(
+			recordSet.getCompanyId(), recordSet.getGroupId(),
+			DDLRecordSet.class.getName(), recordSet.getRecordSetId(), 0);
 	}
 
+	@Override
 	public void deleteRecordSet(long recordSetId)
 		throws PortalException, SystemException {
 
@@ -160,6 +171,7 @@ public class DDLRecordSetLocalServiceImpl
 		deleteRecordSet(recordSet);
 	}
 
+	@Override
 	public void deleteRecordSet(long groupId, String recordSetKey)
 		throws PortalException, SystemException {
 
@@ -169,6 +181,7 @@ public class DDLRecordSetLocalServiceImpl
 		deleteRecordSet(recordSet);
 	}
 
+	@Override
 	public void deleteRecordSets(long groupId)
 		throws PortalException, SystemException {
 
@@ -180,34 +193,40 @@ public class DDLRecordSetLocalServiceImpl
 		}
 	}
 
+	@Override
 	public DDLRecordSet fetchRecordSet(long groupId, String recordSetKey)
 		throws SystemException {
 
 		return ddlRecordSetPersistence.fetchByG_R(groupId, recordSetKey);
 	}
 
+	@Override
 	public DDLRecordSet getRecordSet(long recordSetId)
 		throws PortalException, SystemException {
 
 		return ddlRecordSetPersistence.findByPrimaryKey(recordSetId);
 	}
 
+	@Override
 	public DDLRecordSet getRecordSet(long groupId, String recordSetKey)
 		throws PortalException, SystemException {
 
 		return ddlRecordSetPersistence.findByG_R(groupId, recordSetKey);
 	}
 
+	@Override
 	public List<DDLRecordSet> getRecordSets(long groupId)
 		throws SystemException {
 
 		return ddlRecordSetPersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public int getRecordSetsCount(long groupId) throws SystemException {
 		return ddlRecordSetPersistence.countByGroupId(groupId);
 	}
 
+	@Override
 	public List<DDLRecordSet> search(
 			long companyId, long groupId, String keywords, int scope, int start,
 			int end, OrderByComparator orderByComparator)
@@ -217,6 +236,7 @@ public class DDLRecordSetLocalServiceImpl
 			companyId, groupId, keywords, scope, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<DDLRecordSet> search(
 			long companyId, long groupId, String name, String description,
 			int scope, boolean andOperator, int start, int end,
@@ -228,6 +248,7 @@ public class DDLRecordSetLocalServiceImpl
 			end, orderByComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, String keywords, int scope)
 		throws SystemException {
@@ -236,6 +257,7 @@ public class DDLRecordSetLocalServiceImpl
 			companyId, groupId, keywords, scope);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, String name, String description,
 			int scope, boolean andOperator)
@@ -245,6 +267,7 @@ public class DDLRecordSetLocalServiceImpl
 			companyId, groupId, name, description, scope, andOperator);
 	}
 
+	@Override
 	public DDLRecordSet updateMinDisplayRows(
 			long recordSetId, int minDisplayRows, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -260,6 +283,7 @@ public class DDLRecordSetLocalServiceImpl
 		return recordSet;
 	}
 
+	@Override
 	public DDLRecordSet updateRecordSet(
 			long recordSetId, long ddmStructureId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, int minDisplayRows,
@@ -274,6 +298,7 @@ public class DDLRecordSetLocalServiceImpl
 			serviceContext, recordSet);
 	}
 
+	@Override
 	public DDLRecordSet updateRecordSet(
 			long groupId, long ddmStructureId, String recordSetKey,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -320,7 +345,12 @@ public class DDLRecordSetLocalServiceImpl
 				groupId, recordSetKey);
 
 			if (recordSet != null) {
-				throw new RecordSetDuplicateRecordSetKeyException();
+				RecordSetDuplicateRecordSetKeyException rsdrske =
+					new RecordSetDuplicateRecordSetKeyException();
+
+				rsdrske.setRecordSetKey(recordSet.getRecordSetKey());
+
+				throw rsdrske;
 			}
 		}
 

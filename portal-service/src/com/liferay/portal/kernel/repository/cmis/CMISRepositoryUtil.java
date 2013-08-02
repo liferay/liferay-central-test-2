@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -94,10 +94,8 @@ public class CMISRepositoryUtil {
 	private static MethodKey _checkRepository = new MethodKey(
 		_CLASS_NAME, "checkRepository", long.class, Map.class,
 		UnicodeProperties.class, String.class);
-
 	private static MethodKey _createSession = new MethodKey(
 		_CLASS_NAME, "createSession", Map.class);
-
 	private static MethodKey _getTypeSettingsValue = new MethodKey(
 		_CLASS_NAME, "getTypeSettingsValue", UnicodeProperties.class,
 		String.class);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -226,6 +228,10 @@ public class ResourceActionWrapper implements ResourceAction,
 		return new ResourceActionWrapper(_resourceAction.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ResourceAction toUnescapedModel() {
+		return new ResourceActionWrapper(_resourceAction.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _resourceAction.toString();
@@ -238,6 +244,26 @@ public class ResourceActionWrapper implements ResourceAction,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceAction.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceActionWrapper)) {
+			return false;
+		}
+
+		ResourceActionWrapper resourceActionWrapper = (ResourceActionWrapper)obj;
+
+		if (Validator.equals(_resourceAction,
+					resourceActionWrapper._resourceAction)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

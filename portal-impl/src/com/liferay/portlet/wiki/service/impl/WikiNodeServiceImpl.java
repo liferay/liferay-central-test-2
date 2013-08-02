@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import java.util.Map;
  */
 public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 
+	@Override
 	public WikiNode addNode(
 			String name, String description, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -45,6 +46,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getUserId(), name, description, serviceContext);
 	}
 
+	@Override
 	public void deleteNode(long nodeId)
 		throws PortalException, SystemException {
 
@@ -54,6 +56,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		wikiNodeLocalService.deleteNode(nodeId);
 	}
 
+	@Override
 	public WikiNode getNode(long nodeId)
 		throws PortalException, SystemException {
 
@@ -63,6 +66,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		return wikiNodeLocalService.getNode(nodeId);
 	}
 
+	@Override
 	public WikiNode getNode(long groupId, String name)
 		throws PortalException, SystemException {
 
@@ -72,6 +76,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		return wikiNodeLocalService.getNode(groupId, name);
 	}
 
+	@Override
 	public void importPages(
 			long nodeId, String importer, InputStream[] inputStreams,
 			Map<String, String[]> options)
@@ -84,6 +89,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 			getUserId(), nodeId, importer, inputStreams, options);
 	}
 
+	@Override
 	public void subscribeNode(long nodeId)
 		throws PortalException, SystemException {
 
@@ -93,6 +99,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		wikiNodeLocalService.subscribeNode(getUserId(), nodeId);
 	}
 
+	@Override
 	public void unsubscribeNode(long nodeId)
 		throws PortalException, SystemException {
 
@@ -102,6 +109,7 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		wikiNodeLocalService.unsubscribeNode(getUserId(), nodeId);
 	}
 
+	@Override
 	public WikiNode updateNode(
 			long nodeId, String name, String description,
 			ServiceContext serviceContext)

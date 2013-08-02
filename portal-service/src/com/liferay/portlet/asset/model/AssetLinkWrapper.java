@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -373,6 +374,10 @@ public class AssetLinkWrapper implements AssetLink, ModelWrapper<AssetLink> {
 		return new AssetLinkWrapper(_assetLink.toEscapedModel());
 	}
 
+	public com.liferay.portlet.asset.model.AssetLink toUnescapedModel() {
+		return new AssetLinkWrapper(_assetLink.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _assetLink.toString();
@@ -385,6 +390,25 @@ public class AssetLinkWrapper implements AssetLink, ModelWrapper<AssetLink> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetLink.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetLinkWrapper)) {
+			return false;
+		}
+
+		AssetLinkWrapper assetLinkWrapper = (AssetLinkWrapper)obj;
+
+		if (Validator.equals(_assetLink, assetLinkWrapper._assetLink)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

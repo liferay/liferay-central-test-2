@@ -59,7 +59,7 @@
 
 		<!-- Resource -->
 
-		<column name="resourcePrimKey" type="long" />
+		<column name="resourcePrimKey" type="long" filter-primary="true" />
 
 		<!-- Group instance -->
 
@@ -140,6 +140,16 @@
 			<finder-column name="nodeId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_N_H" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="nodeId" />
+			<finder-column name="head" />
+		</finder>
+		<finder name="G_N_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="nodeId" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="U_N_S" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="nodeId" />
@@ -170,7 +180,32 @@
 			<finder-column name="head" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="G_U_N_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
+			<finder-column name="nodeId" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_N_T_H" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="nodeId" />
+			<finder-column name="title" case-sensitive="false" />
+			<finder-column name="head" />
+		</finder>
+		<finder name="G_N_H_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="nodeId" />
+			<finder-column name="head" />
+			<finder-column name="status" />
+		</finder>
 		<finder name="N_H_P_S" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="head" />
+			<finder-column name="parentTitle" case-sensitive="false" />
+			<finder-column name="status" />
+		</finder>
+		<finder name="G_N_H_P_S" return-type="Collection">
+			<finder-column name="groupId" />
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
 			<finder-column name="parentTitle" case-sensitive="false" />

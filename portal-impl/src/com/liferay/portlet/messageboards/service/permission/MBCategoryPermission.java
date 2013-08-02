@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -107,62 +107,51 @@ public class MBCategoryPermission {
 
 		long categoryId = category.getCategoryId();
 
-		if (actionId.equals(ActionKeys.VIEW)) {
+		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+			long originalCategoryId = categoryId;
+
 			while (categoryId !=
-					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+						MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
 
 				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
 
-				categoryId = category.getParentCategoryId();
-
 				if (!permissionChecker.hasOwnerPermission(
 						category.getCompanyId(), MBCategory.class.getName(),
-						category.getCategoryId(), category.getUserId(),
-						actionId) &&
+						categoryId, category.getUserId(), ActionKeys.VIEW) &&
 					!permissionChecker.hasPermission(
 						category.getGroupId(), MBCategory.class.getName(),
-						category.getCategoryId(), actionId)) {
+						categoryId, ActionKeys.VIEW)) {
 
 					return false;
 				}
 
-				if (!PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-					break;
-				}
-			}
-
-			return true;
-		}
-		else {
-			while (categoryId !=
-					MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-
-				category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-
 				categoryId = category.getParentCategoryId();
-
-				if (permissionChecker.hasOwnerPermission(
-						category.getCompanyId(), MBCategory.class.getName(),
-						category.getCategoryId(), category.getUserId(),
-						actionId)) {
-
-					return true;
-				}
-
-				if (permissionChecker.hasPermission(
-						category.getGroupId(), MBCategory.class.getName(),
-						category.getCategoryId(), actionId)) {
-
-					return true;
-				}
-
-				if (actionId.equals(ActionKeys.VIEW)) {
-					break;
-				}
 			}
 
-			return false;
+			if (actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+
+			categoryId = originalCategoryId;
 		}
+
+		while (categoryId != MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
+			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+
+			if (permissionChecker.hasOwnerPermission(
+					category.getCompanyId(), MBCategory.class.getName(),
+					categoryId, category.getUserId(), actionId) ||
+				permissionChecker.hasPermission(
+					category.getGroupId(), MBCategory.class.getName(),
+					categoryId, actionId)) {
+
+				return true;
+			}
+
+			categoryId = category.getParentCategoryId();
+		}
+
+		return false;
 	}
 
 }

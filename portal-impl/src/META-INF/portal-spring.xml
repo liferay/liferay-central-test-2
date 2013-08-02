@@ -52,7 +52,6 @@
 	<bean id="com.liferay.portal.service.LayoutSetBranchLocalService" class="com.liferay.portal.service.impl.LayoutSetBranchLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.LayoutSetBranchService" class="com.liferay.portal.service.impl.LayoutSetBranchServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.LayoutSetBranchPersistence" class="com.liferay.portal.service.persistence.LayoutSetBranchPersistenceImpl" parent="basePersistence" />
-	<bean id="com.liferay.portal.service.persistence.LayoutSetBranchFinder" class="com.liferay.portal.service.persistence.LayoutSetBranchFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.LayoutSetPrototypeLocalService" class="com.liferay.portal.service.impl.LayoutSetPrototypeLocalServiceImpl" />
 	<bean id="com.liferay.portal.service.LayoutSetPrototypeService" class="com.liferay.portal.service.impl.LayoutSetPrototypeServiceImpl" />
 	<bean id="com.liferay.portal.service.persistence.LayoutSetPrototypePersistence" class="com.liferay.portal.service.persistence.LayoutSetPrototypePersistenceImpl" parent="basePersistence" />
@@ -242,6 +241,7 @@
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderLocalServiceImpl" />
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderServiceImpl" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService" class="com.liferay.portlet.calendar.service.impl.CalEventLocalServiceImpl" />
 	<bean id="com.liferay.portlet.calendar.service.CalEventService" class="com.liferay.portlet.calendar.service.impl.CalEventServiceImpl" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" parent="basePersistence" />

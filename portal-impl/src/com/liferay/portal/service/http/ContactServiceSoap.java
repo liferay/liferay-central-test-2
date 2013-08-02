@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,12 @@
  */
 
 package com.liferay.portal.service.http;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ContactServiceUtil;
+
+import java.rmi.RemoteException;
 
 /**
  * <p>
@@ -58,4 +64,19 @@ package com.liferay.portal.service.http;
  * @generated
  */
 public class ContactServiceSoap {
+	public static com.liferay.portal.model.ContactSoap getContact(
+		long contactId) throws RemoteException {
+		try {
+			com.liferay.portal.model.Contact returnValue = ContactServiceUtil.getContact(contactId);
+
+			return com.liferay.portal.model.ContactSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(ContactServiceSoap.class);
 }

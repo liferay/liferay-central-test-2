@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,13 +16,16 @@ package com.liferay.portal.dao.orm.jpa;
 
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactory;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 
 /**
  * @author Prashant Dighe
  * @author Brian Wing Shun Chan
  */
+@DoPrivileged
 public class PropertyFactoryImpl implements PropertyFactory {
 
+	@Override
 	public Property forName(String propertyName) {
 		throw new UnsupportedOperationException();
 	}

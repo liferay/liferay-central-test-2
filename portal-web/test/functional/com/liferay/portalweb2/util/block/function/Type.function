@@ -1,0 +1,49 @@
+<definition>
+	<command name="clickAtSendKeys">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="type" argument2="" />
+
+		<execute selenium="clickAt" />
+
+		<execute selenium="sendKeys" />
+	</command>
+
+	<command name="sendKeys">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="sendKeys" />
+	</command>
+
+	<command name="sendKeysApplicationSearch">
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-live-search/aui-live-search-min.js')]" />
+
+		<execute function="Type#sendKeys" />
+	</command>
+
+	<command name="type">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="type" />
+	</command>
+
+	<command name="typeFrame">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="typeFrame" />
+	</command>
+
+	<command name="typeFrameWaitForCKEditor">
+		<execute selenium="waitForVisible" />
+
+		<execute selenium="waitForVisible" argument1="//a[@class='cke_button_cut cke_disabled']" />
+
+		<execute selenium="typeFrame" />
+	</command>
+
+	<command name="typeWaitForNotValueNull">
+		<execute selenium="waitForNotValue" />
+
+		<execute function="Type#type" />
+	</command>
+</definition>

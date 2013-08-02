@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 public class CyrusUserPersistenceImpl
 	extends BasePersistenceImpl<Dummy> implements CyrusUserPersistence {
 
+	@Override
 	public CyrusUser findByPrimaryKey(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
@@ -50,6 +51,7 @@ public class CyrusUserPersistenceImpl
 		}
 	}
 
+	@Override
 	public void remove(long userId)
 		throws NoSuchCyrusUserException, SystemException {
 
@@ -76,6 +78,7 @@ public class CyrusUserPersistenceImpl
 		}
 	}
 
+	@Override
 	public void update(CyrusUser user) throws SystemException {
 		Session session = null;
 

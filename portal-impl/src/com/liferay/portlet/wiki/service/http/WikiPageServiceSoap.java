@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -183,6 +183,22 @@ public class WikiPageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getChildren(
+		long groupId, long nodeId, boolean head, java.lang.String parentTitle)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getChildren(groupId,
+					nodeId, head, parentTitle);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageSoap getDraftPage(
 		long nodeId, java.lang.String title) throws RemoteException {
 		try {
@@ -222,6 +238,55 @@ public class WikiPageServiceSoap {
 					max, type, version, displayStyle, feedURL, entryURL);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getNodePagesRSS(long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL,
+		java.lang.String attachmentURLPrefix) throws RemoteException {
+		try {
+			java.lang.String returnValue = WikiPageServiceUtil.getNodePagesRSS(nodeId,
+					max, type, version, displayStyle, feedURL, entryURL,
+					attachmentURLPrefix);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getOrphans(
+		long groupId, long nodeId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getOrphans(groupId,
+					nodeId);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
+		long groupId, long nodeId, java.lang.String title)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(groupId,
+					nodeId, title);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -277,6 +342,69 @@ public class WikiPageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getPages(
+		long groupId, long nodeId, boolean head, int status, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getPages(groupId,
+					nodeId, head, status, start, end, obc);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getPages(
+		long groupId, long userId, long nodeId, int status, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getPages(groupId,
+					userId, nodeId, status, start, end);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getPagesCount(long groupId, long nodeId, boolean head)
+		throws RemoteException {
+		try {
+			int returnValue = WikiPageServiceUtil.getPagesCount(groupId,
+					nodeId, head);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getPagesCount(long groupId, long userId, long nodeId,
+		int status) throws RemoteException {
+		try {
+			int returnValue = WikiPageServiceUtil.getPagesCount(groupId,
+					userId, nodeId, status);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getPagesRSS(long companyId, long nodeId,
 		java.lang.String title, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
@@ -285,6 +413,57 @@ public class WikiPageServiceSoap {
 			java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
 					nodeId, title, max, type, version, displayStyle, feedURL,
 					entryURL, LocaleUtil.fromLanguageId(locale));
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getPagesRSS(long companyId, long nodeId,
+		java.lang.String title, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL, java.lang.String attachmentURLPrefix,
+		String locale) throws RemoteException {
+		try {
+			java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
+					nodeId, title, max, type, version, displayStyle, feedURL,
+					entryURL, attachmentURLPrefix,
+					LocaleUtil.fromLanguageId(locale));
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getRecentChanges(
+		long groupId, long nodeId, int start, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getRecentChanges(groupId,
+					nodeId, start, end);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getRecentChangesCount(long groupId, long nodeId)
+		throws RemoteException {
+		try {
+			int returnValue = WikiPageServiceUtil.getRecentChangesCount(groupId,
+					nodeId);
 
 			return returnValue;
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,7 @@ import java.util.List;
 public class SocialActivitySettingLocalServiceImpl
 	extends SocialActivitySettingLocalServiceBaseImpl {
 
+	@Override
 	public SocialActivityDefinition getActivityDefinition(
 			long groupId, String className, int activityType)
 		throws SystemException {
@@ -70,6 +71,7 @@ public class SocialActivitySettingLocalServiceImpl
 		return activityDefinition;
 	}
 
+	@Override
 	public List<SocialActivityDefinition> getActivityDefinitions(
 			long groupId, String className)
 		throws SystemException {
@@ -93,12 +95,14 @@ public class SocialActivitySettingLocalServiceImpl
 		return activityDefinitions;
 	}
 
+	@Override
 	public List<SocialActivitySetting> getActivitySettings(long groupId)
 		throws SystemException {
 
 		return socialActivitySettingPersistence.findByG_A(groupId, 0);
 	}
 
+	@Override
 	public boolean isEnabled(long groupId, long classNameId)
 		throws SystemException {
 
@@ -114,6 +118,7 @@ public class SocialActivitySettingLocalServiceImpl
 		return GetterUtil.getBoolean(activitySetting.getValue());
 	}
 
+	@Override
 	public void updateActivitySetting(
 			long groupId, String className, boolean enabled)
 		throws PortalException, SystemException {
@@ -145,6 +150,7 @@ public class SocialActivitySettingLocalServiceImpl
 		socialActivitySettingPersistence.update(activitySetting, false);
 	}
 
+	@Override
 	public void updateActivitySetting(
 			long groupId, String className, int activityType,
 			SocialActivityCounterDefinition activityCounterDefinition)
@@ -202,6 +208,7 @@ public class SocialActivitySettingLocalServiceImpl
 		_activityDefinitions.remove(key);
 	}
 
+	@Override
 	public void updateActivitySettings(
 			long groupId, String className, int activityType,
 			List<SocialActivityCounterDefinition> activityCounterDefinitions)

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,8 +37,6 @@ int roleType = ParamUtil.getInteger(request, "roleType", RoleConstants.TYPE_SITE
 Organization organization = null;
 
 if (group.isOrganization()) {
-	roleType = RoleConstants.TYPE_ORGANIZATION;
-
 	organization = OrganizationLocalServiceUtil.getOrganization(group.getClassPK());
 }
 
@@ -55,7 +53,7 @@ if (organization != null) {
 	UsersAdminUtil.addPortletBreadcrumbEntries(organization, request, renderResponse);
 }
 else if (group != null) {
-	PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(locale), null);
+	PortalUtil.addPortletBreadcrumbEntry(request, groupName, null);
 }
 
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-user-roles"), portletURL.toString());
@@ -63,7 +61,7 @@ PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "ass
 if (role != null) {
 	portletURL.setParameter("roleId", String.valueOf(roleId));
 
-	PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.escape(role.getTitle(locale)), currentURL);
+	PortalUtil.addPortletBreadcrumbEntry(request, role.getTitle(locale), currentURL);
 }
 
 request.setAttribute("edit_user_roles.jsp-tabs1", tabs1);
@@ -84,8 +82,9 @@ request.setAttribute("edit_user_roles.jsp-portletURL", portletURL);
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
+	escapeXml="<%= false %>"
 	localizeTitle="<%= false %>"
-	title="<%= group.getDescriptiveName(locale) %>"
+	title="<%= HtmlUtil.escape(groupName) %>"
 />
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">

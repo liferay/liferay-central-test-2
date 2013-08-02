@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -271,6 +273,10 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		return new UserIdMapperWrapper(_userIdMapper.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.UserIdMapper toUnescapedModel() {
+		return new UserIdMapperWrapper(_userIdMapper.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _userIdMapper.toString();
@@ -283,6 +289,25 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userIdMapper.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserIdMapperWrapper)) {
+			return false;
+		}
+
+		UserIdMapperWrapper userIdMapperWrapper = (UserIdMapperWrapper)obj;
+
+		if (Validator.equals(_userIdMapper, userIdMapperWrapper._userIdMapper)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

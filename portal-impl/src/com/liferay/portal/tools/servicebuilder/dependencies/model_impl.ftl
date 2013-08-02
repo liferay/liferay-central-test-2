@@ -757,11 +757,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	@Override
 	public ${entity.name} toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelProxyInterfaces, new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (${entity.name})ProxyUtil.newProxyInstance(_classLoader, _escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ${entity.name} toUnescapedModel() {
+		return (${entity.name})this;
 	}
 
 	@Override
@@ -853,18 +857,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ${entity.name})) {
 			return false;
 		}
 
-		${entity.name} ${entity.varName} = null;
-
-		try {
-			${entity.varName} = (${entity.name})obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		${entity.name} ${entity.varName} = (${entity.name})obj;
 
 		${entity.PKClassName} primaryKey = ${entity.varName}.getPrimaryKey();
 
@@ -897,13 +898,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	@Override
 	public void resetOriginalValues() {
 		<#list entity.regularColList as column>
-			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
+			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name)) || ((column.type == "Blob") && column.lazy)>
 				<#if !cloneCastModelImpl??>
 					<#assign cloneCastModelImpl = true>
 
 					${entity.name}ModelImpl ${entity.varName}ModelImpl = this;
 				</#if>
+			</#if>
 
+			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
 				${entity.varName}ModelImpl._original${column.methodName} = ${entity.varName}ModelImpl._${column.name};
 
 				<#if column.isPrimitiveType()>
@@ -1004,7 +1007,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 	private static ClassLoader _classLoader = ${entity.name}.class.getClassLoader();
 
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {${entity.name}.class};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {${entity.name}.class};
 
 	<#list entity.regularColList as column>
 		<#if (column.type == "Blob") && column.lazy>
@@ -1034,6 +1037,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		private long _columnBitmask;
 	</#if>
 
-	private ${entity.name} _escapedModelProxy;
+	private ${entity.name} _escapedModel;
 
 }

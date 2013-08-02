@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -68,6 +68,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			UserConverterKeys.SCREEN_NAME, UserConverterKeys.SCREEN_NAME);
 	}
 
+	@Override
 	public String getGroupDNName(
 			long ldapServerId, UserGroup userGroup, Properties groupMappings)
 		throws Exception {
@@ -94,6 +95,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		return sb.toString();
 	}
 
+	@Override
 	public Modifications getLDAPContactModifications(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes,
 			Properties contactMappings, Properties contactExpandoMappings)
@@ -113,6 +115,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		return modifications;
 	}
 
+	@Override
 	public Attributes getLDAPGroupAttributes(
 			long ldapServerId, UserGroup userGroup, User user,
 			Properties groupMappings, Properties userMappings)
@@ -151,6 +154,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public Modifications getLDAPGroupModifications(
 			long ldapServerId, UserGroup userGroup, User user,
 			Properties groupMappings, Properties userMappings)
@@ -161,6 +165,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			LDAPOperation.ADD);
 	}
 
+	@Override
 	public Modifications getLDAPGroupModifications(
 			long ldapServerId, UserGroup userGroup, User user,
 			Properties groupMappings, Properties userMappings,
@@ -192,6 +197,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		return modifications;
 	}
 
+	@Override
 	public Attributes getLDAPUserAttributes(
 			long ldapServerId, User user, Properties userMappings)
 		throws SystemException {
@@ -243,16 +249,27 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		addAttributeMapping(
 			userMappings.getProperty(UserConverterKeys.PORTRAIT),
 			getUserPortrait(user), attributes);
+		addAttributeMapping(
+			userMappings.getProperty(UserConverterKeys.STATUS),
+			String.valueOf(user.getStatus()), attributes);
 
 		return attributes;
 	}
 
+	@Override
 	public Modifications getLDAPUserGroupModifications(
 			long ldapServerId, List<UserGroup> userGroups, User user,
 			Properties userMappings)
 		throws Exception {
 
 		Modifications modifications = Modifications.getInstance();
+
+		String groupMappingAttributeName = userMappings.getProperty(
+			UserConverterKeys.GROUP);
+
+		if (Validator.isNull(groupMappingAttributeName)) {
+			return modifications;
+		}
 
 		Properties groupMappings = LDAPSettingsUtil.getGroupMappings(
 			ldapServerId, user.getCompanyId());
@@ -270,13 +287,13 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 			}
 
 			modifications.addItem(
-				DirContext.ADD_ATTRIBUTE,
-				userMappings.getProperty(UserConverterKeys.GROUP), groupDN);
+				DirContext.ADD_ATTRIBUTE, groupMappingAttributeName, groupDN);
 		}
 
 		return modifications;
 	}
 
+	@Override
 	public Modifications getLDAPUserModifications(
 			User user, Map<String, Serializable> userExpandoAttributes,
 			Properties userMappings, Properties userExpandoMappings)
@@ -325,6 +342,7 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 		return modifications;
 	}
 
+	@Override
 	public String getUserDNName(
 			long ldapServerId, User user, Properties userMappings)
 		throws Exception {
@@ -413,27 +431,31 @@ public class DefaultPortalToLDAPConverter implements PortalToLDAPConverter {
 
 		String password = user.getPasswordUnencrypted();
 
+		if (Validator.isNull(password)) {
+			return password;
+		}
+
 		String algorithm = PrefsPropsUtil.getString(
 			user.getCompanyId(),
 			PropsKeys.LDAP_AUTH_PASSWORD_ENCRYPTION_ALGORITHM);
 
-		if (Validator.isNotNull(algorithm)) {
-			try {
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(StringPool.OPEN_CURLY_BRACE);
-				sb.append(algorithm);
-				sb.append(StringPool.CLOSE_CURLY_BRACE);
-				sb.append(PwdEncryptor.encrypt(algorithm, password, null));
-
-				password = sb.toString();
-			}
-			catch (PwdEncryptorException pee) {
-				throw new SystemException(pee);
-			}
+		if (Validator.isNull(algorithm)) {
+			return password;
 		}
 
-		return password;
+		try {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(StringPool.OPEN_CURLY_BRACE);
+			sb.append(algorithm);
+			sb.append(StringPool.CLOSE_CURLY_BRACE);
+			sb.append(PwdEncryptor.encrypt(algorithm, password, null));
+
+			return sb.toString();
+		}
+		catch (PwdEncryptorException pee) {
+			throw new SystemException(pee);
+		}
 	}
 
 	protected Modifications getModifications(

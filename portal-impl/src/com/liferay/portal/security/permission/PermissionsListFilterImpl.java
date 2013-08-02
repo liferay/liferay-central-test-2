@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,6 +23,7 @@ import java.util.List;
  */
 public class PermissionsListFilterImpl implements PermissionsListFilter {
 
+	@Override
 	public List<Permission> filterGroupPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
 		boolean portletActions, List<Permission> permissions) {
@@ -30,6 +31,7 @@ public class PermissionsListFilterImpl implements PermissionsListFilter {
 		return permissions;
 	}
 
+	@Override
 	public List<Permission> filterGuestPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
 		boolean portletActions, List<Permission> permissions) {
@@ -37,6 +39,7 @@ public class PermissionsListFilterImpl implements PermissionsListFilter {
 		return permissions;
 	}
 
+	@Override
 	public List<Permission> filterUserPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
 		boolean portletActions, List<Permission> permissions) {

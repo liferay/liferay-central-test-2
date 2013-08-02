@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portlet.layoutconfiguration.util;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.servlet.PipingPageContext;
 import com.liferay.portal.kernel.servlet.PipingServletResponse;
 import com.liferay.portal.kernel.servlet.PluginContextListener;
@@ -34,15 +35,12 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTemplateConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
 import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.velocity.CustomizationSettingsProcessor;
@@ -51,9 +49,8 @@ import com.liferay.portlet.layoutconfiguration.util.xml.ActionURLLogic;
 import com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic;
 import com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
-import com.liferay.taglib.util.VelocityTaglib;
-
-import java.lang.reflect.Constructor;
+import com.liferay.taglib.util.DummyVelocityTaglib;
+import com.liferay.taglib.util.VelocityTaglibImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -74,19 +71,37 @@ import javax.servlet.jsp.PageContext;
  * @author Raymond Augé
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class RuntimePortletImpl implements RuntimePortlet {
 
+	@Override
+	public StringBundler getProcessedTemplate(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext,
+			JspWriter jspWriter, String portletId, String velocityTemplateId,
+			String velocityTemplateContent)
+		throws Exception {
+
+		return doDispatch(
+			servletContext, request, response, pageContext, jspWriter,
+			portletId, velocityTemplateId, velocityTemplateContent, true);
+	}
+
+	@Override
 	public String processCustomizationSettings(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
 			String velocityTemplateId, String velocityTemplateContent)
 		throws Exception {
 
-		return doDispatch(
+		StringBundler sb = doDispatch(
 			servletContext, request, response, pageContext, null, null,
 			velocityTemplateId, velocityTemplateContent, false);
+
+		return sb.toString();
 	}
 
+	@Override
 	public String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, Portlet portlet, String queryString,
@@ -100,6 +115,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			columnCount, path, writeOutput);
 	}
 
+	@Override
 	public String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, RenderRequest renderRequest,
@@ -180,6 +196,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		}
 	}
 
+	@Override
 	public String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, RenderRequest renderRequest,
@@ -192,6 +209,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			portletId, queryString, null, null, null, writeOutput);
 	}
 
+	@Override
 	public String processPortlet(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, RenderRequest renderRequest,
@@ -206,6 +224,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			null, writeOutput);
 	}
 
+	@Override
 	public void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
@@ -218,6 +237,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			velocityTemplateId, velocityTemplateContent);
 	}
 
+	@Override
 	public void processTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
@@ -225,11 +245,14 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			String velocityTemplateContent)
 		throws Exception {
 
-		doDispatch(
+		StringBundler sb = doDispatch(
 			servletContext, request, response, pageContext, jspWriter,
 			portletId, velocityTemplateId, velocityTemplateContent, true);
+
+		sb.writeTo(pageContext.getOut());
 	}
 
+	@Override
 	public String processXML(
 			HttpServletRequest request, String content,
 			RuntimeLogic runtimeLogic)
@@ -280,7 +303,15 @@ public class RuntimePortletImpl implements RuntimePortlet {
 					x = close2 + runtimeLogic.getClose2Tag().length();
 				}
 
-				sb.append(runtimeLogic.processXML(content.substring(y, x)));
+				String runtimePortletTag = content.substring(y, x);
+
+				if ((renderPortlet != null) &&
+					runtimePortletTag.contains(renderPortlet.getPortletId())) {
+
+					return StringPool.BLANK;
+				}
+
+				sb.append(runtimeLogic.processXML(runtimePortletTag));
 
 				y = content.indexOf(runtimeLogic.getOpenTag(), x);
 			}
@@ -308,6 +339,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		}
 	}
 
+	@Override
 	public String processXML(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, RenderRequest renderRequest,
@@ -319,34 +351,14 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		RuntimeLogic actionURLLogic = new ActionURLLogic(renderResponse);
 		RuntimeLogic renderURLLogic = new RenderURLLogic(renderResponse);
 
-		content = RuntimePortletUtil.processXML(request, content, portletLogic);
-		content = RuntimePortletUtil.processXML(
-			request, content, actionURLLogic);
-		content = RuntimePortletUtil.processXML(
-			request, content, renderURLLogic);
+		content = processXML(request, content, portletLogic);
+		content = processXML(request, content, actionURLLogic);
+		content = processXML(request, content, renderURLLogic);
 
 		return content;
 	}
 
-	protected Object buildVelocityTaglib(
-			HttpServletRequest request, HttpServletResponse response,
-			PageContext pageContext)
-		throws Exception {
-
-		// We have to load this class from the plugin class loader (context
-		// class loader) or we will throw a ClassCastException
-
-		Class<?> clazz = Class.forName(VelocityTaglib.class.getName());
-
-		Constructor<?> constructor = clazz.getConstructor(
-			ServletContext.class, HttpServletRequest.class,
-			HttpServletResponse.class, PageContext.class);
-
-		return constructor.newInstance(
-			pageContext.getServletContext(), request, response, pageContext);
-	}
-
-	protected String doDispatch(
+	protected StringBundler doDispatch(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
 			JspWriter jspWriter, String portletId, String velocityTemplateId,
@@ -357,59 +369,51 @@ public class RuntimePortletImpl implements RuntimePortlet {
 			return null;
 		}
 
-		LayoutTemplate layoutTemplate = getLayoutTemplate(velocityTemplateId);
-
-		String pluginServletContextName = GetterUtil.getString(
-			layoutTemplate.getServletContextName());
-
-		ServletContext pluginServletContext = ServletContextPool.get(
-			pluginServletContextName);
-
 		ClassLoader pluginClassLoader = null;
 
-		if (pluginServletContext != null) {
-			pluginClassLoader =
-				(ClassLoader)pluginServletContext.getAttribute(
-					PluginContextListener.PLUGIN_CLASS_LOADER);
+		LayoutTemplate layoutTemplate = getLayoutTemplate(velocityTemplateId);
+
+		if (layoutTemplate != null) {
+			String pluginServletContextName = GetterUtil.getString(
+				layoutTemplate.getServletContextName());
+
+			ServletContext pluginServletContext = ServletContextPool.get(
+				pluginServletContextName);
+
+			if (pluginServletContext != null) {
+				pluginClassLoader =
+					(ClassLoader)pluginServletContext.getAttribute(
+						PluginContextListener.PLUGIN_CLASS_LOADER);
+			}
 		}
 
 		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
-
-		PACLPolicy contextClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(contextClassLoader);
-		PACLPolicy pluginClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(pluginClassLoader);
+			ClassLoaderUtil.getContextClassLoader();
 
 		try {
 			if ((pluginClassLoader != null) &&
 				(pluginClassLoader != contextClassLoader)) {
 
-				PACLClassLoaderUtil.setContextClassLoader(pluginClassLoader);
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					pluginClassLoaderPACLPolicy);
+				ClassLoaderUtil.setContextClassLoader(pluginClassLoader);
 			}
 
 			if (processTemplate) {
-				doProcessTemplate(
+				return doProcessTemplate(
 					servletContext, request, response, pageContext, jspWriter,
 					portletId, velocityTemplateId, velocityTemplateContent);
 			}
 			else {
-				return doProcessCustomizationSettings(
-					servletContext, request, response, pageContext,
-					velocityTemplateId, velocityTemplateContent);
+				return new StringBundler(
+					doProcessCustomizationSettings(
+						servletContext, request, response, pageContext,
+						velocityTemplateId, velocityTemplateContent));
 			}
-
-			return null;
 		}
 		finally {
 			if ((pluginClassLoader != null) &&
 				(pluginClassLoader != contextClassLoader)) {
 
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					contextClassLoaderPACLPolicy);
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
@@ -442,8 +446,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 
 		// liferay:include tag library
 
-		Object velocityTaglib = buildVelocityTaglib(
-			request, response, pageContext);
+		Object velocityTaglib = new DummyVelocityTaglib();
 
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
@@ -462,7 +465,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		return unsyncStringWriter.toString();
 	}
 
-	protected void doProcessTemplate(
+	protected StringBundler doProcessTemplate(
 			ServletContext servletContext, HttpServletRequest request,
 			HttpServletResponse response, PageContext pageContext,
 			JspWriter jspWriter, String portletId, String velocityTemplateId,
@@ -470,7 +473,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		throws Exception {
 
 		if (Validator.isNull(velocityTemplateContent)) {
-			return;
+			return null;
 		}
 
 		TemplateProcessor processor = new TemplateProcessor(
@@ -489,8 +492,10 @@ public class RuntimePortletImpl implements RuntimePortlet {
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
-		Object velocityTaglib = buildVelocityTaglib(
-			request, response, pageContext);
+		Object velocityTaglib = new VelocityTaglibImpl(
+			pageContext.getServletContext(), request,
+			new PipingServletResponse(response, unsyncStringWriter),
+			pageContext);
 
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
@@ -540,7 +545,7 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		StringBundler sb = StringUtil.replaceWithStringBundler(
 			output, "[$TEMPLATE_PORTLET_", "$]", contentsMap);
 
-		sb.writeTo(jspWriter);
+		return sb;
 	}
 
 	protected LayoutTemplate getLayoutTemplate(String velocityTemplateId) {
@@ -602,6 +607,6 @@ public class RuntimePortletImpl implements RuntimePortlet {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(RuntimePortletUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(RuntimePortletImpl.class);
 
 }

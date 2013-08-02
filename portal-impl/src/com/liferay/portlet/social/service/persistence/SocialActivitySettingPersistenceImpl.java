@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -252,16 +252,71 @@ public class SocialActivitySettingPersistenceImpl extends BasePersistenceImpl<So
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		SocialActivitySetting socialActivitySetting) {
+		if (socialActivitySetting.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(socialActivitySetting.getGroupId()),
+					Long.valueOf(socialActivitySetting.getClassNameId()),
+					Integer.valueOf(socialActivitySetting.getActivityType()),
+					
+					socialActivitySetting.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_A_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_N, args,
+				socialActivitySetting);
+		}
+		else {
+			SocialActivitySettingModelImpl socialActivitySettingModelImpl = (SocialActivitySettingModelImpl)socialActivitySetting;
+
+			if ((socialActivitySettingModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_C_A_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialActivitySetting.getGroupId()),
+						Long.valueOf(socialActivitySetting.getClassNameId()),
+						Integer.valueOf(socialActivitySetting.getActivityType()),
+						
+						socialActivitySetting.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C_A_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_N, args,
+					socialActivitySetting);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		SocialActivitySetting socialActivitySetting) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_N,
-			new Object[] {
+		SocialActivitySettingModelImpl socialActivitySettingModelImpl = (SocialActivitySettingModelImpl)socialActivitySetting;
+
+		Object[] args = new Object[] {
 				Long.valueOf(socialActivitySetting.getGroupId()),
 				Long.valueOf(socialActivitySetting.getClassNameId()),
 				Integer.valueOf(socialActivitySetting.getActivityType()),
 				
-			socialActivitySetting.getName()
-			});
+				socialActivitySetting.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_A_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_N, args);
+
+		if ((socialActivitySettingModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_C_A_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(socialActivitySettingModelImpl.getOriginalGroupId()),
+					Long.valueOf(socialActivitySettingModelImpl.getOriginalClassNameId()),
+					Integer.valueOf(socialActivitySettingModelImpl.getOriginalActivityType()),
+					
+					socialActivitySettingModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_A_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_N, args);
+		}
 	}
 
 	/**
@@ -439,41 +494,8 @@ public class SocialActivitySettingPersistenceImpl extends BasePersistenceImpl<So
 			SocialActivitySettingImpl.class,
 			socialActivitySetting.getPrimaryKey(), socialActivitySetting);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_N,
-				new Object[] {
-					Long.valueOf(socialActivitySetting.getGroupId()),
-					Long.valueOf(socialActivitySetting.getClassNameId()),
-					Integer.valueOf(socialActivitySetting.getActivityType()),
-					
-				socialActivitySetting.getName()
-				}, socialActivitySetting);
-		}
-		else {
-			if ((socialActivitySettingModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_C_A_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(socialActivitySettingModelImpl.getOriginalGroupId()),
-						Long.valueOf(socialActivitySettingModelImpl.getOriginalClassNameId()),
-						Integer.valueOf(socialActivitySettingModelImpl.getOriginalActivityType()),
-						
-						socialActivitySettingModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C_A_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C_A_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C_A_N,
-					new Object[] {
-						Long.valueOf(socialActivitySetting.getGroupId()),
-						Long.valueOf(socialActivitySetting.getClassNameId()),
-						Integer.valueOf(socialActivitySetting.getActivityType()),
-						
-					socialActivitySetting.getName()
-					}, socialActivitySetting);
-			}
-		}
+		clearUniqueFindersCache(socialActivitySetting);
+		cacheUniqueFindersCache(socialActivitySetting);
 
 		return socialActivitySetting;
 	}
@@ -2060,8 +2082,10 @@ public class SocialActivitySettingPersistenceImpl extends BasePersistenceImpl<So
 				List<ModelListener<SocialActivitySetting>> listenersList = new ArrayList<ModelListener<SocialActivitySetting>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<SocialActivitySetting>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,6 +45,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		_event = event;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _event.getEventId();
 	}
@@ -59,14 +60,17 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getGroupId() {
 		return _event.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		return HtmlUtil.extractText(_event.getDescription());
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _event.getTitle();
 	}
@@ -96,10 +100,9 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
 			PortletKeys.CALENDAR, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(windowState);
-
 		portletURL.setParameter("struts_action", "/calendar/view_event");
 		portletURL.setParameter("eventId", String.valueOf(_event.getEventId()));
+		portletURL.setWindowState(windowState);
 
 		return portletURL;
 	}
@@ -115,14 +118,17 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 			"eventId", _event.getEventId());
 	}
 
+	@Override
 	public long getUserId() {
 		return _event.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _event.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _event.getUuid();
 	}
@@ -144,6 +150,7 @@ public class CalEventAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

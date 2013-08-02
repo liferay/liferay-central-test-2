@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -348,10 +348,54 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(CalEvent calEvent) {
+		if (calEvent.isNew()) {
+			Object[] args = new Object[] {
+					calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				calEvent);
+		}
+		else {
+			CalEventModelImpl calEventModelImpl = (CalEventModelImpl)calEvent;
+
+			if ((calEventModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					calEvent);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(CalEvent calEvent) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { calEvent.getUuid(), Long.valueOf(
-					calEvent.getGroupId()) });
+		CalEventModelImpl calEventModelImpl = (CalEventModelImpl)calEvent;
+
+		Object[] args = new Object[] {
+				calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((calEventModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					calEventModelImpl.getOriginalUuid(),
+					Long.valueOf(calEventModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -646,30 +690,8 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 		EntityCacheUtil.putResult(CalEventModelImpl.ENTITY_CACHE_ENABLED,
 			CalEventImpl.class, calEvent.getPrimaryKey(), calEvent);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
-				}, calEvent);
-		}
-		else {
-			if ((calEventModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						calEventModelImpl.getOriginalUuid(),
-						Long.valueOf(calEventModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						calEvent.getUuid(), Long.valueOf(calEvent.getGroupId())
-					}, calEvent);
-			}
-		}
+		clearUniqueFindersCache(calEvent);
+		cacheUniqueFindersCache(calEvent);
 
 		return calEvent;
 	}
@@ -7305,8 +7327,10 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				List<ModelListener<CalEvent>> listenersList = new ArrayList<ModelListener<CalEvent>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<CalEvent>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

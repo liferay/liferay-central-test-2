@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,6 +42,8 @@ else {
 }
 
 String keywords = ParamUtil.getString(request, "keywords");
+
+String[] mediaGalleryMimeTypes = DLUtil.getMediaGalleryMimeTypes(preferences, renderRequest);
 
 boolean useAssetEntryQuery = false;
 %>
@@ -88,10 +90,6 @@ boolean useAssetEntryQuery = false;
 
 		Hits hits = indexer.search(searchContext);
 
-		int total = hits.getLength();
-
-		searchContainer.setTotal(total);
-
 		List results = new ArrayList(hits.getDocs().length);
 
 		for (int i = 0; i < hits.getDocs().length; i++) {
@@ -102,7 +100,9 @@ boolean useAssetEntryQuery = false;
 			try {
 				FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
 
-				results.add(fileEntry);
+				if (ArrayUtil.contains(mediaGalleryMimeTypes, fileEntry.getMimeType())) {
+					results.add(fileEntry);
+				}
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -110,6 +110,10 @@ boolean useAssetEntryQuery = false;
 				}
 			}
 		}
+
+		int total = results.size();
+
+		searchContainer.setTotal(total);
 	%>
 
 	<div id="<portlet:namespace />imageGalleryAssetInfo">
@@ -120,10 +124,6 @@ boolean useAssetEntryQuery = false;
 			</span>
 
 		<br /><br />
-
-		<%
-			String[] mediaGalleryMimeTypes = null;
-		%>
 
 		<%@ include file="/html/portlet/image_gallery_display/view_images.jspf" %>
 	</div>

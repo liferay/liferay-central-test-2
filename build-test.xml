@@ -9,18 +9,8 @@
 	<property file="${project.dir}/test.${env.HOSTNAME}.properties" />
 	<property file="${project.dir}/test.properties" />
 
-	<propertycopy name="db.device.name" from="db.${db.type}.device.name" silent="true" />
-	<propertycopy name="db.driver" from="db.${db.type}.driver" silent="true" />
-	<propertycopy name="db.host" from="db.${db.type}.host" silent="true" />
-	<propertycopy name="db.password" from="db.${db.type}.password" silent="true" />
-	<propertycopy name="db.schema" from="db.${db.type}.schema" silent="true" />
-	<propertycopy name="db.url" from="db.${db.type}.url" silent="true" />
-	<propertycopy name="db.username" from="db.${db.type}.username" silent="true" />
-
 	<property name="plink.executable" location="${project.dir}/tools/putty/plink.exe" />
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
-
-	<property name="selenium.nanny.executable" location="${project.dir}/tools/selenium/selenium_nanny.exe" />
 
 	<trycatch>
 		<try>
@@ -44,21 +34,137 @@
 		<echo file="portal-web/test-ant-scripts/${ant.script.file.name}" append="true">${template.content}</echo>
 	</target>
 
+	<target name="build-sql-file">
+		<if>
+			<not>
+				<isset property="sql.legacy.zip" />
+			</not>
+			<then>
+				<fail>Please set "sql.legacy.zip" in test.properties to point to the legacy SQL ZIP file.</fail>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<and>
+					<available file="sql/legacy" />
+					<uptodate
+						srcfile="${sql.legacy.zip}"
+						targetfile="sql/legacy"
+					/>
+				</and>
+			</not>
+			<then>
+				<delete dir="sql/legacy" failonerror="false" />
+
+				<unzip src="${sql.legacy.zip}" dest="sql" />
+
+				<touch>
+					<fileset dir="sql/legacy" />
+				</touch>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<equals arg1="${database}" arg2="hsql" />
+			</not>
+			<then>
+				<if>
+					<or>
+						<not>
+							<isset property="sql.dir" />
+						</not>
+						<not>
+							<isset property="sql.file" />
+						</not>
+					</or>
+					<then>
+						<if>
+							<isset property="test.database.minimal" />
+							<then>
+								<property name="sql.dir" value="sql\create-minimal\" />
+								<property name="sql.file" value="create-minimal-${database.family}.sql" />
+							</then>
+							<else>
+								<property name="sql.dir" value="sql\create\" />
+								<property name="sql.file" value="create-${database.family}.sql" />
+							</else>
+						</if>
+					</then>
+				</if>
+
+				<copy file="${sql.dir}${sql.file}" tofile="create.sql" />
+
+				<if>
+					<not>
+						<equals arg1="${database.sql-replacement.drop-schema.token}" arg2="" />
+					</not>
+					<then>
+						<replace file="create.sql">
+							<replacefilter token="${database.sql-replacement.drop-schema.token}" value="${database.sql-replacement.drop-schema.value}" />
+						</replace>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<equals arg1="${database.sql-replacement.create-schema.token}" arg2="" />
+					</not>
+					<then>
+						<replace file="create.sql">
+							<replacefilter token="${database.sql-replacement.create-schema.token}" value="${database.sql-replacement.create-schema.value}" />
+						</replace>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<equals arg1="${database.sql-replacement.use-schema.token}" arg2="" />
+					</not>
+					<then>
+						<replace file="create.sql">
+							<replacefilter token="${database.sql-replacement.use-schema.token}" value="${database.sql-replacement.use-schema.value}" />
+						</replace>
+					</then>
+				</if>
+
+				<if>
+					<not>
+						<equals arg1="${database.sql-replacement.create-schema-secondary.token}" arg2="" />
+					</not>
+					<then>
+						<replace file="create.sql">
+							<replacefilter token="${database.sql-replacement.create-schema-secondary.token}" value="${database.sql-replacement.create-schema-secondary.value}" />
+						</replace>
+					</then>
+				</if>
+			</then>
+		</if>
+	</target>
+
 	<target name="build-test-ant-script">
 		<if>
-			<isset property="test.ant.script.sevencogs" />
+			<isset property="test.ant.script.kaleo" />
 			<then>
-				<property name="test.ant.script.plugin.hooks" value="audit-hook,default-site-templates-hook,default-web-content-hook,sevencogs-hook" />
-				<property name="test.ant.script.plugin.layouttpls" value="1-2-1-columns-layouttpl,1-3-1-columns-layouttpl,1-3-2-columns-layouttpl,2-1-2-columns-layouttpl,3-2-3-columns-layouttpl" />
-				<property name="test.ant.script.plugin.portlets" value="audit-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,netvibes-widget-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
-				<property name="test.ant.script.plugin.themes" value="sevencogs-theme" />
-				<property name="test.ant.script.plugin.webs" value="drools-web,jasperreports-web,kaleo-web" />
+				<property name="test.ant.script.plugin.hooks" value="kaleo-upgrade-hook" />
+				<property name="test.ant.script.plugin.webs" value="kaleo-web" />
 			</then>
+			<elseif>
+				<isset property="test.ant.script.sevencogs" />
+				<then>
+					<property name="test.ant.script.plugin.hooks" value="audit-hook,default-site-templates-hook,default-web-content-hook,sevencogs-hook" />
+					<property name="test.ant.script.plugin.layouttpls" value="1-2-1-columns-layouttpl,1-3-1-columns-layouttpl,1-3-2-columns-layouttpl,2-1-2-columns-layouttpl,3-2-3-columns-layouttpl" />
+					<property name="test.ant.script.plugin.portlets" value="audit-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-maps-portlet,ip-geocoder-portlet,knowledge-base-portlet,mail-portlet,netvibes-widget-portlet,opensocial-portlet,social-coding-portlet,social-networking-portlet,twitter-portlet,weather-portlet,web-form-portlet,wsrp-portlet" />
+					<property name="test.ant.script.plugin.themes" value="sevencogs-theme" />
+					<property name="test.ant.script.plugin.webs" value="drools-web,jasperreports-web,kaleo-web" />
+				</then>
+			</elseif>
 			<elseif>
 				<isset property="test.ant.script.social.office" />
 				<then>
-					<property name="test.ant.script.plugin.hooks" value="so-hook" />
-					<property name="test.ant.script.plugin.portlets" value="chat-portlet,contacts-portlet,events-display-portlet,microblogs-portlet,private-messaging-portlet,so-portlet,tasks-portlet,weather-portlet,wysiwyg-portlet" />
+					<property name="test.ant.script.plugin.hooks" value="deploy-listener-hook,portal-compat-hook,so-hook" />
+					<property name="test.ant.script.plugin.portlets" value="chat-portlet,contacts-portlet,events-display-portlet,microblogs-portlet,private-messaging-portlet,so-configurations-portlet,so-portlet,tasks-portlet,weather-portlet,wysiwyg-portlet" />
 					<property name="test.ant.script.plugin.themes" value="so-theme" />
 				</then>
 			</elseif>
@@ -95,12 +201,50 @@
 		</if>
 
 		<if>
-			<isset property="test.ant.script.evaluate.logs" />
+			<equals arg1="${test.ant.script.evaluate.logs}" arg2="false" />
 			<then>
-				<property name="test.ant.script.file.evaluate.logs" value="&lt;property name=&quot;test.evaluate.logs&quot; value=&quot;true&quot; /&gt;" />
+				<property name="test.ant.script.file.evaluate.logs" value=" " />
 			</then>
 			<else>
-				<property name="test.ant.script.file.evaluate.logs" value=" " />
+				<property name="test.ant.script.file.evaluate.logs" value="&lt;property name=&quot;test.evaluate.logs&quot; value=&quot;true&quot; /&gt;" />
+			</else>
+		</if>
+
+		<if>
+			<isset property="test.ant.script.legacy.plugins" />
+			<then>
+				<var name="first" value="true" />
+
+				<for list="${test.ant.script.legacy.plugins}" param="test.ant.script.legacy.plugin">
+					<sequential>
+						<if>
+							<equals arg1="${first}" arg2="true" />
+							<then>
+								<var name="first" value="false" />
+
+								<var name="legacy.plugin.list" value="@{test.ant.script.legacy.plugin}**.war" />
+							</then>
+							<else>
+								<var name="legacy.plugin.list" value="${legacy.plugin.list},@{test.ant.script.legacy.plugin}**.war" />
+							</else>
+						</if>
+					</sequential>
+				</for>
+
+				<property name="test.ant.script.file.legacy.plugins" value="&lt;property name=&quot;plugins.version.includes&quot; value=&quot;${legacy.plugin.list}&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.legacy.plugins" value=" " />
+			</else>
+		</if>
+
+		<if>
+			<isset property="test.ant.script.legacy.version" />
+			<then>
+				<property name="test.ant.script.file.legacy.version" value= "&lt;property name=&quot;lp.version&quot; value=&quot;${test.ant.script.legacy.version}&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.legacy.version" value= " " />
 			</else>
 		</if>
 
@@ -175,6 +319,36 @@
 		</if>
 
 		<if>
+			<equals arg1="${test.ant.script.selenium.implementation}" arg2="webdriver" />
+			<then>
+				<property name="test.ant.script.file.selenium.implementation" value="&lt;property name=&quot;test.selenium.implementation&quot; value=&quot;webdriver&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.selenium.implementation" value="&lt;property name=&quot;test.selenium.implementation&quot; value=&quot;selenium&quot; /&gt;" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${test.ant.script.selenium.logger.enabled}" arg2="true" />
+			<then>
+				<property name="test.ant.script.file.selenium.logger.enabled" value="&lt;property name=&quot;test.selenium.logger.enabled&quot; value=&quot;true&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.selenium.logger.enabled" value=" " />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${test.ant.script.setup.wizard.enabled}" arg2="true" />
+			<then>
+				<property name="test.ant.script.setup.wizard.enabled" value="true" />
+			</then>
+			<else>
+				<property name="test.ant.script.setup.wizard.enabled" value="false" />
+			</else>
+		</if>
+
+		<if>
 			<not>
 				<isset property="test.ant.script.template" />
 			</not>
@@ -191,12 +365,32 @@
 
 	<target name="build-test-ant-script-db-upgrade">
 		<if>
-			<isset property="test.ant.script.evaluate.logs" />
+			<equals arg1="${test.ant.script.evaluate.logs}" arg2="false" />
 			<then>
-				<property name="test.ant.script.file.evaluate.logs" value="&lt;param name=&quot;test.evaluate.logs&quot; value=&quot;true&quot; /&gt;" />
+				<property name="test.ant.script.file.evaluate.logs" value=" " />
 			</then>
 			<else>
-				<property name="test.ant.script.file.evaluate.logs" value=" " />
+				<property name="test.ant.script.file.evaluate.logs" value="&lt;param name=&quot;test.evaluate.logs&quot; value=&quot;true&quot; /&gt;" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${test.ant.script.selenium.implementation}" arg2="webdriver" />
+			<then>
+				<property name="test.ant.script.file.selenium.implementation" value="&lt;param name=&quot;test.selenium.implementation&quot; value=&quot;webdriver&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.selenium.implementation" value="&lt;param name=&quot;test.selenium.implementation&quot; value=&quot;selenium&quot; /&gt;" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${test.ant.script.selenium.logger.enabled}" arg2="true" />
+			<then>
+				<property name="test.ant.script.file.selenium.logger.enabled" value="&lt;param name=&quot;test.selenium.logger.enabled&quot; value=&quot;true&quot; /&gt;" />
+			</then>
+			<else>
+				<property name="test.ant.script.file.selenium.logger.enabled" value=" " />
 			</else>
 		</if>
 
@@ -255,7 +449,7 @@
 	</target>
 
 	<target name="build-test-ant-scripts">
-		<property name="build-test-ant-scripts.version" value="4" />
+		<property name="build-test-ant-scripts.version" value="9" />
 
 		<if>
 			<available file="portal-web/test-ant-scripts/version" />
@@ -283,6 +477,48 @@
 		<mkdir dir="portal-web/test-ant-scripts" />
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-asset-publisher" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetAssetPublisherTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-blogs" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetBlogsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-bookmarks" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetBookmarksTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-documents-and-media" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetDocumentsAndMediaTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-message-boards" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetMessageBoardsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-web-content" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetWebContentTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="asset-wiki" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="AssetWikiTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="cluster-smoke" />
 			<param name="test.ant.script.suite.1" value="Cluster1TestSuite" />
 			<param name="test.ant.script.suite.2" value="Cluster2TestSuite" />
@@ -292,96 +528,121 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-admin" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelAdminTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-blogs" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-bookmarks" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelBookmarksTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-calendar" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelCalendarTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-categories" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelCategoriesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-dynamic-data-lists" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelDynamicDataListsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-message-boards" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelMessageBoardsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-organizations" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelOrganizationsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-page-templates" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelPageTemplatesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-password-policies" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelPasswordPoliciesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-polls" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelPollsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-roles" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelRolesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="control-panel-server-administration" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="ControlPanelServerAdministrationTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-settings" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelSettingsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-sites" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelSitesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-social-activity" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelSocialActivityTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-user-groups" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelUserGroupsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-users" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelUsersTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-virtual-hosting" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelVirtualHostingTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="control-panel-web-content" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="ControlPanelWebContentTestSuite" />
 		</antcall>
 
@@ -428,49 +689,49 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-asset-publisher" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoAssetPublisherTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-my-submissions" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoMySubmissionsTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-my-workflow-tasks" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoMyWorkflowTasksTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-web-content" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoWebContentTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-web-content-display" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoWebContentDisplayTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-workflow" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoWorkflowTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="db-sharding-kaleo-workflow-configuration" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="KaleoWorkflowConfigurationTestSuite" />
 			<param name="test.ant.script.template" value="ant-script-db-sharding.xml" />
 		</antcall>
@@ -555,178 +816,228 @@
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-address" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Address" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-announcements" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Announcements" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-announcements-delivery" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="AnnouncementsDelivery" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-bookmarks" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Bookmarks" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-calendar" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Calendar" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-community" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Community" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-document-library" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="DocumentLibrary" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-expando" />
 			<param name="test.ant.script.plugin.portlets" value="web-form-portlet" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Expando" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-groups" />
 			<param name="test.ant.script.suite" value="Groups" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-message-boards" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="MessageBoards" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-organizations" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Organizations" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-permissions-algorithm" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsAlgorithm" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade-permissions-algorithm.xml" />
 			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.command" value="db-upgrade-phone" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="Phone" />
+			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.command" value="db-upgrade-polls" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="Polls" />
+			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-portlet-permissions" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortletPermissions" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-shopping" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Shopping" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-smoke" />
-			<param name="test.ant.script.evaluate.logs" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Smoke" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-social" />
 			<param name="test.ant.script.plugin.portlets" value="social-networking-portlet" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Social" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-staging-community" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingCommunity" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-staging-organization" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingOrganization" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-tags" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Tags" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-web-content" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="WebContent" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
+		</antcall>
+
+		<antcall target="build-test-ant-script-db-upgrade">
+			<param name="test.ant.script.command" value="db-upgrade-website" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="Website" />
+			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script-db-upgrade">
 			<param name="test.ant.script.command" value="db-upgrade-wiki" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="Wiki" />
 			<param name="test.ant.script.template" value="ant-script-db-upgrade.xml" />
-			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.0" />
+			<param name="test.ant.script.versions" value="5.2.3,5.2.5,5.2.7,5.2.8,5.2.9,6.0.6,6.0.10,6.0.11,6.0.12,6.1.1,6.1.10,6.1.20" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="demo-dynamic-data" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.plugin.portlets" value="kaleo-designer-portlet,kaleo-forms-portlet" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="DemoDynamicDataTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="demo-fundamentals" />
-			<param name="test.ant.script.plugin.portlets" value="knowledge-base-portlet,test-misc-portlet,wsrp-portlet" />
-			<param name="test.ant.script.plugin.portlets.properties" value="admin.kb.article.sections=Application Server,Authentication,Content Management,Database,Development,Plugins,Portlets,Security,Server Configuration,User Interface$${line.separator}admin.kb.article.default.sections=" />
+			<param name="test.ant.script.plugin.portlets" value="test-misc-portlet,wsrp-portlet" />
 			<param name="test.ant.script.properties" value="mime.types.content.disposition.inline=pdf" />
 			<param name="test.ant.script.suite" value="DemoFundamentalsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="demo-knowledge-base" />
+			<param name="test.ant.script.plugin.portlets" value="knowledge-base-portlet" />
+			<param name="test.ant.script.plugin.portlets.properties" value="admin.kb.article.sections=Application Server,Authentication,Content Management,Database,Development,Plugins,Portlets,Security,Server Configuration,User Interface$${line.separator}admin.kb.article.default.sections=" />
+			<param name="test.ant.script.suite" value="DemoKnowledgeBaseTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="demo-media" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="DemoMediaTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="demo-site-management" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
 			<param name="test.ant.script.suite" value="DemoSiteManagementTestSuite" />
 		</antcall>
 
@@ -736,68 +1047,246 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-apis-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentAPIsAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-configuration-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentConfigurationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-frameworks-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentFrameworksAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-sample-portlet-plugins-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentSamplePortletPluginsAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-theme-development-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentThemeDevelopmentAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="development-tools-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="DevelopmentToolsAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-administration-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserAdministrationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-business-productivity-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserBusinessProductivityAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-collaboration-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserCollaborationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-document-management-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserDocumentManagementAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-legacy-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserLegacyAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-personalization-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserPersonalizationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-search-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserSearchAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-so-administration-acceptance" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="EndUserSOAdministrationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-so-dashboard-acceptance" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="EndUserSODashboardAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-so-profile-acceptance" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="EndUserSOProfileAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-so-site-acceptance" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="EndUserSOSiteAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-so-user-bar-acceptance" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="EndUserSOUserBarAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-social-networking-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserSocialNetworkingAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-user-interface-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.plugin.themes" value="welcome-theme" />
+			<param name="test.ant.script.plugin.webs" value="resources-importer-web" />
+			<param name="test.ant.script.suite" value="EndUserUserinterfaceAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-util-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserUtilAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-wcm-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserWCMAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-web-forms-and-data-lists-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.plugin.portlets" value="web-form-portlet" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserWebFormsAndDataListsAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-workflow-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="EndUserWorkflowAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-asset-publisher" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoAssetPublisherTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-blogs" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-message-boards" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoMessageBoardsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-my-submissions" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoMySubmissionsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-my-workflow-tasks" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoMyWorkflowTasksTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-page-comments" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoPageCommentsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-web-content" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoWebContentTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-web-content-display" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoWebContentDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-wiki" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoWikiTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-workflow" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoWorkflowTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="kaleo-workflow-configuration" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="KaleoWorkflowConfigurationTestSuite" />
 		</antcall>
 
@@ -871,33 +1360,134 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="legacy-plugins-chat" />
+			<param name="test.ant.script.legacy.plugins" value="chat-portlet" />
+			<param name="test.ant.script.legacy.version" value="6.1.20" />
+			<param name="test.ant.script.suite" value="PluginsChatTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-legacy-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="legacy-plugins-kaleo" />
+			<param name="test.ant.script.legacy.plugins" value="kaleo-upgrade-hook,kaleo-web" />
+			<param name="test.ant.script.legacy.version" value="6.1.20" />
+			<param name="test.ant.script.suite" value="KaleoWebContentTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-legacy-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="legacy-plugins-layouttpl" />
+			<param name="test.ant.script.legacy.plugins" value="1-2-1-columns-layouttpl" />
+			<param name="test.ant.script.legacy.version" value="6.1.20" />
+			<param name="test.ant.script.suite" value="SmokeTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-legacy-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="legacy-plugins-theme" />
+			<param name="test.ant.script.legacy.plugins" value="zoe-brochure-theme" />
+			<param name="test.ant.script.legacy.version" value="6.1.20" />
+			<param name="test.ant.script.suite" value="SmokeTestSuite" />
+			<param name="test.ant.script.template" value="ant-script-legacy-plugins.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-announcements" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsAnnouncementsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-blogs" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-document-library" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsDocumentLibraryTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-image-gallery" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsImageGalleryTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="permissions-media-gallery" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PermissionsMediaGalleryTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-message-boards" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsMessageBoardsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="permissions-organizations" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PermissionsOrganizationsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="permissions-web-content" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PermissionsWebContentTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-application-standard-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformApplicationStandardAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-authentication-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformAuthenticationAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-deployment-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.setup.wizard.enabled" value="true" />
+			<param name="test.ant.script.suite" value="PlatformDeploymentAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-infrastructure-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformInfrastructureAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-operations-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformOperationsAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-security-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.plugin.hooks" value="antisamy-hook" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformSecurityAcceptanceTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="platform-upgrade-acceptance" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PlatformUpgradesAcceptanceTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1333,7 +1923,7 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="plugins-test-pacl" />
-			<param name="test.ant.script.plugin.portlets" value="chat-portlet,flash-portlet,test-pacl-portlet" />
+			<param name="test.ant.script.plugin.portlets" value="chat-portlet,flash-portlet,sample-service-builder-portlet,test-pacl-portlet" />
 			<param name="test.ant.script.suite" value="PluginsTestPACLTestSuite" />
 		</antcall>
 
@@ -1412,116 +2002,127 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-activities" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebActivitiesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-add-application" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebAddApplicationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-amazon-rankings" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebAmazonRankingsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-announcements" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebAnnouncementsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-asset-publisher" />
-			<param name="test.ant.script.suite" value="PortalWebAssetPublisherTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-blogs" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-blogs-aggregator" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebBlogsAggregatorTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-bookmarks" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebBookmarksTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-breadcrumb" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebBreadcrumbTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-calendar" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebCalendarTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-currency-converter" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebCurrencyConverterTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-dictionary" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebDictionaryTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-directory" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebDirectoryTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-documents-and-media" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebDocumentsAndMediaTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-documents-and-media-display" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebDocumentsAndMediaDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-dynamic-data-list-display" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebDynamicDataListDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-hello-velocity" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebHelloVelocityTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-hello-world" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebHelloWorldTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-iframe" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebIFrameTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="portal-web-image-gallery" />
-			<param name="test.ant.script.suite" value="PortalWebImageGalleryTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-invitation" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebInvitationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-language" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebLanguageTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-loan-calculator" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebLoanCalculatorTestSuite" />
 		</antcall>
 
@@ -1531,87 +2132,110 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="portal-web-media-gallery" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="PortalWebMediaGalleryTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-message-boards" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebMessageBoardsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-my-account" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebMyAccountTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-navigation" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebNavigationTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-nested-portlets" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebNestedPortletsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-network-utilities" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebNetworkUtilitiesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-page-comments" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebPageCommentsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-page-ratings" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebPageRatingsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-password-generator" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebPasswordGeneratorTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-polls-display" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebPollsDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-quick-note" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebQuickNoteTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-recent-bloggers" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebRecentBloggersTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-recent-documents" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebRecentDocumentsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-rss" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebRSSTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-security-json" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebSecurityJsonTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-sign-in" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebSignInTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-search" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebSearchTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-shopping" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebShoppingTestSuite" />
 		</antcall>
 
@@ -1622,61 +2246,73 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-software-catalog" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebSoftwareCatalogTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-translator" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebTranslatorTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-unit-converter" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebUnitConverterTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-user-statistics" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebUserStatisticsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-web-content-display" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWebContentDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-web-content-list" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWebContentListTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-web-content-search" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWebContentSearchTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-web-proxy" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWebProxyTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-wiki" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWikiTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-wiki-display" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWikiDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-words" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebWordsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="portal-web-xsl-content" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="PortalWebXSLContentTestSuite" />
 		</antcall>
 
@@ -1807,14 +2443,13 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="sevencogs-smoke" />
-			<param name="test.ant.script.evaluate.logs" value="true" />
 			<param name="test.ant.script.sevencogs" value="true" />
 			<param name="test.ant.script.suite" value="SevencogsSmokeTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="smoke-test" />
-			<param name="test.ant.script.evaluate.logs" value="true" />
+			<param name="test.ant.script.database.minimal" value="true" />
 			<param name="test.ant.script.suite" value="SmokeTestSuite" />
 		</antcall>
 
@@ -1846,6 +2481,12 @@
 			<param name="test.ant.script.command" value="social-office-home-microblogs" />
 			<param name="test.ant.script.social.office" value="true" />
 			<param name="test.ant.script.suite" value="SocialOfficeHomeMicroblogsTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="social-office-home-my-documents" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeHomeMyDocumentsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
@@ -1891,68 +2532,62 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-profile-my-contacts" />
-			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeProfileMyContactsTestSuite" />
-		</antcall>
-
-		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="social-office-profile-profile" />
 			<param name="test.ant.script.social.office" value="true" />
 			<param name="test.ant.script.suite" value="SocialOfficeProfileProfileTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sevencogs-smoke" />
-			<param name="test.ant.script.evaluate.logs" value="true" />
-			<param name="test.ant.script.social.office.sevencogs" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSevencogsSmokeTestSuite" />
+			<param name="test.ant.script.command" value="social-office-site-blogs" />
+			<param name="test.ant.script.social.office" value="true" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-blogs" />
+			<param name="test.ant.script.command" value="social-office-site-calendar" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesBlogsTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteCalendarTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-calendar" />
+			<param name="test.ant.script.command" value="social-office-site-documents" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesCalendarTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteDocumentsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-documents" />
+			<param name="test.ant.script.command" value="social-office-site-forums" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesDocumentsTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteForumsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-forums" />
+			<param name="test.ant.script.command" value="social-office-site-home" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesForumsTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteHomeTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-home" />
+			<param name="test.ant.script.command" value="social-office-site-members" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesHomeTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteMembersTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-members" />
+			<param name="test.ant.script.command" value="social-office-site-recent-blogs" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesMembersTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteRecentBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="social-office-sites-wiki" />
+			<param name="test.ant.script.command" value="social-office-site-wiki" />
 			<param name="test.ant.script.social.office" value="true" />
-			<param name="test.ant.script.suite" value="SocialOfficeSitesWikiTestSuite" />
+			<param name="test.ant.script.suite" value="SocialOfficeSiteWikiTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="social-office-smoke" />
+			<param name="test.ant.script.evaluate.logs" value="false" />
 			<param name="test.ant.script.social.office" value="true" />
 			<param name="test.ant.script.suite" value="SocialOfficeSmokeTestSuite" />
 		</antcall>
@@ -1965,34 +2600,40 @@
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-community-asset-publisher" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingCommunityAssetPublisherTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-community-blogs" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingCommunityBlogsTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
-			<param name="test.ant.script.command" value="staging-community-document-library" />
-			<param name="test.ant.script.suite" value="StagingCommunityDocumentLibraryTestSuite" />
+			<param name="test.ant.script.command" value="staging-community-documents-and-media" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="StagingCommunityDocumentsAndMediaTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-community-sites" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingCommunitySitesTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-community-web-content-display" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingCommunityWebContentDisplayTestSuite" />
 		</antcall>
 
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="staging-organization-blogs" />
-			<param name="test.ant.script.plugin.webs" value="kaleo-web" />
+			<param name="test.ant.script.kaleo" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="StagingOrganizationBlogsTestSuite" />
 		</antcall>
 
@@ -2008,7 +2649,15 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="tags-web-content" />
+			<param name="test.ant.script.database.collate" value="true" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
+			<param name="test.ant.script.suite" value="TagsWebContentTestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="tags-wiki" />
+			<param name="test.ant.script.selenium.implementation" value="webdriver" />
 			<param name="test.ant.script.suite" value="TagsWikiTestSuite" />
 		</antcall>
 
@@ -2017,7 +2666,97 @@
 			<param name="test.ant.script.template" value="ant-script-tck.xml" />
 		</antcall>
 
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="unit-plugins" />
+			<param name="test.ant.script.template" value="ant-script-unit.xml" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="unit-portal" />
+			<param name="test.ant.script.template" value="ant-script-unit.xml" />
+		</antcall>
+
 		<echo file="portal-web/test-ant-scripts/version">${build-test-ant-scripts.version}</echo>
+	</target>
+
+	<target name="check-config">
+		<if>
+			<not>
+				<isset property="app-server" />
+			</not>
+			<then>
+				<property name="app-server" value="tomcat" />
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<or>
+					<equals arg1="${app-server}" arg2="glassfish" />
+					<equals arg1="${app-server}" arg2="jboss" />
+					<equals arg1="${app-server}" arg2="jonas" />
+					<equals arg1="${app-server}" arg2="resin" />
+					<equals arg1="${app-server}" arg2="tomcat" />
+					<equals arg1="${app-server}" arg2="weblogic" />
+					<equals arg1="${app-server}" arg2="websphere-7.0" />
+					<equals arg1="${app-server}" arg2="websphere-8.0" />
+				</or>
+			</not>
+			<then>
+				<fail>Please set "app-server" to one of the following:${line.separator}glassfish, jboss, jonas, resin, tomcat, weblogic, websphere-7.0, websphere-8.0</fail>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<isset property="browser" />
+			</not>
+			<then>
+				<property name="browser" value="firefox" />
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<or>
+					<equals arg1="${browser}" arg2="firefox" />
+					<equals arg1="${browser}" arg2="googlechrome" />
+					<equals arg1="${browser}" arg2="ie" />
+				</or>
+			</not>
+			<then>
+				<fail>Please set "browser" to one of the following:${line.separator}firefox, googlechrome, ie</fail>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<isset property="database" />
+			</not>
+			<then>
+				<property name="database" value="mysql" />
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<or>
+					<equals arg1="${database}" arg2="db2" />
+					<equals arg1="${database}" arg2="hsql" />
+					<equals arg1="${database}" arg2="mysql" />
+					<equals arg1="${database}" arg2="oracle-10" />
+					<equals arg1="${database}" arg2="oracle-11" />
+					<equals arg1="${database}" arg2="postgresql-8.4" />
+					<equals arg1="${database}" arg2="postgresql-9.0" />
+					<equals arg1="${database}" arg2="sql-server-2005" />
+					<equals arg1="${database}" arg2="sql-server-2008" />
+					<equals arg1="${database}" arg2="sybase" />
+				</or>
+			</not>
+			<then>
+				<fail>Please set "database" to one of the following:${line.separator}db2, hsql, mysql, oracle-10, oracle-11, postgresql-8.4, postgresql-9.0, sql-server-2005, sql-server-2008, sybase</fail>
+			</then>
+		</if>
 	</target>
 
 	<target name="clean-up-bundles">
@@ -2058,9 +2797,19 @@
 			project.setProperty("java.processes.old.list", javaProcessesOldList);
 		</script>
 
-		<exec executable="cmd.exe">
-			<arg line="/c jps -l > java-processes" />
-		</exec>
+		<if>
+			<os family="windows" />
+			<then>
+				<exec executable="${shell.executable}" output="java-processes">
+					<arg line="/c jps -l" />
+				</exec>
+			</then>
+			<else>
+				<exec executable="${shell.executable}" output="java-processes">
+					<arg line="-c jps -l" />
+				</exec>
+			</else>
+		</if>
 
 		<loadfile property="java.processes.new.content" srcfile="java-processes" />
 
@@ -2132,6 +2881,22 @@
 		<delete dir="${lp.plugins.dir}/dist" />
 	</target>
 
+	<target name="clean-up-test-properties">
+		<if>
+			<available file="app.server.${user.name}.properties" />
+			<then>
+				<delete file="app.server.${user.name}.properties" />
+			</then>
+		</if>
+
+		<if>
+			<available file="test.${user.name}.properties" />
+			<then>
+				<delete file="test.${user.name}.properties" />
+			</then>
+		</if>
+	</target>
+
 	<target name="clean-up-vms">
 		<if>
 			<available file="${vm.drive}\${vm.host}\${vm.host}.vmdk.lck" />
@@ -2161,54 +2926,70 @@
 
 	<target name="copy-optional-jars">
 		<if>
-			<equals arg1="${db.type}" arg2="db2" />
+			<equals arg1="${database}" arg2="db2" />
 			<then>
 				<delete includeemptydirs="true" failonerror="false">
 					<fileset
 						dir="${simple.server.lib.global.dir}"
-						includes="db2*.jar"
+						includes="${jdbc.db2.driver}"
 					/>
 				</delete>
 
-				<copy todir="${app.server.lib.global.dir}">
+				<copy todir="${todir}">
 						<fileset
 							dir="${jdbc.drivers.optional.dir}/db2/8.1.18"
-							includes="*.jar"
+							includes="${jdbc.db2.driver}"
 					/>
 				</copy>
 			</then>
 			<elseif>
-				<equals arg1="${db.type}" arg2="oracle-10" />
+				<and>
+					<equals arg1="${database}" arg2="mysql" />
+					<not>
+						<available file="${simple.server.lib.global.dir}/${jdbc.mysql.driver}" />
+					</not>
+				</and>
 				<then>
-					<delete includeemptydirs="true" failonerror="false">
+					<copy todir="${todir}">
 						<fileset
-							dir="${simple.server.lib.global.dir}"
-							includes="ojdbc*.jar"
-						/>
-					</delete>
-
-					<copy todir="${app.server.lib.global.dir}">
-						<fileset
-							dir="${jdbc.drivers.optional.dir}/oracle/10.2.0.1.0"
-							includes="*.jar"
+							dir="${jdbc.drivers.optional.dir}/mysql/5.0.7"
+							includes="${jdbc.mysql.driver}"
 						/>
 					</copy>
 				</then>
 			</elseif>
 			<elseif>
-				<equals arg1="${db.type}" arg2="oracle-11" />
+				<equals arg1="${database}" arg2="oracle-10" />
 				<then>
 					<delete includeemptydirs="true" failonerror="false">
 						<fileset
 							dir="${simple.server.lib.global.dir}"
-							includes="ojdbc*.jar"
+							includes="${jdbc.oracle.driver}"
 						/>
 					</delete>
 
-					<copy todir="${app.server.lib.global.dir}">
+					<copy todir="${todir}">
+						<fileset
+							dir="${jdbc.drivers.optional.dir}/oracle/10.2.0.1.0"
+							includes="${jdbc.oracle.driver}"
+						/>
+					</copy>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${database}" arg2="oracle-11" />
+				<then>
+					<delete includeemptydirs="true" failonerror="false">
+						<fileset
+							dir="${simple.server.lib.global.dir}"
+							includes="${jdbc.oracle.driver}"
+						/>
+					</delete>
+
+					<copy todir="${todir}">
 						<fileset
 							dir="${jdbc.drivers.optional.dir}/oracle/11.2.0.1.0"
-							includes="*.jar"
+							includes="${jdbc.oracle.driver}"
 						/>
 					</copy>
 				</then>
@@ -2277,6 +3058,89 @@
 		<delete file="execute-remote-command.bat" />
 	</target>
 
+	<target name="generate-test-properties" depends="check-config">
+		<xmlproperty
+			file="portal-web/test-config/database.xml"
+			keeproot="true"
+		/>
+
+		<echoproperties destfile="${basedir}/test.run.properties">
+			<propertyset>
+				<propertyref prefix="database.${database}" />
+			</propertyset>
+		</echoproperties>
+
+		<replaceregexp
+			file="${basedir}/test.run.properties"
+			flags="g"
+			match="database\.${database}"
+			replace="database"
+		/>
+
+		<property file="${basedir}/test.run.properties" />
+
+		<loadfile property="test.properties.expanded" srcfile="${basedir}/test.run.properties">
+			<filterchain>
+				<expandproperties />
+			</filterchain>
+		</loadfile>
+
+		<echo file="${basedir}/test.run.properties">${test.properties.expanded}</echo>
+	</target>
+
+	<target name="generate-tests">
+		<script classpathref="project.classpath" language="beanshell">
+			String testCase = "";
+			String testSuite = "";
+
+			String testClass = project.getProperty("test.class");
+
+			if (testClass.endsWith("TestCase")) {
+				testCase = testClass.replaceAll("TestCase", "");
+			}
+			else if (testClass.endsWith("TestSuite")) {
+				testSuite = testClass.replaceAll("TestSuite", "");
+			}
+
+			project.setProperty("test-case", testCase);
+			project.setProperty("test-suite", testSuite);
+		</script>
+
+		<if>
+			<available file="portal-web/test/functional" type="dir" />
+			<then>
+				<resourcecount property="test-case.count">
+					<fileset dir="portal-web/test/functional" includes="**/${test-case}.testcase" />
+				</resourcecount>
+				<resourcecount property="test-suite.count">
+					<fileset dir="portal-web/test/functional" includes="**/${test-suite}.testsuite" />
+				</resourcecount>
+			</then>
+		</if>
+
+		<delete dir="portal-web/test/functional-generated" failonerror="false" />
+
+		<if>
+			<or>
+				<and>
+					<isset property="test-case.count" />
+					<not>
+						<equals arg1="${test-case.count}" arg2="0" />
+					</not>
+				</and>
+				<and>
+					<isset property="test-suite.count" />
+					<not>
+						<equals arg1="${test-suite.count}" arg2="0" />
+					</not>
+				</and>
+			</or>
+			<then>
+				<ant dir="portal-web" target="build-selenium-new" inheritAll="false" />
+			</then>
+		</if>
+	</target>
+
 	<target name="install-vm-java">
 		<if>
 			<not>
@@ -2343,6 +3207,8 @@
 	</target>
 
 	<target name="prepare-common">
+		<echo file="test.${user.name}.properties">database=${database}</echo>
+
 		<antcall target="prepare-portal-properties" inheritAll="false" />
 
 		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
@@ -2388,45 +3254,17 @@
 		</if>
 	</target>
 
-	<target name="prepare-db2">
-		<echo file="test.${user.name}.properties">db.type=db2</echo>
+	<target name="prepare-portal-ext-properties" depends="generate-test-properties">
+		<echo file="portal-impl/src/portal-ext.properties">liferay.home=$${user.home}/liferay
 
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-hsql">
-		<echo file="test.${user.name}.properties">db.type=hsql</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-mysql">
-		<echo file="test.${user.name}.properties">db.type=mysql</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-oracle-10">
-		<echo file="test.${user.name}.properties">db.type=oracle-10</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-oracle-11">
-		<echo file="test.${user.name}.properties">db.type=oracle-11</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-portal-ext-properties">
-		<echo file="portal-impl/src/portal-ext.properties">plugin.notifications.enabled=false
+plugin.notifications.enabled=false
 
 jdbc.default.jndi.name=
 
-jdbc.default.driverClassName=${db.driver}
-jdbc.default.url=${db.url}
-jdbc.default.username=${db.username}
-jdbc.default.password=${db.password}
+jdbc.default.driverClassName=${database.driver}
+jdbc.default.url=${database.url}
+jdbc.default.username=${database.username}
+jdbc.default.password=${database.password}
 
 captcha.max.challenges=0
 
@@ -2440,12 +3278,10 @@ mail.session.jndi.name=
 
 axis.servlet.hosts.allowed=
 
-tunnel.servlet.hosts.allowed=
-
-resource.repositories.root=$${user.home}/liferay</echo>
+tunnel.servlet.hosts.allowed=</echo>
 
 		<if>
-			<contains string="${db.type}" substring="db2" />
+			<contains string="${database}" substring="db2" />
 			<then>
 				<echo file="portal-impl/src/portal-ext.properties" append="true">
 
@@ -2454,7 +3290,7 @@ custom.sql.function.isnull=CAST(? AS VARCHAR(32672)) IS NULL
 custom.sql.function.isnotnull=CAST(? AS VARCHAR(32672)) IS NOT NULL</echo>
 			</then>
 			<elseif>
-				<contains string="${db.type}" substring="oracle" />
+				<contains string="${database}" substring="oracle" />
 				<then>
 					<echo file="portal-impl/src/portal-ext.properties" append="true">
 
@@ -2465,7 +3301,7 @@ jdbc.default.numHelperThreads=1</echo>
 				</then>
 			</elseif>
 			<elseif>
-				<contains string="${db.type}" substring="sybase" />
+				<contains string="${database}" substring="sybase" />
 				<then>
 					<echo file="portal-impl/src/portal-ext.properties" append="true">
 
@@ -2501,15 +3337,15 @@ organizations.assignment.auto=true
 organizations.assignment.strict=false
 organizations.membership.strict=true
 
-lucene.dir=$${resource.repositories.root}/lucene/
+lucene.dir=$${liferay.home}/lucene/
 
-jcr.jackrabbit.repository.root=$${resource.repositories.root}/jackrabbit
+jcr.jackrabbit.repository.root=$${liferay.home}/jackrabbit
 
 discussion.thread.view=combination
 
 dl.hook.impl=com.liferay.documentlibrary.util.JCRHook
 
-dl.hook.file.system.root.dir=$${resource.repositories.root}/document_library
+dl.hook.file.system.root.dir=$${liferay.home}/document_library
 
 ##
 ## From portal-legacy-5.2.properties
@@ -2554,20 +3390,20 @@ setup.wizard.enabled=false
 
 discussion.subscribe.by.default=false
 
-dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
-dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
-dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
-dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
+#dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
+#dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
+#dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
+#dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
 
-dl.store.file.system.root.dir=${dl.hook.file.system.root.dir}
+dl.store.file.system.root.dir=${liferay.home}/data/document_library
 
-dl.store.jcr.fetch.delay=${dl.hook.jcr.fetch.delay}
-dl.store.jcr.fetch.max.failures=${dl.hook.jcr.fetch.max.failures}
-dl.store.jcr.move.version.labels=${dl.hook.jcr.move.version.labels}
+dl.store.jcr.fetch.delay=500
+dl.store.jcr.fetch.max.failures=5
+dl.store.jcr.move.version.labels=false
 
-dl.store.s3.access.key=${dl.hook.s3.access.key}
-dl.store.s3.secret.key=${dl.hook.s3.secret.key}
-dl.store.s3.bucket.name=${dl.hook.s3.bucket.name}
+dl.store.s3.access.key=
+dl.store.s3.secret.key=
+dl.store.s3.bucket.name=
 
 message.boards.subscribe.by.default=false</echo>
 			</then>
@@ -2627,20 +3463,20 @@ setup.wizard.enabled=false
 
 discussion.subscribe.by.default=false
 
-dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
-dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
-dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
-dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
+#dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
+#dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
+#dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
+#dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
 
-dl.store.file.system.root.dir=${dl.hook.file.system.root.dir}
+dl.store.file.system.root.dir=${liferay.home}/data/document_library
 
-dl.store.jcr.fetch.delay=${dl.hook.jcr.fetch.delay}
-dl.store.jcr.fetch.max.failures=${dl.hook.jcr.fetch.max.failures}
-dl.store.jcr.move.version.labels=${dl.hook.jcr.move.version.labels}
+dl.store.jcr.fetch.delay=500
+dl.store.jcr.fetch.max.failures=5
+dl.store.jcr.move.version.labels=false
 
-dl.store.s3.access.key=${dl.hook.s3.access.key}
-dl.store.s3.secret.key=${dl.hook.s3.secret.key}
-dl.store.s3.bucket.name=${dl.hook.s3.bucket.name}
+dl.store.s3.access.key=
+dl.store.s3.secret.key=
+dl.store.s3.bucket.name=
 
 message.boards.subscribe.by.default=false</echo>
 				</then>
@@ -2672,20 +3508,20 @@ setup.wizard.enabled=false
 
 discussion.subscribe.by.default=false
 
-dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
-dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
-dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
-dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
+#dl.store.cmis.credentials.username=${dl.hook.cmis.credentials.username}
+#dl.store.cmis.credentials.password=${dl.hook.cmis.credentials.password}
+#dl.store.cmis.repository.url=${dl.hook.cmis.repository.url}
+#dl.store.cmis.system.root.dir=${dl.hook.cmis.system.root.dir}
 
-dl.store.file.system.root.dir=${dl.hook.file.system.root.dir}
+dl.store.file.system.root.dir=${liferay.home}/data/document_library
 
-dl.store.jcr.fetch.delay=${dl.hook.jcr.fetch.delay}
-dl.store.jcr.fetch.max.failures=${dl.hook.jcr.fetch.max.failures}
-dl.store.jcr.move.version.labels=${dl.hook.jcr.move.version.labels}
+dl.store.jcr.fetch.delay=500
+dl.store.jcr.fetch.max.failures=5
+dl.store.jcr.move.version.labels=false
 
-dl.store.s3.access.key=${dl.hook.s3.access.key}
-dl.store.s3.secret.key=${dl.hook.s3.secret.key}
-dl.store.s3.bucket.name=${dl.hook.s3.bucket.name}
+dl.store.s3.access.key=
+dl.store.s3.secret.key=
+dl.store.s3.bucket.name=
 
 message.boards.subscribe.by.default=false</echo>
 				</then>
@@ -2701,8 +3537,8 @@ message.boards.subscribe.by.default=false</echo>
 			<then>
 				<replace
 					file="portal-impl/src/portal-ext.properties"
-					token="resource.repositories.root=$${user.home}/liferay"
-					value="resource.repositories.root=C:/WINDOWS/system32/config/systemprofile/liferay"
+					token="liferay.home=$${user.home}/liferay"
+					value="liferay.home=C:/WINDOWS/system32/config/systemprofile/liferay"
 				/>
 
 				<echo file="portal-impl/src/portal-ext.properties" append="true">
@@ -2724,6 +3560,13 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 			<then>
 				<replace file="portal-impl/src/portal-ext.properties" token="permissions.user.check.algorithm=5" value="" />
 				<replace file="portal-impl/src/portal-ext.properties" token="permissions.view.dynamic.inheritance=false" value="" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${setup.wizard.enabled}" arg2="true" />
+			<then>
+				<replace file="portal-impl/src/portal-ext.properties" token="setup.wizard.enabled=false" value="" />
 			</then>
 		</if>
 	</target>
@@ -2765,8 +3608,8 @@ auto.deploy.dest.dir=C:/WINDOWS/system32/config/systemprofile/liferay/websphere-
 			</then>
 		</if>
 
-		<exec dir="${project.dir}" executable="cmd.exe" os="${os.windows}" outputproperty="svn.info.output">
-			<arg line="/c svn info" />
+		<exec dir="${project.dir}" executable="svn" outputproperty="svn.info.output">
+			<arg line="info" />
 		</exec>
 
 		<script classpathref="project.classpath" language="beanshell">
@@ -2801,18 +3644,6 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 		</if>
 	</target>
 
-	<target name="prepare-postgresql-8.4">
-		<echo file="test.${user.name}.properties">db.type=postgresql-8.4</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
-	<target name="prepare-postgresql-9.0">
-		<echo file="test.${user.name}.properties">db.type=postgresql-9.0</echo>
-
-		<antcall target="prepare-common" />
-	</target>
-
 	<target name="prepare-root-xml">
 		<echo file="${app.server.tomcat.dir}/conf/Catalina/localhost/ROOT.xml"><![CDATA[<Context path="" crossContext="true">
 
@@ -2820,57 +3651,16 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 	name="jdbc/LiferayPool"
 	auth="Container"
 	type="javax.sql.DataSource"
-	driverClassName="${db.driver}"
-	url="${db.url}"
-	username="${db.username}"
-	password="${db.password}"
+	driverClassName="${database.driver}"
+	url="${database.url}"
+	username="${database.username}"
+	password="${database.password}"
 	maxActive="20"
 />
 </Context>]]></echo>
 	</target>
 
 	<target name="prepare-selenium">
-		<if>
-			<not>
-				<isset property="selenium.executable.zip" />
-			</not>
-			<then>
-				<fail>
-.
-
-Please set "selenium.executable.zip" in test.properties to point to the Selenium
-executable ZIP file.
-				</fail>
-			</then>
-		</if>
-
-		<if>
-			<or>
-				<not>
-					<available file="${selenium.nanny.executable}" />
-				</not>
-				<uptodate
-					srcfile="${selenium.nanny.executable}"
-					targetfile="${selenium.executable.zip}"
-				/>
-			</or>
-			<then>
-				<delete>
-					<fileset
-						dir="${project.dir}/tools/selenium"
-						includes="*.exe"
-					/>
-				</delete>
-
-				<unzip
-					dest="${project.dir}/tools/selenium"
-					src="${selenium.executable.zip}"
-				/>
-
-				<touch file="${selenium.nanny.executable}" />
-			</then>
-		</if>
-
 		<if>
 			<isset property="selenium.output.dir" />
 			<then>
@@ -2916,40 +3706,63 @@ executable ZIP file.
 				<equals arg1="${test.browser}" arg2="firefox" />
 			</or>
 			<then>
-				<replace
-					file="portal-web/test/test-portal-web.properties"
-					token="#selenium.executable.dir="
-					value="selenium.executable.dir=${basedir.unix}/tools/selenium/"
-				/>
-				<replace
-					file="portal-web/test/test-portal-web.properties"
-					token="#selenium.download.file.executable="
-					value="selenium.download.file.executable=selenium_download_file_ff.exe"
-				/>
-				<replace
-					file="portal-web/test/test-portal-web.properties"
-					token="#selenium.set.browser.option.executable="
-					value="selenium.set.browser.option.executable=selenium_set_browser_option_ff.exe"
-				/>
+				<property name="browser.type" value="firefox" />
+
+				<propertycopy name="browser.version" from="browser.firefox.version" silent="true" />
 			</then>
+			<elseif>
+				<equals arg1="${test.browser}" arg2="googlechrome" />
+				<then>
+					<property name="browser.type" value="googlechrome" />
+
+					<propertycopy name="browser.version" from="browser.googlechrome.version" silent="true" />
+				</then>
+			</elseif>
 			<elseif>
 				<or>
 					<equals arg1="${test.browser}" arg2="iehta" />
-					<equals arg1="${test.browser}" arg2="iexplorer" />
+					<equals arg1="${test.browser}" arg2="iexplore" />
 				</or>
 				<then>
-					<replace
-						file="portal-web/test/test-portal-web.properties"
-						token="#selenium.executable.dir="
-						value="selenium.executable.dir=${basedir.unix}/tools/selenium/"
-					/>
-					<replace
-						file="portal-web/test/test-portal-web.properties"
-						token="#selenium.download.file.executable="
-						value="selenium.download.file.executable=selenium_download_file_ie.exe"
-					/>
+					<property name="browser.type" value="ie" />
+
+					<propertycopy name="browser.version" from="browser.ie.version" silent="true" />
 				</then>
 			</elseif>
+		</if>
+
+		<replace
+			file="portal-web/test/test-portal-web.properties"
+			token="#browser.commands.dir="
+			value="browser.commands.dir=${basedir.unix}/tools/selenium/browser-commands/${test.selenium.implementation}/${os.type}/${browser.type}/${browser.version}/"
+		/>
+
+		<replace
+			file="portal-web/test/test-portal-web.properties"
+			token="#selenium.executable.dir="
+			value="selenium.executable.dir=${basedir.unix}/tools/selenium/"
+		/>
+
+		<if>
+			<equals arg1="${test.selenium.implementation}" arg2="webdriver" />
+			<then>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="selenium.implementation=com.thoughtworks.selenium.Selenium"
+					value="selenium.implementation=org.openqa.selenium.WebDriver"
+				/>
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${test.selenium.logger.enabled}" arg2="true" />
+			<then>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="selenium.logger.enabled=false"
+					value="selenium.logger.enabled=true"
+				/>
+			</then>
 		</if>
 
 		<if>
@@ -2962,24 +3775,167 @@ executable ZIP file.
 				/>
 			</then>
 		</if>
+
+		<if>
+			<equals arg1="${test.save.screenshot}" arg2="true" />
+			<then>
+				<replace
+					file="portal-web/test/test-portal-web.properties"
+					token="save.screenshot=false"
+					value="save.screenshot=true"
+				/>
+			</then>
+		</if>
 	</target>
 
-	<target name="prepare-sql-server-2005">
-		<echo file="test.${user.name}.properties">db.type=sql-server-2005</echo>
+	<target name="prepare-test-properties" depends="generate-test-properties">
+		<echo file="portal-impl/test/portal-test-ext.properties">
+jdbc.default.driverClassName=${database.driver}
+jdbc.default.url=${database.url}
+jdbc.default.username=${database.username}
+jdbc.default.password=${database.password}
+		</echo>
 
-		<antcall target="prepare-common" />
+		<if>
+			<contains string="${database}" substring="db2" />
+			<then>
+				<echo file="portal-impl/test/portal-test-ext.properties" append="true">
+
+hibernate.dialect=com.liferay.portal.dao.orm.hibernate.DB2Dialect
+custom.sql.function.isnull=CAST(? AS VARCHAR(32672)) IS NULL
+custom.sql.function.isnotnull=CAST(? AS VARCHAR(32672)) IS NOT NULL</echo>
+			</then>
+			<elseif>
+				<contains string="${database}" substring="oracle" />
+				<then>
+					<echo file="portal-impl/test/portal-test-ext.properties" append="true">
+
+jdbc.default.acquireIncrement=1
+jdbc.default.maxPoolSize=5
+jdbc.default.minPoolSize=1
+jdbc.default.numHelperThreads=1</echo>
+				</then>
+			</elseif>
+			<elseif>
+				<contains string="${database}" substring="sybase" />
+				<then>
+					<echo file="portal-impl/test/portal-test-ext.properties" append="true">
+
+hibernate.dialect=org.hibernate.dialect.SybaseDialect
+custom.sql.function.isnull=CONVERT(VARCHAR,?) IS NULL
+custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
+				</then>
+			</elseif>
+		</if>
 	</target>
 
-	<target name="prepare-sql-server-2008">
-		<echo file="test.${user.name}.properties">db.type=sql-server-2008</echo>
+	<target name="prepare-versioned-common">
+		<antcall target="prepare-portal-ext-properties" inheritAll="false" />
 
-		<antcall target="prepare-common" />
+		<ant dir="portal-impl" target="deploy-properties" inheritAll="false" />
+
+		<if>
+			<isset property="sql.version" />
+			<then>
+				<property name="sql.dir" value="sql\legacy\${sql.version}\create\" />
+
+				<if>
+					<contains string="${database}" substring="db2" />
+					<then>
+						<property name="sql.file" value="create-db2.sql" />
+					</then>
+					<elseif>
+						<contains string="${database}" substring="mysql" />
+						<then>
+							<property name="sql.file" value="create-mysql.sql" />
+						</then>
+					</elseif>
+					<elseif>
+						<contains string="${database}" substring="oracle" />
+						<then>
+							<property name="sql.file" value="create-oracle.sql" />
+						</then>
+					</elseif>
+					<elseif>
+						<contains string="${database}" substring="postgresql" />
+						<then>
+							<property name="sql.file" value="create-postgresql.sql" />
+						</then>
+					</elseif>
+					<elseif>
+						<contains string="${database}" substring="sql-server" />
+						<then>
+							<property name="sql.file" value="create-sql-server.sql" />
+						</then>
+					</elseif>
+					<elseif>
+						<contains string="${database}" substring="sybase" />
+						<then>
+							<property name="sql.file" value="create-sybase.sql" />
+						</then>
+					</elseif>
+				</if>
+			</then>
+		</if>
+
+		<antcall target="rebuild-database" inheritAll="false">
+			<param name="sql.dir" value="${sql.dir}" />
+			<param name="sql.file" value="${sql.file}" />
+		</antcall>
 	</target>
 
-	<target name="prepare-sybase">
-		<echo file="test.${user.name}.properties">db.type=sybase</echo>
+	<target name="prepare-versioned-db2">
+		<echo file="test.${user.name}.properties">database=db2</echo>
 
-		<antcall target="prepare-common" />
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-mysql">
+		<echo file="test.${user.name}.properties">database=mysql</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-oracle-10">
+		<echo file="test.${user.name}.properties">database=oracle-10</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-oracle-11">
+		<echo file="test.${user.name}.properties">database=oracle-11</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-postgresql-8.4">
+		<echo file="test.${user.name}.properties">database=postgresql-8.4</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-postgresql-9.0">
+		<echo file="test.${user.name}.properties">database=postgresql-9.0</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-sql-server-2005">
+		<echo file="test.${user.name}.properties">database=sql-server-2005</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-sql-server-2008">
+		<echo file="test.${user.name}.properties">database=sql-server-2008</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
+	</target>
+
+	<target name="prepare-versioned-sybase">
+		<echo file="test.${user.name}.properties">database=sybase</echo>
+
+		<antcall target="prepare-versioned-common" inheritAll="false" />
 	</target>
 
 	<target name="prepare-virtual-host-name-properties">
@@ -3044,7 +4000,7 @@ executable ZIP file.
 127.0.0.1	www.easy.com
 127.0.0.1	www.fox.com</echo>
 
- 		<if>
+		<if>
 			<not>
 				<isset property="build.war" />
 			</not>
@@ -3064,469 +4020,122 @@ executable ZIP file.
 		</if>
 	</target>
 
-	<target name="rebuild-database">
+	<target name="print-scm-revision">
 		<if>
-			<not>
-				<isset property="sql.legacy.zip" />
-			</not>
+			<equals arg1="${scm.tool}" arg2="git" />
 			<then>
-				<fail>
-.
+				<echo>Portal GIT ID:</echo>
+				<echo />
 
-Please set "sql.legacy.zip" in test.properties to point to the legacy SQL ZIP
-file.
-				</fail>
+				<exec dir="${project.dir}" executable="git">
+					<arg line="log -n 1" />
+				</exec>
+
+				<echo />
+				<echo>Plugins GIT ID:</echo>
+				<echo />
+
+				<exec dir="${lp.plugins.dir}" executable="git">
+					<arg line="log -n 1" />
+				</exec>
+
+				<echo />
 			</then>
 			<else>
-				<if>
-					<or>
-						<not>
-							<available file="sql/legacy" />
-						</not>
-						<not>
-							<uptodate
-								srcfile="${sql.legacy.zip}"
-								targetfile="sql/legacy"
-							/>
-						</not>
-					</or>
-					<then>
-						<delete dir="sql/legacy" failonerror="false" />
+				<echo>Portal SVN Revision:</echo>
+				<echo />
 
-						<unzip src="${sql.legacy.zip}" dest="sql" />
+				<exec dir="${project.dir}" executable="svn">
+					<arg line="info" />
+				</exec>
 
-						<touch>
-							<fileset dir="sql/legacy" />
-						</touch>
-					</then>
-				</if>
+				<echo />
+				<echo>Plugins SVN Revision:</echo>
+				<echo />
 
+				<exec dir="${lp.plugins.dir}" executable="svn">
+					<arg line="info" />
+				</exec>
+			</else>
+		</if>
+	</target>
+
+	<target name="rebuild-database" depends="generate-test-properties,build-sql-file">
+		<if>
+			<not>
+				<isset property="skip.rebuild-database" />
+			</not>
+			<then>
 				<if>
 					<not>
-						<isset property="skip.rebuild-database" />
+						<isset property="skip.delete-liferay-home" />
 					</not>
 					<then>
+						<delete dir="${user.home}/liferay" />
+					</then>
+				</if>
+
+				<if>
+					<equals arg1="${database}" arg2="hsql" />
+					<then>
+						<delete dir="${user.home}/liferay/data" includeemptydirs="true" />
+
 						<if>
 							<not>
-								<isset property="skip.delete-liferay-home" />
+								<isset property="test.database.minimal" />
 							</not>
 							<then>
-								<delete dir="${user.home}/liferay" />
+								<copy file="sql/${database.name}.properties" tofile="${user.home}/liferay/data/hsql/${database.name}.properties" />
+								<copy file="sql/${database.name}.script" tofile="${user.home}/liferay/data/hsql/${database.name}.script" />
 							</then>
 						</if>
-
-						<if>
-							<equals arg1="${db.type}" arg2="db2" />
-							<then>
-								<antcall target="rebuild-database-db2" />
-							</then>
-							<elseif>
-								<equals arg1="${db.type}" arg2="hsql" />
-								<then>
-									<antcall target="rebuild-database-hsql" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="${db.type}" arg2="mysql" />
-								<then>
-									<antcall target="rebuild-database-mysql" />
-								</then>
-							</elseif>
-							<elseif>
-								<or>
-									<equals arg1="${db.type}" arg2="oracle-10" />
-									<equals arg1="${db.type}" arg2="oracle-11" />
-								</or>
-								<then>
-									<antcall target="rebuild-database-oracle" />
-								</then>
-							</elseif>
-							<elseif>
-								<or>
-									<equals arg1="${db.type}" arg2="postgresql-8.4" />
-									<equals arg1="${db.type}" arg2="postgresql-9.0" />
-								</or>
-								<then>
-									<antcall target="rebuild-database-postgresql" />
-								</then>
-							</elseif>
-							<elseif>
-								<or>
-									<equals arg1="${db.type}" arg2="sql-server-2005" />
-									<equals arg1="${db.type}" arg2="sql-server-2008" />
-								</or>
-								<then>
-									<antcall target="rebuild-database-sql-server" />
-								</then>
-							</elseif>
-							<elseif>
-								<equals arg1="${db.type}" arg2="sybase" />
-								<then>
-									<antcall target="rebuild-database-sybase" />
-								</then>
-							</elseif>
-						</if>
 					</then>
-				</if>
-			</else>
-		</if>
-	</target>
-
-	<target name="rebuild-database-db2">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-db2.sql" />
-					</then>
+					<elseif>
+						<equals arg1="${database.family}" arg2="mysql" />
+						<then>
+							<exec executable="${mysql.executable}" input="create.sql">
+								<arg line="${mysql.arg.line}" />
+							</exec>
+						</then>
+					</elseif>
 					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-db2.sql" />
+						<exec executable="${plink.executable}">
+							<arg line="-pw ${vm.password} ${vm.username}@${database.host} cmd.exe /c mkdir C:\temporary" />
+						</exec>
+
+						<exec executable="${pscp.executable}">
+							<arg line="-pw ${vm.password} create.sql ${vm.username}@${database.host}:\temporary" />
+						</exec>
+
+						<exec executable="${plink.executable}">
+							<arg line="-pw ${vm.password} ${vm.username}@${database.host} ${database.remote-schema-command}" />
+						</exec>
+
+						<exec executable="${plink.executable}">
+							<arg line="-pw ${vm.password} ${vm.username}@${database.host} cmd.exe /c rmdir /q /s C:\temporary" />
+						</exec>
 					</else>
 				</if>
 			</then>
 		</if>
 
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
-
-		<replace file="${sql.file}">
-			<replacefilter token="drop database lportal;" value="drop database ${db.schema};" />
-			<replacefilter token="create database lportal;" value="create database ${db.schema} pagesize 8192;" />
-			<replacefilter token="create database lportal pagesize 8192;" value="create database ${db.schema} pagesize 8192;" />
-			<replacefilter token="connect to lportal;" value="connect to ${db.schema} USER ${db.username} USING ${db.password};" />
-		</replace>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c mkdir C:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.host}:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c db2cmd /c /w /i /t db2 -f C:\${tstamp.value}\${sql.file} -td;" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
-		</exec>
-
-		<delete file="${sql.file}" />
-	</target>
-
-	<target name="rebuild-database-hsql">
-		<delete dir="${app.server.parent.dir}/data" includeemptydirs="true" />
-
-		<if>
-			<not>
-				<isset property="test.database.minimal" />
-			</not>
-			<then>
-				<copy file="sql/${database.name}.properties" tofile="${app.server.parent.dir}/data/hsql/${database.name}.properties" />
-				<copy file="sql/${database.name}.script" tofile="${app.server.parent.dir}/data/hsql/${database.name}.script" />
-			</then>
-		</if>
-	</target>
-
-	<target name="rebuild-database-mysql">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-mysql.sql" />
-					</then>
-					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-mysql.sql" />
-					</else>
-				</if>
-			</then>
-		</if>
-
-		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
-
-		<if>
-			<isset property="test.database.collate" />
-			<then>
-				<replace file="${sql.file}">
-					<replacefilter token="drop database if exists lportal;" value="drop database if exists ${db.schema};" />
-					<replacefilter token="create database lportal character set utf8;" value="create database ${db.schema} character set utf8 collate utf8_bin;" />
-					<replacefilter token="use lportal;" value="use ${db.schema};" />
-				</replace>
-			</then>
-			<else>
-				<replace file="${sql.file}">
-					<replacefilter token="drop database if exists lportal;" value="drop database if exists ${db.schema};" />
-					<replacefilter token="create database lportal character set utf8;" value="create database ${db.schema} character set utf8;" />
-					<replacefilter token="use lportal;" value="use ${db.schema};" />
-				</replace>
-			</else>
-		</if>
-
-		<exec executable="${mysql.executable}" input="${sql.file}">
-			<arg line="${mysql.arg.line}" />
-		</exec>
-
-		<delete file="${sql.file}" />
-	</target>
-
-	<target name="rebuild-database-oracle">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-oracle.sql" />
-					</then>
-					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-oracle.sql" />
-					</else>
-				</if>
-			</then>
-		</if>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c mkdir C:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.dir}${sql.file} ${vm.username}@${db.host}:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} sqlplus system/password @C:\${tstamp.value}\${sql.file} ${db.username} ${db.password}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
-		</exec>
-	</target>
-
-	<target name="rebuild-database-postgresql">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-postgresql.sql" />
-					</then>
-					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-postgresql.sql" />
-					</else>
-				</if>
-			</then>
-		</if>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
-
-		<replace file="${sql.file}">
-			<replacefilter token="drop database lportal;" value="drop database ${db.schema};" />
-			<replacefilter token="create database lportal encoding = 'UNICODE';" value="create database ${db.schema} encoding = 'UNICODE';" />
-			<replacefilter token="\c lportal;" value="\c ${db.schema};" />
-		</replace>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c mkdir C:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.host}:\${tstamp.value}" />
-		</exec>
-
-		<if>
-			<equals arg1="${db.type}" arg2="postgresql-8.4" />
-			<then>
-				<exec executable="${plink.executable}">
-					<arg line="-pw ${vm.password} ${vm.username}@${db.host} C:\Progra~1\PostgreSQL\8.4\bin\psql.exe -U ${db.username} -f C:\${tstamp.value}\${sql.file}" />
-				</exec>
-			</then>
-			<elseif>
-				<equals arg1="${db.type}" arg2="postgresql-9.0" />
-				<then>
-					<exec executable="${plink.executable}">
-						<arg line="-pw ${vm.password} ${vm.username}@${db.host} C:\Progra~1\PostgreSQL\9.0\bin\psql.exe -U ${db.username} -f C:\${tstamp.value}\${sql.file}" />
-					</exec>
-				</then>
-			</elseif>
-		</if>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
-		</exec>
-
-		<delete file="${sql.file}" />
-	</target>
-
-	<target name="rebuild-database-sql-server">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-sql-server.sql" />
-					</then>
-					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-sql-server.sql" />
-					</else>
-				</if>
-			</then>
-		</if>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
-
-		<replace file="${sql.file}">
-			<replacefilter token="drop database lportal;" value="drop database ${db.schema};" />
-			<replacefilter token="create database lportal;" value="create database ${db.schema};" />
-			<replacefilter token="use lportal;" value="use ${db.schema};" />
-		</replace>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c mkdir C:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.host}:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} osql -n -U ${db.username} -P ${db.password} -i C:\${tstamp.value}\${sql.file}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
-		</exec>
-
-		<delete file="${sql.file}" />
-	</target>
-
-	<target name="rebuild-database-sybase">
-		<if>
-			<or>
-				<not>
-					<isset property="sql.dir" />
-				</not>
-				<not>
-					<isset property="sql.file" />
-				</not>
-			</or>
-			<then>
-				<if>
-					<isset property="test.database.minimal" />
-					<then>
-						<property name="sql.dir" value="sql\create-minimal\" />
-						<property name="sql.file" value="create-minimal-sybase.sql" />
-					</then>
-					<else>
-						<property name="sql.dir" value="sql\create\" />
-						<property name="sql.file" value="create-sybase.sql" />
-					</else>
-				</if>
-			</then>
-		</if>
-
-		<tstamp>
-			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<copy file="${sql.dir}${sql.file}" tofile="${sql.file}" />
-
-		<replace file="${sql.file}">
-			<replacefilter token="use master" value="use master${line.separator}dump transaction master with no_log${line.separator}go${line.separator}if exists (select * from master.dbo.sysdatabases where name = &quot;${db.schema}&quot;)${line.separator}begin${line.separator}drop database ${db.schema}${line.separator}end${line.separator}go${line.separator}create database ${db.schema} on ${db.device.name} = &quot;250m&quot;${line.separator}go" />
-			<replacefilter token="exec sp_dboption 'lportal', 'allow nulls by default' , true" value="exec sp_dboption '${db.schema}', 'allow nulls by default' , true" />
-			<replacefilter token="exec sp_dboption 'lportal', 'select into/bulkcopy/pllsort' , true" value="exec sp_dboption '${db.schema}', 'select into/bulkcopy/pllsort' , true" />
-			<replacefilter token="use lportal" value="use ${db.schema}${line.separator}go" />
-		</replace>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c mkdir C:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${pscp.executable}">
-			<arg line="-pw ${vm.password} ${sql.file} ${vm.username}@${db.host}:\${tstamp.value}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} isql -U ${db.username} -P ${db.password} -i C:\${tstamp.value}\${sql.file}" />
-		</exec>
-
-		<exec executable="${plink.executable}">
-			<arg line="-pw ${vm.password} ${vm.username}@${db.host} cmd.exe /c rmdir /q /s C:\${tstamp.value}" />
-		</exec>
-
-		<delete file="${sql.file}" />
+		<delete file="create.sql" />
 	</target>
 
 	<target name="record-java-processes">
-		<exec executable="cmd.exe">
-			<arg line="/c jps -q > java-processes" />
-		</exec>
+		<if>
+			<os family="windows" />
+			<then>
+				<exec executable="${shell.executable}" output="java-processes">
+					<arg line="/c jps -q" />
+				</exec>
+			</then>
+			<else>
+				<exec executable="${shell.executable}" output="java-processes">
+					<arg line="-c jps -q" />
+				</exec>
+			</else>
+		</if>
 	</target>
 
 	<target name="replace-remote-file">
@@ -3553,6 +4162,18 @@ file.
 
 	<target name="revert-test-properties">
 		<liferay-format
+			arguments="portal-impl/test/portal-test.properties"
+			message="${scm.revert.command}"
+			property="scm.revert.command.formatted"
+		/>
+
+		<exec executable="${shell.executable}">
+			<arg line="${scm.revert.command.formatted}" />
+		</exec>
+
+		<delete file="portal-impl/test/portal-test-ext.properties" failonerror="false" />
+
+		<liferay-format
 			arguments="portal-impl/test/test-portal-impl.properties"
 			message="${scm.revert.command}"
 			property="scm.revert.command.formatted"
@@ -3578,7 +4199,7 @@ file.
 			<and>
 				<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
 				<not>
-					<equals arg1="${db.type}" arg2="hsql" />
+					<equals arg1="${database}" arg2="hsql" />
 				</not>
 			</and>
 			<then>
@@ -3610,6 +4231,10 @@ file.
 			</else>
 		</if>
 
+		<antcall target="generate-tests" inheritAll="false">
+			<param name="test.class" value="${test.class}" />
+		</antcall>
+
 		<ant dir="portal-impl" target="compile-test" inheritAll="false" />
 
 		<ant dir="portal-web" target="test-class" inheritAll="false">
@@ -3620,7 +4245,9 @@ file.
 	<target name="run-simple-server">
 		<antcall target="rebuild-database" inheritAll="false" />
 
-		<antcall target="copy-optional-jars" inheritAll="false" />
+		<antcall target="copy-optional-jars" inheritAll="false">
+			<param name="todir" value="${app.server.lib.global.dir}" />
+		</antcall>
 
 		<if>
 			<not>
@@ -3722,7 +4349,7 @@ file.
 				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
 					<property name="plugin.types" value="portlets" />
 					<property name="plugins.deployed" value="${plugins.deployed}" />
-					<property name="plugins.includes" value="chat-portlet,flash-portlet,test-pacl-portlet" />
+					<property name="plugins.includes" value="chat-portlet,flash-portlet,portal-compat-hook,sample-service-builder-portlet,test-pacl-portlet" />
 				</ant>
 
 				<property name="plugins.deployed" value="true" />
@@ -3755,7 +4382,29 @@ file.
 			</then>
 		</if>
 
+		<if>
+			<or>
+				<isset property="hook.plugins.includes" />
+				<isset property="portlet.plugins.includes" />
+				<isset property="web.plugins.includes" />
+			</or>
+			<then>
+				<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
+					<property name="plugin.types" value="hooks" />
+					<property name="plugins.deployed" value="${plugins.deployed}" />
+					<property name="plugins.includes" value="portal-compat-hook" />
+				</ant>
+			</then>
+		</if>
+
 		<antcall target="prepare-selenium" />
+
+		<if>
+			<equals arg1="${test.browser}" arg2="googlechrome" />
+			<then>
+				<antcall target="start-chrome-driver" />
+			</then>
+		</if>
 
 		<if>
 			<or>
@@ -3763,7 +4412,7 @@ file.
 				<equals arg1="${test.browser}" arg2="iexplore" />
 			</or>
 			<then>
-				<antcall target="start-selenium-nanny" />
+				<antcall target="start-ie-driver" />
 			</then>
 		</if>
 
@@ -3778,23 +4427,21 @@ file.
 				</waitfor>
 
 				<if>
-					<and>
-						<contains string="${hook.plugins.includes}" substring="sevencogs-hook" />
-						<contains string="${hook.plugins.includes}" substring="so-hook" />
-					</and>
+					<or>
+						<contains string="${simple.server.dir}" substring="glassfish" />
+						<contains string="${simple.server.dir}" substring="jonas" />
+						<isset property="plugins.deployed" />
+					</or>
 					<then>
-						<sleep seconds="120" />
+						<sleep seconds="60" />
 					</then>
-					<elseif>
-						<or>
-							<contains string="${simple.server.dir}" substring="glassfish" />
-							<contains string="${simple.server.dir}" substring="jonas" />
-							<isset property="plugins.deployed" />
-						</or>
-						<then>
-							<sleep seconds="60" />
-						</then>
-					</elseif>
+				</if>
+
+				<if>
+					<contains string="${hook.plugins.includes}" substring="so-hook" />
+					<then>
+						<echo file="${app.server.portal.dir}/html/portlet/dockbar/license_warning.jsp" />
+					</then>
 				</if>
 
 				<if>
@@ -3813,14 +4460,73 @@ file.
 		</parallel>
 
 		<if>
+			<equals arg1="${test.browser}" arg2="googlechrome" />
+			<then>
+				<antcall target="stop-chrome-driver" />
+			</then>
+		</if>
+
+		<if>
 			<or>
 				<equals arg1="${test.browser}" arg2="iehta" />
 				<equals arg1="${test.browser}" arg2="iexplore" />
 			</or>
 			<then>
-				<antcall target="stop-selenium-nanny" />
+				<antcall target="stop-ie-driver" />
 			</then>
 		</if>
+	</target>
+
+	<target name="start-chrome-driver">
+		<if>
+			<not>
+				<isset property="chrome.driver.zip" />
+			</not>
+			<then>
+				<fail>
+.
+
+Please set "chrome.driver.zip" in test.properties to point to "chromedriver_win_22_0_1203_0b.zip"
+which can be downloaded from this website: http://code.google.com/p/chromedriver/
+				</fail>
+			</then>
+			<else>
+				<exec executable="taskkill.exe">
+					<arg line="/F /IM chromedriver.exe" />
+				</exec>
+
+				<unzip src="${chrome.driver.zip}" dest="tools/selenium" />
+			</else>
+		</if>
+	</target>
+
+	<target name="start-ie-driver">
+		<if>
+			<not>
+				<isset property="ie.driver.zip" />
+			</not>
+			<then>
+				<fail>
+.
+
+Please set "ie.driver.zip" in test.properties to point to "IEDriverServer_x64_2.31.0.zip" or "IEDriverServer_Win32_2.31.0.zip" which can be downloaded from this website: https://code.google.com/p/selenium/wiki/InternetExplorerDriver
+				</fail>
+			</then>
+			<else>
+				<exec executable="taskkill.exe">
+					<arg line="/F /IM IEDriverServer.exe" />
+				</exec>
+
+				<unzip src="${ie.driver.zip}" dest="tools/selenium" />
+			</else>
+		</if>
+	</target>
+
+	<target name="start-ldap">
+		<exec dir="${app.server.parent.dir}/apacheds_1.5.7" executable="cmd">
+			<arg value="/c" />
+			<arg value="apacheds.bat" />
+		</exec>
 	</target>
 
 	<target name="start-selenium">
@@ -3839,20 +4545,69 @@ file.
 		</java>
 	</target>
 
-	<target name="start-selenium-nanny">
-		<forget>
-			<exec executable="${selenium.nanny.executable}" />
-		</forget>
+	<target name="stop-chrome-driver">
+		<exec executable="taskkill.exe">
+			<arg line="/F /IM chromedriver.exe" />
+		</exec>
+	</target>
+
+	<target name="stop-ie-driver">
+		<exec executable="taskkill.exe">
+			<arg line="/F /IM IEDriverServer.exe" />
+		</exec>
+	</target>
+
+	<target name="stop-ldap">
+		<if>
+			<os family="windows" />
+			<then>
+				<exec executable="${shell.executable}">
+					<arg line="/c jps -l > java-processes" />
+				</exec>
+			</then>
+			<else>
+				<exec executable="${shell.executable}" output="java-processes">
+					<arg line="-c jps -l" />
+				</exec>
+			</else>
+		</if>
+
+		<loadfile property="java-processes.content" srcfile="java-processes" />
+
+		<delete file="java-processes" />
+
+		<script classpathref="project.classpath" language="beanshell">
+			String javaProcessesNewContent = project.getProperty("java-processes.content");
+
+			if (javaProcessesNewContent.contains("File Not Found")) {
+				javaProcessesNewContent = "";
+			}
+
+			String javaProcessList = javaProcessesNewContent.replaceAll("\r\n", ",");
+
+			if (javaProcessList.endsWith(",")) {
+				javaProcessList = javaProcessList.substring(0, javaProcessList.length() - 1);
+			}
+
+			project.setProperty("java.process.list", javaProcessList);
+		</script>
+
+		<for list="${java.process.list}" param="java.process">
+			<sequential>
+				<if>
+					<contains string="@{java.process}" substring="org.apache.directory.server.UberjarMain" />
+					<then>
+						<antcall target="kill-java-process">
+							<param name="java.process.to.kill" value="@{java.process}" />
+						</antcall>
+					</then>
+				</if>
+			</sequential>
+		</for>
 	</target>
 
 	<target name="stop-selenium">
 		<antelope:post to="http://localhost:14444/selenium-server/driver/?cmd=shutDownSeleniumServer" wantresponse="true" />
-	</target>
-
-	<target name="stop-selenium-nanny">
-		<exec executable="taskkill.exe">
-			<arg line="/F /IM selenium_nanny.exe" />
-		</exec>
 	</target>
 
 	<target name="stop-vm">
@@ -3866,7 +4621,9 @@ file.
 
 		<antcall target="clean-up-plugins" />
 
-		<antcall target="prepare-mysql" />
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+		</antcall>
 
 		<antcall target="rebuild-database" inheritAll="false">
 			<param name="test.database.minimal" value="true" />

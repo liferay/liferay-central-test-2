@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,10 +38,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SharepointRequest {
 
-	public SharepointRequest(String rootPath) {
-		_rootPath = rootPath;
-	}
-
 	public SharepointRequest(
 			HttpServletRequest request, HttpServletResponse response, User user)
 		throws SharepointException {
@@ -53,6 +49,10 @@ public class SharepointRequest {
 		_params.putAll(request.getParameterMap());
 
 		addParams();
+	}
+
+	public SharepointRequest(String rootPath) {
+		_rootPath = rootPath;
 	}
 
 	public void addParam(String key, String value) {

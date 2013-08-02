@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -200,6 +202,10 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 		return new ListTypeWrapper(_listType.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ListType toUnescapedModel() {
+		return new ListTypeWrapper(_listType.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _listType.toString();
@@ -207,6 +213,25 @@ public class ListTypeWrapper implements ListType, ModelWrapper<ListType> {
 
 	public java.lang.String toXmlString() {
 		return _listType.toXmlString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ListTypeWrapper)) {
+			return false;
+		}
+
+		ListTypeWrapper listTypeWrapper = (ListTypeWrapper)obj;
+
+		if (Validator.equals(_listType, listTypeWrapper._listType)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

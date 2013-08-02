@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,9 +51,7 @@ public class ResourcePermissionFinderImpl
 	public static final String FIND_BY_R_S =
 		ResourcePermissionFinder.class.getName() + ".findByR_S";
 
-	public static final String FIND_BY_C_N_S =
-		ResourcePermissionFinder.class.getName() + ".findByC_N_S";
-
+	@Override
 	public int countByR_S(long roleId, int[] scopes) throws SystemException {
 		Session session = null;
 
@@ -93,6 +91,7 @@ public class ResourcePermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByC_N_S_P_R_A(
 			long companyId, String name, int scope, String primKey,
 			long[] roleIds, long actionId)
@@ -167,6 +166,7 @@ public class ResourcePermissionFinderImpl
 		return count.intValue();
 	}
 
+	@Override
 	public List<ResourcePermission> findByResource(
 			long companyId, long groupId, String name, String primKey)
 		throws SystemException {
@@ -203,12 +203,14 @@ public class ResourcePermissionFinderImpl
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public List<ResourcePermission> findByC_P(long companyId, String primKey)
 		throws SystemException {
 
 		return ResourcePermissionUtil.findByC_P(companyId, primKey);
 	}
 
+	@Override
 	public List<ResourcePermission> findByR_S(
 			long roleId, int[] scopes, int start, int end)
 		throws SystemException {
@@ -233,36 +235,6 @@ public class ResourcePermissionFinderImpl
 
 			return (List<ResourcePermission>)QueryUtil.list(
 				q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<String> findByC_N_S(long companyId, String name, int scope)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_S);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar("primKey", Type.STRING);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(name);
-			qPos.add(scope);
-
-			return q.list(true);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

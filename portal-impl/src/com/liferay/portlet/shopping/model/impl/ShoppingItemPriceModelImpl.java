@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -317,13 +317,16 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	@Override
 	public ShoppingItemPrice toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ShoppingItemPrice)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ShoppingItemPrice)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ShoppingItemPrice toUnescapedModel() {
+		return (ShoppingItemPrice)this;
 	}
 
 	@Override
@@ -382,18 +385,15 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingItemPrice)) {
 			return false;
 		}
 
-		ShoppingItemPrice shoppingItemPrice = null;
-
-		try {
-			shoppingItemPrice = (ShoppingItemPrice)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)obj;
 
 		long primaryKey = shoppingItemPrice.getPrimaryKey();
 
@@ -531,7 +531,7 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	}
 
 	private static ClassLoader _classLoader = ShoppingItemPrice.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ShoppingItemPrice.class
 		};
 	private long _itemPriceId;
@@ -547,5 +547,5 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl<ShoppingItemPrice>
 	private boolean _useShippingFormula;
 	private int _status;
 	private long _columnBitmask;
-	private ShoppingItemPrice _escapedModelProxy;
+	private ShoppingItemPrice _escapedModel;
 }

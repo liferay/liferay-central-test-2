@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,6 +63,7 @@ public class JournalArticleAssetRendererFactory
 
 	public static final String TYPE = "content";
 
+	@Override
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
 
@@ -71,7 +72,7 @@ public class JournalArticleAssetRendererFactory
 		try {
 			article = JournalArticleLocalServiceUtil.getArticle(classPK);
 		}
-		catch (NoSuchArticleException nsae) {
+		catch (NoSuchArticleException nsae1) {
 			JournalArticleResource articleResource =
 				JournalArticleResourceLocalServiceUtil.getArticleResource(
 					classPK);
@@ -84,7 +85,7 @@ public class JournalArticleAssetRendererFactory
 						articleResource.getGroupId(),
 						articleResource.getArticleId());
 				}
-				catch (NoSuchArticleException nsae1) {
+				catch (NoSuchArticleException nsae2) {
 					approvedArticleAvailable = false;
 				}
 			}
@@ -111,6 +112,7 @@ public class JournalArticleAssetRendererFactory
 		return new JournalArticleAssetRenderer(article);
 	}
 
+	@Override
 	public String getClassName() {
 		return CLASS_NAME;
 	}
@@ -133,6 +135,7 @@ public class JournalArticleAssetRendererFactory
 		return classTypes;
 	}
 
+	@Override
 	public String getType() {
 		return TYPE;
 	}

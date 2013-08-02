@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -74,7 +74,7 @@ if (folder != null) {
 
 		// Name
 
-		row.addText(curFolder.getName(), rowURL);
+		row.addText(HtmlUtil.escape(curFolder.getName()), rowURL);
 
 		// Statistics
 
@@ -99,7 +99,7 @@ if (folder != null) {
 		sb.append("selectFolder('");
 		sb.append(curFolder.getFolderId());
 		sb.append("', '");
-		sb.append(UnicodeFormatter.toString(curFolder.getName()));
+		sb.append(UnicodeFormatter.toString(HtmlUtil.escape(curFolder.getName())));
 		sb.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());

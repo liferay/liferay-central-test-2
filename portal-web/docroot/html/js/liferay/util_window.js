@@ -130,6 +130,15 @@ AUI.add(
 				);
 
 				Liferay.after(
+					'hashChange',
+					function(event) {
+						if (event.id == id ) {
+							dialog.iframe.set('uri', event.uri);
+						}
+					}
+				);
+
+				Liferay.after(
 					'popupReady',
 					function(event) {
 						if (event.windowName == id) {

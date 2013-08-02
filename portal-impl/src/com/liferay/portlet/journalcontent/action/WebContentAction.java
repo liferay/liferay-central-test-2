@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,8 +45,9 @@ public class WebContentAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		PortletPreferences preferences = actionRequest.getPreferences();
@@ -87,8 +88,9 @@ public class WebContentAction extends PortletAction {
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		String contentType = ParamUtil.getString(
@@ -100,7 +102,7 @@ public class WebContentAction extends PortletAction {
 
 		if (resourceRequest.getResourceID() != null) {
 			super.serveResource(
-				mapping, form, portletConfig, resourceRequest,
+				actionMapping, actionForm, portletConfig, resourceRequest,
 				resourceResponse);
 		}
 		else {

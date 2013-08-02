@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -727,6 +728,10 @@ public class JournalFeedWrapper implements JournalFeed,
 		return new JournalFeedWrapper(_journalFeed.toEscapedModel());
 	}
 
+	public com.liferay.portlet.journal.model.JournalFeed toUnescapedModel() {
+		return new JournalFeedWrapper(_journalFeed.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _journalFeed.toString();
@@ -739,6 +744,25 @@ public class JournalFeedWrapper implements JournalFeed,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalFeed.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalFeedWrapper)) {
+			return false;
+		}
+
+		JournalFeedWrapper journalFeedWrapper = (JournalFeedWrapper)obj;
+
+		if (Validator.equals(_journalFeed, journalFeedWrapper._journalFeed)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

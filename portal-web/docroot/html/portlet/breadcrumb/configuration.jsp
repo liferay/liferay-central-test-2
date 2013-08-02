@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,16 +79,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	var toggleCustomFields = function() {
 		var data = {
-			'_<%= portletResource %>_displayStyle': selectDisplayStyle.val(),
-			'_<%= portletResource %>_showCurrentGroup': formNode.one('#<portlet:namespace />showCurrentGroup').val(),
-			'_<%= portletResource %>_showCurrentPortlet': formNode.one('#<portlet:namespace />showCurrentPortlet').val(),
-			'_<%= portletResource %>_showGuestGroup': formNode.one('#<portlet:namespace />showGuestGroup').val(),
-			'_<%= portletResource %>_showLayout': formNode.one('#<portlet:namespace />showLayout').val(),
-			'_<%= portletResource %>_showParentGroups': formNode.one('#<portlet:namespace />showParentGroups').val(),
-			'_<%= portletResource %>_showPortletBreadcrumb': formNode.one('#<portlet:namespace />showPortletBreadcrumb').val()
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_displayStyle': selectDisplayStyle.val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showCurrentGroup': formNode.one('#<portlet:namespace />showCurrentGroup').val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showCurrentPortlet': formNode.one('#<portlet:namespace />showCurrentPortlet').val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showGuestGroup': formNode.one('#<portlet:namespace />showGuestGroup').val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showLayout': formNode.one('#<portlet:namespace />showLayout').val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showParentGroups': formNode.one('#<portlet:namespace />showParentGroups').val(),
+			'_<%= HtmlUtil.escapeJS(portletResource) %>_showPortletBreadcrumb': formNode.one('#<portlet:namespace />showPortletBreadcrumb').val()
 		};
 
-		Liferay.Portlet.refresh('#p_p_id_<%= portletResource %>_', data);
+		Liferay.Portlet.refresh('#p_p_id_<%= HtmlUtil.escapeJS(portletResource) %>_', data);
 	};
 
 	if (selectDisplayStyle) {

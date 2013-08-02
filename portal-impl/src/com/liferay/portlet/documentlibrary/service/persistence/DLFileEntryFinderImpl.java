@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -97,6 +97,7 @@ public class DLFileEntryFinderImpl
 	public static final String FIND_BY_G_U_F_S_M =
 		DLFileEntryFinder.class.getName() + ".findByG_U_F_S_M";
 
+	@Override
 	public int countByExtraSettings() throws SystemException {
 		Session session = null;
 
@@ -129,12 +130,14 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public int countByG_F_S(long groupId, List<Long> folderIds, int status)
 		throws SystemException {
 
 		return doCountByG_F_S(groupId, folderIds, status, false);
 	}
 
+	@Override
 	public int countByG_U_F_M_S(
 			long groupId, long userId, List<Long> folderIds, String[] mimeTypes,
 			int status)
@@ -230,6 +233,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public DLFileEntry fetchByAnyImageId(long imageId) throws SystemException {
 		Session session = null;
 
@@ -265,6 +269,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public int filterCountByG_F_S(
 			long groupId, List<Long> folderIds, int status)
 		throws SystemException {
@@ -272,6 +277,7 @@ public class DLFileEntryFinderImpl
 		return doCountByG_F_S(groupId, folderIds, status, true);
 	}
 
+	@Override
 	public DLFileEntry findByAnyImageId(long imageId)
 		throws NoSuchFileEntryException, SystemException {
 
@@ -285,6 +291,7 @@ public class DLFileEntryFinderImpl
 			"No DLFileEntry exists with the imageId " + imageId);
 	}
 
+	@Override
 	public List<DLFileEntry> findByExtraSettings(int start, int end)
 		throws SystemException {
 
@@ -310,6 +317,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<DLFileEntry> findByMisversioned() throws SystemException {
 		Session session = null;
 
@@ -332,6 +340,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<DLFileEntry> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -354,6 +363,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<DLFileEntry> findByOrphanedFileEntries()
 		throws SystemException {
 
@@ -378,6 +388,7 @@ public class DLFileEntryFinderImpl
 		}
 	}
 
+	@Override
 	public List<DLFileEntry> findByG_U_F_M_S(
 			long groupId, long userId, List<Long> folderIds, String[] mimeTypes,
 			int status, int start, int end, OrderByComparator obc)
@@ -505,7 +516,6 @@ public class DLFileEntryFinderImpl
 				sql = CustomSQLUtil.get(COUNT_BY_G_F_S);
 
 				if (inlineSQLHelper && InlineSQLHelperUtil.isEnabled()) {
-
 					sql = StringUtil.replace(
 						sql, "[$JOIN$]",
 						CustomSQLUtil.get(

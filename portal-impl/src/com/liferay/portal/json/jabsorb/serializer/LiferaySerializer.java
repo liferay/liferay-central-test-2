@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -64,14 +64,17 @@ public class LiferaySerializer extends AbstractSerializer {
 		return false;
 	}
 
+	@Override
 	public Class<?>[] getJSONClasses() {
 		return _JSON_CLASSES;
 	}
 
+	@Override
 	public Class<?>[] getSerializableClasses() {
 		return _SERIALIZABLE_CLASSES;
 	}
 
+	@Override
 	public Object marshall(
 			SerializerState serializerState, Object parentObject, Object object)
 		throws MarshallException {
@@ -167,6 +170,7 @@ public class LiferaySerializer extends AbstractSerializer {
 		return jsonObject;
 	}
 
+	@Override
 	public ObjectMatch tryUnmarshall(
 			SerializerState serializerState,
 			@SuppressWarnings("rawtypes") Class clazz, Object object)
@@ -240,6 +244,7 @@ public class LiferaySerializer extends AbstractSerializer {
 		return objectMatch;
 	}
 
+	@Override
 	public Object unmarshall(
 			SerializerState serializerState,
 			@SuppressWarnings("rawtypes") Class clazz, Object object)

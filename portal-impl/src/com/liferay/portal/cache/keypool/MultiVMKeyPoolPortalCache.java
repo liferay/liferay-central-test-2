@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,9 +37,11 @@ public class MultiVMKeyPoolPortalCache implements PortalCache {
 		_localPortalCache = localPortalCache;
 	}
 
+	@Override
 	public void destroy() {
 	}
 
+	@Override
 	public Collection<Object> get(Collection<Serializable> keys) {
 		List<Object> values = new ArrayList<Object>(keys.size());
 
@@ -50,6 +52,7 @@ public class MultiVMKeyPoolPortalCache implements PortalCache {
 		return values;
 	}
 
+	@Override
 	public Object get(Serializable key) {
 		if (key == null) {
 			return null;
@@ -58,38 +61,45 @@ public class MultiVMKeyPoolPortalCache implements PortalCache {
 		return _localPortalCache.get(key);
 	}
 
+	@Override
 	public String getName() {
 		return _clusterPortalCache.getName();
 	}
 
+	@Override
 	public void put(Serializable key, Object obj) {
 		_clusterPortalCache.put(key, key);
 
 		_localPortalCache.put(key, obj);
 	}
 
+	@Override
 	public void put(Serializable key, Object obj, int timeToLive) {
 		_clusterPortalCache.put(key, key, timeToLive);
 
 		_localPortalCache.put(key, obj, timeToLive);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable obj) {
 		_clusterPortalCache.put(key, key);
 
 		_localPortalCache.put(key, obj);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable obj, int timeToLive) {
 		_clusterPortalCache.put(key, key, timeToLive);
 
 		_localPortalCache.put(key, obj, timeToLive);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener cacheListener) {
 		_clusterPortalCache.registerCacheListener(cacheListener);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
@@ -97,20 +107,24 @@ public class MultiVMKeyPoolPortalCache implements PortalCache {
 			cacheListener, cacheListenerScope);
 	}
 
+	@Override
 	public void remove(Serializable key) {
 		_clusterPortalCache.remove(key);
 		_localPortalCache.remove(key);
 	}
 
+	@Override
 	public void removeAll() {
 		_clusterPortalCache.removeAll();
 		_localPortalCache.removeAll();
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		_clusterPortalCache.unregisterCacheListener(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		_clusterPortalCache.unregisterCacheListeners();
 	}

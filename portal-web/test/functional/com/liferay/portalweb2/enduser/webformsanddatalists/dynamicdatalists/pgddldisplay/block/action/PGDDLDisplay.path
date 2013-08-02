@@ -1,0 +1,137 @@
+<html>
+<head>
+<title>PGDDLDisplay</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDDLDisplay</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGDDLDisplay</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>HEADER_TITLE</td>
+	<td>//h1[@class='header-title']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_RECORD_BUTTON</td>
+	<td>//input[@value='Add Record']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--RECORD_TABLE-->
+<tr>
+	<td>RECORD_TABLE_COLUMN_ONE_NAME</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tbody/tr/th[1])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_ONE_RECORD_1</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tr/td[1]/a)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_TWO_NAME</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tbody/tr/th[2])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_TWO_RECORD_1</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tr/td[2]/a)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_THREE_NAME</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tbody/tr/th[3])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_THREE_RECORD_1</td>
+	<td>xpath=(//div[contains(@id,'ocerSearchContainer')]//tr/td[3]/a)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_ACTIONS_1</td>
+	<td>xpath=(//span[@title='Actions']/ul/li/strong/a/span)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--TOOLBAR-->
+<tr>
+	<td>TOOLBAR_ADD_DETAIL_TEMPLATE</td>
+	<td>//img[@title='Add Detail Template']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TOOLBAR_ADD_LIST_TEMPLATE</td>
+	<td>//img[@title='Add List Template']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TOOLBAR_SELECT_LIST</td>
+	<td>//img[@title='Select List']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TOOLBAR_ADD_LIST</td>
+	<td>//img[@title='Add List']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--RECORD_MENULIST-->
+<tr>
+	<td>RECORD_MENULIST_VIEW</td>
+	<td>//a[@role='menuitem' and contains(.,'View')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

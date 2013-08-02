@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -267,6 +267,56 @@ public class AssetEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(
+		HttpPrincipal httpPrincipal, long groupId, java.util.Date createDate,
+		java.util.Date modifiedDate, java.lang.String className, long classPK,
+		java.lang.String classUuid, long classTypeId, long[] categoryIds,
+		java.lang.String[] tagNames, boolean visible, java.util.Date startDate,
+		java.util.Date endDate, java.util.Date publishDate,
+		java.util.Date expirationDate, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String summary, java.lang.String url,
+		java.lang.String layoutUuid, int height, int width,
+		java.lang.Integer priority, boolean sync)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
+					"updateEntry", _updateEntryParameterTypes6);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
+					createDate, modifiedDate, className, classPK, classUuid,
+					classTypeId, categoryIds, tagNames, visible, startDate,
+					endDate, publishDate, expirationDate, mimeType, title,
+					description, summary, url, layoutUuid, height, width,
+					priority, sync);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.exception.PortalException) {
+					throw (com.liferay.portal.kernel.exception.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.kernel.exception.SystemException) {
+					throw (com.liferay.portal.kernel.exception.SystemException)e;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(e);
+			}
+
+			return (com.liferay.portlet.asset.model.AssetEntry)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetEntry updateEntry(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
 		long classPK, java.lang.String classUuid, long classTypeId,
 		long[] categoryIds, java.lang.String[] tagNames, boolean visible,
@@ -280,7 +330,7 @@ public class AssetEntryServiceHttp {
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
 			MethodKey methodKey = new MethodKey(AssetEntryServiceUtil.class.getName(),
-					"updateEntry", _updateEntryParameterTypes6);
+					"updateEntry", _updateEntryParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, groupId,
 					className, classPK, classUuid, classTypeId, categoryIds,
@@ -334,6 +384,16 @@ public class AssetEntryServiceHttp {
 			java.lang.String.class, long.class
 		};
 	private static final Class<?>[] _updateEntryParameterTypes6 = new Class[] {
+			long.class, java.util.Date.class, java.util.Date.class,
+			java.lang.String.class, long.class, java.lang.String.class,
+			long.class, long[].class, java.lang.String[].class, boolean.class,
+			java.util.Date.class, java.util.Date.class, java.util.Date.class,
+			java.util.Date.class, java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class,
+			java.lang.String.class, java.lang.String.class, int.class, int.class,
+			java.lang.Integer.class, boolean.class
+		};
+	private static final Class<?>[] _updateEntryParameterTypes7 = new Class[] {
 			long.class, java.lang.String.class, long.class,
 			java.lang.String.class, long.class, long[].class,
 			java.lang.String[].class, boolean.class, java.util.Date.class,

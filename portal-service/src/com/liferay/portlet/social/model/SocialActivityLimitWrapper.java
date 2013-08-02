@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -388,6 +389,10 @@ public class SocialActivityLimitWrapper implements SocialActivityLimit,
 		return new SocialActivityLimitWrapper(_socialActivityLimit.toEscapedModel());
 	}
 
+	public com.liferay.portlet.social.model.SocialActivityLimit toUnescapedModel() {
+		return new SocialActivityLimitWrapper(_socialActivityLimit.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _socialActivityLimit.toString();
@@ -408,6 +413,26 @@ public class SocialActivityLimitWrapper implements SocialActivityLimit,
 
 	public void setCount(int limitPeriod, int count) {
 		_socialActivityLimit.setCount(limitPeriod, count);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivityLimitWrapper)) {
+			return false;
+		}
+
+		SocialActivityLimitWrapper socialActivityLimitWrapper = (SocialActivityLimitWrapper)obj;
+
+		if (Validator.equals(_socialActivityLimit,
+					socialActivityLimitWrapper._socialActivityLimit)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

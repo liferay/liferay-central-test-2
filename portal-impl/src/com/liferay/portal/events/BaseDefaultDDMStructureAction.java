@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,12 +17,15 @@ package com.liferay.portal.events;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.upgrade.UpgradeProcessUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
@@ -90,6 +93,12 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 			xsd = DDMXMLUtil.updateXMLDefaultLocale(
 				xsd, ddmStructureDefaultLocale, LocaleUtil.getDefault());
 
+			if (name.equals(DLFileEntryTypeConstants.NAME_IG_IMAGE) &&
+				!UpgradeProcessUtil.isCreateIGImageDocumentType()) {
+
+				continue;
+			}
+
 			DDMStructureLocalServiceUtil.addStructure(
 				userId, groupId, classNameId, ddmStructureKey, nameMap,
 				descriptionMap, xsd, "xml", DDMStructureConstants.TYPE_DEFAULT,
@@ -102,6 +111,10 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 
 		String xml = ContentUtil.get(
 			"com/liferay/portal/events/dependencies/" + fileName);
+
+		Locale locale = LocaleUtil.getDefault();
+
+		xml = StringUtil.replace(xml, "[$LOCALE_DEFAULT$]", locale.toString());
 
 		Document document = SAXReaderUtil.read(xml);
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,10 @@ public class InputEditorTag extends IncludeTag {
 
 	public void setConfigParams(Map<String, String> configParams) {
 		_configParams = configParams;
+	}
+
+	public void setContentsLanguageId(String contentsLanguageId) {
+		_contentsLanguageId = contentsLanguageId;
 	}
 
 	public void setCssClass(String cssClass) {
@@ -79,6 +83,7 @@ public class InputEditorTag extends IncludeTag {
 	@Override
 	protected void cleanUp() {
 		_configParams = null;
+		_contentsLanguageId = null;
 		_cssClass = null;
 		_editorImpl = null;
 		_fileBrowserParams = null;
@@ -114,6 +119,8 @@ public class InputEditorTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:input-editor:configParams", _configParams);
+		request.setAttribute(
+			"liferay-ui:input-editor:contentsLanguageId", _contentsLanguageId);
 		request.setAttribute("liferay-ui:input-editor:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:input-editor:cssClasses", cssClasses);
 		request.setAttribute("liferay-ui:input-editor:editorImpl", editorImpl);
@@ -134,6 +141,7 @@ public class InputEditorTag extends IncludeTag {
 	}
 
 	private Map<String, String> _configParams;
+	private String _contentsLanguageId;
 	private String _cssClass;
 	private String _editorImpl;
 	private Map<String, String> _fileBrowserParams;

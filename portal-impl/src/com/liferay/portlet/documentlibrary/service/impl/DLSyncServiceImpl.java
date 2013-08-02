@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,6 +46,7 @@ import java.util.List;
  */
 public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 
+	@Override
 	public DLSyncUpdate getDLSyncUpdate(
 			long companyId, long repositoryId, Date lastAccessDate)
 		throws PortalException, SystemException {
@@ -66,6 +67,7 @@ public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 		return dlSyncUpdate;
 	}
 
+	@Override
 	public InputStream getFileDeltaAsStream(
 			long fileEntryId, String sourceVersion, String destinationVersion)
 		throws PortalException, SystemException {
@@ -172,6 +174,7 @@ public class DLSyncServiceImpl extends DLSyncServiceBaseImpl {
 		return deltaInputStream;
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String mimeType,
 			String title, String description, String changeLog,

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -211,6 +211,125 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the resources where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @return the matching resources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Resource> findByPrimKey(
+		java.lang.String primKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the resources where primKey = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param primKey the prim key
+	* @param start the lower bound of the range of resources
+	* @param end the upper bound of the range of resources (not inclusive)
+	* @return the range of matching resources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Resource> findByPrimKey(
+		java.lang.String primKey, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the resources where primKey = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param primKey the prim key
+	* @param start the lower bound of the range of resources
+	* @param end the upper bound of the range of resources (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching resources
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portal.model.Resource> findByPrimKey(
+		java.lang.String primKey, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first resource in the ordered set where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching resource
+	* @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Resource findByPrimKey_First(
+		java.lang.String primKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchResourceException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first resource in the ordered set where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching resource, or <code>null</code> if a matching resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Resource fetchByPrimKey_First(
+		java.lang.String primKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last resource in the ordered set where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching resource
+	* @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Resource findByPrimKey_Last(
+		java.lang.String primKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchResourceException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last resource in the ordered set where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching resource, or <code>null</code> if a matching resource could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Resource fetchByPrimKey_Last(
+		java.lang.String primKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the resources before and after the current resource in the ordered set where primKey = &#63;.
+	*
+	* @param resourceId the primary key of the current resource
+	* @param primKey the prim key
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next resource
+	* @throws com.liferay.portal.NoSuchResourceException if a resource with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portal.model.Resource[] findByPrimKey_PrevAndNext(
+		long resourceId, java.lang.String primKey,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.NoSuchResourceException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the resource where codeId = &#63; and primKey = &#63; or throws a {@link com.liferay.portal.NoSuchResourceException} if it could not be found.
 	*
 	* @param codeId the code ID
@@ -302,6 +421,15 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Removes all the resources where primKey = &#63; from the database.
+	*
+	* @param primKey the prim key
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByPrimKey(java.lang.String primKey)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes the resource where codeId = &#63; and primKey = &#63; from the database.
 	*
 	* @param codeId the code ID
@@ -330,6 +458,16 @@ public interface ResourcePersistence extends BasePersistence<Resource> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByCodeId(long codeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of resources where primKey = &#63;.
+	*
+	* @param primKey the prim key
+	* @return the number of matching resources
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByPrimKey(java.lang.String primKey)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

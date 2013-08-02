@@ -1,0 +1,51 @@
+<html>
+<head>
+<title>PGDocumentsandmediaAddshortcutsites</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDocumentsandmediaAddshortcutsites</td></tr>
+</thead>
+<tbody>
+<!--SITES-->
+<tr>
+	<td>SITES_SEARCH_FIELD</td>
+	<td>//span[@class='aui-search-bar lfr-display-terms-search']/span/span/span/input</td>
+	<td>Search Field</td>
+</tr>
+<tr>
+	<td>SITES_SEARCH_BUTTON</td>
+	<td>//span[@class='aui-search-bar lfr-display-terms-search']/span[2]/span/input</td>
+	<td>Search Button</td>
+</tr>
+<tr>
+	<td>SITES_GLOBAL_SITE</td>
+	<td>//div[@id='_20_groupsSearchContainerSearchContainer']/table/tbody/tr[3]/td/a</td>
+	<td>Global</td>
+</tr>
+<tr>
+	<td>SITES_MY_SITE_SITE</td>
+	<td>//div[@id='_20_groupsSearchContainerSearchContainer']/table/tbody/tr[4]/td/a</td>
+	<td>My Site</td>
+</tr>
+<tr>
+	<td>SITES_LIFERAY_SITE</td>
+	<td>//div[@id='_20_groupsSearchContainerSearchContainer']/table/tbody/tr[5]/td/a</td>
+	<td>Liferay</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DOCUMENTS_AND_MEDIA_POPUP-->
+<tr>
+	<td>DOCUMENTS_AND_MEDIA_POPUP</td>
+	<td>//body[contains(.,'portal-popup')]</td>
+	<td>Popup Window</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

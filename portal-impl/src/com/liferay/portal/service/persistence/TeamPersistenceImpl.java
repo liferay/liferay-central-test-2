@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -204,9 +204,59 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Team team) {
+		if (team.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(team.getGroupId()),
+					
+					team.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args, team);
+		}
+		else {
+			TeamModelImpl teamModelImpl = (TeamModelImpl)team;
+
+			if ((teamModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(team.getGroupId()),
+						
+						team.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args, team);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Team team) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { Long.valueOf(team.getGroupId()), team.getName() });
+		TeamModelImpl teamModelImpl = (TeamModelImpl)team;
+
+		Object[] args = new Object[] {
+				Long.valueOf(team.getGroupId()),
+				
+				team.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+
+		if ((teamModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(teamModelImpl.getOriginalGroupId()),
+					
+					teamModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+		}
 	}
 
 	/**
@@ -372,29 +422,8 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		EntityCacheUtil.putResult(TeamModelImpl.ENTITY_CACHE_ENABLED,
 			TeamImpl.class, team.getPrimaryKey(), team);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-				new Object[] { Long.valueOf(team.getGroupId()), team.getName() },
-				team);
-		}
-		else {
-			if ((teamModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(teamModelImpl.getOriginalGroupId()),
-						
-						teamModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-					new Object[] { Long.valueOf(team.getGroupId()), team.getName() },
-					team);
-			}
-		}
+		clearUniqueFindersCache(team);
+		cacheUniqueFindersCache(team);
 
 		return team;
 	}
@@ -2687,8 +2716,10 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 				List<ModelListener<Team>> listenersList = new ArrayList<ModelListener<Team>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Team>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

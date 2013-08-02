@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -252,6 +254,10 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		return new ServiceComponentWrapper(_serviceComponent.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ServiceComponent toUnescapedModel() {
+		return new ServiceComponentWrapper(_serviceComponent.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _serviceComponent.toString();
@@ -276,6 +282,26 @@ public class ServiceComponentWrapper implements ServiceComponent,
 
 	public java.lang.String getTablesSQL() {
 		return _serviceComponent.getTablesSQL();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ServiceComponentWrapper)) {
+			return false;
+		}
+
+		ServiceComponentWrapper serviceComponentWrapper = (ServiceComponentWrapper)obj;
+
+		if (Validator.equals(_serviceComponent,
+					serviceComponentWrapper._serviceComponent)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

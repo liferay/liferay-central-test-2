@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import java.util.List;
  */
 public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
+	@Override
 	public Website addWebsite(
 			long userId, String className, long classPK, String url, int typeId,
 			boolean primary)
@@ -65,6 +66,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return website;
 	}
 
+	@Override
 	public void deleteWebsites(long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -78,10 +80,12 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<Website> getWebsites() throws SystemException {
 		return websitePersistence.findAll();
 	}
 
+	@Override
 	public List<Website> getWebsites(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -91,6 +95,7 @@ public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 		return websitePersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
+	@Override
 	public Website updateWebsite(
 			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {

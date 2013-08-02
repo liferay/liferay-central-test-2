@@ -1,0 +1,163 @@
+<html>
+<head>
+<title>CPSites</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPSites</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPSites</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD</td>
+	<td>//div[@class='lfr-portlet-toolbar']//li/strong/a[contains(.,'Add')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ADD-->
+<tr>
+	<td>ADD_BLANK_SITE</td>
+	<td>//ul[@class='lfr-menu-list-overflow']/li/a[contains(.,'Blank Site')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_COMMUNITY_SITE</td>
+	<td>//ul[@class='lfr-menu-list-overflow']/li/a[contains(.,'Community Site')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_INTRANET_SITE</td>
+	<td>//ul[@class='lfr-menu-list-overflow']/li/a[contains(.,'Intranet Site')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SEARCH-->
+<tr>
+	<td>SEARCH_FIELD</td>
+	<td>//input[@id='_134_name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SITE_TABLE-->
+<tr>
+	<td>SITE_TABLE_NAME</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_TYPE</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_MEMBERS_USERS</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[3]/div[@class='user-count']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_MEMBERS_ORGS</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[3]/div[@class='organization-count']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_ACTIVE</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_PENDING_REQUESTS</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_TAGS</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td[6]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_TABLE_ACTIONS</td>
+	<td>//table[@data-searchcontainerid='_134_groupsSearchContainer']//tr[3]/td/span[@title='Actions']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SITE_MENULIST-->
+<tr>
+	<td>SITE_MENULIST_EDIT_SETTINGS</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit Settings')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_MENULIST_MANAGE_PAGES</td>
+	<td>//a[@role='menuitem' and contains(.,'Manage Pages')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_MENULIST_MANAGE_MEMBERSHIPS</td>
+	<td>//a[@role='menuitem' and contains(.,'Manage Memberships')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_MENULIST_LEAVE</td>
+	<td>//a[@role='menuitem' and contains(.,'Leave')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_MENULIST_DEACTIVATE</td>
+	<td>//a[@role='menuitem' and contains(.,'Deactivate')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

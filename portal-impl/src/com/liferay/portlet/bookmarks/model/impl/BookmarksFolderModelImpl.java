@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -488,13 +488,16 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 	@Override
 	public BookmarksFolder toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (BookmarksFolder)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (BookmarksFolder)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public BookmarksFolder toUnescapedModel() {
+		return (BookmarksFolder)this;
 	}
 
 	@Override
@@ -548,18 +551,15 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BookmarksFolder)) {
 			return false;
 		}
 
-		BookmarksFolder bookmarksFolder = null;
-
-		try {
-			bookmarksFolder = (BookmarksFolder)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BookmarksFolder bookmarksFolder = (BookmarksFolder)obj;
 
 		long primaryKey = bookmarksFolder.getPrimaryKey();
 
@@ -765,7 +765,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	}
 
 	private static ClassLoader _classLoader = BookmarksFolder.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			BookmarksFolder.class
 		};
 	private String _uuid;
@@ -791,5 +791,5 @@ public class BookmarksFolderModelImpl extends BaseModelImpl<BookmarksFolder>
 	private String _name;
 	private String _description;
 	private long _columnBitmask;
-	private BookmarksFolder _escapedModelProxy;
+	private BookmarksFolder _escapedModel;
 }

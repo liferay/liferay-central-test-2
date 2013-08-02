@@ -4,6 +4,12 @@ AUI.add(
 		var Browser = Liferay.Browser;
 		var Lang = A.Lang;
 
+		var REGEX_IGNORED_CLASSES = /boundary|draggable/;
+
+		var REGEX_IGNORED_CLASSES_PORTLET = /(?:^|\s)portlet(?=\s|$)/g;
+
+		var REGEX_VALID_CLASSES = /(?:([\w\d-]+)-)?portlet(?:-?([\w\d-]+-?))?/g;
+
 		var PortletCSS = {
 			init: function(portletId) {
 				var instance = this;
@@ -44,6 +50,8 @@ AUI.add(
 											if (Browser.isIe() && Browser.getMajorVersion() == 6) {
 												window.location.reload(true);
 											}
+
+											instance._destroyColorPickers();
 										}
 									},
 									title: Liferay.Language.get('look-and-feel'),
@@ -436,6 +444,7 @@ AUI.add(
 				var instance = this;
 
 				var portlet = instance._curPortlet;
+				var portletBoundary = instance._portletBoundary;
 
 				var customCSS = instance._getNodeById('lfr-custom-css');
 				var customCSSClassName = instance._getNodeById('lfr-custom-css-class-name');
@@ -446,14 +455,13 @@ AUI.add(
 				var refreshText = '';
 
 				var portletId = instance._curPortletWrapperId;
-				var portletClasses = portlet.get('className');
 
-				portletClasses = Lang.trim(portletClasses).replace(/(\s)/g, '$1.');
+				var portletClasses = instance._getCSSClasses(portletBoundary, portlet);
 
 				var portletInfoText =
-					Liferay.Language.get('your-current-portlet-information-is-as-follows') + ':<br />' +
+					Liferay.Language.get('your-current-portlet-information-is-as-follows') + '<br />' +
 						Liferay.Language.get('portlet-id') + ': <strong>#' + portletId + '</strong><br />' +
-							Liferay.Language.get('portlet-classes') + ': <strong>.' + portletClasses + '</strong>';
+							Liferay.Language.get('portlet-classes') + ': <strong>' + portletClasses + '</strong>';
 
 				var customNote = A.one('#lfr-refresh-styles');
 
@@ -583,7 +591,7 @@ AUI.add(
 				addIdLink.on(
 					'click',
 					function() {
-						customCSS.getDOM().value += '\n#' + portletId + '{\n\t\n}\n';
+						instance._insertCustomCSSValue(customCSS, '#' + portletId);
 					}
 				);
 
@@ -592,9 +600,29 @@ AUI.add(
 				addClassLink.on(
 					'click',
 					function() {
-						customCSS.getDOM().value += '\n.' + portletClasses.replace(/\s/g, '') + '{\n\t\n}\n';
+						instance._insertCustomCSSValue(customCSS, instance._getCSSClasses(portletBoundary, portlet));
 					}
 				);
+			},
+
+			_destroyColorPickers: function() {
+				var instance = this;
+
+				for (var i = 0; i < 4; i++) {
+					var borderLocation = '_borderColorPicker' + i;
+
+					instance[borderLocation].destroy();
+
+					instance[borderLocation] = null;
+				}
+
+				instance._backgroundColorPicker.destroy();
+
+				instance._backgroundColorPicker = null;
+
+				instance._fontColorPicker.destroy();
+
+				instance._fontColorPicker = null;
 			},
 
 			_getCombo: function(input, selectBox) {
@@ -606,6 +634,35 @@ AUI.add(
 				inputVal = instance._getSafeInteger(inputVal);
 
 				return {input: inputVal, selectBox: selectVal, both: inputVal + selectVal};
+			},
+
+			_getCSSClasses: function(portletBoundary, portlet) {
+				var instance = this;
+
+				var portletClasses = '';
+
+				if (portlet && portlet != portletBoundary) {
+					portletClasses = portlet.attr('className').replace(REGEX_IGNORED_CLASSES_PORTLET, '');
+
+					portletClasses = Lang.trim(portletClasses).replace(/\s+/g, '.');
+
+					if (portletClasses) {
+						portletClasses = ' .' + portletClasses;
+					}
+				}
+
+				var boundaryClasses = [];
+
+				portletBoundary.attr('className').replace(
+					REGEX_VALID_CLASSES,
+					function(match, subMatch1, subMatch2) {
+						if (!REGEX_IGNORED_CLASSES.test(subMatch2)) {
+							boundaryClasses.push(match);
+						}
+					}
+				);
+
+				return '.' + boundaryClasses.join('.') + portletClasses;
 			},
 
 			_getNodeById: function(id) {
@@ -624,6 +681,22 @@ AUI.add(
 				}
 
 				return output;
+			},
+
+			_insertCustomCSSValue: function(textarea, value) {
+				var instance = this;
+
+				var currentVal = Lang.trim(textarea.val());
+
+				if (currentVal.length) {
+					currentVal += '\n\n';
+				}
+
+				var newVal = currentVal + value + ' {\n\t\n}\n';
+
+				textarea.val(newVal);
+
+				Liferay.Util.setCursorPosition(textarea, newVal.length - 3);
 			},
 
 			_languageClasses: function(key, value, removeClass) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,6 +65,7 @@ import java.util.Map;
 public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
 
+	@Override
 	public JournalTemplate addTemplate(
 			long userId, long groupId, String templateId,
 			boolean autoTemplateId, String structureId,
@@ -164,6 +165,7 @@ public class JournalTemplateLocalServiceImpl
 		return template;
 	}
 
+	@Override
 	public void addTemplateResources(
 			JournalTemplate template, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -175,6 +177,7 @@ public class JournalTemplateLocalServiceImpl
 			template.getId(), false, addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addTemplateResources(
 			JournalTemplate template, String[] groupPermissions,
 			String[] guestPermissions)
@@ -186,6 +189,7 @@ public class JournalTemplateLocalServiceImpl
 			template.getId(), groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void addTemplateResources(
 			long groupId, String templateId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -198,6 +202,7 @@ public class JournalTemplateLocalServiceImpl
 			template, addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addTemplateResources(
 			long groupId, String templateId, String[] groupPermissions,
 			String[] guestPermissions)
@@ -209,6 +214,7 @@ public class JournalTemplateLocalServiceImpl
 		addTemplateResources(template, groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void checkNewLine(long groupId, String templateId)
 		throws PortalException, SystemException {
 
@@ -217,7 +223,7 @@ public class JournalTemplateLocalServiceImpl
 
 		String xsl = template.getXsl();
 
-		if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
+		if ((xsl != null) && xsl.contains("\\n")) {
 			xsl = StringUtil.replace(
 				xsl, new String[] {"\\n", "\\r"}, new String[] {"\n", "\r"});
 
@@ -227,6 +233,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public JournalTemplate copyTemplate(
 			long userId, long groupId, String oldTemplateId,
 			String newTemplateId, boolean autoTemplateId)
@@ -295,9 +302,18 @@ public class JournalTemplateLocalServiceImpl
 
 		addTemplateResources(newTemplate, true, true);
 
+		// Expando
+
+		ExpandoBridge oldExpandoBridge = oldTemplate.getExpandoBridge();
+
+		ExpandoBridge newExpandoBridge = newTemplate.getExpandoBridge();
+
+		newExpandoBridge.setAttributes(oldExpandoBridge.getAttributes());
+
 		return newTemplate;
 	}
 
+	@Override
 	public void deleteTemplate(JournalTemplate template)
 		throws PortalException, SystemException {
 
@@ -351,6 +367,7 @@ public class JournalTemplateLocalServiceImpl
 		journalTemplatePersistence.remove(template);
 	}
 
+	@Override
 	public void deleteTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
@@ -362,6 +379,7 @@ public class JournalTemplateLocalServiceImpl
 		deleteTemplate(template);
 	}
 
+	@Override
 	public void deleteTemplates(long groupId)
 		throws PortalException, SystemException {
 
@@ -372,6 +390,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<JournalTemplate> getStructureTemplates(
 			long groupId, String structureId)
 		throws SystemException {
@@ -379,6 +398,7 @@ public class JournalTemplateLocalServiceImpl
 		return journalTemplatePersistence.findByG_S(groupId, structureId);
 	}
 
+	@Override
 	public List<JournalTemplate> getStructureTemplates(
 			long groupId, String structureId, int start, int end)
 		throws SystemException {
@@ -387,24 +407,28 @@ public class JournalTemplateLocalServiceImpl
 			groupId, structureId, start, end);
 	}
 
+	@Override
 	public int getStructureTemplatesCount(long groupId, String structureId)
 		throws SystemException {
 
 		return journalTemplatePersistence.countByG_S(groupId, structureId);
 	}
 
+	@Override
 	public JournalTemplate getTemplate(long id)
 		throws PortalException, SystemException {
 
 		return journalTemplatePersistence.findByPrimaryKey(id);
 	}
 
+	@Override
 	public JournalTemplate getTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		return getTemplate(groupId, templateId, false);
 	}
 
+	@Override
 	public JournalTemplate getTemplate(
 			long groupId, String templateId, boolean includeGlobalTemplates)
 		throws PortalException, SystemException {
@@ -413,9 +437,9 @@ public class JournalTemplateLocalServiceImpl
 
 		if (groupId == 0) {
 			_log.error(
-				"No group id was passed for " + templateId + ". Group id is " +
+				"No group ID was passed for " + templateId + ". Group ID is " +
 					"required since 4.2.0. Please update all custom code and " +
-						"data that references templates without a group id.");
+						"data that references templates without a group ID.");
 
 			List<JournalTemplate> templates =
 				journalTemplatePersistence.findByTemplateId(templateId);
@@ -425,7 +449,7 @@ public class JournalTemplateLocalServiceImpl
 			}
 
 			throw new NoSuchTemplateException(
-				"No JournalTemplate exists with the template id " + templateId);
+				"No JournalTemplate exists with the template ID " + templateId);
 		}
 
 		JournalTemplate template = journalTemplatePersistence.fetchByG_T(
@@ -437,7 +461,7 @@ public class JournalTemplateLocalServiceImpl
 
 		if (!includeGlobalTemplates) {
 			throw new NoSuchTemplateException(
-				"No JournalTemplate exists with the template id " + templateId);
+				"No JournalTemplate exists with the template ID " + templateId);
 		}
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
@@ -449,32 +473,38 @@ public class JournalTemplateLocalServiceImpl
 			companyGroup.getGroupId(), templateId);
 	}
 
+	@Override
 	public JournalTemplate getTemplateBySmallImageId(long smallImageId)
 		throws PortalException, SystemException {
 
 		return journalTemplatePersistence.findBySmallImageId(smallImageId);
 	}
 
+	@Override
 	public List<JournalTemplate> getTemplates() throws SystemException {
 		return journalTemplatePersistence.findAll();
 	}
 
+	@Override
 	public List<JournalTemplate> getTemplates(long groupId)
 		throws SystemException {
 
 		return journalTemplatePersistence.findByGroupId(groupId);
 	}
 
+	@Override
 	public List<JournalTemplate> getTemplates(long groupId, int start, int end)
 		throws SystemException {
 
 		return journalTemplatePersistence.findByGroupId(groupId, start, end);
 	}
 
+	@Override
 	public int getTemplatesCount(long groupId) throws SystemException {
 		return journalTemplatePersistence.countByGroupId(groupId);
 	}
 
+	@Override
 	public boolean hasTemplate(long groupId, String templateId)
 		throws SystemException {
 
@@ -488,6 +518,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<JournalTemplate> search(
 			long companyId, long[] groupIds, String keywords,
 			String structureId, String structureIdComparator, int start,
@@ -499,6 +530,7 @@ public class JournalTemplateLocalServiceImpl
 			start, end, obc);
 	}
 
+	@Override
 	public List<JournalTemplate> search(
 			long companyId, long[] groupIds, String templateId,
 			String structureId, String structureIdComparator, String name,
@@ -511,6 +543,7 @@ public class JournalTemplateLocalServiceImpl
 			name, description, andOperator, start, end, obc);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long[] groupIds, String keywords,
 			String structureId, String structureIdComparator)
@@ -520,6 +553,7 @@ public class JournalTemplateLocalServiceImpl
 			companyId, groupIds, keywords, structureId, structureIdComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long[] groupIds, String templateId,
 			String structureId, String structureIdComparator, String name,
@@ -531,6 +565,7 @@ public class JournalTemplateLocalServiceImpl
 			name, description, andOperator);
 	}
 
+	@Override
 	public JournalTemplate updateTemplate(
 			long groupId, String templateId, String structureId,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -577,9 +612,9 @@ public class JournalTemplateLocalServiceImpl
 		if (Validator.isNull(template.getStructureId()) &&
 			Validator.isNotNull(structureId)) {
 
-			// Allow users to set the structure if and only if it currently
-			// does not have one. Otherwise, you can have bad data because there
-			// may be an existing article that has chosen to use a structure and
+			// Allow users to set the structure if and only if it currently does
+			// not have one. Otherwise, you can have bad data because there may
+			// be an existing article that has chosen to use a structure and
 			// template combination that no longer exists.
 
 			template.setStructureId(structureId);
@@ -665,39 +700,41 @@ public class JournalTemplateLocalServiceImpl
 		String[] imageExtensions = PrefsPropsUtil.getStringArray(
 			PropsKeys.JOURNAL_IMAGE_EXTENSIONS, StringPool.COMMA);
 
-		if (smallImage && Validator.isNull(smallImageURL) &&
-			(smallImageFile != null) && (smallImageBytes != null)) {
+		if (!smallImage || Validator.isNotNull(smallImageURL) ||
+			(smallImageFile == null) || (smallImageBytes == null)) {
 
-			String smallImageName = smallImageFile.getName();
+			return;
+		}
 
-			if (smallImageName != null) {
-				boolean validSmallImageExtension = false;
+		String smallImageName = smallImageFile.getName();
 
-				for (int i = 0; i < imageExtensions.length; i++) {
-					if (StringPool.STAR.equals(imageExtensions[i]) ||
-						StringUtil.endsWith(
-							smallImageName, imageExtensions[i])) {
+		if (smallImageName != null) {
+			boolean validSmallImageExtension = false;
 
-						validSmallImageExtension = true;
+			for (int i = 0; i < imageExtensions.length; i++) {
+				if (StringPool.STAR.equals(imageExtensions[i]) ||
+					StringUtil.endsWith(
+						smallImageName, imageExtensions[i])) {
 
-						break;
-					}
-				}
+					validSmallImageExtension = true;
 
-				if (!validSmallImageExtension) {
-					throw new TemplateSmallImageNameException(smallImageName);
+					break;
 				}
 			}
 
-			long smallImageMaxSize = PrefsPropsUtil.getLong(
-				PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE);
-
-			if ((smallImageMaxSize > 0) &&
-				((smallImageBytes == null) ||
-				 (smallImageBytes.length > smallImageMaxSize))) {
-
-				throw new TemplateSmallImageSizeException();
+			if (!validSmallImageExtension) {
+				throw new TemplateSmallImageNameException(smallImageName);
 			}
+		}
+
+		long smallImageMaxSize = PrefsPropsUtil.getLong(
+			PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE);
+
+		if ((smallImageMaxSize > 0) &&
+			((smallImageBytes == null) ||
+			 (smallImageBytes.length > smallImageMaxSize))) {
+
+			throw new TemplateSmallImageSizeException();
 		}
 	}
 

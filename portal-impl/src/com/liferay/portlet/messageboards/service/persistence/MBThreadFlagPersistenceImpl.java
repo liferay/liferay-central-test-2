@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -220,12 +220,57 @@ public class MBThreadFlagPersistenceImpl extends BasePersistenceImpl<MBThreadFla
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MBThreadFlag mbThreadFlag) {
+		if (mbThreadFlag.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(mbThreadFlag.getUserId()),
+					Long.valueOf(mbThreadFlag.getThreadId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T, args,
+				mbThreadFlag);
+		}
+		else {
+			MBThreadFlagModelImpl mbThreadFlagModelImpl = (MBThreadFlagModelImpl)mbThreadFlag;
+
+			if ((mbThreadFlagModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mbThreadFlag.getUserId()),
+						Long.valueOf(mbThreadFlag.getThreadId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T, args,
+					mbThreadFlag);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MBThreadFlag mbThreadFlag) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
-			new Object[] {
+		MBThreadFlagModelImpl mbThreadFlagModelImpl = (MBThreadFlagModelImpl)mbThreadFlag;
+
+		Object[] args = new Object[] {
 				Long.valueOf(mbThreadFlag.getUserId()),
 				Long.valueOf(mbThreadFlag.getThreadId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
+
+		if ((mbThreadFlagModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(mbThreadFlagModelImpl.getOriginalUserId()),
+					Long.valueOf(mbThreadFlagModelImpl.getOriginalThreadId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
+		}
 	}
 
 	/**
@@ -396,32 +441,8 @@ public class MBThreadFlagPersistenceImpl extends BasePersistenceImpl<MBThreadFla
 		EntityCacheUtil.putResult(MBThreadFlagModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadFlagImpl.class, mbThreadFlag.getPrimaryKey(), mbThreadFlag);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-				new Object[] {
-					Long.valueOf(mbThreadFlag.getUserId()),
-					Long.valueOf(mbThreadFlag.getThreadId())
-				}, mbThreadFlag);
-		}
-		else {
-			if ((mbThreadFlagModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(mbThreadFlagModelImpl.getOriginalUserId()),
-						Long.valueOf(mbThreadFlagModelImpl.getOriginalThreadId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-					new Object[] {
-						Long.valueOf(mbThreadFlag.getUserId()),
-						Long.valueOf(mbThreadFlag.getThreadId())
-					}, mbThreadFlag);
-			}
-		}
+		clearUniqueFindersCache(mbThreadFlag);
+		cacheUniqueFindersCache(mbThreadFlag);
 
 		return mbThreadFlag;
 	}
@@ -1818,8 +1839,10 @@ public class MBThreadFlagPersistenceImpl extends BasePersistenceImpl<MBThreadFla
 				List<ModelListener<MBThreadFlag>> listenersList = new ArrayList<ModelListener<MBThreadFlag>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MBThreadFlag>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

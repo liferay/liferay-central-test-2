@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,7 @@ public class OrgGroupPermissionFinderImpl
 	public static final String FIND_BY_O_G_R =
 		OrgGroupPermissionFinder.class.getName() + ".findByO_G_R";
 
+	@Override
 	public void removeByO_G_R(
 			long organizationId, long groupId, long resourceId)
 		throws SystemException {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -110,6 +110,9 @@ public class StagingUtil {
 			user, layoutSetBranchId, plid);
 	}
 
+	/**
+	 * @deprecated {@link #disableStaging(Group, ServiceContext)}
+	 */
 	public static void disableStaging(
 			Group scopeGroup, Group liveGroup, ServiceContext serviceContext)
 		throws Exception {
@@ -118,12 +121,31 @@ public class StagingUtil {
 	}
 
 	public static void disableStaging(
+			Group liveGroup, ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().disableStaging(liveGroup, serviceContext);
+	}
+
+	/**
+	 * @deprecated {@link #disableStaging(PortletRequest, Group,
+	 *             ServiceContext)}
+	 */
+	public static void disableStaging(
 			PortletRequest portletRequest, Group scopeGroup, Group liveGroup,
 			ServiceContext serviceContext)
 		throws Exception {
 
 		getStaging().disableStaging(
 			portletRequest, scopeGroup, liveGroup, serviceContext);
+	}
+
+	public static void disableStaging(
+			PortletRequest portletRequest, Group liveGroup,
+			ServiceContext serviceContext)
+		throws Exception {
+
+		getStaging().disableStaging(portletRequest, liveGroup, serviceContext);
 	}
 
 	public static void enableLocalStaging(
@@ -316,8 +338,8 @@ public class StagingUtil {
 	}
 
 	public static void setRecentLayoutBranchId(
-		HttpServletRequest request, long layoutSetBranchId, long plid,
-		long layoutBranchId)
+			HttpServletRequest request, long layoutSetBranchId, long plid,
+			long layoutBranchId)
 		throws SystemException {
 
 		getStaging().setRecentLayoutBranchId(
@@ -325,7 +347,7 @@ public class StagingUtil {
 	}
 
 	public static void setRecentLayoutBranchId(
-		User user, long layoutSetBranchId, long plid, long layoutBranchId)
+			User user, long layoutSetBranchId, long plid, long layoutBranchId)
 		throws SystemException {
 
 		getStaging().setRecentLayoutBranchId(

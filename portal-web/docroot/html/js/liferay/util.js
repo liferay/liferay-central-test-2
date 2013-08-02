@@ -180,7 +180,9 @@
 
 			if (params) {
 				var loc = url || location.href;
-				var anchorHash, finalUrl;
+
+				var anchorHash;
+				var finalUrl;
 
 				if (loc.indexOf('#') > -1) {
 					var locationPieces = loc.split('#');
@@ -253,6 +255,15 @@
 		disableFormButtons: function(inputs, form) {
 			inputs.set('disabled', true);
 			inputs.setStyle('opacity', 0.5);
+
+			if (A.UA.gecko) {
+				A.getWin().on(
+					'unload',
+					function(event) {
+						inputs.set('disabled', false);
+					}
+				);
+			}
 		},
 
 		enableFormButtons: function(inputs, form) {
@@ -519,6 +530,36 @@
 			oldBox.options[0].selected = true;
 		},
 
+		setCursorPosition: function(el, position) {
+			var instance = this;
+
+			instance.setSelectionRange(el, position, position);
+		},
+
+		setSelectionRange: function(el, selectionStart, selectionEnd) {
+			var instance = this;
+
+			if (Lang.isFunction(el.getDOM)) {
+				el = el.getDOM();
+			}
+
+			if (el.setSelectionRange) {
+				el.focus();
+
+				el.setSelectionRange(selectionStart, selectionEnd);
+			}
+			else if (el.createTextRange) {
+				var textRange = el.createTextRange();
+
+				textRange.collapse(true);
+
+				textRange.moveEnd('character', selectionEnd);
+				textRange.moveEnd('character', selectionStart);
+
+				textRange.select();
+			}
+		},
+
 		showCapsLock: function(event, span) {
 			var keyCode = event.keyCode ? event.keyCode : event.which;
 			var shiftKey = event.shiftKey ? event.shiftKey : ((keyCode == 16) ? true : false);
@@ -762,7 +803,17 @@
 		Util,
 		'afterIframeLoaded',
 		function(event) {
-			var iframeDocument = A.one(event.doc);
+			var nodeInstances = A.Node._instances;
+
+			var docEl = event.doc;
+
+			var docUID = docEl._yuid;
+
+			if (docUID in nodeInstances) {
+				delete nodeInstances[docUID];
+			}
+
+			var iframeDocument = A.one(docEl);
 
 			var iframeBody = iframeDocument.one('body');
 
@@ -770,47 +821,54 @@
 
 			iframeBody.addClass('aui-dialog-iframe-popup');
 
-			iframeBody.delegate(
-				EVENT_CLICK,
-				function() {
-					iframeDocument.purge(true);
+			var detachEventHandles = function() {
+				AArray.invoke(eventHandles, 'detach');
 
-					dialog.close();
-				},
-				'.aui-button-input-cancel'
-			);
+				iframeDocument.purge(true);
+			};
 
-			iframeBody.delegate(
-				'submit',
-				function(event) {
-					iframeDocument.purge(true);
-				},
-				'form'
-			);
+			var eventHandles = [
+				iframeBody.delegate('submit', detachEventHandles, 'form'),
 
-			iframeBody.delegate(
-				EVENT_CLICK,
-				function(){
-					dialog.set('visible', false, SRC_HIDE_LINK);
+				iframeBody.delegate(
+					EVENT_CLICK,
+					function() {
+						dialog.set('visible', false, SRC_HIDE_LINK);
 
-					iframeDocument.purge(true);
-				},
-				'.lfr-hide-dialog'
-			);
+						detachEventHandles();
+					},
+					'.lfr-hide-dialog'
+				)
+			];
+
+			var cancelButton = iframeBody.one('.aui-button-input-cancel');
+
+			if (cancelButton) {
+				cancelButton.after(
+					EVENT_CLICK,
+					function() {
+						detachEventHandles();
+
+						dialog.close();
+					}
+				);
+			}
 
 			var rolesSearchContainer = iframeBody.one('#rolesSearchContainerSearchContainer');
 
 			if (rolesSearchContainer) {
-				rolesSearchContainer.delegate(
-					EVENT_CLICK,
-					function(event){
-						event.preventDefault();
+				eventHandles.push(
+					rolesSearchContainer.delegate(
+						EVENT_CLICK,
+						function(event) {
+							event.preventDefault();
 
-						iframeDocument.purge(true);
+							detachEventHandles();
 
-						submitForm(document.hrefFm, event.currentTarget.attr('href'));
-					},
-					'a'
+							submitForm(document.hrefFm, event.currentTarget.attr('href'));
+						},
+						'a'
+					)
 				);
 			}
 		},
@@ -870,10 +928,8 @@
 
 			inputs.each(
 				function(item, index, collection) {
-					if (!item.compareTo(allBox)) {
-						if (arrayIndexOf(name, item.getAttribute('name')) > -1) {
-							totalBoxes++;
-						}
+					if (!item.compareTo(allBox) && (arrayIndexOf(name, item.attr('name')) > -1)) {
+						totalBoxes++;
 
 						if (item.get('checked')) {
 							totalOn++;
@@ -1199,6 +1255,7 @@
 
 			ddmURL.setParameter('chooseCallback', config.chooseCallback);
 			ddmURL.setParameter('ddmResource', config.ddmResource);
+			ddmURL.setParameter('groupId', config.groupId);
 			ddmURL.setParameter('saveCallback', config.saveCallback);
 			ddmURL.setParameter('scopeAvailableFields', config.availableFields);
 			ddmURL.setParameter('scopeStorageType', config.storageType);
@@ -1255,6 +1312,30 @@
 
 	Liferay.provide(
 		Util,
+		'openDocument',
+		function(webDavUrl, onSuccess, onError) {
+			if (A.UA.ie) {
+				try {
+					var executor = new A.config.win.ActiveXObject('SharePoint.OpenDocuments');
+
+					executor.EditDocument(webDavUrl);
+
+					if (Lang.isFunction(onSuccess)) {
+						onSuccess();
+					}
+				}
+				catch (exception) {
+					if (Lang.isFunction(onError)) {
+						onError(exception);
+					}
+				}
+			}
+		},
+		['aui-base']
+	);
+
+	Liferay.provide(
+		Util,
 		'portletTitleEdit',
 		function(options) {
 			var obj = options.obj;
@@ -1263,7 +1344,7 @@
 				var title = obj.one('.portlet-title-text');
 
 				if (title && !title.hasClass('not-editable')) {
-					title.setData('portletTitleEditOptions', options);
+					title.addClass('portlet-title-editable');
 
 					title.on(
 						EVENT_CLICK,
@@ -1285,6 +1366,8 @@
 							editable._startEditing(event);
 						}
 					);
+
+					title.setData('portletTitleEditOptions', options);
 				}
 			}
 		},
@@ -1825,18 +1908,25 @@
 				var dialogWindow = dialog.iframe.node.get('contentWindow').getDOM();
 
 				var openingWindow = dialogWindow.Liferay.Util.getOpener();
-				var refresh = event.refresh;
+				var redirect = event.redirect;
 
-				if (refresh && openingWindow) {
-					var data;
+				if (redirect) {
+					openingWindow.location = redirect;
+				}
+				else {
+					var refresh = event.refresh;
 
-					if (!event.portletAjaxable) {
-						data = {
-							portletAjaxable: false
-						};
+					if (refresh && openingWindow) {
+						var data;
+
+						if (!event.portletAjaxable) {
+							data = {
+								portletAjaxable: false
+							};
+						}
+
+						openingWindow.Liferay.Portlet.refresh('#p_p_id_' + refresh + '_', data);
 					}
-
-					openingWindow.Liferay.Portlet.refresh('#p_p_id_' + refresh + '_', data);
 				}
 
 				dialog.close();

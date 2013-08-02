@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -172,10 +172,6 @@ public class VerifyProperties extends VerifyProcess {
 			"com.liferay.portal.servlet.filters.gzip.GZipFilter"
 		},
 		new String[] {
-			"com.liferay.filters.doubleclick.DoubleClickFilter",
-			"com.liferay.portal.servlet.filters.doubleclick.DoubleClickFilter"
-		},
-		new String[] {
 			"com.liferay.filters.strip.StripFilter",
 			"com.liferay.portal.servlet.filters.strip.StripFilter"
 		},
@@ -237,8 +233,10 @@ public class VerifyProperties extends VerifyProcess {
 
 	private static final String[] _OBSOLETE_PORTAL_KEYS = new String[] {
 		"auth.max.failures.limit", "cas.validate.url",
-		"cluster.executor.heartbeat.interval", "commons.pool.enabled",
-		"jbi.workflow.url", "lucene.analyzer",
+		"cluster.executor.heartbeat.interval",
+		"com.liferay.filters.doubleclick.DoubleClickFilter",
+		"com.liferay.portal.servlet.filters.doubleclick.DoubleClickFilter",
+		"commons.pool.enabled", "jbi.workflow.url", "lucene.analyzer",
 		"lucene.store.jdbc.auto.clean.up",
 		"lucene.store.jdbc.auto.clean.up.enabled",
 		"lucene.store.jdbc.auto.clean.up.interval",
@@ -248,9 +246,10 @@ public class VerifyProperties extends VerifyProcess {
 		"lucene.store.jdbc.dialect.mysql", "lucene.store.jdbc.dialect.oracle",
 		"lucene.store.jdbc.dialect.postgresql",
 		"message.boards.thread.locking.enabled",
-		"portal.security.manager.enable", "shard.available.names",
-		"webdav.storage.class", "webdav.storage.show.edit.url",
-		"webdav.storage.show.view.url", "webdav.storage.tokens", "xss.allow"
+		"portal.security.manager.enable", "scheduler.classes",
+		"shard.available.names", "webdav.storage.class",
+		"webdav.storage.show.edit.url", "webdav.storage.show.view.url",
+		"webdav.storage.tokens", "xss.allow"
 	};
 
 	private static final String[] _OBSOLETE_SYSTEM_KEYS = new String[] {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -71,7 +71,7 @@ public class TikaRawMetadataProcessorTest extends PowerMockito {
 			Assert.assertEquals(0, metadata.size());
 
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			Assert.fail("Unexpected error");
 		}
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -201,13 +201,16 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 	@Override
 	public BrowserTracker toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (BrowserTracker)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (BrowserTracker)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public BrowserTracker toUnescapedModel() {
+		return (BrowserTracker)this;
 	}
 
 	@Override
@@ -239,18 +242,15 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BrowserTracker)) {
 			return false;
 		}
 
-		BrowserTracker browserTracker = null;
-
-		try {
-			browserTracker = (BrowserTracker)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BrowserTracker browserTracker = (BrowserTracker)obj;
 
 		long primaryKey = browserTracker.getPrimaryKey();
 
@@ -332,7 +332,7 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	}
 
 	private static ClassLoader _classLoader = BrowserTracker.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			BrowserTracker.class
 		};
 	private long _browserTrackerId;
@@ -342,5 +342,5 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	private boolean _setOriginalUserId;
 	private long _browserKey;
 	private long _columnBitmask;
-	private BrowserTracker _escapedModelProxy;
+	private BrowserTracker _escapedModel;
 }

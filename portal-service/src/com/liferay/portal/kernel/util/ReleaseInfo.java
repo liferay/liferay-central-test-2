@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,9 +79,13 @@ public class ReleaseInfo {
 
 	public static final int RELEASE_6_1_1_BUILD_NUMBER = 6101;
 
+	public static final int RELEASE_6_1_2_BUILD_NUMBER = 6102;
+
 	public static final int RELEASE_6_1_10_BUILD_NUMBER = 6110;
 
 	public static final int RELEASE_6_1_20_BUILD_NUMBER = 6120;
+
+	public static final int RELEASE_6_1_30_BUILD_NUMBER = 6130;
 
 	public static final Date getBuildDate() {
 		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
@@ -132,13 +136,13 @@ public class ReleaseInfo {
 		return _VERSION;
 	}
 
-	private static final String _BUILD = "6101";
+	private static final String _BUILD = "6102";
 
 	private static final int _BUILD_NUMBER = GetterUtil.getInteger(_BUILD);
 
 	private static final String _CODE_NAME = "Paton";
 
-	private static final String _DATE = "June 1, 2012";
+	private static final String _DATE = "August 2, 2013";
 
 	private static final String _NAME = "Liferay Portal Community Edition";
 
@@ -152,9 +156,9 @@ public class ReleaseInfo {
 
 	private static final String _VENDOR = "Liferay, Inc.";
 
-	private static final String _VERSION = "6.1.1";
+	private static final String _VERSION = "6.1.2";
 
-	private static final String _VERSION_DISPLAY_NAME = "6.1.1 CE";
+	private static final String _VERSION_DISPLAY_NAME = "6.1.2 CE";
 
 	private static String _releaseInfo;
 	private static String _serverInfo;

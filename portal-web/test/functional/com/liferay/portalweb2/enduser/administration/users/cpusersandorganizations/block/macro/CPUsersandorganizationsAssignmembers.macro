@@ -1,0 +1,23 @@
+<definition>
+	<command name="showAdvancedSearch">
+		<if>
+			<condition action="CPUsersandorganizationsAssignmembers#isElementPresent" locator-key1="BASIC_SEARCH_ADVANCED" value1="Advanced" />
+			<then>
+				<execute action="CPUsersandorganizationsAssignmembers#assertClick" locator-key1="BASIC_SEARCH_ADVANCED" value1="Advanced" />
+			</then>
+		</if>
+
+		<execute action="CPUsersandorganizationsAssignmembers#assertElementPresent" locator-key1="ADVANCED_SEARCH_MATCH_SELECT" />
+	</command>
+
+	<command name="showBasicSearch">
+		<if>
+			<condition action="CPUsersandorganizationsAssignmembers#isElementPresent" locator-key1="ADVANCED_SEARCH_BASIC" value1="Basic" />
+			<then>
+				<execute action="CPUsersandorganizationsAssignmembers#assertClick" locator-key1="ADVANCED_SEARCH_BASIC" value1="Basic" />
+			</then>
+		</if>
+
+		<execute action="CPUsersandorganizationsAssignmembers#assertElementPresent" locator-key1="BASIC_SEARCH_FIELD" />
+	</command>
+</definition>

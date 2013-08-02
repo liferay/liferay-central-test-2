@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -230,13 +230,61 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 		}
 	}
 
+	protected void cacheUniqueFindersCache(DDLRecordVersion ddlRecordVersion) {
+		if (ddlRecordVersion.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(ddlRecordVersion.getRecordId()),
+					
+					ddlRecordVersion.getVersion()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_V, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V, args,
+				ddlRecordVersion);
+		}
+		else {
+			DDLRecordVersionModelImpl ddlRecordVersionModelImpl = (DDLRecordVersionModelImpl)ddlRecordVersion;
+
+			if ((ddlRecordVersionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_R_V.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(ddlRecordVersion.getRecordId()),
+						
+						ddlRecordVersion.getVersion()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_R_V, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V, args,
+					ddlRecordVersion);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(DDLRecordVersion ddlRecordVersion) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V,
-			new Object[] {
+		DDLRecordVersionModelImpl ddlRecordVersionModelImpl = (DDLRecordVersionModelImpl)ddlRecordVersion;
+
+		Object[] args = new Object[] {
 				Long.valueOf(ddlRecordVersion.getRecordId()),
 				
-			ddlRecordVersion.getVersion()
-			});
+				ddlRecordVersion.getVersion()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_V, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V, args);
+
+		if ((ddlRecordVersionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_R_V.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(ddlRecordVersionModelImpl.getOriginalRecordId()),
+					
+					ddlRecordVersionModelImpl.getOriginalVersion()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_V, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V, args);
+		}
 	}
 
 	/**
@@ -410,35 +458,8 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 			DDLRecordVersionImpl.class, ddlRecordVersion.getPrimaryKey(),
 			ddlRecordVersion);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
-				new Object[] {
-					Long.valueOf(ddlRecordVersion.getRecordId()),
-					
-				ddlRecordVersion.getVersion()
-				}, ddlRecordVersion);
-		}
-		else {
-			if ((ddlRecordVersionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_R_V.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(ddlRecordVersionModelImpl.getOriginalRecordId()),
-						
-						ddlRecordVersionModelImpl.getOriginalVersion()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_R_V, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_R_V, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_R_V,
-					new Object[] {
-						Long.valueOf(ddlRecordVersion.getRecordId()),
-						
-					ddlRecordVersion.getVersion()
-					}, ddlRecordVersion);
-			}
-		}
+		clearUniqueFindersCache(ddlRecordVersion);
+		cacheUniqueFindersCache(ddlRecordVersion);
 
 		return ddlRecordVersion;
 	}
@@ -1912,8 +1933,10 @@ public class DDLRecordVersionPersistenceImpl extends BasePersistenceImpl<DDLReco
 				List<ModelListener<DDLRecordVersion>> listenersList = new ArrayList<ModelListener<DDLRecordVersion>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<DDLRecordVersion>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

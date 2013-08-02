@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,6 +44,7 @@ import com.liferay.portlet.messageboards.service.base.MBMessageServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.util.RSSUtil;
 
@@ -53,12 +54,15 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.feed.synd.SyndLink;
+import com.sun.syndication.feed.synd.SyndLinkImpl;
 import com.sun.syndication.io.FeedException;
 
 import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -69,6 +73,7 @@ import java.util.List;
  */
 public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
+	@Override
 	public MBMessage addDiscussionMessage(
 			long groupId, String className, long classPK,
 			String permissionClassName, long permissionClassPK,
@@ -88,6 +93,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			parentMessageId, subject, body, serviceContext);
 	}
 
+	/**
+	 * @deprecated {@link #addMessage(long, String, String, String,
+	 *             java.util.List, boolean, double, boolean,
+	 *             com.liferay.portal.service.ServiceContext)}
+	 */
+	@Override
 	public MBMessage addMessage(
 			long groupId, long categoryId, long threadId, long parentMessageId,
 			String subject, String body, String format,
@@ -96,41 +107,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		checkReplyToPermission(groupId, categoryId, parentMessageId);
-
-		if (lockLocalService.isLocked(MBThread.class.getName(), threadId)) {
-			throw new LockedThreadException();
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.ADD_FILE)) {
-
-			inputStreamOVPs = Collections.emptyList();
-		}
-
-		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
-
-		int workFlowAction = serviceContext.getWorkflowAction();
-
-		if ((workFlowAction == WorkflowConstants.STATUS_DRAFT) && !preview) {
-			MBMessagePermission.check(
-				getPermissionChecker(), parentMessageId, ActionKeys.UPDATE);
-		}
-
-		if (!MBCategoryPermission.contains(
-				getPermissionChecker(), groupId, categoryId,
-				ActionKeys.UPDATE_THREAD_PRIORITY)) {
-
-			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
-		}
-
-		return mbMessageLocalService.addMessage(
-			getGuestOrUserId(), null, groupId, categoryId, threadId,
+		return addMessage(
 			parentMessageId, subject, body, format, inputStreamOVPs, anonymous,
 			priority, allowPingbacks, serviceContext);
 	}
 
+	@Override
 	public MBMessage addMessage(
 			long groupId, long categoryId, String subject, String body,
 			String format,
@@ -163,6 +145,61 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
+	public MBMessage addMessage(
+			long parentMessageId, String subject, String body, String format,
+			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
+			boolean anonymous, double priority, boolean allowPingbacks,
+			ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		MBMessage parentMessage = mbMessagePersistence.findByPrimaryKey(
+			parentMessageId);
+
+		checkReplyToPermission(
+			parentMessage.getGroupId(), parentMessage.getCategoryId(),
+			parentMessageId);
+
+		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
+
+		int workFlowAction = serviceContext.getWorkflowAction();
+
+		if ((workFlowAction == WorkflowConstants.STATUS_DRAFT) && !preview &&
+			!serviceContext.isSignedIn()) {
+
+			MBMessagePermission.check(
+				getPermissionChecker(), parentMessageId, ActionKeys.UPDATE);
+		}
+
+		if (lockLocalService.isLocked(
+				MBThread.class.getName(), parentMessage.getThreadId())) {
+
+			throw new LockedThreadException();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), parentMessage.getGroupId(),
+				parentMessage.getCategoryId(), ActionKeys.ADD_FILE)) {
+
+			inputStreamOVPs = Collections.emptyList();
+		}
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), parentMessage.getGroupId(),
+				parentMessage.getCategoryId(),
+				ActionKeys.UPDATE_THREAD_PRIORITY)) {
+
+			priority = MBThreadConstants.PRIORITY_NOT_GIVEN;
+		}
+
+		return mbMessageLocalService.addMessage(
+			getGuestOrUserId(), null, parentMessage.getGroupId(),
+			parentMessage.getCategoryId(), parentMessage.getThreadId(),
+			parentMessageId, subject, body, format, inputStreamOVPs, anonymous,
+			priority, allowPingbacks, serviceContext);
+	}
+
+	@Override
 	public void deleteDiscussionMessage(
 			long groupId, String className, long classPK,
 			String permissionClassName, long permissionClassPK,
@@ -179,6 +216,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.deleteDiscussionMessage(messageId);
 	}
 
+	@Override
 	public void deleteMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -188,6 +226,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.deleteMessage(messageId);
 	}
 
+	@Override
 	public List<MBMessage> getCategoryMessages(
 			long groupId, long categoryId, int status, int start, int end)
 		throws PortalException, SystemException {
@@ -210,6 +249,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return messages;
 	}
 
+	@Override
 	public int getCategoryMessagesCount(
 			long groupId, long categoryId, int status)
 		throws SystemException {
@@ -218,6 +258,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			groupId, categoryId, status);
 	}
 
+	@Override
 	public String getCategoryMessagesRSS(
 			long groupId, long categoryId, int status, int max, String type,
 			double version, String displayStyle, String feedURL,
@@ -278,6 +319,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	@Override
 	public String getCompanyMessagesRSS(
 			long companyId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
@@ -323,6 +365,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	@Override
 	public int getGroupMessagesCount(long groupId, int status)
 		throws SystemException {
 
@@ -334,6 +377,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public String getGroupMessagesRSS(
 			long groupId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
@@ -384,6 +428,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	@Override
 	public String getGroupMessagesRSS(
 			long groupId, long userId, int status, int max, String type,
 			double version, String displayStyle, String feedURL,
@@ -434,6 +479,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	@Override
 	public MBMessage getMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -443,6 +489,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		return mbMessageLocalService.getMessage(messageId);
 	}
 
+	@Override
 	public MBMessageDisplay getMessageDisplay(
 			long messageId, int status, String threadView,
 			boolean includePrevAndNext)
@@ -456,6 +503,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			includePrevAndNext);
 	}
 
+	@Override
 	public int getThreadAnswersCount(
 			long groupId, long categoryId, long threadId)
 		throws SystemException {
@@ -464,6 +512,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			groupId, categoryId, threadId, true);
 	}
 
+	@Override
 	public List<MBMessage> getThreadMessages(
 			long groupId, long categoryId, long threadId, int status, int start,
 			int end)
@@ -479,6 +528,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public int getThreadMessagesCount(
 			long groupId, long categoryId, long threadId, int status)
 		throws SystemException {
@@ -493,6 +543,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public String getThreadMessagesRSS(
 			long threadId, int status, int max, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
@@ -539,6 +590,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	@Override
 	public void subscribeMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -548,6 +600,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.subscribeMessage(getUserId(), messageId);
 	}
 
+	@Override
 	public void unsubscribeMessage(long messageId)
 		throws PortalException, SystemException {
 
@@ -557,12 +610,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.unsubscribeMessage(getUserId(), messageId);
 	}
 
+	@Override
 	public void updateAnswer(long messageId, boolean answer, boolean cascade)
 		throws PortalException, SystemException {
 
 		mbMessageLocalService.updateAnswer(messageId, answer, cascade);
 	}
 
+	@Override
 	public MBMessage updateDiscussionMessage(
 			String className, long classPK, String permissionClassName,
 			long permissionClassPK, long permissionOwnerId, long messageId,
@@ -582,6 +637,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public MBMessage updateMessage(
 			long messageId, String subject, String body,
 			List<ObjectValuePair<String, InputStream>> inputStreamOVPs,
@@ -589,7 +645,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		MBMessage message = mbMessageLocalService.getMessage(messageId);
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
 		boolean preview = ParamUtil.getBoolean(serviceContext, "preview");
 
@@ -646,11 +702,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 				return;
 			}
 
-			MBMessage parentMessage = mbMessagePersistence.fetchByPrimaryKey(
-				parentMessageId);
-
-			if ((parentMessage == null) ||
-				!MBCategoryPermission.contains(
+			if (!MBCategoryPermission.contains(
 					getPermissionChecker(), groupId, categoryId,
 					ActionKeys.REPLY_TO_MESSAGE)) {
 
@@ -672,23 +724,24 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
-		syndFeed.setTitle(name);
-		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
 		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(syndEntries);
 
-		Iterator<MBMessage> itr = messages.iterator();
+		for (MBMessage message : messages) {
+			SyndEntry syndEntry = new SyndEntryImpl();
 
-		while (itr.hasNext()) {
-			MBMessage message = itr.next();
+			if (!message.isAnonymous()) {
+				String author = PortalUtil.getUserName(message);
 
-			String author = HtmlUtil.escape(
-				PortalUtil.getUserName(
-					message.getUserId(), message.getUserName()));
+				syndEntry.setAuthor(author);
+			}
+
+			SyndContent syndContent = new SyndContentImpl();
+
+			syndContent.setType(RSSUtil.ENTRY_TYPE_DEFAULT);
 
 			String value = null;
 
@@ -701,44 +754,45 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
 				value = StringPool.BLANK;
 			}
-			else {
+			else if (message.isFormatBBCode()) {
 				value = BBCodeTranslatorUtil.getHTML(message.getBody());
 
-				value = StringUtil.replace(
-					value,
-					new String[] {
-						"@theme_images_path@", "href=\"/", "src=\"/"
-					},
-					new String[] {
-						themeDisplay.getURLPortal() +
-							themeDisplay.getPathThemeImages(),
-						"href=\"" + themeDisplay.getURLPortal() + "/",
-						"src=\"" + themeDisplay.getURLPortal() + "/"
-					});
+				value = MBUtil.replaceMessageBodyPaths(themeDisplay, value);
+			}
+			else {
+				value = message.getBody();
 			}
 
-			SyndEntry syndEntry = new SyndEntryImpl();
-
-			if (!message.isAnonymous()) {
-				syndEntry.setAuthor(author);
-			}
-
-			syndEntry.setTitle(message.getSubject());
-			syndEntry.setLink(
-				entryURL + "&messageId=" + message.getMessageId());
-			syndEntry.setUri(syndEntry.getLink());
-			syndEntry.setPublishedDate(message.getCreateDate());
-			syndEntry.setUpdatedDate(message.getModifiedDate());
-
-			SyndContent syndContent = new SyndContentImpl();
-
-			syndContent.setType(RSSUtil.ENTRY_TYPE_DEFAULT);
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
 
+			syndEntry.setLink(
+				entryURL + "&messageId=" + message.getMessageId());
+			syndEntry.setPublishedDate(message.getCreateDate());
+			syndEntry.setTitle(message.getSubject());
+			syndEntry.setUpdatedDate(message.getModifiedDate());
+			syndEntry.setUri(syndEntry.getLink());
+
 			syndEntries.add(syndEntry);
 		}
+
+		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
+
+		List<SyndLink> syndLinks = new ArrayList<SyndLink>();
+
+		syndFeed.setLinks(syndLinks);
+
+		SyndLink selfSyndLink = new SyndLinkImpl();
+
+		syndLinks.add(selfSyndLink);
+
+		selfSyndLink.setHref(feedURL);
+		selfSyndLink.setRel("self");
+
+		syndFeed.setPublishedDate(new Date());
+		syndFeed.setTitle(name);
+		syndFeed.setUri(feedURL);
 
 		try {
 			return RSSUtil.export(syndFeed);

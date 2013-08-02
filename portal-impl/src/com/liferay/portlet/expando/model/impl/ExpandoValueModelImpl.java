@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -406,13 +406,16 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 	@Override
 	public ExpandoValue toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ExpandoValue)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ExpandoValue)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ExpandoValue toUnescapedModel() {
+		return (ExpandoValue)this;
 	}
 
 	@Override
@@ -483,18 +486,15 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoValue)) {
 			return false;
 		}
 
-		ExpandoValue expandoValue = null;
-
-		try {
-			expandoValue = (ExpandoValue)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoValue expandoValue = (ExpandoValue)obj;
 
 		long primaryKey = expandoValue.getPrimaryKey();
 
@@ -640,7 +640,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	}
 
 	private static ClassLoader _classLoader = ExpandoValue.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ExpandoValue.class
 		};
 	private long _valueId;
@@ -663,5 +663,5 @@ public class ExpandoValueModelImpl extends BaseModelImpl<ExpandoValue>
 	private String _data;
 	private String _originalData;
 	private long _columnBitmask;
-	private ExpandoValue _escapedModelProxy;
+	private ExpandoValue _escapedModel;
 }

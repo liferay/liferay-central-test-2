@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,6 +79,20 @@ public class PortalLifecycleUtil {
 		if (!_inFlushDestroys) {
 			_portalLifecyclesDestroy.remove(portalLifecycle);
 		}
+	}
+
+	public static void reset() {
+		_inFlushDestroys = false;
+
+		if (_portalLifecyclesInit == null) {
+			_portalLifecyclesInit = Collections.synchronizedList(
+				new ArrayList<PortalLifecycle>());
+		}
+		else {
+			_portalLifecyclesInit.clear();
+		}
+
+		_portalLifecyclesDestroy.clear();
 	}
 
 	private static boolean _inFlushDestroys;

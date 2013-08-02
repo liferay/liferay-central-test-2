@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -709,13 +709,16 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 
 	@Override
 	public MDRAction toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MDRAction)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MDRAction)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MDRAction toUnescapedModel() {
+		return (MDRAction)this;
 	}
 
 	@Override
@@ -759,18 +762,15 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MDRAction)) {
 			return false;
 		}
 
-		MDRAction mdrAction = null;
-
-		try {
-			mdrAction = (MDRAction)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MDRAction mdrAction = (MDRAction)obj;
 
 		long primaryKey = mdrAction.getPrimaryKey();
 
@@ -1004,7 +1004,7 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	}
 
 	private static ClassLoader _classLoader = MDRAction.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MDRAction.class
 		};
 	private String _uuid;
@@ -1031,5 +1031,5 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	private String _type;
 	private String _typeSettings;
 	private long _columnBitmask;
-	private MDRAction _escapedModelProxy;
+	private MDRAction _escapedModel;
 }

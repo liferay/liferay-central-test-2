@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -281,6 +281,31 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		_workflowDefinitionLinkLocalService.deleteWorkflowDefinitionLink(companyId,
 			groupId, className, classPK, typePK);
+	}
+
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchDefaultWorkflowDefinitionLink(
+		long companyId, java.lang.String className, long classPK, long typePK)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.fetchDefaultWorkflowDefinitionLink(companyId,
+			className, classPK, typePK);
+	}
+
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchWorkflowDefinitionLink(
+		long companyId, long groupId, java.lang.String className, long classPK,
+		long typePK)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(companyId,
+			groupId, className, classPK, typePK);
+	}
+
+	public com.liferay.portal.model.WorkflowDefinitionLink fetchWorkflowDefinitionLink(
+		long companyId, long groupId, java.lang.String className, long classPK,
+		long typePK, boolean strict)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _workflowDefinitionLinkLocalService.fetchWorkflowDefinitionLink(companyId,
+			groupId, className, classPK, typePK, strict);
 	}
 
 	public com.liferay.portal.model.WorkflowDefinitionLink getDefaultWorkflowDefinitionLink(

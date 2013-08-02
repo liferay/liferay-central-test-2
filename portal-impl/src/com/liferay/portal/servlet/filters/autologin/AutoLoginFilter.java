@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,12 +23,11 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserTrackerLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -91,18 +90,6 @@ public class AutoLoginFilter extends BasePortalFilter {
 				if (user.isLockout()) {
 					return null;
 				}
-				else if (PropsValues.LIVE_USERS_ENABLED) {
-					UserTracker userTracker =
-						UserTrackerLocalServiceUtil.fetchUserTracker(userId);
-
-					if ((userTracker == null) &&
-						(session.getAttribute(WebKeys.USER) == null)) {
-
-						session.invalidate();
-
-						return null;
-					}
-				}
 			}
 			else {
 				return null;
@@ -164,7 +151,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 		String path = request.getRequestURI().toLowerCase();
 
 		if (!contextPath.equals(StringPool.SLASH) &&
-			(path.indexOf(contextPath) != -1)) {
+			path.contains(contextPath)) {
 
 			path = path.substring(contextPath.length());
 		}
@@ -210,13 +197,18 @@ public class AutoLoginFilter extends BasePortalFilter {
 							return;
 						}
 
-						redirect = (String)request.getAttribute(
-							AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE);
+						if (!PropsValues.AUTH_FORWARD_BY_LAST_PATH) {
+							redirect = Portal.PATH_MAIN;
+						}
+						else {
+							redirect = (String)request.getAttribute(
+								AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE);
+						}
 
 						if (Validator.isNotNull(redirect)) {
 							response.sendRedirect(redirect);
 
-							break;
+							return;
 						}
 					}
 				}

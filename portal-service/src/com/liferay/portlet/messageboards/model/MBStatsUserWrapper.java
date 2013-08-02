@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -295,6 +296,10 @@ public class MBStatsUserWrapper implements MBStatsUser,
 		return new MBStatsUserWrapper(_mbStatsUser.toEscapedModel());
 	}
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser toUnescapedModel() {
+		return new MBStatsUserWrapper(_mbStatsUser.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _mbStatsUser.toString();
@@ -307,6 +312,25 @@ public class MBStatsUserWrapper implements MBStatsUser,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbStatsUser.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBStatsUserWrapper)) {
+			return false;
+		}
+
+		MBStatsUserWrapper mbStatsUserWrapper = (MBStatsUserWrapper)obj;
+
+		if (Validator.equals(_mbStatsUser, mbStatsUserWrapper._mbStatsUser)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

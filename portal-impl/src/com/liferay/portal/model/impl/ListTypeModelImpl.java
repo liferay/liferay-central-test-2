@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -236,13 +236,16 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	@Override
 	public ListType toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ListType)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ListType)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ListType toUnescapedModel() {
+		return (ListType)this;
 	}
 
 	@Override
@@ -273,18 +276,15 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ListType)) {
 			return false;
 		}
 
-		ListType listType = null;
-
-		try {
-			listType = (ListType)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ListType listType = (ListType)obj;
 
 		int primaryKey = listType.getPrimaryKey();
 
@@ -376,7 +376,7 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	}
 
 	private static ClassLoader _classLoader = ListType.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ListType.class
 		};
 	private int _listTypeId;
@@ -384,5 +384,5 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	private String _type;
 	private String _originalType;
 	private long _columnBitmask;
-	private ListType _escapedModelProxy;
+	private ListType _escapedModel;
 }

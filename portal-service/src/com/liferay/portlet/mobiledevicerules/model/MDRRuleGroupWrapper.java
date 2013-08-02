@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.mobiledevicerules.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -624,6 +625,10 @@ public class MDRRuleGroupWrapper implements MDRRuleGroup,
 		return new MDRRuleGroupWrapper(_mdrRuleGroup.toEscapedModel());
 	}
 
+	public com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup toUnescapedModel() {
+		return new MDRRuleGroupWrapper(_mdrRuleGroup.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _mdrRuleGroup.toString();
@@ -641,6 +646,25 @@ public class MDRRuleGroupWrapper implements MDRRuleGroup,
 	public java.util.List<com.liferay.portlet.mobiledevicerules.model.MDRRule> getRules()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _mdrRuleGroup.getRules();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MDRRuleGroupWrapper)) {
+			return false;
+		}
+
+		MDRRuleGroupWrapper mdrRuleGroupWrapper = (MDRRuleGroupWrapper)obj;
+
+		if (Validator.equals(_mdrRuleGroup, mdrRuleGroupWrapper._mdrRuleGroup)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

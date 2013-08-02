@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portal.parsers.bbcode;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslator;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
@@ -35,16 +36,17 @@ import java.util.regex.Pattern;
 /**
  * @author Iliyan Peychev
  */
+@DoPrivileged
 public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 	public HtmlBBCodeTranslatorImpl() {
 		_listStyles = new HashMap<String, String>();
 
-		_listStyles.put("a", "list-style: lower-alpha inside;");
-		_listStyles.put("A", "list-style: upper-alpha inside;");
-		_listStyles.put("1", "list-style: decimal inside;");
-		_listStyles.put("i", "list-style: lower-roman inside;");
-		_listStyles.put("I", "list-style: upper-roman inside;");
+		_listStyles.put("a", "list-style: lower-alpha outside;");
+		_listStyles.put("A", "list-style: upper-alpha outside;");
+		_listStyles.put("1", "list-style: decimal outside;");
+		_listStyles.put("i", "list-style: lower-roman outside;");
+		_listStyles.put("I", "list-style: upper-roman outside;");
 
 		_excludeNewLineTypes = new HashMap<String, Integer>();
 
@@ -84,22 +86,27 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 		}
 	}
 
+	@Override
 	public String[] getEmoticonDescriptions() {
 		return _emoticonDescriptions;
 	}
 
+	@Override
 	public String[] getEmoticonFiles() {
 		return _emoticonFiles;
 	}
 
+	@Override
 	public String[][] getEmoticons() {
 		return _EMOTICONS;
 	}
 
+	@Override
 	public String[] getEmoticonSymbols() {
 		return _emoticonSymbols;
 	}
 
+	@Override
 	public String getHTML(String bbcode) {
 		try {
 			bbcode = parse(bbcode);
@@ -113,6 +120,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 		return bbcode;
 	}
 
+	@Override
 	public String parse(String text) {
 		StringBundler sb = new StringBundler();
 
@@ -393,7 +401,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 			tag = "ol";
 		}
 		else {
-			tag = "ul style=\"list-style: disc inside;\"";
+			tag = "ul style=\"list-style: disc outside;\"";
 		}
 
 		if (listStyle == null) {
@@ -422,33 +430,36 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 
 		BBCodeItem bbCodeItem = null;
 
-		if (data.matches("\\A\r?\n\\z")) {
-			bbCodeItem = bbCodeItems.get(marker.getValue() + 1);
+		if ((marker.getValue() + 1) < bbCodeItems.size()) {
+			if (data.matches("\\A\r?\n\\z")) {
+				bbCodeItem = bbCodeItems.get(marker.getValue() + 1);
 
-			if (bbCodeItem != null) {
-				String value = bbCodeItem.getValue();
+				if (bbCodeItem != null) {
+					String value = bbCodeItem.getValue();
 
-				if (_excludeNewLineTypes.containsKey(value)) {
-					int type = bbCodeItem.getType();
+					if (_excludeNewLineTypes.containsKey(value)) {
+						int type = bbCodeItem.getType();
 
-					int excludeNewLineType = _excludeNewLineTypes.get(value);
+						int excludeNewLineType = _excludeNewLineTypes.get(
+							value);
 
-					if ((type & excludeNewLineType) > 0) {
-						data = StringPool.BLANK;
+						if ((type & excludeNewLineType) > 0) {
+							data = StringPool.BLANK;
+						}
 					}
 				}
 			}
-		}
-		else if (data.matches("(?s).*\r?\n\\z")) {
-			bbCodeItem = bbCodeItems.get(marker.getValue() + 1);
+			else if (data.matches("(?s).*\r?\n\\z")) {
+				bbCodeItem = bbCodeItems.get(marker.getValue() + 1);
 
-			if ((bbCodeItem != null) &&
-				(bbCodeItem.getType() == BBCodeParser.TYPE_TAG_END)) {
+				if ((bbCodeItem != null) &&
+					(bbCodeItem.getType() == BBCodeParser.TYPE_TAG_END)) {
 
-				String value = bbCodeItem.getValue();
+					String value = bbCodeItem.getValue();
 
-				if (value.equals("*")) {
-					data = data.substring(0, data.length() - 1);
+					if (value.equals("*")) {
+						data = data.substring(0, data.length() - 1);
+					}
 				}
 			}
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
@@ -60,16 +61,22 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 
 		_portletContext = portletContext;
 		_resourceBundles = new ConcurrentHashMap<String, ResourceBundle>();
+
+		_copyRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("copy-request-parameters"));
 	}
 
+	@Override
 	public Map<String, String[]> getContainerRuntimeOptions() {
 		return _portletApp.getContainerRuntimeOptions();
 	}
 
+	@Override
 	public String getDefaultNamespace() {
 		return _portletApp.getDefaultNamespace();
 	}
 
+	@Override
 	public String getInitParameter(String name) {
 		if (name == null) {
 			throw new IllegalArgumentException();
@@ -78,31 +85,38 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		return _portlet.getInitParams().get(name);
 	}
 
+	@Override
 	public Enumeration<String> getInitParameterNames() {
 		return Collections.enumeration(_portlet.getInitParams().keySet());
 	}
 
+	@Override
 	public Portlet getPortlet() {
 		return _portlet;
 	}
 
+	@Override
 	public PortletContext getPortletContext() {
 		return _portletContext;
 	}
 
+	@Override
 	public String getPortletId() {
 		return _portlet.getPortletId();
 	}
 
+	@Override
 	public String getPortletName() {
 		return _portletName;
 	}
 
+	@Override
 	public Enumeration<QName> getProcessingEventQNames() {
 		return Collections.enumeration(
 			toJavaxQNames(_portlet.getProcessingEvents()));
 	}
 
+	@Override
 	public Enumeration<String> getPublicRenderParameterNames() {
 		List<String> publicRenderParameterNames = new ArrayList<String>();
 
@@ -116,11 +130,13 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		return Collections.enumeration(publicRenderParameterNames);
 	}
 
+	@Override
 	public Enumeration<QName> getPublishingEventQNames() {
 		return Collections.enumeration(
 			toJavaxQNames(_portlet.getPublishingEvents()));
 	}
 
+	@Override
 	public ResourceBundle getResourceBundle(Locale locale) {
 		String resourceBundleClassName = _portlet.getResourceBundle();
 
@@ -177,6 +193,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		}
 	}
 
+	@Override
 	public Enumeration<Locale> getSupportedLocales() {
 		List<Locale> supportedLocales = new ArrayList<Locale>();
 
@@ -187,6 +204,12 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		return Collections.enumeration(supportedLocales);
 	}
 
+	@Override
+	public boolean isCopyRequestParameters() {
+		return _copyRequestParameters;
+	}
+
+	@Override
 	public boolean isWARFile() {
 		return _portletApp.isWARFile();
 	}
@@ -207,6 +230,7 @@ public class PortletConfigImpl implements LiferayPortletConfig {
 		return javaxQNames;
 	}
 
+	private boolean _copyRequestParameters;
 	private Portlet _portlet;
 	private PortletApp _portletApp;
 	private PortletContext _portletContext;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.test.TestCase;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import org.junit.Test;
 
 /**
  * @author Shuyang Zhou
@@ -48,6 +50,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		_testFile.delete();
 	}
 
+	@Test
 	public void testaAailable() throws IOException {
 
 		// Uninitialized
@@ -87,6 +90,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		byteArrayFileInputStream.close();
 	}
 
+	@Test
 	public void testBlockRead() throws IOException {
 
 		// byte[]
@@ -164,6 +168,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		byteArrayFileInputStream.close();
 	}
 
+	@Test
 	public void testClose() throws IOException {
 
 		// Do not delete on close
@@ -192,6 +197,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		assertFalse(_testFile.exists());
 	}
 
+	@Test
 	public void testConstructor() {
 
 		// File is a dir
@@ -245,6 +251,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		assertTrue(byteArrayFileInputStream.deleteOnClose);
 	}
 
+	@Test
 	public void testMark() throws IOException {
 
 		// byte[]
@@ -299,6 +306,7 @@ public class ByteArrayFileInputStreamTest extends TestCase {
 		byteArrayFileInputStream.close();
 	}
 
+	@Test
 	public void testSkip() throws IOException {
 
 		// byte[]

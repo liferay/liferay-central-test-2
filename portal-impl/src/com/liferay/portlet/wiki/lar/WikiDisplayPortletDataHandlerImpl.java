@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -107,6 +107,10 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		if (portletPreferences == null) {
+			return portletPreferences;
+		}
+
 		portletPreferences.setValue("title", StringPool.BLANK);
 		portletPreferences.setValue("nodeId", StringPool.BLANK);
 
@@ -168,8 +172,22 @@ public class WikiDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element nodesElement = rootElement.addElement("nodes");
 		Element pagesElement = rootElement.addElement("pages");
 
+		Element dlFileEntryTypesElement = pagesElement.addElement(
+			"dl-file-entry-types");
+		Element dlFoldersElement = pagesElement.addElement("dl-folders");
+		Element dlFileEntriesElement = pagesElement.addElement(
+			"dl-file-entries");
+		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
+		Element dlRepositoriesElement = pagesElement.addElement(
+			"dl-repositories");
+		Element dlRepositoryEntriesElement = pagesElement.addElement(
+			"dl-repository-entries");
+
 		WikiPortletDataHandlerImpl.exportNode(
-			portletDataContext, nodesElement, pagesElement, node);
+			portletDataContext, nodesElement, pagesElement,
+			dlFileEntryTypesElement, dlFoldersElement, dlFileEntriesElement,
+			dlFileRanksElement, dlRepositoriesElement,
+			dlRepositoryEntriesElement, node);
 
 		return document.formattedString();
 	}

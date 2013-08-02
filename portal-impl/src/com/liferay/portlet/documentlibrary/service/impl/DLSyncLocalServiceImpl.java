@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,6 +34,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 	 * @deprecated {@link #addSync(long, String, long, long, long, String,
 	 *             String, String, String)}
 	 */
+	@Override
 	public DLSync addSync(
 			long fileId, String fileUuid, long companyId, long repositoryId,
 			long parentFolderId, String name, String type, String version)
@@ -44,6 +45,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 			StringPool.BLANK, type, version);
 	}
 
+	@Override
 	public DLSync addSync(
 			long fileId, String fileUuid, long companyId, long repositoryId,
 			long parentFolderId, String name, String description, String type,
@@ -82,6 +84,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 	 * @deprecated {@link #updateSync(long, long, String, String, String,
 	 *             String)}
 	 */
+	@Override
 	public DLSync updateSync(
 			long fileId, long parentFolderId, String name, String event,
 			String version)
@@ -91,6 +94,7 @@ public class DLSyncLocalServiceImpl extends DLSyncLocalServiceBaseImpl {
 			fileId, parentFolderId, name, StringPool.BLANK, event, version);
 	}
 
+	@Override
 	public DLSync updateSync(
 			long fileId, long parentFolderId, String name, String description,
 			String event, String version)

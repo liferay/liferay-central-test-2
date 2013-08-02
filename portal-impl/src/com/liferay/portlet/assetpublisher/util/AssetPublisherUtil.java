@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -64,8 +63,15 @@ import javax.servlet.http.HttpSession;
 
 /**
  * @author Raymond Augé
+ * @author Julio Camarero
  */
 public class AssetPublisherUtil {
+
+	public static final String SCOPE_ID_GROUP_PREFIX = "Group_";
+
+	public static final String SCOPE_ID_LAYOUT_PREFIX = "Layout_";
+
+	public static final String SCOPE_ID_LAYOUT_UUID_PREFIX = "LayoutUuid_";
 
 	public static void addAndStoreSelection(
 			PortletRequest portletRequest, String className, long classPK,
@@ -417,14 +423,18 @@ public class AssetPublisherUtil {
 
 			String[] scopeIds = portletPreferences.getValues(
 				"scopeIds",
-				new String[] {"group" + StringPool.UNDERLINE + scopeGroupId});
+				new String[] {SCOPE_ID_GROUP_PREFIX + scopeGroupId});
 
 			long[] groupIds = new long[scopeIds.length];
 
-			for (int i = 0; i < scopeIds.length; i++) {
+			int i = 0;
+
+			for (String scopeId : scopeIds) {
 				try {
 					groupIds[i] = _getGroupId(
-						scopeIds[i], scopeGroupId, layout.isPrivateLayout());
+						scopeId, scopeGroupId, layout.isPrivateLayout());
+
+					i++;
 				}
 				catch (Exception e) {
 					continue;
@@ -541,10 +551,36 @@ public class AssetPublisherUtil {
 			String scopeId, long scopeGroupId, boolean privateLayout)
 		throws Exception {
 
-		String[] scopeIdParts = StringUtil.split(scopeId, CharPool.UNDERLINE);
+		if (scopeId.startsWith(SCOPE_ID_GROUP_PREFIX)) {
+			String scopeIdSuffix = scopeId.substring(
+				SCOPE_ID_GROUP_PREFIX.length());
 
-		if (scopeIdParts[0].equals("Layout")) {
-			long scopeIdLayoutId = GetterUtil.getLong(scopeIdParts[1]);
+			if (scopeIdSuffix.equals(GroupConstants.DEFAULT)) {
+				return scopeGroupId;
+			}
+
+			return GetterUtil.getLong(scopeIdSuffix);
+		}
+		else if (scopeId.startsWith(SCOPE_ID_LAYOUT_UUID_PREFIX)) {
+			String layoutUuid = scopeId.substring(
+				SCOPE_ID_LAYOUT_UUID_PREFIX.length());
+
+			Layout scopeIdLayout =
+				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
+					layoutUuid, scopeGroupId, privateLayout);
+
+			Group scopeIdGroup = scopeIdLayout.getScopeGroup();
+
+			return scopeIdGroup.getGroupId();
+		}
+		else if (scopeId.startsWith(SCOPE_ID_LAYOUT_PREFIX)) {
+
+			// Legacy preferences
+
+			String scopeIdSuffix = scopeId.substring(
+				SCOPE_ID_LAYOUT_PREFIX.length());
+
+			long scopeIdLayoutId = GetterUtil.getLong(scopeIdSuffix);
 
 			Layout scopeIdLayout = LayoutLocalServiceUtil.getLayout(
 				scopeGroupId, privateLayout, scopeIdLayoutId);
@@ -553,12 +589,9 @@ public class AssetPublisherUtil {
 
 			return scopeIdGroup.getGroupId();
 		}
-
-		if (scopeIdParts[1].equals(GroupConstants.DEFAULT)) {
-			return scopeGroupId;
+		else {
+			throw new IllegalArgumentException("Invalid scope ID " + scopeId);
 		}
-
-		return GetterUtil.getLong(scopeIdParts[1]);
 	}
 
 	private static Map<String, Long> _getRecentFolderIds(

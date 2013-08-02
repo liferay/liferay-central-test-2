@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -36,7 +37,6 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.HashSet;
@@ -103,6 +103,8 @@ public class SecureFilter extends BasePortalFilter {
 		if (userId > 0) {
 			request = new ProtectedServletRequest(
 				request, String.valueOf(userId), HttpServletRequest.BASIC_AUTH);
+
+			initThreadLocals(request);
 		}
 		else {
 			try {
@@ -140,6 +142,8 @@ public class SecureFilter extends BasePortalFilter {
 			request = new ProtectedServletRequest(
 				request, String.valueOf(userId),
 				HttpServletRequest.DIGEST_AUTH);
+
+			initThreadLocals(request);
 		}
 		else {
 			try {
@@ -178,6 +182,28 @@ public class SecureFilter extends BasePortalFilter {
 		}
 
 		return request;
+	}
+
+	protected void initThreadLocals(HttpServletRequest request)
+		throws Exception {
+
+		HttpSession session = request.getSession();
+
+		User user = (User)session.getAttribute(WebKeys.USER);
+
+		CompanyThreadLocal.setCompanyId(user.getCompanyId());
+
+		PrincipalThreadLocal.setName(user.getUserId());
+		PrincipalThreadLocal.setPassword(PortalUtil.getUserPassword(request));
+
+		if (!_usePermissionChecker) {
+			return;
+		}
+
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 	}
 
 	protected boolean isAccessAllowed(HttpServletRequest request) {
@@ -269,24 +295,18 @@ public class SecureFilter extends BasePortalFilter {
 				_log.debug("Not securing " + completeURL);
 			}
 
-			// This authentication should only be run if specified by web.xml
-			// and JAAS is disabled. Make sure to run this once per session and
-			// wrap the request if necessary.
+			User user = PortalUtil.getUser(request);
 
-			if (!PropsValues.PORTAL_JAAS_ENABLE) {
-				User user = PortalUtil.getUser(request);
-
-				if ((user != null) && !user.isDefaultUser()) {
-					request = setCredentials(
-						request, request.getSession(), user.getUserId(), null);
+			if ((user != null) && !user.isDefaultUser()) {
+				request = setCredentials(
+					request, request.getSession(), user.getUserId(), null);
+			}
+			else {
+				if (_digestAuthEnabled) {
+					request = digestAuth(request, response);
 				}
-				else {
-					if (_digestAuthEnabled) {
-						request = digestAuth(request, response);
-					}
-					else if (_basicAuthEnabled) {
-						request = basicAuth(request, response);
-					}
+				else if (_basicAuthEnabled) {
+					request = basicAuth(request, response);
 				}
 			}
 
@@ -310,16 +330,7 @@ public class SecureFilter extends BasePortalFilter {
 		session.setAttribute(WebKeys.USER, user);
 		session.setAttribute(_AUTHENTICATED_USER, userIdString);
 
-		if (_usePermissionChecker) {
-			PrincipalThreadLocal.setName(userId);
-			PrincipalThreadLocal.setPassword(
-				PortalUtil.getUserPassword(request));
-
-			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-		}
+		initThreadLocals(request);
 
 		return request;
 	}

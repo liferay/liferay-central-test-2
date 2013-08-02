@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,8 +37,9 @@ public class ViewAction extends WebContentAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -49,10 +50,10 @@ public class ViewAction extends WebContentAction {
 
 			GroupLocalServiceUtil.getGroup(groupId);
 
-			return mapping.findForward("portlet.journal_articles.view");
+			return actionMapping.findForward("portlet.journal_articles.view");
 		}
 		catch (NoSuchGroupException nsge) {
-			return mapping.findForward("/portal/portlet_not_setup");
+			return actionMapping.findForward("/portal/portlet_not_setup");
 		}
 	}
 

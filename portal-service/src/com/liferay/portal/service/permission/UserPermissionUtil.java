@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,13 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -83,6 +89,41 @@ public class UserPermissionUtil {
 		PortalRuntimePermission.checkGetBeanProperty(UserPermissionUtil.class);
 
 		return _userPermission;
+	}
+
+	public static boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Group group, Role role,
+			User user)
+		throws PortalException, SystemException {
+
+		return getUserPermission().hasMembershipProtected(
+			permissionChecker, group, role, user);
+	}
+
+	public static boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Group group, User user)
+		throws PortalException, SystemException {
+
+		return getUserPermission().hasMembershipProtected(
+			permissionChecker, group, user);
+	}
+
+	public static boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Organization organization,
+			Role role, User user)
+		throws SystemException {
+
+		return getUserPermission().hasMembershipProtected(
+			permissionChecker, organization, role, user);
+	}
+
+	public static boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Organization organization,
+			User user)
+		throws PortalException, SystemException {
+
+		return getUserPermission().hasMembershipProtected(
+			permissionChecker, organization, user);
 	}
 
 	public void setUserPermission(UserPermission userPermission) {

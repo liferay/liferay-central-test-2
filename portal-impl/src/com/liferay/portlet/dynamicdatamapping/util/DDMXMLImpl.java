@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,10 +35,12 @@ import java.util.Locale;
  */
 public class DDMXMLImpl implements DDMXML {
 
+	@Override
 	public String formatXML(Document document) throws IOException {
 		return document.formattedString(_XML_INDENT);
 	}
 
+	@Override
 	public String formatXML(String xml) throws DocumentException, IOException {
 
 		// This is only supposed to format your xml, however, it will also
@@ -59,6 +61,7 @@ public class DDMXMLImpl implements DDMXML {
 		return xml;
 	}
 
+	@Override
 	public String updateXMLDefaultLocale(
 			String xml, Locale contentDefaultLocale,
 			Locale contentNewDefaultLocale)

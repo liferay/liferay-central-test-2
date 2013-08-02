@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringBundler;
 
@@ -33,7 +34,7 @@ import java.sql.SQLException;
  */
 public class VerifyOracle extends VerifyProcess {
 
-	protected void alterColumns() throws Exception {
+	protected void alterVarchar2Columns() throws Exception {
 		int buildNumber = getBuildNumber();
 
 		Connection con = null;
@@ -52,13 +53,26 @@ public class VerifyOracle extends VerifyProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString(1);
+
+				if (!isPortalTableName(tableName)) {
+					continue;
+				}
+
 				String columnName = rs.getString(2);
 				int dataLength = rs.getInt(3);
 
-				if ((buildNumber >= ReleaseInfo.RELEASE_5_2_9_BUILD_NUMBER) &&
-					(buildNumber < ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
+				if (isBetweenBuildNumbers(
+						buildNumber, ReleaseInfo.RELEASE_5_2_9_BUILD_NUMBER,
+						ReleaseInfo.RELEASE_6_0_0_BUILD_NUMBER) ||
+					isBetweenBuildNumbers(
+						buildNumber, ReleaseInfo.RELEASE_6_0_5_BUILD_NUMBER,
+						ReleaseInfo.RELEASE_6_1_20_BUILD_NUMBER)) {
 
-					if (dataLength != 4000) {
+					// LPS-33903
+
+					if (!ArrayUtil.contains(
+							_ORIGINAL_DATA_LENGTH_VALUES, dataLength)) {
+
 						dataLength = dataLength / 4;
 					}
 				}
@@ -77,7 +91,7 @@ public class VerifyOracle extends VerifyProcess {
 							sb.append(columnName);
 							sb.append(" for table ");
 							sb.append(tableName);
-							sb.append("because it contains values that are ");
+							sb.append(" because it contains values that are ");
 							sb.append("larger than the new column length");
 
 							_log.warn(sb.toString());
@@ -94,6 +108,51 @@ public class VerifyOracle extends VerifyProcess {
 		}
 	}
 
+	protected void convertColumnToClob(String tableName, String columnName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(6);
+
+			sb.append("select count(*) from user_tab_columns ");
+			sb.append("where table_name = '");
+			sb.append(tableName.toUpperCase());
+			sb.append("' and column_name = '");
+			sb.append(columnName.toUpperCase());
+			sb.append("' and data_type = 'CLOB'");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			if (!rs.next()) {
+				return;
+			}
+
+			int count = rs.getInt(1);
+
+			if (count > 0) {
+				return;
+			}
+
+			runSQL("alter table " + tableName + " add temp CLOB");
+			runSQL("update " + tableName + " set temp = " + columnName);
+			runSQL("alter table " + tableName + " drop column " + columnName);
+			runSQL(
+				"alter table " + tableName + " rename column temp to " +
+					columnName);
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	@Override
 	protected void doVerify() throws Exception {
 		DB db = DBFactoryUtil.getDB();
@@ -104,8 +163,27 @@ public class VerifyOracle extends VerifyProcess {
 			return;
 		}
 
-		alterColumns();
+		alterVarchar2Columns();
+
+		convertColumnToClob("Layout", "css");
+		convertColumnToClob("LayoutRevision", "css");
 	}
+
+	protected boolean isBetweenBuildNumbers(
+		int buildNumber, int startBuildNumber, int endBuildNumber) {
+
+		if ((buildNumber >= startBuildNumber) &&
+			(buildNumber < endBuildNumber)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
+	private static final int[] _ORIGINAL_DATA_LENGTH_VALUES = {
+		75, 100, 150, 200, 255, 500, 1000, 1024, 2000, 4000
+	};
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyOracle.class);
 

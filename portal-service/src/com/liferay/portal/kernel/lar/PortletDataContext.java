@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -75,8 +75,6 @@ public interface PortletDataContext extends Serializable {
 	public void addComments(
 		String className, long classPK, List<MBMessage> messages);
 
-	public void addCompanyReference(Class<?> clazz, String key);
-
 	public void addExpando(
 			Element element, String path, ClassedModel classedModel)
 		throws PortalException, SystemException;
@@ -144,6 +142,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map<String, List<MBMessage>> getComments();
 
+	public long getCompanyGroupId();
+
 	public long getCompanyId();
 
 	public String getDataStrategy();
@@ -184,6 +184,8 @@ public interface PortletDataContext extends Serializable {
 
 	public String getScopeType();
 
+	public long getSourceCompanyGroupId();
+
 	public long getSourceGroupId();
 
 	public String getSourceLayoutPath(long layoutId);
@@ -203,6 +205,8 @@ public interface PortletDataContext extends Serializable {
 	public byte[] getZipEntryAsByteArray(String path);
 
 	public InputStream getZipEntryAsInputStream(String path);
+
+	public Object getZipEntryAsObject(Element element, String path);
 
 	public Object getZipEntryAsObject(String path);
 
@@ -245,8 +249,6 @@ public interface PortletDataContext extends Serializable {
 			Class<?> clazz, long classPK, long newClassPK)
 		throws PortalException, SystemException;
 
-	public boolean isCompanyReference(Class<?> clazz, String key);
-
 	public boolean isDataStrategyMirror();
 
 	public boolean isDataStrategyMirrorWithOverwriting();
@@ -279,6 +281,8 @@ public interface PortletDataContext extends Serializable {
 	public void setScopeLayoutUuid(String scopeLayoutUuid);
 
 	public void setScopeType(String scopeType);
+
+	public void setSourceCompanyGroupId(long sourceCompanyGroupId);
 
 	public void setSourceGroupId(long sourceGroupId);
 

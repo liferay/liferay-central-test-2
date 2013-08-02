@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,13 +16,12 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.Html;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.servlet.filters.absoluteredirects.AbsoluteRedirectsFilter;
-import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.xml.DocumentImpl;
 import com.liferay.util.xml.XMLMerger;
@@ -53,9 +52,7 @@ public class WebXMLBuilder {
 	public static String organizeWebXML(String webXML)
 		throws DocumentException, IOException {
 
-		Html html = new HtmlImpl();
-
-		webXML = html.stripComments(webXML);
+		webXML = HtmlUtil.stripComments(webXML);
 
 		Document document = SAXReaderUtil.read(webXML);
 

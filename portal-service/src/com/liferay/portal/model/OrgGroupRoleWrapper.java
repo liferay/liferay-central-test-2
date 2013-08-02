@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -202,6 +204,10 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 		return new OrgGroupRoleWrapper(_orgGroupRole.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.OrgGroupRole toUnescapedModel() {
+		return new OrgGroupRoleWrapper(_orgGroupRole.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _orgGroupRole.toString();
@@ -219,6 +225,25 @@ public class OrgGroupRoleWrapper implements OrgGroupRole,
 	public boolean containsOrganization(
 		java.util.List<com.liferay.portal.model.Organization> organizations) {
 		return _orgGroupRole.containsOrganization(organizations);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgGroupRoleWrapper)) {
+			return false;
+		}
+
+		OrgGroupRoleWrapper orgGroupRoleWrapper = (OrgGroupRoleWrapper)obj;
+
+		if (Validator.equals(_orgGroupRole, orgGroupRoleWrapper._orgGroupRole)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

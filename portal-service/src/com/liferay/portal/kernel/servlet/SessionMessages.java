@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portal.kernel.servlet;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -177,9 +178,8 @@ public class SessionMessages {
 		if (map == null) {
 			return false;
 		}
-		else {
-			return map.containsKey(key);
-		}
+
+		return map.containsKey(key);
 	}
 
 	public static boolean contains(
@@ -204,9 +204,8 @@ public class SessionMessages {
 		if (map == null) {
 			return false;
 		}
-		else {
-			return map.containsKey(key);
-		}
+
+		return map.containsKey(key);
 	}
 
 	public static Object get(HttpServletRequest request, Class<?> clazz) {
@@ -227,9 +226,8 @@ public class SessionMessages {
 		if (map == null) {
 			return null;
 		}
-		else {
-			return map.get(key);
-		}
+
+		return map.get(key);
 	}
 
 	public static Object get(PortletRequest portletRequest, Class<?> clazz) {
@@ -250,9 +248,8 @@ public class SessionMessages {
 		if (map == null) {
 			return null;
 		}
-		else {
-			return map.get(key);
-		}
+
+		return map.get(key);
 	}
 
 	public static boolean isEmpty(HttpServletRequest request) {
@@ -265,9 +262,8 @@ public class SessionMessages {
 		if (map == null) {
 			return true;
 		}
-		else {
-			return map.isEmpty();
-		}
+
+		return map.isEmpty();
 	}
 
 	public static boolean isEmpty(PortletRequest portletRequest) {
@@ -280,9 +276,8 @@ public class SessionMessages {
 		if (map == null) {
 			return true;
 		}
-		else {
-			return map.isEmpty();
-		}
+
+		return map.isEmpty();
 	}
 
 	public static Iterator<String> iterator(HttpServletRequest request) {
@@ -293,11 +288,14 @@ public class SessionMessages {
 		Map<String, Object> map = _getMap(session, false);
 
 		if (map == null) {
-			return Collections.<String>emptyList().iterator();
+			List<String> list = Collections.<String>emptyList();
+
+			return list.iterator();
 		}
-		else {
-			return Collections.unmodifiableSet(map.keySet()).iterator();
-		}
+
+		Set<String> set = Collections.unmodifiableSet(map.keySet());
+
+		return set.iterator();
 	}
 
 	public static Iterator<String> iterator(PortletRequest portletRequest) {
@@ -308,11 +306,14 @@ public class SessionMessages {
 		Map<String, Object> map = _getMap(portletSession, false);
 
 		if (map == null) {
-			return Collections.<String>emptyList().iterator();
+			List<String> list = Collections.<String>emptyList();
+
+			return list.iterator();
 		}
-		else {
-			return Collections.unmodifiableSet(map.keySet()).iterator();
-		}
+
+		Set<String> set = Collections.unmodifiableSet(map.keySet());
+
+		return set.iterator();
 	}
 
 	public static Set<String> keySet(HttpServletRequest request) {
@@ -325,9 +326,8 @@ public class SessionMessages {
 		if (map == null) {
 			return Collections.emptySet();
 		}
-		else {
-			return Collections.unmodifiableSet(map.keySet());
-		}
+
+		return Collections.unmodifiableSet(map.keySet());
 	}
 
 	public static Set<String> keySet(PortletRequest portletRequest) {
@@ -340,9 +340,8 @@ public class SessionMessages {
 		if (map == null) {
 			return Collections.emptySet();
 		}
-		else {
-			return Collections.unmodifiableSet(map.keySet());
-		}
+
+		return Collections.unmodifiableSet(map.keySet());
 	}
 
 	public static void print(HttpServletRequest request) {
@@ -379,9 +378,8 @@ public class SessionMessages {
 		if (map == null) {
 			return 0;
 		}
-		else {
-			return map.size();
-		}
+
+		return map.size();
 	}
 
 	public static int size(PortletRequest portletRequest) {
@@ -394,9 +392,8 @@ public class SessionMessages {
 		if (map == null) {
 			return 0;
 		}
-		else {
-			return map.size();
-		}
+
+		return map.size();
 	}
 
 	private static Map<String, Object> _getMap(

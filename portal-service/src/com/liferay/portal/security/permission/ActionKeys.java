@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -201,6 +201,8 @@ public class ActionKeys {
 	public static final String MERGE = "MERGE";
 
 	public static final String MOVE_THREAD = "MOVE_THREAD";
+
+	public static final String OVERRIDE_CHECKOUT = "OVERRIDE_CHECKOUT";
 
 	public static final String PERMISSIONS = "PERMISSIONS";
 

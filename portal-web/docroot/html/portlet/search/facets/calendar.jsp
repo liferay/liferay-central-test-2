@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -62,8 +62,8 @@ if (Validator.isNotNull(fieldParam)) {
 	<aui:script use="liferay-token-list">
 		Liferay.Search.tokenList.add(
 			{
-				clearFields: '<%= UnicodeFormatter.toString(renderResponse.getNamespace() + facet.getFieldName()) %>',
-				text: '<%= UnicodeLanguageUtil.format(pageContext, "from-x-to-x", new Object[] {"<strong>" + fieldParamFrom + "</strong>", "<strong>" + fieldParamTo + "</strong>"}) %>'
+				clearFields: '<%= renderResponse.getNamespace() + facet.getFieldName() %>',
+				html: '<%= UnicodeLanguageUtil.format(pageContext, "from-x-to-x", new Object[] {"<strong>" + HtmlUtil.escape(fieldParamFrom) + "</strong>", "<strong>" + HtmlUtil.escape(fieldParamTo) + "</strong>"}) %>'
 			}
 		);
 	</aui:script>

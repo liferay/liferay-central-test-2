@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,6 @@
 
 package com.liferay.portal.upgrade.v6_0_3;
 
-import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -103,6 +102,10 @@ public class UpgradePermission extends UpgradeProcess {
 	protected void addUserGroupRole(long userId, long groupId, long roleId)
 		throws Exception {
 
+		if (hasUserGroupRole(userId, groupId, roleId)) {
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -125,6 +128,10 @@ public class UpgradePermission extends UpgradeProcess {
 	}
 
 	protected void addUserRole(long userId, long roleId) throws Exception {
+		if (hasUserRole(userId, roleId)) {
+			return;
+		}
+
 		Connection con = null;
 		PreparedStatement ps = null;
 
@@ -185,9 +192,7 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("from User_, UserGroupRole where User_.userId = ");
 			sb.append("UserGroupRole.userId and UserGroupRole.roleId = ?)");
 
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setLong(1, roleId);
 			ps.setLong(2, roleId);
@@ -279,6 +284,73 @@ public class UpgradePermission extends UpgradeProcess {
 		}
 	}
 
+	protected boolean hasUserGroupRole(long userId, long groupId, long roleId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from UserGroupRole where userId = ? and " +
+					"groupId = ? and roleId = ?");
+
+			ps.setLong(1, userId);
+			ps.setLong(2, groupId);
+			ps.setLong(3, roleId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected boolean hasUserRole(long userId, long roleId) throws Exception {
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from Users_Roles where userId = ? and " +
+					"roleId = ?");
+
+			ps.setLong(1, userId);
+			ps.setLong(2, roleId);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void updatePermissions_5() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -343,11 +415,7 @@ public class UpgradePermission extends UpgradeProcess {
 			sb.append("mod((ResourcePermission.actionIds / ");
 			sb.append("ResourceAction.bitwiseValue), 2) = 1");
 
-			String sql = sb.toString();
-
-			sql = SQLTransformer.transform(sql);
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(sb.toString());
 
 			rs = ps.executeQuery();
 

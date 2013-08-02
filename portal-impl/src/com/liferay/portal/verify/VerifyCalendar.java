@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,12 +14,12 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.dao.orm.common.SQLTransformer;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 
@@ -34,11 +34,13 @@ import org.jabsorb.JSONSerializer;
 /**
  * @author Juan Fernández
  * @author Matthew Kong
+ * @author Mate Thurzo
  */
 public class VerifyCalendar extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
+		verifyEndDate();
 		verifyNoAssets();
 		verifyRecurrence();
 	}
@@ -63,6 +65,13 @@ public class VerifyCalendar extends VerifyProcess {
 		finally {
 			DataAccess.cleanUp(con, ps);
 		}
+	}
+
+	protected void verifyEndDate() throws Exception {
+		runSQL(
+			"update CalEvent set endDate = null where endDate is not null " +
+				"and (recurrence like '%\"until\":null%' or " +
+					"CAST_TEXT(recurrence) = 'null')");
 	}
 
 	protected void verifyNoAssets() throws Exception {
@@ -104,14 +113,10 @@ public class VerifyCalendar extends VerifyProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			String sql =
+			ps = con.prepareStatement(
 				"select eventId, recurrence from CalEvent where (CAST_TEXT(" +
-					"recurrence) is not null or CAST_TEXT(recurrence) != '') " +
-						"and recurrence not like '%serializable%'";
-
-			sql = SQLTransformer.transform(sql);
-
-			ps = con.prepareStatement(sql);
+					"recurrence) != '') and recurrence not like " +
+						"'%serializable%'");
 
 			rs = ps.executeQuery();
 
@@ -119,8 +124,12 @@ public class VerifyCalendar extends VerifyProcess {
 				long eventId = rs.getLong("eventId");
 				String recurrence = rs.getString("recurrence");
 
-				TZSRecurrence recurrenceObj =
-					(TZSRecurrence)jsonSerializer.fromJSON(recurrence);
+				TZSRecurrence recurrenceObj = null;
+
+				if (Validator.isNotNull(recurrence)) {
+					recurrenceObj = (TZSRecurrence)jsonSerializer.fromJSON(
+						recurrence);
+				}
 
 				String newRecurrence = JSONFactoryUtil.serialize(recurrenceObj);
 

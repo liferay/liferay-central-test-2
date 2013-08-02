@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -90,7 +90,7 @@ public class DialectDetector {
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
 				dialect = new SybaseASE15Dialect();
 			}
-			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)) {
+			else if (dbName.startsWith("DB2") && (dbMajorVersion >= 9)) {
 				dialect = new DB2Dialect();
 			}
 			else if (dbName.startsWith("Microsoft") && (dbMajorVersion == 9)) {
@@ -110,7 +110,7 @@ public class DialectDetector {
 		catch (Exception e) {
 			String msg = GetterUtil.getString(e.getMessage());
 
-			if (msg.indexOf("explicitly set for database: DB2") != -1) {
+			if (msg.contains("explicitly set for database: DB2")) {
 				dialect = new DB2400Dialect();
 
 				if (_log.isWarnEnabled()) {

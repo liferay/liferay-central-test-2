@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -310,13 +310,16 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 	@Override
 	public SocialRelation toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (SocialRelation)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (SocialRelation)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public SocialRelation toUnescapedModel() {
+		return (SocialRelation)this;
 	}
 
 	@Override
@@ -352,18 +355,15 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialRelation)) {
 			return false;
 		}
 
-		SocialRelation socialRelation = null;
-
-		try {
-			socialRelation = (SocialRelation)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialRelation socialRelation = (SocialRelation)obj;
 
 		long primaryKey = socialRelation.getPrimaryKey();
 
@@ -497,7 +497,7 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	}
 
 	private static ClassLoader _classLoader = SocialRelation.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			SocialRelation.class
 		};
 	private String _uuid;
@@ -517,5 +517,5 @@ public class SocialRelationModelImpl extends BaseModelImpl<SocialRelation>
 	private int _originalType;
 	private boolean _setOriginalType;
 	private long _columnBitmask;
-	private SocialRelation _escapedModelProxy;
+	private SocialRelation _escapedModel;
 }

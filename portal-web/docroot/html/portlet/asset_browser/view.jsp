@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,7 @@
 
 <%
 long groupId = ParamUtil.getLong(request, "groupId");
-
+long[] selectedGroupIds = StringUtil.split(ParamUtil.getString(request, "selectedGroupIds"), 0L);
 long refererAssetEntryId = ParamUtil.getLong(request, "refererAssetEntryId");
 String typeSelection = ParamUtil.getString(request, "typeSelection");
 String callback = ParamUtil.getString(request, "callback");
@@ -26,6 +26,7 @@ String callback = ParamUtil.getString(request, "callback");
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/asset_browser/view");
+portletURL.setParameter("selectedGroupIds", StringUtil.merge(selectedGroupIds));
 portletURL.setParameter("refererAssetEntryId", String.valueOf(refererAssetEntryId));
 portletURL.setParameter("typeSelection", typeSelection);
 portletURL.setParameter("callback", callback);
@@ -36,12 +37,7 @@ portletURL.setParameter("callback", callback);
 />
 
 <div class="asset-search">
-	<liferay-portlet:renderURL varImpl="searchURL">
-		<portlet:param name="struts_action" value="/asset_browser/view" />
-		<portlet:param name="callback" value="<%= callback%>" />
-	</liferay-portlet:renderURL>
-
-	<aui:form action="<%= searchURL %>" method="post" name="searchFm">
+	<aui:form action="<%= portletURL %>" method="post" name="searchFm">
 		<aui:input name="typeSelection" type="hidden" value="<%= typeSelection %>" />
 
 		<%
@@ -49,14 +45,14 @@ portletURL.setParameter("callback", callback);
 		%>
 
 		<liferay-ui:search-form
-			page="/html/portlet/asset_browser/asset_search.jsp"
+			page="/html/portlet/asset_publisher/asset_search.jsp"
 			searchContainer="<%= searchContainer %>"
 		/>
 
 		<%
 		AssetSearchTerms searchTerms = (AssetSearchTerms)searchContainer.getSearchTerms();
 
-		long[] groupIds = new long[] {groupId};
+		long[] groupIds = selectedGroupIds;
 		%>
 
 		<%@ include file="/html/portlet/asset_publisher/asset_search_results.jspf" %>
@@ -86,12 +82,12 @@ portletURL.setParameter("callback", callback);
 				continue;
 			}
 
-			assetEntry = assetEntry.toEscapedModel();
-
 			String rowHREF = null;
 
+			Group group = GroupLocalServiceUtil.getGroup(assetEntry.getGroupId());
+
 			if (assetEntry.getEntryId() != refererAssetEntryId) {
-				StringBundler sb = new StringBundler(9);
+				StringBundler sb = new StringBundler(11);
 
 				sb.append("javascript:Liferay.Util.getOpener().");
 				sb.append(callback);
@@ -100,7 +96,9 @@ portletURL.setParameter("callback", callback);
 				sb.append("', '");
 				sb.append(ResourceActionsUtil.getModelResource(locale, assetEntry.getClassName()));
 				sb.append("', '");
-				sb.append(assetEntry.getTitle(locale));
+				sb.append(HtmlUtil.escapeJS(assetEntry.getTitle(locale)));
+				sb.append("', '");
+				sb.append(HtmlUtil.escapeJS(group.getDescriptiveName(locale)));
 				sb.append("');Liferay.Util.getWindow().close();");
 
 				rowHREF = sb.toString();
@@ -108,19 +106,23 @@ portletURL.setParameter("callback", callback);
 
 			// Title
 
-			row.addText(assetEntry.getTitle(locale), rowHREF);
+			row.addText(HtmlUtil.escape(assetEntry.getTitle(locale)), rowHREF);
 
 			// Description
 
-			row.addText(assetEntry.getSummary(locale), rowHREF);
+			row.addText(HtmlUtil.stripHtml(assetEntry.getDescription(locale)), rowHREF);
 
 			// User name
 
-			row.addText(HtmlUtil.escape(PortalUtil.getUserName(assetEntry.getUserId(), assetEntry.getUserName())), rowHREF);
+			row.addText(PortalUtil.getUserName(assetEntry), rowHREF);
 
 			// Modified date
 
 			row.addText(dateFormatDate.format(assetEntry.getModifiedDate()), rowHREF);
+
+			// Scope
+
+			row.addText(HtmlUtil.escape(group.getDescriptiveName(locale)), rowHREF);
 
 			// Add result row
 

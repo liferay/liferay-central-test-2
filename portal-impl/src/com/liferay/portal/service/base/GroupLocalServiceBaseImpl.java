@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -153,7 +153,6 @@ import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
-import com.liferay.portal.service.persistence.LayoutSetBranchFinder;
 import com.liferay.portal.service.persistence.LayoutSetBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
@@ -237,6 +236,7 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.CalEventService;
@@ -522,6 +522,646 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 		group.setNew(false);
 
 		return groupPersistence.update(group, merge);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addOrganizationGroup(long organizationId, long groupId)
+		throws SystemException {
+		organizationPersistence.addGroup(organizationId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addOrganizationGroup(long organizationId, Group group)
+		throws SystemException {
+		organizationPersistence.addGroup(organizationId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addOrganizationGroups(long organizationId, long[] groupIds)
+		throws SystemException {
+		organizationPersistence.addGroups(organizationId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addOrganizationGroups(long organizationId, List<Group> Groups)
+		throws SystemException {
+		organizationPersistence.addGroups(organizationId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearOrganizationGroups(long organizationId)
+		throws SystemException {
+		organizationPersistence.clearGroups(organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteOrganizationGroup(long organizationId, long groupId)
+		throws SystemException {
+		organizationPersistence.removeGroup(organizationId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteOrganizationGroup(long organizationId, Group group)
+		throws SystemException {
+		organizationPersistence.removeGroup(organizationId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteOrganizationGroups(long organizationId, long[] groupIds)
+		throws SystemException {
+		organizationPersistence.removeGroups(organizationId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteOrganizationGroups(long organizationId, List<Group> Groups)
+		throws SystemException {
+		organizationPersistence.removeGroups(organizationId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getOrganizationGroups(long organizationId)
+		throws SystemException {
+		return organizationPersistence.getGroups(organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getOrganizationGroups(long organizationId, int start,
+		int end) throws SystemException {
+		return organizationPersistence.getGroups(organizationId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getOrganizationGroups(long organizationId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return organizationPersistence.getGroups(organizationId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getOrganizationGroupsCount(long organizationId)
+		throws SystemException {
+		return organizationPersistence.getGroupsSize(organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasOrganizationGroup(long organizationId, long groupId)
+		throws SystemException {
+		return organizationPersistence.containsGroup(organizationId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasOrganizationGroups(long organizationId)
+		throws SystemException {
+		return organizationPersistence.containsGroups(organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setOrganizationGroups(long organizationId, long[] groupIds)
+		throws SystemException {
+		organizationPersistence.setGroups(organizationId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addPermissionGroup(long permissionId, long groupId)
+		throws SystemException {
+		permissionPersistence.addGroup(permissionId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addPermissionGroup(long permissionId, Group group)
+		throws SystemException {
+		permissionPersistence.addGroup(permissionId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addPermissionGroups(long permissionId, long[] groupIds)
+		throws SystemException {
+		permissionPersistence.addGroups(permissionId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addPermissionGroups(long permissionId, List<Group> Groups)
+		throws SystemException {
+		permissionPersistence.addGroups(permissionId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearPermissionGroups(long permissionId)
+		throws SystemException {
+		permissionPersistence.clearGroups(permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deletePermissionGroup(long permissionId, long groupId)
+		throws SystemException {
+		permissionPersistence.removeGroup(permissionId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deletePermissionGroup(long permissionId, Group group)
+		throws SystemException {
+		permissionPersistence.removeGroup(permissionId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deletePermissionGroups(long permissionId, long[] groupIds)
+		throws SystemException {
+		permissionPersistence.removeGroups(permissionId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deletePermissionGroups(long permissionId, List<Group> Groups)
+		throws SystemException {
+		permissionPersistence.removeGroups(permissionId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getPermissionGroups(long permissionId)
+		throws SystemException {
+		return permissionPersistence.getGroups(permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getPermissionGroups(long permissionId, int start, int end)
+		throws SystemException {
+		return permissionPersistence.getGroups(permissionId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getPermissionGroups(long permissionId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return permissionPersistence.getGroups(permissionId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getPermissionGroupsCount(long permissionId)
+		throws SystemException {
+		return permissionPersistence.getGroupsSize(permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasPermissionGroup(long permissionId, long groupId)
+		throws SystemException {
+		return permissionPersistence.containsGroup(permissionId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasPermissionGroups(long permissionId)
+		throws SystemException {
+		return permissionPersistence.containsGroups(permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setPermissionGroups(long permissionId, long[] groupIds)
+		throws SystemException {
+		permissionPersistence.setGroups(permissionId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRoleGroup(long roleId, long groupId)
+		throws SystemException {
+		rolePersistence.addGroup(roleId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRoleGroup(long roleId, Group group)
+		throws SystemException {
+		rolePersistence.addGroup(roleId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRoleGroups(long roleId, long[] groupIds)
+		throws SystemException {
+		rolePersistence.addGroups(roleId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRoleGroups(long roleId, List<Group> Groups)
+		throws SystemException {
+		rolePersistence.addGroups(roleId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearRoleGroups(long roleId) throws SystemException {
+		rolePersistence.clearGroups(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRoleGroup(long roleId, long groupId)
+		throws SystemException {
+		rolePersistence.removeGroup(roleId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRoleGroup(long roleId, Group group)
+		throws SystemException {
+		rolePersistence.removeGroup(roleId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRoleGroups(long roleId, long[] groupIds)
+		throws SystemException {
+		rolePersistence.removeGroups(roleId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRoleGroups(long roleId, List<Group> Groups)
+		throws SystemException {
+		rolePersistence.removeGroups(roleId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getRoleGroups(long roleId) throws SystemException {
+		return rolePersistence.getGroups(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getRoleGroups(long roleId, int start, int end)
+		throws SystemException {
+		return rolePersistence.getGroups(roleId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getRoleGroups(long roleId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return rolePersistence.getGroups(roleId, start, end, orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getRoleGroupsCount(long roleId) throws SystemException {
+		return rolePersistence.getGroupsSize(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasRoleGroup(long roleId, long groupId)
+		throws SystemException {
+		return rolePersistence.containsGroup(roleId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasRoleGroups(long roleId) throws SystemException {
+		return rolePersistence.containsGroups(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setRoleGroups(long roleId, long[] groupIds)
+		throws SystemException {
+		rolePersistence.setGroups(roleId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroupGroup(long userGroupId, long groupId)
+		throws SystemException {
+		userGroupPersistence.addGroup(userGroupId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroupGroup(long userGroupId, Group group)
+		throws SystemException {
+		userGroupPersistence.addGroup(userGroupId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroupGroups(long userGroupId, long[] groupIds)
+		throws SystemException {
+		userGroupPersistence.addGroups(userGroupId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroupGroups(long userGroupId, List<Group> Groups)
+		throws SystemException {
+		userGroupPersistence.addGroups(userGroupId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearUserGroupGroups(long userGroupId)
+		throws SystemException {
+		userGroupPersistence.clearGroups(userGroupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroupGroup(long userGroupId, long groupId)
+		throws SystemException {
+		userGroupPersistence.removeGroup(userGroupId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroupGroup(long userGroupId, Group group)
+		throws SystemException {
+		userGroupPersistence.removeGroup(userGroupId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroupGroups(long userGroupId, long[] groupIds)
+		throws SystemException {
+		userGroupPersistence.removeGroups(userGroupId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroupGroups(long userGroupId, List<Group> Groups)
+		throws SystemException {
+		userGroupPersistence.removeGroups(userGroupId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroupGroups(long userGroupId)
+		throws SystemException {
+		return userGroupPersistence.getGroups(userGroupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroupGroups(long userGroupId, int start, int end)
+		throws SystemException {
+		return userGroupPersistence.getGroups(userGroupId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroupGroups(long userGroupId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return userGroupPersistence.getGroups(userGroupId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getUserGroupGroupsCount(long userGroupId)
+		throws SystemException {
+		return userGroupPersistence.getGroupsSize(userGroupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserGroupGroup(long userGroupId, long groupId)
+		throws SystemException {
+		return userGroupPersistence.containsGroup(userGroupId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserGroupGroups(long userGroupId)
+		throws SystemException {
+		return userGroupPersistence.containsGroups(userGroupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setUserGroupGroups(long userGroupId, long[] groupIds)
+		throws SystemException {
+		userGroupPersistence.setGroups(userGroupId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroup(long userId, long groupId)
+		throws SystemException {
+		userPersistence.addGroup(userId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroup(long userId, Group group)
+		throws SystemException {
+		userPersistence.addGroup(userId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroups(long userId, long[] groupIds)
+		throws SystemException {
+		userPersistence.addGroups(userId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserGroups(long userId, List<Group> Groups)
+		throws SystemException {
+		userPersistence.addGroups(userId, Groups);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearUserGroups(long userId) throws SystemException {
+		userPersistence.clearGroups(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroup(long userId, long groupId)
+		throws SystemException {
+		userPersistence.removeGroup(userId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroup(long userId, Group group)
+		throws SystemException {
+		userPersistence.removeGroup(userId, group);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroups(long userId, long[] groupIds)
+		throws SystemException {
+		userPersistence.removeGroups(userId, groupIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserGroups(long userId, List<Group> Groups)
+		throws SystemException {
+		userPersistence.removeGroups(userId, Groups);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroups(long userId)
+		throws PortalException, SystemException {
+		return userPersistence.getGroups(userId);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroups(long userId, int start, int end)
+		throws PortalException, SystemException {
+		return userPersistence.getGroups(userId, start, end);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Group> getUserGroups(long userId, int start, int end,
+		OrderByComparator orderByComparator)
+		throws PortalException, SystemException {
+		return userPersistence.getGroups(userId, start, end, orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getUserGroupsCount(long userId) throws SystemException {
+		return userPersistence.getGroupsSize(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserGroup(long userId, long groupId)
+		throws SystemException {
+		return userPersistence.containsGroup(userId, groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserGroups(long userId) throws SystemException {
+		return userPersistence.containsGroups(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setUserGroups(long userId, long[] groupIds)
+		throws SystemException {
+		userPersistence.setGroups(userId, groupIds);
 	}
 
 	/**
@@ -1462,25 +2102,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	public void setLayoutSetBranchPersistence(
 		LayoutSetBranchPersistence layoutSetBranchPersistence) {
 		this.layoutSetBranchPersistence = layoutSetBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout set branch finder.
-	 *
-	 * @return the layout set branch finder
-	 */
-	public LayoutSetBranchFinder getLayoutSetBranchFinder() {
-		return layoutSetBranchFinder;
-	}
-
-	/**
-	 * Sets the layout set branch finder.
-	 *
-	 * @param layoutSetBranchFinder the layout set branch finder
-	 */
-	public void setLayoutSetBranchFinder(
-		LayoutSetBranchFinder layoutSetBranchFinder) {
-		this.layoutSetBranchFinder = layoutSetBranchFinder;
 	}
 
 	/**
@@ -4371,6 +4992,25 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the bookmarks folder finder.
+	 *
+	 * @return the bookmarks folder finder
+	 */
+	public BookmarksFolderFinder getBookmarksFolderFinder() {
+		return bookmarksFolderFinder;
+	}
+
+	/**
+	 * Sets the bookmarks folder finder.
+	 *
+	 * @param bookmarksFolderFinder the bookmarks folder finder
+	 */
+	public void setBookmarksFolderFinder(
+		BookmarksFolderFinder bookmarksFolderFinder) {
+		this.bookmarksFolderFinder = bookmarksFolderFinder;
+	}
+
+	/**
 	 * Returns the cal event local service.
 	 *
 	 * @return the cal event local service
@@ -5651,8 +6291,6 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected LayoutSetBranchService layoutSetBranchService;
 	@BeanReference(type = LayoutSetBranchPersistence.class)
 	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
-	@BeanReference(type = LayoutSetBranchFinder.class)
-	protected LayoutSetBranchFinder layoutSetBranchFinder;
 	@BeanReference(type = LayoutSetPrototypeLocalService.class)
 	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
 	@BeanReference(type = LayoutSetPrototypeService.class)
@@ -5963,6 +6601,8 @@ public abstract class GroupLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected BookmarksFolderService bookmarksFolderService;
 	@BeanReference(type = BookmarksFolderPersistence.class)
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
+	@BeanReference(type = BookmarksFolderFinder.class)
+	protected BookmarksFolderFinder bookmarksFolderFinder;
 	@BeanReference(type = CalEventLocalService.class)
 	protected CalEventLocalService calEventLocalService;
 	@BeanReference(type = CalEventService.class)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -256,14 +256,63 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		AssetCategoryProperty assetCategoryProperty) {
+		if (assetCategoryProperty.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(assetCategoryProperty.getCategoryId()),
+					
+					assetCategoryProperty.getKey()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CA_K, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K, args,
+				assetCategoryProperty);
+		}
+		else {
+			AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = (AssetCategoryPropertyModelImpl)assetCategoryProperty;
+
+			if ((assetCategoryPropertyModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_CA_K.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(assetCategoryProperty.getCategoryId()),
+						
+						assetCategoryProperty.getKey()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CA_K, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K, args,
+					assetCategoryProperty);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		AssetCategoryProperty assetCategoryProperty) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K,
-			new Object[] {
+		AssetCategoryPropertyModelImpl assetCategoryPropertyModelImpl = (AssetCategoryPropertyModelImpl)assetCategoryProperty;
+
+		Object[] args = new Object[] {
 				Long.valueOf(assetCategoryProperty.getCategoryId()),
 				
-			assetCategoryProperty.getKey()
-			});
+				assetCategoryProperty.getKey()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CA_K, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K, args);
+
+		if ((assetCategoryPropertyModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_CA_K.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(assetCategoryPropertyModelImpl.getOriginalCategoryId()),
+					
+					assetCategoryPropertyModelImpl.getOriginalKey()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CA_K, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K, args);
+		}
 	}
 
 	/**
@@ -462,35 +511,8 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 			AssetCategoryPropertyImpl.class,
 			assetCategoryProperty.getPrimaryKey(), assetCategoryProperty);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
-				new Object[] {
-					Long.valueOf(assetCategoryProperty.getCategoryId()),
-					
-				assetCategoryProperty.getKey()
-				}, assetCategoryProperty);
-		}
-		else {
-			if ((assetCategoryPropertyModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CA_K.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(assetCategoryPropertyModelImpl.getOriginalCategoryId()),
-						
-						assetCategoryPropertyModelImpl.getOriginalKey()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CA_K, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CA_K, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CA_K,
-					new Object[] {
-						Long.valueOf(assetCategoryProperty.getCategoryId()),
-						
-					assetCategoryProperty.getKey()
-					}, assetCategoryProperty);
-			}
-		}
+		clearUniqueFindersCache(assetCategoryProperty);
+		cacheUniqueFindersCache(assetCategoryProperty);
 
 		return assetCategoryProperty;
 	}
@@ -2470,8 +2492,10 @@ public class AssetCategoryPropertyPersistenceImpl extends BasePersistenceImpl<As
 				List<ModelListener<AssetCategoryProperty>> listenersList = new ArrayList<ModelListener<AssetCategoryProperty>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<AssetCategoryProperty>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

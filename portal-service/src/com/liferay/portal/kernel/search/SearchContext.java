@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Layout;
 
 import java.io.Serializable;
 
@@ -108,6 +109,10 @@ public class SearchContext implements Serializable {
 
 	public String getKeywords() {
 		return _keywords;
+	}
+
+	public Layout getLayout() {
+		return _layout;
 	}
 
 	public Locale getLocale() {
@@ -244,6 +249,10 @@ public class SearchContext implements Serializable {
 		_keywords = keywords;
 	}
 
+	public void setLayout(Layout layout) {
+		_layout = layout;
+	}
+
 	public void setLocale(Locale locale) {
 		if (locale != null) {
 			_locale = locale;
@@ -307,6 +316,7 @@ public class SearchContext implements Serializable {
 	private boolean _includeLiveGroups = true;
 	private boolean _includeStagingGroups = true;
 	private String _keywords;
+	private Layout _layout;
 	private Locale _locale = LocaleUtil.getMostRelevantLocale();
 	private long[] _nodeIds;
 	private long _ownerUserId;

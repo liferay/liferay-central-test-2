@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -181,19 +181,19 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	}
 
 	/**
-	* Returns the layout with the UUID in the group.
-	*
 	* @param uuid the UUID of layout
 	* @param groupId the group id of the layout
+	* @param privateLayout whether the layout is private to the group
 	* @return the layout
-	* @throws PortalException if a layout with the UUID in the group could not be found
+	* @throws PortalException if a layout with the UUID in the group and privateLayout could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.Layout getLayoutByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
+		java.lang.String uuid, long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _layoutLocalService.getLayoutByUuidAndGroupId(uuid, groupId);
+		return _layoutLocalService.getLayoutByUuidAndGroupId(uuid, groupId,
+			privateLayout);
 	}
 
 	/**
@@ -625,19 +625,18 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	}
 
 	/**
-	* Returns the layout matching the universally unique identifier and group
-	* ID
-	*
 	* @param uuid the universally unique identifier of the scope layout
 	* @param groupId the primary key of the group
+	* @param privateLayout whether the layout is private to the group
 	* @return the layout, or <code>null</code> if a matching layout could not
 	be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.portal.model.Layout fetchLayoutByUuidAndGroupId(
-		java.lang.String uuid, long groupId)
+		java.lang.String uuid, long groupId, boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _layoutLocalService.fetchLayoutByUuidAndGroupId(uuid, groupId);
+		return _layoutLocalService.fetchLayoutByUuidAndGroupId(uuid, groupId,
+			privateLayout);
 	}
 
 	/**
@@ -876,11 +875,27 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		return _layoutLocalService.getLayoutsCount(group, privateLayout);
 	}
 
+	public int getLayoutsCount(com.liferay.portal.model.Group group,
+		boolean privateLayout, boolean includeUserGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.getLayoutsCount(group, privateLayout,
+			includeUserGroups);
+	}
+
 	public int getLayoutsCount(com.liferay.portal.model.User user,
 		boolean privateLayout)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.getLayoutsCount(user, privateLayout);
+	}
+
+	public int getLayoutsCount(com.liferay.portal.model.User user,
+		boolean privateLayout, boolean includeUserGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.getLayoutsCount(user, privateLayout,
+			includeUserGroups);
 	}
 
 	/**
@@ -928,6 +943,14 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		return _layoutLocalService.hasLayouts(group, privateLayout);
 	}
 
+	public boolean hasLayouts(com.liferay.portal.model.Group group,
+		boolean privateLayout, boolean includeUserGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.hasLayouts(group, privateLayout,
+			includeUserGroups);
+	}
+
 	/**
 	* Returns <code>true</code> if the group has any layouts;
 	* <code>false</code> otherwise.
@@ -951,6 +974,14 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutLocalService.hasLayouts(user, privateLayout);
+	}
+
+	public boolean hasLayouts(com.liferay.portal.model.User user,
+		boolean privateLayout, boolean includeUserGroups)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutLocalService.hasLayouts(user, privateLayout,
+			includeUserGroups);
 	}
 
 	public boolean hasLayoutSetPrototypeLayout(long layoutSetPrototypeId,
@@ -1419,6 +1450,9 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		return _layoutLocalService.updatePriority(plid, priority);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, with no direct replacement
+	*/
 	public void updateScopedPortletNames(long groupId, boolean privateLayout,
 		long layoutId,
 		java.util.Map<java.util.Locale, java.lang.String> nameMap,
@@ -1435,13 +1469,14 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 	*
 	* @param groupId the primary key of the group
 	* @param privateLayout whether the layout is private to the group
-	* @param layoutId the primary key of the layout whose universally unique
-	identifier to match
+	* @param layoutId the primary key of the layout whose universally
+	unique identifier to match
 	* @param name the new name for the portlets
 	* @param languageId the primary key of the language
 	* @throws PortalException if a matching layout could not be found
 	* @throws SystemException if a system exception occurred
 	* @see com.liferay.portlet.portletconfiguration.action.EditScopeAction
+	* @deprecated As of 6.2.0, with no direct replacement
 	*/
 	public void updateScopedPortletNames(long groupId, boolean privateLayout,
 		long layoutId, java.lang.String name, java.lang.String languageId)

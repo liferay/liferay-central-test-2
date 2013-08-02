@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,10 @@
 <%@ include file="/html/taglib/ui/journal_content_search/init.jsp" %>
 
 <%
+boolean showListed = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-content-search:showListed"));
+String targetPortletId = (String)request.getAttribute("liferay-ui:journal-content-search:targetPortletId");
+String type = (String)request.getAttribute("liferay-ui:journal-content-search:type");
+
 String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
 String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
@@ -33,10 +37,19 @@ else {
 	portletURL = new PortletURLImpl(request, PortletKeys.JOURNAL_CONTENT_SEARCH, plid, PortletRequest.RENDER_PHASE);
 }
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-portletURL.setPortletMode(PortletMode.VIEW);
-
 portletURL.setParameter("struts_action", "/journal_content_search/search");
+portletURL.setParameter("showListed", String.valueOf(showListed));
+
+if (Validator.isNotNull(targetPortletId)) {
+	portletURL.setParameter("targetPortletId", targetPortletId);
+}
+
+if (Validator.isNotNull(type)) {
+	portletURL.setParameter("type", type);
+}
+
+portletURL.setPortletMode(PortletMode.VIEW);
+portletURL.setWindowState(WindowState.MAXIMIZED);
 %>
 
 <form action="<%= HtmlUtil.escape(portletURL.toString()) %>" class="aui-form" method="post" name="<%= namespace %>fm" onSubmit="submitForm(this); return false;">

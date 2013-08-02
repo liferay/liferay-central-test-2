@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,8 +29,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordConstants;
@@ -57,6 +62,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -69,6 +75,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class DDLImpl implements DDL {
 
+	@Override
 	public void addAllReservedEls(
 		Element rootElement, Map<String, String> tokens,
 		DDLRecordSet recordSet) {
@@ -90,10 +97,12 @@ public class DDLImpl implements DDL {
 			String.valueOf(recordSet.getDDMStructureId()));
 	}
 
+	@Override
 	public JSONObject getRecordJSONObject(DDLRecord record) throws Exception {
 		return getRecordJSONObject(record, false);
 	}
 
+	@Override
 	public JSONObject getRecordJSONObject(
 			DDLRecord record, boolean latestRecordVersion)
 		throws Exception {
@@ -164,6 +173,7 @@ public class DDLImpl implements DDL {
 		return jsonObject;
 	}
 
+	@Override
 	public JSONArray getRecordSetJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
@@ -214,12 +224,14 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(DDLRecordSet recordSet)
 		throws Exception {
 
 		return getRecordsJSONArray(recordSet.getRecords(), false);
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(List<DDLRecord> records)
 		throws Exception {
 
@@ -234,6 +246,7 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public JSONArray getRecordsJSONArray(
 			List<DDLRecord> records, boolean latestRecordVersion)
 		throws Exception {
@@ -250,6 +263,7 @@ public class DDLImpl implements DDL {
 		return jsonArray;
 	}
 
+	@Override
 	public String getTemplateContent(
 			long ddmTemplateId, DDLRecordSet recordSet,
 			ThemeDisplay themeDisplay, RenderRequest renderRequest,
@@ -294,6 +308,28 @@ public class DDLImpl implements DDL {
 			template.getScript(), template.getLanguage());
 	}
 
+	@Override
+	public boolean isEditable(
+			HttpServletRequest request, String portletId, long groupId)
+		throws Exception {
+
+		boolean defaultValue = ParamUtil.getBoolean(request, "editable", true);
+
+		return isEditable(portletId, groupId, defaultValue);
+	}
+
+	@Override
+	public boolean isEditable(
+			PortletPreferences preferences, String portletId, long groupId)
+		throws Exception {
+
+		boolean defaultValue = GetterUtil.getBoolean(
+			preferences.getValue("editable", null), true);
+
+		return isEditable(portletId, groupId, defaultValue);
+	}
+
+	@Override
 	public void sendRecordFileUpload(
 			HttpServletRequest request, HttpServletResponse response,
 			DDLRecord record, String fieldName)
@@ -304,6 +340,7 @@ public class DDLImpl implements DDL {
 		DDMUtil.sendFieldFile(request, response, field);
 	}
 
+	@Override
 	public void sendRecordFileUpload(
 			HttpServletRequest request, HttpServletResponse response,
 			long recordId, String fieldName)
@@ -314,15 +351,27 @@ public class DDLImpl implements DDL {
 		sendRecordFileUpload(request, response, record, fieldName);
 	}
 
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			boolean checkPermission, ServiceContext serviceContext)
 		throws Exception {
 
+		DDLRecord record = DDLRecordLocalServiceUtil.fetchRecord(recordId);
+
+		PortletPreferences preferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				serviceContext.getPortletPreferencesIds());
+
+		if (!isEditable(
+				preferences, serviceContext.getPortletId(),
+				serviceContext.getScopeGroupId())) {
+
+			return record;
+		}
+
 		boolean majorVersion = ParamUtil.getBoolean(
 			serviceContext, "majorVersion");
-
-		DDLRecord record = DDLRecordLocalServiceUtil.fetchRecord(recordId);
 
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getDDLRecordSet(
 			recordSetId);
@@ -368,6 +417,7 @@ public class DDLImpl implements DDL {
 		return record;
 	}
 
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, long recordSetId, boolean mergeFields,
 			ServiceContext serviceContext)
@@ -377,6 +427,7 @@ public class DDLImpl implements DDL {
 			recordId, recordSetId, mergeFields, true, serviceContext);
 	}
 
+	@Override
 	public String uploadRecordFieldFile(
 			DDLRecord record, String fieldName, ServiceContext serviceContext)
 		throws Exception {
@@ -405,6 +456,25 @@ public class DDLImpl implements DDL {
 				LocaleUtil.getDefault(), "is-temporarily-unavailable",
 				"content");
 		}
+	}
+
+	protected boolean isEditable(
+			String portletId, long groupId, boolean defaultValue)
+		throws Exception {
+
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
+
+		if (rootPortletId.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
+			return true;
+		}
+
+		Group group = GroupLocalServiceUtil.fetchGroup(groupId);
+
+		if ((group == null) || group.isInStagingPortlet(portletId)) {
+			return false;
+		}
+
+		return defaultValue;
 	}
 
 	protected void uploadRecordFieldFiles(

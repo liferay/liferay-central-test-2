@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,11 +63,11 @@ public class CleanUpPermissionsUtil {
 		role = RoleLocalServiceUtil.getRole(
 			companyId, RoleConstants.POWER_USER);
 
-		_cleanUpAddToPagePermissions_5(companyId, role.getRoleId(), false);
+		_cleanUpAddToPagePermissions_5(companyId, role.getRoleId(), true);
 
 		role = RoleLocalServiceUtil.getRole(companyId, RoleConstants.USER);
 
-		_cleanUpAddToPagePermissions_5(companyId, role.getRoleId(), true);
+		_cleanUpAddToPagePermissions_5(companyId, role.getRoleId(), false);
 	}
 
 	private static void _cleanUpAddToPagePermissions_5(
@@ -91,7 +91,7 @@ public class CleanUpPermissionsUtil {
 				roleId, companyId, permission.getName(), permission.getScope(),
 				permission.getPrimKey(), ActionKeys.ADD_TO_PAGE);
 
-			if (!limitScope || groupIdString.equals(permission.getPrimKey())) {
+			if (!limitScope) {
 				continue;
 			}
 
@@ -116,11 +116,11 @@ public class CleanUpPermissionsUtil {
 		role = RoleLocalServiceUtil.getRole(
 			companyId, RoleConstants.POWER_USER);
 
-		_cleanUpAddToPagePermissions_6(companyId, role.getRoleId(), false);
+		_cleanUpAddToPagePermissions_6(companyId, role.getRoleId(), true);
 
 		role = RoleLocalServiceUtil.getRole(companyId, RoleConstants.USER);
 
-		_cleanUpAddToPagePermissions_6(companyId, role.getRoleId(), true);
+		_cleanUpAddToPagePermissions_6(companyId, role.getRoleId(), false);
 	}
 
 	private static void _cleanUpAddToPagePermissions_6(
@@ -146,9 +146,7 @@ public class CleanUpPermissionsUtil {
 				resourcePermission.getScope(), resourcePermission.getPrimKey(),
 				roleId, ActionKeys.ADD_TO_PAGE);
 
-			if (!limitScope ||
-				groupIdString.equals(resourcePermission.getPrimKey())) {
-
+			if (!limitScope) {
 				continue;
 			}
 

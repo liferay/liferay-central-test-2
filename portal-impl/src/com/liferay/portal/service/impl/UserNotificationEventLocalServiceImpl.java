@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,6 +34,7 @@ import java.util.List;
 public class UserNotificationEventLocalServiceImpl
 	extends UserNotificationEventLocalServiceBaseImpl {
 
+	@Override
 	public UserNotificationEvent addUserNotificationEvent(
 			long userId, NotificationEvent notificationEvent)
 		throws PortalException, SystemException {
@@ -51,6 +52,7 @@ public class UserNotificationEventLocalServiceImpl
 			serviceContext);
 	}
 
+	@Override
 	public UserNotificationEvent addUserNotificationEvent(
 			long userId, String type, long timestamp, long deliverBy,
 			String payload, boolean archived, ServiceContext serviceContext)
@@ -77,6 +79,7 @@ public class UserNotificationEventLocalServiceImpl
 		return userNotificationEvent;
 	}
 
+	@Override
 	public List<UserNotificationEvent> addUserNotificationEvents(
 			long userId, Collection<NotificationEvent> notificationEvents)
 		throws PortalException, SystemException {
@@ -94,12 +97,14 @@ public class UserNotificationEventLocalServiceImpl
 		return userNotificationEvents;
 	}
 
+	@Override
 	public void deleteUserNotificationEvent(String uuid)
 		throws SystemException {
 
 		userNotificationEventPersistence.removeByUuid(uuid);
 	}
 
+	@Override
 	public void deleteUserNotificationEvents(Collection<String> uuids)
 		throws SystemException {
 
@@ -108,12 +113,14 @@ public class UserNotificationEventLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<UserNotificationEvent> getUserNotificationEvents(long userId)
 		throws SystemException {
 
 		return userNotificationEventPersistence.findByUserId(userId);
 	}
 
+	@Override
 	public List<UserNotificationEvent> getUserNotificationEvents(
 			long userId, boolean archived)
 		throws SystemException {
@@ -121,6 +128,7 @@ public class UserNotificationEventLocalServiceImpl
 		return userNotificationEventPersistence.findByU_A(userId, archived);
 	}
 
+	@Override
 	public List<UserNotificationEvent> getUserNotificationEvents(
 			long userId, boolean archived, int start, int end)
 		throws SystemException {
@@ -129,6 +137,7 @@ public class UserNotificationEventLocalServiceImpl
 			userId, archived, start, end);
 	}
 
+	@Override
 	public List<UserNotificationEvent> getUserNotificationEvents(
 			long userId, int start, int end)
 		throws SystemException {
@@ -137,18 +146,21 @@ public class UserNotificationEventLocalServiceImpl
 			userId, start, end);
 	}
 
+	@Override
 	public int getUserNotificationEventsCount(long userId)
 		throws SystemException {
 
 		return userNotificationEventPersistence.countByUserId(userId);
 	}
 
+	@Override
 	public int getUserNotificationEventsCount(long userId, boolean archived)
 		throws SystemException {
 
 		return userNotificationEventPersistence.countByU_A(userId, archived);
 	}
 
+	@Override
 	public UserNotificationEvent updateUserNotificationEvent(
 			String uuid, boolean archive)
 		throws SystemException {
@@ -170,6 +182,7 @@ public class UserNotificationEventLocalServiceImpl
 		return userNotificationEvent;
 	}
 
+	@Override
 	public List<UserNotificationEvent> updateUserNotificationEvents(
 			Collection<String> uuids, boolean archive)
 		throws SystemException {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,11 +31,14 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicReference;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class ProcessExecutorTest extends BaseTestCase {
 
+	@Test
 	public void testCrash() throws Exception {
 
 		// Negative one crash
@@ -61,6 +64,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 		assertNull(result);
 	}
 
+	@Test
 	public void testDestroy() throws Exception {
 
 		// Clean destroy
@@ -111,6 +115,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 		assertNull(_getExecutorService());
 	}
 
+	@Test
 	public void testException() throws Exception {
 		DummyExceptionProcessCallable dummyExceptionProcessCallable =
 			new DummyExceptionProcessCallable();
@@ -216,6 +221,7 @@ public class ProcessExecutorTest extends BaseTestCase {
 		}
 	}
 
+	@Test
 	public void testReturn() throws Exception {
 		DummyReturnProcessCallable dummyReturnProcessCallable =
 			new DummyReturnProcessCallable();
@@ -265,6 +271,8 @@ public class ProcessExecutorTest extends BaseTestCase {
 				DummyExceptionProcessCallable.class.getName());
 		}
 
+		private static final long serialVersionUID = 1L;
+
 	}
 
 	private static class DummyJob implements Callable<Void> {
@@ -296,6 +304,8 @@ public class ProcessExecutorTest extends BaseTestCase {
 			return DummyReturnProcessCallable.class.getName();
 		}
 
+		private static final long serialVersionUID = 1L;
+
 	}
 
 	private static class KillJVMProcessCallable
@@ -310,6 +320,8 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			return null;
 		}
+
+		private static final long serialVersionUID = 1L;
 
 		private final int _exitCode;
 
@@ -346,6 +358,8 @@ public class ProcessExecutorTest extends BaseTestCase {
 
 			return null;
 		}
+
+		private static final long serialVersionUID = 1L;
 
 		private final String _logMessage;
 		private final File _signalFile;

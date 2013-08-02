@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,13 +39,14 @@ import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.feed.synd.SyndLink;
+import com.sun.syndication.feed.synd.SyndLinkImpl;
 import com.sun.syndication.io.FeedException;
-
-import edu.emory.mathcs.backport.java.util.Collections;
 
 import java.io.OutputStream;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -65,8 +66,9 @@ public class RSSAction extends PortletAction {
 
 	@Override
 	public void serveResource(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ResourceRequest resourceRequest,
+			ResourceResponse resourceResponse)
 		throws Exception {
 
 		resourceResponse.setContentType(ContentTypes.TEXT_XML_UTF8);
@@ -117,19 +119,9 @@ public class RSSAction extends PortletAction {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		String feedTitle = ParamUtil.getString(portletRequest, "feedTitle");
+		String description = ParamUtil.getString(portletRequest, "feedTitle");
 
-		syndFeed.setDescription(feedTitle);
-
-		syndFeed.setFeedType(RSSUtil.FEED_TYPE_DEFAULT);
-
-		String feedLink =
-			PortalUtil.getLayoutFullURL(themeDisplay) +
-				Portal.FRIENDLY_URL_SEPARATOR + "activities/rss";
-
-		syndFeed.setLink(feedLink);
-
-		syndFeed.setTitle(feedTitle);
+		syndFeed.setDescription(description);
 
 		List<SyndEntry> syndEntries = new ArrayList<SyndEntry>();
 
@@ -165,6 +157,35 @@ public class RSSAction extends PortletAction {
 
 			syndEntries.add(syndEntry);
 		}
+
+		syndFeed.setFeedType(RSSUtil.FEED_TYPE_DEFAULT);
+
+		List<SyndLink> syndLinks = new ArrayList<SyndLink>();
+
+		syndFeed.setLinks(syndLinks);
+
+		SyndLink selfSyndLink = new SyndLinkImpl();
+
+		syndLinks.add(selfSyndLink);
+
+		String link =
+			PortalUtil.getLayoutFullURL(themeDisplay) +
+				Portal.FRIENDLY_URL_SEPARATOR + "activities/rss";
+
+		selfSyndLink.setHref(link);
+
+		selfSyndLink.setRel("self");
+
+		SyndLink alternateSyndLink = new SyndLinkImpl();
+
+		syndLinks.add(alternateSyndLink);
+
+		alternateSyndLink.setHref(PortalUtil.getLayoutFullURL(themeDisplay));
+		alternateSyndLink.setRel("alternate");
+
+		syndFeed.setPublishedDate(new Date());
+		syndFeed.setTitle(description);
+		syndFeed.setUri(link);
 
 		String rss = StringPool.BLANK;
 

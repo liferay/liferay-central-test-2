@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>PGHome</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGHome</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGHome</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WHATS_HAPPENING-->
+<tr>
+	<td>WHATS_HAPPENING_CONTENT_FIELD</td>
+	<td>//div[contains(@id,'_2_WAR_microblogsportlet_autocompleteContent')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_CONTENT_INPUT_FIELD</td>
+	<td>//textarea[contains(@name,'contentInput')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_CONTENT_COUNTDOWN</td>
+	<td>//span[@class='microblogs-countdown']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_CONTENT_VIEW_FILTER</td>
+	<td>//select[@id='_2_WAR_microblogsportlet_socialRelationType']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_POST_BUTTON</td>
+	<td>//input[@value='Post']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_ENTRY_CONTENT</td>
+	<td>//div[@class='entry-bubble']/div[@class='content']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WHATS_HAPPENING_INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

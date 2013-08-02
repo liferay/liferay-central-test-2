@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,9 +14,12 @@
 
 package com.liferay.portlet.journal.asset;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -29,9 +32,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
+import com.liferay.portlet.journal.model.JournalArticleDisplay;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 
@@ -39,6 +45,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -65,6 +72,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return _article.getAvailableLocales();
 	}
 
+	@Override
 	public long getClassPK() {
 		if ((_article.isDraft() || _article.isPending()) &&
 			(_article.getVersion() !=
@@ -87,14 +95,33 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getGroupId() {
 		return _article.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
-		return _article.getDescription(locale);
+		String summary = _article.getDescription(locale);
+
+		if (Validator.isNull(summary)) {
+			try {
+				JournalArticleDisplay articleDisplay =
+					JournalArticleLocalServiceUtil.getArticleDisplay(
+						_article, null, null,
+						LanguageUtil.getLanguageId(locale), 1, null, null);
+
+				summary = StringUtil.shorten(
+					HtmlUtil.stripHtml(articleDisplay.getContent()), 200);
+			}
+			catch (Exception e) {
+			}
+		}
+
+		return summary;
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _article.getTitle(locale);
 	}
@@ -151,22 +178,34 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		Group group = themeDisplay.getScopeGroup();
+		Layout layout = themeDisplay.getLayout();
 
-		if (Validator.isNotNull(_article.getLayoutUuid())) {
+		String portletId = (String)liferayPortletRequest.getAttribute(
+			WebKeys.PORTLET_ID);
+
+		PortletPreferences portletSetup =
+			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+				layout, portletId);
+
+		String linkToLayoutUuid = GetterUtil.getString(
+			portletSetup.getValue("portletSetupLinkToLayoutUuid", null));
+
+		if (Validator.isNotNull(_article.getLayoutUuid()) &&
+			Validator.isNull(linkToLayoutUuid)) {
+
+			Group group = themeDisplay.getScopeGroup();
+
 			if (group.getGroupId() != _article.getGroupId()) {
 				group = GroupLocalServiceUtil.getGroup(_article.getGroupId());
 			}
 
 			String groupFriendlyURL = PortalUtil.getGroupFriendlyURL(
-				group, false, themeDisplay);
+				group, layout.isPrivateLayout(), themeDisplay);
 
 			return groupFriendlyURL.concat(
 				JournalArticleConstants.CANONICAL_URL_SEPARATOR).concat(
-					HtmlUtil.escape(_article.getUrlTitle()));
+					_article.getUrlTitle());
 		}
-
-		Layout layout = themeDisplay.getLayout();
 
 		List<Long> hitLayoutIds =
 			JournalContentSearchLocalServiceUtil.getLayoutIds(
@@ -186,14 +225,17 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return noSuchEntryRedirect;
 	}
 
+	@Override
 	public long getUserId() {
 		return _article.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _article.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _article.getUuid();
 	}
@@ -249,6 +291,7 @@ public class JournalArticleAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

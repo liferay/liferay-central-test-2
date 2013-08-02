@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -321,13 +321,16 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	@Override
 	public Ticket toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Ticket)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Ticket)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Ticket toUnescapedModel() {
+		return (Ticket)this;
 	}
 
 	@Override
@@ -371,18 +374,15 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Ticket)) {
 			return false;
 		}
 
-		Ticket ticket = null;
-
-		try {
-			ticket = (Ticket)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Ticket ticket = (Ticket)obj;
 
 		long primaryKey = ticket.getPrimaryKey();
 
@@ -536,9 +536,7 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	}
 
 	private static ClassLoader _classLoader = Ticket.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Ticket.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Ticket.class };
 	private long _ticketId;
 	private long _companyId;
 	private Date _createDate;
@@ -550,5 +548,5 @@ public class TicketModelImpl extends BaseModelImpl<Ticket>
 	private String _extraInfo;
 	private Date _expirationDate;
 	private long _columnBitmask;
-	private Ticket _escapedModelProxy;
+	private Ticket _escapedModel;
 }

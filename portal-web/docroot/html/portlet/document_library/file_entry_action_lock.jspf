@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,9 +14,9 @@
  */
 --%>
 
-<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) && fileEntry.isSupportsLocking() %>">
+<c:if test="<%= fileEntry.isSupportsLocking() %>">
 	<c:choose>
-		<c:when test="<%= !fileEntry.isCheckedOut() %>">
+		<c:when test="<%= !fileEntry.isCheckedOut() && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 			<portlet:actionURL var="checkOutURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.CHECKOUT %>" />

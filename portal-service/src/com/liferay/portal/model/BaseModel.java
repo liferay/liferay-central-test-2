@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ public interface BaseModel<T>
 	 *
 	 * @return the expando bridge for this model instance
 	 */
+	@Override
 	public ExpandoBridge getExpandoBridge();
 
 	public Map<String, Object> getModelAttributes();
@@ -52,6 +53,7 @@ public interface BaseModel<T>
 	 *
 	 * @return the primary key of this model instance
 	 */
+	@Override
 	public Serializable getPrimaryKeyObj();
 
 	/**
@@ -119,6 +121,7 @@ public interface BaseModel<T>
 	 *
 	 * @param primaryKeyObj the primary key of this model instance
 	 */
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj);
 
 	/**
@@ -136,6 +139,8 @@ public interface BaseModel<T>
 	 * @see    com.liferay.portal.kernel.bean.AutoEscapeBeanHandler
 	 */
 	public T toEscapedModel();
+
+	public T toUnescapedModel();
 
 	/**
 	 * Returns the XML representation of this model instance.

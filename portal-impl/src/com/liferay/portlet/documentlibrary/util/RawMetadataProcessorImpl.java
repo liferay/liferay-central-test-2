@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
@@ -54,19 +54,23 @@ import java.util.Map;
  * @author Mika Koivisto
  * @author Miguel Pastor
  */
+@DoPrivileged
 public class RawMetadataProcessorImpl
-	extends BaseDLProcessorImpl implements RawMetadataProcessor {
+	implements DLProcessor, RawMetadataProcessor {
 
-	public static RawMetadataProcessorImpl getInstance() {
-		return _instance;
+	@Override
+	public void afterPropertiesSet() {
 	}
 
+	@Override
 	public void cleanUp(FileEntry fileEntry) {
 	}
 
+	@Override
 	public void cleanUp(FileVersion fileVersion) {
 	}
 
+	@Override
 	public void exportGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			Element fileEntryElement)
@@ -75,22 +79,22 @@ public class RawMetadataProcessorImpl
 		return;
 	}
 
+	@Override
 	public void generateMetadata(FileVersion fileVersion)
 		throws SystemException {
 
-		if (!isEnabled()) {
-			return;
-		}
+		long fileVersionId = fileVersion.getFileVersionId();
 
 		long fileEntryMetadataCount =
-			DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadataCount(
-				fileVersion.getFileEntryId(), fileVersion.getFileVersionId());
+			DLFileEntryMetadataLocalServiceUtil.
+				getFileVersionFileEntryMetadatasCount(fileVersionId);
 
 		if (fileEntryMetadataCount == 0) {
-			_instance.trigger(fileVersion);
+			trigger(fileVersion);
 		}
 	}
 
+	@Override
 	public void importGeneratedFiles(
 			PortletDataContext portletDataContext, FileEntry fileEntry,
 			FileEntry importedFileEntry, Element fileEntryElement)
@@ -99,20 +103,19 @@ public class RawMetadataProcessorImpl
 		return;
 	}
 
+	@Override
 	public boolean isSupported(FileVersion fileVersion) {
 		return true;
 	}
 
+	@Override
 	public boolean isSupported(String mimeType) {
 		return true;
 	}
 
+	@Override
 	public void saveMetadata(FileVersion fileVersion)
 		throws PortalException, SystemException {
-
-		if (!isEnabled()) {
-			return;
-		}
 
 		Map<String, Fields> rawMetadataMap = null;
 
@@ -137,6 +140,16 @@ public class RawMetadataProcessorImpl
 			try {
 				inputStream = fileVersion.getContentStream(false);
 
+				if (inputStream == null) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"No metadata is available for file version " +
+								fileVersion.getFileVersionId());
+					}
+
+					return;
+				}
+
 				rawMetadataMap = RawMetadataProcessorUtil.getRawMetadataMap(
 					fileVersion.getExtension(), fileVersion.getMimeType(),
 					inputStream);
@@ -148,6 +161,7 @@ public class RawMetadataProcessorImpl
 
 		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getClassStructures(
+				fileVersion.getCompanyId(),
 				PortalUtil.getClassNameId(DLFileEntry.class), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
@@ -173,11 +187,8 @@ public class RawMetadataProcessorImpl
 		}
 	}
 
+	@Override
 	public void trigger(FileVersion fileVersion) {
-		if (!isEnabled()) {
-			return;
-		}
-
 		if (PropsValues.DL_FILE_ENTRY_PROCESSORS_TRIGGER_SYNCHRONOUSLY) {
 			try {
 				MessageBusUtil.sendSynchronousMessage(
@@ -197,17 +208,7 @@ public class RawMetadataProcessorImpl
 		}
 	}
 
-	private RawMetadataProcessorImpl() {
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(
 		RawMetadataProcessorImpl.class);
-
-	private static RawMetadataProcessorImpl _instance =
-		new RawMetadataProcessorImpl();
-
-	static {
-		InstancePool.put(RawMetadataProcessorImpl.class.getName(), _instance);
-	}
 
 }

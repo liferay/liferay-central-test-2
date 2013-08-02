@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,6 +39,7 @@ public class XSLErrorListener implements ErrorListener {
 		_locale = locale;
 	}
 
+	@Override
 	public void error(TransformerException exception)
 		throws TransformerException {
 
@@ -47,6 +48,7 @@ public class XSLErrorListener implements ErrorListener {
 		throw exception;
 	}
 
+	@Override
 	public void fatalError(TransformerException exception)
 		throws TransformerException {
 
@@ -133,6 +135,7 @@ public class XSLErrorListener implements ErrorListener {
 		}
 	}
 
+	@Override
 	public void warning(TransformerException exception)
 		throws TransformerException {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
@@ -130,10 +131,8 @@ public class TabsTag extends IncludeTag {
 
 			boolean match = false;
 
-			for (int i = 0; i < _tabsValues.length; i++) {
-				if (_value.equals(_tabsValues[i])) {
-					match = true;
-				}
+			if (ArrayUtil.contains(_tabsValues, _value)) {
+				match = true;
 			}
 
 			if (!match) {

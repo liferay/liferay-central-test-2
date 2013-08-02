@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,6 +38,7 @@ import javax.servlet.http.HttpSession;
  */
 public class EventsProcessorImpl implements EventsProcessor {
 
+	@Override
 	public void process(
 			String key, String[] classes, String[] ids,
 			HttpServletRequest request, HttpServletResponse response,
@@ -69,6 +70,7 @@ public class EventsProcessorImpl implements EventsProcessor {
 		}
 	}
 
+	@Override
 	public void processEvent(
 			Object event, String[] ids, HttpServletRequest request,
 			HttpServletResponse response, HttpSession session)
@@ -107,12 +109,14 @@ public class EventsProcessorImpl implements EventsProcessor {
 		}
 	}
 
+	@Override
 	public void registerEvent(String key, Object event) {
 		List<Object> events = _getEvents(key);
 
 		events.add(event);
 	}
 
+	@Override
 	public void unregisterEvent(String key, Object event) {
 		List<Object> events = _getEvents(key);
 

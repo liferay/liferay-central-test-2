@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -215,9 +215,53 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 		}
 	}
 
+	protected void cacheUniqueFindersCache(SCProductVersion scProductVersion) {
+		if (scProductVersion.isNew()) {
+			Object[] args = new Object[] { scProductVersion.getDirectDownloadURL() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+				args, Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+				args, scProductVersion);
+		}
+		else {
+			SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
+
+			if ((scProductVersionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						scProductVersion.getDirectDownloadURL()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+					args, scProductVersion);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(SCProductVersion scProductVersion) {
+		SCProductVersionModelImpl scProductVersionModelImpl = (SCProductVersionModelImpl)scProductVersion;
+
+		Object[] args = new Object[] { scProductVersion.getDirectDownloadURL() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+			args);
 		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-			new Object[] { scProductVersion.getDirectDownloadURL() });
+			args);
+
+		if ((scProductVersionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					scProductVersionModelImpl.getOriginalDirectDownloadURL()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
+				args);
+		}
 	}
 
 	/**
@@ -382,29 +426,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 			SCProductVersionImpl.class, scProductVersion.getPrimaryKey(),
 			scProductVersion);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-				new Object[] { scProductVersion.getDirectDownloadURL() },
-				scProductVersion);
-		}
-		else {
-			if ((scProductVersionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						scProductVersionModelImpl.getOriginalDirectDownloadURL()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_DIRECTDOWNLOADURL,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_DIRECTDOWNLOADURL,
-					new Object[] { scProductVersion.getDirectDownloadURL() },
-					scProductVersion);
-			}
-		}
+		clearUniqueFindersCache(scProductVersion);
+		cacheUniqueFindersCache(scProductVersion);
 
 		return scProductVersion;
 	}
@@ -1895,8 +1918,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl<SCProdu
 				List<ModelListener<SCProductVersion>> listenersList = new ArrayList<ModelListener<SCProductVersion>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<SCProductVersion>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -272,13 +272,16 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 	@Override
 	public DDMStorageLink toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DDMStorageLink)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DDMStorageLink)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DDMStorageLink toUnescapedModel() {
+		return (DDMStorageLink)this;
 	}
 
 	@Override
@@ -312,18 +315,15 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStorageLink)) {
 			return false;
 		}
 
-		DDMStorageLink ddmStorageLink = null;
-
-		try {
-			ddmStorageLink = (DDMStorageLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMStorageLink ddmStorageLink = (DDMStorageLink)obj;
 
 		long primaryKey = ddmStorageLink.getPrimaryKey();
 
@@ -433,7 +433,7 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	}
 
 	private static ClassLoader _classLoader = DDMStorageLink.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DDMStorageLink.class
 		};
 	private String _uuid;
@@ -447,5 +447,5 @@ public class DDMStorageLinkModelImpl extends BaseModelImpl<DDMStorageLink>
 	private long _originalStructureId;
 	private boolean _setOriginalStructureId;
 	private long _columnBitmask;
-	private DDMStorageLink _escapedModelProxy;
+	private DDMStorageLink _escapedModel;
 }

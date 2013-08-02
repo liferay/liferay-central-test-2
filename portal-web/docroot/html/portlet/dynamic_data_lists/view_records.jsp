@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,14 +21,10 @@ DDLRecordSet recordSet = (DDLRecordSet)request.getAttribute(WebKeys.DYNAMIC_DATA
 
 long detailDDMTemplateId = ParamUtil.getLong(request, "detailDDMTemplateId");
 
-boolean editable = ParamUtil.getBoolean(request, "editable", true);
+boolean editable = false;
 
-if (portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS)) {
-	editable = true;
-}
-
-if (!DDLRecordSetPermission.contains(permissionChecker, recordSet.getRecordSetId(), ActionKeys.UPDATE)) {
-	editable = false;
+if (DDLRecordSetPermission.contains(permissionChecker, recordSet.getRecordSetId(), ActionKeys.UPDATE)) {
+	editable = DDLUtil.isEditable(request, portletDisplay.getId(), themeDisplay.getScopeGroupId());
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -110,7 +106,7 @@ for (int i = 0; i < results.size(); i++) {
 		if (fieldsModel.contains(name)) {
 			com.liferay.portlet.dynamicdatamapping.storage.Field field = fieldsModel.get(name);
 
-			value = field.getRenderedValue(themeDisplay.getLocale());
+			value = HtmlUtil.escape(field.getRenderedValue(themeDisplay.getLocale()));
 		}
 		else {
 			value = StringPool.BLANK;
@@ -127,7 +123,7 @@ for (int i = 0; i < results.size(); i++) {
 	if (editable) {
 		row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(recordVersion.getStatus())), rowURL);
 		row.addText(dateFormatDateTime.format(record.getModifiedDate()), rowURL);
-		row.addText(HtmlUtil.escape(PortalUtil.getUserName(recordVersion.getUserId(), recordVersion.getUserName())), rowURL);
+		row.addText(HtmlUtil.escape(PortalUtil.getUserName(recordVersion)), rowURL);
 
 		// Action
 

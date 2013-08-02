@@ -1,0 +1,28 @@
+<definition>
+	<command name="assertTextEquals">
+		<case locator-key1="SUCCESS_MESSAGE">
+			<execute function="AssertTextEquals#assertText" />
+		</case>
+	</command>
+
+	<command name="assertClick">
+		<case locator-key1="BASIC_SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="LIST_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="LIST_MENULIST_EDIT">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="LIST_TABLE_NAME">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case comparator="startsWith" locator-key1="LIST_TABLE_ACTIONS">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="SAVE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+</definition>

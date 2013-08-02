@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,13 +37,7 @@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %><%@
 page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+PortletPreferences preferences = portletPreferences;
 
 long groupId = GetterUtil.getLong(preferences.getValue("groupId", String.valueOf(themeDisplay.getScopeGroupId())));
 String structureId = GetterUtil.getString(preferences.getValue("structureId", StringPool.BLANK));

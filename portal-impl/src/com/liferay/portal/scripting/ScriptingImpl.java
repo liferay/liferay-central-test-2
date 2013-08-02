@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.scripting.Scripting;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.scripting.ScriptingExecutor;
 import com.liferay.portal.kernel.scripting.UnsupportedLanguageException;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -54,14 +55,17 @@ import org.python.core.PySyntaxError;
  * @author Alberto Montero
  * @author Brian Wing Shun Chan
  */
+@DoPrivileged
 public class ScriptingImpl implements Scripting {
 
-	public void addScriptionExecutor(
+	@Override
+	public void addScriptingExecutor(
 		String language, ScriptingExecutor scriptingExecutor) {
 
 		_scriptingExecutors.put(language, scriptingExecutor);
 	}
 
+	@Override
 	public void clearCache(String language) throws ScriptingException {
 		ScriptingExecutor scriptingExecutor = _scriptingExecutors.get(language);
 
@@ -72,6 +76,7 @@ public class ScriptingImpl implements Scripting {
 		scriptingExecutor.clearCache();
 	}
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String language, String script,
@@ -108,6 +113,7 @@ public class ScriptingImpl implements Scripting {
 		}
 	}
 
+	@Override
 	public void exec(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			String language, String script, ClassLoader... classLoaders)
@@ -117,6 +123,7 @@ public class ScriptingImpl implements Scripting {
 			allowedClasses, inputObjects, null, language, script, classLoaders);
 	}
 
+	@Override
 	public Map<String, Object> getPortletObjects(
 		PortletConfig portletConfig, PortletContext portletContext,
 		PortletRequest portletRequest, PortletResponse portletResponse) {
@@ -159,10 +166,12 @@ public class ScriptingImpl implements Scripting {
 		return objects;
 	}
 
+	@Override
 	public Set<String> getSupportedLanguages() {
 		return _scriptingExecutors.keySet();
 	}
 
+	@Override
 	public void setScriptingExecutors(
 		Map<String, ScriptingExecutor> scriptingExecutors) {
 

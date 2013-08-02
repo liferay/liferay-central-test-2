@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,7 +55,7 @@ viewFullContentURLString = HttpUtil.setParameter(viewFullContentURLString, "redi
 
 String viewURL = viewInContext ? assetRenderer.getURLViewInContext(liferayPortletRequest, liferayPortletResponse, viewFullContentURLString) : viewFullContentURL.toString();
 
-viewURL = _checkViewURL(viewURL, currentURL, themeDisplay);
+viewURL = _checkViewURL(assetEntry, viewInContext, viewURL, currentURL, themeDisplay);
 %>
 
 	<c:if test="<%= assetEntryIndex == 0 %>">

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -52,14 +52,8 @@ public class AssetEntryQuery {
 	};
 
 	public static String checkOrderByCol(String orderByCol) {
-		if (orderByCol == null) {
-			return ORDER_BY_COLUMNS[2];
-		}
-
-		for (String curOrderByCol : ORDER_BY_COLUMNS) {
-			if (orderByCol.equals(curOrderByCol)) {
-				return orderByCol;
-			}
+		if (ArrayUtil.contains(ORDER_BY_COLUMNS, orderByCol)) {
+			return orderByCol;
 		}
 
 		return ORDER_BY_COLUMNS[2];
@@ -303,7 +297,7 @@ public class AssetEntryQuery {
 	public void setAllTagIds(long[] allTagIds) {
 		_allTagIds = allTagIds;
 
-		_allTagIdsArray = new long[][] {_allTagIds};
+		_allTagIdsArray = _expandTagIds(allTagIds);
 
 		_toString = null;
 	}
@@ -397,7 +391,7 @@ public class AssetEntryQuery {
 	public void setNotAllTagIds(long[] notAllTagIds) {
 		_notAllTagIds = notAllTagIds;
 
-		_notAllTagIdsArray = new long[][] {_notAllTagIds};
+		_notAllTagIdsArray = _expandTagIds(notAllTagIds);
 
 		_toString = null;
 	}
@@ -527,6 +521,16 @@ public class AssetEntryQuery {
 		_toString = sb.toString();
 
 		return _toString;
+	}
+
+	private long[][] _expandTagIds(long[] tagIds) {
+		long[][] tagIdsArray = new long[tagIds.length][1];
+
+		for (int i = 0; i < tagIds.length; i++) {
+			tagIdsArray[i][0] = tagIds[i];
+		}
+
+		return tagIdsArray;
 	}
 
 	private long[] _flattenTagIds(long[][] tagIdsArray) {

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -255,14 +255,11 @@
 			<div class="thread-body">
 
 				<%
-				String msgBody = StringPool.BLANK;
+				String msgBody = message.getBody();
 
 				if (message.isFormatBBCode()) {
-					msgBody = BBCodeTranslatorUtil.getHTML(message.getBody());
+					msgBody = BBCodeTranslatorUtil.getHTML(msgBody);
 					msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
-				}
-				else{
-					msgBody = message.getBody();
 				}
 				%>
 
@@ -311,7 +308,14 @@
 							<%
 							for (int j = 0; j < attachmentsFiles.length; j++) {
 								String fileName = FileUtil.getShortFileName(attachmentsFiles[j]);
-								long fileSize = DLStoreUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachmentsFiles[j]);
+
+								long fileSize = 0;
+
+								try {
+									fileSize = DLStoreUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, attachmentsFiles[j]);
+								}
+								catch (NoSuchFileException nsfe) {
+								}
 							%>
 
 								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)<%= (j < (attachmentsFiles.length - 1)) ? ", " : "" %>
@@ -371,7 +375,7 @@
 						/>
 					</li>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 						<li>
 							<portlet:renderURL var="editURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
@@ -387,7 +391,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && !message.isRoot() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"
@@ -422,7 +426,7 @@
 						</li>
 					</c:if>
 
-					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) && !thread.isLocked() %>">
+					<c:if test="<%= !thread.isLocked() && MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
 						<li>
 
 							<%

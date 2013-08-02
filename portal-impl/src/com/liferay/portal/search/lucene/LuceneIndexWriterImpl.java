@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,7 @@ import org.apache.lucene.index.Term;
  */
 public class LuceneIndexWriterImpl implements IndexWriter {
 
+	@Override
 	public void addDocument(SearchContext searchContext, Document document)
 		throws SearchException {
 
@@ -57,6 +58,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void addDocuments(
 			SearchContext searchContext, Collection<Document> documents)
 		throws SearchException {
@@ -66,6 +68,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void deleteDocument(SearchContext searchContext, String uid)
 		throws SearchException {
 
@@ -82,6 +85,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void deleteDocuments(
 			SearchContext searchContext, Collection<String> uids)
 		throws SearchException {
@@ -91,6 +95,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void deletePortletDocuments(
 			SearchContext searchContext, String portletId)
 		throws SearchException {
@@ -105,6 +110,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void updateDocument(SearchContext searchContext, Document document)
 		throws SearchException {
 
@@ -123,6 +129,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
+	@Override
 	public void updateDocuments(
 			SearchContext searchContext, Collection<Document> documents)
 		throws SearchException {
@@ -134,12 +141,13 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 	private void _addLuceneFieldable(
 		org.apache.lucene.document.Document luceneDocument, String name,
-		boolean numeric, boolean tokenized, float boost, String value) {
+		boolean numeric, Class<? extends Number> numericClass,
+		boolean tokenized, float boost, String value) {
 
 		org.apache.lucene.document.Fieldable luceneFieldable = null;
 
 		if (numeric) {
-			luceneFieldable = LuceneFields.getNumber(name, value);
+			luceneFieldable = LuceneFields.getNumber(name, value, numericClass);
 		}
 		else {
 			if (tokenized) {
@@ -166,6 +174,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		for (Field field : fields) {
 			String name = field.getName();
 			boolean numeric = field.isNumeric();
+			Class<? extends Number> numericClass = field.getNumericClass();
 			boolean tokenized = field.isTokenized();
 			float boost = field.getBoost();
 
@@ -176,7 +185,8 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 					}
 
 					_addLuceneFieldable(
-						luceneDocument, name, numeric, tokenized, boost, value);
+						luceneDocument, name, numeric, numericClass, tokenized,
+						boost, value);
 				}
 			}
 			else {
@@ -201,16 +211,16 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 
 					if (languageId.equals(defaultLanguageId)) {
 						_addLuceneFieldable(
-							luceneDocument, name, numeric, tokenized, boost,
-							value);
+							luceneDocument, name, numeric, numericClass,
+							tokenized, boost, value);
 					}
 
 					String localizedName = DocumentImpl.getLocalizedName(
 						locale, name);
 
 					_addLuceneFieldable(
-						luceneDocument, localizedName, numeric, tokenized,
-						boost, value);
+						luceneDocument, localizedName, numeric, numericClass,
+						tokenized, boost, value);
 				}
 			}
 

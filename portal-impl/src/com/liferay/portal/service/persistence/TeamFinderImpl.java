@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -53,6 +53,7 @@ public class TeamFinderImpl
 	public static final String JOIN_BY_USERS_USER_GROUPS =
 		TeamFinder.class.getName() + ".joinByUsersUserGroups";
 
+	@Override
 	public int countByG_N_D(
 			long groupId, String name, String description,
 			LinkedHashMap<String, Object> params)
@@ -105,6 +106,7 @@ public class TeamFinderImpl
 		}
 	}
 
+	@Override
 	public List<Team> findByG_N_D(
 			long groupId, String name, String description,
 			LinkedHashMap<String, Object> params, int start, int end,

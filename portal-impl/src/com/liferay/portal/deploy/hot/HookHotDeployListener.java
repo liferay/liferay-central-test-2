@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,7 +48,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.sanitizer.Sanitizer;
 import com.liferay.portal.kernel.sanitizer.SanitizerUtil;
-import com.liferay.portal.kernel.sanitizer.SanitizerWrapper;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerPostProcessor;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -69,7 +68,6 @@ import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.struts.StrutsAction;
 import com.liferay.portal.kernel.struts.StrutsPortletAction;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -80,6 +78,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -95,6 +94,7 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.repository.util.RepositoryFactory;
 import com.liferay.portal.repository.util.RepositoryFactoryImpl;
 import com.liferay.portal.repository.util.RepositoryFactoryUtil;
+import com.liferay.portal.sanitizer.SanitizerImpl;
 import com.liferay.portal.security.auth.AuthFailure;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.AuthToken;
@@ -115,6 +115,7 @@ import com.liferay.portal.security.auth.ScreenNameGenerator;
 import com.liferay.portal.security.auth.ScreenNameGeneratorFactory;
 import com.liferay.portal.security.auth.ScreenNameValidator;
 import com.liferay.portal.security.auth.ScreenNameValidatorFactory;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.security.ldap.AttributesTransformer;
 import com.liferay.portal.security.ldap.AttributesTransformerFactory;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
@@ -143,7 +144,6 @@ import com.liferay.portlet.documentlibrary.store.Store;
 import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.portlet.documentlibrary.util.DLProcessor;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
-import com.liferay.util.log4j.Log4JUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -153,8 +153,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationHandler;
 
 import java.net.URL;
-
-import java.security.Permission;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -192,6 +190,7 @@ public class HookHotDeployListener
 		"auth.max.failures", "auth.token.impl", "auth.pipeline.post",
 		"auth.pipeline.pre", "auto.login.hooks",
 		"captcha.check.portal.create_account", "captcha.engine.impl",
+		"company.default.locale", "company.default.time.zone",
 		"company.settings.form.configuration",
 		"company.settings.form.identification",
 		"company.settings.form.miscellaneous",
@@ -213,10 +212,11 @@ public class HookHotDeployListener
 		"layout.user.public.layouts.auto.create",
 		"layout.user.public.layouts.enabled",
 		"layout.user.public.layouts.power.user.required",
-		"ldap.attrs.transformer.impl", "locales.beta", "lock.listeners",
-		"login.create.account.allow.custom.password", "login.events.post",
-		"login.events.pre", "logout.events.post", "logout.events.pre",
-		"mail.hook.impl", "my.sites.show.private.sites.with.no.layouts",
+		"ldap.attrs.transformer.impl", "locales", "locales.beta",
+		"lock.listeners", "login.create.account.allow.custom.password",
+		"login.events.post", "login.events.pre", "logout.events.post",
+		"logout.events.pre", "mail.hook.impl",
+		"my.sites.show.private.sites.with.no.layouts",
 		"my.sites.show.public.sites.with.no.layouts",
 		"my.sites.show.user.private.sites.with.no.layouts",
 		"my.sites.show.user.public.sites.with.no.layouts",
@@ -239,7 +239,7 @@ public class HookHotDeployListener
 		"theme.css.fast.load", "theme.images.fast.load",
 		"theme.jsp.override.enabled", "theme.loader.new.theme.id.on.import",
 		"theme.portlet.decorate.default", "theme.portlet.sharing.default",
-		"theme.shortcut.icon", "upgrade.processes",
+		"theme.shortcut.icon", "time.zones", "upgrade.processes",
 		"user.notification.event.confirmation.enabled",
 		"users.email.address.generator", "users.email.address.validator",
 		"users.email.address.required", "users.form.add.identification",
@@ -266,6 +266,7 @@ public class HookHotDeployListener
 		}
 	}
 
+	@Override
 	public void invokeDeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -278,6 +279,7 @@ public class HookHotDeployListener
 		}
 	}
 
+	@Override
 	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -288,6 +290,25 @@ public class HookHotDeployListener
 			throwHotDeployException(
 				hotDeployEvent, "Error unregistering hook for ", t);
 		}
+	}
+
+	protected boolean checkPermission(
+		String name, ClassLoader portletClassLoader, Object subject,
+		String message) {
+
+		try {
+			PortalHookPermission.checkPermission(
+				name, portletClassLoader, subject);
+		}
+		catch (SecurityException se) {
+			if (_log.isInfoEnabled()) {
+				_log.info(message);
+			}
+
+			return false;
+		}
+
+		return true;
 	}
 
 	protected boolean containsKey(Properties portalProperties, String key) {
@@ -371,7 +392,18 @@ public class HookHotDeployListener
 		}
 
 		if (portalProperties.containsKey(PropsKeys.CAPTCHA_ENGINE_IMPL)) {
-			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+			CaptchaImpl captchaImpl = null;
+
+			Captcha captcha = CaptchaUtil.getCaptcha();
+
+			if (captcha instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean = (DoPrivilegedBean)captcha;
+
+				captchaImpl = (CaptchaImpl)doPrivilegedBean.getActualBean();
+			}
+			else {
+				captchaImpl = (CaptchaImpl)captcha;
+			}
 
 			captchaImpl.setCaptcha(null);
 		}
@@ -443,10 +475,12 @@ public class HookHotDeployListener
 		}
 
 		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
-			SanitizerWrapper sanitizerWrapper =
-				(SanitizerWrapper)SanitizerUtil.getSanitizer();
+			SanitizerContainer sanitizerContainer =
+				_sanitizerContainerMap.remove(servletContextName);
 
-			sanitizerWrapper.setSanitizer(null);
+			if (sanitizerContainer != null) {
+				sanitizerContainer.unregisterSanitizers();
+			}
 		}
 
 		if (portalProperties.containsKey(
@@ -552,13 +586,11 @@ public class HookHotDeployListener
 
 		_servletContextNames.add(servletContextName);
 
-		ClassLoader portletClassLoader = hotDeployEvent.getContextClassLoader();
-
-		initLogger(portletClassLoader);
-
 		Document document = SAXReaderUtil.read(xml, true);
 
 		Element rootElement = document.getRootElement();
+
+		ClassLoader portletClassLoader = hotDeployEvent.getContextClassLoader();
 
 		initPortalProperties(
 			servletContextName, portletClassLoader, rootElement);
@@ -579,23 +611,12 @@ public class HookHotDeployListener
 			String serviceType = serviceElement.elementText("service-type");
 			String serviceImpl = serviceElement.elementText("service-impl");
 
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager != null) {
-				Permission permission = new PortalHookPermission(
+			if (!checkPermission(
 					PACLConstants.PORTAL_HOOK_PERMISSION_SERVICE,
-					portletClassLoader, serviceType);
+					portletClassLoader, serviceType,
+					"Rejecting service " + serviceImpl)) {
 
-				try {
-					securityManager.checkPermission(permission);
-				}
-				catch (SecurityException se) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Rejecting service " + serviceImpl);
-					}
-
-					continue;
-				}
+				continue;
 			}
 
 			Class<?> serviceTypeClass = portletClassLoader.loadClass(
@@ -1087,28 +1108,16 @@ public class HookHotDeployListener
 			Element rootElement)
 		throws Exception {
 
-		SecurityManager securityManager = System.getSecurityManager();
-
-		if (securityManager != null) {
-			Permission permission = new PortalHookPermission(
-				PACLConstants.PORTAL_HOOK_PERMISSION_CUSTOM_JSP_DIR,
-				portletClassLoader, null);
-
-			try {
-				securityManager.checkPermission(permission);
-			}
-			catch (SecurityException se) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Rejecting custom JSP directory");
-				}
-
-				return;
-			}
-		}
-
 		String customJspDir = rootElement.elementText("custom-jsp-dir");
 
 		if (Validator.isNull(customJspDir)) {
+			return;
+		}
+
+		if (!checkPermission(
+				PACLConstants.PORTAL_HOOK_PERMISSION_CUSTOM_JSP_DIR,
+				portletClassLoader, null, "Rejecting custom JSP directory")) {
+
 			return;
 		}
 
@@ -1185,7 +1194,7 @@ public class HookHotDeployListener
 			return null;
 		}
 
-		if (ArrayUtil.contains(_PROPS_KEYS_EVENTS, eventName)) {
+		if (_propsKeysEvents.contains(eventName)) {
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClassName).newInstance();
 
@@ -1196,7 +1205,7 @@ public class HookHotDeployListener
 			return action;
 		}
 
-		if (ArrayUtil.contains(_PROPS_KEYS_SESSION_EVENTS, eventName)) {
+		if (_propsKeysSessionEvents.contains(eventName)) {
 			SessionAction sessionAction =
 				(SessionAction)portletClassLoader.loadClass(
 					eventClassName).newInstance();
@@ -1225,8 +1234,8 @@ public class HookHotDeployListener
 			String key = (String)entry.getKey();
 
 			if (!key.equals(APPLICATION_STARTUP_EVENTS) &&
-				!ArrayUtil.contains(_PROPS_KEYS_EVENTS, key) &&
-				!ArrayUtil.contains(_PROPS_KEYS_SESSION_EVENTS, key)) {
+				!_propsKeysEvents.contains(key) &&
+				!_propsKeysSessionEvents.contains(key)) {
 
 				continue;
 			}
@@ -1301,23 +1310,12 @@ public class HookHotDeployListener
 			String indexerClassName = indexerPostProcessorElement.elementText(
 				"indexer-class-name");
 
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager != null) {
-				Permission permission = new PortalHookPermission(
+			if (!checkPermission(
 					PACLConstants.PORTAL_HOOK_PERMISSION_INDEXER,
-					portletClassLoader, indexerClassName);
+					portletClassLoader, indexerClassName,
+					"Rejecting indexer " + indexerClassName)) {
 
-				try {
-					securityManager.checkPermission(permission);
-				}
-				catch (SecurityException se) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Rejecting indexer " + indexerClassName);
-					}
-
-					continue;
-				}
+				continue;
 			}
 
 			String indexerPostProcessorImpl =
@@ -1366,24 +1364,13 @@ public class HookHotDeployListener
 			Locale locale = getLocale(languagePropertiesLocation);
 
 			if (locale != null) {
-				SecurityManager securityManager = System.getSecurityManager();
-
-				if (securityManager != null) {
-					Permission permission = new PortalHookPermission(
+				if (!checkPermission(
 						PACLConstants.
 							PORTAL_HOOK_PERMISSION_LANGUAGE_PROPERTIES_LOCALE,
-						portletClassLoader, locale);
+						portletClassLoader, locale,
+						"Rejecting locale " + locale)) {
 
-					try {
-						securityManager.checkPermission(permission);
-					}
-					catch (SecurityException se) {
-						if (_log.isInfoEnabled()) {
-							_log.info("Rejecting locale " + locale);
-						}
-
-						continue;
-					}
+					continue;
 				}
 			}
 
@@ -1435,11 +1422,6 @@ public class HookHotDeployListener
 
 			languagesContainer.addLanguage(locale, baseLanguageMap);
 		}
-	}
-
-	protected void initLogger(ClassLoader portletClassLoader) {
-		Log4JUtil.configureLog4J(
-			portletClassLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	@SuppressWarnings("rawtypes")
@@ -1544,23 +1526,12 @@ public class HookHotDeployListener
 		while (iterator.hasNext()) {
 			String key = (String)iterator.next();
 
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager != null) {
-				Permission permission = new PortalHookPermission(
+			if (!checkPermission(
 					PACLConstants.PORTAL_HOOK_PERMISSION_PORTAL_PROPERTIES_KEY,
-					portletClassLoader, key);
+					portletClassLoader, key,
+					"Rejecting portal.properties key " + key)) {
 
-				try {
-					securityManager.checkPermission(permission);
-				}
-				catch (SecurityException se) {
-					if (_log.isInfoEnabled()) {
-						_log.info("Rejecting portal.properties key " + key);
-					}
-
-					iterator.remove();
-				}
+				iterator.remove();
 			}
 		}
 
@@ -1643,7 +1614,19 @@ public class HookHotDeployListener
 			Captcha captcha = (Captcha)newInstance(
 				portletClassLoader, Captcha.class, captchaClassName);
 
-			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+			CaptchaImpl captchaImpl = null;
+
+			Captcha currentCaptcha = CaptchaUtil.getCaptcha();
+
+			if (currentCaptcha instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)currentCaptcha;
+
+				captchaImpl = (CaptchaImpl)doPrivilegedBean.getActualBean();
+			}
+			else {
+				captchaImpl = (CaptchaImpl)currentCaptcha;
+			}
 
 			captchaImpl.setCaptcha(captcha);
 		}
@@ -1806,16 +1789,19 @@ public class HookHotDeployListener
 		}
 
 		if (portalProperties.containsKey(PropsKeys.SANITIZER_IMPL)) {
-			String sanitizerClassName = portalProperties.getProperty(
-				PropsKeys.SANITIZER_IMPL);
+			String[] sanitizerClassNames = StringUtil.split(
+				portalProperties.getProperty(PropsKeys.SANITIZER_IMPL));
 
-			Sanitizer sanitizer = (Sanitizer)newInstance(
-				portletClassLoader, Sanitizer.class, sanitizerClassName);
+			SanitizerContainer sanitizerContainer = new SanitizerContainer();
 
-			SanitizerWrapper sanitizerWrapper =
-				(SanitizerWrapper)SanitizerUtil.getSanitizer();
+			_sanitizerContainerMap.put(servletContextName, sanitizerContainer);
 
-			sanitizerWrapper.setSanitizer(sanitizer);
+			for (String sanitizerClassName : sanitizerClassNames) {
+				Sanitizer sanitizer = (Sanitizer)newInstance(
+					portletClassLoader, Sanitizer.class, sanitizerClassName);
+
+				sanitizerContainer.registerSanitizer(sanitizer);
+			}
 		}
 
 		if (portalProperties.containsKey(
@@ -2017,25 +2003,6 @@ public class HookHotDeployListener
 			ClassLoader portletClassLoader, Element parentElement)
 		throws Exception {
 
-		SecurityManager securityManager = System.getSecurityManager();
-
-		if (securityManager != null) {
-			Permission permission = new PortalHookPermission(
-				PACLConstants.PORTAL_HOOK_PERMISSION_SERVLET_FILTERS,
-				portletClassLoader, null);
-
-			try {
-				securityManager.checkPermission(permission);
-			}
-			catch (SecurityException se) {
-				if (_log.isInfoEnabled()) {
-					_log.info("Rejecting servlet filters");
-				}
-
-				return;
-			}
-		}
-
 		ServletFiltersContainer servletFiltersContainer =
 			_servletFiltersContainerMap.get(servletContextName);
 
@@ -2048,6 +2015,14 @@ public class HookHotDeployListener
 
 		List<Element> servletFilterElements = parentElement.elements(
 			"servlet-filter");
+
+		if (!servletFilterElements.isEmpty() &&
+			!checkPermission(
+				PACLConstants.PORTAL_HOOK_PERMISSION_SERVLET_FILTERS,
+				portletClassLoader, null, "Rejecting servlet filters")) {
+
+			return;
+		}
 
 		for (Element servletFilterElement : servletFilterElements) {
 			String servletFilterName = servletFilterElement.elementText(
@@ -2172,24 +2147,12 @@ public class HookHotDeployListener
 			String strutsActionPath = strutsActionElement.elementText(
 				"struts-action-path");
 
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager != null) {
-				Permission permission = new PortalHookPermission(
+			if (!checkPermission(
 					PACLConstants.PORTAL_HOOK_PERMISSION_STRUTS_ACTION_PATH,
-					portletClassLoader, strutsActionPath);
+					portletClassLoader, strutsActionPath,
+					"Rejecting struts action path " + strutsActionPath)) {
 
-				try {
-					securityManager.checkPermission(permission);
-				}
-				catch (SecurityException se) {
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Rejecting struts action path " + strutsActionPath);
-					}
-
-					continue;
-				}
+				continue;
 			}
 
 			String strutsActionImpl = strutsActionElement.elementText(
@@ -2542,6 +2505,7 @@ public class HookHotDeployListener
 	};
 
 	private static final String[] _PROPS_VALUES_STRING = {
+		"company.default.locale", "company.default.time.zone",
 		"default.landing.page.path",
 		"passwords.passwordpolicytoolkit.generator",
 		"passwords.passwordpolicytoolkit.static",
@@ -2591,6 +2555,12 @@ public class HookHotDeployListener
 			new HashMap<String, StringArraysContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
+	private Set<String> _propsKeysEvents = SetUtil.fromArray(
+		_PROPS_KEYS_EVENTS);
+	private Set<String> _propsKeysSessionEvents = SetUtil.fromArray(
+		_PROPS_KEYS_SESSION_EVENTS);
+	private Map<String, SanitizerContainer> _sanitizerContainerMap =
+		new HashMap<String, SanitizerContainer>();
 	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
@@ -2966,6 +2936,7 @@ public class HookHotDeployListener
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
+		@Override
 		public String[] getStringArray() {
 			List<String> mergedStringList = new UniqueList<String>();
 
@@ -2983,6 +2954,7 @@ public class HookHotDeployListener
 				new String[mergedStringList.size()]);
 		}
 
+		@Override
 		public void setPluginStringArray(
 			String servletContextName, String[] pluginStringArray) {
 
@@ -3050,6 +3022,7 @@ public class HookHotDeployListener
 			_portalStringArray = PropsUtil.getArray(key);
 		}
 
+		@Override
 		public String[] getStringArray() {
 			if (_pluginStringArray != null) {
 				return _pluginStringArray;
@@ -3067,6 +3040,7 @@ public class HookHotDeployListener
 			}
 		}
 
+		@Override
 		public void setPluginStringArray(
 			String servletContextName, String[] pluginStringArray) {
 
@@ -3087,6 +3061,30 @@ public class HookHotDeployListener
 		private String[] _pluginStringArray;
 		private String[] _portalStringArray;
 		private String _servletContextName;
+
+	}
+
+	private class SanitizerContainer {
+
+		public void registerSanitizer(Sanitizer sanitizer) {
+			_sanitizers.add(sanitizer);
+
+			SanitizerImpl sanitizerImpl =
+				(SanitizerImpl)SanitizerUtil.getSanitizer();
+
+			sanitizerImpl.registerSanitizer(sanitizer);
+		}
+
+		public void unregisterSanitizers() {
+			SanitizerImpl sanitizerImpl =
+				(SanitizerImpl)SanitizerUtil.getSanitizer();
+
+			for (Sanitizer sanitizer : _sanitizers) {
+				sanitizerImpl.unregisterSanitizer(sanitizer);
+			}
+		}
+
+		private List<Sanitizer> _sanitizers = new ArrayList<Sanitizer>();
 
 	}
 

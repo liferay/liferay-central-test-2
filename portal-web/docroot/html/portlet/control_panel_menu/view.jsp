@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -158,7 +158,7 @@
 							}
 							%>
 
-							<liferay-ui:icon-menu align="left" direction="down" icon="<%= icon %>" id="groupSelector" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
+							<liferay-ui:icon-menu align="left" direction="down" icon="<%= icon %>" id="groupSelector" localizeMessage="<%= false %>" message="<%= HtmlUtil.escape(StringUtil.shorten(curGroupName, 25)) %>">
 
 								<%
 								for (int i = 0; i < manageableSites.size(); i++) {
@@ -187,6 +187,7 @@
 
 									<liferay-ui:icon
 										image="<%= image %>"
+										localizeMessage="<%= false %>"
 										message="<%= HtmlUtil.escape(message) %>"
 										url="<%= url %>"
 									/>
@@ -227,7 +228,7 @@
 					</c:choose>
 				</liferay-util:buffer>
 
-				<%
+			<%
 				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), false));
 				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(curGroup.getGroupId(), true));
 
@@ -241,7 +242,7 @@
 			}
 
 			List<Portlet> portlets = PortalUtil.getControlPanelPortlets(curCategory, themeDisplay);
-		%>
+			%>
 
 			<liferay-util:buffer var="categoryPortletsContent">
 				<c:if test="<%= !scopeLayouts.isEmpty() && curCategory.equals(PortletCategoryKeys.CONTENT) %>">
@@ -280,7 +281,14 @@
 					%>
 
 							<li class="<%= ppid.equals(portletId) ? "selected-portlet" : "" %>">
-								<a href="<liferay-portlet:renderURL doAsGroupId="<%= themeDisplay.getScopeGroupId() %>" portletName="<%= portlet.getRootPortletId() %>" windowState="<%= WindowState.MAXIMIZED.toString() %>" />" id="<portlet:namespace />portlet_<%= portletId %>">
+								<liferay-portlet:renderURL
+									doAsGroupId="<%= themeDisplay.getScopeGroupId() %>"
+									portletName="<%= portlet.getRootPortletId() %>"
+									var="portletURL"
+									windowState="<%= WindowState.MAXIMIZED.toString() %>"
+								/>
+
+								<a href="<%= portletURL %>" id="<portlet:namespace />portlet_<%= portletId %>">
 									<c:choose>
 										<c:when test="<%= Validator.isNull(portlet.getIcon()) %>">
 											<liferay-ui:icon src='<%= themeDisplay.getPathContext() + "/html/icons/default.png" %>' />
@@ -293,6 +301,30 @@
 									<%= PortalUtil.getPortletTitle(portlet, application, locale) %>
 								</a>
 							</li>
+
+							<c:if test="<%= !ppid.equals(portletId) %>">
+
+								<%
+								String portletClassName = portlet.getPortletClass();
+								%>
+
+								<%
+								if (portletClassName.equals(AlloyPortlet.class.getName())) {
+									PortletConfig alloyPortletConfig = PortletConfigFactoryUtil.create(portlet, application);
+
+									PortletContext alloyPortletContext = alloyPortletConfig.getPortletContext();
+
+									if (alloyPortletContext.getAttribute(BaseAlloyControllerImpl.TOUCH + portlet.getRootPortletId()) != Boolean.FALSE) {
+								%>
+
+										<iframe height="0" src="<%= portletURL %>" style="display: none; visibility: hidden;" width="0"></iframe>
+
+								<%
+									}
+								}
+								%>
+
+							</c:if>
 
 					<%
 						}

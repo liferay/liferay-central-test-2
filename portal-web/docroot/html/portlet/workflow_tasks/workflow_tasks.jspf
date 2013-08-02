@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,8 +14,19 @@
  */
 --%>
 
+<%
+String curParam = SearchContainer.DEFAULT_CUR_PARAM;
+
+if (type.equals("assigned-to-me")) {
+	curParam = "cur1";
+}
+else if (type.equals("assigned-to-my-roles")) {
+	curParam = "cur2";
+}
+%>
+
 <liferay-ui:search-container
-	searchContainer="<%= new WorkflowTaskSearch(renderRequest, portletURL) %>"
+	searchContainer="<%= new WorkflowTaskSearch(renderRequest, curParam, currentURLObj) %>"
 >
 	<%@ include file="/html/portlet/workflow_tasks/workflow_search_results.jspf" %>
 
@@ -39,8 +50,6 @@
 
 		Map<String, Serializable> workflowContext = workflowInstance.getWorkflowContext();
 
-		long companyId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_COMPANY_ID));
-		long groupId = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_GROUP_ID));
 		String className = (String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_NAME);
 		long classPK = GetterUtil.getLong((String)workflowContext.get(WorkflowConstants.CONTEXT_ENTRY_CLASS_PK));
 

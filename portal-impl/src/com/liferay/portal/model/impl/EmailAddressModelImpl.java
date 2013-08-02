@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -486,13 +486,16 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	@Override
 	public EmailAddress toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (EmailAddress)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (EmailAddress)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public EmailAddress toUnescapedModel() {
+		return (EmailAddress)this;
 	}
 
 	@Override
@@ -530,18 +533,15 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof EmailAddress)) {
 			return false;
 		}
 
-		EmailAddress emailAddress = null;
-
-		try {
-			emailAddress = (EmailAddress)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		EmailAddress emailAddress = (EmailAddress)obj;
 
 		long primaryKey = emailAddress.getPrimaryKey();
 
@@ -729,7 +729,7 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	}
 
 	private static ClassLoader _classLoader = EmailAddress.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			EmailAddress.class
 		};
 	private long _emailAddressId;
@@ -755,5 +755,5 @@ public class EmailAddressModelImpl extends BaseModelImpl<EmailAddress>
 	private boolean _originalPrimary;
 	private boolean _setOriginalPrimary;
 	private long _columnBitmask;
-	private EmailAddress _escapedModelProxy;
+	private EmailAddress _escapedModel;
 }

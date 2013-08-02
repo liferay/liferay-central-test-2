@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,9 +43,11 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		return new PortalCacheCacheEventListener(_cacheListener, _portalCache);
 	}
 
+	@Override
 	public void dispose() {
 	}
 
+	@Override
 	public void notifyElementEvicted(Ehcache ehcache, Element element) {
 		Serializable key = element.getKey();
 
@@ -57,6 +59,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		}
 	}
 
+	@Override
 	public void notifyElementExpired(Ehcache ehcache, Element element) {
 		Serializable key = element.getKey();
 
@@ -68,6 +71,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		}
 	}
 
+	@Override
 	public void notifyElementPut(Ehcache ehcache, Element element)
 		throws CacheException {
 
@@ -81,6 +85,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		}
 	}
 
+	@Override
 	public void notifyElementRemoved(Ehcache ehcache, Element element)
 		throws CacheException {
 
@@ -94,6 +99,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		}
 	}
 
+	@Override
 	public void notifyElementUpdated(Ehcache ehcache, Element element)
 		throws CacheException {
 
@@ -107,6 +113,7 @@ public class PortalCacheCacheEventListener implements CacheEventListener {
 		}
 	}
 
+	@Override
 	public void notifyRemoveAll(Ehcache ehcache) {
 		_cacheListener.notifyRemoveAll(_portalCache);
 

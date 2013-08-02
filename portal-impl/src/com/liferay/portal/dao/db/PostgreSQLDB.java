@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -116,10 +116,7 @@ public class PostgreSQLDB extends BaseDB {
 		sb.append("\\c ");
 		sb.append(databaseName);
 		sb.append(";\n\n");
-		sb.append(
-			readFile(
-				sqlDir + "/portal" + suffix + "/portal" + suffix +
-					"-postgresql.sql"));
+		sb.append(getCreateTablesContent(sqlDir, suffix));
 		sb.append("\n\n");
 		sb.append(readFile(sqlDir + "/indexes/indexes-postgresql.sql"));
 		sb.append("\n\n");
@@ -163,20 +160,27 @@ public class PostgreSQLDB extends BaseDB {
 						"using @old-column@::@type@;",
 					REWORD_TEMPLATE, template);
 			}
-			else if (line.indexOf(DROP_INDEX) != -1) {
+			else if (line.startsWith(ALTER_TABLE_NAME)) {
+				String[] template = buildTableNameTokens(line);
+
+				line = StringUtil.replace(
+					"alter table @old-table@ rename to @new-table@;",
+					RENAME_TABLE_TEMPLATE, template);
+			}
+			else if (line.contains(DROP_INDEX)) {
 				String[] tokens = StringUtil.split(line, ' ');
 
 				line = StringUtil.replace(
 					"drop index @index@;", "@index@", tokens[2]);
 			}
-			else if (line.indexOf(DROP_PRIMARY_KEY) != -1) {
+			else if (line.contains(DROP_PRIMARY_KEY)) {
 				String[] tokens = StringUtil.split(line, ' ');
 
 				line = StringUtil.replace(
 					"alter table @table@ drop constraint @table@_pkey;",
 					"@table@", tokens[2]);
 			}
-			else if (line.indexOf("\\\'") != -1) {
+			else if (line.contains("\\\'")) {
 				line = StringUtil.replace(line, "\\\'", "\'\'");
 			}
 

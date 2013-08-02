@@ -1,0 +1,21 @@
+<definition>
+	<execute test-case="WorkflowadminCPBlogsAcceptance" />
+
+	<execute test-case="WorkflowadminCPWebcontentAcceptance" />
+
+	<execute test-case="WorkflowadminMysubmissionsAcceptance" />
+
+	<execute test-case="WorkflowadminMyworkflowtasksAcceptance" />
+
+	<execute test-case="WorkflowadminPGAssetpublisherAcceptance" />
+
+	<execute test-case="WorkflowadminPGMessageboardsAcceptance" />
+
+	<execute test-case="WorkflowadminPGPagecommentsAcceptance" />
+
+	<execute test-case="WorkflowadminPGPagerevisionAcceptance" />
+
+	<execute test-case="WorkflowadminPGWikiAcceptance" />
+
+	<execute test-case="WorkflowadminPGWebcontentdisplayAcceptance" />
+</definition>

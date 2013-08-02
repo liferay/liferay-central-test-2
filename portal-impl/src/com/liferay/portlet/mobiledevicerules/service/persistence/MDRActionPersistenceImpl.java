@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -222,11 +222,55 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MDRAction mdrAction) {
+		if (mdrAction.isNew()) {
+			Object[] args = new Object[] {
+					mdrAction.getUuid(), Long.valueOf(mdrAction.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				mdrAction);
+		}
+		else {
+			MDRActionModelImpl mdrActionModelImpl = (MDRActionModelImpl)mdrAction;
+
+			if ((mdrActionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						mdrAction.getUuid(),
+						Long.valueOf(mdrAction.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					mdrAction);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MDRAction mdrAction) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		MDRActionModelImpl mdrActionModelImpl = (MDRActionModelImpl)mdrAction;
+
+		Object[] args = new Object[] {
 				mdrAction.getUuid(), Long.valueOf(mdrAction.getGroupId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((mdrActionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					mdrActionModelImpl.getOriginalUuid(),
+					Long.valueOf(mdrActionModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -407,31 +451,8 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 		EntityCacheUtil.putResult(MDRActionModelImpl.ENTITY_CACHE_ENABLED,
 			MDRActionImpl.class, mdrAction.getPrimaryKey(), mdrAction);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					mdrAction.getUuid(), Long.valueOf(mdrAction.getGroupId())
-				}, mdrAction);
-		}
-		else {
-			if ((mdrActionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						mdrActionModelImpl.getOriginalUuid(),
-						Long.valueOf(mdrActionModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						mdrAction.getUuid(),
-						Long.valueOf(mdrAction.getGroupId())
-					}, mdrAction);
-			}
-		}
+		clearUniqueFindersCache(mdrAction);
+		cacheUniqueFindersCache(mdrAction);
 
 		return mdrAction;
 	}
@@ -1907,8 +1928,10 @@ public class MDRActionPersistenceImpl extends BasePersistenceImpl<MDRAction>
 				List<ModelListener<MDRAction>> listenersList = new ArrayList<ModelListener<MDRAction>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MDRAction>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

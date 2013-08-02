@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -32,38 +33,47 @@ import java.util.Set;
 /**
  * @author Amos Fong
  */
+@DoPrivileged
 public class DefaultLicenseManagerImpl
 	implements com.liferay.portal.license.util.LicenseManager {
 
+	@Override
 	public void checkLicense(String productId) {
 	}
 
+	@Override
 	public List<Map<String, String>> getClusterLicenseProperties(
 		String clusterNodeId) {
 
 		return null;
 	}
 
+	@Override
 	public String getHostName() {
 		return LicenseUtil.getHostName();
 	}
 
+	@Override
 	public Set<String> getIpAddresses() {
 		return LicenseUtil.getIpAddresses();
 	}
 
+	@Override
 	public LicenseInfo getLicenseInfo(String productId) {
 		return null;
 	}
 
+	@Override
 	public List<Map<String, String>> getLicenseProperties() {
 		return null;
 	}
 
+	@Override
 	public Map<String, String> getLicenseProperties(String productId) {
 		return null;
 	}
 
+	@Override
 	public int getLicenseState(Map<String, String> licenseProperties) {
 		String productId = licenseProperties.get("productId");
 
@@ -125,6 +135,7 @@ public class DefaultLicenseManagerImpl
 		return 0;
 	}
 
+	@Override
 	public int getLicenseState(String productId) {
 		Map<String, String> licenseProperties = new HashMap<String, String>();
 
@@ -133,10 +144,12 @@ public class DefaultLicenseManagerImpl
 		return getLicenseState(licenseProperties);
 	}
 
+	@Override
 	public Set<String> getMacAddresses() {
 		return LicenseUtil.getMacAddresses();
 	}
 
+	@Override
 	public void registerLicense(JSONObject jsonObject) throws Exception {
 		String serverId = jsonObject.getString("serverId");
 

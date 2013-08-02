@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.social.NoSuchRequestException;
+import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -45,8 +46,9 @@ public class UpdateRequestAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -98,6 +100,15 @@ public class UpdateRequestAction extends PortletAction {
 
 		long requestId = ParamUtil.getLong(actionRequest, "requestId");
 		int status = ParamUtil.getInteger(actionRequest, "status");
+
+		SocialRequest request = SocialRequestLocalServiceUtil.getSocialRequest(
+			requestId);
+
+		if (!PortalUtil.isOmniadmin(themeDisplay.getUserId()) &&
+			(themeDisplay.getUserId() != request.getReceiverUserId())) {
+
+			throw new PrincipalException();
+		}
 
 		SocialRequestLocalServiceUtil.updateRequest(
 			requestId, status, themeDisplay);

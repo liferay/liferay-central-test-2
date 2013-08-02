@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -237,13 +237,16 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 
 	@Override
 	public VirtualHost toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (VirtualHost)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (VirtualHost)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public VirtualHost toUnescapedModel() {
+		return (VirtualHost)this;
 	}
 
 	@Override
@@ -276,18 +279,15 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof VirtualHost)) {
 			return false;
 		}
 
-		VirtualHost virtualHost = null;
-
-		try {
-			virtualHost = (VirtualHost)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		VirtualHost virtualHost = (VirtualHost)obj;
 
 		long primaryKey = virtualHost.getPrimaryKey();
 
@@ -389,7 +389,7 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	}
 
 	private static ClassLoader _classLoader = VirtualHost.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			VirtualHost.class
 		};
 	private long _virtualHostId;
@@ -402,5 +402,5 @@ public class VirtualHostModelImpl extends BaseModelImpl<VirtualHost>
 	private String _hostname;
 	private String _originalHostname;
 	private long _columnBitmask;
-	private VirtualHost _escapedModelProxy;
+	private VirtualHost _escapedModel;
 }

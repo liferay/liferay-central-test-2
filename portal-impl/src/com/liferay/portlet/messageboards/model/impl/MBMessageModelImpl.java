@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -955,13 +955,16 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	@Override
 	public MBMessage toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MBMessage)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MBMessage)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MBMessage toUnescapedModel() {
+		return (MBMessage)this;
 	}
 
 	@Override
@@ -1028,18 +1031,15 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBMessage)) {
 			return false;
 		}
 
-		MBMessage mbMessage = null;
-
-		try {
-			mbMessage = (MBMessage)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBMessage mbMessage = (MBMessage)obj;
 
 		long primaryKey = mbMessage.getPrimaryKey();
 
@@ -1400,7 +1400,7 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	}
 
 	private static ClassLoader _classLoader = MBMessage.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MBMessage.class
 		};
 	private String _uuid;
@@ -1453,5 +1453,5 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;
-	private MBMessage _escapedModelProxy;
+	private MBMessage _escapedModel;
 }

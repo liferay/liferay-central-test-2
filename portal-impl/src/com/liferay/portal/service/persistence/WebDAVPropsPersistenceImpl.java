@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -178,12 +178,57 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(WebDAVProps webDAVProps) {
+		if (webDAVProps.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(webDAVProps.getClassNameId()),
+					Long.valueOf(webDAVProps.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args,
+				webDAVProps);
+		}
+		else {
+			WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
+
+			if ((webDAVPropsModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(webDAVProps.getClassNameId()),
+						Long.valueOf(webDAVProps.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args,
+					webDAVProps);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(WebDAVProps webDAVProps) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-			new Object[] {
+		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
+
+		Object[] args = new Object[] {
 				Long.valueOf(webDAVProps.getClassNameId()),
 				Long.valueOf(webDAVProps.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+
+		if ((webDAVPropsModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(webDAVPropsModelImpl.getOriginalClassNameId()),
+					Long.valueOf(webDAVPropsModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+		}
 	}
 
 	/**
@@ -287,8 +332,6 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 
 		boolean isNew = webDAVProps.isNew();
 
-		WebDAVPropsModelImpl webDAVPropsModelImpl = (WebDAVPropsModelImpl)webDAVProps;
-
 		Session session = null;
 
 		try {
@@ -314,32 +357,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 		EntityCacheUtil.putResult(WebDAVPropsModelImpl.ENTITY_CACHE_ENABLED,
 			WebDAVPropsImpl.class, webDAVProps.getPrimaryKey(), webDAVProps);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-				new Object[] {
-					Long.valueOf(webDAVProps.getClassNameId()),
-					Long.valueOf(webDAVProps.getClassPK())
-				}, webDAVProps);
-		}
-		else {
-			if ((webDAVPropsModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(webDAVPropsModelImpl.getOriginalClassNameId()),
-						Long.valueOf(webDAVPropsModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
-						Long.valueOf(webDAVProps.getClassNameId()),
-						Long.valueOf(webDAVProps.getClassPK())
-					}, webDAVProps);
-			}
-		}
+		clearUniqueFindersCache(webDAVProps);
+		cacheUniqueFindersCache(webDAVProps);
 
 		return webDAVProps;
 	}
@@ -863,8 +882,10 @@ public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl<WebDAVProps>
 				List<ModelListener<WebDAVProps>> listenersList = new ArrayList<ModelListener<WebDAVProps>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<WebDAVProps>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

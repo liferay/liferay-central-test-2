@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -228,12 +228,57 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 		}
 	}
 
+	protected void cacheUniqueFindersCache(PollsQuestion pollsQuestion) {
+		if (pollsQuestion.isNew()) {
+			Object[] args = new Object[] {
+					pollsQuestion.getUuid(),
+					Long.valueOf(pollsQuestion.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				pollsQuestion);
+		}
+		else {
+			PollsQuestionModelImpl pollsQuestionModelImpl = (PollsQuestionModelImpl)pollsQuestion;
+
+			if ((pollsQuestionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						pollsQuestion.getUuid(),
+						Long.valueOf(pollsQuestion.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					pollsQuestion);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(PollsQuestion pollsQuestion) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		PollsQuestionModelImpl pollsQuestionModelImpl = (PollsQuestionModelImpl)pollsQuestion;
+
+		Object[] args = new Object[] {
 				pollsQuestion.getUuid(),
 				Long.valueOf(pollsQuestion.getGroupId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((pollsQuestionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					pollsQuestionModelImpl.getOriginalUuid(),
+					Long.valueOf(pollsQuestionModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -413,32 +458,8 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 			PollsQuestionImpl.class, pollsQuestion.getPrimaryKey(),
 			pollsQuestion);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					pollsQuestion.getUuid(),
-					Long.valueOf(pollsQuestion.getGroupId())
-				}, pollsQuestion);
-		}
-		else {
-			if ((pollsQuestionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						pollsQuestionModelImpl.getOriginalUuid(),
-						Long.valueOf(pollsQuestionModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						pollsQuestion.getUuid(),
-						Long.valueOf(pollsQuestion.getGroupId())
-					}, pollsQuestion);
-			}
-		}
+		clearUniqueFindersCache(pollsQuestion);
+		cacheUniqueFindersCache(pollsQuestion);
 
 		return pollsQuestion;
 	}
@@ -2282,8 +2303,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistenceImpl<PollsQuest
 				List<ModelListener<PollsQuestion>> listenersList = new ArrayList<ModelListener<PollsQuestion>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<PollsQuestion>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

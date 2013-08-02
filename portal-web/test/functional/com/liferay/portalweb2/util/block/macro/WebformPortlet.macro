@@ -1,0 +1,53 @@
+<definition>
+	<command name="configureWebformPG">
+		<execute action="PGWebform#assertTextEquals" locator-key1="PORTLET_TITLE" value1="Web Form" />
+
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_INFORMATION_TITLE" value1="${webFormInformationTitle}" />
+
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_INFORMATION_DESCRIPTION" value1="${webFormInformationDescription}" />
+
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_NAME_HEADER" value1="${webFormFieldsName}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_NAME" />
+
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_RATING_HEADER" value1="${webFormFieldsRating}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_RATING" />
+
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_COMMENTS_HEADER" value1="${webFormFieldsComments}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_COMMENTS" />
+
+		<execute action="PGWebform#assertClick" locator-key1="PORTLET_OPTIONS" value1="Options" />
+		<execute action="PGWebform#assertClick" locator-key1="WEBFORM_OPTIONS_MENULIST_CONFIGURATION" value1="Configuration" />
+
+		<execute action="PGWebformConfiguration#selectFrame" locator-key1="CONFIGURATION_IFRAME" />
+		<execute action="PGWebformConfiguration#type" locator-key1="SETUP_FORM_INFORMATION_TITLE" value1="${webFormInformationTitleEdit}" />
+		<execute action="PGWebformConfiguration#type" locator-key1="SETUP_FORM_INFORMATION_DESCRIPTION" value1="${webFormInformationDescriptionEdit}" />
+		<execute action="PGWebformConfiguration#type" locator-key1="SETUP_FORM_FIELDS_NAME" value1="${webFormFieldsNameEdit}" />
+		<execute action="PGWebformConfiguration#type" locator-key1="SETUP_FORM_FIELDS_RATING" value1="${webFormFieldsRatingEdit}" />
+		<execute action="PGWebformConfiguration#type" locator-key1="SETUP_FORM_FIELDS_COMMENTS" value1="${webFormFieldsCommentsEdit}" />
+
+		<execute action="PGWebformConfiguration#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
+		<execute action="PGWebformConfiguration#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="You have successfully updated the setup." />
+	</command>
+
+	<command name="viewConfigureWebformPG">
+		<execute action="PGWebform#assertTextEquals" locator-key1="PORTLET_TITLE" value1="Web Form" />
+
+		<execute action="PGWebform#assertTextNotEquals" locator-key1="DEFAULT_FORM_INFORMATION_TITLE" value1="${webFormInformationTitle}" />
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_INFORMATION_TITLE" value1="${webFormInformationTitleEdit}" />
+
+		<execute action="PGWebform#assertTextNotEquals" locator-key1="DEFAULT_FORM_INFORMATION_DESCRIPTION" value1="${webFormInformationDescription}" />
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_INFORMATION_DESCRIPTION" value1="${webFormInformationDescriptionEdit}" />
+
+		<execute action="PGWebform#assertTextNotEquals" locator-key1="DEFAULT_FORM_FIELDS_NAME_HEADER" value1="${webFormFieldsName}" />
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_NAME_HEADER" value1="${webFormFieldsNameEdit}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_NAME" />
+
+		<execute action="PGWebform#assertTextNotEquals" locator-key1="DEFAULT_FORM_FIELDS_RATING_HEADER" value1="${webFormFieldsRating}" />
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_RATING_HEADER" value1="${webFormFieldsRatingEdit}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_RATING" />
+
+		<execute action="PGWebform#assertTextNotEquals" locator-key1="DEFAULT_FORM_FIELDS_COMMENTS_HEADER" value1="${webFormFieldsComments}" />
+		<execute action="PGWebform#assertTextEquals" locator-key1="DEFAULT_FORM_FIELDS_COMMENTS_HEADER" value1="${webFormFieldsCommentsEdit}" />
+		<execute action="PGWebform#assertElementPresent" locator-key1="DEFAULT_FORM_FIELDS_COMMENTS" />
+	</command>
+</definition>

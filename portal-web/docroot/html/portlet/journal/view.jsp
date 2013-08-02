@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,6 +44,7 @@ portletURL.setParameter("tabs1", tabs1);
 			List headerNames = searchContainer.getHeaderNames();
 
 			headerNames.add(2, "status");
+			headerNames.add(3, "version");
 			headerNames.add(StringPool.BLANK);
 
 			searchContainer.setRowChecker(new RowChecker(renderResponse));
@@ -101,7 +102,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_article");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("originalRedirect", currentURL);
 				rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				rowURL.setParameter("articleId", article.getArticleId());
 			%>
@@ -174,8 +174,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 			for (int i = 0; i < results.size(); i++) {
 				JournalStructure structure = (JournalStructure)results.get(i);
-
-				structure = structure.toEscapedModel();
 
 				ResultRow row = new ResultRow(structure, structure.getStructureId(), i);
 
@@ -254,8 +252,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 			for (int i = 0; i < results.size(); i++) {
 				JournalTemplate template = (JournalTemplate)results.get(i);
-
-				template = template.toEscapedModel();
 
 				ResultRow row = new ResultRow(template, template.getTemplateId(), i);
 

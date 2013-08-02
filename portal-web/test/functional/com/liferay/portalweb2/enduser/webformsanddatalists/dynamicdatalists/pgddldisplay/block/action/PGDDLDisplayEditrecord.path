@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>PGDDLDisplayEditrecord</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDDLDisplayEditrecord</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGDDLDisplayEditrecord</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>VIEW_HISTORY_BUTTON</td>
+	<td>//button/span[.='View History']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_AS_DRAFT_BUTTON</td>
+	<td>//input[@value='Save as Draft']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PUBLISH_BUTTON</td>
+	<td>//input[@value='Publish']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

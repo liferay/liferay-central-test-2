@@ -406,7 +406,7 @@ body.portlet {
 .visible.portlet-options .lfr-trigger strong a {
 }
 
-/*------ Breadcrumbs taglib ------*/
+/* ---------- Breadcrumbs taglib ---------- */
 
 .breadcrumbs:before,
 .breadcrumbs:after {
@@ -454,4 +454,21 @@ body.portlet {
 }
 
 .ie .taglib-calendar tr td.first a {
+}
+
+/* ---------- RTL ---------- */
+
+.rtl .breadcrumbs-horizontal li {
+}
+
+.rtl .portlet-msg {
+}
+
+.rtl .portlet-topper-toolbar {
+}
+
+.rtl .portlet-topper-toolbar .nobr {
+}
+
+.rtl .lfr-message .lfr-message-controls {
 }

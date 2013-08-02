@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portlet.expando.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -47,6 +48,7 @@ import java.util.Map;
  * @see com.liferay.portlet.expando.model.ExpandoTableModel
  * @generated
  */
+@JSON(strict = true)
 public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	implements ExpandoTableModel {
 	/*
@@ -147,6 +149,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		}
 	}
 
+	@JSON
 	public long getTableId() {
 		return _tableId;
 	}
@@ -155,6 +158,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		_tableId = tableId;
 	}
 
+	@JSON
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -193,6 +197,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		setClassNameId(classNameId);
 	}
 
+	@JSON
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -213,6 +218,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 		return _originalClassNameId;
 	}
 
+	@JSON
 	public String getName() {
 		if (_name == null) {
 			return StringPool.BLANK;
@@ -242,13 +248,16 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 
 	@Override
 	public ExpandoTable toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ExpandoTable)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ExpandoTable)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ExpandoTable toUnescapedModel() {
+		return (ExpandoTable)this;
 	}
 
 	@Override
@@ -281,18 +290,15 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoTable)) {
 			return false;
 		}
 
-		ExpandoTable expandoTable = null;
-
-		try {
-			expandoTable = (ExpandoTable)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoTable expandoTable = (ExpandoTable)obj;
 
 		long primaryKey = expandoTable.getPrimaryKey();
 
@@ -394,7 +400,7 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	}
 
 	private static ClassLoader _classLoader = ExpandoTable.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ExpandoTable.class
 		};
 	private long _tableId;
@@ -407,5 +413,5 @@ public class ExpandoTableModelImpl extends BaseModelImpl<ExpandoTable>
 	private String _name;
 	private String _originalName;
 	private long _columnBitmask;
-	private ExpandoTable _escapedModelProxy;
+	private ExpandoTable _escapedModel;
 }

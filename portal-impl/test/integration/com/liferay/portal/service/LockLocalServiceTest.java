@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,9 +19,9 @@ import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
-import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.util.ArrayList;
@@ -117,6 +117,7 @@ public class LockLocalServiceTest {
 			return _systemException;
 		}
 
+		@Override
 		public void run() {
 			int count = 0;
 
@@ -143,8 +144,8 @@ public class LockLocalServiceTest {
 							continue;
 						}
 
-						// PostgreSQL fails to do row or table level locking.
-						// A unique index is required to enforce mutual exclude
+						// PostgreSQL fails to do row or table level locking. A
+						// unique index is required to enforce mutual exclude
 						// locking, but it may do so by violating a unique index
 						// constraint.
 

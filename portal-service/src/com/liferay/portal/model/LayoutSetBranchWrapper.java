@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -714,6 +716,10 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 		return new LayoutSetBranchWrapper(_layoutSetBranch.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.LayoutSetBranch toUnescapedModel() {
+		return new LayoutSetBranchWrapper(_layoutSetBranch.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _layoutSetBranch.toString();
@@ -783,6 +789,26 @@ public class LayoutSetBranchWrapper implements LayoutSetBranch,
 	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
 		_layoutSetBranch.setSettingsProperties(settingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutSetBranchWrapper)) {
+			return false;
+		}
+
+		LayoutSetBranchWrapper layoutSetBranchWrapper = (LayoutSetBranchWrapper)obj;
+
+		if (Validator.equals(_layoutSetBranch,
+					layoutSetBranchWrapper._layoutSetBranch)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,11 +24,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class BatchablePipeTest extends TestCase {
 
+	@Test
 	public void testBatchPutAndGet() {
 		BatchablePipe<String, Integer> batchablePipe =
 			new BatchablePipe<String, Integer>();
@@ -113,6 +116,7 @@ public class BatchablePipeTest extends TestCase {
 
 		Runnable putRunnable = new Runnable() {
 
+			@Override
 			public void run() {
 				for (int i = 0; i < 100; i++) {
 					batchablePipe.put(
@@ -124,6 +128,7 @@ public class BatchablePipeTest extends TestCase {
 
 		Runnable takeRunnable = new Runnable() {
 
+			@Override
 			public void run() {
 				while (true) {
 					try {
@@ -202,6 +207,7 @@ public class BatchablePipeTest extends TestCase {
 		assertLessThan(1000, resultBlockingQueue.size());
 	}
 
+	@Test
 	public void testCreation() {
 		BatchablePipe<String, Integer> batchablePipe =
 			new BatchablePipe<String, Integer>();
@@ -211,6 +217,7 @@ public class BatchablePipeTest extends TestCase {
 		assertNull(batchablePipe.take());
 	}
 
+	@Test
 	public void testSimplePutAndTake() {
 		BatchablePipe<String, Integer> batchablePipe =
 			new BatchablePipe<String, Integer>();

@@ -1,0 +1,28 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="DETAILS">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="FIELDS_LINK">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="NAME_FIELD">
+			<execute function="Click#clickAt" />
+		</case>
+		<case locator-key1="SAVE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="SETTINGS_CELL_EDITOR_SAVE_BUTTON">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+	</command>
+
+	<command name="type">
+		<case locator-key1="DESCRIPTION_FIELD">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="NAME_FIELD">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+	</command>
+</definition>

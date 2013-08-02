@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,23 +34,18 @@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil
 page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %><%@
 page import="com.liferay.portlet.journal.service.permission.JournalPermission" %><%@
 page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %><%@
-page import="com.liferay.portlet.journal.util.JournalUtil" %><%@
 page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %><%@
 page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
+PortletPreferences preferences = portletPreferences;
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
 
 long groupId = ParamUtil.getLong(renderRequest, "groupId");
 
 if (groupId <= 0) {
-	groupId = GetterUtil.getLong(preferences.getValue("groupId", scopeGroupId.toString()));
+	groupId = GetterUtil.getLong(preferences.getValue("groupId", String.valueOf(scopeGroupId)));
 }
 
 String articleId = ParamUtil.getString(renderRequest, "articleId");

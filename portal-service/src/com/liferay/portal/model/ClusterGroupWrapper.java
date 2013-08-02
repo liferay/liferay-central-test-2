@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -235,6 +237,10 @@ public class ClusterGroupWrapper implements ClusterGroup,
 		return new ClusterGroupWrapper(_clusterGroup.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ClusterGroup toUnescapedModel() {
+		return new ClusterGroupWrapper(_clusterGroup.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _clusterGroup.toString();
@@ -251,6 +257,25 @@ public class ClusterGroupWrapper implements ClusterGroup,
 
 	public java.lang.String[] getClusterNodeIdsArray() {
 		return _clusterGroup.getClusterNodeIdsArray();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClusterGroupWrapper)) {
+			return false;
+		}
+
+		ClusterGroupWrapper clusterGroupWrapper = (ClusterGroupWrapper)obj;
+
+		if (Validator.equals(_clusterGroup, clusterGroupWrapper._clusterGroup)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

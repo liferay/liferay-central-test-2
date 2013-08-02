@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -119,70 +119,87 @@ public class PortletBagImpl implements PortletBag {
 			getPreferencesValidatorInstance(), getResourceBundles());
 	}
 
+	@Override
 	public List<AssetRendererFactory> getAssetRendererFactoryInstances() {
 		return _assetRendererFactoryInstances;
 	}
 
+	@Override
 	public List<AtomCollectionAdapter<?>> getAtomCollectionAdapterInstances() {
 		return _atomCollectionAdapterInstances;
 	}
 
+	@Override
 	public ConfigurationAction getConfigurationActionInstance() {
 		return _configurationActionInstance;
 	}
 
+	@Override
 	public ControlPanelEntry getControlPanelEntryInstance() {
 		return _controlPanelEntryInstance;
 	}
 
+	@Override
 	public List<CustomAttributesDisplay> getCustomAttributesDisplayInstances() {
 		return _customAttributesDisplayInstances;
 	}
 
+	@Override
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
 		return _friendlyURLMapperInstance;
 	}
 
+	@Override
 	public List<Indexer> getIndexerInstances() {
 		return _indexerInstances;
 	}
 
+	@Override
 	public OpenSearch getOpenSearchInstance() {
 		return _openSearchInstance;
 	}
 
+	@Override
 	public PermissionPropagator getPermissionPropagatorInstance() {
 		return _permissionPropagatorInstance;
 	}
 
+	@Override
 	public PollerProcessor getPollerProcessorInstance() {
 		return _pollerProcessorInstance;
 	}
 
+	@Override
 	public MessageListener getPopMessageListenerInstance() {
 		return _popMessageListenerInstance;
 	}
 
+	@Override
 	public PortletDataHandler getPortletDataHandlerInstance() {
 		return _portletDataHandlerInstance;
 	}
 
+	@Override
 	public Portlet getPortletInstance() {
 		return _portletInstance;
 	}
 
+	@Override
 	public PortletLayoutListener getPortletLayoutListenerInstance() {
 		return _portletLayoutListenerInstance;
 	}
 
+	@Override
 	public String getPortletName() {
 		return _portletName;
 	}
 
+	@Override
 	public PreferencesValidator getPreferencesValidatorInstance() {
 		return _preferencesValidatorInstance;
 	}
 
+	@Override
 	public ResourceBundle getResourceBundle(Locale locale) {
 		ResourceBundle resourceBundle = _resourceBundles.get(
 			LocaleUtil.toLanguageId(locale));
@@ -199,42 +216,52 @@ public class PortletBagImpl implements PortletBag {
 		return resourceBundle;
 	}
 
+	@Override
 	public Map<String, ResourceBundle> getResourceBundles() {
 		return _resourceBundles;
 	}
 
+	@Override
 	public ServletContext getServletContext() {
 		return _servletContext;
 	}
 
+	@Override
 	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
 		return _socialActivityInterpreterInstance;
 	}
 
+	@Override
 	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
 		return _socialRequestInterpreterInstance;
 	}
 
+	@Override
 	public URLEncoder getURLEncoderInstance() {
 		return _urlEncoderInstance;
 	}
 
+	@Override
 	public WebDAVStorage getWebDAVStorageInstance() {
 		return _webDAVStorageInstance;
 	}
 
+	@Override
 	public List<WorkflowHandler> getWorkflowHandlerInstances() {
 		return _workflowHandlerInstances;
 	}
 
+	@Override
 	public Method getXmlRpcMethodInstance() {
 		return _xmlRpcMethodInstance;
 	}
 
+	@Override
 	public void setPortletInstance(Portlet portletInstance) {
 		_portletInstance = portletInstance;
 	}
 
+	@Override
 	public void setPortletName(String portletName) {
 		_portletName = portletName;
 	}

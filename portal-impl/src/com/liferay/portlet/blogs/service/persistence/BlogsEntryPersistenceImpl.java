@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -498,18 +498,101 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		}
 	}
 
-	protected void clearUniqueFindersCache(BlogsEntry blogsEntry) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
-				blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
-			});
+	protected void cacheUniqueFindersCache(BlogsEntry blogsEntry) {
+		if (blogsEntry.isNew()) {
+			Object[] args = new Object[] {
+					blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
+				};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT,
-			new Object[] {
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				blogsEntry);
+
+			args = new Object[] {
+					Long.valueOf(blogsEntry.getGroupId()),
+					
+					blogsEntry.getUrlTitle()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_UT, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT, args,
+				blogsEntry);
+		}
+		else {
+			BlogsEntryModelImpl blogsEntryModelImpl = (BlogsEntryModelImpl)blogsEntry;
+
+			if ((blogsEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						blogsEntry.getUuid(),
+						Long.valueOf(blogsEntry.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					blogsEntry);
+			}
+
+			if ((blogsEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_UT.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(blogsEntry.getGroupId()),
+						
+						blogsEntry.getUrlTitle()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_UT, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT, args,
+					blogsEntry);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(BlogsEntry blogsEntry) {
+		BlogsEntryModelImpl blogsEntryModelImpl = (BlogsEntryModelImpl)blogsEntry;
+
+		Object[] args = new Object[] {
+				blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((blogsEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					blogsEntryModelImpl.getOriginalUuid(),
+					Long.valueOf(blogsEntryModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(blogsEntry.getGroupId()),
 				
-			blogsEntry.getUrlTitle()
-			});
+				blogsEntry.getUrlTitle()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_UT, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT, args);
+
+		if ((blogsEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_UT.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(blogsEntryModelImpl.getOriginalGroupId()),
+					
+					blogsEntryModelImpl.getOriginalUrlTitle()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_UT, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT, args);
+		}
 	}
 
 	/**
@@ -849,58 +932,8 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 		EntityCacheUtil.putResult(BlogsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			BlogsEntryImpl.class, blogsEntry.getPrimaryKey(), blogsEntry);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					blogsEntry.getUuid(), Long.valueOf(blogsEntry.getGroupId())
-				}, blogsEntry);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
-				new Object[] {
-					Long.valueOf(blogsEntry.getGroupId()),
-					
-				blogsEntry.getUrlTitle()
-				}, blogsEntry);
-		}
-		else {
-			if ((blogsEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						blogsEntryModelImpl.getOriginalUuid(),
-						Long.valueOf(blogsEntryModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						blogsEntry.getUuid(),
-						Long.valueOf(blogsEntry.getGroupId())
-					}, blogsEntry);
-			}
-
-			if ((blogsEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_UT.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(blogsEntryModelImpl.getOriginalGroupId()),
-						
-						blogsEntryModelImpl.getOriginalUrlTitle()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_UT, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_UT, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_UT,
-					new Object[] {
-						Long.valueOf(blogsEntry.getGroupId()),
-						
-					blogsEntry.getUrlTitle()
-					}, blogsEntry);
-			}
-		}
+		clearUniqueFindersCache(blogsEntry);
+		cacheUniqueFindersCache(blogsEntry);
 
 		return blogsEntry;
 	}
@@ -12027,8 +12060,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistenceImpl<BlogsEntry>
 				List<ModelListener<BlogsEntry>> listenersList = new ArrayList<ModelListener<BlogsEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<BlogsEntry>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

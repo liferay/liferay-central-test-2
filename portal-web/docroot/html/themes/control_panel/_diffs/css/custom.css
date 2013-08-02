@@ -4,7 +4,7 @@
 /* ---------- Base styles ---------- */
 
 body {
-	background: #EEF0F2;
+	background: #EEF0F2 url(../images/custom/sidebar_bg.png) repeat-y 0 0;
 	color: #1A1A1A;
 	font-size: 12px;
 }
@@ -22,31 +22,15 @@ select {
 	padding: 4px;
 }
 
-.display-panel-columns:after, .display-panel-columns:before {
-	position: fixed;
-	content: '';
-	display: block;
-	bottom: 0;
-	top: 0;
-	width: 238px;
-	z-index: -1;
-}
-
-.display-panel-columns:after {
-	margin-left: 1px;
-	border-right: 1px solid #FFF;
-}
-
-.display-panel-columns:before {
-	background-color: #CAD2DD;
-	border-right: 1px solid #B0B1B3;
-}
-
 body.portal-popup:after, body.portal-popup:before {
-	display: none;
+	background-image: none;
 }
 
-.panels-minimized.display-panel-columns:before, .panels-minimized.display-panel-columns:after, .panels-minimized .panel-page-menu {
+.panels-minimized.display-panel-columns {
+	background-position: -198px 0;
+}
+
+.panels-minimized .panel-page-menu {
 	left: -198px;
 }
 
@@ -82,11 +66,8 @@ body.portal-popup:after, body.portal-popup:before {
 }
 
 #breadcrumbs {
-	left: 257px;
-	position: absolute;
-	right: 20px;
-	top: 40px;
-	z-index: 1;
+	display: inline-block;
+	width: 100%;
 }
 
 #breadcrumbs .first {
@@ -119,6 +100,7 @@ body.portal-popup:after, body.portal-popup:before {
 #breadcrumbs li, #breadcrumbs li a {
 	color: #868686;
 	text-decoration: none;
+	word-wrap: break-word;
 }
 
 #breadcrumbs li a:hover {
@@ -127,14 +109,6 @@ body.portal-popup:after, body.portal-popup:before {
 
 #breadcrumbs li.last a {
 	color: #5C85AD;
-}
-
-#breadcrumbs.control-panel-category {
-	top: 10px;
-}
-
-.panels-minimized #breadcrumbs {
-	left: 57px;
 }
 
 .lfr-panel-container {
@@ -221,7 +195,7 @@ body.portal-popup:after, body.portal-popup:before {
 
 #wrapper div.panel-page-body {
 	float: none;
-	padding: 44px 20px 0 260px;
+	padding: 15px 20px 0 260px;
 	width: auto;
 }
 
@@ -714,7 +688,7 @@ body.portal-popup:after, body.portal-popup:before {
 	}
 }
 
-/*----- Extras -----*/
+/* ---------- Extras ---------- */
 
 input[type="text"], input[type="password"], select, textarea, .textarea, .aui-tagselector-content .aui-textboxlistentry-holder {
 	@include box-shadow(0 1px 0 #FFF, 0 1px 2px #CCC inset);
@@ -785,4 +759,91 @@ input[type="text"], input[type="password"], select, textarea, .textarea, #breadc
 .panel-page-menu .lfr-panel-content ul li.selected-portlet a {
 	@include filter-gradient(#427EAD, #154B75);
 	@include background-image(linear-gradient(#427EAD, #154B75));
+}
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	body {
+		background-color: #EEF0F2;
+		background-image: url(../images/custom/sidebar_bg_rtl.png);
+		background-position: right;
+
+		&.portal-popup {
+			&:after, &:before {
+				background-image: none;
+			}
+		}
+	}
+
+	#breadcrumbs li {
+		background-image: url(../images/custom/breadcrumb_item_bg_rtl.png);
+		background-position: left;
+		float: right;
+		padding-left: 20px;
+		padding-right: 15px;
+
+		&.first a {
+			background-position: right;
+			padding-left: 0;
+			padding-right: 21px;
+			float: right;
+		}
+	}
+
+	#wrapper div.panel-page-body {
+		float: right;
+		padding-left: 0;
+		padding-right: 20px;
+		width: 75%;
+	}
+
+	.panel-page-menu {
+		#panel-manage-content .lfr-panel-title {
+			padding-right: 0;
+		}
+		
+		.lfr-panel-content ul li a .icon {
+			float: right;
+			padding-left: 4px;
+			padding-right: 0;
+		}
+
+		.lfr-panel-titlebar .lfr-panel-title {
+			padding-right: 20px;
+		}
+
+		#panel-manage-my .lfr-panel-title {
+			background-position: right 3px;
+		}
+
+		#panel-manage-marketplace .lfr-panel-title {
+			background-position: right -72px;
+		}
+
+		#panel-manage-portal .lfr-panel-title {
+			background-position: right -36px;
+		}
+
+		#panel-manage-server .lfr-panel-title {
+			background-position: right -55px;
+		}
+
+		#panel-manage-content .lfr-panel-title span a {
+			padding-left: 20px;
+			padding-right: 2px;
+		}
+	}
+
+	.panel-page-application .lfr-panel .lfr-panel-titlebar {
+		background-position: 100% 0;
+		padding-left: 2px;
+		padding-right: 20px;
+
+		.lfr-panel-button {
+			background-position: right;
+			padding-left: 2px;
+			padding-right: 5px;
+		}
+	}
 }

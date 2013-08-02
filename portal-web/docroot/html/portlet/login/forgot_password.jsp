@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -116,7 +116,7 @@ if (reminderAttempts == null) {
 						<%= LanguageUtil.format(pageContext, "a-new-password-will-be-sent-to-x-if-you-can-correctly-answer-the-following-question", login) %>
 					</div>
 
-					<aui:input label="<%= user2.getReminderQueryQuestion() %>" name="answer" type="text" />
+					<aui:input label="<%= HtmlUtil.escape(user2.getReminderQueryQuestion()) %>" name="answer" type="text" />
 				</c:if>
 
 				<c:choose>

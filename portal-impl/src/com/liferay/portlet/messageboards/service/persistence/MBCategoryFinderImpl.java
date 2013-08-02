@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,6 +54,7 @@ public class MBCategoryFinderImpl
 	public static final String FIND_BY_S_G_U_P =
 		MBCategoryFinder.class.getName() + ".findByS_G_U_P";
 
+	@Override
 	public int countByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds)
 		throws SystemException {
@@ -61,6 +62,7 @@ public class MBCategoryFinderImpl
 		return doCountByS_G_U_P(groupId, userId, parentCategoryIds, false);
 	}
 
+	@Override
 	public int filterCountByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds)
 		throws SystemException {
@@ -68,6 +70,7 @@ public class MBCategoryFinderImpl
 		return doCountByS_G_U_P(groupId, userId, parentCategoryIds, true);
 	}
 
+	@Override
 	public List<MBCategory> filterFindByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds, int start,
 			int end)
@@ -77,9 +80,10 @@ public class MBCategoryFinderImpl
 			groupId, userId, parentCategoryIds, start, end, true);
 	}
 
+	@Override
 	public List<MBCategory> findByS_G_U_P(
 			long groupId, long userId, long[] parentCategoryIds, int start,
-		int end)
+			int end)
 		throws SystemException {
 
 		return doFindByS_G_U_P(

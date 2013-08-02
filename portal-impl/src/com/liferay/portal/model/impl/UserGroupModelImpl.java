@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -144,7 +144,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			{ "userGroupId", Types.BIGINT },
 			{ "teamId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_SQL_CREATE = "create table UserGroups_Teams (userGroupId LONG not null,teamId LONG not null,primary key (userGroupId, teamId))";
+	public static final String MAPPING_TABLE_USERGROUPS_TEAMS_SQL_CREATE = "create table UserGroups_Teams (teamId LONG not null,userGroupId LONG not null,primary key (teamId, userGroupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERGROUPS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.UserGroups_Teams"), true);
 	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = "Users_UserGroups";
@@ -152,7 +152,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 			{ "userGroupId", Types.BIGINT },
 			{ "userId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userGroupId LONG not null,userId LONG not null,primary key (userGroupId, userId))";
+	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userId LONG not null,userGroupId LONG not null,primary key (userId, userGroupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_UserGroups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -359,13 +359,16 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 	@Override
 	public UserGroup toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (UserGroup)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (UserGroup)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public UserGroup toUnescapedModel() {
+		return (UserGroup)this;
 	}
 
 	@Override
@@ -398,18 +401,15 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroup)) {
 			return false;
 		}
 
-		UserGroup userGroup = null;
-
-		try {
-			userGroup = (UserGroup)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserGroup userGroup = (UserGroup)obj;
 
 		long primaryKey = userGroup.getPrimaryKey();
 
@@ -533,7 +533,7 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	}
 
 	private static ClassLoader _classLoader = UserGroup.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			UserGroup.class
 		};
 	private long _userGroupId;
@@ -548,5 +548,5 @@ public class UserGroupModelImpl extends BaseModelImpl<UserGroup>
 	private String _description;
 	private boolean _addedByLDAPImport;
 	private long _columnBitmask;
-	private UserGroup _escapedModelProxy;
+	private UserGroup _escapedModel;
 }

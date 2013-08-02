@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -603,6 +603,133 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the d d m structures where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @return the matching d d m structures
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_C(
+		long companyId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the d d m structures where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
+	* @return the range of matching d d m structures
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_C(
+		long companyId, long classNameId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the d d m structures where companyId = &#63; and classNameId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching d d m structures
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> findByC_C(
+		long companyId, long classNameId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first d d m structure in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d m structure
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure findByC_C_First(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
+
+	/**
+	* Returns the first d d m structure in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchByC_C_First(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last d d m structure in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d m structure
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a matching d d m structure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure findByC_C_Last(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
+
+	/**
+	* Returns the last d d m structure in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching d d m structure, or <code>null</code> if a matching d d m structure could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure fetchByC_C_Last(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the d d m structures before and after the current d d m structure in the ordered set where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param structureId the primary key of the current d d m structure
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next d d m structure
+	* @throws com.liferay.portlet.dynamicdatamapping.NoSuchStructureException if a d d m structure with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructure[] findByC_C_PrevAndNext(
+		long structureId, long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
+
+	/**
 	* Returns all the d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* @param groupId the group ID
@@ -911,6 +1038,16 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 			com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 
 	/**
+	* Removes all the d d m structures where companyId = &#63; and classNameId = &#63; from the database.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByC_C(long companyId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Removes all the d d m structures where groupId = &#63; and name = &#63; and description = &#63; from the database.
 	*
 	* @param groupId the group ID
@@ -993,6 +1130,17 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the number of d d m structures where companyId = &#63; and classNameId = &#63;.
+	*
+	* @param companyId the company ID
+	* @param classNameId the class name ID
+	* @return the number of matching d d m structures
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByC_C(long companyId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the number of d d m structures where groupId = &#63; and name = &#63; and description = &#63;.
 	*
 	* @param groupId the group ID
@@ -1025,5 +1173,196 @@ public interface DDMStructurePersistence extends BasePersistence<DDMStructure> {
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countAll()
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the document library file entry types associated with the d d m structure.
+	*
+	* @param pk the primary key of the d d m structure
+	* @return the document library file entry types associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
+		long pk) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the document library file entry types associated with the d d m structure.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the d d m structure
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
+	* @return the range of document library file entry types associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
+		long pk, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the document library file entry types associated with the d d m structure.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param pk the primary key of the d d m structure
+	* @param start the lower bound of the range of d d m structures
+	* @param end the upper bound of the range of d d m structures (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of document library file entry types associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> getDLFileEntryTypes(
+		long pk, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of document library file entry types associated with the d d m structure.
+	*
+	* @param pk the primary key of the d d m structure
+	* @return the number of document library file entry types associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public int getDLFileEntryTypesSize(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns <code>true</code> if the document library file entry type is associated with the d d m structure.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePK the primary key of the document library file entry type
+	* @return <code>true</code> if the document library file entry type is associated with the d d m structure; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsDLFileEntryType(long pk, long dlFileEntryTypePK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns <code>true</code> if the d d m structure has any document library file entry types associated with it.
+	*
+	* @param pk the primary key of the d d m structure to check for associations with document library file entry types
+	* @return <code>true</code> if the d d m structure has any document library file entry types associated with it; <code>false</code> otherwise
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean containsDLFileEntryTypes(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the d d m structure and the document library file entry type. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePK the primary key of the document library file entry type
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryType(long pk, long dlFileEntryTypePK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the d d m structure and the document library file entry type. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryType the document library file entry type
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryType(long pk,
+		com.liferay.portlet.documentlibrary.model.DLFileEntryType dlFileEntryType)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the d d m structure and the document library file entry types. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePKs the primary keys of the document library file entry types
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Adds an association between the d d m structure and the document library file entry types. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypes the document library file entry types
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypes(long pk,
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Clears all associations between the d d m structure and its document library file entry types. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure to clear the associated document library file entry types from
+	* @throws SystemException if a system exception occurred
+	*/
+	public void clearDLFileEntryTypes(long pk)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the d d m structure and the document library file entry type. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePK the primary key of the document library file entry type
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeDLFileEntryType(long pk, long dlFileEntryTypePK)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the d d m structure and the document library file entry type. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryType the document library file entry type
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeDLFileEntryType(long pk,
+		com.liferay.portlet.documentlibrary.model.DLFileEntryType dlFileEntryType)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the d d m structure and the document library file entry types. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePKs the primary keys of the document library file entry types
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes the association between the d d m structure and the document library file entry types. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypes the document library file entry types
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeDLFileEntryTypes(long pk,
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the document library file entry types associated with the d d m structure, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypePKs the primary keys of the document library file entry types to be associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Sets the document library file entry types associated with the d d m structure, removing and adding associations as necessary. Also notifies the appropriate model listeners and clears the mapping table finder cache.
+	*
+	* @param pk the primary key of the d d m structure
+	* @param dlFileEntryTypes the document library file entry types to be associated with the d d m structure
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setDLFileEntryTypes(long pk,
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryType> dlFileEntryTypes)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

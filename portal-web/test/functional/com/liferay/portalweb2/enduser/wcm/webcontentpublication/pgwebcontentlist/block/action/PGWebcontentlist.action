@@ -1,0 +1,10 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="OPTIONS_MENULIST_CONFIGURATION">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="WEB_CONTENT_TABLE_TITLE_1">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

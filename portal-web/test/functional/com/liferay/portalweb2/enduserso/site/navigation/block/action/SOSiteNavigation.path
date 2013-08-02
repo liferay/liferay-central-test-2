@@ -1,0 +1,64 @@
+<html>
+<head>
+<title>SOSiteNavigation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SOSiteNavigation</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>SOSiteNavigation</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_NAME</td>
+	<td>//div[@class='community-title']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_HOME</td>
+	<td>//nav/ul/li[contains(.,'Home')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_CALENDAR</td>
+	<td>//nav/ul/li[contains(.,'Calendar')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_DOCUMENTS</td>
+	<td>//nav/ul/li[contains(.,'Documents')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_FORUMS</td>
+	<td>//nav/ul/li[contains(.,'Forums')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_BLOGS</td>
+	<td>//nav/ul/li[contains(.,'Blogs')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_WIKI</td>
+	<td>//nav/ul/li[contains(.,'Wiki')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_MEMBERS</td>
+	<td>//nav/ul/li[contains(.,'Members')]/a/span</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

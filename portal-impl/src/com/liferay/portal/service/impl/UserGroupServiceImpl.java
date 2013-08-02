@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,6 +46,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         assign group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
@@ -65,6 +66,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         assign team members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addTeamUserGroups(long teamId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
@@ -89,6 +91,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         the user did not have permission to add the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup addUserGroup(String name, String description)
 		throws PortalException, SystemException {
 
@@ -110,6 +113,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         group, or if the user group had a workflow in approved status
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
@@ -129,6 +133,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup getUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 
@@ -147,6 +152,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         or if the user did not have permission to view the user group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup getUserGroup(String name)
 		throws PortalException, SystemException {
 
@@ -168,8 +174,11 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *
 	 * @param  userId the primary key of the user
 	 * @return the user groups to which the user belongs
+	 * @throws PortalException if the current user did not have permission to
+	 *         view the user or any one of the user group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<UserGroup> getUserUserGroups(long userId)
 		throws PortalException, SystemException {
 
@@ -191,6 +200,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
@@ -209,6 +219,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         team members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetTeamUserGroups(long teamId, long[] userGroupIds)
 		throws PortalException, SystemException {
 
@@ -230,6 +241,7 @@ public class UserGroupServiceImpl extends UserGroupServiceBaseImpl {
 	 *         have permission to update the user group information
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public UserGroup updateUserGroup(
 			long userGroupId, String name, String description)
 		throws PortalException, SystemException {

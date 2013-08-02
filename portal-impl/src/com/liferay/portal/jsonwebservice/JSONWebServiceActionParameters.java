@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -289,9 +289,7 @@ public class JSONWebServiceActionParameters {
 			_serviceContext.setHeaders(serviceContext.getHeaders());
 		}
 
-		if (Validator.isNotNull(serviceContext.getLanguageId())) {
-			_serviceContext.setLanguageId(serviceContext.getLanguageId());
-		}
+		_serviceContext.setLanguageId(serviceContext.getLanguageId());
 
 		if (Validator.isNotNull(serviceContext.getLayoutFullURL())) {
 			_serviceContext.setLayoutFullURL(serviceContext.getLayoutFullURL());
@@ -359,6 +357,7 @@ public class JSONWebServiceActionParameters {
 
 	private Map<String, List<KeyValue<String, Object>>> _innerParameters;
 	private JSONRPCRequest _jsonRPCRequest;
+
 	private Map<String, Object> _parameters = new HashMap<String, Object>() {
 
 		@Override

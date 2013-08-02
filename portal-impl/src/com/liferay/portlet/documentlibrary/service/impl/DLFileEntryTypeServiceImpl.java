@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ import java.util.List;
  */
 public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 
+	@Override
 	public DLFileEntryType addFileEntryType(
 			long groupId, String name, String description,
 			long[] ddmStructureIds, ServiceContext serviceContext)
@@ -44,6 +45,7 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public void deleteFileEntryType(long fileEntryTypeId)
 		throws PortalException, SystemException {
 
@@ -53,6 +55,7 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 		dlFileEntryTypeLocalService.deleteFileEntryType(fileEntryTypeId);
 	}
 
+	@Override
 	public DLFileEntryType getFileEntryType(long fileEntryTypeId)
 		throws PortalException, SystemException {
 
@@ -62,16 +65,19 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 		return dlFileEntryTypeLocalService.getFileEntryType(fileEntryTypeId);
 	}
 
+	@Override
 	public List<DLFileEntryType> getFileEntryTypes(long[] groupIds)
 		throws SystemException {
 
 		return dlFileEntryTypePersistence.filterFindByGroupId(groupIds);
 	}
 
+	@Override
 	public int getFileEntryTypesCount(long[] groupIds) throws SystemException {
 		return dlFileEntryTypePersistence.filterCountByGroupId(groupIds);
 	}
 
+	@Override
 	public List<DLFileEntryType> search(
 			long companyId, long[] groupIds, String keywords,
 			boolean includeBasicFileEntryType, int start, int end,
@@ -83,6 +89,7 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 			end, orderByComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long[] groupIds, String keywords,
 			boolean includeBasicFileEntryType)
@@ -92,6 +99,7 @@ public class DLFileEntryTypeServiceImpl extends DLFileEntryTypeServiceBaseImpl {
 			companyId, groupIds, keywords, includeBasicFileEntryType);
 	}
 
+	@Override
 	public void updateFileEntryType(
 			long fileEntryTypeId, String name, String description,
 			long[] ddmStructureIds, ServiceContext serviceContext)

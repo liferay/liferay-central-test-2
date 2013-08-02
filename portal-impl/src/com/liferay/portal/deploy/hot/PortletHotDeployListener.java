@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletBag;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.search.Indexer;
@@ -81,7 +81,6 @@ import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 import com.liferay.util.bridges.php.PHPPortlet;
-import com.liferay.util.log4j.Log4JUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -113,6 +112,7 @@ import org.apache.portals.bridges.struts.StrutsPortlet;
  */
 public class PortletHotDeployListener extends BaseHotDeployListener {
 
+	@Override
 	public void invokeDeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -125,6 +125,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
+	@Override
 	public void invokeUndeploy(HotDeployEvent hotDeployEvent)
 		throws HotDeployException {
 
@@ -216,7 +217,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 			if ((schedulerEntries != null) && !schedulerEntries.isEmpty()) {
 				for (SchedulerEntry schedulerEntry : schedulerEntries) {
-					SchedulerEngineUtil.unschedule(
+					SchedulerEngineHelperUtil.unschedule(
 						schedulerEntry, StorageType.MEMORY_CLUSTERED);
 				}
 			}
@@ -298,10 +299,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			servletContextName, servletContext, xmls,
 			hotDeployEvent.getPluginPackage());
 
-		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
-
-		initLogger(classLoader);
-
 		boolean portletAppInitialized = false;
 
 		boolean phpPortlet = false;
@@ -309,7 +306,10 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		PortletBagFactory portletBagFactory = new PortletBagFactory();
 
+		ClassLoader classLoader = hotDeployEvent.getContextClassLoader();
+
 		portletBagFactory.setClassLoader(classLoader);
+
 		portletBagFactory.setServletContext(servletContext);
 		portletBagFactory.setWARFile(true);
 
@@ -532,11 +532,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 						" was unregistered");
 			}
 		}
-	}
-
-	protected void initLogger(ClassLoader classLoader) {
-		Log4JUtil.configureLog4J(
-			classLoader.getResource("META-INF/portal-log4j.xml"));
 	}
 
 	protected PortletBag initPortlet(

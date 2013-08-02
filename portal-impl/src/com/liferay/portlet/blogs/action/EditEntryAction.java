@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,9 +17,11 @@ package com.liferay.portlet.blogs.action;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -78,8 +80,9 @@ public class EditEntryAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -107,35 +110,35 @@ public class EditEntryAction extends PortletAction {
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
 			boolean updateRedirect = false;
 
-			if (redirect.contains("/blogs/" + oldUrlTitle + "/maximized")) {
-				oldUrlTitle += "/maximized";
-			}
+			if (Validator.isNotNull(oldUrlTitle)) {
+				String portletId = HttpUtil.getParameter(
+					redirect, "p_p_id", false);
 
-			if ((entry != null) && Validator.isNotNull(oldUrlTitle) &&
-				(redirect.endsWith("/blogs/" + oldUrlTitle) ||
-				 redirect.contains("/blogs/" + oldUrlTitle + "?") ||
-				 redirect.contains("/blog/" + oldUrlTitle + "?"))) {
+				String oldRedirectParam =
+					PortalUtil.getPortletNamespace(portletId) + "redirect";
 
-				int pos = redirect.indexOf("?");
+				String oldRedirect = HttpUtil.getParameter(
+					redirect, oldRedirectParam, false);
 
-				if (pos == -1) {
-					pos = redirect.length();
+				if (Validator.isNotNull(oldRedirect)) {
+					String newRedirect = HttpUtil.decodeURL(oldRedirect);
+
+					newRedirect = StringUtil.replace(
+						newRedirect, oldUrlTitle, entry.getUrlTitle());
+					newRedirect = StringUtil.replace(
+						newRedirect, oldRedirectParam, "redirect");
+
+					redirect = StringUtil.replace(
+						redirect, oldRedirect, newRedirect);
+				}
+				else if (redirect.endsWith("/blogs/" + oldUrlTitle) ||
+						 redirect.contains("/blogs/" + oldUrlTitle + "?") ||
+						 redirect.contains("/blog/" + oldUrlTitle + "?")) {
+
+					redirect = StringUtil.replace(
+						redirect, oldUrlTitle, entry.getUrlTitle());
 				}
 
-				String newRedirect = redirect.substring(
-					0, pos - oldUrlTitle.length());
-
-				newRedirect += entry.getUrlTitle();
-
-				if (oldUrlTitle.indexOf("/maximized") != -1) {
-					newRedirect += "/maximized";
-				}
-
-				if (pos < redirect.length()) {
-					newRedirect += "?" + redirect.substring(pos + 1);
-				}
-
-				redirect = newRedirect;
 				updateRedirect = true;
 			}
 
@@ -192,7 +195,8 @@ public class EditEntryAction extends PortletAction {
 					 e instanceof EntryDisplayDateException ||
 					 e instanceof EntrySmallImageNameException ||
 					 e instanceof EntrySmallImageSizeException ||
-					 e instanceof EntryTitleException) {
+					 e instanceof EntryTitleException ||
+					 e instanceof SanitizerException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
@@ -202,15 +206,23 @@ public class EditEntryAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -237,14 +249,14 @@ public class EditEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.blogs.error");
+				return actionMapping.findForward("portlet.blogs.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.blogs.edit_entry"));
 	}
 
@@ -280,8 +292,6 @@ public class EditEntryAction extends PortletAction {
 			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(actionRequest.getWindowState());
-
 		String portletName = portletConfig.getPortletName();
 
 		if (portletName.equals(PortletKeys.BLOGS_ADMIN)) {
@@ -299,6 +309,7 @@ public class EditEntryAction extends PortletAction {
 		portletURL.setParameter(
 			"entryId", String.valueOf(entry.getEntryId()), false);
 		portletURL.setParameter("preview", String.valueOf(preview), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}

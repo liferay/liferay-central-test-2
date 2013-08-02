@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.webdav.WebDAVUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.sharepoint.methods.Method;
 import com.liferay.portal.sharepoint.methods.MethodFactory;
@@ -80,18 +81,17 @@ public class SharepointServlet extends HttpServlet {
 					throw new SharepointException("Unabled to get root path");
 				}
 
-				int pos = rootPath.lastIndexOf("sharepoint/");
-
-				if (pos != -1) {
-					rootPath = rootPath.substring(pos + 11);
-				}
-
 				// LPS-12922
 
-				pos = rootPath.lastIndexOf("webdav/");
+				if (_log.isInfoEnabled()) {
+					_log.info("Original root path " + rootPath);
+				}
 
-				if (pos != -1) {
-					rootPath = rootPath.substring(pos + 7);
+				rootPath = WebDAVUtil.stripOfficeExtension(rootPath);
+				rootPath = SharepointUtil.stripService(rootPath, true);
+
+				if (_log.isInfoEnabled()) {
+					_log.info("Modified root path " + rootPath);
 				}
 
 				sharepointRequest.setRootPath(rootPath);

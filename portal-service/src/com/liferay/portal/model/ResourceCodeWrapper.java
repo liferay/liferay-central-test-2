@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -226,6 +228,10 @@ public class ResourceCodeWrapper implements ResourceCode,
 		return new ResourceCodeWrapper(_resourceCode.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ResourceCode toUnescapedModel() {
+		return new ResourceCodeWrapper(_resourceCode.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _resourceCode.toString();
@@ -238,6 +244,25 @@ public class ResourceCodeWrapper implements ResourceCode,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_resourceCode.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceCodeWrapper)) {
+			return false;
+		}
+
+		ResourceCodeWrapper resourceCodeWrapper = (ResourceCodeWrapper)obj;
+
+		if (Validator.equals(_resourceCode, resourceCodeWrapper._resourceCode)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

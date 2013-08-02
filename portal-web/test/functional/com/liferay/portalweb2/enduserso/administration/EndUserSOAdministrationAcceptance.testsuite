@@ -1,0 +1,5 @@
+<definition>
+	<execute test-case="SocialOfficeSmoke" />
+
+	<execute test-case="SOUsersAcceptance" />
+</definition>

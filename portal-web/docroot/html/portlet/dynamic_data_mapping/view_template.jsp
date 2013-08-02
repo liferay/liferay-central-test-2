@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,8 +19,6 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "templates");
 
-String backURL = ParamUtil.getString(request, "backURL");
-
 long structureId = ParamUtil.getLong(request, "structureId");
 
 DDMStructure structure = null;
@@ -33,20 +31,22 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/dynamic_data_mapping/view_template");
 portletURL.setParameter("tabs1", tabs1);
-portletURL.setParameter("backURL", backURL);
 portletURL.setParameter("structureId", String.valueOf(structureId));
 %>
 
 <c:if test="<%= (structure != null) %>">
+	<portlet:renderURL var="viewRecordsURL">
+		<portlet:param name="struts_action" value="/dynamic_data_mapping/view" />
+	</portlet:renderURL>
+
 	<liferay-ui:header
-		backURL="<%= backURL %>"
+		backURL="<%= viewRecordsURL %>"
 		title='<%= LanguageUtil.format(pageContext, (Validator.isNull(templateHeaderTitle) ? "templates-for-structure-x" : templateHeaderTitle), structure.getName(locale), false) %>'
 	/>
 </c:if>
 
 <liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
 	<liferay-util:param name="structureId" value="<%= String.valueOf(structureId) %>" />
-	<liferay-util:param name="backURL" value="<%= backURL %>" />
 </liferay-util:include>
 
 <aui:form action="<%= portletURL.toString() %>" method="post" name="fm">

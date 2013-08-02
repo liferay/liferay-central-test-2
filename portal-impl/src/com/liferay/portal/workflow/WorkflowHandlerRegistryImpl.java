@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portal.workflow;
 
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistry;
@@ -26,20 +27,25 @@ import java.util.TreeMap;
  * @author Bruno Farache
  * @author Marcellus Tavares
  */
+@DoPrivileged
 public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 
+	@Override
 	public List<WorkflowHandler> getScopeableWorkflowHandlers() {
 		return ListUtil.fromMapValues(_scopeableWorkflowHandlerMap);
 	}
 
+	@Override
 	public WorkflowHandler getWorkflowHandler(String className) {
 		return _workflowHandlerMap.get(className);
 	}
 
+	@Override
 	public List<WorkflowHandler> getWorkflowHandlers() {
 		return ListUtil.fromMapValues(_workflowHandlerMap);
 	}
 
+	@Override
 	public void register(WorkflowHandler workflowHandler) {
 		synchronized (this) {
 			_workflowHandlerMap.put(
@@ -52,6 +58,7 @@ public class WorkflowHandlerRegistryImpl implements WorkflowHandlerRegistry {
 		}
 	}
 
+	@Override
 	public void unregister(WorkflowHandler workflowHandler) {
 		synchronized (this) {
 			_workflowHandlerMap.remove(workflowHandler.getClassName());

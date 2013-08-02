@@ -1,0 +1,44 @@
+<html>
+<head>
+<title>SOProfileNavigation</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SOProfileNavigation</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>SOProfileNavigation</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_PROFILE</td>
+	<td>//nav/ul/li[contains(.,'Profile')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_CONTACTS</td>
+	<td>//nav/ul/li[contains(.,'Contacts')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_MICROBLOGS</td>
+	<td>//nav/ul/li[contains(.,'Microblogs')]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

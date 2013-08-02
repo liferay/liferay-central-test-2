@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -203,6 +205,10 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission,
 		return new OrgGroupPermissionWrapper(_orgGroupPermission.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.OrgGroupPermission toUnescapedModel() {
+		return new OrgGroupPermissionWrapper(_orgGroupPermission.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _orgGroupPermission.toString();
@@ -220,6 +226,26 @@ public class OrgGroupPermissionWrapper implements OrgGroupPermission,
 	public boolean containsOrganization(
 		java.util.List<com.liferay.portal.model.Organization> organizations) {
 		return _orgGroupPermission.containsOrganization(organizations);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgGroupPermissionWrapper)) {
+			return false;
+		}
+
+		OrgGroupPermissionWrapper orgGroupPermissionWrapper = (OrgGroupPermissionWrapper)obj;
+
+		if (Validator.equals(_orgGroupPermission,
+					orgGroupPermissionWrapper._orgGroupPermission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

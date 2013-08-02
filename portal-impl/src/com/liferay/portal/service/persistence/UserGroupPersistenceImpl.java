@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -228,13 +228,60 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(UserGroup userGroup) {
+		if (userGroup.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(userGroup.getCompanyId()),
+					
+					userGroup.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args, userGroup);
+		}
+		else {
+			UserGroupModelImpl userGroupModelImpl = (UserGroupModelImpl)userGroup;
+
+			if ((userGroupModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(userGroup.getCompanyId()),
+						
+						userGroup.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N, args,
+					userGroup);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(UserGroup userGroup) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N,
-			new Object[] {
+		UserGroupModelImpl userGroupModelImpl = (UserGroupModelImpl)userGroup;
+
+		Object[] args = new Object[] {
 				Long.valueOf(userGroup.getCompanyId()),
 				
-			userGroup.getName()
-			});
+				userGroup.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+
+		if ((userGroupModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(userGroupModelImpl.getOriginalCompanyId()),
+					
+					userGroupModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
+		}
 	}
 
 	/**
@@ -438,35 +485,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		EntityCacheUtil.putResult(UserGroupModelImpl.ENTITY_CACHE_ENABLED,
 			UserGroupImpl.class, userGroup.getPrimaryKey(), userGroup);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-				new Object[] {
-					Long.valueOf(userGroup.getCompanyId()),
-					
-				userGroup.getName()
-				}, userGroup);
-		}
-		else {
-			if ((userGroupModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(userGroupModelImpl.getOriginalCompanyId()),
-						
-						userGroupModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_N,
-					new Object[] {
-						Long.valueOf(userGroup.getCompanyId()),
-						
-					userGroup.getName()
-					}, userGroup);
-			}
-		}
+		clearUniqueFindersCache(userGroup);
+		cacheUniqueFindersCache(userGroup);
 
 		return userGroup;
 	}
@@ -4092,8 +4112,10 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 				List<ModelListener<UserGroup>> listenersList = new ArrayList<ModelListener<UserGroup>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<UserGroup>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

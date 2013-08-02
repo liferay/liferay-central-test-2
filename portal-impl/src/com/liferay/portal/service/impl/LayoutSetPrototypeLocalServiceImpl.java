@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import java.util.Map;
 public class LayoutSetPrototypeLocalServiceImpl
 	extends LayoutSetPrototypeLocalServiceBaseImpl {
 
+	@Override
 	public LayoutSetPrototype addLayoutSetPrototype(
 			long userId, long companyId, Map<Locale, String> nameMap,
 			String description, boolean active, boolean layoutsUpdateable,
@@ -149,12 +150,21 @@ public class LayoutSetPrototypeLocalServiceImpl
 		return deleteLayoutSetPrototype(layoutSetPrototype);
 	}
 
+	@Override
 	public LayoutSetPrototype getLayoutSetPrototypeByUuid(String uuid)
 		throws PortalException, SystemException {
 
 		return layoutSetPrototypePersistence.findByUuid_First(uuid, null);
 	}
 
+	@Override
+	public List<LayoutSetPrototype> getLayoutSetPrototypes(long companyId)
+		throws SystemException {
+
+		return layoutSetPrototypePersistence.findByCompanyId(companyId);
+	}
+
+	@Override
 	public List<LayoutSetPrototype> search(
 			long companyId, Boolean active, int start, int end,
 			OrderByComparator obc)
@@ -170,6 +180,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int searchCount(long companyId, Boolean active)
 		throws SystemException {
 
@@ -181,6 +192,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		}
 	}
 
+	@Override
 	public LayoutSetPrototype updateLayoutSetPrototype(
 			long layoutSetPrototypeId, Map<Locale, String> nameMap,
 			String description, boolean active, boolean layoutsUpdateable,
@@ -221,6 +233,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 		return layoutSetPrototype;
 	}
 
+	@Override
 	public LayoutSetPrototype updateLayoutSetPrototype(
 			long layoutSetPrototypeId, String settings)
 		throws PortalException, SystemException {

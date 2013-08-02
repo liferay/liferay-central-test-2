@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,10 +16,10 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.servlet.DirectServletRegistry;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -38,12 +38,15 @@ import javax.servlet.ServletContext;
 /**
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class DirectServletRegistryImpl implements DirectServletRegistry {
 
+	@Override
 	public void clearServlets() {
 		_servletInfos.clear();
 	}
 
+	@Override
 	public Servlet getServlet(String path) {
 		ServletInfo servletInfo = _servletInfos.get(path);
 
@@ -75,6 +78,7 @@ public class DirectServletRegistryImpl implements DirectServletRegistry {
 		return servlet;
 	}
 
+	@Override
 	public void putServlet(String path, Servlet servlet) {
 		if (_servletInfos.containsKey(path)) {
 			return;
@@ -115,11 +119,7 @@ public class DirectServletRegistryImpl implements DirectServletRegistry {
 			return servlet;
 		}
 
-		boolean enabled = PortalSecurityManagerThreadLocal.isEnabled();
-
 		try {
-			PortalSecurityManagerThreadLocal.setEnabled(false);
-
 			Method method = ReflectionUtil.getDeclaredMethod(
 				servlet.getClass(), "getDependants");
 
@@ -186,9 +186,6 @@ public class DirectServletRegistryImpl implements DirectServletRegistry {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-		finally {
-			PortalSecurityManagerThreadLocal.setEnabled(enabled);
 		}
 
 		return servlet;

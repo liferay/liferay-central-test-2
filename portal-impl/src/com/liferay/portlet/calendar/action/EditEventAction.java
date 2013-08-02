@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -42,6 +43,7 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.CalEventConstants;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
 import java.util.ArrayList;
@@ -68,8 +70,9 @@ public class EditEventAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -107,7 +110,8 @@ public class EditEventAction extends PortletAction {
 			else if (e instanceof EventDurationException ||
 					 e instanceof EventEndDateException ||
 					 e instanceof EventStartDateException ||
-					 e instanceof EventTitleException) {
+					 e instanceof EventTitleException ||
+					 e instanceof SanitizerException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
@@ -117,15 +121,23 @@ public class EditEventAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -137,14 +149,14 @@ public class EditEventAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.calendar.error");
+				return actionMapping.findForward("portlet.calendar.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.calendar.edit_event"));
 	}
 
@@ -189,8 +201,17 @@ public class EditEventAction extends PortletAction {
 		int durationMinute = ParamUtil.getInteger(
 			actionRequest, "durationMinute");
 		boolean allDay = ParamUtil.getBoolean(actionRequest, "allDay");
-		boolean timeZoneSensitive = ParamUtil.getBoolean(
-			actionRequest, "timeZoneSensitive");
+
+		boolean timeZoneSensitive = false;
+
+		if (allDay) {
+			timeZoneSensitive = false;
+		}
+		else {
+			timeZoneSensitive = ParamUtil.getBoolean(
+				actionRequest, "timeZoneSensitive");
+		}
+
 		String type = ParamUtil.getString(actionRequest, "type");
 
 		int endDateMonth = ParamUtil.getInteger(actionRequest, "endDateMonth");
@@ -381,13 +402,13 @@ public class EditEventAction extends PortletAction {
 			int endDateType = ParamUtil.getInteger(
 				actionRequest, "endDateType");
 
-			if (endDateType == 1) {
+			if (endDateType == CalEventConstants.END_DATE_TYPE_END_AFTER) {
 				int endDateOccurrence = ParamUtil.getInteger(
 					actionRequest, "endDateOccurrence");
 
 				recurrence.setOccurrence(endDateOccurrence);
 			}
-			else if (endDateType == 2) {
+			else if (endDateType == CalEventConstants.END_DATE_TYPE_END_BY) {
 				Calendar endDate = CalendarFactoryUtil.getCalendar(timeZone);
 
 				endDate.set(Calendar.MONTH, endDateMonth);
@@ -429,10 +450,10 @@ public class EditEventAction extends PortletAction {
 
 			CalEvent event = CalEventServiceUtil.addEvent(
 				title, description, location, startDateMonth, startDateDay,
-				startDateYear, startDateHour, startDateMinute, endDateMonth,
-				endDateDay, endDateYear, durationHour, durationMinute, allDay,
-				timeZoneSensitive, type, repeating, recurrence, remindBy,
-				firstReminder, secondReminder, serviceContext);
+				startDateYear, startDateHour, startDateMinute, durationHour,
+				durationMinute, allDay, timeZoneSensitive, type, repeating,
+				recurrence, remindBy, firstReminder, secondReminder,
+				serviceContext);
 
 			AssetPublisherUtil.addAndStoreSelection(
 				actionRequest, CalEvent.class.getName(), event.getEventId(),
@@ -445,9 +466,8 @@ public class EditEventAction extends PortletAction {
 			CalEventServiceUtil.updateEvent(
 				eventId, title, description, location, startDateMonth,
 				startDateDay, startDateYear, startDateHour, startDateMinute,
-				endDateMonth, endDateDay, endDateYear, durationHour,
-				durationMinute, allDay, timeZoneSensitive, type, repeating,
-				recurrence, remindBy, firstReminder, secondReminder,
+				durationHour, durationMinute, allDay, timeZoneSensitive, type,
+				repeating, recurrence, remindBy, firstReminder, secondReminder,
 				serviceContext);
 		}
 	}

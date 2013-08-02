@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -62,6 +62,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         assign group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -85,7 +86,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  name the organization's name
 	 * @param  type the organization's type
 	 * @param  recursable whether the permissions of the organization are to be
-	 *         inherited by its sub-organizations
+	 *         inherited by its suborganizations
 	 * @param  regionId the primary key of the organization's region
 	 * @param  countryId the primary key of the organization's country
 	 * @param  statusId the organization's workflow status
@@ -107,6 +108,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
@@ -171,7 +173,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  name the organization's name
 	 * @param  type the organization's type
 	 * @param  recursable whether the permissions of the organization are to be
-	 *         inherited by its sub-organizations
+	 *         inherited by its suborganizations
 	 * @param  regionId the primary key of the organization's region
 	 * @param  countryId the primary key of the organization's country
 	 * @param  statusId the organization's workflow status
@@ -187,6 +189,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         or if the user did not have permission to add the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization addOrganization(
 			long parentOrganizationId, String name, String type,
 			boolean recursable, long regionId, long countryId, int statusId,
@@ -219,6 +222,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         password policy
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
@@ -239,6 +243,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         the user did not have permission to update the organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteLogo(long organizationId)
 		throws PortalException, SystemException {
 
@@ -259,6 +264,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         status, or if the organization was a parent organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
@@ -278,6 +284,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @throws     SystemException if a system exception occurred
 	 * @deprecated Replaced by {@link #getOrganizations(long, long, int, int)}
 	 */
+	@Override
 	public List<Organization> getManageableOrganizations(
 			String actionId, int max)
 		throws PortalException, SystemException {
@@ -333,6 +340,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
@@ -349,8 +357,11 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  name the organization's name
 	 * @return the primary key of the organization with the name, or
 	 *         <code>0</code> if the organization could not be found
+	 * @throws PortalException if the user did not have permission to view the
+	 *         organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public long getOrganizationId(long companyId, String name)
 		throws PortalException, SystemException {
 
@@ -372,6 +383,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @return the organizations belonging to the parent organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Organization> getOrganizations(
 			long companyId, long parentOrganizationId)
 		throws SystemException {
@@ -403,6 +415,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @return the range of organizations belonging to the parent organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Organization> getOrganizations(
 			long companyId, long parentOrganizationId, int start, int end)
 		throws SystemException {
@@ -420,6 +433,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @return the number of organizations belonging to the parent organization
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getOrganizationsCount(long companyId, long parentOrganizationId)
 		throws SystemException {
 
@@ -435,6 +449,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Organization> getUserOrganizations(long userId)
 		throws PortalException, SystemException {
 
@@ -455,6 +470,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         assign group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -475,6 +491,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         assign group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetGroupOrganizations(long groupId, long[] organizationIds)
 		throws PortalException, SystemException {
 
@@ -495,6 +512,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         permission to update the password policy
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetPasswordPolicyOrganizations(
 			long passwordPolicyId, long[] organizationIds)
 		throws PortalException, SystemException {
@@ -515,7 +533,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  name the organization's name
 	 * @param  type the organization's type
 	 * @param  recursable whether the permissions of the organization are to be
-	 *         inherited by its sub-organizations
+	 *         inherited by its suborganizations
 	 * @param  regionId the primary key of the organization's region
 	 * @param  countryId the primary key of the organization's country
 	 * @param  statusId the organization's workflow status
@@ -538,6 +556,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         information was invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,
@@ -591,7 +610,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 * @param  name the organization's name
 	 * @param  type the organization's type
 	 * @param  recursable whether permissions of the organization are to be
-	 *         inherited by its sub-organizations
+	 *         inherited by its suborganizations
 	 * @param  regionId the primary key of the organization's region
 	 * @param  countryId the primary key of the organization's country
 	 * @param  statusId the organization's workflow status
@@ -609,6 +628,7 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	 *         was invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Organization updateOrganization(
 			long organizationId, long parentOrganizationId, String name,
 			String type, boolean recursable, long regionId, long countryId,

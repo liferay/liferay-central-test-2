@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
@@ -49,6 +50,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 public class SCProductVersionLocalServiceImpl
 	extends SCProductVersionLocalServiceBaseImpl {
 
+	@Override
 	public SCProductVersion addProductVersion(
 			long userId, long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
@@ -108,6 +110,7 @@ public class SCProductVersionLocalServiceImpl
 		return productVersion;
 	}
 
+	@Override
 	public void deleteProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 
@@ -117,12 +120,14 @@ public class SCProductVersionLocalServiceImpl
 		deleteProductVersion(productVersion);
 	}
 
+	@Override
 	public void deleteProductVersion(SCProductVersion productVersion)
 		throws SystemException {
 
 		scProductVersionPersistence.remove(productVersion);
 	}
 
+	@Override
 	public void deleteProductVersions(long productEntryId)
 		throws SystemException {
 
@@ -134,12 +139,14 @@ public class SCProductVersionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public SCProductVersion getProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 
 		return scProductVersionPersistence.findByPrimaryKey(productVersionId);
 	}
 
+	@Override
 	public SCProductVersion getProductVersionByDirectDownloadURL(
 			String directDownloadURL)
 		throws PortalException, SystemException {
@@ -148,6 +155,7 @@ public class SCProductVersionLocalServiceImpl
 			directDownloadURL);
 	}
 
+	@Override
 	public List<SCProductVersion> getProductVersions(
 			long productEntryId, int start, int end)
 		throws SystemException {
@@ -156,6 +164,7 @@ public class SCProductVersionLocalServiceImpl
 			productEntryId, start, end);
 	}
 
+	@Override
 	public int getProductVersionsCount(long productEntryId)
 		throws SystemException {
 
@@ -163,6 +172,7 @@ public class SCProductVersionLocalServiceImpl
 			productEntryId);
 	}
 
+	@Override
 	public SCProductVersion updateProductVersion(
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
@@ -220,7 +230,19 @@ public class SCProductVersionLocalServiceImpl
 		throws PortalException {
 
 		try {
-			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
+			HttpImpl httpImpl = null;
+
+			Object httpObject = HttpUtil.getHttp();
+
+			if (httpObject instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)httpObject;
+
+				httpImpl = (HttpImpl)doPrivilegedBean.getActualBean();
+			}
+			else {
+				httpImpl = (HttpImpl)httpObject;
+			}
 
 			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
 				directDownloadURL);

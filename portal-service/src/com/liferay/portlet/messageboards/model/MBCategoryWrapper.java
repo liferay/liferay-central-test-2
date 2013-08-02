@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -524,6 +525,10 @@ public class MBCategoryWrapper implements MBCategory, ModelWrapper<MBCategory> {
 		return new MBCategoryWrapper(_mbCategory.toEscapedModel());
 	}
 
+	public com.liferay.portlet.messageboards.model.MBCategory toUnescapedModel() {
+		return new MBCategoryWrapper(_mbCategory.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _mbCategory.toString();
@@ -552,6 +557,25 @@ public class MBCategoryWrapper implements MBCategory, ModelWrapper<MBCategory> {
 
 	public boolean isRoot() {
 		return _mbCategory.isRoot();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBCategoryWrapper)) {
+			return false;
+		}
+
+		MBCategoryWrapper mbCategoryWrapper = (MBCategoryWrapper)obj;
+
+		if (Validator.equals(_mbCategory, mbCategoryWrapper._mbCategory)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

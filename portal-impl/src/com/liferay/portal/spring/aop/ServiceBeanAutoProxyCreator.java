@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,19 @@ import org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreat
 public class ServiceBeanAutoProxyCreator
 	extends AbstractAdvisorAutoProxyCreator {
 
+	public void afterPropertiesSet() {
+
+		// Backwards compatibility
+
+		if (_beanMatcher == null) {
+			_beanMatcher = new ServiceBeanMatcher();
+		}
+	}
+
+	public void setBeanMatcher(BeanMatcher beanMatcher) {
+		_beanMatcher = beanMatcher;
+	}
+
 	public void setMethodInterceptor(MethodInterceptor methodInterceptor) {
 		_methodInterceptor = methodInterceptor;
 	}
@@ -39,6 +52,7 @@ public class ServiceBeanAutoProxyCreator
 		proxyFactory.setAopProxyFactory(
 			new AopProxyFactory() {
 
+				@Override
 				public AopProxy createAopProxy(AdvisedSupport advisedSupport)
 					throws AopConfigException {
 
@@ -57,7 +71,7 @@ public class ServiceBeanAutoProxyCreator
 
 		Object[] advices = DO_NOT_PROXY;
 
-		if (beanName.endsWith(_SERVICE_SUFFIX)) {
+		if (_beanMatcher.match(beanClass, beanName)) {
 			advices = super.getAdvicesAndAdvisorsForBean(
 				beanClass, beanName, targetSource);
 
@@ -69,8 +83,7 @@ public class ServiceBeanAutoProxyCreator
 		return advices;
 	}
 
-	private static final String _SERVICE_SUFFIX = "Service";
-
+	private BeanMatcher _beanMatcher;
 	private MethodInterceptor _methodInterceptor;
 
 }

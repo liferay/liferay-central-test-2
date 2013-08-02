@@ -3,6 +3,8 @@ AUI.add(
 	function(A) {
 		var AArray = A.Array;
 
+		var DateMath = A.DataType.DateMath;
+
 		var Lang = A.Lang;
 
 		var DDL = Liferay.Service.DDL;
@@ -80,7 +82,7 @@ AUI.add(
 						);
 					},
 
-					_selectFileEntry: function(url, uuid, title, version) {
+					_selectFileEntry: function(url, uuid, groupId, title, version) {
 						var instance = this;
 
 						instance.selectedTitle = title;
@@ -90,9 +92,9 @@ AUI.add(
 							'value',
 							JSON.stringify(
 								{
-									groupId: themeDisplay.getScopeGroupId(),
-									uuid: uuid,
+									groupId: groupId,
 									title: title,
+									uuid: uuid,
 									version: version
 								}
 							)
@@ -290,7 +292,6 @@ AUI.add(
 							}
 						);
 
-						delete normalized.classPK;
 						delete normalized.displayIndex;
 						delete normalized.recordId;
 
@@ -317,8 +318,8 @@ AUI.add(
 
 								var fieldsMap = instance._normalizeRecordData(data);
 
-								if (data.classPK > 0) {
-									SpreadSheet.updateRecord(data.classPK, recordIndex, fieldsMap, true);
+								if (data.recordId > 0) {
+									SpreadSheet.updateRecord(data.recordId, recordIndex, fieldsMap, true);
 								}
 								else {
 									SpreadSheet.addRecord(
@@ -327,7 +328,7 @@ AUI.add(
 										fieldsMap,
 										function(json) {
 											if (json.recordId > 0) {
-												data.classPK = json.recordId;
+												data.recordId = json.recordId;
 											}
 										}
 									);
@@ -442,9 +443,11 @@ AUI.add(
 									var value = data[name];
 
 									if (value !== STR_EMPTY) {
-										value = parseInt(value, 10);
+										var date = new Date(Lang.toInt(value));
 
-										value = A.DataType.Date.format(new Date(value));
+										date = DateMath.add(value, DateMath.MINUTES, value.getTimezoneOffset());
+
+										value = A.DataType.Date.format(date);
 									}
 
 									return value;

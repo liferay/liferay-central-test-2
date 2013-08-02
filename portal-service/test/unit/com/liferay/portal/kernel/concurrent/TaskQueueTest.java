@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,11 +23,14 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class TaskQueueTest extends TestCase {
 
+	@Test
 	public void testConstructor() {
 		try {
 			new TaskQueue<Object>(0);
@@ -127,6 +130,7 @@ public class TaskQueueTest extends TestCase {
 		assertSame(object4, taskQueue.poll());
 	}
 
+	@Test
 	public void testIsEmpty() {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>();
 
@@ -256,6 +260,7 @@ public class TaskQueueTest extends TestCase {
 		assertFalse(hasWaiterMarker[0]);
 	}
 
+	@Test
 	public void testPoll() throws InterruptedException {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>();
 
@@ -306,6 +311,7 @@ public class TaskQueueTest extends TestCase {
 		assertSame(object1, taskQueue.poll(100, TimeUnit.MILLISECONDS));
 	}
 
+	@Test
 	public void testRemainingCapacity() {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
 
@@ -317,6 +323,7 @@ public class TaskQueueTest extends TestCase {
 		}
 	}
 
+	@Test
 	public void testRemove() {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
 
@@ -339,6 +346,7 @@ public class TaskQueueTest extends TestCase {
 		assertEquals(0, taskQueue.size());
 	}
 
+	@Test
 	public void testSize() {
 		TaskQueue<Object> taskQueue = new TaskQueue<Object>(10);
 

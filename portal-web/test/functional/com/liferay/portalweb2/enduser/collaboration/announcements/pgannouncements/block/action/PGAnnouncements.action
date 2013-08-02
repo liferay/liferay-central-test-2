@@ -1,0 +1,13 @@
+<definition>
+	<command name="assertClick">
+		<case comparator="startsWith" locator-key1="ENTRY_DELETE_">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="ENTRY_EDIT_">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="NAVIGATION_MANAGE_ENTRIES">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

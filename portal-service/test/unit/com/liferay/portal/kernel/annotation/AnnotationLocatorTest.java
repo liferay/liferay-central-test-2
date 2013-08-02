@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,16 +28,12 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import org.junit.Test;
+
 /**
- * <table>
- *	<tr>
- *		<th colspan = 3>
- * Test Classes Inherited Hierarchy
- *		</th>
- *	</tr>
- *	<tr valign="top">
- *		<td>
- *			<pre>
+ * <p><tr> <th colspan = 3> Test Classes Inherited Hierarchy </th> </tr> <tr
+ * valign="top"> <td>
+ * <pre>
  * &#64;Type(value = 5)
  * OriginClass {    -------->
  *   &#64;Method(value = 5)
@@ -45,49 +41,49 @@ import java.util.Queue;
  *   originMethod1()
  *   originMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Mix(value = 8)
  * OriginInterface2 {  -------->
  *   &#64;Method(value = 8)
  *   originMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Type(value = 9)
  * OriginInterface1 {
  *   &#64;Method(value = 9)
  *   &#64;Mix(value = 9)
  *   originMethod1()
  * }
- *			</pre>
- *		</td>
- *	</tr>
- *	<tr valign="top">
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>
+ * <pre>
  *   ^
  *   |
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  *   ^
  *   |
- *			</pre>
- *		</td>
- *	</tr>
- *	<tr valign="top">
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>
+ * <pre>
  * &#64;Mix(value = 2)
  * SuperClass {    -------->
  *   &#64;Method(value = 2)
@@ -96,10 +92,10 @@ import java.util.Queue;
  *   superMethod1()
  *   superMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Type(value = 6)
  * SuperInterface2 {  -------->
  *   &#64;Method(value = 6)
@@ -109,39 +105,39 @@ import java.util.Queue;
  *   &#64;Mix(value = 6)
  *   superMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Mix(value = 7)
  * SuperInterface1 {
- *   &#64;Method(value = 7)
- *   superMethod1()
+ * &#64;Method(value = 7)
+ * superMethod1()
  * }
- *			</pre>
- *		</td>
- *	</tr>
- *	<tr valign="top">
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>
+ * <pre>
  *   ^
  *   |
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  *   ^
  *   |
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
- *			</pre>
- *		</td>
- *	</tr>
- *	<tr valign="top">
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
+ * </pre>
+ * </td>
+ * </tr>
+ * <tr valign="top">
+ * <td>
+ * <pre>
  * &#64;Type(value = 1)
  * TestClass {    -------->
  * &#64;Method(value = 1)
@@ -156,10 +152,10 @@ import java.util.Queue;
  *   testMethod1()
  *   testMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Mix(value = 3)
  * TestInterface2 {  -------->
  *   &#64;Method(value = 3)
@@ -167,25 +163,27 @@ import java.util.Queue;
  *   &#64;Method(value = 3)
  *   testMethod2()
  * }
- *			</pre>
- *		</td>
- *		<td>
- *			<pre>
+ * </pre>
+ * </td>
+ * <td>
+ * <pre>
  * &#64;Type(value = 4)
  * TestInterface1 {
  *   &#64;Method(value = 4)
  *   &#64;Mix(value = 4)
  *   testMethod1()
  * }
- *			</pre>
- *		</td>
- *	</tr>
+ * </pre>
+ * </td>
+ * </tr>
  * </table>
+ * </p>
  *
  * @author Shuyang Zhou
  */
 public class AnnotationLocatorTest extends TestCase {
 
+	@Test
 	public void testClassListLocate() {
 		_classListLocate(TestClass.class, Arrays.asList(_type(1), _mix(2)));
 
@@ -210,6 +208,7 @@ public class AnnotationLocatorTest extends TestCase {
 		_classListLocate(OriginInterface1.class, Arrays.asList(_type(9)));
 	}
 
+	@Test
 	public void testClassSingleLocate() {
 		_classSingleLocate(TestClass.class, 2, 1);
 
@@ -230,10 +229,12 @@ public class AnnotationLocatorTest extends TestCase {
 		_classSingleLocate(OriginInterface1.class, -1, 9);
 	}
 
+	@Test
 	public void testConstructor() {
 		new AnnotationLocator();
 	}
 
+	@Test
 	public void testInheritedHierarchyWalking() throws Exception {
 		List<Class<?>> expectedClassHierarchy = Arrays.asList(
 			TestClass.class, SuperClass.class, TestInterface2.class,
@@ -258,6 +259,7 @@ public class AnnotationLocatorTest extends TestCase {
 		assertEquals(expectedClassHierarchy, actualClassHierarchy);
 	}
 
+	@Test
 	public void testMethodListLocate() {
 		_methodListLocate(
 			TestClass.class,
@@ -335,6 +337,7 @@ public class AnnotationLocatorTest extends TestCase {
 				new Annotation[0], new Annotation[0]));
 	}
 
+	@Test
 	public void testMethodSingleLocate() {
 		_methodSingleLocate(
 			TestClass.class, new int[] {1, 2, 2, 1, 1, 3},
@@ -442,10 +445,12 @@ public class AnnotationLocatorTest extends TestCase {
 
 		return new Method() {
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return Method.class;
 			}
 
+			@Override
 			public int value() {
 				return value;
 			}
@@ -533,7 +538,8 @@ public class AnnotationLocatorTest extends TestCase {
 							expectedMix.value(), actualMix.value());
 					}
 					else if (expectedAnnotation.annotationType() ==
-						Method.class) {
+								Method.class) {
+
 						Method expectedType = (Method)expectedAnnotation;
 						Method actualMethod = (Method)actualAnnotation;
 
@@ -663,10 +669,12 @@ public class AnnotationLocatorTest extends TestCase {
 	private Mix _mix(final int value) {
 		return new Mix() {
 
+			@Override
 			public int value() {
 				return value;
 			}
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return Mix.class;
 			}
@@ -677,10 +685,12 @@ public class AnnotationLocatorTest extends TestCase {
 	private Type _type(final int value) {
 		return new Type() {
 
+			@Override
 			public int value() {
 				return value;
 			}
 
+			@Override
 			public Class<? extends Annotation> annotationType() {
 				return Type.class;
 			}
@@ -737,11 +747,13 @@ public class AnnotationLocatorTest extends TestCase {
 	@Type(value = 5)
 	private class OriginClass implements OriginInterface2, OriginInterface1 {
 
+		@Override
 		@Method(value = 5)
 		@Mix(value = 5)
 		public void originMethod1() {
 		}
 
+		@Override
 		public void originMethod2() {
 		}
 
@@ -773,10 +785,12 @@ public class AnnotationLocatorTest extends TestCase {
 		public void originMethod2() {
 		}
 
+		@Override
 		@Method(value = 2)
 		public void superMethod1() {
 		}
 
+		@Override
 		public void superMethod2() {
 		}
 
@@ -793,6 +807,7 @@ public class AnnotationLocatorTest extends TestCase {
 	@Type(value = 6)
 	private interface SuperInterface2 extends SuperInterface1 {
 
+		@Override
 		@Method(value = 6)
 		@Mix(value = 6)
 		void originMethod1();
@@ -819,11 +834,13 @@ public class AnnotationLocatorTest extends TestCase {
 		public void superMethod2() {
 		}
 
+		@Override
 		@Method(value = 1)
 		@Mix(value = 1)
 		public void testMethod1() {
 		}
 
+		@Override
 		public void testMethod2() {
 		}
 
@@ -841,6 +858,7 @@ public class AnnotationLocatorTest extends TestCase {
 	@Mix(value = 3)
 	private interface TestInterface2 extends TestInterface1, SuperInterface2 {
 
+		@Override
 		@Method(value = 3)
 		public void superMethod1();
 

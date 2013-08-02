@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -343,6 +345,10 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 		return new CountryWrapper(_country.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Country toUnescapedModel() {
+		return new CountryWrapper(_country.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _country.toString();
@@ -350,6 +356,25 @@ public class CountryWrapper implements Country, ModelWrapper<Country> {
 
 	public java.lang.String toXmlString() {
 		return _country.toXmlString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof CountryWrapper)) {
+			return false;
+		}
+
+		CountryWrapper countryWrapper = (CountryWrapper)obj;
+
+		if (Validator.equals(_country, countryWrapper._country)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

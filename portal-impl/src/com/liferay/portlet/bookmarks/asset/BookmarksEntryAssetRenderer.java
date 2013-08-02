@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,18 +44,22 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		_entry = entry;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _entry.getEntryId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _entry.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_entry.getDescription());
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _entry.getName();
 	}
@@ -89,14 +93,17 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 			"entryId", _entry.getEntryId());
 	}
 
+	@Override
 	public long getUserId() {
 		return _entry.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _entry.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _entry.getUuid();
 	}
@@ -130,6 +137,7 @@ public class BookmarksEntryAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

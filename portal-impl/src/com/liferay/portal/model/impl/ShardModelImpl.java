@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -256,13 +256,16 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 
 	@Override
 	public Shard toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Shard)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Shard)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Shard toUnescapedModel() {
+		return (Shard)this;
 	}
 
 	@Override
@@ -295,18 +298,15 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Shard)) {
 			return false;
 		}
 
-		Shard shard = null;
-
-		try {
-			shard = (Shard)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Shard shard = (Shard)obj;
 
 		long primaryKey = shard.getPrimaryKey();
 
@@ -408,9 +408,7 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	}
 
 	private static ClassLoader _classLoader = Shard.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Shard.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Shard.class };
 	private long _shardId;
 	private long _classNameId;
 	private long _originalClassNameId;
@@ -421,5 +419,5 @@ public class ShardModelImpl extends BaseModelImpl<Shard> implements ShardModel {
 	private String _name;
 	private String _originalName;
 	private long _columnBitmask;
-	private Shard _escapedModelProxy;
+	private Shard _escapedModel;
 }

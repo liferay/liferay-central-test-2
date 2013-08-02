@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,12 +51,13 @@ public class InputTag extends BaseInputTag {
 
 	@Override
 	public int doStartTag() throws JspException {
-		addModelValidators();
+		addModelValidatorTags();
+		addRequiredValidatorTag();
 
 		return super.doStartTag();
 	}
 
-	protected void addModelValidators() {
+	protected void addModelValidatorTags() {
 		Class<?> model = getModel();
 
 		if (model == null) {
@@ -93,6 +94,17 @@ public class InputTag extends BaseInputTag {
 
 			addValidatorTag(validatorName, validatorTag);
 		}
+	}
+
+	protected void addRequiredValidatorTag() {
+		if (!getRequired()) {
+			return;
+		}
+
+		ValidatorTag validatorTag = new ValidatorTagImpl(
+			"required", null, null, false);
+
+		addValidatorTag("required", validatorTag);
 	}
 
 	protected void addValidatorTag(
@@ -176,11 +188,16 @@ public class InputTag extends BaseInputTag {
 		String id = getId();
 		String type = getType();
 
-		if (Validator.isNull(id) &&
-			((model == null) || Validator.isNotNull(type))) {
+		if (Validator.isNull(id)) {
+			String fieldParam = getFieldParam();
 
-			if (!Validator.equals(type, "assetTags") &&
-				!Validator.equals(type, "radio")) {
+			if ((model != null) && Validator.isNull(type) &&
+				Validator.isNotNull(fieldParam)) {
+
+				id = fieldParam;
+			}
+			else if (!Validator.equals(type, "assetTags") &&
+					 !Validator.equals(type, "radio")) {
 
 				id = name;
 			}
@@ -206,7 +223,6 @@ public class InputTag extends BaseInputTag {
 			String fieldParam = getFieldParam();
 
 			if (Validator.isNotNull(fieldParam)) {
-				_forLabel = fieldParam;
 				_inputName = fieldParam;
 			}
 
@@ -241,16 +257,14 @@ public class InputTag extends BaseInputTag {
 	}
 
 	protected void setEndAttributes() {
+		if ((_validators == null) || (_validators.get("required") == null)) {
+			return;
+		}
+
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		boolean required = false;
-
-		if ((_validators != null) && (_validators.get("required") != null)) {
-			required = true;
-		}
-
-		setNamespacedAttribute(request, "required", String.valueOf(required));
+		setNamespacedAttribute(request, "required", Boolean.TRUE.toString());
 	}
 
 	protected void updateFormValidators() {

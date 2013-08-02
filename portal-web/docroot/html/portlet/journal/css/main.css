@@ -383,6 +383,12 @@
 		}
 	}
 
+	.journal-structure-selection-break {
+		.journal-article-field-label, .journal-article-localized-checkbox, .journal-article-buttons {
+			display: none;
+		}
+	}
+
 	.journal-article-buttons {
 		display: none;
 	}
@@ -623,6 +629,10 @@
 	.journal-article-helper {
 		filter: alpha(opacity=80);
 	}
+
+	.portlet-journal .add-article-selector {
+		display: inline;
+	}
 }
 
 .journal-component {
@@ -848,5 +858,17 @@
 				width: 40px;
 			}
 		}
+	}
+}
+
+/* ---------- RTL ---------- */
+
+.rtl .portlet-journal {
+	.add-permission-button-row {
+		float: right;
+	}
+
+	.subscribe-link {
+		float: left;
 	}
 }

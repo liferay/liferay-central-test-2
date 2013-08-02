@@ -1,0 +1,259 @@
+<html>
+<head>
+<title>CPDynamicdatalistsDatadefinitionsEdit</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPDynamicdatalistsDatadefinitionsEdit</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPDynamicdatalistsDatadefinitionsEdit</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>DATA_DEFINITIONS_IFRAME</td>
+	<td>//iframe[contains(@src,'dynamicdatalists')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>HEADER_TITLE</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAME_FIELD</td>
+	<td>//input[@id='_166_name_en_US']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DETAILS</td>
+	<td>//div[@id='structureDetailsSectionPanel']/div/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DESCRIPTION_FIELD</td>
+	<td>//textarea[@id='_166_description_en_US']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+<!---->
+<!--FIELDS-->
+<tr>
+	<td>FIELDS_LINK</td>
+	<td>//ul[@class='aui-tabview-list aui-widget-hd']/li/span/a[contains(.,'Fields')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_BOOLEAN</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Boolean']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_DATE</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Date']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_DECIMAL</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Decimal']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_DOCUMENTS_AND_MEDIA</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Documents and Media']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_FILE_UPLOAD</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='File Upload']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_INTEGER</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Integer']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_NUMBER</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Number']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_RADIO</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Radio']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_SELECT</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Select']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_TEXT</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Text']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FIELDS_TEXT_BOX</td>
+	<td>//div[@class='aui-tabview-content aui-widget-bd']/div/ul/li[@title='Text Box']/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SETTINGS-->
+<tr>
+	<td>SETTINGS_LINK</td>
+	<td>//ul[@class='aui-tabview-list aui-widget-hd']/li/span/a[contains(.,'Settings')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_TYPE</td>
+	<td>//td[contains(@class,'yui3-column-name')]/div[contains(.,'Type')]/../following-sibling::td[contains(@class,'yui3-column-value')]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_FIELD_LABEL</td>
+	<td>//td[contains(@class,'yui3-column-name')]/div[contains(.,'Field Label')]/../following-sibling::td[contains(@class,'yui3-column-value')]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_NAME</td>
+	<td>//td[contains(@class,'yui3-column-name')]/div[contains(.,'Name')]/../following-sibling::td[contains(@class,'yui3-column-value')]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_PREDEFINED_VALUE</td>
+	<td>//td[contains(@class,'yui3-column-name')]/div[contains(.,'Predefined Value')]/../following-sibling::td[contains(@class,'yui3-column-value')]/div</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FORM-->
+<tr>
+	<td>FORM_BUILDER</td>
+	<td>//div[@class='aui-diagram-builder-drop-container']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-form-builder-field')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_BOOLEAN_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-form-builder-checkbox-field-content')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_DATE_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-date')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_DECIMAL_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-decimal')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_DOCUMENTS_AND_MEDIA_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-documentlibrary')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_FILE_UPLOAD_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-fileupload')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_INTEGER_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-integer')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_NUMBER_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-ddm-number')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_RADIO_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-form-builder-radio-field-content')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_SELECT_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-form-builder-select-field-content')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_TEXT_FIELD_1</td>
+	<td>xpath=(//div[@class='aui-form-builder-field-content aui-form-builder-text-field-content aui-helper-clearfix'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_TEXT_BOX_FIELD_1</td>
+	<td>xpath=(//div[contains(@class,'aui-form-builder-textarea-field-content')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_FIELD_SETTINGS_ICON_1</td>
+	<td>//button[@id='editEvent']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_FIELD_DUPLICATE_ICON_1</td>
+	<td>//button[@id='duplicateEvent']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FORM_FIELD_DELETE_ICON</td>
+	<td>//button[@id='deleteEvent']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SETTINGS_CELL_EDITOR-->
+<tr>
+	<td>SETTINGS_CELL_EDITOR_FIELD</td>
+	<td>//input[@name='value']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_CELL_EDITOR_SAVE_BUTTON</td>
+	<td>//button/span[contains(.,'Save')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SETTINGS_CELL_EDITOR_CANCEL_BUTTON</td>
+	<td>//button/span[contains(.,'Cancel')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

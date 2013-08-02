@@ -1,0 +1,19 @@
+<definition>
+	<execute test-case="SocialOfficeSmoke" />
+
+	<execute test-case="PGHomeAcceptance" />
+
+	<execute test-case="PGContactsCenterAcceptance" />
+
+	<execute test-case="PGContactsCenterViewProfileAcceptance" />
+
+	<execute test-case="PGMicroblogsAcceptance" />
+
+	<execute test-case="PGMessagesAcceptance" />
+
+	<execute test-case="PGMyDocumentsAcceptance" />
+
+	<execute test-case="PGTasksAcceptance" />
+
+	<execute test-case="SOSitesAcceptance" />
+</definition>

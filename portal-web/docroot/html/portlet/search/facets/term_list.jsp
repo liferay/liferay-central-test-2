@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,8 +42,8 @@ int maxTerms = dataJSONObject.getInt("maxTerms");
 				<aui:script use="liferay-token-list">
 					Liferay.Search.tokenList.add(
 						{
-							clearFields: '<%= UnicodeFormatter.toString(renderResponse.getNamespace() + facet.getFieldName()) %>',
-							text: '<%= UnicodeFormatter.toString(termCollector.getTerm()) %>'
+							clearFields: '<%= renderResponse.getNamespace() + facet.getFieldName() %>',
+							text: '<%= HtmlUtil.escapeJS(termCollector.getTerm()) %>'
 						}
 					);
 				</aui:script>
@@ -56,7 +56,7 @@ int maxTerms = dataJSONObject.getInt("maxTerms");
 		%>
 
 			<li class="facet-value <%= fieldParam.equals(termCollector.getTerm()) ? "current-term" : StringPool.BLANK %>">
-				<a data-value="<%= termCollector.getTerm() %>" href="javascript:;"><%= termCollector.getTerm() %></a> <span class="frequency">(<%= termCollector.getFrequency() %>)</span>
+				<a data-value="<%= HtmlUtil.escapeAttribute(termCollector.getTerm()) %>" href="javascript:;"><%= HtmlUtil.escape(termCollector.getTerm()) %></a> <span class="frequency">(<%= termCollector.getFrequency() %>)</span>
 			</li>
 
 		<%

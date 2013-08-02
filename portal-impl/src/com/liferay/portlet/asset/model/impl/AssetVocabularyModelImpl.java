@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -651,13 +651,16 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 	@Override
 	public AssetVocabulary toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetVocabulary)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetVocabulary)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetVocabulary toUnescapedModel() {
+		return (AssetVocabulary)this;
 	}
 
 	@Override
@@ -696,18 +699,15 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetVocabulary)) {
 			return false;
 		}
 
-		AssetVocabulary assetVocabulary = null;
-
-		try {
-			assetVocabulary = (AssetVocabulary)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetVocabulary assetVocabulary = (AssetVocabulary)obj;
 
 		long primaryKey = assetVocabulary.getPrimaryKey();
 
@@ -919,7 +919,7 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	private static ClassLoader _classLoader = AssetVocabulary.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetVocabulary.class
 		};
 	private String _uuid;
@@ -944,5 +944,5 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	private String _descriptionCurrentLanguageId;
 	private String _settings;
 	private long _columnBitmask;
-	private AssetVocabulary _escapedModelProxy;
+	private AssetVocabulary _escapedModel;
 }

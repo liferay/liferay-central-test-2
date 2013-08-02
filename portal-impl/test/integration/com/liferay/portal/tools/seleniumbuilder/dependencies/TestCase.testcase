@@ -1,0 +1,40 @@
+<definition>
+	<var name="name" value="value" />
+	<var name="name" value="" />
+
+	<set-up>
+		<var name="name" value="value" />
+
+		<execute action="BaseLiferay#click" locator1="locator1" value1="value1" />
+
+		<execute macro="BlogsEntry#addPG" />
+
+				<execute macro="BlogsEntry#addPG">
+			<var name="name" value="value" />
+		</execute>
+	</set-up>
+
+	<command name="name">
+		<var name="name" value="value" />
+
+		<execute action="BaseLiferay#click" locator1="locator1" value1="value1" />
+
+		<execute macro="BlogsEntry#addPG" />
+
+				<execute macro="BlogsEntry#addPG">
+			<var name="name" value="value" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<var name="name" value="value" />
+
+		<execute action="BaseLiferay#click" locator1="locator1" value1="value1" />
+
+		<execute macro="BlogsEntry#addPG" />
+
+				<execute macro="BlogsEntry#addPG">
+			<var name="name" value="value" />
+		</execute>
+	</tear-down>
+</definition>

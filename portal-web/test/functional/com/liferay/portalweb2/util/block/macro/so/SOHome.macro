@@ -1,0 +1,20 @@
+<definition>
+	<command name="addWhatsHappeningEntry">
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<if>
+			<condition action="PGHome#isElementNotPresent" locator-key1="WHATS_HAPPENING_ENTRY_CONTENT" />
+			<then>
+				<execute action="PGHome#assertTextEquals" locator-key1="WHATS_HAPPENING_INFO_MESSAGE" value1="You do not have any microblog entries." />
+			</then>
+		</if>
+
+		<execute action="PGHome#click" locator-key1="WHATS_HAPPENING_CONTENT_FIELD" />
+		<execute action="PGHome#click" locator-key1="WHATS_HAPPENING_CONTENT_INPUT_FIELD" />
+		<execute action="PGHome#type" locator-key1="WHATS_HAPPENING_CONTENT_INPUT_FIELD" value1="${whatsHappeningEntryContent}" />
+		<execute action="PGHome#assertTextEquals" locator-key1="WHATS_HAPPENING_CONTENT_COUNTDOWN" value1="${whatsHappeningEntryCharacterCountdown}" />
+		<execute action="PGHome#select" locator-key1="WHATS_HAPPENING_CONTENT_VIEW_FILTER" value1="${whatsHappeningEntryViewableBy}" />
+		<execute action="PGHome#click" locator-key1="WHATS_HAPPENING_POST_BUTTON" />
+		<execute action="PGHome#assertTextEquals" locator-key1="WHATS_HAPPENING_ENTRY_CONTENT" value1="${whatsHappeningEntryContent}" />
+	</command>
+</definition>

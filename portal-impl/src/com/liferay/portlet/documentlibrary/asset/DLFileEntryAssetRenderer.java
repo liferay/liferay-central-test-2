@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -52,8 +52,10 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		_fileVersion = fileVersion;
 	}
 
+	@Override
 	public long getClassPK() {
-		if (!_fileVersion.isApproved() &&
+		if (!_fileVersion.isApproved() && _fileVersion.isDraft() &&
+			!_fileVersion.isPending() &&
 			!_fileVersion.getVersion().equals(
 				DLFileEntryConstants.VERSION_DEFAULT)) {
 
@@ -74,14 +76,17 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getGroupId() {
 		return _fileEntry.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_fileEntry.getDescription());
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _fileVersion.getTitle();
 	}
@@ -133,14 +138,17 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 			_fileEntry.getFileEntryId());
 	}
 
+	@Override
 	public long getUserId() {
 		return _fileEntry.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _fileEntry.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _fileEntry.getUuid();
 	}
@@ -171,6 +179,7 @@ public class DLFileEntryAssetRenderer extends BaseAssetRenderer {
 		return false;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

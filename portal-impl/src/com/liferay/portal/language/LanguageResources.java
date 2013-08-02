@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 import com.liferay.portal.tools.LangBuilder;
 
 import java.io.InputStream;
@@ -31,6 +30,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -185,30 +185,38 @@ public class LanguageResources {
 	private static Properties _loadProperties(String name) {
 		Properties properties = new Properties();
 
-		boolean enabled = PortalSecurityManagerThreadLocal.isEnabled();
-
 		try {
-			PortalSecurityManagerThreadLocal.setEnabled(false);
-
 			ClassLoader classLoader = LanguageResources.class.getClassLoader();
 
-			URL url = classLoader.getResource(name);
+			Enumeration<URL> enu = classLoader.getResources(name);
 
-			if (_log.isInfoEnabled()) {
-				_log.info("Attempting to load " + name);
+			if (_log.isDebugEnabled() && !enu.hasMoreElements()) {
+				_log.debug("No resources found for " + name);
 			}
 
-			if (url != null) {
-				InputStream inputStream = url.openStream();
-
-				properties = PropertiesUtil.load(inputStream, StringPool.UTF8);
-
-				inputStream.close();
+			while (enu.hasMoreElements()) {
+				URL url = enu.nextElement();
 
 				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Loading " + url + " with " + properties.size() +
-							" values");
+					_log.info("Loading " + name + " from " + url);
+				}
+
+				InputStream inputStream = url.openStream();
+
+				try {
+					Properties inputStreamProperties = PropertiesUtil.load(
+						inputStream, StringPool.UTF8);
+
+					properties.putAll(inputStreamProperties);
+
+					if (_log.isInfoEnabled()) {
+						_log.info(
+							"Loading " + url + " with " +
+								inputStreamProperties.size() + " values");
+					}
+				}
+				finally {
+					inputStream.close();
 				}
 			}
 		}
@@ -216,9 +224,6 @@ public class LanguageResources {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e, e);
 			}
-		}
-		finally {
-			PortalSecurityManagerThreadLocal.setEnabled(enabled);
 		}
 
 		return properties;

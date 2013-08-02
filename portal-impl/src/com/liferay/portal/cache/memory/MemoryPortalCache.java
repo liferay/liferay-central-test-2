@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ public class MemoryPortalCache implements PortalCache {
 		_map = new ConcurrentHashMap<Serializable, Object>(initialCapacity);
 	}
 
+	@Override
 	public void destroy() {
 		removeAll();
 
@@ -48,6 +49,7 @@ public class MemoryPortalCache implements PortalCache {
 		_name = null;
 	}
 
+	@Override
 	public Collection<Object> get(Collection<Serializable> keys) {
 		List<Object> values = new ArrayList<Object>(keys.size());
 
@@ -58,48 +60,57 @@ public class MemoryPortalCache implements PortalCache {
 		return values;
 	}
 
+	@Override
 	public Object get(Serializable key) {
 		return _map.get(key);
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public void put(Serializable key, Object value) {
 		Object oldValue = _map.put(key, value);
 
 		notifyPutEvents(key, value, oldValue != null);
 	}
 
+	@Override
 	public void put(Serializable key, Object value, int timeToLive) {
 		Object oldValue = _map.put(key, value);
 
 		notifyPutEvents(key, value, oldValue != null);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value) {
 		Object oldValue = _map.put(key, value);
 
 		notifyPutEvents(key, value, oldValue != null);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value, int timeToLive) {
 		Object oldValue = _map.put(key, value);
 
 		notifyPutEvents(key, value, oldValue != null);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener cacheListener) {
 		_cacheListeners.add(cacheListener);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		registerCacheListener(cacheListener);
 	}
 
+	@Override
 	public void remove(Serializable key) {
 		Object value = _map.remove(key);
 
@@ -108,6 +119,7 @@ public class MemoryPortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		_map.clear();
 
@@ -116,10 +128,12 @@ public class MemoryPortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		_cacheListeners.remove(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		_cacheListeners.clear();
 	}

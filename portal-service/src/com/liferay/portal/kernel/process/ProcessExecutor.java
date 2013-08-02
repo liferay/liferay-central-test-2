@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.process.log.ProcessOutputStream;
+import com.liferay.portal.kernel.util.ClassLoaderObjectInputStream;
 import com.liferay.portal.kernel.util.NamedThreadFactory;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
@@ -32,6 +33,9 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,9 +50,25 @@ public class ProcessExecutor {
 			ProcessCallable<T> processCallable, String classPath)
 		throws ProcessException {
 
+		return execute(
+			processCallable, classPath, Collections.<String>emptyList());
+	}
+
+	public static <T extends Serializable> T execute(
+			ProcessCallable<T> processCallable, String classPath,
+			List<String> arguments)
+		throws ProcessException {
+
 		try {
-			ProcessBuilder processBuilder = new ProcessBuilder(
-				"java", "-cp", classPath, ProcessExecutor.class.getName());
+			List<String> commands = new ArrayList<String>(arguments.size() + 4);
+
+			commands.add("java");
+			commands.add("-cp");
+			commands.add(classPath);
+			commands.addAll(arguments);
+			commands.add(ProcessExecutor.class.getName());
+
+			ProcessBuilder processBuilder = new ProcessBuilder(commands);
 
 			Process process = processBuilder.start();
 
@@ -231,9 +251,9 @@ public class ProcessExecutor {
 
 						_unsyncBufferedInputStream.mark(4);
 
-						objectInputStream =
-							new PortalClassLoaderObjectInputStream(
-								_unsyncBufferedInputStream);
+						objectInputStream = new ClassLoaderObjectInputStream(
+							_unsyncBufferedInputStream,
+							PortalClassLoaderUtil.getClassLoader());
 
 						// Found the beginning of the object input stream. Flush
 						// out corrupted log if necessary.

@@ -1,0 +1,55 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_APPLICATION">
+			<execute function="AssertClick#assertPartialTextClickAt" value1="More" />
+		</case>
+		<case locator-key1="ADD_PAGE">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="GO_TO">
+			<execute function="AssertClick#assertTextClickAt" value1="Go to" />
+		</case>
+		<case locator-key1="GO_TO_CONTROL_PANEL">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="MANAGE">
+			<execute function="AssertClick#assertTextClickAt" value1="Manage" />
+		</case>
+		<case locator-key1="MANAGE_SITE">
+			<execute function="AssertClick#assertTextClickAtAndWait" value1="Site" />
+		</case>
+		<case locator-key1="USER_SIGN_OUT">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="click">
+		<case comparator="startsWith" locator1="//span[@data-title='">
+			<execute function="Click#makeVisibleClickAt" />
+		</case>
+	</command>
+
+	<command name="mouseOver">
+		<case locator-key1="ADD">
+			<execute function="MouseOver#textMouseOverClickDockbar" value1="Add" />
+		</case>
+		<case locator-key1="EDIT_CONTROLS">
+			<execute function="MouseOver#mouseOverClickDockbar" />
+		</case>
+		<case locator-key1="GO_TO">
+			<execute function="MouseOver#textMouseOverClickDockbar" value1="Go to" />
+		</case>
+		<case locator-key1="GO_TO_STAGING">
+			<execute function="MouseOver#mouseOver" value1="Go to" />
+		</case>
+		<case locator-key1="MANAGE">
+			<execute function="MouseOver#textMouseOverClickDockbar" value1="Manage" />
+		</case>
+	</command>
+
+	<command name="type">
+		<case locator-key1="ADD_APPLICATION_SEARCH_FIELD">
+			<execute function="Type#sendKeysApplicationSearch" />
+		</case>
+	</command>
+</definition>

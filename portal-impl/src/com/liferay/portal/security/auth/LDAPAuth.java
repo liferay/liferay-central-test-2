@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,6 +66,7 @@ public class LDAPAuth implements Authenticator {
 	public static final String RESULT_PASSWORD_RESET =
 		"2.16.840.1.113730.3.4.4";
 
+	@Override
 	public int authenticateByEmailAddress(
 			long companyId, String emailAddress, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -82,6 +83,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
+	@Override
 	public int authenticateByScreenName(
 			long companyId, String screenName, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -98,6 +100,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
+	@Override
 	public int authenticateByUserId(
 			long companyId, long userId, String password,
 			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
@@ -158,8 +161,8 @@ public class LDAPAuth implements Authenticator {
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Failed to bind to the LDAP server with userDN "
-							+ userDN + " and password " + password);
+						"Failed to bind to the LDAP server with userDN " +
+							userDN + " and password " + password);
 				}
 
 				_log.error("Failed to bind to the LDAP server", e);
@@ -367,7 +370,14 @@ public class LDAPAuth implements Authenticator {
 				password);
 
 			if (result == SUCCESS) {
-				return result;
+				if (PrefsPropsUtil.getBoolean(
+						companyId,
+						PropsKeys.LDAP_IMPORT_USER_PASSWORD_ENABLED)) {
+
+					return result;
+				}
+
+				return Authenticator.SKIP_LIFERAY_CHECK;
 			}
 		}
 
@@ -386,7 +396,14 @@ public class LDAPAuth implements Authenticator {
 				password);
 
 			if (result == SUCCESS) {
-				return result;
+				if (PrefsPropsUtil.getBoolean(
+						companyId,
+						PropsKeys.LDAP_IMPORT_USER_PASSWORD_ENABLED)) {
+
+					return result;
+				}
+
+				return Authenticator.SKIP_LIFERAY_CHECK;
 			}
 		}
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,8 +34,8 @@ public class SpringCompatibilityTest {
 
 		try {
 			AbstractAutowireCapableBeanFactoryClass = Class.forName(
-				"org.springframework.beans.factory.support."
-				+ "AbstractAutowireCapableBeanFactory");
+				"org.springframework.beans.factory.support." +
+					"AbstractAutowireCapableBeanFactory");
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
@@ -56,7 +56,8 @@ public class SpringCompatibilityTest {
 			filteredPropertyDescriptorsCacheField.getType();
 
 		if (!Map.class.isAssignableFrom(
-			filteredPropertyDescriptorsCacheClass)) {
+				filteredPropertyDescriptorsCacheClass)) {
+
 			Assert.fail(
 				filteredPropertyDescriptorsCacheClass.getClass().getName() +
 				" is not " + Map.class.getName());

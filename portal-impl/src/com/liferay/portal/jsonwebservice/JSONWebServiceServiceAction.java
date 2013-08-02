@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,8 +22,10 @@ import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionMapping;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 
 import java.lang.reflect.Method;
 
@@ -71,11 +73,18 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
-		JSONWebServiceAction jsonWebServiceAction = null;
+		UploadException uploadException = (UploadException)request.getAttribute(
+			WebKeys.UPLOAD_EXCEPTION);
+
+		if (uploadException != null) {
+			return JSONFactoryUtil.serializeException(uploadException);
+		}
 
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		try {
+			JSONWebServiceAction jsonWebServiceAction = null;
+
 			if (path.equals("/invoke")) {
 				jsonWebServiceAction = new JSONWebServiceInvokerAction(request);
 			}
@@ -111,7 +120,9 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 
 			return JSONFactoryUtil.serializeException(e);
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -577,8 +577,10 @@ public class WebServerServlet extends HttpServlet {
 			return null;
 		}
 
-		if ((image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT) ||
-			(image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH)) {
+		if (((PropsValues.USERS_IMAGE_MAX_HEIGHT > 0) &&
+			 (image.getHeight() > PropsValues.USERS_IMAGE_MAX_HEIGHT)) ||
+			((PropsValues.USERS_IMAGE_MAX_WIDTH > 0) &&
+			 (image.getWidth() > PropsValues.USERS_IMAGE_MAX_WIDTH))) {
 
 			User user = UserLocalServiceUtil.getUserByPortraitId(imageId);
 
@@ -616,10 +618,10 @@ public class WebServerServlet extends HttpServlet {
 			if (imageId == dlFileEntry.getSmallImageId()) {
 				queryString = "&imageThumbnail=1";
 			}
-			else if (imageId == dlFileEntry.getSmallImageId()) {
+			else if (imageId == dlFileEntry.getCustom1ImageId()) {
 				queryString = "&imageThumbnail=2";
 			}
-			else if (imageId == dlFileEntry.getSmallImageId()) {
+			else if (imageId == dlFileEntry.getCustom2ImageId()) {
 				queryString = "&imageThumbnail=3";
 			}
 
@@ -815,6 +817,18 @@ public class WebServerServlet extends HttpServlet {
 
 		FileVersion fileVersion = fileEntry.getFileVersion(version);
 
+		if ((ParamUtil.getInteger(request, "height") > 0) ||
+			(ParamUtil.getInteger(request, "width") > 0)) {
+
+			InputStream inputStream = fileVersion.getContentStream(true);
+
+			Image image = ImageLocalServiceUtil.getImage(inputStream);
+
+			writeImage(image, request, response);
+
+			return;
+		}
+
 		String fileName = fileVersion.getTitle();
 
 		String extension = fileVersion.getExtension();
@@ -989,7 +1003,7 @@ public class WebServerServlet extends HttpServlet {
 
 		InputStream inputStream = fileEntry.getContentStream();
 
-		ServletResponseUtil.write(response, inputStream);
+		ServletResponseUtil.write(response, inputStream, fileEntry.getSize());
 	}
 
 	protected void sendFileWithRangeHeader(
@@ -1262,7 +1276,6 @@ public class WebServerServlet extends HttpServlet {
 
 	private static Set<String> _acceptRangesMimeTypes = SetUtil.fromArray(
 		PropsValues.WEB_SERVER_SERVLET_ACCEPT_RANGES_MIME_TYPES);
-
 	private static Format _dateFormat =
 		FastDateFormatFactoryUtil.getSimpleDateFormat(_DATE_FORMAT_PATTERN);
 

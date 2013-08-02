@@ -640,6 +640,10 @@
 
 	<definition name="portlet.journal" extends="portlet" />
 
+	<definition name="portlet.journal.asset.add_asset_redirect" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/asset/add_asset_redirect.jsp" />
+	</definition>
+
 	<definition name="portlet.journal.copy_article" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/copy_article.jsp" />
 	</definition>
@@ -946,6 +950,10 @@
 
 	<definition name="portlet.monitoring.edit_session" extends="portlet.monitoring">
 		<put name="portlet_content" value="/portlet/monitoring/edit_session.jsp" />
+	</definition>
+
+	<definition name="portlet.monitoring.error" extends="portlet.monitoring">
+		<put name="portlet_content" value="/portlet/monitoring/error.jsp" />
 	</definition>
 
 	<definition name="portlet.monitoring.view" extends="portlet.monitoring">

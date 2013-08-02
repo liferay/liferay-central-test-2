@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,8 +22,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.MethodCache;
-import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -35,8 +33,8 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -97,8 +95,7 @@ public class LiferayPortlet extends GenericPortlet {
 			Throwable cause = pe.getCause();
 
 			if (isSessionErrorException(cause)) {
-				SessionErrors.add(
-					actionRequest, cause.getClass().getName(), cause);
+				SessionErrors.add(actionRequest, cause.getClass(), cause);
 			}
 			else {
 				throw pe;
@@ -146,9 +143,7 @@ public class LiferayPortlet extends GenericPortlet {
 		}
 
 		try {
-			Method method = MethodCache.get(
-				_classesMap, _methodsMap, getClass().getName(), actionName,
-				new Class[] {ActionRequest.class, ActionResponse.class});
+			Method method = getActionMethod(actionName);
 
 			method.invoke(this, actionRequest, actionResponse);
 
@@ -278,6 +273,25 @@ public class LiferayPortlet extends GenericPortlet {
 		throw new PortletException("doPrint method not implemented");
 	}
 
+	protected Method getActionMethod(String actionName)
+		throws NoSuchMethodException {
+
+		Method method = _actionMethods.get(actionName);
+
+		if (method != null) {
+			return method;
+		}
+
+		Class<?> clazz = getClass();
+
+		method = clazz.getMethod(
+			actionName, ActionRequest.class, ActionResponse.class);
+
+		_actionMethods.put(actionName, method);
+
+		return method;
+	}
+
 	protected String getRedirect(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
@@ -312,9 +326,8 @@ public class LiferayPortlet extends GenericPortlet {
 		if (cause instanceof PortalException) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
 	protected void sendRedirect(
@@ -375,9 +388,11 @@ public class LiferayPortlet extends GenericPortlet {
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 
-		response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+		response.setContentType(ContentTypes.APPLICATION_JSON);
 
 		ServletResponseUtil.write(response, json.toString());
+
+		response.flushBuffer();
 	}
 
 	protected void writeJSON(
@@ -385,17 +400,18 @@ public class LiferayPortlet extends GenericPortlet {
 			Object json)
 		throws IOException {
 
-		mimeResponse.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+		mimeResponse.setContentType(ContentTypes.APPLICATION_JSON);
 
 		PortletResponseUtil.write(mimeResponse, json.toString());
+
+		mimeResponse.flushBuffer();
 	}
 
 	protected boolean addProcessActionSuccessMessage;
 
 	private static final boolean _PROCESS_PORTLET_REQUEST = true;
 
-	private Map<String, Class<?>> _classesMap = new HashMap<String, Class<?>>();
-	private Map<MethodKey, Method> _methodsMap =
-		new HashMap<MethodKey, Method>();
+	private Map<String, Method> _actionMethods =
+		new ConcurrentHashMap<String, Method>();
 
 }

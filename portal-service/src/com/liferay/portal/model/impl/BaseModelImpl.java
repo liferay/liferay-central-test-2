@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,50 +38,67 @@ public abstract class BaseModelImpl<T> implements BaseModel<T> {
 	@Override
 	public abstract Object clone();
 
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		return Collections.emptyMap();
 	}
 
+	@Override
 	public boolean isCachedModel() {
 		return _cachedModel;
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return _ESCAPED_MODEL;
 	}
 
+	@Override
 	public boolean isNew() {
 		return _new;
 	}
 
+	@Override
 	public void resetOriginalValues() {
 	}
 
+	@Override
 	public void setCachedModel(boolean cachedModel) {
 		_cachedModel = cachedModel;
 	}
 
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 	}
 
+	@Override
 	public void setNew(boolean n) {
 		_new = n;
 	}
 
+	@Override
 	public CacheModel<T> toCacheModel() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public T toEscapedModel() {
 		throw new UnsupportedOperationException();
+	}
+
+	@Override
+	public T toUnescapedModel() {
+		return (T)this;
 	}
 
 	protected Locale getLocale(String languageId) {

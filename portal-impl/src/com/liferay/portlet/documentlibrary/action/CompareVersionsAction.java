@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -53,8 +53,9 @@ public class CompareVersionsAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -73,7 +74,8 @@ public class CompareVersionsAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward("portlet.document_library.compare_versions");
+		return actionMapping.findForward(
+			"portlet.document_library.compare_versions");
 	}
 
 	protected void compareVersions(RenderRequest renderRequest)
@@ -94,8 +96,9 @@ public class CompareVersionsAction extends PortletAction {
 
 		String sourceExtension = sourceFileVersion.getExtension();
 
-		if (sourceExtension.equals("htm") || sourceExtension.equals("html") ||
-			sourceExtension.equals("xml")) {
+		if (sourceExtension.equals("css") || sourceExtension.equals("htm") ||
+			sourceExtension.equals("html") || sourceExtension.equals("js") ||
+			sourceExtension.equals("txt") || sourceExtension.equals("xml")) {
 
 			String sourceContent = HtmlUtil.escape(StringUtil.read(sourceIs));
 
@@ -109,8 +112,9 @@ public class CompareVersionsAction extends PortletAction {
 
 		String targetExtension = targetFileVersion.getExtension();
 
-		if (targetExtension.equals("htm") || targetExtension.equals("html") ||
-			targetExtension.equals("xml")) {
+		if (targetExtension.equals("css") || targetExtension.equals("htm") ||
+			targetExtension.equals("html") || targetExtension.equals("js") ||
+			targetExtension.equals("txt") || targetExtension.equals("xml")) {
 
 			String targetContent = HtmlUtil.escape(StringUtil.read(targetIs));
 

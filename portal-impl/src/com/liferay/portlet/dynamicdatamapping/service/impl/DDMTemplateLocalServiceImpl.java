@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import java.util.Map;
 public class DDMTemplateLocalServiceImpl
 	extends DDMTemplateLocalServiceBaseImpl {
 
+	@Override
 	public DDMTemplate addTemplate(
 			long userId, long groupId, long structureId,
 			Map<Locale, String> nameMap, Map<Locale, String> descriptionMap,
@@ -93,6 +94,7 @@ public class DDMTemplateLocalServiceImpl
 		return template;
 	}
 
+	@Override
 	public void addTemplateResources(
 			DDMTemplate template, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -105,6 +107,7 @@ public class DDMTemplateLocalServiceImpl
 			addGuestPermissions);
 	}
 
+	@Override
 	public void addTemplateResources(
 			DDMTemplate template, String[] groupPermissions,
 			String[] guestPermissions)
@@ -116,6 +119,7 @@ public class DDMTemplateLocalServiceImpl
 			template.getTemplateId(), groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public List<DDMTemplate> copyTemplates(
 			long userId, long structureId, long newStructureId, String type,
 			ServiceContext serviceContext)
@@ -139,6 +143,7 @@ public class DDMTemplateLocalServiceImpl
 		return newTemplates;
 	}
 
+	@Override
 	public void deleteTemplate(DDMTemplate template)
 		throws PortalException, SystemException {
 
@@ -153,6 +158,7 @@ public class DDMTemplateLocalServiceImpl
 			ResourceConstants.SCOPE_INDIVIDUAL, template.getTemplateId());
 	}
 
+	@Override
 	public void deleteTemplate(long templateId)
 		throws PortalException, SystemException {
 
@@ -162,6 +168,7 @@ public class DDMTemplateLocalServiceImpl
 		deleteTemplate(template);
 	}
 
+	@Override
 	public void deleteTemplates(long groupId)
 		throws PortalException, SystemException {
 
@@ -173,24 +180,28 @@ public class DDMTemplateLocalServiceImpl
 		}
 	}
 
+	@Override
 	public DDMTemplate getTemplate(long templateId)
 		throws PortalException, SystemException {
 
 		return ddmTemplatePersistence.findByPrimaryKey(templateId);
 	}
 
+	@Override
 	public List<DDMTemplate> getTemplates(long structureId)
 		throws SystemException {
 
 		return ddmTemplatePersistence.findByStructureId(structureId);
 	}
 
+	@Override
 	public List<DDMTemplate> getTemplates(long structureId, String type)
 		throws SystemException {
 
 		return ddmTemplatePersistence.findByS_T(structureId, type);
 	}
 
+	@Override
 	public List<DDMTemplate> getTemplates(
 			long structureId, String type, String mode)
 		throws SystemException {
@@ -198,6 +209,7 @@ public class DDMTemplateLocalServiceImpl
 		return ddmTemplatePersistence.findByS_T_M(structureId, type, mode);
 	}
 
+	@Override
 	public List<DDMTemplate> search(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode, int start, int end,
@@ -209,6 +221,7 @@ public class DDMTemplateLocalServiceImpl
 			orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> search(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -221,6 +234,7 @@ public class DDMTemplateLocalServiceImpl
 			language, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode)
@@ -230,6 +244,7 @@ public class DDMTemplateLocalServiceImpl
 			companyId, groupId, structureId, keywords, type, mode);
 	}
 
+	@Override
 	public int searchCount(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -241,6 +256,7 @@ public class DDMTemplateLocalServiceImpl
 			language, andOperator);
 	}
 
+	@Override
 	public DDMTemplate updateTemplate(
 			long templateId, Map<Locale, String> nameMap,
 			Map<Locale, String> descriptionMap, String type, String mode,

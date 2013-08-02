@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,8 +40,11 @@ public class SessionFactoryImpl implements SessionFactory {
 		return portletSessionFactories;
 	}
 
+	@Override
 	public void closeSession(Session session) throws ORMException {
-		if (!PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
+		if ((session != null) &&
+			!PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED) {
+
 			session.close();
 		}
 	}
@@ -50,6 +53,7 @@ public class SessionFactoryImpl implements SessionFactory {
 		portletSessionFactories.clear();
 	}
 
+	@Override
 	public Dialect getDialect() throws ORMException {
 		return new DialectImpl(_sessionFactoryImplementor.getDialect());
 	}
@@ -62,10 +66,12 @@ public class SessionFactoryImpl implements SessionFactory {
 		return _sessionFactoryImplementor;
 	}
 
+	@Override
 	public Session openNewSession(Connection connection) throws ORMException {
 		return wrapSession(_sessionFactoryImplementor.openSession(connection));
 	}
 
+	@Override
 	public Session openSession() throws ORMException {
 		org.hibernate.Session session = null;
 
@@ -114,11 +120,11 @@ public class SessionFactoryImpl implements SessionFactory {
 		return liferaySession;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
-
 	protected static final List<PortletSessionFactoryImpl>
 		portletSessionFactories =
 			new CopyOnWriteArrayList<PortletSessionFactoryImpl>();
+
+	private static Log _log = LogFactoryUtil.getLog(SessionFactoryImpl.class);
 
 	private ClassLoader _sessionFactoryClassLoader;
 	private SessionFactoryImplementor _sessionFactoryImplementor;

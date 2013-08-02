@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,12 +19,14 @@ import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.concurrent.ConcurrentLFUCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.NonSerializableObjectRequestWrapper;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -46,10 +48,12 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
+	@Override
 	public void destroy() {
 		portalDestroy();
 	}
 
+	@Override
 	public void doFilter(
 			ServletRequest servletRequest, ServletResponse servletResponse,
 			FilterChain filterChain)
@@ -58,6 +62,8 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 		HttpServletRequest request = (HttpServletRequest)servletRequest;
 
 		String uri = getURI(request);
+
+		request = handleNonSerializableRequest(request);
 
 		request.setAttribute(WebKeys.INVOKER_FILTER_URI, uri);
 
@@ -70,9 +76,10 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 		invokerFilterChain.setContextClassLoader(contextClassLoader);
 
-		invokerFilterChain.doFilter(servletRequest, servletResponse);
+		invokerFilterChain.doFilter(request, servletResponse);
 	}
 
+	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		_filterConfig = filterConfig;
 
@@ -219,6 +226,18 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 		}
 
 		return uri;
+	}
+
+	protected HttpServletRequest handleNonSerializableRequest(
+		HttpServletRequest request) {
+
+		if (ServerDetector.isWebLogic()) {
+			if (!NonSerializableObjectRequestWrapper.isWrapped(request)) {
+				request = new NonSerializableObjectRequestWrapper(request);
+			}
+		}
+
+		return request;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);

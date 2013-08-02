@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -151,7 +151,9 @@ public class AttachmentCommandReceiver extends BaseCommandReceiver {
 
 			String[] parts = StringUtil.split(fileName, StringPool.SLASH);
 
-			fileName = parts[3];
+			if (parts.length > 0) {
+				fileName = parts[parts.length - 1];
+			}
 
 			Element fileElement = document.createElement("File");
 

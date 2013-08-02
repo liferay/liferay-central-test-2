@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 List results = (List)request.getAttribute("view.jsp-results");
 
+if (Validator.isNull(redirect) && results.isEmpty()) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setParameter("struts_action", "/asset_publisher/view");
+
+	redirect = portletURL.toString();
+}
+
 int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")).intValue();
 
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
@@ -34,6 +42,7 @@ boolean print = ((Boolean)request.getAttribute("view.jsp-print")).booleanValue()
 
 request.setAttribute(WebKeys.LAYOUT_ASSET_ENTRY, assetEntry);
 
+request.setAttribute("view.jsp-fullContentRedirect", currentURL);
 request.setAttribute("view.jsp-showIconLabel", true);
 %>
 
@@ -61,8 +70,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<c:if test="<%= (enableConversions && assetRenderer.isConvertible()) && !print %>">
 
 				<%
-				String languageId = LanguageUtil.getLanguageId(request);
-
 				PortletURL exportAssetURL = assetRenderer.getURLExport(liferayPortletRequest, liferayPortletResponse);
 				%>
 
@@ -73,8 +80,6 @@ request.setAttribute("view.jsp-showIconLabel", true);
 			<c:if test="<%= (showAvailableLocales && assetRenderer.isLocalizable()) && !print %>">
 
 				<%
-				String languageId = LanguageUtil.getLanguageId(request);
-
 				String[] availableLocales = assetRenderer.getAvailableLocales();
 				%>
 
@@ -95,8 +100,15 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 	// Dynamically created asset entries are never persisted so incrementing the view counter breaks
 
-	if (!assetEntry.isNew()) {
-		AssetEntry incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
+	if (!assetEntry.isNew() && assetEntry.isVisible()) {
+		AssetEntry incrementAssetEntry = null;
+
+		if (assetEntryQuery.isEnablePermissions()) {
+			incrementAssetEntry = AssetEntryServiceUtil.incrementViewCounter(assetEntry.getClassName(), assetEntry.getClassPK());
+		}
+		else {
+			incrementAssetEntry = AssetEntryLocalServiceUtil.incrementViewCounter(user.getUserId(), assetEntry.getClassName(), assetEntry.getClassPK());
+		}
 
 		if (incrementAssetEntry != null) {
 			assetEntry = incrementAssetEntry;
@@ -168,9 +180,21 @@ request.setAttribute("view.jsp-showIconLabel", true);
 
 		<c:if test="<%= enableRatings %>">
 			<div class="asset-ratings">
+
+				<%
+				String assetEntryClassName = assetEntry.getClassName();
+
+				String ratingsType = "stars";
+
+				if (assetEntryClassName.equals(MBDiscussion.class.getName()) || assetEntryClassName.equals(MBMessage.class.getName())) {
+					ratingsType = "thumbs";
+				}
+				%>
+
 				<liferay-ui:ratings
 					className="<%= assetEntry.getClassName() %>"
 					classPK="<%= assetEntry.getClassPK() %>"
+					type="<%= ratingsType %>"
 				/>
 			</div>
 		</c:if>

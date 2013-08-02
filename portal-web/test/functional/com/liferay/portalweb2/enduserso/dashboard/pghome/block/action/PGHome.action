@@ -1,0 +1,7 @@
+<definition>
+	<command name="type">
+		<case locator-key1="WHATS_HAPPENING_CONTENT_INPUT_FIELD">
+			<execute function="Type#sendKeys" />
+		</case>
+	</command>
+</definition>

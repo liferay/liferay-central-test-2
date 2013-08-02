@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,22 +28,27 @@ public class LiferayCacheStorage implements ConcurrentCacheStorage {
 		return _portalCache;
 	}
 
+	@Override
 	public void clear() {
 		_portalCache.removeAll();
 	}
 
+	@Override
 	public Object get(Object key) {
 		return _portalCache.get(key.toString());
 	}
 
+	@Override
 	public boolean isConcurrent() {
 		return true;
 	}
 
+	@Override
 	public void put(Object key, Object value) {
 		_portalCache.put(key.toString(), value);
 	}
 
+	@Override
 	public void remove(Object key) {
 		_portalCache.remove(key.toString());
 	}

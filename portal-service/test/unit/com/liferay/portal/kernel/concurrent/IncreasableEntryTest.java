@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,14 @@ package com.liferay.portal.kernel.concurrent;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class IncreasableEntryTest extends TestCase {
 
+	@Test
 	public void testGettingKey() {
 		IncreasableEntry<String, Integer> increasableEntry =
 			new IntegerIncreasableEntry("test", 0);
@@ -30,6 +33,7 @@ public class IncreasableEntryTest extends TestCase {
 		assertEquals("test", increasableEntry.getKey());
 	}
 
+	@Test
 	public void testIncreaseAndGet() {
 		IncreasableEntry<String, Integer> increasableEntry =
 			new IntegerIncreasableEntry("test", 0);

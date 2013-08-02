@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -62,8 +63,9 @@ public class EditPageAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -120,7 +122,8 @@ public class EditPageAction extends PortletAction {
 			else if (e instanceof DuplicatePageException ||
 					 e instanceof PageContentException ||
 					 e instanceof PageVersionException ||
-					 e instanceof PageTitleException) {
+					 e instanceof PageTitleException ||
+					 e instanceof SanitizerException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
@@ -130,15 +133,23 @@ public class EditPageAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -157,7 +168,7 @@ public class EditPageAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.wiki.error");
+				return actionMapping.findForward("portlet.wiki.error");
 			}
 			else if (e instanceof NoSuchPageException) {
 
@@ -169,7 +180,7 @@ public class EditPageAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.wiki.edit_page"));
 	}
 
@@ -204,39 +215,43 @@ public class EditPageAction extends PortletAction {
 
 		WikiPage page = null;
 
-		if (Validator.isNotNull(title)) {
+		if (Validator.isNull(title)) {
+			renderRequest.setAttribute(WebKeys.WIKI_PAGE, page);
+
+			return;
+		}
+
+		try {
+			if (version == 0) {
+				page = WikiPageServiceUtil.getPage(nodeId, title, null);
+			}
+			else {
+				page = WikiPageServiceUtil.getPage(nodeId, title, version);
+			}
+		}
+		catch (NoSuchPageException nspe1) {
 			try {
-				if (version == 0) {
-					page = WikiPageServiceUtil.getPage(nodeId, title, null);
+				page = WikiPageServiceUtil.getPage(nodeId, title, false);
+			}
+			catch (NoSuchPageException nspe2) {
+				if (title.equals(WikiPageConstants.FRONT_PAGE) &&
+					(version == 0)) {
+
+					ServiceContext serviceContext = new ServiceContext();
+
+					page = WikiPageServiceUtil.addPage(
+						nodeId, title, null, WikiPageConstants.NEW, true,
+						serviceContext);
 				}
 				else {
-					page = WikiPageServiceUtil.getPage(nodeId, title, version);
+					throw nspe2;
 				}
 			}
-			catch (NoSuchPageException nspe1) {
-				try {
-					page = WikiPageServiceUtil.getPage(nodeId, title, false);
-				}
-				catch (NoSuchPageException nspe2) {
-					if (title.equals(WikiPageConstants.FRONT_PAGE) &&
-						(version == 0)) {
+		}
 
-						ServiceContext serviceContext = new ServiceContext();
-
-						page = WikiPageServiceUtil.addPage(
-							nodeId, title, null, WikiPageConstants.NEW, true,
-							serviceContext);
-					}
-					else {
-						throw nspe2;
-					}
-				}
-			}
-
-			if (removeRedirect) {
-				page.setContent(StringPool.BLANK);
-				page.setRedirectTitle(StringPool.BLANK);
-			}
+		if (removeRedirect) {
+			page.setContent(StringPool.BLANK);
+			page.setRedirectTitle(StringPool.BLANK);
 		}
 
 		renderRequest.setAttribute(WebKeys.WIKI_PAGE, page);
@@ -268,6 +283,7 @@ public class EditPageAction extends PortletAction {
 		portletURL.setParameter(
 			"nodeId", String.valueOf(page.getNodeId()), false);
 		portletURL.setParameter("title", page.getTitle(), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}

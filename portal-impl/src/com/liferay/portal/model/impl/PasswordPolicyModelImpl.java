@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -850,13 +850,16 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 	@Override
 	public PasswordPolicy toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PasswordPolicy)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PasswordPolicy)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PasswordPolicy toUnescapedModel() {
+		return (PasswordPolicy)this;
 	}
 
 	@Override
@@ -917,18 +920,15 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PasswordPolicy)) {
 			return false;
 		}
 
-		PasswordPolicy passwordPolicy = null;
-
-		try {
-			passwordPolicy = (PasswordPolicy)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PasswordPolicy passwordPolicy = (PasswordPolicy)obj;
 
 		long primaryKey = passwordPolicy.getPrimaryKey();
 
@@ -1280,7 +1280,7 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	}
 
 	private static ClassLoader _classLoader = PasswordPolicy.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PasswordPolicy.class
 		};
 	private long _passwordPolicyId;
@@ -1322,5 +1322,5 @@ public class PasswordPolicyModelImpl extends BaseModelImpl<PasswordPolicy>
 	private long _resetFailureCount;
 	private long _resetTicketMaxAge;
 	private long _columnBitmask;
-	private PasswordPolicy _escapedModelProxy;
+	private PasswordPolicy _escapedModel;
 }

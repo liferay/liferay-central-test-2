@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,8 @@ if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 }
 
 String redirect = ParamUtil.getString(request, "redirect");
+
+String portletNameSpace = PortalUtil.getPortletNamespace(portletResource);
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
@@ -186,7 +188,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 		folderWindow.focus();
 	}
 
-	function <%= PortalUtil.getPortletNamespace(portletResource) %>selectFolder(rootFolderId, rootFolderName) {
+	function <%= portletNameSpace %>selectFolder(rootFolderId, rootFolderName) {
 		var folderData = {
 			idString: 'rootFolderId',
 			idValue: rootFolderId,
@@ -194,7 +196,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			nameValue: rootFolderName
 		};
 
-		Liferay.Util.selectFolder(folderData, '<liferay-portlet:renderURL portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>', '<portlet:namespace />');
+		Liferay.Util.selectFolder(folderData, '<liferay-portlet:renderURL portletName="<%= HtmlUtil.escapeJS(portletResource) %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /></liferay-portlet:renderURL>', '<portlet:namespace />');
 	}
 
 	Liferay.provide(
@@ -209,3 +211,30 @@ String redirect = ParamUtil.getString(request, "redirect");
 		['liferay-util-list-fields']
 	);
 </aui:script>
+
+<c:if test="<%= SessionMessages.contains(renderRequest, portletDisplay.getId() + SessionMessages.KEY_SUFFIX_UPDATED_CONFIGURATION) %>">
+	<aui:script position="inline" use="aui-base">
+		var valueMap = {};
+
+		var foldersPerPageInput = A.one('#<portlet:namespace />foldersPerPage');
+
+		if (foldersPerPageInput) {
+			valueMap.delta1 = foldersPerPageInput.val();
+		}
+
+		var fileEntriesPerPageInput = A.one('#<portlet:namespace />fileEntriesPerPage');
+
+		if (fileEntriesPerPageInput) {
+			valueMap.delta2 = fileEntriesPerPageInput.val();
+		}
+
+		var portlet = Liferay.Util.getTop().AUI().one('#p_p_id<%= portletNameSpace %>');
+
+		portlet.refreshURL = portlet.refreshURL.replace(
+			/(cur\d{1}|delta[12])(=|%3D)[^%&]+/g,
+			function(match, param, equals) {
+				return param + equals + (valueMap[param] || 1);
+			}
+		);
+	</aui:script>
+</c:if>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -231,13 +231,16 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 
 	@Override
 	public ResourceAction toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ResourceAction)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ResourceAction)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ResourceAction toUnescapedModel() {
+		return (ResourceAction)this;
 	}
 
 	@Override
@@ -282,18 +285,15 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceAction)) {
 			return false;
 		}
 
-		ResourceAction resourceAction = null;
-
-		try {
-			resourceAction = (ResourceAction)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourceAction resourceAction = (ResourceAction)obj;
 
 		long primaryKey = resourceAction.getPrimaryKey();
 
@@ -395,7 +395,7 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	}
 
 	private static ClassLoader _classLoader = ResourceAction.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ResourceAction.class
 		};
 	private long _resourceActionId;
@@ -405,5 +405,5 @@ public class ResourceActionModelImpl extends BaseModelImpl<ResourceAction>
 	private String _originalActionId;
 	private long _bitwiseValue;
 	private long _columnBitmask;
-	private ResourceAction _escapedModelProxy;
+	private ResourceAction _escapedModel;
 }

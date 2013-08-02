@@ -1,0 +1,25 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="SAVE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="type">
+		<case locator-key1="SETUP_FORM_INFORMATION_TITLE">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="SETUP_FORM_INFORMATION_DESCRIPTION">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="SETUP_FORM_FIELDS_NAME">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="SETUP_FORM_FIELDS_RATING">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="SETUP_FORM_FIELDS_COMMENTS">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+	</command>
+</definition>

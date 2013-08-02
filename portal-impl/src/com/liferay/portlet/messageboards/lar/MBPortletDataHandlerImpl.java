@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,6 +48,7 @@ import com.liferay.portlet.messageboards.model.MBThreadFlag;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
@@ -121,7 +122,13 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 		if (!portletDataContext.addPrimaryKey(
 				MBPortletDataHandlerImpl.class, "deleteData")) {
 
+			MBBanLocalServiceUtil.deleteBansByGroupId(
+				portletDataContext.getScopeGroupId());
+
 			MBCategoryLocalServiceUtil.deleteCategories(
+				portletDataContext.getScopeGroupId());
+
+			MBStatsUserLocalServiceUtil.deleteStatsUsersByGroupId(
 				portletDataContext.getScopeGroupId());
 
 			MBThreadLocalServiceUtil.deleteThreads(
@@ -884,17 +891,14 @@ public class MBPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static PortletDataHandlerBoolean _categoriesAndMessages =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "categories-and-messages", true, true);
-
 	private static PortletDataHandlerControl[] _metadataControls =
 		new PortletDataHandlerControl[] {
 			new PortletDataHandlerBoolean(_NAMESPACE, "attachments"),
 			new PortletDataHandlerBoolean(_NAMESPACE, "ratings"),
 			new PortletDataHandlerBoolean(_NAMESPACE, "tags")
 		};
-
 	private static PortletDataHandlerBoolean _threadFlags =
 		new PortletDataHandlerBoolean(_NAMESPACE, "thread-flags");
-
 	private static PortletDataHandlerBoolean _userBans =
 		new PortletDataHandlerBoolean(_NAMESPACE, "user-bans");
 

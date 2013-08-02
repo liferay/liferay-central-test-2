@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -60,6 +60,7 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		}
 	}
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
@@ -206,6 +207,9 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		if (t == Types.BIGINT) {
 			value = GetterUtil.getLong(_resultSet.getLong(name));
 		}
+		else if (t == Types.BINARY) {
+			value = _resultSet.getBytes(name);
+		}
 		else if (t == Types.BIT) {
 			value = GetterUtil.getBoolean(_resultSet.getBoolean(name));
 		}
@@ -215,8 +219,17 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		else if (t == Types.BOOLEAN) {
 			value = GetterUtil.getBoolean(_resultSet.getBoolean(name));
 		}
+		else if (t == Types.CHAR) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
 		else if (t == Types.CLOB) {
 			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == Types.DATE) {
+			value = _resultSet.getDate(name);
+		}
+		else if (t == Types.DECIMAL) {
+			value = _resultSet.getBigDecimal(name);
 		}
 		else if (t == Types.DOUBLE) {
 			value = GetterUtil.getDouble(_resultSet.getDouble(name));
@@ -227,14 +240,50 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 		else if (t == Types.INTEGER) {
 			value = GetterUtil.getInteger(_resultSet.getInt(name));
 		}
+		else if (t == _LONGNVARCHAR) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == Types.LONGVARBINARY) {
+			value = _resultSet.getBytes(name);
+		}
+		else if (t == Types.LONGVARCHAR) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == _NCHAR) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == _NCLOB) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
 		else if (t == Types.NUMERIC) {
 			value = GetterUtil.getLong(_resultSet.getLong(name));
+		}
+		else if (t == _NVARCHAR) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == Types.REAL) {
+			value = GetterUtil.getFloat(_resultSet.getFloat(name));
+		}
+		else if (t == Types.ROWID) {
+			value = GetterUtil.getFloat(_resultSet.getFloat(name));
 		}
 		else if (t == Types.SMALLINT) {
 			value = GetterUtil.getShort(_resultSet.getShort(name));
 		}
+		else if (t == _SQLXML) {
+			value = GetterUtil.getString(_resultSet.getString(name));
+		}
+		else if (t == Types.TIME) {
+			value = _resultSet.getTime(name);
+		}
 		else if (t == Types.TIMESTAMP) {
 			value = _resultSet.getTimestamp(name);
+		}
+		else if (t == Types.TINYINT) {
+			value = GetterUtil.getShort(_resultSet.getShort(name));
+		}
+		else if (t == Types.VARBINARY) {
+			value = _resultSet.getBytes(name);
 		}
 		else if (t == Types.VARCHAR) {
 			value = GetterUtil.getString(_resultSet.getString(name));
@@ -246,6 +295,16 @@ public class UpgradeOptimizedResultSetHandler implements InvocationHandler {
 
 		return value;
 	}
+
+	private static final int _LONGNVARCHAR = -16;
+
+	private static final int _NCHAR = -15;
+
+	private static final int _NCLOB = 2011;
+
+	private static final int _NVARCHAR = -9;
+
+	private static final int _SQLXML = 2009;
 
 	private List<String> _columnNames = new ArrayList<String>();
 	private Map<Object, Integer> _columnTypes = new HashMap<Object, Integer>();

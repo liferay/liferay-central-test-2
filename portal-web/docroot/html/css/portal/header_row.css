@@ -55,3 +55,18 @@
 	float: right;
 	margin: -2px 0 0 2px;
 }
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.lfr-header-row {
+		.lfr-search-combobox {
+			float: left;
+		}
+
+		.lfr-actions.show-arrow.direction-down .lfr-trigger strong a {
+			padding-left: 20px;
+			padding-right: 4px;
+		}
+	}
+}

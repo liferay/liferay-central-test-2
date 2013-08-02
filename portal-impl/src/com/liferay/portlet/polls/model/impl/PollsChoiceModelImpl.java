@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -407,13 +407,16 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 	@Override
 	public PollsChoice toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PollsChoice)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PollsChoice)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PollsChoice toUnescapedModel() {
+		return (PollsChoice)this;
 	}
 
 	@Override
@@ -459,18 +462,15 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PollsChoice)) {
 			return false;
 		}
 
-		PollsChoice pollsChoice = null;
-
-		try {
-			pollsChoice = (PollsChoice)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PollsChoice pollsChoice = (PollsChoice)obj;
 
 		long primaryKey = pollsChoice.getPrimaryKey();
 
@@ -590,7 +590,7 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	private static ClassLoader _classLoader = PollsChoice.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PollsChoice.class
 		};
 	private String _uuid;
@@ -604,5 +604,5 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	private String _description;
 	private String _descriptionCurrentLanguageId;
 	private long _columnBitmask;
-	private PollsChoice _escapedModelProxy;
+	private PollsChoice _escapedModel;
 }

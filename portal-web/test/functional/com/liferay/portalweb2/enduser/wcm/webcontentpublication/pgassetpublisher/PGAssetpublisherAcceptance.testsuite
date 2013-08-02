@@ -1,0 +1,5 @@
+<definition>
+	<execute test-case="PGAssetpublisherSiteAcceptance" />
+
+	<execute test-case="PGAssetpublisherWebcontentAcceptance" />
+</definition>

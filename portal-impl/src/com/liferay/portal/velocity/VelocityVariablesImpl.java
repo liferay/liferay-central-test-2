@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,14 +65,13 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.webserver.WebServerServletTokenUtil;
-import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
-import com.liferay.taglib.util.VelocityTaglib;
+import com.liferay.taglib.util.VelocityTaglibImpl;
 import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.lang.reflect.Method;
@@ -80,6 +79,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
@@ -103,6 +103,7 @@ import org.apache.velocity.tools.generic.SortTool;
  */
 public class VelocityVariablesImpl implements VelocityVariables {
 
+	@Override
 	public void insertHelperUtilities(
 		VelocityContext velocityContext, String[] restrictedVariables) {
 
@@ -436,7 +437,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		// VelocityTaglib methods
 
 		try {
-			Class<?> clazz = VelocityTaglib.class;
+			Class<?> clazz = VelocityTaglibImpl.class;
 
 			Method method = clazz.getMethod(
 				"layoutIcon", new Class[] {Layout.class});
@@ -583,6 +584,7 @@ public class VelocityVariablesImpl implements VelocityVariables {
 		}
 	}
 
+	@Override
 	public void insertVariables(
 			VelocityContext velocityContext, HttpServletRequest request)
 		throws Exception {
@@ -593,12 +595,11 @@ public class VelocityVariablesImpl implements VelocityVariables {
 
 		// Portlet config
 
-		PortletConfigImpl portletConfigImpl =
-			(PortletConfigImpl)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		if (portletConfigImpl != null) {
-			velocityContext.put("portletConfig", portletConfigImpl);
+		if (portletConfig != null) {
+			velocityContext.put("portletConfig", portletConfig);
 		}
 
 		// Render request

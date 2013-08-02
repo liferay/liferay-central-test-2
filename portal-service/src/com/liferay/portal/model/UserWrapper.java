@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -1180,6 +1182,10 @@ public class UserWrapper implements User, ModelWrapper<User> {
 		return new UserWrapper(_user.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.User toUnescapedModel() {
+		return new UserWrapper(_user.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _user.toString();
@@ -1232,11 +1238,26 @@ public class UserWrapper implements User, ModelWrapper<User> {
 		return _user.getDisplayURL(portalURL, mainPath);
 	}
 
+	public java.lang.String getDisplayURL(java.lang.String portalURL,
+		java.lang.String mainPath, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _user.getDisplayURL(portalURL, mainPath, privateLayout);
+	}
+
 	public java.lang.String getDisplayURL(
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _user.getDisplayURL(themeDisplay);
+	}
+
+	public java.lang.String getDisplayURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay,
+		boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _user.getDisplayURL(themeDisplay, privateLayout);
 	}
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
@@ -1501,6 +1522,25 @@ public class UserWrapper implements User, ModelWrapper<User> {
 
 	public void setPasswordUnencrypted(java.lang.String passwordUnencrypted) {
 		_user.setPasswordUnencrypted(passwordUnencrypted);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserWrapper)) {
+			return false;
+		}
+
+		UserWrapper userWrapper = (UserWrapper)obj;
+
+		if (Validator.equals(_user, userWrapper._user)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

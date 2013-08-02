@@ -1,0 +1,38 @@
+<definition>
+
+	<command name="assertElementPresent">
+		<case locator-key1="NOTIFICATION">
+			<execute function="AssertElementPresent#assertElementPresent" />
+		</case>
+	</command>
+
+	<command name="assertTextEquals">
+		<case locator-key1="NOTIFICATION_MENU_ENTRY_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+
+	<command name="click">
+		<case locator-key1="DASHBOARD">
+			<execute function="Click#textClickAtAndWait" value1="Dashboard" />
+		</case>
+		<case locator-key1="USER_MENU_MY_ACCOUNT">
+			<execute function="AssertClick#assertTextClickAt" />
+		</case>
+		<case locator-key1="USER_MENU_MY_PROFILE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="USER_MENU_SIGN_OUT">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator1="//span[@data-title='">
+			<execute function="Click#makeVisibleClickAt" />
+		</case>
+	</command>
+
+	<command name="mouseOver">
+		<case locator-key1="USER_NAME">
+			<execute function="MouseOver#mouseOverClickDockbar" />
+		</case>
+	</command>
+</definition>

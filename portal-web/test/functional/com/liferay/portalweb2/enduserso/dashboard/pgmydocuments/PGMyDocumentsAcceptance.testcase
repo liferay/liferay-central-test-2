@@ -1,0 +1,34 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="AddFolderDocument">
+		<var name="dmDocumentFile" value="Document_1.txt" />
+		<var name="dmDocumentSize" value="0.3k" />
+		<var name="dmDocumentTitle" value="DM Folder Document Title" />
+		<var name="dmDocumentDescription" value="DM Folder Document Description" />
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+
+		<execute macro="DMFolder#addPG">
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#addPG">
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="SOMicroblogs#tearDownMicroblogsEntry" />
+
+		<execute macro="SOUser#tearDownCP" />
+	</tear-down>
+</definition>

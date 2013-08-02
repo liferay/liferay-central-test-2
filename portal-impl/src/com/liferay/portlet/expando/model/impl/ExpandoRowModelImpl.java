@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -205,13 +205,16 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 
 	@Override
 	public ExpandoRow toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ExpandoRow)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ExpandoRow)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ExpandoRow toUnescapedModel() {
+		return (ExpandoRow)this;
 	}
 
 	@Override
@@ -244,18 +247,15 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoRow)) {
 			return false;
 		}
 
-		ExpandoRow expandoRow = null;
-
-		try {
-			expandoRow = (ExpandoRow)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoRow expandoRow = (ExpandoRow)obj;
 
 		long primaryKey = expandoRow.getPrimaryKey();
 
@@ -349,7 +349,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	}
 
 	private static ClassLoader _classLoader = ExpandoRow.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ExpandoRow.class
 		};
 	private long _rowId;
@@ -361,5 +361,5 @@ public class ExpandoRowModelImpl extends BaseModelImpl<ExpandoRow>
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private long _columnBitmask;
-	private ExpandoRow _escapedModelProxy;
+	private ExpandoRow _escapedModel;
 }

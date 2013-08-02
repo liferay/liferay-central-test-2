@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ public class ResourceImpl extends ResourceBaseImpl {
 	public ResourceImpl() {
 	}
 
+	@Override
 	public long getCompanyId() throws PortalException, SystemException {
 		if (_companyId != 0) {
 			return _companyId;
@@ -41,6 +42,7 @@ public class ResourceImpl extends ResourceBaseImpl {
 		}
 	}
 
+	@Override
 	public String getName() throws PortalException, SystemException {
 		if (_name != null) {
 			return _name;
@@ -53,6 +55,7 @@ public class ResourceImpl extends ResourceBaseImpl {
 		}
 	}
 
+	@Override
 	public int getScope() throws PortalException, SystemException {
 		if (_scope != 0) {
 			return _scope;
@@ -65,14 +68,17 @@ public class ResourceImpl extends ResourceBaseImpl {
 		}
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
+	@Override
 	public void setName(String name) {
 		_name = name;
 	}
 
+	@Override
 	public void setScope(int scope) {
 		_scope = scope;
 	}

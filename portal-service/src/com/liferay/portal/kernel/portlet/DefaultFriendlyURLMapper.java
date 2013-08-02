@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -95,6 +95,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		defaultReservedParameters.put(name, value);
 	}
 
+	@Override
 	public String buildPath(LiferayPortletURL liferayPortletURL) {
 		Map<String, String> routeParameters = new HashMap<String, String>();
 
@@ -134,6 +135,7 @@ public class DefaultFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return defaultReservedParameters;
 	}
 
+	@Override
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> parameterMap,
 		Map<String, Object> requestContext) {

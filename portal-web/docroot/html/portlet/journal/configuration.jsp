@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,9 +21,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+PortletPreferences portletSetup = renderRequest.getPreferences();
 
 String emailFromName = ParamUtil.getString(request, "emailFromName", JournalUtil.getEmailFromName(portletSetup, company.getCompanyId()));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", JournalUtil.getEmailFromAddress(portletSetup, company.getCompanyId()));
@@ -88,10 +86,10 @@ else if (tabs2.equals("web-content-updated-email")) {
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 
 	<%
-	String tabs1Names = "email-from,web-content-added-email,web-content-updated-email";
+	String tabs1Names = "email-from,web-content-added-email,web-content-review-email,web-content-updated-email";
 
 	if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, JournalArticle.class.getName())) {
-		tabs1Names = tabs1Names.concat(",web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email,web-content-review-email");
+		tabs1Names = tabs1Names.concat(",web-content-approval-denied-email,web-content-approval-granted-email,web-content-approval-requested-email");
 	}
 	%>
 

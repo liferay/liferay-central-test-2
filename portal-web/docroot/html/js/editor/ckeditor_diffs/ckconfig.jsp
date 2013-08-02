@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,14 +14,22 @@
  */
 --%>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
+<%@ page import="java.util.Locale" %>
+
 <%
+String contentsLanguageId = ParamUtil.getString(request, "contentsLanguageId");
 String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 String languageId = ParamUtil.getString(request, "languageId");
+boolean resizable = ParamUtil.getBoolean(request, "resizable");
 
 response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>
@@ -54,15 +62,33 @@ if (!CKEDITOR.stylesSet.get('liferayStyles')) {
 	);
 }
 
+CKEDITOR.config.autoParagraph = false;
+
 CKEDITOR.config.bodyClass = 'html-editor <%= HtmlUtil.escapeJS(cssClasses) %>';
 
 CKEDITOR.config.contentsCss = '<%= HtmlUtil.escapeJS(cssPath) %>/main.css';
+
+<%
+Locale contentsLocale = LocaleUtil.fromLanguageId(contentsLanguageId);
+
+String contentsLanguageDir = LanguageUtil.get(contentsLocale, "lang.dir");
+%>
+
+CKEDITOR.config.contentsLangDirection = '<%= HtmlUtil.escapeJS(contentsLanguageDir) %>';
+
+CKEDITOR.config.contentsLanguage = '<%= HtmlUtil.escapeJS(contentsLanguageId.replace("iw_", "he_")) %>';
 
 CKEDITOR.config.entities = false;
 
 CKEDITOR.config.height = 265;
 
-CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId) %>';
+CKEDITOR.config.language = '<%= HtmlUtil.escapeJS(languageId.replace("iw_", "he_")) %>';
+
+CKEDITOR.config.resize_enabled = <%= resizable %>;
+
+<c:if test="<%= resizable %>">
+	CKEDITOR.config.resize_dir = 'vertical';
+</c:if>
 
 CKEDITOR.config.stylesCombo_stylesSet = 'liferayStyles';
 
@@ -115,3 +141,31 @@ CKEDITOR.config.toolbar_liferayArticle = [
 	['Link', 'Unlink', 'Anchor'],
 	['Image', 'Flash', 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
 ];
+
+CKEDITOR.on(
+	'dialogDefinition',
+	function(event) {
+		var dialogDefinition = event.data.definition;
+
+		var onShow = dialogDefinition.onShow;
+
+		dialogDefinition.onShow = function() {
+			if (typeof onShow === 'function') {
+				onShow.apply(this);
+			}
+
+			if (window.top != window.self) {
+				var editorElement = this.getParentEditor().container;
+
+				var documentPosition = editorElement.getDocumentPosition();
+
+				var dialogSize = this.getSize();
+
+				var x = documentPosition.x + ((editorElement.getSize('width', true) - dialogSize.width) / 2);
+				var y = documentPosition.y + ((editorElement.getSize('height', true) - dialogSize.height) / 2);
+
+				this.move(x, y, false);
+			}
+		}
+	}
+);

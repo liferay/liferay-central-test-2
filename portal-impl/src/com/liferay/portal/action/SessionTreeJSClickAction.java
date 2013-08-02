@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,8 +40,8 @@ public class SessionTreeJSClickAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		try {
@@ -77,11 +77,14 @@ public class SessionTreeJSClickAction extends Action {
 					}
 				}
 				else {
+					boolean recursive = ParamUtil.getBoolean(
+						request, "recursive");
+
 					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 					SessionTreeJSClicks.openLayoutNodes(
 						request, treeId, layout.getPrivateLayout(),
-						layout.getLayoutId(), true);
+						layout.getLayoutId(), recursive);
 				}
 			}
 			else if (cmd.equals("layoutCollapse")) {
@@ -105,11 +108,14 @@ public class SessionTreeJSClickAction extends Action {
 					}
 				}
 				else {
+					boolean recursive = ParamUtil.getBoolean(
+						request, "recursive");
+
 					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 					SessionTreeJSClicks.closeLayoutNodes(
 						request, treeId, layout.getPrivateLayout(),
-						layout.getLayoutId(), true);
+						layout.getLayoutId(), recursive);
 				}
 			}
 			else if (cmd.equals("layoutUncollapse")) {

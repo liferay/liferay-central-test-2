@@ -1,0 +1,16 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_EVENT_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="EVENT_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="VIEW_EVENTS">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="VIEW_SUMMARY">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -849,6 +850,10 @@ public class DLFileVersionWrapper implements DLFileVersion,
 		return new DLFileVersionWrapper(_dlFileVersion.toEscapedModel());
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion toUnescapedModel() {
+		return new DLFileVersionWrapper(_dlFileVersion.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _dlFileVersion.toString();
@@ -861,6 +866,12 @@ public class DLFileVersionWrapper implements DLFileVersion,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileVersion.persist();
+	}
+
+	public java.lang.String getChecksum()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _dlFileVersion.getChecksum();
 	}
 
 	public java.io.InputStream getContentStream(boolean incrementCounter)
@@ -887,9 +898,34 @@ public class DLFileVersionWrapper implements DLFileVersion,
 		return _dlFileVersion.getIcon();
 	}
 
+	public void setChecksum(java.lang.String checksum)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_dlFileVersion.setChecksum(checksum);
+	}
+
 	public void setExtraSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties extraSettingsProperties) {
 		_dlFileVersion.setExtraSettingsProperties(extraSettingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileVersionWrapper)) {
+			return false;
+		}
+
+		DLFileVersionWrapper dlFileVersionWrapper = (DLFileVersionWrapper)obj;
+
+		if (Validator.equals(_dlFileVersion, dlFileVersionWrapper._dlFileVersion)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

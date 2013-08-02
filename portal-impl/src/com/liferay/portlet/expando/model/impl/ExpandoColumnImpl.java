@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,6 +36,7 @@ public class ExpandoColumnImpl extends ExpandoColumnBaseImpl {
 	public ExpandoColumnImpl() {
 	}
 
+	@Override
 	public Serializable getDefaultValue() {
 		try {
 			ExpandoValue value = new ExpandoValueImpl();
@@ -105,6 +106,7 @@ public class ExpandoColumnImpl extends ExpandoColumnBaseImpl {
 		}
 	}
 
+	@Override
 	public String getDisplayName(Locale locale) {
 		String name = getName();
 
@@ -127,6 +129,7 @@ public class ExpandoColumnImpl extends ExpandoColumnBaseImpl {
 		}
 	}
 
+	@Override
 	public UnicodeProperties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
 			_typeSettingsProperties = new UnicodeProperties(true);
@@ -149,6 +152,7 @@ public class ExpandoColumnImpl extends ExpandoColumnBaseImpl {
 		super.setTypeSettings(typeSettings);
 	}
 
+	@Override
 	public void setTypeSettingsProperties(
 		UnicodeProperties typeSettingsProperties) {
 

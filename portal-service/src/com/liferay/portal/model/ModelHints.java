@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,6 +32,8 @@ public interface ModelHints {
 	public Element getFieldsEl(String model, String field);
 
 	public Map<String, String> getHints(String model, String field);
+
+	public int getMaxLength(String model, String field);
 
 	public List<String> getModels();
 

@@ -1,0 +1,37 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_REGULAR_ORGANIZATION">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="ADD_USER">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="ORGANIZATION_TABLE_ACTIONS_">
+			<execute function="AssertClick#pauseAssertTextClickAt" />
+		</case>
+		<case comparator="startsWith" locator-key1="ORGANIZATION_TABLE_NAME_">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="ORGANIZATION_MENULIST_">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="SEARCH_ALL_USERS">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+ 	<command name="click">
+		<case comparator="startsWith" locator-key1="ORGANIZATION_TABLE_NAME_">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="confirm">
+		<case locator-key1="CONFIRMATION">
+			<execute function="Confirm#waitForConfirmation" />
+		</case>
+	</command>
+</definition>

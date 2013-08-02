@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,6 +69,14 @@ public class PortalBeanLocatorUtil {
 		if (beanLocator == null) {
 			_log.error("BeanLocator is null");
 
+			Thread.dumpStack();
+
+			if (_log.isDebugEnabled()) {
+				Exception e = new Exception();
+
+				_log.debug(e, e);
+			}
+
 			throw new BeanLocatorException("BeanLocator has not been set");
 		}
 
@@ -92,12 +100,21 @@ public class PortalBeanLocatorUtil {
 		}
 	}
 
+	public static void reset() {
+		setBeanLocator(null);
+	}
+
 	public static void setBeanLocator(BeanLocator beanLocator) {
 		PortalRuntimePermission.checkSetBeanProperty(
 			PortalBeanLocatorUtil.class);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			if (beanLocator == null) {
+				_log.debug("Setting BeanLocator " + beanLocator);
+			}
+			else {
+				_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+			}
 		}
 
 		_beanLocator = beanLocator;

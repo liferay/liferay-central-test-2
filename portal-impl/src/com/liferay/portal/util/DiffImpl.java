@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,10 +45,13 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	/**
 	 * This is a diff method with default values.
 	 *
+	 * @param  source the source text
+	 * @param  target the modified version of the source text
 	 * @return an array containing two lists of <code>DiffResults</code>, the
 	 *         first element contains DiffResults related to changes in source
 	 *         and the second element to changes in target
 	 */
+	@Override
 	public List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
 
@@ -61,10 +64,23 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 	 * highlight the changes by enclosing them with markers and return a list of
 	 * <code>DiffResults</code>.
 	 *
+	 * @param  source the source text
+	 * @param  target the modified version of the source text
+	 * @param  addedMarkerStart the marker to indicate the start of text added
+	 *         to the source
+	 * @param  addedMarkerEnd the marker to indicate the end of text added to
+	 *         the source
+	 * @param  deletedMarkerStart the marker to indicate the start of text
+	 *         deleted from the source
+	 * @param  deletedMarkerEnd the marker to indicate the end of text deleted
+	 *         from the source
+	 * @param  margin the vertical margin to use in displaying differences
+	 *         between changed line changes
 	 * @return an array containing two lists of <code>DiffResults</code>, the
 	 *         first element contains DiffResults related to changes in source
 	 *         and the second element to changes in target
 	 */
+	@Override
 	public List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,
@@ -328,10 +344,10 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 			}
 		}
 
-		// After the for loop above, some lines might remained unchecked.
-		// They are considered as deletions or additions.
+		// After the for loop above, some lines might remained unchecked. They
+		// are considered as deletions or additions.
 
-		for (; i <= difference.getDeletedEnd();i++) {
+		for (; i <= difference.getDeletedEnd(); i++) {
 			_highlightLines(
 				sourceStringList, deletedMarkerStart, deletedMarkerEnd, i, i);
 
@@ -446,8 +462,8 @@ public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 		int deletedChars = 0;
 		int addedChars = 0;
 
-		// The following while loop will calculate how many characters of
-		// the source line need to be changed to be equals to the target line.
+		// The following while loop will calculate how many characters of the
+		// source line need to be changed to be equals to the target line.
 
 		while (itr.hasNext() && !aligned) {
 			Difference difference = itr.next();

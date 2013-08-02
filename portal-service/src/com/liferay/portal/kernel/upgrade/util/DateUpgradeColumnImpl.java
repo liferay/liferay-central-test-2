@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ public class DateUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		super(name, Types.TIMESTAMP);
 	}
 
+	@Override
 	public Object getNewValue(Object oldValue) throws Exception {
 		if (StringPool.NULL.equals(oldValue)) {
 			return 0;

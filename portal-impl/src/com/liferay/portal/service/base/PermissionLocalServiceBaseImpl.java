@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -153,7 +153,6 @@ import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
-import com.liferay.portal.service.persistence.LayoutSetBranchFinder;
 import com.liferay.portal.service.persistence.LayoutSetBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
@@ -449,6 +448,384 @@ public abstract class PermissionLocalServiceBaseImpl
 		permission.setNew(false);
 
 		return permissionPersistence.update(permission, merge);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupPermission(long groupId, long permissionId)
+		throws SystemException {
+		groupPersistence.addPermission(groupId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupPermission(long groupId, Permission permission)
+		throws SystemException {
+		groupPersistence.addPermission(groupId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupPermissions(long groupId, long[] permissionIds)
+		throws SystemException {
+		groupPersistence.addPermissions(groupId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupPermissions(long groupId, List<Permission> Permissions)
+		throws SystemException {
+		groupPersistence.addPermissions(groupId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearGroupPermissions(long groupId) throws SystemException {
+		groupPersistence.clearPermissions(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupPermission(long groupId, long permissionId)
+		throws SystemException {
+		groupPersistence.removePermission(groupId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupPermission(long groupId, Permission permission)
+		throws SystemException {
+		groupPersistence.removePermission(groupId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupPermissions(long groupId, long[] permissionIds)
+		throws SystemException {
+		groupPersistence.removePermissions(groupId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupPermissions(long groupId,
+		List<Permission> Permissions) throws SystemException {
+		groupPersistence.removePermissions(groupId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getGroupPermissions(long groupId)
+		throws SystemException {
+		return groupPersistence.getPermissions(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getGroupPermissions(long groupId, int start, int end)
+		throws SystemException {
+		return groupPersistence.getPermissions(groupId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getGroupPermissions(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return groupPersistence.getPermissions(groupId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getGroupPermissionsCount(long groupId) throws SystemException {
+		return groupPersistence.getPermissionsSize(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasGroupPermission(long groupId, long permissionId)
+		throws SystemException {
+		return groupPersistence.containsPermission(groupId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasGroupPermissions(long groupId) throws SystemException {
+		return groupPersistence.containsPermissions(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setGroupPermissions(long groupId, long[] permissionIds)
+		throws SystemException {
+		groupPersistence.setPermissions(groupId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRolePermission(long roleId, long permissionId)
+		throws SystemException {
+		rolePersistence.addPermission(roleId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRolePermission(long roleId, Permission permission)
+		throws SystemException {
+		rolePersistence.addPermission(roleId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRolePermissions(long roleId, long[] permissionIds)
+		throws SystemException {
+		rolePersistence.addPermissions(roleId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addRolePermissions(long roleId, List<Permission> Permissions)
+		throws SystemException {
+		rolePersistence.addPermissions(roleId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearRolePermissions(long roleId) throws SystemException {
+		rolePersistence.clearPermissions(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRolePermission(long roleId, long permissionId)
+		throws SystemException {
+		rolePersistence.removePermission(roleId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRolePermission(long roleId, Permission permission)
+		throws SystemException {
+		rolePersistence.removePermission(roleId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRolePermissions(long roleId, long[] permissionIds)
+		throws SystemException {
+		rolePersistence.removePermissions(roleId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteRolePermissions(long roleId, List<Permission> Permissions)
+		throws SystemException {
+		rolePersistence.removePermissions(roleId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getRolePermissions(long roleId)
+		throws SystemException {
+		return rolePersistence.getPermissions(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getRolePermissions(long roleId, int start, int end)
+		throws SystemException {
+		return rolePersistence.getPermissions(roleId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getRolePermissions(long roleId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return rolePersistence.getPermissions(roleId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getRolePermissionsCount(long roleId) throws SystemException {
+		return rolePersistence.getPermissionsSize(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasRolePermission(long roleId, long permissionId)
+		throws SystemException {
+		return rolePersistence.containsPermission(roleId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasRolePermissions(long roleId) throws SystemException {
+		return rolePersistence.containsPermissions(roleId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setRolePermissions(long roleId, long[] permissionIds)
+		throws SystemException {
+		rolePersistence.setPermissions(roleId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserPermission(long userId, long permissionId)
+		throws SystemException {
+		userPersistence.addPermission(userId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserPermission(long userId, Permission permission)
+		throws SystemException {
+		userPersistence.addPermission(userId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserPermissions(long userId, long[] permissionIds)
+		throws SystemException {
+		userPersistence.addPermissions(userId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserPermissions(long userId, List<Permission> Permissions)
+		throws SystemException {
+		userPersistence.addPermissions(userId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearUserPermissions(long userId) throws SystemException {
+		userPersistence.clearPermissions(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserPermission(long userId, long permissionId)
+		throws SystemException {
+		userPersistence.removePermission(userId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserPermission(long userId, Permission permission)
+		throws SystemException {
+		userPersistence.removePermission(userId, permission);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserPermissions(long userId, long[] permissionIds)
+		throws SystemException {
+		userPersistence.removePermissions(userId, permissionIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserPermissions(long userId, List<Permission> Permissions)
+		throws SystemException {
+		userPersistence.removePermissions(userId, Permissions);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getUserPermissions(long userId)
+		throws SystemException {
+		return userPersistence.getPermissions(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getUserPermissions(long userId, int start, int end)
+		throws SystemException {
+		return userPersistence.getPermissions(userId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Permission> getUserPermissions(long userId, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		return userPersistence.getPermissions(userId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getUserPermissionsCount(long userId) throws SystemException {
+		return userPersistence.getPermissionsSize(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserPermission(long userId, long permissionId)
+		throws SystemException {
+		return userPersistence.containsPermission(userId, permissionId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserPermissions(long userId) throws SystemException {
+		return userPersistence.containsPermissions(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setUserPermissions(long userId, long[] permissionIds)
+		throws SystemException {
+		userPersistence.setPermissions(userId, permissionIds);
 	}
 
 	/**
@@ -1389,25 +1766,6 @@ public abstract class PermissionLocalServiceBaseImpl
 	public void setLayoutSetBranchPersistence(
 		LayoutSetBranchPersistence layoutSetBranchPersistence) {
 		this.layoutSetBranchPersistence = layoutSetBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout set branch finder.
-	 *
-	 * @return the layout set branch finder
-	 */
-	public LayoutSetBranchFinder getLayoutSetBranchFinder() {
-		return layoutSetBranchFinder;
-	}
-
-	/**
-	 * Sets the layout set branch finder.
-	 *
-	 * @param layoutSetBranchFinder the layout set branch finder
-	 */
-	public void setLayoutSetBranchFinder(
-		LayoutSetBranchFinder layoutSetBranchFinder) {
-		this.layoutSetBranchFinder = layoutSetBranchFinder;
 	}
 
 	/**
@@ -4116,8 +4474,6 @@ public abstract class PermissionLocalServiceBaseImpl
 	protected LayoutSetBranchService layoutSetBranchService;
 	@BeanReference(type = LayoutSetBranchPersistence.class)
 	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
-	@BeanReference(type = LayoutSetBranchFinder.class)
-	protected LayoutSetBranchFinder layoutSetBranchFinder;
 	@BeanReference(type = LayoutSetPrototypeLocalService.class)
 	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
 	@BeanReference(type = LayoutSetPrototypeService.class)

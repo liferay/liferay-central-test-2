@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -674,6 +675,10 @@ public class AssetVocabularyWrapper implements AssetVocabulary,
 		return new AssetVocabularyWrapper(_assetVocabulary.toEscapedModel());
 	}
 
+	public com.liferay.portlet.asset.model.AssetVocabulary toUnescapedModel() {
+		return new AssetVocabularyWrapper(_assetVocabulary.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _assetVocabulary.toString();
@@ -703,6 +708,26 @@ public class AssetVocabularyWrapper implements AssetVocabulary,
 	public void setSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties settingsProperties) {
 		_assetVocabulary.setSettingsProperties(settingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetVocabularyWrapper)) {
+			return false;
+		}
+
+		AssetVocabularyWrapper assetVocabularyWrapper = (AssetVocabularyWrapper)obj;
+
+		if (Validator.equals(_assetVocabulary,
+					assetVocabularyWrapper._assetVocabulary)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

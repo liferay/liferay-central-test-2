@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,6 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -258,49 +257,17 @@ public class VerifyPermission
 			String[] actionIds)
 		throws Exception {
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("select count(*) from ResourcePermission where ");
-			sb.append("ResourcePermission.companyId = ? and ");
-			sb.append("ResourcePermission.primKey = ? and ");
-			sb.append("ResourcePermission.roleId = ?");
-
-			ps = con.prepareStatement(sb.toString());
-
-			ps.setLong(1, companyId);
-			ps.setString(2, primKey);
-			ps.setLong(3, ownerRoleId);
-
-			rs = ps.executeQuery();
-
-			if (!rs.next()) {
-				return;
-			}
-
-			int count = rs.getInt(1);
-
-			if (count > 0) {
-				return;
-			}
-
-			ResourcePermissionLocalServiceUtil.setResourcePermissions(
-				companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
-				ownerRoleId, actionIds);
-
-			ResourcePermissionLocalServiceUtil.getResourcePermission(
-				companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
-				ownerRoleId);
+		if (hasResourcePermission(companyId, primKey, ownerRoleId)) {
+			return;
 		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
+
+		ResourcePermissionLocalServiceUtil.setResourcePermissions(
+			companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
+			ownerRoleId, actionIds);
+
+		ResourcePermissionLocalServiceUtil.getResourcePermission(
+			companyId, Layout.class.getName(), SCOPE_INDIVIDUAL, primKey,
+			ownerRoleId);
 	}
 
 	protected void fixOrganizationRolePermissions() throws Exception {
@@ -422,6 +389,81 @@ public class VerifyPermission
 		}
 	}
 
+	protected boolean hasPermission(String actionId, long resourceId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from Permission_ where actionId = ? and " +
+					"resourceId = ?");
+
+			ps.setString(1, actionId);
+			ps.setLong(2, resourceId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected boolean hasResourcePermission(
+			long companyId, String primKey, long roleId)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(4);
+
+			sb.append("select count(*) from ResourcePermission where ");
+			sb.append("ResourcePermission.companyId = ? and ");
+			sb.append("ResourcePermission.primKey = ? and ");
+			sb.append("ResourcePermission.roleId = ?");
+
+			ps = con.prepareStatement(sb.toString());
+
+			ps.setLong(1, companyId);
+			ps.setString(2, primKey);
+			ps.setLong(3, roleId);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int count = rs.getInt(1);
+
+				if (count > 0) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected boolean isPrivateLayout(String name, String primKey)
 		throws Exception {
 
@@ -444,14 +486,11 @@ public class VerifyPermission
 			Resource resource, List<Permission> permissions)
 		throws Exception {
 
-		Resource groupResource = null;
+		Resource groupResource = ResourceLocalServiceUtil.fetchResource(
+			resource.getCompanyId(), Group.class.getName(), resource.getScope(),
+			resource.getPrimKey());
 
-		try {
-			groupResource = ResourceLocalServiceUtil.getResource(
-				resource.getCompanyId(), Group.class.getName(),
-				resource.getScope(), resource.getPrimKey());
-		}
-		catch (NoSuchResourceException nsre) {
+		if (groupResource == null) {
 			groupResource = ResourceLocalServiceUtil.addResource(
 				resource.getCompanyId(), Group.class.getName(),
 				resource.getScope(), resource.getPrimKey());
@@ -467,7 +506,9 @@ public class VerifyPermission
 				}
 
 				try {
-					if (mask != 0L) {
+					if ((mask != 0L) &&
+						!hasPermission(actionId, permission.getResourceId())) {
+
 						permission.resetOriginalValues();
 
 						permission.setResourceId(groupResource.getResourceId());

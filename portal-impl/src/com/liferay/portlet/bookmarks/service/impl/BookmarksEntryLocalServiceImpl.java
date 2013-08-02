@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,6 +48,7 @@ import java.util.List;
 public class BookmarksEntryLocalServiceImpl
 	extends BookmarksEntryLocalServiceBaseImpl {
 
+	@Override
 	public BookmarksEntry addEntry(
 			long userId, long groupId, long folderId, String name, String url,
 			String description, ServiceContext serviceContext)
@@ -115,6 +116,7 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public void deleteEntries(long groupId, long folderId)
 		throws PortalException, SystemException {
 
@@ -128,6 +130,7 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteEntry(BookmarksEntry entry)
 		throws PortalException, SystemException {
 
@@ -158,6 +161,7 @@ public class BookmarksEntryLocalServiceImpl
 		indexer.delete(entry);
 	}
 
+	@Override
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -167,6 +171,7 @@ public class BookmarksEntryLocalServiceImpl
 		deleteEntry(entry);
 	}
 
+	@Override
 	public List<BookmarksEntry> getEntries(
 			long groupId, long folderId, int start, int end)
 		throws SystemException {
@@ -175,6 +180,7 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, folderId, start, end);
 	}
 
+	@Override
 	public List<BookmarksEntry> getEntries(
 			long groupId, long folderId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -184,18 +190,21 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, folderId, start, end, orderByComparator);
 	}
 
+	@Override
 	public int getEntriesCount(long groupId, long folderId)
 		throws SystemException {
 
 		return bookmarksEntryPersistence.countByG_F(groupId, folderId);
 	}
 
+	@Override
 	public BookmarksEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	@Override
 	public int getFoldersEntriesCount(long groupId, List<Long> folderIds)
 		throws SystemException {
 
@@ -204,6 +213,7 @@ public class BookmarksEntryLocalServiceImpl
 			ArrayUtil.toArray(folderIds.toArray(new Long[folderIds.size()])));
 	}
 
+	@Override
 	public List<BookmarksEntry> getGroupEntries(
 			long groupId, int start, int end)
 		throws SystemException {
@@ -212,6 +222,7 @@ public class BookmarksEntryLocalServiceImpl
 			groupId, start, end, new EntryModifiedDateComparator());
 	}
 
+	@Override
 	public List<BookmarksEntry> getGroupEntries(
 			long groupId, long userId, int start, int end)
 		throws SystemException {
@@ -228,10 +239,12 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return bookmarksEntryPersistence.countByGroupId(groupId);
 	}
 
+	@Override
 	public int getGroupEntriesCount(long groupId, long userId)
 		throws SystemException {
 
@@ -243,10 +256,19 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<BookmarksEntry> getNoAssetEntries() throws SystemException {
 		return bookmarksEntryFinder.findByNoAssets();
 	}
 
+	@Override
+	public List<BookmarksEntry> getNoResourceBlockEntries()
+		throws SystemException {
+
+		return bookmarksEntryFinder.findByNoResourceBlocks();
+	}
+
+	@Override
 	public BookmarksEntry openEntry(long userId, long entryId)
 		throws PortalException, SystemException {
 
@@ -263,13 +285,15 @@ public class BookmarksEntryLocalServiceImpl
 		return entry;
 	}
 
+	@Override
 	public void updateAsset(
 			long userId, BookmarksEntry entry, long[] assetCategoryIds,
 			String[] assetTagNames, long[] assetLinkEntryIds)
 		throws PortalException, SystemException {
 
 		AssetEntry assetEntry = assetEntryLocalService.updateEntry(
-			userId, entry.getGroupId(), BookmarksEntry.class.getName(),
+			userId, entry.getGroupId(), entry.getCreateDate(),
+			entry.getModifiedDate(), BookmarksEntry.class.getName(),
 			entry.getEntryId(), entry.getUuid(), 0, assetCategoryIds,
 			assetTagNames, true, null, null, null, null,
 			ContentTypes.TEXT_PLAIN, entry.getName(), entry.getDescription(),
@@ -280,6 +304,7 @@ public class BookmarksEntryLocalServiceImpl
 			AssetLinkConstants.TYPE_RELATED);
 	}
 
+	@Override
 	public BookmarksEntry updateEntry(
 			long userId, long entryId, long groupId, long folderId, String name,
 			String url, String description, ServiceContext serviceContext)

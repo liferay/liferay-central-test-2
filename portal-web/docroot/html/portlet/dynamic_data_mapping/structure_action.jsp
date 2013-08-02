@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,7 +39,6 @@ DDMStructure structure = (DDMStructure)row.getObject();
 	<c:if test="<%= DDMStructurePermission.contains(permissionChecker, structure, ActionKeys.VIEW) && showManageTemplates %>">
 		<portlet:renderURL var="manageViewURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/view_template" />
-			<portlet:param name="backURL" value="<%= currentURL %>" />
 			<portlet:param name="structureId" value="<%= String.valueOf(structure.getStructureId()) %>" />
 		</portlet:renderURL>
 

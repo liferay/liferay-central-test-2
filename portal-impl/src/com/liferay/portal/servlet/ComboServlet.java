@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,7 +41,7 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.servlet.ServletContext;
@@ -88,15 +88,14 @@ public class ComboServlet extends HttpServlet {
 			return;
 		}
 
-		Set<String> modulePathsSet = new HashSet<String>(modulePaths.length);
+		Set<String> modulePathsSet = new LinkedHashSet<String>(
+			modulePaths.length);
 
 		for (String path : modulePaths) {
 			modulePathsSet.add(path);
 		}
 
 		modulePaths = modulePathsSet.toArray(new String[modulePathsSet.size()]);
-
-		Arrays.sort(modulePaths);
 
 		String modulePathsString = null;
 
@@ -130,11 +129,11 @@ public class ComboServlet extends HttpServlet {
 				minifierType = "js";
 			}
 
-			int length = modulePaths.length;
+			bytesArray = new byte[modulePaths.length][];
 
-			bytesArray = new byte[length][];
+			for (int i = 0; i < modulePaths.length; i++) {
+				String modulePath = modulePaths[i];
 
-			for (String modulePath : modulePaths) {
 				if (!validateModuleExtension(modulePath)) {
 					response.setHeader(
 						HttpHeaders.CACHE_CONTROL,
@@ -163,7 +162,7 @@ public class ComboServlet extends HttpServlet {
 						request, response, modulePath, minifierType);
 				}
 
-				bytesArray[--length] = bytes;
+				bytesArray[i] = bytes;
 			}
 
 			if ((modulePathsString != null) &&

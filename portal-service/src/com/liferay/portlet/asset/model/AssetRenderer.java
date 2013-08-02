@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,6 +48,8 @@ public interface AssetRenderer {
 
 	public String getIconPath(PortletRequest portletRequest);
 
+	public String getSearchSummary(Locale locale);
+
 	public String getSummary(Locale locale);
 
 	public String getTitle(Locale locale);
@@ -55,6 +57,12 @@ public interface AssetRenderer {
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
+		throws Exception;
+
+	public PortletURL getURLEdit(
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
+			WindowState windowState, PortletURL redirectURL)
 		throws Exception;
 
 	public PortletURL getURLExport(

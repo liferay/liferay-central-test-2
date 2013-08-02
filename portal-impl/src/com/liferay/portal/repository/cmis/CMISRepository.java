@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -125,6 +125,7 @@ public class CMISRepository extends BaseCmisRepository {
 		_cmisRepositoryHandler = cmisRepositoryHandler;
 	}
 
+	@Override
 	public FileEntry addFileEntry(
 			long folderId, String sourceFileName, String mimeType, String title,
 			String description, String changeLog, InputStream is, long size,
@@ -173,6 +174,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Folder addFolder(
 			long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
@@ -207,6 +209,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public FileVersion cancelCheckOut(long fileEntryId) throws SystemException {
 		Document draftDocument = null;
 
@@ -247,6 +250,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return null;
 	}
 
+	@Override
 	public void checkInFileEntry(
 		long fileEntryId, boolean major, String changeLog,
 		ServiceContext serviceContext) {
@@ -285,11 +289,13 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public void checkInFileEntry(long fileEntryId, String lockUuid) {
 		checkInFileEntry(
 			fileEntryId, false, StringPool.BLANK, new ServiceContext());
 	}
 
+	@Override
 	public FileEntry checkOutFileEntry(
 			long fileEntryId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -319,6 +325,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return getFileEntry(fileEntryId);
 	}
 
+	@Override
 	public FileEntry checkOutFileEntry(
 		long fileEntryId, String owner, long expirationTime,
 		ServiceContext serviceContext) {
@@ -326,6 +333,7 @@ public class CMISRepository extends BaseCmisRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
@@ -362,6 +370,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -387,6 +396,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -413,6 +423,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -422,6 +433,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return subList(fileEntries, start, end, obc);
 	}
 
+	@Override
 	public List<FileEntry> getFileEntries(
 		long folderId, long fileEntryTypeId, int start, int end,
 		OrderByComparator obc) {
@@ -429,6 +441,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return new ArrayList<FileEntry>();
 	}
 
+	@Override
 	public List<FileEntry> getFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
@@ -458,18 +471,21 @@ public class CMISRepository extends BaseCmisRepository {
 		return subList(fileEntries, start, end, obc);
 	}
 
+	@Override
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		List<FileEntry> fileEntries = getFileEntries(folderId);
 
 		return fileEntries.size();
 	}
 
+	@Override
 	public int getFileEntriesCount(long folderId, long fileEntryTypeId) {
 		List<FileEntry> fileEntries = getFileEntries(folderId, fileEntryTypeId);
 
 		return fileEntries.size();
 	}
 
+	@Override
 	public int getFileEntriesCount(long folderId, String[] mimeTypes)
 		throws PortalException, SystemException {
 
@@ -480,6 +496,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return documentIds.size();
 	}
 
+	@Override
 	public FileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -503,6 +520,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public FileEntry getFileEntry(long folderId, String title)
 		throws PortalException, SystemException {
 
@@ -542,6 +560,7 @@ public class CMISRepository extends BaseCmisRepository {
 				title + "}");
 	}
 
+	@Override
 	public FileEntry getFileEntryByUuid(String uuid)
 		throws PortalException, SystemException {
 
@@ -572,6 +591,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
@@ -593,6 +613,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
@@ -614,6 +635,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Folder getFolder(long parentFolderId, String title)
 		throws PortalException, SystemException {
 
@@ -654,6 +676,7 @@ public class CMISRepository extends BaseCmisRepository {
 				", title=" + title + "}");
 	}
 
+	@Override
 	public List<Folder> getFolders(
 			long parentFolderId, boolean includeMountfolders, int start,
 			int end, OrderByComparator obc)
@@ -734,6 +757,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
 		throws PortalException, SystemException {
 
@@ -742,6 +766,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return folders.size();
 	}
 
+	@Override
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
 		throws SystemException {
 
@@ -774,12 +799,14 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public List<Folder> getMountFolders(
 		long parentFolderId, int start, int end, OrderByComparator obc) {
 
 		return new ArrayList<Folder>();
 	}
 
+	@Override
 	public int getMountFoldersCount(long parentFolderId) {
 		return 0;
 	}
@@ -831,6 +858,7 @@ public class CMISRepository extends BaseCmisRepository {
 		return session;
 	}
 
+	@Override
 	public void getSubfolderIds(List<Long> folderIds, long folderId)
 		throws SystemException {
 
@@ -848,6 +876,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
 		throws SystemException {
 
@@ -869,10 +898,12 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public String[] getSupportedConfigurations() {
 		return _cmisRepositoryHandler.getSupportedConfigurations();
 	}
 
+	@Override
 	public String[][] getSupportedParameters() {
 		return _cmisRepositoryHandler.getSupportedParameters();
 	}
@@ -959,16 +990,19 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Lock lockFolder(long folderId) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Lock lockFolder(
 		long folderId, String owner, boolean inheritable, long expirationTime) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry moveFileEntry(
 			long fileEntryId, long newFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1025,6 +1059,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Folder moveFolder(
 			long folderId, long parentFolderId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1081,14 +1116,17 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Lock refreshFileEntryLock(String lockUuid, long expirationTime) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Lock refreshFolderLock(String lockUuid, long expirationTime) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -1139,6 +1177,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Hits search(SearchContext searchContext, Query query)
 		throws SearchException {
 
@@ -1215,10 +1254,12 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public void unlockFolder(long folderId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 			long fileEntryId, String sourceFileName, String mimeType,
 			String title, String description, String changeLog,
@@ -1371,6 +1412,7 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public Folder updateFolder(
 			long folderId, String title, String description,
 			ServiceContext serviceContext)
@@ -1423,10 +1465,12 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	@Override
 	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public boolean verifyInheritableLock(long folderId, String lockUuid) {
 		throw new UnsupportedOperationException();
 	}
@@ -1843,7 +1887,7 @@ public class CMISRepository extends BaseCmisRepository {
 		if ((mimeTypes != null) && (mimeTypes.length > 0)) {
 			sb.append(" WHERE cmis:contentStreamMimeType IN (");
 
-			for (int i = 0 ; i < mimeTypes.length; i++) {
+			for (int i = 0; i < mimeTypes.length; i++) {
 				sb.append(StringUtil.quote(mimeTypes[i]));
 
 				if ((i + 1) < mimeTypes.length) {
@@ -2106,18 +2150,13 @@ public class CMISRepository extends BaseCmisRepository {
 	protected <E> List<E> subList(
 		List<E> list, int start, int end, OrderByComparator obc) {
 
-		if (obc != null) {
-			if ((obc instanceof RepositoryModelCreateDateComparator) ||
-				(obc instanceof RepositoryModelModifiedDateComparator) ||
-				(obc instanceof RepositoryModelSizeComparator)) {
+		if ((obc != null) &&
+			((obc instanceof RepositoryModelCreateDateComparator) ||
+			 (obc instanceof RepositoryModelModifiedDateComparator) ||
+			 (obc instanceof RepositoryModelNameComparator) ||
+			 (obc instanceof RepositoryModelSizeComparator))) {
 
-				list = ListUtil.sort(list, obc);
-			}
-			else if (obc instanceof RepositoryModelNameComparator) {
-				if (!obc.isAscending()) {
-					list = ListUtil.sort(list, obc);
-				}
-			}
+			list = ListUtil.sort(list, obc);
 		}
 
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {

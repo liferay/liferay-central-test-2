@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -326,13 +326,16 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	@Override
 	public ExpandoColumn toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ExpandoColumn)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ExpandoColumn)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ExpandoColumn toUnescapedModel() {
+		return (ExpandoColumn)this;
 	}
 
 	@Override
@@ -366,18 +369,15 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoColumn)) {
 			return false;
 		}
 
-		ExpandoColumn expandoColumn = null;
-
-		try {
-			expandoColumn = (ExpandoColumn)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ExpandoColumn expandoColumn = (ExpandoColumn)obj;
 
 		long primaryKey = expandoColumn.getPrimaryKey();
 
@@ -511,7 +511,7 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	}
 
 	private static ClassLoader _classLoader = ExpandoColumn.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ExpandoColumn.class
 		};
 	private long _columnId;
@@ -525,5 +525,5 @@ public class ExpandoColumnModelImpl extends BaseModelImpl<ExpandoColumn>
 	private String _defaultData;
 	private String _typeSettings;
 	private long _columnBitmask;
-	private ExpandoColumn _escapedModelProxy;
+	private ExpandoColumn _escapedModel;
 }

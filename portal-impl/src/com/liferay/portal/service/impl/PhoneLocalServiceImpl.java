@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ import java.util.List;
  */
 public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
+	@Override
 	public Phone addPhone(
 			long userId, String className, long classPK, String number,
 			String extension, int typeId, boolean primary)
@@ -71,6 +72,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return phone;
 	}
 
+	@Override
 	public void deletePhones(long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -84,10 +86,12 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<Phone> getPhones() throws SystemException {
 		return phonePersistence.findAll();
 	}
 
+	@Override
 	public List<Phone> getPhones(long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -96,6 +100,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		return phonePersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
+	@Override
 	public Phone updatePhone(
 			long phoneId, String number, String extension, int typeId,
 			boolean primary)
@@ -150,7 +155,7 @@ public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNotNull(extension)) {
-			for (int i = 0;i < extension.length();i++) {
+			for (int i = 0; i < extension.length(); i++) {
 				if (!Character.isDigit(extension.charAt(i))) {
 					throw new PhoneNumberException();
 				}

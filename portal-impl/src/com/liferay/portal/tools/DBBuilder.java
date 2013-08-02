@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,9 +63,15 @@ public class DBBuilder {
 			_databaseName = databaseName;
 			_databaseTypes = databaseTypes;
 
-			_buildSQLFile(sqlDir, "portal");
-			_buildSQLFile(sqlDir, "portal-minimal");
-			_buildSQLFile(sqlDir, "portal-tables");
+			if (!sqlDir.endsWith("/WEB-INF/sql")) {
+				_buildSQLFile(sqlDir, "portal");
+				_buildSQLFile(sqlDir, "portal-minimal");
+				_buildSQLFile(sqlDir, "portal-tables");
+			}
+			else {
+				_buildSQLFile(sqlDir, "tables");
+			}
+
 			_buildSQLFile(sqlDir, "indexes");
 			_buildSQLFile(sqlDir, "sequences");
 			_buildSQLFile(sqlDir, "update-5.0.1-5.1.0");

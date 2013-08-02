@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -50,6 +50,7 @@ portletURL.setParameter("keywords", keywords);
 portletURL.setParameter("format", format);
 
 request.setAttribute("search.jsp-portletURL", portletURL);
+request.setAttribute("search.jsp-returnToFullPageURL", portletDisplay.getURLBack());
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL">
@@ -129,10 +130,10 @@ request.setAttribute("search.jsp-portletURL", portletURL);
 </aui:form>
 
 <aui:script use="aui-base">
-	var pageLinks = A.one('.portlet-search .result .page-links');
+	var searchContainer = A.one('.portlet-search .result .lfr-search-container');
 
-	if (pageLinks) {
-		pageLinks.delegate(
+	if (searchContainer) {
+		searchContainer.delegate(
 			'click',
 			function(event) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value = 1;
@@ -141,10 +142,10 @@ request.setAttribute("search.jsp-portletURL", portletURL);
 
 				event.preventDefault();
 			},
-			'a.first'
+			'.page-links a.first'
 		);
 
-		pageLinks.delegate(
+		searchContainer.delegate(
 			'click',
 			function(event) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value = parseInt(document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value) - 1;
@@ -153,10 +154,10 @@ request.setAttribute("search.jsp-portletURL", portletURL);
 
 				event.preventDefault();
 			},
-			'a.previous'
+			'.page-links a.previous'
 		);
 
-		pageLinks.delegate(
+		searchContainer.delegate(
 			'click',
 			function(event) {
 				document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value = parseInt(document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value) + 1;
@@ -165,7 +166,7 @@ request.setAttribute("search.jsp-portletURL", portletURL);
 
 				event.preventDefault();
 			},
-			'a.next'
+			'.page-links a.next'
 		);
 	}
 
@@ -206,6 +207,8 @@ request.setAttribute("search.jsp-portletURL", portletURL);
 		window,
 		'<portlet:namespace />search',
 		function() {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= SearchContainer.DEFAULT_CUR_PARAM %>.value = 1;
+
 			var keywords = document.<portlet:namespace />fm.<portlet:namespace />keywords.value;
 
 			keywords = keywords.replace(/^\s+|\s+$/, '');

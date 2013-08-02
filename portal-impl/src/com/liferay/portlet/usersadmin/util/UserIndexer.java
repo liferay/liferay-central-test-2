@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +14,9 @@
 
 package com.liferay.portlet.usersadmin.util;
 
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -37,9 +33,9 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.FullNameGenerator;
 import com.liferay.portal.security.auth.FullNameGeneratorFactory;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.persistence.UserActionableDynamicQuery;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 
@@ -68,10 +64,12 @@ public class UserIndexer extends BaseIndexer {
 		setStagingAware(false);
 	}
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -102,27 +100,29 @@ public class UserIndexer extends BaseIndexer {
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
 
-		if (params != null) {
-			for (Map.Entry<String, Object> entry : params.entrySet()) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
+		if (params == null) {
+			return;
+		}
 
-				if (value == null) {
+		for (Map.Entry<String, Object> entry : params.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+
+			if (value == null) {
+				continue;
+			}
+
+			Class<?> clazz = value.getClass();
+
+			if (clazz.isArray()) {
+				Object[] values = (Object[])value;
+
+				if (values.length == 0) {
 					continue;
 				}
-
-				Class<?> clazz = value.getClass();
-
-				if (clazz.isArray()) {
-					Object[] values = (Object[])value;
-
-					if (values.length == 0) {
-						continue;
-					}
-				}
-
-				addContextQueryParams(contextQuery, searchContext, key, value);
 			}
+
+			addContextQueryParams(contextQuery, searchContext, key, value);
 		}
 	}
 
@@ -193,14 +193,6 @@ public class UserIndexer extends BaseIndexer {
 		else if (key.equals("usersUserGroups")) {
 			contextQuery.addRequiredTerm("userGroupIds", String.valueOf(value));
 		}
-	}
-
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId) {
-
-		Property property = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(property.eq(companyId));
 	}
 
 	@Override
@@ -408,76 +400,30 @@ public class UserIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexUsers(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			User.class, PACLClassLoaderUtil.getPortalClassLoader());
+	protected void reindexUsers(long companyId)
+		throws PortalException, SystemException {
 
-		Projection minUserIdProjection = ProjectionFactoryUtil.min("userId");
-		Projection maxUserIdProjection = ProjectionFactoryUtil.max("userId");
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new UserActionableDynamicQuery() {
 
-		projectionList.add(minUserIdProjection);
-		projectionList.add(maxUserIdProjection);
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				User user = (User)object;
 
-		dynamicQuery.setProjection(projectionList);
+				if (!user.isDefaultUser()) {
+					Document document = getDocument(user);
 
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<Object[]> results = UserLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
-
-		Object[] minAndMaxUserIds = results.get(0);
-
-		if ((minAndMaxUserIds[0] == null) || (minAndMaxUserIds[1] == null)) {
-			return;
-		}
-
-		long minUserId = (Long)minAndMaxUserIds[0];
-		long maxUserId = (Long)minAndMaxUserIds[1];
-
-		long startUserId = minUserId;
-		long endUserId = startUserId + DEFAULT_INTERVAL;
-
-		while (startUserId <= maxUserId) {
-			reindexUsers(companyId, startUserId, endUserId);
-
-			startUserId = endUserId;
-			endUserId += DEFAULT_INTERVAL;
-		}
-	}
-
-	protected void reindexUsers(
-			long companyId, long startUserId, long endUserId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			User.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("userId");
-
-		dynamicQuery.add(property.ge(startUserId));
-		dynamicQuery.add(property.lt(endUserId));
-
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<User> users = UserLocalServiceUtil.dynamicQuery(dynamicQuery);
-
-		if (users.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(users.size());
-
-		for (User user : users) {
-			if (user.isDefaultUser()) {
-				continue;
+					documents.add(document);
+				}
 			}
 
-			Document document = getDocument(user);
+		};
 
-			documents.add(document);
-		}
+		actionableDynamicQuery.setCompanyId(companyId);
+
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);

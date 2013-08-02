@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
+import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -100,15 +102,16 @@ public class PortletURLUtil {
 	}
 
 	public static PortletURL getCurrent(
-		PortletRequest portletRequest, MimeResponse mimeResponse) {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
-		PortletURL portletURL = mimeResponse.createRenderURL();
+		PortletURL portletURL = liferayPortletResponse.createRenderURL();
 
-		Enumeration<String> enu = portletRequest.getParameterNames();
+		Enumeration<String> enu = liferayPortletRequest.getParameterNames();
 
 		while (enu.hasMoreElements()) {
 			String param = enu.nextElement();
-			String[] values = portletRequest.getParameterValues(param);
+			String[] values = liferayPortletRequest.getParameterValues(param);
 
 			boolean addParam = true;
 
@@ -128,6 +131,14 @@ public class PortletURLUtil {
 		}
 
 		return portletURL;
+	}
+
+	public static PortletURL getCurrent(
+		PortletRequest portletRequest, MimeResponse mimeResponse) {
+
+		return getCurrent(
+			(LiferayPortletRequest)portletRequest,
+			(LiferayPortletResponse)mimeResponse);
 	}
 
 	public static String getRefreshURL(
@@ -201,6 +212,13 @@ public class PortletURLUtil {
 
 		sb.append("&p_p_isolated=1");
 
+		long sourceGroupId = ParamUtil.getLong(request, "p_v_l_s_g_id");
+
+		if (sourceGroupId > 0) {
+			sb.append("&p_v_l_s_g_id=");
+			sb.append(sourceGroupId);
+		}
+
 		String doAsUserId = themeDisplay.getDoAsUserId();
 
 		if (Validator.isNotNull(doAsUserId)) {
@@ -215,37 +233,30 @@ public class PortletURLUtil {
 
 		String ppid = ParamUtil.getString(request, "p_p_id");
 
-		if (ppid.equals(portletId)) {
-			String namespace = PortalUtil.getPortletNamespace(portletId);
-
-			Map<String, String[]> parameters = request.getParameterMap();
-
-			for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
-				String name = entry.getKey();
-
-				if (!PortalUtil.isReservedParameter(name) &&
-					!name.equals("currentURL") &&
-					!isRefreshURLReservedParameter(name, namespace)) {
-
-					String[] values = entry.getValue();
-
-					for (int i = 0; i < values.length; i++) {
-						sb.append(StringPool.AMPERSAND);
-						sb.append(name);
-						sb.append(StringPool.EQUAL);
-						sb.append(HttpUtil.encodeURL(values[i]));
-					}
-				}
-			}
+		if (!ppid.equals(portletId)) {
+			return sb.toString();
 		}
 
-		String outerPortletId = PortalUtil.getOuterPortletId(request);
+		String namespace = PortalUtil.getPortletNamespace(portletId);
 
-		if (outerPortletId != null) {
-			sb.append(StringPool.AMPERSAND);
-			sb.append("p_o_p_id");
-			sb.append(StringPool.EQUAL);
-			sb.append(HttpUtil.encodeURL(outerPortletId));
+		Map<String, String[]> parameters = request.getParameterMap();
+
+		for (Map.Entry<String, String[]> entry : parameters.entrySet()) {
+			String name = entry.getKey();
+
+			if (!PortalUtil.isReservedParameter(name) &&
+				!name.equals("currentURL") &&
+				!isRefreshURLReservedParameter(name, namespace)) {
+
+				String[] values = entry.getValue();
+
+				for (int i = 0; i < values.length; i++) {
+					sb.append(StringPool.AMPERSAND);
+					sb.append(name);
+					sb.append(StringPool.EQUAL);
+					sb.append(HttpUtil.encodeURL(values[i]));
+				}
+			}
 		}
 
 		return sb.toString();

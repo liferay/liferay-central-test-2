@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -37,6 +38,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 		_detachedCriteria = detachedCriteria;
 	}
 
+	@Override
 	public DynamicQuery add(Criterion criterion) {
 		CriterionImpl criterionImpl = (CriterionImpl)criterion;
 
@@ -45,6 +47,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 		return this;
 	}
 
+	@Override
 	public DynamicQuery addOrder(Order order) {
 		OrderImpl orderImpl = (OrderImpl)order;
 
@@ -53,6 +56,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 		return this;
 	}
 
+	@Override
 	public void compile(Session session) {
 		org.hibernate.Session hibernateSession =
 			(org.hibernate.Session)session.getWrappedSession();
@@ -78,11 +82,13 @@ public class DynamicQueryImpl implements DynamicQuery {
 		return _detachedCriteria;
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List list() {
 		return list(true);
 	}
 
+	@Override
 	@SuppressWarnings("rawtypes")
 	public List list(boolean unmodifiable) {
 		List list = _criteria.list();
@@ -95,12 +101,27 @@ public class DynamicQueryImpl implements DynamicQuery {
 		}
 	}
 
+	@Override
 	public void setLimit(int start, int end) {
 		_start = Integer.valueOf(start);
 		_end = Integer.valueOf(end);
 	}
 
+	@Override
 	public DynamicQuery setProjection(Projection projection) {
+		return setProjection(projection, true);
+	}
+
+	@Override
+	public DynamicQuery setProjection(
+		Projection projection, boolean useColumnAlias) {
+
+		if (!useColumnAlias) {
+			projection = ProjectionFactoryUtil.sqlProjection(
+				_detachedCriteria.getAlias() + "_." + projection.toString(),
+				null, null);
+		}
+
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
 		_detachedCriteria.setProjection(projectionImpl.getWrappedProjection());

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -496,13 +496,16 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 
 	@Override
 	public OrgLabor toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (OrgLabor)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (OrgLabor)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public OrgLabor toUnescapedModel() {
+		return (OrgLabor)this;
 	}
 
 	@Override
@@ -568,18 +571,15 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof OrgLabor)) {
 			return false;
 		}
 
-		OrgLabor orgLabor = null;
-
-		try {
-			orgLabor = (OrgLabor)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		OrgLabor orgLabor = (OrgLabor)obj;
 
 		long primaryKey = orgLabor.getPrimaryKey();
 
@@ -773,7 +773,7 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	}
 
 	private static ClassLoader _classLoader = OrgLabor.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			OrgLabor.class
 		};
 	private long _orgLaborId;
@@ -796,5 +796,5 @@ public class OrgLaborModelImpl extends BaseModelImpl<OrgLabor>
 	private int _satOpen;
 	private int _satClose;
 	private long _columnBitmask;
-	private OrgLabor _escapedModelProxy;
+	private OrgLabor _escapedModel;
 }

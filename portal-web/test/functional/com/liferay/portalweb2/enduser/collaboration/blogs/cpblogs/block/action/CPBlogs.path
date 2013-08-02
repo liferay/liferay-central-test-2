@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>CPBlogs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPBlogs</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPBlogs</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_TITLE</td>
+	<td>//span[@class='portlet-title-text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_ENTRY</td>
+	<td>//span[contains(@class,'add-button')]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DELETE_BUTTON</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ENTRY_TABLE-->
+<tr>
+	<td>ENTRY_TABLE_ALL_CHECKBOX</td>
+	<td>//th/input[@name='_161_allRowIds']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TABLE_CHECKBOX</td>
+	<td>//tr[contains(.,'${key_entryTitle}')]/td/input[@name='_161_rowIds']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TABLE_TITLE</td>
+	<td>//tr[contains(.,'${key_entryTitle}')]/td[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TABLE_ACTIONS</td>
+	<td>//tr[contains(.,'${key_entryTitle}')]/td/span[@title='Actions']/ul/li/strong/a/span</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

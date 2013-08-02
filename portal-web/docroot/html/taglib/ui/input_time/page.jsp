@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,15 +31,8 @@ boolean amPmNullable = GetterUtil.getBoolean((String)request.getAttribute("lifer
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-time:disabled"));
 
 NumberFormat numberFormat = NumberFormat.getInstance(locale);
+
 numberFormat.setMinimumIntegerDigits(2);
-
-String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
-
-boolean timeFormatAmPm = true;
-
-if (timeFormatPattern.indexOf("a") == -1) {
-	timeFormatAmPm = false;
-}
 %>
 
 <div class="lfr-input-time <%= cssClass %>">
@@ -49,10 +42,10 @@ if (timeFormatPattern.indexOf("a") == -1) {
 		</c:if>
 
 		<%
-		for (int i = 0; i < (timeFormatAmPm ? 12 : 24); i++) {
+		for (int i = 0; i < (DateUtil.isFormatAmPm(locale) ? 12 : 24); i++) {
 			String hourString = String.valueOf(i);
 
-			if (timeFormatAmPm && (i == 0)) {
+			if (DateUtil.isFormatAmPm(locale) && (i == 0)) {
 				hourString = "12";
 			}
 		%>
@@ -86,7 +79,7 @@ if (timeFormatPattern.indexOf("a") == -1) {
 	</select>
 
 	<c:choose>
-		<c:when test="<%= ! timeFormatAmPm %>">
+		<c:when test="<%= !DateUtil.isFormatAmPm(locale) %>">
 			<input name="<%= amPmParam %>" type="hidden" value="<%= Calendar.AM %>" />
 		</c:when>
 		<c:otherwise>

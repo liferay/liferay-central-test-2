@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,10 +26,29 @@ import java.util.Locale;
  */
 public class FooService {
 
+	public static String camel(String goodName, String badNAME) {
+		return goodName + '*' + badNAME;
+	}
+
 	public static FooData getFooData(int id) {
 		FooData fooData = new FooDataImpl();
 
 		fooData.setId(id);
+
+		if (id == 7) {
+			FooDataImpl fooDataImpl = (FooDataImpl)fooData;
+
+			fooDataImpl.setName("James Bond");
+			fooDataImpl.setHeight(173);
+			fooDataImpl.setValue("licensed");
+		}
+		else if (id == -13) {
+			FooDataImpl fooDataImpl = (FooDataImpl)fooData;
+
+			fooDataImpl.setName("Dr. Evil");
+			fooDataImpl.setHeight(59);
+			fooDataImpl.setValue("fun");
+		}
 
 		return fooData;
 	}

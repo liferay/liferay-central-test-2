@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,16 +42,16 @@ public interface PermissionCheckerBag extends Serializable {
 	public List<Group> getUserUserGroupGroups();
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupAdmin(PermissionChecker,
-	 *             Group)}
+	 * @deprecated As of 6.1.0, renamed to {@link
+	 *             #isGroupAdmin(PermissionChecker, Group)}
 	 */
 	public boolean isCommunityAdmin(
 			PermissionChecker permissionChecker, Group group)
 		throws Exception;
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupOwner(PermissionChecker,
-	 *             Group)}
+	 * @deprecated As of 6.1.0, renamed to {@link
+	 *             #isGroupOwner(PermissionChecker, Group)}
 	 */
 	public boolean isCommunityOwner(
 			PermissionChecker permissionChecker, Group group)
@@ -70,6 +70,10 @@ public interface PermissionCheckerBag extends Serializable {
 		throws Exception;
 
 	public boolean isOrganizationAdmin(
+			PermissionChecker permissionChecker, Organization organization)
+		throws Exception;
+
+	public boolean isOrganizationOwner(
 			PermissionChecker permissionChecker, Organization organization)
 		throws Exception;
 

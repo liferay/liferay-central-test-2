@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -327,13 +327,16 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 	@Override
 	public Image toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Image)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Image)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Image toUnescapedModel() {
+		return (Image)this;
 	}
 
 	@Override
@@ -375,18 +378,15 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Image)) {
 			return false;
 		}
 
-		Image image = null;
-
-		try {
-			image = (Image)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Image image = (Image)obj;
 
 		long primaryKey = image.getPrimaryKey();
 
@@ -519,9 +519,7 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	}
 
 	private static ClassLoader _classLoader = Image.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Image.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Image.class };
 	private long _imageId;
 	private Date _modifiedDate;
 	private String _text;
@@ -532,5 +530,5 @@ public class ImageModelImpl extends BaseModelImpl<Image> implements ImageModel {
 	private int _originalSize;
 	private boolean _setOriginalSize;
 	private long _columnBitmask;
-	private Image _escapedModelProxy;
+	private Image _escapedModel;
 }

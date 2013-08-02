@@ -1,0 +1,97 @@
+<definition>
+	<command name="assertPartialTextClickAt">
+		<execute function="AssertTextEquals#assertPartialText" />
+
+		<execute selenium="clickAt" />
+	</command>
+
+	<command name="assertPartialTextClickAtAndWait">
+		<execute function="AssertTextEquals#assertPartialText" />
+
+		<execute selenium="clickAtAndWait" />
+	</command>
+
+	<command name="assertTextClick">
+		<execute function="AssertTextEquals#assertText" />
+
+		<execute selenium="click" />
+	</command>
+
+	<command name="assertTextClickAndWait">
+		<execute function="AssertTextEquals#assertText" />
+
+		<execute selenium="clickAndWait" />
+	</command>
+
+	<command name="assertTextClickAt">
+		<execute function="AssertTextEquals#assertText" />
+
+		<execute selenium="clickAt" />
+	</command>
+
+	<command name="assertTextClickAtAndWait">
+		<execute function="AssertTextEquals#assertText" />
+
+		<execute selenium="clickAtAndWait" />
+	</command>
+
+	<command name="assertTextClickAtClickDockbar">
+		<execute selenium="clickAt" argument1="//div[@id='dockbar']" argument2="" />
+
+		<execute selenium="waitForElementPresent" argument1="//script[contains(@src,'/aui/aui-button-item/aui-button-item-min.js')]" />
+
+		<execute function="AssertClick#assertTextClickAt" />
+	</command>
+
+	<command name="assertValueClickAt">
+		<execute function="AssertTextEquals#assertValue" />
+
+		<execute selenium="clickAt" />
+	</command>
+
+	<command name="assertValueClickAtAndWait">
+		<execute function="AssertTextEquals#assertValue" />
+
+		<execute selenium="clickAtAndWait" />
+	</command>
+
+	<command name="assertValueClickAtAndWaitClickAtAndWait">
+		<execute function="AssertTextEquals#assertValue" />
+
+		<execute selenium="clickAtAndWait" />
+
+		<execute selenium="clickAtAndWait" />
+	</command>
+
+	<command name="assertValueClickAtAndWaitCKEditor">
+		<execute selenium="waitForVisible" argument1="//a[@class='cke_button_cut cke_disabled']" />
+
+		<execute function="AssertClick#assertValueClickAtAndWait" />
+	</command>
+
+	<command name="assertValueClickAtPause">
+		<execute function="AssertTextEquals#assertValue" />
+
+		<execute selenium="clickAt" />
+
+		<execute selenium="pause" argument1="1000" />
+	</command>
+
+	<command name="pauseAssertTextClickAt">
+		<execute selenium="pause" argument1="1000" />
+
+		<execute function="AssertClick#assertTextClickAt" />
+	</command>
+
+	<command name="pauseAssertPartialTextClickAt">
+		<execute selenium="pause" argument1="1000" />
+
+		<execute function="AssertClick#assertPartialTextClickAt" />
+	</command>
+
+	<command name="pauseAssertTextClickAtAndWait">
+		<execute selenium="pause" argument1="1000" />
+
+		<execute function="AssertClick#assertTextClickAtAndWait" />
+	</command>
+</definition>

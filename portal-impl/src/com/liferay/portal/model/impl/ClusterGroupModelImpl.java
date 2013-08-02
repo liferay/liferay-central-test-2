@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -203,13 +203,16 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	@Override
 	public ClusterGroup toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ClusterGroup)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ClusterGroup)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ClusterGroup toUnescapedModel() {
+		return (ClusterGroup)this;
 	}
 
 	@Override
@@ -242,18 +245,15 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClusterGroup)) {
 			return false;
 		}
 
-		ClusterGroup clusterGroup = null;
-
-		try {
-			clusterGroup = (ClusterGroup)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ClusterGroup clusterGroup = (ClusterGroup)obj;
 
 		long primaryKey = clusterGroup.getPrimaryKey();
 
@@ -348,12 +348,12 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	private static ClassLoader _classLoader = ClusterGroup.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ClusterGroup.class
 		};
 	private long _clusterGroupId;
 	private String _name;
 	private String _clusterNodeIds;
 	private boolean _wholeCluster;
-	private ClusterGroup _escapedModelProxy;
+	private ClusterGroup _escapedModel;
 }

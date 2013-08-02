@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -72,6 +72,10 @@ public class HtmlUtil {
 		PortalRuntimePermission.checkGetBeanProperty(HtmlUtil.class);
 
 		return _html;
+	}
+
+	public static String render(String html) {
+		return getHtml().render(html);
 	}
 
 	public static String replaceMsWordCharacters(String html) {

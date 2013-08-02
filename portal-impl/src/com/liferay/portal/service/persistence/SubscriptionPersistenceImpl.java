@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -254,14 +254,65 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Subscription subscription) {
+		if (subscription.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(subscription.getCompanyId()),
+					Long.valueOf(subscription.getUserId()),
+					Long.valueOf(subscription.getClassNameId()),
+					Long.valueOf(subscription.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C, args,
+				subscription);
+		}
+		else {
+			SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscription;
+
+			if ((subscriptionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_U_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(subscription.getCompanyId()),
+						Long.valueOf(subscription.getUserId()),
+						Long.valueOf(subscription.getClassNameId()),
+						Long.valueOf(subscription.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_U_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C, args,
+					subscription);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Subscription subscription) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-			new Object[] {
+		SubscriptionModelImpl subscriptionModelImpl = (SubscriptionModelImpl)subscription;
+
+		Object[] args = new Object[] {
 				Long.valueOf(subscription.getCompanyId()),
 				Long.valueOf(subscription.getUserId()),
 				Long.valueOf(subscription.getClassNameId()),
 				Long.valueOf(subscription.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_U_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C, args);
+
+		if ((subscriptionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_U_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(subscriptionModelImpl.getOriginalCompanyId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalUserId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalClassNameId()),
+					Long.valueOf(subscriptionModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_U_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C, args);
+		}
 	}
 
 	/**
@@ -457,38 +508,8 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		EntityCacheUtil.putResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 			SubscriptionImpl.class, subscription.getPrimaryKey(), subscription);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-				new Object[] {
-					Long.valueOf(subscription.getCompanyId()),
-					Long.valueOf(subscription.getUserId()),
-					Long.valueOf(subscription.getClassNameId()),
-					Long.valueOf(subscription.getClassPK())
-				}, subscription);
-		}
-		else {
-			if ((subscriptionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_U_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(subscriptionModelImpl.getOriginalCompanyId()),
-						Long.valueOf(subscriptionModelImpl.getOriginalUserId()),
-						Long.valueOf(subscriptionModelImpl.getOriginalClassNameId()),
-						Long.valueOf(subscriptionModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_U_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_U_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_U_C_C,
-					new Object[] {
-						Long.valueOf(subscription.getCompanyId()),
-						Long.valueOf(subscription.getUserId()),
-						Long.valueOf(subscription.getClassNameId()),
-						Long.valueOf(subscription.getClassPK())
-					}, subscription);
-			}
-		}
+		clearUniqueFindersCache(subscription);
+		cacheUniqueFindersCache(subscription);
 
 		return subscription;
 	}
@@ -2482,8 +2503,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 				List<ModelListener<Subscription>> listenersList = new ArrayList<ModelListener<Subscription>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Subscription>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

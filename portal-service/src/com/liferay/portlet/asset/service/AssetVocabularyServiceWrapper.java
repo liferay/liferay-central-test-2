@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,7 +51,8 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 	}
 
 	/**
-	* @deprecated
+	* @deprecated As of 6.1.0 {@link #addVocabulary(String, Map, Map, String,
+	ServiceContext)}
 	*/
 	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
 		java.util.Map<java.util.Locale, java.lang.String> titleMap,
@@ -76,10 +77,23 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 			descriptionMap, settings, serviceContext);
 	}
 
+	/**
+	* @deprecated As of 6.2.0, Replaced by {@link #deleteVocabularies(long[],
+	ServiceContext)}
+	*/
 	public void deleteVocabularies(long[] vocabularyIds)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_assetVocabularyService.deleteVocabularies(vocabularyIds);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> deleteVocabularies(
+		long[] vocabularyIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyService.deleteVocabularies(vocabularyIds,
+			serviceContext);
 	}
 
 	public void deleteVocabulary(long vocabularyId)
@@ -117,6 +131,14 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
+		long groupId, boolean createDefaultVocabulary)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyService.getGroupVocabularies(groupId,
+			createDefaultVocabulary);
+	}
+
+	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -142,6 +164,16 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 		return _assetVocabularyService.getGroupVocabulariesCount(groupId, name);
 	}
 
+	public com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
+		long groupId, java.lang.String name, int start, int end,
+		boolean addDefaultVocabulary,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyService.getGroupVocabulariesDisplay(groupId,
+			name, start, end, addDefaultVocabulary, obc);
+	}
+
 	public com.liferay.portal.kernel.json.JSONObject getJSONGroupVocabularies(
 		long groupId, java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -149,6 +181,16 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetVocabularyService.getJSONGroupVocabularies(groupId, name,
 			start, end, obc);
+	}
+
+	public com.liferay.portal.kernel.json.JSONObject getJSONGroupVocabulariesDisplay(
+		long groupId, java.lang.String name, int start, int end,
+		boolean addDefaultVocabulary,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyService.getJSONGroupVocabulariesDisplay(groupId,
+			name, start, end, addDefaultVocabulary, obc);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getVocabularies(
@@ -166,7 +208,8 @@ public class AssetVocabularyServiceWrapper implements AssetVocabularyService,
 	}
 
 	/**
-	* @deprecated
+	* @deprecated As of 6.1.0, {@link #updateVocabulary(long, String, Map, Map,
+	String, ServiceContext)}
 	*/
 	public com.liferay.portlet.asset.model.AssetVocabulary updateVocabulary(
 		long vocabularyId,

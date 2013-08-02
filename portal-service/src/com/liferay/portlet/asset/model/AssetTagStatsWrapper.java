@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -242,6 +243,10 @@ public class AssetTagStatsWrapper implements AssetTagStats,
 		return new AssetTagStatsWrapper(_assetTagStats.toEscapedModel());
 	}
 
+	public com.liferay.portlet.asset.model.AssetTagStats toUnescapedModel() {
+		return new AssetTagStatsWrapper(_assetTagStats.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _assetTagStats.toString();
@@ -254,6 +259,25 @@ public class AssetTagStatsWrapper implements AssetTagStats,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_assetTagStats.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetTagStatsWrapper)) {
+			return false;
+		}
+
+		AssetTagStatsWrapper assetTagStatsWrapper = (AssetTagStatsWrapper)obj;
+
+		if (Validator.equals(_assetTagStats, assetTagStatsWrapper._assetTagStats)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

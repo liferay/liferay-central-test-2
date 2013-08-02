@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -381,13 +381,16 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	@Override
 	public MBBan toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MBBan)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MBBan)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MBBan toUnescapedModel() {
+		return (MBBan)this;
 	}
 
 	@Override
@@ -424,18 +427,15 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBBan)) {
 			return false;
 		}
 
-		MBBan mbBan = null;
-
-		try {
-			mbBan = (MBBan)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBBan mbBan = (MBBan)obj;
 
 		long primaryKey = mbBan.getPrimaryKey();
 
@@ -585,9 +585,7 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	}
 
 	private static ClassLoader _classLoader = MBBan.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			MBBan.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { MBBan.class };
 	private long _banId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -605,5 +603,5 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	private long _originalBanUserId;
 	private boolean _setOriginalBanUserId;
 	private long _columnBitmask;
-	private MBBan _escapedModelProxy;
+	private MBBan _escapedModel;
 }

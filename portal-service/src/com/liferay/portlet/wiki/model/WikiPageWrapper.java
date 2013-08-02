@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -844,6 +845,10 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 		return new WikiPageWrapper(_wikiPage.toEscapedModel());
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPage toUnescapedModel() {
+		return new WikiPageWrapper(_wikiPage.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _wikiPage.toString();
@@ -888,8 +893,39 @@ public class WikiPageWrapper implements WikiPage, ModelWrapper<WikiPage> {
 		return _wikiPage.getRedirectPage();
 	}
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getViewableChildPages() {
+		return _wikiPage.getViewableChildPages();
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage getViewableParentPage() {
+		return _wikiPage.getViewableParentPage();
+	}
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getViewableParentPages() {
+		return _wikiPage.getViewableParentPages();
+	}
+
 	public void setAttachmentsDir(java.lang.String attachmentsDir) {
 		_wikiPage.setAttachmentsDir(attachmentsDir);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WikiPageWrapper)) {
+			return false;
+		}
+
+		WikiPageWrapper wikiPageWrapper = (WikiPageWrapper)obj;
+
+		if (Validator.equals(_wikiPage, wikiPageWrapper._wikiPage)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,0 +1,155 @@
+<html>
+<head>
+<title>CPUsersandorganizations</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPUsersandorganizations</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPUsersandorganizaitons</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD</td>
+	<td>//span[@title='Add']/ul/li/strong/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_FIELD</td>
+	<td>//input[@name='_125_keywords']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_ALL_ORGANIZATIONS</td>
+	<td>//a[@id='_125_allOrganizationsLink']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_ALL_USERS</td>
+	<td>//a[contains(.,'Search All Users')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NAVIGATION-->
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ADD-->
+<tr>
+	<td>ADD_USER</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'User')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_REGULAR_ORGANIZATION</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Regular Organization')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ORGANIZATION_TABLE-->
+<tr>
+	<td>ORGANIZATION_TABLE_NAME_1</td>
+	<td>xpath=(//div[@id='_125_organizationsSearchContainer']//tr/td[2]/a/strong)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_TABLE_TYPE_1</td>
+	<td>xpath=(//div[@id='_125_organizationsSearchContainer']//tr/td[3]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_TABLE_ACTIONS_1</td>
+	<td>xpath=(//div[@id='_125_organizationsSearchContainer']//tr/td[4]/span[@title='Actions']/ul/li/strong/a/span)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ORGANIZATION_MENULIST-->
+<tr>
+	<td>ORGANIZATION_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_ASSIGN_ORGANIZATION_ROLES</td>
+	<td>//a[@role='menuitem' and contains(.,'Assign Organization Roles')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_ASSIGN_USERS</td>
+	<td>//a[@role='menuitem' and contains(.,'Assign Users')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_ADD_USER</td>
+	<td>//a[@role='menuitem' and contains(.,'Add User')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_ADD_REGULAR_ORGANIZATION</td>
+	<td>//a[@role='menuitem' and contains(.,'Add Regular Organization')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_ADD_LOCATION</td>
+	<td>//a[@role='menuitem' and contains(.,'Add Location')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--USER_TABLE-->
+<!--USER_MENULIST-->
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

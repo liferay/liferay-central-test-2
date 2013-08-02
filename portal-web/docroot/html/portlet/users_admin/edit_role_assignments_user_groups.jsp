@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,7 +46,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_role_assignments.
 	<%
 	UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-	LinkedHashMap userGroupParams = new LinkedHashMap();
+	LinkedHashMap<String, Object> userGroupParams = new LinkedHashMap<String, Object>();
 
 	if (tabs3.equals("current")) {
 		List userGroupsRoles = new ArrayList();

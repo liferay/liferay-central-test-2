@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -159,27 +159,29 @@ public class LayoutCache {
 
 		List<Role> roles = groupRolesMap.get(groupId);
 
-		if (roles == null) {
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			roles = ResourceActionsUtil.getRoles(
-				group.getCompanyId(), group, resourceName, null);
-
-			List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
-
-			for (Team team : teams) {
-				Role teamRole = RoleLocalServiceUtil.getTeamRole(
-					group.getCompanyId(), team.getTeamId());
-
-				teamRole.setName(
-					PermissionExporter.ROLE_TEAM_PREFIX + team.getName());
-				teamRole.setDescription(team.getDescription());
-
-				roles.add(teamRole);
-			}
-
-			groupRolesMap.put(groupId, roles);
+		if (roles != null) {
+			return roles;
 		}
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		roles = ResourceActionsUtil.getRoles(
+			group.getCompanyId(), group, resourceName, null);
+
+		List<Team> teams = TeamLocalServiceUtil.getGroupTeams(groupId);
+
+		for (Team team : teams) {
+			Role teamRole = RoleLocalServiceUtil.getTeamRole(
+				group.getCompanyId(), team.getTeamId());
+
+			teamRole.setName(
+				PermissionExporter.ROLE_TEAM_PREFIX + team.getName());
+			teamRole.setDescription(team.getDescription());
+
+			roles.add(teamRole);
+		}
+
+		groupRolesMap.put(groupId, roles);
 
 		return roles;
 	}

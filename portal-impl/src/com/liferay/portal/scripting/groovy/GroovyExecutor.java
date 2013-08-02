@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.scripting.BaseScriptingExecutor;
 import com.liferay.portal.kernel.scripting.ExecutionException;
 import com.liferay.portal.kernel.scripting.ScriptingException;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 import groovy.lang.Binding;
 import groovy.lang.GroovyShell;
@@ -41,6 +41,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 		SingleVMPoolUtil.clear(_CACHE_NAME);
 	}
 
+	@Override
 	public Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
 			Set<String> outputNames, String script, ClassLoader... classLoaders)
@@ -72,6 +73,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 		return outputObjects;
 	}
 
+	@Override
 	public String getLanguage() {
 		return _LANGUAGE;
 	}
@@ -109,7 +111,7 @@ public class GroovyExecutor extends BaseScriptingExecutor {
 
 		ClassLoader aggregateClassLoader =
 			AggregateClassLoader.getAggregateClassLoader(
-				PACLClassLoaderUtil.getPortalClassLoader(), classLoaders);
+				ClassLoaderUtil.getPortalClassLoader(), classLoaders);
 
 		GroovyShell groovyShell = null;
 

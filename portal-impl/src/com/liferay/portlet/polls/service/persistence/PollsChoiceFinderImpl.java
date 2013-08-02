@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,6 +36,7 @@ public class PollsChoiceFinderImpl
 	public static final String FIND_BY_UUID_G =
 		PollsChoiceFinder.class.getName() + ".findByUUID_G";
 
+	@Override
 	public PollsChoice fetchByUUID_G(String uuid, long groupId)
 		throws SystemException {
 
@@ -71,6 +72,7 @@ public class PollsChoiceFinderImpl
 		}
 	}
 
+	@Override
 	public PollsChoice findByUUID_G(String uuid, long groupId)
 		throws NoSuchChoiceException, SystemException {
 

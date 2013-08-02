@@ -1,0 +1,59 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<var name="taskAssignee" value="Joe Bloggs" />
+	<var name="taskDescription" value="Task Description" />
+	<var name="taskDescriptionEdit" value="Task Description Edit" />
+
+	<command name="AddTaskAssignedToMe">
+		<execute macro="SOTasks#addTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescription}" />
+		</execute>
+
+		<execute macro="SOTasks#viewTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescription}" />
+		</execute>
+	</command>
+
+	<command name="EditTaskAssignedToMeDescription">
+		<var name="taskAssignee" value="Joe Bloggs" />
+		<var name="taskDescription" value="Task Description" />
+
+		<execute macro="SOTasks#addTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescription}" />
+		</execute>
+
+		<execute macro="SOTasks#editTask">
+			<var name="taskDescriptionEdit" value="${taskDescriptionEdit}" />
+		</execute>
+
+		<execute macro="SOTasks#viewTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescriptionEdit}" />
+		</execute>
+	</command>
+
+	<command name="DeleteTaskAssignedToMeDescription">
+		<var name="taskAssignee" value="Joe Bloggs" />
+		<var name="taskDescription" value="Task Description" />
+
+		<execute macro="SOTasks#addTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescription}" />
+		</execute>
+
+		<execute macro="SOTasks#deleteTask">
+			<var name="taskAssignee" value="${taskAssignee}" />
+			<var name="taskDescription" value="${taskDescription}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="SOTasks#tearDownTask" />
+	</tear-down>
+</definition>

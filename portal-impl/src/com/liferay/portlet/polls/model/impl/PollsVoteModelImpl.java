@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -392,13 +392,16 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 
 	@Override
 	public PollsVote toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PollsVote)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PollsVote)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PollsVote toUnescapedModel() {
+		return (PollsVote)this;
 	}
 
 	@Override
@@ -436,18 +439,15 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PollsVote)) {
 			return false;
 		}
 
-		PollsVote pollsVote = null;
-
-		try {
-			pollsVote = (PollsVote)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PollsVote pollsVote = (PollsVote)obj;
 
 		long primaryKey = pollsVote.getPrimaryKey();
 
@@ -612,7 +612,7 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	}
 
 	private static ClassLoader _classLoader = PollsVote.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PollsVote.class
 		};
 	private long _voteId;
@@ -632,5 +632,5 @@ public class PollsVoteModelImpl extends BaseModelImpl<PollsVote>
 	private boolean _setOriginalChoiceId;
 	private Date _voteDate;
 	private long _columnBitmask;
-	private PollsVote _escapedModelProxy;
+	private PollsVote _escapedModel;
 }

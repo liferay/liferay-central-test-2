@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -808,6 +808,60 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
+	* Returns all the asset categories where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @return the matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_V(
+		long groupId, long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_V(
+		long groupId, long[] vocabularyIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_V(
+		long groupId, long[] vocabularyIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns all the asset categories that the user has permission to view where groupId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
@@ -873,6 +927,56 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns all the asset categories that the user has permission to view where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @return the matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_V(
+		long groupId, long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_V(
+		long groupId, long[] vocabularyIds, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories that the user has permission to view where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_V(
+		long groupId, long[] vocabularyIds, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns all the asset categories where parentCategoryId = &#63; and name = &#63;.
@@ -1256,20 +1360,20 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
-	* Returns all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns all the asset categories where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns a range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1277,18 +1381,18 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name, int start,
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns an ordered range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1296,117 +1400,117 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name, int start,
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory findByG_P_N_First(
-		long groupId, long parentCategoryId, java.lang.String name,
+	public com.liferay.portlet.asset.model.AssetCategory findByG_P_V_First(
+		long groupId, long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
-	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_N_First(
-		long groupId, long parentCategoryId, java.lang.String name,
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_V_First(
+		long groupId, long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory findByG_P_N_Last(
-		long groupId, long parentCategoryId, java.lang.String name,
+	public com.liferay.portlet.asset.model.AssetCategory findByG_P_V_Last(
+		long groupId, long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
-	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching asset category, or <code>null</code> if a matching asset category could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_N_Last(
-		long groupId, long parentCategoryId, java.lang.String name,
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_V_Last(
+		long groupId, long parentCategoryId, long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the asset categories before and after the current asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory[] findByG_P_N_PrevAndNext(
+	public com.liferay.portlet.asset.model.AssetCategory[] findByG_P_V_PrevAndNext(
 		long categoryId, long groupId, long parentCategoryId,
-		java.lang.String name,
+		long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
-	* Returns all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1414,18 +1518,18 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @return the range of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name, int start,
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the asset categories that the user has permissions to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns an ordered range of all the asset categories that the user has permissions to view where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
@@ -1433,37 +1537,359 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param start the lower bound of the range of asset categories
 	* @param end the upper bound of the range of asset categories (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	* @return the ordered range of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N(
-		long groupId, long parentCategoryId, java.lang.String name, int start,
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_V(
+		long groupId, long parentCategoryId, long vocabularyId, int start,
 		int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the asset categories before and after the current asset category in the ordered set of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the asset categories before and after the current asset category in the ordered set of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param categoryId the primary key of the current asset category
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next asset category
 	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.liferay.portlet.asset.model.AssetCategory[] filterFindByG_P_N_PrevAndNext(
+	public com.liferay.portlet.asset.model.AssetCategory[] filterFindByG_P_V_PrevAndNext(
 		long categoryId, long groupId, long parentCategoryId,
-		java.lang.String name,
+		long vocabularyId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first asset category in the ordered set where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory findByG_LikeN_V_First(
+		long groupId, java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns the first asset category in the ordered set where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_LikeN_V_First(
+		long groupId, java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last asset category in the ordered set where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory findByG_LikeN_V_Last(
+		long groupId, java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns the last asset category in the ordered set where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_LikeN_V_Last(
+		long groupId, java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the asset categories before and after the current asset category in the ordered set where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param categoryId the primary key of the current asset category
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory[] findByG_LikeN_V_PrevAndNext(
+		long categoryId, long groupId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @return the matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories that the user has permissions to view where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long vocabularyId, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the asset categories before and after the current asset category in the ordered set of asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param categoryId the primary key of the current asset category
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory[] filterFindByG_LikeN_V_PrevAndNext(
+		long categoryId, long groupId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns all the asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @return the matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds, int start,
+		int end) throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_LikeN_V(
+		long groupId, java.lang.String name, long[] vocabularyIds, int start,
+		int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Returns the asset category where parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; or throws a {@link com.liferay.portlet.asset.NoSuchCategoryException} if it could not be found.
@@ -1507,6 +1933,236 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		long parentCategoryId, java.lang.String name, long vocabularyId,
 		boolean retrieveFromCache)
 		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> findByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory findByG_P_N_V_First(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns the first asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_N_V_First(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory findByG_P_N_V_Last(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns the last asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching asset category, or <code>null</code> if a matching asset category could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory fetchByG_P_N_V_Last(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the asset categories before and after the current asset category in the ordered set where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param categoryId the primary key of the current asset category
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory[] findByG_P_N_V_PrevAndNext(
+		long categoryId, long groupId, long parentCategoryId,
+		java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Returns all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @return the range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the asset categories that the user has permissions to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	* </p>
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param start the lower bound of the range of asset categories
+	* @param end the upper bound of the range of asset categories (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.asset.model.AssetCategory> filterFindByG_P_N_V(
+		long groupId, long parentCategoryId, java.lang.String name,
+		long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the asset categories before and after the current asset category in the ordered set of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param categoryId the primary key of the current asset category
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next asset category
+	* @throws com.liferay.portlet.asset.NoSuchCategoryException if a asset category with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.portlet.asset.model.AssetCategory[] filterFindByG_P_N_V_PrevAndNext(
+		long categoryId, long groupId, long parentCategoryId,
+		java.lang.String name, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.liferay.portlet.asset.NoSuchCategoryException;
 
 	/**
 	* Returns all the asset categories.
@@ -1641,15 +2297,27 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; from the database.
+	* Removes all the asset categories where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63; from the database.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByG_P_N(long groupId, long parentCategoryId,
-		java.lang.String name)
+	public void removeByG_P_V(long groupId, long parentCategoryId,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByG_LikeN_V(long groupId, java.lang.String name,
+		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -1665,6 +2333,19 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		long parentCategoryId, java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.liferay.portlet.asset.NoSuchCategoryException;
+
+	/**
+	* Removes all the asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63; from the database.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByG_P_N_V(long groupId, long parentCategoryId,
+		java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
 	* Removes all the asset categories from the database.
@@ -1747,6 +2428,17 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns the number of asset categories where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @return the number of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_V(long groupId, long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
@@ -1755,6 +2447,17 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	* @throws SystemException if a system exception occurred
 	*/
 	public int filterCountByG_V(long groupId, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param vocabularyIds the vocabulary IDs
+	* @return the number of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_V(long groupId, long[] vocabularyIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -1791,29 +2494,81 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the number of asset categories where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByG_P_N(long groupId, long parentCategoryId,
-		java.lang.String name)
+	public int countByG_P_V(long groupId, long parentCategoryId,
+		long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63;.
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and vocabularyId = &#63;.
 	*
 	* @param groupId the group ID
 	* @param parentCategoryId the parent category ID
-	* @param name the name
+	* @param vocabularyId the vocabulary ID
 	* @return the number of matching asset categories that the user has permission to view
 	* @throws SystemException if a system exception occurred
 	*/
-	public int filterCountByG_P_N(long groupId, long parentCategoryId,
-		java.lang.String name)
+	public int filterCountByG_P_V(long groupId, long parentCategoryId,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the number of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_LikeN_V(long groupId, java.lang.String name,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @return the number of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_LikeN_V(long groupId, java.lang.String name,
+		long[] vocabularyIds)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the number of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_LikeN_V(long groupId, java.lang.String name,
+		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and name LIKE &#63; and vocabularyId = any &#63;.
+	*
+	* @param groupId the group ID
+	* @param name the name
+	* @param vocabularyIds the vocabulary IDs
+	* @return the number of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_LikeN_V(long groupId, java.lang.String name,
+		long[] vocabularyIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -1827,6 +2582,34 @@ public interface AssetCategoryPersistence extends BasePersistence<AssetCategory>
 	*/
 	public int countByP_N_V(long parentCategoryId, java.lang.String name,
 		long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the number of matching asset categories
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByG_P_N_V(long groupId, long parentCategoryId,
+		java.lang.String name, long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of asset categories that the user has permission to view where groupId = &#63; and parentCategoryId = &#63; and name = &#63; and vocabularyId = &#63;.
+	*
+	* @param groupId the group ID
+	* @param parentCategoryId the parent category ID
+	* @param name the name
+	* @param vocabularyId the vocabulary ID
+	* @return the number of matching asset categories that the user has permission to view
+	* @throws SystemException if a system exception occurred
+	*/
+	public int filterCountByG_P_N_V(long groupId, long parentCategoryId,
+		java.lang.String name, long vocabularyId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

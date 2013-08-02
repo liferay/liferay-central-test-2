@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,18 +22,22 @@ import java.util.List;
  */
 public abstract class BaseVisitor<T> implements Visitor<T> {
 
+	@Override
 	public T visitAttribute(Attribute attribute) {
 		return handleAttribute(attribute);
 	}
 
+	@Override
 	public T visitCDATA(CDATA cdata) {
 		return handleCDATA(cdata);
 	}
 
+	@Override
 	public T visitComment(Comment comment) {
 		return handleComment(comment);
 	}
 
+	@Override
 	public T visitDocument(Document document) {
 		List<T> nodeResults = new ArrayList<T>(document.nodeCount());
 
@@ -48,6 +52,7 @@ public abstract class BaseVisitor<T> implements Visitor<T> {
 		return handleDocument(document, nodeResults);
 	}
 
+	@Override
 	public T visitElement(Element element) {
 		List<Attribute> attributes = element.attributes();
 
@@ -76,24 +81,29 @@ public abstract class BaseVisitor<T> implements Visitor<T> {
 		return handleElement(element, attributeResults, nodeResults);
 	}
 
+	@Override
 	public T visitEntity(Entity entity) {
 		return handleEntity(entity);
 	}
 
+	@Override
 	public T visitNamespace(Namespace namespace) {
 		return handleNamespace(namespace);
 	}
 
+	@Override
 	public T visitNode(Node node) {
 		return handleNode(node);
 	}
 
+	@Override
 	public T visitProcessInstruction(
 		ProcessingInstruction processingInstruction) {
 
 		return handleProcessInstruction(processingInstruction);
 	}
 
+	@Override
 	public T visitText(Text text) {
 		return handleText(text);
 	}

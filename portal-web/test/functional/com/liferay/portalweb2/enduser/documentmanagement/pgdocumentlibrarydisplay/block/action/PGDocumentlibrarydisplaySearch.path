@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>PGDocumentlibrarydisplaySearch</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDocumentlibrarydisplaySearch</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGDocumentlibrarydisplay</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[contains(@class,'portlet-msg-success')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SEARCH-->
+<tr>
+	<td>SEARCH_FIELD</td>
+	<td>//input[@title='Search Documents']</td>
+	<td>Search Field</td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//input[@value='Search']</td>
+	<td>Search Button</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SEARCH_RESULTS-->
+<tr>
+	<td>SEARCH_RESULTS_NUMBER</td>
+	<td>xpath=(//tbody/tr[3]/td[1])[1]</td>
+	<td>Search Result #</td>
+</tr>
+<tr>
+	<td>SEARCH_RESULTS_FOLDER</td>
+	<td>xpath=(//tbody/tr[3]/td[2]/a)[1]</td>
+	<td>Search Result Folder</td>
+</tr>
+<tr>
+	<td>SEARCH_RESULTS_DOCUMENT</td>
+	<td>xpath=(//tbody/tr[3]/td[3]/a)[1]</td>
+	<td>Search Result Document</td>
+</tr>
+<tr>
+	<td>SEARCH_RESULTS_ACTIONS</td>
+	<td>xpath=(//span[@title='Actions']/ul/li/strong/a/span)[1]</td>
+	<td>Search Result Actions</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DOCUMENT_MENULIST-->
+<tr>
+	<td>DOCUMENT_MENULIST_DOWNLOAD</td>
+	<td>//a[@role='menuitem' and contains(.,'Download')]</td>
+	<td>Download</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_MOVE</td>
+	<td>//a[@role='menuitem' and contains(.,'Move')]</td>
+	<td>Move</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_CHECKOUT</td>
+	<td>//a[@role='menuitem' and contains(.,'Checkout')]</td>
+	<td>Checkout</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_PERMISSIONS</td>
+	<td>//a[@role='menuitem' and contains(.,'Permissions')]</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td>Delete</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

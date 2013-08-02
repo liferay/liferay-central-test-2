@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ public class PasswordPolicyFinderImpl
 	public static final String FIND_BY_C_N =
 		PasswordPolicyFinder.class.getName() + ".findByC_N";
 
+	@Override
 	public int countByC_N(long companyId, String name) throws SystemException {
 		name = StringUtil.lowerCase(name);
 
@@ -83,6 +84,7 @@ public class PasswordPolicyFinderImpl
 		}
 	}
 
+	@Override
 	public List<PasswordPolicy> findByC_N(
 			long companyId, String name, int start, int end,
 			OrderByComparator obc)

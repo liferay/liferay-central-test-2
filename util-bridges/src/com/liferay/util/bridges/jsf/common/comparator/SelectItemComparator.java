@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ public class SelectItemComparator implements Comparator<SelectItem> {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(SelectItem selectItem1, SelectItem selectItem2) {
 		int value = selectItem1.getLabel().compareTo(selectItem2.getLabel());
 

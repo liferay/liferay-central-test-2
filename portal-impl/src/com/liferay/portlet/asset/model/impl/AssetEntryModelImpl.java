@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -118,8 +118,9 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	public static long COMPANYID_COLUMN_BITMASK = 8L;
 	public static long EXPIRATIONDATE_COLUMN_BITMASK = 16L;
 	public static long GROUPID_COLUMN_BITMASK = 32L;
-	public static long PUBLISHDATE_COLUMN_BITMASK = 64L;
-	public static long VISIBLE_COLUMN_BITMASK = 128L;
+	public static long LAYOUTUUID_COLUMN_BITMASK = 64L;
+	public static long PUBLISHDATE_COLUMN_BITMASK = 128L;
+	public static long VISIBLE_COLUMN_BITMASK = 256L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -191,7 +192,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 			{ "categoryId", Types.BIGINT }
 		};
 	public static final String MAPPING_TABLE_ASSETENTRIES_ASSETCATEGORIES_SQL_CREATE =
-		"create table AssetEntries_AssetCategories (entryId LONG not null,categoryId LONG not null,primary key (entryId, categoryId))";
+		"create table AssetEntries_AssetCategories (categoryId LONG not null,entryId LONG not null,primary key (categoryId, entryId))";
 	public static final boolean FINDER_CACHE_ENABLED_ASSETENTRIES_ASSETCATEGORIES =
 		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.AssetEntries_AssetCategories"),
@@ -1015,7 +1016,17 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	public void setLayoutUuid(String layoutUuid) {
+		_columnBitmask |= LAYOUTUUID_COLUMN_BITMASK;
+
+		if (_originalLayoutUuid == null) {
+			_originalLayoutUuid = _layoutUuid;
+		}
+
 		_layoutUuid = layoutUuid;
+	}
+
+	public String getOriginalLayoutUuid() {
+		return GetterUtil.getString(_originalLayoutUuid);
 	}
 
 	@JSON
@@ -1084,13 +1095,16 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 	@Override
 	public AssetEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetEntry toUnescapedModel() {
+		return (AssetEntry)this;
 	}
 
 	@Override
@@ -1145,18 +1159,15 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetEntry)) {
 			return false;
 		}
 
-		AssetEntry assetEntry = null;
-
-		try {
-			assetEntry = (AssetEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetEntry assetEntry = (AssetEntry)obj;
 
 		long primaryKey = assetEntry.getPrimaryKey();
 
@@ -1202,6 +1213,8 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 		assetEntryModelImpl._originalPublishDate = assetEntryModelImpl._publishDate;
 
 		assetEntryModelImpl._originalExpirationDate = assetEntryModelImpl._expirationDate;
+
+		assetEntryModelImpl._originalLayoutUuid = assetEntryModelImpl._layoutUuid;
 
 		assetEntryModelImpl._columnBitmask = 0;
 	}
@@ -1534,7 +1547,7 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	private static ClassLoader _classLoader = AssetEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetEntry.class
 		};
 	private long _entryId;
@@ -1576,10 +1589,11 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	private String _summaryCurrentLanguageId;
 	private String _url;
 	private String _layoutUuid;
+	private String _originalLayoutUuid;
 	private int _height;
 	private int _width;
 	private double _priority;
 	private int _viewCount;
 	private long _columnBitmask;
-	private AssetEntry _escapedModelProxy;
+	private AssetEntry _escapedModel;
 }

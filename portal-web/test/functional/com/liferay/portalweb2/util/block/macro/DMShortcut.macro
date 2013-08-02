@@ -1,0 +1,11 @@
+<definition>
+	<command name="pgAdd">
+		<execute action="PGDocumentsandmedia#assertClick" locator-key1="TOOLBAR_ADD" value1="Add" />
+		<execute action="PGDocumentsandmedia#assertClick" locator-key1="ADD_MENULIST_SHORTCUT" value1="Shortcut" />
+
+		<execute action="PGDocumentsandmediaAddshortcut#click" locator-key1="SITE_BUTTON" />
+		<!--<execute action="PGDocumentsandmediaAddshortcutsites#selectwindow" locator-key1="DOCUMENTS_AND_MEDIA_POPUP" />-->
+		<execute action="PGDocumentsandmediaAddshortcutsites#click" locator-key1="SITES_GLOBAL_SITE" />
+		<execute action="PGDocumentsandmediaAddshortcut#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
+	</command>
+</definition>

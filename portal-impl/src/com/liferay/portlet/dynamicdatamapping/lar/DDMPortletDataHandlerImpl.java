@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -100,7 +100,8 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		DDMStructure structure =
-			(DDMStructure)portletDataContext.getZipEntryAsObject(path);
+			(DDMStructure)portletDataContext.getZipEntryAsObject(
+				structureElement, path);
 
 		prepareLanguagesForImport(structure);
 
@@ -169,7 +170,8 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 		}
 
 		DDMTemplate template =
-			(DDMTemplate)portletDataContext.getZipEntryAsObject(path);
+			(DDMTemplate)portletDataContext.getZipEntryAsObject(
+				templateElement, path);
 
 		long userId = portletDataContext.getUserId(template.getUserUuid());
 
@@ -400,7 +402,6 @@ public class DDMPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	private static PortletDataHandlerBoolean _structures =
 		new PortletDataHandlerBoolean(_NAMESPACE, "structures", true, true);
-
 	private static PortletDataHandlerBoolean _templates =
 		new PortletDataHandlerBoolean(_NAMESPACE, "templates");
 

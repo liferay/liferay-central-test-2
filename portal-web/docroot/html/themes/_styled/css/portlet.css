@@ -22,7 +22,7 @@ body.portlet {
 	}
 }
 
-.portlet-title-text {
+.portlet-title-editable {
 	cursor: pointer;
 }
 
@@ -645,7 +645,7 @@ body.portlet {
 	background-image: url(../images/portlet/options_selected.png);
 }
 
-/*------ Breadcrumbs taglib ------*/
+/* ---------- Breadcrumbs taglib ---------- */
 
 .breadcrumbs {
 	&:before, &:after {
@@ -774,5 +774,58 @@ body.portlet {
 
 	.breadcrumbs {
 		zoom: 1;
+	}
+}
+
+/* ---------- RTL ---------- */
+
+.rtl { 
+	.breadcrumbs-horizontal li {
+		float: right;
+	}
+
+	.portlet-msg {
+		background-position: right;
+		padding-left: 6px;
+		padding-right: 24px;
+		text-align: right;
+	}
+
+	.portlet-topper-toolbar {
+		left: 3px;
+		right: auto;
+		text-align: left;
+
+		.nobr {
+			float: right;
+		}
+	}
+
+	.lfr-actions {
+		&.portlet-options {
+			float: right;
+
+			.lfr-trigger strong a {
+				padding: 0;
+			}
+		}	
+	}
+
+	.lfr-message {
+		.lfr-message-controls {
+			left: auto;
+			margin-left: -4px;
+			margin-right: 3px;
+			right: 3px;
+		}
+	}
+
+	.results-row, .results-row.hover {
+		padding-right: 5px;
+
+		&.lfr-role .col-1 {
+			background-position: right;
+			padding-right: 30px;
+		}		
 	}
 }

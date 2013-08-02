@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -238,6 +240,10 @@ public class ShardWrapper implements Shard, ModelWrapper<Shard> {
 		return new ShardWrapper(_shard.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Shard toUnescapedModel() {
+		return new ShardWrapper(_shard.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _shard.toString();
@@ -250,6 +256,25 @@ public class ShardWrapper implements Shard, ModelWrapper<Shard> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_shard.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShardWrapper)) {
+			return false;
+		}
+
+		ShardWrapper shardWrapper = (ShardWrapper)obj;
+
+		if (Validator.equals(_shard, shardWrapper._shard)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

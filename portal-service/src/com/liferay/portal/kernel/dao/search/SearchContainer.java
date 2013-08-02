@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -72,26 +72,6 @@ public class SearchContainer<R> {
 	}
 
 	public SearchContainer(
-		PortletRequest portletRequest, PortletURL iteratorURL,
-		List<String> headerNames, String emptyResultsMessage) {
-
-		this(
-			portletRequest, null, null, DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			iteratorURL, headerNames, emptyResultsMessage);
-	}
-
-	public SearchContainer(
-		PortletRequest portletRequest, DisplayTerms displayTerms,
-		DisplayTerms searchTerms, String curParam, int delta,
-		PortletURL iteratorURL, List<String> headerNames,
-		String emptyResultsMessage) {
-
-		this (
-			portletRequest, displayTerms, searchTerms, curParam, 0, delta,
-			iteratorURL, headerNames, emptyResultsMessage);
-	}
-
-	public SearchContainer(
 		PortletRequest portletRequest, DisplayTerms displayTerms,
 		DisplayTerms searchTerms, String curParam, int cur, int delta,
 		PortletURL iteratorURL, List<String> headerNames,
@@ -158,6 +138,26 @@ public class SearchContainer<R> {
 		}
 
 		_emptyResultsMessage = emptyResultsMessage;
+	}
+
+	public SearchContainer(
+		PortletRequest portletRequest, DisplayTerms displayTerms,
+		DisplayTerms searchTerms, String curParam, int delta,
+		PortletURL iteratorURL, List<String> headerNames,
+		String emptyResultsMessage) {
+
+		this (
+			portletRequest, displayTerms, searchTerms, curParam, 0, delta,
+			iteratorURL, headerNames, emptyResultsMessage);
+	}
+
+	public SearchContainer(
+		PortletRequest portletRequest, PortletURL iteratorURL,
+		List<String> headerNames, String emptyResultsMessage) {
+
+		this(
+			portletRequest, null, null, DEFAULT_CUR_PARAM, DEFAULT_DELTA,
+			iteratorURL, headerNames, emptyResultsMessage);
 	}
 
 	public String getClassName() {
@@ -331,6 +331,24 @@ public class SearchContainer<R> {
 		return _hover;
 	}
 
+	public boolean isRecalculateCur(int total) {
+		if (((_cur - 1) * _delta) >= total) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean recalculateCur(int total) {
+		if (isRecalculateCur(total)) {
+			setTotal(total);
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public void setClassName(String className) {
 		_className = className;
 	}
@@ -429,10 +447,7 @@ public class SearchContainer<R> {
 	public void setTotal(int total) {
 		_total = total;
 
-		if (((_cur - 1) * _delta) >= _total) {
-			_cur = DEFAULT_CUR;
-		}
-
+		_calculateCur();
 		_calculateStartAndEnd();
 	}
 
@@ -446,6 +461,23 @@ public class SearchContainer<R> {
 		for (String headerName : headerNames) {
 			_normalizedHeaderNames.add(
 				FriendlyURLNormalizerUtil.normalize(headerName));
+		}
+	}
+
+	private void _calculateCur() {
+		if (_total == 0) {
+			_cur = DEFAULT_CUR;
+
+			return;
+		}
+
+		if (isRecalculateCur(_total)) {
+			if ((_total % _delta) == 0) {
+				_cur = (_total / _delta);
+			}
+			else {
+				_cur = (_total / _delta) + 1;
+			}
 		}
 	}
 

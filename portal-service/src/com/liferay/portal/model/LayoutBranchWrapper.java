@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -405,6 +407,10 @@ public class LayoutBranchWrapper implements LayoutBranch,
 		return new LayoutBranchWrapper(_layoutBranch.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.LayoutBranch toUnescapedModel() {
+		return new LayoutBranchWrapper(_layoutBranch.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _layoutBranch.toString();
@@ -417,6 +423,25 @@ public class LayoutBranchWrapper implements LayoutBranch,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_layoutBranch.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutBranchWrapper)) {
+			return false;
+		}
+
+		LayoutBranchWrapper layoutBranchWrapper = (LayoutBranchWrapper)obj;
+
+		if (Validator.equals(_layoutBranch, layoutBranchWrapper._layoutBranch)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

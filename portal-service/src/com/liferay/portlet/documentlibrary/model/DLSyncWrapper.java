@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -454,6 +455,10 @@ public class DLSyncWrapper implements DLSync, ModelWrapper<DLSync> {
 		return new DLSyncWrapper(_dlSync.toEscapedModel());
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLSync toUnescapedModel() {
+		return new DLSyncWrapper(_dlSync.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _dlSync.toString();
@@ -466,6 +471,25 @@ public class DLSyncWrapper implements DLSync, ModelWrapper<DLSync> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlSync.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLSyncWrapper)) {
+			return false;
+		}
+
+		DLSyncWrapper dlSyncWrapper = (DLSyncWrapper)obj;
+
+		if (Validator.equals(_dlSync, dlSyncWrapper._dlSync)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

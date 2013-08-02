@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.asset.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -749,6 +750,10 @@ public class AssetCategoryWrapper implements AssetCategory,
 		return new AssetCategoryWrapper(_assetCategory.toEscapedModel());
 	}
 
+	public com.liferay.portlet.asset.model.AssetCategory toUnescapedModel() {
+		return new AssetCategoryWrapper(_assetCategory.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _assetCategory.toString();
@@ -771,6 +776,25 @@ public class AssetCategoryWrapper implements AssetCategory,
 
 	public boolean isRootCategory() {
 		return _assetCategory.isRootCategory();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetCategoryWrapper)) {
+			return false;
+		}
+
+		AssetCategoryWrapper assetCategoryWrapper = (AssetCategoryWrapper)obj;
+
+		if (Validator.equals(_assetCategory, assetCategoryWrapper._assetCategory)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -270,11 +270,55 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MBCategory mbCategory) {
+		if (mbCategory.isNew()) {
+			Object[] args = new Object[] {
+					mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				mbCategory);
+		}
+		else {
+			MBCategoryModelImpl mbCategoryModelImpl = (MBCategoryModelImpl)mbCategory;
+
+			if ((mbCategoryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						mbCategory.getUuid(),
+						Long.valueOf(mbCategory.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					mbCategory);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MBCategory mbCategory) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		MBCategoryModelImpl mbCategoryModelImpl = (MBCategoryModelImpl)mbCategory;
+
+		Object[] args = new Object[] {
 				mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((mbCategoryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					mbCategoryModelImpl.getOriginalUuid(),
+					Long.valueOf(mbCategoryModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -495,31 +539,8 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 		EntityCacheUtil.putResult(MBCategoryModelImpl.ENTITY_CACHE_ENABLED,
 			MBCategoryImpl.class, mbCategory.getPrimaryKey(), mbCategory);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					mbCategory.getUuid(), Long.valueOf(mbCategory.getGroupId())
-				}, mbCategory);
-		}
-		else {
-			if ((mbCategoryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						mbCategoryModelImpl.getOriginalUuid(),
-						Long.valueOf(mbCategoryModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						mbCategory.getUuid(),
-						Long.valueOf(mbCategory.getGroupId())
-					}, mbCategory);
-			}
-		}
+		clearUniqueFindersCache(mbCategory);
+		cacheUniqueFindersCache(mbCategory);
 
 		return mbCategory;
 	}
@@ -4170,8 +4191,10 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				List<ModelListener<MBCategory>> listenersList = new ArrayList<ModelListener<MBCategory>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MBCategory>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

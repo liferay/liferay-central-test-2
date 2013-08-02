@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.portlet.Route;
 import com.liferay.portal.kernel.portlet.Router;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.StorageType;
@@ -64,9 +64,9 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.poller.PollerProcessorUtil;
 import com.liferay.portal.pop.POPServerUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.permission.PermissionPropagator;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.xmlrpc.XmlRpcServlet;
@@ -111,7 +111,7 @@ public class PortletBagFactory {
 
 			_servletContext = ServletContextPool.get(contextPath);
 
-			_classLoader = PACLClassLoaderUtil.getPortalClassLoader();
+			_classLoader = ClassLoaderUtil.getPortalClassLoader();
 		}
 
 		Class<?> portletClass = null;
@@ -491,11 +491,11 @@ public class PortletBagFactory {
 			schedulerEntry.setTriggerValue(triggerValue);
 		}
 
-		if (_classLoader == PACLClassLoaderUtil.getPortalClassLoader()) {
+		if (_classLoader == ClassLoaderUtil.getPortalClassLoader()) {
 			portletId = null;
 		}
 
-		SchedulerEngineUtil.schedule(
+		SchedulerEngineHelperUtil.schedule(
 			schedulerEntry, StorageType.MEMORY_CLUSTERED, portletId, 0);
 	}
 
@@ -685,7 +685,7 @@ public class PortletBagFactory {
 			}
 
 			for (Element implicitParameterElement :
-				routeElement.elements("implicit-parameter")) {
+					routeElement.elements("implicit-parameter")) {
 
 				String name = implicitParameterElement.attributeValue("name");
 				String value = implicitParameterElement.getText();

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,12 +28,11 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutPrototypeServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -56,43 +55,12 @@ public class UpdateLayoutAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		long plid = ParamUtil.getLong(request, "plid");
-
-		long groupId = ParamUtil.getLong(request, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-		long layoutId = ParamUtil.getLong(request, "layoutId");
-		long parentLayoutId = ParamUtil.getLong(request, "parentLayoutId");
-
-		Layout layout = null;
-
-		if (plid > 0) {
-			layout = LayoutLocalServiceUtil.getLayout(plid);
-		}
-		else if (layoutId > 0) {
-			layout = LayoutLocalServiceUtil.getLayout(
-				groupId, privateLayout, layoutId);
-		}
-		else if (parentLayoutId > 0) {
-			layout = LayoutLocalServiceUtil.getLayout(
-				groupId, privateLayout, parentLayoutId);
-		}
-
-		if ((layout != null) &&
-			!LayoutPermissionUtil.contains(
-				permissionChecker, layout, ActionKeys.UPDATE)) {
-
-			return null;
-		}
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
 
@@ -103,7 +71,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 			jsonObj.put("deletable", Boolean.valueOf(array[2]));
 			jsonObj.put("layoutId", array[0]);
-			jsonObj.put("updateable", Boolean.valueOf(array[3]));
+			jsonObj.put("sortable", Boolean.valueOf(array[3]));
+			jsonObj.put("updateable", Boolean.valueOf(array[4]));
 			jsonObj.put("url", array[1]);
 		}
 		else if (cmd.equals("delete")) {
@@ -189,15 +158,20 @@ public class UpdateLayoutAction extends JSONAction {
 				themeDisplay.getDoAsUserLanguageId());
 		}
 
-		boolean updateable = SitesUtil.isLayoutUpdateable(layout);
-		boolean deleteable =
-			updateable &&
-			LayoutPermissionUtil.contains(
-				themeDisplay.getPermissionChecker(), layout, ActionKeys.DELETE);
+		boolean deleteable = LayoutPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), layout, ActionKeys.DELETE);
+		boolean sortable =
+			GroupPermissionUtil.contains(
+				themeDisplay.getPermissionChecker(), layout.getGroupId(),
+				ActionKeys.MANAGE_LAYOUTS) &&
+			SitesUtil.isLayoutSortable(layout);
+		boolean updateable = LayoutPermissionUtil.contains(
+			themeDisplay.getPermissionChecker(), layout, ActionKeys.UPDATE);
 
 		return new String[] {
 			String.valueOf(layout.getLayoutId()), layoutURL,
-			String.valueOf(deleteable), String.valueOf(updateable)
+			String.valueOf(deleteable), String.valueOf(sortable),
+			String.valueOf(updateable)
 		};
 	}
 
@@ -225,9 +199,6 @@ public class UpdateLayoutAction extends JSONAction {
 		long layoutId = ParamUtil.getLong(request, "layoutId");
 		String name = ParamUtil.getString(request, "name");
 		String languageId = ParamUtil.getString(request, "languageId");
-
-		LayoutLocalServiceUtil.updateScopedPortletNames(
-			groupId, privateLayout, layoutId, name, languageId);
 
 		if (plid <= 0) {
 			LayoutServiceUtil.updateName(

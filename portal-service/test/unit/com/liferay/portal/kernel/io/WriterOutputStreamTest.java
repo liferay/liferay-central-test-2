@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,11 +23,14 @@ import java.io.OutputStream;
 import java.io.StringWriter;
 import java.io.Writer;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class WriterOutputStreamTest extends TestCase {
 
+	@Test
 	public void testACSIIOutput() throws IOException {
 
 		// Auto flush
@@ -106,6 +109,7 @@ public class WriterOutputStreamTest extends TestCase {
 		assertEquals(expectedResult, writer.toString());
 	}
 
+	@Test
 	public void testChineseOutput() throws IOException {
 
 		// Auto flush
@@ -115,7 +119,7 @@ public class WriterOutputStreamTest extends TestCase {
 		OutputStream outputStream = new WriterOutputStream(
 			writer, StringPool.UTF8, true);
 
-		String[] chineseOutput = {"这是", "一个", "中文", "解码 ", "测试"};
+		String[] chineseOutput = {"这是", "一个", "中文", "解�? ", "测试"};
 		byte[][] chineseInput = {
 			chineseOutput[0].getBytes(StringPool.UTF8),
 			chineseOutput[1].getBytes(StringPool.UTF8),
@@ -184,6 +188,7 @@ public class WriterOutputStreamTest extends TestCase {
 		assertEquals(expectedResult, writer.toString());
 	}
 
+	@Test
 	public void testNonAlignOutput() throws IOException {
 		CharArrayWriter charArrayWriter = new CharArrayWriter();
 
@@ -192,7 +197,7 @@ public class WriterOutputStreamTest extends TestCase {
 
 		int charNumber = 0;
 
-		String nonAlignOutput = "非对齐测试中文输出";
+		String nonAlignOutput = "�?�对�?测试中文输出";
 		byte[] nonAlignInput = nonAlignOutput.getBytes(StringPool.UTF8);
 
 		for (byte b : nonAlignInput) {

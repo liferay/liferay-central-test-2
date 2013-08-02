@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,13 +33,13 @@ boolean showCheckBox = DLFolderPermission.contains(permissionChecker, folder, Ac
 
 	<liferay-util:include page="/html/portlet/document_library/folder_action.jsp" />
 
-	<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-folder-id="<%= folder.getFolderId() %>" href="<%= tempRowURL.toString() %>" title="<%= HtmlUtil.escape(folder.getName()) + " - " + HtmlUtil.escape(folder.getDescription()) %>">
+	<a class="document-link" data-folder="<%= Boolean.TRUE.toString() %>" data-folder-id="<%= folder.getFolderId() %>" href="<%= tempRowURL.toString() %>" title="<%= folder.getName() + " - " + folder.getDescription() %>">
 		<span class="document-thumbnail">
 			<img alt="" border="no" src="<%= themeDisplay.getPathThemeImages() + "/file_system/large/" + folderImage + ".png" %>" style="height: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_HEIGHT) %>; width: <%= PrefsPropsUtil.getLong(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_MAX_WIDTH) %>;" />
 		</span>
 
 		<span class="entry-title">
-			<%= HtmlUtil.escape(StringUtil.shorten(folder.getName(), 60)) %>
+			<%= StringUtil.shorten(folder.getName(), 60) %>
 		</span>
 	</a>
 </div>

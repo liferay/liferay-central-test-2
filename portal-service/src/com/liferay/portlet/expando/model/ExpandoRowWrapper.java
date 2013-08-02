@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -228,6 +229,10 @@ public class ExpandoRowWrapper implements ExpandoRow, ModelWrapper<ExpandoRow> {
 		return new ExpandoRowWrapper(_expandoRow.toEscapedModel());
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoRow toUnescapedModel() {
+		return new ExpandoRowWrapper(_expandoRow.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _expandoRow.toString();
@@ -240,6 +245,25 @@ public class ExpandoRowWrapper implements ExpandoRow, ModelWrapper<ExpandoRow> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_expandoRow.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoRowWrapper)) {
+			return false;
+		}
+
+		ExpandoRowWrapper expandoRowWrapper = (ExpandoRowWrapper)obj;
+
+		if (Validator.equals(_expandoRow, expandoRowWrapper._expandoRow)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

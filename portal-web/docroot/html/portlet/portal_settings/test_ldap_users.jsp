@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -57,6 +57,15 @@ if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
 
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
+if (!LDAPUtil.isValidFilter(userFilter)) {
+%>
+
+	<liferay-ui:message key="please-enter-a-valid-ldap-search-filter" />
+
+<%
+	return;
+}
+
 String userMappingsParams =
 	"screenName=" + ParamUtil.getString(request, "userMappingScreenName") +
 	"\npassword=" + ParamUtil.getString(request, "userMappingPassword") +
@@ -73,7 +82,9 @@ String[] attributeIds = StringUtil.split(StringUtil.merge(userMappings.values())
 
 List<SearchResult> searchResults = new ArrayList<SearchResult>();
 
-PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, attributeIds, searchResults);
+if (Validator.isNotNull(userFilter) && !userFilter.equals(StringPool.STAR)) {
+	PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, new byte[0], 20, baseDN, userFilter, attributeIds, searchResults);
+}
 %>
 
 <liferay-ui:message key="test-ldap-users" />

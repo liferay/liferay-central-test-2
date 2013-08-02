@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -64,7 +64,7 @@ portletURL.setParameter("struts_action", "/user_groups_admin/select_user_group")
 
 		<liferay-ui:search-container-row
 			className="com.liferay.portal.model.UserGroup"
-			escapedModel="<%= true %>"
+			escapedModel="<%= false %>"
 			keyProperty="userGroupId"
 			modelVar="userGroup"
 		>
@@ -77,7 +77,7 @@ portletURL.setParameter("struts_action", "/user_groups_admin/select_user_group")
 			sb.append("selectUserGroup('");
 			sb.append(userGroup.getUserGroupId());
 			sb.append("', '");
-			sb.append(UnicodeFormatter.toString(userGroup.getName()));
+			sb.append(HtmlUtil.escapeJS(userGroup.getName()));
 			sb.append("', '");
 			sb.append(target);
 			sb.append("');");
@@ -89,13 +89,13 @@ portletURL.setParameter("struts_action", "/user_groups_admin/select_user_group")
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="name"
-				property="name"
+				value="<%= HtmlUtil.escape(userGroup.getName()) %>"
 			/>
 
 			<liferay-ui:search-container-column-text
 				href="<%= rowHREF %>"
 				name="description"
-				value="<%= LanguageUtil.get(pageContext, userGroup.getDescription()) %>"
+				value="<%= HtmlUtil.escape(userGroup.getDescription()) %>"
 			/>
 		</liferay-ui:search-container-row>
 

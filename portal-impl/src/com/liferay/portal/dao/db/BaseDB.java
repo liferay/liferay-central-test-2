@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
 
@@ -65,6 +65,7 @@ import javax.naming.NamingException;
  */
 public abstract class BaseDB implements DB {
 
+	@Override
 	public void addIndexes(
 			Connection con, String indexesSQL, Set<String> validIndexNames)
 		throws IOException {
@@ -107,6 +108,7 @@ public abstract class BaseDB implements DB {
 		}
 	}
 
+	@Override
 	public void buildCreateFile(String sqlDir, String databaseName)
 		throws IOException {
 
@@ -115,6 +117,7 @@ public abstract class BaseDB implements DB {
 		buildCreateFile(sqlDir, databaseName, SHARDED);
 	}
 
+	@Override
 	public void buildCreateFile(
 			String sqlDir, String databaseName, int population)
 		throws IOException {
@@ -157,8 +160,10 @@ public abstract class BaseDB implements DB {
 		}
 	}
 
+	@Override
 	public abstract String buildSQL(String template) throws IOException;
 
+	@Override
 	public void buildSQLFile(String sqlDir, String fileName)
 		throws IOException {
 
@@ -176,65 +181,80 @@ public abstract class BaseDB implements DB {
 			template);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public List<Index> getIndexes(Connection con) throws SQLException {
 		return Collections.emptyList();
 	}
 
+	@Override
 	public String getTemplateFalse() {
 		return getTemplate()[2];
 	}
 
+	@Override
 	public String getTemplateTrue() {
 		return getTemplate()[1];
 	}
 
+	@Override
 	public String getType() {
 		return _type;
 	}
 
+	@Override
 	public long increment() throws SystemException {
 		return CounterLocalServiceUtil.increment();
 	}
 
+	@Override
 	public long increment(String name) throws SystemException {
 		return CounterLocalServiceUtil.increment(name);
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnName() {
 		return _SUPPORTS_ALTER_COLUMN_NAME;
 	}
 
+	@Override
 	public boolean isSupportsAlterColumnType() {
 		return _SUPPORTS_ALTER_COLUMN_TYPE;
 	}
 
+	@Override
 	public boolean isSupportsDateMilliseconds() {
 		return _SUPPORTS_DATE_MILLISECONDS;
 	}
 
+	@Override
 	public boolean isSupportsInlineDistinct() {
 		return _SUPPORTS_INLINE_DISTINCT;
 	}
 
+	@Override
 	public boolean isSupportsScrollableResults() {
 		return _SUPPORTS_SCROLLABLE_RESULTS;
 	}
 
+	@Override
 	public boolean isSupportsStringCaseSensitiveQuery() {
 		return _supportsStringCaseSensitiveQuery;
 	}
 
+	@Override
 	public boolean isSupportsUpdateWithInnerJoin() {
 		return _SUPPORTS_UPDATE_WITH_INNER_JOIN;
 	}
 
+	@Override
 	public void runSQL(Connection con, String sql)
 		throws IOException, SQLException {
 
 		runSQL(con, new String[] {sql});
 	}
 
+	@Override
 	public void runSQL(Connection con, String[] sqls)
 		throws IOException, SQLException {
 
@@ -264,7 +284,7 @@ public abstract class BaseDB implements DB {
 					s.executeUpdate(sql);
 				}
 				catch (SQLException sqle) {
-					throw sqle;
+					handleSQLException(sql, sqle);
 				}
 			}
 		}
@@ -273,10 +293,12 @@ public abstract class BaseDB implements DB {
 		}
 	}
 
+	@Override
 	public void runSQL(String sql) throws IOException, SQLException {
 		runSQL(new String[] {sql});
 	}
 
+	@Override
 	public void runSQL(String[] sqls) throws IOException, SQLException {
 		Connection con = DataAccess.getConnection();
 
@@ -288,16 +310,18 @@ public abstract class BaseDB implements DB {
 		}
 	}
 
+	@Override
 	public void runSQLTemplate(String path)
 		throws IOException, NamingException, SQLException {
 
 		runSQLTemplate(path, true);
 	}
 
+	@Override
 	public void runSQLTemplate(String path, boolean failOnError)
 		throws IOException, NamingException, SQLException {
 
-		ClassLoader classLoader = PACLClassLoaderUtil.getContextClassLoader();
+		ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
 
 		InputStream is = classLoader.getResourceAsStream(
 			"com/liferay/portal/tools/sql/dependencies/" + path);
@@ -326,6 +350,7 @@ public abstract class BaseDB implements DB {
 		runSQLTemplateString(template, evaluate, failOnError);
 	}
 
+	@Override
 	public void runSQLTemplateString(
 			String template, boolean evaluate, boolean failOnError)
 		throws IOException, NamingException, SQLException {
@@ -354,7 +379,7 @@ public abstract class BaseDB implements DB {
 					String includeFileName = line.substring(pos + 1);
 
 					ClassLoader classLoader =
-						PACLClassLoaderUtil.getContextClassLoader();
+						ClassLoaderUtil.getContextClassLoader();
 
 					InputStream is = classLoader.getResourceAsStream(
 						"com/liferay/portal/tools/sql/dependencies/" +
@@ -444,6 +469,7 @@ public abstract class BaseDB implements DB {
 		unsyncBufferedReader.close();
 	}
 
+	@Override
 	public void setSupportsStringCaseSensitiveQuery(
 		boolean supportsStringCaseSensitiveQuery) {
 
@@ -459,6 +485,7 @@ public abstract class BaseDB implements DB {
 		_supportsStringCaseSensitiveQuery = supportsStringCaseSensitiveQuery;
 	}
 
+	@Override
 	public void updateIndexes(
 			Connection con, String tablesSQL, String indexesSQL,
 			String indexesProperties, boolean dropIndexes)
@@ -540,6 +567,12 @@ public abstract class BaseDB implements DB {
 	protected abstract String buildCreateFileContent(
 			String sqlDir, String databaseName, int population)
 		throws IOException;
+
+	protected String[] buildTableNameTokens(String line) {
+		String[] words = StringUtil.split(line, StringPool.SPACE);
+
+		return new String[] {words[1], words[2]};
+	}
 
 	protected String buildTemplate(String sqlDir, String fileName)
 		throws IOException {
@@ -700,16 +733,16 @@ public abstract class BaseDB implements DB {
 
 		variables.put("counter", new SimpleCounter());
 
-		ClassLoader classLoader = PACLClassLoaderUtil.getContextClassLoader();
+		ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
 
 		try {
-			PACLClassLoaderUtil.setContextClassLoader(
-				PACLClassLoaderUtil.getPortalClassLoader());
+			ClassLoaderUtil.setContextClassLoader(
+				ClassLoaderUtil.getPortalClassLoader());
 
 			template = VelocityUtil.evaluate(template, variables);
 		}
 		finally {
-			PACLClassLoaderUtil.setContextClassLoader(classLoader);
+			ClassLoaderUtil.setContextClassLoader(classLoader);
 		}
 
 		// Trim insert statements because it breaks MySQL Query Browser
@@ -736,6 +769,32 @@ public abstract class BaseDB implements DB {
 		return template;
 	}
 
+	protected String getCreateTablesContent(String sqlDir, String suffix)
+		throws IOException {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(sqlDir);
+
+		if (!sqlDir.endsWith("/WEB-INF/sql")) {
+			sb.append("/portal");
+			sb.append(suffix);
+			sb.append("/portal");
+		}
+		else {
+			sb.append("/tables");
+			sb.append(suffix);
+			sb.append("/tables");
+		}
+
+		sb.append(suffix);
+		sb.append(StringPool.DASH);
+		sb.append(getServerName());
+		sb.append(".sql");
+
+		return readFile(sb.toString());
+	}
+
 	protected abstract String getServerName();
 
 	protected String getSuffix(int type) {
@@ -751,6 +810,29 @@ public abstract class BaseDB implements DB {
 	}
 
 	protected abstract String[] getTemplate();
+
+	protected void handleSQLException(String sql, SQLException sqle)
+		throws SQLException {
+
+		if (_log.isDebugEnabled()) {
+			StringBundler sb = new StringBundler(18);
+
+			sb.append("SQL: ");
+			sb.append(sql);
+			sb.append("\nSQL state: ");
+			sb.append(sqle.getSQLState());
+			sb.append("\nVendor: ");
+			sb.append(getType());
+			sb.append("\nVendor error code: ");
+			sb.append(sqle.getErrorCode());
+			sb.append("\nVendor error message: ");
+			sb.append(sqle.getMessage());
+
+			_log.debug(sb.toString());
+		}
+
+		throw sqle;
+	}
 
 	protected String readFile(String fileName) throws IOException {
 		if (FileUtil.exists(fileName)) {
@@ -832,8 +914,8 @@ public abstract class BaseDB implements DB {
 				String portalTableData = portalData.substring(x, y);
 
 				for (int i = 0; i < columns.length; i++) {
-					if (portalTableData.indexOf(
-							columns[i].trim() + " BOOLEAN") != -1) {
+					if (portalTableData.contains(
+							columns[i].trim() + " BOOLEAN")) {
 
 						append = false;
 
@@ -957,9 +1039,15 @@ public abstract class BaseDB implements DB {
 
 	protected static final String ALTER_COLUMN_TYPE = "alter_column_type ";
 
+	protected static final String ALTER_TABLE_NAME = "alter_table_name ";
+
 	protected static final String DROP_INDEX = "drop index";
 
 	protected static final String DROP_PRIMARY_KEY = "drop primary key";
+
+	protected static final String[] RENAME_TABLE_TEMPLATE = {
+		"@old-table@", "@new-table@"
+	};
 
 	protected static final String[] REWORD_TEMPLATE = {
 		"@table@", "@old-column@", "@new-column@", "@type@", "@nullable@"

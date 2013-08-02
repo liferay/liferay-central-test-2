@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,11 +30,21 @@ String layoutBreadcrumb = StringPool.BLANK;
 
 if (Validator.isNotNull(layoutUuid)) {
 	try {
-		selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getParentGroupId());
+		selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getParentGroupId(), false);
 
 		layoutBreadcrumb = _getLayoutBreadcrumb(selLayout, locale);
 	}
 	catch (NoSuchLayoutException nsle) {
+	}
+
+	if (selLayout == null) {
+		try {
+			selLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, themeDisplay.getParentGroupId(), true);
+
+			layoutBreadcrumb = _getLayoutBreadcrumb(selLayout, locale);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 }
 
@@ -429,7 +439,7 @@ Group parentGroup = themeDisplay.getParentGroup();
 				if (publicPages && treeViewPublic) {
 					tree = treeViewPublic;
 				}
-				else if (treeViewPrivate){
+				else if (treeViewPrivate) {
 					tree = treeViewPrivate;
 				}
 
@@ -543,7 +553,14 @@ Group parentGroup = themeDisplay.getParentGroup();
 <c:if test="<%= (article != null) && Validator.isNotNull(layoutUuid) %>">
 
 	<%
-	Layout defaultDisplayLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, scopeGroupId);
+	Layout defaultDisplayLayout = null;
+
+	try {
+		defaultDisplayLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, scopeGroupId, false);
+	}
+	catch (NoSuchLayoutException nsle) {
+		defaultDisplayLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(layoutUuid, scopeGroupId, true);
+	}
 
 	defaultDisplayLayout = defaultDisplayLayout.toEscapedModel();
 

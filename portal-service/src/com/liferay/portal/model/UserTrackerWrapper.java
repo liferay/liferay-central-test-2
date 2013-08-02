@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -347,6 +349,10 @@ public class UserTrackerWrapper implements UserTracker,
 		return new UserTrackerWrapper(_userTracker.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.UserTracker toUnescapedModel() {
+		return new UserTrackerWrapper(_userTracker.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _userTracker.toString();
@@ -379,6 +385,25 @@ public class UserTrackerWrapper implements UserTracker,
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> getPaths() {
 		return _userTracker.getPaths();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserTrackerWrapper)) {
+			return false;
+		}
+
+		UserTrackerWrapper userTrackerWrapper = (UserTrackerWrapper)obj;
+
+		if (Validator.equals(_userTracker, userTrackerWrapper._userTracker)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

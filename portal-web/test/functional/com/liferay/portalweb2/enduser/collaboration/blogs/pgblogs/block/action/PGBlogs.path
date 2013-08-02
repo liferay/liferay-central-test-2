@@ -1,0 +1,341 @@
+<html>
+<head>
+<title>PGBlogs</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGBlogs</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGBlogs</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_TITLE</td>
+	<td>//span[@class='portlet-title-text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_FIELD</td>
+	<td>//input[@id='_33_keywords']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_ENTRY_BUTTON</td>
+	<td>//input[@value='Add Blog Entry']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PERMISSIONS_BUTTON</td>
+	<td>//input[@value='Permissions']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_LINK</td>
+	<td>//div[@class='subscribe']/span/a[contains(.,'RSS')]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUBSCRIBE_LINK</td>
+	<td>//div[@class='subscribe']/span/a[contains(.,'Subscribe')]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEARCH_RESULTS</td>
+	<td>//div[@class='search-results']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--ENTRY-->
+<tr>
+	<td>ENTRY_TITLE_1</td>
+	<td>xpath=(//div[@class='entry-title']/h2/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TITLE_2</td>
+	<td>xpath=(//div[@class='entry-title']/h2/a)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TITLE_3</td>
+	<td>xpath=(//div[@class='entry-title']/h2/a)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DATE_1</td>
+	<td>xpath=(//div[@class='entry-date'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DATE_2</td>
+	<td>xpath=(//div[@class='entry-date'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DATE_3</td>
+	<td>xpath=(//div[@class='entry-date'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_WORKFLOW_STATUS_1</td>
+	<td>xpath=(//div[@class='entry-content']/h3)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_WORKFLOW_STATUS_2</td>
+	<td>xpath=(//div[@class='entry-content']/h3)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_WORKFLOW_STATUS_3</td>
+	<td>xpath=(//div[@class='entry-content']/h3)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_CONTENT_1</td>
+	<td>xpath=(//div[@class='entry-body'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_CONTENT_2</td>
+	<td>xpath=(//div[@class='entry-body'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_CONTENT_3</td>
+	<td>xpath=(//div[@class='entry-body'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_EDIT_1</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Edit'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_EDIT_2</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Edit'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_EDIT_3</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Edit'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_PERMISSIONS_1</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Permissions'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_PERMISSIONS_2</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Permissions'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_PERMISSIONS_3</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Permissions'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DELETE_1</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Delete'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DELETE_2</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Delete'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_DELETE_3</td>
+	<td>xpath=(//div[contains(@class,'edit-actions')]//span/a/span[.='Delete'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AUTHOR_1</td>
+	<td>xpath=(//div[@class='entry-author'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AUTHOR_2</td>
+	<td>xpath=(//div[@class='entry-author'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AUTHOR_3</td>
+	<td>xpath=(//div[@class='entry-author'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_COMMENTS_1</td>
+	<td>xpath=(//span[@class='comments']/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_COMMENTS_2</td>
+	<td>xpath=(//span[@class='comments']/a)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_COMMENTS_3</td>
+	<td>xpath=(//span[@class='comments']/a)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FLAG_1</td>
+	<td>xpath=(//div[@class='taglib-flags']/span/a/span)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FLAG_2</td>
+	<td>xpath=(//div[@class='taglib-flags']/span/a/span)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FLAG_3</td>
+	<td>xpath=(//div[@class='taglib-flags']/span/a/span)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TWITTER_1</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-twitter'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TWITTER_2</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-twitter'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TWITTER_3</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-twitter'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FACEBOOK_1</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-facebook'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FACEBOOK_2</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-facebook'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_FACEBOOK_3</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-facebook'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_GOOGLE_1</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-plusone'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_GOOGLE_2</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-plusone'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_GOOGLE_3</td>
+	<td>xpath=(//li[@class='taglib-social-bookmark-plusone'])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_YOUR_RATING_1</td>
+	<td>xpath=(//div[contains(@id,'ratingStar')]/div)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_YOUR_RATING_2</td>
+	<td>xpath=(//div[contains(@id,'ratingStar')]/div)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_YOUR_RATING_3</td>
+	<td>xpath=(//div[contains(@id,'ratingStar')]/div)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AVERAGE_RATING_1</td>
+	<td>xpath=(//div[contains(@id,'ratingScore')]/div)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AVERAGE_RATING_2</td>
+	<td>xpath=(//div[contains(@id,'ratingScore')]/div)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AVERAGE_RATING_3</td>
+	<td>xpath=(//div[contains(@id,'ratingScore')]/div)[3]</td>
+	<td></td>
+</tr>
+<!--RSS-->
+<tr>
+	<td>RSS_SITE_NAME</td>
+	<td>//x:h1[@id='feedTitleText']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_SITE_NAME_SUBTITLE</td>
+	<td>//x:h2[@id='feedSubtitleText']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_TITLE</td>
+	<td>//x:div[@id='feedContent']/x:div[1]/x:h3/x:a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_CONTENT</td>
+	<td>//x:div[@id='feedContent']/x:div[1]/x:div/x:p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_TITLE_DETAILS</td>
+	<td>//x:h1[@class='header-title']/x:span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RSS_ENTRY_CONTENT_DETAILS</td>
+	<td>//x:div[@class='entry-body']/x:p</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_NULL_WINDOW</td>
+	<td>null</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

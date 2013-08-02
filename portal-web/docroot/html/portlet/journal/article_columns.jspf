@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,11 +22,33 @@ row.addText(article.getArticleId(), rowURL);
 
 // Title
 
-row.addText(article.getTitle(locale), rowURL);
+row.addText(HtmlUtil.escape(article.getTitle(locale)), rowURL);
 
 // Status
 
 row.addText(LanguageUtil.get(pageContext, WorkflowConstants.toLabel(article.getStatus())), rowURL);
+
+// Version
+
+double latestVersion = JournalArticleLocalServiceUtil.getLatestVersion(article.getGroupId(), article.getArticleId());
+
+if (article.getVersion() != latestVersion) {
+	StringBundler sb = new StringBundler(8);
+
+	sb.append(article.getVersion());
+	sb.append("<br /><i>");
+	sb.append(StringPool.OPEN_PARENTHESIS);
+	sb.append(LanguageUtil.get(pageContext, "last"));
+	sb.append(": ");
+	sb.append(latestVersion);
+	sb.append(StringPool.CLOSE_PARENTHESIS);
+	sb.append("</i>");
+
+	row.addText(sb.toString(), rowURL);
+}
+else {
+	row.addText(String.valueOf(article.getVersion()), rowURL);
+}
 
 // Modified date
 
@@ -38,7 +60,7 @@ row.addText(dateFormatDateTime.format(article.getDisplayDate()), rowURL);
 
 // Author
 
-row.addText(HtmlUtil.escape(PortalUtil.getUserName(article.getUserId(), article.getUserName())), rowURL);
+row.addText(HtmlUtil.escape(PortalUtil.getUserName(article)), rowURL);
 
 // Action
 

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,9 +46,9 @@
 
 							PortletURL portletURL = renderResponse.createRenderURL();
 
+							portletURL.setParameter("topLink", homeMessage);
 							portletURL.setParameter("categoryId", StringPool.BLANK);
 							portletURL.setParameter("tag", StringPool.BLANK);
-							portletURL.setParameter("topLink", homeMessage);
 							%>
 
 							<liferay-ui:icon

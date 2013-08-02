@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,6 +39,7 @@ import java.util.Map;
 public class LayoutPrototypeLocalServiceImpl
 	extends LayoutPrototypeLocalServiceBaseImpl {
 
+	@Override
 	public LayoutPrototype addLayoutPrototype(
 			long userId, long companyId, Map<Locale, String> nameMap,
 			String description, boolean active)
@@ -133,12 +134,14 @@ public class LayoutPrototypeLocalServiceImpl
 		return deleteLayoutPrototype(layoutPrototype);
 	}
 
+	@Override
 	public LayoutPrototype getLayoutPrototypeByUuid(String uuid)
 		throws PortalException, SystemException {
 
 		return layoutPrototypePersistence.findByUuid_First(uuid, null);
 	}
 
+	@Override
 	public List<LayoutPrototype> search(
 			long companyId, Boolean active, int start, int end,
 			OrderByComparator obc)
@@ -154,6 +157,7 @@ public class LayoutPrototypeLocalServiceImpl
 		}
 	}
 
+	@Override
 	public int searchCount(long companyId, Boolean active)
 		throws SystemException {
 
@@ -165,6 +169,7 @@ public class LayoutPrototypeLocalServiceImpl
 		}
 	}
 
+	@Override
 	public LayoutPrototype updateLayoutPrototype(
 			long layoutPrototypeId, Map<Locale, String> nameMap,
 			String description, boolean active)

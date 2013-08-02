@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -546,13 +546,16 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 	@Override
 	public BookmarksEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (BookmarksEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (BookmarksEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public BookmarksEntry toUnescapedModel() {
+		return (BookmarksEntry)this;
 	}
 
 	@Override
@@ -609,18 +612,15 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BookmarksEntry)) {
 			return false;
 		}
 
-		BookmarksEntry bookmarksEntry = null;
-
-		try {
-			bookmarksEntry = (BookmarksEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BookmarksEntry bookmarksEntry = (BookmarksEntry)obj;
 
 		long primaryKey = bookmarksEntry.getPrimaryKey();
 
@@ -856,7 +856,7 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	}
 
 	private static ClassLoader _classLoader = BookmarksEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			BookmarksEntry.class
 		};
 	private String _uuid;
@@ -885,5 +885,5 @@ public class BookmarksEntryModelImpl extends BaseModelImpl<BookmarksEntry>
 	private int _visits;
 	private int _priority;
 	private long _columnBitmask;
-	private BookmarksEntry _escapedModelProxy;
+	private BookmarksEntry _escapedModel;
 }

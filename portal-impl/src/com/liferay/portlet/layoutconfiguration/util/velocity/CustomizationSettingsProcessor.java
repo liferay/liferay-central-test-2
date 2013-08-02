@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -56,10 +56,12 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 		}
 	}
 
+	@Override
 	public String processColumn(String columnId) throws Exception {
 		return processColumn(columnId, StringPool.BLANK);
 	}
 
+	@Override
 	public String processColumn(String columnId, String classNames)
 		throws Exception {
 
@@ -102,14 +104,17 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public String processMax() throws Exception {
 		return processMax(StringPool.BLANK);
 	}
 
+	@Override
 	public String processMax(String classNames) throws Exception {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public String processPortlet(String portletId) throws Exception {
 		_writer.append("<div class=\"portlet\">");
 		_writer.append(portletId);

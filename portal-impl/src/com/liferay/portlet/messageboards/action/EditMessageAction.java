@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.kernel.captcha.CaptchaMaxChallengesException;
 import com.liferay.portal.kernel.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.sanitizer.SanitizerException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
@@ -81,8 +82,9 @@ public class EditMessageAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -132,7 +134,8 @@ public class EditMessageAction extends PortletAction {
 					 e instanceof FileSizeException ||
 					 e instanceof LockedThreadException ||
 					 e instanceof MessageBodyException ||
-					 e instanceof MessageSubjectException) {
+					 e instanceof MessageSubjectException ||
+					 e instanceof SanitizerException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
@@ -142,15 +145,23 @@ public class EditMessageAction extends PortletAction {
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {
-				throw e;
+				Throwable cause = e.getCause();
+
+				if (cause instanceof SanitizerException) {
+					SessionErrors.add(actionRequest, SanitizerException.class);
+				}
+				else {
+					throw e;
+				}
 			}
 		}
 	}
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -162,14 +173,15 @@ public class EditMessageAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.message_boards.error");
+				return actionMapping.findForward(
+					"portlet.message_boards.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.message_boards.edit_message"));
 	}
 
@@ -376,9 +388,8 @@ public class EditMessageAction extends PortletAction {
 					// Post reply
 
 					message = MBMessageServiceUtil.addMessage(
-						groupId, categoryId, threadId, parentMessageId, subject,
-						body, format, inputStreamOVPs, anonymous, priority,
-						allowPingbacks, serviceContext);
+						parentMessageId, subject, body, format, inputStreamOVPs,
+						anonymous, priority, allowPingbacks, serviceContext);
 				}
 			}
 			else {
@@ -411,7 +422,7 @@ public class EditMessageAction extends PortletAction {
 			boolean subscribe = ParamUtil.getBoolean(
 				actionRequest, "subscribe");
 
-			if (subscribe &&
+			if (!preview && subscribe &&
 				MBMessagePermission.contains(
 					permissionChecker, message, ActionKeys.SUBSCRIBE)) {
 

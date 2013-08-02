@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,6 +23,7 @@ import java.io.Writer;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CoderResult;
 
@@ -71,6 +72,10 @@ public class WriterOutputStream extends OutputStream {
 			throw new IllegalArgumentException(
 				"Output buffer size " + outputBufferSize +
 					" must be a positive number");
+		}
+
+		if (charsetName == null) {
+			charsetName = _DEFAULT_CHARSET_NAME;
 		}
 
 		_writer = writer;
@@ -156,6 +161,9 @@ public class WriterOutputStream extends OutputStream {
 			_outputBuffer.rewind();
 		}
 	}
+
+	private static final String _DEFAULT_CHARSET_NAME =
+		Charset.defaultCharset().name();
 
 	private static final int _DEFAULT_INTPUT_BUFFER_SIZE = 128;
 

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,13 +43,13 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 
 <portlet:actionURL var="editAssignmentsURL">
 	<portlet:param name="struts_action" value="/users_admin/edit_organization_assignments" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
 </portlet:actionURL>
 
 <aui:form action="<%= editAssignmentsURL %>" method="post" name="fm">
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="tabs1" type="hidden" value="<%= tabs1 %>" />
 	<aui:input name="tabs2" type="hidden" value="<%= tabs2 %>" />
+	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="assignmentsRedirect" type="hidden" />
 	<aui:input name="organizationId" type="hidden" value="<%= organization.getOrganizationId() %>" />
 
@@ -73,7 +73,7 @@ portletURL.setParameter("organizationId", String.valueOf(organization.getOrganiz
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		LinkedHashMap userParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 		if (tabs2.equals("current")) {
 			userParams.put("usersOrgs", new Long(organization.getOrganizationId()));

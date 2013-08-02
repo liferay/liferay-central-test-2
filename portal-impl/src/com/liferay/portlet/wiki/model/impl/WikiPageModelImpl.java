@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -893,13 +893,16 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	@Override
 	public WikiPage toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (WikiPage)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (WikiPage)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public WikiPage toUnescapedModel() {
+		return (WikiPage)this;
 	}
 
 	@Override
@@ -980,18 +983,15 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WikiPage)) {
 			return false;
 		}
 
-		WikiPage wikiPage = null;
-
-		try {
-			wikiPage = (WikiPage)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		WikiPage wikiPage = (WikiPage)obj;
 
 		long primaryKey = wikiPage.getPrimaryKey();
 
@@ -1342,7 +1342,7 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	}
 
 	private static ClassLoader _classLoader = WikiPage.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			WikiPage.class
 		};
 	private String _uuid;
@@ -1390,5 +1390,5 @@ public class WikiPageModelImpl extends BaseModelImpl<WikiPage>
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;
-	private WikiPage _escapedModelProxy;
+	private WikiPage _escapedModel;
 }

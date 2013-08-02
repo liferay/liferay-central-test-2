@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,24 +42,28 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
+	@Override
 	public AssetEntry getAssetEntry(long assetEntryId)
 		throws PortalException, SystemException {
 
 		return AssetEntryLocalServiceUtil.getEntry(assetEntryId);
 	}
 
+	@Override
 	public AssetEntry getAssetEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
 		return AssetEntryLocalServiceUtil.getEntry(className, classPK);
 	}
 
+	@Override
 	public AssetRenderer getAssetRenderer(long classPK)
 		throws PortalException, SystemException {
 
 		return getAssetRenderer(classPK, TYPE_LATEST_APPROVED);
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public AssetRenderer getAssetRenderer(long groupId, String urlTitle)
 		throws PortalException, SystemException {
@@ -67,16 +71,19 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return null;
 	}
 
+	@Override
 	public long getClassNameId() {
 		return PortalUtil.getClassNameId(_className);
 	}
 
+	@Override
 	public Map<Long, String> getClassTypes(long[] groupId, Locale locale)
 		throws Exception {
 
 		return null;
 	}
 
+	@Override
 	public String getIconPath(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -84,10 +91,12 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return getIconPath(themeDisplay);
 	}
 
+	@Override
 	public String getPortletId() {
 		return _portletId;
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public PortletURL getURLAdd(
 			LiferayPortletRequest liferayPortletRequest,
@@ -97,6 +106,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return null;
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long classPK, String actionId)
 		throws Exception {
@@ -104,22 +114,27 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return _PERMISSION;
 	}
 
+	@Override
 	public boolean isCategorizable() {
 		return true;
 	}
 
+	@Override
 	public boolean isLinkable() {
 		return _LINKABLE;
 	}
 
+	@Override
 	public boolean isSelectable() {
 		return _SELECTABLE;
 	}
 
+	@Override
 	public void setClassName(String className) {
 		_className = className;
 	}
 
+	@Override
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
 	}

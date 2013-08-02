@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  */
 public class SubscriptionPermissionImpl implements SubscriptionPermission {
 
+	@Override
 	public void check(
 			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {
@@ -52,6 +53,7 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 		}
 	}
 
+	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker, String className, long classPK)
 		throws PortalException, SystemException {

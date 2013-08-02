@@ -2,8 +2,13 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Portal_ContactService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="allowedMethods" value="*" />
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:ContactSoap" type="java:com.liferay.portal.model.ContactSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getContact" qname="operNS:getContact" returnQName="getContactReturn" returnType="rtns:ContactSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="contactId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getContact" />
 		<parameter name="className" value="com.liferay.portal.service.http.ContactServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ContactServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ContactServiceSoapService" />

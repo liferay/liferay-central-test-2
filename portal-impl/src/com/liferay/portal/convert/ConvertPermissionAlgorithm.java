@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -60,6 +60,7 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -68,6 +69,10 @@ import com.liferay.portal.upgrade.util.Table;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -93,6 +98,7 @@ import java.util.Set;
  * </p>
  *
  * @author Alexander Chow
+ * @author Joshua Steven Rodriguez
  */
 public class ConvertPermissionAlgorithm extends ConvertProcess {
 
@@ -213,6 +219,42 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 		FileUtil.delete(legacyFile);
 	}
 
+	protected void convertResourceBlock() throws Exception {
+		List<String> actionIds = ResourceActionsUtil.getModelResourceActions(
+			BookmarksEntry.class.getName());
+
+		List<BookmarksEntry> entries =
+			BookmarksEntryLocalServiceUtil.getBookmarksEntries(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (BookmarksEntry entry : entries) {
+			Role ownerRole = RoleLocalServiceUtil.getRole(
+				entry.getCompanyId(), RoleConstants.OWNER);
+
+			ResourceBlockLocalServiceUtil.setIndividualScopePermissions(
+				entry.getCompanyId(), entry.getGroupId(),
+				BookmarksEntry.class.getName(), entry, ownerRole.getRoleId(),
+				actionIds);
+		}
+
+		actionIds = ResourceActionsUtil.getModelResourceActions(
+			BookmarksFolder.class.getName());
+
+		List<BookmarksFolder> folders =
+			BookmarksFolderLocalServiceUtil.getBookmarksFolders(
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (BookmarksFolder folder : folders) {
+			Role ownerRole = RoleLocalServiceUtil.getRole(
+				folder.getCompanyId(), RoleConstants.OWNER);
+
+			ResourceBlockLocalServiceUtil.setIndividualScopePermissions(
+				folder.getCompanyId(), folder.getGroupId(),
+				BookmarksFolder.class.getName(), folder, ownerRole.getRoleId(),
+				actionIds);
+		}
+	}
+
 	protected void convertResourcePermission(Writer writer, String name)
 		throws Exception {
 
@@ -240,7 +282,7 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			String line = null;
 
 			while (Validator.isNotNull(
-					line = resourcePermissionReader.readLine())) {
+						line = resourcePermissionReader.readLine())) {
 
 				String[] values = StringUtil.split(line);
 
@@ -691,6 +733,8 @@ public class ConvertPermissionAlgorithm extends ConvertProcess {
 			}
 
 			convertToBitwise();
+
+			convertResourceBlock();
 
 			MaintenanceUtil.appendStatus(
 				"Please set " + PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM +

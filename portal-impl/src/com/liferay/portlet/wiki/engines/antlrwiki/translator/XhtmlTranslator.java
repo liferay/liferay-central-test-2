@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,7 @@ package com.liferay.portlet.wiki.engines.antlrwiki.translator;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -141,7 +142,16 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 
 		append("<div class=\"toc\">");
 		append("<div class=\"collapsebox\">");
-		append("<h4>Table of Contents");
+		append("<h4>");
+
+		String title = tableOfContentsNode.getTitle();
+
+		if (title == null) {
+			title = "Table of Contents";
+		}
+
+		append(title);
+
 		append(StringPool.NBSP);
 		append("<a class=\"toc-trigger\" href=\"javascript:;\">[-]</a></h4>");
 		append("<div class=\"toc-index\">");
@@ -287,12 +297,10 @@ public class XhtmlTranslator extends XhtmlTranslationVisitor {
 			StringPool.SLASH + _wikiPage.getAttachmentsDir() +
 				StringPool.SLASH + linkNode.getLink();
 
-		for (String attachment : attachments) {
-			if (attachment.equals(link)) {
-				int pos = attachment.lastIndexOf(StringPool.SLASH);
+		if (ArrayUtil.contains(attachments, link)) {
+			int pos = link.lastIndexOf(StringPool.SLASH);
 
-				return attachment.substring(pos + 1);
-			}
+			return link.substring(pos + 1);
 		}
 
 		return null;

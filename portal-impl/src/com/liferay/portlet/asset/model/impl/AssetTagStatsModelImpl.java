@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -246,13 +246,16 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 
 	@Override
 	public AssetTagStats toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetTagStats)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetTagStats)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetTagStats toUnescapedModel() {
+		return (AssetTagStats)this;
 	}
 
 	@Override
@@ -293,18 +296,15 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetTagStats)) {
 			return false;
 		}
 
-		AssetTagStats assetTagStats = null;
-
-		try {
-			assetTagStats = (AssetTagStats)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetTagStats assetTagStats = (AssetTagStats)obj;
 
 		long primaryKey = assetTagStats.getPrimaryKey();
 
@@ -398,7 +398,7 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	}
 
 	private static ClassLoader _classLoader = AssetTagStats.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetTagStats.class
 		};
 	private long _tagStatsId;
@@ -410,5 +410,5 @@ public class AssetTagStatsModelImpl extends BaseModelImpl<AssetTagStats>
 	private boolean _setOriginalClassNameId;
 	private int _assetCount;
 	private long _columnBitmask;
-	private AssetTagStats _escapedModelProxy;
+	private AssetTagStats _escapedModel;
 }

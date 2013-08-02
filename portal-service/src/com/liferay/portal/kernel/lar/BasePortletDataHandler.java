@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,15 @@
 
 package com.liferay.portal.kernel.lar;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+
 import javax.portlet.PortletPreferences;
 
 /**
@@ -21,10 +30,19 @@ import javax.portlet.PortletPreferences;
  */
 public abstract class BasePortletDataHandler implements PortletDataHandler {
 
+	@Override
 	public PortletPreferences deleteData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
+
+		long startTime = 0;
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Deleting portlet " + portletId);
+
+			startTime = System.currentTimeMillis();
+		}
 
 		try {
 			return doDeleteData(
@@ -33,12 +51,28 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+		finally {
+			if (_log.isInfoEnabled()) {
+				long duration = System.currentTimeMillis() - startTime;
+
+				_log.info("Deleted portlet in " + Time.getDuration(duration));
+			}
+		}
 	}
 
+	@Override
 	public String exportData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
+
+		long startTime = 0;
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Exporting portlet " + portletId);
+
+			startTime = System.currentTimeMillis();
+		}
 
 		try {
 			return doExportData(
@@ -47,54 +81,103 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+		finally {
+			if (_log.isInfoEnabled()) {
+				long duration = System.currentTimeMillis() - startTime;
+
+				_log.info("Exported portlet in " + Time.getDuration(duration));
+			}
+		}
 	}
 
+	@Override
 	public String[] getDataPortletPreferences() {
 		return new String[0];
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getExportMetadataControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
+	@Override
 	public PortletDataHandlerControl[] getImportMetadataControls() {
 		return new PortletDataHandlerControl[0];
 	}
 
+	@Override
 	public PortletPreferences importData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, String data)
 		throws PortletDataException {
 
+		long startTime = 0;
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Importing portlet " + portletId);
+
+			startTime = System.currentTimeMillis();
+		}
+
+		long sourceGroupId = portletDataContext.getSourceGroupId();
+
 		try {
+			if (Validator.isXml(data)) {
+				Document document = SAXReaderUtil.read(data);
+
+				Element rootElement = document.getRootElement();
+
+				long portletSourceGroupId = GetterUtil.getLong(
+					rootElement.attributeValue("group-id"));
+
+				if (portletSourceGroupId != 0) {
+					portletDataContext.setSourceGroupId(portletSourceGroupId);
+				}
+			}
+
 			return doImportData(
 				portletDataContext, portletId, portletPreferences, data);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+		finally {
+			portletDataContext.setSourceGroupId(sourceGroupId);
+
+			if (_log.isInfoEnabled()) {
+				long duration = System.currentTimeMillis() - startTime;
+
+				_log.info("Imported portlet in " + Time.getDuration(duration));
+			}
+		}
 	}
 
+	@Override
 	public boolean isAlwaysExportable() {
 		return _ALWAYS_EXPORTABLE;
 	}
 
+	@Override
 	public boolean isAlwaysStaged() {
 		return _ALWAYS_STAGED;
 	}
 
+	@Override
 	public boolean isDataLocalized() {
 		return _DATA_LOCALIZED;
 	}
 
+	@Override
 	public boolean isPublishToLiveByDefault() {
 		return _PUBLISH_TO_LIVE_BY_DEFAULT;
 	}
@@ -130,5 +213,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	private static final boolean _DATA_LOCALIZED = false;
 
 	private static final boolean _PUBLISH_TO_LIVE_BY_DEFAULT = false;
+
+	private static Log _log = LogFactoryUtil.getLog(
+		BasePortletDataHandler.class);
 
 }

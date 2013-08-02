@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,8 +15,11 @@
 package com.liferay.portlet.portalsettings.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.ldap.DuplicateLDAPServerNameException;
+import com.liferay.portal.kernel.ldap.LDAPFilterException;
+import com.liferay.portal.kernel.ldap.LDAPServerNameException;
+import com.liferay.portal.kernel.ldap.LDAPUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
@@ -24,6 +27,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.ldap.LDAPSettingsUtil;
 import com.liferay.portal.service.CompanyServiceUtil;
@@ -33,6 +37,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.WebKeys;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.portlet.ActionRequest;
@@ -53,8 +58,9 @@ public class EditLDAPServerAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -70,7 +76,13 @@ public class EditLDAPServerAction extends PortletAction {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e) {
-			if (e instanceof PrincipalException) {
+			if (e instanceof DuplicateLDAPServerNameException ||
+				e instanceof LDAPFilterException ||
+				e instanceof LDAPServerNameException) {
+
+				SessionErrors.add(actionRequest, e.getClass());
+			}
+			else if (e instanceof PrincipalException) {
 				SessionErrors.add(actionRequest, e.getClass());
 
 				setForward(actionRequest, "portlet.portal_settings.error");
@@ -83,12 +95,14 @@ public class EditLDAPServerAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.portal_settings.edit_ldap_server"));
+		return actionMapping.findForward(
+			getForward(
+				renderRequest, "portlet.portal_settings.edit_ldap_server"));
 	}
 
 	protected UnicodeProperties addLDAPServer(
@@ -97,10 +111,10 @@ public class EditLDAPServerAction extends PortletAction {
 
 		String defaultPostfix = LDAPSettingsUtil.getPropertyPostfix(0);
 
-		String[] defaultKeys = new String[_KEYS.length];
+		Set<String> defaultKeys = new HashSet<String>(_KEYS.length);
 
-		for (int i = 0; i < _KEYS.length; i++) {
-			defaultKeys[i] = _KEYS[i] + defaultPostfix;
+		for (String key : _KEYS) {
+			defaultKeys.add(key + defaultPostfix);
 		}
 
 		long ldapServerId = CounterLocalServiceUtil.increment();
@@ -112,7 +126,7 @@ public class EditLDAPServerAction extends PortletAction {
 		String[] keys = keysSet.toArray(new String[keysSet.size()]);
 
 		for (String key : keys) {
-			if (ArrayUtil.contains(defaultKeys, key)) {
+			if (defaultKeys.contains(key)) {
 				String value = properties.remove(key);
 
 				if (key.equals(
@@ -192,12 +206,48 @@ public class EditLDAPServerAction extends PortletAction {
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
 			actionRequest, "settings--");
 
+		validateLDAPServerName(
+			themeDisplay.getCompanyId(), ldapServerId, properties);
+
+		String filter = ParamUtil.getString(
+			actionRequest, "importUserSearchFilter");
+
+		LDAPUtil.validateFilter(filter);
+
 		if (ldapServerId <= 0) {
 			properties = addLDAPServer(themeDisplay.getCompanyId(), properties);
 		}
 
 		CompanyServiceUtil.updatePreferences(
 			themeDisplay.getCompanyId(), properties);
+	}
+
+	protected void validateLDAPServerName(
+			long companyId, long ldapServerId, UnicodeProperties properties)
+		throws Exception {
+
+		String ldapServerName = properties.getProperty(
+			"ldap.server.name." + ldapServerId);
+
+		if (Validator.isNull(ldapServerName)) {
+			throw new LDAPServerNameException();
+		}
+
+		long[] existingLDAPServerIds = StringUtil.split(
+			PrefsPropsUtil.getString(companyId, "ldap.server.ids"), 0L);
+
+		for (long existingLDAPServerId : existingLDAPServerIds) {
+			if (ldapServerId == existingLDAPServerId) {
+				continue;
+			}
+
+			String existingLDAPServerName = PrefsPropsUtil.getString(
+				companyId, "ldap.server.name." + existingLDAPServerId);
+
+			if (ldapServerName.equals(existingLDAPServerName)) {
+				throw new DuplicateLDAPServerNameException();
+			}
+		}
 	}
 
 	private static final String[] _KEYS = {

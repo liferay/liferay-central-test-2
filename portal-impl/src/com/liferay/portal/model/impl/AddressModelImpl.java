@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -649,13 +649,16 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 
 	@Override
 	public Address toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Address)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Address)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Address toUnescapedModel() {
+		return (Address)this;
 	}
 
 	@Override
@@ -700,18 +703,15 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Address)) {
 			return false;
 		}
 
-		Address address = null;
-
-		try {
-			address = (Address)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Address address = (Address)obj;
 
 		long primaryKey = address.getPrimaryKey();
 
@@ -983,7 +983,7 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	}
 
 	private static ClassLoader _classLoader = Address.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Address.class
 		};
 	private long _addressId;
@@ -1018,5 +1018,5 @@ public class AddressModelImpl extends BaseModelImpl<Address>
 	private boolean _originalPrimary;
 	private boolean _setOriginalPrimary;
 	private long _columnBitmask;
-	private Address _escapedModelProxy;
+	private Address _escapedModel;
 }

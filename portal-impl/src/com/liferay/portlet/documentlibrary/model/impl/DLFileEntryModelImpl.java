@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -822,13 +822,16 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	@Override
 	public DLFileEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DLFileEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DLFileEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DLFileEntry toUnescapedModel() {
+		return (DLFileEntry)this;
 	}
 
 	@Override
@@ -895,18 +898,15 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileEntry)) {
 			return false;
 		}
 
-		DLFileEntry dlFileEntry = null;
-
-		try {
-			dlFileEntry = (DLFileEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileEntry dlFileEntry = (DLFileEntry)obj;
 
 		long primaryKey = dlFileEntry.getPrimaryKey();
 
@@ -1270,7 +1270,7 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	}
 
 	private static ClassLoader _classLoader = DLFileEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DLFileEntry.class
 		};
 	private String _uuid;
@@ -1316,5 +1316,5 @@ public class DLFileEntryModelImpl extends BaseModelImpl<DLFileEntry>
 	private long _custom1ImageId;
 	private long _custom2ImageId;
 	private long _columnBitmask;
-	private DLFileEntry _escapedModelProxy;
+	private DLFileEntry _escapedModel;
 }

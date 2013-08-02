@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -410,13 +410,61 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 		}
 	}
 
+	protected void cacheUniqueFindersCache(LayoutRevision layoutRevision) {
+		if (layoutRevision.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(layoutRevision.getLayoutSetBranchId()),
+					Boolean.valueOf(layoutRevision.getHead()),
+					Long.valueOf(layoutRevision.getPlid())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_L_H_P, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P, args,
+				layoutRevision);
+		}
+		else {
+			LayoutRevisionModelImpl layoutRevisionModelImpl = (LayoutRevisionModelImpl)layoutRevision;
+
+			if ((layoutRevisionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_L_H_P.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(layoutRevision.getLayoutSetBranchId()),
+						Boolean.valueOf(layoutRevision.getHead()),
+						Long.valueOf(layoutRevision.getPlid())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_L_H_P, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P, args,
+					layoutRevision);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(LayoutRevision layoutRevision) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P,
-			new Object[] {
+		LayoutRevisionModelImpl layoutRevisionModelImpl = (LayoutRevisionModelImpl)layoutRevision;
+
+		Object[] args = new Object[] {
 				Long.valueOf(layoutRevision.getLayoutSetBranchId()),
 				Boolean.valueOf(layoutRevision.getHead()),
 				Long.valueOf(layoutRevision.getPlid())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_L_H_P, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P, args);
+
+		if ((layoutRevisionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_L_H_P.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
+					Boolean.valueOf(layoutRevisionModelImpl.getOriginalHead()),
+					Long.valueOf(layoutRevisionModelImpl.getOriginalPlid())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_L_H_P, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P, args);
+		}
 	}
 
 	/**
@@ -743,35 +791,8 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 			LayoutRevisionImpl.class, layoutRevision.getPrimaryKey(),
 			layoutRevision);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P,
-				new Object[] {
-					Long.valueOf(layoutRevision.getLayoutSetBranchId()),
-					Boolean.valueOf(layoutRevision.getHead()),
-					Long.valueOf(layoutRevision.getPlid())
-				}, layoutRevision);
-		}
-		else {
-			if ((layoutRevisionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_L_H_P.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(layoutRevisionModelImpl.getOriginalLayoutSetBranchId()),
-						Boolean.valueOf(layoutRevisionModelImpl.getOriginalHead()),
-						Long.valueOf(layoutRevisionModelImpl.getOriginalPlid())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_L_H_P, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_L_H_P, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_L_H_P,
-					new Object[] {
-						Long.valueOf(layoutRevision.getLayoutSetBranchId()),
-						Boolean.valueOf(layoutRevision.getHead()),
-						Long.valueOf(layoutRevision.getPlid())
-					}, layoutRevision);
-			}
-		}
+		clearUniqueFindersCache(layoutRevision);
+		cacheUniqueFindersCache(layoutRevision);
 
 		return layoutRevision;
 	}
@@ -6215,8 +6236,10 @@ public class LayoutRevisionPersistenceImpl extends BasePersistenceImpl<LayoutRev
 				List<ModelListener<LayoutRevision>> listenersList = new ArrayList<ModelListener<LayoutRevision>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<LayoutRevision>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,14 +20,16 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -42,6 +44,7 @@ import java.io.FileInputStream;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -64,8 +67,9 @@ public class ExportLayoutsAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		File file = null;
@@ -135,21 +139,13 @@ public class ExportLayoutsAction extends PortletAction {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					groupId, privateLayout);
 
-				UnicodeProperties settingsProperties =
-					layoutSet.getSettingsProperties();
-
 				long lastPublishDate = GetterUtil.getLong(
-					settingsProperties.getProperty("last-publish-date"));
+					layoutSet.getSettingsProperty("last-publish-date"));
 
 				if (lastPublishDate > 0) {
-					Calendar cal = Calendar.getInstance(
-						themeDisplay.getTimeZone(), themeDisplay.getLocale());
+					endDate = new Date();
 
-					endDate = cal.getTime();
-
-					cal.setTimeInMillis(lastPublishDate);
-
-					startDate = cal.getTime();
+					startDate = new Date(lastPublishDate);
 				}
 			}
 			else if (range.equals("last")) {
@@ -160,6 +156,18 @@ public class ExportLayoutsAction extends PortletAction {
 				startDate = new Date(now.getTime() - (rangeLast * Time.HOUR));
 
 				endDate = now;
+			}
+
+			if (layoutIds.length == 1) {
+				Layout layout = LayoutLocalServiceUtil.getLayout(
+					groupId, privateLayout, layoutIds[0]);
+
+				List<Layout> childLayouts = layout.getAllChildren();
+
+				for (Layout childLayout : childLayouts) {
+					layoutIds = ArrayUtil.append(
+						layoutIds, childLayout.getLayoutId());
+				}
 			}
 
 			file = LayoutServiceUtil.exportLayoutsAsFile(
@@ -194,8 +202,9 @@ public class ExportLayoutsAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -207,14 +216,14 @@ public class ExportLayoutsAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.layouts_admin.error");
+				return actionMapping.findForward("portlet.layouts_admin.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.layouts_admin.export_layouts"));
 	}
 

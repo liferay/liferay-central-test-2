@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -159,7 +159,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 			{ "roleId", Types.BIGINT },
 			{ "permissionId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_SQL_CREATE = "create table Roles_Permissions (roleId LONG not null,permissionId LONG not null,primary key (roleId, permissionId))";
+	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_SQL_CREATE = "create table Roles_Permissions (permissionId LONG not null,roleId LONG not null,primary key (permissionId, roleId))";
 	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);
 	public static final String MAPPING_TABLE_USERS_ROLES_NAME = "Users_Roles";
@@ -167,7 +167,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 			{ "userId", Types.BIGINT },
 			{ "roleId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (userId LONG not null,roleId LONG not null,primary key (userId, roleId))";
+	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (roleId LONG not null,userId LONG not null,primary key (roleId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -644,13 +644,16 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 
 	@Override
 	public Role toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Role)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Role)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Role toUnescapedModel() {
+		return (Role)this;
 	}
 
 	@Override
@@ -686,18 +689,15 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Role)) {
 			return false;
 		}
 
-		Role role = null;
-
-		try {
-			role = (Role)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Role role = (Role)obj;
 
 		long primaryKey = role.getPrimaryKey();
 
@@ -867,9 +867,7 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	}
 
 	private static ClassLoader _classLoader = Role.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Role.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Role.class };
 	private long _roleId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -892,5 +890,5 @@ public class RoleModelImpl extends BaseModelImpl<Role> implements RoleModel {
 	private String _subtype;
 	private String _originalSubtype;
 	private long _columnBitmask;
-	private Role _escapedModelProxy;
+	private Role _escapedModel;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,11 +66,8 @@ public class Duration implements Cloneable, Serializable {
 	/**
 	 * Constructor Duration
 	 */
-	public Duration(int d, int h, int m, int s) {
-		_days = d;
-		_hours = h;
-		_minutes = m;
-		_seconds = s;
+	public Duration(int w) {
+		_weeks = w;
 	}
 
 	/**
@@ -83,8 +80,11 @@ public class Duration implements Cloneable, Serializable {
 	/**
 	 * Constructor Duration
 	 */
-	public Duration(int w) {
-		_weeks = w;
+	public Duration(int d, int h, int m, int s) {
+		_days = d;
+		_hours = h;
+		_minutes = m;
+		_seconds = s;
 	}
 
 	/**
@@ -306,9 +306,10 @@ public class Duration implements Cloneable, Serializable {
 	 * Method checkWeeksOkay
 	 */
 	protected void checkWeeksOkay(int f) {
-		if ((f != 0)
-			&& ((_days != 0) || (_hours != 0) || (_minutes != 0)
-				|| (_seconds != 0))) {
+		if ((f != 0) &&
+			((_days != 0) || (_hours != 0) || (_minutes != 0) ||
+			 (_seconds != 0))) {
+
 			throw new IllegalStateException(
 				"Weeks and non-weeks are incompatible");
 		}

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,8 +35,8 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 
 		PortletURL portletURL = new PortletURLImpl(request, ppid, plid, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(WindowState.MAXIMIZED);
 		portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setWindowState(WindowState.MAXIMIZED);
 
 		PortalUtil.addPortletBreadcrumbEntry(request, portletTitle, portletURL.toString());
 
@@ -62,7 +62,27 @@ if (!denyAccess && (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp
 		request.setAttribute(WebKeys.RUNTIME_PORTLET_IDS, runtimePortletIds);
 	}
 
-	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, content);
+	StringBundler sb = null;
+
+	if (Validator.isNotNull(velocityTemplateId) && Validator.isNotNull(content)) {
+		sb = RuntimePortletUtil.getProcessedTemplate(application, request, response, pageContext, out, ppid, velocityTemplateId, content);
+	}
+	%>
+
+	<div class="site-breadcrumbs" id="breadcrumbs">
+		<h1>
+			<span>
+				<liferay-ui:message key="breadcrumb" />
+			</span>
+		</h1>
+
+		<liferay-ui:breadcrumb />
+	</div>
+
+	<%
+	if (sb != null) {
+		sb.writeTo(pageContext.getOut());
+	}
 }
 else {
 	String description = StringPool.BLANK;

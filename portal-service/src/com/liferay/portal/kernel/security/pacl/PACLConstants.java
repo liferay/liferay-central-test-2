@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,9 @@ public interface PACLConstants {
 
 	public static final String MBEAN_PERMISSION_REGISTER_MBEAN =
 		"registerMBean";
+
+	public static final String MBEAN_PERMISSION_UNREGISTER_MBEAN =
+		"unregisterMBean";
 
 	public static final String MBEAN_TRUST_PERMISSION_REGISTER = "register";
 
@@ -70,17 +73,28 @@ public interface PACLConstants {
 	public static final String PORTAL_RUNTIME_PERMISSION_GET_BEAN_PROPERTY =
 		"getBeanProperty";
 
+	public static final String PORTAL_RUNTIME_PERMISSION_GET_CLASSLOADER =
+		"getClassLoader";
+
+	public static final String PORTAL_RUNTIME_PERMISSION_PORTLET_BAG_POOL =
+		"portletBagPool";
+
+	public static final String
+		PORTAL_RUNTIME_PERMISSION_PORTLET_BAG_POOL_ALL_PORTLETS =
+			"<<ALL PORTLETS>>";
+
 	public static final String PORTAL_RUNTIME_PERMISSION_SEARCH_ENGINE =
 		"searchEngine";
 
 	public static final String PORTAL_RUNTIME_PERMISSION_SET_BEAN_PROPERTY =
 		"setBeanProperty";
 
+	public static final String
+		PORTAL_RUNTIME_PERMISSION_THREAD_POOL_ALL_EXECUTORS =
+			"<<ALL EXECUTORS>>";
+
 	public static final String PORTAL_RUNTIME_PERMISSION_THREAD_POOL_EXECUTOR =
 		"threadPoolExecutor";
-
-	public static final String PORTAL_SERVICE_PERMISSION_DYNAMIC_QUERY =
-		"dynamicQuery";
 
 	public static final String PORTAL_SERVICE_PERMISSION_SERVICE = "service";
 
@@ -93,6 +107,9 @@ public interface PACLConstants {
 	public static final String RUNTIME_PERMISSION_CREATE_CLASS_LOADER =
 		"createClassLoader";
 
+	public static final String RUNTIME_PERMISSION_CREATE_SECURITY_MANAGER =
+		"createSecurityManager";
+
 	public static final String RUNTIME_PERMISSION_GET_CLASSLOADER =
 		"getClassLoader";
 
@@ -100,6 +117,11 @@ public interface PACLConstants {
 
 	public static final String RUNTIME_PERMISSION_GET_PROTECTION_DOMAIN =
 		"getProtectionDomain";
+
+	public static final String RUNTIME_PERMISSION_LOAD_LIBRARY = "loadLibrary";
+
+	public static final String RUNTIME_PERMISSION_MODIFY_THREAD =
+		"modifyThread";
 
 	public static final String RUNTIME_PERMISSION_READ_FILE_DESCRIPTOR =
 		"readFileDescriptor";
@@ -109,6 +131,9 @@ public interface PACLConstants {
 
 	public static final String RUNTIME_PERMISSION_SET_SECURITY_MANAGER =
 		"setSecurityManager";
+
+	public static final String RUNTIME_PERMISSION_SUPPRESS_ACCESS_CHECKS =
+		"suppressAccessChecks";
 
 	public static final String RUNTIME_PERMISSION_WRITE_FILE_DESCRIPTOR =
 		"writeFileDescriptor";
@@ -122,5 +147,7 @@ public interface PACLConstants {
 	public static final String SOCKET_PERMISSION_CONNECT = "connect";
 
 	public static final String SOCKET_PERMISSION_LISTEN = "listen";
+
+	public static final String SOCKET_PERMISSION_RESOLVE = "resolve";
 
 }

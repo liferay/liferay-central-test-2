@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -67,11 +67,11 @@ public class ServiceContextFactory {
 			serviceContext.setLayoutFullURL(
 				PortalUtil.getCanonicalURL(
 					PortalUtil.getLayoutFullURL(themeDisplay), themeDisplay,
-					themeDisplay.getLayout()));
+					themeDisplay.getLayout(), true));
 			serviceContext.setLayoutURL(
 				PortalUtil.getCanonicalURL(
 					PortalUtil.getLayoutURL(themeDisplay), themeDisplay,
-					themeDisplay.getLayout()));
+					themeDisplay.getLayout(), true));
 			serviceContext.setPathMain(PortalUtil.getPathMain());
 			serviceContext.setPlid(themeDisplay.getPlid());
 			serviceContext.setPortalURL(PortalUtil.getPortalURL(request));
@@ -237,11 +237,15 @@ public class ServiceContextFactory {
 
 		serviceContext.setAssetEntryVisible(assetEntryVisible);
 
-		long[] assetLinkEntryIds = StringUtil.split(
-			ParamUtil.getString(
-				request, "assetLinksSearchContainerPrimaryKeys"), 0L);
+		String assetLinkEntryIdsString = request.getParameter(
+			"assetLinksSearchContainerPrimaryKeys");
 
-		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+		if (assetLinkEntryIdsString != null) {
+			long[] assetLinkEntryIds = StringUtil.split(
+				assetLinkEntryIdsString, 0L);
+
+			serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+		}
 
 		String assetTagNamesString = request.getParameter("assetTagNames");
 
@@ -269,8 +273,8 @@ public class ServiceContextFactory {
 		ServiceContext serviceContext =
 			ServiceContextThreadLocal.getServiceContext();
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)portletRequest.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		if (serviceContext != null) {
 			serviceContext = (ServiceContext)serviceContext.clone();
@@ -428,11 +432,15 @@ public class ServiceContextFactory {
 
 		serviceContext.setAssetEntryVisible(assetEntryVisible);
 
-		long[] assetLinkEntryIds = StringUtil.split(
-			ParamUtil.getString(
-				portletRequest, "assetLinksSearchContainerPrimaryKeys"), 0L);
+		String assetLinkEntryIdsString = request.getParameter(
+			"assetLinksSearchContainerPrimaryKeys");
 
-		serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+		if (assetLinkEntryIdsString != null) {
+			long[] assetLinkEntryIds = StringUtil.split(
+				assetLinkEntryIdsString, 0L);
+
+			serviceContext.setAssetLinkEntryIds(assetLinkEntryIds);
+		}
 
 		String assetTagNamesString = request.getParameter("assetTagNames");
 
@@ -458,6 +466,21 @@ public class ServiceContextFactory {
 
 		ServiceContext serviceContext = getInstance(portletRequest);
 
+		// Permissions
+
+		String[] groupPermissions = PortalUtil.getGroupPermissions(
+			portletRequest, className);
+		String[] guestPermissions = PortalUtil.getGuestPermissions(
+			portletRequest, className);
+
+		if (groupPermissions != null) {
+			serviceContext.setGroupPermissions(groupPermissions);
+		}
+
+		if (guestPermissions != null) {
+			serviceContext.setGuestPermissions(guestPermissions);
+		}
+
 		// Expando
 
 		Map<String, Serializable> expandoBridgeAttributes =
@@ -476,6 +499,21 @@ public class ServiceContextFactory {
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext = getInstance(uploadPortletRequest);
+
+		// Permissions
+
+		String[] groupPermissions = PortalUtil.getGroupPermissions(
+			uploadPortletRequest, className);
+		String[] guestPermissions = PortalUtil.getGuestPermissions(
+			uploadPortletRequest, className);
+
+		if (groupPermissions != null) {
+			serviceContext.setGroupPermissions(groupPermissions);
+		}
+
+		if (guestPermissions != null) {
+			serviceContext.setGuestPermissions(guestPermissions);
+		}
 
 		// Expando
 

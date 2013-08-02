@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,8 +29,6 @@ birthday.set(Calendar.YEAR, 1970);
 if (selContact != null) {
 	birthday.setTime(selContact.getBirthday());
 }
-
-boolean deletePortrait = ParamUtil.getBoolean(request, "deletePortrait");
 %>
 
 <liferay-ui:error-marker key="errorSection" value="details" />

@@ -1,0 +1,28 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="SAVE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="check">
+		<case locator-key1="SETUP_DISPLAY_SETTINGS_SHOW_ACTIONS_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="SETUP_DISPLAY_SETTINGS_SHOW_FOLDER_MENU_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="SETUP_DISPLAY_SETTINGS_SHOW_NAVIGATION_LINKS_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="SETUP_DISPLAY_SETTINGS_SHOW_SEARCH_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+	</command>
+
+	<command name="selectFrame">
+		<case locator-key1="CONFIGURATION_IFRAME">
+			<execute function="SelectFrame#selectFrameWaitForScript" />
+		</case>
+	</command>
+</definition>

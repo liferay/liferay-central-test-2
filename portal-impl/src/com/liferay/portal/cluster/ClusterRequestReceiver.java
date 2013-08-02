@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,22 +14,15 @@
 
 package com.liferay.portal.cluster;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.cluster.Address;
 import com.liferay.portal.kernel.cluster.ClusterException;
 import com.liferay.portal.kernel.cluster.ClusterMessageType;
-import com.liferay.portal.kernel.cluster.ClusterNode;
 import com.liferay.portal.kernel.cluster.ClusterNodeResponse;
 import com.liferay.portal.kernel.cluster.ClusterRequest;
 import com.liferay.portal.kernel.cluster.FutureClusterResponses;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,7 +30,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import org.jgroups.Channel;
-import org.jgroups.ChannelException;
 import org.jgroups.Message;
 import org.jgroups.View;
 
@@ -67,10 +59,6 @@ public class ClusterRequestReceiver extends BaseReceiver {
 					"not be ready.");
 		}
 
-		Channel controlChannel = _clusterExecutorImpl.getControlChannel();
-
-		org.jgroups.Address localAddress = controlChannel.getAddress();
-
 		Object obj = message.getObject();
 
 		if (obj == null) {
@@ -81,10 +69,12 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			return;
 		}
 
-		org.jgroups.Address sourceAddress = message.getSrc();
+		Address sourceAddress = new AddressImpl(message.getSrc());
 
-		if (localAddress.equals(sourceAddress)) {
-			boolean isProcessed = processLocalMessage(obj, sourceAddress);
+		if (sourceAddress.equals(
+				_clusterExecutorImpl.getLocalClusterNodeAddress())) {
+
+			boolean isProcessed = processLocalMessage(obj);
 
 			if (isProcessed) {
 				return;
@@ -94,13 +84,12 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		if (obj instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)obj;
 
-			processClusterRequest(clusterRequest, sourceAddress, localAddress);
+			processClusterRequest(clusterRequest, sourceAddress);
 		}
 		else if (obj instanceof ClusterNodeResponse) {
 			ClusterNodeResponse clusterNodeResponse = (ClusterNodeResponse)obj;
 
-			processClusterResponse(
-				clusterNodeResponse, sourceAddress, localAddress);
+			processClusterResponse(clusterNodeResponse, sourceAddress);
 		}
 		else if (_log.isWarnEnabled()) {
 			_log.warn(
@@ -193,171 +182,89 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		return newAddresses;
 	}
 
-	protected Object invoke(
-			String servletContextName, String beanIdentifier,
-			MethodHandler methodHandler)
-		throws Exception {
+	protected void handleResponse(
+		Address address, ClusterRequest clusterRequest, Object returnValue,
+		Exception exception) {
 
-		if (servletContextName == null) {
-			if (Validator.isNull(beanIdentifier)) {
-				return methodHandler.invoke(true);
-			}
-			else {
-				Object bean = PortalBeanLocatorUtil.locate(beanIdentifier);
+		ClusterNodeResponse clusterNodeResponse =
+			_clusterExecutorImpl.generateClusterNodeResponse(
+				clusterRequest, returnValue, exception);
 
-				return methodHandler.invoke(bean);
-			}
-		}
-
-		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
+		Channel channel = _clusterExecutorImpl.getControlChannel();
 
 		try {
-			ClassLoader classLoader =
-				(ClassLoader)PortletBeanLocatorUtil.locate(
-					servletContextName, "portletClassLoader");
-
-			PACLClassLoaderUtil.setContextClassLoader(classLoader);
-
-			if (Validator.isNull(beanIdentifier)) {
-				return methodHandler.invoke(true);
-			}
-			else {
-				Object bean = PortletBeanLocatorUtil.locate(
-					servletContextName, beanIdentifier);
-
-				return methodHandler.invoke(bean);
-			}
+			channel.send(
+				(org.jgroups.Address)address.getRealAddress(), null,
+				clusterNodeResponse);
 		}
 		catch (Exception e) {
-			throw e;
-		}
-		finally {
-			PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	protected void processClusterRequest(
-		ClusterRequest clusterRequest, org.jgroups.Address sourceAddress,
-		org.jgroups.Address localAddress) {
-
-		ClusterMessageType clusterMessageType =
-			clusterRequest.getClusterMessageType();
-
-		ClusterNodeResponse clusterNodeResponse = new ClusterNodeResponse();
-
-		Address address = new AddressImpl(localAddress);
-
-		clusterNodeResponse.setAddress(address);
-
-		ClusterNode localClusterNode =
-			_clusterExecutorImpl.getLocalClusterNode();
-
-		clusterNodeResponse.setClusterNode(localClusterNode);
-
-		if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
-			clusterMessageType.equals(ClusterMessageType.UPDATE)) {
-
-			ClusterNode originatingClusterNode =
-				clusterRequest.getOriginatingClusterNode();
-
-			if (originatingClusterNode != null) {
-				_clusterExecutorImpl.memberJoined(
-					new AddressImpl(sourceAddress), originatingClusterNode);
-
-				clusterNodeResponse.setClusterMessageType(clusterMessageType);
-			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Content of notify message does not contain cluster " +
-							"node information");
-				}
-
-				return;
-			}
-		}
-		else {
-			clusterNodeResponse.setClusterMessageType(
-				ClusterMessageType.EXECUTE);
-			clusterNodeResponse.setMulticast(clusterRequest.isMulticast());
-			clusterNodeResponse.setUuid(clusterRequest.getUuid());
-
-			MethodHandler methodHandler = clusterRequest.getMethodHandler();
-
-			if (methodHandler != null) {
-				try {
-					ClusterInvokeThreadLocal.setEnabled(false);
-
-					Object returnValue = invoke(
-						clusterRequest.getServletContextName(),
-						clusterRequest.getBeanIdentifier(), methodHandler);
-
-					if (returnValue instanceof Serializable) {
-						clusterNodeResponse.setResult(returnValue);
-					}
-					else if (returnValue != null) {
-						clusterNodeResponse.setException(
-							new ClusterException(
-								"Return value is not serializable"));
-					}
-				}
-				catch (Exception e) {
-					clusterNodeResponse.setException(e);
-
-					_log.error("Failed to invoke method " + methodHandler, e);
-				}
-				finally {
-					ClusterInvokeThreadLocal.setEnabled(true);
-				}
-			}
-			else {
-				clusterNodeResponse.setException(
-					new ClusterException(
-						"Payload is not of type " +
-							MethodHandler.class.getName()));
-			}
-		}
-
-		Channel controlChannel = _clusterExecutorImpl.getControlChannel();
-
-		try {
-			controlChannel.send(
-				sourceAddress, localAddress, clusterNodeResponse);
-		}
-		catch (ChannelException ce) {
 			_log.error(
-				"Unable to send response message " + clusterNodeResponse, ce);
+				"Unable to send response message " + clusterNodeResponse, e);
 		}
 		catch (Throwable t) {
 			_log.error(t, t);
 		}
 	}
 
-	protected void processClusterResponse(
-		ClusterNodeResponse clusterNodeResponse,
-		org.jgroups.Address sourceAddress, org.jgroups.Address localAddress) {
+	protected void processClusterRequest(
+		ClusterRequest clusterRequest, Address sourceAddress) {
 
 		ClusterMessageType clusterMessageType =
-			clusterNodeResponse.getClusterMessageType();
+			clusterRequest.getClusterMessageType();
 
 		if (clusterMessageType.equals(ClusterMessageType.NOTIFY) ||
 			clusterMessageType.equals(ClusterMessageType.UPDATE)) {
 
-			ClusterNode clusterNode = clusterNodeResponse.getClusterNode();
+			_clusterExecutorImpl.memberJoined(
+				sourceAddress, clusterRequest.getOriginatingClusterNode());
 
-			if (clusterNode != null) {
-				Address joinAddress = new AddressImpl(sourceAddress);
+			if (clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
+				handleResponse(sourceAddress, clusterRequest, null, null);
+			}
 
-				_clusterExecutorImpl.memberJoined(joinAddress, clusterNode);
+			return;
+		}
+
+		MethodHandler methodHandler = clusterRequest.getMethodHandler();
+
+		Object returnValue = null;
+		Exception exception = null;
+
+		if (methodHandler != null) {
+			try {
+				ClusterInvokeThreadLocal.setEnabled(false);
+
+				returnValue = methodHandler.invoke(true);
 			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Response of notify message does not contain cluster " +
-							"node information");
-				}
+			catch (Exception e) {
+				exception = e;
+
+				_log.error("Unable to invoke method " + methodHandler, e);
 			}
+			finally {
+				ClusterInvokeThreadLocal.setEnabled(true);
+			}
+		}
+		else {
+			exception = new ClusterException(
+				"Payload is not of type " + MethodHandler.class.getName());
+		}
+
+		if (!clusterRequest.isFireAndForget()) {
+			handleResponse(
+				sourceAddress, clusterRequest, returnValue, exception);
+		}
+	}
+
+	protected void processClusterResponse(
+		ClusterNodeResponse clusterNodeResponse, Address sourceAddress) {
+
+		ClusterMessageType clusterMessageType =
+			clusterNodeResponse.getClusterMessageType();
+
+		if (clusterMessageType.equals(ClusterMessageType.NOTIFY)) {
+			_clusterExecutorImpl.memberJoined(
+				sourceAddress, clusterNodeResponse.getClusterNode());
 
 			return;
 		}
@@ -375,9 +282,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 			return;
 		}
 
-		Address address = new AddressImpl(sourceAddress);
-
-		if (futureClusterResponses.expectsReply(address)) {
+		if (futureClusterResponses.expectsReply(sourceAddress)) {
 			futureClusterResponses.addClusterNodeResponse(clusterNodeResponse);
 		}
 		else {
@@ -387,8 +292,7 @@ public class ClusterRequestReceiver extends BaseReceiver {
 		}
 	}
 
-	protected boolean processLocalMessage(
-		Object message, org.jgroups.Address sourceAddress) {
+	protected boolean processLocalMessage(Object message) {
 
 		if (message instanceof ClusterRequest) {
 			ClusterRequest clusterRequest = (ClusterRequest)message;

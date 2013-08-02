@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -449,13 +449,16 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 
 	@Override
 	public LayoutPrototype toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (LayoutPrototype)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (LayoutPrototype)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public LayoutPrototype toUnescapedModel() {
+		return (LayoutPrototype)this;
 	}
 
 	@Override
@@ -491,18 +494,15 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutPrototype)) {
 			return false;
 		}
 
-		LayoutPrototype layoutPrototype = null;
-
-		try {
-			layoutPrototype = (LayoutPrototype)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		LayoutPrototype layoutPrototype = (LayoutPrototype)obj;
 
 		long primaryKey = layoutPrototype.getPrimaryKey();
 
@@ -646,7 +646,7 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	}
 
 	private static ClassLoader _classLoader = LayoutPrototype.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			LayoutPrototype.class
 		};
 	private String _uuid;
@@ -663,5 +663,5 @@ public class LayoutPrototypeModelImpl extends BaseModelImpl<LayoutPrototype>
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
-	private LayoutPrototype _escapedModelProxy;
+	private LayoutPrototype _escapedModel;
 }

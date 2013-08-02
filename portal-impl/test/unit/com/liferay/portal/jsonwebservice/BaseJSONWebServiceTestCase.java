@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,15 +15,19 @@
 package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.json.JSONFactoryImpl;
+import com.liferay.portal.json.JSONIncludesManagerImpl;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONIncludesManagerUtil;
 import com.liferay.portal.kernel.json.JSONSerializable;
 import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceActionsManagerUtil;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.MethodParametersResolverUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.MethodParametersResolverImpl;
+import com.liferay.portal.util.PropsImpl;
 
 import java.lang.reflect.Method;
 
@@ -43,6 +47,12 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 
 		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 
+		JSONIncludesManagerUtil jsonIncludesManagerUtil =
+			new JSONIncludesManagerUtil();
+
+		jsonIncludesManagerUtil.setJSONIncludesManager(
+			new JSONIncludesManagerImpl());
+
 		JSONWebServiceActionsManagerUtil jsonWebServiceActionsManagerUtil =
 			new JSONWebServiceActionsManagerUtil();
 
@@ -54,6 +64,8 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 
 		methodParametersResolverUtil.setMethodParametersResolver(
 			new MethodParametersResolverImpl());
+
+		PropsUtil.setProps(new PropsImpl());
 	}
 
 	protected static void registerActionClass(Class<?> actionClass) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -129,11 +129,6 @@ public class Field implements Serializable {
 		this(name, new String[] {value});
 	}
 
-	public Field(String name, String[] values) {
-		_name = name;
-		_values = values;
-	}
-
 	/**
 	 * @deprecated
 	 */
@@ -141,6 +136,11 @@ public class Field implements Serializable {
 		this(name, value);
 
 		setTokenized(tokenized);
+	}
+
+	public Field(String name, String[] values) {
+		_name = name;
+		_values = values;
 	}
 
 	/**
@@ -172,6 +172,10 @@ public class Field implements Serializable {
 
 	public String getName() {
 		return _name;
+	}
+
+	public Class<? extends Number> getNumericClass() {
+		return _numericClass;
 	}
 
 	public String getValue() {
@@ -216,6 +220,10 @@ public class Field implements Serializable {
 		_numeric = numeric;
 	}
 
+	public void setNumericClass(Class<? extends Number> numericClass) {
+		_numericClass = numericClass;
+	}
+
 	public void setTokenized(boolean tokenized) {
 		_tokenized = tokenized;
 	}
@@ -232,6 +240,7 @@ public class Field implements Serializable {
 	private Map<Locale, String> _localizedValues;
 	private String _name;
 	private boolean _numeric;
+	private Class<? extends Number> _numericClass;
 	private boolean _tokenized;
 	private String[] _values;
 

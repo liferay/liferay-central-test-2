@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,25 +28,21 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutRevision;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutRevisionLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -57,8 +53,10 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,8 +73,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -96,7 +94,6 @@ public class UpdateLayoutAction extends JSONAction {
 		String portletId = ParamUtil.getString(request, "p_p_id");
 
 		boolean updateLayout = true;
-		boolean deletePortlet = false;
 
 		if (cmd.equals(Constants.ADD)) {
 			String columnId = ParamUtil.getString(request, "p_p_col_id", null);
@@ -120,10 +117,6 @@ public class UpdateLayoutAction extends JSONAction {
 					layoutTypePortlet.isCustomizedView()) {
 
 					updateLayout = false;
-					deletePortlet = false;
-				}
-				else {
-					deletePortlet = true;
 				}
 			}
 		}
@@ -259,20 +252,6 @@ public class UpdateLayoutAction extends JSONAction {
 			layout = LayoutServiceUtil.updateLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
 				layout.getLayoutId(), layout.getTypeSettings());
-
-			// See LEP-1411. Delay the delete of extraneous portlet resources
-			// only after the user has proven that he has the valid permissions.
-
-			if (deletePortlet) {
-				String rootPortletId = PortletConstants.getRootPortletId(
-					portletId);
-
-				ResourceLocalServiceUtil.deleteResource(
-					layout.getCompanyId(), rootPortletId,
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					PortletPermissionUtil.getPrimaryKey(
-						layout.getPlid(), portletId));
-			}
 		}
 		else {
 			LayoutClone layoutClone = LayoutCloneFactory.getInstance();
@@ -284,15 +263,16 @@ public class UpdateLayoutAction extends JSONAction {
 		}
 
 		if (cmd.equals(Constants.ADD) && (portletId != null)) {
-			addPortlet(mapping, form, request, response, portletId);
+			addPortlet(actionMapping, actionForm, request, response, portletId);
 		}
 
 		return StringPool.BLANK;
 	}
 
 	protected void addPortlet(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response, String portletId)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response,
+			String portletId)
 		throws Exception {
 
 		// Run the render portlet action to add a portlet without refreshing.
@@ -332,18 +312,18 @@ public class UpdateLayoutAction extends JSONAction {
 				response);
 
 			renderPortletAction.execute(
-				mapping, form, dynamicRequest, stringResponse);
+				actionMapping, actionForm, dynamicRequest, stringResponse);
 
 			populatePortletJSONObject(
 				request, stringResponse, portlet, jsonObject);
 
-			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+			response.setContentType(ContentTypes.APPLICATION_JSON);
 
 			ServletResponseUtil.write(response, jsonObject.toString());
 		}
 		else {
 			renderPortletAction.execute(
-				mapping, form, dynamicRequest, response);
+				actionMapping, actionForm, dynamicRequest, response);
 		}
 	}
 
@@ -397,8 +377,6 @@ public class UpdateLayoutAction extends JSONAction {
 			}
 		}
 
-		PortletApp portletApp = portlet.getPortletApp();
-
 		if (!portletOnLayout && portlet.isAjaxable()) {
 			Portlet rootPortlet = portlet.getRootPortlet();
 
@@ -432,7 +410,7 @@ public class UpdateLayoutAction extends JSONAction {
 			for (String footerPortletCss : portlet.getFooterPortletCss()) {
 				if (!HttpUtil.hasProtocol(footerPortletCss)) {
 					footerPortletCss =
-						portletApp.getContextPath() + footerPortletCss;
+						portlet.getStaticResourcePath() + footerPortletCss;
 
 					footerPortletCss = PortalUtil.getStaticResourceURL(
 						request, footerPortletCss, rootPortlet.getTimestamp());
@@ -446,7 +424,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(footerPortletJavaScript)) {
 					footerPortletJavaScript =
-						portletApp.getContextPath() + footerPortletJavaScript;
+						portlet.getStaticResourcePath() +
+							footerPortletJavaScript;
 
 					footerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, footerPortletJavaScript,
@@ -486,7 +465,7 @@ public class UpdateLayoutAction extends JSONAction {
 			for (String headerPortletCss : portlet.getHeaderPortletCss()) {
 				if (!HttpUtil.hasProtocol(headerPortletCss)) {
 					headerPortletCss =
-						portletApp.getContextPath() + headerPortletCss;
+						portlet.getStaticResourcePath() + headerPortletCss;
 
 					headerPortletCss = PortalUtil.getStaticResourceURL(
 						request, headerPortletCss, rootPortlet.getTimestamp());
@@ -500,7 +479,8 @@ public class UpdateLayoutAction extends JSONAction {
 
 				if (!HttpUtil.hasProtocol(headerPortletJavaScript)) {
 					headerPortletJavaScript =
-						portletApp.getContextPath() + headerPortletJavaScript;
+						portlet.getStaticResourcePath() +
+							headerPortletJavaScript;
 
 					headerPortletJavaScript = PortalUtil.getStaticResourceURL(
 						request, headerPortletJavaScript,
@@ -538,6 +518,15 @@ public class UpdateLayoutAction extends JSONAction {
 		jsonObject.put(
 			"headerJavaScriptPaths",
 			JSONFactoryUtil.createJSONArray(headerJavaScriptPaths));
+
+		List<String> markupHeadElements = (List<String>)request.getAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if (markupHeadElements != null) {
+			jsonObject.put(
+				"markupHeadElements",
+				StringUtil.merge(markupHeadElements, StringPool.BLANK));
+		}
 	}
 
 }

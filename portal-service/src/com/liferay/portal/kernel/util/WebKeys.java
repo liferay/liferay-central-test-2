@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -53,6 +53,8 @@ public interface WebKeys {
 
 	public static final String JAVASCRIPT_CONTEXT = "JAVASCRIPT_CONTEXT";
 
+	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
+
 	public static final String JOURNAL_ARTICLE_DISPLAY = "JOURNAL_ARTICLE_DISPLAY";
 
 	public static final String LAST_PATH = "LAST_PATH";
@@ -98,6 +100,8 @@ public interface WebKeys {
 	public static final String PORTLET_RESOURCE_STATIC_URLS = "PORTLET_RESOURCE_STATIC_URLS";
 
 	public static final String REDIRECT = "REDIRECT";
+
+	public static final String REFERER = "referer";
 
 	public static final String RENDER_PORTLET = "RENDER_PORTLET";
 

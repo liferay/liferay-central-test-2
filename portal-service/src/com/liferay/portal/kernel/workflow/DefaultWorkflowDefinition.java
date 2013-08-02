@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,22 +29,27 @@ import java.util.Map;
 public class DefaultWorkflowDefinition
 	implements Serializable, WorkflowDefinition {
 
+	@Override
 	public String getContent() {
 		return _content;
 	}
 
+	@Override
 	public InputStream getInputStream() {
 		return _inputStream;
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public Map<String, Object> getOptionalAttributes() {
 		return _optionalAttributes;
 	}
 
+	@Override
 	public String getTitle() {
 		if (_title == null) {
 			return StringPool.BLANK;
@@ -54,14 +59,17 @@ public class DefaultWorkflowDefinition
 		}
 	}
 
+	@Override
 	public String getTitle(String languageId) {
 		return getTitle();
 	}
 
+	@Override
 	public int getVersion() {
 		return _version;
 	}
 
+	@Override
 	public boolean isActive() {
 		return _active;
 	}

@@ -38,6 +38,13 @@ Liferay.Service.registerClass(
 );
 
 Liferay.Service.registerClass(
+	Liferay.Service.Portal, "Contact",
+	{
+		getContact: true
+	}
+);
+
+Liferay.Service.registerClass(
 	Liferay.Service.Portal, "Country",
 	{
 		addCountry: true,
@@ -99,7 +106,9 @@ Liferay.Service.registerClass(
 	{
 		addLayout: true,
 		deleteLayout: true,
+		getAncestorLayouts: true,
 		getDefaultPlid: true,
+		getLayoutByUuidAndGroupId: true,
 		getLayoutName: true,
 		getLayoutReferences: true,
 		getLayouts: true,
@@ -280,7 +289,6 @@ Liferay.Service.registerClass(
 		testAddClassNameAndTestTransactionPortletBar_PortalRollback: true,
 		testAddClassNameAndTestTransactionPortletBar_PortletRollback: true,
 		testAddClassNameAndTestTransactionPortletBar_Success: true,
-		testCounterIncrement_Rollback: true,
 		testDeleteClassName: true,
 		testGetBuildNumber: true,
 		testGetUserId: true,
@@ -511,6 +519,7 @@ Liferay.Service.registerClass(
 	{
 		addEntry: true,
 		deleteEntry: true,
+		getEntry: true,
 		updateEntry: true
 	}
 );
@@ -540,6 +549,7 @@ Liferay.Service.registerClass(
 		getVocabularyCategories: true,
 		getVocabularyCategoriesCount: true,
 		getVocabularyRootCategories: true,
+		getVocabularyRootCategoriesCount: true,
 		moveCategory: true,
 		search: true,
 		updateCategory: true
@@ -610,7 +620,9 @@ Liferay.Service.registerClass(
 		getGroupsVocabularies: true,
 		getGroupVocabularies: true,
 		getGroupVocabulariesCount: true,
+		getGroupVocabulariesDisplay: true,
 		getJSONGroupVocabularies: true,
+		getJSONGroupVocabulariesDisplay: true,
 		getVocabularies: true,
 		getVocabulary: true,
 		updateVocabulary: true
@@ -1250,11 +1262,17 @@ Liferay.Service.registerClass(
 		deletePage: true,
 		deletePageAttachment: true,
 		deleteTempPageAttachment: true,
+		getChildren: true,
 		getDraftPage: true,
 		getNodePages: true,
 		getNodePagesRSS: true,
+		getOrphans: true,
 		getPage: true,
+		getPages: true,
+		getPagesCount: true,
 		getPagesRSS: true,
+		getRecentChanges: true,
+		getRecentChangesCount: true,
 		getTempPageAttachmentNames: true,
 		movePage: true,
 		revertPage: true,

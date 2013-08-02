@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -310,7 +310,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 							<liferay-ui:search-container-column-text
 								href="<%= rowURL %>"
 								name="started-by"
-								value='<%= message.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())) %>'
+								value='<%= message.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(message) %>'
 							/>
 
 							<liferay-ui:search-container-column-text
@@ -487,7 +487,7 @@ request.setAttribute("view.jsp-viewCategory", Boolean.TRUE.toString());
 					<liferay-ui:search-container-column-text
 						href="<%= rowURL %>"
 						name="started-by"
-						value='<%= message.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(message.getUserId(), message.getUserName())) %>'
+						value='<%= message.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : PortalUtil.getUserName(message) %>'
 					/>
 
 					<liferay-ui:search-container-column-text

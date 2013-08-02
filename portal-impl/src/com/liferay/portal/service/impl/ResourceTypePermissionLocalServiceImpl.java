@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ import java.util.List;
 public class ResourceTypePermissionLocalServiceImpl
 	extends ResourceTypePermissionLocalServiceBaseImpl {
 
+	@Override
 	public long getCompanyScopeActionIds(
 			long companyId, String name, long roleId)
 		throws SystemException {
@@ -44,6 +45,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		return getGroupScopeActionIds(companyId, 0, name, roleId);
 	}
 
+	@Override
 	public long getGroupScopeActionIds(
 			long companyId, long groupId, String name, long roleId)
 		throws SystemException {
@@ -60,6 +62,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<ResourceTypePermission> getGroupScopeResourceTypePermissions(
 			long companyId, String name, long roleId)
 		throws SystemException {
@@ -68,6 +71,7 @@ public class ResourceTypePermissionLocalServiceImpl
 			companyId, name, roleId);
 	}
 
+	@Override
 	public ResourceBlockPermissionsContainer
 			getResourceBlockPermissionsContainer(
 				long companyId, long groupId, String name)
@@ -91,6 +95,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		return resourceBlockPermissionContainer;
 	}
 
+	@Override
 	public List<ResourceTypePermission> getRoleResourceTypePermissions(
 			long roleId)
 		throws SystemException {
@@ -98,6 +103,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		return resourceTypePermissionPersistence.findByRoleId(roleId);
 	}
 
+	@Override
 	public boolean hasCompanyScopePermission(
 			long companyId, String name, long roleId, String actionId)
 		throws PortalException, SystemException {
@@ -105,6 +111,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		return hasGroupScopePermission(companyId, 0, name, roleId, actionId);
 	}
 
+	@Override
 	public boolean hasEitherScopePermission(
 			long companyId, String name, long roleId, String actionId)
 		throws PortalException, SystemException {
@@ -117,7 +124,7 @@ public class ResourceTypePermissionLocalServiceImpl
 				companyId, name, roleId);
 
 		for (ResourceTypePermission resourceTypePermission :
-			resourceTypePermissions) {
+				resourceTypePermissions) {
 
 			long actionIdsLong = resourceTypePermission.getActionIds();
 			long bitwiseValue = resourceAction.getBitwiseValue();
@@ -130,6 +137,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		return false;
 	}
 
+	@Override
 	public boolean hasGroupScopePermission(
 			long companyId, long groupId, String name, long roleId,
 			String actionId)
@@ -153,6 +161,7 @@ public class ResourceTypePermissionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void updateCompanyScopeResourceTypePermissions(
 			long companyId, String name, long roleId, long actionIdsLong,
 			long operator)
@@ -162,6 +171,7 @@ public class ResourceTypePermissionLocalServiceImpl
 			companyId, 0, name, roleId, actionIdsLong, operator);
 	}
 
+	@Override
 	public void updateGroupScopeResourceTypePermissions(
 			long companyId, long groupId, String name, long roleId,
 			long actionIdsLong, long operator)

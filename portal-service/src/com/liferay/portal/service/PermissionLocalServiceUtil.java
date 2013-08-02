@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -249,6 +249,415 @@ public class PermissionLocalServiceUtil {
 	}
 
 	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addGroupPermission(long groupId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addGroupPermission(groupId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addGroupPermission(long groupId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addGroupPermission(groupId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addGroupPermissions(long groupId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addGroupPermissions(groupId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addGroupPermissions(long groupId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addGroupPermissions(groupId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void clearGroupPermissions(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearGroupPermissions(groupId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteGroupPermission(long groupId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteGroupPermission(groupId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteGroupPermission(long groupId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteGroupPermission(groupId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteGroupPermissions(long groupId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteGroupPermissions(groupId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteGroupPermissions(long groupId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteGroupPermissions(groupId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupPermissions(groupId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupPermissions(groupId, start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getGroupPermissions(groupId, start, end, orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getGroupPermissionsCount(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getGroupPermissionsCount(groupId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasGroupPermission(long groupId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasGroupPermission(groupId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasGroupPermissions(long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasGroupPermissions(groupId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setGroupPermissions(long groupId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().setGroupPermissions(groupId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addRolePermission(long roleId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addRolePermission(roleId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addRolePermission(long roleId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addRolePermission(roleId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addRolePermissions(long roleId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addRolePermissions(roleId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addRolePermissions(long roleId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addRolePermissions(roleId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void clearRolePermissions(long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearRolePermissions(roleId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteRolePermission(long roleId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRolePermission(roleId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteRolePermission(long roleId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRolePermission(roleId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteRolePermissions(long roleId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRolePermissions(roleId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteRolePermissions(long roleId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteRolePermissions(roleId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRolePermissions(roleId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRolePermissions(roleId, start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getRolePermissions(roleId, start, end, orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getRolePermissionsCount(long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRolePermissionsCount(roleId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasRolePermission(long roleId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasRolePermission(roleId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasRolePermissions(long roleId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasRolePermissions(roleId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setRolePermissions(long roleId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().setRolePermissions(roleId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUserPermission(long userId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addUserPermission(userId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUserPermission(long userId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addUserPermission(userId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUserPermissions(long userId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addUserPermissions(userId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addUserPermissions(long userId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addUserPermissions(userId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void clearUserPermissions(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearUserPermissions(userId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteUserPermission(long userId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteUserPermission(userId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteUserPermission(long userId,
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteUserPermission(userId, permission);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteUserPermissions(long userId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteUserPermissions(userId, permissionIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteUserPermissions(long userId,
+		java.util.List<com.liferay.portal.model.Permission> Permissions)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteUserPermissions(userId, Permissions);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId) throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserPermissions(userId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserPermissions(userId, start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getUserPermissions(userId, start, end, orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getUserPermissionsCount(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getUserPermissionsCount(userId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasUserPermission(long userId, long permissionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasUserPermission(userId, permissionId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasUserPermissions(long userId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasUserPermissions(userId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setUserPermissions(long userId, long[] permissionIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().setUserPermissions(userId, permissionIds);
+	}
+
+	/**
 	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
@@ -460,18 +869,6 @@ public class PermissionLocalServiceUtil {
 		return getService().getPermissions(companyId, actionIds, resourceId);
 	}
 
-	/**
-	* Returns all the role's permissions.
-	*
-	* @param roleId the primary key of the role
-	* @return the role's permissions
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
-		long roleId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRolePermissions(roleId);
-	}
-
 	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
 		long roleId, int[] scopes)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -490,18 +887,6 @@ public class PermissionLocalServiceUtil {
 		long roleId, long resourceId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getRolePermissions(roleId, resourceId);
-	}
-
-	/**
-	* Returns all the user's permissions.
-	*
-	* @param userId the primary key of the user
-	* @return the user's permissions
-	* @throws SystemException if a system exception occurred
-	*/
-	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
-		long userId) throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getUserPermissions(userId);
 	}
 
 	/**

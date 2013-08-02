@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.bean;
 
 import com.liferay.portal.kernel.util.HtmlUtil;
+
+import java.io.Serializable;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
@@ -35,17 +37,18 @@ import java.lang.reflect.Method;
  * @author Shuyang Zhou
  * @see    AutoEscape
  */
-public class AutoEscapeBeanHandler implements InvocationHandler {
+public class AutoEscapeBeanHandler implements InvocationHandler, Serializable {
 
 	public AutoEscapeBeanHandler(Object bean) {
-		_bean = bean;
+		_bean = (Serializable)bean;
 	}
 
 	public Object getBean() {
 		return _bean;
 	}
 
-	public Object invoke(Object proxy, Method method, Object[] args)
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] arguments)
 		throws Throwable {
 
 		String methodName = method.getName();
@@ -65,7 +68,7 @@ public class AutoEscapeBeanHandler implements InvocationHandler {
 		Object result = null;
 
 		try {
-			result = method.invoke(_bean, args);
+			result = method.invoke(_bean, arguments);
 		}
 		catch (InvocationTargetException ite) {
 			throw ite.getTargetException();
@@ -78,6 +81,6 @@ public class AutoEscapeBeanHandler implements InvocationHandler {
 		return result;
 	}
 
-	private Object _bean;
+	private Serializable _bean;
 
 }

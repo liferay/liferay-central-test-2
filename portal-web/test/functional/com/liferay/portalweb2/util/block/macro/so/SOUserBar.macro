@@ -1,0 +1,9 @@
+<definition>
+	<command name="dashboardPG">
+		<execute macro="Page#openURL" />
+
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute action="SONavigation#assertTextEquals" locator-key1="PROFILE_NAME" value1="${userName}" />
+	</command>
+</definition>

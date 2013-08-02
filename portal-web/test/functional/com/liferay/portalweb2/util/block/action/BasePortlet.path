@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>BasePortlet</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">BasePortlet</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>BasePortlet</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>TITLE</td>
+	<td>//h1[@class='portlet-title']/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_ICON</td>
+	<td>//span[@title='Options']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MINIMIZE</td>
+	<td>//img[@title='Minimize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MAXIMIZE</td>
+	<td>//img[@title='Maximize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REMOVE</td>
+	<td>//img[@title='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--OPTIONS_MENULIST-->
+<tr>
+	<td>OPTIONS_MENULIST_LOOK_AND_FEEL</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Look and Feel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_CONFIGURATION</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Configuration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_EXPORT_IMPORT</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Export / Import')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -8,6 +8,14 @@
 	<propertycopy name="db-upgrade.tomcat.folder.dir" from="db-upgrade.${test.ant.script.version}.tomcat.folder.dir" silent="true" />
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-db2-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="db2" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -64,6 +72,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-mysql-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-db-mysql-common">
@@ -109,6 +125,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-oracle-10-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="oracle-10" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -165,6 +189,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-oracle-11-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="oracle-11" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -221,6 +253,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-postgresql-8.4-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="postgresql-8.4" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -277,6 +317,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-postgresql-9.0-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="postgresql-9.0" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -333,6 +381,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-sql-server-2005-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sql-server-2005" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -389,6 +445,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-sql-server-2008-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sql-server-2008" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">
@@ -445,6 +509,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-${test.ant.script.version}-tomcat-sybase-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sybase" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<ant antfile="build-dist.xml" target="build-dist-tomcat" />
 
 		<antcall target="prepare-vm-server">

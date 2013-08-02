@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portlet.dynamicdatamapping.action;
 import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -56,8 +57,9 @@ public class CopyStructureAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -65,11 +67,13 @@ public class CopyStructureAction extends PortletAction {
 
 			String redirect = getSaveAndContinueRedirect(
 				portletConfig, actionRequest, structure);
-
 			String closeRedirect = ParamUtil.getString(
 				actionRequest, "closeRedirect");
 
 			if (Validator.isNotNull(closeRedirect)) {
+				redirect = HttpUtil.setParameter(
+					redirect, "closeRedirect", closeRedirect);
+
 				LiferayPortletConfig liferayPortletConfig =
 					(LiferayPortletConfig)portletConfig;
 
@@ -101,8 +105,9 @@ public class CopyStructureAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -118,7 +123,7 @@ public class CopyStructureAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward(
+				return actionMapping.findForward(
 					"portlet.dynamic_data_mapping.error");
 			}
 			else {
@@ -126,7 +131,7 @@ public class CopyStructureAction extends PortletAction {
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(
 				renderRequest, "portlet.dynamic_data_mapping.copy_structure"));
 	}
@@ -188,8 +193,6 @@ public class CopyStructureAction extends PortletAction {
 			actionRequest, portletConfig.getPortletName(),
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(actionRequest.getWindowState());
-
 		portletURL.setParameter(
 			"struts_action", "/dynamic_data_mapping/copy_structure");
 		portletURL.setParameter(
@@ -200,6 +203,7 @@ public class CopyStructureAction extends PortletAction {
 		portletURL.setParameter(
 			"copyListTemplates",
 			ParamUtil.getString(actionRequest, "copyListTemplates"), false);
+		portletURL.setWindowState(actionRequest.getWindowState());
 
 		return portletURL.toString();
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,6 +69,7 @@ public class UserGroupFinderImpl
 	public static final String JOIN_BY_USER_GROUPS_USERS =
 		UserGroupFinder.class.getName() + ".joinByUserGroupsUsers";
 
+	@Override
 	public int countByKeywords(
 			long companyId, String keywords,
 			LinkedHashMap<String, Object> params)
@@ -90,6 +91,7 @@ public class UserGroupFinderImpl
 			companyId, names, descriptions, params, andOperator);
 	}
 
+	@Override
 	public int countByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params, boolean andOperator)
@@ -102,6 +104,7 @@ public class UserGroupFinderImpl
 			companyId, names, descriptions, params, andOperator);
 	}
 
+	@Override
 	public int countByC_N_D(
 			long companyId, String[] names, String[] descriptions,
 			LinkedHashMap<String, Object> params, boolean andOperator)
@@ -158,6 +161,7 @@ public class UserGroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<UserGroup> findByKeywords(
 			long companyId, String keywords,
 			LinkedHashMap<String, Object> params, int start, int end,
@@ -181,6 +185,7 @@ public class UserGroupFinderImpl
 			obc);
 	}
 
+	@Override
 	public UserGroup findByC_N(long companyId, String name)
 		throws NoSuchUserGroupException, SystemException {
 
@@ -226,6 +231,7 @@ public class UserGroupFinderImpl
 		throw new NoSuchUserGroupException(sb.toString());
 	}
 
+	@Override
 	public List<UserGroup> findByC_N_D(
 			long companyId, String name, String description,
 			LinkedHashMap<String, Object> params, boolean andOperator,
@@ -240,6 +246,7 @@ public class UserGroupFinderImpl
 			obc);
 	}
 
+	@Override
 	public List<UserGroup> findByC_N_D(
 			long companyId, String[] names, String[] descriptions,
 			LinkedHashMap<String, Object> params, boolean andOperator,

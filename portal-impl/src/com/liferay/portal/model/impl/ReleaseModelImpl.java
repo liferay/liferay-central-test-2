@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -301,13 +301,16 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	@Override
 	public Release toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Release)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Release)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Release toUnescapedModel() {
+		return (Release)this;
 	}
 
 	@Override
@@ -345,18 +348,15 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Release)) {
 			return false;
 		}
 
-		Release release = null;
-
-		try {
-			release = (Release)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Release release = (Release)obj;
 
 		long primaryKey = release.getPrimaryKey();
 
@@ -517,7 +517,7 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	}
 
 	private static ClassLoader _classLoader = Release.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Release.class
 		};
 	private long _releaseId;
@@ -531,5 +531,5 @@ public class ReleaseModelImpl extends BaseModelImpl<Release>
 	private int _state;
 	private String _testString;
 	private long _columnBitmask;
-	private Release _escapedModelProxy;
+	private Release _escapedModel;
 }

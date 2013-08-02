@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.wiki.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -229,6 +230,10 @@ public class WikiPageResourceWrapper implements WikiPageResource,
 		return new WikiPageResourceWrapper(_wikiPageResource.toEscapedModel());
 	}
 
+	public com.liferay.portlet.wiki.model.WikiPageResource toUnescapedModel() {
+		return new WikiPageResourceWrapper(_wikiPageResource.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _wikiPageResource.toString();
@@ -241,6 +246,26 @@ public class WikiPageResourceWrapper implements WikiPageResource,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_wikiPageResource.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WikiPageResourceWrapper)) {
+			return false;
+		}
+
+		WikiPageResourceWrapper wikiPageResourceWrapper = (WikiPageResourceWrapper)obj;
+
+		if (Validator.equals(_wikiPageResource,
+					wikiPageResourceWrapper._wikiPageResource)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

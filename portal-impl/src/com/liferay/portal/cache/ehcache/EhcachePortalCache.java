@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,9 +43,11 @@ public class EhcachePortalCache implements PortalCache {
 		_ehcache = ehcache;
 	}
 
+	@Override
 	public void destroy() {
 	}
 
+	@Override
 	public Collection<Object> get(Collection<Serializable> keys) {
 		List<Object> values = new ArrayList<Object>(keys.size());
 
@@ -56,6 +58,7 @@ public class EhcachePortalCache implements PortalCache {
 		return values;
 	}
 
+	@Override
 	public Object get(Serializable key) {
 		Element element = _ehcache.get(key);
 
@@ -67,16 +70,19 @@ public class EhcachePortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public String getName() {
 		return _ehcache.getName();
 	}
 
+	@Override
 	public void put(Serializable key, Object value) {
 		Element element = new Element(key, value);
 
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void put(Serializable key, Object value, int timeToLive) {
 		Element element = new Element(key, value);
 
@@ -85,12 +91,14 @@ public class EhcachePortalCache implements PortalCache {
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value) {
 		Element element = new Element(key, value);
 
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value, int timeToLive) {
 		Element element = new Element(key, value);
 
@@ -99,10 +107,12 @@ public class EhcachePortalCache implements PortalCache {
 		_ehcache.put(element);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
@@ -125,10 +135,12 @@ public class EhcachePortalCache implements PortalCache {
 			cacheEventListener, notificationScope);
 	}
 
+	@Override
 	public void remove(Serializable key) {
 		_ehcache.remove(key);
 	}
 
+	@Override
 	public void removeAll() {
 		_ehcache.removeAll();
 	}
@@ -137,6 +149,7 @@ public class EhcachePortalCache implements PortalCache {
 		_ehcache = ehcache;
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		CacheEventListener cacheEventListener = _cacheEventListeners.get(
 			cacheListener);
@@ -151,6 +164,7 @@ public class EhcachePortalCache implements PortalCache {
 		_cacheEventListeners.remove(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		RegisteredEventListeners registeredEventListeners =
 			_ehcache.getCacheEventNotificationService();

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -443,6 +445,10 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 		return new WebsiteWrapper(_website.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Website toUnescapedModel() {
+		return new WebsiteWrapper(_website.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _website.toString();
@@ -461,6 +467,25 @@ public class WebsiteWrapper implements Website, ModelWrapper<Website> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _website.getType();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WebsiteWrapper)) {
+			return false;
+		}
+
+		WebsiteWrapper websiteWrapper = (WebsiteWrapper)obj;
+
+		if (Validator.equals(_website, websiteWrapper._website)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

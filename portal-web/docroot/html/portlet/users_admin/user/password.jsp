@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,7 +23,7 @@ PasswordPolicy passwordPolicy = (PasswordPolicy)request.getAttribute("user.passw
 
 boolean passwordResetDisabled = false;
 
-if (((selUser == null) || (selUser.getLastLoginDate() == null)) && passwordPolicy.isChangeable() && passwordPolicy.isChangeRequired()) {
+if (((selUser == null) || (selUser.getLastLoginDate() == null)) && ((passwordPolicy == null) || (passwordPolicy.isChangeable() && passwordPolicy.isChangeRequired()))) {
 	passwordResetDisabled = true;
 }
 
@@ -62,7 +62,16 @@ else {
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
-		<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
+
+		<%
+		int passwordPolicyMinLength = _PASSWORDS_DEFAULT_POLICY_MIN_LENGTH;
+
+		if (passwordPolicy != null) {
+			passwordPolicyMinLength = passwordPolicy.getMinLength();
+		}
+		%>
+
+		<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicyMinLength), false) %>
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_NOT_CHANGEABLE %>">
@@ -78,7 +87,16 @@ else {
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
-		<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
+
+		<%
+		long passwordPolicyMinAge = _PASSWORDS_DEFAULT_POLICY_MIN_AGE;
+
+		if (passwordPolicy != null) {
+			passwordPolicyMinAge = passwordPolicy.getMinAge();
+		}
+		%>
+
+		<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicyMinAge * 1000), false) %>
 	</c:if>
 
 	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
@@ -168,3 +186,9 @@ else {
 		}
 	</aui:script>
 </c:if>
+
+<%!
+private static final int _PASSWORDS_DEFAULT_POLICY_MIN_AGE = 0;
+
+private static final int _PASSWORDS_DEFAULT_POLICY_MIN_LENGTH = 6;
+%>

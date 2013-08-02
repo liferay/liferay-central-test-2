@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,8 +26,10 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -128,6 +130,8 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 			0, portletId, columnId, -1, false);
 
 		updateLayout(layout);
+
+		addResourcePermissions(layout, portletId);
 
 		return portletId;
 	}
@@ -308,6 +312,16 @@ public class AddDefaultLayoutSetPrototypesAction extends SimpleAction {
 		addPortletId(
 			layout, PortletKeys.TAGS_CATEGORIES_NAVIGATION, "column-2");
 		addPortletId(layout, PortletKeys.TAGS_CLOUD, "column-2");
+	}
+
+	protected void addResourcePermissions(Layout layout, String portletId)
+		throws Exception {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			layout.getCompanyId(), portletId);
+
+		PortalUtil.addPortletDefaultResource(
+			layout.getCompanyId(), layout, portlet);
 	}
 
 	protected void doRun(long companyId) throws Exception {

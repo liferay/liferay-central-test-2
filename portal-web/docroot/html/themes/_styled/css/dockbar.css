@@ -37,6 +37,10 @@
 	visibility: hidden;
 }
 
+.ie.rtl .dockbar .menu-button span {
+	background-position-x: -25px;
+}
+
 .ie7 .dockbar {
 	zoom: 1;
 }
@@ -48,7 +52,7 @@
 	top: 0;
 }
 
-.dockbar a {
+.dockbar a, span.user-portrait {
 	color: #2C2F34;
 	font-weight: bold;
 	text-shadow: 1px 1px #FFF;
@@ -107,8 +111,18 @@ html > .lfr-dockbar-pinned {
 	background-image: url(../images/dockbar/unpin.png);
 }
 
-.dockbar .user-portrait {
+.dockbar a.user-portrait {
 	text-decoration: none;
+
+	span {
+		text-decoration: underline;
+	}
+}
+
+.dockbar .user-portrait img {
+	text-decoration: none;
+	vertical-align: middle;
+	width: 25px;
 }
 
 .dockbar .user-avatar img {
@@ -138,9 +152,9 @@ html > .lfr-dockbar-pinned {
 	margin: 1em 0 0 1em;
 	padding: 0;
 
-	.aproximate-date {
+	.approximate-date {
 		color: #999;
-    	font-weight: bold;
+		font-weight: bold;
 	}
 
 	.current-version {
@@ -171,8 +185,8 @@ html > .lfr-dockbar-pinned {
 
 	.real-date {
 		color: #999;
-    	display: block;
-    	text-align: right;
+		display: block;
+		text-align: right;
 	}
 
 	.taglib-workflow-status .workflow-status {
@@ -218,7 +232,7 @@ html > .lfr-dockbar-pinned {
 	visibility: hidden;
 }
 
-.dockbar .aui-toolbar {
+.dockbar .admin-toolbar {
 	float: left;
 }
 
@@ -339,7 +353,12 @@ html > .lfr-dockbar-pinned {
 }
 
 .ie6 .my-sites-menu a {
-	height: 1%;
+	zoom: 1;
+}
+
+.ie6 .aui-menu-scroll {
+	height: 300px;
+	overflow-y: auto;
 }
 
 .dockbar .toggle-controls a {
@@ -483,4 +502,46 @@ html > .lfr-dockbar-pinned {
 .page-customization-bar .reset-prototype {
 	display: inline;
 	padding-left: 1em;
+}
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.dockbar {
+		.admin-toolbar {
+			float: right;
+		}
+
+		.user-toolbar {
+			float: left;
+		}
+
+		.menu-button {
+			background-position: 7%;
+			padding-left: 0;
+			padding-right: 5px;
+			
+			span {
+				background-position: right;
+				padding-right: 20px;
+			}
+		}
+	}
+
+	.my-sites-menu {
+		.site-name {
+			float: right;
+		}
+
+		.site-type {
+			float: left;
+			margin-right: 10px;
+		}
+
+		.control-panel a {
+			background-position: right;
+			margin-right: 3px;
+			padding-right: 25px;
+		}
+	}
 }

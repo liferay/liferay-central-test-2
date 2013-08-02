@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,19 +26,18 @@ import com.liferay.portal.util.PropsValues;
  */
 public class BatchSessionImpl implements BatchSession {
 
+	@Override
 	public void delete(Session session, BaseModel<?> model)
 		throws ORMException {
 
-		if (model.isCachedModel() || isEnabled()) {
-			Object staleObject = session.get(
+		if (!session.contains(model)) {
+			model = (BaseModel<?>)session.get(
 				model.getClass(), model.getPrimaryKeyObj());
-
-			if (staleObject != null) {
-				session.evict(staleObject);
-			}
 		}
 
-		session.delete(model);
+		if (model != null) {
+			session.delete(model);
+		}
 
 		if (!isEnabled()) {
 			session.flush();
@@ -55,14 +54,17 @@ public class BatchSessionImpl implements BatchSession {
 		_counter.set(_counter.get() + 1);
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return _enabled.get();
 	}
 
+	@Override
 	public void setEnabled(boolean enabled) {
 		_enabled.set(enabled);
 	}
 
+	@Override
 	public void update(Session session, BaseModel<?> model, boolean merge)
 		throws ORMException {
 
@@ -72,22 +74,11 @@ public class BatchSessionImpl implements BatchSession {
 		else {
 			if (model.isNew()) {
 				session.save(model);
+
+				model.setNew(false);
 			}
 			else {
-				boolean contains = false;
-
-				if (isEnabled()) {
-					Object obj = session.get(
-						model.getClass(), model.getPrimaryKeyObj());
-
-					if ((obj != null) && obj.equals(model)) {
-						contains = true;
-					}
-				}
-
-				if (!contains && !session.contains(model)) {
-					session.saveOrUpdate(model);
-				}
+				session.merge(model);
 			}
 		}
 

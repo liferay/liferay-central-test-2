@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,17 +25,21 @@ import java.io.InputStream;
  */
 public class DatabaseHook extends BaseHook {
 
+	@Override
 	public void deleteImage(Image image) {
 	}
 
+	@Override
 	public byte[] getImageAsBytes(Image image) {
 		return (byte[])Base64.stringToObject(image.getText());
 	}
 
+	@Override
 	public InputStream getImageAsStream(Image image) {
 		return new UnsyncByteArrayInputStream(getImageAsBytes(image));
 	}
 
+	@Override
 	public void updateImage(Image image, String type, byte[] bytes) {
 		image.setTextObj(bytes);
 	}

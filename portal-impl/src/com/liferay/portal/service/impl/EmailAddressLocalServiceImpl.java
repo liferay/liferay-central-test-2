@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,7 @@ import java.util.List;
 public class EmailAddressLocalServiceImpl
 	extends EmailAddressLocalServiceBaseImpl {
 
+	@Override
 	public EmailAddress addEmailAddress(
 			long userId, String className, long classPK, String address,
 			int typeId, boolean primary)
@@ -69,6 +70,7 @@ public class EmailAddressLocalServiceImpl
 		return emailAddress;
 	}
 
+	@Override
 	public void deleteEmailAddresses(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -83,10 +85,12 @@ public class EmailAddressLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<EmailAddress> getEmailAddresses() throws SystemException {
 		return emailAddressPersistence.findAll();
 	}
 
+	@Override
 	public List<EmailAddress> getEmailAddresses(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -97,6 +101,7 @@ public class EmailAddressLocalServiceImpl
 			companyId, classNameId, classPK);
 	}
 
+	@Override
 	public EmailAddress updateEmailAddress(
 			long emailAddressId, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {

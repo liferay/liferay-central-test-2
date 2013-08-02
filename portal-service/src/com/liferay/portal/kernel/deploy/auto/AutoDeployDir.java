@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,9 +18,12 @@ import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +38,41 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class AutoDeployDir {
 
 	public static final String DEFAULT_NAME = "defaultAutoDeployDir";
+
+	public static void deploy(
+			AutoDeploymentContext autoDeploymentContext,
+			List<AutoDeployListener> autoDeployListeners)
+		throws AutoDeployException {
+
+		List<String> duplicateApplicableAutoDeployListenerClassNames =
+			new ArrayList<String>();
+
+		for (AutoDeployListener autoDeployListener : autoDeployListeners) {
+			if (autoDeployListener.deploy(autoDeploymentContext) !=
+					AutoDeployer.CODE_NOT_APPLICABLE) {
+
+				Class<?> autoDeployListenerClass =
+					autoDeployListener.getClass();
+
+				duplicateApplicableAutoDeployListenerClassNames.add(
+					autoDeployListenerClass.getName());
+			}
+		}
+
+		if (duplicateApplicableAutoDeployListenerClassNames.size() > 1) {
+			StringBundler sb = new StringBundler();
+
+			sb.append("The auto deploy listeners ");
+			sb.append(
+				StringUtil.merge(
+					duplicateApplicableAutoDeployListenerClassNames, ", "));
+			sb.append(" all deployed ");
+			sb.append(autoDeploymentContext.getFile());
+			sb.append(", but only one should have.");
+
+			throw new AutoDeployException(sb.toString());
+		}
+	}
 
 	public AutoDeployDir(
 		String name, File deployDir, File destDir, long interval,
@@ -189,9 +227,7 @@ public class AutoDeployDir {
 			AutoDeploymentContext autoDeploymentContext =
 				buildAutoDeploymentContext(file);
 
-			for (AutoDeployListener autoDeployListener : _autoDeployListeners) {
-				autoDeployListener.deploy(autoDeploymentContext);
-			}
+			deploy(autoDeploymentContext, _autoDeployListeners);
 
 			if (file.delete()) {
 				_inProcessFiles.remove(fileName);

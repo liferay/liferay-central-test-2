@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,30 +25,35 @@ import com.liferay.portal.service.base.VirtualHostLocalServiceBaseImpl;
 public class VirtualHostLocalServiceImpl
 	extends VirtualHostLocalServiceBaseImpl {
 
+	@Override
 	public VirtualHost fetchVirtualHost(long companyId, long layoutSetId)
 		throws SystemException {
 
 		return virtualHostPersistence.fetchByC_L(companyId, layoutSetId);
 	}
 
+	@Override
 	public VirtualHost fetchVirtualHost(String hostname)
 		throws SystemException {
 
 		return virtualHostPersistence.fetchByHostname(hostname);
 	}
 
+	@Override
 	public VirtualHost getVirtualHost(long companyId, long layoutSetId)
 		throws PortalException, SystemException {
 
 		return virtualHostPersistence.findByC_L(companyId, layoutSetId);
 	}
 
+	@Override
 	public VirtualHost getVirtualHost(String hostname)
 		throws PortalException, SystemException {
 
 		return virtualHostPersistence.findByHostname(hostname);
 	}
 
+	@Override
 	public VirtualHost updateVirtualHost(
 			long companyId, long layoutSetId, String hostname)
 		throws SystemException {

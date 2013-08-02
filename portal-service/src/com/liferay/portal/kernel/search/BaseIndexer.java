@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,6 +65,8 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
+import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -85,6 +87,7 @@ public abstract class BaseIndexer implements Indexer {
 	public static final int INDEX_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.INDEX_FILTER_SEARCH_LIMIT));
 
+	@Override
 	public void delete(long companyId, String uid) throws SearchException {
 		try {
 			SearchEngineUtil.deleteDocument(
@@ -98,6 +101,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public void delete(Object obj) throws SearchException {
 		try {
 			doDelete(obj);
@@ -110,6 +114,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public Document getDocument(Object obj) throws SearchException {
 		try {
 			Document document = doGetDocument(obj);
@@ -144,6 +149,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public BooleanQuery getFacetQuery(
 			String className, SearchContext searchContext)
 		throws Exception {
@@ -166,6 +172,7 @@ public abstract class BaseIndexer implements Indexer {
 		return facetQuery;
 	}
 
+	@Override
 	public BooleanQuery getFullQuery(SearchContext searchContext)
 		throws SearchException {
 
@@ -198,10 +205,12 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public IndexerPostProcessor[] getIndexerPostProcessors() {
 		return _indexerPostProcessors;
 	}
 
+	@Override
 	public String getSearchEngineId() {
 		if (_searchEngineId != null) {
 			return _searchEngineId;
@@ -235,6 +244,7 @@ public abstract class BaseIndexer implements Indexer {
 		return _searchEngineId;
 	}
 
+	@Override
 	public String getSortField(String orderByCol) {
 		String sortField = doGetSortField(orderByCol);
 
@@ -245,6 +255,7 @@ public abstract class BaseIndexer implements Indexer {
 		return sortField;
 	}
 
+	@Override
 	public Summary getSummary(
 			Document document, Locale locale, String snippet,
 			PortletURL portletURL)
@@ -271,6 +282,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public boolean hasPermission(
 			PermissionChecker permissionChecker, long entryClassPK,
 			String actionId)
@@ -279,6 +291,7 @@ public abstract class BaseIndexer implements Indexer {
 		return true;
 	}
 
+	@Override
 	public boolean isFilterSearch() {
 		return _FILTER_SEARCH;
 	}
@@ -287,24 +300,37 @@ public abstract class BaseIndexer implements Indexer {
 		return _INDEXER_ENABLED;
 	}
 
+	@Override
 	public boolean isPermissionAware() {
 		return _PERMISSION_AWARE;
 	}
 
+	@Override
 	public boolean isStagingAware() {
 		return _stagingAware;
 	}
 
+	@Override
 	public void postProcessContextQuery(
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 	}
 
+	@Override
 	public void postProcessSearchQuery(
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
+
+		String keywords = searchContext.getKeywords();
+
+		if (Validator.isNull(keywords)) {
+			addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, false);
+			addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
+			addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
+		}
 	}
 
+	@Override
 	public void registerIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor) {
 
@@ -317,6 +343,7 @@ public abstract class BaseIndexer implements Indexer {
 			new IndexerPostProcessor[indexerPostProcessorsList.size()]);
 	}
 
+	@Override
 	public void reindex(Object obj) throws SearchException {
 		try {
 			if (SearchEngineUtil.isIndexReadOnly() || !isIndexerEnabled()) {
@@ -333,6 +360,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public void reindex(String className, long classPK) throws SearchException {
 		try {
 			if (SearchEngineUtil.isIndexReadOnly() || !isIndexerEnabled()) {
@@ -354,6 +382,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public void reindex(String[] ids) throws SearchException {
 		try {
 			if (SearchEngineUtil.isIndexReadOnly() || !isIndexerEnabled()) {
@@ -370,6 +399,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
 		try {
 			searchContext.setSearchEngineId(getSearchEngineId());
@@ -408,6 +438,7 @@ public abstract class BaseIndexer implements Indexer {
 		}
 	}
 
+	@Override
 	public void unregisterIndexerPostProcessor(
 		IndexerPostProcessor indexerPostProcessor) {
 
@@ -545,6 +576,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		multiValueFacet.setFieldName(Field.ASSET_CATEGORY_IDS);
 		multiValueFacet.setStatic(true);
+		multiValueFacet.setValues(searchContext.getAssetCategoryIds());
 
 		searchContext.addFacet(multiValueFacet);
 	}
@@ -606,6 +638,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		multiValueFacet.setFieldName(Field.ASSET_TAG_NAMES);
 		multiValueFacet.setStatic(true);
+		multiValueFacet.setValues(searchContext.getAssetTagNames());
 
 		searchContext.addFacet(multiValueFacet);
 	}
@@ -717,7 +750,29 @@ public abstract class BaseIndexer implements Indexer {
 			return;
 		}
 
-		String value = String.valueOf(searchContext.getAttribute(field));
+		String value = null;
+
+		Serializable serializable = searchContext.getAttribute(field);
+
+		if (serializable != null) {
+			Class<?> clazz = serializable.getClass();
+
+			if (clazz.isArray()) {
+				value = StringUtil.merge((Object[])serializable);
+			}
+			else {
+				value = GetterUtil.getString(serializable);
+			}
+		}
+		else {
+			value = GetterUtil.getString(serializable);
+		}
+
+		if (Validator.isNotNull(value) &&
+			(searchContext.getFacet(field) != null)) {
+
+			return;
+		}
 
 		if (Validator.isNull(value)) {
 			value = searchContext.getKeywords();
@@ -898,8 +953,8 @@ public abstract class BaseIndexer implements Indexer {
 					entryClassName);
 
 				if ((indexer.isFilterSearch() &&
-					indexer.hasPermission(
-						permissionChecker, entryClassPK, ActionKeys.VIEW)) ||
+					 indexer.hasPermission(
+						 permissionChecker, entryClassPK, ActionKeys.VIEW)) ||
 					!indexer.isFilterSearch() ||
 					!indexer.isPermissionAware()) {
 

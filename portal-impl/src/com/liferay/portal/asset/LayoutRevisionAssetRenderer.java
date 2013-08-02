@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,14 +55,17 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getClassPK() {
 		return _layoutRevision.getLayoutRevisionId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _layoutRevision.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		StringBundler sb = new StringBundler(16);
 
@@ -86,6 +89,7 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		return sb.toString();
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _layoutRevision.getHTMLTitle(locale);
 	}
@@ -119,14 +123,17 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getUserId() {
 		return _layoutRevision.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _layoutRevision.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return null;
 	}
@@ -136,6 +143,7 @@ public class LayoutRevisionAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

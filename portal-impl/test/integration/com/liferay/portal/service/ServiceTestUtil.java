@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,19 +16,24 @@ package com.liferay.portal.service;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.freemarker.FreeMarkerEngineUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.velocity.VelocityEngineUtil;
 import com.liferay.portal.kernel.workflow.WorkflowHandlerRegistryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
@@ -37,8 +42,11 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.model.LayoutSetPrototype;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.repository.liferayrepository.LiferayRepository;
+import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -47,6 +55,8 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
@@ -62,6 +72,7 @@ import com.liferay.portlet.journal.workflow.JournalArticleWorkflowHandler;
 import com.liferay.portlet.messageboards.util.MBIndexer;
 import com.liferay.portlet.messageboards.workflow.MBDiscussionWorkflowHandler;
 import com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler;
+import com.liferay.portlet.usersadmin.util.OrganizationIndexer;
 import com.liferay.portlet.usersadmin.util.UserIndexer;
 import com.liferay.util.PwdGenerator;
 
@@ -83,6 +94,10 @@ import java.util.Set;
 public class ServiceTestUtil {
 
 	public static final int THREAD_COUNT = 25;
+
+	public static Group addGroup() throws Exception {
+		return addGroup(randomString());
+	}
 
 	public static Group addGroup(String name) throws Exception {
 		Group group = GroupLocalServiceUtil.fetchGroup(
@@ -112,6 +127,14 @@ public class ServiceTestUtil {
 			long groupId, String name, boolean privateLayout)
 		throws Exception {
 
+		return addLayout(groupId, name, privateLayout, null, false);
+	}
+
+	public static Layout addLayout(
+			long groupId, String name, boolean privateLayout,
+			LayoutPrototype layoutPrototype, boolean linkEnabled)
+		throws Exception {
+
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
 
@@ -128,11 +151,19 @@ public class ServiceTestUtil {
 
 		String description = "This is a test page.";
 
+		ServiceContext serviceContext = getServiceContext();
+
+		if (layoutPrototype != null) {
+			serviceContext.setAttribute(
+				"layoutPrototypeLinkEnabled", linkEnabled);
+			serviceContext.setAttribute(
+				"layoutPrototypeUuid", layoutPrototype.getUuid());
+		}
+
 		return LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), groupId, privateLayout,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, null, description,
-			LayoutConstants.TYPE_PORTLET, false, friendlyURL,
-			getServiceContext());
+			LayoutConstants.TYPE_PORTLET, false, friendlyURL, serviceContext);
 	}
 
 	public static LayoutPrototype addLayoutPrototype(String name)
@@ -157,6 +188,55 @@ public class ServiceTestUtil {
 		return LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
 			nameMap, null, true, true, getServiceContext());
+	}
+
+	public static void addResourcePermission(
+			Role role, String resourceName, int scope, String primKey,
+			String actionId)
+		throws Exception {
+
+		ResourcePermissionLocalServiceUtil.addResourcePermission(
+			role.getCompanyId(), resourceName, scope, primKey, role.getRoleId(),
+			actionId);
+	}
+
+	public static void addResourcePermission(
+			String roleName, String resourceName, int scope, String primKey,
+			String actionId)
+		throws Exception {
+
+		Role role = RoleLocalServiceUtil.getRole(
+			TestPropsValues.getCompanyId(), roleName);
+
+		addResourcePermission(role, resourceName, scope, primKey, actionId);
+	}
+
+	public static Role addRole(String roleName, int roleType) throws Exception {
+		Role role = null;
+
+		try {
+			role = RoleLocalServiceUtil.getRole(
+				TestPropsValues.getCompanyId(), roleName);
+		}
+		catch (NoSuchRoleException nsre) {
+			role = RoleLocalServiceUtil.addRole(
+				TestPropsValues.getUserId(), null, 0, roleName, null, null,
+				roleType, null);
+		}
+
+		return role;
+	}
+
+	public static Role addRole(
+			String roleName, int roleType, String resourceName, int scope,
+			String primKey, String actionId)
+		throws Exception {
+
+		Role role = addRole(roleName, roleType);
+
+		addResourcePermission(role, resourceName, scope, primKey, actionId);
+
+		return role;
 	}
 
 	public static User addUser(
@@ -201,26 +281,57 @@ public class ServiceTestUtil {
 			userGroupIds, sendMail, getServiceContext());
 	}
 
+	public static User addUser(String screenName, long groupId)
+		throws Exception {
+
+		if (Validator.isNull(screenName)) {
+			return addUser(null, true, new long[] {groupId});
+		}
+		else {
+			return addUser(screenName, false, new long[] {groupId});
+		}
+	}
+
 	public static void destroyServices() {
-		FileUtil.delete(PropsValues.LIFERAY_HOME + "/data");
+		_deleteDLDirectories();
 	}
 
 	public static SearchContext getSearchContext() throws Exception {
+		return getSearchContext(TestPropsValues.getGroupId());
+	}
+
+	public static SearchContext getSearchContext(long groupId)
+		throws Exception {
+
 		SearchContext searchContext = new SearchContext();
 
 		searchContext.setCompanyId(TestPropsValues.getCompanyId());
-		searchContext.setGroupIds(new long[] {TestPropsValues.getGroupId()});
+		searchContext.setGroupIds(new long[] {groupId});
 		searchContext.setUserId(TestPropsValues.getUserId());
 
 		return searchContext;
 	}
 
 	public static ServiceContext getServiceContext() throws Exception {
+		return getServiceContext(TestPropsValues.getGroupId());
+	}
+
+	public static ServiceContext getServiceContext(long groupId)
+		throws Exception {
+
+		return getServiceContext(groupId, TestPropsValues.getUserId());
+	}
+
+	public static ServiceContext getServiceContext(long groupId, long userId)
+		throws Exception {
+
 		ServiceContext serviceContext = new ServiceContext();
 
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
-		serviceContext.setScopeGroupId(TestPropsValues.getGroupId());
-		serviceContext.setUserId(TestPropsValues.getUserId());
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
 
 		return serviceContext;
 	}
@@ -235,15 +346,7 @@ public class ServiceTestUtil {
 		try {
 			PortalInstances.addCompanyId(TestPropsValues.getCompanyId());
 
-			PrincipalThreadLocal.setName(TestPropsValues.getUserId());
-
-			User user = UserLocalServiceUtil.getUserById(
-				TestPropsValues.getUserId());
-
-			PermissionChecker permissionChecker =
-				PermissionCheckerFactoryUtil.create(user);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			setUser(TestPropsValues.getUser());
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -253,9 +356,7 @@ public class ServiceTestUtil {
 	public static void initServices() {
 		InitUtil.initWithSpring();
 
-		FileUtil.delete(PropsValues.LIFERAY_HOME + "/data");
-
-		FileUtil.mkdirs(PropsValues.LUCENE_DIR);
+		_deleteDLDirectories();
 
 		// JCR
 
@@ -266,13 +367,44 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
+		// Lucene
+
+		try {
+			FileUtil.mkdirs(
+				PropsValues.LUCENE_DIR + TestPropsValues.getCompanyId());
+
+			LuceneHelperUtil.startup(TestPropsValues.getCompanyId());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// FreeMarker
+
+		try {
+			FreeMarkerEngineUtil.init();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		// Velocity
+
+		try {
+			VelocityEngineUtil.init();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		// Indexers
 
 		IndexerRegistryUtil.register(new BlogsIndexer());
-		IndexerRegistryUtil.register(new UserIndexer());
 		IndexerRegistryUtil.register(new BookmarksIndexer());
 		IndexerRegistryUtil.register(new DLIndexer());
 		IndexerRegistryUtil.register(new MBIndexer());
+		IndexerRegistryUtil.register(new OrganizationIndexer());
+		IndexerRegistryUtil.register(new UserIndexer());
 
 		// Upgrade
 
@@ -300,7 +432,7 @@ public class ServiceTestUtil {
 		// Scheduler
 
 		try {
-			SchedulerEngineUtil.start();
+			SchedulerEngineHelperUtil.start();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -314,6 +446,10 @@ public class ServiceTestUtil {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		// Class names
+
+		_checkClassNames();
 
 		// Resource actions
 
@@ -390,6 +526,19 @@ public class ServiceTestUtil {
 		return PwdGenerator.getPassword();
 	}
 
+	public static void setUser(User user) throws Exception {
+		PrincipalThreadLocal.setName(user.getUserId());
+
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user);
+
+		PermissionThreadLocal.setPermissionChecker(permissionChecker);
+	}
+
+	private static void _checkClassNames() {
+		PortalUtil.getClassNameId(LiferayRepository.class.getName());
+	}
+
 	private static void _checkResourceActions() throws Exception {
 		for (int i = 0; i < 200; i++) {
 			String portletId = String.valueOf(i);
@@ -415,6 +564,21 @@ public class ServiceTestUtil {
 				ResourceActionLocalServiceUtil.checkResourceActions(
 					modelName, modelActions);
 			}
+		}
+	}
+
+	private static void _deleteDLDirectories() {
+		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
+
+		FileUtil.deltree(
+			PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT));
+
+		try {
+			FileUtil.deltree(
+				PropsValues.LUCENE_DIR + TestPropsValues.getCompanyId());
+		}
+		catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 

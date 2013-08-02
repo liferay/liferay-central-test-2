@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -41,15 +41,15 @@ import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.net.URLDecoder;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import jodd.io.findfile.ClassFinder;
 import jodd.io.findfile.FindFile;
 import jodd.io.findfile.RegExpFindFile;
-
-import jodd.util.ClassLoaderUtil;
 
 import org.apache.commons.lang.time.StopWatch;
 
@@ -126,25 +126,29 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 				libDir = new File(classPathFile.getParent(), "lib");
 			}
 
-			classPathFiles = new File[2];
+			List<File> classPaths = new ArrayList<File>();
 
-			classPathFiles[0] = classPathFile;
+			classPaths.add(classPathFile);
 
 			FindFile findFile = new RegExpFindFile(
 				".*-(hook|portlet|web)-service.*\\.jar");
 
 			findFile.searchPath(libDir);
 
-			classPathFiles[1] = findFile.nextFile();
+			File file = null;
 
-			if (classPathFiles[1] == null) {
-				File classesDir = new File(libDir.getParent(), "classes");
-
-				classPathFiles[1] = classesDir;
+			while ((file = findFile.nextFile()) != null) {
+				classPaths.add(file);
 			}
+
+			File classesDir = new File(libDir.getParent(), "classes");
+
+			classPaths.add(classesDir);
+
+			classPathFiles = classPaths.toArray(new File[classPaths.size()]);
 		}
 		else {
-			classLoader = PACLClassLoaderUtil.getContextClassLoader();
+			classLoader = ClassLoaderUtil.getContextClassLoader();
 
 			File portalImplJarFile = new File(
 				PortalUtil.getPortalLibDir(), "portal-impl.jar");
@@ -158,7 +162,7 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 				classPathFiles[1] = portalServiceJarFile;
 			}
 			else {
-				classPathFiles = ClassLoaderUtil.getDefaultClasspath(
+				classPathFiles = jodd.util.ClassLoaderUtil.getDefaultClasspath(
 					classLoader);
 			}
 		}
@@ -331,6 +335,12 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 				continue;
 			}
 
+			if ((_excludedMethodNames != null) &&
+				_excludedMethodNames.contains(method.getName())) {
+
+				continue;
+			}
+
 			boolean registerMethod = false;
 
 			JSONWebService methodAnnotation = method.getAnnotation(
@@ -402,6 +412,9 @@ public class JSONWebServiceConfigurator extends ClassFinder {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JSONWebServiceConfigurator.class);
+
+	private static Set<String> _excludedMethodNames = SetUtil.fromArray(
+		new String[] {"getBeanIdentifier", "setBeanIdentifier"});
 
 	private ClassLoader _classLoader;
 	private Set<String> _invalidHttpMethods = SetUtil.fromArray(

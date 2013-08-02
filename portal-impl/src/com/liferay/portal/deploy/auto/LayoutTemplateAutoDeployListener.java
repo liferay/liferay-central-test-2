@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployer;
 import com.liferay.portal.kernel.deploy.auto.BaseAutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
@@ -32,7 +33,8 @@ public class LayoutTemplateAutoDeployListener extends BaseAutoDeployListener {
 		_autoDeployer = new LayoutTemplateAutoDeployer();
 	}
 
-	public void deploy(AutoDeploymentContext autoDeploymentContext)
+	@Override
+	public int deploy(AutoDeploymentContext autoDeploymentContext)
 		throws AutoDeployException {
 
 		File file = autoDeploymentContext.getFile();
@@ -42,7 +44,7 @@ public class LayoutTemplateAutoDeployListener extends BaseAutoDeployListener {
 		}
 
 		if (!isMatchingFile(file, "WEB-INF/liferay-layout-templates.xml")) {
-			return;
+			return AutoDeployer.CODE_NOT_APPLICABLE;
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -57,6 +59,8 @@ public class LayoutTemplateAutoDeployListener extends BaseAutoDeployListener {
 					" copied successfully. Deployment will start in a few " +
 						"seconds.");
 		}
+
+		return code;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

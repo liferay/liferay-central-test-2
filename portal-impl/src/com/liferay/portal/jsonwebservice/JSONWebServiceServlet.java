@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,9 +21,8 @@ import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.StreamUtil;
+import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -37,10 +36,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 
-import java.net.URL;
+import java.util.Locale;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -76,6 +73,10 @@ public class JSONWebServiceServlet extends JSONServlet {
 		String path = GetterUtil.getString(request.getPathInfo());
 
 		if (!path.equals(StringPool.SLASH) && !path.equals(StringPool.BLANK)) {
+			Locale locale = PortalUtil.getLocale(request, response, true);
+
+			LocaleThreadLocal.setThemeDisplayLocale(locale);
+
 			super.service(request, response);
 
 			return;
@@ -113,50 +114,29 @@ public class JSONWebServiceServlet extends JSONServlet {
 
 		ServletContext servletContext = session.getServletContext();
 
-		if (servletContext.getContext(PropsValues.PORTAL_CTX) != null) {
+		String contextPath = PropsValues.PORTAL_CTX;
+
+		if (servletContext.getContext(contextPath) != null) {
+			if (!contextPath.equals(StringPool.SLASH) &&
+				apiPath.startsWith(contextPath)) {
+
+				apiPath = apiPath.substring(contextPath.length());
+			}
+
 			RequestDispatcher requestDispatcher = request.getRequestDispatcher(
 				apiPath);
 
 			requestDispatcher.forward(request, response);
 		}
 		else {
-			String requestURI = request.getRequestURI();
-			String requestURL = String.valueOf(request.getRequestURL());
-
-			String serverURL = requestURL.substring(
-				0, requestURL.length() - requestURI.length());
-
-			String queryString = request.getQueryString();
-
-			if (Validator.isNull(queryString)) {
-				queryString = StringPool.BLANK;
-			}
-			else {
-				queryString += StringPool.AMPERSAND;
-			}
-
 			String servletContextPath = ContextPathUtil.getContextPath(
 				servletContext);
 
-			queryString +=
-				"contextPath=" + HttpUtil.encodeURL(servletContextPath);
+			String redirectPath =
+				"/api/jsonws?contextPath=" +
+					HttpUtil.encodeURL(servletContextPath);
 
-			apiPath = serverURL + apiPath + StringPool.QUESTION + queryString;
-
-			URL url = new URL(apiPath);
-
-			InputStream inputStream = null;
-
-			try {
-				inputStream = url.openStream();
-
-				OutputStream outputStream = response.getOutputStream();
-
-				StreamUtil.transfer(inputStream, outputStream);
-			}
-			finally {
-				StreamUtil.cleanUp(inputStream);
-			}
+			response.sendRedirect(redirectPath);
 		}
 	}
 

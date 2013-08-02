@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import java.util.List;
  */
 public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
+	@Override
 	public Address addAddress(
 			long userId, String className, long classPK, String street1,
 			String street2, String street3, String city, String zip,
@@ -82,6 +83,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return address;
 	}
 
+	@Override
 	public void deleteAddresses(long companyId, String className, long classPK)
 		throws SystemException {
 
@@ -95,10 +97,12 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<Address> getAddresses() throws SystemException {
 		return addressPersistence.findAll();
 	}
 
+	@Override
 	public List<Address> getAddresses(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -108,6 +112,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		return addressPersistence.findByC_C_C(companyId, classNameId, classPK);
 	}
 
+	@Override
 	public Address updateAddress(
 			long addressId, String street1, String street2, String street3,
 			String city, String zip, long regionId, long countryId, int typeId,

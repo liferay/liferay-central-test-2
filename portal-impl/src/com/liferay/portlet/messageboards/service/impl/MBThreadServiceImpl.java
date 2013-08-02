@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ import java.util.List;
  */
 public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 
+	@Override
 	public void deleteThread(long threadId)
 		throws PortalException, SystemException {
 
@@ -62,6 +63,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		mbThreadLocalService.deleteThread(threadId);
 	}
 
+	@Override
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, Date modifiedDate, int status, int start,
 			int end)
@@ -93,6 +95,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return threads;
 	}
 
+	@Override
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous, int start, int end)
@@ -146,6 +149,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return threads;
 	}
 
+	@Override
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, boolean subscribed,
 			int start, int end)
@@ -155,6 +159,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			groupId, userId, status, subscribed, true, start, end);
 	}
 
+	@Override
 	public List<MBThread> getGroupThreads(
 			long groupId, long userId, int status, int start, int end)
 		throws PortalException, SystemException {
@@ -162,6 +167,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return getGroupThreads(groupId, userId, status, false, start, end);
 	}
 
+	@Override
 	public int getGroupThreadsCount(
 			long groupId, long userId, Date modifiedDate, int status)
 		throws SystemException {
@@ -182,12 +188,14 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			groupId, userId, modifiedDate, categoryIds, status);
 	}
 
+	@Override
 	public int getGroupThreadsCount(long groupId, long userId, int status)
 		throws SystemException {
 
 		return getGroupThreadsCount(groupId, userId, status, false);
 	}
 
+	@Override
 	public int getGroupThreadsCount(
 			long groupId, long userId, int status, boolean subscribed)
 		throws SystemException {
@@ -195,6 +203,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		return getGroupThreadsCount(groupId, userId, status, subscribed, true);
 	}
 
+	@Override
 	public int getGroupThreadsCount(
 			long groupId, long userId, int status, boolean subscribed,
 			boolean includeAnonymous)
@@ -234,6 +243,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<MBThread> getThreads(
 			long groupId, long categoryId, int status, int start, int end)
 		throws SystemException {
@@ -248,6 +258,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public int getThreadsCount(long groupId, long categoryId, int status)
 		throws SystemException {
 
@@ -260,6 +271,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public Lock lockThread(long threadId)
 		throws PortalException, SystemException {
 
@@ -275,6 +287,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			MBThreadModelImpl.LOCK_EXPIRATION_TIME);
 	}
 
+	@Override
 	public MBThread moveThread(long categoryId, long threadId)
 		throws PortalException, SystemException {
 
@@ -292,6 +305,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			thread.getGroupId(), categoryId, threadId);
 	}
 
+	@Override
 	public MBThread splitThread(
 			long messageId, String subject, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -306,6 +320,7 @@ public class MBThreadServiceImpl extends MBThreadServiceBaseImpl {
 			messageId, subject, serviceContext);
 	}
 
+	@Override
 	public void unlockThread(long threadId)
 		throws PortalException, SystemException {
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.polls.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -370,6 +371,10 @@ public class PollsChoiceWrapper implements PollsChoice,
 		return new PollsChoiceWrapper(_pollsChoice.toEscapedModel());
 	}
 
+	public com.liferay.portlet.polls.model.PollsChoice toUnescapedModel() {
+		return new PollsChoiceWrapper(_pollsChoice.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _pollsChoice.toString();
@@ -387,6 +392,25 @@ public class PollsChoiceWrapper implements PollsChoice,
 	public int getVotesCount()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _pollsChoice.getVotesCount();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PollsChoiceWrapper)) {
+			return false;
+		}
+
+		PollsChoiceWrapper pollsChoiceWrapper = (PollsChoiceWrapper)obj;
+
+		if (Validator.equals(_pollsChoice, pollsChoiceWrapper._pollsChoice)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

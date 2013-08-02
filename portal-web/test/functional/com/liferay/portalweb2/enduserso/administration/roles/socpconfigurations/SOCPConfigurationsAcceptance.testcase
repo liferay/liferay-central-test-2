@@ -1,0 +1,22 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="AssignSORoleAdminUserConfigurations">
+		<var name="userName" value="Joe Bloggs" />
+		<var name="userScreenName" value="joebloggs" />
+
+		<execute macro="SOConfigurations#assignUserRoleCP">
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="${userName}" />
+		</execute>
+
+		<execute macro="SOConfigurations#unassignUserRoleCP">
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+	</command>
+</definition>

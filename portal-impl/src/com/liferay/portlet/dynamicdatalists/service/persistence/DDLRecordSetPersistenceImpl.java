@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,6 +42,7 @@ import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.BatchSessionUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.WorkflowDefinitionLinkPersistence;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.dynamicdatalists.NoSuchRecordSetException;
@@ -241,18 +242,102 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		}
 	}
 
-	protected void clearUniqueFindersCache(DDLRecordSet ddlRecordSet) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
-				ddlRecordSet.getUuid(), Long.valueOf(ddlRecordSet.getGroupId())
-			});
+	protected void cacheUniqueFindersCache(DDLRecordSet ddlRecordSet) {
+		if (ddlRecordSet.isNew()) {
+			Object[] args = new Object[] {
+					ddlRecordSet.getUuid(),
+					Long.valueOf(ddlRecordSet.getGroupId())
+				};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R,
-			new Object[] {
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				ddlRecordSet);
+
+			args = new Object[] {
+					Long.valueOf(ddlRecordSet.getGroupId()),
+					
+					ddlRecordSet.getRecordSetKey()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_R, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_R, args,
+				ddlRecordSet);
+		}
+		else {
+			DDLRecordSetModelImpl ddlRecordSetModelImpl = (DDLRecordSetModelImpl)ddlRecordSet;
+
+			if ((ddlRecordSetModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						ddlRecordSet.getUuid(),
+						Long.valueOf(ddlRecordSet.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					ddlRecordSet);
+			}
+
+			if ((ddlRecordSetModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_R.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(ddlRecordSet.getGroupId()),
+						
+						ddlRecordSet.getRecordSetKey()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_R, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_R, args,
+					ddlRecordSet);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(DDLRecordSet ddlRecordSet) {
+		DDLRecordSetModelImpl ddlRecordSetModelImpl = (DDLRecordSetModelImpl)ddlRecordSet;
+
+		Object[] args = new Object[] {
+				ddlRecordSet.getUuid(), Long.valueOf(ddlRecordSet.getGroupId())
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((ddlRecordSetModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					ddlRecordSetModelImpl.getOriginalUuid(),
+					Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(ddlRecordSet.getGroupId()),
 				
-			ddlRecordSet.getRecordSetKey()
-			});
+				ddlRecordSet.getRecordSetKey()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_R, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R, args);
+
+		if ((ddlRecordSetModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_R.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId()),
+					
+					ddlRecordSetModelImpl.getOriginalRecordSetKey()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_R, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R, args);
+		}
 	}
 
 	/**
@@ -431,59 +516,8 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 		EntityCacheUtil.putResult(DDLRecordSetModelImpl.ENTITY_CACHE_ENABLED,
 			DDLRecordSetImpl.class, ddlRecordSet.getPrimaryKey(), ddlRecordSet);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					ddlRecordSet.getUuid(),
-					Long.valueOf(ddlRecordSet.getGroupId())
-				}, ddlRecordSet);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_R,
-				new Object[] {
-					Long.valueOf(ddlRecordSet.getGroupId()),
-					
-				ddlRecordSet.getRecordSetKey()
-				}, ddlRecordSet);
-		}
-		else {
-			if ((ddlRecordSetModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						ddlRecordSetModelImpl.getOriginalUuid(),
-						Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						ddlRecordSet.getUuid(),
-						Long.valueOf(ddlRecordSet.getGroupId())
-					}, ddlRecordSet);
-			}
-
-			if ((ddlRecordSetModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_R.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(ddlRecordSetModelImpl.getOriginalGroupId()),
-						
-						ddlRecordSetModelImpl.getOriginalRecordSetKey()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_R, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_R, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_R,
-					new Object[] {
-						Long.valueOf(ddlRecordSet.getGroupId()),
-						
-					ddlRecordSet.getRecordSetKey()
-					}, ddlRecordSet);
-			}
-		}
+		clearUniqueFindersCache(ddlRecordSet);
+		cacheUniqueFindersCache(ddlRecordSet);
 
 		return ddlRecordSet;
 	}
@@ -2539,8 +2573,10 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 				List<ModelListener<DDLRecordSet>> listenersList = new ArrayList<ModelListener<DDLRecordSet>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<DDLRecordSet>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
@@ -2567,6 +2603,8 @@ public class DDLRecordSetPersistenceImpl extends BasePersistenceImpl<DDLRecordSe
 	protected ResourcePersistence resourcePersistence;
 	@BeanReference(type = UserPersistence.class)
 	protected UserPersistence userPersistence;
+	@BeanReference(type = WorkflowDefinitionLinkPersistence.class)
+	protected WorkflowDefinitionLinkPersistence workflowDefinitionLinkPersistence;
 	@BeanReference(type = DDMStructurePersistence.class)
 	protected DDMStructurePersistence ddmStructurePersistence;
 	@BeanReference(type = DDMStructureLinkPersistence.class)

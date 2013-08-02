@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -121,10 +121,6 @@ public class LayoutServiceUtil {
 	}
 
 	/**
-	* Adds a layout with empty maps for descriptions, keywords, and titles ,
-	* and a names map containing a mapping for the default locale as its only
-	* entry.
-	*
 	* <p>
 	* This method handles the creation of the layout including its resources,
 	* metadata, and internal data structures. It is not necessary to make
@@ -369,6 +365,22 @@ public class LayoutServiceUtil {
 	}
 
 	/**
+	* Returns all the ancestor layouts of the layout.
+	*
+	* @param plid the primary key of the layout
+	* @return the ancestor layouts of the layout
+	* @throws PortalException if a matching layout could not be found or if a
+	portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portal.model.Layout> getAncestorLayouts(
+		long plid)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAncestorLayouts(plid);
+	}
+
+	/**
 	* Returns the primary key of the default layout for the group.
 	*
 	* @param groupId the primary key of the group
@@ -389,6 +401,21 @@ public class LayoutServiceUtil {
 		return getService()
 				   .getDefaultPlid(groupId, scopeGroupId, privateLayout,
 			portletId);
+	}
+
+	public static long getDefaultPlid(long groupId, long scopeGroupId,
+		java.lang.String portletId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getDefaultPlid(groupId, scopeGroupId, portletId);
+	}
+
+	public static com.liferay.portal.model.Layout getLayoutByUuidAndGroupId(
+		java.lang.String uuid, long groupId, boolean privateLayout)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getLayoutByUuidAndGroupId(uuid, groupId, privateLayout);
 	}
 
 	/**
@@ -433,16 +460,24 @@ public class LayoutServiceUtil {
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLayouts(groupId, privateLayout);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout, long parentLayoutId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getLayouts(groupId, privateLayout, parentLayoutId);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
+		long groupId, boolean privateLayout, long parentLayoutId,
+		boolean incomplete, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getLayouts(groupId, privateLayout, parentLayoutId);
+		return getService()
+				   .getLayouts(groupId, privateLayout, parentLayoutId,
+			incomplete, start, end);
 	}
 
 	/**
@@ -626,6 +661,7 @@ public class LayoutServiceUtil {
 	com.liferay.portal.kernel.lar.PortletDataHandlerKeys}
 	* @param remoteAddress the remote address
 	* @param remotePort the remote port
+	* @param remotePathContext the remote path context
 	* @param secureConnection whether the connection is secure
 	* @param remoteGroupId the primary key of the remote group
 	* @param remotePrivateLayout whether remote group's layout is private

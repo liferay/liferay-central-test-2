@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -54,9 +55,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -89,18 +92,72 @@ public class WikiUtil {
 		String targetContent = StringPool.BLANK;
 
 		if (sourcePage != null) {
-			sourceContent = WikiUtil.convert(
+			sourceContent = convert(
 				sourcePage, viewPageURL, editPageURL, attachmentURLPrefix);
 		}
 
 		if (targetPage != null) {
-			targetContent = WikiUtil.convert(
+			targetContent = convert(
 				targetPage, viewPageURL, editPageURL, attachmentURLPrefix);
 		}
 
 		return DiffHtmlUtil.diff(
 			new UnsyncStringReader(sourceContent),
 			new UnsyncStringReader(targetContent));
+	}
+
+	public static List<WikiPage> filterOrphans(List<WikiPage> pages)
+		throws PortalException {
+
+		List<Map<String, Boolean>> pageTitles =
+			new ArrayList<Map<String, Boolean>>();
+
+		for (WikiPage page : pages) {
+			pageTitles.add(WikiCacheUtil.getOutgoingLinks(page));
+		}
+
+		Set<WikiPage> notOrphans = new HashSet<WikiPage>();
+
+		for (WikiPage page : pages) {
+			for (Map<String, Boolean> pageTitle : pageTitles) {
+				String pageTitleLowerCase = page.getTitle();
+
+				if (pageTitle.get(pageTitleLowerCase) != null) {
+					notOrphans.add(page);
+
+					break;
+				}
+			}
+		}
+
+		List<WikiPage> orphans = new ArrayList<WikiPage>();
+
+		for (WikiPage page : pages) {
+			if (!notOrphans.contains(page)) {
+				orphans.add(page);
+			}
+		}
+
+		orphans = ListUtil.sort(orphans);
+
+		return orphans;
+	}
+
+	public static String getAttachmentURLPrefix(
+		String mainPath, long plid, long nodeId, String title) {
+
+		StringBundler sb = new StringBundler(8);
+
+		sb.append(mainPath);
+		sb.append("/wiki/get_page_attachment?p_l_id=");
+		sb.append(plid);
+		sb.append("&nodeId=");
+		sb.append(nodeId);
+		sb.append("&title=");
+		sb.append(HttpUtil.encodeURL(title));
+		sb.append("&fileName=");
+
+		return sb.toString();
 	}
 
 	public static String getEditPage(String format) {
@@ -131,8 +188,8 @@ public class WikiUtil {
 			return emailPageAddedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY));
 		}
 	}
 
@@ -146,8 +203,8 @@ public class WikiUtil {
 			return GetterUtil.getBoolean(emailPageAddedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED));
 		}
 	}
 
@@ -161,8 +218,8 @@ public class WikiUtil {
 			return emailPageAddedSignature;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_SIGNATURE));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_ADDED_SIGNATURE));
 		}
 	}
 
@@ -176,8 +233,8 @@ public class WikiUtil {
 			return emailPageAddedSubjectPrefix;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX));
 		}
 	}
 
@@ -191,8 +248,8 @@ public class WikiUtil {
 			return emailPageUpdatedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY));
 		}
 	}
 
@@ -206,8 +263,8 @@ public class WikiUtil {
 			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
 		}
 	}
 
@@ -221,8 +278,8 @@ public class WikiUtil {
 			return emailPageUpdatedSignature;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SIGNATURE));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SIGNATURE));
 		}
 	}
 
@@ -236,8 +293,9 @@ public class WikiUtil {
 			return emailPageUpdatedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX));
 		}
 	}
 
@@ -263,8 +321,8 @@ public class WikiUtil {
 
 		for (WikiNode node : nodes) {
 			if ((Arrays.binarySearch(hiddenNodes, node.getName()) < 0) &&
-				(WikiNodePermission.contains(
-					permissionChecker, node, ActionKeys.VIEW))) {
+				WikiNodePermission.contains(
+					permissionChecker, node, ActionKeys.VIEW)) {
 
 				return node;
 			}

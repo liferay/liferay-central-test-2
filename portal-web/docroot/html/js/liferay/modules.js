@@ -46,12 +46,12 @@
 			'asset-categories-selector': ['aui-tree', 'liferay-asset-tags-selector'],
 			'asset-tags-selector': ['array-extras', 'async-queue', 'aui-autocomplete', 'aui-dialog', 'aui-io-request', 'aui-live-search', 'aui-textboxlist', 'aui-form-textfield', 'datasource-cache', 'liferay-service-datasource'],
 			'auto-fields': ['aui-base', 'aui-data-set', 'aui-io-request', 'aui-parse-content', 'sortable', 'base', 'liferay-undo-manager'],
-			'dockbar': ['aui-node', 'event-touch'],
+			'dockbar': ['aui-node', 'event-touch', 'portal-available-languages'],
 			'dockbar-underlay': ['aui-button-item', 'aui-io-plugin', 'aui-overlay-manager'],
 			'dynamic-select': ['aui-base'],
 			'form': ['aui-base', 'aui-form-validator'],
 			'form-placeholders': ['liferay-form', 'plugin'],
-			'form-navigator': ['aui-base'],
+			'form-navigator': ['aui-base', 'aui-task-manager'],
 			'history': getHistoryRequirements(),
 			'history-html5': ['liferay-history', 'history-html5', 'querystring-stringify-simple'],
 			'history-manager': ['liferay-history'],
@@ -65,8 +65,10 @@
 			'list-view': ['aui-base', 'transition'],
 			'logo-selector': ['aui-base'],
 			'look-and-feel': ['aui-color-picker', 'aui-dialog', 'aui-io-request', 'aui-tabs-base'],
-			'menu': ['aui-debounce', 'aui-node'],
+			'menu': ['aui-debounce', 'aui-node', 'portal-available-languages'],
 			'navigation': [],
+			'navigation-interaction': ['node-focusmanager', 'plugin'],
+			'navigation-interaction-touch': ['event-touch', 'liferay-navigation-interaction'],
 			'navigation-touch': ['event-touch', 'liferay-navigation'],
 			'navigation-interaction': ['node-focusmanager', 'plugin'],
 			'notice': ['aui-base'],
@@ -163,6 +165,12 @@
 			'portal-aui-lang': {
 				requires: ['aui-calendar'],
 				path: LiferayAUI.getLangPath()
+			},
+			'portal-available-languages': {
+				path: LiferayAUI.getAvailableLangPath(),
+				requires: [
+					'liferay-language'
+				]
 			}
 		}
 	};
@@ -184,6 +192,16 @@
 				return A.UA.touch;
 			},
 			trigger: 'liferay-navigation'
+		}
+	);
+
+	addPlugin(
+		{
+			name: 'liferay-navigation-interaction-touch',
+			test: function(A) {
+				return A.UA.touch;
+			},
+			trigger: 'liferay-navigation-interaction'
 		}
 	);
 

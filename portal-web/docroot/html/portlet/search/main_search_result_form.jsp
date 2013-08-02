@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,10 +25,15 @@ String className = document.get(Field.ENTRY_CLASS_NAME);
 
 String entryTitle = null;
 String entrySummary = null;
+String returnToFullPageURL = (String)request.getAttribute("search.jsp-returnToFullPageURL");
 PortletURL viewFullContentURL = null;
 String viewURL = null;
 
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
+
+AssetRenderer assetRenderer = null;
+
+boolean inheritRedirect = false;
 
 if (assetRendererFactory != null) {
 	long classPK = GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK));
@@ -41,11 +46,16 @@ if (assetRendererFactory != null) {
 
 	AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(className, classPK);
 
-	AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
+	assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
 
 	viewFullContentURL = _getViewFullContentURL(request, themeDisplay, PortletKeys.ASSET_PUBLISHER, document);
 
 	viewFullContentURL.setParameter("struts_action", "/asset_publisher/view_content");
+
+	if (Validator.isNotNull(returnToFullPageURL)) {
+		viewFullContentURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+	}
+
 	viewFullContentURL.setParameter("assetEntryId", String.valueOf(assetEntry.getEntryId()));
 	viewFullContentURL.setParameter("type", assetRendererFactory.getType());
 
@@ -58,6 +68,8 @@ if (assetRendererFactory != null) {
 	}
 
 	if (viewInContext) {
+		inheritRedirect = true;
+
 		String viewFullContentURLString = viewFullContentURL.toString();
 
 		viewFullContentURLString = HttpUtil.setParameter(viewFullContentURLString, "redirect", currentURL);
@@ -69,12 +81,16 @@ if (assetRendererFactory != null) {
 	}
 
 	entryTitle = assetRenderer.getTitle(locale);
-	entrySummary = assetRenderer.getSummary(locale);
+	entrySummary = assetRenderer.getSearchSummary(locale);
 }
 else {
 	String portletId = document.get(Field.PORTLET_ID);
 
 	viewFullContentURL = _getViewFullContentURL(request, themeDisplay, portletId, document);
+
+	if (Validator.isNotNull(returnToFullPageURL)) {
+		viewFullContentURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+	}
 
 	viewURL = viewFullContentURL.toString();
 
@@ -94,7 +110,7 @@ else {
 
 entrySummary = StringUtil.shorten(entrySummary, 200);
 
-viewURL = _checkViewURL(themeDisplay, viewURL, currentURL);
+viewURL = _checkViewURL(themeDisplay, viewURL, currentURL, inheritRedirect);
 
 String[] queryTerms = (String[])request.getAttribute("search.jsp-queryTerms");
 
@@ -108,8 +124,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL"
 
 	<span class="asset-entry-title">
 		<a href="<%= viewURL %>">
-			<c:if test="<%= assetRendererFactory != null %>">
-				<img alt="" src="<%= assetRendererFactory.getIconPath(renderRequest) %>" />
+			<c:if test="<%= assetRenderer != null %>">
+				<img alt="" src="<%= assetRenderer.getIconPath(renderRequest) %>" />
 			</c:if>
 
 			<%= StringUtil.highlight(HtmlUtil.escape(entryTitle), queryTerms) %>

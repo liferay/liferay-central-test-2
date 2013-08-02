@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -393,6 +395,10 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 		return new CompanyWrapper(_company.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Company toUnescapedModel() {
+		return new CompanyWrapper(_company.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _company.toString();
@@ -528,6 +534,25 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 
 	public void setKeyObj(java.security.Key keyObj) {
 		_company.setKeyObj(keyObj);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof CompanyWrapper)) {
+			return false;
+		}
+
+		CompanyWrapper companyWrapper = (CompanyWrapper)obj;
+
+		if (Validator.equals(_company, companyWrapper._company)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

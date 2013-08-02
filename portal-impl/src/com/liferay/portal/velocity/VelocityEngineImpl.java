@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,8 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.security.pacl.NotPrivileged;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -23,19 +25,23 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.velocity.VelocityContext;
 import com.liferay.portal.kernel.velocity.VelocityEngine;
 import com.liferay.portal.kernel.velocity.VelocityVariablesUtil;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
+import com.liferay.portal.template.TemplateControlContext;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.Writer;
 
+import java.security.AccessControlContext;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
+import java.security.PrivilegedExceptionAction;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.velocity.Template;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.ResourceManager;
 import org.apache.velocity.runtime.resource.loader.StringResourceLoader;
@@ -44,15 +50,18 @@ import org.apache.velocity.runtime.resource.util.StringResourceRepository;
 /**
  * @author Raymond Augé
  */
+@DoPrivileged
 public class VelocityEngineImpl implements VelocityEngine {
 
 	public VelocityEngineImpl() {
 	}
 
+	@Override
 	public void clearClassLoader(ClassLoader classLoader) {
-		_classLoaderVelocityContexts.remove(classLoader);
+		_classLoaderToolsContextsMap.remove(classLoader);
 	}
 
+	@Override
 	public void flushTemplate(String velocityTemplateId) {
 		StringResourceRepository stringResourceRepository =
 			StringResourceLoader.getRepository();
@@ -65,69 +74,47 @@ public class VelocityEngineImpl implements VelocityEngine {
 			_getResourceCacheKey(velocityTemplateId));
 	}
 
+	@NotPrivileged
+	@Override
 	public VelocityContext getEmptyContext() {
 		return new VelocityContextImpl();
 	}
 
+	@NotPrivileged
+	@Override
 	public VelocityContext getRestrictedToolsContext() {
-		return _restrictedToolsContext;
+		return _getToolsContext(_RESTRICTED);
 	}
 
+	@NotPrivileged
+	@Override
 	public VelocityContext getStandardToolsContext() {
-		return _standardToolsContext;
+		return _getToolsContext(_STANDARD);
 	}
 
+	public TemplateControlContext getTemplateControlContext() {
+		return _pacl.getTemplateControlContext();
+	}
+
+	@NotPrivileged
+	@Override
 	public VelocityContext getWrappedClassLoaderToolsContext() {
-
-		// This context will have all of its utilities initialized within the
-		// class loader of the current thread
-
-		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
-
-		PACLPolicy threadLocalPACLPolicy =
-			PortalSecurityManagerThreadLocal.getPACLPolicy();
-
-		PACLPolicy contextClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(contextClassLoader);
-
-		try {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(
-				contextClassLoaderPACLPolicy);
-
-			VelocityContextImpl velocityContextImpl =
-				_classLoaderVelocityContexts.get(contextClassLoader);
-
-			if (velocityContextImpl == null) {
-				velocityContextImpl = new VelocityContextImpl();
-
-				VelocityVariablesUtil.insertHelperUtilities(
-					velocityContextImpl, null);
-
-				_classLoaderVelocityContexts.put(
-					contextClassLoader, velocityContextImpl);
-			}
-
-			return new PACLVelocityContextImpl(
-				velocityContextImpl.getWrappedVelocityContext(),
-				contextClassLoaderPACLPolicy);
-		}
-		finally {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(
-				threadLocalPACLPolicy);
-		}
+		return new VelocityContextImpl(_getToolsContext(_STANDARD));
 	}
 
+	@NotPrivileged
+	@Override
 	public VelocityContext getWrappedRestrictedToolsContext() {
-		return new VelocityContextImpl(
-			_restrictedToolsContext.getWrappedVelocityContext());
+		return new VelocityContextImpl(_getToolsContext(_RESTRICTED));
 	}
 
+	@NotPrivileged
+	@Override
 	public VelocityContext getWrappedStandardToolsContext() {
-		return new VelocityContextImpl(
-			_standardToolsContext.getWrappedVelocityContext());
+		return new VelocityContextImpl(_getToolsContext(_STANDARD));
 	}
 
+	@Override
 	public void init() throws Exception {
 		if (_velocityEngine != null) {
 			return;
@@ -224,55 +211,27 @@ public class VelocityEngineImpl implements VelocityEngine {
 			_standardToolsContext, null);
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean mergeTemplate(
 			String velocityTemplateId, String velocityTemplateContent,
 			VelocityContext velocityContext, Writer writer)
 		throws Exception {
 
-		if (Validator.isNotNull(velocityTemplateContent)) {
-			LiferayResourceCacheUtil.remove(
-				_getResourceCacheKey(velocityTemplateId));
-
-			StringResourceRepository stringResourceRepository =
-				StringResourceLoader.getRepository();
-
-			stringResourceRepository.putStringResource(
-				velocityTemplateId, velocityTemplateContent);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Added " + velocityTemplateId +
-						" to the Velocity template repository");
-			}
-		}
+		Template template = AccessController.doPrivileged(
+			new DoGetTemplatePrivilegedAction(
+				velocityTemplateId, velocityTemplateContent, StringPool.UTF8));
 
 		VelocityContextImpl velocityContextImpl =
 			(VelocityContextImpl)velocityContext;
 
-		PACLPolicy threadLocalPACLPolicy =
-			PortalSecurityManagerThreadLocal.getPACLPolicy();
+		template.merge(velocityContextImpl.getWrappedVelocityContext(), writer);
 
-		try {
-			if (velocityContextImpl instanceof PACLVelocityContextImpl) {
-				PACLVelocityContextImpl paclContextImpl =
-					(PACLVelocityContextImpl)velocityContextImpl;
-
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					paclContextImpl.getPaclPolicy());
-			}
-
-			return _velocityEngine.mergeTemplate(
-				velocityTemplateId, StringPool.UTF8,
-				velocityContextImpl.getWrappedVelocityContext(), writer);
-		}
-		finally {
-			if (velocityContextImpl instanceof PACLVelocityContextImpl) {
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					threadLocalPACLPolicy);
-			}
-		}
+		return true;
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean mergeTemplate(
 			String velocityTemplateId, VelocityContext velocityContext,
 			Writer writer)
@@ -281,12 +240,69 @@ public class VelocityEngineImpl implements VelocityEngine {
 		return mergeTemplate(velocityTemplateId, null, velocityContext, writer);
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean resourceExists(String resource) {
 		return _velocityEngine.resourceExists(resource);
 	}
 
+	private VelocityContextImpl _doGetToolsContext(
+		ClassLoader classLoader, String templateContextType) {
+
+		Map<String, VelocityContextImpl> toolsContextMap =
+			_classLoaderToolsContextsMap.get(classLoader);
+
+		if (toolsContextMap == null) {
+			toolsContextMap =
+				new ConcurrentHashMap<String, VelocityContextImpl>();
+
+			_classLoaderToolsContextsMap.put(classLoader, toolsContextMap);
+		}
+
+		VelocityContextImpl velocityContextImpl = toolsContextMap.get(
+			templateContextType);
+
+		if (velocityContextImpl != null) {
+			return velocityContextImpl;
+		}
+
+		velocityContextImpl = new VelocityContextImpl();
+
+		if (_RESTRICTED.equals(templateContextType)) {
+			VelocityVariablesUtil.insertHelperUtilities(
+				velocityContextImpl,
+				PropsValues.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
+		}
+		else {
+			VelocityVariablesUtil.insertHelperUtilities(
+				velocityContextImpl, null);
+		}
+
+		toolsContextMap.put(templateContextType, velocityContextImpl);
+
+		return velocityContextImpl;
+	}
+
 	private String _getResourceCacheKey(String velocityTemplateId) {
 		return _RESOURCE_TEMPLATE_NAME_SPACE.concat(velocityTemplateId);
+	}
+
+	private VelocityContextImpl _getToolsContext(String templateContextType) {
+		TemplateControlContext templateControlContext =
+			getTemplateControlContext();
+
+		AccessControlContext accessControlContext =
+			templateControlContext.getAccessControlContext();
+		ClassLoader classLoader = templateControlContext.getClassLoader();
+
+		if (accessControlContext == null) {
+			return _doGetToolsContext(classLoader, templateContextType);
+		}
+
+		return AccessController.doPrivileged(
+			new DoGetToolsContextPrivilegedAction(
+				classLoader, templateContextType),
+			accessControlContext);
 	}
 
 	private static final String _RESOURCE_LOADER =
@@ -295,12 +311,94 @@ public class VelocityEngineImpl implements VelocityEngine {
 	private static final String _RESOURCE_TEMPLATE_NAME_SPACE = String.valueOf(
 		ResourceManager.RESOURCE_TEMPLATE);
 
+	private static final String _RESTRICTED = "RESTRICTED";
+
+	private static final String _STANDARD = "STANDARD";
+
 	private static Log _log = LogFactoryUtil.getLog(VelocityEngineImpl.class);
 
-	private Map<ClassLoader, VelocityContextImpl> _classLoaderVelocityContexts =
-		new ConcurrentHashMap<ClassLoader, VelocityContextImpl>();
+	private static PACL _pacl = new NoPACL();
+
+	private Map<ClassLoader, Map<String, VelocityContextImpl>>
+		_classLoaderToolsContextsMap = new ConcurrentHashMap
+			<ClassLoader, Map<String, VelocityContextImpl>>();
 	private VelocityContextImpl _restrictedToolsContext;
 	private VelocityContextImpl _standardToolsContext;
 	private org.apache.velocity.app.VelocityEngine _velocityEngine;
+
+	private static class NoPACL implements PACL {
+
+		public TemplateControlContext getTemplateControlContext() {
+			ClassLoader contextClassLoader =
+				ClassLoaderUtil.getContextClassLoader();
+
+			return new TemplateControlContext(null, contextClassLoader);
+		}
+
+	}
+
+	public static interface PACL {
+
+		public TemplateControlContext getTemplateControlContext();
+
+	}
+
+	private class DoGetTemplatePrivilegedAction
+		implements PrivilegedExceptionAction<Template> {
+
+		public DoGetTemplatePrivilegedAction(
+			String velocityTemplateId, String velocityTemplateContent,
+			String encoding) {
+
+			_velocityTemplateId = velocityTemplateId;
+			_velocityTemplateContent = velocityTemplateContent;
+			_encoding = encoding;
+		}
+
+		public Template run() throws Exception {
+			if (Validator.isNotNull(_velocityTemplateContent)) {
+				LiferayResourceCacheUtil.remove(
+					_getResourceCacheKey(_velocityTemplateId));
+
+				StringResourceRepository stringResourceRepository =
+					StringResourceLoader.getRepository();
+
+				stringResourceRepository.putStringResource(
+					_velocityTemplateId, _velocityTemplateContent);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Added " + _velocityTemplateId +
+							" to the Velocity template repository");
+				}
+			}
+
+			return _velocityEngine.getTemplate(_velocityTemplateId, _encoding);
+		}
+
+		private String _encoding;
+		private String _velocityTemplateContent;
+		private String _velocityTemplateId;
+
+	}
+
+	private class DoGetToolsContextPrivilegedAction
+		implements PrivilegedAction<VelocityContextImpl> {
+
+		public DoGetToolsContextPrivilegedAction(
+			ClassLoader classLoader, String templateContextType) {
+
+			_classLoader = classLoader;
+			_templateContextType = templateContextType;
+		}
+
+		public VelocityContextImpl run() {
+			return _doGetToolsContext(_classLoader, _templateContextType);
+		}
+
+		private ClassLoader _classLoader;
+		private String _templateContextType;
+
+	}
 
 }

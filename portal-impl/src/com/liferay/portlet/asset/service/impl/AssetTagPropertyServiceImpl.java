@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -42,6 +42,7 @@ public class AssetTagPropertyServiceImpl
 	 *         asset tag, or if the key or value were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagProperty addTagProperty(long tagId, String key, String value)
 		throws PortalException, SystemException {
 
@@ -61,6 +62,7 @@ public class AssetTagPropertyServiceImpl
 	 *         update the asset tag property
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteTagProperty(long tagPropertyId)
 		throws PortalException, SystemException {
 
@@ -81,6 +83,7 @@ public class AssetTagPropertyServiceImpl
 	 * @return the matching asset tag properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagProperty> getTagProperties(long tagId)
 		throws SystemException {
 
@@ -95,6 +98,7 @@ public class AssetTagPropertyServiceImpl
 	 * @return the matching asset tag properties
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagProperty> getTagPropertyValues(
 			long companyId, String key)
 		throws SystemException {
@@ -115,6 +119,7 @@ public class AssetTagPropertyServiceImpl
 	 *         the asset tag, or if the key or value were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagProperty updateTagProperty(
 			long tagPropertyId, String key, String value)
 		throws PortalException, SystemException {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,12 +28,19 @@ public class FreeMarkerContextImpl implements FreeMarkerContext {
 		_context = new ConcurrentHashMap<String, Object>();
 	}
 
+	public FreeMarkerContextImpl(FreeMarkerContextImpl freeMarkerContextImpl) {
+		_context = new ConcurrentHashMap<String, Object>();
+
+		_context.putAll(freeMarkerContextImpl.getWrappedContext());
+	}
+
 	public FreeMarkerContextImpl(Map<String, Object> context) {
 		_context = new ConcurrentHashMap<String, Object>();
 
 		_context.putAll(context);
 	}
 
+	@Override
 	public Object get(String key) {
 		return _context.get(key);
 	}
@@ -42,6 +49,7 @@ public class FreeMarkerContextImpl implements FreeMarkerContext {
 		return _context;
 	}
 
+	@Override
 	public void put(String key, Object value) {
 		_context.put(key, value);
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,10 +32,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.lang.reflect.Method;
@@ -98,53 +98,53 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
+			ClassLoaderUtil.getContextClassLoader();
 
 		Class<?> clazz = contextClassLoader.loadClass(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
 			clazz, methodName, serviceParameters, serviceParameterTypes);
 
-		if (methodAndParameterTypes != null) {
-			Method method = (Method)methodAndParameterTypes[0];
-			Type[] parameterTypes = (Type[])methodAndParameterTypes[1];
-			Object[] args = new Object[serviceParameters.length];
-
-			for (int i = 0; i < serviceParameters.length; i++) {
-				args[i] = getArgValue(
-					request, clazz, methodName, serviceParameters[i],
-					parameterTypes[i]);
-			}
-
-			try {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Invoking " + clazz + " on method " + method.getName() +
-							" with args " + Arrays.toString(args));
-				}
-
-				Object returnObj = method.invoke(clazz, args);
-
-				if (returnObj != null) {
-					return getReturnValue(returnObj);
-				}
-				else {
-					return JSONFactoryUtil.getNullJSON();
-				}
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Invoked " + clazz + " on method " + method.getName() +
-							" with args " + Arrays.toString(args),
-						e);
-				}
-
-				return JSONFactoryUtil.serializeException(e);
-			}
+		if (methodAndParameterTypes == null) {
+			return null;
 		}
 
-		return null;
+		Method method = (Method)methodAndParameterTypes[0];
+		Type[] parameterTypes = (Type[])methodAndParameterTypes[1];
+		Object[] args = new Object[serviceParameters.length];
+
+		for (int i = 0; i < serviceParameters.length; i++) {
+			args[i] = getArgValue(
+				request, clazz, methodName, serviceParameters[i],
+				parameterTypes[i]);
+		}
+
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Invoking " + clazz + " on method " + method.getName() +
+						" with args " + Arrays.toString(args));
+			}
+
+			Object returnObj = method.invoke(clazz, args);
+
+			if (returnObj != null) {
+				return getReturnValue(returnObj);
+			}
+			else {
+				return JSONFactoryUtil.getNullJSON();
+			}
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Invoked " + clazz + " on method " + method.getName() +
+						" with args " + Arrays.toString(args),
+					e);
+			}
+
+			return JSONFactoryUtil.serializeException(e);
+		}
 	}
 
 	protected void checkMethodGuestAccess(
@@ -404,16 +404,18 @@ public class JSONServiceAction extends JSONAction {
 
 			return LocalizationUtil.deserialize(jsonObject);
 		}
-		else if (typeNameOrClassDescriptor.startsWith("java.util.Map")) {
-			return JSONFactoryUtil.looseDeserializeSafe(value);
-		}
 		else {
-			_log.error(
-				"Unsupported parameter type for class " + clazz + ", method " +
-					methodName + ", parameter " + parameter + ", and type " +
-						typeNameOrClassDescriptor);
+			try {
+				return JSONFactoryUtil.looseDeserializeSafe(value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Unsupported parameter type for class " + clazz +
+						", method " + methodName + ", parameter " + parameter +
+							", and type " + typeNameOrClassDescriptor);
 
-			return null;
+				return null;
+			}
 		}
 	}
 

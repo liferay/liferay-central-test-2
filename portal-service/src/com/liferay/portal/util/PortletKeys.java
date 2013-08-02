@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,6 +44,8 @@ public class PortletKeys {
 	public static final String BLOGS_AGGREGATOR = "115";
 
 	public static final String BOOKMARKS = "28";
+
+	public static final String BREADCRUMB = "73";
 
 	public static final String CALENDAR = "8";
 
@@ -95,6 +97,8 @@ public class PortletKeys {
 	public static final String LANGUAGE = "82";
 
 	public static final String LAYOUT_CONFIGURATION = "87";
+
+	public static final String LAYOUT_PROTOTYPE = "146";
 
 	public static final String LAYOUT_SET_PROTOTYPE = "149";
 

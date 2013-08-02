@@ -46,6 +46,7 @@ hr, .separator {
 	height: auto;
 	margin-top: 1.4em;
 	position: relative;
+	z-index: 210;
 }
 
 .site-title .site-name {
@@ -94,7 +95,8 @@ hr, .separator {
 
 #skip-to-content:focus {
 	clip: rect(auto auto auto auto);
-	right: 0;
+	margin-top: 35px;
+	right: 5px;
 	z-index: 200;
 }
 
@@ -105,6 +107,14 @@ hr, .separator {
 	position: absolute;
 	right: 0;
 	top: -1.2em;
+}
+
+.ie7 #banner {
+	z-index: 2;
+}
+
+.ie7 .portlet-message-boards .thread-body {
+	word-wrap: break-word;
 }
 
 .ie6 #banner {
@@ -124,7 +134,7 @@ hr, .separator {
 	min-height: 2.2em;
 	padding: 0 5px;
 	position: relative;
-	z-index: 1;
+	z-index: 210;
 }
 
 #navigation ul {
@@ -159,6 +169,10 @@ hr, .separator {
 	margin: 0 1px;
 	padding: 3px 15px;
 	text-decoration: none;
+}
+
+.touch #navigation a {
+	padding: 10px 20px;
 }
 
 .ie6 #navigation a, .ie7 #navigation a {
@@ -266,6 +280,10 @@ hr, .separator {
 	margin-top: 4px;
 }
 
+.portlet-asset-publisher .asset-content, .portlet-asset-publisher .asset-summary, .portlet-asset-publisher .asset-title, .portlet-asset-publisher .header-title, .portlet-asset-publisher li.title-list, .portlet-asset-publisher .results-row, .portlet-blogs .entry-body, .portlet-blogs .entry-title, .portlet-blogs .header-title, .portlet-journal-content .journal-content-article, .portlet-message-boards .header-title, .portlet-message-boards .thread-body, .portlet-search .results-row {
+	@include hyphenation;
+}
+
 .portlet-icons {
 	float: none;
 }
@@ -326,7 +344,7 @@ hr, .separator {
 	text-decoration: none;
 }
 
-.site-breadcrumbs li.first a {
+.site-breadcrumbs li.first a, .site-breadcrumbs li.only a {
 	color: #369;
 	font-weight: bold;
 }
@@ -429,4 +447,30 @@ hr, .separator {
 	-webkit-border-bottom-left-radius: 0;
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
+}
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.portlet {
+		text-align: right;
+	}
+
+	.signed-in.controls-visible .portlet-title {
+		padding-left: 80px;
+		padding-right: 5px;
+	}
+
+	.site-breadcrumbs {
+		li span {
+			background-image: url(@theme_image_path@/common/breadcrumbs_rtl.png);
+			background-position: 0 50%;
+			padding-left: 15px;
+			padding-right: 2px;
+		}
+
+		.last span {
+			background-image: none;
+		}
+	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,14 +38,14 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		this(renderRequest, null, true);
 	}
 
+	public DynamicRenderRequest(RenderRequest renderRequest, boolean inherit) {
+		this(renderRequest, null, inherit);
+	}
+
 	public DynamicRenderRequest(
 		RenderRequest renderRequest, Map<String, String[]> params) {
 
 		this(renderRequest, params, true);
-	}
-
-	public DynamicRenderRequest(RenderRequest renderRequest, boolean inherit) {
-		this(renderRequest, null, inherit);
 	}
 
 	public DynamicRenderRequest(

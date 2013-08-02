@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -416,13 +416,16 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	@Override
 	public ResourcePermission toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ResourcePermission)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ResourcePermission)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ResourcePermission toUnescapedModel() {
+		return (ResourcePermission)this;
 	}
 
 	@Override
@@ -459,18 +462,15 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourcePermission)) {
 			return false;
 		}
 
-		ResourcePermission resourcePermission = null;
-
-		try {
-			resourcePermission = (ResourcePermission)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ResourcePermission resourcePermission = (ResourcePermission)obj;
 
 		long primaryKey = resourcePermission.getPrimaryKey();
 
@@ -624,7 +624,7 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	}
 
 	private static ClassLoader _classLoader = ResourcePermission.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ResourcePermission.class
 		};
 	private long _resourcePermissionId;
@@ -648,5 +648,5 @@ public class ResourcePermissionModelImpl extends BaseModelImpl<ResourcePermissio
 	private long _originalActionIds;
 	private boolean _setOriginalActionIds;
 	private long _columnBitmask;
-	private ResourcePermission _escapedModelProxy;
+	private ResourcePermission _escapedModel;
 }

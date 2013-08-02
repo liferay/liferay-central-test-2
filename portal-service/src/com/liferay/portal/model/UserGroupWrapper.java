@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -284,6 +286,10 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 		return new UserGroupWrapper(_userGroup.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.UserGroup toUnescapedModel() {
+		return new UserGroupWrapper(_userGroup.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _userGroup.toString();
@@ -326,6 +332,25 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _userGroup.hasPublicLayouts();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroupWrapper)) {
+			return false;
+		}
+
+		UserGroupWrapper userGroupWrapper = (UserGroupWrapper)obj;
+
+		if (Validator.equals(_userGroup, userGroupWrapper._userGroup)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

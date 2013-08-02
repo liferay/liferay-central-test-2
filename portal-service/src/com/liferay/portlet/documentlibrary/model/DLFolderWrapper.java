@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -569,6 +570,10 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 		return new DLFolderWrapper(_dlFolder.toEscapedModel());
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder toUnescapedModel() {
+		return new DLFolderWrapper(_dlFolder.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _dlFolder.toString();
@@ -621,6 +626,25 @@ public class DLFolderWrapper implements DLFolder, ModelWrapper<DLFolder> {
 
 	public boolean isRoot() {
 		return _dlFolder.isRoot();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFolderWrapper)) {
+			return false;
+		}
+
+		DLFolderWrapper dlFolderWrapper = (DLFolderWrapper)obj;
+
+		if (Validator.equals(_dlFolder, dlFolderWrapper._dlFolder)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

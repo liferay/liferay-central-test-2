@@ -1,0 +1,278 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+
+		<execute macro="Role#assignRegRoleCP">
+			<var name="roleName" value="Social Office" />
+			<var name="userScreenName" value="joebloggs" />
+		</execute>
+	</set-up>
+
+	<command name="ViewContactsCenterUserDetails">
+		<var name="adminName" value="Joe Bloggs" />
+		<var name="adminEmailAddress" value="test@liferay.com" />
+		<var name="password" value="test" />
+		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+		<var name="userFirstName" value="Social01" />
+		<var name="userMiddleName" value="Office01" />
+		<var name="userName" value="Social01 Office01 User01" />
+		<var name="userLastName" value="User01" />
+		<var name="userListName" value="User01, Social01" />
+		<var name="userScreenName" value="socialoffice01" />
+		<var name="roleName" value="Social Office" />
+
+		<var name="userAdditionalEmailAddress" value="socialoffice02@liferay.com" />
+
+		<var name="userAddressCity" value="Ray of Light" />
+		<var name="userAddressCountry" value="United States" />
+		<var name="userAddressPostalCode" value="91234" />
+		<var name="userAddressRegion" value="California" />
+		<var name="userAddressStreet1" value="123 Liferay Ln." />
+		<var name="userAddressType" value="Personal" />
+
+		<var name="userIntroduction" value="Introduction Content" />
+
+		<var name="userInstantMessengerAIM" value="socialofficesn" />
+		<var name="userInstantMessengerICQ" value="socialofficesn" />
+		<var name="userInstantMessengerJabber" value="socialofficesn" />
+		<var name="userInstantMessengerSkype" value="socialofficesn" />
+		<var name="userInstantMessengerWindowsLiveMessenger" value="socialofficesn" />
+		<var name="userInstantMessengerYM" value="socialofficesn" />
+
+		<var name="userPhoneNumberNumber" value="123-123-1234" />
+		<var name="userPhoneNumberExtension" value="123" />
+		<var name="userPhoneNumberType" value="Business" />
+
+		<var name="userProjectTitle" value="Expertise Title" />
+		<var name="userProjectDescription" value="Expertise Description" />
+
+		<var name="userSMS" value="socialoffice@liferay.com" />
+
+		<var name="userSocialNetworkFacebook" value="socialoffice01" />
+		<var name="userSocialNetworkMyspace" value="socialoffice01" />
+		<var name="userSocialNetworkTwitter" value="socialoffice01" />
+
+		<var name="userTag" value="tag1" />
+
+		<var name="userWebsiteURL" value="http://www.socialoffice01.com" />
+		<var name="userWebsiteType" value="Personal" />
+
+		<var name="viewProfileLocation" value="contactsCenter" />
+
+		<execute macro="SOUser#addUserWithSORole">
+			<var name="adminEmailAddress" value="test@liferay.com" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+			<var name="userFirstName" value="Social01" />
+			<var name="userMiddleName" value="Office01" />
+			<var name="userLastName" value="User01" />
+			<var name="userScreenName" value="socialoffice01" />
+		</execute>
+
+		<execute macro="SOUser#logoutPG" />
+
+		<execute macro="SOUser#loginPG">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="password" value="test" />
+		</execute>
+
+		<execute macro="SOProfile#addAdditionalEmailAddressProfile">
+			<var name="userAdditionalEmailAddress" value="${userAdditionalEmailAddress}" />
+		</execute>
+
+		<execute macro="SOProfile#addAddressProfile">
+			<var name="userAddressCity" value="${userAddressCity}" />
+			<var name="userAddressCountry" value="${userAddressCountry}" />
+			<var name="userAddressPostalCode" value="${userAddressPostalCode}" />
+			<var name="userAddressRegion" value="${userAddressRegion}" />
+			<var name="userAddressStreet1" value="${userAddressStreet1}" />
+			<var name="userAddressType" value="${userAddressType}" />
+		</execute>
+
+		<execute macro="SOProfile#addIntroductionProfile">
+			<var name="userIntroduction" value="${userIntroduction}" />
+		</execute>
+
+		<execute macro="SOProfile#addInstantMessengerProfile">
+			<var name="userInstantMessengerAIM" value="${userInstantMessengerAIM}" />
+			<var name="userInstantMessengerICQ" value="${userInstantMessengerICQ}" />
+			<var name="userInstantMessengerJabber" value="${userInstantMessengerJabber}" />
+			<var name="userInstantMessengerSkype" value="${userInstantMessengerSkype}" />
+			<var name="userInstantMessengerWindowsLiveMessenger" value="${userInstantMessengerWindowsLiveMessenger}" />
+			<var name="userInstantMessengerYM" value="${userInstantMessengerYM}" />
+		</execute>
+
+		<execute macro="SOProfile#addPhoneNumbersProfile">
+			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
+			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
+			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />
+		</execute>
+
+		<execute macro="SOProfile#addProjectsProfile">
+			<var name="userProjectTitle" value="${userProjectTitle}" />
+			<var name="userProjectDescription" value="${userProjectDescription}" />
+		</execute>
+
+		<execute macro="SOProfile#addSMSProfile">
+			<var name="userSMS" value="${userSMS}" />
+		</execute>
+
+		<execute macro="SOProfile#addSocialNetworkProfile">
+			<var name="userSocialNetworkFacebook" value="${userSocialNetworkFacebook}" />
+			<var name="userSocialNetworkMyspace" value="${userSocialNetworkMyspace}" />
+			<var name="userSocialNetworkTwitter" value="${userSocialNetworkTwitter}" />
+		</execute>
+
+		<execute macro="SOProfile#addTagProfile">
+			<var name="userTag" value="${userTag}" />
+		</execute>
+
+		<execute macro="SOProfile#addWebsiteProfile">
+			<var name="userWebsiteURL" value="${userWebsiteURL}" />
+			<var name="userWebsiteType" value="${userWebsiteType}" />
+		</execute>
+
+		<execute macro="SOUser#logoutPG" />
+
+		<execute macro="SOUser#loginPG">
+			<var name="userEmailAddress" value="${adminEmailAddress}" />
+			<var name="password" value="test" />
+		</execute>
+
+		<execute macro="SOProfile#viewLocation">
+			<var name="userListName" value="User01, Social01" />
+			<var name="userName" value="${adminName}" />
+			<var name="userScreenName" value="socialoffice01" />
+			<var name="viewProfileLocation" value="${viewProfileLocation}" />
+		</execute>
+
+		<execute macro="SOProfile#viewAdditionalEmailAddressProfile">
+			<var name="userAdditionalEmailAddress" value="${userAdditionalEmailAddress}" />
+		</execute>
+
+		<execute macro="SOProfile#viewAddressProfile">
+			<var name="userAddressCity" value="${userAddressCity}" />
+			<var name="userAddressCountry" value="${userAddressCountry}" />
+			<var name="userAddressPostalCode" value="${userAddressPostalCode}" />
+			<var name="userAddressRegion" value="${userAddressRegion}" />
+			<var name="userAddressStreet1" value="${userAddressStreet1}" />
+			<var name="userAddressType" value="${userAddressType}" />
+		</execute>
+
+		<execute macro="SOProfile#viewIntroductionProfile">
+			<var name="userIntroduction" value="${userIntroduction}" />
+		</execute>
+
+		<execute macro="SOProfile#viewInstantMessengerProfile">
+			<var name="userInstantMessengerAIM" value="${userInstantMessengerAIM}" />
+			<var name="userInstantMessengerICQ" value="${userInstantMessengerICQ}" />
+			<var name="userInstantMessengerJabber" value="${userInstantMessengerJabber}" />
+			<var name="userInstantMessengerSkype" value="${userInstantMessengerSkype}" />
+			<var name="userInstantMessengerWindowsLiveMessenger" value="${userInstantMessengerWindowsLiveMessenger}" />
+			<var name="userInstantMessengerYM" value="${userInstantMessengerYM}" />
+		</execute>
+
+		<execute macro="SOProfile#viewPhoneNumbersProfile">
+			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
+			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
+			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />
+		</execute>
+
+		<execute macro="SOProfile#viewProjectsProfile">
+			<var name="userProjectTitle" value="${userProjectTitle}" />
+			<var name="userProjectDescription" value="${userProjectDescription}" />
+		</execute>
+
+		<execute macro="SOProfile#viewSMSProfile">
+			<var name="userSMS" value="${userSMS}" />
+		</execute>
+
+		<execute macro="SOProfile#viewSocialNetworkProfile">
+			<var name="userSocialNetworkFacebook" value="${userSocialNetworkFacebook}" />
+			<var name="userSocialNetworkMyspace" value="${userSocialNetworkMyspace}" />
+			<var name="userSocialNetworkTwitter" value="${userSocialNetworkTwitter}" />
+		</execute>
+
+		<execute macro="SOProfile#viewWebsiteProfile">
+			<var name="userWebsiteURL" value="${userWebsiteURL}" />
+			<var name="userWebsiteType" value="${userWebsiteType}" />
+		</execute>
+
+		<execute macro="SOUser#logoutPG" />
+
+		<execute macro="SOUser#loginPG">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="password" value="test" />
+		</execute>
+
+		<execute macro="SOProfile#viewLocation">
+			<var name="userListName" value="User01, Social01" />
+			<var name="userName" value="${userName}" />
+			<var name="userScreenName" value="socialoffice01" />
+			<var name="viewProfileLocation" value="${viewProfileLocation}" />
+		</execute>
+
+		<execute macro="SOProfile#viewAdditionalEmailAddressProfile">
+			<var name="userAdditionalEmailAddress" value="socialoffice02@liferay.com" />
+		</execute>
+
+		<execute macro="SOProfile#viewAddressProfile">
+			<var name="userAddressCity" value="${userAddressCity}" />
+			<var name="userAddressCountry" value="${userAddressCountry}" />
+			<var name="userAddressPostalCode" value="${userAddressPostalCode}" />
+			<var name="userAddressRegion" value="${userAddressRegion}" />
+			<var name="userAddressStreet1" value="${userAddressStreet1}" />
+			<var name="userAddressType" value="${userAddressType}" />
+		</execute>
+
+		<execute macro="SOProfile#viewIntroductionProfile">
+			<var name="userIntroduction" value="${userIntroduction}" />
+		</execute>
+
+		<execute macro="SOProfile#viewInstantMessengerProfile">
+			<var name="userInstantMessengerAIM" value="${userInstantMessengerAIM}" />
+			<var name="userInstantMessengerICQ" value="${userInstantMessengerICQ}" />
+			<var name="userInstantMessengerJabber" value="${userInstantMessengerJabber}" />
+			<var name="userInstantMessengerSkype" value="${userInstantMessengerSkype}" />
+			<var name="userInstantMessengerWindowsLiveMessenger" value="${userInstantMessengerWindowsLiveMessenger}" />
+			<var name="userInstantMessengerYM" value="${userInstantMessengerYM}" />
+		</execute>
+
+		<execute macro="SOProfile#viewPhoneNumbersProfile">
+			<var name="userPhoneNumberNumber" value="${userPhoneNumberNumber}" />
+			<var name="userPhoneNumberExtension" value="${userPhoneNumberExtension}" />
+			<var name="userPhoneNumberType" value="${userPhoneNumberType}" />
+		</execute>
+
+		<execute macro="SOProfile#viewProjectsProfile">
+			<var name="userProjectTitle" value="${userProjectTitle}" />
+			<var name="userProjectDescription" value="${userProjectDescription}" />
+		</execute>
+
+		<execute macro="SOProfile#viewSMSProfile">
+			<var name="userSMS" value="${userSMS}" />
+		</execute>
+
+		<execute macro="SOProfile#viewSocialNetworkProfile">
+			<var name="userSocialNetworkFacebook" value="${userSocialNetworkFacebook}" />
+			<var name="userSocialNetworkMyspace" value="${userSocialNetworkMyspace}" />
+			<var name="userSocialNetworkTwitter" value="${userSocialNetworkTwitter}" />
+		</execute>
+
+		<execute macro="SOProfile#viewWebsiteProfile">
+			<var name="userWebsiteURL" value="${userWebsiteURL}" />
+			<var name="userWebsiteType" value="${userWebsiteType}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="SOUser#firstLoginPG" />
+
+		<execute macro="Role#unassignRegRoleCP">
+			<var name="roleName" value="Social Office" />
+			<var name="userScreenName" value="joebloggs" />
+		</execute>
+
+		<execute macro="SOUser#tearDownCP" />
+	</tear-down>
+</definition>

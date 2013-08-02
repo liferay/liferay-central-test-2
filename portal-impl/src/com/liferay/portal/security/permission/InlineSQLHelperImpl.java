@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -35,6 +36,7 @@ import java.util.Set;
  * @author Raymond Augé
  * @author Connor McKay
  */
+@DoPrivileged
 public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 	public static final String FILTER_BY_RESOURCE_BLOCK_ID =
@@ -49,10 +51,12 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 	public static final String JOIN_RESOURCE_PERMISSION =
 		InlineSQLHelper.class.getName() + ".joinResourcePermission";
 
+	@Override
 	public boolean isEnabled() {
 		return isEnabled(0);
 	}
 
+	@Override
 	public boolean isEnabled(long groupId) {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return false;
@@ -85,6 +89,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return true;
 	}
 
+	@Override
 	public boolean isEnabled(long[] groupIds) {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
 			return false;
@@ -103,6 +108,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 		return false;
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField) {
 
@@ -110,6 +116,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, null, new long[] {0}, null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, long groupId) {
 
@@ -117,6 +124,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, null, new long[] {groupId}, null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, long groupId,
 		String bridgeJoin) {
@@ -126,6 +134,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			bridgeJoin);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, long[] groupIds) {
 
@@ -133,6 +142,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, null, groupIds, null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, long[] groupIds,
 		String bridgeJoin) {
@@ -141,6 +151,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, null, groupIds, bridgeJoin);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField) {
 
@@ -148,6 +159,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, userIdField, new long[] {0}, null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long groupId) {
@@ -157,6 +169,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long groupId, String bridgeJoin) {
@@ -166,6 +179,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			bridgeJoin);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long[] groupIds) {
@@ -174,6 +188,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, userIdField, groupIds, null);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		long[] groupIds, String bridgeJoin) {
@@ -183,6 +198,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			bridgeJoin);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		String bridgeJoin) {
@@ -191,6 +207,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			sql, className, classPKField, userIdField, 0, bridgeJoin);
 	}
 
+	@Override
 	public String replacePermissionCheck(
 		String sql, String className, String classPKField, String userIdField,
 		String groupIdField, long[] groupIds, String bridgeJoin) {
@@ -495,12 +512,12 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 
 		StringBundler sb = new StringBundler();
 
-		sb.append("((InlineSQLResourcePermission.scope = ");
-		sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
-		sb.append(" AND ");
-		sb.append("InlineSQLResourcePermission.primKey = CAST_TEXT(");
+		sb.append("(((InlineSQLResourcePermission.primKey = CAST_TEXT(");
 		sb.append(classPKField);
-		sb.append(") AND (");
+		sb.append(")) AND (((");
+		sb.append("InlineSQLResourcePermission.scope = ");
+		sb.append(ResourceConstants.SCOPE_INDIVIDUAL);
+		sb.append(") AND ");
 
 		long userId = getUserId();
 
@@ -599,7 +616,7 @@ public class InlineSQLHelperImpl implements InlineSQLHelper {
 			}
 		}
 
-		sb.append("))");
+		sb.append(")))");
 
 		permissionJoin = StringUtil.replace(
 			permissionJoin,

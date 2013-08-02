@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -52,6 +52,7 @@ public class DLFileEntryTypeFinderImpl
 	public static final String JOIN_BY_FILE_ENTRY_TYPE =
 		DLFileEntryTypeFinder.class.getName() + ".joinByFileEntryType";
 
+	@Override
 	public int countByKeywords(
 			long companyId, long[] groupIds, String keywords,
 			boolean includeBasicFileEntryType)
@@ -74,6 +75,7 @@ public class DLFileEntryTypeFinderImpl
 			includeBasicFileEntryType, false);
 	}
 
+	@Override
 	public int filterCountByKeywords(
 			long companyId, long[] groupIds, String keywords,
 			boolean includeBasicFileEntryType)
@@ -96,10 +98,11 @@ public class DLFileEntryTypeFinderImpl
 			includeBasicFileEntryType, true);
 	}
 
+	@Override
 	public List<DLFileEntryType> filterFindByKeywords(
-		long companyId, long[] groupIds, String keywords,
-		boolean includeBasicFileEntryType, int start, int end,
-		OrderByComparator orderByComparator)
+			long companyId, long[] groupIds, String keywords,
+			boolean includeBasicFileEntryType, int start, int end,
+			OrderByComparator orderByComparator)
 		throws SystemException {
 
 		String[] names = null;
@@ -119,6 +122,7 @@ public class DLFileEntryTypeFinderImpl
 			includeBasicFileEntryType, start, end, orderByComparator, true);
 	}
 
+	@Override
 	public List<DLFileEntryType> findByKeywords(
 			long companyId, long[] groupIds, String keywords,
 			boolean includeBasicFileEntryType, int start, int end,
@@ -171,7 +175,7 @@ public class DLFileEntryTypeFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "description", StringPool.LIKE, false, descriptions);
+				sql, "description", StringPool.LIKE, true, descriptions);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -240,7 +244,7 @@ public class DLFileEntryTypeFinderImpl
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(name)", StringPool.LIKE, false, names);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "description", StringPool.LIKE, false, descriptions);
+				sql, "description", StringPool.LIKE, true, descriptions);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			if (orderByComparator != null) {

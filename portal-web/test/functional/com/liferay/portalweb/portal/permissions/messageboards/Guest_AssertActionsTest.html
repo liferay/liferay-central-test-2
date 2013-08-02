@@ -1,0 +1,303 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Guest_AssertActionsTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Guest_AssertActionsTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/site-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Message Boards Test Page</td>
+	<td>Message Boards Test Page</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@title='Search Messages']</td>
+	<td>Search Messages Field</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='category-subscription-types']/span/a/span[contains(.,'RSS')]</td>
+	<td>RSS</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='category-subscription-types']/span/a/span[contains(.,'Subscribe')]</td>
+	<td>Subscribe</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Add Category']</td>
+	<td>Add Category</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Post New Thread']</td>
+	<td>Post New Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Permissions']</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[1]/a</td>
+	<td>MB Category Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[2]</td>
+	<td>0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[3]</td>
+	<td>1</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[4]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[5]/span/a</td>
+	<td>RSS (Opens New Window)</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[5]/span[@title='Actions']/ul/li/strong/a</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//tr[contains(.,'MB Category Name')]/td[1]/a</td>
+	<td>MB Category Name</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@title='Search Messages']</td>
+	<td>Search Messages Field</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Add Subcategory']</td>
+	<td>Add Subcategory</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Post New Thread']</td>
+	<td>Post New Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//input[@value='Permissions']</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//span[@class='header-back-to']/a</td>
+	<td>« Back to Message Boards Home</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']</td>
+	<td>MB Category Name</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[1]/a</td>
+	<td>MB Thread Message Subject</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[2]</td>
+	<td>Flag</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[3]</td>
+	<td>MA Liferay</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[4]</td>
+	<td>2</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[5]</td>
+	<td>Views</td>
+</tr>
+<tr>
+	<td>assertVisible</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[6]</td>
+	<td>Last Post</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[7]/span[@title='Actions']/ul/li/strong/a</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[7]/span/a</td>
+	<td>RSS (Opens New Window)</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//tr[contains(.,'MB Thread Message Subject')]/td[1]/a</td>
+	<td>MB Thread Message Subject</td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h1[@class='header-title']</td>
+	<td>MB Thread Message Subject</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='thread-actions']/table/tbody/tr/td/span/a[contains(.,'Post New Thread')]</td>
+	<td>Post New Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='thread-actions']/table/tbody/tr/td/span/a[contains(.,'Subscribe')]</td>
+	<td>Subscribe</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='thread-actions']/table/tbody/tr/td/span/a[contains(.,'Lock Thread')]</td>
+	<td>Lock Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//div[@class='thread-actions']/table/tbody/tr/td/span/a[contains(.,'Move Thread')]</td>
+	<td>Move Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li[2]/span/a</td>
+	<td>Reply</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li[3]/span/a</td>
+	<td>Reply with Quote</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li[4]/span/a</td>
+	<td>Quick Reply</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Edit')]</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Permissions')]</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Split Thread')]</td>
+	<td>Split Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Delete')]</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/div/div[@class='user-details']/span/a[contains(.,'Ban This User')]</td>
+	<td>Ban This User</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody[contains(.,'MB Thread Message Body')]/tr/td/div[@class='taglib-ratings thumbs']/a</td>
+	<td>Sign in to vote.</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li[2]/span/a</td>
+	<td>Reply</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li[3]/span/a</td>
+	<td>Reply with Quote</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li[4]/span/a</td>
+	<td>Quick Reply</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Edit')]</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Permissions')]</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Split Thread')]</td>
+	<td>Split Thread</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/ul[@class='edit-controls lfr-component']/li/span/a[contains(.,'Delete')]</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>assertElementNotPresent</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/div/div[@class='user-details']/span/a[contains(.,'Ban This User')]</td>
+	<td>Ban This User</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tbody[contains(.,'MB Thread Message Body Reply')]/tr/td/div[@class='taglib-ratings thumbs']/a</td>
+	<td>Sign in to vote.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,6 @@
 <%@ page import="com.liferay.portlet.expando.model.ExpandoBridge" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoColumnConstants" %>
 <%@ page import="com.liferay.portlet.expando.model.ExpandoTableConstants" %>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.expando.service.permission.ExpandoColumnPermissionUtil" %>
 <%@ page import="com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil" %>
 
@@ -60,7 +59,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 	String localizedName = LanguageUtil.get(pageContext, name);
 
 	if (name.equals(localizedName)) {
-		localizedName = TextFormatter.format(name, TextFormatter.J);
+		localizedName = HtmlUtil.escape(TextFormatter.format(name, TextFormatter.J));
 	}
 
 	Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
@@ -133,16 +132,12 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									year = valueDate.get(Calendar.YEAR);
 								}
 
-								String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
-
-								boolean timeFormatAmPm = timeFormatPattern.contains("a");
-
 								int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
 
 								if ((amPm == -1) && (valueDate != null)) {
 									amPm = Calendar.AM;
 
-									if (timeFormatAmPm) {
+									if (DateUtil.isFormatAmPm(locale)) {
 										amPm = valueDate.get(Calendar.AM_PM);
 									}
 								}
@@ -152,7 +147,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 								if ((hour == -1) && (valueDate != null)) {
 									hour = valueDate.get(Calendar.HOUR_OF_DAY);
 
-									if (timeFormatAmPm) {
+									if (DateUtil.isFormatAmPm(locale)) {
 										hour = valueDate.get(Calendar.HOUR);
 									}
 								}
@@ -170,7 +165,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									disabled="<%= false %>"
 									firstDayOfWeek="<%= valueDate.getFirstDayOfWeek() - 1 %>"
 									monthParam='<%= fieldParam + "Month" %>'
-									monthValue='<%= month %>'
+									monthValue="<%= month %>"
 									yearParam='<%= fieldParam + "Year" %>'
 									yearRangeEnd="<%= valueDate.get(Calendar.YEAR) + 100 %>"
 									yearRangeStart="<%= valueDate.get(Calendar.YEAR) - 100 %>"
@@ -580,7 +575,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
 
-										<input <%= ((curValue.length > 0) && ArrayUtil.contains(curValue, curDefaultValue)) ? "checked" : "" %> name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--" type="checkbox" value="<%= curDefaultValue %>"><%= curDefaultValue %></input><br />
+										<input <%= ((curValue.length > 0) && ArrayUtil.contains(curValue, curDefaultValue)) ? "checked" : "" %> name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--" type="checkbox" value="<%= HtmlUtil.escapeAttribute(curDefaultValue) %>"><%= HtmlUtil.escape(curDefaultValue) %></input><br />
 
 									<%
 									}
@@ -595,7 +590,7 @@ ExpandoBridge expandoBridge = ExpandoBridgeFactoryUtil.getExpandoBridge(company.
 									for (String curDefaultValue : (String[])defaultValue) {
 									%>
 
-										<input <%= ((curValue.length > 0) && ArrayUtil.contains(curValue, curDefaultValue)) ? "checked" : "" %> name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--" type="radio" value="<%= curDefaultValue %>"><%= curDefaultValue %></input><br />
+										<input <%= ((curValue.length > 0) && ArrayUtil.contains(curValue, curDefaultValue)) ? "checked" : "" %> name="<portlet:namespace />ExpandoAttribute--<%= escapedName %>--" type="radio" value="<%= HtmlUtil.escapeAttribute(curDefaultValue) %>"><%= HtmlUtil.escape(curDefaultValue) %></input><br />
 
 									<%
 									}

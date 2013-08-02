@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,7 +22,6 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
-<%@ page import="com.liferay.portlet.messageboards.model.MBThreadConstants" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
@@ -181,13 +180,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						</c:if>
 
 						<aui:button-row>
-							<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>" />
+							<aui:button cssClass="aui-button-comment" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value="<%= postReplyButtonLabel %>" />
 
 							<%
 							String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i + "').value = ''; void('');";
 							%>
 
-							<aui:button onClick="<%= taglibCancel %>" type="cancel" />
+							<aui:button cssClass="aui-button-comment" onClick="<%= taglibCancel %>" type="cancel" />
 						</aui:button-row>
 					</div>
 				</aui:fieldset>
@@ -223,12 +222,12 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 						}
 
 						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
-						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
 						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
-						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(lastChildNode));
+						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, message);
 						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(lastChildNode));
+						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, rootMessage);
+						request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_THREAD, thread);
 					%>
 
 						<liferay-util:include page="/html/taglib/ui/discussion/view_message_thread.jsp" />
@@ -422,13 +421,13 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 									<aui:input id='<%= randomNamespace + "postReplyBody" + i %>' label="" name='<%= "postReplyBody" + i %>' style='<%= "height: " + ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT + "px; width: " + ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH + "px;" %>' type="textarea" wrap="soft" />
 
 									<aui:button-row>
-										<aui:button id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
+										<aui:button cssClass="aui-button-comment" id='<%= namespace + randomNamespace + "postReplyButton" + i %>' onClick='<%= randomNamespace + "postReply(" + i + ");" %>' value='<%= themeDisplay.isSignedIn() ? "reply" : "reply-as" %>' />
 
 										<%
 										String taglibCancel = "document.getElementById('" + randomNamespace + "postReplyForm" + i + "').style.display = 'none'; document.getElementById('" + namespace + randomNamespace + "postReplyBody" + i + "').value = ''; void('');";
 										%>
 
-										<aui:button onClick="<%= taglibCancel %>" type="cancel" />
+										<aui:button cssClass="aui-button-comment" onClick="<%= taglibCancel %>" type="cancel" />
 									</aui:button-row>
 								</div>
 
@@ -516,31 +515,31 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 	<aui:script>
 		function <%= randomNamespace %>afterLogin(emailAddress, anonymousAccount) {
-			document.<%= namespace %><%= formName %>.<%= namespace %>emailAddress.value = emailAddress;
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>emailAddress.value = emailAddress;
 
 			if (anonymousAccount) {
-				<portlet:namespace />sendMessage(document.<portlet:namespace /><%= formName %>);
+				<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"]);
 			}
 			else {
-				<portlet:namespace />sendMessage(document.<portlet:namespace /><%= formName %>, true);
+				<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"], true);
 			}
 		}
 
 		function <%= randomNamespace %>deleteMessage(i) {
-			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
+			var messageId = document['<%= namespace + HtmlUtil.escapeJS(formName) %>']['<%= namespace %>messageId' + i].value;
 
-			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
-			<portlet:namespace />sendMessage(document.<%= namespace %><%= formName %>);
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>messageId.value = messageId;
+			<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"]);
 		}
 
 		function <%= randomNamespace %>postReply(i) {
-			eval("var parentMessageId = document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId" + i + ".value;");
-			eval("var body = document.<%= namespace %><%= formName %>.<%= namespace %>postReplyBody" + i + ".value;");
+			var parentMessageId = document['<%= namespace + HtmlUtil.escapeJS(formName) %>']['<%= namespace %>parentMessageId' + i].value;
+			var body = document['<%= namespace + HtmlUtil.escapeJS(formName) %>']['<%= namespace %>postReplyBody' + i ].value;
 
-			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
-			document.<%= namespace %><%= formName %>.<%= namespace %>parentMessageId.value = parentMessageId;
-			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.ADD %>";
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>parentMessageId.value = parentMessageId;
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>body.value = body;
 
 			if (!themeDisplay.isSignedIn()) {
 				window.namespace = '<%= namespace %>';
@@ -549,17 +548,17 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 				Liferay.Util.openWindow(
 					{
 						dialog: {
-							centered: true,
+							align: Liferay.Util.Window.ALIGN_CENTER,
 							modal: true
 						},
 						id: '<%= namespace %>signInDialog',
-						title: Liferay.Language.get('sign-in'),
+						title: '<%= UnicodeLanguageUtil.get(pageContext, "sign-in") %>',
 						uri: '<%= loginURL.toString() %>'
 					}
 				);
 			}
 			else {
-				<portlet:namespace />sendMessage(document.<%= namespace %><%= formName %>);
+				<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"]);
 			}
 		}
 
@@ -574,48 +573,58 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 		function <%= randomNamespace %>subscribeToComments(subscribe) {
 			if (subscribe) {
-				document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.SUBSCRIBE_TO_COMMENTS %>";
+				document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.SUBSCRIBE_TO_COMMENTS %>";
 			}
 			else {
-				document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UNSUBSCRIBE_FROM_COMMENTS %>";
+				document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UNSUBSCRIBE_FROM_COMMENTS %>";
 			}
 
-			<portlet:namespace />sendMessage(document.<%= namespace %><%= formName %>);
+			<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"]);
 		}
 
 		function <%= randomNamespace %>updateMessage(i, pending) {
-			eval("var messageId = document.<%= namespace %><%= formName %>.<%= namespace %>messageId" + i + ".value;");
-			eval("var body = document.<%= namespace %><%= formName %>.<%= namespace %>editReplyBody" + i + ".value;");
+			var messageId = document['<%= namespace + HtmlUtil.escapeJS(formName) %>']['<%= namespace %>messageId' + i].value;
+			var body = document['<%= namespace + HtmlUtil.escapeJS(formName) %>']['<%= namespace %>editReplyBody' + i].value;
 
 			if (pending) {
-				document.<%= namespace %><%= formName %>.<%= namespace %>workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
+				document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>workflowAction.value = <%= WorkflowConstants.ACTION_SAVE_DRAFT %>;
 			}
 
-			document.<%= namespace %><%= formName %>.<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-			document.<%= namespace %><%= formName %>.<%= namespace %>messageId.value = messageId;
-			document.<%= namespace %><%= formName %>.<%= namespace %>body.value = body;
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>messageId.value = messageId;
+			document["<%= namespace + HtmlUtil.escapeJS(formName) %>"].<%= namespace %>body.value = body;
 
-			<portlet:namespace />sendMessage(document.<%= namespace %><%= formName %>);
+			<portlet:namespace />sendMessage(document["<%= namespace + HtmlUtil.escapeJS(formName) %>"]);
 		}
 
 		Liferay.provide(
 			window,
 			'<portlet:namespace />sendMessage',
 			function(form, refreshPage) {
+				var Util = Liferay.Util;
+
 				var A = AUI();
 
-				var uri = form.getAttribute('action');
+				form = A.one(form);
+
+				var commentButtonList = form.all('.aui-button-comment input');
 
 				A.io.request(
-					uri,
+					form.attr('action'),
 					{
 						dataType: 'json',
 						form: {
 							id: form
 						},
 						on: {
+							complete: function(event, id, obj) {
+								Util.toggleDisabled(commentButtonList, false);
+							},
 							failure: function(event, id, obj) {
 								<portlet:namespace />showStatusMessage('error', '<%= UnicodeLanguageUtil.get(pageContext, "your-request-failed-to-complete") %>');
+							},
+							start: function() {
+								Util.toggleDisabled(commentButtonList, true);
 							},
 							success: function(event, id, obj) {
 								var response = this.get('responseData');

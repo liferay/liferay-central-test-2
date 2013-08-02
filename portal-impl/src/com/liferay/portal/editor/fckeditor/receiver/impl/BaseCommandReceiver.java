@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -80,6 +80,7 @@ import org.w3c.dom.Node;
  */
 public abstract class BaseCommandReceiver implements CommandReceiver {
 
+	@Override
 	public void createFolder(
 		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -129,6 +130,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		_writeDocument(document, response);
 	}
 
+	@Override
 	public void fileUpload(
 		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -210,8 +212,11 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (cause != null) {
 				String causeString = GetterUtil.getString(cause.toString());
 
-				if (causeString.contains("NoSuchFolderException")||
-					causeString.contains("NoSuchGroupException")) {
+				if (causeString.contains("DuplicateFileException")) {
+					returnValue = "201";
+				}
+				else if (causeString.contains("NoSuchFolderException")||
+						 causeString.contains("NoSuchGroupException")) {
 
 					returnValue = "204";
 				}
@@ -248,6 +253,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		_writeUploadResponse(returnValue, response);
 	}
 
+	@Override
 	public void getFolders(
 		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -263,6 +269,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		_writeDocument(document, response);
 	}
 
+	@Override
 	public void getFoldersAndFiles(
 		CommandArgument commandArgument, HttpServletRequest request,
 		HttpServletResponse response) {

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -280,13 +280,13 @@ else if (tabs3.equals("shipping-email")) {
 									[$FROM_ADDRESS$]
 								</dt>
 								<dd>
-									<%= emailFromAddress %>
+									<%= HtmlUtil.escape(emailFromAddress) %>
 								</dd>
 								<dt>
 									[$FROM_NAME$]
 								</dt>
 								<dd>
-									<%= emailFromName %>
+									<%= HtmlUtil.escape(emailFromName) %>
 								</dd>
 								<dt>
 									[$ORDER_BILLING_ADDRESS$]

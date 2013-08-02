@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.sanitizer.Sanitizer" %><%@
+page import="com.liferay.portal.kernel.sanitizer.SanitizerException" %><%@
 page import="com.liferay.portal.kernel.sanitizer.SanitizerUtil" %><%@
 page import="com.liferay.portlet.journal.action.EditArticleAction" %><%@
 page import="com.liferay.portlet.journal.model.JournalArticle" %><%@
@@ -24,7 +25,6 @@ page import="com.liferay.portlet.journal.search.ArticleSearch" %><%@
 page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %><%@
 page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %><%@
 page import="com.liferay.portlet.journal.service.JournalArticleServiceUtil" %><%@
-page import="com.liferay.portlet.journal.util.JournalUtil" %><%@
 page import="com.liferay.portlet.rss.util.RSSUtil" %>
 
 <%@ page import="com.sun.syndication.feed.synd.SyndContent" %><%@
@@ -34,13 +34,9 @@ page import="com.sun.syndication.feed.synd.SyndFeed" %><%@
 page import="com.sun.syndication.feed.synd.SyndImage" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
+PortletPreferences preferences = portletPreferences;
 
 String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
 
 String[] urls = preferences.getValues("urls", new String[0]);
 String[] titles = preferences.getValues("titles", new String[0]);

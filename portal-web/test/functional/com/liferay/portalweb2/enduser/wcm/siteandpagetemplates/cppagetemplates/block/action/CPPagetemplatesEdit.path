@@ -1,0 +1,49 @@
+<html>
+<head>
+<title>CPPagetemplatesEdit</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPPagetemplatesEdit</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPPagetemplatesEdit</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAME_FIELD</td>
+	<td>//input[@id='_146_name_en_US']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DESCRIPTION_FIELD</td>
+	<td>//textarea[@id='_146_description']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ACTIVE_CHECKBOX</td>
+	<td>//input[@id='_146_activeCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIGURATION_OPEN</td>
+	<td>//div[@class='aui-field aui-field-wrapper']/div/span/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SAVE_BUTTON</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

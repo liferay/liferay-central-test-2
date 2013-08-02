@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -188,6 +190,10 @@ public class ClassNameWrapper implements ClassName, ModelWrapper<ClassName> {
 		return new ClassNameWrapper(_className.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ClassName toUnescapedModel() {
+		return new ClassNameWrapper(_className.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _className.toString();
@@ -200,6 +206,25 @@ public class ClassNameWrapper implements ClassName, ModelWrapper<ClassName> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_className.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClassNameWrapper)) {
+			return false;
+		}
+
+		ClassNameWrapper classNameWrapper = (ClassNameWrapper)obj;
+
+		if (Validator.equals(_className, classNameWrapper._className)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

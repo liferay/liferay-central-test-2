@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -266,6 +266,149 @@ public class AssetCategoryLocalServiceUtil {
 	}
 
 	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addAssetEntryAssetCategory(long entryId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addAssetEntryAssetCategory(entryId, categoryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addAssetEntryAssetCategory(long entryId,
+		com.liferay.portlet.asset.model.AssetCategory assetCategory)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addAssetEntryAssetCategory(entryId, assetCategory);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addAssetEntryAssetCategories(long entryId,
+		long[] categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addAssetEntryAssetCategories(entryId, categoryIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void addAssetEntryAssetCategories(long entryId,
+		java.util.List<com.liferay.portlet.asset.model.AssetCategory> AssetCategories)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().addAssetEntryAssetCategories(entryId, AssetCategories);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void clearAssetEntryAssetCategories(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().clearAssetEntryAssetCategories(entryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteAssetEntryAssetCategory(long entryId,
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAssetEntryAssetCategory(entryId, categoryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteAssetEntryAssetCategory(long entryId,
+		com.liferay.portlet.asset.model.AssetCategory assetCategory)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAssetEntryAssetCategory(entryId, assetCategory);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteAssetEntryAssetCategories(long entryId,
+		long[] categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAssetEntryAssetCategories(entryId, categoryIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void deleteAssetEntryAssetCategories(long entryId,
+		java.util.List<com.liferay.portlet.asset.model.AssetCategory> AssetCategories)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteAssetEntryAssetCategories(entryId, AssetCategories);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetEntryAssetCategories(
+		long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAssetEntryAssetCategories(entryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetEntryAssetCategories(
+		long entryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAssetEntryAssetCategories(entryId, start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.liferay.portlet.asset.model.AssetCategory> getAssetEntryAssetCategories(
+		long entryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getAssetEntryAssetCategories(entryId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int getAssetEntryAssetCategoriesCount(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getAssetEntryAssetCategoriesCount(entryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasAssetEntryAssetCategory(long entryId,
+		long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasAssetEntryAssetCategory(entryId, categoryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static boolean hasAssetEntryAssetCategories(long entryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().hasAssetEntryAssetCategories(entryId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void setAssetEntryAssetCategories(long entryId,
+		long[] categoryIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getService().setAssetEntryAssetCategories(entryId, categoryIds);
+	}
+
+	/**
 	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
@@ -364,6 +507,13 @@ public class AssetCategoryLocalServiceUtil {
 		return getService().getCategory(categoryId);
 	}
 
+	public static com.liferay.portlet.asset.model.AssetCategory getCategory(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCategory(uuid, groupId);
+	}
+
 	public static long[] getCategoryIds(java.lang.String className, long classPK)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCategoryIds(className, classPK);
@@ -438,6 +588,11 @@ public class AssetCategoryLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .getVocabularyRootCategories(vocabularyId, start, end, obc);
+	}
+
+	public static int getVocabularyRootCategoriesCount(long vocabularyId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getVocabularyRootCategoriesCount(vocabularyId);
 	}
 
 	public static void mergeCategories(long fromCategoryId, long toCategoryId)

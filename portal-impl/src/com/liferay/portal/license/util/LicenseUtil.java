@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,18 +25,19 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 
@@ -138,114 +139,170 @@ public class LicenseUtil {
 	}
 
 	public static String getHostName() {
-		if (_hostName == null) {
-			_hostName = StringPool.BLANK;
+		if (_hostName != null) {
+			return _hostName;
+		}
 
-			try {
-				Runtime runtime = Runtime.getRuntime();
+		_hostName = StringPool.BLANK;
 
-				Process process = runtime.exec("hostname");
+		try {
+			Runtime runtime = Runtime.getRuntime();
 
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(process.getInputStream()), 128);
+			Process process = runtime.exec("hostname");
 
-				_hostName = bufferedReader.readLine();
+			BufferedReader bufferedReader = new BufferedReader(
+				new InputStreamReader(process.getInputStream()), 128);
 
-				bufferedReader.close();
-			}
-			catch (Exception e) {
-				_log.error("Unable to read local server's host name");
+			_hostName = bufferedReader.readLine();
 
-				_log.error(e, e);
-			}
+			bufferedReader.close();
+		}
+		catch (Exception e) {
+			_log.error("Unable to read local server's host name");
+
+			_log.error(e, e);
 		}
 
 		return _hostName;
 	}
 
 	public static Set<String> getIpAddresses() {
-		if (_ipAddresses == null) {
-			_ipAddresses = new HashSet<String>();
+		if (_ipAddresses != null) {
+			return new HashSet<String>(_ipAddresses);
+		}
 
-			try {
-				List<NetworkInterface> networkInterfaces = Collections.list(
-					NetworkInterface.getNetworkInterfaces());
+		_ipAddresses = new HashSet<String>();
 
-				for (NetworkInterface networkInterface : networkInterfaces) {
-					List<InetAddress> inetAddresses = Collections.list(
-						networkInterface.getInetAddresses());
+		try {
+			List<NetworkInterface> networkInterfaces = Collections.list(
+				NetworkInterface.getNetworkInterfaces());
 
-					for (InetAddress inetAddress : inetAddresses) {
-						if (inetAddress.isLinkLocalAddress() ||
-							inetAddress.isLoopbackAddress() ||
-							!(inetAddress instanceof Inet4Address)) {
+			for (NetworkInterface networkInterface : networkInterfaces) {
+				List<InetAddress> inetAddresses = Collections.list(
+					networkInterface.getInetAddresses());
 
-							continue;
-						}
+				for (InetAddress inetAddress : inetAddresses) {
+					if (inetAddress.isLinkLocalAddress() ||
+						inetAddress.isLoopbackAddress() ||
+						!(inetAddress instanceof Inet4Address)) {
 
-						_ipAddresses.add(inetAddress.getHostAddress());
+						continue;
 					}
+
+					_ipAddresses.add(inetAddress.getHostAddress());
 				}
 			}
-			catch (Exception e) {
-				_log.error("Unable to read local server's IP addresses");
+		}
+		catch (Exception e) {
+			_log.error("Unable to read local server's IP addresses");
 
-				_log.error(e, e);
-			}
+			_log.error(e, e);
 		}
 
 		return new HashSet<String>(_ipAddresses);
 	}
 
 	public static Set<String> getMacAddresses() {
-		if (_macAddresses == null) {
-			_macAddresses = new HashSet<String>();
+		if (_macAddresses != null) {
+			return new HashSet<String>(_macAddresses);
+		}
 
-			try {
-				Process process = null;
+		Set<String> macAddresses = new HashSet<String>();
 
-				Runtime runtime = Runtime.getRuntime();
+		String osName = System.getProperty("os.name");
 
-				File ifconfigFile = new File("/sbin/ifconfig");
+		String executable = null;
+		String arguments = null;
 
-				if (ifconfigFile.exists()) {
-					process = runtime.exec(
-						new String[] {"/sbin/ifconfig", "-a"}, null);
-				}
-				else {
-					process = runtime.exec(
-						new String[] {"ipconfig", "/all"}, null);
-				}
-
-				BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(process.getInputStream()), 128);
-
-				String line = null;
-
-				while ((line = bufferedReader.readLine()) != null) {
-					Matcher matcher = _macAddressPattern.matcher(line);
-
-					if (matcher.find()) {
-						String macAddress = matcher.group(1);
-
-						if (Validator.isNotNull(macAddress)) {
-							macAddress = macAddress.toLowerCase();
-							macAddress = StringUtil.replace(
-								macAddress, "-", ":");
-
-							_macAddresses.add(macAddress);
-						}
-					}
-				}
-
-				bufferedReader.close();
+		if (StringUtil.startsWith(osName, "win")) {
+			executable = "ipconfig";
+			arguments = "/all";
+		}
+		else {
+			if (StringUtil.startsWith(osName, "aix")) {
+				executable = "netstat";
+				arguments = "-ina";
 			}
-			catch (Exception e) {
-				_log.error(e, e);
+			else {
+				executable = "ifconfig";
+				arguments = "-a";
+			}
+
+			File sbinDir = new File("/sbin", executable);
+
+			if (sbinDir.exists()) {
+				executable = "/sbin/".concat(executable);
 			}
 		}
 
-		return new HashSet<String>(_macAddresses);
+		try {
+			Runtime runtime = Runtime.getRuntime();
+
+			Process process = runtime.exec(
+				new String[] {executable, arguments});
+
+			macAddresses = getMacAddresses(osName, process.getInputStream());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		_macAddresses = macAddresses;
+
+		return new HashSet<String>(macAddresses);
+	}
+
+	public static Set<String> getMacAddresses(
+			String osName, InputStream processInputStream)
+		throws Exception {
+
+		Set<String> macAddresses = new HashSet<String>();
+
+		Pattern macAddressPattern = _macAddressPattern1;
+
+		if (StringUtil.startsWith(osName, "aix")) {
+			macAddressPattern = _macAddressPattern2;
+		}
+
+		String processOutput = StringUtil.read(processInputStream);
+
+		String[] lines = StringUtil.split(processOutput, CharPool.NEW_LINE);
+
+		for (String line : lines) {
+			Matcher matcher = macAddressPattern.matcher(line);
+
+			if (!matcher.find()) {
+				continue;
+			}
+
+			String macAddress = matcher.group(1);
+
+			macAddress = macAddress.toLowerCase();
+			macAddress = macAddress.replace(CharPool.DASH, CharPool.COLON);
+			macAddress = macAddress.replace(CharPool.PERIOD, CharPool.COLON);
+
+			StringBuilder sb = new StringBuilder(17);
+
+			sb.append(macAddress);
+
+			for (int i = 1; i < 5; ++i) {
+				int pos = (i * 3) - 1;
+
+				if (sb.charAt(pos) != CharPool.COLON) {
+					sb.insert((i - 1) * 3, CharPool.NUMBER_0);
+				}
+			}
+
+			if (sb.length() < 17) {
+				sb.insert(15, CharPool.NUMBER_0);
+			}
+
+			macAddress = sb.toString();
+
+			macAddresses.add(macAddress);
+		}
+
+		return macAddresses;
 	}
 
 	public static byte[] getServerIdBytes() throws Exception {
@@ -310,8 +367,10 @@ public class LicenseUtil {
 				catch (Exception e) {
 					_log.error(e, e);
 
+					InetAddress inetAddress = clusterNode.getInetAddress();
+
 					String message =
-						"Error contacting " + clusterNode.getHostName();
+						"Error contacting " + inetAddress.getHostName();
 
 					if (clusterNode.getPort() != -1) {
 						message += StringPool.COLON + clusterNode.getPort();
@@ -580,9 +639,9 @@ public class LicenseUtil {
 	}
 
 	private static void _initKeys() {
-		ClassLoader classLoader = PACLClassLoaderUtil.getPortalClassLoader();
+		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
-		if (_encryptedSymmetricKey != null) {
+		if ((classLoader == null) || (_encryptedSymmetricKey != null)) {
 			return;
 		}
 
@@ -658,8 +717,7 @@ public class LicenseUtil {
 	private static final String _PROXY_USER_NAME = GetterUtil.getString(
 		PropsUtil.get("license.proxy.username"));
 
-	private static Log _log = LogFactoryUtil.getLog(
-		DefaultLicenseManagerImpl.class);
+	private static Log _log = LogFactoryUtil.getLog(LicenseUtil.class);
 
 	private static String _encryptedSymmetricKey;
 	private static MethodHandler _getServerInfoMethodHandler =
@@ -668,8 +726,10 @@ public class LicenseUtil {
 	private static String _hostName;
 	private static Set<String> _ipAddresses;
 	private static Set<String> _macAddresses;
-	private static Pattern _macAddressPattern = Pattern.compile(
-		"\\s((\\p{XDigit}{1,2}(-|:)){5}(\\p{XDigit}{1,2}))(?:\\s|$)");
+	private static Pattern _macAddressPattern1 = Pattern.compile(
+		"\\s((\\p{XDigit}{2}(-|:)){5}(\\p{XDigit}{2}))(?:\\s|$)");
+	private static Pattern _macAddressPattern2 = Pattern.compile(
+		"\\s((\\p{XDigit}{1,2}(\\.)){5}(\\p{XDigit}{1,2}))(?:\\s|$)");
 	private static MethodKey _registerOrderMethodKey = new MethodKey(
 		LicenseUtil.class.getName(), "registerOrder", String.class,
 		String.class, int.class);

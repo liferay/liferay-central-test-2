@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,8 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
+import com.liferay.portal.kernel.portlet.LiferayPortletContext;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.PortletFilterUtil;
@@ -33,13 +35,16 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.tools.deploy.PortletDeployer;
+import com.liferay.portal.util.ClassLoaderUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -67,6 +72,7 @@ import javax.portlet.filter.RenderFilter;
 import javax.portlet.filter.ResourceFilter;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -77,6 +83,7 @@ import org.apache.commons.lang.time.StopWatch;
 /**
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
+ * @author Raymond Augé
  */
 public class InvokerPortletImpl implements InvokerPortlet {
 
@@ -179,6 +186,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 			facesPortlet, strutsPortlet, strutsBridgePortlet);
 	}
 
+	@Override
 	public void destroy() {
 		if (PortletConstants.hasInstanceId(_portletModel.getPortletId())) {
 			if (_log.isWarnEnabled()) {
@@ -189,13 +197,13 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 
 		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
+			ClassLoaderUtil.getContextClassLoader();
 
 		ClassLoader portletClassLoader = getPortletClassLoader();
 
 		try {
 			if (portletClassLoader != null) {
-				PACLClassLoaderUtil.setContextClassLoader(portletClassLoader);
+				ClassLoaderUtil.setContextClassLoader(portletClassLoader);
 			}
 
 			removePortletFilters();
@@ -204,80 +212,93 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 		finally {
 			if (portletClassLoader != null) {
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
+	@Override
 	public Integer getExpCache() {
 		return _expCache;
 	}
 
+	@Override
 	public Portlet getPortlet() {
 		return _portlet;
 	}
 
+	@Override
 	public ClassLoader getPortletClassLoader() {
-		ClassLoader classLoader = (ClassLoader)_portletContextImpl.getAttribute(
-			PluginContextListener.PLUGIN_CLASS_LOADER);
+		ClassLoader classLoader =
+			(ClassLoader)_liferayPortletContext.getAttribute(
+				PluginContextListener.PLUGIN_CLASS_LOADER);
 
 		if (classLoader == null) {
-			classLoader = PACLClassLoaderUtil.getPortalClassLoader();
+			classLoader = ClassLoaderUtil.getPortalClassLoader();
 		}
 
 		return classLoader;
 	}
 
-	public PortletConfigImpl getPortletConfig() {
-		return _portletConfigImpl;
+	@Override
+	public PortletConfig getPortletConfig() {
+		return _liferayPortletConfig;
 	}
 
-	public PortletContextImpl getPortletContext() {
-		return _portletContextImpl;
+	@Override
+	public PortletContext getPortletContext() {
+		return _liferayPortletContext;
 	}
 
+	@Override
 	public Portlet getPortletInstance() {
 		return _portlet;
 	}
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
-		_portletConfigImpl = (PortletConfigImpl)portletConfig;
+		_liferayPortletConfig = (LiferayPortletConfig)portletConfig;
 
 		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
+			ClassLoaderUtil.getContextClassLoader();
 
 		ClassLoader portletClassLoader = getPortletClassLoader();
 
 		try {
 			if (portletClassLoader != null) {
-				PACLClassLoaderUtil.setContextClassLoader(portletClassLoader);
+				ClassLoaderUtil.setContextClassLoader(portletClassLoader);
 			}
 
 			_portlet.init(portletConfig);
 		}
 		finally {
 			if (portletClassLoader != null) {
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}
 
+	@Override
 	public boolean isCheckAuthToken() {
 		return _checkAuthToken;
 	}
 
+	@Override
 	public boolean isFacesPortlet() {
 		return _facesPortlet;
 	}
 
+	@Override
 	public boolean isStrutsBridgePortlet() {
 		return _strutsBridgePortlet;
 	}
 
+	@Override
 	public boolean isStrutsPortlet() {
 		return _strutsPortlet;
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException {
@@ -310,6 +331,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void processEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
@@ -331,6 +353,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -420,6 +443,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException {
@@ -447,6 +471,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void setPortletFilters() throws PortletException {
 		PortletApp portletApp = _portletModel.getPortletApp();
 
@@ -469,7 +494,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 				entry.getValue();
 
 			PortletFilter portletFilter = PortletFilterFactory.create(
-				portletFilterModel, _portletContextImpl);
+				portletFilterModel, _liferayPortletContext);
 
 			Set<String> lifecycles = portletFilterModel.getLifecycles();
 
@@ -489,6 +514,47 @@ public class InvokerPortletImpl implements InvokerPortlet {
 				_resourceFilters.add((ResourceFilter)portletFilter);
 			}
 		}
+
+		ClassLoader classLoader = ClassLoaderUtil.getContextClassLoader();
+
+		try {
+			ClassLoaderUtil.setContextClassLoader(
+				ClassLoaderUtil.getPortalClassLoader());
+
+			for (String portletFilterClassName :
+					PropsValues.PORTLET_FILTERS_SYSTEM) {
+
+				com.liferay.portal.model.PortletFilter portletFilterModel =
+					new PortletFilterImpl(
+						portletFilterClassName, portletFilterClassName,
+						Collections.<String>emptySet(),
+						Collections.<String, String>emptyMap(), portletApp);
+
+				PortletFilter portletFilter = PortletFilterFactory.create(
+					portletFilterModel, _liferayPortletContext);
+
+				_systemPortletFilters.add(portletFilter);
+
+				if (portletFilter instanceof ActionFilter) {
+					_actionFilters.add((ActionFilter)portletFilter);
+				}
+
+				if (portletFilter instanceof EventFilter) {
+					_eventFilters.add((EventFilter)portletFilter);
+				}
+
+				if (portletFilter instanceof RenderFilter) {
+					_renderFilters.add((RenderFilter)portletFilter);
+				}
+
+				if (portletFilter instanceof ResourceFilter) {
+					_resourceFilters.add((ResourceFilter)portletFilter);
+				}
+			}
+		}
+		finally {
+			ClassLoaderUtil.setContextClassLoader(classLoader);
+		}
 	}
 
 	protected void invoke(
@@ -499,19 +565,21 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		FilterChain filterChain = new FilterChainImpl(_portlet, filters);
 
-		if (_portletConfigImpl.isWARFile()) {
-			String invokerPortletName = _portletConfigImpl.getInitParameter(
+		if (_liferayPortletConfig.isWARFile()) {
+			String invokerPortletName = _liferayPortletConfig.getInitParameter(
 				INIT_INVOKER_PORTLET_NAME);
 
 			if (invokerPortletName == null) {
-				invokerPortletName = _portletConfigImpl.getPortletName();
+				invokerPortletName = _liferayPortletConfig.getPortletName();
 			}
 
 			String path = StringPool.SLASH + invokerPortletName + "/invoke";
 
+			ServletContext servletContext =
+				_liferayPortletContext.getServletContext();
+
 			RequestDispatcher requestDispatcher =
-				_portletContextImpl.getServletContext().getRequestDispatcher(
-					path);
+				servletContext.getRequestDispatcher(path);
 
 			HttpServletRequest request = portletRequest.getHttpServletRequest();
 			HttpServletResponse response =
@@ -633,6 +701,12 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		_eventFilters.clear();
 		_renderFilters.clear();
 		_resourceFilters.clear();
+
+		for (PortletFilter portletFilter : _systemPortletFilters) {
+			portletFilter.destroy();
+		}
+
+		_systemPortletFilters.clear();
 	}
 
 	private void _initialize(
@@ -644,9 +718,9 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 		_portletModel = portletModel;
 		_portlet = portlet;
-		_portletConfigImpl = (PortletConfigImpl)portletConfig;
+		_liferayPortletConfig = (LiferayPortletConfig)portletConfig;
 		_portletId = _portletModel.getPortletId();
-		_portletContextImpl = (PortletContextImpl)portletContext;
+		_liferayPortletContext = (LiferayPortletContext)portletContext;
 		_checkAuthToken = checkAuthToken;
 		_facesPortlet = facesPortlet;
 		_strutsPortlet = strutsPortlet;
@@ -657,7 +731,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"Create instance cache wrapper for " +
-					_portletContextImpl.getPortlet().getPortletId());
+					_liferayPortletContext.getPortlet().getPortletId());
 		}
 	}
 
@@ -668,9 +742,9 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	private List<EventFilter> _eventFilters = new ArrayList<EventFilter>();
 	private Integer _expCache;
 	private boolean _facesPortlet;
+	private LiferayPortletConfig _liferayPortletConfig;
+	private LiferayPortletContext _liferayPortletContext;
 	private Portlet _portlet;
-	private PortletConfigImpl _portletConfigImpl;
-	private PortletContextImpl _portletContextImpl;
 	private String _portletId;
 	private com.liferay.portal.model.Portlet _portletModel;
 	private List<RenderFilter> _renderFilters = new ArrayList<RenderFilter>();
@@ -678,5 +752,7 @@ public class InvokerPortletImpl implements InvokerPortlet {
 		new ArrayList<ResourceFilter>();
 	private boolean _strutsBridgePortlet;
 	private boolean _strutsPortlet;
+	private List<PortletFilter> _systemPortletFilters =
+		new ArrayList<PortletFilter>();
 
 }

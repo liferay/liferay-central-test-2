@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,8 +30,6 @@ import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.FieldConstants;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageEngineUtil;
-
-import java.io.Serializable;
 
 import java.util.List;
 import java.util.Map;
@@ -78,7 +76,6 @@ public class DDLCSVExporter extends BaseDDLExporter {
 				recordVersion.getDDMStorageId());
 
 			for (Map<String, String> fieldMap : fieldsMap.values()) {
-				String dataType = fieldMap.get(FieldConstants.DATA_TYPE);
 				String name = fieldMap.get(FieldConstants.NAME);
 				String value = StringPool.BLANK;
 
@@ -88,10 +85,7 @@ public class DDLCSVExporter extends BaseDDLExporter {
 					value = field.getRenderedValue(getLocale());
 				}
 
-				Serializable fieldValueSerializable =
-					FieldConstants.getSerializable(dataType, value);
-
-				sb.append(CSVUtil.encode(fieldValueSerializable));
+				sb.append(CSVUtil.encode(value));
 				sb.append(CharPool.COMMA);
 			}
 

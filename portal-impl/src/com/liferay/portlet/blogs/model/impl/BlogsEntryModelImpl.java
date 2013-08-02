@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -835,13 +835,16 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	@Override
 	public BlogsEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (BlogsEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (BlogsEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public BlogsEntry toUnescapedModel() {
+		return (BlogsEntry)this;
 	}
 
 	@Override
@@ -901,18 +904,15 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof BlogsEntry)) {
 			return false;
 		}
 
-		BlogsEntry blogsEntry = null;
-
-		try {
-			blogsEntry = (BlogsEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		BlogsEntry blogsEntry = (BlogsEntry)obj;
 
 		long primaryKey = blogsEntry.getPrimaryKey();
 
@@ -1254,7 +1254,7 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	}
 
 	private static ClassLoader _classLoader = BlogsEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			BlogsEntry.class
 		};
 	private String _uuid;
@@ -1294,5 +1294,5 @@ public class BlogsEntryModelImpl extends BaseModelImpl<BlogsEntry>
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;
-	private BlogsEntry _escapedModelProxy;
+	private BlogsEntry _escapedModel;
 }

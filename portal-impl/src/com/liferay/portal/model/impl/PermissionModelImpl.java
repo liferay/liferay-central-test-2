@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -137,7 +137,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 			{ "roleId", Types.BIGINT },
 			{ "permissionId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_SQL_CREATE = "create table Roles_Permissions (roleId LONG not null,permissionId LONG not null,primary key (roleId, permissionId))";
+	public static final String MAPPING_TABLE_ROLES_PERMISSIONS_SQL_CREATE = "create table Roles_Permissions (permissionId LONG not null,roleId LONG not null,primary key (permissionId, roleId))";
 	public static final boolean FINDER_CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);
 	public static final String MAPPING_TABLE_USERS_PERMISSIONS_NAME = "Users_Permissions";
@@ -145,7 +145,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 			{ "userId", Types.BIGINT },
 			{ "permissionId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (userId LONG not null,permissionId LONG not null,primary key (userId, permissionId))";
+	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (permissionId LONG not null,userId LONG not null,primary key (permissionId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -299,13 +299,16 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 	@Override
 	public Permission toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Permission)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Permission)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Permission toUnescapedModel() {
+		return (Permission)this;
 	}
 
 	@Override
@@ -338,18 +341,15 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Permission)) {
 			return false;
 		}
 
-		Permission permission = null;
-
-		try {
-			permission = (Permission)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Permission permission = (Permission)obj;
 
 		long primaryKey = permission.getPrimaryKey();
 
@@ -447,7 +447,7 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	}
 
 	private static ClassLoader _classLoader = Permission.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Permission.class
 		};
 	private long _permissionId;
@@ -458,5 +458,5 @@ public class PermissionModelImpl extends BaseModelImpl<Permission>
 	private long _originalResourceId;
 	private boolean _setOriginalResourceId;
 	private long _columnBitmask;
-	private Permission _escapedModelProxy;
+	private Permission _escapedModel;
 }

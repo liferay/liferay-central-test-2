@@ -1,0 +1,16 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_STRUCTURE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="DELETE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="isElementPresent">
+		<case locator-key1="STRUCTURE_TABLE_ALL_CHECKBOX">
+			<execute function="IsElementPresent#isVisible" />
+		</case>
+	</command>
+</definition>

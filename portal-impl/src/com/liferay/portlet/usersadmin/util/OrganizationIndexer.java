@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +14,8 @@
 
 package com.liferay.portlet.usersadmin.util;
 
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
-import com.liferay.portal.kernel.dao.orm.Property;
-import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
@@ -33,8 +28,9 @@ import com.liferay.portal.kernel.search.Summary;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.persistence.OrganizationActionableDynamicQuery;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 
@@ -63,10 +59,12 @@ public class OrganizationIndexer extends BaseIndexer {
 		setStagingAware(false);
 	}
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -93,6 +91,23 @@ public class OrganizationIndexer extends BaseIndexer {
 			return;
 		}
 
+		List<Long> excludedOrganizationIds = (List<Long>)params.get(
+			"excludedOrganizationIds");
+
+		if ((excludedOrganizationIds != null) &&
+			!excludedOrganizationIds.isEmpty()) {
+
+			BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create(
+				searchContext);
+
+			for (long excludedOrganizationId : excludedOrganizationIds) {
+				booleanQuery.addTerm(
+					"organizationId", String.valueOf(excludedOrganizationId));
+			}
+
+			contextQuery.add(booleanQuery, BooleanClauseOccur.MUST_NOT);
+		}
+
 		List<Organization> organizationsTree = (List<Organization>)params.get(
 			"organizationsTree");
 
@@ -108,6 +123,17 @@ public class OrganizationIndexer extends BaseIndexer {
 
 			contextQuery.add(booleanQuery, BooleanClauseOccur.MUST);
 		}
+		else {
+			long parentOrganizationId = GetterUtil.getLong(
+				searchContext.getAttribute("parentOrganizationId"));
+
+			if (parentOrganizationId !=
+					OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+
+				contextQuery.addRequiredTerm(
+					"parentOrganizationId", parentOrganizationId);
+			}
+		}
 	}
 
 	@Override
@@ -118,8 +144,6 @@ public class OrganizationIndexer extends BaseIndexer {
 		addSearchTerm(searchQuery, searchContext, "city", false);
 		addSearchTerm(searchQuery, searchContext, "country", false);
 		addSearchTerm(searchQuery, searchContext, "name", false);
-		addSearchTerm(
-			searchQuery, searchContext, "parentOrganizationId", false);
 		addSearchTerm(searchQuery, searchContext, "region", false);
 		addSearchTerm(searchQuery, searchContext, "street", false);
 		addSearchTerm(searchQuery, searchContext, "type", false);
@@ -135,14 +159,6 @@ public class OrganizationIndexer extends BaseIndexer {
 				addSearchExpando(searchQuery, searchContext, expandoAttributes);
 			}
 		}
-	}
-
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId) {
-
-		Property property = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(property.eq(companyId));
 	}
 
 	@Override
@@ -298,78 +314,25 @@ public class OrganizationIndexer extends BaseIndexer {
 	}
 
 	protected void reindexOrganizations(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			Organization.class, PACLClassLoaderUtil.getPortalClassLoader());
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		Projection minOrganizationIdProjection = ProjectionFactoryUtil.min(
-			"organizationId");
-		Projection maxOrganizationIdProjection = ProjectionFactoryUtil.max(
-			"organizationId");
+		ActionableDynamicQuery actionableDynamicQuery =
+			new OrganizationActionableDynamicQuery() {
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				Organization organization = (Organization)object;
 
-		projectionList.add(minOrganizationIdProjection);
-		projectionList.add(maxOrganizationIdProjection);
+				Document document = getDocument(organization);
 
-		dynamicQuery.setProjection(projectionList);
+				documents.add(document);
+			}
 
-		addReindexCriteria(dynamicQuery, companyId);
+		};
 
-		List<Object[]> results = OrganizationLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
+		actionableDynamicQuery.setCompanyId(companyId);
 
-		Object[] minAndMaxOrganizationIds = results.get(0);
-
-		if ((minAndMaxOrganizationIds[0] == null) ||
-			(minAndMaxOrganizationIds[1] == null)) {
-
-			return;
-		}
-
-		long minOrganizationId = (Long)minAndMaxOrganizationIds[0];
-		long maxOrganizationId = (Long)minAndMaxOrganizationIds[1];
-
-		long startOrganizationId = minOrganizationId;
-		long endOrganizationId = startOrganizationId + DEFAULT_INTERVAL;
-
-		while (startOrganizationId <= maxOrganizationId) {
-			reindexOrganizations(
-				companyId, startOrganizationId, endOrganizationId);
-
-			startOrganizationId = endOrganizationId;
-			endOrganizationId += DEFAULT_INTERVAL;
-		}
-	}
-
-	protected void reindexOrganizations(
-			long companyId, long startOrganizationId, long endOrganizationId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			Organization.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("organizationId");
-
-		dynamicQuery.add(property.ge(startOrganizationId));
-		dynamicQuery.add(property.lt(endOrganizationId));
-
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<Organization> organizations =
-			OrganizationLocalServiceUtil.dynamicQuery(dynamicQuery);
-
-		if (organizations.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(
-			organizations.size());
-
-		for (Organization organization : organizations) {
-			Document document = getDocument(organization);
-
-			documents.add(document);
-		}
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);

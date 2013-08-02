@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -70,7 +70,8 @@ import java.util.Map;
  */
 public class AssetVocabularyServiceSoap {
 	/**
-	* @deprecated
+	* @deprecated As of 6.1.0 {@link #addVocabulary(String, Map, Map, String,
+	ServiceContext)}
 	*/
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap addVocabulary(
 		java.lang.String[] titleMapLanguageIds,
@@ -122,10 +123,32 @@ public class AssetVocabularyServiceSoap {
 		}
 	}
 
+	/**
+	* @deprecated As of 6.2.0, Replaced by {@link #deleteVocabularies(long[],
+	ServiceContext)}
+	*/
 	public static void deleteVocabularies(long[] vocabularyIds)
 		throws RemoteException {
 		try {
 			AssetVocabularyServiceUtil.deleteVocabularies(vocabularyIds);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] deleteVocabularies(
+		long[] vocabularyIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
+				AssetVocabularyServiceUtil.deleteVocabularies(vocabularyIds,
+					serviceContext);
+
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -208,6 +231,23 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getGroupVocabularies(
+		long groupId, boolean createDefaultVocabulary)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> returnValue =
+				AssetVocabularyServiceUtil.getGroupVocabularies(groupId,
+					createDefaultVocabulary);
+
+			return com.liferay.portlet.asset.model.AssetVocabularySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.asset.model.AssetVocabularySoap[] getGroupVocabularies(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws RemoteException {
@@ -272,6 +312,24 @@ public class AssetVocabularyServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.asset.model.AssetVocabularyDisplay getGroupVocabulariesDisplay(
+		long groupId, java.lang.String name, int start, int end,
+		boolean addDefaultVocabulary,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.asset.model.AssetVocabularyDisplay returnValue = AssetVocabularyServiceUtil.getGroupVocabulariesDisplay(groupId,
+					name, start, end, addDefaultVocabulary, obc);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getJSONGroupVocabularies(long groupId,
 		java.lang.String name, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
@@ -279,6 +337,24 @@ public class AssetVocabularyServiceSoap {
 		try {
 			com.liferay.portal.kernel.json.JSONObject returnValue = AssetVocabularyServiceUtil.getJSONGroupVocabularies(groupId,
 					name, start, end, obc);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getJSONGroupVocabulariesDisplay(
+		long groupId, java.lang.String name, int start, int end,
+		boolean addDefaultVocabulary,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = AssetVocabularyServiceUtil.getJSONGroupVocabulariesDisplay(groupId,
+					name, start, end, addDefaultVocabulary, obc);
 
 			return returnValue.toString();
 		}
@@ -319,7 +395,8 @@ public class AssetVocabularyServiceSoap {
 	}
 
 	/**
-	* @deprecated
+	* @deprecated As of 6.1.0, {@link #updateVocabulary(long, String, Map, Map,
+	String, ServiceContext)}
 	*/
 	public static com.liferay.portlet.asset.model.AssetVocabularySoap updateVocabulary(
 		long vocabularyId, java.lang.String[] titleMapLanguageIds,

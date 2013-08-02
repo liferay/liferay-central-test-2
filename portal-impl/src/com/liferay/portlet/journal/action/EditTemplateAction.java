@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -72,8 +73,9 @@ public class EditTemplateAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -137,8 +139,9 @@ public class EditTemplateAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -160,14 +163,14 @@ public class EditTemplateAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.journal.error");
+				return actionMapping.findForward("portlet.journal.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.journal.edit_template"));
 	}
 
@@ -196,8 +199,8 @@ public class EditTemplateAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String originalRedirect = ParamUtil.getString(
-			actionRequest, "originalRedirect");
+		String referringPortletResource = ParamUtil.getString(
+			actionRequest, "referringPortletResource");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			actionRequest, portletConfig.getPortletName(),
@@ -208,7 +211,8 @@ public class EditTemplateAction extends PortletAction {
 		portletURL.setParameter("struts_action", "/journal/edit_template");
 		portletURL.setParameter(Constants.CMD, Constants.UPDATE, false);
 		portletURL.setParameter("redirect", redirect, false);
-		portletURL.setParameter("originalRedirect", originalRedirect, false);
+		portletURL.setParameter(
+			"referringPortletResource", referringPortletResource, false);
 		portletURL.setParameter(
 			"groupId", String.valueOf(template.getGroupId()), false);
 		portletURL.setParameter("templateId", template.getTemplateId(), false);
@@ -217,15 +221,13 @@ public class EditTemplateAction extends PortletAction {
 	}
 
 	protected String getXsl(UploadPortletRequest uploadPortletRequest) {
-		String xsl = null;
+		InputStream inputStream = null;
 
 		try {
-			InputStream is = uploadPortletRequest.getFileAsStream("xsl");
+			inputStream = uploadPortletRequest.getFileAsStream("xsl");
 
-			if (is != null) {
-				xsl = new String(FileUtil.getBytes(is));
-
-				is.close();
+			if (inputStream != null) {
+				return new String(FileUtil.getBytes(inputStream));
 			}
 		}
 		catch (IOException ioe) {
@@ -233,8 +235,11 @@ public class EditTemplateAction extends PortletAction {
 				_log.warn(ioe, ioe);
 			}
 		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
 
-		return xsl;
+		return null;
 	}
 
 	protected JournalTemplate updateTemplate(ActionRequest actionRequest)
@@ -313,6 +318,6 @@ public class EditTemplateAction extends PortletAction {
 		return template;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JournalTemplate.class);
+	private static Log _log = LogFactoryUtil.getLog(EditTemplateAction.class);
 
 }

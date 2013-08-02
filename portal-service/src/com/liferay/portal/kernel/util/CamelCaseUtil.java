@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,6 +66,7 @@ public class CamelCaseUtil {
 			char c = s.charAt(i);
 
 			boolean nextUpperCase = true;
+
 			if (i < (s.length() - 1)) {
 				nextUpperCase = Character.isUpperCase(s.charAt(i + 1));
 			}

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,7 +17,6 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:user-display:user-id"));
 String userName = GetterUtil.getString((String)request.getAttribute("liferay-ui:user-display:user-name"));
 User userDisplay = (User)request.getAttribute("liferay-ui:user-display:user");
 String url = (String)request.getAttribute("liferay-ui:user-display:url");

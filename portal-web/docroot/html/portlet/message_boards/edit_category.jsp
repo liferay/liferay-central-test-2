@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,7 +25,15 @@ long categoryId = MBUtil.getCategoryId(request, category);
 
 long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID);
 
-String displayStyle = BeanParamUtil.getString(category, request, "displayStyle", MBCategoryConstants.DEFAULT_DISPLAY_STYLE);
+String defaultDisplayStyle = MBCategoryConstants.DEFAULT_DISPLAY_STYLE;
+
+if ((category == null) && (parentCategoryId > 0)) {
+	MBCategory parentCategory = MBCategoryLocalServiceUtil.getCategory(parentCategoryId);
+
+	defaultDisplayStyle = parentCategory.getDisplayStyle();
+}
+
+String displayStyle = BeanParamUtil.getString(category, request, "displayStyle", defaultDisplayStyle);
 
 MBMailingList mailingList = null;
 
@@ -35,6 +43,16 @@ try {
 	}
 }
 catch (NoSuchMailingListException nsmle) {
+}
+
+if ((category == null) && (mailingList == null)) {
+	try {
+		if (parentCategoryId > 0) {
+			mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(scopeGroupId, parentCategoryId);
+		}
+	}
+	catch (NoSuchMailingListException nsmle) {
+	}
 }
 %>
 
@@ -86,7 +104,7 @@ catch (NoSuchMailingListException nsmle) {
 				<portlet:param name="mbCategoryId" value="<%= String.valueOf(parentCategoryId) %>" />
 			</portlet:renderURL>
 
-			<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName"><%= parentCategoryName %></aui:a>
+			<aui:a href="<%= viewCategoryURL %>" id="parentCategoryName"><%= HtmlUtil.escape(parentCategoryName) %></aui:a>
 
 			<portlet:renderURL var="selectCategoryURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 				<portlet:param name="struts_action" value="/message_boards/select_category" />

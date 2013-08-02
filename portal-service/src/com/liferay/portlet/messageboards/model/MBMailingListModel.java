@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -514,6 +514,8 @@ public interface MBMailingListModel extends BaseModel<MBMailingList>,
 	public CacheModel<MBMailingList> toCacheModel();
 
 	public MBMailingList toEscapedModel();
+
+	public MBMailingList toUnescapedModel();
 
 	public String toString();
 

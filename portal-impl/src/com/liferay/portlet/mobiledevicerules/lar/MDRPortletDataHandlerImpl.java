@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -570,13 +570,13 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 				String ruleGroupUuid = ruleGroupInstanceElement.attributeValue(
 					"rule-group-uuid");
 
-				MDRRuleGroup ruleGroup = MDRRuleGroupUtil.fetchByUUID_G(
-					ruleGroupUuid, portletDataContext.getScopeGroupId());
+				MDRRuleGroup ruleGroup = MDRRuleGroupUtil.findByUuid_First(
+					ruleGroupUuid, null);
 
 				ruleGroupId = ruleGroup.getRuleGroupId();
 			}
 			catch (Exception e) {
-				if (_log.isErrorEnabled()) {
+				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Unable to import rule group instance " +
 							ruleGroupInstance,
@@ -596,7 +596,8 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (Validator.isNotNull(layoutUuid)) {
 				Layout layout =
 					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						layoutUuid, portletDataContext.getScopeGroupId());
+						layoutUuid, portletDataContext.getScopeGroupId(),
+						portletDataContext.isPrivateLayout());
 
 				classPK = layout.getPrimaryKey();
 			}
@@ -706,11 +707,13 @@ public class MDRPortletDataHandlerImpl extends BasePortletDataHandler {
 
 		long targetGroupId = GetterUtil.getLong(
 			typeSettingsProperties.getProperty("groupId"));
+		boolean privateLayout = GetterUtil.getBoolean(
+			actionElement.attributeValue("private-layout"));
 
 		try {
 			Layout targetLayout =
 				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					targetLayoutUuid, targetGroupId);
+					targetLayoutUuid, targetGroupId, privateLayout);
 
 			typeSettingsProperties.setProperty(
 				"plid", String.valueOf(targetLayout.getPlid()));

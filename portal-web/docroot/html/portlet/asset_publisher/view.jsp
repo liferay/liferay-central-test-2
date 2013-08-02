@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -82,21 +82,19 @@ Group scopeGroup = themeDisplay.getScopeGroup();
 %>
 
 <c:if test="<%= (scopeGroup != null) && (!scopeGroup.hasStagingGroup() || scopeGroup.isStagingGroup()) && !portletName.equals(PortletKeys.RELATED_ASSETS) %>">
-	<aui:form name="fm">
 
-		<%
-		for (long groupId : groupIds) {
-		%>
+	<%
+	for (long groupId : groupIds) {
+	%>
 
-			<div class="lfr-meta-actions add-asset-selector">
-				<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
-			</div>
+		<div class="lfr-meta-actions add-asset-selector">
+			<%@ include file="/html/portlet/asset_publisher/add_asset.jspf" %>
+		</div>
 
-		<%
-		}
-		%>
+	<%
+	}
+	%>
 
-	</aui:form>
 </c:if>
 
 <%
@@ -113,7 +111,7 @@ if (!paginationType.equals("none")) {
 <c:if test="<%= showMetadataDescriptions %>">
 	<liferay-ui:categorization-filter
 		assetType="content"
-		portletURL="<%= portletURL%>"
+		portletURL="<%= portletURL %>"
 	/>
 </c:if>
 

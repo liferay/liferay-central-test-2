@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -444,6 +446,10 @@ public class EmailAddressWrapper implements EmailAddress,
 		return new EmailAddressWrapper(_emailAddress.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.EmailAddress toUnescapedModel() {
+		return new EmailAddressWrapper(_emailAddress.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _emailAddress.toString();
@@ -462,6 +468,25 @@ public class EmailAddressWrapper implements EmailAddress,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _emailAddress.getType();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof EmailAddressWrapper)) {
+			return false;
+		}
+
+		EmailAddressWrapper emailAddressWrapper = (EmailAddressWrapper)obj;
+
+		if (Validator.equals(_emailAddress, emailAddressWrapper._emailAddress)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

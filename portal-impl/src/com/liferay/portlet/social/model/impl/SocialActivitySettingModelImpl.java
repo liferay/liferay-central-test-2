@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -383,13 +383,16 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public SocialActivitySetting toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (SocialActivitySetting)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (SocialActivitySetting)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public SocialActivitySetting toUnescapedModel() {
+		return (SocialActivitySetting)this;
 	}
 
 	@Override
@@ -425,18 +428,15 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivitySetting)) {
 			return false;
 		}
 
-		SocialActivitySetting socialActivitySetting = null;
-
-		try {
-			socialActivitySetting = (SocialActivitySetting)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivitySetting socialActivitySetting = (SocialActivitySetting)obj;
 
 		long primaryKey = socialActivitySetting.getPrimaryKey();
 
@@ -572,7 +572,7 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 	}
 
 	private static ClassLoader _classLoader = SocialActivitySetting.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			SocialActivitySetting.class
 		};
 	private long _activitySettingId;
@@ -590,5 +590,5 @@ public class SocialActivitySettingModelImpl extends BaseModelImpl<SocialActivity
 	private String _originalName;
 	private String _value;
 	private long _columnBitmask;
-	private SocialActivitySetting _escapedModelProxy;
+	private SocialActivitySetting _escapedModel;
 }

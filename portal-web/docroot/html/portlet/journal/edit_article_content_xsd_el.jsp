@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,10 @@ String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 if (Validator.isNotNull(toLanguageId)) {
 	languageId = toLanguageId;
 }
+
+Locale toLocale = LocaleUtil.fromLanguageId(languageId);
+
+String languageDir = LanguageUtil.get(toLocale, "lang.dir");
 
 long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
@@ -115,13 +119,15 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<div class="journal-article-move-handler"></div>
 
-			<label class="journal-article-field-label">
-				<span><%= elLabel %></span>
+			<c:if test='<%= !elType.equals("selection_break") %>'>
+				<label class="journal-article-field-label">
+					<span><%= elLabel %></span>
 
-				<c:if test="<%= (Validator.isNotNull(elInstructions) && displayAsTooltip) %>">
-					<img align="top" class="journal-article-instructions-container" src="/html/themes/classic/images/portlet/help.png" />
-				</c:if>
-			</label>
+					<c:if test="<%= (Validator.isNotNull(elInstructions) && displayAsTooltip) %>">
+						<img align="top" class="journal-article-instructions-container" src="/html/themes/classic/images/portlet/help.png" />
+					</c:if>
+				</label>
+			</c:if>
 
 			<div class="journal-article-component-container">
 				<c:if test='<%= elType.equals("text") %>'>
@@ -134,7 +140,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					}
 					%>
 
-					<aui:input cssClass="lfr-input-text-container" ignoreRequestValue="<%= true %>" label="" name="<%= textInputName %>" size="55" type="text" value="<%= elContent %>" />
+					<aui:input cssClass="lfr-input-text-container" dir="<%= languageDir %>" ignoreRequestValue="<%= true %>" label="" name="<%= textInputName %>" size="55" type="text" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_box") %>'>
@@ -147,13 +153,21 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					}
 					%>
 
-					<aui:input cols="60" cssClass="lfr-textarea-container" ignoreRequestValue="<%= true %>" label="" name="<%= textBoxInputName %>" rows="10" type="textarea" value="<%= elContent %>" />
+					<aui:input cols="60" cssClass="lfr-textarea-container" dir="<%= languageDir %>" ignoreRequestValue="<%= true %>" label="" name="<%= textBoxInputName %>" rows="10" type="textarea" value="<%= elContent %>" />
 				</c:if>
 
 				<c:if test='<%= elType.equals("text_area") %>'>
 
 					<%
-					String textAreaInputName = "structure_el_" + elName + elRepeatCount + "_content";
+					StringBundler sb = new StringBundler(5);
+
+					sb.append("structure_el_");
+					sb.append(elInstanceId);
+					sb.append(elName);
+					sb.append(elRepeatCount);
+					sb.append("_content");
+
+					String textAreaInputName = sb.toString();
 
 					if (Validator.isNull(elContent)) {
 						elContent = ParamUtil.getString(request, textAreaInputName);
@@ -161,6 +175,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					%>
 
 					<liferay-ui:input-editor
+						contentsLanguageId="<%= languageId %>"
 						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 						height="460"
 						initMethod='<%= "initEditor" + elInstanceId %>'
@@ -192,7 +207,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							String journalImageContentInputName = "journalImageContent_" + elName + elRepeatCount;
 							%>
 
-							<aui:input name="<%= journalImageContentInputName %>" type="hidden" value="<%= elContent %>" />
+							<aui:input inputCssClass="journal-image-preview-content" name="<%= journalImageContentInputName %>" type="hidden" value="<%= elContent %>" />
 
 							<aui:input name="journalImageDelete" type="hidden" value="" />
 
@@ -201,7 +216,7 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 							<br /><br />
 
 							<div class="journal-image-wrapper results-grid">
-								<img class="journal-image" hspace="0" src="<%= elContent %>" vspace="0" />
+								<img class="journal-image" hspace="0" src="<%= themeDisplay.getPathContext() + elContent %>" vspace="0" />
 							</div>
 						</div>
 					</c:if>
@@ -400,7 +415,14 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				<c:if test='<%= elType.equals("link_to_layout") %>'>
 
 					<%
-					String linkSelectName = "structure_el" + elName + elRepeatCount + "_content";
+					StringBundler sb = new StringBundler(4);
+
+					sb.append("structure_el");
+					sb.append(elName);
+					sb.append(elRepeatCount);
+					sb.append("_content");
+
+					String linkSelectName = sb.toString();
 
 					if (Validator.isNull(elContent)) {
 						elContent = ParamUtil.getString(request, linkSelectName);
@@ -430,13 +452,13 @@ Element contentEl = (Element)request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 				</c:if>
 			</div>
 
-			<c:if test="<%= Validator.isNull(toLanguageId) %>">
-				<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
-			</c:if>
-
 			<div class="journal-article-required-message portlet-msg-error">
 				<liferay-ui:message key="this-field-is-required" />
 			</div>
+
+			<c:if test='<%= Validator.isNull(toLanguageId) && !elType.equals("selection_break") %>'>
+				<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name='<%= elInstanceId + "localized-checkbox" %>' type="checkbox" value="<%= !elLanguageId.equals(StringPool.BLANK) %>" />
+			</c:if>
 
 			<c:if test="<%= (Validator.isNotNull(elInstructions) && !displayAsTooltip) %>">
 				<div class="journal-article-instructions-container journal-article-instructions-message portlet-msg-info">

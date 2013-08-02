@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,8 +61,8 @@ public class ViewArticleContentAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		UploadServletRequest uploadServletRequest = null;
@@ -160,11 +160,11 @@ public class ViewArticleContentAction extends Action {
 			request.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);
 
 			if (output.startsWith("<?xml ")) {
-				return mapping.findForward(
+				return actionMapping.findForward(
 					"portlet.journal.raw_article_content");
 			}
 			else {
-				return mapping.findForward(
+				return actionMapping.findForward(
 					"portlet.journal.view_article_content");
 			}
 		}
@@ -232,10 +232,11 @@ public class ViewArticleContentAction extends Action {
 				}
 				else {
 					if (Validator.isNotNull(articleId)) {
-						long imageId = JournalArticleImageLocalServiceUtil.
-							getArticleImageId(
-								groupId, articleId, version, elInstanceId,
-								elName, elLanguage);
+						long imageId =
+							JournalArticleImageLocalServiceUtil.
+								getArticleImageId(
+									groupId, articleId, version, elInstanceId,
+									elName, elLanguage);
 
 						String token = WebServerServletTokenUtil.getToken(
 							imageId);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,25 +69,27 @@ public class UnsyncBufferedReader extends Reader {
 
 		markLimitIndex = markLimit;
 
-		if (index > 0) {
-			int available = firstInvalidIndex - index;
+		if (index == 0) {
+			return;
+		}
 
-			if (available > 0) {
+		int available = firstInvalidIndex - index;
 
-				// Shuffle mark beginning to buffer beginning
+		if (available > 0) {
 
-				System.arraycopy(buffer, index, buffer, 0, available);
+			// Shuffle mark beginning to buffer beginning
 
-				index = 0;
+			System.arraycopy(buffer, index, buffer, 0, available);
 
-				firstInvalidIndex = available;
-			}
-			else {
+			index = 0;
 
-				// Reset buffer states
+			firstInvalidIndex = available;
+		}
+		else {
 
-				index = firstInvalidIndex = 0;
-			}
+			// Reset buffer states
+
+			index = firstInvalidIndex = 0;
 		}
 	}
 

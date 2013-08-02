@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -367,13 +367,16 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 	@Override
 	public Subscription toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Subscription)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Subscription)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Subscription toUnescapedModel() {
+		return (Subscription)this;
 	}
 
 	@Override
@@ -411,18 +414,15 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Subscription)) {
 			return false;
 		}
 
-		Subscription subscription = null;
-
-		try {
-			subscription = (Subscription)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Subscription subscription = (Subscription)obj;
 
 		long primaryKey = subscription.getPrimaryKey();
 
@@ -590,7 +590,7 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	}
 
 	private static ClassLoader _classLoader = Subscription.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Subscription.class
 		};
 	private long _subscriptionId;
@@ -612,5 +612,5 @@ public class SubscriptionModelImpl extends BaseModelImpl<Subscription>
 	private boolean _setOriginalClassPK;
 	private String _frequency;
 	private long _columnBitmask;
-	private Subscription _escapedModelProxy;
+	private Subscription _escapedModel;
 }

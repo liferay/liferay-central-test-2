@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,8 @@ import java.io.Serializable;
  */
 public interface PortalPreferences extends Serializable {
 
+	public long getUserId();
+
 	public String getValue(String namespace, String key);
 
 	public String getValue(String namespace, String key, String defaultValue);
@@ -35,6 +37,8 @@ public interface PortalPreferences extends Serializable {
 	public void resetValues(String namespace);
 
 	public void setSignedIn(boolean signedIn);
+
+	public void setUserId(long userId);
 
 	public void setValue(String namespace, String key, String value);
 

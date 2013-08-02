@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,16 +31,19 @@ import javax.persistence.PersistenceUnit;
  */
 public class SessionFactoryImpl implements SessionFactory {
 
+	@Override
 	public void closeSession(Session session) throws ORMException {
 		if (session != null) {
 			session.close();
 		}
 	}
 
+	@Override
 	public Dialect getDialect() throws ORMException {
 		return new DialectImpl();
 	}
 
+	@Override
 	public Session openNewSession(Connection connection) throws ORMException {
 		EntityManager entityManager =
 			_entityManagerFactory.createEntityManager();
@@ -48,6 +51,7 @@ public class SessionFactoryImpl implements SessionFactory {
 		return new NewSessionImpl(entityManager);
 	}
 
+	@Override
 	public Session openSession() throws ORMException {
 		return _session;
 	}

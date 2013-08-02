@@ -75,6 +75,9 @@
 		<finder name="TemplateId" return-type="Collection">
 			<finder-column name="templateId" />
 		</finder>
+		<finder name="LayoutUuid" return-type="Collection">
+			<finder-column name="layoutUuid" />
+		</finder>
 		<finder name="SmallImageId" return-type="Collection">
 			<finder-column name="smallImageId" />
 		</finder>
@@ -163,6 +166,7 @@
 		<reference package-path="com.liferay.portal" entity="Image" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Subscription" />
+		<reference package-path="com.liferay.portal" entity="WorkflowDefinitionLink" />
 		<reference package-path="com.liferay.portal" entity="WorkflowInstanceLink" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetCategory" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />

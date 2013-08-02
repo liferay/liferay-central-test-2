@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,12 +35,11 @@ if (Validator.isNull(formAction)) {
 		liferayPortletURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
 	}
 
-	liferayPortletURL.setWindowState(WindowState.NORMAL);
-	liferayPortletURL.setPortletMode(PortletMode.VIEW);
 	liferayPortletURL.setAnchor(false);
-
 	liferayPortletURL.setParameter("struts_action", "/language/view");
 	liferayPortletURL.setParameter("redirect", currentURL);
+	liferayPortletURL.setPortletMode(PortletMode.VIEW);
+	liferayPortletURL.setWindowState(WindowState.NORMAL);
 
 	formAction = liferayPortletURL.toString();
 }
@@ -64,7 +63,7 @@ for (int i = 0; i < locales.length; i++) {
 	langCounts.put(locales[i].getLanguage(), count);
 }
 
-Set duplicateLanguages = new HashSet();
+Set<String> duplicateLanguages = new HashSet<String>();
 
 for (int i = 0; i < locales.length; i++) {
 	Integer count = (Integer)langCounts.get(locales[i].getLanguage());
@@ -82,14 +81,9 @@ for (int i = 0; i < locales.length; i++) {
 
 				<%
 				for (int i = 0; i < locales.length; i++) {
-					String label = locales[i].getDisplayName(locales[i]);
-
-					if (LanguageUtil.isBetaLocale(locales[i])) {
-						label = label + " - Beta";
-					}
 				%>
 
-					<aui:option cssClass="taglib-language-option" label="<%= label %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
+					<aui:option cssClass="taglib-language-option" label="<%= LocaleUtil.getLongDisplayName(locales[i], duplicateLanguages) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>" selected="<%= (locale.getLanguage().equals(locales[i].getLanguage()) && locale.getCountry().equals(locales[i].getCountry())) %>" value="<%= LocaleUtil.toLanguageId(locales[i]) %>" />
 
 				<%
 				}
@@ -116,46 +110,31 @@ for (int i = 0; i < locales.length; i++) {
 
 		<%
 		for (int i = 0; i < locales.length; i++) {
-			String language = locales[i].getDisplayLanguage(locales[i]);
-			String country = locales[i].getDisplayCountry(locales[i]);
+			String cssClassName = "taglib-language-list-text";
+
+			if ((i + 1) == locales.length) {
+				cssClassName += " last";
+			}
+
+			String localeDisplayName = null;
 
 			if (displayStyle == LanguageTag.LIST_SHORT_TEXT) {
-				if (language.length() > 3) {
-					language = locales[i].getLanguage().toUpperCase();
-				}
-
-				country = locales[i].getCountry().toUpperCase();
+				localeDisplayName = LocaleUtil.getShortDisplayName(locales[i], duplicateLanguages);
+			}
+			else {
+				localeDisplayName = LocaleUtil.getLongDisplayName(locales[i], duplicateLanguages);
 			}
 		%>
 
 			<c:choose>
 				<c:when test="<%= (displayStyle == LanguageTag.LIST_LONG_TEXT) || (displayStyle == LanguageTag.LIST_SHORT_TEXT) %>">
-					<a class="taglib-language-list-text <%= ((i + 1) < locales.length) ? StringPool.BLANK : "last" %>" href="<%= formAction %>&<%= name %>=<%= locales[i].getLanguage() + "_" + locales[i].getCountry() %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>">
-						<%= language %>
-
-						<c:if test="<%= duplicateLanguages.contains(locales[i].getLanguage()) %>">
-							(<%= country %>)
-						</c:if>
-
-						<c:if test="<%= LanguageUtil.isBetaLocale(locales[i]) %>">
-							[Beta]
-						</c:if>
-					</a>
+					<aui:a cssClass="<%= cssClassName %>" href="<%= HttpUtil.addParameter(formAction, name, LocaleUtil.toLanguageId(locales[i])) %>" lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"><%= localeDisplayName %></aui:a>
 				</c:when>
 				<c:otherwise>
-
-					<%
-					String message = locales[i].getDisplayName(locales[i]);
-
-					if (LanguageUtil.isBetaLocale(locales[i])) {
-						message = message + " - Beta";
-					}
-					%>
-
 					<liferay-ui:icon
 						image='<%= "../language/" + LocaleUtil.toLanguageId(locales[i]) %>'
 						lang="<%= LocaleUtil.toW3cLanguageId(locales[i]) %>"
-						message="<%= message %>"
+						message="<%= LocaleUtil.getLongDisplayName(locales[i], duplicateLanguages) %>"
 						url='<%= formAction + "&" + name + "=" + LocaleUtil.toLanguageId(locales[i]) %>'
 					/>
 				</c:otherwise>

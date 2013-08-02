@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.RepositoryEntry;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
@@ -94,6 +95,10 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
+		if (portletPreferences == null) {
+			return portletPreferences;
+		}
+
 		portletPreferences.setValue("rootFolderId", StringPool.BLANK);
 		portletPreferences.setValue("showFoldersSearch", StringPool.BLANK);
 		portletPreferences.setValue("showSubfolders", StringPool.BLANK);
@@ -116,13 +121,13 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			"com.liferay.portlet.documentlibrary",
 			portletDataContext.getScopeGroupId());
 
-		long rootFolderId = GetterUtil.getLong(
-			portletPreferences.getValue("rootFolderId", null));
-
 		Document document = SAXReaderUtil.createDocument();
 
 		Element rootElement = document.addElement(
 			"documentlibrary-display-data");
+
+		rootElement.addAttribute(
+			"group-id", String.valueOf(portletDataContext.getScopeGroupId()));
 
 		Element fileEntryTypesElement = rootElement.addElement(
 			"file-entry-types");
@@ -133,6 +138,9 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element repositoriesElement = rootElement.addElement("repositories");
 		Element repositoryEntriesElement = rootElement.addElement(
 			"repository-entries");
+
+		long rootFolderId = GetterUtil.getLong(
+			portletPreferences.getValue("rootFolderId", null));
 
 		if (rootFolderId == DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 			List<Folder> folders = FolderUtil.findByRepositoryId(
@@ -252,7 +260,7 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 			if (defaultRepository) {
 				folderIds =
 					(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
-						Folder.class);
+						DLFolder.class);
 			}
 			else {
 				folderIds =
@@ -277,13 +285,10 @@ public class DLDisplayPortletDataHandlerImpl extends BasePortletDataHandler {
 	private static PortletDataHandlerBoolean _foldersAndDocuments =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "folders-and-documents", true, true);
-
 	private static PortletDataHandlerBoolean _previewsAndThumbnails =
 		new PortletDataHandlerBoolean(_NAMESPACE, "previews-and-thumbnails");
-
 	private static PortletDataHandlerBoolean _ranks =
 		new PortletDataHandlerBoolean(_NAMESPACE, "ranks");
-
 	private static PortletDataHandlerBoolean _shortcuts=
 		new PortletDataHandlerBoolean(_NAMESPACE, "shortcuts");
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,28 +19,20 @@ package com.liferay.portal.kernel.lock;
  */
 public abstract class BaseLockListener implements LockListener {
 
+	@Override
 	public void onAfterExpire(String key) {
 	}
 
-	public void onAfterLock(String key) {
-	}
-
+	@Override
 	public void onAfterRefresh(String key) {
 	}
 
-	public void onAfterUnlock(String key) {
-	}
-
+	@Override
 	public void onBeforeExpire(String key) {
 	}
 
-	public void onBeforeLock(String key) {
-	}
-
+	@Override
 	public void onBeforeRefresh(String key) {
-	}
-
-	public void onBeforeUnlock(String key) {
 	}
 
 }

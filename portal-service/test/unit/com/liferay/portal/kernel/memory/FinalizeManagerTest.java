@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,14 @@ package com.liferay.portal.kernel.memory;
 
 import com.liferay.portal.kernel.test.BaseTestCase;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class FinalizeManagerTest extends BaseTestCase {
 
+	@Test
 	public void testRegister() throws InterruptedException {
 		if (FinalizeManager.THREAD_ENABLED) {
 			registerWithThread();
@@ -85,6 +88,7 @@ public class FinalizeManagerTest extends BaseTestCase {
 
 	private class MarkFinalizeAction implements FinalizeAction {
 
+		@Override
 		public void doFinalize() {
 			_marked = true;
 		}

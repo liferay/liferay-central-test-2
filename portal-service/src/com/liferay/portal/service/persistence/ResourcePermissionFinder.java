@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,9 +36,5 @@ public interface ResourcePermissionFinder {
 
 	public java.util.List<com.liferay.portal.model.ResourcePermission> findByR_S(
 		long roleId, int[] scopes, int start, int end)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
-	public java.util.List<java.lang.String> findByC_N_S(long companyId,
-		java.lang.String name, int scope)
 		throws com.liferay.portal.kernel.exception.SystemException;
 }

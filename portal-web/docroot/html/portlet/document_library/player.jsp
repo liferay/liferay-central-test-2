@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,16 +29,16 @@ String oggPreviewFileURL = null;
 String ogvPreviewFileURL = null;
 
 for (String previewFileURL : previewFileURLs) {
-	if (previewFileURL.endsWith("mp3")){
+	if (previewFileURL.endsWith("mp3")) {
 		mp3PreviewFileURL = previewFileURL;
 	}
-	else if (previewFileURL.endsWith("mp4")){
+	else if (previewFileURL.endsWith("mp4")) {
 		mp4PreviewFileURL = previewFileURL;
 	}
-	else if (previewFileURL.endsWith("ogg")){
+	else if (previewFileURL.endsWith("ogg")) {
 		oggPreviewFileURL = previewFileURL;
 	}
-	else if (previewFileURL.endsWith("ogv")){
+	else if (previewFileURL.endsWith("ogv")) {
 		ogvPreviewFileURL = previewFileURL;
 	}
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -22,6 +22,7 @@ import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateOpenIdException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.EmailAddressException;
@@ -83,8 +84,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntryConstants;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.sites.util.SitesUtil;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
 
@@ -120,8 +119,9 @@ public class EditUserAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -129,7 +129,7 @@ public class EditUserAction extends PortletAction {
 		try {
 			User user = null;
 			String oldScreenName = StringPool.BLANK;
-			String oldLanguageId = StringPool.BLANK;
+			boolean updateLanguageId = false;
 
 			if (cmd.equals(Constants.ADD)) {
 				user = addUser(actionRequest);
@@ -149,7 +149,7 @@ public class EditUserAction extends PortletAction {
 
 				user = (User)returnValue[0];
 				oldScreenName = ((String)returnValue[1]);
-				oldLanguageId = ((String)returnValue[2]);
+				updateLanguageId = ((Boolean)returnValue[2]);
 			}
 			else if (cmd.equals("unlock")) {
 				user = updateLockout(actionRequest);
@@ -191,9 +191,7 @@ public class EditUserAction extends PortletAction {
 					}
 				}
 
-				if (Validator.isNotNull(oldLanguageId) &&
-					themeDisplay.isI18n()) {
-
+				if (updateLanguageId && themeDisplay.isI18n()) {
 					String i18nLanguageId = user.getLanguageId();
 					int pos = i18nLanguageId.indexOf(CharPool.UNDERLINE);
 
@@ -244,6 +242,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof ContactFirstNameException ||
 					 e instanceof ContactFullNameException ||
 					 e instanceof ContactLastNameException ||
+					 e instanceof DuplicateOpenIdException ||
 					 e instanceof DuplicateUserEmailAddressException ||
 					 e instanceof DuplicateUserScreenNameException ||
 					 e instanceof EmailAddressException ||
@@ -274,7 +273,9 @@ public class EditUserAction extends PortletAction {
 					SessionErrors.add(actionRequest, e.getClass(), e);
 				}
 
-				if (e instanceof RequiredUserException) {
+				if (e instanceof CompanyMaxUsersException ||
+					e instanceof RequiredUserException) {
+
 					String redirect = PortalUtil.escapeRedirect(
 						ParamUtil.getString(actionRequest, "redirect"));
 
@@ -291,8 +292,9 @@ public class EditUserAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -302,14 +304,14 @@ public class EditUserAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.users_admin.error");
+				return actionMapping.findForward("portlet.users_admin.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.users_admin.edit_user"));
 	}
 
@@ -552,7 +554,7 @@ public class EditUserAction extends PortletAction {
 			user, actionRequest, "reminderQueryQuestion");
 
 		if (reminderQueryQuestion.equals(UsersAdminUtil.CUSTOM_QUESTION)) {
-			reminderQueryQuestion = BeanParamUtil.getString(
+			reminderQueryQuestion = BeanParamUtil.getStringSilent(
 				user, actionRequest, "reminderQueryCustomQuestion");
 		}
 
@@ -566,7 +568,6 @@ public class EditUserAction extends PortletAction {
 			user, actionRequest, "emailAddress");
 		long facebookId = user.getFacebookId();
 		String openId = BeanParamUtil.getString(user, actionRequest, "openId");
-		String oldLanguageId = user.getLanguageId();
 		String languageId = BeanParamUtil.getString(
 			user, actionRequest, "languageId");
 		String timeZoneId = BeanParamUtil.getString(
@@ -646,21 +647,6 @@ public class EditUserAction extends PortletAction {
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);
 
-		if (actionRequest.getParameter("assetCategoryNames") == null ) {
-			long[] assetCategoryIds =
-				AssetCategoryLocalServiceUtil.getCategoryIds(
-					User.class.getName(), user.getUserId());
-
-			serviceContext.setAssetCategoryIds(assetCategoryIds);
-		}
-
-		if (actionRequest.getParameter("assetTagNames") == null ) {
-			String[] assetTagNames = AssetTagLocalServiceUtil.getTagNames(
-				User.class.getName(), user.getUserId());
-
-			serviceContext.setAssetTagNames(assetTagNames);
-		}
-
 		user = UserServiceUtil.updateUser(
 			user.getUserId(), oldPassword, newPassword1, newPassword2,
 			passwordReset, reminderQueryQuestion, reminderQueryAnswer,
@@ -675,6 +661,8 @@ public class EditUserAction extends PortletAction {
 		if (oldScreenName.equals(user.getScreenName())) {
 			oldScreenName = StringPool.BLANK;
 		}
+
+		boolean updateLanguageId = false;
 
 		if (user.getUserId() == themeDisplay.getUserId()) {
 
@@ -707,6 +695,8 @@ public class EditUserAction extends PortletAction {
 					WebKeys.USER_PASSWORD, newPassword1,
 					PortletSession.APPLICATION_SCOPE);
 			}
+
+			updateLanguageId = true;
 		}
 
 		String portletId = serviceContext.getPortletId();
@@ -736,7 +726,7 @@ public class EditUserAction extends PortletAction {
 			SessionMessages.add(actionRequest, "verificationEmailSent");
 		}
 
-		return new Object[] {user, oldScreenName, oldLanguageId};
+		return new Object[] {user, oldScreenName, updateLanguageId};
 	}
 
 }

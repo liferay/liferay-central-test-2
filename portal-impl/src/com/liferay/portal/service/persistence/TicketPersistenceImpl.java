@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -175,9 +175,43 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Ticket ticket) {
+		if (ticket.isNew()) {
+			Object[] args = new Object[] { ticket.getKey() };
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_KEY, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEY, args, ticket);
+		}
+		else {
+			TicketModelImpl ticketModelImpl = (TicketModelImpl)ticket;
+
+			if ((ticketModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_KEY.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { ticket.getKey() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_KEY, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEY, args, ticket);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Ticket ticket) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY,
-			new Object[] { ticket.getKey() });
+		TicketModelImpl ticketModelImpl = (TicketModelImpl)ticket;
+
+		Object[] args = new Object[] { ticket.getKey() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
+
+		if ((ticketModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_KEY.getColumnBitmask()) != 0) {
+			args = new Object[] { ticketModelImpl.getOriginalKey() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
+		}
 	}
 
 	/**
@@ -278,8 +312,6 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 
 		boolean isNew = ticket.isNew();
 
-		TicketModelImpl ticketModelImpl = (TicketModelImpl)ticket;
-
 		Session session = null;
 
 		try {
@@ -305,23 +337,8 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 		EntityCacheUtil.putResult(TicketModelImpl.ENTITY_CACHE_ENABLED,
 			TicketImpl.class, ticket.getPrimaryKey(), ticket);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEY,
-				new Object[] { ticket.getKey() }, ticket);
-		}
-		else {
-			if ((ticketModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_KEY.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { ticketModelImpl.getOriginalKey() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_KEY, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_KEY, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_KEY,
-					new Object[] { ticket.getKey() }, ticket);
-			}
-		}
+		clearUniqueFindersCache(ticket);
+		cacheUniqueFindersCache(ticket);
 
 		return ticket;
 	}
@@ -852,8 +869,10 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 				List<ModelListener<Ticket>> listenersList = new ArrayList<ModelListener<Ticket>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Ticket>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

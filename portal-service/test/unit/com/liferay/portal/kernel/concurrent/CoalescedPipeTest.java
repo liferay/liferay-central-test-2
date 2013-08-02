@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
@@ -35,6 +37,7 @@ public class CoalescedPipeTest extends TestCase {
 		scheduledExecutorService.schedule(
 			new Runnable() {
 
+				@Override
 				public void run() {
 					try {
 						coalescedPipe.put("test1");
@@ -57,6 +60,7 @@ public class CoalescedPipeTest extends TestCase {
 		scheduledExecutorService.awaitTermination(120, TimeUnit.SECONDS);
 	}
 
+	@Test
 	public void testNonBlockingTake() throws InterruptedException {
 		CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
 
@@ -119,6 +123,7 @@ public class CoalescedPipeTest extends TestCase {
 		coalescedPipe = new CoalescedPipe<String>(
 			new Comparator<String>() {
 
+				@Override
 				public int compare(String o1, String o2) {
 					return o1.length() - o2.length();
 				}
@@ -161,6 +166,7 @@ public class CoalescedPipeTest extends TestCase {
 		assertEquals(2, coalescedPipe.coalescedCount());
 	}
 
+	@Test
 	public void testTakeSnapshot() throws InterruptedException {
 		CoalescedPipe<String> coalescedPipe = new CoalescedPipe<String>();
 

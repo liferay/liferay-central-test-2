@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ page import="com.liferay.portal.ContactBirthdayException" %><%@
 page import="com.liferay.portal.ContactFirstNameException" %><%@
 page import="com.liferay.portal.ContactFullNameException" %><%@
 page import="com.liferay.portal.ContactLastNameException" %><%@
+page import="com.liferay.portal.DuplicateOpenIdException" %><%@
 page import="com.liferay.portal.DuplicateOrganizationException" %><%@
 page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%@
 page import="com.liferay.portal.DuplicateUserIdException" %><%@
@@ -54,7 +55,6 @@ page import="com.liferay.portal.UserScreenNameException" %><%@
 page import="com.liferay.portal.UserSmsException" %><%@
 page import="com.liferay.portal.WebsiteURLException" %><%@
 page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %><%@
-page import="com.liferay.portal.service.permission.PortalPermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.UserPermissionUtil" %><%@
 page import="com.liferay.portlet.announcements.model.AnnouncementsDelivery" %><%@
 page import="com.liferay.portlet.announcements.model.AnnouncementsEntryConstants" %><%@

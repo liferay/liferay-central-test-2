@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ public class BookmarksFolderImpl extends BookmarksFolderBaseImpl {
 	public BookmarksFolderImpl() {
 	}
 
+	@Override
 	public List<BookmarksFolder> getAncestors()
 		throws PortalException, SystemException {
 
@@ -52,6 +53,7 @@ public class BookmarksFolderImpl extends BookmarksFolderBaseImpl {
 		return ancestors;
 	}
 
+	@Override
 	public BookmarksFolder getParentFolder()
 		throws PortalException, SystemException {
 
@@ -64,6 +66,7 @@ public class BookmarksFolderImpl extends BookmarksFolderBaseImpl {
 		return BookmarksFolderLocalServiceUtil.getFolder(getParentFolderId());
 	}
 
+	@Override
 	public boolean isRoot() {
 		if (getParentFolderId() ==
 				BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.announcements.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -352,6 +353,10 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery,
 		return new AnnouncementsDeliveryWrapper(_announcementsDelivery.toEscapedModel());
 	}
 
+	public com.liferay.portlet.announcements.model.AnnouncementsDelivery toUnescapedModel() {
+		return new AnnouncementsDeliveryWrapper(_announcementsDelivery.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _announcementsDelivery.toString();
@@ -364,6 +369,26 @@ public class AnnouncementsDeliveryWrapper implements AnnouncementsDelivery,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_announcementsDelivery.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AnnouncementsDeliveryWrapper)) {
+			return false;
+		}
+
+		AnnouncementsDeliveryWrapper announcementsDeliveryWrapper = (AnnouncementsDeliveryWrapper)obj;
+
+		if (Validator.equals(_announcementsDelivery,
+					announcementsDeliveryWrapper._announcementsDelivery)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

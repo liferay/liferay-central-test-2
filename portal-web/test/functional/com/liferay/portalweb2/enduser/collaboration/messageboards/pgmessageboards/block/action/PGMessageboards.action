@@ -1,0 +1,40 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_CATEGORY_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="CATEGORY_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait"  />
+		</case>
+		<case comparator="startsWith" locator-key1="CATEGORY_TABLE_ACTIONS">
+			<execute function="AssertClick#pauseAssertTextClickAt"  />
+		</case>
+		<case comparator="startsWith" locator-key1="CATEGORY_TABLE_CATEGORY">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="NAVIGATION_MY_POSTS">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="NAVIGATION_RECENT_POSTS">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="POST_NEW_THREAD_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="THREAD_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case comparator="startsWith" locator-key1="THREAD_TABLE_ACTIONS">
+			<execute function="AssertClick#pauseAssertTextClickAt" />
+		</case>
+		<case comparator="startsWith" locator-key1="THREAD_TABLE_THREAD">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="assertTextEquals">
+		<case comparator="startsWith" locator-key1="THREAD_TABLE_LAST_POST">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+</definition>

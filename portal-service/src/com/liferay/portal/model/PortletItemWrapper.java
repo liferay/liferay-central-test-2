@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -410,6 +412,10 @@ public class PortletItemWrapper implements PortletItem,
 		return new PortletItemWrapper(_portletItem.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.PortletItem toUnescapedModel() {
+		return new PortletItemWrapper(_portletItem.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _portletItem.toString();
@@ -422,6 +428,25 @@ public class PortletItemWrapper implements PortletItem,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_portletItem.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortletItemWrapper)) {
+			return false;
+		}
+
+		PortletItemWrapper portletItemWrapper = (PortletItemWrapper)obj;
+
+		if (Validator.equals(_portletItem, portletItemWrapper._portletItem)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,0 +1,114 @@
+<definition>
+	<var name="key_siteName" value="${siteName}" />
+	<var name="pageName" value="Blogs" />
+	<var name="pageType" value="Open Site" />
+	<var name="siteName" value="Open Site Name" />
+	<var name="siteDescription" value="Open Site Description" />
+	<var name="siteType" value="Open" />
+
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+
+		<execute macro="SOSites#addSOSite">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+	</set-up>
+
+	<var name="entryTitle" value="Blogs Entry Title" />
+	<var name="entryContent" value="Blogs Entry Content" />
+	<var name="entryAuthorFirstName" value="Joe" />
+	<var name="entryAuthorLastName" value="Bloggs" />
+	<var name="entryContentEdit" value="Blogs Entry Content Edit" />
+	<var name="entryTitleEdit" value="Blogs Entry Title Edit" />
+	<var name="entryContentEdit" value="Blogs Entry Content Edit" />
+
+	<command name="AddSOBlogsEntry">
+		<var name="siteName" value="${siteName}" />
+		<var name="entryTitle" value="${entryTitle}" />
+		<var name="entryContent" value="${entryContent}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG" />
+
+		<execute macro="BlogsEntry#viewPG" />
+		
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_COMMENTS_1" value1="0 Comments" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_AVERAGE_RATING_1" value1="Average (0 Votes)" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="SEARCH_RESULTS" value1="Showing 1 result." />
+
+		<execute macro="BlogsEntry#viewPGDetails" />
+
+		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="ENTRY_COMMENTS" value1="0 Comments" />
+		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="ENTRY_AVERAGE_RATING" value1="Average (0 Votes)" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPGDetails" />
+
+		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="ENTRY_VIEW_COUNT" value1="1 View" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPGDetails" />
+
+		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="ENTRY_VIEW_COUNT" value1="2 Views" />
+
+		<execute action="PGSOBlogs#open" locator-key1="OPEN_SITE_NAME_BLOGS_RSS_URL" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_SITE_NAME" value1="${siteName}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_ENTRY_CONTENT" value1="${entryContent}" />
+		<execute action="PGBlogs#click" locator-key1="RSS_ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_ENTRY_TITLE_DETAILS" value1="${entryTitle}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_ENTRY_CONTENT_DETAILS" value1="${entryContent}" />
+
+		<execute macro="Page#openURL" />
+	</command>
+
+	<command name="EditSOBlogsEntry">
+		<var name="siteName" value="${siteName}" />
+		<var name="entryTitle" value="${entryTitle}" />
+		<var name="entryContent" value="${entryContent}" />
+		<var name="entryTitleEdit" value="${entryTitleEdit}" />
+		<var name="entryContentEdit" value="${entryContentEdit}" />
+		<var name="key_siteName" value="${key_siteName}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG" />
+
+		<execute macro="BlogsEntry#editPG" />
+	</command>
+
+	<command name="DeleteSOBlogsEntry">
+		<var name="siteName" value="${siteName}" />
+		<var name="entryTitle" value="${entryTitle}" />
+		<var name="entryContent" value="${entryContent}" />
+		<var name="key_siteName" value="${key_siteName}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG" />
+
+		<execute macro="BlogsEntry#deletePG" />
+	</command>
+
+	<tear-down>
+		<execute macro="Site#tearDownCP" />
+	</tear-down>
+</definition>

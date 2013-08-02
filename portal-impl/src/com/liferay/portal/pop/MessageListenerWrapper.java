@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,7 @@ public class MessageListenerWrapper implements MessageListener {
 		_listener = listener;
 	}
 
+	@Override
 	public boolean accept(String from, String recipient, Message message) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Listener " + _listener.getClass().getName());
@@ -46,6 +47,7 @@ public class MessageListenerWrapper implements MessageListener {
 		return value;
 	}
 
+	@Override
 	public void deliver(String from, String recipient, Message message)
 		throws MessageListenerException {
 
@@ -61,24 +63,22 @@ public class MessageListenerWrapper implements MessageListener {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MessageListenerWrapper)) {
 			return false;
 		}
 
-		MessageListenerWrapper listener = null;
-
-		try {
-			listener = (MessageListenerWrapper)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MessageListenerWrapper listener = (MessageListenerWrapper)obj;
 
 		String id = listener.getId();
 
 		return getId().equals(id);
 	}
 
+	@Override
 	public String getId() {
 		return _listener.getId();
 	}

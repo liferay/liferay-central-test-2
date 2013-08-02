@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -305,6 +305,15 @@ public class LayoutBranchLocalServiceWrapper implements LayoutBranchLocalService
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutBranchLocalService.getMasterLayoutBranch(layoutSetBranchId,
 			plid);
+	}
+
+	public com.liferay.portal.model.LayoutBranch getMasterLayoutBranch(
+		long layoutSetBranchId, long plid,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _layoutBranchLocalService.getMasterLayoutBranch(layoutSetBranchId,
+			plid, serviceContext);
 	}
 
 	public com.liferay.portal.model.LayoutBranch updateLayoutBranch(

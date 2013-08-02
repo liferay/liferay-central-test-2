@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -111,7 +111,7 @@ if (fieldParamSelection.equals("0")) {
 					<aui:input label="to" name='<%= facet.getFieldName() + "to" %>' size="14" />
 				</div>
 
-				<aui:button onClick='<%= renderResponse.getNamespace() + facet.getFieldName() + "searchCustomRange(" + (index + 1) + ");" %>' value="search" />
+				<aui:button disabled="<%= Validator.isNull(fieldParamFrom) || Validator.isNull(fieldParamTo) %>" name="searchCustomRangeButton" onClick='<%= renderResponse.getNamespace() + facet.getFieldName() + "searchCustomRange(" + (index + 1) + ");" %>' value="search" />
 			</div>
 		</ul>
 	</aui:field-wrapper>
@@ -129,18 +129,18 @@ if (fieldParamSelection.equals("0")) {
 		String tokenLabel = modifiedLabel;
 
 		if (fieldParamSelection.equals(String.valueOf(index + 1))) {
-			String fromDateLabel = fieldParamFrom;
-			String toDateLabel = fieldParamTo;
+			String fromDateLabel = HtmlUtil.escape(fieldParamFrom);
+			String toDateLabel = HtmlUtil.escape(fieldParamTo);
 
-			tokenLabel = LanguageUtil.format(pageContext, "from-x-to-x", new Object[] {"<strong>" + fromDateLabel + "</strong>", "<strong>" + toDateLabel + "</strong>"});
+			tokenLabel = UnicodeLanguageUtil.format(pageContext, "from-x-to-x", new Object[] {"<strong>" + fromDateLabel + "</strong>", "<strong>" + toDateLabel + "</strong>"});
 		}
 		%>
 
 		Liferay.Search.tokenList.add(
 			{
-				clearFields: '<%= UnicodeFormatter.toString(fieldName) %>',
-				fieldValues: '<%= UnicodeFormatter.toString(fieldName + "selection|0") %>',
-				text: '<%= UnicodeFormatter.toString(tokenLabel) %>'
+				clearFields: '<%= fieldName %>',
+				fieldValues: '<%= fieldName + "selection|0" %>',
+				html: '<%= tokenLabel %>'
 			}
 		);
 	</aui:script>
@@ -175,7 +175,7 @@ if (fieldParamSelection.equals("0")) {
 					document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>from'].value = fromDate;
 				}
 
-				var range = '[' + fromDate.replace(/-/g, '') + '000000 TO ' + toDate.replace(/-/g, '') + '000000]';
+				var range = '[' + fromDate.replace(/-/g, '') + '000000 TO ' + toDate.replace(/-/g, '') + '235959]';
 
 				document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>'].value = range;
 				document.<portlet:namespace />fm['<portlet:namespace /><%= facet.getFieldName() %>selection'].value = selection;
@@ -258,6 +258,78 @@ if (fieldParamSelection.equals("0")) {
 			event.halt();
 
 			A.one('#<%= randomNamespace + "custom-range" %>').toggle();
+		}
+	);
+</aui:script>
+
+<aui:script use="aui-form-validator">
+	var Util = Liferay.Util;
+
+	var DEFAULTS_FORM_VALIDATOR = AUI.defaults.FormValidator;
+
+	var REGEX_DATE = /^\d{4}(-)(0[1-9]|1[012])\1(0[1-9]|[12][0-9]|3[01])$/;
+
+	var customRangeFrom = A.one('#<portlet:namespace /><%= facet.getFieldName() %>from');
+	var customRangeTo = A.one('#<portlet:namespace /><%= facet.getFieldName() %>to');
+
+	var dateFromValid = false;
+	var dateToValid = false;
+
+	var searchButton = A.one('#<portlet:namespace />searchCustomRangeButton');
+
+	A.mix(
+		DEFAULTS_FORM_VALIDATOR.STRINGS,
+		{
+			customRange: '<%= UnicodeLanguageUtil.get(pageContext, "search-custom-range-format") %>'
+		},
+		true
+	);
+
+	A.mix(
+		DEFAULTS_FORM_VALIDATOR.RULES,
+		{
+			customRange: function(val, fieldNode, ruleValue) {
+				return REGEX_DATE.test(val);
+			}
+		},
+		true
+	);
+
+	var ruleCustomRange = {
+		customRange: true
+	};
+
+	var setValid = function(field, value) {
+		if (field === customRangeFrom) {
+			dateFromValid = value;
+		}
+		else if (field === customRangeTo) {
+			dateToValid = value;
+		}
+	};
+
+	var customRangeValidator = new A.FormValidator(
+		{
+			boundingBox: document.<portlet:namespace />fm,
+			fieldContainer: 'div',
+			on: {
+				errorField: function(event) {
+					setValid(event.validator.field, false);
+
+					Util.toggleDisabled(searchButton, true);
+				},
+				validField: function(event) {
+					setValid(event.validator.field, true);
+
+					if (dateFromValid && dateToValid) {
+						Util.toggleDisabled(searchButton, false);
+					}
+				}
+			},
+			rules: {
+				<portlet:namespace /><%= facet.getFieldName() %>from: ruleCustomRange,
+				<portlet:namespace /><%= facet.getFieldName() %>to: ruleCustomRange
+			}
 		}
 	);
 </aui:script>

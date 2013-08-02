@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,8 +40,11 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 	}
 
 	public boolean isHookPlugin(File file) throws AutoDeployException {
+		String fileName = file.getName();
+
 		if (isMatchingFile(file, "WEB-INF/liferay-hook.xml") &&
-			!isMatchingFile(file, "WEB-INF/liferay-portlet.xml")) {
+			!isMatchingFile(file, "WEB-INF/liferay-portlet.xml") &&
+			!fileName.contains("-theme") && !fileName.contains("-web")) {
 
 			return true;
 		}
@@ -98,7 +101,9 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 	}
 
 	public boolean isMatchingFileExtension(File file) {
-		String fileName = file.getName().toLowerCase();
+		String fileName = file.getName();
+
+		fileName = fileName.toLowerCase();
 
 		if (fileName.endsWith(".war") || fileName.endsWith(".zip")) {
 			if (_log.isDebugEnabled()) {

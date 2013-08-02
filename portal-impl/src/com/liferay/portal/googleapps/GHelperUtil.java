@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -163,15 +163,17 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			String body = document.formattedString();
+
 			if (_log.isInfoEnabled()) {
-				_log.info("submitAdd request " + url);
+				_log.info("submitAdd request url " + url);
+				_log.info("submitAdd request body " + body);
 			}
 
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setBody(
-				document.formattedString(), ContentTypes.APPLICATION_ATOM_XML,
-				StringPool.UTF8);
+				body, ContentTypes.APPLICATION_ATOM_XML, StringPool.UTF8);
 			options.setLocation(url);
 			options.setPost(true);
 
@@ -215,15 +217,17 @@ public class GHelperUtil {
 		throws GoogleAppsException {
 
 		try {
+			String body = document.formattedString();
+
 			if (_log.isInfoEnabled()) {
-				_log.info("submitUpdate request " + url);
+				_log.info("submitUpdate request url " + url);
+				_log.info("submitUpdate request body " + body);
 			}
 
 			Http.Options options = _getOptions(gAuthenticator);
 
 			options.setBody(
-				document.formattedString(), ContentTypes.APPLICATION_ATOM_XML,
-				StringPool.UTF8);
+				body, ContentTypes.APPLICATION_ATOM_XML, StringPool.UTF8);
 			options.setLocation(url);
 			options.setPut(true);
 

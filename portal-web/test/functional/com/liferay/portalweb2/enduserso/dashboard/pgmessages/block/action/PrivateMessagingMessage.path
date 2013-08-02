@@ -1,0 +1,54 @@
+<html>
+<head>
+<title>PrivateMessagingMessage</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PrivateMessagingMessage</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PrivateMessagingMessage</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_SUBJECT</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_USERS</td>
+	<td>//div[@class='aui-layout-content thread-info-content ']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_SENDER</td>
+	<td>//div[@class='message']/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_BODY</td>
+	<td>//div[@class='body']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_ATTACHMENT</td>
+	<td>//div[@class='image-thumbnail']/a/img</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PRIVATE_MESSAGE_ATTACHMENT_LINK</td>
+	<td>//td[2]/a</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

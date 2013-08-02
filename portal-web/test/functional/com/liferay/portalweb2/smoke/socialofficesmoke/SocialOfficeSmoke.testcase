@@ -1,0 +1,24 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="Smoke">
+		<var name="roleName" value="Social Office" />
+		<var name="userName" value="Joe Bloggs" />
+		<var name="userScreenName" value="joebloggs" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
+		</execute>
+
+		<execute macro="Role#assignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="${userName}" />
+		</execute>
+	</command>
+</definition>

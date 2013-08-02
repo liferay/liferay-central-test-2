@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,6 +66,7 @@ public class JournalArticleFinderImpl
 		JournalArticleFinder.class.getName() +
 			".findByC_G_C_A_V_T_D_C_T_S_T_D_S_R";
 
+	@Override
 	public int countByKeywords(
 			long companyId, long groupId, long classNameId, String keywords,
 			Double version, String type, String structureId, String templateId,
@@ -97,6 +98,7 @@ public class JournalArticleFinderImpl
 			false);
 	}
 
+	@Override
 	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -114,6 +116,7 @@ public class JournalArticleFinderImpl
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
+	@Override
 	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -133,6 +136,7 @@ public class JournalArticleFinderImpl
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
+	@Override
 	public int countByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String[] articleIds,
 			Double version, String[] titles, String[] descriptions,
@@ -148,6 +152,7 @@ public class JournalArticleFinderImpl
 			false);
 	}
 
+	@Override
 	public int filterCountByKeywords(
 			long companyId, long groupId, long classNameId, String keywords,
 			Double version, String type, String structureId, String templateId,
@@ -179,6 +184,7 @@ public class JournalArticleFinderImpl
 			true);
 	}
 
+	@Override
 	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -196,6 +202,7 @@ public class JournalArticleFinderImpl
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
+	@Override
 	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -215,6 +222,7 @@ public class JournalArticleFinderImpl
 			displayDateGT, displayDateLT, status, reviewDate, andOperator);
 	}
 
+	@Override
 	public int filterCountByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String[] articleIds,
 			Double version, String[] titles, String[] descriptions,
@@ -230,6 +238,7 @@ public class JournalArticleFinderImpl
 			true);
 	}
 
+	@Override
 	public List<JournalArticle> filterFindByKeywords(
 			long companyId, long groupId, long classNameId, String keywords,
 			Double version, String type, String structureId, String templateId,
@@ -262,6 +271,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator, true);
 	}
 
+	@Override
 	public List<JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -281,6 +291,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
+	@Override
 	public List<JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -302,6 +313,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
+	@Override
 	public List<JournalArticle> filterFindByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String[] articleIds,
 			Double version, String[] titles, String[] descriptions,
@@ -318,6 +330,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator, true);
 	}
 
+	@Override
 	public List<JournalArticle> findByExpirationDate(
 			long classNameId, int status, Date expirationDateLT)
 		throws SystemException {
@@ -360,6 +373,7 @@ public class JournalArticleFinderImpl
 		}
 	}
 
+	@Override
 	public List<JournalArticle> findByKeywords(
 			long companyId, long groupId, long classNameId, String keywords,
 			Double version, String type, String structureId, String templateId,
@@ -392,6 +406,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
+	@Override
 	public List<JournalArticle> findByReviewDate(
 			long classNameId, Date reviewDateLT, Date reviewDateGT)
 		throws SystemException {
@@ -425,6 +440,7 @@ public class JournalArticleFinderImpl
 		}
 	}
 
+	@Override
 	public JournalArticle findByR_D(long resourcePrimKey, Date displayDate)
 		throws NoSuchArticleException, SystemException {
 
@@ -471,6 +487,7 @@ public class JournalArticleFinderImpl
 		throw new NoSuchArticleException(sb.toString());
 	}
 
+	@Override
 	public List<JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -494,6 +511,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
+	@Override
 	public List<JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String articleId,
 			Double version, String title, String description, String content,
@@ -515,6 +533,7 @@ public class JournalArticleFinderImpl
 			start, end, orderByComparator);
 	}
 
+	@Override
 	public List<JournalArticle> findByC_G_C_A_V_T_D_C_T_S_T_D_S_R(
 			long companyId, long groupId, long classNameId, String[] articleIds,
 			Double version, String[] titles, String[] descriptions,
@@ -604,21 +623,6 @@ public class JournalArticleFinderImpl
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-
-			if ((articleIds != null) &&
-				((articleIds.length > 1) ||
-				 ((articleIds.length == 1) && (articleIds[0] != null))) &&
-				(version == null)) {
-
-				sql = StringUtil.replace(
-					sql, "MAX(version) AS tempVersion",
-					"version AS tempVersion");
-				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY groupId, articleId");
-			}
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
@@ -771,22 +775,6 @@ public class JournalArticleFinderImpl
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
-
-			if ((articleIds != null) &&
-				((articleIds.length > 1) ||
-				 ((articleIds.length == 1) && (articleIds[0] != null))) &&
-				(version == null)) {
-
-				sql = StringUtil.replace(
-					sql, "MAX(version) AS tempVersion",
-					"version AS tempVersion");
-				sql = StringUtil.replace(sql, "[$GROUP_BY_CLAUSE$]", "");
-			}
-			else {
-				sql = StringUtil.replace(
-					sql, "[$GROUP_BY_CLAUSE$]", "GROUP BY groupId, articleId");
-			}
-
 			sql = CustomSQLUtil.replaceOrderBy(sql, orderByComparator);
 
 			if (inlineSQLHelper) {

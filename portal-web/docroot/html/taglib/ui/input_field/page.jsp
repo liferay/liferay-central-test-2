@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,7 +33,12 @@ boolean ignoreRequestValue = GetterUtil.getBoolean((String) request.getAttribute
 String placeholder = (String)request.getAttribute("liferay-ui:input-field:placeholder");
 
 String type = ModelHintsUtil.getType(model, field);
+
 Map<String, String> hints = ModelHintsUtil.getHints(model, field);
+
+if (hints != null) {
+	type = GetterUtil.getString(hints.get("type"), type);
+}
 %>
 
 <c:if test="<%= type != null %>">
@@ -65,14 +70,6 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			<%
 			Calendar now = CalendarFactoryUtil.getCalendar(timeZone, locale);
-
-			String timeFormatPattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT, locale))).toPattern();
-
-			boolean timeFormatAmPm = true;
-
-			if (timeFormatPattern.indexOf("a") == -1) {
-				timeFormatAmPm = false;
-			}
 
 			boolean checkDefaultDelta = false;
 
@@ -236,7 +233,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			if ((hour == -1) && (cal != null)) {
 				hour = cal.get(Calendar.HOUR_OF_DAY);
 
-				if (timeFormatAmPm) {
+				if (DateUtil.isFormatAmPm(locale)) {
 					hour = cal.get(Calendar.HOUR);
 				}
 			}
@@ -260,7 +257,7 @@ Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 			if ((amPm == -1) && (cal != null)) {
 				amPm = Calendar.AM;
 
-				if (timeFormatAmPm) {
+				if (DateUtil.isFormatAmPm(locale)) {
 					amPm = cal.get(Calendar.AM_PM);
 				}
 			}

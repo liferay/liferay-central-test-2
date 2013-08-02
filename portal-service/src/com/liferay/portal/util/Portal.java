@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -382,6 +382,26 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	/**
+	 * Returns the canonical URL of the page, to distinguish it among its
+	 * translations.
+	 *
+	 * @param  completeURL the complete URL of the page
+	 * @param  themeDisplay the current theme display
+	 * @param  layout the layout. If it is <code>null</code>, then it is
+	 *         generated for the current layout
+	 * @param  forceLayoutFriendlyURL adds the page friendly URL to the
+	 *         canonical URL even if it is not needed
+	 * @return the canonical URL
+	 * @throws PortalException if a friendly URL or the group could not be
+	 *         retrieved
+	 * @throws SystemException if a system exception occurred
+	 */
+	public String getCanonicalURL(
+			String completeURL, ThemeDisplay themeDisplay, Layout layout,
+			boolean forceLayoutFriendlyURL)
+		throws PortalException, SystemException;
+
+	/**
 	 * @deprecated Replaced by the more general {@link #getCDNHost(boolean)}
 	 */
 	public String getCDNHost();
@@ -725,13 +745,30 @@ public interface Portal {
 			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
+	public String getGroupFriendlyURL(
+			Group group, boolean privateLayoutSet, ThemeDisplay themeDisplay,
+			Locale locale)
+		throws PortalException, SystemException;
+
 	public String[] getGroupPermissions(HttpServletRequest request);
+
+	public String[] getGroupPermissions(
+		HttpServletRequest request, String className);
 
 	public String[] getGroupPermissions(PortletRequest portletRequest);
 
+	public String[] getGroupPermissions(
+		PortletRequest portletRequest, String className);
+
 	public String[] getGuestPermissions(HttpServletRequest request);
 
+	public String[] getGuestPermissions(
+		HttpServletRequest request, String className);
+
 	public String[] getGuestPermissions(PortletRequest portletRequest);
+
+	public String[] getGuestPermissions(
+		PortletRequest portletRequest, String className);
 
 	public String getHomeURL(HttpServletRequest request)
 		throws PortalException, SystemException;
@@ -747,11 +784,12 @@ public interface Portal {
 		PortletResponse portletResponse);
 
 	public String getJournalArticleActualURL(
-			long groupId, String mainPath, String friendlyURL,
-			Map<String, String[]> params, Map<String, Object> requestContext)
+			long groupId, boolean privateLayout, String mainPath,
+			String friendlyURL, Map<String, String[]> params,
+			Map<String, Object> requestContext)
 		throws PortalException, SystemException;
 
-	public String getJsSafePortletId(String portletId) ;
+	public String getJsSafePortletId(String portletId);
 
 	public String getLayoutActualURL(Layout layout);
 
@@ -824,6 +862,10 @@ public interface Portal {
 
 	public Locale getLocale(HttpServletRequest request);
 
+	public Locale getLocale(
+		HttpServletRequest request, HttpServletResponse response,
+		boolean initialize);
+
 	public Locale getLocale(RenderRequest renderRequest);
 
 	public String getMailId(String mx, String popPortletPrefix, Object... ids);
@@ -836,8 +878,6 @@ public interface Portal {
 
 	public HttpServletRequest getOriginalServletRequest(
 		HttpServletRequest request);
-
-	public String getOuterPortletId(HttpServletRequest request);
 
 	public long getParentGroupId(long scopeGroupId)
 		throws PortalException, SystemException;
@@ -1066,6 +1106,8 @@ public interface Portal {
 
 	public long getUserId(PortletRequest portletRequest);
 
+	public String getUserName(BaseModel<?> baseModel);
+
 	public String getUserName(long userId, String defaultUserName);
 
 	public String getUserName(
@@ -1101,6 +1143,8 @@ public interface Portal {
 
 	public void initCustomSQL();
 
+	public User initUser(HttpServletRequest request) throws Exception;
+
 	public boolean isAllowAddPortletDefaultResource(
 			HttpServletRequest request, Portlet portlet)
 		throws PortalException, SystemException;
@@ -1111,12 +1155,12 @@ public interface Portal {
 	public boolean isCDNDynamicResourcesEnabled(long companyId);
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupAdmin(User, long)}
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupAdmin(User, long)}
 	 */
 	public boolean isCommunityAdmin(User user, long groupId) throws Exception;
 
 	/**
-	 * @deprecated As of 6.1, renamed to {@link #isGroupOwner(User, long)}
+	 * @deprecated As of 6.1.0, renamed to {@link #isGroupOwner(User, long)}
 	 */
 	public boolean isCommunityOwner(User user, long groupId) throws Exception;
 
@@ -1142,6 +1186,9 @@ public interface Portal {
 		throws SystemException;
 
 	public boolean isGroupAdmin(User user, long groupId) throws Exception;
+
+	public boolean isGroupFriendlyURL(
+		String fullURL, String groupFriendlyURL, String layoutFriendlyURL);
 
 	public boolean isGroupOwner(User user, long groupId) throws Exception;
 
@@ -1270,6 +1317,8 @@ public interface Portal {
 	public String[] stripURLAnchor(String url, String separator);
 
 	public String transformCustomSQL(String sql);
+
+	public String transformSQL(String sql);
 
 	public PortletMode updatePortletMode(
 		String portletId, User user, Layout layout, PortletMode portletMode,

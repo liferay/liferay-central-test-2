@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,10 +69,12 @@ UnicodeProperties layoutTypeSettings = selLayout.getTypeSettingsProperties();
 </aui:fieldset>
 
 <aui:script use="aui-base">
-	var deleteLogoLink = A.one('#<portlet:namespace />deleteIconLink');
-	var iconImageInput = A.one('#<portlet:namespace />iconImage');
-	var layoutIconContainer = A.one('#<portlet:namespace />layoutIconContainer');
-	var iconFileNameInput = A.one('#<portlet:namespace />iconFileName');
+	var panel = A.one('#<portlet:namespace />advanced');
+
+	var deleteLogoLink = panel.one('#<portlet:namespace />deleteIconLink');
+	var iconFileNameInput = panel.one('#<portlet:namespace />iconFileName');
+	var iconImageInput = panel.one('#<portlet:namespace />iconImage');
+	var layoutIconContainer = panel.one('#<portlet:namespace />layoutIconContainer');
 
 	var changeLogo = function(event) {
 		var changeLogo = (event.type == 'change');

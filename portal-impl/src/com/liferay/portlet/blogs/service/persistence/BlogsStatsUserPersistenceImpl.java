@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -280,12 +280,57 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 		}
 	}
 
+	protected void cacheUniqueFindersCache(BlogsStatsUser blogsStatsUser) {
+		if (blogsStatsUser.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(blogsStatsUser.getGroupId()),
+					Long.valueOf(blogsStatsUser.getUserId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args,
+				blogsStatsUser);
+		}
+		else {
+			BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
+
+			if ((blogsStatsUserModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(blogsStatsUser.getGroupId()),
+						Long.valueOf(blogsStatsUser.getUserId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args,
+					blogsStatsUser);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(BlogsStatsUser blogsStatsUser) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
-			new Object[] {
+		BlogsStatsUserModelImpl blogsStatsUserModelImpl = (BlogsStatsUserModelImpl)blogsStatsUser;
+
+		Object[] args = new Object[] {
 				Long.valueOf(blogsStatsUser.getGroupId()),
 				Long.valueOf(blogsStatsUser.getUserId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
+
+		if ((blogsStatsUserModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(blogsStatsUserModelImpl.getOriginalGroupId()),
+					Long.valueOf(blogsStatsUserModelImpl.getOriginalUserId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
+		}
 	}
 
 	/**
@@ -480,32 +525,8 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 			BlogsStatsUserImpl.class, blogsStatsUser.getPrimaryKey(),
 			blogsStatsUser);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-				new Object[] {
-					Long.valueOf(blogsStatsUser.getGroupId()),
-					Long.valueOf(blogsStatsUser.getUserId())
-				}, blogsStatsUser);
-		}
-		else {
-			if ((blogsStatsUserModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(blogsStatsUserModelImpl.getOriginalGroupId()),
-						Long.valueOf(blogsStatsUserModelImpl.getOriginalUserId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-					new Object[] {
-						Long.valueOf(blogsStatsUser.getGroupId()),
-						Long.valueOf(blogsStatsUser.getUserId())
-					}, blogsStatsUser);
-			}
-		}
+		clearUniqueFindersCache(blogsStatsUser);
+		cacheUniqueFindersCache(blogsStatsUser);
 
 		return blogsStatsUser;
 	}
@@ -3386,8 +3407,10 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistenceImpl<BlogsStat
 				List<ModelListener<BlogsStatsUser>> listenersList = new ArrayList<ModelListener<BlogsStatsUser>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<BlogsStatsUser>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

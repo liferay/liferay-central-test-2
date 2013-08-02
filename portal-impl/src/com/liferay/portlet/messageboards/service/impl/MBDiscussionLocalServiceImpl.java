@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,6 +26,7 @@ import com.liferay.portlet.messageboards.service.base.MBDiscussionLocalServiceBa
 public class MBDiscussionLocalServiceImpl
 	extends MBDiscussionLocalServiceBaseImpl {
 
+	@Override
 	public MBDiscussion addDiscussion(
 			long classNameId, long classPK, long threadId)
 		throws SystemException {
@@ -43,12 +44,14 @@ public class MBDiscussionLocalServiceImpl
 		return discussion;
 	}
 
+	@Override
 	public MBDiscussion getDiscussion(long discussionId)
 		throws PortalException, SystemException {
 
 		return mbDiscussionPersistence.findByPrimaryKey(discussionId);
 	}
 
+	@Override
 	public MBDiscussion getDiscussion(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -57,6 +60,7 @@ public class MBDiscussionLocalServiceImpl
 		return mbDiscussionPersistence.findByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public MBDiscussion getThreadDiscussion(long threadId)
 		throws PortalException, SystemException {
 

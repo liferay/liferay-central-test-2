@@ -1,0 +1,176 @@
+<html>
+<head>
+<title>PGTasks</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGTasks</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGTasks</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>ASSIGNED_TO_ME_LINK</td>
+	<td>//a[contains(.,'Assigned to Me')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>I_HAVE_CREATED_LINK</td>
+	<td>//a[contains(.,'I Have Created')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_TASK_BUTTON</td>
+	<td>//a[@class='add-task']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PERMISSIONS_BUTTON</td>
+	<td>//a[@class='permission-tasks']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILTER_BUTTON</td>
+	<td>//a[@class='filter-tasks']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SHOW_COMPLETED_TASKS_CHECKBOX</td>
+	<td>//input[@name='all-tasks']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FILTER-->
+<tr>
+	<td>FILTER_TAG_HEADER</td>
+	<td>//h3[contains(.,'Filter by Tags')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILTER_TAG_CHECKBOX</td>
+	<td>//span/a[contains(.,'portaltag1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILTER_PLACE_HEADER</td>
+	<td>//h3[contains(.,'Filter by Place')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILTER_PLACE_SELECT_MENU</td>
+	<td>//div[@class='filter-container group-filter']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--TASK-->
+<tr>
+	<td>TASK_DESCRIPTION</td>
+	<td>//a[contains(@class,'tasks-title')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_DESCRIPTION_NORMAL</td>
+	<td>//a[@class='tasks-title normal']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_DESCRIPTION_HIGH</td>
+	<td>//a[@class='tasks-title high']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_DESCRIPTION_LOW</td>
+	<td>//a[@class='tasks-title low']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_REPORTER</td>
+	<td>//div[@class='result-data']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_20</td>
+	<td>//div[@style='width: 20%;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_CLICK_20</td>
+	<td>//div[3]/a[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_40</td>
+	<td>//div[@style='width: 40%;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_CLICK_40</td>
+	<td>//div[3]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_60</td>
+	<td>//div[@style='width: 60%;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_CLICK_60</td>
+	<td>//div[3]/a[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_80</td>
+	<td>//div[@style='width: 80%;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_CLICK_80</td>
+	<td>//div[3]/a[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_100</td>
+	<td>//div[@style='width: 100%;']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>TASK_PROGRESS_BAR_CLICK_100</td>
+	<td>//div[3]/a[5]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILTER_PLACE_SELECT_MENU</td>
+	<td>//div[@class='filter-container group-filter']/select</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -220,12 +220,57 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		}
 	}
 
+	protected void cacheUniqueFindersCache(ShoppingCart shoppingCart) {
+		if (shoppingCart.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(shoppingCart.getGroupId()),
+					Long.valueOf(shoppingCart.getUserId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args,
+				shoppingCart);
+		}
+		else {
+			ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
+
+			if ((shoppingCartModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(shoppingCart.getGroupId()),
+						Long.valueOf(shoppingCart.getUserId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U, args,
+					shoppingCart);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(ShoppingCart shoppingCart) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U,
-			new Object[] {
+		ShoppingCartModelImpl shoppingCartModelImpl = (ShoppingCartModelImpl)shoppingCart;
+
+		Object[] args = new Object[] {
 				Long.valueOf(shoppingCart.getGroupId()),
 				Long.valueOf(shoppingCart.getUserId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
+
+		if ((shoppingCartModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(shoppingCartModelImpl.getOriginalGroupId()),
+					Long.valueOf(shoppingCartModelImpl.getOriginalUserId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
+		}
 	}
 
 	/**
@@ -396,32 +441,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 		EntityCacheUtil.putResult(ShoppingCartModelImpl.ENTITY_CACHE_ENABLED,
 			ShoppingCartImpl.class, shoppingCart.getPrimaryKey(), shoppingCart);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-				new Object[] {
-					Long.valueOf(shoppingCart.getGroupId()),
-					Long.valueOf(shoppingCart.getUserId())
-				}, shoppingCart);
-		}
-		else {
-			if ((shoppingCartModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_U.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(shoppingCartModelImpl.getOriginalGroupId()),
-						Long.valueOf(shoppingCartModelImpl.getOriginalUserId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U,
-					new Object[] {
-						Long.valueOf(shoppingCart.getGroupId()),
-						Long.valueOf(shoppingCart.getUserId())
-					}, shoppingCart);
-			}
-		}
+		clearUniqueFindersCache(shoppingCart);
+		cacheUniqueFindersCache(shoppingCart);
 
 		return shoppingCart;
 	}
@@ -1823,8 +1844,10 @@ public class ShoppingCartPersistenceImpl extends BasePersistenceImpl<ShoppingCar
 				List<ModelListener<ShoppingCart>> listenersList = new ArrayList<ModelListener<ShoppingCart>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<ShoppingCart>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

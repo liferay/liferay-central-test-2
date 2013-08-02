@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -376,6 +376,12 @@ public class MBCategoryLocalServiceUtil {
 		long groupId, long[] parentCategoryIds, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getCategories(groupId, parentCategoryIds, start, end);
+	}
+
+	public static java.util.List<java.lang.Object> getCategoriesAndThreads(
+		long groupId, long categoryId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCategoriesAndThreads(groupId, categoryId);
 	}
 
 	public static int getCategoriesCount(long groupId)

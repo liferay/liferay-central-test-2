@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,9 @@
  */
 
 package com.liferay.portal.kernel.util;
+
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -44,7 +47,12 @@ public class ServiceLoader {
 		while (enu.hasMoreElements()) {
 			URL url = enu.nextElement();
 
-			_load(services, classLoader, clazz, url);
+			try {
+				_load(services, classLoader, clazz, url);
+			}
+			catch (Exception e) {
+				_log.error("Unable to load " + clazz + "with " + classLoader);
+			}
 		}
 
 		return services;
@@ -96,5 +104,7 @@ public class ServiceLoader {
 			inputStream.close();
 		}
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(ServiceLoader.class);
 
 }

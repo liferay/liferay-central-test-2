@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,8 +29,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.ResourceAction;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
 import com.liferay.portal.service.impl.GroupLocalServiceImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
@@ -127,6 +129,7 @@ public class GroupFinderImpl
 	public static final String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
+	@Override
 	public int countByG_U(long groupId, long userId, boolean inherit)
 		throws SystemException {
 
@@ -173,6 +176,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public int countByC_N_D(
 			long companyId, String name, String realName, String description,
 			LinkedHashMap<String, Object> params)
@@ -183,6 +187,7 @@ public class GroupFinderImpl
 			description, params);
 	}
 
+	@Override
 	public int countByC_C_N_D(
 			long companyId, long[] classNameIds, String name, String realName,
 			String description, LinkedHashMap<String, Object> params)
@@ -195,10 +200,6 @@ public class GroupFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
-		Long userId = (Long)params.get("usersGroups");
-
-		boolean doUnion = Validator.isNotNull(userId);
-
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 = null;
@@ -206,6 +207,10 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params3 = null;
 
 		LinkedHashMap<String, Object> params4 = null;
+
+		Long userId = (Long)params.get("usersGroups");
+
+		boolean doUnion = Validator.isNotNull(userId);
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -263,6 +268,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<Group> findByLiveGroups() throws SystemException {
 		Session session = null;
 
@@ -285,6 +291,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<Group> findByNoLayouts(
 			long classNameId, boolean privateLayout, int start, int end)
 		throws SystemException {
@@ -315,6 +322,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<Group> findByNullFriendlyURL() throws SystemException {
 		Session session = null;
 
@@ -337,6 +345,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<Group> findBySystem(long companyId) throws SystemException {
 		Session session = null;
 
@@ -363,6 +372,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public List<Group> findByCompanyId(
 			long companyId, LinkedHashMap<String, Object> params, int start,
 			int end, OrderByComparator obc)
@@ -372,11 +382,6 @@ public class GroupFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
-		Long userId = (Long)params.get("usersGroups");
-		boolean inherit = GetterUtil.getBoolean(params.get("inherit"), true);
-
-		boolean doUnion = Validator.isNotNull(userId) && inherit;
-
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 = null;
@@ -384,6 +389,11 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params3 = null;
 
 		LinkedHashMap<String, Object> params4 = null;
+
+		Long userId = (Long)params.get("usersGroups");
+		boolean inherit = GetterUtil.getBoolean(params.get("inherit"), true);
+
+		boolean doUnion = Validator.isNotNull(userId) && inherit;
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -502,6 +512,7 @@ public class GroupFinderImpl
 		}
 	}
 
+	@Override
 	public Group findByC_N(long companyId, String name)
 		throws NoSuchGroupException, SystemException {
 
@@ -547,6 +558,7 @@ public class GroupFinderImpl
 		throw new NoSuchGroupException(sb.toString());
 	}
 
+	@Override
 	public List<Group> findByC_N_D(
 			long companyId, String name, String realName, String description,
 			LinkedHashMap<String, Object> params, int start, int end,
@@ -558,6 +570,7 @@ public class GroupFinderImpl
 			description, params, start, end, obc);
 	}
 
+	@Override
 	public List<Group> findByC_C_N_D(
 			long companyId, long[] classNameIds, String name, String realName,
 			String description, LinkedHashMap<String, Object> params, int start,
@@ -571,11 +584,6 @@ public class GroupFinderImpl
 			params = _emptyLinkedHashMap;
 		}
 
-		Long userId = (Long)params.get("usersGroups");
-		boolean inherit = GetterUtil.getBoolean(params.get("inherit"), true);
-
-		boolean doUnion = Validator.isNotNull(userId) && inherit;
-
 		LinkedHashMap<String, Object> params1 = params;
 
 		LinkedHashMap<String, Object> params2 = null;
@@ -583,6 +591,11 @@ public class GroupFinderImpl
 		LinkedHashMap<String, Object> params3 = null;
 
 		LinkedHashMap<String, Object> params4 = null;
+
+		Long userId = (Long)params.get("usersGroups");
+		boolean inherit = GetterUtil.getBoolean(params.get("inherit"), true);
+
+		boolean doUnion = Validator.isNotNull(userId) && inherit;
 
 		if (doUnion) {
 			params2 = new LinkedHashMap<String, Object>(params1);
@@ -730,7 +743,8 @@ public class GroupFinderImpl
 	}
 
 	protected int countByGroupId(
-		Session session, long groupId, LinkedHashMap<String, Object> params) {
+			Session session, long groupId, LinkedHashMap<String, Object> params)
+		throws Exception {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
@@ -760,9 +774,10 @@ public class GroupFinderImpl
 	}
 
 	protected List<Long> countByC_C_N_D(
-		Session session, long companyId, long[] classNameIds, String name,
-		String realName, String description,
-		LinkedHashMap<String, Object> params) {
+			Session session, long companyId, long[] classNameIds, String name,
+			String realName, String description,
+			LinkedHashMap<String, Object> params)
+		throws Exception {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
@@ -937,8 +952,8 @@ public class GroupFinderImpl
 		return sql;
 	}
 
-	protected void setJoin(
-		QueryPos qPos, LinkedHashMap<String, Object> params) {
+	protected void setJoin(QueryPos qPos, LinkedHashMap<String, Object> params)
+		throws Exception {
 
 		if (params == null) {
 			return;
@@ -964,6 +979,10 @@ public class GroupFinderImpl
 				String actionId = (String)values.get(2);
 				Long roleId = (Long)values.get(3);
 
+				ResourceAction resourceAction =
+					ResourceActionLocalServiceUtil.getResourceAction(
+						name, actionId);
+
 				if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 6) &&
 					ResourceBlockLocalServiceUtil.isSupported(name)) {
 
@@ -971,13 +990,13 @@ public class GroupFinderImpl
 
 					qPos.add(name);
 					qPos.add(roleId);
-					qPos.add(actionId);
+					qPos.add(resourceAction.getBitwiseValue());
 				}
 				else {
 					qPos.add(name);
 					qPos.add(scope);
-					qPos.add(actionId);
 					qPos.add(roleId);
+					qPos.add(resourceAction.getBitwiseValue());
 				}
 			}
 			else if (key.equals("types")) {

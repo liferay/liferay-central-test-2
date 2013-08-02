@@ -4,6 +4,14 @@
 	<import file="../../build-test-db-upgrade.xml" />
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-db2-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="db2" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -14,7 +22,7 @@
 		<echo file="create-db2.sql">drop database lportal;
 create database lportal;</echo>
 
-		<antcall target="prepare-db-db2-common">
+		<antcall target="prepare-versioned-db2">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-db2.sql" />
@@ -30,10 +38,18 @@ create database lportal;</echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-mysql-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<echo file="create-mysql.sql">drop database if exists lportal;
 create database lportal character set utf8;</echo>
 
-		<antcall target="prepare-db-mysql-common">
+		<antcall target="prepare-versioned-mysql">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-mysql.sql" />
@@ -45,6 +61,12 @@ create database lportal character set utf8;</echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-oracle-firefox">
+		<antcall target="generate-test-properties" />
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -57,7 +79,7 @@ create user &1 identified by &2
 grant connect,resource to &1;
 exit;]]></echo>
 
-		<antcall target="prepare-db-oracle-common">
+		<antcall target="prepare-versioned-oracle">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-oracle.sql" />
@@ -73,6 +95,12 @@ exit;]]></echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-postgresql-firefox">
+		<antcall target="generate-test-properties" />
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -83,7 +111,7 @@ exit;]]></echo>
 		<echo file="create-postgresql.sql">drop database lportal;
 create database lportal encoding = 'UNICODE';</echo>
 
-		<antcall target="prepare-db-postgresql-common">
+		<antcall target="prepare-versioned-postgresql">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-postgresql.sql" />
@@ -99,6 +127,12 @@ create database lportal encoding = 'UNICODE';</echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-sql-server-firefox">
+		<antcall target="generate-test-properties" />
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -109,7 +143,7 @@ create database lportal encoding = 'UNICODE';</echo>
 		<echo file="create-sql-server.sql">drop database lportal;
 create database lportal;</echo>
 
-		<antcall target="prepare-db-sql-server-common">
+		<antcall target="prepare-versioned-sql-server">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-sql-server.sql" />
@@ -125,6 +159,14 @@ create database lportal;</echo>
 	</target>
 
 	<target name="test-db-upgrade-smoke-latest-tomcat-sybase-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sybase" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="vm.vmdk.suffix" value="sybase-15.0.2" />
@@ -138,7 +180,7 @@ exec sp_dboption 'lportal', 'select into/bulkcopy/pllsort' , true
 go
 use lportal</echo>
 
-		<antcall target="prepare-db-sybase-common">
+		<antcall target="prepare-versioned-sybase">
 			<param name="skip.prepare-bundle" value="true" />
 			<param name="sql.dir" value="" />
 			<param name="sql.file" value="create-sybase.sql" />

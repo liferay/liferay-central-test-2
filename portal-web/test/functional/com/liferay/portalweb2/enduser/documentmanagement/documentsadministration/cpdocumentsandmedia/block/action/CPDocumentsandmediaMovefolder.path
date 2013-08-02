@@ -1,0 +1,118 @@
+<html>
+<head>
+<title>CPDocumentsandmediaMovefolder</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPDocumentsandmediaMovefolder</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPDocumentsandmediaMovefolder</td>
+</tr>
+<!---->
+<tr>
+	<td>CONFIGURATION_OPTIONS</td>
+	<td>//span[@title='Options']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>BACK</td>
+	<td>//a[@id='_20_TabsBack']</td>
+	<td>Back</td>
+</tr>
+<tr>
+	<td>PARENT_FOLDER</td>
+	<td>//a[@id='_20_parentFolderName']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_PARENT_FOLDER_BUTTON</td>
+	<td>//input[@value='Select']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REMOVE_PARENT_FOLDER_BUTTON</td>
+	<td>//input[@value='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MOVE_BUTTON</td>
+	<td>//input[@value='Move']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CANCEL_BUTTON</td>
+	<td>//input[@value='Cancel']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--CONFIGURATION_OPTIONS_MENULIST-->
+<tr>
+	<td>CONFIGURATION_OPTIONS_MENULIST_EXPORT_IMPORT</td>
+	<td>//a[contains(@id, 'menu_export-import')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FOLDER_WINDOW-->
+<tr>
+	<td>FOLDER_WINDOW_ID</td>
+	<td>title=Documents and Media</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_ADD_FOLDER_BUTTON</td>
+	<td>//input[@value='Add Folder']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_CHOOSE_THIS_FOLDER_BUTTON</td>
+	<td>//input[@value='Choose This Folder']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_FOLDER1</td>
+	<td>//td[@id='_20_ocerSearchContainer_col-folder_row-1']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_FOLDER1_CHOOSE_BUTTON</td>
+	<td>//td[@id='_20_ocerSearchContainer_col-4_row-1']/input</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_FOLDER2</td>
+	<td>//td[@id='_20_ocerSearchContainer_col-folder_row-2']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FOLDER_WINDOW_FOLDER2_CHOOSE_BUTTON</td>
+	<td>//td[@id='_20_ocerSearchContainer_col-4_row-2']/input</td>
+	<td></td>
+</tr>
+
+</tbody>
+</table>
+</body>
+</html>

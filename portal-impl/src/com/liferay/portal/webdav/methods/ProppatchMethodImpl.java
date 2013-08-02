@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,6 +51,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ProppatchMethodImpl extends BasePropMethodImpl {
 
+	@Override
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
 		try {
 			Set<QName> props = processInstructions(webDavRequest);
@@ -174,8 +175,9 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 							webDavProps.addProp(name, prefix, uri, text);
 						}
 
-						newProps.add(SAXReaderUtil.createQName(
-							customPropElement.getName(), namespace));
+						newProps.add(
+							SAXReaderUtil.createQName(
+								customPropElement.getName(), namespace));
 					}
 					else if (instructionElement.getName().equals("remove")) {
 						webDavProps.removeProp(name, prefix, uri);

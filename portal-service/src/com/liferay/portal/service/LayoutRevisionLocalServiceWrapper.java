@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -387,6 +387,14 @@ public class LayoutRevisionLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
 			plid, status);
+	}
+
+	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(
+		long layoutSetBranchId, long plid, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _layoutRevisionLocalService.getLayoutRevisions(layoutSetBranchId,
+			plid, start, end, orderByComparator);
 	}
 
 	public java.util.List<com.liferay.portal.model.LayoutRevision> getLayoutRevisions(

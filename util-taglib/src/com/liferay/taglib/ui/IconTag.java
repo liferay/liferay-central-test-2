@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,12 +15,15 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.Map;
+
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -66,6 +69,10 @@ public class IconTag extends IncludeTag {
 		_lang = lang;
 	}
 
+	public void setLocalizeMessage(boolean localizeMessage) {
+		_localizeMessage = localizeMessage;
+	}
+
 	public void setMessage(String message) {
 		_message = message;
 	}
@@ -108,6 +115,7 @@ public class IconTag extends IncludeTag {
 		_imageHover = null;
 		_label = false;
 		_lang = null;
+		_localizeMessage = true;
 		_message = null;
 		_method = null;
 		_onClick = null;
@@ -152,6 +160,14 @@ public class IconTag extends IncludeTag {
 			if (Validator.isNotNull(id) && Validator.isNotNull(message)) {
 				id = id.concat(StringPool.UNDERLINE).concat(
 					FriendlyURLNormalizerUtil.normalize(message));
+
+				PortletResponse portletResponse =
+					(PortletResponse)request.getAttribute(
+						JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+				id = PortalUtil.getUniqueElementId(
+					getOriginalServletRequest(), portletResponse.getNamespace(),
+					id);
 			}
 			else {
 				id = PortalUtil.generateRandomKey(
@@ -167,6 +183,9 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
 		request.setAttribute("liferay-ui:icon:lang", _lang);
+		request.setAttribute(
+			"liferay-ui:icon:localizeMessage",
+			String.valueOf(_localizeMessage));
 		request.setAttribute("liferay-ui:icon:message", _message);
 		request.setAttribute("liferay-ui:icon:method", _method);
 		request.setAttribute("liferay-ui:icon:onClick", _onClick);
@@ -190,6 +209,7 @@ public class IconTag extends IncludeTag {
 	private String _imageHover;
 	private boolean _label;
 	private String _lang;
+	private boolean _localizeMessage = true;
 	private String _message;
 	private String _method;
 	private String _onClick;

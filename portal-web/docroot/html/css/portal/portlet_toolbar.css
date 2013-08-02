@@ -97,3 +97,16 @@
 .lfr-portlet-toolbar .lfr-toolbar-button.membership-requests-button a {
 	background-image: url(@theme_image_path@/common/manage_task.png);
 }
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.lfr-portlet-toolbar .lfr-toolbar-button {
+		a {
+			background-position: right;
+			float: right;
+			padding-left: 14px;
+			padding-right: 29px;
+		}
+	}
+}

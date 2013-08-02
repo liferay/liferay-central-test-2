@@ -37,3 +37,21 @@
 .taglib-workflow-status .workflow-status .workflow-status-pending {
 	color: #F7A233;
 }
+
+/* ---------- RTL ---------- */
+
+.rtl .taglib-workflow-status {
+	.workflow-id, .workflow-version {
+		background-position: right 50%;
+		margin-left: 5px;
+		margin-right: 0;
+	}
+	
+	.workflow-status {
+		background-position: right 50%;
+		margin-left: 5px;
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 20px;
+	}
+}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -335,13 +335,16 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 	@Override
 	public AssetLink toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetLink)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetLink)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetLink toUnescapedModel() {
+		return (AssetLink)this;
 	}
 
 	@Override
@@ -385,18 +388,15 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetLink)) {
 			return false;
 		}
 
-		AssetLink assetLink = null;
-
-		try {
-			assetLink = (AssetLink)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetLink assetLink = (AssetLink)obj;
 
 		long primaryKey = assetLink.getPrimaryKey();
 
@@ -547,7 +547,7 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	}
 
 	private static ClassLoader _classLoader = AssetLink.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetLink.class
 		};
 	private long _linkId;
@@ -567,5 +567,5 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	private boolean _setOriginalType;
 	private int _weight;
 	private long _columnBitmask;
-	private AssetLink _escapedModelProxy;
+	private AssetLink _escapedModel;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -45,6 +45,7 @@ import java.util.concurrent.locks.Lock;
 public class PortletPreferencesLocalServiceImpl
 	extends PortletPreferencesLocalServiceBaseImpl {
 
+	@Override
 	public PortletPreferences addPortletPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, Portlet portlet, String defaultPreferences)
@@ -93,12 +94,14 @@ public class PortletPreferencesLocalServiceImpl
 		return portletPreferences;
 	}
 
+	@Override
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws SystemException {
 
 		portletPreferencesPersistence.removeByO_O_P(ownerId, ownerType, plid);
 	}
 
+	@Override
 	public void deletePortletPreferences(
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException, SystemException {
@@ -107,6 +110,7 @@ public class PortletPreferencesLocalServiceImpl
 			ownerId, ownerType, plid, portletId);
 	}
 
+	@Override
 	@Skip
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 			long companyId, String portletId)
@@ -119,12 +123,14 @@ public class PortletPreferencesLocalServiceImpl
 			portlet.getDefaultPreferences());
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferences()
 		throws SystemException {
 
 		return portletPreferencesPersistence.findAll();
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferences(
 			int ownerType, long plid, String portletId)
 		throws SystemException {
@@ -133,6 +139,7 @@ public class PortletPreferencesLocalServiceImpl
 			ownerType, plid, portletId);
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferences(
 			long ownerId, int ownerType, long plid)
 		throws SystemException {
@@ -141,6 +148,7 @@ public class PortletPreferencesLocalServiceImpl
 			ownerId, ownerType, plid);
 	}
 
+	@Override
 	public PortletPreferences getPortletPreferences(
 			long ownerId, int ownerType, long plid, String portletId)
 		throws PortalException, SystemException {
@@ -149,6 +157,7 @@ public class PortletPreferencesLocalServiceImpl
 			ownerId, ownerType, plid, portletId);
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferences(
 			long companyId, long groupId, long ownerId, int ownerType,
 			String portletId, boolean privateLayout)
@@ -158,6 +167,7 @@ public class PortletPreferencesLocalServiceImpl
 			companyId, groupId, ownerId, ownerType, portletId, privateLayout);
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferences(
 			long plid, String portletId)
 		throws SystemException {
@@ -165,12 +175,14 @@ public class PortletPreferencesLocalServiceImpl
 		return portletPreferencesPersistence.findByP_P(plid, portletId);
 	}
 
+	@Override
 	public List<PortletPreferences> getPortletPreferencesByPlid(long plid)
 		throws SystemException {
 
 		return portletPreferencesPersistence.findByPlid(plid);
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences getPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId)
@@ -180,6 +192,7 @@ public class PortletPreferencesLocalServiceImpl
 			companyId, ownerId, ownerType, plid, portletId, null);
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences getPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String defaultPreferences)
@@ -224,6 +237,7 @@ public class PortletPreferencesLocalServiceImpl
 		}
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences getPreferences(
 			PortletPreferencesIds portletPreferencesIds)
 		throws SystemException {
@@ -236,6 +250,7 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferencesIds.getPortletId());
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences getStrictPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId)
@@ -254,6 +269,7 @@ public class PortletPreferencesLocalServiceImpl
 		}
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences getStrictPreferences(
 			PortletPreferencesIds portletPreferencesIds)
 		throws SystemException {
@@ -266,6 +282,7 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferencesIds.getPortletId());
 	}
 
+	@Override
 	public PortletPreferences updatePreferences(
 			long ownerId, int ownerType, long plid, String portletId,
 			javax.portlet.PortletPreferences portletPreferences)
@@ -276,6 +293,7 @@ public class PortletPreferencesLocalServiceImpl
 		return updatePreferences(ownerId, ownerType, plid, portletId, xml);
 	}
 
+	@Override
 	public PortletPreferences updatePreferences(
 			long ownerId, int ownerType, long plid, String portletId,
 			String xml)

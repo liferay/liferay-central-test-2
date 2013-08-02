@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -66,8 +66,9 @@ public class CheckoutAction extends CartAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		if (redirectToLogin(actionRequest, actionResponse)) {
@@ -224,6 +225,7 @@ public class CheckoutAction extends CartAction {
 		String billingStateSel = ParamUtil.getString(
 			actionRequest, "billingStateSel");
 		String billingState = billingStateSel;
+
 		if (Validator.isNull(billingStateSel)) {
 			billingState = ParamUtil.getString(actionRequest, "billingState");
 		}
@@ -252,6 +254,7 @@ public class CheckoutAction extends CartAction {
 		String shippingStateSel = ParamUtil.getString(
 			actionRequest, "shippingStateSel");
 		String shippingState = shippingStateSel;
+
 		if (Validator.isNull(shippingStateSel)) {
 			shippingState = ParamUtil.getString(actionRequest, "shippingState");
 		}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import org.apache.struts.action.Action;
  */
 public class StrutsActionRegistryImpl implements StrutsActionRegistry {
 
+	@Override
 	public Action getAction(String path) {
 		Action action = _actions.get(path);
 
@@ -44,22 +45,26 @@ public class StrutsActionRegistryImpl implements StrutsActionRegistry {
 		return null;
 	}
 
+	@Override
 	public Map<String, Action> getActions() {
 		return _actions;
 	}
 
+	@Override
 	public void register(String path, StrutsAction strutsAction) {
 		Action action = new ActionAdapter(strutsAction);
 
 		_actions.put(path, action);
 	}
 
+	@Override
 	public void register(String path, StrutsPortletAction strutsPortletAction) {
 		Action action = new PortletActionAdapter(strutsPortletAction);
 
 		_actions.put(path, action);
 	}
 
+	@Override
 	public void unregister(String path) {
 		_actions.remove(path);
 	}

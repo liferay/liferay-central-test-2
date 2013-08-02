@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,6 +47,7 @@ public class DDMTemplateFinderImpl
 	public static final String FIND_BY_C_G_S_N_D_T_M_L =
 		DDMTemplateFinder.class.getName() + ".findByC_G_S_N_D_T_M_L";
 
+	@Override
 	public int countByKeywords(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode)
@@ -73,6 +74,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator);
 	}
 
+	@Override
 	public int countByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -90,6 +92,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator);
 	}
 
+	@Override
 	public int countByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] modes,
@@ -101,6 +104,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, false);
 	}
 
+	@Override
 	public int filterCountByKeywords(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode)
@@ -127,6 +131,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator);
 	}
 
+	@Override
 	public int filterCountByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -144,6 +149,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator);
 	}
 
+	@Override
 	public int filterCountByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] modes,
@@ -155,6 +161,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, true);
 	}
 
+	@Override
 	public List<DDMTemplate> filterFindByKeywords(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode, int start, int end,
@@ -182,6 +189,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> filterFindByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -200,6 +208,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> filterFindByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] modes,
@@ -212,6 +221,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, start, end, orderByComparator, true);
 	}
 
+	@Override
 	public List<DDMTemplate> findByKeywords(
 			long companyId, long groupId, long structureId, String keywords,
 			String type, String mode, int start, int end,
@@ -239,6 +249,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> findByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String name,
 			String description, String type, String mode, String language,
@@ -257,6 +268,7 @@ public class DDMTemplateFinderImpl
 			languages, andOperator, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<DDMTemplate> findByC_G_S_N_D_T_M_L(
 			long companyId, long groupId, long structureId, String[] names,
 			String[] descriptions, String[] types, String[] modes,

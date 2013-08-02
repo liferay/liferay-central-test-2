@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -403,13 +403,16 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 	@Override
 	public AssetTagProperty toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AssetTagProperty)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AssetTagProperty)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AssetTagProperty toUnescapedModel() {
+		return (AssetTagProperty)this;
 	}
 
 	@Override
@@ -445,18 +448,15 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AssetTagProperty)) {
 			return false;
 		}
 
-		AssetTagProperty assetTagProperty = null;
-
-		try {
-			assetTagProperty = (AssetTagProperty)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AssetTagProperty assetTagProperty = (AssetTagProperty)obj;
 
 		long primaryKey = assetTagProperty.getPrimaryKey();
 
@@ -624,7 +624,7 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	}
 
 	private static ClassLoader _classLoader = AssetTagProperty.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AssetTagProperty.class
 		};
 	private long _tagPropertyId;
@@ -643,5 +643,5 @@ public class AssetTagPropertyModelImpl extends BaseModelImpl<AssetTagProperty>
 	private String _originalKey;
 	private String _value;
 	private long _columnBitmask;
-	private AssetTagProperty _escapedModelProxy;
+	private AssetTagProperty _escapedModel;
 }

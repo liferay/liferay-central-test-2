@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ String viewOrganizationsRedirect = ParamUtil.getString(request, "viewOrganizatio
 String redirect = ParamUtil.getString(request, "redirect", viewOrganizationsRedirect);
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
+boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -109,8 +110,10 @@ else if (layoutSetPrototype != null) {
 
 <liferay-ui:header
 	backURL="<%= backURL %>"
+	escapeXml="<%= false %>"
 	localizeTitle="<%= localizeTitle %>"
-	title="<%= title %>"
+	showBackURL="<%= showBackURL %>"
+	title="<%= HtmlUtil.escape(title) %>"
 />
 
 <portlet:actionURL var="editSiteURL">
@@ -252,5 +255,5 @@ else {
 %>
 
 <%!
-private static String[] _CATEGORY_NAMES = {"basic-information", "search-engine-optimization", "advanced", "miscellaneous"};
+private static final String[] _CATEGORY_NAMES = {"basic-information", "search-engine-optimization", "advanced", "miscellaneous"};
 %>

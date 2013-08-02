@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,8 +28,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface BufferedIncrement {
 
-	Class<? extends Increment<?>> incrementClass();
+	public Class<? extends Increment<?>> incrementClass();
 
-	boolean parallel() default true;
+	public boolean parallel() default true;
 
 }

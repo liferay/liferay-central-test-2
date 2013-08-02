@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import java.util.Map;
  */
 public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 
+	@Override
 	public DDLRecord addRecord(
 			long groupId, long recordSetId, int displayIndex, Fields fields,
 			ServiceContext serviceContext)
@@ -46,6 +47,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public DDLRecord addRecord(
 			long groupId, long recordSetId, int displayIndex,
 			Map<String, Serializable> fieldsMap, ServiceContext serviceContext)
@@ -59,6 +61,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public DDLRecord getRecord(long recordId)
 		throws PortalException, SystemException {
 
@@ -70,6 +73,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 		return record;
 	}
 
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, boolean majorVersion, int displayIndex,
 			Fields fields, boolean mergeFields, ServiceContext serviceContext)
@@ -85,6 +89,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			mergeFields, serviceContext);
 	}
 
+	@Override
 	public DDLRecord updateRecord(
 			long recordId, int displayIndex,
 			Map<String, Serializable> fieldsMap, boolean mergeFields,

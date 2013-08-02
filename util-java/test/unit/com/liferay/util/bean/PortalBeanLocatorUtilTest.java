@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -34,6 +34,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @RunWith(PowerMockRunner.class)
 public class PortalBeanLocatorUtilTest extends PowerMockito {
+
+	@After
+	public void tearDown() {
+		PortalBeanLocatorUtil.setBeanLocator(null);
+	}
 
 	@Test
 	public void testBeanLocatorHasNotBeenSet() {
@@ -81,11 +86,6 @@ public class PortalBeanLocatorUtilTest extends PowerMockito {
 		Assert.assertNull(bean);
 
 		Mockito.verify(_beanLocator, Mockito.times(1));
-	}
-
-	@After
-	public void unsetBeanLocator() {
-		PortalBeanLocatorUtil.setBeanLocator(null);
 	}
 
 	@Mock

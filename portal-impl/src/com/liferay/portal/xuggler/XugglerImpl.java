@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,7 @@ import com.xuggle.xuggler.IContainer;
  */
 public class XugglerImpl implements Xuggler {
 
+	@Override
 	public void installNativeLibraries(
 			String name, XugglerInstallStatus xugglerInstallStatus)
 		throws Exception {
@@ -50,10 +51,12 @@ public class XugglerImpl implements Xuggler {
 		}
 	}
 
+	@Override
 	public boolean isEnabled() {
 		return isEnabled(true);
 	}
 
+	@Override
 	public boolean isEnabled(boolean checkNativeLibraries) {
 		boolean enabled = false;
 
@@ -78,6 +81,7 @@ public class XugglerImpl implements Xuggler {
 		return false;
 	}
 
+	@Override
 	public boolean isNativeLibraryInstalled() {
 		if (_nativeLibraryInstalled) {
 			return _nativeLibraryInstalled;

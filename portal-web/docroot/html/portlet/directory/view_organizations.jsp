@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,12 @@
 
 <%
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
+
+long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+
+if (parentOrganizationId > 0) {
+	portletURL.setParameter("parentOrganizationId", String.valueOf(parentOrganizationId));
+}
 %>
 
 <liferay-ui:search-container
@@ -32,12 +38,28 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 	<%
 	OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-	LinkedHashMap organizationParams = new LinkedHashMap();
-
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+	LinkedHashMap<String, Object> organizationParams = new LinkedHashMap<String, Object>();
 
 	if (parentOrganizationId <= 0) {
 		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+	}
+
+	if (Validator.isNotNull(searchTerms.getKeywords()) || searchTerms.isAdvancedSearch()) {
+		if (parentOrganizationId != OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
+			List<Long> excludedOrganizationIds = new ArrayList<Long>();
+
+			excludedOrganizationIds.add(parentOrganizationId);
+
+			organizationParams.put("excludedOrganizationIds", excludedOrganizationIds);
+
+			Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
+
+			List<Organization> organizations = new ArrayList<Organization>();
+
+			organizations.add(parentOrganization);
+
+			organizationParams.put("organizationsTree", organizations);
+		}
 	}
 	%>
 

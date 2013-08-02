@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,13 +20,7 @@
 page import="com.liferay.portal.util.LayoutView" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+PortletPreferences preferences = portletPreferences;
 
 String rootLayoutUuid = GetterUtil.getString(preferences.getValue("rootLayoutUuid", StringPool.BLANK));
 int displayDepth = GetterUtil.getInteger(preferences.getValue("displayDepth", StringPool.BLANK));
@@ -40,7 +34,7 @@ Layout rootLayout = null;
 long rootLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 if (Validator.isNotNull(rootLayoutUuid)) {
-	rootLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(rootLayoutUuid, scopeGroupId);
+	rootLayout = LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(rootLayoutUuid, scopeGroupId, layout.isPrivateLayout());
 
 	if (rootLayout != null) {
 		rootLayoutId = rootLayout.getLayoutId();

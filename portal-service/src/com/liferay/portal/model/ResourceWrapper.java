@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -200,6 +202,10 @@ public class ResourceWrapper implements Resource, ModelWrapper<Resource> {
 		return new ResourceWrapper(_resource.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Resource toUnescapedModel() {
+		return new ResourceWrapper(_resource.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _resource.toString();
@@ -242,6 +248,25 @@ public class ResourceWrapper implements Resource, ModelWrapper<Resource> {
 
 	public void setScope(int scope) {
 		_resource.setScope(scope);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceWrapper)) {
+			return false;
+		}
+
+		ResourceWrapper resourceWrapper = (ResourceWrapper)obj;
+
+		if (Validator.equals(_resource, resourceWrapper._resource)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

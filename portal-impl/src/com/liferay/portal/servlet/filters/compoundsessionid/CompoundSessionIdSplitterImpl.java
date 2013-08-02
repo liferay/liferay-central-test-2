@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,14 +27,17 @@ import com.liferay.portal.util.PropsValues;
 public class CompoundSessionIdSplitterImpl
 	implements CompoundSessionIdSplitter {
 
+	@Override
 	public String getSessionIdDelimiter() {
 		return _sessionIdDelimiter;
 	}
 
+	@Override
 	public boolean hasSessionDelimiter() {
 		return Validator.isNotNull(_sessionIdDelimiter);
 	}
 
+	@Override
 	public String parseSessionId(String sessionId) {
 		if (Validator.isNull(_sessionIdDelimiter)) {
 			return sessionId;
@@ -55,12 +58,12 @@ public class CompoundSessionIdSplitterImpl
 		String sessionIdDelimiter = PropsValues.SESSION_ID_DELIMITER;
 
 		if (Validator.isNull(sessionIdDelimiter)) {
-			_sessionIdDelimiter = PropsUtil.get(
-				"session.id." + ServerDetector.getServerId() + " .delimiter");
+			sessionIdDelimiter = PropsUtil.get(
+				"session.id." + ServerDetector.getServerId() + ".delimiter");
 		}
 
-		if (_sessionIdDelimiter == null) {
-			_sessionIdDelimiter = StringPool.BLANK;
+		if (sessionIdDelimiter == null) {
+			sessionIdDelimiter = StringPool.BLANK;
 		}
 
 		_sessionIdDelimiter = sessionIdDelimiter;

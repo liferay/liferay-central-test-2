@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -74,7 +74,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 			<%
 			String parentText = StringPool.BLANK;
 
-			WikiPage parentPage = wikiPage.getParentPage();
+			WikiPage parentPage = wikiPage.getViewableParentPage();
 
 			if (parentPage == null) {
 				parentText = StringPool.OPEN_PARENTHESIS + LanguageUtil.get(pageContext, "none") + StringPool.CLOSE_PARENTHESIS;
@@ -82,12 +82,12 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 			else {
 				parentText = parentPage.getTitle();
 
-				parentPage = parentPage.getParentPage();
+				parentPage = parentPage.getViewableParentPage();
 
 				while (parentPage != null) {
 					parentText = parentPage.getTitle() + " &raquo; " + parentText;
 
-					parentPage = parentPage.getParentPage();
+					parentPage = parentPage.getViewableParentPage();
 				}
 			}
 

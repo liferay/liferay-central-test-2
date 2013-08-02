@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -83,6 +83,33 @@ public class ThemeDisplay implements Cloneable, Serializable {
 
 	public Account getAccount() {
 		return _account;
+	}
+
+	public String getCDNBaseURL() {
+		if (_cdnBaseURL != null) {
+			return _cdnBaseURL;
+		}
+
+		String host = getCDNHost();
+
+		String portalURL = getPortalURL();
+
+		if (getServerName() != null) {
+			try {
+				portalURL = PortalUtil.getPortalURL(getLayout(), this);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
+		if (Validator.isNull(host)) {
+			host = portalURL;
+		}
+
+		_cdnBaseURL = host;
+
+		return _cdnBaseURL;
 	}
 
 	public String getCDNDynamicResourcesHost() {
@@ -324,6 +351,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 		return getScopeGroupId();
 	}
 
+	public String getPpid() {
+		return _ppid;
+	}
+
 	public String getRealCompanyLogo() {
 		return _realCompanyLogo;
 	}
@@ -342,6 +373,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 
 	public long getRealUserId() {
 		return _realUser.getUserId();
+	}
+
+	public long getRefererGroupId() {
+		return _refererGroupId;
 	}
 
 	public long getRefererPlid() {
@@ -473,6 +508,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 	}
 
 	public String getURLLayoutTemplates() {
+		if (Validator.isNull(_urlLayoutTemplates)) {
+			return _urlPageSettings + "#layout";
+		}
+
 		return _urlLayoutTemplates;
 	}
 
@@ -589,6 +628,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 
 	public boolean isLifecycleAction() {
 		return _lifecycleAction;
+	}
+
+	public boolean isLifecycleEvent() {
+		return _lifecycleEvent;
 	}
 
 	public boolean isLifecycleRender() {
@@ -723,6 +766,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 		_ajax = ajax;
 	}
 
+	public void setCDNBaseURL(String cdnBase) {
+		_cdnBaseURL = cdnBase;
+	}
+
 	public void setCDNDynamicResourcesHost(String cdnDynamicResourcesHost) {
 		_cdnDynamicResourcesHost = cdnDynamicResourcesHost;
 	}
@@ -854,6 +901,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 		_lifecycleAction = lifecycleAction;
 	}
 
+	public void setLifecycleEvent(boolean lifecycleEvent) {
+		_lifecycleEvent = lifecycleEvent;
+	}
+
 	public void setLifecycleRender(boolean lifecycleRender) {
 		_lifecycleRender = lifecycleRender;
 	}
@@ -872,11 +923,21 @@ public class ThemeDisplay implements Cloneable, Serializable {
 		_theme = theme;
 		_colorScheme = colorScheme;
 
-		if ((theme != null) && (colorScheme != null)) {
-			String themeStaticResourcePath = theme.getStaticResourcePath();
+		if ((theme == null) || (colorScheme == null)) {
+			return;
+		}
 
-			String host = getCDNHost();
+		String themeStaticResourcePath = theme.getStaticResourcePath();
 
+		String cdnBaseURL = getCDNBaseURL();
+
+		setPathColorSchemeImages(
+			cdnBaseURL + themeStaticResourcePath +
+				colorScheme.getColorSchemeImagesPath());
+
+		String dynamicResourcesHost = getCDNDynamicResourcesHost();
+
+		if (Validator.isNull(dynamicResourcesHost)) {
 			String portalURL = getPortalURL();
 
 			if (getServerName() != null) {
@@ -888,32 +949,30 @@ public class ThemeDisplay implements Cloneable, Serializable {
 				}
 			}
 
-			if (Validator.isNull(host)) {
-				host = portalURL;
-			}
-
-			setPathColorSchemeImages(
-				host + themeStaticResourcePath +
-					colorScheme.getColorSchemeImagesPath());
-
-			String dynamicResourcesHost = getCDNDynamicResourcesHost();
-
-			if (Validator.isNull(dynamicResourcesHost)) {
-				dynamicResourcesHost = portalURL;
-			}
-
-			setPathThemeCss(
-				dynamicResourcesHost + themeStaticResourcePath +
-					theme.getCssPath());
-
-			setPathThemeImages(
-				host + themeStaticResourcePath + theme.getImagesPath());
-			setPathThemeJavaScript(
-				host + themeStaticResourcePath + theme.getJavaScriptPath());
-			setPathThemeRoot(themeStaticResourcePath + theme.getRootPath());
-			setPathThemeTemplates(
-				host + themeStaticResourcePath + theme.getTemplatesPath());
+			dynamicResourcesHost = portalURL;
 		}
+
+		setPathThemeCss(
+			dynamicResourcesHost + themeStaticResourcePath +
+				theme.getCssPath());
+
+		setPathThemeImages(
+			cdnBaseURL + themeStaticResourcePath + theme.getImagesPath());
+		setPathThemeJavaScript(
+			cdnBaseURL + themeStaticResourcePath +
+				theme.getJavaScriptPath());
+
+		String rootPath = theme.getRootPath();
+
+		if (rootPath.equals(StringPool.SLASH)) {
+			setPathThemeRoot(themeStaticResourcePath);
+		}
+		else {
+			setPathThemeRoot(themeStaticResourcePath + rootPath);
+		}
+
+		setPathThemeTemplates(
+			cdnBaseURL + themeStaticResourcePath + theme.getTemplatesPath());
 	}
 
 	public void setMDRRuleGroupInstance(
@@ -1026,6 +1085,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 		_portalURL = portalURL;
 	}
 
+	public void setPpid(String ppid) {
+		_ppid = ppid;
+	}
+
 	public void setRealCompanyLogo(String realCompanyLogo) {
 		_realCompanyLogo = realCompanyLogo;
 	}
@@ -1040,6 +1103,10 @@ public class ThemeDisplay implements Cloneable, Serializable {
 
 	public void setRealUser(User realUser) {
 		_realUser = realUser;
+	}
+
+	public void setRefererGroupId(long refererGroupId) {
+		_refererGroupId = refererGroupId;
 	}
 
 	public void setRefererPlid(long refererPlid) {
@@ -1292,6 +1359,7 @@ public class ThemeDisplay implements Cloneable, Serializable {
 	private Account _account;
 	private boolean _addSessionIdToURL;
 	private boolean _ajax;
+	private String _cdnBaseURL;
 	private String _cdnDynamicResourcesHost = StringPool.BLANK;
 	private String _cdnHost = StringPool.BLANK;
 	private ColorScheme _colorScheme;
@@ -1324,6 +1392,7 @@ public class ThemeDisplay implements Cloneable, Serializable {
 	private LayoutTypePortlet _layoutTypePortlet;
 	private String _lifecycle;
 	private boolean _lifecycleAction;
+	private boolean _lifecycleEvent;
 	private boolean _lifecycleRender;
 	private boolean _lifecycleResource;
 	private Locale _locale;
@@ -1351,10 +1420,12 @@ public class ThemeDisplay implements Cloneable, Serializable {
 	private long _plid;
 	private String _portalURL = StringPool.BLANK;
 	private PortletDisplay _portletDisplay = new PortletDisplay();
+	private String _ppid = StringPool.BLANK;
 	private String _realCompanyLogo = StringPool.BLANK;
 	private int _realCompanyLogoHeight;
 	private int _realCompanyLogoWidth;
 	private User _realUser;
+	private long _refererGroupId;
 	private long _refererPlid;
 	private Group _scopeGroup;
 	private long _scopeGroupId;

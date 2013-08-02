@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -89,7 +89,7 @@ long assetClassPK = 0;
 		<c:if test="<%= (folder == null) || folder.isSupportsMetadata() %>">
 			<aui:input name="description" />
 
-			<c:if test="<%= fileEntryTypes.size() > 1 %>">
+			<c:if test="<%= fileEntryTypes.size() > 0 %>">
 				<liferay-ui:panel collapsible="<%= true %>" cssClass="document-type" persistState="<%= true %>" title="document-type">
 					<aui:input name="fileEntryTypeId" type="hidden" value="<%= (fileEntryTypeId > 0) ? fileEntryTypeId : 0 %>" />
 

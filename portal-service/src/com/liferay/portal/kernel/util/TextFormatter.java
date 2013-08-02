@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -275,7 +275,7 @@ public class TextFormatter {
 
 		for (int i = 0; i < s.length(); i++) {
 			if (((i + 1) != s.length()) &&
-				(Character.isLowerCase(s.charAt(i + 1)))) {
+				Character.isLowerCase(s.charAt(i + 1))) {
 
 				break;
 			}

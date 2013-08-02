@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -154,7 +154,7 @@ public class DataFactory {
 			initClassNames();
 			initCompany();
 			initDefaultUser();
-			initGroups();
+			initGuestGroup();
 			initJournalArticle(maxJournalArticleSize);
 			initResourceCodes();
 			initRoles();
@@ -847,10 +847,6 @@ public class DataFactory {
 		return _groupClassName;
 	}
 
-	public List<Group> getGroups() {
-		return _groups;
-	}
-
 	public Group getGuestGroup() {
 		return _guestGroup;
 	}
@@ -1048,27 +1044,15 @@ public class DataFactory {
 		_defaultUser.setUserId(_counter.get());
 	}
 
-	public void initGroups() {
-		if (_groups != null) {
-			return;
-		}
+	public void initGuestGroup() {
+		_guestGroup = new GroupImpl();
 
-		_groups = new ArrayList<Group>();
-
-		// Guest
-
-		Group group = new GroupImpl();
-
-		group.setGroupId(_counter.get());
-		group.setClassNameId(_groupClassName.getClassNameId());
-		group.setClassPK(group.getGroupId());
-		group.setName(GroupConstants.GUEST);
-		group.setFriendlyURL("/guest");
-		group.setSite(true);
-
-		_groups.add(group);
-
-		_guestGroup = group;
+		_guestGroup.setGroupId(_counter.get());
+		_guestGroup.setClassNameId(_groupClassName.getClassNameId());
+		_guestGroup.setClassPK(_guestGroup.getGroupId());
+		_guestGroup.setName(GroupConstants.GUEST);
+		_guestGroup.setFriendlyURL("/guest");
+		_guestGroup.setSite(true);
 	}
 
 	public void initJournalArticle(int maxJournalArticleSize) throws Exception {
@@ -1348,7 +1332,6 @@ public class DataFactory {
 	private SimpleCounter _dlDateCounter;
 	private ClassName _dlFileEntryClassName;
 	private ClassName _groupClassName;
-	private List<Group> _groups;
 	private Group _guestGroup;
 	private Role _guestRole;
 	private Map<String, Long> _individualResourceCodeIds;

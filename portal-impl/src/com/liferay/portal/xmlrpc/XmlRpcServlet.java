@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -64,9 +64,11 @@ public class XmlRpcServlet extends HttpServlet {
 		Method registeredMethod = tokenMethods.get(methodName);
 
 		if (registeredMethod != null) {
-			_log.error(
-				"There is already an XML-RPC method registered with name " +
-					methodName + " at " + token);
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"There is already an XML-RPC method registered with name " +
+						methodName + " at " + token);
+			}
 		}
 		else {
 			tokenMethods.put(methodName, method);

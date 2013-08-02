@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -230,6 +231,10 @@ public class JournalArticleResourceWrapper implements JournalArticleResource,
 		return new JournalArticleResourceWrapper(_journalArticleResource.toEscapedModel());
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticleResource toUnescapedModel() {
+		return new JournalArticleResourceWrapper(_journalArticleResource.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _journalArticleResource.toString();
@@ -242,6 +247,26 @@ public class JournalArticleResourceWrapper implements JournalArticleResource,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleResource.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof JournalArticleResourceWrapper)) {
+			return false;
+		}
+
+		JournalArticleResourceWrapper journalArticleResourceWrapper = (JournalArticleResourceWrapper)obj;
+
+		if (Validator.equals(_journalArticleResource,
+					journalArticleResourceWrapper._journalArticleResource)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

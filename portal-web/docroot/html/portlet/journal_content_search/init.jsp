@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,13 +28,7 @@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServic
 page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+PortletPreferences preferences = portletPreferences;
 
 boolean showListedDefault = true;
 
@@ -42,15 +36,15 @@ if (portletName.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 	showListedDefault = PropsValues.JOURNAL_CONTENT_SEARCH_SHOW_LISTED;
 }
 
-boolean showListed = GetterUtil.getBoolean(preferences.getValue("showListed", null), showListedDefault);
+boolean showListed = PrefsParamUtil.getBoolean(preferences, request, "showListed", showListedDefault);
 
 String targetPortletId = StringPool.BLANK;
 
 if (!showListed) {
-	targetPortletId = preferences.getValue("targetPortletId", StringPool.BLANK);
+	targetPortletId = PrefsParamUtil.getString(preferences, request, "targetPortletId", StringPool.BLANK);
 }
 
-String type = preferences.getValue("type", StringPool.BLANK);
+String type = PrefsParamUtil.getString(preferences, request, "type", StringPool.BLANK);
 %>
 
 <%@ include file="/html/portlet/journal_content_search/init-ext.jsp" %>

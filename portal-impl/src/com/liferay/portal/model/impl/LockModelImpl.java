@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -399,13 +399,16 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	@Override
 	public Lock toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Lock)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Lock)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Lock toUnescapedModel() {
+		return (Lock)this;
 	}
 
 	@Override
@@ -445,18 +448,15 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Lock)) {
 			return false;
 		}
 
-		Lock lock = null;
-
-		try {
-			lock = (Lock)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Lock lock = (Lock)obj;
 
 		long primaryKey = lock.getPrimaryKey();
 
@@ -652,9 +652,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	}
 
 	private static ClassLoader _classLoader = Lock.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Lock.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Lock.class };
 	private String _uuid;
 	private String _originalUuid;
 	private long _lockId;
@@ -673,5 +671,5 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	private Date _expirationDate;
 	private Date _originalExpirationDate;
 	private long _columnBitmask;
-	private Lock _escapedModelProxy;
+	private Lock _escapedModel;
 }

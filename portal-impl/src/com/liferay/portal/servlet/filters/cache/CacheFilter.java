@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portal.servlet.filters.cache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -39,6 +40,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortletConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -218,7 +220,7 @@ public class CacheFilter extends BasePortalFilter {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.error(e);
+				_log.warn(e);
 			}
 
 			return 0;
@@ -418,6 +420,30 @@ public class CacheFilter extends BasePortalFilter {
 
 		String key = getCacheKey(request);
 
+		String pAuth = request.getParameter("p_auth");
+
+		if (Validator.isNotNull(pAuth)) {
+			try {
+				if (PropsValues.AUTH_TOKEN_CHECK_ENABLED) {
+					AuthTokenUtil.check(request);
+				}
+			}
+			catch (PortalException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Request is not cacheable " + key +
+							", invalid token received");
+				}
+
+				processFilter(
+					CacheFilter.class, request, response, filterChain);
+
+				return;
+			}
+
+			key = key.replace(pAuth.toUpperCase(), "VALID");
+		}
+
 		long companyId = PortalInstances.getCompanyId(request);
 
 		CacheResponseData cacheResponseData = CacheUtil.getCacheResponseData(
@@ -455,9 +481,9 @@ public class CacheFilter extends BasePortalFilter {
 			}
 
 			// Cache the result if and only if there is a result and the request
-			// is cacheable. We have to test the cacheability of a request
-			// twice because the user could have been authenticated after the
-			// initial test.
+			// is cacheable. We have to test the cacheability of a request twice
+			// because the user could have been authenticated after the initial
+			// test.
 
 			String cacheControl = GetterUtil.getString(
 				byteBufferResponse.getHeader(HttpHeaders.CACHE_CONTROL));

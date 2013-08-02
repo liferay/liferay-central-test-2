@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -123,7 +123,7 @@ userGroupRoles.addAll(organizationRoles);
 			/>
 			<liferay-ui:search-container-column-text
 				name="title"
-				value='<%= HtmlUtil.escape(ListUtil.toString(groupRoles, Role.NAME_ACCESSOR)) %>'
+				value="<%= HtmlUtil.escape(ListUtil.toString(groupRoles, Role.NAME_ACCESSOR)) %>"
 			/>
 
 		<%
@@ -171,7 +171,7 @@ userGroupRoles.addAll(organizationRoles);
 				value="<%= HtmlUtil.escape(userGroupRole.getGroup().getDescriptiveName(locale)) %>"
 			/>
 
-			<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+			<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && !UserPermissionUtil.hasMembershipProtected(permissionChecker, userGroupRole.getGroup(), userGroupRole.getRole(), userGroupRole.getUser()) %>">
 				<liferay-ui:search-container-column-text>
 					<a class="modify-link" data-groupId="<%= userGroupRole.getGroupId() %>" data-rowId="<%= userGroupRole.getRoleId() %>" href="javascript:;"><%= removeRoleIcon %></a>
 				</liferay-ui:search-container-column-text>
@@ -248,7 +248,7 @@ userGroupRoles.addAll(organizationRoles);
 					value="<%= HtmlUtil.escape(userGroupRole.getGroup().getDescriptiveName(locale)) %>"
 				/>
 
-				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+				<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && !UserPermissionUtil.hasMembershipProtected(permissionChecker, userGroupRole.getGroup(), userGroupRole.getRole(), selUser) %>">
 					<liferay-ui:search-container-column-text>
 						<a class="modify-link" data-groupId="<%= userGroupRole.getGroupId() %>" data-rowId="<%= userGroupRole.getRoleId() %>" href="javascript:;"><%= removeRoleIcon %></a>
 					</liferay-ui:search-container-column-text>
@@ -338,10 +338,10 @@ userGroupRoles.addAll(organizationRoles);
 
 			var rowColumns = [];
 
-			rowColumns.push(name);
+			rowColumns.push(A.Escape.html(name));
 
 			if (groupName) {
-				rowColumns.push(groupName);
+				rowColumns.push(A.Escape.html(groupName));
 			}
 
 			if (groupId) {
@@ -360,7 +360,7 @@ userGroupRoles.addAll(organizationRoles);
 			searchContainer.addRow(rowColumns, roleId);
 			searchContainer.updateDataStore();
 		},
-		['liferay-search-container']
+		['liferay-search-container', 'escape']
 	);
 </aui:script>
 

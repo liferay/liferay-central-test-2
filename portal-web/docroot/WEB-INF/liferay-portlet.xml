@@ -61,8 +61,6 @@
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
-		<show-portlet-access-denied>true</show-portlet-access-denied>
-		<show-portlet-inactive>true</show-portlet-inactive>
 		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
@@ -206,6 +204,7 @@
 		<asset-renderer-factory>com.liferay.portlet.messageboards.asset.MBMessageAssetRendererFactory</asset-renderer-factory>
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBCategoryCustomAttributesDisplay</custom-attributes-display>
 		<custom-attributes-display>com.liferay.portlet.messageboards.MBMessageCustomAttributesDisplay</custom-attributes-display>
+		<permission-propagator>com.liferay.portlet.messageboards.security.permission.MBPermissionPropagatorImpl</permission-propagator>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBDiscussionWorkflowHandler</workflow-handler>
 		<workflow-handler>com.liferay.portlet.messageboards.workflow.MBMessageWorkflowHandler</workflow-handler>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
@@ -615,6 +614,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
+		<header-portlet-css>/html/portlet/journal_articles/css/main.css</header-portlet-css>
 		<css-class-wrapper>portlet-journal-articles</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -698,7 +698,8 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
-		<render-weight>50</render-weight>
+		<render-weight>1</render-weight>
+		<ajaxable>false</ajaxable>
 		<css-class-wrapper>portlet-breadcrumb</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
@@ -738,7 +739,6 @@
 		<preferences-company-wide>false</preferences-company-wide>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
-		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -763,11 +763,11 @@
 		<preferences-company-wide>true</preferences-company-wide>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
-		<instanceable>false</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
 		<header-portlet-css>/html/portlet/announcements/css/main.css</header-portlet-css>
+		<footer-portal-javascript>/html/js/liferay/service.js</footer-portal-javascript>
 		<css-class-wrapper>portlet-announcements</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -902,6 +902,7 @@
 		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
 		<friendly-url-mapping>asset_publisher</friendly-url-mapping>
 		<friendly-url-routes>com/liferay/portlet/assetpublisher/asset-publisher-friendly-url-routes.xml</friendly-url-routes>
+		<portlet-layout-listener-class>com.liferay.portlet.assetpublisher.AssetPublisherPortletLayoutListener</portlet-layout-listener-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
@@ -950,7 +951,7 @@
 		<struts-path>update_manager</struts-path>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>com.liferay.portlet.OmniadminControlPanelEntry</control-panel-entry-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1281,7 +1282,7 @@
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>2.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>com.liferay.portlet.OmniadminControlPanelEntry</control-panel-entry-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1296,7 +1297,7 @@
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>3.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>com.liferay.portlet.OmniadminControlPanelEntry</control-panel-entry-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1315,7 +1316,7 @@
 		<poller-processor-class>com.liferay.portlet.admin.poller.AdminPollerProcessor</poller-processor-class>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>1.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>com.liferay.portlet.OmniadminControlPanelEntry</control-panel-entry-class>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
@@ -1367,6 +1368,7 @@
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1461,6 +1463,7 @@
 		<use-default-template>false</use-default-template>
 		<layout-cacheable>true</layout-cacheable>
 		<instanceable>true</instanceable>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1656,6 +1659,7 @@
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<control-panel-entry-category>content</control-panel-entry-category>
 		<control-panel-entry-weight>15.0</control-panel-entry-weight>
+		<permission-propagator>com.liferay.portlet.messageboards.security.permission.MBPermissionPropagatorImpl</permission-propagator>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
 		<scopeable>true</scopeable>
@@ -1729,6 +1733,7 @@
 		<workflow-handler>com.liferay.portlet.dynamicdatalists.workflow.DDLRecordWorkflowHandler</workflow-handler>
 		<preferences-owned-by-group>true</preferences-owned-by-group>
 		<use-default-template>false</use-default-template>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>50</render-weight>
@@ -1842,7 +1847,7 @@
 		<struts-path>license_manager</struts-path>
 		<control-panel-entry-category>server</control-panel-entry-category>
 		<control-panel-entry-weight>4.0</control-panel-entry-weight>
-		<control-panel-entry-class>com.liferay.portlet.admin.OmniadminControlPanelEntry</control-panel-entry-class>
+		<control-panel-entry-class>com.liferay.portlet.OmniadminControlPanelEntry</control-panel-entry-class>
 		<use-default-template>false</use-default-template>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>

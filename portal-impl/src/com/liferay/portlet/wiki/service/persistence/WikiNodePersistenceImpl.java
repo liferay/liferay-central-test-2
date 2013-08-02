@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -257,13 +257,99 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		}
 	}
 
-	protected void clearUniqueFindersCache(WikiNode wikiNode) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] { wikiNode.getUuid(), Long.valueOf(
-					wikiNode.getGroupId()) });
+	protected void cacheUniqueFindersCache(WikiNode wikiNode) {
+		if (wikiNode.isNew()) {
+			Object[] args = new Object[] {
+					wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
+				};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N,
-			new Object[] { Long.valueOf(wikiNode.getGroupId()), wikiNode.getName() });
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				wikiNode);
+
+			args = new Object[] {
+					Long.valueOf(wikiNode.getGroupId()),
+					
+					wikiNode.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args, wikiNode);
+		}
+		else {
+			WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
+
+			if ((wikiNodeModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					wikiNode);
+			}
+
+			if ((wikiNodeModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(wikiNode.getGroupId()),
+						
+						wikiNode.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N, args,
+					wikiNode);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(WikiNode wikiNode) {
+		WikiNodeModelImpl wikiNodeModelImpl = (WikiNodeModelImpl)wikiNode;
+
+		Object[] args = new Object[] {
+				wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((wikiNodeModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					wikiNodeModelImpl.getOriginalUuid(),
+					Long.valueOf(wikiNodeModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		args = new Object[] {
+				Long.valueOf(wikiNode.getGroupId()),
+				
+				wikiNode.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+
+		if ((wikiNodeModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(wikiNodeModelImpl.getOriginalGroupId()),
+					
+					wikiNodeModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
+		}
 	}
 
 	/**
@@ -458,57 +544,8 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 		EntityCacheUtil.putResult(WikiNodeModelImpl.ENTITY_CACHE_ENABLED,
 			WikiNodeImpl.class, wikiNode.getPrimaryKey(), wikiNode);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
-				}, wikiNode);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-				new Object[] {
-					Long.valueOf(wikiNode.getGroupId()),
-					
-				wikiNode.getName()
-				}, wikiNode);
-		}
-		else {
-			if ((wikiNodeModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						wikiNodeModelImpl.getOriginalUuid(),
-						Long.valueOf(wikiNodeModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						wikiNode.getUuid(), Long.valueOf(wikiNode.getGroupId())
-					}, wikiNode);
-			}
-
-			if ((wikiNodeModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(wikiNodeModelImpl.getOriginalGroupId()),
-						
-						wikiNodeModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_N,
-					new Object[] {
-						Long.valueOf(wikiNode.getGroupId()),
-						
-					wikiNode.getName()
-					}, wikiNode);
-			}
-		}
+		clearUniqueFindersCache(wikiNode);
+		cacheUniqueFindersCache(wikiNode);
 
 		return wikiNode;
 	}
@@ -3035,8 +3072,10 @@ public class WikiNodePersistenceImpl extends BasePersistenceImpl<WikiNode>
 				List<ModelListener<WikiNode>> listenersList = new ArrayList<ModelListener<WikiNode>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<WikiNode>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

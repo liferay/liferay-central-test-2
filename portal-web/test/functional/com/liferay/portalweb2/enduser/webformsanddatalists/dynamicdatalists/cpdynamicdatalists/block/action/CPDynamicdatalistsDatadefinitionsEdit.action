@@ -1,0 +1,22 @@
+<definition>
+	<command name="assertTextEquals">
+		<case locator-key1="FORM_FIELD_1">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+
+	<command name="assertClick">
+		<case locator-key1="SAVE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="type">
+		<case locator-key1="DESCRIPTION_FIELD">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+		<case locator-key1="NAME_FIELD">
+			<execute function="Type#clickAtSendKeys" />
+		</case>
+	</command>
+</definition>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -139,6 +139,8 @@ public interface PermissionModel extends BaseModel<Permission> {
 	public CacheModel<Permission> toCacheModel();
 
 	public Permission toEscapedModel();
+
+	public Permission toUnescapedModel();
 
 	public String toString();
 

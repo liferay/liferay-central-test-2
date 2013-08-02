@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.calendar.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -750,6 +751,10 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 		return new CalEventWrapper(_calEvent.toEscapedModel());
 	}
 
+	public com.liferay.portlet.calendar.model.CalEvent toUnescapedModel() {
+		return new CalEventWrapper(_calEvent.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _calEvent.toString();
@@ -771,6 +776,25 @@ public class CalEventWrapper implements CalEvent, ModelWrapper<CalEvent> {
 	public void setRecurrenceObj(
 		com.liferay.portal.kernel.cal.TZSRecurrence recurrenceObj) {
 		_calEvent.setRecurrenceObj(recurrenceObj);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof CalEventWrapper)) {
+			return false;
+		}
+
+		CalEventWrapper calEventWrapper = (CalEventWrapper)obj;
+
+		if (Validator.equals(_calEvent, calEventWrapper._calEvent)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

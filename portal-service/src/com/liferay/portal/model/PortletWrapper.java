@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -259,6 +261,10 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 		return new PortletWrapper(_portlet.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Portlet toUnescapedModel() {
+		return new PortletWrapper(_portlet.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _portlet.toString();
@@ -305,16 +311,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	public void addSchedulerEntry(
 		com.liferay.portal.kernel.scheduler.SchedulerEntry schedulerEntry) {
 		_portlet.addSchedulerEntry(schedulerEntry);
-	}
-
-	/**
-	* Checks whether this portlet is equal to the specified object.
-	*
-	* @param obj the object to compare this portlet against
-	* @return <code>true</code> if the portlet is equal to the specified object
-	*/
-	public boolean equals(java.lang.Object obj) {
-		return _portlet.equals(obj);
 	}
 
 	/**
@@ -1097,6 +1093,8 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns the supported processing event from a namespace URI and a local
 	* part.
 	*
+	* @param uri the namespace URI
+	* @param localPart the local part
 	* @return the supported processing event from a namespace URI and a local
 	part
 	*/
@@ -1117,6 +1115,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	/**
 	* Returns the supported public render parameter from an identifier.
 	*
+	* @param identifier the identifier
 	* @return the supported public render parameter from an identifier
 	*/
 	public com.liferay.portal.model.PublicRenderParameter getPublicRenderParameter(
@@ -1128,6 +1127,8 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns the supported public render parameter from a namespace URI and a
 	* local part.
 	*
+	* @param uri the namespace URI
+	* @param localPart the local part
 	* @return the supported public render parameter from a namespace URI and a
 	local part
 	*/
@@ -1547,6 +1548,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns <code>true</code> if the user has the permission to add the
 	* portlet to a layout.
 	*
+	* @param userId the primary key of the user
 	* @return <code>true</code> if the user has the permission to add the
 	portlet to a layout
 	*/
@@ -1568,6 +1570,8 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns <code>true</code> if the portlet supports the specified mime type
 	* and portlet mode.
 	*
+	* @param mimeType the mime type
+	* @param portletMode the portlet mode
 	* @return <code>true</code> if the portlet supports the specified mime type
 	and portlet mode
 	*/
@@ -1580,6 +1584,7 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns <code>true</code> if the portlet has a role with the specified
 	* name.
 	*
+	* @param roleName the role name
 	* @return <code>true</code> if the portlet has a role with the specified
 	name
 	*/
@@ -1591,6 +1596,8 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	* Returns <code>true</code> if the portlet supports the specified mime type
 	* and window state.
 	*
+	* @param mimeType the mime type
+	* @param windowState the window state
 	* @return <code>true</code> if the portlet supports the specified mime type
 	and window state
 	*/
@@ -2851,6 +2858,25 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	*/
 	public void setXmlRpcMethodClass(java.lang.String xmlRpcMethodClass) {
 		_portlet.setXmlRpcMethodClass(xmlRpcMethodClass);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortletWrapper)) {
+			return false;
+		}
+
+		PortletWrapper portletWrapper = (PortletWrapper)obj;
+
+		if (Validator.equals(_portlet, portletWrapper._portlet)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

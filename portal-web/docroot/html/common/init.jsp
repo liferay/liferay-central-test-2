@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,8 +38,6 @@
 <%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
 <%@ taglib uri="http://struts.apache.org/tags-logic-el" prefix="logic-el" %>
 <%@ taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
-<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
-<%@ taglib uri="http://struts.apache.org/tags-tiles-el" prefix="tiles-el" %>
 
 <%@ page contentType="text/html; charset=UTF-8" %>
 
@@ -142,6 +140,7 @@ page import="com.liferay.portal.model.*" %><%@
 page import="com.liferay.portal.model.impl.*" %><%@
 page import="com.liferay.portal.security.auth.AuthTokenUtil" %><%@
 page import="com.liferay.portal.security.auth.PrincipalException" %><%@
+page import="com.liferay.portal.security.pacl.PACLClassLoaderUtil" %><%@
 page import="com.liferay.portal.security.permission.ActionKeys" %><%@
 page import="com.liferay.portal.security.permission.PermissionChecker" %><%@
 page import="com.liferay.portal.security.permission.ResourceActionsUtil" %><%@
@@ -150,8 +149,10 @@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.LayoutPrototypePermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.LayoutSetPrototypePermissionUtil" %><%@
+page import="com.liferay.portal.service.permission.PortalPermissionUtil" %><%@
 page import="com.liferay.portal.service.permission.PortletPermissionUtil" %><%@
 page import="com.liferay.portal.struts.StrutsUtil" %><%@
+page import="com.liferay.portal.struts.TilesAttributeUtil" %><%@
 page import="com.liferay.portal.theme.PortletDisplay" %><%@
 page import="com.liferay.portal.theme.ThemeDisplay" %><%@
 page import="com.liferay.portal.util.CookieKeys" %><%@
@@ -187,6 +188,7 @@ page import="com.liferay.portlet.RenderRequestImpl" %><%@
 page import="com.liferay.portlet.RenderResponseFactory" %><%@
 page import="com.liferay.portlet.RenderResponseImpl" %><%@
 page import="com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil" %><%@
+page import="com.liferay.portlet.sites.util.SitesUtil" %><%@
 page import="com.liferay.util.ContentUtil" %><%@
 page import="com.liferay.util.CreditCard" %><%@
 page import="com.liferay.util.Encryptor" %><%@

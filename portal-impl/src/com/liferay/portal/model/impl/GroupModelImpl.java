@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -191,7 +191,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 			{ "userId", Types.BIGINT },
 			{ "groupId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (userId LONG not null,groupId LONG not null,primary key (userId, groupId))";
+	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (groupId LONG not null,userId LONG not null,primary key (groupId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -625,13 +625,16 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public Group toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Group)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Group)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Group toUnescapedModel() {
+		return (Group)this;
 	}
 
 	@Override
@@ -672,18 +675,15 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Group)) {
 			return false;
 		}
 
-		Group group = null;
-
-		try {
-			group = (Group)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Group group = (Group)obj;
 
 		long primaryKey = group.getPrimaryKey();
 
@@ -901,9 +901,7 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	}
 
 	private static ClassLoader _classLoader = Group.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Group.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Group.class };
 	private long _groupId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -934,5 +932,5 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
 	private long _columnBitmask;
-	private Group _escapedModelProxy;
+	private Group _escapedModel;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,26 +55,31 @@ public class PortletAppImpl implements PortletApp {
 		}
 	}
 
+	@Override
 	public void addEventDefinition(EventDefinition eventDefinition) {
 		_eventDefinitions.add(eventDefinition);
 	}
 
+	@Override
 	public void addPortlet(Portlet portlet) {
 		_portlets.add(portlet);
 	}
 
+	@Override
 	public void addPortletFilter(PortletFilter portletFilter) {
 		_portletFilters.add(portletFilter);
 		_portletFiltersByFilterName.put(
 			portletFilter.getFilterName(), portletFilter);
 	}
 
+	@Override
 	public void addPortletURLListener(PortletURLListener portletURLListener) {
 		_portletURLListeners.add(portletURLListener);
 		_portletURLListenersByListenerClass.put(
 			portletURLListener.getListenerClass(), portletURLListener);
 	}
 
+	@Override
 	public void addPublicRenderParameter(
 		PublicRenderParameter publicRenderParameter) {
 
@@ -82,6 +87,7 @@ public class PortletAppImpl implements PortletApp {
 			publicRenderParameter.getIdentifier(), publicRenderParameter);
 	}
 
+	@Override
 	public void addPublicRenderParameter(String identifier, QName qName) {
 		PublicRenderParameter publicRenderParameter =
 			new PublicRenderParameterImpl(identifier, qName, this);
@@ -89,74 +95,97 @@ public class PortletAppImpl implements PortletApp {
 		addPublicRenderParameter(publicRenderParameter);
 	}
 
+	@Override
 	public void addServletURLPatterns(Set<String> servletURLPatterns) {
 		_servletURLPatterns.addAll(servletURLPatterns);
 	}
 
+	@Override
 	public Map<String, String[]> getContainerRuntimeOptions() {
 		return _containerRuntimeOptions;
 	}
 
+	@Override
 	public String getContextPath() {
 		return _contextPath;
 	}
 
+	@Override
 	public Map<String, String> getCustomUserAttributes() {
 		return _customUserAttributes;
 	}
 
+	@Override
 	public String getDefaultNamespace() {
 		return _defaultNamespace;
 	}
 
+	@Override
+	public Set<EventDefinition> getEventDefinitions() {
+		return _eventDefinitions;
+	}
+
+	@Override
 	public PortletFilter getPortletFilter(String filterName) {
 		return _portletFiltersByFilterName.get(filterName);
 	}
 
+	@Override
 	public Set<PortletFilter> getPortletFilters() {
 		return _portletFilters;
 	}
 
+	@Override
 	public List<Portlet> getPortlets() {
 		return _portlets;
 	}
 
+	@Override
 	public PortletURLListener getPortletURLListener(String listenerClass) {
 		return _portletURLListenersByListenerClass.get(listenerClass);
 	}
 
+	@Override
 	public Set<PortletURLListener> getPortletURLListeners() {
 		return _portletURLListeners;
 	}
 
+	@Override
 	public PublicRenderParameter getPublicRenderParameter(String identifier) {
 		return _publicRenderParametersByIdentifier.get(identifier);
 	}
 
+	@Override
 	public String getServletContextName() {
 		return _servletContextName;
 	}
 
+	@Override
 	public Set<String> getServletURLPatterns() {
 		return _servletURLPatterns;
 	}
 
+	@Override
 	public SpriteImage getSpriteImage(String fileName) {
 		return _spriteImagesMap.get(fileName);
 	}
 
+	@Override
 	public Set<String> getUserAttributes() {
 		return _userAttributes;
 	}
 
+	@Override
 	public boolean isWARFile() {
 		return _warFile;
 	}
 
+	@Override
 	public void setDefaultNamespace(String defaultNamespace) {
 		_defaultNamespace = defaultNamespace;
 	}
 
+	@Override
 	public void setSpriteImages(String spriteFileName, Properties properties) {
 		Iterator<Map.Entry<Object, Object>> itr =
 			properties.entrySet().iterator();
@@ -180,6 +209,7 @@ public class PortletAppImpl implements PortletApp {
 		}
 	}
 
+	@Override
 	public void setWARFile(boolean warFile) {
 		_warFile = warFile;
 	}

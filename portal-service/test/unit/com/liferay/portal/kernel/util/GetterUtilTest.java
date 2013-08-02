@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,33 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class GetterUtilTest extends TestCase {
 
+	@Test
+	public void testGetBoolean() {
+		assertFalse(GetterUtil.getBoolean("false"));
+		assertTrue(GetterUtil.getBoolean("true"));
+		assertFalse(GetterUtil.getBoolean(Boolean.FALSE));
+		assertTrue(GetterUtil.getBoolean(Boolean.TRUE));
+		assertFalse(GetterUtil.getBoolean(null, false));
+		assertTrue(GetterUtil.getBoolean(null, true));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK, false));
+		assertFalse(GetterUtil.getBoolean(StringPool.BLANK, true));
+
+		for (String s : GetterUtil.BOOLEANS) {
+			assertTrue(GetterUtil.getBoolean(s));
+			assertTrue(GetterUtil.getBoolean(s, true));
+			assertTrue(GetterUtil.getBoolean(s, false));
+		}
+	}
+
+	@Test
 	public void testGetInteger() {
 
 		// Wrong first char
@@ -72,6 +94,7 @@ public class GetterUtilTest extends TestCase {
 		assertEquals(-1, result);
 	}
 
+	@Test
 	public void testGetLong() {
 
 		// Wrong first char
@@ -123,6 +146,7 @@ public class GetterUtilTest extends TestCase {
 		assertEquals(-1L, result);
 	}
 
+	@Test
 	public void testGetShort() {
 
 		// Wrong first char
@@ -174,6 +198,17 @@ public class GetterUtilTest extends TestCase {
 			Short.toString(Short.MIN_VALUE) + "0", (short)-1);
 
 		assertEquals((short)-1, result);
+	}
+
+	@Test
+	public void testGetString() {
+		assertEquals(
+			StringPool.BLANK,
+			GetterUtil.getString(StringPool.BLANK, "default"));
+		assertEquals(GetterUtil.DEFAULT_STRING, GetterUtil.getString(null));
+		assertEquals("default", GetterUtil.getString(null, "default"));
+		assertEquals("default", GetterUtil.getString(new Object(), "default"));
+		assertEquals("test", GetterUtil.getString("test"));
 	}
 
 }

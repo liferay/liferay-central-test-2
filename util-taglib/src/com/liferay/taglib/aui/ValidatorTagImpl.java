@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -84,6 +84,7 @@ public class ValidatorTagImpl
 		return EVAL_BODY_BUFFERED;
 	}
 
+	@Override
 	public String getBody() {
 		if (Validator.isNull(_body)) {
 			return StringPool.DOUBLE_APOSTROPHE;
@@ -103,6 +104,7 @@ public class ValidatorTagImpl
 		return errorMessage;
 	}
 
+	@Override
 	public boolean isCustom() {
 		return _custom;
 	}

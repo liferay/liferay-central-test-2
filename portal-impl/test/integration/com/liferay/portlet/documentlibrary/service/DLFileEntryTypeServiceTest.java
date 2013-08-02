@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,11 +18,12 @@ import com.liferay.portal.events.AddDefaultDocumentLibraryStructuresAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
-import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -55,22 +56,24 @@ public class DLFileEntryTypeServiceTest {
 
 		simpleAction.run(new String[] {companyIdString});
 
+		_group = ServiceTestUtil.addGroup();
+
 		_folder = DLAppLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			TestPropsValues.getUserId(), _group.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder A", "",
-			ServiceTestUtil.getServiceContext());
+			ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		_subfolder = DLAppLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), TestPropsValues.getGroupId(),
+			TestPropsValues.getUserId(), _group.getGroupId(),
 			_folder.getFolderId(), "SubFolder AA", "",
-			ServiceTestUtil.getServiceContext());
+			ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		_basicDocumentDLFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.getFileEntryType(
 				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT);
 
 		_dlFileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFileEntryTypes(
-			DLUtil.getGroupIds(TestPropsValues.getGroupId()));
+			DLUtil.getGroupIds(_group.getGroupId()));
 
 		for (DLFileEntryType dlFileEntryType : _dlFileEntryTypes) {
 			String name = dlFileEntryType.getName();
@@ -118,7 +121,7 @@ public class DLFileEntryTypeServiceTest {
 					_contractDLFileEntryType.getPrimaryKey(),
 					_marketingBannerDLFileEntryType.getPrimaryKey()
 				}),
-			true, ServiceTestUtil.getServiceContext());
+			true, ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		// Add file to folder
 
@@ -126,18 +129,18 @@ public class DLFileEntryTypeServiceTest {
 		byte[] bytes = _CONTENT.getBytes();
 
 		FileEntry fileEntry = DLAppServiceUtil.addFileEntry(
-			TestPropsValues.getGroupId(), _folder.getFolderId(), name,
+			_group.getGroupId(), _folder.getFolderId(), name,
 			ContentTypes.TEXT_PLAIN, name, "", "", bytes,
-			ServiceTestUtil.getServiceContext());
+			ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		assertFileEntryType(fileEntry, _contractDLFileEntryType);
 
 		// Add file to subfolder
 
 		fileEntry = DLAppServiceUtil.addFileEntry(
-			TestPropsValues.getGroupId(), _subfolder.getFolderId(), name,
+			_group.getGroupId(), _subfolder.getFolderId(), name,
 			ContentTypes.TEXT_PLAIN, name, "", "", bytes,
-			ServiceTestUtil.getServiceContext());
+			ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		assertFileEntryType(fileEntry, _contractDLFileEntryType);
 
@@ -149,7 +152,7 @@ public class DLFileEntryTypeServiceTest {
 			_basicDocumentDLFileEntryType.getPrimaryKey(),
 			ListUtil.toList(
 				new long[] {_basicDocumentDLFileEntryType.getPrimaryKey()}),
-			true, ServiceTestUtil.getServiceContext());
+			true, ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		fileEntry = DLAppServiceUtil.getFileEntry(fileEntry.getFileEntryId());
 
@@ -174,6 +177,7 @@ public class DLFileEntryTypeServiceTest {
 	private DLFileEntryType _contractDLFileEntryType;
 	private List<DLFileEntryType> _dlFileEntryTypes;
 	private Folder _folder;
+	private Group _group;
 	private DLFileEntryType _marketingBannerDLFileEntryType;
 	private Folder _subfolder;
 

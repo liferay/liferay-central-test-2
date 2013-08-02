@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,8 @@
 
 <%
 String redirect = (String)request.getAttribute("edit_article.jsp-redirect");
+
+String portletResource = ParamUtil.getString(request, "portletResource");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
@@ -161,6 +163,7 @@ if (Validator.isNotNull(content)) {
 <portlet:renderURL var="updateDefaultLanguageURL" windowState="<%= WindowState.MAXIMIZED.toString() %>">
 	<portlet:param name="struts_action" value="/journal/edit_article" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
+	<portlet:param name="portletResource" value="<%= portletResource %>" />
 	<portlet:param name="articleId" value="<%= articleId %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
@@ -360,7 +363,7 @@ if (Validator.isNotNull(content)) {
 
 							<span class="lfr-translation-manager-selector nobr">
 								<span class="article-default-language lfr-token lfr-token-primary" id="<portlet:namespace />textLanguageId">
-									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png" %>' />
+									<img alt="" src='<%= HtmlUtil.escapeAttribute(themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png") %>' />
 
 									<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
 								</span>
@@ -386,7 +389,7 @@ if (Validator.isNotNull(content)) {
 								</aui:select>
 							</span>
 
-							<c:if test="<%= Validator.isNotNull(articleId) %>">
+							<c:if test="<%= article != null %>">
 								<span class="lfr-translation-manager-add-menu">
 									<liferay-ui:icon-menu
 										align="left"
@@ -430,7 +433,7 @@ if (Validator.isNotNull(content)) {
 					</c:choose>
 				</div>
 
-				<c:if test="<%= Validator.isNotNull(articleId) %>">
+				<c:if test="<%= article != null %>">
 
 					<%
 					String[] translations = article.getAvailableLocales();
@@ -442,7 +445,7 @@ if (Validator.isNotNull(content)) {
 								<liferay-util:buffer var="languageLabel">
 									<%= LocaleUtil.fromLanguageId(toLanguageId).getDisplayName(locale) %>
 
-									<img alt="" src='<%= themeDisplay.getPathThemeImages() + "/language/" + toLanguageId + ".png" %>' />
+									<img alt="" src='<%= HtmlUtil.escapeAttribute(themeDisplay.getPathThemeImages() + "/language/" + toLanguageId + ".png") %>' />
 								</liferay-util:buffer>
 
 								<%= LanguageUtil.format(pageContext, "translating-web-content-to-x", languageLabel) %>
@@ -455,7 +458,7 @@ if (Validator.isNotNull(content)) {
 
 										<%
 										for (int i = 0; i < translations.length; i++) {
-											if (translations[i].equals(defaultLanguageId)){
+											if (translations[i].equals(defaultLanguageId)) {
 												continue;
 											}
 
@@ -506,7 +509,7 @@ if (Validator.isNotNull(content)) {
 										</label>
 
 										<div class="journal-article-component-container">
-											<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' toolbarSet="liferay-article" width="100%" />
+											<liferay-ui:input-editor contentsLanguageId="<%= Validator.isNotNull(toLanguageId) ? toLanguageId : defaultLanguageId %>" editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" name='<%= renderResponse.getNamespace() + "structure_el_TextAreaField_content" %>' toolbarSet="liferay-article" width="100%" />
 										</div>
 
 										<aui:input cssClass="journal-article-localized-checkbox" label="localizable" name="localized" type="hidden" value="<%= true %>" />
@@ -599,7 +602,7 @@ if (Validator.isNotNull(content)) {
 	Liferay.provide(
 		window,
 		'<portlet:namespace />postProcessTranslation',
-		function(formDate, cmd, newVersion, newLanguageId, newLanguage) {
+		function(formDate, cmd, newVersion, newLanguageId, newLanguage, newStatusMessage) {
 			var A = AUI();
 
 			document.<portlet:namespace />fm1.<portlet:namespace />formDate.value = formDate;
@@ -612,6 +615,9 @@ if (Validator.isNotNull(content)) {
 
 			var taglibWorkflowStatus = A.one('#<portlet:namespace />journalArticleWrapper .taglib-workflow-status');
 			var statusNode = taglibWorkflowStatus.one('.workflow-status strong');
+
+			statusNode.html(newStatusMessage);
+
 			var versionNode = taglibWorkflowStatus.one('.workflow-version strong');
 
 			document.<portlet:namespace />fm1.<portlet:namespace />version.value = newVersion;
@@ -765,7 +771,7 @@ if (Validator.isNotNull(content)) {
 	Liferay.Portlet.Journal.PROXY.pathThemeCss = '<%= HttpUtil.encodeURL(themeDisplay.getPathThemeCss()) %>';
 	Liferay.Portlet.Journal.PROXY.portletNamespace = '<portlet:namespace />';
 
-	new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= HtmlUtil.escape(articleId) %>');
+	window.<portlet:namespace />journalPortlet = new Liferay.Portlet.Journal(Liferay.Portlet.Journal.PROXY.portletNamespace, '<%= (article != null) ? HtmlUtil.escape(articleId) : StringPool.BLANK %>');
 
 	var defaultLocaleSelector = A.one('#<portlet:namespace/>defaultLocale');
 

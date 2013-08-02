@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.documentlibrary.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -624,6 +625,10 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 		return new DLFileShortcutWrapper(_dlFileShortcut.toEscapedModel());
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut toUnescapedModel() {
+		return new DLFileShortcutWrapper(_dlFileShortcut.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _dlFileShortcut.toString();
@@ -644,6 +649,26 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 
 	public java.lang.String getToTitle() {
 		return _dlFileShortcut.getToTitle();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileShortcutWrapper)) {
+			return false;
+		}
+
+		DLFileShortcutWrapper dlFileShortcutWrapper = (DLFileShortcutWrapper)obj;
+
+		if (Validator.equals(_dlFileShortcut,
+					dlFileShortcutWrapper._dlFileShortcut)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

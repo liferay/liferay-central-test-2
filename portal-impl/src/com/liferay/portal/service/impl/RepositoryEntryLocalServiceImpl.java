@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import com.liferay.portal.service.base.RepositoryEntryLocalServiceBaseImpl;
 public class RepositoryEntryLocalServiceImpl
 	extends RepositoryEntryLocalServiceBaseImpl {
 
+	@Override
 	public RepositoryEntry addRepositoryEntry(
 			long groupId, long repositoryId, String mappedId,
 			ServiceContext serviceContext)
@@ -47,6 +48,7 @@ public class RepositoryEntryLocalServiceImpl
 		return repositoryEntry;
 	}
 
+	@Override
 	public RepositoryEntry updateRepositoryEntry(
 			long repositoryEntryId, String mappedId)
 		throws PortalException, SystemException {

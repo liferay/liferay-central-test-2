@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -386,8 +386,31 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public double[] toDoubleArray(
+		java.util.Collection<java.lang.Double> collection) {
+		return ArrayUtil.toDoubleArray(collection);
+	}
+
+	public float[] toFloatArray(
+		java.util.Collection<java.lang.Float> collection) {
+		return ArrayUtil.toFloatArray(collection);
+	}
+
+	public int[] toIntArray(java.util.Collection<java.lang.Integer> collection) {
+		return ArrayUtil.toIntArray(collection);
+	}
+
+	public long[] toLongArray(java.util.Collection<java.lang.Long> collection) {
+		return ArrayUtil.toLongArray(collection);
+	}
+
 	public java.lang.Long[] toLongArray(java.lang.Object[] array) {
 		return ArrayUtil.toLongArray(array);
+	}
+
+	public short[] toShortArray(
+		java.util.Collection<java.lang.Short> collection) {
+		return ArrayUtil.toShortArray(collection);
 	}
 
 	public java.lang.String toString(java.lang.Object[] array,

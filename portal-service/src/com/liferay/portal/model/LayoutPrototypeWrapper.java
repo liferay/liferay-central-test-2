@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -425,6 +427,10 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 		return new LayoutPrototypeWrapper(_layoutPrototype.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.LayoutPrototype toUnescapedModel() {
+		return new LayoutPrototypeWrapper(_layoutPrototype.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _layoutPrototype.toString();
@@ -455,6 +461,26 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _layoutPrototype.getLayout();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutPrototypeWrapper)) {
+			return false;
+		}
+
+		LayoutPrototypeWrapper layoutPrototypeWrapper = (LayoutPrototypeWrapper)obj;
+
+		if (Validator.equals(_layoutPrototype,
+					layoutPrototypeWrapper._layoutPrototype)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

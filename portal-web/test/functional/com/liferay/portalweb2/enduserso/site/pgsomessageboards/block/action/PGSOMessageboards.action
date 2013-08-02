@@ -1,0 +1,7 @@
+<definition>
+	<command name="isElementNotPresent">
+		<case locator-key1="BREADCRUMB_PORTLET_TITLE">
+			<execute function="IsElementNotPresent#pauseIsElementNotPresent" />
+		</case>
+	</command>
+</definition>

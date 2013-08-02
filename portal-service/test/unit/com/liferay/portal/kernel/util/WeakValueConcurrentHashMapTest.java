@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,11 +18,14 @@ import com.liferay.portal.kernel.memory.DummyFinalizeAction;
 import com.liferay.portal.kernel.memory.FinalizeManager;
 import com.liferay.portal.kernel.test.BaseTestCase;
 
+import org.junit.Test;
+
 /**
  * @author Shuyang Zhou
  */
 public class WeakValueConcurrentHashMapTest extends BaseTestCase {
 
+	@Test
 	public void testAutoRemove() throws Exception {
 		WeakValueConcurrentHashMap<String, Object> weakValueConcurrentHashMap =
 			new WeakValueConcurrentHashMap<String, Object>();

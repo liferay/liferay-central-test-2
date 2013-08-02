@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -105,10 +105,6 @@ try {
 catch (NoSuchLayoutException nsle) {
 }
 
-if (selLayout != null) {
-	layoutId = selLayout.getLayoutId();
-}
-
 Organization organization = null;
 User selUser = null;
 UserGroup userGroup = null;
@@ -181,9 +177,8 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 	<portlet:param name="struts_action" value="/layouts_admin/edit_layouts" />
 	<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="closeRedirect" value="<%= closeRedirect %>" />
 
-	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) %>">
+	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.USERS_ADMIN)) %>">
 		<portlet:param name="backURL" value="<%= backURL %>" />
 	</c:if>
 
@@ -196,7 +191,7 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="closeRedirect" value="<%= closeRedirect %>" />
 
-	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) %>">
+	<c:if test="<%= (portletName.equals(PortletKeys.LAYOUTS_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.USERS_ADMIN)) %>">
 		<portlet:param name="backURL" value="<%= backURL %>" />
 	</c:if>
 
@@ -222,12 +217,6 @@ request.setAttribute("edit_pages.jsp-selLayoutSet", selLayoutSet);
 
 request.setAttribute("edit_pages.jsp-rootNodeName", rootNodeName);
 
-request.setAttribute("edit_pages.jsp-layoutList", layoutList);
-
 request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 request.setAttribute("edit_pages.jsp-redirectURL", redirectURL);
-%>
-
-<%!
-private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.layout_admin.init_attributes_jsp");
 %>

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,7 +24,6 @@ String type = (String)request.getAttribute("liferay-ui:search:type");
 
 String id = searchContainer.getId(request, namespace);
 
-int start = searchContainer.getStart();
 int end = searchContainer.getEnd();
 int total = searchContainer.getTotal();
 List resultRows = searchContainer.getResultRows();
@@ -176,7 +175,14 @@ int sortColumnIndex = -1;
 					</c:if>
 
 						<%
-						String headerNameValue = LanguageUtil.get(pageContext, headerName);
+						String headerNameValue = null;
+
+						if ((rowChecker == null) || (i > 0)) {
+							headerNameValue = LanguageUtil.get(pageContext, HtmlUtil.escape(headerName));
+						}
+						else {
+							headerNameValue = headerName;
+						}
 						%>
 
 						<c:choose>
@@ -231,7 +237,7 @@ int sortColumnIndex = -1;
 			String rowClassName = _ROW_CLASS_NAME_ALTERNATE + " results-row alt";
 			String rowClassHoverName = _ROW_CLASS_NAME_ALTERNATE_HOVER + " results-row alt " + _CLASS_NAME_HOVER;
 
-			primaryKeys.add(row.getPrimaryKey());
+			primaryKeys.add(HtmlUtil.escape(row.getPrimaryKey()));
 
 			if (MathUtil.isEven(i)) {
 				rowClassName = _ROW_CLASS_NAME_BODY + " results-row";

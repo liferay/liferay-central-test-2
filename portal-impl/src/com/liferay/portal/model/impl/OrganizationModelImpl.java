@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -154,7 +154,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 			{ "userId", Types.BIGINT },
 			{ "organizationId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (userId LONG not null,organizationId LONG not null,primary key (userId, organizationId))";
+	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (organizationId LONG not null,userId LONG not null,primary key (organizationId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -451,13 +451,16 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	@Override
 	public Organization toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Organization)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Organization)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Organization toUnescapedModel() {
+		return (Organization)this;
 	}
 
 	@Override
@@ -495,18 +498,15 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Organization)) {
 			return false;
 		}
 
-		Organization organization = null;
-
-		try {
-			organization = (Organization)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Organization organization = (Organization)obj;
 
 		long primaryKey = organization.getPrimaryKey();
 
@@ -682,7 +682,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	}
 
 	private static ClassLoader _classLoader = Organization.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Organization.class
 		};
 	private long _organizationId;
@@ -702,5 +702,5 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	private int _statusId;
 	private String _comments;
 	private long _columnBitmask;
-	private Organization _escapedModelProxy;
+	private Organization _escapedModel;
 }

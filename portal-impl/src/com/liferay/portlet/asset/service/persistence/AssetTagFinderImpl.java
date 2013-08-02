@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,13 +29,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.asset.NoSuchTagException;
-import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.impl.AssetTagImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -55,14 +53,8 @@ public class AssetTagFinderImpl
 	public static final String COUNT_BY_G_N_P =
 		AssetTagFinder.class.getName() + ".countByG_N_P";
 
-	public static final String FIND_BY_ENTRY_ID =
-		AssetTagFinder.class.getName() + ".findByEntryId";
-
 	public static final String FIND_BY_G_N =
 		AssetTagFinder.class.getName() + ".findByG_N";
-
-	public static final String FIND_BY_C_C =
-		AssetTagFinder.class.getName() + ".findByC_C";
 
 	public static final String FIND_BY_G_C_N =
 		AssetTagFinder.class.getName() + ".findByG_C_N";
@@ -73,30 +65,35 @@ public class AssetTagFinderImpl
 	public static final String FIND_BY_G_N_S_E =
 			AssetTagFinder.class.getName() + ".findByG_N_S_E";
 
+	@Override
 	public int countByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
 
 		return doCountByG_C_N(groupId, classNameId, name, false);
 	}
 
+	@Override
 	public int countByG_N_P(long groupId, String name, String[] tagProperties)
 		throws SystemException {
 
 		return doCountByG_N_P(groupId, name, tagProperties, false);
 	}
 
+	@Override
 	public int filterCountByG_N(long groupId, String name)
 		throws SystemException {
 
 		return doCountByG_N(groupId, name, true);
 	}
 
+	@Override
 	public int filterCountByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
 
 		return doCountByG_C_N(groupId, classNameId, name, true);
 	}
 
+	@Override
 	public int filterCountByG_N_P(
 			long groupId, String name, String[] tagProperties)
 		throws SystemException {
@@ -104,12 +101,14 @@ public class AssetTagFinderImpl
 		return doCountByG_N_P(groupId, name, tagProperties, true);
 	}
 
+	@Override
 	public AssetTag filterFindByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 
 		return doFindByG_N(groupId, name, true);
 	}
 
+	@Override
 	public List<AssetTag> filterFindByG_C_N(
 			long groupId, long classNameId, String name, int start, int end,
 			OrderByComparator obc)
@@ -118,83 +117,24 @@ public class AssetTagFinderImpl
 		return doFindByG_C_N(groupId, classNameId, name, start, end, obc, true);
 	}
 
+	@Override
 	public List<AssetTag> filterFindByG_N_P(
-			long groupId, String name, String[] tagProperties, int start,
+			long[] groupIds, String name, String[] tagProperties, int start,
 			int end, OrderByComparator obc)
 		throws SystemException {
 
 		return doFindByG_N_P(
-			groupId, name, tagProperties, start, end, obc, true);
+			groupIds, name, tagProperties, start, end, obc, true);
 	}
 
-	public List<AssetTag> findByEntryId(long entryId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_ENTRY_ID);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetTag", AssetTagImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entryId);
-
-			return (List<AssetTag>)QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
+	@Override
 	public AssetTag findByG_N(long groupId, String name)
 		throws NoSuchTagException, SystemException {
 
 		return doFindByG_N(groupId, name, false);
 	}
 
-	public List<AssetTag> findByC_C(long classNameId, long classPK)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			AssetEntry entry = AssetEntryUtil.fetchByC_C(classNameId, classPK);
-
-			if (entry == null) {
-				return Collections.emptyList();
-			}
-
-			session = openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_C);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("AssetTag", AssetTagImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(entry.getEntryId());
-
-			return (List<AssetTag>)QueryUtil.list(
-				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
+	@Override
 	public List<AssetTag> findByG_C_N(
 			long groupId, long classNameId, String name, int start, int end,
 			OrderByComparator obc)
@@ -204,15 +144,17 @@ public class AssetTagFinderImpl
 			groupId, classNameId, name, start, end, obc, false);
 	}
 
+	@Override
 	public List<AssetTag> findByG_N_P(
-			long groupId, String name, String[] tagProperties, int start,
+			long[] groupIds, String name, String[] tagProperties, int start,
 			int end, OrderByComparator obc)
 		throws SystemException {
 
 		return doFindByG_N_P(
-			groupId, name, tagProperties, start, end, obc, false);
+			groupIds, name, tagProperties, start, end, obc, false);
 	}
 
+	@Override
 	public List<AssetTag> findByG_N_S_E(
 			long groupId, String name, int startPeriod, int endPeriod,
 			int periodLength)
@@ -498,7 +440,7 @@ public class AssetTagFinderImpl
 	}
 
 	protected List<AssetTag> doFindByG_N_P(
-			long groupId, String name, String[] tagProperties, int start,
+			long[] groupIds, String name, String[] tagProperties, int start,
 			int end, OrderByComparator obc, boolean inlineSQLHelper)
 		throws SystemException {
 
@@ -510,11 +452,13 @@ public class AssetTagFinderImpl
 			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(tagProperties));
+			sql = StringUtil.replace(
+				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
 			if (inlineSQLHelper) {
 				sql = InlineSQLHelperUtil.replacePermissionCheck(
-					sql, AssetTag.class.getName(), "AssetTag.tagId", groupId);
+					sql, AssetTag.class.getName(), "AssetTag.tagId", groupIds);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -525,7 +469,7 @@ public class AssetTagFinderImpl
 
 			setJoin(qPos, tagProperties);
 
-			qPos.add(groupId);
+			qPos.add(groupIds);
 			qPos.add(name);
 			qPos.add(name);
 
@@ -537,6 +481,28 @@ public class AssetTagFinderImpl
 		finally {
 			closeSession(session);
 		}
+	}
+
+	protected String getGroupIds(long[] groupIds) {
+		if (groupIds.length == 0) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(groupIds.length * 2);
+
+		sb.append("(");
+
+		for (int i = 0; i < groupIds.length; i++) {
+			sb.append("groupId = ?");
+
+			if ((i + 1) < groupIds.length) {
+				sb.append(" OR ");
+			}
+		}
+
+		sb.append(") AND");
+
+		return sb.toString();
 	}
 
 	protected String getJoin(String[] tagProperties) {

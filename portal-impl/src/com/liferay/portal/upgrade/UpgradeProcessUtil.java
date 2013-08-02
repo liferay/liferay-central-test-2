@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,16 @@ import com.liferay.portal.util.PropsValues;
  * @author Raymond Augé
  */
 public class UpgradeProcessUtil {
+
+	public static boolean isCreateIGImageDocumentType() {
+		return _createIGImageDocumentType;
+	}
+
+	public static void setCreateIGImageDocumentType(
+		boolean createIGImageDocumentType) {
+
+		_createIGImageDocumentType = createIGImageDocumentType;
+	}
 
 	public static boolean upgradeProcess(
 			int buildNumber, String[] upgradeProcessClassNames,
@@ -122,5 +132,7 @@ public class UpgradeProcessUtil {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcessUtil.class);
+
+	private static boolean _createIGImageDocumentType = false;
 
 }

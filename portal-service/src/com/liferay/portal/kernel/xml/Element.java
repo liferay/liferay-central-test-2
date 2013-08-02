@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -110,10 +110,13 @@ public interface Element extends Branch {
 
 	public String elementTextTrim(String name);
 
+	@Override
 	public String formattedString() throws IOException;
 
+	@Override
 	public String formattedString(String indent) throws IOException;
 
+	@Override
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException;
 
@@ -137,8 +140,10 @@ public interface Element extends Branch {
 
 	public String getQualifiedName();
 
+	@Override
 	public String getStringValue();
 
+	@Override
 	public String getText();
 
 	public String getTextTrim();

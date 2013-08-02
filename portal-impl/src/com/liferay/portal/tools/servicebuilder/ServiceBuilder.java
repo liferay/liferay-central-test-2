@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,8 @@
 package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
+import com.liferay.portal.kernel.dao.db.IndexMetadata;
+import com.liferay.portal.kernel.dao.db.IndexMetadataFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.io.unsync.UnsyncBufferedReader;
@@ -42,7 +44,7 @@ import com.liferay.portal.model.CacheField;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.tools.ArgumentsUtil;
-import com.liferay.portal.tools.SourceFormatter;
+import com.liferay.portal.tools.sourceformatter.JavaSourceProcessor;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.xml.XMLFormatter;
@@ -82,6 +84,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -108,10 +111,86 @@ import org.dom4j.DocumentException;
  * @author Raymond Augé
  * @author Prashant Dighe
  * @author Shuyang Zhou
+ * @author James Lefeu
  */
 public class ServiceBuilder {
 
 	public static final String AUTHOR = "Brian Wing Shun Chan";
+
+	public static String getContent(String fileName) throws Exception {
+		Document document = _getContentDocument(fileName);
+
+		Element rootElement = document.getRootElement();
+
+		Element authorElement = null;
+		Element namespaceElement = null;
+		Map<String, Element> entityElements = new TreeMap<String, Element>();
+		Map<String, Element> exceptionElements = new TreeMap<String, Element>();
+
+		for (Element element : rootElement.elements()) {
+			String elementName = element.getName();
+
+			if (elementName.equals("author")) {
+				element.detach();
+
+				if (authorElement != null) {
+					throw new IllegalArgumentException(
+						"There can only be one author element");
+				}
+
+				authorElement = element;
+			}
+			else if (elementName.equals("namespace")) {
+				element.detach();
+
+				if (namespaceElement != null) {
+					throw new IllegalArgumentException(
+						"There can only be one namespace element");
+				}
+
+				namespaceElement = element;
+			}
+			else if (elementName.equals("entity")) {
+				element.detach();
+
+				String name = element.attributeValue("name");
+
+				entityElements.put(name.toLowerCase(), element);
+			}
+			else if (elementName.equals("exceptions")) {
+				element.detach();
+
+				for (Element exceptionElement : element.elements("exception")) {
+					exceptionElement.detach();
+
+					exceptionElements.put(
+						exceptionElement.getText(), exceptionElement);
+				}
+			}
+		}
+
+		if (authorElement != null) {
+			rootElement.add(authorElement);
+		}
+
+		if (namespaceElement == null) {
+			throw new IllegalArgumentException(
+				"The namespace element is required");
+		}
+		else {
+			rootElement.add(namespaceElement);
+		}
+
+		_addElements(rootElement, entityElements);
+
+		if (!exceptionElements.isEmpty()) {
+			Element exceptionsElement = rootElement.addElement("exceptions");
+
+			_addElements(exceptionsElement, exceptionElements);
+		}
+
+		return document.asXML();
+	}
 
 	public static void main(String[] args) {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
@@ -300,7 +379,7 @@ public class ServiceBuilder {
 
 		className = className.substring(0, className.length() - 5);
 
-		content = SourceFormatter.stripJavaImports(
+		content = JavaSourceProcessor.stripJavaImports(
 			content, packagePath, className);
 
 		File tempFile = new File("ServiceBuilder.temp");
@@ -556,7 +635,7 @@ public class ServiceBuilder {
 			_buildNumber = buildNumber;
 			_buildNumberIncrement = buildNumberIncrement;
 
-			String content = _getContent(fileName);
+			String content = getContent(fileName);
 
 			Document document = SAXReaderUtil.read(content, true);
 
@@ -655,6 +734,10 @@ public class ServiceBuilder {
 
 					if (_isTargetEntity(entity)) {
 						System.out.println("Building " + entity.getName());
+
+						if (entity.hasActionableDynamicQuery()) {
+							_createActionableDynamicQuery(entity);
+						}
 
 						if (entity.hasColumns()) {
 							_createHbm(entity);
@@ -786,43 +869,43 @@ public class ServiceBuilder {
 		int dimensions = type.getDimensions();
 		String name = type.getValue();
 
-		if (dimensions > 0) {
-			StringBundler sb = new StringBundler();
-
-			for (int i = 0; i < dimensions; i++) {
-				sb.append("[");
-			}
-
-			if (name.equals("boolean")) {
-				return sb.append("Z").toString();
-			}
-			else if (name.equals("byte")) {
-				return sb.append("B").toString();
-			}
-			else if (name.equals("char")) {
-				return sb.append("C").toString();
-			}
-			else if (name.equals("double")) {
-				return sb.append("D").toString();
-			}
-			else if (name.equals("float")) {
-				return sb.append("F").toString();
-			}
-			else if (name.equals("int")) {
-				return sb.append("I").toString();
-			}
-			else if (name.equals("long")) {
-				return sb.append("J").toString();
-			}
-			else if (name.equals("short")) {
-				return sb.append("S").toString();
-			}
-			else {
-				return sb.append("L").append(name).append(";").toString();
-			}
+		if (dimensions == 0) {
+			return name;
 		}
 
-		return name;
+		StringBundler sb = new StringBundler();
+
+		for (int i = 0; i < dimensions; i++) {
+			sb.append("[");
+		}
+
+		if (name.equals("boolean")) {
+			return sb.append("Z").toString();
+		}
+		else if (name.equals("byte")) {
+			return sb.append("B").toString();
+		}
+		else if (name.equals("char")) {
+			return sb.append("C").toString();
+		}
+		else if (name.equals("double")) {
+			return sb.append("D").toString();
+		}
+		else if (name.equals("float")) {
+			return sb.append("F").toString();
+		}
+		else if (name.equals("int")) {
+			return sb.append("I").toString();
+		}
+		else if (name.equals("long")) {
+			return sb.append("J").toString();
+		}
+		else if (name.equals("short")) {
+			return sb.append("S").toString();
+		}
+		else {
+			return sb.append("L").append(name).append(";").toString();
+		}
 	}
 
 	public String getCreateMappingTableSQL(EntityMapping entityMapping)
@@ -1307,7 +1390,7 @@ public class ServiceBuilder {
 			return false;
 		}
 
-		if (genericsName.indexOf(".model.") == -1) {
+		if (!genericsName.contains(".model.")) {
 			return false;
 		}
 
@@ -1324,7 +1407,7 @@ public class ServiceBuilder {
 			return false;
 		}
 
-		if (parameterTypeValue.indexOf(".model.") == -1) {
+		if (!parameterTypeValue.contains(".model.")) {
 			return false;
 		}
 
@@ -1556,10 +1639,11 @@ public class ServiceBuilder {
 				parameterTypeName.equals(
 					"com.liferay.portlet.dynamicdatamapping.storage.Fields") ||
 				parameterTypeName.startsWith("java.io") ||
+				parameterTypeName.startsWith("java.util.LinkedHashMap") ||
 				//parameterTypeName.startsWith("java.util.List") ||
 				//parameterTypeName.startsWith("java.util.Locale") ||
 				(parameterTypeName.startsWith("java.util.Map") &&
-					!_isStringLocaleMap(javaParameter)) ||
+				 !_isStringLocaleMap(javaParameter)) ||
 				parameterTypeName.startsWith("java.util.Properties") ||
 				parameterTypeName.startsWith("javax")) {
 
@@ -1577,15 +1661,62 @@ public class ServiceBuilder {
 			return false;
 		}
 
-		String methodName = method.getName();
-
-		for (String txRequired : txRequiredList) {
-			if (methodName.equals(txRequired)) {
-				return true;
-			}
+		if (txRequiredList.contains(method.getName())) {
+			return true;
 		}
 
 		return false;
+	}
+
+	private static void _addElements(
+		Element element, Map<String, Element> elements) {
+
+		for (Map.Entry<String, Element> entry : elements.entrySet()) {
+			Element childElement = entry.getValue();
+
+			element.add(childElement);
+		}
+	}
+
+	private static Document _getContentDocument(String fileName)
+		throws Exception {
+
+		String content = FileUtil.read(new File(fileName));
+
+		Document document = SAXReaderUtil.read(content);
+
+		Element rootElement = document.getRootElement();
+
+		for (Element element : rootElement.elements()) {
+			String elementName = element.getName();
+
+			if (!elementName.equals("service-builder-import")) {
+				continue;
+			}
+
+			element.detach();
+
+			String dirName = fileName.substring(
+				0, fileName.lastIndexOf(StringPool.SLASH) + 1);
+			String serviceBuilderImportFileName = element.attributeValue(
+				"file");
+
+			Document serviceBuilderImportDocument = _getContentDocument(
+				dirName + serviceBuilderImportFileName);
+
+			Element serviceBuilderImportRootElement =
+				serviceBuilderImportDocument.getRootElement();
+
+			for (Element serviceBuilderImportElement :
+					serviceBuilderImportRootElement.elements()) {
+
+				serviceBuilderImportElement.detach();
+
+				rootElement.add(serviceBuilderImportElement);
+			}
+		}
+
+		return document;
 	}
 
 	private static String _getPackagePath(File file) {
@@ -1604,12 +1735,22 @@ public class ServiceBuilder {
 		return StringUtil.replace(fileName, "/", ".");
 	}
 
-	private void _addElements(Element element, Map<String, Element> elements) {
-		for (Map.Entry<String, Element> entry : elements.entrySet()) {
-			Element childElement = entry.getValue();
+	private void _createActionableDynamicQuery(Entity entity) throws Exception {
+		Map<String, Object> context = _getContext();
 
-			element.add(childElement);
-		}
+		context.put("entity", entity);
+
+		// Content
+
+		String content = _processTemplate(_tplActionableDynamicQuery, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_serviceOutputPath + "/service/persistence/" +
+				entity.getName() + "ActionableDynamicQuery.java");
+
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createBlobModels(Entity entity) throws Exception {
@@ -2942,9 +3083,7 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content);
 	}
 
-	private void _createServiceFactory(Entity entity, int sessionType)
-		throws Exception {
-
+	private void _createServiceFactory(Entity entity, int sessionType) {
 		File ejbFile = new File(
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceFactory.java");
@@ -3013,7 +3152,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createServiceJson(Entity entity) throws Exception {
+	private void _createServiceJson(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceJSON.java");
@@ -3025,7 +3164,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createServiceJsonSerializer(Entity entity) throws Exception {
+	private void _createServiceJsonSerializer(Entity entity) {
 		File ejbFile = new File(
 			_serviceOutputPath + "/service/http/" + entity.getName() +
 				"JSONSerializer.java");
@@ -3403,49 +3542,31 @@ public class ServiceBuilder {
 				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBundler sb = new StringBundler();
-
-					sb.append(entity.getTable() + " (");
+					List<String> finderColsNames = new ArrayList<String>();
 
 					List<EntityColumn> finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = finderColsList.get(k);
 
-						sb.append(col.getDBName());
-
-						if ((k + 1) != finderColsList.size()) {
-							sb.append(", ");
-						}
+						finderColsNames.add(col.getDBName());
 					}
 
-					sb.append(");");
+					IndexMetadata indexMetadata =
+						IndexMetadataFactoryUtil.createIndexMetadata(
+							finder.isUnique(), entity.getTable(),
+							finderColsNames.toArray(
+								new String[finderColsNames.size()]));
 
-					String indexSpec = sb.toString();
-
-					String indexHash = StringUtil.toHexString(
-						indexSpec.hashCode()).toUpperCase();
-
-					String indexName = "IX_" + indexHash;
-
-					sb.setIndex(0);
-
-					sb.append("create ");
-
-					if (finder.isUnique()) {
-						sb.append("unique ");
-					}
-
-					sb.append("index " + indexName + " on ");
-					sb.append(indexSpec);
-
-					indexSQLs.put(indexSpec, sb.toString());
+					indexSQLs.put(
+						indexMetadata.getSpecification(),
+						indexMetadata.getCreateSQL());
 
 					String finderName =
 						entity.getTable() + StringPool.PERIOD +
 							finder.getName();
 
-					indexProps.put(finderName, indexName);
+					indexProps.put(finderName, indexMetadata.getIndexName());
 				}
 			}
 		}
@@ -3921,120 +4042,6 @@ public class ServiceBuilder {
 		return javaFields.toArray(new JavaField[javaFields.size()]);
 	}
 
-	private String _getContent(String fileName) throws Exception {
-		Document document = _getContentDocument(fileName);
-
-		Element rootElement = document.getRootElement();
-
-		Element authorElement = null;
-		Element namespaceElement = null;
-		Map<String, Element> entityElements = new TreeMap<String, Element>();
-		Map<String, Element> exceptionElements = new TreeMap<String, Element>();
-
-		for (Element element : rootElement.elements()) {
-			String elementName = element.getName();
-
-			if (elementName.equals("author")) {
-				element.detach();
-
-				if (authorElement != null) {
-					throw new IllegalArgumentException(
-						"There can only be one author element");
-				}
-
-				authorElement = element;
-			}
-			else if (elementName.equals("namespace")) {
-				element.detach();
-
-				if (namespaceElement != null) {
-					throw new IllegalArgumentException(
-						"There can only be one namespace element");
-				}
-
-				namespaceElement = element;
-			}
-			else if (elementName.equals("entity")) {
-				element.detach();
-
-				String name = element.attributeValue("name");
-
-				entityElements.put(name.toLowerCase(), element);
-			}
-			else if (elementName.equals("exceptions")) {
-				element.detach();
-
-				for (Element exceptionElement : element.elements("exception")) {
-					exceptionElement.detach();
-
-					exceptionElements.put(
-						exceptionElement.getText(), exceptionElement);
-				}
-			}
-		}
-
-		if (authorElement != null) {
-			rootElement.add(authorElement);
-		}
-
-		if (namespaceElement == null) {
-			throw new IllegalArgumentException(
-				"The namespace element is required");
-		}
-		else {
-			rootElement.add(namespaceElement);
-		}
-
-		_addElements(rootElement, entityElements);
-
-		if (!exceptionElements.isEmpty()) {
-			Element exceptionsElement = rootElement.addElement("exceptions");
-
-			_addElements(exceptionsElement, exceptionElements);
-		}
-
-		return document.asXML();
-	}
-
-	private Document _getContentDocument(String fileName) throws Exception {
-		String content = FileUtil.read(new File(fileName));
-
-		Document document = SAXReaderUtil.read(content);
-
-		Element rootElement = document.getRootElement();
-
-		for (Element element : rootElement.elements()) {
-			String elementName = element.getName();
-
-			if (!elementName.equals("service-builder-import")) {
-				continue;
-			}
-
-			element.detach();
-
-			String dirName = fileName.substring(
-				0, fileName.lastIndexOf(StringPool.SLASH) + 1);
-			String serviceBuilderImportFileName = element.attributeValue(
-				"file");
-
-			Document serviceBuilderImportDocument = _getContentDocument(
-				dirName + serviceBuilderImportFileName);
-
-			Element serviceBuilderImportRootElement =
-				serviceBuilderImportDocument.getRootElement();
-
-			for (Element serviceBuilderImportElement :
-					serviceBuilderImportRootElement.elements()) {
-
-				serviceBuilderImportElement.detach();
-
-				rootElement.add(serviceBuilderImportElement);
-			}
-		}
-
-		return document;
-	}
-
 	private Map<String, Object> _getContext() throws TemplateModelException {
 		BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
 
@@ -4142,6 +4149,20 @@ public class ServiceBuilder {
 				return null;
 			}
 		}
+
+		Arrays.sort(
+			entities,
+			new Comparator<Entity>() {
+
+				@Override
+				public int compare(Entity entity1, Entity entity2) {
+					String name1 = entity1.getName();
+					String name2 = entity2.getName();
+
+					return name1.compareTo(name2);
+				}
+
+			});
 
 		StringBundler sb = new StringBundler();
 
@@ -4475,7 +4496,7 @@ public class ServiceBuilder {
 			if (found) {
 				String property = matcher.group();
 
-				if (property.indexOf("get") != -1) {
+				if (property.contains("get")) {
 					property = property.substring(
 						property.indexOf("get") + 3, property.length() - 1);
 				}
@@ -4614,8 +4635,8 @@ public class ServiceBuilder {
 		String finderClass = "";
 
 		if (FileUtil.exists(
-			_outputPath + "/service/persistence/" + ejbName +
-				"FinderImpl.java")) {
+				_outputPath + "/service/persistence/" + ejbName +
+					"FinderImpl.java")) {
 
 			finderClass =
 				_packagePath + ".service.persistence." + ejbName + "FinderImpl";
@@ -4813,7 +4834,13 @@ public class ServiceBuilder {
 			if (columnList.contains(new EntityColumn("groupId"))) {
 				finderElement = SAXReaderUtil.createElement("finder");
 
-				finderElement.addAttribute("name", "UUID_G");
+				if (ejbName.equals("Layout")) {
+					finderElement.addAttribute("name", "UUID_G_P");
+				}
+				else {
+					finderElement.addAttribute("name", "UUID_G");
+				}
+
 				finderElement.addAttribute("return-type", ejbName);
 				finderElement.addAttribute("unique", "true");
 
@@ -4824,6 +4851,13 @@ public class ServiceBuilder {
 				finderColumnElement = finderElement.addElement("finder-column");
 
 				finderColumnElement.addAttribute("name", "groupId");
+
+				if (ejbName.equals("Layout")) {
+					finderColumnElement = finderElement.addElement(
+						"finder-column");
+
+					finderColumnElement.addAttribute("name", "privateLayout");
+				}
 
 				finderElements.add(1, finderElement);
 			}
@@ -4861,7 +4895,7 @@ public class ServiceBuilder {
 				for (EntityColumn column : columnList) {
 					String name = column.getName();
 
-					if (finderWhere.indexOf(name) != -1) {
+					if (finderWhere.contains(name)) {
 						finderWhere = finderWhere.replaceAll(
 							name, alias + "." + name);
 					}
@@ -5016,7 +5050,6 @@ public class ServiceBuilder {
 	private static Pattern _getterPattern = Pattern.compile(
 		"public .* get.*" + Pattern.quote("(") + "|public boolean is.*" +
 			Pattern.quote("("));
-
 	private static Pattern _setterPattern = Pattern.compile(
 		"public void set.*" + Pattern.quote("("));
 
@@ -5066,6 +5099,8 @@ public class ServiceBuilder {
 	private String _targetEntityName;
 	private String _testDir;
 	private String _testOutputPath;
+	private String _tplActionableDynamicQuery =
+		_TPL_ROOT + "actionable_dynamic_query.ftl";
 	private String _tplBadAliasNames = _TPL_ROOT + "bad_alias_names.txt";
 	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
 	private String _tplBadJsonTypes = _TPL_ROOT + "bad_json_types.txt";

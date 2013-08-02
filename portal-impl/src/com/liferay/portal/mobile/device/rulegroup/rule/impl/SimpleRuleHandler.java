@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ public class SimpleRuleHandler implements RuleHandler {
 		return SimpleRuleHandler.class.getName();
 	}
 
+	@Override
 	public boolean evaluateRule(MDRRule mdrRule, ThemeDisplay themeDisplay) {
 		Device device = themeDisplay.getDevice();
 
@@ -78,10 +79,12 @@ public class SimpleRuleHandler implements RuleHandler {
 		return result;
 	}
 
+	@Override
 	public Collection<String> getPropertyNames() {
 		return _propertyNames;
 	}
 
+	@Override
 	public String getType() {
 		return getHandlerType();
 	}

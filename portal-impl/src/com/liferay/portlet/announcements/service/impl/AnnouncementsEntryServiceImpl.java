@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,14 +39,15 @@ import com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPe
 public class AnnouncementsEntryServiceImpl
 	extends AnnouncementsEntryServiceBaseImpl {
 
+	@Override
 	public AnnouncementsEntry addEntry(
 			long plid, long classNameId, long classPK, String title,
 			String content, String url, String type, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute, int priority,
-			boolean alert)
+			int displayDateMinute, boolean autoDisplayDate,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, int priority, boolean alert)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -106,11 +107,36 @@ public class AnnouncementsEntryServiceImpl
 		return announcementsEntryLocalService.addEntry(
 			getUserId(), classNameId, classPK, title, content, url, type,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, expirationDateMonth, expirationDateDay,
+			displayDateMinute, autoDisplayDate, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, priority, alert);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addEntry(long, long, long,
+	 *             String, String, String, String, int, int, int, int, int,
+	 *             boolean, int, int, int, int, int, int, boolean)}
+	 */
+	@Override
+	public AnnouncementsEntry addEntry(
+			long plid, long classNameId, long classPK, String title,
+			String content, String url, String type, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, int priority,
+			boolean alert)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			plid, classNameId, classPK, title, content, url, type,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, false, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
 			priority, alert);
 	}
 
+	@Override
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -120,6 +146,20 @@ public class AnnouncementsEntryServiceImpl
 		announcementsEntryLocalService.deleteEntry(entryId);
 	}
 
+	@Override
+	public AnnouncementsEntry getEntry(long entryId)
+		throws PortalException, SystemException {
+
+		AnnouncementsEntry entry = announcementsEntryLocalService.getEntry(
+			entryId);
+
+		AnnouncementsEntryPermission.check(
+			getPermissionChecker(), entry, ActionKeys.VIEW);
+
+		return entry;
+	}
+
+	@Override
 	public AnnouncementsEntry updateEntry(
 			long entryId, String title, String content, String url, String type,
 			int displayDateMonth, int displayDateDay, int displayDateYear,

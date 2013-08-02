@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -39,6 +39,7 @@ public class AssetTagPropertyKeyFinderImpl
 	public static final String FIND_BY_GROUP_ID =
 		AssetTagPropertyKeyFinder.class.getName() + ".findByGroupId";
 
+	@Override
 	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
@@ -75,10 +76,12 @@ public class AssetTagPropertyKeyFinderImpl
 		}
 	}
 
+	@Override
 	public String[] findByGroupId(long groupId) throws SystemException {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
+	@Override
 	public String[] findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 

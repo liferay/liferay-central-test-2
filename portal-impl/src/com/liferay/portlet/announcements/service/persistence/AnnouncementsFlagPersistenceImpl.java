@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -216,13 +216,61 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 		}
 	}
 
+	protected void cacheUniqueFindersCache(AnnouncementsFlag announcementsFlag) {
+		if (announcementsFlag.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(announcementsFlag.getUserId()),
+					Long.valueOf(announcementsFlag.getEntryId()),
+					Integer.valueOf(announcementsFlag.getValue())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_E_V, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V, args,
+				announcementsFlag);
+		}
+		else {
+			AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
+
+			if ((announcementsFlagModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_U_E_V.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(announcementsFlag.getUserId()),
+						Long.valueOf(announcementsFlag.getEntryId()),
+						Integer.valueOf(announcementsFlag.getValue())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_E_V, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V, args,
+					announcementsFlag);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(AnnouncementsFlag announcementsFlag) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V,
-			new Object[] {
+		AnnouncementsFlagModelImpl announcementsFlagModelImpl = (AnnouncementsFlagModelImpl)announcementsFlag;
+
+		Object[] args = new Object[] {
 				Long.valueOf(announcementsFlag.getUserId()),
 				Long.valueOf(announcementsFlag.getEntryId()),
 				Integer.valueOf(announcementsFlag.getValue())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_E_V, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V, args);
+
+		if ((announcementsFlagModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_U_E_V.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(announcementsFlagModelImpl.getOriginalUserId()),
+					Long.valueOf(announcementsFlagModelImpl.getOriginalEntryId()),
+					Integer.valueOf(announcementsFlagModelImpl.getOriginalValue())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_E_V, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V, args);
+		}
 	}
 
 	/**
@@ -375,35 +423,8 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 			AnnouncementsFlagImpl.class, announcementsFlag.getPrimaryKey(),
 			announcementsFlag);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
-				new Object[] {
-					Long.valueOf(announcementsFlag.getUserId()),
-					Long.valueOf(announcementsFlag.getEntryId()),
-					Integer.valueOf(announcementsFlag.getValue())
-				}, announcementsFlag);
-		}
-		else {
-			if ((announcementsFlagModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_U_E_V.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(announcementsFlagModelImpl.getOriginalUserId()),
-						Long.valueOf(announcementsFlagModelImpl.getOriginalEntryId()),
-						Integer.valueOf(announcementsFlagModelImpl.getOriginalValue())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_E_V, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_E_V, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_E_V,
-					new Object[] {
-						Long.valueOf(announcementsFlag.getUserId()),
-						Long.valueOf(announcementsFlag.getEntryId()),
-						Integer.valueOf(announcementsFlag.getValue())
-					}, announcementsFlag);
-			}
-		}
+		clearUniqueFindersCache(announcementsFlag);
+		cacheUniqueFindersCache(announcementsFlag);
 
 		return announcementsFlag;
 	}
@@ -1395,8 +1416,10 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl<Announ
 				List<ModelListener<AnnouncementsFlag>> listenersList = new ArrayList<ModelListener<AnnouncementsFlag>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<AnnouncementsFlag>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

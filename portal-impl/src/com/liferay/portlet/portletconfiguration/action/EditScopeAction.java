@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,11 +30,11 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigFactoryUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil;
 
 import java.util.ResourceBundle;
@@ -58,18 +58,19 @@ import org.apache.struts.action.ActionMapping;
  * @author Jorge Ferrer
  * @author Hugo Huijser
  */
-public class EditScopeAction extends EditConfigurationAction {
+public class EditScopeAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(actionRequest);
+			portlet = ActionUtil.getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
@@ -77,6 +78,12 @@ public class EditScopeAction extends EditConfigurationAction {
 
 			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
+
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(actionRequest, portlet);
+
+		actionRequest = ActionUtil.getWrappedActionRequest(
+			actionRequest, portletPreferences);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -113,26 +120,35 @@ public class EditScopeAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(renderRequest);
+			portlet = ActionUtil.getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
-		renderResponse.setTitle(getTitle(portlet, renderRequest));
+		PortletPreferences portletPreferences =
+			ActionUtil.getLayoutPortletSetup(renderRequest, portlet);
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.portlet_configuration.edit_scope"));
+		renderRequest = ActionUtil.getWrappedRenderRequest(
+			renderRequest, portletPreferences);
+
+		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
+
+		return actionMapping.findForward(
+			getForward(
+				renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
 	protected Tuple getNewScope(ActionRequest actionRequest) throws Exception {
@@ -159,7 +175,8 @@ public class EditScopeAction extends EditConfigurationAction {
 
 			Layout scopeLayout =
 				LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-					scopeLayoutUuid, layout.getGroupId());
+					scopeLayoutUuid, layout.getGroupId(),
+					layout.isPrivateLayout());
 
 			if (!scopeLayout.hasScopeGroup()) {
 				String name = String.valueOf(scopeLayout.getPlid());
@@ -190,12 +207,10 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String scopeType = GetterUtil.getString(
-			preferences.getValue("lfrScopeType", null));
+			portletPreferences.getValue("lfrScopeType", null));
 
 		if (Validator.isNull(scopeType)) {
 			return null;
@@ -208,12 +223,13 @@ public class EditScopeAction extends EditConfigurationAction {
 		}
 		else if (scopeType.equals("layout")) {
 			String scopeLayoutUuid = GetterUtil.getString(
-				preferences.getValue("lfrScopeLayoutUuid", null));
+				portletPreferences.getValue("lfrScopeLayoutUuid", null));
 
 			try {
 				Layout scopeLayout =
 					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						scopeLayoutUuid, layout.getGroupId());
+						scopeLayoutUuid, layout.getGroupId(),
+						layout.isPrivateLayout());
 
 				scopeName = scopeLayout.getName(themeDisplay.getLocale());
 			}
@@ -263,13 +279,13 @@ public class EditScopeAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		PortletPreferences preferences =
-			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-				layout, portlet.getPortletId());
+		String oldScopeName = getOldScopeName(actionRequest, portlet);
+
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		String scopeType = ParamUtil.getString(actionRequest, "scopeType");
 
-		preferences.setValue("lfrScopeType", scopeType);
+		portletPreferences.setValue("lfrScopeType", scopeType);
 
 		String scopeLayoutUuid = ParamUtil.getString(
 			actionRequest, "scopeLayoutUuid");
@@ -278,32 +294,31 @@ public class EditScopeAction extends EditConfigurationAction {
 			scopeLayoutUuid = StringPool.BLANK;
 		}
 
-		preferences.setValue("lfrScopeLayoutUuid", scopeLayoutUuid);
+		portletPreferences.setValue("lfrScopeLayoutUuid", scopeLayoutUuid);
 
 		String portletTitle = getPortletTitle(
-			actionRequest, portlet, preferences);
+			actionRequest, portlet, portletPreferences);
 
 		Tuple newScopeTuple = getNewScope(actionRequest);
 
 		long newScopeGroupId = (Long)newScopeTuple.getObject(0);
 
-		preferences.setValue("groupId", String.valueOf(newScopeGroupId));
+		portletPreferences.setValue("groupId", String.valueOf(newScopeGroupId));
 
-		String oldScopeName = getOldScopeName(actionRequest, portlet);
 		String newScopeName = (String)newScopeTuple.getObject(1);
 
 		String newPortletTitle = PortalUtil.getNewPortletTitle(
 			portletTitle, oldScopeName, newScopeName);
 
 		if (!newPortletTitle.equals(portletTitle)) {
-			preferences.setValue(
+			portletPreferences.setValue(
 				"portletSetupTitle_" + themeDisplay.getLanguageId(),
 				newPortletTitle);
-			preferences.setValue(
+			portletPreferences.setValue(
 				"portletSetupUseCustomTitle", Boolean.TRUE.toString());
 		}
 
-		preferences.store();
+		portletPreferences.store();
 	}
 
 }

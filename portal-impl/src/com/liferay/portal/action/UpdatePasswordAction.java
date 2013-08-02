@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,8 +61,8 @@ public class UpdatePasswordAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -71,7 +71,8 @@ public class UpdatePasswordAction extends Action {
 		Ticket ticket = getTicket(request);
 
 		if (!themeDisplay.isSignedIn() && (ticket == null)) {
-			return mapping.findForward(ActionConstants.COMMON_REFERER_JSP);
+			return actionMapping.findForward(
+				ActionConstants.COMMON_REFERER_JSP);
 		}
 
 		String cmd = ParamUtil.getString(request, Constants.CMD);
@@ -91,17 +92,23 @@ public class UpdatePasswordAction extends Action {
 				}
 			}
 
-			return mapping.findForward("portal.update_password");
+			return actionMapping.findForward("portal.update_password");
 		}
 
 		try {
 			updatePassword(request, response, themeDisplay, ticket);
 
-			PortletURL portletURL = new PortletURLImpl(
-				request, PortletKeys.LOGIN, themeDisplay.getPlid(),
-				PortletRequest.RENDER_PHASE);
+			String redirect = ParamUtil.getString(request, WebKeys.REFERER);
 
-			response.sendRedirect(portletURL.toString());
+			if (Validator.isNull(redirect)) {
+				PortletURL portletURL = new PortletURLImpl(
+					request, PortletKeys.LOGIN, themeDisplay.getPlid(),
+					PortletRequest.RENDER_PHASE);
+
+				redirect = portletURL.toString();
+			}
+
+			response.sendRedirect(redirect);
 
 			return null;
 		}
@@ -109,14 +116,14 @@ public class UpdatePasswordAction extends Action {
 			if (e instanceof UserPasswordException) {
 				SessionErrors.add(request, e.getClass(), e);
 
-				return mapping.findForward("portal.update_password");
+				return actionMapping.findForward("portal.update_password");
 			}
 			else if (e instanceof NoSuchUserException ||
 					 e instanceof PrincipalException) {
 
 				SessionErrors.add(request, e.getClass());
 
-				return mapping.findForward("portal.error");
+				return actionMapping.findForward("portal.error");
 			}
 			else {
 				PortalUtil.sendError(e, request, response);
@@ -160,7 +167,7 @@ public class UpdatePasswordAction extends Action {
 			WebKeys.SETUP_WIZARD_PASSWORD_UPDATED);
 
 		if ((setupWizardPasswordUpdated != null) &&
-			 setupWizardPasswordUpdated) {
+			setupWizardPasswordUpdated) {
 
 			return false;
 		}

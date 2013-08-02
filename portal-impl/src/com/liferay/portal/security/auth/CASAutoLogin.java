@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ import javax.servlet.http.HttpSession;
  */
 public class CASAutoLogin implements AutoLogin {
 
+	@Override
 	public String[] login(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -121,7 +122,8 @@ public class CASAutoLogin implements AutoLogin {
 			String redirect = ParamUtil.getString(request, "redirect");
 
 			if (Validator.isNotNull(redirect)) {
-				request.setAttribute(AutoLogin.AUTO_LOGIN_REDIRECT, redirect);
+				request.setAttribute(
+					AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE, redirect);
 			}
 
 			credentials = new String[3];

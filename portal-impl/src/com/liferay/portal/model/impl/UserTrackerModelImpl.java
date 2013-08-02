@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -327,13 +327,16 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	@Override
 	public UserTracker toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (UserTracker)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (UserTracker)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public UserTracker toUnescapedModel() {
+		return (UserTracker)this;
 	}
 
 	@Override
@@ -370,18 +373,15 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserTracker)) {
 			return false;
 		}
 
-		UserTracker userTracker = null;
-
-		try {
-			userTracker = (UserTracker)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserTracker userTracker = (UserTracker)obj;
 
 		long primaryKey = userTracker.getPrimaryKey();
 
@@ -540,7 +540,7 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	}
 
 	private static ClassLoader _classLoader = UserTracker.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			UserTracker.class
 		};
 	private long _userTrackerId;
@@ -558,5 +558,5 @@ public class UserTrackerModelImpl extends BaseModelImpl<UserTracker>
 	private String _remoteHost;
 	private String _userAgent;
 	private long _columnBitmask;
-	private UserTracker _escapedModelProxy;
+	private UserTracker _escapedModel;
 }

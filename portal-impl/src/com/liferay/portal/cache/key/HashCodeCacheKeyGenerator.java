@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 		return new HashCodeCacheKeyGenerator();
 	}
 
+	@Override
 	public Long getCacheKey(String key) {
 		long hashCode = 0;
 
@@ -38,6 +39,7 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 		return hashCode;
 	}
 
+	@Override
 	public Long getCacheKey(String[] keys) {
 		long hashCode = 0;
 
@@ -54,6 +56,7 @@ public class HashCodeCacheKeyGenerator extends BaseCacheKeyGenerator {
 		return hashCode;
 	}
 
+	@Override
 	public Long getCacheKey(StringBundler sb) {
 		long hashCode = 0;
 

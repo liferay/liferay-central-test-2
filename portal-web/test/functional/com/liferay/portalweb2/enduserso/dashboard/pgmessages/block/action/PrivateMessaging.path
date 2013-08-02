@@ -1,0 +1,95 @@
+<html>
+<head>
+<title>PrivateMessaging</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PrivateMessaging</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PrivateMessaging</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SELECT_ALL_CHECKBOX</td>
+	<td>//input[contains(@id,'checkAll')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MARK_AS_UNREAD_BUTTON</td>
+	<td>//input[@value='Mark as Unread']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MARK_AS_READ_BUTTON</td>
+	<td>//input[@value='Mark as Read']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DELETE_BUTTON</td>
+	<td>//input[@value='Delete']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEW_MESSAGE_BUTTON</td>
+	<td>//input[@value='New Message']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FILTER-->
+<tr>
+	<td>MESSAGE_SENDER</td>
+	<td>//span[@class='author-sender']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MESSAGE_SUBJECT</td>
+	<td>//div[@class='subject']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MESSAGE_BODY</td>
+	<td>//div[@class='body']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MESSAGE_SEARCH_RESULTS</td>
+	<td>//div[@class='search-results']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MESSAGE_CHECKBOX</td>
+	<td>//td[1]/span/span/span/input[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,3 +1,12 @@
+.taglib-form-navigator {
+	&:after {
+		clear: both;
+		content: "";
+		display: block;
+		height: 0;
+	}
+}
+
 .taglib-form-navigator .form-navigator {
 	background-color: #D7F1FF;
 	border: 1px solid #88C5D9;
@@ -113,6 +122,10 @@
 	max-width: 100%;
 }
 
+.ie6, .ie7 {
+	zoom: 1;
+}
+
 .ie6 .taglib-form-navigator .form-section {
 	width: 60%;
 }
@@ -123,4 +136,32 @@
 	font-size: 14px;
 	font-weight: 700;
 	margin: 10px 0;
+}
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.taglib-form-navigator {
+
+		.form-navigator {
+			float: left;
+			margin-left: 0;
+			margin-right: 15px;
+
+			li.selected {
+				background-image: url(@theme_image_path@/control_panel/selected_rtl.png);
+				background-position: right 50%;
+				right: 0;
+
+				a {
+					margin-left: 0;
+					margin-right: 11px;
+				}
+			}
+		}
+
+		.form-section {
+			float: right;
+		}
+	}
 }

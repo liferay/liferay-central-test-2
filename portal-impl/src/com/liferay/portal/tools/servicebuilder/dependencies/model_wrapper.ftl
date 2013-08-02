@@ -1,6 +1,7 @@
 package ${packagePath}.model;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.expando.model.ExpandoBridge;
@@ -70,7 +71,7 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 	}
 
 	<#list methods as method>
-		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap)>
+		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap) && !(method.name == "equals" && (parameters?size == 1))>
 			<#assign parameters = method.parameters>
 
 			${serviceBuilder.getJavadocComment(method)}
@@ -104,8 +105,8 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 			{
 				<#if method.name == "clone" && (parameters?size == 0)>
 					return new ${entity.name}Wrapper((${entity.name})_${entity.varName}.clone());
-				<#elseif method.name == "toEscapedModel" && (parameters?size == 0)>
-					return new ${entity.name}Wrapper(_${entity.varName}.toEscapedModel());
+				<#elseif (method.name == "toEscapedModel" || method.name == "toUnescapedModel") && (parameters?size == 0)>
+					return new ${entity.name}Wrapper(_${entity.varName}.${method.name}());
 				<#else>
 					<#if method.returns.value != "void">
 						return
@@ -126,6 +127,25 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 			}
 		</#if>
 	</#list>
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ${entity.name}Wrapper)) {
+			return false;
+		}
+
+		${entity.name}Wrapper ${entity.varName}Wrapper = (${entity.name}Wrapper)obj;
+
+		if (Validator.equals(_${entity.varName}, ${entity.varName}Wrapper._${entity.varName})) {
+			return true;
+		}
+
+		return false;
+	}
 
 	/**
 	 * @deprecated Renamed to {@link #getWrappedModel}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -81,54 +81,49 @@ public class DLFolderPermission {
 
 		long folderId = dlFolder.getFolderId();
 
-		if (actionId.equals(ActionKeys.VIEW)) {
+		if (PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
+			long originalFolderId = folderId;
+
 			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				dlFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
-				folderId = dlFolder.getParentFolderId();
-
 				if (!permissionChecker.hasOwnerPermission(
 						dlFolder.getCompanyId(), DLFolder.class.getName(),
-						dlFolder.getFolderId(), dlFolder.getUserId(),
-						actionId) &&
+						folderId, dlFolder.getUserId(), ActionKeys.VIEW) &&
 					!permissionChecker.hasPermission(
 						dlFolder.getGroupId(), DLFolder.class.getName(),
-						dlFolder.getFolderId(), actionId)) {
+						folderId, ActionKeys.VIEW)) {
 
 					return false;
 				}
 
-				if (!PropsValues.PERMISSIONS_VIEW_DYNAMIC_INHERITANCE) {
-					break;
-				}
-			}
-
-			return true;
-		}
-		else {
-			while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-				dlFolder = DLFolderLocalServiceUtil.getFolder(folderId);
-
 				folderId = dlFolder.getParentFolderId();
-
-				if (permissionChecker.hasOwnerPermission(
-						dlFolder.getCompanyId(), DLFolder.class.getName(),
-						dlFolder.getFolderId(), dlFolder.getUserId(),
-						actionId)) {
-
-					return true;
-				}
-
-				if (permissionChecker.hasPermission(
-						dlFolder.getGroupId(), DLFolder.class.getName(),
-						dlFolder.getFolderId(), actionId)) {
-
-					return true;
-				}
 			}
 
-			return false;
+			if (actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+
+			folderId = originalFolderId;
 		}
+
+		while (folderId != DLFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
+			dlFolder = DLFolderLocalServiceUtil.getFolder(folderId);
+
+			if (permissionChecker.hasOwnerPermission(
+					dlFolder.getCompanyId(), DLFolder.class.getName(), folderId,
+					dlFolder.getUserId(), actionId) ||
+				permissionChecker.hasPermission(
+					dlFolder.getGroupId(), DLFolder.class.getName(), folderId,
+					actionId)) {
+
+				return true;
+			}
+
+			folderId = dlFolder.getParentFolderId();
+		}
+
+		return false;
 	}
 
 	public static boolean contains(

@@ -177,3 +177,11 @@ hr, .separator {
 
 .highlight {
 }
+
+/* ---------- RTL ---------- */
+
+.rtl caption, .rtl th {
+}
+
+.rtl .portal-add-content {
+}

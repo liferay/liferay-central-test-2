@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -178,9 +178,51 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		}
 	}
 
+	protected void cacheUniqueFindersCache(BrowserTracker browserTracker) {
+		if (browserTracker.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(browserTracker.getUserId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID, args,
+				browserTracker);
+		}
+		else {
+			BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTracker;
+
+			if ((browserTrackerModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_USERID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(browserTracker.getUserId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERID, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID, args,
+					browserTracker);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(BrowserTracker browserTracker) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID,
-			new Object[] { Long.valueOf(browserTracker.getUserId()) });
+		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTracker;
+
+		Object[] args = new Object[] { Long.valueOf(browserTracker.getUserId()) };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID, args);
+
+		if ((browserTrackerModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_USERID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(browserTrackerModelImpl.getOriginalUserId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID, args);
+		}
 	}
 
 	/**
@@ -284,8 +326,6 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 
 		boolean isNew = browserTracker.isNew();
 
-		BrowserTrackerModelImpl browserTrackerModelImpl = (BrowserTrackerModelImpl)browserTracker;
-
 		Session session = null;
 
 		try {
@@ -312,27 +352,8 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 			BrowserTrackerImpl.class, browserTracker.getPrimaryKey(),
 			browserTracker);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-				new Object[] { Long.valueOf(browserTracker.getUserId()) },
-				browserTracker);
-		}
-		else {
-			if ((browserTrackerModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_USERID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(browserTrackerModelImpl.getOriginalUserId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERID, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERID,
-					new Object[] { Long.valueOf(browserTracker.getUserId()) },
-					browserTracker);
-			}
-		}
+		clearUniqueFindersCache(browserTracker);
+		cacheUniqueFindersCache(browserTracker);
 
 		return browserTracker;
 	}
@@ -833,8 +854,10 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 				List<ModelListener<BrowserTracker>> listenersList = new ArrayList<ModelListener<BrowserTracker>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<BrowserTracker>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

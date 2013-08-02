@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,7 +17,6 @@ package com.liferay.portal.spring.aop;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
 
 import java.io.Serializable;
 
@@ -46,16 +45,7 @@ public class ServiceBeanMethodInvocation
 		_arguments = arguments;
 
 		if (!_method.isAccessible()) {
-			boolean enabled = PortalSecurityManagerThreadLocal.isEnabled();
-
-			try {
-				PortalSecurityManagerThreadLocal.setEnabled(false);
-
-				_method.setAccessible(true);
-			}
-			finally {
-				PortalSecurityManagerThreadLocal.setEnabled(enabled);
-			}
+			_method.setAccessible(true);
 		}
 	}
 
@@ -81,14 +71,17 @@ public class ServiceBeanMethodInvocation
 		return false;
 	}
 
+	@Override
 	public Object[] getArguments() {
 		return _arguments;
 	}
 
+	@Override
 	public Method getMethod() {
 		return _method;
 	}
 
+	@Override
 	public AccessibleObject getStaticPart() {
 		return _method;
 	}
@@ -97,6 +90,7 @@ public class ServiceBeanMethodInvocation
 		return _targetClass;
 	}
 
+	@Override
 	public Object getThis() {
 		return _target;
 	}
@@ -110,6 +104,7 @@ public class ServiceBeanMethodInvocation
 		return _hashCode;
 	}
 
+	@Override
 	public Object proceed() throws Throwable {
 		if (_index < _methodInterceptors.size()) {
 			MethodInterceptor methodInterceptor = _methodInterceptors.get(

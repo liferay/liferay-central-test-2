@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,13 +36,7 @@ page import="com.liferay.portlet.calendar.util.CalUtil" %><%@
 page import="com.liferay.portlet.calendar.util.comparator.EventTimeComparator" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+PortletPreferences preferences = portletPreferences;
 
 String tabs1Names = "summary,day,week,month,year,events";
 
@@ -107,13 +101,11 @@ int curMonth = curCal.get(Calendar.MONTH);
 int curDay = curCal.get(Calendar.DATE);
 int curYear = curCal.get(Calendar.YEAR);
 
-int[] monthIds = CalendarUtil.getMonthIds();
 String[] months = CalendarUtil.getMonths(locale);
 
 String[] days = CalendarUtil.getDays(locale);
 
 Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale);
-Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale);
 Format dateFormatTime = FastDateFormatFactoryUtil.getTime(locale);
 DateFormat dateFormatISO8601 = DateUtil.getISO8601Format();
 %>

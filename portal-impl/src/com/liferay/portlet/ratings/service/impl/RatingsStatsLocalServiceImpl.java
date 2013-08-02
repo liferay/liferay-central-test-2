@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ import java.util.List;
 public class RatingsStatsLocalServiceImpl
 	extends RatingsStatsLocalServiceBaseImpl {
 
+	@Override
 	public RatingsStats addStats(long classNameId, long classPK)
 		throws SystemException {
 
@@ -65,6 +66,7 @@ public class RatingsStatsLocalServiceImpl
 		return stats;
 	}
 
+	@Override
 	public void deleteStats(String className, long classPK)
 		throws SystemException {
 
@@ -80,12 +82,14 @@ public class RatingsStatsLocalServiceImpl
 		ratingsEntryPersistence.removeByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public RatingsStats getStats(long statsId)
 		throws PortalException, SystemException {
 
 		return ratingsStatsPersistence.findByPrimaryKey(statsId);
 	}
 
+	@Override
 	public List<RatingsStats> getStats(String className, List<Long> classPKs)
 		throws SystemException {
 
@@ -94,6 +98,7 @@ public class RatingsStatsLocalServiceImpl
 		return ratingsStatsFinder.findByC_C(classNameId, classPKs);
 	}
 
+	@Override
 	public RatingsStats getStats(String className, long classPK)
 		throws SystemException {
 

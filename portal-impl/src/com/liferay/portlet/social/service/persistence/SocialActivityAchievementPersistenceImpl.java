@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -322,15 +322,68 @@ public class SocialActivityAchievementPersistenceImpl
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		SocialActivityAchievement socialActivityAchievement) {
+		if (socialActivityAchievement.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(socialActivityAchievement.getGroupId()),
+					Long.valueOf(socialActivityAchievement.getUserId()),
+					
+					socialActivityAchievement.getName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_N, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_N, args,
+				socialActivityAchievement);
+		}
+		else {
+			SocialActivityAchievementModelImpl socialActivityAchievementModelImpl =
+				(SocialActivityAchievementModelImpl)socialActivityAchievement;
+
+			if ((socialActivityAchievementModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_U_N.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialActivityAchievement.getGroupId()),
+						Long.valueOf(socialActivityAchievement.getUserId()),
+						
+						socialActivityAchievement.getName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_N, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_N, args,
+					socialActivityAchievement);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		SocialActivityAchievement socialActivityAchievement) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_N,
-			new Object[] {
+		SocialActivityAchievementModelImpl socialActivityAchievementModelImpl = (SocialActivityAchievementModelImpl)socialActivityAchievement;
+
+		Object[] args = new Object[] {
 				Long.valueOf(socialActivityAchievement.getGroupId()),
 				Long.valueOf(socialActivityAchievement.getUserId()),
 				
-			socialActivityAchievement.getName()
-			});
+				socialActivityAchievement.getName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_N, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_N, args);
+
+		if ((socialActivityAchievementModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_U_N.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(socialActivityAchievementModelImpl.getOriginalGroupId()),
+					Long.valueOf(socialActivityAchievementModelImpl.getOriginalUserId()),
+					
+					socialActivityAchievementModelImpl.getOriginalName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_N, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_N, args);
+		}
 	}
 
 	/**
@@ -573,38 +626,8 @@ public class SocialActivityAchievementPersistenceImpl
 			SocialActivityAchievementImpl.class,
 			socialActivityAchievement.getPrimaryKey(), socialActivityAchievement);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_N,
-				new Object[] {
-					Long.valueOf(socialActivityAchievement.getGroupId()),
-					Long.valueOf(socialActivityAchievement.getUserId()),
-					
-				socialActivityAchievement.getName()
-				}, socialActivityAchievement);
-		}
-		else {
-			if ((socialActivityAchievementModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_U_N.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(socialActivityAchievementModelImpl.getOriginalGroupId()),
-						Long.valueOf(socialActivityAchievementModelImpl.getOriginalUserId()),
-						
-						socialActivityAchievementModelImpl.getOriginalName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_N, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_N, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_N,
-					new Object[] {
-						Long.valueOf(socialActivityAchievement.getGroupId()),
-						Long.valueOf(socialActivityAchievement.getUserId()),
-						
-					socialActivityAchievement.getName()
-					}, socialActivityAchievement);
-			}
-		}
+		clearUniqueFindersCache(socialActivityAchievement);
+		cacheUniqueFindersCache(socialActivityAchievement);
 
 		return socialActivityAchievement;
 	}
@@ -3606,8 +3629,10 @@ public class SocialActivityAchievementPersistenceImpl
 				List<ModelListener<SocialActivityAchievement>> listenersList = new ArrayList<ModelListener<SocialActivityAchievement>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<SocialActivityAchievement>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

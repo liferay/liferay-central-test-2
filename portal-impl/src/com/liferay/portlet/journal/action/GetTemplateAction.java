@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,7 +24,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.JournalTemplateConstants;
-import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 
 import java.util.Map;
@@ -45,8 +45,8 @@ public class GetTemplateAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		try {
@@ -66,9 +66,8 @@ public class GetTemplateAction extends Action {
 			boolean transform = ParamUtil.getBoolean(
 				request, "transform", true);
 
-			JournalTemplate template =
-				JournalTemplateLocalServiceUtil.getTemplate(
-					groupId, templateId, true);
+			JournalTemplate template = JournalTemplateServiceUtil.getTemplate(
+				groupId, templateId, true);
 
 			String script = JournalUtil.getTemplateScript(
 				template, tokens, languageId, transform);
@@ -90,7 +89,7 @@ public class GetTemplateAction extends Action {
 				contentType = ContentTypes.TEXT_CSS_UTF8;
 			}
 			else if (Validator.equals(
-					extension, JournalTemplateConstants.LANG_TYPE_XSL)) {
+						extension, JournalTemplateConstants.LANG_TYPE_XSL)) {
 
 				contentType = ContentTypes.TEXT_XML_UTF8;
 			}

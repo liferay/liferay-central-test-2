@@ -1,0 +1,139 @@
+<definition>
+	<command name="addSOSite">
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute action="SOSites#click" locator-key1="ADD_SITE_BUTTON" />
+
+		<execute action="SOSitesAdd#type" locator-key1="NAME_FIELD" value1="${siteName}" />
+		<execute action="SOSitesAdd#type" locator-key1="DESCRIPTION_FIELD" value1="${siteDescription}" />
+		<execute action="SOSitesAdd#click" locator-key1="NEXT_BUTTON" />
+		<execute action="SOSitesAdd#select" locator-key1="DEFAULT_PAGES_SELECT" value1="Default Social Office Site" />
+
+		<if>
+			<equals arg1="${siteType}" arg2="Private" />
+			<then>
+				<execute action="SOSitesAdd#select" locator-key1="TYPE_SELECT" value1="index=3" />
+				<execute action="SOSitesAdd#assertSelectedLabel" locator-key1="TYPE_SELECT" value1="Private" />
+			</then>
+			<else>
+				<execute action="SOSitesAdd#select" locator-key1="TYPE_SELECT" value1="${siteType}" />
+			</else>
+		</if>
+
+		<execute action="SOSitesAdd#check" locator-key1="HOME_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="CALENDAR_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="DOCUMENTS_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="FORUMS_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="BLOGS_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="WIKI_CHECKBOX" />
+		<execute action="SOSitesAdd#check" locator-key1="MEMBERS_CHECKBOX" />
+		<execute action="SOSitesAdd#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="SOSites#assertTextEquals" locator-key1="SUCCESS_MESSAGE" />
+		<execute action="SOSites#assertTextEquals" locator-key1="SITE_NAME_LINK" value1="${siteName}" />
+	</command>
+
+	<command name="deleteSOSite">
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute action="SOSites#click" locator-key1="SITES_DIRECTORY_BUTTON" />
+
+		<if>
+			<equals arg1="${siteType}" arg2="Private" />
+			<then>
+				<execute action="SOUserBarSitesDirectory#select" locator-key1="SITE_CATEGORY_SELECT" value1="My Sites" />
+			</then>
+			<else>
+				<execute action="SOUserBarSitesDirectory#select" locator-key1="SITE_CATEGORY_SELECT" value1="All Sites" />
+			</else>
+		</if>
+
+		<execute action="SOUserBarSitesDirectory#type" locator-key1="SITE_SEARCH_FIELD" value1="${siteName}" />
+		<execute action="SOUserBarSitesDirectory#assertTextEquals" locator-key1="SITE_NAME_LINK" value1="${siteName}" />
+		<execute action="SOUserBarSitesDirectory#click" locator-key1="DELETE_SITE_ICON" />
+		<execute action="SOUserBarSitesDirectory#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete ${siteName}?" />
+		<execute action="SOUserBarSitesDirectory#assertTextNotPresent" value1="${siteName}" />
+	</command>
+
+	<command name="viewSOSite">
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<if>
+			<equals arg1="${siteType}" arg2="Private" />
+			<then>
+				<execute action="SOSites#select" locator-key1="SITE_CATEGORY_SELECT" value1="My Sites" />
+			</then>
+			<else>
+				<execute action="SOSites#select" locator-key1="SITE_CATEGORY_SELECT" value1="All Sites" />
+			</else>
+		</if>
+
+		<execute action="SOSites#type" locator-key1="SITE_SEARCH_FIELD" value1="${siteName}" />
+		<execute action="SOSites#assertTextEquals" locator-key1="SITE_NAME_LINK" value1="${siteName}" />
+		<execute action="SOSites#click" locator-key1="SITE_NAME_LINK" />
+
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="SITE_NAME" value1="${siteName}" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_HOME" value1="Home" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_CALENDAR" value1="Calendar" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_DOCUMENTS" value1="Documents" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_FORUMS" value1="Forums" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_BLOGS" value1="Blogs" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_WIKI" value1="Wiki" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_MEMBERS" value1="Members" />
+
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute action="SOSites#click" locator-key1="SITES_DIRECTORY_BUTTON" />
+
+		<if>
+			<equals arg1="${siteType}" arg2="Private" />
+			<then>
+				<execute action="SOUserBarSitesDirectory#select" locator-key1="SITE_CATEGORY_SELECT" value1="My Sites" />
+			</then>
+			<else>
+				<execute action="SOUserBarSitesDirectory#select" locator-key1="SITE_CATEGORY_SELECT" value1="All Sites" />
+			</else>
+		</if>
+
+		<execute action="SOUserBarSitesDirectory#type" locator-key1="SITE_SEARCH_FIELD" value1="${siteName}" />
+		<execute action="SOUserBarSitesDirectory#assertTextEquals" locator-key1="SITE_NAME_LINK" value1="${siteName}" />
+		<execute action="SOUserBarSitesDirectory#assertTextEquals" locator-key1="SITE_DESCRIPTION" value1="${siteDescription}" />
+		<execute action="SOUserBarSitesDirectory#click" locator-key1="SITE_NAME_LINK" value1="${siteName}" />
+
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="SITE_NAME" value1="${siteName}" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_HOME" value1="Home" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_CALENDAR" value1="Calendar" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_DOCUMENTS" value1="Documents" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_FORUMS" value1="Forums" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_BLOGS" value1="Blogs" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_WIKI" value1="Wiki" />
+		<execute action="SOSiteNavigation#assertTextEquals" locator-key1="NAVIGATION_MEMBERS" value1="Members" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Sites" />
+		</execute>
+
+		<execute action="CPSites#type" locator-key1="SEARCH_FIELD" value1="${siteName}" />
+		<execute action="CPSites#click" locator-key1="SEARCH_BUTTON" />
+		<execute action="CPSites#assertTextEquals" locator-key1="SITE_TABLE_NAME" value1="${siteName}" />
+		<execute action="CPSites#click" locator-key1="SITE_TABLE_NAME" />
+
+		<if>
+			<equals arg1="${siteType}" arg2="Private" />
+			<then>
+				<execute action="CPSitesEdit#assertChecked" locator-key1="PRIVATE_PAGE_PROPAGATION_CHECKBOX" />
+			</then>
+			<elseif>
+				<equals arg1="${siteType}" arg2="Private Restricted" />
+				<then>
+					<execute action="CPSitesEdit#assertChecked" locator-key1="PRIVATE_PAGE_PROPAGATION_CHECKBOX" />
+				</then>
+			</elseif>
+			<else>
+				<execute action="CPSitesEdit#assertChecked" locator-key1="PUBLIC_PAGE_PROPAGATION_CHECKBOX" />
+			</else>
+		</if>
+
+		<execute action="CPSitesEdit#assertSelectedLabel" locator-key1="APPLICATION_ADAPTER_SELECT" value1="Social Office EE Hook" />
+	</command>
+</definition>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -109,6 +109,10 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences)
 		throws Exception {
+
+		if (portletPreferences == null) {
+			return portletPreferences;
+		}
 
 		portletPreferences.setValue(
 			"expandedItemsPerChannel", StringPool.BLANK);
@@ -243,7 +247,7 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 				portletDataContext, rootElement, rootElement, rootElement,
 				dlFileEntryTypesElement, dlFoldersElement, dlFilesElement,
 				dlFileRanksElement, dlRepositoriesElement,
-				dlRepositoryEntriesElement, article, null, false);
+				dlRepositoryEntriesElement, article, false);
 		}
 
 		return document.formattedString();
@@ -363,7 +367,6 @@ public class RSSPortletDataHandlerImpl extends JournalPortletDataHandlerImpl {
 
 	private static PortletDataHandlerBoolean _embeddedAssets =
 		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
-
 	private static PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "selected-web-content", true, true);

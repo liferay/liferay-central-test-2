@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>CPDynamicdatalistsListSpreadsheetview</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPDynamicdatalistsListSpreadsheetview</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPDynamicdatalistsListSpreadsheeview</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>HEADER_TITLE</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--RECORD_TABLE-->
+<tr>
+	<td>RECORD_TABLE_COLUMN_ONE_NAME</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//thead/tr/th[1])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_ONE_RECORD_1</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//tr/td[1]/div)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_TWO_NAME</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//thead/tr/th[2])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_TWO_RECORD_1</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//tr/td[2]/div)</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_THREE_NAME</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//thead/tr/th[3])</td>
+	<td></td>
+</tr>
+<tr>
+	<td>RECORD_TABLE_COLUMN_THREE_RECORD_1</td>
+	<td>xpath=(//div[@id='_167_dataTableContent']//tr/td[3]/div)</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

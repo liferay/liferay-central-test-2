@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -72,7 +72,7 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 	<%
 	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-	LinkedHashMap userParams = new LinkedHashMap();
+	LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 	if (tabs1.equals("summary") || tabs2.equals("current")) {
 		userParams.put("inherit", true);
@@ -173,9 +173,11 @@ userSearch.setEmptyResultsMessage(emptyResultsMessage);
 	<c:choose>
 		<c:when test='<%= tabs1.equals("summary") && (total > 0) %>'>
 			<liferay-ui:panel collapsible="<%= true %>" extended="<%= false %>" persistState="<%= true %>" title='<%= LanguageUtil.format(pageContext, (total > 1) ? "x-users" : "x-user", total) %>'>
-				<aui:input inlineField="<%= true %>" label="" name='<%= DisplayTerms.KEYWORDS + "_users" %>' size="30" value="" />
+				<span class="aui-search-bar">
+					<aui:input inlineField="<%= true %>" label="" name='<%= DisplayTerms.KEYWORDS + "_users" %>' size="30" value="" />
 
-				<aui:button type="submit" value="search" />
+					<aui:button type="submit" value="search" />
+				</span>
 
 				<br /><br />
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -299,26 +299,6 @@ public class DLFileEntryLocalServiceUtil {
 			fileEntryTypeId, fieldsMap, file, is, size, serviceContext);
 	}
 
-	public static void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		boolean addGroupPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addFileEntryResources(dlFileEntry, addGroupPermissions,
-			addGuestPermissions);
-	}
-
-	public static void addFileEntryResources(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
-		java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService()
-			.addFileEntryResources(dlFileEntry, groupPermissions,
-			guestPermissions);
-	}
-
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion cancelCheckOut(
 		long userId, long fileEntryId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -434,6 +414,12 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().fetchFileEntryByAnyImageId(imageId);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry fetchFileEntryByName(
+		long groupId, long folderId, java.lang.String name)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchFileEntryByName(groupId, folderId, name);
+	}
+
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getExtraSettingsFileEntries(
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -477,10 +463,10 @@ public class DLFileEntryLocalServiceUtil {
 		return getService().getFileEntries(groupId, folderId, start, end, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntriesByMimeType(
-		java.lang.String mimeType)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getFileEntriesByMimeType(mimeType);
+		return getService().getFileEntries(folderId, name);
 	}
 
 	public static int getFileEntriesCount()

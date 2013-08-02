@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -75,7 +75,7 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 
 		<aui:button-row cssClass="edit-toolbar" id='<%= liferayPortletResponse.getNamespace() + "layoutSetToolbar" %>'>
 			<c:if test="<%= hasExportImportLayoutsPermission %>">
-				<c:if test="<%= SessionErrors.contains(liferayPortletRequest, LayoutImportException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARFileException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARTypeException.class.getName()) %>">
+				<c:if test="<%= SessionErrors.contains(liferayPortletRequest, LayoutImportException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARFileException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARFileSizeException.class.getName()) || SessionErrors.contains(liferayPortletRequest, LARTypeException.class.getName()) %>">
 					<liferay-util:html-top>
 						<div class="aui-helper-hidden" id="<portlet:namespace />importPage">
 							<liferay-util:include page="/html/portlet/layouts_admin/export_import.jsp">
@@ -91,8 +91,8 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 					<aui:script use="aui-dialog">
 						new A.Dialog(
 							{
+								align: Liferay.Util.Window.ALIGN_CENTER,
 								bodyContent: A.one('#<portlet:namespace />importPage').show(),
-								centered: true,
 								modal: true,
 								title: '<%= UnicodeLanguageUtil.get(pageContext, "import") %>',
 								width: 600
@@ -150,8 +150,8 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 					if (!popup) {
 						popup = new A.Dialog(
 							{
+								align: Liferay.Util.Window.ALIGN_CENTER,
 								bodyContent: content.show(),
-								centered: true,
 								title: '<%= UnicodeLanguageUtil.get(pageContext, "add-page") %>',
 								modal: true,
 								width: 500
@@ -207,7 +207,7 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 						{
 							dialog:
 								{
-									centered: true,
+									align: Liferay.Util.Window.ALIGN_CENTER,
 									constrain: true,
 									modal: true,
 									width: 600
@@ -236,7 +236,7 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 						{
 							dialog:
 								{
-									centered: true,
+									align: Liferay.Util.Window.ALIGN_CENTER,
 									constrain: true,
 									modal: true,
 									width: 600
@@ -371,5 +371,5 @@ boolean hasExportImportLayoutsPermission = GroupPermissionUtil.contains(permissi
 </aui:script>
 
 <%!
-private static String[] _CATEGORY_NAMES = {""};
+private static final String[] _CATEGORY_NAMES = {""};
 %>

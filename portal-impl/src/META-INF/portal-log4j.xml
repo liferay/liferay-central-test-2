@@ -150,19 +150,11 @@
 		<priority value="INFO" />
 	</category>
 
-	<category name="com.liferay.portal.deploy.hot.HotDeployImpl">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portal.deploy.hot.PACLHotDeployListener">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.deploy.hot.PluginPackageHotDeployListener">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.deploy.hot.PortletHotDeployListener">
 		<priority value="ERROR" />
 	</category>
 
@@ -302,6 +294,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.lar">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.messaging.config.AbstractMessagingConfigurator">
 		<priority value="INFO" />
 	</category>
@@ -360,6 +356,10 @@
 
 	<category name="com.liferay.portal.kernel.servlet.ServletResponseUtil">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.kernel.test.plugins.PluginIntegrationTestHotDeployListener">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.lar">
@@ -474,6 +474,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.security.pacl.GeneratingPACLPolicy">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.security.pacl.PACLAdvice">
 		<priority value="ERROR" />
 	</category>
@@ -507,7 +511,7 @@
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.FileChecker">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.MBeanChecker">
@@ -535,11 +539,11 @@
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.ReflectChecker">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.RuntimeChecker">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.pacl.checker.SecurityChecker">
@@ -674,10 +678,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.servlet.filters.doubleclick">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.servlet.filters.dynamiccss">
 		<priority value="ERROR" />
 	</category>
@@ -760,6 +760,10 @@
 
 	<category name="com.liferay.portal.spring.jpa.LocalContainerEntityManagerFactoryBean">
 		<priority value="INFO" />
+	</category>
+
+	<category name="com.liferay.portal.staging">
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portal.struts">

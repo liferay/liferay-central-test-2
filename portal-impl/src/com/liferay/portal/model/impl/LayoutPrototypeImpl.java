@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,17 +32,20 @@ public class LayoutPrototypeImpl extends LayoutPrototypeBaseImpl {
 	public LayoutPrototypeImpl() {
 	}
 
+	@Override
 	public Group getGroup() throws PortalException, SystemException {
 		return GroupLocalServiceUtil.getLayoutPrototypeGroup(
 			getCompanyId(), getLayoutPrototypeId());
 	}
 
+	@Override
 	public long getGroupId() throws PortalException, SystemException {
 		Group group = getGroup();
 
 		return group.getGroupId();
 	}
 
+	@Override
 	public Layout getLayout() throws PortalException, SystemException {
 		Group group = getGroup();
 

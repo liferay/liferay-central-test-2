@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portal.test;
 
+import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.servlet.MainServlet;
 
 import java.io.File;
@@ -21,6 +22,7 @@ import java.io.File;
 import javax.servlet.ServletException;
 
 import org.springframework.core.io.FileSystemResourceLoader;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
 
@@ -34,18 +36,19 @@ public class MainServletExecutionTestListener
 	public void runBeforeClass(TestContext testContext) {
 		super.runBeforeClass(testContext);
 
-		MockServletContext mockServletContext = new MockServletContext(
-			getResourceBasePath(), new FileSystemResourceLoader());
+		MockServletContext mockServletContext =
+			new AutoDeployMockServletContext(
+				getResourceBasePath(), new FileSystemResourceLoader());
 
 		MockServletConfig mockServletConfig = new MockServletConfig(
 			mockServletContext);
 
-		_mainServlet = new MainServlet();
+		mainServlet = new MainServlet();
 
 		try {
-			_mainServlet.init(mockServletConfig);
+			mainServlet.init(mockServletConfig);
 		}
-		catch (ServletException e) {
+		catch (ServletException se) {
 			throw new RuntimeException(
 				"The main servlet could not be initialized");
 		}
@@ -57,6 +60,21 @@ public class MainServletExecutionTestListener
 		return "file:" + file.getAbsolutePath();
 	}
 
-	private MainServlet _mainServlet;
+	protected MainServlet mainServlet;
+
+	protected class AutoDeployMockServletContext extends MockServletContext {
+
+		public AutoDeployMockServletContext(
+			String resourceBasePath, ResourceLoader resourceLoader) {
+
+			super(resourceBasePath, resourceLoader);
+		}
+
+		/**
+		 * @see com.liferay.portal.server.capabilities.TomcatServerCapabilities
+		 */
+		protected Boolean autoDeploy = Boolean.TRUE;
+
+	}
 
 }

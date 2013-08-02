@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -1444,6 +1446,10 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 		return new LayoutWrapper(_layout.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Layout toUnescapedModel() {
+		return new LayoutWrapper(_layout.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _layout.toString();
@@ -1698,6 +1704,25 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_layout.setTypeSettingsProperties(typeSettingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof LayoutWrapper)) {
+			return false;
+		}
+
+		LayoutWrapper layoutWrapper = (LayoutWrapper)obj;
+
+		if (Validator.equals(_layout, layoutWrapper._layout)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

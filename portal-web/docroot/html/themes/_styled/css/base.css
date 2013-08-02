@@ -1,3 +1,5 @@
+@import "compass";
+
 /* ---------- Browser normalization ---------- */
 
 article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
@@ -157,6 +159,11 @@ body.html-editor {
 	color: #000;
 }
 
+.html-editor.portlet-message-boards {
+	@include hyphenation;
+	word-wrap: break-word;
+}
+
 .html-editor.portlet-message-boards blockquote {
 	background: #EEF0F2 url(../images/message_boards/quoteleft.png) no-repeat 5px 5px;
 	border: 1px solid #777;
@@ -269,4 +276,16 @@ hr, .separator {
 	background: #FFC;
 	font-weight: bold;
 	margin: 0 1px;
+}
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	caption, th {
+		text-align: right;
+	}
+
+	.portal-add-content {
+		text-align: right;
+	}
 }

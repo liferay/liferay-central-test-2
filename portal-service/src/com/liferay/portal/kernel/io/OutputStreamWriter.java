@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.io;
 
 import com.liferay.portal.kernel.nio.charset.CharsetEncoderUtil;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -23,6 +22,7 @@ import java.io.Writer;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.nio.charset.Charset;
 import java.nio.charset.CharsetEncoder;
 
 /**
@@ -31,10 +31,14 @@ import java.nio.charset.CharsetEncoder;
 public class OutputStreamWriter extends Writer {
 
 	public OutputStreamWriter(OutputStream outputStream) {
-		this(outputStream, StringPool.UTF8);
+		this(outputStream, _DEFAULT_CHARSET_NAME);
 	}
 
 	public OutputStreamWriter(OutputStream outputStream, String charsetName) {
+		if (charsetName == null) {
+			charsetName = _DEFAULT_CHARSET_NAME;
+		}
+
 		_outputStream = outputStream;
 		_charsetName = charsetName;
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
@@ -75,10 +79,13 @@ public class OutputStreamWriter extends Writer {
 		throws IOException {
 
 		ByteBuffer byteBuffer = _charsetEncoder.encode(
-			CharBuffer.wrap(string, offset, length));
+			CharBuffer.wrap(string, offset, offset + length));
 
 		_outputStream.write(byteBuffer.array(), 0, byteBuffer.limit());
 	}
+
+	private static final String _DEFAULT_CHARSET_NAME =
+		Charset.defaultCharset().name();
 
 	private CharsetEncoder _charsetEncoder;
 	private String _charsetName;

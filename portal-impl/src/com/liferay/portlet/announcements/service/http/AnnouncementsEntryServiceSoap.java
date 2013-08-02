@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -69,6 +69,37 @@ public class AnnouncementsEntryServiceSoap {
 		long plid, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean autoDisplayDate,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, int priority,
+		boolean alert) throws RemoteException {
+		try {
+			com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue =
+				AnnouncementsEntryServiceUtil.addEntry(plid, classNameId,
+					classPK, title, content, url, type, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, autoDisplayDate, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, priority, alert);
+
+			return com.liferay.portlet.announcements.model.AnnouncementsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @deprecated As of 6.2.0, replaced by {@link #addEntry(long, long, long,
+	String, String, String, String, int, int, int, int, int,
+	boolean, int, int, int, int, int, int, boolean)}
+	*/
+	public static com.liferay.portlet.announcements.model.AnnouncementsEntrySoap addEntry(
+		long plid, long classNameId, long classPK, java.lang.String title,
+		java.lang.String content, java.lang.String url, java.lang.String type,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
 		int displayDateHour, int displayDateMinute, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority, boolean alert)
@@ -94,6 +125,21 @@ public class AnnouncementsEntryServiceSoap {
 	public static void deleteEntry(long entryId) throws RemoteException {
 		try {
 			AnnouncementsEntryServiceUtil.deleteEntry(entryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.announcements.model.AnnouncementsEntrySoap getEntry(
+		long entryId) throws RemoteException {
+		try {
+			com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue =
+				AnnouncementsEntryServiceUtil.getEntry(entryId);
+
+			return com.liferay.portlet.announcements.model.AnnouncementsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

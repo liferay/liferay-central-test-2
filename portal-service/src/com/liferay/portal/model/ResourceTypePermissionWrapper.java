@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -279,6 +281,10 @@ public class ResourceTypePermissionWrapper implements ResourceTypePermission,
 		return new ResourceTypePermissionWrapper(_resourceTypePermission.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ResourceTypePermission toUnescapedModel() {
+		return new ResourceTypePermissionWrapper(_resourceTypePermission.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _resourceTypePermission.toString();
@@ -299,6 +305,26 @@ public class ResourceTypePermissionWrapper implements ResourceTypePermission,
 
 	public boolean isGroupScope() {
 		return _resourceTypePermission.isGroupScope();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourceTypePermissionWrapper)) {
+			return false;
+		}
+
+		ResourceTypePermissionWrapper resourceTypePermissionWrapper = (ResourceTypePermissionWrapper)obj;
+
+		if (Validator.equals(_resourceTypePermission,
+					resourceTypePermissionWrapper._resourceTypePermission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

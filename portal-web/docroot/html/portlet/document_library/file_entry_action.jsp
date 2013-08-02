@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -68,7 +68,6 @@ else {
 			if (request.getAttribute("view_entries.jsp-fileShortcut") != null) {
 				fileShortcut = (DLFileShortcut)request.getAttribute("view_entries.jsp-fileShortcut");
 			}
-
 		}
 		else {
 			fileShortcut = (DLFileShortcut)request.getAttribute("view_file_shortcut.jsp-fileShortcut");
@@ -95,6 +94,12 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 	<liferay-ui:icon-menu align='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? "right" : "auto" %>' direction='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? null : "down" %>' extended="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? true : false %>" icon="<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? null : StringPool.BLANK %>" message='<%= portletName.equals(PortletKeys.DOCUMENT_LIBRARY_DISPLAY) ? "actions" : StringPool.BLANK %>' showExpanded="<%= false %>" showWhenSingleIcon="<%= showWhenSingleIcon %>">
 		<c:choose>
 			<c:when test="<%= (fileEntry != null) && (fileShortcut == null) %>">
+
+				<%
+				boolean checkedOut = fileEntry.isCheckedOut();
+				boolean hasLock = fileEntry.hasLock();
+				%>
+
 				<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
 					<liferay-ui:icon
 						image="download"
@@ -105,7 +110,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 
 				<%@ include file="/html/portlet/document_library/file_entry_action_open_document.jspf" %>
 
-				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+				<c:if test="<%= (!checkedOut || hasLock) && showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="editURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -119,7 +124,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+				<c:if test="<%= (!checkedOut || hasLock) && showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 					<portlet:renderURL var="moveURL">
 						<portlet:param name="struts_action" value="/document_library/move_file_entry" />
 						<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
@@ -152,11 +157,11 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					/>
 				</c:if>
 
-				<c:if test="<%= showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
+				<c:if test="<%= (!checkedOut || hasLock) && showActions && DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
 					<portlet:actionURL var="deleteURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="fileEntryId" value="<%= String.valueOf(fileEntry.getFileEntryId()) %>" />
 					</portlet:actionURL>
 
@@ -231,7 +236,7 @@ viewFolderURL.setParameter("folderId", String.valueOf(folderId));
 					<portlet:actionURL var="deleteShortcutURL">
 						<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 						<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-						<portlet:param name="redirect" value="<%= viewFolderURL.toString() %>" />
+						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 					</portlet:actionURL>
 

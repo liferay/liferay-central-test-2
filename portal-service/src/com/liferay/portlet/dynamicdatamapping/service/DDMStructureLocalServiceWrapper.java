@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -262,6 +262,160 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 	}
 
 	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypeDDMStructure(long fileEntryTypeId,
+		long structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.addDLFileEntryTypeDDMStructure(fileEntryTypeId,
+			structureId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypeDDMStructure(long fileEntryTypeId,
+		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.addDLFileEntryTypeDDMStructure(fileEntryTypeId,
+			ddmStructure);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypeDDMStructures(long fileEntryTypeId,
+		long[] structureIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.addDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			structureIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void addDLFileEntryTypeDDMStructures(long fileEntryTypeId,
+		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> DDMStructures)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.addDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			DDMStructures);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void clearDLFileEntryTypeDDMStructures(long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.clearDLFileEntryTypeDDMStructures(fileEntryTypeId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteDLFileEntryTypeDDMStructure(long fileEntryTypeId,
+		long structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.deleteDLFileEntryTypeDDMStructure(fileEntryTypeId,
+			structureId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteDLFileEntryTypeDDMStructure(long fileEntryTypeId,
+		com.liferay.portlet.dynamicdatamapping.model.DDMStructure ddmStructure)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.deleteDLFileEntryTypeDDMStructure(fileEntryTypeId,
+			ddmStructure);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteDLFileEntryTypeDDMStructures(long fileEntryTypeId,
+		long[] structureIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.deleteDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			structureIds);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void deleteDLFileEntryTypeDDMStructures(long fileEntryTypeId,
+		java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> DDMStructures)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.deleteDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			DDMStructures);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeDDMStructures(
+		long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getDLFileEntryTypeDDMStructures(fileEntryTypeId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeDDMStructures(
+		long fileEntryTypeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			start, end);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getDLFileEntryTypeDDMStructures(
+		long fileEntryTypeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			start, end, orderByComparator);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public int getDLFileEntryTypeDDMStructuresCount(long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getDLFileEntryTypeDDMStructuresCount(fileEntryTypeId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean hasDLFileEntryTypeDDMStructure(long fileEntryTypeId,
+		long structureId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.hasDLFileEntryTypeDDMStructure(fileEntryTypeId,
+			structureId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public boolean hasDLFileEntryTypeDDMStructures(long fileEntryTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.hasDLFileEntryTypeDDMStructures(fileEntryTypeId);
+	}
+
+	/**
+	* @throws SystemException if a system exception occurred
+	*/
+	public void setDLFileEntryTypeDDMStructures(long fileEntryTypeId,
+		long[] structureIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_ddmStructureLocalService.setDLFileEntryTypeDDMStructures(fileEntryTypeId,
+			structureIds);
+	}
+
+	/**
 	* Returns the Spring bean ID for this bean.
 	*
 	* @return the Spring bean ID for this bean
@@ -359,12 +513,18 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 		return _ddmStructureLocalService.fetchStructure(groupId, structureKey);
 	}
 
+	/**
+	* @deprecated {@link #getClassStructures(long, long)}
+	*/
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long classNameId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureLocalService.getClassStructures(classNameId);
 	}
 
+	/**
+	* @deprecated {@link #getClassStructures(long, long, int, int)}
+	*/
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long classNameId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -372,6 +532,31 @@ public class DDMStructureLocalServiceWrapper implements DDMStructureLocalService
 			end);
 	}
 
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
+		long companyId, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getClassStructures(companyId,
+			classNameId);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
+		long companyId, long classNameId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getClassStructures(companyId,
+			classNameId, start, end);
+	}
+
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
+		long companyId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureLocalService.getClassStructures(companyId,
+			classNameId, orderByComparator);
+	}
+
+	/**
+	* @deprecated {@link #getClassStructures(long, long, OrderByComparator)}
+	*/
 	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getClassStructures(
 		long classNameId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -336,13 +336,16 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 	@Override
 	public PluginSetting toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PluginSetting)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PluginSetting)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PluginSetting toUnescapedModel() {
+		return (PluginSetting)this;
 	}
 
 	@Override
@@ -377,18 +380,15 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PluginSetting)) {
 			return false;
 		}
 
-		PluginSetting pluginSetting = null;
-
-		try {
-			pluginSetting = (PluginSetting)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PluginSetting pluginSetting = (PluginSetting)obj;
 
 		long primaryKey = pluginSetting.getPrimaryKey();
 
@@ -516,7 +516,7 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	}
 
 	private static ClassLoader _classLoader = PluginSetting.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PluginSetting.class
 		};
 	private long _pluginSettingId;
@@ -530,5 +530,5 @@ public class PluginSettingModelImpl extends BaseModelImpl<PluginSetting>
 	private String _roles;
 	private boolean _active;
 	private long _columnBitmask;
-	private PluginSetting _escapedModelProxy;
+	private PluginSetting _escapedModel;
 }

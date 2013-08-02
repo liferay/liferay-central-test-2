@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -75,6 +75,8 @@ public interface HttpHeaders {
 
 	public static final String WWW_AUTHENTICATE = "WWW-Authenticate";
 
+	public static final String X_REQUESTED_WITH = "X-Requested-With";
+
 	// Values
 
 	public static final String ACCEPT_RANGES_BYTES_VALUE = "bytes";
@@ -96,6 +98,10 @@ public interface HttpHeaders {
 	 */
 	public static final String CLOSE = CONNECTION_CLOSE_VALUE;
 
+	public static final String CONTENT_DISPOSITION_ATTACHMENT = "attachment";
+
+	public static final String CONTENT_DISPOSITION_INLINE = "inline";
+
 	public static final String EXPIRES_DEFAULT_VALUE = "315360000";
 
 	public static final String PRAGMA_NO_CACHE_VALUE = "no-cache";
@@ -106,5 +112,7 @@ public interface HttpHeaders {
 	 * @deprecated Use <code>CACHE_CONTROL_PUBLIC_VALUE</code>.
 	 */
 	public static final String PUBLIC = CACHE_CONTROL_PUBLIC_VALUE;
+
+	public static final String XML_HTTP_REQUEST = "XMLHttpRequest";
 
 }

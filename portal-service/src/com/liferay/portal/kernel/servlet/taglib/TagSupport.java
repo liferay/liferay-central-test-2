@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,28 +55,34 @@ public class TagSupport implements Tag {
 		}
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public int doEndTag() throws JspException {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public int doStartTag() throws JspException {
 		return SKIP_BODY;
 	}
 
+	@Override
 	public Tag getParent() {
 		return _parent;
 	}
 
+	@Override
 	public void release() {
 		_parent = null;
 	}
 
+	@Override
 	public void setPageContext(PageContext pageContext) {
 		this.pageContext = pageContext;
 	}
 
+	@Override
 	public void setParent(Tag tag) {
 		_parent = tag;
 	}

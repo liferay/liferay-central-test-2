@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,7 +47,10 @@ public class MessageTag extends TagSupport {
 			}
 
 			if (_arguments == null) {
-				if (_unicode) {
+				if (!_localizeKey) {
+					value = _key;
+				}
+				else if (_unicode) {
 					value = UnicodeLanguageUtil.get(pageContext, _key);
 				}
 				else {
@@ -78,6 +81,7 @@ public class MessageTag extends TagSupport {
 			if (!ServerDetector.isResin()) {
 				_arguments = null;
 				_key = null;
+				_localizeKey = true;
 				_translateArguments = true;
 				_unicode = false;
 			}
@@ -85,15 +89,28 @@ public class MessageTag extends TagSupport {
 	}
 
 	public void setArguments(Object argument) {
-		_arguments = new Object[] {argument};
-	}
+		if (argument == null) {
+			_arguments = null;
 
-	public void setArguments(Object[] arguments) {
-		_arguments = arguments;
+			return;
+		}
+
+		Class<?> clazz = argument.getClass();
+
+		if (clazz.isArray()) {
+			_arguments = (Object[])argument;
+		}
+		else {
+			_arguments = new Object[] {argument};
+		}
 	}
 
 	public void setKey(String key) {
 		_key = key;
+	}
+
+	public void setLocalizeKey(boolean localizeKey) {
+		_localizeKey = localizeKey;
 	}
 
 	public void setTranslateArguments(boolean translateArguments) {
@@ -106,6 +123,7 @@ public class MessageTag extends TagSupport {
 
 	private Object[] _arguments;
 	private String _key;
+	private boolean _localizeKey = true;
 	private boolean _translateArguments = true;
 	private boolean _unicode;
 

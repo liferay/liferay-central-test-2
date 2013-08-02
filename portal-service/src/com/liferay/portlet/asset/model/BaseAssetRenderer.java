@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,17 +18,25 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 
+import java.util.Locale;
+
+import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
@@ -41,14 +49,17 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseAssetRenderer implements AssetRenderer {
 
+	@Override
 	public String[] getAvailableLocales() {
 		return _AVAILABLE_LOCALES;
 	}
 
+	@Override
 	public String getDiscussionPath() {
 		return null;
 	}
 
+	@Override
 	public String getIconPath(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -56,6 +67,12 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return getIconPath(themeDisplay);
 	}
 
+	@Override
+	public String getSearchSummary(Locale locale) {
+		return getSummary(locale);
+	}
+
+	@Override
 	public PortletURL getURLEdit(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -64,6 +81,64 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return null;
 	}
 
+	@Override
+	public PortletURL getURLEdit(
+			LiferayPortletRequest liferayPortletRequest,
+			LiferayPortletResponse liferayPortletResponse,
+			WindowState windowState, PortletURL redirectURL)
+		throws Exception {
+
+		LiferayPortletURL editPortletURL =
+			(LiferayPortletURL)getURLEdit(
+				liferayPortletRequest, liferayPortletResponse);
+
+		if (editPortletURL == null) {
+			return null;
+		}
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)liferayPortletRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		Group group = themeDisplay.getScopeGroup();
+
+		if (group.isLayout()) {
+			Layout layout = themeDisplay.getLayout();
+
+			group = layout.getGroup();
+		}
+
+		if (group.hasStagingGroup()) {
+			return null;
+		}
+
+		editPortletURL.setDoAsGroupId(getGroupId());
+
+		editPortletURL.setParameter("redirect", redirectURL.toString());
+		editPortletURL.setParameter("originalRedirect", redirectURL.toString());
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		String portletResource = ParamUtil.getString(
+			liferayPortletRequest, "portletResource", portletDisplay.getId());
+
+		if (Validator.isNotNull(portletResource)) {
+			editPortletURL.setParameter(
+				"referringPortletResource", portletResource);
+		}
+		else {
+			editPortletURL.setParameter(
+				"referringPortletResource", portletDisplay.getId());
+		}
+
+		editPortletURL.setPortletMode(PortletMode.VIEW);
+		editPortletURL.setRefererPlid(themeDisplay.getPlid());
+		editPortletURL.setWindowState(windowState);
+
+		return editPortletURL;
+	}
+
+	@Override
 	public PortletURL getURLExport(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse)
@@ -72,10 +147,12 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return null;
 	}
 
+	@Override
 	public String getUrlTitle() {
 		return null;
 	}
 
+	@Override
 	public PortletURL getURLView(
 			LiferayPortletResponse liferayPortletResponse,
 			WindowState windowState)
@@ -84,6 +161,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return null;
 	}
 
+	@Override
 	public String getURLViewInContext(
 			LiferayPortletRequest liferayPortletRequest,
 			LiferayPortletResponse liferayPortletResponse,
@@ -93,10 +171,12 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return null;
 	}
 
+	@Override
 	public String getViewInContextMessage() {
 		return "view-in-context";
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public boolean hasEditPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
@@ -104,6 +184,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return false;
 	}
 
+	@Override
 	@SuppressWarnings("unused")
 	public boolean hasViewPermission(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
@@ -111,22 +192,27 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		return true;
 	}
 
+	@Override
 	public boolean isConvertible() {
 		return false;
 	}
 
+	@Override
 	public boolean isDisplayable() {
 		return true;
 	}
 
+	@Override
 	public boolean isLocalizable() {
 		return false;
 	}
 
+	@Override
 	public boolean isPreviewInContext() {
 		return false;
 	}
 
+	@Override
 	public boolean isPrintable() {
 		return false;
 	}

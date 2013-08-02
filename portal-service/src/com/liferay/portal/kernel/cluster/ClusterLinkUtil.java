@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,8 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 
+import java.net.InetAddress;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -33,6 +35,16 @@ public class ClusterLinkUtil {
 
 	public static Address getAddress(Message message) {
 		return (Address)message.get(_ADDRESS);
+	}
+
+	public static InetAddress getBindInetAddress() {
+		ClusterLink clusterLink = getClusterLink();
+
+		if (clusterLink == null) {
+			return null;
+		}
+
+		return clusterLink.getBindInetAddress();
 	}
 
 	public static ClusterLink getClusterLink() {

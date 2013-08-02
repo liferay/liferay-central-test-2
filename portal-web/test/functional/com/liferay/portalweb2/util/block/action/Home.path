@@ -1,0 +1,269 @@
+<html>
+<head>
+<title>Home</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Home</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>Home</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>API_AXIS_URL</td>
+	<td>/api/axis</td>
+	<td></td>
+</tr>
+<tr>
+	<td>API_JSON_URL</td>
+	<td>/api/jsonws/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GUEST_URL</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GUEST_PRIVATE_URL</td>
+	<td>/group/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GUEST_PRIVATE_STAGING_URL</td>
+	<td>/group/guest-staging/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GUEST_STAGING_URL</td>
+	<td>/web/guest-staging/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPEN_SITE_URL</td>
+	<td>/web/open-site-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_URL</td>
+	<td>/web/organization-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_PRIVATE_URL</td>
+	<td>/group/organization-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_PRIVATE_STAGING_URL</td>
+	<td>/group/organization-name-staging/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ORGANIZATION_STAGING_URL</td>
+	<td>/web/organization-name-staging/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_URL</td>
+	<td>/web/site-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_PRIVATE_URL</td>
+	<td>/group/site-name/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_PRIVATE_STAGING_URL</td>
+	<td>/group/site-name-staging/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_STAGING_URL</td>
+	<td>/web/site-name-staging/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_NAME</td>
+	<td>//h1[@class='site-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SCOPE_SELECTOR</td>
+	<td>//ul[@id='_160_groupSelector']/li/strong/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SCOPE_SELECTOR_MENULIST-->
+<tr>
+	<td>SCOPE_SELECTOR_MENULIST_ITEM</td>
+	<td>//ul[@aria-labelledby='_160_groupSelectorButton']/li/a[contains(.,'${key_siteScopeName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--PAGE-->
+<tr>
+	<td>PAGE</td>
+	<td>//nav/ul/li/a[contains(.,'${key_pageName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_1</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_1_CHILD_PAGE_1</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[1]/ul[@class='child-menu']/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_1_CHILD_PAGE_2</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[1]/ul[@class='child-menu']/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_1_CHILD_PAGE_3</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[1]/ul[@class='child-menu']/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_2</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_2_STAGING</td>
+	<td>//nav[@id='navigation']/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_3</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_CONFIRM</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_DELETE_1</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[1]/span[@class='delete-tab']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_DELETE_2</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[2]/span[@class='delete-tab']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGE_DELETE_3</td>
+	<td>xpath=(//li[contains(@class,'lfr-nav-deletable')])[3]/span[@class='delete-tab']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--BREADCRUMB-->
+<tr>
+	<td>BREADCRUMB_1</td>
+	<td>xpath=(//nav[@id='breadcrumbs']/ul/li/span/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>BREADCRUMB_2</td>
+	<td>xpath=(//nav[@id='breadcrumbs']/ul/li/span/a)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>BREADCRUMB_3</td>
+	<td>xpath=(//nav[@id='breadcrumbs']/ul/li/span/a)[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>BREADCRUMB_4</td>
+	<td>xpath=(//nav[@id='breadcrumbs']/ul/li/span/a)[4]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NEW_PAGE-->
+<tr>
+	<td>NEW_PAGE_FIELD</td>
+	<td>//li[@class='add-page']//input[contains(@class,'input-text')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEW_PAGE_SAVE</td>
+	<td>//button[contains(@id,'Save')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--PORTLET-->
+<tr>
+	<td>PORTLET_1</td>
+	<td>xpath=(//section)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_MINIMIZE_1</td>
+	<td>//img[@title='Minimize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_MAXIMIZE_1</td>
+	<td>//img[@title='Maximize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_REMOVE_1</td>
+	<td>//img[@title='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_2</td>
+	<td>xpath=(//section)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_3</td>
+	<td>xpath=(//section)[3]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

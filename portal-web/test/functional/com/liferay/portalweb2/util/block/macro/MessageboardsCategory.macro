@@ -1,0 +1,59 @@
+<definition>
+	<command name="addPG">
+		<execute action="PGMessageboards#assertClick" locator-key1="ADD_CATEGORY_BUTTON" value1="Add Category" />
+
+		<execute action="PGMessageboardsAddcategory#type" locator-key1="NAME_FIELD" value1="${categoryName}" />
+		<execute action="PGMessageboardsAddcategory#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
+
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="deletePG">
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_CATEGORY_1" value1="${categoryName}" />
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_TABLE_ACTIONS_1" value1="Actions" />
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_MENULIST_DELETE" value1="Delete" />
+		<execute action="PGMessageboards#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete this?" />
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+		<execute action="PGMessageboards#assertTextNotPresent" value1="${categoryName}" />
+	</command>
+
+	<command name="editPG">
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_CATEGORY_1" value1="${categoryName}" />
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_TABLE_ACTIONS_1" value1="Actions" />
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_MENULIST_EDIT" value1="Edit" />
+
+		<execute action="PGMessageboardsAddcategory#type" locator-key1="NAME_FIELD" value1="${categoryNameEdit}" />
+		<execute action="PGMessageboardsAddcategory#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
+
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_CATEGORY_1" value1="${categoryNameEdit}" />
+	</command>
+
+	<command name="gotoPG">
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_TABLE_CATEGORY_1" value1="${categoryName}" />
+	</command>
+
+	<command name="tearDownCP">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Message Boards" />
+		</execute>
+
+		<if>
+			<condition action="CPMessageboards#isElementPresent" locator-key1="CATEGORY_TABLE_ALL_CHECKBOX" />
+			<then>
+				<execute action="CPMessageboards#check" locator-key1="CATEGORY_TABLE_ALL_CHECKBOX" />
+				<execute action="CPMessageboards#assertClick" locator-key1="CATEGORIES_DELETE_BUTTON"  value1="Delete" />
+				<execute action="CPMessageboards#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete this?" />
+			</then>
+		</if>
+	</command>
+
+	<command name="viewPG">
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_CATEGORIES_1" value1="0" />
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_THREADS_1" value1="0" />
+		<execute action="PGMessageboards#assertTextEquals" locator-key1="CATEGORY_TABLE_POSTS_1" value1="0" />
+		<execute action="PGMessageboards#assertClick" locator-key1="CATEGORY_TABLE_CATEGORY_1" value1="${categoryName}" />
+
+		<execute action="PGMessageboardsCategory#assertTextEquals" locator-key1="NAME_HEADER" value1="${categoryName}" />
+	</command>
+</definition>

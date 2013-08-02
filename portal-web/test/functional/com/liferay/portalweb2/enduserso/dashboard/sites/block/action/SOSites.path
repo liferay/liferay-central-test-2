@@ -1,0 +1,79 @@
+<html>
+<head>
+<title>SOSites</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SOSites</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>SOSites</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//span[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_CATEGORY_SELECT</td>
+	<td>//select[contains(@id,'soportlet_tabs1')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_SEARCH_FIELD</td>
+	<td>//input[@class='search-input']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_NAME</td>
+	<td>//li[contains(@class, 'social-office-enabled')]/span[contains(.,'${siteName}')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITE_NAME_LINK</td>
+	<td>//li[contains(@class, 'social-office-enabled')]/span[contains(.,'${siteName}')]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FAVORITE_SITE_ICON</td>
+	<td>//li[contains(@class, 'social-office-enabled')]/span[@class='action favorite']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>UNFAVORITE_SITE_ICON</td>
+	<td>//li[contains(@class, 'social-office-enabled')]/span[@class='action unfavorite']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_SITE_BUTTON</td>
+	<td>//button[contains(.,'Add Site')]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SITES_DIRECTORY_BUTTON</td>
+	<td>//button[contains(.,'Sites Directory')]/span[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

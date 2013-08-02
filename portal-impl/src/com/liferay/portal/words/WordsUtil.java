@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,9 +63,10 @@ public class WordsUtil {
 	}
 
 	private WordsUtil() {
-		_dictionaryList = ListUtil.fromArray(StringUtil.splitLines(
-			ContentUtil.get(
-				"com/liferay/portal/words/dependencies/words.txt")));
+		_dictionaryList = ListUtil.fromArray(
+			StringUtil.splitLines(
+				ContentUtil.get(
+					"com/liferay/portal/words/dependencies/words.txt")));
 
 		_dictionaryList = new UnmodifiableList<String>(_dictionaryList);
 
@@ -85,9 +86,11 @@ public class WordsUtil {
 			};
 
 			for (int i = 0; i < dics.length; i++) {
-				_spellDictionaryHashMap.addDictionary(new UnsyncStringReader(
-					ContentUtil.get(
-						"com/liferay/portal/words/dependencies/" + dics[i])));
+				_spellDictionaryHashMap.addDictionary(
+					new UnsyncStringReader(
+						ContentUtil.get(
+							"com/liferay/portal/words/dependencies/" +
+								dics[i])));
 			}
 		}
 		catch (IOException ioe) {

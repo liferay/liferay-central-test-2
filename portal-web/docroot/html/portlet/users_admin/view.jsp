@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,8 @@
 String viewUsersRedirect = ParamUtil.getString(request, "viewUsersRedirect");
 String backURL = ParamUtil.getString(request, "backURL", viewUsersRedirect);
 
+int status = ParamUtil.getInteger(request, "status", WorkflowConstants.STATUS_APPROVED);
+
 String usersListView = ParamUtil.get(request, "usersListView", UserConstants.LIST_VIEW_TREE);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -31,21 +33,51 @@ if (Validator.isNotNull(viewUsersRedirect)) {
 	portletURL.setParameter("viewUsersRedirect", viewUsersRedirect);
 }
 
-pageContext.setAttribute("portletURL", portletURL);
-
 String portletURLString = portletURL.toString();
+
+request.setAttribute("view.jsp-usersListView", usersListView);
+
+request.setAttribute("view.jsp-portletURL", portletURL);
 %>
 
+<liferay-ui:error exception="<%= CompanyMaxUsersException.class %>" message="unable-to-activate-user-because-that-would-exceed-the-maximum-number-of-users-allowed" />
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
 <liferay-ui:error exception="<%= RequiredUserException.class %>" message="you-cannot-delete-or-deactivate-yourself" />
 
-<aui:form action="<%= portletURLString %>" method="get" name="fm">
+<aui:form action="<%= portletURLString %>" method="post" name="fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= portletURLString %>" />
 
 	<%
 	long organizationGroupId = 0;
+
+	int inactiveUsersCount = 0;
+	int usersCount = 0;
+
+	long organizationId = ParamUtil.getLong(request, "organizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+
+	Organization organization = null;
+
+	if (organizationId != 0) {
+		organization = OrganizationServiceUtil.getOrganization(organizationId);
+	}
+
+	if (organization != null) {
+		inactiveUsersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId, WorkflowConstants.STATUS_INACTIVE);
+		usersCount = UserLocalServiceUtil.getOrganizationUsersCount(organizationId, WorkflowConstants.STATUS_APPROVED);
+	}
+	else {
+		LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
+
+		if (!usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS)) {
+			userParams.put("noOrganizations", Boolean.TRUE);
+			userParams.put("usersOrgsCount", 0);
+		}
+
+		inactiveUsersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, WorkflowConstants.STATUS_INACTIVE, userParams);
+		usersCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, userParams);
+	}
 	%>
 
 	<c:if test="<%= portletName.equals(PortletKeys.USERS_ADMIN) %>">
@@ -68,7 +100,7 @@ String portletURLString = portletURL.toString();
 
 	<c:choose>
 		<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_ORGANIZATIONS) %>">
-			<%@ include file="/html/portlet/users_admin/view_flat_organizations.jspf" %>
+			<liferay-util:include page="/html/portlet/users_admin/view_flat_organizations.jsp" />
 		</c:when>
 		<c:when test="<%= usersListView.equals(UserConstants.LIST_VIEW_FLAT_USERS) %>">
 
@@ -149,9 +181,31 @@ String portletURLString = portletURL.toString();
 	}
 
 	function <portlet:namespace />search() {
-		document.<portlet:namespace />fm.method = "get";
+		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "";
 		submitForm(document.<portlet:namespace />fm, '<%= portletURLString %>');
+	}
+
+	function <portlet:namespace />showUsers(status) {
+
+		<%
+		PortletURL showUsersURL = renderResponse.createRenderURL();
+
+		showUsersURL.setParameter("struts_action", "/users_admin/view_users");
+		showUsersURL.setParameter("usersListView", usersListView);
+
+		long organizationId = ParamUtil.getLong(request, "organizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
+
+		if (organizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+			showUsersURL.setParameter("organizationId", String.valueOf(organizationId));
+		}
+
+		if (Validator.isNotNull(viewUsersRedirect)) {
+			showUsersURL.setParameter("viewUsersRedirect", viewUsersRedirect);
+		}
+		%>
+
+		location.href = Liferay.Util.addParams('<portlet:namespace />status=' + status.value, '<%= showUsersURL.toString() %>');
 	}
 
 	Liferay.provide(
@@ -196,6 +250,7 @@ String portletURLString = portletURL.toString();
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 				document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
 				document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = deleteUserIds;
+
 				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/users_admin/edit_user" /></portlet:actionURL>");
 			}
 		},

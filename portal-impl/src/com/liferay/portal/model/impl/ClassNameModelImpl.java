@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -246,13 +246,16 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 	@Override
 	public ClassName toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ClassName)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ClassName)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ClassName toUnescapedModel() {
+		return (ClassName)this;
 	}
 
 	@Override
@@ -283,18 +286,15 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ClassName)) {
 			return false;
 		}
 
-		ClassName className = null;
-
-		try {
-			className = (ClassName)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ClassName className = (ClassName)obj;
 
 		long primaryKey = className.getPrimaryKey();
 
@@ -372,12 +372,12 @@ public class ClassNameModelImpl extends BaseModelImpl<ClassName>
 	}
 
 	private static ClassLoader _classLoader = ClassName.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ClassName.class
 		};
 	private long _classNameId;
 	private String _value;
 	private String _originalValue;
 	private long _columnBitmask;
-	private ClassName _escapedModelProxy;
+	private ClassName _escapedModel;
 }

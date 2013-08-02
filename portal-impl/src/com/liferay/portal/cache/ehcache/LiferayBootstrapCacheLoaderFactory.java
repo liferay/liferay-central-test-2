@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,8 +33,15 @@ public class LiferayBootstrapCacheLoaderFactory
 	public LiferayBootstrapCacheLoaderFactory() {
 		String className = PropsValues.EHCACHE_BOOTSTRAP_CACHE_LOADER_FACTORY;
 
+		if (PropsValues.CLUSTER_LINK_ENABLED &&
+			PropsValues.EHCACHE_CLUSTER_LINK_REPLICATION_ENABLED) {
+
+			className =
+				EhcacheStreamBootstrapCacheLoaderFactory.class.getName();
+		}
+
 		if (_log.isDebugEnabled()) {
-			_log.debug("Instantiating " + className + " " + this.hashCode());
+			_log.debug("Instantiating " + className + " " + hashCode());
 		}
 
 		try {

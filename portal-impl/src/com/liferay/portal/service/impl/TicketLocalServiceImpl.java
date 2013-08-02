@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,6 +29,7 @@ import java.util.Date;
  */
 public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {
 
+	@Override
 	public Ticket addTicket(
 			long companyId, String className, long classPK, int type,
 			String extraInfo, Date expirationDate,
@@ -56,10 +57,12 @@ public class TicketLocalServiceImpl extends TicketLocalServiceBaseImpl {
 		return ticket;
 	}
 
+	@Override
 	public Ticket fetchTicket(String key) throws SystemException {
 		return ticketPersistence.fetchByKey(key);
 	}
 
+	@Override
 	public Ticket getTicket(String key)
 		throws PortalException, SystemException {
 

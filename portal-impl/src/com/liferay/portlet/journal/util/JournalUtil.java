@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
@@ -56,6 +57,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.webserver.WebServerServletTokenUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -64,7 +66,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalStructureConstants;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
@@ -103,7 +104,7 @@ public class JournalUtil {
 
 	public static void addAllReservedEls(
 		Element rootElement, Map<String, String> tokens, JournalArticle article,
-		String languageId) {
+		String languageId, ThemeDisplay themeDisplay) {
 
 		JournalUtil.addReservedEl(
 			rootElement, tokens, JournalStructureConstants.RESERVED_ARTICLE_ID,
@@ -150,10 +151,28 @@ public class JournalUtil {
 				article.getDisplayDate());
 		}
 
+		String smallImageURL = StringPool.BLANK;
+
+		if (Validator.isNotNull(article.getSmallImageURL())) {
+			smallImageURL = article.getSmallImageURL();
+		}
+		else if ((themeDisplay != null) && article.isSmallImage()) {
+			StringBundler sb = new StringBundler(5);
+
+			sb.append(themeDisplay.getPathImage());
+			sb.append("/journal/article?img_id=");
+			sb.append(article.getSmallImageId());
+			sb.append("&t=");
+			sb.append(
+				WebServerServletTokenUtil.getToken(article.getSmallImageId()));
+
+			smallImageURL = sb.toString();
+		}
+
 		JournalUtil.addReservedEl(
 			rootElement, tokens,
 			JournalStructureConstants.RESERVED_ARTICLE_SMALL_IMAGE_URL,
-			article.getSmallImageURL());
+			smallImageURL);
 
 		String[] assetTagNames = new String[0];
 
@@ -381,8 +400,8 @@ public class JournalUtil {
 			return emailArticleAddedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_BODY));
 		}
 	}
 
@@ -396,8 +415,8 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleAddedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_ENABLED));
 		}
 	}
 
@@ -411,8 +430,8 @@ public class JournalUtil {
 			return emailArticleAddedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_ADDED_SUBJECT));
 		}
 	}
 
@@ -426,8 +445,9 @@ public class JournalUtil {
 			return emailArticleApprovalDeniedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY));
 		}
 	}
 
@@ -441,8 +461,9 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleApprovalDeniedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED));
 		}
 	}
 
@@ -456,8 +477,9 @@ public class JournalUtil {
 			return emailArticleApprovalDeniedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_SUBJECT));
 		}
 	}
 
@@ -471,8 +493,9 @@ public class JournalUtil {
 			return emailArticleApprovalGrantedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_BODY));
 		}
 	}
 
@@ -486,8 +509,9 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleApprovalGrantedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_ENABLED));
 		}
 	}
 
@@ -501,8 +525,9 @@ public class JournalUtil {
 			return emailArticleApprovalGrantedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_SUBJECT));
 		}
 	}
 
@@ -516,8 +541,9 @@ public class JournalUtil {
 			return emailArticleApprovalRequestedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY));
 		}
 	}
 
@@ -531,8 +557,10 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleApprovalRequestedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(
+					PropsKeys.
+						JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_ENABLED));
 		}
 	}
 
@@ -546,8 +574,10 @@ public class JournalUtil {
 			return emailArticleApprovalRequestedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(
+					PropsKeys.
+						JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_SUBJECT));
 		}
 	}
 
@@ -561,8 +591,8 @@ public class JournalUtil {
 			return emailArticleReviewBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_BODY));
 		}
 	}
 
@@ -576,8 +606,8 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleReviewEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED));
 		}
 	}
 
@@ -591,8 +621,8 @@ public class JournalUtil {
 			return emailArticleReviewSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT));
 		}
 	}
 
@@ -606,8 +636,8 @@ public class JournalUtil {
 			return emailArticleUpdatedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_BODY));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_BODY));
 		}
 	}
 
@@ -621,8 +651,8 @@ public class JournalUtil {
 			return GetterUtil.getBoolean(emailArticleUpdatedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_ENABLED));
+			return GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_ENABLED));
 		}
 	}
 
@@ -636,8 +666,8 @@ public class JournalUtil {
 			return emailArticleUpdatedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_SUBJECT));
+			return ContentUtil.get(
+				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_SUBJECT));
 		}
 	}
 
@@ -1107,26 +1137,7 @@ public class JournalUtil {
 
 			if (newElement == null) {
 				curElement.detach();
-
-				String type = curElement.attributeValue("type");
-
-				if (type.equals("image")) {
-					_mergeArticleContentDeleteImages(
-						curElement.elements("dynamic-content"));
-				}
 			}
-		}
-	}
-
-	private static void _mergeArticleContentDeleteImages(List<Element> elements)
-		throws Exception {
-
-		for (Element element : elements) {
-			long articleImageId = GetterUtil.getLong(
-				element.attributeValue("id"));
-
-			JournalArticleImageLocalServiceUtil.deleteArticleImage(
-				articleImageId);
 		}
 	}
 
@@ -1200,7 +1211,8 @@ public class JournalUtil {
 			if (curIndexTypeAttribute == null) {
 				curElement.addAttribute(
 					"index-type", newIndexTypeAttribute.getValue());
-			} else {
+			}
+			else {
 				curIndexTypeAttribute.setValue(
 					newIndexTypeAttribute.getValue());
 			}
@@ -1348,7 +1360,8 @@ public class JournalUtil {
 				"path-friendly-url-private-group");
 		}
 
-		String layoutSetFriendlyUrl = StringPool.BLANK;
+		String layoutSetFriendlyUrl = themeDisplayElement.elementText(
+			"i18n-path");
 
 		String virtualHostname = layoutSet.getVirtualHostname();
 
@@ -1388,6 +1401,9 @@ public class JournalUtil {
 				themeDisplayElement.elementText("url-portal")));
 		tokens.put(
 			"root_path", themeDisplayElement.elementText("path-context"));
+		tokens.put(
+			"scope_group_id",
+			themeDisplayElement.elementText("scope-group-id"));
 		tokens.put(
 			"theme_image_path",
 			themeDisplayElement.elementText("path-theme-images"));
@@ -1429,7 +1445,7 @@ public class JournalUtil {
 			friendlyUrlCurrent = themeDisplay.getPathFriendlyURLPrivateGroup();
 		}
 
-		String layoutSetFriendlyUrl = StringPool.BLANK;
+		String layoutSetFriendlyUrl = themeDisplay.getI18nPath();
 
 		String virtualHostname = layoutSet.getVirtualHostname();
 
@@ -1461,6 +1477,8 @@ public class JournalUtil {
 		tokens.put(
 			"protocol", HttpUtil.getProtocol(themeDisplay.getURLPortal()));
 		tokens.put("root_path", themeDisplay.getPathContext());
+		tokens.put(
+			"scope_group_id", String.valueOf(themeDisplay.getScopeGroupId()));
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 
 		_populateCustomTokens(tokens);

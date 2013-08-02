@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import javax.portlet.PortletPreferences;
@@ -34,6 +33,7 @@ import javax.portlet.PortletPreferences;
 public class JournalContentPortletLayoutListener
 	implements PortletLayoutListener {
 
+	@Override
 	public void onAddToLayout(String portletId, long plid)
 		throws PortletLayoutListenerException {
 
@@ -42,6 +42,7 @@ public class JournalContentPortletLayoutListener
 		}
 	}
 
+	@Override
 	public void onMoveInLayout(String portletId, long plid)
 		throws PortletLayoutListenerException {
 
@@ -50,6 +51,7 @@ public class JournalContentPortletLayoutListener
 		}
 	}
 
+	@Override
 	public void onRemoveFromLayout(String portletId, long plid)
 		throws PortletLayoutListenerException {
 
@@ -80,13 +82,9 @@ public class JournalContentPortletLayoutListener
 			return;
 		}
 
-		try {
-			JournalContentSearchLocalServiceUtil.deleteArticleContentSearch(
-				layout.getGroupId(), layout.isPrivateLayout(),
-				layout.getLayoutId(), portletId, articleId);
-		}
-		catch (NoSuchContentSearchException nscse) {
-		}
+		JournalContentSearchLocalServiceUtil.deleteArticleContentSearch(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			portletId, articleId);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

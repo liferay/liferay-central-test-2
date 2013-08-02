@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,6 +16,8 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<portlet:defineObjects />
+
 <%
 String backURL = (String)request.getAttribute("liferay-ui:form-navigator:backURL");
 String[][] categorySections = (String[][])request.getAttribute("liferay-ui:form-navigator:categorySections");
@@ -26,13 +28,29 @@ String htmlTop = (String)request.getAttribute("liferay-ui:form-navigator:htmlTop
 String jspPath = (String)request.getAttribute("liferay-ui:form-navigator:jspPath");
 boolean showButtons = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:form-navigator:showButtons"));
 
+if (Validator.isNull(backURL)) {
+	String redirect = ParamUtil.getString(request, "redirect");
+
+	backURL = redirect;
+}
+
+if (Validator.isNull(backURL)) {
+	PortletURL portletURL = liferayPortletResponse.createRenderURL();
+
+	backURL = portletURL.toString();
+}
+
 String[] allSections = new String[0];
 
 for (String[] categorySection : categorySections) {
 	allSections = ArrayUtil.append(allSections, categorySection);
 }
 
-String curSection = categorySections[0][0];
+String curSection = StringPool.BLANK;
+
+if (categorySections[0].length > 0) {
+	curSection = categorySections[0][0];
+}
 
 String historyKey = ParamUtil.getString(request, "historyKey");
 
@@ -46,17 +64,17 @@ if (Validator.isNotNull(historyKey)) {
 
 		<%
 		for (String section : allSections) {
-			String sectionId = _getSectionId(section);
+			String sectionId = namespace + _getSectionId(section);
 			String sectionJsp = jspPath + _getSectionJsp(section) + ".jsp";
 		%>
 
-			<!-- Begin fragment <%= namespace + sectionId %> -->
+			<!-- Begin fragment <%= sectionId %> -->
 
-			<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= namespace + sectionId %>">
+			<div class="form-section <%= (curSection.equals(section) || curSection.equals(sectionId)) ? "selected" : "aui-helper-hidden-accessible" %>" id="<%= sectionId %>">
 				<liferay-util:include page="<%= sectionJsp %>" portletId="<%= portletDisplay.getRootPortletId() %>" />
 			</div>
 
-			<!-- End fragment <%= namespace + sectionId %> -->
+			<!-- End fragment <%= sectionId %> -->
 
 		<%
 		}
@@ -90,7 +108,7 @@ if (Validator.isNotNull(historyKey)) {
 							}
 
 							for (String section : sections) {
-								String sectionId = _getSectionId(section);
+								String sectionId = namespace + _getSectionId(section);
 
 								Boolean show = (Boolean)request.getAttribute(WebKeys.FORM_NAVIGATOR_SECTION_SHOW + sectionId);
 
@@ -122,7 +140,7 @@ if (Validator.isNotNull(historyKey)) {
 							%>
 
 								<li class="<%= cssClass %>">
-									<a href="#<%= namespace + sectionId %>" id="<%= namespace + sectionId %>Link">
+									<a href="#<%= sectionId %>" id="<%= sectionId %>Link">
 
 									<liferay-ui:message key="<%= section %>" />
 
@@ -185,15 +203,17 @@ if (Validator.isNotNull(historyKey)) {
 </aui:script>
 
 <aui:script use="aui-base">
-	var modifyLinks = A.all('.modify-link');
+	var sectionsContainer = A.one('#<portlet:namespace />sectionsContainer');
+
+	var modifyLinks = sectionsContainer.all('.modify-link');
 
 	if (modifyLinks) {
 		modifyLinks.on(
 			'click',
-			function() {
+			function(event) {
 				A.fire(
 					'formNavigator:trackChanges',
-					A.one('.selected .modify-link')
+					event.currentTarget
 				);
 			}
 		);

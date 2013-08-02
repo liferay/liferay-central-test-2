@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,16 +18,12 @@ import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.security.pacl.PACLConstants;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.ProxyUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.security.pacl.PACLBeanHandler;
-import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 
-import java.security.Permission;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -37,6 +33,7 @@ import org.springframework.context.ApplicationContext;
  * @author Brian Wing Shun Chan
  * @author Miguel Pastor
  */
+@DoPrivileged
 public class BeanLocatorImpl implements BeanLocator {
 
 	public static final String VELOCITY_SUFFIX = ".velocity";
@@ -52,14 +49,19 @@ public class BeanLocatorImpl implements BeanLocator {
 		return _applicationContext;
 	}
 
+	@Override
 	public ClassLoader getClassLoader() {
+		PortalRuntimePermission.checkGetClassLoader(_paclServletContextName);
+
 		return _classLoader;
 	}
 
+	@Override
 	public String[] getNames() {
 		return _applicationContext.getBeanDefinitionNames();
 	}
 
+	@Override
 	public Class<?> getType(String name) {
 		try {
 			return _applicationContext.getType(name);
@@ -69,15 +71,22 @@ public class BeanLocatorImpl implements BeanLocator {
 		}
 	}
 
-	public <T> Map<String, T> locate(Class<T> clazz) {
+	@Override
+	public <T> Map<String, T> locate(Class<T> clazz)
+		throws BeanLocatorException {
+
 		try {
-			return _applicationContext.getBeansOfType(clazz);
+			return doLocate(clazz);
+		}
+		catch (SecurityException se) {
+			throw se;
 		}
 		catch (Exception e) {
 			throw new BeanLocatorException(e);
 		}
 	}
 
+	@Override
 	public Object locate(String name) throws BeanLocatorException {
 		try {
 			return doLocate(name);
@@ -94,8 +103,14 @@ public class BeanLocatorImpl implements BeanLocator {
 		_paclServletContextName = paclServletContextName;
 	}
 
-	public void setPACLWrapPersistence(boolean paclWrapPersistence) {
-		_paclWrapPersistence = paclWrapPersistence;
+	/**
+	 * This method ensures the calls stack is the proper length.
+	 */
+	protected <T> Map<String, T> doLocate(Class<T> clazz) throws Exception {
+		PortalRuntimePermission.checkGetBeanProperty(
+			_paclServletContextName, clazz);
+
+		return _applicationContext.getBeansOfType(clazz);
 	}
 
 	protected Object doLocate(String name) throws Exception {
@@ -104,16 +119,11 @@ public class BeanLocatorImpl implements BeanLocator {
 		}
 
 		if (name.equals("portletClassLoader")) {
-			SecurityManager securityManager = System.getSecurityManager();
-
-			if (securityManager != null) {
-				Permission permission = new RuntimePermission(
-					PACLConstants.RUNTIME_PERMISSION_GET_CLASSLOADER.concat(
-						StringPool.PERIOD).concat(_paclServletContextName));
-
-				securityManager.checkPermission(permission);
-			}
+			PortalRuntimePermission.checkGetClassLoader(
+				_paclServletContextName);
 		}
+
+		Object bean = null;
 
 		if (name.endsWith(VELOCITY_SUFFIX)) {
 			Object velocityBean = _velocityBeans.get(name);
@@ -122,80 +132,58 @@ public class BeanLocatorImpl implements BeanLocator {
 				String originalName = name.substring(
 					0, name.length() - VELOCITY_SUFFIX.length());
 
-				Object bean = _applicationContext.getBean(originalName);
+				Object curBean = _applicationContext.getBean(originalName);
 
 				velocityBean = ProxyUtil.newProxyInstance(
-					_classLoader, getInterfaces(bean),
-					new VelocityBeanHandler(bean, _classLoader));
+					_classLoader,
+					ReflectionUtil.getInterfaces(curBean, _classLoader),
+					new VelocityBeanHandler(curBean, _classLoader));
 
 				_velocityBeans.put(name, velocityBean);
 			}
 
-			return velocityBean;
+			bean = velocityBean;
+		}
+		else {
+			bean = _applicationContext.getBean(name);
 		}
 
-		Object bean = _applicationContext.getBean(name);
-
-		if (_paclWrapPersistence && (bean != null) &&
-			(bean instanceof BasePersistence)) {
-
-			Object paclPersistenceBean = _paclPersistenceBeans.get(name);
-
-			if (paclPersistenceBean != null) {
-				return paclPersistenceBean;
-			}
-
-			paclPersistenceBean = ProxyUtil.newProxyInstance(
-				_classLoader, getInterfaces(bean), new PACLBeanHandler(bean));
-
-			_paclPersistenceBeans.put(name, paclPersistenceBean);
-
-			return paclPersistenceBean;
+		if (bean == null) {
+			return bean;
 		}
 
-		return bean;
-	}
+		if (bean instanceof DoPrivilegedBean) {
+			PortalRuntimePermission.checkGetBeanProperty(bean.getClass());
 
-	protected void getInterfaces(
-		List<Class<?>> interfaceClasses, Class<?> clazz) {
-
-		for (Class<?> interfaceClass : clazz.getInterfaces()) {
-			try {
-				interfaceClasses.add(
-					_classLoader.loadClass(interfaceClass.getName()));
-			}
-			catch (ClassNotFoundException cnfe) {
-			}
-		}
-	}
-
-	protected Class<?>[] getInterfaces(Object object) {
-		List<Class<?>> interfaceClasses = new ArrayList<Class<?>>();
-
-		Class<?> clazz = object.getClass();
-
-		getInterfaces(interfaceClasses, clazz);
-
-		Class<?> superClazz = clazz.getSuperclass();
-
-		while (superClazz != null) {
-			getInterfaces(interfaceClasses, superClazz);
-
-			superClazz = superClazz.getSuperclass();
+			return bean;
 		}
 
-		return interfaceClasses.toArray(new Class<?>[interfaceClasses.size()]);
+		return _pacl.getBean(bean, _classLoader);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(BeanLocatorImpl.class);
 
+	private static PACL _pacl = new NoPACL();
+
 	private ApplicationContext _applicationContext;
 	private ClassLoader _classLoader;
-	private Map<String, Object> _paclPersistenceBeans =
-		new ConcurrentHashMap<String, Object>();
 	private String _paclServletContextName;
-	private boolean _paclWrapPersistence;
 	private Map<String, Object> _velocityBeans =
 		new ConcurrentHashMap<String, Object>();
+
+	private static class NoPACL implements PACL {
+
+		@Override
+		public Object getBean(Object bean, ClassLoader classLoader) {
+			return bean;
+		}
+
+	}
+
+	public static interface PACL {
+
+		public Object getBean(Object bean, ClassLoader classLoader);
+
+	}
 
 }

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,12 +16,16 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
-
 <aui:fieldset>
 
 	<%
 	Calendar cal = CalendarFactoryUtil.getCalendar(timeZone, locale);
+
+	int hour = cal.get(Calendar.HOUR_OF_DAY);
+
+	if (DateUtil.isFormatAmPm(locale)) {
+		hour = cal.get(Calendar.HOUR);
+	}
 	%>
 
 	<aui:field-wrapper label="start-date">
@@ -45,7 +49,7 @@
 				amPmParam="schedulerStartDateAmPm"
 				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 				hourParam="schedulerStartDateHour"
-				hourValue="<%= cal.get(Calendar.HOUR) %>"
+				hourValue="<%= hour %>"
 				minuteInterval="<%= 1 %>"
 				minuteParam="schedulerStartDateMinute"
 				minuteValue="<%= cal.get(Calendar.MINUTE) %>"
@@ -80,7 +84,7 @@
 				amPmParam="schedulerEndDateAmPm"
 				amPmValue="<%= cal.get(Calendar.AM_PM) %>"
 				hourParam="schedulerEndDateHour"
-				hourValue="<%= cal.get(Calendar.HOUR) %>"
+				hourValue="<%= hour %>"
 				minuteInterval="<%= 1 %>"
 				minuteParam="schedulerEndDateMinute"
 				minuteValue="<%= cal.get(Calendar.MINUTE) %>"

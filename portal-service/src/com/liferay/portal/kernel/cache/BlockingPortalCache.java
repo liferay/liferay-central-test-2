@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,13 +31,16 @@ public class BlockingPortalCache implements PortalCache {
 		_portalCache = portalCache;
 	}
 
+	@Override
 	public void destroy() {
 	}
 
+	@Override
 	public Collection<Object> get(Collection<Serializable> keys) {
 		return _portalCache.get(keys);
 	}
 
+	@Override
 	public Object get(Serializable key) {
 		Object value = _portalCache.get(key);
 
@@ -83,10 +86,12 @@ public class BlockingPortalCache implements PortalCache {
 		return value;
 	}
 
+	@Override
 	public String getName() {
 		return _portalCache.getName();
 	}
 
+	@Override
 	public void put(Serializable key, Object value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -109,6 +114,7 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void put(Serializable key, Object value, int timeToLive) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -131,6 +137,7 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -153,6 +160,7 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value, int timeToLive) {
 		if (key == null) {
 			throw new IllegalArgumentException("Key is null");
@@ -175,16 +183,19 @@ public class BlockingPortalCache implements PortalCache {
 		_competeLatchMap.remove(key);
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener cacheListener) {
 		_portalCache.registerCacheListener(cacheListener);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		_portalCache.registerCacheListener(cacheListener, cacheListenerScope);
 	}
 
+	@Override
 	public void remove(Serializable key) {
 		_portalCache.remove(key);
 
@@ -195,21 +206,25 @@ public class BlockingPortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		_portalCache.removeAll();
 		_competeLatchMap.clear();
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener cacheListener) {
 		_portalCache.unregisterCacheListener(cacheListener);
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 		_portalCache.unregisterCacheListeners();
 	}
 
 	private static ThreadLocal<CompeteLatch> _competeLatch =
 		new ThreadLocal<CompeteLatch>();
+
 	private final ConcurrentMap<Serializable, CompeteLatch> _competeLatchMap =
 		new ConcurrentHashMap<Serializable, CompeteLatch>();
 	private final PortalCache _portalCache;

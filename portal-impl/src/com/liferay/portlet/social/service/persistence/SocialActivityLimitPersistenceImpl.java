@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -228,18 +228,79 @@ public class SocialActivityLimitPersistenceImpl extends BasePersistenceImpl<Soci
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		SocialActivityLimit socialActivityLimit) {
+		if (socialActivityLimit.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(socialActivityLimit.getGroupId()),
+					Long.valueOf(socialActivityLimit.getUserId()),
+					Long.valueOf(socialActivityLimit.getClassNameId()),
+					Long.valueOf(socialActivityLimit.getClassPK()),
+					Integer.valueOf(socialActivityLimit.getActivityType()),
+					
+					socialActivityLimit.getActivityCounterName()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_C_C_A_A, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A, args,
+				socialActivityLimit);
+		}
+		else {
+			SocialActivityLimitModelImpl socialActivityLimitModelImpl = (SocialActivityLimitModelImpl)socialActivityLimit;
+
+			if ((socialActivityLimitModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_U_C_C_A_A.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(socialActivityLimit.getGroupId()),
+						Long.valueOf(socialActivityLimit.getUserId()),
+						Long.valueOf(socialActivityLimit.getClassNameId()),
+						Long.valueOf(socialActivityLimit.getClassPK()),
+						Integer.valueOf(socialActivityLimit.getActivityType()),
+						
+						socialActivityLimit.getActivityCounterName()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_U_C_C_A_A,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
+					args, socialActivityLimit);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		SocialActivityLimit socialActivityLimit) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
-			new Object[] {
+		SocialActivityLimitModelImpl socialActivityLimitModelImpl = (SocialActivityLimitModelImpl)socialActivityLimit;
+
+		Object[] args = new Object[] {
 				Long.valueOf(socialActivityLimit.getGroupId()),
 				Long.valueOf(socialActivityLimit.getUserId()),
 				Long.valueOf(socialActivityLimit.getClassNameId()),
 				Long.valueOf(socialActivityLimit.getClassPK()),
 				Integer.valueOf(socialActivityLimit.getActivityType()),
 				
-			socialActivityLimit.getActivityCounterName()
-			});
+				socialActivityLimit.getActivityCounterName()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_C_C_A_A, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A, args);
+
+		if ((socialActivityLimitModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_U_C_C_A_A.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(socialActivityLimitModelImpl.getOriginalGroupId()),
+					Long.valueOf(socialActivityLimitModelImpl.getOriginalUserId()),
+					Long.valueOf(socialActivityLimitModelImpl.getOriginalClassNameId()),
+					Long.valueOf(socialActivityLimitModelImpl.getOriginalClassPK()),
+					Integer.valueOf(socialActivityLimitModelImpl.getOriginalActivityType()),
+					
+					socialActivityLimitModelImpl.getOriginalActivityCounterName()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_C_C_A_A, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A, args);
+		}
 	}
 
 	/**
@@ -394,49 +455,8 @@ public class SocialActivityLimitPersistenceImpl extends BasePersistenceImpl<Soci
 			SocialActivityLimitImpl.class, socialActivityLimit.getPrimaryKey(),
 			socialActivityLimit);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
-				new Object[] {
-					Long.valueOf(socialActivityLimit.getGroupId()),
-					Long.valueOf(socialActivityLimit.getUserId()),
-					Long.valueOf(socialActivityLimit.getClassNameId()),
-					Long.valueOf(socialActivityLimit.getClassPK()),
-					Integer.valueOf(socialActivityLimit.getActivityType()),
-					
-				socialActivityLimit.getActivityCounterName()
-				}, socialActivityLimit);
-		}
-		else {
-			if ((socialActivityLimitModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_U_C_C_A_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(socialActivityLimitModelImpl.getOriginalGroupId()),
-						Long.valueOf(socialActivityLimitModelImpl.getOriginalUserId()),
-						Long.valueOf(socialActivityLimitModelImpl.getOriginalClassNameId()),
-						Long.valueOf(socialActivityLimitModelImpl.getOriginalClassPK()),
-						Integer.valueOf(socialActivityLimitModelImpl.getOriginalActivityType()),
-						
-						socialActivityLimitModelImpl.getOriginalActivityCounterName()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_U_C_C_A_A,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_U_C_C_A_A,
-					new Object[] {
-						Long.valueOf(socialActivityLimit.getGroupId()),
-						Long.valueOf(socialActivityLimit.getUserId()),
-						Long.valueOf(socialActivityLimit.getClassNameId()),
-						Long.valueOf(socialActivityLimit.getClassPK()),
-						Integer.valueOf(socialActivityLimit.getActivityType()),
-						
-					socialActivityLimit.getActivityCounterName()
-					}, socialActivityLimit);
-			}
-		}
+		clearUniqueFindersCache(socialActivityLimit);
+		cacheUniqueFindersCache(socialActivityLimit);
 
 		return socialActivityLimit;
 	}
@@ -1557,8 +1577,10 @@ public class SocialActivityLimitPersistenceImpl extends BasePersistenceImpl<Soci
 				List<ModelListener<SocialActivityLimit>> listenersList = new ArrayList<ModelListener<SocialActivityLimit>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<SocialActivityLimit>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

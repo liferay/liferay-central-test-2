@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -72,6 +72,7 @@ import com.liferay.portal.search.lucene.LuceneHelperUtil;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.search.lucene.cluster.LuceneClusterUtil;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
@@ -126,8 +127,9 @@ public class EditServerAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -279,9 +281,8 @@ public class EditServerAction extends PortletAction {
 		if (path != null) {
 			PortletURL portletURL = actionResponseImpl.createRenderURL();
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
-
 			portletURL.setParameter("struts_action", path);
+			portletURL.setWindowState(WindowState.MAXIMIZED);
 
 			return portletURL.toString();
 		}
@@ -386,14 +387,24 @@ public class EditServerAction extends PortletAction {
 				return;
 			}
 
+			Set<String> searchEngineIds = new HashSet<String>();
+
+			for (Indexer indexer : indexers) {
+				searchEngineIds.add(indexer.getSearchEngineId());
+			}
+
+			for (String searchEngineId : searchEngineIds) {
+				for (long companyId : companyIds) {
+					SearchEngineUtil.deletePortletDocuments(
+						searchEngineId, companyId, portletId);
+				}
+			}
+
 			for (Indexer indexer : indexers) {
 				for (long companyId : companyIds) {
 					ShardUtil.pushCompanyService(companyId);
 
 					try {
-						SearchEngineUtil.deletePortletDocuments(
-							indexer.getSearchEngineId(), companyId, portletId);
-
 						indexer.reindex(
 							new String[] {String.valueOf(companyId)});
 
@@ -402,37 +413,39 @@ public class EditServerAction extends PortletAction {
 					catch (Exception e) {
 						_log.error(e, e);
 					}
-
-					ShardUtil.popCompanyService();
+					finally {
+						ShardUtil.popCompanyService();
+					}
 				}
 			}
 		}
 
-		if (LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
-			Set<BaseAsyncDestination> searchWriterDestinations =
-				new HashSet<BaseAsyncDestination>();
-
-			MessageBus messageBus = MessageBusUtil.getMessageBus();
-
-			for (String usedSearchEngineId : usedSearchEngineIds) {
-				String searchWriterDestinationName =
-					SearchEngineUtil.getSearchWriterDestinationName(
-						usedSearchEngineId);
-
-				Destination destination = messageBus.getDestination(
-					searchWriterDestinationName);
-
-				if (destination instanceof BaseAsyncDestination) {
-					BaseAsyncDestination baseAsyncDestination =
-						(BaseAsyncDestination)destination;
-
-					searchWriterDestinations.add(baseAsyncDestination);
-				}
-			}
-
-			submitClusterIndexLoadingSyncJob(
-				searchWriterDestinations, companyIds);
+		if (!LuceneHelperUtil.isLoadIndexFromClusterEnabled()) {
+			return;
 		}
+
+		Set<BaseAsyncDestination> searchWriterDestinations =
+			new HashSet<BaseAsyncDestination>();
+
+		MessageBus messageBus = MessageBusUtil.getMessageBus();
+
+		for (String usedSearchEngineId : usedSearchEngineIds) {
+			String searchWriterDestinationName =
+				SearchEngineUtil.getSearchWriterDestinationName(
+					usedSearchEngineId);
+
+			Destination destination = messageBus.getDestination(
+				searchWriterDestinationName);
+
+			if (destination instanceof BaseAsyncDestination) {
+				BaseAsyncDestination baseAsyncDestination =
+					(BaseAsyncDestination)destination;
+
+				searchWriterDestinations.add(baseAsyncDestination);
+			}
+		}
+
+		submitClusterIndexLoadingSyncJob(searchWriterDestinations, companyIds);
 	}
 
 	protected void runScript(
@@ -600,7 +613,19 @@ public class EditServerAction extends PortletAction {
 
 			preferences.store();
 
-			CaptchaImpl captchaImpl = (CaptchaImpl)CaptchaUtil.getCaptcha();
+			CaptchaImpl captchaImpl = null;
+
+			Captcha currentCaptcha = CaptchaUtil.getCaptcha();
+
+			if (currentCaptcha instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)currentCaptcha;
+
+				captchaImpl = (CaptchaImpl)doPrivilegedBean.getActualBean();
+			}
+			else {
+				captchaImpl = (CaptchaImpl)currentCaptcha;
+			}
 
 			captchaImpl.setCaptcha(captcha);
 		}
@@ -859,6 +884,7 @@ public class EditServerAction extends PortletAction {
 			_master = master;
 		}
 
+		@Override
 		public void run() {
 			_countDownLatch.countDown();
 

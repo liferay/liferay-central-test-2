@@ -1,0 +1,34 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADVANCED_SEARCH_BASIC">
+			<execute function="AssertClick#assertPartialTextClickAt" />
+		</case>
+		<case locator-key1="ADVANCED_SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="AVAILABLE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="BASIC_SEARCH_ADVANCED">
+			<execute function="AssertClick#assertPartialTextClickAt" />
+		</case>
+		<case locator-key1="BASIC_SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="CURRENT">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="UPDATE_ASSOCIATIONS_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="isElementPresent">
+		<case locator-key1="ADVANCED_SEARCH_BASIC">
+			<execute function="IsElementPresent#isVisible" />
+		</case>
+		<case locator-key1="BASIC_SEARCH_ADVANCED">
+			<execute function="IsElementPresent#isVisible" />
+		</case>
+	</command>
+</definition>

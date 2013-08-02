@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -905,6 +907,10 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 		return new ContactWrapper(_contact.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Contact toUnescapedModel() {
+		return new ContactWrapper(_contact.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _contact.toString();
@@ -921,6 +927,25 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 
 	public java.lang.String getFullName() {
 		return _contact.getFullName();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ContactWrapper)) {
+			return false;
+		}
+
+		ContactWrapper contactWrapper = (ContactWrapper)obj;
+
+		if (Validator.equals(_contact, contactWrapper._contact)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,6 +79,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         primary keys
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Permission addPermission(
 			long companyId, String actionId, long resourceId)
 		throws SystemException {
@@ -117,6 +118,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the permissions to perform the actions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> addPermissions(
 			long companyId, List<String> actionIds, long resourceId)
 		throws SystemException {
@@ -188,6 +190,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the permissions to perform the actions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> addPermissions(
 			long companyId, String name, long resourceId,
 			boolean portletActions)
@@ -214,6 +217,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addUserPermissions(
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -240,6 +244,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         found or were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void checkPermissions(String name, List<String> actionIds)
 		throws PortalException, SystemException {
 
@@ -325,6 +330,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  permissions the permissions
 	 * @return the IDs of all the actions belonging to the permissions
 	 */
+	@Override
 	public List<String> getActions(List<Permission> permissions) {
 		List<String> actionIds = new ArrayList<String>();
 
@@ -347,6 +353,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the group's permissions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getGroupPermissions(long groupId, long resourceId)
 		throws SystemException {
 
@@ -366,6 +373,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         primKey
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getGroupPermissions(
 			long groupId, long companyId, String name, int scope,
 			String primKey)
@@ -381,6 +389,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the primary key of the latest permission created
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public long getLatestPermissionId() throws SystemException {
 		List<Permission> permissions = permissionPersistence.findAll(
 			0, 1, new PermissionComparator());
@@ -406,6 +415,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getOrgGroupPermissions(
 			long organizationId, long groupId, long resourceId)
 		throws SystemException {
@@ -425,6 +435,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @see    #addPermission(long, String, long)
 	 */
+	@Override
 	public List<Permission> getPermissions(
 			long companyId, String[] actionIds, long resourceId)
 		throws SystemException {
@@ -448,12 +459,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the role's permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getRolePermissions(long roleId)
 		throws SystemException {
 
 		return rolePersistence.getPermissions(roleId);
 	}
 
+	@Override
 	public List<Permission> getRolePermissions(long roleId, int[] scopes)
 		throws SystemException {
 
@@ -468,6 +481,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the role's permissions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getRolePermissions(long roleId, long resourceId)
 		throws SystemException {
 
@@ -481,6 +495,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the user's permissions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getUserPermissions(long userId)
 		throws SystemException {
 
@@ -495,6 +510,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the user's permissions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getUserPermissions(long userId, long resourceId)
 		throws SystemException {
 
@@ -513,6 +529,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @return the user permissions of the resource name, scope, and primKey
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Permission> getUserPermissions(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
@@ -532,6 +549,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         action on the resource; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasGroupPermission(
 			long groupId, String actionId, long resourceId)
 		throws SystemException {
@@ -539,8 +557,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Permission permission = permissionPersistence.fetchByA_R(
 			actionId, resourceId);
 
-		// Return false if there is no permission based on the given action
-		// id and resource id
+		// Return false if there is no permission based on the given action id
+		// and resource id
 
 		if (permission == null) {
 			return false;
@@ -564,6 +582,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasRolePermission(
 			long roleId, long companyId, String name, int scope,
 			String actionId)
@@ -597,6 +616,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasRolePermission(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String actionId)
@@ -634,6 +654,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         action on the resource; <code>false</code> otherwise
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserPermission(
 			long userId, String actionId, long resourceId)
 		throws SystemException {
@@ -641,8 +662,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		Permission permission = permissionPersistence.fetchByA_R(
 			actionId, resourceId);
 
-		// Return false if there is no permission based on the given action
-		// id and resource id
+		// Return false if there is no permission based on the given action id
+		// and resource id
 
 		if (permission == null) {
 			return false;
@@ -675,6 +696,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         resources and the action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserPermissions(
 			long userId, long groupId, List<Resource> resources,
 			String actionId, PermissionCheckerBag permissionCheckerBag)
@@ -801,6 +823,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         default user for the company could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setContainerResourcePermissions(
 			String name, String roleName, String actionId)
 		throws PortalException, SystemException {
@@ -824,6 +847,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setGroupPermissions(
 			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -861,6 +885,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setGroupPermissions(
 			String className, String classPK, long groupId, String[] actionIds,
 			long resourceId)
@@ -905,6 +930,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setOrgGroupPermissions(
 			long organizationId, long groupId, String[] actionIds,
 			long resourceId)
@@ -955,6 +981,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         com.liferay.portal.model.ResourceConstants#SCOPE_INDIVIDUAL}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRolePermission(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String actionId)
@@ -1023,6 +1050,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 *         com.liferay.portal.model.ResourceConstants#SCOPE_INDIVIDUAL}
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRolePermissions(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String[] actionIds)
@@ -1044,6 +1072,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @throws PortalException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRolePermissions(
 			long roleId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -1076,6 +1105,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  resourceId the primary key of the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRolesPermissions(
 			long companyId, Map<Long, String[]> roleIdsToActionIds,
 			long resourceId)
@@ -1124,6 +1154,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  primKey the resource primKey
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRolesPermissions(
 			long companyId, Map<Long, String[]> roleIdsToActionIds, String name,
 			int scope, String primKey)
@@ -1155,6 +1186,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setUserPermissions(
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -1181,6 +1213,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  permissionId the primary key of the permission
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetRolePermission(long roleId, long permissionId)
 		throws SystemException {
 
@@ -1206,6 +1239,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  actionId the action's ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetRolePermission(
 			long roleId, long companyId, String name, int scope, String primKey,
 			String actionId)
@@ -1240,6 +1274,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  actionId the action's ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetRolePermissions(
 			long roleId, long companyId, String name, int scope,
 			String actionId)
@@ -1266,6 +1301,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	 * @param  resourceId the primary key of the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetUserPermissions(
 			long userId, String[] actionIds, long resourceId)
 		throws SystemException {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -347,13 +347,16 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	@Override
 	public SCLicense toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (SCLicense)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (SCLicense)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public SCLicense toUnescapedModel() {
+		return (SCLicense)this;
 	}
 
 	@Override
@@ -386,18 +389,15 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SCLicense)) {
 			return false;
 		}
 
-		SCLicense scLicense = null;
-
-		try {
-			scLicense = (SCLicense)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SCLicense scLicense = (SCLicense)obj;
 
 		long primaryKey = scLicense.getPrimaryKey();
 
@@ -519,7 +519,7 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	}
 
 	private static ClassLoader _classLoader = SCLicense.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			SCLicense.class
 		};
 	private long _licenseId;
@@ -533,5 +533,5 @@ public class SCLicenseModelImpl extends BaseModelImpl<SCLicense>
 	private boolean _originalRecommended;
 	private boolean _setOriginalRecommended;
 	private long _columnBitmask;
-	private SCLicense _escapedModelProxy;
+	private SCLicense _escapedModel;
 }

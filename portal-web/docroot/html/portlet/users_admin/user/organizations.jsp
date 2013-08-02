@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -83,7 +83,7 @@ List<Organization> organizations = (List<Organization>)request.getAttribute("use
 
 		</liferay-ui:search-container-column-text>
 
-		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && ((selUser == null) || !UserPermissionUtil.hasMembershipProtected(permissionChecker, organization, selUser)) %>">
 			<liferay-ui:search-container-column-text>
 				<a class="modify-link" data-rowId="<%= organization.getOrganizationId() %>" href="javascript:;"><%= removeOrganizationIcon %></a>
 			</liferay-ui:search-container-column-text>

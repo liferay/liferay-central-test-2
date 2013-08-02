@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -203,6 +205,10 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 		return new UserGroupGroupRoleWrapper(_userGroupGroupRole.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.UserGroupGroupRole toUnescapedModel() {
+		return new UserGroupGroupRoleWrapper(_userGroupGroupRole.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _userGroupGroupRole.toString();
@@ -215,6 +221,26 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_userGroupGroupRole.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserGroupGroupRoleWrapper)) {
+			return false;
+		}
+
+		UserGroupGroupRoleWrapper userGroupGroupRoleWrapper = (UserGroupGroupRoleWrapper)obj;
+
+		if (Validator.equals(_userGroupGroupRole,
+					userGroupGroupRoleWrapper._userGroupGroupRole)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

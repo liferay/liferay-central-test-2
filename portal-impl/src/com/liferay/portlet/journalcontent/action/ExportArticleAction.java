@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -35,6 +35,7 @@ import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,8 +59,9 @@ public class ExportArticleAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		try {
@@ -79,6 +81,9 @@ public class ExportArticleAction extends PortletAction {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
+			String xmlRequest = PortletRequestUtil.toXML(
+				actionRequest, actionResponse);
+
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
@@ -86,7 +91,7 @@ public class ExportArticleAction extends PortletAction {
 
 			getFile(
 				groupId, articleId, targetExtension, allowedExtensions,
-				languageId, themeDisplay, request, response);
+				languageId, themeDisplay, xmlRequest, request, response);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
 		}
@@ -98,14 +103,15 @@ public class ExportArticleAction extends PortletAction {
 	protected void getFile(
 			long groupId, String articleId, String targetExtension,
 			String[] allowedExtensions, String languageId,
-			ThemeDisplay themeDisplay, HttpServletRequest request,
-			HttpServletResponse response)
+			ThemeDisplay themeDisplay, String xmlRequest,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		try {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
-					groupId, articleId, null, languageId, themeDisplay);
+					groupId, articleId, null, "export", languageId,
+					themeDisplay, 1, xmlRequest);
 
 			int pages = articleDisplay.getNumberOfPages();
 

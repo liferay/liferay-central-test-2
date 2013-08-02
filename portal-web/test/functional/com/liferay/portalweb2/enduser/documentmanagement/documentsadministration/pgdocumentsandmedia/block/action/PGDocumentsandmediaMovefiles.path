@@ -1,0 +1,65 @@
+<html>
+<head>
+<title>PGDocumentsandmediaMovefiles</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDocumentsandmediaMovefiles</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>SELECT</td>
+	<td>//input[@value='Select']</td>
+	<td>Select</td>
+</tr>
+<tr>
+	<td>MOVE</td>
+	<td>//input[@value='Move']</td>
+	<td>Move</td>
+</tr>
+<tr>
+	<td>CANCEL</td>
+	<td>//input[@value='Cancel']</td>
+	<td>Cancel</td>
+</tr>
+<tr>
+	<td>SELECT_NULL_WINDOW</td>
+	<td>null</td>
+	<td>Select Null Window</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SELECT_POP_UP-->
+<tr>
+	<td>SELECT_POP_UP</td>
+	<td>title=Documents and Media</td>
+	<td>Select Pop Up</td>
+</tr>
+<tr>
+	<td>SELECT_POP_UP_ADD_FOLDER</td>
+	<td>//input[@value='Add Folder']</td>
+	<td>Add Folder</td>
+</tr>
+<tr>
+	<td>SELECT_POP_UP_CHOOSE_THIS_FOLDER</td>
+	<td>//input[@value='Choose This Folder']</td>
+	<td>Choose This Folder</td>
+</tr>
+<tr>
+	<td>SELECT_POP_UP_CHOOSE_1</td>
+	<td>xpath=(//input[@value='Choose'])[1]</td>
+	<td>Choose 1</td>
+</tr>
+<tr>
+	<td>SELECT_POP_UP_CHOOSE_2</td>
+	<td>xpath=(//input[@value='Choose'])[2]</td>
+	<td>Choose 2</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,22 +14,69 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.io.NotSerializableException;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * @author Igor Spasic
  */
-public class NonSerializableObjectRequestWrapper extends
-	HttpServletRequestWrapper {
+public class NonSerializableObjectRequestWrapper
+	extends PersistentHttpServletRequestWrapper {
+
+	public static boolean isWrapped(HttpServletRequest request) {
+		Class<?> clazz = request.getClass();
+
+		String className = clazz.getName();
+
+		if (className.startsWith("weblogic.")) {
+			request.removeAttribute(
+				NonSerializableObjectRequestWrapper.class.getName());
+
+			return false;
+		}
+
+		Boolean wrapped = (Boolean)request.getAttribute(
+			NonSerializableObjectRequestWrapper.class.getName());
+
+		if (wrapped == null) {
+			return false;
+		}
+
+		return wrapped.booleanValue();
+	}
 
 	public NonSerializableObjectRequestWrapper(HttpServletRequest request) {
 		super(request);
+
+		request.setAttribute(
+			NonSerializableObjectRequestWrapper.class.getName(), Boolean.TRUE);
 	}
 
 	@Override
 	public Object getAttribute(String name) {
-		Object object = super.getAttribute(name);
+		Object object = null;
+
+		try {
+			object = super.getAttribute(name);
+		}
+		catch (Exception e) {
+			if (e instanceof NotSerializableException) {
+
+				// LPS-31885
+
+				String message = e.getMessage();
+
+				if ((message == null) || !message.contains("BEA-101362")) {
+					_log.error(e, e);
+				}
+			}
+
+			return null;
+		}
 
 		object = NonSerializableObjectHandler.getValue(object);
 
@@ -42,5 +89,8 @@ public class NonSerializableObjectRequestWrapper extends
 
 		super.setAttribute(name, object);
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		NonSerializableObjectRequestWrapper.class);
 
 }

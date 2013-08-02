@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -149,9 +149,7 @@ DecimalFormat decimalFormat = new DecimalFormat("##.00%");
 		}
 	).render(chartContainer);
 
-	// TODO http://yuilibrary.com/projects/yui3/ticket/2531555
-
-	/*Liferay.after(
+	Liferay.after(
 		['portletMoved', 'liferaypanel:collapse'],
 		function(event) {
 			var width = getContainerWidth(chartContainer);
@@ -160,9 +158,11 @@ DecimalFormat decimalFormat = new DecimalFormat("##.00%");
 				(event.type == 'liferaypanel:collapse' && event.panelId == 'groupStatisticsPanel<%= displayActivityCounterNameIndex %>')) {
 
 				chart.set('width', width);
+
+				chartContainer.setStyle('height', width);
 			}
 		}
-	);*/
+	);
 </aui:script>
 
 <%!

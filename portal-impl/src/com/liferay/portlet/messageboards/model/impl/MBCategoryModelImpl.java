@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -533,13 +533,16 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 	@Override
 	public MBCategory toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MBCategory)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MBCategory)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MBCategory toUnescapedModel() {
+		return (MBCategory)this;
 	}
 
 	@Override
@@ -596,18 +599,15 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBCategory)) {
 			return false;
 		}
 
-		MBCategory mbCategory = null;
-
-		try {
-			mbCategory = (MBCategory)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MBCategory mbCategory = (MBCategory)obj;
 
 		long primaryKey = mbCategory.getPrimaryKey();
 
@@ -846,7 +846,7 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	}
 
 	private static ClassLoader _classLoader = MBCategory.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MBCategory.class
 		};
 	private String _uuid;
@@ -873,5 +873,5 @@ public class MBCategoryModelImpl extends BaseModelImpl<MBCategory>
 	private int _messageCount;
 	private Date _lastPostDate;
 	private long _columnBitmask;
-	private MBCategory _escapedModelProxy;
+	private MBCategory _escapedModel;
 }

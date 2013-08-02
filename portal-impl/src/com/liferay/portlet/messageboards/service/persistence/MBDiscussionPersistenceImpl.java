@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -215,15 +215,93 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		}
 	}
 
-	protected void clearUniqueFindersCache(MBDiscussion mbDiscussion) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID,
-			new Object[] { Long.valueOf(mbDiscussion.getThreadId()) });
+	protected void cacheUniqueFindersCache(MBDiscussion mbDiscussion) {
+		if (mbDiscussion.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(mbDiscussion.getThreadId())
+				};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-			new Object[] {
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID, args,
+				mbDiscussion);
+
+			args = new Object[] {
+					Long.valueOf(mbDiscussion.getClassNameId()),
+					Long.valueOf(mbDiscussion.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args,
+				mbDiscussion);
+		}
+		else {
+			MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
+
+			if ((mbDiscussionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_THREADID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mbDiscussion.getThreadId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_THREADID, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID, args,
+					mbDiscussion);
+			}
+
+			if ((mbDiscussionModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mbDiscussion.getClassNameId()),
+						Long.valueOf(mbDiscussion.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args,
+					mbDiscussion);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(MBDiscussion mbDiscussion) {
+		MBDiscussionModelImpl mbDiscussionModelImpl = (MBDiscussionModelImpl)mbDiscussion;
+
+		Object[] args = new Object[] { Long.valueOf(mbDiscussion.getThreadId()) };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_THREADID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID, args);
+
+		if ((mbDiscussionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_THREADID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(mbDiscussionModelImpl.getOriginalThreadId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_THREADID, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(mbDiscussion.getClassNameId()),
 				Long.valueOf(mbDiscussion.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+
+		if ((mbDiscussionModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(mbDiscussionModelImpl.getOriginalClassNameId()),
+					Long.valueOf(mbDiscussionModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+		}
 	}
 
 	/**
@@ -377,51 +455,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 		EntityCacheUtil.putResult(MBDiscussionModelImpl.ENTITY_CACHE_ENABLED,
 			MBDiscussionImpl.class, mbDiscussion.getPrimaryKey(), mbDiscussion);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
-				new Object[] { Long.valueOf(mbDiscussion.getThreadId()) },
-				mbDiscussion);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-				new Object[] {
-					Long.valueOf(mbDiscussion.getClassNameId()),
-					Long.valueOf(mbDiscussion.getClassPK())
-				}, mbDiscussion);
-		}
-		else {
-			if ((mbDiscussionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_THREADID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(mbDiscussionModelImpl.getOriginalThreadId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_THREADID, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_THREADID, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_THREADID,
-					new Object[] { Long.valueOf(mbDiscussion.getThreadId()) },
-					mbDiscussion);
-			}
-
-			if ((mbDiscussionModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(mbDiscussionModelImpl.getOriginalClassNameId()),
-						Long.valueOf(mbDiscussionModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
-						Long.valueOf(mbDiscussion.getClassNameId()),
-						Long.valueOf(mbDiscussion.getClassPK())
-					}, mbDiscussion);
-			}
-		}
+		clearUniqueFindersCache(mbDiscussion);
+		cacheUniqueFindersCache(mbDiscussion);
 
 		return mbDiscussion;
 	}
@@ -1585,8 +1620,10 @@ public class MBDiscussionPersistenceImpl extends BasePersistenceImpl<MBDiscussio
 				List<ModelListener<MBDiscussion>> listenersList = new ArrayList<ModelListener<MBDiscussion>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MBDiscussion>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

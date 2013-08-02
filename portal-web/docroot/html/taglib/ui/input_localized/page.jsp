@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -50,6 +50,10 @@ if (Validator.isNotNull(languageId)) {
 	mainLanguageId = languageId;
 }
 
+Locale mainLocale = LocaleUtil.fromLanguageId(mainLanguageId);
+
+String mainLanguageDir = LanguageUtil.get(mainLocale, "lang.dir");
+
 String mainLanguageValue = LocalizationUtil.getLocalization(xml, mainLanguageId, false);
 
 if (!ignoreRequestValue) {
@@ -64,10 +68,10 @@ if (Validator.isNull(mainLanguageValue)) {
 <span class="taglib-input-localized">
 	<c:choose>
 		<c:when test='<%= type.equals("input") %>'>
-			<input class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" type="text" value="<%= HtmlUtil.escape(mainLanguageValue) %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
+			<input class="language-value <%= cssClass %>" dir="<%= mainLanguageDir %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + StringPool.UNDERLINE + mainLanguageId) %>" name="<portlet:namespace /><%= HtmlUtil.escapeAttribute(name + StringPool.UNDERLINE + mainLanguageId) %>" type="text" value="<%= HtmlUtil.escapeAttribute(mainLanguageValue) %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %> />
 		</c:when>
 		<c:when test='<%= type.equals("textarea") %>'>
-			<textarea class="language-value <%= cssClass %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + mainLanguageId %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(mainLanguageValue) %></textarea>
+			<textarea class="language-value <%= cssClass %>" dir="<%= mainLanguageDir %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + StringPool.UNDERLINE + mainLanguageId) %>" name="<portlet:namespace /><%= HtmlUtil.escapeAttribute(name + StringPool.UNDERLINE + mainLanguageId) %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>><%= HtmlUtil.escape(mainLanguageValue) %></textarea>
 		</c:when>
 	</c:choose>
 
@@ -75,14 +79,14 @@ if (Validator.isNull(mainLanguageValue)) {
 		<aui:script use="aui-char-counter">
 			new A.CharCounter(
 				{
-					input: '#<portlet:namespace /><%= id + StringPool.UNDERLINE + mainLanguageId %>',
+					input: '#<portlet:namespace /><%= HtmlUtil.escapeJS(id + StringPool.UNDERLINE + mainLanguageId) %>',
 					maxLength: <%= maxLength %>
 				}
 			);
 		</aui:script>
 	</c:if>
 
-	<c:if test="<%= Validator.isNull(languageId) %>">
+	<c:if test="<%= (locales.length > 1) && Validator.isNull(languageId) %>">
 		<span class="flag-selector nobr">
 			<img alt="<%= defaultLocale.getDisplayName() %>" class="default-language" src="<%= themeDisplay.getPathThemeImages() %>/language/<%= mainLanguageId %>.png" />
 
@@ -127,6 +131,8 @@ if (Validator.isNull(mainLanguageValue)) {
 					<%
 					for (int i = 0; i < languageIds.size(); i++) {
 						String curLanguageId = languageIds.get(i);
+
+						String curLanguageDir = LanguageUtil.get(LocaleUtil.fromLanguageId(curLanguageId), "lang.dir");
 					%>
 
 						<div class="lfr-form-row">
@@ -167,17 +173,17 @@ if (Validator.isNull(mainLanguageValue)) {
 									languageValue = LocalizationUtil.getLocalization(xml, curLanguageId, false);
 								}
 
-								if (!ignoreRequestValue){
+								if (!ignoreRequestValue) {
 									languageValue = ParamUtil.getString(request, name + StringPool.UNDERLINE + curLanguageId, languageValue);
 								}
 								%>
 
 								<c:choose>
 									<c:when test='<%= type.equals("input") %>'>
-										<input class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>" type="text" value="<%= HtmlUtil.escape(languageValue) %>" />
+										<input class="language-value" dir="<%= curLanguageDir %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + StringPool.UNDERLINE + curLanguageId) %>" name="<portlet:namespace /><%= HtmlUtil.escapeAttribute(name + StringPool.UNDERLINE + curLanguageId) %>" type="text" value="<%= languageValue %>" />
 									</c:when>
 									<c:when test='<%= type.equals("textarea") %>'>
-										<textarea class="language-value" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>" name="<portlet:namespace /><%= name + StringPool.UNDERLINE + curLanguageId %>"><%= HtmlUtil.escape(languageValue) %></textarea>
+										<textarea class="language-value" dir="<%= curLanguageDir %>" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + StringPool.UNDERLINE + curLanguageId) %>" name="<portlet:namespace /><%= HtmlUtil.escapeAttribute(name + StringPool.UNDERLINE + curLanguageId) %>"><%= languageValue %></textarea>
 									</c:when>
 								</c:choose>
 
@@ -185,7 +191,7 @@ if (Validator.isNull(mainLanguageValue)) {
 									<aui:script use="aui-char-counter">
 										new A.CharCounter(
 											{
-												input: '#<portlet:namespace /><%= id + StringPool.UNDERLINE + curLanguageId %>',
+												input: '#<portlet:namespace /><%= HtmlUtil.escapeAttribute(id + StringPool.UNDERLINE + curLanguageId) %>',
 												maxLength: <%= maxLength %>
 											}
 										);
@@ -204,8 +210,8 @@ if (Validator.isNull(mainLanguageValue)) {
 	</c:if>
 </span>
 
-<c:if test="<%= Validator.isNull(languageId) %>">
-	<aui:script use="liferay-auto-fields,liferay-panel-floating">
+<c:if test="<%= (locales.length > 1) && Validator.isNull(languageId) %>">
+	<aui:script use="liferay-auto-fields,liferay-panel-floating,portal-available-languages">
 		var updateLanguageFlag = function(event) {
 			var target = event.target;
 
@@ -231,6 +237,7 @@ if (Validator.isNull(mainLanguageValue)) {
 			if (inputField) {
 				inputField.attr('name', newName);
 				inputField.attr('id', newId);
+				inputField.attr('dir', Liferay.Language.direction[selectedValue]);
 			}
 
 			if (img) {
@@ -260,11 +267,19 @@ if (Validator.isNull(mainLanguageValue)) {
 							if (img) {
 								img.attr('src', '<%= themeDisplay.getPathThemeImages() %>/spacer.png');
 							}
+
+							var inputField = row.one('.language-value');
+
+							if (inputField) {
+								inputField.removeAttribute('dir');
+							}
 						}
 					}
 				}
-			).render();
+			);
 		</c:if>
+
+		var form = A.one(document.<portlet:namespace /><%= formName %>);
 
 		var panel = new Liferay.PanelFloating(
 			{
@@ -274,7 +289,7 @@ if (Validator.isNull(mainLanguageValue)) {
 					hide: function(event) {
 						var instance = this;
 
-						instance._positionHelper.appendTo(document.<portlet:namespace /><%= formName %>);
+						instance._positionHelper.appendTo(form);
 					},
 					show: function(event) {
 						var instance = this;
@@ -287,21 +302,41 @@ if (Validator.isNull(mainLanguageValue)) {
 			}
 		);
 
-		panel._positionHelper.appendTo(document.<portlet:namespace /><%= formName %>);
-
-		A.all('#<%= randomNamespace %>languageSelector select').each(
-			function(item) {
-				if (item) {
-					item.on('change', updateLanguageFlag);
-				}
-			}
-		);
+		panel._positionHelper.appendTo(form);
 
 		var languageSelectorTrigger = A.one('#<%= randomNamespace %>languageSelectorTrigger');
 
 		if (languageSelectorTrigger) {
-			languageSelectorTrigger.setData('autoFieldsInstance', autoFields);
-			languageSelectorTrigger.setData('panelInstance', panel);
+			Liferay.component(
+				'<%= HtmlUtil.escapeJS(namespace + id) %>languageSelector',
+				function(event) {
+					if (handle) {
+						handle.detach();
+
+						handle = null;
+					}
+
+					autoFields.render();
+
+					A.all('#<%= randomNamespace %>languageSelector select').each(
+						function(item) {
+							if (item) {
+								item.on('change', updateLanguageFlag);
+							}
+						}
+					);
+
+					languageSelectorTrigger.setData('autoFieldsInstance', autoFields);
+					languageSelectorTrigger.setData('panelInstance', panel);
+				}
+			);
+
+			var handle = languageSelectorTrigger.once(
+				'click',
+				function(event) {
+					Liferay.component('<%= HtmlUtil.escapeJS(namespace + id) %>languageSelector');
+				}
+			);
 		}
 	</aui:script>
 </c:if>

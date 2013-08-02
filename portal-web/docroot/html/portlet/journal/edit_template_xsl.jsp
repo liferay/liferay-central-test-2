@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -132,11 +132,13 @@ else if (langType.equals("xml") || langType.equals("xsl") || langType.equals("xs
 		if (editorContentOutputElement) {
 			var editorMode = '<%= editorMode %>';
 
+			var encodedContent = encodeURIComponent(content);
+
 			if (editorMode == 'xml') {
 				editorContentOutputElement.val(content);
 			}
 			else {
-				editorContentOutputElement.val(encodeURIComponent(content));
+				editorContentOutputElement.val(encodedContent);
 			}
 
 			var dialog = Liferay.Util.getWindow();
@@ -145,6 +147,13 @@ else if (langType.equals("xml") || langType.equals("xsl") || langType.equals("xs
 				dialog.close();
 
 				if (content != prevEditorContent) {
+					if (editorMode == 'xml') {
+						editorContentInputElement.val(content);
+					}
+					else {
+						editorContentInputElement.val(encodedContent);
+					}
+
 					dialog.fire('update');
 				}
 			}

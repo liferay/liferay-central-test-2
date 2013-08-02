@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -424,13 +424,16 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 
 	@Override
 	public RatingsEntry toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (RatingsEntry)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (RatingsEntry)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public RatingsEntry toUnescapedModel() {
+		return (RatingsEntry)this;
 	}
 
 	@Override
@@ -468,18 +471,15 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof RatingsEntry)) {
 			return false;
 		}
 
-		RatingsEntry ratingsEntry = null;
-
-		try {
-			ratingsEntry = (RatingsEntry)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		RatingsEntry ratingsEntry = (RatingsEntry)obj;
 
 		long primaryKey = ratingsEntry.getPrimaryKey();
 
@@ -641,7 +641,7 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	}
 
 	private static ClassLoader _classLoader = RatingsEntry.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			RatingsEntry.class
 		};
 	private long _entryId;
@@ -663,5 +663,5 @@ public class RatingsEntryModelImpl extends BaseModelImpl<RatingsEntry>
 	private double _originalScore;
 	private boolean _setOriginalScore;
 	private long _columnBitmask;
-	private RatingsEntry _escapedModelProxy;
+	private RatingsEntry _escapedModel;
 }

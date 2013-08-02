@@ -1,0 +1,121 @@
+<definition>
+	<command name="addPG">
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute action="PGDocumentsandmediaFolder#assertClick" locator-key1="TOOLBAR_ADD" value1="Add" />
+		<execute action="PGDocumentsandmediaFolder#assertClick" locator-key1="ADD_MENULIST_BASIC_DOCUMENT" value1="Basic Document" />
+
+		<execute action="PGDocumentsandmediaAdddocument#uploadCommonFile" locator-key1="FILE_FIELD" value1="${dmDocumentFile}" />
+		<execute action="PGDocumentsandmediaAdddocument#type" locator-key1="TITLE_FIELD" value1="${dmDocumentTitle}" />
+		<execute action="PGDocumentsandmediaAdddocument#type" locator-key1="DESCRIPTION_FIELD" value1="${dmDocumentDescription}" />
+		<execute action="PGDocumentsandmediaAdddocument#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+
+		<execute action="PGDocumentsandmediaFolder#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="addPGviaDMD">
+		<execute action="PGDocumentlibrarydisplay#assertClick" locator-key1="FOLDERS_TABLE_NAME_1" value1="${dmdFolderName}" />
+
+		<execute action="PGDocumentlibrarydisplayFolder#click" locator-key1="SUBFOLDER_MENU_ADD_DOCUMENT" value1="${dmdDocumentTitle}" />
+
+		<execute action="PGDocumentlibrarydisplayAdddocument#selectFrame" locator-key1="SELECT_DOCUMENT_TYPE_IFRAME" />
+		<execute action="PGDocumentlibrarydisplayAdddocument#assertClick" locator-key1="SELECT_DOCUMENT_TYPE_BASIC_DOCUMENT" value1="Basic Document" />
+		<execute action="PGDocumentlibrarydisplayAdddocument#selectFrame" />
+		<execute action="PGDocumentlibrarydisplayAdddocument#uploadCommonFile" locator-key1="DOCUMENT_FILE_FIELD" value1="${dmdDocumentFile}" />
+		<execute action="PGDocumentlibrarydisplayAdddocument#type" locator-key1="DOCUMENT_TITLE_FIELD" value1="${dmdDocumentTitle}" />
+		<execute action="PGDocumentlibrarydisplayAdddocument#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+
+		<execute action="PGDocumentlibrarydisplayFolder#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+		<execute action="PGDocumentlibrarydisplayFolder#assertTextEquals" locator-key1="DOCUMENTS_TABLE_NAME_1" value1="${dmdDocumentTitle}" />
+		<execute action="PGDocumentlibrarydisplayFolder#assertTextEquals" locator-key1="DOCUMENTS_TABLE_SIZE_1" value1="${dmdDocumentSize}" />
+		<execute action="PGDocumentlibrarydisplayFolder#assertClick" locator-key1="DOCUMENTS_TABLE_NAME_1" value1="${dmdDocumentTitle}" />
+
+		<execute action="PGDocumentlibrarydisplayDocument#assertTextEquals" locator-key1="DOCUMENT_HEADER_TITLE" value1="${dmdDocumentTitle}" />
+		<execute action="PGDocumentlibrarydisplayDocument#assertTextEquals" locator-key1="DOCUMENT_TITLE" value1="${dmdDocumentTitle}" />
+		<execute action="PGDocumentlibrarydisplayDocument#assertTextEquals" locator-key1="DOCUMENT_VERSION" value1="Version 1.0" />
+	</command>
+
+	<command name="addPGviaMG">
+		<execute action="PGMediagallery#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+		<execute action="PGMediagallery#assertClick" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+
+		<execute action="PGMediagalleryFolder#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no media files in this folder." />
+		<execute action="PGMediagalleryFolder#assertClick" locator-key1="FOLDER_MENU_ADD_MEDIA" value1="Add Media" />
+
+		<execute action="PGMediagallerySelectmediatype#selectFrame" locator-key1="SELECT_MEDIA_TYPE_IFRAME" />
+		<execute action="PGMediagallerySelectmediatype#assertClick" locator-key1="MEDIA_TABLE_BASIC_DOCUMENT" value1="Basic Document" />
+		<execute action="PGMediagallerySelectmediatype#selectFrame" />
+
+		<execute action="PGMediagalleryAddmedia#uploadCommonFile" locator-key1="FILE" value1="${mgDocumentFile}" />
+		<execute action="PGMediagalleryAddmedia#type" locator-key1="TITLE_FIELD" value1="${mgDocumentTitle}" />
+		<execute action="PGMediagalleryAddmedia#type" locator-key1="DESCRIPTION_FIELD" value1="${mgDocumentDescription}" />
+		<execute action="PGMediagalleryAddmedia#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+		<execute action="PGMediagalleryAddmedia#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+
+		<execute action="PGMediagallery#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+		<execute action="PGMediagallery#assertClick" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+
+		<execute action="PGMediagalleryFolder#assertElementPresent" locator-key1="MEDIA_THUMBNAIL" />
+		<execute action="PGMediagalleryFolder#assertElementPresent" locator-key1="MEDIA_TITLE" value1="${mgDocumentTitle}" />
+	</command>
+
+	<command name="deletePGviaMG">
+		<execute action="PGMediagallery#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+		<execute action="PGMediagallery#assertClick" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+
+		<execute action="PGMediagalleryFolder#assertClick" locator-key1="MEDIA_TITLE" value1="${mgDocumentTitle}"/>
+
+		<execute action="PGMediagalleryMedia#click" locator-key1="DELETE_ICON" />
+		<execute action="PGMediagalleryMedia#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to delete this?" />
+
+		<execute action="PGMediagalleryFolder#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+		<execute action="PGMediagalleryFolder#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no media files in this folder." />
+	</command>
+
+	<command name="editPGviaMG">
+		<execute action="PGMediagallery#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+		<execute action="PGMediagallery#assertClick" locator-key1="ENTRY_TITLE" value1="${mgFolderName}" />
+
+		<execute action="PGMediagalleryFolder#assertClick" locator-key1="MEDIA_TITLE" value1="${mgDocumentTitle}"/>
+
+		<execute action="PGMediagalleryMedia#assertTextEquals" locator-key1="MEDIA_CAPTION" value1="${mgDocumentTitle} - ${mgDocumentDescription}" />
+		<execute action="PGMediagalleryMedia#click" locator-key1="EDIT_ICON" />
+
+		<execute action="PGMediagalleryEditmedia#type" locator-key1="TITLE_FIELD" value1="${mgDocumentTitleEdit}" />
+		<execute action="PGMediagalleryEditmedia#type" locator-key1="DESCRIPTION_FIELD" value1="${mgDocumentDescriptionEdit}" />
+		<execute action="PGMediagalleryEditmedia#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+		<execute action="PGMediagalleryEditmedia#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+
+		<execute action="PGMediagalleryFolder#assertTextEquals" locator-key1="MEDIA_TITLE" value1="${mgDocumentTitleEdit}" />
+	</command>
+
+	<command name="moveToFolderPG">
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute action="PGDocumentsandmediaFolder#check" locator-key1="FOLDER_ENTRIES_DOCUMENT_SELECT" />
+		<execute action="PGDocumentsandmediaFolder#assertClick" locator-key1="TOOLBAR_ACTIONS" value1="Actions" />
+		<execute action="PGDocumentsandmediaFolder#assertClick" locator-key1="ACTIONS_MENULIST_MOVE" value1="Move" />
+
+		<execute action="PGDocumentsandmediaMovefiles#assertClick" locator-key1="SELECT" value1="Select" />
+		<execute action="PGDocumentsandmediaMovefiles#selectWindow" locator-key1="SELECT_POP_UP" />
+		<execute action="PGDocumentsandmediaMovefiles#assertClick" locator-key1="SELECT_POP_UP_CHOOSE_2" value1="Choose" />
+		<execute action="PGDocumentsandmediaMovefiles#selectWindow" locator-key1="SELECT_NULL_WINDOW" />
+		<execute action="PGDocumentsandmediaMovefiles#assertClick" locator-key1="MOVE" value1="Move" />
+
+		<execute action="PGDocumentsandmedia#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="searchNoPGviaDMD">
+		<execute action="PGDocumentlibrarydisplaySearch#type" locator-key1="SEARCH_FIELD" value1="${dmdDocumentTitleSearch}" />
+		<execute action="PGDocumentlibrarydisplaySearch#assertClick" locator-key1="SEARCH_BUTTON" value1="Search" />
+		<execute action="PGDocumentlibrarydisplaySearch#assertTextEquals" locator-key1="INFO_MESSAGE" value1="No documents were found that matched the keywords: ${dmdDocumentTitleSearch}." />
+	</command>
+
+	<command name="searchPGviaDMD">
+		<execute action="PGDocumentlibrarydisplay#type" locator-key1="SEARCH_FIELD" value1="${dmdDocumentTitleSearch}" />
+		<execute action="PGDocumentlibrarydisplay#assertClick" locator-key1="SEARCH_BUTTON" value1="Search" />
+
+		<execute action="PGDocumentlibrarydisplaySearch#assertTextEquals" locator-key1="SEARCH_RESULTS_FOLDER" value1="${dmdFolderName}" />
+		<execute action="PGDocumentlibrarydisplaySearch#assertTextEquals" locator-key1="SEARCH_RESULTS_DOCUMENT" value1="${dmdDocumentTitle}" />
+	</command>
+</definition>

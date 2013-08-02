@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -364,6 +366,10 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 		return new TicketWrapper(_ticket.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Ticket toUnescapedModel() {
+		return new TicketWrapper(_ticket.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _ticket.toString();
@@ -380,6 +386,25 @@ public class TicketWrapper implements Ticket, ModelWrapper<Ticket> {
 
 	public boolean isExpired() {
 		return _ticket.isExpired();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof TicketWrapper)) {
+			return false;
+		}
+
+		TicketWrapper ticketWrapper = (TicketWrapper)obj;
+
+		if (Validator.equals(_ticket, ticketWrapper._ticket)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

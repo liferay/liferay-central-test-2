@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -83,22 +82,32 @@ import org.im4java.core.IMOperation;
 public class PDFProcessorImpl
 	extends DLPreviewableProcessor implements PDFProcessor {
 
-	public static PDFProcessorImpl getInstance() {
-		return _instance;
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		FileUtil.mkdirs(PREVIEW_TMP_PATH);
+		FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
+
+		reset();
 	}
 
+	@Override
 	public void generateImages(FileVersion fileVersion) throws Exception {
-		Initializer._initializedInstance._generateImages(fileVersion);
+		_generateImages(fileVersion);
 	}
 
+	@Override
 	public String getGlobalSearchPath() throws Exception {
-		PortletPreferences preferences = PrefsPropsUtil.getPreferences();
+		try {
+			PortletPreferences preferences = PrefsPropsUtil.getPreferences();
 
-		String globalSearchPath = preferences.getValue(
-			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, null);
+			String globalSearchPath = preferences.getValue(
+				PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, null);
 
-		if (Validator.isNotNull(globalSearchPath)) {
-			return globalSearchPath;
+			if (Validator.isNotNull(globalSearchPath)) {
+				return globalSearchPath;
+			}
+		}
+		catch (Exception e) {
 		}
 
 		String filterName = null;
@@ -117,17 +126,17 @@ public class PDFProcessorImpl
 			PropsKeys.IMAGEMAGICK_GLOBAL_SEARCH_PATH, new Filter(filterName));
 	}
 
+	@Override
 	public InputStream getPreviewAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return Initializer._initializedInstance.doGetPreviewAsStream(
-			fileVersion, index, PREVIEW_TYPE);
+		return doGetPreviewAsStream(fileVersion, index, PREVIEW_TYPE);
 	}
 
+	@Override
 	public int getPreviewFileCount(FileVersion fileVersion) {
 		try {
-			return Initializer._initializedInstance.doGetPreviewFileCount(
-				fileVersion);
+			return doGetPreviewFileCount(fileVersion);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -136,37 +145,45 @@ public class PDFProcessorImpl
 		return 0;
 	}
 
+	@Override
 	public long getPreviewFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
-		return Initializer._initializedInstance.doGetPreviewFileSize(
-			fileVersion, index);
+		return doGetPreviewFileSize(fileVersion, index);
 	}
 
+	@Override
 	public Properties getResourceLimitsProperties() throws Exception {
-		Properties resourceLimitsProperties = PrefsPropsUtil.getProperties(
-			PropsKeys.IMAGEMAGICK_RESOURCE_LIMIT, true);
-
-		if (resourceLimitsProperties.isEmpty()) {
-			resourceLimitsProperties = PropsUtil.getProperties(
+		try {
+			Properties resourceLimitsProperties = PrefsPropsUtil.getProperties(
 				PropsKeys.IMAGEMAGICK_RESOURCE_LIMIT, true);
+
+			if (!resourceLimitsProperties.isEmpty()) {
+				return resourceLimitsProperties;
+			}
+		}
+		catch (Exception e) {
 		}
 
-		return resourceLimitsProperties;
+		return PropsUtil.getProperties(
+			PropsKeys.IMAGEMAGICK_RESOURCE_LIMIT, true);
 	}
 
+	@Override
 	public InputStream getThumbnailAsStream(FileVersion fileVersion, int index)
 		throws Exception {
 
 		return doGetThumbnailAsStream(fileVersion, index);
 	}
 
+	@Override
 	public long getThumbnailFileSize(FileVersion fileVersion, int index)
 		throws Exception {
 
 		return doGetThumbnailFileSize(fileVersion, index);
 	}
 
+	@Override
 	public boolean hasImages(FileVersion fileVersion) {
 		boolean hasImages = false;
 
@@ -174,7 +191,7 @@ public class PDFProcessorImpl
 			hasImages = _hasImages(fileVersion);
 
 			if (!hasImages && isSupported(fileVersion)) {
-				Initializer._initializedInstance._queueGeneration(fileVersion);
+				_queueGeneration(fileVersion);
 			}
 		}
 		catch (Exception e) {
@@ -184,20 +201,28 @@ public class PDFProcessorImpl
 		return hasImages;
 	}
 
+	@Override
 	public boolean isDocumentSupported(FileVersion fileVersion) {
-		return Initializer._initializedInstance.isSupported(fileVersion);
+		return isSupported(fileVersion);
 	}
 
+	@Override
 	public boolean isDocumentSupported(String mimeType) {
-		return Initializer._initializedInstance.isSupported(mimeType);
+		return isSupported(mimeType);
 	}
 
+	@Override
 	public boolean isImageMagickEnabled() throws Exception {
-		if (PrefsPropsUtil.getBoolean(PropsKeys.IMAGEMAGICK_ENABLED)) {
-			return true;
+		boolean enabled = false;
+
+		try {
+			enabled = PrefsPropsUtil.getBoolean(PropsKeys.IMAGEMAGICK_ENABLED);
+		}
+		catch (Exception e) {
+			enabled = PropsValues.IMAGEMAGICK_ENABLED;
 		}
 
-		if (!_warned) {
+		if (!enabled && !_warned) {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append("Liferay is not configured to use ImageMagick. For ");
@@ -212,9 +237,10 @@ public class PDFProcessorImpl
 			_warned = true;
 		}
 
-		return false;
+		return enabled;
 	}
 
+	@Override
 	public boolean isSupported(String mimeType) {
 		if (Validator.isNull(mimeType)) {
 			return false;
@@ -244,6 +270,7 @@ public class PDFProcessorImpl
 		return false;
 	}
 
+	@Override
 	public void reset() throws Exception {
 		if (isImageMagickEnabled()) {
 			_globalSearchPath = getGlobalSearchPath();
@@ -252,8 +279,9 @@ public class PDFProcessorImpl
 		}
 	}
 
+	@Override
 	public void trigger(FileVersion fileVersion) {
-		Initializer._initializedInstance._queueGeneration(fileVersion);
+		_queueGeneration(fileVersion);
 	}
 
 	@Override
@@ -294,8 +322,7 @@ public class PDFProcessorImpl
 		}
 
 		if (!portletDataContext.isPerformDirectBinaryImport()) {
-			int previewFileCount = PDFProcessorUtil.getPreviewFileCount(
-				fileVersion);
+			int previewFileCount = getPreviewFileCount(fileVersion);
 
 			fileEntryElement.addAttribute(
 				"bin-path-pdf-preview-count", String.valueOf(previewFileCount));
@@ -331,21 +358,6 @@ public class PDFProcessorImpl
 				portletDataContext, fileEntry, importedFileEntry,
 				fileEntryElement, "pdf", PREVIEW_TYPE, i);
 		}
-	}
-
-	protected void initialize() {
-		try {
-			FileUtil.mkdirs(PREVIEW_TMP_PATH);
-			FileUtil.mkdirs(THUMBNAIL_TMP_PATH);
-
-			reset();
-		}
-		catch (Exception e) {
-			_log.warn(e, e);
-		}
-	}
-
-	private PDFProcessorImpl() {
 	}
 
 	private void _generateImages(FileVersion fileVersion) throws Exception {
@@ -532,8 +544,8 @@ public class PDFProcessorImpl
 		}
 		else {
 
-			// ImageMagick converts single page PDFs without appending an
-			// index. Rename file for consistency.
+			// ImageMagick converts single page PDFs without appending an index.
+			// Rename file for consistency.
 
 			File singlePagePreviewFile = getPreviewTempFile(tempFileId, -1);
 
@@ -782,12 +794,6 @@ public class PDFProcessorImpl
 
 	private static Log _log = LogFactoryUtil.getLog(PDFProcessorImpl.class);
 
-	private static PDFProcessorImpl _instance = new PDFProcessorImpl();
-
-	static {
-		InstancePool.put(PDFProcessorImpl.class.getName(), _instance);
-	}
-
 	private List<Long> _fileVersionIds = new Vector<Long>();
 	private String _globalSearchPath;
 	private Properties _resourceLimitsProperties;
@@ -821,21 +827,11 @@ public class PDFProcessorImpl
 			return StringPool.BLANK;
 		}
 
+		private static final long serialVersionUID = 1L;
+
 		private LinkedList<String> _commandArguments;
 		private String _globalSearchPath;
 		private Properties _resourceLimits;
-
-	}
-
-	private static class Initializer {
-
-		private static PDFProcessorImpl _initializedInstance;
-
-		static {
-			_instance.initialize();
-
-			_initializedInstance = _instance;
-		}
 
 	}
 

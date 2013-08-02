@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,6 +54,7 @@ import java.util.Map;
  */
 public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
+	@Override
 	public WikiNode addDefaultNode(long userId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -62,6 +63,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public WikiNode addNode(
 			long userId, String name, String description,
 			ServiceContext serviceContext)
@@ -126,6 +128,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return node;
 	}
 
+	@Override
 	public void addNodeResources(
 			long nodeId, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -136,6 +139,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		addNodeResources(node, addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addNodeResources(
 			long nodeId, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -145,6 +149,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		addNodeResources(node, groupPermissions, guestPermissions);
 	}
 
+	@Override
 	public void addNodeResources(
 			WikiNode node, boolean addGroupPermissions,
 			boolean addGuestPermissions)
@@ -156,6 +161,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			addGroupPermissions, addGuestPermissions);
 	}
 
+	@Override
 	public void addNodeResources(
 			WikiNode node, String[] groupPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -166,6 +172,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			guestPermissions);
 	}
 
+	@Override
 	public void deleteNode(long nodeId)
 		throws PortalException, SystemException {
 
@@ -174,6 +181,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		deleteNode(node);
 	}
 
+	@Override
 	public void deleteNode(WikiNode node)
 		throws PortalException, SystemException {
 
@@ -204,6 +212,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		wikiNodePersistence.remove(node);
 	}
 
+	@Override
 	public void deleteNodes(long groupId)
 		throws PortalException, SystemException {
 
@@ -217,28 +226,33 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public List<WikiNode> getCompanyNodes(long companyId, int start, int end)
 		throws SystemException {
 
 		return wikiNodePersistence.findByCompanyId(companyId, start, end);
 	}
 
+	@Override
 	public int getCompanyNodesCount(long companyId) throws SystemException {
 		return wikiNodePersistence.countByCompanyId(companyId);
 	}
 
+	@Override
 	public WikiNode getNode(long nodeId)
 		throws PortalException, SystemException {
 
 		return wikiNodePersistence.findByPrimaryKey(nodeId);
 	}
 
+	@Override
 	public WikiNode getNode(long groupId, String nodeName)
 		throws PortalException, SystemException {
 
 		return wikiNodePersistence.findByG_N(groupId, nodeName);
 	}
 
+	@Override
 	public List<WikiNode> getNodes(long groupId)
 		throws PortalException, SystemException {
 
@@ -251,6 +265,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return nodes;
 	}
 
+	@Override
 	public List<WikiNode> getNodes(long groupId, int start, int end)
 		throws PortalException, SystemException {
 
@@ -264,10 +279,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return nodes;
 	}
 
+	@Override
 	public int getNodesCount(long groupId) throws SystemException {
 		return wikiNodePersistence.countByGroupId(groupId);
 	}
 
+	@Override
 	public void importPages(
 			long userId, long nodeId, String importer,
 			InputStream[] inputStreams, Map<String, String[]> options)
@@ -280,6 +297,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		wikiImporter.importPages(userId, node, inputStreams, options);
 	}
 
+	@Override
 	public void subscribeNode(long userId, long nodeId)
 		throws PortalException, SystemException {
 
@@ -289,6 +307,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			userId, node.getGroupId(), WikiNode.class.getName(), nodeId);
 	}
 
+	@Override
 	public void unsubscribeNode(long userId, long nodeId)
 		throws PortalException, SystemException {
 
@@ -296,6 +315,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			userId, WikiNode.class.getName(), nodeId);
 	}
 
+	@Override
 	public WikiNode updateNode(
 			long nodeId, String name, String description,
 			ServiceContext serviceContext)
@@ -328,7 +348,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setScopeGroupId(groupId);
 
-		WikiNode node = addDefaultNode(defaultUserId, serviceContext);
+		WikiNode node = wikiNodeLocalService.addDefaultNode(
+			defaultUserId, serviceContext);
 
 		List<WikiNode> nodes = new ArrayList<WikiNode>(1);
 

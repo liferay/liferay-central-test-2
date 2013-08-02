@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -257,13 +257,16 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	@Override
 	public Resource toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Resource)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Resource)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Resource toUnescapedModel() {
+		return (Resource)this;
 	}
 
 	@Override
@@ -295,18 +298,15 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Resource)) {
 			return false;
 		}
 
-		Resource resource = null;
-
-		try {
-			resource = (Resource)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Resource resource = (Resource)obj;
 
 		long primaryKey = resource.getPrimaryKey();
 
@@ -396,7 +396,7 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	}
 
 	private static ClassLoader _classLoader = Resource.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Resource.class
 		};
 	private long _resourceId;
@@ -406,5 +406,5 @@ public class ResourceModelImpl extends BaseModelImpl<Resource>
 	private String _primKey;
 	private String _originalPrimKey;
 	private long _columnBitmask;
-	private Resource _escapedModelProxy;
+	private Resource _escapedModel;
 }

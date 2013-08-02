@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -158,10 +158,6 @@ public class LayoutServiceSoap {
 	}
 
 	/**
-	* Adds a layout with empty maps for descriptions, keywords, and titles ,
-	* and a names map containing a mapping for the default locale as its only
-	* entry.
-	*
 	* <p>
 	* This method handles the creation of the layout including its resources,
 	* metadata, and internal data structures. It is not necessary to make
@@ -277,6 +273,29 @@ public class LayoutServiceSoap {
 	}
 
 	/**
+	* Returns all the ancestor layouts of the layout.
+	*
+	* @param plid the primary key of the layout
+	* @return the ancestor layouts of the layout
+	* @throws PortalException if a matching layout could not be found or if a
+	portal exception occurred
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.liferay.portal.model.LayoutSoap[] getAncestorLayouts(
+		long plid) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Layout> returnValue = LayoutServiceUtil.getAncestorLayouts(plid);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
 	* Returns the primary key of the default layout for the group.
 	*
 	* @param groupId the primary key of the group
@@ -298,6 +317,37 @@ public class LayoutServiceSoap {
 					scopeGroupId, privateLayout, portletId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getDefaultPlid(long groupId, long scopeGroupId,
+		java.lang.String portletId) throws RemoteException {
+		try {
+			long returnValue = LayoutServiceUtil.getDefaultPlid(groupId,
+					scopeGroupId, portletId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap getLayoutByUuidAndGroupId(
+		java.lang.String uuid, long groupId, boolean privateLayout)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.getLayoutByUuidAndGroupId(uuid,
+					groupId, privateLayout);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -383,6 +433,22 @@ public class LayoutServiceSoap {
 		try {
 			java.util.List<com.liferay.portal.model.Layout> returnValue = LayoutServiceUtil.getLayouts(groupId,
 					privateLayout, parentLayoutId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap[] getLayouts(
+		long groupId, boolean privateLayout, long parentLayoutId,
+		boolean incomplete, int start, int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Layout> returnValue = LayoutServiceUtil.getLayouts(groupId,
+					privateLayout, parentLayoutId, incomplete, start, end);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModels(returnValue);
 		}

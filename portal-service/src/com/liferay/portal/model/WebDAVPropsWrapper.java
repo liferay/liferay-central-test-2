@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -315,6 +317,10 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 		return new WebDAVPropsWrapper(_webDAVProps.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.WebDAVProps toUnescapedModel() {
+		return new WebDAVPropsWrapper(_webDAVProps.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _webDAVProps.toString();
@@ -357,6 +363,25 @@ public class WebDAVPropsWrapper implements WebDAVProps,
 
 	public void store() throws java.lang.Exception {
 		_webDAVProps.store();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof WebDAVPropsWrapper)) {
+			return false;
+		}
+
+		WebDAVPropsWrapper webDAVPropsWrapper = (WebDAVPropsWrapper)obj;
+
+		if (Validator.equals(_webDAVProps, webDAVPropsWrapper._webDAVProps)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

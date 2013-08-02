@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -140,6 +140,10 @@ public class StringUtil_IW {
 
 	public java.lang.String lowerCase(java.lang.String s) {
 		return StringUtil.lowerCase(s);
+	}
+
+	public void lowerCase(java.lang.String... array) {
+		StringUtil.lowerCase(array);
 	}
 
 	public boolean matches(java.lang.String s, java.lang.String pattern) {

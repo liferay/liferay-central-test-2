@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,13 +29,16 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class StringTemplateLoader implements TemplateLoader {
 
+	@Override
 	public void closeTemplateSource(Object templateSource) {
 	}
 
+	@Override
 	public Object findTemplateSource(String name) {
 		return _templates.get(name);
 	}
 
+	@Override
 	public long getLastModified(Object templateSource) {
 		StringTemplateSource stringTemplateSource =
 			(StringTemplateSource)templateSource;
@@ -43,6 +46,7 @@ public class StringTemplateLoader implements TemplateLoader {
 		return stringTemplateSource._lastModified;
 	}
 
+	@Override
 	public Reader getReader(Object templateSource, String encoding) {
 		StringTemplateSource stringTemplateSource =
 			(StringTemplateSource)templateSource;

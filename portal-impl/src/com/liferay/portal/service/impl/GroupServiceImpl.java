@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,6 +79,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         valid friendly URL could not be created for the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group addGroup(
 			long liveGroupId, String name, String description, int type,
 			String friendlyURL, boolean site, boolean active,
@@ -114,6 +115,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         valid friendly URL could not be created for the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group addGroup(
 			String name, String description, int type, String friendlyURL,
 			boolean site, boolean active, ServiceContext serviceContext)
@@ -136,6 +138,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
@@ -161,6 +164,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         could not be found, or if the group was a system group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
 
@@ -180,6 +184,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group getGroup(long groupId)
 		throws PortalException, SystemException {
 
@@ -199,6 +204,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         current user did not have permission to view the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group getGroup(long companyId, String name)
 		throws PortalException, SystemException {
 
@@ -222,6 +228,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getManageableSites(Collection<Portlet> portlets, int max)
 		throws PortalException, SystemException {
 
@@ -279,6 +286,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getOrganizationsGroups(List<Organization> organizations)
 		throws PortalException, SystemException {
 
@@ -298,6 +306,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         current user did not have permission to view the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group getUserGroup(long companyId, long userId)
 		throws PortalException, SystemException {
 
@@ -318,6 +327,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserGroupsGroups(List<UserGroup> userGroups)
 		throws PortalException, SystemException {
 
@@ -351,6 +361,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         or if another portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserOrganizationsGroups(
 			long userId, int start, int end)
 		throws PortalException, SystemException {
@@ -361,6 +372,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		return filterGroups(groups);
 	}
 
+	@Override
 	public List<Group> getUserPlaces(
 			long userId, String[] classNames, boolean includeControlPanel,
 			int max)
@@ -408,11 +420,24 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 				user.getCompanyId(), organizationParams, start, end);
 
 			for (Organization organization : userOrgs) {
-				userPlaces.add(0, organization.getGroup());
+				if (!organization.hasPrivateLayouts() &&
+					!organization.hasPublicLayouts()) {
+
+					userPlaces.remove(organization.getGroup());
+				}
+				else {
+					userPlaces.add(0, organization.getGroup());
+				}
 
 				if (!PropsValues.ORGANIZATIONS_MEMBERSHIP_STRICT) {
 					for (Organization ancestorOrganization :
 							organization.getAncestors()) {
+
+						if (!organization.hasPrivateLayouts() &&
+							!organization.hasPublicLayouts()) {
+
+							continue;
+						}
 
 						userPlaces.add(0, ancestorOrganization.getGroup());
 					}
@@ -485,6 +510,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserPlaces(long userId, String[] classNames, int max)
 		throws PortalException, SystemException {
 
@@ -515,6 +541,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserPlaces(String[] classNames, int max)
 		throws PortalException, SystemException {
 
@@ -530,6 +557,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> getUserSites() throws PortalException, SystemException {
 		return getUserPlaces(null, QueryUtil.ALL_POS);
 	}
@@ -543,8 +571,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @param  groupId the primary key of the group
 	 * @return <code>true</code> if the user is associated with the group;
 	 *         <code>false</code> otherwise
+	 * @throws PortalException if the current user did not have permission to
+	 *         view the user or group members
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasUserGroup(long userId, long groupId)
 		throws PortalException, SystemException {
 
@@ -552,7 +583,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			UserPermissionUtil.check(
 				getPermissionChecker(), userId, ActionKeys.VIEW);
 		}
-		catch (PrincipalException e) {
+		catch (PrincipalException pe) {
 			GroupPermissionUtil.check(
 				getPermissionChecker(), groupId, ActionKeys.VIEW_MEMBERS);
 		}
@@ -593,10 +624,15 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<Group> search(
 			long companyId, String name, String description, String[] params,
 			int start, int end)
 		throws PortalException, SystemException {
+
+		if (params == null) {
+			params = new String[0];
+		}
 
 		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
 			params);
@@ -625,9 +661,14 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @return the number of matching groups
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int searchCount(
 			long companyId, String name, String description, String[] params)
 		throws SystemException {
+
+		if (params == null) {
+			params = new String[0];
+		}
 
 		LinkedHashMap<String, Object> paramsObj = MapUtil.toLinkedHashMap(
 			params);
@@ -646,6 +687,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         update the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
@@ -664,6 +706,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unsetRoleGroups(long roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
@@ -685,6 +728,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         a valid friendly URL could not be created for the group
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group updateFriendlyURL(long groupId, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -705,6 +749,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         group or if a group with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group updateGroup(long groupId, String typeSettings)
 		throws PortalException, SystemException {
 
@@ -735,6 +780,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 *         friendly URL was invalid or could one not be created
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active, ServiceContext serviceContext)

@@ -4,7 +4,17 @@
 	<import file="../../build-test.xml" />
 
 	<target name="test-${test.ant.script.command}-geronimo-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -15,6 +25,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -25,13 +37,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-glassfish-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -42,6 +66,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -52,13 +78,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-jboss-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -69,6 +107,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -79,13 +119,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-jetty-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -96,6 +148,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -106,13 +160,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-jonas-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -123,6 +189,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -133,12 +201,22 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-db2-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="db2" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -146,7 +224,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-db2">
+		<antcall target="prepare-common">
+			<param name="database" value="db2" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -157,6 +237,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -167,6 +249,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -177,7 +261,17 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-hsql-firefox">
-		<antcall target="prepare-hsql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="hsql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="hsql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -188,6 +282,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -198,13 +294,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -215,6 +323,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -225,13 +335,25 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-mysql-google-chrome">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -242,6 +364,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.browser" value="googlechrome" />
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
@@ -253,6 +377,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.browser" value="googlechrome" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
@@ -260,7 +386,17 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-mysql-internet-explorer">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -271,6 +407,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.browser" value="iehta" />
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
@@ -282,6 +420,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.browser" value="iehta" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
@@ -289,6 +429,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-oracle-10-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="oracle-10" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -296,7 +444,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-oracle-10">
+		<antcall target="prepare-common">
+			<param name="database" value="oracle-10" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -307,6 +457,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -317,6 +469,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -327,6 +481,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-oracle-11-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="oracle-11" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -334,7 +496,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-oracle-11">
+		<antcall target="prepare-common">
+			<param name="database" value="oracle-11" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -345,6 +509,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -355,6 +521,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -365,6 +533,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-8.4-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="postgresql-8.4" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -372,7 +548,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-postgresql-8.4">
+		<antcall target="prepare-common">
+			<param name="database" value="postgresql-8.4" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -383,6 +561,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -393,6 +573,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -403,6 +585,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-postgresql-9.0-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="postgresql-9.0" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -410,7 +600,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-postgresql-9.0">
+		<antcall target="prepare-common">
+			<param name="database" value="postgresql-9.0" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -421,6 +613,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -431,6 +625,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -441,6 +637,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-2005-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sql-server-2005" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -448,7 +652,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-sql-server-2005">
+		<antcall target="prepare-common">
+			<param name="database" value="sql-server-2005" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -459,6 +665,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -469,6 +677,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -479,6 +689,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sql-server-2008-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sql-server-2008" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -486,7 +704,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-sql-server-2008">
+		<antcall target="prepare-common">
+			<param name="database" value="sql-server-2008" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -497,6 +717,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -507,6 +729,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -517,6 +741,14 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-tomcat-sybase-firefox">
+		<antcall target="generate-test-properties">
+			<param name="database" value="sybase" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
 		<antcall target="prepare-vm-server">
 			<param name="build.war" value="false" />
 			<param name="skip.prepare-bundle" value="true" />
@@ -524,7 +756,9 @@
 			<param name="vm.host" value="${vm.db.host}" />
 		</antcall>
 
-		<antcall target="prepare-sybase">
+		<antcall target="prepare-common">
+			<param name="database" value="sybase" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
@@ -535,6 +769,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
@@ -545,6 +781,8 @@
 			${test.ant.script.file.plugin.portlets.properties}
 			${test.ant.script.file.plugin.themes}
 			${test.ant.script.file.plugin.webs}
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
@@ -555,60 +793,116 @@
 	</target>
 
 	<target name="test-${test.ant.script.command}-weblogic-10.3-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
 		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
 		<ant antfile="build-test-weblogic-10.3.xml" target="run-selenium-weblogic-10.3">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-6.1-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
 		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
 		<ant antfile="build-test-websphere-6.1.xml" target="run-selenium-websphere-6.1">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-7.0-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
 		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
 		<ant antfile="build-test-websphere-7.0.xml" target="run-selenium-websphere-7.0">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>
 	</target>
 
 	<target name="test-${test.ant.script.command}-websphere-8.0-mysql-firefox">
-		<antcall target="prepare-mysql">
+		<antcall target="generate-test-properties">
+			<param name="database" value="mysql" />
+		</antcall>
+
+		<antcall target="print-scm-revision" />
+
+		<antcall target="clean-up-test-properties" />
+
+		<antcall target="prepare-common">
+			<param name="database" value="mysql" />
+			<param name="setup.wizard.enabled" value="${test.ant.script.setup.wizard.enabled}" />
 			${test.ant.script.file.properties}
 		</antcall>
 
 		<ant antfile="build-test-websphere-8.0.xml" target="run-selenium-websphere-8.0">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="test.name" value="${test.ant.script.suite.1}" />
 		</ant>
 
 		<ant antfile="build-test-websphere-8.0.xml" target="run-selenium-websphere-8.0">
+			${test.ant.script.file.selenium.implementation}
+			${test.ant.script.file.selenium.logger.enabled}
 			<property name="skip.delete-selenium-output" value="true" />
 			<property name="test.name" value="${test.ant.script.suite.2}" />
 		</ant>

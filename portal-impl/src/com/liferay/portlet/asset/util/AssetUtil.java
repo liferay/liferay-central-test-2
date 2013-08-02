@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbEntry;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -58,9 +57,9 @@ public class AssetUtil {
 		CharPool.COLON, CharPool.COMMA, CharPool.EQUAL, CharPool.GREATER_THAN,
 		CharPool.FORWARD_SLASH, CharPool.LESS_THAN, CharPool.NEW_LINE,
 		CharPool.OPEN_BRACKET, CharPool.OPEN_CURLY_BRACE, CharPool.PERCENT,
-		CharPool.PIPE, CharPool.PLUS, CharPool.POUND, CharPool.QUESTION,
-		CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON, CharPool.SLASH,
-		CharPool.STAR, CharPool.TILDE
+		CharPool.PIPE, CharPool.PLUS, CharPool.POUND, CharPool.PRIME,
+		CharPool.QUESTION, CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON,
+		CharPool.SLASH, CharPool.STAR, CharPool.TILDE
 	};
 
 	public static Set<String> addLayoutTags(
@@ -91,35 +90,16 @@ public class AssetUtil {
 			portletURL.setParameter("categoryId", String.valueOf(
 				ancestorCategory.getCategoryId()));
 
-			addPortletBreadcrumbEntry(
+			PortalUtil.addPortletBreadcrumbEntry(
 				request, ancestorCategory.getTitleCurrentValue(),
 				portletURL.toString());
 		}
 
 		portletURL.setParameter("categoryId", String.valueOf(assetCategoryId));
 
-		addPortletBreadcrumbEntry(
+		PortalUtil.addPortletBreadcrumbEntry(
 			request, assetCategory.getTitleCurrentValue(),
 			portletURL.toString());
-	}
-
-	public static void addPortletBreadcrumbEntry(
-			HttpServletRequest request, String title, String url)
-		throws Exception {
-
-		List<BreadcrumbEntry> breadcrumbEntries =
-			(List<BreadcrumbEntry>)request.getAttribute(
-				WebKeys.PORTLET_BREADCRUMBS);
-
-		if (breadcrumbEntries != null) {
-			for (BreadcrumbEntry breadcrumbEntry : breadcrumbEntries) {
-				if (title.equals(breadcrumbEntry.getTitle())) {
-					return;
-				}
-			}
-		}
-
-		PortalUtil.addPortletBreadcrumbEntry(request, title, url);
 	}
 
 	public static String getAssetKeywords(String className, long classPK)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,10 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -36,6 +39,8 @@ public abstract class BaseDLAppTestCase {
 
 	@Before
 	public void setUp() throws Exception {
+		group = ServiceTestUtil.addGroup();
+
 		parentFolder = addFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test Folder", true);
 	}
@@ -45,6 +50,39 @@ public abstract class BaseDLAppTestCase {
 		if (parentFolder != null) {
 			DLAppServiceUtil.deleteFolder(parentFolder.getFolderId());
 		}
+	}
+
+	protected DLFileRank addDLFileRank(long fileEntryId) throws Exception {
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		return DLAppLocalServiceUtil.addFileRank(
+			group.getGroupId(), TestPropsValues.getCompanyId(),
+			TestPropsValues.getUserId(), fileEntryId, serviceContext);
+	}
+
+	protected DLFileShortcut addDLFileShortcut(FileEntry fileEntry)
+		throws Exception {
+
+		return addDLFileShortcut(fileEntry, fileEntry.getFolderId());
+	}
+
+	protected DLFileShortcut addDLFileShortcut(
+			FileEntry fileEntry, long folderId)
+		throws Exception {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(group.getGroupId());
+
+		return DLAppServiceUtil.addFileShortcut(
+			group.getGroupId(), folderId, fileEntry.getFileEntryId(),
+			serviceContext);
 	}
 
 	protected FileEntry addFileEntry(boolean rootFolder, String fileName)
@@ -83,6 +121,16 @@ public abstract class BaseDLAppTestCase {
 			long folderId, String sourceFileName, String title, byte[] bytes)
 		throws Exception {
 
+		return addFileEntry(
+			folderId, sourceFileName, title, bytes,
+			WorkflowConstants.ACTION_PUBLISH);
+	}
+
+	protected FileEntry addFileEntry(
+			long folderId, String sourceFileName, String title, byte[] bytes,
+			int workflowAction)
+		throws Exception {
+
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 
@@ -95,8 +143,11 @@ public abstract class BaseDLAppTestCase {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 
+		serviceContext.setScopeGroupId(group.getGroupId());
+		serviceContext.setWorkflowAction(workflowAction);
+
 		return DLAppServiceUtil.addFileEntry(
-			TestPropsValues.getGroupId(), folderId, sourceFileName,
+			group.getGroupId(), folderId, sourceFileName,
 			ContentTypes.TEXT_PLAIN, title, description, changeLog, bytes,
 			serviceContext);
 	}
@@ -153,18 +204,19 @@ public abstract class BaseDLAppTestCase {
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(group.getGroupId());
 
 		if (deleteExisting) {
 			try {
 				DLAppServiceUtil.deleteFolder(
-					TestPropsValues.getGroupId(), parentFolderId, name);
+					group.getGroupId(), parentFolderId, name);
 			}
 			catch (NoSuchFolderException nsfe) {
 			}
 		}
 
 		return DLAppServiceUtil.addFolder(
-			TestPropsValues.getGroupId(), parentFolderId, name, description,
+			group.getGroupId(), parentFolderId, name, description,
 			serviceContext);
 	}
 
@@ -186,13 +238,16 @@ public abstract class BaseDLAppTestCase {
 		byte[] bytes = null;
 
 		if (Validator.isNotNull(sourceFileName)) {
-			bytes = CONTENT.getBytes();
+			String newContent = CONTENT + "\n" + System.currentTimeMillis();
+
+			bytes = newContent.getBytes();
 		}
 
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
+		serviceContext.setScopeGroupId(group.getGroupId());
 
 		return DLAppServiceUtil.updateFileEntry(
 			fileEntryId, sourceFileName, ContentTypes.TEXT_PLAIN, title,
@@ -202,6 +257,7 @@ public abstract class BaseDLAppTestCase {
 	protected static final String CONTENT =
 		"Content: Enterprise. Open Source. For Life.";
 
+	protected Group group;
 	protected Folder parentFolder;
 
 }

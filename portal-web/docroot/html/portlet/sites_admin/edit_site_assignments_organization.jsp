@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -52,7 +52,7 @@ if (group.isOrganization()) {
 			>
 
 				<%
-				LinkedHashMap userParams = new LinkedHashMap();
+				LinkedHashMap<String, Object> userParams = new LinkedHashMap<String, Object>();
 
 				userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 

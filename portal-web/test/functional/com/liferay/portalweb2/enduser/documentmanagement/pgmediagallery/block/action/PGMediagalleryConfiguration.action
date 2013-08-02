@@ -1,0 +1,16 @@
+<definition>
+	<command name="check">
+		<case locator-key1="MG_DISPLAY_SETTINGS_SHOW_ACTIONS_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="MG_DISPLAY_SETTINGS_SHOW_FOLDER_MENU_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="MG_DISPLAY_SETTINGS_SHOW_NAVIGATION_LINKS_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+		<case locator-key1="MG_DISPLAY_SETTINGS_SHOW_SEARCH_CHECKBOX">
+			<execute function="Check#clickAtConfiguration" />
+		</case>
+	</command>
+</definition>

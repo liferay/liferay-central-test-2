@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.image.ImageToolUtil;
 import com.liferay.portal.kernel.image.SpriteProcessor;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.servlet.ServletContextUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
@@ -67,8 +68,10 @@ import org.geotools.image.ImageWorker;
 /**
  * @author Brian Wing Shun Chan
  */
+@DoPrivileged
 public class SpriteProcessorImpl implements SpriteProcessor {
 
+	@Override
 	public Properties generate(
 			ServletContext servletContext, List<File> imageFiles,
 			String spriteFileName, String spritePropertiesFileName,
@@ -361,7 +364,7 @@ public class SpriteProcessorImpl implements SpriteProcessor {
 			"filestore", tiledImage, "test.png", "PNG");
 
 		printImage(renderedImage);
-		printImage(tiledImage);}*/
+		printImage(tiledImage);*/
 
 		return tiledImage;
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,7 +14,7 @@
 
 package com.liferay.portal.freemarker;
 
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.core.Environment;
@@ -29,6 +29,7 @@ import freemarker.template.utility.ObjectConstructor;
  */
 public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
+	@Override
 	public Class<?> resolve(
 			String className, Environment environment, Template template)
 		throws TemplateException {
@@ -64,7 +65,7 @@ public class LiferayTemplateClassResolver implements TemplateClassResolver {
 
 		try {
 			return Class.forName(
-				className, true, PACLClassLoaderUtil.getContextClassLoader());
+				className, true, ClassLoaderUtil.getContextClassLoader());
 		}
 		catch (Exception e) {
 			throw new TemplateException(e, environment);

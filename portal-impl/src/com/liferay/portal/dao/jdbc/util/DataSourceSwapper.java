@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.dao.jdbc.DataSourceFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.spring.hibernate.PortalHibernateConfiguration;
 import com.liferay.portal.spring.hibernate.PortletHibernateConfiguration;
 import com.liferay.portal.spring.jpa.LocalContainerEntityManagerFactoryBean;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
@@ -211,20 +211,19 @@ public class DataSourceSwapper {
 		for (PortletSessionFactoryImpl portletSessionFactoryImpl :
 				portletSessionFactoryImpls) {
 
-			ClassLoader oldPortletClassLoader =
-				PortletClassLoaderUtil.getClassLoader();
-
-			ClassLoader portletClassLoader =
-				portletSessionFactoryImpl.getSessionFactoryClassLoader();
-
-			PortletClassLoaderUtil.setClassLoader(portletClassLoader);
-
+			ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 			ClassLoader contextClassLoader =
-				PACLClassLoaderUtil.getContextClassLoader();
-
-			PACLClassLoaderUtil.setContextClassLoader(portletClassLoader);
+				ClassLoaderUtil.getContextClassLoader();
 
 			try {
+				ClassLoader sessionFactoryClassLoader =
+					portletSessionFactoryImpl.getSessionFactoryClassLoader();
+
+				PortletClassLoaderUtil.setClassLoader(
+					sessionFactoryClassLoader);
+				ClassLoaderUtil.setContextClassLoader(
+					sessionFactoryClassLoader);
+
 				PortletHibernateConfiguration portletHibernateConfiguration =
 					new PortletHibernateConfiguration();
 
@@ -240,9 +239,8 @@ public class DataSourceSwapper {
 					sessionFactoryImplementor);
 			}
 			finally {
-				PortletClassLoaderUtil.setClassLoader(oldPortletClassLoader);
-
-				PACLClassLoaderUtil.setContextClassLoader(contextClassLoader);
+				PortletClassLoaderUtil.setClassLoader(classLoader);
+				ClassLoaderUtil.setContextClassLoader(contextClassLoader);
 			}
 		}
 	}

@@ -1,0 +1,112 @@
+<html>
+<head>
+<title>SOUserBar</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">SOUserBar</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>SOUserBar</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>DASHBOARD</td>
+	<td>//a[contains(text(),'Dashboard')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GO_TO</td>
+	<td>//li[@id='_145_mySites']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NOTIFICATION</td>
+	<td>//li[@id='_145_notificationsMenu']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_NAME</td>
+	<td>//li[@id='_145_userMenu']/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--GO_TO-->
+<tr>
+	<td>GO_TO_CONTROL_PANEL</td>
+	<td>//li[contains(@class,'control-panel')]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>GO_TO_SITES_DIRECTORY</td>
+	<td>//span[@class='site-name' and contains(.,'Sites Directory')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NOTIFICATION_MENU-->
+<tr>
+	<td>NOTIFICATION_MENU_COUNT</td>
+	<td>//span[@class='notification-count']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NOTIFICATION_MENU_ENTRY_SENDER</td>
+	<td>//div[@class='notification-entry']/div/span/a</td>
+	<td>Joe Bloggs</td>
+</tr>
+<tr>
+	<td>NOTIFICATION_MENU_ENTRY_CONTENT</td>
+	<td>//div[@class='notification-entry']/div/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NOTIFICATION_MENU_CONFIRM</td>
+	<td>//span[contains(@class,'user-action-confirm')]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NOTIFICATION_MENU_IGNORE</td>
+	<td>//span[contains(@class,'user-action-ignore')]/a</td>
+	<td>Ignore</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--USER_MENU-->
+<tr>
+	<td>USER_MENU_MY_PROFILE</td>
+	<td>//div[@id='_145_userMenuContent']/ul/li/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_MENU_MY_ACCOUNT</td>
+	<td>//div[@id='_145_userMenuContent']/ul/li[2]/span/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>USER_MENU_SIGN_OUT</td>
+	<td>//div[@id='_145_userMenuContent']/ul/li/a[contains(.,'Sign Out')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

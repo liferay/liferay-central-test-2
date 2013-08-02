@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -44,8 +44,9 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 
 	<liferay-ui:header
 		backURL="<%= redirect %>"
+		escapeXml="<%= false %>"
 		localizeTitle="<%= false %>"
-		title='<%= LanguageUtil.format(pageContext, "reply-membership-request-for-x", group.getDescriptiveName(locale)) %>'
+		title='<%= LanguageUtil.format(pageContext, "reply-membership-request-for-x", HtmlUtil.escape(group.getDescriptiveName(locale))) %>'
 	/>
 
 	<liferay-ui:error exception="<%= DuplicateGroupException.class %>" message="please-enter-a-unique-name" />
@@ -58,7 +59,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 	<aui:fieldset>
 		<c:if test="<%= Validator.isNotNull(group.getDescription()) %>">
 			<aui:field-wrapper label="description">
-				<%= group.getDescription() %>
+				<%= HtmlUtil.escape(group.getDescription()) %>
 			</aui:field-wrapper>
 		</c:if>
 
@@ -67,7 +68,7 @@ MembershipRequest membershipRequest = (MembershipRequest)request.getAttribute(We
 		</aui:field-wrapper>
 
 		<aui:field-wrapper label="user-comments">
-			<%= membershipRequest.getComments() %>
+			<%= HtmlUtil.escape(membershipRequest.getComments()) %>
 		</aui:field-wrapper>
 
 		<aui:select label="status" name="statusId">

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.lang.reflect.Constructor;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -77,7 +76,7 @@ public class MapUtil {
 	public static long getLong(
 		Map<Long, Long> map, long key, long defaultValue) {
 
-		Long value = map.get(new Long(key));
+		Long value = map.get(key);
 
 		if (value == null) {
 			return defaultValue;
@@ -155,8 +154,8 @@ public class MapUtil {
 
 		LinkedHashMap<String, Object> map = new LinkedHashMap<String, Object>();
 
-		for (int i = 0; i < params.length; i++) {
-			String[] kvp = StringUtil.split(params[i], delimiter);
+		for (String param : params) {
+			String[] kvp = StringUtil.split(param, delimiter);
 
 			if (kvp.length == 2) {
 				map.put(kvp[0], kvp[1]);
@@ -167,7 +166,7 @@ public class MapUtil {
 				if (type.equalsIgnoreCase("boolean") ||
 					type.equals(Boolean.class.getName())) {
 
-					map.put(kvp[0], new Boolean(kvp[1]));
+					map.put(kvp[0], Boolean.valueOf(kvp[1]));
 				}
 				else if (type.equalsIgnoreCase("double") ||
 						 type.equals(Double.class.getName())) {
@@ -197,7 +196,7 @@ public class MapUtil {
 						Class<?> clazz = Class.forName(type);
 
 						Constructor<?> constructor = clazz.getConstructor(
-							new Class<?>[] {String.class});
+							String.class);
 
 						map.put(kvp[0], constructor.newInstance(kvp[1]));
 					}
@@ -208,24 +207,43 @@ public class MapUtil {
 			}
 		}
 
-		return (LinkedHashMap<String, T>) map;
+		return (LinkedHashMap<String, T>)map;
 	}
 
 	public static String toString(Map<?, ?> map) {
+		return toString(map, null, null);
+	}
+
+	public static String toString(
+		Map<?, ?> map, String hideIncludesRegex, String hideExcludesRegex) {
+
+		if ((map == null) || map.isEmpty()) {
+			return StringPool.OPEN_CURLY_BRACE + StringPool.CLOSE_CURLY_BRACE;
+		}
+
 		StringBundler sb = new StringBundler(map.size() * 4 + 1);
 
 		sb.append(StringPool.OPEN_CURLY_BRACE);
 
-		Iterator<?> itr = map.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry =
-				(Map.Entry<Object, Object>)itr.next();
-
+		for (Map.Entry<?, ?> entry : map.entrySet()) {
 			Object key = entry.getKey();
 			Object value = entry.getValue();
 
-			sb.append(key);
+			String keyString = String.valueOf(key);
+
+			if (hideIncludesRegex != null) {
+				if (!keyString.matches(hideIncludesRegex)) {
+					value = "********";
+				}
+			}
+
+			if (hideExcludesRegex != null) {
+				if (keyString.matches(hideExcludesRegex)) {
+					value = "********";
+				}
+			}
+
+			sb.append(keyString);
 			sb.append(StringPool.EQUAL);
 
 			if (value instanceof Map<?, ?>) {
@@ -243,12 +261,10 @@ public class MapUtil {
 				sb.append(value);
 			}
 
-			if (itr.hasNext()) {
-				sb.append(StringPool.COMMA_AND_SPACE);
-			}
+			sb.append(StringPool.COMMA_AND_SPACE);
 		}
 
-		sb.append(StringPool.CLOSE_CURLY_BRACE);
+		sb.setStringAt(StringPool.CLOSE_CURLY_BRACE, sb.index() - 1);
 
 		return sb.toString();
 	}

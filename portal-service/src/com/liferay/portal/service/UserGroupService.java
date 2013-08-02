@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -154,6 +154,8 @@ public interface UserGroupService extends BaseService {
 	*
 	* @param userId the primary key of the user
 	* @return the user groups to which the user belongs
+	* @throws PortalException if the current user did not have permission to
+	view the user or any one of the user group members
 	* @throws SystemException if a system exception occurred
 	*/
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

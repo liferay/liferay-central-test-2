@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,8 +32,10 @@ import com.liferay.portal.kernel.search.facet.Facet;
 import com.liferay.portal.kernel.search.facet.ScopeFacet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
@@ -55,15 +57,12 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.wiki.model.WikiPage;
-
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -72,6 +71,7 @@ import java.util.Map;
  */
 public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
+	@Override
 	public void deleteEntry(AssetEntry entry)
 		throws PortalException, SystemException {
 
@@ -100,6 +100,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		socialActivityLocalService.deleteActivities(entry);
 	}
 
+	@Override
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -108,6 +109,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		deleteEntry(entry);
 	}
 
+	@Override
 	public void deleteEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -121,10 +123,19 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public AssetEntry fetchEntry(long entryId) throws SystemException {
 		return assetEntryPersistence.fetchByPrimaryKey(entryId);
 	}
 
+	@Override
+	public AssetEntry fetchEntry(long groupId, String classUuid)
+		throws SystemException {
+
+		return assetEntryPersistence.fetchByG_CU(groupId, classUuid);
+	}
+
+	@Override
 	public AssetEntry fetchEntry(String className, long classPK)
 		throws SystemException {
 
@@ -133,6 +144,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.fetchByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public List<AssetEntry> getAncestorEntries(long entryId)
 		throws PortalException, SystemException {
 
@@ -149,6 +161,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entries;
 	}
 
+	@Override
 	public List<AssetEntry> getChildEntries(long entryId)
 		throws PortalException, SystemException {
 
@@ -166,6 +179,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entries;
 	}
 
+	@Override
 	public List<AssetEntry> getCompanyEntries(
 			long companyId, int start, int end)
 		throws SystemException {
@@ -173,34 +187,40 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByCompanyId(companyId, start, end);
 	}
 
+	@Override
 	public int getCompanyEntriesCount(long companyId) throws SystemException {
 		return assetEntryPersistence.countByCompanyId(companyId);
 	}
 
+	@Override
 	public List<AssetEntry> getEntries(AssetEntryQuery entryQuery)
 		throws SystemException {
 
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
+	@Override
 	public int getEntriesCount(AssetEntryQuery entryQuery)
 		throws SystemException {
 
 		return assetEntryFinder.countEntries(entryQuery);
 	}
 
+	@Override
 	public AssetEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 
 		return assetEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	@Override
 	public AssetEntry getEntry(long groupId, String classUuid)
 		throws PortalException, SystemException {
 
 		return assetEntryPersistence.findByG_CU(groupId, classUuid);
 	}
 
+	@Override
 	public AssetEntry getEntry(String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -209,6 +229,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
+	@Override
 	public AssetEntry getNextEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -246,6 +267,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throw new NoSuchEntryException();
 	}
 
+	@Override
 	public AssetEntry getParentEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -261,6 +283,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return getEntry(link.getEntryId1());
 	}
 
+	@Override
 	public AssetEntry getPreviousEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -287,6 +310,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throw new NoSuchEntryException();
 	}
 
+	@Override
 	public List<AssetEntry> getTopViewedEntries(
 			String className, boolean asc, int start, int end)
 		throws SystemException {
@@ -294,6 +318,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return getTopViewedEntries(new String[] {className}, asc, start, end);
 	}
 
+	@Override
 	public List<AssetEntry> getTopViewedEntries(
 			String[] className, boolean asc, int start, int end)
 		throws SystemException {
@@ -316,7 +341,29 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return assetEntryFinder.findEntries(entryQuery);
 	}
 
+	@Override
+	public AssetEntry incrementViewCounter(
+			long userId, String className, long classPK)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		assetEntryLocalService.incrementViewCounter(
+			user.getUserId(), className, classPK, 1);
+
+		AssetEntry assetEntry = getEntry(className, classPK);
+
+		if (!user.isDefaultUser()) {
+			socialActivityLocalService.addActivity(
+				user.getUserId(), assetEntry.getGroupId(), className, classPK,
+				SocialActivityConstants.TYPE_VIEW, StringPool.BLANK, 0);
+		}
+
+		return assetEntry;
+	}
+
 	@BufferedIncrement(incrementClass = NumberIncrement.class)
+	@Override
 	public AssetEntry incrementViewCounter(
 			long userId, String className, long classPK, int increment)
 		throws SystemException {
@@ -345,6 +392,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public void reindex(List<AssetEntry> entries) throws PortalException {
 		for (AssetEntry entry : entries) {
 			String className = PortalUtil.getClassName(entry.getClassNameId());
@@ -355,9 +403,25 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #search(long, long[], long, String, String, int, int,
+	 *             int)}
+	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String keywords, int start, int end)
+		throws SystemException {
+
+		return search(
+			companyId, groupIds, userId, className, keywords,
+			WorkflowConstants.STATUS_ANY, start, end);
+	}
+
+	@Override
+	public Hits search(
+			long companyId, long[] groupIds, long userId, String className,
+			String keywords, int status, int start, int end)
 		throws SystemException {
 
 		try {
@@ -376,6 +440,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.addFacet(scopeFacet);
 
 			searchContext.setAttribute("paginationType", "regular");
+			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(getClassNames(className));
@@ -401,6 +466,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #search(long, long[], long, String, String, String,
+	 *             String, String, String, int, boolean, int, int)}
+	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
 			String userName, String title, String description,
@@ -408,15 +478,21 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			int start, int end)
 		throws SystemException {
 
+		return search(
+			companyId, groupIds, userId, className, userName, title,
+			description, assetCategoryIds, assetTagNames,
+			WorkflowConstants.STATUS_ANY, andSearch, start, end);
+	}
+
+	@Override
+	public Hits search(
+			long companyId, long[] groupIds, long userId, String className,
+			String userName, String title, String description,
+			String assetCategoryIds, String assetTagNames, int status,
+			boolean andSearch, int start, int end)
+		throws SystemException {
+
 		try {
-			Map<String, Serializable> attributes =
-				new HashMap<String, Serializable>();
-
-			attributes.put(Field.DESCRIPTION, description);
-			attributes.put(Field.TITLE, title);
-			attributes.put(Field.USER_NAME, userName);
-			attributes.put("paginationType", "regular");
-
 			SearchContext searchContext = new SearchContext();
 
 			Facet assetEntriesFacet = new AssetEntriesFacet(searchContext);
@@ -435,7 +511,11 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAssetCategoryIds(
 				StringUtil.split(assetCategoryIds, 0L));
 			searchContext.setAssetTagNames(StringUtil.split(assetTagNames));
-			searchContext.setAttributes(attributes);
+			searchContext.setAttribute(Field.DESCRIPTION, description);
+			searchContext.setAttribute(Field.TITLE, title);
+			searchContext.setAttribute(Field.USER_NAME, userName);
+			searchContext.setAttribute("paginationType", "regular");
+			searchContext.setAttribute("status", status);
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(getClassNames(className));
@@ -460,57 +540,36 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 	}
 
+	/**
+	 * @deprecated {@link #search(long, long[], long, String, String, int, int,
+	 *             int)}
+	 */
+	@Override
 	public Hits search(
 			long companyId, long[] groupIds, String className, String keywords,
 			int start, int end)
 		throws SystemException {
 
-		return search(companyId, groupIds, 0, className, keywords, start, end);
+		return search(
+			companyId, groupIds, 0, className, keywords,
+			WorkflowConstants.STATUS_ANY, start, end);
 	}
 
+	@Override
 	public AssetEntry updateEntry(
-			long userId, long groupId, String className, long classPK,
-			long[] categoryIds, String[] tagNames)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		AssetEntry entry = assetEntryPersistence.fetchByC_C(
-			classNameId, classPK);
-
-		if (entry != null) {
-			return updateEntry(
-				userId, groupId, className, classPK, entry.getClassUuid(),
-				entry.getClassTypeId(), categoryIds, tagNames,
-				entry.isVisible(), entry.getStartDate(), entry.getEndDate(),
-				entry.getPublishDate(), entry.getExpirationDate(),
-				entry.getMimeType(), entry.getTitle(), entry.getDescription(),
-				entry.getSummary(), entry.getUrl(), entry.getLayoutUuid(),
-				entry.getHeight(), entry.getWidth(),
-				GetterUtil.getInteger(entry.getPriority()), false);
-		}
-
-		return updateEntry(
-			userId, groupId, className, classPK, null, 0, categoryIds, tagNames,
-			true, null, null, null, null, null, null, null, null, null, null, 0,
-			0, null, false);
-	}
-
-	public AssetEntry updateEntry(
-			long userId, long groupId, String className, long classPK,
-			String classUuid, long classTypeId, long[] categoryIds,
-			String[] tagNames, boolean visible, Date startDate, Date endDate,
-			Date publishDate, Date expirationDate, String mimeType,
-			String title, String description, String summary, String url,
-			String layoutUuid, int height, int width, Integer priority,
-			boolean sync)
+			long userId, long groupId, Date createDate, Date modifiedDate,
+			String className, long classPK, String classUuid, long classTypeId,
+			long[] categoryIds, String[] tagNames, boolean visible,
+			Date startDate, Date endDate, Date publishDate, Date expirationDate,
+			String mimeType, String title, String description, String summary,
+			String url, String layoutUuid, int height, int width,
+			Integer priority, boolean sync)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
-		Date now = new Date();
 
 		validate(groupId, className, categoryIds, tagNames);
 
@@ -523,6 +582,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			oldVisible = entry.isVisible();
 		}
 
+		if (modifiedDate == null) {
+			modifiedDate = new Date();
+		}
+
 		if (entry == null) {
 			long entryId = counterLocalService.increment();
 
@@ -531,7 +594,14 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			entry.setCompanyId(user.getCompanyId());
 			entry.setUserId(user.getUserId());
 			entry.setUserName(user.getFullName());
-			entry.setCreateDate(now);
+
+			if (createDate == null) {
+				createDate = new Date();
+			}
+
+			entry.setCreateDate(createDate);
+
+			entry.setModifiedDate(modifiedDate);
 			entry.setClassNameId(classNameId);
 			entry.setClassPK(classPK);
 			entry.setClassUuid(classUuid);
@@ -547,7 +617,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		}
 
 		entry.setGroupId(groupId);
-		entry.setModifiedDate(now);
+		entry.setModifiedDate(modifiedDate);
 		entry.setClassTypeId(classTypeId);
 		entry.setVisible(visible);
 		entry.setStartDate(startDate);
@@ -711,6 +781,61 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
+	public AssetEntry updateEntry(
+			long userId, long groupId, String className, long classPK,
+			long[] categoryIds, String[] tagNames)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		AssetEntry entry = assetEntryPersistence.fetchByC_C(
+			classNameId, classPK);
+
+		if (entry != null) {
+			return updateEntry(
+				userId, groupId, entry.getCreateDate(), entry.getModifiedDate(),
+				className, classPK, entry.getClassUuid(),
+				entry.getClassTypeId(), categoryIds, tagNames,
+				entry.isVisible(), entry.getStartDate(), entry.getEndDate(),
+				entry.getPublishDate(), entry.getExpirationDate(),
+				entry.getMimeType(), entry.getTitle(), entry.getDescription(),
+				entry.getSummary(), entry.getUrl(), entry.getLayoutUuid(),
+				entry.getHeight(), entry.getWidth(),
+				GetterUtil.getInteger(entry.getPriority()), false);
+		}
+
+		return updateEntry(
+			userId, groupId, className, classPK, null, 0, categoryIds, tagNames,
+			true, null, null, null, null, null, null, null, null, null, null, 0,
+			0, null, false);
+	}
+
+	/**
+	 * @deprecated {@link #updateEntry(long, long, Date, Date, String, long,
+	 *             String, long, long[], String[], boolean, Date, Date, Date,
+	 *             Date, String, String, String, String, String, String, int,
+	 *             int, Integer, boolean)}
+	 */
+	@Override
+	public AssetEntry updateEntry(
+			long userId, long groupId, String className, long classPK,
+			String classUuid, long classTypeId, long[] categoryIds,
+			String[] tagNames, boolean visible, Date startDate, Date endDate,
+			Date publishDate, Date expirationDate, String mimeType,
+			String title, String description, String summary, String url,
+			String layoutUuid, int height, int width, Integer priority,
+			boolean sync)
+		throws PortalException, SystemException {
+
+		return updateEntry(
+			userId, groupId, null, null, className, classPK, classUuid,
+			classTypeId, categoryIds, tagNames, visible, startDate, endDate,
+			publishDate, expirationDate, mimeType, title, description, summary,
+			url, layoutUuid, height, width, priority, sync);
+	}
+
+	@Override
 	public AssetEntry updateEntry(
 			String className, long classPK, Date publishDate,
 			Date expirationDate, boolean visible)
@@ -731,6 +856,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public AssetEntry updateVisible(
 			String className, long classPK, boolean visible)
 		throws PortalException, SystemException {
@@ -763,6 +889,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
+	@Override
 	public void validate(
 			long groupId, String className, long[] categoryIds,
 			String[] tagNames)

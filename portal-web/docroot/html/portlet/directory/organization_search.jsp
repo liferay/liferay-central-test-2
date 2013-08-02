@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -62,23 +62,23 @@ String type = displayTerms.getType();
 </liferay-ui:search-toggle>
 
 <%
-Organization organization = null;
+Organization parentOrganization = null;
 
 if (displayTerms.getParentOrganizationId() > 0) {
 	try {
-		organization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getParentOrganizationId());
+		parentOrganization = OrganizationLocalServiceUtil.getOrganization(displayTerms.getParentOrganizationId());
 	}
 	catch (NoSuchOrganizationException nsoe) {
 	}
 }
 %>
 
-<c:if test="<%= organization != null %>">
-	<aui:input name="<%= UserDisplayTerms.ORGANIZATION_ID %>" type="hidden" value="<%= organization.getOrganizationId() %>" />
+<c:if test="<%= parentOrganization != null %>">
+	<aui:input name="<%= OrganizationDisplayTerms.PARENT_ORGANIZATION_ID %>" type="hidden" value="<%= parentOrganization.getOrganizationId() %>" />
 
 	<br />
 
-	<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(organization.getName()) %><br />
+	<liferay-ui:message key="filter-by-organization" />: <%= HtmlUtil.escape(parentOrganization.getName()) %><br />
 </c:if>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

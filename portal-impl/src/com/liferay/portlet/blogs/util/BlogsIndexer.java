@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +14,12 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
@@ -33,18 +32,17 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.blogs.service.persistence.BlogsEntryActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -61,10 +59,12 @@ public class BlogsIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -77,11 +77,6 @@ public class BlogsIndexer extends BaseIndexer {
 
 		return BlogsEntryPermission.contains(
 			permissionChecker, entryClassPK, ActionKeys.VIEW);
-	}
-
-	@Override
-	public boolean isFilterSearch() {
-		return _FILTER_SEARCH;
 	}
 
 	@Override
@@ -103,23 +98,6 @@ public class BlogsIndexer extends BaseIndexer {
 		}
 	}
 
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId) {
-
-		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(companyIdProperty.eq(companyId));
-
-		Property displayDateProperty = PropertyFactoryUtil.forName(
-			"displayDate");
-
-		dynamicQuery.add(displayDateProperty.lt(new Date()));
-
-		Property statusProperty = PropertyFactoryUtil.forName("status");
-
-		dynamicQuery.add(statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
-	}
-
 	@Override
 	protected void doDelete(Object obj) throws Exception {
 		BlogsEntry entry = (BlogsEntry)obj;
@@ -135,6 +113,7 @@ public class BlogsIndexer extends BaseIndexer {
 
 		document.addText(
 			Field.CONTENT, HtmlUtil.extractText(entry.getContent()));
+		document.addText(Field.DESCRIPTION, entry.getDescription());
 		document.addDate(Field.MODIFIED_DATE, entry.getDisplayDate());
 		document.addText(Field.TITLE, entry.getTitle());
 
@@ -195,80 +174,45 @@ public class BlogsIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexEntries(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			BlogsEntry.class, PACLClassLoaderUtil.getPortalClassLoader());
+	protected void reindexEntries(long companyId)
+		throws PortalException, SystemException {
 
-		Projection minEntryIdProjection = ProjectionFactoryUtil.min("entryId");
-		Projection maxEntryIdProjection = ProjectionFactoryUtil.max("entryId");
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		ActionableDynamicQuery actionableDynamicQuery =
+			new BlogsEntryActionableDynamicQuery() {
 
-		projectionList.add(minEntryIdProjection);
-		projectionList.add(maxEntryIdProjection);
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				Property displayDateProperty = PropertyFactoryUtil.forName(
+					"displayDate");
 
-		dynamicQuery.setProjection(projectionList);
+				dynamicQuery.add(displayDateProperty.lt(new Date()));
 
-		addReindexCriteria(dynamicQuery, companyId);
+				Property statusProperty = PropertyFactoryUtil.forName("status");
 
-		List<Object[]> results = BlogsEntryLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
+				dynamicQuery.add(
+					statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
+			}
 
-		Object[] minAndMaxEntryIds = results.get(0);
+			@Override
+			protected void performAction(Object object) throws PortalException {
+				BlogsEntry entry = (BlogsEntry)object;
 
-		if ((minAndMaxEntryIds[0] == null) || (minAndMaxEntryIds[1] == null)) {
-			return;
-		}
+				Document document = getDocument(entry);
 
-		long minEntryId = (Long)minAndMaxEntryIds[0];
-		long maxEntryId = (Long)minAndMaxEntryIds[1];
+				documents.add(document);
+			}
 
-		long startEntryId = minEntryId;
-		long endEntryId = startEntryId + DEFAULT_INTERVAL;
+		};
 
-		while (startEntryId <= maxEntryId) {
-			reindexEntries(companyId, startEntryId, endEntryId);
+		actionableDynamicQuery.setCompanyId(companyId);
 
-			startEntryId = endEntryId;
-			endEntryId += DEFAULT_INTERVAL;
-		}
-	}
-
-	protected void reindexEntries(
-			long companyId, long startEntryId, long endEntryId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			BlogsEntry.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("entryId");
-
-		dynamicQuery.add(property.ge(startEntryId));
-		dynamicQuery.add(property.lt(endEntryId));
-
-		addReindexCriteria(dynamicQuery, companyId);
-
-		List<BlogsEntry> entries = BlogsEntryLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
-
-		if (entries.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(
-			entries.size());
-
-		for (BlogsEntry entry : entries) {
-			Document document = getDocument(entry);
-
-			documents.add(document);
-		}
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);
 	}
-
-	private static final boolean _FILTER_SEARCH = true;
 
 	private static final boolean _PERMISSION_AWARE = true;
 

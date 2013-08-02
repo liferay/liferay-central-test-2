@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,6 +26,7 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import java.util.List;
 import java.util.Map;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -99,6 +100,20 @@ public class DDLUtil {
 		return getDDL().getTemplateContent(
 			ddmTemplateId, recordSet, themeDisplay, renderRequest,
 			renderResponse);
+	}
+
+	public static boolean isEditable(
+			HttpServletRequest request, String portletId, long groupId)
+		throws Exception {
+
+		return getDDL().isEditable(request, portletId, groupId);
+	}
+
+	public static boolean isEditable(
+			PortletPreferences preferences, String portletId, long groupId)
+		throws Exception {
+
+		return getDDL().isEditable(preferences, portletId, groupId);
 	}
 
 	public static void sendRecordFileUpload(

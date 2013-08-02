@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.security.pacl.permission.PortalSocketPermission;
 
 import java.io.IOException;
 
@@ -67,6 +68,10 @@ public class HttpUtil {
 
 	public static String decodeURL(String url, boolean unescapeSpaces) {
 		return getHttp().decodeURL(url, unescapeSpaces);
+	}
+
+	public static String encodeParameters(String url) {
+		return getHttp().encodeParameters(url);
 	}
 
 	public static String encodePath(String path) {
@@ -252,29 +257,41 @@ public class HttpUtil {
 	public static byte[] URLtoByteArray(Http.Options options)
 		throws IOException {
 
+		PortalSocketPermission.checkConnect(options);
+
 		return getHttp().URLtoByteArray(options);
 	}
 
 	public static byte[] URLtoByteArray(String location) throws IOException {
+		PortalSocketPermission.checkConnect(location);
+
 		return getHttp().URLtoByteArray(location);
 	}
 
 	public static byte[] URLtoByteArray(String location, boolean post)
 		throws IOException {
 
+		PortalSocketPermission.checkConnect(location);
+
 		return getHttp().URLtoByteArray(location, post);
 	}
 
 	public static String URLtoString(Http.Options options) throws IOException {
+		PortalSocketPermission.checkConnect(options);
+
 		return getHttp().URLtoString(options);
 	}
 
 	public static String URLtoString(String location) throws IOException {
+		PortalSocketPermission.checkConnect(location);
+
 		return getHttp().URLtoString(location);
 	}
 
 	public static String URLtoString(String location, boolean post)
 		throws IOException {
+
+		PortalSocketPermission.checkConnect(location);
 
 		return getHttp().URLtoString(location, post);
 	}
@@ -289,6 +306,8 @@ public class HttpUtil {
 	 *         object
 	 */
 	public static String URLtoString(URL url) throws IOException {
+		PortalSocketPermission.checkConnect(url);
+
 		return getHttp().URLtoString(url);
 	}
 

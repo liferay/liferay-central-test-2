@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,14 +33,14 @@ public class PropertyComparator implements Comparator<Object> {
 		this(new String[] {propertyName}, true, false);
 	}
 
-	public PropertyComparator(String[] propertyNames) {
-		this(propertyNames, true, false);
-	}
-
 	public PropertyComparator(
 		String propertyName, boolean ascending, boolean caseSensitive) {
 
 		this(new String[] {propertyName}, ascending, caseSensitive);
+	}
+
+	public PropertyComparator(String[] propertyNames) {
+		this(propertyNames, true, false);
 	}
 
 	public PropertyComparator(
@@ -51,6 +51,7 @@ public class PropertyComparator implements Comparator<Object> {
 		_caseSensitive = caseSensitive;
 	}
 
+	@Override
 	public int compare(Object obj1, Object obj2) {
 		try {
 			for (String propertyName : _propertyNames) {

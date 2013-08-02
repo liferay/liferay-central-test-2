@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -76,7 +76,7 @@ public class OrganizationServiceWrapper implements OrganizationService,
 	* @param name the organization's name
 	* @param type the organization's type
 	* @param recursable whether the permissions of the organization are to be
-	inherited by its sub-organizations
+	inherited by its suborganizations
 	* @param regionId the primary key of the organization's region
 	* @param countryId the primary key of the organization's country
 	* @param statusId the organization's workflow status
@@ -129,7 +129,7 @@ public class OrganizationServiceWrapper implements OrganizationService,
 	* @param name the organization's name
 	* @param type the organization's type
 	* @param recursable whether the permissions of the organization are to be
-	inherited by its sub-organizations
+	inherited by its suborganizations
 	* @param regionId the primary key of the organization's region
 	* @param countryId the primary key of the organization's country
 	* @param statusId the organization's workflow status
@@ -248,6 +248,8 @@ public class OrganizationServiceWrapper implements OrganizationService,
 	* @param name the organization's name
 	* @return the primary key of the organization with the name, or
 	<code>0</code> if the organization could not be found
+	* @throws PortalException if the user did not have permission to view the
+	organization
 	* @throws SystemException if a system exception occurred
 	*/
 	public long getOrganizationId(long companyId, java.lang.String name)
@@ -392,7 +394,7 @@ public class OrganizationServiceWrapper implements OrganizationService,
 	* @param name the organization's name
 	* @param type the organization's type
 	* @param recursable whether the permissions of the organization are to be
-	inherited by its sub-organizations
+	inherited by its suborganizations
 	* @param regionId the primary key of the organization's region
 	* @param countryId the primary key of the organization's country
 	* @param statusId the organization's workflow status
@@ -442,7 +444,7 @@ public class OrganizationServiceWrapper implements OrganizationService,
 	* @param name the organization's name
 	* @param type the organization's type
 	* @param recursable whether permissions of the organization are to be
-	inherited by its sub-organizations
+	inherited by its suborganizations
 	* @param regionId the primary key of the organization's region
 	* @param countryId the primary key of the organization's country
 	* @param statusId the organization's workflow status

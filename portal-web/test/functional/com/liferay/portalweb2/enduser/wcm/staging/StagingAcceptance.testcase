@@ -1,0 +1,114 @@
+<definition>
+	<var name="siteName" value="Liferay" />
+
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+	</set-up>
+
+	<command name="ActivateStaging">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+	</command>
+
+	<command name="DeactivateStaging">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#deactivateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+	</command>
+
+	<command name="EnablePageVersioning">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="${siteName}" />
+			<var name="pageVersioningEnabled" value="true" />
+		</execute>
+	</command>
+
+	<command name="StagingPublishToLive">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="Welcome" />
+			<var name="pageStaging" value="true" />
+		</execute>
+
+		<execute macro="Staging#publishToLiveNowPG">
+			<var name="pageName" value="Welcome" />
+		</execute>
+	</command>
+
+	<command name="StagingAddPortlet">
+		<var name="pageName" value="Blogs Page" />
+		<var name="portletName" value="Blogs" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#activateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="pageStaging" value="true" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="pageStaging" value="true" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageStaging" value="true" />
+		</execute>
+
+		<execute macro="Staging#publishToLiveNowPG" />
+
+		<execute action="Staging#assertClick" locator-key1="LIVE_BUTTON" value1="Live" />
+
+		<var name="key_pageName" value="${pageName}" />
+
+		<execute action="Home#assertClick" locator-key1="PAGE" value1="${pageName}" />
+		<execute action="Home#assertElementPresent" locator-key1="PORTLET_1" />
+	</command>
+
+	<tear-down>
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Site Settings" />
+		</execute>
+
+		<execute macro="Staging#deactivateStagingCP">
+			<var name="siteName" value="${siteName}" />
+		</execute>
+
+		<execute macro="Page#tearDownPG" />
+	</tear-down>
+</definition>

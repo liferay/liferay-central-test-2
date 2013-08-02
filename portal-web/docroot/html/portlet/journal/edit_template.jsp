@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,14 +19,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
-
-if (originalRedirect.equals(StringPool.BLANK)) {
-	originalRedirect = redirect;
-}
-else {
-	redirect = originalRedirect;
-}
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 JournalTemplate template = (JournalTemplate)request.getAttribute(WebKeys.JOURNAL_TEMPLATE);
 
@@ -96,7 +89,7 @@ if (template == null) {
 <aui:form action="<%= editTemplateURL %>" enctype="multipart/form-data" method="post" name="fm1" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveTemplate();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-	<aui:input name="originalRedirect" type="hidden" value="<%= originalRedirect %>" />
+	<aui:input name="referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
 	<aui:input name="groupId" type="hidden" value="<%= groupId %>" />
 	<aui:input name="templateId" type="hidden" value="<%= templateId %>" />
 	<aui:input name="xslContent" type="hidden" value="<%= JS.encodeURIComponent(xsl) %>" />
@@ -322,7 +315,7 @@ if (template == null) {
 		var nameEl = document.getElementById("<portlet:namespace />structureName");
 
 		nameEl.href = "<portlet:renderURL><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>&<portlet:namespace />structureId=" + structureId;
-		nameEl.innerHTML = structureName + "&nbsp;";
+		nameEl.innerHTML = structureName + " ";
 
 		document.getElementById("<portlet:namespace />removeStructureButton").disabled = false;
 
@@ -336,6 +329,7 @@ if (template == null) {
 	Liferay.Util.inlineEditor(
 		{
 			button: '#<portlet:namespace />editorButton',
+			cache: false,
 			id: '<portlet:namespace />xslContentIFrame',
 			textarea: '<portlet:namespace />xslContent',
 			title: '<%= UnicodeLanguageUtil.get(pageContext, "editor") %>',

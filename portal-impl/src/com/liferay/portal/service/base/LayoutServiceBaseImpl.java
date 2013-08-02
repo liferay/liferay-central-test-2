@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -145,7 +145,6 @@ import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
-import com.liferay.portal.service.persistence.LayoutSetBranchFinder;
 import com.liferay.portal.service.persistence.LayoutSetBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
@@ -225,6 +224,9 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
+import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalService;
+import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceService;
+import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleGroupInstancePersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsFinder;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
@@ -1189,25 +1191,6 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	public void setLayoutSetBranchPersistence(
 		LayoutSetBranchPersistence layoutSetBranchPersistence) {
 		this.layoutSetBranchPersistence = layoutSetBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout set branch finder.
-	 *
-	 * @return the layout set branch finder
-	 */
-	public LayoutSetBranchFinder getLayoutSetBranchFinder() {
-		return layoutSetBranchFinder;
-	}
-
-	/**
-	 * Sets the layout set branch finder.
-	 *
-	 * @param layoutSetBranchFinder the layout set branch finder
-	 */
-	public void setLayoutSetBranchFinder(
-		LayoutSetBranchFinder layoutSetBranchFinder) {
-		this.layoutSetBranchFinder = layoutSetBranchFinder;
 	}
 
 	/**
@@ -4004,6 +3987,63 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+	 * Returns the m d r rule group instance local service.
+	 *
+	 * @return the m d r rule group instance local service
+	 */
+	public MDRRuleGroupInstanceLocalService getMDRRuleGroupInstanceLocalService() {
+		return mdrRuleGroupInstanceLocalService;
+	}
+
+	/**
+	 * Sets the m d r rule group instance local service.
+	 *
+	 * @param mdrRuleGroupInstanceLocalService the m d r rule group instance local service
+	 */
+	public void setMDRRuleGroupInstanceLocalService(
+		MDRRuleGroupInstanceLocalService mdrRuleGroupInstanceLocalService) {
+		this.mdrRuleGroupInstanceLocalService = mdrRuleGroupInstanceLocalService;
+	}
+
+	/**
+	 * Returns the m d r rule group instance remote service.
+	 *
+	 * @return the m d r rule group instance remote service
+	 */
+	public MDRRuleGroupInstanceService getMDRRuleGroupInstanceService() {
+		return mdrRuleGroupInstanceService;
+	}
+
+	/**
+	 * Sets the m d r rule group instance remote service.
+	 *
+	 * @param mdrRuleGroupInstanceService the m d r rule group instance remote service
+	 */
+	public void setMDRRuleGroupInstanceService(
+		MDRRuleGroupInstanceService mdrRuleGroupInstanceService) {
+		this.mdrRuleGroupInstanceService = mdrRuleGroupInstanceService;
+	}
+
+	/**
+	 * Returns the m d r rule group instance persistence.
+	 *
+	 * @return the m d r rule group instance persistence
+	 */
+	public MDRRuleGroupInstancePersistence getMDRRuleGroupInstancePersistence() {
+		return mdrRuleGroupInstancePersistence;
+	}
+
+	/**
+	 * Sets the m d r rule group instance persistence.
+	 *
+	 * @param mdrRuleGroupInstancePersistence the m d r rule group instance persistence
+	 */
+	public void setMDRRuleGroupInstancePersistence(
+		MDRRuleGroupInstancePersistence mdrRuleGroupInstancePersistence) {
+		this.mdrRuleGroupInstancePersistence = mdrRuleGroupInstancePersistence;
+	}
+
+	/**
 	 * Returns the ratings stats local service.
 	 *
 	 * @return the ratings stats local service
@@ -4212,8 +4252,6 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	protected LayoutSetBranchService layoutSetBranchService;
 	@BeanReference(type = LayoutSetBranchPersistence.class)
 	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
-	@BeanReference(type = LayoutSetBranchFinder.class)
-	protected LayoutSetBranchFinder layoutSetBranchFinder;
 	@BeanReference(type = LayoutSetPrototypeLocalService.class)
 	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
 	@BeanReference(type = LayoutSetPrototypeService.class)
@@ -4514,6 +4552,12 @@ public abstract class LayoutServiceBaseImpl extends BaseServiceImpl
 	protected MBMessagePersistence mbMessagePersistence;
 	@BeanReference(type = MBMessageFinder.class)
 	protected MBMessageFinder mbMessageFinder;
+	@BeanReference(type = MDRRuleGroupInstanceLocalService.class)
+	protected MDRRuleGroupInstanceLocalService mdrRuleGroupInstanceLocalService;
+	@BeanReference(type = MDRRuleGroupInstanceService.class)
+	protected MDRRuleGroupInstanceService mdrRuleGroupInstanceService;
+	@BeanReference(type = MDRRuleGroupInstancePersistence.class)
+	protected MDRRuleGroupInstancePersistence mdrRuleGroupInstancePersistence;
 	@BeanReference(type = RatingsStatsLocalService.class)
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	@BeanReference(type = RatingsStatsPersistence.class)

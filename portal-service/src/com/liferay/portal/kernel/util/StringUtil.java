@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -153,6 +153,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * appendParentheticalSuffix("file", 0) returns "file (0)"
@@ -160,6 +161,7 @@ public class StringUtil {
 	 * appendParentheticalSuffix("file (0)", 1) returns "file (1)"
 	 * appendParentheticalSuffix("file (0)", 2) returns "file (0) (2)"
 	 * </code>
+	 * </pre>
 	 * </p>
 	 *
 	 * @param  s the original string
@@ -188,11 +190,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * appendParentheticalSuffix("Java", "EE") returns "Java (EE)"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  suffix the suffix to be appended
@@ -243,11 +247,14 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
-	 * contains("application", "app") returns true
+	 * contains("one,two,three", "two") returns true
+	 * contains("one,two,three", "thr") returns false
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string in which to search
 	 * @param  text the text to search for in the string
@@ -266,12 +273,14 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * contains("three...two...one", "two", "...") returns true
 	 * contains("three...two...one", "thr", "...") returns false
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string in which to search
 	 * @param  text the text to search for in the string
@@ -685,6 +694,14 @@ public class StringUtil {
 		}
 		else {
 			return s.toLowerCase();
+		}
+	}
+
+	public static void lowerCase(String... array) {
+		if (array != null) {
+			for (int i = 0; i < array.length; i++) {
+				array[i] = array[i].toLowerCase();
+			}
 		}
 	}
 
@@ -1106,11 +1123,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * quote("Hello, World!") returns "'Hello, World!'"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to enclose in apostrophes
 	 * @return the string enclosed by apostrophes, or <code>null</code> if the
@@ -1127,11 +1146,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * quote("PATH", '%') returns "%PATH%"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to enclose in quotes
 	 * @param  quote the character to insert to insert to the beginning of and
@@ -1154,11 +1175,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * quote("WARNING", "!!!") returns "!!!WARNING!!!"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to enclose in quotes
 	 * @param  quote the quote string to insert to insert to the beginning of
@@ -1284,6 +1307,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * remove("red,blue,green,yellow", "blue") returns "red,green,yellow,"
@@ -1291,6 +1315,7 @@ public class StringUtil {
 	 * remove("blue,", "blue") returns ""
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string representing the list of comma delimited strings
 	 * @param  remove the string to remove
@@ -1316,13 +1341,15 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
-	 * remove("red;blue;green;yellow", "blue") returns "red,green,yellow;"
-	 * remove("blue", "blue") returns ""
-	 * remove("blue;", "blue") returns ""
+	 * remove("red;blue;green;yellow", "blue", ";") returns "red;green;yellow;"
+	 * remove("blue", "blue", ";") returns ""
+	 * remove("blue;", "blue", ";") returns ""
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string representing the list of delimited strings
 	 * @param  remove the string to remove
@@ -1548,6 +1575,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * replace("redorangeyellow", {"red", "orange", "yellow"}, {"RED","ORANGE", "YELLOW"}, false) returns "REDORANGEYELLOW"
@@ -1558,6 +1586,7 @@ public class StringUtil {
 	 * replace("redorange.yellow", {"red", "orange", "yellow"}, {"RED","ORANGE", * "YELLOW"}, true) returns "redorange.YELLOW"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  oldSubs the strings to be searched for and replaced in the
@@ -1930,11 +1959,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * safePath("http://www.liferay.com") returns "http:/www.liferay.com"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  path the original string
 	 * @return a string representing the original string with all double slashes
@@ -1958,6 +1989,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * shorten("12345678901234567890xyz") returns "12345678901234567..."
@@ -1967,6 +1999,7 @@ public class StringUtil {
 	 * shorten(" 2345678901234567890") returns " 2345678901234567890"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @return a string representing the original string shortened to 20
@@ -1991,6 +2024,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * shorten("123456789", 8) returns "12345..."
@@ -2000,6 +2034,7 @@ public class StringUtil {
 	 * shorten(" 1234567", 8) returns " 1234567"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  length the number of characters to limit from the original string
@@ -2025,6 +2060,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * shorten("12345678901234", 13, "... etc.") returns "12345... etc."
@@ -2034,6 +2070,7 @@ public class StringUtil {
 	 * shorten(" 123456789012", 13, "... etc.") returns " 123456789012"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  length the number of characters to limit from the original string
@@ -2087,6 +2124,7 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * shorten("12345678901234567890xyz", "... etc.") returns "123456789012... etc."
@@ -2096,6 +2134,7 @@ public class StringUtil {
 	 * shorten(" 2345678901234567890", "... etc.") returns " 2345678901234567890"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  suffix the suffix to append
@@ -2113,12 +2152,14 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * split("Alice,Bob,Charlie") returns {"Alice", "Bob", "Charlie"}
 	 * split("Alice, Bob, Charlie") returns {"Alice", " Bob", " Charlie"}
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to split
 	 * @return the array of strings resulting from splitting string
@@ -2133,6 +2174,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * boolean values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the boolean value for that substring
 	 * @return the array of boolean values resulting from splitting string
@@ -2150,11 +2192,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * splitLines("First;Second;Third", ';') returns {"First","Second","Third"}
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to split
 	 * @param  delimiter the delimiter
@@ -2203,6 +2247,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * double-precision decimal values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the double-precision decimal value for that
 	 *         substring
@@ -2218,6 +2263,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * decimal values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the decimal value for that substring
 	 * @return the array of decimal values resulting from splitting string
@@ -2232,6 +2278,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * integer values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the integer value for that substring
 	 * @return the array of integer values resulting from splitting string
@@ -2246,6 +2293,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * long integer values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the long integer value for that substring
 	 * @return the array of long integer values resulting from splitting string
@@ -2260,6 +2308,7 @@ public class StringUtil {
 	 * Splits the string <code>s</code> around comma characters returning the
 	 * short integer values of the substrings.
 	 *
+	 * @param  s the string to split
 	 * @param  x the default value to use for a substring in case an exception
 	 *         occurs in getting the short integer value for that substring
 	 * @return the array of short integer values resulting from splitting string
@@ -2277,11 +2326,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * splitLines("oneandtwoandthreeandfour", "and") returns {"one","two","three","four"}
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to split
 	 * @param  delimiter the delimiter
@@ -2520,11 +2571,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * splitLines("Red\rBlue\nGreen") returns {"Red","Blue","Green"}
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string to split
 	 * @return the array of strings resulting from splitting string
@@ -2662,11 +2715,13 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * strip("Mississipi", 'i') returns "Mssssp"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the string from which to strip all occurrences the character
 	 * @param  remove the character to strip from the string
@@ -2712,11 +2767,13 @@ public class StringUtil {
 	 * Example:
 	 * <p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * stripBetween("One small step for man, one giant leap for mankind", "step", "giant ") returns "One small leap for mankind"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the from which to strip a substring
 	 * @param  begin the beginning characters of the substring to be removed
@@ -2765,6 +2822,7 @@ public class StringUtil {
 	 * Example:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * toCharCode("a") returns "97"
@@ -2772,6 +2830,7 @@ public class StringUtil {
 	 * toCharCode("c") returns "99"
 	 * toCharCode("What's for lunch?") returns "87104971163911532102111114321081171109910463"
 	 * </code>
+	 * </pre>
 	 * </p>
 	 *
 	 * @param  s the string whose character codes are to be represented
@@ -2838,7 +2897,49 @@ public class StringUtil {
 	 *         trailing whitespace removed
 	 */
 	public static String trim(String s) {
-		return trim(s, null);
+		if (s == null) {
+			return null;
+		}
+
+		if (s.length() == 0) {
+			return s;
+		}
+
+		int len = s.length();
+
+		int x = len;
+
+		for (int i = 0; i < len; i++) {
+			char c = s.charAt(i);
+
+			if (!Character.isWhitespace(c)) {
+				x = i;
+
+				break;
+			}
+		}
+
+		if (x == len) {
+			return StringPool.BLANK;
+		}
+
+		int y = x + 1;
+
+		for (int i = len - 1; i > x; i--) {
+			char c = s.charAt(i);
+
+			if (!Character.isWhitespace(c)) {
+				y = i + 1;
+
+				break;
+			}
+		}
+
+		if ((x == 0) && (y == len)) {
+			return s;
+		}
+
+		return s.substring(x, y);
 	}
 
 	/**
@@ -2849,12 +2950,14 @@ public class StringUtil {
 	 * Examples:
 	 * </p>
 	 *
+	 * <p>
 	 * <pre>
 	 * <code>
 	 * trim(" \tHey\t ", '\t') returns "\tHey\t"
 	 * trim(" \t Hey \t ", '\t') returns "\t Hey \t"
 	 * </code>
 	 * </pre>
+	 * </p>
 	 *
 	 * @param  s the original string
 	 * @param  c the whitespace character to limit trimming
@@ -2881,40 +2984,48 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] chars = s.toCharArray();
+		if (s.length() == 0) {
+			return s;
+		}
 
-		int len = chars.length;
+		if ((exceptions == null) || (exceptions.length == 0)) {
+			return trim(s);
+		}
 
-		int x = 0;
-		int y = chars.length;
+		int len = s.length();
+		int x = len;
 
 		for (int i = 0; i < len; i++) {
-			char c = chars[i];
+			char c = s.charAt(i);
 
-			if (_isTrimable(c, exceptions)) {
-				x = i + 1;
-			}
-			else {
+			if (!_isTrimable(c, exceptions)) {
+				x = i;
+
 				break;
 			}
 		}
 
-		for (int i = len - 1; i >= 0; i--) {
-			char c = chars[i];
+		if (x == len) {
+			return StringPool.BLANK;
+		}
 
-			if (_isTrimable(c, exceptions)) {
-				y = i;
-			}
-			else {
+		int y = x + 1;
+
+		for (int i = len - 1; i > x; i--) {
+			char c = s.charAt(i);
+
+			if (!_isTrimable(c, exceptions)) {
+				y = i + 1;
+
 				break;
 			}
 		}
 
-		if ((x != 0) || (y != len)) {
-			return s.substring(x, y);
+		if ((x == 0) && (y == len)) {
+			return s;
 		}
 		else {
-			return s;
+			return s.substring(x, y);
 		}
 	}
 
@@ -2926,7 +3037,36 @@ public class StringUtil {
 	 *         whitespace removed
 	 */
 	public static String trimLeading(String s) {
-		return trimLeading(s, null);
+		if (s == null) {
+			return null;
+		}
+
+		if (s.length() == 0) {
+			return s;
+		}
+
+		int len = s.length();
+		int x = len;
+
+		for (int i = 0; i < len; i++) {
+			char c = s.charAt(i);
+
+			if (!Character.isWhitespace(c)) {
+				x = i;
+
+				break;
+			}
+		}
+
+		if (x == len) {
+			return StringPool.BLANK;
+		}
+		else if (x == 0) {
+			return s;
+		}
+		else {
+			return s.substring(x);
+		}
 	}
 
 	/**
@@ -2958,29 +3098,35 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] chars = s.toCharArray();
+		if (s.length() == 0) {
+			return s;
+		}
 
-		int len = chars.length;
+		if ((exceptions == null) || (exceptions.length == 0)) {
+			return trimLeading(s);
+		}
 
-		int x = 0;
-		int y = chars.length;
+		int len = s.length();
+		int x = len;
 
 		for (int i = 0; i < len; i++) {
-			char c = chars[i];
+			char c = s.charAt(i);
 
-			if (_isTrimable(c, exceptions)) {
-				x = i + 1;
-			}
-			else {
+			if (!_isTrimable(c, exceptions)) {
+				x = i;
+
 				break;
 			}
 		}
 
-		if ((x != 0) || (y != len)) {
-			return s.substring(x, y);
+		if (x == len) {
+			return StringPool.BLANK;
+		}
+		else if (x == 0) {
+			return s;
 		}
 		else {
-			return s;
+			return s.substring(x);
 		}
 	}
 
@@ -2992,7 +3138,36 @@ public class StringUtil {
 	 *         whitespace removed
 	 */
 	public static String trimTrailing(String s) {
-		return trimTrailing(s, null);
+		if (s == null) {
+			return null;
+		}
+
+		if (s.length() == 0) {
+			return s;
+		}
+
+		int len = s.length();
+		int x = 0;
+
+		for (int i = len - 1; i >= 0; i--) {
+			char c = s.charAt(i);
+
+			if (!Character.isWhitespace(c)) {
+				x = i + 1;
+
+				break;
+			}
+		}
+
+		if (x == 0) {
+			return StringPool.BLANK;
+		}
+		else if (x == len) {
+			return s;
+		}
+		else {
+			return s.substring(0, x);
+		}
 	}
 
 	/**
@@ -3024,29 +3199,35 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] chars = s.toCharArray();
+		if (s.length() == 0) {
+			return s;
+		}
 
-		int len = chars.length;
+		if ((exceptions == null) || (exceptions.length == 0)) {
+			return trimTrailing(s);
+		}
 
+		int len = s.length();
 		int x = 0;
-		int y = chars.length;
 
 		for (int i = len - 1; i >= 0; i--) {
-			char c = chars[i];
+			char c = s.charAt(i);
 
-			if (_isTrimable(c, exceptions)) {
-				y = i;
-			}
-			else {
+			if (!_isTrimable(c, exceptions)) {
+				x = i + 1;
+
 				break;
 			}
 		}
 
-		if ((x != 0) || (y != len)) {
-			return s.substring(x, y);
+		if (x == 0) {
+			return StringPool.BLANK;
+		}
+		else if (x == len) {
+			return s;
 		}
 		else {
-			return s;
+			return s.substring(0, x);
 		}
 	}
 
@@ -3085,7 +3266,7 @@ public class StringUtil {
 	 * @param  s the string to convert
 	 * @return the string, converted to upper-case, or <code>null</code> if the
 	 *         string is <code>null</code>
-	 * @see    {@link String#toUpperCase()}
+	 * @see    String#toUpperCase()
 	 */
 	public static String upperCase(String s) {
 		if (s == null) {
@@ -3117,7 +3298,7 @@ public class StringUtil {
 	 *
 	 * @param  obj the object whose string value is to be returned
 	 * @return the string value of the object
-	 * @see    {@link String#valueOf(Object obj)}
+	 * @see    String#valueOf(Object obj)
 	 */
 	public static String valueOf(Object obj) {
 		return String.valueOf(obj);
@@ -3190,11 +3371,9 @@ public class StringUtil {
 	 *         to any of the exception characters; <code>true</code> otherwise
 	 */
 	private static boolean _isTrimable(char c, char[] exceptions) {
-		if ((exceptions != null) && (exceptions.length > 0)) {
-			for (char exception : exceptions) {
-				if (c == exception) {
-					return false;
-				}
+		for (char exception : exceptions) {
+			if (c == exception) {
+				return false;
 			}
 		}
 

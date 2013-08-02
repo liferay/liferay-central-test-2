@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,6 +44,7 @@ import org.apache.commons.collections.map.LRUMap;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 
 	public static final String CACHE_NAME = EntityCache.class.getName();
@@ -51,6 +53,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		CacheRegistryUtil.register(this);
 	}
 
+	@Override
 	public void clearCache() {
 		clearLocalCache();
 
@@ -59,26 +62,30 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
+	@Override
 	public void clearCache(String className) {
 		clearLocalCache();
 
-		PortalCache portalCache = _getPortalCache(className, false);
+		PortalCache portalCache = _getPortalCache(className, true);
 
 		if (portalCache != null) {
 			portalCache.removeAll();
 		}
 	}
 
+	@Override
 	public void clearLocalCache() {
 		if (_localCacheAvailable) {
 			_localCache.remove();
 		}
 	}
 
+	@Override
 	public String getRegistryName() {
 		return CACHE_NAME;
 	}
 
+	@Override
 	public Object getResult(
 		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey) {
 
@@ -121,10 +128,12 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		return _toEntityModel(result);
 	}
 
+	@Override
 	public void invalidate() {
 		clearCache();
 	}
 
+	@Override
 	public Object loadResult(
 		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
 		SessionFactory sessionFactory) {
@@ -207,6 +216,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		}
 	}
 
+	@Override
 	public void putResult(
 		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey,
 		Object result) {
@@ -236,6 +246,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		portalCache.put(cacheKey, result);
 	}
 
+	@Override
 	public void removeCache(String className) {
 		_portalCaches.remove(className);
 
@@ -244,6 +255,7 @@ public class EntityCacheImpl implements CacheRegistryItem, EntityCache {
 		_multiVMPool.removeCache(groupKey);
 	}
 
+	@Override
 	public void removeResult(
 		boolean entityCacheEnabled, Class<?> clazz, Serializable primaryKey) {
 

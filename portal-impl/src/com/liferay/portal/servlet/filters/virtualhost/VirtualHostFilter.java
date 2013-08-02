@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -61,29 +61,6 @@ public class VirtualHostFilter extends BasePortalFilter {
 		super.init(filterConfig);
 
 		_servletContext = filterConfig.getServletContext();
-
-		_slashedKeywords =
-			new String[PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS.length];
-
-		for (int i = 0; i < PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS.length;
-				i++) {
-
-			String keyword = PropsValues.LAYOUT_FRIENDLY_URL_KEYWORDS[i];
-
-			if (keyword.contains(StringPool.PERIOD) ||
-				keyword.equals("_vti_") || keyword.equals("api") ||
-				keyword.equals("display_chart") ||
-				keyword.equals("sharepoint") ||
-				keyword.equals("software_catalog")) {
-
-				keyword = StringPool.SLASH + keyword;
-			}
-			else {
-				keyword = StringPool.SLASH + keyword + StringPool.SLASH;
-			}
-
-			_slashedKeywords[i] = keyword.toLowerCase();
-		}
 	}
 
 	@Override
@@ -111,13 +88,11 @@ public class VirtualHostFilter extends BasePortalFilter {
 			return false;
 		}
 
-		for (String keyword : _slashedKeywords) {
-			if (friendlyURL.startsWith(keyword)) {
-				return false;
-			}
+		if (LayoutImpl.hasFriendlyURLKeyword(friendlyURL)) {
+			return false;
 		}
 
-		int code = LayoutImpl.validateFriendlyURL(friendlyURL);
+		int code = LayoutImpl.validateFriendlyURL(friendlyURL, false);
 
 		if ((code > -1) &&
 			(code != LayoutFriendlyURLException.ENDS_WITH_SLASH)) {
@@ -159,7 +134,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		String friendlyURL = originalFriendlyURL;
 
 		if (Validator.isNotNull(contextPath) &&
-			(friendlyURL.indexOf(contextPath) != -1)) {
+			friendlyURL.contains(contextPath)) {
 
 			friendlyURL = friendlyURL.substring(contextPath.length());
 		}
@@ -270,7 +245,9 @@ public class VirtualHostFilter extends BasePortalFilter {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layoutSet.getGroupId());
 
-				if (group.isGuest() && friendlyURL.equals(StringPool.SLASH)) {
+				if (group.isGuest() && friendlyURL.equals(StringPool.SLASH) &&
+					!layoutSet.isPrivateLayout()) {
+
 					String homeURL = PortalUtil.getRelativeHomeURL(request);
 
 					if (Validator.isNotNull(homeURL)) {
@@ -336,6 +313,5 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static Log _log = LogFactoryUtil.getLog(VirtualHostFilter.class);
 
 	private ServletContext _servletContext;
-	private String[] _slashedKeywords;
 
 }

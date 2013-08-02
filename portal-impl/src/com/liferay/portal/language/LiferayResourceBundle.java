@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,16 +37,6 @@ import java.util.Set;
  */
 public class LiferayResourceBundle extends ResourceBundle {
 
-	public LiferayResourceBundle(String string, String charsetName)
-		throws IOException {
-
-		_map = new HashMap<String, String>();
-
-		Properties properties = PropertiesUtil.load(string, charsetName);
-
-		LanguageResources.fixValues(_map, properties);
-	}
-
 	public LiferayResourceBundle(InputStream inputStream, String charsetName)
 		throws IOException {
 
@@ -67,6 +57,16 @@ public class LiferayResourceBundle extends ResourceBundle {
 		LanguageResources.fixValues(_map, properties);
 	}
 
+	public LiferayResourceBundle(String string, String charsetName)
+		throws IOException {
+
+		_map = new HashMap<String, String>();
+
+		Properties properties = PropertiesUtil.load(string, charsetName);
+
+		LanguageResources.fixValues(_map, properties);
+	}
+
 	@Override
 	public Enumeration<String> getKeys() {
 		final Set<String> keys = _map.keySet();
@@ -79,6 +79,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 		return new Enumeration<String>() {
 			String next = null;
 
+			@Override
 			public boolean hasMoreElements() {
 				if (next == null) {
 					if (itr.hasNext()) {
@@ -103,6 +104,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 				}
 			}
 
+			@Override
 			public String nextElement() {
 				if (hasMoreElements()) {
 					String result = next;
@@ -115,6 +117,7 @@ public class LiferayResourceBundle extends ResourceBundle {
 					throw new NoSuchElementException();
 				}
 			}
+
 		};
 	}
 

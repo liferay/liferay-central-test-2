@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import java.util.Map;
  */
 public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 
+	@Override
 	public void addCompanyScopePermission(
 			long scopeGroupId, long companyId, String name, long roleId,
 			String actionId)
@@ -39,6 +40,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, name, roleId, actionId);
 	}
 
+	@Override
 	public void addGroupScopePermission(
 			long scopeGroupId, long companyId, long groupId, String name,
 			long roleId, String actionId)
@@ -51,6 +53,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, roleId, actionId);
 	}
 
+	@Override
 	public void addIndividualScopePermission(
 			long companyId, long groupId, String name, long primKey,
 			long roleId, String actionId)
@@ -62,6 +65,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, primKey, roleId, actionId);
 	}
 
+	@Override
 	public void removeAllGroupScopePermissions(
 			long scopeGroupId, long companyId, String name, long roleId,
 			String actionId)
@@ -74,6 +78,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, name, roleId, actionId);
 	}
 
+	@Override
 	public void removeCompanyScopePermission(
 			long scopeGroupId, long companyId, String name, long roleId,
 			String actionId)
@@ -86,6 +91,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, name, roleId, actionId);
 	}
 
+	@Override
 	public void removeGroupScopePermission(
 			long scopeGroupId, long companyId, long groupId, String name,
 			long roleId, String actionId)
@@ -98,6 +104,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, roleId, actionId);
 	}
 
+	@Override
 	public void removeIndividualScopePermission(
 			long companyId, long groupId, String name, long primKey,
 			long roleId, String actionId)
@@ -109,6 +116,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, primKey, roleId, actionId);
 	}
 
+	@Override
 	public void setCompanyScopePermissions(
 			long scopeGroupId, long companyId, String name, long roleId,
 			List<String> actionIds)
@@ -121,6 +129,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, name, roleId, actionIds);
 	}
 
+	@Override
 	public void setGroupScopePermissions(
 			long scopeGroupId, long companyId, long groupId, String name,
 			long roleId, List<String> actionIds)
@@ -133,6 +142,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, roleId, actionIds);
 	}
 
+	@Override
 	public void setIndividualScopePermissions(
 			long companyId, long groupId, String name, long primKey,
 			long roleId, List<String> actionIds)
@@ -144,6 +154,7 @@ public class ResourceBlockServiceImpl extends ResourceBlockServiceBaseImpl {
 			companyId, groupId, name, primKey, roleId, actionIds);
 	}
 
+	@Override
 	public void setIndividualScopePermissions(
 			long companyId, long groupId, String name, long primKey,
 			Map<Long, String[]> roleIdsToActionIds)

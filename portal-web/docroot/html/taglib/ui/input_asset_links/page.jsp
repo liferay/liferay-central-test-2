@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,11 +55,11 @@ Group controlPanelGroup = GroupLocalServiceUtil.getGroup(themeDisplay.getCompany
 
 PortletURL assetBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.ASSET_BROWSER, LayoutLocalServiceUtil.getDefaultPlid(controlPanelGroup.getGroupId(), true), PortletRequest.RENDER_PHASE);
 
-assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
-assetBrowserURL.setPortletMode(PortletMode.VIEW);
-
 assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
-assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
+assetBrowserURL.setParameter("groupId", String.valueOf(scopeGroupId));
+assetBrowserURL.setParameter("selectedGroupIds", themeDisplay.getCompanyGroupId() + "," + scopeGroupId);
+assetBrowserURL.setPortletMode(PortletMode.VIEW);
+assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 %>
 
 <liferay-ui:icon-menu align="left" cssClass="select-existing-selector" icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>' id='<%= randomNamespace + "inputAssetLinks" %>' message="select" showWhenSingleIcon="<%= true %>">
@@ -78,7 +78,7 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 		%>
 
 			<liferay-ui:icon
-				message='<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>'
+				message="<%= ResourceActionsUtil.getModelResource(locale, assetRendererFactory.getClassName()) %>"
 				src="<%= assetRendererFactory.getIconPath(portletRequest) %>"
 				url="<%= href %>"
 			/>
@@ -103,7 +103,7 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 </liferay-util:buffer>
 
 <liferay-ui:search-container
-	headerNames="type,title,null"
+	headerNames="type,title,scope,null"
 >
 	<liferay-ui:search-container-results
 		results="<%= assetLinks %>"
@@ -128,10 +128,9 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 
 		assetLinkEntry = assetLinkEntry.toEscapedModel();
 
-		long assetLinkEntryId = assetLinkEntry.getEntryId();
-
-		String assetLinkEntryTitle = assetLinkEntry.getTitle(locale);
 		String assetLinkEntryType = ResourceActionsUtil.getModelResource(locale, assetLinkEntry.getClassName());
+		String assetLinkEntryTitle = assetLinkEntry.getTitle(locale);
+		Group assetLinkEntryGroup = GroupLocalServiceUtil.getGroup(assetLinkEntry.getGroupId());
 		%>
 
 		<liferay-ui:search-container-column-text
@@ -144,8 +143,13 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 			value="<%= assetLinkEntryTitle %>"
 		/>
 
+		<liferay-ui:search-container-column-text
+			name="scope"
+			value="<%= HtmlUtil.escape(assetLinkEntryGroup.getDescriptiveName(locale)) %>"
+		/>
+
 		<liferay-ui:search-container-column-text>
-			<a class="modify-link" data-rowId="<%= assetLinkEntryId %>" href="javascript:;"><%= removeLinkIcon %></a>
+			<a class="modify-link" data-rowId="<%= assetLinkEntry.getEntryId() %>" href="javascript:;"><%= removeLinkIcon %></a>
 		</liferay-ui:search-container-column-text>
 	</liferay-ui:search-container-row>
 
@@ -172,7 +176,7 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 	Liferay.provide(
 		window,
 		'<%= randomNamespace %>addAssetLink',
-		function(entryId, entryType, entryTitle) {
+		function(entryId, entryType, entryTitle, entryScope) {
 			var A = AUI();
 
 			var searchContainerName = '<%= portletResponse.getNamespace() %>assetLinksSearchContainer';
@@ -181,11 +185,11 @@ assetBrowserURL.setParameter("groupId", scopeGroupId.toString());
 
 			var entryLink = '<a class="modify-link" data-rowId="' + entryId + '" href="javascript:;"><%= UnicodeFormatter.toString(removeLinkIcon) %></a>';
 
-			searchContainer.addRow([entryType, entryTitle, entryLink], entryId);
+			searchContainer.addRow([entryType, A.Escape.html(entryTitle), A.Escape.html(entryScope), entryLink], entryId);
 
 			searchContainer.updateDataStore();
 		},
-		['liferay-search-container']
+		['liferay-search-container', 'escape']
 	);
 
 </aui:script>

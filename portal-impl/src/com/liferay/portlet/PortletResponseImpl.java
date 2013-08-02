@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,14 +31,18 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.security.lang.DoPrivilegedUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.Writer;
 
 import java.lang.reflect.Constructor;
+
+import java.security.PrivilegedAction;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -101,6 +105,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		return (PortletResponseImpl)portletResponse;
 	}
 
+	@Override
 	public void addDateHeader(String name, long date) {
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
@@ -118,6 +123,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	@Override
 	public void addHeader(String name, String value) {
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
@@ -135,6 +141,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	@Override
 	public void addIntHeader(String name, int value) {
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
@@ -152,6 +159,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	@Override
 	public void addProperty(Cookie cookie) {
 		if (cookie == null) {
 			throw new IllegalArgumentException();
@@ -169,6 +177,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	@Override
 	public void addProperty(String key, Element element) {
 		if (key == null) {
 			throw new IllegalArgumentException();
@@ -197,6 +206,7 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		}
 	}
 
+	@Override
 	public void addProperty(String key, String value) {
 		if (Validator.isNull(key)) {
 			throw new IllegalArgumentException();
@@ -205,15 +215,18 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		addHeader(key, value);
 	}
 
+	@Override
 	public PortletURL createActionURL() {
 		return createActionURL(_portletName);
 	}
 
+	@Override
 	public LiferayPortletURL createActionURL(String portletName) {
 		return createLiferayPortletURL(
 			portletName, PortletRequest.ACTION_PHASE);
 	}
 
+	@Override
 	public Element createElement(String tagName) throws DOMException {
 		if (_document == null) {
 			try {
@@ -234,12 +247,338 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		return _document.createElement(tagName);
 	}
 
+	@Override
 	public LiferayPortletURL createLiferayPortletURL(
 		long plid, String portletName, String lifecycle) {
+
+		return createLiferayPortletURL(plid, portletName, lifecycle, true);
+	}
+
+	@Override
+	public LiferayPortletURL createLiferayPortletURL(
+		long plid, String portletName, String lifecycle,
+		boolean includeLinkToLayoutUuid) {
+
+		return DoPrivilegedUtil.wrap(
+			new LiferayPortletURLPrivilegedAction(
+				plid, portletName, lifecycle, includeLinkToLayoutUuid));
+	}
+
+	@Override
+	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
+		return createLiferayPortletURL(_portletName, lifecycle);
+	}
+
+	@Override
+	public LiferayPortletURL createLiferayPortletURL(
+		String portletName, String lifecycle) {
+
+		return createLiferayPortletURL(_plid, portletName, lifecycle);
+	}
+
+	@Override
+	public PortletURL createRenderURL() {
+		return createRenderURL(_portletName);
+	}
+
+	@Override
+	public LiferayPortletURL createRenderURL(String portletName) {
+		return createLiferayPortletURL(
+			portletName, PortletRequest.RENDER_PHASE);
+	}
+
+	@Override
+	public ResourceURL createResourceURL() {
+		return createResourceURL(_portletName);
+	}
+
+	@Override
+	public LiferayPortletURL createResourceURL(String portletName) {
+		return createLiferayPortletURL(
+			portletName, PortletRequest.RESOURCE_PHASE);
+	}
+
+	@Override
+	public String encodeURL(String path) {
+		if ((path == null) ||
+			(!path.startsWith("#") && !path.startsWith("/") &&
+			 !path.contains("://"))) {
+
+			// Allow '#' as well to workaround a bug in Oracle ADF 10.1.3
+
+			throw new IllegalArgumentException(
+				"URL path must start with a '/' or include '://'");
+		}
+
+		if (_urlEncoder != null) {
+			return _urlEncoder.encodeURL(_response, path);
+		}
+		else {
+			return path;
+		}
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public HttpServletRequest getHttpServletRequest() {
+		return _portletRequestImpl.getHttpServletRequest();
+	}
+
+	@Override
+	public HttpServletResponse getHttpServletResponse() {
+		return _response;
+	}
+
+	public abstract String getLifecycle();
+
+	@Override
+	public String getNamespace() {
+		if (_wsrp) {
+			return "wsrp_rewrite_";
+		}
+
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletName);
+		}
+
+		return _namespace;
+	}
+
+	public long getPlid() {
+		return _plid;
+	}
+
+	public Portlet getPortlet() {
+		if (_portlet == null) {
+			try {
+				_portlet = PortletLocalServiceUtil.getPortletById(
+					_companyId, _portletName);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return _portlet;
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public PortletRequestImpl getPortletRequest() {
+		return _portletRequestImpl;
+	}
+
+	@Override
+	public Map<String, String[]> getProperties() {
+		Map<String, String[]> properties =
+			new LinkedHashMap<String, String[]>();
+
+		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
+			String name = entry.getKey();
+			Object[] values = (Object[])entry.getValue();
+
+			String[] valuesString = new String[values.length];
+
+			for (int i = 0; i < values.length; i++) {
+				valuesString[i] = values[i].toString();
+			}
+
+			properties.put(name, valuesString);
+		}
+
+		return properties;
+	}
+
+	public URLEncoder getUrlEncoder() {
+		return _urlEncoder;
+	}
+
+	@Override
+	public void setDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (date <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Long[] {new Long(date)});
+		}
+	}
+
+	@Override
+	public void setHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (Validator.isNull(value)) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new String[] {value});
+		}
+	}
+
+	@Override
+	public void setIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (value <= 0) {
+			_headers.remove(name);
+		}
+		else {
+			_headers.put(name, new Integer[] {new Integer(value)});
+		}
+	}
+
+	public void setPlid(long plid) {
+		_plid = plid;
+
+		if (_plid <= 0) {
+			Layout layout = (Layout)_portletRequestImpl.getAttribute(
+				WebKeys.LAYOUT);
+
+			if (layout != null) {
+				_plid = layout.getPlid();
+			}
+		}
+	}
+
+	@Override
+	public void setProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+
+		setHeader(key, value);
+	}
+
+	public void setURLEncoder(URLEncoder urlEncoder) {
+		_urlEncoder = urlEncoder;
+	}
+
+	public void transferHeaders(HttpServletResponse response) {
+		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
+			String name = entry.getKey();
+			Object values = entry.getValue();
+
+			if (values instanceof Integer[]) {
+				Integer[] intValues = (Integer[])values;
+
+				for (int value : intValues) {
+					if (response.containsHeader(name)) {
+						response.addIntHeader(name, value);
+					}
+					else {
+						response.setIntHeader(name, value);
+					}
+				}
+			}
+			else if (values instanceof Long[]) {
+				Long[] dateValues = (Long[])values;
+
+				for (long value : dateValues) {
+					if (response.containsHeader(name)) {
+						response.addDateHeader(name, value);
+					}
+					else {
+						response.setDateHeader(name, value);
+					}
+				}
+			}
+			else if (values instanceof String[]) {
+				String[] stringValues = (String[])values;
+
+				for (String value : stringValues) {
+					if (response.containsHeader(name)) {
+						response.addHeader(name, value);
+					}
+					else {
+						response.setHeader(name, value);
+					}
+				}
+			}
+			else if (values instanceof Cookie[]) {
+				Cookie[] cookies = (Cookie[])values;
+
+				for (Cookie cookie : cookies) {
+					response.addCookie(cookie);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void transferMarkupHeadElements() {
+		List<Element> elements = _markupHeadElements.get(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if ((elements == null) || elements.isEmpty()) {
+			return;
+		}
+
+		HttpServletRequest request = getHttpServletRequest();
+
+		List<String> markupHeadElements = (List<String>)request.getAttribute(
+			MimeResponse.MARKUP_HEAD_ELEMENT);
+
+		if (markupHeadElements == null) {
+			markupHeadElements = new ArrayList<String>();
+
+			request.setAttribute(
+				MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
+		}
+
+		for (Element element : elements) {
+			try {
+				Writer writer = new UnsyncStringWriter();
+
+				TransformerFactory transformerFactory =
+					TransformerFactory.newInstance();
+
+				Transformer transformer = transformerFactory.newTransformer();
+
+				transformer.setOutputProperty(
+					OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+				transformer.transform(
+					new DOMSource(element), new StreamResult(writer));
+
+				markupHeadElements.add(writer.toString());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
+			}
+		}
+	}
+
+	protected LiferayPortletURL doCreateLiferayPortletURL(
+		long plid, String portletName, String lifecycle,
+		boolean includeLinkToLayoutUuid) {
 
 		try {
 			Layout layout = (Layout)_portletRequestImpl.getAttribute(
 				WebKeys.LAYOUT);
+
+			if (layout == null) {
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)_portletRequestImpl.getAttribute(
+						WebKeys.THEME_DISPLAY);
+
+				if (themeDisplay != null) {
+					layout = themeDisplay.getLayout();
+				}
+			}
 
 			if (_portletSetup == null) {
 				_portletSetup =
@@ -250,11 +589,14 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 			String linkToLayoutUuid = GetterUtil.getString(
 				_portletSetup.getValue("portletSetupLinkToLayoutUuid", null));
 
-			if (Validator.isNotNull(linkToLayoutUuid)) {
+			if (Validator.isNotNull(linkToLayoutUuid) &&
+				includeLinkToLayoutUuid) {
+
 				try {
 					Layout linkedLayout =
 						LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-							linkToLayoutUuid, layout.getGroupId());
+							linkToLayoutUuid, layout.getGroupId(),
+							layout.isPrivateLayout());
 
 					plid = linkedLayout.getPlid();
 				}
@@ -361,289 +703,6 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 		return portletURLImpl;
 	}
 
-	public LiferayPortletURL createLiferayPortletURL(String lifecycle) {
-		return createLiferayPortletURL(_portletName, lifecycle);
-	}
-
-	public LiferayPortletURL createLiferayPortletURL(
-		String portletName, String lifecycle) {
-
-		return createLiferayPortletURL(_plid, portletName, lifecycle);
-	}
-
-	public PortletURL createRenderURL() {
-		return createRenderURL(_portletName);
-	}
-
-	public LiferayPortletURL createRenderURL(String portletName) {
-		return createLiferayPortletURL(
-			portletName, PortletRequest.RENDER_PHASE);
-	}
-
-	public ResourceURL createResourceURL() {
-		return createResourceURL(_portletName);
-	}
-
-	public LiferayPortletURL createResourceURL(String portletName) {
-		return createLiferayPortletURL(
-			portletName, PortletRequest.RESOURCE_PHASE);
-	}
-
-	public String encodeURL(String path) {
-		if ((path == null) ||
-			(!path.startsWith("#") && !path.startsWith("/") &&
-				(path.indexOf("://") == -1))) {
-
-			// Allow '#' as well to workaround a bug in Oracle ADF 10.1.3
-
-			throw new IllegalArgumentException(
-				"URL path must start with a '/' or include '://'");
-		}
-
-		if (_urlEncoder != null) {
-			return _urlEncoder.encodeURL(_response, path);
-		}
-		else {
-			return path;
-		}
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public HttpServletRequest getHttpServletRequest() {
-		return _portletRequestImpl.getHttpServletRequest();
-	}
-
-	public HttpServletResponse getHttpServletResponse() {
-		return _response;
-	}
-
-	public abstract String getLifecycle();
-
-	public String getNamespace() {
-		if (_wsrp) {
-			return "wsrp_rewrite_";
-		}
-
-		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletName);
-		}
-
-		return _namespace;
-	}
-
-	public long getPlid() {
-		return _plid;
-	}
-
-	public Portlet getPortlet() {
-		if (_portlet == null) {
-			try {
-				_portlet = PortletLocalServiceUtil.getPortletById(
-					_companyId, _portletName);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return _portlet;
-	}
-
-	public String getPortletName() {
-		return _portletName;
-	}
-
-	public PortletRequestImpl getPortletRequest() {
-		return _portletRequestImpl;
-	}
-
-	public Map<String, String[]> getProperties() {
-		Map<String, String[]> properties =
-			new LinkedHashMap<String, String[]>();
-
-		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
-			String name = entry.getKey();
-			Object[] values = (Object[])entry.getValue();
-
-			String[] valuesString = new String[values.length];
-
-			for (int i = 0; i < values.length; i++) {
-				valuesString[i] = values[i].toString();
-			}
-
-			properties.put(name, valuesString);
-		}
-
-		return properties;
-	}
-
-	public URLEncoder getUrlEncoder() {
-		return _urlEncoder;
-	}
-
-	public void setDateHeader(String name, long date) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (date <= 0) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new Long[] {new Long(date)});
-		}
-	}
-
-	public void setHeader(String name, String value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (Validator.isNull(value)) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new String[] {value});
-		}
-	}
-
-	public void setIntHeader(String name, int value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (value <= 0) {
-			_headers.remove(name);
-		}
-		else {
-			_headers.put(name, new Integer[] {new Integer(value)});
-		}
-	}
-
-	public void setPlid(long plid) {
-		_plid = plid;
-
-		if (_plid <= 0) {
-			Layout layout = (Layout)_portletRequestImpl.getAttribute(
-				WebKeys.LAYOUT);
-
-			if (layout != null) {
-				_plid = layout.getPlid();
-			}
-		}
-	}
-
-	public void setProperty(String key, String value) {
-		if (key == null) {
-			throw new IllegalArgumentException();
-		}
-
-		setHeader(key, value);
-	}
-
-	public void setURLEncoder(URLEncoder urlEncoder) {
-		_urlEncoder = urlEncoder;
-	}
-
-	public void transferHeaders(HttpServletResponse response) {
-		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
-			String name = entry.getKey();
-			Object values = entry.getValue();
-
-			if (values instanceof Integer[]) {
-				Integer[] intValues = (Integer[])values;
-
-				for (int value : intValues) {
-					if (response.containsHeader(name)) {
-						response.addIntHeader(name, value);
-					}
-					else {
-						response.setIntHeader(name, value);
-					}
-				}
-			}
-			else if (values instanceof Long[]) {
-				Long[] dateValues = (Long[])values;
-
-				for (long value : dateValues) {
-					if (response.containsHeader(name)) {
-						response.addDateHeader(name, value);
-					}
-					else {
-						response.setDateHeader(name, value);
-					}
-				}
-			}
-			else if (values instanceof String[]) {
-				String[] stringValues = (String[])values;
-
-				for (String value : stringValues) {
-					if (response.containsHeader(name)) {
-						response.addHeader(name, value);
-					}
-					else {
-						response.setHeader(name, value);
-					}
-				}
-			}
-			else if (values instanceof Cookie[]) {
-				Cookie[] cookies = (Cookie[])values;
-
-				for (Cookie cookie : cookies) {
-					response.addCookie(cookie);
-				}
-			}
-		}
-	}
-
-	public void transferMarkupHeadElements() {
-		List<Element> elements = _markupHeadElements.get(
-			MimeResponse.MARKUP_HEAD_ELEMENT);
-
-		if ((elements == null) || elements.isEmpty()) {
-			return;
-		}
-
-		HttpServletRequest request = getHttpServletRequest();
-
-		List<String> markupHeadElements = (List<String>)request.getAttribute(
-			MimeResponse.MARKUP_HEAD_ELEMENT);
-
-		if (markupHeadElements == null) {
-			markupHeadElements = new ArrayList<String>();
-
-			request.setAttribute(
-				MimeResponse.MARKUP_HEAD_ELEMENT, markupHeadElements);
-		}
-
-		for (Element element : elements) {
-			try {
-				Writer writer = new UnsyncStringWriter();
-
-				TransformerFactory transformerFactory =
-					TransformerFactory.newInstance();
-
-				Transformer transformer = transformerFactory.newTransformer();
-
-				transformer.setOutputProperty(
-					OutputKeys.OMIT_XML_DECLARATION, "yes");
-
-				transformer.transform(
-					new DOMSource(element), new StreamResult(writer));
-
-				markupHeadElements.add(writer.toString());
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
-				}
-			}
-		}
-	}
-
 	protected void init(
 		PortletRequestImpl portletRequestImpl, HttpServletResponse response,
 		String portletName, long companyId, long plid) {
@@ -675,5 +734,31 @@ public abstract class PortletResponseImpl implements LiferayPortletResponse {
 	private HttpServletResponse _response;
 	private URLEncoder _urlEncoder;
 	private boolean _wsrp;
+
+	private class LiferayPortletURLPrivilegedAction
+		implements PrivilegedAction<LiferayPortletURL> {
+
+		public LiferayPortletURLPrivilegedAction(
+			long plid, String portletName, String lifecycle,
+			boolean includeLinkToLayoutUuid) {
+
+			_plid = plid;
+			_portletName = portletName;
+			_lifecycle = lifecycle;
+			_includeLinkToLayoutUuid = includeLinkToLayoutUuid;
+		}
+
+		@Override
+		public LiferayPortletURL run() {
+			return doCreateLiferayPortletURL(
+				_plid, _portletName, _lifecycle, _includeLinkToLayoutUuid);
+		}
+
+		private boolean _includeLinkToLayoutUuid;
+		private String _lifecycle;
+		private long _plid;
+		private String _portletName;
+
+	}
 
 }

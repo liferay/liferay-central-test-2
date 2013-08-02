@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -468,6 +470,10 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 		return new PhoneWrapper(_phone.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Phone toUnescapedModel() {
+		return new PhoneWrapper(_phone.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _phone.toString();
@@ -486,6 +492,25 @@ public class PhoneWrapper implements Phone, ModelWrapper<Phone> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _phone.getType();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PhoneWrapper)) {
+			return false;
+		}
+
+		PhoneWrapper phoneWrapper = (PhoneWrapper)obj;
+
+		if (Validator.equals(_phone, phoneWrapper._phone)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

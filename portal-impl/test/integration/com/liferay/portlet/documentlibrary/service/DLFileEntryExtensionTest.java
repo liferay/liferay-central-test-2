@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,8 +15,8 @@
 package com.liferay.portlet.documentlibrary.service;
 
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
-import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.FileNameException;
@@ -32,151 +32,151 @@ import org.junit.runner.RunWith;
  * verifies that the correct validations occur and the correct title with
  * extension can be generated.
  *
+ * <p>
  * <table>
+ * <tr>
+ * <th>
+ * Source
+ * </th>
+ * <th>
+ * Title
+ * </th>
+ * <th>
+ * Extension
+ * </th>
+ * <th>
+ * Download Title
+ * </th>
+ * </tr>
  *
- * 	<tr>
- * 		<th>
- * 			Source
- * 		</th>
- * 		<th>
- * 			Title
- * 		</th>
- * 		<th>
- * 			Extension
- * 		</th>
- * 		<th>
- * 			Download Title
- * 		</th>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Text.txt
+ * </td>
+ * <td>
+ * Text.pdf
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Text.pdf.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Text.txt
- * 		</td>
- * 		<td>
- * 			Text.pdf
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Text.pdf.txt
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 	</tr>
+ * <tr>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * </td>
+ * <td>
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * </tr>
+ * <tr>
+ * <td>
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * <td>
+ * txt
+ * </td>
+ * <td>
+ * Test.txt
+ * </td>
+ * </tr>
  *
- * 	<tr>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 		</td>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 	</tr>
- * 	<tr>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 		<td>
- * 			txt
- * 		</td>
- * 		<td>
- * 			Test.txt
- * 		</td>
- * 	</tr>
- *
- * 	<tr>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 		<td>
- * 		</td>
- * 		<td>
- * 			Test
- * 		</td>
- * 	</tr>
- *
+ * <tr>
+ * <td>
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * <td>
+ * </td>
+ * <td>
+ * Test
+ * </td>
+ * </tr>
  * </table>
+ * </p>
  *
  * @author Alexander Chow
  */
@@ -185,20 +185,53 @@ import org.junit.runner.RunWith;
 public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 
 	@Test
-	public void testAddFileEntryBasic() throws Exception {
-		testAddFileEntryBasic(_FILE_NAME, "Test.pdf", "txt", "Test.pdf.txt");
-		testAddFileEntryBasic(_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
-		testAddFileEntryBasic(
-			_FILE_NAME, _STRIPPED_FILE_NAME, "txt", _FILE_NAME);
-		testAddFileEntryBasic(_FILE_NAME, "", "txt", _FILE_NAME);
-		testAddFileEntryBasic(
-			_STRIPPED_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
-		testAddFileEntryBasic(
-			_STRIPPED_FILE_NAME, _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
-		testAddFileEntryBasic(_STRIPPED_FILE_NAME, "", "", _STRIPPED_FILE_NAME);
-		testAddFileEntryBasic("", _FILE_NAME, "txt", _FILE_NAME);
-		testAddFileEntryBasic("", _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
+	public void testAddFileEntryBasic01() throws Exception {
+		addFileEntryBasic(_FILE_NAME, "Test.pdf", "txt", "Test.pdf.txt");
+	}
 
+	@Test
+	public void testAddFileEntryBasic02() throws Exception {
+		addFileEntryBasic(_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic03() throws Exception {
+		addFileEntryBasic(_FILE_NAME, _STRIPPED_FILE_NAME, "txt", _FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic04() throws Exception {
+		addFileEntryBasic(_FILE_NAME, "", "txt", _FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic05() throws Exception {
+		addFileEntryBasic(_STRIPPED_FILE_NAME, _FILE_NAME, "txt", _FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic06() throws Exception {
+		addFileEntryBasic(
+			_STRIPPED_FILE_NAME, _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic07() throws Exception {
+		addFileEntryBasic(_STRIPPED_FILE_NAME, "", "", _STRIPPED_FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic08() throws Exception {
+		addFileEntryBasic("", _FILE_NAME, "txt", _FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic09() throws Exception {
+		addFileEntryBasic("", _STRIPPED_FILE_NAME, "", _STRIPPED_FILE_NAME);
+	}
+
+	@Test
+	public void testAddFileEntryBasic10() throws Exception {
 		try {
 			addFileEntry(false, "", "");
 
@@ -413,7 +446,7 @@ public class DLFileEntryExtensionTest extends BaseDLAppTestCase {
 		DLAppLocalServiceUtil.deleteFileEntry(fileEntry.getFileEntryId());
 	}
 
-	protected void testAddFileEntryBasic(
+	protected void addFileEntryBasic(
 			String sourceFileName, String title, String extension,
 			String titleWithExtension)
 		throws Exception {

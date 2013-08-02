@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -845,6 +846,10 @@ public class MBMailingListWrapper implements MBMailingList,
 		return new MBMailingListWrapper(_mbMailingList.toEscapedModel());
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMailingList toUnescapedModel() {
+		return new MBMailingListWrapper(_mbMailingList.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _mbMailingList.toString();
@@ -857,6 +862,25 @@ public class MBMailingListWrapper implements MBMailingList,
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_mbMailingList.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBMailingListWrapper)) {
+			return false;
+		}
+
+		MBMailingListWrapper mbMailingListWrapper = (MBMailingListWrapper)obj;
+
+		if (Validator.equals(_mbMailingList, mbMailingListWrapper._mbMailingList)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

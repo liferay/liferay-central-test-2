@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,7 @@ import java.util.List;
 public class PollsChoiceLocalServiceImpl
 	extends PollsChoiceLocalServiceBaseImpl {
 
+	@Override
 	public PollsChoice addChoice(
 			long questionId, String name, String description,
 			ServiceContext serviceContext)
@@ -53,22 +54,26 @@ public class PollsChoiceLocalServiceImpl
 		return choice;
 	}
 
+	@Override
 	public PollsChoice getChoice(long choiceId)
 		throws PortalException, SystemException {
 
 		return pollsChoicePersistence.findByPrimaryKey(choiceId);
 	}
 
+	@Override
 	public List<PollsChoice> getChoices(long questionId)
 		throws SystemException {
 
 		return pollsChoicePersistence.findByQuestionId(questionId);
 	}
 
+	@Override
 	public int getChoicesCount(long questionId) throws SystemException {
 		return pollsChoicePersistence.countByQuestionId(questionId);
 	}
 
+	@Override
 	public PollsChoice updateChoice(
 			long choiceId, long questionId, String name, String description)
 		throws PortalException, SystemException {

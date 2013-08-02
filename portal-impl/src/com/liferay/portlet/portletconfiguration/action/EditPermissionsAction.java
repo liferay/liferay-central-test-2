@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,6 +28,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionPropagator;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
@@ -35,11 +36,13 @@ import com.liferay.portal.service.ResourceBlockServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionServiceUtil;
 import com.liferay.portal.servlet.filters.cache.CacheUtil;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -59,13 +62,16 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  * @author Connor McKay
  */
-public class EditPermissionsAction extends EditConfigurationAction {
+public class EditPermissionsAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
+
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -114,9 +120,12 @@ public class EditPermissionsAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
+
+		renderRequest = ActionUtil.getWrappedRenderRequest(renderRequest, null);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -151,11 +160,14 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			themeDisplay.getCompanyId(), portletResource);
 
 		if (portlet != null) {
-			renderResponse.setTitle(getTitle(portlet, renderRequest));
+			renderResponse.setTitle(
+				ActionUtil.getTitle(portlet, renderRequest));
 		}
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.portlet_configuration.edit_permissions"));
+		return actionMapping.findForward(
+			getForward(
+				renderRequest,
+				"portlet.portlet_configuration.edit_permissions"));
 	}
 
 	protected String[] getActionIds(
@@ -367,6 +379,22 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
 				resourceGroupId, themeDisplay.getCompanyId(), selResource,
 				resourcePrimKey, roleIdsToActionIds);
+		}
+
+		int pos = resourcePrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
+
+		if (pos != -1) {
+			long plid = GetterUtil.getLong(resourcePrimKey.substring(0, pos));
+
+			Layout layout = LayoutLocalServiceUtil.fetchLayout(plid);
+
+			if (layout != null) {
+				layout.setModifiedDate(new Date());
+
+				LayoutLocalServiceUtil.updateLayout(layout);
+
+				CacheUtil.clearCache(layout.getCompanyId());
+			}
 		}
 
 		if (PropsValues.PERMISSIONS_PROPAGATION_ENABLED) {

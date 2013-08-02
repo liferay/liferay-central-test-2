@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +14,13 @@
 
 package com.liferay.portal.dao.jdbc;
 
-import com.liferay.portal.dao.jdbc.pacl.PACLDataSource;
 import com.liferay.portal.dao.jdbc.util.DataSourceWrapper;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.jdbc.DataSourceFactory;
 import com.liferay.portal.kernel.jndi.JNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -61,8 +61,10 @@ import org.apache.tomcat.jdbc.pool.jmx.ConnectionPool;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class DataSourceFactoryImpl implements DataSourceFactory {
 
+	@Override
 	public void destroyDataSource(DataSource dataSource) throws Exception {
 		while (dataSource instanceof DataSourceWrapper) {
 			DataSourceWrapper dataSourceWrapper = (DataSourceWrapper)dataSource;
@@ -84,6 +86,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		}
 	}
 
+	@Override
 	public DataSource initDataSource(Properties properties) throws Exception {
 		Properties defaultProperties = PropsUtil.getProperties(
 			"jdbc.default.", true);
@@ -152,12 +155,13 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 			_log.debug("Created data source " + dataSource.getClass());
 		}
 
-		return new PACLDataSource(dataSource);
+		return _pacl.getDataSource(dataSource);
 	}
 
+	@Override
 	public DataSource initDataSource(
 			String driverClassName, String url, String userName,
-			String password)
+			String password, String jndiName)
 		throws Exception {
 
 		Properties properties = new Properties();
@@ -166,6 +170,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 		properties.setProperty("url", url);
 		properties.setProperty("username", userName);
 		properties.setProperty("password", password);
+		properties.setProperty("jndi.name", jndiName);
 
 		return initDataSource(properties);
 	}
@@ -395,5 +400,22 @@ public class DataSourceFactoryImpl implements DataSourceFactory {
 
 	private static Log _log = LogFactoryUtil.getLog(
 		DataSourceFactoryImpl.class);
+
+	private static PACL _pacl = new NoPACL();
+
+	private static class NoPACL implements PACL {
+
+		@Override
+		public DataSource getDataSource(DataSource dataSource) {
+			return dataSource;
+		}
+
+	}
+
+	public static interface PACL {
+
+		public DataSource getDataSource(DataSource dataSource);
+
+	}
 
 }

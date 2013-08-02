@@ -1,0 +1,147 @@
+<html>
+<head>
+<title>CPSitepagesImport</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">CPSitepagesImport</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>CPSitepagesImport</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>IMPORT_IFRAME</td>
+	<td>//iframe[@id='_156_importDialog']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>FILE_UPLOAD_FIELD</td>
+	<td>//input[@id='_156_importFileName']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>IMPORT_BUTTON</td>
+	<td>//input[@value='Import']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--PAGES-->
+<tr>
+	<td>PAGES_PAGES_CHECKBOX</td>
+	<td>//input[@id='_156_pagesCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PAGES_DELETE_MISSING_PAGES_CHECKBOX</td>
+	<td>//input[@id='_156_DELETE_MISSING_LAYOUTSCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--APPLICATIONS-->
+<tr>
+	<td>APPLICATIONS_SETUP_CHECKBOX</td>
+	<td>//input[@id='_156_PORTLET_SETUPCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_ARCHIVED_SETUPS</td>
+	<td>//input[@id='_156_PORTLET_ARCHIVED_SETUPSCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_USER_PREFERENCES_CHECKBOX</td>
+	<td>//input[@id='_156_PORTLET_USER_PREFERENCESCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_DATA_CHECKBOX</td>
+	<td>//input[@id='_156_PORTLET_DATACheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_DELETE_PORTLET_DATA_CHECKBOX</td>
+	<td>//input[@id='_156_DELETE_PORTLET_DATACheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_MIRROR</td>
+	<td>//input[@value='DATA_STRATEGY_MIRROR']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_MIRROR_WITH_OVERWRITING</td>
+	<td>//input[@value='DATA_STRATEGY_MIRROR_OVERWRITE']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_COPY_AS_NEW</td>
+	<td>//input[@value='DATA_STRATEGY_COPY_AS_NEW']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_CURRENT_USER_ID</td>
+	<td>//input[@value='CURRENT_USER_ID']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>APPLICATIONS_ALWAYS_CURRENT_USER_ID</td>
+	<td>//input[@value='ALWAYS_CURRENT_USER_ID']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--OTHER-->
+<tr>
+	<td>OTHER_PERMISSIONS_CHECKBOX</td>
+	<td>//input[@id='_156_PERMISSIONSCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OTHER_THEME_CHECKBOX</td>
+	<td>//input[@id='_156_THEMECheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OTHER_THEME_SETTINGS_CHECKBOX</td>
+	<td>//input[@id='_156_THEME_REFERENCECheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OTHER_LOGO_CHECKBOX</td>
+	<td>//input[@id='_156_LOGOCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OTHER_SITE_PAGES_SETTINGS_CHECKBOX</td>
+	<td>//input[@id='_156_LAYOUT_SET_SETTINGSCheckbox']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OTHER_CATEGORIES_CHECKBOX</td>
+	<td>//input[@id='_156_CATEGORIESCheckbox']</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -148,6 +148,22 @@ public class JournalTemplateServiceSoap {
 		try {
 			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(groupId,
 					templateId);
+
+			return com.liferay.portlet.journal.model.JournalTemplateSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplateSoap getTemplate(
+		long groupId, java.lang.String templateId,
+		boolean includeGlobalTemplates) throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(groupId,
+					templateId, includeGlobalTemplates);
 
 			return com.liferay.portlet.journal.model.JournalTemplateSoap.toSoapModel(returnValue);
 		}

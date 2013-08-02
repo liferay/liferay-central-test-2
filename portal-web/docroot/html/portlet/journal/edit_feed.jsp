@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -145,7 +145,7 @@ if (feed != null) {
 			</c:when>
 			<c:otherwise>
 				<aui:field-wrapper label="id">
-					<%= feedId %>
+					<%= HtmlUtil.escape(feedId) %>
 				</aui:field-wrapper>
 			</c:otherwise>
 		</c:choose>
@@ -263,10 +263,10 @@ if (feed != null) {
 						<c:if test="<%= (structure != null) && (templates.size() > 1) %>">
 
 							<%
-							for (JournalTemplate currTemplate : templates) {
+							for (JournalTemplate curTemplate : templates) {
 							%>
 
-								<aui:option data-contentField="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>"  label='<%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName(locale)) %>' selected="<%= rendererTemplateId.equals(currTemplate.getTemplateId()) %>" value="<%= currTemplate.getTemplateId() %>" />
+								<aui:option data-contentField="<%= JournalFeedConstants.RENDERED_WEB_CONTENT %>"  label='<%= LanguageUtil.format(pageContext, "use-template-x", curTemplate.getName(locale)) %>' selected="<%= rendererTemplateId.equals(curTemplate.getTemplateId()) %>" value="<%= curTemplate.getTemplateId() %>" />
 
 							<%
 							}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -49,12 +50,12 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.ResourceActionLocalService;
 import com.liferay.portal.service.RoleLocalService;
-import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
+import com.liferay.util.JS;
 
 import java.io.InputStream;
 
@@ -75,6 +76,7 @@ import javax.servlet.jsp.PageContext;
  * @author Daeyoung Song
  * @author Raymond Augé
  */
+@DoPrivileged
 public class ResourceActionsImpl implements ResourceActions {
 
 	public void afterPropertiesSet() {
@@ -120,6 +122,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public void checkAction(String name, String actionId)
 		throws NoSuchResourceActionException {
 
@@ -131,6 +134,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public String getAction(Locale locale, String action) {
 		String key = getActionNamePrefix() + action;
 
@@ -147,6 +151,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return value;
 	}
 
+	@Override
 	public String getAction(PageContext pageContext, String action) {
 		String key = getActionNamePrefix() + action;
 
@@ -163,10 +168,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		return value;
 	}
 
+	@Override
 	public String getActionNamePrefix() {
 		return _ACTION_NAME_PREFIX;
 	}
 
+	@Override
 	public List<String> getActions(List<Permission> permissions) {
 		List<String> actions = new UniqueList<String>();
 
@@ -177,6 +184,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getActionsNames(
 		PageContext pageContext, List<String> actions) {
 
@@ -189,6 +197,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actionNames;
 	}
 
+	@Override
 	public List<String> getActionsNames(
 		PageContext pageContext, String name, long actionIds) {
 
@@ -215,10 +224,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public List<String> getModelNames() {
 		return ListUtil.fromMapKeys(_modelPortletResources);
 	}
 
+	@Override
 	public List<String> getModelPortletResources(String name) {
 		Set<String> resources = _modelPortletResources.get(name);
 
@@ -230,6 +241,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public String getModelResource(Locale locale, String name) {
 		String key = getModelResourceNamePrefix() + name;
 
@@ -246,6 +258,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return value;
 	}
 
+	@Override
 	public String getModelResource(PageContext pageContext, String name) {
 		String key = getModelResourceNamePrefix() + name;
 
@@ -262,38 +275,47 @@ public class ResourceActionsImpl implements ResourceActions {
 		return value;
 	}
 
+	@Override
 	public List<String> getModelResourceActions(String name) {
 		return getActions(_modelResourceActions, name);
 	}
 
+	@Override
 	public List<String> getModelResourceGroupDefaultActions(String name) {
 		return getActions(_modelResourceGroupDefaultActions, name);
 	}
 
+	@Override
 	public List<String> getModelResourceGuestDefaultActions(String name) {
 		return getActions(_modelResourceGuestDefaultActions, name);
 	}
 
+	@Override
 	public List<String> getModelResourceGuestUnsupportedActions(String name) {
 		return getActions(_modelResourceGuestUnsupportedActions, name);
 	}
 
+	@Override
 	public String getModelResourceNamePrefix() {
 		return _MODEL_RESOURCE_NAME_PREFIX;
 	}
 
+	@Override
 	public List<String> getModelResourceOwnerDefaultActions(String name) {
 		return getActions(_modelResourceOwnerDefaultActions, name);
 	}
 
+	@Override
 	public String[] getOrganizationModelResources() {
 		return _ORGANIZATION_MODEL_RESOURCES;
 	}
 
+	@Override
 	public String[] getPortalModelResources() {
 		return _PORTAL_MODEL_RESOURCES;
 	}
 
+	@Override
 	public String getPortletBaseResource(String portletName) {
 		List<String> modelNames = getPortletModelResources(portletName);
 
@@ -306,6 +328,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return null;
 	}
 
+	@Override
 	public List<String> getPortletModelResources(String portletName) {
 		portletName = PortletConstants.getRootPortletId(portletName);
 
@@ -319,10 +342,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public List<String> getPortletNames() {
 		return ListUtil.fromMapKeys(_portletModelResources);
 	}
 
+	@Override
 	public List<String> getPortletResourceActions(Portlet portlet) {
 		List<String> actions = ListUtil.copy(
 			getPortletResourceActions(portlet.getPortletId()));
@@ -337,6 +362,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getPortletResourceActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
@@ -395,12 +421,13 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getPortletResourceGroupDefaultActions(String name) {
 
 		// This method should always be called only after
-		// _getPortletResourceActions has been called at least once to
-		// populate the default group actions. Check to make sure this is the
-		// case. However, if it is not, that means the methods
+		// _getPortletResourceActions has been called at least once to populate
+		// the default group actions. Check to make sure this is the case.
+		// However, if it is not, that means the methods
 		// getPortletResourceGuestDefaultActions and
 		// getPortletResourceGuestDefaultActions may not work either.
 
@@ -409,12 +436,14 @@ public class ResourceActionsImpl implements ResourceActions {
 		return getActions(_portletResourceGroupDefaultActions, name);
 	}
 
+	@Override
 	public List<String> getPortletResourceGuestDefaultActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
 		return getActions(_portletResourceGuestDefaultActions, name);
 	}
 
+	@Override
 	public List<String> getPortletResourceGuestUnsupportedActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
@@ -437,6 +466,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getPortletResourceLayoutManagerActions(String name) {
 		name = PortletConstants.getRootPortletId(name);
 
@@ -461,6 +491,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getResourceActions(String name) {
 		if (name.contains(StringPool.PERIOD)) {
 			return getModelResourceActions(name);
@@ -470,6 +501,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public List<String> getResourceActions(
 		String portletResource, String modelResource) {
 
@@ -485,6 +517,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
+	@Override
 	public List<String> getResourceGroupDefaultActions(String name) {
 		if (name.contains(StringPool.PERIOD)) {
 			return getModelResourceGroupDefaultActions(name);
@@ -494,6 +527,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public List<String> getResourceGuestUnsupportedActions(
 		String portletResource, String modelResource) {
 
@@ -513,13 +547,15 @@ public class ResourceActionsImpl implements ResourceActions {
 	/**
 	 * @deprecated {@link #getRoles(long, Group, String, int[])}
 	 */
+	@Override
 	public List<Role> getRoles(
 			long companyId, Group group, String modelResource)
-			throws SystemException {
+		throws SystemException {
 
 		return getRoles(companyId, group, modelResource, null);
 	}
 
+	@Override
 	public List<Role> getRoles(
 			long companyId, Group group, String modelResource, int[] roleTypes)
 		throws SystemException {
@@ -543,6 +579,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		return roles;
 	}
 
+	@Override
 	public boolean hasModelResourceActions(String name) {
 		List<String> actions = _modelResourceActions.get(name);
 
@@ -554,6 +591,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public boolean isOrganizationModelResource(String modelResource) {
 		if (_organizationModelResources.contains(modelResource)) {
 			return true;
@@ -563,6 +601,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public boolean isPortalModelResource(String modelResource) {
 		if (_portalModelResources.contains(modelResource)) {
 			return true;
@@ -572,6 +611,7 @@ public class ResourceActionsImpl implements ResourceActions {
 		}
 	}
 
+	@Override
 	public void read(
 			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
@@ -620,16 +660,13 @@ public class ResourceActionsImpl implements ResourceActions {
 		read(servletContextName, document);
 	}
 
+	@Override
 	public void read(String servletContextName, InputStream inputStream)
 		throws Exception {
 
 		Document document = SAXReaderUtil.read(inputStream, true);
 
 		read(servletContextName, document);
-	}
-
-	public void setPortal(Portal portal) {
-		this.portal = portal;
 	}
 
 	protected void checkGuestUnsupportedActions(
@@ -958,7 +995,7 @@ public class ResourceActionsImpl implements ResourceActions {
 					PortletConstants.WAR_SEPARATOR).concat(servletContextName);
 			}
 
-			portletName = portal.getJsSafePortletId(portletName);
+			portletName = JS.getSafeName(portletName);
 
 			// Reference for a portlet to child models
 
@@ -1039,7 +1076,7 @@ public class ResourceActionsImpl implements ResourceActions {
 				servletContextName);
 		}
 
-		name = portal.getJsSafePortletId(name);
+		name = JS.getSafeName(name);
 
 		List<String> supportsActions = readSupportsActions(
 			portletResourceElement, _portletResourceActions, name);
@@ -1097,11 +1134,12 @@ public class ResourceActionsImpl implements ResourceActions {
 		return actions;
 	}
 
-	protected Portal portal;
 	@BeanReference(type = PortletLocalService.class)
 	protected PortletLocalService portletLocalService;
+
 	@BeanReference(type = ResourceActionLocalService.class)
 	protected ResourceActionLocalService resourceActionLocalService;
+
 	@BeanReference(type = RoleLocalService.class)
 	protected RoleLocalService roleLocalService;
 

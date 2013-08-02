@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -33,6 +33,9 @@
 
 		<portlet:renderURL var="searchURL">
 			<portlet:param name="struts_action" value="/journal_content_search/search" />
+			<portlet:param name="showListed" value="<%= String.valueOf(showListed) %>" />
+			<portlet:param name="targetPortletId" value="<%= targetPortletId %>" />
+			<portlet:param name="type" value="<%= type %>" />
 		</portlet:renderURL>
 
 		<aui:form action="<%= searchURL %>" method="post" name="fm">

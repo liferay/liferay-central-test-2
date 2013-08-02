@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -282,21 +282,91 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		JournalArticleImage journalArticleImage) {
+		if (journalArticleImage.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(journalArticleImage.getGroupId()),
+					
+					journalArticleImage.getArticleId(),
+					Double.valueOf(journalArticleImage.getVersion()),
+					
+					journalArticleImage.getElInstanceId(),
+					
+					journalArticleImage.getElName(),
+					
+					journalArticleImage.getLanguageId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L, args,
+				journalArticleImage);
+		}
+		else {
+			JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
+
+			if ((journalArticleImageModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_A_V_E_E_L.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(journalArticleImage.getGroupId()),
+						
+						journalArticleImage.getArticleId(),
+						Double.valueOf(journalArticleImage.getVersion()),
+						
+						journalArticleImage.getElInstanceId(),
+						
+						journalArticleImage.getElName(),
+						
+						journalArticleImage.getLanguageId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
+					args, journalArticleImage);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		JournalArticleImage journalArticleImage) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-			new Object[] {
+		JournalArticleImageModelImpl journalArticleImageModelImpl = (JournalArticleImageModelImpl)journalArticleImage;
+
+		Object[] args = new Object[] {
 				Long.valueOf(journalArticleImage.getGroupId()),
 				
-			journalArticleImage.getArticleId(),
+				journalArticleImage.getArticleId(),
 				Double.valueOf(journalArticleImage.getVersion()),
 				
-			journalArticleImage.getElInstanceId(),
+				journalArticleImage.getElInstanceId(),
 				
-			journalArticleImage.getElName(),
+				journalArticleImage.getElName(),
 				
-			journalArticleImage.getLanguageId()
-			});
+				journalArticleImage.getLanguageId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L, args);
+
+		if ((journalArticleImageModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_A_V_E_E_L.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(journalArticleImageModelImpl.getOriginalGroupId()),
+					
+					journalArticleImageModelImpl.getOriginalArticleId(),
+					Double.valueOf(journalArticleImageModelImpl.getOriginalVersion()),
+					
+					journalArticleImageModelImpl.getOriginalElInstanceId(),
+					
+					journalArticleImageModelImpl.getOriginalElName(),
+					
+					journalArticleImageModelImpl.getOriginalLanguageId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L, args);
+		}
 	}
 
 	/**
@@ -495,58 +565,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 			JournalArticleImageImpl.class, journalArticleImage.getPrimaryKey(),
 			journalArticleImage);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-				new Object[] {
-					Long.valueOf(journalArticleImage.getGroupId()),
-					
-				journalArticleImage.getArticleId(),
-					Double.valueOf(journalArticleImage.getVersion()),
-					
-				journalArticleImage.getElInstanceId(),
-					
-				journalArticleImage.getElName(),
-					
-				journalArticleImage.getLanguageId()
-				}, journalArticleImage);
-		}
-		else {
-			if ((journalArticleImageModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_A_V_E_E_L.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(journalArticleImageModelImpl.getOriginalGroupId()),
-						
-						journalArticleImageModelImpl.getOriginalArticleId(),
-						Double.valueOf(journalArticleImageModelImpl.getOriginalVersion()),
-						
-						journalArticleImageModelImpl.getOriginalElInstanceId(),
-						
-						journalArticleImageModelImpl.getOriginalElName(),
-						
-						journalArticleImageModelImpl.getOriginalLanguageId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_A_V_E_E_L,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_A_V_E_E_L,
-					new Object[] {
-						Long.valueOf(journalArticleImage.getGroupId()),
-						
-					journalArticleImage.getArticleId(),
-						Double.valueOf(journalArticleImage.getVersion()),
-						
-					journalArticleImage.getElInstanceId(),
-						
-					journalArticleImage.getElName(),
-						
-					journalArticleImage.getLanguageId()
-					}, journalArticleImage);
-			}
-		}
+		clearUniqueFindersCache(journalArticleImage);
+		cacheUniqueFindersCache(journalArticleImage);
 
 		return journalArticleImage;
 	}
@@ -2692,8 +2712,10 @@ public class JournalArticleImagePersistenceImpl extends BasePersistenceImpl<Jour
 				List<ModelListener<JournalArticleImage>> listenersList = new ArrayList<ModelListener<JournalArticleImage>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<JournalArticleImage>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

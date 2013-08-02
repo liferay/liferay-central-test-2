@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.transaction.TransactionCommitCallbackRegistryUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -30,7 +31,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.spring.transaction.TransactionCommitCallbackUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.NoSuchEntryException;
 import com.liferay.portlet.asset.model.AssetEntry;
@@ -58,6 +58,7 @@ import java.util.concurrent.Callable;
 public class DLAppHelperLocalServiceImpl
 	extends DLAppHelperLocalServiceBaseImpl {
 
+	@Override
 	public void addFileEntry(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			ServiceContext serviceContext)
@@ -94,6 +95,7 @@ public class DLAppHelperLocalServiceImpl
 		registerDLProcessorCallback(fileEntry);
 	}
 
+	@Override
 	public void addFolder(Folder folder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -106,6 +108,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void cancelCheckOut(
 			long userId, FileEntry fileEntry,
 			FileVersion destinationFileVersion, FileVersion draftFileVersion,
@@ -132,6 +135,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void checkAssetEntry(
 			long userId, FileEntry fileEntry, FileVersion fileVersion)
 		throws PortalException, SystemException {
@@ -146,7 +150,8 @@ public class DLAppHelperLocalServiceImpl
 
 		if (fileEntryAssetEntry == null) {
 			fileEntryAssetEntry = assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(),
+				userId, fileEntry.getGroupId(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(),
 				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 				fileEntry.getUuid(), fileEntryTypeId, assetCategoryIds,
 				assetTagNames, false, null, null, null, null,
@@ -171,7 +176,8 @@ public class DLAppHelperLocalServiceImpl
 				fileEntry.getFileEntryId());
 
 			fileVersionAssetEntry = assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(),
+				userId, fileEntry.getGroupId(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(),
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				fileEntryTypeId, assetCategoryIds, assetTagNames, false, null,
@@ -192,6 +198,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteFileEntry(FileEntry fileEntry)
 		throws PortalException, SystemException {
 
@@ -217,7 +224,7 @@ public class DLAppHelperLocalServiceImpl
 
 		// Sync
 
-		if (!isStagingGroup(fileEntry.getGroupId())) {
+		if (isUpdateSync(fileEntry)) {
 			dlSyncLocalService.updateSync(
 				fileEntry.getFileEntryId(), fileEntry.getFolderId(),
 				fileEntry.getTitle(), fileEntry.getDescription(),
@@ -240,6 +247,7 @@ public class DLAppHelperLocalServiceImpl
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 	}
 
+	@Override
 	public void deleteFolder(Folder folder)
 		throws PortalException, SystemException {
 
@@ -251,6 +259,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void getFileAsStream(
 			long userId, FileEntry fileEntry, boolean incrementCounter)
 		throws SystemException {
@@ -284,6 +293,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<DLFileShortcut> getFileShortcuts(
 			long groupId, long folderId, int status)
 		throws SystemException {
@@ -291,6 +301,7 @@ public class DLAppHelperLocalServiceImpl
 		return dlFileShortcutPersistence.findByG_F_S(groupId, folderId, status);
 	}
 
+	@Override
 	public int getFileShortcutsCount(long groupId, long folderId, int status)
 		throws SystemException {
 
@@ -298,14 +309,16 @@ public class DLAppHelperLocalServiceImpl
 			groupId, folderId, status);
 	}
 
+	@Override
 	public List<FileEntry> getNoAssetFileEntries() {
 		return null;
 	}
 
+	@Override
 	public void moveFileEntry(FileEntry fileEntry)
 		throws PortalException, SystemException {
 
-		if (!isStagingGroup(fileEntry.getGroupId())) {
+		if (isUpdateSync(fileEntry)) {
 			dlSyncLocalService.updateSync(
 				fileEntry.getFileEntryId(), fileEntry.getFolderId(),
 				fileEntry.getTitle(), fileEntry.getDescription(),
@@ -313,6 +326,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void moveFolder(Folder folder)
 		throws PortalException, SystemException {
 
@@ -323,6 +337,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long assetClassPk)
@@ -347,6 +362,7 @@ public class DLAppHelperLocalServiceImpl
 			assetLinkIds);
 	}
 
+	@Override
 	public AssetEntry updateAsset(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long[] assetCategoryIds, String[] assetTagNames,
@@ -380,8 +396,36 @@ public class DLAppHelperLocalServiceImpl
 		long fileEntryTypeId = getFileEntryTypeId(fileEntry);
 
 		if (addDraftAssetEntry) {
+			if (assetCategoryIds == null) {
+				assetCategoryIds = assetCategoryLocalService.getCategoryIds(
+					DLFileEntryConstants.getClassName(),
+					fileEntry.getFileEntryId());
+			}
+
+			if (assetTagNames == null) {
+				assetTagNames = assetTagLocalService.getTagNames(
+					DLFileEntryConstants.getClassName(),
+					fileEntry.getFileEntryId());
+			}
+
+			if (assetLinkEntryIds == null) {
+				AssetEntry previousAssetEntry = assetEntryLocalService.getEntry(
+					DLFileEntryConstants.getClassName(),
+					fileEntry.getFileEntryId());
+
+				List<AssetLink> assetLinks =
+					assetLinkLocalService.getDirectLinks(
+						previousAssetEntry.getEntryId(),
+						AssetLinkConstants.TYPE_RELATED);
+
+				assetLinkEntryIds = StringUtil.split(
+					ListUtil.toString(
+						assetLinks, AssetLink.ENTRY_ID2_ACCESSOR), 0L);
+			}
+
 			assetEntry = assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(),
+				userId, fileEntry.getGroupId(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(),
 				DLFileEntryConstants.getClassName(),
 				fileVersion.getFileVersionId(), fileEntry.getUuid(),
 				fileEntryTypeId, assetCategoryIds, assetTagNames, false, null,
@@ -391,7 +435,8 @@ public class DLAppHelperLocalServiceImpl
 		}
 		else {
 			assetEntry = assetEntryLocalService.updateEntry(
-				userId, fileEntry.getGroupId(),
+				userId, fileEntry.getGroupId(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(),
 				DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId(),
 				fileEntry.getUuid(), fileEntryTypeId, assetCategoryIds,
 				assetTagNames, visible, null, null, null, null,
@@ -406,6 +451,8 @@ public class DLAppHelperLocalServiceImpl
 			for (DLFileShortcut dlFileShortcut : dlFileShortcuts) {
 				assetEntryLocalService.updateEntry(
 					userId, dlFileShortcut.getGroupId(),
+					dlFileShortcut.getCreateDate(),
+					dlFileShortcut.getModifiedDate(),
 					DLFileShortcut.class.getName(),
 					dlFileShortcut.getFileShortcutId(),
 					dlFileShortcut.getUuid(), fileEntryTypeId, assetCategoryIds,
@@ -423,6 +470,7 @@ public class DLAppHelperLocalServiceImpl
 		return assetEntry;
 	}
 
+	@Override
 	public void updateFileEntry(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			long assetClassPk)
@@ -443,6 +491,7 @@ public class DLAppHelperLocalServiceImpl
 		registerDLProcessorCallback(fileEntry);
 	}
 
+	@Override
 	public void updateFileEntry(
 			long userId, FileEntry fileEntry, FileVersion fileVersion,
 			ServiceContext serviceContext)
@@ -457,6 +506,7 @@ public class DLAppHelperLocalServiceImpl
 		registerDLProcessorCallback(fileEntry);
 	}
 
+	@Override
 	public void updateFolder(Folder folder, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -468,6 +518,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void updateStatus(
 			long userId, FileEntry fileEntry, FileVersion latestFileVersion,
 			int status, Map<String, Serializable> workflowContext)
@@ -508,6 +559,8 @@ public class DLAppHelperLocalServiceImpl
 						AssetEntry assetEntry =
 							assetEntryLocalService.updateEntry(
 								userId, fileEntry.getGroupId(),
+								fileEntry.getCreateDate(),
+								fileEntry.getModifiedDate(),
 								DLFileEntryConstants.getClassName(),
 								fileEntry.getFileEntryId(), fileEntry.getUuid(),
 								fileEntryTypeId, assetCategoryIds,
@@ -560,9 +613,7 @@ public class DLAppHelperLocalServiceImpl
 
 			int activityType = DLActivityKeys.UPDATE_FILE_ENTRY;
 
-			if (latestFileVersionVersion.equals(
-					DLFileEntryConstants.VERSION_DEFAULT)) {
-
+			if (event.equals(DLSyncConstants.EVENT_ADD)) {
 				activityType = DLActivityKeys.ADD_FILE_ENTRY;
 			}
 
@@ -610,12 +661,28 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	protected boolean isUpdateSync(FileEntry fileEntry)
+		throws PortalException, SystemException {
+
+		if (isStagingGroup(fileEntry.getGroupId())) {
+			return false;
+		}
+
+		FileVersion fileVersion = fileEntry.getFileVersion();
+
+		if (!fileVersion.isApproved()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	protected void registerDLProcessorCallback(final FileEntry fileEntry) {
-		TransactionCommitCallbackUtil.registerCallback(
+		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
 
 				public Void call() throws Exception {
-					DLProcessorRegistryUtil.trigger(fileEntry);
+					DLProcessorRegistryUtil.trigger(fileEntry, true);
 
 					return null;
 				}

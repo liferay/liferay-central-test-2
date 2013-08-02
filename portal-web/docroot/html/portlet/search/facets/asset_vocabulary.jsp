@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -96,7 +96,7 @@ private void _buildCategoriesNavigation(String[] assetCategoryIdsOrNames, boolea
 		if (ArrayUtil.contains(assetCategoryIdsOrNames, term)) {
 			sb.append(" current-term");
 
-			ScriptTag.doTag(null, "liferay-token-list", "Liferay.Search.tokenList.add({clearFields: '" + UnicodeFormatter.toString(clearFields) + "', text: '" + UnicodeFormatter.toString(assetCategoryName) + "'});", null, pageContext);
+			ScriptTag.doTag(null, "liferay-token-list", "Liferay.Search.tokenList.add({clearFields: '" + clearFields + "', text: '" + HtmlUtil.escapeJS(assetCategoryName) + "'});", null, pageContext);
 		}
 
 		sb.append("\"><a href=\"#\" data-value=\"");

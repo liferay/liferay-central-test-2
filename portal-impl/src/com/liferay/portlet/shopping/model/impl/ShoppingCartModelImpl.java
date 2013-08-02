@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -364,13 +364,16 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	@Override
 	public ShoppingCart toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ShoppingCart)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ShoppingCart)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ShoppingCart toUnescapedModel() {
+		return (ShoppingCart)this;
 	}
 
 	@Override
@@ -410,18 +413,15 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCart)) {
 			return false;
 		}
 
-		ShoppingCart shoppingCart = null;
-
-		try {
-			shoppingCart = (ShoppingCart)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingCart shoppingCart = (ShoppingCart)obj;
 
 		long primaryKey = shoppingCart.getPrimaryKey();
 
@@ -603,7 +603,7 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	}
 
 	private static ClassLoader _classLoader = ShoppingCart.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ShoppingCart.class
 		};
 	private long _cartId;
@@ -623,5 +623,5 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	private int _altShipping;
 	private boolean _insure;
 	private long _columnBitmask;
-	private ShoppingCart _escapedModelProxy;
+	private ShoppingCart _escapedModel;
 }

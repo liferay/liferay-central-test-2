@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -361,18 +361,79 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 		}
 	}
 
+	protected void cacheUniqueFindersCache(
+		JournalContentSearch journalContentSearch) {
+		if (journalContentSearch.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(journalContentSearch.getGroupId()),
+					Boolean.valueOf(journalContentSearch.getPrivateLayout()),
+					Long.valueOf(journalContentSearch.getLayoutId()),
+					
+					journalContentSearch.getPortletId(),
+					
+					journalContentSearch.getArticleId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_L_P_A, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A, args,
+				journalContentSearch);
+		}
+		else {
+			JournalContentSearchModelImpl journalContentSearchModelImpl = (JournalContentSearchModelImpl)journalContentSearch;
+
+			if ((journalContentSearchModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_P_L_P_A.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(journalContentSearch.getGroupId()),
+						Boolean.valueOf(journalContentSearch.getPrivateLayout()),
+						Long.valueOf(journalContentSearch.getLayoutId()),
+						
+						journalContentSearch.getPortletId(),
+						
+						journalContentSearch.getArticleId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_P_L_P_A, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A, args,
+					journalContentSearch);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(
 		JournalContentSearch journalContentSearch) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-			new Object[] {
+		JournalContentSearchModelImpl journalContentSearchModelImpl = (JournalContentSearchModelImpl)journalContentSearch;
+
+		Object[] args = new Object[] {
 				Long.valueOf(journalContentSearch.getGroupId()),
 				Boolean.valueOf(journalContentSearch.getPrivateLayout()),
 				Long.valueOf(journalContentSearch.getLayoutId()),
 				
-			journalContentSearch.getPortletId(),
+				journalContentSearch.getPortletId(),
 				
-			journalContentSearch.getArticleId()
-			});
+				journalContentSearch.getArticleId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_L_P_A, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A, args);
+
+		if ((journalContentSearchModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_P_L_P_A.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(journalContentSearchModelImpl.getOriginalGroupId()),
+					Boolean.valueOf(journalContentSearchModelImpl.getOriginalPrivateLayout()),
+					Long.valueOf(journalContentSearchModelImpl.getOriginalLayoutId()),
+					
+					journalContentSearchModelImpl.getOriginalPortletId(),
+					
+					journalContentSearchModelImpl.getOriginalArticleId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_L_P_A, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A, args);
+		}
 	}
 
 	/**
@@ -644,49 +705,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 			JournalContentSearchImpl.class,
 			journalContentSearch.getPrimaryKey(), journalContentSearch);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-				new Object[] {
-					Long.valueOf(journalContentSearch.getGroupId()),
-					Boolean.valueOf(journalContentSearch.getPrivateLayout()),
-					Long.valueOf(journalContentSearch.getLayoutId()),
-					
-				journalContentSearch.getPortletId(),
-					
-				journalContentSearch.getArticleId()
-				}, journalContentSearch);
-		}
-		else {
-			if ((journalContentSearchModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_P_L_P_A.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(journalContentSearchModelImpl.getOriginalGroupId()),
-						Boolean.valueOf(journalContentSearchModelImpl.getOriginalPrivateLayout()),
-						Long.valueOf(journalContentSearchModelImpl.getOriginalLayoutId()),
-						
-						journalContentSearchModelImpl.getOriginalPortletId(),
-						
-						journalContentSearchModelImpl.getOriginalArticleId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_P_L_P_A,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_P_L_P_A,
-					new Object[] {
-						Long.valueOf(journalContentSearch.getGroupId()),
-						Boolean.valueOf(journalContentSearch.getPrivateLayout()),
-						Long.valueOf(journalContentSearch.getLayoutId()),
-						
-					journalContentSearch.getPortletId(),
-						
-					journalContentSearch.getArticleId()
-					}, journalContentSearch);
-			}
-		}
+		clearUniqueFindersCache(journalContentSearch);
+		cacheUniqueFindersCache(journalContentSearch);
 
 		return journalContentSearch;
 	}
@@ -4457,8 +4477,10 @@ public class JournalContentSearchPersistenceImpl extends BasePersistenceImpl<Jou
 				List<ModelListener<JournalContentSearch>> listenersList = new ArrayList<ModelListener<JournalContentSearch>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<JournalContentSearch>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

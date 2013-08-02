@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,8 +58,6 @@ long groupId = ParamUtil.getLong(request, "groupId");
 	for (int i = 0; i < results.size(); i++) {
 		JournalStructure structure = (JournalStructure)results.get(i);
 
-		structure = structure.toEscapedModel();
-
 		ResultRow row = new ResultRow(structure, structure.getId(), i);
 
 		StringBundler sb = new StringBundler(7);
@@ -69,7 +67,7 @@ long groupId = ParamUtil.getLong(request, "groupId");
 		sb.append("selectStructure('");
 		sb.append(structure.getStructureId());
 		sb.append("', '");
-		sb.append(structure.getName(locale));
+		sb.append(HtmlUtil.escapeJS(structure.getName(locale)));
 		sb.append("', Liferay.Util.getWindow());");
 
 		String rowHREF = sb.toString();

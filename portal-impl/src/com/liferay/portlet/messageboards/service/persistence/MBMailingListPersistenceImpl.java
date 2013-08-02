@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -242,18 +242,99 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MBMailingList mbMailingList) {
+		if (mbMailingList.isNew()) {
+			Object[] args = new Object[] {
+					mbMailingList.getUuid(),
+					Long.valueOf(mbMailingList.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				mbMailingList);
+
+			args = new Object[] {
+					Long.valueOf(mbMailingList.getGroupId()),
+					Long.valueOf(mbMailingList.getCategoryId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C, args,
+				mbMailingList);
+		}
+		else {
+			MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
+
+			if ((mbMailingListModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						mbMailingList.getUuid(),
+						Long.valueOf(mbMailingList.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					mbMailingList);
+			}
+
+			if ((mbMailingListModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_G_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mbMailingList.getGroupId()),
+						Long.valueOf(mbMailingList.getCategoryId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_G_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C, args,
+					mbMailingList);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MBMailingList mbMailingList) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		MBMailingListModelImpl mbMailingListModelImpl = (MBMailingListModelImpl)mbMailingList;
+
+		Object[] args = new Object[] {
 				mbMailingList.getUuid(),
 				Long.valueOf(mbMailingList.getGroupId())
-			});
+			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C,
-			new Object[] {
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((mbMailingListModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					mbMailingListModelImpl.getOriginalUuid(),
+					Long.valueOf(mbMailingListModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(mbMailingList.getGroupId()),
 				Long.valueOf(mbMailingList.getCategoryId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C, args);
+
+		if ((mbMailingListModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_G_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(mbMailingListModelImpl.getOriginalGroupId()),
+					Long.valueOf(mbMailingListModelImpl.getOriginalCategoryId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C, args);
+		}
 	}
 
 	/**
@@ -433,56 +514,8 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 			MBMailingListImpl.class, mbMailingList.getPrimaryKey(),
 			mbMailingList);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					mbMailingList.getUuid(),
-					Long.valueOf(mbMailingList.getGroupId())
-				}, mbMailingList);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-				new Object[] {
-					Long.valueOf(mbMailingList.getGroupId()),
-					Long.valueOf(mbMailingList.getCategoryId())
-				}, mbMailingList);
-		}
-		else {
-			if ((mbMailingListModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						mbMailingListModelImpl.getOriginalUuid(),
-						Long.valueOf(mbMailingListModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						mbMailingList.getUuid(),
-						Long.valueOf(mbMailingList.getGroupId())
-					}, mbMailingList);
-			}
-
-			if ((mbMailingListModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_G_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(mbMailingListModelImpl.getOriginalGroupId()),
-						Long.valueOf(mbMailingListModelImpl.getOriginalCategoryId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_G_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_G_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_G_C,
-					new Object[] {
-						Long.valueOf(mbMailingList.getGroupId()),
-						Long.valueOf(mbMailingList.getCategoryId())
-					}, mbMailingList);
-			}
-		}
+		clearUniqueFindersCache(mbMailingList);
+		cacheUniqueFindersCache(mbMailingList);
 
 		return mbMailingList;
 	}
@@ -2183,8 +2216,10 @@ public class MBMailingListPersistenceImpl extends BasePersistenceImpl<MBMailingL
 				List<ModelListener<MBMailingList>> listenersList = new ArrayList<ModelListener<MBMailingList>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MBMailingList>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

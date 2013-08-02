@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -378,9 +378,53 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(MBThread mbThread) {
+		if (mbThread.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(mbThread.getRootMessageId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID, args,
+				mbThread);
+		}
+		else {
+			MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
+
+			if ((mbThreadModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_ROOTMESSAGEID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(mbThread.getRootMessageId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+					args, mbThread);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(MBThread mbThread) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
-			new Object[] { Long.valueOf(mbThread.getRootMessageId()) });
+		MBThreadModelImpl mbThreadModelImpl = (MBThreadModelImpl)mbThread;
+
+		Object[] args = new Object[] { Long.valueOf(mbThread.getRootMessageId()) };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID, args);
+
+		if ((mbThreadModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_ROOTMESSAGEID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(mbThreadModelImpl.getOriginalRootMessageId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
+				args);
+		}
 	}
 
 	/**
@@ -661,29 +705,8 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 		EntityCacheUtil.putResult(MBThreadModelImpl.ENTITY_CACHE_ENABLED,
 			MBThreadImpl.class, mbThread.getPrimaryKey(), mbThread);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
-				new Object[] { Long.valueOf(mbThread.getRootMessageId()) },
-				mbThread);
-		}
-		else {
-			if ((mbThreadModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_ROOTMESSAGEID.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(mbThreadModelImpl.getOriginalRootMessageId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ROOTMESSAGEID,
-					args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
-					args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_ROOTMESSAGEID,
-					new Object[] { Long.valueOf(mbThread.getRootMessageId()) },
-					mbThread);
-			}
-		}
+		clearUniqueFindersCache(mbThread);
+		cacheUniqueFindersCache(mbThread);
 
 		return mbThread;
 	}
@@ -9382,8 +9405,10 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				List<ModelListener<MBThread>> listenersList = new ArrayList<ModelListener<MBThread>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<MBThread>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

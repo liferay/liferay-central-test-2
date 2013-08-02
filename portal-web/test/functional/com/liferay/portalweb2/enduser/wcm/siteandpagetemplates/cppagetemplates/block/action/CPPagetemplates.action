@@ -1,0 +1,13 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_BUTTON">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="PAGE_TEMPLATE_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="PAGE_TEMPLATE_MENULIST_EDIT">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

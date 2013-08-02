@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -91,6 +91,25 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 			ResourceModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByCodeId",
 			new String[] { Long.class.getName() });
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_PRIMKEY = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, ResourceImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByPrimKey",
+			new String[] {
+				String.class.getName(),
+				
+			"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PRIMKEY =
+		new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, ResourceImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByPrimKey",
+			new String[] { String.class.getName() },
+			ResourceModelImpl.PRIMKEY_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_PRIMKEY = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
+			ResourceModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByPrimKey",
+			new String[] { String.class.getName() });
 	public static final FinderPath FINDER_PATH_FETCH_BY_C_P = new FinderPath(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceModelImpl.FINDER_CACHE_ENABLED, ResourceImpl.class,
 			FINDER_CLASS_NAME_ENTITY, "fetchByC_P",
@@ -199,13 +218,60 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(Resource resource) {
+		if (resource.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(resource.getCodeId()),
+					
+					resource.getPrimKey()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P, args, resource);
+		}
+		else {
+			ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
+
+			if ((resourceModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_P.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(resource.getCodeId()),
+						
+						resource.getPrimKey()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_P, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P, args,
+					resource);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(Resource resource) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P,
-			new Object[] {
+		ResourceModelImpl resourceModelImpl = (ResourceModelImpl)resource;
+
+		Object[] args = new Object[] {
 				Long.valueOf(resource.getCodeId()),
 				
-			resource.getPrimKey()
-			});
+				resource.getPrimKey()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P, args);
+
+		if ((resourceModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_P.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(resourceModelImpl.getOriginalCodeId()),
+					
+					resourceModelImpl.getOriginalPrimKey()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P, args);
+		}
 	}
 
 	/**
@@ -348,40 +414,30 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CODEID,
 					args);
 			}
+
+			if ((resourceModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PRIMKEY.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						resourceModelImpl.getOriginalPrimKey()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PRIMKEY, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PRIMKEY,
+					args);
+
+				args = new Object[] { resourceModelImpl.getPrimKey() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_PRIMKEY, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PRIMKEY,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(ResourceModelImpl.ENTITY_CACHE_ENABLED,
 			ResourceImpl.class, resource.getPrimaryKey(), resource);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
-				new Object[] {
-					Long.valueOf(resource.getCodeId()),
-					
-				resource.getPrimKey()
-				}, resource);
-		}
-		else {
-			if ((resourceModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_P.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(resourceModelImpl.getOriginalCodeId()),
-						
-						resourceModelImpl.getOriginalPrimKey()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_P, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_P, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_P,
-					new Object[] {
-						Long.valueOf(resource.getCodeId()),
-						
-					resource.getPrimKey()
-					}, resource);
-			}
-		}
+		clearUniqueFindersCache(resource);
+		cacheUniqueFindersCache(resource);
 
 		return resource;
 	}
@@ -873,6 +929,401 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	}
 
 	/**
+	 * Returns all the resources where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @return the matching resources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Resource> findByPrimKey(String primKey)
+		throws SystemException {
+		return findByPrimKey(primKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the resources where primKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param primKey the prim key
+	 * @param start the lower bound of the range of resources
+	 * @param end the upper bound of the range of resources (not inclusive)
+	 * @return the range of matching resources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Resource> findByPrimKey(String primKey, int start, int end)
+		throws SystemException {
+		return findByPrimKey(primKey, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the resources where primKey = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+	 * </p>
+	 *
+	 * @param primKey the prim key
+	 * @param start the lower bound of the range of resources
+	 * @param end the upper bound of the range of resources (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching resources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Resource> findByPrimKey(String primKey, int start, int end,
+		OrderByComparator orderByComparator) throws SystemException {
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_PRIMKEY;
+			finderArgs = new Object[] { primKey };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_PRIMKEY;
+			finderArgs = new Object[] { primKey, start, end, orderByComparator };
+		}
+
+		List<Resource> list = (List<Resource>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (Resource resource : list) {
+				if (!Validator.equals(primKey, resource.getPrimKey())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(2);
+			}
+
+			query.append(_SQL_SELECT_RESOURCE_WHERE);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_2);
+				}
+			}
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (primKey != null) {
+					qPos.add(primKey);
+				}
+
+				list = (List<Resource>)QueryUtil.list(q, getDialect(), start,
+						end);
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (list == null) {
+					FinderCacheUtil.removeResult(finderPath, finderArgs);
+				}
+				else {
+					cacheResult(list);
+
+					FinderCacheUtil.putResult(finderPath, finderArgs, list);
+				}
+
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first resource in the ordered set where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching resource
+	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource findByPrimKey_First(String primKey,
+		OrderByComparator orderByComparator)
+		throws NoSuchResourceException, SystemException {
+		Resource resource = fetchByPrimKey_First(primKey, orderByComparator);
+
+		if (resource != null) {
+			return resource;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("primKey=");
+		msg.append(primKey);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchResourceException(msg.toString());
+	}
+
+	/**
+	 * Returns the first resource in the ordered set where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching resource, or <code>null</code> if a matching resource could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource fetchByPrimKey_First(String primKey,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<Resource> list = findByPrimKey(primKey, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last resource in the ordered set where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching resource
+	 * @throws com.liferay.portal.NoSuchResourceException if a matching resource could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource findByPrimKey_Last(String primKey,
+		OrderByComparator orderByComparator)
+		throws NoSuchResourceException, SystemException {
+		Resource resource = fetchByPrimKey_Last(primKey, orderByComparator);
+
+		if (resource != null) {
+			return resource;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("primKey=");
+		msg.append(primKey);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchResourceException(msg.toString());
+	}
+
+	/**
+	 * Returns the last resource in the ordered set where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching resource, or <code>null</code> if a matching resource could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource fetchByPrimKey_Last(String primKey,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByPrimKey(primKey);
+
+		List<Resource> list = findByPrimKey(primKey, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the resources before and after the current resource in the ordered set where primKey = &#63;.
+	 *
+	 * @param resourceId the primary key of the current resource
+	 * @param primKey the prim key
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next resource
+	 * @throws com.liferay.portal.NoSuchResourceException if a resource with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	public Resource[] findByPrimKey_PrevAndNext(long resourceId,
+		String primKey, OrderByComparator orderByComparator)
+		throws NoSuchResourceException, SystemException {
+		Resource resource = findByPrimaryKey(resourceId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			Resource[] array = new ResourceImpl[3];
+
+			array[0] = getByPrimKey_PrevAndNext(session, resource, primKey,
+					orderByComparator, true);
+
+			array[1] = resource;
+
+			array[2] = getByPrimKey_PrevAndNext(session, resource, primKey,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected Resource getByPrimKey_PrevAndNext(Session session,
+		Resource resource, String primKey, OrderByComparator orderByComparator,
+		boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_RESOURCE_WHERE);
+
+		if (primKey == null) {
+			query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_1);
+		}
+		else {
+			if (primKey.equals(StringPool.BLANK)) {
+				query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_3);
+			}
+			else {
+				query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_2);
+			}
+		}
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		if (primKey != null) {
+			qPos.add(primKey);
+		}
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(resource);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<Resource> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
 	 * Returns the resource where codeId = &#63; and primKey = &#63; or throws a {@link com.liferay.portal.NoSuchResourceException} if it could not be found.
 	 *
 	 * @param codeId the code ID
@@ -1160,6 +1611,18 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	}
 
 	/**
+	 * Removes all the resources where primKey = &#63; from the database.
+	 *
+	 * @param primKey the prim key
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void removeByPrimKey(String primKey) throws SystemException {
+		for (Resource resource : findByPrimKey(primKey)) {
+			remove(resource);
+		}
+	}
+
+	/**
 	 * Removes the resource where codeId = &#63; and primKey = &#63; from the database.
 	 *
 	 * @param codeId the code ID
@@ -1229,6 +1692,71 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				}
 
 				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CODEID,
+					finderArgs, count);
+
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	/**
+	 * Returns the number of resources where primKey = &#63;.
+	 *
+	 * @param primKey the prim key
+	 * @return the number of matching resources
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int countByPrimKey(String primKey) throws SystemException {
+		Object[] finderArgs = new Object[] { primKey };
+
+		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_BY_PRIMKEY,
+				finderArgs, this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_RESOURCE_WHERE);
+
+			if (primKey == null) {
+				query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_1);
+			}
+			else {
+				if (primKey.equals(StringPool.BLANK)) {
+					query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_3);
+				}
+				else {
+					query.append(_FINDER_COLUMN_PRIMKEY_PRIMKEY_2);
+				}
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (primKey != null) {
+					qPos.add(primKey);
+				}
+
+				count = (Long)q.uniqueResult();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				if (count == null) {
+					count = Long.valueOf(0);
+				}
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_PRIMKEY,
 					finderArgs, count);
 
 				closeSession(session);
@@ -1360,8 +1888,10 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 				List<ModelListener<Resource>> listenersList = new ArrayList<ModelListener<Resource>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Resource>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);
@@ -1513,6 +2043,9 @@ public class ResourcePersistenceImpl extends BasePersistenceImpl<Resource>
 	private static final String _SQL_COUNT_RESOURCE = "SELECT COUNT(resource) FROM Resource resource";
 	private static final String _SQL_COUNT_RESOURCE_WHERE = "SELECT COUNT(resource) FROM Resource resource WHERE ";
 	private static final String _FINDER_COLUMN_CODEID_CODEID_2 = "resource.codeId = ?";
+	private static final String _FINDER_COLUMN_PRIMKEY_PRIMKEY_1 = "resource.primKey IS NULL";
+	private static final String _FINDER_COLUMN_PRIMKEY_PRIMKEY_2 = "resource.primKey = ?";
+	private static final String _FINDER_COLUMN_PRIMKEY_PRIMKEY_3 = "(resource.primKey IS NULL OR resource.primKey = ?)";
 	private static final String _FINDER_COLUMN_C_P_CODEID_2 = "resource.codeId = ? AND ";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_1 = "resource.primKey IS NULL";
 	private static final String _FINDER_COLUMN_C_P_PRIMKEY_2 = "resource.primKey = ?";

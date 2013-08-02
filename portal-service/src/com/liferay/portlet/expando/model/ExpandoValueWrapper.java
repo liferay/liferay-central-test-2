@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -342,6 +343,10 @@ public class ExpandoValueWrapper implements ExpandoValue,
 		return new ExpandoValueWrapper(_expandoValue.toEscapedModel());
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoValue toUnescapedModel() {
+		return new ExpandoValueWrapper(_expandoValue.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _expandoValue.toString();
@@ -587,6 +592,25 @@ public class ExpandoValueWrapper implements ExpandoValue,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		_expandoValue.setStringArray(data);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoValueWrapper)) {
+			return false;
+		}
+
+		ExpandoValueWrapper expandoValueWrapper = (ExpandoValueWrapper)obj;
+
+		if (Validator.equals(_expandoValue, expandoValueWrapper._expandoValue)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

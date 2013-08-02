@@ -1,0 +1,185 @@
+<definition>
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+	</set-up>
+
+	<command name="AddDocument">
+		<var name="dmDocumentDescription" value="DM Document Description" />
+		<var name="dmDocumentFile" value="Document_1.txt" />
+		<var name="dmDocumentSize" value="0.3k" />
+		<var name="dmDocumentTitle" value="DM Document Title" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+	</command>
+
+	<command name="AddFolder">
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		</execute>
+	</command>
+
+	<command name="DeleteDocument">
+		<var name="dmDocumentFile" value="Document_1.txt" />
+		<var name="dmDocumentSize" value="0.3k" />
+		<var name="dmDocumentTitle" value="DM Document Title" />
+		<var name="dmDocumentDescription" value="DM Document Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+
+		<execute macro="DMDocument#deleteCP">
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		</execute>
+	</command>
+
+	<command name="DeleteFolder">
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		</execute>
+
+		<execute macro="DMFolder#deleteCP">
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+	</command>
+
+	<command name="EditDocument">
+		<var name="dmDocumentFile" value="Document_1.txt" />
+		<var name="dmDocumentSize" value="0.3k" />
+		<var name="dmDocumentTitle" value="DM Document Title" />
+		<var name="dmDocumentDescription" value="DM Document Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		</execute>
+
+		<execute macro="DMDocument#editCP">
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+			<var name="dmDocumentTitleEdit" value="${dmDocumentTitle} Edit" />
+			<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescription} Edit" />
+		</execute>
+	</command>
+
+	<command name="EditFolder">
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="DMFolder#editCP">
+			<var name="dmFolderName" value="${dmFolderName}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+			<var name="dmFolderNameEdit" value="${dmFolderName} Edit" />
+			<var name="dmFolderDescriptionEdit" value="${dmFolderDescription} Edit" />
+		</execute>
+	</command>
+
+	<command name="MoveDocumentToFolder">
+		<var name="dmDocumentFile" value="Document_1.txt" />
+		<var name="dmDocumentSize" value="0.3k" />
+		<var name="dmDocumentTitle" value="DM Document Title" />
+		<var name="dmDocumentDescription" value="DM Document Description" />
+		<var name="dmFolderName" value="DM Folder Name" />
+		<var name="dmFolderDescription" value="DM Folder Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMDocument#addCP">
+			<var name="dmDocumentFile" value="${dmDocumentFile}" />
+			<var name="dmDocumentSize" value="${dmDocumentSize}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+
+		<execute macro="DMDocument#moveToFolderCP">
+			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmFolderName" value="${dmFolderName}" />
+		</execute>
+	</command>
+
+	<command name="MoveFolderToFolder">
+		<var name="dmFolderName1" value="DM Folder1 Title" />
+		<var name="dmFolderDescription1" value="DM Folder1 Description" />
+		<var name="dmFolderName2" value="DM Folder2 Title" />
+		<var name="dmFolderDescription2" value="DM Folder2 Description" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Documents and Media" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderName" value="${dmFolderName1}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription1}" />
+		</execute>
+
+		<execute macro="DMFolder#addCP">
+			<var name="dmFolderName" value="${dmFolderName2}" />
+			<var name="dmFolderDescription" value="${dmFolderDescription2}" />
+		</execute>
+
+		<execute macro="DMFolder#moveToFolderCP">
+			<var name="dmFolderName1" value="${dmFolderName1}" />
+			<var name="dmFolderName2" value="${dmFolderName2}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="DMDocument#tearDownCP" />
+
+		<execute macro="DMFolder#tearDownCP" />
+	</tear-down>
+</definition>

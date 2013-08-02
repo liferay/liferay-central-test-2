@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -117,6 +117,9 @@
 				getCDNDynamicResourcesHost: function() {
 					return "<%= themeDisplay.getCDNDynamicResourcesHost() %>";
 				},
+				getCDNBaseURL: function() {
+					return "<%= themeDisplay.getCDNBaseURL() %>";
+				},
 				getCDNHost: function() {
 					return "<%= themeDisplay.getCDNHost() %>";
 				},
@@ -155,6 +158,9 @@
 					},
 					getParentLayoutId: function() {
 						return "<%= layout.getParentLayoutId() %>";
+					},
+					isVirtualLayout: function() {
+						return <%= (layout instanceof VirtualLayout) %>;
 					},
 				</c:if>
 
@@ -216,7 +222,7 @@
 					return "<%= themeDisplay.getURLControlPanel() %>";
 				},
 				getURLHome: function() {
-					return "<%= themeDisplay.getURLHome() %>";
+					return "<%= HtmlUtil.escapeJS(themeDisplay.getURLHome()) %>";
 				},
 				getSessionId: function() {
 					<c:choose>
@@ -247,12 +253,15 @@
 
 		String alloyRootPath = javaScriptRootPath + "/aui/";
 
-		String alloyBaseURL = PortalUtil.getPortalURL(request) + alloyRootPath;
+		String alloyBaseURL = PortalUtil.getPortalURL(request, themeDisplay.isSecure()) + alloyRootPath;
 
 		String alloyComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo/", "minifierType=", javaScriptLastModified);
 		%>
 
 		Liferay.AUI = {
+			getAvailableLangPath: function() {
+				return '<%= PortalUtil.getStaticResourceURL(request, "available_languages.jsp", javaScriptLastModified) %>';
+			},
 			getBaseURL: function() {
 				return '<%= alloyBaseURL %>';
 			},
@@ -283,7 +292,7 @@
 			getJavaScriptRootPath: function() {
 				return '<%= javaScriptRootPath %>';
 			},
-			getLangPath: function () {
+			getLangPath: function() {
 				return '<%= PortalUtil.getStaticResourceURL(request, "aui_lang.jsp", javaScriptLastModified) %>';
 			},
 			getRootPath: function() {
@@ -387,7 +396,7 @@
 					Liferay._editControlsState = 'visible';
 				</c:when>
 				<c:otherwise>
-					Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible") %>';
+					Liferay._editControlsState = '<%= HtmlUtil.escape(GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", null), "visible")) %>';
 				</c:otherwise>
 			</c:choose>
 		</c:if>
@@ -412,11 +421,13 @@ String googleAnalyticsId = groupTypeSettings.getProperty("googleAnalyticsId");
 		(function() {
 			var ga = document.createElement('script');
 
+			ga.async = true;
 			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			ga.type = 'text/javascript';
 
-			ga.setAttribute('async', 'true');
+			var s = document.getElementsByTagName('script')[0];
 
-			document.documentElement.firstChild.appendChild(ga);
+			s.parentNode.insertBefore(ga, s);
 		})();
 	</script>
 </c:if>

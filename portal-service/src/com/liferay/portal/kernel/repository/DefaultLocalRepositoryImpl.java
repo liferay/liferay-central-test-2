@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,6 +48,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		_repository = repository;
 	}
 
+	@Override
 	public FileEntry addFileEntry(
 		long userId, long folderId, String sourceFileName, String mimeType,
 		String title, String description, String changeLog, File file,
@@ -56,6 +57,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry addFileEntry(
 		long userId, long folderId, String sourceFileName, String mimeType,
 		String title, String description, String changeLog, InputStream is,
@@ -64,6 +66,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Folder addFolder(
 		long userId, long parentFolderId, String title, String description,
 		ServiceContext serviceContext) {
@@ -71,22 +74,26 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void deleteAll() {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void deleteFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
 		_repository.deleteFileEntry(fileEntryId);
 	}
 
+	@Override
 	public void deleteFolder(long folderId)
 		throws PortalException, SystemException {
 
 		_repository.deleteFolder(folderId);
 	}
 
+	@Override
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -94,6 +101,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		return _repository.getFileEntries(folderId, start, end, obc);
 	}
 
+	@Override
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long folderId, int status, int start, int end)
 		throws SystemException {
@@ -102,6 +110,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status, start, end);
 	}
 
+	@Override
 	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
 		throws SystemException {
 
@@ -109,46 +118,54 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status);
 	}
 
+	@Override
 	public int getFileEntriesCount(long folderId) throws SystemException {
 		return _repository.getFileEntriesCount(folderId);
 	}
 
+	@Override
 	public FileEntry getFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 
 		return _repository.getFileEntry(fileEntryId);
 	}
 
+	@Override
 	public FileEntry getFileEntry(long folderId, String title)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return _repository.getFileEntry(folderId, title);
 	}
 
+	@Override
 	public FileEntry getFileEntryByUuid(String uuid)
 		throws PortalException, SystemException {
 
 		return _repository.getFileEntryByUuid(uuid);
 	}
 
+	@Override
 	public FileVersion getFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 
 		return _repository.getFileVersion(fileVersionId);
 	}
 
+	@Override
 	public Folder getFolder(long folderId)
 		throws PortalException, SystemException {
 
 		return _repository.getFolder(folderId);
 	}
 
+	@Override
 	public Folder getFolder(long parentFolderId, String title)
 		throws PortalException, SystemException {
 
 		return _repository.getFolder(parentFolderId, title);
 	}
 
+	@Override
 	public List<Folder> getFolders(
 			long parentFolderId, boolean includeMountfolders, int start,
 			int end, OrderByComparator obc)
@@ -158,6 +175,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			parentFolderId, includeMountfolders, start, end, obc);
 	}
 
+	@Override
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, boolean includeMountFolders, int start,
 			int end, OrderByComparator obc)
@@ -176,6 +194,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status, true, start, end, obc);
 	}
 
+	@Override
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
@@ -194,6 +213,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status, true);
 	}
 
+	@Override
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, boolean includeMountFolders)
 		throws SystemException {
@@ -202,6 +222,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status, includeMountFolders);
 	}
 
+	@Override
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
@@ -211,18 +232,21 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 			folderId, status, mimeTypes, includeMountFolders);
 	}
 
+	@Override
 	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
 		throws PortalException, SystemException {
 
 		return _repository.getFoldersCount(parentFolderId, includeMountfolders);
 	}
 
+	@Override
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
 		throws SystemException {
 
 		return _repository.getFoldersFileEntriesCount(folderIds, status);
 	}
 
+	@Override
 	public List<Folder> getMountFolders(
 			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -230,16 +254,19 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		return _repository.getMountFolders(parentFolderId, start, end, obc);
 	}
 
+	@Override
 	public int getMountFoldersCount(long parentFolderId)
 		throws SystemException {
 
 		return _repository.getMountFoldersCount(parentFolderId);
 	}
 
+	@Override
 	public long getRepositoryId() {
 		return _repository.getRepositoryId();
 	}
 
+	@Override
 	public FileEntry moveFileEntry(
 		long userId, long fileEntryId, long newFolderId,
 		ServiceContext serviceContext) {
@@ -247,6 +274,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void updateAsset(
 		long userId, FileEntry fileEntry, FileVersion fileVersion,
 		long[] assetCategoryIds, String[] assetTagNames,
@@ -255,6 +283,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 		long userId, long fileEntryId, String sourceFileName, String mimeType,
 		String title, String description, String changeLog,
@@ -263,6 +292,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public FileEntry updateFileEntry(
 		long userId, long fileEntryId, String sourceFileName, String mimeType,
 		String title, String description, String changeLog,
@@ -272,6 +302,7 @@ public class DefaultLocalRepositoryImpl implements LocalRepository {
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public Folder updateFolder(
 		long folderId, long parentFolderId, String title, String description,
 		ServiceContext serviceContext) {

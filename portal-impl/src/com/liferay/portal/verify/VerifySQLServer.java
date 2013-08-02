@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -67,6 +67,11 @@ public class VerifySQLServer extends VerifyProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
+
+				if (!isPortalTableName(tableName)) {
+					continue;
+				}
+
 				String columnName = rs.getString("column_name");
 				String dataType = rs.getString("data_type");
 				int length = rs.getInt("length");
@@ -76,7 +81,7 @@ public class VerifySQLServer extends VerifyProcess {
 					convertVarcharColumn(
 						tableName, columnName, length, nullable);
 				}
-				else if (dataType.equals("text")) {
+				else if (dataType.equals("ntext") || dataType.equals("text")) {
 					convertTextColumn(tableName, columnName, nullable);
 				}
 			}
@@ -93,20 +98,71 @@ public class VerifySQLServer extends VerifyProcess {
 		}
 	}
 
+	protected void convertColumnToNvarcharMax(
+			String tableName, String columnName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(7);
+
+			sb.append("select count(*) from information_schema.columns ");
+			sb.append("where table_name = '");
+			sb.append(tableName);
+			sb.append("' and column_name = '");
+			sb.append(columnName);
+			sb.append("' and data_type = 'nvarchar' and ");
+			sb.append("character_maximum_length = '-1'");
+
+			ps = con.prepareStatement(sb.toString());
+
+			rs = ps.executeQuery();
+
+			if (!rs.next()) {
+				return;
+			}
+
+			int count = rs.getInt(1);
+
+			if (count > 0) {
+				return;
+			}
+
+			sb = new StringBundler(5);
+
+			sb.append("alter table ");
+			sb.append(tableName);
+			sb.append(" alter column ");
+			sb.append(columnName);
+			sb.append(" nvarchar(max) null");
+
+			runSQL(sb.toString());
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
 	protected void convertTextColumn(
 			String tableName, String columnName, boolean nullable)
 		throws Exception {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Updating " + tableName + "." + columnName + " to use ntext");
+				"Updating " + tableName + "." + columnName +" to use " +
+					"nvarchar(max)");
 		}
 
 		StringBundler sb = new StringBundler(4);
 
 		sb.append("alter table ");
 		sb.append(tableName);
-		sb.append(" add temp ntext");
+		sb.append(" add temp nvarchar(max)");
 
 		if (!nullable) {
 			sb.append(" not null");
@@ -168,6 +224,9 @@ public class VerifySQLServer extends VerifyProcess {
 		}
 
 		convertColumnsToUnicode();
+
+		convertColumnToNvarcharMax("Layout", "css");
+		convertColumnToNvarcharMax("LayoutRevision", "css");
 	}
 
 	protected void dropNonunicodeTableIndexes() {
@@ -204,6 +263,11 @@ public class VerifySQLServer extends VerifyProcess {
 
 			while (rs.next()) {
 				String tableName = rs.getString("table_name");
+
+				if (!isPortalTableName(tableName)) {
+					continue;
+				}
+
 				String indexName = rs.getString("index_name");
 
 				if (_log.isInfoEnabled()) {

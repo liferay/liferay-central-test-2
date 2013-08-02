@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -254,11 +254,11 @@ if (step == 1) {
 					sb.append("selectRole('");
 					sb.append(role.getRoleId());
 					sb.append("', '");
-					sb.append(UnicodeFormatter.toString(role.getTitle(locale)));
+					sb.append(HtmlUtil.escapeJS(role.getTitle(locale)));
 					sb.append("', '");
 					sb.append("organizationRoles");
 					sb.append("', '");
-					sb.append(UnicodeFormatter.toString(organization.getGroup().getDescriptiveName(locale)));
+					sb.append(HtmlUtil.escapeJS(organization.getGroup().getDescriptiveName(locale)));
 					sb.append("', '");
 					sb.append(organization.getGroup().getGroupId());
 					sb.append("');");

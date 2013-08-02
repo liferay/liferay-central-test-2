@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -144,6 +144,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		return _contentType;
 	}
 
+	@Override
 	public String getHeader(String name) {
 		List<Header> values = _headers.get(name);
 
@@ -160,6 +161,7 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 		return _headers;
 	}
 
+	@Override
 	public int getStatus() {
 		return _status;
 	}
@@ -185,6 +187,10 @@ public class HeaderCacheServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public void sendRedirect(String location) throws IOException {
+		if (isCommitted()) {
+			throw new IllegalStateException("Response is already committed");
+		}
+
 		super.sendRedirect(location);
 
 		setStatus(SC_MOVED_PERMANENTLY);

@@ -1,0 +1,55 @@
+<definition>
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+	</set-up>
+
+	<command name="AddCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addCP">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+	</command>
+
+	<command name="DeleteCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addCP">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+
+		<execute macro="Event#deleteCP">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+	</command>
+
+	<command name="EditCalendarEvent">
+		<var name="eventTitle" value="Calendar Event Title" />
+		<var name="eventTitleEdit" value="Calendar Event Title Edit" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Calendar" />
+		</execute>
+
+		<execute macro="Event#addCP">
+			<var name="eventTitle" value="${eventTitle}" />
+		</execute>
+
+		<execute macro="Event#editCP">
+			<var name="eventTitle" value="${eventTitle}" />
+			<var name="eventTitleEdit" value="${eventTitleEdit}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="Event#tearDownCP" />
+	</tear-down>
+</definition>

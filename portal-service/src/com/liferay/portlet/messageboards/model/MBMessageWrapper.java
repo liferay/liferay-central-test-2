@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.messageboards.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.Date;
@@ -947,6 +948,10 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 		return new MBMessageWrapper(_mbMessage.toEscapedModel());
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMessage toUnescapedModel() {
+		return new MBMessageWrapper(_mbMessage.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _mbMessage.toString();
@@ -980,7 +985,9 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 		return _mbMessage.getBody(translate);
 	}
 
-	public com.liferay.portlet.messageboards.model.MBCategory getCategory() {
+	public com.liferay.portlet.messageboards.model.MBCategory getCategory()
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
 		return _mbMessage.getCategory();
 	}
 
@@ -1016,6 +1023,25 @@ public class MBMessageWrapper implements MBMessage, ModelWrapper<MBMessage> {
 
 	public void setAttachmentsDir(java.lang.String attachmentsDir) {
 		_mbMessage.setAttachmentsDir(attachmentsDir);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MBMessageWrapper)) {
+			return false;
+		}
+
+		MBMessageWrapper mbMessageWrapper = (MBMessageWrapper)obj;
+
+		if (Validator.equals(_mbMessage, mbMessageWrapper._mbMessage)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

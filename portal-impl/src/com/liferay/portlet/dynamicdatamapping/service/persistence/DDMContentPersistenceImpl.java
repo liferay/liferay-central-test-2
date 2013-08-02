@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -240,11 +240,55 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		}
 	}
 
+	protected void cacheUniqueFindersCache(DDMContent ddmContent) {
+		if (ddmContent.isNew()) {
+			Object[] args = new Object[] {
+					ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+				ddmContent);
+		}
+		else {
+			DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
+
+			if ((ddmContentModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						ddmContent.getUuid(),
+						Long.valueOf(ddmContent.getGroupId())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_UUID_G, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G, args,
+					ddmContent);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(DDMContent ddmContent) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G,
-			new Object[] {
+		DDMContentModelImpl ddmContentModelImpl = (DDMContentModelImpl)ddmContent;
+
+		Object[] args = new Object[] {
 				ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+
+		if ((ddmContentModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					ddmContentModelImpl.getOriginalUuid(),
+					Long.valueOf(ddmContentModelImpl.getOriginalGroupId())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
+		}
 	}
 
 	/**
@@ -444,31 +488,8 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 		EntityCacheUtil.putResult(DDMContentModelImpl.ENTITY_CACHE_ENABLED,
 			DDMContentImpl.class, ddmContent.getPrimaryKey(), ddmContent);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-				new Object[] {
-					ddmContent.getUuid(), Long.valueOf(ddmContent.getGroupId())
-				}, ddmContent);
-		}
-		else {
-			if ((ddmContentModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_UUID_G.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						ddmContentModelImpl.getOriginalUuid(),
-						Long.valueOf(ddmContentModelImpl.getOriginalGroupId())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_UUID_G, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_UUID_G, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_UUID_G,
-					new Object[] {
-						ddmContent.getUuid(),
-						Long.valueOf(ddmContent.getGroupId())
-					}, ddmContent);
-			}
-		}
+		clearUniqueFindersCache(ddmContent);
+		cacheUniqueFindersCache(ddmContent);
 
 		return ddmContent;
 	}
@@ -2368,8 +2389,10 @@ public class DDMContentPersistenceImpl extends BasePersistenceImpl<DDMContent>
 				List<ModelListener<DDMContent>> listenersList = new ArrayList<ModelListener<DDMContent>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<DDMContent>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

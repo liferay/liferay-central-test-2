@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -102,11 +102,12 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 				"value.object.column.bitmask.enabled.com.liferay.portlet.dynamicdatamapping.model.DDMStructure"),
 			true);
 	public static long CLASSNAMEID_COLUMN_BITMASK = 1L;
-	public static long DESCRIPTION_COLUMN_BITMASK = 2L;
-	public static long GROUPID_COLUMN_BITMASK = 4L;
-	public static long NAME_COLUMN_BITMASK = 8L;
-	public static long STRUCTUREKEY_COLUMN_BITMASK = 16L;
-	public static long UUID_COLUMN_BITMASK = 32L;
+	public static long COMPANYID_COLUMN_BITMASK = 2L;
+	public static long DESCRIPTION_COLUMN_BITMASK = 4L;
+	public static long GROUPID_COLUMN_BITMASK = 8L;
+	public static long NAME_COLUMN_BITMASK = 16L;
+	public static long STRUCTUREKEY_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 64L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -160,6 +161,19 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		return models;
 	}
 
+	public static final String MAPPING_TABLE_DLFILEENTRYTYPES_DDMSTRUCTURES_NAME =
+		"DLFileEntryTypes_DDMStructures";
+	public static final Object[][] MAPPING_TABLE_DLFILEENTRYTYPES_DDMSTRUCTURES_COLUMNS =
+		{
+			{ "structureId", Types.BIGINT },
+			{ "fileEntryTypeId", Types.BIGINT }
+		};
+	public static final String MAPPING_TABLE_DLFILEENTRYTYPES_DDMSTRUCTURES_SQL_CREATE =
+		"create table DLFileEntryTypes_DDMStructures (structureId LONG not null,fileEntryTypeId LONG not null,primary key (structureId, fileEntryTypeId))";
+	public static final boolean FINDER_CACHE_ENABLED_DLFILEENTRYTYPES_DDMSTRUCTURES =
+		GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
+				"value.object.finder.cache.enabled.DLFileEntryTypes_DDMStructures"),
+			true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.dynamicdatamapping.model.DDMStructure"));
 
@@ -364,7 +378,19 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
 		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@JSON
@@ -726,6 +752,22 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	public void setDocument(com.liferay.portal.kernel.xml.Document document) {
 	}
 
+	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> getLocalizedFieldsMap() {
+		return null;
+	}
+
+	public void setLocalizedFieldsMap(
+		java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> localizedFieldsMap) {
+	}
+
+	public java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> getLocalizedTransientFieldsMap() {
+		return null;
+	}
+
+	public void setLocalizedTransientFieldsMap(
+		java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> localizedTransientFieldsMap) {
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -754,13 +796,16 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 	@Override
 	public DDMStructure toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DDMStructure)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DDMStructure)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DDMStructure toUnescapedModel() {
+		return (DDMStructure)this;
 	}
 
 	@Override
@@ -804,18 +849,15 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStructure)) {
 			return false;
 		}
 
-		DDMStructure ddmStructure = null;
-
-		try {
-			ddmStructure = (DDMStructure)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DDMStructure ddmStructure = (DDMStructure)obj;
 
 		long primaryKey = ddmStructure.getPrimaryKey();
 
@@ -841,6 +883,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		ddmStructureModelImpl._originalGroupId = ddmStructureModelImpl._groupId;
 
 		ddmStructureModelImpl._setOriginalGroupId = false;
+
+		ddmStructureModelImpl._originalCompanyId = ddmStructureModelImpl._companyId;
+
+		ddmStructureModelImpl._setOriginalCompanyId = false;
 
 		ddmStructureModelImpl._originalClassNameId = ddmStructureModelImpl._classNameId;
 
@@ -946,6 +992,10 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 		ddmStructureCacheModel.type = getType();
 
 		ddmStructureCacheModel._document = getDocument();
+
+		ddmStructureCacheModel._localizedFieldsMap = getLocalizedFieldsMap();
+
+		ddmStructureCacheModel._localizedTransientFieldsMap = getLocalizedTransientFieldsMap();
 
 		return ddmStructureCacheModel;
 	}
@@ -1063,7 +1113,7 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	private static ClassLoader _classLoader = DDMStructure.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DDMStructure.class
 		};
 	private String _uuid;
@@ -1073,6 +1123,8 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
 	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private long _userId;
 	private String _userUuid;
 	private String _userName;
@@ -1093,5 +1145,5 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private String _storageType;
 	private int _type;
 	private long _columnBitmask;
-	private DDMStructure _escapedModelProxy;
+	private DDMStructure _escapedModel;
 }

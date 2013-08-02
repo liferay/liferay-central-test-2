@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,8 +26,10 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,6 +41,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 	public WikiPageImpl() {
 	}
 
+	@Override
 	public String getAttachmentsDir() {
 		if (_attachmentDirs == null) {
 			_attachmentDirs = "wiki/" + getResourcePrimKey();
@@ -47,6 +50,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return _attachmentDirs;
 	}
 
+	@Override
 	public String[] getAttachmentsFiles()
 		throws PortalException, SystemException {
 
@@ -62,55 +66,49 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return fileNames;
 	}
 
+	@Override
 	public List<WikiPage> getChildPages() {
-		List<WikiPage> pages = null;
-
 		try {
-			pages = WikiPageLocalServiceUtil.getChildren(
+			return WikiPageLocalServiceUtil.getChildren(
 				getNodeId(), true, getTitle());
 		}
 		catch (Exception e) {
-			pages = new ArrayList<WikiPage>();
+			_log.error(e, e);
 
-			_log.error(e);
+			return Collections.emptyList();
 		}
-
-		return pages;
 	}
 
+	@Override
 	public WikiNode getNode() {
-		WikiNode node = null;
-
 		try {
-			node = WikiNodeLocalServiceUtil.getNode(getNodeId());
+			return WikiNodeLocalServiceUtil.getNode(getNodeId());
 		}
 		catch (Exception e) {
-			node = new WikiNodeImpl();
+			_log.error(e, e);
 
-			_log.error(e);
+			return new WikiNodeImpl();
 		}
-
-		return node;
 	}
 
+	@Override
 	public WikiPage getParentPage() {
 		if (Validator.isNull(getParentTitle())) {
 			return null;
 		}
 
-		WikiPage page = null;
-
 		try {
-			page = WikiPageLocalServiceUtil.getPage(
+			return WikiPageLocalServiceUtil.getPage(
 				getNodeId(), getParentTitle());
 		}
 		catch (Exception e) {
-			_log.error(e);
-		}
+			_log.error(e, e);
 
-		return page;
+			return null;
+		}
 	}
 
+	@Override
 	public List<WikiPage> getParentPages() {
 		List<WikiPage> parentPages = new ArrayList<WikiPage>();
 
@@ -124,22 +122,65 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return parentPages;
 	}
 
+	@Override
 	public WikiPage getRedirectPage() {
 		if (Validator.isNull(getRedirectTitle())) {
 			return null;
 		}
 
-		WikiPage page = null;
-
 		try {
-			page = WikiPageLocalServiceUtil.getPage(
+			return WikiPageLocalServiceUtil.getPage(
 				getNodeId(), getRedirectTitle());
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
+
+			return null;
+		}
+	}
+
+	@Override
+	public List<WikiPage> getViewableChildPages() {
+		try {
+			return WikiPageServiceUtil.getChildren(
+				getGroupId(), getNodeId(), true, getTitle());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return Collections.emptyList();
+		}
+	}
+
+	@Override
+	public WikiPage getViewableParentPage() {
+		if (Validator.isNull(getParentTitle())) {
+			return null;
 		}
 
-		return page;
+		try {
+			return WikiPageServiceUtil.getPage(
+				getGroupId(), getNodeId(), getParentTitle());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return null;
+		}
+	}
+
+	@Override
+	public List<WikiPage> getViewableParentPages() {
+		List<WikiPage> pages = new ArrayList<WikiPage>();
+
+		WikiPage page = getViewableParentPage();
+
+		if (page != null) {
+			pages.addAll(page.getViewableParentPages());
+			pages.add(page);
+		}
+
+		return pages;
 	}
 
 	@Override
@@ -147,6 +188,7 @@ public class WikiPageImpl extends WikiPageBaseImpl {
 		return isHead();
 	}
 
+	@Override
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
 	}

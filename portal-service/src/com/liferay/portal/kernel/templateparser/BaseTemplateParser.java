@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,10 +15,13 @@
 package com.liferay.portal.kernel.templateparser;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
+import com.liferay.portal.kernel.mobile.device.Device;
+import com.liferay.portal.kernel.mobile.device.UnknownDevice;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -42,54 +45,71 @@ import java.util.Map;
  */
 public abstract class BaseTemplateParser implements TemplateParser {
 
+	@Override
 	public String getLanguageId() {
 		return _languageId;
 	}
 
+	@Override
 	public String getScript() {
 		return _script;
 	}
 
+	@Override
 	public ThemeDisplay getThemeDisplay() {
 		return _themeDisplay;
 	}
 
+	@Override
 	public Map<String, String> getTokens() {
 		return _tokens;
 	}
 
+	@Override
 	public String getViewMode() {
 		return _viewMode;
 	}
 
+	@Override
 	public String getXML() {
 		return _xml;
 	}
 
+	public void setContextObjects(Map<String, Object> contextObjects) {
+		_contextObjects = contextObjects;
+	}
+
+	@Override
 	public void setLanguageId(String languageId) {
 		_languageId = languageId;
 	}
 
+	@Override
 	public void setScript(String script) {
 		_script = script;
 	}
 
+	@Override
 	public void setThemeDisplay(ThemeDisplay themeDisplay) {
 		_themeDisplay = themeDisplay;
 	}
 
+	@Override
 	public void setTokens(Map<String, String> tokens) {
 		_tokens = tokens;
 	}
 
+	@Override
 	public void setViewMode(String viewMode) {
 		_viewMode = viewMode;
 	}
 
+	@Override
 	public void setXML(String xml) {
 		_xml = xml;
 	}
 
+	@Override
 	public String transform() throws TransformException {
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
@@ -98,24 +118,34 @@ public abstract class BaseTemplateParser implements TemplateParser {
 		try {
 			TemplateContext templateContext = getTemplateContext();
 
-			Document document = SAXReaderUtil.read(_xml);
+			if (Validator.isNotNull(_xml)) {
+				Document document = SAXReaderUtil.read(_xml);
 
-			Element rootElement = document.getRootElement();
+				Element rootElement = document.getRootElement();
 
-			List<TemplateNode> templateNodes = getTemplateNodes(rootElement);
+				List<TemplateNode> templateNodes = getTemplateNodes(
+					rootElement);
 
-			if (templateNodes != null) {
-				for (TemplateNode templateNode : templateNodes) {
-					templateContext.put(templateNode.getName(), templateNode);
+				if (templateNodes != null) {
+					for (TemplateNode templateNode : templateNodes) {
+						templateContext.put(
+							templateNode.getName(), templateNode);
+					}
 				}
+
+				Element requestElement = rootElement.element("request");
+
+				templateContext.put(
+					"request", insertRequestVariables(requestElement));
+
+				templateContext.put("xmlRequest", requestElement.asXML());
 			}
 
-			Element requestElement = rootElement.element("request");
-
-			templateContext.put(
-				"request", insertRequestVariables(requestElement));
-
-			templateContext.put("xmlRequest", requestElement.asXML());
+			if (_contextObjects != null) {
+				for (String key : _contextObjects.keySet()) {
+					templateContext.put(key, _contextObjects.get(key));
+				}
+			}
 
 			populateTemplateContext(templateContext);
 
@@ -144,26 +174,64 @@ public abstract class BaseTemplateParser implements TemplateParser {
 		return unsyncStringWriter.toString();
 	}
 
-	protected Company getCompany() throws Exception {
-		long companyId = getCompanyId();
+	protected long getArticleGroupId() {
+		return GetterUtil.getLong(_tokens.get("article_group_id"));
+	}
 
-		return CompanyLocalServiceUtil.getCompany(companyId);
+	protected Company getCompany() throws Exception {
+		if (_themeDisplay != null) {
+			return _themeDisplay.getCompany();
+		}
+
+		return CompanyLocalServiceUtil.getCompany(getCompanyId());
+	}
+
+	protected long getCompanyGroupId() {
+		if (_themeDisplay != null) {
+			return _themeDisplay.getCompanyGroupId();
+		}
+
+		return GetterUtil.getLong(_tokens.get("company_group_id"));
 	}
 
 	protected long getCompanyId() {
+		if (_themeDisplay != null) {
+			return _themeDisplay.getCompanyId();
+		}
+
 		return GetterUtil.getLong(_tokens.get("company_id"));
 	}
 
+	protected Device getDevice() {
+		if (_themeDisplay != null) {
+			return _themeDisplay.getDevice();
+		}
+
+		return UnknownDevice.getInstance();
+	}
+
 	protected long getGroupId() {
-		return GetterUtil.getLong(_tokens.get("group_id"));
+		return getArticleGroupId();
+	}
+
+	protected long getScopeGroupId() {
+		return GetterUtil.getLong(_tokens.get("scope_group_id"));
 	}
 
 	protected abstract TemplateContext getTemplateContext() throws Exception;
 
 	protected String getTemplateId() {
-		long companyGroupId = GetterUtil.getLong(
-			_tokens.get("company_group_id"));
-		String templateId = _tokens.get("template_id");
+		long companyGroupId = getCompanyGroupId();
+
+		String templateId = null;
+
+		if (_tokens != null) {
+			templateId = _tokens.get("template_id");
+		}
+
+		if (Validator.isNull(templateId)) {
+			templateId = (String.valueOf(_contextObjects.get("template_id")));
+		}
 
 		StringBundler sb = new StringBundler(5);
 
@@ -241,9 +309,10 @@ public abstract class BaseTemplateParser implements TemplateParser {
 	protected void populateTemplateContext(TemplateContext templateContext)
 		throws Exception {
 
+		templateContext.put("articleGroupId", getArticleGroupId());
 		templateContext.put("company", getCompany());
 		templateContext.put("companyId", getCompanyId());
-		templateContext.put("device", _themeDisplay.getDevice());
+		templateContext.put("device", getDevice());
 		templateContext.put("groupId", getGroupId());
 
 		Locale locale = LocaleUtil.fromLanguageId(_languageId);
@@ -252,9 +321,11 @@ public abstract class BaseTemplateParser implements TemplateParser {
 
 		templateContext.put(
 			"permissionChecker", PermissionThreadLocal.getPermissionChecker());
+		templateContext.put("scopeGroupId", getScopeGroupId());
 		templateContext.put("viewMode", _viewMode);
 	}
 
+	private Map<String, Object> _contextObjects = new HashMap<String, Object>();
 	private String _languageId;
 	private String _script;
 	private ThemeDisplay _themeDisplay;

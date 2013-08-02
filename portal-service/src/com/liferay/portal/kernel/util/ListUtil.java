@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -241,6 +241,20 @@ public class ListUtil {
 		List<Boolean> list = new ArrayList<Boolean>(array.length);
 
 		for (boolean value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Character> toList(char[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return new ArrayList<Character>();
+		}
+
+		List<Character> list = new ArrayList<Character>(array.length);
+
+		for (char value : array) {
 			list.add(value);
 		}
 

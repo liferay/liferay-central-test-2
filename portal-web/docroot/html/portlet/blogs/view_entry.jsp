@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,10 +17,26 @@
 <%@ include file="/html/portlet/blogs/init.jsp" %>
 
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
-if (Validator.isNull(redirect) || layoutTypePortlet.hasPortletId(PortletKeys.BLOGS_AGGREGATOR)) {
-	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + Portal.FRIENDLY_URL_SEPARATOR + "blogs";
+String portletId = portletDisplay.getId();
+
+if (Validator.isNull(redirect) || (strutsAction.equals("/blogs/view_entry") && !portletId.equals(PortletKeys.BLOGS))) {
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	if (portletId.equals(PortletKeys.BLOGS_ADMIN)) {
+		portletURL.setParameter("struts_action", "/blogs_admin/view");
+	}
+	else if (portletId.equals(PortletKeys.BLOGS_AGGREGATOR)) {
+		portletURL.setParameter("struts_action", "/blogs_aggregator/view");
+	}
+	else {
+		portletURL.setParameter("struts_action", "/blogs/view");
+	}
+
+	redirect = portletURL.toString();
 }
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);

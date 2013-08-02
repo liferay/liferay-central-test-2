@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -371,6 +373,10 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 		return new TeamWrapper(_team.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Team toUnescapedModel() {
+		return new TeamWrapper(_team.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _team.toString();
@@ -389,6 +395,25 @@ public class TeamWrapper implements Team, ModelWrapper<Team> {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _team.getRole();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof TeamWrapper)) {
+			return false;
+		}
+
+		TeamWrapper teamWrapper = (TeamWrapper)obj;
+
+		if (Validator.equals(_team, teamWrapper._team)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

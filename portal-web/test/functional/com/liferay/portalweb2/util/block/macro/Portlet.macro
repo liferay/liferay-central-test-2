@@ -1,0 +1,24 @@
+<definition>
+	<command name="addPG">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="Dockbar#mouseOver" locator-key1="ADD" />
+		<execute action="Dockbar#click" locator-key1="ADD_APPLICATION" />
+		<execute action="Dockbar#type" locator-key1="ADD_APPLICATION_SEARCH_FIELD" value1="${portletName}" />
+		<execute action="Dockbar#click" locator1="//div[@title='${portletName}']/p/a" value1="Add" />
+
+		<execute action="Home#assertElementPresent" locator-key1="PORTLET_1" />
+	</command>
+
+	<command name="removePG">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="Home#click" locator-key1="PORTLET_REMOVE_1" />
+		<execute action="Home#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to remove this component?" />
+		<execute action="Home#assertElementNotPresent" locator-key1="PORTLET_1" />
+	</command>
+</definition>

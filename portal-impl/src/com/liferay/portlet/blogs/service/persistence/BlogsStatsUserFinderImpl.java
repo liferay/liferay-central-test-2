@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -50,6 +50,7 @@ public class BlogsStatsUserFinderImpl
 	public static final String FIND_BY_ORGANIZATION_IDS =
 		BlogsStatsUserFinder.class.getName() + ".findByOrganizationIds";
 
+	@Override
 	public int countByOrganizationId(long organizationId)
 		throws SystemException {
 
@@ -60,6 +61,7 @@ public class BlogsStatsUserFinderImpl
 		return countByOrganizationIds(organizationIds);
 	}
 
+	@Override
 	public int countByOrganizationIds(List<Long> organizationIds)
 		throws SystemException {
 
@@ -106,6 +108,7 @@ public class BlogsStatsUserFinderImpl
 		}
 	}
 
+	@Override
 	public List<BlogsStatsUser> findByGroupIds(
 			long companyId, long groupId, int start, int end)
 		throws SystemException {
@@ -160,6 +163,7 @@ public class BlogsStatsUserFinderImpl
 		}
 	}
 
+	@Override
 	public List<BlogsStatsUser> findByOrganizationId(
 			long organizationId, int start, int end, OrderByComparator obc)
 		throws SystemException {
@@ -171,6 +175,7 @@ public class BlogsStatsUserFinderImpl
 		return findByOrganizationIds(organizationIds, start, end, obc);
 	}
 
+	@Override
 	public List<BlogsStatsUser> findByOrganizationIds(
 			List<Long> organizationIds, int start, int end,
 			OrderByComparator obc)

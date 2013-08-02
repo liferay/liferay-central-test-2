@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ import java.util.Map;
 public class DLFileEntryMetadataLocalServiceImpl
 	extends DLFileEntryMetadataLocalServiceBaseImpl {
 
+	@Override
 	public void deleteFileEntryMetadata(long fileEntryId)
 		throws PortalException, SystemException {
 
@@ -48,6 +49,19 @@ public class DLFileEntryMetadataLocalServiceImpl
 		}
 	}
 
+	@Override
+	public void deleteFileVersionFileEntryMetadata(long fileVersionId)
+		throws PortalException, SystemException {
+
+		List<DLFileEntryMetadata> fileEntryMetadatas =
+			dlFileEntryMetadataPersistence.findByFileVersionId(fileVersionId);
+
+		for (DLFileEntryMetadata fileEntryMetadata : fileEntryMetadatas) {
+			deleteFileEntryMetadata(fileEntryMetadata);
+		}
+	}
+
+	@Override
 	public DLFileEntryMetadata getFileEntryMetadata(long fileEntryMetadataId)
 		throws PortalException, SystemException {
 
@@ -55,6 +69,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 			fileEntryMetadataId);
 	}
 
+	@Override
 	public DLFileEntryMetadata getFileEntryMetadata(
 			long ddmStructureId, long fileVersionId)
 		throws PortalException, SystemException {
@@ -63,13 +78,34 @@ public class DLFileEntryMetadataLocalServiceImpl
 			ddmStructureId, fileVersionId);
 	}
 
+	/**
+	 * @deprecated {@link #getFileVersionFileEntryMetadatasCount(long)}
+	 */
+	@Override
 	public long getFileEntryMetadataCount(long fileEntryId, long fileVersionId)
 		throws SystemException {
 
-		return dlFileEntryMetadataPersistence.countByF_V(
-			fileEntryId, fileVersionId);
+		return getFileVersionFileEntryMetadatasCount(fileVersionId);
 	}
 
+	@Override
+	public List<DLFileEntryMetadata> getFileVersionFileEntryMetadatas(
+			long fileVersionId)
+		throws SystemException {
+
+		return dlFileEntryMetadataPersistence.findByFileVersionId(
+			fileVersionId);
+	}
+
+	@Override
+	public long getFileVersionFileEntryMetadatasCount(long fileVersionId)
+		throws SystemException {
+
+		return dlFileEntryMetadataPersistence.countByFileVersionId(
+			fileVersionId);
+	}
+
+	@Override
 	public void updateFileEntryMetadata(
 			long companyId, List<DDMStructure> ddmStructures,
 			long fileEntryTypeId, long fileEntryId, long fileVersionId,
@@ -87,6 +123,7 @@ public class DLFileEntryMetadataLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void updateFileEntryMetadata(
 			long fileEntryTypeId, long fileEntryId, long fileVersionId,
 			Map<String, Fields> fieldsMap, ServiceContext serviceContext)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -216,20 +216,107 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		}
 	}
 
+	protected void cacheUniqueFindersCache(UserIdMapper userIdMapper) {
+		if (userIdMapper.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(userIdMapper.getUserId()),
+					
+					userIdMapper.getType()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T, args,
+				userIdMapper);
+
+			args = new Object[] {
+					userIdMapper.getType(),
+					
+					userIdMapper.getExternalUserId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_E, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E, args,
+				userIdMapper);
+		}
+		else {
+			UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
+
+			if ((userIdMapperModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(userIdMapper.getUserId()),
+						
+						userIdMapper.getType()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_T, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T, args,
+					userIdMapper);
+			}
+
+			if ((userIdMapperModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_T_E.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						userIdMapper.getType(),
+						
+						userIdMapper.getExternalUserId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_T_E, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E, args,
+					userIdMapper);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(UserIdMapper userIdMapper) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T,
-			new Object[] {
+		UserIdMapperModelImpl userIdMapperModelImpl = (UserIdMapperModelImpl)userIdMapper;
+
+		Object[] args = new Object[] {
 				Long.valueOf(userIdMapper.getUserId()),
 				
-			userIdMapper.getType()
-			});
+				userIdMapper.getType()
+			};
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E,
-			new Object[] {
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
+
+		if ((userIdMapperModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(userIdMapperModelImpl.getOriginalUserId()),
+					
+					userIdMapperModelImpl.getOriginalType()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
+		}
+
+		args = new Object[] {
 				userIdMapper.getType(),
 				
-			userIdMapper.getExternalUserId()
-			});
+				userIdMapper.getExternalUserId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_T_E, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E, args);
+
+		if ((userIdMapperModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_T_E.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					userIdMapperModelImpl.getOriginalType(),
+					
+					userIdMapperModelImpl.getOriginalExternalUserId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_T_E, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E, args);
+		}
 	}
 
 	/**
@@ -381,62 +468,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 		EntityCacheUtil.putResult(UserIdMapperModelImpl.ENTITY_CACHE_ENABLED,
 			UserIdMapperImpl.class, userIdMapper.getPrimaryKey(), userIdMapper);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-				new Object[] {
-					Long.valueOf(userIdMapper.getUserId()),
-					
-				userIdMapper.getType()
-				}, userIdMapper);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
-				new Object[] {
-					userIdMapper.getType(),
-					
-				userIdMapper.getExternalUserId()
-				}, userIdMapper);
-		}
-		else {
-			if ((userIdMapperModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_U_T.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(userIdMapperModelImpl.getOriginalUserId()),
-						
-						userIdMapperModelImpl.getOriginalType()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_T, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_T, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_T,
-					new Object[] {
-						Long.valueOf(userIdMapper.getUserId()),
-						
-					userIdMapper.getType()
-					}, userIdMapper);
-			}
-
-			if ((userIdMapperModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_T_E.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						userIdMapperModelImpl.getOriginalType(),
-						
-						userIdMapperModelImpl.getOriginalExternalUserId()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_T_E, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_T_E, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_T_E,
-					new Object[] {
-						userIdMapper.getType(),
-						
-					userIdMapper.getExternalUserId()
-					}, userIdMapper);
-			}
-		}
+		clearUniqueFindersCache(userIdMapper);
+		cacheUniqueFindersCache(userIdMapper);
 
 		return userIdMapper;
 	}
@@ -1694,8 +1727,10 @@ public class UserIdMapperPersistenceImpl extends BasePersistenceImpl<UserIdMappe
 				List<ModelListener<UserIdMapper>> listenersList = new ArrayList<ModelListener<UserIdMapper>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<UserIdMapper>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,19 +18,10 @@
 
 	<%
 	if (portletDisplay.isWebDAVEnabled() && BrowserSnifferUtil.isIe(request)) {
-		String webDavUrl = DLUtil.getWebDavURL(themeDisplay, fileEntry.getFolder(), fileEntry);
+		String webDavUrl = DLUtil.getWebDavURL(themeDisplay, fileEntry.getFolder(), fileEntry, true);
 
-		String curExtension = fileEntry.getExtension();
-
-		if (curExtension.equalsIgnoreCase("doc") ||
-			curExtension.equalsIgnoreCase("docx") ||
-			curExtension.equalsIgnoreCase("dot") ||
-			curExtension.equalsIgnoreCase("ppt") ||
-			curExtension.equalsIgnoreCase("pptx") ||
-			curExtension.equalsIgnoreCase("xls") ||
-			curExtension.equalsIgnoreCase("xlsx")) {
-
-			String taglibOnClick = "Liferay.fire('" + liferayPortletResponse.getNamespace() + "openDocument', {webDavUrl: '" + webDavUrl + "'});";
+		if (DLUtil.isOfficeExtension(fileEntry.getExtension())) {
+			String taglibOnClick = "javascript:" + liferayPortletResponse.getNamespace() + "openDocument('" + webDavUrl + "');";
 	%>
 
 			<liferay-ui:icon
@@ -45,4 +36,31 @@
 	}
 	%>
 
+	<aui:script>
+		Liferay.provide(
+			window,
+			'<portlet:namespace />openDocument',
+			function(webDavUrl) {
+				var A = AUI();
+
+				Liferay.Util.openDocument(
+					webDavUrl,
+					null,
+					function(exception) {
+						var errorMessage = A.Lang.sub(
+							'<%= UnicodeLanguageUtil.get(pageContext, "cannot-open-the-requested-document-due-to-the-following-reason") %>',
+							[exception.message]
+						);
+
+						var openMSOfficeError = A.one('#<portlet:namespace />openMSOfficeError');
+
+						openMSOfficeError.html(errorMessage);
+
+						openMSOfficeError.show();
+					}
+				);
+			},
+			['aui-base']
+		);
+	</aui:script>
 </c:if>

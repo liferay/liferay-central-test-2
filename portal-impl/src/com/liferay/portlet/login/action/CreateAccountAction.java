@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ import com.liferay.portal.CompanyMaxUsersException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactFullNameException;
 import com.liferay.portal.ContactLastNameException;
+import com.liferay.portal.DuplicateOpenIdException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
 import com.liferay.portal.EmailAddressException;
@@ -95,8 +96,9 @@ public class CreateAccountAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -159,6 +161,7 @@ public class CreateAccountAction extends PortletAction {
 					 e instanceof ContactFirstNameException ||
 					 e instanceof ContactFullNameException ||
 					 e instanceof ContactLastNameException ||
+					 e instanceof DuplicateOpenIdException ||
 					 e instanceof EmailAddressException ||
 					 e instanceof GroupFriendlyURLException ||
 					 e instanceof NoSuchCountryException ||
@@ -205,8 +208,9 @@ public class CreateAccountAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
@@ -215,12 +219,12 @@ public class CreateAccountAction extends PortletAction {
 		Company company = themeDisplay.getCompany();
 
 		if (!company.isStrangers()) {
-			return mapping.findForward("portlet.login.login");
+			return actionMapping.findForward("portlet.login.login");
 		}
 
 		renderResponse.setTitle(themeDisplay.translate("create-account"));
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.login.create_account"));
 	}
 
@@ -356,6 +360,10 @@ public class CreateAccountAction extends PortletAction {
 
 		User anonymousUser = UserLocalServiceUtil.getUserByEmailAddress(
 			themeDisplay.getCompanyId(), emailAddress);
+
+		if (anonymousUser.getStatus() != WorkflowConstants.STATUS_INCOMPLETE) {
+			throw new PrincipalException();
+		}
 
 		UserLocalServiceUtil.deleteUser(anonymousUser.getUserId());
 

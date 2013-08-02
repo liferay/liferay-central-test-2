@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -81,6 +81,7 @@ public class MBThreadFinderImpl
 	public static final String FIND_BY_S_G_U_C_S =
 		MBThreadFinder.class.getName() + ".findByS_G_U_C_S";
 
+	@Override
 	public int countByG_U_S(long groupId, long userId, int status)
 		throws SystemException {
 
@@ -129,12 +130,14 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public int countByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 
 		return doCountByG_C_S(groupId, categoryId, status, false);
 	}
 
+	@Override
 	public int countByG_U_MD_S(
 			long groupId, long userId, Date modifiedDate, int status)
 		throws SystemException {
@@ -194,6 +197,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public int countByG_U_A_S(
 			long groupId, long userId, boolean anonymous, int status)
 		throws SystemException {
@@ -244,12 +248,14 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public int countByS_G_U_S(long groupId, long userId, int status)
 		throws SystemException {
 
 		return doCountByS_G_U_S(groupId, userId, status);
 	}
 
+	@Override
 	public int countByS_G_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
@@ -257,6 +263,7 @@ public class MBThreadFinderImpl
 		return doCountByS_G_U_C_S(groupId, userId, categoryIds, status, false);
 	}
 
+	@Override
 	public int filterCountByG_C(long groupId, long categoryId)
 		throws SystemException {
 
@@ -304,12 +311,14 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public int filterCountByG_C_S(long groupId, long categoryId, int status)
 		throws SystemException {
 
 		return doCountByG_C_S(groupId, categoryId, status, true);
 	}
 
+	@Override
 	public int filterCountByS_G_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status)
 		throws SystemException {
@@ -317,6 +326,7 @@ public class MBThreadFinderImpl
 		return doCountByS_G_U_C_S(groupId, userId, categoryIds, status, true);
 	}
 
+	@Override
 	public List<MBThread> filterFindByG_C(
 			long groupId, long categoryId, int start, int end)
 		throws SystemException {
@@ -355,6 +365,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> filterFindByG_C_S(
 			long groupId, long categoryId, int status, int start, int end)
 		throws SystemException {
@@ -362,6 +373,7 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, true);
 	}
 
+	@Override
 	public List<MBThread> filterFindByS_G_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)
@@ -371,6 +383,7 @@ public class MBThreadFinderImpl
 			groupId, userId, categoryIds, status, start, end, true);
 	}
 
+	@Override
 	public List<MBThread> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -393,6 +406,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> findByG_U_S(
 			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
@@ -432,6 +446,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> findByG_C_S(
 			long groupId, long categoryId, int status, int start, int end)
 		throws SystemException {
@@ -439,6 +454,7 @@ public class MBThreadFinderImpl
 		return doFindByG_C_S(groupId, categoryId, status, start, end, false);
 	}
 
+	@Override
 	public List<MBThread> findByG_U_MD_S(
 			long groupId, long userId, Date modifiedDate, int status, int start,
 			int end)
@@ -489,6 +505,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> findByG_U_A_S(
 			long groupId, long userId, boolean anonymous, int status, int start,
 			int end)
@@ -530,8 +547,9 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> findByS_G_U_S(
-		long groupId, long userId, int status, int start, int end)
+			long groupId, long userId, int status, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -570,6 +588,7 @@ public class MBThreadFinderImpl
 		}
 	}
 
+	@Override
 	public List<MBThread> findByS_G_U_C_S(
 			long groupId, long userId, long[] categoryIds, int status,
 			int start, int end)

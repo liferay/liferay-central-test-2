@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,15 +15,15 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.scheduler.CronTrigger;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.Trigger;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
@@ -49,7 +49,6 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -110,6 +109,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         involved, or if layout values were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			Map<Locale, String> localeNamesMap,
@@ -138,10 +138,6 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	/**
-	 * Adds a layout with empty maps for descriptions, keywords, and titles ,
-	 * and a names map containing a mapping for the default locale as its only
-	 * entry.
-	 *
 	 * <p>
 	 * This method handles the creation of the layout including its resources,
 	 * metadata, and internal data structures. It is not necessary to make
@@ -185,23 +181,28 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         involved, or if layout values were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			String name, String title, String description, String type,
 			boolean hidden, String friendlyURL, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
+		PermissionChecker permissionChecker = getPermissionChecker();
 
-		Locale defaultLocale = LocaleUtil.getDefault();
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+			GroupPermissionUtil.check(
+				permissionChecker, groupId, ActionKeys.ADD_LAYOUT);
+		}
+		else {
+			LayoutPermissionUtil.check(
+				permissionChecker, groupId, privateLayout, parentLayoutId,
+				ActionKeys.ADD_LAYOUT);
+		}
 
-		localeNamesMap.put(defaultLocale, name);
-
-		return addLayout(
-			groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap<Locale, String>(), new HashMap<Locale, String>(),
-			new HashMap<Locale, String>(), new HashMap<Locale, String>(), type,
-			hidden, friendlyURL, serviceContext);
+		return layoutLocalService.addLayout(
+			getUserId(), groupId, privateLayout, parentLayoutId, name, title,
+			description, type, hidden, friendlyURL, serviceContext);
 	}
 
 	/**
@@ -217,6 +218,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         other portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			ServiceContext serviceContext)
@@ -241,6 +243,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         if some other portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteLayout(long plid, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -269,6 +272,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         manage the layouts, or if some other portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -299,6 +303,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         layouts, or if some other portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -330,6 +335,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         manage the layouts, or if some other portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public File exportLayoutsAsFile(
 			long groupId, boolean privateLayout, long[] layoutIds,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -363,6 +369,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public byte[] exportPortletInfo(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -398,6 +405,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public File exportPortletInfoAsFile(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, Date startDate, Date endDate)
@@ -414,6 +422,26 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	/**
+	 * Returns all the ancestor layouts of the layout.
+	 *
+	 * @param  plid the primary key of the layout
+	 * @return the ancestor layouts of the layout
+	 * @throws PortalException if a matching layout could not be found or if a
+	 *         portal exception occurred
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<Layout> getAncestorLayouts(long plid)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayout(plid);
+
+		List<Layout> ancestors = layout.getAncestors();
+
+		return filterLayouts(ancestors);
+	}
+
+	/**
 	 * Returns the primary key of the default layout for the group.
 	 *
 	 * @param  groupId the primary key of the group
@@ -427,6 +455,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public long getDefaultPlid(
 			long groupId, long scopeGroupId, boolean privateLayout,
 			String portletId)
@@ -519,6 +548,35 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		return LayoutConstants.DEFAULT_PLID;
 	}
 
+	@Override
+	@ThreadLocalCachable
+	public long getDefaultPlid(
+			long groupId, long scopeGroupId, String portletId)
+		throws PortalException, SystemException {
+
+		long plid = getDefaultPlid(groupId, scopeGroupId, false, portletId);
+
+		if (plid == 0) {
+			plid = getDefaultPlid(groupId, scopeGroupId, true, portletId);
+		}
+
+		return plid;
+	}
+
+	@Override
+	public Layout getLayoutByUuidAndGroupId(
+			String uuid, long groupId, boolean privateLayout)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutLocalService.getLayoutByUuidAndGroupId(
+			uuid, groupId, privateLayout);
+
+		LayoutPermissionUtil.check(
+			getPermissionChecker(), layout, ActionKeys.VIEW);
+
+		return layout;
+	}
+
 	/**
 	 * Returns the name of the layout.
 	 *
@@ -531,6 +589,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 * @throws PortalException if a matching layout could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public String getLayoutName(
 			long groupId, boolean privateLayout, long layoutId,
 			String languageId)
@@ -553,6 +612,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 * @return the layout references of the matching layouts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public LayoutReference[] getLayoutReferences(
 			long companyId, String portletId, String preferencesKey,
 			String preferencesValue)
@@ -562,21 +622,30 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			companyId, portletId, preferencesKey, preferencesValue);
 	}
 
+	@Override
 	public List<Layout> getLayouts(long groupId, boolean privateLayout)
-		throws PortalException, SystemException {
+		throws SystemException {
 
-		List<Layout> layouts = layoutLocalService.getLayouts(
-			groupId, privateLayout);
-
-		return filterLayouts(layouts);
+		return layoutPersistence.filterFindByG_P(groupId, privateLayout);
 	}
 
+	@Override
 	public List<Layout> getLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId)
+		throws SystemException {
+
+		return layoutPersistence.filterFindByG_P_P(
+			groupId, privateLayout, parentLayoutId);
+	}
+
+	@Override
+	public List<Layout> getLayouts(
+			long groupId, boolean privateLayout, long parentLayoutId,
+			boolean incomplete, int start, int end)
 		throws PortalException, SystemException {
 
 		List<Layout> layouts = layoutLocalService.getLayouts(
-			groupId, privateLayout, parentLayoutId);
+			groupId, privateLayout, parentLayoutId, incomplete, start, end);
 
 		return filterLayouts(layouts);
 	}
@@ -597,6 +666,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @see    com.liferay.portal.lar.LayoutImporter
 	 */
+	@Override
 	public void importLayouts(
 			long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, byte[] bytes)
@@ -625,6 +695,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @see    com.liferay.portal.lar.LayoutImporter
 	 */
+	@Override
 	public void importLayouts(
 			long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, File file)
@@ -653,6 +724,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 * @see    com.liferay.portal.lar.LayoutImporter
 	 */
+	@Override
 	public void importLayouts(
 			long groupId, boolean privateLayout,
 			Map<String, String[]> parameterMap, InputStream is)
@@ -682,6 +754,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         to manage the layouts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void importPortletInfo(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, File file)
@@ -712,6 +785,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         manage the layouts
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void importPortletInfo(
 			long plid, long groupId, String portletId,
 			Map<String, String[]> parameterMap, InputStream is)
@@ -752,6 +826,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         and publish
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void schedulePublishToLive(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
@@ -782,7 +857,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 				command, getUserId(), sourceGroupId, targetGroupId,
 				privateLayout, layoutIdMap, parameterMap, startDate, endDate);
 
-		SchedulerEngineUtil.schedule(
+		SchedulerEngineHelperUtil.schedule(
 			trigger, StorageType.PERSISTED, description,
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER, publisherRequest, 0);
 	}
@@ -799,6 +874,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         com.liferay.portal.kernel.lar.PortletDataHandlerKeys}
 	 * @param  remoteAddress the remote address
 	 * @param  remotePort the remote port
+	 * @param  remotePathContext the remote path context
 	 * @param  secureConnection whether the connection is secure
 	 * @param  remoteGroupId the primary key of the remote group
 	 * @param  remotePrivateLayout whether remote group's layout is private
@@ -816,6 +892,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         not found or if the group did not have permission to publish
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void schedulePublishToRemote(
 			long sourceGroupId, boolean privateLayout,
 			Map<Long, Boolean> layoutIdMap, Map<String, String[]> parameterMap,
@@ -841,7 +918,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		Trigger trigger = new CronTrigger(
 			jobName, groupName, schedulerStartDate, schedulerEndDate, cronText);
 
-		SchedulerEngineUtil.schedule(
+		SchedulerEngineHelperUtil.schedule(
 			trigger, StorageType.PERSISTED, description,
 			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, publisherRequest, 0);
 	}
@@ -862,6 +939,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId,
 			long[] layoutIds, ServiceContext serviceContext)
@@ -886,6 +964,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         and publish
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unschedulePublishToLive(
 			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
@@ -893,7 +972,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING);
 
-		SchedulerEngineUtil.delete(jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineHelperUtil.delete(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	/**
@@ -908,6 +988,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         found or if the group did not have permission to publish
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void unschedulePublishToRemote(
 			long groupId, String jobName, String groupName)
 		throws PortalException, SystemException {
@@ -915,7 +996,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING);
 
-		SchedulerEngineUtil.delete(jobName, groupName, StorageType.PERSISTED);
+		SchedulerEngineHelperUtil.delete(
+			jobName, groupName, StorageType.PERSISTED);
 	}
 
 	/**
@@ -959,6 +1041,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         layout parameters were invalid
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map<Locale, String> localeNamesMap,
@@ -993,6 +1076,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         user did not have permission to update the layout
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			String typeSettings)
@@ -1022,6 +1106,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         permission to apply the theme
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateLookAndFeel(
 			long groupId, boolean privateLayout, long layoutId, String themeId,
 			String colorSchemeId, String css, boolean wapTheme)
@@ -1057,6 +1142,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         name was <code>null</code>
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateName(
 			long groupId, boolean privateLayout, long layoutId, String name,
 			String languageId)
@@ -1083,6 +1169,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         layout, or if the name was <code>null</code>
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateName(long plid, String name, String languageId)
 		throws PortalException, SystemException {
 
@@ -1107,6 +1194,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         did not have permission to update the layout
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateParentLayoutId(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId)
@@ -1135,6 +1223,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         or if a valid parent layout ID to use could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updateParentLayoutId(long plid, long parentPlid)
 		throws PortalException, SystemException {
 
@@ -1157,6 +1246,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         user did not have permission to update the layout
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updatePriority(
 			long groupId, boolean privateLayout, long layoutId, int priority)
 		throws PortalException, SystemException {
@@ -1179,6 +1269,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public Layout updatePriority(long plid, int priority)
 		throws PortalException, SystemException {
 

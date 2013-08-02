@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,8 +15,10 @@
 package com.liferay.util.bridges.alloy;
 
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.theme.ThemeDisplay;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
@@ -27,6 +29,10 @@ public interface AlloyController {
 	public void afterPropertiesSet();
 
 	public void execute() throws Exception;
+
+	public Portlet getPortlet();
+
+	public HttpServletRequest getRequest();
 
 	public ThemeDisplay getThemeDisplay();
 

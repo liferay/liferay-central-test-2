@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -80,6 +80,7 @@ public class PingbackMethodImpl implements Method {
 
 	public static final int TARGET_URI_INVALID = 33;
 
+	@Override
 	public Response execute(long companyId) {
 		if (!PropsValues.BLOGS_PINGBACK_ENABLED) {
 			return XmlRpcUtil.createFault(
@@ -176,14 +177,17 @@ public class PingbackMethodImpl implements Method {
 		}
 	}
 
+	@Override
 	public String getMethodName() {
 		return "pingback.ping";
 	}
 
+	@Override
 	public String getToken() {
 		return "pingback";
 	}
 
+	@Override
 	public boolean setArguments(Object[] arguments) {
 		try {
 			_sourceUri = (String)arguments[0];

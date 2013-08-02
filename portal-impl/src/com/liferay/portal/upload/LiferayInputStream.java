@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStreamWrapper;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.servlet.ServletInputStreamWrapper;
@@ -36,7 +37,7 @@ import javax.servlet.http.HttpSession;
  */
 public class LiferayInputStream extends ServletInputStreamWrapper {
 
-	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(
+	public static final long THRESHOLD_SIZE = GetterUtil.getLong(
 		PropsUtil.get(LiferayInputStream.class.getName() + ".threshold.size"));
 
 	public LiferayInputStream(HttpServletRequest request) throws IOException {
@@ -44,6 +45,11 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 
 		_session = request.getSession();
 		_totalSize = request.getContentLength();
+
+		if (_totalSize < 0) {
+			_totalSize = GetterUtil.getLong(
+				request.getHeader(HttpHeaders.CONTENT_LENGTH), _totalSize);
+		}
 	}
 
 	public ServletInputStream getCachedInputStream() {
@@ -94,7 +100,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	private UnsyncByteArrayOutputStream _cachedBytes =
 		new UnsyncByteArrayOutputStream();
 	private HttpSession _session;
-	private int _totalRead;
-	private int _totalSize;
+	private long _totalRead;
+	private long _totalSize;
 
 }

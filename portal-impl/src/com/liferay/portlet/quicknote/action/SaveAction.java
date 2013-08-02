@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,8 +38,8 @@ public class SaveAction extends JSONAction {
 
 	@Override
 	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -48,7 +48,7 @@ public class SaveAction extends JSONAction {
 		String portletId = ParamUtil.getString(request, "portletId");
 
 		PortletPermissionUtil.check(
-			themeDisplay.getPermissionChecker(), themeDisplay.getPlid(),
+			themeDisplay.getPermissionChecker(), themeDisplay.getLayout(),
 			portletId, ActionKeys.CONFIGURATION);
 
 		PortletPreferences preferences =

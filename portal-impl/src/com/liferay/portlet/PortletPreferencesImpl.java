@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -49,12 +49,6 @@ public class PortletPreferencesImpl
 	}
 
 	public PortletPreferencesImpl(
-		String xml, Map<String, Preference> preferences) {
-
-		this(0, 0, 0, 0, null, xml, preferences);
-	}
-
-	public PortletPreferencesImpl(
 		long companyId, long ownerId, int ownerType, long plid,
 		String portletId, String xml, Map<String, Preference> preferences) {
 
@@ -62,6 +56,12 @@ public class PortletPreferencesImpl
 
 		_plid = plid;
 		_portletId = portletId;
+	}
+
+	public PortletPreferencesImpl(
+		String xml, Map<String, Preference> preferences) {
+
+		this(0, 0, 0, 0, null, xml, preferences);
 	}
 
 	@Override
@@ -73,11 +73,15 @@ public class PortletPreferencesImpl
 
 	@Override
 	public boolean equals(Object obj) {
-		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
-
-		if (this == portletPreferences) {
+		if (this == obj) {
 			return true;
 		}
+
+		if (!(obj instanceof PortletPreferencesImpl)) {
+			return false;
+		}
+
+		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
 
 		if ((getCompanyId() == portletPreferences.getCompanyId()) &&
 			(getOwnerId() == portletPreferences.getOwnerId()) &&
@@ -119,8 +123,9 @@ public class PortletPreferencesImpl
 
 		if ((_defaultPreferences == null) && (_portletId != null)) {
 			try {
-				_defaultPreferences = PortletPreferencesLocalServiceUtil.
-					getDefaultPreferences(getCompanyId(), _portletId);
+				_defaultPreferences =
+					PortletPreferencesLocalServiceUtil.getDefaultPreferences(
+						getCompanyId(), _portletId);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {

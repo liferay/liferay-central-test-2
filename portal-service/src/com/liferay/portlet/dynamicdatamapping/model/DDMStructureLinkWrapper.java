@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.dynamicdatamapping.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -242,6 +243,10 @@ public class DDMStructureLinkWrapper implements DDMStructureLink,
 		return new DDMStructureLinkWrapper(_ddmStructureLink.toEscapedModel());
 	}
 
+	public com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink toUnescapedModel() {
+		return new DDMStructureLinkWrapper(_ddmStructureLink.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _ddmStructureLink.toString();
@@ -260,6 +265,26 @@ public class DDMStructureLinkWrapper implements DDMStructureLink,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _ddmStructureLink.getStructure();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DDMStructureLinkWrapper)) {
+			return false;
+		}
+
+		DDMStructureLinkWrapper ddmStructureLinkWrapper = (DDMStructureLinkWrapper)obj;
+
+		if (Validator.equals(_ddmStructureLink,
+					ddmStructureLinkWrapper._ddmStructureLink)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

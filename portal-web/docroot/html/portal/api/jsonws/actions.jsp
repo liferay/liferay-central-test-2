@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,30 @@
 
 <%
 String signature = ParamUtil.getString(request, "signature");
+
+Set<String> contextPaths = JSONWebServiceActionsManagerUtil.getContextPaths();
 %>
+
+<c:if test="<%= contextPaths.size() > 1 %>">
+	<aui:select cssClass="lfr-api-context" label="context-path" name="contextPath">
+
+		<%
+		for (String curContextPath : contextPaths) {
+			String curContextPathView = curContextPath;
+
+			if (Validator.isNull(curContextPath)) {
+				curContextPathView = StringPool.SLASH;
+			}
+		%>
+
+			<aui:option label="<%= curContextPathView %>" selected="<%= contextPath.equals(curContextPath) %>" value="<%= curContextPath %>" />
+
+		<%
+		}
+		%>
+
+	</aui:select>
+</c:if>
 
 <aui:input cssClass="lfr-api-service-search" label="" name="serviceSearch" placeholder="search" />
 
@@ -68,7 +91,12 @@ String signature = ParamUtil.getString(request, "signature");
 				%>
 
 					<li class="lfr-api-signature <%= (serviceSignature.equals(signature)) ? "selected" : StringPool.BLANK %>">
-						<a class="method-name lfr-api-service-result" data-metaData="<%= jsonWebServiceClassName %>" href="?signature=<%= serviceSignature %>">
+
+						<%
+						String methodURL = HttpUtil.addParameter(jsonWSContextPath, "signature", serviceSignature);
+						%>
+
+						<a class="method-name lfr-api-service-result" data-metaData="<%= jsonWebServiceClassName %>" href="<%= methodURL %>">
 							<%= path %>
 						</a>
 					</li>
@@ -94,6 +122,27 @@ String signature = ParamUtil.getString(request, "signature");
 	var Lang = A.Lang;
 
 	var AArray = A.Array;
+
+	<c:if test="<%= contextPaths.size() > 1 %>">
+		var contextPathSelector = A.one('#<portlet:namespace />contextPath');
+
+		if (contextPathSelector) {
+			contextPathSelector.on(
+				'change',
+				function(event) {
+					var contextPath = contextPathSelector.val();
+
+					var location = '<%= jsonWSPath %>';
+
+					if (contextPath && (contextPath != '/')) {
+						location = Liferay.Util.addParams('contextPath=' + contextPath, location);
+					}
+
+					window.location.href = location;
+				}
+			);
+		}
+	</c:if>
 
 	var ServiceFilter = A.Component.create(
 		{

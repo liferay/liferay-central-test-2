@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -147,13 +147,16 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 
 	@Override
 	public Counter toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Counter)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Counter)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Counter toUnescapedModel() {
+		return (Counter)this;
 	}
 
 	@Override
@@ -176,18 +179,15 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Counter)) {
 			return false;
 		}
 
-		Counter counter = null;
-
-		try {
-			counter = (Counter)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Counter counter = (Counter)obj;
 
 		String primaryKey = counter.getPrimaryKey();
 
@@ -260,10 +260,10 @@ public class CounterModelImpl extends BaseModelImpl<Counter>
 	}
 
 	private static ClassLoader _classLoader = Counter.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Counter.class
 		};
 	private String _name;
 	private long _currentId;
-	private Counter _escapedModelProxy;
+	private Counter _escapedModel;
 }

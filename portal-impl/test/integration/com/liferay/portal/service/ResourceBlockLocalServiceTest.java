@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,10 +15,10 @@
 package com.liferay.portal.service;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.model.PermissionedModel;
 import com.liferay.portal.model.ResourceBlockPermissionsContainer;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
-import com.liferay.portal.test.ExecutionTestListeners;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.sql.Connection;
@@ -263,13 +263,16 @@ public class ResourceBlockLocalServiceTest {
 
 	private class MockPermissionedModel implements PermissionedModel {
 
+		@Override
 		public long getResourceBlockId() {
 			return _resourceBlockId;
 		}
 
+		@Override
 		public void persist() {
 		}
 
+		@Override
 		public void setResourceBlockId(long resourceBlockId) {
 			_resourceBlockId = resourceBlockId;
 		}
@@ -287,6 +290,7 @@ public class ResourceBlockLocalServiceTest {
 			_semaphore = semaphore;
 		}
 
+		@Override
 		public Void call() throws Exception {
 			if (_semaphore != null) {
 				_semaphore.acquire();
@@ -317,6 +321,7 @@ public class ResourceBlockLocalServiceTest {
 			_semaphore = semaphore;
 		}
 
+		@Override
 		public Void call() throws Exception {
 			ResourceBlockLocalServiceUtil.updateResourceBlockId(
 				_COMPANY_ID, _GROUP_ID, _MODEL_NAME, _permissionedModel,

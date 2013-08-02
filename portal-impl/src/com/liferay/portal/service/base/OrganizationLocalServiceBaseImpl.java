@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -153,7 +153,6 @@ import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutPrototypePersistence;
 import com.liferay.portal.service.persistence.LayoutRevisionPersistence;
-import com.liferay.portal.service.persistence.LayoutSetBranchFinder;
 import com.liferay.portal.service.persistence.LayoutSetBranchPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPersistence;
 import com.liferay.portal.service.persistence.LayoutSetPrototypePersistence;
@@ -458,6 +457,266 @@ public abstract class OrganizationLocalServiceBaseImpl
 		organization.setNew(false);
 
 		return organizationPersistence.update(organization, merge);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupOrganization(long groupId, long organizationId)
+		throws SystemException {
+		groupPersistence.addOrganization(groupId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupOrganization(long groupId, Organization organization)
+		throws SystemException {
+		groupPersistence.addOrganization(groupId, organization);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupOrganizations(long groupId, long[] organizationIds)
+		throws PortalException, SystemException {
+		groupPersistence.addOrganizations(groupId, organizationIds);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addGroupOrganizations(long groupId,
+		List<Organization> Organizations)
+		throws PortalException, SystemException {
+		groupPersistence.addOrganizations(groupId, Organizations);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearGroupOrganizations(long groupId) throws SystemException {
+		groupPersistence.clearOrganizations(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupOrganization(long groupId, long organizationId)
+		throws SystemException {
+		groupPersistence.removeOrganization(groupId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupOrganization(long groupId, Organization organization)
+		throws SystemException {
+		groupPersistence.removeOrganization(groupId, organization);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupOrganizations(long groupId, long[] organizationIds)
+		throws SystemException {
+		groupPersistence.removeOrganizations(groupId, organizationIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteGroupOrganizations(long groupId,
+		List<Organization> Organizations) throws SystemException {
+		groupPersistence.removeOrganizations(groupId, Organizations);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getGroupOrganizations(long groupId)
+		throws SystemException {
+		return groupPersistence.getOrganizations(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getGroupOrganizations(long groupId, int start,
+		int end) throws SystemException {
+		return groupPersistence.getOrganizations(groupId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getGroupOrganizations(long groupId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return groupPersistence.getOrganizations(groupId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getGroupOrganizationsCount(long groupId)
+		throws SystemException {
+		return groupPersistence.getOrganizationsSize(groupId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasGroupOrganization(long groupId, long organizationId)
+		throws SystemException {
+		return groupPersistence.containsOrganization(groupId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasGroupOrganizations(long groupId)
+		throws SystemException {
+		return groupPersistence.containsOrganizations(groupId);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setGroupOrganizations(long groupId, long[] organizationIds)
+		throws PortalException, SystemException {
+		groupPersistence.setOrganizations(groupId, organizationIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserOrganization(long userId, long organizationId)
+		throws SystemException {
+		userPersistence.addOrganization(userId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserOrganization(long userId, Organization organization)
+		throws SystemException {
+		userPersistence.addOrganization(userId, organization);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserOrganizations(long userId, long[] organizationIds)
+		throws SystemException {
+		userPersistence.addOrganizations(userId, organizationIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void addUserOrganizations(long userId,
+		List<Organization> Organizations) throws SystemException {
+		userPersistence.addOrganizations(userId, Organizations);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void clearUserOrganizations(long userId) throws SystemException {
+		userPersistence.clearOrganizations(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserOrganization(long userId, long organizationId)
+		throws SystemException {
+		userPersistence.removeOrganization(userId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserOrganization(long userId, Organization organization)
+		throws SystemException {
+		userPersistence.removeOrganization(userId, organization);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserOrganizations(long userId, long[] organizationIds)
+		throws SystemException {
+		userPersistence.removeOrganizations(userId, organizationIds);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void deleteUserOrganizations(long userId,
+		List<Organization> Organizations) throws SystemException {
+		userPersistence.removeOrganizations(userId, Organizations);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getUserOrganizations(long userId)
+		throws PortalException, SystemException {
+		return userPersistence.getOrganizations(userId);
+	}
+
+	/**
+	 * @throws PortalException
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getUserOrganizations(long userId, int start,
+		int end) throws PortalException, SystemException {
+		return userPersistence.getOrganizations(userId, start, end);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public List<Organization> getUserOrganizations(long userId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		return userPersistence.getOrganizations(userId, start, end,
+			orderByComparator);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public int getUserOrganizationsCount(long userId) throws SystemException {
+		return userPersistence.getOrganizationsSize(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserOrganization(long userId, long organizationId)
+		throws SystemException {
+		return userPersistence.containsOrganization(userId, organizationId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public boolean hasUserOrganizations(long userId) throws SystemException {
+		return userPersistence.containsOrganizations(userId);
+	}
+
+	/**
+	 * @throws SystemException if a system exception occurred
+	 */
+	public void setUserOrganizations(long userId, long[] organizationIds)
+		throws SystemException {
+		userPersistence.setOrganizations(userId, organizationIds);
 	}
 
 	/**
@@ -1398,25 +1657,6 @@ public abstract class OrganizationLocalServiceBaseImpl
 	public void setLayoutSetBranchPersistence(
 		LayoutSetBranchPersistence layoutSetBranchPersistence) {
 		this.layoutSetBranchPersistence = layoutSetBranchPersistence;
-	}
-
-	/**
-	 * Returns the layout set branch finder.
-	 *
-	 * @return the layout set branch finder
-	 */
-	public LayoutSetBranchFinder getLayoutSetBranchFinder() {
-		return layoutSetBranchFinder;
-	}
-
-	/**
-	 * Sets the layout set branch finder.
-	 *
-	 * @param layoutSetBranchFinder the layout set branch finder
-	 */
-	public void setLayoutSetBranchFinder(
-		LayoutSetBranchFinder layoutSetBranchFinder) {
-		this.layoutSetBranchFinder = layoutSetBranchFinder;
 	}
 
 	/**
@@ -4255,8 +4495,6 @@ public abstract class OrganizationLocalServiceBaseImpl
 	protected LayoutSetBranchService layoutSetBranchService;
 	@BeanReference(type = LayoutSetBranchPersistence.class)
 	protected LayoutSetBranchPersistence layoutSetBranchPersistence;
-	@BeanReference(type = LayoutSetBranchFinder.class)
-	protected LayoutSetBranchFinder layoutSetBranchFinder;
 	@BeanReference(type = LayoutSetPrototypeLocalService.class)
 	protected LayoutSetPrototypeLocalService layoutSetPrototypeLocalService;
 	@BeanReference(type = LayoutSetPrototypeService.class)

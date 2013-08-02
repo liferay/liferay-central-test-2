@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -114,6 +114,7 @@ public class PermissionFinderImpl
 			String.class.getName(), "[L" + Long.class.getName()
 		});
 
+	@Override
 	public boolean containsPermissions_2(
 			List<Permission> permissions, long userId, List<Group> groups,
 			long groupId)
@@ -246,6 +247,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public boolean containsPermissions_4(
 			List<Permission> permissions, long userId, List<Group> groups,
 			List<Role> roles)
@@ -350,6 +352,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByGroupsPermissions(
 			List<Permission> permissions, List<Group> groups)
 		throws SystemException {
@@ -396,6 +399,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByGroupsRoles(
 			List<Permission> permissions, List<Group> groups)
 		throws SystemException {
@@ -442,6 +446,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByRolesPermissions(
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
@@ -499,6 +504,7 @@ public class PermissionFinderImpl
 		return count.intValue();
 	}
 
+	@Override
 	public int countByUserGroupRole(
 			List<Permission> permissions, long userId, long groupId)
 		throws SystemException {
@@ -544,6 +550,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByUsersPermissions(
 			List<Permission> permissions, long userId)
 		throws SystemException {
@@ -588,6 +595,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByUsersRoles(List<Permission> permissions, long userId)
 		throws SystemException {
 
@@ -631,6 +639,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public int countByR_A_C(long roleId, String actionId, long codeId)
 		throws SystemException {
 
@@ -671,6 +680,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByA_C(String actionId, long codeId)
 		throws SystemException {
 
@@ -700,6 +710,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
@@ -766,6 +777,7 @@ public class PermissionFinderImpl
 		return list;
 	}
 
+	@Override
 	public List<Permission> findByG_R(long groupId, long resourceId)
 		throws SystemException {
 
@@ -795,6 +807,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByR_R(long roleId, long resourceId)
 		throws SystemException {
 
@@ -824,6 +837,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByR_S(long roleId, int[] scopes)
 		throws SystemException {
 
@@ -855,6 +869,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByU_R(long userId, long resourceId)
 		throws SystemException {
 
@@ -884,6 +899,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByO_G_R(
 			long organizationId, long groupId, long resourceId)
 		throws SystemException {
@@ -915,6 +931,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByU_A_R(
 			long userId, String[] actionIds, long resourceId)
 		throws SystemException {
@@ -948,6 +965,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByG_C_N_S_P(
 			long groupId, long companyId, String name, int scope,
 			String primKey)
@@ -982,6 +1000,7 @@ public class PermissionFinderImpl
 		}
 	}
 
+	@Override
 	public List<Permission> findByU_C_N_S_P(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {

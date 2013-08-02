@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.servlet.DynamicServletRequest;
-import com.liferay.portal.kernel.servlet.NonSerializableObjectRequestWrapper;
 import com.liferay.portal.kernel.servlet.PortalSessionThreadLocal;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
@@ -43,7 +42,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalLifecycleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -65,7 +63,7 @@ import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
+import com.liferay.portal.security.jaas.JAASHelper;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.server.capabilities.ServerCapabilitiesUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -82,6 +80,7 @@ import com.liferay.portal.servlet.filters.i18n.I18nFilter;
 import com.liferay.portal.setup.SetupWizardUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.ExtRegistry;
 import com.liferay.portal.util.MaintenanceUtil;
 import com.liferay.portal.util.Portal;
@@ -101,7 +100,9 @@ import com.liferay.util.ContentUtil;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -113,7 +114,6 @@ import javax.portlet.PortletException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -250,10 +250,10 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Initialize portlets");
 		}
 
-		List<Portlet> portlets = null;
+		List<Portlet> portlets = new ArrayList<Portlet>();
 
 		try {
-			portlets = initPortlets(pluginPackage);
+			portlets.addAll(initPortlets(pluginPackage));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -445,8 +445,6 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Handle non-serializable request");
 		}
 
-		request = handleNonSerializableRequest(request);
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Encrypt request");
 		}
@@ -469,7 +467,7 @@ public class MainServlet extends ActionServlet {
 
 		String password = getPassword(request);
 
-		setPrincipal(userId, remoteUser, password);
+		setPrincipal(companyId, userId, remoteUser, password);
 
 		try {
 			if (_log.isDebugEnabled()) {
@@ -478,7 +476,8 @@ public class MainServlet extends ActionServlet {
 						remoteUser);
 			}
 
-			userId = loginUser(request, response, userId, remoteUser);
+			userId = loginUser(
+				request, response, companyId, userId, remoteUser);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Authenticated user id " + userId);
@@ -739,7 +738,7 @@ public class MainServlet extends ActionServlet {
 			try {
 				requestProcessor =
 					(RequestProcessor)InstanceFactory.newInstance(
-						PACLClassLoaderUtil.getPortalClassLoader(),
+						ClassLoaderUtil.getPortalClassLoader(),
 						controllerConfig.getProcessorClass());
 			}
 			catch (Exception e) {
@@ -756,16 +755,6 @@ public class MainServlet extends ActionServlet {
 
 	protected long getUserId(HttpServletRequest request) {
 		return PortalUtil.getUserId(request);
-	}
-
-	protected HttpServletRequest handleNonSerializableRequest(
-		HttpServletRequest request) {
-
-		if (ServerDetector.isWebLogic()) {
-			request = new NonSerializableObjectRequestWrapper(request);
-		}
-
-		return request;
 	}
 
 	protected boolean hasAbsoluteRedirect(HttpServletRequest request) {
@@ -908,7 +897,7 @@ public class MainServlet extends ActionServlet {
 		PortletBagFactory portletBagFactory = new PortletBagFactory();
 
 		portletBagFactory.setClassLoader(
-			PACLClassLoaderUtil.getPortalClassLoader());
+			ClassLoaderUtil.getPortalClassLoader());
 		portletBagFactory.setServletContext(servletContext);
 		portletBagFactory.setWARFile(false);
 
@@ -1003,7 +992,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void initSocial(PluginPackage pluginPackage) throws Exception {
-		ClassLoader classLoader = PACLClassLoaderUtil.getPortalClassLoader();
+		ClassLoader classLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		ServletContext servletContext = getServletContext();
 
@@ -1047,14 +1036,19 @@ public class MainServlet extends ActionServlet {
 
 	protected long loginUser(
 			HttpServletRequest request, HttpServletResponse response,
-			long userId, String remoteUser)
+			long companyId, long userId, String remoteUser)
 		throws PortalException, SystemException {
 
 		if ((userId > 0) || (remoteUser == null)) {
 			return userId;
 		}
 
-		userId = GetterUtil.getLong(remoteUser);
+		if (PropsValues.PORTAL_JAAS_ENABLE) {
+			userId = JAASHelper.getJaasUserId(companyId, remoteUser);
+		}
+		else {
+			userId = GetterUtil.getLong(remoteUser);
+		}
 
 		EventsProcessorUtil.process(
 			PropsKeys.LOGIN_EVENTS_PRE, PropsValues.LOGIN_EVENTS_PRE, request,
@@ -1150,9 +1144,9 @@ public class MainServlet extends ActionServlet {
 
 		html = StringUtil.replace(html, "[$MESSAGE$]", message);
 
-		ServletOutputStream servletOutputStream = response.getOutputStream();
+		PrintWriter printWriter = response.getWriter();
 
-		servletOutputStream.print(html);
+		printWriter.print(html);
 	}
 
 	protected boolean processMaintenanceRequest(
@@ -1181,17 +1175,6 @@ public class MainServlet extends ActionServlet {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
-		}
-
-		if (_HTTP_HEADER_VERSION_VERBOSITY_DEFAULT) {
-		}
-		else if (_HTTP_HEADER_VERSION_VERBOSITY_PARTIAL) {
-			response.addHeader(
-				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getName());
-		}
-		else {
-			response.addHeader(
-				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
 		}
 	}
 
@@ -1232,6 +1215,17 @@ public class MainServlet extends ActionServlet {
 				servletContext, request, response);
 
 			return true;
+		}
+
+		if (_HTTP_HEADER_VERSION_VERBOSITY_DEFAULT) {
+		}
+		else if (_HTTP_HEADER_VERSION_VERBOSITY_PARTIAL) {
+			response.addHeader(
+				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getName());
+		}
+		else {
+			response.addHeader(
+				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
 		}
 
 		return false;
@@ -1342,7 +1336,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void setPrincipal(
-		long userId, String remoteUser, String password) {
+		long companyId, long userId, String remoteUser, String password) {
 
 		if ((userId == 0) && (remoteUser == null)) {
 			return;
@@ -1350,10 +1344,22 @@ public class MainServlet extends ActionServlet {
 
 		String name = String.valueOf(userId);
 
-		if (!PropsValues.PORTAL_JAAS_ENABLE) {
-			if (remoteUser != null) {
-				name = remoteUser;
+		if (PropsValues.PORTAL_JAAS_ENABLE) {
+			long remoteUserId = 0;
+
+			try {
+				remoteUserId = JAASHelper.getJaasUserId(companyId, remoteUser);
 			}
+			catch (Exception e) {
+				_log.warn(e);
+			}
+
+			if (remoteUserId > 0) {
+				name = String.valueOf(remoteUserId);
+			}
+		}
+		else if (remoteUser != null) {
+			name = remoteUser;
 		}
 
 		PrincipalThreadLocal.setName(name);

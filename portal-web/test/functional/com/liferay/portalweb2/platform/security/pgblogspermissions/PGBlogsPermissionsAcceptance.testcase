@@ -1,0 +1,39 @@
+<definition>
+	<var name="pageName" value="Blogs Page" />
+	<var name="portletName" value="Blogs" />
+
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+	</set-up>
+
+	<command name="Guest_ViewPortletBlogsPermissionsNoTest">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPortletPG" />
+
+		<execute macro="User#logoutPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPortletPGasGuest" />
+	</command>
+
+	<tear-down>
+		<execute macro="User#firstLoginPG" />
+
+		<execute macro="Page#tearDownPG" />
+	</tear-down>
+</definition>

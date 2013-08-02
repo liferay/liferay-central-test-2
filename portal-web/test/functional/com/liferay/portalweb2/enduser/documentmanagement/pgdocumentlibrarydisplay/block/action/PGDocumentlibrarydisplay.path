@@ -1,0 +1,307 @@
+<html>
+<head>
+<title>PGDocumentlibrarydisplay</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGDocumentlibrarydisplay</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGDocumentlibrarydisplay</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_WRENCH_ICON</td>
+	<td>//span[@title='Options']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MINIMIZE</td>
+	<td>//img[@title='Minimize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MAXIMIZE</td>
+	<td>//img[@title='Maximize']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>REMOVE</td>
+	<td>//img[@title='Remove']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[contains(@class,'portlet-msg-success')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>INFO_MESSAGE</td>
+	<td>//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--OPTIONS_MENULIST-->
+<tr>
+	<td>OPTIONS_MENULIST_LOOK_AND_FEEL</td>
+	<td>//a[@role='menuitem' and contains(.,'Look and Feel')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_CONFIGURATION</td>
+	<td>//a[@role='menuitem' and contains(.,'Configuration')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>OPTIONS_MENULIST_EXPORT_IMPORT</td>
+	<td>//a[@role='menuitem' and contains(.,'Export / Import')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--SEARCH-->
+<tr>
+	<td>SEARCH_FIELD</td>
+	<td>//input[@title='Search Documents']</td>
+	<td>Search Field</td>
+</tr>
+<tr>
+	<td>SEARCH_BUTTON</td>
+	<td>//input[@value='Search']</td>
+	<td>Search Button</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FOLDERS_TABLE-->
+<tr>
+	<td>FOLDERS_TABLE_NAME_1</td>
+	<td>xpath=(//div[contains(@id,'foldersSearchContainer')]/table/tbody/tr/td[1]/a/strong)[1]</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>FOLDERS_TABLE_NUMBER_OF_FOLDERS_1</td>
+	<td>xpath=(//div[contains(@id,'foldersSearchContainer')]/table/tbody/tr/td[2]/a)[1]</td>
+	<td># of Folders</td>
+</tr>
+<tr>
+	<td>FOLDERS_TABLE_NUMBER_OF_DOCUMENTS_1</td>
+	<td>xpath=(//div[contains(@id,'foldersSearchContainer')]/table/tbody/tr/td[3]/a)[1]</td>
+	<td># of Documents</td>
+</tr>
+<tr>
+	<td>FOLDERS_TABLE_ACTIONS_BUTTON_1</td>
+	<td>xpath=(//div[contains(@id,'foldersSearchContainer')]/table/tbody/tr/td[4]/span/ul/li/strong/a/span)[1]</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FOLDER_MENULIST-->
+<tr>
+	<td>FOLDER_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_MOVE</td>
+	<td>//a[@role='menuitem' and contains(.,'Move')]</td>
+	<td>Move</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_PERMISSIONS</td>
+	<td>//a[@role='menuitem' and contains(.,'Permissions')]</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_ADD_SUBFOLDER</td>
+	<td>//a[@role='menuitem' and contains(.,'Add Subfolder')]</td>
+	<td>Add Subfolder</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_MULTIPLE_DOCUMENTS</td>
+	<td>//a[@role='menuitem' and contains(.,'Multiple Documents')]</td>
+	<td>Multiple Documents</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_ADD_DOCUMENT</td>
+	<td>//a[@role='menuitem' and contains(.,'Add Document')]</td>
+	<td>Add Document</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_ADD_SHORTCUT</td>
+	<td>//a[@role='menuitem' and contains(.,'Add Shortcut')]</td>
+	<td>Add Shortcut</td>
+</tr>
+<tr>
+	<td>FOLDER_MENULIST_ACCESS_FROM_DESKTOP</td>
+	<td>//a[@role='menuitem' and contains(.,'Access from Desktop')]</td>
+	<td>Access from Desktop</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DOCUMENTS-->
+<tr>
+	<td>DOCUMENTS_DELETE</td>
+	<td>//input[@value='Delete']</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DOCUMENTS_TABLE-->
+<tr>
+	<td>DOCUMENTS_TABLE_CHECKBOX_1</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[1]/input)[1]</td>
+	<td>Checkbox</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_NAME_1</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[2]/a/span[@class='entry-title'])[1]</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_SIZE_1</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[3]/a)[1]</td>
+	<td>Size</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_ACTIONS_BUTTON_1</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[4]/span/ul/li/strong/a/span)[1]</td>
+	<td>Actions</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_NAME_2</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[2]/a/span[@class='entry-title'])[2]</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_SIZE_2</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[3]/a)[2]</td>
+	<td>Size</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_NAME_3</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[2]/a/span[@class='entry-title'])[3]</td>
+	<td>Name</td>
+</tr>
+<tr>
+	<td>DOCUMENTS_TABLE_SIZE_3</td>
+	<td>xpath=(//div[contains(@id,'objectsSearchContainerSearchContainer')]/table/tbody/tr/td[3]/a)[3]</td>
+	<td>Size</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DOCUMENT_MENULIST-->
+<tr>
+	<td>DOCUMENT_MENULIST_DOWNLOAD</td>
+	<td>//a[@role='menuitem' and contains(.,'Download')]</td>
+	<td>Download</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td>Edit</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_MOVE</td>
+	<td>//a[@role='menuitem' and contains(.,'Move')]</td>
+	<td>Move</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_CHECKOUT</td>
+	<td>//a[@role='menuitem' and contains(.,'Checkout')]</td>
+	<td>Checkout</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_PERMISSIONS</td>
+	<td>//a[@role='menuitem' and contains(.,'Permissions')]</td>
+	<td>Permissions</td>
+</tr>
+<tr>
+	<td>DOCUMENT_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td>Delete</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--FOLDER_MENU-->
+<tr>
+	<td>FOLDER_MENU_PERMISSIONS</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Permissions')]</td>
+	<td>Permissions </td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_ADD_FOLDER</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Add Folder')]</td>
+	<td>Add Folder</td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_ADD_REPOSITORY</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Add Repository')]</td>
+	<td>Add Repository</td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_MULTIPLE_DOCUMENTS</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Multiple Documents')]</td>
+	<td>Multiple Documents</td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_ADD_DOCUMENT</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Add Document')]</td>
+	<td>Add Document</td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_ADD_SHORTCUT</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Add Shortcut')]</td>
+	<td>Add Shortcut</td>
+</tr>
+<tr>
+	<td>FOLDER_MENU_ACCESS_FROM_DESKTOP</td>
+	<td>//div[@class='lfr-component lfr-menu-list lfr-menu-expanded align-right null']/ul/li/a[contains(.,'Access from Desktop')]</td>
+	<td>Access from Desktop</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

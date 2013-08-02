@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -26,6 +26,7 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUti
  */
 public class MDRRuleGroupPermissionImpl implements MDRRuleGroupPermission {
 
+	@Override
 	public void check(
 			PermissionChecker permissionChecker, long ruleGroupId,
 			String actionId)
@@ -36,6 +37,7 @@ public class MDRRuleGroupPermissionImpl implements MDRRuleGroupPermission {
 		}
 	}
 
+	@Override
 	public void check(
 			PermissionChecker permissionChecker, MDRRuleGroup ruleGroup,
 			String actionId)
@@ -46,6 +48,7 @@ public class MDRRuleGroupPermissionImpl implements MDRRuleGroupPermission {
 		}
 	}
 
+	@Override
 	public boolean contains(
 			PermissionChecker permissionChecker, long ruleGroupId,
 			String actionId)
@@ -57,6 +60,7 @@ public class MDRRuleGroupPermissionImpl implements MDRRuleGroupPermission {
 		return contains(permissionChecker, ruleGroup, actionId);
 	}
 
+	@Override
 	public boolean contains(
 		PermissionChecker permissionChecker, MDRRuleGroup ruleGroup,
 		String actionId) {

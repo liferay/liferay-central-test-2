@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,16 +16,77 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil" %><%@ page import="com.liferay.portal.kernel.search.Document" %><%@ page import="com.liferay.portal.kernel.search.Hits" %><%@ page import="com.liferay.portal.kernel.search.Indexer" %><%@ page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %><%@ page import="com.liferay.portal.kernel.search.SearchContext" %><%@ page import="com.liferay.portal.kernel.search.SearchContextFactory" %><%@ page import="com.liferay.portlet.asset.model.AssetTag" %><%@ page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %><%@ page import="com.liferay.portlet.asset.util.AssetUtil" %><%@ page import="com.liferay.portlet.documentlibrary.FileExtensionException" %><%@ page import="com.liferay.portlet.documentlibrary.FileNameException" %><%@ page import="com.liferay.portlet.documentlibrary.FileSizeException" %><%@ page import="com.liferay.portlet.documentlibrary.store.DLStoreUtil" %><%@ page import="com.liferay.portlet.messageboards.BannedUserException" %><%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %><%@ page import="com.liferay.portlet.messageboards.LockedThreadException" %><%@ page import="com.liferay.portlet.messageboards.MailingListEmailAddressException" %><%@ page import="com.liferay.portlet.messageboards.MailingListInServerNameException" %><%@ page import="com.liferay.portlet.messageboards.MailingListInUserNameException" %><%@ page import="com.liferay.portlet.messageboards.MailingListOutEmailAddressException" %><%@ page import="com.liferay.portlet.messageboards.MailingListOutServerNameException" %><%@ page import="com.liferay.portlet.messageboards.MailingListOutUserNameException" %><%@ page import="com.liferay.portlet.messageboards.MessageBodyException" %><%@ page import="com.liferay.portlet.messageboards.MessageSubjectException" %><%@ page import="com.liferay.portlet.messageboards.NoSuchCategoryException" %><%@ page import="com.liferay.portlet.messageboards.NoSuchMailingListException" %><%@ page import="com.liferay.portlet.messageboards.NoSuchMessageException" %><%@ page import="com.liferay.portlet.messageboards.RequiredMessageException" %><%@ page import="com.liferay.portlet.messageboards.SplitThreadException" %><%@ page import="com.liferay.portlet.messageboards.model.MBBan" %><%@ page import="com.liferay.portlet.messageboards.model.MBCategory" %><%@ page import="com.liferay.portlet.messageboards.model.MBCategoryConstants" %><%@ page import="com.liferay.portlet.messageboards.model.MBCategoryDisplay" %><%@ page import="com.liferay.portlet.messageboards.model.MBMailingList" %><%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %><%@ page import="com.liferay.portlet.messageboards.model.MBMessageConstants" %><%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %><%@ page import="com.liferay.portlet.messageboards.model.MBStatsUser" %><%@ page import="com.liferay.portlet.messageboards.model.MBThread" %><%@ page import="com.liferay.portlet.messageboards.model.MBThreadConstants" %><%@ page import="com.liferay.portlet.messageboards.model.MBThreadFlag" %><%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %><%@ page import="com.liferay.portlet.messageboards.model.impl.MBCategoryDisplayImpl" %><%@ page import="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" %><%@ page import="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBThreadFlagLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" %><%@ page import="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" %><%@ page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %><%@ page import="com.liferay.portlet.messageboards.service.permission.MBPermission" %><%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %><%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %><%@ page import="com.liferay.portlet.ratings.model.RatingsStats" %><%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %><%@ page import="com.liferay.util.RSSUtil" %>
+<%@ page import="com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil" %><%@
+page import="com.liferay.portal.kernel.search.Document" %><%@
+page import="com.liferay.portal.kernel.search.Hits" %><%@
+page import="com.liferay.portal.kernel.search.Indexer" %><%@
+page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %><%@
+page import="com.liferay.portal.kernel.search.SearchContext" %><%@
+page import="com.liferay.portal.kernel.search.SearchContextFactory" %><%@
+page import="com.liferay.portlet.asset.model.AssetEntry" %><%@
+page import="com.liferay.portlet.asset.model.AssetTag" %><%@
+page import="com.liferay.portlet.asset.service.AssetEntryServiceUtil" %><%@
+page import="com.liferay.portlet.asset.service.AssetTagLocalServiceUtil" %><%@
+page import="com.liferay.portlet.asset.service.persistence.AssetEntryQuery" %><%@
+page import="com.liferay.portlet.asset.util.AssetUtil" %><%@
+page import="com.liferay.portlet.documentlibrary.FileExtensionException" %><%@
+page import="com.liferay.portlet.documentlibrary.FileNameException" %><%@
+page import="com.liferay.portlet.documentlibrary.FileSizeException" %><%@
+page import="com.liferay.portlet.documentlibrary.NoSuchDirectoryException" %><%@
+page import="com.liferay.portlet.documentlibrary.NoSuchFileException" %><%@
+page import="com.liferay.portlet.documentlibrary.store.DLStoreUtil" %><%@
+page import="com.liferay.portlet.messageboards.BannedUserException" %><%@
+page import="com.liferay.portlet.messageboards.CategoryNameException" %><%@
+page import="com.liferay.portlet.messageboards.LockedThreadException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListEmailAddressException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListInServerNameException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListInUserNameException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListOutEmailAddressException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListOutServerNameException" %><%@
+page import="com.liferay.portlet.messageboards.MailingListOutUserNameException" %><%@
+page import="com.liferay.portlet.messageboards.MessageBodyException" %><%@
+page import="com.liferay.portlet.messageboards.MessageSubjectException" %><%@
+page import="com.liferay.portlet.messageboards.NoSuchCategoryException" %><%@
+page import="com.liferay.portlet.messageboards.NoSuchMailingListException" %><%@
+page import="com.liferay.portlet.messageboards.NoSuchMessageException" %><%@
+page import="com.liferay.portlet.messageboards.RequiredMessageException" %><%@
+page import="com.liferay.portlet.messageboards.SplitThreadException" %><%@
+page import="com.liferay.portlet.messageboards.model.MBBan" %><%@
+page import="com.liferay.portlet.messageboards.model.MBCategory" %><%@
+page import="com.liferay.portlet.messageboards.model.MBCategoryConstants" %><%@
+page import="com.liferay.portlet.messageboards.model.MBCategoryDisplay" %><%@
+page import="com.liferay.portlet.messageboards.model.MBMailingList" %><%@
+page import="com.liferay.portlet.messageboards.model.MBMessage" %><%@
+page import="com.liferay.portlet.messageboards.model.MBMessageConstants" %><%@
+page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %><%@
+page import="com.liferay.portlet.messageboards.model.MBStatsUser" %><%@
+page import="com.liferay.portlet.messageboards.model.MBThread" %><%@
+page import="com.liferay.portlet.messageboards.model.MBThreadConstants" %><%@
+page import="com.liferay.portlet.messageboards.model.MBThreadFlag" %><%@
+page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %><%@
+page import="com.liferay.portlet.messageboards.model.impl.MBCategoryDisplayImpl" %><%@
+page import="com.liferay.portlet.messageboards.model.impl.MBMessageImpl" %><%@
+page import="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBThreadFlagLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" %><%@
+page import="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" %><%@
+page import="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" %><%@
+page import="com.liferay.portlet.messageboards.service.permission.MBPermission" %><%@
+page import="com.liferay.portlet.messageboards.util.MBUtil" %><%@
+page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %><%@
+page import="com.liferay.portlet.ratings.model.RatingsStats" %><%@
+page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %><%@
+page import="com.liferay.util.RSSUtil" %>
 
 <%
-PortletPreferences preferences = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+PortletPreferences preferences = portletPreferences;
 
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);

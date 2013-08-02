@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import java.util.List;
 public class SubscriptionLocalServiceImpl
 	extends SubscriptionLocalServiceBaseImpl {
 
+	@Override
 	public Subscription addSubscription(
 			long userId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -49,6 +50,7 @@ public class SubscriptionLocalServiceImpl
 			SubscriptionConstants.FREQUENCY_INSTANT);
 	}
 
+	@Override
 	public Subscription addSubscription(
 			long userId, long groupId, String className, long classPK,
 			String frequency)
@@ -89,8 +91,9 @@ public class SubscriptionLocalServiceImpl
 			}
 			catch (Exception e) {
 				assetEntryLocalService.updateEntry(
-					userId, groupId, className, classPK, null, 0, null, null,
-					false, null, null, null, null, null,
+					userId, groupId, subscription.getCreateDate(),
+					subscription.getModifiedDate(), className, classPK, null, 0,
+					null, null, false, null, null, null, null, null,
 					String.valueOf(groupId), null, null, null, null, 0, 0, null,
 					false);
 			}
@@ -132,6 +135,7 @@ public class SubscriptionLocalServiceImpl
 		return deleteSubscription(subscription);
 	}
 
+	@Override
 	public void deleteSubscription(long userId, String className, long classPK)
 		throws PortalException, SystemException {
 
@@ -170,6 +174,7 @@ public class SubscriptionLocalServiceImpl
 		return subscription;
 	}
 
+	@Override
 	public void deleteSubscriptions(long userId)
 		throws PortalException, SystemException {
 
@@ -181,6 +186,7 @@ public class SubscriptionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void deleteSubscriptions(
 			long companyId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -195,6 +201,7 @@ public class SubscriptionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public Subscription getSubscription(
 			long companyId, long userId, String className, long classPK)
 		throws PortalException, SystemException {
@@ -205,6 +212,7 @@ public class SubscriptionLocalServiceImpl
 			companyId, userId, classNameId, classPK);
 	}
 
+	@Override
 	public List<Subscription> getSubscriptions(
 			long companyId, String className, long classPK)
 		throws SystemException {
@@ -215,6 +223,7 @@ public class SubscriptionLocalServiceImpl
 			companyId, classNameId, classPK);
 	}
 
+	@Override
 	public List<Subscription> getUserSubscriptions(
 			long userId, int start, int end,
 			OrderByComparator orderByComparator)
@@ -224,6 +233,7 @@ public class SubscriptionLocalServiceImpl
 			userId, start, end, orderByComparator);
 	}
 
+	@Override
 	public List<Subscription> getUserSubscriptions(
 			long userId, String className)
 		throws SystemException {
@@ -233,10 +243,12 @@ public class SubscriptionLocalServiceImpl
 		return subscriptionPersistence.findByU_C(userId, classNameId);
 	}
 
+	@Override
 	public int getUserSubscriptionsCount(long userId) throws SystemException {
 		return subscriptionPersistence.countByUserId(userId);
 	}
 
+	@Override
 	public boolean isSubscribed(
 			long companyId, long userId, String className, long classPK)
 		throws SystemException {

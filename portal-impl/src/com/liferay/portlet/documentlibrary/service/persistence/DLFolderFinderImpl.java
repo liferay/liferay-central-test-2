@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -73,6 +73,7 @@ public class DLFolderFinderImpl
 	public static final String JOIN_FV_BY_DL_FILE_ENTRY =
 		DLFolderFinder.class.getName() + ".joinFV_ByDLFileEntry";
 
+	@Override
 	public int countF_FE_FS_ByG_F_S_M_M(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
@@ -82,12 +83,14 @@ public class DLFolderFinderImpl
 			groupId, folderId, status, mimeTypes, includeMountFolders, false);
 	}
 
+	@Override
 	public int countFE_ByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 
 		return doCountFE_ByG_F_S(groupId, folderId, status, false);
 	}
 
+	@Override
 	public int filterCountF_FE_FS_ByG_F_S_M_M(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders)
@@ -97,12 +100,14 @@ public class DLFolderFinderImpl
 			groupId, folderId, status, mimeTypes, includeMountFolders, true);
 	}
 
+	@Override
 	public int filterCountFE_ByG_F_S(long groupId, long folderId, int status)
 		throws SystemException {
 
 		return doCountFE_ByG_F_S(groupId, folderId, status, true);
 	}
 
+	@Override
 	public int filterCountFE_FS_ByG_F_S_M(
 			long groupId, long folderId, int status, String[] mimeTypes)
 		throws SystemException {
@@ -111,6 +116,7 @@ public class DLFolderFinderImpl
 			groupId, folderId, status, mimeTypes, true);
 	}
 
+	@Override
 	public List<Object> filterFindF_FE_FS_ByG_F_S_M_M(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
@@ -122,6 +128,7 @@ public class DLFolderFinderImpl
 			end, obc, true);
 	}
 
+	@Override
 	public List<Object> filterFindFE_FS_ByG_F_S(
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
@@ -129,6 +136,7 @@ public class DLFolderFinderImpl
 		return doFindFE_FS_ByG_F_S(groupId, folderId, status, start, end, true);
 	}
 
+	@Override
 	public List<Object> findF_FE_FS_ByG_F_S_M_M(
 			long groupId, long folderId, int status, String[] mimeTypes,
 			boolean includeMountFolders, int start, int end,
@@ -140,6 +148,7 @@ public class DLFolderFinderImpl
 			end, obc, false);
 	}
 
+	@Override
 	public List<Object> findFE_FS_ByG_F_S(
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {

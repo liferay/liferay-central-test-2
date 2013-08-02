@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,7 +27,7 @@ List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
-boolean viewResults = ParamUtil.getBoolean(request, "viewResults", false);
+boolean viewResults = ParamUtil.getBoolean(request, "viewResults");
 
 if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE)) {
 	viewResults = false;
@@ -52,7 +52,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 	<liferay-ui:error exception="<%= NoSuchChoiceException.class %>" message="please-select-an-option" />
 
 	<aui:fieldset>
- 		<liferay-ui:header
+		<liferay-ui:header
 			backURL="<%= redirect %>"
 			escapeXml="<%= false %>"
 			localizeTitle="<%= false %>"
@@ -103,7 +103,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 				</c:if>
 
 				<aui:button-row>
-					<aui:button type="submit" value="vote" />
+					<aui:button type="submit" value="vote[action]" />
 
 					<aui:button href="<%= redirect %>" type="cancel" />
 				</aui:button-row>

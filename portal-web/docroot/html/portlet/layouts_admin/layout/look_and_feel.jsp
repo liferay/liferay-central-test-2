@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -76,7 +76,7 @@ else {
 		taglibLabel = LanguageUtil.get(pageContext, "use-the-same-look-and-feel-of-the-pages-in-which-this-template-is-used");
 	}
 	else {
-		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x-x", new String[] {rootNodeName, redirectURL.toString()});
+		taglibLabel = LanguageUtil.format(pageContext, "use-the-same-look-and-feel-of-the-x-x", new String[] {HtmlUtil.escape(rootNodeName), redirectURL.toString()});
 	}
 	%>
 
@@ -117,7 +117,9 @@ else {
 
 				<h3><liferay-ui:message key="css" /></h3>
 
-				<aui:input cssClass="lfr-textarea-container" label="insert-custom-css-that-will-be-loaded-after-the-theme" name="regularCss" type="textarea" value="<%= cssText %>" />
+				<aui:input cssClass="lfr-textarea-container" label="insert-custom-css-that-will-be-loaded-after-the-theme" name="regularCss" type="textarea" value="<%= cssText %>">
+					<%@ include file="/html/taglib/aui/input/validator_max_length_oracle.jspf" %>
+				</aui:input>
 			</div>
 		</liferay-ui:section>
 

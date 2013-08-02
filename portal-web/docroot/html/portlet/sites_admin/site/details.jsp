@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -82,7 +82,7 @@ if (showPrototypes && (group != null)) {
 		</c:when>
 		<c:when test="<%= (liveGroup != null) && liveGroup.isOrganization() %>">
 			<aui:field-wrapper helpMessage="the-name-of-this-site-cannot-be-edited-because-it-belongs-to-an-organization" label="name">
-				<%= liveGroup.getDescriptiveName(locale) %>
+				<%= HtmlUtil.escape(liveGroup.getDescriptiveName(locale)) %>
 			</aui:field-wrapper>
 		</c:when>
 		<c:otherwise>
@@ -182,6 +182,17 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 											<aui:input name="publicLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= publicLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
 									</c:choose>
+
+									<c:if test="<%= publicLayoutSetPrototype != null %>">
+
+										<%
+										request.setAttribute("merge_alert.jsp-groupId", String.valueOf(group.getGroupId()));
+										request.setAttribute("merge_alert.jsp-layoutSet", publicLayoutSet);
+										request.setAttribute("merge_alert.jsp-redirect", currentURL);
+										%>
+
+										<liferay-util:include page="/html/portlet/sites_admin/merge_alert.jsp" />
+									</c:if>
 								</c:when>
 							</c:choose>
 						</c:otherwise>
@@ -254,6 +265,17 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 											<aui:input name="privateLayoutSetPrototypeLinkEnabled" type="hidden" value="<%= privateLayoutSetPrototypeLinkEnabled %>" />
 										</c:when>
 									</c:choose>
+
+									<c:if test="<%= privateLayoutSetPrototype != null %>">
+
+										<%
+										request.setAttribute("merge_alert.jsp-groupId", String.valueOf(group.getGroupId()));
+										request.setAttribute("merge_alert.jsp-layoutSet", privateLayoutSet);
+										request.setAttribute("merge_alert.jsp-redirect", currentURL);
+										%>
+
+										<liferay-util:include page="/html/portlet/sites_admin/merge_alert.jsp" />
+									</c:if>
 								</c:when>
 							</c:choose>
 						</c:otherwise>
@@ -271,8 +293,8 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 					<%
 					String customJspServletContextName = StringPool.BLANK;
 
-					if (group != null) {
-						UnicodeProperties typeSettingsProperties = group.getTypeSettingsProperties();
+					if (liveGroup != null) {
+						UnicodeProperties typeSettingsProperties = liveGroup.getTypeSettingsProperties();
 
 						customJspServletContextName = GetterUtil.getString(typeSettingsProperties.get("customJspServletContextName"));
 					}

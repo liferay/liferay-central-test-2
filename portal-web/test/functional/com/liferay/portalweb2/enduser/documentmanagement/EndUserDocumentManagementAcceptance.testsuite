@@ -1,0 +1,9 @@
+<definition>
+	<execute test-case="CPDocumentsandmediaAcceptance" />
+
+	<execute test-case="PGDocumentlibrarydisplayAcceptance" />
+
+	<execute test-case="PGDocumentsandmediaAcceptance" />
+
+	<execute test-case="PGMediaGalleryAcceptance" />
+</definition>

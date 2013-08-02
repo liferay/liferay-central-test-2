@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -78,6 +78,10 @@ if (hidePortletWhenEmpty) {
 
 <%
 }
+
+if (categoryId > 0) {
+	AssetUtil.addPortletBreadcrumbEntries(categoryId, request, portletURL);
+}
 %>
 
 <aui:script use="aui-tree-view">
@@ -123,7 +127,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cat
 
 		List<AssetCategory> categoriesChildren = AssetCategoryServiceUtil.getChildCategories(category.getCategoryId(), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		sb.append("<li><span>");
+		sb.append("<li class=\"aui-tree-node\"><span>");
 
 		if (categoryId == category.getCategoryId()) {
 			portletURL.setParameter("categoryId", StringPool.BLANK);
@@ -137,7 +141,7 @@ private void _buildCategoriesNavigation(List<AssetCategory> categories, long cat
 			sb.append("<a href=\"");
 		}
 
-		sb.append(portletURL.toString());
+		sb.append(HtmlUtil.escape(portletURL.toString()));
 		sb.append("\">");
 		sb.append(title);
 		sb.append("</a>");

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -120,10 +120,14 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 
 		String path = documentName;
 
-		int pos = documentName.lastIndexOf("sharepoint/");
+		if (_log.isInfoEnabled()) {
+			_log.info("Original path " + path);
+		}
 
-		if (pos != -1) {
-			path = path.substring(pos + 11);
+		path = SharepointUtil.stripService(path, true);
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Modified path " + path);
 		}
 
 		Group group = GroupServiceUtil.getGroup(
@@ -265,41 +269,43 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 			responseElement.addElement(membersEl);
 		}
 
-		if (!minimal) {
-			Element assigneesEl = resultsEl.addElement("Assignees");
-
-			for (User member : users) {
-				responseElement = new MemberResponseElement(member, true);
-
-				responseElement.addElement(assigneesEl);
-			}
-
-			Element listEl = resultsEl.addElement("List");
-
-			listEl.addAttribute("Name", "Documents");
-
-			listEl.addElement("ID");
-
-			String parentFolderPath = path;
-
-			pos = parentFolderPath.lastIndexOf("/");
-
-			if (pos != -1) {
-				parentFolderPath = parentFolderPath.substring(0, pos);
-			}
-
-			SharepointStorage storage = SharepointUtil.getStorage(
-				parentFolderPath);
-
-			SharepointRequest sharepointRequest = new SharepointRequest(
-				parentFolderPath);
-
-			storage.addDocumentElements(sharepointRequest, listEl);
+		if (minimal) {
+			return doc.asXML();
 		}
+
+		Element assigneesEl = resultsEl.addElement("Assignees");
+
+		for (User member : users) {
+			responseElement = new MemberResponseElement(member, true);
+
+			responseElement.addElement(assigneesEl);
+		}
+
+		Element listEl = resultsEl.addElement("List");
+
+		listEl.addAttribute("Name", "Documents");
+
+		listEl.addElement("ID");
+
+		String parentFolderPath = path;
+
+		int pos = parentFolderPath.lastIndexOf("/");
+
+		if (pos != -1) {
+			parentFolderPath = parentFolderPath.substring(0, pos);
+		}
+
+		SharepointStorage storage = SharepointUtil.getStorage(parentFolderPath);
+
+		SharepointRequest sharepointRequest = new SharepointRequest(
+			parentFolderPath);
+
+		storage.addDocumentElements(sharepointRequest, listEl);
 
 		return doc.asXML();
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SharepointServlet.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		SharepointDocumentWorkspaceServlet.class);
 
 }

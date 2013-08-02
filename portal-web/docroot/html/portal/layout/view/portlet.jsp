@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -67,21 +67,5 @@ else {
 	RuntimePortletUtil.processTemplate(application, request, response, pageContext, out, velocityTemplateId, velocityTemplateContent);
 }
 %>
-
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() && !themeDisplay.isWidget() %>">
-
-	<%
-	for (String portletId : PropsValues.LAYOUT_STATIC_PORTLETS_ALL) {
-		if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), portletId)) {
-	%>
-
-			<liferay-portlet:runtime portletName="<%= portletId %>" />
-
-	<%
-		}
-	}
-	%>
-
-</c:if>
 
 <%@ include file="/html/portal/layout/view/common.jspf" %>

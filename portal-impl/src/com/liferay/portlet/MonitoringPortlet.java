@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,6 +17,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender;
 import com.liferay.portal.kernel.monitoring.RequestStatus;
 import com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal;
+import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.monitoring.statistics.portlet.PortletRequestDataSample;
 import com.liferay.portal.monitoring.statistics.portlet.PortletRequestType;
 import com.liferay.portal.util.PropsValues;
@@ -39,6 +40,7 @@ import javax.portlet.ResourceResponse;
 /**
  * @author Michael C. Han
  * @author Karthik Sudarshan
+ * @author Raymond Augé
  */
 public class MonitoringPortlet implements InvokerPortlet {
 
@@ -93,62 +95,76 @@ public class MonitoringPortlet implements InvokerPortlet {
 		_singleDestinationMessageSender = singleDestinationMessageSender;
 	}
 
+	@Override
 	public void destroy() {
 		_invokerPortlet.destroy();
 	}
 
+	@Override
 	public Integer getExpCache() {
 		return _invokerPortlet.getExpCache();
 	}
 
+	@Override
 	public Portlet getPortlet() {
 		return _invokerPortlet.getPortlet();
 	}
 
+	@Override
 	public ClassLoader getPortletClassLoader() {
 		return _invokerPortlet.getPortletClassLoader();
 	}
 
+	@Override
 	public PortletConfig getPortletConfig() {
 		return _invokerPortlet.getPortletConfig();
 	}
 
+	@Override
 	public PortletContext getPortletContext() {
 		return _invokerPortlet.getPortletContext();
 	}
 
+	@Override
 	public Portlet getPortletInstance() {
 		return _invokerPortlet.getPortletInstance();
 	}
 
+	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
-		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
+		LiferayPortletConfig liferayPortletConfig =
+			(LiferayPortletConfig)portletConfig;
 
-		_invokerPortlet.init(portletConfigImpl);
+		_invokerPortlet.init(liferayPortletConfig);
 
 		com.liferay.portal.model.Portlet portletModel =
-			portletConfigImpl.getPortlet();
+			liferayPortletConfig.getPortlet();
 
 		_actionTimeout = portletModel.getActionTimeout();
 		_renderTimeout = portletModel.getRenderTimeout();
 	}
 
+	@Override
 	public boolean isCheckAuthToken() {
 		return _invokerPortlet.isCheckAuthToken();
 	}
 
+	@Override
 	public boolean isFacesPortlet() {
 		return _invokerPortlet.isFacesPortlet();
 	}
 
+	@Override
 	public boolean isStrutsBridgePortlet() {
 		return _invokerPortlet.isStrutsBridgePortlet();
 	}
 
+	@Override
 	public boolean isStrutsPortlet() {
 		return _invokerPortlet.isStrutsPortlet();
 	}
 
+	@Override
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws IOException, PortletException {
@@ -184,6 +200,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void processEvent(
 			EventRequest eventRequest, EventResponse eventResponse)
 		throws IOException, PortletException {
@@ -217,6 +234,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void render(
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
@@ -252,6 +270,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 		}
 	}
 
+	@Override
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
@@ -290,6 +309,7 @@ public class MonitoringPortlet implements InvokerPortlet {
 		_invokerPortlet = invokerPortlet;
 	}
 
+	@Override
 	public void setPortletFilters() throws PortletException {
 		_invokerPortlet.setPortletFilters();
 	}

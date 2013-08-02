@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,8 +47,9 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		_page = page;
 	}
 
+	@Override
 	public long getClassPK() {
-		if (!_page.isApproved() &&
+		if (!_page.isApproved() && !_page.isDraft() && !_page.isPending() &&
 			(_page.getVersion() != WikiPageConstants.VERSION_DEFAULT)) {
 
 			return _page.getPageId();
@@ -68,10 +69,12 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		}
 	}
 
+	@Override
 	public long getGroupId() {
 		return _page.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		String content = _page.getContent();
 
@@ -85,6 +88,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return content;
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _page.getTitle();
 	}
@@ -131,11 +135,10 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
 			PortletKeys.WIKI, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(windowState);
-
 		portletURL.setParameter("struts_action", "/wiki/view");
 		portletURL.setParameter("nodeId", String.valueOf(_page.getNodeId()));
 		portletURL.setParameter("title", _page.getTitle());
+		portletURL.setWindowState(windowState);
 
 		return portletURL;
 	}
@@ -151,14 +154,17 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 			"pageResourcePrimKey", _page.getResourcePrimKey());
 	}
 
+	@Override
 	public long getUserId() {
 		return _page.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _page.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _page.getUuid();
 	}
@@ -185,6 +191,7 @@ public class WikiPageAssetRenderer extends BaseAssetRenderer {
 		return true;
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

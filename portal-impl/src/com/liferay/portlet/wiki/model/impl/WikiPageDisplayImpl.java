@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,78 +37,97 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		_attachments = attachments;
 	}
 
+	@Override
 	public String[] getAttachments() {
 		return _attachments;
 	}
 
+	@Override
 	public String getContent() {
 		return _content;
 	}
 
+	@Override
 	public String getFormat() {
 		return _format;
 	}
 
+	@Override
 	public String getFormattedContent() {
 		return _formattedContent;
 	}
 
+	@Override
 	public boolean getHead() {
 		return _head;
 	}
 
+	@Override
 	public long getNodeId() {
 		return _nodeId;
 	}
 
+	@Override
 	public String getTitle() {
 		return _title;
 	}
 
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
+	@Override
 	public double getVersion() {
 		return _version;
 	}
 
+	@Override
 	public boolean isHead() {
 		return _head;
 	}
 
+	@Override
 	public void setAttachments(String[] attachments) {
 		_attachments = attachments;
 	}
 
+	@Override
 	public void setContent(String content) {
 		_content = content;
 	}
 
+	@Override
 	public void setFormat(String format) {
 		_format = format;
 	}
 
+	@Override
 	public void setFormattedContent(String formattedContent) {
 		_formattedContent = formattedContent;
 	}
 
+	@Override
 	public void setHead(boolean head) {
 		_head = head;
 	}
 
+	@Override
 	public void setNodeId(long nodeId) {
 		_nodeId = nodeId;
 	}
 
+	@Override
 	public void setTitle(String title) {
 		_title = title;
 	}
 
+	@Override
 	public void setUserId(long userId) {
 		_userId = userId;
 	}
 
+	@Override
 	public void setVersion(double version) {
 		_version = version;
 	}

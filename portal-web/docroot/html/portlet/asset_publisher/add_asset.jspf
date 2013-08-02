@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -51,8 +51,8 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 	<liferay-ui:icon-menu
 		align="left"
 		icon='<%= themeDisplay.getPathThemeImages() + "/common/add.png" %>'
-		id='<%= taglibId %>'
-		message='<%= LanguageUtil.format(pageContext, (groupIds.length == 1) ? "add-new" : "add-new-in-x", new Object[] {(GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName(locale)}) %>'
+		id="<%= taglibId %>"
+		message='<%= LanguageUtil.format(pageContext, (groupIds.length == 1) ? "add-new" : "add-new-in-x", new Object[] {HtmlUtil.escape((GroupLocalServiceUtil.getGroup(groupId)).getDescriptiveName(locale))}) %>'
 		showWhenSingleIcon="<%= true %>"
 	>
 
@@ -100,7 +100,7 @@ addPortletURLs = getAddPortletURLs(liferayPortletRequest, liferayPortletResponse
 				addPortletURLString = HttpUtil.addParameter(addPortletURLString, "layoutUuid", layout.getUuid());
 			}
 
-			String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {width: 960}, id: '" + liferayPortletResponse.getNamespace() + "editAsset', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri:'" + HtmlUtil.escapeURL(addPortletURLString) + "'});";
+			String taglibEditURL = "javascript:Liferay.Util.openWindow({dialog: {align: Liferay.Util.Window.ALIGN_CENTER, width: 960}, id: '" + liferayPortletResponse.getNamespace() + "editAsset', title: '" + ResourceActionsUtil.getModelResource(locale, className) + "', uri: '" + HtmlUtil.escapeJS(addPortletURLString) + "'});";
 		%>
 
 			<liferay-ui:icon
@@ -134,15 +134,12 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 		return null;
 	}
 
-	addPortletURL.setWindowState(LiferayWindowState.POP_UP);
+	PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-	addPortletURL.setPortletMode(PortletMode.VIEW);
-
-	PortletURL redirectURL = liferayPortletResponse.createRenderURL();
-
-	redirectURL.setWindowState(LiferayWindowState.POP_UP);
+	PortletURL redirectURL = liferayPortletResponse.createLiferayPortletURL(themeDisplay.getPlid(), portletDisplay.getId(), PortletRequest.RENDER_PHASE, false);
 
 	redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect");
+	redirectURL.setWindowState(LiferayWindowState.POP_UP);
 
 	addPortletURL.setParameter("redirect", redirectURL.toString());
 
@@ -152,14 +149,16 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 		addPortletURL.setParameter("referringPortletResource", referringPortletResource);
 	}
 	else {
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
 		addPortletURL.setParameter("referringPortletResource", portletDisplay.getId());
 
 		Map<Long, String> assetVocabularyAssetCategoryIds = new HashMap<Long, String>();
 
 		for (long assetCategoryId : allAssetCategoryIds) {
-			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(assetCategoryId);
+			AssetCategory assetCategory = AssetCategoryLocalServiceUtil.fetchAssetCategory(assetCategoryId);
+
+			if (assetCategory == null) {
+				continue;
+			}
 
 			long assetVocabularyId = assetCategory.getVocabularyId();
 
@@ -198,6 +197,9 @@ public PortletURL getAddPortletURL(LiferayPortletRequest liferayPortletRequest, 
 			addPortletURL.setParameter("structureId", structure.getStructureId());
 		}
 	}
+
+	addPortletURL.setPortletMode(PortletMode.VIEW);
+	addPortletURL.setWindowState(LiferayWindowState.POP_UP);
 
 	return addPortletURL;
 }

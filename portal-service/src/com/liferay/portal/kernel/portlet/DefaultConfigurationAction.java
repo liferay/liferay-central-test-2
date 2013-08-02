@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,7 +30,6 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.PortletConfigFactoryUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +43,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ValidatorException;
 
 import javax.servlet.ServletContext;
 
@@ -72,6 +72,7 @@ public class DefaultConfigurationAction
 		return ParamUtil.getString(portletRequest, name);
 	}
 
+	@Override
 	public void processAction(
 			PortletConfig portletConfig, ActionRequest actionRequest,
 			ActionResponse actionResponse)
@@ -96,9 +97,7 @@ public class DefaultConfigurationAction
 			themeDisplay.getPermissionChecker(), themeDisplay.getLayout(),
 			portletResource, ActionKeys.CONFIGURATION);
 
-		PortletPreferences portletPreferences =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
+		PortletPreferences portletPreferences = actionRequest.getPreferences();
 
 		for (Map.Entry<String, String> entry : properties.entrySet()) {
 			String name = entry.getKey();
@@ -123,7 +122,15 @@ public class DefaultConfigurationAction
 		}
 
 		if (SessionErrors.isEmpty(actionRequest)) {
-			portletPreferences.store();
+			try {
+				portletPreferences.store();
+			}
+			catch (ValidatorException ve) {
+				SessionErrors.add(
+					actionRequest, ValidatorException.class.getName(), ve);
+
+				return;
+			}
 
 			LiferayPortletConfig liferayPortletConfig =
 				(LiferayPortletConfig)portletConfig;
@@ -141,6 +148,7 @@ public class DefaultConfigurationAction
 		}
 	}
 
+	@Override
 	public String render(
 			PortletConfig portletConfig, RenderRequest renderRequest,
 			RenderResponse renderResponse)
@@ -164,6 +172,7 @@ public class DefaultConfigurationAction
 		return "/configuration.jsp";
 	}
 
+	@Override
 	public void serveResource(
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
 			ResourceResponse resourceResponse)

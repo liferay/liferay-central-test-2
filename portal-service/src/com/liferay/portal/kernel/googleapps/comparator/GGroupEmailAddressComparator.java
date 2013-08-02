@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ public class GGroupEmailAddressComparator implements Comparator<GGroup> {
 		_ascending = ascending;
 	}
 
+	@Override
 	public int compare(GGroup user1, GGroup user2) {
 		String emailAddress1 = user1.getEmailAddress();
 		String emailAddress2 = user2.getEmailAddress();

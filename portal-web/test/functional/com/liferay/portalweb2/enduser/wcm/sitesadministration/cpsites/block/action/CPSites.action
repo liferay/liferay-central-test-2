@@ -1,0 +1,22 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_BLANK_SITE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="SITE_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="assertTextEquals">
+		<case locator-key1="SITE_TABLE_NAME">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+		<case locator-key1="SUCCESS_MESSAGE">
+			<execute function="AssertTextEquals#assertText" value1="Your request completed successfully." />
+		</case>
+	</command>
+</definition>

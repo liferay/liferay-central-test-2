@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -49,8 +48,9 @@ public class CompareVersionsAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -61,17 +61,16 @@ public class CompareVersionsAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchPageException) {
-
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.wiki.error");
+				return actionMapping.findForward("portlet.wiki.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward("portlet.wiki.compare_versions");
+		return actionMapping.findForward("portlet.wiki.compare_versions");
 	}
 
 	protected void compareVersions(
@@ -110,10 +109,9 @@ public class CompareVersionsAction extends PortletAction {
 			editPageURL.setParameter("nodeId", String.valueOf(nodeId));
 			editPageURL.setParameter("title", title);
 
-			String attachmentURLPrefix =
-				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
-					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
-						"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
+			String attachmentURLPrefix = WikiUtil.getAttachmentURLPrefix(
+				themeDisplay.getPathMain(), themeDisplay.getPlid(), nodeId,
+				title);
 
 			String htmlDiffResult = WikiUtil.diffHtml(
 				sourcePage, targetPage, viewPageURL, editPageURL,
@@ -129,13 +127,13 @@ public class CompareVersionsAction extends PortletAction {
 			sourceContent = WikiUtil.processContent(sourceContent);
 			targetContent = WikiUtil.processContent(targetContent);
 
-			if (type.equals("escape")) {
-				sourceContent = HtmlUtil.escape(sourceContent);
-				targetContent = HtmlUtil.escape(targetContent);
-			}
-			else if (type.equals("strip")) {
+			if (type.equals("strip")) {
 				sourceContent = HtmlUtil.extractText(sourceContent);
 				targetContent = HtmlUtil.extractText(targetContent);
+			}
+			else {
+				sourceContent = HtmlUtil.escape(sourceContent);
+				targetContent = HtmlUtil.escape(targetContent);
 			}
 
 			List<DiffResult>[] diffResults = DiffUtil.diff(

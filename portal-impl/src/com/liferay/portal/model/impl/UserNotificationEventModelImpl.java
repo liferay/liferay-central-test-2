@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -344,13 +344,16 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	@Override
 	public UserNotificationEvent toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (UserNotificationEvent)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (UserNotificationEvent)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public UserNotificationEvent toUnescapedModel() {
+		return (UserNotificationEvent)this;
 	}
 
 	@Override
@@ -396,18 +399,15 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof UserNotificationEvent)) {
 			return false;
 		}
 
-		UserNotificationEvent userNotificationEvent = null;
-
-		try {
-			userNotificationEvent = (UserNotificationEvent)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		UserNotificationEvent userNotificationEvent = (UserNotificationEvent)obj;
 
 		long primaryKey = userNotificationEvent.getPrimaryKey();
 
@@ -561,7 +561,7 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	}
 
 	private static ClassLoader _classLoader = UserNotificationEvent.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			UserNotificationEvent.class
 		};
 	private String _uuid;
@@ -580,5 +580,5 @@ public class UserNotificationEventModelImpl extends BaseModelImpl<UserNotificati
 	private boolean _originalArchived;
 	private boolean _setOriginalArchived;
 	private long _columnBitmask;
-	private UserNotificationEvent _escapedModelProxy;
+	private UserNotificationEvent _escapedModel;
 }

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-String originalRedirect = ParamUtil.getString(request, "originalRedirect");
+String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
@@ -74,7 +74,7 @@ if ((article != null) && article.isDraft()) {
 						permissionPopUp = Liferay.Util.openWindow(
 							{
 								dialog: {
-									centered: true,
+									align: Liferay.Util.Window.ALIGN_CENTER,
 									cssClass: 'portlet-asset-categories-admin-dialog permissions-change',
 									width: 700
 								},
@@ -126,14 +126,14 @@ if ((article != null) && article.isDraft()) {
 		<portlet:renderURL var="viewHistoryURL">
 			<portlet:param name="struts_action" value="/journal/view_article_history" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="originalRedirect" value="<%= originalRedirect %>" />
+			<portlet:param name="referringPortletResource" value="<%= referringPortletResource %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
 			<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 		</portlet:renderURL>
 
 		toolbarChildren.push(
 			{
-				handler: function (event) {
+				handler: function(event) {
 					window.location = '<%= viewHistoryURL %>';
 				},
 				icon: 'history',

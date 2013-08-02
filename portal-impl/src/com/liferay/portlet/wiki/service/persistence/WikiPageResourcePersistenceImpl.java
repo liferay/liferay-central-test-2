@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -209,13 +209,61 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 		}
 	}
 
+	protected void cacheUniqueFindersCache(WikiPageResource wikiPageResource) {
+		if (wikiPageResource.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(wikiPageResource.getNodeId()),
+					
+					wikiPageResource.getTitle()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_T, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T, args,
+				wikiPageResource);
+		}
+		else {
+			WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
+			if ((wikiPageResourceModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_N_T.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(wikiPageResource.getNodeId()),
+						
+						wikiPageResource.getTitle()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_N_T, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T, args,
+					wikiPageResource);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(WikiPageResource wikiPageResource) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T,
-			new Object[] {
+		WikiPageResourceModelImpl wikiPageResourceModelImpl = (WikiPageResourceModelImpl)wikiPageResource;
+
+		Object[] args = new Object[] {
 				Long.valueOf(wikiPageResource.getNodeId()),
 				
-			wikiPageResource.getTitle()
-			});
+				wikiPageResource.getTitle()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_T, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T, args);
+
+		if ((wikiPageResourceModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_N_T.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(wikiPageResourceModelImpl.getOriginalNodeId()),
+					
+					wikiPageResourceModelImpl.getOriginalTitle()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_T, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T, args);
+		}
 	}
 
 	/**
@@ -376,35 +424,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 			WikiPageResourceImpl.class, wikiPageResource.getPrimaryKey(),
 			wikiPageResource);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
-				new Object[] {
-					Long.valueOf(wikiPageResource.getNodeId()),
-					
-				wikiPageResource.getTitle()
-				}, wikiPageResource);
-		}
-		else {
-			if ((wikiPageResourceModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_N_T.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(wikiPageResourceModelImpl.getOriginalNodeId()),
-						
-						wikiPageResourceModelImpl.getOriginalTitle()
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_N_T, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_N_T, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_N_T,
-					new Object[] {
-						Long.valueOf(wikiPageResource.getNodeId()),
-						
-					wikiPageResource.getTitle()
-					}, wikiPageResource);
-			}
-		}
+		clearUniqueFindersCache(wikiPageResource);
+		cacheUniqueFindersCache(wikiPageResource);
 
 		return wikiPageResource;
 	}
@@ -1425,8 +1446,10 @@ public class WikiPageResourcePersistenceImpl extends BasePersistenceImpl<WikiPag
 				List<ModelListener<WikiPageResource>> listenersList = new ArrayList<ModelListener<WikiPageResource>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<WikiPageResource>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

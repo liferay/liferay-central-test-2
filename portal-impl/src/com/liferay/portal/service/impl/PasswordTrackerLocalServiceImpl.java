@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -32,10 +32,12 @@ import java.util.Iterator;
 public class PasswordTrackerLocalServiceImpl
 	extends PasswordTrackerLocalServiceBaseImpl {
 
+	@Override
 	public void deletePasswordTrackers(long userId) throws SystemException {
 		passwordTrackerPersistence.removeByUserId(userId);
 	}
 
+	@Override
 	public boolean isSameAsCurrentPassword(long userId, String newClearTextPwd)
 		throws PortalException, SystemException {
 
@@ -64,13 +66,14 @@ public class PasswordTrackerLocalServiceImpl
 		}
 	}
 
+	@Override
 	public boolean isValidPassword(long userId, String newClearTextPwd)
 		throws PortalException, SystemException {
 
 		PasswordPolicy passwordPolicy =
 			passwordPolicyLocalService.getPasswordPolicyByUserId(userId);
 
-		if (!passwordPolicy.getHistory()) {
+		if ((passwordPolicy == null) || !passwordPolicy.getHistory()) {
 			return true;
 		}
 
@@ -101,6 +104,7 @@ public class PasswordTrackerLocalServiceImpl
 		return true;
 	}
 
+	@Override
 	public void trackPassword(long userId, String encPassword)
 		throws PortalException, SystemException {
 

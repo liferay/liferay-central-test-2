@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,7 +43,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 				'<portlet:namespace />folderId': '<%= folderId %>',
 				'<portlet:namespace />displayStyle': displayStyle,
 				'<portlet:namespace />viewEntries': <%= Boolean.FALSE.toString() %>,
-				'<portlet:namespace />viewEntriesPage': <%= Boolean.TRUE.toString() %>,
+				'<portlet:namespace />viewEntriesPage': <%= Boolean.FALSE.toString() %>,
 				'<portlet:namespace />viewFolders': <%= Boolean.FALSE.toString() %>,
 				'<portlet:namespace />saveDisplayStyle': <%= Boolean.TRUE.toString() %>
 			};
@@ -102,7 +102,13 @@ String keywords = ParamUtil.getString(request, "keywords");
 		}
 		%>
 
-		var displayStyleToolbar = new A.Toolbar(
+		var displayStyleToolbar = buttonRow.getData('displayStyleToolbar');
+
+		if (displayStyleToolbar) {
+			displayStyleToolbar.removeAll();
+		}
+
+		displayStyleToolbar = new A.Toolbar(
 			{
 				activeState: true,
 				boundingBox: buttonRow,

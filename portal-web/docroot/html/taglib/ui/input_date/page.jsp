@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,20 +24,21 @@ if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:di
 }
 
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:cssClass"));
-String formName = namespace + request.getAttribute("liferay-ui:input-date:formName");
 String monthParam = namespace + request.getAttribute("liferay-ui:input-date:monthParam");
+String monthParamId = namespace + request.getAttribute("liferay-ui:input-date:monthParamId");
 int monthValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:monthValue"));
 boolean monthNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:monthNullable"));
 String dayParam = namespace + request.getAttribute("liferay-ui:input-date:dayParam");
+String dayParamId = namespace + request.getAttribute("liferay-ui:input-date:dayParamId");
 int dayValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:dayValue"));
 boolean dayNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:dayNullable"));
 String yearParam = namespace + request.getAttribute("liferay-ui:input-date:yearParam");
+String yearParamId = namespace + request.getAttribute("liferay-ui:input-date:yearParamId");
 int yearValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearValue"));
 boolean yearNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:yearNullable"));
 int yearRangeStart = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearRangeStart"));
 int yearRangeEnd = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearRangeEnd"));
 String monthAndYearParam = namespace + request.getAttribute("liferay-ui:input-date:monthAndYearParam");
-boolean monthAndYearNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:monthAndYearNullable"));
 int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:firstDayOfWeek"));
 String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
@@ -92,6 +93,12 @@ if (yearValue > 0) {
 else if (yearNullable) {
 	yearEmpty = true;
 }
+
+boolean allowNone = false;
+
+if (dayNullable && monthNullable && yearNullable) {
+	allowNone = true;
+}
 %>
 
 <div class="aui-datepicker aui-datepicker-display aui-helper-clearfix <%= Validator.isNotNull(cssClass) ? cssClass : StringPool.BLANK %>" id="<%= randomNamespace %>displayDate">
@@ -132,7 +139,7 @@ else if (yearNullable) {
 			</c:choose>
 		</div>
 		<div class="aui-datepicker-button-wrapper">
-			<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default yui3-widget" id="buttonTest" type="button">
+			<button class="aui-buttonitem aui-buttonitem-content aui-buttonitem-icon-only aui-component aui-state-default yui3-widget" id="buttonTest" title="<liferay-ui:message key="display-a-datepicker" />" type="button">
 				<span class="aui-buttonitem-icon aui-icon aui-icon-calendar"></span>
 			</button>
 		</div>
@@ -169,6 +176,7 @@ else if (yearNullable) {
 					appendOrder: '<%= dateFormatOrder %>',
 					boundingBox: displayDateNode,
 					calendar: {
+						allowNone: <%= allowNone %>,
 						dates: [
 							<c:if test="<%= !monthEmpty && !dayEmpty && !yearEmpty %>">
 								new Date(
@@ -200,9 +208,9 @@ else if (yearNullable) {
 							today: '<liferay-ui:message key="today" />'
 						}
 					},
-					dayNode: '#<%= dayParam %>',
+					dayNode: '#<%= dayParamId %>',
 					disabled: <%= disabled %>,
-					monthNode: '#<%= monthParam %>',
+					monthNode: '#<%= monthParamId %>',
 					nullableDay: <%= dayNullable %>,
 					nullableMonth: <%= monthNullable %>,
 					nullableYear: <%= yearNullable %>,
@@ -214,7 +222,7 @@ else if (yearNullable) {
 						}
 					},
 					srcNode: '#<%= randomNamespace %>displayDateContent',
-					yearNode: '#<%= yearParam %>',
+					yearNode: '#<%= yearParamId %>',
 					yearRange: [<%= yearRangeStart %>, <%= yearRangeEnd %>]
 				}
 			).render();

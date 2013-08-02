@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.SourceFileNameException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -60,8 +61,9 @@ public class EditEntryAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
@@ -117,7 +119,6 @@ public class EditEntryAction extends PortletAction {
 			}
 			else if (e instanceof DuplicateFileException ||
 					 e instanceof DuplicateFolderNameException ||
-					 e instanceof NoSuchFolderException ||
 					 e instanceof SourceFileNameException) {
 
 				if (e instanceof DuplicateFileException) {
@@ -143,8 +144,9 @@ public class EditEntryAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -158,7 +160,8 @@ public class EditEntryAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.document_library.error");
+				return actionMapping.findForward(
+					"portlet.document_library.error");
 			}
 			else {
 				throw e;
@@ -167,7 +170,7 @@ public class EditEntryAction extends PortletAction {
 
 		String forward = "portlet.document_library.edit_entry";
 
-		return mapping.findForward(getForward(renderRequest, forward));
+		return actionMapping.findForward(getForward(renderRequest, forward));
 	}
 
 	protected void cancelCheckedOutEntries(ActionRequest actionRequest)
@@ -178,6 +181,16 @@ public class EditEntryAction extends PortletAction {
 
 		for (long fileEntryId : fileEntryIds) {
 			DLAppServiceUtil.cancelCheckOut(fileEntryId);
+		}
+
+		long[] fileShortcutIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileShortcutIds"), 0L);
+
+		for (long fileShortcutId : fileShortcutIds) {
+			DLFileShortcut fileShortcut = DLAppLocalServiceUtil.getFileShortcut(
+				fileShortcutId);
+
+			DLAppServiceUtil.cancelCheckOut(fileShortcut.getToFileEntryId());
 		}
 	}
 
@@ -194,6 +207,18 @@ public class EditEntryAction extends PortletAction {
 			DLAppServiceUtil.checkInFileEntry(
 				fileEntryId, false, StringPool.BLANK, serviceContext);
 		}
+
+		long[] fileShortcutIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileShortcutIds"), 0L);
+
+		for (long fileShortcutId : fileShortcutIds) {
+			DLFileShortcut fileShortcut = DLAppLocalServiceUtil.getFileShortcut(
+				fileShortcutId);
+
+			DLAppServiceUtil.checkInFileEntry(
+				fileShortcut.getToFileEntryId(), false, StringPool.BLANK,
+				serviceContext);
+		}
 	}
 
 	protected void checkOutEntries(ActionRequest actionRequest)
@@ -207,6 +232,17 @@ public class EditEntryAction extends PortletAction {
 
 		for (long fileEntryId : fileEntryIds) {
 			DLAppServiceUtil.checkOutFileEntry(fileEntryId, serviceContext);
+		}
+
+		long[] fileShortcutIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "fileShortcutIds"), 0L);
+
+		for (long fileShortcutId : fileShortcutIds) {
+			DLFileShortcut fileShortcut = DLAppLocalServiceUtil.getFileShortcut(
+				fileShortcutId);
+
+			DLAppServiceUtil.checkOutFileEntry(
+				fileShortcut.getToFileEntryId(), serviceContext);
 		}
 	}
 

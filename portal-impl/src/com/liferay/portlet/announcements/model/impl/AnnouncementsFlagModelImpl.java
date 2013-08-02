@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -320,13 +320,16 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	@Override
 	public AnnouncementsFlag toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (AnnouncementsFlag)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (AnnouncementsFlag)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public AnnouncementsFlag toUnescapedModel() {
+		return (AnnouncementsFlag)this;
 	}
 
 	@Override
@@ -373,18 +376,15 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof AnnouncementsFlag)) {
 			return false;
 		}
 
-		AnnouncementsFlag announcementsFlag = null;
-
-		try {
-			announcementsFlag = (AnnouncementsFlag)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)obj;
 
 		long primaryKey = announcementsFlag.getPrimaryKey();
 
@@ -497,7 +497,7 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	}
 
 	private static ClassLoader _classLoader = AnnouncementsFlag.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			AnnouncementsFlag.class
 		};
 	private long _flagId;
@@ -513,5 +513,5 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl<AnnouncementsFlag>
 	private int _originalValue;
 	private boolean _setOriginalValue;
 	private long _columnBitmask;
-	private AnnouncementsFlag _escapedModelProxy;
+	private AnnouncementsFlag _escapedModel;
 }

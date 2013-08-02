@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,9 +31,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.invitation.util.InvitationUtil;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
@@ -56,12 +54,13 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
-		List<String> validEmailAddresses = new ArrayList<String>();
 		Set<String> invalidEmailAddresses = new HashSet<String>();
+		Set<String> validEmailAddresses = new HashSet<String>();
 
 		int emailMessageMaxRecipients =
 			InvitationUtil.getEmailMessageMaxRecipients();
@@ -71,9 +70,7 @@ public class ViewAction extends PortletAction {
 				actionRequest, "emailAddress" + i);
 
 			if (Validator.isEmailAddress(emailAddress)) {
-				if (!validEmailAddresses.contains(emailAddress)) {
-					validEmailAddresses.add(emailAddress);
-				}
+				validEmailAddresses.add(emailAddress);
 			}
 			else if (Validator.isNotNull(emailAddress)) {
 				invalidEmailAddresses.add("emailAddress" + i);
@@ -156,11 +153,12 @@ public class ViewAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.invitation.view"));
 	}
 

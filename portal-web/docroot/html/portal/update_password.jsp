@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,9 +17,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String currentURL = PortalUtil.getCurrentURL(request);
-
-String referer = ParamUtil.getString(request, WebKeys.REFERER, currentURL);
+String referer = ParamUtil.getString(request, WebKeys.REFERER);
 
 if (referer.equals(themeDisplay.getPathMain() + "/portal/update_password")) {
 	referer = themeDisplay.getPathMain() + "?doAsUserId=" + themeDisplay.getDoAsUserId();

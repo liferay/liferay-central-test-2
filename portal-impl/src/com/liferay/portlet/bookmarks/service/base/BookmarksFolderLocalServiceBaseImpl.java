@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -50,6 +50,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
@@ -435,6 +436,25 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the bookmarks folder finder.
+	 *
+	 * @return the bookmarks folder finder
+	 */
+	public BookmarksFolderFinder getBookmarksFolderFinder() {
+		return bookmarksFolderFinder;
+	}
+
+	/**
+	 * Sets the bookmarks folder finder.
+	 *
+	 * @param bookmarksFolderFinder the bookmarks folder finder
+	 */
+	public void setBookmarksFolderFinder(
+		BookmarksFolderFinder bookmarksFolderFinder) {
+		this.bookmarksFolderFinder = bookmarksFolderFinder;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -794,6 +814,8 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 	protected BookmarksFolderService bookmarksFolderService;
 	@BeanReference(type = BookmarksFolderPersistence.class)
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
+	@BeanReference(type = BookmarksFolderFinder.class)
+	protected BookmarksFolderFinder bookmarksFolderFinder;
 	@BeanReference(type = CounterLocalService.class)
 	protected CounterLocalService counterLocalService;
 	@BeanReference(type = GroupLocalService.class)

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,14 @@ package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.test.TestCase;
 
+import org.junit.Test;
+
 /**
  * @author Michael C. Han
  */
 public class PrimitiveIntListTest extends TestCase {
 
+	@Test
 	public void testAdd() {
 		int[] expected = new int[] {10, 11, 12};
 
@@ -41,6 +44,7 @@ public class PrimitiveIntListTest extends TestCase {
 		}
 	}
 
+	@Test
 	public void testAddAll() {
 		int[] expected = new int[] {10, 11, 12};
 

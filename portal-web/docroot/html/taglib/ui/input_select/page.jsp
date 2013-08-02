@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,7 +18,6 @@
 
 <%
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-select:cssClass"));
-String formName = namespace + request.getAttribute("liferay-ui:input-select:formName");
 String param = (String)request.getAttribute("liferay-ui:input-select:param");
 Boolean defaultValue = (Boolean)request.getAttribute("liferay-ui:input-select:defaultValue");
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-select:disabled"));

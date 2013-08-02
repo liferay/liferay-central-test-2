@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -80,6 +80,11 @@ import javax.servlet.http.HttpServletRequest;
  * @author Julio Camarero
  */
 public class DLUtil {
+
+	public static final String OFFICE_EXTENSION = "officeExtension";
+
+	public static final String OFFICE_EXTENSION_PATH =
+		StringPool.SLASH + OFFICE_EXTENSION;
 
 	public static void addPortletBreadcrumbEntries(
 			DLFileShortcut dlFileShortcut, HttpServletRequest request,
@@ -369,7 +374,8 @@ public class DLUtil {
 
 		if (scopeGroup.isLayout()) {
 			return new long[] {
-				scopeGroup.getParentGroupId(), companyGroup.getGroupId()
+				groupId, scopeGroup.getParentGroupId(),
+				companyGroup.getGroupId()
 			};
 		}
 		else {
@@ -427,10 +433,9 @@ public class DLUtil {
 			if (absoluteURL) {
 				sb.append(themeDisplay.getPortalURL());
 			}
-
-			sb.append(themeDisplay.getPathContext());
 		}
 
+		sb.append(PortalUtil.getPathContext());
 		sb.append("/documents/");
 		sb.append(fileEntry.getRepositoryId());
 		sb.append(StringPool.SLASH);
@@ -552,14 +557,18 @@ public class DLUtil {
 		if (dlFileShortcut == null) {
 			String thumbnailQueryString = null;
 
-			if (ImageProcessorUtil.hasImages(fileVersion)) {
-				thumbnailQueryString = "&imageThumbnail=1";
-			}
-			else if (PDFProcessorUtil.hasImages(fileVersion)) {
-				thumbnailQueryString = "&documentThumbnail=1";
-			}
-			else if (VideoProcessorUtil.hasVideo(fileVersion)) {
-				thumbnailQueryString = "&videoThumbnail=1";
+			if (GetterUtil.getBoolean(
+					PropsUtil.get(PropsKeys.DL_FILE_ENTRY_THUMBNAIL_ENABLED))) {
+
+				if (ImageProcessorUtil.hasImages(fileVersion)) {
+					thumbnailQueryString = "&imageThumbnail=1";
+				}
+				else if (PDFProcessorUtil.hasImages(fileVersion)) {
+					thumbnailQueryString = "&documentThumbnail=1";
+				}
+				else if (VideoProcessorUtil.hasVideo(fileVersion)) {
+					thumbnailQueryString = "&videoThumbnail=1";
+				}
 			}
 
 			if (Validator.isNotNull(thumbnailQueryString)) {
@@ -611,9 +620,57 @@ public class DLUtil {
 			ThemeDisplay themeDisplay, Folder folder, FileEntry fileEntry)
 		throws PortalException, SystemException {
 
+		return getWebDavURL(themeDisplay, folder, fileEntry, false);
+	}
+
+	public static String getWebDavURL(
+			ThemeDisplay themeDisplay, Folder folder, FileEntry fileEntry,
+			boolean openDocumentUrl)
+		throws PortalException, SystemException {
+
+		StringBundler webDavURL = new StringBundler(7);
+
+		boolean secure = false;
+
+		if (themeDisplay.isSecure() || _WEBDAV_SERVLET_HTTPS_REQUIRED) {
+			secure = true;
+		}
+
+		String portalURL = PortalUtil.getPortalURL(
+			themeDisplay.getServerName(), themeDisplay.getServerPort(), secure);
+
+		webDavURL.append(portalURL);
+
+		webDavURL.append(themeDisplay.getPathContext());
+		webDavURL.append("/api/secure/webdav");
+
+		String fileEntryTitle = null;
+
+		if (fileEntry != null) {
+			String extension = fileEntry.getExtension();
+
+			fileEntryTitle = HtmlUtil.unescape(fileEntry.getTitle());
+
+			if (openDocumentUrl && isOfficeExtension(extension) &&
+				!fileEntryTitle.endsWith(StringPool.PERIOD + extension)) {
+
+				webDavURL.append(OFFICE_EXTENSION_PATH);
+
+				fileEntryTitle += StringPool.PERIOD + extension;
+			}
+		}
+
+		Group group = themeDisplay.getScopeGroup();
+
+		webDavURL.append(group.getFriendlyURL());
+		webDavURL.append("/document_library");
+
 		StringBuilder sb = new StringBuilder();
 
-		if (folder != null) {
+		if ((folder != null) &&
+			(folder.getFolderId() !=
+				DLFolderConstants.DEFAULT_PARENT_FOLDER_ID)) {
+
 			Folder curFolder = folder;
 
 			while (true) {
@@ -625,23 +682,20 @@ public class DLUtil {
 
 					break;
 				}
-				else {
-					curFolder = DLAppLocalServiceUtil.getFolder(
-						curFolder.getParentFolderId());
-				}
+
+				curFolder = DLAppLocalServiceUtil.getFolder(
+					curFolder.getParentFolderId());
 			}
 		}
 
 		if (fileEntry != null) {
 			sb.append(StringPool.SLASH);
-			sb.append(HttpUtil.encodeURL(fileEntry.getTitle(), true));
+			sb.append(HttpUtil.encodeURL(fileEntryTitle, true));
 		}
 
-		Group group = themeDisplay.getScopeGroup();
+		webDavURL.append(sb.toString());
 
-		return themeDisplay.getPortalURL() + themeDisplay.getPathContext() +
-			"/api/secure/webdav" + group.getFriendlyURL() +
-				"/document_library" + sb.toString();
+		return webDavURL.toString();
 	}
 
 	public static boolean hasWorkflowDefinitionLink(
@@ -680,6 +734,21 @@ public class DLUtil {
 		String ddmStructureKey) {
 
 		if (ddmStructureKey.startsWith("auto_")) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isOfficeExtension(String extension) {
+		if (extension.equalsIgnoreCase("doc") ||
+			extension.equalsIgnoreCase("docx") ||
+			extension.equalsIgnoreCase("dot") ||
+			extension.equalsIgnoreCase("ppt") ||
+			extension.equalsIgnoreCase("pptx") ||
+			extension.equalsIgnoreCase("xls") ||
+			extension.equalsIgnoreCase("xlsx")) {
+
 			return true;
 		}
 
@@ -783,6 +852,10 @@ public class DLUtil {
 	private static final String _DEFAULT_GENERIC_NAME = "default";
 
 	private static final long _DIVISOR = 256;;
+
+	private static final boolean _WEBDAV_SERVLET_HTTPS_REQUIRED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.WEBDAV_SERVLET_HTTPS_REQUIRED));
 
 	private static Log _log = LogFactoryUtil.getLog(DLUtil.class);
 

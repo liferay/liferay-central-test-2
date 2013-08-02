@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,9 +18,15 @@ import com.liferay.portal.NoSuchResourcePermissionException;
 import com.liferay.portal.kernel.concurrent.LockRegistry;
 import com.liferay.portal.kernel.dao.db.DB;
 import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -38,6 +44,7 @@ import com.liferay.portal.service.base.ResourcePermissionLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ResourcePermissionsThreadLocal;
+import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -111,6 +118,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addResourcePermission(
 			long companyId, String name, int scope, String primKey, long roleId,
 			String actionId)
@@ -161,6 +169,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @param  resourceActionBitwiseValue the bitwise IDs of the actions
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void addResourcePermissions(
 			String resourceName, String roleName, int scope,
 			long resourceActionBitwiseValue)
@@ -168,43 +177,84 @@ public class ResourcePermissionLocalServiceImpl
 
 		List<Role> roles = rolePersistence.findByName(roleName);
 
-		for (Role role : roles) {
-			List<String> primKeys = resourcePermissionFinder.findByC_N_S(
-				role.getCompanyId(), resourceName, scope);
+		if (roles.isEmpty()) {
+			return;
+		}
 
-			for (String primKey : primKeys) {
-				List<ResourcePermission> resourcePermissions =
-					resourcePermissionPersistence.findByC_N_S_P_R(
-						role.getCompanyId(), resourceName, scope, primKey,
-						role.getRoleId());
+		Session session = resourcePermissionPersistence.openSession();
 
-				ResourcePermission resourcePermission = null;
+		try {
 
-				if (resourcePermissions.isEmpty()) {
-					long resourcePermissionId = counterLocalService.increment(
-						ResourcePermission.class.getName());
+			// Update existing resource permissions
 
-					resourcePermission = resourcePermissionPersistence.create(
-						resourcePermissionId);
+			String sql = CustomSQLUtil.get(_UPDATE_ACTION_IDS);
 
-					resourcePermission.setCompanyId(role.getCompanyId());
-					resourcePermission.setName(resourceName);
-					resourcePermission.setScope(scope);
-					resourcePermission.setPrimKey(primKey);
-					resourcePermission.setRoleId(role.getRoleId());
-				}
-				else {
-					resourcePermission = resourcePermissions.get(0);
-				}
+			sql = StringUtil.replace(
+				sql, "[$ROLE_ID$]",
+				ListUtil.toString(roles, Role.ROLE_ID_ACCESSOR));
 
-				long actionIdsLong = resourcePermission.getActionIds();
+			SQLQuery sqlQuery = session.createSQLQuery(sql);
 
-				actionIdsLong |= resourceActionBitwiseValue;
+			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-				resourcePermission.setActionIds(actionIdsLong);
+			qPos.add(resourceActionBitwiseValue);
+			qPos.add(resourceActionBitwiseValue);
+			qPos.add(resourceName);
+			qPos.add(scope);
 
-				resourcePermissionPersistence.update(resourcePermission, false);
+			sqlQuery.executeUpdate();
+
+			// Add missing resource permissions
+
+			sql = CustomSQLUtil.get(_FIND_MISSING_RESOURCE_PERMISSIONS);
+
+			sqlQuery = session.createSQLQuery(sql);
+
+			sqlQuery.addScalar("companyId", Type.LONG);
+			sqlQuery.addScalar("name", Type.STRING);
+			sqlQuery.addScalar("scope", Type.INTEGER);
+			sqlQuery.addScalar("primKey", Type.STRING);
+			sqlQuery.addScalar("roleId", Type.LONG);
+
+			qPos = QueryPos.getInstance(sqlQuery);
+
+			qPos.add(resourceName);
+			qPos.add(scope);
+			qPos.add(roleName);
+
+			List<Object[]> resourcePermissionArrays = sqlQuery.list(true);
+
+			if (resourcePermissionArrays.isEmpty()) {
+				return;
 			}
+
+			for (Object[] resourcePermissionArray : resourcePermissionArrays) {
+				long resourcePermissionId = counterLocalService.increment(
+					ResourcePermission.class.getName());
+
+				ResourcePermission resourcePermission =
+					resourcePermissionPersistence.create(resourcePermissionId);
+
+				resourcePermission.setCompanyId(
+					(Long)resourcePermissionArray[0]);
+				resourcePermission.setName((String)resourcePermissionArray[1]);
+				resourcePermission.setScope(
+					(Integer)resourcePermissionArray[2]);
+				resourcePermission.setPrimKey(
+					(String)resourcePermissionArray[3]);
+				resourcePermission.setRoleId((Long)resourcePermissionArray[4]);
+				resourcePermission.setActionIds(resourceActionBitwiseValue);
+
+				session.save(resourcePermission);
+			}
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			resourcePermissionPersistence.closeSession(session);
+
+			resourcePermissionPersistence.clearCache();
 		}
 	}
 
@@ -231,6 +281,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteResourcePermissions(
 			long companyId, String name, int scope, long primKey)
 		throws PortalException, SystemException {
@@ -262,6 +313,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteResourcePermissions(
 			long companyId, String name, int scope, String primKey)
 		throws PortalException, SystemException {
@@ -293,6 +345,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         one of the actions on the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<String> getAvailableResourcePermissionActionIds(
 			long companyId, String name, int scope, String primKey, long roleId,
 			Collection<String> actionIds)
@@ -323,6 +376,7 @@ public class ResourcePermissionLocalServiceImpl
 		return availableActionIds;
 	}
 
+	@Override
 	public Map<Long, Set<String>> getAvailableResourcePermissionActionIds(
 			long companyId, String name, int scope, String primKey,
 			long[] roleIds, Collection<String> actionIds)
@@ -381,6 +435,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @throws PortalException if no matching resources could be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public ResourcePermission getResourcePermission(
 			long companyId, String name, int scope, String primKey, long roleId)
 		throws PortalException, SystemException {
@@ -421,6 +476,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the resource permissions at the scope of the type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourcePermission> getResourcePermissions(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
@@ -440,6 +496,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the number of resource permissions at the scope of the type
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public int getResourcePermissionsCount(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
@@ -459,6 +516,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the resource permissions associated with the resource
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourcePermission> getResourceResourcePermissions(
 			long companyId, long groupId, String name, String primKey)
 		throws SystemException {
@@ -474,6 +532,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the resource permissions for the role
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourcePermission> getRoleResourcePermissions(long roleId)
 		throws SystemException {
 
@@ -501,6 +560,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the range of resource permissions for the role at the scopes
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourcePermission> getRoleResourcePermissions(
 			long roleId, int[] scopes, int start, int end)
 		throws SystemException {
@@ -525,6 +585,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return the resource permissions where scope = any &#63;
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<ResourcePermission> getScopeResourcePermissions(int[] scopes)
 		throws SystemException {
 
@@ -542,6 +603,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @return <code>true</code> if the resource permission grants permission to
 	 *         perform the resource action
 	 */
+	@Override
 	public boolean hasActionId(
 		ResourcePermission resourcePermission, ResourceAction resourceAction) {
 
@@ -577,14 +639,15 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasResourcePermission(
 			List<Resource> resources, long[] roleIds, String actionId)
 		throws PortalException, SystemException {
 
 		// Iterate the list of resources in reverse order to test permissions
 		// from company scope to individual scope because it is more likely that
-		// a permission is assigned at a higher scope. Optimizing this method
-		// to one SQL call may actually slow things down since most of the calls
+		// a permission is assigned at a higher scope. Optimizing this method to
+		// one SQL call may actually slow things down since most of the calls
 		// will pull from the cache after the first request.
 
 		for (int i = resources.size() - 1; i >= 0; i--) {
@@ -625,6 +688,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasResourcePermission(
 			long companyId, String name, int scope, String primKey, long roleId,
 			String actionId)
@@ -658,6 +722,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasResourcePermission(
 			long companyId, String name, int scope, String primKey,
 			long[] roleIds, String actionId)
@@ -705,6 +770,7 @@ public class ResourcePermissionLocalServiceImpl
 		return false;
 	}
 
+	@Override
 	public boolean[] hasResourcePermissions(
 			long companyId, String name, int scope, String primKey,
 			long[] roleIds, String actionId)
@@ -760,6 +826,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public boolean hasScopeResourcePermission(
 			long companyId, String name, int scope, long roleId,
 			String actionId)
@@ -789,6 +856,7 @@ public class ResourcePermissionLocalServiceImpl
 	 * @throws PortalException if a role with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void mergePermissions(long fromRoleId, long toRoleId)
 		throws PortalException, SystemException {
 
@@ -832,6 +900,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void reassignPermissions(long resourcePermissionId, long toRoleId)
 		throws PortalException, SystemException {
 
@@ -892,6 +961,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeResourcePermission(
 			long companyId, String name, int scope, String primKey, long roleId,
 			String actionId)
@@ -920,6 +990,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void removeResourcePermissions(
 			long companyId, String name, int scope, long roleId,
 			String actionId)
@@ -968,6 +1039,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setOwnerResourcePermissions(
 			long companyId, String name, int scope, String primKey, long roleId,
 			long ownerId, String[] actionIds)
@@ -1005,6 +1077,7 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setResourcePermissions(
 			long companyId, String name, int scope, String primKey, long roleId,
 			String[] actionIds)
@@ -1041,19 +1114,20 @@ public class ResourcePermissionLocalServiceImpl
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void setResourcePermissions(
 			long companyId, String name, int scope, String primKey,
 			Map<Long, String[]> roleIdsToActionIds)
 		throws PortalException, SystemException {
 
 		updateResourcePermission(
-			companyId, name, scope, primKey, 0, roleIdsToActionIds,
-			ResourcePermissionConstants.OPERATOR_SET);
+			companyId, name, scope, primKey, 0, roleIdsToActionIds);
 	}
 
 	protected void doUpdateResourcePermission(
 			long companyId, String name, int scope, String primKey,
-			long ownerId, long roleId, String[] actionIds, int operator)
+			long ownerId, long roleId, String[] actionIds, int operator,
+			boolean fetch)
 		throws PortalException, SystemException {
 
 		ResourcePermission resourcePermission = null;
@@ -1064,7 +1138,7 @@ public class ResourcePermissionLocalServiceImpl
 		if (resourcePermissionsMap != null) {
 			resourcePermission = resourcePermissionsMap.get(roleId);
 		}
-		else {
+		else if (fetch) {
 			List<ResourcePermission> resourcePermissions =
 				resourcePermissionPersistence.findByC_N_S_P_R(
 					companyId, name, scope, primKey, roleId);
@@ -1136,7 +1210,7 @@ public class ResourcePermissionLocalServiceImpl
 
 	protected void doUpdateResourcePermission(
 			long companyId, String name, int scope, String primKey,
-			long ownerId, Map<Long, String[]> roleIdsToActionIds, int operator)
+			long ownerId, Map<Long, String[]> roleIdsToActionIds)
 		throws PortalException, SystemException {
 
 		boolean flushEnabled = PermissionThreadLocal.isFlushEnabled();
@@ -1144,6 +1218,25 @@ public class ResourcePermissionLocalServiceImpl
 		PermissionThreadLocal.setIndexEnabled(false);
 
 		try {
+			long[] roleIds = ArrayUtil.toLongArray(roleIdsToActionIds.keySet());
+
+			List<ResourcePermission> resourcePermissions =
+				resourcePermissionPersistence.findByC_N_S_P_R(
+					companyId, name, scope, primKey, roleIds);
+
+			for (ResourcePermission resourcePermission : resourcePermissions) {
+				long roleId = resourcePermission.getRoleId();
+				String[] actionIds = roleIdsToActionIds.remove(roleId);
+
+				doUpdateResourcePermission(
+					companyId, name, scope, primKey, ownerId, roleId, actionIds,
+					ResourcePermissionConstants.OPERATOR_SET, true);
+			}
+
+			if (roleIdsToActionIds.isEmpty()) {
+				return;
+			}
+
 			for (Map.Entry<Long, String[]> entry :
 					roleIdsToActionIds.entrySet()) {
 
@@ -1152,7 +1245,7 @@ public class ResourcePermissionLocalServiceImpl
 
 				doUpdateResourcePermission(
 					companyId, name, scope, primKey, ownerId, roleId, actionIds,
-					operator);
+					ResourcePermissionConstants.OPERATOR_SET, false);
 			}
 		}
 		finally {
@@ -1204,7 +1297,7 @@ public class ResourcePermissionLocalServiceImpl
 		if (!dbType.equals(DB.TYPE_HYPERSONIC)) {
 			doUpdateResourcePermission(
 				companyId, name, scope, primKey, ownerId, roleId, actionIds,
-				operator);
+				operator, true);
 
 			return;
 		}
@@ -1234,7 +1327,7 @@ public class ResourcePermissionLocalServiceImpl
 		try {
 			doUpdateResourcePermission(
 				companyId, name, scope, primKey, ownerId, roleId, actionIds,
-				operator);
+				operator, true);
 		}
 		finally {
 			lock.unlock();
@@ -1262,16 +1355,13 @@ public class ResourcePermissionLocalServiceImpl
 	 * @param  scope the scope
 	 * @param  primKey the primary key
 	 * @param  ownerId the primary key of the owner
-	 * @param  operator whether to add to, remove from, or set/replace the
-	 *         existing actions. Possible values can be found in {@link
-	 *         ResourcePermissionConstants}.
 	 * @throws PortalException if a role with the primary key or a resource
 	 *         action with the name and action ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	protected void updateResourcePermission(
 			long companyId, String name, int scope, String primKey,
-			long ownerId, Map<Long, String[]> roleIdsToActionIds, int operator)
+			long ownerId, Map<Long, String[]> roleIdsToActionIds)
 		throws PortalException, SystemException {
 
 		DB db = DBFactoryUtil.getDB();
@@ -1280,8 +1370,7 @@ public class ResourcePermissionLocalServiceImpl
 
 		if (!dbType.equals(DB.TYPE_HYPERSONIC)) {
 			doUpdateResourcePermission(
-				companyId, name, scope, primKey, ownerId, roleIdsToActionIds,
-				operator);
+				companyId, name, scope, primKey, ownerId, roleIdsToActionIds);
 
 			return;
 		}
@@ -1310,8 +1399,7 @@ public class ResourcePermissionLocalServiceImpl
 
 		try {
 			doUpdateResourcePermission(
-				companyId, name, scope, primKey, ownerId, roleIdsToActionIds,
-				operator);
+				companyId, name, scope, primKey, ownerId, roleIdsToActionIds);
 		}
 		finally {
 			lock.unlock();
@@ -1319,5 +1407,12 @@ public class ResourcePermissionLocalServiceImpl
 			LockRegistry.freeLock(groupName, key);
 		}
 	}
+
+	private static final String _FIND_MISSING_RESOURCE_PERMISSIONS =
+		ResourcePermissionLocalServiceImpl.class.getName() +
+			".findMissingResourcePermissions";
+
+	private static final String _UPDATE_ACTION_IDS =
+		ResourcePermissionLocalServiceImpl.class.getName() + ".updateActionIds";
 
 }

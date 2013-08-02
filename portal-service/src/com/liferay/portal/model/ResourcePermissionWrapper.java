@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -327,6 +329,10 @@ public class ResourcePermissionWrapper implements ResourcePermission,
 		return new ResourcePermissionWrapper(_resourcePermission.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.ResourcePermission toUnescapedModel() {
+		return new ResourcePermissionWrapper(_resourcePermission.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _resourcePermission.toString();
@@ -343,6 +349,26 @@ public class ResourcePermissionWrapper implements ResourcePermission,
 
 	public boolean hasActionId(java.lang.String actionId) {
 		return _resourcePermission.hasActionId(actionId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ResourcePermissionWrapper)) {
+			return false;
+		}
+
+		ResourcePermissionWrapper resourcePermissionWrapper = (ResourcePermissionWrapper)obj;
+
+		if (Validator.equals(_resourcePermission,
+					resourcePermissionWrapper._resourcePermission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

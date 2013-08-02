@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,8 +16,6 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.parsers.bbcode.BBCodeTranslatorUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
@@ -40,11 +38,13 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 	public MBMessageImpl() {
 	}
 
+	@Override
 	public String[] getAssetTagNames() throws SystemException {
 		return AssetTagLocalServiceUtil.getTagNames(
 			MBMessage.class.getName(), getMessageId());
 	}
 
+	@Override
 	public String getAttachmentsDir() {
 		if (_attachmentDirs == null) {
 			_attachmentDirs = getThreadAttachmentsDir() + "/" + getMessageId();
@@ -53,6 +53,7 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		return _attachmentDirs;
 	}
 
+	@Override
 	public String[] getAttachmentsFiles()
 		throws PortalException, SystemException {
 
@@ -68,6 +69,7 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		return fileNames;
 	}
 
+	@Override
 	public String getBody(boolean translate) {
 		String body = null;
 
@@ -81,33 +83,22 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		return body;
 	}
 
-	public MBCategory getCategory() {
-		MBCategory category = null;
-
-		long categoryId = getCategoryId();
-
-		try {
-			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-		}
-		catch (Exception e) {
-			category = new MBCategoryImpl();
-
-			category.setCategoryId(getCategoryId());
-
-			_log.error(e);
-		}
-
-		return category;
+	@Override
+	public MBCategory getCategory() throws PortalException, SystemException {
+		return MBCategoryLocalServiceUtil.getCategory(getCategoryId());
 	}
 
+	@Override
 	public MBThread getThread() throws PortalException, SystemException {
 		return MBThreadLocalServiceUtil.getThread(getThreadId());
 	}
 
+	@Override
 	public String getThreadAttachmentsDir() {
 		return "messageboards/" + getThreadId();
 	}
 
+	@Override
 	public String getWorkflowClassName() {
 		if (isDiscussion()) {
 			return MBDiscussion.class.getName();
@@ -117,6 +108,7 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		}
 	}
 
+	@Override
 	public boolean isDiscussion() {
 		if (getCategoryId() == MBCategoryConstants.DISCUSSION_CATEGORY_ID) {
 			return true;
@@ -126,6 +118,7 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		}
 	}
 
+	@Override
 	public boolean isFormatBBCode() {
 		String format = getFormat();
 
@@ -137,10 +130,12 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		}
 	}
 
+	@Override
 	public boolean isReply() {
 		return !isRoot();
 	}
 
+	@Override
 	public boolean isRoot() {
 		if (getParentMessageId() ==
 				MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID) {
@@ -152,11 +147,10 @@ public class MBMessageImpl extends MBMessageBaseImpl {
 		}
 	}
 
+	@Override
 	public void setAttachmentsDir(String attachmentsDir) {
 		_attachmentDirs = attachmentsDir;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(MBMessageImpl.class);
 
 	private String _attachmentDirs;
 

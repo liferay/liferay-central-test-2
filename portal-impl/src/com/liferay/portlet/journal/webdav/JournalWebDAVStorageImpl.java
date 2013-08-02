@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -87,6 +87,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public Resource getResource(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -110,7 +111,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				if (type.equals(_TYPE_STRUCTURES)) {
 					try {
 						JournalStructure journalStructure =
-							JournalStructureLocalServiceUtil.getStructure(
+							JournalStructureServiceUtil.getStructure(
 								webDavRequest.getGroupId(), journalTypeId,
 								true);
 
@@ -124,7 +125,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				else if (type.equals(_TYPE_TEMPLATES)) {
 					try {
 						JournalTemplate journalTemplate =
-							JournalTemplateLocalServiceUtil.getTemplate(
+							JournalTemplateServiceUtil.getTemplate(
 								webDavRequest.getGroupId(), journalTypeId,
 								true);
 
@@ -144,6 +145,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	@Override
 	public List<Resource> getResources(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -286,6 +288,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavRequest.getPath();
+
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -300,6 +303,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavRequest.getPath();
+
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
@@ -313,6 +317,7 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		WebDAVRequest webDavRequest, String type, boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavRequest.getPath();
+
 		String name = StringPool.BLANK;
 
 		if (appendPath) {

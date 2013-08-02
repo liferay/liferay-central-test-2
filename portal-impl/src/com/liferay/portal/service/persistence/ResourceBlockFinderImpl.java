@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ public class ResourceBlockFinderImpl
 	public static final String FIND_BY_C_G_N_R =
 		ResourceBlockFinder.class.getName() + ".findByC_G_N_R";
 
+	@Override
 	public ResourceBlockIdsBag findByC_G_N_R(
 			long companyId, long groupId, String name, long[] roleIds)
 		throws SystemException {

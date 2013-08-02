@@ -14,7 +14,7 @@
 	}
 
 	.code {
-		background: #fff;
+		background: #FFF;
 		border: 1px solid #777;
 		font-family: monospace;
 		overflow-x: auto;
@@ -22,14 +22,14 @@
 	}
 
 	.code-lines {
-		border-right: 1px solid #ccc;
+		border-right: 1px solid #CCC;
 		color: #000;
 		margin-right: 5px;
 		padding: 0px 5px 0px 5px;
 	}
 
 	.quote {
-		background: #fff url(@theme_image_path@/message_boards/quoteleft.png) left top no-repeat;
+		background: #FFF url(@theme_image_path@/message_boards/quoteleft.png) left top no-repeat;
 		border: 1px solid #777;
 		padding: 5px 0px 0px 5px;
 	}
@@ -45,7 +45,7 @@
 	}
 
 	.title {
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #CCC;
 		font-size: large;
 		font-weight: normal;
 		padding: 5px;
@@ -56,7 +56,7 @@
 	}
 
 	.message-container {
-		border: 1px solid #ccc;
+		border: 1px solid #CCC;
 		margin: 5px 0 0 0;
 
 		table {
@@ -65,12 +65,12 @@
 		}
 
 		td {
-			border: none;
+			border-width: 0;
 		}
 	}
 
 	.thread-top {
-		border-bottom: 1px solid #ccc;
+		border-bottom: 1px solid #CCC;
 		padding: 3px 5px;
 	}
 
@@ -84,7 +84,7 @@
 	}
 
 	td.user-info {
-		border-right: 1px solid #ccc;
+		border-right: 1px solid #CCC;
 		width: 150px;
 	}
 
@@ -104,10 +104,14 @@
 	.thread-body {
 		overflow: hidden;
 		padding: 15px;
+
+		td {
+			border: 1px solid #CCC;
+		}
 	}
 
 	.message-container .user-info {
-		border-right: 1px solid #ccc;
+		border-right: 1px solid #CCC;
 		padding: 5px;
 	}
 
@@ -161,7 +165,7 @@
 		}
 	}
 
-	.votes, .status {
+	.status, .votes {
 		display: inline-block;
 		height: 38px;
 		margin: 0 3px 0 0;
@@ -196,13 +200,13 @@
 	}
 
 	.toggle_id_message_boards_view_message_thread {
-		border: 1px solid #ccc;
+		border: 1px solid #CCC;
 		margin: 5px 0 0 0;
 		width: 100%;
 	}
 
 	.thread-controls {
-		border: 1px solid #ccc;
+		border: 1px solid #CCC;
 		margin-bottom: 5px;
 		padding: 3px 5px;
 	}
@@ -224,14 +228,14 @@
 		float: left;
 	}
 
-	.thread-view, .message-container .thread-message-view {
+	.message-container .thread-message-view, .thread-view {
 		border-collapse: collapse;
 		padding: 0;
 		width: 100%;
 	}
 
 	.emoticons {
-		border: 1px solid #ccc;
+		border: 1px solid #CCC;
 		margin-left: 10px;
 	}
 
@@ -243,15 +247,17 @@
 		margin: 5px 0 0 0;
 	}
 
-	.lfr-textarea.message-edit {
-		height: 100%;
-		width: 100%;
-	}
+	.lfr-textarea {
+		&.message-edit {
+			height: 100%;
+			width: 100%;
 
-	.lfr-textarea.message-edit textarea {
-		height: 378px;
-		min-height: 100%;
-		width: 99.5%;
+			textarea {
+				height: 378px;
+				min-height: 100%;
+				width: 99.5%;
+			}
+		}
 	}
 
 	.subcategories {
@@ -315,10 +321,10 @@
 
 		.question-subject {
 			font-size: 125%;
-		}
 
-		.question-subject #a {
-			color: #06C;
+			#a {
+				color: #06C;
+			}
 		}
 
 		.summary {
@@ -350,5 +356,11 @@
 		.code {
 			width: 100%;
 		}
+	}
+}
+
+.ie8 {
+	.question-details {
+		white-space: normal;
 	}
 }

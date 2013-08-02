@@ -1,0 +1,10 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="PORTLET_OPTIONS">
+			<execute function="AssertClick#pauseAssertTextClickAt" />
+		</case>
+		<case locator-key1="WEBFORM_OPTIONS_MENULIST_CONFIGURATION">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

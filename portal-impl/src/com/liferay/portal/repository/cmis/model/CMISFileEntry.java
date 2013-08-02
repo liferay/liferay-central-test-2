@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -73,6 +73,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		_document = document;
 	}
 
+	@Override
 	public boolean containsPermission(
 			PermissionChecker permissionChecker, String actionId)
 		throws SystemException {
@@ -80,6 +81,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return containsPermission(_document, actionId);
 	}
 
+	@Override
 	public Map<String, Serializable> getAttributes() {
 		return new HashMap<String, Serializable>();
 	}
@@ -89,6 +91,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _cmisRepository.getCompanyId();
 	}
 
+	@Override
 	public InputStream getContentStream() {
 		ContentStream contentStream = _document.getContentStream();
 
@@ -103,6 +106,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return contentStream.getStream();
 	}
 
+	@Override
 	public InputStream getContentStream(String version) throws PortalException {
 		if (Validator.isNull(version)) {
 			return getContentStream();
@@ -129,24 +133,29 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 				", version=" + version + "}");
 	}
 
+	@Override
 	public Date getCreateDate() {
 		return _document.getCreationDate().getTime();
 	}
 
+	@Override
 	public String getExtension() {
 		return FileUtil.getExtension(getTitle());
 	}
 
+	@Override
 	public long getFileEntryId() {
 		return _fileEntryId;
 	}
 
+	@Override
 	public FileVersion getFileVersion()
 		throws PortalException, SystemException {
 
 		return getLatestFileVersion();
 	}
 
+	@Override
 	public FileVersion getFileVersion(String version)
 		throws PortalException, SystemException {
 
@@ -166,6 +175,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 				", version=" + version + "}");
 	}
 
+	@Override
 	public List<FileVersion> getFileVersions(int status)
 		throws SystemException {
 
@@ -190,6 +200,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		}
 	}
 
+	@Override
 	public Folder getFolder() {
 		Folder parentFolder = null;
 
@@ -225,20 +236,24 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return parentFolder;
 	}
 
+	@Override
 	public long getFolderId() {
 		Folder folder = getFolder();
 
 		return folder.getFolderId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _cmisRepository.getGroupId();
 	}
 
+	@Override
 	public String getIcon() {
 		return DLUtil.getFileIcon(getExtension());
 	}
 
+	@Override
 	public FileVersion getLatestFileVersion()
 		throws PortalException, SystemException {
 
@@ -262,6 +277,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _latestFileVersion;
 	}
 
+	@Override
 	public Lock getLock() {
 		if (!isCheckedOut()) {
 			return null;
@@ -285,6 +301,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return lock;
 	}
 
+	@Override
 	public String getMimeType() {
 		String mimeType = _document.getContentStreamMimeType();
 
@@ -295,6 +312,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return MimeTypesUtil.getContentType(getTitle());
 	}
 
+	@Override
 	public String getMimeType(String version) {
 		if (Validator.isNull(version)) {
 			return getMimeType();
@@ -322,10 +340,12 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return ContentTypes.APPLICATION_OCTET_STREAM;
 	}
 
+	@Override
 	public Object getModel() {
 		return _document;
 	}
 
+	@Override
 	public Class<?> getModelClass() {
 		return DLFileEntry.class;
 	}
@@ -335,6 +355,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return DLFileEntry.class.getName();
 	}
 
+	@Override
 	public Date getModifiedDate() {
 		return _document.getLastModificationDate().getTime();
 	}
@@ -344,26 +365,32 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return _fileEntryId;
 	}
 
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return getPrimaryKey();
 	}
 
+	@Override
 	public int getReadCount() {
 		return 0;
 	}
 
+	@Override
 	public long getRepositoryId() {
 		return _cmisRepository.getRepositoryId();
 	}
 
+	@Override
 	public long getSize() {
 		return _document.getContentStreamLength();
 	}
 
+	@Override
 	public String getTitle() {
 		return _document.getName();
 	}
 
+	@Override
 	public long getUserId() {
 		User user = getUser(_document.getCreatedBy());
 
@@ -375,6 +402,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		}
 	}
 
+	@Override
 	public String getUserName() {
 		User user = getUser(_document.getCreatedBy());
 
@@ -386,6 +414,7 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		}
 	}
 
+	@Override
 	public String getUserUuid() {
 		User user = getUser(_document.getCreatedBy());
 
@@ -398,26 +427,32 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public String getUuid() {
 		return _uuid;
 	}
 
+	@Override
 	public String getVersion() {
 		return GetterUtil.getString(_document.getVersionLabel(), null);
 	}
 
+	@Override
 	public long getVersionUserId() {
 		return 0;
 	}
 
+	@Override
 	public String getVersionUserName() {
 		return _document.getLastModifiedBy();
 	}
 
+	@Override
 	public String getVersionUserUuid() {
 		return StringPool.BLANK;
 	}
 
+	@Override
 	public boolean hasLock() {
 		if (!isCheckedOut()) {
 			return false;
@@ -448,34 +483,42 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		return false;
 	}
 
+	@Override
 	public boolean isCheckedOut() {
 		return _document.isVersionSeriesCheckedOut();
 	}
 
+	@Override
 	public boolean isDefaultRepository() {
 		return false;
 	}
 
+	@Override
 	public boolean isEscapedModel() {
 		return false;
 	}
 
+	@Override
 	public boolean isSupportsLocking() {
 		return true;
 	}
 
+	@Override
 	public boolean isSupportsMetadata() {
 		return false;
 	}
 
+	@Override
 	public boolean isSupportsSocial() {
 		return false;
 	}
 
+	@Override
 	public void setCompanyId(long companyId) {
 		_cmisRepository.setCompanyId(companyId);
 	}
 
+	@Override
 	public void setCreateDate(Date date) {
 	}
 
@@ -483,10 +526,12 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		_fileEntryId = fileEntryId;
 	}
 
+	@Override
 	public void setGroupId(long groupId) {
 		_cmisRepository.setGroupId(groupId);
 	}
 
+	@Override
 	public void setModifiedDate(Date date) {
 	}
 
@@ -494,20 +539,30 @@ public class CMISFileEntry extends CMISModel implements FileEntry {
 		setFileEntryId(primaryKey);
 	}
 
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
+	@Override
 	public void setUserId(long userId) {
 	}
 
+	@Override
 	public void setUserName(String userName) {
 	}
 
+	@Override
 	public void setUserUuid(String userUuid) {
 	}
 
+	@Override
 	public FileEntry toEscapedModel() {
+		return this;
+	}
+
+	@Override
+	public FileEntry toUnescapedModel() {
 		return this;
 	}
 

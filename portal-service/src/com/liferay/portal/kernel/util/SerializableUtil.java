@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,7 +24,7 @@ import java.io.ObjectOutputStream;
 /**
  * @author     Alexander Chow
  * @author     Igor Spasic
- * @deprecated As of 6.1, moved to {@link com.liferay.util.SerializableUtil}
+ * @deprecated As of 6.1.0, moved to {@link com.liferay.util.SerializableUtil}
  */
 public class SerializableUtil {
 
@@ -38,6 +38,26 @@ public class SerializableUtil {
 		try {
 			objectInputStream = new ObjectInputStream(
 				new UnsyncByteArrayInputStream(bytes));
+
+			return objectInputStream.readObject();
+		}
+		catch (ClassNotFoundException cnfe) {
+			throw new RuntimeException(cnfe);
+		}
+		catch (IOException ioe) {
+			throw new RuntimeException(ioe);
+		}
+		finally {
+			StreamUtil.cleanUp(objectInputStream);
+		}
+	}
+
+	public static Object deserialize(byte[] bytes, ClassLoader classLoader) {
+		ObjectInputStream objectInputStream = null;
+
+		try {
+			objectInputStream = new ClassLoaderObjectInputStream(
+				new UnsyncByteArrayInputStream(bytes), classLoader);
 
 			return objectInputStream.readObject();
 		}

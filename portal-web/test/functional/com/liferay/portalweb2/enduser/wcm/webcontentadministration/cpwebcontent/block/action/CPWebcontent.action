@@ -1,0 +1,28 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="DELETE_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="NAVIGATION_STRUCTURES">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="NAVIGATION_TEMPLATES">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="click">
+		<case comparator="startsWith" locator1="//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains.,'">
+			<execute function="Click#clickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="isElementPresent">
+		<case locator-key1="WEB_CONTENT_TABLE_ALL_CHECKBOX">
+			<execute function="IsElementPresent#isVisible" />
+		</case>
+	</command>
+</definition>

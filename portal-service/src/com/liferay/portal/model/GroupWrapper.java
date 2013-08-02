@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -526,6 +528,10 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 		return new GroupWrapper(_group.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Group toUnescapedModel() {
+		return new GroupWrapper(_group.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _group.toString();
@@ -624,7 +630,7 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	}
 
 	/**
-	* @deprecated As of 6.1, renamed to {@link #isRegularSite}
+	* @deprecated As of 6.1.0, renamed to {@link #isRegularSite}
 	*/
 	public boolean isCommunity() {
 		return _group.isCommunity();
@@ -640,6 +646,10 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 
 	public boolean isGuest() {
 		return _group.isGuest();
+	}
+
+	public boolean isInStagingPortlet(java.lang.String portletId) {
+		return _group.isInStagingPortlet(portletId);
 	}
 
 	public boolean isLayout() {
@@ -660,6 +670,14 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 
 	public boolean isRegularSite() {
 		return _group.isRegularSite();
+	}
+
+	public boolean isShowSite(
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker,
+		boolean privateSite)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _group.isShowSite(permissionChecker, privateSite);
 	}
 
 	public boolean isStaged() {
@@ -693,6 +711,25 @@ public class GroupWrapper implements Group, ModelWrapper<Group> {
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_group.setTypeSettingsProperties(typeSettingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof GroupWrapper)) {
+			return false;
+		}
+
+		GroupWrapper groupWrapper = (GroupWrapper)obj;
+
+		if (Validator.equals(_group, groupWrapper._group)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

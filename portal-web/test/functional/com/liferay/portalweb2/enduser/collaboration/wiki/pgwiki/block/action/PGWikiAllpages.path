@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>PGWikiAllpages</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGWikiAllpages</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGWikiAllpages</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ADD_PAGE_BUTTON</td>
+	<td>//input[@value='Add Page']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>CONFIRMATION</td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--NAVIGATION-->
+<tr>
+	<td>NAVIGATION_ALL_PAGES</td>
+	<td>//ul[@class='top-links-navigation']/li/span/a[contains(.,'All Pages')]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NAVIGATION_DRAFT_PAGES</td>
+	<td>//ul[@class='top-links-navigation']/li/span/a[contains(.,'Draft Pages')]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WIKI_PAGE_TABLE-->
+<tr>
+	<td>WIKI_PAGE_TABLE_PAGE</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_STATUS</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_REVISION</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td[3]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_USER</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td[4]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_DATE</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td[5]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_ACTIONS</td>
+	<td>//tr[contains(.,'${key_wikiPageTitle}')]/td/span[@title='Actions']/ul/li/strong/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_PAGE_1</td>
+	<td>xpath=(//tr/td[1]/a)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_PAGE_2</td>
+	<td>xpath=(//tr/td[1]/a)[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_TABLE_ACTIONS_1</td>
+	<td>xpath=(//tr/td[6]/span[@title='Actions']/ul/li/strong/a/span)[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WIKI_PAGE_MENULIST-->
+<tr>
+	<td>WIKI_PAGE_MENULIST_EDIT</td>
+	<td>//a[@role='menuitem' and contains(.,'Edit')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_MENULIST_PERMISSIONS</td>
+	<td>//a[@role='menuitem' and contains(.,'Permissions')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_MENULIST_COPY</td>
+	<td>//a[@role='menuitem' and contains(.,'Copy')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_MENULIST_MOVE</td>
+	<td>//a[@role='menuitem' and contains(.,'Move')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_MENULIST_SUBSCRIBE</td>
+	<td>//a[@role='menuitem' and contains(.,'Subscribe')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>WIKI_PAGE_MENULIST_DELETE</td>
+	<td>//a[@role='menuitem' and contains(.,'Delete')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

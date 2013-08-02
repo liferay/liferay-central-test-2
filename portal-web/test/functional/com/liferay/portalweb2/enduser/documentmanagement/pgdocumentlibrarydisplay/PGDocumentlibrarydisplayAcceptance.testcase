@@ -1,0 +1,177 @@
+<definition>
+	<var name="pageName" value="Documents and Media Display Page" />
+	<var name="portletName" value="Documents and Media Display" />
+
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+
+		<execute macro="Page#addPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="pageName" value="${pageName}" />
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="DMDPortlet#configureShowAllPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+	</set-up>
+
+	<command name="AddDocument">
+		<var name="dmdDocumentFile" value="Document_1.txt" />
+		<var name="dmdDocumentSize" value="0.3k" />
+		<var name="dmdDocumentTitle" value="DM Document Title" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGviaDMD">
+			<var name="dmdDocumentFile" value="${dmdDocumentFile}" />
+			<var name="dmdDocumentSize" value="${dmdDocumentSize}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle}" />
+		</execute>
+	</command>
+
+	<command name="AddFolder">
+		<var name="dmdFolderName" value="DM Folder Name" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#addPGviaDMD">
+			<var name="dmdFolderName" value="${dmdFolderName}" />
+		</execute>
+	</command>
+
+	<command name="DeleteDocuments">
+		<var name="dmdDocumentFile1" value="Document_1.txt" />
+		<var name="dmdDocumentSize1" value="0.3k" />
+		<var name="dmdDocumentTitle1" value="DM Document1 Title" />
+		<var name="dmdDocumentFile2" value="Document_2.txt" />
+		<var name="dmdDocumentSize2" value="0.5k" />
+		<var name="dmdDocumentTitle2" value="DM Document2 Title" />
+		<var name="dmdDocumentFile3" value="Document_3.txt" />
+		<var name="dmdDocumentSize3" value="0.8k" />
+		<var name="dmdDocumentTitle3" value="DM Document3 Title" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGviaDMD">
+			<var name="dmdDocumentFile" value="${dmdDocumentFile1}" />
+			<var name="dmdDocumentSize" value="${dmdDocumentSize1}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGviaDMD">
+			<var name="dmdDocumentFile" value="${dmdDocumentFile2}" />
+			<var name="dmdDocumentSize" value="${dmdDocumentSize2}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle2}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPGviaDMD">
+			<var name="dmdDocumentFile" value="${dmdDocumentFile3}" />
+			<var name="dmdDocumentSize" value="${dmdDocumentSize3}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle3}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#deletePGviaDMD">
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle1}" />
+		</execute>
+
+		<execute macro="DMDocument#deletePGviaDMD">
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle2}" />
+		</execute>
+
+		<execute macro="DMDocument#deletePGviaDMD">
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle3}" />
+		</execute>
+
+		<execute action="PGDocumentlibrarydisplay#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no documents or media files in this folder." />
+	</command>
+
+	<command name="RemovePortlet">
+		<execute macro="Portlet#removePG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+	</command>
+
+	<command name="SearchFolderDocument">
+		<var name="dmdFolderName" value="DM Folder Name" />
+		<var name="dmdDocumentFile" value="Document_1.txt" />
+		<var name="dmdDocumentSize" value="0.3k" />
+		<var name="dmdDocumentTitle" value="DM Document Title" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#addPGviaDMD">
+			<var name="dmdFolderName" value="${dmdFolderName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#addPGviaDMD">
+			<var name="dmdFolderName" value="${dmdFolderName}" />
+			<var name="dmdDocumentFile" value="${dmdDocumentFile}" />
+			<var name="dmdDocumentSize" value="${dmdDocumentSize}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#searchPGviaDMD">
+			<var name="dmdFolderName" value="${dmdFolderName}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle}" />
+			<var name="dmdDocumentTitleSearch" value="${dmdDocumentTitle}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#searchNoPGviaDMD">
+			<var name="dmdDocumentTitleSearch" value="DM2 Document2 Title2" />
+		</execute>
+
+		<execute macro="DMFolderDocument#searchPGviaDMD">
+			<var name="dmdFolderName" value="${dmdFolderName}" />
+			<var name="dmdDocumentTitle" value="${dmdDocumentTitle}" />
+			<var name="dmdDocumentTitleSearch" value="\&quot;${dmdDocumentTitle}\&quot;" />
+		</execute>
+
+		<execute macro="DMFolderDocument#searchNoPGviaDMD">
+			<var name="dmdDocumentTitleSearch" value="\&quot;DM Document Title2\&quot;" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="DMDocument#tearDownPGviaDMD">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#tearDownPGviaDMD">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="Page#tearDownPG" />
+	</tear-down>
+</definition>

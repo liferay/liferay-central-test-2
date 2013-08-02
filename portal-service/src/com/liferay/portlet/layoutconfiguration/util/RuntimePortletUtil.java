@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portlet.layoutconfiguration.util;
 
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 
@@ -33,6 +34,18 @@ import javax.servlet.jsp.PageContext;
  * @author Shuyang Zhou
  */
 public class RuntimePortletUtil {
+
+	public static StringBundler getProcessedTemplate(
+			ServletContext servletContext, HttpServletRequest request,
+			HttpServletResponse response, PageContext pageContext,
+			JspWriter jspWriter, String portletId, String velocityTemplateId,
+			String velocityTemplateContent)
+		throws Exception {
+
+		return getRuntimePortlet().getProcessedTemplate(
+			servletContext, request, response, pageContext, jspWriter,
+			portletId, velocityTemplateId, velocityTemplateContent);
+	}
 
 	public static RuntimePortlet getRuntimePortlet() {
 		PortalRuntimePermission.checkGetBeanProperty(RuntimePortletUtil.class);

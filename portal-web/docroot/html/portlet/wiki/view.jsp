@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -38,7 +38,7 @@ if (wikiPage != null) {
 	parentTitle = wikiPage.getParentTitle();
 }
 
-List childPages = wikiPage.getChildPages();
+List childPages = wikiPage.getViewableChildPages();
 
 String[] attachments = new String[0];
 
@@ -51,7 +51,13 @@ boolean print = ParamUtil.getString(request, "viewMode").equals(Constants.PRINT)
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
-viewPageURL.setParameter("struts_action", "/wiki/view");
+if (portletName.equals(PortletKeys.WIKI)) {
+	viewPageURL.setParameter("struts_action", "/wiki/view");
+}
+else {
+	viewPageURL.setParameter("struts_action", "/wiki/view_page");
+}
+
 viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", title);
 
@@ -86,9 +92,8 @@ editPageURL.setParameter("title", title);
 
 PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-printPageURL.setWindowState(LiferayWindowState.POP_UP);
-
 printPageURL.setParameter("viewMode", Constants.PRINT);
+printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
 PortletURL categorizedPagesURL = renderResponse.createRenderURL();
 
@@ -380,7 +385,7 @@ if ((wikiPage != null) && !wikiPage.getTitle().equals(WikiPageConstants.FRONT_PA
 	PortalUtil.setPageDescription(description, request);
 	PortalUtil.setPageKeywords(AssetUtil.getAssetKeywords(WikiPage.class.getName(), wikiPage.getResourcePrimKey()), request);
 
-	List<WikiPage> parentPages = wikiPage.getParentPages();
+	List<WikiPage> parentPages = wikiPage.getViewableParentPages();
 
 	for (WikiPage curParentPage : parentPages) {
 		viewPageURL.setParameter("title", curParentPage.getTitle());

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -43,6 +43,7 @@ public class DDLRecordFinderImpl extends BasePersistenceImpl<DDLRecord>
 	public static final String FIND_BY_R_S =
 		DDLRecordFinder.class.getName() + ".findByR_S";
 
+	@Override
 	public int countByR_S(long recordSetId, int status) throws SystemException {
 		Session session = null;
 
@@ -88,6 +89,7 @@ public class DDLRecordFinderImpl extends BasePersistenceImpl<DDLRecord>
 		}
 	}
 
+	@Override
 	public List<DDLRecord> findByR_S(
 			long recordSetId, int status, int start, int end,
 			OrderByComparator orderByComparator)

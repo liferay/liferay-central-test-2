@@ -1,0 +1,31 @@
+<definition>
+	<command name="isElementNotPresent">
+		<if>
+			<condition selenium="isElementPresent" />
+			<then>
+				<execute selenium="isNotVisible" />
+			</then>
+			<else>
+				<execute selenium="isElementNotPresent" />
+			</else>
+		</if>
+	</command>
+
+	<command name="isNotVisible">
+		<execute selenium="isNotVisible" />
+	</command>
+
+	<command name="pauseIsElementNotPresent">
+		<execute selenium="pause" argument1="1000" />
+
+		<if>
+			<condition selenium="isElementPresent" />
+			<then>
+				<execute selenium="isNotVisible" />
+			</then>
+			<else>
+				<execute selenium="isElementNotPresent" />
+			</else>
+		</if>
+	</command>
+</definition>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -342,13 +342,16 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 
 	@Override
 	public DLContent toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DLContent)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DLContent)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DLContent toUnescapedModel() {
+		return (DLContent)this;
 	}
 
 	@Override
@@ -384,18 +387,15 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLContent)) {
 			return false;
 		}
 
-		DLContent dlContent = null;
-
-		try {
-			dlContent = (DLContent)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLContent dlContent = (DLContent)obj;
 
 		long primaryKey = dlContent.getPrimaryKey();
 
@@ -531,7 +531,7 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 	}
 
 	private static ClassLoader _classLoader = DLContent.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DLContent.class
 		};
 	private long _contentId;
@@ -549,5 +549,5 @@ public class DLContentModelImpl extends BaseModelImpl<DLContent>
 	private DLContentDataBlobModel _dataBlobModel;
 	private long _size;
 	private long _columnBitmask;
-	private DLContent _escapedModelProxy;
+	private DLContent _escapedModel;
 }

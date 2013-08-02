@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,7 +30,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class JSONWebServiceSecureTest extends BaseJSONWebServiceTestCase {
 
 	@BeforeClass
-	public static void init() throws Exception {
+	public static void setUpClass() throws Exception {
 		initPortalServices();
 
 		registerActionClass(OpenService.class);

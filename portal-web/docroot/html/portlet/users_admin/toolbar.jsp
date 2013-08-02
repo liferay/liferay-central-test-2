@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -65,7 +65,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 					<liferay-ui:icon
 						image="add_location"
-						message='<%= LanguageUtil.get(pageContext, organizationType) %>'
+						message="<%= LanguageUtil.get(pageContext, organizationType) %>"
 						url="<%= addOrganizationURL %>"
 					/>
 
@@ -79,7 +79,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view");
 
 	<c:choose>
 		<c:when test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.EXPORT_USER) %>">
-			<span class="lfr-toolbar-button export-button"><a href="javascript:<portlet:namespace />exportUsers();"><liferay-ui:message key="export-all-users" /></a></span>
+			<span class="lfr-toolbar-button export-button"><a href="javascript:<portlet:namespace />exportUsers();"><liferay-ui:message key="export-users" /></a></span>
 		</c:when>
 		<c:when test="<%= PortletPermissionUtil.contains(permissionChecker, PortletKeys.USERS_ADMIN, ActionKeys.EXPORT_USER) %>">
 			<span class="lfr-toolbar-button export-button"><a href="javascript:<portlet:namespace />exportUsers();"><liferay-ui:message key="export-organization-users" /></a></span>

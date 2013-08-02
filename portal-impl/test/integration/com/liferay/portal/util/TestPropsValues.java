@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -124,11 +124,15 @@ public class TestPropsValues {
 	}
 
 	public static long getPlid() throws Exception {
+		return getPlid(getGroupId());
+	}
+
+	public static long getPlid(long groupId) throws Exception {
 		if (_plid > 0) {
 			return _plid;
 		}
 
-		_plid = LayoutLocalServiceUtil.getDefaultPlid(getGroupId());
+		_plid = LayoutLocalServiceUtil.getDefaultPlid(groupId);
 
 		return _plid;
 	}

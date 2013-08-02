@@ -1,0 +1,19 @@
+<definition>
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+	</set-up>
+
+	<command name="GotoControlPanel">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Blogs" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Users and Organizations" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Wiki" />
+		</execute>
+	</command>
+</definition>

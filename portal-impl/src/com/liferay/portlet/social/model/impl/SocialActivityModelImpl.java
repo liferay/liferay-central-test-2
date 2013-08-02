@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -470,13 +470,16 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 
 	@Override
 	public SocialActivity toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (SocialActivity)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (SocialActivity)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public SocialActivity toUnescapedModel() {
+		return (SocialActivity)this;
 	}
 
 	@Override
@@ -524,18 +527,15 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SocialActivity)) {
 			return false;
 		}
 
-		SocialActivity socialActivity = null;
-
-		try {
-			socialActivity = (SocialActivity)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		SocialActivity socialActivity = (SocialActivity)obj;
 
 		long primaryKey = socialActivity.getPrimaryKey();
 
@@ -719,7 +719,7 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	}
 
 	private static ClassLoader _classLoader = SocialActivity.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			SocialActivity.class
 		};
 	private long _activityId;
@@ -754,5 +754,5 @@ public class SocialActivityModelImpl extends BaseModelImpl<SocialActivity>
 	private long _originalReceiverUserId;
 	private boolean _setOriginalReceiverUserId;
 	private long _columnBitmask;
-	private SocialActivity _escapedModelProxy;
+	private SocialActivity _escapedModel;
 }

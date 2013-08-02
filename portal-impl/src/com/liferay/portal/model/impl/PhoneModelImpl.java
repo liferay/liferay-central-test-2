@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -508,13 +508,16 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public Phone toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (Phone)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (Phone)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public Phone toUnescapedModel() {
+		return (Phone)this;
 	}
 
 	@Override
@@ -553,18 +556,15 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof Phone)) {
 			return false;
 		}
 
-		Phone phone = null;
-
-		try {
-			phone = (Phone)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		Phone phone = (Phone)obj;
 
 		long primaryKey = phone.getPrimaryKey();
 
@@ -766,9 +766,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	}
 
 	private static ClassLoader _classLoader = Phone.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			Phone.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { Phone.class };
 	private long _phoneId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -793,5 +791,5 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	private boolean _originalPrimary;
 	private boolean _setOriginalPrimary;
 	private long _columnBitmask;
-	private Phone _escapedModelProxy;
+	private Phone _escapedModel;
 }

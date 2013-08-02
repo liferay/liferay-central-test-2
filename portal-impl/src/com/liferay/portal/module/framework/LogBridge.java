@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -37,6 +37,7 @@ public class LogBridge
 	implements BundleActivator, LogListener,
 			   ServiceTrackerCustomizer<LogReaderService, LogReaderService> {
 
+	@Override
 	public LogReaderService addingService(
 		ServiceReference<LogReaderService> serviceReference) {
 
@@ -48,6 +49,7 @@ public class LogBridge
 		return logReaderService;
 	}
 
+	@Override
 	public void logged(LogEntry logEntry) {
 		int level = logEntry.getLevel();
 
@@ -80,11 +82,13 @@ public class LogBridge
 		}
 	}
 
+	@Override
 	public void modifiedService(
 		ServiceReference<LogReaderService> serviceReference,
 		LogReaderService logReaderService) {
 	}
 
+	@Override
 	public void removedService(
 		ServiceReference<LogReaderService> serviceReference,
 		LogReaderService logReaderService) {
@@ -92,6 +96,7 @@ public class LogBridge
 		logReaderService.removeLogListener(this);
 	}
 
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		_bundleContext = bundleContext;
 
@@ -102,6 +107,7 @@ public class LogBridge
 		_serviceTracker.open();
 	}
 
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		_serviceTracker.close();
 

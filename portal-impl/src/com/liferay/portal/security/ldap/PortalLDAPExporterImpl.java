@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,7 +16,9 @@ package com.liferay.portal.security.ldap;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
@@ -47,8 +49,10 @@ import javax.naming.ldap.LdapContext;
  * @author Marcellus Tavares
  * @author Wesley Gong
  */
+@DoPrivileged
 public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
+	@Override
 	public void exportToLDAP(
 			Contact contact, Map<String, Serializable> contactExpandoAttributes)
 		throws Exception {
@@ -63,6 +67,12 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 
 		User user = UserLocalServiceUtil.getUserByContactId(
 			contact.getContactId());
+
+		if (user.isDefaultUser() ||
+			(user.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+
+			return;
+		}
 
 		long ldapServerId = PortalLDAPUtil.getLdapServerId(
 			companyId, user.getScreenName(), user.getEmailAddress());
@@ -125,10 +135,12 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public void exportToLDAP(long userId, long userGroupId) throws Exception {
 		exportToLDAP(userId, userGroupId, LDAPOperation.ADD);
 	}
 
+	@Override
 	public void exportToLDAP(
 			long userId, long userGroupId, LDAPOperation ldapOperation)
 		throws Exception {
@@ -201,7 +213,7 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 			Attribute groupMembers = attributes.get(
 				groupMappings.getProperty(GroupConverterKeys.USER));
 
-			if (groupMembers.size() == 1) {
+			if ((groupMembers != null) && (groupMembers.size() == 1)) {
 				ldapContext.unbind(fullGroupDN);
 			}
 		}
@@ -215,9 +227,16 @@ public class PortalLDAPExporterImpl implements PortalLDAPExporter {
 		}
 	}
 
+	@Override
 	public void exportToLDAP(
 			User user, Map<String, Serializable> userExpandoAttributes)
 		throws Exception {
+
+		if (user.isDefaultUser() ||
+			(user.getStatus() != WorkflowConstants.STATUS_APPROVED)) {
+
+			return;
+		}
 
 		long companyId = user.getCompanyId();
 

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,9 +15,17 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.deploy.sandbox.SandboxHandler;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.util.PropsUtil;
+
+import java.io.IOException;
 
 import java.lang.reflect.Field;
+
+import java.security.AccessController;
+import java.security.PrivilegedActionException;
+import java.security.PrivilegedExceptionAction;
 
 import org.apache.commons.collections.ExtendedProperties;
 import org.apache.velocity.runtime.RuntimeInstance;
@@ -55,12 +63,27 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			String resourceName, int resourceType, String encoding)
 		throws Exception {
 
-		if (resourceName.contains(SandboxHandler.SANDBOX_MARKER)) {
-			return loadResource(resourceName, resourceType, encoding);
+		String[] macroTemplateIds = PropsUtil.getArray(
+			PropsKeys.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY);
+
+		for (String macroTemplateId : macroTemplateIds) {
+			if (resourceName.equals(macroTemplateId)) {
+
+				// This resource is provided by the portal, so invoke it from an
+				// access controller
+
+				try {
+					return AccessController.doPrivileged(
+						new ResourcePrivilegedExceptionAction(
+							resourceName, resourceType, encoding));
+				}
+				catch (PrivilegedActionException pae) {
+					throw (IOException)pae.getException();
+				}
+			}
 		}
-		else {
-			return super.getResource(resourceName, resourceType, encoding);
-		}
+
+		return doGetResource(resourceName, resourceType, encoding);
 	}
 
 	@Override
@@ -77,6 +100,40 @@ public class LiferayResourceManager extends ResourceManagerImpl {
 			runtimeServices, new FastExtendedProperties(extendedProperties));
 
 		super.initialize(runtimeServices);
+	}
+
+	private Resource doGetResource(
+			String resourceName, int resourceType, String encoding)
+		throws Exception {
+
+		if (resourceName.contains(SandboxHandler.SANDBOX_MARKER)) {
+			return loadResource(resourceName, resourceType, encoding);
+		}
+		else {
+			return super.getResource(resourceName, resourceType, encoding);
+		}
+	}
+
+	private class ResourcePrivilegedExceptionAction
+		implements PrivilegedExceptionAction<Resource> {
+
+		public ResourcePrivilegedExceptionAction(
+			String resourceName, int resourceType, String encoding) {
+
+			_resourceName = resourceName;
+			_resourceType = resourceType;
+			_encoding = encoding;
+		}
+
+		@Override
+		public Resource run() throws Exception {
+			return doGetResource(_resourceName, _resourceType, _encoding);
+		}
+
+		private String _encoding;
+		private String _resourceName;
+		private int _resourceType;
+
 	}
 
 }

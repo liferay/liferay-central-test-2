@@ -66,3 +66,20 @@
 		zoom: 1;
 	}
 }
+
+/* ---------- RTL ---------- */
+
+.rtl {
+	.lfr-autorow-controls {
+		bottom: 0;
+		float: left;
+		left: 5px;
+		position: relative;
+		right: 0;
+		text-align: left;
+	}
+
+	.row-names {
+		float: right;
+	}
+}

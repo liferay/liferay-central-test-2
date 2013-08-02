@@ -1,0 +1,31 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="DOCUMENTS_TABLE_NAME_1">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="DOCUMENTS_TABLE_NAME_2">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="DOCUMENTS_TABLE_NAME_3">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="FOLDER_MENU_ADD_FOLDER">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="FOLDER_MENULIST_DELETE">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="FOLDERS_TABLE_NAME_1">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="OPTIONS_MENULIST_CONFIGURATION">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+		<case locator-key1="OPTIONS_WRENCH_ICON">
+			<execute function="AssertClick#pauseAssertTextClickAt" />
+		</case>
+		<case locator-key1="SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+	</command>
+</definition>

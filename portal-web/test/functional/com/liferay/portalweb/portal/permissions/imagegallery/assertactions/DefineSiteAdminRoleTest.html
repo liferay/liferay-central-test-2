@@ -1,0 +1,443 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>DefineSiteAdminRoleTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">DefineSiteAdminRoleTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/web/guest/home/</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//div[@id='dockbar']</td>
+	<td>Dockbar</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//script[contains(@src,'/aui/aui-editable/aui-editable-min.js')]</td>
+	<td>AUI Editable Min</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>mouseOver</td>
+	<td>//li[@id='_145_mySites']/a/span</td>
+	<td>Go to</td>
+</tr>
+<tr>
+	<td>waitForVisible</td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Control Panel</td>
+	<td>Control Panel</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Roles</td>
+	<td>Roles</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//input[@id='_128_keywords']</td>
+	<td>SiteAdmin</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Search']</td>
+	<td>Search</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//tr[contains(.,'SiteAdmin')]/td[1]/a</td>
+	<td>SiteAdmin</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//tr[contains(.,'SiteAdmin')]/td[1]/a</td>
+	<td>SiteAdmin</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>link=Define Permissions</td>
+	<td>Define Permissions</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>//select[@id='_128_add-permissions']</td>
+	<td>label=Media Gallery</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[contains(.,'Documents and Media')]</td>
+	<td>Documents and Media</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT']</td>
+	<td>addDocumentCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addDocumentCheckbox}</td>
+	<td>AddDocumentCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT']</td>
+	<td>Documents and Media Add Document Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddDocumentCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT']</td>
+	<td>Documents and Media Add Document Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT_TYPE']</td>
+	<td>addDocumentTypeCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addDocumentTypeCheckbox}</td>
+	<td>AddDocumentTypeCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT_TYPE']</td>
+	<td>Documents and Media Add Document Type Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddDocumentTypeCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_DOCUMENT_TYPE']</td>
+	<td>Documents and Media Add Document Type Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_FOLDER']</td>
+	<td>addFolderCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addFolderCheckbox}</td>
+	<td>AddFolderCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_FOLDER']</td>
+	<td>Documents and Media Add Folder Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddFolderCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_FOLDER']</td>
+	<td>Documents and Media Add Folder Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_REPOSITORY']</td>
+	<td>addRepositoryCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addRepositoryCheckbox}</td>
+	<td>AddRepositoryCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_REPOSITORY']</td>
+	<td>Documents and Media Add Repository Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddRepositoryCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_REPOSITORY']</td>
+	<td>Documents and Media Add Repository Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_SHORTCUT']</td>
+	<td>addShortcutCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addShortcutCheckbox}</td>
+	<td>AddShortcutCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_SHORTCUT']</td>
+	<td>Documents and Media Add Shortcut Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddShortcutCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_SHORTCUT']</td>
+	<td>Documents and Media Add Shortcut Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_STRUCTURE']</td>
+	<td>addStructureCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addStructureCheckbox}</td>
+	<td>AddStructureCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_STRUCTURE']</td>
+	<td>Documents and Media Add Structure Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddStructureCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryADD_STRUCTURE']</td>
+	<td>Documents and Media Add Structure Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryPERMISSIONS']</td>
+	<td>permissionsCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${permissionsCheckbox}</td>
+	<td>PermissionsCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryPERMISSIONS']</td>
+	<td>Documents and Media Permissions Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>PermissionsCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryPERMISSIONS']</td>
+	<td>Documents and Media Permissions Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryUPDATE']</td>
+	<td>updateCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${updateCheckbox}</td>
+	<td>UpdateCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryUPDATE']</td>
+	<td>Documents and Media Update Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>UpdateCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryUPDATE']</td>
+	<td>Documents and Media Update Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryVIEW']</td>
+	<td>viewCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${viewCheckbox}</td>
+	<td>ViewCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryVIEW']</td>
+	<td>Documents and Media View Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ViewCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='com.liferay.portlet.documentlibraryVIEW']</td>
+	<td>Documents and Media View Checkbox</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>The role permissions were updated.</td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>//select[@id='_128_add-permissions']</td>
+	<td>value=regexp:.*portletResource=31&.*showModelResources=0</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//h3[contains(.,'Media Gallery')]</td>
+	<td>Media Gallery</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='31ADD_TO_PAGE']</td>
+	<td>addToPageCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${addToPageCheckbox}</td>
+	<td>AddToPageCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='31ADD_TO_PAGE']</td>
+	<td>Media Gallery Add to Page Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>AddToPageCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='31ADD_TO_PAGE']</td>
+	<td>Media Gallery Add to Page Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='31CONFIGURATION']</td>
+	<td>configurationCheckbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${configurationCheckbox}</td>
+	<td>ConfigurationCheckbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='31CONFIGURATION']</td>
+	<td>Media Gallery Configuration Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>ConfigurationCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='31CONFIGURATION']</td>
+	<td>Media Gallery Configuration Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='31PERMISSIONS']</td>
+	<td>permissions1Checkbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${permissions1Checkbox}</td>
+	<td>Permissions1Checkbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='31PERMISSIONS']</td>
+	<td>Media Gallery Permissions Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>Permissions1Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='31PERMISSIONS']</td>
+	<td>Media Gallery Permissions Checkbox</td>
+</tr>
+<tr>
+	<td>storeChecked</td>
+	<td>//input[@value='31VIEW']</td>
+	<td>view1Checkbox</td>
+</tr>
+<tr>
+	<td>gotoIf</td>
+	<td>${view1Checkbox}</td>
+	<td>View1Checkbox</td>
+</tr>
+<tr>
+	<td>clickAt</td>
+	<td>//input[@value='31VIEW']</td>
+	<td>Media Gallery View Checkbox</td>
+</tr>
+<tr>
+	<td>label</td>
+	<td>View1Checkbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertChecked</td>
+	<td>//input[@value='31VIEW']</td>
+	<td>Media Gallery View Checkbox</td>
+</tr>
+<tr>
+	<td>clickAtAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td>Save</td>
+</tr>
+<tr>
+	<td>assertText</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td>The role permissions were updated.</td>
+</tr>
+</tbody></table>
+</body>
+</html>

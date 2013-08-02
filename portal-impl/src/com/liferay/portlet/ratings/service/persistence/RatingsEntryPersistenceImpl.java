@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -238,13 +238,61 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		}
 	}
 
+	protected void cacheUniqueFindersCache(RatingsEntry ratingsEntry) {
+		if (ratingsEntry.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(ratingsEntry.getUserId()),
+					Long.valueOf(ratingsEntry.getClassNameId()),
+					Long.valueOf(ratingsEntry.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C, args,
+				ratingsEntry);
+		}
+		else {
+			RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
+
+			if ((ratingsEntryModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_U_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(ratingsEntry.getUserId()),
+						Long.valueOf(ratingsEntry.getClassNameId()),
+						Long.valueOf(ratingsEntry.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_U_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C, args,
+					ratingsEntry);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(RatingsEntry ratingsEntry) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C,
-			new Object[] {
+		RatingsEntryModelImpl ratingsEntryModelImpl = (RatingsEntryModelImpl)ratingsEntry;
+
+		Object[] args = new Object[] {
 				Long.valueOf(ratingsEntry.getUserId()),
 				Long.valueOf(ratingsEntry.getClassNameId()),
 				Long.valueOf(ratingsEntry.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C, args);
+
+		if ((ratingsEntryModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_U_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(ratingsEntryModelImpl.getOriginalUserId()),
+					Long.valueOf(ratingsEntryModelImpl.getOriginalClassNameId()),
+					Long.valueOf(ratingsEntryModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C, args);
+		}
 	}
 
 	/**
@@ -421,35 +469,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 		EntityCacheUtil.putResult(RatingsEntryModelImpl.ENTITY_CACHE_ENABLED,
 			RatingsEntryImpl.class, ratingsEntry.getPrimaryKey(), ratingsEntry);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
-				new Object[] {
-					Long.valueOf(ratingsEntry.getUserId()),
-					Long.valueOf(ratingsEntry.getClassNameId()),
-					Long.valueOf(ratingsEntry.getClassPK())
-				}, ratingsEntry);
-		}
-		else {
-			if ((ratingsEntryModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_U_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(ratingsEntryModelImpl.getOriginalUserId()),
-						Long.valueOf(ratingsEntryModelImpl.getOriginalClassNameId()),
-						Long.valueOf(ratingsEntryModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_U_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_U_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_U_C_C,
-					new Object[] {
-						Long.valueOf(ratingsEntry.getUserId()),
-						Long.valueOf(ratingsEntry.getClassNameId()),
-						Long.valueOf(ratingsEntry.getClassPK())
-					}, ratingsEntry);
-			}
-		}
+		clearUniqueFindersCache(ratingsEntry);
+		cacheUniqueFindersCache(ratingsEntry);
 
 		return ratingsEntry;
 	}
@@ -1977,8 +1998,10 @@ public class RatingsEntryPersistenceImpl extends BasePersistenceImpl<RatingsEntr
 				List<ModelListener<RatingsEntry>> listenersList = new ArrayList<ModelListener<RatingsEntry>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<RatingsEntry>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

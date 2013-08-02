@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.softwarecatalog.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -305,6 +306,10 @@ public class SCLicenseWrapper implements SCLicense, ModelWrapper<SCLicense> {
 		return new SCLicenseWrapper(_scLicense.toEscapedModel());
 	}
 
+	public com.liferay.portlet.softwarecatalog.model.SCLicense toUnescapedModel() {
+		return new SCLicenseWrapper(_scLicense.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _scLicense.toString();
@@ -317,6 +322,25 @@ public class SCLicenseWrapper implements SCLicense, ModelWrapper<SCLicense> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_scLicense.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof SCLicenseWrapper)) {
+			return false;
+		}
+
+		SCLicenseWrapper scLicenseWrapper = (SCLicenseWrapper)obj;
+
+		if (Validator.equals(_scLicense, scLicenseWrapper._scLicense)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

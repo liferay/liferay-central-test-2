@@ -23,18 +23,6 @@
 				(AssetCategory.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.countByG_N_V">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				AssetCategory
-			WHERE
-				(AssetCategory.groupId = ?) AND
-				(AssetCategory.name LIKE ? OR ? IS NULL) AND
-				(AssetCategory.vocabularyId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.countByG_N_P">
 		<![CDATA[
 			SELECT
@@ -45,18 +33,6 @@
 			WHERE
 				(AssetCategory.groupId = ?) AND
 				(AssetCategory.name LIKE ? OR ? IS NULL)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByEntryId">
-		<![CDATA[
-			SELECT
-				{AssetCategory.*}
-			FROM
-				AssetCategory
-			INNER JOIN
-				AssetEntries_AssetCategories ON
-					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId) AND
-					(AssetEntries_AssetCategories.entryId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_L">
@@ -79,33 +55,6 @@
 			WHERE
 				(AssetCategory.groupId = ?) AND
 				(lower(AssetCategory.name) = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByC_C">
-		<![CDATA[
-			SELECT
-				{AssetCategory.*}
-			FROM
-				AssetCategory
-			INNER JOIN
-				AssetEntries_AssetCategories ON
-					(AssetEntries_AssetCategories.categoryId = AssetCategory.categoryId)
-			WHERE
-				(AssetEntries_AssetCategories.entryId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_V">
-		<![CDATA[
-			SELECT
-				{AssetCategory.*}
-			FROM
-				AssetCategory
-			WHERE
-				(AssetCategory.groupId = ?) AND
-				(AssetCategory.name LIKE ? OR ? IS NULL) AND
-				(AssetCategory.vocabularyId = ?)
-			ORDER BY
-				AssetCategory.name ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetCategoryFinder.findByG_N_P">
@@ -173,7 +122,7 @@
 			FROM
 				AssetEntries_AssetTags
 			WHERE
-				([$TAG_ID])
+				([$TAG_ID$])
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.countByG_N">
@@ -231,40 +180,15 @@
 				(AssetTag.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByEntryId">
-		<![CDATA[
-			SELECT
-				{AssetTag.*}
-			FROM
-				AssetTag
-			INNER JOIN
-				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId) AND
-					(AssetEntries_AssetTags.entryId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_N">
 		<![CDATA[
 			SELECT
-				{AssetTag.*}
+				DISTINCT {AssetTag.*}
 			FROM
 				AssetTag
 			WHERE
 				(AssetTag.groupId = ?) AND
 				(lower(AssetTag.name) = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByC_C">
-		<![CDATA[
-			SELECT
-				{AssetTag.*}
-			FROM
-				AssetTag
-			INNER JOIN
-				AssetEntries_AssetTags ON
-					(AssetEntries_AssetTags.tagId = AssetTag.tagId)
-			WHERE
-				(AssetEntries_AssetTags.entryId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_C_N">
@@ -294,12 +218,12 @@
 	<sql id="com.liferay.portlet.asset.service.persistence.AssetTagFinder.findByG_N_P">
 		<![CDATA[
 			SELECT
-				{AssetTag.*}
+				DISTINCT {AssetTag.*}
 			FROM
 				AssetTag
 			[$JOIN$]
 			WHERE
-				(AssetTag.groupId = ?) AND
+				[$GROUP_ID$]
 				(AssetTag.name LIKE ? OR ? IS NULL)
 			ORDER BY
 				AssetTag.name ASC

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -143,8 +143,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String I18N_PATH = "I18N_PATH";
 
 	public static final String IFRAME_SRC = "IFRAME_SRC";
-
-	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
 
 	public static final String JOURNAL_ARTICLE_CONTENT = "JOURNAL_ARTICLE_CONTENT";
 
@@ -318,7 +316,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String PORTAL_REQUEST_DATA_SAMPLE = "PORTAL_REQUEST_DATA_SAMPLE";
 
-	public static final String PORTLET_BREADCRUMBS = "PORTLET_BREADCRUMBS";
+	public static final String PORTLET_BREADCRUMBS = "LIFERAY_SHARED_PORTLET_BREADCRUMBS";
 
 	public static final String PORTLET_CATEGORY = "PORTLET_CATEGORY";
 
@@ -355,8 +353,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String PUBLIC_RENDER_PARAMETERS_POOL = "PUBLIC_RENDER_PARAMETERS_POOL_";
 
 	public static final String REDIRECT_TO_DEFAULT_LAYOUT = "REDIRECT_TO_DEFAULT_LAYOUT";
-
-	public static final String REFERER = "referer";
 
 	public static final String REQUESTED_LAYOUT = "REQUESTED_LAYOUT";
 

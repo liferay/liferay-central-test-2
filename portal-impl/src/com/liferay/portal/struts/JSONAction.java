@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -56,8 +56,8 @@ public abstract class JSONAction extends Action {
 
 	@Override
 	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
 		if (rerouteExecute(request, response)) {
@@ -72,7 +72,7 @@ public abstract class JSONAction extends Action {
 		try {
 			checkAuthToken(request);
 
-			json = getJSON(mapping, form, request, response);
+			json = getJSON(actionMapping, actionForm, request, response);
 
 			if (Validator.isNotNull(callback)) {
 				json = callback + "(" + json + ");";
@@ -89,6 +89,8 @@ public abstract class JSONAction extends Action {
 			json = JSONFactoryUtil.serializeException(pe);
 		}
 		catch (Exception e) {
+			_log.error(e, e);
+
 			PortalUtil.sendError(
 				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, request,
 				response);
@@ -99,11 +101,11 @@ public abstract class JSONAction extends Action {
 		boolean refresh = ParamUtil.getBoolean(request, "refresh");
 
 		if (refresh) {
-			return mapping.findForward(ActionConstants.COMMON_REFERER);
+			return actionMapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		else if (Validator.isNotNull(json)) {
 			response.setCharacterEncoding(StringPool.UTF8);
-			response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
+			response.setContentType(ContentTypes.APPLICATION_JSON);
 			response.setHeader(
 				HttpHeaders.CACHE_CONTROL,
 				HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
@@ -121,8 +123,8 @@ public abstract class JSONAction extends Action {
 	}
 
 	public abstract String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response)
+			ActionMapping actionMapping, ActionForm actionForm,
+			HttpServletRequest request, HttpServletResponse response)
 		throws Exception;
 
 	public void setServletContext(ServletContext servletContext) {

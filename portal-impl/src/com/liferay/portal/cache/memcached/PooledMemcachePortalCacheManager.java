@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 	public void afterPropertiesSet() {
 	}
 
+	@Override
 	public void clearAll() {
 		_portalCaches.clear();
 	}
@@ -41,10 +42,12 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		}
 	}
 
+	@Override
 	public PortalCache getCache(String name) {
 		return getCache(name, false);
 	}
 
+	@Override
 	public PortalCache getCache(String name, boolean blocking) {
 		PortalCache portalCache = _portalCaches.get(name);
 
@@ -58,9 +61,11 @@ public class PooledMemcachePortalCacheManager implements PortalCacheManager {
 		return portalCache;
 	}
 
+	@Override
 	public void reconfigureCaches(URL configurationURL) {
 	}
 
+	@Override
 	public void removeCache(String name) {
 		_portalCaches.remove(name);
 	}

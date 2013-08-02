@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,10 +17,9 @@
 <%@ include file="/html/portlet/invitation/init.jsp" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
 String redirect = ParamUtil.getString(request, "redirect");
 
-PortletPreferences preferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+PortletPreferences preferences = portletPreferences;
 
 String emailMessageSubject = ParamUtil.getString(request, "emailMessageSubject", InvitationUtil.getEmailMessageSubject(preferences));
 String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", InvitationUtil.getEmailMessageBody(preferences));

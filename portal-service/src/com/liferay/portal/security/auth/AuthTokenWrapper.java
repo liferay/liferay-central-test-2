@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -28,14 +28,17 @@ public class AuthTokenWrapper implements AuthToken {
 		_originalAuthToken = authToken;
 	}
 
+	@Override
 	public void check(HttpServletRequest request) throws PortalException {
 		_authToken.check(request);
 	}
 
+	@Override
 	public String getToken(HttpServletRequest request) {
 		return _authToken.getToken(request);
 	}
 
+	@Override
 	public String getToken(
 		HttpServletRequest request, long plid, String portletId) {
 

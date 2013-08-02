@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import java.io.InputStream;
  * and other portlets, as shown below.
  * </p>
  *
+ * <p>
  * <pre>
  * <code>
  * long repositoryId = CompanyConstants.SYSTEM;
@@ -55,6 +56,7 @@ import java.io.InputStream;
  * companyId, repositoryId, dirName + "/" + fileName, file);
  * </code>
  * </pre>
+ * </p>
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
@@ -304,6 +306,12 @@ public class DLStoreUtil {
 	 * UnsupportedOperationException}.
 	 * </p>
 	 *
+	 * <p>
+	 * If using an S3 store, it is preferable for performance reasons to use
+	 * {@link #getFileAsStream(long, long, String)} instead of this method
+	 * wherever possible.
+	 * </p>
+	 *
 	 * @param  companyId the primary key of the company
 	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
@@ -328,6 +336,12 @@ public class DLStoreUtil {
 	 * object in any way. This method is only supported in certain stores. If
 	 * not supported, this method will throw an {@link
 	 * UnsupportedOperationException}.
+	 * </p>
+	 *
+	 * <p>
+	 * If using an S3 store, it is preferable for performance reasons to use
+	 * {@link #getFileAsStream(long, long, String, String)} instead of this
+	 * method wherever possible.
 	 * </p>
 	 *
 	 * @param  companyId the primary key of the company
@@ -390,6 +404,12 @@ public class DLStoreUtil {
 	/**
 	 * Returns the file as an {@link InputStream} object.
 	 *
+	 * <p>
+	 * If using an S3 store, it is preferable for performance reasons to use
+	 * this method to get the file as an {@link java.io.InputStream} instead of
+	 * using other methods to get the file as a {@link java.io.File}.
+	 * </p>
+	 *
 	 * @param  companyId the primary key of the company
 	 * @param  repositoryId the primary key of the data repository (optionally
 	 *         {@link CompanyConstants#SYSTEM})
@@ -407,6 +427,12 @@ public class DLStoreUtil {
 
 	/**
 	 * Returns the file as an {@link InputStream} object.
+	 *
+	 * <p>
+	 * If using an S3 store, it is preferable for performance reasons to use
+	 * this method to get the file as an {@link java.io.InputStream} instead of
+	 * using other methods to get the file as a {@link java.io.File}.
+	 * </p>
 	 *
 	 * @param  companyId the primary key of the company
 	 * @param  repositoryId the primary key of the data repository (optionally

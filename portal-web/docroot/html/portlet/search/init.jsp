@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,7 @@
 page import="com.liferay.portal.kernel.search.Document" %><%@
 page import="com.liferay.portal.kernel.search.FacetedSearcher" %><%@
 page import="com.liferay.portal.kernel.search.Hits" %><%@
+page import="com.liferay.portal.kernel.search.HitsOpenSearchImpl" %><%@
 page import="com.liferay.portal.kernel.search.Indexer" %><%@
 page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %><%@
 page import="com.liferay.portal.kernel.search.OpenSearch" %><%@
@@ -37,7 +38,6 @@ page import="com.liferay.portal.kernel.search.facet.config.FacetConfigurationUti
 page import="com.liferay.portal.kernel.search.facet.util.FacetFactoryUtil" %><%@
 page import="com.liferay.portal.kernel.search.facet.util.RangeParserUtil" %><%@
 page import="com.liferay.portal.kernel.util.DateFormatFactoryUtil" %><%@
-page import="com.liferay.portal.kernel.util.PortalClassLoaderUtil" %><%@
 page import="com.liferay.portal.kernel.xml.Element" %><%@
 page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %><%@
 page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %><%@
@@ -64,12 +64,6 @@ page import="java.util.LinkedList" %>
 
 <%
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	portletPreferences = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
 
 boolean advancedConfiguration = GetterUtil.getBoolean(portletPreferences.getValue("advancedConfiguration", null));
 boolean displayAssetTypeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTypeFacet", null), true);
@@ -143,9 +137,13 @@ private String _buildAssetCategoryPath(AssetCategory assetCategory, Locale local
 	return sb.toString();
 }
 
-private String _checkViewURL(ThemeDisplay themeDisplay, String viewURL, String currentURL) {
+private String _checkViewURL(ThemeDisplay themeDisplay, String viewURL, String currentURL, boolean inheritRedirect) {
 	if (Validator.isNotNull(viewURL) && viewURL.startsWith(themeDisplay.getURLPortal())) {
-		viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
+		viewURL = HttpUtil.setParameter(viewURL, "inheritRedirect", inheritRedirect);
+
+		if (!inheritRedirect) {
+			viewURL = HttpUtil.setParameter(viewURL, "redirect", currentURL);
+		}
 	}
 
 	return viewURL;
@@ -166,24 +164,22 @@ private PortletURL _getViewFullContentURL(HttpServletRequest request, ThemeDispl
 		scopeGroupId = themeDisplay.getScopeGroupId();
 	}
 
-	long plid = LayoutServiceUtil.getDefaultPlid(groupId, scopeGroupId, false, portletId);
+	long plid = LayoutConstants.DEFAULT_PLID;
 
-	if (plid == 0) {
-		plid = LayoutServiceUtil.getDefaultPlid(groupId, scopeGroupId, true, portletId);
+	Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+	if (layout != null) {
+		plid = layout.getPlid();
 	}
 
 	if (plid == 0) {
-		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
-
-		if (layout != null) {
-			plid = layout.getPlid();
-		}
+		plid = LayoutServiceUtil.getDefaultPlid(groupId, scopeGroupId, portletId);
 	}
 
 	PortletURL portletURL = PortletURLFactoryUtil.create(request, portletId, plid, PortletRequest.RENDER_PHASE);
 
-	portletURL.setWindowState(WindowState.MAXIMIZED);
 	portletURL.setPortletMode(PortletMode.VIEW);
+	portletURL.setWindowState(WindowState.MAXIMIZED);
 
 	return portletURL;
 }

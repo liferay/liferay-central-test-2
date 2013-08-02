@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,12 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -52,5 +58,24 @@ public interface UserPermission {
 
 	public boolean contains(
 		PermissionChecker permissionChecker, long userId, String actionId);
+
+	public boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Group group, Role role,
+			User user)
+		throws PortalException, SystemException;
+
+	public boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Group group, User user)
+		throws PortalException, SystemException;
+
+	public boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Organization organization,
+			Role role, User user)
+		throws SystemException;
+
+	public boolean hasMembershipProtected(
+			PermissionChecker permissionChecker, Organization organization,
+			User user)
+		throws PortalException, SystemException;
 
 }

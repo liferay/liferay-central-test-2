@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.upload.UploadRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -25,16 +26,16 @@ import com.liferay.portal.kernel.util.MimeTypesUtil;
 import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.documentlibrary.DuplicateDirectoryException;
-import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadataModel;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
+import com.liferay.portlet.documentlibrary.store.Store;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordModel;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
@@ -60,6 +61,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @author Eduardo Lundgren
  */
+@DoPrivileged
 public class DDMImpl implements DDM {
 
 	public static final String TYPE_CHECKBOX = "checkbox";
@@ -72,6 +74,7 @@ public class DDMImpl implements DDM {
 
 	public static final String TYPE_SELECT = "select";
 
+	@Override
 	public Fields getFields(
 			long ddmStructureId, long ddmTemplateId,
 			ServiceContext serviceContext)
@@ -81,6 +84,7 @@ public class DDMImpl implements DDM {
 			ddmStructureId, ddmTemplateId, StringPool.BLANK, serviceContext);
 	}
 
+	@Override
 	public Fields getFields(
 			long ddmStructureId, long ddmTemplateId, String fieldNamespace,
 			ServiceContext serviceContext)
@@ -131,7 +135,7 @@ public class DDMImpl implements DDM {
 				}
 			}
 
-			if ((fieldValue == null) ||
+			if (Validator.isNull(fieldValue) ||
 				fieldDataType.equals(FieldConstants.FILE_UPLOAD)) {
 
 				continue;
@@ -159,12 +163,14 @@ public class DDMImpl implements DDM {
 		return fields;
 	}
 
+	@Override
 	public Fields getFields(long ddmStructureId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		return getFields(ddmStructureId, 0, serviceContext);
 	}
 
+	@Override
 	public Fields getFields(
 			long ddmStructureId, String fieldNamespace,
 			ServiceContext serviceContext)
@@ -173,6 +179,7 @@ public class DDMImpl implements DDM {
 		return getFields(ddmStructureId, 0, fieldNamespace, serviceContext);
 	}
 
+	@Override
 	public String getFileUploadPath(BaseModel<?> baseModel) {
 		StringBundler sb = new StringBundler(7);
 
@@ -216,6 +223,7 @@ public class DDMImpl implements DDM {
 		return sb.toString();
 	}
 
+	@Override
 	public void sendFieldFile(
 			HttpServletRequest request, HttpServletResponse response,
 			Field field)
@@ -245,6 +253,7 @@ public class DDMImpl implements DDM {
 			request, response, fileName, is, contentLength, contentType);
 	}
 
+	@Override
 	public String uploadFieldFile(
 			long structureId, long storageId, BaseModel<?> baseModel,
 			String fieldName, ServiceContext serviceContext)
@@ -255,6 +264,7 @@ public class DDMImpl implements DDM {
 			serviceContext);
 	}
 
+	@Override
 	public String uploadFieldFile(
 			long structureId, long storageId, BaseModel<?> baseModel,
 			String fieldName, String fieldNamespace,
@@ -317,27 +327,32 @@ public class DDMImpl implements DDM {
 	protected String storeFieldFile(
 			BaseModel<?> baseModel, String fieldName, InputStream inputStream,
 			ServiceContext serviceContext)
-		throws Exception {
+		throws PortalException, SystemException {
+
+		long companyId = serviceContext.getCompanyId();
 
 		String dirName = getFileUploadPath(baseModel);
 
-		try {
+		if (!DLStoreUtil.hasDirectory(
+				companyId, CompanyConstants.SYSTEM, dirName)) {
+
 			DLStoreUtil.addDirectory(
-				serviceContext.getCompanyId(), CompanyConstants.SYSTEM,
-				dirName);
-		}
-		catch (DuplicateDirectoryException dde) {
+				companyId, CompanyConstants.SYSTEM, dirName);
 		}
 
 		String fileName = dirName + StringPool.SLASH + fieldName;
 
-		try {
-			DLStoreUtil.addFile(
-				serviceContext.getCompanyId(), CompanyConstants.SYSTEM,
-				fileName, inputStream);
+		if (DLStoreUtil.hasFile(
+				companyId, CompanyConstants.SYSTEM, fileName,
+				Store.VERSION_DEFAULT)) {
+
+			DLStoreUtil.deleteFile(
+				companyId, CompanyConstants.SYSTEM, fileName,
+				Store.VERSION_DEFAULT);
 		}
-		catch (DuplicateFileException dfe) {
-		}
+
+		DLStoreUtil.addFile(
+			companyId, CompanyConstants.SYSTEM, fileName, false, inputStream);
 
 		return fileName;
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -73,6 +73,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class DDMXSDImpl implements DDMXSD {
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, DDMStructure ddmStructure, Fields fields,
 			String namespace, boolean readOnly, Locale locale)
@@ -83,6 +84,7 @@ public class DDMXSDImpl implements DDMXSD {
 			locale);
 	}
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, DDMTemplate ddmTemplate, Fields fields,
 			String namespace, boolean readOnly, Locale locale)
@@ -186,6 +188,7 @@ public class DDMXSDImpl implements DDMXSD {
 		return getHTML(pageContext, element, null, locale);
 	}
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, String xml, Fields fields, Locale locale)
 		throws Exception {
@@ -193,6 +196,7 @@ public class DDMXSDImpl implements DDMXSD {
 		return getHTML(pageContext, xml, fields, StringPool.BLANK, locale);
 	}
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, String xml, Fields fields,
 			String namespace, boolean readOnly, Locale locale)
@@ -202,6 +206,7 @@ public class DDMXSDImpl implements DDMXSD {
 			pageContext, xml, fields, namespace, null, readOnly, locale);
 	}
 
+	@Override
 	public String getHTML(
 			PageContext pageContext, String xml, Fields fields,
 			String namespace, Locale locale)
@@ -222,16 +227,19 @@ public class DDMXSDImpl implements DDMXSD {
 			readOnly, locale);
 	}
 
+	@Override
 	public String getHTML(PageContext pageContext, String xml, Locale locale)
 		throws Exception {
 
 		return getHTML(pageContext, xml, null, locale);
 	}
 
+	@Override
 	public JSONArray getJSONArray(Document document) throws JSONException {
 		return getJSONArray(document.getRootElement());
 	}
 
+	@Override
 	public JSONArray getJSONArray(Element element) throws JSONException {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
@@ -273,7 +281,7 @@ public class DDMXSDImpl implements DDMXSD {
 
 					String attributeName = metadataEntryElement.attributeValue(
 						"name");
-					String attributeValue = metadataEntryElement.getText();
+					String attributeValue = metadataEntryElement.getTextTrim();
 
 					putMetadataValue(
 						localeMap, attributeName, attributeValue, type);
@@ -320,6 +328,7 @@ public class DDMXSDImpl implements DDMXSD {
 		return jsonArray;
 	}
 
+	@Override
 	public JSONArray getJSONArray(String xml)
 		throws DocumentException, JSONException {
 
@@ -331,11 +340,11 @@ public class DDMXSDImpl implements DDMXSD {
 
 		Document document = dynamicElementElement.getDocument();
 
-		String[] availableLocales = LocalizationUtil.getAvailableLocales(
-			document.asXML());
+		String xml = document.asXML();
 
-		String defaultLanguageId = LocalizationUtil.getDefaultLocale(
-			document.asXML());
+		String[] availableLocales = LocalizationUtil.getAvailableLocales(xml);
+
+		String defaultLanguageId = LocalizationUtil.getDefaultLocale(xml);
 
 		String languageId = LocaleUtil.toLanguageId(locale);
 

@@ -512,6 +512,9 @@
 		<finder name="LayoutPrototypeUuid" return-type="Collection">
 			<finder-column name="layoutPrototypeUuid" />
 		</finder>
+		<finder name="SourcePrototypeLayoutUuid" return-type="Collection">
+			<finder-column name="sourcePrototypeLayoutUuid" />
+		</finder>
 		<finder name="G_P" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
@@ -548,6 +551,7 @@
 		<reference package-path="com.liferay.portlet.journal" entity="JournalArticle" />
 		<reference package-path="com.liferay.portlet.journal" entity="JournalContentSearch" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
+		<reference package-path="com.liferay.portlet.mobiledevicerules" entity="MDRRuleGroupInstance" />
 		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 	</entity>
 	<entity name="LayoutBranch" local-service="true" remote-service="true">
@@ -588,7 +592,7 @@
 			<finder-column name="plid" />
 			<finder-column name="name" />
 		</finder>
-		<finder name="L_P_M" return-type="LayoutBranch">
+		<finder name="L_P_M" return-type="Collection">
 			<finder-column name="layoutSetBranchId" />
 			<finder-column name="plid" />
 			<finder-column name="master" />
@@ -819,6 +823,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="privateLayout" />
 			<finder-column name="name" />
+		</finder>
+		<finder name="G_P_M" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="privateLayout" />
+			<finder-column name="master" />
 		</finder>
 	</entity>
 	<entity name="LayoutSetPrototype" uuid="true" local-service="true" remote-service="true">
@@ -1418,6 +1427,9 @@
 		<finder name="Plid" return-type="Collection">
 			<finder-column name="plid" />
 		</finder>
+		<finder name="PortletId" return-type="Collection">
+			<finder-column name="portletId" />
+		</finder>
 		<finder name="P_P" return-type="Collection">
 			<finder-column name="plid" />
 			<finder-column name="portletId" />
@@ -1585,6 +1597,9 @@
 		<finder name="CodeId" return-type="Collection">
 			<finder-column name="codeId" />
 		</finder>
+		<finder name="PrimKey" return-type="Collection">
+			<finder-column name="primKey" />
+		</finder>
 		<finder name="C_P" return-type="Resource" unique="true">
 			<finder-column name="codeId" />
 			<finder-column name="primKey" />
@@ -1615,7 +1630,7 @@
 			<finder-column name="name" />
 		</finder>
 		<finder name="N_A" return-type="ResourceAction" unique="true">
-			<finder-column name="name" case-sensitive="false" />
+			<finder-column name="name" case-sensitive="true" />
 			<finder-column name="actionId" />
 		</finder>
 	</entity>
@@ -1737,6 +1752,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 			<finder-column name="scope" />
+		</finder>
+		<finder name="C_P_R" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="primKey" />
+			<finder-column name="roleId" />
 		</finder>
 		<finder name="C_N_S_P" return-type="Collection">
 			<finder-column name="companyId" />
@@ -2122,6 +2142,14 @@
 			<finder-column name="companyId" />
 			<finder-column name="userId" />
 		</finder>
+		<finder name="C_CD" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="createDate" />
+		</finder>
+		<finder name="C_MD" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="modifiedDate" />
+		</finder>
 		<finder name="C_DU" return-type="User">
 			<finder-column name="companyId" />
 			<finder-column name="defaultUser" />
@@ -2146,6 +2174,11 @@
 			<finder-column name="companyId" />
 			<finder-column name="status" />
 		</finder>
+		<finder name="C_CD_MD" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="createDate" />
+			<finder-column name="modifiedDate" />
+		</finder>
 
 		<!-- References -->
 
@@ -2153,8 +2186,8 @@
 		<reference package-path="com.liferay.portlet.announcements" entity="AnnouncementsDelivery" />
 		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
-		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />
+		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBBan" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBStatsUser" />
@@ -2586,6 +2619,7 @@
 		<exception>CountryNumber</exception>
 		<exception>DuplicateGroup</exception>
 		<exception>DuplicateLock</exception>
+		<exception>DuplicateOpenId</exception>
 		<exception>DuplicateOrganization</exception>
 		<exception>DuplicatePasswordPolicy</exception>
 		<exception>DuplicateRole</exception>
@@ -2594,17 +2628,17 @@
 		<exception>DuplicateUserGroup</exception>
 		<exception>DuplicateUserId</exception>
 		<exception>DuplicateUserScreenName</exception>
-		<exception>GroupFriendlyURL</exception>
-		<exception>GroupName</exception>
 		<exception>EmailAddress</exception>
 		<exception>ExpiredLock</exception>
+		<exception>GroupFriendlyURL</exception>
+		<exception>GroupName</exception>
 		<exception>ImageType</exception>
 		<exception>InvalidLock</exception>
 		<exception>InvalidRepository</exception>
 		<exception>LARFile</exception>
+		<exception>LARFileSize</exception>
 		<exception>LARType</exception>
 		<exception>LayoutBranchName</exception>
-		<exception>LayoutSetBranchName</exception>
 		<exception>LayoutFriendlyURL</exception>
 		<exception>LayoutHidden</exception>
 		<exception>LayoutImport</exception>
@@ -2613,21 +2647,23 @@
 		<exception>LayoutPermission</exception>
 		<exception>LayoutPrototype</exception>
 		<exception>LayoutRevisionMajor</exception>
+		<exception>LayoutSetBranchName</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
 		<exception>MembershipRequestComments</exception>
+		<exception>OldServiceComponent</exception>
 		<exception>OrganizationId</exception>
 		<exception>OrganizationName</exception>
 		<exception>OrganizationParent</exception>
 		<exception>OrganizationType</exception>
 		<exception>PasswordExpired</exception>
 		<exception>PasswordPolicyName</exception>
-		<exception>PwdEncryptor</exception>
 		<exception>PhoneNumber</exception>
 		<exception>PortletActive</exception>
 		<exception>PortletDefaultPreferences</exception>
 		<exception>PortletId</exception>
 		<exception>PortletItemName</exception>
+		<exception>PwdEncryptor</exception>
 		<exception>RegionCode</exception>
 		<exception>RegionName</exception>
 		<exception>RemoteExport</exception>
@@ -2649,8 +2685,10 @@
 		<exception>RoleAssignment</exception>
 		<exception>RoleName</exception>
 		<exception>RolePermissions</exception>
-		<exception>OldServiceComponent</exception>
 		<exception>SendPassword</exception>
+		<exception>SitemapChangeFrequency</exception>
+		<exception>SitemapInclude</exception>
+		<exception>SitemapPagePriority</exception>
 		<exception>TeamName</exception>
 		<exception>UserActive</exception>
 		<exception>UserEmailAddress</exception>

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,9 +27,7 @@ import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.portlet.LiferayPortletConfig;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -82,8 +80,9 @@ public class EditGroupAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -92,11 +91,10 @@ public class EditGroupAction extends PortletAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		String redirect = ParamUtil.getString(actionRequest, "redirect");
+		String closeRedirect = ParamUtil.getString(
+			actionRequest, "closeRedirect");
 
 		try {
-			String closeRedirect = ParamUtil.getString(
-				actionRequest, "closeRedirect");
-
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
 				Object[] returnValue = updateGroup(actionRequest);
 
@@ -123,18 +121,9 @@ public class EditGroupAction extends PortletAction {
 				deleteGroup(actionRequest);
 			}
 
-			if (Validator.isNotNull(closeRedirect)) {
-				LiferayPortletConfig liferayPortletConfig =
-					(LiferayPortletConfig)portletConfig;
-
-				SessionMessages.add(
-					actionRequest,
-					liferayPortletConfig.getPortletId() +
-						SessionMessages.KEY_SUFFIX_CLOSE_REDIRECT,
-					closeRedirect);
-			}
-
-			sendRedirect(actionRequest, actionResponse, redirect);
+			sendRedirect(
+				portletConfig, actionRequest, actionResponse, redirect,
+				closeRedirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchGroupException ||
@@ -158,14 +147,9 @@ public class EditGroupAction extends PortletAction {
 
 				SessionErrors.add(actionRequest, e.getClass(), e);
 
-				if (cmd.equals(Constants.DEACTIVATE) ||
-					cmd.equals(Constants.DELETE) ||
-					cmd.equals(Constants.RESTORE)) {
-
-					if (Validator.isNotNull(redirect)) {
-						actionResponse.sendRedirect(redirect);
-					}
-				}
+				sendRedirect(
+					portletConfig, actionRequest, actionResponse, redirect,
+					closeRedirect);
 			}
 			else {
 				throw e;
@@ -175,8 +159,9 @@ public class EditGroupAction extends PortletAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		try {
@@ -188,14 +173,14 @@ public class EditGroupAction extends PortletAction {
 
 				SessionErrors.add(renderRequest, e.getClass());
 
-				return mapping.findForward("portlet.sites_admin.error");
+				return actionMapping.findForward("portlet.sites_admin.error");
 			}
 			else {
 				throw e;
 			}
 		}
 
-		return mapping.findForward(
+		return actionMapping.findForward(
 			getForward(renderRequest, "portlet.sites_admin.edit_site"));
 	}
 
@@ -274,7 +259,7 @@ public class EditGroupAction extends PortletAction {
 			oldPath = oldFriendlyURL;
 			newPath = group.getFriendlyURL();
 
-			if (closeRedirect.indexOf(oldPath) != -1) {
+			if (closeRedirect.contains(oldPath)) {
 				closeRedirect = PortalUtil.updateRedirect(
 					closeRedirect, oldPath, newPath);
 			}

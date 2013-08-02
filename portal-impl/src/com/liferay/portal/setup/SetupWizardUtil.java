@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -42,6 +43,7 @@ import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
@@ -91,6 +93,12 @@ public class SetupWizardUtil {
 	public static final String PROPERTIES_FILE_NAME =
 		"portal-setup-wizard.properties";
 
+	public static String getDefaultLanguageId() {
+		Locale defaultLocale = LocaleUtil.getDefault();
+
+		return LocaleUtil.toLanguageId(defaultLocale);
+	}
+
 	public static boolean isDefaultDatabase(HttpServletRequest request) {
 		boolean hsqldb = ParamUtil.getBoolean(
 			request, "defaultDatabase",
@@ -124,15 +132,16 @@ public class SetupWizardUtil {
 			request, PropsKeys.JDBC_DEFAULT_USERNAME, null);
 		String password = _getParameter(
 			request, PropsKeys.JDBC_DEFAULT_PASSWORD, null);
+		String jndiName = StringPool.BLANK;
 
-		_testConnection(driverClassName, url, userName, password);
+		_testConnection(driverClassName, url, userName, password, jndiName);
 	}
 
 	public static void updateLanguage(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		String languageId = ParamUtil.getString(
-			request, "companyLocale", PropsValues.COMPANY_DEFAULT_LOCALE);
+			request, "companyLocale", getDefaultLanguageId());
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -319,21 +328,23 @@ public class SetupWizardUtil {
 
 	private static void _testConnection(
 			String driverClassName, String url, String userName,
-			String password)
+			String password, String jndiName)
 		throws Exception {
 
 		Class.forName(driverClassName);
 
+		DataSource dataSource = null;
 		Connection connection = null;
 
 		try {
-			DataSource dataSource = DataSourceFactoryUtil.initDataSource(
-				driverClassName, url, userName, password);
+			dataSource = DataSourceFactoryUtil.initDataSource(
+				driverClassName, url, userName, password, jndiName);
 
 			connection = dataSource.getConnection();
 		}
 		finally {
 			DataAccess.cleanUp(connection);
+			DataSourceFactoryUtil.destroyDataSource(dataSource);
 		}
 	}
 
@@ -359,7 +370,8 @@ public class SetupWizardUtil {
 		ScreenNameGenerator screenNameGenerator =
 			ScreenNameGeneratorFactory.getInstance();
 
-		String screenName = "test";
+		String screenName = GetterUtil.getString(
+			PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX, "test");
 
 		try {
 			screenName = screenNameGenerator.generate(0, 0, emailAddress);
@@ -426,6 +438,21 @@ public class SetupWizardUtil {
 
 			user = UserLocalServiceUtil.getUserByEmailAddress(
 				themeDisplay.getCompanyId(), emailAddress);
+
+			String defaultAdminEmailAddress =
+				PropsValues.DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX + "@" +
+					PropsValues.COMPANY_DEFAULT_WEB_ID;
+
+			if (!emailAddress.equals(defaultAdminEmailAddress)) {
+				User testUser = UserLocalServiceUtil.fetchUserByEmailAddress(
+					themeDisplay.getCompanyId(), defaultAdminEmailAddress);
+
+				if (testUser != null) {
+					UserLocalServiceUtil.updateStatus(
+						testUser.getUserId(),
+						WorkflowConstants.STATUS_INACTIVE);
+				}
+			}
 		}
 
 		user = UserLocalServiceUtil.updatePasswordReset(user.getUserId(), true);
@@ -457,7 +484,7 @@ public class SetupWizardUtil {
 		}
 
 		String languageId = ParamUtil.getString(
-			request, "companyLocale", PropsValues.COMPANY_DEFAULT_LOCALE);
+			request, "companyLocale", getDefaultLanguageId());
 
 		User defaultUser = company.getDefaultUser();
 

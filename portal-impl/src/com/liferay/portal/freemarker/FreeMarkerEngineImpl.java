@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,12 +20,13 @@ import com.liferay.portal.kernel.freemarker.FreeMarkerEngine;
 import com.liferay.portal.kernel.freemarker.FreeMarkerVariablesUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
+import com.liferay.portal.kernel.security.pacl.NotPrivileged;
+import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.security.lang.PortalSecurityManagerThreadLocal;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
-import com.liferay.portal.security.pacl.PACLPolicy;
-import com.liferay.portal.security.pacl.PACLPolicyManager;
+import com.liferay.portal.template.TemplateControlContext;
+import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.util.PropsValues;
 
 import freemarker.cache.ClassTemplateLoader;
@@ -40,6 +41,10 @@ import java.io.IOException;
 import java.io.Writer;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+
+import java.security.AccessController;
+import java.security.PrivilegedExceptionAction;
 
 import java.util.Locale;
 import java.util.Map;
@@ -49,12 +54,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Mika Koivisto
  * @author Raymond Augé
  */
+@DoPrivileged
 public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 
+	@Override
 	public void clearClassLoader(ClassLoader classLoader) {
-		_classLoaderFreeMarkerContexts.remove(classLoader);
+		_classLoaderToolsContextsMap.remove(classLoader);
 	}
 
+	@Override
 	public void flushTemplate(String freeMarkerTemplateId) {
 		if (_configuration == null) {
 			return;
@@ -69,57 +77,29 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		portalCache.remove(_getResourceCacheKey(freeMarkerTemplateId));
 	}
 
+	public TemplateControlContext getTemplateControlContext() {
+		return _pacl.getTemplateControlContext();
+	}
+
+	@NotPrivileged
+	@Override
 	public FreeMarkerContext getWrappedClassLoaderToolsContext() {
-
-		// This context will have all of its utilities initialized within the
-		// class loader of the current thread
-
-		ClassLoader contextClassLoader =
-			PACLClassLoaderUtil.getContextClassLoader();
-
-		PACLPolicy threadLocalPACLPolicy =
-			PortalSecurityManagerThreadLocal.getPACLPolicy();
-
-		PACLPolicy contextClassLoaderPACLPolicy =
-			PACLPolicyManager.getPACLPolicy(contextClassLoader);
-
-		try {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(
-				contextClassLoaderPACLPolicy);
-
-			FreeMarkerContextImpl classLoaderContext =
-				_classLoaderFreeMarkerContexts.get(contextClassLoader);
-
-			if (classLoaderContext == null) {
-				classLoaderContext = new FreeMarkerContextImpl();
-
-				FreeMarkerVariablesUtil.insertHelperUtilities(
-					classLoaderContext, null);
-
-				_classLoaderFreeMarkerContexts.put(
-					contextClassLoader, classLoaderContext);
-			}
-
-			return new PACLFreeMarkerContextImpl(
-				classLoaderContext.getWrappedContext(),
-				contextClassLoaderPACLPolicy);
-		}
-		finally {
-			PortalSecurityManagerThreadLocal.setPACLPolicy(
-				threadLocalPACLPolicy);
-		}
+		return new FreeMarkerContextImpl(_doGetToolsContext(_STANDARD));
 	}
 
+	@NotPrivileged
+	@Override
 	public FreeMarkerContext getWrappedRestrictedToolsContext() {
-		return new FreeMarkerContextImpl(
-			_restrictedToolsContext.getWrappedContext());
+		return new FreeMarkerContextImpl(_doGetToolsContext(_RESTRICTED));
 	}
 
+	@NotPrivileged
+	@Override
 	public FreeMarkerContext getWrappedStandardToolsContext() {
-		return new FreeMarkerContextImpl(
-			_standardToolsContext.getWrappedContext());
+		return new FreeMarkerContextImpl(_doGetToolsContext(_STANDARD));
 	}
 
+	@Override
 	public void init() throws Exception {
 		if (_configuration != null) {
 			return;
@@ -159,19 +139,27 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_configuration.setTemplateUpdateDelay(
 			PropsValues.FREEMARKER_ENGINE_MODIFICATION_CHECK_INTERVAL);
 
+		try {
+
+			// This must take place after setting properties above otherwise the
+			// cache is reset to the original implementation
+
+			Field field = ReflectionUtil.getDeclaredField(
+				Configuration.class, "cache");
+
+			TemplateCache templateCache = (TemplateCache)field.get(
+				_configuration);
+
+			templateCache = new LiferayTemplateCache(templateCache);
+
+			field.set(_configuration, templateCache);
+		}
+		catch (Exception e) {
+			throw new Exception("Unable to Initialize Freemarker manager");
+		}
+
 		_encoding = _configuration.getEncoding(_configuration.getLocale());
 		_locale = _configuration.getLocale();
-
-		_restrictedToolsContext = new FreeMarkerContextImpl();
-
-		FreeMarkerVariablesUtil.insertHelperUtilities(
-			_restrictedToolsContext,
-			PropsValues.JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES);
-
-		_standardToolsContext = new FreeMarkerContextImpl();
-
-		FreeMarkerVariablesUtil.insertHelperUtilities(
-			_standardToolsContext, null);
 
 		ClassLoader classLoader = TemplateCache.class.getClassLoader();
 
@@ -184,6 +172,8 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		_templateKeyConstructor.setAccessible(true);
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean mergeTemplate(
 			String freeMarkerTemplateId, FreeMarkerContext freeMarkerContext,
 			Writer writer)
@@ -193,56 +183,28 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 			freeMarkerTemplateId, null, freeMarkerContext, writer);
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean mergeTemplate(
 			String freeMarkerTemplateId, String freemarkerTemplateContent,
 			FreeMarkerContext freeMarkerContext, Writer writer)
 		throws Exception {
 
-		if (Validator.isNotNull(freemarkerTemplateContent)) {
-			PortalCache portalCache = LiferayCacheStorage.getPortalCache();
-
-			portalCache.remove(_getResourceCacheKey(freeMarkerTemplateId));
-
-			_stringTemplateLoader.putTemplate(
-				freeMarkerTemplateId, freemarkerTemplateContent);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Added " + freeMarkerTemplateId +
-						" to the string based FreeMarker template repository");
-			}
-		}
+		Template template = AccessController.doPrivileged(
+			new DoGetTemplatePrivilegedAction(
+				freeMarkerTemplateId, freemarkerTemplateContent,
+				StringPool.UTF8));
 
 		FreeMarkerContextImpl freeMarkerContextImpl =
 			(FreeMarkerContextImpl)freeMarkerContext;
 
-		PACLPolicy threadLocalPACLPolicy =
-			PortalSecurityManagerThreadLocal.getPACLPolicy();
-
-		try {
-			if (freeMarkerContextImpl instanceof PACLFreeMarkerContextImpl) {
-				PACLFreeMarkerContextImpl paclContextImpl =
-					(PACLFreeMarkerContextImpl)freeMarkerContextImpl;
-
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					paclContextImpl.getPaclPolicy());
-			}
-
-			Template template = _configuration.getTemplate(
-				freeMarkerTemplateId, StringPool.UTF8);
-
-			template.process(freeMarkerContextImpl.getWrappedContext(), writer);
-		}
-		finally {
-			if (freeMarkerContextImpl instanceof PACLFreeMarkerContextImpl) {
-				PortalSecurityManagerThreadLocal.setPACLPolicy(
-					threadLocalPACLPolicy);
-			}
-		}
+		template.process(freeMarkerContextImpl.getWrappedContext(), writer);
 
 		return true;
 	}
 
+	@NotPrivileged
+	@Override
 	public boolean resourceExists(String resource) {
 		try {
 			Template template = _configuration.getTemplate(resource);
@@ -263,6 +225,48 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		}
 	}
 
+	private FreeMarkerContextImpl _doGetToolsContext(
+		String templateContextType) {
+
+		TemplateControlContext templateControlContext =
+			getTemplateControlContext();
+
+		ClassLoader classLoader = templateControlContext.getClassLoader();
+
+		Map<String, FreeMarkerContextImpl> toolsContextMap =
+			_classLoaderToolsContextsMap.get(classLoader);
+
+		if (toolsContextMap == null) {
+			toolsContextMap =
+				new ConcurrentHashMap<String, FreeMarkerContextImpl>();
+
+			_classLoaderToolsContextsMap.put(classLoader, toolsContextMap);
+		}
+
+		FreeMarkerContextImpl freeMarkerContextImpl = toolsContextMap.get(
+			templateContextType);
+
+		if (freeMarkerContextImpl != null) {
+			return freeMarkerContextImpl;
+		}
+
+		freeMarkerContextImpl = new FreeMarkerContextImpl();
+
+		if (_RESTRICTED.equals(templateContextType)) {
+			FreeMarkerVariablesUtil.insertHelperUtilities(
+				freeMarkerContextImpl,
+				PropsValues.JOURNAL_TEMPLATE_FREEMARKER_RESTRICTED_VARIABLES);
+		}
+		else {
+			FreeMarkerVariablesUtil.insertHelperUtilities(
+				freeMarkerContextImpl, null);
+		}
+
+		toolsContextMap.put(templateContextType, freeMarkerContextImpl);
+
+		return freeMarkerContextImpl;
+	}
+
 	private String _getResourceCacheKey(String freeMarkerTemplateId) {
 		try {
 			Object object = _templateKeyConstructor.newInstance(
@@ -277,17 +281,76 @@ public class FreeMarkerEngineImpl implements FreeMarkerEngine {
 		}
 	}
 
+	private static final String _RESTRICTED = "RESTRICTED";
+
+	private static final String _STANDARD = "STANDARD";
+
 	private static Log _log = LogFactoryUtil.getLog(FreeMarkerEngineImpl.class);
 
-	private Map<ClassLoader, FreeMarkerContextImpl>
-		_classLoaderFreeMarkerContexts =
-			new ConcurrentHashMap<ClassLoader, FreeMarkerContextImpl>();
+	private static PACL _pacl = new NoPACL();
+
+	private Map<ClassLoader, Map<String, FreeMarkerContextImpl>>
+		_classLoaderToolsContextsMap = new ConcurrentHashMap
+			<ClassLoader, Map<String, FreeMarkerContextImpl>>();
 	private Configuration _configuration;
 	private String _encoding;
 	private Locale _locale;
-	private FreeMarkerContextImpl _restrictedToolsContext;
-	private FreeMarkerContextImpl _standardToolsContext;
 	private StringTemplateLoader _stringTemplateLoader;
 	private Constructor<?> _templateKeyConstructor;
+
+	private static class NoPACL implements PACL {
+
+		public TemplateControlContext getTemplateControlContext() {
+			ClassLoader contextClassLoader =
+				ClassLoaderUtil.getContextClassLoader();
+
+			return new TemplateControlContext(null, contextClassLoader);
+		}
+
+	}
+
+	public static interface PACL {
+
+		public TemplateControlContext getTemplateControlContext();
+
+	}
+
+	private class DoGetTemplatePrivilegedAction
+		implements PrivilegedExceptionAction<Template> {
+
+		public DoGetTemplatePrivilegedAction(
+			String freeMarkerTemplateId, String freemarkerTemplateContent,
+			String encoding) {
+
+			_freemarkerTemplateContent = freemarkerTemplateContent;
+			_freeMarkerTemplateId = freeMarkerTemplateId;
+			_encoding = encoding;
+		}
+
+		public Template run() throws Exception {
+			if (Validator.isNotNull(_freemarkerTemplateContent)) {
+				PortalCache portalCache = LiferayCacheStorage.getPortalCache();
+
+				portalCache.remove(_getResourceCacheKey(_freeMarkerTemplateId));
+
+				_stringTemplateLoader.putTemplate(
+					_freeMarkerTemplateId, _freemarkerTemplateContent);
+
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Added " + _freeMarkerTemplateId +
+							" to the string based FreeMarker template " +
+								"repository");
+				}
+			}
+
+			return _configuration.getTemplate(_freeMarkerTemplateId, _encoding);
+		}
+
+		private String _encoding;
+		private String _freemarkerTemplateContent;
+		private String _freeMarkerTemplateId;
+
+	}
 
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,7 @@ import java.util.Map;
 public class ResourceActionLocalServiceImpl
 	extends ResourceActionLocalServiceBaseImpl {
 
+	@Override
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public void checkResourceActions() throws SystemException {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 6) {
@@ -58,12 +59,14 @@ public class ResourceActionLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void checkResourceActions(String name, List<String> actionIds)
 		throws SystemException {
 
 		checkResourceActions(name, actionIds, false);
 	}
 
+	@Override
 	public void checkResourceActions(
 			String name, List<String> actionIds, boolean addDefaultActions)
 		throws SystemException {
@@ -81,12 +84,14 @@ public class ResourceActionLocalServiceImpl
 			name, actionIds, resourceActions, addDefaultActions);
 	}
 
+	@Override
 	public ResourceAction fetchResourceAction(String name, String actionId) {
 		String key = encodeKey(name, actionId);
 
 		return _resourceActions.get(key);
 	}
 
+	@Override
 	public ResourceAction getResourceAction(String name, String actionId)
 		throws PortalException {
 
@@ -101,6 +106,7 @@ public class ResourceActionLocalServiceImpl
 		return resourceAction;
 	}
 
+	@Override
 	public List<ResourceAction> getResourceActions(String name)
 		throws SystemException {
 
@@ -173,35 +179,46 @@ public class ResourceActionLocalServiceImpl
 			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 
+			long guestBitwiseValue = 0;
+			long ownerBitwiseValue = 0;
+			long siteMemberBitwiseValue = 0;
+
 			for (ResourceAction resourceAction : newResourceActions) {
 				String actionId = resourceAction.getActionId();
 
-				if (groupDefaultActions.contains(actionId)) {
-					resourcePermissionLocalService.addResourcePermissions(
-						name, RoleConstants.SITE_MEMBER,
-						ResourceConstants.SCOPE_INDIVIDUAL,
-						resourceAction.getBitwiseValue());
-				}
-
 				if (guestDefaultActions.contains(actionId)) {
-					resourcePermissionLocalService.addResourcePermissions(
-						name, RoleConstants.GUEST,
-						ResourceConstants.SCOPE_INDIVIDUAL,
-						resourceAction.getBitwiseValue());
+					guestBitwiseValue |= resourceAction.getBitwiseValue();
 				}
 
+				ownerBitwiseValue |= resourceAction.getBitwiseValue();
+
+				if (groupDefaultActions.contains(actionId)) {
+					siteMemberBitwiseValue |= resourceAction.getBitwiseValue();
+				}
+			}
+
+			if (guestBitwiseValue > 0) {
+				resourcePermissionLocalService.addResourcePermissions(
+					name, RoleConstants.GUEST,
+					ResourceConstants.SCOPE_INDIVIDUAL, guestBitwiseValue);
+			}
+
+			if (ownerBitwiseValue > 0) {
 				resourcePermissionLocalService.addResourcePermissions(
 					name, RoleConstants.OWNER,
-					ResourceConstants.SCOPE_INDIVIDUAL,
-					resourceAction.getBitwiseValue());
+					ResourceConstants.SCOPE_INDIVIDUAL, ownerBitwiseValue);
+			}
+
+			if (siteMemberBitwiseValue > 0) {
+				resourcePermissionLocalService.addResourcePermissions(
+					name, RoleConstants.SITE_MEMBER,
+					ResourceConstants.SCOPE_INDIVIDUAL, siteMemberBitwiseValue);
 			}
 		}
 	}
 
 	protected String encodeKey(String name, String actionId) {
-		String key = name.concat(StringPool.POUND).concat(actionId);
-
-		return key.toLowerCase();
+		return name.concat(StringPool.POUND).concat(actionId);
 	}
 
 	private static Map<String, ResourceAction> _resourceActions =

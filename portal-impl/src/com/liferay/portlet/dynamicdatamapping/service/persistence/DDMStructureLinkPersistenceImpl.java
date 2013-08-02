@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -227,9 +227,51 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 		}
 	}
 
+	protected void cacheUniqueFindersCache(DDMStructureLink ddmStructureLink) {
+		if (ddmStructureLink.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(ddmStructureLink.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSPK, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK, args,
+				ddmStructureLink);
+		}
+		else {
+			DDMStructureLinkModelImpl ddmStructureLinkModelImpl = (DDMStructureLinkModelImpl)ddmStructureLink;
+
+			if ((ddmStructureLinkModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_CLASSPK.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(ddmStructureLink.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_CLASSPK, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK, args,
+					ddmStructureLink);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(DDMStructureLink ddmStructureLink) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK,
-			new Object[] { Long.valueOf(ddmStructureLink.getClassPK()) });
+		DDMStructureLinkModelImpl ddmStructureLinkModelImpl = (DDMStructureLinkModelImpl)ddmStructureLink;
+
+		Object[] args = new Object[] { Long.valueOf(ddmStructureLink.getClassPK()) };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK, args);
+
+		if ((ddmStructureLinkModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_CLASSPK.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(ddmStructureLinkModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK, args);
+		}
 	}
 
 	/**
@@ -405,27 +447,8 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 			DDMStructureLinkImpl.class, ddmStructureLink.getPrimaryKey(),
 			ddmStructureLink);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
-				new Object[] { Long.valueOf(ddmStructureLink.getClassPK()) },
-				ddmStructureLink);
-		}
-		else {
-			if ((ddmStructureLinkModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_CLASSPK.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(ddmStructureLinkModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CLASSPK, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_CLASSPK, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_CLASSPK,
-					new Object[] { Long.valueOf(ddmStructureLink.getClassPK()) },
-					ddmStructureLink);
-			}
-		}
+		clearUniqueFindersCache(ddmStructureLink);
+		cacheUniqueFindersCache(ddmStructureLink);
 
 		return ddmStructureLink;
 	}
@@ -1813,8 +1836,10 @@ public class DDMStructureLinkPersistenceImpl extends BasePersistenceImpl<DDMStru
 				List<ModelListener<DDMStructureLink>> listenersList = new ArrayList<ModelListener<DDMStructureLink>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<DDMStructureLink>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

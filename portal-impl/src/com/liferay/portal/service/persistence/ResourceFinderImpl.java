@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,6 +47,7 @@ public class ResourceFinderImpl
 	public static final String FIND_BY_N_S =
 		ResourceFinder.class.getName() + ".findByN_S";
 
+	@Override
 	public List<Resource> findByContainerResource(long codeId, long classNameId)
 		throws SystemException {
 
@@ -79,6 +80,7 @@ public class ResourceFinderImpl
 		}
 	}
 
+	@Override
 	public List<Resource> findByName(String name) throws SystemException {
 		Session session = null;
 
@@ -105,6 +107,7 @@ public class ResourceFinderImpl
 		}
 	}
 
+	@Override
 	public List<Resource> findByNoActions(long codeId, String actionId)
 		throws SystemException {
 
@@ -134,6 +137,7 @@ public class ResourceFinderImpl
 		}
 	}
 
+	@Override
 	public List<Resource> findByC_P(long companyId, String primKey)
 		throws SystemException {
 
@@ -163,6 +167,7 @@ public class ResourceFinderImpl
 		}
 	}
 
+	@Override
 	public List<Resource> findByN_S(String name, int scope)
 		throws SystemException {
 

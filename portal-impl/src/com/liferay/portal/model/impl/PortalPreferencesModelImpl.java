@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -226,13 +226,16 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 
 	@Override
 	public PortalPreferences toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (PortalPreferences)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (PortalPreferences)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public PortalPreferences toUnescapedModel() {
+		return (PortalPreferences)this;
 	}
 
 	@Override
@@ -265,18 +268,15 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PortalPreferences)) {
 			return false;
 		}
 
-		PortalPreferences portalPreferences = null;
-
-		try {
-			portalPreferences = (PortalPreferences)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		PortalPreferences portalPreferences = (PortalPreferences)obj;
 
 		long primaryKey = portalPreferences.getPrimaryKey();
 
@@ -376,7 +376,7 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 	}
 
 	private static ClassLoader _classLoader = PortalPreferences.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PortalPreferences.class
 		};
 	private long _portalPreferencesId;
@@ -388,5 +388,5 @@ public class PortalPreferencesModelImpl extends BaseModelImpl<PortalPreferences>
 	private boolean _setOriginalOwnerType;
 	private String _preferences;
 	private long _columnBitmask;
-	private PortalPreferences _escapedModelProxy;
+	private PortalPreferences _escapedModel;
 }

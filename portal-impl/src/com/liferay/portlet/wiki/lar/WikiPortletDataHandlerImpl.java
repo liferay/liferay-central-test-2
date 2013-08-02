@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -63,7 +63,10 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 
 	public static void exportNode(
 			PortletDataContext portletDataContext, Element nodesElement,
-			Element pagesElement, WikiNode node)
+			Element pagesElement, Element dlFileEntryTypesElement,
+			Element dlFoldersElement, Element dlFileEntriesElement,
+			Element dlFileRanksElement, Element dlRepositoriesElement,
+			Element dlRepositoryEntriesElement, WikiNode node)
 		throws Exception {
 
 		if (portletDataContext.isWithinDateRange(node.getModifiedDate())) {
@@ -76,17 +79,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 					nodeElement, path, node, _NAMESPACE);
 			}
 		}
-
-		Element dlFileEntryTypesElement = pagesElement.addElement(
-			"dl-file-entry-types");
-		Element dlFoldersElement = pagesElement.addElement("dl-folders");
-		Element dlFileEntriesElement = pagesElement.addElement(
-			"dl-file-entries");
-		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
-		Element dlRepositoriesElement = pagesElement.addElement(
-			"dl-repositories");
-		Element dlRepositoryEntriesElement = pagesElement.addElement(
-			"dl-repository-entries");
 
 		List<WikiPage> pages = WikiPageUtil.findByN_S(
 			node.getNodeId(), WorkflowConstants.STATUS_APPROVED,
@@ -522,11 +514,26 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 		Element nodesElement = rootElement.addElement("nodes");
 		Element pagesElement = rootElement.addElement("pages");
 
+		Element dlFileEntryTypesElement = pagesElement.addElement(
+			"dl-file-entry-types");
+		Element dlFoldersElement = pagesElement.addElement("dl-folders");
+		Element dlFileEntriesElement = pagesElement.addElement(
+			"dl-file-entries");
+		Element dlFileRanksElement = pagesElement.addElement("dl-file-ranks");
+		Element dlRepositoriesElement = pagesElement.addElement(
+			"dl-repositories");
+		Element dlRepositoryEntriesElement = pagesElement.addElement(
+			"dl-repository-entries");
+
 		List<WikiNode> nodes = WikiNodeUtil.findByGroupId(
 			portletDataContext.getScopeGroupId());
 
 		for (WikiNode node : nodes) {
-			exportNode(portletDataContext, nodesElement, pagesElement, node);
+			exportNode(
+				portletDataContext, nodesElement, pagesElement,
+				dlFileEntryTypesElement, dlFoldersElement, dlFileEntriesElement,
+				dlFileRanksElement, dlRepositoriesElement,
+				dlRepositoryEntriesElement, node);
 		}
 
 		return document.formattedString();
@@ -600,7 +607,6 @@ public class WikiPortletDataHandlerImpl extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(_NAMESPACE, "ratings"),
 			new PortletDataHandlerBoolean(_NAMESPACE, "tags")
 		};
-
 	private static PortletDataHandlerBoolean _nodesAndPages =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "wikis-and-pages", true, true);

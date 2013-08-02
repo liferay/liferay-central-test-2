@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -46,10 +46,12 @@ public class MemcachePortalCache implements PortalCache {
 		_timeoutTimeUnit = timeoutTimeUnit;
 	}
 
+	@Override
 	public void destroy() {
 		_memcachedClient.shutdown();
 	}
 
+	@Override
 	public Collection<Object> get(Collection<Serializable> keys) {
 		List<String> processedKeys = new ArrayList<String>(keys.size());
 
@@ -92,6 +94,7 @@ public class MemcachePortalCache implements PortalCache {
 		return null;
 	}
 
+	@Override
 	public Object get(Serializable key) {
 		String processedKey = _name.concat(String.valueOf(key));
 
@@ -124,14 +127,17 @@ public class MemcachePortalCache implements PortalCache {
 		return value;
 	}
 
+	@Override
 	public String getName() {
 		return _name;
 	}
 
+	@Override
 	public void put(Serializable key, Object value) {
 		put(key, value, _timeToLive);
 	}
 
+	@Override
 	public void put(Serializable key, Object value, int timeToLive) {
 		String processedKey = _name.concat(String.valueOf(key));
 
@@ -145,10 +151,12 @@ public class MemcachePortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value) {
 		put(key, value, _timeToLive);
 	}
 
+	@Override
 	public void put(Serializable key, Serializable value, int timeToLive) {
 		String processedKey = _name.concat(String.valueOf(key));
 
@@ -162,16 +170,19 @@ public class MemcachePortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void registerCacheListener(CacheListener cacheListener) {
 		registerCacheListener(cacheListener, CacheListenerScope.ALL);
 	}
 
+	@Override
 	public void registerCacheListener(
 		CacheListener cacheListener, CacheListenerScope cacheListenerScope) {
 
 		throw new UnsupportedOperationException();
 	}
 
+	@Override
 	public void remove(Serializable key) {
 		String processedKey = _name.concat(String.valueOf(key));
 
@@ -185,6 +196,7 @@ public class MemcachePortalCache implements PortalCache {
 		}
 	}
 
+	@Override
 	public void removeAll() {
 		_memcachedClient.flush();
 	}
@@ -193,9 +205,11 @@ public class MemcachePortalCache implements PortalCache {
 		_timeToLive = timeToLive;
 	}
 
+	@Override
 	public void unregisterCacheListener(CacheListener cacheListener) {
 	}
 
+	@Override
 	public void unregisterCacheListeners() {
 	}
 

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -93,7 +93,12 @@ private void _buildSiteMap(Layout layout, List<Layout> layouts, Layout rootLayou
 			_buildLayoutView(curLayout, cssClass, useHtmlTitle, themeDisplay, sb);
 
 			if ((displayDepth == 0) || (displayDepth > curDepth)) {
-				_buildSiteMap(layout, curLayout.getChildren(), rootLayout, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, curDepth + 1, themeDisplay, sb);
+				if (showHiddenPages) {
+					_buildSiteMap(layout, curLayout.getChildren(), rootLayout, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, curDepth + 1, themeDisplay, sb);
+				}
+				else {
+					_buildSiteMap(layout, curLayout.getChildren(permissionChecker), rootLayout, includeRootInTree, displayDepth, showCurrentPage, useHtmlTitle, showHiddenPages, curDepth + 1, themeDisplay, sb);
+				}
 			}
 
 			sb.append("</li>");

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPool;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -26,37 +27,42 @@ import com.liferay.portal.kernel.webcache.WebCachePool;
 /**
  * @author Brian Wing Shun Chan
  */
+@DoPrivileged
 public class WebCachePoolImpl implements WebCachePool {
 
 	public void afterPropertiesSet() {
 		_portalCache = _singleVMPool.getCache(_CACHE_NAME);
 	}
 
+	@Override
 	public void clear() {
 		_portalCache.removeAll();
 	}
 
+	@Override
 	public Object get(String key, WebCacheItem wci) {
 		Object obj = _portalCache.get(key);
 
-		if (obj == null) {
-			try {
-				obj = wci.convert(key);
+		if (obj != null) {
+			return obj;
+		}
 
-				int timeToLive = (int)(wci.getRefreshTime() / Time.SECOND);
+		try {
+			obj = wci.convert(key);
 
-				_portalCache.put(key, obj, timeToLive);
-			}
-			catch (WebCacheException wce) {
-				if (_log.isWarnEnabled()) {
-					Throwable cause = wce.getCause();
+			int timeToLive = (int)(wci.getRefreshTime() / Time.SECOND);
 
-					if (cause != null) {
-						_log.warn(cause, cause);
-					}
-					else {
-						_log.warn(wce, wce);
-					}
+			_portalCache.put(key, obj, timeToLive);
+		}
+		catch (WebCacheException wce) {
+			if (_log.isWarnEnabled()) {
+				Throwable cause = wce.getCause();
+
+				if (cause != null) {
+					_log.warn(cause, cause);
+				}
+				else {
+					_log.warn(wce, wce);
 				}
 			}
 		}
@@ -64,6 +70,7 @@ public class WebCachePoolImpl implements WebCachePool {
 		return obj;
 	}
 
+	@Override
 	public void remove(String key) {
 		_portalCache.remove(key);
 	}

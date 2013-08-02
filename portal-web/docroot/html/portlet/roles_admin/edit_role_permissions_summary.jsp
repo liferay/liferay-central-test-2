@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -201,7 +201,7 @@ for (int i = 0; i < results.size(); i++) {
 	int scope;
 
 	if (role.getType() == RoleConstants.TYPE_REGULAR) {
-		LinkedHashMap groupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> groupParams = new LinkedHashMap<String, Object>();
 
 		List rolePermissions = new ArrayList();
 
@@ -274,7 +274,7 @@ for (int i = 0; i < results.size(); i++) {
 		for (int j = 0; j < groups.size(); j++) {
 			Group group = (Group)groups.get(j);
 
-			sb.append(group.getDescriptiveName(locale));
+			sb.append(HtmlUtil.escape(group.getDescriptiveName(locale)));
 
 			if (j < (groups.size() - 1)) {
 				sb.append(StringPool.COMMA);

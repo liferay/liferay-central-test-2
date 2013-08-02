@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,6 +31,7 @@ public class FooDataImpl implements FooData {
 		return _name;
 	}
 
+	@Override
 	public String getValue() {
 		return _value;
 	}
@@ -39,6 +40,7 @@ public class FooDataImpl implements FooData {
 		_height = height;
 	}
 
+	@Override
 	public void setId(int id) {
 		_id = id;
 	}

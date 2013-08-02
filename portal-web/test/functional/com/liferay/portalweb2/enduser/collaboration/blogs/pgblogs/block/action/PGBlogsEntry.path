@@ -1,0 +1,121 @@
+<html>
+<head>
+<title>PGBlogsEntry</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGBlogsEntry</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGBlogsEntry</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_TITLE</td>
+	<td>//h1[@class='header-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_CONTENT</td>
+	<td>//div[@class='entry-body']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AUTHOR</td>
+	<td>//div[@class='entry-author']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_VIEW_COUNT</td>
+	<td>//span[@class='view-count']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_COMMENTS</td>
+	<td>//span[@class='comments']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_YOUR_RATING</td>
+	<td>xpath=(//div[@class='aui-rating-label-element'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>ENTRY_AVERAGE_RATING</td>
+	<td>xpath=(//div[@class='aui-rating-label-element'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PREVIOUS</td>
+	<td>//span[@class='previous']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>NEXT</td>
+	<td>//span[@class='next']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--COMMENTS-->
+<tr>
+	<td>COMMENTS</td>
+	<td>//div[@class='lfr-panel-title']/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENTS_SUCCESS</td>
+	<td>//div[@class='lfr-message-response portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENTS_ADD</td>
+	<td>//fieldset/div/a[contains(.,'Be the first.')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENTS_BODY_FIELD</td>
+	<td>//textarea[@name='_33_postReplyBody0']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENTS_REPLY_BUTTON</td>
+	<td>//input[@value='Reply']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--COMMENT-->
+<tr>
+	<td>COMMENT_1</td>
+	<td>xpath=(//div[@class='lfr-discussion-message'])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENT_2</td>
+	<td>xpath=(//div[@class='lfr-discussion-message'])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>COMMENT_3</td>
+	<td>xpath=(//div[@class='lfr-discussion-message'])[3]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

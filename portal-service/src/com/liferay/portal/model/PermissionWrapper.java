@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -225,6 +227,10 @@ public class PermissionWrapper implements Permission, ModelWrapper<Permission> {
 		return new PermissionWrapper(_permission.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Permission toUnescapedModel() {
+		return new PermissionWrapper(_permission.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _permission.toString();
@@ -261,6 +267,25 @@ public class PermissionWrapper implements Permission, ModelWrapper<Permission> {
 
 	public void setScope(int scope) {
 		_permission.setScope(scope);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof PermissionWrapper)) {
+			return false;
+		}
+
+		PermissionWrapper permissionWrapper = (PermissionWrapper)obj;
+
+		if (Validator.equals(_permission, permissionWrapper._permission)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

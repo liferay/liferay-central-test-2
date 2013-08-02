@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -273,6 +273,12 @@ public class DLFileEntryMetadataLocalServiceUtil {
 		getService().deleteFileEntryMetadata(fileEntryId);
 	}
 
+	public static void deleteFileVersionFileEntryMetadata(long fileVersionId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFileVersionFileEntryMetadata(fileVersionId);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata getFileEntryMetadata(
 		long fileEntryMetadataId)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -287,10 +293,24 @@ public class DLFileEntryMetadataLocalServiceUtil {
 		return getService().getFileEntryMetadata(ddmStructureId, fileVersionId);
 	}
 
+	/**
+	* @deprecated {@link #getFileVersionFileEntryMetadatasCount(long)}
+	*/
 	public static long getFileEntryMetadataCount(long fileEntryId,
 		long fileVersionId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getFileEntryMetadataCount(fileEntryId, fileVersionId);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata> getFileVersionFileEntryMetadatas(
+		long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersionFileEntryMetadatas(fileVersionId);
+	}
+
+	public static long getFileVersionFileEntryMetadatasCount(long fileVersionId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getFileVersionFileEntryMetadatasCount(fileVersionId);
 	}
 
 	public static void updateFileEntryMetadata(long companyId,

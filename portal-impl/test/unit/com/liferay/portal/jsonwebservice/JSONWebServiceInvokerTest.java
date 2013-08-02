@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,13 +16,13 @@ package com.liferay.portal.jsonwebservice;
 
 import com.liferay.portal.jsonwebservice.action.JSONWebServiceInvokerAction;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebServiceAction;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 
 	@BeforeClass
-	public static void init() throws Exception {
+	public static void setUpClass() throws Exception {
 		initPortalServices();
 
 		registerActionClass(FooService.class);
@@ -68,6 +68,29 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		Assert.assertEquals(
 			"[\"Welcome 173 to Jupiter\",\"Welcome 173 to Jupiter\"]",
 			toJSON(invokerResult));
+	}
+
+	@Test
+	public void testCamelCaseNormalizedParameters() throws Exception {
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
+		Map<String, Object> params = new LinkedHashMap<String, Object>();
+
+		map.put("/foo/camel", params);
+
+		params.put("goodName", "goodboy");
+		params.put("badNAME", "badboy");
+
+		String json = toJSON(map);
+
+		JSONWebServiceAction jsonWebServiceAction = prepareInvokerAction(json);
+
+		Object result = jsonWebServiceAction.invoke();
+
+		JSONWebServiceInvokerAction.InvokerResult invokerResult =
+			(JSONWebServiceInvokerAction.InvokerResult)result;
+
+		Assert.assertEquals("\"goodboy*badboy\"", toJSON(invokerResult));
 	}
 
 	@Test
@@ -140,6 +163,59 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 	}
 
 	@Test
+	public void testInnerCallsNested() throws Exception {
+		Map<String, Object> map1 = new LinkedHashMap<String, Object>();
+
+		Map<String, Object> params = new LinkedHashMap<String, Object>();
+
+		map1.put("$data = /foo/get-foo-data", params);
+
+		params.put("id", 173);
+
+		Map<String, Object> map2 = new LinkedHashMap<String, Object>();
+
+		params.put("$spy = /foo/get-foo-data", map2);
+
+		map2.put("id", "007");
+
+		Map<String, Object> map3 = new LinkedHashMap<String, Object>();
+
+		map2.put("$thief = /foo/get-foo-data", map3);
+
+		map3.put("id", -13);
+
+		Map<String, Object> map4 = new LinkedHashMap<String, Object>();
+
+		map3.put("$world = /foo/hello-world", map4);
+
+		map4.put("@userId", "$thief.id");
+		map4.put("worldName", "Jupiter");
+
+		String json = toJSON(map1);
+
+		JSONWebServiceAction jsonWebServiceAction = prepareInvokerAction(json);
+
+		Object result = jsonWebServiceAction.invoke();
+
+		JSONWebServiceInvokerAction.InvokerResult invokerResult =
+			(JSONWebServiceInvokerAction.InvokerResult)result;
+
+		result = invokerResult.getResult();
+
+		Assert.assertTrue(result instanceof Map);
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("{\"id\":173,\"height\":177,\"spy\":{\"id\":7,\"height\":");
+		sb.append("173,\"name\":\"James Bond\",\"value\":\"licensed\",");
+		sb.append("\"thief\":{\"id\":-13,\"height\":59,\"name\":\"Dr. Evil\",");
+		sb.append("\"value\":\"fun\",\"world\":\"Welcome -13 to Jupiter\"}},");
+		sb.append("\"name\":\"John Doe\",\"value\":\"foo!\"}");
+
+		Assert.assertEquals(sb.toString(), toJSON(invokerResult));
+	}
+
+	@Test
 	public void testListFiltering() throws Exception {
 		Map<String, Object> map = new LinkedHashMap<String, Object>();
 
@@ -161,6 +237,39 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 		Assert.assertTrue(result instanceof List);
 		Assert.assertEquals(
 			"[{\"id\":1},{\"id\":2},{\"id\":3}]", toJSON(invokerResult));
+	}
+
+	@Test
+	public void testListFilteringAndFlags() throws Exception {
+		Map<String, Object> map = new LinkedHashMap<String, Object>();
+
+		Map<String, Object> params = new LinkedHashMap<String, Object>();
+
+		map.put("$world[id] = /foo/get-foo-datas", params);
+
+		Map<String, Object> map2 = new LinkedHashMap<String, Object>();
+
+		params.put("$resource[id,value] = /foo/get-foo-data", map2);
+
+		map2.put("@id", "$world.id");
+
+		String json = toJSON(map);
+
+		JSONWebServiceAction jsonWebServiceAction = prepareInvokerAction(json);
+
+		Object result = jsonWebServiceAction.invoke();
+
+		JSONWebServiceInvokerAction.InvokerResult invokerResult =
+			(JSONWebServiceInvokerAction.InvokerResult)result;
+
+		result = invokerResult.getResult();
+
+		Assert.assertTrue(result instanceof List);
+		Assert.assertEquals(
+			"[{\"id\":1,\"resource\":{\"id\":1,\"value\":\"foo!\"}},{\"id\":" +
+				"2,\"resource\":{\"id\":2,\"value\":\"foo!\"}},{\"id\":3," +
+					"\"resource\":{\"id\":3,\"value\":\"foo!\"}}]",
+			toJSON(invokerResult));
 	}
 
 	@Test

@@ -1,0 +1,113 @@
+<html>
+<head>
+<title>PGWebform</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGWebform</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGWebform</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_TITLE</td>
+	<td>//span[@class='portlet-title-text']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>PORTLET_OPTIONS</td>
+	<td>//span[@title='Options']/ul/li/strong/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>SEND_BUTTON</td>
+	<td>//input[@value='Send']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--WEBFORM_OPTIONS_MENULIST-->
+<tr>
+	<td>WEBFORM_OPTIONS_MENULIST_CONFIGURATION</td>
+	<td>//a[@role='menuitem' and contains(.,'Configuration')]</td>
+	<td></td>
+</tr>
+<!---->
+<!--DEFAULT_FORM_INFORMATION-->
+<tr>
+	<td>DEFAULT_FORM_INFORMATION_TITLE</td>
+	<td>//div[@class='portlet-body']/form/fieldset/legend/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_INFORMATION_DESCRIPTION</td>
+	<td>//div[@class='portlet-body']/form/fieldset/div/em</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--DEFAULT_FORM_FIELDS-->
+<tr>
+	<td>DEFAULT_FORM_FIELDS_NAME_HEADER</td>
+	<td>xpath=(//label[contains(@for,'webformportlet')])[1]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_FIELDS_NAME</td>
+	<td>//span/input[contains(@id,'webformportlet')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_FIELDS_RATING_HEADER</td>
+	<td>xpath=(//label[contains(@for,'webformportlet')])[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_FIELDS_RATING</td>
+	<td>//select[contains(@id,'webformportlet')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_FIELDS_COMMENTS_HEADER</td>
+	<td>xpath=(//label[contains(@for,'webformportlet')])[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DEFAULT_FORM_FIELDS_COMMENTS</td>
+	<td>//textarea[contains(@id,'webformportlet')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

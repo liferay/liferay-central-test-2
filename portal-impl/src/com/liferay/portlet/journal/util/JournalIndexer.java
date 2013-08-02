@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +14,14 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
-import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionList;
+import com.liferay.portal.kernel.dao.orm.Junction;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
@@ -44,7 +45,6 @@ import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portal.security.pacl.PACLClassLoaderUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -52,13 +52,16 @@ import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.persistence.JournalArticleActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.portlet.PortletURL;
 
@@ -68,6 +71,7 @@ import javax.portlet.PortletURL;
  * @author Bruno Farache
  * @author Raymond Augé
  * @author Hugo Huijser
+ * @author Tibor Lipusz
  */
 public class JournalIndexer extends BaseIndexer {
 
@@ -75,10 +79,12 @@ public class JournalIndexer extends BaseIndexer {
 
 	public static final String PORTLET_ID = PortletKeys.JOURNAL;
 
+	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
 
+	@Override
 	public String getPortletId() {
 		return PORTLET_ID;
 	}
@@ -154,28 +160,6 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId, double version, int status) {
-
-		addReindexCriteria(dynamicQuery, companyId, status);
-
-		Property property = PropertyFactoryUtil.forName("version");
-
-		dynamicQuery.add(property.eq(version));
-	}
-
-	protected void addReindexCriteria(
-		DynamicQuery dynamicQuery, long companyId, int status) {
-
-		Property companyIdProperty = PropertyFactoryUtil.forName("companyId");
-
-		dynamicQuery.add(companyIdProperty.eq(companyId));
-
-		Property statusProperty = PropertyFactoryUtil.forName("status");
-
-		dynamicQuery.add(statusProperty.eq(status));
-	}
-
 	@Override
 	protected void addSearchLocalizedTerm(
 			BooleanQuery searchQuery, SearchContext searchContext, String field,
@@ -224,6 +208,9 @@ public class JournalIndexer extends BaseIndexer {
 		document.addUID(
 			PORTLET_ID, article.getGroupId(), article.getArticleId());
 
+		String articleDefaultLanguageId = LocalizationUtil.getDefaultLocale(
+			article.getContent());
+
 		Locale defaultLocale = LocaleUtil.getDefault();
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
@@ -234,24 +221,35 @@ public class JournalIndexer extends BaseIndexer {
 		for (String languageId : languageIds) {
 			String content = extractContent(article, languageId);
 
-			if (languageId.equals(defaultLanguageId)) {
+			String description = article.getDescription(languageId);
+
+			String title = article.getTitle(languageId);
+
+			if (languageId.equals(articleDefaultLanguageId)) {
 				document.addText(Field.CONTENT, content);
+				document.addText(Field.DESCRIPTION, description);
+				document.addText(Field.TITLE, title);
 			}
 
 			document.addText(
 				Field.CONTENT.concat(StringPool.UNDERLINE).concat(languageId),
 				content);
+			document.addText(
+				Field.DESCRIPTION.concat(StringPool.UNDERLINE).concat(
+					languageId), description);
+			document.addText(
+				Field.TITLE.concat(StringPool.UNDERLINE).concat(languageId),
+				title);
 		}
 
-		document.addLocalizedText(
-			Field.DESCRIPTION, article.getDescriptionMap());
-		document.addLocalizedText(Field.TITLE, article.getTitleMap());
 		document.addKeyword(Field.TYPE, article.getType());
 		document.addKeyword(Field.VERSION, article.getVersion());
 
 		document.addKeyword("articleId", article.getArticleId());
 		document.addDate("displayDate", article.getDisplayDate());
 		document.addKeyword("layoutUuid", article.getLayoutUuid());
+		document.addLocalizedKeyword(
+			"localized_title", article.getTitleMap(), true);
 		document.addKeyword("structureId", article.getStructureId());
 		document.addKeyword("templateId", article.getTemplateId());
 
@@ -354,8 +352,16 @@ public class JournalIndexer extends BaseIndexer {
 		reindexArticles(companyId);
 	}
 
-	protected String encodeFieldName(String name) {
-		return _FIELD_NAMESPACE.concat(StringPool.FORWARD_SLASH).concat(name);
+	protected String encodeFieldName(Element element) {
+		StringBundler sb = new StringBundler(5);
+
+		sb.append(_FIELD_NAMESPACE);
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(element.attributeValue("name"));
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(element.attributeValue("instance-id"));
+
+		return sb.toString();
 	}
 
 	protected String extractContent(JournalArticle article, String languageId) {
@@ -448,43 +454,6 @@ public class JournalIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected List<JournalArticle> getReindexApprovedArticles(
-			long companyId, long startId, long endId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("id");
-
-		dynamicQuery.add(property.ge(startId));
-		dynamicQuery.add(property.lt(endId));
-
-		addReindexCriteria(
-			dynamicQuery, companyId, WorkflowConstants.STATUS_APPROVED);
-
-		return JournalArticleLocalServiceUtil.dynamicQuery(dynamicQuery);
-	}
-
-	protected List<JournalArticle> getReindexDraftArticles(
-			long companyId, long startId, long endId)
-		throws Exception {
-
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
-
-		Property property = PropertyFactoryUtil.forName("id");
-
-		dynamicQuery.add(property.ge(startId));
-		dynamicQuery.add(property.lt(endId));
-
-		addReindexCriteria(
-			dynamicQuery, companyId, JournalArticleConstants.VERSION_DEFAULT,
-			WorkflowConstants.STATUS_APPROVED);
-
-		return JournalArticleLocalServiceUtil.dynamicQuery(dynamicQuery);
-	}
-
 	protected void indexField(
 		Document document, Element element, String elType, String elIndexType) {
 
@@ -500,7 +469,7 @@ public class JournalIndexer extends BaseIndexer {
 		String defaultLocale = GetterUtil.getString(
 			rootElement.attributeValue("default-locale"));
 
-		String name = encodeFieldName(element.attributeValue("name"));
+		String name = encodeFieldName(element);
 
 		List<Element> dynamicContentElements = element.elements(
 			"dynamic-content");
@@ -567,6 +536,11 @@ public class JournalIndexer extends BaseIndexer {
 
 		while ((element = queue.poll()) != null) {
 			String elName = element.attributeValue("name", StringPool.BLANK);
+
+			if (Validator.isNull(elName)) {
+				continue;
+			}
+
 			String elType = element.attributeValue("type", StringPool.BLANK);
 			String elIndexType = element.attributeValue(
 				"index-type", StringPool.BLANK);
@@ -617,81 +591,86 @@ public class JournalIndexer extends BaseIndexer {
 		}
 	}
 
-	protected void reindexArticles(long companyId) throws Exception {
-		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
-			JournalArticle.class, PACLClassLoaderUtil.getPortalClassLoader());
+	protected void reindexArticles(long companyId)
+		throws PortalException, SystemException {
 
-		Projection minIdProjection = ProjectionFactoryUtil.min("id");
-		Projection maxIdProjection = ProjectionFactoryUtil.max("id");
+		final Collection<Document> documents = new ArrayList<Document>();
 
-		ProjectionList projectionList = ProjectionFactoryUtil.projectionList();
+		final Set<String> latestArticleIds = new HashSet<String>();
 
-		projectionList.add(minIdProjection);
-		projectionList.add(maxIdProjection);
+		ActionableDynamicQuery actionableDynamicQuery =
+			new JournalArticleActionableDynamicQuery() {
 
-		dynamicQuery.setProjection(projectionList);
+			@Override
+			protected void addCriteria(DynamicQuery dynamicQuery) {
+				Junction junction = RestrictionsFactoryUtil.disjunction();
 
-		addReindexCriteria(
-			dynamicQuery, companyId, WorkflowConstants.STATUS_APPROVED);
+				Junction approvedArticlesJunction =
+					RestrictionsFactoryUtil.conjunction();
 
-		List<Object[]> results = JournalArticleLocalServiceUtil.dynamicQuery(
-			dynamicQuery);
+				Property statusProperty = PropertyFactoryUtil.forName("status");
 
-		Object[] minAndMaxIds = results.get(0);
+				approvedArticlesJunction.add(
+					statusProperty.eq(WorkflowConstants.STATUS_APPROVED));
 
-		if ((minAndMaxIds[0] == null) || (minAndMaxIds[1] == null)) {
-			return;
-		}
+				junction.add(approvedArticlesJunction);
 
-		long minId = (Long)minAndMaxIds[0];
-		long maxId = (Long)minAndMaxIds[1];
+				Junction draftArticlesJunction =
+					RestrictionsFactoryUtil.conjunction();
 
-		long startId = minId;
-		long endId = startId + DEFAULT_INTERVAL;
+				Property versionProperty = PropertyFactoryUtil.forName(
+					"version");
 
-		while (startId <= maxId) {
-			reindexArticles(companyId, startId, endId);
+				draftArticlesJunction.add(
+					versionProperty.eq(
+						JournalArticleConstants.VERSION_DEFAULT));
 
-			startId = endId;
-			endId += DEFAULT_INTERVAL;
-		}
-	}
+				draftArticlesJunction.add(
+					statusProperty.eq(WorkflowConstants.STATUS_DRAFT));
 
-	protected void reindexArticles(long companyId, long startId, long endId)
-		throws Exception {
+				junction.add(draftArticlesJunction);
 
-		List<JournalArticle> articles = new ArrayList<JournalArticle>();
+				dynamicQuery.add(junction);
 
-		articles.addAll(getReindexApprovedArticles(companyId, startId, endId));
-		articles.addAll(getReindexDraftArticles(companyId, startId, endId));
+				Property indexableProperty = PropertyFactoryUtil.forName(
+					"indexable");
 
-		if (articles.isEmpty()) {
-			return;
-		}
-
-		Collection<Document> documents = new ArrayList<Document>(
-			articles.size());
-
-		for (JournalArticle article : articles) {
-			if (!article.isIndexable()) {
-				continue;
+				dynamicQuery.add(indexableProperty.eq(true));
 			}
 
-			if (article.isApproved()) {
-				JournalArticle latestArticle =
-					JournalArticleLocalServiceUtil.getLatestArticle(
-						article.getResourcePrimKey(),
-						WorkflowConstants.STATUS_APPROVED);
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-				if (!latestArticle.isIndexable()) {
-					continue;
+				JournalArticle article = (JournalArticle)object;
+
+				if (article.isApproved()) {
+					JournalArticle latestArticle =
+						JournalArticleLocalServiceUtil.getLatestArticle(
+							article.getResourcePrimKey(),
+							WorkflowConstants.STATUS_APPROVED);
+
+					String latestArticleId = latestArticle.getArticleId();
+
+					if (latestArticleIds.contains(latestArticleId)) {
+						return;
+					}
+
+					latestArticleIds.add(latestArticleId);
+
+					article = latestArticle;
 				}
+
+				Document document = getDocument(article);
+
+				documents.add(document);
 			}
 
-			Document document = getDocument(article);
+		};
 
-			documents.add(document);
-		}
+		actionableDynamicQuery.setCompanyId(companyId);
+
+		actionableDynamicQuery.performActions();
 
 		SearchEngineUtil.updateDocuments(
 			getSearchEngineId(), companyId, documents);

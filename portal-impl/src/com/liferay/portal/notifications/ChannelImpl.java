@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -58,16 +58,19 @@ public class ChannelImpl extends BaseChannelImpl {
 		super(companyId, usedId);
 	}
 
+	@Override
 	public Channel clone(long companyId, long userId) {
 		return new ChannelImpl(companyId, userId);
 	}
 
+	@Override
 	public void confirmDelivery(Collection<String> notificationEventUuids)
 		throws ChannelException {
 
 		confirmDelivery(notificationEventUuids, false);
 	}
 
+	@Override
 	public void confirmDelivery(
 			Collection<String> notificationEventUuids, boolean archive)
 		throws ChannelException {
@@ -103,12 +106,14 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void confirmDelivery(String notificationEventUuid)
 		throws ChannelException {
 
 		confirmDelivery(notificationEventUuid, false);
 	}
 
+	@Override
 	public void confirmDelivery(String notificationEventUuid, boolean archive)
 		throws ChannelException {
 
@@ -141,14 +146,15 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void deleteUserNotificiationEvent(String notificationEventUuid)
 		throws ChannelException {
 
 		_reentrantLock.lock();
 
 		try {
-			UserNotificationEventLocalServiceUtil.
-				deleteUserNotificationEvent(notificationEventUuid);
+			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvent(
+				notificationEventUuid);
 
 			Map<String, NotificationEvent> unconfirmedNotificationEvents =
 				_getUnconfirmedNotificationEvents();
@@ -164,6 +170,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void deleteUserNotificiationEvents(
 			Collection<String> notificationEventUuids)
 		throws ChannelException {
@@ -171,8 +178,8 @@ public class ChannelImpl extends BaseChannelImpl {
 		_reentrantLock.lock();
 
 		try {
-			UserNotificationEventLocalServiceUtil.
-				deleteUserNotificationEvents(notificationEventUuids);
+			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvents(
+				notificationEventUuids);
 
 			for (String notificationEventUuid : notificationEventUuids) {
 				Map<String, NotificationEvent> unconfirmedNotificationEvents =
@@ -190,6 +197,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void flush() {
 		_reentrantLock.lock();
 
@@ -203,6 +211,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void flush(long timestamp) {
 		_reentrantLock.lock();
 
@@ -226,6 +235,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public List<NotificationEvent> getNotificationEvents(boolean flush)
 		throws ChannelException {
 
@@ -245,6 +255,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void init() throws ChannelException {
 		_reentrantLock.lock();
 
@@ -260,6 +271,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void removeTransientNotificationEvents(
 		Collection<NotificationEvent> notificationEvents) {
 
@@ -275,6 +287,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void removeTransientNotificationEventsByUuid(
 		Collection<String> notificationEventUuids) {
 
@@ -305,6 +318,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		}
 	}
 
+	@Override
 	public void sendNotificationEvent(NotificationEvent notificationEvent)
 		throws ChannelException {
 
@@ -332,6 +346,7 @@ public class ChannelImpl extends BaseChannelImpl {
 		notifyChannelListeners();
 	}
 
+	@Override
 	public void sendNotificationEvents(
 			Collection<NotificationEvent> notificationEvents)
 		throws ChannelException {

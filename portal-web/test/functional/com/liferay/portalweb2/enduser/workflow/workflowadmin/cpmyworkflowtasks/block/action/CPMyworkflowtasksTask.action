@@ -1,0 +1,16 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="BACK">
+			<execute function="AssertClick#assertPartialTextClickAtAndWait" />
+		</case>
+		<case locator-key1="PANEL_OK_BUTTON">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+
+	<command name="assertTextEquals">
+		<case locator-key1="PREVIEW_CONTENT">
+			<execute function="AssertTextEquals#assertPartialText" />
+		</case>
+	</command>
+</definition>

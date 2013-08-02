@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ public class AssetTagStatsLocalServiceImpl
 	 * @return the asset tag statistics instance
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats addTagStats(long tagId, long classNameId)
 		throws SystemException {
 
@@ -77,6 +78,7 @@ public class AssetTagStatsLocalServiceImpl
 	 * @param  tagStats the asset tag statistics instance
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteTagStats(AssetTagStats tagStats) throws SystemException {
 		assetTagStatsPersistence.remove(tagStats);
 	}
@@ -89,6 +91,7 @@ public class AssetTagStatsLocalServiceImpl
 	 *         not be found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteTagStats(long tagStatsId)
 		throws PortalException, SystemException {
 
@@ -105,6 +108,7 @@ public class AssetTagStatsLocalServiceImpl
 	 * @param  classNameId the asset entry's class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteTagStatsByClassNameId(long classNameId)
 		throws SystemException {
 
@@ -122,6 +126,7 @@ public class AssetTagStatsLocalServiceImpl
 	 * @param  tagId the primary key of the tag
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public void deleteTagStatsByTagId(long tagId) throws SystemException {
 		List<AssetTagStats> tagStatsList = assetTagStatsPersistence.findByTagId(
 			tagId);
@@ -152,6 +157,7 @@ public class AssetTagStatsLocalServiceImpl
 	 *         matching the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public List<AssetTagStats> getTagStats(long classNameId, int start, int end)
 		throws SystemException {
 
@@ -169,6 +175,7 @@ public class AssetTagStatsLocalServiceImpl
 	 *         entry  matching the class name ID
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats getTagStats(long tagId, long classNameId)
 		throws SystemException {
 
@@ -193,6 +200,7 @@ public class AssetTagStatsLocalServiceImpl
 	 *         found
 	 * @throws SystemException if a system exception occurred
 	 */
+	@Override
 	public AssetTagStats updateTagStats(long tagId, long classNameId)
 		throws PortalException, SystemException {
 

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,12 +40,10 @@ List<Group> mySites = user.getMySites(true, max);
 		for (Group mySite : mySites) {
 			String escapedSiteName = HtmlUtil.escape(mySite.getName());
 
-			Organization organization = null;
-
 			String publicAddPageHREF = null;
 			String privateAddPageHREF = null;
 
-			if (mySite.isRegularSite() && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.ADD_LAYOUT)) {
+			if (mySite.isSite() && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.ADD_LAYOUT)) {
 				PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.SITE_REDIRECTOR, plid, PortletRequest.ACTION_PHASE);
 
 				addPageURL.setWindowState(WindowState.NORMAL);
@@ -75,8 +73,6 @@ List<Group> mySites = user.getMySites(true, max);
 
 				publicAddPageHREF = publicAddPageURL.toString();
 
-				long privateAddPagePlid = mySite.getDefaultPrivatePlid();
-
 				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
 
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
@@ -90,55 +86,8 @@ List<Group> mySites = user.getMySites(true, max);
 				privateAddPageHREF = privateAddPageURL.toString();
 			}
 
-			boolean showPublicSite = true;
-
-			boolean hasPowerUserRole = RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleConstants.POWER_USER, true);
-
-			Layout defaultPublicLayout = null;
-
-			if (mySite.getDefaultPublicPlid() > 0) {
-				defaultPublicLayout = LayoutLocalServiceUtil.fetchFirstLayout(mySite.getGroupId(), false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-			}
-
-			if (mySite.getPublicLayoutsPageCount() == 0) {
-				if (mySite.isRegularSite()) {
-					showPublicSite = PropsValues.MY_SITES_SHOW_PUBLIC_SITES_WITH_NO_LAYOUTS;
-				}
-				else if (mySite.isUser()) {
-					showPublicSite = PropsValues.MY_SITES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
-
-					if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole) {
-						showPublicSite = false;
-					}
-				}
-			}
-			else if ((defaultPublicLayout != null ) && !LayoutPermissionUtil.contains(permissionChecker, defaultPublicLayout, true, ActionKeys.VIEW)) {
-				showPublicSite = false;
-			}
-
-			boolean showPrivateSite = true;
-
-			Layout defaultPrivateLayout = null;
-
-			if (mySite.getDefaultPrivatePlid() > 0) {
-				defaultPrivateLayout = LayoutLocalServiceUtil.fetchFirstLayout(mySite.getGroupId(), true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
-			}
-
-			if (mySite.getPrivateLayoutsPageCount() == 0) {
-				if (mySite.isRegularSite()) {
-					showPrivateSite = PropsValues.MY_SITES_SHOW_PRIVATE_SITES_WITH_NO_LAYOUTS;
-				}
-				else if (mySite.isUser()) {
-					showPrivateSite = PropsValues.MY_SITES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
-
-					if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED && !hasPowerUserRole) {
-						showPrivateSite = false;
-					}
-				}
-			}
-			else if ((defaultPrivateLayout != null ) && !LayoutPermissionUtil.contains(permissionChecker, defaultPrivateLayout, true, ActionKeys.VIEW)) {
-				showPrivateSite = false;
-			}
+			boolean showPublicSite = mySite.isShowSite(permissionChecker, false);
+			boolean showPrivateSite = mySite.isShowSite(permissionChecker, true);
 		%>
 
 			<c:if test="<%= showPublicSite || showPrivateSite %>">
@@ -215,12 +164,14 @@ List<Group> mySites = user.getMySites(true, max);
 
 									stagingGroupId = stagingGroup.getGroupId();
 
-									if ((mySite.getPublicLayoutsPageCount() == 0) && (stagingGroup.getPublicLayoutsPageCount() > 0) && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
-										showPublicSiteStaging = true;
-									}
+									if (GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
+										if ((mySite.getPublicLayoutsPageCount() == 0) && (stagingGroup.getPublicLayoutsPageCount() > 0)) {
+											showPublicSiteStaging = true;
+										}
 
-									if ((mySite.getPrivateLayoutsPageCount() == 0) && (stagingGroup.getPrivateLayoutsPageCount() > 0) && GroupPermissionUtil.contains(permissionChecker, mySite.getGroupId(), ActionKeys.VIEW_STAGING)) {
-										showPrivateSiteStaging = true;
+										if ((mySite.getPrivateLayoutsPageCount() == 0) && (stagingGroup.getPrivateLayoutsPageCount() > 0)) {
+											showPrivateSiteStaging = true;
+										}
 									}
 								}
 								%>
@@ -252,7 +203,7 @@ List<Group> mySites = user.getMySites(true, max);
 											if (showPublicSiteStaging) {
 												StringBundler sb = new StringBundler(5);
 
-												sb.append(siteName);
+												sb.append(HtmlUtil.escape(siteName));
 												sb.append(StringPool.SPACE);
 												sb.append(StringPool.OPEN_PARENTHESIS);
 												sb.append(LanguageUtil.get(pageContext, "staging"));

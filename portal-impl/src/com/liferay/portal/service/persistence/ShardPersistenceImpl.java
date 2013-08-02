@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -190,15 +190,83 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		}
 	}
 
-	protected void clearUniqueFindersCache(Shard shard) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME,
-			new Object[] { shard.getName() });
+	protected void cacheUniqueFindersCache(Shard shard) {
+		if (shard.isNew()) {
+			Object[] args = new Object[] { shard.getName() };
 
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C,
-			new Object[] {
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME, args, shard);
+
+			args = new Object[] {
+					Long.valueOf(shard.getClassNameId()),
+					Long.valueOf(shard.getClassPK())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args, shard);
+		}
+		else {
+			ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
+
+			if ((shardModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] { shard.getName() };
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_NAME, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME, args, shard);
+			}
+
+			if ((shardModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(shard.getClassNameId()),
+						Long.valueOf(shard.getClassPK())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_C_C, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C, args, shard);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(Shard shard) {
+		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
+
+		Object[] args = new Object[] { shard.getName() };
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
+
+		if ((shardModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
+			args = new Object[] { shardModelImpl.getOriginalName() };
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
+		}
+
+		args = new Object[] {
 				Long.valueOf(shard.getClassNameId()),
 				Long.valueOf(shard.getClassPK())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+
+		if ((shardModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(shardModelImpl.getOriginalClassNameId()),
+					Long.valueOf(shardModelImpl.getOriginalClassPK())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
+		}
 	}
 
 	/**
@@ -299,8 +367,6 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 
 		boolean isNew = shard.isNew();
 
-		ShardModelImpl shardModelImpl = (ShardModelImpl)shard;
-
 		Session session = null;
 
 		try {
@@ -326,47 +392,8 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 		EntityCacheUtil.putResult(ShardModelImpl.ENTITY_CACHE_ENABLED,
 			ShardImpl.class, shard.getPrimaryKey(), shard);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-				new Object[] { shard.getName() }, shard);
-
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-				new Object[] {
-					Long.valueOf(shard.getClassNameId()),
-					Long.valueOf(shard.getClassPK())
-				}, shard);
-		}
-		else {
-			if ((shardModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_NAME.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] { shardModelImpl.getOriginalName() };
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_NAME, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_NAME, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_NAME,
-					new Object[] { shard.getName() }, shard);
-			}
-
-			if ((shardModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_C_C.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(shardModelImpl.getOriginalClassNameId()),
-						Long.valueOf(shardModelImpl.getOriginalClassPK())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_C_C, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_C_C, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_C_C,
-					new Object[] {
-						Long.valueOf(shard.getClassNameId()),
-						Long.valueOf(shard.getClassPK())
-					}, shard);
-			}
-		}
+		clearUniqueFindersCache(shard);
+		cacheUniqueFindersCache(shard);
 
 		return shard;
 	}
@@ -1112,8 +1139,10 @@ public class ShardPersistenceImpl extends BasePersistenceImpl<Shard>
 				List<ModelListener<Shard>> listenersList = new ArrayList<ModelListener<Shard>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<Shard>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

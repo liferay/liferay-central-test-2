@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.expando.model;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
 import java.util.HashMap;
@@ -304,6 +305,10 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 		return new ExpandoColumnWrapper(_expandoColumn.toEscapedModel());
 	}
 
+	public com.liferay.portlet.expando.model.ExpandoColumn toUnescapedModel() {
+		return new ExpandoColumnWrapper(_expandoColumn.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _expandoColumn.toString();
@@ -333,6 +338,25 @@ public class ExpandoColumnWrapper implements ExpandoColumn,
 	public void setTypeSettingsProperties(
 		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties) {
 		_expandoColumn.setTypeSettingsProperties(typeSettingsProperties);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ExpandoColumnWrapper)) {
+			return false;
+		}
+
+		ExpandoColumnWrapper expandoColumnWrapper = (ExpandoColumnWrapper)obj;
+
+		if (Validator.equals(_expandoColumn, expandoColumnWrapper._expandoColumn)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -13,6 +13,8 @@
  */
 
 package com.liferay.portal.model;
+
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -360,6 +362,10 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 		return new ReleaseWrapper(_release.toEscapedModel());
 	}
 
+	public com.liferay.portal.model.Release toUnescapedModel() {
+		return new ReleaseWrapper(_release.toUnescapedModel());
+	}
+
 	@Override
 	public java.lang.String toString() {
 		return _release.toString();
@@ -372,6 +378,25 @@ public class ReleaseWrapper implements Release, ModelWrapper<Release> {
 	public void persist()
 		throws com.liferay.portal.kernel.exception.SystemException {
 		_release.persist();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ReleaseWrapper)) {
+			return false;
+		}
+
+		ReleaseWrapper releaseWrapper = (ReleaseWrapper)obj;
+
+		if (Validator.equals(_release, releaseWrapper._release)) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**

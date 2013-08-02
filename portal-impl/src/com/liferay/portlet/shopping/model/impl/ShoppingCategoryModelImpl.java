@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -412,13 +412,16 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	@Override
 	public ShoppingCategory toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (ShoppingCategory)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (ShoppingCategory)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public ShoppingCategory toUnescapedModel() {
+		return (ShoppingCategory)this;
 	}
 
 	@Override
@@ -470,18 +473,15 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof ShoppingCategory)) {
 			return false;
 		}
 
-		ShoppingCategory shoppingCategory = null;
-
-		try {
-			shoppingCategory = (ShoppingCategory)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		ShoppingCategory shoppingCategory = (ShoppingCategory)obj;
 
 		long primaryKey = shoppingCategory.getPrimaryKey();
 
@@ -655,7 +655,7 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	}
 
 	private static ClassLoader _classLoader = ShoppingCategory.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ShoppingCategory.class
 		};
 	private long _categoryId;
@@ -674,5 +674,5 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl<ShoppingCategory>
 	private String _name;
 	private String _description;
 	private long _columnBitmask;
-	private ShoppingCategory _escapedModelProxy;
+	private ShoppingCategory _escapedModel;
 }

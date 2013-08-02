@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,12 +27,12 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.KMPSearch;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.servlet.filters.dynamiccss.DynamicCSSUtil;
@@ -210,6 +210,26 @@ public class StripFilter extends BasePortalFilter {
 		}
 	}
 
+	protected boolean isStripContentType(String contentType) {
+		for (String stripContentType : PropsValues.STRIP_MIME_TYPES) {
+			if (stripContentType.endsWith(StringPool.STAR)) {
+				stripContentType = stripContentType.substring(
+					0, stripContentType.length() - 1);
+
+				if (contentType.startsWith(stripContentType)) {
+					return true;
+				}
+			}
+			else {
+				if (contentType.equals(stripContentType)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
+
 	protected void outputCloseTag(
 			CharBuffer charBuffer, Writer writer, String closeTag)
 		throws Exception {
@@ -308,7 +328,7 @@ public class StripFilter extends BasePortalFilter {
 			}
 		}
 
-		if (!Validator.isNull(minifiedContent)) {
+		if (Validator.isNotNull(minifiedContent)) {
 			writer.write(minifiedContent);
 		}
 
@@ -343,7 +363,7 @@ public class StripFilter extends BasePortalFilter {
 
 		response.setContentType(contentType);
 
-		if (contentType.startsWith(ContentTypes.TEXT_HTML) &&
+		if (isStripContentType(contentType) &&
 			(stringResponse.getStatus() == HttpServletResponse.SC_OK)) {
 
 			CharBuffer oldCharBuffer = CharBuffer.wrap(
@@ -364,7 +384,7 @@ public class StripFilter extends BasePortalFilter {
 
 				unsyncByteArrayOutputStream.writeTo(response.getOutputStream());
 			}
-			else {
+			else if (!response.isCommitted()) {
 				strip(request, response, oldCharBuffer, response.getWriter());
 			}
 		}
@@ -523,10 +543,8 @@ public class StripFilter extends BasePortalFilter {
 			}
 		}
 
-		if (!Validator.isNull(minifiedContent)) {
-			writer.write(_CDATA_OPEN);
+		if (Validator.isNotNull(minifiedContent)) {
 			writer.write(minifiedContent);
-			writer.write(_CDATA_CLOSE);
 		}
 
 		outputCloseTag(charBuffer, writer, _MARKER_SCRIPT_CLOSE);
@@ -662,10 +680,6 @@ public class StripFilter extends BasePortalFilter {
 		writer.flush();
 	}
 
-	private static final String _CDATA_CLOSE = "/*]]>*/";
-
-	private static final String _CDATA_OPEN = "/*<![CDATA[*/";
-
 	private static final String _ENSURE_CONTENT_LENGTH = "ensureContentLength";
 
 	private static final String _MARKER_INPUT_CLOSE = "/>";
@@ -675,7 +689,7 @@ public class StripFilter extends BasePortalFilter {
 
 	private static final char[] _MARKER_INPUT_OPEN = "input".toCharArray();
 
-	private static final String _MARKER_LANGUAGE = "language=\"";
+	private static final String _MARKER_LANGUAGE = "language=";
 
 	private static final int[] _MARKER_LANGUAGE_NEXTS = KMPSearch.generateNexts(
 		_MARKER_LANGUAGE);

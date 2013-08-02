@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,6 +27,7 @@ import com.liferay.portal.parsers.creole.ast.HorizontalNode;
 import com.liferay.portal.parsers.creole.ast.ImageNode;
 import com.liferay.portal.parsers.creole.ast.ItalicTextNode;
 import com.liferay.portal.parsers.creole.ast.LineNode;
+import com.liferay.portal.parsers.creole.ast.ListNode;
 import com.liferay.portal.parsers.creole.ast.NoWikiSectionNode;
 import com.liferay.portal.parsers.creole.ast.OrderedListItemNode;
 import com.liferay.portal.parsers.creole.ast.OrderedListNode;
@@ -44,6 +45,7 @@ import com.liferay.portal.parsers.creole.ast.table.TableNode;
 import com.liferay.portal.parsers.creole.visitor.ASTVisitor;
 
 import java.util.List;
+import java.util.Stack;
 
 /**
  * @author Miguel Pastor
@@ -58,6 +60,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		return _sb.toString();
 	}
 
+	@Override
 	public void visit(BoldTextNode boldTextNode) {
 		append("<strong>");
 
@@ -68,16 +71,19 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("</strong>");
 	}
 
+	@Override
 	public void visit(CollectionNode collectionNode) {
 		for (ASTNode astNode : collectionNode.getASTNodes()) {
 			astNode.accept(this);
 		}
 	}
 
+	@Override
 	public void visit(ForcedEndOfLineNode forcedEndOfLineNode) {
 		append("<br/>");
 	}
 
+	@Override
 	public void visit(FormattedTextNode formattedTextNode) {
 		if (formattedTextNode.getContent() != null) {
 			append(HtmlUtil.escape(formattedTextNode.getContent()));
@@ -87,6 +93,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		}
 	}
 
+	@Override
 	public void visit(HeadingNode headingNode) {
 		int level = headingNode.getLevel();
 
@@ -101,10 +108,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append(">");
 	}
 
+	@Override
 	public void visit(HorizontalNode horizontalNode) {
 		append("<hr/>");
 	}
 
+	@Override
 	public void visit(ImageNode imageNode) {
 		append("<img src=\"");
 		append(HtmlUtil.escape(imageNode.getLink()));
@@ -123,6 +132,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("/>");
 	}
 
+	@Override
 	public void visit(ItalicTextNode italicTextNode) {
 		append("<em>");
 
@@ -133,10 +143,12 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("</em>");
 	}
 
+	@Override
 	public void visit(LineNode lineNode) {
 		traverse(lineNode.getChildASTNodes(), null, StringPool.SPACE);
 	}
 
+	@Override
 	public void visit(LinkNode linkNode) {
 		append("<a href=\"");
 		append(HtmlUtil.escape(linkNode.getLink()));
@@ -154,42 +166,53 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("</a>");
 	}
 
+	@Override
+	public void visit(ListNode listNode) {
+		traverse(listNode.getChildASTNodes());
+	}
+
+	@Override
 	public void visit(NoWikiSectionNode noWikiSectionNode) {
 		append("<pre>");
 		append(HtmlUtil.escape(noWikiSectionNode.getContent()));
 		append("</pre>");
 	}
 
+	@Override
 	public void visit(OrderedListItemNode orderedListItemNode) {
-		appendLevelTags(orderedListItemNode.getLevel(), true);
-
 		traverse(orderedListItemNode.getChildASTNodes(), "<li>", "</li>");
 	}
 
+	@Override
 	public void visit(OrderedListNode orderedListNode) {
-		_currentNodeLevel = 0;
+		append("<ol>");
 
 		traverse(orderedListNode.getChildASTNodes());
 
-		appendLevelTags(0, true);
+		append("</ol>");
 	}
 
+	@Override
 	public void visit(ParagraphNode paragraphNode) {
 		traverse(paragraphNode.getChildASTNodes(), "<p>", "</p>");
 	}
 
+	@Override
 	public void visit(ScapedNode scapedNode) {
 		append(HtmlUtil.escape(scapedNode.getContent()));
 	}
 
+	@Override
 	public void visit(TableDataNode tableDataNode) {
 		traverse(tableDataNode.getChildASTNodes(), "<td>", "</td>");
 	}
 
+	@Override
 	public void visit(TableHeaderNode tableHeaderNode) {
 		traverse(tableHeaderNode.getChildASTNodes(), "<th>", "</th>");
 	}
 
+	@Override
 	public void visit(TableNode tableNode) {
 		append("<table>");
 
@@ -198,9 +221,11 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("</table>");
 	}
 
+	@Override
 	public void visit(TableOfContentsNode tableOfContentsNode) {
 	}
 
+	@Override
 	public void visit(UnformattedTextNode unformattedTextNode) {
 		if (unformattedTextNode.hasContent()) {
 			append(HtmlUtil.escape(unformattedTextNode.getContent()));
@@ -210,20 +235,21 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		}
 	}
 
+	@Override
 	public void visit(UnorderedListItemNode unorderedListItemNode) {
-		appendLevelTags(unorderedListItemNode.getLevel(), false);
-
 		traverse(unorderedListItemNode.getChildASTNodes(), "<li>", "</li>");
 	}
 
+	@Override
 	public void visit(UnorderedListNode unorderedListNode) {
-		_currentNodeLevel = 0;
+		append("<ul>");
 
 		traverse(unorderedListNode.getChildASTNodes());
 
-		appendLevelTags(0, false);
+		append("</ul>");
 	}
 
+	@Override
 	public void visit(WikiPageNode wikiPageNode) {
 		traverse(wikiPageNode.getChildASTNodes());
 	}
@@ -235,7 +261,7 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 	}
 
 	protected void appendLevelTags(int nodeLevel, boolean ordered) {
-		int diff = nodeLevel - _currentNodeLevel;
+		int diff = nodeLevel - _currentNodeLevel.pop();
 
 		if (diff > 0) {
 			for (int i = 0; i < diff; i++) {
@@ -258,13 +284,15 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 			}
 		}
 
-		_currentNodeLevel = nodeLevel;
+		_currentNodeLevel.push(nodeLevel);
 	}
 
 	protected void traverse(List<ASTNode> astNodes) {
 		if (astNodes != null) {
 			for (ASTNode astNode : astNodes) {
-				astNode.accept(this);
+				if (astNode != null) {
+					astNode.accept(this);
+				}
 			}
 		}
 	}
@@ -283,13 +311,15 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		for (ASTNode curNode : astNodes) {
 			append(open);
 
-			curNode.accept(this);
+			if (curNode != null) {
+				curNode.accept(this);
+			}
 
 			append(close);
 		}
 	}
 
-	private int _currentNodeLevel;
+	private Stack<Integer> _currentNodeLevel = new Stack<Integer>();
 	private StringBundler _sb = new StringBundler();
 
 }

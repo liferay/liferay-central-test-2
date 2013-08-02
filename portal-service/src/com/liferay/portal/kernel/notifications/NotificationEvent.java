@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -36,8 +36,8 @@ public class NotificationEvent implements Serializable {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
+		if (this == obj) {
+			return true;
 		}
 
 		if (!(obj instanceof NotificationEvent)) {
@@ -46,7 +46,7 @@ public class NotificationEvent implements Serializable {
 
 		NotificationEvent notificationEvent = (NotificationEvent)obj;
 
-		if (Validator.equals(_uuid, notificationEvent._uuid)) {
+		if (Validator.equals(getUuid(), notificationEvent.getUuid())) {
 			return true;
 		}
 
@@ -79,12 +79,9 @@ public class NotificationEvent implements Serializable {
 
 	@Override
 	public int hashCode() {
-		if (_uuid != null) {
-			return _uuid.hashCode();
-		}
-		else {
-			return 0;
-		}
+		String uuid = getUuid();
+
+		return uuid.hashCode();
 	}
 
 	public boolean isArchived() {

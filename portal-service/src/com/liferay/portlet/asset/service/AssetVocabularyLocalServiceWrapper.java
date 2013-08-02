@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -282,6 +282,13 @@ public class AssetVocabularyLocalServiceWrapper
 		_assetVocabularyLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	public com.liferay.portlet.asset.model.AssetVocabulary addDefaultVocabulary(
+		long groupId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyLocalService.addDefaultVocabulary(groupId);
+	}
+
 	/**
 	* @deprecated
 	*/
@@ -307,6 +314,15 @@ public class AssetVocabularyLocalServiceWrapper
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetVocabularyLocalService.addVocabulary(userId, title,
 			titleMap, descriptionMap, settings, serviceContext);
+	}
+
+	public com.liferay.portlet.asset.model.AssetVocabulary addVocabulary(
+		long userId, java.lang.String title,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _assetVocabularyLocalService.addVocabulary(userId, title,
+			serviceContext);
 	}
 
 	public void addVocabularyResources(
@@ -375,11 +391,11 @@ public class AssetVocabularyLocalServiceWrapper
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(
-		long groupId, boolean createDefaultVocabulary)
+		long groupId, boolean addDefaultVocabulary)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _assetVocabularyLocalService.getGroupVocabularies(groupId,
-			createDefaultVocabulary);
+			addDefaultVocabulary);
 	}
 
 	public java.util.List<com.liferay.portlet.asset.model.AssetVocabulary> getGroupVocabularies(

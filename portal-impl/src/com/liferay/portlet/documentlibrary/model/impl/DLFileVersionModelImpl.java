@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -111,10 +111,11 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	public static long FILEENTRYID_COLUMN_BITMASK = 1L;
 	public static long FOLDERID_COLUMN_BITMASK = 2L;
 	public static long GROUPID_COLUMN_BITMASK = 4L;
-	public static long STATUS_COLUMN_BITMASK = 8L;
-	public static long TITLE_COLUMN_BITMASK = 16L;
-	public static long UUID_COLUMN_BITMASK = 32L;
-	public static long VERSION_COLUMN_BITMASK = 64L;
+	public static long MIMETYPE_COLUMN_BITMASK = 8L;
+	public static long STATUS_COLUMN_BITMASK = 16L;
+	public static long TITLE_COLUMN_BITMASK = 32L;
+	public static long UUID_COLUMN_BITMASK = 64L;
+	public static long VERSION_COLUMN_BITMASK = 128L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -574,7 +575,17 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	public void setMimeType(String mimeType) {
+		_columnBitmask |= MIMETYPE_COLUMN_BITMASK;
+
+		if (_originalMimeType == null) {
+			_originalMimeType = _mimeType;
+		}
+
 		_mimeType = mimeType;
+	}
+
+	public String getOriginalMimeType() {
+		return GetterUtil.getString(_originalMimeType);
 	}
 
 	@JSON
@@ -846,13 +857,16 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	@Override
 	public DLFileVersion toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (DLFileVersion)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (DLFileVersion)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public DLFileVersion toUnescapedModel() {
+		return (DLFileVersion)this;
 	}
 
 	@Override
@@ -922,18 +936,15 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof DLFileVersion)) {
 			return false;
 		}
 
-		DLFileVersion dlFileVersion = null;
-
-		try {
-			dlFileVersion = (DLFileVersion)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		DLFileVersion dlFileVersion = (DLFileVersion)obj;
 
 		long primaryKey = dlFileVersion.getPrimaryKey();
 
@@ -967,6 +978,8 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 		dlFileVersionModelImpl._originalFileEntryId = dlFileVersionModelImpl._fileEntryId;
 
 		dlFileVersionModelImpl._setOriginalFileEntryId = false;
+
+		dlFileVersionModelImpl._originalMimeType = dlFileVersionModelImpl._mimeType;
 
 		dlFileVersionModelImpl._originalTitle = dlFileVersionModelImpl._title;
 
@@ -1282,7 +1295,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	}
 
 	private static ClassLoader _classLoader = DLFileVersion.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			DLFileVersion.class
 		};
 	private String _uuid;
@@ -1306,6 +1319,7 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private boolean _setOriginalFileEntryId;
 	private String _extension;
 	private String _mimeType;
+	private String _originalMimeType;
 	private String _title;
 	private String _originalTitle;
 	private String _description;
@@ -1323,5 +1337,5 @@ public class DLFileVersionModelImpl extends BaseModelImpl<DLFileVersion>
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;
-	private DLFileVersion _escapedModelProxy;
+	private DLFileVersion _escapedModel;
 }

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -37,6 +38,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.comparator.GroupFriendlyURLComparator;
+import com.liferay.portlet.documentlibrary.util.DLUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -313,6 +315,31 @@ public class WebDAVUtil {
 
 	public static boolean isOverwrite(HttpServletRequest request) {
 		return getInstance()._isOverwrite(request);
+	}
+
+	public static String stripOfficeExtension(String url) {
+		String strippedUrl = stripToken(url, DLUtil.OFFICE_EXTENSION_PATH);
+
+		if (strippedUrl.length() != url.length()) {
+			strippedUrl = FileUtil.stripExtension(strippedUrl);
+		}
+
+		return strippedUrl;
+	}
+
+	public static String stripToken(String url, String token) {
+		if (Validator.isNull(url)) {
+			return StringPool.BLANK;
+		}
+
+		int index = url.indexOf(token);
+
+		if (index >= 0) {
+			url =
+				url.substring(0, index) + url.substring(index + token.length());
+		}
+
+		return url;
 	}
 
 	private WebDAVUtil() {

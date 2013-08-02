@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,10 +17,13 @@ package com.liferay.portal.jsonwebservice;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.servlet.HttpMethods;
 import com.liferay.portal.kernel.util.CamelCaseUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.lang.reflect.Method;
+
+import java.util.Set;
 
 /**
  * @author Igor Spasic
@@ -113,17 +116,14 @@ public class JSONWebServiceMappingResolver {
 	}
 
 	private String _prefixToHttpMethod(String prefix) {
-		for (String postPrefix : _GET_PREFIXES) {
-			if (prefix.equals(postPrefix)) {
-				return HttpMethods.GET;
-			}
+		if (_prefixes.contains(prefix)) {
+			return HttpMethods.GET;
 		}
 
 		return HttpMethods.POST;
 	}
 
-	private static final String[] _GET_PREFIXES = new String[] {
-		"get", "has", "is",
-	};
+	private static Set<String> _prefixes = SetUtil.fromArray(
+		new String[] {"get", "has", "is"});
 
 }

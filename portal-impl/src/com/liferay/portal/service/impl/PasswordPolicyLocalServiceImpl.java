@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,7 @@ import java.util.List;
 public class PasswordPolicyLocalServiceImpl
 	extends PasswordPolicyLocalServiceBaseImpl {
 
+	@Override
 	public PasswordPolicy addPasswordPolicy(
 			long userId, boolean defaultPolicy, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,
@@ -110,6 +111,7 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicy;
 	}
 
+	@Override
 	public void checkDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
@@ -166,6 +168,7 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicyPersistence.remove(passwordPolicy);
 	}
 
+	@Override
 	public PasswordPolicy getDefaultPasswordPolicy(long companyId)
 		throws PortalException, SystemException {
 
@@ -179,6 +182,7 @@ public class PasswordPolicyLocalServiceImpl
 	/**
 	 * @deprecated
 	 */
+	@Override
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long organizationId, long locationId)
 		throws PortalException, SystemException {
@@ -187,6 +191,7 @@ public class PasswordPolicyLocalServiceImpl
 			companyId, new long[] {organizationId, locationId});
 	}
 
+	@Override
 	public PasswordPolicy getPasswordPolicy(
 			long companyId, long[] organizationIds)
 		throws PortalException, SystemException {
@@ -219,6 +224,7 @@ public class PasswordPolicyLocalServiceImpl
 		return getDefaultPasswordPolicy(companyId);
 	}
 
+	@Override
 	@ThreadLocalCachable
 	public PasswordPolicy getPasswordPolicyByUserId(long userId)
 		throws PortalException, SystemException {
@@ -259,6 +265,7 @@ public class PasswordPolicyLocalServiceImpl
 		}
 	}
 
+	@Override
 	public List<PasswordPolicy> search(
 			long companyId, String name, int start, int end,
 			OrderByComparator obc)
@@ -267,10 +274,12 @@ public class PasswordPolicyLocalServiceImpl
 		return passwordPolicyFinder.findByC_N(companyId, name, start, end, obc);
 	}
 
+	@Override
 	public int searchCount(long companyId, String name) throws SystemException {
 		return passwordPolicyFinder.countByC_N(companyId, name);
 	}
 
+	@Override
 	public PasswordPolicy updatePasswordPolicy(
 			long passwordPolicyId, String name, String description,
 			boolean changeable, boolean changeRequired, long minAge,

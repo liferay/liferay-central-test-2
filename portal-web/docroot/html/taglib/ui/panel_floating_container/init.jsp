@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -19,7 +19,6 @@
 <%
 boolean accordion = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:accordion"));
 String cssClass = (String)request.getAttribute("liferay-ui:panel-floating-container:cssClass");
-Boolean extended = (Boolean)request.getAttribute("liferay-ui:panel-floating-container:extended");
 String id = (String)request.getAttribute("liferay-ui:panel-floating-container:id");
 boolean paging = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:panel-floating-container:paging"));
 String pagingElements = (String)request.getAttribute("liferay-ui:panel-floating-container:pagingElements");

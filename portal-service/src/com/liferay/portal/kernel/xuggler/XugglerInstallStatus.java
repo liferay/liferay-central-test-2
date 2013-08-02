@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -27,10 +27,12 @@ public class XugglerInstallStatus implements InstallStatus {
 
 	public static final int DOWNLOADING = 0;
 
+	@Override
 	public int getStatus() {
 		return _status;
 	}
 
+	@Override
 	public String getStatusLabel() {
 		int status = getStatus();
 
@@ -47,6 +49,7 @@ public class XugglerInstallStatus implements InstallStatus {
 		return "unknown";
 	}
 
+	@Override
 	public void setStatus(int status) {
 		_status = status;
 	}

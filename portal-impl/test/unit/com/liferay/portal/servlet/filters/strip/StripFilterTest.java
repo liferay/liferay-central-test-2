@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,8 +24,7 @@ import java.io.StringWriter;
 
 import java.nio.CharBuffer;
 
-import junit.framework.Assert;
-
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -221,8 +220,7 @@ public class StripFilterTest extends PowerMockito {
 			charBuffer, stringWriter, "script".toCharArray());
 
 		Assert.assertEquals(
-			"script>/*<![CDATA[*/" + minifiedCode + "/*]]>*/</script>",
-			stringWriter.toString());
+			"script>" + minifiedCode + "</script>", stringWriter.toString());
 		Assert.assertEquals(code.length() + 16, charBuffer.position());
 
 		// Minifier code with trailing spaces
@@ -234,8 +232,7 @@ public class StripFilterTest extends PowerMockito {
 			charBuffer, stringWriter, "script".toCharArray());
 
 		Assert.assertEquals(
-			"script>/*<![CDATA[*/" + minifiedCode + "/*]]>*/</script> ",
-			stringWriter.toString());
+			"script>" + minifiedCode + "</script> ", stringWriter.toString());
 		Assert.assertEquals(code.length() + 20, charBuffer.position());
 
 		verifyStatic(Mockito.times(5));

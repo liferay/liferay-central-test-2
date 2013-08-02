@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -55,6 +55,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 
+	@Override
 	public long addRepository(
 			long userId, long groupId, long classNameId, long parentFolderId,
 			String name, String description, String portletId,
@@ -104,6 +105,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repositoryId;
 	}
 
+	@Override
 	public void checkRepository(long repositoryId) throws SystemException {
 		Group group = groupPersistence.fetchByPrimaryKey(repositoryId);
 
@@ -119,6 +121,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		}
 	}
 
+	@Override
 	public void deleteRepositories(long groupId)
 		throws PortalException, SystemException {
 
@@ -157,6 +160,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repository;
 	}
 
+	@Override
 	public LocalRepository getLocalRepositoryImpl(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -175,7 +179,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 				dlAppHelperLocalService, dlFileEntryLocalService,
 				dlFileEntryService, dlFileVersionLocalService,
 				dlFileVersionService, dlFolderLocalService, dlFolderService,
-				repositoryId);
+				resourceLocalService, repositoryId);
 		}
 		else {
 			BaseRepository baseRepository = createRepositoryImpl(
@@ -191,6 +195,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return localRepositoryImpl;
 	}
 
+	@Override
 	public LocalRepository getLocalRepositoryImpl(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws PortalException, SystemException {
@@ -209,8 +214,8 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			repositoryLocalService, repositoryService, dlAppHelperLocalService,
 			dlFileEntryLocalService, dlFileEntryService,
 			dlFileVersionLocalService, dlFileVersionService,
-			dlFolderLocalService, dlFolderService, folderId, fileEntryId,
-			fileVersionId);
+			dlFolderLocalService, dlFolderService, resourceLocalService,
+			folderId, fileEntryId, fileVersionId);
 
 		if (localRepositoryImpl.getRepositoryId() == 0) {
 			localRepositoryImpl = null;
@@ -232,6 +237,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return localRepositoryImpl;
 	}
 
+	@Override
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long repositoryId)
 		throws PortalException, SystemException {
@@ -253,7 +259,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 				dlAppHelperLocalService, dlFileEntryLocalService,
 				dlFileEntryService, dlFileVersionLocalService,
 				dlFileVersionService, dlFolderLocalService, dlFolderService,
-				repositoryId);
+				resourceLocalService, repositoryId);
 		}
 		else {
 			repositoryImpl = createRepositoryImpl(repositoryId, classNameId);
@@ -266,6 +272,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repositoryImpl;
 	}
 
+	@Override
 	public com.liferay.portal.kernel.repository.Repository getRepositoryImpl(
 			long folderId, long fileEntryId, long fileVersionId)
 		throws PortalException, SystemException {
@@ -284,8 +291,8 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			repositoryLocalService, repositoryService, dlAppHelperLocalService,
 			dlFileEntryLocalService, dlFileEntryService,
 			dlFileVersionLocalService, dlFileVersionService,
-			dlFolderLocalService, dlFolderService, folderId, fileEntryId,
-			fileVersionId);
+			dlFolderLocalService, dlFolderService, resourceLocalService,
+			folderId, fileEntryId, fileVersionId);
 
 		if (repositoryImpl.getRepositoryId() == 0) {
 			repositoryImpl = null;
@@ -303,6 +310,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repositoryImpl;
 	}
 
+	@Override
 	public UnicodeProperties getTypeSettingsProperties(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -312,6 +320,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		return repository.getTypeSettingsProperties();
 	}
 
+	@Override
 	public void updateRepository(
 			long repositoryId, String name, String description)
 		throws PortalException, SystemException {
@@ -379,7 +388,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 		}
 		else if (baseRepository instanceof BaseRepositoryProxyBean) {
 			BaseRepositoryProxyBean baseRepositoryProxyBean =
-				(BaseRepositoryProxyBean) baseRepository;
+				(BaseRepositoryProxyBean)baseRepository;
 
 			ClassLoaderBeanHandler classLoaderBeanHandler =
 				(ClassLoaderBeanHandler)ProxyUtil.getInvocationHandler(

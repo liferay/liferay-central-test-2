@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -119,15 +119,17 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			true);
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long CONTACTID_COLUMN_BITMASK = 2L;
-	public static long DEFAULTUSER_COLUMN_BITMASK = 4L;
-	public static long EMAILADDRESS_COLUMN_BITMASK = 8L;
-	public static long FACEBOOKID_COLUMN_BITMASK = 16L;
-	public static long OPENID_COLUMN_BITMASK = 32L;
-	public static long PORTRAITID_COLUMN_BITMASK = 64L;
-	public static long SCREENNAME_COLUMN_BITMASK = 128L;
-	public static long STATUS_COLUMN_BITMASK = 256L;
-	public static long USERID_COLUMN_BITMASK = 512L;
-	public static long UUID_COLUMN_BITMASK = 1024L;
+	public static long CREATEDATE_COLUMN_BITMASK = 4L;
+	public static long DEFAULTUSER_COLUMN_BITMASK = 8L;
+	public static long EMAILADDRESS_COLUMN_BITMASK = 16L;
+	public static long FACEBOOKID_COLUMN_BITMASK = 32L;
+	public static long MODIFIEDDATE_COLUMN_BITMASK = 64L;
+	public static long OPENID_COLUMN_BITMASK = 128L;
+	public static long PORTRAITID_COLUMN_BITMASK = 256L;
+	public static long SCREENNAME_COLUMN_BITMASK = 512L;
+	public static long STATUS_COLUMN_BITMASK = 1024L;
+	public static long USERID_COLUMN_BITMASK = 2048L;
+	public static long UUID_COLUMN_BITMASK = 4096L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -210,7 +212,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userId", Types.BIGINT },
 			{ "groupId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (userId LONG not null,groupId LONG not null,primary key (userId, groupId))";
+	public static final String MAPPING_TABLE_USERS_GROUPS_SQL_CREATE = "create table Users_Groups (groupId LONG not null,userId LONG not null,primary key (groupId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
 	public static final String MAPPING_TABLE_USERS_ORGS_NAME = "Users_Orgs";
@@ -218,7 +220,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userId", Types.BIGINT },
 			{ "organizationId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (userId LONG not null,organizationId LONG not null,primary key (userId, organizationId))";
+	public static final String MAPPING_TABLE_USERS_ORGS_SQL_CREATE = "create table Users_Orgs (organizationId LONG not null,userId LONG not null,primary key (organizationId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Orgs"), true);
 	public static final String MAPPING_TABLE_USERS_PERMISSIONS_NAME = "Users_Permissions";
@@ -226,7 +228,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userId", Types.BIGINT },
 			{ "permissionId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (userId LONG not null,permissionId LONG not null,primary key (userId, permissionId))";
+	public static final String MAPPING_TABLE_USERS_PERMISSIONS_SQL_CREATE = "create table Users_Permissions (permissionId LONG not null,userId LONG not null,primary key (permissionId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Permissions"), true);
 	public static final String MAPPING_TABLE_USERS_ROLES_NAME = "Users_Roles";
@@ -234,7 +236,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userId", Types.BIGINT },
 			{ "roleId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (userId LONG not null,roleId LONG not null,primary key (userId, roleId))";
+	public static final String MAPPING_TABLE_USERS_ROLES_SQL_CREATE = "create table Users_Roles (roleId LONG not null,userId LONG not null,primary key (roleId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Roles"), true);
 	public static final String MAPPING_TABLE_USERS_TEAMS_NAME = "Users_Teams";
@@ -242,7 +244,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userId", Types.BIGINT },
 			{ "teamId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (userId LONG not null,teamId LONG not null,primary key (userId, teamId))";
+	public static final String MAPPING_TABLE_USERS_TEAMS_SQL_CREATE = "create table Users_Teams (teamId LONG not null,userId LONG not null,primary key (teamId, userId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_TEAMS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Teams"), true);
 	public static final String MAPPING_TABLE_USERS_USERGROUPS_NAME = "Users_UserGroups";
@@ -250,7 +252,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 			{ "userGroupId", Types.BIGINT },
 			{ "userId", Types.BIGINT }
 		};
-	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userGroupId LONG not null,userId LONG not null,primary key (userGroupId, userId))";
+	public static final String MAPPING_TABLE_USERS_USERGROUPS_SQL_CREATE = "create table Users_UserGroups (userId LONG not null,userGroupId LONG not null,primary key (userId, userGroupId))";
 	public static final boolean FINDER_CACHE_ENABLED_USERS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_UserGroups"), true);
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
@@ -650,7 +652,17 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setCreateDate(Date createDate) {
+		_columnBitmask |= CREATEDATE_COLUMN_BITMASK;
+
+		if (_originalCreateDate == null) {
+			_originalCreateDate = _createDate;
+		}
+
 		_createDate = createDate;
+	}
+
+	public Date getOriginalCreateDate() {
+		return _originalCreateDate;
 	}
 
 	@JSON
@@ -659,7 +671,17 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	public void setModifiedDate(Date modifiedDate) {
+		_columnBitmask |= MODIFIEDDATE_COLUMN_BITMASK;
+
+		if (_originalModifiedDate == null) {
+			_originalModifiedDate = _modifiedDate;
+		}
+
 		_modifiedDate = modifiedDate;
+	}
+
+	public Date getOriginalModifiedDate() {
+		return _originalModifiedDate;
 	}
 
 	@JSON
@@ -1186,13 +1208,16 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	@Override
 	public User toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (User)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (User)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public User toUnescapedModel() {
+		return (User)this;
 	}
 
 	@Override
@@ -1260,18 +1285,15 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof User)) {
 			return false;
 		}
 
-		User user = null;
-
-		try {
-			user = (User)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		User user = (User)obj;
 
 		long primaryKey = user.getPrimaryKey();
 
@@ -1301,6 +1323,10 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 		userModelImpl._originalCompanyId = userModelImpl._companyId;
 
 		userModelImpl._setOriginalCompanyId = false;
+
+		userModelImpl._originalCreateDate = userModelImpl._createDate;
+
+		userModelImpl._originalModifiedDate = userModelImpl._modifiedDate;
 
 		userModelImpl._originalDefaultUser = userModelImpl._defaultUser;
 
@@ -1832,9 +1858,7 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	}
 
 	private static ClassLoader _classLoader = User.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
-			User.class
-		};
+	private static Class<?>[] _escapedModelInterfaces = new Class[] { User.class };
 	private String _uuid;
 	private String _originalUuid;
 	private long _userId;
@@ -1845,7 +1869,9 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private Date _createDate;
+	private Date _originalCreateDate;
 	private Date _modifiedDate;
+	private Date _originalModifiedDate;
 	private boolean _defaultUser;
 	private boolean _originalDefaultUser;
 	private boolean _setOriginalDefaultUser;
@@ -1894,5 +1920,5 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private long _columnBitmask;
-	private User _escapedModelProxy;
+	private User _escapedModel;
 }

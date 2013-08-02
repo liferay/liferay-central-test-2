@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,8 @@ LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLay
 long groupId = selLayoutSet.getGroupId();
 String className = LayoutSet.class.getName();
 long classPK = selLayoutSet.getLayoutSetId();
+
+String redirect = null;
 %>
 
 <%@ include file="/html/portlet/layouts_admin/layout/mobile_rule_groups_header.jspf" %>

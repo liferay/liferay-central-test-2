@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -21,9 +21,11 @@ import com.liferay.portal.kernel.cluster.messaging.ClusterForwardMessageListener
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.PropsValues;
+
+import java.net.InetAddress;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -36,13 +38,14 @@ import org.jgroups.JChannel;
 /**
  * @author Shuyang Zhou
  */
+@DoPrivileged
 public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 
 	public static final int MAX_CHANNEL_COUNT = Priority.values().length;
 
 	@Override
 	public void destroy() {
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return;
 		}
 
@@ -51,8 +54,14 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		}
 	}
 
+	@Override
+	public InetAddress getBindInetAddress() {
+		return bindInetAddress;
+	}
+
+	@Override
 	public List<Address> getLocalTransportAddresses() {
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return Collections.emptyList();
 		}
 
@@ -66,8 +75,9 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		return addresses;
 	}
 
+	@Override
 	public List<Address> getTransportAddresses(Priority priority) {
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return Collections.emptyList();
 		}
 
@@ -76,8 +86,9 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		return getAddresses(jChannel);
 	}
 
+	@Override
 	public void sendMulticastMessage(Message message, Priority priority) {
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return;
 		}
 
@@ -91,10 +102,11 @@ public class ClusterLinkImpl extends ClusterBase implements ClusterLink {
 		}
 	}
 
+	@Override
 	public void sendUnicastMessage(
 		Address address, Message message, Priority priority) {
 
-		if (!PropsValues.CLUSTER_LINK_ENABLED) {
+		if (!isEnabled()) {
 			return;
 		}
 

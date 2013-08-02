@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.util.FileImpl;
 
@@ -52,12 +53,14 @@ import net.jmge.gif.Gif89Encoder;
 /**
  * @author Brian Wing Shun Chan
  */
+@DoPrivileged
 public class ImageToolImpl implements ImageTool {
 
 	public static ImageTool getInstance() {
 		return _instance;
 	}
 
+	@Override
 	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
 		BufferedImage targetImage = new BufferedImage(
 			sourceImage.getWidth(), sourceImage.getHeight(), type);
@@ -71,6 +74,7 @@ public class ImageToolImpl implements ImageTool {
 		return targetImage;
 	}
 
+	@Override
 	public void encodeGIF(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
@@ -91,6 +95,7 @@ public class ImageToolImpl implements ImageTool {
 		}
 	}
 
+	@Override
 	public void encodeWBMP(RenderedImage renderedImage, OutputStream os)
 		throws IOException {
 
@@ -135,6 +140,7 @@ public class ImageToolImpl implements ImageTool {
 		}
 	}
 
+	@Override
 	public BufferedImage getBufferedImage(RenderedImage renderedImage) {
 		if (renderedImage instanceof BufferedImage) {
 			return (BufferedImage)renderedImage;
@@ -147,6 +153,7 @@ public class ImageToolImpl implements ImageTool {
 		}
 	}
 
+	@Override
 	public byte[] getBytes(RenderedImage renderedImage, String contentType)
 		throws IOException {
 
@@ -157,6 +164,7 @@ public class ImageToolImpl implements ImageTool {
 		return baos.toByteArray();
 	}
 
+	@Override
 	public ImageBag read(byte[] bytes) {
 		RenderedImage renderedImage = null;
 		String type = TYPE_NOT_AVAILABLE;
@@ -192,10 +200,12 @@ public class ImageToolImpl implements ImageTool {
 		return new ImageBag(renderedImage, type);
 	}
 
+	@Override
 	public ImageBag read(File file) throws IOException {
 		return read(_fileUtil.getBytes(file));
 	}
 
+	@Override
 	public RenderedImage scale(RenderedImage renderedImage, int width) {
 		if (width <= 0) {
 			return renderedImage;
@@ -204,7 +214,7 @@ public class ImageToolImpl implements ImageTool {
 		int imageHeight = renderedImage.getHeight();
 		int imageWidth = renderedImage.getWidth();
 
-		double factor = (double) width / imageWidth;
+		double factor = (double)width / imageWidth;
 
 		int scaledHeight = (int)(factor * imageHeight);
 		int scaledWidth = width;
@@ -230,6 +240,7 @@ public class ImageToolImpl implements ImageTool {
 		return scaledBufferedImage;
 	}
 
+	@Override
 	public RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth) {
 
@@ -313,6 +324,7 @@ public class ImageToolImpl implements ImageTool {
 		return scaledBufferedImage;
 	}
 
+	@Override
 	public void write(
 			RenderedImage renderedImage, String contentType, OutputStream os)
 		throws IOException {

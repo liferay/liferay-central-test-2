@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -403,25 +403,27 @@ public class LiveUsers {
 
 		List<UserTracker> userTrackers = _getUserTrackers(companyId, userId);
 
-		if (userTrackers != null) {
-			String sessionId = userTracker.getSessionId();
+		if (userTrackers == null) {
+			return;
+		}
 
-			Iterator<UserTracker> itr = userTrackers.iterator();
+		String sessionId = userTracker.getSessionId();
 
-			while (itr.hasNext()) {
-				UserTracker curUserTracker = itr.next();
+		Iterator<UserTracker> itr = userTrackers.iterator();
 
-				if (sessionId.equals(curUserTracker.getSessionId())) {
-					itr.remove();
-				}
+		while (itr.hasNext()) {
+			UserTracker curUserTracker = itr.next();
+
+			if (sessionId.equals(curUserTracker.getSessionId())) {
+				itr.remove();
 			}
+		}
 
-			if (userTrackers.size() == 0) {
-				Map<Long, List<UserTracker>> userTrackersMap =
-					_getUserTrackersMap(companyId);
+		if (userTrackers.size() == 0) {
+			Map<Long, List<UserTracker>> userTrackersMap = _getUserTrackersMap(
+				companyId);
 
-				userTrackersMap.remove(userId);
-			}
+			userTrackersMap.remove(userId);
 		}
 	}
 

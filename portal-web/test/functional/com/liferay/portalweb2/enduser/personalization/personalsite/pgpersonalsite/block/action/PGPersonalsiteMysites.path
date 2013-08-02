@@ -1,0 +1,97 @@
+<html>
+<head>
+<title>PGPersonalsiteMysites</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">PGPersonalsiteMysites</td></tr>
+</thead>
+<tbody>
+<tr>
+	<td>PAGE_NAME</td>
+	<td></td>
+	<td>PGPersonalsiteMysites</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--MY_SITES-->
+<tr>
+	<td>MY_SITES_SUCCESS_MESSAGE</td>
+	<td>//div[@class='portlet-msg-success']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_MY_SITES</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'My Sites')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_AVAILABLE_SITES</td>
+	<td>//ul[@class='aui-tabview-list']/li/span/a[contains(.,'Available Sites')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_SEARCH_FIELD</td>
+	<td>//input[@id='_29_name']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_SEARCH_BUTTON</td>
+	<td>//section[@id='portlet_29']//input[@value='Search']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_INFO_MESSAGE</td>
+	<td>//section[@id='portlet_29']//div[@class='portlet-msg-info']</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--MY_SITES_TABLE-->
+<tr>
+	<td>MY_SITES_TABLE_NAME</td>
+	<td>//section[@id='portlet_29']//tr[3]/td[1]/a/strong</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_TABLE_MEMBERS</td>
+	<td>//section[@id='portlet_29']//tr[3]/td[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_TABLE_TAGS</td>
+	<td>//section[@id='portlet_29']//tr[3]/td[3]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_TABLE_ACTIONS</td>
+	<td>//section[@id='portlet_29']//span[@title='Actions']/ul/li/strong/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
+<!--MY_SITES_MENULIST-->
+<tr>
+	<td>MY_SITES_MENULIST_GO_TO_PUBLIC_PAGES</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Go to Public Pages')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>MY_SITES_MENULIST_LEAVE</td>
+	<td>//div[@class='lfr-component lfr-menu-list']/ul/li/a[contains(.,'Leave')]</td>
+	<td></td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>

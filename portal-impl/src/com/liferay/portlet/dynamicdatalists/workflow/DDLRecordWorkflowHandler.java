@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,10 +41,12 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 
 	public static final String CLASS_NAME = DDLRecord.class.getName();
 
+	@Override
 	public String getClassName() {
 		return CLASS_NAME;
 	}
 
+	@Override
 	public String getType(Locale locale) {
 		return ResourceActionsUtil.getModelResource(locale, CLASS_NAME);
 	}
@@ -59,9 +61,10 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 
 		DDLRecord record = recordVersion.getRecord();
 
-		return WorkflowDefinitionLinkLocalServiceUtil.getWorkflowDefinitionLink(
-			companyId, groupId, DDLRecordSet.class.getName(),
-			record.getRecordSetId(), 0);
+		return WorkflowDefinitionLinkLocalServiceUtil.
+			fetchWorkflowDefinitionLink(
+				companyId, groupId, DDLRecordSet.class.getName(),
+				record.getRecordSetId(), 0);
 	}
 
 	@Override
@@ -69,6 +72,7 @@ public class DDLRecordWorkflowHandler extends BaseWorkflowHandler {
 		return false;
 	}
 
+	@Override
 	public DDLRecord updateStatus(
 			int status, Map<String, Serializable> workflowContext)
 		throws PortalException, SystemException {

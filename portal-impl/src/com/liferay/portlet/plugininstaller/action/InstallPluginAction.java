@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -41,6 +41,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.lang.DoPrivilegedBean;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -84,8 +85,9 @@ public class InstallPluginAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
@@ -205,7 +207,7 @@ public class InstallPluginAction extends PortletAction {
 			}
 
 			List<AutoDeployListener> autoDeployListeners =
-				GlobalStartupAction.getAutoDeployListeners();
+				GlobalStartupAction.getAutoDeployListeners(true);
 
 			AutoDeployDir autoDeployDir = new AutoDeployDir(
 				"defaultAutoDeployDir", new File(deployDir), new File(destDir),
@@ -266,8 +268,8 @@ public class InstallPluginAction extends PortletAction {
 				BaseDeployer.DEPLOY_TO_PREFIX + deploymentContext + ".war";
 		}
 		else {
-			fileName = GetterUtil.getString(uploadPortletRequest.getFileName(
-				"file"));
+			fileName = GetterUtil.getString(
+				uploadPortletRequest.getFileName("file"));
 
 			int pos = fileName.lastIndexOf(CharPool.PERIOD);
 
@@ -350,7 +352,19 @@ public class InstallPluginAction extends PortletAction {
 			actionRequest, "deploymentContext");
 
 		try {
-			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
+			HttpImpl httpImpl = null;
+
+			Object httpObject = HttpUtil.getHttp();
+
+			if (httpObject instanceof DoPrivilegedBean) {
+				DoPrivilegedBean doPrivilegedBean =
+					(DoPrivilegedBean)httpObject;
+
+				httpImpl = (HttpImpl)doPrivilegedBean.getActualBean();
+			}
+			else {
+				httpImpl = (HttpImpl)httpObject;
+			}
 
 			HostConfiguration hostConfiguration = httpImpl.getHostConfiguration(
 				url);
@@ -544,14 +558,8 @@ public class InstallPluginAction extends PortletAction {
 		String deploymentContext = ParamUtil.getString(
 			actionRequest, "deploymentContext");
 
-		if (appServerType.startsWith(ServerDetector.JBOSS_ID) ||
-			appServerType.equals(ServerDetector.WEBLOGIC_ID)) {
-
-			deploymentContext += ".war";
-		}
-
 		File deployDir = new File(
-			DeployUtil.getAutoDeployDestDir() + "/" + deploymentContext);
+			DeployUtil.getAutoDeployDestDir(), deploymentContext);
 
 		DeployUtil.undeploy(appServerType, deployDir);
 

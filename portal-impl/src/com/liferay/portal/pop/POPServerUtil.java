@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,7 +17,7 @@ package com.liferay.portal.pop;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEntry;
 import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.StorageType;
@@ -141,7 +141,7 @@ public class POPServerUtil {
 			schedulerEntry.setTriggerValue(
 				PropsValues.POP_SERVER_NOTIFICATIONS_INTERVAL);
 
-			SchedulerEngineUtil.schedule(
+			SchedulerEngineHelperUtil.schedule(
 				schedulerEntry, StorageType.MEMORY_CLUSTERED, null, 0);
 		}
 		catch (Exception e) {

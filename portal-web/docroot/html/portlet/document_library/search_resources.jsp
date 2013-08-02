@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -147,26 +147,24 @@ int total = 0;
 			}
 		</aui:script>
 
-		<c:if test="<%= (searchRepositoryId == scopeGroupId) %>">
-			<aui:script use="aui-base">
-				A.one('#<portlet:namespace />closeSearch').on(
-					'click',
-					function(event) {
-						Liferay.fire(
-							'<portlet:namespace />dataRequest',
-							{
-								requestParams: {
-									'<portlet:namespace />struts_action': '/document_library/view',
-									'<portlet:namespace />folderId': '<%= String.valueOf(folderId) %>',
-									'<portlet:namespace />viewEntries': <%= Boolean.TRUE.toString() %>
-								},
-								src: Liferay.DL_SEARCH_END
-							}
-						);
-					}
-				);
-			</aui:script>
-		</c:if>
+		<aui:script use="aui-base">
+			A.one('#<portlet:namespace />closeSearch').on(
+				'click',
+				function(event) {
+					Liferay.fire(
+						'<portlet:namespace />dataRequest',
+						{
+							requestParams: {
+								'<portlet:namespace />struts_action': '/document_library/view',
+								'<portlet:namespace />folderId': '<%= String.valueOf(folderId) %>',
+								'<portlet:namespace />viewEntries': <%= Boolean.TRUE.toString() %>
+							},
+							src: Liferay.DL_SEARCH_END
+						}
+					);
+				}
+			);
+		</aui:script>
 	</c:if>
 </liferay-util:buffer>
 

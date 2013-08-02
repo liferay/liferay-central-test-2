@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -173,8 +173,8 @@ public class Atom {
 	protected int patchCo64Atom(int index) {
 		int size = (int)bytesToLong(ArrayUtil.clone(_buffer, index - 4, index));
 
-		int offsetCount = (int)bytesToLong(ArrayUtil.clone(
-			_buffer, index + 8, index + 12));
+		int offsetCount = (int)bytesToLong(
+			ArrayUtil.clone(_buffer, index + 8, index + 12));
 
 		for (int i = 0; i < offsetCount; i++) {
 			int offsetIndex = index + 12 + i * 8;

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.security.permission.InlineSQLHelperUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -54,64 +55,62 @@ public class WikiPageFinderImpl
 	public static final String FIND_BY_NO_ASSETS =
 		WikiPageFinder.class.getName() + ".findByNoAssets";
 
-	public int countByCreateDate(long nodeId, Date createDate, boolean before)
+	@Override
+	public int countByCreateDate(
+			long groupId, long nodeId, Date createDate, boolean before)
 		throws SystemException {
 
 		return countByCreateDate(
-			nodeId, new Timestamp(createDate.getTime()), before);
+			groupId, nodeId, new Timestamp(createDate.getTime()), before);
 	}
 
+	@Override
 	public int countByCreateDate(
-			long nodeId, Timestamp createDate, boolean before)
+			long groupId, long nodeId, Timestamp createDate, boolean before)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String createDateComparator = StringPool.GREATER_THAN;
-
-			if (before) {
-				createDateComparator = StringPool.LESS_THAN;
-			}
-
-			String sql = CustomSQLUtil.get(COUNT_BY_CREATE_DATE);
-
-			sql = StringUtil.replace(
-				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-			qPos.add(createDate);
-			qPos.add(true);
-			qPos.add(WorkflowConstants.STATUS_APPROVED);
-
-			Iterator<Long> itr = q.iterate();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doCountByCreateDate(groupId, nodeId, createDate, before, false);
 	}
 
+	@Override
+	public int filterCountByCreateDate(
+			long groupId, long nodeId, Date createDate, boolean before)
+		throws SystemException {
+
+		return doCountByCreateDate(
+			groupId, nodeId, new Timestamp(createDate.getTime()), before, true);
+	}
+
+	@Override
+	public int filterCountByCreateDate(
+			long groupId, long nodeId, Timestamp createDate, boolean before)
+		throws SystemException {
+
+		return doCountByCreateDate(groupId, nodeId, createDate, before, true);
+	}
+
+	@Override
+	public List<WikiPage> filterFindByCreateDate(
+			long groupId, long nodeId, Date createDate, boolean before,
+			int start, int end)
+		throws SystemException {
+
+		return doFindByCreateDate(
+			groupId, nodeId, new Timestamp(createDate.getTime()), before, start,
+			end, true);
+	}
+
+	@Override
+	public List<WikiPage> filterFindByCreateDate(
+			long groupId, long nodeId, Timestamp createDate, boolean before,
+			int start, int end)
+		throws SystemException {
+
+		return doFindByCreateDate(
+			groupId, nodeId, createDate, before, start, end, true);
+	}
+
+	@Override
 	public WikiPage findByResourcePrimKey(long resourcePrimKey)
 		throws NoSuchPageException, SystemException {
 
@@ -152,56 +151,28 @@ public class WikiPageFinderImpl
 		throw new NoSuchPageException(sb.toString());
 	}
 
+	@Override
 	public List<WikiPage> findByCreateDate(
-			long nodeId, Date createDate, boolean before, int start, int end)
+			long groupId, long nodeId, Date createDate, boolean before,
+			int start, int end)
 		throws SystemException {
 
-		return findByCreateDate(
-			nodeId, new Timestamp(createDate.getTime()), before, start, end);
+		return doFindByCreateDate(
+			groupId, nodeId, new Timestamp(createDate.getTime()), before, start,
+			end, false);
 	}
 
+	@Override
 	public List<WikiPage> findByCreateDate(
-			long nodeId, Timestamp createDate, boolean before, int start,
-			int end)
+			long groupId, long nodeId, Timestamp createDate, boolean before,
+			int start, int end)
 		throws SystemException {
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			String createDateComparator = StringPool.GREATER_THAN;
-
-			if (before) {
-				createDateComparator = StringPool.LESS_THAN;
-			}
-
-			String sql = CustomSQLUtil.get(FIND_BY_CREATE_DATE);
-
-			sql = StringUtil.replace(
-				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("WikiPage", WikiPageImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(nodeId);
-			qPos.add(createDate);
-			qPos.add(true);
-			qPos.add(WorkflowConstants.STATUS_APPROVED);
-
-			return (List<WikiPage>)QueryUtil.list(q, getDialect(), start, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
-		}
+		return doFindByCreateDate(
+			groupId, nodeId, createDate, before, start, end, false);
 	}
 
+	@Override
 	public List<WikiPage> findByNoAssets() throws SystemException {
 		Session session = null;
 
@@ -215,6 +186,114 @@ public class WikiPageFinderImpl
 			q.addEntity("WikiPage", WikiPageImpl.class);
 
 			return q.list(true);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected int doCountByCreateDate(
+			long groupId, long nodeId, Timestamp createDate, boolean before,
+			boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_CREATE_DATE);
+
+			String createDateComparator = StringPool.GREATER_THAN;
+
+			if (before) {
+				createDateComparator = StringPool.LESS_THAN;
+			}
+
+			sql = StringUtil.replace(
+				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, WikiPage.class.getName(), "WikiPage.resourcePrimKey",
+					groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(nodeId);
+			qPos.add(createDate);
+			qPos.add(true);
+			qPos.add(WorkflowConstants.STATUS_APPROVED);
+
+			Iterator<Long> itr = q.iterate();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected List<WikiPage> doFindByCreateDate(
+			long groupId, long nodeId, Timestamp createDate, boolean before,
+			int start, int end, boolean inlineSQLHelper)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_CREATE_DATE);
+
+			String createDateComparator = StringPool.GREATER_THAN;
+
+			if (before) {
+				createDateComparator = StringPool.LESS_THAN;
+			}
+
+			sql = StringUtil.replace(
+				sql, "[$CREATE_DATE_COMPARATOR$]", createDateComparator);
+
+			if (inlineSQLHelper) {
+				sql = InlineSQLHelperUtil.replacePermissionCheck(
+					sql, WikiPage.class.getName(), "WikiPage.resourcePrimKey",
+					groupId);
+			}
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("WikiPage", WikiPageImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(nodeId);
+			qPos.add(createDate);
+			qPos.add(true);
+			qPos.add(WorkflowConstants.STATUS_APPROVED);
+
+			return (List<WikiPage>)QueryUtil.list(q, getDialect(), start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

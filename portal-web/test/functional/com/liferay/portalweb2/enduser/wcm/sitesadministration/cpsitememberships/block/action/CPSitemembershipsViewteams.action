@@ -1,0 +1,13 @@
+<definition>
+	<command name="assertClick">
+		<case locator-key1="ADD_TEAM_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="SEARCH_BUTTON">
+			<execute function="AssertClick#assertValueClickAtAndWait" />
+		</case>
+		<case locator-key1="TEAM_MENULIST_ASSIGN_MEMBERS">
+			<execute function="AssertClick#assertTextClickAtAndWait" />
+		</case>
+	</command>
+</definition>

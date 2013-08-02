@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -24,6 +24,7 @@ import java.util.Map;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.DynaActionForm;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -36,8 +37,6 @@ import org.powermock.modules.junit4.PowerMockRunner;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
-import static junit.framework.Assert.assertEquals;
-
 /**
  * @author Igor Spasic
  */
@@ -48,7 +47,7 @@ public class JSONWebServiceServiceActionTest
 	extends BaseJSONWebServiceTestCase {
 
 	@BeforeClass
-	public static void init() throws Exception {
+	public static void setUpClass() throws Exception {
 		initPortalServices();
 
 		PortalUtil portalUtil = new PortalUtil();
@@ -91,7 +90,7 @@ public class JSONWebServiceServiceActionTest
 			new ActionMapping(), new DynaActionForm(), mockHttpServletRequest,
 			mockHttpServletResponse);
 
-		assertEquals("{}", json);
+		Assert.assertEquals("{}", json);
 	}
 
 	@Test
@@ -116,7 +115,7 @@ public class JSONWebServiceServiceActionTest
 			new ActionMapping(), new DynaActionForm(), mockHttpServletRequest,
 			mockHttpServletResponse);
 
-		assertEquals("\"Welcome 173 to Jupiter\"", json);
+		Assert.assertEquals("\"Welcome 173 to Jupiter\"", json);
 	}
 
 	protected MockHttpServletRequest createInvokerHttpServletRequest(

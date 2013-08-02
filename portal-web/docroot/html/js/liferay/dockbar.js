@@ -7,6 +7,11 @@ AUI.add(
 		var Portlet = Liferay.Portlet;
 		var Util = Liferay.Util;
 
+		var ALIGN_POINTS = {
+			ltr: ['tl', 'bl'],
+			rtl: ['tr', 'br']
+		};
+
 		var BODY = A.getBody();
 
 		var BODY_CONTENT = 'bodyContent';
@@ -16,6 +21,10 @@ AUI.add(
 		var CONTENT_BOX = 'contentBox';
 
 		var EVENT_CLICK = 'click';
+
+		var STR_LTR = 'ltr';
+
+		var STR_RTL = 'rtl';
 
 		var Dockbar = {
 			init: function() {
@@ -137,6 +146,8 @@ AUI.add(
 				var menu;
 				var name = options.name;
 
+				var langDir = Liferay.Language.direction[themeDisplay.getLanguageId()] || STR_LTR;
+
 				if (name && A.one(options.trigger)) {
 
 					delete options.name;
@@ -146,6 +157,9 @@ AUI.add(
 					A.mix(
 						options,
 						{
+							align: {
+								points: ALIGN_POINTS[langDir]
+							},
 							hideDelay: 500,
 							hideOn: 'mouseleave',
 							showOn: 'mouseover'
@@ -181,7 +195,7 @@ AUI.add(
 
 					contentBox.delegate(
 						'mouseenter',
-						function (event) {
+						function(event) {
 							focusManager.focus(event.currentTarget.one('a'));
 						},
 						'.aui-menu-item'
@@ -189,7 +203,7 @@ AUI.add(
 
 					contentBox.delegate(
 						'mouseleave',
-						function (event) {
+						function(event) {
 							focusManager.blur(event.currentTarget.one('a'));
 						},
 						'.aui-menu-item'
@@ -557,10 +571,30 @@ AUI.add(
 				instance._addMenu(
 					{
 						boundingBox: '#' + namespace + 'mySitesContainer',
+						constrain: true,
 						name: 'mySites',
 						trigger: '#' + namespace + 'mySites'
 					}
 				);
+
+				if (A.UA.ie === 6) {
+					var mySitesMenu = Dockbar.mySites;
+
+					if (mySitesMenu) {
+						mySitesMenu.onceAfter(
+							'visibleChange',
+							function(event) {
+								if (event.newVal) {
+									var menuBoundingBox = mySitesMenu.get('boundingBox');
+
+									if (menuBoundingBox.height() > 300) {
+										menuBoundingBox.addClass('aui-menu-scroll');
+									}
+								}
+							}
+						);
+					}
+				}
 
 				var userOptionsContainer = A.one('#' + namespace + 'userOptionsContainer');
 
@@ -744,26 +778,14 @@ AUI.add(
 						function(event) {
 							event.preventDefault();
 
-							var currentTarget = event.currentTarget;
-
-							var controlPanelCategory = Lang.trim(currentTarget.attr('data-controlPanelCategory'));
-
-							var uri = currentTarget.attr('href');
-							var title = currentTarget.attr('title');
-
-							if (controlPanelCategory) {
-								uri = Liferay.Util.addParams('controlPanelCategory=' + controlPanelCategory, uri) || uri;
-							}
-
 							instance._openWindow(
 								{
 									dialog: {
 										align: Util.Window.ALIGN_CENTER,
 										width: 960
-									},
-									title: title,
-									uri: uri
-								}
+									}
+								},
+								event.currentTarget
 							);
 						},
 						'a.use-dialog'
@@ -819,7 +841,7 @@ AUI.add(
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					p_auth: Liferay.authToken,
 					p_l_id: themeDisplay.getPlid(),
-					p_v_g_id: themeDisplay.getParentGroupId()
+					p_v_l_s_g_id: themeDisplay.getParentGroupId()
 				};
 
 				var checkboxName = checkbox.attr('name');
@@ -842,6 +864,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-node', 'event-touch']
+		requires: ['aui-node', 'event-touch', 'portal-available-languages']
 	}
 );

@@ -367,13 +367,13 @@
 .aui-tree-pages {
 	.aui-tree-icon {
 		background: transparent url() no-repeat 50% 50%;
-		cursor: pointer;
+		cursor: move;
 		height: 18px;
 		width: 18px;
 	}
 
 	.aui-tree-node-selected {
-		.aui-tree-label a, .aui-tree-icon {
+		.aui-tree-label a {
 			cursor: move;
 		}
 	}
@@ -383,7 +383,7 @@
 	background-image: url(@theme_image_path@/trees/page_copy.png);
 }
 
-.aui-tree-collapsed .aui-tree-icon {
+.aui-tree-collapsed .aui-tree-icon, .aui-tree-node-leaf .aui-tree-icon {
 	background-image: url(@theme_image_path@/trees/page.png);
 }
 
@@ -480,5 +480,30 @@
 
 	.lfr-page-layouts .lfr-layout-template-column {
 		width: 30%;
+	}
+}
+
+.ie7 {
+	.portlet-communities, .portlet-users-admin {
+		.edit-layout-form, .edit-layoutset-form {
+			.layout-description .aui-field-input-text {
+				max-width: 350px;
+				width: 100%;
+			}
+		}
+	}
+}
+
+/* ---------- RTL ---------- */
+
+.portlet-communities, .portlet-users-admin {
+	.lfr-available-themes {
+		.header-title {
+			float: left;
+		}
+
+		.install-themes {
+			float: left;
+		}
 	}
 }

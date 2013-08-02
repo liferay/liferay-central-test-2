@@ -1,0 +1,61 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="AddWhatsHappeningEntryViewableByEveryone">
+		<var name="whatsHappeningEntryAuthorFirstName" value="Joe" />
+		<var name="whatsHappeningEntryAuthorLastName" value="Bloggs" />
+		<var name="whatsHappeningEntryAuthorScreenName" value="joebloggs" />
+		<var name="whatsHappeningEntryContent" value="Microblogs Post" />
+		<var name="whatsHappeningEntryCharacterCountdown" value="135" />
+		<var name="whatsHappeningEntryViewableBy" value="Everyone" />
+		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+		<var name="userFirstName" value="Social01" />
+		<var name="userMiddleName" value="Office01" />
+		<var name="userLastName" value="User01" />
+		<var name="userScreenName" value="socialoffice01" />
+
+		<execute macro="SOUser#addUserWithSORole">
+			<var name="adminEmailAddress" value="test@liferay.com" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+			<var name="userFirstName" value="Social01" />
+			<var name="userMiddleName" value="Office01" />
+			<var name="userLastName" value="User01" />
+			<var name="userScreenName" value="socialoffice01" />
+		</execute>
+
+		<execute macro="SOHome#addWhatsHappeningEntry">
+			<var name="whatsHappeningEntryContent" value="${whatsHappeningEntryContent}" />
+			<var name="whatsHappeningEntryCharacterCountdown" value="${whatsHappeningEntryCharacterCountdown}" />
+			<var name="whatsHappeningEntryViewableBy" value="${whatsHappeningEntryViewableBy}" />
+		</execute>
+
+		<execute macro="SOMicroblogs#viewOwnMicroblogsEntry">
+			<var name="microblogsEntryAuthorFirstName" value="${whatsHappeningEntryAuthorFirstName}" />
+			<var name="microblogsEntryAuthorLastName" value="${whatsHappeningEntryAuthorLastName}" />
+			<var name="microblogsEntryContent" value="${whatsHappeningEntryContent}" />
+		</execute>
+
+		<execute macro="SOUser#logoutPG" />
+
+		<execute macro="SOUser#loginPG">
+			<var name="userEmailAddress" value="${userEmailAddress}" />
+			<var name="password" value="test" />
+		</execute>
+
+		<execute macro="SOMicroblogs#viewMicroblogsEntryViewableByEveryone">
+			<var name="microblogsEntryAuthorFirstName" value="${whatsHappeningEntryAuthorFirstName}" />
+			<var name="microblogsEntryAuthorLastName" value="${whatsHappeningEntryAuthorLastName}" />
+			<var name="microblogsEntryAuthorScreenName" value="${whatsHappeningEntryAuthorScreenName}" />
+			<var name="microblogsEntryContent" value="${whatsHappeningEntryContent}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="SOMicroblogs#tearDownMicroblogsEntry" />
+
+		<execute macro="SOUser#tearDownCP" />
+	</tear-down>
+</definition>

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -47,7 +47,7 @@ if (threadId > 0) {
 			}
 		}
 
-		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(curParentMessage.getUserId(), curParentMessage.getUserName()));
+		parentAuthor = curParentMessage.isAnonymous() ? LanguageUtil.get(pageContext, "anonymous") : HtmlUtil.escape(PortalUtil.getUserName(curParentMessage));
 	}
 	catch (Exception e) {
 	}
@@ -62,7 +62,12 @@ boolean splitThread = ParamUtil.getBoolean(request, "splitThread");
 String[] existingAttachments = new String[0];
 
 if ((message != null) && message.isAttachments()) {
-	existingAttachments = DLStoreUtil.getFileNames(message.getCompanyId(), CompanyConstants.SYSTEM, message.getAttachmentsDir());
+	try {
+		existingAttachments = DLStoreUtil.getFileNames(message.getCompanyId(), CompanyConstants.SYSTEM, message.getAttachmentsDir());
+	}
+	catch (NoSuchDirectoryException nsde) {
+		_log.error("Unable to get attachments for directory " + message.getAttachmentsDir() + " in company " + message.getCompanyId());
+	}
 }
 
 boolean allowPingbacks = PropsValues.MESSAGE_BOARDS_PINGBACK_ENABLED && BeanParamUtil.getBoolean(message, request, "allowPingbacks", true);
@@ -416,7 +421,7 @@ if (Validator.isNull(redirect)) {
 			<aui:button onClick='<%= renderResponse.getNamespace() + "manageAttachments(" + !attachments + ");" %>' value='<%= ((attachments) ? "remove" : "attach") + "-files" %>' />
 		</c:if>
 
-		<c:if test="<%=themeDisplay.isSignedIn() %>">
+		<c:if test="<%= themeDisplay.isSignedIn() %>">
 			<aui:button name="saveButton" onClick='<%= renderResponse.getNamespace() + "saveMessage(true);" %>' value="<%= saveButtonLabel %>" />
 		</c:if>
 
@@ -551,4 +556,8 @@ else {
 
 	PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-message"), currentURL);
 }
+%>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_message_jsp");
 %>

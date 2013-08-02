@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -183,12 +183,57 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 		}
 	}
 
+	protected void cacheUniqueFindersCache(PortalPreferences portalPreferences) {
+		if (portalPreferences.isNew()) {
+			Object[] args = new Object[] {
+					Long.valueOf(portalPreferences.getOwnerId()),
+					Integer.valueOf(portalPreferences.getOwnerType())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O, args,
+				portalPreferences);
+		}
+		else {
+			PortalPreferencesModelImpl portalPreferencesModelImpl = (PortalPreferencesModelImpl)portalPreferences;
+
+			if ((portalPreferencesModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_O_O.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						Long.valueOf(portalPreferences.getOwnerId()),
+						Integer.valueOf(portalPreferences.getOwnerType())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_O_O, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O, args,
+					portalPreferences);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(PortalPreferences portalPreferences) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O,
-			new Object[] {
+		PortalPreferencesModelImpl portalPreferencesModelImpl = (PortalPreferencesModelImpl)portalPreferences;
+
+		Object[] args = new Object[] {
 				Long.valueOf(portalPreferences.getOwnerId()),
 				Integer.valueOf(portalPreferences.getOwnerType())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_O_O, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O, args);
+
+		if ((portalPreferencesModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_O_O.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					Long.valueOf(portalPreferencesModelImpl.getOriginalOwnerId()),
+					Integer.valueOf(portalPreferencesModelImpl.getOriginalOwnerType())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_O_O, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O, args);
+		}
 	}
 
 	/**
@@ -292,8 +337,6 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 
 		boolean isNew = portalPreferences.isNew();
 
-		PortalPreferencesModelImpl portalPreferencesModelImpl = (PortalPreferencesModelImpl)portalPreferences;
-
 		Session session = null;
 
 		try {
@@ -320,32 +363,8 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 			PortalPreferencesImpl.class, portalPreferences.getPrimaryKey(),
 			portalPreferences);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O,
-				new Object[] {
-					Long.valueOf(portalPreferences.getOwnerId()),
-					Integer.valueOf(portalPreferences.getOwnerType())
-				}, portalPreferences);
-		}
-		else {
-			if ((portalPreferencesModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_O_O.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						Long.valueOf(portalPreferencesModelImpl.getOriginalOwnerId()),
-						Integer.valueOf(portalPreferencesModelImpl.getOriginalOwnerType())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_O_O, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_O_O, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_O_O,
-					new Object[] {
-						Long.valueOf(portalPreferences.getOwnerId()),
-						Integer.valueOf(portalPreferences.getOwnerType())
-					}, portalPreferences);
-			}
-		}
+		clearUniqueFindersCache(portalPreferences);
+		cacheUniqueFindersCache(portalPreferences);
 
 		return portalPreferences;
 	}
@@ -869,8 +888,10 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 				List<ModelListener<PortalPreferences>> listenersList = new ArrayList<ModelListener<PortalPreferences>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<PortalPreferences>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

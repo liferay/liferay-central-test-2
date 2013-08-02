@@ -68,7 +68,7 @@
 .lfr-actions.direction-down .lfr-trigger strong a {
 	padding: 2px 20px 2px 5px;
 	text-decoration: none;
-	vertical-align: middle;
+	vertical-align: baseline;
 }
 
 .lfr-actions.show-arrow .lfr-trigger strong a {
@@ -89,7 +89,7 @@
 .lfr-actions.show-arrow.direction-right .lfr-trigger strong a {
 	background-image: url(@theme_image_path@/arrows/05_right.png);
 	background-position: 98%;
-	padding-right:20px;
+	padding-right: 20px;
 }
 
 .lfr-actions.show-arrow.direction-right.disabled .lfr-trigger strong a {
@@ -168,4 +168,55 @@
 
 .lfr-menu-list li.last {
 	border-bottom: none;
+}
+
+/* ---------- RTL ---------- */
+
+.rtl .lfr-actions {
+	float: left;
+	text-align: right;
+
+	&.align-left {
+		float: right;
+	}
+
+	.lfr-trigger strong a {
+		padding-left: 5px;
+		padding-right: 15px;
+	}
+
+	&.direction-down .lfr-trigger strong a {
+		padding-left: 20px;
+		padding-right: 5px;
+	}
+
+	&.show-arrow {
+		&.direction-left {
+			.lfr-trigger strong a {
+				background-image: url(@theme_image_path@/arrows/05_right.png);
+				background-position: 98%;
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+
+			&.disabled .lfr-trigger strong a {
+				background-image: url(@theme_image_path@/arrows/09_right.png);
+			}
+		}
+
+		&.direction-right {
+			.lfr-trigger strong a {
+				background-image: url(@theme_image_path@/arrows/05_left.png);
+				background-position: 5%;
+			}
+
+			&.disabled .lfr-trigger strong a {
+				background-image: url(@theme_image_path@/arrows/09_left.png);
+			}
+		}
+
+		&.direction-down .lfr-trigger strong a {
+			background-position: 5px 5px;
+		}
+	}
 }

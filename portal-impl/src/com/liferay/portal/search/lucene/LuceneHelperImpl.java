@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
@@ -49,6 +50,8 @@ import com.liferay.portal.search.lucene.cluster.LuceneClusterUtil;
 import com.liferay.portal.search.lucene.highlight.QueryTermExtractor;
 import com.liferay.portal.security.auth.TransientTokenUtil;
 import com.liferay.portal.util.PortalInstances;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.lucene.KeywordsUtil;
 
@@ -73,6 +76,7 @@ import org.apache.commons.lang.time.StopWatch;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.document.Document;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanClause;
@@ -101,6 +105,7 @@ import org.apache.lucene.util.Version;
  */
 public class LuceneHelperImpl implements LuceneHelper {
 
+	@Override
 	public void addDocument(long companyId, Document document)
 		throws IOException {
 
@@ -109,12 +114,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.addDocument(document);
 	}
 
+	@Override
 	public void addExactTerm(
 		BooleanQuery booleanQuery, String field, String value) {
 
 		addTerm(booleanQuery, field, value, false);
 	}
 
+	@Override
 	public void addNumericRangeTerm(
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
@@ -126,6 +133,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		booleanQuery.add(numericRangeQuery, BooleanClause.Occur.SHOULD);
 	}
 
+	@Override
 	public void addRangeTerm(
 		BooleanQuery booleanQuery, String field, String startValue,
 		String endValue) {
@@ -148,12 +156,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		booleanQuery.add(termRangeQuery, BooleanClause.Occur.SHOULD);
 	}
 
+	@Override
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
 		addRequiredTerm(booleanQuery, field, new String[] {value}, like);
 	}
 
+	@Override
 	public void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String[] values,
 		boolean like) {
@@ -171,12 +181,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 		booleanQuery.add(query, BooleanClause.Occur.MUST);
 	}
 
+	@Override
 	public void addTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like) {
 
 		addTerm(booleanQuery, field, value, like, BooleanClauseOccur.SHOULD);
 	}
 
+	@Override
 	public void addTerm(
 		BooleanQuery booleanQuery, String field, String value, boolean like,
 		BooleanClauseOccur booleanClauseOccur) {
@@ -187,11 +199,10 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		Analyzer analyzer = getAnalyzer();
 
-		if (analyzer instanceof PerFieldAnalyzerWrapper) {
-			PerFieldAnalyzerWrapper perFieldAnalyzerWrapper =
-				(PerFieldAnalyzerWrapper)analyzer;
+		if (analyzer instanceof PerFieldAnalyzer) {
+			PerFieldAnalyzer perFieldAnalyzer = (PerFieldAnalyzer)analyzer;
 
-			Analyzer fieldAnalyzer = perFieldAnalyzerWrapper.getAnalyzer(field);
+			Analyzer fieldAnalyzer = perFieldAnalyzer.getAnalyzer(field);
 
 			if (fieldAnalyzer instanceof LikeKeywordAnalyzer) {
 				like = true;
@@ -207,10 +218,22 @@ public class LuceneHelperImpl implements LuceneHelper {
 			QueryParser queryParser = new QueryParser(
 				getVersion(), field, analyzer);
 
-			Query query = null;
+			Query query = queryParser.parse(value);
 
 			try {
-				query = queryParser.parse(value);
+				if (like && (query instanceof TermQuery)) {
+
+					// LUCENE-89
+
+					TermQuery termQuery = (TermQuery)query;
+
+					Term term = termQuery.getTerm();
+
+					value = term.text();
+					value = value.toLowerCase(queryParser.getLocale());
+
+					query = new TermQuery(term.createTerm(value));
+				}
 			}
 			catch (Exception e) {
 				query = queryParser.parse(KeywordsUtil.escape(value));
@@ -235,6 +258,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public void addTerm(
 		BooleanQuery booleanQuery, String field, String[] values,
 		boolean like) {
@@ -244,6 +268,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public int countScoredFieldNames(Query query, String[] filedNames) {
 		int count = 0;
 
@@ -261,6 +286,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return count;
 	}
 
+	@Override
 	public void delete(long companyId) {
 		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
@@ -271,6 +297,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.delete();
 	}
 
+	@Override
 	public void deleteDocuments(long companyId, Term term) throws IOException {
 		IndexAccessor indexAccessor = _indexAccessors.get(companyId);
 
@@ -281,6 +308,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.deleteDocuments(term);
 	}
 
+	@Override
 	public void dumpIndex(long companyId, OutputStream outputStream)
 		throws IOException {
 
@@ -304,10 +332,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 		indexAccessor.dumpIndex(outputStream);
 	}
 
+	@Override
 	public Analyzer getAnalyzer() {
 		return _analyzer;
 	}
 
+	@Override
 	public long getLastGeneration(long companyId) {
 		if (!isLoadIndexFromClusterEnabled()) {
 			return IndexAccessor.DEFAULT_LAST_GENERATION;
@@ -322,6 +352,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return indexAccessor.getLastGeneration();
 	}
 
+	@Override
 	public InputStream getLoadIndexesInputStreamFromCluster(
 			long companyId, Address bootupAddress)
 		throws SystemException {
@@ -361,6 +392,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public String[] getQueryTerms(Query query) {
 		String queryString = StringUtil.replace(
 			query.toString(), StringPool.STAR, StringPool.BLANK);
@@ -401,13 +433,16 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return queryTerms.toArray(new String[queryTerms.size()]);
 	}
 
+	@Override
 	public IndexSearcher getSearcher(long companyId, boolean readOnly)
 		throws IOException {
 
 		IndexAccessor indexAccessor = _getIndexAccessor(companyId);
 
-		IndexSearcher indexSearcher = new IndexSearcher(
+		IndexReader indexReader = IndexReader.open(
 			indexAccessor.getLuceneDir(), readOnly);
+
+		IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 
 		indexSearcher.setDefaultFieldSortScoring(true, true);
 		indexSearcher.setSimilarity(new FieldWeightSimilarity());
@@ -415,6 +450,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return indexSearcher;
 	}
 
+	@Override
 	public String getSnippet(
 			Query query, String field, String s, int maxNumFragments,
 			int fragmentLength, String fragmentSuffix, String preTag,
@@ -439,7 +475,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 				tokenStream, s, maxNumFragments, fragmentSuffix);
 
 			if (Validator.isNotNull(snippet) &&
-				!StringUtil.endsWith(snippet, fragmentSuffix)) {
+				!StringUtil.endsWith(snippet, fragmentSuffix) &&
+				!s.equals(snippet)) {
 
 				snippet = snippet.concat(fragmentSuffix);
 			}
@@ -451,10 +488,12 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public Version getVersion() {
 		return _version;
 	}
 
+	@Override
 	public boolean isLoadIndexFromClusterEnabled() {
 		if (PropsValues.CLUSTER_LINK_ENABLED &&
 			PropsValues.LUCENE_REPLICATE_WRITE) {
@@ -469,6 +508,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		return false;
 	}
 
+	@Override
 	public void loadIndex(long companyId, InputStream inputStream)
 		throws IOException {
 
@@ -508,6 +548,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public void loadIndexesFromCluster(long companyId) throws SystemException {
 		if (!isLoadIndexFromClusterEnabled()) {
 			return;
@@ -532,6 +573,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		_version = version;
 	}
 
+	@Override
 	public void shutdown() {
 		if (_luceneIndexThreadPoolExecutor != null) {
 			_luceneIndexThreadPoolExecutor.shutdownNow();
@@ -555,34 +597,38 @@ public class LuceneHelperImpl implements LuceneHelper {
 		}
 	}
 
+	@Override
 	public void startup(long companyId) {
-		if (PropsValues.INDEX_ON_STARTUP) {
-			if (_log.isInfoEnabled()) {
-				_log.info("Indexing Lucene on startup");
+		if (!PropsValues.INDEX_ON_STARTUP) {
+			return;
+		}
+
+		if (_log.isInfoEnabled()) {
+			_log.info("Indexing Lucene on startup");
+		}
+
+		LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
+
+		if (PropsValues.INDEX_WITH_THREAD) {
+			if (_luceneIndexThreadPoolExecutor == null) {
+
+				// This should never be null except for the case where
+				// VerifyProcessUtil#_verifyProcess(boolean) sets
+				// PropsValues#INDEX_ON_STARTUP to true.
+
+				_luceneIndexThreadPoolExecutor =
+					PortalExecutorManagerUtil.getPortalExecutor(
+						LuceneHelperImpl.class.getName());
 			}
 
-			LuceneIndexer luceneIndexer = new LuceneIndexer(companyId);
-
-			if (PropsValues.INDEX_WITH_THREAD) {
-				if (_luceneIndexThreadPoolExecutor == null) {
-
-					// This should never be null except for the case where
-					// VerifyProcessUtil#_verifyProcess(boolean) sets
-					// PropsValues#INDEX_ON_STARTUP to true.
-
-					_luceneIndexThreadPoolExecutor =
-						PortalExecutorManagerUtil.getPortalExecutor(
-							LuceneHelperImpl.class.getName());
-				}
-
-				_luceneIndexThreadPoolExecutor.execute(luceneIndexer);
-			}
-			else {
-				luceneIndexer.reindex();
-			}
+			_luceneIndexThreadPoolExecutor.execute(luceneIndexer);
+		}
+		else {
+			luceneIndexer.reindex();
 		}
 	}
 
+	@Override
 	public void updateDocument(long companyId, Term term, Document document)
 		throws IOException {
 
@@ -605,6 +651,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 			ClusterExecutorUtil.addClusterEventListener(
 				_loadIndexClusterEventListener);
 		}
+
+		BooleanQuery.setMaxClauseCount(_LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE);
 	}
 
 	private ObjectValuePair<String, URL>
@@ -624,7 +672,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 		try {
 			ClusterNodeResponse clusterNodeResponse = clusterNodeResponses.poll(
-				_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT, TimeUnit.MILLISECONDS);
+				_CLUSTER_LINK_NODE_BOOTUP_RESPONSE_TIMEOUT,
+				TimeUnit.MILLISECONDS);
 
 			String transientToken = (String)clusterNodeResponse.getResult();
 
@@ -632,9 +681,17 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 			InetAddress inetAddress = clusterNode.getInetAddress();
 
+			String fileName = PortalUtil.getPathContext();
+
+			if (!fileName.endsWith(StringPool.SLASH)) {
+				fileName = fileName.concat(StringPool.SLASH);
+			}
+
+			fileName = fileName.concat("lucene/dump");
+
 			URL url = new URL(
 				"http", inetAddress.getHostAddress(), clusterNode.getPort(),
-				"/lucene/dump");
+				fileName);
 
 			return new ObjectValuePair<String, URL>(transientToken, url);
 		}
@@ -789,7 +846,13 @@ public class LuceneHelperImpl implements LuceneHelper {
 				indexAccessor, clusterNodeAddressesCount, localLastGeneration));
 	}
 
-	private static final long _BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT = 10000;
+	private static final long _CLUSTER_LINK_NODE_BOOTUP_RESPONSE_TIMEOUT =
+		PropsValues.CLUSTER_LINK_NODE_BOOTUP_RESPONSE_TIMEOUT;
+
+	private static final int _LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.LUCENE_BOOLEAN_QUERY_CLAUSE_MAX_SIZE),
+			BooleanQuery.getMaxClauseCount());
 
 	private static final long _TRANSIENT_TOKEN_KEEP_ALIVE_TIME = 10000;
 
@@ -812,6 +875,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	private class LoadIndexClusterEventListener
 		implements ClusterEventListener {
 
+		@Override
 		public void processClusterEvent(ClusterEvent clusterEvent) {
 			ClusterEventType clusterEventType =
 				clusterEvent.getClusterEventType();
@@ -886,7 +950,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 				try {
 					clusterNodeResponse = blockingQueue.poll(
-						_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT,
+						_CLUSTER_LINK_NODE_BOOTUP_RESPONSE_TIMEOUT,
 						TimeUnit.MILLISECONDS);
 				}
 				catch (Exception e) {
@@ -897,7 +961,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Unable to get cluster node response in " +
-								_BOOTUP_CLUSTER_NODE_RESPONSE_TIMEOUT +
+								_CLUSTER_LINK_NODE_BOOTUP_RESPONSE_TIMEOUT +
 									TimeUnit.MILLISECONDS);
 					}
 
@@ -981,7 +1045,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 		@Override
 		public void processTimeoutException(TimeoutException timeoutException) {
 			_log.error(
-				"Uanble to load index for company " + _companyId,
+				"Unable to load index for company " + _companyId,
 				timeoutException);
 		}
 

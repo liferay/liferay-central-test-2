@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -578,13 +578,16 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 
 	@Override
 	public MDRRuleGroup toEscapedModel() {
-		if (_escapedModelProxy == null) {
-			_escapedModelProxy = (MDRRuleGroup)ProxyUtil.newProxyInstance(_classLoader,
-					_escapedModelProxyInterfaces,
-					new AutoEscapeBeanHandler(this));
+		if (_escapedModel == null) {
+			_escapedModel = (MDRRuleGroup)ProxyUtil.newProxyInstance(_classLoader,
+					_escapedModelInterfaces, new AutoEscapeBeanHandler(this));
 		}
 
-		return _escapedModelProxy;
+		return _escapedModel;
+	}
+
+	public MDRRuleGroup toUnescapedModel() {
+		return (MDRRuleGroup)this;
 	}
 
 	@Override
@@ -623,18 +626,15 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (!(obj instanceof MDRRuleGroup)) {
 			return false;
 		}
 
-		MDRRuleGroup mdrRuleGroup = null;
-
-		try {
-			mdrRuleGroup = (MDRRuleGroup)obj;
-		}
-		catch (ClassCastException cce) {
-			return false;
-		}
+		MDRRuleGroup mdrRuleGroup = (MDRRuleGroup)obj;
 
 		long primaryKey = mdrRuleGroup.getPrimaryKey();
 
@@ -812,7 +812,7 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 	}
 
 	private static ClassLoader _classLoader = MDRRuleGroup.class.getClassLoader();
-	private static Class<?>[] _escapedModelProxyInterfaces = new Class[] {
+	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			MDRRuleGroup.class
 		};
 	private String _uuid;
@@ -832,5 +832,5 @@ public class MDRRuleGroupModelImpl extends BaseModelImpl<MDRRuleGroup>
 	private String _description;
 	private String _descriptionCurrentLanguageId;
 	private long _columnBitmask;
-	private MDRRuleGroup _escapedModelProxy;
+	private MDRRuleGroup _escapedModel;
 }

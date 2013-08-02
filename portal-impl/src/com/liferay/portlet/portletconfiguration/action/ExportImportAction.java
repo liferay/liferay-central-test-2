@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -15,6 +15,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.LARFileException;
+import com.liferay.portal.LARFileSizeException;
 import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.LocaleException;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.staging.StagingUtil;
+import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -39,10 +41,13 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.dynamicdatalists.RecordSetDuplicateRecordSetKeyException;
+import com.liferay.portlet.dynamicdatamapping.StructureDuplicateStructureKeyException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -54,6 +59,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -68,18 +74,21 @@ import org.apache.struts.action.ActionMapping;
  * @author Jorge Ferrer
  * @author Raymond Augé
  */
-public class ExportImportAction extends EditConfigurationAction {
+public class ExportImportAction extends PortletAction {
 
 	@Override
 	public void processAction(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, ActionRequest actionRequest,
+			ActionResponse actionResponse)
 		throws Exception {
+
+		actionRequest = ActionUtil.getWrappedActionRequest(actionRequest, null);
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(actionRequest);
+			portlet = ActionUtil.getPortlet(actionRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
@@ -102,6 +111,8 @@ public class ExportImportAction extends EditConfigurationAction {
 				sendRedirect(actionRequest, actionResponse);
 			}
 			else if (cmd.equals(Constants.IMPORT)) {
+				checkExceededSizeLimit(actionRequest);
+
 				importData(actionRequest, actionResponse, portlet);
 
 				sendRedirect(actionRequest, actionResponse);
@@ -113,8 +124,9 @@ public class ExportImportAction extends EditConfigurationAction {
 			}
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchLayoutException ||
-				e instanceof PrincipalException) {
+			if ((e instanceof LARFileSizeException) ||
+				(e instanceof NoSuchLayoutException) ||
+				(e instanceof PrincipalException)) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 
@@ -129,26 +141,47 @@ public class ExportImportAction extends EditConfigurationAction {
 
 	@Override
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(renderRequest);
+			portlet = ActionUtil.getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(
 				renderRequest, PrincipalException.class.getName());
 
-			return mapping.findForward("portlet.portlet_configuration.error");
+			return actionMapping.findForward(
+				"portlet.portlet_configuration.error");
 		}
 
-		renderResponse.setTitle(getTitle(portlet, renderRequest));
+		renderResponse.setTitle(ActionUtil.getTitle(portlet, renderRequest));
 
-		return mapping.findForward(getForward(
-			renderRequest, "portlet.portlet_configuration.export_import"));
+		renderRequest = ActionUtil.getWrappedRenderRequest(renderRequest, null);
+
+		return actionMapping.findForward(
+			getForward(
+				renderRequest, "portlet.portlet_configuration.export_import"));
+	}
+
+	protected void checkExceededSizeLimit(PortletRequest portletRequest)
+		throws PortalException {
+
+		UploadException uploadException =
+			(UploadException)portletRequest.getAttribute(
+				WebKeys.UPLOAD_EXCEPTION);
+
+		if (uploadException != null) {
+			if (uploadException.isExceededSizeLimit()) {
+				throw new LARFileSizeException(uploadException.getCause());
+			}
+
+			throw new PortalException(uploadException.getCause());
+		}
 	}
 
 	protected void exportData(
@@ -228,14 +261,9 @@ public class ExportImportAction extends EditConfigurationAction {
 						"last-publish-date", StringPool.BLANK));
 
 				if (lastPublishDate > 0) {
-					Calendar cal = Calendar.getInstance(
-						themeDisplay.getTimeZone(), themeDisplay.getLocale());
+					endDate = new Date();
 
-					endDate = cal.getTime();
-
-					cal.setTimeInMillis(lastPublishDate);
-
-					startDate = cal.getTime();
+					startDate = new Date(lastPublishDate);
 				}
 			}
 
@@ -296,7 +324,10 @@ public class ExportImportAction extends EditConfigurationAction {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
-			else if (e instanceof LocaleException) {
+			else if ((e instanceof LocaleException) ||
+					 (e instanceof RecordSetDuplicateRecordSetKeyException) ||
+					 (e instanceof StructureDuplicateStructureKeyException)) {
+
 				SessionErrors.add(actionRequest, e.getClass(), e);
 			}
 			else {

@@ -1,6 +1,6 @@
 <%--
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -23,6 +23,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "current");
 int cur = ParamUtil.getInteger(request, SearchContainer.DEFAULT_CUR_PARAM);
 
 String redirect = ParamUtil.getString(request, "redirect");
+boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
@@ -48,6 +49,7 @@ tabsURL.setParameter("struts_action", "/sites_admin/edit_site_assignments");
 tabsURL.setParameter("tabs1", tabs1);
 tabsURL.setParameter("tabs2", "current");
 tabsURL.setParameter("redirect", redirect);
+tabsURL.setParameter("showBackURL", String.valueOf(showBackURL));
 
 request.setAttribute("edit_site_assignments.jsp-tabs1", tabs1);
 request.setAttribute("edit_site_assignments.jsp-tabs2", tabs2);
@@ -66,8 +68,10 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 	<c:when test="<%= selUser == null %>">
 		<liferay-ui:header
 			backURL="<%= redirect %>"
+			escapeXml="<%= false %>"
 			localizeTitle="<%= false %>"
-			title='<%= group.getDescriptiveName(locale) %>'
+			showBackURL="<%= showBackURL %>"
+			title="<%= HtmlUtil.escape(group.getDescriptiveName(locale)) %>"
 		/>
 
 		<liferay-util:include page="/html/portlet/sites_admin/edit_site_assignments_toolbar.jsp">
@@ -85,6 +89,7 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 	<c:otherwise>
 		<liferay-ui:header
 			backURL="<%= redirect %>"
+			showBackURL="<%= showBackURL %>"
 			title="roles"
 		/>
 	</c:otherwise>
@@ -270,6 +275,6 @@ request.setAttribute("edit_site_assignments.jsp-portletURL", portletURL);
 </aui:script>
 
 <%
-PortalUtil.addPortletBreadcrumbEntry(request, HtmlUtil.escape(group.getDescriptiveName(locale)), null);
+PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(locale), null);
 PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "assign-members"), currentURL);
 %>

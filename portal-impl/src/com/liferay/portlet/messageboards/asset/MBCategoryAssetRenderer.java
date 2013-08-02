@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,18 +48,22 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 		_category = category;
 	}
 
+	@Override
 	public long getClassPK() {
 		return _category.getCategoryId();
 	}
 
+	@Override
 	public long getGroupId() {
 		return _category.getGroupId();
 	}
 
+	@Override
 	public String getSummary(Locale locale) {
 		return HtmlUtil.stripHtml(_category.getDescription());
 	}
 
+	@Override
 	public String getTitle(Locale locale) {
 		return _category.getName();
 	}
@@ -91,11 +95,10 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 		PortletURL portletURL = liferayPortletResponse.createLiferayPortletURL(
 			PortletKeys.MESSAGE_BOARDS, PortletRequest.RENDER_PHASE);
 
-		portletURL.setWindowState(windowState);
-
 		portletURL.setParameter("struts_action", "/message_boards/view");
 		portletURL.setParameter(
 			"mbCategoryId", String.valueOf(_category.getCategoryId()));
+		portletURL.setWindowState(windowState);
 
 		return portletURL;
 	}
@@ -112,14 +115,17 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 			_category.getCategoryId());
 	}
 
+	@Override
 	public long getUserId() {
 		return _category.getUserId();
 	}
 
+	@Override
 	public String getUserName() {
 		return _category.getUserName();
 	}
 
+	@Override
 	public String getUuid() {
 		return _category.getUuid();
 	}
@@ -141,6 +147,7 @@ public class MBCategoryAssetRenderer extends BaseAssetRenderer {
 
 	}
 
+	@Override
 	public String render(
 			RenderRequest renderRequest, RenderResponse renderResponse,
 			String template)

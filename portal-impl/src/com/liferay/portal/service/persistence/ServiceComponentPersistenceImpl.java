@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2012 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -206,12 +206,57 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		}
 	}
 
+	protected void cacheUniqueFindersCache(ServiceComponent serviceComponent) {
+		if (serviceComponent.isNew()) {
+			Object[] args = new Object[] {
+					serviceComponent.getBuildNamespace(),
+					Long.valueOf(serviceComponent.getBuildNumber())
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BNS_BNU, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU, args,
+				serviceComponent);
+		}
+		else {
+			ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
+
+			if ((serviceComponentModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_BNS_BNU.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						serviceComponent.getBuildNamespace(),
+						Long.valueOf(serviceComponent.getBuildNumber())
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_BNS_BNU, args,
+					Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU, args,
+					serviceComponent);
+			}
+		}
+	}
+
 	protected void clearUniqueFindersCache(ServiceComponent serviceComponent) {
-		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-			new Object[] {
+		ServiceComponentModelImpl serviceComponentModelImpl = (ServiceComponentModelImpl)serviceComponent;
+
+		Object[] args = new Object[] {
 				serviceComponent.getBuildNamespace(),
 				Long.valueOf(serviceComponent.getBuildNumber())
-			});
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BNS_BNU, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU, args);
+
+		if ((serviceComponentModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_BNS_BNU.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					serviceComponentModelImpl.getOriginalBuildNamespace(),
+					Long.valueOf(serviceComponentModelImpl.getOriginalBuildNumber())
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BNS_BNU, args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU, args);
+		}
 	}
 
 	/**
@@ -366,32 +411,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 			ServiceComponentImpl.class, serviceComponent.getPrimaryKey(),
 			serviceComponent);
 
-		if (isNew) {
-			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-				new Object[] {
-					serviceComponent.getBuildNamespace(),
-					Long.valueOf(serviceComponent.getBuildNumber())
-				}, serviceComponent);
-		}
-		else {
-			if ((serviceComponentModelImpl.getColumnBitmask() &
-					FINDER_PATH_FETCH_BY_BNS_BNU.getColumnBitmask()) != 0) {
-				Object[] args = new Object[] {
-						serviceComponentModelImpl.getOriginalBuildNamespace(),
-						Long.valueOf(serviceComponentModelImpl.getOriginalBuildNumber())
-					};
-
-				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_BNS_BNU, args);
-
-				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_BNS_BNU, args);
-
-				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_BNS_BNU,
-					new Object[] {
-						serviceComponent.getBuildNamespace(),
-						Long.valueOf(serviceComponent.getBuildNumber())
-					}, serviceComponent);
-			}
-		}
+		clearUniqueFindersCache(serviceComponent);
+		cacheUniqueFindersCache(serviceComponent);
 
 		return serviceComponent;
 	}
@@ -1444,8 +1465,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 				List<ModelListener<ServiceComponent>> listenersList = new ArrayList<ModelListener<ServiceComponent>>();
 
 				for (String listenerClassName : listenerClassNames) {
+					Class<?> clazz = getClass();
+
 					listenersList.add((ModelListener<ServiceComponent>)InstanceFactory.newInstance(
-							listenerClassName));
+							clazz.getClassLoader(), listenerClassName));
 				}
 
 				listeners = listenersList.toArray(new ModelListener[listenersList.size()]);

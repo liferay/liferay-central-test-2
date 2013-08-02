@@ -1,0 +1,39 @@
+<definition>
+	<command name="assignUserRoleCP">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Social Office Configurations" />
+		</execute>
+
+		<execute action="SOCPConfigurations#click" locator-key1="STATUS_AVAILABLE" />
+		<execute action="SOCPConfigurations#type" locator-key1="SEARCH_FIELD" value1="${userScreenName}" />
+		<execute action="SOCPConfigurations#click" locator-key1="SEARCH_BUTTON" />
+
+		<execute action="CPRolesAssignmembersUsers#assertTextEquals" locator-key1="SEARCH_RESULTS" value1="Showing 1 result." />
+
+		<execute action="SOCPConfigurations#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
+		<execute action="SOCPConfigurations#check" locator-key1="USER_TABLE_CHECKBOX_1" />
+		<execute action="SOCPConfigurations#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="CPRolesAssignmembersUsers#assertTextEquals" locator-key1="SUCCESS_MESSAGE" />
+
+		<execute action="SOCPConfigurations#assertChecked" locator-key1="USER_TABLE_CHECKBOX_1" />
+	</command>
+
+	<command name="unassignUserRoleCP">
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Social Office Configurations" />
+		</execute>
+
+		<execute action="SOCPConfigurations#click" locator-key1="STATUS_CURRENT" />
+		<execute action="SOCPConfigurations#type" locator-key1="SEARCH_FIELD" value1="${userScreenName}" />
+		<execute action="SOCPConfigurations#click" locator-key1="SEARCH_BUTTON" />
+
+		<execute action="CPRolesAssignmembersUsers#assertTextEquals" locator-key1="SEARCH_RESULTS" value1="Showing 1 result." />
+
+		<execute action="SOCPConfigurations#assertTextEquals" locator-key1="USER_TABLE_SCREEN_NAME_1" value1="${userScreenName}" />
+		<execute action="SOCPConfigurations#uncheck" locator-key1="USER_TABLE_CHECKBOX_1" />
+		<execute action="SOCPConfigurations#click" locator-key1="SAVE_BUTTON" />
+
+		<execute action="CPRolesAssignmembersUsers#assertTextEquals" locator-key1="SUCCESS_MESSAGE" />
+	</command>
+</definition>
