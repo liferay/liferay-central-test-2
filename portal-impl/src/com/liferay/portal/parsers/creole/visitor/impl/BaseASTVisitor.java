@@ -134,7 +134,6 @@ public abstract class BaseASTVisitor implements ASTVisitor {
 
 	@Override
 	public void visit(JSPWikiInterwikiLinkNode jspWikiInterwikiLinkNode) {
-
 	}
 
 	@Override

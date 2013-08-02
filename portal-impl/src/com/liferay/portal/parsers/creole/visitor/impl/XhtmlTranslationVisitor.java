@@ -387,11 +387,8 @@ public class XhtmlTranslationVisitor implements ASTVisitor {
 		append("<a href=\"");
 		append(HtmlUtil.escape(interwikiLinkNode.getURL()));
 		append("\">");
-
 		append(HtmlUtil.escape(interwikiLinkNode.getTitle()));
-
 		append("</a>");
-
 	}
 
 	protected void appendLevelTags(int nodeLevel, boolean ordered) {

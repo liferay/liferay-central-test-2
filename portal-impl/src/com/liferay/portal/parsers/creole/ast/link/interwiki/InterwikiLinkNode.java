@@ -29,8 +29,6 @@ public abstract class InterwikiLinkNode extends LinkNode {
 		super(token);
 	}
 
-	abstract public void accept(ASTVisitor astVisitor);
-
 	public InterwikiLinkNode(int token, String title) {
 		this(token);
 
@@ -40,6 +38,8 @@ public abstract class InterwikiLinkNode extends LinkNode {
 	public InterwikiLinkNode(String title) {
 		_title = title;
 	}
+
+	public abstract void accept(ASTVisitor astVisitor);
 
 	public String getTitle() {
 		return _title;
