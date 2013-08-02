@@ -30,6 +30,7 @@ AUI.add(
 					deletePortletDataNode: defaultConfig,
 					deletionsNode: defaultConfig,
 					form: defaultConfig,
+					incompleteProcessMessageNode: defaultConfig,
 					layoutSetSettingsNode: defaultConfig,
 					logoNode: defaultConfig,
 					processesNode: defaultConfig,
@@ -47,7 +48,6 @@ AUI.add(
 					setupNode: defaultConfig,
 					themeNode: defaultConfig,
 					themeReferenceNode: defaultConfig,
-					incompleteProcessMessageNode: defaultConfig,
 					userPreferencesNode: defaultConfig
 				},
 

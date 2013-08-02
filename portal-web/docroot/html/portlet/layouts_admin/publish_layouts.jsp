@@ -363,9 +363,9 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 								unscheduleCMD = "unschedule_publish_to_remote";
 							}
 
-							String backgroundTaskExecutorClassName = localPublishing ? LayoutStagingBackgroundTaskExecutor.class.getName() : LayoutRemoteStagingBackgroundTaskExecutor.class.getName();
+							String taskExecutorClassName = localPublishing ? LayoutStagingBackgroundTaskExecutor.class.getName() : LayoutRemoteStagingBackgroundTaskExecutor.class.getName();
 
-							int incompleteBackgroundTaskCount = BackgroundTaskLocalServiceUtil.getBackgroundTasksCount(stagingGroupId, backgroundTaskExecutorClassName, false);
+							int incompleteBackgroundTaskCount = BackgroundTaskLocalServiceUtil.getBackgroundTasksCount(stagingGroupId, taskExecutorClassName, false);
 							%>
 
 							<div class="<%= incompleteBackgroundTaskCount == 0 ? "hide" : "in-progress" %>" id="<portlet:namespace />incompleteProcessMessage">
