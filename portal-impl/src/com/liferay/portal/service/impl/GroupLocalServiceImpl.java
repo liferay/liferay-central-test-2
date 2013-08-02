@@ -2458,7 +2458,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		String[] names = getSearchNames(companyId, name);
-
 		String[] descriptions = CustomSQLUtil.keywords(description);
 
 		return groupFinder.findByC_C_PG_N_D(
@@ -2974,7 +2973,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		String[] names = getSearchNames(companyId, name);
-
 		String[] descriptions = CustomSQLUtil.keywords(description);
 
 		return groupFinder.countByC_C_PG_N_D(
