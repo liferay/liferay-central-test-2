@@ -131,6 +131,7 @@ String[][] categorySections = {mainSections, seoSections, advancedSections, misc
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "add-site"), currentURL);
 	}
 	%>
+
 </c:if>
 
 <c:if test="<%= (group == null) || !layout.isTypeControlPanel() %>">
