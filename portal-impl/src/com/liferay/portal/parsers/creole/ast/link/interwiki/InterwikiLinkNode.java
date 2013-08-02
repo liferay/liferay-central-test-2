@@ -39,6 +39,7 @@ public abstract class InterwikiLinkNode extends LinkNode {
 		_title = title;
 	}
 
+	@Override
 	public abstract void accept(ASTVisitor astVisitor);
 
 	public String getTitle() {
