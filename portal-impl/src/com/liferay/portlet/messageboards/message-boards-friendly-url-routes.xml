@@ -13,17 +13,6 @@
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
 	<route>
-		<pattern>/attachment/{messageId:\d+}/{fileName:[^/]+}</pattern>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="status">0</implicit-parameter>
-		<implicit-parameter name="struts_action">/message_boards/get_message_attachment</implicit-parameter>
-	</route>
-	<route>
-		<pattern>/attachment/{messageId:\d+}/{status}/{fileName:[^/]+}</pattern>
-		<implicit-parameter name="p_p_state">normal</implicit-parameter>
-		<implicit-parameter name="struts_action">/message_boards/get_message_attachment</implicit-parameter>
-	</route>
-	<route>
 		<pattern>/rss</pattern>
 		<ignored-parameter name="p_p_cacheability" />
 		<implicit-parameter name="p_p_lifecycle">2</implicit-parameter>
@@ -50,6 +39,12 @@
 		<implicit-parameter name="struts_action">/message_boards/view_message</implicit-parameter>
 	</route>
 	<route>
+		<pattern>/attachment/{messageId:\d+}/{fileName:[^/]+}</pattern>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="status">0</implicit-parameter>
+		<implicit-parameter name="struts_action">/message_boards/get_message_attachment</implicit-parameter>
+	</route>
+	<route>
 		<pattern>/category/{mbCategoryId:\d+}/{p_p_state}</pattern>
 		<implicit-parameter name="struts_action">/message_boards/view</implicit-parameter>
 	</route>
@@ -60,6 +55,11 @@
 	<route>
 		<pattern>/view_message/{messageId:\d+}/{p_p_state}</pattern>
 		<implicit-parameter name="struts_action">/message_boards/view_message</implicit-parameter>
+	</route>
+	<route>
+		<pattern>/attachment/{messageId:\d+}/{status}/{fileName:[^/]+}</pattern>
+		<implicit-parameter name="p_p_state">normal</implicit-parameter>
+		<implicit-parameter name="struts_action">/message_boards/get_message_attachment</implicit-parameter>
 	</route>
 	<route>
 		<pattern>/category/{p_p_state}</pattern>
