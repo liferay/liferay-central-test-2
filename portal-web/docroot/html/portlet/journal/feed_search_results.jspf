@@ -15,9 +15,8 @@
 --%>
 
 <%
-int total = 0;
-
 List results = null;
+int total = 0;
 
 if (searchTerms.isAdvancedSearch()) {
 	total = JournalFeedLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFeedId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
@@ -25,7 +24,6 @@ if (searchTerms.isAdvancedSearch()) {
 	searchContainer.setTotal(total);
 
 	results = JournalFeedLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getFeedId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
-
 }
 else {
 	total = JournalFeedLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getKeywords());
