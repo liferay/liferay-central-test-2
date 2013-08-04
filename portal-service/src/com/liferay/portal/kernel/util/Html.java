@@ -46,9 +46,9 @@ public interface Html {
 
 	public String render(String html);
 
-	public String replaceNewLine(String html);
-
 	public String replaceMsWordCharacters(String text);
+
+	public String replaceNewLine(String html);
 
 	public String stripBetween(String text, String tag);
 

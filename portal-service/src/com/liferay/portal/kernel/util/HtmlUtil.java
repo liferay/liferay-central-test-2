@@ -74,16 +74,16 @@ public class HtmlUtil {
 		return _html;
 	}
 
-	public static String replaceNewLine(String html) {
-		return getHtml().replaceNewLine(html);
-	}
-
 	public static String render(String html) {
 		return getHtml().render(html);
 	}
 
 	public static String replaceMsWordCharacters(String html) {
 		return getHtml().replaceMsWordCharacters(html);
+	}
+
+	public static String replaceNewLine(String html) {
+		return getHtml().replaceNewLine(html);
 	}
 
 	public static String stripBetween(String html, String tag) {
