@@ -80,9 +80,9 @@ if (Validator.isNull(method)) {
 	method = "post";
 }
 
-if (Validator.isNull(src)) {
-	boolean auiImage = (image != null) && image.startsWith(_AUI_PATH);
+boolean auiImage = (image != null) && image.startsWith(_AUI_PATH);
 
+if (Validator.isNull(src)) {
 	if (auiImage) {
 		src = themeDisplay.getPathThemeImages().concat("/spacer.png");
 	}
