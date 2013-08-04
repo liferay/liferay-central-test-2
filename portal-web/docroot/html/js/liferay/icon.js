@@ -7,9 +7,9 @@ AUI.add(
 
 				var icon = A.one('#' + config.id);
 
-				var srcHover = config.srcHover;
-				var src = config.src;
 				var forcePost = config.forcePost;
+				var src = config.src;
+				var srcHover = config.srcHover;
 				var useDialog = config.useDialog;
 
 				if (icon) {
