@@ -47,8 +47,8 @@ MDRRuleGroup ruleGroup = (MDRRuleGroup)row.getObject();
 		/>
 
 		<liferay-ui:icon
-			linkCssClass="use-dialog"
 			image="permissions"
+			linkCssClass="use-dialog"
 			method="get"
 			url="<%= permissionsURL %>"
 		/>

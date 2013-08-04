@@ -42,12 +42,12 @@ ShoppingCategory category = (ShoppingCategory)row.getObject();
 			modelResourceDescription="<%= category.getName() %>"
 			resourcePrimKey="<%= String.valueOf(category.getCategoryId()) %>"
 			var="permissionsURL"
-		    windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+			windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 		/>
 
 		<liferay-ui:icon
-			linkCssClass="use-dialog"
 			image="permissions"
+			linkCssClass="use-dialog"
 			method="get"
 			url="<%= permissionsURL %>"
 		/>

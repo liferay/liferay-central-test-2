@@ -451,13 +451,13 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 								modelResourceDescription="<%= HtmlUtil.escape(message.getSubject()) %>"
 								resourcePrimKey="<%= String.valueOf(message.getMessageId()) %>"
 								var="permissionsURL"
-							    windowState="<%= LiferayWindowState.POP_UP.toString() %>"
+								windowState="<%= LiferayWindowState.POP_UP.toString() %>"
 							/>
 
 							<liferay-ui:icon
-								linkCssClass="use-dialog"
 								image="permissions"
 								label="<%= true %>"
+								linkCssClass="use-dialog"
 								method="get"
 								url="<%= permissionsURL %>"
 							/>
