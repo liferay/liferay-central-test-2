@@ -82,8 +82,8 @@ boolean useAssetEntryQuery = false;
 
 		SearchContext searchContext = SearchContextFactory.getInstance(request);
 
-		searchContext.setAttribute("paginationType", "more");
 		searchContext.setAttribute("mimeTypes", mediaGalleryMimeTypes);
+		searchContext.setAttribute("paginationType", "more");
 		searchContext.setEnd(searchContainer.getEnd());
 		searchContext.setFolderIds(folderIdsArray);
 		searchContext.setKeywords(keywords);
