@@ -144,7 +144,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 				folder.getGroupId(), folder.getFolderId(),
 				_ASSEMBLED_LAR_PREFIX + String.valueOf(stagingRequestId));
 		}
-		catch (NoSuchFileException e) {
+		catch (NoSuchFileException nsfe) {
 			return null;
 		}
 	}
@@ -197,8 +197,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 				folder.getGroupId(), userId, Group.class.getName(),
 				folder.getGroupId(), PortletKeys.SITES_ADMIN,
 				folder.getFolderId(), tempFile,
-				_ASSEMBLED_LAR_PREFIX + StringPool.UNDERLINE +
-					String.valueOf(stagingRequestId) + ".lar",
+				_ASSEMBLED_LAR_PREFIX + String.valueOf(stagingRequestId) +
+					".lar",
 				ContentTypes.APPLICATION_ZIP, false);
 
 			stagingRequestFileEntry = fetchStagingRequestFileEntry(
