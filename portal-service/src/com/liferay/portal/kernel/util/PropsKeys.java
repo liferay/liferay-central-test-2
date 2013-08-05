@@ -883,7 +883,7 @@ public interface PropsKeys {
 
 	public static final String GOOGLE_GADGET_SERVLET_MAPPING = "google.gadget.servlet.mapping";
 
-	public static final String GROUP_FINDER_IN_MEMORY_FILTER_CLASSNAME_BLACKLIST = "group.finder.in.memory.filter.classname.blacklist";
+	public static final String GROUPS_COMPLEX_SQL_CLASS_NAMES = "groups.complex.sql.class.names";
 
 	public static final String GZIP_COMPRESSION_LEVEL = "gzip.compression.level";
 

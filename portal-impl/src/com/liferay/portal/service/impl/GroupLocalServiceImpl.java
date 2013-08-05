@@ -49,6 +49,8 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GroupThreadLocal;
+import com.liferay.portal.kernel.util.ListUtil;
+import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -2355,17 +2357,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			andOperator = true;
 		}
 
-		if (isInMemoryFilterable(classNameIds)) {
-			List<Group> groups = doSearch(
+		if (isUseComplexSQL(classNameIds)) {
+			return groupFinder.findByC_C_PG_N_D(
 				companyId, classNameIds, parentGroupId, keywordsArray,
-				keywordsArray, params, andOperator);
-
-			return sort(groups, start, end, obc);
+				keywordsArray, params, andOperator, start, end, obc);
 		}
 
-		return groupFinder.findByC_C_PG_N_D(
+		List<Group> groups = doSearch(
 			companyId, classNameIds, parentGroupId, keywordsArray,
-			keywordsArray, params, andOperator, start, end, obc);
+			keywordsArray, params, andOperator);
+
+		return sort(groups, start, end, obc);
 	}
 
 	/**
@@ -2470,17 +2472,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String[] names = getSearchNames(companyId, name);
 		String[] descriptions = CustomSQLUtil.keywords(description);
 
-		if (isInMemoryFilterable(classNameIds)) {
-			List<Group> groups = doSearch(
+		if (isUseComplexSQL(classNameIds)) {
+			return groupFinder.findByC_C_PG_N_D(
 				companyId, classNameIds, parentGroupId, names, descriptions,
-				params, andOperator);
-
-			return sort(groups, start, end, obc);
+				params, andOperator, start, end, obc);
 		}
 
-		return groupFinder.findByC_C_PG_N_D(
+		List<Group> groups = doSearch(
 			companyId, classNameIds, parentGroupId, names, descriptions, params,
-			andOperator, start, end, obc);
+			andOperator);
+
+		return sort(groups, start, end, obc);
 	}
 
 	/**
@@ -2953,17 +2955,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			andOperator = true;
 		}
 
-		if (isInMemoryFilterable(classNameIds)) {
-			List<Group> groups = doSearch(
+		if (isUseComplexSQL(classNameIds)) {
+			return groupFinder.countByC_C_PG_N_D(
 				companyId, classNameIds, parentGroupId, keywordsArray,
 				keywordsArray, params, andOperator);
-
-			return groups.size();
 		}
 
-		return groupFinder.countByC_C_PG_N_D(
+		List<Group> groups = doSearch(
 			companyId, classNameIds, parentGroupId, keywordsArray,
 			keywordsArray, params, andOperator);
+
+		return groups.size();
 	}
 
 	/**
@@ -3001,17 +3003,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		String[] names = getSearchNames(companyId, name);
 		String[] descriptions = CustomSQLUtil.keywords(description);
 
-		if (isInMemoryFilterable(classNameIds)) {
-			List<Group> groups = doSearch(
+		if (isUseComplexSQL(classNameIds)) {
+			return groupFinder.countByC_C_PG_N_D(
 				companyId, classNameIds, parentGroupId, names, descriptions,
 				params, andOperator);
-
-			return groups.size();
 		}
 
-		return groupFinder.countByC_C_PG_N_D(
+		List<Group> groups = doSearch(
 			companyId, classNameIds, parentGroupId, names, descriptions, params,
 			andOperator);
+
+		return groups.size();
 	}
 
 	/**
@@ -3658,20 +3660,62 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Boolean site = (Boolean)params.remove("site");
 		List<Integer> types = (List<Integer>)params.remove("types");
 
-		// Find by companyId and classNameId
-
 		List<Group> groups = new ArrayList<Group>();
 
 		for (long classNameId : classNameIds) {
 			groups.addAll(groupPersistence.findByC_C(companyId, classNameId));
 		}
 
-		// In memory filters
-
 		Iterator<Group> iterator = groups.iterator();
 
 		while (iterator.hasNext()) {
 			Group group = iterator.next();
+
+			// Filter by live group ID
+
+			long liveGroupId = group.getLiveGroupId();
+
+			if (liveGroupId != 0) {
+				iterator.remove();
+
+				continue;
+			}
+
+			// Filter by parent group ID
+
+			long groupParentGroupId = group.getParentGroupId();
+
+			if ((parentGroupIdEquals &&
+				 (groupParentGroupId != parentGroupId)) ||
+				(!parentGroupIdEquals &&
+				 (groupParentGroupId == parentGroupId))) {
+
+				iterator.remove();
+
+				continue;
+			}
+
+			// Filter by name and description
+
+			String name = group.getName();
+
+			if (name.equals(GroupConstants.CONTROL_PANEL)) {
+				iterator.remove();
+
+				continue;
+			}
+
+			boolean containsName = matches(name, names);
+			boolean containsDescription = matches(
+				group.getDescription(), descriptions);
+
+			if ((andOperator && (!containsName || !containsDescription)) ||
+				(!andOperator && (!containsName && !containsDescription))) {
+
+				iterator.remove();
+
+				continue;
+			}
 
 			// Filter by active
 
@@ -3683,7 +3727,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
-			// Filter by excludedGroupIds
+			// Filter by excluded group IDs
 
 			if ((excludedGroupIds != null) &&
 				excludedGroupIds.contains(group.getGroupId())) {
@@ -3693,19 +3737,19 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				continue;
 			}
 
-			// Filter by groupsTree
+			// Filter by groups tree
 
 			if (groupsTree != null) {
 				String treePath = group.getTreePath();
 
 				boolean matched = false;
 
-				for (Group curGroup : groupsTree) {
-					String curTreePath = StringUtil.quote(
-						String.valueOf(curGroup.getGroupId()),
+				for (Group groupTree : groupsTree) {
+					String groupTreePath = StringUtil.quote(
+						String.valueOf(groupTree.getGroupId()),
 						StringPool.SLASH);
 
-					if (treePath.contains(curTreePath)) {
+					if (treePath.contains(groupTreePath)) {
 						matched = true;
 
 						break;
@@ -3719,7 +3763,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
-			// Filter by manualMembership
+			// Filter by manual membership
 
 			if ((manualMembership != null) &&
 				(manualMembership != group.isManualMembership())) {
@@ -3729,7 +3773,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				continue;
 			}
 
-			// Filter by membershipRestriction
+			// Filter by membership restriction
 
 			if ((membershipRestriction != null) &&
 				(membershipRestriction != group.getMembershipRestriction())) {
@@ -3751,60 +3795,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			// Filter by type and types
 
-			int curType = group.getType();
+			int type = group.getType();
 
-			if (curType == 4) {
+			if (type == 4) {
 				iterator.remove();
 
 				continue;
 			}
 
-			if ((types != null) && !types.contains(curType)) {
-				iterator.remove();
-
-				continue;
-			}
-
-			// Filter by liveGroupId
-
-			long curLiveGroupId = group.getLiveGroupId();
-
-			if (curLiveGroupId != 0) {
-				iterator.remove();
-
-				continue;
-			}
-
-			// Filter by parentGroupId
-
-			long curParentGroupId = group.getParentGroupId();
-
-			if ((parentGroupIdEquals && (curParentGroupId != parentGroupId)) ||
-				(!parentGroupIdEquals && (curParentGroupId == parentGroupId))) {
-
-				iterator.remove();
-
-				continue;
-			}
-
-			// Filter by name and description
-
-			String curName = group.getName();
-
-			if (curName.equals("Control Panel")) {
-				iterator.remove();
-
-				continue;
-			}
-
-			boolean containsName = matchesAny(curName, names);
-
-			boolean containsDescription = matchesAny(
-				group.getDescription(), descriptions);
-
-			if ((andOperator && (!containsName || !containsDescription)) ||
-				(!andOperator && (!containsName && !containsDescription))) {
-
+			if ((types != null) && !types.contains(type)) {
 				iterator.remove();
 
 				continue;
@@ -3817,13 +3816,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			return groups;
 		}
 
-		// Join By Users_Groups
+		// Join by Groups_Roles
 
 		Set<Group> resultGroups = new HashSet<Group>(groups);
-
-		resultGroups.retainAll(userPersistence.getGroups(userId));
-
-		// Join By Groups_Roles
 
 		Long roleId = (Long)params.remove("groupsRoles");
 
@@ -3831,11 +3826,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			resultGroups.retainAll(rolePersistence.getGroups(roleId));
 		}
 
+		// Join by Users_Groups
+
+		resultGroups.retainAll(userPersistence.getGroups(userId));
+
 		boolean inherit = GetterUtil.getBoolean(params.remove("inherit"), true);
 
 		if (inherit) {
 
-			// Join By Users_Orgs
+			// Join by Users_Orgs
 
 			List<Organization> organizations = userPersistence.getOrganizations(
 				userId);
@@ -3850,38 +3849,38 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				}
 			}
 
-			// Join By Users_Orgs and Groups_Orgs
+			// Join by Groups_Orgs and Users_Orgs
 
 			for (Organization organization : organizations) {
-				List<Group> copyGroups = new ArrayList<Group>(groups);
+				List<Group> tempGroups = new ArrayList<Group>(groups);
 
-				copyGroups.retainAll(
+				tempGroups.retainAll(
 					organizationPersistence.getGroups(
 						organization.getOrganizationId()));
 
-				if (!copyGroups.isEmpty()) {
-					resultGroups.addAll(copyGroups);
+				if (!tempGroups.isEmpty()) {
+					resultGroups.addAll(tempGroups);
 				}
 			}
 
-			// Join By Users_UserGroups and Groups_UserGroups
+			// Join by Groups_UserGroups and Users_UserGroups
 
 			List<UserGroup> userGroups = userPersistence.getUserGroups(userId);
 
 			for (UserGroup userGroup : userGroups) {
-				List<Group> copyGroups = new ArrayList<Group>(groups);
+				List<Group> tempGroups = new ArrayList<Group>(groups);
 
-				copyGroups.retainAll(
+				tempGroups.retainAll(
 					userGroupPersistence.getGroups(userGroup.getUserGroupId()));
 
-				if (!copyGroups.isEmpty()) {
-					resultGroups.addAll(copyGroups);
+				if (!tempGroups.isEmpty()) {
+					resultGroups.addAll(tempGroups);
 				}
 			}
 		}
 
 		if (_log.isDebugEnabled() && !params.isEmpty()) {
-			_log.debug("Unprocessed params : " + params);
+			_log.debug("Unprocessed parameters " + MapUtil.toString(params));
 		}
 
 		return new ArrayList<Group>(resultGroups);
@@ -4072,36 +4071,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		setRolePermissions(group, role, "com.liferay.portlet.wiki");
 	}
 
-	protected boolean isInMemoryFilterable(long[] classNameIds) {
-		if (classNameIds == null) {
-			return false;
-		}
-
-		if (_inMemoryFilterClassNameIdBlackList == null) {
-			String[] classNameBlackList =
-				PropsValues.GROUP_FINDER_IN_MEMORY_FILTER_CLASSNAME_BLACKLIST;
-
-			long[] classNameIdBlackList = new long[classNameBlackList.length];
-
-			for (int i = 0; i < classNameBlackList.length; i++) {
-				classNameIdBlackList[i] = classNameLocalService.getClassNameId(
-					classNameBlackList[i]);
-			}
-
-			_inMemoryFilterClassNameIdBlackList = classNameIdBlackList;
-		}
-
-		for (long classNameId : classNameIds) {
-			if (ArrayUtil.contains(
-					_inMemoryFilterClassNameIdBlackList, classNameId)) {
-
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	protected boolean isParentGroup(long parentGroupId, long groupId)
 			throws PortalException, SystemException {
 
@@ -4133,7 +4102,38 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return false;
 	}
 
-	protected boolean matchesAny(String s, String[] keywords) {
+	protected boolean isUseComplexSQL(long[] classNameIds) {
+		if ((classNameIds == null) || (classNameIds.length == 0)) {
+			return false;
+		}
+
+		if (_complexSQLClassNameIds == null) {
+			String[] complexSQLClassNames =
+				PropsValues.GROUPS_COMPLEX_SQL_CLASS_NAMES;
+
+			long[] complexSQLClassNameIds =
+				new long[complexSQLClassNames.length];
+
+			for (int i = 0; i < complexSQLClassNames.length; i++) {
+				String complexSQLClassName = complexSQLClassNames[i];
+
+				complexSQLClassNameIds[i] = PortalUtil.getClassNameId(
+					complexSQLClassName);
+			}
+
+			_complexSQLClassNameIds = complexSQLClassNameIds;
+		}
+
+		for (long classNameId : classNameIds) {
+			if (ArrayUtil.contains(_complexSQLClassNameIds, classNameId)) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	protected boolean matches(String s, String[] keywords) {
 		if ((keywords == null) ||
 			((keywords.length == 1) && (keywords[0] == null))) {
 
@@ -4196,29 +4196,17 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<Group> sort(
 		List<Group> groups, int start, int end, OrderByComparator obc) {
 
-		if (start < 0) {
-			start = 0;
+		if (obc == null) {
+			obc = new GroupNameComparator(true);
 		}
 
-		if ((end < 0) || (end > groups.size())) {
-			end = groups.size();
-		}
+		Collections.sort(groups, obc);
 
-		if (start < end) {
-			if (obc == null) {
-				obc = new GroupNameComparator(true);
-			}
-
-			Collections.sort(groups, obc);
-
-			return groups.subList(start, end);
-		}
-
-		return Collections.emptyList();
+		return Collections.unmodifiableList(
+			ListUtil.subList(groups, start, end));
 	}
 
 	protected void unscheduleStaging(Group group) {
@@ -4428,7 +4416,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		GroupLocalServiceImpl.class);
 
 	private volatile long[] _classNameIds;
-	private volatile long[] _inMemoryFilterClassNameIdBlackList;
+	private volatile long[] _complexSQLClassNameIds;
 	private Map<String, Group> _systemGroupsMap = new HashMap<String, Group>();
 
 }
