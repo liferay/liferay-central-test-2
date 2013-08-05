@@ -142,12 +142,12 @@ public class ListUtilTest {
 	public void testSubList() {
 		List<Integer> list = Arrays.asList(1, 2, 3, 4);
 
-		// Negative start, positive end within range
+		// Negative start, positive end, within range
 
 		Assert.assertEquals(
 			Arrays.asList(1, 2, 3), ListUtil.subList(list, -1, 3));
 
-		// Negative start, positive end out of range
+		// Negative start, positive end, out of range
 
 		Assert.assertEquals(list, ListUtil.subList(list, -1, 5));
 
@@ -159,12 +159,12 @@ public class ListUtilTest {
 
 		Assert.assertEquals(Arrays.asList(2, 3), ListUtil.subList(list, 1, 3));
 
-		// Start == end
+		// Start is equal to end
 
 		Assert.assertSame(
 			Collections.emptyList(), ListUtil.subList(list, 1, 1));
 
-		// Start > end
+		// Start is greater than end
 
 		Assert.assertSame(
 			Collections.emptyList(), ListUtil.subList(list, 2, 1));
