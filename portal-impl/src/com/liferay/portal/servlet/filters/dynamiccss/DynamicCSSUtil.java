@@ -173,11 +173,11 @@ public class DynamicCSSUtil {
 			return content;
 		}
 
-		String contextPath = ContextPathUtil.getContextPath(servletContext);
-
 		String portalContextPath = PortalUtil.getPathContext();
 
 		String baseURL = portalContextPath;
+
+		String contextPath = ContextPathUtil.getContextPath(servletContext);
 
 		if (!contextPath.equals(portalContextPath)) {
 			baseURL = StringPool.SLASH.concat(
