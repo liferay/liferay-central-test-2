@@ -320,27 +320,23 @@ public class JSONWebServiceInvokerAction implements JSONWebServiceAction {
 
 		Class<?> clazz = object.getClass();
 
-		if (clazz.isArray()) {
-			if (clazz.getComponentType().isPrimitive()) {
-				int len = Array.getLength(object);
-
-				ArrayList<Object> list = new ArrayList<Object>();
-
-				for (int i = 0; i < len; i++) {
-					Object element = Array.get(object, i);
-
-					list.add(element);
-				}
-
-				return list;
-			}
-			else {
-				return ListUtil.toList((Object[])object);
-
-			}
+		if (!clazz.isArray()) {
+			return null;
 		}
 
-		return null;
+		Class<?> componentType = clazz.getComponentType();
+
+		if (!componentType.isPrimitive()) {
+			return ListUtil.toList((Object[])object);
+		}
+
+		List<Object> list = new ArrayList<Object>();
+
+		for (int i = 0; i < Array.getLength(object); i++) {
+			list.add(Array.get(object, i));
+		}
+
+		return list;
 	}
 
 	private Map<String, Object> _convertObjectToMap(
