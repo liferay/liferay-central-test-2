@@ -14,8 +14,7 @@
 
 package com.liferay.portal.security.pacl.checker;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.StringReader;
@@ -48,6 +47,7 @@ public class SQLChecker extends BaseChecker {
 
 	@Override
 	public void afterPropertiesSet() {
+		initSqlStatements();
 		initTableNames();
 	}
 
@@ -69,14 +69,12 @@ public class SQLChecker extends BaseChecker {
 			statement = _jSqlParser.parse(new StringReader(sql));
 		}
 		catch (Exception e) {
-			_log.error("Unable to parse SQL " + sql);
-
-			return null;
 		}
 
 		String key = null;
 		String value = null;
 
+		if (statement != null) {
 		if (statement instanceof CreateIndex) {
 			key = "security-manager-sql-tables-index-create";
 
@@ -166,8 +164,12 @@ public class SQLChecker extends BaseChecker {
 
 			value = StringUtil.merge(tableNames);
 		}
+		}
 		else {
-			return null;
+			key = "security-manager-sql-statements";
+
+			value = StringUtil.replace(
+				sql, StringPool.COMMA, StringPool.SEMICOLON);
 		}
 
 		AuthorizationProperty authorizationProperty =
@@ -186,11 +188,9 @@ public class SQLChecker extends BaseChecker {
 			statement = _jSqlParser.parse(new StringReader(sql));
 		}
 		catch (Exception e) {
-			_log.error("Unable to parse SQL " + sql);
-
-			return false;
 		}
 
+		if (statement != null) {
 		if (statement instanceof CreateIndex) {
 			CreateIndex createIndex = (CreateIndex)statement;
 
@@ -241,6 +241,14 @@ public class SQLChecker extends BaseChecker {
 
 			return hasSQL(update);
 		}
+		}
+		else {
+			sql = StringUtil.replace(
+				sql, StringPool.COMMA, StringPool.SEMICOLON);
+
+			if (_sqlStatements.contains(sql)) {
+				return true;
+			}		}
 
 		return false;
 	}
@@ -326,6 +334,10 @@ public class SQLChecker extends BaseChecker {
 			"security-manager-sql-tables-update");
 	}
 
+	protected void initSqlStatements() {
+		_sqlStatements = getPropertySet("security-manager-sql-statements");
+	}
+
 	protected boolean isAllowedTable(
 		String tableName, Set<String> allowedTableNames) {
 
@@ -358,8 +370,6 @@ public class SQLChecker extends BaseChecker {
 		return true;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(SQLChecker.class);
-
 	private Set<String> _allTableNames;
 	private Set<String> _createTableNames;
 	private Set<String> _deleteTableNames;
@@ -369,6 +379,7 @@ public class SQLChecker extends BaseChecker {
 	private JSqlParser _jSqlParser = new CCJSqlParserManager();
 	private Set<String> _replaceTableNames;
 	private Set<String> _selectTableNames;
+	private Set<String> _sqlStatements;
 	private Set<String> _truncateTableNames;
 	private Set<String> _updateTableNames;
 
