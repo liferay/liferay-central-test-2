@@ -77,17 +77,17 @@ public class ReflectChecker extends BaseChecker {
 			}
 		}
 		else {
-		int stackIndex = Reflection.getStackIndex(10, 9);
+			int stackIndex = Reflection.getStackIndex(10, 9);
 
-		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+			Class<?> callerClass = Reflection.getCallerClass(stackIndex);
 
-		if (isTrustedCaller(callerClass, permission)) {
-			return true;
-		}
+			if (isTrustedCaller(callerClass, permission)) {
+				return true;
+			}
 
-		logSecurityException(_log, "Attempted to reflect");
+			logSecurityException(_log, "Attempted to reflect");
 
-		return false;
+			return false;
 		}
 
 		return true;
