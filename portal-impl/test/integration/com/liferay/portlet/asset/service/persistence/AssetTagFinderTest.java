@@ -62,22 +62,22 @@ import org.junit.runner.RunWith;
 public class AssetTagFinderTest {
 
 	@Test
-	public void testScopeGroupFilterCountByG_C_N() throws Exception {
+	public void testFilterCountByG_C_N() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
 		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
+		String assetTagName = ServiceTestUtil.randomString();
 
-		String tagName = ServiceTestUtil.randomString();
-
-		int initialTagsCountScopeGroup =
+		int initialScopeGroupAssetTagsCount =
 			AssetTagFinderUtil.filterCountByG_C_N(
-				scopeGroup.getGroupId(), classNameId, tagName);
-		int initialTagsCountSiteGroup =
+				scopeGroup.getGroupId(), classNameId, assetTagName);
+		int initialSiteGroupAssetTagsCount =
 			AssetTagFinderUtil.filterCountByG_C_N(
-				siteGroup.getGroupId(), classNameId, tagName);
+				siteGroup.getGroupId(), classNameId, assetTagName);
 
-		addBlogEntry(scopeGroup.getGroupId(), tagName);
+		addBlogsEntry(scopeGroup.getGroupId(), assetTagName);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -90,16 +90,18 @@ public class AssetTagFinderTest {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			int finalTagsCountScopeGroup =
+			int scopeGroupAssetTagsCount =
 				AssetTagFinderUtil.filterCountByG_C_N(
-					scopeGroup.getGroupId(), classNameId, tagName);
-			int finalTagsCountSiteGroup = AssetTagFinderUtil.filterCountByG_C_N(
-				siteGroup.getGroupId(), classNameId, tagName);
+					scopeGroup.getGroupId(), classNameId, assetTagName);
 
 			Assert.assertEquals(
-				initialTagsCountScopeGroup + 1, finalTagsCountScopeGroup);
+				initialScopeGroupAssetTagsCount + 1, scopeGroupAssetTagsCount);
+
+			int siteGroupAssetTagsCount = AssetTagFinderUtil.filterCountByG_C_N(
+					siteGroup.getGroupId(), classNameId, assetTagName);
+
 			Assert.assertEquals(
-				initialTagsCountSiteGroup, finalTagsCountSiteGroup);
+				initialSiteGroupAssetTagsCount, siteGroupAssetTagsCount);
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -108,18 +110,20 @@ public class AssetTagFinderTest {
 	}
 
 	@Test
-	public void testScopeGroupFilterCountByG_N() throws Exception {
+	public void testFilterCountByG_N() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String tagName = ServiceTestUtil.randomString();
+		String assetTagName = ServiceTestUtil.randomString();
 
-		int initialTagsCountScopeGroup = AssetTagFinderUtil.filterCountByG_N(
-			scopeGroup.getGroupId(), tagName);
+		int initialScopeGroupAssetTagsCount =
+			AssetTagFinderUtil.filterCountByG_N(
+				scopeGroup.getGroupId(), assetTagName);
 		int initialTagsCountSiteGroup = AssetTagFinderUtil.filterCountByG_N(
-			siteGroup.getGroupId(), tagName);
+			siteGroup.getGroupId(), assetTagName);
 
-		addBlogEntry(scopeGroup.getGroupId(), tagName);
+		addBlogsEntry(scopeGroup.getGroupId(), assetTagName);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -132,15 +136,17 @@ public class AssetTagFinderTest {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			int finalTagsCountScopeGroup = AssetTagFinderUtil.filterCountByG_N(
-				scopeGroup.getGroupId(), tagName);
-			int finalTagsCountSiteGroup = AssetTagFinderUtil.filterCountByG_N(
-				siteGroup.getGroupId(), tagName);
+			int scopeGroupAssetTagsCount = AssetTagFinderUtil.filterCountByG_N(
+				scopeGroup.getGroupId(), assetTagName);
 
 			Assert.assertEquals(
-				initialTagsCountScopeGroup + 1, finalTagsCountScopeGroup);
+				initialScopeGroupAssetTagsCount + 1, scopeGroupAssetTagsCount);
+
+			int siteGroupAssetTagsCount = AssetTagFinderUtil.filterCountByG_N(
+				siteGroup.getGroupId(), assetTagName);
+
 			Assert.assertEquals(
-				initialTagsCountSiteGroup, finalTagsCountSiteGroup);
+				initialTagsCountSiteGroup, siteGroupAssetTagsCount);
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -149,20 +155,21 @@ public class AssetTagFinderTest {
 	}
 
 	@Test
-	public void testScopeGroupFilterCountByG_N_P() throws Exception {
+	public void testFilterCountByG_N_P() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String tagName = ServiceTestUtil.randomString();
+		String assetTagName = ServiceTestUtil.randomString();
+		String[] assetTagProperties = new String[] {"key:value"};
 
-		String[] tagProperties = new String[] {"key:value"};
-
-		int initialTagsCountScopeGroup = AssetTagFinderUtil.filterCountByG_N_P(
-			scopeGroup.getGroupId(), tagName, tagProperties);
+		int initialScopeGroupAssetTagsCount =
+			AssetTagFinderUtil.filterCountByG_N_P(
+				scopeGroup.getGroupId(), assetTagName, assetTagProperties);
 		int initialTagsCountSiteGroup = AssetTagFinderUtil.filterCountByG_N_P(
-			siteGroup.getGroupId(), tagName, tagProperties);
+			siteGroup.getGroupId(), assetTagName, assetTagProperties);
 
-		addAssetTag(siteGroup.getGroupId(), tagName, tagProperties);
+		addAssetTag(siteGroup.getGroupId(), assetTagName, assetTagProperties);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -175,16 +182,18 @@ public class AssetTagFinderTest {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			int finalTagsCountScopeGroup =
+			int scopeGroupAssetTagsCount =
 				AssetTagFinderUtil.filterCountByG_N_P(
-					scopeGroup.getGroupId(), tagName, tagProperties);
-			int finalTagsCountSiteGroup = AssetTagFinderUtil.filterCountByG_N_P(
-				siteGroup.getGroupId(), tagName, tagProperties);
+					scopeGroup.getGroupId(), assetTagName, assetTagProperties);
 
 			Assert.assertEquals(
-				initialTagsCountScopeGroup, finalTagsCountScopeGroup);
+				initialScopeGroupAssetTagsCount, scopeGroupAssetTagsCount);
+
+			int siteGroupAssetTagsCount = AssetTagFinderUtil.filterCountByG_N_P(
+				siteGroup.getGroupId(), assetTagName, assetTagProperties);
+
 			Assert.assertEquals(
-				initialTagsCountSiteGroup + 1, finalTagsCountSiteGroup);
+				initialTagsCountSiteGroup + 1, siteGroupAssetTagsCount);
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -193,24 +202,24 @@ public class AssetTagFinderTest {
 	}
 
 	@Test
-	public void testScopeGroupFilterFindByG_C_N() throws Exception {
+	public void testFilterFindByG_C_N() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
 		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
+		String assetTagName = ServiceTestUtil.randomString();
 
-		String tagName = ServiceTestUtil.randomString();
-
-		List<AssetTag> initialTagsScopeGroup =
+		List<AssetTag> initialScopeGroupAssetTags =
 			AssetTagFinderUtil.filterFindByG_C_N(
-				scopeGroup.getGroupId(), classNameId, tagName,
+				scopeGroup.getGroupId(), classNameId, assetTagName,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-		List<AssetTag> initialTagsSiteGroup =
+		List<AssetTag> initialSiteGroupAssetTags =
 			AssetTagFinderUtil.filterFindByG_C_N(
-				siteGroup.getGroupId(), classNameId, tagName, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
+				siteGroup.getGroupId(), classNameId, assetTagName,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		addBlogEntry(scopeGroup.getGroupId(), tagName);
+		addBlogsEntry(scopeGroup.getGroupId(), assetTagName);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -223,19 +232,22 @@ public class AssetTagFinderTest {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			List<AssetTag> finalTagsScopeGroup =
+			List<AssetTag> scopeGroupAssetTags =
 				AssetTagFinderUtil.filterFindByG_C_N(
-					scopeGroup.getGroupId(), classNameId, tagName,
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-			List<AssetTag> finalTagsSiteGroup =
-				AssetTagFinderUtil.filterFindByG_C_N(
-					siteGroup.getGroupId(), classNameId, tagName,
+					scopeGroup.getGroupId(), classNameId, assetTagName,
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 			Assert.assertEquals(
-				initialTagsScopeGroup.size() + 1, finalTagsScopeGroup.size());
+				initialScopeGroupAssetTags.size() + 1,
+				scopeGroupAssetTags.size());
+
+			List<AssetTag> siteGroupAssetTags =
+				AssetTagFinderUtil.filterFindByG_C_N(
+					siteGroup.getGroupId(), classNameId, assetTagName,
+					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
 			Assert.assertEquals(
-				initialTagsSiteGroup.size(), finalTagsSiteGroup.size());
+				initialSiteGroupAssetTags.size(), siteGroupAssetTags.size());
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -244,13 +256,14 @@ public class AssetTagFinderTest {
 	}
 
 	@Test
-	public void testScopeGroupFilterFindByG_N() throws Exception {
+	public void testFilterFindByG_N() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String tagName = ServiceTestUtil.randomString();
+		String assetTagName = ServiceTestUtil.randomString();
 
-		addAssetTag(siteGroup.getGroupId(), tagName, null);
+		addAssetTag(siteGroup.getGroupId(), assetTagName, null);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -265,18 +278,18 @@ public class AssetTagFinderTest {
 
 			try {
 				AssetTagFinderUtil.filterFindByG_N(
-					scopeGroup.getGroupId(), tagName);
+					scopeGroup.getGroupId(), assetTagName);
 
 				Assert.fail();
 			}
 			catch (NoSuchTagException nste) {
 			}
 
-			AssetTag finalTagsSiteGroup = AssetTagFinderUtil.filterFindByG_N(
-				siteGroup.getGroupId(), tagName);
+			AssetTag siteGroupAssetTag = AssetTagFinderUtil.filterFindByG_N(
+				siteGroup.getGroupId(), assetTagName);
 
 			Assert.assertEquals(
-				tagName.toLowerCase(), finalTagsSiteGroup.getName());
+				assetTagName.toLowerCase(), siteGroupAssetTag.getName());
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -285,24 +298,24 @@ public class AssetTagFinderTest {
 	}
 
 	@Test
-	public void testScopeGroupFilterFindByG_N_P() throws Exception {
+	public void testFilterFindByG_N_P() throws Exception {
 		Group scopeGroup = addScopeGroup();
+
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String tagName = ServiceTestUtil.randomString();
+		String assetTagName = ServiceTestUtil.randomString();
+		String[] assetTagProperties = new String[] {"key:value"};
 
-		String[] tagProperties = new String[] {"key:value"};
-
-		List<AssetTag> initialTagsScopeGroup =
+		List<AssetTag> initialScopeGroupAssetTags=
 			AssetTagFinderUtil.filterFindByG_N_P(
-				new long[] {scopeGroup.getGroupId()}, tagName, tagProperties,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-		List<AssetTag> initialTagsSiteGroup =
+				new long[] {scopeGroup.getGroupId()}, assetTagName,
+				assetTagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+		List<AssetTag> initialSiteGroupAssetTags =
 			AssetTagFinderUtil.filterFindByG_N_P(
-				new long[]{siteGroup.getGroupId()}, tagName, tagProperties,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+				new long[] {siteGroup.getGroupId()}, assetTagName,
+				assetTagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		addAssetTag(siteGroup.getGroupId(), tagName, tagProperties);
+		addAssetTag(siteGroup.getGroupId(), assetTagName, assetTagProperties);
 
 		User user = UserTestUtil.addUser(null, 0);
 
@@ -315,19 +328,24 @@ public class AssetTagFinderTest {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			List<AssetTag> finalTagsScopeGroup =
+			List<AssetTag> scopeGroupAssetTags =
 				AssetTagFinderUtil.filterFindByG_N_P(
-					new long[]{scopeGroup.getGroupId()}, tagName, tagProperties,
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-			List<AssetTag> finalTagsSiteGroup =
-				AssetTagFinderUtil.filterFindByG_N_P(
-					new long[]{siteGroup.getGroupId()}, tagName, tagProperties,
-					QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+					new long[] {scopeGroup.getGroupId()}, assetTagName,
+					assetTagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null);
 
 			Assert.assertEquals(
-				initialTagsScopeGroup.size(), finalTagsScopeGroup.size());
+				initialScopeGroupAssetTags.size(), scopeGroupAssetTags.size());
+
+			List<AssetTag> siteGroupAssetTags =
+				AssetTagFinderUtil.filterFindByG_N_P(
+					new long[] {siteGroup.getGroupId()}, assetTagName,
+					assetTagProperties, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null);
+
 			Assert.assertEquals(
-				initialTagsSiteGroup.size() + 1, finalTagsSiteGroup.size());
+				initialSiteGroupAssetTags.size() + 1,
+				siteGroupAssetTags.size());
 		}
 		finally {
 			PermissionThreadLocal.setPermissionChecker(
@@ -345,11 +363,13 @@ public class AssetTagFinderTest {
 			TestPropsValues.getUserId(), name, properties, serviceContext);
 	}
 
-	protected void addBlogEntry(long groupId, String tagName) throws Exception {
+	protected void addBlogsEntry(long groupId, String assetTagName)
+		throws Exception {
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
-		serviceContext.setAssetTagNames(new String[] {tagName});
+		serviceContext.setAssetTagNames(new String[] {assetTagName});
 
 		BlogsTestUtil.addEntry(
 			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), true,
@@ -363,18 +383,17 @@ public class AssetTagFinderTest {
 			group.getGroupId(), ServiceTestUtil.randomString());
 
 		String name = ServiceTestUtil.randomString();
-		String description = ServiceTestUtil.randomString();
-		String friendlyURL =
-			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		Group scopeGroup = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), group.getParentGroupId(),
 			Layout.class.getName(), layout.getPlid(),
-			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description,
-			GroupConstants.TYPE_SITE_OPEN, true,
-			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, friendlyURL, false,
+			GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
+			ServiceTestUtil.randomString(), GroupConstants.TYPE_SITE_OPEN, true,
+			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,
+			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name), false,
 			true, serviceContext);
 
 		return scopeGroup;
