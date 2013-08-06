@@ -76,7 +76,6 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 			</#list>
 
 			boolean testPassed = false;
-
 			boolean testSkipped = false;
 
 			try {
@@ -136,7 +135,7 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 
 				testPassed = true;
 			}
-			catch (SeleniumException e) {
+			catch (SeleniumException se) {
 				testSkipped = true;
 			}
 			finally {
@@ -164,11 +163,11 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 					selenium.sendLogger("${testCaseName?uncap_first}TestCase${lineNumber}", "pass");
 				</#if>
 
-				if (testPassed) {
-					selenium.sendLogger("${testCaseName?uncap_first}TestCase${commandName}", "pass");
-				}
-				else if (testSkipped) {
+				if (testSkipped) {
 					selenium.sendLogger("${testCaseName?uncap_first}TestCase${commandName}", "skip");
+				}
+				else if (testPassed) {
+					selenium.sendLogger("${testCaseName?uncap_first}TestCase${commandName}", "pass");
 				}
 				else {
 					selenium.sendLogger("${testCaseName?uncap_first}TestCase${commandName}", "fail");
