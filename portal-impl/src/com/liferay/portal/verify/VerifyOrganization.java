@@ -35,7 +35,7 @@ public class VerifyOrganization extends VerifyProcess {
 	@Override
 	protected void doVerify() throws Exception {
 		rebuildTree();
-		updateOrganizationAssets();
+		updateOrganizationAssetEntries();
 	}
 
 	protected void rebuildTree() throws Exception {
@@ -46,7 +46,7 @@ public class VerifyOrganization extends VerifyProcess {
 		}
 	}
 
-	protected void updateOrganizationAssets() throws Exception {
+	protected void updateOrganizationAssetEntries() throws Exception {
 		ActionableDynamicQuery actionableDynamicQuery =
 			new OrganizationActionableDynamicQuery() {
 
@@ -68,8 +68,9 @@ public class VerifyOrganization extends VerifyProcess {
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
-							"Unable to update organization asset" +
-								organization.getOrganizationId(), e);
+							"Unable to update asset entry for organization " +
+								organization.getOrganizationId(),
+							e);
 					}
 				}
 			}
