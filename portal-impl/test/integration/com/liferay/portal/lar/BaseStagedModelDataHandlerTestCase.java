@@ -329,16 +329,6 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 		Assert.assertEquals(
 			assetCategory.getUuid(), importedAssetCategory.getUuid());
 
-		AssetVocabulary assetVocabulary =
-			stagedModelAssets.getAssetVocabulary();
-
-		AssetVocabulary importedAssetVocabulary =
-			AssetVocabularyLocalServiceUtil.getVocabulary(
-				importedAssetCategory.getVocabularyId());
-
-		Assert.assertEquals(
-			assetVocabulary.getUuid(), importedAssetVocabulary.getUuid());
-
 		List<AssetTag> assetTags = AssetTagLocalServiceUtil.getEntryTags(
 			assetEntry.getEntryId());
 
@@ -348,6 +338,15 @@ public abstract class BaseStagedModelDataHandlerTestCase extends PowerMockito {
 		AssetTag importedAssetTag = assetTags.get(0);
 
 		Assert.assertEquals(assetTag.getName(), importedAssetTag.getName());
+
+		AssetVocabulary assetVocabulary =
+			stagedModelAssets.getAssetVocabulary();
+		AssetVocabulary importedAssetVocabulary =
+			AssetVocabularyLocalServiceUtil.getVocabulary(
+				importedAssetCategory.getVocabularyId());
+
+		Assert.assertEquals(
+			assetVocabulary.getUuid(), importedAssetVocabulary.getUuid());
 	}
 
 	protected void validateExport(

@@ -135,6 +135,7 @@ public class DLFileShortcutStagedModelDataHandlerTest
 		return super.getStagedModelPath(groupId, stagedModel);
 	}
 
+	@Override
 	protected void validateAssets(
 			String classUuid, StagedModelAssets stagedModelAssets, Group group)
 		throws Exception {
@@ -156,7 +157,6 @@ public class DLFileShortcutStagedModelDataHandlerTest
 
 		AssetVocabulary assetVocabulary =
 			stagedModelAssets.getAssetVocabulary();
-
 		AssetVocabulary importedAssetVocabulary =
 			AssetVocabularyLocalServiceUtil.getVocabulary(
 				importedAssetCategory.getVocabularyId());
