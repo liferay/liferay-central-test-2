@@ -35,7 +35,7 @@ String[] tempFileEntryNames = LayoutServiceUtil.getTempFileEntryNames(groupId, E
 			int incompleteBackgroundTaskCount = BackgroundTaskLocalServiceUtil.getBackgroundTasksCount(groupId, LayoutImportBackgroundTaskExecutor.class.getName(), false);
 			%>
 
-			<div class="<%= incompleteBackgroundTaskCount == 0 ? "hide" : "in-progress" %>" id="<portlet:namespace />incompleteProcessMessage">
+			<div class="<%= (incompleteBackgroundTaskCount == 0) ? "hide" : "in-progress" %>" id="<portlet:namespace />incompleteProcessMessage">
 				<liferay-util:include page="/html/portlet/layouts_admin/incomplete_processes_message.jsp">
 					<liferay-util:param name="incompleteBackgroundTaskCount" value="<%= String.valueOf(incompleteBackgroundTaskCount) %>" />
 				</liferay-util:include>
