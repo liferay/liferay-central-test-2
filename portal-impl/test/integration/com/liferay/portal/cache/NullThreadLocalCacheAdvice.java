@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.test.cache;
+package com.liferay.portal.cache;
 
-import com.liferay.portal.cache.ThreadLocalCacheAdvice;
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 
 import org.aopalliance.intercept.MethodInvocation;
