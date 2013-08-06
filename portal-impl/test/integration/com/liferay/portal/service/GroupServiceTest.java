@@ -43,7 +43,6 @@ import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.LayoutTestUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portal.util.UserTestUtil;
-import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -171,24 +170,22 @@ public class GroupServiceTest {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
-		List<AssetTag> tags = AssetTagLocalServiceUtil.getGroupTags(
+		int initialTagsCount = AssetTagLocalServiceUtil.getGroupTagsCount(
 			group.getGroupId());
-
-		int initialTagsCount = tags.size();
 
 		AssetTagLocalServiceUtil.addTag(
 			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
 			serviceContext);
 
-		tags = AssetTagLocalServiceUtil.getGroupTags(group.getGroupId());
-
-		Assert.assertEquals(initialTagsCount + 1, tags.size());
+		Assert.assertEquals(
+			initialTagsCount + 1,
+			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 
 		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 
-		tags = AssetTagLocalServiceUtil.getGroupTags(group.getGroupId());
-
-		Assert.assertEquals(initialTagsCount, tags.size());
+		Assert.assertEquals(
+			initialTagsCount,
+			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 	}
 
 	@Test

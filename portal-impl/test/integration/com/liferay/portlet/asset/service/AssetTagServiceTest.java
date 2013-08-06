@@ -24,9 +24,6 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.portlet.asset.model.AssetTag;
-
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -45,34 +42,31 @@ import org.junit.runner.RunWith;
 public class AssetTagServiceTest {
 
 	@Test
-	public void testDeleteTags() throws Exception {
+	public void testDeleteGroupTags() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
-		List<AssetTag> tags = AssetTagLocalServiceUtil.getGroupTags(
+		int initialTagsCount = AssetTagLocalServiceUtil.getGroupTagsCount(
 			group.getGroupId());
 
-		int initialTagsCount = tags.size();
-
+		AssetTagLocalServiceUtil.addTag(
+			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
+			serviceContext);
 		AssetTagLocalServiceUtil.addTag(
 			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
 			serviceContext);
 
-		AssetTagLocalServiceUtil.addTag(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
-			serviceContext);
+		Assert.assertEquals(
+			initialTagsCount + 2,
+			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 
-		tags = AssetTagLocalServiceUtil.getGroupTags(group.getGroupId());
+		AssetTagLocalServiceUtil.deleteGroupTags(group.getGroupId());
 
-		Assert.assertEquals(initialTagsCount + 2, tags.size());
-
-		AssetTagLocalServiceUtil.deleteTags(group.getGroupId());
-
-		tags = AssetTagLocalServiceUtil.getGroupTags(group.getGroupId());
-
-		Assert.assertEquals(initialTagsCount, tags.size());
+		Assert.assertEquals(
+			initialTagsCount,
+			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 	}
 
 }
