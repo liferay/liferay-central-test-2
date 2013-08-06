@@ -76,7 +76,7 @@ public class ReflectChecker extends BaseChecker {
 				return false;
 			}
 		}
-
+		else {
 		int stackIndex = Reflection.getStackIndex(10, 9);
 
 		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
@@ -88,12 +88,25 @@ public class ReflectChecker extends BaseChecker {
 		logSecurityException(_log, "Attempted to reflect");
 
 		return false;
+		}
+
+		return true;
 	}
 
 	protected boolean hasSuppressAccessChecks(Permission permission) {
 		if (_suppressAccessChecks) {
 			return true;
 		}
+
+		int stackIndex = Reflection.getStackIndex(10, 9);
+
+		Class<?> callerClass = Reflection.getCallerClass(stackIndex);
+
+		if (isTrustedCaller(callerClass, permission)) {
+			return true;
+		}
+
+		logSecurityException(_log, "Attempted to reflect");
 
 		return false;
 	}
