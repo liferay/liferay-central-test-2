@@ -126,7 +126,7 @@ public class WikiTestUtil {
 		return file;
 	}
 
-	public static WikiPage copyPageAttachments(
+	public static WikiPage copyPage(
 			WikiPage page, boolean approved, ServiceContext serviceContext)
 		throws Exception {
 

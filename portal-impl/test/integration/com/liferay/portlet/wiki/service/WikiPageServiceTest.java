@@ -92,7 +92,7 @@ public class WikiPageServiceTest {
 	}
 
 	@Test
-	public void testCopyWikiPageAttachments() throws Exception {
+	public void testCopyPage() throws Exception {
 		WikiPage page = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _group.getGroupId(), _node.getNodeId(),
 			ServiceTestUtil.randomString(), true);
@@ -100,23 +100,26 @@ public class WikiPageServiceTest {
 		WikiTestUtil.addWikiAttachment(
 			page.getUserId(), page.getNodeId(), page.getTitle(), getClass());
 
-		List<FileEntry> fileEntries = page.getAttachmentsFileEntries();
+		List<FileEntry> attachmentsFileEntries =
+			page.getAttachmentsFileEntries();
 
-		WikiPage copyPage =  WikiTestUtil.copyPageAttachments(
+		WikiPage copyPage = WikiTestUtil.copyPage(
 			page, true, ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
-		List<FileEntry> copyFileEntries = copyPage.getAttachmentsFileEntries();
+		List<FileEntry> copyAttachmentsFileEntries =
+			copyPage.getAttachmentsFileEntries();
 
-		Assert.assertEquals(fileEntries.size(), copyFileEntries.size());
+		Assert.assertEquals(
+			attachmentsFileEntries.size(), copyAttachmentsFileEntries.size());
 
-		FileEntry fileEntry = fileEntries.get(0);
-		FileEntry copyFileEntry = copyFileEntries.get(0);
+		FileEntry fileEntry = attachmentsFileEntries.get(0);
+		FileEntry copyFileEntry = copyAttachmentsFileEntries.get(0);
 
-		Assert.assertEquals(fileEntry.getTitle(), copyFileEntry.getTitle());
 		Assert.assertEquals(
 			fileEntry.getExtension(), copyFileEntry.getExtension());
 		Assert.assertEquals(
 			fileEntry.getMimeType(), copyFileEntry.getMimeType());
+		Assert.assertEquals(fileEntry.getTitle(), copyFileEntry.getTitle());
 		Assert.assertEquals(fileEntry.getSize(), copyFileEntry.getSize());
 	}
 
