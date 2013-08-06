@@ -1159,7 +1159,6 @@ AUI.add(
 					_updateincompleteProcessMessage: function(inProgress, content) {
 						var instance = this;
 
-						debugger;
 						var incompleteProcessMessageNode = instance.get('incompleteProcessMessageNode');
 
 						if (incompleteProcessMessageNode) {
