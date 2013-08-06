@@ -32,7 +32,7 @@ public abstract class CustomizableSpringContextJUnitTestRunner
 		super(clazz);
 	}
 
-	public abstract void doAfterApplicationContextInit();
+	public abstract void afterApplicationContextInit();
 
 	public abstract List<String> getExtraConfigLocations();
 

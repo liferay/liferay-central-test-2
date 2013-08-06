@@ -32,7 +32,7 @@ public class NullableThreadLocalCacheJUnitTestRunner
 	}
 
 	@Override
-	public void doAfterApplicationContextInit() {
+	public void afterApplicationContextInit() {
 	}
 
 	@Override
