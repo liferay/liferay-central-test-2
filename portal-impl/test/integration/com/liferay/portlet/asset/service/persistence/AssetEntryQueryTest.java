@@ -310,34 +310,24 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testOrderByRatingsAsc() throws Exception {
-		double[] scores = {
-			2.2, 1.0, 3.0, 1.1, 4.3
-		};
-
-		double[] orderedScores = {
-			1.0, 1.1, 2.2, 3.0, 4.3
-		};
+		double[] scores = {2.2, 1.0, 3.0, 1.1, 4.3};
+		double[] orderedScores = {1.0, 1.1, 2.2, 3.0, 4.3};
 
 		testOrderByRatings(scores, orderedScores, "ASC");
 	}
 
 	@Test
 	public void testOrderByRatingsDesc() throws Exception {
-		double[] scores = {
-			2.2, 1.0, 3.0, 1.1, 4.3
-		};
-
-		double[] orderedScores = {
-			4.3, 3.0, 2.2, 1.1, 1.0
-		};
+		double[] scores = {2.2, 1.0, 3.0, 1.1, 4.3};
+		double[] orderedScores = {4.3, 3.0, 2.2, 1.1, 1.0};
 
 		testOrderByRatings(scores, orderedScores, "DESC");
 	}
 
 	@Test
 	public void testOrderByViewCountsAsc() throws Exception {
-		int[] orderedViewCounts = new int[10];
 		int[] viewCounts = new int[10];
+		int[] orderedViewCounts = new int[10];
 
 		for (int i = 0; i < viewCounts.length; i++) {
 			int randomInt = ServiceTestUtil.randomInt();
@@ -353,8 +343,8 @@ public class AssetEntryQueryTest {
 
 	@Test
 	public void testOrderByViewCountsDesc() throws Exception {
-		int[] orderedViewCounts = new int[10];
 		int[] viewCounts = new int[10];
+		int[] orderedViewCounts = new int[10];
 
 		for (int i = 0; i < viewCounts.length; i++) {
 			int randomInt = ServiceTestUtil.randomInt();
