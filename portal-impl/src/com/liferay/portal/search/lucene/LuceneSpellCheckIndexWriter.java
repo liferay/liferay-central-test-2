@@ -131,7 +131,7 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 	}
 
 	@Override
-	protected void doIndexDictionary(
+	protected void indexDictionary(
 			long companyId, String languageId, InputStream inputStream)
 		throws Exception {
 

@@ -38,7 +38,7 @@ public abstract class BaseSpellCheckIndexWriter
 		throws SearchException {
 
 		try {
-			for (String languageId : _SUPPORTED_LANGUAGE_IDS) {
+			for (String languageId : _SUPPORTED_LOCALES) {
 				indexDictionary(searchContext.getCompanyId(), languageId);
 			}
 		}
@@ -59,10 +59,6 @@ public abstract class BaseSpellCheckIndexWriter
 			throw new SearchException(e);
 		}
 	}
-
-	protected abstract void doIndexDictionary(
-		long companyId, String languageId, InputStream inputStream)
-	throws Exception;
 
 	protected URL getResource(String name) {
 		ClassLoader contextClassLoader =
@@ -111,7 +107,7 @@ public abstract class BaseSpellCheckIndexWriter
 					continue;
 				}
 
-				doIndexDictionary(companyId, languageId, inputStream);
+				indexDictionary(companyId, languageId, inputStream);
 			}
 			finally {
 				StreamUtil.cleanUp(inputStream);
@@ -119,7 +115,11 @@ public abstract class BaseSpellCheckIndexWriter
 		}
 	}
 
-	private static final String[] _SUPPORTED_LANGUAGE_IDS = StringUtil.split(
+	protected abstract void indexDictionary(
+			long companyId, String languageId, InputStream inputStream)
+		throws Exception;
+
+	private static final String[] _SUPPORTED_LOCALES = StringUtil.split(
 		PropsUtil.get(PropsKeys.INDEX_SEARCH_SPELL_CHECKER_SUPPORTED_LOCALES));
 
 	private static Log _log = LogFactoryUtil.getLog(
