@@ -778,14 +778,10 @@ public class JavadocFormatter {
 		cdata = cdata.replaceAll(
 			"(?s)\\s*<(p|[ou]l)>\\s*(.*?)\\s*</\\1>\\s*",
 			"\n\n<$1>\n$2\n</$1>\n\n");
-
 		cdata = cdata.replaceAll(
 			"(?s)\\s*<li>\\s*(.*?)\\s*</li>\\s*", "\n<li>\n$1\n</li>\n");
-
 		cdata = StringUtil.replace(cdata, "</li>\n\n<li>", "</li>\n<li>");
-
 		cdata = cdata.replaceAll("\n\\s+\n", "\n\n");
-
 		cdata = cdata.replaceAll(" +", " ");
 
 		// Trim whitespace inside paragraph tags or in the first paragraph
@@ -858,6 +854,8 @@ public class JavadocFormatter {
 			boolean startsWithTableTag = (tableTagIndex == 0) ? true : false;
 
 			if (startsWithPreTag || startsWithTableTag) {
+				sb.append("\n");
+
 				String tagName = null;
 
 				if (preTagIndex == 0) {
@@ -875,11 +873,8 @@ public class JavadocFormatter {
 
 				int endTagIndex = cdata.indexOf(endTag, startTagLength - 1);
 
-				String entireElement = cdata.substring(
-					0, endTagIndex + endTagLength);
+				sb.append(cdata.substring(0, endTagIndex + endTagLength));
 
-				sb.append("\n");
-				sb.append(entireElement);
 				sb.append("\n");
 
 				cdataBeginIndex = endTagIndex + endTagLength;
@@ -908,9 +903,7 @@ public class JavadocFormatter {
 					startTagIndex = tableTagIndex;
 				}
 
-				String textToFormat = cdata.substring(0, startTagIndex);
-
-				sb.append(_formatCDATA(textToFormat));
+				sb.append(_formatCDATA(cdata.substring(0, startTagIndex)));
 
 				cdataBeginIndex = startTagIndex;
 			}
@@ -918,7 +911,9 @@ public class JavadocFormatter {
 			cdata = cdata.substring(cdataBeginIndex);
 		}
 
-		return sb.toString().trim();
+		cdata = sb.toString();
+
+		return cdata.trim();
 	}
 
 	private String _getClassName(String fileName) {
@@ -1615,7 +1610,9 @@ public class JavadocFormatter {
 			}
 		}
 
-		return sb.toString().trim();
+		content = sb.toString();
+
+		return content.trim();
 	}
 
 	private String _trimMultilineText(String text) {
@@ -1779,7 +1776,9 @@ public class JavadocFormatter {
 			sb.append("\n");
 		}
 
-		String formattedContent = sb.toString().trim();
+		String formattedContent = sb.toString();
+
+		formattedContent = formattedContent.trim();
 
 		if (!originalContent.equals(formattedContent)) {
 			File file = new File(_inputDir + fileName);
