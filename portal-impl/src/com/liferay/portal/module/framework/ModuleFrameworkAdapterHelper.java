@@ -159,8 +159,6 @@ public class ModuleFrameworkAdapterHelper {
 
 			long lastModified = urlConnection.getLastModified();
 
-			// Because LPS-38581
-
 			if ((destinationFile.lastModified() < lastModified) ||
 				(lastModified == 0)) {
 
