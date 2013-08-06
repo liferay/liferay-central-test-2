@@ -146,27 +146,6 @@ public class GroupServiceTest {
 	public void testDeleteSite() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		User user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), group.getGroupId());
-
-		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(
-			user.getUserId(), group, true);
-
-		Assert.assertNotNull(
-			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
-				blogsEntry.getEntryId()));
-
-		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
-
-		Assert.assertNull(
-			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
-				blogsEntry.getEntryId()));
-	}
-
-	@Test
-	public void testDeleteSiteWithTags() throws Exception {
-		Group group = GroupTestUtil.addGroup();
-
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
@@ -181,11 +160,24 @@ public class GroupServiceTest {
 			initialTagsCount + 1,
 			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 
+		User user = UserTestUtil.addUser(
+			ServiceTestUtil.randomString(), group.getGroupId());
+
+		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(
+			user.getUserId(), group, true);
+
+		Assert.assertNotNull(
+			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
+				blogsEntry.getEntryId()));
+
 		GroupLocalServiceUtil.deleteGroup(group.getGroupId());
 
 		Assert.assertEquals(
 			initialTagsCount,
 			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
+		Assert.assertNull(
+			BlogsEntryLocalServiceUtil.fetchBlogsEntry(
+				blogsEntry.getEntryId()));
 	}
 
 	@Test
