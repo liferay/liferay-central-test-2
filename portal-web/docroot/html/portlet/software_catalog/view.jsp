@@ -328,9 +328,8 @@ portletURL.setParameter("tabs1", tabs1);
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		int total = 0;
-
 		List results = null;
+		int total = 0;
 
 		if (tabs1.equals("products")) {
 			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(scopeGroupId);
