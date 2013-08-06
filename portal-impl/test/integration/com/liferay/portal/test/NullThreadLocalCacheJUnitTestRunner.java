@@ -22,10 +22,10 @@ import org.junit.runners.model.InitializationError;
 /**
  * @author Miguel Pastor
  */
-public class NullableThreadLocalCacheJUnitTestRunner
+public class NullThreadLocalCacheJUnitTestRunner
 	extends CustomizableSpringContextJUnitTestRunner {
 
-	public NullableThreadLocalCacheJUnitTestRunner(Class<?> clazz)
+	public NullThreadLocalCacheJUnitTestRunner(Class<?> clazz)
 		throws InitializationError {
 
 		super(clazz);

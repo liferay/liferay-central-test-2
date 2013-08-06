@@ -22,7 +22,7 @@ import org.aopalliance.intercept.MethodInvocation;
 /**
  * @author Miguel Pastor
  */
-public class NullableThreadLocalCacheAdvice extends ThreadLocalCacheAdvice {
+public class NullThreadLocalCacheAdvice extends ThreadLocalCacheAdvice {
 
 	@Override
 	protected ThreadLocalCachable findAnnotation(
