@@ -313,10 +313,9 @@ public class SitemapImpl implements Sitemap {
 						getAlternateURLs(layoutFullURL, themeDisplay, layout));
 				}
 			}
-
-			visitArticles(element, layout, themeDisplay);
 		}
 
+		visitArticles(element, layout, themeDisplay);
 		visitLayouts(element, layout.getChildren(), themeDisplay);
 	}
 
