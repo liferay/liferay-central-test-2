@@ -278,7 +278,7 @@ public class SitemapImpl implements Sitemap {
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
-		if (layout.isHidden() || !PortalUtil.isLayoutSitemapable(layout) ||
+		if (!PortalUtil.isLayoutSitemapable(layout) ||
 			!GetterUtil.getBoolean(
 				typeSettingsProperties.getProperty("sitemap-include"), true)) {
 
