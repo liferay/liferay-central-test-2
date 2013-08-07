@@ -83,9 +83,9 @@ public class SearchContainerColumnStatusTag<R>
 				(HttpServletResponse)pageContext.getResponse());
 			statusSearchEntry.setServletContext(
 				pageContext.getServletContext());
+			statusSearchEntry.setStatus(_status);
 			statusSearchEntry.setStatusByUserId(_statusByUserId);
 			statusSearchEntry.setStatusDate(_statusDate);
-			statusSearchEntry.setStatus(_status);
 			statusSearchEntry.setValign(getValign());
 
 			resultRow.addSearchEntry(index, statusSearchEntry);
@@ -94,9 +94,9 @@ public class SearchContainerColumnStatusTag<R>
 		}
 		finally {
 			index = -1;
+			_status = -1;
 			_statusByUserId = -1;
 			_statusDate = null;
-			_status = -1;
 
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;

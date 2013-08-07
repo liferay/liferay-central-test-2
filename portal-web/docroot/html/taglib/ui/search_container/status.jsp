@@ -25,17 +25,17 @@ Date statusDate = GetterUtil.getDate(request.getAttribute("liferay-ui:search-con
 <c:if test="<%= statusByUserId > 0 %>">
 
 	<%
-	User userDisplay = UserLocalServiceUtil.getUser(statusByUserId);
+	User statusByUser = UserLocalServiceUtil.getUser(statusByUserId);
 	%>
 
 	<liferay-util:buffer var="buffer">
 		<div class="user-status-tooltip">
 			<span class="user-status-avatar">
-				<img alt="<%= HtmlUtil.escapeAttribute(userDisplay.getFullName()) %>" class="user-status-avatar-image" src="<%= HtmlUtil.escape(userDisplay.getPortraitURL(themeDisplay)) %>" />
+				<img alt="<%= HtmlUtil.escapeAttribute(statusByUser.getFullName()) %>" class="user-status-avatar-image" src="<%= HtmlUtil.escape(statusByUser.getPortraitURL(themeDisplay)) %>" />
 			</span>
 			<span class="user-status-info">
 				<div class="user-status-name">
-					<aui:a href="<%= userDisplay.getDisplayURL(themeDisplay) %>"><%= StringUtil.shorten(userDisplay.getFullName(), 20) %></aui:a>
+					<aui:a href="<%= statusByUser.getDisplayURL(themeDisplay) %>"><%= StringUtil.shorten(statusByUser.getFullName(), 20) %></aui:a>
 				</div>
 				<div class="user-status-date">
 					<liferay-ui:message arguments="<%= LanguageUtil.getTimeDescription(pageContext, System.currentTimeMillis() - statusDate.getTime(), true) %>" key="x-ago" />
