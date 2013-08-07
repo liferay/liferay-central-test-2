@@ -141,14 +141,14 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		try {
 			return PortletFileRepositoryUtil.getPortletFileEntry(
 				folder.getGroupId(), folder.getFolderId(),
-				getAssembledFileEntryName(stagingRequestId));
+				getAssembledFileName(stagingRequestId));
 		}
 		catch (NoSuchFileEntryException nsfe) {
 			return null;
 		}
 	}
 
-	protected String getAssembledFileEntryName(long stagingRequestId) {
+	protected String getAssembledFileName(long stagingRequestId) {
 		return _ASSEMBLED_LAR_PREFIX + String.valueOf(stagingRequestId) +
 			".lar";
 	}
@@ -201,7 +201,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 				folder.getGroupId(), userId, Group.class.getName(),
 				folder.getGroupId(), PortletKeys.SITES_ADMIN,
 				folder.getFolderId(), tempFile,
-				getAssembledFileEntryName(stagingRequestId),
+				getAssembledFileName(stagingRequestId),
 				ContentTypes.APPLICATION_ZIP, false);
 
 			stagingRequestFileEntry = fetchStagingRequestFileEntry(
