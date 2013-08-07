@@ -127,18 +127,14 @@ public class PermissionImporter {
 
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-			boolean prototypeLayout = false;
+			if (!group.isLayoutPrototype() && !group.isLayoutSetPrototype() &&
+				layout.isPrivateLayout()) {
 
-			if (group.isLayoutPrototype() || group.isLayoutSetPrototype()) {
-				prototypeLayout = true;
-			}
-
-			String roleName = role.getName();
-
-			if (!prototypeLayout && layout.isPrivateLayout() &&
-				roleName.equals(RoleConstants.GUEST)) {
-
-				continue;
+				String roleName = role.getName();
+	
+				if (roleName.equals(RoleConstants.GUEST)) {	
+					continue;
+				}
 			}
 
 			List<String> actions = getActions(roleElement);
