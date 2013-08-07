@@ -612,8 +612,8 @@ public class SeleniumBuilderContextTest {
 	}
 
 	private static final String _BASE_DIR =
-		"./portal-impl/test/integration/com/liferay/portal/tools/" +
-			"seleniumbuilder/dependencies/context";
+		"./portal-impl/test/integration/com/liferay/portal/tools" +
+			"/seleniumbuilder/dependencies/context";
 
 	private static final String _DIR_NAME = "/..";
 
