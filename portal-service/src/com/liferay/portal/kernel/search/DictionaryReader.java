@@ -49,7 +49,9 @@ public class DictionaryReader {
 		return new DictionaryIterator();
 	}
 
-	class DictionaryIterator implements Iterator<DictionaryEntry> {
+	private class DictionaryIterator implements Iterator<DictionaryEntry> {
+
+		@Override
 		public DictionaryEntry next() {
 
 			if (!_hasNextCalled) {
@@ -59,7 +61,7 @@ public class DictionaryReader {
 			_hasNextCalled = false;
 
 			if (StringPool.UTF8.equals(_encoding) &&
-				(_line.charAt(0) == StringPool.UNICODE_BYTE_ORDER_MARK)) {
+				(_line.charAt(0) == _UNICODE_BYTE_ORDER_MARK)) {
 
 				_line = _line.substring(1);
 			}
@@ -67,6 +69,7 @@ public class DictionaryReader {
 			return new DictionaryEntry(_line);
 		}
 
+		@Override
 		public boolean hasNext() {
 			if (!_hasNextCalled) {
 				try {
@@ -86,6 +89,7 @@ public class DictionaryReader {
 			return false;
 		}
 
+		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}
@@ -94,6 +98,8 @@ public class DictionaryReader {
 		private boolean _hasNextCalled;
 
 	}
+
+	private static final int _UNICODE_BYTE_ORDER_MARK = 65279;
 
 	private BufferedReader _bufferedReader;
 	private final String _encoding;
