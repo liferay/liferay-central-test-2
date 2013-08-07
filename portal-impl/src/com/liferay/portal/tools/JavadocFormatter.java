@@ -184,7 +184,7 @@ public class JavadocFormatter {
 			}
 			catch (Exception e) {
 				throw new RuntimeException(
-					"Error while formatting file " + fileName, e);
+					"Unable to format file " + fileName, e);
 			}
 		}
 
