@@ -66,7 +66,10 @@ public class MethodKey implements Externalizable {
 			method.getParameterTypes());
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #MethodKey(Class, String,
+	 *             Class...)}
+	 */
 	public MethodKey(
 		String declaringClassName, String methodName,
 		Class<?>... parameterTypes) {
