@@ -14,8 +14,7 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -25,19 +24,12 @@ import com.liferay.portal.kernel.util.StringUtil;
 public class DictionaryEntry {
 
 	public DictionaryEntry(String line) {
-		String[] entryValues = StringUtil.split(line, StringPool.SPACE);
+		String[] values = StringUtil.split(line, StringPool.SPACE);
 
-		_word = entryValues[0];
+		_word = values[0];
 
-		if (entryValues.length == 2) {
-			try {
-				_weight = Float.parseFloat(entryValues[1]);
-			}
-			catch (NumberFormatException e) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Invalid weight for word: " + _word);
-				}
-			}
+		if (values.length == 2) {
+			_weight = GetterUtil.getFloat(values[1]);
 		}
 	}
 
@@ -48,8 +40,6 @@ public class DictionaryEntry {
 	public String getWord() {
 		return _word;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(DictionaryEntry.class);
 
 	private float _weight;
 	private String _word;

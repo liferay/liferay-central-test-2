@@ -106,11 +106,11 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 			PortletKeys.SEARCH, Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
 		addField(
-			document, localizedFieldName, word, Field.Store.YES,
-			FieldInfo.IndexOptions.DOCS_ONLY, true);
-		addField(
 			document, com.liferay.portal.kernel.search.Field.PRIORITY,
 			String.valueOf(weight), Field.Store.YES,
+			FieldInfo.IndexOptions.DOCS_ONLY, true);
+		addField(
+			document, localizedFieldName, word, Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
 
 		NGramHolder nGramHolder = NGramHolderBuilderUtil.buildNGramHolder(word);

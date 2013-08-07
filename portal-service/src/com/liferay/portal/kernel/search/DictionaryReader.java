@@ -39,26 +39,30 @@ public class DictionaryReader {
 	public DictionaryReader(InputStream inputStream, String encoding)
 		throws UnsupportedEncodingException {
 
+		_encoding = encoding;
+
 		_bufferedReader = new BufferedReader(
 			new InputStreamReader(inputStream, encoding));
-
-		_encoding = encoding;
 	}
 
 	public Iterator<DictionaryEntry> getDictionaryEntriesIterator() {
 		return new DictionaryIterator();
 	}
 
+	private static final int _UNICODE_BYTE_ORDER_MARK = 65279;
+
+	private BufferedReader _bufferedReader;
+	private final String _encoding;
+
 	private class DictionaryIterator implements Iterator<DictionaryEntry> {
 
 		@Override
 		public DictionaryEntry next() {
-
-			if (!_hasNextCalled) {
+			if (!_calledHasNext) {
 				hasNext();
 			}
 
-			_hasNextCalled = false;
+			_calledHasNext = false;
 
 			if (StringPool.UTF8.equals(_encoding) &&
 				(_line.charAt(0) == _UNICODE_BYTE_ORDER_MARK)) {
@@ -71,14 +75,14 @@ public class DictionaryReader {
 
 		@Override
 		public boolean hasNext() {
-			if (!_hasNextCalled) {
+			if (!_calledHasNext) {
 				try {
 					_line = _bufferedReader.readLine();
 
-					_hasNextCalled = true;
+					_calledHasNext = true;
 				}
-				catch (IOException ex) {
-					throw new IllegalStateException(ex);
+				catch (IOException ioe) {
+					throw new IllegalStateException(ioe);
 				}
 			}
 
@@ -94,14 +98,9 @@ public class DictionaryReader {
 			throw new UnsupportedOperationException();
 		}
 
+		private boolean _calledHasNext;
 		private String _line;
-		private boolean _hasNextCalled;
 
 	}
-
-	private static final int _UNICODE_BYTE_ORDER_MARK = 65279;
-
-	private BufferedReader _bufferedReader;
-	private final String _encoding;
 
 }
