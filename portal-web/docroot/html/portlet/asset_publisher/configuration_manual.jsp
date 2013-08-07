@@ -23,7 +23,6 @@ String redirect = (String)request.getAttribute("configuration.jsp-redirect");
 String rootPortletId = (String)request.getAttribute("configuration.jsp-rootPortletId");
 String selectScope = (String)request.getAttribute("configuration.jsp-selectScope");
 String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle");
-
 String eventName = "_" + HtmlUtil.escapeJS(portletResource) + "_selectAsset";
 %>
 
@@ -115,9 +114,9 @@ String eventName = "_" + HtmlUtil.escapeJS(portletResource) + "_selectAsset";
 							PortletURL assetBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.ASSET_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
 							assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
-							assetBrowserURL.setParameter("eventName", eventName);
 							assetBrowserURL.setParameter("groupId", String.valueOf(groupId));
 							assetBrowserURL.setParameter("selectedGroupIds", String.valueOf(groupId));
+							assetBrowserURL.setParameter("eventName", eventName);
 							assetBrowserURL.setPortletMode(PortletMode.VIEW);
 							assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 

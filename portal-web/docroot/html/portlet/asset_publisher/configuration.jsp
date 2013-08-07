@@ -22,7 +22,6 @@ String tabs2 = ParamUtil.getString(request, "tabs2");
 String redirect = ParamUtil.getString(request, "redirect");
 
 String typeSelection = ParamUtil.getString(request, "typeSelection", StringPool.BLANK);
-
 String eventName = "_" + HtmlUtil.escapeJS(portletResource) + "_selectSite";
 
 List<AssetRendererFactory> classTypesAssetRendererFactories = new ArrayList<AssetRendererFactory>();
@@ -167,10 +166,10 @@ String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 						PortletURL layoutSiteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
 						layoutSiteBrowserURL.setParameter("struts_action", "/site_browser/view");
-						layoutSiteBrowserURL.setParameter("eventName", eventName);
 						layoutSiteBrowserURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
 						layoutSiteBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
 						layoutSiteBrowserURL.setParameter("type", "layoutScopes");
+						layoutSiteBrowserURL.setParameter("eventName", eventName);
 						layoutSiteBrowserURL.setPortletMode(PortletMode.VIEW);
 						layoutSiteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
@@ -217,10 +216,10 @@ String emailBodyParam = emailParam + "Body_" + currentLanguageId;
 						PortletURL siteBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.SITE_BROWSER, PortalUtil.getControlPanelPlid(company.getCompanyId()), PortletRequest.RENDER_PHASE);
 
 						siteBrowserURL.setParameter("struts_action", "/site_browser/view");
-						siteBrowserURL.setParameter("eventName", eventName);
 						siteBrowserURL.setParameter("groupId", String.valueOf(layout.getGroupId()));
 						siteBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
 						siteBrowserURL.setParameter("types", StringUtil.merge(types));
+						siteBrowserURL.setParameter("eventName", eventName);
 						siteBrowserURL.setPortletMode(PortletMode.VIEW);
 						siteBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 

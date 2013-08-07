@@ -75,9 +75,9 @@ long controlPanelPlid = PortalUtil.getControlPanelPlid(company.getCompanyId());
 PortletURL assetBrowserURL = PortletURLFactoryUtil.create(request, PortletKeys.ASSET_BROWSER, controlPanelPlid, PortletRequest.RENDER_PHASE);
 
 assetBrowserURL.setParameter("struts_action", "/asset_browser/view");
-assetBrowserURL.setParameter("eventName", eventName);
 assetBrowserURL.setParameter("groupId", String.valueOf(scopeGroupId));
 assetBrowserURL.setParameter("selectedGroupIds", themeDisplay.getCompanyGroupId() + "," + scopeGroupId);
+assetBrowserURL.setParameter("eventName", eventName);
 assetBrowserURL.setPortletMode(PortletMode.VIEW);
 assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 %>
