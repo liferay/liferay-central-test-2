@@ -87,15 +87,13 @@ public class TikaRawMetadataProcessor extends XugglerRawMetadataProcessor {
 						"Unable to extract metadata from an encrypted file");
 				}
 			}
+			else if (e instanceof TikaException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to extract metadata");
+				}
+			}
 			else {
-				if (e instanceof TikaException) {
-					if (_log.isWarnEnabled()) {
-						_log.warn("Unable to extract metadata");
-					}
-				}
-				else {
-					_log.error(e, e);
-				}
+				_log.error(e, e);
 			}
 
 			throw new IOException(e.getMessage());

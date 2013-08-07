@@ -368,18 +368,13 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 							fileName);
 				}
 			}
+			else if (e instanceof TikaException) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to extract text from " + fileName);
+				}
+			}
 			else {
-				if (e instanceof TikaException) {
-					text = null;
-
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Unable to extract text from \"" + fileName + "\"");
-					}
-				}
-				else {
-					_log.error(e, e);
-				}
+				_log.error(e, e);
 			}
 		}
 		finally {
