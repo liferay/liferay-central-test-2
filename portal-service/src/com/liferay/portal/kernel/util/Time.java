@@ -170,7 +170,7 @@ public class Time {
 
 	public static String getRelativeTimeDescription(
 		Date date, Locale locale, TimeZone timeZone) {
-		
+
 		return getRelativeTimeDescription(date.getTime(), locale, timeZone);
 	}
 
