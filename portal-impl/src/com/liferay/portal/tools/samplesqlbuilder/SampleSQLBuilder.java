@@ -92,8 +92,6 @@ public class SampleSQLBuilder {
 		_optimizeBufferSize = GetterUtil.getInteger(
 			properties.getProperty("sample.sql.optimize.buffer.size"));
 		_outputDir = properties.getProperty("sample.sql.output.dir");
-		boolean outputMerge = GetterUtil.getBoolean(
-			properties.getProperty("sample.sql.output.merge"));
 
 		_dataFactory = new DataFactory(properties);
 
@@ -101,7 +99,6 @@ public class SampleSQLBuilder {
 
 		Reader reader = generateSQL();
 
-		String endSQLFileName = "others.sql";
 		File tempDir = new File(_outputDir, "temp");
 
 		tempDir.mkdirs();
@@ -110,29 +107,32 @@ public class SampleSQLBuilder {
 
 			// Specific
 
-			compressSQL(reader, tempDir, endSQLFileName);
+			compressSQL(reader, tempDir, "misc.sql");
 
 			// Merge
 
+			boolean outputMerge = GetterUtil.getBoolean(
+				properties.getProperty("sample.sql.output.merge"));
+
 			if (outputMerge) {
-				File mergedSQLFile = new File(
+				File sqlFile = new File(
 					_outputDir, "sample-" + _dbType + ".sql");
 
-				FileUtil.delete(mergedSQLFile);
+				FileUtil.delete(sqlFile);
 
-				mergeSQL(mergedSQLFile, tempDir, endSQLFileName);
+				mergeSQL(sqlFile, tempDir, "misc.sql");
 			}
 			else {
-				File dividedSQLDir = new File(_outputDir, "output");
+				File outputDir = new File(_outputDir, "output");
 
-				FileUtil.deltree(dividedSQLDir);
+				FileUtil.deltree(outputDir);
 
-				if (!tempDir.renameTo(dividedSQLDir)) {
+				if (!tempDir.renameTo(outputDir)) {
 
 					// This will only happen when temp and output folders are on
 					// different file systems
 
-					FileUtil.copyDirectory(tempDir, dividedSQLDir);
+					FileUtil.copyDirectory(tempDir, outputDir);
 				}
 			}
 		}
@@ -201,7 +201,7 @@ public class SampleSQLBuilder {
 	}
 
 	protected void compressSQL(
-			Reader reader, File directory, String endSQLFileName)
+			Reader reader, File directory, String sqlFileName)
 		throws IOException {
 
 		DB db = DBFactoryUtil.getDB(_dbType);
@@ -253,7 +253,7 @@ public class SampleSQLBuilder {
 		}
 
 		Writer endSQLFileWriter = new FileWriter(
-			new File(directory, endSQLFileName));
+			new File(directory, sqlFileName));
 
 		for (String sql : otherSQLs) {
 			sql = db.buildSQL(sql);
@@ -286,7 +286,7 @@ public class SampleSQLBuilder {
 		};
 	}
 
-	protected void doMergeSQL(File sqlFile, FileChannel outputFileChannel)
+	protected void mergeSQL(File sqlFile, FileChannel outputFileChannel)
 		throws IOException {
 
 		FileInputStream fileInputStream = new FileInputStream(sqlFile);
@@ -360,6 +360,7 @@ public class SampleSQLBuilder {
 		throws IOException {
 
 		FileOutputStream fileOutputStream = new FileOutputStream(mergedSQLFile);
+
 		FileChannel fileChannel = fileOutputStream.getChannel();
 
 		File endSQLFile = null;
@@ -373,11 +374,11 @@ public class SampleSQLBuilder {
 				continue;
 			}
 
-			doMergeSQL(sqlFile, fileChannel);
+			mergeSQL(sqlFile, fileChannel);
 		}
 
 		if (endSQLFile != null) {
-			doMergeSQL(endSQLFile, fileChannel);
+			mergeSQL(endSQLFile, fileChannel);
 		}
 
 		fileChannel.close();
