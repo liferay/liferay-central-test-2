@@ -47,7 +47,7 @@ public class SQLChecker extends BaseChecker {
 
 	@Override
 	public void afterPropertiesSet() {
-		initSqlStatements();
+		initSQLs();
 		initTableNames();
 	}
 
@@ -251,9 +251,10 @@ public class SQLChecker extends BaseChecker {
 			sql = StringUtil.replace(
 				sql, StringPool.COMMA, StringPool.SEMICOLON);
 
-			if (_sqlStatements.contains(sql)) {
+			if (_sqls.contains(sql)) {
 				return true;
-			}		}
+			}
+		}
 
 		return false;
 	}
@@ -319,6 +320,10 @@ public class SQLChecker extends BaseChecker {
 		return isAllowedTables(tableNames, _updateTableNames);
 	}
 
+	protected void initSQLs() {
+		_sqls = getPropertySet("security-manager-sql-statements");
+	}
+
 	protected void initTableNames() {
 		_allTableNames = getPropertySet("security-manager-sql-tables-all");
 		_createTableNames = getPropertySet(
@@ -337,10 +342,6 @@ public class SQLChecker extends BaseChecker {
 			"security-manager-sql-tables-truncate");
 		_updateTableNames = getPropertySet(
 			"security-manager-sql-tables-update");
-	}
-
-	protected void initSqlStatements() {
-		_sqlStatements = getPropertySet("security-manager-sql-statements");
 	}
 
 	protected boolean isAllowedTable(
@@ -384,7 +385,7 @@ public class SQLChecker extends BaseChecker {
 	private JSqlParser _jSqlParser = new CCJSqlParserManager();
 	private Set<String> _replaceTableNames;
 	private Set<String> _selectTableNames;
-	private Set<String> _sqlStatements;
+	private Set<String> _sqls;
 	private Set<String> _truncateTableNames;
 	private Set<String> _updateTableNames;
 
