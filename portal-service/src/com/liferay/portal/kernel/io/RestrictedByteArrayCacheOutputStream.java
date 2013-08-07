@@ -38,7 +38,7 @@ public class RestrictedByteArrayCacheOutputStream extends OutputStream {
 		if (initialCacheSize > cacheCapacity) {
 			throw new IllegalArgumentException(
 				"Initial cache size " + initialCacheSize +
-					" is bigger than cache capacity " + cacheCapacity);
+					" is larger than cache capacity " + cacheCapacity);
 		}
 
 		this.outputStream = outputStream;

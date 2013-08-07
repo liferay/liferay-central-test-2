@@ -72,7 +72,7 @@ public class RestrictedByteBufferCacheServletResponse
 	public ServletOutputStream getOutputStream() throws IOException {
 		if (calledGetWriter) {
 			throw new IllegalStateException(
-				"Cannot obtain OutputStream because Writer is already in use");
+				"Unable obtain OutputStream because Writer is already in use");
 		}
 
 		if (_servletOutputStream != null) {
@@ -96,7 +96,7 @@ public class RestrictedByteBufferCacheServletResponse
 	public PrintWriter getWriter() throws IOException {
 		if (calledGetOutputStream) {
 			throw new IllegalStateException(
-				"Cannot obtain Writer because OutputStream is already in use");
+				"Unable obtain Writer because OutputStream is already in use");
 		}
 
 		if (_printWriter != null) {
