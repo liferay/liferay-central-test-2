@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.RestrictedByteArrayCacheOutputStream.FlushPr
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
 import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 
 import java.io.IOException;
 
@@ -49,15 +50,15 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 				new RestrictedByteArrayCacheOutputStream(
 					unsyncByteArrayOutputStream, 9, 19, null);
 
-		byte[] data = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+		byte[] bytes = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-		restrictedByteArrayCacheOutputStream.write(data);
+		restrictedByteArrayCacheOutputStream.write(bytes);
 
 		Assert.assertFalse(restrictedByteArrayCacheOutputStream.isOverflowed());
 		Assert.assertEquals(10, restrictedByteArrayCacheOutputStream.index);
 		Assert.assertEquals(10, restrictedByteArrayCacheOutputStream.size());
 		Assert.assertArrayEquals(
-			data, restrictedByteArrayCacheOutputStream.toByteArray());
+			bytes, restrictedByteArrayCacheOutputStream.toByteArray());
 
 		byte[] unsafeGetByteArray =
 			restrictedByteArrayCacheOutputStream.unsafeGetByteArray();
@@ -65,7 +66,7 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 		Assert.assertEquals(18, unsafeGetByteArray.length);
 
 		for (int i = 0; i < 10; i++) {
-			Assert.assertEquals(data[i], unsafeGetByteArray[i]);
+			Assert.assertEquals(bytes[i], unsafeGetByteArray[i]);
 		}
 
 		ByteBuffer byteBuffer =
@@ -76,29 +77,29 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 		byte[] byteBufferArray = byteBuffer.array();
 
 		for (int i = 0; i < 10; i++) {
-			Assert.assertEquals(data[i], byteBufferArray[i]);
+			Assert.assertEquals(bytes[i], byteBufferArray[i]);
 		}
 
-		restrictedByteArrayCacheOutputStream.write(data);
+		restrictedByteArrayCacheOutputStream.write(bytes);
 
 		Assert.assertTrue(restrictedByteArrayCacheOutputStream.isOverflowed());
 		Assert.assertNull(restrictedByteArrayCacheOutputStream.cache);
 		Assert.assertEquals(-1, restrictedByteArrayCacheOutputStream.index);
 		Assert.assertEquals(-1, restrictedByteArrayCacheOutputStream.size());
 		Assert.assertArrayEquals(
-			ArrayUtil.append(data, data),
+			ArrayUtil.append(bytes, bytes),
 			unsyncByteArrayOutputStream.toByteArray());
 
-		restrictedByteArrayCacheOutputStream.write(data);
+		restrictedByteArrayCacheOutputStream.write(bytes);
 
 		Assert.assertArrayEquals(
-			ArrayUtil.append(data, data, data),
+			ArrayUtil.append(bytes, bytes, bytes),
 			unsyncByteArrayOutputStream.toByteArray());
 
-		restrictedByteArrayCacheOutputStream.write(data, 0, 0);
+		restrictedByteArrayCacheOutputStream.write(bytes, 0, 0);
 
 		Assert.assertArrayEquals(
-			ArrayUtil.append(data, data, data),
+			ArrayUtil.append(bytes, bytes, bytes),
 			unsyncByteArrayOutputStream.toByteArray());
 	}
 
@@ -220,10 +221,11 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 				new RestrictedByteArrayCacheOutputStream(
 					unsyncByteArrayOutputStream, 10, 27, flushPreAction);
 
-		StringBuilder sb = new StringBuilder(26);
+		StringBundler sb = new StringBundler(26);
 
 		for (int i = 'a'; i <= 'z'; i++) {
 			restrictedByteArrayCacheOutputStream.write(i);
+
 			sb.append((char)i);
 		}
 
@@ -233,11 +235,12 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 		Assert.assertEquals(26, restrictedByteArrayCacheOutputStream.size());
 
 		String expectedStringResult = sb.toString();
-		byte[] expectedByteResult = expectedStringResult.getBytes(
+
+		byte[] expectedBytesResult = expectedStringResult.getBytes(
 			Charset.forName("ASCII"));
 
 		Assert.assertArrayEquals(
-			expectedByteResult,
+			expectedBytesResult,
 			restrictedByteArrayCacheOutputStream.toByteArray());
 
 		byte[] unsafeGetByteArray =
@@ -246,7 +249,7 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 		Assert.assertEquals(27, unsafeGetByteArray.length);
 
 		for (int i = 0; i < 26; i++) {
-			Assert.assertEquals(expectedByteResult[i], unsafeGetByteArray[i]);
+			Assert.assertEquals(expectedBytesResult[i], unsafeGetByteArray[i]);
 		}
 
 		ByteBuffer byteBuffer =
@@ -257,7 +260,7 @@ public class RestrictedByteArrayCacheOutputStreamTest {
 		byte[] byteBufferArray = byteBuffer.array();
 
 		for (int i = 0; i < 26; i++) {
-			Assert.assertEquals(expectedByteResult[i], byteBufferArray[i]);
+			Assert.assertEquals(expectedBytesResult[i], byteBufferArray[i]);
 		}
 
 		for (int i = '0'; i <= '9'; i++) {

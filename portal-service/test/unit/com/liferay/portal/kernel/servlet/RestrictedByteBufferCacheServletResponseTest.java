@@ -226,7 +226,7 @@ public class RestrictedByteBufferCacheServletResponseTest {
 
 		Assert.assertSame(printWriter1, printWriter2);
 
-		// Get printWriter after getting servlet output stream
+		// Get print writer after getting servlet output stream
 
 		restrictedByteBufferCacheServletResponse =
 			new RestrictedByteBufferCacheServletResponse(
@@ -325,14 +325,14 @@ public class RestrictedByteBufferCacheServletResponseTest {
 		outputStream =
 			restrictedByteBufferCacheServletResponse.getOutputStream();
 
-		byte[] data = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+		byte[] bytes = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
 
-		outputStream.write(data);
+		outputStream.write(bytes);
 
 		ByteBuffer byteBuffer =
 			restrictedByteBufferCacheServletResponse.getByteBuffer();
 
-		Assert.assertEquals(ByteBuffer.wrap(data), byteBuffer);
+		Assert.assertEquals(ByteBuffer.wrap(bytes), byteBuffer);
 
 		restrictedByteBufferCacheServletResponse.resetBuffer(false);
 
