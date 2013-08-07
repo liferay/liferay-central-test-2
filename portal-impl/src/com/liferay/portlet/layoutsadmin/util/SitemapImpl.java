@@ -278,45 +278,44 @@ public class SitemapImpl implements Sitemap {
 		UnicodeProperties typeSettingsProperties =
 			layout.getTypeSettingsProperties();
 
-		if (!layout.isHidden() && PortalUtil.isLayoutSitemapable(layout) &&
-			GetterUtil.getBoolean(
+		if (layout.isHidden() || !PortalUtil.isLayoutSitemapable(layout) ||
+			!GetterUtil.getBoolean(
 				typeSettingsProperties.getProperty("sitemap-include"), true)) {
 
-			String layoutFullURL = PortalUtil.getLayoutFullURL(
-				layout, themeDisplay);
-
-			layoutFullURL = PortalUtil.getCanonicalURL(
-				layoutFullURL, themeDisplay, layout);
-
-			addURLElement(
-				element, layoutFullURL, typeSettingsProperties,
-				layout.getModifiedDate(), layoutFullURL,
-				getAlternateURLs(layoutFullURL, themeDisplay, layout));
-
-			Locale[] availableLocales = LanguageUtil.getAvailableLocales(
-				layout.getGroupId());
-
-			if (availableLocales.length > 1) {
-				Locale defaultLocale = LocaleUtil.getSiteDefault();
-
-				for (Locale availableLocale : availableLocales) {
-					if (availableLocale.equals(defaultLocale)) {
-						continue;
-					}
-
-					String alternateURL = PortalUtil.getAlternateURL(
-						layoutFullURL, themeDisplay, availableLocale, layout);
-
-					addURLElement(
-						element, alternateURL, typeSettingsProperties,
-						layout.getModifiedDate(), layoutFullURL,
-						getAlternateURLs(layoutFullURL, themeDisplay, layout));
-				}
-			}
+			return;
 		}
 
-		visitArticles(element, layout, themeDisplay);
-		visitLayouts(element, layout.getChildren(), themeDisplay);
+		String layoutFullURL = PortalUtil.getLayoutFullURL(
+			layout, themeDisplay);
+
+		layoutFullURL = PortalUtil.getCanonicalURL(
+			layoutFullURL, themeDisplay, layout);
+
+		addURLElement(
+			element, layoutFullURL, typeSettingsProperties,
+			layout.getModifiedDate(), layoutFullURL,
+			getAlternateURLs(layoutFullURL, themeDisplay, layout));
+
+		Locale[] availableLocales = LanguageUtil.getAvailableLocales(
+			layout.getGroupId());
+
+		if (availableLocales.length > 1) {
+			Locale defaultLocale = LocaleUtil.getSiteDefault();
+
+			for (Locale availableLocale : availableLocales) {
+				if (availableLocale.equals(defaultLocale)) {
+					continue;
+				}
+
+				String alternateURL = PortalUtil.getAlternateURL(
+					layoutFullURL, themeDisplay, availableLocale, layout);
+
+				addURLElement(
+					element, alternateURL, typeSettingsProperties,
+					layout.getModifiedDate(), layoutFullURL,
+					getAlternateURLs(layoutFullURL, themeDisplay, layout));
+			}
+		}
 	}
 
 	protected void visitLayouts(
@@ -325,6 +324,8 @@ public class SitemapImpl implements Sitemap {
 
 		for (Layout layout : layouts) {
 			visitLayout(element, layout, themeDisplay);
+			visitArticles(element, layout, themeDisplay);
+			visitLayouts(element, layout.getChildren(), themeDisplay);
 		}
 	}
 
