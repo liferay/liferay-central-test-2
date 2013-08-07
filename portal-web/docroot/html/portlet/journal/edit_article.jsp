@@ -139,15 +139,9 @@ request.setAttribute("edit_article.jsp-template", ddmTemplate);
 request.setAttribute("edit_article.jsp-languageId", languageId);
 request.setAttribute("edit_article.jsp-defaultLanguageId", defaultLanguageId);
 request.setAttribute("edit_article.jsp-toLanguageId", toLanguageId);
-
-String containerCssClass = "article-form-add";
-
-if (article != null) {
-	containerCssClass = "article-form-edit";
-}
 %>
 
-<div class="article-form <%= containerCssClass %>">
+<div class="article-form <%= (article != null) ? "article-form-edit" : "article-form-add" %>">
 	<c:if test="<%= showHeader %>">
 		<liferay-util:include page="/html/portlet/journal/article_header.jsp" />
 	</c:if>
