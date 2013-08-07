@@ -131,8 +131,8 @@ public class PermissionImporter {
 				layout.isPrivateLayout()) {
 
 				String roleName = role.getName();
-	
-				if (roleName.equals(RoleConstants.GUEST)) {	
+
+				if (roleName.equals(RoleConstants.GUEST)) {
 					continue;
 				}
 			}
