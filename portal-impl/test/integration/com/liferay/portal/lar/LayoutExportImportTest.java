@@ -49,7 +49,6 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 	public void testDeleteMissingLayouts() throws Exception {
 		Layout layout1 = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString());
-
 		Layout layout2 = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString());
 

@@ -534,8 +534,8 @@ public class LayoutImporter {
 			}
 		}
 
-		List<Layout> newLayouts = new ArrayList<Layout>();
 		List<String> sourceLayoutsUuids = new ArrayList<String>();
+		List<Layout> newLayouts = new ArrayList<Layout>();
 
 		if (_log.isDebugEnabled()) {
 			if (_layoutElements.size() > 0) {
@@ -545,7 +545,7 @@ public class LayoutImporter {
 
 		for (Element layoutElement : _layoutElements) {
 			importLayout(
-				portletDataContext, newLayouts, sourceLayoutsUuids,
+				portletDataContext, sourceLayoutsUuids, newLayouts,
 				layoutElement);
 		}
 
@@ -885,8 +885,9 @@ public class LayoutImporter {
 	}
 
 	protected void importLayout(
-			PortletDataContext portletDataContext, List<Layout> newLayouts,
-			List<String> sourceLayoutsUuids, Element layoutElement)
+			PortletDataContext portletDataContext,
+			List<String> sourceLayoutsUuids, List<Layout> newLayouts,
+			Element layoutElement)
 		throws Exception {
 
 		String action = layoutElement.attributeValue("action");
