@@ -34,36 +34,36 @@ public class PortalDelegateServlet extends SecureServlet {
 	protected void doPortalDestroy() {
 		PortalDelegatorServlet.removeDelegate(_subContext);
 
-		_servlet.destroy();
+		servlet.destroy();
 	}
 
 	@Override
 	protected void doPortalInit() throws Exception {
-		ServletContext servletContext = _servletConfig.getServletContext();
+		ServletContext servletContext = servletConfig.getServletContext();
 
 		ClassLoader classLoader = (ClassLoader)servletContext.getAttribute(
 			PluginContextListener.PLUGIN_CLASS_LOADER);
 
-		String servletClass = _servletConfig.getInitParameter("servlet-class");
+		String servletClass = servletConfig.getInitParameter("servlet-class");
 
-		_subContext = _servletConfig.getInitParameter("sub-context");
+		_subContext = servletConfig.getInitParameter("sub-context");
 
 		if (_subContext == null) {
 			_subContext = getServletName();
 		}
 
-		_servlet = (Servlet)InstanceFactory.newInstance(
+		servlet = (Servlet)InstanceFactory.newInstance(
 			classLoader, servletClass);
 
-		if (!(_servlet instanceof HttpServlet)) {
+		if (!(servlet instanceof HttpServlet)) {
 			throw new IllegalArgumentException(
 				"servlet-class is not an instance of " +
-					"javax.servlet.http.HttpServlet");
+					HttpServlet.class.getName());
 		}
 
-		_servlet.init(_servletConfig);
+		servlet.init(servletConfig);
 
-		PortalDelegatorServlet.addDelegate(_subContext, (HttpServlet)_servlet);
+		PortalDelegatorServlet.addDelegate(_subContext, (HttpServlet)servlet);
 	}
 
 	private String _subContext;
