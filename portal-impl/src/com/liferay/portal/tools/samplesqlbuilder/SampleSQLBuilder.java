@@ -286,21 +286,6 @@ public class SampleSQLBuilder {
 		};
 	}
 
-	protected void mergeSQL(File sqlFile, FileChannel outputFileChannel)
-		throws IOException {
-
-		FileInputStream fileInputStream = new FileInputStream(sqlFile);
-
-		FileChannel inputFileChannel = fileInputStream.getChannel();
-
-		inputFileChannel.transferTo(
-			0, inputFileChannel.size(), outputFileChannel);
-
-		inputFileChannel.close();
-
-		sqlFile.delete();
-	}
-
 	protected Reader generateSQL() {
 		final CharPipe charPipe = new CharPipe(_PIPE_BUFFER_SIZE);
 
@@ -382,6 +367,21 @@ public class SampleSQLBuilder {
 		}
 
 		fileChannel.close();
+	}
+
+	protected void mergeSQL(File sqlFile, FileChannel outputFileChannel)
+		throws IOException {
+
+		FileInputStream fileInputStream = new FileInputStream(sqlFile);
+
+		FileChannel inputFileChannel = fileInputStream.getChannel();
+
+		inputFileChannel.transferTo(
+			0, inputFileChannel.size(), outputFileChannel);
+
+		inputFileChannel.close();
+
+		sqlFile.delete();
 	}
 
 	protected void writeToInsertSQLFile(
