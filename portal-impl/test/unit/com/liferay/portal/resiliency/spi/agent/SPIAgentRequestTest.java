@@ -552,7 +552,7 @@ public class SPIAgentRequestTest {
 	}
 
 	@Test
-	public void testFooterControl() {
+	public void testShowFooter() {
 
 		// No theme display
 
@@ -568,7 +568,7 @@ public class SPIAgentRequestTest {
 			new String[] {StringPool.TRUE},
 			parameterMap.get("portalResiliencyPortletShowFooter"));
 
-		// Has theme display, not ajax
+		// Has theme display, without ajax
 
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
@@ -583,7 +583,7 @@ public class SPIAgentRequestTest {
 			new String[] {StringPool.TRUE},
 			parameterMap.get("portalResiliencyPortletShowFooter"));
 
-		// Has theme display, is ajax
+		// Has theme display, with ajax
 
 		themeDisplay.setAjax(true);
 
