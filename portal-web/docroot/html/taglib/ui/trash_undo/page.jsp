@@ -67,13 +67,7 @@ if (SessionMessages.contains(portletRequest, portletDisplay.getId() + SessionMes
 				</liferay-util:buffer>
 
 				<%
-				String cmd = null;
-
-				String[] cmds = data.get(Constants.CMD);
-
-				if ((cmds != null) && (cmds.length > 0)) {
-					cmd = cmds[0];
-				}
+				String cmd = MapUtil.getString(data, Constants.CMD);
 				%>
 
 				<c:choose>
