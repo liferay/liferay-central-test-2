@@ -59,14 +59,13 @@ public abstract class BaseGenericSpellCheckIndexWriter
 
 		Document document = (Document)_documentPrototype.clone();
 
-		document.addKeyword(Field.UID, getUID(companyId, languageId, word));
-
 		document.addKeyword(Field.COMPANY_ID, companyId);
 		document.addKeyword(Field.LANGUAGE_ID, languageId);
 		document.addKeyword(Field.PORTLET_ID, PortletKeys.SEARCH);
 		document.addKeyword(Field.PRIORITY, String.valueOf(weight));
 		document.addKeyword(Field.SPELL_CHECK_WORD, word);
 		document.addKeyword(Field.TYPE, DICTIONARY_TYPE);
+		document.addKeyword(Field.UID, getUID(companyId, languageId, word));
 
 		NGramHolder nGramHolder = NGramHolderBuilderUtil.buildNGramHolder(word);
 
