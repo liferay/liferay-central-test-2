@@ -66,7 +66,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _enLocale, _enLocale);
+			3, Locale.US, Locale.US, Locale.US);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -76,7 +76,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _enLocale, _esLocale);
+			3, Locale.US, Locale.US, _esLocale);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -86,7 +86,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _enLocale, null);
+			3, Locale.US, Locale.US, null);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -96,7 +96,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _esLocale, _enLocale);
+			3, Locale.US, _esLocale, Locale.US);
 
 		Assert.assertEquals(
 			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
@@ -107,7 +107,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _esLocale, null);
+			3, Locale.US, _esLocale, null);
 
 		Assert.assertEquals(
 			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
@@ -118,7 +118,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, _enLocale, _esLocale, _esLocale);
+			3, Locale.US, _esLocale, _esLocale);
 
 		Assert.assertEquals(
 			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
@@ -129,7 +129,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, null, _enLocale, _enLocale);
+			3, null, Locale.US, Locale.US);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -139,7 +139,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, null, _enLocale, _esLocale);
+			3, null, Locale.US, _esLocale);
 
 		Assert.assertEquals(
 			LocaleUtil.toLanguageId(_esLocale), prependI18nLanguageId);
@@ -150,7 +150,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, null, _enLocale, null);
+			3, null, Locale.US, null);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -160,7 +160,7 @@ public class I18nFilterTest {
 		throws Exception {
 
 		String prependI18nLanguageId = getPrependI18nLanguageId(
-			3, null, _esLocale, _enLocale);
+			3, null, _esLocale, Locale.US);
 
 		Assert.assertNull(prependI18nLanguageId);
 	}
@@ -220,7 +220,6 @@ public class I18nFilterTest {
 			_mockHttpServletRequest, localePrependFriendlyURLStyle);
 	}
 
-	private static Locale _enLocale = new Locale("en", "US");
 	private static Locale _esLocale = new Locale("es", "ES");
 
 	private I18nFilter _i18nFilter;
