@@ -1537,7 +1537,7 @@ Please set the property "jdk.6.home" in build.properties.
 			excludes="WEB-INF/web.xml,html/js/editor/fckeditor/_samples/**,html/js/editor/fckeditor_diffs/**"
 			webxml="docroot/WEB-INF/web.xml"
 		>
-			<metainf dir="../oss-licenses">
+			<metainf dir="${project.dir}/oss-licenses">
 				<exclude name="**/development/**" />
 			</metainf>
 		</war>
