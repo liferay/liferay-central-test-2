@@ -17,6 +17,7 @@ package com.liferay.portal.security.pacl.test;
 import com.liferay.portal.kernel.format.PhoneNumberFormatUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.security.pacl.PACLExecutionTestListener;
 import com.liferay.portal.security.pacl.PACLIntegrationJUnitTestRunner;
 import com.liferay.portal.security.pacl.test.hook.action.FailureStrutsAction;
@@ -63,13 +64,13 @@ public class HookTest {
 	@Test
 	public void testLanguage3() throws Exception {
 		Assert.assertEquals(
-			LanguageUtil.get(new Locale("pt", "BR"), "stars"), "Ricardo Kaka");
+			LanguageUtil.get(LocaleUtil.BRAZIL, "stars"), "Ricardo Kaka");
 	}
 
 	@Test
 	public void testLanguage4() throws Exception {
 		Assert.assertEquals(
-			LanguageUtil.get(new Locale("pt", "PT"), "stars"),
+			LanguageUtil.get(LocaleUtil.PORTUGAL, "stars"),
 			"Cristiano Ronaldo");
 	}
 

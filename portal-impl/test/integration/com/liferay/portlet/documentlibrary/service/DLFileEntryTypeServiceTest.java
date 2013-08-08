@@ -147,7 +147,7 @@ public class DLFileEntryTypeServiceTest {
 		Assert.assertTrue(hasDefaultLocale);
 
 		boolean hasHungarianLocale = ArrayUtil.contains(
-			availableLocales, new Locale("hu", "HU"));
+			availableLocales, LocaleUtil.HUNGARY);
 
 		Assert.assertTrue(hasHungarianLocale);
 

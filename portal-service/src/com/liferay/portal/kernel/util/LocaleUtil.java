@@ -32,6 +32,12 @@ import java.util.TreeMap;
  */
 public class LocaleUtil {
 
+	public static final Locale BRAZIL = new Locale("pt", "BR");
+
+	public static final Locale HUNGARY = new Locale("hu", "HU");
+
+	public static final Locale PORTUGAL = new Locale("pt", "PT");
+
 	public static final Locale SPAIN = new Locale("es", "ES");
 
 	public static boolean equals(Locale locale1, Locale locale2) {
