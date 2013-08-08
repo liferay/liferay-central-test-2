@@ -58,7 +58,8 @@ public class HookTest {
 
 	@Test
 	public void testLanguage2() throws Exception {
-		Assert.assertEquals(LanguageUtil.get(Locale.GERMAN, "stars"), "Sterne");
+		Assert.assertEquals(
+			LanguageUtil.get(LocaleUtil.GERMAN, "stars"), "Sterne");
 	}
 
 	@Test
@@ -77,17 +78,17 @@ public class HookTest {
 	@Test
 	public void testLanguage5() throws Exception {
 		Assert.assertEquals(
-			LanguageUtil.get(Locale.UK, "stars"), "David Beckham");
+			LanguageUtil.get(LocaleUtil.UK, "stars"), "David Beckham");
 	}
 
 	@Test
 	public void testLanguage6() throws Exception {
-		Assert.assertEquals(LanguageUtil.get(Locale.US, "stars"), "Stars");
+		Assert.assertEquals(LanguageUtil.get(LocaleUtil.US, "stars"), "Stars");
 	}
 
 	@Test
 	public void testPortalProperties1() throws Exception {
-		Assert.assertFalse(LanguageUtil.isBetaLocale(Locale.US));
+		Assert.assertFalse(LanguageUtil.isBetaLocale(LocaleUtil.US));
 	}
 
 	@Test

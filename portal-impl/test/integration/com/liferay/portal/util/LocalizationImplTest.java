@@ -218,7 +218,7 @@ public class LocalizationImplTest {
 	public void testUpdateLocalization() {
 		Map<Locale, String>localizationMap = new HashMap<Locale, String>();
 
-		localizationMap.put(Locale.US, _englishHello);
+		localizationMap.put(LocaleUtil.US, _englishHello);
 
 		StringBundler sb = new StringBundler();
 
@@ -246,9 +246,10 @@ public class LocalizationImplTest {
 	}
 
 	private String _englishHello = "Hello World";
-	private String _englishLanguageId = LocaleUtil.toLanguageId(Locale.US);
+	private String _englishLanguageId = LocaleUtil.toLanguageId(LocaleUtil.US);
 	private String _germanHello = "Hallo Welt";
-	private String _germanLanguageId = LocaleUtil.toLanguageId(Locale.GERMANY);
+	private String _germanLanguageId = LocaleUtil.toLanguageId(
+		LocaleUtil.GERMANY);
 	private String _xml;
 
 }

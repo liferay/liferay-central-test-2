@@ -110,8 +110,8 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		throws Exception {
 
 		testAvailableLocales(
-			new Locale[] {Locale.US, LocaleUtil.SPAIN},
-			new Locale[] {Locale.US, Locale.GERMANY}, true);
+			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN},
+			new Locale[] {LocaleUtil.US, LocaleUtil.GERMANY}, true);
 	}
 
 	@Test
@@ -119,8 +119,9 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		throws Exception {
 
 		testAvailableLocales(
-			new Locale[] {Locale.US, Locale.US},
-			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.US}, false);
+			new Locale[] {LocaleUtil.US, LocaleUtil.US},
+			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.US},
+			false);
 	}
 
 	@Test

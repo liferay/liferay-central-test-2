@@ -616,7 +616,7 @@ public class GroupServiceTest {
 		Group group = GroupTestUtil.addGroup();
 
 		Locale[] availableLocales =
-			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY};
+			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY};
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, null);

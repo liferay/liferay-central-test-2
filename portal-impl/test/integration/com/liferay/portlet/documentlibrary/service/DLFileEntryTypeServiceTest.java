@@ -249,9 +249,11 @@ public class DLFileEntryTypeServiceTest {
 					description, new long[] {ddmStructure.getStructureId()},
 					serviceContext);
 
-			Assert.assertEquals(name, dlFileEntryType.getName(Locale.US, true));
 			Assert.assertEquals(
-				description, dlFileEntryType.getDescription(Locale.US, true));
+				name, dlFileEntryType.getName(LocaleUtil.US, true));
+			Assert.assertEquals(
+				description,
+				dlFileEntryType.getDescription(LocaleUtil.US, true));
 		}
 		finally {
 			LocaleThreadLocal.setSiteDefaultLocale(locale);
@@ -294,9 +296,11 @@ public class DLFileEntryTypeServiceTest {
 			dlFileEntryType = DLFileEntryTypeLocalServiceUtil.getFileEntryType(
 				dlFileEntryType.getFileEntryTypeId());
 
-			Assert.assertEquals(name, dlFileEntryType.getName(Locale.US, true));
 			Assert.assertEquals(
-				description, dlFileEntryType.getDescription(Locale.US, true));
+				name, dlFileEntryType.getName(LocaleUtil.US, true));
+			Assert.assertEquals(
+				description,
+				dlFileEntryType.getDescription(LocaleUtil.US, true));
 		}
 		finally {
 			LocaleThreadLocal.setSiteDefaultLocale(locale);

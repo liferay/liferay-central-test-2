@@ -74,7 +74,7 @@ public class AssetVocabularyServiceTest {
 
 		Assert.assertEquals(
 			PropsValues.ASSET_VOCABULARY_DEFAULT,
-			assetVocabulary.getTitle(Locale.US, true));
+			assetVocabulary.getTitle(LocaleUtil.US, true));
 	}
 
 	@Test
@@ -85,7 +85,7 @@ public class AssetVocabularyServiceTest {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		titleMap.put(Locale.US, title + "_US");
+		titleMap.put(LocaleUtil.US, title + "_US");
 		titleMap.put(LocaleUtil.SPAIN, title + "_ES");
 
 		String description = ServiceTestUtil.randomString();
@@ -93,7 +93,7 @@ public class AssetVocabularyServiceTest {
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		descriptionMap.put(LocaleUtil.SPAIN, description + "_ES");
-		descriptionMap.put(Locale.US, description + "_US");
+		descriptionMap.put(LocaleUtil.US, description + "_US");
 
 		Group group = GroupTestUtil.addGroup();
 
@@ -109,21 +109,22 @@ public class AssetVocabularyServiceTest {
 			titleMap.get(LocaleUtil.SPAIN), assetVocabulary.getName());
 		Assert.assertEquals(
 			titleMap.get(LocaleUtil.SPAIN),
-			assetVocabulary.getTitle(Locale.GERMANY, true));
+			assetVocabulary.getTitle(LocaleUtil.GERMANY, true));
 		Assert.assertEquals(
 			titleMap.get(LocaleUtil.SPAIN),
 			assetVocabulary.getTitle(LocaleUtil.SPAIN, true));
 		Assert.assertEquals(
-			titleMap.get(Locale.US), assetVocabulary.getTitle(Locale.US, true));
+			titleMap.get(LocaleUtil.US),
+			assetVocabulary.getTitle(LocaleUtil.US, true));
 		Assert.assertEquals(
 			descriptionMap.get(LocaleUtil.SPAIN),
-			assetVocabulary.getDescription(Locale.GERMANY, true));
+			assetVocabulary.getDescription(LocaleUtil.GERMANY, true));
 		Assert.assertEquals(
 			descriptionMap.get(LocaleUtil.SPAIN),
 			assetVocabulary.getDescription(LocaleUtil.SPAIN, true));
 		Assert.assertEquals(
-			descriptionMap.get(Locale.US),
-			assetVocabulary.getDescription(Locale.US, true));
+			descriptionMap.get(LocaleUtil.US),
+			assetVocabulary.getDescription(LocaleUtil.US, true));
 	}
 
 	@Test
@@ -141,7 +142,8 @@ public class AssetVocabularyServiceTest {
 			AssetVocabularyLocalServiceUtil.addVocabulary(
 				TestPropsValues.getUserId(), title, serviceContext);
 
-		Assert.assertEquals(title, assetVocabulary.getTitle(Locale.US, true));
+		Assert.assertEquals(
+			title, assetVocabulary.getTitle(LocaleUtil.US, true));
 		Assert.assertEquals(title, assetVocabulary.getName());
 	}
 

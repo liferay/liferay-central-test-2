@@ -53,7 +53,7 @@ public class PortalImplAlternateURLTest {
 
 	@Test
 	public void testDefaultPortalLocaleAlternateURL() throws Exception {
-		testAlternateURL(null, null, Locale.US, StringPool.BLANK);
+		testAlternateURL(null, null, LocaleUtil.US, StringPool.BLANK);
 	}
 
 	@Test
@@ -61,8 +61,8 @@ public class PortalImplAlternateURLTest {
 		throws Exception {
 
 		testAlternateURL(
-			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY},
-			LocaleUtil.SPAIN, Locale.US, "/en");
+			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY},
+			LocaleUtil.SPAIN, LocaleUtil.US, "/en");
 	}
 
 	@Test
@@ -70,7 +70,7 @@ public class PortalImplAlternateURLTest {
 		throws Exception {
 
 		testAlternateURL(
-			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY},
+			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY},
 			LocaleUtil.SPAIN, LocaleUtil.SPAIN, StringPool.BLANK);
 	}
 
