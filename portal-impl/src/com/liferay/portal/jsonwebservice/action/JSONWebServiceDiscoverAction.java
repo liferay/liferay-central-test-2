@@ -85,7 +85,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 	public static class DiscoveryContent implements JSONSerializable {
 
 		public DiscoveryContent(Map<String, Object> resultsMap) {
-			this._resultsMap = resultsMap;
+			_resultsMap = resultsMap;
 		}
 
 		@Override
