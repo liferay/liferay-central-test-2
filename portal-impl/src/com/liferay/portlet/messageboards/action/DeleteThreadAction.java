@@ -87,6 +87,8 @@ public class DeleteThreadAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
+		String deleteEntryTitle = null;
+
 		long[] deleteThreadIds = null;
 
 		long threadId = ParamUtil.getLong(actionRequest, "threadId");
@@ -98,8 +100,6 @@ public class DeleteThreadAction extends PortletAction {
 			deleteThreadIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "threadIds"), 0L);
 		}
-
-		String deleteEntryTitle = null;
 
 		for (int i = 0; i < deleteThreadIds.length; i++) {
 			long deleteThreadId = deleteThreadIds[i];

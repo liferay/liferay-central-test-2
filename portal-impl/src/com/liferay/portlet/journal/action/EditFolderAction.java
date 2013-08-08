@@ -136,6 +136,8 @@ public class EditFolderAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
+		String deleteEntryTitle = null;
+
 		long[] deleteFolderIds = null;
 
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
@@ -147,8 +149,6 @@ public class EditFolderAction extends PortletAction {
 			deleteFolderIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "folderIds"), 0L);
 		}
-
-		String deleteEntryTitle = null;
 
 		for (int i = 0; i < deleteFolderIds.length; i++) {
 			long deleteFolderId = deleteFolderIds[i];

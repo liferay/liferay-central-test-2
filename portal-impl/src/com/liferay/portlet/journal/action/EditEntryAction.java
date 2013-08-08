@@ -197,11 +197,11 @@ public class EditEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long[] deleteFolderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
 		String deleteEntryClassName = null;
 		String deleteEntryTitle = null;
+
+		long[] deleteFolderIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "folderIds"), 0L);
 
 		for (int i = 0; i < deleteFolderIds.length; i++) {
 			long deleteFolderId = deleteFolderIds[i];

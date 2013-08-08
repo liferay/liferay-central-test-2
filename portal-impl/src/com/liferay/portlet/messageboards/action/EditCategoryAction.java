@@ -154,6 +154,8 @@ public class EditCategoryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String deleteEntryTitle = null;
+
 		long[] deleteCategoryIds = null;
 
 		long categoryId = ParamUtil.getLong(actionRequest, "mbCategoryId");
@@ -165,8 +167,6 @@ public class EditCategoryAction extends PortletAction {
 			deleteCategoryIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "deleteCategoryIds"), 0L);
 		}
-
-		String deleteEntryTitle = null;
 
 		for (int i = 0; i < deleteCategoryIds.length; i++) {
 			long deleteCategoryId = deleteCategoryIds[i];

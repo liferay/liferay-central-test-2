@@ -345,6 +345,8 @@ public class EditArticleAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String deleteEntryTitle = null;
+
 		String[] deleteArticleIds = null;
 
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
@@ -358,8 +360,6 @@ public class EditArticleAction extends PortletAction {
 		}
 
 		long[] restoreArticleIds = new long[deleteArticleIds.length];
-
-		String deleteEntryTitle = null;
 
 		for (int i = 0; i < deleteArticleIds.length; i++) {
 			String deleteArticleId = deleteArticleIds[i];

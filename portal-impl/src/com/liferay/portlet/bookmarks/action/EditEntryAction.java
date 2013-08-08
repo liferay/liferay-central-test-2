@@ -174,6 +174,8 @@ public class EditEntryAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
+		String deleteEntryTitle = null;
+
 		long[] deleteEntryIds = null;
 
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
@@ -185,8 +187,6 @@ public class EditEntryAction extends PortletAction {
 			deleteEntryIds = StringUtil.split(
 				ParamUtil.getString(actionRequest, "deleteEntryIds"), 0L);
 		}
-
-		String deleteEntryTitle = null;
 
 		for (int i = 0; i < deleteEntryIds.length; i++) {
 			long deleteEntryId = deleteEntryIds[i];

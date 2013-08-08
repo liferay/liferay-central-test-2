@@ -273,11 +273,11 @@ public class EditEntryAction extends PortletAction {
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws Exception {
 
-		long[] deleteFolderIds = StringUtil.split(
-			ParamUtil.getString(actionRequest, "folderIds"), 0L);
-
 		String deleteEntryClassName = null;
 		String deleteEntryTitle = null;
+
+		long[] deleteFolderIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "folderIds"), 0L);
 
 		for (int i = 0; i < deleteFolderIds.length; i++) {
 			long deleteFolderId = deleteFolderIds[i];
@@ -288,7 +288,6 @@ public class EditEntryAction extends PortletAction {
 
 				if (i == 0) {
 					deleteEntryClassName = DLFolder.class.getName();
-
 					deleteEntryTitle = TrashUtil.getOriginalTitle(
 						folder.getName());
 				}
@@ -334,7 +333,6 @@ public class EditEntryAction extends PortletAction {
 
 				if (i == 0) {
 					deleteEntryClassName = DLFileEntry.class.getName();
-
 					deleteEntryTitle = TrashUtil.getOriginalTitle(
 						fileEntry.getTitle());
 				}

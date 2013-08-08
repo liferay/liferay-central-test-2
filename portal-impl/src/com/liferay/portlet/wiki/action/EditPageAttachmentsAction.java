@@ -328,6 +328,7 @@ public class EditPageAttachmentsAction extends EditFileEntryAction {
 			Map<String, String[]> data = new HashMap<String, String[]>();
 
 			data.put(Constants.CMD, new String[] {Constants.REMOVE});
+
 			data.put(
 				"deleteEntryClassName",
 				new String[] {DLFileEntry.class.getName()});
