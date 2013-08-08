@@ -27,7 +27,9 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.theme.ThemeDisplay;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -43,44 +45,42 @@ import org.junit.runner.RunWith;
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 @Transactional
-public class PortalImplGetAlternateURLTest {
+public class PortalImplCanonicalURLTest {
 
 	@Test
-	public void testCustomPortalLocaleAlternateURL() throws Exception {
-		Locale esLocale = new Locale("es", "ES");
-
-		testAlternateURL(null, null, esLocale, "/es");
+	public void testCustomPortalLocaleCanonicalURL() throws Exception {
+		testCanonicalURL(null, null, "/es", "/home");
 	}
 
 	@Test
-	public void testDefaultPortalLocaleAlternateURL() throws Exception {
-		testAlternateURL(null, null, Locale.US, StringPool.BLANK);
+	public void testDefaultPortalLocaleCanonicalURL() throws Exception {
+		testCanonicalURL(null, null, "/en", "/home");
 	}
 
 	@Test
-	public void testLocalizedSiteCustomSiteLocaleAlternateURL()
+	public void testLocalizedSiteCustomSiteLocaleCanonicalURL()
 		throws Exception {
 
 		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
 		Locale deLocale = new Locale("de", "DE");
 
-		testAlternateURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, enLocale,
-			"/en");
+		testCanonicalURL(
+			new Locale[] {enLocale, esLocale, deLocale}, esLocale, "/en",
+			"/casa");
 	}
 
 	@Test
-	public void testLocalizedSiteDefaultSiteLocaleAlternateURL()
+	public void testLocalizedSiteDefaultSiteLocaleCanonicalURL()
 		throws Exception {
 
 		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
 		Locale deLocale = new Locale("de", "DE");
 
-		testAlternateURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, esLocale,
-			StringPool.BLANK);
+		testCanonicalURL(
+			new Locale[] {enLocale, esLocale, deLocale}, esLocale, "/es",
+			"/casa");
 	}
 
 	protected String generateURL(
@@ -103,15 +103,17 @@ public class PortalImplGetAlternateURLTest {
 
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
-		themeDisplay.setLayoutSet(group.getPublicLayoutSet());
 		themeDisplay.setCompany(company);
+		themeDisplay.setLayoutSet(group.getPublicLayoutSet());
+		themeDisplay.setServerPort(80);
+		themeDisplay.setSiteGroupId(group.getGroupId());
 
 		return themeDisplay;
 	}
 
-	protected void testAlternateURL(
+	protected void testCanonicalURL(
 			Locale[] groupAvailableLocales, Locale groupDefaultLocale,
-			Locale alternateLocale, String expectedI18nPath)
+			String i18nPath, String expectedFriendlyURL)
 		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
@@ -119,19 +121,35 @@ public class PortalImplGetAlternateURLTest {
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), groupAvailableLocales, groupDefaultLocale);
 
-		Layout layout = LayoutTestUtil.addLayout(
-			group.getGroupId(), "welcome", false);
+		Locale enLocale = Locale.US;
+		Locale esLocale = new Locale("es", "ES");
+		Locale deLocale = new Locale("de", "DE");
 
-		String canonicalURL = generateURL(
-			StringPool.BLANK, group.getFriendlyURL(), layout.getFriendlyURL());
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
+
+		nameMap.put(enLocale, "Home");
+		nameMap.put(esLocale, "Casa");
+		nameMap.put(deLocale, "Zuhause");
+
+		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
+
+		friendlyURLMap.put(enLocale, "/home");
+		friendlyURLMap.put(esLocale, "/casa");
+		friendlyURLMap.put(deLocale, "/zuhause");
+
+		Layout layout = LayoutTestUtil.addLayout(
+			group.getGroupId(), false, nameMap, friendlyURLMap);
+
+		String completeURL = generateURL(
+			i18nPath, group.getFriendlyURL(), layout.getFriendlyURL());
 
 		ThemeDisplay themeDisplay = initThemeDisplay(group);
 
-		String alternateURL = PortalUtil.getAlternateURL(
-			canonicalURL, themeDisplay, alternateLocale, layout);
+		String alternateURL = PortalUtil.getCanonicalURL(
+			completeURL, themeDisplay, layout, true);
 
 		String expectedURL = generateURL(
-			expectedI18nPath, group.getFriendlyURL(), layout.getFriendlyURL());
+			StringPool.BLANK, group.getFriendlyURL(), expectedFriendlyURL);
 
 		Assert.assertEquals(expectedURL, alternateURL);
 	}
