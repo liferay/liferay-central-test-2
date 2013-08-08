@@ -65,7 +65,7 @@ public class ETagFilter extends BasePortalFilter {
 		RestrictedByteBufferCacheServletResponse
 			restrictedByteBufferCacheServletResponse =
 				new RestrictedByteBufferCacheServletResponse(
-					response, PropsValues.ETAG_CACHE_CAPACITY);
+					response, PropsValues.ETAG_RESPONSE_SIZE_MAX);
 
 		processFilter(
 			ETagFilter.class, request, restrictedByteBufferCacheServletResponse,
@@ -80,6 +80,7 @@ public class ETagFilter extends BasePortalFilter {
 				!ETagUtil.processETag(request, response, byteBuffer)) {
 
 				restrictedByteBufferCacheServletResponse.finishResponse();
+
 				restrictedByteBufferCacheServletResponse.flushCache();
 			}
 		}
