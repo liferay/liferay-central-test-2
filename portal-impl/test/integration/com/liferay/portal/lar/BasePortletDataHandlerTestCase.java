@@ -196,8 +196,8 @@ public abstract class BasePortletDataHandlerTestCase extends PowerMockito {
 		Map<String, LongWrapper> actualCounters) {
 
 		for (String className : expectedCounters.keySet()) {
-			LongWrapper actualCounter = actualCounters.get(className);
 			LongWrapper expectedCounter = expectedCounters.get(className);
+			LongWrapper actualCounter = actualCounters.get(className);
 
 			Assert.assertEquals(
 				className, expectedCounter.getValue(),
