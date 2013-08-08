@@ -624,6 +624,7 @@ public class DLAppHelperLocalServiceImpl
 		}
 	}
 
+	@Override
 	public void registerDLSyncEventCallback(
 			final String event, final String type, final long typePK)
 		throws SystemException {
