@@ -17,6 +17,7 @@ package com.liferay.portlet.asset.service;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
@@ -65,7 +66,7 @@ public class AssetVocabularyServiceTest {
 	public void testLocalizedSiteAddDefaultVocabulary() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
+		LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
 		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addDefaultVocabulary(
@@ -78,23 +79,21 @@ public class AssetVocabularyServiceTest {
 
 	@Test
 	public void testLocalizedSiteAddLocalizedVocabulary() throws Exception {
-		Locale esLocale = new Locale("es", "ES");
-
-		LocaleThreadLocal.setSiteDefaultLocale(esLocale);
+		LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
 		String title = ServiceTestUtil.randomString();
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
 		titleMap.put(Locale.US, title + "_US");
-		titleMap.put(esLocale, title + "_ES");
+		titleMap.put(LocaleUtil.SPAIN, title + "_ES");
 
 		String description = ServiceTestUtil.randomString();
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
+		descriptionMap.put(LocaleUtil.SPAIN, description + "_ES");
 		descriptionMap.put(Locale.US, description + "_US");
-		descriptionMap.put(esLocale, description + "_ES");
 
 		Group group = GroupTestUtil.addGroup();
 
@@ -106,29 +105,30 @@ public class AssetVocabularyServiceTest {
 				TestPropsValues.getUserId(), StringPool.BLANK, titleMap,
 				descriptionMap, StringPool.BLANK, serviceContext);
 
-		Assert.assertEquals(titleMap.get(esLocale), assetVocabulary.getName());
+		Assert.assertEquals(
+			titleMap.get(LocaleUtil.SPAIN), assetVocabulary.getName());
+		Assert.assertEquals(
+			titleMap.get(LocaleUtil.SPAIN),
+			assetVocabulary.getTitle(Locale.GERMANY, true));
+		Assert.assertEquals(
+			titleMap.get(LocaleUtil.SPAIN),
+			assetVocabulary.getTitle(LocaleUtil.SPAIN, true));
 		Assert.assertEquals(
 			titleMap.get(Locale.US), assetVocabulary.getTitle(Locale.US, true));
 		Assert.assertEquals(
-			titleMap.get(esLocale), assetVocabulary.getTitle(esLocale, true));
+			descriptionMap.get(LocaleUtil.SPAIN),
+			assetVocabulary.getDescription(Locale.GERMANY, true));
 		Assert.assertEquals(
-			titleMap.get(esLocale),
-			assetVocabulary.getTitle(Locale.GERMANY, true));
-
+			descriptionMap.get(LocaleUtil.SPAIN),
+			assetVocabulary.getDescription(LocaleUtil.SPAIN, true));
 		Assert.assertEquals(
 			descriptionMap.get(Locale.US),
 			assetVocabulary.getDescription(Locale.US, true));
-		Assert.assertEquals(
-			descriptionMap.get(esLocale),
-			assetVocabulary.getDescription(esLocale, true));
-		Assert.assertEquals(
-			descriptionMap.get(esLocale),
-			assetVocabulary.getDescription(Locale.GERMANY, true));
 	}
 
 	@Test
 	public void testLocalizedSiteAddVocabulary() throws Exception {
-		LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
+		LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
 		String title = ServiceTestUtil.randomString();
 

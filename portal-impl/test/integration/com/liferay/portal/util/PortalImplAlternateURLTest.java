@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
@@ -47,9 +48,7 @@ public class PortalImplAlternateURLTest {
 
 	@Test
 	public void testCustomPortalLocaleAlternateURL() throws Exception {
-		Locale esLocale = new Locale("es", "ES");
-
-		testAlternateURL(null, null, esLocale, "/es");
+		testAlternateURL(null, null, LocaleUtil.SPAIN, "/es");
 	}
 
 	@Test
@@ -61,22 +60,18 @@ public class PortalImplAlternateURLTest {
 	public void testLocalizedSiteCustomSiteLocaleAlternateURL()
 		throws Exception {
 
-		Locale esLocale = new Locale("es", "ES");
-
 		testAlternateURL(
-			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
-			esLocale, Locale.US, "/en");
+			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY},
+			LocaleUtil.SPAIN, Locale.US, "/en");
 	}
 
 	@Test
 	public void testLocalizedSiteDefaultSiteLocaleAlternateURL()
 		throws Exception {
 
-		Locale esLocale = new Locale("es", "ES");
-
 		testAlternateURL(
-			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
-			esLocale, esLocale, StringPool.BLANK);
+			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY},
+			LocaleUtil.SPAIN, LocaleUtil.SPAIN, StringPool.BLANK);
 	}
 
 	protected String generateURL(

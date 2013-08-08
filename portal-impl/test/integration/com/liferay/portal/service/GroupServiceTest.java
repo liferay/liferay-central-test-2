@@ -615,9 +615,8 @@ public class GroupServiceTest {
 	public void testUpdateAvailableLocales() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		Locale[] availableLocales = new Locale[] {
-			Locale.US, new Locale("es", "ES"), Locale.GERMANY
-		};
+		Locale[] availableLocales =
+			new Locale[] {Locale.US, LocaleUtil.SPAIN, Locale.GERMANY};
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, null);
@@ -631,13 +630,12 @@ public class GroupServiceTest {
 	public void testUpdateDefaultLocale() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		Locale esLocale = new Locale("es", "ES");
-
 		group = GroupTestUtil.updateDisplaySettings(
-			group.getGroupId(), null, esLocale);
+			group.getGroupId(), null, LocaleUtil.SPAIN);
 
 		Assert.assertEquals(
-			esLocale, PortalUtil.getSiteDefaultLocale(group.getGroupId()));
+			LocaleUtil.SPAIN,
+			PortalUtil.getSiteDefaultLocale(group.getGroupId()));
 	}
 
 	@Test

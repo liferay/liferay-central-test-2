@@ -32,6 +32,8 @@ import java.util.TreeMap;
  */
 public class LocaleUtil {
 
+	public static final Locale SPAIN = new Locale("es", "ES");
+
 	public static boolean equals(Locale locale1, Locale locale2) {
 		return getInstance()._equals(locale1, locale2);
 	}

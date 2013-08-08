@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
@@ -61,22 +62,18 @@ public class PortalImplCanonicalURLTest {
 	public void testLocalizedSiteCustomSiteLocaleCanonicalURL()
 		throws Exception {
 
-		Locale esLocale = new Locale("es", "ES");
-
 		testCanonicalURL(
-			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
-			esLocale, "/en", "/casa");
+			new Locale[] {Locale.GERMANY, LocaleUtil.SPAIN, Locale.US},
+			LocaleUtil.SPAIN, "/en", "/casa");
 	}
 
 	@Test
 	public void testLocalizedSiteDefaultSiteLocaleCanonicalURL()
 		throws Exception {
 
-		Locale esLocale = new Locale("es", "ES");
-
 		testCanonicalURL(
-			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
-			esLocale, "/es", "/casa");
+			new Locale[] {Locale.GERMANY, LocaleUtil.SPAIN, Locale.US},
+			LocaleUtil.SPAIN, "/es", "/casa");
 	}
 
 	protected String generateURL(
@@ -120,19 +117,15 @@ public class PortalImplCanonicalURLTest {
 
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(Locale.US, "Home");
-
-		Locale esLocale = new Locale("es", "ES");
-
-		nameMap.put(esLocale, "Casa");
-
 		nameMap.put(Locale.GERMANY, "Zuhause");
+		nameMap.put(LocaleUtil.SPAIN, "Casa");
+		nameMap.put(Locale.US, "Home");
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(Locale.US, "/home");
-		friendlyURLMap.put(esLocale, "/casa");
 		friendlyURLMap.put(Locale.GERMANY, "/zuhause");
+		friendlyURLMap.put(LocaleUtil.SPAIN, "/casa");
+		friendlyURLMap.put(Locale.US, "/home");
 
 		Layout layout = LayoutTestUtil.addLayout(
 			group.getGroupId(), false, nameMap, friendlyURLMap);

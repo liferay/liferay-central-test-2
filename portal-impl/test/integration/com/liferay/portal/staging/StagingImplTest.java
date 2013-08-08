@@ -205,9 +205,9 @@ public class StagingImplTest {
 		}
 		else {
 			for (Locale locale : _locales) {
-				Assert.assertFalse(
-					assetCategory.getTitle(locale).equals(
-						stagingAssetCategory.getTitle(locale)));
+				Assert.assertNotEquals(
+					assetCategory.getTitle(locale),
+					stagingAssetCategory.getTitle(locale));
 			}
 		}
 
@@ -220,9 +220,9 @@ public class StagingImplTest {
 		}
 		else {
 			for (Locale locale : _locales) {
-				Assert.assertFalse(
-					journalArticle.getTitle(locale).equals(
-						stagingJournalArticle.getTitle(locale)));
+				Assert.assertNotEquals(
+					journalArticle.getTitle(locale),
+					stagingJournalArticle.getTitle(locale));
 			}
 		}
 	}
@@ -245,7 +245,7 @@ public class StagingImplTest {
 	}
 
 	private static Locale[] _locales = {
-		Locale.US, new Locale("es", "ES"), Locale.GERMANY
+		Locale.GERMANY, LocaleUtil.SPAIN, Locale.US
 	};
 
 }

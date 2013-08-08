@@ -235,13 +235,13 @@ public class DLFileEntryTypeServiceTest {
 		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
 
 		try {
-			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
+			LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
 			String name = ServiceTestUtil.randomString();
 			String description = ServiceTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-				DLFileEntry.class.getName(),
-				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
+				DLFileEntry.class.getName(), new Locale[] {LocaleUtil.SPAIN},
+				LocaleUtil.SPAIN);
 
 			DLFileEntryType dlFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
@@ -269,13 +269,13 @@ public class DLFileEntryTypeServiceTest {
 		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
 
 		try {
-			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
+			LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
 			String name = ServiceTestUtil.randomString();
 			String description = ServiceTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-				DLFileEntry.class.getName(),
-				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
+				DLFileEntry.class.getName(), new Locale[] {LocaleUtil.SPAIN},
+				LocaleUtil.SPAIN);
 
 			DLFileEntryType dlFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
