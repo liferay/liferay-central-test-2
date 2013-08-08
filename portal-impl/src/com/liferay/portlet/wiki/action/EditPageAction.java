@@ -209,8 +209,6 @@ public class EditPageAction extends PortletAction {
 
 		WikiPage wikiPage = null;
 
-		String deleteEntryTitle = null;
-
 		if (moveToTrash) {
 			if (version > 0) {
 				wikiPage = WikiPageServiceUtil.movePageToTrash(
@@ -235,12 +233,6 @@ public class EditPageAction extends PortletAction {
 			data.put(
 				"deleteEntryClassName",
 				new String[] {WikiPage.class.getName()});
-
-			if (Validator.isNotNull(deleteEntryTitle)) {
-				data.put(
-					"deleteEntryTitle", new String[] {wikiPage.getTitle()});
-			}
-
 			data.put(
 				"restoreEntryIds",
 				new String[] {String.valueOf(wikiPage.getResourcePrimKey())});
