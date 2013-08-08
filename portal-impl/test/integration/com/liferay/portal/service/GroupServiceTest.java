@@ -615,11 +615,9 @@ public class GroupServiceTest {
 	public void testUpdateAvailableLocales() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		Locale enLocale = Locale.US;
-		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
-
-		Locale[] availableLocales = new Locale[] {enLocale, esLocale, deLocale};
+		Locale[] availableLocales = new Locale[] {
+			Locale.US, new Locale("es", "ES"), new Locale("de", "DE")
+		};
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, null);

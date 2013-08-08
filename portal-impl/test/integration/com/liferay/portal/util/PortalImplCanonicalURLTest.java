@@ -61,32 +61,28 @@ public class PortalImplCanonicalURLTest {
 	public void testLocalizedSiteCustomSiteLocaleCanonicalURL()
 		throws Exception {
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
 		testCanonicalURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, "/en",
-			"/casa");
+			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			esLocale, "/en", "/casa");
 	}
 
 	@Test
 	public void testLocalizedSiteDefaultSiteLocaleCanonicalURL()
 		throws Exception {
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
 		testCanonicalURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, "/es",
-			"/casa");
+			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			esLocale, "/es", "/casa");
 	}
 
 	protected String generateURL(
 		String languageId, String groupFriendlyURL, String layoutFriendlyURL) {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("http://localhost");
 		sb.append(languageId);
@@ -97,13 +93,14 @@ public class PortalImplCanonicalURLTest {
 		return sb.toString();
 	}
 
-	protected ThemeDisplay initThemeDisplay(Group group) throws Exception {
+	protected ThemeDisplay getThemeDisplay(Group group) throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
 		Company company = CompanyLocalServiceUtil.getCompany(
 			TestPropsValues.getCompanyId());
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		themeDisplay.setCompany(company);
+
 		themeDisplay.setLayoutSet(group.getPublicLayoutSet());
 		themeDisplay.setServerPort(80);
 		themeDisplay.setSiteGroupId(group.getGroupId());
@@ -121,19 +118,21 @@ public class PortalImplCanonicalURLTest {
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), groupAvailableLocales, groupDefaultLocale);
 
-		Locale enLocale = Locale.US;
-		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
-
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(enLocale, "Home");
+		nameMap.put(Locale.US, "Home");
+
+		Locale esLocale = new Locale("es", "ES");
+
 		nameMap.put(esLocale, "Casa");
+
+		Locale deLocale = new Locale("de", "DE");
+
 		nameMap.put(deLocale, "Zuhause");
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(enLocale, "/home");
+		friendlyURLMap.put(Locale.US, "/home");
 		friendlyURLMap.put(esLocale, "/casa");
 		friendlyURLMap.put(deLocale, "/zuhause");
 
@@ -143,15 +142,13 @@ public class PortalImplCanonicalURLTest {
 		String completeURL = generateURL(
 			i18nPath, group.getFriendlyURL(), layout.getFriendlyURL());
 
-		ThemeDisplay themeDisplay = initThemeDisplay(group);
+		String actualCanonicalURL = PortalUtil.getCanonicalURL(
+			completeURL, getThemeDisplay(group), layout, true);
 
-		String alternateURL = PortalUtil.getCanonicalURL(
-			completeURL, themeDisplay, layout, true);
-
-		String expectedURL = generateURL(
+		String expectedCanonicalURL = generateURL(
 			StringPool.BLANK, group.getFriendlyURL(), expectedFriendlyURL);
 
-		Assert.assertEquals(expectedURL, alternateURL);
+		Assert.assertEquals(expectedCanonicalURL, actualCanonicalURL);
 	}
 
 }

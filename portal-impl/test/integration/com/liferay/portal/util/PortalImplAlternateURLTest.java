@@ -61,32 +61,28 @@ public class PortalImplAlternateURLTest {
 	public void testLocalizedSiteCustomSiteLocaleAlternateURL()
 		throws Exception {
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
 		testAlternateURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, enLocale,
-			"/en");
+			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			esLocale, Locale.US, "/en");
 	}
 
 	@Test
 	public void testLocalizedSiteDefaultSiteLocaleAlternateURL()
 		throws Exception {
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
 		testAlternateURL(
-			new Locale[] {enLocale, esLocale, deLocale}, esLocale, esLocale,
-			StringPool.BLANK);
+			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			esLocale, esLocale, StringPool.BLANK);
 	}
 
 	protected String generateURL(
 		String languageId, String groupFriendlyURL, String layoutFriendlyURL) {
 
-		StringBundler sb = new StringBundler(6);
+		StringBundler sb = new StringBundler(5);
 
 		sb.append("http://localhost");
 		sb.append(languageId);
@@ -97,14 +93,15 @@ public class PortalImplAlternateURLTest {
 		return sb.toString();
 	}
 
-	protected ThemeDisplay initThemeDisplay(Group group) throws Exception {
+	protected ThemeDisplay getThemeDisplay(Group group) throws Exception {
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
 		Company company = CompanyLocalServiceUtil.getCompany(
 			TestPropsValues.getCompanyId());
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
+		themeDisplay.setCompany(company);
 
 		themeDisplay.setLayoutSet(group.getPublicLayoutSet());
-		themeDisplay.setCompany(company);
 
 		return themeDisplay;
 	}
@@ -125,15 +122,13 @@ public class PortalImplAlternateURLTest {
 		String canonicalURL = generateURL(
 			StringPool.BLANK, group.getFriendlyURL(), layout.getFriendlyURL());
 
-		ThemeDisplay themeDisplay = initThemeDisplay(group);
+		String actualAlternateURL = PortalUtil.getAlternateURL(
+			canonicalURL, getThemeDisplay(group), alternateLocale, layout);
 
-		String alternateURL = PortalUtil.getAlternateURL(
-			canonicalURL, themeDisplay, alternateLocale, layout);
-
-		String expectedURL = generateURL(
+		String expectedAlternateURL = generateURL(
 			expectedI18nPath, group.getFriendlyURL(), layout.getFriendlyURL());
 
-		Assert.assertEquals(expectedURL, alternateURL);
+		Assert.assertEquals(expectedAlternateURL, actualAlternateURL);
 	}
 
 }

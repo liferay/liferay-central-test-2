@@ -160,40 +160,6 @@ public class DLFileEntryTypeServiceTest {
 	}
 
 	@Test
-	@Transactional
-	public void testLocalizedSiteAddFileEntryType() throws Exception {
-		Group group = GroupTestUtil.addGroup();
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
-
-		try {
-			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
-
-			String name = ServiceTestUtil.randomString();
-			String description = ServiceTestUtil.randomString();
-			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-				DLFileEntry.class.getName(),
-				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
-
-			DLFileEntryType dlFileEntryType =
-				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
-					TestPropsValues.getUserId(), group.getGroupId(), name,
-					description, new long[] {ddmStructure.getStructureId()},
-					serviceContext);
-
-			Assert.assertEquals(name, dlFileEntryType.getName(Locale.US, true));
-			Assert.assertEquals(
-				description, dlFileEntryType.getDescription(Locale.US, true));
-		}
-		finally {
-			LocaleThreadLocal.setSiteDefaultLocale(locale);
-		}
-	}
-
-	@Test
 	public void testCheckDefaultFileEntryTypes() throws Exception {
 		Assert.assertNotNull(
 			DLFileEntryTypeConstants.NAME_BASIC_DOCUMENT + " cannot be null",
@@ -256,6 +222,40 @@ public class DLFileEntryTypeServiceTest {
 		fileEntry = DLAppServiceUtil.getFileEntry(fileEntry.getFileEntryId());
 
 		assertFileEntryType(fileEntry, _basicDocumentDLFileEntryType);
+	}
+
+	@Test
+	@Transactional
+	public void testLocalizedSiteAddFileEntryType() throws Exception {
+		Group group = GroupTestUtil.addGroup();
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
+		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
+
+		try {
+			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
+
+			String name = ServiceTestUtil.randomString();
+			String description = ServiceTestUtil.randomString();
+			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+				DLFileEntry.class.getName(),
+				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
+
+			DLFileEntryType dlFileEntryType =
+				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
+					TestPropsValues.getUserId(), group.getGroupId(), name,
+					description, new long[] {ddmStructure.getStructureId()},
+					serviceContext);
+
+			Assert.assertEquals(name, dlFileEntryType.getName(Locale.US, true));
+			Assert.assertEquals(
+				description, dlFileEntryType.getDescription(Locale.US, true));
+		}
+		finally {
+			LocaleThreadLocal.setSiteDefaultLocale(locale);
+		}
 	}
 
 	@Test

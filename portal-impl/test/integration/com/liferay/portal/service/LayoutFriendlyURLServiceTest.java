@@ -54,26 +54,27 @@ public class LayoutFriendlyURLServiceTest {
 	public void testLocalizedSiteAddLayoutFriendlyURLs() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
-		Locale[] availableLocales = new Locale[] {enLocale, esLocale};
+		Locale[] availableLocales = new Locale[] {Locale.US, esLocale};
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, esLocale);
 
-		String name = ServiceTestUtil.randomString();
-
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(enLocale, name);
+		String name = ServiceTestUtil.randomString();
+
+		nameMap.put(Locale.US, name);
 		nameMap.put(esLocale, name);
+
+		Locale deLocale = new Locale("de", "DE");
+
 		nameMap.put(deLocale, name);
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(enLocale, "/englishurl");
+		friendlyURLMap.put(Locale.US, "/englishurl");
 		friendlyURLMap.put(esLocale, "/spanishurl");
 		friendlyURLMap.put(deLocale, "/germanurl");
 
@@ -102,27 +103,25 @@ public class LayoutFriendlyURLServiceTest {
 	public void testLocalizedSiteFetchLayoutFriendlyURL() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
-		Locale[] availableLocales = new Locale[] {enLocale, esLocale};
+		Locale[] availableLocales = new Locale[] {Locale.US, esLocale};
 
 		Locale defaultLocale = esLocale;
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, defaultLocale);
 
-		String name = ServiceTestUtil.randomString();
-
 		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
-		nameMap.put(enLocale, name);
+		String name = ServiceTestUtil.randomString();
+
+		nameMap.put(Locale.US, name);
 		nameMap.put(esLocale, name);
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
-		friendlyURLMap.put(enLocale, "/englishurl");
+		friendlyURLMap.put(Locale.US, "/englishurl");
 		friendlyURLMap.put(esLocale, "/spanishurl");
 
 		Layout layout = LayoutTestUtil.addLayout(
@@ -133,11 +132,14 @@ public class LayoutFriendlyURLServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(defaultLocale);
 
+			Locale deLocale = new Locale("de", "DE");
+
 			LayoutFriendlyURL layoutFriendlyURL =
 				LayoutFriendlyURLLocalServiceUtil.fetchLayoutFriendlyURL(
 					layout.getPlid(), LocaleUtil.toLanguageId(deLocale), true);
 
-			Assert.assertEquals("/spanishurl", layoutFriendlyURL.getFriendlyURL());
+			Assert.assertEquals(
+				"/spanishurl", layoutFriendlyURL.getFriendlyURL());
 			Assert.assertEquals(
 				LocaleUtil.toLanguageId(defaultLocale),
 				layoutFriendlyURL.getLanguageId());

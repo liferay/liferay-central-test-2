@@ -17,6 +17,7 @@ package com.liferay.portal.lar;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -177,24 +178,18 @@ public class BasePortletExportImportTestCase extends BaseExportImportTestCase {
 
 	@Test
 	public void testExportImportInvalidAvailableLocales() throws Exception {
-		Locale enLocale = Locale.US;
-		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
-
 		testExportImportAvailableLocales(
-			new Locale[] {enLocale, esLocale},
-			new Locale[] {enLocale, deLocale}, true);
+			new Locale[] {Locale.US, new Locale("es", "ES")},
+			new Locale[] {Locale.US, new Locale("de", "DE")}, true);
 	}
 
 	@Test
 	public void testExportImportValidAvailableLocales() throws Exception {
-		Locale enLocale = Locale.US;
 		Locale esLocale = new Locale("es", "ES");
-		Locale deLocale = new Locale("de", "DE");
 
 		testExportImportAvailableLocales(
-			new Locale[] {enLocale, esLocale},
-			new Locale[] {enLocale, esLocale, deLocale}, false);
+			new Locale[] {Locale.US, esLocale},
+			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")}, false);
 	}
 
 	protected AssetLink addAssetLink(
@@ -270,7 +265,7 @@ public class BasePortletExportImportTestCase extends BaseExportImportTestCase {
 			return;
 		}
 
-		com.liferay.portal.kernel.lar.PortletDataHandler portletDataHandler =
+		PortletDataHandler portletDataHandler =
 			portlet.getPortletDataHandlerInstance();
 
 		if (!portletDataHandler.isDataLocalized()) {

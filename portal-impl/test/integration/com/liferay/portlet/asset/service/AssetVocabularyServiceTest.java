@@ -86,16 +86,14 @@ public class AssetVocabularyServiceTest {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		Locale enLocale = Locale.US;
-
-		titleMap.put(enLocale, title + "_US");
+		titleMap.put(Locale.US, title + "_US");
 		titleMap.put(esLocale, title + "_ES");
 
 		String description = ServiceTestUtil.randomString();
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(enLocale, description + "_US");
+		descriptionMap.put(Locale.US, description + "_US");
 		descriptionMap.put(esLocale, description + "_ES");
 
 		Group group = GroupTestUtil.addGroup();
@@ -110,7 +108,7 @@ public class AssetVocabularyServiceTest {
 
 		Assert.assertEquals(titleMap.get(esLocale), assetVocabulary.getName());
 		Assert.assertEquals(
-			titleMap.get(enLocale), assetVocabulary.getTitle(enLocale, true));
+			titleMap.get(Locale.US), assetVocabulary.getTitle(Locale.US, true));
 		Assert.assertEquals(
 			titleMap.get(esLocale), assetVocabulary.getTitle(esLocale, true));
 
@@ -120,8 +118,8 @@ public class AssetVocabularyServiceTest {
 			titleMap.get(esLocale), assetVocabulary.getTitle(deLocale, true));
 
 		Assert.assertEquals(
-			descriptionMap.get(enLocale),
-			assetVocabulary.getDescription(enLocale, true));
+			descriptionMap.get(Locale.US),
+			assetVocabulary.getDescription(Locale.US, true));
 		Assert.assertEquals(
 			descriptionMap.get(esLocale),
 			assetVocabulary.getDescription(esLocale, true));
