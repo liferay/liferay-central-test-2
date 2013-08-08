@@ -245,8 +245,7 @@ public class StagingImplTest {
 	}
 
 	private static Locale[] _locales = {
-		new Locale("en", "US"), new Locale("es", "ES"),
-		new Locale("de", "DE")
+		new Locale("en", "US"), new Locale("es", "ES"), Locale.GERMANY
 	};
 
 }

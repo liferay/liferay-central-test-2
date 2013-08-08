@@ -67,16 +67,13 @@ public class LayoutFriendlyURLServiceTest {
 
 		nameMap.put(Locale.US, name);
 		nameMap.put(esLocale, name);
-
-		Locale deLocale = new Locale("de", "DE");
-
-		nameMap.put(deLocale, name);
+		nameMap.put(Locale.GERMANY, name);
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(Locale.US, "/englishurl");
 		friendlyURLMap.put(esLocale, "/spanishurl");
-		friendlyURLMap.put(deLocale, "/germanurl");
+		friendlyURLMap.put(Locale.GERMANY, "/germanurl");
 
 		Layout layout = LayoutTestUtil.addLayout(
 			group.getGroupId(), false, nameMap, friendlyURLMap);
@@ -132,11 +129,10 @@ public class LayoutFriendlyURLServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(defaultLocale);
 
-			Locale deLocale = new Locale("de", "DE");
-
 			LayoutFriendlyURL layoutFriendlyURL =
 				LayoutFriendlyURLLocalServiceUtil.fetchLayoutFriendlyURL(
-					layout.getPlid(), LocaleUtil.toLanguageId(deLocale), true);
+					layout.getPlid(), LocaleUtil.toLanguageId(Locale.GERMANY),
+					true);
 
 			Assert.assertEquals(
 				"/spanishurl", layoutFriendlyURL.getFriendlyURL());

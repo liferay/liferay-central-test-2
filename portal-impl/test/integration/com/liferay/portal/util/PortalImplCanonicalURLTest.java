@@ -64,7 +64,7 @@ public class PortalImplCanonicalURLTest {
 		Locale esLocale = new Locale("es", "ES");
 
 		testCanonicalURL(
-			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
 			esLocale, "/en", "/casa");
 	}
 
@@ -75,7 +75,7 @@ public class PortalImplCanonicalURLTest {
 		Locale esLocale = new Locale("es", "ES");
 
 		testCanonicalURL(
-			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
 			esLocale, "/es", "/casa");
 	}
 
@@ -126,15 +126,13 @@ public class PortalImplCanonicalURLTest {
 
 		nameMap.put(esLocale, "Casa");
 
-		Locale deLocale = new Locale("de", "DE");
-
-		nameMap.put(deLocale, "Zuhause");
+		nameMap.put(Locale.GERMANY, "Zuhause");
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(Locale.US, "/home");
 		friendlyURLMap.put(esLocale, "/casa");
-		friendlyURLMap.put(deLocale, "/zuhause");
+		friendlyURLMap.put(Locale.GERMANY, "/zuhause");
 
 		Layout layout = LayoutTestUtil.addLayout(
 			group.getGroupId(), false, nameMap, friendlyURLMap);

@@ -58,13 +58,13 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public static void setUpClass() {
 		_nameMap = new HashMap<Locale, String>();
 
-		_nameMap.put(_enLocale, "Home");
+		_nameMap.put(Locale.US, "Home");
 		_nameMap.put(_esLocale, "Inicio");
 		_nameMap.put(_frLocale, "Accueil");
 
 		_friendlyURLMap = new HashMap<Locale, String>();
 
-		_friendlyURLMap.put(_enLocale, "/home");
+		_friendlyURLMap.put(Locale.US, "/home");
 		_friendlyURLMap.put(_esLocale, "/inicio");
 		_friendlyURLMap.put(_frLocale, "/accueil");
 	}
@@ -151,7 +151,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedSiteLayoutPrivateFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedSiteLayoutFriendlyURL(true, _enLocale, "/home");
+		testWronglyLocalizedSiteLayoutFriendlyURL(true, Locale.US, "/home");
 	}
 
 	@Test
@@ -165,7 +165,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedSiteLayoutPublicFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedSiteLayoutFriendlyURL(false, _enLocale, "/home");
+		testWronglyLocalizedSiteLayoutFriendlyURL(false, Locale.US, "/home");
 	}
 
 	@Test
@@ -179,7 +179,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedVirtualPrivateLayoutFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedVirtualLayoutFriendlyURL(true, _enLocale, "/home");
+		testWronglyLocalizedVirtualLayoutFriendlyURL(true, Locale.US, "/home");
 	}
 
 	@Test
@@ -194,7 +194,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 	public void testWronglyLocalizedVirtualPublicLayoutFriendlyURL1()
 		throws Exception {
 
-		testWronglyLocalizedVirtualLayoutFriendlyURL(false, _enLocale, "/home");
+		testWronglyLocalizedVirtualLayoutFriendlyURL(false, Locale.US, "/home");
 	}
 
 	@Test
@@ -347,7 +347,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 			group.getGroupId(), privateLayout, _nameMap, _friendlyURLMap);
 
 		assertLocalizedSiteLayoutFriendlyURL(
-			group.getGroupId(), layout, "/home", _deLocale, "/home");
+			group.getGroupId(), layout, "/home", Locale.GERMANY, "/home");
 	}
 
 	protected void testNonexistentLocalizedVirtualLayoutFriendlyURL(
@@ -372,7 +372,8 @@ public class PortalImplLocalizedFriendlyURLTest {
 			serviceContext.getUserId(), userGroup.getUserGroupId());
 
 		assertLocalizedVirtualLayoutFriendlyURL(
-			userGroupGroup.getGroupId(), layout, "/home", _deLocale, "/home");
+			userGroupGroup.getGroupId(), layout, "/home", Locale.GERMANY,
+			"/home");
 	}
 
 	protected void testNonexistentWronglyLocalizedSiteLayoutFriendlyURL(
@@ -385,7 +386,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 			group.getGroupId(), privateLayout, _nameMap, _friendlyURLMap);
 
 		assertLocalizedSiteLayoutFriendlyURL(
-			group.getGroupId(), layout, "/inicio", _deLocale, "/home");
+			group.getGroupId(), layout, "/inicio", Locale.GERMANY, "/home");
 	}
 
 	protected void testNonexistentWronglyLocalizedVirtualLayoutFriendlyURL(
@@ -410,7 +411,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 			serviceContext.getUserId(), userGroup.getUserGroupId());
 
 		assertLocalizedVirtualLayoutFriendlyURL(
-			userGroupGroup.getGroupId(), layout, "/inicio", _enLocale, "/home");
+			userGroupGroup.getGroupId(), layout, "/inicio", Locale.US, "/home");
 	}
 
 	protected void testWronglyLocalizedSiteLayoutFriendlyURL(
@@ -461,8 +462,6 @@ public class PortalImplLocalizedFriendlyURLTest {
 	private static final String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
-	private static Locale _deLocale = new Locale("de", "DE");
-	private static Locale _enLocale = new Locale("en", "US");
 	private static Locale _esLocale = new Locale("es", "ES");
 	private static Map<Locale, String> _friendlyURLMap;
 	private static Locale _frLocale = new Locale("fr", "CA");

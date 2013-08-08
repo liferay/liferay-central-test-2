@@ -64,7 +64,7 @@ public class PortalImplAlternateURLTest {
 		Locale esLocale = new Locale("es", "ES");
 
 		testAlternateURL(
-			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
 			esLocale, Locale.US, "/en");
 	}
 
@@ -75,7 +75,7 @@ public class PortalImplAlternateURLTest {
 		Locale esLocale = new Locale("es", "ES");
 
 		testAlternateURL(
-			new Locale[] {Locale.US, esLocale, new Locale("de", "DE")},
+			new Locale[] {Locale.US, esLocale, Locale.GERMANY},
 			esLocale, esLocale, StringPool.BLANK);
 	}
 

@@ -111,11 +111,9 @@ public class AssetVocabularyServiceTest {
 			titleMap.get(Locale.US), assetVocabulary.getTitle(Locale.US, true));
 		Assert.assertEquals(
 			titleMap.get(esLocale), assetVocabulary.getTitle(esLocale, true));
-
-		Locale deLocale = new Locale("de", "DE");
-
 		Assert.assertEquals(
-			titleMap.get(esLocale), assetVocabulary.getTitle(deLocale, true));
+			titleMap.get(esLocale),
+			assetVocabulary.getTitle(Locale.GERMANY, true));
 
 		Assert.assertEquals(
 			descriptionMap.get(Locale.US),
@@ -125,7 +123,7 @@ public class AssetVocabularyServiceTest {
 			assetVocabulary.getDescription(esLocale, true));
 		Assert.assertEquals(
 			descriptionMap.get(esLocale),
-			assetVocabulary.getDescription(deLocale, true));
+			assetVocabulary.getDescription(Locale.GERMANY, true));
 	}
 
 	@Test

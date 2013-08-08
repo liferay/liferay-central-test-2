@@ -111,18 +111,16 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 
 		testAvailableLocales(
 			new Locale[] {Locale.US, new Locale("es", "ES")},
-			new Locale[] {Locale.US, new Locale("de", "DE")}, true);
+			new Locale[] {Locale.US, Locale.GERMANY}, true);
 	}
 
 	@Test
 	public void testExportImportLayoutsValidAvailableLocales()
 		throws Exception {
 
-		Locale deLocale = new Locale("de", "DE");
-
 		testAvailableLocales(
-			new Locale[] {Locale.US, deLocale},
-			new Locale[] {Locale.US, new Locale("es", "ES"), deLocale}, false);
+			new Locale[] {Locale.US, Locale.US},
+			new Locale[] {Locale.US, new Locale("es", "ES"), Locale.US}, false);
 	}
 
 	@Test
