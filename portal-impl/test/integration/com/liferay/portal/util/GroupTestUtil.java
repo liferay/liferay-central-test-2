@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -175,7 +176,7 @@ public class GroupTestUtil {
 
 		if (availableLocales != null) {
 			typeSettingsProperties.put(
-				com.liferay.portal.kernel.util.PropsKeys.LOCALES,
+				PropsKeys.LOCALES,
 				StringUtil.merge(LocaleUtil.toLanguageIds(availableLocales)));
 		}
 

@@ -172,12 +172,11 @@ public class DLFileEntryTypeServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
 
+			String name = ServiceTestUtil.randomString();
+			String description = ServiceTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 				DLFileEntry.class.getName(),
 				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
-
-			String name = ServiceTestUtil.randomString();
-			String description = ServiceTestUtil.randomString();
 
 			DLFileEntryType dlFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
@@ -272,12 +271,11 @@ public class DLFileEntryTypeServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(new Locale("es", "ES"));
 
+			String name = ServiceTestUtil.randomString();
+			String description = ServiceTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 				DLFileEntry.class.getName(),
 				new Locale[] {new Locale("es", "ES")}, new Locale("es", "ES"));
-
-			String name = ServiceTestUtil.randomString();
-			String description = ServiceTestUtil.randomString();
 
 			DLFileEntryType dlFileEntryType =
 				DLFileEntryTypeLocalServiceUtil.addFileEntryType(
