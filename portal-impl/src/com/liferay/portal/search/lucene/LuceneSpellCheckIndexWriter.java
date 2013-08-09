@@ -101,7 +101,6 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 			document, com.liferay.portal.kernel.search.Field.GROUP_ID,
 			String.valueOf(groupId), Field.Store.YES,
 			FieldInfo.IndexOptions.DOCS_ONLY, true);
-
 		addField(
 			document, com.liferay.portal.kernel.search.Field.LANGUAGE_ID,
 			languageId, Field.Store.YES, FieldInfo.IndexOptions.DOCS_ONLY,

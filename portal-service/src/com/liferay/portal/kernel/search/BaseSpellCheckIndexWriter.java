@@ -205,15 +205,17 @@ public abstract class BaseSpellCheckIndexWriter
 		List<Group> groups = GroupLocalServiceUtil.getLiveGroups();
 
 		for (Group group : groups) {
-			String[] groupSpecificDictionaryFileNames = PropsUtil.getArray(
+			String[] groupDictionaryFileNames = PropsUtil.getArray(
 				PropsKeys.INDEX_SEARCH_SPELL_CHECKER_DICTIONARY,
 				new Filter(languageId, String.valueOf(group.getGroupId())));
 
-			if (Validator.isNotNull(groupSpecificDictionaryFileNames)) {
-				indexDictionary(
-					companyId, group.getGroupId(), languageId,
-					groupSpecificDictionaryFileNames);
+			if (Validator.isNull(groupDictionaryFileNames)) {
+				continue;
 			}
+
+			indexDictionary(
+				companyId, group.getGroupId(), languageId,
+				groupDictionaryFileNames);
 		}
 	}
 
