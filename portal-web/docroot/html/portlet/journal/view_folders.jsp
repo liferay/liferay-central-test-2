@@ -345,8 +345,8 @@ else {
 
 					Map<String, Object> dataExpand = new HashMap<String, Object>();
 
-					dataExpand.put("folder-id", parentFolderId);
 					dataExpand.put("direction-right", Boolean.TRUE);
+					dataExpand.put("folder-id", parentFolderId);
 
 					Map<String, Object> dataView = new HashMap<String, Object>();
 

@@ -73,7 +73,7 @@ int total = 0;
 if (browseBy.equals("file-entry-type")) {
 	total = DLFileEntryTypeServiceUtil.getFileEntryTypesCount(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay));
 }
-if ((folderId != rootFolderId) || expandFolder) {
+else if ((folderId != rootFolderId) || expandFolder) {
 	total = DLAppServiceUtil.getFoldersCount(repositoryId, parentFolderId, false);
 }
 
@@ -261,8 +261,8 @@ else {
 
 					Map<String, Object> dataExpand = new HashMap<String, Object>();
 
-					dataExpand.put("folder-id", parentFolderId);
 					dataExpand.put("direction-right", Boolean.TRUE);
+					dataExpand.put("folder-id", parentFolderId);
 
 					Map<String, Object> dataView = new HashMap<String, Object>();
 

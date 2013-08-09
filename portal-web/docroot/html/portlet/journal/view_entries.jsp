@@ -36,6 +36,8 @@ if (!ArrayUtil.contains(displayViews, displayStyle)) {
 	displayStyle = displayViews[0];
 }
 
+String browseBy = ParamUtil.getString(request, "browseBy");
+
 String ddmStructureName = LanguageUtil.get(pageContext, "basic-web-content");
 
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
@@ -79,8 +81,6 @@ searchContainer.setRowChecker(entriesChecker);
 ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDisplayTerms();
 
 boolean showAddArticleButton = JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_ARTICLE);
-
-String browseBy = ParamUtil.getString(request, "browseBy");
 %>
 
 <c:if test='<%= Validator.isNotNull(displayTerms.getStructureId()) && !browseBy.equals("structure") %>'>
