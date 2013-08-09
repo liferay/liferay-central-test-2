@@ -299,7 +299,7 @@ create index IX_CBC408D8 on DLFolder (uuid_);
 create index IX_DA448450 on DLFolder (uuid_, companyId);
 create unique index IX_3CC1DED2 on DLFolder (uuid_, groupId);
 
-create index IX_21D2FEA8 on DLSyncEvent (modifiedDate);
+create index IX_3D8E1607 on DLSyncEvent (modifiedTime);
 create unique index IX_57D82B06 on DLSyncEvent (typePK);
 
 create index IX_1BB072CA on EmailAddress (companyId);
