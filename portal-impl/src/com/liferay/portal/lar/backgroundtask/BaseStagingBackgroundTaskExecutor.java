@@ -62,14 +62,14 @@ public abstract class BaseStagingBackgroundTaskExecutor
 		backgroundTaskStatus.clearAttributes();
 	}
 
-	protected BackgroundTask markBackgroundTaskAsValidated(
+	protected BackgroundTask markValidatedBackgroundTask(
 			BackgroundTask backgroundTask)
 		throws SystemException {
 
 		Map<String, Serializable> taskContextMap =
 			backgroundTask.getTaskContextMap();
 
-		taskContextMap.put("validated", true);
+		taskContextMap.put("validated", Boolean.TRUE);
 
 		backgroundTask.setTaskContext(
 			JSONFactoryUtil.serialize(taskContextMap));

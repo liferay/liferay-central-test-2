@@ -112,7 +112,7 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 			missingReferences = StagingServiceHttp.validateStagingRequest(
 				httpPrincipal, stagingRequestId, privateLayout, parameterMap);
 
-			backgroundTask = markBackgroundTaskAsValidated(backgroundTask);
+			backgroundTask = markValidatedBackgroundTask(backgroundTask);
 
 			StagingServiceHttp.publishStagingRequest(
 				httpPrincipal, stagingRequestId, privateLayout, parameterMap);

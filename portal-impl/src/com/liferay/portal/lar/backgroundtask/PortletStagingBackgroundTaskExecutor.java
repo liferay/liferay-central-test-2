@@ -67,7 +67,7 @@ public class PortletStagingBackgroundTaskExecutor
 					userId, targetGroupId, targetPlid, portletId, parameterMap,
 					larFile);
 
-			backgroundTask = markBackgroundTaskAsValidated(backgroundTask);
+			backgroundTask = markValidatedBackgroundTask(backgroundTask);
 
 			LayoutLocalServiceUtil.importPortletInfo(
 				userId, targetPlid, targetGroupId, portletId, parameterMap,
