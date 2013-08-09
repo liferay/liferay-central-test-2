@@ -632,7 +632,7 @@ public class DLAppHelperLocalServiceImpl
 		DLSyncEvent dlSyncEvent = dlSyncEventLocalService.addDLSyncEvent(
 			event, type, typePK);
 
-		final long modifiedDate = dlSyncEvent.getModifiedDate();
+		final long modifiedTime = dlSyncEvent.getModifiedTime();
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
@@ -644,7 +644,7 @@ public class DLAppHelperLocalServiceImpl
 					Map<String, Object> values = new HashMap<String, Object>(4);
 
 					values.put("event", event);
-					values.put("modifiedDate", modifiedDate);
+					values.put("modifiedTime", modifiedTime);
 					values.put("type", type);
 					values.put("typePK", typePK);
 
