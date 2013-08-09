@@ -150,6 +150,10 @@ public class LocaleUtil {
 		getInstance()._setDefault(userLanguage, userCountry, userVariant);
 	}
 
+	public static String[] toDisplayNames(Locale[] locales, Locale locale) {
+		return getInstance()._toDisplayNames(locales, locale);
+	}
+
 	public static String toLanguageId(Locale locale) {
 		return getInstance()._toLanguageId(locale);
 	}
@@ -387,6 +391,16 @@ public class LocaleUtil {
 
 			_locale = new Locale(userLanguage, userCountry, userVariant);
 		}
+	}
+
+	private String[] _toDisplayNames(Locale[] locales, Locale locale) {
+		String[] displayNames = new String[locales.length];
+
+		for (int i = 0; i < locales.length; i++) {
+			displayNames[i] = locales[i].getDisplayName(locale);
+		}
+
+		return displayNames;
 	}
 
 	private String _toLanguageId(Locale locale) {
