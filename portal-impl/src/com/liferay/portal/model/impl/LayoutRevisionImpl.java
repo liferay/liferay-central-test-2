@@ -170,7 +170,7 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 	}
 
 	@Override
-	public boolean isContentDisplayPage() {
+	public boolean hasDefaultAssetPublisherPortletId() {
 		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
 		String defaultAssetPublisherPortletId =
