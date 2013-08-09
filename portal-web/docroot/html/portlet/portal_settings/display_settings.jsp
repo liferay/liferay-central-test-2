@@ -27,7 +27,7 @@
 		LocaleException le = (LocaleException)errorException;
 		%>
 
-		<c:if test="<%= le.getType() == LocaleException.DISPLAY_SETTINGS %>">
+		<c:if test="<%= le.getType() == LocaleException.TYPE_DISPLAY_SETTINGS %>">
 			<liferay-ui:message key="please-enter-a-valid-locale" />
 		</c:if>
 	</liferay-ui:error>

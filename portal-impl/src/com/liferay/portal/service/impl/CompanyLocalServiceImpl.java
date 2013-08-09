@@ -1325,7 +1325,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		for (String languageId : languageIdsArray) {
 			if (!ArrayUtil.contains(PropsValues.LOCALES, languageId)) {
 				LocaleException le = new LocaleException(
-					LocaleException.DISPLAY_SETTINGS);
+					LocaleException.TYPE_DISPLAY_SETTINGS);
 
 				le.setSourceAvailableLocales(
 					LocaleUtil.fromLanguageIds(PropsValues.LOCALES));

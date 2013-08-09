@@ -4349,7 +4349,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		for (String languageId : languageIdsArray) {
 			if (!ArrayUtil.contains(availableLanguageIds, languageId)) {
 				LocaleException le = new LocaleException(
-					LocaleException.DISPLAY_SETTINGS);
+					LocaleException.TYPE_DISPLAY_SETTINGS);
 
 				le.setSourceAvailableLocales(availableLocales);
 				le.setTargetAvailableLocales(
@@ -4360,7 +4360,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		if (!ArrayUtil.contains(languageIdsArray, defaultLanguageId)) {
-			LocaleException le = new LocaleException(LocaleException.DEFAULT);
+			LocaleException le = new LocaleException(
+				LocaleException.TYPE_DEFAULT);
 
 			le.setSourceAvailableLocales(availableLocales);
 			le.setTargetAvailableLocales(

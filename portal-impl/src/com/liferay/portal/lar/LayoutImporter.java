@@ -1069,7 +1069,7 @@ public class LayoutImporter {
 					targetAvailableLocales, sourceAvailableLocale)) {
 
 				LocaleException le = new LocaleException(
-					LocaleException.EXPORT_IMPORT);
+					LocaleException.TYPE_EXPORT_IMPORT);
 
 				le.setSourceAvailableLocales(sourceAvailableLocales);
 				le.setTargetAvailableLocales(targetAvailableLocales);

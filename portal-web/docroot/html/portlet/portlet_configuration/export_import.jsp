@@ -70,7 +70,7 @@ else if (scopeGroup.isLayout()) {
 	LocaleException le = (LocaleException)errorException;
 	%>
 
-	<c:if test="<%= le.getType() == LocaleException.EXPORT_IMPORT %>">
+	<c:if test="<%= le.getType() == LocaleException.TYPE_EXPORT_IMPORT %>">
 		<liferay-ui:message arguments="<%= new String[] {StringUtil.merge(le.getSourceAvailableLocales(), StringPool.COMMA_AND_SPACE), StringUtil.merge(le.getTargetAvailableLocales(), StringPool.COMMA_AND_SPACE)} %>" key="the-available-languages-in-the-lar-file-x-do-not-match-the-site's-available-languages-x" />
 	</c:if>
 </liferay-ui:error>
