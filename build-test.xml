@@ -606,6 +606,7 @@
 		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="platform-application-standard-acceptance" />
 			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.plugin.portlets" value="saml-portlet" />
 			<param name="test.ant.script.suite" value="PlatformApplicationStandardAcceptanceTestSuite" />
 		</antcall>
 
