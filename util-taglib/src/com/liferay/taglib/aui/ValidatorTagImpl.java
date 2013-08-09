@@ -117,8 +117,8 @@ public class ValidatorTagImpl
 		if (name.equals("custom")) {
 			_custom = true;
 
-			return name.concat(
-				StringPool.UNDERLINE).concat(StringUtil.randomId());
+			return name.concat(StringPool.UNDERLINE).concat(
+				StringUtil.randomId());
 		}
 
 		return name;

@@ -1872,13 +1872,13 @@ public class StringUtil {
 	public static String randomId() {
 		Random random = new Random();
 
-		char[] result = new char[4];
+		char[] chars = new char[4];
 
 		for (int i = 0; i < 4; i++) {
-			result[i] = (char) (CharPool.LOWER_CASE_A + random.nextInt(26));
+			chars[i] = (char)(CharPool.LOWER_CASE_A + random.nextInt(26));
 		}
 
-		return new String(result);
+		return new String(chars);
 	}
 
 	/**
@@ -1890,7 +1890,9 @@ public class StringUtil {
 	 *         string
 	 */
 	public static String randomize(String s) {
-		return Randomizer.getInstance().randomize(s);
+		Randomizer randomizer = Randomizer.getInstance();
+
+		return randomizer.randomize(s);
 	}
 
 	public static String randomString() {
@@ -1900,15 +1902,15 @@ public class StringUtil {
 	public static String randomString(int length) {
 		Random random = new Random();
 
-		char[] result = new char[length];
+		char[] chars = new char[length];
 
 		for (int i = 0; i < length; i++) {
 			int index = random.nextInt(_RANDOM_STRING_CHAR_TABLE.length);
 
-			result[i] = _RANDOM_STRING_CHAR_TABLE[index];
+			chars[i] = _RANDOM_STRING_CHAR_TABLE[index];
 		}
 
-		return new String(result);
+		return new String(chars);
 	}
 
 	public static String read(ClassLoader classLoader, String name)
