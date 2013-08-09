@@ -99,7 +99,7 @@ if (publicLayoutSet.isLayoutSetPrototypeLinkEnabled() || privateLayoutSet.isLayo
 				}
 				%>
 
-				<liferay-ui:message arguments="<%= StringUtil.merge(targetAvailableLocaleDisplayNames, StringPool.COMMA_AND_SPACE) %>" key="please-select-a-default-language-amongst-the-available-languages-of-the-site-x" />
+				<liferay-ui:message arguments="<%= StringUtil.merge(targetAvailableLocaleDisplayNames, StringPool.COMMA_AND_SPACE) %>" key="please-select-a-default-language-among-the-available-languages-of-the-site-x" />
 			</c:when>
 			<c:when test="<%= le.getType() == LocaleException.DISPLAY_SETTINGS %>">
 
@@ -115,7 +115,7 @@ if (publicLayoutSet.isLayoutSetPrototypeLinkEnabled() || privateLayoutSet.isLayo
 				}
 				%>
 
-				<liferay-ui:message arguments="<%= StringUtil.merge(sourceAvailableLocaleDisplayNames, StringPool.COMMA_AND_SPACE) %>" key="please-select-the-available-languages-of-the-site-amongst-the-available-languages-of-the-portal-x" />
+				<liferay-ui:message arguments="<%= StringUtil.merge(sourceAvailableLocaleDisplayNames, StringPool.COMMA_AND_SPACE) %>" key="please-select-the-available-languages-of-the-site-among-the-available-languages-of-the-portal-x" />
 			</c:when>
 		</c:choose>
 	</liferay-ui:error>
