@@ -1910,7 +1910,7 @@ public class SeleniumBuilderTest {
 			"TestSuiteExecuteElement1004_1.testsuite",
 			"Error 1004: Missing (test-case|test-case-command|test-class|" +
 				"test-suite) attribute in " + _DIR_NAME +
-				"/TestSuiteExecuteElement1004_1.testsuite:2");
+					"/TestSuiteExecuteElement1004_1.testsuite:2");
 	}
 
 	@Test
@@ -1919,7 +1919,7 @@ public class SeleniumBuilderTest {
 			"TestSuiteExecuteElement1004_2.testsuite",
 			"Error 1004: Missing (test-case|test-case-command|test-class|" +
 				"test-suite) attribute in " + _DIR_NAME +
-				"/TestSuiteExecuteElement1004_2.testsuite:2");
+					"/TestSuiteExecuteElement1004_2.testsuite:2");
 	}
 
 	@Test
@@ -1928,7 +1928,7 @@ public class SeleniumBuilderTest {
 			"TestSuiteExecuteElement1004_3.testsuite",
 			"Error 1004: Missing (test-case|test-case-command|test-class|" +
 				"test-suite) attribute in " + _DIR_NAME +
-				"/TestSuiteExecuteElement1004_3.testsuite:2");
+					"/TestSuiteExecuteElement1004_3.testsuite:2");
 	}
 
 	@Test
