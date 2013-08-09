@@ -114,7 +114,7 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 					<h4 class="upload-error-message">
 						<c:choose>
 							<c:when test='<%= MapUtil.getBoolean(backgroundTask.getTaskContextMap(), "validated") %>'>
-								<liferay-ui:message key="the-publication-process-failed" /></h4>
+								<liferay-ui:message key="an-unexpected-error-occurred-with-the-publication-process" /></h4>
 							</c:when>
 							<c:otherwise>
 								<liferay-ui:message key="the-publication-process-did-not-start-due-to-validation-errors" /></h4>
