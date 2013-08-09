@@ -476,15 +476,15 @@ public class GroupServiceTest {
 	@Test
 	public void testInvalidChangeAvailableLanguageIds() throws Exception {
 		testUpdateDisplaySettings(
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN},
-			new Locale[] {LocaleUtil.US, LocaleUtil.GERMANY}, null, true);
+			new Locale[] {LocaleUtil.SPAIN, LocaleUtil.US},
+			new Locale[] {LocaleUtil.GERMANY, LocaleUtil.US}, null, true);
 	}
 
 	@Test
 	public void testInvalidChangeDefaultLanguageId() throws Exception {
 		testUpdateDisplaySettings(
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN},
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN}, LocaleUtil.GERMANY,
+			new Locale[] {LocaleUtil.SPAIN, LocaleUtil.US},
+			new Locale[] {LocaleUtil.SPAIN, LocaleUtil.US}, LocaleUtil.GERMANY,
 			true);
 	}
 
@@ -636,7 +636,7 @@ public class GroupServiceTest {
 		Group group = GroupTestUtil.addGroup();
 
 		Locale[] availableLocales =
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY};
+			new Locale[] {LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US};
 
 		group = GroupTestUtil.updateDisplaySettings(
 			group.getGroupId(), availableLocales, null);
@@ -728,15 +728,15 @@ public class GroupServiceTest {
 	@Test
 	public void testValidChangeAvailableLanguageIds() throws Exception {
 		testUpdateDisplaySettings(
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY},
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN}, null, false);
+			new Locale[] {LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US},
+			new Locale[] {LocaleUtil.SPAIN, LocaleUtil.US}, null, false);
 	}
 
 	@Test
 	public void testValidChangeDefaultLanguageId() throws Exception {
 		testUpdateDisplaySettings(
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY},
-			new Locale[] {LocaleUtil.US, LocaleUtil.SPAIN, LocaleUtil.GERMANY},
+			new Locale[] {LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US},
+			new Locale[] {LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US},
 			LocaleUtil.GERMANY, false);
 	}
 
