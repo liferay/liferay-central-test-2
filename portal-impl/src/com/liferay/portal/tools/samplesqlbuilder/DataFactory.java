@@ -1802,7 +1802,7 @@ public class DataFactory {
 
 		return newPortletPreferencesModel(
 			plid, portletId,
-			_PORTLET_PREFERENCES_FACTORY.toXML(jxPortletPreferences));
+			_portletPreferencesFactory.toXML(jxPortletPreferences));
 	}
 
 	public PortletPreferencesModel newPortletPreferencesModel(
@@ -1819,7 +1819,7 @@ public class DataFactory {
 
 		return newPortletPreferencesModel(
 			plid, portletId,
-			_PORTLET_PREFERENCES_FACTORY.toXML(jxPortletPreferences));
+			_portletPreferencesFactory.toXML(jxPortletPreferences));
 	}
 
 	public PortletPreferencesModel newPortletPreferencesModel(
@@ -1845,7 +1845,7 @@ public class DataFactory {
 
 		return newPortletPreferencesModel(
 			plid, portletId,
-			_PORTLET_PREFERENCES_FACTORY.toXML(jxPortletPreferences));
+			_portletPreferencesFactory.toXML(jxPortletPreferences));
 	}
 
 	public List<PortletPreferencesModel> newPortletPreferencesModels(
@@ -2790,10 +2790,10 @@ public class DataFactory {
 	private static final long _FUTURE_TIME =
 		System.currentTimeMillis() + Time.YEAR;
 
-	private static final PortletPreferencesFactory
-		_PORTLET_PREFERENCES_FACTORY = new PortletPreferencesFactoryImpl();
-
 	private static final String _SAMPLE_USER_NAME = "Sample";
+
+	private static PortletPreferencesFactory _portletPreferencesFactory =
+		new PortletPreferencesFactoryImpl();
 
 	private long _accountId;
 	private AccountModel _accountModel;
