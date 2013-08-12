@@ -72,68 +72,73 @@ public class PermissionExportImportTest extends PowerMockito {
 
 		// Export
 
-		LayoutSetPrototype layoutSetPrototype =
+		LayoutSetPrototype exportLayoutSetPrototype =
 			LayoutTestUtil.addLayoutSetPrototype(
 				ServiceTestUtil.randomString());
 
-		exportGroup = layoutSetPrototype.getGroup();
+		Group exportGroup = exportLayoutSetPrototype.getGroup();
 
-		exportLayout = LayoutTestUtil.addLayout(
+		Layout exportLayout = LayoutTestUtil.addLayout(
 			exportGroup.getGroupId(), ServiceTestUtil.randomString(), true);
 
-		portletId = PortletKeys.BOOKMARKS;
+		String exportResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+			exportLayout.getPlid(), _PORTLET_ID);
 
-		actionIds = new String[] {ActionKeys.ADD_TO_PAGE, ActionKeys.VIEW};
-
-		exportResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-			exportLayout.getPlid(), portletId);
-
-		role = RoleLocalServiceUtil.getRole(
+		Role role = RoleLocalServiceUtil.getRole(
 			TestPropsValues.getCompanyId(), RoleConstants.GUEST);
 
-		addPortletPermissions();
+		addPortletPermissions(exportGroup, role, exportResourcePrimKey);
 
-		exportPortletPermissions();
+		Element portletElement = exportPortletPermissions(
+			exportGroup, exportLayout);
 
 		// Import
 
-		layoutSetPrototype = LayoutTestUtil.addLayoutSetPrototype(
-			ServiceTestUtil.randomString());
+		LayoutSetPrototype importLayoutSetPrototype =
+			LayoutTestUtil.addLayoutSetPrototype(
+				ServiceTestUtil.randomString());
 
-		importGroup = layoutSetPrototype.getGroup();
+		Group importGroup = importLayoutSetPrototype.getGroup();
 
-		importLayout = LayoutTestUtil.addLayout(
+		Layout importLayout = LayoutTestUtil.addLayout(
 			importGroup.getGroupId(), ServiceTestUtil.randomString(), true);
 
-		importResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
-			importLayout.getPlid(), portletId);
+		String importResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
+			importLayout.getPlid(), _PORTLET_ID);
 
-		importPortletPermissions();
+		importPortletPermissions(importGroup, importLayout, portletElement);
 
-		validateImportedPortletPermissions();
+		validateImportedPortletPermissions(
+			importGroup, role, importResourcePrimKey);
 	}
 
-	protected void addPortletPermissions() throws Exception {
+	protected void addPortletPermissions(
+			Group exportGroup, Role role, String exportResourcePrimKey)
+		throws Exception {
+
 		Map<Long, String[]> roleIdsToActionIds = new HashMap<Long, String[]>();
 
-		if (ResourceBlockLocalServiceUtil.isSupported(portletId)) {
-			roleIdsToActionIds.put(role.getRoleId(), actionIds);
+		if (ResourceBlockLocalServiceUtil.isSupported(_PORTLET_ID)) {
+			roleIdsToActionIds.put(role.getRoleId(), _ACTION_IDS);
 
 			ResourceBlockServiceUtil.setIndividualScopePermissions(
 				TestPropsValues.getCompanyId(), exportGroup.getGroupId(),
-				portletId, GetterUtil.getLong(exportResourcePrimKey),
+				_PORTLET_ID, GetterUtil.getLong(exportResourcePrimKey),
 				roleIdsToActionIds);
 		}
 		else {
-			roleIdsToActionIds.put(role.getRoleId(), actionIds);
+			roleIdsToActionIds.put(role.getRoleId(), _ACTION_IDS);
 
 			ResourcePermissionServiceUtil.setIndividualResourcePermissions(
 				exportGroup.getGroupId(), TestPropsValues.getCompanyId(),
-				portletId, exportResourcePrimKey, roleIdsToActionIds);
+				_PORTLET_ID, exportResourcePrimKey, roleIdsToActionIds);
 		}
 	}
 
-	protected void exportPortletPermissions() throws Exception {
+	protected Element exportPortletPermissions(
+			Group exportGroup, Layout exportLayout)
+		throws Exception {
+
 		PortletDataContext portletDataContext = mock(PortletDataContext.class);
 
 		when(
@@ -148,30 +153,38 @@ public class PermissionExportImportTest extends PowerMockito {
 			exportGroup.getGroupId()
 		);
 
-		portletElement = SAXReaderUtil.createElement("portlet");
+		Element portletElement = SAXReaderUtil.createElement("portlet");
 
 		PermissionExporter permissionExporter = new PermissionExporter();
 
 		permissionExporter.exportPortletPermissions(
-			portletDataContext, new LayoutCache(), portletId, exportLayout,
+			portletDataContext, new LayoutCache(), _PORTLET_ID, exportLayout,
 			portletElement);
+
+		return portletElement;
 	}
 
-	protected void importPortletPermissions() throws Exception {
+	protected void importPortletPermissions(
+			Group importGroup, Layout importLayout, Element portletElement)
+		throws Exception {
+
 		PermissionImporter permissionImporter = new PermissionImporter();
 
 		permissionImporter.importPortletPermissions(
 			new LayoutCache(), TestPropsValues.getCompanyId(),
 			importGroup.getGroupId(), TestPropsValues.getUserId(), importLayout,
-			portletElement, portletId);
+			portletElement, _PORTLET_ID);
 	}
 
-	protected void validateImportedPortletPermissions() throws Exception {
+	protected void validateImportedPortletPermissions(
+			Group importGroup, Role role, String importResourcePrimKey)
+		throws Exception {
+
 		List<String> actions = ResourceActionsUtil.getResourceActions(
-			portletId, null);
+			_PORTLET_ID, null);
 
 		Resource resource = ResourceLocalServiceUtil.getResource(
-			TestPropsValues.getCompanyId(), portletId,
+			TestPropsValues.getCompanyId(), _PORTLET_ID,
 			ResourceConstants.SCOPE_INDIVIDUAL, importResourcePrimKey);
 
 		List<String> currentIndividualActions = new ArrayList<String>();
@@ -181,12 +194,13 @@ public class PermissionExportImportTest extends PowerMockito {
 			currentIndividualActions, new ArrayList<String>(),
 			new ArrayList<String>(), new ArrayList<String>());
 
-		Assert.assertEquals(actionIds.length, currentIndividualActions.size());
+		Assert.assertEquals(
+			_ACTION_IDS.length, currentIndividualActions.size());
 
 		for (String action : currentIndividualActions) {
 			boolean foundActionId = false;
 
-			for (String actionId : actionIds) {
+			for (String actionId : _ACTION_IDS) {
 				if (action.equals(actionId)) {
 					foundActionId = true;
 
@@ -195,20 +209,14 @@ public class PermissionExportImportTest extends PowerMockito {
 			}
 
 			if (!foundActionId) {
-				Assert.fail("Failed to import permissions.");
+				Assert.fail("Unable to import permissions");
 			}
 		}
 	}
 
-	protected String[] actionIds;
-	protected Group exportGroup;
-	protected Layout exportLayout;
-	protected String exportResourcePrimKey;
-	protected Group importGroup;
-	protected Layout importLayout;
-	protected String importResourcePrimKey;
-	protected Element portletElement;
-	protected String portletId;
-	protected Role role;
+	private static final String[] _ACTION_IDS =
+		{ActionKeys.ADD_TO_PAGE, ActionKeys.VIEW};
+
+	private static final String _PORTLET_ID = PortletKeys.BOOKMARKS;
 
 }
