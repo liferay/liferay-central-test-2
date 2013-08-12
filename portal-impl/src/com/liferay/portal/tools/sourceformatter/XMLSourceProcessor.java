@@ -51,7 +51,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		Pattern pattern1 = Pattern.compile(">\n\t+<!--[\n ]");
 		Pattern pattern2 = Pattern.compile("[\t ]-->\n[\t<]");
 
-		for (;;) {
+		while (true) {
 			Matcher matcher = pattern1.matcher(newContent);
 
 			if (matcher.find()) {
