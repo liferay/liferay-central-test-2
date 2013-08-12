@@ -77,7 +77,7 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 
 			searchContainer.setHeaderNames(headerNames);
 
-			Map orderableHeaders = new HashMap();
+			Map<String, String> orderableHeaders = new HashMap<String, String>();
 
 			orderableHeaders.put("modified-date", "modified-date");
 
