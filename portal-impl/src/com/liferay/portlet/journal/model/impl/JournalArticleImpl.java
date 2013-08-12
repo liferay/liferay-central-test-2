@@ -93,16 +93,13 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 
 	@Override
 	public String[] getAvailableLanguageIds() {
-
 		Set<String> availableLanguageIds = SetUtil.fromArray(
 			super.getAvailableLanguageIds());
 
-		// Content
-
-		String[] availableContentLanguageIdsArray =
+		String[] contentAvailableLanguageIds=
 			LocalizationUtil.getAvailableLanguageIds(getContent());
 
-		for (String availableLanguageId : availableContentLanguageIdsArray) {
+		for (String availableLanguageId : contentAvailableLanguageIds) {
 			availableLanguageIds.add(availableLanguageId);
 		}
 
@@ -123,6 +120,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 		return getContentByLocale(getContent(), isTemplateDriven(), languageId);
 	}
 
+	@Override
 	public String getDefaultLanguageId() {
 		String defaultLanguageId = super.getDefaultLanguageId();
 

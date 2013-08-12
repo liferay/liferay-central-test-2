@@ -853,6 +853,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	</#if>
 
 	<#if entity.hasLocalizedColumn()>
+		@Override
 		public String[] getAvailableLanguageIds() {
 			Set<String> availableLanguageIds = new TreeSet<String>();
 
@@ -865,21 +866,22 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 						String value = entry.getValue();
 
 						if (Validator.isNotNull(value)) {
-							availableLanguageIds.add(locale.toString());
+							availableLanguageIds.add(LocaleUtil.toLanguageId(locale));
 						}
 					}
 				</#if>
 			</#list>
 
-		return availableLanguageIds.toArray(new String[availableLanguageIds.size()]);
+			return availableLanguageIds.toArray(new String[availableLanguageIds.size()]);
 		}
 
+		@Override
 		public String getDefaultLanguageId() {
 			<#list entity.regularColList as column>
 				<#if column.localized>
 					String xml = get${column.methodName}();
 
-						if (xml == null) {
+					if (xml == null) {
 						return StringPool.BLANK;
 					}
 
@@ -889,7 +891,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			</#list>
 		}
 
-		@SuppressWarnings("unused")
+		@Override
 		public void prepareLocalizedFieldsForImport() throws LocaleException {
 			prepareLocalizedFieldsForImport (null);
 		}
@@ -898,14 +900,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		@SuppressWarnings("unused")
 		public void prepareLocalizedFieldsForImport(Locale defaultImportLocale) throws LocaleException {
 			Locale defaultLocale = LocaleUtil.getDefault();
-			String dataDefaultLanguageId = getDefaultLanguageId();
+
+			String modelDefaultLanguageId = getDefaultLanguageId();
 
 			<#list entity.regularColList as column>
 				<#if column.localized>
 					String ${column.name} = get${column.methodName}(defaultLocale);
 
 					if (Validator.isNull(${column.name})) {
-						set${column.methodName}(get${column.methodName}(dataDefaultLanguageId), defaultLocale);
+						set${column.methodName}(get${column.methodName}(modelDefaultLanguageId), defaultLocale);
 					}
 					else {
 					  set${column.methodName}(get${column.methodName}(defaultLocale), defaultLocale, defaultLocale);
