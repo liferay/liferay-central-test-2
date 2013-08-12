@@ -45,7 +45,8 @@ public class DDMIndexerUtil {
 	public static String extractAttributes(
 		DDMStructure ddmStructure, Fields fields, Locale locale) {
 
-		return getDDMIndexer().extractAttributes(ddmStructure, fields, locale);
+		return getDDMIndexer().extractIndexableAttributes(
+			ddmStructure, fields, locale);
 	}
 
 	public static DDMIndexer getDDMIndexer() {

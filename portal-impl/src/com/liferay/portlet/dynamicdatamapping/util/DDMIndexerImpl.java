@@ -176,7 +176,7 @@ public class DDMIndexerImpl implements DDMIndexer {
 	}
 
 	@Override
-	public String extractAttributes(
+	public String extractIndexableAttributes(
 		DDMStructure ddmStructure, Fields fields, Locale locale) {
 
 		Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(

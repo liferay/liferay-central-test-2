@@ -35,7 +35,7 @@ public interface DDMIndexer {
 	public String encodeName(
 		long ddmStructureId, String fieldName, Locale locale);
 
-	public String extractAttributes(
+	public String extractIndexableAttributes(
 		DDMStructure ddmStructure, Fields fields, Locale locale);
 
 }
