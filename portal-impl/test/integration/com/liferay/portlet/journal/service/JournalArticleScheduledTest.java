@@ -93,9 +93,10 @@ public class JournalArticleScheduledTest {
 
 		descriptionMap.put(Locale.getDefault(), ServiceTestUtil.randomString());
 
-		Calendar cal = new GregorianCalendar();
+		Calendar displayDateCalendar = new GregorianCalendar();
 
-		cal.setTime(new Date(displayDate.getTime() + Time.MINUTE * 5));
+		displayDateCalendar.setTime(
+			new Date(displayDate.getTime() + Time.MINUTE * 5));
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
@@ -116,11 +117,13 @@ public class JournalArticleScheduledTest {
 			descriptionMap,
 			JournalTestUtil.createLocalizedContent(
 				ServiceTestUtil.randomString(), LocaleUtil.getDefault()),
-			"general", null, null, null, cal.get(Calendar.MONTH),
-			cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.YEAR),
-			cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), 0, 0, 0, 0,
-			0, true, 0, 0, 0, 0, 0, true, true, false, null, null, null, null,
-			serviceContext);
+			"general", null, null, null,
+			displayDateCalendar.get(Calendar.MONTH),
+			displayDateCalendar.get(Calendar.DAY_OF_MONTH),
+			displayDateCalendar.get(Calendar.YEAR),
+			displayDateCalendar.get(Calendar.HOUR_OF_DAY),
+			displayDateCalendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true, 0, 0,
+			0, 0, 0, true, true, false, null, null, null, null, serviceContext);
 	}
 
 	protected void testScheduledArticle(boolean approved) throws Exception {

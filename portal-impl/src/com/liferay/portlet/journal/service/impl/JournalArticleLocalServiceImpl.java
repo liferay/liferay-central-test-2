@@ -1460,8 +1460,6 @@ public class JournalArticleLocalServiceImpl
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
-		Date now = new Date();
-
 		int[] statuses = new int[] {
 			WorkflowConstants.STATUS_APPROVED, WorkflowConstants.STATUS_IN_TRASH
 		};
@@ -5126,15 +5124,15 @@ public class JournalArticleLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		int oldStatus = article.getStatus();
-
-		int oldArticleVersionStatus = WorkflowConstants.STATUS_ANY;
-
 		if ((status == WorkflowConstants.STATUS_APPROVED) &&
 			now.before(article.getDisplayDate())) {
 
 			status = WorkflowConstants.STATUS_SCHEDULED;
 		}
+
+		int oldStatus = article.getStatus();
+
+		int oldArticleVersionStatus = WorkflowConstants.STATUS_ANY;
 
 		List<ObjectValuePair<Long, Integer>> articleVersionStatusOVPs =
 			new ArrayList<ObjectValuePair<Long, Integer>>();
