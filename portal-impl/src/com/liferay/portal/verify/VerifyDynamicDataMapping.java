@@ -399,6 +399,8 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 	}
 
 	protected void verifyStructure(DDMStructure structure) throws Exception {
+		boolean modified = false;
+
 		String defaultLanguageId = structure.getDefaultLanguageId();
 
 		XPath xPathSelector = SAXReaderUtil.createXPath("//dynamic-element");
@@ -406,8 +408,6 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		Document document = structure.getDocument();
 
 		List<Node> nodes = xPathSelector.selectNodes(document);
-
-		boolean modified = false;
 
 		for (Node node : nodes) {
 			Element dynamicElementElement = (Element)node;
