@@ -794,17 +794,17 @@ Plugins: ${lp.plugins.dir}</echo>
 			tofile="${app.server.lib.global.dir}/rebel.xml"
 		/>
 
-		<var name="lportal.rebel.xml" value="tools/jrebel/lportal-rebel.xml" />
+		<var name="portal.rebel.xml" value="tools/jrebel/portal-rebel.xml" />
 
 		<if>
-			<available file="tools/jrebel/lportal-rebel-overwrite.xml" />
+			<available file="tools/jrebel/portal-rebel-overwrite.xml" />
 			<then>
-				<var name="lportal.rebel.xml" value="tools/jrebel/lportal-rebel-overwrite.xml" />
+				<var name="portal.rebel.xml" value="tools/jrebel/portal-rebel-overwrite.xml" />
 			</then>
 		</if>
 
 		<copy
-			file="${lportal.rebel.xml}"
+			file="${portal.rebel.xml}"
 			overwrite="true"
 			tofile="${app.server.classes.portal.dir}/rebel.xml"
 		/>
