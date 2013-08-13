@@ -358,10 +358,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalFeed> list = findByUuid(uuid, count - 1, count,
 				orderByComparator);
 
@@ -1181,10 +1177,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalFeed> list = findByUuid_C(uuid, companyId, count - 1,
 				count, orderByComparator);
 
@@ -1713,10 +1705,6 @@ public class JournalFeedPersistenceImpl extends BasePersistenceImpl<JournalFeed>
 	public JournalFeed fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalFeed> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);

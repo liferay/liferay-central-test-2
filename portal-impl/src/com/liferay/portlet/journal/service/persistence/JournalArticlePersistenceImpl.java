@@ -368,10 +368,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid(uuid);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByUuid(uuid, count - 1, count,
 				orderByComparator);
 
@@ -1195,10 +1191,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUuid_C(uuid, companyId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByUuid_C(uuid, companyId, count - 1,
 				count, orderByComparator);
 
@@ -1740,10 +1732,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByResourcePrimKey(resourcePrimKey);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByResourcePrimKey(resourcePrimKey,
 				count - 1, count, orderByComparator);
 
@@ -2236,10 +2224,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByGroupId(groupId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByGroupId(groupId, count - 1, count,
 				orderByComparator);
@@ -3096,10 +3080,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByCompanyId(companyId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByCompanyId(companyId, count - 1,
 				count, orderByComparator);
 
@@ -3612,10 +3592,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByStructureId_Last(String structureId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByStructureId(structureId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByStructureId(structureId, count - 1,
 				count, orderByComparator);
@@ -4429,10 +4405,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByTemplateId(templateId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByTemplateId(templateId, count - 1,
 				count, orderByComparator);
 
@@ -4969,10 +4941,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByLayoutUuid(layoutUuid);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByLayoutUuid(layoutUuid, count - 1,
 				count, orderByComparator);
 
@@ -5500,10 +5468,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countBySmallImageId(smallImageId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findBySmallImageId(smallImageId, count - 1,
 				count, orderByComparator);
 
@@ -6018,10 +5982,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByR_ST_Last(long resourcePrimKey, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByR_ST(resourcePrimKey, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByR_ST(resourcePrimKey, status,
 				count - 1, count, orderByComparator);
@@ -6549,10 +6509,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByG_U_Last(long groupId, long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_U(groupId, userId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_U(groupId, userId, count - 1,
 				count, orderByComparator);
@@ -7466,10 +7422,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByG_F_Last(long groupId, long folderId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_F(groupId, folderId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_F(groupId, folderId, count - 1,
 				count, orderByComparator);
@@ -8914,10 +8866,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_A(groupId, articleId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_A(groupId, articleId, count - 1,
 				count, orderByComparator);
 
@@ -9914,10 +9862,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByG_UT_Last(long groupId, String urlTitle,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_UT(groupId, urlTitle);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_UT(groupId, urlTitle, count - 1,
 				count, orderByComparator);
@@ -10917,10 +10861,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_S(groupId, structureId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_S(groupId, structureId, count - 1,
 				count, orderByComparator);
 
@@ -11918,10 +11858,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByG_T_Last(long groupId, String templateId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_T(groupId, templateId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_T(groupId, templateId, count - 1,
 				count, orderByComparator);
@@ -12921,10 +12857,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_L(groupId, layoutUuid);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_L(groupId, layoutUuid, count - 1,
 				count, orderByComparator);
 
@@ -13907,10 +13839,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByG_ST(groupId, status);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_ST(groupId, status, count - 1,
 				count, orderByComparator);
 
@@ -14819,10 +14747,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_V(companyId, version);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByC_V(companyId, version, count - 1,
 				count, orderByComparator);
 
@@ -15351,10 +15275,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByC_ST(companyId, status);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByC_ST(companyId, status, count - 1,
 				count, orderByComparator);
 
@@ -15877,10 +15797,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 	public JournalArticle fetchByLtD_S_Last(Date displayDate, int status,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByLtD_S(displayDate, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByLtD_S(displayDate, status, count - 1,
 				count, orderByComparator);
@@ -16468,10 +16384,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		boolean indexable, int status, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByR_I_S(resourcePrimKey, indexable, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByR_I_S(resourcePrimKey, indexable,
 				status, count - 1, count, orderByComparator);
@@ -17359,10 +17271,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByG_F_ST(groupId, folderId, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_F_ST(groupId, folderId, status,
 				count - 1, count, orderByComparator);
@@ -18904,10 +18812,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		int count = countByG_C_C(groupId, classNameId, classPK);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_C_C(groupId, classNameId, classPK,
 				count - 1, count, orderByComparator);
 
@@ -20194,10 +20098,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		int count = countByG_C_T(groupId, classNameId, templateId);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_C_T(groupId, classNameId,
 				templateId, count - 1, count, orderByComparator);
 
@@ -21257,10 +21157,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		int count = countByG_C_L(groupId, classNameId, layoutUuid);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_C_L(groupId, classNameId,
 				layoutUuid, count - 1, count, orderByComparator);
 
@@ -22301,10 +22197,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		long classNameId, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByG_U_C(groupId, userId, classNameId);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_U_C(groupId, userId, classNameId,
 				count - 1, count, orderByComparator);
@@ -23586,10 +23478,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByG_A_ST(groupId, articleId, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByG_A_ST(groupId, articleId, status,
 				count - 1, count, orderByComparator);
@@ -25268,10 +25156,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		throws SystemException {
 		int count = countByG_UT_ST(groupId, urlTitle, status);
 
-		if (count == 0) {
-			return null;
-		}
-
 		List<JournalArticle> list = findByG_UT_ST(groupId, urlTitle, status,
 				count - 1, count, orderByComparator);
 
@@ -26314,10 +26198,6 @@ public class JournalArticlePersistenceImpl extends BasePersistenceImpl<JournalAr
 		int status, OrderByComparator orderByComparator)
 		throws SystemException {
 		int count = countByC_V_ST(companyId, version, status);
-
-		if (count == 0) {
-			return null;
-		}
 
 		List<JournalArticle> list = findByC_V_ST(companyId, version, status,
 				count - 1, count, orderByComparator);
