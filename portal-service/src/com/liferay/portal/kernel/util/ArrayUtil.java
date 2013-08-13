@@ -679,13 +679,6 @@ public class ArrayUtil {
 		return false;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(boolean[] array, boolean[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -702,13 +695,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(byte[] array, byte[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -725,13 +711,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(char[] array, char[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -748,13 +727,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(double[] array, double[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -771,13 +743,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(float[] array, float[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -794,13 +759,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(int[] array, int[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -817,13 +775,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(long[] array, long[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -840,13 +791,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains all the elements of array2
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(Object[] array, Object[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
@@ -863,13 +807,6 @@ public class ArrayUtil {
 		return true;
 	}
 
-	/**
-	 * Checks if array contains the whole array2 elements
-	 *
-	 * @param array the container array
-	 * @param array2 the contained array
-	 * @return
-	 */
 	public static boolean containsAll(short[] array, short[] array2) {
 		if ((array == null) || (array.length == 0) ||
 			(array2 == null) || (array2.length == 0)) {
