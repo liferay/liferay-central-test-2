@@ -107,7 +107,7 @@ public class JournalArticleFinderTest {
 
 		JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder.getFolderId(),
-			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
+			PortalUtil.getClassNameId(JournalStructure.class),
 			"<title>Article 4</title>", _ddmStructure.getStructureKey(),
 			ddmTemplate.getTemplateKey());
 
