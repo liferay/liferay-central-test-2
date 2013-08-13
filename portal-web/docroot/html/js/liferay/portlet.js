@@ -509,7 +509,7 @@
 				if (canEditTitle) {
 					var events = ['focus', 'gesturemovestart'];
 
-					if(!A.UA.touch) {
+					if (!A.UA.touch) {
 						events.push('mousemove');
 					}
 
