@@ -893,8 +893,7 @@ public class JournalArticleLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle fetchLatestArticle(
 		long groupId, java.lang.String articleId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().fetchLatestArticle(groupId, articleId, status);
 	}
 
