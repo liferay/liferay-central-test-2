@@ -341,7 +341,7 @@ public class SearchEngineUtil {
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
-		indexWriter.indexDictionaries(searchContext);
+		indexWriter.indexSpellCheckerDictionaries(searchContext);
 	}
 
 	public static void indexDictionary(long companyId, Locale locale)
@@ -368,7 +368,7 @@ public class SearchEngineUtil {
 		searchContext.setSearchEngineId(searchEngineId);
 		searchContext.setLocale(locale);
 
-		indexWriter.indexDictionary(searchContext);
+		indexWriter.indexSpellCheckerDictionary(searchContext);
 	}
 
 	public static void indexKeywordQueryFile(long companyId, Locale locale)
@@ -395,7 +395,7 @@ public class SearchEngineUtil {
 		searchContext.setSearchEngineId(searchEngineId);
 		searchContext.setLocale(locale);
 
-		indexWriter.indexKeywordQueryFile(searchContext);
+		indexWriter.indexQuerySuggestionDictionary(searchContext);
 	}
 
 	public static void indexKeywordQueryFiles(long companyId)
@@ -421,7 +421,7 @@ public class SearchEngineUtil {
 		searchContext.setCompanyId(companyId);
 		searchContext.setSearchEngineId(searchEngineId);
 
-		indexWriter.indexKeywordQueryFiles(searchContext);
+		indexWriter.indexQuerySuggestionDictionaries(searchContext);
 	}
 
 	public static boolean isIndexReadOnly() {

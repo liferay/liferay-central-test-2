@@ -48,7 +48,7 @@ import org.apache.lucene.util.ReaderUtil;
 public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 
 	@Override
-	public void clearDictionaryIndexes(SearchContext searchContext)
+	public void clearSpellCheckerDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		Term term = new Term(
@@ -64,7 +64,7 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 	}
 
 	@Override
-	public void clearKeywordQueryIndexes(SearchContext searchContext)
+	public void clearQuerySuggestionDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		Term term = new Term(

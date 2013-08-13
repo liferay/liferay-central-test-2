@@ -49,7 +49,7 @@ public abstract class BaseSpellCheckIndexWriter
 	implements SpellCheckIndexWriter {
 
 	@Override
-	public void indexDictionaries(SearchContext searchContext)
+	public void indexSpellCheckerDictionaries(SearchContext searchContext)
 		throws SearchException {
 
 		try {
@@ -66,7 +66,7 @@ public abstract class BaseSpellCheckIndexWriter
 	}
 
 	@Override
-	public void indexDictionary(SearchContext searchContext)
+	public void indexSpellCheckerDictionary(SearchContext searchContext)
 		throws SearchException {
 
 		try {
@@ -81,7 +81,7 @@ public abstract class BaseSpellCheckIndexWriter
 	}
 
 	@Override
-	public void indexKeywordQueryFile(SearchContext searchContext)
+	public void indexQuerySuggestionDictionary(SearchContext searchContext)
 		throws SearchException {
 
 		try {
@@ -96,7 +96,7 @@ public abstract class BaseSpellCheckIndexWriter
 	}
 
 	@Override
-	public void indexKeywordQueryFiles(SearchContext searchContext)
+	public void indexQuerySuggestionDictionaries(SearchContext searchContext)
 		throws SearchException {
 
 		try {

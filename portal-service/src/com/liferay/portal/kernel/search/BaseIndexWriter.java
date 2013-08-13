@@ -24,7 +24,7 @@ public abstract class BaseIndexWriter
 	implements IndexWriter, SpellCheckIndexWriter {
 
 	@Override
-	public void clearDictionaryIndexes(SearchContext searchContext)
+	public void clearSpellCheckerDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -33,11 +33,11 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.clearDictionaryIndexes(searchContext);
+		_spellCheckIndexWriter.clearSpellCheckerDictionaryIndexes(searchContext);
 	}
 
 	@Override
-	public void clearKeywordQueryIndexes(SearchContext searchContext)
+	public void clearQuerySuggestionDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -46,11 +46,11 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.clearKeywordQueryIndexes(searchContext);
+		_spellCheckIndexWriter.clearQuerySuggestionDictionaryIndexes(searchContext);
 	}
 
 	@Override
-	public void indexDictionaries(SearchContext searchContext)
+	public void indexSpellCheckerDictionaries(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -59,11 +59,11 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.indexDictionaries(searchContext);
+		_spellCheckIndexWriter.indexSpellCheckerDictionaries(searchContext);
 	}
 
 	@Override
-	public void indexDictionary(SearchContext searchContext)
+	public void indexSpellCheckerDictionary(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -72,11 +72,11 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.indexDictionary(searchContext);
+		_spellCheckIndexWriter.indexSpellCheckerDictionary(searchContext);
 	}
 
 	@Override
-	public void indexKeywordQueryFile(SearchContext searchContext)
+	public void indexQuerySuggestionDictionary(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -85,11 +85,11 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.indexKeywordQueryFile(searchContext);
+		_spellCheckIndexWriter.indexQuerySuggestionDictionary(searchContext);
 	}
 
 	@Override
-	public void indexKeywordQueryFiles(SearchContext searchContext)
+	public void indexQuerySuggestionDictionaries(SearchContext searchContext)
 		throws SearchException {
 
 		if (_spellCheckIndexWriter == null) {
@@ -98,7 +98,7 @@ public abstract class BaseIndexWriter
 			}
 		}
 
-		_spellCheckIndexWriter.indexKeywordQueryFiles(searchContext);
+		_spellCheckIndexWriter.indexQuerySuggestionDictionaries(searchContext);
 	}
 
 	public void setSpellCheckIndexWriter(
