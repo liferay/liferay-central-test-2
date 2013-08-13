@@ -57,7 +57,7 @@ public abstract class BaseSpellCheckIndexWriter
 				indexKeywords(
 					searchContext.getCompanyId(), languageId,
 					PropsKeys.INDEX_SEARCH_SPELL_CHECKER_DICTIONARY,
-					Field.SPELL_CHECK_WORD, DICTIONARY_TYPE, 0);
+					Field.SPELL_CHECK_WORD, SPELL_CHECKER_TYPE, 0);
 			}
 		}
 		catch (Exception e) {
@@ -73,7 +73,7 @@ public abstract class BaseSpellCheckIndexWriter
 			indexKeywords(
 				searchContext.getCompanyId(), searchContext.getLanguageId(),
 				PropsKeys.INDEX_SEARCH_SPELL_CHECKER_DICTIONARY,
-				Field.SPELL_CHECK_WORD, DICTIONARY_TYPE, 0);
+				Field.SPELL_CHECK_WORD, SPELL_CHECKER_TYPE, 0);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -88,7 +88,7 @@ public abstract class BaseSpellCheckIndexWriter
 			indexKeywords(
 				searchContext.getCompanyId(), searchContext.getLanguageId(),
 				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
-				Field.KEYWORD_SEARCH, KEYWORD_QUERY_TYPE, 0);
+				Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -104,7 +104,7 @@ public abstract class BaseSpellCheckIndexWriter
 				indexKeywords(
 					searchContext.getCompanyId(), languageId,
 					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
-					Field.KEYWORD_SEARCH, KEYWORD_QUERY_TYPE, 0);
+					Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
 			}
 		}
 		catch (Exception e) {
@@ -179,10 +179,10 @@ public abstract class BaseSpellCheckIndexWriter
 	}
 
 	protected abstract void indexKeywords(
-				long companyId, long groupId, String languageId,
-				InputStream inputStream, String keywordFieldName,
-				String typeFieldValue, int maxNGramLength)
-			throws Exception;
+			long companyId, long groupId, String languageId,
+			InputStream inputStream, String keywordFieldName,
+			String typeFieldValue, int maxNGramLength)
+		throws Exception;
 
 	protected void indexKeywords(
 			long companyId, long groupId, String languageId,
@@ -263,9 +263,9 @@ public abstract class BaseSpellCheckIndexWriter
 		}
 	}
 
-	protected static final String DICTIONARY_TYPE = "dictionary";
+	protected static final String SPELL_CHECKER_TYPE = "spellChecker";
 
-	protected static final String KEYWORD_QUERY_TYPE = "keywordQuery";
+	protected static final String QUERY_SUGGESTION_TYPE = "querySuggestion";
 
 	private static final String _PORTLET_SEPARATOR = "_PORTLET_";
 

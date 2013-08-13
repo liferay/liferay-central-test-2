@@ -52,7 +52,7 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 		throws SearchException {
 
 		Term term = new Term(
-			com.liferay.portal.kernel.search.Field.TYPE, DICTIONARY_TYPE);
+			com.liferay.portal.kernel.search.Field.TYPE, SPELL_CHECKER_TYPE);
 
 		try {
 			LuceneHelperUtil.deleteDocuments(
@@ -68,7 +68,7 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 		throws SearchException {
 
 		Term term = new Term(
-			com.liferay.portal.kernel.search.Field.TYPE, KEYWORD_QUERY_TYPE);
+			com.liferay.portal.kernel.search.Field.TYPE, QUERY_SUGGESTION_TYPE);
 
 		try {
 			LuceneHelperUtil.deleteDocuments(
