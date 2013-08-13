@@ -79,7 +79,6 @@ public class AddDefaultLayoutPrototypesAction
 		preferences.put(
 			"classNameId",
 			String.valueOf(PortalUtil.getClassNameId(BlogsEntry.class)));
-
 		preferences.put("showAssetCount", Boolean.TRUE.toString());
 
 		updatePortletSetup(layout, portletId, preferences);
@@ -183,7 +182,6 @@ public class AddDefaultLayoutPrototypesAction
 		preferences.put(
 			"classNameId",
 			String.valueOf(PortalUtil.getClassNameId(WikiPage.class)));
-
 		preferences.put("showAssetCount", Boolean.TRUE.toString());
 
 		updatePortletSetup(layout, portletId, preferences);
