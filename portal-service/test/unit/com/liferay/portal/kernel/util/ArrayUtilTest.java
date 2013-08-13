@@ -29,7 +29,7 @@ import org.junit.Test;
 public class ArrayUtilTest {
 
 	@Test
-	public void testBooleanArrayContainsAllBooleanArray() throws Exception {
+	public void testContainsAllBooleanArray() throws Exception {
 		boolean[] array1 = {true};
 		boolean[] array2 = {true, false};
 
@@ -38,7 +38,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testByteArrayContainsAllByteArray() throws Exception {
+	public void testContainsAllByteArray() throws Exception {
 		byte[] array1 = {1, 2};
 		byte[] array2= {1, 2, 3};
 
@@ -47,7 +47,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCharArrayContainsAllCharArray() throws Exception {
+	public void testContainsAllCharArray() throws Exception {
 		char[] array1 = {'a', 'b'};
 		char[] array2 = {'a', 'b', 'c'};
 
@@ -56,7 +56,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testDoubleArrayContainsAllDoubleArray() throws Exception {
+	public void testContainsAllDoubleArray() throws Exception {
 		double[] array1 = {1.5D, 2.5D};
 		double[] array2 = {1.5D, 2.5D, 3.5D};
 
@@ -145,7 +145,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testFloatArrayContainsAllFloatArray() throws Exception {
+	public void testContainsAllFloatArray() throws Exception {
 		float[] array1 = {1.5f, 2.5f};
 		float[] array2 = {1.5f, 2.5f, 3.5f};
 
@@ -154,7 +154,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testIntArrayContainsAllIntArray() throws Exception {
+	public void testContainsAllIntArray() throws Exception {
 		int[] array1 = {1, 2};
 		int[] array2 = {1, 2, 3};
 
@@ -163,7 +163,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testLongArrayContainsAllLongArray() throws Exception {
+	public void testContainsAllLongArray() throws Exception {
 		long[] array1 = {1L, 2L};
 		long[] array2 = {1L, 2L, 3L};
 
@@ -237,7 +237,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testShortArrayContainsAllOShortArray() throws Exception {
+	public void testContainsAllOShortArray() throws Exception {
 		short[] array1 = {1, 2};
 		short[] array2 = {1, 2, 3};
 
@@ -318,7 +318,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testUserArrayContainsAllUserArray() throws Exception {
+	public void testContainsAllUserArray() throws Exception {
 		User julio = new User("julio", 20);
 		User sergio = new User("sergio", 20);
 		User brian = new User("brian", 20);
