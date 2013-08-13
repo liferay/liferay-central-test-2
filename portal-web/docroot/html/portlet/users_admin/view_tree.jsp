@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
-String keywords = ParamUtil.getString(request, "keywords");
-
 String backURL = GetterUtil.getString(request.getAttribute("view.jsp-backURL"));
 int inactiveUsersCount = GetterUtil.getInteger(request.getAttribute("view.jsp-inactiveUsersCount"));
 Organization organization = (Organization)request.getAttribute("view.jsp-organization");
@@ -30,6 +28,8 @@ String toolbarItem = GetterUtil.getString(request.getAttribute("view.jsp-toolbar
 int usersCount = GetterUtil.getInteger(request.getAttribute("view.jsp-usersCount"));
 String usersListView = GetterUtil.getString(request.getAttribute("view.jsp-usersListView"));
 String viewUsersRedirect = GetterUtil.getString(request.getAttribute("view.jsp-viewUsersRedirect"));
+
+String keywords = ParamUtil.getString(request, "keywords");
 
 if (organization != null) {
 	Group organizationGroup = organization.getGroup();
