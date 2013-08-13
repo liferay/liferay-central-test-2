@@ -235,12 +235,12 @@ public abstract class BaseSpellCheckIndexWriter
 	}
 
 	protected void indexKeywords(
-			long companyId, String languageId, String fileToIndexPropertyName,
+			long companyId, String languageId, String propsKey,
 			String keywordFieldName, String typeFieldValue, int maxNGramLength)
 		throws Exception {
 
 		String[] dictionaryFileNames = PropsUtil.getArray(
-			fileToIndexPropertyName, new Filter(languageId));
+			propsKey, new Filter(languageId));
 
 		indexKeywords(
 			companyId, 0, languageId, dictionaryFileNames, keywordFieldName,
