@@ -87,7 +87,7 @@ public abstract class BaseSpellCheckIndexWriter
 		try {
 			indexKeywords(
 				searchContext.getCompanyId(), searchContext.getLanguageId(),
-				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_FILE,
+				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
 				Field.KEYWORD_SEARCH, KEYWORD_QUERY_TYPE, 0);
 		}
 		catch (Exception e) {
@@ -103,7 +103,7 @@ public abstract class BaseSpellCheckIndexWriter
 			for (String languageId : _SUPPORTED_LOCALES) {
 				indexKeywords(
 					searchContext.getCompanyId(), languageId,
-					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_FILE,
+					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
 					Field.KEYWORD_SEARCH, KEYWORD_QUERY_TYPE, 0);
 			}
 		}
