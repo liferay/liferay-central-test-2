@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.dao.search;
 
 import org.junit.Assert;
 import org.junit.Test;

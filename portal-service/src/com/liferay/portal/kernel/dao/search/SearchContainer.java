@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.TextFormatter;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.SearchPaginationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
