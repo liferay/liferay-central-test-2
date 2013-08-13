@@ -474,7 +474,7 @@ public class EditServerAction extends PortletAction {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		for (long companyId : companyIds) {
-			SearchEngineUtil.indexDictionaries(companyId);
+			SearchEngineUtil.indexSpellCheckerDictionaries(companyId);
 		}
 	}
 

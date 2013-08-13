@@ -25,7 +25,7 @@ public interface NGramHolderBuilder {
 		throws SearchException;
 
 	public NGramHolder buildNGramHolder(
-		String input, int nGramMinLength, int nGramMaxLength)
-	throws SearchException;
+			String input, int nGramMinLength, int nGramMaxLength)
+		throws SearchException;
 
 }

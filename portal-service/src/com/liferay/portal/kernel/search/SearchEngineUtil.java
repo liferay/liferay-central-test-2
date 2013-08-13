@@ -319,17 +319,18 @@ public class SearchEngineUtil {
 			searchEngineId);
 	}
 
-	public static void indexDictionaries(long companyId)
+	public static void indexSpellCheckerDictionaries(long companyId)
 		throws SearchException {
 
 		Set<String> searchEngineIds = getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
-			indexDictionaries(searchEngineId, companyId);
+			indexSpellCheckerDictionaries(searchEngineId, companyId);
 		}
 	}
 
-	public static void indexDictionaries(String searchEngineId, long companyId)
+	public static void indexSpellCheckerDictionaries(
+			String searchEngineId, long companyId)
 		throws SearchException {
 
 		SearchEngine searchEngine = getSearchEngine(searchEngineId);
@@ -344,17 +345,18 @@ public class SearchEngineUtil {
 		indexWriter.indexSpellCheckerDictionaries(searchContext);
 	}
 
-	public static void indexDictionary(long companyId, Locale locale)
+	public static void indexSpellCheckerDictionary(
+			long companyId, Locale locale)
 		throws SearchException {
 
 		Set<String> searchEngineIds = getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
-			indexDictionary(searchEngineId, companyId, locale);
+			indexSpellCheckerDictionary(searchEngineId, companyId, locale);
 		}
 	}
 
-	public static void indexDictionary(
+	public static void indexSpellCheckerDictionary(
 			String searchEngineId, long companyId, Locale locale)
 		throws SearchException {
 
@@ -371,17 +373,18 @@ public class SearchEngineUtil {
 		indexWriter.indexSpellCheckerDictionary(searchContext);
 	}
 
-	public static void indexKeywordQueryFile(long companyId, Locale locale)
+	public static void indexQuerySuggestionDictionary(
+			long companyId, Locale locale)
 		throws SearchException {
 
 		Set<String> searchEngineIds = getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
-			indexKeywordQueryFile(searchEngineId, companyId, locale);
+			indexQuerySuggestionDictionary(searchEngineId, companyId, locale);
 		}
 	}
 
-	public static void indexKeywordQueryFile(
+	public static void indexQuerySuggestionDictionary(
 			String searchEngineId, long companyId, Locale locale)
 		throws SearchException {
 
@@ -398,17 +401,17 @@ public class SearchEngineUtil {
 		indexWriter.indexQuerySuggestionDictionary(searchContext);
 	}
 
-	public static void indexKeywordQueryFiles(long companyId)
+	public static void indexQuerySuggestionDictionaries(long companyId)
 		throws SearchException {
 
 		Set<String> searchEngineIds = getSearchEngineIds();
 
 		for (String searchEngineId : searchEngineIds) {
-			indexKeywordQueryFiles(searchEngineId, companyId);
+			indexQuerySuggestionDictionaries(searchEngineId, companyId);
 		}
 	}
 
-	public static void indexKeywordQueryFiles(
+	public static void indexQuerySuggestionDictionaries(
 			String searchEngineId, long companyId)
 		throws SearchException {
 
