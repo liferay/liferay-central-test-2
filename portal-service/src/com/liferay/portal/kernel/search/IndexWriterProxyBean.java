@@ -39,12 +39,16 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 	}
 
 	@Override
-	public void clearSpellCheckerDictionaryIndexes(SearchContext searchContext) {
+	public void clearQuerySuggestionDictionaryIndexes(
+		SearchContext searchContext) {
+
 		throw new UnsupportedOperationException();
 	}
 
 	@Override
-	public void clearQuerySuggestionDictionaryIndexes(SearchContext searchContext) {
+	public void clearSpellCheckerDictionaryIndexes(
+		SearchContext searchContext) {
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -79,13 +83,9 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 	}
 
 	@Override
-	public void indexSpellCheckerDictionaries(SearchContext searchContext) {
+	public void indexQuerySuggestionDictionaries(SearchContext searchContext) {
 		throw new UnsupportedOperationException();
-	}
 
-	@Override
-	public void indexSpellCheckerDictionary(SearchContext searchContext) {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -95,9 +95,13 @@ public class IndexWriterProxyBean extends BaseMultiDestinationProxyBean
 	}
 
 	@Override
-	public void indexQuerySuggestionDictionaries(SearchContext searchContext) {
+	public void indexSpellCheckerDictionaries(SearchContext searchContext) {
 		throw new UnsupportedOperationException();
+	}
 
+	@Override
+	public void indexSpellCheckerDictionary(SearchContext searchContext) {
+		throw new UnsupportedOperationException();
 	}
 
 	@Override

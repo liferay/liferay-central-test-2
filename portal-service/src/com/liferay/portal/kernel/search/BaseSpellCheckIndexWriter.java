@@ -49,6 +49,38 @@ public abstract class BaseSpellCheckIndexWriter
 	implements SpellCheckIndexWriter {
 
 	@Override
+	public void indexQuerySuggestionDictionaries(SearchContext searchContext)
+		throws SearchException {
+
+		try {
+			for (String languageId : _SUPPORTED_LOCALES) {
+				indexKeywords(
+					searchContext.getCompanyId(), languageId,
+					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
+					Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
+			}
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+	}
+
+	@Override
+	public void indexQuerySuggestionDictionary(SearchContext searchContext)
+		throws SearchException {
+
+		try {
+			indexKeywords(
+				searchContext.getCompanyId(), searchContext.getLanguageId(),
+				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
+				Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+	}
+
+	@Override
 	public void indexSpellCheckerDictionaries(SearchContext searchContext)
 		throws SearchException {
 
@@ -74,38 +106,6 @@ public abstract class BaseSpellCheckIndexWriter
 				searchContext.getCompanyId(), searchContext.getLanguageId(),
 				PropsKeys.INDEX_SEARCH_SPELL_CHECKER_DICTIONARY,
 				Field.SPELL_CHECK_WORD, SPELL_CHECKER_TYPE, 0);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	@Override
-	public void indexQuerySuggestionDictionary(SearchContext searchContext)
-		throws SearchException {
-
-		try {
-			indexKeywords(
-				searchContext.getCompanyId(), searchContext.getLanguageId(),
-				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
-				Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
-	@Override
-	public void indexQuerySuggestionDictionaries(SearchContext searchContext)
-		throws SearchException {
-
-		try {
-			for (String languageId : _SUPPORTED_LOCALES) {
-				indexKeywords(
-					searchContext.getCompanyId(), languageId,
-					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
-					Field.KEYWORD_SEARCH, QUERY_SUGGESTION_TYPE, 0);
-			}
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -263,9 +263,9 @@ public abstract class BaseSpellCheckIndexWriter
 		}
 	}
 
-	protected static final String SPELL_CHECKER_TYPE = "spellChecker";
-
 	protected static final String QUERY_SUGGESTION_TYPE = "querySuggestion";
+
+	protected static final String SPELL_CHECKER_TYPE = "spellChecker";
 
 	private static final String _PORTLET_SEPARATOR = "_PORTLET_";
 

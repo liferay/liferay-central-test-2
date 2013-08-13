@@ -48,11 +48,12 @@ import org.apache.lucene.util.ReaderUtil;
 public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 
 	@Override
-	public void clearSpellCheckerDictionaryIndexes(SearchContext searchContext)
+	public void clearQuerySuggestionDictionaryIndexes(
+			SearchContext searchContext)
 		throws SearchException {
 
 		Term term = new Term(
-			com.liferay.portal.kernel.search.Field.TYPE, SPELL_CHECKER_TYPE);
+			com.liferay.portal.kernel.search.Field.TYPE, QUERY_SUGGESTION_TYPE);
 
 		try {
 			LuceneHelperUtil.deleteDocuments(
@@ -64,11 +65,11 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 	}
 
 	@Override
-	public void clearQuerySuggestionDictionaryIndexes(SearchContext searchContext)
+	public void clearSpellCheckerDictionaryIndexes(SearchContext searchContext)
 		throws SearchException {
 
 		Term term = new Term(
-			com.liferay.portal.kernel.search.Field.TYPE, QUERY_SUGGESTION_TYPE);
+			com.liferay.portal.kernel.search.Field.TYPE, SPELL_CHECKER_TYPE);
 
 		try {
 			LuceneHelperUtil.deleteDocuments(

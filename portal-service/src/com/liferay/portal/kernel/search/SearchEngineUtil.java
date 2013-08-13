@@ -319,6 +319,60 @@ public class SearchEngineUtil {
 			searchEngineId);
 	}
 
+	public static void indexQuerySuggestionDictionaries(long companyId)
+		throws SearchException {
+
+		Set<String> searchEngineIds = getSearchEngineIds();
+
+		for (String searchEngineId : searchEngineIds) {
+			indexQuerySuggestionDictionaries(searchEngineId, companyId);
+		}
+	}
+
+	public static void indexQuerySuggestionDictionaries(
+			String searchEngineId, long companyId)
+		throws SearchException {
+
+		SearchEngine searchEngine = getSearchEngine(searchEngineId);
+
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
+
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setSearchEngineId(searchEngineId);
+
+		indexWriter.indexQuerySuggestionDictionaries(searchContext);
+	}
+
+	public static void indexQuerySuggestionDictionary(
+			long companyId, Locale locale)
+		throws SearchException {
+
+		Set<String> searchEngineIds = getSearchEngineIds();
+
+		for (String searchEngineId : searchEngineIds) {
+			indexQuerySuggestionDictionary(searchEngineId, companyId, locale);
+		}
+	}
+
+	public static void indexQuerySuggestionDictionary(
+			String searchEngineId, long companyId, Locale locale)
+		throws SearchException {
+
+		SearchEngine searchEngine = getSearchEngine(searchEngineId);
+
+		IndexWriter indexWriter = searchEngine.getIndexWriter();
+
+		SearchContext searchContext = new SearchContext();
+
+		searchContext.setCompanyId(companyId);
+		searchContext.setSearchEngineId(searchEngineId);
+		searchContext.setLocale(locale);
+
+		indexWriter.indexQuerySuggestionDictionary(searchContext);
+	}
+
 	public static void indexSpellCheckerDictionaries(long companyId)
 		throws SearchException {
 
@@ -371,60 +425,6 @@ public class SearchEngineUtil {
 		searchContext.setLocale(locale);
 
 		indexWriter.indexSpellCheckerDictionary(searchContext);
-	}
-
-	public static void indexQuerySuggestionDictionary(
-			long companyId, Locale locale)
-		throws SearchException {
-
-		Set<String> searchEngineIds = getSearchEngineIds();
-
-		for (String searchEngineId : searchEngineIds) {
-			indexQuerySuggestionDictionary(searchEngineId, companyId, locale);
-		}
-	}
-
-	public static void indexQuerySuggestionDictionary(
-			String searchEngineId, long companyId, Locale locale)
-		throws SearchException {
-
-		SearchEngine searchEngine = getSearchEngine(searchEngineId);
-
-		IndexWriter indexWriter = searchEngine.getIndexWriter();
-
-		SearchContext searchContext = new SearchContext();
-
-		searchContext.setCompanyId(companyId);
-		searchContext.setSearchEngineId(searchEngineId);
-		searchContext.setLocale(locale);
-
-		indexWriter.indexQuerySuggestionDictionary(searchContext);
-	}
-
-	public static void indexQuerySuggestionDictionaries(long companyId)
-		throws SearchException {
-
-		Set<String> searchEngineIds = getSearchEngineIds();
-
-		for (String searchEngineId : searchEngineIds) {
-			indexQuerySuggestionDictionaries(searchEngineId, companyId);
-		}
-	}
-
-	public static void indexQuerySuggestionDictionaries(
-			String searchEngineId, long companyId)
-		throws SearchException {
-
-		SearchEngine searchEngine = getSearchEngine(searchEngineId);
-
-		IndexWriter indexWriter = searchEngine.getIndexWriter();
-
-		SearchContext searchContext = new SearchContext();
-
-		searchContext.setCompanyId(companyId);
-		searchContext.setSearchEngineId(searchEngineId);
-
-		indexWriter.indexQuerySuggestionDictionaries(searchContext);
 	}
 
 	public static boolean isIndexReadOnly() {
