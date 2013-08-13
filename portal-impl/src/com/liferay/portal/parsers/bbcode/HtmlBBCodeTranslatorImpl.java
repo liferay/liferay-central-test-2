@@ -259,13 +259,11 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 		sb.append("<td class=\"lines\">");
 
 		for (int i = 0; i < lines.length; i++) {
-			String index = String.valueOf(i + 1);
 			String line = lines[i];
 
 			line = StringUtil.replace(
 				line, StringPool.THREE_SPACES, "&nbsp; &nbsp;");
-			line = StringUtil.replace(
-				line, StringPool.DOUBLE_SPACE, "&nbsp; ");
+			line = StringUtil.replace(line, StringPool.DOUBLE_SPACE, "&nbsp; ");
 
 			if (Validator.isNull(line)) {
 				line = "<br />";
