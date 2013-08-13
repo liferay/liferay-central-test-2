@@ -100,12 +100,6 @@ public class SearchResultUtil {
 					searchResult = searchResults.get(index);
 				}
 
-				if (entryClassName.equals(JournalArticle.class.getName())) {
-					String version = document.get(Field.VERSION);
-
-					searchResult.addVersion(version);
-				}
-
 				if (fileEntry != null) {
 					Summary summary = getSummary(
 						document, DLFileEntry.class.getName(),
@@ -116,6 +110,12 @@ public class SearchResultUtil {
 
 				if (mbMessage != null) {
 					searchResult.addMBMessage(mbMessage);
+				}
+
+				if (entryClassName.equals(JournalArticle.class.getName())) {
+					String version = document.get(Field.VERSION);
+
+					searchResult.addVersion(version);
 				}
 
 				if ((mbMessage == null) && (fileEntry == null)) {

@@ -284,11 +284,11 @@ ArticleSearch searchContainer = new ArticleSearch(liferayPortletRequest, entryEn
 									rowURL.setParameter("folderId", String.valueOf(article.getFolderId()));
 									rowURL.setParameter("articleId", article.getArticleId());
 
-									request.setAttribute("view_entries.jsp-article", article);
-
 									List<String> versions = searchResult.getVersions();
 
 									Collections.sort(versions);
+
+									request.setAttribute("view_entries.jsp-article", article);
 									%>
 
 									<liferay-ui:app-view-search-entry
