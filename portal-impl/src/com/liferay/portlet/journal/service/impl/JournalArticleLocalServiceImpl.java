@@ -1459,7 +1459,7 @@ public class JournalArticleLocalServiceImpl
 	@Override
 	public JournalArticle fetchLatestArticle(
 			long groupId, String articleId, int status)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		OrderByComparator orderByComparator = new ArticleVersionComparator();
 
