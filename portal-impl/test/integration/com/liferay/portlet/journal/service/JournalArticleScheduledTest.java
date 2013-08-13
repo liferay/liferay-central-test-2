@@ -162,7 +162,7 @@ public class JournalArticleScheduledTest {
 
 		article.setDisplayDate(now);
 
-		article = JournalArticleUtil.update(article);
+		article = JournalArticleLocalServiceUtil.updateJournalArticle(article);
 
 		// Launch the scheduled task
 
