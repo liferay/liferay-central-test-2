@@ -171,12 +171,12 @@ public class ActionUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		long resourcePrimKey = ParamUtil.getLong(request, "resourcePrimKey");
 		long groupId = ParamUtil.getLong(
 			request, "groupId", themeDisplay.getScopeGroupId());
 		long classNameId = ParamUtil.getLong(request, "classNameId");
 		long classPK = ParamUtil.getLong(request, "classPK");
 		String articleId = ParamUtil.getString(request, "articleId");
-		long resourcePrimKey = ParamUtil.getLong(request, "resourcePrimKey");
 		String structureId = ParamUtil.getString(request, "structureId");
 
 		JournalArticle article = null;
