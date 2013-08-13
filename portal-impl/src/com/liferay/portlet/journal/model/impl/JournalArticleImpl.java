@@ -206,9 +206,7 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 	}
 
 	@Override
-	public boolean hasApprovedVersion()
-		throws PortalException, SystemException {
-
+	public boolean hasApprovedVersion() throws SystemException {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.fetchLatestArticle(
 				getGroupId(), getArticleId(),
