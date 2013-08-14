@@ -48,11 +48,7 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "password-policies", true, true, null,
 				PasswordPolicy.class.getName()));
-	}
-
-	@Override
-	public boolean isSupportsDataStrategyCopyAsNew() {
-		return false;
+		setSupportsDataStrategyCopyAsNew(false);
 	}
 
 	@Override

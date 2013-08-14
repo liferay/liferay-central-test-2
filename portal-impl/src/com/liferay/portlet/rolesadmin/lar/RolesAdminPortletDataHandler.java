@@ -60,11 +60,7 @@ public class RolesAdminPortletDataHandler extends BasePortletDataHandler {
 				},
 				Role.class.getName()
 			));
-	}
-
-	@Override
-	public boolean isSupportsDataStrategyCopyAsNew() {
-		return false;
+		setSupportsDataStrategyCopyAsNew(false);
 	}
 
 	@Override

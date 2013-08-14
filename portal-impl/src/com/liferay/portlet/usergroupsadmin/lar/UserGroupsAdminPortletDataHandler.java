@@ -44,11 +44,7 @@ public class UserGroupsAdminPortletDataHandler extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "user-groups", true, true, null,
 				UserGroup.class.getName()));
-	}
-
-	@Override
-	public boolean isSupportsDataStrategyCopyAsNew() {
-		return false;
+		setSupportsDataStrategyCopyAsNew(false);
 	}
 
 	@Override

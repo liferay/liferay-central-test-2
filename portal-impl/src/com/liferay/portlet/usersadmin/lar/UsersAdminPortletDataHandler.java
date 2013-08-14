@@ -48,11 +48,7 @@ public class UsersAdminPortletDataHandler extends BasePortletDataHandler {
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "organizations", true, true, null,
 				Organization.class.getName()));
-	}
-
-	@Override
-	public boolean isSupportsDataStrategyCopyAsNew() {
-		return false;
+		setSupportsDataStrategyCopyAsNew(false);
 	}
 
 	@Override
