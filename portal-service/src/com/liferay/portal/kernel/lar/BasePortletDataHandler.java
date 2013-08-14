@@ -354,6 +354,11 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
+	public boolean isSupportsDataStrategyCopyAsNew() {
+		return true;
+	}
+
+	@Override
 	public void prepareManifestSummary(PortletDataContext portletDataContext)
 		throws PortletDataException {
 
@@ -502,11 +507,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	@Override
 	public void setPortletId(String portletId) {
 		_portletId = portletId;
-	}
-
-	@Override
-	public boolean isSupportsDataStrategyCopyAsNew() {
-		return true;
 	}
 
 	protected Element addExportDataRootElement(

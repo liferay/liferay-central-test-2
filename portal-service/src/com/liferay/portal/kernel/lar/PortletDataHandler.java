@@ -183,6 +183,8 @@ public interface PortletDataHandler {
 	 */
 	public boolean isPublishToLiveByDefault();
 
+	public boolean isSupportsDataStrategyCopyAsNew();
+
 	public void prepareManifestSummary(PortletDataContext portletDataContext)
 		throws PortletDataException;
 
@@ -202,7 +204,5 @@ public interface PortletDataHandler {
 		throws PortletDataException;
 
 	public void setPortletId(String portletId);
-
-	public boolean isSupportsDataStrategyCopyAsNew();
 
 }
