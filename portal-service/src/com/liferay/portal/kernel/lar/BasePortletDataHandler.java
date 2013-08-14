@@ -505,7 +505,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public boolean supportsDataStrategyCopyAsNew() {
+	public boolean isSupportsDataStrategyCopyAsNew() {
 		return true;
 	}
 

@@ -51,7 +51,7 @@ public class UsersAdminPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Override
-	public boolean supportsDataStrategyCopyAsNew() {
+	public boolean isSupportsDataStrategyCopyAsNew() {
 		return false;
 	}
 

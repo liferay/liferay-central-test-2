@@ -51,7 +51,7 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 	}
 
 	@Override
-	public boolean supportsDataStrategyCopyAsNew() {
+	public boolean isSupportsDataStrategyCopyAsNew() {
 		return false;
 	}
 
