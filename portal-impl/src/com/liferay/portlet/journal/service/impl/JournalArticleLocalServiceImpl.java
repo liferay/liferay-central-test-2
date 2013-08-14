@@ -3341,6 +3341,15 @@ public class JournalArticleLocalServiceImpl
 				JournalArticle.class.getName(), article.getId());
 		}
 
+		if (!articleVersions.isEmpty()) {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				JournalArticle.class);
+
+			for (JournalArticle curArticleVersion : articleVersions) {
+				indexer.reindex(curArticleVersion);
+			}
+		}
+
 		return article;
 	}
 
@@ -3500,6 +3509,15 @@ public class JournalArticleLocalServiceImpl
 			article.getResourcePrimKey(),
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 			extraDataJSONObject.toString(), 0);
+
+		if (!articleVersions.isEmpty()) {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				JournalArticle.class);
+
+			for (JournalArticle curArticleVersion : articleVersions) {
+				indexer.reindex(curArticleVersion);
+			}
+		}
 
 		return article;
 	}
@@ -5399,6 +5417,9 @@ public class JournalArticleLocalServiceImpl
 	protected void checkArticlesByDisplayDate(Date displayDate)
 		throws PortalException, SystemException {
 
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			JournalArticle.class);
+
 		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
 			displayDate, WorkflowConstants.STATUS_SCHEDULED);
 
@@ -5417,11 +5438,16 @@ public class JournalArticleLocalServiceImpl
 			updateStatus(
 				article.getUserId(), article, WorkflowConstants.STATUS_APPROVED,
 				null, new HashMap<String, Serializable>(), serviceContext);
+
+			indexer.reindex(article);
 		}
 	}
 
 	protected void checkArticlesByExpirationDate(Date expirationDate)
 		throws PortalException, SystemException {
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			JournalArticle.class);
 
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
@@ -5465,6 +5491,8 @@ public class JournalArticleLocalServiceImpl
 				article.getTemplateId());
 
 			companyIds.add(article.getCompanyId());
+
+			indexer.reindex(article);
 		}
 
 		for (long companyId : companyIds) {
