@@ -162,8 +162,8 @@ public class ExportLayoutsAction extends PortletAction {
 
 		List<Layout> layouts = new UniqueList<Layout>();
 
-		Map<Long, Boolean> layoutIdMap =
-			ExportImportHelperUtil.getLayoutIdMap(portletRequest);
+		Map<Long, Boolean> layoutIdMap = ExportImportHelperUtil.getLayoutIdMap(
+			portletRequest);
 
 		for (Map.Entry<Long, Boolean> entry : layoutIdMap.entrySet()) {
 			long plid = GetterUtil.getLong(String.valueOf(entry.getKey()));
