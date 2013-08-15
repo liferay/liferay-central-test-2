@@ -592,7 +592,7 @@ public class ExpandoValueConversionTest extends TestCase {
 		try {
 			Collection<String> floats = new ArrayList<String>();
 
-			floats.add(String.valueOf(Double.MAX_VALUE)); // Infinity
+			floats.add(String.valueOf(Double.MAX_VALUE));
 			floats.add(String.valueOf(Integer.MAX_VALUE));
 
 			_converter.convertType(ExpandoColumnConstants.FLOAT_ARRAY, floats);
