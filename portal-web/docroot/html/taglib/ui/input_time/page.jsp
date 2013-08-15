@@ -19,58 +19,50 @@
 <%
 String randomNamespace = PortalUtil.generateRandomKey(request, "taglib_ui_input_time_page") + StringPool.UNDERLINE;
 
+String amPmParam = namespace + request.getAttribute("liferay-ui:input-time:amPmParam");
+int amPmValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time:amPmValue"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-time:cssClass"));
+boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-time:disabled"));
 String hourParam = namespace + request.getAttribute("liferay-ui:input-time:hourParam");
 int hourValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time:hourValue"));
 String minuteParam = namespace + request.getAttribute("liferay-ui:input-time:minuteParam");
 int minuteValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time:minuteValue"));
 int minuteInterval = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time:minuteInterval"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-time:name"));
-String amPmParam = namespace + request.getAttribute("liferay-ui:input-time:amPmParam");
-int amPmValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-time:amPmValue"));
-boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-time:disabled"));
 
 if (minuteInterval < 1) {
 	minuteInterval = 30;
 }
 
-String datePattern = _TIME_PATTERN_ISO;
+Calendar calendar = CalendarFactoryUtil.getCalendar(1970, 0, 1, hourValue, minuteValue);
+
+String simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_ISO;
 
 if (BrowserSnifferUtil.isMobile(request)) {
-	datePattern = _TIME_PATTERN_HTML5;
+	simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_HTML5;
 }
 else if (DateUtil.isFormatAmPm(locale)) {
-	datePattern = _TIME_PATTERN;
+	simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN;
 }
 
-String datePlaceholder = _TIME_PLACEHOLDER;
+String placeholder = _PLACEHOLDER_DEFAULT;
 
 if (!DateUtil.isFormatAmPm(locale)) {
-	datePlaceholder = _TIME_PLACEHOLDER_ISO;
+	placeholder = _PLACEHOLDER_ISO;
 
 	amPmValue = Calendar.AM;
 }
 
-Format dateFormat = FastDateFormatFactoryUtil.getSimpleDateFormat(datePattern);
-
-Calendar calendar = CalendarFactoryUtil.getCalendar(1970, 0, 1, hourValue, minuteValue);
-
-String timePickerClazz = "A.TimePicker";
-String timePickerModuleName = "aui-timepicker";
-
-if (BrowserSnifferUtil.isMobile(request)) {
-	timePickerClazz = "A.TimePickerNative";
-	timePickerModuleName = "aui-timepicker-native";
-}
+Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPattern);
 %>
 
 <span class="lfr-input-time <%= cssClass %>" id="<%= randomNamespace %>displayTime">
 	<c:choose>
 		<c:when test="<%= BrowserSnifferUtil.isMobile(request) %>">
-			<input class="input-small" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace + name %>" name="<%= namespace + name %>" type="time" value="<%= dateFormat.format(calendar.getTime()) %>" />
+			<input class="input-small" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace + name %>" name="<%= namespace + name %>" type="time" value="<%= format.format(calendar.getTime()) %>" />
 		</c:when>
 		<c:otherwise>
-			<input class="input-small" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace + name %>" name="<%= namespace + name %>" type="text" placeholder="<%= datePlaceholder %>" value="<%= dateFormat.format(calendar.getTime()) %>" />
+			<input class="input-small" <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= namespace + name %>" name="<%= namespace + name %>" type="text" placeholder="<%= placeholder %>" value="<%= format.format(calendar.getTime()) %>" />
 		</c:otherwise>
 	</c:choose>
 
@@ -79,11 +71,11 @@ if (BrowserSnifferUtil.isMobile(request)) {
 	<input <%= disabled ? "disabled=\"disabled\"" : "" %> id="<%= amPmParam %>" name="<%= amPmParam %>" type="hidden" value="<%= amPmValue %>" />
 </span>
 
-<aui:script use="<%= timePickerModuleName %>">
+<aui:script use='<%= "aui-timepicker" + (BrowserSnifferUtil.isMobile(request) ? "-native" : StringPool.BLANK) %>'>
 	Liferay.component(
 		'<%= namespace + name %>TimePicker',
 		function() {
-			return new <%= timePickerClazz %>({
+			return new A.TimePicker<%= BrowserSnifferUtil.isMobile(request) ? "Native" : StringPool.BLANK %>({
 				container: '#<%= randomNamespace %>displayTime',
 				mask: '<%= DateUtil.isFormatAmPm(locale) ? "%I:%M %p" : "%H:%M" %>',
 				on: {
@@ -146,13 +138,13 @@ private JSONArray _getHoursJSONArray(int minuteInterval, Locale locale) throws E
 	return hoursJSONArray;
 }
 
-private static final String _TIME_PATTERN = "hh:mm a";
+private static final String _SIMPLE_DATE_FORMAT_PATTERN = "hh:mm a";
 
-private static final String _TIME_PATTERN_HTML5 = "HH:mm";
+private static final String _SIMPLE_DATE_FORMAT_PATTERN_HTML5 = "HH:mm";
 
-private static final String _TIME_PATTERN_ISO = "HH:mm";
+private static final String _SIMPLE_DATE_FORMAT_PATTERN_ISO = "HH:mm";
 
-private static final String _TIME_PLACEHOLDER = "h:mm am/pm";
+private static final String _PLACEHOLDER_DEFAULT = "h:mm am/pm";
 
-private static final String _TIME_PLACEHOLDER_ISO = "h:mm";
+private static final String _PLACEHOLDER_ISO = "h:mm";
 %>
