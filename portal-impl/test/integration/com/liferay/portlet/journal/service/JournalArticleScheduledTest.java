@@ -74,26 +74,26 @@ public class JournalArticleScheduledTest {
 
 	@Test
 	public void testScheduleApprovedArticleToTheFuture() throws Exception {
-		testScheduleArticle(true, FUTURE);
+		testScheduleArticle(true, _WHEN_FUTURE);
 	}
 
 	@Test
 	public void testScheduleApprovedArticleToThePast() throws Exception {
-		testScheduleArticle(true, PAST);
+		testScheduleArticle(true, _WHEN_PAST);
 	}
 
 	@Test
 	public void testScheduleDraftArticleToTheFuture() throws Exception {
-		testScheduleArticle(false, FUTURE);
+		testScheduleArticle(false, _WHEN_FUTURE);
 	}
 
 	@Test
 	public void testScheduleDraftArticleToThePast() throws Exception {
-		testScheduleArticle(false, PAST);
+		testScheduleArticle(false, _WHEN_PAST);
 	}
 
-	protected JournalArticle addJournalArticle(
-			long groupId, boolean approved, Date displayDate, int when)
+	protected JournalArticle addArticle(
+			long groupId, Date displayDate, int when, boolean approved)
 		throws Exception {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
@@ -105,7 +105,7 @@ public class JournalArticleScheduledTest {
 		descriptionMap.put(
 			LocaleUtil.getDefault(), ServiceTestUtil.randomString());
 
-		Calendar displayDateCalendar = getCalendarFromDate(displayDate, when);
+		Calendar displayDateCalendar = getCalendar(displayDate, when);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
@@ -131,12 +131,11 @@ public class JournalArticleScheduledTest {
 			displayDateCalendar.get(Calendar.DAY_OF_MONTH),
 			displayDateCalendar.get(Calendar.YEAR),
 			displayDateCalendar.get(Calendar.HOUR_OF_DAY),
-			displayDateCalendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true,
-			0, 0, 0, 0, 0, true, true, false, null, null, null, null,
-			serviceContext);
+			displayDateCalendar.get(Calendar.MINUTE), 0, 0, 0, 0, 0, true, 0, 0,
+			0, 0, 0, true, true, false, null, null, null, null, serviceContext);
 	}
 
-	protected Calendar getCalendarFromDate(Date date, int when) {
+	protected Calendar getCalendar(Date date, int when) {
 		Calendar calendar = new GregorianCalendar();
 
 		calendar.setTime(new Date(date.getTime() + Time.MINUTE * when * 5));
@@ -152,10 +151,8 @@ public class JournalArticleScheduledTest {
 
 		Date now = new Date();
 
-		JournalArticle article = addJournalArticle(
-			_group.getGroupId(), approved, now, when);
-
-		// Launch the scheduled task
+		JournalArticle article = addArticle(
+			_group.getGroupId(), now, when, approved);
 
 		JournalArticleLocalServiceUtil.checkArticles();
 
@@ -164,16 +161,16 @@ public class JournalArticleScheduledTest {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			JournalArticle.class.getName(), article.getResourcePrimKey());
 
-		if (when == FUTURE) {
+		if (when == _WHEN_FUTURE) {
+			Assert.assertFalse(article.isApproved());
+			Assert.assertFalse(assetEntry.isVisible());
+
 			if (approved) {
 				Assert.assertTrue(article.isScheduled());
 			}
 			else {
 				Assert.assertTrue(article.isDraft());
 			}
-
-			Assert.assertFalse(article.isApproved());
-			Assert.assertFalse(assetEntry.isVisible());
 		}
 		else {
 			Assert.assertFalse(article.isScheduled());
@@ -195,9 +192,9 @@ public class JournalArticleScheduledTest {
 		}
 	}
 
-	private static final int FUTURE = 1;
+	private static final int _WHEN_FUTURE = 1;
 
-	private static final int PAST = -1;
+	private static final int _WHEN_PAST = -1;
 
 	private Group _group;
 
