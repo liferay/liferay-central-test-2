@@ -189,10 +189,6 @@ public class LayoutsTreeUtil {
 					jsonObject.put("incomplete", true);
 				}
 
-				if (layoutRevision.isHead()) {
-					jsonObject.put("layoutRevisionHead", true);
-				}
-
 				long layoutSetBranchId = layoutRevision.getLayoutSetBranchId();
 
 				LayoutSetBranch layoutSetBranch =
@@ -205,6 +201,10 @@ public class LayoutsTreeUtil {
 					jsonObject.put(
 						"layoutBranchId", layoutBranch.getLayoutBranchId());
 					jsonObject.put("layoutBranchName", layoutBranch.getName());
+				}
+
+				if (layoutRevision.isHead()) {
+					jsonObject.put("layoutRevisionHead", true);
 				}
 
 				jsonObject.put(
