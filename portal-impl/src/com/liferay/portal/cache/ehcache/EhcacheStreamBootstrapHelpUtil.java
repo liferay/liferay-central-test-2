@@ -265,9 +265,7 @@ public class EhcacheStreamBootstrapHelpUtil {
 				}
 				catch (SocketTimeoutException ste) {
 					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Client connect back waiting timeout. Terminate " +
-								"server thread " + getName());
+						_log.debug("Terminate timed out thread " + getName());
 					}
 
 					return;
