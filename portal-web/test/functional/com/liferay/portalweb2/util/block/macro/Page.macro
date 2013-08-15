@@ -66,48 +66,48 @@
 
 	<command name="openURL">
 		<if>
-			<equals arg1="${pageType}" arg2="Site" />
+			<equals arg1="${pageAccess}" arg2="Private" />
 			<then>
-				<var name="pageTypeKey" value="SITE" />
+				<var name="pageAccessURL" value="/group" />
 			</then>
-			<elseif>
-				<equals arg1="${pageType}" arg2="Organization" />
-				<then>
-					<var name="pageTypeKey" value="ORGANIZATION" />
-				</then>
-			</elseif>
-			<elseif>
-				<equals arg1="${pageType}" arg2="Open Site" />
-				<then>
-					<var name="pageTypeKey" value="OPEN_SITE" />
-				</then>
-			</elseif>
 			<else>
-				<var name="pageTypeKey" value="GUEST" />
+				<var name="pageAccessURL" value="/web" />
 			</else>
 		</if>
 
 		<if>
-			<equals arg1="${pageAccess}" arg2="Private" />
+			<equals arg1="${pageType}" arg2="Open Site" />
 			<then>
-				<var name="pageAccessKey" value="_PRIVATE" />
+				<var name="pageTypeURL" value="/open-site-name" />
 			</then>
+			<elseif>
+				<equals arg1="${pageType}" arg2="Organization" />
+				<then>
+					<var name="pageTypeURL" value="/organization-name" />
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${pageType}" arg2="Site" />
+				<then>
+					<var name="pageTypeURL" value="/site-name" />
+				</then>
+			</elseif>
 			<else>
-				<var name="pageAccessKey" value="" />
+				<var name="pageTypeURL" value="/guest" />
 			</else>
 		</if>
 
 		<if>
 			<equals arg1="${pageStaging}" arg2="true" />
 			<then>
-				<var name="pageStagingKey" value="_STAGING" />
+				<var name="pageStagingURL" value="-staging" />
 			</then>
 			<else>
-				<var name="pageStagingKey" value="" />
+				<var name="pageStagingURL" value="" />
 			</else>
 		</if>
 
-		<execute action="Home#open" locator-key1="${pageTypeKey}${pageAccessKey}${pageStagingKey}_URL" />
+		<execute action="Home#open" locator1="${pageAccessURL}${pageTypeURL}${pageStagingURL}" />
 	</command>
 
 	<command name="tearDownPG">

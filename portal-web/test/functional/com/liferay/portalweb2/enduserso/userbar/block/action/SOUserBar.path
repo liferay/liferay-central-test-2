@@ -67,12 +67,12 @@
 </tr>
 <tr>
 	<td>NOTIFICATION_MENU_ENTRY_SENDER</td>
-	<td>//div[@class='notification-entry']/div/span/a</td>
+	<td>//div[@class='notification-entry']/div[@class='title']//a</td>
 	<td>Joe Bloggs</td>
 </tr>
 <tr>
 	<td>NOTIFICATION_MENU_ENTRY_CONTENT</td>
-	<td>//div[@class='notification-entry']/div/span</td>
+	<td>//div[@class='notification-entry']/div[@class='title']</td>
 	<td></td>
 </tr>
 <tr>

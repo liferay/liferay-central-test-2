@@ -24,6 +24,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SITE_JOIN_LINK</td>
+	<td>//span[@class='action request']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>NAVIGATION_HOME</td>
 	<td>//nav/ul/li[contains(.,'Home')]/a/span</td>
 	<td></td>

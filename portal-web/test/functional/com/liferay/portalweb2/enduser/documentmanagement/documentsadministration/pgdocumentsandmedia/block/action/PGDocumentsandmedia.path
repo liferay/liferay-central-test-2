@@ -128,12 +128,12 @@
 </tr>
 <tr>
 	<td>TOOLBAR_SEARCH_FIELD</td>
-	<td>//div[@id='_20_fileEntrySearchContainer']/form/span[1]/span/span/input</td>
+	<td>//input[@id='_20_keywords']</td>
 	<td>Search Field</td>
 </tr>
 <tr>
 	<td>TOOLBAR_SEARCH_BUTTON</td>
-	<td>//div[@id='_20_fileEntrySearchContainer']/form/span[2]/span/input</td>
+	<td>//input[@id='_20_search']</td>
 	<td>Search Button</td>
 </tr>
 <tr>
@@ -315,7 +315,7 @@
 </tr>
 <tr>
 	<td>ENTRIES_DOCUMENT_SEARCH_TITLE</td>
-	<td>//div[contains(@id,'_20_searchResults')]/div/form/div/a/span[2]</td>
+	<td>//div[contains(@id,'Results')]/div/form/div/a/span[2]</td>
 	<td>Document Search Title</td>
 </tr>
 <tr>

@@ -3,8 +3,6 @@
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
 
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
-
 		<execute action="CPMyAccount#click" locator-key1="ADDITIONAL_EMAIL_ADDRESSES" />
 		<execute action="CPMyAccount#type" locator-key1="ADDITIONAL_EMAIL_ADDRESSES_EMAIL_ADDRESS_FIELD" value1="${userAdditionalEmailAddress}" />
 		<execute action="CPMyAccount#select" locator-key1="ADDITIONAL_EMAIL_ADDRESSES_TYPE_SELECT" value1="Email Address" />
@@ -33,8 +31,6 @@
 	<command name="addAddressMyAccount">
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
-
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
 
 		<execute action="CPMyAccount#click" locator-key1="ADDRESSES" />
 		<execute action="CPMyAccount#type" locator-key1="ADDRESSES_STREET_1_FIELD" value1="${userAddressStreet1}" />
@@ -85,25 +81,13 @@
 		<execute action="SOProfileAddAddress#type" locator-key1="STREET_1_FIELD" value1="${userAddressStreet1}" />
 
 		<if>
-			<isset var="userAddressCountry" />
-			<then>
-				<execute action="SOProfileAddAddress#select" locator-key1="COUNTRY_SELECT" value1="${userAddressCountry}" />
-			</then>
-		</if>
-
-		<if>
-			<isset var="userAddressRegion" />
-			<then>
-				<execute action="SOProfileAddAddress#select" locator-key1="REGION_SELECT" value1="${userAddressRegion}" />
-			</then>
-		</if>
-
-		<if>
 			<isset var="userAddressPostalCode" />
 			<then>
 				<execute action="SOProfileAddAddress#type" locator-key1="POSTAL_CODE_FIELD" value1="${userAddressPostalCode}" />
 			</then>
 		</if>
+
+		<execute action="SOProfileAddAddress#type" locator-key1="CITY_FIELD" value1="${userAddressCity}" />
 
 		<if>
 			<isset var="userAddressType" />
@@ -112,9 +96,23 @@
 			</then>
 		</if>
 
-		<execute action="SOProfileAddAddress#type" locator-key1="CITY_FIELD" value1="${userAddressCity}" />
+		<if>
+			<isset var="userAddressCountry" />
+			<then>
+				<execute action="SOProfileAddAddress#select" locator-key1="COUNTRY_SELECT" value1="${userAddressCountry}" />
+			</then>
+		</if>
+
 		<execute action="SOProfileAddAddress#click" locator-key1="PRIMARY_RADIO_BUTTON" />
 		<execute action="SOProfileAddAddress#check" locator-key1="MAILING_CHECKBOX" />
+
+		<if>
+			<isset var="userAddressRegion" />
+			<then>
+				<execute action="SOProfileAddAddress#select" locator-key1="REGION_SELECT" value1="${userAddressRegion}" />
+			</then>
+		</if>
+
 		<execute action="SOProfileAddAddress#click" locator-key1="SAVE_BUTTON" />
 
 		<execute action="SOProfile#assertTextEquals" locator-key1="PROFILE_INFO_ADDRESS_TITLE" value1="Addresses:" />
@@ -124,8 +122,6 @@
 	<command name="addCommentsMyAccount">
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
-
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
 
 		<execute action="CPMyAccount#click" locator-key1="COMMENTS" />
 		<execute action="CPMyAccount#type" locator-key1="COMMENTS_FIELD" value1="${userIntroduction}" />
@@ -151,8 +147,6 @@
 	<command name="addInstantMessengerMyAccount">
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
-
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
 
 		<execute action="CPMyAccount#click" locator-key1="INSTANT_MESSENGER" />
 
@@ -267,8 +261,6 @@
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
 
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
-
 		<execute action="CPMyAccount#click" locator-key1="PHONE_NUMBERS" />
 		<execute action="CPMyAccount#type" locator-key1="PHONE_NUMBERS_NUMBER_FIELD" value1="${userPhoneNumberNumber}" />
 
@@ -324,8 +316,6 @@
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
 
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
-
 		<execute action="CPMyAccount#click" locator-key1="PROJECTS" />
 		<execute action="CPMyAccount#type" locator-key1="PROJECTS_TITLE_FIELD" value1="${userProjectTitle}" />
 		<execute action="CPMyAccount#select" locator-key1="PROJECTS_START_DATE_MONTH_SELECT" value1="January" />
@@ -380,8 +370,6 @@
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
 
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
-
 		<execute action="CPMyAccount#click" locator-key1="SMS" />
 		<execute action="CPMyAccount#type" locator-key1="SMS_SMS_FIELD" value1="${userSMS}" />
 		<execute action="CPMyAccount#click" locator-key1="SAVE_BUTTON" />
@@ -406,8 +394,6 @@
 	<command name="addSocialNetworkMyAccount">
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
-
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
 
 		<execute action="CPMyAccount#click" locator-key1="SOCIAL_NETWORK" />
 
@@ -477,8 +463,6 @@
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
 
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
-
 		<execute action="CPMyAccount#click" locator-key1="CATEGORIZATION" />
 		<execute action="CPMyAccount#type" locator-key1="CATEGORIZATION_TAGS_FIELD" value1="${userTag}" />
 		<execute action="CPMyAccount#click" locator-key1="CATEGORIZATION_ADD_BUTTON" />
@@ -505,8 +489,6 @@
 	<command name="addWebsiteMyAccount">
 		<execute action="SOUserBar#mouseOver" locator-key1="USER_NAME" />
 		<execute action="SOUserBar#click" locator-key1="USER_MENU_MY_ACCOUNT" value1="My Account" />
-
-		<execute action="SOMyAccount#selectFrame" locator-key1="MY_ACCOUNT_IFRAME" />
 
 		<execute action="CPMyAccount#click" locator-key1="WEBSITES" />
 		<execute action="CPMyAccount#type" locator-key1="WEBSITES_URL_FIELD" value1="${userWebsiteURL}" />

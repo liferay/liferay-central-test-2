@@ -1,28 +1,17 @@
 <definition>
+	<var name="adminName" value="Joe Bloggs" />
+	<var name="adminEmailAddress" value="test@liferay.com" />
+	<var name="password" value="test" />
+	<var name="userEmailAddress" value="socialoffice01@liferay.com" />
+	<var name="userFirstName" value="Social01" />
+	<var name="userMiddleName" value="Office01" />
+	<var name="userName" value="Social01 Office01 User01" />
+	<var name="userLastName" value="User01" />
+	<var name="userListName" value="User01, Social01" />
+	<var name="userScreenName" value="socialoffice01" />
+
 	<set-up>
 		<execute macro="SOUser#firstLoginPG" />
-
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
-		</execute>
-
-		<execute macro="Role#assignRegRoleCP">
-			<var name="roleName" value="Social Office" />
-			<var name="userScreenName" value="joebloggs" />
-		</execute>
-	</set-up>
-
-	<command name="SendMessage">
-		<var name="adminName" value="Joe Bloggs" />
-		<var name="adminEmailAddress" value="test@liferay.com" />
-		<var name="password" value="test" />
-		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
-		<var name="userFirstName" value="Social01" />
-		<var name="userMiddleName" value="Office01" />
-		<var name="userName" value="Social01 Office01 User01" />
-		<var name="userLastName" value="User01" />
-		<var name="userListName" value="User01, Social01" />
-		<var name="userScreenName" value="socialoffice01" />
 
 		<execute macro="SOUser#addUserWithSORole">
 			<var name="adminEmailAddress" value="test@liferay.com" />
@@ -59,7 +48,9 @@
 			<var name="userEmailAddress" value="${adminEmailAddress}" />
 			<var name="password" value="test" />
 		</execute>
+	</set-up>
 
+	<command name="SendMessage">
 		<execute macro="SOPrivateMessages#sendMessage">
 			<var name="key_recipientName" value="${userName}" />
 			<var name="messageBody" value="Message Body" />
@@ -94,53 +85,6 @@
 	</command>
 
 	<command name="DeleteMessage">
-		<var name="adminName" value="Joe Bloggs" />
-		<var name="adminEmailAddress" value="test@liferay.com" />
-		<var name="password" value="test" />
-		<var name="userEmailAddress" value="socialoffice01@liferay.com" />
-		<var name="userFirstName" value="Social01" />
-		<var name="userMiddleName" value="Office01" />
-		<var name="userName" value="Social01 Office01 User01" />
-		<var name="userLastName" value="User01" />
-		<var name="userListName" value="User01, Social01" />
-		<var name="userScreenName" value="socialoffice01" />
-
-		<execute macro="SOUser#addUserWithSORole">
-			<var name="adminEmailAddress" value="test@liferay.com" />
-			<var name="password" value="test" />
-			<var name="userEmailAddress" value="socialoffice01@liferay.com" />
-			<var name="userFirstName" value="Social01" />
-			<var name="userMiddleName" value="Office01" />
-			<var name="userLastName" value="User01" />
-			<var name="userScreenName" value="socialoffice01" />
-		</execute>
-
-		<execute macro="SOContactsCenter#requestToConnect">
-			<var name="userEmailAddress" value="${userEmailAddress}" />
-			<var name="userListName" value="${userListName}" />
-			<var name="userName" value="${userName}" />
-			<var name="userScreenName" value="${userScreenName}" />
-		</execute>
-
-		<execute macro="SOUser#logoutPG" />
-
-		<execute macro="SOUser#loginPG">
-			<var name="userEmailAddress" value="${userEmailAddress}" />
-			<var name="password" value="test" />
-		</execute>
-
-		<execute macro="SOContactsCenter#confirmRequestToConnect">
-			<var name="senderName" value="${adminName}" />
-			<var name="userName" value="${userName}" />
-		</execute>
-
-		<execute macro="SOUser#logoutPG" />
-
-		<execute macro="SOUser#loginPG">
-			<var name="userEmailAddress" value="${adminEmailAddress}" />
-			<var name="password" value="test" />
-		</execute>
-
 		<execute macro="SOPrivateMessages#sendMessage">
 			<var name="key_recipientName" value="${userName}" />
 			<var name="messageBody" value="Message Body" />
@@ -164,28 +108,10 @@
 		<var name="password" value="test" />
 		<var name="userName" value="Social01 Office01 User01" />
 
-		<execute macro="SOPrivateMessages#tearDownPG">
-			<var name="userName" value="${userName}" />
-		</execute>
-
-		<execute macro="SOUser#logoutPG" />
-
-		<execute macro="SOUser#loginPG">
-			<var name="userEmailAddress" value="${adminEmailAddress}" />
-			<var name="password" value="test" />
-		</execute>
+		<execute macro="SOUser#firstLoginPG" />
 
 		<execute macro="SOPrivateMessages#tearDownPG">
 			<var name="userName" value="${adminName}" />
-		</execute>
-
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
-		</execute>
-
-		<execute macro="Role#unassignRegRoleCP">
-			<var name="roleName" value="Social Office" />
-			<var name="userScreenName" value="joebloggs" />
 		</execute>
 
 		<execute macro="SOUser#tearDownCP" />

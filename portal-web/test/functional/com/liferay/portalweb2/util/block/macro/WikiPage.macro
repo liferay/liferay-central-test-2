@@ -88,6 +88,20 @@
 		<execute action="PGWikiAllpages#assertElementNotPresent" locator-key1="WIKI_PAGE_TABLE_PAGE_1" value1="FrontPage" />
 	</command>
 
+	<command name="editFrontPagePG">
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+		
+		<execute action="PGWiki#assertClick" locator-key1="PAGE_ACTIONS_EDIT" value1="Edit" />
+
+		<execute action="PGWikiAddpage#type" locator-key1="BODY_FIELD" value1="${wikiPageContentEdit}" />
+		<execute action="PGWikiAddpage#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
+
+		<execute action="PGWiki#assertTextEquals" locator-key1="SUCCESS_MESSAGE"  value1="Your request completed successfully." />
+		<execute action="PGWiki#assertTextEquals" locator-key1="WIKI_PAGE_BODY" value1="${wikiPageContentEdit}" />
+	</command>
+
 	<command name="tearDownCP">
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Wiki" />

@@ -8,6 +8,10 @@
 			<execute function="Click#textClickAtAndWait" value1="Messages" />
 		</case>
 
+		<case locator-key1="NAVIGATION_MY_DOCUMENTS">
+			<execute function="Click#textClickAtAndWait" />
+		</case>
+
 		<case locator-key1="NAVIGATION_MICROBLOGS">
 			<execute function="Click#textClickAtAndWait" value1="Microblogs" />
 		</case>

@@ -3,31 +3,156 @@
 		<execute macro="SOUser#firstLoginPG" />
 	</set-up>
 
-	<command name="AddFolderDocument">
-		<var name="dmDocumentFile" value="Document_1.txt" />
-		<var name="dmDocumentSize" value="0.3k" />
-		<var name="dmDocumentTitle" value="DM Folder Document Title" />
-		<var name="dmDocumentDescription" value="DM Folder Document Description" />
-		<var name="dmFolderName" value="DM Folder Name" />
-		<var name="dmFolderDescription" value="DM Folder Description" />
+	<var name="dmDocumentDescription" value="DM Folder Document Description" />
+	<var name="dmDocumentDescriptionEdit" value="DM Folder Document Description Edit" />
+	<var name="dmDocumentFile" value="Document_1.doc" />
+	<var name="dmDocumentSize" value="21.5k" />
+	<var name="dmDocumentTitle" value="DM Folder Document Title" />
+	<var name="dmDocumentTitleEdit" value="DM Folder Document Title Edit" />
+	<var name="dmDocumentUploader" value="Joe Bloggs" />
+	<var name="dmDocumentVersionNumber" value="1.0" />
+	<var name="dmDocumentVersionNumberEdit" value="1.1" />
+	<var name="dmFolderName" value="DM Folder Name" />
+	<var name="dmFolderDescription" value="DM Folder Description" />
 
-		<execute macro="DMFolder#addPG">
-			<var name="dmFolderName" value="${dmFolderName}" />
-			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+	<command name="AddFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
 		</execute>
 
-		<execute macro="DMFolderDocument#addPG">
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentSize" value="${dmDocumentSize}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmFolderName" value="${dmFolderName}" />
-			<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute macro="DMFolderDocument#viewPG" />
+	</command>
+
+	<command name="DeleteDMFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolderDocument#deletePG" />
+	</command>
+
+	<command name="EditDMFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		<var name="dmDocumentVersionNumberEdit" value="${dmDocumentVersionNumberEdit}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute macro="DMFolderDocument#editPG" />
+
+		<execute macro="SOUserBar#dashboardPG">
+			<var name="userName" value="Joe Bloggs" />
+		</execute>
+
+		<execute action="SONavigation#click" locator-key1="NAVIGATION_MY_DOCUMENTS" value1="My Documents" />
+
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute macro="DMFolderDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit}" />
 		</execute>
 	</command>
 
 	<tear-down>
-		<execute macro="SOMicroblogs#tearDownMicroblogsEntry" />
+		<execute macro="SOUser#firstLoginPG" />
+
+		<execute macro="SODocuments#tearDownPG" />
 
 		<execute macro="SOUser#tearDownCP" />
 	</tear-down>

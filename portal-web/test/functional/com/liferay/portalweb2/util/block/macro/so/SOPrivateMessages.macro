@@ -30,7 +30,7 @@
 		<execute action="PrivateMessagingAdd#click" locator-key1="TO_FIELD_DROPDOWN" />
 		<execute action="PrivateMessagingAdd#type" locator-key1="TO_FIELD" value1="${recipientName}" />
 		<execute action="PrivateMessagingAdd#assertClick" locator-key1="TO_FIELD_DROPDOWN_LIST" value1="${key_recipientName}" />
-		<execute action="PrivateMessagingAdd#assertTextEquals" locator-key1="TO_FIELD" value1="${recipientName} &lt;${recipientScreenName}&gt;, " />
+		<execute action="PrivateMessagingAdd#assertTextEquals" locator-key1="TO_FIELD" value1="${recipientName} &lt;${recipientScreenName}&gt;," />
 		<execute action="PrivateMessagingAdd#type" locator-key1="SUBJECT_FIELD" value1="${messageSubject}" />
 		<execute action="PrivateMessagingAdd#type" locator-key1="BODY_FIELD" value1="${messageBody}" />
 		<execute action="PrivateMessagingAdd#click" locator-key1="SEND_BUTTON" />

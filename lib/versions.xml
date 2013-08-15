@@ -8,7 +8,8 @@
 		<project-url>http://java.sun.com/products/javabeans/jaf</project-url>
 		<licenses>
 			<license>
-				<license-name>JavaBeans Activation Framework 1.1 License</license-name>
+				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -20,6 +21,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -31,6 +33,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -42,6 +45,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 				<copyright-notice>Copyright (c) 2001-2003 Ant-Contrib project. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -54,6 +58,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2005 Paul Hinds</copyright-notice>
 			</license>
 		</licenses>
@@ -66,6 +71,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2005 Paul Hinds</copyright-notice>
 			</license>
 		</licenses>
@@ -78,6 +84,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -89,6 +96,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -100,6 +108,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -111,6 +120,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -122,6 +132,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -133,6 +144,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -144,6 +156,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -155,6 +168,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -166,6 +180,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -177,6 +192,7 @@
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -188,12 +204,15 @@
 		<licenses>
 			<license>
 				<license-name>Initial Developer's Public License 1.0</license-name>
+				<license-url>http://www.firebirdsql.org/en/initial-developer-s-public-license-version-1-0/</license-url>
 			</license>
 			<license>
 				<license-name>Public Domain</license-name>
+				<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 			</license>
 			<license>
 				<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
+				<license-url>http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/sun-u.c.license.pdf</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -205,6 +224,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -216,6 +236,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -227,6 +248,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -277,7 +299,8 @@
 		<project-url>http://info.borland.com/devsupport/interbase/opensource</project-url>
 		<licenses>
 			<license>
-				<license-name>InterBase Public License 1.0 and Ammendments</license-name>
+				<license-name>InterBase Public License 1.0 and Amendments</license-name>
+				<license-url>http://www.firebirdsql.org/en/interbase-public-license/</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -289,6 +312,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -311,6 +335,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -322,6 +347,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -336,6 +362,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -347,6 +374,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -358,6 +386,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -369,6 +398,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -380,9 +410,11 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -394,9 +426,11 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -408,6 +442,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -419,6 +454,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -430,6 +466,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -441,6 +478,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -499,6 +537,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -510,6 +549,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -524,6 +564,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -535,6 +576,7 @@
 		<licenses>
 			<license>
 				<license-name>Common Public License 1.0</license-name>
+				<license-url>http://opensource.org/licenses/cpl1.0.php</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -557,6 +599,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -568,6 +611,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -579,6 +623,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -590,6 +635,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -625,6 +671,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -636,6 +683,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -647,6 +695,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -658,6 +707,7 @@
 		<licenses>
 			<license>
 				<license-name>P6Spy Software License 1.1</license-name>
+				<license-url>https://wiki.kuali.org/display/KULFOUND/P6Spy+License</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -669,6 +719,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -680,6 +731,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -691,6 +743,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -702,6 +755,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2002-2006 Joe Walnes and QDox Project Team</copyright-notice>
 			</license>
 		</licenses>
@@ -714,6 +768,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -728,6 +783,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -750,6 +806,7 @@
 		<licenses>
 			<license>
 				<license-name>GPL 2.0</license-name>
+				<license-url>http://www.gnu.org/licenses/gpl-2.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -761,6 +818,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -772,6 +830,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -787,6 +846,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -802,6 +862,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -813,6 +874,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -824,6 +886,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -835,6 +898,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -846,6 +910,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -857,6 +922,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -868,6 +934,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -879,6 +946,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -890,6 +958,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -904,6 +973,7 @@
 		<licenses>
 			<license>
 				<license-name>IBM Java Portlet Specification 2.0 License</license-name>
+				<license-url>http://www.jcp.org/en/jsr/detail?id=286</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -915,6 +985,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -926,6 +997,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -937,6 +1009,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -948,6 +1021,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -959,6 +1033,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -970,6 +1045,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -981,6 +1057,7 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+				<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -992,6 +1069,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1003,6 +1081,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1014,6 +1093,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1025,6 +1105,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1036,6 +1117,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1047,6 +1129,7 @@
 		<licenses>
 			<license>
 				<license-name>ASM License</license-name>
+				<license-url>http://asm.ow2.org/license.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1058,6 +1141,7 @@
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1069,6 +1153,7 @@
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1084,6 +1169,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1095,6 +1181,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1106,6 +1193,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1120,6 +1208,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1132,9 +1221,11 @@
 		<licenses>
 			<license>
 				<license-name>Creative Commons Public Domain</license-name>
+				<license-url>http://creativecommons.org/publicdomain/zero/1.0/legalcode</license-url>
 			</license>
 			<license>
 				<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
+				<license-url>http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/sun-u.c.license.pdf</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1146,6 +1237,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1157,6 +1249,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1168,6 +1261,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1179,6 +1273,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 3</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1194,6 +1289,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1208,6 +1304,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1219,6 +1316,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
@@ -1231,6 +1329,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1242,6 +1341,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1253,6 +1353,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1264,6 +1365,7 @@
 		<licenses>
 			<license>
 				<license-name>Sun Binary Code License Agreement</license-name>
+				<license-url>http://www.oracle.com/technetwork/java/javase/downloads/java-se-archive-license-1382604.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1275,6 +1377,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1286,6 +1389,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
+				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1300,6 +1404,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1311,6 +1416,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1322,6 +1428,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1336,6 +1443,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1347,6 +1455,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1358,6 +1467,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1369,6 +1479,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1380,6 +1491,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1391,6 +1503,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1402,6 +1515,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1413,6 +1527,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1424,6 +1539,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1435,6 +1551,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -1447,6 +1564,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1458,6 +1576,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2002-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -1470,6 +1589,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1481,6 +1601,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -1493,6 +1614,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -1505,6 +1627,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1516,6 +1639,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1527,6 +1651,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1538,6 +1663,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -1550,9 +1676,11 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+				<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 			</license>
 			<license>
 				<license-name>Technology License From Sun Microsystems Inc. To Doug Lea</license-name>
+				<license-url>http://gee.cs.oswego.edu/dl/classes/EDU/oswego/cs/dl/util/sun-u.c.license.pdf</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1564,6 +1692,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1575,6 +1704,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1586,6 +1716,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1603,6 +1734,7 @@
 		<licenses>
 			<license>
 				<license-name>Artistic License</license-name>
+				<license-url>http://opensource.org/licenses/artistic-license-1.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1614,6 +1746,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1625,6 +1758,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2004-2005 Germinus XXI</copyright-notice>
 			</license>
 		</licenses>
@@ -1637,6 +1771,7 @@
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1648,6 +1783,7 @@
 		<licenses>
 			<license>
 				<license-name>Eclipse Public License 1.0</license-name>
+				<license-url>http://www.eclipse.org/legal/epl-v10.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1659,6 +1795,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1670,6 +1807,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1681,6 +1819,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1692,6 +1831,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1703,6 +1843,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1714,6 +1855,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1725,6 +1867,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1736,6 +1879,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1750,6 +1894,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1764,6 +1909,7 @@
 			</license>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 1996 by Jef Poskanzer &lt;jef@acme.com&gt;. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1776,6 +1922,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1787,6 +1934,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1798,6 +1946,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1809,6 +1958,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1820,6 +1970,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1834,6 +1985,7 @@
 		<licenses>
 			<license>
 				<license-name>Common Public License 1.0</license-name>
+				<license-url>http://opensource.org/licenses/cpl1.0.php</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1845,6 +1997,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1856,6 +2009,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1867,6 +2021,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 2007, Ben Fortuna. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -1879,6 +2034,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 				<copyright-notice>Copyright (c) Fabrice Michellonet 2002</copyright-notice>
 			</license>
 		</licenses>
@@ -1891,6 +2047,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 				<copyright-notice>Copyright (c) Bernhard Bablok 2008-2010</copyright-notice>
 			</license>
 		</licenses>
@@ -1903,6 +2060,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1914,6 +2072,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1928,6 +2087,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1939,6 +2099,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -1953,6 +2114,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1964,6 +2126,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1975,6 +2138,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1986,6 +2150,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1997,6 +2162,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2008,6 +2174,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2019,6 +2186,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2030,6 +2198,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2041,6 +2210,7 @@
 		<licenses>
 			<license>
 				<license-name>Jaxen License</license-name>
+				<license-url>http://jaxen.codehaus.org/license.html</license-url>
 				<copyright-notice>Copyright (c) 2003 The Werken Company. All Rights Reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2053,6 +2223,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2064,6 +2235,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2075,6 +2247,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.1</license-name>
+				<license-url>http://web.archive.org/web/20090305064954/http://www.sun.com/cddl/cddl.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2086,6 +2259,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2097,6 +2271,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2108,6 +2283,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2119,6 +2295,7 @@
 		<licenses>
 			<license>
 				<license-name>Content Repository for Java Technology API Specification License</license-name>
+				<license-url>http://www.day.com/dam/day/downloads/jsr283/day-spec-license.htm</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2130,6 +2307,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 2000-2004 Jason Hunter &amp; Brett McLaughlin. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2142,6 +2320,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2153,6 +2332,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 2000-2008 Hewlett-Packard Company, LP</copyright-notice>
 			</license>
 		</licenses>
@@ -2165,6 +2345,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2176,6 +2357,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2006 James Murty</copyright-notice>
 			</license>
 		</licenses>
@@ -2188,6 +2370,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2199,6 +2382,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2213,6 +2397,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2228,6 +2413,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2250,6 +2436,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2261,6 +2448,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2272,6 +2460,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2286,6 +2475,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2300,6 +2490,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) Metaparadigm Pte. Ltd. 2004.</copyright-notice>
 			</license>
 		</licenses>
@@ -2316,6 +2507,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2327,6 +2519,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2341,6 +2534,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2352,6 +2546,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2363,6 +2558,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2374,6 +2570,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2385,6 +2582,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
+				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2396,6 +2594,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2407,6 +2606,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2421,6 +2621,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2435,6 +2636,7 @@
 		<licenses>
 			<license>
 				<license-name>ICU License</license-name>
+				<license-url>http://www.icu-project.org/repos/icu/icu/trunk/license.html</license-url>
 				<copyright-notice>Copyright (c) 1995-2006 International Business Machines Corporation and others</copyright-notice>
 			</license>
 		</licenses>
@@ -2450,6 +2652,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2464,6 +2667,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2475,6 +2679,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2486,6 +2691,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2497,6 +2703,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2508,6 +2715,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2519,6 +2727,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2530,6 +2739,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2541,6 +2751,7 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+				<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2552,6 +2763,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2563,6 +2775,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2574,6 +2787,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2585,6 +2799,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 2002 Jang-Ho Hwang. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2597,6 +2812,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2608,18 +2824,19 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>lib/portal/odmg.jar</file-name>
-		<version></version>
+		<version>3.0</version>
 		<project-name>ODMG - Object Data Management Group Java Bindings</project-name>
-		<project-url>http://www.odmg.org</project-url>
+		<project-url>http://www.odbms.org/odmg</project-url>
 		<licenses>
 			<license>
-				<license-name>ODMG License</license-name>
-				<copyright-notice>Copyright (c) 1999 E. Wray Johnson. All rights reserved.</copyright-notice>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Authored by David Jordan (as Java Editor of the Object Data Management Group)</copyright-notice>
 			</license>
 		</licenses>
 	</library>
@@ -2631,6 +2848,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2006-2008 Sxip Identity Corporation</copyright-notice>
 			</license>
 		</licenses>
@@ -2643,6 +2861,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 				<copyright-notice>Copyright (c) 2000-2002 The Apache Software Foundation. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2655,6 +2874,7 @@
 		<licenses>
 			<license>
 				<license-name>Symphony License For OSCache</license-name>
+				<license-url>https://wiki.kuali.org/display/KULFOUND/Open+Symphony+License</license-url>
 				<copyright-notice>Copyright (c) 2001-2004 The OpenSymphony Group. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2671,6 +2891,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2682,6 +2903,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -2694,6 +2916,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -2706,6 +2929,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -2718,6 +2942,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -2730,11 +2955,13 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2005-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 			<license>
 				<bundled-project-name>phpportlet</bundled-project-name>
 				<license-name>PHP License 2.02</license-name>
+				<license-url>http://www.php.net/license/2_02.txt</license-url>
 				<copyright-notice>Copyright (c) 1999-2002 The PHP Group. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2747,6 +2974,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2004 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
@@ -2759,6 +2987,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2004 The Apache Software Foundation.</copyright-notice>
 			</license>
 		</licenses>
@@ -2771,6 +3000,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2782,6 +3012,7 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+				<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2793,6 +3024,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
+				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2807,6 +3039,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2818,6 +3051,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2004 Sun Microsystems, Inc.</copyright-notice>
 			</license>
 		</licenses>
@@ -2833,6 +3067,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2844,6 +3079,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2855,6 +3091,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2869,14 +3106,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999-2002, Lotus Development Corporation</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2002, Sun Microsystems.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2003, IBM Corporation., http://www.ibm.com</copyright-notice>
 			</license>
 		</licenses>
@@ -2889,6 +3129,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2903,6 +3144,7 @@
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
+				<license-url>http://opensource.org/licenses/MIT</license-url>
 				<copyright-notice>Copyright (c) 2004-2007 QOS.ch</copyright-notice>
 			</license>
 		</licenses>
@@ -2915,6 +3157,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 1.1</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-1.1</license-url>
 				<copyright-notice>Copyright (c) 1999 The Apache Software Foundation. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -2927,6 +3170,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2941,6 +3185,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2952,6 +3197,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2963,6 +3209,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2978,6 +3225,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2989,6 +3237,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3000,6 +3249,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3011,6 +3261,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3022,6 +3273,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3033,6 +3285,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3044,6 +3297,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3055,6 +3309,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3066,6 +3321,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3077,6 +3333,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3088,6 +3345,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3099,6 +3357,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3110,6 +3369,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3121,6 +3381,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3132,6 +3393,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.1</license-name>
+				<license-url>http://web.archive.org/web/20090305064954/http://www.sun.com/cddl/cddl.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3143,6 +3405,7 @@
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
+				<license-url>http://glassfish.java.net/public/CDDLv1.0.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3154,6 +3417,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3165,6 +3429,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3176,6 +3441,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3187,6 +3453,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3198,6 +3465,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3209,6 +3477,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -3223,6 +3492,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3234,6 +3504,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3245,6 +3516,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3256,6 +3528,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl-2.1.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3267,6 +3540,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -3282,6 +3556,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2012 Vaadin Ltd</copyright-notice>
 			</license>
 		</licenses>
@@ -3294,6 +3569,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2000-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -3306,6 +3582,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2000-2007 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -3318,6 +3595,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3329,6 +3607,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3340,6 +3619,7 @@
 		<licenses>
 			<license>
 				<license-name>Common Public License 1.0</license-name>
+				<license-url>http://opensource.org/licenses/cpl1.0.php</license-url>
 				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
 			</license>
 		</licenses>
@@ -3352,6 +3632,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3363,14 +3644,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999-2002, Lotus Development Corporation</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2001-2002, Sun Microsystems.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2003, IBM Corporation., http://www.ibm.com</copyright-notice>
 			</license>
 		</licenses>
@@ -3383,6 +3667,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2004-2009 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -3400,6 +3685,7 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2005-2006 The Apache Software Foundation</copyright-notice>
 			</license>
 		</licenses>
@@ -3412,14 +3698,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999, IBM Corporation., http://www.ibm.com</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>copyright (c) 1999, Sun Microsystems., http://www.sun.com</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999, iClick, Inc.</copyright-notice>
 			</license>
 		</licenses>
@@ -3432,14 +3721,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999, IBM Corporation., http://www.ibm.com</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999, Sun Microsystems., http://www.sun.com</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2000 World Wide Web Consortium, http://www.w3.org</copyright-notice>
 			</license>
 		</licenses>
@@ -3452,14 +3744,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 1999-2006 The Apache Software Foundation.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>Copyright (c) 2005 Sun Microsystems, Inc. All rights reserved.</copyright-notice>
 			</license>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+				<license-url>http://www.apache.org/licenses/LICENSE-2.0</license-url>
 				<copyright-notice>(c) 2001, Institute for Data Communications Systems, http://www.nue.et-inf.uni-siegen.de</copyright-notice>
 			</license>
 		</licenses>
@@ -3472,6 +3767,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3483,6 +3779,7 @@
 		<licenses>
 			<license>
 				<license-name>Indiana University Extreme! Lab Software License 1.1.1</license-name>
+				<license-url>http://www.extreme.indiana.edu/xgws/xsoap/PullParser/LICENSE.txt</license-url>
 				<copyright-notice>Copyright (c) 2002 Extreme! Lab, Indiana University. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -3495,6 +3792,7 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 				<copyright-notice>Copyright (c) 2003-2006, Joe Walnes. Copyright (c) 2006-2007, XStream Committers. All rights reserved.</copyright-notice>
 			</license>
 		</licenses>
@@ -3507,6 +3805,7 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 3</license-name>
+				<license-url>http://www.gnu.org/licenses/lgpl.html</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -3517,6 +3816,7 @@
 		<project-url>http://tukaani.org/xz/java.html</project-url>
 		<license>
 			<license-name>Public Domain</license-name>
+			<license-url>http://en.wikipedia.org/wiki/Public_domain</license-url>
 		</license>
 	</library>
 </libraries>

@@ -71,28 +71,38 @@
 	<td>Title</td>
 </tr>
 <tr>
+	<td>DOCUMENT_INFO_THUMBNAIL</td>
+	<td>//div[@class='document-info']//span[@class='document-thumbnail']/img</td>
+	<td>Rating</td>
+</tr>
+<tr>
+	<td>DOCUMENT_INFO_UPLOADED_BY</td>
+	<td>//div[@class='document-info']//span[@class='user-date']/span/span</td>
+	<td>Rating</td>
+</tr>
+<tr>
 	<td>DOCUMENT_INFO_RATING</td>
-	<td>//div[@class='document-info']/span[@class='lfr-asset-ratings']</td>
+	<td>//div[@class='document-info']//span[@class='lfr-asset-ratings']</td>
 	<td>Rating</td>
 </tr>
 <tr>
 	<td>DOCUMENT_INFO_LINKS</td>
-	<td>//div[@class='document-info']/div[@class='entry-links']</td>
+	<td>//div[@class='document-info']//div[@class='entry-links']</td>
 	<td>Links</td>
 </tr>
 <tr>
 	<td>DOCUMENT_INFO_DESCRIPTION</td>
-	<td>//div[@class='document-info']/span[@class='document-description']</td>
+	<td>//div[@class='document-info']//span[@class='document-description']</td>
 	<td>Description</td>
 </tr>
 <tr>
 	<td>DOCUMENT_INFO_CATEGORIES</td>
-	<td>//div[@class='document-info']/div[@class='lfr-asset-categories']</td>
+	<td>//div[@class='document-info']//div[@class='lfr-asset-categories']</td>
 	<td>Categories</td>
 </tr>
 <tr>
 	<td>DOCUMENT_INFO_TAGS</td>
-	<td>//div[@class='document-info']/div[@class='lfr-asset-tags']</td>
+	<td>//div[@class='document-info']//div[@class='lfr-asset-tags']</td>
 	<td>Tags</td>
 </tr>
 <tr>
@@ -130,6 +140,37 @@
 	<td>COMMENTS_REPLY</td>
 	<td>//div[@class='taglib-discussion']/form/fieldset/div/div/div/span[2]/span/input</td>
 	<td>Cancel</td>
+</tr>
+<!--DOCUMENT_DETAILS-->
+<tr>
+	<td>DOCUMENT_DETAILS_VERSION</td>
+	<td>//div[@class='asset-details-content']//h3[contains(@class,'version')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DOCUMENT_DETAILS_UPLOADER</td>
+	<td>//div[@class='asset-details-content']//div[@class='lfr-asset-icon lfr-asset-author']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DOCUMENT_DETAILS_DATE</td>
+	<td>//div[@class='asset-details-content']//div[@class='lfr-asset-icon lfr-asset-date']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DOCUMENT_DETAILS_WORKFLOW</td>
+	<td>//div[@class='asset-details-content']//span[@class='workflow-status']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DOCUMENT_DETAILS_DOWNLOAD</td>
+	<td>//div[@class='asset-details-content']//span[@class='download-document']/span/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>DOCUMENT_DETAILS_URL</td>
+	<td>//div[@class='asset-details-content']//span[@class='webdav-url']</td>
+	<td></td>
 </tr>
 </tbody>
 </table>

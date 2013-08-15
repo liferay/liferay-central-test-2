@@ -39,6 +39,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SITE_LIST</td>
+	<td>//ul[contains(@class, 'site-list')]</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SITE_NAME</td>
 	<td>//li[contains(@class, 'social-office-enabled')]/span[contains(.,'${siteName}')]</td>
 	<td></td>

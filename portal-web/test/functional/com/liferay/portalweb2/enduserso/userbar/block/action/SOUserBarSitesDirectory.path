@@ -44,6 +44,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>SITE_LIST</td>
+	<td>//ul[@class='directory-list']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SITE_NAME</td>
 	<td>//ul[@class='directory-list']/li[contains(.,'${siteName}')]/span[@class='name']</td>
 	<td></td>

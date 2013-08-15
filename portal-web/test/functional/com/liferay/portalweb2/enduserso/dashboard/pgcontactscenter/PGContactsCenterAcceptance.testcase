@@ -1,15 +1,6 @@
 <definition>
 	<set-up>
 		<execute macro="SOUser#firstLoginPG" />
-
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
-		</execute>
-
-		<execute macro="Role#assignRegRoleCP">
-			<var name="roleName" value="Social Office" />
-			<var name="userScreenName" value="joebloggs" />
-		</execute>
 	</set-up>
 
 	<command name="AddConnection">
@@ -70,14 +61,7 @@
 	</command>
 
 	<tear-down>
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="Roles" />
-		</execute>
-
-		<execute macro="Role#unassignRegRoleCP">
-			<var name="roleName" value="Social Office" />
-			<var name="userScreenName" value="joebloggs" />
-		</execute>
+		<execute macro="SOUser#firstLoginPG" />
 
 		<execute macro="SOUser#tearDownCP" />
 	</tear-down>

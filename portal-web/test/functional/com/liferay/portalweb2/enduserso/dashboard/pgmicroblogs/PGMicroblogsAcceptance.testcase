@@ -71,6 +71,8 @@
 	</command>
 
 	<tear-down>
+		<execute macro="SOUser#firstLoginPG" />
+
 		<execute macro="SOMicroblogs#tearDownMicroblogsEntry" />
 
 		<execute macro="SOUser#tearDownCP" />

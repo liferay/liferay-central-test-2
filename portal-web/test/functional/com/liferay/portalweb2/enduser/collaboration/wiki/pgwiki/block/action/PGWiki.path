@@ -50,6 +50,17 @@
 	<td></td>
 	<td></td>
 </tr>
+<!--PAGE_ACTIONS-->
+<tr>
+	<td>PAGE_ACTIONS_EDIT</td>
+	<td>//div[@class='page-actions top-actions']/span/a[contains(.,'Edit')]/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--WIKI_PAGE-->
 <tr>
 	<td>WIKI_PAGE_TITLE</td>

@@ -4,4 +4,10 @@
 			<execute function="AssertTextEquals#assertText" value1="Your request completed successfully." />
 		</case>
 	</command>
+
+	<command name="assertTextNotEquals">
+		<case locator-key1="SITE_LIST">
+			<execute function="AssertTextNotEquals#assertNotPartialText" />
+		</case>
+	</command>
 </definition>

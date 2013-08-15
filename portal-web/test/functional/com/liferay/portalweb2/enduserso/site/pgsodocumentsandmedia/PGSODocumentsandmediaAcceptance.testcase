@@ -1,0 +1,148 @@
+<definition>
+	<var name="key_siteName" value="${siteName}" />
+	<var name="pageName" value="Documents" />
+	<var name="pageType" value="Open Site" />
+	<var name="siteName" value="Open Site Name" />
+	<var name="siteDescription" value="Open Site Description" />
+	<var name="siteType" value="Open" />
+
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+
+		<execute macro="SOSites#addSOSite">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteDescription" value="${siteDescription}" />
+			<var name="siteType" value="${siteType}" />
+		</execute>
+	</set-up>
+
+	<var name="dmDocumentDescription" value="DM Folder Document Description" />
+	<var name="dmDocumentDescriptionEdit" value="DM Folder Document Description Edit" />
+	<var name="dmDocumentFile" value="Document_1.doc" />
+	<var name="dmDocumentSize" value="21.5k" />
+	<var name="dmDocumentTitle" value="DM Folder Document Title" />
+	<var name="dmDocumentTitleEdit" value="DM Folder Document Title Edit" />
+	<var name="dmDocumentUploader" value="Joe Bloggs" />
+	<var name="dmDocumentVersionNumber" value="1.0" />
+	<var name="dmDocumentVersionNumberEdit" value="1.1" />
+	<var name="dmFolderName" value="DM Folder Name" />
+	<var name="dmFolderDescription" value="DM Folder Description" />
+
+	<command name="AddDMFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute macro="DMFolderDocument#viewPG" />
+	</command>
+
+	<command name="DeleteDMFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#deletePG" />
+	</command>
+
+	<command name="EditDMFolderDocument">
+		<var name="dmDocumentFile" value="${dmDocumentFile}" />
+		<var name="dmDocumentSize" value="${dmDocumentSize}" />
+		<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+		<var name="dmDocumentTitleEdit" value="${dmDocumentTitleEdit}" />
+		<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
+		<var name="dmDocumentDescriptionEdit" value="${dmDocumentDescriptionEdit}" />
+		<var name="dmDocumentUploader" value="${dmDocumentUploader}" />
+		<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
+		<var name="dmDocumentVersionNumberEdit" value="${dmDocumentVersionNumberEdit}" />
+		<var name="dmFolderName" value="${dmFolderName}" />
+		<var name="dmFolderDescription" value="${dmFolderDescription}" />
+		<var name="key_siteName" value="${key_siteName}" />
+		<var name="pageName" value="${pageName}" />
+		<var name="pageType" value="${pageType}" />
+		<var name="siteName" value="${siteName}" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolder#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#addPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMFolderDocument#editPG" />
+
+		<execute macro="Page#gotoPG">
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute action="PGDocumentsandmedia#click" locator-key1="ENTRIES_FOLDER" />
+
+		<execute macro="DMFolderDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleEdit}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionEdit}" />
+			<var name="dmDocumentVersionNumber" value="${dmDocumentVersionNumberEdit}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="Site#tearDownCP" />
+	</tear-down>
+</definition>
