@@ -308,9 +308,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 	public Map<Long, Boolean> getLayoutIdMap(PortletRequest portletRequest)
 		throws Exception {
 
-		String layoutIdsJSON = ParamUtil.getString(portletRequest, "layoutIds");
-
 		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
+
+		String layoutIdsJSON = ParamUtil.getString(portletRequest, "layoutIds");
 
 		if (Validator.isNull(layoutIdsJSON)) {
 			return layoutIdMap;
