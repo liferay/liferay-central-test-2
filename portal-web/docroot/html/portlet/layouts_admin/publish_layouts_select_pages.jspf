@@ -28,10 +28,10 @@
 
 		<div class="selected-pages" id="<portlet:namespace />pane">
 			<liferay-util:include page="/html/portlet/layouts_admin/tree_js.jsp">
-				<liferay-util:param name="selectableTree" value="1" />
-				<liferay-util:param name="treeId" value="<%= treeId %>" />
-				<liferay-util:param name="incomplete" value="<%= String.valueOf(false) %>" />
 				<liferay-util:param name="tabs1" value='<%= (privateLayout) ? "private-pages" : "public-pages" %>' />
+				<liferay-util:param name="incomplete" value="<%= Boolean.FALSE.toString() %>" />
+				<liferay-util:param name="treeId" value="<%= treeId %>" />
+				<liferay-util:param name="selectableTree" value="1" />
 			</liferay-util:include>
 		</div>
 
