@@ -33,10 +33,6 @@ int[] categoryPropertiesIndexes = null;
 
 List<AssetCategoryProperty> categoryProperties = Collections.emptyList();
 
-String categoryDescriptionId = "categoryDescription";
-String categoryNameId = "categoryName";
-String categoryPropertiesId = "categoryProperties";
-
 String categoryPropertiesIndexesParam = ParamUtil.getString(request, "categoryPropertiesIndexes");
 
 if (Validator.isNotNull(categoryPropertiesIndexesParam)) {
@@ -71,6 +67,10 @@ else {
 		categoryPropertiesIndexes = new int[0];
 	}
 }
+
+String categoryDescriptionId = "categoryDescription";
+String categoryNameId = "categoryName";
+String categoryPropertiesId = "categoryProperties";
 %>
 
 <portlet:actionURL var="editCategoryURL">
