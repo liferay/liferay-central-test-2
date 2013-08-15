@@ -173,6 +173,14 @@ PortletURL editFileEntryURL = renderResponse.createActionURL();
 
 editFileEntryURL.setParameter("struts_action", "/document_library/edit_file_entry");
 
+if (Validator.isNotNull(redirect)) {
+	editFileEntryURL.setParameter("redirect", redirect);
+}
+
+if (Validator.isNotNull(referringPortletResource)) {
+	editFileEntryURL.setParameter("referringPortletResource", referringPortletResource);
+}
+
 if (repositoryId > 0) {
 	editFileEntryURL.setParameter("repositoryId", String.valueOf(repositoryId));
 }
@@ -185,15 +193,7 @@ if (fileEntryId > 0) {
 	editFileEntryURL.setParameter("fileEntryId", String.valueOf(fileEntryId));
 }
 
-if (Validator.isNotNull(referringPortletResource)) {
-	editFileEntryURL.setParameter("referringPortletResource", referringPortletResource);
-}
-
 editFileEntryURL.setParameter("workflowAction", String.valueOf(WorkflowConstants.ACTION_PUBLISH));
-
-if (Validator.isNotNull(redirect)) {
-	editFileEntryURL.setParameter("redirect", redirect);
-}
 %>
 
 <aui:form action="<%= editFileEntryURL %>" cssClass="lfr-dynamic-form" enctype="multipart/form-data" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveFileEntry(" + saveAsDraft + ");" %>'>
