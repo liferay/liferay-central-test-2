@@ -14,11 +14,11 @@
 
 package com.liferay.portal.kernel.util;
 
+import java.math.BigDecimal;
+
 import java.text.DateFormat;
 
 import java.util.Date;
-
-import java.math.BigDecimal;
 
 /**
  * @author Brian Wing Shun Chan

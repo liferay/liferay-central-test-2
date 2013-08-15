@@ -28,6 +28,7 @@ public class NumberArrayConverter implements TypeConverter<Number[]> {
 		this.convertBean = convertBean;
 	}
 
+	@Override
 	public Number[] convert(Object value) {
 		if (value == null) {
 			return null;
@@ -47,64 +48,84 @@ public class NumberArrayConverter implements TypeConverter<Number[]> {
 
 		if (type.getComponentType().isPrimitive()) {
 			if (type == double[].class) {
-				double[] values = (double[]) value;
+				double[] values = (double[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
+
 			if (type == float[].class) {
-				float[] values = (float[]) value;
+				float[] values = (float[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
+
 			if (type == int[].class) {
-				int[] values = (int[]) value;
+				int[] values = (int[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
+
 			if (type == long[].class) {
-				long[] values = (long[]) value;
+				long[] values = (long[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
+
 			if (type == byte[].class) {
-				byte[] values = (byte[]) value;
+				byte[] values = (byte[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
+
 			if (type == boolean[].class) {
-				boolean[] values = (boolean[]) value;
+				boolean[] values = (boolean[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = (values[i] == true ? 1 : 0);
 				}
+
 				return results;
 			}
+
 			if (type == short[].class) {
-				short[] values = (short[]) value;
+				short[] values = (short[])value;
 				Number[] results = new Number[values.length];
+
 				for (int i = 0; i < values.length; i++) {
 					results[i] = values[i];
 				}
+
 				return results;
 			}
 		}
 
-		return convertArray((Object[]) value);
+		return convertArray((Object[])value);
 	}
 
 	protected Number[] convertArray(Object[] values) {

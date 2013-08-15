@@ -30,6 +30,7 @@ public class DateArrayConverter implements TypeConverter<Date[]> {
 		this.convertBean = convertBean;
 	}
 
+	@Override
 	public Date[] convert(Object value) {
 		if (value == null) {
 			return null;
@@ -49,7 +50,7 @@ public class DateArrayConverter implements TypeConverter<Date[]> {
 
 		if (type.getComponentType().isPrimitive()) {
 			if (type == long[].class) {
-				long[] values = (long[]) value;
+				long[] values = (long[])value;
 
 				Date[] results = new Date[values.length];
 
@@ -61,7 +62,7 @@ public class DateArrayConverter implements TypeConverter<Date[]> {
 			}
 		}
 
-		return convertArray((Object[]) value);
+		return convertArray((Object[])value);
 	}
 
 	protected Date[] convertArray(Object[] values) {

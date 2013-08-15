@@ -24,6 +24,7 @@ import jodd.typeconverter.TypeConverter;
  */
 public class NumberConverter implements TypeConverter<Number> {
 
+	@Override
 	public Number convert(Object value) {
 		if (value == null) {
 			return null;

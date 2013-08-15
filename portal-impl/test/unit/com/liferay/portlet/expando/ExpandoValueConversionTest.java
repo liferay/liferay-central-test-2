@@ -198,7 +198,7 @@ public class ExpandoValueConversionTest extends TestCase {
 
 	@Test
 	public void testDateArray1() {
-		try {			
+		try {
 			String[] dates = new String[] {
 				String.valueOf(System.currentTimeMillis()),
 				String.valueOf(System.currentTimeMillis())
