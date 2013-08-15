@@ -62,11 +62,11 @@ public class ExpandoValueLocalServiceImpl
 			new DateArrayConverter(
 				defaultTypeConverterManager.getConvertBean()));
 		defaultTypeConverterManager.register(
+			Number.class, new NumberConverter());
+		defaultTypeConverterManager.register(
 			Number[].class,
 			new NumberArrayConverter(
 				defaultTypeConverterManager.getConvertBean()));
-		defaultTypeConverterManager.register(
-			Number.class, new NumberConverter());
 	}
 
 	@Override
