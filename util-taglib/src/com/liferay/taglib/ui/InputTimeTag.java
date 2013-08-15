@@ -74,6 +74,7 @@ public class InputTimeTag extends IncludeTag {
 		_minuteInterval = 0;
 		_minuteParam = null;
 		_minuteValue = 0;
+		_name = null;
 	}
 
 	@Override
