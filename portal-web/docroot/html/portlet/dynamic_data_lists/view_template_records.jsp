@@ -36,14 +36,14 @@ if (DDLUtil.isEditable(request, portletDisplay.getId(), themeDisplay.getScopeGro
 	<c:if test="<%= showAddRecordButton %>">
 		<aui:nav-bar>
 			<aui:nav>
-					<portlet:renderURL var="addRecordURL">
-						<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
-						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
-						<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
-					</portlet:renderURL>
+				<portlet:renderURL var="addRecordURL">
+					<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="recordSetId" value="<%= String.valueOf(recordSet.getRecordSetId()) %>" />
+					<portlet:param name="formDDMTemplateId" value="<%= String.valueOf(formDDMTemplateId) %>" />
+				</portlet:renderURL>
 
-					<aui:nav-item href="<%= addRecordURL %>" iconClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-x", ddmStructure.getName(locale)) %>' />
+				<aui:nav-item href="<%= addRecordURL %>" iconClass="icon-plus" label='<%= LanguageUtil.format(pageContext, "add-x", ddmStructure.getName(locale)) %>' />
 			</aui:nav>
 		</aui:nav-bar>
 	</c:if>
