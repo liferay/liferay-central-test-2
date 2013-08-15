@@ -19,7 +19,6 @@ import com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import junit.framework.TestCase;
 
@@ -178,9 +177,8 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void testDate1() {
 		try {
-			Date now = new Date();
-
-			_converter.convertType(ExpandoColumnConstants.DATE, now.getTime());
+			_converter.convertType(
+				ExpandoColumnConstants.DATE, System.currentTimeMillis());
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -200,9 +198,9 @@ public class ExpandoValueConversionTest extends TestCase {
 
 	@Test
 	public void testDateArray1() {
-		try {
+		try {			
 			String[] dates = new String[] {
-				String.valueOf(new Date().getTime()),
+				String.valueOf(System.currentTimeMillis()),
 				String.valueOf(System.currentTimeMillis())
 			};
 
