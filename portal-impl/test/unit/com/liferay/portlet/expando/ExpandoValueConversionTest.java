@@ -34,8 +34,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_1() {
 		try {
-			boolean converted = _converter.convertType(
-				ExpandoColumnConstants.BOOLEAN, "true");
+			_converter.convertType(ExpandoColumnConstants.BOOLEAN, "true");
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -45,8 +44,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_2() {
 		try {
-			boolean converted = _converter.convertType(
-				ExpandoColumnConstants.BOOLEAN, "false");
+			_converter.convertType(ExpandoColumnConstants.BOOLEAN, "false");
 		}
 		catch (Exception e) {
 			Assert.fail();
@@ -56,8 +54,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_3() {
 		try {
-			boolean converted = _converter.convertType(
-				ExpandoColumnConstants.BOOLEAN, "other");
+			_converter.convertType(ExpandoColumnConstants.BOOLEAN, "other");
 
 			Assert.fail();
 		}
@@ -68,7 +65,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_1() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "true");
 		}
 		catch (Exception e) {
@@ -79,7 +76,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_2() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "false,true");
 		}
 		catch (Exception e) {
@@ -90,7 +87,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_3() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "other,false");
 
 			Assert.fail();
@@ -102,7 +99,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_4() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "[false,true]");
 		}
 		catch (Exception e) {
@@ -113,7 +110,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_5() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "[other,false]");
 
 			Assert.fail();
@@ -125,7 +122,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_6() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "[\"false\",true]");
 		}
 		catch (Exception e) {
@@ -136,7 +133,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_BOOLEAN_ARRAY_7() {
 		try {
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, "[\"other\",false]");
 
 			Assert.fail();
@@ -153,7 +150,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			booleans.add("true");
 			booleans.add("false");
 
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, booleans);
 		}
 		catch (Exception e) {
@@ -169,7 +166,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			booleans.add("true");
 			booleans.add("other");
 
-			boolean[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.BOOLEAN_ARRAY, booleans);
 
 			Assert.fail();
@@ -183,7 +180,7 @@ public class ExpandoValueConversionTest extends TestCase {
 		try {
 			Date now = new Date();
 
-			Date converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE, now.getTime());
 		}
 		catch (Exception e) {
@@ -194,7 +191,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_2() {
 		try {
-			Date converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE, "other");
 
 			Assert.fail();
@@ -211,7 +208,7 @@ public class ExpandoValueConversionTest extends TestCase {
 				String.valueOf(System.currentTimeMillis())
 			};
 
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, dates);
 		}
 		catch (Exception e) {
@@ -222,7 +219,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_2() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, "1376510136750");
 		}
 		catch (Exception e) {
@@ -233,7 +230,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_3() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY,
 				"1376510136750, 1376510136751");
 		}
@@ -245,7 +242,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_4() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY,
 				"[1376510136750, 1376510136751]");
 		}
@@ -257,7 +254,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_5() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY,
 				"1376510136750, other");
 
@@ -270,7 +267,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_6() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY,
 				"[1376510136750, other]");
 
@@ -283,7 +280,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_7() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, "other");
 
 			Assert.fail();
@@ -295,7 +292,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DATE_ARRAY_8() {
 		try {
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, 1376510136750L);
 		}
 		catch (Exception e) {
@@ -308,7 +305,7 @@ public class ExpandoValueConversionTest extends TestCase {
 		try {
 			long[] dates = new long[] {1376510136750L, 1376510136560L};
 
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, dates);
 		}
 		catch (Exception e) {
@@ -321,7 +318,7 @@ public class ExpandoValueConversionTest extends TestCase {
 		try {
 			int[] dates = new int[] {1376510136, 1376510136};
 
-			Date[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DATE_ARRAY, dates);
 
 			Assert.fail();
@@ -333,7 +330,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_1() {
 		try {
-			double converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE, "-456.23");
 		}
 		catch (Exception e) {
@@ -344,7 +341,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_2() {
 		try {
-			double converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE, "345.4");
 		}
 		catch (Exception e) {
@@ -355,7 +352,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_3() {
 		try {
-			double converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE, "other");
 
 			Assert.fail();
@@ -367,7 +364,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_1() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "13.4");
 		}
 		catch (Exception e) {
@@ -378,7 +375,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_2() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "345.67,56");
 		}
 		catch (Exception e) {
@@ -389,7 +386,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_3() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "other,23.4");
 
 			Assert.fail();
@@ -401,7 +398,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_4() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "[56.6567,0.0000345]");
 		}
 		catch (Exception e) {
@@ -412,7 +409,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_5() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "[0.34,other]");
 
 			Assert.fail();
@@ -424,7 +421,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_6() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "[\"34.67\",12.45]");
 		}
 		catch (Exception e) {
@@ -435,7 +432,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_DOUBLE_ARRAY_7() {
 		try {
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, "[\"other\",34.65]");
 
 			Assert.fail();
@@ -452,7 +449,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			doubles.add(String.valueOf(Double.MAX_VALUE));
 			doubles.add(String.valueOf(Integer.MAX_VALUE));
 
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, doubles);
 		}
 		catch (Exception e) {
@@ -468,7 +465,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			booleans.add("12.5");
 			booleans.add("other");
 
-			double[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.DOUBLE_ARRAY, booleans);
 
 			Assert.fail();
@@ -480,7 +477,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_1() {
 		try {
-			float converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT, "-456.23");
 		}
 		catch (Exception e) {
@@ -491,7 +488,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_2() {
 		try {
-			float converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT, "345.4");
 		}
 		catch (Exception e) {
@@ -502,7 +499,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_3() {
 		try {
-			float converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT, "other");
 
 			Assert.fail();
@@ -514,7 +511,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_1() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "13.4");
 		}
 		catch (Exception e) {
@@ -525,7 +522,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_2() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "345.67,56");
 		}
 		catch (Exception e) {
@@ -536,7 +533,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_3() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "other,23.4");
 
 			Assert.fail();
@@ -548,7 +545,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_4() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "[56.6567,0.0000345]");
 		}
 		catch (Exception e) {
@@ -559,7 +556,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_5() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "[0.34,other]");
 
 			Assert.fail();
@@ -571,7 +568,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_6() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "[\"34.67\",12.45]");
 		}
 		catch (Exception e) {
@@ -582,7 +579,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_FLOAT_ARRAY_7() {
 		try {
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, "[\"other\",34.65]");
 
 			Assert.fail();
@@ -599,7 +596,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			floats.add(String.valueOf(Float.MAX_VALUE));
 			floats.add(String.valueOf(Integer.MAX_VALUE));
 
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, floats);
 		}
 		catch (Exception e) {
@@ -615,7 +612,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			floats.add(String.valueOf(Double.MAX_VALUE)); // Infinity
 			floats.add(String.valueOf(Integer.MAX_VALUE));
 
-			float[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.FLOAT_ARRAY, floats);
 		}
 		catch (Exception e) {
@@ -626,7 +623,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_1() {
 		try {
-			int converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER, "456");
 		}
 		catch (Exception e) {
@@ -637,7 +634,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_2() {
 		try {
-			int converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER, "-345");
 		}
 		catch (Exception e) {
@@ -648,7 +645,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_3() {
 		try {
-			int converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER, "13.4");
 
 			Assert.fail();
@@ -660,7 +657,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_1() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "13");
 		}
 		catch (Exception e) {
@@ -671,7 +668,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_2() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "345,56");
 		}
 		catch (Exception e) {
@@ -682,7 +679,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_3() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "675,23.4");
 
 			Assert.fail();
@@ -694,7 +691,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_4() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "[56,1]");
 		}
 		catch (Exception e) {
@@ -705,7 +702,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_5() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "[0,56.23]");
 
 			Assert.fail();
@@ -717,7 +714,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_6() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "[\"34\",12]");
 		}
 		catch (Exception e) {
@@ -728,7 +725,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_INTEGER_ARRAY_7() {
 		try {
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, "[\"34.5\",34]");
 
 			Assert.fail();
@@ -745,7 +742,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			ints.add("-345");
 			ints.add(String.valueOf(Integer.MAX_VALUE));
 
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, ints);
 		}
 		catch (Exception e) {
@@ -761,7 +758,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			ints.add(String.valueOf(Double.MAX_VALUE));
 			ints.add(String.valueOf(Integer.MAX_VALUE));
 
-			int[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.INTEGER_ARRAY, ints);
 
 			Assert.fail();
@@ -773,7 +770,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_1() {
 		try {
-			long converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG, "456");
 		}
 		catch (Exception e) {
@@ -784,7 +781,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_2() {
 		try {
-			long converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG, "-345");
 		}
 		catch (Exception e) {
@@ -795,7 +792,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_3() {
 		try {
-			long converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG, "13.4");
 
 			Assert.fail();
@@ -807,7 +804,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_1() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "13");
 		}
 		catch (Exception e) {
@@ -818,7 +815,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_2() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "345,56");
 		}
 		catch (Exception e) {
@@ -829,7 +826,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_3() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "675,23.4");
 
 			Assert.fail();
@@ -841,7 +838,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_4() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "[56,1]");
 		}
 		catch (Exception e) {
@@ -852,7 +849,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_5() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "[0,56.23]");
 
 			Assert.fail();
@@ -864,7 +861,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_6() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "[\"34\",12]");
 		}
 		catch (Exception e) {
@@ -875,7 +872,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_LONG_ARRAY_7() {
 		try {
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, "[\"34.5\",34]");
 
 			Assert.fail();
@@ -892,7 +889,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			longs.add("-345");
 			longs.add(String.valueOf(Long.MAX_VALUE));
 
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, longs);
 		}
 		catch (Exception e) {
@@ -908,7 +905,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			longs.add(String.valueOf(Double.MAX_VALUE));
 			longs.add(String.valueOf(Long.MAX_VALUE));
 
-			long[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.LONG_ARRAY, longs);
 
 			Assert.fail();
@@ -920,7 +917,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_1() {
 		try {
-			Number converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER, "456");
 		}
 		catch (Exception e) {
@@ -931,7 +928,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_2() {
 		try {
-			Number converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER, "-345");
 		}
 		catch (Exception e) {
@@ -942,7 +939,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_3() {
 		try {
-			Number converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER, "other");
 
 			Assert.fail();
@@ -954,7 +951,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_1() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "13");
 		}
 		catch (Exception e) {
@@ -965,7 +962,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_2() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "345,56");
 		}
 		catch (Exception e) {
@@ -976,7 +973,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_3() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "675.345,other");
 
 			Assert.fail();
@@ -988,7 +985,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_4() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "[56,1]");
 		}
 		catch (Exception e) {
@@ -999,7 +996,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_5() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "[0,other]");
 
 			Assert.fail();
@@ -1011,7 +1008,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_6() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "[\"34\",12]");
 		}
 		catch (Exception e) {
@@ -1022,7 +1019,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_NUMBER_ARRAY_7() {
 		try {
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, "[\"other\",34]");
 
 			Assert.fail();
@@ -1039,7 +1036,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			numbers.add("-345");
 			numbers.add(String.valueOf(Double.MAX_VALUE));
 
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, numbers);
 		}
 		catch (Exception e) {
@@ -1055,7 +1052,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			numbers.add(String.valueOf(Double.MAX_VALUE));
 			numbers.add(String.valueOf(Long.MAX_VALUE));
 
-			Number[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.NUMBER_ARRAY, numbers);
 		}
 		catch (Exception e) {
@@ -1066,7 +1063,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_1() {
 		try {
-			short converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT, "456");
 		}
 		catch (Exception e) {
@@ -1077,7 +1074,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_2() {
 		try {
-			short converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT, "-345");
 		}
 		catch (Exception e) {
@@ -1088,7 +1085,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_3() {
 		try {
-			short converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT, "12344535");
 
 			Assert.fail();
@@ -1100,7 +1097,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_1() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "13");
 		}
 		catch (Exception e) {
@@ -1111,7 +1108,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_2() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "345,56");
 		}
 		catch (Exception e) {
@@ -1122,7 +1119,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_3() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "675,12344535");
 
 			Assert.fail();
@@ -1134,7 +1131,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_4() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "[56,1]");
 		}
 		catch (Exception e) {
@@ -1145,7 +1142,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_5() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "[0,12344535]");
 
 			Assert.fail();
@@ -1157,7 +1154,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_6() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "[\"34\",12]");
 		}
 		catch (Exception e) {
@@ -1168,7 +1165,7 @@ public class ExpandoValueConversionTest extends TestCase {
 	@Test
 	public void test_SHORT_ARRAY_7() {
 		try {
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, "[\"12344535\",34]");
 
 			Assert.fail();
@@ -1185,7 +1182,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			shorts.add("-345");
 			shorts.add(String.valueOf(Short.MAX_VALUE));
 
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, shorts);
 		}
 		catch (Exception e) {
@@ -1201,7 +1198,7 @@ public class ExpandoValueConversionTest extends TestCase {
 			shorts.add(String.valueOf(Double.MAX_VALUE));
 			shorts.add(String.valueOf(Short.MAX_VALUE));
 
-			short[] converted = _converter.convertType(
+			_converter.convertType(
 				ExpandoColumnConstants.SHORT_ARRAY, shorts);
 
 			Assert.fail();
