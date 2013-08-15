@@ -40,7 +40,6 @@ public class BaseDDLServiceTestCase  extends BaseDDMServiceTestCase {
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
-
 		serviceContext.setUserId(TestPropsValues.getUserId());
 
 		return DDLRecordLocalServiceUtil.addRecord(
