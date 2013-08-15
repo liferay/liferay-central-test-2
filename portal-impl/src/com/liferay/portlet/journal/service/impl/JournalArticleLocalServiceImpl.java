@@ -5447,6 +5447,30 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	protected void checkArticlesByDisplayDate(Date displayDate)
+		throws PortalException, SystemException {
+
+		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
+			displayDate, WorkflowConstants.STATUS_SCHEDULED);
+
+		for (JournalArticle article : articles) {
+			ServiceContext serviceContext = new ServiceContext();
+
+			serviceContext.setCommand(Constants.UPDATE);
+
+			String layoutFullURL = PortalUtil.getLayoutFullURL(
+				article.getGroupId(), PortletKeys.JOURNAL);
+
+			serviceContext.setLayoutFullURL(layoutFullURL);
+
+			serviceContext.setScopeGroupId(article.getGroupId());
+
+			updateStatus(
+				article.getUserId(), article, WorkflowConstants.STATUS_APPROVED,
+				null, new HashMap<String, Serializable>(), serviceContext);
+		}
+	}
+
 	protected void checkArticlesByExpirationDate(Date expirationDate)
 		throws PortalException, SystemException {
 
@@ -5501,30 +5525,6 @@ public class JournalArticleLocalServiceImpl
 		if (_previousCheckDate == null) {
 			_previousCheckDate = new Date(
 				expirationDate.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL);
-		}
-	}
-
-	protected void checkArticlesByDisplayDate(Date displayDate)
-		throws PortalException, SystemException {
-
-		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
-			displayDate, WorkflowConstants.STATUS_SCHEDULED);
-
-		for (JournalArticle article : articles) {
-			ServiceContext serviceContext = new ServiceContext();
-
-			serviceContext.setCommand(Constants.UPDATE);
-
-			String layoutFullURL = PortalUtil.getLayoutFullURL(
-				article.getGroupId(), PortletKeys.JOURNAL);
-
-			serviceContext.setLayoutFullURL(layoutFullURL);
-
-			serviceContext.setScopeGroupId(article.getGroupId());
-
-			updateStatus(
-				article.getUserId(), article, WorkflowConstants.STATUS_APPROVED,
-				null, new HashMap<String, Serializable>(), serviceContext);
 		}
 	}
 
