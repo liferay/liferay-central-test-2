@@ -35,12 +35,14 @@ public class NumberConverter implements TypeConverter<Number> {
 		}
 
 		try {
-			String stringValue = value.toString().trim();
+			String valueString = value.toString();
 
-			return new BigDecimal(stringValue);
+			valueString = valueString.trim();
+
+			return new BigDecimal(valueString);
 		}
-		catch (NumberFormatException nfex) {
-			throw new TypeConversionException(value, nfex);
+		catch (NumberFormatException nfe) {
+			throw new TypeConversionException(value, nfe);
 		}
 	}
 

@@ -27,7 +27,7 @@ import jodd.util.CsvUtil;
 public class DateArrayConverter implements TypeConverter<Date[]> {
 
 	public DateArrayConverter(ConvertBean convertBean) {
-		this.convertBean = convertBean;
+		_convertBean = convertBean;
 	}
 
 	@Override
@@ -45,17 +45,19 @@ public class DateArrayConverter implements TypeConverter<Date[]> {
 				return convertArray(values);
 			}
 
-			return new Date[] {convertBean.toDate(value)};
+			return new Date[] {_convertBean.toDate(value)};
 		}
 
-		if (type.getComponentType().isPrimitive()) {
+		Class<?> componentType = type.getComponentType();
+
+		if (componentType.isPrimitive()) {
 			if (type == long[].class) {
 				long[] values = (long[])value;
 
 				Date[] results = new Date[values.length];
 
 				for (int i = 0; i < values.length; i++) {
-					results[i] = convertBean.toDate(values[i]);
+					results[i] = _convertBean.toDate(values[i]);
 				}
 
 				return results;
@@ -69,12 +71,12 @@ public class DateArrayConverter implements TypeConverter<Date[]> {
 		Date[] results = new Date[values.length];
 
 		for (int i = 0; i < values.length; i++) {
-			results[i] = convertBean.toDate(values[i]);
+			results[i] = _convertBean.toDate(values[i]);
 		}
 
 		return results;
 	}
 
-	protected final ConvertBean convertBean;
+	private ConvertBean _convertBean;
 
 }

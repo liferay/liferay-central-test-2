@@ -25,7 +25,7 @@ import jodd.util.CsvUtil;
 public class NumberArrayConverter implements TypeConverter<Number[]> {
 
 	public NumberArrayConverter(ConvertBean convertBean) {
-		this.convertBean = convertBean;
+		_convertBean = convertBean;
 	}
 
 	@Override
@@ -43,65 +43,12 @@ public class NumberArrayConverter implements TypeConverter<Number[]> {
 				return convertArray(values);
 			}
 
-			return new Number[] {convertBean.toBigDecimal(value)};
+			return new Number[] {_convertBean.toBigDecimal(value)};
 		}
 
-		if (type.getComponentType().isPrimitive()) {
-			if (type == double[].class) {
-				double[] values = (double[])value;
-				Number[] results = new Number[values.length];
+		Class<?> componentType = type.getComponentType();
 
-				for (int i = 0; i < values.length; i++) {
-					results[i] = values[i];
-				}
-
-				return results;
-			}
-
-			if (type == float[].class) {
-				float[] values = (float[])value;
-				Number[] results = new Number[values.length];
-
-				for (int i = 0; i < values.length; i++) {
-					results[i] = values[i];
-				}
-
-				return results;
-			}
-
-			if (type == int[].class) {
-				int[] values = (int[])value;
-				Number[] results = new Number[values.length];
-
-				for (int i = 0; i < values.length; i++) {
-					results[i] = values[i];
-				}
-
-				return results;
-			}
-
-			if (type == long[].class) {
-				long[] values = (long[])value;
-				Number[] results = new Number[values.length];
-
-				for (int i = 0; i < values.length; i++) {
-					results[i] = values[i];
-				}
-
-				return results;
-			}
-
-			if (type == byte[].class) {
-				byte[] values = (byte[])value;
-				Number[] results = new Number[values.length];
-
-				for (int i = 0; i < values.length; i++) {
-					results[i] = values[i];
-				}
-
-				return results;
-			}
-
+		if (componentType.isPrimitive()) {
 			if (type == boolean[].class) {
 				boolean[] values = (boolean[])value;
 				Number[] results = new Number[values.length];
@@ -112,8 +59,57 @@ public class NumberArrayConverter implements TypeConverter<Number[]> {
 
 				return results;
 			}
+			else if (type == byte[].class) {
+				byte[] values = (byte[])value;
+				Number[] results = new Number[values.length];
 
-			if (type == short[].class) {
+				for (int i = 0; i < values.length; i++) {
+					results[i] = values[i];
+				}
+
+				return results;
+			}
+			else if (type == double[].class) {
+				double[] values = (double[])value;
+				Number[] results = new Number[values.length];
+
+				for (int i = 0; i < values.length; i++) {
+					results[i] = values[i];
+				}
+
+				return results;
+			}
+			else if (type == float[].class) {
+				float[] values = (float[])value;
+				Number[] results = new Number[values.length];
+
+				for (int i = 0; i < values.length; i++) {
+					results[i] = values[i];
+				}
+
+				return results;
+			}
+			else if (type == int[].class) {
+				int[] values = (int[])value;
+				Number[] results = new Number[values.length];
+
+				for (int i = 0; i < values.length; i++) {
+					results[i] = values[i];
+				}
+
+				return results;
+			}
+			else if (type == long[].class) {
+				long[] values = (long[])value;
+				Number[] results = new Number[values.length];
+
+				for (int i = 0; i < values.length; i++) {
+					results[i] = values[i];
+				}
+
+				return results;
+			}
+			else if (type == short[].class) {
 				short[] values = (short[])value;
 				Number[] results = new Number[values.length];
 
@@ -132,12 +128,12 @@ public class NumberArrayConverter implements TypeConverter<Number[]> {
 		Number[] results = new Number[values.length];
 
 		for (int i = 0; i < values.length; i++) {
-			results[i] = convertBean.toBigDecimal(values[i]);
+			results[i] = _convertBean.toBigDecimal(values[i]);
 		}
 
 		return results;
 	}
 
-	protected final ConvertBean convertBean;
+	protected ConvertBean _convertBean;
 
 }
