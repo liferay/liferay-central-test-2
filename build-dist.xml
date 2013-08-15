@@ -1565,7 +1565,7 @@ rerun this task.
 			<equals arg1="${app.server.weblogic.version.build}" arg2="1212" />
 			<then>
 				<move todir="${app.server.weblogic.dir}">
-					<fileset dir="${app.server.weblogic.dir}/wls12120"/>
+					<fileset dir="${app.server.weblogic.dir}/wls12120" />
 				</move>
 
 				<property name="app.server.weblogic.template.dir" value="${app.server.weblogic.wlserver.dir}/common/templates/wls" />
