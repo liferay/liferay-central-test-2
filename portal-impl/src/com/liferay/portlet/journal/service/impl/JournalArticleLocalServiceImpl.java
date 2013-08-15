@@ -662,7 +662,7 @@ public class JournalArticleLocalServiceImpl
 
 		checkArticlesByReviewDate(now);
 
-		checkArticlesByLtD_S(now);
+		checkArticlesByDisplayDate(now);
 
 		_previousCheckDate = now;
 	}
@@ -5447,13 +5447,14 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkArticlesByExpirationDate(Date sinceDate)
+	protected void checkArticlesByExpirationDate(Date expirationDate)
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles =
 			journalArticleFinder.findByExpirationDate(
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-				new Date(sinceDate.getTime() + _JOURNAL_ARTICLE_CHECK_INTERVAL),
+				new Date(
+					expirationDate.getTime() + _JOURNAL_ARTICLE_CHECK_INTERVAL),
 				new QueryDefinition(WorkflowConstants.STATUS_APPROVED));
 
 		if (_log.isDebugEnabled()) {
@@ -5499,15 +5500,15 @@ public class JournalArticleLocalServiceImpl
 
 		if (_previousCheckDate == null) {
 			_previousCheckDate = new Date(
-				sinceDate.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL);
+				expirationDate.getTime() - _JOURNAL_ARTICLE_CHECK_INTERVAL);
 		}
 	}
 
-	protected void checkArticlesByLtD_S(Date sinceDate)
+	protected void checkArticlesByDisplayDate(Date displayDate)
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = journalArticlePersistence.findByLtD_S(
-			sinceDate, WorkflowConstants.STATUS_SCHEDULED);
+			displayDate, WorkflowConstants.STATUS_SCHEDULED);
 
 		for (JournalArticle article : articles) {
 			ServiceContext serviceContext = new ServiceContext();
@@ -5527,11 +5528,11 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkArticlesByReviewDate(Date sinceDate)
+	protected void checkArticlesByReviewDate(Date reviewDate)
 		throws PortalException, SystemException {
 
 		List<JournalArticle> articles = journalArticleFinder.findByReviewDate(
-			JournalArticleConstants.CLASSNAME_ID_DEFAULT, sinceDate,
+			JournalArticleConstants.CLASSNAME_ID_DEFAULT, reviewDate,
 			_previousCheckDate);
 
 		if (_log.isDebugEnabled()) {
