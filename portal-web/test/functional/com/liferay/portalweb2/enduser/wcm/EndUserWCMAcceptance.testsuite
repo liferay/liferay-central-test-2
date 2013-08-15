@@ -29,5 +29,7 @@
 
 	<execute test-suite="RecyclebinWikiAcceptance" />
 
+	<execute test-suite="PGStagingAcceptance" />
+	
 	<execute test-suite="DockbarAcceptance" />
 </definition>
