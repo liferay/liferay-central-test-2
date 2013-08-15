@@ -1568,10 +1568,10 @@ rerun this task.
 					<fileset dir="${app.server.weblogic.dir}/wls12120"/>
 				</move>
 
-				<property name="weblogic.template.path" value="${app.server.weblogic.wlserver.dir}/common/templates/wls/wls.jar" />
+				<property name="app.server.weblogic.template.dir" value="${app.server.weblogic.wlserver.dir}/common/templates/wls" />
 			</then>
 			<else>
-				<property name="weblogic.template.path" value="${app.server.weblogic.wlserver.dir}/common/templates/domains/wls.jar" />
+				<property name="app.server.weblogic.template.dir" value="${app.server.weblogic.wlserver.dir}/common/templates/domains" />
 			</else>
 		</if>
 
@@ -1582,7 +1582,7 @@ rerun this task.
 		<mkdir dir="${tstamp.value}" />
 
 		<echo file="${tstamp.value}/create-weblogic-domain.py">
-readTemplate('${weblogic.template.path}')
+readTemplate('${app.server.weblogic.template.dir}/wls.jar')
 
 set('Name', '${app.server.weblogic.instance.name}')
 
