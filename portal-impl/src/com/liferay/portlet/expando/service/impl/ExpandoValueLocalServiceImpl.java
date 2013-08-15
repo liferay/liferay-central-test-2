@@ -53,6 +53,22 @@ import jodd.typeconverter.TypeConverterManagerBean;
 public class ExpandoValueLocalServiceImpl
 	extends ExpandoValueLocalServiceBaseImpl {
 
+	public ExpandoValueLocalServiceImpl() {
+		TypeConverterManagerBean defaultTypeConverterManager =
+			TypeConverterManager.getDefaultTypeConverterManager();
+
+		defaultTypeConverterManager.register(
+			Date[].class,
+			new DateArrayConverter(
+				defaultTypeConverterManager.getConvertBean()));
+		defaultTypeConverterManager.register(
+			Number[].class,
+			new NumberArrayConverter(
+				defaultTypeConverterManager.getConvertBean()));
+		defaultTypeConverterManager.register(
+			Number.class, new NumberConverter());
+	}
+
 	@Override
 	public ExpandoValue addValue(
 			long classNameId, long tableId, long columnId, long classPK,
@@ -2448,22 +2464,6 @@ public class ExpandoValueLocalServiceImpl
 		}
 
 		return false;
-	}
-
-	static {
-		TypeConverterManagerBean defaultTypeConverterManager =
-			TypeConverterManager.getDefaultTypeConverterManager();
-
-		defaultTypeConverterManager.register(
-			Date[].class,
-			new DateArrayConverter(
-				defaultTypeConverterManager.getConvertBean()));
-		defaultTypeConverterManager.register(
-			Number[].class,
-			new NumberArrayConverter(
-				defaultTypeConverterManager.getConvertBean()));
-		defaultTypeConverterManager.register(
-			Number.class, new NumberConverter());
 	}
 
 }
