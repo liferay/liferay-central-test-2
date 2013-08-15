@@ -45,8 +45,8 @@
 </tr>
 <tr>
 	<td>PAGE_VARIATION</td>
-	<td>//ul[@class='nav nav-tabs variations-tabview-list']/li[2]/span[contains(.,'${key_pageVariationName}')]</td>
-	<td>${key_pageVariationName}</td>
+	<td>//ul[@class='nav nav-tabs variations-tabview-list']/li/span[contains(.,'${key_pageVariationName}')]</td>
+	<td></td>
 </tr>
 <tr>
 	<td></td>

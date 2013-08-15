@@ -44,8 +44,8 @@
 		<var name="pageVariationName" value="Page Variation Name" />
 
 		<execute macro="Page#gotoConfigurationCP">
-			<var name="pageTypeURL" value="${siteName}" />
 			<var name="pageType" value="Site" />
+			<var name="pageTypeURL" value="${siteName}" />
 			<var name="portletName" value="Site Settings" />
 		</execute>
 
