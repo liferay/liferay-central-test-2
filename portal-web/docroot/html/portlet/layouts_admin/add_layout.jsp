@@ -34,7 +34,7 @@ if (layout.isTypeControlPanel()) {
 		parentLayoutId = selLayout.getLayoutId();
 	}
 	else {
-	 	privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
+	 	privateLayout = GetterUtil.getBoolean(request.getAttribute("edit_pages.jsp-privateLayout"));
 	}
 }
 else {
