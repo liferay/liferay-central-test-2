@@ -325,35 +325,6 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashEntryPersistence.findByC_C(classNameId, classPK);
 	}
 
-	/**
-	 * Returns all the trash versions associated with the trash entry.
-	 *
-	 * @param  entryId the primary key of the trash entry
-	 * @return all the trash versions associated with the trash entry
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<TrashVersion> getVersions(long entryId) throws SystemException {
-		return trashVersionPersistence.findByEntryId(entryId);
-	}
-
-	/**
-	 * Returns all the trash versions associated with the trash entry.
-	 *
-	 * @param  className the class name of the trash entity
-	 * @param  classPK the primary key of the trash entity
-	 * @return all the trash versions associated with the trash entry
-	 * @throws SystemException if a system exception occurred
-	 */
-	@Override
-	public List<TrashVersion> getVersions(String className, long classPK)
-		throws SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return trashVersionPersistence.findByC_C(classNameId, classPK);
-	}
-
 	@Override
 	public Hits search(
 			long companyId, long groupId, long userId, String keywords,
