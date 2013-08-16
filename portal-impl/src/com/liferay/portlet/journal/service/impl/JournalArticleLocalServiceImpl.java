@@ -3250,8 +3250,7 @@ public class JournalArticleLocalServiceImpl
 				new HashMap<String, Serializable>(), serviceContext);
 		}
 
-		return moveArticle(
-			groupId, article.getArticleId(), newFolderId);
+		return moveArticle(groupId, article.getArticleId(), newFolderId);
 	}
 
 	/**
