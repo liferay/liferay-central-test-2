@@ -415,19 +415,18 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 	protected void validate(long ddmStructureId, Fields fields)
 		throws Exception {
 
+		// Expando
+
 		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
-		String s1 = jsonSerializer.serializeDeep(fields);
-
-		// Expando
+		String expectedFieldsString = jsonSerializer.serializeDeep(fields);
 
 		long classPK = create(_expandoStorageAdapater, ddmStructureId, fields);
 
 		Fields actualFields = _expandoStorageAdapater.getFields(classPK);
 
-		String s2 = jsonSerializer.serializeDeep(actualFields);
-
-		Assert.assertEquals(s1, s2);
+		Assert.assertEquals(
+			expectedFieldsString, jsonSerializer.serializeDeep(actualFields));
 
 		// XML
 
@@ -435,9 +434,8 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 
 		actualFields = _xmlStorageAdapater.getFields(classPK);
 
-		s2 = jsonSerializer.serializeDeep(actualFields);
-
-		Assert.assertEquals(s1, s2);
+		Assert.assertEquals(
+			expectedFieldsString, jsonSerializer.serializeDeep(actualFields));
 	}
 
 	private long _classNameId = PortalUtil.getClassNameId(DDLRecordSet.class);
