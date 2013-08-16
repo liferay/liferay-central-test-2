@@ -70,6 +70,8 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				hideDefaultSuccessMessage(portletConfig, actionRequest);
+
 				LayoutSetPrototype layoutSetPrototype =
 					updateLayoutSetPrototype(actionRequest);
 
@@ -87,8 +89,6 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 					PortalUtil.getSiteAdministrationURL(
 						actionResponse, siteThemeDisplay,
 						PortletKeys.SITE_TEMPLATE_SETTINGS);
-
-				hideDefaultSuccessMessage(portletConfig, actionRequest);
 
 				redirect = siteAdministrationURL.toString();
 			}
