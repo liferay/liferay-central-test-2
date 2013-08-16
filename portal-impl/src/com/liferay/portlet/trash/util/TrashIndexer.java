@@ -67,16 +67,6 @@ public class TrashIndexer extends BaseIndexer {
 			contextQuery.addRequiredTerm(
 				Field.COMPANY_ID, searchContext.getCompanyId());
 
-			BooleanQuery excludeArticleVersionsQuery =
-				BooleanQueryFactoryUtil.create(searchContext);
-
-			excludeArticleVersionsQuery.addRequiredTerm(
-				Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
-			excludeArticleVersionsQuery.addRequiredTerm("head", false);
-
-			contextQuery.add(
-				excludeArticleVersionsQuery, BooleanClauseOccur.MUST_NOT);
-
 			BooleanQuery excludeAttachmentsQuery =
 				BooleanQueryFactoryUtil.create(searchContext);
 
@@ -86,6 +76,18 @@ public class TrashIndexer extends BaseIndexer {
 
 			contextQuery.add(
 				excludeAttachmentsQuery, BooleanClauseOccur.MUST_NOT);
+
+			BooleanQuery excludeJournalArticleVersionsQuery =
+				BooleanQueryFactoryUtil.create(searchContext);
+
+			excludeJournalArticleVersionsQuery.addRequiredTerm(
+				Field.ENTRY_CLASS_NAME, JournalArticle.class.getName());
+
+			excludeJournalArticleVersionsQuery.addRequiredTerm("head", false);
+
+			contextQuery.add(
+				excludeJournalArticleVersionsQuery,
+				BooleanClauseOccur.MUST_NOT);
 
 			BooleanQuery groupQuery = BooleanQueryFactoryUtil.create(
 				searchContext);

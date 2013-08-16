@@ -112,9 +112,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 			BooleanQuery contextQuery, SearchContext searchContext)
 		throws Exception {
 
-		boolean relatedClassName = GetterUtil.getBoolean(
-			searchContext.getAttribute("relatedClassName"), false);
-
 		Long classNameId = (Long)searchContext.getAttribute(
 			Field.CLASS_NAME_ID);
 
@@ -202,10 +199,12 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		boolean head = GetterUtil.getBoolean(
-			searchContext.getAttribute("head"), true);
+			searchContext.getAttribute("head"), Boolean.TRUE);
+		boolean relatedClassName = GetterUtil.getBoolean(
+			searchContext.getAttribute("relatedClassName"));
 
 		if (head && !relatedClassName) {
-			contextQuery.addRequiredTerm("head", true);
+			contextQuery.addRequiredTerm("head", Boolean.TRUE);
 		}
 	}
 
@@ -308,7 +307,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 
 		deleteDocument(article.getCompanyId(), article.getId());
 
-		setHead(article);
+		updateArticles(article);
 	}
 
 	@Override
@@ -471,7 +470,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 		SearchEngineUtil.updateDocument(
 			getSearchEngineId(), article.getCompanyId(), document);
 
-		setHead(article);
+		updateArticles(article);
 	}
 
 	@Override
@@ -609,9 +608,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 			}
 
 			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
+			protected void performAction(Object object) throws PortalException {
 				JournalArticle article = (JournalArticle)object;
 
 				Document document = getDocument(article);
@@ -629,7 +626,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 			getSearchEngineId(), companyId, documents);
 	}
 
-	protected void setHead(JournalArticle article) throws Exception {
+	protected void updateArticles(JournalArticle article) throws Exception {
 		JournalArticle latestIndexableArticle =
 			JournalArticleLocalServiceUtil.fetchLatestIndexableArticle(
 				article.getResourcePrimKey());
