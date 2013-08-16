@@ -48,7 +48,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#addPGWithWorkflow">
+		<execute macro="MessageboardsThread#addWithWorkflowPG">
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
 		</execute>
@@ -57,7 +57,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewPGWithWorkflow">
+		<execute macro="MessageboardsThread#viewWithWorkflowPG">
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
 			<var name="workflowTask" value="Review" />
@@ -77,7 +77,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewPGWithWorkflow">
+		<execute macro="MessageboardsThread#viewWithWorkflowPG">
 			<var name="pageName" value="${pageName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -113,7 +113,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#addPGWithWorkflow">
+		<execute macro="MessageboardsThread#addWithWorkflowPG">
 			<var name="pageName" value="${pageName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
@@ -152,7 +152,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewPGWithWorkflow">
+		<execute macro="MessageboardsThread#viewWithWorkflowPG">
 			<var name="pageName" value="${pageName}" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />

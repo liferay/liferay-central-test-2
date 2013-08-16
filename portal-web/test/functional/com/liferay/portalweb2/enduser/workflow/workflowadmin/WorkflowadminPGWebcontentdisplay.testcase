@@ -46,7 +46,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#addPGWithWorkflowViaWCD">
+		<execute macro="WebContent#addWithWorkflowPGViaWCD">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
@@ -55,7 +55,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#viewPGWithWorkflowViaWCD">
+		<execute macro="WebContent#viewWithWorkflowPGViaWCD">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 			<var name="workflowTask" value="Review" />
@@ -75,7 +75,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#viewPGWithWorkflowViaWCD">
+		<execute macro="WebContent#viewWithWorkflowPGViaWCD">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 			<var name="workflowTask" value="Review" />
@@ -109,7 +109,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#addPGWithWorkflowViaWCD">
+		<execute macro="WebContent#addWithWorkflowPGViaWCD">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 		</execute>
@@ -147,7 +147,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#viewPGWithWorkflowViaWCD">
+		<execute macro="WebContent#viewWithWorkflowPGViaWCD">
 			<var name="webContentContent" value="${webContentContent}" />
 			<var name="webContentTitle" value="${webContentTitle}" />
 			<var name="workflowTask" value="Update" />
