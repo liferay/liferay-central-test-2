@@ -190,7 +190,7 @@ public class LDAPAuth implements Authenticator {
 
 				if (Validator.isNotNull(algorithm)) {
 					encryptedPassword = PasswordEncryptorUtil.encrypt(
-						algorithm, password, ldapPassword).toString();
+						algorithm, password, ldapPassword);
 				}
 
 				if (ldapPassword.equals(encryptedPassword)) {
