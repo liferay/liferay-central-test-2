@@ -491,7 +491,6 @@ public class JournalArticleLocalServiceImpl
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public JournalArticle addArticle(
 			long userId, long groupId, long folderId,
@@ -508,7 +507,7 @@ public class JournalArticleLocalServiceImpl
 		int displayDateHour = calendar.get(Calendar.HOUR_OF_DAY);
 		int displayDateMinute = calendar.get(Calendar.MINUTE);
 
-		return addArticle(
+		return journalArticleLocalService.addArticle(
 			userId, groupId, folderId,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, 0, StringPool.BLANK,
 			true, 1, titleMap, descriptionMap, content, "general",
@@ -857,14 +856,14 @@ public class JournalArticleLocalServiceImpl
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.DELETE)
 	@Override
 	@SystemEvent(
 		action = SystemEventConstants.ACTION_SKIP, send = false)
 	public JournalArticle deleteArticle(JournalArticle article)
 		throws PortalException, SystemException {
 
-		return deleteArticle(article, StringPool.BLANK, null);
+		return journalArticleLocalService.deleteArticle(
+			article, StringPool.BLANK, null);
 	}
 
 	/**
@@ -1027,7 +1026,6 @@ public class JournalArticleLocalServiceImpl
 	 *         found or if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.DELETE)
 	@Override
 	public JournalArticle deleteArticle(
 			long groupId, String articleId, double version, String articleURL,
@@ -3252,7 +3250,7 @@ public class JournalArticleLocalServiceImpl
 				new HashMap<String, Serializable>(), serviceContext);
 		}
 
-		return journalArticleLocalService.moveArticle(
+		return moveArticle(
 			groupId, article.getArticleId(), newFolderId);
 	}
 
@@ -4282,7 +4280,6 @@ public class JournalArticleLocalServiceImpl
 	 *         occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public JournalArticle updateArticle(
 			long userId, long groupId, long folderId, String articleId,
@@ -4375,7 +4372,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		return updateArticle(
+		return journalArticleLocalService.updateArticle(
 			userId, groupId, folderId, articleId, version, titleMap,
 			descriptionMap, content, article.getType(),
 			article.getStructureId(), article.getTemplateId(), layoutUuid,
@@ -4753,7 +4750,6 @@ public class JournalArticleLocalServiceImpl
 	 *         occurred
 	 * @throws SystemException if a system exception occurred
 	 */
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public JournalArticle updateArticle(
 			long userId, long groupId, long folderId, String articleId,
@@ -4763,7 +4759,7 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.findByG_A_V(
 			groupId, articleId, version);
 
-		return updateArticle(
+		return journalArticleLocalService.updateArticle(
 			userId, groupId, folderId, articleId, version,
 			article.getTitleMap(), article.getDescriptionMap(), content,
 			article.getLayoutUuid(), serviceContext);
@@ -4774,7 +4770,6 @@ public class JournalArticleLocalServiceImpl
 	 *             #updateArticleTranslation(long, String, double, Locale,
 	 *             String, String, String, Map, ServiceContext)}
 	 */
-	@Indexable(type = IndexableType.REINDEX)
 	@Override
 	public JournalArticle updateArticleTranslation(
 			long groupId, String articleId, double version, Locale locale,
@@ -4782,7 +4777,7 @@ public class JournalArticleLocalServiceImpl
 			Map<String, byte[]> images)
 		throws PortalException, SystemException {
 
-		return updateArticleTranslation(
+		return journalArticleLocalService.updateArticleTranslation(
 			groupId, articleId, version, locale, title, description, content,
 			images, null);
 	}
