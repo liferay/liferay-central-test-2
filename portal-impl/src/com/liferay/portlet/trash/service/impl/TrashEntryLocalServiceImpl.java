@@ -278,6 +278,15 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		return trashEntryPersistence.findByGroupId(groupId, start, end, obc);
 	}
 
+	@Override
+	public List<TrashEntry> getEntries(long groupId, String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return trashEntryPersistence.findByG_C(groupId, classNameId);
+	}
+
 	/**
 	 * Returns the number of trash entries with the group ID.
 	 *

@@ -15,6 +15,7 @@
 package com.liferay.portlet.trash.service.impl;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.trash.model.TrashVersion;
 import com.liferay.portlet.trash.service.base.TrashVersionLocalServiceBaseImpl;
@@ -28,8 +29,52 @@ public class TrashVersionLocalServiceImpl
 	extends TrashVersionLocalServiceBaseImpl {
 
 	@Override
+	public void addTrashVersion(
+			long trashEntryId, String className, long classPK, int status)
+		throws SystemException {
+
+		long versionId = counterLocalService.increment();
+
+		TrashVersion trashVersion = trashVersionPersistence.create(versionId);
+
+		trashVersion.setEntryId(trashEntryId);
+		trashVersion.setClassName(className);
+		trashVersion.setClassPK(classPK);
+		trashVersion.setStatus(status);
+
+		trashVersionPersistence.update(trashVersion);
+	}
+
+	@Override
+	public TrashVersion fetchVersion(
+			long entryId, String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		TrashVersion version = trashVersionPersistence.fetchByE_C_C(
+			entryId, classNameId, classPK);
+
+		return version;
+	}
+
+	@Override
 	public List<TrashVersion> getVersions(long entryId) throws SystemException {
 		return trashVersionPersistence.findByEntryId(entryId);
+	}
+
+	@Override
+	public List<TrashVersion> getVersions(long entryId, String className)
+		throws SystemException {
+
+		if (Validator.isNull(className)) {
+			return trashVersionPersistence.findByEntryId(entryId);
+		}
+		else {
+			long classNameId = PortalUtil.getClassNameId(className);
+
+			return trashVersionPersistence.findByE_C(entryId, classNameId);
+		}
 	}
 
 	/**
