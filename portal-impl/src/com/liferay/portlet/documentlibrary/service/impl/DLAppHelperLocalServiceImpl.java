@@ -684,7 +684,7 @@ public class DLAppHelperLocalServiceImpl
 		Map<String, Serializable> workflowContext =
 			new HashMap<String, Serializable>();
 
-		List<TrashVersion> trashVersions = trashEntryLocalService.getVersions(
+		List<TrashVersion> trashVersions = trashVersionLocalService.getVersions(
 			trashEntry.getEntryId());
 
 		workflowContext.put("trashVersions", (Serializable)trashVersions);
