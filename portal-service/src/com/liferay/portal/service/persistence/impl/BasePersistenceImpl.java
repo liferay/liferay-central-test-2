@@ -66,13 +66,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 
-	public BasePersistenceImpl() {
-	}
-
-	public BasePersistenceImpl(Class<T> modelClass) {
-		_modelClass = modelClass;
-	}
-
 	@Override
 	public void clearCache() {
 	}
@@ -491,6 +484,10 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 */
 	protected T removeImpl(T model) throws SystemException {
 		throw new UnsupportedOperationException();
+	}
+
+	protected void setModelClass(Class<T> modelClass) {
+		_modelClass = modelClass;
 	}
 
 	/**

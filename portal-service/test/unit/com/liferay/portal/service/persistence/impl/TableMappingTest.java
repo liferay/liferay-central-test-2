@@ -1362,7 +1362,7 @@ public class TableMappingTest {
 		extends BasePersistenceImpl<T> {
 
 		public MockPersistence(Class<T> clazz) {
-			super(clazz);
+			setModelClass(clazz);
 		}
 
 		@Override

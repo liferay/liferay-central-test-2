@@ -147,7 +147,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	</#list>
 
 	public ${entity.name}PersistenceImpl() {
-		super(${entity.name}.class);
+		setModelClass(${entity.name}.class);
 	}
 
 	/**
