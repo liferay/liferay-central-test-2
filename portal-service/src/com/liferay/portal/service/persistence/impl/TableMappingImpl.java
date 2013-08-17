@@ -154,6 +154,28 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
+	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
+		throws SystemException {
+
+		return doDeleteMappingsByMasterPrimaryKey(
+			leftBasePersistence, rightBasePersistence, leftToRightPortalCache,
+			rightToLeftPortalCache,
+			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery,
+			deleteMappingsByLeftPrimaryKeySqlUpdate, leftPrimaryKey);
+	}
+
+	@Override
+	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
+		throws SystemException {
+
+		return doDeleteMappingsByMasterPrimaryKey(
+			rightBasePersistence, leftBasePersistence, rightToLeftPortalCache,
+			leftToRightPortalCache,
+			getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery,
+			deleteMappingsByRightPrimaryKeySqlUpdate, rightPrimaryKey);
+	}
+
+	@Override
 	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
@@ -209,28 +231,6 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		}
 
 		return false;
-	}
-
-	@Override
-	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
-		throws SystemException {
-
-		return doDeleteMappingsByMasterPrimaryKey(
-			leftBasePersistence, rightBasePersistence, leftToRightPortalCache,
-			rightToLeftPortalCache,
-			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery,
-			deleteMappingsByLeftPrimaryKeySqlUpdate, leftPrimaryKey);
-	}
-
-	@Override
-	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
-		throws SystemException {
-
-		return doDeleteMappingsByMasterPrimaryKey(
-			rightBasePersistence, leftBasePersistence, rightToLeftPortalCache,
-			leftToRightPortalCache,
-			getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery,
-			deleteMappingsByRightPrimaryKeySqlUpdate, rightPrimaryKey);
 	}
 
 	@Override

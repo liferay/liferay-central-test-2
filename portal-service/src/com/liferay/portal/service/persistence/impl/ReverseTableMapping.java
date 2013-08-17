@@ -45,13 +45,6 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
-		throws SystemException {
-
-		return _tableMapping.deleteTableMapping(rightPrimaryKey, leftPrimaryKey);
-	}
-
-	@Override
 	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
 		throws SystemException {
 
@@ -63,6 +56,13 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 		throws SystemException {
 
 		return _tableMapping.deleteLeftPrimaryKeyTableMappings(rightPrimaryKey);
+	}
+
+	@Override
+	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
+		throws SystemException {
+
+		return _tableMapping.deleteTableMapping(rightPrimaryKey, leftPrimaryKey);
 	}
 
 	@Override
@@ -78,8 +78,7 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] getLeftPrimaryKeys(long rightPrimaryKey)
 		throws SystemException {
 
-		return _tableMapping.getRightPrimaryKeys(
-			rightPrimaryKey);
+		return _tableMapping.getRightPrimaryKeys(rightPrimaryKey);
 	}
 
 	@Override
@@ -92,16 +91,14 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 			long leftPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return _tableMapping.getLeftBaseModels(
-			leftPrimaryKey, start, end, obc);
+		return _tableMapping.getLeftBaseModels(leftPrimaryKey, start, end, obc);
 	}
 
 	@Override
 	public long[] getRightPrimaryKeys(long leftPrimaryKey)
 		throws SystemException {
 
-		return _tableMapping.getLeftPrimaryKeys(
-			leftPrimaryKey);
+		return _tableMapping.getLeftPrimaryKeys(leftPrimaryKey);
 	}
 
 	@Override

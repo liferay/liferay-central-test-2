@@ -887,9 +887,8 @@ public class TableMappingTest {
 
 		long rightPrimaryKey = 1;
 
-		long[] leftPrimaryKeys =
-			_tableMappingImpl.getLeftPrimaryKeys(
-				rightPrimaryKey);
+		long[] leftPrimaryKeys = _tableMappingImpl.getLeftPrimaryKeys(
+			rightPrimaryKey);
 
 		Assert.assertEquals(0, leftPrimaryKeys.length);
 
@@ -897,8 +896,7 @@ public class TableMappingTest {
 
 		Assert.assertSame(
 			leftPrimaryKeys,
-			_tableMappingImpl.getLeftPrimaryKeys(
-				rightPrimaryKey));
+			_tableMappingImpl.getLeftPrimaryKeys(rightPrimaryKey));
 
 		// Get 2 results, ensure ordered
 
@@ -913,8 +911,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey1, new long[] {rightPrimaryKey});
 		_mappingStore.put(leftPrimaryKey2, new long[] {rightPrimaryKey});
 
-		leftPrimaryKeys = _tableMappingImpl.getLeftPrimaryKeys(
-			rightPrimaryKey);
+		leftPrimaryKeys = _tableMappingImpl.getLeftPrimaryKeys(rightPrimaryKey);
 
 		Assert.assertArrayEquals(
 			new long[] {leftPrimaryKey2, leftPrimaryKey1}, leftPrimaryKeys);
@@ -933,8 +930,7 @@ public class TableMappingTest {
 			true);
 
 		try {
-			_tableMappingImpl.getLeftPrimaryKeys(
-				rightPrimaryKey);
+			_tableMappingImpl.getLeftPrimaryKeys(rightPrimaryKey);
 		}
 		catch (SystemException se) {
 			Throwable cause = se.getCause();
@@ -1084,9 +1080,8 @@ public class TableMappingTest {
 
 		long leftPrimaryKey = 1;
 
-		long[] rightPrimaryKeys =
-			_tableMappingImpl.getRightPrimaryKeys(
-				leftPrimaryKey);
+		long[] rightPrimaryKeys = _tableMappingImpl.getRightPrimaryKeys(
+			leftPrimaryKey);
 
 		Assert.assertEquals(0, rightPrimaryKeys.length);
 
@@ -1094,8 +1089,7 @@ public class TableMappingTest {
 
 		Assert.assertSame(
 			rightPrimaryKeys,
-			_tableMappingImpl.getRightPrimaryKeys(
-				leftPrimaryKey));
+			_tableMappingImpl.getRightPrimaryKeys(leftPrimaryKey));
 
 		// Get 2 results, ensure ordered
 
@@ -1110,9 +1104,8 @@ public class TableMappingTest {
 		_mappingStore.put(
 			leftPrimaryKey, new long[] {rightPrimaryKey1, rightPrimaryKey2});
 
-		rightPrimaryKeys =
-			_tableMappingImpl.getRightPrimaryKeys(
-				leftPrimaryKey);
+		rightPrimaryKeys = _tableMappingImpl.getRightPrimaryKeys(
+			leftPrimaryKey);
 
 		Assert.assertArrayEquals(
 			new long[] {rightPrimaryKey2, rightPrimaryKey1}, rightPrimaryKeys);
@@ -1131,8 +1124,7 @@ public class TableMappingTest {
 			true);
 
 		try {
-			_tableMappingImpl.getRightPrimaryKeys(
-				leftPrimaryKey);
+			_tableMappingImpl.getRightPrimaryKeys(leftPrimaryKey);
 		}
 		catch (SystemException se) {
 			Throwable cause = se.getCause();

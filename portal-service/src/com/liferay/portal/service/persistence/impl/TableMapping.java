@@ -33,13 +33,13 @@ public interface TableMapping<L extends BaseModel<L>, R extends BaseModel<R>> {
 			long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException;
 
-	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
-		throws SystemException;
-
 	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
 		throws SystemException;
 
 	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
+		throws SystemException;
+
+	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException;
 
 	public List<L> getLeftBaseModels(
