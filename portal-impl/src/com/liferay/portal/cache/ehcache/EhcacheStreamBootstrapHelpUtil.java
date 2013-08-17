@@ -62,22 +62,8 @@ import net.sf.ehcache.Element;
 public class EhcacheStreamBootstrapHelpUtil {
 
 	public static SocketAddress createServerSocketFromCluster(
-			List<String> allCacheNames, List<String> toLoadCacheNames)
+			List<String> allCacheNames, List<String> newCacheNames)
 		throws Exception {
-
-		EhcachePortalCacheManager<?, ?> ehcachePortalCacheManager =
-			(EhcachePortalCacheManager<?, ?>)PortalBeanLocatorUtil.locate(
-				_BEAN_NAME_MULTI_VM_PORTAL_CACHE_MANAGER);
-
-		CacheManager cacheManager =
-			ehcachePortalCacheManager.getEhcacheManager();
-
-		if (allCacheNames != null) {
-			toLoadCacheNames.addAll(
-				Arrays.asList(cacheManager.getCacheNames()));
-
-			toLoadCacheNames.removeAll(allCacheNames);
-		}
 
 		ServerSocketChannel serverSocketChannel =
 			SocketUtil.createServerSocketChannel(
@@ -87,9 +73,22 @@ public class EhcacheStreamBootstrapHelpUtil {
 
 		ServerSocket serverSocket = serverSocketChannel.socket();
 
+		EhcachePortalCacheManager<?, ?> ehcachePortalCacheManager =
+			(EhcachePortalCacheManager<?, ?>)PortalBeanLocatorUtil.locate(
+				_BEAN_NAME_MULTI_VM_PORTAL_CACHE_MANAGER);
+
+		CacheManager cacheManager =
+			ehcachePortalCacheManager.getEhcacheManager();
+
+		if (allCacheNames != null) {
+			newCacheNames.addAll(Arrays.asList(cacheManager.getCacheNames()));
+
+			newCacheNames.removeAll(allCacheNames);
+		}
+
 		EhcacheStreamServerThread ehcacheStreamServerThread =
 			new EhcacheStreamServerThread(
-				serverSocket, cacheManager, toLoadCacheNames);
+				serverSocket, cacheManager, newCacheNames);
 
 		ehcacheStreamServerThread.start();
 
@@ -97,7 +96,7 @@ public class EhcacheStreamBootstrapHelpUtil {
 	}
 
 	protected static void loadCachesFromCluster(
-			boolean synchronizeCaches, Ehcache... toLoadEhcaches)
+			boolean synchronizeCaches, Ehcache... newEhcaches)
 		throws Exception {
 
 		List<Address> clusterNodeAddresses =
@@ -110,7 +109,8 @@ public class EhcacheStreamBootstrapHelpUtil {
 		if (clusterNodeAddresses.size() <= 1) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"No cluster peer found, skip load cache from cluster.");
+					"Not loading cache from cluster because a cluster peer " +
+						"was not found");
 			}
 
 			return;
@@ -129,16 +129,16 @@ public class EhcacheStreamBootstrapHelpUtil {
 			allCacheNames = Arrays.asList(cacheManager.getCacheNames());
 		}
 
-		List<String> toLoadCacheNames = new ArrayList<String>();
+		List<String> newCacheNames = new ArrayList<String>();
 
-		for (Ehcache ehcache : toLoadEhcaches) {
-			toLoadCacheNames.add(ehcache.getName());
+		for (Ehcache ehcache : newEhcaches) {
+			newCacheNames.add(ehcache.getName());
 		}
 
 		ClusterRequest clusterRequest = ClusterRequest.createMulticastRequest(
 			new MethodHandler(
 				_createServerSocketFromClusterMethodKey, allCacheNames,
-				toLoadCacheNames),
+				newCacheNames),
 			true);
 
 		FutureClusterResponses futureClusterResponses =
@@ -161,14 +161,15 @@ public class EhcacheStreamBootstrapHelpUtil {
 		if (clusterNodeResponse == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Load cache from cluster timeout, no peer responsed.");
+					"Unable to load cache from the cluster because there " +
+						"was no peer response");
 			}
 
 			return;
 		}
 
-		ObjectInputStream objectInputStream = null;
 		Socket socket = null;
+		ObjectInputStream objectInputStream = null;
 
 		try {
 			SocketAddress remoteSocketAddress =
@@ -177,7 +178,7 @@ public class EhcacheStreamBootstrapHelpUtil {
 			if (remoteSocketAddress == null) {
 				_log.error(
 					"Cluster peer " + clusterNodeResponse.getClusterNode() +
-						" responsed null SocketAddress.");
+						" responded with a null socket address");
 
 				return;
 			}
@@ -240,15 +241,15 @@ public class EhcacheStreamBootstrapHelpUtil {
 
 	private static final String _COMMAND_SOCKET_CLOSE = "${SOCKET_CLOSE}";
 
-	private static final MethodKey _createServerSocketFromClusterMethodKey =
+	private static Log _log = LogFactoryUtil.getLog(
+		EhcacheStreamBootstrapHelpUtil.class);
+
+	private static MethodKey _createServerSocketFromClusterMethodKey =
 		new MethodKey(
 			EhcacheStreamBootstrapHelpUtil.class,
 			"createServerSocketFromCluster", List.class, List.class);
-	private static final ServerSocketConfigurator _serverSocketConfigurator =
+	private static ServerSocketConfigurator _serverSocketConfigurator =
 		new SocketCacheServerSocketConfiguration();
-
-	private static Log _log = LogFactoryUtil.getLog(
-		EhcacheStreamBootstrapHelpUtil.class);
 
 	private static class EhcacheElement implements Serializable {
 
@@ -277,10 +278,8 @@ public class EhcacheStreamBootstrapHelpUtil {
 			_cacheNames = cacheNames;
 
 			setDaemon(true);
-
 			setName(
 				EhcacheStreamServerThread.class.getName() + " - " + cacheNames);
-
 			setPriority(Thread.NORM_PRIORITY);
 		}
 
@@ -382,8 +381,8 @@ public class EhcacheStreamBootstrapHelpUtil {
 			}
 		}
 
-		private List<String> _cacheNames;
 		private CacheManager _cacheManager;
+		private List<String> _cacheNames;
 		private ServerSocket _serverSocket;
 
 	}
