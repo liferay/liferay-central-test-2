@@ -149,6 +149,7 @@ public class TransactionalExecutionTestListener
 	}
 
 	private static Method _popCallbackListMethod;
+	private static Method _pushCallbackListMethod;
 
 	static {
 		Class<?> clazz = TransactionalExecutionTestListener.class;
@@ -160,17 +161,15 @@ public class TransactionalExecutionTestListener
 				"com.liferay.portal.spring.transaction." +
 					"TransactionCommitCallbackUtil");
 
-			_pushCallbackListMethod = ReflectionUtil.getDeclaredMethod(
-				transactionCommitCallbackUtilClass, "pushCallbackList");
 			_popCallbackListMethod = ReflectionUtil.getDeclaredMethod(
 				transactionCommitCallbackUtilClass, "popCallbackList");
+			_pushCallbackListMethod = ReflectionUtil.getDeclaredMethod(
+				transactionCommitCallbackUtilClass, "pushCallbackList");
 		}
 		catch (Exception e) {
 			throw new ExceptionInInitializerError(e);
 		}
 	}
-
-	private static Method _pushCallbackListMethod;
 
 	private PlatformTransactionManager _platformTransactionManager;
 	private TransactionAttributeSource _transactionAttributeSource;
