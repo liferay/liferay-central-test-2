@@ -56,7 +56,7 @@ import org.junit.Test;
 /**
  * @author Shuyang Zhou
  */
-public class TableMappingTest {
+public class TableMappingImplTest {
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -75,7 +75,7 @@ public class TableMappingTest {
 
 	@Before
 	public void setUp() {
-		Class<?> clazz = TableMappingTest.class;
+		Class<?> clazz = TableMappingImplTest.class;
 
 		ClassLoader classLoader = clazz.getClassLoader();
 

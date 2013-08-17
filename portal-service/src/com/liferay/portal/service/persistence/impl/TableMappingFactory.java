@@ -25,18 +25,19 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class TableMappingFactory {
 
-	public static <L extends BaseModel<L>, R extends BaseModel<R>>
-		TableMapping<L, R> getTableMapping(
-			String mappingTableName, String leftColumnName,
-			String rightColumnName, BasePersistence<L> leftPersistence,
-			BasePersistence<R> rightPersistence) {
+	public static
+		<L extends BaseModel<L>, R extends BaseModel<R>> TableMapping<L, R>
+			getTableMapping(
+				String tableName, String leftColumnName,
+				String rightColumnName, BasePersistence<L> leftPersistence,
+				BasePersistence<R> rightPersistence) {
 
-		TableMapping<?, ?> tableMapping = tableMappings.get(mappingTableName);
+		TableMapping<?, ?> tableMapping = tableMappings.get(tableName);
 
 		if (tableMapping == null) {
 			TableMappingImpl<L, R> tableMappingImpl =
 				new TableMappingImpl<L, R>(
-					mappingTableName, leftColumnName, rightColumnName,
+					tableName, leftColumnName, rightColumnName,
 					leftPersistence, rightPersistence);
 
 			tableMappingImpl.setReverseTableMapping(
@@ -44,7 +45,7 @@ public class TableMappingFactory {
 
 			tableMapping = tableMappingImpl;
 
-			tableMappings.put(mappingTableName, tableMapping);
+			tableMappings.put(tableName, tableMapping);
 		}
 		else if (!tableMapping.matches(leftColumnName, rightColumnName)) {
 			tableMapping = tableMapping.getReverseTableMapping();

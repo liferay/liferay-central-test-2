@@ -38,10 +38,12 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public boolean containsTableMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean containsTableMapping(
+			long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
-		return _tableMapping.containsTableMapping(rightPrimaryKey, leftPrimaryKey);
+		return _tableMapping.containsTableMapping(
+			rightPrimaryKey, leftPrimaryKey);
 	}
 
 	@Override
