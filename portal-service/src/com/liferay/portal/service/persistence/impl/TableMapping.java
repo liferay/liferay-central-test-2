@@ -26,35 +26,36 @@ import java.util.List;
  */
 public interface TableMapping<L extends BaseModel<L>, R extends BaseModel<R>> {
 
-	public boolean addMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean addTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException;
 
-	public boolean containsMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean containsTableMapping(
+			long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException;
 
-	public boolean deleteMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException;
 
-	public int deleteMappingsByLeftPrimaryKey(long leftPrimaryKey)
+	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
 		throws SystemException;
 
-	public int deleteMappingsByRightPrimaryKey(long rightPrimaryKey)
+	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
 		throws SystemException;
 
-	public List<L> getLeftBaseModelsByRightPrimaryKey(
+	public List<L> getLeftBaseModels(
 			long rightPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException;
 
-	public long[] getLeftPrimaryKeysByRightPrimaryKey(long rightPrimaryKey)
+	public long[] getLeftPrimaryKeys(long rightPrimaryKey)
 		throws SystemException;
 
 	public TableMapping<R, L> getReverseTableMapping();
 
-	public List<R> getRightBaseModelsByLeftPrimaryKey(
+	public List<R> getRightBaseModels(
 			long leftPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException;
 
-	public long[] getRightPrimaryKeysByLeftPrimaryKey(long leftPrimaryKey)
+	public long[] getRightPrimaryKeys(long leftPrimaryKey)
 		throws SystemException;
 
 	public boolean matches(String leftColumnName, String rightColumnName);

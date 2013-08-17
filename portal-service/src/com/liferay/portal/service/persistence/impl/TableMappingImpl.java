@@ -96,7 +96,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public boolean addMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean addTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
 		if (doContainsMapping(leftPrimaryKey, rightPrimaryKey, false)) {
@@ -147,14 +147,14 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public boolean containsMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean containsTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
 		return doContainsMapping(leftPrimaryKey, rightPrimaryKey, true);
 	}
 
 	@Override
-	public boolean deleteMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
 		if (!doContainsMapping(leftPrimaryKey, rightPrimaryKey, false)) {
@@ -212,7 +212,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public int deleteMappingsByLeftPrimaryKey(long leftPrimaryKey)
+	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
 		throws SystemException {
 
 		return doDeleteMappingsByMasterPrimaryKey(
@@ -223,7 +223,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public int deleteMappingsByRightPrimaryKey(long rightPrimaryKey)
+	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
 		throws SystemException {
 
 		return doDeleteMappingsByMasterPrimaryKey(
@@ -234,7 +234,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public List<L> getLeftBaseModelsByRightPrimaryKey(
+	public List<L> getLeftBaseModels(
 			long rightPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -245,7 +245,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public long[] getLeftPrimaryKeysByRightPrimaryKey(long rightPrimaryKey)
+	public long[] getLeftPrimaryKeys(long rightPrimaryKey)
 		throws SystemException {
 
 		return doGetSlavePrimaryKeysByMasterPrimaryKey(
@@ -260,7 +260,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public List<R> getRightBaseModelsByLeftPrimaryKey(
+	public List<R> getRightBaseModels(
 			long leftPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -271,7 +271,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public long[] getRightPrimaryKeysByLeftPrimaryKey(long leftPrimaryKey)
+	public long[] getRightPrimaryKeys(long leftPrimaryKey)
 		throws SystemException {
 
 		return doGetSlavePrimaryKeysByMasterPrimaryKey(

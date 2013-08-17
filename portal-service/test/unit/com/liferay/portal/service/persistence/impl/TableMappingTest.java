@@ -118,12 +118,12 @@ public class TableMappingTest {
 		long rightPrimaryKey = 2;
 
 		Assert.assertTrue(
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Fail, no model listener
 
 		Assert.assertFalse(
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Error, no model listener
 
@@ -133,7 +133,7 @@ public class TableMappingTest {
 		leftToRightPortalCache.put(leftPrimaryKey, new long[0]);
 
 		try {
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey);
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey);
 
 			Assert.fail();
 		}
@@ -150,7 +150,7 @@ public class TableMappingTest {
 		// Auto recover after error
 
 		Assert.assertFalse(
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Success, with model listener
 
@@ -168,7 +168,7 @@ public class TableMappingTest {
 		_rightPersistence.registerListener(rightModelListener);
 
 		Assert.assertTrue(
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		leftModelListener.assertOnBeforeAddAssociation(
 			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
@@ -199,7 +199,7 @@ public class TableMappingTest {
 		_rightPersistence.registerListener(rightModelListener);
 
 		try {
-			_tableMappingImpl.addMapping(leftPrimaryKey, rightPrimaryKey);
+			_tableMappingImpl.addTableMapping(leftPrimaryKey, rightPrimaryKey);
 
 			Assert.fail();
 		}
@@ -282,7 +282,7 @@ public class TableMappingTest {
 		long rightPrimaryKey = 2;
 
 		Assert.assertFalse(
-			_tableMappingImpl.containsMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.containsTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Has mapping
 
@@ -294,7 +294,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey, new long[] {rightPrimaryKey});
 
 		Assert.assertTrue(
-			_tableMappingImpl.containsMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.containsTableMapping(leftPrimaryKey, rightPrimaryKey));
 	}
 
 	@Test
@@ -306,14 +306,14 @@ public class TableMappingTest {
 		long rightPrimaryKey = 2;
 
 		Assert.assertFalse(
-			_tableMappingImpl.deleteMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Success, without model listener
 
 		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
 
 		Assert.assertTrue(
-			_tableMappingImpl.deleteMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		// Success, with model listener
 
@@ -330,7 +330,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
 
 		Assert.assertTrue(
-			_tableMappingImpl.deleteMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
@@ -367,7 +367,7 @@ public class TableMappingTest {
 		mockDeleteSqlUpdate.setDatabaseError(true);
 
 		try {
-			_tableMappingImpl.deleteMapping(leftPrimaryKey, rightPrimaryKey);
+			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey);
 
 			Assert.fail();
 		}
@@ -415,7 +415,7 @@ public class TableMappingTest {
 		leftToRightPortalCache.put(leftPrimaryKey, new long[]{rightPrimaryKey});
 
 		Assert.assertFalse(
-			_tableMappingImpl.deleteMapping(leftPrimaryKey, rightPrimaryKey));
+			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
@@ -443,7 +443,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		// Delete 1 entry
 
@@ -453,7 +453,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		// Delete 2 entries
 
@@ -464,7 +464,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			2,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		// Delete 0 entry, with left model listener
 
@@ -475,7 +475,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			false, null, null, null);
@@ -494,7 +494,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		rightModelListener.assertOnBeforeRemoveAssociation(
 			false, null, null, null);
@@ -514,7 +514,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey1);
@@ -534,7 +534,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
 
 		rightModelListener.assertOnBeforeRemoveAssociation(
 			true, rightPrimaryKey1, Left.class.getName(), leftPrimaryKey);
@@ -563,7 +563,7 @@ public class TableMappingTest {
 		mockDeleteByLeftSqlUpdate.setDatabaseError(true);
 
 		try {
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKey(leftPrimaryKey);
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey);
 
 			Assert.fail();
 		}
@@ -602,7 +602,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		// Delete 1 entry
 
@@ -612,7 +612,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		// Delete 2 entries
 
@@ -623,7 +623,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			2,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		// Delete 0 entry, with left model listener
 
@@ -634,7 +634,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			false, null, null, null);
@@ -653,7 +653,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		rightModelListener.assertOnBeforeRemoveAssociation(
 			false, null, null, null);
@@ -673,7 +673,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		leftModelListener.assertOnBeforeRemoveAssociation(
 			true, leftPrimaryKey1, Right.class.getName(), rightPrimaryKey);
@@ -693,7 +693,7 @@ public class TableMappingTest {
 
 		Assert.assertEquals(
 			1,
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey));
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey));
 
 		rightModelListener.assertOnBeforeRemoveAssociation(
 			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey1);
@@ -723,7 +723,7 @@ public class TableMappingTest {
 		mockDeleteByRightSqlUpdate.setDatabaseError(true);
 
 		try {
-			_tableMappingImpl.deleteMappingsByRightPrimaryKey(rightPrimaryKey);
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey);
 
 			Assert.fail();
 		}
@@ -761,7 +761,7 @@ public class TableMappingTest {
 
 		long rightPrimaryKey = 1;
 
-		List<Left> lefts = _tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+		List<Left> lefts = _tableMappingImpl.getLeftBaseModels(
 			rightPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertSame(Collections.emptyList(), lefts);
@@ -777,7 +777,7 @@ public class TableMappingTest {
 
 		_mappingStore.put(leftPrimaryKey1, new long[] {rightPrimaryKey});
 
-		lefts = _tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+		lefts = _tableMappingImpl.getLeftBaseModels(
 			rightPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(1, lefts.size());
@@ -795,7 +795,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey1, new long[] {rightPrimaryKey});
 		_mappingStore.put(leftPrimaryKey2, new long[] {rightPrimaryKey});
 
-		lefts = _tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+		lefts = _tableMappingImpl.getLeftBaseModels(
 			rightPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(2, lefts.size());
@@ -813,7 +813,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey1, new long[] {rightPrimaryKey});
 		_mappingStore.put(leftPrimaryKey2, new long[] {rightPrimaryKey});
 
-		lefts = _tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+		lefts = _tableMappingImpl.getLeftBaseModels(
 			rightPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			new OrderByComparator() {
 
@@ -847,7 +847,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey2, new long[] {rightPrimaryKey});
 		_mappingStore.put(leftPrimaryKey3, new long[] {rightPrimaryKey});
 
-		lefts = _tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+		lefts = _tableMappingImpl.getLeftBaseModels(
 			rightPrimaryKey, 1, 2, null);
 
 		Assert.assertEquals(1, lefts.size());
@@ -863,7 +863,7 @@ public class TableMappingTest {
 		_leftPersistence.setNoSuchModelException(true);
 
 		try {
-			_tableMappingImpl.getLeftBaseModelsByRightPrimaryKey(
+			_tableMappingImpl.getLeftBaseModels(
 				rightPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 		}
 		catch (SystemException se) {
@@ -888,7 +888,7 @@ public class TableMappingTest {
 		long rightPrimaryKey = 1;
 
 		long[] leftPrimaryKeys =
-			_tableMappingImpl.getLeftPrimaryKeysByRightPrimaryKey(
+			_tableMappingImpl.getLeftPrimaryKeys(
 				rightPrimaryKey);
 
 		Assert.assertEquals(0, leftPrimaryKeys.length);
@@ -897,7 +897,7 @@ public class TableMappingTest {
 
 		Assert.assertSame(
 			leftPrimaryKeys,
-			_tableMappingImpl.getLeftPrimaryKeysByRightPrimaryKey(
+			_tableMappingImpl.getLeftPrimaryKeys(
 				rightPrimaryKey));
 
 		// Get 2 results, ensure ordered
@@ -913,7 +913,7 @@ public class TableMappingTest {
 		_mappingStore.put(leftPrimaryKey1, new long[] {rightPrimaryKey});
 		_mappingStore.put(leftPrimaryKey2, new long[] {rightPrimaryKey});
 
-		leftPrimaryKeys = _tableMappingImpl.getLeftPrimaryKeysByRightPrimaryKey(
+		leftPrimaryKeys = _tableMappingImpl.getLeftPrimaryKeys(
 			rightPrimaryKey);
 
 		Assert.assertArrayEquals(
@@ -933,7 +933,7 @@ public class TableMappingTest {
 			true);
 
 		try {
-			_tableMappingImpl.getLeftPrimaryKeysByRightPrimaryKey(
+			_tableMappingImpl.getLeftPrimaryKeys(
 				rightPrimaryKey);
 		}
 		catch (SystemException se) {
@@ -958,7 +958,7 @@ public class TableMappingTest {
 		long leftPrimaryKey = 1;
 
 		List<Right> rights =
-			_tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+			_tableMappingImpl.getRightBaseModels(
 				leftPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertSame(Collections.emptyList(), rights);
@@ -974,7 +974,7 @@ public class TableMappingTest {
 
 		_mappingStore.put(leftPrimaryKey, new long[] {rightPrimaryKey1});
 
-		rights = _tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+		rights = _tableMappingImpl.getRightBaseModels(
 			leftPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(1, rights.size());
@@ -992,7 +992,7 @@ public class TableMappingTest {
 		_mappingStore.put(
 			leftPrimaryKey, new long[] {rightPrimaryKey2, rightPrimaryKey1});
 
-		rights = _tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+		rights = _tableMappingImpl.getRightBaseModels(
 			leftPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
 		Assert.assertEquals(2, rights.size());
@@ -1010,7 +1010,7 @@ public class TableMappingTest {
 		_mappingStore.put(
 			leftPrimaryKey, new long[] {rightPrimaryKey2, rightPrimaryKey1});
 
-		rights = _tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+		rights = _tableMappingImpl.getRightBaseModels(
 			leftPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			new OrderByComparator() {
 
@@ -1044,7 +1044,7 @@ public class TableMappingTest {
 			leftPrimaryKey,
 			new long[] {rightPrimaryKey3, rightPrimaryKey2, rightPrimaryKey1});
 
-		rights = _tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+		rights = _tableMappingImpl.getRightBaseModels(
 			leftPrimaryKey, 1, 2, null);
 
 		Assert.assertEquals(1, rights.size());
@@ -1060,7 +1060,7 @@ public class TableMappingTest {
 		_rightPersistence.setNoSuchModelException(true);
 
 		try {
-			_tableMappingImpl.getRightBaseModelsByLeftPrimaryKey(
+			_tableMappingImpl.getRightBaseModels(
 				leftPrimaryKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 		}
 		catch (SystemException se) {
@@ -1085,7 +1085,7 @@ public class TableMappingTest {
 		long leftPrimaryKey = 1;
 
 		long[] rightPrimaryKeys =
-			_tableMappingImpl.getRightPrimaryKeysByLeftPrimaryKey(
+			_tableMappingImpl.getRightPrimaryKeys(
 				leftPrimaryKey);
 
 		Assert.assertEquals(0, rightPrimaryKeys.length);
@@ -1094,7 +1094,7 @@ public class TableMappingTest {
 
 		Assert.assertSame(
 			rightPrimaryKeys,
-			_tableMappingImpl.getRightPrimaryKeysByLeftPrimaryKey(
+			_tableMappingImpl.getRightPrimaryKeys(
 				leftPrimaryKey));
 
 		// Get 2 results, ensure ordered
@@ -1111,7 +1111,7 @@ public class TableMappingTest {
 			leftPrimaryKey, new long[] {rightPrimaryKey1, rightPrimaryKey2});
 
 		rightPrimaryKeys =
-			_tableMappingImpl.getRightPrimaryKeysByLeftPrimaryKey(
+			_tableMappingImpl.getRightPrimaryKeys(
 				leftPrimaryKey);
 
 		Assert.assertArrayEquals(
@@ -1131,7 +1131,7 @@ public class TableMappingTest {
 			true);
 
 		try {
-			_tableMappingImpl.getRightPrimaryKeysByLeftPrimaryKey(
+			_tableMappingImpl.getRightPrimaryKeys(
 				leftPrimaryKey);
 		}
 		catch (SystemException se) {
@@ -1188,44 +1188,44 @@ public class TableMappingTest {
 
 		recordInvocationHandler.setTableMapping(reverseTableMapping);
 
-		reverseTableMapping.addMapping(1, 2);
+		reverseTableMapping.addTableMapping(1, 2);
 
 		recordInvocationHandler.assertCall("addMapping", 2L, 1L);
 
-		reverseTableMapping.containsMapping(1, 2);
+		reverseTableMapping.containsTableMapping(1, 2);
 
 		recordInvocationHandler.assertCall("containsMapping", 2L, 1L);
 
-		reverseTableMapping.deleteMappingsByLeftPrimaryKey(1);
+		reverseTableMapping.deleteLeftPrimaryKeyTableMappings(1);
 
 		recordInvocationHandler.assertCall(
 			"deleteMappingsByRightPrimaryKey", 1L);
 
-		reverseTableMapping.deleteMappingsByRightPrimaryKey(2);
+		reverseTableMapping.deleteRightPrimaryKeyTableMappings(2);
 
 		recordInvocationHandler.assertCall(
 			"deleteMappingsByLeftPrimaryKey", 2L);
 
-		reverseTableMapping.deleteMapping(1, 2);
+		reverseTableMapping.deleteTableMapping(1, 2);
 
 		recordInvocationHandler.assertCall("deleteMapping", 2L, 1L);
 
-		reverseTableMapping.getRightPrimaryKeysByLeftPrimaryKey(1);
+		reverseTableMapping.getRightPrimaryKeys(1);
 
 		recordInvocationHandler.assertCall(
 			"getLeftPrimaryKeysByRightPrimaryKey", 1L);
 
-		reverseTableMapping.getRightBaseModelsByLeftPrimaryKey(1, 2, 3, null);
+		reverseTableMapping.getRightBaseModels(1, 2, 3, null);
 
 		recordInvocationHandler.assertCall(
 			"getLeftBaseModelsByRightPrimaryKey", 1L, 2, 3, null);
 
-		reverseTableMapping.getLeftPrimaryKeysByRightPrimaryKey(2);
+		reverseTableMapping.getLeftPrimaryKeys(2);
 
 		recordInvocationHandler.assertCall(
 			"getRightPrimaryKeysByLeftPrimaryKey", 2L);
 
-		reverseTableMapping.getLeftBaseModelsByRightPrimaryKey(2, 2, 3, null);
+		reverseTableMapping.getLeftBaseModels(2, 2, 3, null);
 
 		recordInvocationHandler.assertCall(
 			"getRightBaseModelsByLeftPrimaryKey", 2L, 2, 3, null);
