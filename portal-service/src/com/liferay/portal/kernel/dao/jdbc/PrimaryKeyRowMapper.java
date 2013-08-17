@@ -20,7 +20,7 @@ import java.sql.SQLException;
 /**
  * @author Shuyang Zhou
  */
-public class IdRowMapper implements RowMapper<Long> {
+public class PrimaryKeyRowMapper implements RowMapper<Long> {
 
 	@Override
 	public Long mapRow(ResultSet rs, int rowNumber) throws SQLException {

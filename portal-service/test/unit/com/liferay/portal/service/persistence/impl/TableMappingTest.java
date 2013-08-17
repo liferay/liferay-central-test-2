@@ -1738,7 +1738,7 @@ public class TableMappingTest {
 				sql);
 			Assert.assertArrayEquals(
 				new int[] { java.sql.Types.BIGINT }, types);
-			Assert.assertSame(RowMapper.ID, rowMapper);
+			Assert.assertSame(RowMapper.PRIMARY_KEY, rowMapper);
 		}
 
 		@Override
@@ -1787,7 +1787,7 @@ public class TableMappingTest {
 				sql);
 			Assert.assertArrayEquals(
 				new int[] { java.sql.Types.BIGINT }, types);
-			Assert.assertSame(RowMapper.ID, rowMapper);
+			Assert.assertSame(RowMapper.PRIMARY_KEY, rowMapper);
 		}
 
 		@Override
@@ -1837,13 +1837,13 @@ public class TableMappingTest {
 			if (count == 0) {
 				return (MappingSqlQuery<T>)
 					new MockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery(
-						dataSource, sql, types, RowMapper.ID);
+						dataSource, sql, types, RowMapper.PRIMARY_KEY);
 			}
 
 			if (count == 1) {
 				return (MappingSqlQuery<T>)
 					new MockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery(
-						dataSource, sql, types, RowMapper.ID);
+						dataSource, sql, types, RowMapper.PRIMARY_KEY);
 			}
 
 			return null;

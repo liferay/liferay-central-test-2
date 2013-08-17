@@ -80,13 +80,13 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
 				dataSource, "SELECT " + rightColumnName + " FROM " +
 					mappingTableName + " WHERE " + leftColumnName + "=?",
-				new int[] { java.sql.Types.BIGINT }, RowMapper.ID);
+				new int[] { java.sql.Types.BIGINT }, RowMapper.PRIMARY_KEY);
 
 		getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery =
 			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
 				dataSource, "SELECT " + leftColumnName + " FROM " +
 					mappingTableName + " WHERE " + rightColumnName + "=?",
-				new int[] { java.sql.Types.BIGINT }, RowMapper.ID);
+				new int[] { java.sql.Types.BIGINT }, RowMapper.PRIMARY_KEY);
 
 		leftToRightPortalCache = MultiVMPoolUtil.getCache(
 			mappingTableName + "-Left->Right");
