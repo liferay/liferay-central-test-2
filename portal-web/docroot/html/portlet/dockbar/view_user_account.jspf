@@ -154,7 +154,7 @@ if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 
 		signInURL.setParameter("redirect", currentURL);
 		signInURL.setPortletMode(PortletMode.VIEW);
-		signInURL.setSecure(PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS);
+		signInURL.setSecure(request.isSecure() || PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS);
 		signInURL.setWindowState(LiferayWindowState.MAXIMIZED);
 		%>
 
