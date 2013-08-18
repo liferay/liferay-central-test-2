@@ -28,8 +28,8 @@ public class TableMappingFactory {
 	public static
 		<L extends BaseModel<L>, R extends BaseModel<R>> TableMapping<L, R>
 			getTableMapping(
-				String tableName, String leftColumnName,
-				String rightColumnName, BasePersistence<L> leftPersistence,
+				String tableName, String leftColumnName, String rightColumnName,
+				BasePersistence<L> leftPersistence,
 				BasePersistence<R> rightPersistence) {
 
 		TableMapping<?, ?> tableMapping = tableMappings.get(tableName);
@@ -37,8 +37,8 @@ public class TableMappingFactory {
 		if (tableMapping == null) {
 			TableMappingImpl<L, R> tableMappingImpl =
 				new TableMappingImpl<L, R>(
-					tableName, leftColumnName, rightColumnName,
-					leftPersistence, rightPersistence);
+					tableName, leftColumnName, rightColumnName, leftPersistence,
+					rightPersistence);
 
 			tableMappingImpl.setReverseTableMapping(
 				new ReverseTableMapping<R, L>(tableMappingImpl));

@@ -30,6 +30,7 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import java.sql.Types;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -268,8 +269,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		throws SystemException {
 
 		return getBaseModels(
-			leftToRightPortalCache,
-			getRightPrimaryKeysSqlQuery, leftPrimaryKey,
+			leftToRightPortalCache, getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			rightBasePersistence, start, end, obc);
 	}
 
@@ -470,10 +470,10 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 
 	protected SqlUpdate addMappingSqlUpdate;
 	protected SqlUpdate deleteLeftPrimaryKeyTableMappingsSqlUpdate;
-	protected SqlUpdate deleteRightPrimaryKeyTableMappingsSqlUpdate;
 	protected SqlUpdate deleteMappingSqlUpdate;
-	protected MappingSqlQuery<Long> getRightPrimaryKeysSqlQuery;
+	protected SqlUpdate deleteRightPrimaryKeyTableMappingsSqlUpdate;
 	protected MappingSqlQuery<Long> getLeftPrimaryKeysSqlQuery;
+	protected MappingSqlQuery<Long> getRightPrimaryKeysSqlQuery;
 	protected BasePersistence<L> leftBasePersistence;
 	protected String leftColumnName;
 	protected PortalCache<Long, long[]> leftToRightPortalCache;
