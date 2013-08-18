@@ -241,18 +241,18 @@ public class TableMappingImplTest {
 			_tableMappingImpl.deleteMappingSqlUpdate
 				instanceof MockDeleteMappingSqlUpdate);
 		Assert.assertTrue(
-			_tableMappingImpl.deleteMappingsByLeftPrimaryKeySqlUpdate
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappingsSqlUpdate
 				instanceof MockDeleteMappingsByLeftPrimaryKeySqlUpdate);
 		Assert.assertTrue(
-			_tableMappingImpl.deleteMappingsByRightPrimaryKeySqlUpdate
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappingsSqlUpdate
 				instanceof MockDeleteMappingsByRightPrimaryKeySqlUpdate);
 
 		Assert.assertTrue(
-			_tableMappingImpl.getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery
+			_tableMappingImpl.getRightPrimaryKeysSqlQuery
 				instanceof
 					MockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery);
 		Assert.assertTrue(
-			_tableMappingImpl.getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery
+			_tableMappingImpl.getLeftPrimaryKeysSqlQuery
 				instanceof
 					MockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery);
 
@@ -558,7 +558,7 @@ public class TableMappingImplTest {
 
 		MockDeleteMappingsByLeftPrimaryKeySqlUpdate mockDeleteByLeftSqlUpdate =
 			(MockDeleteMappingsByLeftPrimaryKeySqlUpdate)
-				_tableMappingImpl.deleteMappingsByLeftPrimaryKeySqlUpdate;
+				_tableMappingImpl.deleteLeftPrimaryKeyTableMappingsSqlUpdate;
 
 		mockDeleteByLeftSqlUpdate.setDatabaseError(true);
 
@@ -718,7 +718,7 @@ public class TableMappingImplTest {
 		MockDeleteMappingsByRightPrimaryKeySqlUpdate
 			mockDeleteByRightSqlUpdate =
 				(MockDeleteMappingsByRightPrimaryKeySqlUpdate)
-					_tableMappingImpl.deleteMappingsByRightPrimaryKeySqlUpdate;
+					_tableMappingImpl.deleteRightPrimaryKeyTableMappingsSqlUpdate;
 
 		mockDeleteByRightSqlUpdate.setDatabaseError(true);
 
@@ -923,8 +923,7 @@ public class TableMappingImplTest {
 		MockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery
 			mockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery =
 				(MockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery)
-					_tableMappingImpl.
-						getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery;
+					_tableMappingImpl.getLeftPrimaryKeysSqlQuery;
 
 		mockGetLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery.setDatabaseError(
 			true);
@@ -1117,8 +1116,7 @@ public class TableMappingImplTest {
 		MockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery
 			mockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery =
 				(MockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery)
-					_tableMappingImpl.
-						getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery;
+					_tableMappingImpl.getRightPrimaryKeysSqlQuery;
 
 		mockGetRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery.setDatabaseError(
 			true);

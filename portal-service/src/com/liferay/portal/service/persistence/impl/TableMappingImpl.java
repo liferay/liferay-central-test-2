@@ -29,6 +29,7 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,7 +44,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	implements TableMapping<L, R> {
 
 	public TableMappingImpl(
-		String mappingTableName, String leftColumnName, String rightColumnName,
+		String tableName, String leftColumnName, String rightColumnName,
 		BasePersistence<L> leftBasePersistence,
 		BasePersistence<R> rightBasePersistence) {
 
@@ -55,71 +56,76 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		DataSource dataSource = leftBasePersistence.getDataSource();
 
 		addMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
-			dataSource, "INSERT INTO " + mappingTableName + " (" +
-				leftColumnName + ", " + rightColumnName+ ") VALUES (?, ?)",
-			new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
+			dataSource,
+			"INSERT INTO " + tableName + " (" + leftColumnName + ", " +
+				rightColumnName + ") VALUES (?, ?)",
+			new int[] {Types.BIGINT, Types.BIGINT});
 
 		deleteMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
-			dataSource, "DELETE FROM " + mappingTableName + " WHERE " +
-				leftColumnName + " = ? AND " + rightColumnName+ " = ?",
-			new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT });
+			dataSource,
+			"DELETE FROM " + tableName + " WHERE " + leftColumnName +
+				" = ? AND " + rightColumnName + " = ?",
+			new int[] {Types.BIGINT, Types.BIGINT});
 
-		deleteMappingsByLeftPrimaryKeySqlUpdate =
+		deleteLeftPrimaryKeyTableMappingsSqlUpdate =
 			SqlUpdateFactoryUtil.getSqlUpdate(
-				dataSource, "DELETE FROM " + mappingTableName + " WHERE " +
+				dataSource,
+				"DELETE FROM " + tableName + " WHERE " + leftColumnName +
+					" = ?",
+				new int[] {Types.BIGINT});
+
+		deleteRightPrimaryKeyTableMappingsSqlUpdate =
+			SqlUpdateFactoryUtil.getSqlUpdate(
+				dataSource,
+				"DELETE FROM " + tableName + " WHERE " + rightColumnName +
+					" = ?",
+				new int[] {Types.BIGINT});
+
+		getRightPrimaryKeysSqlQuery =
+			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
+				dataSource,
+				"SELECT " + rightColumnName + " FROM " + tableName + " WHERE " +
 					leftColumnName + " = ?",
-				new int[] { java.sql.Types.BIGINT });
+				new int[] {Types.BIGINT}, RowMapper.PRIMARY_KEY);
 
-		deleteMappingsByRightPrimaryKeySqlUpdate =
-			SqlUpdateFactoryUtil.getSqlUpdate(
-				dataSource, "DELETE FROM " + mappingTableName + " WHERE " +
+		getLeftPrimaryKeysSqlQuery =
+			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
+				dataSource,
+				"SELECT " + leftColumnName + " FROM " + tableName + " WHERE " +
 					rightColumnName + " = ?",
-				new int[] { java.sql.Types.BIGINT });
-
-		getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery =
-			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
-				dataSource, "SELECT " + rightColumnName + " FROM " +
-					mappingTableName + " WHERE " + leftColumnName + "=?",
-				new int[] { java.sql.Types.BIGINT }, RowMapper.PRIMARY_KEY);
-
-		getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery =
-			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
-				dataSource, "SELECT " + leftColumnName + " FROM " +
-					mappingTableName + " WHERE " + rightColumnName + "=?",
-				new int[] { java.sql.Types.BIGINT }, RowMapper.PRIMARY_KEY);
+				new int[] {Types.BIGINT}, RowMapper.PRIMARY_KEY);
 
 		leftToRightPortalCache = MultiVMPoolUtil.getCache(
-			mappingTableName + "-Left->Right");
-
+			tableName + "-LeftToRight");
 		rightToLeftPortalCache = MultiVMPoolUtil.getCache(
-			mappingTableName + "-Right->Left");
+			tableName + "-RightToLeft");
 	}
 
 	@Override
 	public boolean addTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
-		if (doContainsMapping(leftPrimaryKey, rightPrimaryKey, false)) {
+		if (containsTableMapping(leftPrimaryKey, rightPrimaryKey, false)) {
 			return false;
 		}
 
 		leftToRightPortalCache.remove(leftPrimaryKey);
 		rightToLeftPortalCache.remove(rightPrimaryKey);
 
+		Class<R> rightModelClass = rightBasePersistence.getModelClass();
+
 		ModelListener<L>[] leftModelListeners =
 			leftBasePersistence.getListeners();
-
-		Class<R> rightModelClass = rightBasePersistence.getModelClass();
 
 		for (ModelListener<L> leftModelListener : leftModelListeners) {
 			leftModelListener.onBeforeAddAssociation(
 				leftPrimaryKey, rightModelClass.getName(), rightPrimaryKey);
 		}
 
+		Class<L> leftModelClass = leftBasePersistence.getModelClass();
+
 		ModelListener<R>[] rightModelListeners =
 			rightBasePersistence.getListeners();
-
-		Class<L> leftModelClass = leftBasePersistence.getModelClass();
 
 		for (ModelListener<R> rightModelListener : rightModelListeners) {
 			rightModelListener.onBeforeAddAssociation(
@@ -147,76 +153,75 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	@Override
-	public boolean containsTableMapping(long leftPrimaryKey, long rightPrimaryKey)
+	public boolean containsTableMapping(
+			long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
-		return doContainsMapping(leftPrimaryKey, rightPrimaryKey, true);
+		return containsTableMapping(leftPrimaryKey, rightPrimaryKey, true);
 	}
 
 	@Override
 	public int deleteLeftPrimaryKeyTableMappings(long leftPrimaryKey)
 		throws SystemException {
 
-		return doDeleteMappingsByMasterPrimaryKey(
+		return deleteTableMappings(
 			leftBasePersistence, rightBasePersistence, leftToRightPortalCache,
-			rightToLeftPortalCache,
-			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery,
-			deleteMappingsByLeftPrimaryKeySqlUpdate, leftPrimaryKey);
+			rightToLeftPortalCache, getRightPrimaryKeysSqlQuery,
+			deleteLeftPrimaryKeyTableMappingsSqlUpdate, leftPrimaryKey);
 	}
 
 	@Override
 	public int deleteRightPrimaryKeyTableMappings(long rightPrimaryKey)
 		throws SystemException {
 
-		return doDeleteMappingsByMasterPrimaryKey(
+		return deleteTableMappings(
 			rightBasePersistence, leftBasePersistence, rightToLeftPortalCache,
-			leftToRightPortalCache,
-			getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery,
-			deleteMappingsByRightPrimaryKeySqlUpdate, rightPrimaryKey);
+			leftToRightPortalCache, getLeftPrimaryKeysSqlQuery,
+			deleteRightPrimaryKeyTableMappingsSqlUpdate, rightPrimaryKey);
 	}
 
 	@Override
 	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
-		if (!doContainsMapping(leftPrimaryKey, rightPrimaryKey, false)) {
+		if (!containsTableMapping(leftPrimaryKey, rightPrimaryKey, false)) {
 			return false;
 		}
 
 		leftToRightPortalCache.remove(leftPrimaryKey);
 		rightToLeftPortalCache.remove(rightPrimaryKey);
 
+		Class<R> rightModelClass = rightBasePersistence.getModelClass();
+
 		ModelListener<L>[] leftModelListeners =
 			leftBasePersistence.getListeners();
-
-		Class<R> rightModelClass = rightBasePersistence.getModelClass();
 
 		for (ModelListener<L> leftModelListener : leftModelListeners) {
 			leftModelListener.onBeforeRemoveAssociation(
 				leftPrimaryKey, rightModelClass.getName(), rightPrimaryKey);
 		}
 
+		Class<L> leftModelClass = leftBasePersistence.getModelClass();
+
 		ModelListener<R>[] rightModelListeners =
 			rightBasePersistence.getListeners();
-
-		Class<L> leftModelClass = leftBasePersistence.getModelClass();
 
 		for (ModelListener<R> rightModelListener : rightModelListeners) {
 			rightModelListener.onBeforeRemoveAssociation(
 				rightPrimaryKey, leftModelClass.getName(), leftPrimaryKey);
 		}
 
-		int affectRowCount = 0;
+		int rowCount = 0;
 
 		try {
-			affectRowCount = deleteMappingSqlUpdate.update(
+			rowCount = deleteMappingSqlUpdate.update(
 				leftPrimaryKey, rightPrimaryKey);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
 
-		if (affectRowCount > 0) {
+		if (rowCount > 0) {
 			for (ModelListener<L> leftModelListener : leftModelListeners) {
 				leftModelListener.onAfterRemoveAssociation(
 					leftPrimaryKey, rightModelClass.getName(), rightPrimaryKey);
@@ -238,9 +243,8 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			long rightPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return doGetSlaveBaseModelsByMasterPrimaryKey(
-			rightToLeftPortalCache,
-			getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery, rightPrimaryKey,
+		return getBaseModels(
+			rightToLeftPortalCache, getLeftPrimaryKeysSqlQuery, rightPrimaryKey,
 			leftBasePersistence, start, end, obc);
 	}
 
@@ -248,9 +252,8 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] getLeftPrimaryKeys(long rightPrimaryKey)
 		throws SystemException {
 
-		return doGetSlavePrimaryKeysByMasterPrimaryKey(
-			rightToLeftPortalCache,
-			getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery, rightPrimaryKey,
+		return getPrimaryKeys(
+			rightToLeftPortalCache, getLeftPrimaryKeysSqlQuery, rightPrimaryKey,
 			true);
 	}
 
@@ -264,9 +267,9 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			long leftPrimaryKey, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return doGetSlaveBaseModelsByMasterPrimaryKey(
+		return getBaseModels(
 			leftToRightPortalCache,
-			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery, leftPrimaryKey,
+			getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			rightBasePersistence, start, end, obc);
 	}
 
@@ -274,9 +277,8 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	public long[] getRightPrimaryKeys(long leftPrimaryKey)
 		throws SystemException {
 
-		return doGetSlavePrimaryKeysByMasterPrimaryKey(
-			leftToRightPortalCache,
-			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery, leftPrimaryKey,
+		return getPrimaryKeys(
+			leftToRightPortalCache, getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			true);
 	}
 
@@ -296,7 +298,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	protected static <M extends BaseModel<M>, S extends BaseModel<S>> int
-		doDeleteMappingsByMasterPrimaryKey(
+		deleteTableMappings(
 			BasePersistence<M> masterBasePersistence,
 			BasePersistence<S> slaveBasePersistence,
 			PortalCache<Long, long[]> masterToSlavePortalCache,
@@ -310,7 +312,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		ModelListener<S>[] slaveModelListeners =
 			slaveBasePersistence.getListeners();
 
-		long[] slavePrimaryKeys = doGetSlavePrimaryKeysByMasterPrimaryKey(
+		long[] slavePrimaryKeys = getPrimaryKeys(
 			masterToSlavePortalCache, mappingSqlQuery, masterPrimaryKey, false);
 
 		Class<M> masterModelClass = null;
@@ -383,14 +385,14 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	protected static <T extends BaseModel<T>> List<T>
-		doGetSlaveBaseModelsByMasterPrimaryKey(
+		getBaseModels(
 			PortalCache<Long, long[]> portalCache,
 			MappingSqlQuery<Long> mappingSqlQuery, long masterPrimaryKey,
 			BasePersistence<T> slaveBasePersistence, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		long[] slavePrimaryKeys = doGetSlavePrimaryKeysByMasterPrimaryKey(
+		long[] slavePrimaryKeys = getPrimaryKeys(
 			portalCache, mappingSqlQuery, masterPrimaryKey, true);
 
 		if (slavePrimaryKeys.length == 0) {
@@ -416,7 +418,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		return ListUtil.subList(slaveBaseModels, start, end);
 	}
 
-	protected static long[] doGetSlavePrimaryKeysByMasterPrimaryKey(
+	protected static long[] getPrimaryKeys(
 			PortalCache<Long, long[]> portalCache,
 			MappingSqlQuery<Long> mappingSqlQuery, long masterPrimaryKey,
 			boolean updateCache)
@@ -425,19 +427,19 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		long[] primaryKeys = portalCache.get(masterPrimaryKey);
 
 		if (primaryKeys == null) {
-			List<Long> primaryKeyList = null;
+			List<Long> primaryKeysList = null;
 
 			try {
-				primaryKeyList = mappingSqlQuery.execute(masterPrimaryKey);
+				primaryKeysList = mappingSqlQuery.execute(masterPrimaryKey);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
 			}
 
-			primaryKeys = new long[primaryKeyList.size()];
+			primaryKeys = new long[primaryKeysList.size()];
 
 			for (int i = 0; i < primaryKeys.length; i++) {
-				primaryKeys[i] = primaryKeyList.get(i);
+				primaryKeys[i] = primaryKeysList.get(i);
 			}
 
 			Arrays.sort(primaryKeys);
@@ -450,13 +452,12 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		return primaryKeys;
 	}
 
-	protected boolean doContainsMapping(
+	protected boolean containsTableMapping(
 			long leftPrimaryKey, long rightPrimaryKey, boolean updateCache)
 		throws SystemException {
 
-		long[] rightPrimaryKeys = doGetSlavePrimaryKeysByMasterPrimaryKey(
-			leftToRightPortalCache,
-			getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery, leftPrimaryKey,
+		long[] rightPrimaryKeys = getPrimaryKeys(
+			leftToRightPortalCache, getRightPrimaryKeysSqlQuery, leftPrimaryKey,
 			updateCache);
 
 		if (Arrays.binarySearch(rightPrimaryKeys, rightPrimaryKey) < 0) {
@@ -468,13 +469,11 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 	}
 
 	protected SqlUpdate addMappingSqlUpdate;
-	protected SqlUpdate deleteMappingsByLeftPrimaryKeySqlUpdate;
-	protected SqlUpdate deleteMappingsByRightPrimaryKeySqlUpdate;
+	protected SqlUpdate deleteLeftPrimaryKeyTableMappingsSqlUpdate;
+	protected SqlUpdate deleteRightPrimaryKeyTableMappingsSqlUpdate;
 	protected SqlUpdate deleteMappingSqlUpdate;
-	protected MappingSqlQuery<Long>
-		getRightPrimaryKeysByLeftPrimaryKeyMappingSqlQuery;
-	protected MappingSqlQuery<Long>
-		getLeftPrimaryKeysByRightPrimaryKeyMappingSqlQuery;
+	protected MappingSqlQuery<Long> getRightPrimaryKeysSqlQuery;
+	protected MappingSqlQuery<Long> getLeftPrimaryKeysSqlQuery;
 	protected BasePersistence<L> leftBasePersistence;
 	protected String leftColumnName;
 	protected PortalCache<Long, long[]> leftToRightPortalCache;
