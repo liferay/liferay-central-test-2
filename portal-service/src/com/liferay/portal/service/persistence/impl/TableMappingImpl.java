@@ -61,41 +61,35 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			"INSERT INTO " + tableName + " (" + leftColumnName + ", " +
 				rightColumnName + ") VALUES (?, ?)",
 			new int[] {Types.BIGINT, Types.BIGINT});
-
-		deleteMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
-			dataSource,
-			"DELETE FROM " + tableName + " WHERE " + leftColumnName +
-				" = ? AND " + rightColumnName + " = ?",
-			new int[] {Types.BIGINT, Types.BIGINT});
-
 		deleteLeftPrimaryKeyTableMappingsSqlUpdate =
 			SqlUpdateFactoryUtil.getSqlUpdate(
 				dataSource,
 				"DELETE FROM " + tableName + " WHERE " + leftColumnName +
 					" = ?",
 				new int[] {Types.BIGINT});
-
+		deleteMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+			dataSource,
+			"DELETE FROM " + tableName + " WHERE " + leftColumnName +
+				" = ? AND " + rightColumnName + " = ?",
+			new int[] {Types.BIGINT, Types.BIGINT});
 		deleteRightPrimaryKeyTableMappingsSqlUpdate =
 			SqlUpdateFactoryUtil.getSqlUpdate(
 				dataSource,
 				"DELETE FROM " + tableName + " WHERE " + rightColumnName +
 					" = ?",
 				new int[] {Types.BIGINT});
-
-		getRightPrimaryKeysSqlQuery =
-			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
-				dataSource,
-				"SELECT " + rightColumnName + " FROM " + tableName + " WHERE " +
-					leftColumnName + " = ?",
-				new int[] {Types.BIGINT}, RowMapper.PRIMARY_KEY);
-
 		getLeftPrimaryKeysSqlQuery =
 			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
 				dataSource,
 				"SELECT " + leftColumnName + " FROM " + tableName + " WHERE " +
 					rightColumnName + " = ?",
 				new int[] {Types.BIGINT}, RowMapper.PRIMARY_KEY);
-
+		getRightPrimaryKeysSqlQuery =
+			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
+				dataSource,
+				"SELECT " + rightColumnName + " FROM " + tableName + " WHERE " +
+					leftColumnName + " = ?",
+				new int[] {Types.BIGINT}, RowMapper.PRIMARY_KEY);
 		leftToRightPortalCache = MultiVMPoolUtil.getCache(
 			tableName + "-LeftToRight");
 		rightToLeftPortalCache = MultiVMPoolUtil.getCache(
