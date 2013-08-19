@@ -56,7 +56,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 
 		DataSource dataSource = leftBasePersistence.getDataSource();
 
-		addMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+		addTableMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
 			dataSource,
 			"INSERT INTO " + tableName + " (" + leftColumnName + ", " +
 				rightColumnName + ") VALUES (?, ?)",
@@ -67,17 +67,17 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 				"DELETE FROM " + tableName + " WHERE " + leftColumnName +
 					" = ?",
 				new int[] {Types.BIGINT});
-		deleteMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
-			dataSource,
-			"DELETE FROM " + tableName + " WHERE " + leftColumnName +
-				" = ? AND " + rightColumnName + " = ?",
-			new int[] {Types.BIGINT, Types.BIGINT});
 		deleteRightPrimaryKeyTableMappingsSqlUpdate =
 			SqlUpdateFactoryUtil.getSqlUpdate(
 				dataSource,
 				"DELETE FROM " + tableName + " WHERE " + rightColumnName +
 					" = ?",
 				new int[] {Types.BIGINT});
+		deleteTableMappingSqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(
+			dataSource,
+			"DELETE FROM " + tableName + " WHERE " + leftColumnName +
+				" = ? AND " + rightColumnName + " = ?",
+			new int[] {Types.BIGINT, Types.BIGINT});
 		getLeftPrimaryKeysSqlQuery =
 			MappingSqlQueryFactoryUtil.getMappingSqlQuery(
 				dataSource,
@@ -128,7 +128,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		}
 
 		try {
-			addMappingSqlUpdate.update(leftPrimaryKey, rightPrimaryKey);
+			addTableMappingSqlUpdate.update(leftPrimaryKey, rightPrimaryKey);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -209,7 +209,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		int rowCount = 0;
 
 		try {
-			rowCount = deleteMappingSqlUpdate.update(
+			rowCount = deleteTableMappingSqlUpdate.update(
 				leftPrimaryKey, rightPrimaryKey);
 		}
 		catch (Exception e) {
@@ -461,9 +461,9 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 		}
 	}
 
-	protected SqlUpdate addMappingSqlUpdate;
+	protected SqlUpdate addTableMappingSqlUpdate;
 	protected SqlUpdate deleteLeftPrimaryKeyTableMappingsSqlUpdate;
-	protected SqlUpdate deleteMappingSqlUpdate;
+	protected SqlUpdate deleteTableMappingSqlUpdate;
 	protected SqlUpdate deleteRightPrimaryKeyTableMappingsSqlUpdate;
 	protected MappingSqlQuery<Long> getLeftPrimaryKeysSqlQuery;
 	protected MappingSqlQuery<Long> getRightPrimaryKeysSqlQuery;

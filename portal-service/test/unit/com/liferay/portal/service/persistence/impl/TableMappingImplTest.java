@@ -235,10 +235,10 @@ public class TableMappingImplTest {
 			_rightPersistence, _tableMappingImpl.rightBasePersistence);
 
 		Assert.assertTrue(
-			_tableMappingImpl.addMappingSqlUpdate
+			_tableMappingImpl.addTableMappingSqlUpdate
 				instanceof MockAddMappingSqlUpdate);
 		Assert.assertTrue(
-			_tableMappingImpl.deleteMappingSqlUpdate
+			_tableMappingImpl.deleteTableMappingSqlUpdate
 				instanceof MockDeleteMappingSqlUpdate);
 		Assert.assertTrue(
 			_tableMappingImpl.deleteLeftPrimaryKeyTableMappingsSqlUpdate
@@ -362,7 +362,7 @@ public class TableMappingImplTest {
 
 		MockDeleteMappingSqlUpdate mockDeleteSqlUpdate =
 			(MockDeleteMappingSqlUpdate)
-				_tableMappingImpl.deleteMappingSqlUpdate;
+				_tableMappingImpl.deleteTableMappingSqlUpdate;
 
 		mockDeleteSqlUpdate.setDatabaseError(true);
 
