@@ -473,16 +473,19 @@ public class LanguageImpl implements Language {
 		return _groupLocalesMap.get(groupId);
 	}
 
+	@Override
 	public String getBCP47LanguageId(HttpServletRequest request) {
 		Locale locale = PortalUtil.getLocale(request);
 
 		return getBCP47LanguageId(locale);
 	}
 
+	@Override
 	public String getBCP47LanguageId(Locale locale) {
 		return LocaleUtil.toBCP47LanguageId(locale);
 	}
 
+	@Override
 	public String getBCP47LanguageId(PortletRequest portletRequest) {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
