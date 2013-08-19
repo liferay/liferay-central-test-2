@@ -487,10 +487,9 @@ public class LanguageImpl implements Language {
 
 	@Override
 	public String getBCP47LanguageId(PortletRequest portletRequest) {
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
+		Locale locale = PortalUtil.getLocale(portletRequest);
 
-		return getBCP47LanguageId(request);
+		return getBCP47LanguageId(locale);
 	}
 
 	@Override
