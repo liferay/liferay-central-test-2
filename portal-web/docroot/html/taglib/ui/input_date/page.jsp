@@ -41,7 +41,7 @@ int yearValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:i
 
 Calendar calendar = CalendarFactoryUtil.getCalendar(yearValue, monthValue, dayValue);
 
-String dateMask = _SIMPLE_DATE_MASK_PATTERN_MDY;
+String mask = _MASK_MDY;
 String simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_MDY;
 
 if (BrowserSnifferUtil.isMobile(request)) {
@@ -55,11 +55,11 @@ else {
 	String shortDateFormatSimpleDateFormatPattern = shortDateFormatSimpleDateFormat.toPattern();
 
 	if (shortDateFormatSimpleDateFormatPattern.indexOf("y") == 0) {
-		dateMask = _SIMPLE_DATE_MASK_PATTERN_YMD;
+		mask = _MASK_YMD;
 		simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_YMD;
 	}
 	else if (shortDateFormatSimpleDateFormatPattern.indexOf("d") == 0) {
-		dateMask = _SIMPLE_DATE_MASK_PATTERN_DMY;
+		mask = _MASK_DMY;
 		simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_DMY;
 	}
 }
@@ -89,7 +89,7 @@ Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPa
 			return new A.DatePicker<%= BrowserSnifferUtil.isMobile(request) ? "Native" : StringPool.BLANK %>(
 				{
 					container: '#<%= randomNamespace %>displayDate',
-					mask: '<%= dateMask %>',
+					mask: '<%= mask %>',
 					on: {
 						selectionChange: function(event) {
 							var date = event.newSelection[0];
@@ -122,9 +122,9 @@ private static final String _SIMPLE_DATE_FORMAT_PATTERN_MDY = "MM/dd/yyyy";
 
 private static final String _SIMPLE_DATE_FORMAT_PATTERN_YMD = "yyyy/MM/dd";
 
-private static final String _SIMPLE_DATE_MASK_PATTERN_DMY = "%d/%m/%Y";
+private static final String _MASK_DMY = "%d/%m/%Y";
 
-private static final String _SIMPLE_DATE_MASK_PATTERN_MDY = "%m/%d/%Y";
+private static final String _MASK_MDY = "%m/%d/%Y";
 
-private static final String _SIMPLE_DATE_MASK_PATTERN_YMD = "%Y/%m/%d";
+private static final String _MASK_YMD = "%Y/%m/%d";
 %>
