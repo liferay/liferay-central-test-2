@@ -66,9 +66,9 @@ public class TableMappingImplTest {
 			public void appendAssertClasses(List<Class<?>> assertClasses) {
 				assertClasses.clear();
 
-				assertClasses.add(TableMappingImpl.class);
 				assertClasses.add(ReverseTableMapping.class);
 				assertClasses.add(TableMappingFactory.class);
+				assertClasses.add(TableMappingImpl.class);
 			}
 
 		};
