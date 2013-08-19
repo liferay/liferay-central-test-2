@@ -316,7 +316,6 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			(slaveModelListeners.length > 0)) {
 
 			masterModelClass = masterBasePersistence.getModelClass();
-
 			slaveModelClass = slaveBasePersistence.getModelClass();
 
 			for (long slavePrimaryKey : slavePrimaryKeys) {
@@ -344,10 +343,10 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			slaveToMasterPortalCache.remove(slavePrimaryKey);
 		}
 
-		int affectRowCount = 0;
+		int rowCount = 0;
 
 		try {
-			affectRowCount = deleteSqlUpdate.update(masterPrimaryKey);
+			rowCount = deleteSqlUpdate.update(masterPrimaryKey);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -375,7 +374,7 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 			}
 		}
 
-		return affectRowCount;
+		return rowCount;
 	}
 
 	protected static <T extends BaseModel<T>> List<T>
