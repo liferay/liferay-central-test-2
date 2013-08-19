@@ -64,7 +64,8 @@ public class ReverseTableMapping<L extends BaseModel<L>, R extends BaseModel<R>>
 	public boolean deleteTableMapping(long leftPrimaryKey, long rightPrimaryKey)
 		throws SystemException {
 
-		return _tableMapping.deleteTableMapping(rightPrimaryKey, leftPrimaryKey);
+		return _tableMapping.deleteTableMapping(
+			rightPrimaryKey, leftPrimaryKey);
 	}
 
 	@Override

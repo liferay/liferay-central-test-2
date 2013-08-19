@@ -40,6 +40,8 @@ import java.io.Serializable;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
+import java.sql.Types;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -142,8 +144,8 @@ public class TableMappingImplTest {
 
 			Assert.assertSame(RuntimeException.class, cause.getClass());
 			Assert.assertEquals(
-				"Unique key violation, leftPrimaryKey : " + leftPrimaryKey +
-					", rightPrimaryKey : " + rightPrimaryKey,
+				"Unique key violation for left primary key " + leftPrimaryKey +
+					" and right primary key " + rightPrimaryKey,
 				cause.getMessage());
 		}
 
@@ -208,8 +210,8 @@ public class TableMappingImplTest {
 
 			Assert.assertSame(RuntimeException.class, cause.getClass());
 			Assert.assertEquals(
-				"Unique key violation, leftPrimaryKey : " + leftPrimaryKey +
-					", rightPrimaryKey : " + rightPrimaryKey,
+				"Unique key violation for left primary key " + leftPrimaryKey +
+					" and right primary key " + rightPrimaryKey,
 				cause.getMessage());
 		}
 
@@ -253,8 +255,7 @@ public class TableMappingImplTest {
 
 		Assert.assertTrue(leftToRightPortalCache instanceof MemoryPortalCache);
 		Assert.assertEquals(
-			_tableName + "-LeftToRight",
-			leftToRightPortalCache.getName());
+			_tableName + "-LeftToRight", leftToRightPortalCache.getName());
 
 		Assert.assertSame(
 			_rightBasePersistence, _tableMappingImpl.rightBasePersistence);
@@ -266,8 +267,7 @@ public class TableMappingImplTest {
 
 		Assert.assertTrue(rightToLeftPortalCache instanceof MemoryPortalCache);
 		Assert.assertEquals(
-			_tableName + "-RightToLeft",
-			rightToLeftPortalCache.getName());
+			_tableName + "-RightToLeft", rightToLeftPortalCache.getName());
 	}
 
 	@Test
@@ -297,147 +297,6 @@ public class TableMappingImplTest {
 	}
 
 	@Test
-	public void testDeleteTableMapping() throws SystemException {
-
-		// No such table mapping
-
-		long leftPrimaryKey = 1;
-		long rightPrimaryKey = 2;
-
-		Assert.assertFalse(
-			_tableMappingImpl.deleteTableMapping(
-				leftPrimaryKey, rightPrimaryKey));
-
-		// Success, without model listener
-
-		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
-
-		Assert.assertTrue(
-			_tableMappingImpl.deleteTableMapping(
-				leftPrimaryKey, rightPrimaryKey));
-
-		// Success, with model listener
-
-		RecorderModelListener<Left> leftModelListener =
-			new RecorderModelListener<Left>();
-
-		_leftBasePersistence.registerListener(leftModelListener);
-
-		RecorderModelListener<Right> rightModelListener =
-			new RecorderModelListener<Right>();
-
-		_rightBasePersistence.registerListener(rightModelListener);
-
-		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
-
-		Assert.assertTrue(
-			_tableMappingImpl.deleteTableMapping(
-				leftPrimaryKey, rightPrimaryKey));
-
-		leftModelListener.assertOnBeforeRemoveAssociation(
-			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
-
-		rightModelListener.assertOnBeforeRemoveAssociation(
-			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
-
-		leftModelListener.assertOnAfterRemoveAssociation(
-			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
-
-		rightModelListener.assertOnAfterRemoveAssociation(
-			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
-
-		_leftBasePersistence.unregisterListener(leftModelListener);
-
-		_rightBasePersistence.unregisterListener(rightModelListener);
-
-		// Database error, with model listener
-
-		leftModelListener = new RecorderModelListener<Left>();
-
-		_leftBasePersistence.registerListener(leftModelListener);
-
-		rightModelListener = new RecorderModelListener<Right>();
-
-		_rightBasePersistence.registerListener(rightModelListener);
-
-		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
-
-		MockDeleteMappingSqlUpdate mockDeleteSqlUpdate =
-			(MockDeleteMappingSqlUpdate)
-				_tableMappingImpl.deleteTableMappingSqlUpdate;
-
-		mockDeleteSqlUpdate.setDatabaseError(true);
-
-		try {
-			_tableMappingImpl.deleteTableMapping(
-				leftPrimaryKey, rightPrimaryKey);
-
-			Assert.fail();
-		}
-		catch (SystemException se) {
-			Throwable cause = se.getCause();
-
-			Assert.assertSame(RuntimeException.class, cause.getClass());
-
-			Assert.assertEquals("Database error", cause.getMessage());
-		}
-		finally {
-			mockDeleteSqlUpdate.setDatabaseError(false);
-			_mappingStore.remove(leftPrimaryKey);
-		}
-
-		leftModelListener.assertOnBeforeRemoveAssociation(
-			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
-
-		rightModelListener.assertOnBeforeRemoveAssociation(
-			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
-
-		leftModelListener.assertOnAfterRemoveAssociation(
-			false, null, null, null);
-
-		rightModelListener.assertOnAfterRemoveAssociation(
-			false, null, null, null);
-
-		_leftBasePersistence.unregisterListener(leftModelListener);
-
-		_rightBasePersistence.unregisterListener(rightModelListener);
-
-		// Phantom delete, with model listener
-
-		leftModelListener = new RecorderModelListener<Left>();
-
-		_leftBasePersistence.registerListener(leftModelListener);
-
-		rightModelListener = new RecorderModelListener<Right>();
-
-		_rightBasePersistence.registerListener(rightModelListener);
-
-		PortalCache<Long, long[]> leftToRightPortalCache =
-			_tableMappingImpl.leftToRightPortalCache;
-
-		leftToRightPortalCache.put(leftPrimaryKey, new long[]{rightPrimaryKey});
-
-		Assert.assertFalse(
-			_tableMappingImpl.deleteTableMapping(leftPrimaryKey, rightPrimaryKey));
-
-		leftModelListener.assertOnBeforeRemoveAssociation(
-			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
-
-		rightModelListener.assertOnBeforeRemoveAssociation(
-			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
-
-		leftModelListener.assertOnAfterRemoveAssociation(
-			false, null, null, null);
-
-		rightModelListener.assertOnAfterRemoveAssociation(
-			false, null, null, null);
-
-		_leftBasePersistence.unregisterListener(leftModelListener);
-
-		_rightBasePersistence.unregisterListener(rightModelListener);
-	}
-
-	@Test
 	public void testDeleteLeftPrimaryKeyTableMappings() throws SystemException {
 
 		// Delete 0 entry
@@ -446,7 +305,8 @@ public class TableMappingImplTest {
 
 		Assert.assertEquals(
 			0,
-			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(leftPrimaryKey));
+			_tableMappingImpl.deleteLeftPrimaryKeyTableMappings(
+				leftPrimaryKey));
 
 		// Delete 1 entry
 
@@ -568,7 +428,8 @@ public class TableMappingImplTest {
 		MockDeleteLeftPrimaryKeyTableMappingsSqlUpdate
 			mockDeleteLeftPrimaryKeyTableMappingsSqlUpdate =
 				(MockDeleteLeftPrimaryKeyTableMappingsSqlUpdate)
-					_tableMappingImpl.deleteLeftPrimaryKeyTableMappingsSqlUpdate;
+					_tableMappingImpl.
+						deleteLeftPrimaryKeyTableMappingsSqlUpdate;
 
 		mockDeleteLeftPrimaryKeyTableMappingsSqlUpdate.setDatabaseError(true);
 
@@ -737,12 +598,14 @@ public class TableMappingImplTest {
 		MockDeleteRightPrimaryKeyTableMappingsSqlUpdate
 			mockDeleteRightPrimaryKeyTableMappingsSqlUpdate =
 				(MockDeleteRightPrimaryKeyTableMappingsSqlUpdate)
-					_tableMappingImpl.deleteRightPrimaryKeyTableMappingsSqlUpdate;
+					_tableMappingImpl.
+						deleteRightPrimaryKeyTableMappingsSqlUpdate;
 
 		mockDeleteRightPrimaryKeyTableMappingsSqlUpdate.setDatabaseError(true);
 
 		try {
-			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(rightPrimaryKey);
+			_tableMappingImpl.deleteRightPrimaryKeyTableMappings(
+				rightPrimaryKey);
 
 			Assert.fail();
 		}
@@ -771,6 +634,148 @@ public class TableMappingImplTest {
 
 		rightModelListener.assertOnAfterRemoveAssociation(
 			false, null, null, null);
+	}
+
+	@Test
+	public void testDeleteTableMapping() throws SystemException {
+
+		// No such table mapping
+
+		long leftPrimaryKey = 1;
+		long rightPrimaryKey = 2;
+
+		Assert.assertFalse(
+			_tableMappingImpl.deleteTableMapping(
+				leftPrimaryKey, rightPrimaryKey));
+
+		// Success, without model listener
+
+		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
+
+		Assert.assertTrue(
+			_tableMappingImpl.deleteTableMapping(
+				leftPrimaryKey, rightPrimaryKey));
+
+		// Success, with model listener
+
+		RecorderModelListener<Left> leftModelListener =
+			new RecorderModelListener<Left>();
+
+		_leftBasePersistence.registerListener(leftModelListener);
+
+		RecorderModelListener<Right> rightModelListener =
+			new RecorderModelListener<Right>();
+
+		_rightBasePersistence.registerListener(rightModelListener);
+
+		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
+
+		Assert.assertTrue(
+			_tableMappingImpl.deleteTableMapping(
+				leftPrimaryKey, rightPrimaryKey));
+
+		leftModelListener.assertOnBeforeRemoveAssociation(
+			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
+
+		rightModelListener.assertOnBeforeRemoveAssociation(
+			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
+
+		leftModelListener.assertOnAfterRemoveAssociation(
+			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
+
+		rightModelListener.assertOnAfterRemoveAssociation(
+			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
+
+		_leftBasePersistence.unregisterListener(leftModelListener);
+
+		_rightBasePersistence.unregisterListener(rightModelListener);
+
+		// Database error, with model listener
+
+		leftModelListener = new RecorderModelListener<Left>();
+
+		_leftBasePersistence.registerListener(leftModelListener);
+
+		rightModelListener = new RecorderModelListener<Right>();
+
+		_rightBasePersistence.registerListener(rightModelListener);
+
+		_mappingStore.put(leftPrimaryKey, new long[]{rightPrimaryKey});
+
+		MockDeleteMappingSqlUpdate mockDeleteSqlUpdate =
+			(MockDeleteMappingSqlUpdate)
+				_tableMappingImpl.deleteTableMappingSqlUpdate;
+
+		mockDeleteSqlUpdate.setDatabaseError(true);
+
+		try {
+			_tableMappingImpl.deleteTableMapping(
+				leftPrimaryKey, rightPrimaryKey);
+
+			Assert.fail();
+		}
+		catch (SystemException se) {
+			Throwable cause = se.getCause();
+
+			Assert.assertSame(RuntimeException.class, cause.getClass());
+
+			Assert.assertEquals("Database error", cause.getMessage());
+		}
+		finally {
+			mockDeleteSqlUpdate.setDatabaseError(false);
+			_mappingStore.remove(leftPrimaryKey);
+		}
+
+		leftModelListener.assertOnBeforeRemoveAssociation(
+			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
+
+		rightModelListener.assertOnBeforeRemoveAssociation(
+			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
+
+		leftModelListener.assertOnAfterRemoveAssociation(
+			false, null, null, null);
+
+		rightModelListener.assertOnAfterRemoveAssociation(
+			false, null, null, null);
+
+		_leftBasePersistence.unregisterListener(leftModelListener);
+
+		_rightBasePersistence.unregisterListener(rightModelListener);
+
+		// Phantom delete, with model listener
+
+		leftModelListener = new RecorderModelListener<Left>();
+
+		_leftBasePersistence.registerListener(leftModelListener);
+
+		rightModelListener = new RecorderModelListener<Right>();
+
+		_rightBasePersistence.registerListener(rightModelListener);
+
+		PortalCache<Long, long[]> leftToRightPortalCache =
+			_tableMappingImpl.leftToRightPortalCache;
+
+		leftToRightPortalCache.put(leftPrimaryKey, new long[]{rightPrimaryKey});
+
+		Assert.assertFalse(
+			_tableMappingImpl.deleteTableMapping(
+				leftPrimaryKey, rightPrimaryKey));
+
+		leftModelListener.assertOnBeforeRemoveAssociation(
+			true, leftPrimaryKey, Right.class.getName(), rightPrimaryKey);
+
+		rightModelListener.assertOnBeforeRemoveAssociation(
+			true, rightPrimaryKey, Left.class.getName(), leftPrimaryKey);
+
+		leftModelListener.assertOnAfterRemoveAssociation(
+			false, null, null, null);
+
+		rightModelListener.assertOnAfterRemoveAssociation(
+			false, null, null, null);
+
+		_leftBasePersistence.unregisterListener(leftModelListener);
+
+		_rightBasePersistence.unregisterListener(rightModelListener);
 	}
 
 	@Test
@@ -1219,8 +1224,7 @@ public class TableMappingImplTest {
 
 		reverseTableMapping.getRightBaseModels(1, 2, 3, null);
 
-		recordInvocationHandler.assertCall(
-			"getLeftBaseModels", 1L, 2, 3, null);
+		recordInvocationHandler.assertCall("getLeftBaseModels", 1L, 2, 3, null);
 
 		reverseTableMapping.getRightPrimaryKeys(1);
 
@@ -1285,16 +1289,24 @@ public class TableMappingImplTest {
 				_rightBasePersistence, _leftBasePersistence));
 	}
 
-	private String _leftColumnName = "leftId";
-	private MockBasePersistence<Left> _leftBasePersistence;
-	private Map<Long, long[]> _mappingStore = new HashMap<Long, long[]>();
-	private String _tableName = "Lefts_Rights";
 	private DataSource _dataSource;
-	private String _rightColumnName = "rightId";
+	private MockBasePersistence<Left> _leftBasePersistence;
+	private String _leftColumnName = "leftId";
+	private Map<Long, long[]> _mappingStore = new HashMap<Long, long[]>();
 	private MockBasePersistence<Right> _rightBasePersistence;
+	private String _rightColumnName = "rightId";
 	private TableMappingImpl<Left, Right> _tableMappingImpl;
+	private String _tableName = "Lefts_Rights";
 
-	private static class GetPrimaryKeyObjInvocationHandler
+	private interface LeftModel extends BaseModel<Left> {};
+
+	private interface Left extends LeftModel {};
+
+	private interface Right extends RightModel {};
+
+	private interface RightModel extends BaseModel<Right> {};
+
+	private class GetPrimaryKeyObjInvocationHandler
 		implements InvocationHandler {
 
 		public GetPrimaryKeyObjInvocationHandler(Serializable primaryKey) {
@@ -1316,50 +1328,58 @@ public class TableMappingImplTest {
 
 	}
 
-	private static interface LeftModel extends BaseModel<Left> {};
+	private class MockAddMappingSqlUpdate implements SqlUpdate {
 
-	private static interface Left extends LeftModel {};
+		public MockAddMappingSqlUpdate(
+			DataSource dataSource, String sql, int[] types) {
 
-	private static class MockMultiVMPool implements MultiVMPool {
-
-		@Override
-		public void clear() {
-			_portalCaches.clear();
+			Assert.assertSame(_dataSource, dataSource);
+			Assert.assertEquals(
+				"INSERT INTO " + _tableName + " (" + _leftColumnName +
+					", " + _rightColumnName+ ") VALUES (?, ?)",
+				sql);
+			Assert.assertArrayEquals(
+				new int[] {Types.BIGINT, Types.BIGINT},
+				types);
 		}
 
 		@Override
-		public PortalCache<? extends Serializable, ? extends Serializable>
-			getCache(String name) {
+		public int update(Object... params) {
+			Assert.assertEquals(2, params.length);
+			Assert.assertSame(Long.class, params[0].getClass());
+			Assert.assertSame(Long.class, params[1].getClass());
 
-			PortalCache<?, ?> portalCache = _portalCaches.get(name);
+			Long leftPrimaryKey = (Long)params[0];
+			Long rightPrimaryKey = (Long)params[1];
 
-			if (portalCache == null) {
-				portalCache = new MemoryPortalCache<Long, long[]>(name, 16);
+			long[] rightPrimaryKeys = _mappingStore.get(leftPrimaryKey);
 
-				_portalCaches.put(name, portalCache);
+			if (rightPrimaryKeys == null) {
+				rightPrimaryKeys = new long[1];
+
+				rightPrimaryKeys[0] = rightPrimaryKey;
+
+				_mappingStore.put(leftPrimaryKey, rightPrimaryKeys);
+			}
+			else if (ArrayUtil.contains(rightPrimaryKeys, rightPrimaryKey)) {
+				throw new RuntimeException(
+					"Unique key violation for left primary key " +
+						leftPrimaryKey + " and right primary key " +
+							rightPrimaryKey);
+			}
+			else {
+				rightPrimaryKeys = ArrayUtil.append(
+					rightPrimaryKeys, rightPrimaryKey);
+
+				_mappingStore.put(leftPrimaryKey, rightPrimaryKeys);
 			}
 
-			return (PortalCache<? extends Serializable, ? extends Serializable>)
-				portalCache;
+			return 1;
 		}
 
-		@Override
-		public PortalCache<? extends Serializable, ? extends Serializable>
-			getCache(String name, boolean blocking) {
-
-			return getCache(name);
-		}
-
-		@Override
-		public void removeCache(String name) {
-			_portalCaches.remove(name);
-		}
-
-		private Map<String, PortalCache<?, ?>> _portalCaches =
-			new HashMap<String, PortalCache<?, ?>>();
 	}
 
-	private static class MockBasePersistence<T extends BaseModel<T>>
+	private class MockBasePersistence<T extends BaseModel<T>>
 		extends BasePersistenceImpl<T> {
 
 		public MockBasePersistence(Class<T> clazz) {
@@ -1391,206 +1411,6 @@ public class TableMappingImplTest {
 
 	}
 
-	private static class RecorderModelListener<T extends BaseModel<T>>
-		extends BaseModelListener<T> {
-
-		public void assertOnAfterAddAssociation(
-			boolean called, Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			assertCall(
-				0, called, classPK, associationClassName, associationClassPK);
-		}
-
-		public void assertOnAfterRemoveAssociation(
-			boolean called, Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			assertCall(
-				1, called, classPK, associationClassName, associationClassPK);
-		}
-
-		public void assertOnBeforeAddAssociation(
-			boolean called, Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			assertCall(
-				2, called, classPK, associationClassName, associationClassPK);
-		}
-
-		public void assertOnBeforeRemoveAssociation(
-			boolean called, Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			assertCall(
-				3, called, classPK, associationClassName, associationClassPK);
-		}
-
-		@Override
-		public void onAfterAddAssociation(
-			Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			record(0, classPK, associationClassName, associationClassPK);
-		}
-
-		@Override
-		public void onAfterRemoveAssociation(
-			Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			record(1, classPK, associationClassName, associationClassPK);
-		}
-
-		@Override
-		public void onBeforeAddAssociation(
-			Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			record(2, classPK, associationClassName, associationClassPK);
-		}
-
-		@Override
-		public void onBeforeRemoveAssociation(
-			Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			record(3, classPK, associationClassName, associationClassPK);
-		}
-
-		private void assertCall(
-			int index, boolean called, Object classPK,
-			String associationClassName, Object associationClassPK) {
-
-			if (called) {
-				Assert.assertSame(_classPKs[index], classPK);
-				Assert.assertEquals(
-					_associationClassNames[index], associationClassName);
-				Assert.assertSame(
-					_associationClassPKs[index], associationClassPK);
-			}
-			else if (_markers[index]) {
-				Assert.fail("Called onAfterAddAssociation.");
-			}
-		}
-
-		private void record(
-			int index, Object classPK, String associationClassName,
-			Object associationClassPK) {
-
-			_markers[index] = true;
-			_classPKs[index] = classPK;
-			_associationClassNames[index] = associationClassName;
-			_associationClassPKs[index] = associationClassPK;
-		}
-
-		private boolean[] _markers = new boolean[4];
-		private Object[] _classPKs = new Object[4];
-		private String[] _associationClassNames = new String[4];
-		private Object[] _associationClassPKs = new Object[4];
-
-	}
-
-	private static class RecordInvocationHandler implements InvocationHandler {
-
-		@Override
-		public Object invoke(Object proxy, Method method, Object[] args) {
-			_records.put(method.getName(), args);
-
-			Class<?> returnType = method.getReturnType();
-
-			if (returnType == boolean.class) {
-				return false;
-			}
-
-			if (returnType == int.class) {
-				return 0;
-			}
-
-			if (returnType == List.class) {
-				return Collections.emptyList();
-			}
-
-			if (returnType == long[].class) {
-				return new long[0];
-			}
-
-			if (returnType == TableMapping.class) {
-				return _tableMapping;
-			}
-
-			return null;
-		}
-
-		public void assertCall(String methodName, Object... args) {
-			Object[] record = _records.get(methodName);
-
-			Assert.assertArrayEquals(record, args);
-		}
-
-		public void setTableMapping(TableMapping<?, ?> tableMapping) {
-			_tableMapping = tableMapping;
-		}
-
-		private TableMapping<?, ?> _tableMapping;
-		private Map<String, Object[]> _records = new
-			HashMap<String, Object[]>();
-
-	}
-
-	private static interface Right extends RightModel {};
-
-	private static interface RightModel extends BaseModel<Right> {};
-
-	private class MockAddMappingSqlUpdate implements SqlUpdate {
-
-		public MockAddMappingSqlUpdate(
-			DataSource dataSource, String sql, int[] types) {
-
-			Assert.assertSame(_dataSource, dataSource);
-			Assert.assertEquals(
-				"INSERT INTO " + _tableName + " (" + _leftColumnName +
-					", " + _rightColumnName+ ") VALUES (?, ?)", sql);
-			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
-				types);
-		}
-
-		@Override
-		public int update(Object... params) {
-			Assert.assertEquals(2, params.length);
-			Assert.assertSame(Long.class, params[0].getClass());
-			Assert.assertSame(Long.class, params[1].getClass());
-
-			Long leftPrimaryKey = (Long)params[0];
-			Long rightPrimaryKey = (Long)params[1];
-
-			long[] rightPrimaryKeys = _mappingStore.get(leftPrimaryKey);
-
-			if (rightPrimaryKeys == null) {
-				rightPrimaryKeys = new long[1];
-
-				rightPrimaryKeys[0] = rightPrimaryKey;
-
-				_mappingStore.put(leftPrimaryKey, rightPrimaryKeys);
-			}
-			else if (ArrayUtil.contains(rightPrimaryKeys, rightPrimaryKey)) {
-				throw new RuntimeException(
-					"Unique key violation, leftPrimaryKey : " + leftPrimaryKey +
-						", rightPrimaryKey : " + rightPrimaryKey);
-			}
-			else {
-				rightPrimaryKeys = ArrayUtil.append(
-					rightPrimaryKeys, rightPrimaryKey);
-
-				_mappingStore.put(leftPrimaryKey, rightPrimaryKeys);
-			}
-
-			return 1;
-		}
-
-	}
-
 	private class MockDeleteLeftPrimaryKeyTableMappingsSqlUpdate
 		implements SqlUpdate {
 
@@ -1599,10 +1419,10 @@ public class TableMappingImplTest {
 
 			Assert.assertSame(_dataSource, dataSource);
 			Assert.assertEquals(
-				"DELETE FROM " + _tableName + " WHERE " +
-					_leftColumnName + " = ?", sql);
-			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT }, types);
+				"DELETE FROM " + _tableName + " WHERE " + _leftColumnName +
+					" = ?",
+				sql);
+			Assert.assertArrayEquals(new int[] {Types.BIGINT}, types);
 		}
 
 		@Override
@@ -1633,57 +1453,6 @@ public class TableMappingImplTest {
 
 	}
 
-	private class MockDeleteRightPrimaryKeyTableMappingsSqlUpdate
-		implements SqlUpdate {
-
-		public MockDeleteRightPrimaryKeyTableMappingsSqlUpdate(
-			DataSource dataSource, String sql, int[] types) {
-
-			Assert.assertSame(_dataSource, dataSource);
-			Assert.assertEquals(
-				"DELETE FROM " + _tableName + " WHERE " +
-					_rightColumnName + " = ?", sql);
-			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT }, types);
-		}
-
-		@Override
-		public int update(Object... params) {
-			Assert.assertEquals(1, params.length);
-			Assert.assertSame(Long.class, params[0].getClass());
-
-			if (_databaseError) {
-				throw new RuntimeException("Database error");
-			}
-
-			Long rightPrimaryKey = (Long)params[0];
-
-			int count = 0;
-
-			for (Map.Entry<Long, long[]> entry : _mappingStore.entrySet()) {
-				long[] rightPrimaryKeys = entry.getValue();
-
-				if (ArrayUtil.contains(rightPrimaryKeys, rightPrimaryKey)) {
-					count++;
-
-					rightPrimaryKeys = ArrayUtil.remove(
-						rightPrimaryKeys, rightPrimaryKey);
-
-					entry.setValue(rightPrimaryKeys);
-				}
-			}
-
-			return count;
-		}
-
-		public void setDatabaseError(boolean databaseError) {
-			_databaseError = databaseError;
-		}
-
-		private boolean _databaseError;
-
-	}
-
 	private class MockDeleteMappingSqlUpdate implements SqlUpdate {
 
 		public MockDeleteMappingSqlUpdate(
@@ -1691,10 +1460,11 @@ public class TableMappingImplTest {
 
 			Assert.assertSame(_dataSource, dataSource);
 			Assert.assertEquals(
-				"DELETE FROM " + _tableName + " WHERE " +
-				_leftColumnName + " = ? AND " + _rightColumnName+ " = ?", sql);
+				"DELETE FROM " + _tableName + " WHERE " + _leftColumnName +
+					" = ? AND " + _rightColumnName + " = ?",
+				sql);
 			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT, java.sql.Types.BIGINT },
+				new int[] {Types.BIGINT, Types.BIGINT},
 				types);
 		}
 
@@ -1737,6 +1507,57 @@ public class TableMappingImplTest {
 
 	}
 
+	private class MockDeleteRightPrimaryKeyTableMappingsSqlUpdate
+		implements SqlUpdate {
+
+		public MockDeleteRightPrimaryKeyTableMappingsSqlUpdate(
+			DataSource dataSource, String sql, int[] types) {
+
+			Assert.assertSame(_dataSource, dataSource);
+			Assert.assertEquals(
+				"DELETE FROM " + _tableName + " WHERE " + _rightColumnName +
+					" = ?",
+				sql);
+			Assert.assertArrayEquals(new int[] {Types.BIGINT}, types);
+		}
+
+		@Override
+		public int update(Object... params) {
+			Assert.assertEquals(1, params.length);
+			Assert.assertSame(Long.class, params[0].getClass());
+
+			if (_databaseError) {
+				throw new RuntimeException("Database error");
+			}
+
+			int count = 0;
+
+			Long rightPrimaryKey = (Long)params[0];
+
+			for (Map.Entry<Long, long[]> entry : _mappingStore.entrySet()) {
+				long[] rightPrimaryKeys = entry.getValue();
+
+				if (ArrayUtil.contains(rightPrimaryKeys, rightPrimaryKey)) {
+					count++;
+
+					rightPrimaryKeys = ArrayUtil.remove(
+						rightPrimaryKeys, rightPrimaryKey);
+
+					entry.setValue(rightPrimaryKeys);
+				}
+			}
+
+			return count;
+		}
+
+		public void setDatabaseError(boolean databaseError) {
+			_databaseError = databaseError;
+		}
+
+		private boolean _databaseError;
+
+	}
+
 	private class MockGetLeftPrimaryKeysSqlQuery
 		implements MappingSqlQuery<Long> {
 
@@ -1747,10 +1568,9 @@ public class TableMappingImplTest {
 			Assert.assertSame(_dataSource, dataSource);
 			Assert.assertEquals(
 				"SELECT " + _leftColumnName + " FROM " +
-					_tableName + " WHERE " + _rightColumnName + "=?",
+					_tableName + " WHERE " + _rightColumnName + " = ?",
 				sql);
-			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT }, types);
+			Assert.assertArrayEquals(new int[] {Types.BIGINT}, types);
 			Assert.assertSame(RowMapper.PRIMARY_KEY, rowMapper);
 		}
 
@@ -1765,17 +1585,17 @@ public class TableMappingImplTest {
 
 			Long rightPrimaryKey = (Long)params[0];
 
-			List<Long> leftPrimaryKeyList = new ArrayList<Long>();
+			List<Long> leftPrimaryKeysList = new ArrayList<Long>();
 
 			for (Map.Entry<Long, long[]> entry : _mappingStore.entrySet()) {
 				long[] rightPrimaryKeys = entry.getValue();
 
 				if (ArrayUtil.contains(rightPrimaryKeys, rightPrimaryKey)) {
-					leftPrimaryKeyList.add(entry.getKey());
+					leftPrimaryKeysList.add(entry.getKey());
 				}
 			}
 
-			return leftPrimaryKeyList;
+			return leftPrimaryKeysList;
 		}
 
 		public void setDatabaseError(boolean databaseError) {
@@ -1796,10 +1616,9 @@ public class TableMappingImplTest {
 			Assert.assertSame(_dataSource, dataSource);
 			Assert.assertEquals(
 				"SELECT " + _rightColumnName + " FROM " +
-					_tableName + " WHERE " + _leftColumnName + "=?",
+					_tableName + " WHERE " + _leftColumnName + " = ?",
 				sql);
-			Assert.assertArrayEquals(
-				new int[] { java.sql.Types.BIGINT }, types);
+			Assert.assertArrayEquals(new int[] {Types.BIGINT}, types);
 			Assert.assertSame(RowMapper.PRIMARY_KEY, rowMapper);
 		}
 
@@ -1820,14 +1639,14 @@ public class TableMappingImplTest {
 				return Collections.emptyList();
 			}
 
-			List<Long> rightPrimaryKeyList = new ArrayList<Long>(
+			List<Long> rightPrimaryKeysList = new ArrayList<Long>(
 				rightPrimaryKeys.length);
 
 			for (long rightPrimaryKey : rightPrimaryKeys) {
-				rightPrimaryKeyList.add(rightPrimaryKey);
+				rightPrimaryKeysList.add(rightPrimaryKey);
 			}
 
-			return rightPrimaryKeyList;
+			return rightPrimaryKeysList;
 		}
 
 		public void setDatabaseError(boolean databaseError) {
@@ -1865,13 +1684,53 @@ public class TableMappingImplTest {
 		private int _counter;
 	}
 
+	private class MockMultiVMPool implements MultiVMPool {
+
+		@Override
+		public void clear() {
+			_portalCaches.clear();
+		}
+
+		@Override
+		public PortalCache<? extends Serializable, ? extends Serializable>
+			getCache(String name) {
+
+			PortalCache<?, ?> portalCache = _portalCaches.get(name);
+
+			if (portalCache == null) {
+				portalCache = new MemoryPortalCache<Long, long[]>(name, 16);
+
+				_portalCaches.put(name, portalCache);
+			}
+
+			return (PortalCache<? extends Serializable, ? extends Serializable>)
+				portalCache;
+		}
+
+		@Override
+		public PortalCache<? extends Serializable, ? extends Serializable>
+			getCache(String name, boolean blocking) {
+
+			return getCache(name);
+		}
+
+		@Override
+		public void removeCache(String name) {
+			_portalCaches.remove(name);
+		}
+
+		private Map<String, PortalCache<?, ?>> _portalCaches =
+			new HashMap<String, PortalCache<?, ?>>();
+
+	}
+
 	private class MockSqlUpdateFactory implements SqlUpdateFactory {
 
 		@Override
 		public SqlUpdate getSqlUpdate(
 			DataSource dataSource, String sql, int[] types) {
 
-			int count = _counter++;
+			int count = _count++;
 
 			if (count == 0) {
 				return new MockAddMappingSqlUpdate(dataSource, sql, types);
@@ -1894,7 +1753,150 @@ public class TableMappingImplTest {
 			return null;
 		}
 
-		private int _counter;
+		private int _count;
+
+	}
+
+	private class RecorderModelListener<T extends BaseModel<T>>
+		extends BaseModelListener<T> {
+
+		public void assertOnAfterAddAssociation(
+			boolean called, Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_assertCall(
+				0, called, classPK, associationClassName, associationClassPK);
+		}
+
+		public void assertOnAfterRemoveAssociation(
+			boolean called, Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_assertCall(
+				1, called, classPK, associationClassName, associationClassPK);
+		}
+
+		public void assertOnBeforeAddAssociation(
+			boolean called, Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_assertCall(
+				2, called, classPK, associationClassName, associationClassPK);
+		}
+
+		public void assertOnBeforeRemoveAssociation(
+			boolean called, Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_assertCall(
+				3, called, classPK, associationClassName, associationClassPK);
+		}
+
+		@Override
+		public void onAfterAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_record(0, classPK, associationClassName, associationClassPK);
+		}
+
+		@Override
+		public void onAfterRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_record(1, classPK, associationClassName, associationClassPK);
+		}
+
+		@Override
+		public void onBeforeAddAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_record(2, classPK, associationClassName, associationClassPK);
+		}
+
+		@Override
+		public void onBeforeRemoveAssociation(
+			Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_record(3, classPK, associationClassName, associationClassPK);
+		}
+
+		private void _assertCall(
+			int index, boolean called, Object classPK,
+			String associationClassName, Object associationClassPK) {
+
+			if (called) {
+				Assert.assertSame(_classPKs[index], classPK);
+				Assert.assertEquals(
+					_associationClassNames[index], associationClassName);
+				Assert.assertSame(
+					_associationClassPKs[index], associationClassPK);
+			}
+			else if (_markers[index]) {
+				Assert.fail("Called onAfterAddAssociation");
+			}
+		}
+
+		private void _record(
+			int index, Object classPK, String associationClassName,
+			Object associationClassPK) {
+
+			_markers[index] = true;
+			_classPKs[index] = classPK;
+			_associationClassNames[index] = associationClassName;
+			_associationClassPKs[index] = associationClassPK;
+		}
+
+		private String[] _associationClassNames = new String[4];
+		private Object[] _associationClassPKs = new Object[4];
+		private Object[] _classPKs = new Object[4];
+		private boolean[] _markers = new boolean[4];
+
+	}
+
+	private class RecordInvocationHandler implements InvocationHandler {
+
+		public void assertCall(String methodName, Object... args) {
+			Object[] record = _records.get(methodName);
+
+			Assert.assertArrayEquals(record, args);
+		}
+
+		@Override
+		public Object invoke(Object proxy, Method method, Object[] args) {
+			_records.put(method.getName(), args);
+
+			Class<?> returnType = method.getReturnType();
+
+			if (returnType == boolean.class) {
+				return false;
+			}
+			else if (returnType == int.class) {
+				return 0;
+			}
+			else if (returnType == List.class) {
+				return Collections.emptyList();
+			}
+			else if (returnType == long[].class) {
+				return new long[0];
+			}
+			else if (returnType == TableMapping.class) {
+				return _tableMapping;
+			}
+
+			return null;
+		}
+
+		public void setTableMapping(TableMapping<?, ?> tableMapping) {
+			_tableMapping = tableMapping;
+		}
+
+		private Map<String, Object[]> _records = new
+			HashMap<String, Object[]>();
+		private TableMapping<?, ?> _tableMapping;
 
 	}
 

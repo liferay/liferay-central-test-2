@@ -463,8 +463,8 @@ public class TableMappingImpl<L extends BaseModel<L>, R extends BaseModel<R>>
 
 	protected SqlUpdate addTableMappingSqlUpdate;
 	protected SqlUpdate deleteLeftPrimaryKeyTableMappingsSqlUpdate;
-	protected SqlUpdate deleteTableMappingSqlUpdate;
 	protected SqlUpdate deleteRightPrimaryKeyTableMappingsSqlUpdate;
+	protected SqlUpdate deleteTableMappingSqlUpdate;
 	protected MappingSqlQuery<Long> getLeftPrimaryKeysSqlQuery;
 	protected MappingSqlQuery<Long> getRightPrimaryKeysSqlQuery;
 	protected BasePersistence<L> leftBasePersistence;
