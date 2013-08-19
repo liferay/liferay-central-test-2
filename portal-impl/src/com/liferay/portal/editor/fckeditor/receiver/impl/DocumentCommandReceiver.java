@@ -26,7 +26,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFolder;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -113,7 +112,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected Element getFileElement(
-			Element fileElement, ThemeDisplay themeDisplay, FileEntry fileEntry)
+			CommandArgument commandArgument, Element fileElement,
+			FileEntry fileEntry)
 		throws Exception {
 
 		String name = fileEntry.getTitle();
@@ -138,8 +138,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		fileElement.setAttribute("size", getSize(fileEntry.getSize()));
 
 		String url = DLUtil.getPreviewURL(
-			fileEntry, fileEntry.getFileVersion(), themeDisplay,
-			StringPool.BLANK, false, false);
+			fileEntry, fileEntry.getFileVersion(),
+			commandArgument.getThemeDisplay(), StringPool.BLANK, false, false);
 
 		fileElement.setAttribute("url", url);
 
@@ -147,7 +147,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	}
 
 	protected List<Element> getFileElements(
-			Document document, ThemeDisplay themeDisplay, Folder folder)
+			CommandArgument commandArgument, Document document, Folder folder)
 		throws Exception {
 
 		List<FileEntry> fileEntries = DLAppServiceUtil.getFileEntries(
@@ -158,7 +158,8 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		for (FileEntry fileEntry : fileEntries) {
 			Element fileElement = document.createElement("File");
 
-			fileElement = getFileElement(fileElement, themeDisplay, fileEntry);
+			fileElement = getFileElement(
+				commandArgument, fileElement, fileEntry);
 
 			fileElements.add(fileElement);
 		}
@@ -219,7 +220,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			group.getGroupId(), commandArgument.getCurrentFolder());
 
 		List<Element> fileElements = getFileElements(
-			document, commandArgument.getThemeDisplay(), folder);
+			commandArgument, document, folder);
 
 		for (Element fileElement : fileElements) {
 			filesElement.appendChild(fileElement);

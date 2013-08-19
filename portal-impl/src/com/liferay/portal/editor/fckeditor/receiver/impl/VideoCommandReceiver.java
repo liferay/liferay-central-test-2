@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.xuggler.XugglerUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
 
@@ -56,18 +55,19 @@ public class VideoCommandReceiver extends DocumentCommandReceiver {
 
 	@Override
 	protected Element getFileElement(
-			Element fileElement, ThemeDisplay themeDisplay, FileEntry fileEntry)
+			CommandArgument commandArgument, Element fileElement,
+			FileEntry fileEntry)
 		throws Exception {
 
 		fileElement = super.getFileElement(
-			fileElement, themeDisplay, fileEntry);
+			commandArgument, fileElement, fileEntry);
 
 		if (!VideoProcessorUtil.hasVideo(fileEntry.getFileVersion())) {
 			fileElement.setAttribute(
 				"errorMessage",
 				LanguageUtil.get(
-					themeDisplay.getLocale(),
-					"video-preview-has-not-been-generated-yet-please-retry-" +
+					commandArgument.getLocale(),
+					"the-video-preview-is-not-yet-ready.-please-try-again-" +
 						"later"));
 		}
 
@@ -76,8 +76,10 @@ public class VideoCommandReceiver extends DocumentCommandReceiver {
 
 	@Override
 	protected List<Element> getFileElements(
-			Document document, ThemeDisplay themeDisplay, Folder folder)
+			CommandArgument commandArgument, Document document, Folder folder)
 		throws Exception {
+
+		List<Element> fileElements = new ArrayList<Element>();
 
 		List<FileEntry> fileEntries = null;
 
@@ -92,12 +94,11 @@ public class VideoCommandReceiver extends DocumentCommandReceiver {
 				folder.getRepositoryId(), folder.getFolderId());
 		}
 
-		List<Element> fileElements = new ArrayList<Element>();
-
 		for (FileEntry fileEntry : fileEntries) {
 			Element fileElement = document.createElement("File");
 
-			fileElement = getFileElement(fileElement, themeDisplay, fileEntry);
+			fileElement = getFileElement(
+				commandArgument, fileElement, fileEntry);
 
 			fileElements.add(fileElement);
 		}
@@ -106,13 +107,13 @@ public class VideoCommandReceiver extends DocumentCommandReceiver {
 	}
 
 	private String[] getVideoMimeTypes() {
-		Set<String> videoMimesSet = VideoProcessorUtil.getVideoMimeTypes();
+		Set<String> videoMimeTypes = VideoProcessorUtil.getVideoMimeTypes();
 
-		if (videoMimesSet == null) {
+		if (videoMimeTypes == null) {
 			return null;
 		}
 
-		return ArrayUtil.toStringArray(videoMimesSet.toArray());
+		return ArrayUtil.toStringArray(videoMimeTypes.toArray());
 	}
 
 }
