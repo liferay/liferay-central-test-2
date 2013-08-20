@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.search;
 
 /**
  * @author Michael C. Han
- * @see org.apache.lucene.search.spell.StringDistance
+ * @see    org.apache.lucene.search.spell.StringDistance
  */
 public interface StringDistanceCalculator {
 
