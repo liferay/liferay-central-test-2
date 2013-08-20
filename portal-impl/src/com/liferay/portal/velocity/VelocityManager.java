@@ -76,7 +76,7 @@ public class VelocityManager extends BaseTemplateManager {
 
 		extendedProperties.setProperty(
 			VelocityEngine.DIRECTIVE_IF_TOSTRING_NULLCHECK,
-			PropsValues.VELOCITY_ENGINE_DIRECTIVE_IF_TOSTRING_NULLCHECK);
+			PropsValues.VELOCITY_ENGINE_DIRECTIVE_IF_TO_STRING_NUL_LCHECK);
 
 		extendedProperties.setProperty(
 			VelocityEngine.EVENTHANDLER_METHODEXCEPTION,
