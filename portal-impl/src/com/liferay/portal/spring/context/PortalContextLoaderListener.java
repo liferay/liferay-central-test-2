@@ -240,11 +240,11 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		SingleVMPoolUtil.clear();
 		WebCachePoolUtil.clear();
 
-		ServletContextPool.put(_portalServlerContextName, servletContext);
-
 		ClassLoader portalClassLoader = ClassLoaderUtil.getPortalClassLoader();
 
 		ClassLoaderPool.register(_portalServlerContextName, portalClassLoader);
+
+		ServletContextPool.put(_portalServlerContextName, servletContext);
 
 		BeanLocatorImpl beanLocatorImpl = new BeanLocatorImpl(
 			portalClassLoader, applicationContext);
@@ -297,7 +297,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	private static Field _filteredPropertyDescriptorsCacheField;
 	private static String _portalServlerContextName = StringPool.BLANK;
-	private static String _portalServletContextPath = "/";
+	private static String _portalServletContextPath = StringPool.SLASH;
 
 	static {
 		try {
