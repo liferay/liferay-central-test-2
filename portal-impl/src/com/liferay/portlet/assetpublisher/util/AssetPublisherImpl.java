@@ -390,12 +390,12 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 
 		if (!ArrayUtil.isEmpty(allCategoryIds)) {
-			assetEntries = _filterAssetEntriesByAllCategories(
+			assetEntries = _filterAssetCategoriesAssetEntries(
 				assetEntries, allCategoryIds);
 		}
 
 		if (!ArrayUtil.isEmpty(allTagNames)) {
-			assetEntries = _filterAssetEntriesByAllTags(
+			assetEntries = _filterAssetTagNamesAssetEntries(
 				assetEntries, allTagNames);
 		}
 
@@ -1171,16 +1171,16 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 	}
 
-	private List<AssetEntry> _filterAssetEntriesByAllCategories(
-			List<AssetEntry> assetEntries, long[] categoryIds)
+	private List<AssetEntry> _filterAssetCategoriesAssetEntries(
+			List<AssetEntry> assetEntries, long[] assetCategoryIds)
 		throws Exception {
 
 		List<AssetEntry> filteredAssetEntries = new ArrayList<AssetEntry>();
 
 		for (AssetEntry assetEntry : assetEntries) {
-			long[] assetEntryCategoryIds = assetEntry.getCategoryIds();
+			if (ArrayUtil.containsAll(
+					assetEntry.getCategoryIds(), assetCategoryIds)) {
 
-			if (ArrayUtil.containsAll(assetEntryCategoryIds, categoryIds)) {
 				filteredAssetEntries.add(assetEntry);
 			}
 		}
@@ -1188,8 +1188,8 @@ public class AssetPublisherImpl implements AssetPublisher {
 		return filteredAssetEntries;
 	}
 
-	private List<AssetEntry> _filterAssetEntriesByAllTags(
-			List<AssetEntry> assetEntries, String[] tagNames)
+	private List<AssetEntry> _filterAssetTagNamesAssetEntries(
+			List<AssetEntry> assetEntries, String[] assetTagNames)
 		throws Exception {
 
 		List<AssetEntry> filteredAssetEntries = new ArrayList<AssetEntry>();
@@ -1197,14 +1197,14 @@ public class AssetPublisherImpl implements AssetPublisher {
 		for (AssetEntry assetEntry : assetEntries) {
 			List<AssetTag> assetEntryTags = assetEntry.getTags();
 
-			String[] assetEntryTagNames = new String[tagNames.length];
+			String[] assetEntryTagNames = new String[assetTagNames.length];
 
 			for (AssetTag assetEntryTag : assetEntryTags) {
 				assetEntryTagNames = ArrayUtil.append(
 					assetEntryTagNames, assetEntryTag.getName());
 			}
 
-			if (ArrayUtil.containsAll(assetEntryTagNames, tagNames)) {
+			if (ArrayUtil.containsAll(assetEntryTagNames, assetTagNames)) {
 				filteredAssetEntries.add(assetEntry);
 			}
 		}
