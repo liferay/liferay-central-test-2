@@ -125,11 +125,8 @@ public class ArrayUtilTest {
 	public void testContainsByteArray() throws Exception {
 		byte[] array1 = {2, 3};
 
-		byte value1 = 1;
-		byte value2 = 2;
-
-		Assert.assertFalse(ArrayUtil.contains(array1, value1));
-		Assert.assertTrue(ArrayUtil.contains(array1, value2));
+		Assert.assertFalse(ArrayUtil.contains(array1, (byte)1));
+		Assert.assertTrue(ArrayUtil.contains(array1, (byte)2));
 	}
 
 	@Test
@@ -176,11 +173,8 @@ public class ArrayUtilTest {
 	public void testContainsShortArray() throws Exception {
 		short[] array = {2, 3};
 
-		short value1 = 1;
-		short value2 = 2;
-
-		Assert.assertFalse(ArrayUtil.contains(array, value1));
-		Assert.assertTrue(ArrayUtil.contains(array, value2));
+		Assert.assertFalse(ArrayUtil.contains(array, (short)1));
+		Assert.assertTrue(ArrayUtil.contains(array, (short)2));
 	}
 
 	@Test
