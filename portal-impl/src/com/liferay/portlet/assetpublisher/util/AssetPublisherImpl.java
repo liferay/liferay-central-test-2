@@ -373,6 +373,40 @@ public class AssetPublisherImpl implements AssetPublisher {
 			PortletRequest portletRequest,
 			PortletPreferences portletPreferences,
 			PermissionChecker permissionChecker, long[] groupIds,
+			long[] allCategoryIds, String[] assetEntryXmls,
+			String[] allTagNames, boolean deleteMissingAssetEntries,
+			boolean checkPermission)
+		throws Exception {
+
+		List<AssetEntry> assetEntries = getAssetEntries(
+			portletRequest, portletPreferences, permissionChecker, groupIds,
+			assetEntryXmls, deleteMissingAssetEntries, checkPermission);
+
+		if (assetEntries.isEmpty() ||
+			(ArrayUtil.isEmpty(allCategoryIds) &&
+			 ArrayUtil.isEmpty(allTagNames))) {
+
+			return assetEntries;
+		}
+
+		if (!ArrayUtil.isEmpty(allCategoryIds)) {
+			assetEntries = _filterAssetEntriesByAllCategories(
+				assetEntries, allCategoryIds);
+		}
+
+		if (!ArrayUtil.isEmpty(allTagNames)) {
+			assetEntries = _filterAssetEntriesByAllTags(
+				assetEntries, allTagNames);
+		}
+
+		return assetEntries;
+	}
+
+	@Override
+	public List<AssetEntry> getAssetEntries(
+			PortletRequest portletRequest,
+			PortletPreferences portletPreferences,
+			PermissionChecker permissionChecker, long[] groupIds,
 			String[] assetEntryXmls, boolean deleteMissingAssetEntries,
 			boolean checkPermission)
 		throws Exception {
@@ -451,39 +485,6 @@ public class AssetPublisherImpl implements AssetPublisher {
 		}
 
 		return assetEntries;
-	}
-
-	@Override
-	public List<AssetEntry> getAssetEntries(
-			PortletRequest portletRequest,
-			PortletPreferences portletPreferences,
-			PermissionChecker permissionChecker, long[] groupIds,
-			long[] allCategoryIds, String[] assetEntryXmls,
-			String[] allTagNames, boolean deleteMissingAssetEntries,
-			boolean checkPermission)
-		throws Exception {
-
-		List<AssetEntry> entries = getAssetEntries(
-			portletRequest, portletPreferences, permissionChecker, groupIds,
-			assetEntryXmls, deleteMissingAssetEntries, checkPermission);
-
-		if (entries.isEmpty() ||
-			(ArrayUtil.isEmpty(allCategoryIds) &&
-			 ArrayUtil.isEmpty(allTagNames))) {
-
-			return entries;
-		}
-
-		if (!ArrayUtil.isEmpty(allCategoryIds)) {
-			entries = _filterAssetEntriesByAllCategories(
-				entries, allCategoryIds);
-		}
-
-		if (!ArrayUtil.isEmpty(allTagNames)) {
-			entries = _filterAssetEntriesByAllTags(entries, allTagNames);
-		}
-
-		return entries;
 	}
 
 	@Override
@@ -1171,12 +1172,12 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	private List<AssetEntry> _filterAssetEntriesByAllCategories(
-			List<AssetEntry> entries, long[] categoryIds)
+			List<AssetEntry> assetEntries, long[] categoryIds)
 		throws Exception {
 
 		List<AssetEntry> filteredAssetEntries = new ArrayList<AssetEntry>();
 
-		for (AssetEntry assetEntry : entries) {
+		for (AssetEntry assetEntry : assetEntries) {
 			long[] assetEntryCategoryIds = assetEntry.getCategoryIds();
 
 			if (ArrayUtil.containsAll(assetEntryCategoryIds, categoryIds)) {
@@ -1188,12 +1189,12 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	private List<AssetEntry> _filterAssetEntriesByAllTags(
-			List<AssetEntry> entries, String[] tagNames)
+			List<AssetEntry> assetEntries, String[] tagNames)
 		throws Exception {
 
 		List<AssetEntry> filteredAssetEntries = new ArrayList<AssetEntry>();
 
-		for (AssetEntry assetEntry : entries) {
+		for (AssetEntry assetEntry : assetEntries) {
 			List<AssetTag> assetEntryTags = assetEntry.getTags();
 
 			String[] assetEntryTagNames = new String[tagNames.length];
