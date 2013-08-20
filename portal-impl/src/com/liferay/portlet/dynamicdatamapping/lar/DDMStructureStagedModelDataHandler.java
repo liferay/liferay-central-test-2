@@ -128,7 +128,7 @@ public class DDMStructureStagedModelDataHandler
 			structureIds, structure.getParentStructureId(),
 			structure.getParentStructureId());
 
-		Map<String, String> ddmStructureKeys =
+		Map<String, String> structureKeys =
 			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 				DDMStructure.class + ".ddmStructureKey");
 
@@ -185,7 +185,7 @@ public class DDMStructureStagedModelDataHandler
 					structure.getStructureId(),
 					existingStructure.getStructureId());
 
-				ddmStructureKeys.put(
+				structureKeys.put(
 					structure.getStructureKey(),
 					existingStructure.getStructureKey());
 
@@ -211,7 +211,7 @@ public class DDMStructureStagedModelDataHandler
 		portletDataContext.importClassedModel(
 			structure, importedStructure, DDMPortletDataHandler.NAMESPACE);
 
-		ddmStructureKeys.put(
+		structureKeys.put(
 			structure.getStructureKey(), importedStructure.getStructureKey());
 	}
 
