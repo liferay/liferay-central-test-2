@@ -32,11 +32,11 @@ public abstract class BaseQuerySuggester implements QuerySuggester {
 		String localizedFieldName = DocumentImpl.getLocalizedName(
 			searchContext.getLanguageId(), Field.SPELL_CHECK_WORD);
 
-		List<String> keywordSuggestions = TokenizerUtil.tokenize(
+		List<String> keywords = TokenizerUtil.tokenize(
 			localizedFieldName, searchContext.getKeywords(),
 			searchContext.getLanguageId());
 
-		return CollatorUtil.collate(suggestions, keywordSuggestions);
+		return CollatorUtil.collate(suggestions, keywords);
 	}
 
 }

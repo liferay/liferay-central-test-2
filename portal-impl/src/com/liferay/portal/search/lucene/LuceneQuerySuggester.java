@@ -86,11 +86,11 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 		String localizedFieldName = DocumentImpl.getLocalizedName(
 			languageId, Field.SPELL_CHECK_WORD);
 
-		List<String> keywordTokens = TokenizerUtil.tokenize(
+		List<String> keywords = TokenizerUtil.tokenize(
 			localizedFieldName, searchContext.getKeywords(), languageId);
 
 		return spellCheckKeywords(
-			keywordTokens, localizedFieldName, searchContext, languageId, max);
+			keywords, localizedFieldName, searchContext, languageId, max);
 	}
 
 	@Override
