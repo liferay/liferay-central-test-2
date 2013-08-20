@@ -458,9 +458,9 @@ public class AssetPublisherImpl implements AssetPublisher {
 			PortletRequest portletRequest,
 			PortletPreferences portletPreferences,
 			PermissionChecker permissionChecker, long[] groupIds,
-			String[] assetEntryXmls, boolean deleteMissingAssetEntries,
-			boolean checkPermission, long[] allCategoryIds,
-			String[] allTagNames)
+			long[] allCategoryIds, String[] assetEntryXmls,
+			String[] allTagNames, boolean deleteMissingAssetEntries,
+			boolean checkPermission)
 		throws Exception {
 
 		List<AssetEntry> entries = getAssetEntries(

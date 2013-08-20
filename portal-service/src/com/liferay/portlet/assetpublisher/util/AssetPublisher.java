@@ -90,9 +90,9 @@ public interface AssetPublisher {
 			PortletRequest portletRequest,
 			PortletPreferences portletPreferences,
 			PermissionChecker permissionChecker, long[] groupIds,
-			String[] assetEntryXmls, boolean deleteMissingAssetEntries,
-			boolean checkPermission, long[] assetCategoryIds,
-			String[] assetTagNames)
+			long[] assetCategoryIds, String[] assetEntryXmls,
+			String[] assetTagNames, boolean deleteMissingAssetEntries,
+			boolean checkPermission)
 		throws Exception;
 
 	public AssetEntryQuery getAssetEntryQuery(

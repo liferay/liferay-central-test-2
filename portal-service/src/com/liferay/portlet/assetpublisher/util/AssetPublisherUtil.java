@@ -120,8 +120,8 @@ public class AssetPublisherUtil {
 
 		return getAssetPublisher().getAssetEntries(
 			portletRequest, portletPreferences, permissionChecker, groupIds,
-			assetEntryXmls, deleteMissingAssetEntries, checkPermission,
-			assetCategoryIds, assetTagNames);
+			assetCategoryIds, assetEntryXmls, assetTagNames,
+			deleteMissingAssetEntries, checkPermission);
 	}
 
 	public static AssetEntryQuery getAssetEntryQuery(
