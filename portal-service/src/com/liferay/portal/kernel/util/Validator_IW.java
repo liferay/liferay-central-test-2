@@ -203,8 +203,11 @@ public class Validator_IW {
 		return Validator.isNotNull(obj);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public boolean isNotNull(java.lang.Object[] array) {
-		return !ArrayUtil.isEmpty(array);
+		return Validator.isNotNull(array);
 	}
 
 	public boolean isNotNull(java.lang.String s) {
@@ -219,8 +222,11 @@ public class Validator_IW {
 		return Validator.isNull(obj);
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public boolean isNull(java.lang.Object[] array) {
-		return ArrayUtil.isEmpty(array);
+		return Validator.isNull(array);
 	}
 
 	public boolean isNull(java.lang.String s) {
