@@ -1195,16 +1195,12 @@ public class AssetPublisherImpl implements AssetPublisher {
 		List<AssetEntry> filteredAssetEntries = new ArrayList<AssetEntry>();
 
 		for (AssetEntry assetEntry : assetEntries) {
-			List<AssetTag> assetEntryTags = assetEntry.getTags();
+			List<AssetTag> assetTags = assetEntry.getTags();
 
-			String[] assetEntryTagNames = new String[assetTagNames.length];
+			if (ArrayUtil.containsAll(
+					assetTags.toArray(new String[assetTags.size()]),
+					assetTagNames)) {
 
-			for (AssetTag assetEntryTag : assetEntryTags) {
-				assetEntryTagNames = ArrayUtil.append(
-					assetEntryTagNames, assetEntryTag.getName());
-			}
-
-			if (ArrayUtil.containsAll(assetEntryTagNames, assetTagNames)) {
 				filteredAssetEntries.add(assetEntry);
 			}
 		}
