@@ -82,7 +82,7 @@ public class AsyncRunnable implements Externalizable, Runnable {
 			ClassLoader contextClassLoader =
 				currentThread.getContextClassLoader();
 
-			String contextServletContextName = ClassLoaderPool.getContextName(
+			String servletContextName = ClassLoaderPool.getContextName(
 				contextClassLoader);
 
 			methodHandler = new MethodHandler(
@@ -104,7 +104,7 @@ public class AsyncRunnable implements Externalizable, Runnable {
 			String beanIdentifier = identifiableBean.getBeanIdentifier();
 
 			methodHandler = new MethodHandler(
-				_invokeMethodKey, methodHandler, contextServletContextName,
+				_invokeMethodKey, methodHandler, servletContextName,
 				identifiableBeanServletContextName, beanIdentifier);
 		}
 
