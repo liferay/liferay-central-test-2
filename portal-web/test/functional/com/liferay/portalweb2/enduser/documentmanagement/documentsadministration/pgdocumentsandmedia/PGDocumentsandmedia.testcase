@@ -31,22 +31,162 @@
 	</tear-down>
 
 	<command name="AddDocument">
-		<var name="dmDocumentDescription" value="DM Document Description" />
-		<var name="dmDocumentFile" value="Document_1.doc" />
-		<var name="dmDocumentTitle" value="DM Document Title" />
+		<var name="dmDocumentDescriptionDoc" value="DM Document .doc Description" />
+		<var name="dmDocumentDescriptionDocx" value="DM Document .docx Description" />
+		<var name="dmDocumentDescriptionJpeg" value="DM Document .jpeg Description" />
+		<var name="dmDocumentDescriptionJpg" value="DM Document .jpg Description" />
+		<var name="dmDocumentDescriptionMp3" value="DM Document .mp3 Description" />
+		<var name="dmDocumentDescriptionOdt" value="DM Document .odt Description" />
+		<var name="dmDocumentDescriptionPdf" value="DM Document .pdf Description" />
+		<var name="dmDocumentDescriptionPng" value="DM Document .png Description" />
+		<var name="dmDocumentDescriptionXls" value="DM Document .xls Description" />
+		<var name="dmDocumentDescriptionXlsx" value="DM Document .xlsx Description" />
+		
+		<var name="dmDocumentFileDoc" value="Document_1.doc" />
+		<var name="dmDocumentFileDocx" value="Document_1.docx" />
+		<var name="dmDocumentFileJpeg" value="Document_1.jpeg" />
+		<var name="dmDocumentFileJpg" value="Document_1.jpg" />
+		<var name="dmDocumentFileMp3" value="Document_2.mp3" />
+		<var name="dmDocumentFileOdt" value="Document_1.odt" />
+		<var name="dmDocumentFilePdf" value="Document_1.pdf" />
+		<var name="dmDocumentFilePng" value="Document_1.png" />
+		<var name="dmDocumentFileXls" value="Document_1.xls" />
+		<var name="dmDocumentFileXlsx" value="Document_1.xlsx" />
+
+		
+		<var name="dmDocumentTitleDoc" value="DM Document .doc Title" />
+		<var name="dmDocumentTitleDocx" value="DM Document .docx Title" />
+		<var name="dmDocumentTitleJpeg" value="DM Document .jpeg Title" />
+		<var name="dmDocumentTitleJpg" value="DM Document .jpg Title" />
+		<var name="dmDocumentTitleMp3" value="DM Document .mp3 Title" />
+		<var name="dmDocumentTitleOdt" value="DM Document .odt Title" />
+		<var name="dmDocumentTitlePdf" value="DM Document .pdf Title" />
+		<var name="dmDocumentTitlePng" value="DM Document .png Title" />
+		<var name="dmDocumentTitleXls" value="DM Document .xls Title" />
+		<var name="dmDocumentTitleXlsx" value="DM Document .xlsx Title" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="DMDocument#addPG">
-			<var name="dmDocumentDescription" value="${dmDocumentDescription}" />
-			<var name="dmDocumentFile" value="${dmDocumentFile}" />
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionDoc}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileDoc}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleDoc}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionDocx}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileDocx}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleDocx}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionJpeg}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileJpeg}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleJpeg}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionJpg}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileJpg}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleJpg}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionMp3}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileMp3}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleMp3}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionOdt}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileOdt}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleOdt}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionPdf}" />
+			<var name="dmDocumentFile" value="${dmDocumentFilePdf}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitlePdf}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionPng}" />
+			<var name="dmDocumentFile" value="${dmDocumentFilePng}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitlePng}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionXls}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileXls}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleXls}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+		<execute macro="DMDocument#addPG">
+			<var name="dmDocumentDescription" value="${dmDocumentDescriptionXlsx}" />
+			<var name="dmDocumentFile" value="${dmDocumentFileXlsx}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleXlsx}" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 
 		<execute macro="DMDocument#viewPG">
-			<var name="dmDocumentTitle" value="${dmDocumentTitle}" />
+			<var name="dmDocumentTitle" value="${dmDocumentTitleDoc}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleDocx}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleJpeg}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleJpg}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleMp3}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleOdt}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitlePdf}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitlePng}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleXls}" />
+			<var name="pageName" value="${pageName}" />
+		</execute>
+
+			<execute macro="DMDocument#viewPG">
+			<var name="dmDocumentTitle" value="${dmDocumentTitleXlsx}" />
+			<var name="pageName" value="${pageName}" />
 		</execute>
 	</command>
 
