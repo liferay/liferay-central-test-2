@@ -1641,16 +1641,16 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				PortletDataHandler portletDataHandler =
 					portlet.getPortletDataHandlerInstance();
 
-				String[] configurationOptions = StringUtil.split(
+				String[] configurationPortletOptions = StringUtil.split(
 					element.attributeValue("portlet-configuration"));
 
 				PortletDataHandlerControl[] portletDataHandlerControls =
 					portletDataHandler.getImportConfigurationControls(
-						configurationOptions);
+						configurationPortletOptions);
 
 				if (ArrayUtil.isNotEmpty(portletDataHandlerControls)) {
 					_manifestSummary.addConfigurationPortlet(
-						portlet, configurationOptions);
+						portlet, configurationPortletOptions);
 				}
 
 				if (!(portletDataHandler instanceof

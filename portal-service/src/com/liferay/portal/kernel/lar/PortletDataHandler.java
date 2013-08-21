@@ -119,7 +119,7 @@ public interface PortletDataHandler {
 		Portlet portlet, ManifestSummary manifestSummary);
 
 	public PortletDataHandlerControl[] getImportConfigurationControls(
-		String[] configurationOptions);
+		String[] configurationPortletOptions);
 
 	/**
 	 * Returns an array of the controls defined for this data handler. These
