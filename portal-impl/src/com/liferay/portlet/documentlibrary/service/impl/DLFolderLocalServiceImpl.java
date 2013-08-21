@@ -244,7 +244,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			dlFolder.getGroupId(), dlFolder.getFolderId(),
 			includeTrashedEntries);
 
-		// Workflow
+		// File entry types
 
 		List<Long> fileEntryTypeIds = new ArrayList<Long>();
 
@@ -256,30 +256,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		}
 
 		if (fileEntryTypeIds.isEmpty()) {
-			fileEntryTypeIds.add(DLFileEntryTypeConstants.
-				FILE_ENTRY_TYPE_ID_ALL);
+			fileEntryTypeIds.add(
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL);
 		}
-
-		for (long fileEntryTypeId : fileEntryTypeIds) {
-			WorkflowDefinitionLink workflowDefinitionLink = null;
-
-			try {
-				workflowDefinitionLink =
-					workflowDefinitionLinkLocalService.
-						getWorkflowDefinitionLink(
-							dlFolder.getCompanyId(), dlFolder.getGroupId(),
-							DLFolder.class.getName(), dlFolder.getFolderId(),
-							fileEntryTypeId);
-			}
-			catch (NoSuchWorkflowDefinitionLinkException nswdle) {
-				continue;
-			}
-
-			workflowDefinitionLinkLocalService.deleteWorkflowDefinitionLink(
-				workflowDefinitionLink);
-		}
-
-		// File entry types
 
 		dlFileEntryTypeLocalService.unsetFolderFileEntryTypes(
 			dlFolder.getFolderId());
@@ -315,6 +294,27 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			if (_log.isDebugEnabled()) {
 				_log.debug(nsde.getMessage());
 			}
+		}
+
+		// Workflow
+
+		for (long fileEntryTypeId : fileEntryTypeIds) {
+			WorkflowDefinitionLink workflowDefinitionLink = null;
+
+			try {
+				workflowDefinitionLink =
+					workflowDefinitionLinkLocalService.
+						getWorkflowDefinitionLink(
+							dlFolder.getCompanyId(), dlFolder.getGroupId(),
+							DLFolder.class.getName(), dlFolder.getFolderId(),
+							fileEntryTypeId);
+			}
+			catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+				continue;
+			}
+
+			workflowDefinitionLinkLocalService.deleteWorkflowDefinitionLink(
+				workflowDefinitionLink);
 		}
 
 		return dlFolder;
