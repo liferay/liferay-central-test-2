@@ -26,6 +26,7 @@ import java.util.Locale;
 import javax.portlet.CacheControl;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -147,11 +148,13 @@ public abstract class MimeResponseImpl
 			throw new IllegalArgumentException("Content type cannot be null");
 		}
 
-		if (getLifecycle().equals(PortletRequest.RESOURCE_PHASE) ||
-			_portletRequestImpl.getWindowState().equals(
-				LiferayWindowState.EXCLUSIVE) ||
-			contentType.startsWith(
-				_portletRequestImpl.getResponseContentType())) {
+		String lifecycle = getLifecycle();
+		WindowState windowState = _portletRequestImpl.getWindowState();
+
+		if (contentType.startsWith(
+				_portletRequestImpl.getResponseContentType()) ||
+			lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
+			windowState.equals(LiferayWindowState.EXCLUSIVE)) {
 
 			_contentType = contentType;
 
