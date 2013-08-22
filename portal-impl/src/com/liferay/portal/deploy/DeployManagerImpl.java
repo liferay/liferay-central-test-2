@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.deploy.auto.context.AutoDeploymentContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.plugin.RequiredPluginPackageException;
 import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -191,6 +192,15 @@ public class DeployManagerImpl implements DeployManager {
 
 	@Override
 	public void undeploy(String context) throws Exception {
+		if (isRequiredDeploymentContext(context)) {
+			RequiredPluginPackageException rppe =
+				new RequiredPluginPackageException();
+
+			rppe.setContext(context);
+
+			throw rppe;
+		}
+
 		File deployDir = new File(getDeployDir(), context);
 
 		DeployUtil.undeploy(ServerDetector.getServerId(), deployDir);
