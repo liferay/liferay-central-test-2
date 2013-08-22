@@ -305,11 +305,11 @@ public class LiferaySeleniumHelper {
 	}
 
 	public static String getEmailContent(String index) throws Exception {
-		return EmailCommands.getEmailContent(index);
+		return EmailCommands.getEmailContent(GetterUtil.getInteger(index));
 	}
 
 	public static String getEmailSubject(String index) throws Exception {
-		return EmailCommands.getEmailSubject(index);
+		return EmailCommands.getEmailSubject(GetterUtil.getInteger(index));
 	}
 
 	public static String getNumberDecrement(String value) {

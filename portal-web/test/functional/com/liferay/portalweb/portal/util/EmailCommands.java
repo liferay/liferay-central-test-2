@@ -14,8 +14,6 @@
 
 package com.liferay.portalweb.portal.util;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-
 import com.sun.mail.imap.IMAPFolder;
 
 import java.util.Properties;
@@ -79,22 +77,18 @@ public class EmailCommands {
 		_imapFolder.close(true);
 	}
 
-	public static String getEmailContent(String index) throws Exception {
-		int i = GetterUtil.getInteger(index);
-
-		Message message = _imapFolder.getMessage(i);
+	public static String getEmailContent(int index) throws Exception {
+		Message message = _imapFolder.getMessage(index);
 
 		String content = (String)message.getContent();
 
 		return content.trim();
 	}
 
-	public static String getEmailSubject(String index) throws Exception {
-		int i = GetterUtil.getInteger(index);
+	public static String getEmailSubject(int index) throws Exception {
+		Message message = _imapFolder.getMessage(index);
 
-		Message message = _imapFolder.getMessage(i);
-
-		String subject = (String)message.getSubject();
+		String subject = message.getSubject();
 
 		return subject;
 	}
@@ -102,9 +96,9 @@ public class EmailCommands {
 	public static void replyToEmail(String to, String content)
 		throws Exception {
 
-		Message retreiveMessage = _imapFolder.getMessage(1);
+		Message message = _imapFolder.getMessage(1);
 
-		Message replyMessage = retreiveMessage.reply(false);
+		Message replyMessage = message.reply(false);
 
 		replyMessage.setRecipient(RecipientType.TO, new InternetAddress(to));
 		replyMessage.setText(content);
@@ -118,7 +112,7 @@ public class EmailCommands {
 	public static void sendEmail(String to, String subject, String content)
 		throws Exception {
 
-		MimeMessage message = new MimeMessage(_smtpSession);
+		Message message = new MimeMessage(_smtpSession);
 
 		message.addRecipient(RecipientType.TO, new InternetAddress(to));
 		message.setSubject(subject);

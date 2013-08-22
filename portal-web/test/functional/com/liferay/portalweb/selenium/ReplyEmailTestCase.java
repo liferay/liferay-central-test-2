@@ -27,20 +27,25 @@ public class ReplyEmailTestCase extends BaseSeleniumTestCase {
 	public void testReplyEmail() throws Exception {
 		selenium.connectToEmailAccount(
 			TestPropsValues.EMAIL_ADDRESS_1, TestPropsValues.EMAIL_PASSWORD_1);
+
 		selenium.sendEmail(
 			TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
-			"This is a test message");
+			"This is a test message.");
 
 		selenium.connectToEmailAccount(
 			TestPropsValues.EMAIL_ADDRESS_2, TestPropsValues.EMAIL_PASSWORD_2);
+
 		selenium.replyToEmail(
-			TestPropsValues.EMAIL_ADDRESS_1, "This is a reply");
+			TestPropsValues.EMAIL_ADDRESS_1, "This is a reply.");
+
 		selenium.deleteAllEmails();
 
 		selenium.connectToEmailAccount(
 			TestPropsValues.EMAIL_ADDRESS_1, TestPropsValues.EMAIL_PASSWORD_1);
+
+		selenium.assertEmailContent("1", "This is a reply.");
 		selenium.assertEmailSubject("1", "Re: Email Test");
-		selenium.assertEmailContent("1", "This is a reply");
+
 		selenium.deleteAllEmails();
 	}
 

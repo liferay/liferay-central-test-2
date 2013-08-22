@@ -27,13 +27,16 @@ public class SendEmailTestCase extends BaseSeleniumTestCase {
 	public void testSendEmail() throws Exception {
 		selenium.connectToEmailAccount(
 			TestPropsValues.EMAIL_ADDRESS_1, TestPropsValues.EMAIL_PASSWORD_1);
+
 		selenium.sendEmail(
 			TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
 			"This is a test message");
+
 		selenium.deleteAllEmails();
 
 		selenium.connectToEmailAccount(
 			TestPropsValues.EMAIL_ADDRESS_2, TestPropsValues.EMAIL_PASSWORD_2);
+
 		selenium.deleteAllEmails();
 	}
 
