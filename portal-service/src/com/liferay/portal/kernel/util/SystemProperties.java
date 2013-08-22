@@ -30,13 +30,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SystemProperties {
 
-	public static final String QUIET_LOADING = "QUIET_LOADING";
-
 	public static final String SYSTEM_PROPERTIES_FINAL =
 		"system.properties.final";
 
 	public static final String SYSTEM_PROPERTIES_LOAD =
 		"system.properties.load";
+
+	public static final String SYSTEM_PROPERTIES_QUIET =
+		"system.properties.quiet";
 
 	public static final String TMP_DIR = "java.io.tmpdir";
 
@@ -78,7 +79,8 @@ public class SystemProperties {
 
 		ClassLoader classLoader = currentThread.getContextClassLoader();
 
-		boolean quietLoading = Boolean.getBoolean(QUIET_LOADING);
+		boolean systemPropertiesQuiet = GetterUtil.getBoolean(
+			System.getProperty(SYSTEM_PROPERTIES_QUIET), true);
 
 		// system.properties
 
@@ -92,7 +94,7 @@ public class SystemProperties {
 
 				inputStream.close();
 
-				if (!quietLoading) {
+				if (!systemPropertiesQuiet) {
 					System.out.println("Loading " + url);
 				}
 			}
@@ -113,7 +115,7 @@ public class SystemProperties {
 
 				inputStream.close();
 
-				if (!quietLoading) {
+				if (!systemPropertiesQuiet) {
 					System.out.println("Loading " + url);
 				}
 			}

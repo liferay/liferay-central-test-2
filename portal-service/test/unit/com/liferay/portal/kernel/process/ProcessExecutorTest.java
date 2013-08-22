@@ -1054,6 +1054,9 @@ public class ProcessExecutorTest {
 	private static List<String> _createArguments(String jpdaOptions) {
 		List<String> arguments = new ArrayList<String>();
 
+		arguments.add(
+			"-D" + SystemProperties.SYSTEM_PROPERTIES_QUIET + "=true");
+
 		boolean coberturaParentDynamicallyInstrumented = Boolean.getBoolean(
 			"cobertura.parent.dynamically.instrumented");
 
@@ -1087,8 +1090,6 @@ public class ProcessExecutorTest {
 		if (fileName != null) {
 			arguments.add("-Dnet.sourceforge.cobertura.datafile=" + fileName);
 		}
-
-		arguments.add("-D" + SystemProperties.QUIET_LOADING + "=true");
 
 		return arguments;
 	}

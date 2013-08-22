@@ -245,9 +245,8 @@ public class SanitizerLogWrapper extends LogWrapper {
 
 	private static final String _SANITIZED = " [Sanitized]";
 
-	private static Boolean _LOG_SANITIZER_ENABLED =
-		GetterUtil.getBoolean(
-			SystemProperties.get(PropsKeys.LOG_SANITIZER_ENABLED));
+	private static boolean _LOG_SANITIZER_ENABLED = GetterUtil.getBoolean(
+		SystemProperties.get(PropsKeys.LOG_SANITIZER_ENABLED));
 
 	private static boolean _LOG_SANITIZER_ESCAPE_HTML_ENABLED = false;
 
