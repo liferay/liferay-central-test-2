@@ -24,6 +24,7 @@ import com.liferay.portal.template.TemplateContextHelper;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import freemarker.cache.TemplateCache;
+
 import freemarker.core.ParseException;
 
 import freemarker.template.Configuration;

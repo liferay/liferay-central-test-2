@@ -151,8 +151,6 @@ public class TemplateContextHelper {
 	public Map<String, Object> getHelperUtilities(
 		ClassLoader classLoader, boolean restricted) {
 
-		Map<String, Object> helperUtilities = null;
-
 		Map<String, Object>[] helperUtilitiesArray = _helperUtilitiesMaps.get(
 			classLoader);
 
@@ -162,6 +160,8 @@ public class TemplateContextHelper {
 			_helperUtilitiesMaps.put(classLoader, helperUtilitiesArray);
 		}
 		else {
+			Map<String, Object> helperUtilities = null;
+
 			if (restricted) {
 				helperUtilities = helperUtilitiesArray[1];
 			}
@@ -174,7 +174,7 @@ public class TemplateContextHelper {
 			}
 		}
 
-		helperUtilities = new HashMap<String, Object>();
+		Map<String, Object> helperUtilities = new HashMap<String, Object>();
 
 		populateCommonHelperUtilities(helperUtilities);
 		populateExtraHelperUtilities(helperUtilities);
