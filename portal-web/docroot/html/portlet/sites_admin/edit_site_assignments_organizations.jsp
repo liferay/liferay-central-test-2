@@ -154,7 +154,12 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 				viewOrganizationsURL.setParameter("tabs2", "available");
 				%>
 
-				<liferay-ui:icon image="../aui/globe" label="<%= true %>" message="assign-organizations" url="<%= viewOrganizationsURL.toString() %>" />
+				<liferay-ui:icon
+					image="../aui/globe"
+					label="<%= true %>"
+					message="assign-organizations"
+					url="<%= viewOrganizationsURL.toString() %>"
+				/>
 
 				<%
 				viewOrganizationsURL.setParameter("tabs2", "current");

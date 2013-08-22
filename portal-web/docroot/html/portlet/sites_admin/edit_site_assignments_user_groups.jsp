@@ -147,7 +147,12 @@ userGroupSearch.setEmptyResultsMessage(emptyResultsMessage);
 				viewUserGroupsURL.setParameter("tabs2", "available");
 				%>
 
-				<liferay-ui:icon image="../aui/globe" label="<%= true %>" message="assign-user-groups" url="<%= viewUserGroupsURL.toString() %>" />
+				<liferay-ui:icon
+					image="../aui/globe"
+					label="<%= true %>"
+					message="assign-user-groups"
+					url="<%= viewUserGroupsURL.toString() %>"
+				/>
 
 				<%
 				viewUserGroupsURL.setParameter("tabs2", "current");
