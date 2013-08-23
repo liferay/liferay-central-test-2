@@ -143,8 +143,7 @@ public class SeleniumBuilder {
 			testCaseCount += commandElements.size();
 		}
 
-		System.out.println(
-			"\nThere are currently " + testCaseCount + " test cases");
+		System.out.println("\nThere are " + testCaseCount + " test cases.");
 	}
 
 }
