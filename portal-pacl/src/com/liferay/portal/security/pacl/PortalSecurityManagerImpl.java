@@ -498,6 +498,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	private static class DoBeanReferenceRefreshUtilPACL implements PACL {
 
+		@Override
 		public Object getNewReferencedBean(
 			String referencedBeanName, BeanFactory beanFactory) {
 

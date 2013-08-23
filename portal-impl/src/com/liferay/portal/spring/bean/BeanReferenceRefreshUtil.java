@@ -103,6 +103,7 @@ public class BeanReferenceRefreshUtil {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public Object getNewReferencedBean(
 			String referencedBeanName, BeanFactory beanFactory) {
 
