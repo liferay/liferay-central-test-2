@@ -137,8 +137,8 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 				<%
 				Map<String, Object> data = new HashMap<String, Object>();
 
-				data.put("groupid", group.getGroupId());
 				data.put("groupdescriptivename", HtmlUtil.escape(groupDescriptiveName));
+				data.put("groupid", group.getGroupId());
 				%>
 
 				<aui:button cssClass="selector-button" data="<%= data %>" value="choose" />
