@@ -175,19 +175,19 @@ if (showLinkTitle) {
 								<dd>
 
 									<%
-									String groupName = null;
+									String groupDescriptiveName = null;
 
 									if (group.isLayout()) {
 										Group parentGroup = group.getParentGroup();
 
-										groupName = parentGroup.getDescriptiveName(locale);
+										groupDescriptiveName = parentGroup.getDescriptiveName(locale);
 									}
 									else {
-										groupName = group.getDescriptiveName(locale);
+										groupDescriptiveName = group.getDescriptiveName(locale);
 									}
 									%>
 
-									<%= HtmlUtil.escape(groupName) %>
+									<%= HtmlUtil.escape(groupDescriptiveName) %>
 								</dd>
 							</c:if>
 
