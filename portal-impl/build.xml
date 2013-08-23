@@ -135,31 +135,40 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</java>
 	</target>-->
 
-	<target name="build-bobo-browse">
-		<tempfile property="temp.file" />
+	<target name="build-bobo-browse-jar">
+		<get dest="release-3.2.0.zip" src="https://codeload.github.com/senseidb/bobo/zip/release-3.2.0" />
 
-		<mkdir dir="${temp.file}" />
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
 
-		<get dest="${temp.file}/release-3.2.0.zip" src="https://github.com/senseidb/bobo/archive/release-3.2.0.zip" />
+		<unzip
+			dest="${tstamp.value}"
+			src="release-3.2.0.zip"
+		/>
 
-		<unzip dest="${temp.file}" src="${temp.file}/release-3.2.0.zip" />
+		<delete file="release-3.2.0.zip" />
 
 		<patch patchfile="${project.dir}/lib/portal/bobo-browse/LPS-28980.patch"
-			dir="${temp.file}/bobo-release-3.2.0/"
-			strip="1" />
+			dir="${tstamp.value}/bobo-release-3.2.0"
+			strip="1"
+		/>
 
 		<patch patchfile="${project.dir}/lib/portal/bobo-browse/LPS-38192.patch"
-			dir="${temp.file}/bobo-release-3.2.0/"
-			strip="1" />
+			dir="${tstamp.value}/bobo-release-3.2.0"
+			strip="1"
+		/>
 
-		<artifact:mvn pom="${temp.file}/bobo-release-3.2.0/bobo-browse/pom.xml">
+		<artifact:mvn pom="${tstamp.value}/bobo-release-3.2.0/bobo-browse/pom.xml">
 			<arg value="package" />
 		</artifact:mvn>
 
-		<move file="${temp.file}/bobo-release-3.2.0/bobo-browse/target/bobo-browse-3.2.0.jar"
-			tofile="${project.dir}/lib/portal/bobo-browse.jar" />
+		<move
+			file="${tstamp.value}/bobo-release-3.2.0/bobo-browse/target/bobo-browse-3.2.0.jar"
+			tofile="${project.dir}/lib/portal/bobo-browse.jar.new"
+		/>
 
-		<delete dir="${temp.file}" />
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="build-creole-parser">
