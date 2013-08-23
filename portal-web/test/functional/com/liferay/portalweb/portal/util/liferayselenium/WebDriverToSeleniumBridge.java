@@ -1220,7 +1220,7 @@ public class WebDriverToSeleniumBridge
 
 		Select select = new Select(webElement);
 
-		List<WebElement> options = select.getOptions();
+		List<WebElement> optionWebElements = select.getOptions();
 
 		String label = optionLocator;
 
@@ -1237,20 +1237,21 @@ public class WebDriverToSeleniumBridge
 			if (value.startsWith("regexp:")) {
 				String regexp = value.substring(7);
 
-				_selectByRegexpValue(selectLocator, regexp);
+				selectByRegexpValue(selectLocator, regexp);
 			}
 			else {
-				for (WebElement option : options) {
-					String optionValue = option.getAttribute("value");
+				for (WebElement optionWebElement : optionWebElements) {
+					String optionWebElementValue =
+						optionWebElement.getAttribute("value");
 
-					if (optionValue.equals(value)) {
-						label = option.getText();
+					if (optionWebElementValue.equals(value)) {
+						label = optionWebElement.getText();
 
 						break;
 					}
 				}
 
-				_selectByLabel(selectLocator, label);
+				selectByLabel(selectLocator, label);
 			}
 		}
 		else {
@@ -1261,10 +1262,10 @@ public class WebDriverToSeleniumBridge
 			if (label.startsWith("regexp:")) {
 				String regexp = label.substring(7);
 
-				_selectByRegexpText(selectLocator, regexp);
+				selectByRegexpText(selectLocator, regexp);
 			}
 			else {
-				_selectByLabel(selectLocator, label);
+				selectByLabel(selectLocator, label);
 			}
 		}
 	}
@@ -1756,7 +1757,7 @@ public class WebDriverToSeleniumBridge
 		_keysSpecialChars.put(")", "0");
 	}
 
-	private void _selectByLabel(String selectLocator, String label) {
+	protected void selectByLabel(String selectLocator, String label) {
 		WebElement webElement = getWebElement(selectLocator);
 
 		keyPress(selectLocator, "\\36");
@@ -1778,21 +1779,21 @@ public class WebDriverToSeleniumBridge
 
 			Select select = new Select(webElement);
 
-			List<WebElement> options = select.getOptions();
+			List<WebElement> optionWebElements = select.getOptions();
 
-			for (WebElement option : options) {
-				String optionText = option.getText();
+			for (WebElement optionWebElement : optionWebElements) {
+				String optionWebElementText = optionWebElement.getText();
 
-				if (optionText.equals(label)) {
-					WrapsDriver wrapsDriver = (WrapsDriver)option;
+				if (optionWebElementText.equals(label)) {
+					WrapsDriver wrapsDriver = (WrapsDriver)optionWebElement;
 
 					WebDriver webDriver = wrapsDriver.getWrappedDriver();
 
 					Actions actions = new Actions(webDriver);
 
-					actions.moveToElement(option);
+					actions.moveToElement(optionWebElement);
 
-					actions.doubleClick(option);
+					actions.doubleClick(optionWebElement);
 
 					Action action = actions.build();
 
@@ -1804,24 +1805,24 @@ public class WebDriverToSeleniumBridge
 		}
 	}
 
-	private void _selectByRegexpText(String selectLocator, String regexp) {
+	protected void selectByRegexpText(String selectLocator, String regexp) {
 		WebElement webElement = getWebElement(selectLocator);
 
 		Select select = new Select(webElement);
 
-		List<WebElement> options = select.getOptions();
+		List<WebElement> optionWebElements = select.getOptions();
 
 		Pattern pattern = Pattern.compile(regexp);
 
 		int index = -1;
 
-		for (WebElement option : options) {
-			String optionText = option.getText();
+		for (WebElement optionWebElement : optionWebElements) {
+			String optionWebElementText = optionWebElement.getText();
 
-			Matcher matcher = pattern.matcher(optionText);
+			Matcher matcher = pattern.matcher(optionWebElementText);
 
 			if (matcher.matches()) {
-				index = options.indexOf(option);
+				index = optionWebElements.indexOf(optionWebElement);
 
 				break;
 			}
@@ -1830,24 +1831,25 @@ public class WebDriverToSeleniumBridge
 		select.selectByIndex(index);
 	}
 
-	private void _selectByRegexpValue(String selectLocator, String regexp) {
+	protected void selectByRegexpValue(String selectLocator, String regexp) {
 		WebElement webElement = getWebElement(selectLocator);
 
 		Select select = new Select(webElement);
 
-		List<WebElement> options = select.getOptions();
+		List<WebElement> optionWebElements = select.getOptions();
 
 		Pattern pattern = Pattern.compile(regexp);
 
 		int index = -1;
 
-		for (WebElement option : options) {
-			String optionValue = option.getAttribute("value");
+		for (WebElement optionWebElement : optionWebElements) {
+			String optionWebElementValue = optionWebElement.getAttribute(
+				"value");
 
-			Matcher matcher = pattern.matcher(optionValue);
+			Matcher matcher = pattern.matcher(optionWebElementValue);
 
 			if (matcher.matches()) {
-				index = options.indexOf(option);
+				index = optionWebElements.indexOf(optionWebElement);
 
 				break;
 			}
