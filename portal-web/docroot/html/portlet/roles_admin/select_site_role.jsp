@@ -219,7 +219,7 @@ if (step == 1) {
 							Map<String, Object> data = new HashMap<String, Object>();
 
 							data.put("groupid", group.getGroupId());
-							data.put("groupname", HtmlUtil.escapeAttribute(group.getDescriptiveName(locale)));
+							data.put("groupdescriptivename", HtmlUtil.escapeAttribute(group.getDescriptiveName(locale)));
 							data.put("roleid", role.getRoleId());
 							data.put("roletitle", HtmlUtil.escapeAttribute(role.getTitle(locale)));
 							data.put("searchcontainername", "siteRoles");
