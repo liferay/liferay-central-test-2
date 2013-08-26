@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.HashUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.CacheModel;
 import com.liferay.portal.util.PropsValues;
@@ -455,14 +456,13 @@ public class EntityCacheImpl
 		public boolean equals(Object obj) {
 			LocalCacheKey localCacheKey = (LocalCacheKey)obj;
 
-			if (localCacheKey._className.equals(_className) &&
-				localCacheKey._primaryKey.equals(_primaryKey)) {
+			if (Validator.equals(_className, localCacheKey._className) &&
+				Validator.equals(_primaryKey, localCacheKey._primaryKey)) {
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override
@@ -491,15 +491,14 @@ public class EntityCacheImpl
 		public boolean equals(Object obj) {
 			ShardLocalCacheKey shardLocalCacheKey = (ShardLocalCacheKey)obj;
 
-			if (shardLocalCacheKey._shardName.equals(_shardName) &&
-				shardLocalCacheKey._className.equals(_className) &&
-				shardLocalCacheKey._primaryKey.equals(_primaryKey)) {
+			if (Validator.equals(_shardName, shardLocalCacheKey._shardName) &&
+				Validator.equals(_className, shardLocalCacheKey._className) &&
+				Validator.equals(_primaryKey, shardLocalCacheKey._primaryKey)) {
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override
