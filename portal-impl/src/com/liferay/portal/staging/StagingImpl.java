@@ -851,17 +851,16 @@ public class StagingImpl implements Staging {
 		else if (e instanceof RemoteExportException) {
 			RemoteExportException ree = (RemoteExportException)e;
 
-			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-
 			if (ree.getType() == RemoteExportException.NO_LAYOUTS) {
 				errorMessage = LanguageUtil.get(
 					locale, "no-pages-are-selected-for-export");
 			}
+
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 		}
 		else {
-			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
-
 			errorMessage = e.getLocalizedMessage();
+			errorType = ServletResponseConstants.SC_FILE_CUSTOM_EXCEPTION;
 		}
 
 		exceptionMessagesJSONObject.put("message", errorMessage);
