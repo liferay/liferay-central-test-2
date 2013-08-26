@@ -269,19 +269,27 @@ if (Validator.isNotNull(keywords)) {
 		totalEntries="<%= searchContainer.getTotal() %>"
 	/>
 
-	<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
-		<liferay-portlet:renderURLParams varImpl="searchURL" />
-		<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
-		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-		<aui:input name="deleteTrashEntryIds" type="hidden" />
-		<aui:input name="restoreTrashEntryIds" type="hidden" />
+	<aui:nav>
+		<aui:nav-bar>
+			<div class="navbar-search pull-right">
+				<div class="form-search">
+					<aui:form action="<%= searchURL.toString() %>" method="get" name="fm">
+						<liferay-portlet:renderURLParams varImpl="searchURL" />
+						<aui:input name="<%= Constants.CMD %>" type="hidden" value="" />
+						<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
+						<aui:input name="deleteTrashEntryIds" type="hidden" />
+						<aui:input name="restoreTrashEntryIds" type="hidden" />
 
-		<aui:button-row>
-			<liferay-ui:search-form
-				page="/html/portlet/trash/entry_search.jsp"
-			/>
-		</aui:button-row>
-	</aui:form>
+						<div class="input-append">
+							<input autoFocus="<%= windowState.equals(WindowState.MAXIMIZED) %>" class="search-query span9" id="<portlet:namespace/>keywords" name="<portlet:namespace/>keywords" placeholder="<liferay-ui:message key="keywords" />" type="text" />
+
+							<aui:button primary="<%= false %>" type="submit" value="search" />
+						</div>
+					</aui:form>
+				</div>
+			</div>
+		</aui:nav-bar>
+	</aui:nav>
 
 	<liferay-ui:breadcrumb
 		showCurrentGroup="<%= false %>"
