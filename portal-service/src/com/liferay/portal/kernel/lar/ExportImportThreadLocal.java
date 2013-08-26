@@ -63,28 +63,36 @@ public class ExportImportThreadLocal {
 		return _portletValidationInProcess.get();
 	}
 
-	public static void setLayoutExportInProcess(boolean inProcess) {
-		_layoutExportInProcess.set(inProcess);
+	public static void setLayoutExportInProcess(boolean layoutExportInProcess) {
+		_layoutExportInProcess.set(layoutExportInProcess);
 	}
 
-	public static void setLayoutImportInProcess(boolean inProcess) {
-		_layoutImportInProcess.set(inProcess);
+	public static void setLayoutImportInProcess(boolean layoutImportInProcess) {
+		_layoutImportInProcess.set(layoutImportInProcess);
 	}
 
-	public static void setLayoutValidationInProcess(boolean inProcess) {
-		_layoutValidationInProcess.set(inProcess);
+	public static void setLayoutValidationInProcess(
+		boolean layoutValidationInProcess) {
+
+		_layoutValidationInProcess.set(layoutValidationInProcess);
 	}
 
-	public static void setPortletExportInProcess(boolean inProcess) {
-		_portletExportInProcess.set(inProcess);
+	public static void setPortletExportInProcess(
+		boolean portletExportInProcess) {
+
+		_portletExportInProcess.set(portletExportInProcess);
 	}
 
-	public static void setPortletImportInProcess(boolean inProcess) {
-		_portletImportInProcess.set(inProcess);
+	public static void setPortletImportInProcess(
+		boolean portletImportInProcess) {
+
+		_portletImportInProcess.set(portletImportInProcess);
 	}
 
-	public static void setPortletValidationInProcess(boolean inProcess) {
-		_portletValidationInProcess.set(inProcess);
+	public static void setPortletValidationInProcess(
+		boolean portletValidationInProcess) {
+
+		_portletValidationInProcess.set(portletValidationInProcess);
 	}
 
 	private static ThreadLocal<Boolean> _layoutExportInProcess =
