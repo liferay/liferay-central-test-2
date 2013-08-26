@@ -21,7 +21,6 @@ import com.liferay.portal.GroupParentException;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.PendingBackgroundTaskException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskConstants;
@@ -906,17 +905,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					continue;
 				}
 
-				WorkflowDefinitionLink workflowDefinitionLink = null;
+				WorkflowDefinitionLink workflowDefinitionLink =
+					workflowDefinitionLinkLocalService.
+						fetchWorkflowDefinitionLink(
+							group.getCompanyId(), group.getGroupId(),
+							scopeableWorkflowHandler.getClassName(), 0, 0,
+							true);
 
-				try {
-					workflowDefinitionLink =
-						workflowDefinitionLinkLocalService.
-							getWorkflowDefinitionLink(
-								group.getCompanyId(), group.getGroupId(),
-								scopeableWorkflowHandler.getClassName(), 0, 0,
-								true);
-				}
-				catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+				if (workflowDefinitionLink == null) {
 					continue;
 				}
 
