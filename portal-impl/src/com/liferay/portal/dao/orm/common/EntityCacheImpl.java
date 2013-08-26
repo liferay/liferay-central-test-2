@@ -222,9 +222,8 @@ public class EntityCacheImpl
 		if (loadResult != null) {
 			return loadResult;
 		}
-		else {
-			return _toEntityModel(result);
-		}
+
+		return _toEntityModel(result);
 	}
 
 	@Override
@@ -309,9 +308,8 @@ public class EntityCacheImpl
 		if (_shardEnabled) {
 			return new CacheKey(ShardUtil.getCurrentShardName(), primaryKey);
 		}
-		else {
-			return primaryKey;
-		}
+
+		return primaryKey;
 	}
 
 	private Serializable _encodeLocalCacheKey(
@@ -321,9 +319,8 @@ public class EntityCacheImpl
 			return new ShardLocalCacheKey(
 				ShardUtil.getCurrentShardName(), clazz.getName(), primaryKey);
 		}
-		else {
-			return new LocalCacheKey(clazz.getName(), primaryKey);
-		}
+
+		return new LocalCacheKey(clazz.getName(), primaryKey);
 	}
 
 	private PortalCache<Serializable, Serializable> _getPortalCache(
@@ -354,15 +351,14 @@ public class EntityCacheImpl
 		if (result == StringPool.BLANK) {
 			return null;
 		}
-		else {
-			CacheModel<?> cacheModel = (CacheModel<?>)result;
 
-			BaseModel<?> entityModel = (BaseModel<?>)cacheModel.toEntityModel();
+		CacheModel<?> cacheModel = (CacheModel<?>)result;
 
-			entityModel.setCachedModel(true);
+		BaseModel<?> entityModel = (BaseModel<?>)cacheModel.toEntityModel();
 
-			return entityModel;
-		}
+		entityModel.setCachedModel(true);
+
+		return entityModel;
 	}
 
 	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
@@ -411,9 +407,8 @@ public class EntityCacheImpl
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override
@@ -460,9 +455,8 @@ public class EntityCacheImpl
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override
@@ -497,9 +491,8 @@ public class EntityCacheImpl
 
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		@Override

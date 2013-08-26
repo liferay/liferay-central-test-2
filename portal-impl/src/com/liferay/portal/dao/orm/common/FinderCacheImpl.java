@@ -134,9 +134,8 @@ public class FinderCacheImpl
 		if (primaryKey != null) {
 			return _primaryKeyToResult(finderPath, sessionFactory, primaryKey);
 		}
-		else {
-			return null;
-		}
+
+		return null;
 	}
 
 	@Override
@@ -275,9 +274,8 @@ public class FinderCacheImpl
 				finderPath.isEntityCacheEnabled(), finderPath.getResultClass(),
 				primaryKey, sessionFactory);
 		}
-		else {
-			return primaryKey;
-		}
+
+		return primaryKey;
 	}
 
 	private Serializable _resultToPrimaryKey(Serializable result) {
@@ -304,9 +302,8 @@ public class FinderCacheImpl
 
 			return cachedList;
 		}
-		else {
-			return result;
-		}
+
+		return result;
 	}
 
 	private static final String _GROUP_KEY_PREFIX = CACHE_NAME.concat(
