@@ -16,95 +16,119 @@
 
 <%@ include file="/html/taglib/aui/nav_item/init.jsp" %>
 
-<li class="<%= cssClass %><%= selected ? " active" : StringPool.BLANK %>" id="<%= id %>" role="presentation" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
-	<c:if test="<%= Validator.isNotNull(iconClass) || Validator.isNotNull(label) %>">
-		<c:if test="<%= Validator.isNotNull(href) %>">
-			<c:choose>
-				<c:when test="<%= Validator.isNull(ariaLabel) %>">
-					<a aria-labelledby="<%= id %>" class="<%= anchorCssClass %>" <%= AUIUtil.buildData(anchorData) %> href="<%= href %>" id="<%= anchorId %>" role="<%= Validator.isNull(ariaRole) ? "menuitem" : ariaRole %>" title="<liferay-ui:message key="<%= title %>" />">
-				</c:when>
-				<c:otherwise>
-					<a aria-label="<%= ariaLabel %>" class="<%= anchorCssClass %>" <%= AUIUtil.buildData(anchorData) %> href="<%= href %>" id="<%= anchorId %>" role="<%= Validator.isNull(ariaRole) ? "menuitem" : ariaRole %>" title="<liferay-ui:message key="<%= title %>" />">
-				</c:otherwise>
-			</c:choose>
+<%@ page import="javax.servlet.jsp.tagext.BodyContent" %>
 
-			<c:if test="<%= useDialog %>">
-				<aui:script>
-					Liferay.delegateClick('<%= anchorId %>', Liferay.Util.openInDialog);
-				</aui:script>
+<%
+BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-item:bodyContent");
+
+boolean emptyBody = false;
+
+if (Validator.isNull(bodyContent)) {
+	emptyBody = true;
+}
+else {
+	String bodyContentString = bodyContent.getString();
+	emptyBody = bodyContentString.trim().isEmpty();
+}
+%>
+
+<c:if test="<%= (!dropdown || !emptyBody ) %>">
+	<li class="<%= cssClass %><%= selected ? " active" : StringPool.BLANK %>" id="<%= id %>" role="presentation" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+		<c:if test="<%= Validator.isNotNull(iconClass) || Validator.isNotNull(label) %>">
+			<c:if test="<%= Validator.isNotNull(href) %>">
+				<c:choose>
+					<c:when test="<%= Validator.isNull(ariaLabel) %>">
+						<a aria-labelledby="<%= id %>" class="<%= anchorCssClass %>" <%= AUIUtil.buildData(anchorData) %> href="<%= href %>" id="<%= anchorId %>" role="<%= Validator.isNull(ariaRole) ? "menuitem" : ariaRole %>" title="<liferay-ui:message key="<%= title %>" />">
+					</c:when>
+					<c:otherwise>
+						<a aria-label="<%= ariaLabel %>" class="<%= anchorCssClass %>" <%= AUIUtil.buildData(anchorData) %> href="<%= href %>" id="<%= anchorId %>" role="<%= Validator.isNull(ariaRole) ? "menuitem" : ariaRole %>" title="<liferay-ui:message key="<%= title %>" />">
+					</c:otherwise>
+				</c:choose>
+
+				<c:if test="<%= useDialog %>">
+					<aui:script>
+						Liferay.delegateClick('<%= anchorId %>', Liferay.Util.openInDialog);
+					</aui:script>
+				</c:if>
+			</c:if>
+					<c:if test="<%= Validator.isNotNull(iconClass) %>">
+						<i class="<%= iconClass %>"></i>
+					</c:if>
+
+					<span class="nav-item-label">
+						<liferay-ui:message key="<%= label %>" />
+					</span>
+
+					<c:if test="<%= dropdown %>">
+						<i class="icon-caret-down"></i>
+					</c:if>
+			<c:if test="<%= Validator.isNotNull(href) %>">
+				</a>
 			</c:if>
 		</c:if>
-				<c:if test="<%= Validator.isNotNull(iconClass) %>">
-					<i class="<%= iconClass %>"></i>
-				</c:if>
 
-				<span class="nav-item-label">
-					<liferay-ui:message key="<%= label %>" />
-				</span>
+		<c:if test="<%= dropdown %>">
+			<aui:script use="aui-base,event-move,event-outside">
+				A.Event.defineOutside('touchend');
 
-				<c:if test="<%= dropdown %>">
-					<i class="icon-caret-down"></i>
-				</c:if>
-		<c:if test="<%= Validator.isNotNull(href) %>">
-			</a>
-		</c:if>
-	</c:if>
+				var container = A.one('#<%= id %>');
 
-	<c:if test="<%= dropdown %>">
-		<aui:script use="aui-base,event-move,event-outside">
-			A.Event.defineOutside('touchend');
+				container.one('a').on(
+					'gesturemovestart',
+					function(event) {
+						var currentTarget = event.currentTarget;
 
-			var container = A.one('#<%= id %>');
+						currentTarget.once(
+							'gesturemoveend',
+							function(event) {
+								var eventOutside = event._event.type + 'outside';
 
-			container.one('a').on(
-				'gesturemovestart',
-				function(event) {
-					var currentTarget = event.currentTarget;
+								container.toggleClass('open');
 
-					currentTarget.once(
-						'gesturemoveend',
-						function(event) {
-							var eventOutside = event._event.type + 'outside';
+								var menuOpen = container.hasClass('open');
 
-							container.toggleClass('open');
+								var handle = Liferay.Data['<%= id %>Handle'];
 
-							var menuOpen = container.hasClass('open');
+								if (menuOpen && !handle) {
+									handle = currentTarget.on(
+										eventOutside,
+										function(event) {
+											if (!event.target.ancestor('#<%= id %>')) {
+												Liferay.Data['<%= id %>Handle'] = null;
 
-							var handle = Liferay.Data['<%= id %>Handle'];
+												handle.detach();
 
-							if (menuOpen && !handle) {
-								handle = currentTarget.on(
-									eventOutside,
-									function(event) {
-										if (!event.target.ancestor('#<%= id %>')) {
-											Liferay.Data['<%= id %>Handle'] = null;
-
-											handle.detach();
-
-											container.removeClass('open');
+												container.removeClass('open');
+											}
 										}
-									}
-								);
+									);
+								}
+								else if (handle) {
+									handle.detach();
+
+									handle = null;
+								}
+
+								Liferay.Data['<%= id %>Handle'] = handle;
 							}
-							else if (handle) {
-								handle.detach();
+						);
+					}
+				);
+			</aui:script>
 
-								handle = null;
-							}
-
-							Liferay.Data['<%= id %>Handle'] = handle;
-						}
-					);
-				}
-			);
-		</aui:script>
-
-		<c:if test="<%= wrapDropDownMenu %>">
-			<ul class='dropdown-menu <%= LanguageUtil.get(locale, "lang.dir").equals("rtl") ? "pull-right" : StringPool.BLANK %>'>
+			<c:if test="<%= wrapDropDownMenu %>">
+				<ul class='dropdown-menu <%= LanguageUtil.get(locale, "lang.dir").equals("rtl") ? "pull-right" : StringPool.BLANK %>'>
+			</c:if>
 		</c:if>
-	</c:if>
 
-	<c:if test="<%= dropdown && wrapDropDownMenu %>">
-		</ul>
-	</c:if>
-</li>
+		<%
+		if (bodyContent != null) {
+			out.print(bodyContent.getString());
+		}
+		%>
+
+		<c:if test="<%= dropdown && wrapDropDownMenu %>">
+			</ul>
+		</c:if>
+	</li>
+</c:if>
