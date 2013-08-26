@@ -64,7 +64,7 @@ public class TemplateProcessor implements ColumnProcessor {
 			request.getAttribute(WebKeys.PORTLET_AJAX_RENDER));
 
 		_portletRenderers = new TreeMap<Integer, List<PortletRenderer>>(
-			_RENDER_WEIGHT_COMPARATOR);
+			_renderWeightComparator);
 	}
 
 	public Map<Integer, List<PortletRenderer>> getPortletRenderers() {
@@ -195,7 +195,7 @@ public class TemplateProcessor implements ColumnProcessor {
 		}
 	}
 
-	private static final RenderWeightComparator _RENDER_WEIGHT_COMPARATOR =
+	private static RenderWeightComparator _renderWeightComparator =
 		new RenderWeightComparator();
 
 	private Portlet _portlet;
