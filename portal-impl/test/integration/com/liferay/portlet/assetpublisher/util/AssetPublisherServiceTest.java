@@ -59,9 +59,8 @@ public class AssetPublisherServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_initialAssetEntries = addAssetEntries(
+		_assetEntries = addAssetEntries(
 			_NO_ASSET_CATEGORY_IDS, _NO_ASSET_TAG_NAMES, 5, true);
-
 		_permissionChecker = PermissionCheckerFactoryUtil.create(
 			TestPropsValues.getUser());
 	}
@@ -74,13 +73,15 @@ public class AssetPublisherServiceTest {
 			_permissionChecker, new long[] {TestPropsValues.getGroupId()},
 			_assetEntryXmls, false, false);
 
-		Assert.assertEquals(_initialAssetEntries, assetEntries);
+		Assert.assertEquals(_assetEntries, assetEntries);
 	}
 
 	@Test
 	@Transactional
-	public void testGetAssetEntriesFilteredByCategories() throws Exception {
-		addVocabulary();
+	public void testGetAssetEntriesFilteredByAssetCategoryIds()
+		throws Exception {
+
+		addAssetVocabulary();
 
 		long[] allAssetCategoryIds =
 			{_assetCategoryIds[0], _assetCategoryIds[1], _assetCategoryIds[2]};
@@ -94,7 +95,7 @@ public class AssetPublisherServiceTest {
 			_assetEntryXmls, false, false);
 
 		Assert.assertEquals(
-			_initialAssetEntries.size() + expectedAssetEntries.size(),
+			_assetEntries.size() + expectedAssetEntries.size(),
 			assetEntries.size());
 
 		List<AssetEntry> filteredAsssetEntries =
@@ -109,10 +110,10 @@ public class AssetPublisherServiceTest {
 
 	@Test
 	@Transactional
-	public void testGetAssetEntriesFilteredByCategoriesAndTags()
+	public void testGetAssetEntriesFilteredByAssetCategoryIdsAndAssetTagNames()
 		throws Exception {
 
-		addVocabulary();
+		addAssetVocabulary();
 
 		long[] allCategoyIds =
 			{_assetCategoryIds[0], _assetCategoryIds[1], _assetCategoryIds[2],
@@ -129,7 +130,7 @@ public class AssetPublisherServiceTest {
 			_assetEntryXmls, false, false);
 
 		Assert.assertEquals(
-			_initialAssetEntries.size() + expectedAssetEntries.size(),
+			_assetEntries.size() + expectedAssetEntries.size(),
 			assetEntries.size());
 
 		List<AssetEntry> filteredAssetEntries =
@@ -143,7 +144,7 @@ public class AssetPublisherServiceTest {
 
 	@Test
 	@Transactional
-	public void testGetAssetEntriesFilteredByTags() throws Exception {
+	public void testGetAssetEntriesFilteredByAssetTagNames() throws Exception {
 		String[] allAssetTagNames = {_ASSET_TAG_NAMES[0], _ASSET_TAG_NAMES[1]};
 
 		List<AssetEntry> expectedAssetEntries = addAssetEntries(
@@ -155,7 +156,7 @@ public class AssetPublisherServiceTest {
 			_assetEntryXmls, false, false);
 
 		Assert.assertEquals(
-			_initialAssetEntries.size() + expectedAssetEntries.size(),
+			_assetEntries.size() + expectedAssetEntries.size(),
 			assetEntries.size());
 
 		List<AssetEntry> filteredAssetEntries =
@@ -181,13 +182,13 @@ public class AssetPublisherServiceTest {
 	}
 
 	protected List<AssetEntry> addAssetEntries(
-			long[] assetCategoryIds, String[] assetTagNames, int number,
+			long[] assetCategoryIds, String[] assetTagNames, int count,
 			boolean manualMode)
 		throws Exception {
 
 		List<AssetEntry> assetEntries = new ArrayList<AssetEntry>();
 
-		for (int i = 0; i < number; i++) {
+		for (int i = 0; i < count; i++) {
 			JournalArticle article = JournalTestUtil.addArticle(
 				TestPropsValues.getGroupId(), ServiceTestUtil.randomString(),
 				ServiceTestUtil.randomString(100));
@@ -202,40 +203,37 @@ public class AssetPublisherServiceTest {
 			assetEntries.add(assetEntry);
 
 			if (manualMode) {
-				_formatXml(assetEntry);
+				StringBuilder sb = new StringBuilder(6);
+
+				sb.append("<?xml version=\"1.0\"?><asset-entry>");
+				sb.append("<asset-entry-type>");
+				sb.append(JournalArticle.class.getName());
+				sb.append("</asset-entry-type><asset-entry-uuid>");
+				sb.append(assetEntry.getClassUuid());
+				sb.append("</asset-entry-uuid></asset-entry>");
+
+				_assetEntryXmls = ArrayUtil.append(
+					_assetEntryXmls, sb.toString());
 			}
 		}
 
 		return assetEntries;
 	}
 
-	protected void addVocabulary() throws Exception {
+	protected void addAssetVocabulary() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			TestPropsValues.getGroupId());
 
 		serviceContext.setAddGroupPermissions(false);
 		serviceContext.setAddGuestPermissions(false);
 
-		AssetVocabulary vocabulary =
+		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
 				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
 				ServiceTestUtil.getServiceContext(
 					TestPropsValues.getGroupId()));
 
-		addAssetCategories(vocabulary.getVocabularyId());
-	}
-
-	private void _formatXml(AssetEntry assetEntry) {
-		StringBuilder sb = new StringBuilder(6);
-
-		sb.append("<?xml version=\"1.0\"?><asset-entry>");
-		sb.append("<asset-entry-type>");
-		sb.append(JournalArticle.class.getName());
-		sb.append("</asset-entry-type><asset-entry-uuid>");
-		sb.append(assetEntry.getClassUuid());
-		sb.append("</asset-entry-uuid></asset-entry>");
-
-		_assetEntryXmls = ArrayUtil.append(_assetEntryXmls, sb.toString());
+		addAssetCategories(assetVocabulary.getVocabularyId());
 	}
 
 	private static final String[] _ASSET_CATEGORY_NAMES =
@@ -249,8 +247,8 @@ public class AssetPublisherServiceTest {
 	private static final String[] _NO_ASSET_TAG_NAMES = new String[0];
 
 	private long[] _assetCategoryIds = new long[0];
+	private List<AssetEntry> _assetEntries = new ArrayList<AssetEntry>();
 	private String[] _assetEntryXmls = new String[0];
-	private List<AssetEntry> _initialAssetEntries = new ArrayList<AssetEntry>();
 	private PermissionChecker _permissionChecker;
 
 }
