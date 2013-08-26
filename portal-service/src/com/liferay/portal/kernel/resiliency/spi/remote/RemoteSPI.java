@@ -213,28 +213,30 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 
 		System.setProperty("portal:" + PropsKeys.CLUSTER_LINK_ENABLED, "false");
 
-		// Log4j log file postfix
-
-		System.setProperty("spi.id", "-" + spiConfiguration.getSPIId());
-
-		// Force disable dependency management, see LPS-39277
+		// Disable dependency management
 
 		try {
 			Field enabledField = ReflectionUtil.getDeclaredField(
 				DependencyManagementThreadLocal.class, "_enabled");
 
-			enabledField.set(null, new ThreadLocal<Boolean>() {
+			enabledField.set(
+				null,
+				new ThreadLocal<Boolean>() {
 
-				@Override
-				public Boolean get() {
-					return Boolean.FALSE;
-				}
+					@Override
+					public Boolean get() {
+						return Boolean.FALSE;
+					}
 
-			});
+				});
 		}
 		catch (Exception e) {
 			throw new IOException("Unable to disable dependency management", e);
 		}
+
+		// Log4j log file postfix
+
+		System.setProperty("spi.id", "-" + spiConfiguration.getSPIId());
 	}
 
 	private void writeObject(ObjectOutputStream objectOutputStream)
