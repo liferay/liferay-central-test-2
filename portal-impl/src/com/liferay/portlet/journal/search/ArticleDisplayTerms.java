@@ -185,49 +185,48 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public long setGroupId(PortletRequest portletRequest) {
 		groupId = ParamUtil.getLong(portletRequest, GROUP_ID);
 
-		if (groupId == 0) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			if (Validator.isNotNull(structureId) && !structureId.equals("0")) {
-				DDMStructure ddmStructure = null;
-
-				try {
-					ddmStructure = DDMStructureLocalServiceUtil.fetchStructure(
-						themeDisplay.getSiteGroupId(),
-						PortalUtil.getClassNameId(JournalArticle.class),
-						structureId);
-				}
-				catch (SystemException se) {
-				}
-
-				if (ddmStructure != null) {
-					return 0;
-				}
-			}
-
-			if (Validator.isNotNull(templateId) && !templateId.equals("0")) {
-				DDMTemplate ddmTemplate = null;
-
-				try {
-					ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(
-						themeDisplay.getSiteGroupId(),
-						PortalUtil.getClassNameId(JournalArticle.class),
-						templateId);
-				}
-				catch (SystemException se) {
-				}
-
-				if (ddmTemplate != null) {
-					return 0;
-				}
-			}
-
-			groupId = themeDisplay.getScopeGroupId();
+		if (groupId != 0) {
+			return groupId;
 		}
 
-		return groupId;
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (Validator.isNotNull(structureId) && !structureId.equals("0")) {
+			DDMStructure ddmStructure = null;
+
+			try {
+				ddmStructure = DDMStructureLocalServiceUtil.fetchStructure(
+					themeDisplay.getSiteGroupId(),
+					PortalUtil.getClassNameId(JournalArticle.class),
+					structureId);
+			}
+			catch (SystemException se) {
+			}
+
+			if (ddmStructure != null) {
+				return 0;
+			}
+		}
+
+		if (Validator.isNotNull(templateId) && !templateId.equals("0")) {
+			DDMTemplate ddmTemplate = null;
+
+			try {
+				ddmTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(
+					themeDisplay.getSiteGroupId(),
+					PortalUtil.getClassNameId(JournalArticle.class),
+					templateId);
+			}
+			catch (SystemException se) {
+			}
+
+			if (ddmTemplate != null) {
+				return 0;
+			}
+		}
+
+		return themeDisplay.getScopeGroupId();
 	}
 
 	public void setStatus(String status) {
