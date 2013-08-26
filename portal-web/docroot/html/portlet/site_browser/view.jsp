@@ -208,7 +208,7 @@ portletURL.setParameter("target", target);
 				data.put("target", target);
 				%>
 
-				<aui:button disabled="<%= ArrayUtil.contains(selectedGroupIds, group.getGroupId())%>" cssClass="selector-button" data="<%= data %>" value="choose" />
+				<aui:button cssClass="selector-button" data="<%= data %>" disabled="<%= ArrayUtil.contains(selectedGroupIds, group.getGroupId()) %>" value="choose" />
 			</liferay-ui:search-container-column-text>
 
 		</liferay-ui:search-container-row>
