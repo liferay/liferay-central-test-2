@@ -42,7 +42,7 @@ public class QueryUtilTest {
 		_db = DBFactoryUtil.getDB();
 
 		_db.runSQL(_SQL_CREATE_TABLE);
-		_db.runSQL(createInserts(_AMOUNT));
+		_db.runSQL(createInserts(_SIZE));
 	}
 
 	@AfterClass
@@ -52,96 +52,94 @@ public class QueryUtilTest {
 
 	@Test
 	public void testListModifiableAllPos() throws Exception {
-		doListTest(
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, false, _AMOUNT, 0,
-			_AMOUNT - 1);
+		testList(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, false, _SIZE, 0, _SIZE - 1);
 	}
 
 	@Test
 	public void testListModifiableFaultyParameters1() throws Exception {
-		doListTest(-1, 0, false, 0, 0, 0);
+		testList(-1, 0, false, 0, 0, 0);
 	}
 
 	@Test
 	public void testListModifiableFaultyParameters2() throws Exception {
-		doListTest(0, -1, false, 0, 0, 0);
+		testList(0, -1, false, 0, 0, 0);
 	}
 
 	@Test
 	public void testListModifiableFaultyParameters3() throws Exception {
-		doListTest(-2, -2, false, 0, 0, 0);
+		testList(-2, -2, false, 0, 0, 0);
 	}
 
 	@Test
 	public void testListModifiableFaultyParameters4() throws Exception {
-		doListTest(-1, 10, false, 10, 0, 9);
+		testList(-1, 10, false, 10, 0, 9);
 	}
 
 	@Test
 	public void testListModifiableFaultyParameters5() throws Exception {
-		doListTest(10, 8, false, 0, 0, 0);
+		testList(10, 8, false, 0, 0, 0);
 	}
 
 	@Test
 	public void testListModifiableFirstTen() throws Exception {
-		doListTest(0, 10, false, 10, 0, 9);
+		testList(0, 10, false, 10, 0, 9);
 	}
 
 	@Test
 	public void testListModifiableFiveAfterFive() throws Exception {
-		doListTest(5, 10, false, 5, 5, 9);
+		testList(5, 10, false, 5, 5, 9);
 	}
 
 	@Test
 	public void testListModifiableTooBigRange() throws Exception {
-		doListTest(_AMOUNT + 1, _AMOUNT + 21, false, 0, 0, 0);
+		testList(_SIZE + 1, _SIZE + 21, false, 0, 0, 0);
 	}
 
 	@Test
 	public void testListUnmodifiableAllPos() throws Exception {
-		doListTest(
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS, true, _AMOUNT, 0,
-			_AMOUNT - 1);
+		testList(
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS, true, _SIZE, 0, _SIZE - 1);
 	}
 
 	@Test
 	public void testListUnmodifiableFaultyParameters1() throws Exception {
-		doListTest(-1, 0, true, 0, 0, 0);
+		testList(-1, 0, true, 0, 0, 0);
 	}
 
 	@Test
 	public void testListUnmodifiableFaultyParameters2() throws Exception {
-		doListTest(0, -1, true, 0, 0, 0);
+		testList(0, -1, true, 0, 0, 0);
 	}
 
 	@Test
 	public void testListUnmodifiableFaultyParameters3() throws Exception {
-		doListTest(-2, -2, true, 0, 0, 0);
+		testList(-2, -2, true, 0, 0, 0);
 	}
 
 	@Test
 	public void testListUnmodifiableFaultyParameters4() throws Exception {
-		doListTest(-1, 10, true, 10, 0, 9);
+		testList(-1, 10, true, 10, 0, 9);
 	}
 
 	@Test
 	public void testListUnmodifiableFaultyParameters5() throws Exception {
-		doListTest(10, 8, true, 0, 0, 0);
+		testList(10, 8, true, 0, 0, 0);
 	}
 
 	@Test
 	public void testListUnmodifiableFirstTen() throws Exception {
-		doListTest(0, 10, true, 10, 0, 9);
+		testList(0, 10, true, 10, 0, 9);
 	}
 
 	@Test
 	public void testListUnmodifiableFiveAfterFive() throws Exception {
-		doListTest(5, 10, true, 5, 5, 9);
+		testList(5, 10, true, 5, 5, 9);
 	}
 
 	@Test
 	public void testListUnmodifiableTooBigRange() throws Exception {
-		doListTest(_AMOUNT + 1, _AMOUNT + 21, true, 0, 0, 0);
+		testList(_SIZE + 1, _SIZE + 21, true, 0, 0, 0);
 	}
 
 	protected static String[] createInserts(int amount) {
@@ -156,9 +154,8 @@ public class QueryUtilTest {
 		return sqls;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected void doListTest(
-			int start, int end, boolean unmodifiable, int expectedResultSize,
+	protected void testList(
+			int start, int end, boolean unmodifiable, int expectedSize,
 			int expectedFirstValue, int expectedLastValue)
 		throws Exception {
 
@@ -172,44 +169,39 @@ public class QueryUtilTest {
 			List<Object[]> result = (List<Object[]>)QueryUtil.list(
 				q, _sessionFactory.getDialect(), start, end, unmodifiable);
 
-			Assert.assertNotNull("Verify that result is not null", result);
-			Assert.assertEquals(
-				"Verify result size", expectedResultSize, result.size());
+			Assert.assertNotNull(result);
+			Assert.assertEquals(expectedSize, result.size());
 
-			if (expectedResultSize > 0) {
+			if (expectedSize > 0) {
 				Object[] firstRow = result.get(0);
 				Object[] lastRow = result.get(result.size() - 1);
 
 				Number firstId = (Number)firstRow[0];
 				Number lastId  =  (Number)lastRow[0];
 
-				Assert.assertEquals(
-					"Verify firstId", expectedFirstValue, firstId.intValue());
-				Assert.assertEquals(
-					"Verify lastId", expectedLastValue, lastId.intValue());
+				Assert.assertEquals(expectedFirstValue, firstId.intValue());
+				Assert.assertEquals(expectedLastValue, lastId.intValue());
 			}
 
 			try {
 				result.add(new Object[0]);
 
-				expectedResultSize++;
+				expectedSize++;
 
-				Assert.assertFalse("Verify modifiable", unmodifiable);
+				Assert.assertFalse(unmodifiable);
 			}
 			catch (UnsupportedOperationException e) {
-				Assert.assertTrue("Verify unmodifiable", unmodifiable);
+				Assert.assertTrue(unmodifiable);
 			}
 
-			Assert.assertEquals(
-				"Verify size after modification", expectedResultSize,
-				result.size());
+			Assert.assertEquals(expectedSize, result.size());
 		}
 		finally {
 			_sessionFactory.closeSession(session);
 		}
 	}
 
-	private static final int _AMOUNT = 20;
+	private static final int _SIZE = 20;
 
 	private static final String _SQL_CREATE_TABLE =
 		"CREATE TABLE QueryUtilTest (id INTEGER NOT NULL PRIMARY KEY, " +
