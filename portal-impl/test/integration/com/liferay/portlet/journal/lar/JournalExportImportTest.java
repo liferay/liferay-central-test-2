@@ -293,8 +293,6 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 	@Override
 	protected void testExportImportDisplayStyle(long groupId, String scopeType)
 		throws Exception {
-
-		Assert.assertTrue("This test does not apply", true);
 	}
 
 }
