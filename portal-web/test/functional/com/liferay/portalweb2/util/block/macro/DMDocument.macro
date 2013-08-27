@@ -124,7 +124,7 @@
 		<execute action="CPDocumentsandmediaMovedocument#assertClick" locator-key1="SELECT_PARENT_FOLDER_BUTTON" value1="Select" />
 
 		<execute action="CPDocumentsandmediaMovedocument#selectWindow" locator-key1="FOLDER_WINDOW_ID" />
-		
+
 		<var name="key_dmFolderName" value="${dmFolderName}" />
 
 		<execute action="CPDocumentsandmediaMovedocument#assertClick" locator-key1="FOLDER_WINDOW_FOLDER_CHOOSE_BUTTON" value1="Choose" />
@@ -166,7 +166,7 @@
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Documents and Media" />
 		</execute>
-			
+
 		<if>
 			<condition action="CPDocumentsandmedia#isElementNotPresent" locator-key1="INFO_MESSAGE" />
 			<then>
@@ -180,7 +180,7 @@
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Recycle Bin" />
 		</execute>
-		
+
 		<execute macro="RecycleBin#emptyCP" />
 	</command>
 
@@ -203,7 +203,7 @@
 		<execute macro="Page#gotoContentCP">
 			<var name="portletName" value="Recycle Bin" />
 		</execute>
-		
+
 		<execute macro="RecycleBin#emptyCP"/>
 	</command>
 
@@ -218,7 +218,7 @@
 
 	<command name="viewEditCP">
 		<var name="key_dmDocumentTitle" value="${dmDocumentTitleEdit}" />
-		
+
 		<execute action="CPDocumentsandmedia#assertElementPresent" locator-key1="DOCUMENT_CONTAINER_DOCUMENT" />
 		<execute action="CPDocumentsandmedia#assertClick" locator-key1="DOCUMENT_CONTAINER_DOCUMENT_TITLE" value1="${dmDocumentTitleEdit}"/>
 

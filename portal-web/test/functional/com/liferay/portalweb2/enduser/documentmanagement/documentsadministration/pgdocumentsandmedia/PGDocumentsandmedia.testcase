@@ -64,7 +64,7 @@
 		<execute macro="DMDocument#viewPG">
 			<var name="dmDocType" value="docx" />
 		</execute>
-		
+
 		<execute macro="DMDocument#addPG">
 			<var name="dmDocType" value="jpeg" />
 			<var name="dmDocumentFile" value="${dmDocumentFileJpeg}" />
