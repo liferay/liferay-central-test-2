@@ -70,18 +70,18 @@ public class DLPermissionPropagatorImpl extends BasePermissionPropagator {
 				}
 			}
 			else if (folderAndFileEntryAndFileShortcut instanceof Folder) {
-				Folder subFolder = (Folder)folderAndFileEntryAndFileShortcut;
+				Folder subfolder = (Folder)folderAndFileEntryAndFileShortcut;
 
 				for (long roleId : roleIds) {
 					propagateRolePermissions(
 						actionRequest, roleId, DLFolder.class.getName(),
 						folderId, DLFolder.class.getName(),
-						subFolder.getFolderId());
+						subfolder.getFolderId());
 				}
 
 				propagateRolePermissions(
 					actionRequest, className,
-					String.valueOf(subFolder.getFolderId()), roleIds);
+					String.valueOf(subfolder.getFolderId()), roleIds);
 			}
 			else if (folderAndFileEntryAndFileShortcut
 						instanceof DLFileShortcut) {
