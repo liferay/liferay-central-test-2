@@ -24,7 +24,7 @@ BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-item:bodyCo
 String bodyContentString = bodyContent.getString();
 %>
 
-<c:if test="<%= (!dropdown || Validator.isNotNull(bodyContentString)) %>">
+<c:if test="<%= !dropdown || Validator.isNotNull(bodyContentString) %>">
 	<li class="<%= cssClass %><%= selected ? " active" : StringPool.BLANK %>" id="<%= id %>" role="presentation" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 		<c:if test="<%= Validator.isNotNull(iconClass) || Validator.isNotNull(label) %>">
 			<c:if test="<%= Validator.isNotNull(href) %>">
@@ -113,11 +113,9 @@ String bodyContentString = bodyContent.getString();
 			</c:if>
 		</c:if>
 
-		<%
-		if (Validator.isNotNull(bodyContentString)) {
-			out.print(bodyContentString);
-		}
-		%>
+		<c:if test="<%= Validator.isNotNull(bodyContentString) %>">
+			<%= bodyContentString %>
+		</c:if>
 
 		<c:if test="<%= dropdown && wrapDropDownMenu %>">
 			</ul>
