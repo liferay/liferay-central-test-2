@@ -1983,18 +1983,7 @@ public class DLFileEntryLocalServiceImpl
 			DLFileVersion latestDLFileVersion, int workflowAction)
 		throws PortalException, SystemException {
 
-		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
-			return false;
-		}
-
 		if (PropsValues.DL_FILE_ENTRY_VERSION_POLICY != 1) {
-			return false;
-		}
-
-		if (!Validator.equals(
-				lastDLFileVersion.getDescription(),
-				latestDLFileVersion.getDescription())) {
-
 			return false;
 		}
 
@@ -2010,11 +1999,20 @@ public class DLFileEntryLocalServiceImpl
 			return false;
 		}
 
-		// File entry type
+		if (!Validator.equals(
+				lastDLFileVersion.getDescription(),
+				latestDLFileVersion.getDescription())) {
+
+			return false;
+		}
 
 		if (lastDLFileVersion.getFileEntryTypeId() !=
 				latestDLFileVersion.getFileEntryTypeId()) {
 
+			return false;
+		}
+
+		if (workflowAction == WorkflowConstants.ACTION_SAVE_DRAFT) {
 			return false;
 		}
 
@@ -2040,22 +2038,26 @@ public class DLFileEntryLocalServiceImpl
 				latestFileEntryMetadata.getDDMStorageId());
 
 			Iterator<com.liferay.portlet.dynamicdatamapping.storage.Field>
-				lastItr = lastFields.iterator();
+				lastFieldIterator = lastFields.iterator();
 			Iterator<com.liferay.portlet.dynamicdatamapping.storage.Field>
-				latestItr = latestFields.iterator();
+				latestFieldIterator = latestFields.iterator();
 
-			while (lastItr.hasNext() && latestItr.hasNext()) {
+			while (lastFieldIterator.hasNext() &&
+				  latestFieldIterator.hasNext()) {
+
 				com.liferay.portlet.dynamicdatamapping.storage.Field
-					lastField = lastItr.next();
+					lastField = lastFieldIterator.next();
 				com.liferay.portlet.dynamicdatamapping.storage.Field
-					latestField = latestItr.next();
+					latestField = latestFieldIterator.next();
 
 				if (!lastField.equals(latestField)) {
 					return false;
 				}
 
-				if (lastItr.hasNext() && !latestItr.hasNext() ||
-					!lastItr.hasNext() && latestItr.hasNext()) {
+				if (lastFieldIterator.hasNext() &&
+					!latestFieldIterator.hasNext() ||
+					!lastFieldIterator.hasNext() &&
+					latestFieldIterator.hasNext()) {
 
 					return false;
 				}
