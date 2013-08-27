@@ -53,7 +53,6 @@ public class CompoundSessionIdSplitterUtil {
 	}
 
 	private static final boolean _hasSessionDelimiter;
-
 	private static final String _sessionIdDelimiter;
 
 	static {
@@ -66,12 +65,12 @@ public class CompoundSessionIdSplitterUtil {
 		}
 
 		if (Validator.isNotNull(sessionIdDelimiter)) {
-			_sessionIdDelimiter = sessionIdDelimiter;
 			_hasSessionDelimiter = true;
+			_sessionIdDelimiter = sessionIdDelimiter;
 		}
 		else {
-			_sessionIdDelimiter = StringPool.BLANK;
 			_hasSessionDelimiter = false;
+			_sessionIdDelimiter = StringPool.BLANK;
 		}
 	}
 
