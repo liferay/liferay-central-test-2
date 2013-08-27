@@ -106,7 +106,7 @@ public class LayoutSetPrototypeExportImportTest
 				ServiceTestUtil.randomString(), true);
 		}
 
-		doExportImportPortlet(PortletKeys.LAYOUT_SET_PROTOTYPE);
+		exportImportPortlet(PortletKeys.LAYOUT_SET_PROTOTYPE);
 
 		LayoutSetPrototype importedLayoutSetPrototype =
 			LayoutSetPrototypeLocalServiceUtil.
