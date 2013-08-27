@@ -482,7 +482,7 @@ public class LangBuilder {
 		UnsyncBufferedWriter unsyncBufferedWriter = new UnsyncBufferedWriter(
 			new FileWriter(propertiesFile));
 
-		Map<String, String> messagesMap = new TreeMap<String, String>(
+		Map<String, String> messages = new TreeMap<String, String>(
 			new NumericalStringComparator(true, true));
 
 		boolean begin = false;
@@ -509,11 +509,11 @@ public class LangBuilder {
 					}
 				}
 
-				messagesMap.put(key, value);
+				messages.put(key, value);
 			}
 			else {
 				if (begin && line.equals(StringPool.BLANK)) {
-					_sortAndWrite(unsyncBufferedWriter, messagesMap, firstLine);
+					_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 				}
 
 				if (line.equals(StringPool.BLANK)) {
@@ -533,8 +533,8 @@ public class LangBuilder {
 			unsyncBufferedWriter.flush();
 		}
 
-		if (!messagesMap.isEmpty()) {
-			_sortAndWrite(unsyncBufferedWriter, messagesMap, firstLine);
+		if (!messages.isEmpty()) {
+			_sortAndWrite(unsyncBufferedWriter, messages, firstLine);
 		}
 
 		unsyncBufferedReader.close();
@@ -545,12 +545,12 @@ public class LangBuilder {
 
 	private void _sortAndWrite(
 			UnsyncBufferedWriter unsyncBufferedWriter,
-			Map<String, String> messagesMap, boolean firstLine)
+			Map<String, String> messages, boolean firstLine)
 		throws IOException {
 
 		boolean firstEntry = true;
 
-		for (Map.Entry<String, String> entry : messagesMap.entrySet()) {
+		for (Map.Entry<String, String> entry : messages.entrySet()) {
 			if (!firstLine || !firstEntry) {
 				unsyncBufferedWriter.newLine();
 			}
@@ -560,7 +560,7 @@ public class LangBuilder {
 			unsyncBufferedWriter.write(entry.getKey() + "=" + entry.getValue());
 		}
 
-		messagesMap.clear();
+		messages.clear();
 	}
 
 	private String _translate(
