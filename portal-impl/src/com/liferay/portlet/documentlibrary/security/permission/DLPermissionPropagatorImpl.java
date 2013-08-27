@@ -72,17 +72,16 @@ public class DLPermissionPropagatorImpl extends BasePermissionPropagator {
 			else if (folderAndFileEntryAndFileShortcut instanceof Folder) {
 				Folder subFolder = (Folder)folderAndFileEntryAndFileShortcut;
 
-				long subFolderId = subFolder.getFolderId();
-
 				for (long roleId : roleIds) {
 					propagateRolePermissions(
 						actionRequest, roleId, DLFolder.class.getName(),
-						folderId, DLFolder.class.getName(), subFolderId);
+						folderId, DLFolder.class.getName(),
+						subFolder.getFolderId());
 				}
 
 				propagateRolePermissions(
-					actionRequest, className, String.valueOf(subFolderId),
-					roleIds);
+					actionRequest, className,
+					String.valueOf(subFolder.getFolderId()), roleIds);
 			}
 			else if (folderAndFileEntryAndFileShortcut
 						instanceof DLFileShortcut) {
