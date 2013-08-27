@@ -67,6 +67,12 @@ public class InputSearchTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
+		String id = _id;
+
+		if (Validator.isNull(id)) {
+			id = _name;
+		}
+
 		request.setAttribute(
 			"liferay-ui:input-search:buttonLabel", _buttonLabel);
 		request.setAttribute("liferay-ui:input-search:cssClass", _cssClass);

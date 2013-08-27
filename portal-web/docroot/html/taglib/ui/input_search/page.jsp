@@ -20,8 +20,8 @@
 String buttonLabel = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-search:buttonLabel"), LanguageUtil.get(pageContext, "search"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-search:cssClass"), "input-append");
 DisplayTerms displayTerms = (DisplayTerms)GetterUtil.getObject(request.getAttribute("liferay-ui:input-search:displayTerms"), new DisplayTerms(portletRequest));
+String id = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-search:id"));
 String name = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-search:name"), DisplayTerms.KEYWORDS);
-String id = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-search:id"), name);
 boolean showButton = GetterUtil.getBoolean(request.getAttribute("liferay-ui:input-search:showButton"), true);
 
 String value = ParamUtil.getString(request, name);
