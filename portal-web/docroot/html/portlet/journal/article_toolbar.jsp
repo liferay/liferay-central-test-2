@@ -35,7 +35,7 @@ if ((article != null) && article.isDraft()) {
 <c:if test="<%= article != null %>">
 	<div class="article-toolbar" id="<portlet:namespace />articleToolbar"></div>
 
-		<aui:script use="aui-toolbar,aui-dialog-iframe-deprecated,aui-tooltip,liferay-util-window">
+	<aui:script use="aui-toolbar,aui-dialog-iframe-deprecated,aui-tooltip,liferay-util-window">
 		var permissionPopUp = null;
 
 		var toolbarButtonGroup = [];
