@@ -121,6 +121,7 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
+	@Override
 	public int countByG_N_V(long groupId, String name, long vocabularyId)
 		throws SystemException {
 
@@ -173,12 +174,14 @@ public class AssetCategoryFinderImpl
 		}
 	}
 
+	@Override
 	public int filterCountByG_N_V(long groupId, String name, long vocabularyId)
 		throws SystemException {
 
 		return doCountByG_N_V(groupId, name, vocabularyId, true);
 	}
 
+	@Override
 	public List<AssetCategory> filterFindByG_N_V(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
@@ -291,6 +294,7 @@ public class AssetCategoryFinderImpl
 		throw new NoSuchCategoryException(sb.toString());
 	}
 
+	@Override
 	public List<AssetCategory> findByG_N_V(
 			long groupId, String name, long vocabularyId, int start, int end,
 			OrderByComparator obc)
