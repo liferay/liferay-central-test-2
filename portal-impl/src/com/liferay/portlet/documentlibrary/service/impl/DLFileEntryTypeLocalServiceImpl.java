@@ -182,10 +182,9 @@ public class DLFileEntryTypeLocalServiceImpl
 	public void deleteFileEntryType(DLFileEntryType dlFileEntryType)
 		throws PortalException, SystemException {
 
-		int fileEntryCount = dlFileEntryPersistence.countByFileEntryTypeId(
-			dlFileEntryType.getFileEntryTypeId());
+		if (dlFileEntryPersistence.countByFileEntryTypeId(
+				dlFileEntryType.getFileEntryTypeId()) > 0) {
 
-		if (fileEntryCount > 0) {
 			throw new RequiredStructureException(
 				RequiredStructureException.REFERENCED_STRUCTURE);
 		}
