@@ -110,9 +110,16 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 					permissionChecker, dlFolder, ActionKeys.VIEW);
 			}
 			else {
-				return DLPermission.contains(
-					permissionChecker, assetEntry.getGroupId(),
-					ActionKeys.VIEW);
+				try {
+					DLPermission.check(
+						permissionChecker, assetEntry.getGroupId(),
+						ActionKeys.VIEW);
+
+					return true;
+				}
+				catch (PrincipalException pe) {
+					return false;
+				}
 			}
 		}
 
@@ -142,6 +149,10 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 			long subscriptionClassPK, AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
+		long companyId = assetEntry.getCompanyId();
+		long groupId = assetEntry.getGroupId();
+		long userCreatorId = assetEntry.getUserId();
+
 		if (subscriptionClassName.equals(Layout.class.getName())) {
 			Layout layout = LayoutLocalServiceUtil.getLayout(
 				subscriptionClassPK);
@@ -153,14 +164,13 @@ public class SubscriptionPermissionImpl implements SubscriptionPermission {
 					WorkflowInstance.class.getName())) {
 
 			return permissionChecker.hasPermission(
-				assetEntry.getGroupId(), PortletKeys.WORKFLOW_DEFINITIONS,
-				assetEntry.getGroupId(), ActionKeys.VIEW);
+				groupId, PortletKeys.WORKFLOW_DEFINITIONS, groupId,
+				ActionKeys.VIEW);
 		}
 		else {
 			return MBDiscussionPermission.contains(
-				permissionChecker, assetEntry.getCompanyId(),
-				assetEntry.getGroupId(), subscriptionClassName,
-				subscriptionClassPK, assetEntry.getUserId(), ActionKeys.VIEW);
+				permissionChecker, companyId, groupId, subscriptionClassName,
+				subscriptionClassPK, userCreatorId, ActionKeys.VIEW);
 		}
 	}
 
