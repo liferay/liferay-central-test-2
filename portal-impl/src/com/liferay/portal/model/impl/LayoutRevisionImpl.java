@@ -127,7 +127,7 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 
 		if (!isInheritLookAndFeel()) {
 			try {
-				Theme theme = _getTheme(device);
+				Theme theme = getTheme(device);
 
 				return theme.getSetting(key);
 			}
@@ -257,7 +257,7 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
-	private Theme _getTheme(String device)
+	protected Theme getTheme(String device)
 		throws PortalException, SystemException {
 
 		if (device.equals("regular")) {
