@@ -58,7 +58,18 @@ public class DLPermissionPropagatorImpl extends BasePermissionPropagator {
 		for (Object folderAndFileEntryAndFileShortcut :
 				foldersAndFileEntriesAndFileShortcuts) {
 
-			if (folderAndFileEntryAndFileShortcut instanceof FileEntry) {
+			if (folderAndFileEntryAndFileShortcut instanceof DLFileShortcut) {
+				DLFileShortcut dlFileShorcut =
+					(DLFileShortcut)folderAndFileEntryAndFileShortcut;
+
+				for (long roleId : roleIds) {
+					propagateRolePermissions(
+						actionRequest, roleId, DLFolder.class.getName(),
+						folderId, DLFileShortcut.class.getName(),
+						dlFileShorcut.getFileShortcutId());
+				}
+			}
+			else if (folderAndFileEntryAndFileShortcut instanceof FileEntry) {
 				FileEntry fileEntry =
 					(FileEntry)folderAndFileEntryAndFileShortcut;
 
@@ -82,19 +93,6 @@ public class DLPermissionPropagatorImpl extends BasePermissionPropagator {
 				propagateRolePermissions(
 					actionRequest, className,
 					String.valueOf(subfolder.getFolderId()), roleIds);
-			}
-			else if (folderAndFileEntryAndFileShortcut
-						instanceof DLFileShortcut) {
-
-				DLFileShortcut dlFileShorcut =
-					(DLFileShortcut)folderAndFileEntryAndFileShortcut;
-
-				for (long roleId : roleIds) {
-					propagateRolePermissions(
-						actionRequest, roleId, DLFolder.class.getName(),
-						folderId, DLFileShortcut.class.getName(),
-						dlFileShorcut.getFileShortcutId());
-				}
 			}
 		}
 	}
