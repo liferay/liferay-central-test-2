@@ -42,13 +42,13 @@ import org.junit.runner.RunWith;
 @Sync
 public class BlogsEntryAssetSearchTest extends BaseAssetSearchTestCase {
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testClassTypeIds1() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testClassTypeIds2() throws Exception {

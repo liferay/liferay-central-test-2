@@ -57,19 +57,19 @@ import org.junit.runner.RunWith;
 @Sync
 public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashAndDeleteDraft() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashAndRestoreDraft() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashDuplicate() throws Exception {
@@ -81,31 +81,31 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 		trashFileEntry();
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashMyBaseModel() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashRecentBaseModel() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashVersionBaseModelAndDelete() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashVersionBaseModelAndRestore() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testTrashVersionParentBaseModel() throws Exception {

@@ -61,7 +61,7 @@ import org.junit.runner.RunWith;
 @Sync
 public class JournalArticleSearchTest extends BaseSearchTestCase {
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchAttachments() throws Exception {

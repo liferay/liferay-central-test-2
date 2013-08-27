@@ -48,7 +48,7 @@ import org.junit.runner.RunWith;
 public class JournalExpiredVersionExportImportTest
 	extends JournalExportImportTest {
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testExportImportAssetLinks() throws Exception {
@@ -111,7 +111,7 @@ public class JournalExpiredVersionExportImportTest
 				importedGroup.getCompanyId(), importedGroup.getGroupId()));
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testExportImportStructuredJournalArticle() throws Exception {

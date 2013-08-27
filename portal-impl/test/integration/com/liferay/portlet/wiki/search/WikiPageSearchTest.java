@@ -52,31 +52,31 @@ import org.junit.runner.RunWith;
 @Sync
 public class WikiPageSearchTest extends BaseSearchTestCase {
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchByDDMStructureField() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchMyEntries() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchRecentEntries() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchStatus() throws Exception {
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testSearchWithinDDMStructure() throws Exception {

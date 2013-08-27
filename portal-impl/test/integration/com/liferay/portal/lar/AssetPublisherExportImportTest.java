@@ -185,7 +185,7 @@ public class AssetPublisherExportImportTest
 				portletPreferences.getValue("displayStyle", null)));
 	}
 
-	@Ignore("This test does not apply")
+	@Ignore()
 	@Override
 	@Test
 	public void testExportImportAssetLinks() throws Exception {
