@@ -386,7 +386,7 @@ public class TemplateContextHelper {
 			_log.error(se, se);
 		}
 
-		// Calendar factory util
+		// Calendar factory
 
 		try {
 			variables.put(
