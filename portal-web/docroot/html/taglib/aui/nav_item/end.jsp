@@ -21,18 +21,10 @@
 <%
 BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-item:bodyContent");
 
-boolean emptyBody = false;
-
-if (Validator.isNull(bodyContent)) {
-	emptyBody = true;
-}
-else {
-	String bodyContentString = bodyContent.getString();
-	emptyBody = bodyContentString.trim().isEmpty();
-}
+String bodyContentString = bodyContent.getString();
 %>
 
-<c:if test="<%= (!dropdown || !emptyBody ) %>">
+<c:if test="<%= (!dropdown || Validator.isNotNull(bodyContentString)) %>">
 	<li class="<%= cssClass %><%= selected ? " active" : StringPool.BLANK %>" id="<%= id %>" role="presentation" <%= AUIUtil.buildData(data) %> <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 		<c:if test="<%= Validator.isNotNull(iconClass) || Validator.isNotNull(label) %>">
 			<c:if test="<%= Validator.isNotNull(href) %>">
@@ -122,8 +114,8 @@ else {
 		</c:if>
 
 		<%
-		if (bodyContent != null) {
-			out.print(bodyContent.getString());
+		if (Validator.isNotNull(bodyContentString)) {
+			out.print(bodyContentString);
 		}
 		%>
 
