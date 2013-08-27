@@ -2054,10 +2054,10 @@ public class DLFileEntryLocalServiceImpl
 					return false;
 				}
 
-				if (lastFieldIterator.hasNext() &&
-					!latestFieldIterator.hasNext() ||
-					!lastFieldIterator.hasNext() &&
-					latestFieldIterator.hasNext()) {
+				if ((lastFieldIterator.hasNext() &&
+					 !latestFieldIterator.hasNext()) ||
+					(!lastFieldIterator.hasNext() &&
+					 latestFieldIterator.hasNext())) {
 
 					return false;
 				}
