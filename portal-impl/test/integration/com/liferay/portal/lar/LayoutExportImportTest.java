@@ -16,6 +16,7 @@ package com.liferay.portal.lar;
 
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.staging.StagingConstants;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -203,7 +204,9 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
-		serviceContext.setAttribute("staged-portlet_28", true);
+		serviceContext.setAttribute(
+			StagingConstants.STAGED_PORTLET + PortletKeys.BOOKMARKS,
+			Boolean.TRUE);
 
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 
