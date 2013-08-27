@@ -50,6 +50,13 @@ public class InputSearchTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
+		super.cleanUp();
+
+		_buttonLabel = null;
+		_cssClass = null;
+		_displayTerms = null;
+		_id = null;
+		_name = null;
 		_showButton = true;
 	}
 
