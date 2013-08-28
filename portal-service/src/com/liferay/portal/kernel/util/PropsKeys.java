@@ -913,17 +913,15 @@ public interface PropsKeys {
 
 	public static final String HOT_UNDEPLOY_ON_REDEPLOY = "hot.undeploy.on.redeploy";
 
+	public static final String HTTP_HEADER_SECURE_X_CONTENT_TYPE_OPTIONS = "http.header.secure.x.content.type.options";
+
+	public static final String HTTP_HEADER_SECURE_X_CONTENT_TYPE_OPTIONS_URLS_EXCLUDES = "http.header.secure.x.content.type.options.urls.excludes";
+
+	public static final String HTTP_HEADER_SECURE_X_FRAME_OPTIONS = "http.header.secure.x.frame.options";
+
+	public static final String HTTP_HEADER_SECURE_X_XSS_PROTECTION = "http.header.secure.x.xss.protection";
+
 	public static final String HTTP_HEADER_VERSION_VERBOSITY = "http.header.version.verbosity";
-
-	public static final String HTTP_HEADER_X_CONTENT_TYPE_OPTIONS_ENABLED = "http.header.x-content-type-options.enabled";
-
-	public static final String HTTP_HEADER_X_CONTENT_TYPE_OPTIONS_WHITELIST = "http.header.x-content-type-options.whitelist";
-
-	public static final String HTTP_HEADER_X_FRAME_OPTIONS_ENABLED = "http.header.x-frame-options.enabled";
-
-	public static final String HTTP_HEADER_X_FRAME_OPTIONS_WHITELIST = "http.header.x-frame-options.whitelist.";
-
-	public static final String HTTP_HEADER_X_XSS_PROTECTION_ENABLED = "http.header.x-xss-protection.enabled";
 
 	public static final String ICON_MENU_MAX_DISPLAY_ITEMS = "icon.menu.max.display.items";
 

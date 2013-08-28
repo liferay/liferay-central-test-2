@@ -51,12 +51,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
-	public InvokerFilter() {
-		if (ServerDetector.isTomcat()) {
-			_sanitizeHeader = false;
-		}
-	}
-
 	@Override
 	public void destroy() {
 		portalDestroy();
@@ -262,24 +256,19 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 	protected HttpServletResponse secureResponseHeaders(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		if (request.getAttribute(_SECURE_HEADERS_SET) != null) {
+		if (!GetterUtil.getBoolean(
+				request.getAttribute(_SECURE_RESPONSE), true)) {
+
 			return response;
 		}
 
-		request.setAttribute(_SECURE_HEADERS_SET, Boolean.TRUE);
+		request.setAttribute(_SECURE_RESPONSE, Boolean.FALSE);
 
-		SecureHttpServletResponseWrapper wrapper =
-			new SecureHttpServletResponseWrapper(response);
-
-		wrapper.setSanitizeHeaders(_sanitizeHeader);
-
-		wrapper.applySecurityHeaders(request);
-
-		return wrapper;
+		return new SecureHttpServletResponseWrapper(request, response);
 	}
 
-	private static final String _SECURE_HEADERS_SET =
-		InvokerFilter.class.getName() + ".secureResponseHeadersSet";
+	private static final String _SECURE_RESPONSE =
+		InvokerFilter.class.getName() + "SECURE_RESPONSE";
 
 	private static Log _log = LogFactoryUtil.getLog(InvokerFilter.class);
 
@@ -289,6 +278,5 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 	private FilterConfig _filterConfig;
 	private int _invokerFilterChainSize;
 	private InvokerFilterHelper _invokerFilterHelper;
-	private boolean _sanitizeHeader = true;
 
 }

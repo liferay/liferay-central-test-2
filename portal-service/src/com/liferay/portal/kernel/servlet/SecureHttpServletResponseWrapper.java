@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -37,8 +38,18 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class SecureHttpServletResponseWrapper
 	extends HttpServletResponseWrapper {
 
-	public SecureHttpServletResponseWrapper(HttpServletResponse response) {
+	public SecureHttpServletResponseWrapper(
+		HttpServletRequest request, HttpServletResponse response) {
+
 		super(response);
+
+		if (ServerDetector.isTomcat()) {
+			_sanitizeHeaders = false;
+		}
+
+		setXContentOptions(request);
+		setXFrameOptions(request);
+		setXXSSProtection(request);
 	}
 
 	@Override
@@ -50,12 +61,6 @@ public class SecureHttpServletResponseWrapper
 		else {
 			super.addHeader(name, value);
 		}
-	}
-
-	public void applySecurityHeaders(HttpServletRequest request) {
-		setXContentOptions(request);
-		setXFrameOptions(request);
-		setXXSSProtection(request);
 	}
 
 	@Override
@@ -99,20 +104,16 @@ public class SecureHttpServletResponseWrapper
 		}
 	}
 
-	public void setSanitizeHeaders(boolean sanitizeHeaders) {
-		this._sanitizeHeaders = sanitizeHeaders;
-	}
-
 	protected void setXContentOptions(HttpServletRequest request) {
-		if (!_X_CONTENT_TYPE_OPTIONS_ENABLED) {
+		if (!_X_CONTENT_TYPE_OPTIONS) {
 			return;
 		}
 
-		if (_X_CONTENT_TYPE_OPTIONS_WHITELIST.length > 0) {
+		if (_X_CONTENT_TYPE_OPTIONS_URLS_EXCLUDES.length > 0) {
 			String requestURI = request.getRequestURI();
 
-			for (String whitelistedURL : _X_CONTENT_TYPE_OPTIONS_WHITELIST) {
-				if (requestURI.startsWith(whitelistedURL)) {
+			for (String url : _X_CONTENT_TYPE_OPTIONS_URLS_EXCLUDES) {
+				if (requestURI.startsWith(url)) {
 					return;
 				}
 			}
@@ -122,29 +123,29 @@ public class SecureHttpServletResponseWrapper
 	}
 
 	protected void setXFrameOptions(HttpServletRequest request) {
-		if (!_X_FRAME_OPTIONS_ENABLED) {
+		if (!_X_FRAME_OPTIONS) {
 			return;
 		}
 
-		if (_X_FRAME_OPTIONS_WHITELIST.size() > 0) {
+		if (_xFrameOptionsProperties.size() > 0) {
 			String requestURI = request.getRequestURI();
 
 			for (int i = 0; i < 256; i++) {
-				String ruleURLKey = i + ".url";
+				String key = "url." + i;
 
-				if (!_X_FRAME_OPTIONS_WHITELIST.containsKey(ruleURLKey)) {
+				if (!_xFrameOptionsProperties.containsKey(key)) {
 					continue;
 				}
 
-				String urlPrefix = StringUtil.trim(
-					_X_FRAME_OPTIONS_WHITELIST.getProperty(ruleURLKey));
+				String url = StringUtil.trim(
+					_xFrameOptionsProperties.getProperty(key));
 
-				if (!requestURI.startsWith(urlPrefix)) {
+				if (!requestURI.startsWith(url)) {
 					continue;
 				}
 
 				String value = StringUtil.trim(
-					_X_FRAME_OPTIONS_WHITELIST.getProperty(i + ".value"));
+					_xFrameOptionsProperties.getProperty("value." + i));
 
 				if (Validator.isNotNull(value)) {
 					setHeader(HttpHeaders.X_FRAME_OPTIONS, value);
@@ -158,43 +159,32 @@ public class SecureHttpServletResponseWrapper
 	}
 
 	protected void setXXSSProtection(HttpServletRequest request) {
-		if (!_X_XSS_PROTECTION_ENABLED) {
+		if (!_X_XSS_PROTECTION) {
 			return;
 		}
 
 		super.setHeader(HttpHeaders.X_XSS_PROTECTION, "1; mode=block");
 	}
 
-	private static boolean _X_CONTENT_TYPE_OPTIONS_ENABLED;
+	private static final boolean _X_CONTENT_TYPE_OPTIONS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.HTTP_HEADER_SECURE_X_CONTENT_TYPE_OPTIONS),
+			true);
 
-	private static String[] _X_CONTENT_TYPE_OPTIONS_WHITELIST;
+	private static final String[] _X_CONTENT_TYPE_OPTIONS_URLS_EXCLUDES =
+		PropsUtil.getArray(
+			PropsKeys.HTTP_HEADER_SECURE_X_CONTENT_TYPE_OPTIONS_URLS_EXCLUDES);
 
-	private static boolean _X_FRAME_OPTIONS_ENABLED;
+	private static final boolean _X_FRAME_OPTIONS = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.HTTP_HEADER_SECURE_X_FRAME_OPTIONS), true);
 
-	private static Properties _X_FRAME_OPTIONS_WHITELIST;
+	private static final boolean _X_XSS_PROTECTION = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.HTTP_HEADER_SECURE_X_XSS_PROTECTION), true);
 
-	private static boolean _X_XSS_PROTECTION_ENABLED;
+	private static Properties _xFrameOptionsProperties =
+		PropsUtil.getProperties(
+			PropsKeys.HTTP_HEADER_SECURE_X_FRAME_OPTIONS + ".", true);
 
-	static {
-		_X_CONTENT_TYPE_OPTIONS_ENABLED = GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.HTTP_HEADER_X_CONTENT_TYPE_OPTIONS_ENABLED), true);
-
-		_X_CONTENT_TYPE_OPTIONS_WHITELIST =
-			PropsUtil.getArray(
-				PropsKeys.HTTP_HEADER_X_CONTENT_TYPE_OPTIONS_WHITELIST);
-
-		_X_FRAME_OPTIONS_ENABLED = GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.HTTP_HEADER_X_FRAME_OPTIONS_ENABLED), true);
-
-		_X_FRAME_OPTIONS_WHITELIST = PropsUtil.getProperties(
-			PropsKeys.HTTP_HEADER_X_FRAME_OPTIONS_WHITELIST, true);
-
-		_X_XSS_PROTECTION_ENABLED = GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.HTTP_HEADER_X_XSS_PROTECTION_ENABLED), true);
-	}
-
-	private boolean _sanitizeHeaders;
+	private boolean _sanitizeHeaders = true;
 
 }
