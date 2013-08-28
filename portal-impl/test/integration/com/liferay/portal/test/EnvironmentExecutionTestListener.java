@@ -17,6 +17,7 @@ package com.liferay.portal.test;
 import com.liferay.portal.kernel.test.AbstractExecutionTestListener;
 import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.service.persistence.impl.TableMapperFactoryTestUtil;
 
 /**
  * @author Miguel Pastor
@@ -27,7 +28,7 @@ public class EnvironmentExecutionTestListener
 	@Override
 	public void runAfterClass(TestContext testContext) {
 		ServiceTestUtil.destroyServices();
-		ServiceTestUtil.clearTableMapperCaches();
+		TableMapperFactoryTestUtil.clearCaches();
 	}
 
 	@Override
