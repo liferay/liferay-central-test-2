@@ -126,12 +126,12 @@ public class ServiceTestUtil {
 		return role;
 	}
 
-	public static void clearTableMappersCaches() {
+	public static void clearTableMapperCaches() {
 		Field field = null;
 
 		try {
 			field = ReflectionUtil.getDeclaredField(
-				TableMapperFactory.class, "tableMappers");
+				TableMapperFactory.class, "_tableMappers");
 
 			field.setAccessible(true);
 
@@ -144,7 +144,9 @@ public class ServiceTestUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e, e);
+			if (_log.isErrorEnabled()) {
+				_log.error("Unexpected error cleaning TableMapper caches");
+			}
 		}
 		finally {
 			field.setAccessible(false);
