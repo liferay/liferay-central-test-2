@@ -85,7 +85,7 @@ public class PwdGenerator {
 
 		StringBuilder sb = new StringBuilder(length);
 
-		Random random = _secureSeedRandomThreadLocal.get();
+		Random random = _randomThreadLocal.get();
 
 		for (int i = 0; i < length; i++) {
 			sb.append(key.charAt(random.nextInt(key.length())));
@@ -124,19 +124,19 @@ public class PwdGenerator {
 		return password;
 	}
 
-	private static final SecureRandom _SECURE_RANDOM = new SecureRandom();
-
 	private static Log _log = LogFactoryUtil.getLog(PwdGenerator.class);
 
-	private static ThreadLocal<Random> _secureSeedRandomThreadLocal =
+	private static ThreadLocal<Random> _randomThreadLocal =
 		new AutoResetThreadLocal<Random>(
-			PwdGenerator.class.getName() + "_randomThreadLocal") {
+			PwdGenerator.class.getName() + "._randomThreadLocal") {
 
 			@Override
 			protected Random initialValue() {
-				return new Random(_SECURE_RANDOM.nextLong());
+				return new Random(_secureRandom.nextLong());
 			}
 
 		};
+
+	private static SecureRandom _secureRandom = new SecureRandom();
 
 }
