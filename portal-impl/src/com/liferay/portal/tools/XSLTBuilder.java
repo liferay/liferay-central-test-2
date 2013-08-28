@@ -29,8 +29,6 @@ import javax.xml.transform.stream.StreamSource;
 public class XSLTBuilder {
 
 	public static void main(String[] args) {
-		System.setProperty("line.separator", StringPool.NEW_LINE);
-
 		if (args.length == 3) {
 			new XSLTBuilder(args[0], args[1], args[2]);
 		}
@@ -41,6 +39,8 @@ public class XSLTBuilder {
 
 	public XSLTBuilder(String xml, String xsl, String html) {
 		try {
+			System.setProperty("line.separator", StringPool.NEW_LINE);
+
 			TransformerFactory transformerFactory =
 				TransformerFactory.newInstance();
 
