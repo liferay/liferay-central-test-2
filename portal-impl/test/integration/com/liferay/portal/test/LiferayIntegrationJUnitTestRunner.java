@@ -58,8 +58,8 @@ public class LiferayIntegrationJUnitTestRunner
 
 							classBlock.evaluate();
 						}
-						catch (Throwable e) {
-							_error = e;
+						catch (Throwable throwable) {
+							_throwable = throwable;
 						}
 					}
 
@@ -69,12 +69,13 @@ public class LiferayIntegrationJUnitTestRunner
 
 				thread.join();
 
-				if (_error != null) {
-					throw _error;
+				if (_throwable != null) {
+					throw _throwable;
 				}
 			}
 
-			private Throwable _error = null;
+			private Throwable _throwable;
+
 		};
 	}
 
