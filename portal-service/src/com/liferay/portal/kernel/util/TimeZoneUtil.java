@@ -26,6 +26,8 @@ import java.util.TimeZone;
  */
 public class TimeZoneUtil {
 
+	public static TimeZone GMT = getTimeZone("GMT");
+
 	public static TimeZone getDefault() {
 		return getInstance()._getDefault();
 	}
