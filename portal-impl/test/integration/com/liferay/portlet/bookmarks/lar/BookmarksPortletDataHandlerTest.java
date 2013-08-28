@@ -69,10 +69,10 @@ public class BookmarksPortletDataHandlerTest
 
 		GroupLocalServiceUtil.deleteGroup(group);
 
-		List<BookmarksFolder> bookmarksFolders =
+		List<BookmarksFolder> folders =
 			BookmarksFolderLocalServiceUtil.getFolders(group.getGroupId());
 
-		Assert.assertEquals(0, bookmarksFolders.size());
+		Assert.assertEquals(0, folders.size());
 	}
 
 	@Override

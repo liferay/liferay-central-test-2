@@ -82,10 +82,10 @@ public class JournalPortletDataHandlerTest
 
 		GroupLocalServiceUtil.deleteGroup(group);
 
-		List<JournalFolder> journalFolders =
-			JournalFolderLocalServiceUtil.getFolders(group.getGroupId());
+		List<JournalFolder> folders = JournalFolderLocalServiceUtil.getFolders(
+			group.getGroupId());
 
-		Assert.assertEquals(0, journalFolders.size());
+		Assert.assertEquals(0, folders.size());
 	}
 
 	@Override
