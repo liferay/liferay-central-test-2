@@ -32,7 +32,7 @@ public class TableMapperFactory {
 				BasePersistence<L> leftPersistence,
 				BasePersistence<R> rightPersistence) {
 
-		TableMapper<?, ?> tableMapper = _tableMappers.get(tableName);
+		TableMapper<?, ?> tableMapper = tableMappers.get(tableName);
 
 		if (tableMapper == null) {
 			TableMapperImpl<L, R> tableMapperImpl =
@@ -45,7 +45,7 @@ public class TableMapperFactory {
 
 			tableMapper = tableMapperImpl;
 
-			_tableMappers.put(tableName, tableMapper);
+			tableMappers.put(tableName, tableMapper);
 		}
 		else if (!tableMapper.matches(leftColumnName, rightColumnName)) {
 			tableMapper = tableMapper.getReverseTableMapper();
@@ -54,11 +54,7 @@ public class TableMapperFactory {
 		return (TableMapper<L, R>)tableMapper;
 	}
 
-	protected static Map<String, TableMapper<?, ?>> getTableMappers() {
-		return _tableMappers;
-	}
-
-	private static Map<String, TableMapper<?, ?>> _tableMappers =
+	protected static Map<String, TableMapper<?, ?>> tableMappers =
 		new ConcurrentHashMap<String, TableMapper<?, ?>>();
 
 }
