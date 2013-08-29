@@ -36,6 +36,7 @@ import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 /**
@@ -122,11 +123,7 @@ public class WordsUtil {
 	}
 
 	private String _getRandomWord() {
-		if (_secureRandom == null) {
-			_secureRandom = new SecureRandom();
-		}
-
-		int pos = _secureRandom.nextInt(_dictionaryList.size());
+		int pos = _random.nextInt(_dictionaryList.size());
 
 		return _dictionaryList.get(pos);
 	}
@@ -141,7 +138,7 @@ public class WordsUtil {
 
 	private List<String> _dictionaryList;
 	private Set<String> _dictionarySet;
-	private SecureRandom _secureRandom;
+	private Random _random = new SecureRandom();
 	private SpellDictionaryHashMap _spellDictionaryHashMap;
 
 }
