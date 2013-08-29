@@ -495,7 +495,7 @@ public interface PropsKeys {
 
 	public static final String CONVERT_PROCESSES = "convert.processes";
 
-	public static final String COOKIE_HTTPONLY_IGNORE_NAMES = "cookie.httponly.ignore.names";
+	public static final String COOKIE_HTTP_ONLY_NAMES_EXCLUDES = "cookie.http.only.names.excludes";
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
 

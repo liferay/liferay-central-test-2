@@ -14,18 +14,19 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
 
 import java.util.Properties;
+import java.util.Set;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -55,9 +56,7 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 
 	@Override
 	public void addCookie(Cookie cookie) {
-		if (!ArrayUtil.contains(
-				_COOKIE_HTTPONLY_IGNORE_NAMES, cookie.getName())) {
-
+		if (!_cookieHttpOnlyCookieNamesExcludes.contains(cookie.getName())) {
 			cookie.setHttpOnly(true);
 		}
 
@@ -163,9 +162,6 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 		super(response);
 	}
 
-	private static final String[] _COOKIE_HTTPONLY_IGNORE_NAMES =
-		PropsUtil.getArray(PropsKeys.COOKIE_HTTPONLY_IGNORE_NAMES);
-
 	private static final boolean _X_CONTENT_TYPE_OPTIONS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.HTTP_HEADER_SECURE_X_CONTENT_TYPE_OPTIONS),
@@ -181,6 +177,9 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 	private static final boolean _X_XSS_PROTECTION = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.HTTP_HEADER_SECURE_X_XSS_PROTECTION), true);
 
+	private static Set<String> _cookieHttpOnlyCookieNamesExcludes =
+		SetUtil.fromArray(
+			PropsUtil.getArray(PropsKeys.COOKIE_HTTP_ONLY_NAMES_EXCLUDES));
 	private static Properties _xFrameOptionsProperties =
 		PropsUtil.getProperties(
 			PropsKeys.HTTP_HEADER_SECURE_X_FRAME_OPTIONS + ".", true);
