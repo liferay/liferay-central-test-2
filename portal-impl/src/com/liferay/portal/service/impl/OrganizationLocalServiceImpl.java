@@ -532,7 +532,7 @@ public class OrganizationLocalServiceImpl
 	}
 
 	@Override
-	public List<Organization> getNoAssetEntries() throws SystemException {
+	public List<Organization> getNoAssetOrganizations() throws SystemException {
 		return organizationFinder.findByNoAssets();
 	}
 

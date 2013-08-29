@@ -89,7 +89,7 @@ public class VerifyOrganization extends VerifyProcess {
 
 	protected void updateOrganizationAssets() throws Exception {
 		List<Organization> organizations =
-			OrganizationLocalServiceUtil.getNoAssetEntries();
+			OrganizationLocalServiceUtil.getNoAssetOrganizations();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
