@@ -713,7 +713,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		try {
 			GroupThreadLocal.setDeleteInProcess(true);
 
-			if (((group.isCompany() && !group.isCompanyStaging()) ||
+			if (((group.isCompany() && !group.isCompanyStagingGroup()) ||
 				 PortalUtil.isSystemGroup(group.getName())) &&
 				!CompanyThreadLocal.isDeleteInProcess()) {
 
@@ -1194,7 +1194,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		String name = group.getName();
 
-		if (group.isCompany() && !group.isCompanyStaging()) {
+		if (group.isCompany() && !group.isCompanyStagingGroup()) {
 			name = LanguageUtil.get(locale, "global");
 		}
 		else if (group.isControlPanel()) {

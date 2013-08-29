@@ -84,15 +84,15 @@ public class GroupServiceTest {
 	}
 
 	@Test
-	public void testAddGroupWithGlobalLive() throws Exception {
+	public void testAddCompanyStagingGroup() throws Exception {
 		Group companyGroup = GroupLocalServiceUtil.getCompanyGroup(
 			TestPropsValues.getCompanyId());
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		serviceContext.setAttribute("staging", String.valueOf(true));
+		serviceContext.setAttribute("staging", Boolean.TRUE);
 
-		Group stagingGroup = GroupLocalServiceUtil.addGroup(
+		Group companyStagingGroup = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			companyGroup.getClassName(), companyGroup.getClassPK(),
 			companyGroup.getGroupId(), companyGroup.getDescriptiveName(),
@@ -102,10 +102,10 @@ public class GroupServiceTest {
 			companyGroup.getFriendlyURL(), false, companyGroup.isActive(),
 			serviceContext);
 
-		Assert.assertTrue(stagingGroup.isCompanyStaging());
+		Assert.assertTrue(companyStagingGroup.isCompanyStagingGroup());
 
 		Assert.assertEquals(
-			companyGroup.getGroupId(), stagingGroup.getLiveGroupId());
+			companyGroup.getGroupId(), companyStagingGroup.getLiveGroupId());
 	}
 
 	@Test

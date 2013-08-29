@@ -139,7 +139,7 @@ public class VerifyGroup extends VerifyProcess {
 
 			User user = null;
 
-			if (group.isCompany() && !group.isCompanyStaging()) {
+			if (group.isCompany() && !group.isCompanyStagingGroup()) {
 				friendlyURL = GroupConstants.GLOBAL_FRIENDLY_URL;
 			}
 			else if (group.isUser()) {

@@ -570,11 +570,11 @@ public class GroupImpl extends GroupBaseImpl {
 
 	@Override
 	public boolean isCompany() {
-		return hasClassName(Company.class) || isCompanyStaging();
+		return hasClassName(Company.class) || isCompanyStagingGroup();
 	}
 
 	@Override
-	public boolean isCompanyStaging() {
+	public boolean isCompanyStagingGroup() {
 		Group liveGroup = getLiveGroup();
 
 		if (liveGroup == null) {
