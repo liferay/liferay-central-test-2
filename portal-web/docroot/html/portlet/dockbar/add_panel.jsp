@@ -18,7 +18,7 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
-		<c:if test="<%= (layout != null) %>">
+		<c:if test="<%= layout != null %>">
 
 			<%
 			Group group = layout.getGroup();
