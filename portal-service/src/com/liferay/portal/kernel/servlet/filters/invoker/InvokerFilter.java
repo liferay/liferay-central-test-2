@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.concurrent.ConcurrentLFUCache;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.NonSerializableObjectRequestWrapper;
-import com.liferay.portal.kernel.servlet.SecureHttpServletResponseWrapper;
+import com.liferay.portal.kernel.servlet.SanitizedServletResponse;
 import com.liferay.portal.kernel.util.BasePortalLifecycle;
 import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -264,7 +264,7 @@ public class InvokerFilter extends BasePortalLifecycle implements Filter {
 
 		request.setAttribute(_SECURE_RESPONSE, Boolean.FALSE);
 
-		return SecureHttpServletResponseWrapper.createSecureHttpServletResponseWrapper(
+		return SanitizedServletResponse.getSanitizedServletResponse(
 			request, response);
 	}
 

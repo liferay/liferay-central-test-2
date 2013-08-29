@@ -35,10 +35,9 @@ import javax.servlet.http.HttpServletResponseWrapper;
  * @author Shuyang Zhou
  * @author Tomas Polesovsky
  */
-public class SecureHttpServletResponseWrapper
-	extends HttpServletResponseWrapper {
+public class SanitizedServletResponse extends HttpServletResponseWrapper {
 
-	public static HttpServletResponse createSecureHttpServletResponseWrapper(
+	public static HttpServletResponse getSanitizedServletResponse(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		setXContentOptions(request, response);
@@ -49,7 +48,7 @@ public class SecureHttpServletResponseWrapper
 			return response;
 		}
 
-		return new SecureHttpServletResponseWrapper(response);
+		return new SanitizedServletResponse(response);
 	}
 
 	@Override
@@ -147,7 +146,7 @@ public class SecureHttpServletResponseWrapper
 		response.setHeader(HttpHeaders.X_XSS_PROTECTION, "1; mode=block");
 	}
 
-	private SecureHttpServletResponseWrapper(HttpServletResponse response) {
+	private SanitizedServletResponse(HttpServletResponse response) {
 		super(response);
 	}
 
