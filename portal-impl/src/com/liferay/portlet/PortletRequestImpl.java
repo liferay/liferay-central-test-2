@@ -671,9 +671,9 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		boolean isWARFile = portletApp.isWARFile();
+		boolean warFile = portletApp.isWARFile();
 
-		if (!isWARFile) {
+		if (!warFile) {
 			String portletResource = ParamUtil.getString(
 				request, portletNamespace.concat("portletResource"));
 
@@ -692,13 +692,13 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 						resourcePortlet.getPortletApp();
 
 					if (resourcePortletApp.isWARFile()) {
-						isWARFile = true;
+						warFile = true;
 					}
 				}
 			}
 		}
 
-		if (isWARFile && !portlet.isPrivateSessionAttributes()) {
+		if (warFile && !portlet.isPrivateSessionAttributes()) {
 			portalSessionShared = true;
 		}
 
