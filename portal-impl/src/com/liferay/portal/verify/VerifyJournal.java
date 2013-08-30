@@ -320,7 +320,7 @@ public class VerifyJournal extends VerifyProcess {
 					if (_log.isWarnEnabled()) {
 						_log.warn(
 							"Removing reference to missing structure for " +
-								"article " + articleId);
+								"article " + article.getId());
 					}
 
 					article.setStructureId(StringPool.BLANK);
