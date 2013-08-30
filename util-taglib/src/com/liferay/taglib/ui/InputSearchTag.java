@@ -104,7 +104,8 @@ public class InputSearchTag extends IncludeTag {
 			placeholder = buttonLabel;
 		}
 
-		request.setAttribute("liferay-ui:input-search:autoFocus", _autoFocus);
+		request.setAttribute(
+			"liferay-ui:input-search:autoFocus", String.valueOf(_autoFocus));
 		request.setAttribute(
 			"liferay-ui:input-search:buttonLabel", buttonLabel);
 		request.setAttribute("liferay-ui:input-search:cssClass", cssClass);
@@ -117,7 +118,7 @@ public class InputSearchTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_search/page.jsp";
 
-	private boolean _autoFocus = false;
+	private boolean _autoFocus;
 	private String _buttonLabel;
 	private String _cssClass;
 	private String _id;
