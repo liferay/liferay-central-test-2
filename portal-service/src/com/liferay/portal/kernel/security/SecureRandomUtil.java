@@ -24,23 +24,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <p>A weak coherence thread-safe lock-free SecureRandom buffering utility.</p>
- *
- * <p>Fetch random bytes from SecureRandom by a buffer, then consume the buffer
- * by various number formats. The purpose is to reduce the accessing frequency
- * to SecureRandom, in order to avoid the system level synchronization.</p>
- *
- * <p>The "weak coherence" happens on concurrent buffer reloading. To achieve
- * lock-free only one thread is doing the reloading, the rest currently arrived
- * threads(if there is any) will get their random number by doing a BIT-XOR
- * between first long in the buffer and the non-threadsafe gap seed. The gap
- * seed is replaced by the output random long afterward.</p>
- *
- * <p>The non-threadsafe natual of the gap seed, introduces a new source of
- * randomness(the thread scheduling at OS level), which is making the random
- * output on current reloading even safer. The non-threadsafe property of gap
- * seed won't affact the threadsafe property of this utility class.</p>
- *
  * @author Shuyang Zhou
  */
 public class SecureRandomUtil {
