@@ -428,13 +428,13 @@ public class TrashImpl implements Trash {
 			containerModelURL.toString());
 
 		for (ContainerModel containerModel : containerModels) {
-			TrashHandler containerTrashHandler =
+			TrashHandler containerModelTrashHandler =
 				TrashHandlerRegistryUtil.getTrashHandler(
 					containerModel.getModelClassName());
 
-			if (!containerTrashHandler.isInTrash(
+			if (!containerModelTrashHandler.isInTrash(
 					containerModel.getContainerModelId()) &&
-				(containerTrashHandler.getTrashContainer(
+				(containerModelTrashHandler.getTrashContainer(
 					containerModel.getContainerModelId()) == null)) {
 
 				continue;
@@ -449,7 +449,7 @@ public class TrashImpl implements Trash {
 
 			String name = containerModel.getContainerModelName();
 
-			if (containerTrashHandler.isInTrash(
+			if (containerModelTrashHandler.isInTrash(
 					containerModel.getContainerModelId())) {
 
 				name = TrashUtil.getOriginalTitle(name);
