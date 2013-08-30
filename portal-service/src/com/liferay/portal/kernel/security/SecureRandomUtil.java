@@ -42,7 +42,7 @@ public class SecureRandomUtil {
 	public static byte nextByte() {
 		int index = _index.getAndIncrement();
 
-		if (index < _bufferSize) {
+		if (index < _BUFFER_SIZE) {
 			return _bytes[index];
 		}
 
@@ -52,7 +52,7 @@ public class SecureRandomUtil {
 	public static double nextDouble() {
 		int index = _index.getAndAdd(8);
 
-		if ((index + 7) < _bufferSize) {
+		if ((index + 7) < _BUFFER_SIZE) {
 			return BigEndianCodec.getDouble(_bytes, index);
 		}
 
@@ -62,7 +62,7 @@ public class SecureRandomUtil {
 	public static float nextFloat() {
 		int index = _index.getAndAdd(4);
 
-		if ((index + 3) < _bufferSize) {
+		if ((index + 3) < _BUFFER_SIZE) {
 			return BigEndianCodec.getFloat(_bytes, index);
 		}
 
@@ -72,7 +72,7 @@ public class SecureRandomUtil {
 	public static int nextInt() {
 		int index = _index.getAndAdd(4);
 
-		if ((index + 3) < _bufferSize) {
+		if ((index + 3) < _BUFFER_SIZE) {
 			return BigEndianCodec.getInt(_bytes, index);
 		}
 
@@ -82,7 +82,7 @@ public class SecureRandomUtil {
 	public static long nextLong() {
 		int index = _index.getAndAdd(8);
 
-		if ((index + 7) < _bufferSize) {
+		if ((index + 7) < _BUFFER_SIZE) {
 			return BigEndianCodec.getLong(_bytes, index);
 		}
 
@@ -94,6 +94,7 @@ public class SecureRandomUtil {
 			_random.nextBytes(_bytes);
 
 			_index.set(0);
+
 			_reloadingFlag.set(false);
 		}
 
@@ -104,15 +105,15 @@ public class SecureRandomUtil {
 		return l;
 	}
 
-	private static final int _bufferSize;
-	private static final byte[] _bytes;
-	private static final AtomicInteger _index = new AtomicInteger();
+	private static final int _BUFFER_SIZE;
 
 	private static final int _MIN_BUFFER_SIZE = 1024;
 
-	private static final Random _random = new SecureRandom();
-	private static final AtomicBoolean _reloadingFlag = new AtomicBoolean();
-	private static long _gapSeed = _random.nextLong();
+	private static byte[] _bytes;
+	private static long _gapSeed;
+	private static AtomicInteger _index = new AtomicInteger();
+	private static Random _random = new SecureRandom();
+	private static AtomicBoolean _reloadingFlag = new AtomicBoolean();
 
 	static {
 		int bufferSize = GetterUtil.getInteger(
@@ -123,11 +124,13 @@ public class SecureRandomUtil {
 			bufferSize = _MIN_BUFFER_SIZE;
 		}
 
-		_bufferSize = bufferSize;
+		_BUFFER_SIZE = bufferSize;
 
-		_bytes = new byte[_bufferSize];
+		_bytes = new byte[_BUFFER_SIZE];
 
 		_random.nextBytes(_bytes);
+
+		_gapSeed = _random.nextLong();
 	}
 
 }

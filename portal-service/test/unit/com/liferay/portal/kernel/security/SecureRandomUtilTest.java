@@ -47,24 +47,24 @@ public class SecureRandomUtilTest {
 
 	@Before
 	public void setUp() {
-		System.setProperty(_BUFFER_SIZE_KEY, "2048");
+		System.setProperty(_KEY_BUFFER_SIZE, "2048");
 	}
 
 	@After
 	public void tearDown() {
-		System.clearProperty(_BUFFER_SIZE_KEY);
+		System.clearProperty(_KEY_BUFFER_SIZE);
 	}
 
 	@Test
 	public void testConcurrentReload() throws Exception {
-		SecureRandom secureRandom = _installPredictableRandom();
+		SecureRandom secureRandom = installPredictableRandom();
 
 		FutureTask<Long> futureTask = new FutureTask<Long>(
 			new Callable<Long>() {
 
 				@Override
 				public Long call() throws Exception {
-					return _reload();
+					return reload();
 				}
 
 			});
@@ -78,27 +78,23 @@ public class SecureRandomUtilTest {
 
 			while (reloadThread.getState() != Thread.State.BLOCKED);
 
-			long gapSeed = _getGapSeed();
+			long gapSeed = getGapSeed();
 
-			gapValue = _reload();
+			gapValue = reload();
 
-			Assert.assertEquals(_getFirstLong() ^ gapSeed, gapValue);
-
-			Assert.assertEquals(gapValue, _getGapSeed());
+			Assert.assertEquals(getFirstLong() ^ gapSeed, gapValue);
+			Assert.assertEquals(gapValue, getGapSeed());
 		}
 
 		reloadThread.join();
 
 		Assert.assertEquals(
-			(Long)(_getFirstLong() ^ gapValue), futureTask.get());
+			(Long)(getFirstLong() ^ gapValue), futureTask.get());
 	}
 
 	@Test
 	public void testInitialization() throws Exception {
-
-		// Too small buffer size
-
-		System.setProperty(_BUFFER_SIZE_KEY, "10");
+		System.setProperty(_KEY_BUFFER_SIZE, "10");
 
 		Field bufferSizeField = ReflectionUtil.getDeclaredField(
 			SecureRandomUtil.class, "_bufferSize");
@@ -118,7 +114,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 2048; i++) {
 			byte b = (byte)i;
@@ -133,8 +129,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -164,7 +160,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 2048; i++) {
 			Assert.assertEquals((byte)i, SecureRandomUtil.nextByte());
@@ -172,8 +168,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -191,7 +187,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 256; i++) {
 			byte b = (byte)(i * 8);
@@ -209,8 +205,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -239,7 +235,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 512; i++) {
 			byte b = (byte)(i * 4);
@@ -257,8 +253,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -287,7 +283,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 512; i++) {
 			byte b = (byte)(i * 4);
@@ -304,8 +300,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -332,7 +328,7 @@ public class SecureRandomUtilTest {
 
 		// First load
 
-		_installPredictableRandom();
+		installPredictableRandom();
 
 		for (int i = 0; i < 256; i++) {
 			byte b = (byte)(i * 8);
@@ -350,8 +346,8 @@ public class SecureRandomUtilTest {
 
 		// Gap number
 
-		long firstLong = _getFirstLong();
-		long gapSeed = _getGapSeed();
+		long firstLong = getFirstLong();
+		long gapSeed = getGapSeed();
 
 		long result = firstLong ^ gapSeed;
 
@@ -374,7 +370,7 @@ public class SecureRandomUtilTest {
 		}
 	}
 
-	private long _getFirstLong() throws Exception {
+	protected long getFirstLong() throws Exception {
 		Field bytesField = ReflectionUtil.getDeclaredField(
 			SecureRandomUtil.class, "_bytes");
 
@@ -383,18 +379,18 @@ public class SecureRandomUtilTest {
 		return BigEndianCodec.getLong(bytes, 0);
 	}
 
-	private long _getGapSeed() throws Exception {
+	protected long getGapSeed() throws Exception {
 		Field gapSeedField = ReflectionUtil.getDeclaredField(
 			SecureRandomUtil.class, "_gapSeed");
 
 		return gapSeedField.getLong(null);
 	}
 
-	private SecureRandom _installPredictableRandom() throws Exception {
-		SecureRandom predictableRandom = new PredictableRandom();
-
+	protected SecureRandom installPredictableRandom() throws Exception {
 		Field secureRandomField = ReflectionUtil.getDeclaredField(
 			SecureRandomUtil.class, "_random");
+
+		SecureRandom predictableRandom = new PredictableRandom();
 
 		secureRandomField.set(null, predictableRandom);
 
@@ -408,14 +404,14 @@ public class SecureRandomUtilTest {
 		return predictableRandom;
 	}
 
-	private long _reload() throws Exception {
+	protected long reload() throws Exception {
 		Method reloadMethod = ReflectionUtil.getDeclaredMethod(
 			SecureRandomUtil.class, "_reload");
 
 		return (Long)reloadMethod.invoke(null);
 	}
 
-	private static final String _BUFFER_SIZE_KEY =
+	private static final String _KEY_BUFFER_SIZE =
 		SecureRandomUtil.class.getName() + ".buffer.size";
 
 	private static class PredictableRandom extends SecureRandom {
@@ -427,7 +423,7 @@ public class SecureRandomUtilTest {
 			}
 		}
 
-		private final AtomicInteger _counter = new AtomicInteger();
+		private AtomicInteger _counter = new AtomicInteger();
 
 	}
 

@@ -83,7 +83,8 @@ public class PwdGenerator {
 
 		StringBuilder sb = new StringBuilder(length);
 
-		// Per key generation only consumes one secured random long number
+		// It is safe to use the regular Random class because each generated
+		// password only consumes one secure random long
 
 		Random random = new Random(SecureRandomUtil.nextLong());
 
