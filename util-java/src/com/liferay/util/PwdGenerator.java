@@ -83,7 +83,7 @@ public class PwdGenerator {
 			sb.append(key.charAt(random.nextInt(key.length())));
 		}
 
-		// shuffle
+		// Shuffle
 
 		for (int i = length; i > 1; i--) {
 			int position = random.nextInt(i);
@@ -92,7 +92,6 @@ public class PwdGenerator {
 				char c = sb.charAt(position);
 
 				sb.setCharAt(position, sb.charAt(i - 1));
-
 				sb.setCharAt(i - 1, c);
 			}
 		}
