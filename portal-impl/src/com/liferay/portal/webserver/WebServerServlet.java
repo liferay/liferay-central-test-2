@@ -302,14 +302,8 @@ public class WebServerServlet extends HttpServlet {
 			HttpServletRequest request, String[] pathArray)
 		throws Exception {
 
-		long groupId = GetterUtil.getLong(pathArray[1], -1);
+		long groupId = GetterUtil.getLong(pathArray[1]);
 		String uuid = pathArray[3];
-
-		if ((groupId == -1) || Validator.isNull(uuid)) {
-			throw new NoSuchFileEntryException(
-				"Unable to find attachment with groupId " + groupId + " uuid " +
-					uuid);
-		}
 
 		FileEntry fileEntry = PortletFileRepositoryUtil.getPortletFileEntry(
 			uuid, groupId);
