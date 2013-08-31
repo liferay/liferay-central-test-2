@@ -146,8 +146,8 @@ public class WebServerServlet extends HttpServlet {
 			else if (Validator.isNumber(pathArray[0])) {
 				_checkFileEntry(pathArray);
 			}
-			else if (_PATH_ATTACHMENTS.equals(pathArray[0])) {
-				FileEntry fileEntry = getAttachmentFileEntry(
+			else if (PATH_PORTLET_FILE_ENTRY.equals(pathArray[0])) {
+				FileEntry fileEntry = getPortletFileEntry(
 					request, pathArray);
 
 				if (fileEntry != null) {
@@ -259,8 +259,8 @@ public class WebServerServlet extends HttpServlet {
 				if (Validator.isNumber(pathArray[0])) {
 					sendFile(request, response, user, pathArray);
 				}
-				else if (_PATH_ATTACHMENTS.equals(pathArray[0])) {
-					sendAttachment(request, response, pathArray);
+				else if (PATH_PORTLET_FILE_ENTRY.equals(pathArray[0])) {
+					sendPortletFileEntry(request, response, pathArray);
 				}
 				else {
 					if (isLegacyImageGalleryImageId(request, response)) {
@@ -297,7 +297,7 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected static FileEntry getAttachmentFileEntry(
+	protected static FileEntry getPortletFileEntry(
 			HttpServletRequest request, String[] pathArray)
 		throws Exception {
 
@@ -723,12 +723,12 @@ public class WebServerServlet extends HttpServlet {
 		response.sendRedirect(redirect);
 	}
 
-	protected void sendAttachment(
+	protected void sendPortletFileEntry(
 			HttpServletRequest request, HttpServletResponse response,
 			String[] pathArray)
 		throws Exception {
 
-		FileEntry fileEntry = getAttachmentFileEntry(request, pathArray);
+		FileEntry fileEntry = getPortletFileEntry(request, pathArray);
 
 		if (fileEntry == null) {
 			return;
@@ -1321,7 +1321,7 @@ public class WebServerServlet extends HttpServlet {
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
 
-	private static final String _PATH_ATTACHMENTS = "attachments";
+	public static final String PATH_PORTLET_FILE_ENTRY = "portlet_file_entry";
 
 	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT =
 		PropsValues.WEB_SERVER_SERVLET_VERSION_VERBOSITY.equalsIgnoreCase(

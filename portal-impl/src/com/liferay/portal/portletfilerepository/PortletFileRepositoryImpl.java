@@ -47,6 +47,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.webserver.WebServerServlet;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
@@ -405,7 +406,9 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 		}
 
 		sb.append(PortalUtil.getPathContext());
-		sb.append("/documents/attachments/");
+		sb.append("/documents/");
+		sb.append(WebServerServlet.PATH_PORTLET_FILE_ENTRY);
+		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getGroupId());
 		sb.append(StringPool.SLASH);
 
