@@ -398,7 +398,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			boolean absoluteURL)
 		throws PortalException, SystemException {
 
-		StringBundler sb = new StringBundler(12);
+		StringBundler sb = new StringBundler(10);
 
 		if (themeDisplay != null) {
 			if (absoluteURL) {
@@ -423,8 +423,6 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getUuid());
-		sb.append(StringPool.QUESTION);
-		sb.append(queryString);
 
 		if (themeDisplay != null) {
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
@@ -435,10 +433,19 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 				if (portletId.equals(PortletKeys.TRASH) &&
 					!queryString.contains("status=")) {
 
-					sb.append("&status=");
-					sb.append(WorkflowConstants.STATUS_IN_TRASH);
+					if (Validator.isNotNull(queryString)) {
+						queryString += StringPool.AMPERSAND;
+					}
+
+					queryString +=
+						"status=" + WorkflowConstants.STATUS_IN_TRASH;
 				}
 			}
+		}
+
+		if (Validator.isNotNull(queryString)) {
+			sb.append(StringPool.QUESTION);
+			sb.append(queryString);
 		}
 
 		String downloadURL = sb.toString();
