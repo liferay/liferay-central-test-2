@@ -398,7 +398,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			boolean absoluteURL)
 		throws PortalException, SystemException {
 
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(12);
 
 		if (themeDisplay != null) {
 			if (absoluteURL) {
@@ -423,7 +423,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 		sb.append(StringPool.SLASH);
 		sb.append(fileEntry.getUuid());
-
+		sb.append(StringPool.QUESTION);
 		sb.append(queryString);
 
 		if (themeDisplay != null) {
