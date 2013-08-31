@@ -17,8 +17,6 @@ package com.liferay.portal.portletfilerepository;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
@@ -557,8 +555,5 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			return fileEntries;
 		}
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		PortletFileRepositoryImpl.class);
 
 }
