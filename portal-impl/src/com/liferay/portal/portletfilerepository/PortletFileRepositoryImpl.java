@@ -433,7 +433,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 				String portletId = portletDisplay.getId();
 
 				if (portletId.equals(PortletKeys.TRASH) &&
-					!queryString.contains("&status=")) {
+					!queryString.contains("status=")) {
 
 					sb.append("&status=");
 					sb.append(WorkflowConstants.STATUS_IN_TRASH);
