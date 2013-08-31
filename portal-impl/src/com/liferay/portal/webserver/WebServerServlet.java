@@ -125,6 +125,8 @@ import javax.servlet.http.HttpSession;
  */
 public class WebServerServlet extends HttpServlet {
 
+	public static final String PATH_PORTLET_FILE_ENTRY = "portlet_file_entry";
+
 	/**
 	 * @see com.liferay.portal.servlet.filters.virtualhost.VirtualHostFilter
 	 */
@@ -147,8 +149,7 @@ public class WebServerServlet extends HttpServlet {
 				_checkFileEntry(pathArray);
 			}
 			else if (PATH_PORTLET_FILE_ENTRY.equals(pathArray[0])) {
-				FileEntry fileEntry = getPortletFileEntry(
-					request, pathArray);
+				FileEntry fileEntry = getPortletFileEntry(request, pathArray);
 
 				if (fileEntry != null) {
 					return true;
@@ -723,31 +724,6 @@ public class WebServerServlet extends HttpServlet {
 		response.sendRedirect(redirect);
 	}
 
-	protected void sendPortletFileEntry(
-			HttpServletRequest request, HttpServletResponse response,
-			String[] pathArray)
-		throws Exception {
-
-		FileEntry fileEntry = getPortletFileEntry(request, pathArray);
-
-		if (fileEntry == null) {
-			return;
-		}
-
-		FileVersion fileVersion = fileEntry.getFileVersion();
-
-		String fileName = HttpUtil.decodeURL(
-			HtmlUtil.escape(pathArray[2]), true);
-
-		if (fileVersion.isInTrash()) {
-			fileName = TrashUtil.getOriginalTitle(fileName);
-		}
-
-		ServletResponseUtil.sendFile(
-			request, response, fileName, fileEntry.getContentStream(),
-			fileEntry.getSize(), fileEntry.getMimeType());
-	}
-
 	protected void sendDocumentLibrary(
 			HttpServletRequest request, HttpServletResponse response, User user,
 			String path, String[] pathArray)
@@ -1193,6 +1169,31 @@ public class WebServerServlet extends HttpServlet {
 		template.processTemplate(response.getWriter());
 	}
 
+	protected void sendPortletFileEntry(
+			HttpServletRequest request, HttpServletResponse response,
+			String[] pathArray)
+		throws Exception {
+
+		FileEntry fileEntry = getPortletFileEntry(request, pathArray);
+
+		if (fileEntry == null) {
+			return;
+		}
+
+		FileVersion fileVersion = fileEntry.getFileVersion();
+
+		String fileName = HttpUtil.decodeURL(
+			HtmlUtil.escape(pathArray[2]), true);
+
+		if (fileVersion.isInTrash()) {
+			fileName = TrashUtil.getOriginalTitle(fileName);
+		}
+
+		ServletResponseUtil.sendFile(
+			request, response, fileName, fileEntry.getContentStream(),
+			fileEntry.getSize(), fileEntry.getMimeType());
+	}
+
 	protected void writeImage(
 		Image image, HttpServletRequest request, HttpServletResponse response) {
 
@@ -1320,8 +1321,6 @@ public class WebServerServlet extends HttpServlet {
 	}
 
 	private static final String _DATE_FORMAT_PATTERN = "d MMM yyyy HH:mm z";
-
-	public static final String PATH_PORTLET_FILE_ENTRY = "portlet_file_entry";
 
 	private static final boolean _WEB_SERVER_SERVLET_VERSION_VERBOSITY_DEFAULT =
 		PropsValues.WEB_SERVER_SERVLET_VERSION_VERBOSITY.equalsIgnoreCase(
