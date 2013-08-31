@@ -147,10 +147,10 @@ public class WebServerServlet extends HttpServlet {
 				_checkFileEntry(pathArray);
 			}
 			else if (_PATH_ATTACHMENTS.equals(pathArray[0])) {
-				DLFileEntry dlFileEntry = getAttachmentFileEntry(
+				FileEntry fileEntry = getAttachmentFileEntry(
 					request, pathArray);
 
-				if (dlFileEntry != null) {
+				if (fileEntry != null) {
 					return true;
 				}
 			}
@@ -297,7 +297,7 @@ public class WebServerServlet extends HttpServlet {
 		}
 	}
 
-	protected static DLFileEntry getAttachmentFileEntry(
+	protected static FileEntry getAttachmentFileEntry(
 			HttpServletRequest request, String[] pathArray)
 		throws Exception {
 
@@ -326,7 +326,7 @@ public class WebServerServlet extends HttpServlet {
 			return null;
 		}
 
-		return dlFileEntry;
+		return fileEntry;
 	}
 
 	protected Image convertFileEntry(boolean smallImage, FileEntry fileEntry)
@@ -728,24 +728,24 @@ public class WebServerServlet extends HttpServlet {
 			String[] pathArray)
 		throws Exception {
 
-		DLFileEntry dlFileEntry = getAttachmentFileEntry(request, pathArray);
+		FileEntry fileEntry = getAttachmentFileEntry(request, pathArray);
 
-		if (dlFileEntry == null) {
+		if (fileEntry == null) {
 			return;
 		}
 
-		DLFileVersion dlFileVersion = dlFileEntry.getFileVersion();
+		FileVersion fileVersion = fileEntry.getFileVersion();
 
 		String fileName = HttpUtil.decodeURL(
 			HtmlUtil.escape(pathArray[2]), true);
 
-		if (dlFileVersion.isInTrash()) {
+		if (fileVersion.isInTrash()) {
 			fileName = TrashUtil.getOriginalTitle(fileName);
 		}
 
 		ServletResponseUtil.sendFile(
-			request, response, fileName, dlFileEntry.getContentStream(),
-			dlFileEntry.getSize(), dlFileEntry.getMimeType());
+			request, response, fileName, fileEntry.getContentStream(),
+			fileEntry.getSize(), fileEntry.getMimeType());
 	}
 
 	protected void sendDocumentLibrary(
