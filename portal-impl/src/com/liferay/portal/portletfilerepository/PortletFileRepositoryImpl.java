@@ -398,7 +398,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 			boolean absoluteURL)
 		throws PortalException, SystemException {
 
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(11);
 
 		if (themeDisplay != null) {
 			if (absoluteURL) {
