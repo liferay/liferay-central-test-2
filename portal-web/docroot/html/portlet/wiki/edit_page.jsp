@@ -326,11 +326,9 @@ if (Validator.isNull(redirect)) {
 							<%
 							for (int i = 0; i < attachmentsFileEntries.size(); i++) {
 								FileEntry attachmentsFileEntry = attachmentsFileEntries.get(i);
-
-								String getPageAttachmentURL = PortletFileRepositoryUtil.getPortletFileEntryURL(attachmentsFileEntry, themeDisplay, StringPool.BLANK);
 							%>
 
-								<aui:a href="<%= (templatePage != null) && (templatePage.getAttachmentsFileEntriesCount() > 0) ? getPageAttachmentURL : null %>"><%= attachmentsFileEntry.getTitle() %></aui:a> (<%= TextFormatter.formatStorageSize(attachmentsFileEntry.getSize(), locale) %>)<%= (i < (attachmentsFileEntries.size() - 1)) ? ", " : "" %>
+								<aui:a href="<%= (templatePage != null) && (templatePage.getAttachmentsFileEntriesCount() > 0) ? PortletFileRepositoryUtil.getPortletFileEntryURL(attachmentsFileEntry, themeDisplay, StringPool.BLANK) : null %>"><%= attachmentsFileEntry.getTitle() %></aui:a> (<%= TextFormatter.formatStorageSize(attachmentsFileEntry.getSize(), locale) %>)<%= (i < (attachmentsFileEntries.size() - 1)) ? ", " : "" %>
 
 							<%
 							}

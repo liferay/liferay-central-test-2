@@ -79,11 +79,11 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 	>
 
 		<%
-			String rowURL = PortletFileRepositoryUtil.getPortletFileEntryURL(fileEntry, themeDisplay, "?status=" + String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
+		String rowHREF = PortletFileRepositoryUtil.getPortletFileEntryURL(themeDisplay, fileEntry, "status=" + WorkflowConstants.STATUS_IN_TRASH);
 		%>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
+			href="<%= rowHREF %>"
 			name="file-name"
 		>
 			<liferay-ui:icon
@@ -94,7 +94,7 @@ iteratorURL.setParameter("messageId", String.valueOf(messageId));
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
+			href="<%= rowHREF %>"
 			name="size"
 			value="<%= TextFormatter.formatStorageSize(fileEntry.getSize(), locale) %>"
 		/>

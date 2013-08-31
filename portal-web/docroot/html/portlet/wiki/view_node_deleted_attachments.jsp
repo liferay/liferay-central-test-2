@@ -78,18 +78,18 @@ iteratorURL.setParameter("viewTrashAttachments", Boolean.TRUE.toString());
 		<%
 		WikiPage wikiPage = WikiPageAttachmentsUtil.getPage(fileEntry.getFileEntryId());
 
-		String rowURL = PortletFileRepositoryUtil.getPortletFileEntryURL(fileEntry, themeDisplay, "?status=" + String.valueOf(WorkflowConstants.STATUS_IN_TRASH));
+		String rowHREF = PortletFileRepositoryUtil.getPortletFileEntryURL(themeDisplay, fileEntry, "status=" + WorkflowConstants.STATUS_IN_TRASH);
 		%>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
+			href="<%= rowHREF %>"
 			name="file-name"
 		>
 			<img align="left" alt="" border="0" src="<%= themeDisplay.getPathThemeImages() %>/file_system/small/<%= DLUtil.getFileIcon(fileEntry.getExtension()) %>.png"> <%= TrashUtil.getOriginalTitle(fileEntry.getTitle()) %>
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
-			href="<%= rowURL %>"
+			href="<%= rowHREF %>"
 			name="size"
 			value="<%= TextFormatter.formatStorageSize(fileEntry.getSize(), locale) %>"
 		/>

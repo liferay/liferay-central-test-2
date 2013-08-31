@@ -108,7 +108,7 @@ OrderByComparator orderByComparator = BackgroundTaskUtil.getBackgroundTaskOrderB
 							image="download"
 							label="<%= true %>"
 							message="<%= sb.toString() %>"
-							url="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(fileEntry, themeDisplay, StringPool.BLANK) %>"
+							url="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(themeDisplay, fileEntry, StringPool.BLANK) %>"
 						/>
 
 					<%

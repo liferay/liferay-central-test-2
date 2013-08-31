@@ -385,16 +385,16 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 	@Override
 	public String getPortletFileEntryURL(
-			FileEntry fileEntry, ThemeDisplay themeDisplay, String queryString)
+			ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString)
 		throws PortalException, SystemException {
 
 		return getPortletFileEntryURL(
-			fileEntry, themeDisplay, queryString, true);
+			themeDisplay, fileEntry, queryString, true);
 	}
 
 	@Override
 	public String getPortletFileEntryURL(
-			FileEntry fileEntry, ThemeDisplay themeDisplay, String queryString,
+			ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString,
 			boolean absoluteURL)
 		throws PortalException, SystemException {
 

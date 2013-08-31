@@ -347,7 +347,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 											image='<%= "../file_system/small/" + DLUtil.getFileIcon(fileEntry.getExtension()) %>'
 											label="<%= true %>"
 											message="<%= sb.toString() %>"
-											url="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(fileEntry, themeDisplay, StringPool.BLANK) %>"
+											url="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(themeDisplay, fileEntry, StringPool.BLANK) %>"
 										/>
 									</li>
 

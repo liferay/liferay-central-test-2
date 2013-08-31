@@ -97,7 +97,7 @@ iteratorURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 						<liferay-util:buffer var="attachmentTitle">
 							<c:choose>
 								<c:when test="<%= fileVersion != null %>">
-									<aui:a href="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(fileEntry, themeDisplay, StringPool.BLANK) %>"><%= title %></aui:a>
+									<aui:a href="<%= PortletFileRepositoryUtil.getPortletFileEntryURL(themeDisplay, fileEntry, StringPool.BLANK) %>"><%= title %></aui:a>
 								</c:when>
 								<c:otherwise>
 									<%= title %>
