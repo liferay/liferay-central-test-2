@@ -52,8 +52,6 @@ public class VelocityTemplate extends AbstractTemplate {
 			TemplateConstants.LANG_TYPE_VM,
 			PropsValues.VELOCITY_ENGINE_RESOURCE_MODIFICATION_CHECK_INTERVAL);
 
-		_privileged = privileged;
-
 		if (velocityContext == null) {
 			_velocityContext = new VelocityContext();
 		}
@@ -62,6 +60,7 @@ public class VelocityTemplate extends AbstractTemplate {
 		}
 
 		_velocityEngine = velocityEngine;
+		_privileged = privileged;
 	}
 
 	@Override
