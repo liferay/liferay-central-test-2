@@ -81,13 +81,13 @@ public class PortletDataContextReferencesTest {
 			_portletDataContext.addMissingReferenceElement(
 				PortletKeys.BOOKMARKS, _bookmarksEntry);
 
+		Assert.assertNotNull(missingReferenceElement1);
+
 		Element missingReferenceElement2 =
 			_portletDataContext.addMissingReferenceElement(
 				PortletKeys.BOOKMARKS, _bookmarksEntry);
 
-		Assert.assertNotNull(missingReferenceElement1);
 		Assert.assertNotNull(missingReferenceElement2);
-
 		Assert.assertEquals(missingReferenceElement1, missingReferenceElement2);
 
 		Element missingReferencesElement =
