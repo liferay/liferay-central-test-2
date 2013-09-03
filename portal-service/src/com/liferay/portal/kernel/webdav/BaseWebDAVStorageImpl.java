@@ -16,7 +16,7 @@ package com.liferay.portal.kernel.webdav;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.webdav.methods.MethodFactory;
-import com.liferay.portal.kernel.webdav.methods.MethodFactoryUtil;
+import com.liferay.portal.kernel.webdav.methods.MethodFactoryRegistryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -60,7 +60,7 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	@Override
 	public MethodFactory getMethodFactory() {
-		return MethodFactoryUtil.getMethodFactory("webdav");
+		return MethodFactoryRegistryUtil.getDefaultMethodFactory();
 	}
 
 	@Override

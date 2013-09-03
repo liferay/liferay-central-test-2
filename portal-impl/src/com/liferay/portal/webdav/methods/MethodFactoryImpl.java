@@ -15,7 +15,7 @@
 package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.webdav.WebDAVException;
 import com.liferay.portal.kernel.webdav.methods.Method;
 import com.liferay.portal.kernel.webdav.methods.MethodFactory;
@@ -31,22 +31,10 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MethodFactoryImpl implements MethodFactory {
 
-	public MethodFactoryImpl() {
-		_methods = new HashMap<String, Object>();
-
-		_methods.put(Method.COPY, InstancePool.get(_COPY_METHOD_IMPL));
-		_methods.put(Method.DELETE, InstancePool.get(_DELETE_METHOD_IMPL));
-		_methods.put(Method.GET, InstancePool.get(_GET_METHOD_IMPL));
-		_methods.put(Method.HEAD, InstancePool.get(_HEAD_METHOD_IMPL));
-		_methods.put(Method.LOCK, InstancePool.get(_LOCK_METHOD_IMPL));
-		_methods.put(Method.MKCOL, InstancePool.get(_MKCOL_METHOD_IMPL));
-		_methods.put(Method.MOVE, InstancePool.get(_MOVE_METHOD_IMPL));
-		_methods.put(Method.OPTIONS, InstancePool.get(_OPTIONS_METHOD_IMPL));
-		_methods.put(Method.PROPFIND, InstancePool.get(_PROPFIND_METHOD_IMPL));
-		_methods.put(
-			Method.PROPPATCH, InstancePool.get(_PROPPATCH_METHOD_IMPL));
-		_methods.put(Method.PUT, InstancePool.get(_PUT_METHOD_IMPL));
-		_methods.put(Method.UNLOCK, InstancePool.get(_UNLOCK_METHOD_IMPL));
+	public MethodFactoryImpl() throws Exception {
+		for (String methodName : Method.SUPPORTED_METHODS_ARRAY) {
+			addMethod(methodName);
+		}
 	}
 
 	@Override
@@ -63,54 +51,22 @@ public class MethodFactoryImpl implements MethodFactory {
 		return methodImpl;
 	}
 
-	private static final String _COPY_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".COPY"),
-		CopyMethodImpl.class.getName());
+	protected void addMethod(String methodName) throws Exception {
+		String defaultClassName = methodName.substring(1);
 
-	private static final String _DELETE_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".DELETE"),
-		DeleteMethodImpl.class.getName());
+		defaultClassName = defaultClassName.toLowerCase();
+		defaultClassName = methodName.substring(0, 1) + defaultClassName;
+		defaultClassName =
+			"com.liferay.portal.webdav.methods." + defaultClassName +
+				"MethodImpl";
 
-	private static final String _GET_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".GET"),
-		GetMethodImpl.class.getName());
+		String className = GetterUtil.getString(
+			PropsUtil.get(MethodFactoryImpl.class.getName() + "." + methodName),
+			defaultClassName);
 
-	private static final String _HEAD_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".HEAD"),
-		HeadMethodImpl.class.getName());
+		_methods.put(methodName, InstanceFactory.newInstance(className));
+	}
 
-	private static final String _LOCK_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".LOCK"),
-		LockMethodImpl.class.getName());
-
-	private static final String _MKCOL_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".MKCOL"),
-		MkcolMethodImpl.class.getName());
-
-	private static final String _MOVE_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".MOVE"),
-		MoveMethodImpl.class.getName());
-
-	private static final String _OPTIONS_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".OPTIONS"),
-		OptionsMethodImpl.class.getName());
-
-	private static final String _PROPFIND_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".PROPFIND"),
-		PropfindMethodImpl.class.getName());
-
-	private static final String _PROPPATCH_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".PROPPATCH"),
-		ProppatchMethodImpl.class.getName());
-
-	private static final String _PUT_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".PUT"),
-		PutMethodImpl.class.getName());
-
-	private static final String _UNLOCK_METHOD_IMPL = GetterUtil.getString(
-		PropsUtil.get(MethodFactoryImpl.class.getName() + ".UNLOCK"),
-		UnlockMethodImpl.class.getName());
-
-	private Map<String, Object> _methods;
+	private Map<String, Object> _methods = new HashMap<String, Object>();
 
 }
