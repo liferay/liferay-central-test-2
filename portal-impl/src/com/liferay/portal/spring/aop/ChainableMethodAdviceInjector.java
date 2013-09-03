@@ -52,7 +52,7 @@ public class ChainableMethodAdviceInjector {
 
 		while ((parentChainableMethodAdvice != null) &&
 			   (parentChainableMethodAdvice.nextMethodInterceptor !=
-				_childMethodInterceptor)) {
+					_childMethodInterceptor)) {
 
 			MethodInterceptor methodInterceptor =
 				parentChainableMethodAdvice.nextMethodInterceptor;
@@ -69,12 +69,13 @@ public class ChainableMethodAdviceInjector {
 				_childMethodInterceptor) {
 
 			throw new IllegalArgumentException(
-				"Start from " + _parentChainableMethodAdvice +
-					" can not find " + _childMethodInterceptor);
+				"Unable to find " + _childMethodInterceptor + " from " +
+					_parentChainableMethodAdvice);
 		}
 
 		_newChainableMethodAdvice.nextMethodInterceptor =
 			parentChainableMethodAdvice.nextMethodInterceptor;
+
 		parentChainableMethodAdvice.nextMethodInterceptor =
 			_newChainableMethodAdvice;
 	}

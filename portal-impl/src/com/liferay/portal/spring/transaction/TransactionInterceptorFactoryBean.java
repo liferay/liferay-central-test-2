@@ -49,14 +49,13 @@ public class TransactionInterceptorFactoryBean
 
 		dynamicDataSourceAdvice.setDynamicDataSourceTargetSource(
 			dynamicDataSourceTargetSource);
+		dynamicDataSourceAdvice.setNextMethodInterceptor(methodInterceptor);
 
 		TransactionInterceptor transactionInterceptor =
 			(TransactionInterceptor)methodInterceptor;
 
 		dynamicDataSourceAdvice.setTransactionAttributeSource(
 			transactionInterceptor.transactionAttributeSource);
-
-		dynamicDataSourceAdvice.setNextMethodInterceptor(methodInterceptor);
 
 		return dynamicDataSourceAdvice;
 	}

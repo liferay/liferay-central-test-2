@@ -61,8 +61,10 @@ public class DynamicDataSourceAdvice extends ChainableMethodAdvice {
 
 		_dynamicDataSourceTargetSource.setOperation(operation);
 
+		String targetClassName = targetClass.getName();
+
 		_dynamicDataSourceTargetSource.pushMethod(
-			targetClass.getName().concat(StringPool.PERIOD).concat(
+			targetClassName.concat(StringPool.PERIOD).concat(
 				targetMethod.getName()));
 
 		return null;

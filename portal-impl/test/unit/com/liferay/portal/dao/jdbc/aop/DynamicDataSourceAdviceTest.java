@@ -55,6 +55,10 @@ public class DynamicDataSourceAdviceTest {
 
 	@Before
 	public void setUp() {
+		_dynamicDataSourceAdvice = new DynamicDataSourceAdvice();
+
+		_dynamicDataSourceTargetSource = new DynamicDataSourceTargetSource();
+
 		ClassLoader classLoader =
 			DynamicDataSourceAdviceTest.class.getClassLoader();
 
@@ -66,19 +70,19 @@ public class DynamicDataSourceAdviceTest {
 
 				throw new UnsupportedOperationException();
 			}
+
 		};
 
 		_readDataSource = (DataSource)ProxyUtil.newProxyInstance(
 			classLoader, new Class<?>[] {DataSource.class}, invocationHandler);
+
+		_dynamicDataSourceTargetSource.setReadDataSource(_readDataSource);
+
 		_writeDataSource = (DataSource)ProxyUtil.newProxyInstance(
 			classLoader, new Class<?>[] {DataSource.class}, invocationHandler);
 
-		_dynamicDataSourceTargetSource = new DynamicDataSourceTargetSource();
-
-		_dynamicDataSourceTargetSource.setReadDataSource(_readDataSource);
 		_dynamicDataSourceTargetSource.setWriteDataSource(_writeDataSource);
 
-		_dynamicDataSourceAdvice = new DynamicDataSourceAdvice();
 		_dynamicDataSourceAdvice.setDynamicDataSourceTargetSource(
 			_dynamicDataSourceTargetSource);
 
@@ -99,10 +103,6 @@ public class DynamicDataSourceAdviceTest {
 
 		Assert.assertEquals(1, annotationChainableMethodAdvices.length);
 		Assert.assertNull(annotationChainableMethodAdvices[0]);
-
-		_dynamicDataSourceAdvice.setServiceBeanAopCacheManager(
-			serviceBeanAopCacheManager);
-
 		Assert.assertSame(
 			annotationChainableMethodAdvices,
 			registeredAnnotationChainableMethodAdvices.get(
@@ -126,9 +126,6 @@ public class DynamicDataSourceAdviceTest {
 
 	@Test
 	public void testDynamicDataSourceAdvice() throws Throwable {
-
-		// First round
-
 		TestClass testClass = new TestClass();
 
 		for (int i = 1; i <= 5; i++) {
@@ -141,7 +138,7 @@ public class DynamicDataSourceAdviceTest {
 		testClass.assertExecutions();
 	}
 
-	private MethodInvocation createMethodInvocation(
+	protected MethodInvocation createMethodInvocation(
 			TestClass testClass, String methodName)
 		throws Exception {
 
@@ -187,16 +184,15 @@ public class DynamicDataSourceAdviceTest {
 			Assert.assertTrue(_testMethod5);
 		}
 
+		@SuppressWarnings("unused")
 		public void method1() throws Exception {
 			Assert.assertEquals(
 				Operation.WRITE, _dynamicDataSourceTargetSource.getOperation());
-
 			Assert.assertSame(
 				_writeDataSource, _dynamicDataSourceTargetSource.getTarget());
-
 			Assert.assertEquals(
 				TestClass.class.getName() + StringPool.PERIOD + "method1",
-				getCurrentMethod());
+				_getCurrentMethod());
 
 			_testMethod1 = true;
 		}
@@ -205,13 +201,11 @@ public class DynamicDataSourceAdviceTest {
 		public void method2() throws Exception {
 			Assert.assertEquals(
 				Operation.WRITE, _dynamicDataSourceTargetSource.getOperation());
-
 			Assert.assertSame(
 				_writeDataSource, _dynamicDataSourceTargetSource.getTarget());
-
 			Assert.assertEquals(
 				TestClass.class.getName() + StringPool.PERIOD + "method2",
-				getCurrentMethod());
+				_getCurrentMethod());
 
 			_testMethod2 = true;
 		}
@@ -220,13 +214,11 @@ public class DynamicDataSourceAdviceTest {
 		public void method3() throws Exception {
 			Assert.assertEquals(
 				Operation.READ, _dynamicDataSourceTargetSource.getOperation());
-
 			Assert.assertSame(
 				_readDataSource, _dynamicDataSourceTargetSource.getTarget());
-
 			Assert.assertEquals(
 				TestClass.class.getName() + StringPool.PERIOD + "method3",
-				getCurrentMethod());
+				_getCurrentMethod());
 
 			_testMethod3 = true;
 		}
@@ -236,13 +228,11 @@ public class DynamicDataSourceAdviceTest {
 		public void method4() throws Exception {
 			Assert.assertEquals(
 				Operation.WRITE, _dynamicDataSourceTargetSource.getOperation());
-
 			Assert.assertSame(
 				_writeDataSource, _dynamicDataSourceTargetSource.getTarget());
-
 			Assert.assertEquals(
 				TestClass.class.getName() + StringPool.PERIOD + "method4",
-				getCurrentMethod());
+				_getCurrentMethod());
 
 			_testMethod4 = true;
 		}
@@ -252,18 +242,16 @@ public class DynamicDataSourceAdviceTest {
 		public void method5() throws Exception {
 			Assert.assertEquals(
 				Operation.WRITE, _dynamicDataSourceTargetSource.getOperation());
-
 			Assert.assertSame(
 				_writeDataSource, _dynamicDataSourceTargetSource.getTarget());
-
 			Assert.assertEquals(
 				TestClass.class.getName() + StringPool.PERIOD + "method5",
-				getCurrentMethod());
+				_getCurrentMethod());
 
 			_testMethod5 = true;
 		}
 
-		private String getCurrentMethod() {
+		private String _getCurrentMethod() {
 			Stack<String> stack =
 				_dynamicDataSourceTargetSource.getMethodStack();
 

@@ -13,12 +13,9 @@
 		<property name="newChainableMethodAdvice" ref="dynamicDataSourceAdvice" />
 		<property name="parentChainableMethodAdvice" ref="serviceAdvice" />
 	</bean>
-	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
-		<property name="targetDataSource">
-			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
-				<property name="targetSource" ref="dynamicDataSourceTargetSource" />
-			</bean>
-		</property>
+	<bean id="dynamicDataSourceAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceAdvice">
+		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
+		<property name="transactionAttributeSource" ref="transactionAttributeSource" />
 	</bean>
 	<bean name="dynamicDataSourceTargetSource" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceTargetSource">
 		<property name="readDataSource">
@@ -32,9 +29,12 @@
 			</bean>
 		</property>
 	</bean>
-	<bean id="dynamicDataSourceAdvice" class="com.liferay.portal.dao.jdbc.aop.DynamicDataSourceAdvice">
-		<property name="dynamicDataSourceTargetSource" ref="dynamicDataSourceTargetSource" />
-		<property name="transactionAttributeSource" ref="transactionAttributeSource" />
+	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
+		<property name="targetDataSource">
+			<bean class="org.springframework.aop.framework.ProxyFactoryBean">
+				<property name="targetSource" ref="dynamicDataSourceTargetSource" />
+			</bean>
+		</property>
 	</bean>
 	<bean id="com.liferay.portal.kernel.util.InfrastructureUtil" class="com.liferay.portal.kernel.util.InfrastructureUtil">
 		<property name="dataSource" ref="liferayDataSource" />
