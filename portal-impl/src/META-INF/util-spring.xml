@@ -553,7 +553,7 @@
 		<property name="methodFactories">
 			<map>
 				<entry key="webdav">
-					<bean class="com.liferay.portal.webdav.methods.WebDAVMethodFactoryImpl" />
+					<bean class="com.liferay.portal.webdav.methods.MethodFactoryImpl" />
 				</entry>
 			</map>
 		</property>
