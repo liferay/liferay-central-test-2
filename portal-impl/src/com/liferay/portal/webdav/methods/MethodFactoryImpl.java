@@ -32,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 public class MethodFactoryImpl implements MethodFactory {
 
 	public MethodFactoryImpl() throws Exception {
-		for (String methodName : Method.SUPPORTED_METHODS_ARRAY) {
+		for (String methodName : Method.SUPPORTED_METHOD_NAMES) {
 			addMethod(methodName);
 		}
 	}

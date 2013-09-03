@@ -50,11 +50,12 @@ public class WebDAVLitmusBasicTest extends BaseWebDAVTestCase {
 
 		Map<String, String> headers = getHeaders(tuple);
 
-		String allowMethods = headers.get("Allow");
+		String allowMethodNames = headers.get("Allow");
 
-		for (String method : Method.SUPPORTED_METHODS_ARRAY) {
+		for (String methodName : Method.SUPPORTED_METHOD_NAMES) {
 			Assert.assertTrue(
-				"Does not allow " + method, allowMethods.contains(method));
+				"Does not allow " + methodName,
+				allowMethodNames.contains(methodName));
 		}
 	}
 
