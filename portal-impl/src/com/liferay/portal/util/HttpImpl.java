@@ -703,12 +703,9 @@ public class HttpImpl implements Http {
 
 	@Override
 	public boolean isSecure(String url) {
-		if (getProtocol(url).equalsIgnoreCase(Http.HTTPS)) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		String protocol = getProtocol(url);
+
+		return protocol.equalsIgnoreCase(Http.HTTPS);
 	}
 
 	@Override

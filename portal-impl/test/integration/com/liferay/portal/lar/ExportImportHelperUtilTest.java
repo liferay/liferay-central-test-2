@@ -125,13 +125,13 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 
 		Element rootElement = SAXReaderUtil.createElement("root");
 
-		_stagingPublicLayout = LayoutTestUtil.addLayout(
-			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), false);
+		_portletDataContextExport.setExportDataRootElement(rootElement);
 
 		_stagingPrivateLayout = LayoutTestUtil.addLayout(
 			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), true);
+		_stagingPublicLayout = LayoutTestUtil.addLayout(
+			_stagingGroup.getGroupId(), ServiceTestUtil.randomString(), false);
 
-		_portletDataContextExport.setExportDataRootElement(rootElement);
 		_portletDataContextExport.setPlid(_stagingPublicLayout.getPlid());
 
 		_portletDataContextImport =
@@ -141,11 +141,13 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 				new CurrentUserIdStrategy(TestPropsValues.getUser()),
 				testReaderWriter);
 
+		_portletDataContextImport.setImportDataRootElement(rootElement);
+
 		_livePublicLayout = LayoutTestUtil.addLayout(
 			_liveGroup.getGroupId(), ServiceTestUtil.randomString(), false);
 
-		_portletDataContextImport.setImportDataRootElement(rootElement);
 		_portletDataContextImport.setPlid(_livePublicLayout.getPlid());
+
 		_portletDataContextImport.setSourceGroupId(_stagingGroup.getGroupId());
 
 		rootElement.addElement("entry");
