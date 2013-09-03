@@ -95,11 +95,11 @@ public class EditStructureAction extends PortletAction {
 				}
 
 				if (SessionErrors.isEmpty(actionRequest)) {
-					String refererPortletName = ParamUtil.getString(
-						actionRequest, "refererPortletName");
-
 					LiferayPortletConfig liferayPortletConfig =
 						(LiferayPortletConfig)portletConfig;
+
+					String refererPortletName = ParamUtil.getString(
+						actionRequest, "refererPortletName");
 
 					SessionMessages.add(
 						actionRequest,
