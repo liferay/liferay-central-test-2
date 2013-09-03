@@ -89,13 +89,12 @@ if (row == null) {
 		</c:if>
 
 		<c:if test="<%= !group.isCompany() && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) || GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ADD_COMMUNITY)) %>">
-
 			<liferay-portlet:renderURL varImpl="addSiteURL">
 				<portlet:param name="struts_action" value="/sites_admin/edit_site" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="parentGroupSearchContainerPrimaryKeys" value="<%= String.valueOf(group.getGroupId()) %>" />
-				<portlet:param name="showPrototypes" value="1" />
+				<portlet:param name="showPrototypes" value="<%= Boolean.TRUE.toString() %>" />
 			</liferay-portlet:renderURL>
 
 			<liferay-ui:icon
@@ -104,7 +103,6 @@ if (row == null) {
 				method="get"
 				url="<%= addSiteURL.toString() %>"
 			/>
-
 		</c:if>
 	</c:if>
 
