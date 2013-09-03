@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String navigation = ParamUtil.getString(request, "navigation", "home");
+
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = ParamUtil.getLong(request, "folderId", DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
@@ -36,6 +38,7 @@ if (folder != null) {
 	repositoryId = folder.getRepositoryId();
 }
 
+String browseBy = ParamUtil.getString(request, "browseBy");
 boolean viewEntries = ParamUtil.getBoolean(request, "viewEntries");
 boolean viewEntriesPage = ParamUtil.getBoolean(request, "viewEntriesPage");
 boolean viewFolders = ParamUtil.getBoolean(request, "viewFolders");
@@ -45,9 +48,6 @@ request.setAttribute("view.jsp-folder", folder);
 request.setAttribute("view.jsp-folderId", String.valueOf(folderId));
 
 request.setAttribute("view.jsp-repositoryId", String.valueOf(repositoryId));
-
-String navigation = ParamUtil.getString(request, "navigation", "home");
-String browseBy = ParamUtil.getString(request, "browseBy");
 %>
 
 <div>
