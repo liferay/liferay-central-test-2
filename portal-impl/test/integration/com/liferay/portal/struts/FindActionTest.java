@@ -59,7 +59,7 @@ public class FindActionTest {
 
 		Object[] plidAndPorltetId = FindAction.getPlidAndPortletId(
 			createThemeDisplay(), _blogsEntry.getGroupId(), _assetLayout.getPlid(),
-			_portletIds);
+			_PORTLET_IDS);
 
 		Assert.assertEquals(_blogLayout.getPlid(), plidAndPorltetId[0]);
 		Assert.assertEquals(PortletKeys.BLOGS, plidAndPorltetId[1]);
@@ -74,7 +74,7 @@ public class FindActionTest {
 		try {
 			FindAction.getPlidAndPortletId(
 				createThemeDisplay(), _blogsEntry.getGroupId(),
-				_assetLayout.getPlid(), _portletIds);
+				_assetLayout.getPlid(), _PORTLET_IDS);
 
 			Assert.fail("The page should have not be found");
 		}
@@ -121,13 +121,15 @@ public class FindActionTest {
 		return themeDisplay;
 	}
 
+	private final static String[] _PORTLET_IDS = {
+		PortletKeys.BLOGS_ADMIN, PortletKeys.BLOGS,
+		PortletKeys.BLOGS_AGGREGATOR
+	};
+
 	private Layout _assetLayout;
 	private String _assetPublisherPortletId;
 	private Layout _blogLayout;
 	private BlogsEntry _blogsEntry;
 	private Group _group;
-	private String[] _portletIds = {
-		PortletKeys.BLOGS_ADMIN, PortletKeys.BLOGS,
-		PortletKeys.BLOGS_AGGREGATOR};
 
 }
