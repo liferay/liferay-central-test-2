@@ -101,12 +101,15 @@ public class AlloyServiceInvoker {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery) throws Exception {
+	public List executeDynamicQuery(DynamicQuery dynamicQuery)
+		throws Exception {
+
 		return (List)dynamicQueryMethod2.invoke(false, dynamicQuery);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+	public List executeDynamicQuery(
+			DynamicQuery dynamicQuery, int start, int end)
 		throws Exception {
 
 		return (List)dynamicQueryMethod3.invoke(
@@ -114,7 +117,7 @@ public class AlloyServiceInvoker {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(
+	public List executeDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
 			OrderByComparator obc)
 		throws Exception {
@@ -124,31 +127,34 @@ public class AlloyServiceInvoker {
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(Object[] properties) throws Exception {
-		return dynamicQuery(buildDynamicQuery(properties));
+	public List executeDynamicQuery(Object[] properties) throws Exception {
+		return executeDynamicQuery(buildDynamicQuery(properties));
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(Object[] properties, int start, int end)
+	public List executeDynamicQuery(Object[] properties, int start, int end)
 		throws Exception {
 
-		return dynamicQuery(buildDynamicQuery(properties), start, end);
+		return executeDynamicQuery(buildDynamicQuery(properties), start, end);
 	}
 
 	@SuppressWarnings("rawtypes")
-	public List dynamicQuery(
+	public List executeDynamicQuery(
 			Object[] properties, int start, int end, OrderByComparator obc)
 		throws Exception {
 
-		return dynamicQuery(buildDynamicQuery(properties), start, end, obc);
+		return executeDynamicQuery(
+			buildDynamicQuery(properties), start, end, obc);
 	}
 
-	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws Exception {
+	public long executeDynamicQueryCount(DynamicQuery dynamicQuery)
+		throws Exception {
+
 		return (Long)dynamicQueryCountMethod.invoke(false, dynamicQuery);
 	}
 
-	public long dynamicQueryCount(Object[] properties) throws Exception {
-		return dynamicQueryCount(buildDynamicQuery(properties));
+	public long executeDynamicQueryCount(Object[] properties) throws Exception {
+		return executeDynamicQueryCount(buildDynamicQuery(properties));
 	}
 
 	public BaseModel<?> fetchModel(long classPK) throws Exception {
