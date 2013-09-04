@@ -55,10 +55,10 @@ public class FindActionTest {
 
 	@Test
 	public void testGetPlidAndPortletIdViewInContext() throws Exception {
-		createPages(true);
+		addLayouts(true);
 
 		Object[] plidAndPorltetId = FindAction.getPlidAndPortletId(
-			createThemeDisplay(), _blogsEntry.getGroupId(), _assetLayout.getPlid(),
+			getThemeDisplay(), _blogsEntry.getGroupId(), _assetLayout.getPlid(),
 			_PORTLET_IDS);
 
 		Assert.assertEquals(_blogLayout.getPlid(), plidAndPorltetId[0]);
@@ -69,11 +69,11 @@ public class FindActionTest {
 	public void testGetPlidAndPortletIdWhenPortletDoesNotExist()
 		throws Exception {
 
-		createPages(false);
+		addLayouts(false);
 
 		try {
 			FindAction.getPlidAndPortletId(
-				createThemeDisplay(), _blogsEntry.getGroupId(),
+				getThemeDisplay(), _blogsEntry.getGroupId(),
 				_assetLayout.getPlid(), _PORTLET_IDS);
 
 			Assert.fail("The page should have not be found");
@@ -82,7 +82,7 @@ public class FindActionTest {
 		}
 	}
 
-	protected void createPages(boolean portletExists) throws Exception {
+	protected void addLayouts(boolean portletExists) throws Exception {
 		_group = GroupTestUtil.addGroup();
 
 		_blogLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "blog");
@@ -108,7 +108,7 @@ public class FindActionTest {
 			TestPropsValues.getUserId(), _group, true);
 	}
 
-	protected ThemeDisplay createThemeDisplay() throws Exception {
+	protected ThemeDisplay getThemeDisplay() throws Exception {
 		ThemeDisplay themeDisplay = new ThemeDisplay();
 
 		themeDisplay.setScopeGroupId(_group.getGroupId());
