@@ -137,12 +137,11 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 				<aui:select label="type" listType="<%= ListTypeConstants.ORGANIZATION_SERVICE %>" name='<%= "orgLaborTypeId" + orgLaborsIndex %>' />
 
 				<%
-				int j = 0;
-
-				for (String day : days) {
+				for (int j = 0; j < days.length; j++) {
 					String curParam = paramPrefixes[j];
 					int curOpen = openArray[j];
 					int curClose = closeArray[j];
+					String day = days[j];
 				%>
 					<div class="org-labor-entry">
 						<h5 class="org-labor-entry-title"><%= day %></h5>
@@ -173,7 +172,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 						</aui:select>
 
-						<aui:select label="Close" name='<%= curParam + "Close" + orgLaborsIndex %>'>
+						<aui:select label="close" name='<%= curParam + "Close" + orgLaborsIndex %>'>
 							<aui:option value="-1" />
 
 							<%
@@ -201,7 +200,6 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 					</div>
 
 				<%
-					j++;
 				}
 				%>
 
