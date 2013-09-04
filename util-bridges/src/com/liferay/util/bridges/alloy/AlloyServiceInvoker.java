@@ -82,7 +82,7 @@ public class AlloyServiceInvoker {
 
 		if ((properties.length == 0) || ((properties.length % 2) != 0)) {
 			throw new IllegalArgumentException(
-				"Columns length is not an even number");
+				"Properties length is not an even number");
 		}
 
 		DynamicQuery dynamicQuery = buildDynamicQuery();
