@@ -53,9 +53,9 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 		boolean pending = false;
 
 		if (WorkflowDefinitionLinkLocalServiceUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, WikiPage.class.getName())) {
-			WikiPage lastWikiPage = WikiPageServiceUtil.getPage(wikiPage.getNodeId(), wikiPage.getTitle(), null);
+			WikiPage latestWikiPage = WikiPageServiceUtil.getPage(wikiPage.getNodeId(), wikiPage.getTitle(), null);
 
-			pending = lastWikiPage.isPending();
+			pending = latestWikiPage.isPending();
 		}
 		%>
 
