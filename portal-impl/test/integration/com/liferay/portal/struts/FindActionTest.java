@@ -76,7 +76,7 @@ public class FindActionTest {
 				getThemeDisplay(), _blogsEntry.getGroupId(),
 				_assetLayout.getPlid(), _PORTLET_IDS);
 
-			Assert.fail("The page should have not be found");
+			Assert.fail();
 		}
 		catch (NoSuchLayoutException nsle) {
 		}
@@ -85,8 +85,8 @@ public class FindActionTest {
 	protected void addLayouts(boolean portletExists) throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_blogLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "blog");
-		_assetLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "asset");
+		_blogLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "Blog");
+		_assetLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "Asset");
 
 		if (portletExists) {
 			LayoutTestUtil.addPortletToLayout(_blogLayout, PortletKeys.BLOGS);
@@ -122,8 +122,7 @@ public class FindActionTest {
 	}
 
 	private final static String[] _PORTLET_IDS = {
-		PortletKeys.BLOGS_ADMIN, PortletKeys.BLOGS,
-		PortletKeys.BLOGS_AGGREGATOR
+		PortletKeys.BLOGS_ADMIN, PortletKeys.BLOGS, PortletKeys.BLOGS_AGGREGATOR
 	};
 
 	private Layout _assetLayout;
