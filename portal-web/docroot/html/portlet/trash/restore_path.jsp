@@ -36,8 +36,10 @@
 				for (int i = 0; i < restoreLinks.size(); i++) {
 					String type = "selected-item";
 
-					if (Validator.isNotNull(restoreClassNames.get(i))) {
-						type = ResourceActionsUtil.getModelResource(pageContext, restoreClassNames.get(i));
+					String restoreClassName = restoreClassNames.get(i);
+
+					if (Validator.isNotNull(restoreClassName)) {
+						type = ResourceActionsUtil.getModelResource(pageContext, restoreClassName);
 					}
 				%>
 

@@ -165,10 +165,8 @@ public class EditEntryAction extends PortletAction {
 
 			String restoreEntryLink = trashHandler.getRestoreContainedModelLink(
 				actionRequest, entryOVP.getValue());
-
 			String restoreLink = trashHandler.getRestoreContainerModelLink(
 				actionRequest, entryOVP.getValue());
-
 			String restoreMessage = trashHandler.getRestoreMessage(
 				actionRequest, entryOVP.getValue());
 
@@ -178,15 +176,17 @@ public class EditEntryAction extends PortletAction {
 				continue;
 			}
 
+			restoreClassNames.add(trashHandler.getClassName());
+			restoreEntryLinks.add(restoreEntryLink);
+
 			TrashRenderer trashRenderer = trashHandler.getTrashRenderer(
 				entryOVP.getValue());
 
 			String restoreEntryTitle = trashRenderer.getTitle(
 				themeDisplay.getLocale());
 
-			restoreClassNames.add(trashHandler.getClassName());
-			restoreEntryLinks.add(restoreEntryLink);
 			restoreEntryMessages.add(restoreEntryTitle);
+
 			restoreLinks.add(restoreLink);
 			restoreMessages.add(restoreMessage);
 		}
