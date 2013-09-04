@@ -100,6 +100,23 @@ public class AlloyServiceInvoker {
 		return dynamicQuery;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #executeDynamicQuery(DynamicQuery)}
+	 */
+	@SuppressWarnings("rawtypes")
+	public List dynamicQuery(DynamicQuery dynamicQuery) throws Exception {
+		return executeDynamicQuery(dynamicQuery);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #executeDynamicQueryCount(DynamicQuery)}
+	 */
+	public long dynamicQueryCount(DynamicQuery dynamicQuery) throws Exception {
+		return executeDynamicQueryCount(dynamicQuery);
+	}
+
 	@SuppressWarnings("rawtypes")
 	public List executeDynamicQuery(DynamicQuery dynamicQuery)
 		throws Exception {
