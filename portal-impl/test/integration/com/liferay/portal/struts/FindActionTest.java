@@ -58,10 +58,10 @@ public class FindActionTest {
 		createPages(true);
 
 		Object[] plidAndPorltetId = FindAction.getPlidAndPortletId(
-			createThemeDisplay(), _blogsEntry.getGroupId(), _asset.getPlid(),
+			createThemeDisplay(), _blogsEntry.getGroupId(), _assetLayout.getPlid(),
 			_portletIds);
 
-		Assert.assertEquals(_blog.getPlid(), plidAndPorltetId[0]);
+		Assert.assertEquals(_blogLayout.getPlid(), plidAndPorltetId[0]);
 		Assert.assertEquals(PortletKeys.BLOGS, plidAndPorltetId[1]);
 	}
 
@@ -74,7 +74,7 @@ public class FindActionTest {
 		try {
 			FindAction.getPlidAndPortletId(
 				createThemeDisplay(), _blogsEntry.getGroupId(),
-				_asset.getPlid(), _portletIds);
+				_assetLayout.getPlid(), _portletIds);
 
 			Assert.fail("The page should have not be found");
 		}
@@ -85,11 +85,11 @@ public class FindActionTest {
 	protected void createPages(boolean portletExists) throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_blog = LayoutTestUtil.addLayout(_group.getGroupId(), "blog");
-		_asset = LayoutTestUtil.addLayout(_group.getGroupId(), "asset");
+		_blogLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "blog");
+		_assetLayout = LayoutTestUtil.addLayout(_group.getGroupId(), "asset");
 
 		if (portletExists) {
-			LayoutTestUtil.addPortletToLayout(_blog, PortletKeys.BLOGS);
+			LayoutTestUtil.addPortletToLayout(_blogLayout, PortletKeys.BLOGS);
 		}
 
 		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
@@ -101,7 +101,7 @@ public class FindActionTest {
 			ServiceTestUtil.randomString();
 
 		LayoutTestUtil.addPortletToLayout(
-			TestPropsValues.getUserId(), _asset, _assetPublisherPortletId,
+			TestPropsValues.getUserId(), _assetLayout, _assetPublisherPortletId,
 			"column-1", preferenceMap);
 
 		_blogsEntry = BlogsTestUtil.addEntry(
@@ -121,9 +121,9 @@ public class FindActionTest {
 		return themeDisplay;
 	}
 
-	private Layout _asset;
+	private Layout _assetLayout;
 	private String _assetPublisherPortletId;
-	private Layout _blog;
+	private Layout _blogLayout;
 	private BlogsEntry _blogsEntry;
 	private Group _group;
 	private String[] _portletIds = {
