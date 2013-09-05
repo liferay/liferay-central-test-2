@@ -138,15 +138,16 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 				<%
 				for (int j = 0; j < days.length; j++) {
-					String curParam = paramPrefixes[j];
-					int curOpen = openArray[j];
-					int curClose = closeArray[j];
+					int close = closeArray[j];
 					String day = days[j];
+					int open = openArray[j];
+					String paramPrefix = paramPrefixes[j];
 				%>
+
 					<div class="org-labor-entry">
 						<h5 class="org-labor-entry-title"><%= day %></h5>
 
-						<aui:select label="Open" name='<%= curParam + "Open" + orgLaborsIndex %>'>
+						<aui:select label="Open" name='<%= paramPrefix + "Open" + orgLaborsIndex %>'>
 							<aui:option value="-1" />
 
 							<%
@@ -164,7 +165,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 								cal.add(Calendar.MINUTE, 30);
 							%>
 
-								<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (curOpen == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
+								<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (open == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
 
 							<%
 							}
@@ -172,7 +173,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 
 						</aui:select>
 
-						<aui:select label="close" name='<%= curParam + "Close" + orgLaborsIndex %>'>
+						<aui:select label="close" name='<%= paramPrefix + "Close" + orgLaborsIndex %>'>
 							<aui:option value="-1" />
 
 							<%
@@ -190,7 +191,7 @@ Format timeFormat = FastDateFormatFactoryUtil.getSimpleDateFormat("HH:mm", local
 								cal.add(Calendar.MINUTE, 30);
 							%>
 
-								<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (curClose == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
+								<aui:option label="<%= timeOfDayDisplay %>" selected="<%= (close == timeOfDayValue) %>" value="<%= timeOfDayValue %>" />
 
 							<%
 							}
