@@ -23,13 +23,13 @@ long folderId = GetterUtil.getLong((String)request.getAttribute("view.jsp-folder
 
 List<DDMStructure> ddmStructures = DDMStructureLocalServiceUtil.getStructures(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay), PortalUtil.getClassNameId(JournalArticle.class));
 
-boolean showAddArticle = JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ARTICLE);
-boolean showAddFolder = JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
+boolean hasAddArticlePermission = JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ARTICLE);
+boolean hasAddFolderPermission = JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 %>
 
-<c:if test="<%= showAddArticle || showAddFolder %>">
+<c:if test="<%= hasAddArticlePermission || hasAddFolderPermission %>">
 	<aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
-		<c:if test="<%= showAddFolder %>">
+		<c:if test="<%= hasAddFolderPermission %>">
 			<portlet:renderURL var="addFolderURL">
 				<portlet:param name="struts_action" value="/journal/edit_folder" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -40,7 +40,7 @@ boolean showAddFolder = JournalFolderPermission.contains(permissionChecker, scop
 			<aui:nav-item href="<%= addFolderURL %>" iconClass="icon-folder-open" label='<%= (folder != null) ? "subfolder" : "folder" %>' />
 		</c:if>
 
-		<c:if test="<%= showAddArticle %>">
+		<c:if test="<%= hasAddArticlePermission %>">
 			<liferay-portlet:renderURL var="addArticleURL" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 				<portlet:param name="struts_action" value="/journal/edit_article" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
