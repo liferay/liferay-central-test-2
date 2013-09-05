@@ -14,7 +14,7 @@
 
 package com.liferay.portal.kernel.nio.intraband.welder.fifo;
 
-import com.liferay.portal.kernel.io.AutoRemoveFileInputStream;
+import com.liferay.portal.kernel.io.AutoDeleteFileInputStream;
 import com.liferay.portal.kernel.nio.intraband.Intraband;
 import com.liferay.portal.kernel.nio.intraband.RegistrationReference;
 import com.liferay.portal.kernel.nio.intraband.welder.BaseWelder;
@@ -66,7 +66,7 @@ public class FIFOWelder extends BaseWelder {
 
 		writeFileChannel = fileOutputStream.getChannel();
 
-		FileInputStream fileInputStream = new AutoRemoveFileInputStream(
+		FileInputStream fileInputStream = new AutoDeleteFileInputStream(
 			outputFIFOFile);
 
 		readFileChannel = fileInputStream.getChannel();
@@ -80,7 +80,7 @@ public class FIFOWelder extends BaseWelder {
 
 		// Read, then write
 
-		FileInputStream fileInputStream = new AutoRemoveFileInputStream(
+		FileInputStream fileInputStream = new AutoDeleteFileInputStream(
 			inputFIFOFile);
 
 		readFileChannel = fileInputStream.getChannel();

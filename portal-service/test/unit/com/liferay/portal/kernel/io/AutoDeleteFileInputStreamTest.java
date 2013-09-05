@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author Shuyang Zhou
  */
-public class AutoRemoveFileInputStreamTest {
+public class AutoDeleteFileInputStreamTest {
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -45,8 +45,8 @@ public class AutoRemoveFileInputStreamTest {
 
 		Assert.assertTrue(tempFile.createNewFile());
 
-		AutoRemoveFileInputStream autoRemoveFileInputStream =
-			new AutoRemoveFileInputStream(tempFile);
+		AutoDeleteFileInputStream autoRemoveFileInputStream =
+			new AutoDeleteFileInputStream(tempFile);
 
 		final AtomicInteger checkDeleteCount = new AtomicInteger();
 
@@ -81,7 +81,7 @@ public class AutoRemoveFileInputStreamTest {
 
 		Assert.assertTrue(tempFile.createNewFile());
 
-		autoRemoveFileInputStream = new AutoRemoveFileInputStream(tempFile);
+		autoRemoveFileInputStream = new AutoDeleteFileInputStream(tempFile);
 
 		Assert.assertTrue(tempFile.delete());
 

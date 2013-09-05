@@ -14,7 +14,7 @@
 
 package com.liferay.portal.resiliency.spi.agent;
 
-import com.liferay.portal.kernel.io.AutoRemoveFileInputStream;
+import com.liferay.portal.kernel.io.AutoDeleteFileInputStream;
 import com.liferay.portal.kernel.resiliency.spi.agent.annotation.Direction;
 import com.liferay.portal.kernel.servlet.PersistentHttpServletRequestWrapper;
 import com.liferay.portal.kernel.servlet.ServletInputStreamAdapter;
@@ -293,7 +293,7 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 		public ServletInputStream getInputStream() throws IOException {
 			if (requestBodyFile != null) {
 				return new ServletInputStreamAdapter(
-					new AutoRemoveFileInputStream(requestBodyFile));
+					new AutoDeleteFileInputStream(requestBodyFile));
 			}
 
 			return super.getInputStream();

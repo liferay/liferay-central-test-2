@@ -22,9 +22,9 @@ import java.io.IOException;
 /**
  * @author Shuyang Zhou
  */
-public class AutoRemoveFileInputStream extends FileInputStream {
+public class AutoDeleteFileInputStream extends FileInputStream {
 
-	public AutoRemoveFileInputStream(File file) throws FileNotFoundException {
+	public AutoDeleteFileInputStream(File file) throws FileNotFoundException {
 		super(file);
 
 		_file = file;
@@ -39,6 +39,6 @@ public class AutoRemoveFileInputStream extends FileInputStream {
 		}
 	}
 
-	private final File _file;
+	private File _file;
 
 }
