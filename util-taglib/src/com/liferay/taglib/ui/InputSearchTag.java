@@ -109,8 +109,6 @@ public class InputSearchTag extends IncludeTag {
 			placeholder = buttonLabel;
 		}
 
-		String title = _title;
-
 		request.setAttribute(
 			"liferay-ui:input-search:autoFocus", String.valueOf(_autoFocus));
 		request.setAttribute(
