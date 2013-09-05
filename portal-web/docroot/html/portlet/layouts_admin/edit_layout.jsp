@@ -197,7 +197,7 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 					</div>
 				</c:if>
 
-				<c:if test="<%= selGroup.hasStagingGroup() && !selGroup.isStagingGroup() %>">
+				<c:if test="<%= selGroup.hasLocalOrRemoteStagingGroup() && !selGroup.isStagingGroup() %>">
 					<div class="alert alert-block">
 						<liferay-ui:message key="changes-are-immediately-available-to-end-users" />
 					</div>
@@ -340,15 +340,13 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 				</aui:script>
 			</c:if>
 
-			<c:if test="<%= !selGroup.hasStagingGroup() || selGroup.isStagingGroup() %>">
-				<liferay-ui:form-navigator
-					categoryNames="<%= _CATEGORY_NAMES %>"
-					categorySections="<%= categorySections %>"
-					displayStyle="<%= displayStyle %>"
-					jspPath="/html/portlet/layouts_admin/layout/"
-					showButtons="<%= (selLayout.getGroupId() == groupId) && SitesUtil.isLayoutUpdateable(selLayout) && LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.UPDATE) %>"
-				/>
-			</c:if>
+			<liferay-ui:form-navigator
+				categoryNames="<%= _CATEGORY_NAMES %>"
+				categorySections="<%= categorySections %>"
+				displayStyle="<%= displayStyle %>"
+				jspPath="/html/portlet/layouts_admin/layout/"
+				showButtons="<%= (selLayout.getGroupId() == groupId) && SitesUtil.isLayoutUpdateable(selLayout) && LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.UPDATE) %>"
+			/>
 		</c:otherwise>
 	</c:choose>
 </aui:form>
