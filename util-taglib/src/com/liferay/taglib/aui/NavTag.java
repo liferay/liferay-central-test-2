@@ -107,6 +107,6 @@ public class NavTag extends BaseNavTag {
 		return _namespacedId;
 	}
 
-	private String _namespacedId = null;
+	private String _namespacedId;
 
 }

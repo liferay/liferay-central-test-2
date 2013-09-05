@@ -44,7 +44,7 @@ public class NavBarTag extends BaseNavBarTag implements BodyTag {
 	protected void cleanUp() {
 		super.cleanUp();
 
-		_responsiveButtonsSB = new StringBundler();
+		_responsiveButtonsSB.setIndex(0);
 	}
 
 	@Override

@@ -19,7 +19,6 @@
 <div class="navbar <%= cssClass %>" id="<%= id %>" <%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
 	<div class="navbar-inner">
 		<div class="container">
-
 			<%= responsiveButtons %>
 
 			<%= bodyContentString %>

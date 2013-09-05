@@ -17,10 +17,9 @@
 <%@ page import="javax.servlet.jsp.tagext.BodyContent" %>
 
 <%
-String responsiveButtons = (String)request.getAttribute("aui:nav-bar:responsiveButtons");
-BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-bar:bodyContent");
-
 String bodyContentString = StringPool.BLANK;
+
+BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-bar:bodyContent");
 
 if (bodyContent != null) {
 	bodyContentString = bodyContent.getString();
@@ -33,4 +32,6 @@ if ((portletResponse != null) && Validator.isNotNull(id)) {
 if (Validator.isNull(id)) {
 	id = PwdGenerator.getPassword(4);
 }
+
+String responsiveButtons = (String)request.getAttribute("aui:nav-bar:responsiveButtons");
 %>
