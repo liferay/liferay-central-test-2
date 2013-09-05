@@ -187,11 +187,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	}
 
 	@Override
-	public void setPermissioned(boolean permissioned) {
-		this.permissioned = permissioned;
-	}
-
-	@Override
 	public void updateModel(BaseModel<?> baseModel) throws Exception {
 		BeanPropertiesUtil.setProperties(baseModel, request);
 
@@ -806,6 +801,10 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 		throws Exception {
 
 		return search(null, keywords, sorts);
+	}
+
+	protected void setPermissioned(boolean permissioned) {
+		this.permissioned = permissioned;
 	}
 
 	protected String translate(String pattern, Object... arguments) {
