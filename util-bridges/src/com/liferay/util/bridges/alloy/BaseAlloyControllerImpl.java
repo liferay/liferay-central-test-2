@@ -111,10 +111,6 @@ public abstract class BaseAlloyControllerImpl implements AlloyController {
 	public static final String TOUCH =
 		BaseAlloyControllerImpl.class.getName() + "#TOUCH#";
 
-	public BaseAlloyControllerImpl() {
-		setPermissioned(false);
-	}
-
 	@Override
 	public void afterPropertiesSet() {
 		initClass();
