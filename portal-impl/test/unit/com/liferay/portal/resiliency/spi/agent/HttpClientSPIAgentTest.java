@@ -996,7 +996,7 @@ public class HttpClientSPIAgentTest {
 			mockHttpServletResponse.getOutputStream(),
 			recordSPIAgentResponse._outputStream);
 
-		// Unremovable request body file
+		// Undeletable request body file
 
 		spiAgentRequest = new SPIAgentRequest(new MockHttpServletRequest());
 

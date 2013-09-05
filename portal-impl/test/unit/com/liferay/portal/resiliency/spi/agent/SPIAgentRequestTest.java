@@ -74,20 +74,22 @@ public class SPIAgentRequestTest {
 	public static void setUpClass() throws Exception {
 		FileUtil fileUtil = new FileUtil();
 
-		fileUtil.setFile(new FileImpl() {
+		fileUtil.setFile(
+			new FileImpl() {
 
-			@Override
-			public File createTempFile() {
-				try {
-					return File.createTempFile(
-						SPIAgentRequestTest.class.getName(), null);
+				@Override
+				public File createTempFile() {
+					try {
+						return File.createTempFile(
+							SPIAgentRequestTest.class.getName(), null);
+					}
+					catch (IOException ioe) {
+						throw new RuntimeException(ioe);
+					}
 				}
-				catch (IOException ioe) {
-					throw new RuntimeException(ioe);
-				}
+
 			}
-
-		});
+		);
 
 		PortalUtil portalUtil = new PortalUtil();
 
@@ -359,8 +361,7 @@ public class SPIAgentRequestTest {
 			Assert.fail();
 		}
 		catch (IllegalArgumentException iae) {
-			Assert.assertEquals(
-				"Input stream cannot be null", iae.getMessage());
+			Assert.assertEquals("Input stream is null", iae.getMessage());
 		}
 	}
 
