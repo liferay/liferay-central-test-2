@@ -75,12 +75,6 @@
 		</execute>
 	</command>
 
-	<command name="addSiteTemplateCP">
-		<execute macro="Site#addCP">
-			<var name="siteType" value="Site Template" />
-		</execute>
-	</command>
-
 	<command name="addMemberCP">
 		<var name="key_userScreenName" value="${userScreenName}" />
 
@@ -93,6 +87,12 @@
 		<execute action="CPSitemembershipsAddmembers#check" locator-key1="USER_TABLE_CHECKBOX" />
 		<execute action="CPSitemembershipsAddmembers#click" locator-key1="SAVE_BUTTON" />
 		<execute action="CPSitemembershipsAddmembers#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="addSiteTemplateCP">
+		<execute macro="Site#addCP">
+			<var name="siteType" value="Site Template" />
+		</execute>
 	</command>
 
 	<command name="approveJoinSiteRestrictedViaMySitesPG">
