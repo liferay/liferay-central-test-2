@@ -117,16 +117,16 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 
 <aui:nav-bar>
 	<aui:nav id="layoutsNav">
-		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.ADD_LAYOUT) && (!selGroup.hasStagingGroup() || selGroup.isStagingGroup()) && showAddAction %>">
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.ADD_LAYOUT) && showAddAction %>">
 			<aui:nav-item data-value="add-child-page" iconClass="icon-plus" label="add-child-page" />
 		</c:if>
-		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.PERMISSIONS) && (!selGroup.hasStagingGroup() || selGroup.isStagingGroup()) %>">
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.PERMISSIONS) %>">
 			<aui:nav-item data-value="permissions" iconClass="icon-lock" label="permissions" />
 		</c:if>
 		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selPlid, ActionKeys.DELETE) %>">
 			<aui:nav-item data-value="delete" iconClass="icon-remove" label="delete" />
 		</c:if>
-		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) && (!selGroup.hasStagingGroup() || selGroup.isStagingGroup()) %>">
+		<c:if test="<%= LayoutPermissionUtil.contains(permissionChecker, selLayout, ActionKeys.UPDATE) %>">
 			<aui:nav-item data-value="copy-applications" iconClass="icon-list-alt" label="copy-applications" />
 		</c:if>
 	</aui:nav>
