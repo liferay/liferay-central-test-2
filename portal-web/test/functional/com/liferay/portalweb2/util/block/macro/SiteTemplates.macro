@@ -51,18 +51,11 @@
 		</if>
 
 		<execute action="CPSitetemplateSettings#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
-
-		<execute macro="Page#gotoCP">
-			<var name="portletName" value="${portletName}" />
-		</execute>
-
-		<execute action="CPSitetemplates#assertTextEquals" locator-key1="SITE_TEMPLATE_TABLE_NAME" value1="${siteTemplateName} Edit" />
-		<execute action="CPSitetemplates#assertTextEquals" locator-key1="SITE_TEMPLATE_TABLE_ACTIVE" value1="${siteTemplateActiveEdit}" />
 	</command>
 
 	<command name="tearDownCP">
 		<execute macro="Page#gotoCP">
-			<var name="portletName" value="${portletName}" />
+			<var name="portletName" value="Site Templates" />
 		</execute>
 
 		<var name="key_siteTemplateName" value="${siteTemplateName}" />
@@ -76,5 +69,12 @@
 				<execute action="CPSitetemplates#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully."/>
 			</then>
 		</while>
+	</command>
+
+	<command name="viewEditCP">
+		<var name="key_siteTemplateName" value="${siteTemplateName}" />
+
+		<execute action="CPSitetemplates#assertTextEquals" locator-key1="SITE_TEMPLATE_TABLE_NAME" value1="${siteTemplateName} Edit" />
+		<execute action="CPSitetemplates#assertTextEquals" locator-key1="SITE_TEMPLATE_TABLE_ACTIVE" value1="${siteTemplateActiveEdit}" />
 	</command>
 </definition>
