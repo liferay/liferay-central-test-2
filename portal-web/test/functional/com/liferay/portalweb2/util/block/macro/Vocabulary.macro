@@ -87,18 +87,24 @@
 		</if>
 	</command>
 
-	<command name="viewViewableByCP">
+	<command name="viewVocabularyPermissionsCP">
 		<var name="key_vocabularyName" value="${vocabularyName}" />
 
 		<execute action="CPCategories#assertTextEquals" locator-key1="VOCABULARY_ENTRY" value1="${vocabularyName}" />
 		<execute action="CPCategories#click" locator-key1="EDIT_VOCABULARY_ICON" />
 
 		<execute action="CPCategories#assertClick" locator-key1="EDIT_VOCABULARY_PERMISSIONS_BUTTON" value1="Permissions" />
-
 		<execute action="CPCategories#selectFrame" locator-key1="EDIT_VOCABULARY_PERMISSIONS_IFRAME" />
-		<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_GUEST_VIEW_CHECKBOX" />
-		<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_OWNER_VIEW_CHECKBOX" />
-		<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_SITE_MEMBER_VIEW_CHECKBOX" />
+
+		<if>
+			<equals arg1="${viewableBy}" arg2="Anyone (Guest Role)" />
+			<then>
+				<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_GUEST_VIEW_CHECKBOX" />
+				<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_OWNER_VIEW_CHECKBOX" />
+				<execute action="CPCategories#assertChecked" locator-key1="EDIT_VOCABULARY_PERMISSIONS_SITE_MEMBER_VIEW_CHECKBOX" />
+			</then>
+		</if>
+
 		<execute action="CPCategories#selectFrameTop" value1="relative=top" />
 	</command>
 

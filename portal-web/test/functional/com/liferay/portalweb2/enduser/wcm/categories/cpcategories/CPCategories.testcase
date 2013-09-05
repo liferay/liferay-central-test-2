@@ -188,7 +188,7 @@
 		</execute>
 	</command>
 
-	<command name="AddVocabularyViewableByAnyone">
+	<command name="AddVocabularyViewableByGuest">
 		<var name="vocabularyName" value="Vocabulary Name" />
 		<var name="viewableBy" value="Anyone (Guest Role)" />
 
@@ -196,7 +196,7 @@
 			<var name="portletName" value="Categories" />
 		</execute>
 
-		<execute macro="Vocabulary#addCPViewableBy">
+		<execute macro="Vocabulary#addViewableByCP">
 			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
 
@@ -204,28 +204,10 @@
 			<var name="portletName" value="Categories" />
 		</execute>
 
-		<execute macro="Vocabulary#viewCPViewableBy">
+		<execute macro="Vocabulary#viewVocabularyPermissionsCP">
 			<var name="viewableBy" value="${viewableBy}" />
 			<var name="vocabularyName" value="${vocabularyName}" />
 		</execute>
-	</command>
-
-	<command name="CloseVocabulary">
-		<var name="vocabularyName" value="Vocabulary Name" />
-
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Categories" />
-		</execute>
-
-		<execute action="CPCategories#assertClick" locator-key1="ADD_VOCABULARY_BUTTON" value1="Add Vocabulary" />
-		<execute action="CPCategories#type" locator-key1="ADD_VOCABULARY_NAME_FIELD" value1="${vocabularyName}" />
-		<execute action="CPCategories#assertClick" locator-key1="ADD_VOCABULARY_CLOSE_BUTTON" value1="Close" />
-
-		<execute macro="Page#gotoContentCP">
-			<var name="portletName" value="Categories" />
-		</execute>
-
-		<execute action="CPCategories#assertTextNotPresent" value1="${vocabularyName}" />
 	</command>
 
 	<command name="DeleteCategory">
@@ -376,5 +358,23 @@
 			<var name="vocabularyName" value="${vocabularyName}" />
 			<var name="vocabularyNameEdit" value="${vocabularyNameEdit}" />
 		</execute>
+	</command>
+
+	<command name="ValidateClickingCloseButtonDoesNotSaveVocabulary">
+		<var name="vocabularyName" value="Vocabulary Name" />
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Categories" />
+		</execute>
+
+		<execute action="CPCategories#assertClick" locator-key1="ADD_VOCABULARY_BUTTON" value1="Add Vocabulary" />
+		<execute action="CPCategories#type" locator-key1="ADD_VOCABULARY_NAME_FIELD" value1="${vocabularyName}" />
+		<execute action="CPCategories#assertClick" locator-key1="ADD_VOCABULARY_CLOSE_BUTTON" value1="Close" />
+
+		<execute macro="Page#gotoContentCP">
+			<var name="portletName" value="Categories" />
+		</execute>
+
+		<execute action="CPCategories#assertTextNotPresent" value1="${vocabularyName}" />
 	</command>
 </definition>
