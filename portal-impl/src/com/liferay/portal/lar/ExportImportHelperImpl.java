@@ -395,10 +395,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			FileEntry fileEntry)
 		throws Exception {
 
+		File file = FileUtil.createTempFile("lar");
 		InputStream inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
 			userId, fileEntry.getFileEntryId(), fileEntry.getVersion(), false);
-
-		File file = FileUtil.createTempFile("lar");
 
 		ManifestSummary manifestSummary = null;
 
