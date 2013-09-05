@@ -407,7 +407,7 @@ public class ImportLayoutsAction extends PortletAction {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			if ((weakMissingReferences != null) &&
-				(weakMissingReferences.size() > 0)) {
+				!weakMissingReferences.isEmpty()) {
 
 				jsonObject.put(
 					"warningMessages",
