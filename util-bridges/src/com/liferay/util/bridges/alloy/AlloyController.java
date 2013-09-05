@@ -40,8 +40,6 @@ public interface AlloyController {
 
 	public void setPageContext(PageContext pageContext);
 
-	public void setPermissioned(boolean permissioned);
-
 	public void updateModel(BaseModel<?> baseModel) throws Exception;
 
 }
