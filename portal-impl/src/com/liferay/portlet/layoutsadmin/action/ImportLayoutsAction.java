@@ -349,7 +349,7 @@ public class ImportLayoutsAction extends PortletAction {
 				themeDisplay.getUserId(), fileEntry.getFileEntryId(),
 				fileEntry.getVersion(), false);
 
-			importData(actionRequest, inputStream, fileEntry.getTitle());
+			importData(actionRequest, fileEntry.getTitle(), inputStream);
 
 			deleteTempFileEntry(groupId, folderName);
 
@@ -361,8 +361,8 @@ public class ImportLayoutsAction extends PortletAction {
 	}
 
 	protected void importData(
-			ActionRequest actionRequest, InputStream inputStream,
-			String fileName)
+			ActionRequest actionRequest, String fileName,
+			InputStream inputStream)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -393,9 +393,6 @@ public class ImportLayoutsAction extends PortletAction {
 			inputStream = DLFileEntryLocalServiceUtil.getFileAsStream(
 				themeDisplay.getUserId(), fileEntry.getFileEntryId(),
 				fileEntry.getVersion(), false);
-
-			boolean privateLayout = ParamUtil.getBoolean(
-				actionRequest, "privateLayout");
 
 			MissingReferences missingReferences = validateFile(
 				actionRequest, inputStream);

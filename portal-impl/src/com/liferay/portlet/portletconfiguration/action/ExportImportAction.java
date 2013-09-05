@@ -295,8 +295,8 @@ public class ExportImportAction extends ImportLayoutsAction {
 
 	@Override
 	protected void importData(
-			ActionRequest actionRequest, InputStream inputStream,
-			String fileName)
+			ActionRequest actionRequest, String fileName,
+			InputStream inputStream)
 		throws Exception {
 
 		long plid = ParamUtil.getLong(actionRequest, "plid");
