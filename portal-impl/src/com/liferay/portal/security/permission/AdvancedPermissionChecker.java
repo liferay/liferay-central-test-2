@@ -553,8 +553,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					groupId = group.getGroupId();
 				}
 
-				// If the group is a scope group for a layout, check
-				// the original group.
+				// If the group is a scope group for a layout, check the
+				// original group.
 
 				if (group.isLayout() &&
 					!ResourceBlockLocalServiceUtil.isSupported(name)) {
