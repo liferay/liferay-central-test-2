@@ -17,7 +17,7 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-String copyLayoutIdPrefix = ParamUtil.getString(request, "copyLayoutIdPrefix", "");
+String copyLayoutIdPrefix = ParamUtil.getString(request, "copyLayoutIdPrefix");
 %>
 
 <aui:select id='<%= copyLayoutIdPrefix + "copyLayoutId" %>' label="copy-from-page" name="copyLayoutId" showEmptyOption="<%= true %>">
