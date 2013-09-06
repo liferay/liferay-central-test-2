@@ -98,6 +98,7 @@ if (layout != null) {
 								<c:if test="<%= group.isStagingGroup() || layoutSetBranches.size() <= _MAX_INLINE_BRANCHES %>">
 									<h5>
 										<span class="site-pages-variation-label"><liferay-ui:message key="site-variations-for" /></span>
+
 										<span class="company-name"><%= company.getName() %></span>
 									</h5>
 
@@ -180,6 +181,7 @@ if (layout != null) {
 									<div class="page-variations-options span6">
 										<h5>
 											<span class="page-variation-label"><liferay-ui:message key="page-variations-for" /></span>
+
 											<span class="page-name"><%= HtmlUtil.escape(layout.getName(locale)) %></span>
 										</h5>
 
@@ -477,9 +479,7 @@ if (layout != null) {
 								<liferay-ui:icon-menu cssClass="layoutset-branches-menu" direction="down" extended="<%= false %>" icon='<%= themeDisplay.getPathThemeImages() + "/common/staging.png" %>' message='<%= LanguageUtil.format(pageContext, "site-pages-variations-x", layoutSetBranches.size()) %>'>
 
 									<%
-									for (int i = 0; i < layoutSetBranches.size(); i++) {
-										LayoutSetBranch curLayoutSetBranch = layoutSetBranches.get(i);
-
+									for (LayoutSetBranch curLayoutSetBranch : layoutSetBranches) {
 										boolean selected = group.isStagingGroup() && (layoutRevision != null) && (curLayoutSetBranch.getLayoutSetBranchId() == layoutRevision.getLayoutSetBranchId());
 									%>
 
@@ -544,6 +544,7 @@ if (layout != null) {
 			String remotePathContext = typeSettingsProperties.getProperty("remotePathContext");
 			boolean secureConnection = GetterUtil.getBoolean(typeSettingsProperties.getProperty("secureConnection"));
 			long remoteGroupId = GetterUtil.getLong(typeSettingsProperties.getProperty("remoteGroupId"));
+
 			String remoteURL = StagingUtil.buildRemoteURL(remoteAddress, remotePort, remotePathContext, secureConnection, remoteGroupId, layout.isPrivateLayout());
 			%>
 
