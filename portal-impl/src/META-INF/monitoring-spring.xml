@@ -20,8 +20,8 @@
 		<property name="companyLocalService" ref="com.liferay.portal.service.CompanyLocalService" />
 	</bean>
 	<bean id="serviceMonitorAdvice" class="com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice">
-		<property name="monitoringDestinationName" value="liferay/monitoring" />
 		<property name="invokerPortletFactory" ref="com.liferay.portlet.InvokerPortletFactoryImpl" />
+		<property name="monitoringDestinationName" value="liferay/monitoring" />
 		<property name="monitoringPortletFactoryImpl" ref="com.liferay.portlet.MonitoringPortletFactoryImpl" />
 	</bean>
 	<bean id="serviceStatistics" class="com.liferay.portal.monitoring.statistics.service.ServerStatistics" />

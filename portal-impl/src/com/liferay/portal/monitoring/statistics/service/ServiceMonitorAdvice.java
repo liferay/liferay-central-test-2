@@ -153,29 +153,31 @@ public class ServiceMonitorAdvice extends ChainableMethodAdvice {
 	}
 
 	public void setActive(boolean active) {
-		if (active != _active) {
-			PortletInstanceFactoryImpl portletInstanceFactoryImpl =
-				new PortletInstanceFactoryImpl();
-
-			if (active) {
-				serviceBeanAopCacheManager.reset();
-
-				portletInstanceFactoryImpl.setInvokerPortletFactory(
-					_monitoringPortletFactoryImpl);
-			}
-			else {
-				portletInstanceFactoryImpl.setInvokerPortletFactory(
-					_invokerPortletFactory);
-			}
-
-			PortletInstanceFactoryUtil portletInstanceFactoryUtil =
-				new PortletInstanceFactoryUtil();
-
-			portletInstanceFactoryUtil.setPortletInstanceFactory(
-				portletInstanceFactoryImpl);
-
-			_active = active;
+		if (active == _active) {
+			return;
 		}
+
+		PortletInstanceFactoryImpl portletInstanceFactoryImpl =
+			new PortletInstanceFactoryImpl();
+
+		if (active) {
+			serviceBeanAopCacheManager.reset();
+
+			portletInstanceFactoryImpl.setInvokerPortletFactory(
+				_monitoringPortletFactoryImpl);
+		}
+		else {
+			portletInstanceFactoryImpl.setInvokerPortletFactory(
+				_invokerPortletFactory);
+		}
+
+		PortletInstanceFactoryUtil portletInstanceFactoryUtil =
+			new PortletInstanceFactoryUtil();
+
+		portletInstanceFactoryUtil.setPortletInstanceFactory(
+			portletInstanceFactoryImpl);
+
+		_active = active;
 	}
 
 	public void setInvokerPortletFactory(
