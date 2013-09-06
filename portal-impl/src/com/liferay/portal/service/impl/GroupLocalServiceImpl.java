@@ -3860,7 +3860,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		// Join by permission
+		// Join by role permissions
 
 		List<?> rolePermissions = (List<?>)params.remove("rolePermissions");
 
@@ -3906,7 +3906,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 							resourcePermissionPersistence.fetchByC_N_S_P_R(
 								companyId, resourceName, resourceScope,
 									String.valueOf(group.getGroupId()),
-										resourceRoleId);
+									resourceRoleId);
 
 						if ((resourcePermission == null) ||
 							((resourcePermission.getActionIds() &
@@ -3919,13 +3919,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
+		// Join by Groups_Roles
+
 		Long userId = (Long)params.remove("usersGroups");
 
 		if (userId == null) {
 			return groups;
 		}
-
-		// Join by Groups_Roles
 
 		Set<Group> resultGroups = new HashSet<Group>(groups);
 
