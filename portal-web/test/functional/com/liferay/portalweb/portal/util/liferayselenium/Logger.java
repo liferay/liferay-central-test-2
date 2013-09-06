@@ -249,7 +249,7 @@ public class Logger {
 	}
 
 	protected String generateStackTrace(Throwable throwable) {
-		Stack<String> ids = (Stack)_xpathIdStack.clone();
+		Stack<String> ids = (Stack<String>)_xpathIdStack.clone();
 
 		String currentCommand = null;
 		String currentLine = null;
@@ -266,10 +266,11 @@ public class Logger {
 
 			String command = getLogElementText(
 				xpath + "/div/span[@class='quote'][1]");
-			String line = getLogElementText(
-				xpath + "/div/div[@class='line-number']");
 
 			command = StringUtil.replace(command, "\"", "");
+
+			String line = getLogElementText(
+				xpath + "/div/div[@class='line-number']");
 
 			if ((parentCommand == null) || (parentLine == null)) {
 				parentCommand = command;
@@ -282,12 +283,12 @@ public class Logger {
 				parentCommand = command;
 				parentLine = line;
 
-				String parentFile = "";
+				String parentFileName = "";
 
 				if (ids.size() > 2) {
 					int x = parentCommand.indexOf("#");
 
-					parentFile = parentCommand.substring(0, x) + ".macro";
+					parentFileName = parentCommand.substring(0, x) + ".macro";
 				}
 				else {
 					ids.pop();
@@ -299,13 +300,14 @@ public class Logger {
 
 					int x = testCaseCommand.lastIndexOf("#");
 
-					parentFile = testCaseCommand.substring(0, x) + ".testcase";
+					parentFileName =
+						testCaseCommand.substring(0, x) + ".testcase";
 				}
 
 				sb.append("Failed Line: <b>");
 				sb.append(currentCommand);
 				sb.append("</b> (");
-				sb.append(parentFile);
+				sb.append(parentFileName);
 				sb.append(":");
 				sb.append(currentLine);
 				sb.append(")<br />");
@@ -317,8 +319,7 @@ public class Logger {
 		sb.append("in test case command <b>");
 		sb.append(testCaseCommand.trim());
 		sb.append("</b><br />");
-
-		sb.append("<textarea cols='85' rows='7' wrap='off'>");
+		sb.append("<textarea cols=\"85\" rows=\"7\" wrap=\"off\">");
 		sb.append(throwable.getMessage());
 
 		StackTraceElement[] stackTraceElements = throwable.getStackTrace();
@@ -333,7 +334,6 @@ public class Logger {
 		}
 
 		sb.append("</textarea>");
-
 		sb.append("</p>");
 
 		String stackTrace = sb.toString();
@@ -361,13 +361,9 @@ public class Logger {
 		try {
 			WebElement webElement = _webDriver.findElement(By.xpath(xpath));
 
-			StringBundler sb = new StringBundler();
-
-			sb.append("var element = arguments[0];");
-			sb.append("return element.innerHTML;");
-
 			return (String)_javascriptExecutor.executeScript(
-				sb.toString(), webElement);
+				"var element = arguments[0]; return element.innerHTML;",
+				webElement);
 		}
 		catch (Exception e) {
 			return null;
@@ -393,7 +389,7 @@ public class Logger {
 		_javascriptExecutor.executeScript(sb.toString());
 	}
 
-	private int _errorCount = 0;
+	private int _errorCount;
 	private JavascriptExecutor _javascriptExecutor;
 	private LiferaySelenium _liferaySelenium;
 	private boolean _loggerStarted;
