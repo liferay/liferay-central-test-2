@@ -22,8 +22,8 @@
 String redirect = themeDisplay.getPathMain() + "/portal/protected";
 
 response.setHeader(HttpHeaders.CACHE_CONTROL, HttpHeaders.CACHE_CONTROL_NO_CACHE_VALUE);
-response.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_NO_CACHE_VALUE);
 response.setHeader(HttpHeaders.LOCATION, redirect);
+response.setHeader(HttpHeaders.PRAGMA, HttpHeaders.PRAGMA_NO_CACHE_VALUE);
 
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
 %>
