@@ -18,17 +18,11 @@
 
 <span class="taglib-workflow-status">
 	<c:if test="<%= Validator.isNotNull(id) %>">
-		<span class="workflow-id">
-			<span class="workflow-label"><liferay-ui:message key="id" />:</span>
-			<span class="workflow-value"><%= HtmlUtil.escape(id) %></span>
-		</span>
+		<span class="workflow-id"><liferay-ui:message key="id" />: <%= HtmlUtil.escape(id) %></span>
 	</c:if>
 
 	<c:if test="<%= Validator.isNotNull(version) %>">
-		<span class="workflow-version">
-			<span class="workflow-label"><liferay-ui:message key="version" />:</span>
-			<strong class="workflow-value"><%= version %></strong>
-		</span>
+		<span class="workflow-version"><liferay-ui:message key="version" />: <strong><%= version %></strong></span>
 	</c:if>
 
 	<%
@@ -60,12 +54,12 @@
 	}
 	%>
 
-	<span class="<%= showIcon ? "workflow-status workflow-status-icon" : "workflow-status" %>">
+	<span class='<%= showIcon ? "workflow-status workflow-status-icon" : "workflow-status" %>'>
 		<c:if test="<%= showLabel %>">
-			<span class="workflow-label"><liferay-ui:message key="status" />:</span>
+			<liferay-ui:message key="status" />:
 		</c:if>
 
-		<strong class="label workflow-status-<%= WorkflowConstants.getStatusLabel(status) %> <%= WorkflowConstants.getStatusCssClass(status) %> workflow-value">
+		<strong class="label workflow-status-<%= WorkflowConstants.getStatusLabel(status) %> <%= WorkflowConstants.getStatusCssClass(status) %>">
 			<liferay-ui:message key="<%= statusMessage %>" /><%= additionalText %>
 		</strong>
 	</span>
