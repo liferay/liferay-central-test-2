@@ -19,7 +19,7 @@
 			</bean>
 		</constructor-arg>
 		<constructor-arg>
-			<util:constant static-field="com.liferay.portal.messaging.proxy.MultiDestinationMessagingProxyInvocationHandler.INVOCATION_HANDLER_FACTORY" />
+			<bean class="com.liferay.portal.messaging.proxy.MultiDestinationMessagingProxyInvocationHandler" factory-method="getInvocationHandlerFactory" />
 		</constructor-arg>
 	</bean>
 

@@ -53,7 +53,7 @@ public class ProxyRequest implements Externalizable {
 			_hasReturnValue = true;
 		}
 
-		Boolean synchronous = _methodSynchronousCache.get(method);
+		Boolean synchronous = _synchronousMap.get(method);
 
 		if (synchronous == null) {
 			MessagingProxy messagingProxy = AnnotationLocator.locate(
@@ -68,7 +68,7 @@ public class ProxyRequest implements Externalizable {
 				synchronous = Boolean.FALSE;
 			}
 
-			_methodSynchronousCache.put(method, synchronous);
+			_synchronousMap.put(method, synchronous);
 		}
 
 		_synchronous = synchronous.booleanValue();
@@ -125,12 +125,12 @@ public class ProxyRequest implements Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{hasReturnValue=");
+		sb.append("{arguments=");
+		sb.append(Arrays.toString(_arguments));
+		sb.append(", hasReturnValue=");
 		sb.append(_hasReturnValue);
 		sb.append(", method=");
 		sb.append(_method);
-		sb.append(", arguments=");
-		sb.append(Arrays.toString(_arguments));
 		sb.append(", synchronous");
 		sb.append(_synchronous);
 		sb.append("}");
@@ -146,7 +146,7 @@ public class ProxyRequest implements Externalizable {
 		objectOutput.writeBoolean(_synchronous);
 	}
 
-	private static Map<Method, Boolean> _methodSynchronousCache =
+	private static Map<Method, Boolean> _synchronousMap =
 		new ConcurrentHashMap<Method, Boolean>();
 
 	private Object[] _arguments;
