@@ -32,19 +32,18 @@ public class HttpOnlyCookieServletResponse extends HttpServletResponseWrapper {
 	public static HttpServletResponse getHttpOnlyCookieServletResponse(
 		HttpServletResponse response) {
 
-		HttpServletResponse httpServletResponse = response;
+		HttpServletResponse wrappedResponse = response;
 
-		while (httpServletResponse instanceof HttpServletResponseWrapper) {
-			if (httpServletResponse instanceof HttpOnlyCookieServletResponse) {
+		while (wrappedResponse instanceof HttpServletResponseWrapper) {
+			if (wrappedResponse instanceof HttpOnlyCookieServletResponse) {
 				return response;
 			}
 
 			HttpServletResponseWrapper httpServletResponseWrapper =
-				(HttpServletResponseWrapper)httpServletResponse;
+				(HttpServletResponseWrapper)wrappedResponse;
 
-			httpServletResponse =
-				(HttpServletResponse)
-					httpServletResponseWrapper.getResponse();
+			wrappedResponse =
+				(HttpServletResponse)httpServletResponseWrapper.getResponse();
 		}
 
 		return new HttpOnlyCookieServletResponse(response);
