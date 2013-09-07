@@ -575,6 +575,24 @@ public class StringUtil_IW {
 		return StringUtil.toHexString(obj);
 	}
 
+	public java.lang.String toLowerCase(java.lang.String s) {
+		return StringUtil.toLowerCase(s);
+	}
+
+	public java.lang.String toLowerCase(java.lang.String s,
+		java.util.Locale locale) {
+		return StringUtil.toLowerCase(s, locale);
+	}
+
+	public java.lang.String toUpperCase(java.lang.String s) {
+		return StringUtil.toUpperCase(s);
+	}
+
+	public java.lang.String toUpperCase(java.lang.String s,
+		java.util.Locale locale) {
+		return StringUtil.toUpperCase(s, locale);
+	}
+
 	public java.lang.String trim(java.lang.String s) {
 		return StringUtil.trim(s);
 	}
