@@ -27,8 +27,6 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.core.Ordered;
 
-import static org.springframework.core.Ordered.HIGHEST_PRECEDENCE;
-
 /**
  * @author Shuyang Zhou
  */
@@ -41,18 +39,17 @@ public class DynamicProxyCreator
 
 	@Override
 	public int getOrder() {
-		return HIGHEST_PRECEDENCE;
+		return Ordered.HIGHEST_PRECEDENCE;
 	}
 
 	@Override
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	public Object postProcessAfterInitialization(Object bean, String beanName)
 		throws BeansException {
 
 		Class<?> beanClass = bean.getClass();
 
 		for (ObjectValuePair<BeanMatcher, InvocationHandlerFactory>
-			objectValuePair : _beanMatcherInvocationHandlerFactorys) {
+				objectValuePair : _beanMatcherInvocationHandlerFactories) {
 
 			BeanMatcher beanMatcher = objectValuePair.getKey();
 
@@ -83,7 +80,7 @@ public class DynamicProxyCreator
 					new ObjectValuePair<BeanMatcher, InvocationHandlerFactory>(
 						beanMatcher, invocationHandlerFactory);
 
-			_instance._beanMatcherInvocationHandlerFactorys.add(
+			_instance._beanMatcherInvocationHandlerFactories.add(
 				objectValuePair);
 		}
 
@@ -92,7 +89,7 @@ public class DynamicProxyCreator
 	private static DynamicProxyCreator _instance = new DynamicProxyCreator();
 
 	private List<ObjectValuePair<BeanMatcher, InvocationHandlerFactory>>
-		_beanMatcherInvocationHandlerFactorys =
+		_beanMatcherInvocationHandlerFactories =
 			new ArrayList
 				<ObjectValuePair<BeanMatcher, InvocationHandlerFactory>>();
 

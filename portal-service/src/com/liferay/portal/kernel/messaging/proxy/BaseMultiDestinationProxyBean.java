@@ -30,7 +30,7 @@ public abstract class BaseMultiDestinationProxyBean {
 
 	public void send(ProxyRequest proxyRequest) {
 		_messageSender.send(
-			getDestinationName(proxyRequest), createMessage(proxyRequest));
+			getDestinationName(proxyRequest), buildMessage(proxyRequest));
 	}
 
 	public void setMessageSender(MessageSender messageSender) {
@@ -46,7 +46,7 @@ public abstract class BaseMultiDestinationProxyBean {
 	public Object synchronousSend(ProxyRequest proxyRequest) throws Exception {
 		ProxyResponse proxyResponse =
 			(ProxyResponse)_synchronousMessageSender.send(
-				getDestinationName(proxyRequest), createMessage(proxyRequest));
+				getDestinationName(proxyRequest), buildMessage(proxyRequest));
 
 		if (proxyResponse == null) {
 			return proxyRequest.execute(this);
@@ -59,17 +59,16 @@ public abstract class BaseMultiDestinationProxyBean {
 		}
 	}
 
-	protected Message createMessage(ProxyRequest proxyRequest) {
+	protected Message buildMessage(ProxyRequest proxyRequest) {
 		Message message = new Message();
 
 		message.setPayload(proxyRequest);
 
-		Map<String, Object> messageValues =
-			MessageValuesThreadLocal.getValues();
+		Map<String, Object> values = MessageValuesThreadLocal.getValues();
 
-		if (!messageValues.isEmpty()) {
-			for (String key : messageValues.keySet()) {
-				message.put(key, messageValues.get(key));
+		if (!values.isEmpty()) {
+			for (String key : values.keySet()) {
+				message.put(key, values.get(key));
 			}
 		}
 

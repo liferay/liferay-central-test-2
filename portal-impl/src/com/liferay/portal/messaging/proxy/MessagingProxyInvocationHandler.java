@@ -27,15 +27,9 @@ import java.lang.reflect.Method;
  */
 public class MessagingProxyInvocationHandler implements InvocationHandler {
 
-	public static InvocationHandlerFactory INVOCATION_HANDLER_FACTORY =
-		new InvocationHandlerFactory() {
-
-		@Override
-		public InvocationHandler createInvocationHandler(Object obj) {
-			return new MessagingProxyInvocationHandler((BaseProxyBean)obj);
-		}
-
-	};
+	public static InvocationHandlerFactory getInvocationHandlerFactory() {
+		return _invocationHandlerFactory;
+	}
 
 	public MessagingProxyInvocationHandler(BaseProxyBean baseProxyBean) {
 		_baseProxyBean = baseProxyBean;
@@ -58,6 +52,16 @@ public class MessagingProxyInvocationHandler implements InvocationHandler {
 			return null;
 		}
 	}
+
+	private static InvocationHandlerFactory _invocationHandlerFactory =
+		new InvocationHandlerFactory() {
+
+		@Override
+		public InvocationHandler createInvocationHandler(Object obj) {
+			return new MessagingProxyInvocationHandler((BaseProxyBean)obj);
+		}
+
+	};
 
 	private BaseProxyBean _baseProxyBean;
 

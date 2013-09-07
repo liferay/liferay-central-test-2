@@ -28,16 +28,9 @@ import java.lang.reflect.Method;
 public class MultiDestinationMessagingProxyInvocationHandler
 	implements InvocationHandler {
 
-	public static InvocationHandlerFactory INVOCATION_HANDLER_FACTORY =
-		new InvocationHandlerFactory() {
-
-		@Override
-		public InvocationHandler createInvocationHandler(Object obj) {
-			return new MultiDestinationMessagingProxyInvocationHandler(
-				(BaseMultiDestinationProxyBean)obj);
-		}
-
-	};
+	public static InvocationHandlerFactory getInvocationHandlerFactory() {
+		return _invocationHandlerFactory;
+	}
 
 	public MultiDestinationMessagingProxyInvocationHandler(
 		BaseMultiDestinationProxyBean baseMultiDestinationProxyBean) {
@@ -62,6 +55,17 @@ public class MultiDestinationMessagingProxyInvocationHandler
 			return null;
 		}
 	}
+
+	private static InvocationHandlerFactory _invocationHandlerFactory =
+		new InvocationHandlerFactory() {
+
+			@Override
+			public InvocationHandler createInvocationHandler(Object obj) {
+				return new MultiDestinationMessagingProxyInvocationHandler(
+					(BaseMultiDestinationProxyBean)obj);
+			}
+
+		};
 
 	private BaseMultiDestinationProxyBean _baseMultiDestinationProxyBean;
 

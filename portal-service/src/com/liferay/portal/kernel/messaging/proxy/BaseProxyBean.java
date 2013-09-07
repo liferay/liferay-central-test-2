@@ -29,7 +29,7 @@ import java.util.Map;
 public abstract class BaseProxyBean {
 
 	public void send(ProxyRequest proxyRequest) {
-		_singleDestinationMessageSender.send(createMessage(proxyRequest));
+		_singleDestinationMessageSender.send(buildMessage(proxyRequest));
 	}
 
 	public void setSingleDestinationMessageSender(
@@ -49,7 +49,7 @@ public abstract class BaseProxyBean {
 	public Object synchronousSend(ProxyRequest proxyRequest) throws Exception {
 		ProxyResponse proxyResponse =
 			(ProxyResponse)_singleDestinationSynchronousMessageSender.send(
-				createMessage(proxyRequest));
+				buildMessage(proxyRequest));
 
 		if (proxyResponse == null) {
 			return proxyRequest.execute(this);
@@ -62,17 +62,16 @@ public abstract class BaseProxyBean {
 		}
 	}
 
-	protected Message createMessage(ProxyRequest proxyRequest) {
+	protected Message buildMessage(ProxyRequest proxyRequest) {
 		Message message = new Message();
 
 		message.setPayload(proxyRequest);
 
-		Map<String, Object> messageValues =
-			MessageValuesThreadLocal.getValues();
+		Map<String, Object> values = MessageValuesThreadLocal.getValues();
 
-		if (!messageValues.isEmpty()) {
-			for (String key : messageValues.keySet()) {
-				message.put(key, messageValues.get(key));
+		if (!values.isEmpty()) {
+			for (String key : values.keySet()) {
+				message.put(key, values.get(key));
 			}
 		}
 
