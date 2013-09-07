@@ -580,8 +580,8 @@
 			</attribute>
 			<attribute>
 				<name>max</name>
-				<inputType>java.lang.Integer</inputType>
-				<outputType>java.lang.Integer</outputType>
+				<inputType>int</inputType>
+				<outputType>int</outputType>
 			</attribute>
 			<attribute>
 				<name>model</name>
@@ -590,8 +590,8 @@
 			</attribute>
 			<attribute>
 				<name>min</name>
-				<inputType>java.lang.Integer</inputType>
-				<outputType>java.lang.Integer</outputType>
+				<inputType>int</inputType>
+				<outputType>int</outputType>
 			</attribute>
 			<attribute>
 				<name>multiple</name>
