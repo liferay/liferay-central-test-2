@@ -43,8 +43,7 @@ public class PortalPreferencesLocalServiceImpl
 
 	@Override
 	public PortalPreferences addPortalPreferences(
-			long companyId, long ownerId, int ownerType,
-			String defaultPreferences)
+			long ownerId, int ownerType, String defaultPreferences)
 		throws SystemException {
 
 		long portalPreferencesId = counterLocalService.increment();
@@ -82,18 +81,29 @@ public class PortalPreferencesLocalServiceImpl
 		return portalPreferences;
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by
+	 *	{@link #addPortalPreferences(long, int, String)}
+	 */
 	@Override
-	public PortletPreferences getPreferences(
-			long companyId, long ownerId, int ownerType)
+	public PortalPreferences addPortalPreferences(
+			long companyId, long ownerId, int ownerType,
+			String defaultPreferences)
 		throws SystemException {
 
-		return getPreferences(companyId, ownerId, ownerType, null);
+		return addPortalPreferences(ownerId, ownerType, defaultPreferences);
+	}
+
+	@Override
+	public PortletPreferences getPreferences(long ownerId, int ownerType)
+		throws SystemException {
+
+		return getPreferences(ownerId, ownerType, null);
 	}
 
 	@Override
 	public PortletPreferences getPreferences(
-			long companyId, long ownerId, int ownerType,
-			String defaultPreferences)
+			long ownerId, int ownerType, String defaultPreferences)
 		throws SystemException {
 
 		DB db = DBFactoryUtil.getDB();
@@ -101,8 +111,7 @@ public class PortalPreferencesLocalServiceImpl
 		String dbType = db.getType();
 
 		if (!dbType.equals(DB.TYPE_HYPERSONIC)) {
-			return doGetPreferences(
-				companyId, ownerId, ownerType, defaultPreferences);
+			return doGetPreferences(ownerId, ownerType, defaultPreferences);
 		}
 
 		StringBundler sb = new StringBundler(4);
@@ -120,14 +129,37 @@ public class PortalPreferencesLocalServiceImpl
 		lock.lock();
 
 		try {
-			return doGetPreferences(
-				companyId, ownerId, ownerType, defaultPreferences);
+			return doGetPreferences(ownerId, ownerType, defaultPreferences);
 		}
 		finally {
 			lock.unlock();
 
 			LockRegistry.freeLock(groupName, key);
 		}
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #getPreferences(long, int)}
+	 */
+	@Override
+	public PortletPreferences getPreferences(
+			long companyId, long ownerId, int ownerType)
+		throws SystemException {
+
+		return getPreferences(ownerId, ownerType);
+	}
+
+	/**
+	 * @deprecated As of 6.2.0, replaced by
+	 *	{@link #getPreferences(long, int, String)}
+	 */
+	@Override
+	public PortletPreferences getPreferences(
+			long companyId, long ownerId, int ownerType,
+			String defaultPreferences)
+		throws SystemException {
+
+		return getPreferences(ownerId, ownerType, defaultPreferences);
 	}
 
 	@Override
@@ -167,8 +199,7 @@ public class PortalPreferencesLocalServiceImpl
 	}
 
 	protected PortletPreferences doGetPreferences(
-			long companyId, long ownerId, int ownerType,
-			String defaultPreferences)
+			long ownerId, int ownerType, String defaultPreferences)
 		throws SystemException {
 
 		PortalPreferences portalPreferences =
@@ -184,13 +215,12 @@ public class PortalPreferencesLocalServiceImpl
 
 			portalPreferences =
 				portalPreferencesLocalService.addPortalPreferences(
-					companyId, ownerId, ownerType, defaultPreferences);
+					ownerId, ownerType, defaultPreferences);
 		}
 
 		PortalPreferencesImpl portalPreferencesImpl =
 			(PortalPreferencesImpl)PortletPreferencesFactoryUtil.fromXML(
-				companyId, ownerId, ownerType,
-				portalPreferences.getPreferences());
+				ownerId, ownerType, portalPreferences.getPreferences());
 
 		return new PortalPreferencesWrapper(portalPreferencesImpl);
 	}

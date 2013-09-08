@@ -249,7 +249,7 @@ public class PrefsPropsUtil {
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 
 		return _portalPreferencesLocalService.getPreferences(
-			companyId, ownerId, ownerType);
+			ownerId, ownerType);
 	}
 
 	public static Properties getProperties(
