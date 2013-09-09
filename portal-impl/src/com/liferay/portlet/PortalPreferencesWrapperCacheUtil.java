@@ -23,8 +23,8 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class PortalPreferencesWrapperCacheUtil {
 
-	public static final String PORTAL_PREFERENCES_WRAPPER_CACHE_NAME =
-		"PORTAL_PREFERENCES_WRAPPER_CACHE_NAME";
+	public static final String CACHE_NAME =
+		PortalPreferencesWrapperCacheUtil.class.getName();
 
 	public static PortalPreferencesWrapper get(long ownerId, int ownerType) {
 		String cacheKey = StringUtil.toHexString(ownerId).concat(
@@ -53,6 +53,6 @@ public class PortalPreferencesWrapperCacheUtil {
 
 	private static PortalCache<String, PortalPreferencesWrapper>
 		_portalPreferencesWrapperPortalCache = MultiVMPoolUtil.getCache(
-			PORTAL_PREFERENCES_WRAPPER_CACHE_NAME);
+			CACHE_NAME);
 
 }
