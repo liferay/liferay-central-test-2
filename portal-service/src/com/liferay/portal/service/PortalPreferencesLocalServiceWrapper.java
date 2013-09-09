@@ -279,9 +279,17 @@ public class PortalPreferencesLocalServiceWrapper
 		_portalPreferencesLocalService.setBeanIdentifier(beanIdentifier);
 	}
 
+	@Override
+	public com.liferay.portal.model.PortalPreferences addPortalPreferences(
+		long ownerId, int ownerType, java.lang.String defaultPreferences)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portalPreferencesLocalService.addPortalPreferences(ownerId,
+			ownerType, defaultPreferences);
+	}
+
 	/**
-	* @deprecated As of 6.2.0, replaced by
-	{@link #addPortalPreferences(long, int, String)}
+	* @deprecated As of 6.2.0, replaced by {@link #addPortalPreferences(long,
+	int, String)}
 	*/
 	@Override
 	public com.liferay.portal.model.PortalPreferences addPortalPreferences(
@@ -293,10 +301,17 @@ public class PortalPreferencesLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.portal.model.PortalPreferences addPortalPreferences(
-		long ownerId, int ownerType, java.lang.String defaultPreferences)
+	public javax.portlet.PortletPreferences getPreferences(long ownerId,
+		int ownerType)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portalPreferencesLocalService.addPortalPreferences(ownerId,
+		return _portalPreferencesLocalService.getPreferences(ownerId, ownerType);
+	}
+
+	@Override
+	public javax.portlet.PortletPreferences getPreferences(long ownerId,
+		int ownerType, java.lang.String defaultPreferences)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portalPreferencesLocalService.getPreferences(ownerId,
 			ownerType, defaultPreferences);
 	}
 
@@ -311,16 +326,9 @@ public class PortalPreferencesLocalServiceWrapper
 			ownerId, ownerType);
 	}
 
-	@Override
-	public javax.portlet.PortletPreferences getPreferences(long ownerId,
-		int ownerType)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portalPreferencesLocalService.getPreferences(ownerId, ownerType);
-	}
-
 	/**
-	* @deprecated As of 6.2.0, replaced by
-	{@link #getPreferences(long, int, String)}
+	* @deprecated As of 6.2.0, replaced by {@link #getPreferences(long, int,
+	String)}
 	*/
 	@Override
 	public javax.portlet.PortletPreferences getPreferences(long companyId,
@@ -328,14 +336,6 @@ public class PortalPreferencesLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portalPreferencesLocalService.getPreferences(companyId,
 			ownerId, ownerType, defaultPreferences);
-	}
-
-	@Override
-	public javax.portlet.PortletPreferences getPreferences(long ownerId,
-		int ownerType, java.lang.String defaultPreferences)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portalPreferencesLocalService.getPreferences(ownerId,
-			ownerType, defaultPreferences);
 	}
 
 	@Override
