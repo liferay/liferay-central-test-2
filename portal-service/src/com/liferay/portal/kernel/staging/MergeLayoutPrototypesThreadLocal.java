@@ -93,8 +93,7 @@ public class MergeLayoutPrototypesThreadLocal {
 		public boolean equals(Object obj) {
 			MethodKey methodKey = (MethodKey)obj;
 
-			if (((_method == methodKey._method) ||
-				 Validator.equals(_method, methodKey._method)) &&
+			if (Validator.equals(_method, methodKey._method) &&
 				Arrays.equals(_arguments, methodKey._arguments)) {
 
 				return true;
@@ -103,8 +102,8 @@ public class MergeLayoutPrototypesThreadLocal {
 			return false;
 		}
 
-		private final Method _method;
 		private final Object[] _arguments;
+		private final Method _method;
 
 	}
 
