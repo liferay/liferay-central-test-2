@@ -85,8 +85,8 @@ public class PortalPreferencesLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *	{@link #addPortalPreferences(long, int, String)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addPortalPreferences(long,
+	 *             int, String)}
 	 */
 	@Override
 	public PortalPreferences addPortalPreferences(
@@ -153,8 +153,8 @@ public class PortalPreferencesLocalServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *	{@link #getPreferences(long, int, String)}
+	 * @deprecated As of 6.2.0, replaced by {@link #getPreferences(long, int,
+	 *             String)}
 	 */
 	@Override
 	public PortletPreferences getPreferences(

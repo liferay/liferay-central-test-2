@@ -235,8 +235,8 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *	{@link #getPortalPreferences(HttpSession, long, boolean)}
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #getPortalPreferences(HttpSession, long, boolean)}
 	 */
 	@Override
 	public PortalPreferences getPortalPreferences(
@@ -254,8 +254,8 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by
-	 *	{@link #getPortalPreferences(long, boolean)}
+	 * @deprecated As of 6.2.0, replaced by {@link #getPortalPreferences(long,
+	 *             boolean)}
 	 */
 	@Override
 	public PortalPreferences getPortalPreferences(
