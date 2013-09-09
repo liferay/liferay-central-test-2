@@ -21,7 +21,7 @@
 <%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.LocaleUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.kernel.xuggler.XugglerUtil"%>
+<%@ page import="com.liferay.portal.kernel.xuggler.XugglerUtil" %>
 
 <%@ page import="java.util.Locale" %>
 
@@ -133,7 +133,7 @@ CKEDITOR.config.toolbar_liferay = [
 	['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
 	['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
 	['Image', 'Link', 'Unlink', 'Anchor'],
-	['Flash', <c:if test="<%= XugglerUtil.isEnabled()  %>"> 'Video',</c:if> 'Table', '-', 'Smiley', 'SpecialChar'],
+	['Flash', <c:if test="<%= XugglerUtil.isEnabled() %>"> 'Video',</c:if> 'Table', '-', 'Smiley', 'SpecialChar'],
 	['Find', 'Replace', 'SpellChecker', 'Scayt'],
 	['SelectAll', 'RemoveFormat'],
 	['Subscript', 'Superscript']
@@ -155,7 +155,7 @@ CKEDITOR.config.toolbar_liferayArticle = [
 	'/',
 	['Source'],
 	['Link', 'Unlink', 'Anchor'],
-	['Image', 'Flash', <c:if test="<%= XugglerUtil.isEnabled()  %>">'Video',</c:if> 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
+	['Image', 'Flash', <c:if test="<%= XugglerUtil.isEnabled() %>">'Video',</c:if> 'Table', '-', 'Smiley', 'SpecialChar', 'LiferayPageBreak']
 ];
 
 CKEDITOR.config.toolbar_phone = [
