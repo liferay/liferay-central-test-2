@@ -97,18 +97,18 @@ public class JournalIndexerTest {
 
 		searchContext.setKeywords("Architectural");
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
 		JournalArticleLocalServiceUtil.copyArticle(
@@ -117,7 +117,7 @@ public class JournalIndexerTest {
 			article.getVersion());
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 2,
+			initialSearchCount + 2,
 			searchCount(_group.getGroupId(), searchContext));
 	}
 
@@ -133,18 +133,18 @@ public class JournalIndexerTest {
 
 		searchContext.setKeywords("Architectural");
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		JournalArticle article1 = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
@@ -161,7 +161,7 @@ public class JournalIndexerTest {
 			"Apple Architectural Tablet", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount  + 2,
+			initialSearchCount  + 2,
 			searchCount(_group.getGroupId(), searchContext));
 
 		JournalTestUtil.updateArticle(
@@ -171,7 +171,7 @@ public class JournalIndexerTest {
 		JournalArticleLocalServiceUtil.deleteArticles(_group.getGroupId());
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount,
+			initialSearchCount,
 			searchCount(_group.getGroupId(), searchContext));
 	}
 
@@ -195,11 +195,11 @@ public class JournalIndexerTest {
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		String content = "Liferay Architectural Approach";
 
@@ -207,7 +207,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), folder.getFolderId(), "title", content, true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount  + 1,
+			initialSearchCount  + 1,
 			searchCount(
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
@@ -221,7 +221,7 @@ public class JournalIndexerTest {
 			article, article.getTitle(), content, serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 2,
+			initialSearchCount + 2,
 			searchCount(
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
@@ -232,7 +232,7 @@ public class JournalIndexerTest {
 			article, article.getTitle(), content, serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 3,
+			initialSearchCount + 3,
 			searchCount(
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
@@ -275,29 +275,28 @@ public class JournalIndexerTest {
 
 		searchContext.setKeywords("Architectural");
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
 		JournalArticleLocalServiceUtil.moveArticleToTrash(
 			TestPropsValues.getUserId(), article);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount,
+			initialSearchCount,
 			searchCount(_group.getGroupId(), searchContext));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(
 				_group.getGroupId(), true, WorkflowConstants.STATUS_IN_TRASH,
 				searchContext));
@@ -306,11 +305,10 @@ public class JournalIndexerTest {
 			TestPropsValues.getUserId(), article);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCount,
+			initialSearchCount,
 			searchCount(
 				_group.getGroupId(), true, WorkflowConstants.STATUS_IN_TRASH,
 				searchContext));
@@ -324,34 +322,35 @@ public class JournalIndexerTest {
 		searchContext1.setKeywords("Arquitectura");
 		searchContext1.setLocale(LocaleUtil.SPAIN);
 
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
+
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Architectural");
 		searchContext2.setLocale(LocaleUtil.SPAIN);
 
-		int initialBaseModelsSearchCountKeywords1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountKeywords2 = searchCount(
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		titleMap.put(LocaleUtil.US, "Title");
 		titleMap.put(LocaleUtil.GERMANY, "Titel");
 		titleMap.put(LocaleUtil.SPAIN, "Titulo");
+		titleMap.put(LocaleUtil.US, "Title");
 
 		Map<Locale, String> contentMap = new HashMap<Locale, String>();
 
-		contentMap.put(LocaleUtil.US, "Liferay Architectural Approach");
 		contentMap.put(LocaleUtil.GERMANY, "Liferay Architektur Ansatz");
 		contentMap.put(LocaleUtil.SPAIN, "Liferay Arquitectura Aproximacion");
+		contentMap.put(LocaleUtil.US, "Liferay Architectural Approach");
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), titleMap, titleMap, contentMap, true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
 		JournalArticleLocalServiceUtil.removeArticleLocale(
@@ -359,11 +358,10 @@ public class JournalIndexerTest {
 			LocaleUtil.toLanguageId(LocaleUtil.SPAIN));
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1,
+			initialSearchCount1,
 			searchCount(_group.getGroupId(), searchContext1));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2 + 1,
+			initialSearchCount2 + 1,
 			searchCount(_group.getGroupId(), searchContext2));
 	}
 
@@ -388,36 +386,35 @@ public class JournalIndexerTest {
 		searchContext1.setKeywords("Arquitectura");
 		searchContext1.setLocale(LocaleUtil.SPAIN);
 
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
+
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
 		searchContext2.setLocale(LocaleUtil.SPAIN);
 
-		int initialBaseModelsSearchCountKeywords1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountKeywords2 = searchCount(
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		titleMap.put(LocaleUtil.US, "Title");
 		titleMap.put(LocaleUtil.GERMANY, "Titel");
 		titleMap.put(LocaleUtil.SPAIN, "Titulo");
+		titleMap.put(LocaleUtil.US, "Title");
 
 		Map<Locale, String> contentMap = new HashMap<Locale, String>();
 
-		contentMap.put(LocaleUtil.US, "Liferay Architectural Approach");
 		contentMap.put(LocaleUtil.GERMANY, "Liferay Architektur Ansatz");
 		contentMap.put(LocaleUtil.SPAIN, "Liferay Arquitectura Aproximacion");
+		contentMap.put(LocaleUtil.US, "Liferay Architectural Approach");
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), titleMap, titleMap, contentMap, true);
 
-		User user = UserTestUtil.addUser(_group.getGroupId(), LocaleUtil.SPAIN);
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
 		contentMap.put(LocaleUtil.SPAIN, "Apple manzana tablet");
@@ -432,8 +429,10 @@ public class JournalIndexerTest {
 			serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2,
+			initialSearchCount2,
 			searchCount(_group.getGroupId(), searchContext2));
+
+		User user = UserTestUtil.addUser(_group.getGroupId(), LocaleUtil.SPAIN);
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -443,7 +442,7 @@ public class JournalIndexerTest {
 			serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2 + 1,
+			initialSearchCount2 + 1,
 			searchCount(_group.getGroupId(), searchContext2));
 	}
 
@@ -463,11 +462,11 @@ public class JournalIndexerTest {
 
 		searchContext.setKeywords("Architectural");
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -475,12 +474,12 @@ public class JournalIndexerTest {
 
 		if (approve) {
 			Assert.assertEquals(
-				initialBaseModelsSearchCount + 1,
+				initialSearchCount + 1,
 				searchCount(_group.getGroupId(), searchContext));
 		}
 		else {
 			Assert.assertEquals(
-				initialBaseModelsSearchCount,
+				initialSearchCount,
 				searchCount(_group.getGroupId(), searchContext));
 		}
 	}
@@ -517,14 +516,15 @@ public class JournalIndexerTest {
 
 		searchContext1.setKeywords("Architectural");
 
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
+
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
 
-		int initialBaseModelsSearchCountKeywords1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountKeywords2 = searchCount(
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
@@ -535,7 +535,7 @@ public class JournalIndexerTest {
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
@@ -544,11 +544,10 @@ public class JournalIndexerTest {
 			article, article.getTitle(), "Apple tablet", serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1,
+			initialSearchCount1,
 			searchCount(_group.getGroupId(), searchContext1));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2 + 1,
+			initialSearchCount2 + 1,
 			searchCount(_group.getGroupId(), searchContext2));
 
 		if (all) {
@@ -565,7 +564,7 @@ public class JournalIndexerTest {
 			}
 
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords1,
+				initialSearchCount1,
 				searchCount(_group.getGroupId(), searchContext1));
 		}
 		else {
@@ -580,27 +579,24 @@ public class JournalIndexerTest {
 			}
 
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords1 + 1,
+				initialSearchCount1 + 1,
 				searchCount(_group.getGroupId(), searchContext1));
 		}
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2,
+			initialSearchCount2,
 			searchCount(_group.getGroupId(), searchContext2));
 	}
 
 	protected void indexVersions(boolean delete, boolean all) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId());
-
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
+		int initialSearchCount = searchCount(
+			_group.getGroupId(), searchContext);
+
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		int initialBaseModelsSearchCount = searchCount(
-			_group.getGroupId(), searchContext);
 
 		String content = "Liferay Architectural Approach";
 
@@ -608,8 +604,11 @@ public class JournalIndexerTest {
 			_group.getGroupId(), folder.getFolderId(), "title", content, true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 1,
+			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -617,7 +616,7 @@ public class JournalIndexerTest {
 			article, article.getTitle(), content, serviceContext);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCount + 2,
+			initialSearchCount + 2,
 			searchCount(
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
@@ -629,7 +628,7 @@ public class JournalIndexerTest {
 					serviceContext);
 
 				Assert.assertEquals(
-					initialBaseModelsSearchCount,
+					initialSearchCount,
 					searchCount(
 						_group.getGroupId(), false,
 						WorkflowConstants.STATUS_ANY, searchContext));
@@ -638,7 +637,7 @@ public class JournalIndexerTest {
 				JournalArticleLocalServiceUtil.deleteArticle(article);
 
 				Assert.assertEquals(
-					initialBaseModelsSearchCount + 1,
+					initialSearchCount + 1,
 					searchCount(
 						_group.getGroupId(), false,
 						WorkflowConstants.STATUS_ANY, searchContext));
@@ -659,7 +658,7 @@ public class JournalIndexerTest {
 			}
 
 			Assert.assertEquals(
-				initialBaseModelsSearchCount + 2,
+				initialSearchCount + 2,
 				searchCount(
 					_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 					searchContext));
@@ -667,38 +666,38 @@ public class JournalIndexerTest {
 	}
 
 	protected void moveArticle(boolean moveToTrash) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId());
-
-		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
-
-		JournalFolder newFolder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
-
 		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
-		searchContext1.setFolderIds(new long[]{folder.getFolderId()});
+
+		JournalFolder folder1 = JournalTestUtil.addFolder(
+			_group.getGroupId(), ServiceTestUtil.randomString());
+
+		searchContext1.setFolderIds(new long[] {folder1.getFolderId()});
+
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
 
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Architectural");
-		searchContext2.setFolderIds(new long[]{newFolder.getFolderId()});
 
-		int initialBaseModelsSearchCountFolders1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountFolders2 = searchCount(
+		JournalFolder folder2 = JournalTestUtil.addFolder(
+			_group.getGroupId(), ServiceTestUtil.randomString());
+
+		searchContext2.setFolderIds(new long[] {folder2.getFolderId()});
+
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
-			_group.getGroupId(), folder.getFolderId(), "title",
+			_group.getGroupId(), folder1.getFolderId(), "title",
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountFolders1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
 		if (moveToTrash) {
@@ -706,25 +705,27 @@ public class JournalIndexerTest {
 				TestPropsValues.getUserId(), article);
 
 			Assert.assertEquals(
-				initialBaseModelsSearchCountFolders1,
+				initialSearchCount1,
 				searchCount(_group.getGroupId(), searchContext1));
+
+			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+				_group.getGroupId());
 
 			JournalArticleLocalServiceUtil.moveArticleFromTrash(
 				TestPropsValues.getUserId(), _group.getGroupId(), article,
-				newFolder.getFolderId(), serviceContext);
+				folder2.getFolderId(), serviceContext);
 		}
 		else {
 			JournalArticleLocalServiceUtil.moveArticle(
 				_group.getGroupId(), article.getArticleId(),
-				newFolder.getFolderId());
+				folder2.getFolderId());
 		}
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountFolders1,
+			initialSearchCount1,
 			searchCount(_group.getGroupId(), searchContext1));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCountFolders2 + 1,
+			initialSearchCount2 + 1,
 			searchCount(_group.getGroupId(), searchContext2));
 	}
 
@@ -751,22 +752,20 @@ public class JournalIndexerTest {
 	}
 
 	protected void updateArticle(boolean approve) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId());
-
 		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
+
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
 
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
 
-		int initialBaseModelsSearchCountKeywords1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountKeywords2 = searchCount(
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
@@ -777,8 +776,11 @@ public class JournalIndexerTest {
 			"Liferay Architectural Approach", true);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -792,20 +794,18 @@ public class JournalIndexerTest {
 
 		if (approve) {
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords1,
+				initialSearchCount1,
 				searchCount(_group.getGroupId(), searchContext1));
-
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords2 + 1,
+				initialSearchCount2 + 1,
 				searchCount(_group.getGroupId(), searchContext2));
 		}
 		else {
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords1 + 1,
+				initialSearchCount1 + 1,
 				searchCount(_group.getGroupId(), searchContext1));
-
 			Assert.assertEquals(
-				initialBaseModelsSearchCountKeywords2,
+				initialSearchCount2,
 				searchCount(_group.getGroupId(), searchContext2));
 		}
 	}
@@ -819,14 +819,15 @@ public class JournalIndexerTest {
 
 		searchContext1.setKeywords("Architectural");
 
+		int initialSearchCount1 = searchCount(
+			_group.getGroupId(), searchContext1);
+
 		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Liferay");
 
-		int initialBaseModelsSearchCountKeywords1 = searchCount(
-			_group.getGroupId(), searchContext1);
-		int initialBaseModelsSearchCountKeywords2 = searchCount(
+		int initialSearchCount2 = searchCount(
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
@@ -847,7 +848,7 @@ public class JournalIndexerTest {
 		}
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
 		if (basicContent) {
@@ -864,11 +865,10 @@ public class JournalIndexerTest {
 			content);
 
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords1 + 1,
+			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
-
 		Assert.assertEquals(
-			initialBaseModelsSearchCountKeywords2,
+			initialSearchCount2,
 			searchCount(_group.getGroupId(), searchContext2));
 	}
 
