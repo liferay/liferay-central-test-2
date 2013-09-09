@@ -528,8 +528,6 @@ public class Creole10Parser]]></replacevalue>
 		<if>
 			<os family="windows" />
 			<then>
-				<echo>Replacing shebangs in *nix executables on Windows to fix jRuby issues.</echo>
-
 				<replace dir="${tstamp.value}/output/bin/">
 					<replacetoken><![CDATA[#! jruby]]></replacetoken>
 					<replacevalue><![CDATA[#!/usr/bin/env jruby]]></replacevalue>
