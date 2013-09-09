@@ -60,7 +60,7 @@ public class MapUtil {
 				return defaultValue;
 			}
 
-			return GetterUtil.getBoolean((String)array[0], defaultValue);
+			return GetterUtil.getBoolean(array[0], defaultValue);
 		}
 
 		return GetterUtil.getBoolean(String.valueOf(value), defaultValue);
@@ -90,7 +90,7 @@ public class MapUtil {
 				return defaultValue;
 			}
 
-			return GetterUtil.getDouble((String)array[0], defaultValue);
+			return GetterUtil.getDouble(array[0], defaultValue);
 		}
 
 		return GetterUtil.getDouble(String.valueOf(value), defaultValue);
@@ -120,7 +120,7 @@ public class MapUtil {
 				return defaultValue;
 			}
 
-			return GetterUtil.getInteger((String)array[0], defaultValue);
+			return GetterUtil.getInteger(array[0], defaultValue);
 		}
 
 		return GetterUtil.getInteger(String.valueOf(value), defaultValue);
@@ -167,7 +167,7 @@ public class MapUtil {
 				return defaultValue;
 			}
 
-			return GetterUtil.getLong((String)array[0], defaultValue);
+			return GetterUtil.getLong(array[0], defaultValue);
 		}
 
 		return GetterUtil.getLong(String.valueOf(value), defaultValue);
@@ -197,7 +197,7 @@ public class MapUtil {
 				return defaultValue;
 			}
 
-			return GetterUtil.getShort((String)array[0], defaultValue);
+			return GetterUtil.getShort(array[0], defaultValue);
 		}
 
 		return GetterUtil.getShort(String.valueOf(value), defaultValue);
