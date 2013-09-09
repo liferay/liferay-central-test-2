@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.security.pacl.DoPrivileged;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.util.FileImpl;
@@ -299,7 +300,7 @@ public class ImageToolImpl implements ImageTool {
 			colorModel.createCompatibleWritableRaster(
 				renderedImage.getWidth(), renderedImage.getHeight());
 
-		Hashtable properties = new Hashtable();
+		Hashtable<String, Object> properties = new Hashtable<String, Object>();
 
 		String[] keys = renderedImage.getPropertyNames();
 
@@ -423,7 +424,6 @@ public class ImageToolImpl implements ImageTool {
 	@Override
 	public ImageBag read(byte[] bytes) throws IOException {
 		BufferedImage bufferedImage = null;
-
 		String formatName = null;
 
 		InputStream inputStream = new ByteArrayInputStream(bytes);
@@ -431,16 +431,19 @@ public class ImageToolImpl implements ImageTool {
 		ImageInputStream imageInputStream = ImageIO.createImageInputStream(
 			inputStream);
 
-		Iterator iterator = ImageIO.getImageReaders(imageInputStream);
+		Iterator<ImageReader> iterator = ImageIO.getImageReaders(
+			imageInputStream);
 
 		if (iterator.hasNext()) {
-			ImageReader reader = (ImageReader)iterator.next();
-			reader.setInput(imageInputStream);
-			bufferedImage = reader.read(0);
-			formatName = reader.getFormatName();
+			ImageReader imageReader = iterator.next();
+
+			imageReader.setInput(imageInputStream);
+
+			bufferedImage = imageReader.read(0);
+			formatName = imageReader.getFormatName();
 		}
 
-		formatName = formatName.toLowerCase();
+		formatName = StringUtil.toLowerCase(formatName);
 
 		String type = TYPE_JPEG;
 
@@ -639,14 +642,20 @@ public class ImageToolImpl implements ImageTool {
 				type = "jpeg";
 			}
 
-			InputStream in = new ByteArrayInputStream(bytes);
-			ImageInputStream iis = ImageIO.createImageInputStream(in);
-			Iterator iter = ImageIO.getImageReaders(iis);
+			InputStream inputStream = new ByteArrayInputStream(bytes);
 
-			if (iter.hasNext()) {
-				ImageReader reader = (ImageReader)iter.next();
-				reader.setInput(iis);
-				renderedImage = reader.read(0);
+			ImageInputStream imageInputStream = ImageIO.createImageInputStream(
+				inputStream);
+
+			Iterator<ImageReader> iterator = ImageIO.getImageReaders(
+				imageInputStream);
+
+			if (iterator.hasNext()) {
+				ImageReader imageReader = iterator.next();
+
+				imageReader.setInput(imageInputStream);
+
+				renderedImage = imageReader.read(0);
 			}
 		}
 		catch (IOException ioe) {
