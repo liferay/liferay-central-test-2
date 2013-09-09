@@ -139,9 +139,7 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 		if (PropsValues.TRANSACTIONAL_CACHE_ENABLED &&
 			(name.startsWith(EntityCacheImpl.CACHE_NAME) ||
 			 name.startsWith(FinderCacheImpl.CACHE_NAME) ||
-			 name.equals(
-				PortalPreferencesWrapperCacheUtil.
-					PORTAL_PREFERENCES_WRAPPER_CACHE_NAME))) {
+			 name.equals(PortalPreferencesWrapperCacheUtil.CACHE_NAME))) {
 
 			portalCache = new TransactionalPortalCache<K, V>(portalCache);
 		}
