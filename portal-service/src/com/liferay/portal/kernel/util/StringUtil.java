@@ -378,7 +378,7 @@ public class StringUtil {
 
 		String temp = s.substring(s.length() - end.length());
 
-		if (StringUtil.equalsIgnoreCase(temp, end)) {
+		if (equalsIgnoreCase(temp, end)) {
 			return true;
 		}
 		else {
@@ -3450,7 +3450,7 @@ public class StringUtil {
 
 		String temp = s.substring(0, start.length());
 
-		if (StringUtil.equalsIgnoreCase(temp, start)) {
+		if (equalsIgnoreCase(temp, start)) {
 			return true;
 		}
 		else {
@@ -4126,7 +4126,7 @@ public class StringUtil {
 			return null;
 		}
 		else {
-			return StringUtil.toUpperCase(s);
+			return toUpperCase(s);
 		}
 	}
 
