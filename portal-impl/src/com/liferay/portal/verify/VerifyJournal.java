@@ -69,6 +69,7 @@ public class VerifyJournal extends VerifyProcess {
 		verifyPermissionsAndAssets();
 		verifySearch();
 		verifyTree();
+		verifyURLTitle();
 	}
 
 	protected void updateFolderAssets() throws Exception {
