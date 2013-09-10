@@ -17,7 +17,7 @@
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <%
-String idPrefix = ParamUtil.getString(request, "idPrefix", StringPool.BLANK);
+String idPrefix = ParamUtil.getString(request, "idPrefix");
 
 String description = StringPool.BLANK;
 String panelSelectedPortlets = StringPool.BLANK;
