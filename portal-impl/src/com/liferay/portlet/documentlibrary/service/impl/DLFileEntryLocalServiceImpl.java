@@ -1342,13 +1342,13 @@ public class DLFileEntryLocalServiceImpl
 	public void rebuildTree(long companyId)
 		throws PortalException, SystemException {
 
-		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByCompanyId(
-			companyId);
+		List<DLFileEntry> dlFileEntries =
+			dlFileEntryPersistence.findByCompanyId(companyId);
 
-		for (DLFileEntry fileEntry : fileEntries) {
-			fileEntry.setTreePath(fileEntry.buildTreePath());
+		for (DLFileEntry dlFileEntry : dlFileEntries) {
+			dlFileEntry.setTreePath(dlFileEntry.buildTreePath());
 
-			dlFileEntryPersistence.update(fileEntry);
+			dlFileEntryPersistence.update(dlFileEntry);
 		}
 	}
 
