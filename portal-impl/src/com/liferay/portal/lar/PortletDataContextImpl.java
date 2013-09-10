@@ -566,17 +566,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		if (group.isStagingGroup()) {
 			if (group.isStagedRemotely()) {
-
-				// Since we add all the basic permissions with liveGroupId no
-				// matter staging is remote or local we have to collect these
-				// with liveGroupId
-
 				groupId = group.getLiveGroupId();
 			}
 			else {
-
-				// Do not publish portlet permission when local staging publish
-
 				return;
 			}
 		}
