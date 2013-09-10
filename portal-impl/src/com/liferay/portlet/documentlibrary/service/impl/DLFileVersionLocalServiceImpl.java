@@ -132,13 +132,13 @@ public class DLFileVersionLocalServiceImpl
 	public void rebuildTree(long companyId)
 		throws PortalException, SystemException {
 
-		List<DLFileVersion> fileVersions =
+		List<DLFileVersion> dlFileVersions =
 			dlFileVersionPersistence.findByCompanyId(companyId);
 
-		for (DLFileVersion fileVersion : fileVersions) {
-			fileVersion.setTreePath(fileVersion.buildTreePath());
+		for (DLFileVersion dlFileVersion : dlFileVersions) {
+			dlFileVersion.setTreePath(dlFileVersion.buildTreePath());
 
-			dlFileVersionPersistence.update(fileVersion);
+			dlFileVersionPersistence.update(dlFileVersion);
 		}
 	}
 
