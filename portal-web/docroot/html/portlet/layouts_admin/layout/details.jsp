@@ -194,7 +194,7 @@ StringBuilder friendlyURLBase = new StringBuilder();
 					%>
 
 					<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(curLayoutType) %>">
-						<liferay-util:param name="idPrefix" value="details_" />
+						<liferay-util:param name="idPrefix" value="details" />
 					</liferay-util:include>
 				</div>
 
