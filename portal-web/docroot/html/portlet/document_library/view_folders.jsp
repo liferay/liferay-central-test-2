@@ -140,8 +140,8 @@ else {
 
 					Map<String, Object> dataExpand = new HashMap<String, Object>();
 
-					dataExpand.put("folder-id", rootFolderId);
 					dataExpand.put("expand-folder", Boolean.TRUE);
+					dataExpand.put("folder-id", rootFolderId);
 
 					Map<String, Object> dataView = new HashMap<String, Object>();
 
@@ -272,8 +272,8 @@ else {
 
 							dataExpand = new HashMap<String, Object>();
 
-							dataExpand.put("folder-id", mountFolder.getFolderId());
 							dataExpand.put("expand-folder", Boolean.TRUE);
+							dataExpand.put("folder-id", mountFolder.getFolderId());
 
 							dataView = new HashMap<String, Object>();
 
@@ -496,8 +496,8 @@ else {
 
 						dataExpand = new HashMap<String, Object>();
 
-						dataExpand.put("folder-id", curFolder.getFolderId());
 						dataExpand.put("expand-folder", Boolean.TRUE);
+						dataExpand.put("folder-id", curFolder.getFolderId());
 
 						dataView = new HashMap<String, Object>();
 
