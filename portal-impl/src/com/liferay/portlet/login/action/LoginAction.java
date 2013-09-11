@@ -214,15 +214,16 @@ public class LoginAction extends PortletAction {
 				redirect = getCompleteRedirectURL(request, redirect);
 			}
 		}
+		
+		String mainPath = themeDisplay.getPathMain();
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {
 			if (Validator.isNotNull(redirect)) {
-				redirect = themeDisplay.getPathMain().concat(
+				redirect = mainPath.concat(
 					"/portal/protected?redirect=").concat(redirect);
 			}
 			else {
-				redirect = themeDisplay.getPathMain().concat(
-					"/portal/protected");
+				redirect = mainPath.concat("/portal/protected");
 			}
 
 			actionResponse.sendRedirect(redirect);
@@ -239,7 +240,7 @@ public class LoginAction extends PortletAction {
 					return;
 				}
 				else {
-					actionResponse.sendRedirect(themeDisplay.getPathMain());
+					actionResponse.sendRedirect(mainPath);
 				}
 			}
 		}
