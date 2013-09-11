@@ -5,6 +5,8 @@
 
 	<property name="war.file" value="${ant.project.name}" />
 
+	<property name="alloy-font-awesome.file" value="alloy-font-awesome-1.0.0.zip" />
+
 	<!--
 	When upgrading CKEditor, make sure to delete
 	docroot/html/js/editor/ckeditor_diffs/ckeditor.js.
@@ -13,7 +15,6 @@
 	<property name="ckeditor.file" value="ckeditor-4.0-stable.zip" />
 
 	<property name="fckeditor.file" value="FCKeditor_2.6.3.zip" />
-	<property name="alloy-font-awesome.file" value="alloy-font-awesome-1.0.0.zip" />
 	<property name="scayt.file" value="scayt_4.0.3.zip" />
 	<property name="tinymce.file" value="tinymce_3.5.6.zip" />
 	<property name="vaadin.file" value="vaadin-6.8.12-liferay.zip" />
