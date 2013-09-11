@@ -21,7 +21,7 @@
 <%
 BodyContent bodyContent = (BodyContent)request.getAttribute("aui:nav-item:bodyContent");
 
-String bodyContentString = null;
+String bodyContentString = StringPool.BLANK;
 
 if (bodyContent != null) {
 	bodyContentString = bodyContent.getString();
