@@ -73,30 +73,30 @@ public class SortedProperties extends Properties {
 
 	@Override
 	public Set<Map.Entry<Object, Object>> entrySet() {
-		Set<Map.Entry<Object, Object>> entrySet =
+		Set<Map.Entry<Object, Object>> set =
 			new TreeSet<Map.Entry<Object, Object>>(
 				new Comparator<Map.Entry<Object, Object>>() {
 
-				@Override
-				public int compare(
-					Map.Entry<Object, Object> o1,
-					Map.Entry<Object, Object> o2) {
+					@Override
+					public int compare(
+						Map.Entry<Object, Object> object1,
+						Map.Entry<Object, Object> object2) {
 
-					String key1 = String.valueOf(o1.getKey());
-					String key2 = String.valueOf(o2.getKey());
+						String key1 = String.valueOf(object1.getKey());
+						String key2 = String.valueOf(object2.getKey());
 
-					if (_comparator == null) {
-						return key1.compareTo(key2);
+						if (_comparator == null) {
+							return key1.compareTo(key2);
+						}
+
+						return _comparator.compare(key1, key2);
 					}
 
-					return _comparator.compare(key1, key2);
-				}
+				});
 
-			});
+		set.addAll(super.entrySet());
 
-		entrySet.addAll(super.entrySet());
-
-		return entrySet;
+		return set;
 	}
 
 	@Override
