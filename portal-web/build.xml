@@ -221,11 +221,30 @@
 			</then>
 		</if>
 
-		<!-- Build Font-Awesome -->
+		<!-- Build Alloy Font Awesome -->
 
-		<antcall target="build-font-awesome">
+		<antcall target="build-alloy-font-awesome">
 			<param name="alloy.bootstrap.deploy" value="${alloy.bootstrap.deploy}" />
 		</antcall>
+	</target>
+
+	<target name="build-alloy-font-awesome">
+		<if>
+			<not>
+				<uptodate
+					srcfile="third-party/${alloy-font-awesome.file}"
+					targetfile="${alloy.bootstrap.deploy}/alloy-font-awesome"
+				/>
+			</not>
+			<then>
+				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome" />
+
+				<unzip src="third-party/${alloy-font-awesome.file}" dest="${alloy.bootstrap.deploy}" />
+
+				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome/css" />
+				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome/less" />
+			</then>
+		</if>
 	</target>
 
 	<target name="build-ckeditor">
@@ -857,25 +876,6 @@
 					<fileset dir="docroot/html/js/editor/fckeditor_diffs" />
 				</copy>
 			</else>
-		</if>
-	</target>
-
-	<target name="build-font-awesome">
-		<if>
-			<not>
-				<uptodate
-					srcfile="third-party/${alloy-font-awesome.file}"
-					targetfile="${alloy.bootstrap.deploy}/alloy-font-awesome"
-				/>
-			</not>
-			<then>
-				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome" />
-
-				<unzip src="third-party/${alloy-font-awesome.file}" dest="${alloy.bootstrap.deploy}" />
-
-				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome/css" />
-				<delete dir="${alloy.bootstrap.deploy}/alloy-font-awesome/less" />
-			</then>
 		</if>
 	</target>
 
