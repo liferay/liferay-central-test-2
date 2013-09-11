@@ -421,9 +421,15 @@ public class BreadcrumbTag extends IncludeTag {
 			return StringPool.BLANK;
 		}
 
-		boolean breadcrumbTruncate = breadcrumbString.split(
-			"<li", -1).length > 3;
 		String breadcrumbTruncateClass = StringPool.BLANK;
+
+		String[] breadcrumbArray = breadcrumbString.split("<li", -1);
+
+		boolean breadcrumbTruncate = false;
+
+		if (breadcrumbArray.length > 3) {
+			breadcrumbTruncate = true;
+		}
 
 		if (breadcrumbTruncate) {
 			breadcrumbTruncateClass = " breadcrumb-truncate";
