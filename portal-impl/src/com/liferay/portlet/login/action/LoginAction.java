@@ -214,7 +214,7 @@ public class LoginAction extends PortletAction {
 				redirect = getCompleteRedirectURL(request, redirect);
 			}
 		}
-		
+
 		String mainPath = themeDisplay.getPathMain();
 
 		if (PropsValues.PORTAL_JAAS_ENABLE) {

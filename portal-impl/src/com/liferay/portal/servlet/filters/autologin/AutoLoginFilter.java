@@ -127,7 +127,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 					AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE);
 
 				redirect = redirect.concat("?redirect=");
-				
+
 				if (Validator.isNotNull(autoLoginRedirect)) {
 					redirect = redirect.concat(autoLoginRedirect);
 				}
