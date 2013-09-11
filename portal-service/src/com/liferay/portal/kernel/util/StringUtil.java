@@ -412,9 +412,8 @@ public class StringUtil {
 
 				// Georgian alphabet needs to check both upper and lower case
 
-				if ((Character.toUpperCase(c1) == Character.toUpperCase(c2)) ||
-					(Character.toLowerCase(c1) ==
-							Character.toLowerCase(c2))) {
+				if ((Character.toLowerCase(c1) == Character.toLowerCase(c2)) ||
+					(Character.toUpperCase(c1) == Character.toUpperCase(c2))) {
 
 					continue;
 				}
