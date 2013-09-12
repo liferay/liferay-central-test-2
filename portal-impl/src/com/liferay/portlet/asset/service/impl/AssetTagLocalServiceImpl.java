@@ -166,15 +166,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void checkTags(long userId, long groupId, String[] names)
-		throws PortalException, SystemException {
-
-		checkTagsWithProperties(userId, groupId, names);
-	}
-
-	@Override
-	public List<AssetTag> checkTagsWithProperties(
-			long userId, long groupId, String[] names)
+	public List<AssetTag> checkTags(long userId, long groupId, String[] names)
 		throws PortalException, SystemException {
 
 		List<AssetTag> tags = new ArrayList<AssetTag>();
@@ -185,7 +177,7 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 			try {
 				tag = getTag(groupId, name);
 			}
-			catch (NoSuchTagException nste) {
+			catch (NoSuchTagException nste1) {
 				ServiceContext serviceContext = new ServiceContext();
 
 				serviceContext.setAddGroupPermissions(true);
@@ -196,19 +188,16 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 					userId, name, PropsValues.ASSET_TAG_PROPERTIES_DEFAULT,
 					serviceContext);
 
-				// Properties
-
-				Group companyGroup =
-					groupLocalService.getCompanyGroup(
-						CompanyThreadLocal.getCompanyId());
+				Group companyGroup = groupLocalService.getCompanyGroup(
+					CompanyThreadLocal.getCompanyId());
 
 				try {
-					AssetTag globalTag = getTag(
+					AssetTag companyGroupTag = getTag(
 						companyGroup.getGroupId(), name);
 
 					List<AssetTagProperty> tagProperties =
 						assetTagPropertyLocalService.getTagProperties(
-							globalTag.getTagId());
+							companyGroupTag.getTagId());
 
 					for (AssetTagProperty tagProperty : tagProperties) {
 						assetTagPropertyLocalService.addTagProperty(
