@@ -1806,7 +1806,7 @@ public class DataFactory {
 					plid, portletId, PortletConstants.DEFAULT_PREFERENCES);
 			}
 
-			values = getCategoryFilterValues(assetCategoryModels, index);
+			values = getAssetCategoryFilterValues(assetCategoryModels, index);
 
 			type = "assetCategories";
 		}
@@ -1819,7 +1819,7 @@ public class DataFactory {
 					plid, portletId, PortletConstants.DEFAULT_PREFERENCES);
 			}
 
-			values = getTagFilterValues(assetTagModels, index);
+			values = getAssetTagFilterValues(assetTagModels, index);
 
 			type = "assetTags";
 		}
@@ -2233,7 +2233,7 @@ public class DataFactory {
 		return userName;
 	}
 
-	protected String[] getCategoryFilterValues(
+	protected String[] getAssetCategoryFilterValues(
 		List<AssetCategoryModel> assetCategoryModels, int index) {
 
 		int index1 = index + _maxAssetEntryToAssetCategoryCount;
@@ -2254,7 +2254,7 @@ public class DataFactory {
 		String value2 = String.valueOf(assetCategoryModel2.getCategoryId());
 		String value3 = String.valueOf(assetCategoryModel3.getCategoryId());
 
-		return new String[]{value0, value1, value2, value3};
+		return new String[] {value0, value1, value2, value3};
 	}
 
 	protected InputStream getResourceInputStream(String resourceName) {
@@ -2266,7 +2266,7 @@ public class DataFactory {
 			_DEPENDENCIES_DIR + resourceName);
 	}
 
-	protected String[] getTagFilterValues(
+	protected String[] getAssetTagFilterValues(
 		List<AssetTagModel> assetTagModels, int index) {
 
 		int index1 = index + _maxAssetEntryToAssetTagCount;
