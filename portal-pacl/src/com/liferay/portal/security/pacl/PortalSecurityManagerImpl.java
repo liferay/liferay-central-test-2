@@ -431,8 +431,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		new AutoResetThreadLocal<ClassLoader>(
 			PortalSecurityManagerImpl.class +
 				"._checkMembersAccessClassLoader");
-
-	private static final RuntimePermission _checkMemberAccessPermission =
+	private static RuntimePermission _checkMemberAccessPermission =
 		new RuntimePermission("accessDeclaredMembers");
 
 	private Policy _policy;
