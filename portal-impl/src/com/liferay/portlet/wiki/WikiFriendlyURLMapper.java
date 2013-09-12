@@ -35,8 +35,8 @@ public class WikiFriendlyURLMapper extends DefaultFriendlyURLMapper {
 
 		buildRouteParameters(liferayPortletURL, routeParameters);
 
-		_populateParameter("nodeName", routeParameters);
-		_populateParameter("title", routeParameters);
+		addParameter(routeParameters, "nodeName");
+		addParameter(routeParameters, "title");
 
 		String friendlyURLPath = router.parametersToUrl(routeParameters);
 
@@ -52,30 +52,30 @@ public class WikiFriendlyURLMapper extends DefaultFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
+	protected void addParameter(
+		Map<String, String> routeParameters, String name) {
+
+		if (!routeParameters.containsKey(name)) {
+			return;
+		}
+
+		String nodeName = routeParameters.get(name);
+
+		nodeName = StringUtil.replace(
+			nodeName, _ESCAPED_CHARS, _UNESCAPED_CHARS);
+
+		routeParameters.put(name, nodeName);
+	}
+
 	@Override
 	protected void populateParams(
 		Map<String, String[]> parameterMap, String namespace,
 		Map<String, String> routeParameters) {
 
-		_populateParameter("nodeName", routeParameters);
-		_populateParameter("title", routeParameters);
+		addParameter(routeParameters, "nodeName");
+		addParameter(routeParameters, "title");
 
 		super.populateParams(parameterMap, namespace, routeParameters);
-	}
-
-	private void _populateParameter(
-		String parameterName, Map<String, String> routeParameters) {
-
-		if (!routeParameters.containsKey(parameterName)) {
-			return;
-		}
-
-		String nodeName = routeParameters.get(parameterName);
-
-		nodeName = StringUtil.replace(
-			nodeName, _ESCAPED_CHARS, _UNESCAPED_CHARS);
-
-		routeParameters.put(parameterName, nodeName);
 	}
 
 	private static final String[] _ESCAPED_CHARS = new String[] {
