@@ -44,6 +44,19 @@
 				[$FOLDER_ID$]
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByAnyImageId">
+		<![CDATA[
+			SELECT
+				{DLFileEntry.*}
+			FROM
+				DLFileEntry
+			WHERE
+				(DLFileEntry.smallImageId = ?) OR
+				(DLFileEntry.largeImageId = ?) OR
+				(DLFileEntry.custom1ImageId = ?) OR
+				(DLFileEntry.custom2ImageId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByCompanyId">
 		<![CDATA[
 			SELECT
@@ -63,19 +76,6 @@
 				) TEMP_TABLE
 				INNER JOIN
 					DLFileEntry ON TEMP_TABLE.fileEntryId = DLFileEntry.fileEntryId
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByAnyImageId">
-		<![CDATA[
-			SELECT
-				{DLFileEntry.*}
-			FROM
-				DLFileEntry
-			WHERE
-				(DLFileEntry.smallImageId = ?) OR
-				(DLFileEntry.largeImageId = ?) OR
-				(DLFileEntry.custom1ImageId = ?) OR
-				(DLFileEntry.custom2ImageId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByDDMStructureIds">

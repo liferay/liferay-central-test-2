@@ -404,18 +404,18 @@ public abstract class BaseSearchTestCase {
 		baseModel = addBaseModel(
 			null, true, getSearchKeywords(), serviceContext);
 
-		BaseModel<?> parentBaseModel = getParentBaseModel(
+		BaseModel<?> parentBaseModel1 = getParentBaseModel(
 			group, serviceContext);
 
-		searchContext.setKeywords(getSearchKeywords());
 		searchContext.setFolderIds(
-			new long[] {(Long)parentBaseModel.getPrimaryKeyObj()});
+			new long[] {(Long)parentBaseModel1.getPrimaryKeyObj()});
+		searchContext.setKeywords(getSearchKeywords());
 
 		int initialBaseModelsSearchCount = searchBaseModelsCount(
 			getBaseModelClass(), group.getGroupId(), searchContext);
 
 		baseModel = addBaseModel(
-			parentBaseModel, true, getSearchKeywords(), serviceContext);
+			parentBaseModel1, true, getSearchKeywords(), serviceContext);
 
 		Assert.assertEquals(
 			initialBaseModelsSearchCount + 1,
@@ -423,7 +423,7 @@ public abstract class BaseSearchTestCase {
 				getBaseModelClass(), group.getGroupId(), searchContext));
 
 		BaseModel<?> parentBaseModel2 = getParentBaseModel(
-			parentBaseModel, serviceContext);
+			parentBaseModel1, serviceContext);
 
 		baseModel = addBaseModel(
 			parentBaseModel2, true, getSearchKeywords(), serviceContext);
