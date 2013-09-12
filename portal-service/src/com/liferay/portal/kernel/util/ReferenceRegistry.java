@@ -77,6 +77,14 @@ public class ReferenceRegistry {
 		_referenceEntries.clear();
 	}
 
+	public static interface PACL {
+
+		public ReferenceEntry getReferenceEntry(
+				Class<?> clazz, Object object, String fieldName)
+			throws NoSuchFieldException, SecurityException;
+
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(ReferenceRegistry.class);
 
 	private static PACL _pacl = new NoPACL();
@@ -94,14 +102,6 @@ public class ReferenceRegistry {
 
 			return new ReferenceEntry(object, field);
 		}
-
-	}
-
-	public static interface PACL {
-
-		public ReferenceEntry getReferenceEntry(
-				Class<?> clazz, Object object, String fieldName)
-			throws NoSuchFieldException, SecurityException;
 
 	}
 
