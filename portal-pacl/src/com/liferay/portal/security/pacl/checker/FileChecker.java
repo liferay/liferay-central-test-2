@@ -214,12 +214,15 @@ public class FileChecker extends BaseChecker {
 
 		Package callerClass1Package = callerClass1.getPackage();
 
-		if ((callerClass1Package != null) &&
-			callerClass1Package.getName().startsWith("java.") &&
-			!callerClass1.equals(ProcessBuilder.class) &&
-			isTrustedCaller(callerClass2, permission)) {
+		if (callerClass1Package != null) {
+			String callerClass1PackageName = callerClass1Package.getName();
 
-			return true;
+			if (callerClass1PackageName.startsWith("java.") &&
+				!callerClass1.equals(ProcessBuilder.class) &&
+				isTrustedCaller(callerClass2, permission)) {
+
+				return true;
+			}
 		}
 
 		logSecurityException(
