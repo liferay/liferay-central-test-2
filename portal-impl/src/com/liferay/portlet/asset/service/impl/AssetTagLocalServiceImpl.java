@@ -187,7 +187,8 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 					userId, name, PropsValues.ASSET_TAG_PROPERTIES_DEFAULT,
 					serviceContext);
 
-				Group group = groupLocalService.getGroup(groupId);
+				Group group = groupPersistence.findByPrimaryKey(groupId);
+
 				Group companyGroup = groupLocalService.getCompanyGroup(
 					group.getCompanyId());
 
