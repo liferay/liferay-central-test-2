@@ -2257,15 +2257,6 @@ public class DataFactory {
 		return new String[] {value0, value1, value2, value3};
 	}
 
-	protected InputStream getResourceInputStream(String resourceName) {
-		Class<?> clazz = getClass();
-
-		ClassLoader classLoader = clazz.getClassLoader();
-
-		return classLoader.getResourceAsStream(
-			_DEPENDENCIES_DIR + resourceName);
-	}
-
 	protected String[] getAssetTagFilterValues(
 		List<AssetTagModel> assetTagModels, int index) {
 
@@ -2285,6 +2276,15 @@ public class DataFactory {
 		return new String[] {
 			assetTagModel0.getName(), assetTagModel1.getName(),
 			assetTagModel2.getName(), assetTagModel3.getName()};
+	}
+
+	protected InputStream getResourceInputStream(String resourceName) {
+		Class<?> clazz = getClass();
+
+		ClassLoader classLoader = clazz.getClassLoader();
+
+		return classLoader.getResourceAsStream(
+			_DEPENDENCIES_DIR + resourceName);
 	}
 
 	protected AssetCategoryModel newAssetCategoryModel(
