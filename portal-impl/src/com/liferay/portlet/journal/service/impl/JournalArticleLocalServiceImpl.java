@@ -3386,7 +3386,7 @@ public class JournalArticleLocalServiceImpl
 	public void rebuildTree(long companyId)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByC_NotS(
+		List<JournalArticle> articles = journalArticlePersistence.findByC_NotST(
 			companyId, WorkflowConstants.STATUS_IN_TRASH);
 
 		for (JournalArticle article : articles) {
