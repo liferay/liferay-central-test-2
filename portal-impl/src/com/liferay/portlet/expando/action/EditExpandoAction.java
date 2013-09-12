@@ -164,6 +164,7 @@ public class EditExpandoAction extends PortletAction {
 		throws Exception {
 
 		int type = 0;
+
 		UnicodeProperties properties = null;
 
 		try {
