@@ -55,8 +55,8 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 
 	public void mark() {
 		for (PortletData portletData : _portletDataMap.values()) {
-			_addToIndexList(portletData._callbackSB);
-			_addToIndexList(portletData._rawSB);
+			_addToSBIndexList(portletData._callbackSB);
+			_addToSBIndexList(portletData._rawSB);
 		}
 	}
 
@@ -130,7 +130,7 @@ public class ScriptData implements Mergeable<ScriptData>, Serializable {
 		writer.write("\n// ]]>\n</script>");
 	}
 
-	private void _addToIndexList(StringBundler sb) {
+	private void _addToSBIndexList(StringBundler sb) {
 		ObjectValuePair<StringBundler, Integer> ovp =
 			new ObjectValuePair<StringBundler, Integer>(sb, sb.index());
 
