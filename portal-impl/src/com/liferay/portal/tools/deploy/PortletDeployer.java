@@ -177,7 +177,8 @@ public class PortletDeployer extends BaseDeployer {
 		for (Element portletElement : portletElements) {
 			String portletName = PortalUtil.getJsSafePortletId(
 				portletElement.elementText("portlet-name"));
-			String portletClass = portletElement.elementText("portlet-class");
+			String portletClassName = portletElement.elementText(
+				"portlet-class");
 
 			String servletName = portletName + " Servlet";
 
@@ -191,7 +192,7 @@ public class PortletDeployer extends BaseDeployer {
 			sb.append("<init-param>");
 			sb.append("<param-name>portlet-class</param-name>");
 			sb.append("<param-value>");
-			sb.append(portletClass);
+			sb.append(portletClassName);
 			sb.append("</param-value>");
 			sb.append("</init-param>");
 			sb.append("<load-on-startup>1</load-on-startup>");
@@ -218,24 +219,29 @@ public class PortletDeployer extends BaseDeployer {
 		List<Element> portletElements = rootElement.elements("portlet");
 
 		for (Element portletElement : portletElements) {
-			String portletClass = portletElement.elementText("portlet-class");
+			String portletClassName = portletElement.elementText(
+				"portlet-class");
 
-			if (portletClass.contains(AlloyPortlet.class.getSimpleName())) {
-				String[] dirNames = FileUtil.listDirs(srcFile + "/WEB-INF/jsp");
+			if (!portletClassName.contains(
+					AlloyPortlet.class.getSimpleName())) {
 
-				for (String dirName : dirNames) {
-					File dir = new File(
-						srcFile + "/WEB-INF/jsp/" + dirName + "/views");
+				continue;
+			}
 
-					if (!dir.exists() || !dir.isDirectory()) {
-						continue;
-					}
+			String[] dirNames = FileUtil.listDirs(srcFile + "/WEB-INF/jsp");
 
-					copyDependencyXml("touch.jsp", dir.toString());
+			for (String dirName : dirNames) {
+				File dir = new File(
+					srcFile + "/WEB-INF/jsp/" + dirName + "/views");
+
+				if (!dir.exists() || !dir.isDirectory()) {
+					continue;
 				}
 
-				break;
+				copyDependencyXml("touch.jsp", dir.toString());
 			}
+
+			break;
 		}
 	}
 
