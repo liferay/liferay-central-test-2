@@ -383,8 +383,7 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 	@Override
 	public String getPortletFileEntryURL(
-			ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString)
-		throws PortalException, SystemException {
+		ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString) {
 
 		return getPortletFileEntryURL(
 			themeDisplay, fileEntry, queryString, true);
@@ -392,9 +391,8 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 	@Override
 	public String getPortletFileEntryURL(
-			ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString,
-			boolean absoluteURL)
-		throws PortalException, SystemException {
+		ThemeDisplay themeDisplay, FileEntry fileEntry, String queryString,
+		boolean absoluteURL) {
 
 		StringBundler sb = new StringBundler(10);
 
