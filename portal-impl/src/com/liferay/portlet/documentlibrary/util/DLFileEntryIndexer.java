@@ -438,16 +438,16 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			}
 
 			if (!dlFileEntry.isInTrash() && dlFileEntry.isInTrashContainer()) {
-				DLFolder folder = (DLFolder)dlFileEntry.getTrashContainer();
+				DLFolder dlFolder = dlFileEntry.getTrashContainer();
 
 				addTrashFields(
-					document, DLFolder.class.getName(), folder.getFolderId(),
+					document, DLFolder.class.getName(), dlFolder.getFolderId(),
 					null, null, DLFileEntryAssetRendererFactory.TYPE);
 
 				document.addKeyword(
 					Field.ROOT_ENTRY_CLASS_NAME, DLFolder.class.getName());
 				document.addKeyword(
-					Field.ROOT_ENTRY_CLASS_PK, folder.getFolderId());
+					Field.ROOT_ENTRY_CLASS_PK, dlFolder.getFolderId());
 				document.addKeyword(
 					Field.STATUS, WorkflowConstants.STATUS_IN_TRASH);
 			}
