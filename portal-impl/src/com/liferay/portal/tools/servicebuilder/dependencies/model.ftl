@@ -99,7 +99,7 @@ public interface ${entity.name}Model extends
 		<#assign overrideColumnNames = overrideColumnNames + ["companyId", "createDate", "modifiedDate", "stagedModelType", "uuid"]>
 	</#if>
 
-	<#if entity.isTrashedModel()>
+	<#if entity.isTrashEnabled()>
 		, TrashedModel
 
 		<#assign overrideColumnNames = overrideColumnNames + ["status"]>
@@ -333,7 +333,7 @@ public interface ${entity.name}Model extends
 		</#if>
 	</#list>
 
-	<#if entity.isTrashedModel()>
+	<#if entity.isTrashEnabled()>
 		<#if !entity.isWorkflowEnabled()>
 			/**
 			 * Returns the status of this ${entity.humanName}.

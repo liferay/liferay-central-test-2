@@ -470,7 +470,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 		}
 	</#if>
 
-	<#if entity.isTrashedModel()>
+	<#if entity.isTrashEnabled()>
 		<#if !entity.isWorkflowEnabled()>
 			@Override
 			public int getStatus() {

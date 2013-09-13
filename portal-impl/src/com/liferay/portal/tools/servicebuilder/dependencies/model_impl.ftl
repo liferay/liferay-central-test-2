@@ -731,7 +731,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 	</#if>
 
-	<#if entity.isTrashedModel()>
+	<#if entity.isTrashEnabled()>
 		<#if !entity.isWorkflowEnabled()>
 			@Override
 			public int getStatus() {
