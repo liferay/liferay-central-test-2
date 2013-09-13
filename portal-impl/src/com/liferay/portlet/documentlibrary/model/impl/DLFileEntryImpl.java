@@ -272,7 +272,7 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 			return dlFileVersion.getStatus();
 		}
 		catch (Exception e) {
-			return -1;
+			return WorkflowConstants.STATUS_APPROVED;
 		}
 	}
 
