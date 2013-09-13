@@ -105,13 +105,13 @@ public class UserNotificationDeliveryLocalServiceImpl
 
 	@Override
 	public UserNotificationDelivery updateUserNotificationDelivery(
-			long userNotificationDeliveryId, boolean isDeliver)
+			long userNotificationDeliveryId, boolean deliver)
 		throws SystemException {
 
 		UserNotificationDelivery userNotificationDelivery =
 			fetchUserNotificationDelivery(userNotificationDeliveryId);
 
-		userNotificationDelivery.setDeliver(isDeliver);
+		userNotificationDelivery.setDeliver(deliver);
 
 		return userNotificationDeliveryPersistence.update(
 			userNotificationDelivery);
