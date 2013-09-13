@@ -165,15 +165,6 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 	}
 
 	@Override
-	public void checkTags(long userId, long groupId, String[] names)
-		throws PortalException, SystemException {
-
-		Group group = groupPersistence.findByPrimaryKey(groupId);
-
-		checkTags(userId, group, names);
-	}
-
-	@Override
 	public List<AssetTag> checkTags(long userId, Group group, String[] names)
 		throws PortalException, SystemException {
 
@@ -223,6 +214,15 @@ public class AssetTagLocalServiceImpl extends AssetTagLocalServiceBaseImpl {
 		}
 
 		return tags;
+	}
+
+	@Override
+	public void checkTags(long userId, long groupId, String[] names)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		checkTags(userId, group, names);
 	}
 
 	@Override
