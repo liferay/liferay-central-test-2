@@ -79,10 +79,10 @@ public class ThemeImporter {
 		sb.append(layout.getLayoutId());
 		sb.append(".zip");
 
-		InputStream themeZip = portletDataContext.getZipEntryAsInputStream(
-			sb.toString());
+		InputStream themeZipInputStream =
+			portletDataContext.getZipEntryAsInputStream(sb.toString());
 
-		if (themeZip != null) {
+		if (themeZipInputStream != null) {
 			String themeId = layout.getThemeId();
 			String colorSchemeId = layout.getColorSchemeId();
 
@@ -98,7 +98,7 @@ public class ThemeImporter {
 			long layoutId = importedLayout.getLayoutId();
 
 			String importThemeId = importTheme(
-				groupId, privateLayout, layoutId, themeZip);
+				groupId, privateLayout, layoutId, themeZipInputStream);
 
 			if (importThemeId != null) {
 				themeId = importThemeId;
@@ -150,13 +150,14 @@ public class ThemeImporter {
 			}
 		}
 
-		InputStream themeZip = null;
+		InputStream themeZipInputStream = null;
 
 		if (importTheme) {
-			themeZip = portletDataContext.getZipEntryAsInputStream("theme.zip");
+			themeZipInputStream = portletDataContext.getZipEntryAsInputStream(
+				"theme.zip");
 		}
 
-		if (themeZip != null) {
+		if (themeZipInputStream != null) {
 			StopWatch stopWatch = null;
 
 			if (_log.isDebugEnabled()) {
@@ -167,7 +168,7 @@ public class ThemeImporter {
 
 			String importThemeId = importTheme(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(), 0,
-				themeZip);
+				themeZipInputStream);
 
 			if (importThemeId != null) {
 				themeId = importThemeId;
@@ -190,7 +191,7 @@ public class ThemeImporter {
 
 	protected String importTheme(
 			long groupId, boolean privateLayout, long layoutId,
-			InputStream themeZip)
+			InputStream themeZipInputStream)
 		throws Exception {
 
 		ThemeLoader themeLoader = ThemeLoaderFactory.getDefaultThemeLoader();
@@ -201,7 +202,8 @@ public class ThemeImporter {
 			return null;
 		}
 
-		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(themeZip);
+		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(
+			themeZipInputStream);
 
 		String lookAndFeelXML = zipReader.getEntryAsString(
 			"liferay-look-and-feel.xml");

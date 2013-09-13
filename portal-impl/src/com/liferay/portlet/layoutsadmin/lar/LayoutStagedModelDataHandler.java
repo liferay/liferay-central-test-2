@@ -219,9 +219,9 @@ public class LayoutStagedModelDataHandler
 			exportLinkedLayout(portletDataContext, layout, layoutElement);
 		}
 
-		exportTheme(portletDataContext, layout);
-
 		fixExportTypeSettings(layout);
+
+		exportTheme(portletDataContext, layout);
 
 		portletDataContext.addClassedModel(
 			layoutElement, ExportImportPathUtil.getModelPath(layout), layout,
