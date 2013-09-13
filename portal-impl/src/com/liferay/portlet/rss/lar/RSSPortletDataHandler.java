@@ -235,14 +235,14 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 
 		importReferenceArticle(portletDataContext, footerArticleElement);
 
+		Map<String, String> articleIds =
+			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
+				JournalArticle.class + ".articleId");
+
 		String[] footerArticleValues = portletPreferences.getValues(
 			"footerArticleValues", new String[] {"0", ""});
 
 		String footerArticleId = footerArticleValues[1];
-
-		Map<String, String> articleIds =
-			(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
-				JournalArticle.class + ".articleId");
 
 		footerArticleId = MapUtil.getString(
 			articleIds, footerArticleId, footerArticleId);

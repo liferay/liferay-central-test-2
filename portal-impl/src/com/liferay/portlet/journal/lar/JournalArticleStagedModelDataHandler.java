@@ -441,12 +441,12 @@ public class JournalArticleStagedModelDataHandler
 			StagedModelDataHandlerUtil.importReferenceStagedModel(
 				portletDataContext, ddmStructure);
 
-			Map<String, String> structureKeys =
+			Map<String, String> ddmStructureKeys =
 				(Map<String, String>)portletDataContext.getNewPrimaryKeysMap(
 					DDMStructure.class + ".ddmStructureKey");
 
 			parentDDMStructureKey = MapUtil.getString(
-				structureKeys, ddmStructure.getStructureKey(),
+				ddmStructureKeys, ddmStructure.getStructureKey(),
 				ddmStructure.getStructureKey());
 		}
 

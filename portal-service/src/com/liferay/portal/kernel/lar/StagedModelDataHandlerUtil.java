@@ -161,8 +161,7 @@ public class StagedModelDataHandlerUtil {
 			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		StagedModel stagedModel = _extractStagedModel(
-			portletDataContext, element);
+		StagedModel stagedModel = _getStagedModel(portletDataContext, element);
 
 		importReferenceStagedModel(portletDataContext, stagedModel);
 	}
@@ -195,8 +194,7 @@ public class StagedModelDataHandlerUtil {
 			PortletDataContext portletDataContext, Element element)
 		throws PortletDataException {
 
-		StagedModel stagedModel = _extractStagedModel(
-			portletDataContext, element);
+		StagedModel stagedModel = _getStagedModel(portletDataContext, element);
 
 		importStagedModel(portletDataContext, stagedModel);
 	}
@@ -212,7 +210,7 @@ public class StagedModelDataHandlerUtil {
 			portletDataContext, stagedModel);
 	}
 
-	private static StagedModel _extractStagedModel(
+	private static StagedModel _getStagedModel(
 		PortletDataContext portletDataContext, Element element) {
 
 		String path = element.attributeValue("path");
