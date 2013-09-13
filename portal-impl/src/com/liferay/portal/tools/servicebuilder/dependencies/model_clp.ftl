@@ -497,7 +497,9 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 
 				while (containerModel != null) {
 					if (containerModel instanceof TrashedModel) {
-						return ((TrashedModel)containerModel).getTrashEntry();
+						TrashedModel trashedModel = (TrashedModel)containerModel;
+
+						return trashedModel.getTrashEntry();
 					}
 
 					trashHandler = TrashHandlerRegistryUtil.getTrashHandler(trashHandler.getContainerModelClassName());
@@ -629,7 +631,7 @@ public class ${entity.name}Clp extends BaseModelImpl<${entity.name}> implements 
 				return true;
 			}
 			else {
-			return false;
+				return false;
 			}
 		}
 

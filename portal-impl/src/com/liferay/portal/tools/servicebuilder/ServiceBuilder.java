@@ -4580,10 +4580,10 @@ public class ServiceBuilder {
 			entityElement.attributeValue("cache-enabled"), true);
 		boolean jsonEnabled = GetterUtil.getBoolean(
 			entityElement.attributeValue("json-enabled"), remoteService);
-		boolean deprecated = GetterUtil.getBoolean(
-			entityElement.attributeValue("deprecated"));
 		boolean trashedModel = GetterUtil.getBoolean(
 			entityElement.attributeValue("trashed-model"));
+		boolean deprecated = GetterUtil.getBoolean(
+			entityElement.attributeValue("deprecated"));
 
 		List<EntityColumn> pkList = new ArrayList<EntityColumn>();
 		List<EntityColumn> regularColList = new ArrayList<EntityColumn>();
@@ -4961,7 +4961,7 @@ public class ServiceBuilder {
 				humanName, table, alias, uuid, uuidAccessor, localService,
 				remoteService, persistenceClass, finderClass, dataSource,
 				sessionFactory, txManager, cacheEnabled, jsonEnabled,
-				deprecated, trashedModel, pkList, regularColList, blobList,
+				trashedModel, deprecated, pkList, regularColList, blobList,
 				collectionList, columnList, order, finderList, referenceList,
 				txRequiredList));
 	}
