@@ -197,8 +197,8 @@ public class LDAPAuth implements Authenticator {
 				else {
 					ldapAuthResult.setAuthenticated(false);
 
-					if (_log.isWarnEnabled()) {
-						_log.warn(
+					if (_log.isDebugEnabled()) {
+						_log.debug(
 							"Passwords do not match for userDN " + userDN);
 					}
 				}
