@@ -282,7 +282,7 @@ public abstract class BaseTrashHandlerTestCase {
 				dynamicQuery.add(
 					classNameIdProperty.eq(systemEventClassNameId));
 
-				if (systemEventSetKey != -1) {
+				if (systemEventSetKey > 0) {
 					Property systemEventSetKeyProperty =
 						PropertyFactoryUtil.forName("systemEventSetKey");
 
@@ -842,8 +842,6 @@ public abstract class BaseTrashHandlerTestCase {
 			initialTrashEntriesCount, getTrashEntriesCount(group.getGroupId()));
 
 		moveBaseModelToTrash((Long)baseModel.getPrimaryKeyObj());
-
-		FinderCacheUtil.clearCache();
 
 		Assert.assertEquals(
 			initialBaseModelsCount,
