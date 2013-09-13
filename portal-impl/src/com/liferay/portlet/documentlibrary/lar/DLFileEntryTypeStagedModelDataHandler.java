@@ -228,11 +228,11 @@ public class DLFileEntryTypeStagedModelDataHandler
 			String uuid, long companyId, long groupId)
 		throws Exception {
 
-		DLFileEntryType fileEntryType =
+		DLFileEntryType dlFileEntryType =
 			DLFileEntryTypeLocalServiceUtil.
 				fetchDLFileEntryTypeByUuidAndGroupId(uuid, groupId);
 
-		if (fileEntryType == null) {
+		if (dlFileEntryType == null) {
 			return false;
 		}
 
