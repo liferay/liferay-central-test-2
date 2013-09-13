@@ -82,6 +82,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	public ContainerModel getContainerModel(long containerModelId)
 		throws PortalException, SystemException {
 
@@ -99,6 +100,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	public List<ContainerModel> getContainerModels(
 			long classPK, long containerModelId, int start, int end)
 		throws PortalException, SystemException {
@@ -107,6 +109,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	public int getContainerModelsCount(long classPK, long containerModelId)
 		throws PortalException, SystemException {
 
@@ -243,6 +246,7 @@ public abstract class BaseTrashHandler implements TrashHandler {
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	public TrashEntry getTrashEntry(long classPK)
 		throws PortalException, SystemException {
 
