@@ -20,8 +20,6 @@ import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
@@ -297,9 +295,9 @@ public abstract class BaseTrashHandlerTestCase {
 			}
 
 			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
+			protected void performAction(Object object) {
 			}
+
 		};
 
 		actionableDynamicQuery.setGroupId(group.getGroupId());
