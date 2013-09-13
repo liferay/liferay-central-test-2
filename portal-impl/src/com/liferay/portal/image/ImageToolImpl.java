@@ -609,10 +609,10 @@ public class ImageToolImpl implements ImageTool {
 				type = "jpeg";
 			}
 
-			ImageDecoder decoder = ImageCodec.createImageDecoder(
+			ImageDecoder imageDecoder = ImageCodec.createImageDecoder(
 				type, new UnsyncByteArrayInputStream(bytes), null);
 
-			renderedImage = decoder.decodeAsRenderedImage();
+			renderedImage = imageDecoder.decodeAsRenderedImage();
 		}
 		catch (IOException ioe) {
 			if (_log.isDebugEnabled()) {
