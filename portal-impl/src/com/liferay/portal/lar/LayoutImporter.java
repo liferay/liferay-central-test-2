@@ -197,7 +197,6 @@ public class LayoutImporter {
 			parameterMap, PortletDataHandlerKeys.CATEGORIES);
 		boolean importPermissions = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PERMISSIONS);
-
 		boolean importLogo = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.LOGO);
 		boolean importLayoutSetSettings = MapUtil.getBoolean(

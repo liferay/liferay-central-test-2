@@ -70,9 +70,9 @@ public class ThemeExporter {
 			sb.append(String.valueOf(layout.getLayoutId()));
 			sb.append(".zip");
 
-			File themeZip = new File(sb.toString());
+			File themeZipFile = new File(sb.toString());
 
-			exportTheme(theme, themeZip);
+			exportTheme(theme, themeZipFile);
 		}
 	}
 
@@ -106,9 +106,9 @@ public class ThemeExporter {
 
 			ZipWriter zipWriter = portletDataContext.getZipWriter();
 
-			File themeZip = new File(zipWriter.getPath() + "/theme.zip");
+			File themeZipFile = new File(zipWriter.getPath() + "/theme.zip");
 
-			exportTheme(theme, themeZip);
+			exportTheme(theme, themeZipFile);
 		}
 
 		Element cssElement = headerElement.addElement("css");
@@ -116,7 +116,9 @@ public class ThemeExporter {
 		cssElement.addCDATA(layoutSet.getCss());
 	}
 
-	protected void exportTheme(Theme theme, File themeZip) throws Exception {
+	protected void exportTheme(Theme theme, File themeZipFile)
+		throws Exception {
+
 		String lookAndFeelXML = ContentUtil.get(
 			"com/liferay/portal/dependencies/liferay-look-and-feel.xml.tmpl");
 
@@ -145,7 +147,8 @@ public class ThemeExporter {
 			return;
 		}
 
-		ZipWriter themeZipWriter = ZipWriterFactoryUtil.getZipWriter(themeZip);
+		ZipWriter themeZipWriter = ZipWriterFactoryUtil.getZipWriter(
+			themeZipFile);
 
 		themeZipWriter.addEntry("liferay-look-and-feel.xml", lookAndFeelXML);
 
