@@ -1206,26 +1206,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		return company;
 	}
 
-	protected void deleteGroup(Group group)
-		throws PortalException, SystemException {
-
-		RecursiveDeleteGroupActionableDynamicQuery
-			recursiveDeleteGroupActionableDynamicQuery =
-				new RecursiveDeleteGroupActionableDynamicQuery();
-
-		recursiveDeleteGroupActionableDynamicQuery.setCompanyId(
-			group.getCompanyId());
-
-		recursiveDeleteGroupActionableDynamicQuery.setParentGroupId(
-			group.getGroupId());
-
-		recursiveDeleteGroupActionableDynamicQuery.performActions();
-
-		groupLocalService.deleteGroup(group);
-
-		LiveUsers.deleteGroup(group.getCompanyId(), group.getGroupId());
-	}
-
 	protected Company doDeleteCompany(long companyId)
 		throws PortalException, SystemException {
 
@@ -1284,14 +1264,14 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		for (String groupName : systemGroups) {
 			Group group = groupLocalService.getGroup(companyId, groupName);
 
-			deleteGroup(group);
+			recursiveDeleteGroupActionableDynamicQuery.deleteGroup(group);
 		}
 
 		// Company Group
 
 		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
 
-		deleteGroup(companyGroup);
+		recursiveDeleteGroupActionableDynamicQuery.deleteGroup(companyGroup);
 
 		// LayoutPrototype
 
@@ -1564,6 +1544,26 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			super();
 		}
 
+		public void deleteGroup(Group group)
+			throws PortalException, SystemException {
+
+			RecursiveDeleteGroupActionableDynamicQuery
+				recursiveDeleteGroupActionableDynamicQuery =
+					new RecursiveDeleteGroupActionableDynamicQuery();
+
+			recursiveDeleteGroupActionableDynamicQuery.setCompanyId(
+				group.getCompanyId());
+
+			recursiveDeleteGroupActionableDynamicQuery.setParentGroupId(
+				group.getGroupId());
+
+			recursiveDeleteGroupActionableDynamicQuery.performActions();
+
+			groupLocalService.deleteGroup(group);
+
+			LiveUsers.deleteGroup(group.getCompanyId(), group.getGroupId());
+		}
+
 		public void setParentGroupId(long parentGroupId) {
 			_parentGroupId = parentGroupId;
 		}
@@ -1605,19 +1605,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			super();
 		}
 
-		public void setParentOrganizationId(long parentOrganizationId) {
-			_parentOrganizationId = parentOrganizationId;
-		}
-
-		@Override
-		protected void addCriteria(DynamicQuery dynamicQuery) {
-			Property property = PropertyFactoryUtil.forName(
-				"parentOrganizationId");
-
-			dynamicQuery.add(property.eq(_parentOrganizationId));
-		}
-
-		protected void deleteOrganization(Organization organization)
+		public void deleteOrganization(Organization organization)
 			throws PortalException, SystemException {
 
 			RecursiveDeleteOrganizationActionableDynamicQuery
@@ -1633,6 +1621,18 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			recursiveDeleteOrganizationActionableDynamicQuery.performActions();
 
 			organizationLocalService.deleteOrganization(organization);
+		}
+
+		public void setParentOrganizationId(long parentOrganizationId) {
+			_parentOrganizationId = parentOrganizationId;
+		}
+
+		@Override
+		protected void addCriteria(DynamicQuery dynamicQuery) {
+			Property property = PropertyFactoryUtil.forName(
+				"parentOrganizationId");
+
+			dynamicQuery.add(property.eq(_parentOrganizationId));
 		}
 
 		@Override
