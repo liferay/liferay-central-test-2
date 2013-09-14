@@ -56,7 +56,7 @@ public class ReflectionUtil {
 			return method;
 		}
 
-		Bridge :
+		bridge:
 		for (Method currentMethod : clazz.getMethods()) {
 			if (!currentMethod.isBridge() ||
 				!name.equals(currentMethod.getName())) {
@@ -75,7 +75,7 @@ public class ReflectionUtil {
 				if (!currentParameterTypes[i].isAssignableFrom(
 						parameterTypes[i])) {
 
-					continue Bridge;
+					continue bridge;
 				}
 			}
 
