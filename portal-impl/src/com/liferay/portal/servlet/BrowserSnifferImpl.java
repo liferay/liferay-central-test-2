@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,7 +68,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	@Override
 	public String getRevision(HttpServletRequest request) {
 		String revision = (String)request.getAttribute(
-			_BROWSER_SNIFFER_REVISION);
+			WebKeys.BROWSER_SNIFFER_REVISION);
 
 		if (revision != null) {
 			return revision;
@@ -76,14 +77,15 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		revision = parseVersion(
 			getUserAgent(request), _revisionLeadings, _revisionSeparators);
 
-		request.setAttribute(_BROWSER_SNIFFER_REVISION, revision);
+		request.setAttribute(WebKeys.BROWSER_SNIFFER_REVISION, revision);
 
 		return revision;
 	}
 
 	@Override
 	public String getVersion(HttpServletRequest request) {
-		String version = (String)request.getAttribute(_BROWSER_SNIFFER_VERSION);
+		String version = (String)request.getAttribute(
+			WebKeys.BROWSER_SNIFFER_VERSION);
 
 		if (version != null) {
 			return version;
@@ -92,7 +94,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		version = parseVersion(
 			getUserAgent(request), _versionLeadings, _versionSeparators);
 
-		request.setAttribute(_BROWSER_SNIFFER_VERSION, version);
+		request.setAttribute(WebKeys.BROWSER_SNIFFER_VERSION, version);
 
 		return version;
 	}
@@ -497,12 +499,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 		return false;
 	}
-
-	private static final String _BROWSER_SNIFFER_REVISION =
-		"BROWSER_SNIFFER_REVISION";
-
-	private static final String _BROWSER_SNIFFER_VERSION =
-		"BROWSER_SNIFFER_VERSION";
 
 	private static final String[] _FIREFOX_ALIASES = {
 		"firefox", "minefield", "granparadiso", "bonecho", "firebird",
