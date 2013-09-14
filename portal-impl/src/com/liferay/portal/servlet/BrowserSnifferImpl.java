@@ -471,9 +471,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 			String major = userAgent.substring(majorStart, majorEnd);
 
 			if (userAgent.charAt(majorEnd) != '.') {
-
-				// No minor
-
 				return major;
 			}
 
