@@ -361,6 +361,69 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
+	protected String getAccept(HttpServletRequest request) {
+		String accept = StringPool.BLANK;
+
+		if (request == null) {
+			return accept;
+		}
+
+		accept = String.valueOf(request.getAttribute(HttpHeaders.ACCEPT));
+
+		if (Validator.isNotNull(accept)) {
+			return accept;
+		}
+
+		accept = request.getHeader(HttpHeaders.ACCEPT);
+
+		if (accept != null) {
+			accept = StringUtil.toLowerCase(accept);
+		}
+		else {
+			accept = StringPool.BLANK;
+		}
+
+		request.setAttribute(HttpHeaders.ACCEPT, accept);
+
+		return accept;
+	}
+
+	protected String getUserAgent(HttpServletRequest request) {
+		String userAgent = StringPool.BLANK;
+
+		if (request == null) {
+			return userAgent;
+		}
+
+		userAgent = String.valueOf(
+			request.getAttribute(HttpHeaders.USER_AGENT));
+
+		if (Validator.isNotNull(userAgent)) {
+			return userAgent;
+		}
+
+		userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+
+		if (userAgent != null) {
+			userAgent = StringUtil.toLowerCase(userAgent);
+		}
+		else {
+			userAgent = StringPool.BLANK;
+		}
+
+		request.setAttribute(HttpHeaders.USER_AGENT, userAgent);
+
+		return userAgent;
+	}
+
+	protected boolean isIe(String userAgent) {
+		if (userAgent.contains("msie") && !userAgent.contains("opera")) {
+			return true;
+		}
+
+		return false;
+	}
+
 	protected String parseVersion(
 		String userAgent, String[] leadings, char[] separators) {
 
@@ -435,69 +498,6 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 
 		return StringPool.BLANK;
-	}
-
-	protected String getAccept(HttpServletRequest request) {
-		String accept = StringPool.BLANK;
-
-		if (request == null) {
-			return accept;
-		}
-
-		accept = String.valueOf(request.getAttribute(HttpHeaders.ACCEPT));
-
-		if (Validator.isNotNull(accept)) {
-			return accept;
-		}
-
-		accept = request.getHeader(HttpHeaders.ACCEPT);
-
-		if (accept != null) {
-			accept = StringUtil.toLowerCase(accept);
-		}
-		else {
-			accept = StringPool.BLANK;
-		}
-
-		request.setAttribute(HttpHeaders.ACCEPT, accept);
-
-		return accept;
-	}
-
-	protected String getUserAgent(HttpServletRequest request) {
-		String userAgent = StringPool.BLANK;
-
-		if (request == null) {
-			return userAgent;
-		}
-
-		userAgent = String.valueOf(
-			request.getAttribute(HttpHeaders.USER_AGENT));
-
-		if (Validator.isNotNull(userAgent)) {
-			return userAgent;
-		}
-
-		userAgent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (userAgent != null) {
-			userAgent = StringUtil.toLowerCase(userAgent);
-		}
-		else {
-			userAgent = StringPool.BLANK;
-		}
-
-		request.setAttribute(HttpHeaders.USER_AGENT, userAgent);
-
-		return userAgent;
-	}
-
-	protected boolean isIe(String userAgent) {
-		if (userAgent.contains("msie") && !userAgent.contains("opera")) {
-			return true;
-		}
-
-		return false;
 	}
 
 	private static final String[] _FIREFOX_ALIASES = {
