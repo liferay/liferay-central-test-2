@@ -362,18 +362,18 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 	protected static String parseVersion(
 		String userAgent, String[] leadings, char[] separators) {
 
-		Leading :
+		leading:
 		for (String leading : leadings) {
 			int index = 0;
 
-			Version :
+			version:
 			while (true) {
 				index = userAgent.indexOf(leading, index);
 
 				if ((index < 0) ||
 					(((index += leading.length()) + 2) > userAgent.length())) {
 
-					continue Leading;
+					continue leading;
 				}
 
 				char c1 = userAgent.charAt(index);
@@ -382,7 +382,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 				if (((c2 > '0') && (c2 < '9')) || (c2 == '.')) {
 					for (char separator : separators) {
 						if (c1 == separator) {
-							break Version;
+							break version;
 						}
 					}
 				}
