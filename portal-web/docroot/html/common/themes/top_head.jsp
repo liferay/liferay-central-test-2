@@ -40,12 +40,10 @@ if (!themeDisplay.isSignedIn() && layout.isPublicLayout()) {
 	Locale[] availableLocales = LanguageUtil.getAvailableLocales(themeDisplay.getSiteGroupId());
 
 	if (availableLocales.length > 1) {
-		Locale defaultLocale = LocaleUtil.getDefault();
-
 		for (Locale availableLocale : availableLocales) {
 	%>
 
-			<c:if test="<%= availableLocale.equals(defaultLocale) %>">
+			<c:if test="<%= availableLocale.equals(LocaleUtil.getDefault()) %>">
 				<link href="<%= canonicalURL %>" hreflang="x-default" rel="alternate" />
 			</c:if>
 
