@@ -320,6 +320,8 @@
 	<c:otherwise>
 
 		<%
+		String path = themeDisplay.getCDNHost().concat(themeDisplay.getPathJavaScript());
+
 		String[] javaScriptFiles = null;
 
 		if (themeDisplay.isThemeJsBarebone()) {
@@ -328,8 +330,6 @@
 		else {
 			javaScriptFiles = JavaScriptBundleUtil.getFileNames(PropsKeys.JAVASCRIPT_EVERYTHING_FILES);
 		}
-
-		String path = themeDisplay.getCDNHost().concat(themeDisplay.getPathJavaScript());
 
 		for (String javaScriptFile : javaScriptFiles) {
 		%>
