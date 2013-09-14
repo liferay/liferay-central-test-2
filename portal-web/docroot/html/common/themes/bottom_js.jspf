@@ -123,17 +123,15 @@ if (layout != null) {
 							layoutIds: [
 
 								<%
-								PermissionChecker themeDisplayPermissionChecker = themeDisplay.getPermissionChecker();
-
 								for (int i = 0; (layouts != null) && (i < layouts.size()); i++) {
 									Layout curLayout = (Layout)layouts.get(i);
 								%>
 
 									{
-										deletable: <%= LayoutPermissionUtil.contains(themeDisplayPermissionChecker, curLayout, ActionKeys.DELETE) %>,
+										deletable: <%= LayoutPermissionUtil.contains(permissionChecker, curLayout, ActionKeys.DELETE) %>,
 										id: <%= curLayout.getLayoutId() %>,
-										sortable: <%= GroupPermissionUtil.contains(themeDisplayPermissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && SitesUtil.isLayoutSortable(curLayout) %>,
-										updateable: <%= LayoutPermissionUtil.contains(themeDisplayPermissionChecker, curLayout, ActionKeys.UPDATE) %>
+										sortable: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) && SitesUtil.isLayoutSortable(curLayout) %>,
+										updateable: <%= LayoutPermissionUtil.contains(permissionChecker, curLayout, ActionKeys.UPDATE) %>
 									},
 
 								<%
