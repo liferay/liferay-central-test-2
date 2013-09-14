@@ -1211,45 +1211,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Company
 
-		Company company = companyPersistence.findByPrimaryKey(companyId);
+		Company company = companyPersistence.remove(companyId);
 
-		company.setActive(false);
+		PortalInstances.removeCompany(companyId);
 
-		companyPersistence.update(company);
+		// Account
 
-		// Users
+		accountLocalService.deleteAccount(company.getAccountId());
 
-		ActionableDynamicQuery userActionableDynamicQuery =
-			new UserActionableDynamicQuery() {
-
-			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
-				User user = (User)object;
-
-				if (!user.isDefaultUser()) {
-					userLocalService.deleteUser(user.getUserId());
-				}
-			}
-
-		};
-
-		userActionableDynamicQuery.setCompanyId(companyId);
-
-		userActionableDynamicQuery.performActions();
-
-		// Organizations
-
-		DeleteOrganizationActionableDynamicQuery
-			deleteOrganizationActionableDynamicQuery =
-				new DeleteOrganizationActionableDynamicQuery();
-
-		deleteOrganizationActionableDynamicQuery.setCompanyId(companyId);
-
-		deleteOrganizationActionableDynamicQuery.performActions();
-
-		// Sites
+		// Groups
 
 		DeleteGroupActionableDynamicQuery deleteGroupActionableDynamicQuery =
 			new DeleteGroupActionableDynamicQuery();
@@ -1258,7 +1228,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		deleteGroupActionableDynamicQuery.performActions();
 
-		// System groups
+		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
+
+		deleteGroupActionableDynamicQuery.deleteGroup(companyGroup);
 
 		String[] systemGroups = PortalUtil.getSystemGroups();
 
@@ -1267,12 +1239,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			deleteGroupActionableDynamicQuery.deleteGroup(group);
 		}
-
-		// Company croup
-
-		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
-
-		deleteGroupActionableDynamicQuery.deleteGroup(companyGroup);
 
 		// Layout prototype
 
@@ -1317,11 +1283,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		layoutSetPrototypeActionableDynamicQuery.performActions();
 
-		// Default user
+		// Organizations
 
-		User defaultUser = userLocalService.getDefaultUser(companyId);
+		DeleteOrganizationActionableDynamicQuery
+			deleteOrganizationActionableDynamicQuery =
+				new DeleteOrganizationActionableDynamicQuery();
 
-		userLocalService.deleteUser(defaultUser);
+		deleteOrganizationActionableDynamicQuery.setCompanyId(companyId);
+
+		deleteOrganizationActionableDynamicQuery.performActions();
 
 		// Roles
 
@@ -1352,6 +1322,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		passwordPolicyLocalService.deletePasswordPolicy(defaultPasswordPolicy);
 
+		// Portal preferences
+
+		PortalPreferences portalPreferences =
+			portalPreferencesPersistence.findByO_O(
+				companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY);
+
+		portalPreferencesLocalService.deletePortalPreferences(
+			portalPreferences);
+
 		// Portlets
 
 		List<Portlet> portlets = portletPersistence.findByCompanyId(companyId);
@@ -1362,26 +1341,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		portletLocalService.removeCompanyPortletsPool(companyId);
 
-		// Portal preferences
-
-		PortalPreferences portalPreferences =
-			portalPreferencesPersistence.findByO_O(
-				companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY);
-
-		portalPreferencesLocalService.deletePortalPreferences(
-			portalPreferences);
-
-		// Virtual host
-
-		VirtualHost companyVirtualHost =
-			virtualHostLocalService.fetchVirtualHost(companyId, 0);
-
-		virtualHostLocalService.deleteVirtualHost(companyVirtualHost);
-
-		// Account
-
-		accountLocalService.deleteAccount(company.getAccountId());
-
 		// Shard
 
 		Shard shard = shardLocalService.getShard(
@@ -1389,13 +1348,38 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		shardLocalService.deleteShard(shard);
 
-		// Company
+		// Users
 
-		company = companyPersistence.remove(companyId);
+		ActionableDynamicQuery userActionableDynamicQuery =
+			new UserActionableDynamicQuery() {
 
-		// Portal instance
+			@Override
+			protected void performAction(Object object)
+				throws PortalException, SystemException {
 
-		PortalInstances.removeCompany(companyId);
+				User user = (User)object;
+
+				if (!user.isDefaultUser()) {
+					userLocalService.deleteUser(user.getUserId());
+				}
+			}
+
+		};
+
+		userActionableDynamicQuery.setCompanyId(companyId);
+
+		userActionableDynamicQuery.performActions();
+
+		User defaultUser = userLocalService.getDefaultUser(companyId);
+
+		userLocalService.deleteUser(defaultUser);
+
+		// Virtual host
+
+		VirtualHost companyVirtualHost =
+			virtualHostLocalService.fetchVirtualHost(companyId, 0);
+
+		virtualHostLocalService.deleteVirtualHost(companyVirtualHost);
 
 		return company;
 	}
