@@ -291,7 +291,7 @@ public class DLFileEntryTypeFinderImpl
 			return StringPool.BLANK;
 		}
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append("(SELECT {DLFileEntryType.*} From DLFileEntryType WHERE ");
 		sb.append("((companyId = 0) AND (groupId = 0) AND (");
