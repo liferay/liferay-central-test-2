@@ -361,7 +361,7 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		return false;
 	}
 
-	protected static String parseVersion(
+	protected String parseVersion(
 		String userAgent, String[] leadings, char[] separators) {
 
 		leading:
