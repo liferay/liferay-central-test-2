@@ -37,7 +37,7 @@ if ((folder == null) || folder.isSupportsMetadata()) {
 	fileEntryTypes = DLFileEntryTypeServiceUtil.getFolderFileEntryTypes(PortalUtil.getSiteAndCompanyGroupIds(themeDisplay), folderId, inherited);
 }
 
-boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT);
+boolean hasAddDocumentPermission = DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_DOCUMENT);
 %>
 
 <aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
@@ -72,7 +72,7 @@ boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGr
 		<aui:nav-item href="<%= addRepositoryURL %>" iconClass="icon-hdd" label="repository" />
 	</c:if>
 
-	<c:if test="<%= ((folder == null) || folder.isSupportsMultipleUpload()) && showAddDocument && !fileEntryTypes.isEmpty() %>">
+	<c:if test="<%= ((folder == null) || folder.isSupportsMultipleUpload()) && hasAddDocumentPermission && !fileEntryTypes.isEmpty() %>">
 		<portlet:renderURL var="editFileEntryURL">
 			<portlet:param name="struts_action" value="/document_library/upload_multiple_file_entries" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -85,7 +85,7 @@ boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGr
 	</c:if>
 
 	<c:choose>
-		<c:when test="<%= showAddDocument && (repositoryId != scopeGroupId) %>">
+		<c:when test="<%= hasAddDocumentPermission && (repositoryId != scopeGroupId) %>">
 			<portlet:renderURL var="editFileEntryURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
@@ -97,7 +97,7 @@ boolean showAddDocument = DLFolderPermission.contains(permissionChecker, scopeGr
 
 			<aui:nav-item href="<%= editFileEntryURL %>" iconClass="icon-file" label="basic-document" />
 		</c:when>
-		<c:when test="<%= !fileEntryTypes.isEmpty() && showAddDocument %>">
+		<c:when test="<%= !fileEntryTypes.isEmpty() && hasAddDocumentPermission %>">
 
 			<%
 			for (DLFileEntryType fileEntryType : fileEntryTypes) {

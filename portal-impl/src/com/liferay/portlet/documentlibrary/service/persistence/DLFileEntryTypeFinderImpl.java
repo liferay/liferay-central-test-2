@@ -238,7 +238,7 @@ public class DLFileEntryTypeFinderImpl
 
 			sql = StringUtil.replace(
 				sql, "[$BASIC_DOCUMENT$]",
-				includeBasicDocument(includeBasicFileEntryType));
+				getBasicDocument(includeBasicFileEntryType));
 			sql = StringUtil.replace(
 				sql, "[$GROUP_ID$]", getGroupIds(groupIds));
 			sql = CustomSQLUtil.replaceKeywords(
@@ -286,6 +286,23 @@ public class DLFileEntryTypeFinderImpl
 		}
 	}
 
+	protected String getBasicDocument(boolean includeBasicFileEntryType) {
+		if (!includeBasicFileEntryType) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("(SELECT {DLFileEntryType.*} From DLFileEntryType WHERE ");
+		sb.append("((companyId = 0) AND (groupId = 0) AND (");
+		sb.append("(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) ");
+		sb.append("[$AND_OR_CONNECTOR$] ");
+		sb.append("(description LIKE ? [$AND_OR_NULL_CHECK$]) ");
+		sb.append("))) UNION ALL (");
+
+		return sb.toString();
+	}
+
 	protected String getGroupIds(long[] groupIds) {
 		if (groupIds.length == 0) {
 			return StringPool.BLANK;
@@ -304,23 +321,6 @@ public class DLFileEntryTypeFinderImpl
 		}
 
 		sb.append(") AND");
-
-		return sb.toString();
-	}
-
-	protected String includeBasicDocument(boolean includeBasicFileEntryType) {
-		if (!includeBasicFileEntryType) {
-			return StringPool.BLANK;
-		}
-
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("(SELECT {DLFileEntryType.*} From DLFileEntryType WHERE ");
-		sb.append("((companyId = 0) AND (groupId = 0) AND (");
-		sb.append("(lower(name) LIKE ? [$AND_OR_NULL_CHECK$]) ");
-		sb.append("[$AND_OR_CONNECTOR$] ");
-		sb.append("(description LIKE ? [$AND_OR_NULL_CHECK$]) ");
-		sb.append("))) UNION ALL (");
 
 		return sb.toString();
 	}
