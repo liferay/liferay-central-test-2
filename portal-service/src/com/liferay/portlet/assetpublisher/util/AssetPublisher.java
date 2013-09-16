@@ -157,7 +157,7 @@ public interface AssetPublisher {
 			List<AssetEntry> assetEntries)
 		throws PortalException, SystemException;
 
-	public void processQuery(
+	public void processAssetEntryQuery(
 			User user, PortletPreferences portletPreferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception;

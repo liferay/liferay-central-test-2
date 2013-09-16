@@ -29,7 +29,7 @@ public class CustomUserAttributesAssetEntryQueryProcessor
 	implements AssetEntryQueryProcessor {
 
 	@Override
-	public void adaptAssetEntryQuery(
+	public void processAssetEntryQuery(
 			User user, PortletPreferences preferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception {
