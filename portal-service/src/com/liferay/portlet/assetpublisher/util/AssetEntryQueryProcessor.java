@@ -25,7 +25,7 @@ import javax.portlet.PortletPreferences;
 public interface AssetEntryQueryProcessor {
 
 	public void adaptAssetEntryQuery(
-			User user, PortletPreferences preferences,
+			User user, PortletPreferences portletPreferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception;
 
