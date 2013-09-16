@@ -74,8 +74,8 @@ public interface AssetPublisher {
 	public void checkAssetEntries() throws Exception;
 
 	public List<AssetEntry> getAssetEntries(
-			PortletPreferences preferences, Layout layout, long scopeGroupId,
-			int max, boolean checkPermission)
+			PortletPreferences portletPreferences, Layout layout,
+			long scopeGroupId, int max, boolean checkPermission)
 		throws PortalException, SystemException;
 
 	public List<AssetEntry> getAssetEntries(
@@ -113,20 +113,20 @@ public interface AssetPublisher {
 		Long[] availableClassTypeIds);
 
 	public Map<Locale, String> getEmailAssetEntryAddedBodyMap(
-		PortletPreferences preferences);
+		PortletPreferences portletPreferences);
 
 	public boolean getEmailAssetEntryAddedEnabled(
-		PortletPreferences preferences);
+		PortletPreferences portletPreferences);
 
 	public Map<Locale, String> getEmailAssetEntryAddedSubjectMap(
-		PortletPreferences preferences);
+		PortletPreferences portletPreferences);
 
 	public String getEmailFromAddress(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException;
 
 	public String getEmailFromName(
-			PortletPreferences preferences, long companyId)
+			PortletPreferences portletPreferences, long companyId)
 		throws SystemException;
 
 	public long getGroupIdFromScopeId(
@@ -153,12 +153,12 @@ public interface AssetPublisher {
 		throws PortalException, SystemException;
 
 	public void notifySubscribers(
-			PortletPreferences preferences, long plid, String portletId,
+			PortletPreferences portletPreferences, long plid, String portletId,
 			List<AssetEntry> assetEntries)
 		throws PortalException, SystemException;
 
 	public void processQuery(
-			User user, PortletPreferences preferences,
+			User user, PortletPreferences portletPreferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception;
 
