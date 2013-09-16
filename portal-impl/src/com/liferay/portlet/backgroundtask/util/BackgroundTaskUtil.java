@@ -12,14 +12,16 @@
  * details.
  */
 
-package com.liferay.portlet.backgroundtask.util.comparator;
+package com.liferay.portlet.backgroundtask.util;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.backgroundtask.util.comparator.BackgroundTaskCompletionDateComparator;
+import com.liferay.portlet.backgroundtask.util.comparator.BackgroundTaskCreateDateComparator;
 
 /**
  * @author Eduardo Garcia
  */
-public class BackgroundTaskComparatorUtil {
+public class BackgroundTaskUtil {
 
 	public static OrderByComparator getBackgroundTaskOrderByComparator(
 		String orderByCol, String orderByType) {
