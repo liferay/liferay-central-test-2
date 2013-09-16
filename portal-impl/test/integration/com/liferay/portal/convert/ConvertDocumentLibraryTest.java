@@ -86,8 +86,6 @@ public class ConvertDocumentLibraryTest {
 	public void setUp() throws Exception {
 		FinderCacheUtil.clearCache();
 
-		_originalDLStoreImpl = PropsUtil.get(PropsKeys.DL_STORE_IMPL);
-
 		PropsValues.DL_STORE_IMPL = FileSystemStore.class.getName();
 
 		Store store = (Store)InstanceFactory.newInstance(
@@ -107,10 +105,10 @@ public class ConvertDocumentLibraryTest {
 
 	@After
 	public void tearDown() throws Exception {
-		PropsValues.DL_STORE_IMPL = _originalDLStoreImpl;
+		PropsValues.DL_STORE_IMPL = PropsUtil.get(PropsKeys.DL_STORE_IMPL);
 
 		Store store = (Store)InstanceFactory.newInstance(
-			ClassLoaderUtil.getPortalClassLoader(), _originalDLStoreImpl);
+			ClassLoaderUtil.getPortalClassLoader(), PropsValues.DL_STORE_IMPL);
 
 		StoreFactory.setInstance(store);
 
@@ -154,9 +152,9 @@ public class ConvertDocumentLibraryTest {
 
 		DLFileEntry dlFileEntry = getDLFileEntry(mbMessage);
 
-		String fileEntryTitle = dlFileEntry.getTitle();
+		String title = dlFileEntry.getTitle();
 
-		Assert.assertTrue(fileEntryTitle.endsWith(".docx"));
+		Assert.assertTrue(title.endsWith(".docx"));
 
 		try {
 			DLContentLocalServiceUtil.getContent(
@@ -180,9 +178,9 @@ public class ConvertDocumentLibraryTest {
 
 		DLFileEntry dlFileEntry = getDLFileEntry(wikiPage);
 
-		String fileEntryTitle = dlFileEntry.getTitle();
+		String title = dlFileEntry.getTitle();
 
-		Assert.assertTrue(fileEntryTitle.endsWith(".docx"));
+		Assert.assertTrue(title.endsWith(".docx"));
 
 		try {
 			DLContentLocalServiceUtil.getContent(
@@ -289,6 +287,5 @@ public class ConvertDocumentLibraryTest {
 
 	private ConvertProcess _convertProcess;
 	private Group _group;
-	private String _originalDLStoreImpl;
 
 }
