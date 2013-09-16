@@ -410,11 +410,11 @@ public class HookHotDeployListener
 		resetPortalProperties(servletContextName, portalProperties, false);
 
 		if (portalProperties.containsKey(
-				PropsKeys.ASSET_PUBLISHER_QUERY_PROCESSORS)) {
+				PropsKeys.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS)) {
 
 			String[] assetQueryProcessors = StringUtil.split(
 					portalProperties.getProperty(
-						PropsKeys.ASSET_PUBLISHER_QUERY_PROCESSORS));
+						PropsKeys.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS));
 
 			for (String assetQueryProcessorClassName : assetQueryProcessors) {
 				AssetPublisherUtil.unregisterAssetQueryProcessor(
@@ -1716,11 +1716,11 @@ public class HookHotDeployListener
 		resetPortalProperties(servletContextName, portalProperties, true);
 
 		if (portalProperties.containsKey(
-				PropsKeys.ASSET_PUBLISHER_QUERY_PROCESSORS)) {
+				PropsKeys.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS)) {
 
 			String[] assetQueryProcessors = StringUtil.split(
 				portalProperties.getProperty(
-					PropsKeys.ASSET_PUBLISHER_QUERY_PROCESSORS));
+					PropsKeys.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS));
 
 			for (String assetQueryProcessorClassName : assetQueryProcessors) {
 				AssetEntryQueryProcessor assetQueryProcessor =

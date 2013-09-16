@@ -105,7 +105,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	public AssetPublisherImpl() {
 		for (String queryProcessorClassName :
-				PropsValues.ASSET_PUBLISHER_QUERY_PROCESSORS) {
+				PropsValues.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS) {
 
 			try {
 				AssetEntryQueryProcessor queryProcessor =
