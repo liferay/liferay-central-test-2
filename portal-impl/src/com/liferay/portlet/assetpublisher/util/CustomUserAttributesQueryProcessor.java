@@ -28,6 +28,7 @@ import javax.portlet.PortletPreferences;
 public class CustomUserAttributesQueryProcessor
 	implements AssetEntryQueryProcessor {
 
+	@Override
 	public void adaptAssetEntryQuery(
 			User user, PortletPreferences preferences,
 			AssetEntryQuery assetEntryQuery)
