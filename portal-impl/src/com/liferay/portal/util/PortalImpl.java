@@ -6461,7 +6461,7 @@ public class PortalImpl implements Portal {
 			String currentURL = (String)request.getAttribute(
 				WebKeys.CURRENT_URL);
 
-			response.sendError(status, "Error in current URL " + currentURL);
+			response.sendError(status, "Current URL " + currentURL);
 		}
 	}
 
