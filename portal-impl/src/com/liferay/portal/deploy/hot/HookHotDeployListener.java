@@ -202,7 +202,10 @@ public class HookHotDeployListener
 
 	public static final String[] SUPPORTED_PROPERTIES = {
 		"admin.default.group.names", "admin.default.role.names",
-		"admin.default.user.group.names", "asset.publisher.display.styles",
+		"admin.default.user.group.names",
+		"asset.publisher.asset.entry.query.processors",
+		"asset.publisher.display.styles",
+		"asset.publisher.query.form.configuration", 
 		"auth.forward.by.last.path", "auth.public.paths",
 		"auth.verifier.pipeline", "auto.deploy.listeners",
 		"application.startup.events", "auth.failure", "auth.max.failures",
