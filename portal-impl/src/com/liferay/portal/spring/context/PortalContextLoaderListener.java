@@ -164,6 +164,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		SystemProperties.reload();
+
 		DBFactoryUtil.reset();
 		DeployManagerUtil.reset();
 		InstancePool.reset();
