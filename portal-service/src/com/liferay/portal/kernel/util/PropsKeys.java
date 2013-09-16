@@ -125,7 +125,7 @@ public interface PropsKeys {
 
 	public static final String ASSET_PUBLISHER_QUERY_FORM_CONFIGURATION = "asset.publisher.query.form.configuration";
 
-	public static final String ASSET_PUBLISHER_QUERY_PROCESSORS = "asset.publisher.query.processors";
+	public static final String ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS = "asset.publisher.asset.entry.query.processors";
 
 	public static final String ASSET_PUBLISHER_SEARCH_WITH_INDEX = "asset.publisher.search.with.index";
 
