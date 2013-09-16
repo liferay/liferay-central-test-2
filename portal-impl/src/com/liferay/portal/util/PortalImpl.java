@@ -6454,16 +6454,14 @@ public class PortalImpl implements Portal {
 				requestDispatcher.forward(request, response);
 			}
 		}
+		else if (e != null) {
+			response.sendError(status, e.getMessage());
+		}
 		else {
-			if (e != null) {
-				response.sendError(status, e.getMessage());
-			}
-			else {
-				String currentURL = (String)request.getAttribute(
-					WebKeys.CURRENT_URL);
+			String currentURL = (String)request.getAttribute(
+				WebKeys.CURRENT_URL);
 
-				response.sendError(status, "Error in " + currentURL);
-			}
+			response.sendError(status, "Error in current URL " + currentURL);
 		}
 	}
 
