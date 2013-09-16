@@ -345,15 +345,13 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 
 			<%
 			String[] sections = PropsValues.ASSET_PUBLISHER_QUERY_FORM_CONFIGURATION;
-			String jspPath = "/html/portlet/asset_publisher/query/";
 
 			for (String section : sections) {
 				String sectionId = renderResponse.getNamespace() + _getSectionId(section);
-				String sectionJsp = jspPath + _getSectionJsp(section) + ".jsp";
 			%>
 
 				<liferay-ui:panel collapsible="<%= true %>" extended="<%= true %>" id='<%= "assetPublisherPanelContainerSection_" + sectionId %>' persistState="<%= true %>" title="<%= section %>">
-					<liferay-util:include page="<%= sectionJsp %>" />
+					<liferay-util:include page='<%= "/html/portlet/asset_publisher/query/" + _getSectionJsp(section) + ".jsp" %>' />
 				</liferay-ui:panel>
 
 			<%

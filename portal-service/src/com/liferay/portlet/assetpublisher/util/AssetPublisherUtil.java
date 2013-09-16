@@ -258,12 +258,12 @@ public class AssetPublisherUtil {
 			portletPreferences, plid, portletId, assetEntries);
 	}
 
-	public static void processQuery(
+	public static void processAssetEntryQuery(
 			User user, PortletPreferences portletPreferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception {
 
-		getAssetPublisher().processQuery(
+		getAssetPublisher().processAssetEntryQuery(
 			user, portletPreferences, assetEntryQuery);
 	}
 

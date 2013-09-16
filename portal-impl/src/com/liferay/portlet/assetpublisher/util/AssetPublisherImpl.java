@@ -104,16 +104,17 @@ import javax.servlet.http.HttpSession;
 public class AssetPublisherImpl implements AssetPublisher {
 
 	public AssetPublisherImpl() {
-		for (String queryProcessorClassName :
+		for (String assetEntryQueryProcessorClassName :
 				PropsValues.ASSET_PUBLISHER_ASSET_ENTRY_QUERY_PROCESSORS) {
 
 			try {
-				AssetEntryQueryProcessor queryProcessor =
+				AssetEntryQueryProcessor assetEntryQueryProcessor =
 					(AssetEntryQueryProcessor)InstanceFactory.newInstance(
-						queryProcessorClassName);
+						assetEntryQueryProcessorClassName);
 
 				registerAssetQueryProcessor(
-					queryProcessorClassName, queryProcessor);
+					assetEntryQueryProcessorClassName,
+					assetEntryQueryProcessor);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -1056,28 +1057,30 @@ public class AssetPublisherImpl implements AssetPublisher {
 	}
 
 	@Override
-	public void processQuery(
+	public void processAssetEntryQuery(
 			User user, PortletPreferences portletPreferences,
 			AssetEntryQuery assetEntryQuery)
 		throws Exception {
 
-		for (AssetEntryQueryProcessor queryProcessor :
-				_queryProcessors.values()) {
+		for (AssetEntryQueryProcessor assetEntryQueryProcessor :
+				_assetEntryQueryProcessor.values()) {
 
-			queryProcessor.adaptAssetEntryQuery(
+			assetEntryQueryProcessor.processAssetEntryQuery(
 				user, portletPreferences, assetEntryQuery);
 		}
 	}
 
 	@Override
 	public void registerAssetQueryProcessor(
-		String name, AssetEntryQueryProcessor assetQueryProcessor) {
+		String assetQueryProcessorClassName,
+		AssetEntryQueryProcessor assetQueryProcessor) {
 
 		if (assetQueryProcessor == null) {
 			return;
 		}
 
-		_queryProcessors.put(name, assetQueryProcessor);
+		_assetEntryQueryProcessor.put(
+			assetQueryProcessorClassName, assetQueryProcessor);
 	}
 
 	@Override
@@ -1145,7 +1148,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 	public void unregisterAssetQueryProcessor(
 		String assetQueryProcessorClassName) {
 
-		_queryProcessors.remove(assetQueryProcessorClassName);
+		_assetEntryQueryProcessor.remove(assetQueryProcessorClassName);
 	}
 
 	@Override
@@ -1338,7 +1341,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	private static Log _log = LogFactoryUtil.getLog(AssetPublisherImpl.class);
 
-	private final Map<String, AssetEntryQueryProcessor> _queryProcessors =
+	private Map<String, AssetEntryQueryProcessor> _assetEntryQueryProcessor =
 		new ConcurrentHashMap<String, AssetEntryQueryProcessor>();
 
 	private Accessor<AssetEntry, String> _titleAccessor =
