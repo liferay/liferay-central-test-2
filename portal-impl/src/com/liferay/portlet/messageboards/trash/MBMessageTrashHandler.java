@@ -73,7 +73,7 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 	public ContainerModel getTrashContainer(long classPK)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 		return message.getTrashContainer();
 	}
@@ -82,7 +82,7 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 	public TrashEntry getTrashEntry(long classPK)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 		return message.getTrashEntry();
 	}
@@ -96,7 +96,7 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 	public boolean isInTrash(long classPK)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 		return message.isInTrash();
 	}
@@ -105,7 +105,7 @@ public class MBMessageTrashHandler extends BaseTrashHandler {
 	public boolean isInTrashContainer(long classPK)
 		throws PortalException, SystemException {
 
-		MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
 
 		return message.isInTrashThread();
 	}

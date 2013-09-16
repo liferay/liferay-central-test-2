@@ -1203,9 +1203,10 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		TrashHandler trashHandler = trashedModel.getTrashHandler();
-		TrashRenderer trashRenderer = null;
 
 		try {
+			TrashRenderer trashRenderer = null;
+
 			if ((trashHandler != null) && (trashEntry != null)) {
 				trashRenderer = trashHandler.getTrashRenderer(
 					trashEntry.getClassPK());
