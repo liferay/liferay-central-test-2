@@ -99,7 +99,7 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInSubContainer()
+	public void testSubscriptionContainerWhenAddEntryInSubcontainer()
 		throws Exception {
 	}
 
@@ -127,7 +127,7 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInSubContainer()
+	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer()
 		throws Exception {
 	}
 
