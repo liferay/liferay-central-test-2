@@ -22,6 +22,8 @@ import com.liferay.portal.freemarker.FreeMarkerTemplate;
 import com.liferay.portal.freemarker.LiferayTemplateCache;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.jndi.JNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
@@ -36,8 +38,11 @@ import com.liferay.portal.kernel.servlet.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.AutoResetThreadLocal;
 import com.liferay.portal.kernel.util.CentralizedThreadLocal;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.kernel.util.PreloadClassLoader;
+import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.ReferenceEntry;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
@@ -98,6 +103,9 @@ import java.util.Properties;
 
 import javax.ccpp.Profile;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.naming.spi.InitialContextFactoryBuilder;
 import javax.naming.spi.NamingManager;
 
@@ -400,6 +408,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			BeanReferenceRefreshUtil.class,
 			new DoBeanReferenceRefreshUtilPACL());
 		initPACLImpl(ClassLoaderUtil.class, new DoClassLoaderUtilPACL());
+		initPACLImpl(DataAccess.class, new DoDataAccessPACL());
 		initPACLImpl(
 			DataSourceFactoryImpl.class, new DoDataSourceFactoryImplPACL());
 		initPACLImpl(
@@ -629,6 +638,47 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 
 		private ClassLoaderUtil.PACL _noPacl = new ClassLoaderUtil.NoPACL();
+
+	}
+
+	private static class DoDataAccessPACL implements DataAccess.PACL {
+
+		public DataSource getDataSource() {
+			return AccessController.doPrivileged(
+				new PrivilegedAction<DataSource>() {
+
+					public DataSource run() {
+						return InfrastructureUtil.getDataSource();
+					}
+
+				}
+			);
+		}
+
+		public DataSource getDataSource(final String location)
+			throws NamingException {
+
+			try {
+				return AccessController.doPrivileged(
+					new PrivilegedExceptionAction<DataSource>() {
+
+						public DataSource run() throws Exception {
+							Properties properties = PropsUtil.getProperties(
+								PropsKeys.JNDI_ENVIRONMENT, true);
+
+							Context context = new InitialContext(properties);
+
+							return (DataSource)JNDIUtil.lookup(
+								context, location);
+						}
+
+					}
+				);
+			}
+			catch (PrivilegedActionException e) {
+				throw (NamingException)e.getException();
+			}
+		}
 
 	}
 
