@@ -643,10 +643,12 @@ public class PortalSecurityManagerImpl extends SecurityManager
 
 	private static class DoDataAccessPACL implements DataAccess.PACL {
 
+		@Override
 		public DataSource getDataSource() {
 			return AccessController.doPrivileged(
 				new PrivilegedAction<DataSource>() {
 
+					@Override
 					public DataSource run() {
 						return InfrastructureUtil.getDataSource();
 					}
@@ -655,6 +657,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			);
 		}
 
+		@Override
 		public DataSource getDataSource(final String location)
 			throws NamingException {
 
@@ -662,6 +665,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				return AccessController.doPrivileged(
 					new PrivilegedExceptionAction<DataSource>() {
 
+						@Override
 						public DataSource run() throws Exception {
 							Properties properties = PropsUtil.getProperties(
 								PropsKeys.JNDI_ENVIRONMENT, true);
@@ -676,7 +680,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 				);
 			}
 			catch (PrivilegedActionException pe) {
-				throw (NamingException)e.getException();
+				throw (NamingException)pe.getException();
 			}
 		}
 
