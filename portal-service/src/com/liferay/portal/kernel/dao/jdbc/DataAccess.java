@@ -139,7 +139,9 @@ public class DataAccess {
 			return InfrastructureUtil.getDataSource();
 		}
 
-		public DataSource getDataSource(String location) throws NamingException {
+		public DataSource getDataSource(String location)
+			throws NamingException {
+
 			Properties properties = PropsUtil.getProperties(
 				PropsKeys.JNDI_ENVIRONMENT, true);
 
