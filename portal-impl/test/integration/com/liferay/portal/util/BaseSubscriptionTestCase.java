@@ -53,6 +53,16 @@ import org.junit.runner.RunWith;
 @Sync
 public abstract class BaseSubscriptionTestCase {
 
+	public abstract long addContainer(long containerId) throws Exception;
+
+	public abstract long addEntry(long containerId) throws Exception;
+
+	public abstract void addSubscriptionContainer(long containerId)
+		throws Exception;
+
+	public abstract void addSubscriptionEntry(long entryId)
+		throws Exception;
+
 	@Before
 	public void setUpClass() throws Exception {
 		group = GroupTestUtil.addGroup();
@@ -78,16 +88,6 @@ public abstract class BaseSubscriptionTestCase {
 
 		mailServiceUtil.setService(_mailService);
 	}
-
-	public abstract long addContainer(long containerId) throws Exception;
-
-	public abstract long addEntry(long containerId) throws Exception;
-
-	public abstract void addSubscriptionContainer(long containerId)
-		throws Exception;
-
-	public abstract void addSubscriptionEntry(long entryId)
-		throws Exception;
 
 	@Test
 	public void testSubscriptionContainerWhenAddEntryInContainer()
