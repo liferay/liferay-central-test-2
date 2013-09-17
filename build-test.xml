@@ -2225,7 +2225,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 									<var name="mysql.arg.line" value="-u ${database.username}" />
 								</then>
 								<else>
-									<var name="mysql.arg.line" value="-u ${database.username} -p${database.password}" />
+									<var name="mysql.arg.line" value="-p ${database.password} -u ${database.username}" />
 								</else>
 							</if>
 
