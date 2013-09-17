@@ -70,7 +70,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), group.getGroupId(), containerId, name,
 			ContentTypes.APPLICATION_OCTET_STREAM, name, StringPool.BLANK,
-			StringPool.BLANK, CONTENT.getBytes(), serviceContext);
+			StringPool.BLANK, _CONTENT.getBytes(), serviceContext);
 
 		return fileEntry.getFileEntryId();
 	}
@@ -89,21 +89,19 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) throws Exception {
+	public void addSubscriptionEntry(long entryId) {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInContainer()
-		throws Exception {
+	public void testSubscriptionEntryWhenAddEntryInContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
 	}
 
 	@Override
@@ -111,7 +109,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		return 0;
 	}
 
-	protected static final String CONTENT =
+	private static final String _CONTENT =
 		"Content: Enterprise. Open Source. For Life.";
 
 }

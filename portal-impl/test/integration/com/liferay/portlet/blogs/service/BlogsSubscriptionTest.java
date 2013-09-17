@@ -74,60 +74,53 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) throws Exception {
+	public void addSubscriptionEntry(long entryId) {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInContainer()
-		throws Exception {
+	public void testSubscriptionContainerWhenAddEntryInContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionContainerWhenAddEntryInRootContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInSubcontainer()
-		throws Exception {
+	public void testSubscriptionContainerWhenAddEntryInSubcontainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInContainer()
-		throws Exception {
+	public void testSubscriptionEntryWhenAddEntryInContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInContainer()
-		throws Exception {
+	public void testSubscriptionRootContainerWhenAddEntryInContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer()
-		throws Exception {
+	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer() {
 	}
 
 	@Override
-	public long updateEntry(long entryId) throws Exception {
+	public long updateEntry(long entryId) {
 		return 0;
 	}
 

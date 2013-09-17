@@ -92,59 +92,53 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionContainerWhenAddEntryInRootContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInSubcontainer()
-		throws Exception {
+	public void testSubscriptionContainerWhenAddEntryInSubcontainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInContainer()
-		throws Exception {
+	public void testSubscriptionRootContainerWhenAddEntryInContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInRootContainer()
-		throws Exception {
+	public void testSubscriptionRootContainerWhenAddEntryInRootContainer() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer()
-		throws Exception {
+	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer() {
 	}
 
 	@Override
 	public long updateEntry(long entryId) throws Exception {
-		WikiPage oldPage = WikiPageLocalServiceUtil.getPage(entryId, true);
+		WikiPage page = WikiPageLocalServiceUtil.getPage(entryId, true);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
 
-		WikiPage page = WikiPageLocalServiceUtil.updatePage(
-			TestPropsValues.getUserId(), oldPage.getNodeId(),
-			oldPage.getTitle(), oldPage.getVersion(),
-			ServiceTestUtil.randomString(50), ServiceTestUtil.randomString(),
-			false, WikiPageConstants.DEFAULT_FORMAT, StringPool.BLANK,
+		page = WikiPageLocalServiceUtil.updatePage(
+			TestPropsValues.getUserId(), page.getNodeId(), page.getTitle(),
+			page.getVersion(), ServiceTestUtil.randomString(50),
+			ServiceTestUtil.randomString(), false,
+			WikiPageConstants.DEFAULT_FORMAT, StringPool.BLANK,
 			StringPool.BLANK, serviceContext);
 
 		return page.getResourcePrimKey();
