@@ -269,13 +269,13 @@ public class ComboServlet extends HttpServlet {
 
 					String baseURL = StringPool.BLANK;
 
-					int slashPos = resourcePath.lastIndexOf(CharPool.SLASH);
+					int index = resourcePath.lastIndexOf(CharPool.SLASH);
 
-					if (slashPos != -1) {
-						baseURL = resourcePath.substring(0, slashPos + 1);
+					if (index != -1) {
+						baseURL = resourcePath.substring(0, index + 1);
 					}
 
-					stringFileContent = AggregateUtil.updateRelativeUrls(
+					stringFileContent = AggregateUtil.updateRelativeURLs(
 						stringFileContent, baseURL);
 
 					stringFileContent = MinifierUtil.minifyCss(
