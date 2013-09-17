@@ -47,19 +47,19 @@ import org.junit.runner.RunWith;
 public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainer(long containerId) throws Exception {
+	public long addContainerModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		Folder folder = DLAppLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), containerId,
+			TestPropsValues.getUserId(), group.getGroupId(), containerModelId,
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
 
 		return folder.getFolderId();
 	}
 
 	@Override
-	public long addEntry(long containerId) throws Exception {
+	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
@@ -68,18 +68,20 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		String name = ServiceTestUtil.randomString();
 
 		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
-			TestPropsValues.getUserId(), group.getGroupId(), containerId, name,
-			ContentTypes.APPLICATION_OCTET_STREAM, name, StringPool.BLANK,
+			TestPropsValues.getUserId(), group.getGroupId(), containerModelId,
+			name, ContentTypes.APPLICATION_OCTET_STREAM, name, StringPool.BLANK,
 			StringPool.BLANK, _CONTENT.getBytes(), serviceContext);
 
 		return fileEntry.getFileEntryId();
 	}
 
 	@Override
-	public void addSubscriptionContainer(long containerId) throws Exception {
-		long classPK = containerId;
+	public void addSubscriptionContainerModel(long containerModelId)
+		throws Exception {
 
-		if (containerId == DEFAULT_PARENT_CONTAINER_ID) {
+		long classPK = containerModelId;
+
+		if (containerModelId == DEFAULT_PARENT_CONTAINER_MODEL_ID) {
 			classPK = group.getGroupId();
 		}
 
@@ -89,23 +91,23 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) {
+	public void addSubscriptionBaseModel(long baseModelId) {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInContainer() {
+	public void testSubscriptionBaseModelWhenInContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
+	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Override
-	public long updateEntry(long entryId) throws Exception {
+	public long updateEntry(long baseModelId) throws Exception {
 		return 0;
 	}
 

@@ -44,19 +44,19 @@ import org.junit.runner.RunWith;
 public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainer(long containerId) throws Exception {
+	public long addContainerModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), containerId,
+			TestPropsValues.getUserId(), containerModelId,
 			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
 
 		return folder.getFolderId();
 	}
 
 	@Override
-	public long addEntry(long containerId) throws Exception {
+	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
@@ -64,7 +64,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 		serviceContext.setLayoutFullURL("http://localhost");
 
 		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.addEntry(
-			TestPropsValues.getUserId(), group.getGroupId(), containerId,
+			TestPropsValues.getUserId(), group.getGroupId(), containerModelId,
 			ServiceTestUtil.randomString(), "http://localhost",
 			StringPool.BLANK, serviceContext);
 
@@ -72,10 +72,12 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionContainer(long containerId) throws Exception {
-		long classPK = containerId;
+	public void addSubscriptionContainerModel(long containerModelId)
+		throws Exception {
 
-		if (containerId == DEFAULT_PARENT_CONTAINER_ID) {
+		long classPK = containerModelId;
+
+		if (containerModelId == DEFAULT_PARENT_CONTAINER_MODEL_ID) {
 			classPK = group.getGroupId();
 		}
 
@@ -85,15 +87,16 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) throws Exception {
+	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
-			BookmarksEntry.class.getName(), entryId);
+			BookmarksEntry.class.getName(), baseModelId);
 	}
 
 	@Override
-	public long updateEntry(long entryId) throws Exception {
-		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+	public long updateEntry(long baseModelId) throws Exception {
+		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(
+			baseModelId);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -102,7 +105,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 		serviceContext.setLayoutFullURL("http://localhost");
 
 		entry = BookmarksEntryLocalServiceUtil.updateEntry(
-			TestPropsValues.getUserId(), entryId, entry.getGroupId(),
+			TestPropsValues.getUserId(), baseModelId, entry.getGroupId(),
 			entry.getFolderId(), ServiceTestUtil.randomString(), entry.getUrl(),
 			entry.getDescription(), serviceContext);
 
