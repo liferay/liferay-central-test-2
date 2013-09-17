@@ -19,7 +19,6 @@
 <%
 Group liveGroup = (Group)request.getAttribute("site.liveGroup");
 long liveGroupId = ((Long)request.getAttribute("site.liveGroupId")).longValue();
-
 UnicodeProperties liveGroupTypeSettings = (UnicodeProperties)request.getAttribute("site.liveGroupTypeSettings");
 
 LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(liveGroup.getGroupId(), true);
