@@ -44,18 +44,6 @@ import org.junit.runner.RunWith;
 public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainerModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), containerModelId,
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
-
-		return folder.getFolderId();
-	}
-
-	@Override
 	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -72,6 +60,25 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
+	public long addContainerModel(long containerModelId) throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
+		BookmarksFolder folder = BookmarksFolderLocalServiceUtil.addFolder(
+			TestPropsValues.getUserId(), containerModelId,
+			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+
+		return folder.getFolderId();
+	}
+
+	@Override
+	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
+		SubscriptionLocalServiceUtil.addSubscription(
+			TestPropsValues.getUserId(), group.getGroupId(),
+			BookmarksEntry.class.getName(), baseModelId);
+	}
+
+	@Override
 	public void addSubscriptionContainerModel(long containerModelId)
 		throws Exception {
 
@@ -84,13 +91,6 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			BookmarksFolder.class.getName(), classPK);
-	}
-
-	@Override
-	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
-		SubscriptionLocalServiceUtil.addSubscription(
-			TestPropsValues.getUserId(), group.getGroupId(),
-			BookmarksEntry.class.getName(), baseModelId);
 	}
 
 	@Override

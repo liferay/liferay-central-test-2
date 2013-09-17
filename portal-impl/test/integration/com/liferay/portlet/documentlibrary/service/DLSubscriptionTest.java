@@ -47,18 +47,6 @@ import org.junit.runner.RunWith;
 public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainerModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		Folder folder = DLAppLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), containerModelId,
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
-
-		return folder.getFolderId();
-	}
-
-	@Override
 	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -76,6 +64,22 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
+	public long addContainerModel(long containerModelId) throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
+		Folder folder = DLAppLocalServiceUtil.addFolder(
+			TestPropsValues.getUserId(), group.getGroupId(), containerModelId,
+			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+
+		return folder.getFolderId();
+	}
+
+	@Override
+	public void addSubscriptionBaseModel(long baseModelId) {
+	}
+
+	@Override
 	public void addSubscriptionContainerModel(long containerModelId)
 		throws Exception {
 
@@ -88,10 +92,6 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			Folder.class.getName(), classPK);
-	}
-
-	@Override
-	public void addSubscriptionBaseModel(long baseModelId) {
 	}
 
 	@Ignore
