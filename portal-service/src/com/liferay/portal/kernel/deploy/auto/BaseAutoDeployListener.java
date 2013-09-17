@@ -57,8 +57,6 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 	public boolean isLayoutTemplatePlugin(File file)
 		throws AutoDeployException {
 
-		String fileName = file.getName();
-
 		if (isMatchingFile(file, "WEB-INF/liferay-layout-templates.xml") &&
 			!isThemePlugin(file)) {
 
