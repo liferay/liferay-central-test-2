@@ -47,18 +47,6 @@ import org.junit.runner.RunWith;
 public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainerModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
-		WikiNode node = WikiNodeLocalServiceUtil.addNode(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
-			StringPool.BLANK, serviceContext);
-
-		return node.getNodeId();
-	}
-
-	@Override
 	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -76,6 +64,25 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
+	public long addContainerModel(long containerModelId) throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
+		WikiNode node = WikiNodeLocalServiceUtil.addNode(
+			TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+			StringPool.BLANK, serviceContext);
+
+		return node.getNodeId();
+	}
+
+	@Override
+	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
+		SubscriptionLocalServiceUtil.addSubscription(
+			TestPropsValues.getUserId(), group.getGroupId(),
+			WikiPage.class.getName(), baseModelId);
+	}
+
+	@Override
 	public void addSubscriptionContainerModel(long containerModelId)
 		throws Exception {
 
@@ -84,11 +91,10 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 			WikiNode.class.getName(), containerModelId);
 	}
 
+	@Ignore
 	@Override
-	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
-		SubscriptionLocalServiceUtil.addSubscription(
-			TestPropsValues.getUserId(), group.getGroupId(),
-			WikiPage.class.getName(), baseModelId);
+	@Test
+	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
@@ -101,12 +107,6 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	@Override
 	@Test
 	public void testSubscriptionContainerModelWhenInSubcontainerModel() {
-	}
-
-	@Ignore
-	@Override
-	@Test
-	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore

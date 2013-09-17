@@ -45,11 +45,6 @@ import org.junit.runner.RunWith;
 public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainerModel(long containerModelId) throws Exception {
-		return 0;
-	}
-
-	@Override
 	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -67,6 +62,15 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
+	public long addContainerModel(long containerModelId) throws Exception {
+		return 0;
+	}
+
+	@Override
+	public void addSubscriptionBaseModel(long baseModelId) {
+	}
+
+	@Override
 	public void addSubscriptionContainerModel(long containerModelId)
 		throws Exception {
 
@@ -75,8 +79,16 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 			BlogsEntry.class.getName(), group.getGroupId());
 	}
 
+	@Ignore
 	@Override
-	public void addSubscriptionBaseModel(long baseModelId) {
+	@Test
+	public void testSubscriptionBaseModelWhenInContainerModel() {
+	}
+
+	@Ignore
+	@Override
+	@Test
+	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
@@ -95,18 +107,6 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 	@Override
 	@Test
 	public void testSubscriptionContainerModelWhenInSubcontainerModel() {
-	}
-
-	@Ignore
-	@Override
-	@Test
-	public void testSubscriptionBaseModelWhenInContainerModel() {
-	}
-
-	@Ignore
-	@Override
-	@Test
-	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
