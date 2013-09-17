@@ -44,10 +44,12 @@ import org.junit.runner.RunWith;
 @Sync
 public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 
+	@Override
 	public long addContainer(long containerId) throws Exception {
 		return 0;
 	}
 
+	@Override
 	public long addEntry(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -64,12 +66,14 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 		return entry.getEntryId();
 	}
 
+	@Override
 	public void addSubscriptionContainer(long containerId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			BlogsEntry.class.getName(), group.getGroupId());
 	}
 
+	@Override
 	public void addSubscriptionEntry(long entryId) throws Exception {
 	}
 
@@ -122,6 +126,7 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 		throws Exception {
 	}
 
+	@Override
 	public long updateEntry(long entryId) throws Exception {
 		return 0;
 	}

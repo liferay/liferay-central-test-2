@@ -16,7 +16,6 @@ package com.liferay.portal.test.mail;
 
 import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.util.List;
@@ -59,7 +58,7 @@ public class MockMailServiceImpl implements MailService {
 	}
 
 	@Override
-	public Session getSession() throws SystemException {
+	public Session getSession() {
 		return null;
 	}
 

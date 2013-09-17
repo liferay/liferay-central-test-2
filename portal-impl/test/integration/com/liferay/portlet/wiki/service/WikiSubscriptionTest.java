@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 @Sync
 public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 
+	@Override
 	public long addContainer(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -57,6 +58,7 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 		return node.getNodeId();
 	}
 
+	@Override
 	public long addEntry(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -73,12 +75,14 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 		return page.getResourcePrimKey();
 	}
 
+	@Override
 	public void addSubscriptionContainer(long containerId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			WikiNode.class.getName(), containerId);
 	}
 
+	@Override
 	public void addSubscriptionEntry(long entryId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
@@ -127,6 +131,7 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 		throws Exception {
 	}
 
+	@Override
 	public long updateEntry(long entryId) throws Exception {
 		WikiPage oldPage = WikiPageLocalServiceUtil.getPage(entryId, true);
 

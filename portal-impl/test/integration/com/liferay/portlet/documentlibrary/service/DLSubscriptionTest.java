@@ -46,6 +46,7 @@ import org.junit.runner.RunWith;
 @Sync
 public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 
+	@Override
 	public long addContainer(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -57,6 +58,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		return folder.getFolderId();
 	}
 
+	@Override
 	public long addEntry(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -73,6 +75,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		return fileEntry.getFileEntryId();
 	}
 
+	@Override
 	public void addSubscriptionContainer(long containerId) throws Exception {
 		long classPK = containerId;
 
@@ -85,6 +88,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 			Folder.class.getName(), classPK);
 	}
 
+	@Override
 	public void addSubscriptionEntry(long entryId) throws Exception {
 	}
 
@@ -102,6 +106,7 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		throws Exception {
 	}
 
+	@Override
 	public long updateEntry(long entryId) throws Exception {
 		return 0;
 	}
