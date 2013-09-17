@@ -162,7 +162,7 @@ public class AggregateFilter extends IgnoreModuleRequestFilter {
 					aggregateContext.getResourcePath(StringPool.BLANK));
 				baseURL = baseURL.concat(importDirName);
 
-				importContent = AggregateUtil.updateRelativeUrls(
+				importContent = AggregateUtil.updateRelativeURLs(
 					importContent, baseURL);
 
 				if (Validator.isNotNull(mediaQuery)) {

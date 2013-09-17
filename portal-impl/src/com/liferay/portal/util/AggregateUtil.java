@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  */
 public class AggregateUtil {
 
-	public static String updateRelativeUrls(String content, String baseURL) {
+	public static String updateRelativeURLs(String content, String baseURL) {
 		content = StringUtil.replace(
 			content, _CSS_PATH_TYPES, _CSS_PATH_PLACEHOLDERS);
 
