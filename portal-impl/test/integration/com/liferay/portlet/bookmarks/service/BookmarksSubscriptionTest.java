@@ -93,19 +93,18 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	public long updateEntry(long entryId) throws Exception {
+		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setCommand(Constants.UPDATE);
 		serviceContext.setLayoutFullURL("http://localhost");
 
-		BookmarksEntry oldEntry = BookmarksEntryLocalServiceUtil.getEntry(
-			entryId);
-
-		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.updateEntry(
-			TestPropsValues.getUserId(), entryId, oldEntry.getGroupId(),
-			oldEntry.getFolderId(), ServiceTestUtil.randomString(),
-			oldEntry.getUrl(), oldEntry.getDescription(), serviceContext);
+		entry = BookmarksEntryLocalServiceUtil.updateEntry(
+			TestPropsValues.getUserId(), entryId, entry.getGroupId(),
+			entry.getFolderId(), ServiceTestUtil.randomString(), entry.getUrl(),
+			entry.getDescription(), serviceContext);
 
 		return entry.getEntryId();
 	}
