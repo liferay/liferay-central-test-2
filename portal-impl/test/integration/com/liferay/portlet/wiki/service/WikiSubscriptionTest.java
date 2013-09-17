@@ -47,7 +47,7 @@ import org.junit.runner.RunWith;
 public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainer(long containerId) throws Exception {
+	public long addContainerModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
@@ -59,14 +59,14 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public long addEntry(long containerId) throws Exception {
+	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
 
 		WikiPage page = WikiPageLocalServiceUtil.addPage(
-			TestPropsValues.getUserId(), containerId,
+			TestPropsValues.getUserId(), containerModelId,
 			ServiceTestUtil.randomString(), WikiPageConstants.VERSION_DEFAULT,
 			ServiceTestUtil.randomString(50), ServiceTestUtil.randomString(),
 			false, WikiPageConstants.DEFAULT_FORMAT, true, StringPool.BLANK,
@@ -76,58 +76,60 @@ public class WikiSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionContainer(long containerId) throws Exception {
+	public void addSubscriptionContainerModel(long containerModelId)
+		throws Exception {
+
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
-			WikiNode.class.getName(), containerId);
+			WikiNode.class.getName(), containerModelId);
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) throws Exception {
+	public void addSubscriptionBaseModel(long baseModelId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
-			WikiPage.class.getName(), entryId);
+			WikiPage.class.getName(), baseModelId);
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInRootContainer() {
+	public void testSubscriptionContainerModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInSubcontainer() {
+	public void testSubscriptionContainerModelWhenInSubcontainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
+	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInContainer() {
+	public void testSubscriptionRootContainerModelWhenInContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInRootContainer() {
+	public void testSubscriptionRootContainerModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer() {
+	public void testSubscriptionRootContainerModelWhenInSubcontainerModel() {
 	}
 
 	@Override
-	public long updateEntry(long entryId) throws Exception {
-		WikiPage page = WikiPageLocalServiceUtil.getPage(entryId, true);
+	public long updateEntry(long baseModelId) throws Exception {
+		WikiPage page = WikiPageLocalServiceUtil.getPage(baseModelId, true);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());

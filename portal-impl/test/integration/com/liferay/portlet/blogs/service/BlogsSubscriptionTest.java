@@ -45,12 +45,12 @@ import org.junit.runner.RunWith;
 public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
-	public long addContainer(long containerId) throws Exception {
+	public long addContainerModel(long containerModelId) throws Exception {
 		return 0;
 	}
 
 	@Override
-	public long addEntry(long containerId) throws Exception {
+	public long addBaseModel(long containerModelId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
@@ -67,60 +67,62 @@ public class BlogsSubscriptionTest extends BaseSubscriptionTestCase {
 	}
 
 	@Override
-	public void addSubscriptionContainer(long containerId) throws Exception {
+	public void addSubscriptionContainerModel(long containerModelId)
+		throws Exception {
+
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			BlogsEntry.class.getName(), group.getGroupId());
 	}
 
 	@Override
-	public void addSubscriptionEntry(long entryId) {
+	public void addSubscriptionBaseModel(long baseModelId) {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInContainer() {
+	public void testSubscriptionContainerModelWhenInContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInRootContainer() {
+	public void testSubscriptionContainerModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionContainerWhenAddEntryInSubcontainer() {
+	public void testSubscriptionContainerModelWhenInSubcontainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInContainer() {
+	public void testSubscriptionBaseModelWhenInContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionEntryWhenAddEntryInRootContainer() {
+	public void testSubscriptionBaseModelWhenInRootContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInContainer() {
+	public void testSubscriptionRootContainerModelWhenInContainerModel() {
 	}
 
 	@Ignore
 	@Override
 	@Test
-	public void testSubscriptionRootContainerWhenAddEntryInSubcontainer() {
+	public void testSubscriptionRootContainerModelWhenInSubcontainerModel() {
 	}
 
 	@Override
-	public long updateEntry(long entryId) {
+	public long updateEntry(long baseModelId) {
 		return 0;
 	}
 
