@@ -143,10 +143,12 @@ public class PortalBeanLocatorUtil {
 
 	private static class NoPACL implements PACL {
 
+		@Override
 		public ClassLoader getBeanLocatorClassLoader(BeanLocator beanLocator) {
 			return beanLocator.getClassLoader();
 		}
 
+		@Override
 		public ClassLoader getContextClassLoader(Thread currentThread) {
 			return currentThread.getContextClassLoader();
 		}
