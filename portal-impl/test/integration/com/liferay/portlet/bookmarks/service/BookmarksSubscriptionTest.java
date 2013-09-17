@@ -43,6 +43,7 @@ import org.junit.runner.RunWith;
 @Sync
 public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
+	@Override
 	public long addContainer(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -54,6 +55,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 		return folder.getFolderId();
 	}
 
+	@Override
 	public long addEntry(long containerId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -69,6 +71,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 		return entry.getEntryId();
 	}
 
+	@Override
 	public void addSubscriptionContainer(long containerId) throws Exception {
 		long classPK = containerId;
 
@@ -81,12 +84,14 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 			BookmarksFolder.class.getName(), classPK);
 	}
 
+	@Override
 	public void addSubscriptionEntry(long entryId) throws Exception {
 		SubscriptionLocalServiceUtil.addSubscription(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			BookmarksEntry.class.getName(), entryId);
 	}
 
+	@Override
 	public long updateEntry(long entryId) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
