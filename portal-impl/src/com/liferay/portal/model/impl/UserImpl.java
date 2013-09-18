@@ -92,9 +92,9 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public void addRemotePreference(RemotePreference userRemotePreference) {
+	public void addRemotePreference(RemotePreference remotePreference) {
 		_remotePreferences.put(
-			userRemotePreference.getName(), userRemotePreference);
+			remotePreference.getName(), remotePreference);
 	}
 
 	@Override
