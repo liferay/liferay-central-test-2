@@ -35,7 +35,10 @@ public class JSONWebServiceHotDeployListener extends BaseHotDeployListener {
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				hotDeployEvent, "Error registering JSONWebServices for ", t);
+				hotDeployEvent,
+				"Error registering JSONWebServices for " +
+					hotDeployEvent.getServletContextName(),
+				t);
 		}
 	}
 
@@ -48,7 +51,10 @@ public class JSONWebServiceHotDeployListener extends BaseHotDeployListener {
 		}
 		catch (Throwable t) {
 			throwHotDeployException(
-				hotDeployEvent, "Error unregistering JSONWebServices for ", t);
+				hotDeployEvent,
+				"Error unregistering JSONWebServices for " +
+					hotDeployEvent.getServletContextName(),
+				t);
 		}
 	}
 
