@@ -553,7 +553,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			restoreCategoryFromTrash(userId, categoryId);
 		}
 		catch (NoSuchEntryException nsee) {
+
+			// Category
+
 			updateStatus(userId, categoryId, category.getStatus());
+
+			// Categories and threads
 
 			User user = userPersistence.findByPrimaryKey(userId);
 
@@ -572,6 +577,8 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	@Override
 	public MBCategory moveCategoryToTrash(long userId, long categoryId)
 		throws PortalException, SystemException {
+
+		// Category
 
 		MBCategory category = updateStatus(
 			userId, categoryId, WorkflowConstants.STATUS_IN_TRASH);
@@ -873,6 +880,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		for (Object object : categoriesAndThreads) {
 			if (object instanceof MBThread) {
+
+				// Thread
+
 				MBThread thread = (MBThread)object;
 
 				int oldStatus = thread.getStatus();
@@ -885,11 +895,15 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				mbThreadPersistence.update(thread);
 
+				// Trash
+
 				if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 					trashVersionLocalService.addTrashVersion(
 						trashEntryId, MBThread.class.getName(),
 						thread.getThreadId(), oldStatus);
 				}
+
+				// Threads
 
 				mbThreadLocalService.moveDependentsToTrash(
 					user.getUserId(), thread.getThreadId(), trashEntryId);
@@ -902,6 +916,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				indexer.reindex(thread);
 			}
 			else if (object instanceof MBCategory) {
+
+				// Category
+
 				MBCategory category = (MBCategory)object;
 
 				if (category.isInTrash()) {
@@ -914,11 +931,15 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				mbCategoryPersistence.update(category);
 
+				// Trash
+
 				if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
 					trashVersionLocalService.addTrashVersion(
 						trashEntryId, MBCategory.class.getName(),
 						category.getCategoryId(), oldStatus);
 				}
+
+				// Categories and threads
 
 				moveDependentsToTrash(
 					user,
@@ -935,6 +956,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		for (Object object : categoriesAndThreads) {
 			if (object instanceof MBThread) {
+
+				// Thread
+
 				MBThread thread = (MBThread)object;
 
 				TrashEntry trashEntry = trashEntryLocalService.fetchEntry(
@@ -959,12 +983,16 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				mbThreadPersistence.update(thread);
 
-				if (trashVersion != null) {
-					trashVersionLocalService.deleteTrashVersion(trashVersion);
-				}
+				// Threads
 
 				mbThreadLocalService.restoreDependentsFromTrash(
 					user.getUserId(), thread.getThreadId(), trashEntryId);
+
+				// Trash
+
+				if (trashVersion != null) {
+					trashVersionLocalService.deleteTrashVersion(trashVersion);
+				}
 
 				// Indexer
 
@@ -974,6 +1002,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				indexer.reindex(thread);
 			}
 			else if (object instanceof MBCategory) {
+
+				// Category
+
 				MBCategory category = (MBCategory)object;
 
 				TrashEntry trashEntry = trashEntryLocalService.fetchEntry(
@@ -998,15 +1029,19 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				mbCategoryPersistence.update(category);
 
-				if (trashVersion != null) {
-					trashVersionLocalService.deleteTrashVersion(trashVersion);
-				}
+				// Categories and threads
 
 				restoreDependentFromTrash(
 					user,
 					getCategoriesAndThreads(
 						category.getGroupId(), category.getCategoryId()),
 					trashEntryId);
+
+				// Trash
+
+				if (trashVersion != null) {
+					trashVersionLocalService.deleteTrashVersion(trashVersion);
+				}
 			}
 		}
 	}

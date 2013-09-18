@@ -676,6 +676,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			threadId, WorkflowConstants.STATUS_ANY);
 
 		for (MBMessage message : messages) {
+
+			// Message
+
 			if (message.isDiscussion()) {
 				continue;
 			}
@@ -815,7 +818,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			restoreThreadFromTrash(userId, threadId);
 		}
 		catch (NoSuchEntryException nsee) {
+
+			// Thread
+
 			updateStatus(userId, threadId, thread.getStatus());
+
+			// Messages
 
 			TrashEntry trashEntry = thread.getTrashEntry();
 
@@ -850,6 +858,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public MBThread moveThreadToTrash(long userId, MBThread thread)
 		throws PortalException, SystemException {
 
+		// Thread
+
 		if (thread.getCategoryId() ==
 				MBCategoryConstants.DISCUSSION_CATEGORY_ID) {
 
@@ -867,6 +877,18 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		thread = updateStatus(
 			userId, thread.getThreadId(), WorkflowConstants.STATUS_IN_TRASH);
 
+		// Trash
+
+		TrashEntry trashEntry = trashEntryLocalService.addTrashEntry(
+			userId, thread.getGroupId(), MBThread.class.getName(),
+			thread.getThreadId(), thread.getUuid(), null, oldStatus, null,
+			null);
+
+		// Messages
+
+		moveDependentsToTrash(
+			thread.getGroupId(), thread.getThreadId(), trashEntry.getEntryId());
+
 		// Social
 
 		MBMessage message = mbMessageLocalService.getMBMessage(
@@ -882,16 +904,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			thread.getThreadId(), SocialActivityConstants.TYPE_MOVE_TO_TRASH,
 			extraDataJSONObject.toString(), 0);
 
-		// Trash
-
-		TrashEntry trashEntry = trashEntryLocalService.addTrashEntry(
-			userId, thread.getGroupId(), MBThread.class.getName(),
-			thread.getThreadId(), thread.getUuid(), null, oldStatus, null,
-			null);
-
-		moveDependentsToTrash(
-			thread.getGroupId(), thread.getThreadId(), trashEntry.getEntryId());
-
 		return thread;
 	}
 
@@ -906,6 +918,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			threadId, WorkflowConstants.STATUS_ANY);
 
 		for (MBMessage message : messages) {
+
+			// Message
+
 			if (message.isDiscussion()) {
 				continue;
 			}
@@ -926,17 +941,17 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			userIds.add(message.getUserId());
 
+			// Trash
+
+			if (trashVersion != null) {
+				trashVersionLocalService.deleteTrashVersion(trashVersion);
+			}
+
 			// Asset
 
 			if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
 				assetEntryLocalService.updateVisible(
 					MBMessage.class.getName(), message.getMessageId(), true);
-			}
-
-			// Trash
-
-			if (trashVersion != null) {
-				trashVersionLocalService.deleteTrashVersion(trashVersion);
 			}
 
 			// Indexer
@@ -958,6 +973,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public void restoreThreadFromTrash(long userId, long threadId)
 		throws PortalException, SystemException {
 
+		// Thread
+
 		MBThread thread = getThread(threadId);
 
 		if (thread.getCategoryId() ==
@@ -971,8 +988,14 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		updateStatus(userId, threadId, trashEntry.getStatus());
 
+		// Messages
+
 		restoreDependentsFromTrash(
 			thread.getGroupId(), threadId, trashEntry.getEntryId());
+
+		// Trash
+
+		trashEntryLocalService.deleteEntry(trashEntry.getEntryId());
 
 		// Social
 
@@ -989,10 +1012,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			thread.getThreadId(),
 			SocialActivityConstants.TYPE_RESTORE_FROM_TRASH,
 			extraDataJSONObject.toString(), 0);
-
-		// Trash
-
-		trashEntryLocalService.deleteEntry(MBThread.class.getName(), threadId);
 	}
 
 	@Override
