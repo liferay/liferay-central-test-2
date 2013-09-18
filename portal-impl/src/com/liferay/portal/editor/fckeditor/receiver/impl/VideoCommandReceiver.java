@@ -14,6 +14,7 @@
 
 package com.liferay.portal.editor.fckeditor.receiver.impl;
 
+import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.servlet.ServletResponseConstants;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
@@ -45,6 +46,11 @@ public class VideoCommandReceiver extends BaseFileEntryCommandReceiver {
 	@Override
 	protected int getXugglerDisabledFileUploadReturnValue() {
 		return ServletResponseConstants.SC_VIDEO_PREVIEW_DISABLED_EXCEPTION;
+	}
+
+	@Override
+	protected boolean hasFileEntryPreview(FileVersion fileVersion) {
+		return VideoProcessorUtil.hasVideo(fileVersion);
 	}
 
 	private static final String _UNAVAIABLE_PREVIEW_ERROR_MESSAGE =
