@@ -15,14 +15,14 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.CookieKeys;
-import com.liferay.portal.model.UserRemotePreference;
+import com.liferay.portal.kernel.util.RemotePreference;
 
 import javax.servlet.http.Cookie;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public class CookieRemotePreference implements UserRemotePreference {
+public class CookieRemotePreference implements RemotePreference {
 
 	public CookieRemotePreference(Cookie cookie) {
 		_cookie = cookie;

@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.RemotePreference;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -44,7 +45,6 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Team;
 import com.liferay.portal.model.UserConstants;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.UserRemotePreference;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.security.auth.EmailAddressGenerator;
 import com.liferay.portal.security.auth.EmailAddressGeneratorFactory;
@@ -92,7 +92,7 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public void addRemotePreference(UserRemotePreference userRemotePreference) {
+	public void addRemotePreference(RemotePreference userRemotePreference) {
 		_remotePreferences.put(
 			userRemotePreference.getName(), userRemotePreference);
 	}
@@ -555,13 +555,13 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public UserRemotePreference getRemotePreference(String name) {
+	public RemotePreference getRemotePreference(String name) {
 		return _remotePreferences.get(name);
 	}
 
 	@Override
-	public Iterable<UserRemotePreference> getRemotePreferences() {
-		Collection<UserRemotePreference> values = _remotePreferences.values();
+	public Iterable<RemotePreference> getRemotePreferences() {
+		Collection<RemotePreference> values = _remotePreferences.values();
 
 		return Collections.unmodifiableCollection(values);
 	}
@@ -789,8 +789,8 @@ public class UserImpl extends UserBaseImpl {
 	private boolean _passwordModified;
 	private PasswordPolicy _passwordPolicy;
 	private String _passwordUnencrypted;
-	private transient Map<String, UserRemotePreference> _remotePreferences =
-		new HashMap<String, UserRemotePreference>();
+	private transient Map<String, RemotePreference> _remotePreferences =
+		new HashMap<String, RemotePreference>();
 	private TimeZone _timeZone;
 
 }
