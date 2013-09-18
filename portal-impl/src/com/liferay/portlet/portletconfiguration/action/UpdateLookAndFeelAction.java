@@ -147,17 +147,17 @@ public class UpdateLookAndFeelAction extends JSONAction {
 		if (PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED) {
 			JSONObject wapData = jsonObj.getJSONObject("wapData");
 
-			String wapTitle = wapData.getString("title");
 			String wapInitialWindowState = wapData.getString(
 				"initialWindowState");
+			String wapTitle = wapData.getString("title");
 
-			portletSetup.setValue("lfrWapTitle", wapTitle);
 			portletSetup.setValue(
 				"lfrWapInitialWindowState", wapInitialWindowState);
+			portletSetup.setValue("lfrWapTitle", wapTitle);
 		}
 		else {
-			portletSetup.reset("lfrWapTitle");
 			portletSetup.reset("lfrWapInitialWindowState");
+			portletSetup.reset("lfrWapTitle");
 		}
 
 		portletSetup.store();
