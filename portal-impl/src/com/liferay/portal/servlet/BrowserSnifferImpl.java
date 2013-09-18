@@ -516,10 +516,10 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 	private static String[] _revisionLeadings = {"rv", "it", "ra", "ie"};
 	private static char[] _revisionSeparators =
-		{CharPool.COLON, CharPool.SLASH, CharPool.SPACE, CharPool.BACK_SLASH};
+		{CharPool.BACK_SLASH, CharPool.COLON, CharPool.SLASH, CharPool.SPACE};
 	private static String[] _versionLeadings =
 		{"version", "firefox", "minefield", "chrome"};
 	private static char[] _versionSeparators =
-		{CharPool.SLASH, CharPool.BACK_SLASH};
+		{CharPool.BACK_SLASH, CharPool.SLASH};
 
 }
