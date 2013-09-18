@@ -1866,9 +1866,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	protected void notify(
-		final long groupId, final SubscriptionSender subscriptionSender,
+		final SubscriptionSender subscriptionSender,
 		final SubscriptionSender subscriptionSenderPrototype,
-		final List<Long> categoryIds) {
+		final long groupId, final List<Long> categoryIds) {
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(
 			new Callable<Void>() {
@@ -1898,6 +1898,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 					return null;
 				}
+
 			});
 	}
 
@@ -2166,8 +2167,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBThread.class.getName(), message.getThreadId());
 
 		notify(
-			message.getGroupId(), subscriptionSender,
-			subscriptionSenderPrototype, categoryIds);
+			subscriptionSender, subscriptionSenderPrototype,
+			message.getGroupId(), categoryIds);
 	}
 
 	protected void pingPingback(
