@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.kernel.util;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public interface UserRemotePreference {
+public interface RemotePreference {
 
 	public String getName();
 
