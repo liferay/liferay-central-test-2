@@ -442,7 +442,7 @@ public class AssetTagLocalServiceUtil {
 	* </p>
 	*
 	* @param userId the primary key of the user
-	* @param groupId the primary key of the tag's group
+	* @param group ID the primary key of the tag's group
 	* @param names the tag names
 	* @return the tags matching the group and names and new tags matching the
 	names that don't already exist for the group
