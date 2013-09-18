@@ -30,7 +30,7 @@ public class CookieRemotePreference implements RemotePreference {
 		String cookieName = cookie.getName();
 
 		_name = cookieName.substring(
-			CookieKeys.REMOTE_PREFERENCES_PREFIX.length());
+			CookieKeys.REMOTE_PREFERENCE_PREFIX.length());
 	}
 
 	public Cookie getCookie() {
