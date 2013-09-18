@@ -6113,10 +6113,8 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
-	public boolean isLoginRedirectNeeded(HttpServletRequest request)
+	public boolean isLoginRedirectRequired(HttpServletRequest request)
 		throws SystemException {
-
-		long companyId = PortalUtil.getCompanyId(request);
 
 		if (PropsValues.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS &&
 			!request.isSecure()) {
@@ -6124,21 +6122,20 @@ public class PortalImpl implements Portal {
 			return true;
 		}
 
-		boolean isCasAuthEnabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.CAS_AUTH_ENABLED,
-			PropsValues.CAS_AUTH_ENABLED);
-		boolean isLoginDialogDisabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.LOGIN_DIALOG_DISABLED,
-			PropsValues.LOGIN_DIALOG_DISABLED);
-		boolean isNtlmAuthEnabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.NTLM_AUTH_ENABLED,
-			PropsValues.NTLM_AUTH_ENABLED);
-		boolean isOpenSSOAuthEnabled = PrefsPropsUtil.getBoolean(
-			companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
-			PropsValues.OPEN_SSO_AUTH_ENABLED);
+		long companyId = PortalUtil.getCompanyId(request);
 
-		if (isCasAuthEnabled || isLoginDialogDisabled || isNtlmAuthEnabled ||
-			isOpenSSOAuthEnabled) {
+		if (PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.CAS_AUTH_ENABLED,
+				PropsValues.CAS_AUTH_ENABLED) ||
+			PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.LOGIN_DIALOG_DISABLED,
+				PropsValues.LOGIN_DIALOG_DISABLED) ||
+			PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.NTLM_AUTH_ENABLED,
+				PropsValues.NTLM_AUTH_ENABLED) ||
+			PrefsPropsUtil.getBoolean(
+				companyId, PropsKeys.OPEN_SSO_AUTH_ENABLED,
+				PropsValues.OPEN_SSO_AUTH_ENABLED)) {
 
 			return true;
 		}
