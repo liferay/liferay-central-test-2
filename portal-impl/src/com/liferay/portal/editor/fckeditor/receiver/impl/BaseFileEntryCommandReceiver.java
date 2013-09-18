@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.repository.model.FileVersion;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.xuggler.XugglerUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
-import com.liferay.portlet.documentlibrary.util.VideoProcessorUtil;
 
 import java.io.InputStream;
 
@@ -111,8 +110,6 @@ public abstract class BaseFileEntryCommandReceiver
 
 	protected abstract int getXugglerDisabledFileUploadReturnValue();
 
-	protected boolean hasFileEntryPreview(FileVersion fileVersion) {
-		return VideoProcessorUtil.hasVideo(fileVersion);
-	}
+	protected abstract boolean hasFileEntryPreview(FileVersion fileVersion);
 
 }
