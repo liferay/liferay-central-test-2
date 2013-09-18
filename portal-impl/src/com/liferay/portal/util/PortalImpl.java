@@ -5229,7 +5229,7 @@ public class PortalImpl implements Portal {
 		for (Cookie cookie : request.getCookies()) {
 			String cookieName = cookie.getName();
 
-			if (cookieName.startsWith(CookieKeys.REMOTE_PREFERENCES_PREFIX)) {
+			if (cookieName.startsWith(CookieKeys.REMOTE_PREFERENCE_PREFIX)) {
 				user.addRemotePreference(new CookieRemotePreference(cookie));
 			}
 		}
