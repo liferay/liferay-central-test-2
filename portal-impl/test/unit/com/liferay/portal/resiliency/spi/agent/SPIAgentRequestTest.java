@@ -95,20 +95,6 @@ public class SPIAgentRequestTest {
 			}
 		);
 
-		PortalUtil portalUtil = new PortalUtil();
-
-		portalUtil.setPortal(new PortalImpl());
-
-		ThreadLocalDistributor threadLocalDistributor =
-			new ThreadLocalDistributor();
-
-		threadLocalDistributor.setThreadLocalSources(
-			Arrays.asList(
-				new KeyValuePair(
-					SPIAgentRequestTest.class.getName(), "_threadLocal")));
-
-		threadLocalDistributor.afterPropertiesSet();
-
 		MemoryPortalCacheManager<Serializable, Serializable>
 			memoryPortalCacheManager =
 				new MemoryPortalCacheManager<Serializable, Serializable>();
@@ -122,6 +108,20 @@ public class SPIAgentRequestTest {
 		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
 
 		multiVMPoolUtil.setMultiVMPool(multiVMPoolImpl);
+
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(new PortalImpl());
+
+		ThreadLocalDistributor threadLocalDistributor =
+			new ThreadLocalDistributor();
+
+		threadLocalDistributor.setThreadLocalSources(
+			Arrays.asList(
+				new KeyValuePair(
+					SPIAgentRequestTest.class.getName(), "_threadLocal")));
+
+		threadLocalDistributor.afterPropertiesSet();
 	}
 
 	@Before
