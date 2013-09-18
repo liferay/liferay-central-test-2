@@ -1242,6 +1242,16 @@ public class LayoutServiceUtil {
 				   .updatePriority(groupId, privateLayout, layoutId, priority);
 	}
 
+	public static com.liferay.portal.model.Layout updatePriority(long groupId,
+		boolean privateLayout, long layoutId, long nextLayoutId,
+		long previousLayoutId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updatePriority(groupId, privateLayout, layoutId,
+			nextLayoutId, previousLayoutId);
+	}
+
 	/**
 	* Updates the priority of the layout matching the primary key.
 	*
