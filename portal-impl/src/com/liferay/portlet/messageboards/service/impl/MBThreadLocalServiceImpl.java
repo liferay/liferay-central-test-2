@@ -813,7 +813,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		TrashEntry trashEntry = thread.getTrashEntry();
 
-		if (trashEntry.getClassName().equals(MBThread.class.getName()) &&
+		String className = trashEntry.getClassName();
+
+		if (className.equals(MBThread.class.getName()) &&
 			(trashEntry.getClassPK() == threadId)) {
 
 			restoreThreadFromTrash(userId, threadId);
@@ -835,16 +837,16 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			updateStatus(userId, threadId, status);
 
-			// Messages
-
-			restoreDependentsFromTrash(
-				thread.getGroupId(), threadId, trashEntry.getEntryId());
-
 			// Trash
 
 			if (trashVersion != null) {
 				trashVersionLocalService.deleteTrashVersion(trashVersion);
 			}
+
+			// Messages
+
+			restoreDependentsFromTrash(
+				thread.getGroupId(), threadId, trashEntry.getEntryId());
 		}
 
 		return moveThread(thread.getGroupId(), categoryId, threadId);
