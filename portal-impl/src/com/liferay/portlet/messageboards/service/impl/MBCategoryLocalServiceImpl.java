@@ -547,7 +547,9 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		TrashEntry trashEntry = category.getTrashEntry();
 
-		if (trashEntry.getClassName().equals(MBCategory.class.getName()) &&
+		String className = trashEntry.getClassName();
+
+		if (className.equals(MBCategory.class.getName()) &&
 			(trashEntry.getClassPK() == categoryId)) {
 
 			restoreCategoryFromTrash(userId, categoryId);
@@ -569,6 +571,12 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			updateStatus(userId, categoryId, status);
 
+			// Trash
+
+			if (trashVersion != null) {
+				trashVersionLocalService.deleteTrashVersion(trashVersion);
+			}
+
 			// Categories and threads
 
 			User user = userPersistence.findByPrimaryKey(userId);
@@ -578,12 +586,6 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			restoreDependentFromTrash(
 				user, categoriesAndThreads, trashEntry.getEntryId());
-
-			// Trash
-
-			if (trashVersion != null) {
-				trashVersionLocalService.deleteTrashVersion(trashVersion);
-			}
 		}
 
 		return moveCategory(categoryId, newCategoryId, false);
