@@ -34,7 +34,7 @@ public class BrowserSnifferImplTest {
 
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(getClass().getResourceAsStream(
-				"dependencies/user_agent.csv")));
+				"dependencies/user_agents.csv")));
 
 		String line = null;
 
