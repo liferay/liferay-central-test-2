@@ -157,7 +157,7 @@ public abstract class MimeResponseImpl
 			!windowState.equals(LiferayWindowState.EXCLUSIVE)) {
 
 			throw new IllegalArgumentException(
-				contentType + " is not a supported mime type");
+				contentType + " is an unsupported content type");
 		}
 
 		_contentType = contentType;
