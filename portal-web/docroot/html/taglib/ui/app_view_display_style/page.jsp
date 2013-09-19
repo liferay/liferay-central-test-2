@@ -26,20 +26,18 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 
 <c:if test="<%= displayStyles.length > 1 %>">
 	<div id="<portlet:namespace />displayStyleButtons">
-		<liferay-ui:icon-menu direction="down" icon='<%= "../aui/" + _getDisplayStyleIcon(displayStyle) %>' message="" select="<%= true %>">
+		<liferay-ui:icon-menu direction="down" icon='<%= "../aui/" + _getIcon(displayStyle) %>' message="" select="<%= true %>">
 
 			<%
 			for (int i = 0; i < displayStyles.length; i++) {
 				String dataStyle = displayStyles[i];
-
-				String iconClass = _getDisplayStyleIcon(dataStyle);
 
 				Map<String, Object> data = new HashMap<String, Object>();
 
 				data.put("displayStyle", dataStyle);
 			%>
 
-				<liferay-ui:icon data="<%= data %>" image='<%= "../aui/" + iconClass %>' message="<%= dataStyle %>" onClick='<%= randomNamespace + "onClickDisplayStyle(event);" %>' url="javascript:;" />
+				<liferay-ui:icon data="<%= data %>" image='<%= "../aui/" + _getIcon(dataStyle) %>' message="<%= dataStyle %>" onClick='<%= randomNamespace + "onClickDisplayStyle(event);" %>' url="javascript:;" />
 
 			<%
 			}
@@ -93,19 +91,19 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 </c:if>
 
 <%!
-private String _getDisplayStyleIcon(String displayStyle) {
-	String iconClass = displayStyle;
+private String _getIcon(String displayStyle) {
+	String displayStyleIcon = displayStyle;
 
-	if (displayStyle.equals("icon")) {
-		iconClass = "th-large";
+	if (displayStyle.equals("descriptive")) {
+		displayStyleIcon = "th-list";
 	}
-	else if (displayStyle.equals("descriptive")) {
-		iconClass = "th-list";
+	else if (displayStyle.equals("icon")) {
+		displayStyleIcon = "th-large";
 	}
 	else if (displayStyle.equals("list")) {
-		iconClass ="align-justify";
+		displayStyleIcon = "align-justify";
 	}
 
-	return iconClass;
+	return displayStyleIcon;
 }
 %>

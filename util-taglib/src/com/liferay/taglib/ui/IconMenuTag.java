@@ -417,7 +417,7 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private boolean _localizeMessage = true;
 	private int _maxDisplayItems = _DEFAULT_MAX_DISPLAY_ITEMS;
 	private String _message = "actions";
-	private boolean _select = false;
+	private boolean _select;
 	private boolean _showArrow = true;
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
