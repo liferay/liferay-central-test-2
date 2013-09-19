@@ -23,7 +23,7 @@
 		String signedInAs = HtmlUtil.escape(user.getFullName());
 
 		if (themeDisplay.isShowMyAccountIcon() && (themeDisplay.getURLMyAccount() != null)) {
-			String myAccountURL = themeDisplay.getURLMyAccount().toString();
+			String myAccountURL = String.valueOf(themeDisplay.getURLMyAccount());
 
 			if (PropsValues.DOCKBAR_ADMINISTRATIVE_LINKS_SHOW_IN_POP_UP) {
 				signedInAs = "<a href=\"javascript:Liferay.Util.openWindow({dialog: {destroyOnHide: true}, title: '" + LanguageUtil.get(pageContext, "my-account") + "', uri: '" + HtmlUtil.escape(myAccountURL) + "'});\">" + signedInAs + "</a>";
