@@ -96,6 +96,7 @@ String taskExecutorClassName = localPublishing ? LayoutStagingBackgroundTaskExec
 				<strong class="label label-info">
 					<liferay-ui:message key="initial-publication" />
 				</strong>
+
 				<strong class="label label-default">
 					<c:choose>
 						<c:when test='<%= MapUtil.getBoolean(backgroundTask.getTaskContextMap(), "privateLayout") %>'>
