@@ -54,12 +54,12 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 String emailSignature = PrefsParamUtil.getString(portletPreferences, request, emailSignatureParam, defaultEmailSignature);
 %>
 
-<liferay-portlet:renderURL portletConfiguration="true" var="portletURL">
+<liferay-portlet:renderURL portletConfiguration="<%= true %>" var="portletURL">
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 </liferay-portlet:renderURL>
 
-<liferay-portlet:actionURL portletConfiguration="true" var="configurationURL" />
+<liferay-portlet:actionURL portletConfiguration="<%= true %>" var="configurationURL" />
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveConfiguration();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -113,7 +113,7 @@ String emailSignature = PrefsParamUtil.getString(portletPreferences, request, em
 
 						</c:when>
 						<c:otherwise>
-							<aui:option disabled="true" label="html" selected="true" value="html" />
+							<aui:option disabled="<%= true %>" label="html" selected="<%= true %>" value="html" />
 						</c:otherwise>
 					</c:choose>
 			</aui:select>
