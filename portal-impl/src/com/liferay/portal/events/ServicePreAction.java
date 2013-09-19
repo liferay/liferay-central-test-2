@@ -1428,13 +1428,13 @@ public class ServicePreAction extends Action {
 
 		LayoutTemplate layoutTemplate = layoutTypePortlet.getLayoutTemplate();
 
-		for (String column : layoutTemplate.getColumns()) {
+		for (String columnId : layoutTemplate.getColumns()) {
 			String keyPrefix = PropsKeys.DEFAULT_USER_PRIVATE_LAYOUT_PREFIX;
 
-			String portletIds = PropsUtil.get(keyPrefix.concat(column));
+			String portletIds = PropsUtil.get(keyPrefix.concat(columnId));
 
 			layoutTypePortlet.addPortletIds(
-				0, StringUtil.split(portletIds), column, false);
+				0, StringUtil.split(portletIds), columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(
@@ -1526,13 +1526,13 @@ public class ServicePreAction extends Action {
 
 		LayoutTemplate layoutTemplate = layoutTypePortlet.getLayoutTemplate();
 
-		for (String column : layoutTemplate.getColumns()) {
+		for (String columnId : layoutTemplate.getColumns()) {
 			String keyPrefix = PropsKeys.DEFAULT_USER_PUBLIC_LAYOUT_PREFIX;
 
-			String portletIds = PropsUtil.get(keyPrefix.concat(column));
+			String portletIds = PropsUtil.get(keyPrefix.concat(columnId));
 
 			layoutTypePortlet.addPortletIds(
-				0, StringUtil.split(portletIds), column, false);
+				0, StringUtil.split(portletIds), columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(
