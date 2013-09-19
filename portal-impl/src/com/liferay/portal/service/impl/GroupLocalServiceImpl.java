@@ -3550,13 +3550,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		LayoutTemplate layoutTemplate = layoutTypePortlet.getLayoutTemplate();
 
-		for (String column : layoutTemplate.getColumns()) {
+		for (String columnId : layoutTemplate.getColumns()) {
 			String keyPrefix = PropsKeys.DEFAULT_GUEST_PUBLIC_LAYOUT_PREFIX;
 
-			String portletIds = PropsUtil.get(keyPrefix.concat(column));
+			String portletIds = PropsUtil.get(keyPrefix.concat(columnId));
 
 			layoutTypePortlet.addPortletIds(
-				0, StringUtil.split(portletIds), column, false);
+				0, StringUtil.split(portletIds), columnId, false);
 		}
 
 		layoutLocalService.updateLayout(
