@@ -2640,34 +2640,32 @@ public class HookHotDeployListener
 
 		field.set(null, value);
 
-		if (!key.equals(PropsKeys.LAYOUT_TYPES)) {
-			return;
-		}
+		if (key.equals(PropsKeys.LAYOUT_TYPES)) {
+			Map<String, LayoutSettings> layoutSettingsMap =
+				LayoutSettings.getLayoutSettingsMap();
 
-		Map<String, LayoutSettings> layoutSettingsMap =
-			LayoutSettings.getLayoutSettingsMap();
+			Set<Map.Entry<String, LayoutSettings>> set =
+				layoutSettingsMap.entrySet();
 
-		Set<Map.Entry<String, LayoutSettings>> entrySet =
-			layoutSettingsMap.entrySet();
+			Iterator<Map.Entry<String, LayoutSettings>> iterator =
+				set.iterator();
 
-		Iterator<Map.Entry<String, LayoutSettings>> entrySetIterator =
-			entrySet.iterator();
+			while (iterator.hasNext()) {
+				Map.Entry<String, LayoutSettings> entry = iterator.next();
 
-		while (entrySetIterator.hasNext()) {
-			Map.Entry<String, LayoutSettings> entry = entrySetIterator.next();
+				String layoutType = entry.getKey();
 
-			String layoutType = entry.getKey();
+				if (!layoutType.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
+					!ArrayUtil.contains(value, layoutType)) {
 
-			if (!layoutType.equals(LayoutConstants.TYPE_CONTROL_PANEL) &&
-				!ArrayUtil.contains(value, layoutType)) {
-
-				entrySetIterator.remove();
+					iterator.remove();
+				}
 			}
-		}
 
-		for (String type : value) {
-			if (!layoutSettingsMap.containsKey(type)) {
-				LayoutSettings.addLayoutSetting(type);
+			for (String type : value) {
+				if (!layoutSettingsMap.containsKey(type)) {
+					LayoutSettings.addLayoutSetting(type);
+				}
 			}
 		}
 	}

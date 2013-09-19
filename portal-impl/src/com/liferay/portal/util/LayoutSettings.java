@@ -122,11 +122,7 @@ public class LayoutSettings {
 			PropsUtil.get(PropsKeys.LAYOUT_VIEW_PAGE, filter));
 	}
 
-	private String[] _configurationActionDelete;
-	private String[] _configurationActionUpdate;
-	private String _editPage;
-	private boolean _firstPageable;
-	private final static Map<String, LayoutSettings> _layoutSettingsMap =
+	private static Map<String, LayoutSettings> _layoutSettingsMap =
 		new HashMap<String, LayoutSettings>();
 
 	static {
@@ -139,6 +135,10 @@ public class LayoutSettings {
 		}
 	}
 
+	private String[] _configurationActionDelete;
+	private String[] _configurationActionUpdate;
+	private String _editPage;
+	private boolean _firstPageable;
 	private boolean _parentable;
 	private boolean _sitemapable;
 	private String _type;
