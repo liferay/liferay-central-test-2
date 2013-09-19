@@ -82,7 +82,7 @@ if ((ddmStructure == null) && (ddmTemplate == null) && Validator.isNotNull(templ
 	}
 }
 
-if ((ddmTemplate == null) && (ddmTemplates.size() > 0)) {
+if ((ddmTemplate == null) && !ddmTemplates.isEmpty()) {
 	ddmTemplate = ddmTemplates.get(0);
 
 	templateId = ddmTemplate.getTemplateKey();
