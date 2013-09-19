@@ -84,11 +84,10 @@
 <#assign user_login_ip = user.getLoginIP() />
 <#assign user_last_login_ip = user.getLastLoginIP() />
 
+<#assign is_login_redirect_required = portalUtil.isLoginRedirectRequired(request) />
 <#assign is_signed_in = theme_display.isSignedIn() />
 
 <#assign group_id = theme_display.getScopeGroupId() />
-
-<#assign redirect_login = portalUtil.isLoginRedirectRequired(request) />
 
 <#-- ---------- URLs ---------- -->
 
