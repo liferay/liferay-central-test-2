@@ -29,9 +29,7 @@ public class KeywordsSuggestionHolder {
 	public KeywordsSuggestionHolder(
 		String suggestedKeywords, String originalKeywords) {
 
-		this(
-			suggestedKeywords, originalKeywords,
-			_DEAFULT_KEYWORDS_DELIMETER_REGEXP);
+		this(suggestedKeywords, originalKeywords, _KEYWORDS_DELIMETER_REGEXP);
 	}
 
 	public KeywordsSuggestionHolder(
@@ -63,15 +61,10 @@ public class KeywordsSuggestionHolder {
 	}
 
 	public boolean hasChanged(String suggestedKeyword) {
-		if (_originalKeywords.contains(suggestedKeyword)) {
-			return false;
-		}
-		else {
-			return true;
-		}
+		return !_originalKeywords.contains(suggestedKeyword);
 	}
 
-	private static final String _DEAFULT_KEYWORDS_DELIMETER_REGEXP = "[ ]+";
+	private static final String _KEYWORDS_DELIMETER_REGEXP = "[ ]+";
 
 	private List<String> _originalKeywords;
 	private List<String> _suggestedKeywords;
