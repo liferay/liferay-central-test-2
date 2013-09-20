@@ -854,7 +854,7 @@ public interface Portal {
 
 	public String getPathContext(HttpServletRequest request);
 
-	public String getPathContext(PortletRequest request);
+	public String getPathContext(PortletRequest portletRequest);
 
 	public String getPathContext(String contextPath);
 
