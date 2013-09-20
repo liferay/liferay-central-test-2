@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.monitoring.RequestStatus;
 import com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample;
 import com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
