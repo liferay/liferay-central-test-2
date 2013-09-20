@@ -20,7 +20,6 @@ package com.liferay.portlet;
 public class MonitoringPortletManager implements MonitoringPortletManagerMBean {
 
 	public void afterPropertiesSet() {
-
 		if (MonitoringPortlet.isMonitoringPortletActionRequest() ||
 			MonitoringPortlet.isMonitoringPortletEventRequest() ||
 			MonitoringPortlet.isMonitoringPortletRenderRequest() ||

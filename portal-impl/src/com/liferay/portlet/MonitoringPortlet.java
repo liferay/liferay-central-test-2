@@ -87,7 +87,6 @@ public class MonitoringPortlet implements InvokerPortlet {
 	}
 
 	public MonitoringPortlet(InvokerPortlet invokerPortlet) {
-
 		_invokerPortlet = invokerPortlet;
 	}
 

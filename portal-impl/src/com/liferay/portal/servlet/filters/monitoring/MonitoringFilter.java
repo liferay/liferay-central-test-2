@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.monitoring.RequestStatus;
 import com.liferay.portal.kernel.monitoring.statistics.DataSampleThreadLocal;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample;
 import com.liferay.portal.monitoring.statistics.service.ServiceMonitorAdvice;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -79,15 +78,9 @@ public class MonitoringFilter extends BasePortalFilter {
 		PortalRequestDataSample portalRequestDataSample = null;
 
 		if (_monitoringPortalRequest) {
-			String requestURLString = StringPool.BLANK;
-
-			if (request.getRequestURL() != null) {
-				requestURLString = request.getRequestURL().toString();
-			}
-
 			portalRequestDataSample = new PortalRequestDataSample(
 				companyId, request.getRemoteUser(), request.getRequestURI(),
-				requestURLString);
+				GetterUtil.getString(request.getRequestURL()));
 		}
 
 		try {
