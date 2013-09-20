@@ -959,8 +959,8 @@ public class PortalUtil {
 		return getPortal().getPathContext(request);
 	}
 
-	public static String getPathContext(PortletRequest request) {
-		return getPortal().getPathContext(request);
+	public static String getPathContext(PortletRequest portletRequest) {
+		return getPortal().getPathContext(portletRequest);
 	}
 
 	public static String getPathContext(String contextPath) {

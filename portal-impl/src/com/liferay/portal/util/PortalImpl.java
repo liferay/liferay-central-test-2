@@ -3569,8 +3569,8 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
-	public String getPathContext(PortletRequest request) {
-		return getPathContext(request.getContextPath());
+	public String getPathContext(PortletRequest portletRequest) {
+		return getPathContext(portletRequest.getContextPath());
 	}
 
 	@Override
