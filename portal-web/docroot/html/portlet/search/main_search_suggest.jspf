@@ -61,10 +61,10 @@
 					<li>
 
 						<%
-						String taglibSearchRelatedQuery = renderResponse.getNamespace() + "searchKeywords('" + HtmlUtil.escapeJS(querySuggestion) + "')";
+						String taglibOnClick = renderResponse.getNamespace() + "searchKeywords('" + HtmlUtil.escapeJS(querySuggestion) + "')";
 						%>
 
-						<aui:a href="javascript:;" onclick="<%= taglibSearchRelatedQuery %>">
+						<aui:a href="javascript:;" onClick="<%= taglibOnClick %>">
 
 							<%
 							KeywordsSuggestionHolder keywordsSuggestionHolder = new KeywordsSuggestionHolder(querySuggestion, searchContext.getKeywords());

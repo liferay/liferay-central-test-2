@@ -24,7 +24,7 @@ page import="com.liferay.portal.kernel.search.Hits" %><%@
 page import="com.liferay.portal.kernel.search.HitsOpenSearchImpl" %><%@
 page import="com.liferay.portal.kernel.search.Indexer" %><%@
 page import="com.liferay.portal.kernel.search.IndexerRegistryUtil" %><%@
-page import=" com.liferay.portal.kernel.search.KeywordsSuggestionHolder" %><%@
+page import="com.liferay.portal.kernel.search.KeywordsSuggestionHolder" %><%@
 page import="com.liferay.portal.kernel.search.OpenSearch" %><%@
 page import="com.liferay.portal.kernel.search.OpenSearchUtil" %><%@
 page import="com.liferay.portal.kernel.search.QueryConfig" %><%@
@@ -69,29 +69,6 @@ page import="java.util.LinkedList" %>
 PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
 boolean advancedConfiguration = GetterUtil.getBoolean(portletPreferences.getValue("advancedConfiguration", null));
-boolean displayScopeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayScopeFacet", null), true);
-boolean displayAssetTypeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTypeFacet", null), true);
-boolean displayAssetTagsFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTagsFacet", null), true);
-boolean displayAssetCategoriesFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetCategoriesFacet", null), true);
-boolean displayFolderFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayFolderFacet", null), true);
-boolean displayUserFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayUserFacet", null), true);
-boolean displayModifiedRangeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayModifiedRangeFacet", null), true);
-
-boolean displayResultsInDocumentForm = GetterUtil.getBoolean(portletPreferences.getValue("displayResultsInDocumentForm", null));
-
-if (!permissionChecker.isCompanyAdmin()) {
-	displayResultsInDocumentForm = false;
-}
-
-boolean viewInContext = GetterUtil.getBoolean(portletPreferences.getValue("viewInContext", null), true);
-boolean displayMainQuery = GetterUtil.getBoolean(portletPreferences.getValue("displayMainQuery", null));
-boolean displayOpenSearchResults = GetterUtil.getBoolean(portletPreferences.getValue("displayOpenSearchResults", null));
-
-String searchConfiguration = portletPreferences.getValue("searchConfiguration", StringPool.BLANK);
-
-if (!advancedConfiguration && Validator.isNull(searchConfiguration)) {
-	searchConfiguration = ContentUtil.get(PropsValues.SEARCH_FACET_CONFIGURATION);
-}
 
 int collatedSpellCheckResultDisplayThreshold = GetterUtil.getInteger(portletPreferences.getValue("collatedSpellCheckResultDisplayThreshold", null), PropsValues.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_SCORES_THRESHOLD);
 
@@ -100,10 +77,35 @@ if (collatedSpellCheckResultDisplayThreshold < 0) {
 }
 
 boolean collatedSpellCheckResultEnabled = GetterUtil.getBoolean(portletPreferences.getValue("collatedSpellCheckResultEnabled", null), PropsValues.INDEX_SEARCH_COLLATED_SPELL_CHECK_RESULT_ENABLED);
+boolean dlLinkToViewURL = false;
+boolean displayAssetCategoriesFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetCategoriesFacet", null), true);
+boolean displayAssetTagsFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTagsFacet", null), true);
+boolean displayAssetTypeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayAssetTypeFacet", null), true);
+boolean displayFolderFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayFolderFacet", null), true);
+boolean displayMainQuery = GetterUtil.getBoolean(portletPreferences.getValue("displayMainQuery", null));
+boolean displayModifiedRangeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayModifiedRangeFacet", null), true);
+boolean displayOpenSearchResults = GetterUtil.getBoolean(portletPreferences.getValue("displayOpenSearchResults", null));
+
+boolean displayResultsInDocumentForm = GetterUtil.getBoolean(portletPreferences.getValue("displayResultsInDocumentForm", null));
+
+if (!permissionChecker.isCompanyAdmin()) {
+	displayResultsInDocumentForm = false;
+}
+
+boolean displayScopeFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayScopeFacet", null), true);
+boolean displayUserFacet = GetterUtil.getBoolean(portletPreferences.getValue("displayUserFacet", null), true);
+boolean includeSystemPortlets = false;
+boolean queryIndexingEnabled = GetterUtil.getBoolean(portletPreferences.getValue("queryIndexingEnabled", null), PropsValues.INDEX_SEARCH_QUERY_INDEXING_ENABLED);
+
+int queryIndexingThreshold = GetterUtil.getInteger(portletPreferences.getValue("queryIndexingThreshold", null), PropsValues.INDEX_SEARCH_QUERY_INDEXING_THRESHOLD);
+
+if (queryIndexingThreshold < 0) {
+	queryIndexingThreshold = PropsValues.INDEX_SEARCH_QUERY_INDEXING_THRESHOLD;
+}
 
 int querySuggestionsDisplayThreshold = GetterUtil.getInteger(portletPreferences.getValue("querySuggestionsDisplayThreshold", null), PropsValues.INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD);
 
-	if (querySuggestionsDisplayThreshold < 0) {
+if (querySuggestionsDisplayThreshold < 0) {
 	querySuggestionsDisplayThreshold = PropsValues.INDEX_SEARCH_QUERY_SUGGESTION_SCORES_THRESHOLD;
 }
 
@@ -115,16 +117,13 @@ if (querySuggestionsMax <= 0) {
 	querySuggestionsMax = PropsValues.INDEX_SEARCH_QUERY_SUGGESTION_MAX;
 }
 
-boolean queryIndexingEnabled = GetterUtil.getBoolean(portletPreferences.getValue("queryIndexingEnabled", null), PropsValues.INDEX_SEARCH_QUERY_INDEXING_ENABLED);
+String searchConfiguration = portletPreferences.getValue("searchConfiguration", StringPool.BLANK);
 
-int queryIndexingThreshold = GetterUtil.getInteger(portletPreferences.getValue("queryIndexingThreshold", null), PropsValues.INDEX_SEARCH_QUERY_INDEXING_THRESHOLD);
-
-if (queryIndexingThreshold < 0) {
-	queryIndexingThreshold = PropsValues.INDEX_SEARCH_QUERY_INDEXING_THRESHOLD;
+if (!advancedConfiguration && Validator.isNull(searchConfiguration)) {
+	searchConfiguration = ContentUtil.get(PropsValues.SEARCH_FACET_CONFIGURATION);
 }
 
-boolean dlLinkToViewURL = false;
-boolean includeSystemPortlets = false;
+boolean viewInContext = GetterUtil.getBoolean(portletPreferences.getValue("viewInContext", null), true);
 %>
 
 <%@ include file="/html/portlet/search/init-ext.jsp" %>

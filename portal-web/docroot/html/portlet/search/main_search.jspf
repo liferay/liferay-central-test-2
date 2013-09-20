@@ -17,6 +17,8 @@
 <%
 SearchContainer mainSearchSearchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
+mainSearchSearchContainer.setEmptyResultsMessage(LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(searchContext.getKeywords()) + "</strong>"));
+
 SearchContext searchContext = SearchContextFactory.getInstance(request);
 
 searchContext.setAttribute("paginationType", "more");
@@ -24,11 +26,9 @@ searchContext.setEnd(mainSearchSearchContainer.getEnd());
 
 QueryConfig queryConfig = new QueryConfig();
 
-queryConfig.setHighlightEnabled(true);
-
 queryConfig.setCollatedSpellCheckResultEnabled(collatedSpellCheckResultEnabled);
 queryConfig.setCollatedSpellCheckResultScoresThreshold(collatedSpellCheckResultDisplayThreshold);
-
+queryConfig.setHighlightEnabled(true);
 queryConfig.setQuerySuggestionEnabled(querySuggestionsEnabled);
 queryConfig.setQuerySuggestionScoresThreshold(querySuggestionsDisplayThreshold);
 queryConfig.setQuerySuggestionsMax(querySuggestionsMax);
@@ -60,8 +60,6 @@ for (FacetConfiguration facetConfiguration : facetConfigurations) {
 Indexer indexer = FacetedSearcher.getInstance();
 
 Hits hits = indexer.search(searchContext);
-
-mainSearchSearchContainer.setEmptyResultsMessage(LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<strong>" + HtmlUtil.escape(searchContext.getKeywords()) + "</strong>"));
 
 String[] queryTerms = hits.getQueryTerms();
 
