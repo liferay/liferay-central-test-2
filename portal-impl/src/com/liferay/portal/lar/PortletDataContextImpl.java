@@ -314,6 +314,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		addZipEntry(path, classedModel);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addClassedModel(Element,
+	 *             ClassedModel, Class)}
+	 */
 	@Override
 	public void addClassedModel(
 			Element element, String path, ClassedModel classedModel,
@@ -323,6 +327,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		addClassedModel(element, path, classedModel, clazz);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #addClassedModel(Element,
+	 *             String, ClassedModel)}
+	 */
 	@Override
 	public void addClassedModel(
 			Element element, String path, ClassedModel classedModel,
@@ -767,6 +775,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			element, null, classedModel, classedModel.getModelClass());
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #createServiceContext(Element, ClassedModel)}
+	 */
 	@Override
 	public ServiceContext createServiceContext(
 		Element element, ClassedModel classedModel, String namespace) {
@@ -797,6 +809,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 			null, path, classedModel, classedModel.getModelClass());
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link #createServiceContext(String,
+	 *             ClassedModel)}
+	 */
 	@Override
 	public ServiceContext createServiceContext(
 		String path, ClassedModel classedModel, String namespace) {
@@ -1438,6 +1454,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #importClassedModel(ClassedModel, ClassedModel, Class)}
+	 */
 	@Override
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
@@ -1447,6 +1467,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		importClassedModel(classedModel, newClassedModel, clazz);
 	}
 
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             #importClassedModel(ClassedModel, ClassedModel)}
+	 */
 	@Override
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
