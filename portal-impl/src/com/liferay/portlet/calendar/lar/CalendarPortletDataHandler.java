@@ -154,7 +154,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		Element eventElement = rootElement.addElement("event");
 
 		portletDataContext.addClassedModel(
-			eventElement, path, event, NAMESPACE);
+			eventElement, path, event);
 	}
 
 	protected String getEventPath(
@@ -219,7 +219,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 		}
 
 		ServiceContext serviceContext = portletDataContext.createServiceContext(
-			eventElement, event, NAMESPACE);
+			eventElement, event);
 
 		CalEvent importedEvent = null;
 
@@ -266,7 +266,7 @@ public class CalendarPortletDataHandler extends BasePortletDataHandler {
 				event.getSecondReminder(), serviceContext);
 		}
 
-		portletDataContext.importClassedModel(event, importedEvent, NAMESPACE);
+		portletDataContext.importClassedModel(event, importedEvent);
 	}
 
 }
