@@ -221,8 +221,8 @@ public abstract class BaseActionableDynamicQuery
 	private Method _dynamicQueryCountMethod;
 	private Method _dynamicQueryMethod;
 	private long _groupId;
-	private int _interval = Indexer.DEFAULT_INTERVAL;
 	private String _groupIdPropertyName = "groupId";
+	private int _interval = Indexer.DEFAULT_INTERVAL;
 	private String _primaryKeyPropertyName;
 
 }

@@ -37,7 +37,7 @@ public interface ActionableDynamicQuery {
 	public void setCompanyId(long companyId);
 
 	public void setGroupId(long groupId);
-	
+
 	public void setGroupIdPropertyName(String groupIdPropertyName);
 
 	public void setInterval(int interval);
