@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -45,17 +46,17 @@ public class CompanyTestUtil {
 	public static void resetCompanyLocales(long companyId, Locale[] locales)
 		throws Exception {
 
-		StringBuilder languageIds = new StringBuilder((locales.length) * 2 - 1);
+		StringBundler sb = new StringBundler();
 
 		for (int i = 0; i < locales.length; i++) {
-			languageIds.append(LanguageUtil.getLanguageId(locales[i]));
+			sb.append(LanguageUtil.getLanguageId(locales[i]));
 
-			if (i < locales.length -1) {
-				languageIds.append(StringPool.COMMA);
+			if ((i + 1) < locales.length) {
+				sb.append(StringPool.COMMA);
 			}
 		}
 
-		resetCompanyLocales(companyId, languageIds.toString());
+		resetCompanyLocales(companyId, sb.toString());
 	}
 
 	public static void resetCompanyLocales(long companyId, String languageIds)
