@@ -106,9 +106,8 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #addClassedModel(com.liferay.portal.kernel.xml.Element,
-	 *             String, com.liferay.portal.model.ClassedModel, Class)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addClassedModel(Element,
+	 *             ClassedModel, Class)}
 	 */
 	public void addClassedModel(
 			Element element, String path, ClassedModel classedModel,
@@ -116,9 +115,8 @@ public interface PortletDataContext extends Serializable {
 		throws PortalException, SystemException;
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #addClassedModel(com.liferay.portal.kernel.xml.Element,
-	 *             String, com.liferay.portal.model.ClassedModel)}
+	 * @deprecated As of 6.2.0, replaced by {@link #addClassedModel(Element,
+	 *             String, ClassedModel)}
 	 */
 	public void addClassedModel(
 			Element element, String path, ClassedModel classedModel,
@@ -211,8 +209,7 @@ public interface PortletDataContext extends Serializable {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #createServiceContext(com.liferay.portal.kernel.xml.Element,
-	 *             com.liferay.portal.model.ClassedModel)}
+	 *             #createServiceContext(Element, ClassedModel)}
 	 */
 	public ServiceContext createServiceContext(
 		Element element, ClassedModel classedModel, String namespace);
@@ -227,7 +224,7 @@ public interface PortletDataContext extends Serializable {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link #createServiceContext(String,
-	 *             com.liferay.portal.model.ClassedModel)}
+	 *             ClassedModel)}
 	 */
 	public ServiceContext createServiceContext(
 		String path, ClassedModel classedModel, String namespace);
@@ -447,8 +444,7 @@ public interface PortletDataContext extends Serializable {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #importClassedModel(com.liferay.portal.model.ClassedModel,
-	 *             com.liferay.portal.model.ClassedModel, Class)}
+	 *             #importClassedModel(ClassedModel, ClassedModel, Class)}
 	 */
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
@@ -457,8 +453,7 @@ public interface PortletDataContext extends Serializable {
 
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             #importClassedModel(com.liferay.portal.model.ClassedModel,
-	 *             com.liferay.portal.model.ClassedModel)}
+	 *             #importClassedModel(ClassedModel, ClassedModel)}
 	 */
 	public void importClassedModel(
 			ClassedModel classedModel, ClassedModel newClassedModel,
