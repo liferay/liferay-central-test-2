@@ -127,8 +127,8 @@ public class JSONWebServiceNaming {
 
 	protected Set<String> excludedMethodNames = SetUtil.fromArray(
 		new String[] {"getBeanIdentifier", "setBeanIdentifier"});
-	protected Set<Class> excludedTypes = SetUtil.fromArray(
-		new Class[] {InputStream.class, OutputStream.class});
+	protected Set<Class<?>> excludedTypes = SetUtil.fromArray(
+		new Class<?>[] {InputStream.class, OutputStream.class});
 	protected Set<String> invalidHttpMethods = SetUtil.fromArray(
 		PropsUtil.getArray(PropsKeys.JSONWS_WEB_SERVICE_INVALID_HTTP_METHODS));
 	protected Set<String> prefixes = SetUtil.fromArray(
