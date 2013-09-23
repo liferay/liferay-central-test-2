@@ -410,6 +410,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 
 				return modelAdditionCount;
 			}
+
 		};
 	}
 
