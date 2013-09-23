@@ -96,7 +96,6 @@ String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
 String toLanguageId = ParamUtil.getString(request, "toLanguageId");
 
 if (Validator.isNull(defaultLanguageId) || !LanguageUtil.isAvailableLocale(themeDisplay.getSiteGroupId(), defaultLanguageId)) {
-
 	if (article != null) {
 		defaultLanguageId = article.getDefaultLanguageId();
 	}
