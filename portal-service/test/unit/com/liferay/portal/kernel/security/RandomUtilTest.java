@@ -34,7 +34,7 @@ public class RandomUtilTest {
 
 	@Test
 	public void testNext() {
-		RandomUtil.random = new PredictedRandom(_NUMBERS);
+		RandomUtil.random = new PredictableRandom(_NUMBERS);
 
 		for (int number : _NUMBERS) {
 			Assert.assertEquals(number, RandomUtil.nextInt(10));
@@ -45,15 +45,15 @@ public class RandomUtilTest {
 	public void testNextInts() {
 		int[] expectedResult = new int[] {6, 0, 1, 8, 4, 9, 3, 7, 2, 5};
 
-		RandomUtil.random = new PredictedRandom(_NUMBERS);
+		RandomUtil.random = new PredictableRandom(_NUMBERS);
 
 		Assert.assertArrayEquals(expectedResult, RandomUtil.nextInts(10, 10));
 
-		RandomUtil.random = new PredictedRandom(_NUMBERS);
+		RandomUtil.random = new PredictableRandom(_NUMBERS);
 
 		Assert.assertArrayEquals(expectedResult, RandomUtil.nextInts(10, 20));
 
-		RandomUtil.random = new PredictedRandom(_NUMBERS);
+		RandomUtil.random = new PredictableRandom(_NUMBERS);
 
 		Assert.assertArrayEquals(
 			new int[] {6, 0, 1, 8, 4}, RandomUtil.nextInts(10, 5));
@@ -77,9 +77,9 @@ public class RandomUtilTest {
 	private static final int[] _NUMBERS =
 		new int[] {5, 2, 7, 3, 5, 4, 2, 1, 0, 0};
 
-	private static class PredictedRandom extends Random {
+	private static class PredictableRandom extends Random {
 
-		public PredictedRandom(int[] values) {
+		public PredictableRandom(int[] values) {
 			_values = values;
 		}
 
@@ -89,7 +89,7 @@ public class RandomUtilTest {
 
 			if (value >= n) {
 				throw new IllegalArgumentException(
-					"Value " + value +" is bigger than " + n);
+					"Value " + value + " is larger than " + n);
 			}
 
 			return value;
