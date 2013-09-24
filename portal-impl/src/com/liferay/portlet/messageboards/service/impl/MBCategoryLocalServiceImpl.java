@@ -580,7 +580,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			List<Object> categoriesAndThreads = getCategoriesAndThreads(
 				category.getGroupId(), categoryId);
 
-			restoreDependentFromTrash(
+			restoreDependentsFromTrash(
 				user, categoriesAndThreads, trashEntry.getEntryId());
 		}
 
@@ -635,7 +635,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		List<Object> categoriesAndThreads = getCategoriesAndThreads(
 			category.getGroupId(), categoryId);
 
-		restoreDependentFromTrash(
+		restoreDependentsFromTrash(
 			user, categoriesAndThreads, trashEntry.getEntryId());
 
 		// Trash
@@ -963,7 +963,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		}
 	}
 
-	protected void restoreDependentFromTrash(
+	protected void restoreDependentsFromTrash(
 			User user, List<Object> categoriesAndThreads, long trashEntryId)
 		throws PortalException, SystemException {
 
@@ -1044,7 +1044,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				// Categories and threads
 
-				restoreDependentFromTrash(
+				restoreDependentsFromTrash(
 					user,
 					getCategoriesAndThreads(
 						category.getGroupId(), category.getCategoryId()),
