@@ -395,7 +395,7 @@ public class BookmarksFolderLocalServiceImpl
 					folder.getGroupId(), folder.getFolderId(),
 					WorkflowConstants.STATUS_IN_TRASH);
 
-			restoreDependentFromTrash(
+			restoreDependentsFromTrash(
 				foldersAndEntries, trashEntry.getEntryId());
 		}
 
@@ -430,7 +430,7 @@ public class BookmarksFolderLocalServiceImpl
 			bookmarksFolderLocalService.getFoldersAndEntries(
 				folder.getGroupId(), folder.getFolderId());
 
-		moveDependentToTrash(foldersAndEntries, trashEntry.getEntryId());
+		moveDependentsToTrash(foldersAndEntries, trashEntry.getEntryId());
 
 		// Social
 
@@ -482,7 +482,7 @@ public class BookmarksFolderLocalServiceImpl
 				folder.getGroupId(), folder.getFolderId(),
 				WorkflowConstants.STATUS_IN_TRASH);
 
-		restoreDependentFromTrash(foldersAndEntries, trashEntry.getEntryId());
+		restoreDependentsFromTrash(foldersAndEntries, trashEntry.getEntryId());
 
 		// Trash
 
@@ -707,7 +707,7 @@ public class BookmarksFolderLocalServiceImpl
 		bookmarksFolderLocalService.deleteFolder(fromFolder);
 	}
 
-	protected void moveDependentToTrash(
+	protected void moveDependentsToTrash(
 			List<Object> foldersAndEntries, long trashEntryId)
 		throws PortalException, SystemException {
 
@@ -728,11 +728,6 @@ public class BookmarksFolderLocalServiceImpl
 
 				bookmarksEntryPersistence.update(entry);
 
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					BookmarksEntry.class.getName(), entry.getEntryId(), false);
-
 				// Trash
 
 				int status = oldStatus;
@@ -746,6 +741,11 @@ public class BookmarksFolderLocalServiceImpl
 						trashEntryId, BookmarksEntry.class.getName(),
 						entry.getEntryId(), status);
 				}
+
+				// Asset
+
+				assetEntryLocalService.updateVisible(
+					BookmarksEntry.class.getName(), entry.getEntryId(), false);
 
 				// Indexer
 
@@ -770,19 +770,6 @@ public class BookmarksFolderLocalServiceImpl
 
 				bookmarksFolderPersistence.update(folder);
 
-				// Folders and entries
-
-				List<Object> curFoldersAndEntries = getFoldersAndEntries(
-					folder.getGroupId(), folder.getFolderId());
-
-				moveDependentToTrash(curFoldersAndEntries, trashEntryId);
-
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					BookmarksFolder.class.getName(), folder.getFolderId(),
-					false);
-
 				// Trash
 
 				if (oldStatus != WorkflowConstants.STATUS_APPROVED) {
@@ -790,6 +777,19 @@ public class BookmarksFolderLocalServiceImpl
 						trashEntryId, BookmarksEntry.class.getName(),
 						folder.getFolderId(), oldStatus);
 				}
+
+				// Folders and entries
+
+				List<Object> curFoldersAndEntries = getFoldersAndEntries(
+					folder.getGroupId(), folder.getFolderId());
+
+				moveDependentsToTrash(curFoldersAndEntries, trashEntryId);
+
+				// Asset
+
+				assetEntryLocalService.updateVisible(
+					BookmarksFolder.class.getName(), folder.getFolderId(),
+					false);
 
 				// Index
 
@@ -801,7 +801,7 @@ public class BookmarksFolderLocalServiceImpl
 		}
 	}
 
-	protected void restoreDependentFromTrash(
+	protected void restoreDependentsFromTrash(
 			List<Object> foldersAndEntries, long trashEntryId)
 		throws PortalException, SystemException {
 
@@ -834,18 +834,18 @@ public class BookmarksFolderLocalServiceImpl
 
 				bookmarksEntryPersistence.update(entry);
 
+				// Trash
+
+				if (trashVersion != null) {
+					trashVersionLocalService.deleteTrashVersion(trashVersion);
+				}
+
 				// Asset
 
 				if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
 					assetEntryLocalService.updateVisible(
 						BookmarksEntry.class.getName(), entry.getEntryId(),
 						true);
-				}
-
-				// Trash
-
-				if (trashVersion != null) {
-					trashVersionLocalService.deleteTrashVersion(trashVersion);
 				}
 
 				// Indexer
@@ -888,20 +888,20 @@ public class BookmarksFolderLocalServiceImpl
 				List<Object> curFoldersAndEntries = getFoldersAndEntries(
 					folder.getGroupId(), folder.getFolderId());
 
-				restoreDependentFromTrash(
+				restoreDependentsFromTrash(
 					curFoldersAndEntries, trashEntry.getEntryId());
-
-				// Asset
-
-				assetEntryLocalService.updateVisible(
-					BookmarksFolder.class.getName(), folder.getFolderId(),
-					true);
 
 				// Trash
 
 				if (trashVersion != null) {
 					trashVersionLocalService.deleteTrashVersion(trashVersion);
 				}
+
+				// Asset
+
+				assetEntryLocalService.updateVisible(
+					BookmarksFolder.class.getName(), folder.getFolderId(),
+					true);
 
 				// Index
 
