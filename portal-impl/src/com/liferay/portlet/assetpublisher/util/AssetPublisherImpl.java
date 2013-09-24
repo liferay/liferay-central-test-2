@@ -920,7 +920,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 			}
 		}
 
-		return ArrayUtil.toArray(groupIds.toArray(new Long[groupIds.size()]));
+		return ArrayUtil.toLongArray(groupIds);
 	}
 
 	@Override
