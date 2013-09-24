@@ -3298,6 +3298,8 @@ public class JournalArticleLocalServiceImpl
 			long userId, JournalArticle article)
 		throws PortalException, SystemException {
 
+		// Article
+
 		int oldStatus = article.getStatus();
 
 		if (oldStatus == WorkflowConstants.STATUS_PENDING) {
@@ -3324,12 +3326,6 @@ public class JournalArticleLocalServiceImpl
 		article = updateStatus(
 			userId, article.getId(), WorkflowConstants.STATUS_IN_TRASH,
 			new HashMap<String, Serializable>(), new ServiceContext());
-
-		// Asset
-
-		assetEntryLocalService.updateVisible(
-			JournalArticle.class.getName(), article.getResourcePrimKey(),
-			false);
 
 		// Trash
 
@@ -3370,6 +3366,12 @@ public class JournalArticleLocalServiceImpl
 		article.setArticleId(trashArticleId);
 
 		article = journalArticlePersistence.update(article);
+
+		// Asset
+
+		assetEntryLocalService.updateVisible(
+			JournalArticle.class.getName(), article.getResourcePrimKey(),
+			false);
 
 		// Social
 
@@ -3515,6 +3517,8 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle restoreArticleFromTrash(
 			long userId, JournalArticle article)
 		throws PortalException, SystemException {
+
+		// Article
 
 		String trashArticleId = TrashUtil.getOriginalTitle(
 			article.getArticleId());
