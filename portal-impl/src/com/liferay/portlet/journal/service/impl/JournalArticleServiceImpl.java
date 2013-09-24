@@ -970,7 +970,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	public List<JournalArticle> getGroupArticles(
 			long groupId, long userId, int start, int end,
 			OrderByComparator orderByComparator)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (userId <= 0) {
 			return journalArticlePersistence.filterFindByG_C_NotST(
@@ -1040,7 +1040,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	@Override
 	public int getGroupArticlesCount(long groupId, long userId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (userId <= 0) {
 			return journalArticlePersistence.filterCountByG_C_NotST(
