@@ -43,14 +43,10 @@
 		Map<String, List<Portlet>> siteAdministrationCategoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
 
 		for (String siteAdministrationCategory : siteAdministrationCategoriesMap.keySet()) {
-			String title = LanguageUtil.get(pageContext, "category." + siteAdministrationCategory);
-
-			List<Portlet> portlets = siteAdministrationCategoriesMap.get(siteAdministrationCategory);
-
 			String panelPageCategoryId = "panel-manage-" + siteAdministrationCategory;
 		%>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" id="<%= panelPageCategoryId %>" persistState="<%= true %>" state='<%= siteAdministrationCategory.equals(portletCategory) ? "open" : "closed" %>' title="<%= title %>">
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" id="<%= panelPageCategoryId %>" persistState="<%= true %>" state='<%= siteAdministrationCategory.equals(portletCategory) ? "open" : "closed" %>' title='<%= LanguageUtil.get(pageContext, "category." + siteAdministrationCategory) %>'>
 				<c:if test="<%= siteAdministrationCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
 
 					<%
@@ -108,6 +104,8 @@
 				<ul aria-labelledby="<%= panelPageCategoryId %>" class="category-portlets" role="menu">
 
 					<%
+					List<Portlet> portlets = siteAdministrationCategoriesMap.get(siteAdministrationCategory);
+
 					for (Portlet portlet : portlets) {
 						String portletId = portlet.getPortletId();
 					%>
