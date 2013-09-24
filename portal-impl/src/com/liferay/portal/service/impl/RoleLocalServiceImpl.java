@@ -797,10 +797,10 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	}
 
 	@Override
-	public List<Role> getTeamRoles(long groupId, long[] skipRoleIds)
+	public List<Role> getTeamRoles(long groupId, long[] excludedRoleIds)
 		throws PortalException, SystemException {
 
-		Map<Team, Role> teamRoleMap = getTeamRoleMap(groupId, skipRoleIds);
+		Map<Team, Role> teamRoleMap = getTeamRoleMap(groupId, excludedRoleIds);
 
 		Collection<Role> roles = teamRoleMap.values();
 
@@ -1459,7 +1459,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		};
 	}
 
-	protected Map<Team, Role> getTeamRoleMap(long groupId, long[] skipRoleIds)
+	protected Map<Team, Role> getTeamRoleMap(
+			long groupId, long[] excludedRoleIds)
 		throws PortalException, SystemException {
 
 		Group group = groupLocalService.getGroup(groupId);
@@ -1474,7 +1475,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			return Collections.emptyMap();
 		}
 
-		Set<Long> roleIds = SetUtil.fromArray(skipRoleIds);
+		Set<Long> roleIds = SetUtil.fromArray(excludedRoleIds);
 
 		Map<Team, Role> teamRoleMap = new LinkedHashMap<Team, Role>();
 
