@@ -567,11 +567,6 @@ public class JournalFolderWrapper implements JournalFolder,
 		return _journalFolder.getTrashEntry();
 	}
 
-	/**
-	* Returns the classPK of this journal folder
-	*
-	* @return the classPK of this journal folder
-	*/
 	@Override
 	public long getTrashEntryClassPK() {
 		return _journalFolder.getTrashEntryClassPK();

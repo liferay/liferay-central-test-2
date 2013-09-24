@@ -870,8 +870,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getGroupArticles(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getGroupArticles(groupId, userId, start,
 			end, orderByComparator);
 	}
@@ -909,8 +908,7 @@ public class JournalArticleServiceWrapper implements JournalArticleService,
 
 	@Override
 	public int getGroupArticlesCount(long groupId, long userId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _journalArticleService.getGroupArticlesCount(groupId, userId);
 	}
 
