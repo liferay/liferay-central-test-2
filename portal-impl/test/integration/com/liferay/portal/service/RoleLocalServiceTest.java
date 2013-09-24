@@ -61,10 +61,10 @@ public class RoleLocalServiceTest {
 
 	@Test
 	public void testGetTeamRoleMapWithExclusion() throws Exception {
-		Object[] objects = prepareOrganization();
+		Object[] organizationAndTeam = getOrganizationAndTeam();
 
-		Organization organization = (Organization)objects[0];
-		Team team = (Team)objects[1];
+		Organization organization = (Organization)organizationAndTeam[0];
+		Team team = (Team)organizationAndTeam[1];
 
 		Map<Team, Role> teamRoleMap = RoleLocalServiceUtil.getTeamRoleMap(
 			organization.getGroupId());
@@ -89,37 +89,37 @@ public class RoleLocalServiceTest {
 
 	@Test
 	public void testGetTeamRoleMapWithOtherGroupId() throws Exception {
-		Object[] objects1 = prepareOrganization();
-		Object[] objects2 = prepareOrganization();
+		Object[] organizationAndTeam1 = getOrganizationAndTeam();
+		Object[] organizationAndTeam2 = getOrganizationAndTeam();
 
-		Organization organization = (Organization)objects1[0];
-		Team team = (Team)objects2[1];
+		Organization organization = (Organization)organizationAndTeam1[0];
+		Team team = (Team)organizationAndTeam2[1];
 
 		Map<Team, Role> teamRoleMap = RoleLocalServiceUtil.getTeamRoleMap(
 			organization.getGroupId());
 
-		doTestGetTeamRoleMap(teamRoleMap, team, false);
+		testGetTeamRoleMap(teamRoleMap, team, false);
 	}
 
 	@Test
 	public void testGetTeamRoleMapWithOwnGroupId() throws Exception {
-		Object[] objects = prepareOrganization();
+		Object[] organizationAndTeam = getOrganizationAndTeam();
 
-		Organization organization = (Organization)objects[0];
-		Team team = (Team)objects[1];
+		Organization organization = (Organization)organizationAndTeam[0];
+		Team team = (Team)organizationAndTeam[1];
 
 		Map<Team, Role> teamRoleMap = RoleLocalServiceUtil.getTeamRoleMap(
 			organization.getGroupId());
 
-		doTestGetTeamRoleMap(teamRoleMap, team, true);
+		testGetTeamRoleMap(teamRoleMap, team, true);
 	}
 
 	@Test
 	public void testGetTeamRoleMapWithParentGroupId() throws Exception {
-		Object[] objects = prepareOrganization();
+		Object[] organizationAndTeam = getOrganizationAndTeam();
 
-		Organization organization = (Organization)objects[0];
-		Team team = (Team)objects[1];
+		Organization organization = (Organization)organizationAndTeam[0];
+		Team team = (Team)organizationAndTeam[1];
 
 		Layout layout = LayoutTestUtil.addLayout(
 			organization.getGroupId(), ServiceTestUtil.randomString());
@@ -130,28 +130,10 @@ public class RoleLocalServiceTest {
 		Map<Team, Role> teamRoleMap = RoleLocalServiceUtil.getTeamRoleMap(
 			group.getGroupId());
 
-		doTestGetTeamRoleMap(teamRoleMap, team, true);
+		testGetTeamRoleMap(teamRoleMap, team, true);
 	}
 
-	protected void doTestGetTeamRoleMap(
-		Map<Team, Role> teamRoleMap, Team team, boolean shouldContain) {
-
-		Assert.assertNotNull(teamRoleMap);
-		Assert.assertFalse(teamRoleMap.isEmpty());
-
-		if (shouldContain) {
-			Assert.assertTrue(teamRoleMap.containsKey(team));
-
-			Role role = teamRoleMap.get(team);
-
-			Assert.assertEquals(role.getType(), RoleConstants.TYPE_PROVIDER);
-		}
-		else {
-			Assert.assertFalse(teamRoleMap.containsKey(team));
-		}
-	}
-
-	protected Object[] prepareOrganization() throws Exception {
+	protected Object[] getOrganizationAndTeam() throws Exception {
 		User user = TestPropsValues.getUser();
 
 		Organization organization =
@@ -165,6 +147,24 @@ public class RoleLocalServiceTest {
 			ServiceTestUtil.randomString(), null);
 
 		return new Object[] {organization, team};
+	}
+
+	protected void testGetTeamRoleMap(
+		Map<Team, Role> teamRoleMap, Team team, boolean hasTeam) {
+
+		Assert.assertNotNull(teamRoleMap);
+		Assert.assertFalse(teamRoleMap.isEmpty());
+
+		if (hasTeam) {
+			Assert.assertTrue(teamRoleMap.containsKey(team));
+
+			Role role = teamRoleMap.get(team);
+
+			Assert.assertEquals(role.getType(), RoleConstants.TYPE_PROVIDER);
+		}
+		else {
+			Assert.assertFalse(teamRoleMap.containsKey(team));
+		}
 	}
 
 }
