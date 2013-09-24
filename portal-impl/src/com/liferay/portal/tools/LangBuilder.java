@@ -300,6 +300,7 @@ public class LangBuilder {
 					}
 					else if (languageId.equals("fi") &&
 							 (key.equals("on") || key.equals("the"))) {
+
 						translatedText = "";
 					}
 					else if (languageId.equals("it") && key.equals("am")) {
