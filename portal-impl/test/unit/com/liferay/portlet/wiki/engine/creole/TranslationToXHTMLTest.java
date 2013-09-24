@@ -455,7 +455,7 @@ public class TranslationToXHTMLTest extends PowerMockito {
 
 	@Test
 	public void testParseLinkEmpty() {
-		Assert.assertEquals("<p> </p>", translate("link-8.creole"));
+		Assert.assertEquals("<p></p>", translate("link-8.creole"));
 	}
 
 	@Test
