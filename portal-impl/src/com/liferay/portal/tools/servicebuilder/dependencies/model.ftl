@@ -353,11 +353,6 @@ public interface ${entity.name}Model extends
 		@Override
 		public TrashEntry getTrashEntry() throws PortalException, SystemException;
 
-		/**
-		 * Returns the classPK of this ${entity.humanName}
-		 *
-		 * @return the classPK of this ${entity.humanName}
-		 */
 		@Override
 		public long getTrashEntryClassPK();
 
