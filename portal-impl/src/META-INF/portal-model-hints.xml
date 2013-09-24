@@ -1054,7 +1054,7 @@
 		<field name="virtualHostId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="layoutSetId" type="long" />
-		<field name="hostname" type="String" >
+		<field name="hostname" type="String">
 			<validator name="required" />
 		</field>
 	</model>
