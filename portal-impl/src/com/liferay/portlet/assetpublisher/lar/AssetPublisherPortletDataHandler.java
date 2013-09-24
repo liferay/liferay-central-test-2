@@ -401,14 +401,14 @@ public class AssetPublisherPortletDataHandler
 			catch (NoSuchGroupException nsge) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + "because the " +
+						"Ignoring scope " + newValue + " because the " +
 							"referenced group was not found");
 				}
 			}
 			catch (PrincipalException pe) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Ignoring scope " + newValue + "because the " +
+						"Ignoring scope " + newValue + " because the " +
 							"referenced parent group no longer allows " +
 								"sharing content with child sites");
 				}
