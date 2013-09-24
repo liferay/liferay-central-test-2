@@ -872,10 +872,10 @@ public class JournalFolderLocalServiceImpl
 
 				// Folders and articles
 
-				List<Object> foldersAndArticles = getFoldersAndArticles(
+				List<Object> curFoldersAndArticles = getFoldersAndArticles(
 					folder.getGroupId(), folder.getFolderId());
 
-				moveDependentsToTrash(foldersAndArticles, trashEntryId);
+				moveDependentsToTrash(curFoldersAndArticles, trashEntryId);
 
 				// Asset
 
@@ -1000,11 +1000,11 @@ public class JournalFolderLocalServiceImpl
 
 				// Folders and articles
 
-				List<Object> foldersAndArticles = getFoldersAndArticles(
+				List<Object> curFoldersAndArticles = getFoldersAndArticles(
 					folder.getGroupId(), folder.getFolderId(),
 					WorkflowConstants.STATUS_IN_TRASH);
 
-				restoreDependentsFromTrash(foldersAndArticles, trashEntryId);
+				restoreDependentsFromTrash(curFoldersAndArticles, trashEntryId);
 
 				// Trash
 
