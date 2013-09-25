@@ -1031,7 +1031,8 @@ release was successful.</echo>
 					update="yes"
 				/>
 
-				<echo file="${app.server.jboss.dir}/modules/ibm/jdk/main/module.xml"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+				<echo file="${app.server.jboss.dir}/modules/ibm/jdk/main/module.xml"><![CDATA[<?xml version="1.0"?>
+
 					<module xmlns="urn:jboss:module:1.1" name="ibm.jdk">
 						<dependencies>
 							<system export="true">
