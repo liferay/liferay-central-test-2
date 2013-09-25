@@ -204,7 +204,7 @@ public class WebDriverToSeleniumBridge
 				webElement.click();
 			}
 			catch (Exception e) {
-				scrollElementIntoView(webElement);
+				scrollWebElementIntoView(webElement);
 
 				webElement.click();
 			}
@@ -245,7 +245,7 @@ public class WebDriverToSeleniumBridge
 					webElement.click();
 				}
 				catch (Exception e) {
-					scrollElementIntoView(webElement);
+					scrollWebElementIntoView(webElement);
 
 					webElement.click();
 				}
@@ -715,7 +715,7 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator, timeout);
 
 		if (!webElement.isDisplayed()) {
-			scrollElementIntoView(webElement);
+			scrollWebElementIntoView(webElement);
 		}
 
 		String text = webElement.getText();
@@ -739,7 +739,7 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator, timeout);
 
 		if (!webElement.isDisplayed()) {
-			scrollElementIntoView(webElement);
+			scrollWebElementIntoView(webElement);
 		}
 
 		return webElement.getAttribute("value");
@@ -791,7 +791,7 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator, "1");
 
 		if (!webElement.isDisplayed()) {
-			scrollElementIntoView(webElement);
+			scrollWebElementIntoView(webElement);
 		}
 
 		return webElement.isSelected();
@@ -848,7 +848,7 @@ public class WebDriverToSeleniumBridge
 		WebElement webElement = getWebElement(locator, "1");
 
 		if (!webElement.isDisplayed()) {
-			scrollElementIntoView(webElement);
+			scrollWebElementIntoView(webElement);
 		}
 
 		return webElement.isDisplayed();
@@ -1756,7 +1756,7 @@ public class WebDriverToSeleniumBridge
 		_keysSpecialChars.put(")", "0");
 	}
 
-	protected void scrollElementIntoView(WebElement webElement) {
+	protected void scrollWebElementIntoView(WebElement webElement) {
 		WrapsDriver wrapsDriver = (WrapsDriver)webElement;
 
 		WebDriver webDriver = wrapsDriver.getWrappedDriver();
