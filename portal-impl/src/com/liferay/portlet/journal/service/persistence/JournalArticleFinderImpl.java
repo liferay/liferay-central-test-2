@@ -976,13 +976,12 @@ public class JournalArticleFinderImpl
 				contents);
 
 			if (Validator.isNull(type)) {
-				sql = StringUtil.replace(
-					sql, _TYPE_NAMESPACED_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, _TYPE_SQL, StringPool.BLANK);
 			}
 
 			if (isNullArray(ddmStructureKeys)) {
 				sql = StringUtil.replace(
-					sql, _STRUCTURE_ID_NAMESPACED_SQL, StringPool.BLANK);
+					sql, _STRUCTURE_ID_SQL, StringPool.BLANK);
 			}
 			else {
 				sql = CustomSQLUtil.replaceKeywords(
@@ -992,7 +991,7 @@ public class JournalArticleFinderImpl
 
 			if (isNullArray(ddmTemplateKeys)) {
 				sql = StringUtil.replace(
-					sql, _TEMPLATE_ID_NAMESPACED_SQL, StringPool.BLANK);
+					sql, _TEMPLATE_ID_SQL, StringPool.BLANK);
 			}
 			else {
 				sql = CustomSQLUtil.replaceKeywords(
@@ -1323,13 +1322,12 @@ public class JournalArticleFinderImpl
 				contents);
 
 			if (Validator.isNull(type)) {
-				sql = StringUtil.replace(
-					sql, _TYPE_NAMESPACED_SQL, StringPool.BLANK);
+				sql = StringUtil.replace(sql, _TYPE_SQL, StringPool.BLANK);
 			}
 
 			if (isNullArray(ddmStructureKeys)) {
 				sql = StringUtil.replace(
-					sql, _STRUCTURE_ID_NAMESPACED_SQL, StringPool.BLANK);
+					sql, _STRUCTURE_ID_SQL, StringPool.BLANK);
 			}
 			else {
 				sql = CustomSQLUtil.replaceKeywords(
@@ -1339,7 +1337,7 @@ public class JournalArticleFinderImpl
 
 			if (isNullArray(ddmTemplateKeys)) {
 				sql = StringUtil.replace(
-					sql, _TEMPLATE_ID_NAMESPACED_SQL, StringPool.BLANK);
+					sql, _TEMPLATE_ID_SQL, StringPool.BLANK);
 			}
 			else {
 				sql = CustomSQLUtil.replaceKeywords(
@@ -1478,24 +1476,15 @@ public class JournalArticleFinderImpl
 		return true;
 	}
 
-	private static final String _STRUCTURE_ID_NAMESPACED_SQL =
+	private static final String _STRUCTURE_ID_SQL =
 		"(JournalArticle.structureId LIKE ? [$AND_OR_NULL_CHECK$]) " +
 			"[$AND_OR_CONNECTOR$]";
 
-	private static final String _STRUCTURE_ID_UNNAMESPACED_SQL =
-		"(structureId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
-
-	private static final String _TEMPLATE_ID_NAMESPACED_SQL =
+	private static final String _TEMPLATE_ID_SQL =
 		"(JournalArticle.templateId LIKE ? [$AND_OR_NULL_CHECK$]) " +
 			"[$AND_OR_CONNECTOR$]";
 
-	private static final String _TEMPLATE_ID_UNNAMESPACED_SQL =
-		"(templateId LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
-
-	private static final String _TYPE_NAMESPACED_SQL =
+	private static final String _TYPE_SQL =
 		"(JournalArticle.type_ = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
-
-	private static final String _TYPE_UNNAMESPACED_SQL =
-		"(type_ = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]";
 
 }
