@@ -136,10 +136,10 @@ boolean advancedSearch = ParamUtil.getBoolean(request, displayTerms.ADVANCED_SEA
 
 String keywords = ParamUtil.getString(request, "keywords");
 
+int status = WorkflowConstants.STATUS_ANY;
+
 List results = null;
 int total = 0;
-
-int status = WorkflowConstants.STATUS_ANY;
 %>
 
 <c:choose>

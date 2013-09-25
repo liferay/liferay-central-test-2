@@ -237,7 +237,7 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testGroupArticlesWhenUserNotNullAndStatusAny()
+	public void testGetGroupArticlesWhenUserNotNullAndStatusAny()
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
@@ -248,12 +248,11 @@ public class JournalArticleServiceTest {
 
 		expectedArticles.add(_article);
 
-		int articlesCount =
-			JournalArticleServiceUtil.getGroupArticlesCount(
-				_group.getGroupId(), _article.getUserId(),
-				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		int count = JournalArticleServiceUtil.getGroupArticlesCount(
+			_group.getGroupId(), _article.getUserId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		Assert.assertEquals(3, articlesCount);
+		Assert.assertEquals(3, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -265,7 +264,7 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testGroupArticlesWhenUserNotNullAndStatusApproved()
+	public void testGetGroupArticlesWhenUserNotNullAndStatusApproved()
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
@@ -274,13 +273,12 @@ public class JournalArticleServiceTest {
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
 
-		int articlesCount =
-			JournalArticleServiceUtil.getGroupArticlesCount(
-				_group.getGroupId(), _article.getUserId(),
-				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				WorkflowConstants.STATUS_APPROVED);
+		int count = JournalArticleServiceUtil.getGroupArticlesCount(
+			_group.getGroupId(), _article.getUserId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(2, articlesCount);
+		Assert.assertEquals(2, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -293,7 +291,9 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testGroupArticlesWhenUserNullAndStatusAny() throws Exception {
+	public void testGetGroupArticlesWhenUserNullAndStatusAny()
+		throws Exception {
+
 		List<JournalArticle> expectedArticles = addArticles(
 			2, ServiceTestUtil.randomString());
 
@@ -302,12 +302,11 @@ public class JournalArticleServiceTest {
 
 		expectedArticles.add(_article);
 
-		int articlesCount =
-			JournalArticleServiceUtil.getGroupArticlesCount(
-				_group.getGroupId(), 0,
-				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
+		int count = JournalArticleServiceUtil.getGroupArticlesCount(
+			_group.getGroupId(), 0,
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		Assert.assertEquals(3, articlesCount);
+		Assert.assertEquals(3, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -319,7 +318,7 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testGroupArticlesWhenUserNullAndStatusApproved()
+	public void testGetGroupArticlesWhenUserNullAndStatusApproved()
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
@@ -328,13 +327,12 @@ public class JournalArticleServiceTest {
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
 
-		int articlesCount =
-			JournalArticleServiceUtil.getGroupArticlesCount(
-				_group.getGroupId(), 0,
-				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				WorkflowConstants.STATUS_APPROVED);
+		int count = JournalArticleServiceUtil.getGroupArticlesCount(
+			_group.getGroupId(), 0,
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(2, articlesCount);
+		Assert.assertEquals(2, count);
 
 		List<JournalArticle> articles =
 			JournalArticleServiceUtil.getGroupArticles(
@@ -347,13 +345,13 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testSearchArticleByKeyword() throws Exception {
+	public void testSearchArticlesByKeyword() throws Exception {
 		List<JournalArticle> expectedArticles = createArticlesWithKeyword(2);
 
-		int articlesCount = countArticlesByKeyword(
+		int count = countArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_ANY);
 
-		Assert.assertEquals(2, articlesCount);
+		Assert.assertEquals(2, count);
 
 		List<JournalArticle> articles = searchArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_ANY);
@@ -362,7 +360,7 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testSearchArticleByKeywordAndStatus() throws Exception {
+	public void testSearchArticlesByKeywordAndStatus() throws Exception {
 		List<JournalArticle> initialArticles = createArticlesWithKeyword(2);
 
 		JournalArticle initialArticle = initialArticles.get(0);
@@ -371,10 +369,10 @@ public class JournalArticleServiceTest {
 
 		updateArticleStatus(initialArticle, WorkflowConstants.STATUS_DRAFT);
 
-		int articlesCount = countArticlesByKeyword(
+		int count = countArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_APPROVED);
 
-		Assert.assertEquals(1, articlesCount);
+		Assert.assertEquals(1, count);
 
 		List<JournalArticle> articles = searchArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_APPROVED);
