@@ -1,7 +1,7 @@
 JIRA:
 
-	http://issues.liferay.com/browse/LPS-39705
 	http://issues.jboss.org/browse/JBPAPP-9353
+	http://issues.liferay.com/browse/LPS-39705
 
 Source:
 
