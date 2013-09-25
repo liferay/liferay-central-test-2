@@ -1022,6 +1022,10 @@ public class PortletImporter {
 			boolean importPortletData)
 		throws Exception {
 
+		if (portletId == null) {
+			portletId = parentElement.attributeValue("portlet-id");
+		}
+
 		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getMostRelevantLocale());
 
@@ -1029,10 +1033,6 @@ public class PortletImporter {
 		String portletSetupTitle = StringPool.BLANK;
 		String scopeType = StringPool.BLANK;
 		String scopeLayoutUuid = StringPool.BLANK;
-
-		if (portletId == null) {
-			portletId = parentElement.attributeValue("portlet-id");
-		}
 
 		if (layout != null) {
 			plid = layout.getPlid();
