@@ -522,12 +522,12 @@ public class PluginsSummaryBuilder {
 
 		FileUtil.write(relengChangeLogFile, sb.toString());
 
-		File relengChangeLogHASHFile = new File(
-			webInfDir, "liferay-releng.changelog.HASH");
+		File relengChangeLogMD5File = new File(
+			webInfDir, "liferay-releng.changelog.md5");
 
-		String checksum = FileUtil.getMD5Checksum(relengChangeLogFile);
+		String md5Checksum = FileUtil.getMD5Checksum(relengChangeLogFile);
 
-		FileUtil.write(relengChangeLogHASHFile, checksum);
+		FileUtil.write(relengChangeLogMD5File, md5Checksum);
 	}
 
 	private String _updateRelengPropertiesFile(
