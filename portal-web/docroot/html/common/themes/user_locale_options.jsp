@@ -23,7 +23,7 @@ Locale userLocale = user.getLocale();
 %>
 
 <c:if test="<%= !locale.equals(user.getLocale()) %>">
-	<button class="close" id="dismissUserLocaleOptions" type="button">&times;</button>
+	<button class="close" id="ignoreUserLocaleOptions" type="button">&times;</button>
 
 	<%
 	PortletURL displayPreferredLanguageURL = new PortletURLImpl(request, PortletKeys.LANGUAGE, plid, PortletRequest.ACTION_PHASE);
@@ -60,14 +60,14 @@ Locale userLocale = user.getLocale();
 </c:if>
 
 <aui:script use="aui-base,liferay-store">
-	var dismissUserLocaleOptionsNode = A.one('#dismissUserLocaleOptions');
+	var ignoreUserLocaleOptionsNode = A.one('#ignoreUserLocaleOptions');
 
-	dismissUserLocaleOptionsNode.on(
+	ignoreUserLocaleOptionsNode.on(
 		'click',
 		function() {
 			Liferay.Store(
 				{
-					dismissUserLocaleOptions: true,
+					ignoreUserLocaleOptions: true,
 					useHttpSession: true
 				}
 			);
