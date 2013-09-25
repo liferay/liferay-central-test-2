@@ -679,7 +679,9 @@ public class PortalImpl implements Portal {
 	@Override
 	public void addUserLocaleOptionsMessage(HttpServletRequest request) {
 		boolean ignoreUserLocaleOptions = GetterUtil.getBoolean(
-			SessionClicks.get(request.getSession(), "ignoreUserLocaleOptions"));
+			SessionClicks.get(
+				request.getSession(), "ignoreUserLocaleOptions",
+				Boolean.FALSE.toString()));
 
 		if (ignoreUserLocaleOptions) {
 			return;
