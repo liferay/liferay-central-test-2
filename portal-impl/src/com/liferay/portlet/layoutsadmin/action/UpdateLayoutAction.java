@@ -195,7 +195,7 @@ public class UpdateLayoutAction extends JSONAction {
 
 				return themeDisplay.translate(
 					"you-cannot-delete-this-page-because-the-next-page-is-of-" +
-						"type-x-and-it-cannot-be-the-first-page",
+						"type-x-and-so-cannot-be-the-first-page",
 					"layout.types." + lte.getLayoutType());
 			}
 
@@ -204,8 +204,8 @@ public class UpdateLayoutAction extends JSONAction {
 					LayoutTypeException.FIRST_LAYOUT_PERMISSION)) {
 
 				return themeDisplay.translate(
-					"you-cannot-delete-this-page-because-the-next-page-does-" +
-						"not-have-view-permissions-for-guest-and-it-cannot-" +
+					"you-cannot-delete-this-page-because-the-next-page-is-" +
+						"not-vieweable-by-unathenticated-users-and-so-cannot-" +
 							"be-the-first-page");
 			}
 
