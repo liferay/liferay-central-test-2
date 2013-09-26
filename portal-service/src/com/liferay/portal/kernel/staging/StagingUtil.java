@@ -457,20 +457,20 @@ public class StagingUtil {
 	}
 
 	public static void updateLastPublishDate(
-		long sourceGroupId, boolean privateLayout, Date lastPublishDate)
-	throws Exception {
+			long sourceGroupId, boolean privateLayout, Date lastPublishDate)
+		throws Exception {
 
 		getStaging().updateLastPublishDate(
 			sourceGroupId, privateLayout, lastPublishDate);
 	}
 
 	public static void updateLastPublishDate(
-			String portletId, PortletPreferences jxPreferences,
+			String portletId, PortletPreferences portletPreferences,
 			Date lastPublishDate)
 		throws Exception {
 
 		getStaging().updateLastPublishDate(
-			portletId, jxPreferences, lastPublishDate);
+			portletId, portletPreferences, lastPublishDate);
 	}
 
 	public static void updateStaging(
