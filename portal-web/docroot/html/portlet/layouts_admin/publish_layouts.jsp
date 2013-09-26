@@ -235,7 +235,6 @@ else {
 					%>
 
 					<%= ike.getMessage() %>
-
 				</liferay-ui:error>
 
 				<liferay-ui:error exception="<%= LayoutPrototypeException.class %>">

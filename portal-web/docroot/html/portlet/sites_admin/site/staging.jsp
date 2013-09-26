@@ -139,7 +139,6 @@ if (stagedLocally) {
 				%>
 
 				<%= ike.getMessage() %>
-
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= RemoteExportException.class %>">
