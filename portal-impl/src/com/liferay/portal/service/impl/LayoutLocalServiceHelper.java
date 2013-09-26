@@ -159,7 +159,8 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 					groupId, privateLayout);
 
 				if (Validator.isNotNull(
-						layoutSet.getLayoutSetPrototypeUuid())) {
+						layoutSet.getLayoutSetPrototypeUuid()) &&
+					layoutSet.isLayoutSetPrototypeLinkEnabled()) {
 
 					priority = priority + _PRIORITY_BUFFER;
 				}
