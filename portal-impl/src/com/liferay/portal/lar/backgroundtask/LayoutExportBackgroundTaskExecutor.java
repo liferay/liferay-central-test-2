@@ -64,12 +64,6 @@ public class LayoutExportBackgroundTaskExecutor
 		Date startDate = (Date)taskContextMap.get("startDate");
 		Date endDate = (Date)taskContextMap.get("endDate");
 
-		Date lastPublishDate = new Date();
-
-		if (endDate != null) {
-			lastPublishDate = endDate;
-		}
-
 		File larFile = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			groupId, privateLayout, layoutIds, parameterMap, startDate,
 			endDate);
@@ -81,6 +75,12 @@ public class LayoutExportBackgroundTaskExecutor
 			parameterMap, PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
 
 		if (updateLastPublishDate) {
+			Date lastPublishDate = endDate;
+
+			if (lastPublishDate == null) {
+				lastPublishDate = new Date();
+			}
+
 			StagingUtil.updateLastPublishDate(
 				groupId, privateLayout, lastPublishDate);
 		}
