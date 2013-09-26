@@ -67,7 +67,8 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getActivities(
-				classNameId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				classNameId, 0,
+			end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -105,7 +106,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 		List<SocialActivity> activities =
 			socialActivityLocalService.getActivities(
 				mirrorActivityId, classNameId, classPK, 0,
-				end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -145,7 +146,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 		List<SocialActivity> activities =
 			socialActivityLocalService.getActivities(
 				mirrorActivityId, classNameId, classPK, 0,
-				end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -180,7 +181,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getActivities(
-				classNameId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				classNameId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -318,7 +319,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getGroupActivities(
-				groupId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				groupId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -374,7 +375,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getGroupUsersActivities(
-				groupId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				groupId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -454,7 +455,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 		List<SocialActivity> activities =
 			socialActivityLocalService.getOrganizationActivities(
 				organizationId, 0,
-				end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -505,7 +506,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 		List<SocialActivity> activities =
 			socialActivityLocalService.getOrganizationUsersActivities(
 				organizationId, 0,
-				end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -555,7 +556,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getRelationActivities(
-				userId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				userId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -591,7 +592,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 		List<SocialActivity> activities =
 			socialActivityLocalService.getRelationActivities(
 				userId, type, 0,
-				end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -658,7 +659,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getUserActivities(
-				userId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				userId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -706,7 +707,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getUserGroupsActivities(
-				userId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				userId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -755,7 +756,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getUserGroupsAndOrganizationsActivities(
-				userId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				userId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}
@@ -805,7 +806,7 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 
 		List<SocialActivity> activities =
 			socialActivityLocalService.getUserOrganizationsActivities(
-				userId, 0, end + PropsValues.ACTIVITY_FILTER_SEARCH_LIMIT);
+				userId, 0, end + PropsValues.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT);
 
 		return filterActivities(activities, start, end);
 	}

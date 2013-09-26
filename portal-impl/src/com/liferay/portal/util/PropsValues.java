@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.util.Time;
  */
 public class PropsValues {
 
-	public static final int ACTIVITY_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.ACTIVITY_FILTER_SEARCH_LIMIT));
-
 	public static String[] ADMIN_ANALYTICS_TYPES =  StringUtil.splitLines(PropsUtil.get(PropsKeys.ADMIN_ANALYTICS_TYPES));
 
 	public static String[] ADMIN_DEFAULT_GROUP_NAMES = StringUtil.splitLines(PropsUtil.get(PropsKeys.ADMIN_DEFAULT_GROUP_NAMES));
@@ -1733,6 +1731,8 @@ public class PropsValues {
 	public static final int[] SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES = GetterUtil.getIntegerValues(PropsUtil.getArray(PropsKeys.SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES));
 
 	public static final String SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH = PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH);
+
+	public static final int SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT = GetterUtil.getInteger(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT));
 
 	public static final long SOCIAL_ACTIVITY_LOCK_RETRY_DELAY = GetterUtil.getLong(PropsUtil.get(PropsKeys.SOCIAL_ACTIVITY_LOCK_RETRY_DELAY));
 
