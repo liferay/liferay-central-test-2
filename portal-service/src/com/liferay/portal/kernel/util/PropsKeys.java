@@ -19,8 +19,6 @@ package com.liferay.portal.kernel.util;
  */
 public interface PropsKeys {
 
-	public static final String ACTIVITY_FILTER_SEARCH_LIMIT = "activity.filter.search.limit";
-
 	public static final String ADMIN_ANALYTICS_TYPES = "admin.analytics.types";
 
 	public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
@@ -2306,6 +2304,8 @@ public interface PropsKeys {
 	public static final String SOCIAL_ACTIVITY_CONTRIBUTION_LIMIT_VALUES = "social.activity.contribution.limit.values";
 
 	public static final String SOCIAL_ACTIVITY_COUNTER_PERIOD_LENGTH = "social.activity.counter.period.length";
+
+	public static final String SOCIAL_ACTIVITY_FILTER_SEARCH_LIMIT = "social.activity.filter.search.limit";
 
 	public static final String SOCIAL_ACTIVITY_LOCK_RETRY_DELAY = "social.activity.lock.retry.delay";
 
