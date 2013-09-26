@@ -185,10 +185,9 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 
 	@Override
 	public void removeCache(String name) {
-		_portalCaches.remove(name);
-		_ehcachePortalCaches.remove(name);
-
 		_cacheManager.removeCache(name);
+		_ehcachePortalCaches.remove(name);
+		_portalCaches.remove(name);
 	}
 
 	public void setClusterAware(boolean clusterAware) {
