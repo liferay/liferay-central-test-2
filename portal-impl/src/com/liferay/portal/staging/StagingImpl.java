@@ -1764,15 +1764,15 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void updateLastPublishDate(
-			String portletId, PortletPreferences jxPreferences,
+			String portletId, PortletPreferences portletPreferences,
 			Date lastPublishDate)
 		throws Exception {
 
 		try {
-			jxPreferences.setValue(
+			portletPreferences.setValue(
 				"last-publish-date", String.valueOf(lastPublishDate.getTime()));
 
-			jxPreferences.store();
+			portletPreferences.store();
 		}
 		catch (UnsupportedOperationException uoe) {
 			if (_log.isDebugEnabled()) {

@@ -257,7 +257,7 @@ public interface Staging {
 		throws Exception;
 
 	public void updateLastPublishDate(
-			String portletId, PortletPreferences jxPreferences,
+			String portletId, PortletPreferences portletPreferences,
 			Date lastPublishDate)
 		throws Exception;
 
