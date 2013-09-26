@@ -75,13 +75,15 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 			HttpServletResponse response = accessControlContext.getResponse();
 
 			try {
-				ObjectOutputStream oos = new ObjectOutputStream(
+				ObjectOutputStream objectOutputStream = new ObjectOutputStream(
 					response.getOutputStream());
 
-				oos.writeObject(new SystemException(ae.getMessage()));
+				objectOutputStream.writeObject(
+					new SystemException(ae.getMessage()));
 
-				oos.flush();
-				oos.close();
+				objectOutputStream.flush();
+
+				objectOutputStream.close();
 
 				authVerifierResult.setState(
 					AuthVerifierResult.State.INVALID_CREDENTIALS);
@@ -187,7 +189,7 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 		}
 
 		if (user == null) {
-			throw new AuthException("Internal Server Error");
+			throw new AuthException("Internal server error");
 		}
 
 		String[] credentials = new String[2];
