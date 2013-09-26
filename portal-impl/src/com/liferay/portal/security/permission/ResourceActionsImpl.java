@@ -807,16 +807,16 @@ public class ResourceActionsImpl implements ResourceActions {
 	protected int[] getRoleTypes(
 		long companyId, Group group, String modelResource) {
 
-		int[] types = RoleConstants.TYPES_R_S;
+		int[] types = RoleConstants.TYPES_REGULAR_AND_SITE;
 
 		if (isPortalModelResource(modelResource)) {
 			if (modelResource.equals(Organization.class.getName()) ||
 				modelResource.equals(User.class.getName())) {
 
-				types = RoleConstants.TYPES_R_O;
+				types = RoleConstants.TYPES_ORGANIZATION_AND_REGULAR;
 			}
 			else {
-				types = RoleConstants.TYPES_R;
+				types = RoleConstants.TYPES_REGULAR;
 			}
 		}
 		else {
@@ -831,10 +831,11 @@ public class ResourceActionsImpl implements ResourceActions {
 				}
 
 				if (group.isOrganization()) {
-					types = RoleConstants.TYPES_R_O_S;
+					types =
+						RoleConstants.TYPES_ORGANIZATION_AND_REGULAR_AND_SITE;
 				}
 				else if (group.isUser()) {
-					types = RoleConstants.TYPES_R;
+					types = RoleConstants.TYPES_REGULAR;
 				}
 			}
 		}
