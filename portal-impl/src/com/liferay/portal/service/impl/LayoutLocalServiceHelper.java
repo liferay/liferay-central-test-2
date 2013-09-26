@@ -451,18 +451,6 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 		}
 	}
 
-	@BeanReference(type = LayoutFriendlyURLPersistence.class)
-	protected LayoutFriendlyURLPersistence layoutFriendlyURLPersistence;
-
-	@BeanReference(type = LayoutPersistence.class)
-	protected LayoutPersistence layoutPersistence;
-
-	@BeanReference(type = LayoutSetPersistence.class)
-	protected LayoutSetPersistence layoutSetPersistence;
-
-	@BeanReference(type = ResourcePermissionLocalService.class)
-	protected ResourcePermissionLocalService resourcePermissionLocalService;
-
 	protected boolean hasGuestViewPermission(Layout layout)
 		throws PortalException, SystemException {
 
@@ -475,6 +463,18 @@ public class LayoutLocalServiceHelper implements IdentifiableBean {
 			String.valueOf(layout.getPlid()), role.getRoleId(),
 			ActionKeys.VIEW);
 	}
+
+	@BeanReference(type = LayoutFriendlyURLPersistence.class)
+	protected LayoutFriendlyURLPersistence layoutFriendlyURLPersistence;
+
+	@BeanReference(type = LayoutPersistence.class)
+	protected LayoutPersistence layoutPersistence;
+
+	@BeanReference(type = LayoutSetPersistence.class)
+	protected LayoutSetPersistence layoutSetPersistence;
+
+	@BeanReference(type = ResourcePermissionLocalService.class)
+	protected ResourcePermissionLocalService resourcePermissionLocalService;
 
 	private static final int _PRIORITY_BUFFER = 1000000;
 
