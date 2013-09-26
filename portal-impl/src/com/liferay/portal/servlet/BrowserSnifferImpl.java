@@ -268,15 +268,15 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 
 	@Override
 	public boolean isRtf(HttpServletRequest request) {
-		float majorVersion = getMajorVersion(request);
+		if (isAndroid(request)) {
+			return true;
+		}
 
 		if (isChrome(request)) {
 			return true;
 		}
 
-		if (isAndroid(request)) {
-			return true;
-		}
+		float majorVersion = getMajorVersion(request);
 
 		if (isIe(request) && (majorVersion >= 5.5)) {
 			return true;
