@@ -403,6 +403,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public WikiNode moveNodeToTrash(long userId, WikiNode node)
 		throws PortalException, SystemException {
 
+		// Node
+
 		int oldStatus = node.getStatus();
 
 		node = updateStatus(
@@ -426,7 +428,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Pages
 
-		moveDependentToTrash(node.getNodeId(), trashEntry.getEntryId());
+		moveDependentsToTrash(node.getNodeId(), trashEntry.getEntryId());
 
 		return node;
 	}
@@ -434,6 +436,8 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	@Override
 	public void restoreNodeFromTrash(long userId, WikiNode node)
 		throws PortalException, SystemException {
+
+		// Node
 
 		node.setName(TrashUtil.getOriginalTitle(node.getName()));
 
@@ -569,51 +573,56 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiImporter;
 	}
 
-	protected void moveDependentToTrash(long nodeId, long trashEntryId)
+	protected void moveDependentsToTrash(long nodeId, long trashEntryId)
 		throws PortalException, SystemException {
 
 		List<WikiPage> pages = wikiPagePersistence.findByNodeId(nodeId);
 
 		for (WikiPage page : pages) {
+
+			// Page
+
 			int oldStatus = page.getStatus();
 
 			if (oldStatus == WorkflowConstants.STATUS_IN_TRASH) {
 				continue;
 			}
 
-			// Page versions
+			// Version pages
 
-			List<WikiPage> pageVersions = wikiPagePersistence.findByR_N(
+			List<WikiPage> versionPages = wikiPagePersistence.findByR_N(
 				page.getResourcePrimKey(), page.getNodeId());
 
-			for (WikiPage curPageVersion : pageVersions) {
+			for (WikiPage versionPage : versionPages) {
 
-				// Version
+				// Version page
 
-				int curPageVersionOldStatus = curPageVersion.getStatus();
+				int versionPageOldStatus = versionPage.getStatus();
 
-				curPageVersion.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+				versionPage.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
-				wikiPagePersistence.update(curPageVersion);
+				wikiPagePersistence.update(versionPage);
 
 				// Trash
 
-				int status = curPageVersionOldStatus;
+				int status = versionPageOldStatus;
 
-				if (curPageVersionOldStatus ==
+				if (versionPageOldStatus ==
 						WorkflowConstants.STATUS_PENDING) {
 
 					status = WorkflowConstants.STATUS_DRAFT;
 				}
 
-				if (curPageVersionOldStatus !=
+				if (versionPageOldStatus !=
 						WorkflowConstants.STATUS_APPROVED) {
 
 					trashVersionLocalService.addTrashVersion(
 						trashEntryId, WikiPage.class.getName(),
-						curPageVersion.getPageId(), status);
+						versionPage.getPageId(), status);
 				}
 			}
+
+			// Asset
 
 			if (oldStatus == WorkflowConstants.STATUS_APPROVED) {
 				assetEntryLocalService.updateVisible(
@@ -649,6 +658,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		List<WikiPage> pages = wikiPagePersistence.findByNodeId(nodeId);
 
 		for (WikiPage page : pages) {
+
+			// Page
+
 			TrashEntry trashEntry = trashEntryLocalService.fetchEntry(
 				WikiPage.class.getName(), page.getResourcePrimKey());
 
@@ -665,28 +677,28 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 				oldStatus = trashVersion.getStatus();
 			}
 
-			// Page versions
+			// Version pages
 
-			List<WikiPage> pageVersions = wikiPagePersistence.findByR_N(
+			List<WikiPage> versionPages = wikiPagePersistence.findByR_N(
 				page.getResourcePrimKey(), page.getNodeId());
 
-			for (WikiPage curPageVersion : pageVersions) {
+			for (WikiPage versionPage : versionPages) {
 
-				// Version
+				// Version page
 
 				trashVersion = trashVersionLocalService.fetchVersion(
 					trashEntryId, WikiPage.class.getName(),
-					curPageVersion.getPageId());
+					versionPage.getPageId());
 
-				int curPageVersionOldStatus = WorkflowConstants.STATUS_APPROVED;
+				int versionPageOldStatus = WorkflowConstants.STATUS_APPROVED;
 
 				if (trashVersion != null) {
-					curPageVersionOldStatus = trashVersion.getStatus();
+					versionPageOldStatus = trashVersion.getStatus();
 				}
 
-				curPageVersion.setStatus(curPageVersionOldStatus);
+				versionPage.setStatus(versionPageOldStatus);
 
-				wikiPagePersistence.update(curPageVersion);
+				wikiPagePersistence.update(versionPage);
 
 				// Trash
 
