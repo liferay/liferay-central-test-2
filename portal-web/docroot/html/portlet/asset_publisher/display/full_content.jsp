@@ -18,7 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-String languageId = LanguageUtil.getLanguageId(request);
 
 List results = (List)request.getAttribute("view.jsp-results");
 
@@ -35,6 +34,8 @@ int assetEntryIndex = ((Integer)request.getAttribute("view.jsp-assetEntryIndex")
 AssetEntry assetEntry = (AssetEntry)request.getAttribute("view.jsp-assetEntry");
 AssetRendererFactory assetRendererFactory = (AssetRendererFactory)request.getAttribute("view.jsp-assetRendererFactory");
 AssetRenderer assetRenderer = (AssetRenderer)request.getAttribute("view.jsp-assetRenderer");
+
+String languageId = LanguageUtil.getLanguageId(request);
 
 String title = assetRenderer.getTitle(LocaleUtil.fromLanguageId(languageId));
 
