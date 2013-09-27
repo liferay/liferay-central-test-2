@@ -58,18 +58,18 @@ public class LayoutStagingBackgroundTaskExecutor
 		Date startDate = (Date)taskContextMap.get("startDate");
 		Date endDate = (Date)taskContextMap.get("endDate");
 
-		Date lastPublishDate = endDate;
-
-		if (lastPublishDate == null) {
-			lastPublishDate = new Date();
-		}
-
 		clearBackgroundTaskStatus(backgroundTask);
 
 		File file = null;
 		MissingReferences missingReferences = null;
 
 		try {
+			Date lastPublishDate = endDate;
+
+			if (lastPublishDate == null) {
+				lastPublishDate = new Date();
+			}
+
 			file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 				sourceGroupId, privateLayout, layoutIds, parameterMap,
 				startDate, endDate);

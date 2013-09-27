@@ -68,12 +68,6 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 		HttpPrincipal httpPrincipal = (HttpPrincipal)taskContextMap.get(
 			"httpPrincipal");
 
-		Date lastPublishDate = endDate;
-
-		if (lastPublishDate == null) {
-			lastPublishDate = new Date();
-		}
-
 		clearBackgroundTaskStatus(backgroundTask);
 
 		long stagingRequestId = 0;
@@ -83,6 +77,12 @@ public class LayoutRemoteStagingBackgroundTaskExecutor
 		MissingReferences missingReferences = null;
 
 		try {
+			Date lastPublishDate = endDate;
+
+			if (lastPublishDate == null) {
+				lastPublishDate = new Date();
+			}
+
 			file = exportLayoutsAsFile(
 				sourceGroupId, privateLayout, layoutIdMap, parameterMap,
 				remoteGroupId, startDate, endDate, httpPrincipal);
