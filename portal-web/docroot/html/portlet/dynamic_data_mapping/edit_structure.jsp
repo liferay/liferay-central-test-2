@@ -38,10 +38,9 @@ try {
 catch (NoSuchStructureException nsee) {
 }
 
-String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
-
 long classNameId = PortalUtil.getClassNameId(DDMStructure.class);
 long classPK = BeanParamUtil.getLong(structure, request, "structureId");
+String structureKey = BeanParamUtil.getString(structure, request, "structureKey");
 
 String script = BeanParamUtil.getString(structure, request, "xsd");
 
@@ -116,12 +115,12 @@ if (Validator.isNotNull(script)) {
 		<aui:field-wrapper>
 			<c:if test="<%= (DDMStorageLinkLocalServiceUtil.getStructureStorageLinksCount(classPK) > 0) || (JournalArticleLocalServiceUtil.getStructureArticlesCount(groupId, structureKey) > 0) %>">
 				<div class="alert alert-warning">
-					<liferay-ui:message key="there-are-content-references-to-this-structure.-you-may-lose-data-if-any-field-name-is-renamed-or-removed" />
+					<liferay-ui:message key="there-are-content-references-to-this-structure.-you-may-lose-data-if-a-field-name-is-renamed-or-removed" />
 				</div>
 			</c:if>
 			<c:if test="<%= (classPK > 0) && (DDMTemplateLocalServiceUtil.getTemplatesCount(groupId, classNameId, classPK) > 0) %>">
 				<div class="alert alert-info">
-					<liferay-ui:message key="there-are-template-references-to-this-structure.-please-update-them-if-any-field-name-is-renamed-or-removed" />
+					<liferay-ui:message key="there-are-template-references-to-this-structure.-please-update-them-if-a-field-name-is-renamed-or-removed" />
 				</div>
 			</c:if>
 		</aui:field-wrapper>

@@ -846,7 +846,7 @@ public class DDMTemplateLocalServiceImpl
 	}
 
 	/**
-	 * Returns the number of templates matching the group, class name ID and
+	 * Returns the number of templates matching the group, class name ID, and
 	 * class PK.
 	 *
 	 * @param  groupId the primary key of the group
