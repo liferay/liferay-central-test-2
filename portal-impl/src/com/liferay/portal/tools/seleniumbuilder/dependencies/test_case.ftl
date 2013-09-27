@@ -58,14 +58,10 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)} 
 			Runtime runtime = Runtime.getRuntime();
 
 			if (OSDetector.isWindows()) {
-				String[] commands = { "tskill", "firefox" };
-
-				runtime.exec(commands);
+				runtime.exec(new String[] {"tskill", "firefox"});
 			}
 			else {
-				String[] commands = { "killall", "firefox" };
-
-				runtime.exec(commands);
+				runtime.exec(new String[] {"killall", "firefox"});
 			}
 
 			throw e;
