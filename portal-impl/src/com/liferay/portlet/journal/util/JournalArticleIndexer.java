@@ -20,6 +20,8 @@ import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.BaseIndexer;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.Document;
@@ -562,8 +564,12 @@ public class JournalArticleIndexer extends BaseIndexer {
 			double version = GetterUtil.getDouble(document.get(Field.VERSION));
 
 			JournalArticle article =
-				JournalArticleLocalServiceUtil.getArticle(
+				JournalArticleLocalServiceUtil.fetchArticle(
 					groupId, articleId, version);
+				
+			if (article == null) {
+				return content;
+			}
 
 			JournalArticleDisplay articleDisplay =
 				JournalArticleLocalServiceUtil.getArticleDisplay(
@@ -571,7 +577,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 					LocaleUtil.toLanguageId(snippetLocale), 1, null, null);
 
 			content = HtmlUtil.escape(articleDisplay.getDescription());
-
 			content = HtmlUtil.replaceNewLine(content);
 
 			if (Validator.isNull(content)) {
@@ -579,6 +584,9 @@ public class JournalArticleIndexer extends BaseIndexer {
 			}
 		}
 		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
 		}
 
 		return content;
@@ -690,5 +698,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 			getSearchEngineId(), article.getCompanyId(),
 			getArticleVersions(article));
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		JournalArticleIndexer.class);
 
 }
