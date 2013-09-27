@@ -440,6 +440,10 @@ public class JournalConverterImpl implements JournalConverter {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
+			if (values.length > 2) {
+				jsonObject.put("groupId", values[2]);
+			}
+
 			jsonObject.put("layoutId", values[0]);
 
 			if (values[1].equals("public")) {
@@ -447,10 +451,6 @@ public class JournalConverterImpl implements JournalConverter {
 			}
 			else {
 				jsonObject.put("privateLayout", true);
-			}
-
-			if (values.length > 2) {
-				jsonObject.put("groupId", values[2]);
 			}
 
 			serializable = jsonObject.toString();
