@@ -222,10 +222,10 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 	}
 
 	protected void setUpClassNameIds() {
-		_ddmStructureClassNameId = PortalUtil.getClassNameId(
-			DDMStructure.class);
 		_ddlRecordSetClassNameId = PortalUtil.getClassNameId(
 			DDLRecordSet.class);
+		_ddmStructureClassNameId = PortalUtil.getClassNameId(
+			DDMStructure.class);
 		_dlFileEntryMetadataClassNameId = PortalUtil.getClassNameId(
 			DLFileEntryMetadata.class);
 	}
