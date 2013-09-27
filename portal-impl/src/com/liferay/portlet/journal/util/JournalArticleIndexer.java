@@ -533,65 +533,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 			ddmStructure, fields, LocaleUtil.fromLanguageId(languageId));
 	}
 
-	protected String getBasicContentSummary(
-		Document document, Locale snippetLocale) {
-
-		String prefix = Field.SNIPPET + StringPool.UNDERLINE;
-
-		String content = document.get(
-			snippetLocale, prefix + Field.DESCRIPTION, prefix + Field.CONTENT);
-
-		if (Validator.isBlank(content)) {
-			content = document.get(
-				snippetLocale, Field.DESCRIPTION, Field.CONTENT);
-		}
-
-		if (content.length() > 200) {
-			content = StringUtil.shorten(content, 200);
-		}
-
-		return content;
-	}
-
-	protected String getDDMContentSummary(
-		Document document, Locale snippetLocale) {
-
-		String content = StringPool.BLANK;
-
-		try {
-			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
-			String articleId = document.get("articleId");
-			double version = GetterUtil.getDouble(document.get(Field.VERSION));
-
-			JournalArticle article =
-				JournalArticleLocalServiceUtil.fetchArticle(
-					groupId, articleId, version);
-				
-			if (article == null) {
-				return content;
-			}
-
-			JournalArticleDisplay articleDisplay =
-				JournalArticleLocalServiceUtil.getArticleDisplay(
-					article, null, Constants.VIEW,
-					LocaleUtil.toLanguageId(snippetLocale), 1, null, null);
-
-			content = HtmlUtil.escape(articleDisplay.getDescription());
-			content = HtmlUtil.replaceNewLine(content);
-
-			if (Validator.isNull(content)) {
-				content = HtmlUtil.stripHtml(articleDisplay.getContent());
-			}
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(e, e);
-			}
-		}
-
-		return content;
-	}
-
 	protected Collection<Document> getArticleVersions(JournalArticle article)
 		throws PortalException, SystemException {
 
@@ -636,6 +577,65 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		return documents;
+	}
+
+	protected String getBasicContentSummary(
+		Document document, Locale snippetLocale) {
+
+		String prefix = Field.SNIPPET + StringPool.UNDERLINE;
+
+		String content = document.get(
+			snippetLocale, prefix + Field.DESCRIPTION, prefix + Field.CONTENT);
+
+		if (Validator.isBlank(content)) {
+			content = document.get(
+				snippetLocale, Field.DESCRIPTION, Field.CONTENT);
+		}
+
+		if (content.length() > 200) {
+			content = StringUtil.shorten(content, 200);
+		}
+
+		return content;
+	}
+
+	protected String getDDMContentSummary(
+		Document document, Locale snippetLocale) {
+
+		String content = StringPool.BLANK;
+
+		try {
+			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
+			String articleId = document.get("articleId");
+			double version = GetterUtil.getDouble(document.get(Field.VERSION));
+
+			JournalArticle article =
+				JournalArticleLocalServiceUtil.fetchArticle(
+					groupId, articleId, version);
+
+			if (article == null) {
+				return content;
+			}
+
+			JournalArticleDisplay articleDisplay =
+				JournalArticleLocalServiceUtil.getArticleDisplay(
+					article, null, Constants.VIEW,
+					LocaleUtil.toLanguageId(snippetLocale), 1, null, null);
+
+			content = HtmlUtil.escape(articleDisplay.getDescription());
+			content = HtmlUtil.replaceNewLine(content);
+
+			if (Validator.isNull(content)) {
+				content = HtmlUtil.stripHtml(articleDisplay.getContent());
+			}
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(e, e);
+			}
+		}
+
+		return content;
 	}
 
 	protected String[] getLanguageIds(
