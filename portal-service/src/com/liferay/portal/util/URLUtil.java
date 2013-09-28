@@ -24,17 +24,22 @@ import java.net.URL;
  */
 public class URLUtil {
 
+	/**
+	 * @see {@link
+	 *      com.liferay.portal.kernel.process.ClassPathUtil#_buildClassPath(
+	 *      ClassLoader, String)}
+	 */
 	public static URL normalizeURL(URL url) throws MalformedURLException {
 		String urlString = url.toString();
 
-		if (urlString.startsWith("vfsjar:")) {
+		if (urlString.startsWith("vfsfile:")) {
+			urlString = StringUtil.replaceFirst(urlString, "vfsfile:", "file:");
+		}
+		else if (urlString.startsWith("vfsjar:")) {
 			urlString = StringUtil.replaceFirst(urlString, "vfsjar:", "file:");
 		}
 		else if (urlString.startsWith("vfszip:")) {
 			urlString = StringUtil.replaceFirst(urlString, "vfszip:", "file:");
-		}
-		else if (urlString.startsWith("vfsfile:")) {
-			urlString = StringUtil.replaceFirst(urlString, "vfsfile:", "file:");
 		}
 
 		if (urlString.contains(".jar/")) {
@@ -55,7 +60,7 @@ public class URLUtil {
 			if (urlString.charAt(index) != '/') {
 				urlString =
 					urlString.substring(0, index) + '/' +
-					urlString.substring(index);
+						urlString.substring(index);
 			}
 		}
 
