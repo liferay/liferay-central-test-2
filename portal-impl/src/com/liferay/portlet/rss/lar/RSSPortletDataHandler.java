@@ -240,19 +240,18 @@ public class RSSPortletDataHandler extends BasePortletDataHandler {
 	protected void importReferenceArticle(PortletDataContext portletDataContext)
 		throws PortletDataException {
 
-		Element journalArticlesElement =
-			portletDataContext.getImportDataGroupElement(JournalArticle.class);
+		Element articlesElement = portletDataContext.getImportDataGroupElement(
+			JournalArticle.class);
 
-		if (journalArticlesElement == null) {
+		if (articlesElement == null) {
 			return;
 		}
 
-		List<Element> journalArticleElements =
-			journalArticlesElement.elements();
+		List<Element> articleElements = articlesElement.elements();
 
-		for (Element journalArticleElement : journalArticleElements) {
+		for (Element articleElement : articleElements) {
 			StagedModelDataHandlerUtil.importReferenceStagedModel(
-				portletDataContext, journalArticleElement);
+				portletDataContext, articleElement);
 		}
 	}
 
