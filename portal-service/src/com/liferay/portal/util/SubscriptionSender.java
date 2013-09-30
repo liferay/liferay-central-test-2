@@ -228,11 +228,16 @@ public class SubscriptionSender implements Serializable {
 
 		_initialized = true;
 
+		if ((groupId == 0) && (serviceContext != null)) {
+			setScopeGroupId(serviceContext.getScopeGroupId());
+		}
+
 		Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
 		setContextAttribute("[$COMPANY_ID$]", company.getCompanyId());
 		setContextAttribute("[$COMPANY_MX$]", company.getMx());
 		setContextAttribute("[$COMPANY_NAME$]", company.getName());
+		setContextAttribute("[$PORTAL_URL$]", company.getPortalURL(groupId));
 
 		if (groupId > 0) {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
@@ -248,12 +253,6 @@ public class SubscriptionSender implements Serializable {
 				"[$" + _contextUserPrefix + "_USER_NAME$]",
 				PortalUtil.getUserName(userId, StringPool.BLANK));
 		}
-
-		if ((groupId == 0) && (serviceContext != null)) {
-			setScopeGroupId(serviceContext.getScopeGroupId());
-		}
-
-		setContextAttribute("[$PORTAL_URL$]", company.getPortalURL(groupId));
 
 		mailId = PortalUtil.getMailId(
 			company.getMx(), _mailIdPopPortletPrefix, _mailIdIds);
