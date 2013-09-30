@@ -973,9 +973,6 @@ public class ResourceActionsImpl implements ResourceActions {
 
 		Element portletRefElement = modelResourceElement.element("portlet-ref");
 
-		boolean root = GetterUtil.getBoolean(
-			modelResourceElement.elementText("root"));
-
 		for (Element portletNameElement :
 				portletRefElement.elements("portlet-name")) {
 
@@ -1000,6 +997,9 @@ public class ResourceActionsImpl implements ResourceActions {
 			}
 
 			modelResources.add(name);
+
+			boolean root = GetterUtil.getBoolean(
+				modelResourceElement.elementText("root"));
 
 			if (root) {
 				_portletRootModelResource.put(portletName, name);
