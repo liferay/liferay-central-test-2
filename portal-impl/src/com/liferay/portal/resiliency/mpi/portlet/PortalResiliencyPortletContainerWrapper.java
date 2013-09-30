@@ -82,7 +82,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 
 		Object[] requestAttributeValues = captureRequestAttibutes(
-			request, _actionRequestAttributeNames);
+			request, _ACTION_REQUEST_ATTRIBUTE_NAMES);
 
 		request.setAttribute(
 			WebKeys.SPI_AGENT_LIFECYCLE, SPIAgent.Lifecycle.ACTION);
@@ -103,7 +103,8 @@ public class PortalResiliencyPortletContainerWrapper
 			request.removeAttribute(WebKeys.SPI_AGENT_ACTION_RESULT);
 
 			restoreRequestAttibutes(
-				request, _actionRequestAttributeNames, requestAttributeValues);
+				request, _ACTION_REQUEST_ATTRIBUTE_NAMES,
+				requestAttributeValues);
 		}
 	}
 
@@ -121,7 +122,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 
 		Object[] requestAttributeValues = captureRequestAttibutes(
-			request, _eventRequestAttibuteNames);
+			request, _EVENT_REQUEST_ATTRIBUTE_NAMES);
 
 		request.setAttribute(WebKeys.SPI_AGENT_EVENT, event);
 		request.setAttribute(WebKeys.SPI_AGENT_LAYOUT, layout);
@@ -144,7 +145,8 @@ public class PortalResiliencyPortletContainerWrapper
 			request.removeAttribute(WebKeys.SPI_AGENT_EVENT_RESULT);
 
 			restoreRequestAttibutes(
-				request, _eventRequestAttibuteNames, requestAttributeValues);
+				request, _EVENT_REQUEST_ATTRIBUTE_NAMES,
+				requestAttributeValues);
 		}
 	}
 
@@ -163,7 +165,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 
 		Object[] requestAttributeValues = captureRequestAttibutes(
-			request, _renderRequestAttributeNames);
+			request, _RENDER_REQUEST_ATTRIBUTE_NAMES);
 
 		request.setAttribute(
 			WebKeys.SPI_AGENT_LIFECYCLE, SPIAgent.Lifecycle.RENDER);
@@ -177,7 +179,8 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 		finally {
 			restoreRequestAttibutes(
-				request, _renderRequestAttributeNames, requestAttributeValues);
+				request, _RENDER_REQUEST_ATTRIBUTE_NAMES,
+				requestAttributeValues);
 		}
 	}
 
@@ -196,7 +199,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 
 		Object[] requestAttributeValues = captureRequestAttibutes(
-			request, _resourceRequestAttributeNames);
+			request, _RESOURCE_REQUEST_ATTRIBUTE_NAMES);
 
 		request.setAttribute(
 			WebKeys.SPI_AGENT_LIFECYCLE, SPIAgent.Lifecycle.RESOURCE);
@@ -210,7 +213,7 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 		finally {
 			restoreRequestAttibutes(
-				request, _resourceRequestAttributeNames,
+				request, _RESOURCE_REQUEST_ATTRIBUTE_NAMES,
 				requestAttributeValues);
 		}
 	}
@@ -264,15 +267,18 @@ public class PortalResiliencyPortletContainerWrapper
 		}
 	}
 
-	private static final String[] _actionRequestAttributeNames =
+	private static final String[] _ACTION_REQUEST_ATTRIBUTE_NAMES =
 		{WebKeys.SPI_AGENT_LIFECYCLE, WebKeys.SPI_AGENT_PORTLET};
-	private static final String[] _eventRequestAttibuteNames =
+
+	private static final String[] _EVENT_REQUEST_ATTRIBUTE_NAMES =
 		{WebKeys.SPI_AGENT_EVENT, WebKeys.SPI_AGENT_LAYOUT,
 			WebKeys.SPI_AGENT_LIFECYCLE, WebKeys.SPI_AGENT_PORTLET};
-	private static final String[] _renderRequestAttributeNames =
-		_actionRequestAttributeNames;
-	private static final String[] _resourceRequestAttributeNames =
-		_actionRequestAttributeNames;
+
+	private static final String[] _RENDER_REQUEST_ATTRIBUTE_NAMES =
+		_ACTION_REQUEST_ATTRIBUTE_NAMES;
+
+	private static final String[] _RESOURCE_REQUEST_ATTRIBUTE_NAMES =
+		_ACTION_REQUEST_ATTRIBUTE_NAMES;
 
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalResiliencyPortletContainerWrapper.class);
