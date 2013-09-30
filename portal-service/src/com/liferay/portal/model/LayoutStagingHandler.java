@@ -130,20 +130,6 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		}
 	}
 
-	private boolean _belongsToLayout(
-		LayoutRevision layoutRevision, Layout layout) {
-
-		if (layoutRevision == null) {
-			return false;
-		}
-
-		if (layoutRevision.getPlid() == layout.getPlid()) {
-			return true;
-		}
-
-		return false;
-	}
-
 	private Object _clone() {
 		return ProxyUtil.newProxyInstance(
 			PortalClassLoaderUtil.getClassLoader(), new Class[] {Layout.class},
@@ -202,7 +188,7 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 		}
 
 		if ((layoutRevisionId <= 0) ||
-			!_belongsToLayout(layoutRevision, layout)) {
+			!_isBelongsToLayout(layoutRevision, layout)) {
 
 			layoutRevisionId = StagingUtil.getRecentLayoutRevisionId(
 				user, layoutSetBranchId, layout.getPlid());
@@ -284,6 +270,20 @@ public class LayoutStagingHandler implements InvocationHandler, Serializable {
 				PortalClassLoaderUtil.getClassLoader(),
 				new Class[] {Layout.class},
 				new LayoutStagingHandler(_layout, _layoutRevision)));
+	}
+
+	private boolean _isBelongsToLayout(
+		LayoutRevision layoutRevision, Layout layout) {
+
+		if (layoutRevision == null) {
+			return false;
+		}
+
+		if (layoutRevision.getPlid() == layout.getPlid()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	private Object _toEscapedModel() {
