@@ -19,7 +19,7 @@ package com.liferay.portal.security.auth;
  */
 public class RemoteAuthException extends AuthException {
 
-	public static final int WRONG_SHARED_SECRET = 1001;
+	public static final int WRONG_SHARED_SECRET = 101;
 
 	public RemoteAuthException() {
 		super();
