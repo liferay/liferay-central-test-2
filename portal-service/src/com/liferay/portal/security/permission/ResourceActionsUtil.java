@@ -199,6 +199,10 @@ public class ResourceActionsUtil {
 			name);
 	}
 
+	public static String getPortletRootModelResource(String portletName) {
+		return getResourceActions().getPortletRootModelResource(portletName);
+	}
+
 	public static ResourceActions getResourceActions() {
 		PortalRuntimePermission.checkGetBeanProperty(ResourceActionsUtil.class);
 
@@ -275,10 +279,6 @@ public class ResourceActionsUtil {
 		throws Exception {
 
 		getResourceActions().read(servletContextName, inputStream);
-	}
-
-	public static String getPortletRootModelResource(String portletName) {
-		return getResourceActions().getPortletRootModelResource(portletName);
 	}
 
 	public void setResourceActions(ResourceActions resourceActions) {

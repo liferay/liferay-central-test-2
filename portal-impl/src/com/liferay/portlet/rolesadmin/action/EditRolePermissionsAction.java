@@ -46,12 +46,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletCategoryKeys;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.bookmarks.service.permission.BookmarksPermission;
-import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
-import com.liferay.portlet.journal.service.permission.JournalPermission;
-import com.liferay.portlet.messageboards.service.permission.MBPermission;
-import com.liferay.portlet.mobiledevicerules.service.permission.MDRPermission;
-import com.liferay.portlet.shopping.service.permission.ShoppingPermission;
 
 import java.util.HashMap;
 import java.util.List;
