@@ -15,18 +15,21 @@
 package com.liferay.portal.module.framework;
 
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.InputStream;
 
 import java.net.URL;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 /**
  * @author Igor Spasic
+ * @author Miguel Pastor
  */
-public final class EmptyModuleFramework implements ModuleFramework {
+public final class NoOpModuleFramework implements ModuleFramework {
 
 	@Override
 	public Object addBundle(String location) throws PortalException {
@@ -42,22 +45,22 @@ public final class EmptyModuleFramework implements ModuleFramework {
 
 	@Override
 	public Map<String, List<URL>> getExtraPackageMap() {
-		return null;
+		return Collections.emptyMap();
 	}
 
 	@Override
 	public List<URL> getExtraPackageURLs() {
-		return null;
+		return Collections.emptyList();
 	}
 
 	@Override
 	public Object getFramework() {
-		return null;
+		return new Object();
 	}
 
 	@Override
 	public String getState(long bundleId) throws PortalException {
-		return null;
+		return StringPool.BLANK;
 	}
 
 	@Override
