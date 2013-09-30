@@ -75,7 +75,7 @@ public class JournalContentPortletDataHandler
 
 	public JournalContentPortletDataHandler() {
 		setDataLevel(DataLevel.PORTLET_INSTANCE);
-		setDataPortletPreferences("groupId", "articleId", "ddmTemplateKey");
+		setDataPortletPreferences("articleId", "ddmTemplateKey", "groupId");
 		setExportControls(new PortletDataHandlerControl[0]);
 		setPublishToLiveByDefault(
 			PropsValues.JOURNAL_CONTENT_PUBLISH_TO_LIVE_BY_DEFAULT);
@@ -91,9 +91,9 @@ public class JournalContentPortletDataHandler
 			return portletPreferences;
 		}
 
-		portletPreferences.setValue("groupId", StringPool.BLANK);
 		portletPreferences.setValue("articleId", StringPool.BLANK);
 		portletPreferences.setValue("ddmTemplateKey", StringPool.BLANK);
+		portletPreferences.setValue("groupId", StringPool.BLANK);
 
 		return portletPreferences;
 	}
