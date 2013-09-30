@@ -175,7 +175,7 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
-	public void testCountByG_U_F_M_StatusAnyByMimeTypeAndUserId()
+	public void testCountByG_U_F_M_StatusAnyByUserIdAndMimeType()
 		throws Exception {
 
 		QueryDefinition queryDefinition = new QueryDefinition();
@@ -219,7 +219,7 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
-	public void testCountByG_U_F_M_StatusApprovedByMimeTypeAndUserId()
+	public void testCountByG_U_F_M_StatusApprovedByUserIdAndMimeType()
 		throws Exception {
 
 		QueryDefinition queryDefinition = new QueryDefinition();
@@ -263,7 +263,7 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
-	public void testCountByG_U_F_M_StatusInTrashByMimeTypeAndUserId()
+	public void testCountByG_U_F_M_StatusInTrashByUserIdAndMimeType()
 		throws Exception {
 
 		QueryDefinition queryDefinition = new QueryDefinition();
