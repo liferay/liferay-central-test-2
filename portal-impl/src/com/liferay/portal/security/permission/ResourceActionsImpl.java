@@ -998,13 +998,6 @@ public class ResourceActionsImpl implements ResourceActions {
 
 			modelResources.add(name);
 
-			boolean root = GetterUtil.getBoolean(
-				modelResourceElement.elementText("root"));
-
-			if (root) {
-				_portletRootModelResource.put(portletName, name);
-			}
-
 			// Reference for a model to parent portlets
 
 			Set<String> portletResources = _modelPortletResources.get(name);
@@ -1016,6 +1009,15 @@ public class ResourceActionsImpl implements ResourceActions {
 			}
 
 			portletResources.add(portletName);
+
+			// Reference for a model to root portlets
+
+			boolean root = GetterUtil.getBoolean(
+				modelResourceElement.elementText("root"));
+
+			if (root) {
+				_portletRootModelResource.put(portletName, name);
+			}
 		}
 
 		double weight = GetterUtil.getDouble(
