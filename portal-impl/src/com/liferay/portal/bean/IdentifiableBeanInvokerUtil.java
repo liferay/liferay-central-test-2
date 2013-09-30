@@ -55,6 +55,7 @@ public class IdentifiableBeanInvokerUtil {
 			identifiableBeanServletContextName, beanIdentifier);
 	}
 
+	@SuppressWarnings("unused")
 	private static Object _invoke(
 			MethodHandler methodHandler, String threadContextServletContextName,
 			String identifiableBeanServletContextName, String beanIdentifier)
@@ -64,7 +65,7 @@ public class IdentifiableBeanInvokerUtil {
 			ClassLoaderUtil.getContextClassLoader();
 
 		ClassLoader classLoader = ClassLoaderPool.getClassLoader(
-				threadContextServletContextName);
+			threadContextServletContextName);
 
 		ClassLoaderUtil.setContextClassLoader(classLoader);
 
@@ -88,7 +89,7 @@ public class IdentifiableBeanInvokerUtil {
 		}
 	}
 
-	private static final MethodKey _invokeMethodKey = new MethodKey(
+	private static MethodKey _invokeMethodKey = new MethodKey(
 		IdentifiableBeanInvokerUtil.class, "_invoke", MethodHandler.class,
 		String.class, String.class, String.class);
 

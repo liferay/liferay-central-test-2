@@ -126,12 +126,12 @@ public class ClusterableAdvice
 		MethodHandler methodHandler =
 			IdentifiableBeanInvokerUtil.createMethodHandler(methodInvocation);
 
-		Map<String, Serializable> context =
-			ClusterableContextThreadLocal.collectThreadLocalContext();
-
 		if (clusterInvokeAcceptorClass == ClusterInvokeAcceptor.class) {
 			clusterInvokeAcceptorClass = null;
 		}
+
+		Map<String, Serializable> context =
+			ClusterableContextThreadLocal.collectThreadLocalContext();
 
 		return new MethodHandler(
 			_invokeMethodKey, methodHandler, clusterInvokeAcceptorClass,
