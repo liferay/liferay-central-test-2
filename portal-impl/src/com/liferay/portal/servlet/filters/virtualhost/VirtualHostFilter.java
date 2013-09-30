@@ -83,7 +83,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isPotentialDocument(
+	protected boolean isDocumentFriendlyURL(
 			HttpServletRequest request, long groupId, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -291,7 +291,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 						}
 					}
 					else {
-						if (isPotentialDocument(
+						if (isDocumentFriendlyURL(
 								request, group.getGroupId(), friendlyURL)) {
 
 							processFilter(
