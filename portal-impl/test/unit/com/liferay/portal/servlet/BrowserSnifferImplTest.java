@@ -38,11 +38,8 @@ public class BrowserSnifferImplTest {
 			new InputStreamReader(getClass().getResourceAsStream(
 				"dependencies/user_agents.csv")));
 
+		boolean android = false;
 		String line = null;
-
-		boolean androidSection = false;
-
-		BrowserSnifferImpl browserSnifferImpl = new BrowserSnifferImpl();
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
 			line = line.trim();
@@ -51,24 +48,24 @@ public class BrowserSnifferImplTest {
 				continue;
 			}
 
-			if (line.contains("Android Webkit Browser")) {
-				androidSection = true;
+			if (line.contains("Android")) {
+				android = true;
 
 				continue;
 			}
 
-			if (androidSection && (line.charAt(0) == CharPool.POUND)) {
+			if (android && (line.charAt(0) == CharPool.POUND)) {
 				break;
 			}
 
-			if (androidSection) {
+			if (android) {
 				MockHttpServletRequest mockHttpServletRequest =
 					new MockHttpServletRequest();
 
 				mockHttpServletRequest.addHeader(HttpHeaders.USER_AGENT, line);
 
 				Assert.assertTrue(
-					browserSnifferImpl.isAndroid(mockHttpServletRequest));
+					_browserSnifferImpl.isAndroid(mockHttpServletRequest));
 			}
 		}
 
@@ -79,15 +76,14 @@ public class BrowserSnifferImplTest {
 			HttpHeaders.USER_AGENT,
 			"Safari 6, 6.0, 536.26, mozilla/5.0 (ipad; cpu os 6_0 like mac os" +
 				" x) applewebkit/536.26 (khtml, like gecko) version/6.0" +
-				" mobile/10a5355d safari/8536.25");
+					" mobile/10a5355d safari/8536.25");
 
 		Assert.assertFalse(
-			browserSnifferImpl.isAndroid(mockHttpServletRequest));
+			_browserSnifferImpl.isAndroid(mockHttpServletRequest));
 	}
 
 	@Test
 	public void testParseVersion() throws IOException {
-
 		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
 			new InputStreamReader(getClass().getResourceAsStream(
 				"dependencies/user_agents.csv")));
@@ -124,5 +120,7 @@ public class BrowserSnifferImplTest {
 
 		unsyncBufferedReader.close();
 	}
+
+	private BrowserSnifferImpl _browserSnifferImpl = new BrowserSnifferImpl();
 
 }
