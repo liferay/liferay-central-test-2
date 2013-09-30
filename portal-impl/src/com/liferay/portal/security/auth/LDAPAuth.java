@@ -158,14 +158,15 @@ public class LDAPAuth implements Authenticator {
 
 			ldapAuthResult = new LDAPAuthResult();
 
-			InitialLdapContext innerCtx = null;
+			InitialLdapContext initialLdapContext = null;
 
 			try {
-				innerCtx = new InitialLdapContext(env, null);
+				initialLdapContext = new InitialLdapContext(env, null);
 
 				// Get LDAP bind results
 
-				Control[] responseControls = innerCtx.getResponseControls();
+				Control[] responseControls =
+					initialLdapContext.getResponseControls();
 
 				ldapAuthResult.setAuthenticated(true);
 				ldapAuthResult.setResponseControl(responseControls);
@@ -184,8 +185,8 @@ public class LDAPAuth implements Authenticator {
 				setFailedLDAPAuthResult(env, ldapAuthResult);
 			}
 			finally {
-				if (innerCtx != null) {
-					innerCtx.close();
+				if (initialLdapContext != null) {
+					initialLdapContext.close();
 				}
 			}
 		}
@@ -564,30 +565,15 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	protected LDAPAuthResult getFailedLDAPAuthResult(Map<String, Object> env) {
-		Map<String, LDAPAuthResult> failedLDAPAuthResultCache =
-			_failedLDAPAuthResultCache.get();
+		Map<String, LDAPAuthResult> failedLDAPAuthResults =
+			_failedLDAPAuthResults.get();
 
-		String cacheKey = _getCacheKey(env);
+		String cacheKey = getKey(env);
 
-		return failedLDAPAuthResultCache.get(cacheKey);
+		return failedLDAPAuthResults.get(cacheKey);
 	}
 
-	protected void setFailedLDAPAuthResult(
-		Map<String, Object> env, LDAPAuthResult ldapAuthResult) {
-
-		Map<String, LDAPAuthResult> failedLDAPAuthResultCache =
-			_failedLDAPAuthResultCache.get();
-
-		String cacheKey = _getCacheKey(env);
-
-		if (failedLDAPAuthResultCache.containsKey(cacheKey)) {
-			return;
-		}
-
-		failedLDAPAuthResultCache.put(cacheKey, ldapAuthResult);
-	}
-
-	private String _getCacheKey(Map<String, Object> env) {
+	protected String getKey(Map<String, Object> env) {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append(MapUtil.getString(env, Context.PROVIDER_URL));
@@ -599,10 +585,25 @@ public class LDAPAuth implements Authenticator {
 		return sb.toString();
 	}
 
+	protected void setFailedLDAPAuthResult(
+		Map<String, Object> env, LDAPAuthResult ldapAuthResult) {
+
+		Map<String, LDAPAuthResult> failedLDAPAuthResults =
+			_failedLDAPAuthResults.get();
+
+		String cacheKey = getKey(env);
+
+		if (failedLDAPAuthResults.containsKey(cacheKey)) {
+			return;
+		}
+
+		failedLDAPAuthResults.put(cacheKey, ldapAuthResult);
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LDAPAuth.class);
 
 	private ThreadLocal<Map<String, LDAPAuthResult>>
-		_failedLDAPAuthResultCache =
+		_failedLDAPAuthResults =
 			new AutoResetThreadLocal<Map<String, LDAPAuthResult>>(
 				LDAPAuth.class + "._failedLDAPAuthResultCache",
 				new HashMap<String, LDAPAuthResult>());
