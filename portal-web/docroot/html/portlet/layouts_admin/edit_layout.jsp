@@ -173,7 +173,7 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 		<c:otherwise>
 			<c:if test="<%= !group.isLayoutPrototype() && (selLayout != null) %>">
 				<c:if test="<%= selGroup.isStagingGroup() %>">
-						<liferay-ui:error exception="<%= AuthException.class %>">
+					<liferay-ui:error exception="<%= AuthException.class %>">
 
 						<%
 						AuthException ae = (AuthException)errorException;
@@ -192,18 +192,17 @@ boolean showAddAction = ParamUtil.getBoolean(request, "showAddAction", true);
 							<liferay-ui:message key="internal-server-error" />
 						</c:if>
 
-						<c:if test="<%= ae.getType() == AuthException.NO_SHARED_SECRET %>">
-							<liferay-ui:message key="the-tunneling-servlet-shared-secret-is-not-set" />
+						<c:if test="<%= ae.getType() == AuthException.INVALID_SHARED_SECRET %>">
+							<liferay-ui:message key="the-tunneling-servlet-shared-secret-must-be-16,-32,-or-64-characters-long" />
 						</c:if>
 
-						<c:if test="<%= ae.getType() == AuthException.INVALID_SHARED_SECRET %>">
-							<liferay-ui:message key="the-tunneling-servlet-shared-secret-must-be-16,-32-or-64-characters-long" />
+						<c:if test="<%= ae.getType() == AuthException.NO_SHARED_SECRET %>">
+							<liferay-ui:message key="the-tunneling-servlet-shared-secret-is-not-set" />
 						</c:if>
 
 						<c:if test="<%= ae.getType() == RemoteAuthException.WRONG_SHARED_SECRET %>">
 							<liferay-ui:message key="the-tunneling-servlet-shared-secrets-do-not-match" />
 						</c:if>
-
 					</liferay-ui:error>
 
 					<liferay-ui:error exception="<%= RemoteExportException.class %>">

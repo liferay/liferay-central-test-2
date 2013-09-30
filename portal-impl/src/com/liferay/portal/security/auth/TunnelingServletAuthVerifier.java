@@ -16,11 +16,13 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -146,18 +148,31 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 				TunnelUtil.getSharedSecretKey(), login);
 		}
 		catch (EncryptorException ee) {
-			throw new RemoteAuthException(
-				AuthException.INTERNAL_SERVER_ERROR, "Unable to decrypt login",
-				ee);
+			AuthException authException = new RemoteAuthException(
+				LanguageUtil.get(LocaleUtil.US, "unable-to-decrypt-login"), ee);
+
+			authException.setType(AuthException.INTERNAL_SERVER_ERROR);
+
+			throw authException;
 		}
 		catch (AuthException ae) {
-			throw new RemoteAuthException(ae.getType(), ae.getMessage());
+			AuthException authException = new RemoteAuthException(
+				ae.getMessage());
+
+			authException.setType(ae.getType());
+
+			throw authException;
 		}
 
 		if (!password.equals(expectedPassword)) {
-			throw new RemoteAuthException(
-				RemoteAuthException.WRONG_SHARED_SECRET,
-				"Tunneling servlet shared secrets do not match");
+			AuthException authException = new RemoteAuthException(
+				LanguageUtil.get(
+					LocaleUtil.US,
+					"the-tunneling-servlet-shared-secrets-do-not-match"));
+
+			authException.setType(RemoteAuthException.WRONG_SHARED_SECRET);
+
+			throw authException;
 		}
 
 		User user = null;
@@ -189,8 +204,12 @@ public class TunnelingServletAuthVerifier implements AuthVerifier {
 		}
 
 		if (user == null) {
-			throw new RemoteAuthException(
-				AuthException.INTERNAL_SERVER_ERROR, "Internal server error");
+			AuthException authException = new RemoteAuthException(
+				LanguageUtil.get(LocaleUtil.ENGLISH, "internal-server-error"));
+
+			authException.setType(AuthException.INTERNAL_SERVER_ERROR);
+
+			throw authException;
 		}
 
 		String[] credentials = new String[2];
