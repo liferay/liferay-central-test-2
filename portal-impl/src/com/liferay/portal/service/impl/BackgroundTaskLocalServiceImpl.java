@@ -223,20 +223,19 @@ public class BackgroundTaskLocalServiceImpl
 
 				@Override
 				public Void call() throws Exception {
-					Message responseMessage = new Message();
+					Message message = new Message();
 
-					responseMessage.put(
+					message.put(
 						"backgroundTaskId",
 						backgroundTask.getBackgroundTaskId());
-					responseMessage.put("name", backgroundTask.getName());
-					responseMessage.put("status", status);
-					responseMessage.put(
+					message.put("name", backgroundTask.getName());
+					message.put("status", status);
+					message.put(
 						"taskExecutorClassName",
 						backgroundTask.getTaskExecutorClassName());
 
 					MessageBusUtil.sendMessage(
-						DestinationNames.BACKGROUND_TASK_STATUS,
-						responseMessage);
+						DestinationNames.BACKGROUND_TASK_STATUS, message);
 
 					return null;
 				}
@@ -516,7 +515,6 @@ public class BackgroundTaskLocalServiceImpl
 	@Clusterable(onMaster = true)
 	@Override
 	public String getBackgroundTaskStatusJSON(long backgroundTaskId) {
-
 		BackgroundTaskStatus backgroundTaskStatus =
 			_backgroundTaskStatusRegistry.getBackgroundTaskStatus(
 				backgroundTaskId);

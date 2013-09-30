@@ -30,7 +30,7 @@ public abstract class BaseClusterMasterTokenTransitionListener
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to process token acquired event", e);
+				_log.warn("Unable to process the token acquired event", e);
 			}
 		}
 	}
@@ -42,7 +42,7 @@ public abstract class BaseClusterMasterTokenTransitionListener
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to process token released event", e);
+				_log.warn("Unable to process the token released event", e);
 			}
 		}
 	}

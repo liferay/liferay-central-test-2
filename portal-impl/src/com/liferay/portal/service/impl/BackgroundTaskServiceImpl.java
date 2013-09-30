@@ -23,7 +23,6 @@ public class BackgroundTaskServiceImpl extends BackgroundTaskServiceBaseImpl {
 
 	@Override
 	public String getBackgroundTaskStatusJSON(long backgroundTaskId) {
-
 		return backgroundTaskLocalService.getBackgroundTaskStatusJSON(
 			backgroundTaskId);
 	}
