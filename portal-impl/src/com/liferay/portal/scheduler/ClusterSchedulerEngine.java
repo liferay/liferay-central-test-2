@@ -817,7 +817,7 @@ public class ClusterSchedulerEngine
 
 		ObjectValuePair<SchedulerResponse, TriggerState>
 			memoryClusteredJob = _memoryClusteredJobs.get(
-			getFullName(jobName, groupName));
+				getFullName(jobName, groupName));
 
 		if (memoryClusteredJob != null) {
 			memoryClusteredJob.setValue(triggerState);

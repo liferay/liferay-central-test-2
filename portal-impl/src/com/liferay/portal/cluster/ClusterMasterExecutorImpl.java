@@ -33,7 +33,6 @@ import com.liferay.portal.service.LockLocalServiceUtil;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -56,7 +55,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		}
 		catch (SystemException se) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to destroy cluster master executor", se);
+				_log.warn("Unable to destroy the cluster master executor", se);
 			}
 		}
 	}
@@ -68,7 +67,8 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		if (!_enabled) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Cluster master executor is disabled, run on local node.");
+					"Executing on the local node because the cluster master " +
+						"executor is disabled");
 			}
 
 			try {
@@ -162,7 +162,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 			clusterMasterTokenTransitionListener);
 	}
 
-	protected String getMasterAddressString() throws SystemException {
+	protected String getMasterAddressString() {
 		String owner = null;
 
 		while (true) {
@@ -191,8 +191,9 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
-						"Unable to obtain cluster master token " +
-							"Trying again.", e);
+						"Unable to obtain the cluster master token. Trying " +
+							"again.",
+						e);
 				}
 			}
 		}
@@ -216,8 +217,8 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		boolean masterTokenAcquired) {
 
 		for (ClusterMasterTokenTransitionListener
-			clusterMasterTokenTransitionListener :
-			_clusterMasterTokenTransitionListeners) {
+				clusterMasterTokenTransitionListener :
+					_clusterMasterTokenTransitionListeners) {
 
 			if (masterTokenAcquired) {
 				clusterMasterTokenTransitionListener.masterTokenAcquired();
@@ -244,7 +245,21 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 	private volatile boolean _enabled;
 	private volatile String _localClusterNodeAddress;
 
-	private static class LocalFuture<T> implements Future<T> {
+	private class ClusterMasterTokenClusterEventListener
+		implements ClusterEventListener {
+
+		@Override
+		public void processClusterEvent(ClusterEvent clusterEvent) {
+			try {
+				getMasterAddressString();
+			}
+			catch (Exception e) {
+				_log.error("Unable to update the cluster master lock", e);
+			}
+		}
+	}
+
+	private class LocalFuture<T> implements Future<T> {
 
 		public LocalFuture(T result) {
 			_result = result;
@@ -279,7 +294,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 
 	}
 
-	private static class RemoteFuture<T> implements Future<T> {
+	private class RemoteFuture<T> implements Future<T> {
 
 		public RemoteFuture(
 			Address address, FutureClusterResponses futureClusterResponses) {
@@ -304,7 +319,7 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		}
 
 		@Override
-		public T get() throws ExecutionException, InterruptedException {
+		public T get() throws InterruptedException {
 			ClusterNodeResponses clusterNodeResponses =
 				_futureClusterResponses.get();
 
@@ -324,20 +339,6 @@ public class ClusterMasterExecutorImpl implements ClusterMasterExecutor {
 		private final Address _address;
 		private final FutureClusterResponses _futureClusterResponses;
 
-	}
-
-	private class ClusterMasterTokenClusterEventListener
-		implements ClusterEventListener {
-
-		@Override
-		public void processClusterEvent(ClusterEvent clusterEvent) {
-			try {
-				getMasterAddressString();
-			}
-			catch (Exception e) {
-				_log.error("Unable to update cluster master lock", e);
-			}
-		}
 	}
 
 }

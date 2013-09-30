@@ -35,7 +35,7 @@ public class AddressSerializerUtil {
 		}
 		catch (ClassNotFoundException cnfe) {
 			throw new RuntimeException(
-				"Unable to deserialize address: " + serializedAddress, cnfe);
+				"Unable to deserialize address " + serializedAddress, cnfe);
 		}
 	}
 
