@@ -258,79 +258,11 @@ else {
 					</ul>
 				</liferay-ui:error>
 
-				<liferay-ui:error exception="<%= AuthException.class %>">
+				<%@ include file="/html/portlet/layouts_admin/error_auth_exception.jspf" %>
 
-					<%
-					AuthException ae = (AuthException)errorException;
-					%>
+				<%@ include file="/html/portlet/layouts_admin/error_remote_export_exception.jspf" %>
 
-					<c:if test="<%= ae instanceof RemoteAuthException %>">
-
-						<%
-						RemoteAuthException rae = (RemoteAuthException)errorException;
-						%>
-
-						<liferay-ui:message arguments='<%= "<em>" + rae.getURL() + "</em>" %>' key="an-unexpected-error-occurred-in-the-remote-server-at-x" />
-					</c:if>
-
-					<c:if test="<%= ae.getType() == AuthException.INTERNAL_SERVER_ERROR %>">
-						<liferay-ui:message key="internal-server-error" />
-					</c:if>
-
-					<c:if test="<%= ae.getType() == AuthException.INVALID_SHARED_SECRET %>">
-						<liferay-ui:message key="the-tunneling-servlet-shared-secret-must-be-16,-32,-or-64-characters-long" />
-					</c:if>
-
-					<c:if test="<%= ae.getType() == AuthException.NO_SHARED_SECRET %>">
-						<liferay-ui:message key="the-tunneling-servlet-shared-secret-is-not-set" />
-					</c:if>
-
-					<c:if test="<%= ae.getType() == RemoteAuthException.WRONG_SHARED_SECRET %>">
-						<liferay-ui:message key="the-tunneling-servlet-shared-secrets-do-not-match" />
-					</c:if>
-				</liferay-ui:error>
-
-				<liferay-ui:error exception="<%= RemoteExportException.class %>">
-
-					<%
-					RemoteExportException ree = (RemoteExportException)errorException;
-					%>
-
-					<c:if test="<%= ree.getType() == RemoteExportException.BAD_CONNECTION %>">
-						<liferay-ui:message arguments='<%= "<em>" + ree.getURL() + "</em>" %>' key="could-not-connect-to-address-x.-please-verify-that-the-specified-port-is-correct-and-that-the-remote-server-is-configured-to-accept-requests-from-this-server" />
-					</c:if>
-
-					<c:if test="<%= ree.getType() == RemoteExportException.NO_GROUP %>">
-						<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="no-site-exists-on-the-remote-server-with-site-id-x" />
-					</c:if>
-
-					<c:if test="<%= ree.getType() == RemoteExportException.NO_PERMISSIONS %>">
-						<liferay-ui:message arguments="<%= ree.getGroupId() %>" key="you-do-not-have-permissions-to-edit-the-site-with-id-x-on-the-remote-server" />
-					</c:if>
-				</liferay-ui:error>
-
-				<liferay-ui:error exception="<%= RemoteOptionsException.class %>">
-
-					<%
-					RemoteOptionsException roe = (RemoteOptionsException)errorException;
-					%>
-
-					<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_ADDRESS %>">
-						<liferay-ui:message arguments="<%= roe.getRemoteAddress() %>" key="the-remote-address-x-is-not-valid" />
-					</c:if>
-
-					<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_GROUP_ID %>">
-						<liferay-ui:message arguments="<%= roe.getRemoteGroupId() %>" key="the-remote-site-id-x-is-not-valid" />
-					</c:if>
-
-					<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PATH_CONTEXT %>">
-						<liferay-ui:message arguments="<%= roe.getRemotePathContext() %>" key="the-remote-path-context-x-is-not-valid" />
-					</c:if>
-
-					<c:if test="<%= roe.getType() == RemoteOptionsException.REMOTE_PORT %>">
-						<liferay-ui:message arguments="<%= roe.getRemotePort() %>" key="the-remote-port-x-is-not-valid" />
-					</c:if>
-				</liferay-ui:error>
+				<%@ include file="/html/portlet/layouts_admin/error_remote_options_exception.jspf" %>
 
 				<liferay-ui:error exception="<%= SystemException.class %>">
 
