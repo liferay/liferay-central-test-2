@@ -26,26 +26,10 @@ public class AuthException extends PortalException {
 
 	public static final int INVALID_SHARED_SECRET = 2;
 
-	public static final int NO_SHARED_SECRET = 4;
+	public static final int NO_SHARED_SECRET = 3;
 
 	public AuthException() {
 		super();
-	}
-
-	public AuthException(int type) {
-		_type = type;
-	}
-
-	public AuthException(int type, String msg) {
-		super(msg);
-
-		_type = type;
-	}
-
-	public AuthException(int type, String msg, Throwable cause) {
-		super(msg, cause);
-
-		_type = type;
 	}
 
 	public AuthException(String msg) {
@@ -62,6 +46,10 @@ public class AuthException extends PortalException {
 
 	public int getType() {
 		return _type;
+	}
+
+	public void setType(int type) {
+		_type = type;
 	}
 
 	private int _type;

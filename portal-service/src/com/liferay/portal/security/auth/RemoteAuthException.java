@@ -25,18 +25,6 @@ public class RemoteAuthException extends AuthException {
 		super();
 	}
 
-	public RemoteAuthException(int type) {
-		super(type);
-	}
-
-	public RemoteAuthException(int type, String msg) {
-		super(type, msg);
-	}
-
-	public RemoteAuthException(int type, String msg, Throwable cause) {
-		super(type, msg, cause);
-	}
-
 	public RemoteAuthException(String msg) {
 		super(msg);
 	}

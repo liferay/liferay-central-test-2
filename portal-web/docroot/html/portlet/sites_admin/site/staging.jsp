@@ -151,18 +151,17 @@ if (stagedLocally) {
 					<liferay-ui:message key="internal-server-error" />
 				</c:if>
 
-				<c:if test="<%= ae.getType() == AuthException.NO_SHARED_SECRET %>">
-					<liferay-ui:message key="the-tunneling-servlet-shared-secret-is-not-set" />
+				<c:if test="<%= ae.getType() == AuthException.INVALID_SHARED_SECRET %>">
+					<liferay-ui:message key="the-tunneling-servlet-shared-secret-must-be-16,-32,-or-64-characters-long" />
 				</c:if>
 
-				<c:if test="<%= ae.getType() == AuthException.INVALID_SHARED_SECRET %>">
-					<liferay-ui:message key="the-tunneling-servlet-shared-secret-must-be-16,-32-or-64-characters-long" />
+				<c:if test="<%= ae.getType() == AuthException.NO_SHARED_SECRET %>">
+					<liferay-ui:message key="the-tunneling-servlet-shared-secret-is-not-set" />
 				</c:if>
 
 				<c:if test="<%= ae.getType() == RemoteAuthException.WRONG_SHARED_SECRET %>">
 					<liferay-ui:message key="the-tunneling-servlet-shared-secrets-do-not-match" />
 				</c:if>
-
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= RemoteExportException.class %>">
