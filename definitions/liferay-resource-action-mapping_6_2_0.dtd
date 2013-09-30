@@ -101,7 +101,7 @@ The portlet-ref element is the name of the portlet that the model belongs to.
 <!ELEMENT portlet-ref (portlet-name*) >
 
 <!--
-The weight element is a boolean value that specifies whether the resource is
+The root element is a boolean value that specifies whether the resource is
 a root model resource. A root resource is the one that contains all other
 resources within a portlet.
 -->
