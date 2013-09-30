@@ -261,10 +261,10 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			portletPreferences.getValue("rootFolderId", null));
 
 		if (rootFolderId > 0) {
-			Element folderGroupElement =
+			Element foldersElement =
 				portletDataContext.getImportDataGroupElement(Folder.class);
 
-			List<Element> folderElements = folderGroupElement.elements();
+			List<Element> folderElements = foldersElement.elements();
 
 			if (!folderElements.isEmpty()) {
 				StagedModelDataHandlerUtil.importStagedModel(

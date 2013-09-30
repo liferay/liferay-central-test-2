@@ -42,7 +42,7 @@ public class DDLDisplayPortletDataHandler extends DDLPortletDataHandler {
 	public DDLDisplayPortletDataHandler() {
 		setDataLevel(DataLevel.PORTLET_INSTANCE);
 		setDataPortletPreferences(
-			"recordSetId", "displayDDMTemplateId", "formDDMTemplateId");
+			"displayDDMTemplateId", "formDDMTemplateId", "recordSetId");
 		setExportControls(new PortletDataHandlerControl[0]);
 	}
 
@@ -56,10 +56,10 @@ public class DDLDisplayPortletDataHandler extends DDLPortletDataHandler {
 			return portletPreferences;
 		}
 
-		portletPreferences.setValue("recordSetId", StringPool.BLANK);
 		portletPreferences.setValue("displayDDMTemplateId", StringPool.BLANK);
-		portletPreferences.setValue("formDDMTemplateId", StringPool.BLANK);
 		portletPreferences.setValue("editable", Boolean.TRUE.toString());
+		portletPreferences.setValue("formDDMTemplateId", StringPool.BLANK);
+		portletPreferences.setValue("recordSetId", StringPool.BLANK);
 		portletPreferences.setValue("spreadsheet", Boolean.FALSE.toString());
 
 		return portletPreferences;

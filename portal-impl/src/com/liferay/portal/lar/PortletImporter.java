@@ -1776,7 +1776,7 @@ public class PortletImporter {
 
 		if (importData ||
 			(portletDataHandler.isDisplayPortlet() &&
-				!MergeLayoutPrototypesThreadLocal.isInProgress())) {
+			 !MergeLayoutPrototypesThreadLocal.isInProgress())) {
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				ownerId, ownerType, plid, portletId, xml);
