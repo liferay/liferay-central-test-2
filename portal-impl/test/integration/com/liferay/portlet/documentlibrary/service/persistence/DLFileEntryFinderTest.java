@@ -175,6 +175,16 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
+	public void testCountByG_U_F_M_StatusAnyByUserId() throws Exception {
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
+
+		Assert.assertEquals(
+			2, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
+	}
+
+	@Test
 	public void testCountByG_U_F_M_StatusAnyByUserIdAndMimeType()
 		throws Exception {
 
@@ -186,16 +196,6 @@ public class DLFileEntryFinderTest {
 			1,
 			doCountBy_G_U_F_M(
 				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
-	}
-
-	@Test
-	public void testCountByG_U_F_M_StatusAnyByUserId() throws Exception {
-		QueryDefinition queryDefinition = new QueryDefinition();
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
-
-		Assert.assertEquals(
-			2, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -219,6 +219,16 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
+	public void testCountByG_U_F_M_StatusApprovedByUserId() throws Exception {
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
+
+		Assert.assertEquals(
+			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
+	}
+
+	@Test
 	public void testCountByG_U_F_M_StatusApprovedByUserIdAndMimeType()
 		throws Exception {
 
@@ -230,16 +240,6 @@ public class DLFileEntryFinderTest {
 			0,
 			doCountBy_G_U_F_M(
 				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
-	}
-
-	@Test
-	public void testCountByG_U_F_M_StatusApprovedByUserId() throws Exception {
-		QueryDefinition queryDefinition = new QueryDefinition();
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
-
-		Assert.assertEquals(
-			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -263,6 +263,16 @@ public class DLFileEntryFinderTest {
 	}
 
 	@Test
+	public void testCountByG_U_F_M_StatusInTrashByUserId() throws Exception {
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		Assert.assertEquals(
+			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
+	}
+
+	@Test
 	public void testCountByG_U_F_M_StatusInTrashByUserIdAndMimeType()
 		throws Exception {
 
@@ -274,16 +284,6 @@ public class DLFileEntryFinderTest {
 			0,
 			doCountBy_G_U_F_M(
 				_folder.getUserId(), ContentTypes.TEXT_PLAIN, queryDefinition));
-	}
-
-	@Test
-	public void testCountByG_U_F_M_StatusInTrashByUserId() throws Exception {
-		QueryDefinition queryDefinition = new QueryDefinition();
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		Assert.assertEquals(
-			1, doCountBy_G_U_F_M(_folder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
