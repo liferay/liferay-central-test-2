@@ -14,7 +14,6 @@
 
 package com.liferay.portal.module.framework;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.InputStream;
@@ -29,17 +28,15 @@ import java.util.Map;
  * @author Igor Spasic
  * @author Miguel Pastor
  */
-public final class NoOpModuleFramework implements ModuleFramework {
+public final class DummyModuleFramework implements ModuleFramework {
 
 	@Override
-	public Object addBundle(String location) throws PortalException {
+	public Object addBundle(String location) {
 		return null;
 	}
 
 	@Override
-	public Object addBundle(String location, InputStream inputStream)
-			throws PortalException {
-
+	public Object addBundle(String location, InputStream inputStream) {
 		return null;
 	}
 
@@ -59,7 +56,7 @@ public final class NoOpModuleFramework implements ModuleFramework {
 	}
 
 	@Override
-	public String getState(long bundleId) throws PortalException {
+	public String getState(long bundleId) {
 		return StringPool.BLANK;
 	}
 
@@ -68,16 +65,15 @@ public final class NoOpModuleFramework implements ModuleFramework {
 	}
 
 	@Override
-	public void setBundleStartLevel(long bundleId, int startLevel)
-		throws PortalException {
+	public void setBundleStartLevel(long bundleId, int startLevel) {
 	}
 
 	@Override
-	public void startBundle(long bundleId) throws PortalException {
+	public void startBundle(long bundleId) {
 	}
 
 	@Override
-	public void startBundle(long bundleId, int options) throws PortalException {
+	public void startBundle(long bundleId, int options) {
 	}
 
 	@Override
@@ -89,11 +85,11 @@ public final class NoOpModuleFramework implements ModuleFramework {
 	}
 
 	@Override
-	public void stopBundle(long bundleId) throws PortalException {
+	public void stopBundle(long bundleId) {
 	}
 
 	@Override
-	public void stopBundle(long bundleId, int options) throws PortalException {
+	public void stopBundle(long bundleId, int options) {
 	}
 
 	@Override
@@ -105,16 +101,15 @@ public final class NoOpModuleFramework implements ModuleFramework {
 	}
 
 	@Override
-	public void uninstallBundle(long bundleId) throws PortalException {
+	public void uninstallBundle(long bundleId) {
 	}
 
 	@Override
-	public void updateBundle(long bundleId) throws PortalException {
+	public void updateBundle(long bundleId) {
 	}
 
 	@Override
-	public void updateBundle(long bundleId, InputStream inputStream)
-		throws PortalException {
+	public void updateBundle(long bundleId, InputStream inputStream) {
 	}
 
 }
