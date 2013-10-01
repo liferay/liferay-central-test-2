@@ -62,7 +62,7 @@ public class IntrabandRPCUtilTest {
 
 	@Test
 	public void testEmptyCallable() throws Exception {
-		Assert.assertNull(IntrabandRPCUtil.EMPTY_CALLABLE.call());
+		Assert.assertNull(IntrabandRPCUtil.emptyCallable.call());
 	}
 
 	@Test
@@ -170,7 +170,7 @@ public class IntrabandRPCUtilTest {
 			Assert.assertSame(ioe, ee.getCause());
 		}
 
-		// ClassNotFoundException
+		// Class not found exception
 
 		futureResult = new FutureResult<String>();
 
@@ -201,14 +201,14 @@ public class IntrabandRPCUtilTest {
 				ClassNotFoundException.class, throwable.getClass());
 		}
 
-		// Timeouted
+		// Timed out
 
 		futureResult = new FutureResult<String>();
 
 		futureCompletionHandler = new FutureCompletionHandler<String>(
 			futureResult);
 
-		futureCompletionHandler.timeouted(null);
+		futureCompletionHandler.timedOut(null);
 
 		try {
 			futureResult.get();

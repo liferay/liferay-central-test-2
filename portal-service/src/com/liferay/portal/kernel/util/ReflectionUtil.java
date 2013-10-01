@@ -50,14 +50,14 @@ public class ReflectionUtil {
 			Class<?> clazz, String name, Class<?> ... parameterTypes)
 		throws Exception {
 
-		return doGetBridgeMethod(true, clazz, name, parameterTypes);
+		return getBridgeMethod(true, clazz, name, parameterTypes);
 	}
 
 	public static Method getDeclaredBridgeMethod(
 			Class<?> clazz, String name, Class<?> ... parameterTypes)
 		throws Exception {
 
-		return doGetBridgeMethod(false, clazz, name, parameterTypes);
+		return getBridgeMethod(false, clazz, name, parameterTypes);
 	}
 
 	public static Field getDeclaredField(Class<?> clazz, String name)
@@ -253,7 +253,7 @@ public class ReflectionUtil {
 		return newEnumElement(enumClass, null, name, ordinal, (Object[])null);
 	}
 
-	protected static Method doGetBridgeMethod(
+	protected static Method getBridgeMethod(
 			boolean publicMethod, Class<?> clazz, String name,
 			Class<?> ... parameterTypes)
 		throws Exception {
