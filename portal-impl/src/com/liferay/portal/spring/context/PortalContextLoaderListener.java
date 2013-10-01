@@ -205,7 +205,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to load the module framework because of a bug in the " 
+				"Unable to load the module framework because of a bug in the " +
 					"application server. Support for OSGi plugins is disabled.",
 				e);
 
