@@ -17,6 +17,8 @@ package com.liferay.portlet.social.service.impl;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -828,12 +830,12 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 			List<SocialActivity> activities, int start, int end)
 		throws PortalException {
 
+		List<SocialActivity> filteredActivities =
+			new ArrayList<SocialActivity>();
+
 		List<SocialActivityInterpreter> activityInterpreters =
 			socialActivityInterpreterLocalService.getActivityInterpreters(
 				StringPool.BLANK);
-
-		List<SocialActivity> filteredActivities =
-			new ArrayList<SocialActivity>();
 
 		for (SocialActivity activity : activities) {
 			if (hasPermission(activity, activityInterpreters)) {
@@ -867,17 +869,16 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 			List<SocialActivityInterpreter> activityInterpreters)
 		throws PortalException {
 
+		PermissionChecker permissionChecker = getPermissionChecker();
 		ServiceContext serviceContext = new ServiceContext();
 
-		PermissionChecker permissionChecker = getPermissionChecker();
-
 		for (int i = 0; i < activityInterpreters.size(); i++) {
-			SocialActivityInterpreterImpl activityInterpreter =
+			SocialActivityInterpreterImpl activityInterpreterImpl =
 				(SocialActivityInterpreterImpl)activityInterpreters.get(i);
 
-			if (activityInterpreter.hasClassName(activity.getClassName())) {
+			if (activityInterpreterImpl.hasClassName(activity.getClassName())) {
 				try {
-					if (activityInterpreter.hasPermission(
+					if (activityInterpreterImpl.hasPermission(
 							permissionChecker, activity, ActionKeys.VIEW,
 							serviceContext)) {
 
@@ -885,11 +886,17 @@ public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {
 					}
 				}
 				catch (Exception e) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(e, e);
+					}
 				}
 			}
 		}
 
 		return false;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		SocialActivityServiceImpl.class);
 
 }
