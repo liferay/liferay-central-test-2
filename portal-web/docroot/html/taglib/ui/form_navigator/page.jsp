@@ -201,6 +201,17 @@ if (Validator.isNotNull(historyKey)) {
 					Liferay.fire('formNavigator:reveal' + sectionId);
 				};
 
+				function updateSectionError() {
+					var tabNode = tabview.get('selection').get('boundingBox');
+
+					var sectionId = tabNode.getData('sectionId');
+
+					tabNode.toggleClass(
+						'section-error',
+						A.one('#' + sectionId).one('.error-field')
+					);
+				}
+
 				function updateSectionStatus() {
 					var tabNode = tabview.get('selection').get('boundingBox');
 
@@ -215,17 +226,6 @@ if (Validator.isNotNull(historyKey)) {
 					modifiedSectionsNode.val(modifiedSections.join());
 
 					tabNode.addClass('section-modified');
-				}
-
-				function updateSectionError() {
-					var tabNode = tabview.get('selection').get('boundingBox');
-
-					var sectionId = tabNode.getData('sectionId');
-
-					tabNode.toggleClass(
-						'section-error',
-						A.one('#' + sectionId).one('.error-field')
-					);
 				}
 
 				function updateRedirectForSectionId(sectionId) {
