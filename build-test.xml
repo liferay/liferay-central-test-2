@@ -3040,6 +3040,55 @@ Please set "ie.driver.zip" in test.properties to point to "IEDriverServer_x64_2.
 		<ant dir="util-java" target="test-integration" inheritAll="false" />
 	</target>
 
+	<target name="test-package">
+		<propertyregex property="test.class" input="${test.package}." regexp="\." replace="/" global="true" />
+
+		<resourcecount property="test.portal-impl.count">
+			<fileset dir="portal-impl/test" includes="**/${test.class}**/*Test.java" />
+		</resourcecount>
+
+		<if>
+			<not>
+				<equals arg1="${test.portal-impl.count}" arg2="0" />
+			</not>
+			<then>
+				<ant dir="portal-impl" target="test-class" inheritAll="false">
+					<property name="test.class" value="${test.class}**/*Test" />
+				</ant>
+			</then>
+		</if>
+
+		<resourcecount property="test.portal-service.count">
+			<fileset dir="portal-service/test" includes="**/${test.class}**/*Test.java" />
+		</resourcecount>
+
+		<if>
+			<not>
+				<equals arg1="${test.portal-service.count}" arg2="0" />
+			</not>
+			<then>
+				<ant dir="portal-service" target="test-class" inheritAll="false">
+					<property name="test.class" value="${test.class}**/*Test" />
+				</ant>
+			</then>
+		</if>
+
+		<resourcecount property="test.util-java.count">
+			<fileset dir="util-java/test" includes="**/${test.class}**/*Test.java" />
+		</resourcecount>
+
+		<if>
+			<not>
+				<equals arg1="${test.util-java.count}" arg2="0" />
+			</not>
+			<then>
+				<ant dir="util-java" target="test-class" inheritAll="false">
+					<property name="test.class" value="${test.class}**/*Test" />
+				</ant>
+			</then>
+		</if>
+	</target>
+
 	<target name="test-unit">
 		<ant dir="portal-service" target="test-unit" inheritAll="false" />
 		<ant dir="portal-impl" target="test-unit" inheritAll="false" />
