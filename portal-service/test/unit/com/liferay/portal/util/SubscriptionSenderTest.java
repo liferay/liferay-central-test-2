@@ -50,29 +50,6 @@ public class SubscriptionSenderTest extends PowerMockito {
 
 	@Before
 	public void setUp() throws Exception {
-		Props props = mock(Props.class);
-
-		PropsUtil.setProps(props);
-
-		PortalUtil portalUtil = new PortalUtil();
-
-		Portal portal = mock(Portal.class);
-
-		portalUtil.setPortal(portal);
-
-		portalBeanLocator = mock(BeanLocator.class);
-
-		PortalBeanLocatorUtil.setBeanLocator(portalBeanLocator);
-
-		GroupLocalService groupLocalService = getMockService(
-			GroupLocalServiceUtil.class, GroupLocalService.class);
-
-		Group group = mock(Group.class);
-
-		when(groupLocalService.getGroup(Mockito.eq(100l))).thenReturn(group);
-
-		when(group.isLayout()).thenReturn(false);
-
 		CompanyLocalService companyLocalService = getMockService(
 			CompanyLocalServiceUtil.class, CompanyLocalService.class);
 
@@ -95,11 +72,40 @@ public class SubscriptionSenderTest extends PowerMockito {
 		).thenReturn(
 			"http://www.virtual.com"
 		);
+
+		GroupLocalService groupLocalService = getMockService(
+			GroupLocalServiceUtil.class, GroupLocalService.class);
+
+		Group group = mock(Group.class);
+
+		when(
+			groupLocalService.getGroup(Mockito.eq(100l))
+		).thenReturn(
+			group
+		);
+
+		when(
+			group.isLayout()
+		).thenReturn(
+			false
+		);
+
+		PortalBeanLocatorUtil.setBeanLocator(_beanLocator);
+
+		PortalUtil portalUtil = new PortalUtil();
+
+		Portal portal = mock(Portal.class);
+
+		portalUtil.setPortal(portal);
+
+		Props props = mock(Props.class);
+
+		PropsUtil.setProps(props);
 	}
 
 	@After
 	public void tearDown() {
-		for (Class<?> serviceUtilClass : serviceUtilClasses) {
+		for (Class<?> serviceUtilClass : _serviceUtilClasses) {
 			try {
 				Field field = serviceUtilClass.getDeclaredField("_service");
 
@@ -115,33 +121,33 @@ public class SubscriptionSenderTest extends PowerMockito {
 	}
 
 	@Test
-	public void testWithGroupId() throws Exception {
+	public void testGetPortalURLWithGroupId() throws Exception {
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.setGroupId(100);
 
 		subscriptionSender.initialize();
 
-		String portalUrl = subscriptionSender.getContextAttribute(
-			"[$PORTAL_URL$]").toString();
+		String portalURL = String.valueOf(
+			subscriptionSender.getContextAttribute("[$PORTAL_URL$]"));
 
-		Assert.assertEquals("http://www.virtual.com", portalUrl);
+		Assert.assertEquals("http://www.virtual.com", portalURL);
 	}
 
 	@Test
-	public void testWithoutGroupId() throws Exception {
+	public void testGetPortalURLWithoutGroupId() throws Exception {
 		SubscriptionSender subscriptionSender = new SubscriptionSender();
 
 		subscriptionSender.initialize();
 
-		String portalUrl = subscriptionSender.getContextAttribute(
-			"[$PORTAL_URL$]").toString();
+		String portalURL = String.valueOf(
+			subscriptionSender.getContextAttribute("[$PORTAL_URL$]"));
 
-		Assert.assertEquals("http://www.portal.com", portalUrl);
+		Assert.assertEquals("http://www.portal.com", portalURL);
 	}
 
 	@Test
-	public void testWithServiceContext() throws Exception {
+	public void testGetPortalURLWithServiceContext() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		serviceContext.setScopeGroupId(100l);
@@ -152,22 +158,21 @@ public class SubscriptionSenderTest extends PowerMockito {
 
 		subscriptionSender.initialize();
 
-		String portalUrl = subscriptionSender.getContextAttribute(
-			"[$PORTAL_URL$]").toString();
+		String portalURL = String.valueOf(
+			subscriptionSender.getContextAttribute("[$PORTAL_URL$]"));
 
-		Assert.assertEquals("http://www.virtual.com", portalUrl);
+		Assert.assertEquals("http://www.virtual.com", portalURL);
 	}
 
 	protected <T> T getMockService(
 		Class<?> serviceUtilClass, Class<T> serviceClass) {
 
-		serviceUtilClasses.add(serviceUtilClass);
+		_serviceUtilClasses.add(serviceUtilClass);
 
 		T service = mock(serviceClass);
 
 		when(
-			portalBeanLocator.locate(
-				Mockito.eq(serviceClass.getName()))
+			_beanLocator.locate(Mockito.eq(serviceClass.getName()))
 		).thenReturn(
 			service
 		);
@@ -175,7 +180,7 @@ public class SubscriptionSenderTest extends PowerMockito {
 		return service;
 	}
 
-	protected BeanLocator portalBeanLocator;
-	protected List<Class<?>> serviceUtilClasses = new ArrayList<Class<?>>();
+	private BeanLocator _beanLocator = mock(BeanLocator.class);
+	private List<Class<?>> _serviceUtilClasses = new ArrayList<Class<?>>();
 
 }
