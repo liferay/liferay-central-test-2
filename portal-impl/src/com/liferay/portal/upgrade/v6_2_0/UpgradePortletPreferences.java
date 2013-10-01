@@ -32,6 +32,10 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 	protected void deletePortletPreferences(long portletPreferencesId)
 		throws Exception {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Deleting portlet preferences " + portletPreferencesId);
+		}
+
 		runSQL(
 			"delete from PortletPreferences where portletPreferencesId = " +
 				portletPreferencesId);
@@ -68,12 +72,6 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 				if (typeSettings.contains(portletId)) {
 					continue;
-				}
-
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Deleting PortletPreferences with id=" +
-							portletPreferencesId);
 				}
 
 				deletePortletPreferences(portletPreferencesId);
