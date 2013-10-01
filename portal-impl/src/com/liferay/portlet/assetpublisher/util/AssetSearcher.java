@@ -99,7 +99,7 @@ public class AssetSearcher extends BaseIndexer {
 			PermissionThreadLocal.getPermissionChecker();
 
 		long[] allCategoryIds = AssetUtil.filterCategoryIds(
-			_assetEntryQuery.getAllCategoryIds(), permissionChecker);
+			permissionChecker, _assetEntryQuery.getAllCategoryIds());
 
 		if (allCategoryIds.length == 0) {
 			return;
@@ -148,7 +148,7 @@ public class AssetSearcher extends BaseIndexer {
 			PermissionThreadLocal.getPermissionChecker();
 
 		long[] allTagIds = AssetUtil.filterTagIds(
-			_assetEntryQuery.getAllTagIds(), permissionChecker);
+			permissionChecker, _assetEntryQuery.getAllTagIds());
 
 		if (allTagIds.length == 0) {
 			return;
@@ -172,7 +172,7 @@ public class AssetSearcher extends BaseIndexer {
 			PermissionThreadLocal.getPermissionChecker();
 
 		long[] anyCategoryIds = AssetUtil.filterCategoryIds(
-			_assetEntryQuery.getAnyCategoryIds(), permissionChecker);
+			permissionChecker, _assetEntryQuery.getAnyCategoryIds());
 
 		if (anyCategoryIds.length == 0) {
 			return;
@@ -216,7 +216,7 @@ public class AssetSearcher extends BaseIndexer {
 			PermissionThreadLocal.getPermissionChecker();
 
 		long[] anyTagIds = AssetUtil.filterTagIds(
-			_assetEntryQuery.getAnyTagIds(), permissionChecker);
+			permissionChecker, _assetEntryQuery.getAnyTagIds());
 
 		if (anyTagIds.length == 0) {
 			return;

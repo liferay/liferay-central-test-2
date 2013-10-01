@@ -150,7 +150,7 @@ public class AssetUtil {
 	}
 
 	public static long[] filterCategoryIds(
-			long[] categoryIds, PermissionChecker permissionChecker)
+			PermissionChecker permissionChecker, long[] categoryIds)
 		throws PortalException, SystemException {
 
 		List<Long> viewableCategoryIds = new ArrayList<Long>();
@@ -172,7 +172,7 @@ public class AssetUtil {
 	}
 
 	public static long[] filterTagIds(
-			long[] tagIds, PermissionChecker permissionChecker)
+			PermissionChecker permissionChecker, long[] tagIds)
 		throws PortalException, SystemException {
 
 		List<Long> viewableTagIds = new ArrayList<Long>();
@@ -190,7 +190,7 @@ public class AssetUtil {
 	}
 
 	public static long[][] filterTagIdsArray(
-			long[][] tagIdsArray, PermissionChecker permissionChecker)
+			PermissionChecker permissionChecker, long[][] tagIdsArray)
 		throws PortalException, SystemException {
 
 		List<long[]> viewableTagIdsArray = new ArrayList<long[]>();
