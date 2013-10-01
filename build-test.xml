@@ -2407,6 +2407,42 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		</if>
 	</target>
 
+	<target name="record-test-packages">
+		<script classpathref="project.classpath" language="beanshell">
+			import com.liferay.portal.kernel.util.StringUtil;
+
+			import org.apache.tools.ant.DirectoryScanner;
+
+			DirectoryScanner directoryScanner = new DirectoryScanner();
+
+			directoryScanner.setBasedir(project.getBaseDir());
+			directoryScanner.setIncludes(new String[] {"**/test/unit/**/*Test.java"});
+
+			directoryScanner.scan();
+
+			String[] fileNames = directoryScanner.getIncludedFiles();
+
+			Arrays.sort(fileNames);
+
+			Set packageNames = new TreeSet();
+
+			for (String fileName : fileNames) {
+				int x = fileName.indexOf("com/");
+				int y = fileName.lastIndexOf("/");
+
+				String packageName = fileName.substring(x, y);
+
+				packageName = StringUtil.replace(packageName, "/", ".");
+
+				packageNames.add(packageName);
+			}
+
+			project.setProperty("test.packages", StringUtil.merge(packageNames, " "));
+		</script>
+
+		<echo file="test-packages">${test.packages}</echo>
+	</target>
+
 	<target name="replace-remote-file">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
