@@ -35,8 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The implementation of the social activity remote service.
- *
  * @author Zsolt Berentey
  */
 public class SocialActivityServiceImpl extends SocialActivityServiceBaseImpl {

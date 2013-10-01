@@ -23,8 +23,6 @@ import com.liferay.portlet.social.service.base.SocialRequestServiceBaseImpl;
 import com.liferay.portlet.social.service.permission.SocialRequestPermissionUtil;
 
 /**
- * The implementation of the social request remote service.
- *
  * @author Brian Wing Shun Chan
  */
 public class SocialRequestServiceImpl extends SocialRequestServiceBaseImpl {
