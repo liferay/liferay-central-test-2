@@ -17,10 +17,11 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
+long templateId = ParamUtil.getLong(request, "templateId");
+
 long classNameId = ParamUtil.getLong(request, "classNameId");
 long classPK = ParamUtil.getLong(request, "classPK");
 String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
-long templateId = ParamUtil.getLong(request, "templateId");
 
 DDMStructure structure = null;
 
