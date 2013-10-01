@@ -57,7 +57,7 @@ public class IntrabandRPCUtil {
 			FutureResult<V> futureResult = new FutureResult<V>();
 
 			intraband.sendDatagram(
-				registrationReference, datagram, null, REPLIED_ENUM_SET,
+				registrationReference, datagram, null, repliedEnumSet,
 				new FutureCompletionHandler<V>(futureResult));
 
 			return futureResult;
@@ -67,7 +67,7 @@ public class IntrabandRPCUtil {
 		}
 	}
 
-	protected static final Callable<Serializable> EMPTY_CALLABLE =
+	protected static Callable<Serializable> emptyCallable =
 		new Callable<Serializable>() {
 
 		@Override
@@ -77,8 +77,8 @@ public class IntrabandRPCUtil {
 
 	};
 
-	protected static final EnumSet<CompletionType> REPLIED_ENUM_SET =
-		EnumSet.of(CompletionType.REPLIED);
+	protected static EnumSet<CompletionType> repliedEnumSet = EnumSet.of(
+		CompletionType.REPLIED);
 
 	protected static class FutureCompletionHandler<V extends Serializable>
 		implements CompletionHandler<Object> {
@@ -116,7 +116,7 @@ public class IntrabandRPCUtil {
 		}
 
 		@Override
-		public void timeouted(Object attachment) {
+		public void timedOut(Object attachment) {
 			_futureResult.cancel(true);
 		}
 
@@ -128,7 +128,7 @@ public class IntrabandRPCUtil {
 		extends FutureTask<V> {
 
 		protected FutureResult() {
-			super((Callable<V>)EMPTY_CALLABLE);
+			super((Callable<V>)emptyCallable);
 		}
 
 		@Override

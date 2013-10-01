@@ -73,10 +73,10 @@ public class PortalResiliencyAdvice
 				IdentifiableBeanInvokerUtil.createMethodHandler(
 					methodInvocation));
 
-		Future<Serializable> futureResult = IntrabandRPCUtil.execute(
+		Future<Serializable> future = IntrabandRPCUtil.execute(
 			spi.getRegistrationReference(), serviceMethodProcessCallable);
 
-		Object result = futureResult.get();
+		Object result = future.get();
 
 		Method method = methodInvocation.getMethod();
 
