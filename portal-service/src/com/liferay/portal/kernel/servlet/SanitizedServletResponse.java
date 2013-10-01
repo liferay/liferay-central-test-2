@@ -54,19 +54,23 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 		response.setHeader(HttpHeaders.X_XSS_PROTECTION, "0");
 	}
 
-	public static void disableXSSAuditor(PortletResponse response) {
-		disableXSSAuditor(PortalUtil.getHttpServletResponse(response));
+	public static void disableXSSAuditor(PortletResponse portletResponse) {
+		disableXSSAuditor(PortalUtil.getHttpServletResponse(portletResponse));
 	}
 
 	public static void disableXSSAuditorOnNextRequest(
 		HttpServletRequest request) {
 
-		request.getSession().setAttribute(_DISABLE_XSS_AUDITOR, Boolean.TRUE);
+		HttpSession session = request.getSession();
+
+		session.setAttribute(_DISABLE_XSS_AUDITOR, Boolean.TRUE);
 	}
 
-	public static void disableXSSAuditorOnNextRequest(PortletRequest request) {
+	public static void disableXSSAuditorOnNextRequest(
+		PortletRequest portletRequest) {
+
 		disableXSSAuditorOnNextRequest(
-			PortalUtil.getHttpServletRequest(request));
+			PortalUtil.getHttpServletRequest(portletRequest));
 	}
 
 	public static HttpServletResponse getSanitizedServletResponse(
@@ -184,7 +188,7 @@ public class SanitizedServletResponse extends HttpServletResponseWrapper {
 	}
 
 	private static final String _DISABLE_XSS_AUDITOR =
-		SanitizedServletResponse.class.getName() + ".disableXSSAuditor";
+		SanitizedServletResponse.class.getName() + "DISABLE_XSS_AUDITOR";
 
 	private static final boolean _X_CONTENT_TYPE_OPTIONS =
 		GetterUtil.getBoolean(
