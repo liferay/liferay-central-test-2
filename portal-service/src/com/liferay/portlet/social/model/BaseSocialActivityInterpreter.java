@@ -527,6 +527,12 @@ public abstract class BaseSocialActivityInterpreter
 			return null;
 		}
 
+		if (classPK == 0) {
+			return assetRendererFactory.getURLView(
+				serviceContext.getLiferayPortletResponse(),
+				WindowState.MAXIMIZED);
+		}
+
 		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
 			classPK);
 
