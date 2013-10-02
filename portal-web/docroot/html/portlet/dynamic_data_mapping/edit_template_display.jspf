@@ -623,7 +623,7 @@ private String _getVariableAssignmentCode(String variableName, String variableVa
 		return "<#assign " + variableName + " = " + variableValue + ">";
 	}
 	else if (StringUtil.equalsIgnoreCase(language, "vm")) {
-		if (!variableValue.startsWith(StringPool.DOUBLE_QUOTE) && !variableValue.startsWith(StringPool.QUOTE) && !variableValue.startsWith(StringPool.OPEN_BRACKET) && !variableValue.startsWith(StringPool.OPEN_CURLY_BRACE) && !Validator.isNumber(variableValue)) {
+		if (!variableValue.startsWith(StringPool.DOUBLE_QUOTE) && !variableValue.startsWith(StringPool.OPEN_BRACKET) && !variableValue.startsWith(StringPool.OPEN_CURLY_BRACE) && !variableValue.startsWith(StringPool.QUOTE) && !Validator.isNumber(variableValue)) {
 			variableValue = StringPool.DOLLAR + variableValue;
 		}
 
