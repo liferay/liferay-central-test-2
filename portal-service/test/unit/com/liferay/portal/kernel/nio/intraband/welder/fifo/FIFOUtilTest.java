@@ -159,9 +159,7 @@ public class FIFOUtilTest {
 
 		File newTmpDir = new File("newTmpDir");
 
-		newTmpDir.mkdirs();
-
-		newTmpDir.setReadOnly();
+		newTmpDir.delete();
 
 		String oldTmpDirName = System.getProperty("java.io.tmpdir");
 
@@ -204,9 +202,7 @@ public class FIFOUtilTest {
 
 		File newTmpDir = new File("newTmpDir");
 
-		newTmpDir.mkdirs();
-
-		newTmpDir.setReadOnly();
+		newTmpDir.delete();
 
 		String oldTmpDirName = System.getProperty("java.io.tmpdir");
 
