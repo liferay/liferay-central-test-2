@@ -24,6 +24,12 @@
 			</else>
 		</if>
 
+		<chmod
+			dir="tools/tck/bin/"
+			includes="tsant*"
+			perm="744"
+		/>
+
 		<replace file="tools/tck/bin/ts.jte">
 			<replacefilter token="http://localhost:8080/pluto/tck" value="http://localhost:8080/c/portal/tck" />
 		</replace>
@@ -31,12 +37,6 @@
 		<echo file="tools/tck/bin/build.properties" append="true">
 
 work.dir=${basedir.unix}/tools/tck/work</echo>
-
-		<chmod
-			dir="tools/tck/bin/"
-			includes="tsant*"
-			perm="744"
-		/>
 	</target>
 
 	<target name="record-test-tck-packages">
