@@ -52,8 +52,8 @@ String stagingFriendlyURL = (String)request.getAttribute("view.jsp-stagingFriend
 								<portlet:param name="<%= Constants.CMD %>" value="select_layout_branch" />
 								<portlet:param name="redirect" value="<%= stagingFriendlyURL %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(curLayoutBranch.getGroupId()) %>" />
-								<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(curLayoutBranch.getLayoutSetBranchId()) %>" />
 								<portlet:param name="layoutBranchId" value="<%= String.valueOf(curLayoutBranch.getLayoutBranchId()) %>" />
+								<portlet:param name="layoutSetBranchId" value="<%= String.valueOf(curLayoutBranch.getLayoutSetBranchId()) %>" />
 							</portlet:actionURL>
 
 							<liferay-ui:icon
