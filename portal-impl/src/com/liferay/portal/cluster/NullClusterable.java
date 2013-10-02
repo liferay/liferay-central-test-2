@@ -22,6 +22,7 @@ import java.lang.annotation.Annotation;
 /**
  * @author Shuyang Zhou
  */
+@SuppressWarnings("all")
 public class NullClusterable implements Clusterable {
 
 	public static final Clusterable NULL_CLUSTERABLE = new NullClusterable();
