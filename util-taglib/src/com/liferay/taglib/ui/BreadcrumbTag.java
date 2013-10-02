@@ -472,6 +472,34 @@ public class BreadcrumbTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected void initShowParentGroups(HttpServletRequest request) {
+		if (_showParentGroups != null) {
+			return;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		try {
+			if (Validator.isNull(_selLayout)) {
+				setSelLayout(themeDisplay.getLayout());
+			}
+
+			Group group = _selLayout.getGroup();
+
+			UnicodeProperties typeSettingsProperties =
+				group.getTypeSettingsProperties();
+
+			_showParentGroups = GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty(
+					"breadcrumbShowParentGroups"),
+				_SHOW_PARENT_GROUPS);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+	}
+
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		initShowParentGroups(request);
@@ -500,34 +528,6 @@ public class BreadcrumbTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:breadcrumb:showPortletBreadcrumb",
 			String.valueOf(_showPortletBreadcrumb));
-	}
-
-	protected void initShowParentGroups(HttpServletRequest request) {
-		if (_showParentGroups != null) {
-			return;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			if (Validator.isNull(_selLayout)) {
-				setSelLayout(themeDisplay.getLayout());
-			}
-
-			Group group = _selLayout.getGroup();
-
-			UnicodeProperties typeSettingsProperties =
-				group.getTypeSettingsProperties();
-
-			_showParentGroups = GetterUtil.getBoolean(
-				typeSettingsProperties.getProperty(
-					"breadcrumbShowParentGroups"),
-				_SHOW_PARENT_GROUPS);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/breadcrumb/page.jsp";
