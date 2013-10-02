@@ -51,12 +51,12 @@ public class PortalImplCanonicalURLTest {
 
 	@Test
 	public void testCustomPortalLocaleCanonicalURL() throws Exception {
-		testCanonicalURL(null, _LOCALHOST, null, null, "/es", "/home");
+		testCanonicalURL(null, "localhost", null, null, "/es", "/home");
 	}
 
 	@Test
 	public void testDefaultPortalLocaleCanonicalURL() throws Exception {
-		testCanonicalURL(null, _LOCALHOST, null, null, "/en", "/home");
+		testCanonicalURL(null, "localhost", null, null, "/en", "/home");
 	}
 
 	@Test
@@ -64,7 +64,7 @@ public class PortalImplCanonicalURLTest {
 		throws Exception {
 
 		testCanonicalURL(
-			null, _LOCALHOST, new Locale[] {
+			null, "localhost", new Locale[] {
 				LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US},
 			LocaleUtil.SPAIN, "/en", "/casa");
 	}
@@ -74,7 +74,7 @@ public class PortalImplCanonicalURLTest {
 		throws Exception {
 
 		testCanonicalURL(
-			null, _LOCALHOST, new Locale[] {
+			null, "localhost", new Locale[] {
 				LocaleUtil.GERMANY, LocaleUtil.SPAIN, LocaleUtil.US},
 			LocaleUtil.SPAIN, "/es", "/casa");
 	}
@@ -82,7 +82,7 @@ public class PortalImplCanonicalURLTest {
 	@Test
 	public void testNonLocalhostPortalDomain() throws Exception {
 		testCanonicalURL(
-			_LOCALHOST, _LIFERAY_DOT_COM, null, null, "/en", "/home");
+			"localhost", "liferay.com", null, null, "/en", "/home");
 	}
 
 	protected String generateURL(
@@ -176,9 +176,5 @@ public class PortalImplCanonicalURLTest {
 
 		Assert.assertEquals(expectedCanonicalURL, actualCanonicalURL);
 	}
-
-	private static final String _LIFERAY_DOT_COM = "liferay.com";
-
-	private static final String _LOCALHOST = "localhost";
 
 }
