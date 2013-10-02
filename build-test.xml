@@ -2463,55 +2463,6 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<echo file="test-packages">${test.packages}</echo>
 	</target>
 
-	<target name="record-test-tck-packages">
-		<ant antfile="build-test-tck.xml" target="prepare-tck-286" />
-
-		<script classpathref="project.classpath" language="beanshell">
-			import com.liferay.portal.kernel.util.OSDetector;
-			import com.liferay.portal.kernel.util.StringUtil;
-
-			import org.apache.tools.ant.DirectoryScanner;
-
-			DirectoryScanner directoryScanner = new DirectoryScanner();
-
-			directoryScanner.setBasedir(project.getBaseDir());
-			directoryScanner.setIncludes(new String[] {"**/com/sun/ts/tests/**/*.war"});
-
-			directoryScanner.scan();
-
-			String[] fileNames = directoryScanner.getIncludedFiles();
-
-			Arrays.sort(fileNames);
-
-			Set packageNames = new TreeSet();
-
-			for (String fileName : fileNames) {
-				int x = fileName.indexOf("com/");
-				int y = fileName.lastIndexOf("/");
-
-				if (OSDetector.isWindows()) {
-					x = fileName.indexOf("com\\");
-					y = fileName.lastIndexOf("\\");
-				}
-
-				String packageName = fileName.substring(x, y);
-
-				if (packageName.endsWith("PortletSessionSecondapp")) {
-					continue;
-				}
-
-				packageName = StringUtil.replace(packageName, "/", ".");
-				packageName = StringUtil.replace(packageName, "\\", ".");
-
-				packageNames.add(packageName);
-			}
-
-			project.setProperty("test.tck.packages", StringUtil.merge(packageNames, " "));
-		</script>
-
-		<echo file="test-tck-packages">${test.tck.packages}</echo>
-	</target>
-
 	<target name="replace-remote-file">
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
@@ -3110,7 +3061,13 @@ Please set "ie.driver.zip" in test.properties to point to "IEDriverServer_x64_2.
 	</target>
 
 	<target name="test-package">
-		<propertyregex property="test.class" input="${test.package}." regexp="\." replace="/" global="true" />
+		<propertyregex
+			global="true"
+			input="${test.package}."
+			property="test.class"
+			regexp="\."
+			replace="/"
+		/>
 
 		<resourcecount property="test.portal-impl.count">
 			<fileset dir="portal-impl/test" includes="**/${test.class}**/*Test.java" />
