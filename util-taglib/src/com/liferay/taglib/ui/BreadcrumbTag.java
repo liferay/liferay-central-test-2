@@ -474,7 +474,7 @@ public class BreadcrumbTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-		_initShowParentGroups(request);
+		initShowParentGroups(request);
 
 		request.setAttribute(
 			"liferay-ui:breadcrumb:breadcrumbString",
@@ -502,7 +502,7 @@ public class BreadcrumbTag extends IncludeTag {
 			String.valueOf(_showPortletBreadcrumb));
 	}
 
-	private void _initShowParentGroups(HttpServletRequest request) {
+	protected void initShowParentGroups(HttpServletRequest request) {
 		if (_showParentGroups != null) {
 			return;
 		}
