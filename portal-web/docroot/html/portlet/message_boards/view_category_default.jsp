@@ -57,7 +57,6 @@ if ((category != null) && layout.isTypeControlPanel()) {
 					escapedModel="<%= true %>"
 					keyProperty="categoryId"
 					modelVar="curCategory"
-
 				>
 					<liferay-ui:search-container-row-parameter name="categorySubscriptionClassPKs" value="<%= categorySubscriptionClassPKs %>" />
 
