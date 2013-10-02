@@ -64,10 +64,10 @@ AUI.add(
 					var namespace = instance._namespace;
 
 					var eventHandles = [
-						Liferay.on(namespace + 'submit', instance._onSubmit, instance),
-						Liferay.on(namespace + 'viewHistory', instance._onViewHistory, instance),
-						Liferay.on(namespace + 'undo', instance._onRevisionChange, instance, 'undo'),
 						Liferay.on(namespace + 'redo', instance._onRevisionChange, instance, 'redo')
+						Liferay.on(namespace + 'submit', instance._onSubmit, instance),
+						Liferay.on(namespace + 'undo', instance._onRevisionChange, instance, 'undo'),
+						Liferay.on(namespace + 'viewHistory', instance._onViewHistory, instance),
 					];
 
 					var layoutRevisionDetails = A.byIdNS(namespace, 'layoutRevisionDetails');
@@ -169,7 +169,7 @@ AUI.add(
 						event.publishURL,
 						{
 							after: {
-								failure: function(){
+								failure: function() {
 									var layoutRevisionDetails = A.byIdNS(namespace, 'layoutRevisionDetails');
 
 									layoutRevisionDetails.setContent(Liferay.Language.get('there-was-an-unexpected-error.-please-refresh-the-current-page'));

@@ -603,7 +603,7 @@ public class LayoutLocalServiceStagingAdvice implements MethodInterceptor {
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
-					_log.debug("No layoutSetBranchId found for user " + userId);
+					_log.debug("No layout set branch found for user " + userId);
 				}
 			}
 		}
