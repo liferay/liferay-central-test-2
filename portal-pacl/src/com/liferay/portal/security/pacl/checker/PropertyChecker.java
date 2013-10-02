@@ -28,6 +28,7 @@ import java.util.Set;
  */
 public class PropertyChecker extends BaseChecker {
 
+	@Override
 	public void afterPropertiesSet() {
 		initProperties();
 	}
@@ -61,6 +62,7 @@ public class PropertyChecker extends BaseChecker {
 		return authorizationProperty;
 	}
 
+	@Override
 	public boolean implies(Permission permission) {
 		if (_permissions.implies(permission)) {
 			return true;
