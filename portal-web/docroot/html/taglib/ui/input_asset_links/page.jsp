@@ -111,13 +111,8 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 				}
 			}
 
-			List<Long> groupIds = new ArrayList<Long>();
-
-			groupIds.add(themeDisplay.getCompanyGroupId());
-			groupIds.add(groupId);
-
 			assetBrowserURL.setParameter("groupId", String.valueOf(groupId));
-			assetBrowserURL.setParameter("selectedGroupIds", StringUtil.merge(groupIds));
+			assetBrowserURL.setParameter("selectedGroupIds", themeDisplay.getCompanyGroupId() + "," + groupId);
 			assetBrowserURL.setParameter("typeSelection", assetRendererFactory.getClassName());
 
 			Map<String, Object> data = new HashMap<String, Object>();
