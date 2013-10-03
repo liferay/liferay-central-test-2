@@ -46,9 +46,7 @@ public class MBMessageActivityInterpreter
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
 			activity.getClassPK());
 
-		long categoryId = message.getCategoryId();
-
-		if (categoryId <= 0) {
+		if (message.getCategoryId() <= 0) {
 			return StringPool.BLANK;
 		}
 
@@ -57,24 +55,19 @@ public class MBMessageActivityInterpreter
 		sb.append(serviceContext.getPortalURL());
 		sb.append(serviceContext.getPathMain());
 		sb.append("/message_boards/find_category?mbCategoryId=");
-		sb.append(categoryId);
+		sb.append(message.getCategoryId());
 
-		String pathWithRedirect = addNoSuchEntryRedirect(
-			sb.toString(), activity.getClassName(), categoryId, serviceContext);
+		String categoryLink = sb.toString();
 
-		return wrapLink(pathWithRedirect, "go-to-category", serviceContext);
+		return wrapLink(categoryLink, "go-to-category", serviceContext);
 	}
 
 	@Override
 	protected String getPath(
-			SocialActivity activity, ServiceContext serviceContext)
-		throws Exception {
+		SocialActivity activity, ServiceContext serviceContext) {
 
-		long messageId = activity.getClassPK();
-
-		return addNoSuchEntryRedirect(
-			"/message_boards/find_message?messageId=" + messageId,
-			activity.getClassName(), messageId, serviceContext);
+		return "/message_boards/find_message?messageId=" +
+			activity.getClassPK();
 	}
 
 	@Override

@@ -24,7 +24,6 @@ import com.liferay.portlet.asset.AssetRendererFactoryRegistryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
@@ -82,34 +81,26 @@ public class DLFileEntryActivityInterpreter
 	}
 
 	protected String getFolderLink(
-			final FileEntry fileEntry, ServiceContext serviceContext)
-		throws Exception {
+		FileEntry fileEntry, ServiceContext serviceContext) {
 
-		long folderId = fileEntry.getFolderId();
-
-		StringBundler sb = new StringBundler(8);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(serviceContext.getPortalURL());
 		sb.append(serviceContext.getPathMain());
 		sb.append("/document_library/find_folder?groupId=");
 		sb.append(fileEntry.getRepositoryId());
 		sb.append("&folderId=");
-		sb.append(folderId);
+		sb.append(fileEntry.getFolderId());
 
-		return addNoSuchEntryRedirect(
-			sb.toString(), DLFolder.class.getName(), folderId, serviceContext);
+		return sb.toString();
 	}
 
 	@Override
 	protected String getPath(
-			SocialActivity activity, ServiceContext serviceContext)
-		throws Exception {
+		SocialActivity activity, ServiceContext serviceContext) {
 
-		long entryId = activity.getClassPK();
-
-		return addNoSuchEntryRedirect(
-			"/document_library/find_file_entry?fileEntryId=" + entryId,
-			activity.getClassName(), entryId, serviceContext);
+		return "/document_library/find_file_entry?fileEntryId=" +
+			activity.getClassPK();
 	}
 
 	@Override

@@ -100,14 +100,9 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	@Override
 	protected String getPath(
-			SocialActivity activity, ServiceContext serviceContext)
-		throws Exception {
+		SocialActivity activity, ServiceContext serviceContext) {
 
-		long resourcePrimKey = activity.getClassPK();
-
-		return addNoSuchEntryRedirect(
-			"/wiki/find_page?pageResourcePrimKey=" + resourcePrimKey,
-			activity.getClassName(), resourcePrimKey, serviceContext);
+		return "/wiki/find_page?pageResourcePrimKey=" + activity.getClassPK();
 	}
 
 	@Override
