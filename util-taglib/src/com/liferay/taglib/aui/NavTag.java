@@ -39,7 +39,7 @@ public class NavTag extends BaseNavTag {
 			this, NavBarTag.class);
 
 		if ((navBarTag != null) &&
-			(!_collapsibleSetterInvoked || getCollapsible())) {
+			(!_calledCollapsibleSetter || getCollapsible())) {
 
 			setCollapsible(true);
 
@@ -75,13 +75,14 @@ public class NavTag extends BaseNavTag {
 	public void setCollapsible(boolean collapsible) {
 		super.setCollapsible(collapsible);
 
-		_collapsibleSetterInvoked = true;
+		_calledCollapsibleSetter = true;
 	}
 
 	@Override
 	protected void cleanUp() {
 		super.cleanUp();
 
+		_calledCollapsibleSetter = false;
 		_namespacedId = null;
 	}
 
@@ -116,7 +117,7 @@ public class NavTag extends BaseNavTag {
 		return _namespacedId;
 	}
 
-	private boolean _collapsibleSetterInvoked = false;
+	private boolean _calledCollapsibleSetter;
 	private String _namespacedId;
 
 }
