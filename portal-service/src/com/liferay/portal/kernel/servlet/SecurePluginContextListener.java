@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -278,14 +279,14 @@ public class SecurePluginContextListener
 						servletContextEvent);
 				}
 				catch (Throwable t) {
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							"Unexpected error in listener " +
-								servletContextListener.getClass().getName() +
-									" undeploying context " +
-										servletContext.getServletContextName(),
-							t);
-					}
+					String className = ClassUtil.getClassName(
+						servletContextListener.getClass());
+
+					_log.error(
+						className + " is unable to process a context " +
+							"destroyed event for " +
+								servletContext.getServletContextName(),
+						t);
 				}
 			}
 		}
