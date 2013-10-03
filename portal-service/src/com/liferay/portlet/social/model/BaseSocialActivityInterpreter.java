@@ -128,15 +128,15 @@ public abstract class BaseSocialActivityInterpreter
 			ServiceContext serviceContext)
 		throws Exception {
 
-		PortletURL urlView = getViewEntryPortletURL(
+		PortletURL portletURL = getViewEntryPortletURL(
 			className, classPK, serviceContext);
 
-		if (urlView == null) {
+		if (portletURL == null) {
 			return url;
 		}
 
 		return HttpUtil.setParameter(
-			url, "noSuchEntryRedirect", urlView.toString());
+			url, "noSuchEntryRedirect", portletURL.toString());
 	}
 
 	protected String buildLink(String link, String text) {
