@@ -591,11 +591,8 @@ public class DLFileEntryIndexer extends BaseIndexer {
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);
-
 		actionableDynamicQuery.setDocuments(documents);
-
 		actionableDynamicQuery.setGroupId(groupId);
-
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
 		actionableDynamicQuery.performActions();
