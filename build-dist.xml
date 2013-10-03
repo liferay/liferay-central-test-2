@@ -2110,27 +2110,6 @@ plugins.includes=</echo>
 				</actions>
 			</call>
 		</xmltask>
-
-		<replaceregexp
-			file="${lp.plugins.dir}/build.${user.name}.properties"
-			flags="g"
-			match="=,"
-			replace="="
-		/>
-
-		<replaceregexp
-			file="${lp.plugins.dir}/build.${user.name}.properties"
-			flags="g"
-			match=",,+"
-			replace=","
-		/>
-
-		<replaceregexp
-			file="${lp.plugins.dir}/build.${user.name}.properties"
-			flags="g"
-			match=",(?!.)"
-			replace=""
-		/>
 	</target>
 
 	<macrodef name="update-plugins-includes-plugin">
