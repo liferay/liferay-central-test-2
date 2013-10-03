@@ -527,23 +527,22 @@ public abstract class BaseSocialActivityInterpreter
 			return null;
 		}
 
+		LiferayPortletResponse liferayPortletResponse =
+			serviceContext.getLiferayPortletResponse();
+
+		if (liferayPortletResponse == null) {
+			return null;
+		}
+
 		if (classPK == 0) {
 			return assetRendererFactory.getURLView(
-				serviceContext.getLiferayPortletResponse(),
-				WindowState.MAXIMIZED);
+				liferayPortletResponse, WindowState.MAXIMIZED);
 		}
 
 		AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(
 			classPK);
 
 		if (assetRenderer == null) {
-			return null;
-		}
-
-		LiferayPortletResponse liferayPortletResponse =
-			serviceContext.getLiferayPortletResponse();
-
-		if (liferayPortletResponse == null) {
 			return null;
 		}
 
