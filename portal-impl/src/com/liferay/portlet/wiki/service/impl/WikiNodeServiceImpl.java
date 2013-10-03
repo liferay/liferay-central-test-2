@@ -117,14 +117,14 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 
 	@Override
 	public List<WikiNode> getNodes(long groupId, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getNodes(groupId, WorkflowConstants.STATUS_APPROVED, start, end);
 	}
 
 	@Override
 	public List<WikiNode> getNodes(long groupId, int status, int start, int end)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return wikiNodePersistence.filterFindByG_S(groupId, status, start, end);
 	}
