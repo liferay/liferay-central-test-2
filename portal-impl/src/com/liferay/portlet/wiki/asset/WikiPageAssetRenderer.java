@@ -178,7 +178,7 @@ public class WikiPageAssetRenderer
 			WindowState windowState)
 		throws Exception {
 
-		PortletURL portletURL = getAssetRendererFactory().getURLView(
+		PortletURL portletURL = assetRendererFactory.getURLView(
 			liferayPortletResponse, windowState);
 
 		portletURL.setParameter("struts_action", "/wiki/view");
