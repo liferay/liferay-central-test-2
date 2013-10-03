@@ -2289,6 +2289,10 @@ plugins.includes=</echo>
 								</antcall>
 							</else>
 						</if>
+						
+						<delete>
+							<fileset dir="${zip.executable.dir}/../patching-tool/logs" />
+						</delete>
 
 						<replace
 							file="${zip.executable.dir}/../patching-tool/default.properties"
