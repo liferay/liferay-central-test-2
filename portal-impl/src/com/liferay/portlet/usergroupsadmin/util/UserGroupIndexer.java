@@ -227,8 +227,6 @@ public class UserGroupIndexer extends BaseIndexer {
 	protected void reindexUserGroups(long companyId)
 		throws PortalException, SystemException {
 
-		Collection<Document> documents = new ArrayList<Document>();
-
 		ActionableDynamicQuery actionableDynamicQuery =
 			new UserGroupActionableDynamicQuery() {
 
@@ -238,15 +236,12 @@ public class UserGroupIndexer extends BaseIndexer {
 
 				Document document = getDocument(userGroup);
 
-				getDocuments().add(document);
+				addDocument(document);
 			}
 
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);
-
-		actionableDynamicQuery.setDocuments(documents);
-
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
 		actionableDynamicQuery.performActions();

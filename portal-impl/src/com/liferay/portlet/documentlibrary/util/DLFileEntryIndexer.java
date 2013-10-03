@@ -86,8 +86,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -562,8 +560,6 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			long companyId, final long groupId, final long dataRepositoryId)
 		throws PortalException, SystemException {
 
-		Collection<Document> documents = new ArrayList<Document>();
-
 		ActionableDynamicQuery actionableDynamicQuery =
 			new DLFileEntryActionableDynamicQuery() {
 
@@ -584,14 +580,13 @@ public class DLFileEntryIndexer extends BaseIndexer {
 				Document document = getDocument(dlFileEntry);
 
 				if (document != null) {
-					getDocuments().add(document);
+					addDocument(document);
 				}
 			}
 
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);
-		actionableDynamicQuery.setDocuments(documents);
 		actionableDynamicQuery.setGroupId(groupId);
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
