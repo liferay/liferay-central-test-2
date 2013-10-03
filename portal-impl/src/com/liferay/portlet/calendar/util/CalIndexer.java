@@ -30,8 +30,6 @@ import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventActionableDynamicQuery;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -131,8 +129,6 @@ public class CalIndexer extends BaseIndexer {
 	protected void reindexEvents(long companyId)
 		throws PortalException, SystemException {
 
-		Collection<Document> documents = new ArrayList<Document>();
-
 		ActionableDynamicQuery actionableDynamicQuery =
 			new CalEventActionableDynamicQuery() {
 
@@ -142,15 +138,12 @@ public class CalIndexer extends BaseIndexer {
 
 				Document document = getDocument(event);
 
-				getDocuments().add(document);
+				addDocument(document);
 			}
 
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);
-
-		actionableDynamicQuery.setDocuments(documents);
-
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
 		actionableDynamicQuery.performActions();

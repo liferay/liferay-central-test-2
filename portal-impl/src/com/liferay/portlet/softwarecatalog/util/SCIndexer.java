@@ -38,8 +38,6 @@ import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryActionableDynamicQuery;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Locale;
 
 import javax.portlet.PortletURL;
@@ -209,8 +207,6 @@ public class SCIndexer extends BaseIndexer {
 	protected void reindexProductEntries(long companyId)
 		throws PortalException, SystemException {
 
-		Collection<Document> documents = new ArrayList<Document>();
-
 		ActionableDynamicQuery actionableDynamicQuery =
 			new SCProductEntryActionableDynamicQuery() {
 
@@ -220,15 +216,12 @@ public class SCIndexer extends BaseIndexer {
 
 				Document document = getDocument(productEntry);
 
-				getDocuments().add(document);
+				addDocument(document);
 			}
 
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);
-
-		actionableDynamicQuery.setDocuments(documents);
-
 		actionableDynamicQuery.setSearchEngineId(getSearchEngineId());
 
 		actionableDynamicQuery.performActions();
