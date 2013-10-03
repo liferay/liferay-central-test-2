@@ -90,32 +90,7 @@ public class LayoutStagingBackgroundTaskExecutor
 			LayoutLocalServiceUtil.importLayouts(
 				userId, targetGroupId, privateLayout, parameterMap, file);
 
-			Group sourceGroup = GroupLocalServiceUtil.getGroup(sourceGroupId);
-
-			if (sourceGroup.hasStagingGroup()) {
-				UnicodeProperties typeSettingsProperties =
-					sourceGroup.getTypeSettingsProperties();
-
-				LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
-					targetGroupId, false, true);
-
-				LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
-					targetGroupId, true, true);
-
-				boolean branchingPrivate = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPrivate"));
-
-				boolean branchingPublic = GetterUtil.getBoolean(
-					typeSettingsProperties.getProperty("branchingPublic"));
-
-				ServiceContext serviceContext = new ServiceContext();
-
-				serviceContext.setUserId(userId);
-
-				StagingUtil.checkDefaultLayoutSetBranches(
-					userId, sourceGroup, branchingPublic, branchingPrivate,
-					false, serviceContext);
-			}
+			initLayoutSetBranches(userId, sourceGroupId, targetGroupId);
 
 			boolean updateLastPublishDate = MapUtil.getBoolean(
 				parameterMap, PortletDataHandlerKeys.UPDATE_LAST_PUBLISH_DATE);
@@ -132,6 +107,40 @@ public class LayoutStagingBackgroundTaskExecutor
 		}
 
 		return processMissingReferences(backgroundTask, missingReferences);
+	}
+
+	protected void initLayoutSetBranches(
+			long userId, long sourceGroupId, long targetGroupId)
+		throws Exception {
+
+		Group sourceGroup = GroupLocalServiceUtil.getGroup(sourceGroupId);
+
+		if (!sourceGroup.hasStagingGroup()) {
+			return;
+		}
+
+		UnicodeProperties typeSettingsProperties =
+			sourceGroup.getTypeSettingsProperties();
+
+		LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+			targetGroupId, false, true);
+
+		LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
+			targetGroupId, true, true);
+
+		boolean branchingPrivate = GetterUtil.getBoolean(
+			typeSettingsProperties.getProperty("branchingPrivate"));
+
+		boolean branchingPublic = GetterUtil.getBoolean(
+			typeSettingsProperties.getProperty("branchingPublic"));
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		serviceContext.setUserId(userId);
+
+		StagingUtil.checkDefaultLayoutSetBranches(
+			userId, sourceGroup, branchingPublic, branchingPrivate, false,
+			serviceContext);
 	}
 
 }
