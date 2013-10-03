@@ -53,9 +53,9 @@ public class LayoutStagingBackgroundTaskExecutor
 
 		StagingUtil.lockGroup(userId, targetGroupId);
 
+		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 		boolean privateLayout = MapUtil.getBoolean(
 			taskContextMap, "privateLayout");
-		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 		long[] layoutIds = GetterUtil.getLongValues(
 			taskContextMap.get("layoutIds"));
 		Map<String, String[]> parameterMap =
