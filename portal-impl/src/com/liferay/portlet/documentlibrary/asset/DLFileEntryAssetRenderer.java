@@ -248,7 +248,6 @@ public class DLFileEntryAssetRenderer
 			"struts_action", "/document_library_display/view_file_entry");
 		portletURL.setParameter(
 			"fileEntryId", String.valueOf(_fileEntry.getFileEntryId()));
-
 		portletURL.setWindowState(windowState);
 
 		return portletURL;
