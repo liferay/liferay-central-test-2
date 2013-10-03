@@ -947,7 +947,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 
 	@include respond-to(phone) {
 
-		/* ---------- Panel Page Menu ---------- */
+		/* ---------- Panel page menu ---------- */
 
 		.panel-page-menu {
 			.minimize-panels a {
