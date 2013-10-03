@@ -43,14 +43,9 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	@Override
 	protected String getPath(
-			SocialActivity activity, ServiceContext serviceContext)
-		throws Exception {
+		SocialActivity activity, ServiceContext serviceContext) {
 
-		long entryId = activity.getClassPK();
-
-		return addNoSuchEntryRedirect(
-			"/blogs/find_entry?entryId=" + entryId, activity.getClassName(),
-			entryId, serviceContext);
+		return "/blogs/find_entry?entryId=" + activity.getClassPK();
 	}
 
 	@Override
