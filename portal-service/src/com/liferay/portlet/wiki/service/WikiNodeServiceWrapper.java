@@ -99,16 +99,14 @@ public class WikiNodeServiceWrapper implements WikiNodeService,
 	@Override
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeService.getNodes(groupId, start, end);
 	}
 
 	@Override
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _wikiNodeService.getNodes(groupId, status, start, end);
 	}
 

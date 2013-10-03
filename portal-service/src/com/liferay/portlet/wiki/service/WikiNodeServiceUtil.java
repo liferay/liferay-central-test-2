@@ -99,15 +99,13 @@ public class WikiNodeServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNodes(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int status, int start, int end)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNodes(groupId, status, start, end);
 	}
 
