@@ -155,11 +155,6 @@ public abstract class BaseActionableDynamicQuery
 	}
 
 	@Override
-	public void setDocuments(Collection<Document> documents) {
-		_documents = documents;
-	}
-
-	@Override
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
@@ -202,6 +197,22 @@ public abstract class BaseActionableDynamicQuery
 		}
 	}
 
+	protected void addDocument(Document document) {
+		if (_documents == null) {
+			_documents = new ArrayList<Document>();
+		}
+
+		_documents.add(document);
+	}
+
+	protected void addDocuments(Collection<Document> documents) {
+		if (_documents == null) {
+			_documents = new ArrayList<Document>();
+		}
+
+		_documents.addAll(documents);
+	}
+
 	protected Object executeDynamicQuery(
 			Method dynamicQueryMethod, Object... arguments)
 		throws PortalException, SystemException {
@@ -230,15 +241,11 @@ public abstract class BaseActionableDynamicQuery
 		return ProjectionFactoryUtil.rowCount();
 	}
 
-	protected Collection<Document> getDocuments() {
-		return _documents;
-	}
-
 	protected String getSearchEngineId() {
 		return _searchEngineId;
 	}
 
-	protected void indexInterval() throws PortalException, SystemException {
+	protected void indexInterval() throws PortalException {
 		if (Validator.isNull(_searchEngineId) || (_documents == null) ||
 			_documents.isEmpty()) {
 
@@ -251,6 +258,7 @@ public abstract class BaseActionableDynamicQuery
 		_documents.clear();
 	}
 
+	@SuppressWarnings("unused")
 	protected void intervalCompleted(long startPrimaryKey, long endPrimaryKey)
 		throws PortalException, SystemException {
 	}
