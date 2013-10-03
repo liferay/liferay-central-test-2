@@ -66,18 +66,6 @@ if (showPrototypes && (group != null)) {
 	}
 }
 
-boolean manualMembership = true;
-
-if (liveGroup != null) {
-	manualMembership = GetterUtil.getBoolean(liveGroup.isManualMembership(), true);
-}
-
-boolean membershipRestriction = false;
-
-if ((liveGroup != null) && (liveGroup.getMembershipRestriction() == GroupConstants.MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS)) {
-	membershipRestriction = true;
-}
-
 UnicodeProperties typeSettingsProperties = null;
 
 if (liveGroup != null) {
@@ -85,12 +73,6 @@ if (liveGroup != null) {
 }
 else if (group != null) {
 	typeSettingsProperties = group.getTypeSettingsProperties();
-}
-
-boolean breadcrumbShowParentGroups = PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
-
-if (typeSettingsProperties != null) {
-	breadcrumbShowParentGroups = PropertiesParamUtil.getBoolean(typeSettingsProperties, request, "breadcrumbShowParentGroups", breadcrumbShowParentGroups);
 }
 %>
 
@@ -174,6 +156,14 @@ if (typeSettingsProperties != null) {
 			<aui:option label="restricted" value="<%= GroupConstants.TYPE_SITE_RESTRICTED %>" />
 			<aui:option label="private" value="<%= GroupConstants.TYPE_SITE_PRIVATE %>" />
 		</aui:select>
+
+		<%
+		boolean manualMembership = true;
+
+		if (liveGroup != null) {
+			manualMembership = GetterUtil.getBoolean(liveGroup.isManualMembership(), true);
+		}
+		%>
 
 		<aui:input label="allow-manual-membership-management" name="manualMembership" value="<%= manualMembership %>" />
 	</c:if>
@@ -563,7 +553,25 @@ boolean hasUnlinkLayoutSetPrototypePermission = PortalPermissionUtil.contains(pe
 	<br />
 
 	<div class="<%= parentGroups.isEmpty() ? "membership-restriction-container hide" : "membership-restriction-container" %>" id="<portlet:namespace />membershipRestrictionContainer">
+
+		<%
+		boolean membershipRestriction = false;
+
+		if ((liveGroup != null) && (liveGroup.getMembershipRestriction() == GroupConstants.MEMBERSHIP_RESTRICTION_TO_PARENT_SITE_MEMBERS)) {
+			membershipRestriction = true;
+		}
+		%>
+
 		<aui:input label="limit-membership-to-members-of-the-parent-site" name="membershipRestriction" type="checkbox" value="<%= membershipRestriction %>" />
+
+		<%
+		boolean breadcrumbShowParentGroups = PropsValues.BREADCRUMB_SHOW_PARENT_GROUPS;
+
+		if (typeSettingsProperties != null) {
+			breadcrumbShowParentGroups = PropertiesParamUtil.getBoolean(typeSettingsProperties, request, "breadcrumbShowParentGroups", breadcrumbShowParentGroups);
+		}
+		%>
+
 		<aui:input label="show-parent-sites-in-the-breadcrumb" name="TypeSettingsProperties--breadcrumbShowParentGroups--" type="checkbox" value="<%= breadcrumbShowParentGroups %>" />
 	</div>
 
