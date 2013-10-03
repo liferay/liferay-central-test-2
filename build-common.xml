@@ -829,7 +829,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</if>
 
 		<ant target="test-cmd">
-			<property name="junit.forkmode" value="perTest" />
+			<property name="junit.forkmode" value="once" />
 			<property name="test.type" value="${test.type}" />
 		</ant>
 
