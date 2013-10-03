@@ -112,6 +112,7 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 			getGroupId(), isPrivateLayout());
 	}
 
+	@Override
 	public String getRegularURL(HttpServletRequest request)
 		throws PortalException, SystemException {
 
