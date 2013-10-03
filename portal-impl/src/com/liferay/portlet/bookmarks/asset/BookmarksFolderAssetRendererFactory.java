@@ -65,10 +65,10 @@ public class BookmarksFolderAssetRendererFactory
 		return TYPE;
 	}
 
+	@Override
 	public PortletURL getURLView(
-			LiferayPortletResponse liferayPortletResponse,
-			WindowState windowState)
-		throws PortalException, SystemException {
+		LiferayPortletResponse liferayPortletResponse,
+		WindowState windowState) {
 
 		LiferayPortletURL liferayPortletURL =
 			liferayPortletResponse.createLiferayPortletURL(
