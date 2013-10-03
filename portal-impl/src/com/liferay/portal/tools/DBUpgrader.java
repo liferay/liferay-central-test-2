@@ -229,15 +229,15 @@ public class DBUpgrader {
 			_disableTransactions();
 		}
 
-		boolean versionChanged = false;
+		boolean newBuildNumber = false;
 
-		if (ReleaseInfo.getParentBuildNumber() > release.getBuildNumber()) {
-			versionChanged = true;
+		if (ReleaseInfo.getBuildNumber() > release.getBuildNumber()) {
+			newBuildNumber = true;
 		}
 
 		try {
 			StartupHelperUtil.verifyProcess(
-				release.isVerified(), versionChanged);
+				newBuildNumber, release.isVerified());
 		}
 		catch (Exception e) {
 			_updateReleaseState(ReleaseConstants.STATE_VERIFY_FAILURE);
