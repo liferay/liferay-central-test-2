@@ -140,11 +140,11 @@ public class StartupHelper {
 			ClassLoaderUtil.getPortalClassLoader());
 	}
 
-	public void verifyProcess(boolean verified,
-		boolean versionChanged) throws VerifyException {
+	public void verifyProcess(boolean newBuildNumber, boolean verified)
+		throws VerifyException {
 
 		_verified = VerifyProcessUtil.verifyProcess(
-			_upgraded, verified, versionChanged);
+			_upgraded, newBuildNumber, verified);
 	}
 
 	protected String[] getUpgradeProcessClassNames(String key) {
