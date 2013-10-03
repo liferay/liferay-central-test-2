@@ -119,18 +119,16 @@ public class LayoutStagingBackgroundTaskExecutor
 			return;
 		}
 
-		UnicodeProperties typeSettingsProperties =
-			sourceGroup.getTypeSettingsProperties();
-
 		LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
 			targetGroupId, false, true);
-
 		LayoutSetBranchLocalServiceUtil.deleteLayoutSetBranches(
 			targetGroupId, true, true);
 
+		UnicodeProperties typeSettingsProperties =
+			sourceGroup.getTypeSettingsProperties();
+
 		boolean branchingPrivate = GetterUtil.getBoolean(
 			typeSettingsProperties.getProperty("branchingPrivate"));
-
 		boolean branchingPublic = GetterUtil.getBoolean(
 			typeSettingsProperties.getProperty("branchingPublic"));
 
