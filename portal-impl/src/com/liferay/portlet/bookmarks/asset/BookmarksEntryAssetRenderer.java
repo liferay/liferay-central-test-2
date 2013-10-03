@@ -23,7 +23,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.asset.model.AssetRendererFactory;
 import com.liferay.portlet.asset.model.BaseAssetRenderer;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission;
@@ -76,8 +75,6 @@ public class BookmarksEntryAssetRenderer
 
 	@Override
 	public String getPortletId() {
-		AssetRendererFactory assetRendererFactory = getAssetRendererFactory();
-
 		return assetRendererFactory.getPortletId();
 	}
 
@@ -131,7 +128,7 @@ public class BookmarksEntryAssetRenderer
 			WindowState windowState)
 		throws Exception {
 
-		PortletURL portletURL = getAssetRendererFactory().getURLView(
+		PortletURL portletURL = assetRendererFactory.getURLView(
 			liferayPortletResponse, windowState);
 
 		portletURL.setParameter("struts_action", "/bookmarks/view_entry");
