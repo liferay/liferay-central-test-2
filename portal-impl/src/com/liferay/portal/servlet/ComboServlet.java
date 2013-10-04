@@ -96,7 +96,7 @@ public class ComboServlet extends HttpServlet {
 			Map<String, String[]> parameterMap = HttpUtil.getParameterMap(
 				request.getQueryString());
 
-			enu =  Collections.enumeration(parameterMap.keySet());
+			enu = Collections.enumeration(parameterMap.keySet());
 		}
 
 		while (enu.hasMoreElements()) {
