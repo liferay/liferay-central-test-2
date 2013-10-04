@@ -938,7 +938,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</junit>
 	</target>
 
-	<target name="test-package">
+	<target name="test-package" depends="compile,compile-test">
 		<if>
 			<not>
 				<isset property="test.package" />
