@@ -975,7 +975,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<var name="test.class" value="**/${test.package.dir}/*Test" />
 
 						<if>
-							<equals arg1="${test.package}" value="com.liferay.portal.security.pacl.test" />
+							<equals arg1="${test.package}" arg2="com.liferay.portal.security.pacl.test" />
 							<then>
 								<var name="junit.forkmode" value="once" />
 							</then>
