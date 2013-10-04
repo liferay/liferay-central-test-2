@@ -198,7 +198,7 @@ public interface Repository {
 			long parentFolderId, int start, int end, OrderByComparator obc)
 		throws PortalException, SystemException;
 
-	public int getMountFoldersCount(long parentFolderId) 
+	public int getMountFoldersCount(long parentFolderId)
 		throws PortalException, SystemException;
 
 	public List<FileEntry> getRepositoryFileEntries(
