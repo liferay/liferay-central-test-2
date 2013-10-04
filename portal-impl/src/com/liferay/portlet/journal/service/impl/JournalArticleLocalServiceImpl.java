@@ -5136,7 +5136,7 @@ public class JournalArticleLocalServiceImpl
 			(article.getClassNameId() ==
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT) &&
 			(article.getDisplayDate() != null) &&
-			 now.before(article.getDisplayDate())) {
+			now.before(article.getDisplayDate())) {
 
 			status = WorkflowConstants.STATUS_SCHEDULED;
 		}
