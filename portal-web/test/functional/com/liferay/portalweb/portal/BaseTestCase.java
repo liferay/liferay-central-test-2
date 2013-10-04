@@ -34,6 +34,9 @@ public class BaseTestCase extends LiferaySeleneseTestCase {
 		InitUtil.initWithSpring();
 	}
 
+	/**
+	 * @deprecated
+	 */
 	@Override
 	public void runBare() throws Throwable {
 		try {
