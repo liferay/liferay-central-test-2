@@ -35,7 +35,7 @@ public class BaseTestCase extends LiferaySeleneseTestCase {
 	}
 
 	/**
-	 * @deprecated
+	 * @deprecated As of 6.2.0
 	 */
 	@Override
 	public void runBare() throws Throwable {
