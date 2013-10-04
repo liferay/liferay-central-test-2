@@ -199,7 +199,11 @@ public class TestPropsValues {
 
 	public static long getUserId() throws PortalException, SystemException {
 		if (_userId == 0) {
-			_userId = getUser().getUserId();
+			User user = getUser();
+
+			if (user != null) {
+				_userId = user.getUserId();
+			}
 		}
 
 		return _userId;
