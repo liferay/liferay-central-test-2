@@ -624,10 +624,8 @@ public class DLAppHelperLocalServiceImpl
 			}
 		}
 
-		final String type = DLSyncConstants.TYPE_FILE;
-		final long typePK = fileEntry.getFileEntryId();
-
-		doRegisterDLSyncEventCallback(event, type, typePK);
+		registerDLSyncEventCallback(
+			event, DLSyncConstants.TYPE_FILE, fileEntry.getFileEntryId());
 	}
 
 	@Override
@@ -638,10 +636,8 @@ public class DLAppHelperLocalServiceImpl
 			return;
 		}
 
-		final String type = DLSyncConstants.TYPE_FOLDER;
-		final long typePK = folder.getFolderId();
-
-		doRegisterDLSyncEventCallback(event, type, typePK);
+		registerDLSyncEventCallback(
+			event, DLSyncConstants.TYPE_FOLDER, folder.getFolderId());
 	}
 
 	@Override
@@ -1513,7 +1509,7 @@ public class DLAppHelperLocalServiceImpl
 		return new LiferayFolder(dlFolder);
 	}
 
-	protected void doRegisterDLSyncEventCallback(
+	protected void registerDLSyncEventCallback(
 			final String event, final String type, final long typePK)
 		throws SystemException {
 
