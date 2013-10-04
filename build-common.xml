@@ -990,6 +990,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							<property name="test.type" value="integration" />
 						</ant>
 
+						<var name="junit.forkmode" unset="true" />
+
 						<antcall target="report-test-coverage">
 							<param name="test.type" value="integration" />
 						</antcall>
