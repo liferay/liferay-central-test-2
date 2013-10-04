@@ -1509,42 +1509,6 @@ public class DLAppHelperLocalServiceImpl
 		return new LiferayFolder(dlFolder);
 	}
 
-	protected void registerDLSyncEventCallback(
-			final String event, final String type, final long typePK)
-		throws SystemException {
-
-		DLSyncEvent dlSyncEvent = dlSyncEventLocalService.addDLSyncEvent(
-			event, type, typePK);
-
-		final long modifiedTime = dlSyncEvent.getModifiedTime();
-
-		TransactionCommitCallbackRegistryUtil.registerCallback(
-			new Callable<Void>() {
-
-				@Override
-				public Void call() throws Exception {
-					Message message = new Message();
-
-					Map<String, Object> values = new HashMap<String, Object>(4);
-
-					values.put("event", event);
-					values.put("modifiedTime", modifiedTime);
-					values.put("type", type);
-					values.put("typePK", typePK);
-
-					message.setValues(values);
-
-					MessageBusUtil.sendMessage(
-						DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
-						message);
-
-					return null;
-				}
-
-			}
-		);
-	}
-
 	protected long getFileEntryTypeId(FileEntry fileEntry) {
 		if (fileEntry instanceof LiferayFileEntry) {
 			DLFileEntry dlFileEntry = (DLFileEntry)fileEntry.getModel();
@@ -1715,6 +1679,42 @@ public class DLAppHelperLocalServiceImpl
 				}
 
 			});
+	}
+
+	protected void registerDLSyncEventCallback(
+			final String event, final String type, final long typePK)
+		throws SystemException {
+
+		DLSyncEvent dlSyncEvent = dlSyncEventLocalService.addDLSyncEvent(
+			event, type, typePK);
+
+		final long modifiedTime = dlSyncEvent.getModifiedTime();
+
+		TransactionCommitCallbackRegistryUtil.registerCallback(
+			new Callable<Void>() {
+
+				@Override
+				public Void call() throws Exception {
+					Message message = new Message();
+
+					Map<String, Object> values = new HashMap<String, Object>(4);
+
+					values.put("event", event);
+					values.put("modifiedTime", modifiedTime);
+					values.put("type", type);
+					values.put("typePK", typePK);
+
+					message.setValues(values);
+
+					MessageBusUtil.sendMessage(
+						DestinationNames.DOCUMENT_LIBRARY_SYNC_EVENT_PROCESSOR,
+						message);
+
+					return null;
+				}
+
+			}
+		);
 	}
 
 }
