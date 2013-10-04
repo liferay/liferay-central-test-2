@@ -44,9 +44,8 @@ public class MBMessageActivityInterpreter
 			SocialActivity activity, ServiceContext serviceContext)
 		throws Exception {
 
-		long classPK = activity.getClassPK();
-
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(classPK);
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(
+			activity.getClassPK());
 
 		if (message.getCategoryId() <= 0) {
 			return StringPool.BLANK;
