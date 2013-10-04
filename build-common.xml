@@ -951,14 +951,85 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<propertyregex
 			global="true"
 			input="${test.package}"
-			property="test.class"
+			property="test.package.dir"
 			regexp="\."
 			replace="/"
 		/>
 
-		<ant target="test-class">
-			<property name="test.class" value="${test.class}/*Test" />
-		</ant>
+		<if>
+			<available file="test/integration" type="dir" />
+			<then>
+				<resourcecount property="test.integration.other.count">
+					<fileset
+						dir="test/integration"
+						excludes="**/${test.package.dir}/*PersistenceTest.java"
+						includes="**/${test.package.dir}/*Test.java"
+					/>
+				</resourcecount>
+
+				<if>
+					<not>
+						<equals arg1="${test.integration.other.count}" arg2="0" />
+					</not>
+					<then>
+						<var name="test.class" value="**/${test.package.dir}/*Test" />
+
+						<ant target="test-cmd">
+							<property name="junit.forkmode" value="once" />
+							<property name="test.excludes" value="**/*PersistenceTest.class" />
+							<property name="test.type" value="integration" />
+						</ant>
+					</then>
+				</if>
+
+				<resourcecount property="test.integration.persistence.count">
+					<fileset
+						dir="test/integration"
+						includes="**/${test.package.dir}/*PersistenceTest.java"
+					/>
+				</resourcecount>
+
+				<if>
+					<not>
+						<equals arg1="${test.integration.persistence.count}" arg2="0" />
+					</not>
+					<then>
+						<var name="test.class" value="**/${test.package.dir}/*PersistenceTest" />
+
+						<ant target="test-cmd">
+							<property name="junit.forkmode" value="once" />
+							<property name="test.type" value="integration" />
+						</ant>
+					</then>
+				</if>
+			</then>
+		</if>
+
+		<if>
+			<available file="test/unit" type="dir" />
+			<then>
+				<resourcecount property="test.unit.count">
+					<fileset
+						dir="test/unit"
+						includes="**/${test.package.dir}/*Test.java"
+					/>
+				</resourcecount>
+
+				<if>
+					<not>
+						<equals arg1="${test.unit.count}" arg2="0" />
+					</not>
+					<then>
+						<var name="test.class" value="**/${test.package.dir}/*Test" />
+
+						<ant target="test-cmd">
+							<property name="junit.forkmode" value="perTest" />
+							<property name="test.type" value="unit" />
+						</ant>
+					</then>
+				</if>
+			</then>
+		</if>
 	</target>
 
 	<target name="test-unit" depends="compile,compile-test-unit">
