@@ -15,25 +15,20 @@
 --%>
 
 <%
-String cssInfoItems = "info-items";
-
-boolean customizablePage = !(group.isLayoutPrototype() || group.isLayoutSetPrototype() || group.isUserGroup()) && layoutTypePortlet.isCustomizable() && LayoutPermissionUtil.containsWithoutViewableGroup(permissionChecker, layout, false, ActionKeys.CUSTOMIZE);
-
-boolean dockbarMessagesHidden = GetterUtil.getBoolean(SessionClicks.get(request, "dockbarMessagesHidden", "false"));
-
-boolean pageIsLinked = (!SitesUtil.isLayoutUpdateable(layout) || (layout.isLayoutPrototypeLinkActive() && !group.hasStagingGroup())) && LayoutPermissionUtil.containsWithoutViewableGroup(themeDisplay.getPermissionChecker(), layout, false, ActionKeys.UPDATE);
-
-boolean siteTemplateChanged = (layoutSet != null) && layoutSet.isLayoutSetPrototypeLinkActive() && SitesUtil.isLayoutModifiedSinceLastMerge(layout) && hasLayoutUpdatePermission;
-
-if (dockbarMessagesHidden) {
-	cssInfoItems = cssInfoItems + " hide";
-}
+boolean customizableLayout = !(group.isLayoutPrototype() || group.isLayoutSetPrototype() || group.isUserGroup()) && layoutTypePortlet.isCustomizable() && LayoutPermissionUtil.containsWithoutViewableGroup(permissionChecker, layout, false, ActionKeys.CUSTOMIZE);
+boolean linkedLayout = (!SitesUtil.isLayoutUpdateable(layout) || (layout.isLayoutPrototypeLinkActive() && !group.hasStagingGroup())) && LayoutPermissionUtil.containsWithoutViewableGroup(themeDisplay.getPermissionChecker(), layout, false, ActionKeys.UPDATE);
+boolean modifiedLayout = (layoutSet != null) && layoutSet.isLayoutSetPrototypeLinkActive() && SitesUtil.isLayoutModifiedSinceLastMerge(layout) && hasLayoutUpdatePermission;
 %>
 
-<c:if test="<%= siteTemplateChanged || pageIsLinked || customizablePage %>">
-	<aui:nav-item cssClass="<%= cssInfoItems %>">
+<c:if test="<%= modifiedLayout || linkedLayout || customizableLayout %>">
+
+	<%
+	boolean dockbarMessagesHidden = GetterUtil.getBoolean(SessionClicks.get(request, "dockbarMessagesHidden", "false"));
+	%>
+
+	<aui:nav-item cssClass='<%= "info-items" + (dockbarMessagesHidden ? " hide" : StringPool.BLANK) %>'>
 		<div class="page-customization-bar-container">
-			<c:if test="<%= siteTemplateChanged %>">
+			<c:if test="<%= modifiedLayout %>">
 				<div class="page-customization-bar">
 					<div class="page-customization-bar-text">
 						<span class="page-customization-bar-message">
@@ -59,7 +54,7 @@ if (dockbarMessagesHidden) {
 				</div>
 			</c:if>
 
-			<c:if test="<%= pageIsLinked %>">
+			<c:if test="<%= linkedLayout %>">
 				<div class="page-customization-bar">
 					<div class="page-customization-bar-text">
 						<c:choose>
@@ -77,7 +72,7 @@ if (dockbarMessagesHidden) {
 				</div>
 			</c:if>
 
-			<c:if test="<%= customizablePage %>">
+			<c:if test="<%= customizableLayout %>">
 				<div class="page-customization-bar">
 					<div class="page-customization-bar-text">
 						<c:choose>
