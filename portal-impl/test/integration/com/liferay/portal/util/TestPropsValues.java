@@ -187,9 +187,11 @@ public class TestPropsValues {
 			List<User> users = UserLocalServiceUtil.getRoleUsers(
 				role.getRoleId(), 0, 2);
 
-			_user = users.get(0);
+			if (!users.isEmpty()) {
+				_user = users.get(0);
 
-			_userId = _user.getUserId();
+				_userId = _user.getUserId();
+			}
 		}
 
 		return _user;
