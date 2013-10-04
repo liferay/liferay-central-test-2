@@ -273,7 +273,6 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			groupId, folderId, null, includeMountFolders, queryDefinition);
 	}
 
-
 	@Override
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long groupId, long folderId, int status, String[] mimeTypes,

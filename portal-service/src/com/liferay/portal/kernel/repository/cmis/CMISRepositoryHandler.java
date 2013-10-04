@@ -171,9 +171,9 @@ public abstract class CMISRepositoryHandler extends BaseRepositoryImpl {
 	}
 
 	@Override
-	public int getFileEntriesCount(long folderId) 
+	public int getFileEntriesCount(long folderId)
 		throws PortalException, SystemException {
-		
+
 		return _baseCmisRepository.getFileEntriesCount(folderId);
 	}
 
