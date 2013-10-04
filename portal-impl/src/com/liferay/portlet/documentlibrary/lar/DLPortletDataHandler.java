@@ -85,6 +85,9 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 			new StagedModelType(Repository.class));
 		setExportControls(
 			new PortletDataHandlerBoolean(
+				NAMESPACE, "repositories", false, false, null,
+				Repository.class.getName()),
+			new PortletDataHandlerBoolean(
 				NAMESPACE, "folders", true, false, null,
 				Folder.class.getName()),
 			new PortletDataHandlerBoolean(
@@ -96,10 +99,7 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 				FileEntry.class.getName()),
 			new PortletDataHandlerBoolean(
 				NAMESPACE, "shortcuts", true, false, null,
-				DLFileShortcut.class.getName()),
-			new PortletDataHandlerBoolean(
-				NAMESPACE, "repositories", false, false, null,
-				Repository.class.getName()));
+				DLFileShortcut.class.getName()));
 		setPublishToLiveByDefault(PropsValues.DL_PUBLISH_TO_LIVE_BY_DEFAULT);
 	}
 
@@ -502,10 +502,10 @@ public class DLPortletDataHandler extends BasePortletDataHandler {
 				dynamicQuery.add(
 					classNameIdProperty.ne(liferayRepositoryClassNameId));
 
+				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+
 				Property portletIdProperty = PropertyFactoryUtil.forName(
 					"portletId");
-
-				Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
 
 				disjunction.add(portletIdProperty.isNull());
 				disjunction.add(portletIdProperty.eq(StringPool.BLANK));
