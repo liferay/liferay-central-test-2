@@ -979,6 +979,10 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							<property name="test.excludes" value="**/*PersistenceTest.class" />
 							<property name="test.type" value="integration" />
 						</ant>
+
+						<antcall target="report-test-coverage">
+							<param name="test.type" value="integration" />
+						</antcall>
 					</then>
 				</if>
 
@@ -1000,6 +1004,10 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							<property name="junit.forkmode" value="once" />
 							<property name="test.type" value="integration" />
 						</ant>
+
+						<antcall target="report-test-coverage">
+							<param name="test.type" value="integration" />
+						</antcall>
 					</then>
 				</if>
 			</then>
@@ -1026,6 +1034,10 @@ Please set the environment variable ANT_OPTS to the recommended value of
 							<property name="junit.forkmode" value="perTest" />
 							<property name="test.type" value="unit" />
 						</ant>
+
+						<antcall target="report-test-coverage" >
+							<param name="test.type" value="unit" />
+						</antcall>
 					</then>
 				</if>
 			</then>
