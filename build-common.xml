@@ -974,8 +974,18 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<then>
 						<var name="test.class" value="**/${test.package.dir}/*Test" />
 
+						<if>
+							<equals arg1="${test.package}" value="com.liferay.portal.security.pacl.test" />
+							<then>
+								<var name="junit.forkmode" value="once" />
+							</then>
+							<else>
+								<var name="junit.forkmode" value="perTest" />
+							</else>
+						</if>
+
 						<ant target="test-cmd">
-							<property name="junit.forkmode" value="perTest" />
+							<property name="junit.forkmode" value="${junit.forkmode}" />
 							<property name="test.excludes" value="**/*PersistenceTest.class" />
 							<property name="test.type" value="integration" />
 						</ant>
