@@ -28,10 +28,10 @@ AUI.add(
 		var _portletIdsMap = {};
 
 		var _metaData = {
-			startPolling: true,
 			browserKey: _browserKey,
 			companyId: themeDisplay.getCompanyId(),
-			portletIdsMap: _portletIdsMap
+			portletIdsMap: _portletIdsMap,
+			startPolling: true
 		};
 
 		var _portlets = {};
