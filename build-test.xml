@@ -2460,7 +2460,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 			project.setProperty("test.package.names", StringUtil.merge(packageNames, " "));
 		</script>
 
-		<echo file="test.package.names.properties">TEST_PACKAGE_NAMES=${test.package.names}</echo>
+		<echo file="test.package.names.properties">TEST_PACKAGE_NAMES="${test.package.names}"</echo>
 	</target>
 
 	<target name="replace-remote-file">
