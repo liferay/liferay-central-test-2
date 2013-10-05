@@ -159,8 +159,7 @@ public class SeleniumBuilder {
 
 		seleniumBuilderFileUtil.writeFile(
 			"../../../test.case.method.names.properties",
-			"TEST_CASE_METHOD_NAMES=\"" + testCaseMethodNamesString + "\"",
-			false);
+			"TEST_CASE_METHOD_NAMES=" + testCaseMethodNamesString, false);
 
 		System.out.println("\nThere are " + testCaseCount + " test cases.");
 	}
