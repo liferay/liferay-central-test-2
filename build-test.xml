@@ -2416,7 +2416,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		</if>
 	</target>
 
-	<target name="record-test-packages">
+	<target name="record-test-package-names">
 		<script classpathref="project.classpath" language="beanshell">
 			import com.liferay.portal.kernel.util.OSDetector;
 			import com.liferay.portal.kernel.util.StringUtil;
@@ -2457,10 +2457,10 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 				packageNames.add(packageName);
 			}
 
-			project.setProperty("test.packages", StringUtil.merge(packageNames, " "));
+			project.setProperty("test.package.names", StringUtil.merge(packageNames, " "));
 		</script>
 
-		<echo file="test.packages.properties">test.packages=${test.packages}</echo>
+		<echo file="test.package.names.properties">TEST_PACKAGE_NAMES=${test.package.names}</echo>
 	</target>
 
 	<target name="replace-remote-file">

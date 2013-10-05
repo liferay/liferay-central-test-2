@@ -154,7 +154,7 @@ public class SeleniumBuilder {
 
 		seleniumBuilderFileUtil.writeFile(
 			"../../../test.case.method.names.properties",
-			"test.case.method.names=" +
+			"TEST_CASE_METHOD_NAMES=" +
 				StringUtil.merge(
 					testCaseMethodNames.toArray(
 						new String[testCaseMethodNames.size()]),
