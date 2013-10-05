@@ -85,7 +85,7 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 			project.setProperty("test.tck.packages", StringUtil.merge(packageNames, " "));
 		</script>
 
-		<echo file="test-tck-packages">${test.tck.packages}</echo>
+		<echo file="test.tck.packages.properties">test.tck.packages=${test.tck.packages}</echo>
 	</target>
 
 	<target name="run-tck-tomcat">
