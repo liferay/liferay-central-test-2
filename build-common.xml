@@ -6,7 +6,6 @@
 >
 	<dirname file="${ant.file.build-common}" property="project.dir" />
 
-	<property name="security.policy" value="com/liferay/portal/security/pacl/security.policy" />
 	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
 
 	<property environment="env" />
@@ -921,7 +920,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<jvmarg value="-Xmx${junit.java.mx}" />
 					<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
 					<jvmarg value="-Djava.security.manager" />
-					<jvmarg value="-Djava.security.policy==${basedir}/test-classes/${test.type}/${security.policy}" />
+					<jvmarg value="-Djava.security.policy==${basedir}/test-classes/${test.type}/com/liferay/portal/security/pacl/security.policy" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<jvmarg value="-Dfile.encoding=UTF-8" />
 					<jvmarg value="-Djava.net.preferIPv4Stack=true" />
