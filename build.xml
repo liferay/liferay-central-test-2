@@ -484,8 +484,6 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
 				</tstamp>
 
-				<ant dir="support-websphere" target="deploy" inheritAll="false" />
-
 				<jar
 					basedir="${app.server.portal.dir}"
 					jarfile="${tstamp.value}"
@@ -500,6 +498,8 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 		<if>
 			<equals arg1="${app.server.type}" arg2="websphere" />
 			<then>
+				<ant dir="support-websphere" target="deploy" inheritAll="false" />
+
 				<exec dir="${app.server.websphere.bin.dir}" executable="/bin/sh" os="${os.unix}">
 					<arg line="startServer.sh server1" />
 				</exec>
