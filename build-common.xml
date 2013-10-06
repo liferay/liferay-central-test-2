@@ -919,11 +919,11 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<jvmarg line="${junit.debug.jpda}" />
 					<jvmarg value="-Xmx${junit.java.mx}" />
 					<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
-					<jvmarg value="-Djava.security.manager" />
-					<jvmarg value="-Djava.security.policy==${basedir}/test-classes/${test.type}/com/liferay/portal/security/pacl/security.policy" />
 					<jvmarg value="-Dexternal-properties=${test.properties}" />
 					<jvmarg value="-Dfile.encoding=UTF-8" />
 					<jvmarg value="-Djava.net.preferIPv4Stack=true" />
+					<jvmarg value="-Djava.security.manager" />
+					<jvmarg value="-Djava.security.policy==${basedir}/test-classes/${test.type}/com/liferay/portal/security/pacl/security.policy" />
 					<jvmarg value="-Duser.timezone=GMT" />
 					<classpath location="test-coverage" />
 					<classpath refid="test.classpath" />
