@@ -397,14 +397,14 @@ ${app.server.tomcat.dir}, then run "ant -buildfile build-dist.xml unzip-tomcat".
 		<if>
 			<equals arg1="${app.server.type}" arg2="resin" />
 			<then>
+				<ant dir="support-resin" target="deploy" inheritAll="false" />
+
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
 						includes="saxpath.jar"
 					/>
 				</copy>
-
-				<ant dir="support-resin" target="deploy" inheritAll="false" />
 			</then>
 		</if>
 
