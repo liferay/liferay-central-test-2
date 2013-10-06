@@ -14,7 +14,6 @@
 
 package com.liferay.portal.security.pacl;
 
-import com.liferay.portal.kernel.security.pacl.permission.CheckMemberAccessPermission;
 import com.liferay.portal.kernel.security.pacl.permission.PortalHookPermission;
 import com.liferay.portal.kernel.security.pacl.permission.PortalMessageBusPermission;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
@@ -23,8 +22,6 @@ import com.liferay.portal.kernel.util.JavaDetector;
 import com.liferay.portal.kernel.util.WeakValueConcurrentHashMap;
 
 import java.lang.reflect.Field;
-
-import java.net.URL;
 
 import java.security.AccessControlException;
 import java.security.AccessController;
@@ -48,7 +45,7 @@ public class PortalPolicy extends Policy {
 	public PortalPolicy(Policy policy) throws PrivilegedActionException {
 		if (policy instanceof PortalPolicy) {
 			throw new IllegalArgumentException(
-				"Liferay's PortalPolicy class can not wrap itself");
+				"Liferay's PortalPolicy class should not wrap itself");
 		}
 
 		_policy = policy;
@@ -63,9 +60,7 @@ public class PortalPolicy extends Policy {
 			return new LenientPermissionCollection();
 		}
 
-		URL location = codeSource.getLocation();
-
-		URLWrapper urlWrapper = new URLWrapper(location);
+		URLWrapper urlWrapper = new URLWrapper(codeSource.getLocation());
 
 		PermissionCollection permissionCollection =
 			_urlPermissionCollections.get(urlWrapper);
@@ -74,7 +69,8 @@ public class PortalPolicy extends Policy {
 			return permissionCollection;
 		}
 
-		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(location);
+		PACLPolicy paclPolicy = PACLPolicyManager.getPACLPolicy(
+			codeSource.getLocation());
 
 		if (paclPolicy != null) {
 			permissionCollection = new PortalPermissionCollection(paclPolicy);
@@ -124,7 +120,7 @@ public class PortalPolicy extends Policy {
 			permissionCollection = new PortalPermissionCollection(paclPolicy);
 		}
 		else {
-			if (_IBM_JVM) {
+			if (JavaDetector.isIBM()) {
 				permissionCollection = _policy.getPermissions(protectionDomain);
 			}
 			else {
@@ -143,7 +139,7 @@ public class PortalPolicy extends Policy {
 	public boolean implies(
 		ProtectionDomain protectionDomain, Permission permission) {
 
-		if (_started.get().booleanValue()) {
+		if (_started.get()) {
 			return true;
 		}
 
@@ -152,18 +148,18 @@ public class PortalPolicy extends Policy {
 
 			PermissionCollection permissionCollection = null;
 
-			if (_IBM_JVM) {
+			if (JavaDetector.isIBM()) {
 				permissionCollection = getPermissions(protectionDomain);
 
 				if ((permissionCollection != null) &&
 					(!(permissionCollection instanceof
 						PortalPermissionCollection))) {
 
-					Enumeration<Permission> elements =
+					Enumeration<Permission> enumeration =
 						permissionCollection.elements();
 
-					while (elements.hasMoreElements()) {
-						Permission curPermission = elements.nextElement();
+					while (enumeration.hasMoreElements()) {
+						Permission curPermission = enumeration.nextElement();
 
 						if (curPermission instanceof AllPermission) {
 							return true;
@@ -178,7 +174,7 @@ public class PortalPolicy extends Policy {
 				return _checkWithParentPolicy(protectionDomain, permission);
 			}
 
-			if (!_IBM_JVM) {
+			if (!JavaDetector.isIBM()) {
 				permissionCollection = getPermissions(protectionDomain);
 			}
 
@@ -193,7 +189,7 @@ public class PortalPolicy extends Policy {
 				}
 
 				throw new AccessControlException(
-					"access denied " + permission, permission);
+					"Access denied " + permission, permission);
 			}
 
 			return _checkWithParentPolicy(protectionDomain, permission);
@@ -235,11 +231,14 @@ public class PortalPolicy extends Policy {
 		return false;
 	}
 
+	@SuppressWarnings("deprecation")
 	private boolean _checkWithParentPolicy(
 		ProtectionDomain protectionDomain, Permission permission) {
 
 		if ((_policy != null) &&
-			!(permission instanceof CheckMemberAccessPermission) &&
+			!(permission instanceof
+				com.liferay.portal.kernel.security.pacl.permission.
+					CheckMemberAccessPermission) &&
 			!(permission instanceof PortalHookPermission) &&
 			!(permission instanceof PortalMessageBusPermission) &&
 			!(permission instanceof PortalRuntimePermission) &&
@@ -269,8 +268,6 @@ public class PortalPolicy extends Policy {
 		}
 
 	};
-
-	private final boolean _IBM_JVM = JavaDetector.isIBM();
 
 	private Field _field;
 	private PACLPolicy _paclPolicy = PACLPolicyManager.getDefaultPACLPolicy();
