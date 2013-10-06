@@ -833,16 +833,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			<property name="test.type" value="${test.type}" />
 		</ant>
 
-		<if>
-			<equals arg1="${test.type}" arg2="integration" />
-			<then>
-				<ant target="test-cmd-security">
-					<property name="junit.forkmode" value="once" />
-					<property name="test.type" value="${test.type}" />
-				</ant>
-			</then>
-		</if>
-
 		<antcall target="report-test-coverage">
 			<param name="" value="${test.type}" />
 		</antcall>
@@ -896,50 +886,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</if>
 	</target>
 
-	<target name="test-cmd-security">
-		<if>
-			<not>
-				<isset property="test.dir" />
-			</not>
-			<then>
-				<var name="test.dir" value="${test.type}" />
-			</then>
-		</if>
-
-		<if>
-			<available file="test/${test.type}" type="dir" />
-			<then>
-				<junit dir="${project.dir}" fork="on" forkmode="${junit.forkmode}" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
-					<sysproperty key="junit.aspectj.dump" file="woven-classes" />
-					<sysproperty key="junit.cobertura.agent" value="${junit.cobertura.agent}" />
-					<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
-					<sysproperty key="junit.debug" value="${junit.debug}" />
-					<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/${test.type}/cobertura.ser" />
-					<jvmarg line="${junit.cobertura.agent}" />
-					<jvmarg line="${junit.debug.jpda}" />
-					<jvmarg value="-Xmx${junit.java.mx}" />
-					<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
-					<jvmarg value="-Dexternal-properties=${test.properties}" />
-					<jvmarg value="-Dfile.encoding=UTF-8" />
-					<jvmarg value="-Djava.net.preferIPv4Stack=true" />
-					<jvmarg value="-Djava.security.manager" />
-					<jvmarg value="-Djava.security.policy==${basedir}/test-classes/${test.type}/com/liferay/portal/security/pacl/security.policy" />
-					<jvmarg value="-Duser.timezone=GMT" />
-					<classpath location="test-coverage" />
-					<classpath refid="test.classpath" />
-					<formatter type="brief" usefile="false" />
-					<formatter type="xml" />
-					<batchtest todir="test-results/${test.type}">
-						<fileset dir="test-classes/${test.dir}" includes="**/${test.class}.class">
-							<exclude name="${test.excludes}" />
-							<filename regex=".*/pacl/test/[\w]+Test.class" negate="false" />
-						</fileset>
-					</batchtest>
-				</junit>
-			</then>
-		</if>
-	</target>
-
 	<target name="test-integration" depends="compile,compile-test-integration">
 		<var name="test.class" value="*Test" />
 
@@ -954,11 +900,6 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<ant target="test-cmd">
 			<property name="junit.forkmode" value="once" />
 			<property name="test.type" value="integration" />
-		</ant>
-
-		<ant target="test-cmd-security">
-			<property name="junit.forkmode" value="once" />
-			<property name="test.type" value="${test.type}" />
 		</ant>
 
 		<antcall target="report-test-coverage">
@@ -1034,23 +975,11 @@ Please set the environment variable ANT_OPTS to the recommended value of
 					<then>
 						<var name="test.class" value="**/${test.package.dir}/*Test" />
 
-						<if>
-							<equals arg1="${test.package}" arg2="com.liferay.portal.security.pacl.test" />
-							<then>
-								<var name="junit.forkmode" value="once" />
-							</then>
-							<else>
-								<var name="junit.forkmode" value="perTest" />
-							</else>
-						</if>
-
 						<ant target="test-cmd">
-							<property name="junit.forkmode" value="${junit.forkmode}" />
+							<property name="junit.forkmode" value="once" />
 							<property name="test.excludes" value="**/*PersistenceTest.class" />
 							<property name="test.type" value="integration" />
 						</ant>
-
-						<var name="junit.forkmode" unset="true" />
 
 						<antcall target="report-test-coverage">
 							<param name="test.type" value="integration" />
