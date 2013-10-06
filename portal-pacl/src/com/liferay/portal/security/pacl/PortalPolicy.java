@@ -152,8 +152,8 @@ public class PortalPolicy extends Policy {
 				permissionCollection = getPermissions(protectionDomain);
 
 				if ((permissionCollection != null) &&
-					(!(permissionCollection instanceof
-						PortalPermissionCollection))) {
+					!(permissionCollection instanceof
+						PortalPermissionCollection)) {
 
 					Enumeration<Permission> enumeration =
 						permissionCollection.elements();

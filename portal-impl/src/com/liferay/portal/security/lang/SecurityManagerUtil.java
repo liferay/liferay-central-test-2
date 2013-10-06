@@ -42,8 +42,8 @@ public class SecurityManagerUtil {
 		_portalSecurityManagerStrategy = PortalSecurityManagerStrategy.parse(
 			PropsValues.PORTAL_SECURITY_MANAGER_STRATEGY);
 
-		if ((_portalSecurityManagerStrategy ==
-				PortalSecurityManagerStrategy.LIFERAY)) {
+		if (_portalSecurityManagerStrategy ==
+				PortalSecurityManagerStrategy.LIFERAY) {
 
 			if (!ENABLED) {
 				_log.error(
