@@ -59,7 +59,7 @@ public class PACLUtil {
 		SecurityManager securityManager = System.getSecurityManager();
 
 		try {
-			securityManager.checkPermission(_PERMISSION);
+			securityManager.checkPermission(_permission);
 
 			PACLPolicy paclPolicy = PACLPolicyThreadLocal.get();
 
@@ -173,7 +173,7 @@ public class PACLUtil {
 		return false;
 	}
 
-	private static final Permission _PERMISSION = new PACLUtil.Permission();
+	private static Permission _permission = new PACLUtil.Permission();
 
 	private static class ProtectionDomainPrivilegedAction
 		implements PrivilegedAction<ProtectionDomain> {

@@ -88,13 +88,13 @@ public class PACLPolicyManager {
 			new PACLPolicyPrivilegedAction(protectionDomain));
 	}
 
-	public static PACLPolicy getPACLPolicy(URL location) {
-		if (location == null) {
+	public static PACLPolicy getPACLPolicy(URL locationURL) {
+		if (locationURL == null) {
 			return null;
 		}
 
 		return AccessController.doPrivileged(
-			new PACLPolicyPrivilegedAction(location));
+			new PACLPolicyPrivilegedAction(locationURL));
 	}
 
 	public static void register(
@@ -146,8 +146,8 @@ public class PACLPolicyManager {
 
 			_urlPACLPolicies.put(new URLWrapper(url), paclPolicy);
 		}
-		catch (MalformedURLException e) {
-			throw new RuntimeException(e);
+		catch (MalformedURLException murle) {
+			throw new RuntimeException(murle);
 		}
 
 		_classLoaderPACLPolicies.put(classLoader, paclPolicy);
@@ -198,11 +198,11 @@ public class PACLPolicyManager {
 				return;
 			}
 
-			_location = codeSource.getLocation();
+			_locationURL = codeSource.getLocation();
 		}
 
-		public PACLPolicyPrivilegedAction(URL location) {
-			_location = location;
+		public PACLPolicyPrivilegedAction(URL locationURL) {
+			_locationURL = locationURL;
 		}
 
 		@Override
@@ -210,12 +210,12 @@ public class PACLPolicyManager {
 			PACLPolicy paclPolicy = getFromClassLoader();
 
 			if ((paclPolicy != null) || (_classLoader != null) ||
-				(_location == null)) {
+				(_locationURL == null)) {
 
 				return paclPolicy;
 			}
 
-			return _urlPACLPolicies.get(new URLWrapper(_location));
+			return _urlPACLPolicies.get(new URLWrapper(_locationURL));
 		}
 
 		private PACLPolicy getFromClassLoader() {
@@ -235,7 +235,7 @@ public class PACLPolicyManager {
 		}
 
 		private ClassLoader _classLoader;
-		private URL _location;
+		private URL _locationURL;
 
 	}
 
