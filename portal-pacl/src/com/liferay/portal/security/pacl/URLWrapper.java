@@ -14,6 +14,8 @@
 
 package com.liferay.portal.security.pacl;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.net.URL;
 
 /**
@@ -22,14 +24,16 @@ import java.net.URL;
 public class URLWrapper {
 
 	public URLWrapper(URL url) {
-		this.url = url;
-		this.stringURL = this.url.toString();
-		this.hashCode = this.stringURL.hashCode();
+		_url = url;
+
+		_urlString = _url.toString();
+
+		_hashCode = _urlString.hashCode();
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == this) {
+		if (this == obj) {
 			return true;
 		}
 
@@ -37,22 +41,24 @@ public class URLWrapper {
 			return false;
 		}
 
-		URLWrapper urlKeyWrapper = (URLWrapper)obj;
+		URLWrapper urlWrapper = (URLWrapper)obj;
 
-		if (url == urlKeyWrapper.url) {
+		if ((_url == urlWrapper._url) ||
+			Validator.equals(_urlString, urlWrapper._urlString)) {
+
 			return true;
 		}
 
-		return stringURL.equals(urlKeyWrapper.stringURL);
+		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return hashCode;
+		return _hashCode;
 	}
 
-	protected int hashCode;
-	protected String stringURL;
-	protected URL url;
+	private int _hashCode;
+	private URL _url;
+	private String _urlString;
 
 }
