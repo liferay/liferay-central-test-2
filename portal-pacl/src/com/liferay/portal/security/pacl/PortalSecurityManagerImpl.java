@@ -204,11 +204,11 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 
 		if (ServerDetector.isWebLogic()) {
-			doWebLogicHook();
+			addWebLogicHook();
 		}
 
 		if (ServerDetector.isWebSphere()) {
-			doWebSphereHook();
+			addWebSphereHook();
 		}
 	}
 
@@ -303,7 +303,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		return _policy;
 	}
 
-	protected void doWebLogicHook() {
+	protected void addWebLogicHook() {
 		final SecurityManager securityManager = this;
 
 		try {
@@ -313,9 +313,7 @@ public class PortalSecurityManagerImpl extends SecurityManager
 			Runnable runnable = new Runnable() {
 
 				public void run() {
-					SecurityManager current = System.getSecurityManager();
-
-					if (current != securityManager) {
+					if (securityManager != System.getSecurityManager()) {
 						System.setSecurityManager(securityManager);
 					}
 				}
@@ -330,10 +328,9 @@ public class PortalSecurityManagerImpl extends SecurityManager
 		}
 	}
 
-	protected void doWebSphereHook() {
+	protected void addWebSphereHook() {
 		try {
-			Class.forName(
-				"com.liferay.support.websphere.DynamicPolicyHelper");
+			Class.forName("com.liferay.support.websphere.DynamicPolicyHelper");
 		}
 		catch (Exception e) {
 			_log.error(e, e);
