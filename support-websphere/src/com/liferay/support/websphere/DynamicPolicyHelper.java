@@ -19,6 +19,7 @@ import com.ibm.ws.security.policy.DynamicPolicyFactory;
 
 import java.security.CodeSource;
 import java.security.PermissionCollection;
+import java.security.Policy;
 import java.security.ProtectionDomain;
 
 import java.util.Map;
@@ -29,56 +30,55 @@ import java.util.Map;
 public class DynamicPolicyHelper {
 
 	protected void _start() {
-		_original = DynamicPolicyFactory.getInstance();
+		_originalDynamicPolicy = DynamicPolicyFactory.getInstance();
 
-		final DynamicPolicy original = _original;
+		final DynamicPolicy originalDynamicPolicy = _originalDynamicPolicy;
 
 		DynamicPolicy dynamicPolicy = new DynamicPolicy() {
 
 			@Override
-			public ProtectionDomain getProtectionDomain(
-				CodeSource codeSource) {
-
-				if (original == null) {
+			public ProtectionDomain getProtectionDomain(CodeSource codeSource) {
+				if (originalDynamicPolicy == null) {
 					return null;
 				}
 
-				return original.getProtectionDomain(codeSource);
+				return originalDynamicPolicy.getProtectionDomain(codeSource);
 			}
 
 			@Override
 			public PermissionCollection getPermissions(
 				CodeSource codeSource, Map map) {
 
-				return java.security.Policy.getPolicy().getPermissions(
-					codeSource);
+				Policy policy = Policy.getPolicy();
+
+				return policy.getPermissions(codeSource);
 			}
 
 			@Override
 			public void getSecurityPolicy(Map map1, Map map2) {
-				if (original == null) {
+				if (originalDynamicPolicy == null) {
 					return;
 				}
 
-				original.getSecurityPolicy(map1, map2);
+				originalDynamicPolicy.getSecurityPolicy(map1, map2);
 			}
 
 			@Override
 			public void removePolicy(Map map) {
-				if (original == null) {
+				if (originalDynamicPolicy == null) {
 					return;
 				}
 
-				original.removePolicy(map);
+				originalDynamicPolicy.removePolicy(map);
 			}
 
 			@Override
 			public void setupPolicy(Map map) {
-				if (original == null) {
+				if (originalDynamicPolicy == null) {
 					return;
 				}
 
-				original.setupPolicy(map);
+				originalDynamicPolicy.setupPolicy(map);
 			}
 
 		};
@@ -86,12 +86,12 @@ public class DynamicPolicyHelper {
 		DynamicPolicyFactory.setInstance(dynamicPolicy);
 	}
 
-	private DynamicPolicy _original;
-
 	private static DynamicPolicyHelper _instance = new DynamicPolicyHelper();
 
 	static {
 		_instance._start();
 	}
+
+	private DynamicPolicy _originalDynamicPolicy;
 
 }
