@@ -1,3 +1,17 @@
+/**
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ *
+ * This library is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Lesser General Public License as published by the Free
+ * Software Foundation; either version 2.1 of the License, or (at your option)
+ * any later version.
+ *
+ * This library is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+ * details.
+ */
+
 package com.liferay.support.resin;
 
 import java.security.CodeSource;
@@ -7,11 +21,14 @@ import java.security.Permissions;
 
 import java.util.ArrayList;
 
+/**
+ * @author Raymond Augé
+ */
 public class EnvironmentClassLoader
 	extends com.caucho.loader.EnvironmentClassLoader {
 
-	public EnvironmentClassLoader(ClassLoader parent, String id) {
-		super(parent, id);
+	public EnvironmentClassLoader(ClassLoader classLoader, String id) {
+		super(classLoader, id);
 
 		_id = id;
 	}
@@ -38,7 +55,7 @@ public class EnvironmentClassLoader
 		return super.getPermissions(codeSource);
 	}
 
-	private static boolean _SECURITY_ENABLED =
+	private static boolean final _SECURITY_ENABLED =
 		(System.getSecurityManager() != null);
 
 	private String _id;
