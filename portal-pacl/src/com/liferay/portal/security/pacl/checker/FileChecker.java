@@ -112,8 +112,8 @@ public class FileChecker extends BaseChecker {
 			"${user.home}",
 			"${user.name}",
 			"${weblogic.domain.dir}",
-			"${websphere.profile.dir}",
 			"${websphere.cell}",
+			"${websphere.profile.dir}",
 			StringPool.DOUBLE_SLASH
 		};
 
@@ -144,7 +144,7 @@ public class FileChecker extends BaseChecker {
 			ReleaseInfo.getVersion(), System.getProperty("resin.home"),
 			System.getProperty("user.dir"), System.getProperty("user.home"),
 			System.getProperty("user.name"), System.getenv("DOMAIN_HOME"),
-			System.getProperty("server.root"), System.getenv("WAS_CELL"),
+			System.getenv("WAS_CELL"), System.getProperty("server.root"),
 			StringPool.SLASH
 		};
 
