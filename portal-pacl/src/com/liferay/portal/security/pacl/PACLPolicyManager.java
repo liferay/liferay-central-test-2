@@ -108,7 +108,9 @@ public class PACLPolicyManager {
 			for (URL url : urlClassLoader.getURLs()) {
 				String path = url.getPath();
 
-				if (path.startsWith(PropsValues.LIFERAY_LIB_GLOBAL_SHARED_DIR)) {
+				if (path.startsWith(
+						PropsValues.LIFERAY_LIB_GLOBAL_SHARED_DIR)) {
+
 					continue;
 				}
 

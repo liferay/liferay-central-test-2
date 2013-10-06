@@ -36,7 +36,7 @@ public class EnvironmentClassLoader
 	@Override
 	public ArrayList<Permission> getPermissions() {
 		if (_SECURITY_ENABLED && (_id != null) && _id.startsWith("web-app:") &&
-			(!_id.endsWith("/ROOT"))) {
+			!_id.endsWith("/ROOT")) {
 
 			return new ArrayList<Permission>();
 		}
@@ -47,7 +47,7 @@ public class EnvironmentClassLoader
 	@Override
 	protected PermissionCollection getPermissions(CodeSource codeSource) {
 		if (_SECURITY_ENABLED && (_id != null) && _id.startsWith("web-app:") &&
-			(!_id.endsWith("/ROOT"))) {
+			!_id.endsWith("/ROOT")) {
 
 			return new Permissions();
 		}
