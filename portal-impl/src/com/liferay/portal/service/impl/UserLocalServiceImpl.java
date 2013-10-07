@@ -5696,7 +5696,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			@Override
 			protected Void doCall() throws Exception {
-				boolean originalWorkflowEnabled =
+				boolean currentWorkflowEnabled =
 					WorkflowThreadLocal.isEnabled();
 
 				try {
@@ -5709,7 +5709,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					return null;
 				}
 				finally {
-					WorkflowThreadLocal.setEnabled(originalWorkflowEnabled);
+					WorkflowThreadLocal.setEnabled(currentWorkflowEnabled);
 				}
 			}
 
