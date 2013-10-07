@@ -91,6 +91,9 @@ public class JSONWebServiceServiceAction extends JSONServiceAction {
 		}
 	}
 
+	/**
+	 * @see JSONServiceAction#getCSRFOrigin(HttpServletRequest)
+	 */
 	@Override
 	protected String getCSRFOrigin(HttpServletRequest request) {
 		String uri = request.getRequestURI();

@@ -14,6 +14,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.jsonwebservice.JSONWebServiceServiceAction;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -394,6 +395,9 @@ public class JSONServiceAction extends JSONAction {
 		}
 	}
 
+	/**
+	 * @see JSONWebServiceServiceAction#getCSRFOrigin(HttpServletRequest)
+	 */
 	@Override
 	protected String getCSRFOrigin(HttpServletRequest request) {
 		String className = ParamUtil.getString(request, "serviceClassName");
