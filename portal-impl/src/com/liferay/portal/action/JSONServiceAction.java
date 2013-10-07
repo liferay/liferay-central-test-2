@@ -399,10 +399,11 @@ public class JSONServiceAction extends JSONAction {
 		String className = ParamUtil.getString(request, "serviceClassName");
 		String methodName = ParamUtil.getString(request, "serviceMethodName");
 
-		StringBundler sb = new StringBundler(5);
+		StringBundler sb = new StringBundler(6);
 
 		sb.append(getClass().getName());
 		sb.append(StringPool.COLON);
+		sb.append(StringPool.SLASH);
 		sb.append(className);
 		sb.append(StringPool.POUND);
 		sb.append(methodName);
