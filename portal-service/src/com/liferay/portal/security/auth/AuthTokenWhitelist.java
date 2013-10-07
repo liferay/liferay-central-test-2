@@ -40,7 +40,7 @@ public interface AuthTokenWhitelist {
 	public boolean isPortletInvocationWhitelisted(
 		long companyId, String portletId, String strutsAction);
 
-	public boolean isValidCSRFSharedSecret(String sharedSecret);
+	public boolean isValidSharedSecret(String sharedSecret);
 
 	public Set<String> resetOriginCSRFWhitelist();
 

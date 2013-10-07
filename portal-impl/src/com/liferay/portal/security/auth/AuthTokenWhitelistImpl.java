@@ -130,7 +130,7 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 	}
 
 	@Override
-	public boolean isValidCSRFSharedSecret(String sharedSecret) {
+	public boolean isValidSharedSecret(String sharedSecret) {
 		if (Validator.isNotNull(sharedSecret)) {
 			String authTokenSharedSecret = PropsValues.AUTH_TOKEN_SHARED_SECRET;
 
