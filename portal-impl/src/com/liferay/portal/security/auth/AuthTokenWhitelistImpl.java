@@ -68,11 +68,11 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 	}
 
 	@Override
-	public boolean isCSRFOriginWhitelisted(long companyId, String origin) {
+	public boolean isOriginCSRFWhitelisted(long companyId, String origin) {
 		Set<String> whitelist = getOriginCSRFWhitelist();
 
-		for (String whitelistedCSRFOrigins : whitelist) {
-			if (origin.startsWith(whitelistedCSRFOrigins)) {
+		for (String whitelistedOrigins : whitelist) {
+			if (origin.startsWith(whitelistedOrigins)) {
 				return true;
 			}
 		}

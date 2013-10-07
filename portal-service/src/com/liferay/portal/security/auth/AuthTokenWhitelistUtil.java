@@ -49,7 +49,7 @@ public class AuthTokenWhitelistUtil {
 	public static boolean isCSRFOrigintWhitelisted(
 		long companyId, String origin) {
 
-		return getAuthTokenWhitelist().isCSRFOriginWhitelisted(
+		return getAuthTokenWhitelist().isOriginCSRFWhitelisted(
 			companyId, origin);
 	}
 
