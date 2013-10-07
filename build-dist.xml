@@ -813,7 +813,7 @@ release was successful.</echo>
 		<antcall target="clean" />
 		<antcall target="start" />
 
-		<record name="prepare-generated-files.txt" action="start"/>
+		<record name="prepare-generated-files.txt" action="start" />
 
 		<ant dir="portal-impl" target="build-iw" inheritAll="false" />
 		<ant dir="portal-impl" target="build-lib-versions" inheritAll="false" />
@@ -879,7 +879,7 @@ release was successful.</echo>
 			project.setProperty("prepare-generated-files.tstamp", String.valueOf(System.currentTimeMillis()));
 		</script>
 
-		<record name="prepare-generated-files.txt" action="stop"/>
+		<record name="prepare-generated-files.txt" action="stop" />
 
 		<if>
 			<resourcecontains resource="prepare-generated-files.txt" substring="java.lang.RuntimeException" />
