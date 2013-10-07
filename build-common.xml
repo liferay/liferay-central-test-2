@@ -851,37 +851,103 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<if>
 			<available file="test/${test.type}" type="dir" />
 			<then>
-				<junit dir="${project.dir}" fork="on" forkmode="${junit.forkmode}" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
-					<sysproperty key="junit.aspectj.dump" file="woven-classes" />
-					<sysproperty key="junit.cobertura.agent" value="${junit.cobertura.agent}" />
-					<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
-					<sysproperty key="junit.debug" value="${junit.debug}" />
-					<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/${test.type}/cobertura.ser" />
-					<jvmarg line="${junit.cobertura.agent}" />
-					<jvmarg line="${junit.debug.jpda}" />
-					<jvmarg value="-Xmx${junit.java.mx}" />
-					<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
-					<jvmarg value="-Dexternal-properties=${test.properties}" />
-					<jvmarg value="-Dfile.encoding=UTF-8" />
-					<jvmarg value="-Djava.net.preferIPv4Stack=true" />
-					<jvmarg value="-Duser.timezone=GMT" />
-					<classpath location="test-coverage" />
-					<classpath refid="test.classpath" />
-					<formatter type="brief" usefile="false" />
-					<formatter type="xml" />
-					<batchtest todir="test-results/${test.type}">
-						<fileset dir="test-classes/${test.dir}" includes="**/${test.class}.class">
-							<exclude name="**/DLAppServiceHttpTest.class" />
-							<exclude name="**/DLAppServiceJsonTest.class" />
-							<exclude name="**/DLAppServiceSoapTest.class" />
-							<exclude name="**/UserServiceHttpTest.class" />
-							<exclude name="**/UserServiceSoapTest.class" />
-							<exclude name="**/pacl/test/*Test.class" />
-							<exclude name="${test.excludes}" />
-							<filename regex="${junit.test.excludes}" negate="true" />
-						</fileset>
-					</batchtest>
-				</junit>
+				<resourcecount property="test.with.security.count">
+					<fileset
+						dir="test-classes/${test.type}"
+						includes="**/${test.class}.class"
+					>
+						<filename regex=".*/pacl/test/[\w]+Test.class" negate="false" />
+					</fileset>
+				</resourcecount>
+
+				<if>
+					<not>
+						<equals arg1="${test.with.security.count}" arg2="0" />
+					</not>
+					<then>
+						<junit dir="${project.dir}" fork="on" forkmode="${junit.forkmode}" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
+							<sysproperty key="junit.aspectj.dump" file="woven-classes" />
+							<sysproperty key="junit.cobertura.agent" value="${junit.cobertura.agent}" />
+							<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
+							<sysproperty key="junit.debug" value="${junit.debug}" />
+							<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/${test.type}/cobertura.ser" />
+							<jvmarg line="${junit.cobertura.agent}" />
+							<jvmarg line="${junit.debug.jpda}" />
+							<jvmarg value="-Xmx${junit.java.mx}" />
+							<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
+							<jvmarg value="-Dexternal-properties=${test.properties}" />
+							<jvmarg value="-Dfile.encoding=UTF-8" />
+							<jvmarg value="-Djava.net.preferIPv4Stack=true" />
+							<jvmarg value="-Djava.security.manager" />
+							<jvmarg value="-Djava.security.policy=${basedir}/test-classes/${test.type}/com/liferay/portal/security/pacl/security.policy" />
+							<jvmarg value="-Duser.timezone=GMT" />
+							<classpath location="test-coverage" />
+							<classpath refid="test.classpath" />
+							<formatter type="brief" usefile="false" />
+							<formatter type="xml" />
+							<batchtest todir="test-results/${test.type}">
+								<fileset dir="test-classes/${test.dir}" includes="**/${test.class}.class">
+									<exclude name="**/DLAppServiceHttpTest.class" />
+									<exclude name="**/DLAppServiceJsonTest.class" />
+									<exclude name="**/DLAppServiceSoapTest.class" />
+									<exclude name="**/UserServiceHttpTest.class" />
+									<exclude name="**/UserServiceSoapTest.class" />
+									<exclude name="${test.excludes}" />
+									<filename regex="${junit.test.excludes}" negate="true" />
+									<filename regex=".*/pacl/test/[\w]+Test.class" negate="false" />
+								</fileset>
+							</batchtest>
+						</junit>
+					</then>
+				</if>
+
+				<resourcecount property="test.without.security.count">
+					<fileset
+						dir="test-classes/${test.type}"
+						includes="**/${test.class}.class"
+					>
+						<filename regex=".*/pacl/test/[\w]+Test.class" negate="true" />
+					</fileset>
+				</resourcecount>
+
+				<if>
+					<not>
+						<equals arg1="${test.without.security.count}" arg2="0" />
+					</not>
+					<then>
+						<junit dir="${project.dir}" fork="on" forkmode="${junit.forkmode}" haltonfailure="${junit.halt.on.failure}" outputtoformatters="false" printsummary="on" showoutput="true">
+							<sysproperty key="junit.aspectj.dump" file="woven-classes" />
+							<sysproperty key="junit.cobertura.agent" value="${junit.cobertura.agent}" />
+							<sysproperty key="junit.code.coverage" value="${junit.code.coverage}" />
+							<sysproperty key="junit.debug" value="${junit.debug}" />
+							<sysproperty key="net.sourceforge.cobertura.datafile" file="test-coverage/${test.type}/cobertura.ser" />
+							<jvmarg line="${junit.cobertura.agent}" />
+							<jvmarg line="${junit.debug.jpda}" />
+							<jvmarg value="-Xmx${junit.java.mx}" />
+							<jvmarg value="-XX:MaxPermSize=${junit.java.maxpermsize}" />
+							<jvmarg value="-Dexternal-properties=${test.properties}" />
+							<jvmarg value="-Dfile.encoding=UTF-8" />
+							<jvmarg value="-Djava.net.preferIPv4Stack=true" />
+							<jvmarg value="-Duser.timezone=GMT" />
+							<classpath location="test-coverage" />
+							<classpath refid="test.classpath" />
+							<formatter type="brief" usefile="false" />
+							<formatter type="xml" />
+							<batchtest todir="test-results/${test.type}">
+								<fileset dir="test-classes/${test.dir}" includes="**/${test.class}.class">
+									<exclude name="**/DLAppServiceHttpTest.class" />
+									<exclude name="**/DLAppServiceJsonTest.class" />
+									<exclude name="**/DLAppServiceSoapTest.class" />
+									<exclude name="**/UserServiceHttpTest.class" />
+									<exclude name="**/UserServiceSoapTest.class" />
+									<exclude name="${test.excludes}" />
+									<filename regex="${junit.test.excludes}" negate="true" />
+									<filename regex=".*/pacl/test/[\w]+Test.class" negate="true" />
+								</fileset>
+							</batchtest>
+						</junit>
+					</then>
+				</if>
 			</then>
 		</if>
 	</target>
@@ -939,7 +1005,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</junit>
 	</target>
 
-	<target name="test-package" depends="compile,compile-test">
+	<target name="test-package">
 		<if>
 			<not>
 				<isset property="test.package" />
