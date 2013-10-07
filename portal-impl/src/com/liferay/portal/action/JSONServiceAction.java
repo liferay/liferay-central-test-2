@@ -14,7 +14,6 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.jsonwebservice.JSONWebServiceServiceAction;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -24,6 +23,7 @@ import com.liferay.portal.kernel.json.JSONSerializer;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -400,17 +400,23 @@ public class JSONServiceAction extends JSONAction {
 	 */
 	@Override
 	protected String getCSRFOrigin(HttpServletRequest request) {
-		String className = ParamUtil.getString(request, "serviceClassName");
-		String methodName = ParamUtil.getString(request, "serviceMethodName");
-
 		StringBundler sb = new StringBundler(6);
 
-		sb.append(getClass().getName());
+		sb.append(ClassUtil.getClassName(this));
 		sb.append(StringPool.COLON);
 		sb.append(StringPool.SLASH);
-		sb.append(className);
+
+		String serviceClassName = ParamUtil.getString(
+			request, "serviceClassName");
+
+		sb.append(serviceClassName);
+
 		sb.append(StringPool.POUND);
-		sb.append(methodName);
+
+		String serviceMethodName = ParamUtil.getString(
+			request, "serviceMethodName");
+
+		sb.append(serviceMethodName);
 
 		return sb.toString();
 	}

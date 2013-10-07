@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -165,7 +166,7 @@ public abstract class JSONAction extends Action {
 	}
 
 	protected String getCSRFOrigin(HttpServletRequest request) {
-		return getClass().getName();
+		return ClassUtil.getClassName(this);
 	}
 
 	protected String getReroutePath() {
