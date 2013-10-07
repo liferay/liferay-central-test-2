@@ -24,12 +24,10 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upload.UploadException;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.ContextPathUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.context.PortalContextLoaderListener;
 import com.liferay.portal.util.WebKeys;
 
 import java.lang.reflect.InvocationTargetException;
