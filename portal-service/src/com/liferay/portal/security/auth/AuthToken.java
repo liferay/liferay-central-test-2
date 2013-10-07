@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public interface AuthToken {
 
 	/**
-	 * @deprecated As of 6.2.0, please use {@link
+	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #checkCSRFToken(HttpServletRequest, String)}
 	 */
 	@Deprecated
