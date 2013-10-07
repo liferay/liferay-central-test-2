@@ -131,20 +131,16 @@ public class AuthTokenWhitelistImpl implements AuthTokenWhitelist {
 
 	@Override
 	public boolean isValidSharedSecret(String sharedSecret) {
-		if (Validator.isNotNull(sharedSecret)) {
-			String authTokenSharedSecret = PropsValues.AUTH_TOKEN_SHARED_SECRET;
-
-			if (Validator.isNotNull(authTokenSharedSecret)) {
-				String expectedSharedSecretValue = Encryptor.digest(
-					authTokenSharedSecret);
-
-				if (expectedSharedSecretValue.equals(sharedSecret)) {
-					return true;
-				}
-			}
+		if (Validator.isNull(sharedSecret)) {
+			return false;
 		}
 
-		return false;
+		if (Validator.isNull(PropsValues.AUTH_TOKEN_SHARED_SECRET)) {
+			return false;
+		}
+
+		return sharedSecret.equals(
+			Encryptor.digest(PropsValues.AUTH_TOKEN_SHARED_SECRET));
 	}
 
 	@Override
