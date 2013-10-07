@@ -45,9 +45,9 @@ public class SessionAuthToken implements AuthToken {
 			return;
 		}
 
-		String csrfSharedSecret = ParamUtil.getString(request, "p_auth_secret");
+		String sharedSecret = ParamUtil.getString(request, "p_auth_secret");
 
-		if (AuthTokenWhitelistUtil.isValidCSRFSharedSecret(csrfSharedSecret)) {
+		if (AuthTokenWhitelistUtil.isValidSharedSecret(sharedSecret)) {
 			return;
 		}
 
