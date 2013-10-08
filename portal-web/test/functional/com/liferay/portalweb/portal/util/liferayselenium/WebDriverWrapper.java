@@ -95,10 +95,18 @@ public class WebDriverWrapper implements WebDriver {
 	@Override
 	public void quit() {
 		try {
+			System.out.println("### WebDriverWrapper 1");
+
 			_webDriver.quit();
+
+			System.out.println("### WebDriverWrapper 2");
 		}
 		catch (ProcessStillAliveException psae) {
+			System.out.println("### WebDriverWrapper 3");
+
 			BrowserCommands.killBrowser();
+
+			System.out.println("### WebDriverWrapper 4");
 
 			throw psae;
 		}
