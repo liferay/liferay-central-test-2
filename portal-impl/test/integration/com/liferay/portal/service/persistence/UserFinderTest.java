@@ -60,19 +60,19 @@ public class UserFinderTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-		_groupUser = UserTestUtil.addUser();
 		_group = GroupTestUtil.addGroup();
+		_groupUser = UserTestUtil.addUser();
 
 		GroupLocalServiceUtil.addUserGroup(_groupUser.getUserId(), _group);
 
-		_organizationUser = UserTestUtil.addUser();
 		_organization = OrganizationTestUtil.addOrganization();
+		_organizationUser = UserTestUtil.addUser();
 
 		OrganizationLocalServiceUtil.addUserOrganization(
 			_organizationUser.getUserId(), _organization);
 
-		_userGroupUser = UserTestUtil.addUser();
 		_userGroup = UserGroupTestUtil.addUserGroup();
+		_userGroupUser = UserTestUtil.addUser();
 
 		UserGroupLocalServiceUtil.addUserUserGroup(
 			_userGroupUser.getUserId(), _userGroup);
@@ -80,13 +80,14 @@ public class UserFinderTest {
 
 	@AfterClass
 	public static void tearDownClass() throws Exception {
-		UserLocalServiceUtil.deleteUser(_groupUser);
-		UserLocalServiceUtil.deleteUser(_organizationUser);
-		UserLocalServiceUtil.deleteUser(_userGroupUser);
-
 		GroupLocalServiceUtil.deleteGroup(_group);
+		UserLocalServiceUtil.deleteUser(_groupUser);
+
 		OrganizationLocalServiceUtil.deleteOrganization(_organization);
+		UserLocalServiceUtil.deleteUser(_organizationUser);
+
 		UserGroupLocalServiceUtil.deleteUserGroup(_userGroup);
+		UserLocalServiceUtil.deleteUser(_userGroupUser);
 	}
 
 	@Test
@@ -94,13 +95,13 @@ public class UserFinderTest {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
+		params.put("inherit", Boolean.TRUE);
 		params.put(
 			"usersGroups",
 			new Long[] {
 				_group.getGroupId(), _organization.getGroupId(),
-				_userGroup.getGroup().getGroupId()
+				_userGroup.getGroupId()
 			});
-		params.put("inherit", Boolean.TRUE);
 
 		int count = UserFinderUtil.countByKeywords(
 			TestPropsValues.getCompanyId(), null,
@@ -114,14 +115,13 @@ public class UserFinderTest {
 		long roleId = RoleTestUtil.addRegularRole(_group.getGroupId());
 
 		RoleLocalServiceUtil.addGroupRole(_organization.getGroupId(), roleId);
-		RoleLocalServiceUtil.addGroupRole(
-			_userGroup.getGroup().getGroupId(), roleId);
+		RoleLocalServiceUtil.addGroupRole(_userGroup.getGroupId(), roleId);
 
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("usersRoles", roleId);
 		params.put("inherit", Boolean.TRUE);
+		params.put("usersRoles", roleId);
 
 		int count = UserFinderUtil.countByKeywords(
 			TestPropsValues.getCompanyId(), null,
@@ -144,8 +144,8 @@ public class UserFinderTest {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("usersRoles", roleId);
 		params.put("inherit", Boolean.TRUE);
+		params.put("usersRoles", roleId);
 
 		int count = UserFinderUtil.countByKeywords(
 			TestPropsValues.getCompanyId(), null,
@@ -204,13 +204,13 @@ public class UserFinderTest {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
+		params.put("inherit", Boolean.TRUE);
 		params.put(
 			"usersGroups",
 			new Long[] {
 				_group.getGroupId(), _organization.getGroupId(),
-				_userGroup.getGroup().getGroupId()
+				_userGroup.getGroupId()
 			});
-		params.put("inherit", Boolean.TRUE);
 
 		List<User> users = UserFinderUtil.findByKeywords(
 			TestPropsValues.getCompanyId(), null,
@@ -229,14 +229,13 @@ public class UserFinderTest {
 		long roleId = RoleTestUtil.addRegularRole(_group.getGroupId());
 
 		RoleLocalServiceUtil.addGroupRole(_organization.getGroupId(), roleId);
-		RoleLocalServiceUtil.addGroupRole(
-			_userGroup.getGroup().getGroupId(), roleId);
+		RoleLocalServiceUtil.addGroupRole(_userGroup.getGroupId(), roleId);
 
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("usersRoles", roleId);
 		params.put("inherit", Boolean.TRUE);
+		params.put("usersRoles", roleId);
 
 		List<User> users = UserFinderUtil.findByKeywords(
 			TestPropsValues.getCompanyId(), null,
@@ -264,8 +263,8 @@ public class UserFinderTest {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("usersRoles", roleId);
 		params.put("inherit", Boolean.TRUE);
+		params.put("usersRoles", roleId);
 
 		List<User> users = UserFinderUtil.findByKeywords(
 			TestPropsValues.getCompanyId(), null,
