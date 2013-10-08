@@ -14,12 +14,15 @@
 
 package com.liferay.portalweb.portal.util.liferayselenium;
 
+import com.liferay.portalweb.portal.util.BrowserCommands;
+
 import java.util.List;
 import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.os.ProcessUtils.ProcessStillAliveException;
 
 /**
  * @author Brian Wing Shun Chan
@@ -91,7 +94,14 @@ public class WebDriverWrapper implements WebDriver {
 
 	@Override
 	public void quit() {
-		_webDriver.quit();
+		try {
+			_webDriver.quit();
+		}
+		catch (ProcessStillAliveException psae) {
+			BrowserCommands.killBrowser();
+
+			throw psae;
+		}
 	}
 
 	@Override
