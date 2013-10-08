@@ -384,13 +384,6 @@ public class DLFileEntryLocalServiceImpl
 
 			dlFileVersionPersistence.update(latestDLFileVersion);
 
-			// File
-
-			DLStoreUtil.updateFileVersion(
-				user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
-				dlFileEntry.getName(),
-				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION, version);
-
 			// Folder
 
 			if (dlFileEntry.getFolderId() !=
@@ -403,6 +396,13 @@ public class DLFileEntryLocalServiceImpl
 
 				dlFolderPersistence.update(dlFolder);
 			}
+
+			// File
+
+			DLStoreUtil.updateFileVersion(
+				user.getCompanyId(), dlFileEntry.getDataRepositoryId(),
+				dlFileEntry.getName(),
+				DLFileEntryConstants.PRIVATE_WORKING_COPY_VERSION, version);
 		}
 
 		// Workflow
