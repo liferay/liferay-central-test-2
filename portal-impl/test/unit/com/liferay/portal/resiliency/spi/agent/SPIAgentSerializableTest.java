@@ -303,8 +303,6 @@ public class SPIAgentSerializableTest {
 
 			});
 
-		mockHttpServletRequest.setSession(mockHttpSession);
-
 		Portlet portlet = new PortletImpl() {
 
 			@Override
@@ -315,6 +313,8 @@ public class SPIAgentSerializableTest {
 		};
 
 		mockHttpServletRequest.setAttribute(WebKeys.SPI_AGENT_PORTLET, portlet);
+
+		mockHttpServletRequest.setSession(mockHttpSession);
 
 		Map<String, Serializable> sessionAttributes =
 			SPIAgentSerializable.extractSessionAttributes(
@@ -350,7 +350,7 @@ public class SPIAgentSerializableTest {
 			portletSessionAttributesName1,
 			sessionAttributes.get(portletSessionAttributesName1));
 
-		// Without log, with non-empty portlet session
+		// Without log, with nonempty portlet session
 
 		portletMockHttpSession.setAttribute(
 			serializeableAttribute, serializeableAttribute);
@@ -415,7 +415,7 @@ public class SPIAgentSerializableTest {
 			portletSessionAttributesName1,
 			sessionAttributes.get(portletSessionAttributesName1));
 
-		// With log, with non-empty portlet session
+		// With log, with nonempty portlet session
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			SPIAgentSerializable.class.getName(), Level.WARNING);
