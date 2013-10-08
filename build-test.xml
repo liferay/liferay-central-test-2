@@ -545,6 +545,12 @@
 		</antcall>
 
 		<antcall target="build-test-ant-script">
+			<param name="test.ant.script.command" value="end-user-administration-p4" />
+			<param name="test.ant.script.database.minimal" value="true" />
+			<param name="test.ant.script.suite" value="EndUserAdministrationP4TestSuite" />
+		</antcall>
+
+		<antcall target="build-test-ant-script">
 			<param name="test.ant.script.command" value="end-user-administration-p5" />
 			<param name="test.ant.script.database.minimal" value="true" />
 			<param name="test.ant.script.properties" value="users.screen.name.allow.numeric=true" />
