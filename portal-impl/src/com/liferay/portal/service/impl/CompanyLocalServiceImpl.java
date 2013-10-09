@@ -937,7 +937,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		validateVirtualHost(company.getWebId(), virtualHostname);
-		
+
 		if (PropsValues.MAIL_MX_UPDATE) {
 			validateMX(mx);
 		}
@@ -1461,6 +1461,33 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
+	protected void validateLanguageIds(String languageIds)
+		throws PortalException {
+
+		String[] languageIdsArray = StringUtil.split(
+			languageIds, StringPool.COMMA);
+
+		for (String languageId : languageIdsArray) {
+			if (!ArrayUtil.contains(PropsValues.LOCALES, languageId)) {
+				LocaleException le = new LocaleException(
+					LocaleException.TYPE_DISPLAY_SETTINGS);
+
+				le.setSourceAvailableLocales(
+					LocaleUtil.fromLanguageIds(PropsValues.LOCALES));
+				le.setTargetAvailableLocales(
+					LocaleUtil.fromLanguageIds(languageIdsArray));
+
+				throw le;
+			}
+		}
+	}
+
+	protected void validateMX(String mx) throws PortalException {
+		if (Validator.isNull(mx) || !Validator.isDomain(mx)) {
+			throw new CompanyMxException();
+		}
+	}
+
 	protected void validateName(long companyId, String name)
 		throws PortalException, SystemException {
 
@@ -1500,33 +1527,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				}
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
-			}
-		}
-	}
-	
-	protected void validateMX(String mx) throws PortalException {
-		if (Validator.isNull(mx) || !Validator.isDomain(mx)) {
-			throw new CompanyMxException();
-		}
-	}
-
-	protected void validateLanguageIds(String languageIds)
-		throws PortalException {
-
-		String[] languageIdsArray = StringUtil.split(
-			languageIds, StringPool.COMMA);
-
-		for (String languageId : languageIdsArray) {
-			if (!ArrayUtil.contains(PropsValues.LOCALES, languageId)) {
-				LocaleException le = new LocaleException(
-					LocaleException.TYPE_DISPLAY_SETTINGS);
-
-				le.setSourceAvailableLocales(
-					LocaleUtil.fromLanguageIds(PropsValues.LOCALES));
-				le.setTargetAvailableLocales(
-					LocaleUtil.fromLanguageIds(languageIdsArray));
-
-				throw le;
 			}
 		}
 	}
