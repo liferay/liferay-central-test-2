@@ -67,8 +67,8 @@ public class ThemeExporter {
 		throws Exception {
 
 		boolean exportThemeSettings = MapUtil.getBoolean(
-				portletDataContext.getParameterMap(),
-				PortletDataHandlerKeys.THEME_REFERENCE);
+			portletDataContext.getParameterMap(),
+			PortletDataHandlerKeys.THEME_REFERENCE);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Export theme settings " + exportThemeSettings);
@@ -90,8 +90,8 @@ public class ThemeExporter {
 		}
 
 		exportThemeSettings(
-				portletDataContext, stagedTheme.getThemeId(),
-				layoutSetBranch.getColorSchemeId(), layoutSetBranch.getCss());
+			portletDataContext, stagedTheme.getThemeId(),
+			layoutSetBranch.getColorSchemeId(), layoutSetBranch.getCss());
 	}
 
 	protected void exportThemeSettings(
@@ -101,6 +101,7 @@ public class ThemeExporter {
 
 		Element exportDataRootElement =
 			portletDataContext.getExportDataRootElement();
+
 		Element headerElement = exportDataRootElement.element("header");
 
 		headerElement.addAttribute("theme-id", themeId);

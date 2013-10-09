@@ -709,7 +709,7 @@ public class StagingImpl implements Staging {
 						locale,
 						"the-referenced-theme-x-is-not-deployed-in-the-" +
 							"current-environment",
-						missingReference.getClassPk()));
+						missingReference.getClassPK()));
 			}
 			else if (referrers.size() == 1) {
 				Set<Map.Entry<String, String>> referrerDisplayNames =
