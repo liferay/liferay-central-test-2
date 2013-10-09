@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.layoutsadmin.lar;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
@@ -36,8 +34,7 @@ public class StagedThemeStagedModelDataHandler
 
 	@Override
 	public void deleteStagedModel(
-			String uuid, long groupId, String className, String extraData)
-		throws PortalException, SystemException {
+		String uuid, long groupId, String className, String extraData) {
 	}
 
 	@Override
@@ -72,7 +69,9 @@ public class StagedThemeStagedModelDataHandler
 				portletDataContext.getCompanyId());
 
 			for (Theme theme : themes) {
-				if (theme.getThemeId().equals(classPK)) {
+				String themeId = theme.getThemeId();
+
+				if (themeId.equals(classPK)) {
 					return true;
 				}
 			}
@@ -83,14 +82,12 @@ public class StagedThemeStagedModelDataHandler
 
 	@Override
 	protected void doExportStagedModel(
-			PortletDataContext portletDataContext, StagedTheme stagedTheme)
-		throws Exception {
+		PortletDataContext portletDataContext, StagedTheme stagedTheme) {
 	}
 
 	@Override
 	protected void doImportStagedModel(
-			PortletDataContext portletDataContext, StagedTheme stagedTheme)
-		throws Exception {
+		PortletDataContext portletDataContext, StagedTheme stagedTheme) {
 	}
 
 }
