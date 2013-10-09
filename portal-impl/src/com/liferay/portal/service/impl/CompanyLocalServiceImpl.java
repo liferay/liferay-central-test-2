@@ -144,7 +144,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyWebIdException();
 		}
 
-		validate(webId, virtualHostname, mx, true);
+		validateVirtualHost(webId, virtualHostname);
+		validateMX(mx);
 
 		Company company = checkCompany(webId, mx, shardName);
 
@@ -157,7 +158,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Virtual host
 
-		updateVirtualHost(company.getCompanyId(), virtualHostname);
+		updateVirtualHostname(company.getCompanyId(), virtualHostname);
 
 		return company;
 	}
@@ -254,7 +255,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			// Virtual host
 
 			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
-				updateVirtualHost(companyId, _DEFAULT_VIRTUAL_HOST);
+				updateVirtualHostname(companyId, _DEFAULT_VIRTUAL_HOST);
 			}
 
 			// Demo settings
@@ -262,7 +263,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			if (webId.equals("liferay.net")) {
 				company = companyPersistence.findByWebId(webId);
 
-				updateVirtualHost(companyId, "demo.liferay.net");
+				updateVirtualHostname(companyId, "demo.liferay.net");
 
 				updateSecurity(
 					companyId, CompanyConstants.AUTH_TYPE_EA, true, true, true,
@@ -874,11 +875,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(
-			company.getWebId(), virtualHostname, mx,
-			PropsValues.MAIL_MX_UPDATE);
+		validateVirtualHost(company.getWebId(), virtualHostname);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
+			validateMX(mx);
+
 			company.setMx(mx);
 		}
 
@@ -889,7 +890,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Virtual host
 
-		updateVirtualHost(companyId, virtualHostname);
+		updateVirtualHostname(companyId, virtualHostname);
 
 		return company;
 	}
@@ -935,10 +936,13 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-		validate(
-			company.getWebId(), virtualHostname, mx,
-			PropsValues.MAIL_MX_UPDATE);
-		validate(companyId, name);
+		validateVirtualHost(company.getWebId(), virtualHostname);
+		
+		if (PropsValues.MAIL_MX_UPDATE) {
+			validateMX(mx);
+		}
+
+		validateName(companyId, name);
 
 		if (PropsValues.MAIL_MX_UPDATE) {
 			company.setMx(mx);
@@ -956,7 +960,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		// Virtual host
 
-		updateVirtualHost(companyId, virtualHostname);
+		updateVirtualHostname(companyId, virtualHostname);
 
 		return company;
 	}
@@ -1428,7 +1432,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		accountPersistence.update(account);
 	}
 
-	protected void updateVirtualHost(long companyId, String virtualHostname)
+	protected void updateVirtualHostname(long companyId, String virtualHostname)
 		throws CompanyVirtualHostException, SystemException {
 
 		if (Validator.isNotNull(virtualHostname)) {
@@ -1457,7 +1461,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(long companyId, String name)
+	protected void validateName(long companyId, String name)
 		throws PortalException, SystemException {
 
 		Group group = groupLocalService.fetchGroup(companyId, name);
@@ -1467,8 +1471,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 	}
 
-	protected void validate(
-			String webId, String virtualHostname, String mx, boolean validateMx)
+	protected void validateVirtualHost(String webId, String virtualHostname)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(virtualHostname)) {
@@ -1492,15 +1495,17 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				Company virtualHostnameCompany =
 					companyPersistence.findByPrimaryKey(companyId);
 
-				if (!virtualHostnameCompany.getWebId().equals(webId)) {
+				if (!webId.equals(virtualHostnameCompany.getWebId())) {
 					throw new CompanyVirtualHostException();
 				}
 			}
 			catch (NoSuchVirtualHostException nsvhe) {
 			}
 		}
-
-		if (validateMx && (Validator.isNull(mx) || !Validator.isDomain(mx))) {
+	}
+	
+	protected void validateMX(String mx) throws PortalException {
+		if (Validator.isNull(mx) || !Validator.isDomain(mx)) {
 			throw new CompanyMxException();
 		}
 	}
