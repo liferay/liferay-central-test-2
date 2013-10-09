@@ -141,10 +141,8 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				pathNoQueryString = _path.substring(0, pos);
 				queryString = _path.substring(pos + 1);
 
-				HttpServletRequest request = (HttpServletRequest)servletRequest;
-
 				servletRequest = DynamicServletRequest.addQueryString(
-					request, queryString);
+					(HttpServletRequest)servletRequest, queryString);
 			}
 
 			Set<String> servletURLPatterns = getServletURLPatterns(
