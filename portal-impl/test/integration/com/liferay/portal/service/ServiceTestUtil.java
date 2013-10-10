@@ -124,7 +124,7 @@ public class ServiceTestUtil {
 	}
 
 	public static void destroyServices() {
-		_deleteDLDirectories();
+		_deleteDirectories();
 	}
 
 	public static SearchContext getSearchContext() throws Exception {
@@ -302,7 +302,9 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
-		_deleteDLDirectories();
+		// Directories 
+
+		_deleteDirectories();
 
 		// Lucene
 
@@ -446,7 +448,7 @@ public class ServiceTestUtil {
 		}
 	}
 
-	private static void _deleteDLDirectories() {
+	private static void _deleteDirectories() {
 		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
 		FileUtil.deltree(
