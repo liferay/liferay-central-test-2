@@ -251,13 +251,14 @@ public class EditTemplateAction extends PortletAction {
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
 		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
+			uploadPortletRequest, "portletResource");
 
 		PortletPreferences portletPreferences = null;
 
 		if (Validator.isNotNull(portletResource)) {
 			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+				(ThemeDisplay)uploadPortletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 
 			portletPreferences =
 				PortletPreferencesFactoryUtil.getStrictPortletSetup(
