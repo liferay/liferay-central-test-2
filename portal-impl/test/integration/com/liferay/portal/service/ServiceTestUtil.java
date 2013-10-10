@@ -302,7 +302,7 @@ public class ServiceTestUtil {
 			e.printStackTrace();
 		}
 
-		// Directories 
+		// Directories
 
 		_deleteDirectories();
 
