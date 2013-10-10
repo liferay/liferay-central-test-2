@@ -41,10 +41,8 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.StrictPortletPreferencesImpl;
 import com.liferay.portlet.asset.AssetCategoryException;
 import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
@@ -542,25 +540,6 @@ public class EditArticleAction extends PortletAction {
 		UploadPortletRequest uploadPortletRequest =
 			PortalUtil.getUploadPortletRequest(actionRequest);
 
-		String portletResource = ParamUtil.getString(
-			uploadPortletRequest, "portletResource");
-
-		PortletPreferences portletPreferences = null;
-
-		if (Validator.isNotNull(portletResource)) {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)uploadPortletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
-			portletPreferences =
-				PortletPreferencesFactoryUtil.getStrictPortletSetup(
-					themeDisplay.getLayout(), portletResource);
-
-			if (portletPreferences instanceof StrictPortletPreferencesImpl) {
-				throw new PrincipalException();
-			}
-		}
-
 		String cmd = ParamUtil.getString(uploadPortletRequest, Constants.CMD);
 
 		long groupId = ParamUtil.getLong(uploadPortletRequest, "groupId");
@@ -629,7 +608,7 @@ public class EditArticleAction extends PortletAction {
 			}
 			catch (NoSuchStructureException nsse) {
 				ThemeDisplay themeDisplay =
-					(ThemeDisplay)actionRequest.getAttribute(
+					(ThemeDisplay)uploadPortletRequest.getAttribute(
 						WebKeys.THEME_DISPLAY);
 
 				ddmStructure =
@@ -875,12 +854,18 @@ public class EditArticleAction extends PortletAction {
 
 		// Journal content
 
+		PortletPreferences portletPreferences = getStrictPortletSetup(
+			actionRequest);
+
 		if (portletPreferences != null) {
 			portletPreferences.setValue(
 				"groupId", String.valueOf(article.getGroupId()));
 			portletPreferences.setValue("articleId", article.getArticleId());
 
 			portletPreferences.store();
+
+			String portletResource = ParamUtil.getString(
+				actionRequest, "portletResource");
 
 			updateContentSearch(
 				actionRequest, portletResource, article.getArticleId());
