@@ -204,14 +204,12 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(_postfixDirections.isEmpty());
 		Assert.assertTrue(_prefixDirections.isEmpty());
 		Assert.assertEquals(Direction.REQUEST, _exactDirections.get("name1"));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"Name1", Direction.REQUEST, MatchType.EXACT));
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name1", Direction.REQUEST, MatchType.EXACT));
-
 		Assert.assertTrue(_exactDirections.isEmpty());
 
 		DistributedRegistry.registerDistributed(
@@ -220,7 +218,6 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name1", null, MatchType.EXACT));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"name1", null, MatchType.EXACT));
@@ -235,14 +232,12 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(_prefixDirections.isEmpty());
 		Assert.assertEquals(
 			Direction.RESPONSE, _postfixDirections.get("name2"));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"Name2", Direction.RESPONSE, MatchType.POSTFIX));
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name2", Direction.RESPONSE, MatchType.POSTFIX));
-
 		Assert.assertTrue(_postfixDirections.isEmpty());
 
 		DistributedRegistry.registerDistributed(
@@ -251,7 +246,6 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name2", null, MatchType.POSTFIX));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"name2", null, MatchType.POSTFIX));
@@ -265,14 +259,12 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(_exactDirections.isEmpty());
 		Assert.assertTrue(_postfixDirections.isEmpty());
 		Assert.assertEquals(Direction.DUPLEX, _prefixDirections.get("name3"));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"Name3", Direction.DUPLEX, MatchType.PREFIX));
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name3", Direction.DUPLEX, MatchType.PREFIX));
-
 		Assert.assertTrue(_prefixDirections.isEmpty());
 
 		DistributedRegistry.registerDistributed(
@@ -281,7 +273,6 @@ public class DistributedRegistryTest {
 		Assert.assertTrue(
 			DistributedRegistry.unregisterDistributed(
 				"name3", null, MatchType.PREFIX));
-
 		Assert.assertFalse(
 			DistributedRegistry.unregisterDistributed(
 				"name3", null, MatchType.PREFIX));
