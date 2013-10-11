@@ -101,8 +101,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	public static long COMPANYID_COLUMN_BITMASK = 1L;
 	public static long NAME_COLUMN_BITMASK = 2L;
 	public static long PARENTORGANIZATIONID_COLUMN_BITMASK = 4L;
-	public static long TREEPATH_COLUMN_BITMASK = 8L;
-	public static long UUID_COLUMN_BITMASK = 16L;
+	public static long UUID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -485,17 +484,7 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 
 	@Override
 	public void setTreePath(String treePath) {
-		_columnBitmask |= TREEPATH_COLUMN_BITMASK;
-
-		if (_originalTreePath == null) {
-			_originalTreePath = _treePath;
-		}
-
 		_treePath = treePath;
-	}
-
-	public String getOriginalTreePath() {
-		return GetterUtil.getString(_originalTreePath);
 	}
 
 	@JSON
@@ -717,8 +706,6 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 		organizationModelImpl._originalParentOrganizationId = organizationModelImpl._parentOrganizationId;
 
 		organizationModelImpl._setOriginalParentOrganizationId = false;
-
-		organizationModelImpl._originalTreePath = organizationModelImpl._treePath;
 
 		organizationModelImpl._originalName = organizationModelImpl._name;
 
@@ -952,7 +939,6 @@ public class OrganizationModelImpl extends BaseModelImpl<Organization>
 	private long _originalParentOrganizationId;
 	private boolean _setOriginalParentOrganizationId;
 	private String _treePath;
-	private String _originalTreePath;
 	private String _name;
 	private String _originalName;
 	private String _type;
