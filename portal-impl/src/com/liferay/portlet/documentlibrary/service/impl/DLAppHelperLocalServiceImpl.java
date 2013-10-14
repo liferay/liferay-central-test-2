@@ -435,7 +435,7 @@ public class DLAppHelperLocalServiceImpl
 				dlFileShortcutLocalService.disableFileShortcuts(
 					dlFileEntry.getFileEntryId());
 
-				// File Versions
+				// File versions
 
 				List<DLFileVersion> dlFileVersions =
 					dlFileVersionLocalService.getFileVersions(
@@ -790,6 +790,11 @@ public class DLAppHelperLocalServiceImpl
 					continue;
 				}
 
+				// File shortcut
+
+				dlFileShortcutLocalService.enableFileShortcuts(
+					dlFileEntry.getFileEntryId());
+
 				// File versions
 
 				List<DLFileVersion> dlFileVersions =
@@ -798,6 +803,9 @@ public class DLAppHelperLocalServiceImpl
 						WorkflowConstants.STATUS_IN_TRASH);
 
 				for (DLFileVersion dlFileVersion : dlFileVersions) {
+				
+					// File version
+
 					TrashVersion trashVersion =
 						trashVersionLocalService.fetchVersion(
 							trashEntryId, DLFileVersion.class.getName(),
@@ -820,11 +828,6 @@ public class DLAppHelperLocalServiceImpl
 							trashVersion);
 					}
 				}
-
-				// File shortcut
-
-				dlFileShortcutLocalService.enableFileShortcuts(
-					dlFileEntry.getFileEntryId());
 
 				// Asset
 
@@ -927,22 +930,20 @@ public class DLAppHelperLocalServiceImpl
 		TrashEntry trashEntry = trashEntryLocalService.getEntry(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
-		// File version
-
 		dlFileEntryLocalService.updateStatus(
 			userId, fileVersion.getFileVersionId(), trashEntry.getStatus(),
 			new HashMap<String, Serializable>(), new ServiceContext());
 
 		if (DLAppHelperThreadLocal.isEnabled()) {
 
+			// File rank
+
+			dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
+
 			// File shortcut
 
 			dlFileShortcutLocalService.enableFileShortcuts(
 				fileEntry.getFileEntryId());
-
-			// File rank
-
-			dlFileRankLocalService.enableFileRanks(fileEntry.getFileEntryId());
 
 			// Sync
 
