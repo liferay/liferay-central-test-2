@@ -89,7 +89,9 @@ public class JavaScriptExecutor extends BaseScriptingExecutor {
 					scriptable, outputName);
 
 				if (property instanceof Wrapper) {
-					property = ((Wrapper)property).unwrap();
+					Wrapper wrapper = (Wrapper)property;
+
+					property = wrapper.unwrap();
 				}
 
 				outputObjects.put(outputName, property);
