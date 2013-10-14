@@ -574,7 +574,7 @@ public class SPIAgentRequestTest {
 
 		Assert.assertEquals(0, parameter3.length);
 
-		// Remote info
+		// Remote address, host, port, and user
 
 		Assert.assertEquals(
 			_REMOTE_ADDR, populatedHttpServletRequest.getRemoteAddr());
