@@ -59,8 +59,6 @@ double version = BeanParamUtil.getDouble(article, request, "version", JournalArt
 
 String structureId = BeanParamUtil.getString(article, request, "structureId");
 
-String templateId = BeanParamUtil.getString(article, request, "templateId");
-
 DDMStructure ddmStructure = null;
 
 long ddmStructureId = ParamUtil.getLong(request, "ddmStructureId");
@@ -79,6 +77,8 @@ else if (Validator.isNotNull(structureId)) {
 	catch (NoSuchStructureException nsse) {
 	}
 }
+
+String templateId = BeanParamUtil.getString(article, request, "templateId");
 
 DDMTemplate ddmTemplate = null;
 
