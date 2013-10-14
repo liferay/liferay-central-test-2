@@ -33,7 +33,7 @@ public class WorkflowDefinitionManagerProxyBean
 
 	@Override
 	public WorkflowDefinition deployWorkflowDefinition(
-		long companyId, long userId, String title, byte[] definitionData) {
+		long companyId, long userId, String title, byte[] bytes) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -126,7 +126,7 @@ public class WorkflowDefinitionManagerProxyBean
 	}
 
 	@Override
-	public void validateWorkflowDefinition(byte[] definitionData) {
+	public void validateWorkflowDefinition(byte[] bytes) {
 		throw new UnsupportedOperationException();
 	}
 

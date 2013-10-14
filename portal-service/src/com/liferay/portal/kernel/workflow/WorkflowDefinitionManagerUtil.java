@@ -30,11 +30,11 @@ import java.util.List;
 public class WorkflowDefinitionManagerUtil {
 
 	public static WorkflowDefinition deployWorkflowDefinition(
-			long companyId, long userId, String title, byte[] definitionData)
+			long companyId, long userId, String title, byte[] bytes)
 		throws WorkflowException {
 
 		return getWorkflowDefinitionManager().deployWorkflowDefinition(
-			companyId, userId, title, definitionData);
+			companyId, userId, title, bytes);
 	}
 
 	public static int getActiveWorkflowDefinitionCount(long companyId)
@@ -150,11 +150,10 @@ public class WorkflowDefinitionManagerUtil {
 			companyId, userId, name, version, title);
 	}
 
-	public static void validateWorkflowDefinition(byte[] definitionData)
+	public static void validateWorkflowDefinition(byte[] bytes)
 		throws WorkflowException {
 
-		getWorkflowDefinitionManager().validateWorkflowDefinition(
-			definitionData);
+		getWorkflowDefinitionManager().validateWorkflowDefinition(bytes);
 	}
 
 	public void setWorkflowDefinitionManager(
