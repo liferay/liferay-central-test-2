@@ -163,11 +163,7 @@ public class MethodParameter {
 				try {
 					types[i] = contextClassLoader.loadClass(className);
 				}
-				catch (ClassNotFoundException e) {
-
-					// starting from JDK6, native array classes can be loaded
-					// with Class.forName()
-
+				catch (ClassNotFoundException cnfe) {
 					types[i] = Class.forName(className);
 				}
 			}
