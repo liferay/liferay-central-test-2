@@ -14,6 +14,7 @@
 
 package com.liferay.portal.jsonwebservice;
 
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.service.ServiceContext;
 
@@ -46,23 +47,23 @@ public class FooService {
 	public static String complexWithArrays(
 		List<Long[]> longArrays, Map<String, String[]> mapNames) {
 
-		StringBuilder result = new StringBuilder();
+		StringBundler sb = new StringBundler();
 
 		for (Long[] longArray : longArrays) {
-			result.append(Arrays.toString(longArray));
-			result.append('|');
+			sb.append(Arrays.toString(longArray));
+			sb.append('|');
 		}
 
-		result.append('*');
+		sb.append('*');
 
 		for (Map.Entry<String, String[]> entry : mapNames.entrySet()) {
-			result.append(entry.getKey());
-			result.append("=");
-			result.append(Arrays.toString(entry.getValue()));
-			result.append('|');
+			sb.append(entry.getKey());
+			sb.append("=");
+			sb.append(Arrays.toString(entry.getValue()));
+			sb.append('|');
 		}
 
-		return result.toString();
+		return sb.toString();
 	}
 
 	public static FooData getFooData(int id) {

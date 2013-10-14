@@ -538,7 +538,8 @@ public class JSONWebServiceInvokerTest extends BaseJSONWebServiceTestCase {
 			"longArrays",
 			new long[][] {new long[] {1, 2, 3}, new long[] {8, 9}});
 
-		HashMap<String, String[]> names = new HashMap<String, String[]>();
+		Map<String, String[]> names = new HashMap<String, String[]>();
+
 		names.put("p1", new String[] {"one", "two"});
 
 		params.put("mapNames", names);
