@@ -834,6 +834,7 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 		DDMXMLImpl ddmXMLImpl = new DDMXMLImpl();
 
 		XMLSchemaImpl xmlSchema = new XMLSchemaImpl();
+
 		xmlSchema.setSchemaLanguage("http://www.w3.org/2001/XMLSchema");
 		xmlSchema.setSystemId(
 			"http://www.liferay.com/dtd/liferay-ddm-structure_6_2_0.xsd");
