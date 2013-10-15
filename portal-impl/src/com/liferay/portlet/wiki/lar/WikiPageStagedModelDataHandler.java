@@ -175,7 +175,6 @@ public class WikiPageStagedModelDataHandler
 
 			for (Element attachmentElement : attachmentElements) {
 				String path = attachmentElement.attributeValue("path");
-				String binPath = attachmentElement.attributeValue("bin-path");
 
 				FileEntry fileEntry =
 					(FileEntry)portletDataContext.getZipEntryAsObject(path);
@@ -184,6 +183,9 @@ public class WikiPageStagedModelDataHandler
 				String mimeType = null;
 
 				try {
+					String binPath = attachmentElement.attributeValue(
+						"bin-path");
+
 					if (Validator.isNull(binPath) &&
 						portletDataContext.isPerformDirectBinaryImport()) {
 
@@ -203,7 +205,7 @@ public class WikiPageStagedModelDataHandler
 					if (inputStream == null) {
 						if (_log.isWarnEnabled()) {
 							_log.warn(
-								"Attachment cannot be imported for file " +
+								"Unable to import attachment for file entry " +
 									fileEntry.getFileEntryId());
 						}
 
