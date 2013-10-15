@@ -97,10 +97,9 @@ public class PortletPreferencesLocalServiceStagingAdvice
 
 		long plid = 0;
 
-		if (arguments.length == 4) {
-			plid = (Long)arguments[2];
-		}
-		else if ((arguments.length == 3) && (arguments[2] instanceof Long)) {
+		if (((arguments.length == 3) || (arguments.length == 4)) &&
+			(arguments[2] instanceof Long)) {
+
 			plid = (Long)arguments[2];
 		}
 
