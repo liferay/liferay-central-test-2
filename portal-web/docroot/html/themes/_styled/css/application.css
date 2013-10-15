@@ -1,6 +1,6 @@
-@import "compass";
-
 @import "aui/alloy-font-awesome/scss/variables";
+
+@import "compass";
 
 /* ---------- Dragging/sorting indicators ---------- */
 
