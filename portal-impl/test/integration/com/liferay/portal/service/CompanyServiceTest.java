@@ -57,8 +57,10 @@ public class CompanyServiceTest {
 
 	@Before
 	public void setUp() {
-		mockServletContext = new MockServletContext(
-			getResourceBasePath(), new FileSystemResourceLoader());
+		File file = new File("portal-web/docroot");
+
+		_mockServletContext = new MockServletContext(
+			"file:" + file.getAbsolutePath(), new FileSystemResourceLoader());
 	}
 
 	@Test
@@ -121,12 +123,12 @@ public class CompanyServiceTest {
 
 		long userId = UserLocalServiceUtil.getDefaultUserId(companyId);
 
-		LayoutSetPrototype layoutSetPrototype = addLayoutSetPrototype(
-			companyId, userId, ServiceTestUtil.randomString());
-
 		Group group = GroupTestUtil.addGroup(
 			companyId, userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
+
+		LayoutSetPrototype layoutSetPrototype = addLayoutSetPrototype(
+			companyId, userId, ServiceTestUtil.randomString());
 
 		SitesUtil.updateLayoutSetPrototypesLinks(
 			group, layoutSetPrototype.getLayoutSetPrototypeId(), 0, true,
@@ -146,7 +148,7 @@ public class CompanyServiceTest {
 	}
 
 	@Test
-	public void testAddandDeleteCompanyWithSubGroup() throws Exception {
+	public void testAddandDeleteCompanyWithParentGroup() throws Exception {
 		Company company = addCompany();
 
 		long companyId = company.getCompanyId();
@@ -157,12 +159,12 @@ public class CompanyServiceTest {
 			companyId, userId, GroupConstants.DEFAULT_PARENT_GROUP_ID,
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
 
-		Group subGroup = GroupTestUtil.addGroup(
+		Group group = GroupTestUtil.addGroup(
 			companyId, userId, parentGroup.getGroupId(),
 			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
 
 		addUser(
-			companyId, userId, subGroup.getGroupId(),
+			companyId, userId, group.getGroupId(),
 			getServiceContext(companyId));
 
 		CompanyLocalServiceUtil.deleteCompany(company.getCompanyId());
@@ -172,9 +174,9 @@ public class CompanyServiceTest {
 
 		Assert.assertNull(parentGroup);
 
-		subGroup = GroupLocalServiceUtil.fetchGroup(subGroup.getGroupId());
+		group = GroupLocalServiceUtil.fetchGroup(group.getGroupId());
 
-		Assert.assertNull(subGroup);
+		Assert.assertNull(group);
 	}
 
 	@Test(expected = RequiredCompanyException.class)
@@ -189,7 +191,7 @@ public class CompanyServiceTest {
 			"test.com", "test.com", "test.com", PropsValues.SHARD_DEFAULT_NAME,
 			false, 0, true);
 
-		PortalInstances.initCompany(mockServletContext, "test.com");
+		PortalInstances.initCompany(_mockServletContext, "test.com");
 
 		return company;
 	}
@@ -217,14 +219,9 @@ public class CompanyServiceTest {
 
 		return UserTestUtil.addUser(
 			companyId, userId, ServiceTestUtil.randomString(), false,
-			LocaleUtil.getDefault(), "ServiceTestSuite", "ServiceTestSuite",
-			new long[] {groupId}, serviceContext);
-	}
-
-	protected String getResourceBasePath() {
-		File file = new File("portal-web/docroot");
-
-		return "file:" + file.getAbsolutePath();
+			LocaleUtil.getDefault(), ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), new long[] {groupId},
+			serviceContext);
 	}
 
 	protected ServiceContext getServiceContext(long companyId) {
@@ -237,6 +234,6 @@ public class CompanyServiceTest {
 		return serviceContext;
 	}
 
-	private MockServletContext mockServletContext;
+	private MockServletContext _mockServletContext;
 
 }
