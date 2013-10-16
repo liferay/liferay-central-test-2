@@ -3603,7 +3603,18 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
-		// Subscriptions
+		userGroupRoleLocalService.deleteUserGroupRoles(
+			userIds, groupId, RoleConstants.TYPE_SITE);
+
+		userLocalService.unsetGroupTeamsUsers(groupId, userIds);
+
+		groupPersistence.removeUsers(groupId, userIds);
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
+
+		indexer.reindex(userIds);
+
+		PermissionCacheUtil.clearCache();
 
 		Callable<Void> callable = new Callable<Void>() {
 
@@ -3623,19 +3634,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		};
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
-
-		userGroupRoleLocalService.deleteUserGroupRoles(
-			userIds, groupId, RoleConstants.TYPE_SITE);
-
-		userLocalService.unsetGroupTeamsUsers(groupId, userIds);
-
-		groupPersistence.removeUsers(groupId, userIds);
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
-
-		indexer.reindex(userIds);
-
-		PermissionCacheUtil.clearCache();
 	}
 
 	/**
@@ -3656,7 +3654,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		final Group group = organization.getGroup();
 
-		// Subscriptions
+		userGroupRoleLocalService.deleteUserGroupRoles(
+			userIds, group.getGroupId(), RoleConstants.TYPE_ORGANIZATION);
+
+		organizationPersistence.removeUsers(organizationId, userIds);
+
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
+
+		indexer.reindex(userIds);
+
+		PermissionCacheUtil.clearCache();
 
 		Callable<Void> callable = new Callable<Void>() {
 
@@ -3676,17 +3683,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		};
 
 		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
-
-		userGroupRoleLocalService.deleteUserGroupRoles(
-			userIds, group.getGroupId(), RoleConstants.TYPE_ORGANIZATION);
-
-		organizationPersistence.removeUsers(organizationId, userIds);
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(User.class);
-
-		indexer.reindex(userIds);
-
-		PermissionCacheUtil.clearCache();
 	}
 
 	/**
