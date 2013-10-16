@@ -68,8 +68,6 @@ public class JGroupsCacheManagerPeerProviderFactory
 			_log.debug("Channel properties " + channelProperties);
 		}
 
-		_initialized = true;
-
 		return new JGroupsManager(cacheManager, clusterName, channelProperties);
 	}
 
@@ -77,7 +75,5 @@ public class JGroupsCacheManagerPeerProviderFactory
 
 	private static Log _log = LogFactoryUtil.getLog(
 		JGroupsCacheManagerPeerProviderFactory.class);
-
-	private static boolean _initialized;
 
 }
