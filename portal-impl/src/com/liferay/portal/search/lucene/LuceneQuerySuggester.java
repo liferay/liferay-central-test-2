@@ -65,10 +65,10 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 		_boostStart = boostStart;
 	}
 
-	public void setQuerySuggestionsMaxNGramLength(
-		int querySuggestionsMaxNGramLength) {
+	public void setQuerySuggestionMaxNGramLength(
+		int querySuggestionMaxNGramLength) {
 
-		_querySuggestionsMaxNGramLength = querySuggestionsMaxNGramLength;
+		_querySuggestionMaxNGramLength = querySuggestionMaxNGramLength;
 	}
 
 	public void setStringDistance(StringDistance stringDistance) {
@@ -115,7 +115,7 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 				searchContext.getGroupIds(), searchContext.getKeywords(),
 				searchContext.getLanguageId(),
 				SuggestionConstants.TYPE_QUERY_SUGGESTION,
-				_querySuggestionsMaxNGramLength);
+				_querySuggestionMaxNGramLength);
 
 			return search(
 				indexSearcher, suggestKeywordQuery, localizedKeywordFieldName,
@@ -364,7 +364,7 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 
 	private float _boostEnd = 1.0f;
 	private float _boostStart = 2.0f;
-	private int _querySuggestionsMaxNGramLength = 50;
+	private int _querySuggestionMaxNGramLength = 50;
 	private RelevancyChecker _relevancyChecker = new DefaultRelevancyChecker();
 	private StringDistance _stringDistance;
 	private Comparator<SuggestWord> _suggestWordComparator =

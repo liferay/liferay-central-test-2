@@ -57,10 +57,7 @@ public abstract class BaseSpellCheckIndexWriter
 			!keywordType.equals(SuggestionConstants.TYPE_SPELL_CHECKER)) {
 
 			throw new IllegalArgumentException(
-				"Invalid keyword type: " + keywordType +
-					". Valid values are: " +
-					SuggestionConstants.TYPE_QUERY_SUGGESTION + " or " +
-					SuggestionConstants.TYPE_SPELL_CHECKER);
+				"Invalid keyword type " + keywordType);
 		}
 
 		long groupId = 0;
@@ -73,7 +70,7 @@ public abstract class BaseSpellCheckIndexWriter
 
 		String keywordFieldName = Field.KEYWORD_SEARCH;
 		String typeFieldValue = SuggestionConstants.TYPE_QUERY_SUGGESTION;
-		int maxNGramLength = _querySuggestionsMaxNGramLength;
+		int maxNGramLength = _querySuggestionMaxNGramLength;
 
 		if (keywordType.equals(SuggestionConstants.TYPE_SPELL_CHECKER)) {
 			keywordFieldName = Field.SPELL_CHECK_WORD;
@@ -103,7 +100,7 @@ public abstract class BaseSpellCheckIndexWriter
 					PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
 					Field.KEYWORD_SEARCH,
 					SuggestionConstants.TYPE_QUERY_SUGGESTION,
-					_querySuggestionsMaxNGramLength);
+					_querySuggestionMaxNGramLength);
 			}
 		}
 		catch (Exception e) {
@@ -120,7 +117,7 @@ public abstract class BaseSpellCheckIndexWriter
 				searchContext.getCompanyId(), searchContext.getLanguageId(),
 				PropsKeys.INDEX_SEARCH_QUERY_SUGGESTION_DICTIONARY,
 				Field.KEYWORD_SEARCH, SuggestionConstants.TYPE_QUERY_SUGGESTION,
-				_querySuggestionsMaxNGramLength);
+				_querySuggestionMaxNGramLength);
 		}
 		catch (Exception e) {
 			throw new SearchException(e);
@@ -161,10 +158,10 @@ public abstract class BaseSpellCheckIndexWriter
 		}
 	}
 
-	public void setQuerySuggestionsMaxNGramLength(
-		int querySuggestionsMaxNGramLength) {
+	public void setQuerySuggestionMaxNGramLength(
+		int querySuggestionMaxNGramLength) {
 
-		_querySuggestionsMaxNGramLength = querySuggestionsMaxNGramLength;
+		_querySuggestionMaxNGramLength = querySuggestionMaxNGramLength;
 	}
 
 	protected URL getResource(String name) {
@@ -333,6 +330,6 @@ public abstract class BaseSpellCheckIndexWriter
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseSpellCheckIndexWriter.class);
 
-	private int _querySuggestionsMaxNGramLength = 50;
+	private int _querySuggestionMaxNGramLength = 50;
 
 }
