@@ -21,10 +21,10 @@ import com.liferay.portal.kernel.resiliency.PortalResiliencyException;
  */
 public interface SPIRegistryValidator {
 
-	void validatePortletSPI(String portletId, SPI spi)
+	public void validatePortletSPI(String portletId, SPI spi)
 		throws PortalResiliencyException;
 
-	void validateServletContextSPI(String servletContextName, SPI spi)
+	public void validateServletContextSPI(String servletContextName, SPI spi)
 		throws PortalResiliencyException;
 
 }
