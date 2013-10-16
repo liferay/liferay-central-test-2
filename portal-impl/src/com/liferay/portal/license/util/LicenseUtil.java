@@ -426,7 +426,6 @@ public class LicenseUtil {
 	}
 
 	public static String sendRequest(String request) throws Exception {
-
 		DefaultHttpClient httpClient = new DefaultHttpClient();
 
 		try {
