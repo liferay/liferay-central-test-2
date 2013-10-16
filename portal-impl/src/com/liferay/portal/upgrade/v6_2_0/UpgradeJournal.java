@@ -103,12 +103,9 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to upgrade DDMStructure: uuid: " + uuid_ +
-						" ddmStructureId: " + ddmStructureId + " groupId: " +
-						groupId);
-			}
+			_log.error(
+				"Unable to upgrade dynamic data mapping structure with UUID " +
+					uuid_);
 
 			throw e;
 		}
@@ -192,12 +189,9 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			ps.executeUpdate();
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to upgrade DDMTemplate: uuid: " + uuid_ +
-						" ddmTemplateId: " + ddmTemplateId + " groupId: " +
-						groupId);
-			}
+			_log.error(
+				"Unable to upgrade dynamic data mapping template with UUID " +
+					uuid_);
 
 			throw e;
 		}
@@ -367,11 +361,9 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 			return 0;
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to update JournalStructure: structureId: " +
-						structureId);
-			}
+			_log.error(
+				"Unable to update journal structure with structure ID " +
+					structureId);
 
 			throw e;
 		}
