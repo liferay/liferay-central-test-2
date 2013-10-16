@@ -183,18 +183,18 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 		IndexSearcher indexSearcher = null;
 
 		try {
-			String localizedFieldName = DocumentImpl.getLocalizedName(
-				languageId, keywordFieldName);
+			List<IndexReader> indexReaders = new ArrayList<IndexReader>();
 
 			indexSearcher = LuceneHelperUtil.getSearcher(
 				indexAccessor.getCompanyId(), true);
-
-			List<IndexReader> indexReaders = new ArrayList<IndexReader>();
 
 			if (indexSearcher.maxDoc() > 0) {
 				ReaderUtil.gatherSubReaders(
 					indexReaders, indexSearcher.getIndexReader());
 			}
+
+			String localizedFieldName = DocumentImpl.getLocalizedName(
+				languageId, keywordFieldName);
 
 			boolean validWord = isValidWord(
 				localizedFieldName, keyword, indexReaders);
@@ -202,7 +202,8 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 			if (!validWord) {
 				if (_log.isInfoEnabled()) {
 					_log.info(
-						"Keyword: " + keyword + " is not valid. Not indexing");
+						"Not indexing because keyword " + keyword +
+							" is invalid");
 				}
 
 				return;
@@ -264,7 +265,8 @@ public class LuceneSpellCheckIndexWriter extends BaseSpellCheckIndexWriter {
 				if (!validWord) {
 					if (_log.isInfoEnabled()) {
 						_log.info(
-							"Word: " + word + " is not valid. Not indexing");
+							"Not indexing because word " + word +
+								" is invalid");
 					}
 
 					continue;
