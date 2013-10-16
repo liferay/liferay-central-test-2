@@ -31,47 +31,47 @@ public class Log4jLogImpl implements Log {
 
 	@Override
 	public void debug(Object msg) {
-		_logger.log(_fqcn, Level.DEBUG, msg, null);
+		_logger.log(_logWrapperClassName, Level.DEBUG, msg, null);
 	}
 
 	@Override
 	public void debug(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.DEBUG, msg, t);
+		_logger.log(_logWrapperClassName, Level.DEBUG, msg, t);
 	}
 
 	@Override
 	public void debug(Throwable t) {
-		_logger.log(_fqcn, Level.DEBUG, null, t);
+		_logger.log(_logWrapperClassName, Level.DEBUG, null, t);
 	}
 
 	@Override
 	public void error(Object msg) {
-		_logger.log(_fqcn, Level.ERROR, msg, null);
+		_logger.log(_logWrapperClassName, Level.ERROR, msg, null);
 	}
 
 	@Override
 	public void error(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.ERROR, msg, t);
+		_logger.log(_logWrapperClassName, Level.ERROR, msg, t);
 	}
 
 	@Override
 	public void error(Throwable t) {
-		_logger.log(_fqcn, Level.ERROR, null, t);
+		_logger.log(_logWrapperClassName, Level.ERROR, null, t);
 	}
 
 	@Override
 	public void fatal(Object msg) {
-		_logger.log(_fqcn, Level.FATAL, msg, null);
+		_logger.log(_logWrapperClassName, Level.FATAL, msg, null);
 	}
 
 	@Override
 	public void fatal(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.FATAL, msg, t);
+		_logger.log(_logWrapperClassName, Level.FATAL, msg, t);
 	}
 
 	@Override
 	public void fatal(Throwable t) {
-		_logger.log(_fqcn, Level.FATAL, null, t);
+		_logger.log(_logWrapperClassName, Level.FATAL, null, t);
 	}
 
 	public Logger getWrappedLogger() {
@@ -80,17 +80,17 @@ public class Log4jLogImpl implements Log {
 
 	@Override
 	public void info(Object msg) {
-		_logger.log(_fqcn, Level.INFO, msg, null);
+		_logger.log(_logWrapperClassName, Level.INFO, msg, null);
 	}
 
 	@Override
 	public void info(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.INFO, msg, t);
+		_logger.log(_logWrapperClassName, Level.INFO, msg, t);
 	}
 
 	@Override
 	public void info(Throwable t) {
-		_logger.log(_fqcn, Level.INFO, null, t);
+		_logger.log(_logWrapperClassName, Level.INFO, null, t);
 	}
 
 	@Override
@@ -125,40 +125,40 @@ public class Log4jLogImpl implements Log {
 
 	@Override
 	public void setLogWrapperClassName(String className) {
-		_fqcn = className;
+		_logWrapperClassName = className;
 	}
 
 	@Override
 	public void trace(Object msg) {
-		_logger.log(_fqcn, Level.TRACE, msg, null);
+		_logger.log(_logWrapperClassName, Level.TRACE, msg, null);
 	}
 
 	@Override
 	public void trace(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.TRACE, msg, t);
+		_logger.log(_logWrapperClassName, Level.TRACE, msg, t);
 	}
 
 	@Override
 	public void trace(Throwable t) {
-		_logger.log(_fqcn, Level.TRACE, null, t);
+		_logger.log(_logWrapperClassName, Level.TRACE, null, t);
 	}
 
 	@Override
 	public void warn(Object msg) {
-		_logger.log(_fqcn, Level.WARN, msg, null);
+		_logger.log(_logWrapperClassName, Level.WARN, msg, null);
 	}
 
 	@Override
 	public void warn(Object msg, Throwable t) {
-		_logger.log(_fqcn, Level.WARN, msg, t);
+		_logger.log(_logWrapperClassName, Level.WARN, msg, t);
 	}
 
 	@Override
 	public void warn(Throwable t) {
-		_logger.log(_fqcn, Level.WARN, null, t);
+		_logger.log(_logWrapperClassName, Level.WARN, null, t);
 	}
 
-	private String _fqcn = LogWrapper.class.getName();
 	private Logger _logger;
+	private String _logWrapperClassName = LogWrapper.class.getName();
 
 }
