@@ -90,6 +90,7 @@ public abstract class BaseGenericSpellCheckIndexWriter
 		return document;
 	}
 
+	@Override
 	protected void indexKeyword(
 			long companyId, long groupId, String languageId, String keyword,
 			float weight, String keywordFieldName, String typeFieldValue,
