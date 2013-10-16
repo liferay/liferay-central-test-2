@@ -72,8 +72,8 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 			StringBundler sb = new StringBundler(6);
 
-			sb.append("insert into DDMStructure(uuid_, structureId, groupId, ");
-			sb.append("companyId, userId, userName, createDate, ");
+			sb.append("insert into DDMStructure (uuid_, structureId, ");
+			sb.append("groupId, companyId, userId, userName, createDate, ");
 			sb.append("modifiedDate, parentStructureId, classNameId, ");
 			sb.append("structureKey, name, description, xsd, storageType, ");
 			sb.append("type_) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ");
@@ -156,7 +156,7 @@ public class UpgradeJournal extends BaseUpgradePortletPreferences {
 
 			StringBundler sb = new StringBundler(6);
 
-			sb.append("insert into DDMTemplate(uuid_, templateId, groupId, ");
+			sb.append("insert into DDMTemplate (uuid_, templateId, groupId, ");
 			sb.append("companyId, userId, userName, createDate, modifiedDate,");
 			sb.append("classNameId, classPK , templateKey, name, description,");
 			sb.append("type_, mode_, language, script, cacheable, smallImage,");
