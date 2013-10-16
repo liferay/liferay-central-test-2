@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
@@ -426,7 +427,7 @@ public class LicenseUtil {
 	}
 
 	public static String sendRequest(String request) throws Exception {
-		DefaultHttpClient httpClient = new DefaultHttpClient();
+		DefaultHttpClient defaultHttpClient = new DefaultHttpClient();
 
 		try {
 			String serverURL = LICENSE_SERVER_URL;
@@ -448,16 +449,16 @@ public class LicenseUtil {
 							_PROXY_PORT);
 				}
 
-				HttpHost proxyHost = new HttpHost(_PROXY_URL, _PROXY_PORT);
+				HttpHost httpHost = new HttpHost(_PROXY_URL, _PROXY_PORT);
 
-				HttpParams httpParams = httpClient.getParams();
+				HttpParams httpParams = defaultHttpClient.getParams();
 
 				httpParams.setParameter(
-					ConnRoutePNames.DEFAULT_PROXY, proxyHost);
+					ConnRoutePNames.DEFAULT_PROXY, httpHost);
 
 				if (Validator.isNotNull(_PROXY_USER_NAME)) {
 					CredentialsProvider credentialsProvider =
-						httpClient.getCredentialsProvider();
+						defaultHttpClient.getCredentialsProvider();
 
 					credentialsProvider.setCredentials(
 						new AuthScope(_PROXY_URL, _PROXY_PORT),
@@ -466,19 +467,19 @@ public class LicenseUtil {
 				}
 			}
 
-			ByteArrayEntity requestEntity = new ByteArrayEntity(
+			ByteArrayEntity byteArrayEntity = new ByteArrayEntity(
 				_encryptRequest(serverURL, request));
 
-			requestEntity.setContentType("application/json");
+			byteArrayEntity.setContentType(ContentTypes.APPLICATION_JSON);
 
-			httpPost.setEntity(requestEntity);
+			httpPost.setEntity(byteArrayEntity);
 
-			HttpResponse httpResponse = httpClient.execute(httpPost);
+			HttpResponse httpResponse = defaultHttpClient.execute(httpPost);
 
-			HttpEntity responseEntity = httpResponse.getEntity();
+			HttpEntity httpEntity = httpResponse.getEntity();
 
 			String response = _decryptResponse(
-				serverURL, responseEntity.getContent());
+				serverURL, httpEntity.getContent());
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Server response: " + response);
@@ -491,10 +492,10 @@ public class LicenseUtil {
 			return response;
 		}
 		finally {
-			ClientConnectionManager connectionManager =
-				httpClient.getConnectionManager();
+			ClientConnectionManager clientConnectionManager =
+				defaultHttpClient.getConnectionManager();
 
-			connectionManager.shutdown();
+			clientConnectionManager.shutdown();
 		}
 	}
 
