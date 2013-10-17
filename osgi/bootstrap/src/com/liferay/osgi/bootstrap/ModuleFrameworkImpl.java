@@ -178,10 +178,10 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			String bundleSymbolicNameAttributeValue = attributes.getValue(
 				Constants.BUNDLE_SYMBOLICNAME);
 
-			Parameters bundleSymbolicNameMap = OSGiHeader.parseHeader(
+			Parameters parameters = OSGiHeader.parseHeader(
 				bundleSymbolicNameAttributeValue);
 
-			Set<String> bundleSymbolicNameSet = bundleSymbolicNameMap.keySet();
+			Set<String> bundleSymbolicNameSet = parameters.keySet();
 
 			Iterator<String> bundleSymbolicNameIterator =
 				bundleSymbolicNameSet.iterator();
@@ -784,10 +784,10 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 			return false;
 		}
 
-		Parameters activationPolicyMap = OSGiHeader.parseHeader(
+		Parameters parameters = OSGiHeader.parseHeader(
 			activationPolicy);
 
-		if (activationPolicyMap.containsKey(Constants.ACTIVATION_LAZY)) {
+		if (parameters.containsKey(Constants.ACTIVATION_LAZY)) {
 			return true;
 		}
 
@@ -941,9 +941,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		String exportPackage = GetterUtil.getString(
 			attributes.getValue(Constants.EXPORT_PACKAGE));
 
-		Parameters exportPackageMap = OSGiHeader.parseHeader(exportPackage);
+		Parameters parameters = OSGiHeader.parseHeader(exportPackage);
 
-		for (Map.Entry<String,Attrs> entry : exportPackageMap.entrySet()) {
+		for (Map.Entry<String,Attrs> entry : parameters.entrySet()) {
 			String key = entry.getKey();
 
 			List<URL> urls = _extraPackageMap.get(key);
