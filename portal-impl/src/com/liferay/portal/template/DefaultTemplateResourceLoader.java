@@ -83,8 +83,6 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		cacheName = cacheName.concat(StringPool.PERIOD).concat(name);
 
-		_singleVMPortalCache = SingleVMPoolUtil.getCache(cacheName);
-
 		_multiVMPortalCache = MultiVMPoolUtil.getCache(cacheName);
 
 		CacheListener<String, TemplateResource> cacheListener =
@@ -92,6 +90,8 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 
 		_multiVMPortalCache.registerCacheListener(
 			cacheListener, CacheListenerScope.ALL);
+
+		_singleVMPortalCache = SingleVMPoolUtil.getCache(cacheName);
 	}
 
 	@Override
@@ -183,7 +183,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 			if (System.currentTimeMillis() > expireTime) {
 				portalCache.remove(templateId);
 
-				templateResource = _expiredHolderTemplateResource;
+				templateResource = _nullHolderTemplateResource;
 
 				if (_log.isDebugEnabled()) {
 					_log.debug(
@@ -200,7 +200,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 			_singleVMPortalCache, templateId);
 
 		if (templateResource != null) {
-			if (templateResource == _expiredHolderTemplateResource) {
+			if (templateResource == _nullHolderTemplateResource) {
 				return null;
 			}
 
@@ -210,7 +210,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 		templateResource = _loadFromCache(_multiVMPortalCache, templateId);
 
 		if ((templateResource == null) ||
-			(templateResource == _expiredHolderTemplateResource)) {
+			(templateResource == _nullHolderTemplateResource)) {
 
 			return null;
 		}
@@ -280,7 +280,7 @@ public class DefaultTemplateResourceLoader implements TemplateResourceLoader {
 	private static Log _log = LogFactoryUtil.getLog(
 		DefaultTemplateResourceLoader.class);
 
-	private static NullHolderTemplateResource _expiredHolderTemplateResource =
+	private static NullHolderTemplateResource _nullHolderTemplateResource =
 		new NullHolderTemplateResource();
 
 	private long _modificationCheckInterval;
