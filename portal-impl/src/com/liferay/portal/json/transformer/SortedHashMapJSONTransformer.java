@@ -27,9 +27,9 @@ public class SortedHashMapJSONTransformer extends BaseJSONTransformer {
 	@Override
 	public void transform(Object object) {
 		if (object instanceof HashMap) {
-			HashMap hashMap = (HashMap)object;
+			HashMap<Object, Object> hashMap = (HashMap<Object, Object>)object;
 
-			TreeMap treeMap = new TreeMap();
+			TreeMap<Object, Object> treeMap = new TreeMap<Object, Object>();
 
 			treeMap.putAll(hashMap);
 
