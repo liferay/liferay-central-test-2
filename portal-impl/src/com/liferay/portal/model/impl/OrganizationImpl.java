@@ -101,10 +101,11 @@ public class OrganizationImpl extends OrganizationBaseImpl {
 
 		Organization organization = this;
 
-		do {
+		while (organization != null) {
 			organizations.add(organization);
+
+			organization = organization.getParentOrganization();
 		}
-		while ((organization = organization.getParentOrganization()) != null);
 
 		StringBundler sb = new StringBundler(organizations.size() * 2 + 1);
 
