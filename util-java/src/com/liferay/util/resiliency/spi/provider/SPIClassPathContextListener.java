@@ -87,9 +87,6 @@ public class SPIClassPathContextListener implements ServletContextListener {
 		}
 
 		if (!ServerDetector.isTomcat()) {
-
-			// For non-tomcat appservers, load ext jars from embedded libs
-
 			File spiEmbeddedLibExtDir = new File(spiEmbeddedLibDir, "ext");
 
 			if (!spiEmbeddedLibExtDir.exists() ||
@@ -110,7 +107,7 @@ public class SPIClassPathContextListener implements ServletContextListener {
 				}
 			}
 
-			// Load portal-service.jar from mpi
+			// Load portal-service.jar from MPI
 
 			String liferayLibGlobalDir = SystemProperties.get(
 				PropsKeys.LIFERAY_LIB_GLOBAL_DIR);
@@ -128,7 +125,7 @@ public class SPIClassPathContextListener implements ServletContextListener {
 
 			jarFiles.add(portalServiceJarFile);
 
-			// Load jdbc driver jars from mpi
+			// Load JDBC driver jars from MPI
 
 			String jdbcDriverJarDirName = ClassUtil.getParentPath(
 				PortalClassLoaderUtil.getClassLoader(),
