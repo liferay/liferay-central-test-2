@@ -504,7 +504,7 @@ public class EditServerAction extends PortletAction {
 			SessionMessages.add(actionRequest, "script", script);
 
 			ScriptingUtil.exec(
-				null, portletObjects, language, script, new String[0]);
+				null, portletObjects, language, script, StringPool.EMPTY_ARRAY);
 
 			unsyncPrintWriter.flush();
 
