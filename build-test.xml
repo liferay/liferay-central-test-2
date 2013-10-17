@@ -2877,48 +2877,40 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 
 						import org.apache.commons.io.FileUtils;
 
-						String fullPluginList = "marketplace-portlet";
+						Set requiredPluginNamesSet = new HashSet();
+						
+						requiredPluginNamesSet.add("marketplace-portlet");
 
 						String[] pluginTypes = {"hook", "layouttpl", "portlet", "theme", "web"};
 
 						for (String pluginType : pluginTypes) {
-							String pluginList = project.getProperty(pluginType + ".plugins.includes");
+							String[] pluginNames = StringUtil.split(project.getProperty(pluginType + ".plugins.includes"), ',');
 
-							String[] pluginArray = StringUtil.split(pluginList, ',');
-
-							for (String plugin : pluginArray) {
-								if (!fullPluginList.contains(plugin)) {
-									fullPluginList = fullPluginList + "," + plugin;
-								}
+							for (String pluginName : pluginNames) {
+								requiredPluginNamesSet.add(pluginName);
 							}
 						}
 
 						System.out.println("Ensuring the following plugins have been deployed:");
-						System.out.println(fullPluginList);
-
-						String fileContent = "";
-
-						String fileName = StringUtil.replace(project.getProperty("log.file"), "\\", "/");
-
-						String[] fullPluginArray = StringUtil.split(fullPluginList, ',');
+						System.out.println(StringUtil.merge(requiredPluginNamesSet));
 
 						int i = 0;
 
-						for (String plugin : fullPluginArray) {
-							String pluginDeployedMessage = plugin + " is available for use";
+						for (String pluginName : requiredPluginNamesSet) {
+							String content = "";
 
-							while (i < 120 && !fileContent.contains(pluginDeployedMessage)) {
+							while (i < 120 && !content.contains(pluginName + " is available for use")) {
 								try {
 									Thread.sleep(1000);
 
-									File file = new File(fileName);
+									File file = new File(StringUtil.replace(project.getProperty("log.file"), "\\", "/"));
 
-									fileContent = FileUtils.readFileToString(file);
+									content = FileUtils.readFileToString(file);
 
 									i++;
 								}
 								catch (Exception e) {
-									System.out.println(e.getMessage());
+									e.printStackTrace();
 								}
 							}
 						}
