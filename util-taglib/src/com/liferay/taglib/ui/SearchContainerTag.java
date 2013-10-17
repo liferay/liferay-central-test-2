@@ -229,7 +229,7 @@ public class SearchContainerTag<R> extends ParamAndPropertyAncestorTagImpl {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, see LPS-41307
+	 * @deprecated As of 6.2.0, with no direct replacement. See LPS-41307.
 	 */
 	public boolean isHasResults() {
 		return true;
