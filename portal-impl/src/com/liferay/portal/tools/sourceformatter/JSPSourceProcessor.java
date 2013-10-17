@@ -319,7 +319,9 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 			}
 		}
 
-		if (portalSource && content.contains("page import=") &&
+		if (portalSource &&
+			!mainReleaseVersion.equals(MAIN_RELEASE_VERSION_6_1_0) &&
+			content.contains("page import=") &&
 			!fileName.contains("init.jsp") &&
 			!fileName.contains("init-ext.jsp") &&
 			!fileName.contains("/taglib/aui/") &&
