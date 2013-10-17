@@ -34,7 +34,8 @@ public class ScriptingMessageListener extends BaseMessageListener {
 		String language = (String)message.get(SchedulerEngine.LANGUAGE);
 		String script = (String)message.get(SchedulerEngine.SCRIPT);
 
-		ScriptingUtil.exec(null, inputObjects, language, script);
+		ScriptingUtil.exec(
+			null, inputObjects, language, script, new String[0]);
 	}
 
 }
