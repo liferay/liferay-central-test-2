@@ -26,8 +26,8 @@ import javax.servlet.http.Cookie;
  */
 public class CookieUtil {
 
-	public static Cookie deserialize(byte[] data) {
-		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(data));
+	public static Cookie deserialize(byte[] bytes) {
+		Deserializer deserializer = new Deserializer(ByteBuffer.wrap(bytes));
 
 		String comment = deserializer.readString();
 		String domain = deserializer.readString();
@@ -37,11 +37,12 @@ public class CookieUtil {
 		String path = deserializer.readString();
 		boolean secure = deserializer.readBoolean();
 		String value = deserializer.readString();
-		int version = deserializer.readInt();
 
 		if (value.isEmpty()) {
 			value = null;
 		}
+
+		int version = deserializer.readInt();
 
 		Cookie cookie = new Cookie(name, value);
 
