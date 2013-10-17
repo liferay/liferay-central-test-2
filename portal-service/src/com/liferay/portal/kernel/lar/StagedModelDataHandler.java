@@ -50,7 +50,7 @@ public interface StagedModelDataHandler<T extends StagedModel> {
 		throws PortletDataException;
 
 	public void importCompanyStagedModel(
-			PortletDataContext portletDataContext, String uuid, long classPk)
+			PortletDataContext portletDataContext, String uuid, long classPK)
 		throws PortletDataException;
 
 	public void importStagedModel(
