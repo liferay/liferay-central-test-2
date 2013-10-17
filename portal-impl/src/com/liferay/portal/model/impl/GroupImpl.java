@@ -102,10 +102,11 @@ public class GroupImpl extends GroupBaseImpl {
 
 		Group group = this;
 
-		do {
+		while (group != null) {
 			groups.add(group);
+
+			group = group.getParentGroup();
 		}
-		while ((group = group.getParentGroup()) != null);
 
 		StringBundler sb = new StringBundler(groups.size() * 2 + 1);
 
