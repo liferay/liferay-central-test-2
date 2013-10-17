@@ -1090,10 +1090,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	@Override
 	public Element getReferenceDataElement(
-		Element parentElement, Class<?> clazz, long classPk) {
+		Element parentElement, Class<?> clazz, long classPK) {
 
 		List<Element> referenceElements = getReferenceElements(
-			parentElement, clazz, 0, null, classPk, null);
+			parentElement, clazz, 0, null, classPK, null);
 
 		List<Element> referenceDataElements = getReferenceDataElements(
 			referenceElements, clazz);
@@ -1124,12 +1124,12 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	@Override
 	public Element getReferenceDataElement(
-		StagedModel parentStagedModel, Class<?> clazz, long classPk) {
+		StagedModel parentStagedModel, Class<?> clazz, long classPK) {
 
 		Element parentElement = getImportDataStagedModelElement(
 			parentStagedModel);
 
-		return getReferenceDataElement(parentElement, clazz, classPk);
+		return getReferenceDataElement(parentElement, clazz, classPK);
 	}
 
 	@Override
@@ -1179,10 +1179,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	@Override
 	public Element getReferenceElement(
-		StagedModel parentStagedModel, Class<?> clazz, long classPk) {
+		StagedModel parentStagedModel, Class<?> clazz, long classPK) {
 
 		List<Element> referenceElements = getReferenceElements(
-			parentStagedModel, clazz, classPk, null);
+			parentStagedModel, clazz, classPK, null);
 
 		if (!referenceElements.isEmpty()) {
 			return referenceElements.get(0);
@@ -2363,7 +2363,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	protected List<Element> getReferenceElements(
 		Element parentElement, Class<?> clazz, long groupId, String uuid,
-		long classPk, String referenceType) {
+		long classPK, String referenceType) {
 
 		if (parentElement == null) {
 			return Collections.emptyList();
@@ -2390,9 +2390,9 @@ public class PortletDataContextImpl implements PortletDataContext {
 			sb.append(uuid);
 		}
 
-		if (classPk > 0) {
+		if (classPK > 0) {
 			sb.append("' and @class-pk='");
-			sb.append(classPk);
+			sb.append(classPK);
 		}
 
 		if (referenceType != null) {
@@ -2410,14 +2410,14 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected List<Element> getReferenceElements(
-		StagedModel parentStagedModel, Class<?> clazz, long classPk,
+		StagedModel parentStagedModel, Class<?> clazz, long classPK,
 		String referenceType) {
 
 		Element stagedModelElement = getImportDataStagedModelElement(
 			parentStagedModel);
 
 		return getReferenceElements(
-			stagedModelElement, clazz, 0, null, classPk, referenceType);
+			stagedModelElement, clazz, 0, null, classPK, referenceType);
 	}
 
 	protected String getReferenceKey(ClassedModel classedModel) {

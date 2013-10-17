@@ -98,18 +98,18 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		throws PortletDataException {
 
 		String uuid = element.attributeValue("uuid");
-		long classPk = GetterUtil.getLong(element.attributeValue("class-pk"));
+		long classPK = GetterUtil.getLong(element.attributeValue("class-pk"));
 
-		importCompanyStagedModel(portletDataContext, uuid, classPk);
+		importCompanyStagedModel(portletDataContext, uuid, classPK);
 	}
 
 	@Override
 	public void importCompanyStagedModel(
-			PortletDataContext portletDataContext, String uuid, long classPk)
+			PortletDataContext portletDataContext, String uuid, long classPK)
 		throws PortletDataException {
 
 		try {
-			doImportCompanyStagedModel(portletDataContext, uuid, classPk);
+			doImportCompanyStagedModel(portletDataContext, uuid, classPK);
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -203,7 +203,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 		throws Exception;
 
 	protected void doImportCompanyStagedModel(
-			PortletDataContext portletDataContext, String uuid, long classPk)
+			PortletDataContext portletDataContext, String uuid, long classPK)
 		throws Exception {
 
 		throw new UnsupportedOperationException();
