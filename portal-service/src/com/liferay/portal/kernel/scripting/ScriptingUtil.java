@@ -32,8 +32,8 @@ public class ScriptingUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #eval(java.util.Set,
-	 *             java.util.Map, java.util.Set, String, String, String...)}
+	 * @deprecated As of 6.2.0, replaced by {@link #eval(Set, Map, Set, String,
+	 *             String, String...)}
 	 */
 	public static Map<String, Object> eval(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
@@ -58,8 +58,8 @@ public class ScriptingUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0, replaced by {@link #exec(java.util.Set,
-	 *             java.util.Map, String, String, String...)}
+	 * @deprecated As of 6.2.0, replaced by {@link #exec(Set, Map, String,
+	 *             String, String...)}
 	 */
 	public static void exec(
 			Set<String> allowedClasses, Map<String, Object> inputObjects,
