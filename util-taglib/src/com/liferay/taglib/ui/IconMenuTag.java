@@ -442,6 +442,6 @@ public class IconMenuTag extends BaseBodyTagSupport implements BodyTag {
 	private boolean _showExpanded;
 	private boolean _showWhenSingleIcon;
 	private String _startPage;
-	private boolean _useIconCaret = false;
+	private boolean _useIconCaret;
 
 }
