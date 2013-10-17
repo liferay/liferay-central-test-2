@@ -33,27 +33,27 @@ public class CookieUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// For code coverage
-
 		new CookieUtil();
 	}
 
 	@Test
 	public void testEquals() {
-		Cookie cookie1 = new Cookie("name", null);
-		Cookie cookie2 = new Cookie("name2", null);
 
-		// Different comment
+		// Comment
+
+		Cookie cookie1 = new Cookie("name", null);
 
 		cookie1.setComment("comment");
+
+		Cookie cookie2 = new Cookie("name2", null);
+
 		cookie2.setComment("comment2");
 
 		Assert.assertFalse(CookieUtil.equals(cookie1, cookie2));
 
 		cookie2.setComment("comment");
 
-		// Different domain
+		// Domain
 
 		cookie1.setDomain("domain");
 		cookie2.setDomain("domain2");
@@ -62,7 +62,16 @@ public class CookieUtilTest {
 
 		cookie2.setDomain("domain");
 
-		// Different maxAge
+		// HTTP only
+
+		cookie1.setHttpOnly(true);
+		cookie2.setHttpOnly(false);
+
+		Assert.assertFalse(CookieUtil.equals(cookie1, cookie2));
+
+		cookie2.setHttpOnly(true);
+
+		// Max age
 
 		cookie1.setMaxAge(1);
 		cookie2.setMaxAge(2);
@@ -71,7 +80,7 @@ public class CookieUtilTest {
 
 		cookie2.setMaxAge(1);
 
-		// Different name;
+		// Name
 
 		Assert.assertFalse(CookieUtil.equals(cookie1, cookie2));
 
@@ -81,7 +90,7 @@ public class CookieUtilTest {
 		cookie2.setDomain("domain");
 		cookie2.setMaxAge(1);
 
-		// Different path
+		// Path
 
 		cookie1.setPath("path");
 		cookie2.setPath("path2");
@@ -90,7 +99,7 @@ public class CookieUtilTest {
 
 		cookie2.setPath("path");
 
-		// Different secure
+		// Secure
 
 		cookie1.setSecure(true);
 		cookie2.setSecure(false);
@@ -99,7 +108,7 @@ public class CookieUtilTest {
 
 		cookie2.setSecure(true);
 
-		// Different value
+		// Value
 
 		cookie1.setValue("value");
 		cookie2.setValue("value2");
@@ -108,7 +117,7 @@ public class CookieUtilTest {
 
 		cookie2.setValue("value");
 
-		// Different version
+		// Version
 
 		cookie1.setVersion(1);
 		cookie2.setVersion(2);
@@ -116,15 +125,6 @@ public class CookieUtilTest {
 		Assert.assertFalse(CookieUtil.equals(cookie1, cookie2));
 
 		cookie2.setVersion(1);
-
-		// Different http only
-
-		cookie1.setHttpOnly(true);
-		cookie2.setHttpOnly(false);
-
-		Assert.assertFalse(CookieUtil.equals(cookie1, cookie2));
-
-		cookie2.setHttpOnly(true);
 
 		// Equals
 
@@ -135,10 +135,10 @@ public class CookieUtilTest {
 	public void testSerializationAndDeserialization() {
 		Cookie cookie1 = new Cookie("name1", null);
 
-		byte[] data = CookieUtil.serialize(cookie1);
+		byte[] bytes = CookieUtil.serialize(cookie1);
 
 		Assert.assertTrue(
-			CookieUtil.equals(cookie1, CookieUtil.deserialize(data)));
+			CookieUtil.equals(cookie1, CookieUtil.deserialize(bytes)));
 
 		Cookie cookie2 = new Cookie("name2", "value");
 
@@ -150,10 +150,10 @@ public class CookieUtilTest {
 		cookie2.setSecure(true);
 		cookie2.setVersion(1);
 
-		data = CookieUtil.serialize(cookie2);
+		bytes = CookieUtil.serialize(cookie2);
 
 		Assert.assertTrue(
-			CookieUtil.equals(cookie2, CookieUtil.deserialize(data)));
+			CookieUtil.equals(cookie2, CookieUtil.deserialize(bytes)));
 	}
 
 	@Test

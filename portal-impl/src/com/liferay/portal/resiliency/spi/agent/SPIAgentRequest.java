@@ -113,10 +113,10 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 		Cookie[] cookies = request.getCookies();
 
 		if (cookies != null) {
-			cookiesData = new byte[cookies.length][];
+			cookiesBytes = new byte[cookies.length][];
 
 			for (int i = 0; i < cookies.length; i++) {
-				cookiesData[i] = CookieUtil.serialize(cookies[i]);
+				cookiesBytes[i] = CookieUtil.serialize(cookies[i]);
 			}
 		}
 
@@ -240,8 +240,8 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 	public String toString() {
 		int length = 20 + parameterMap.size() * 4;
 
-		if (cookiesData != null) {
-			length += cookiesData.length * 2 - 1;
+		if (cookiesBytes != null) {
+			length += cookiesBytes.length * 2 - 1;
 		}
 
 		StringBundler sb = new StringBundler(length);
@@ -250,9 +250,9 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 		sb.append(contentType);
 		sb.append(", cookies=[");
 
-		if (cookiesData != null) {
-			for (byte[] cookieData : cookiesData) {
-				Cookie cookie = CookieUtil.deserialize(cookieData);
+		if (cookiesBytes != null) {
+			for (byte[] cookieBytes : cookiesBytes) {
+				Cookie cookie = CookieUtil.deserialize(cookieBytes);
 
 				sb.append(CookieUtil.toString(cookie));
 				sb.append(", ");
@@ -294,7 +294,7 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 	}
 
 	protected String contentType;
-	protected byte[][] cookiesData;
+	protected byte[][] cookiesBytes;
 	protected Map<String, Serializable> distributedRequestAttributes;
 	protected Map<String, List<String>> headerMap;
 	protected Map<String, FileItem[]> multipartParameterMap;
@@ -336,14 +336,14 @@ public class SPIAgentRequest extends SPIAgentSerializable {
 
 		@Override
 		public Cookie[] getCookies() {
-			if (cookiesData == null) {
+			if (cookiesBytes == null) {
 				return null;
 			}
 
-			Cookie[] cookies = new Cookie[cookiesData.length];
+			Cookie[] cookies = new Cookie[cookiesBytes.length];
 
 			for (int i = 0; i < cookies.length; i++) {
-				cookies[i] = CookieUtil.deserialize(cookiesData[i]);
+				cookies[i] = CookieUtil.deserialize(cookiesBytes[i]);
 			}
 
 			return cookies;
