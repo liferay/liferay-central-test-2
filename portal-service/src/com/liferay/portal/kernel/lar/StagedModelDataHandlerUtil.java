@@ -210,7 +210,7 @@ public class StagedModelDataHandlerUtil {
 			(portletDataContext.getGroupId() !=
 				portletDataContext.getCompanyGroupId())) {
 
-			StagedModelDataHandler stagedModelDataHandler =
+			StagedModelDataHandler<?> stagedModelDataHandler =
 				StagedModelDataHandlerRegistryUtil.getStagedModelDataHandler(
 					stagedModelClass.getName());
 
@@ -257,7 +257,7 @@ public class StagedModelDataHandlerUtil {
 				(portletDataContext.getGroupId() !=
 					portletDataContext.getCompanyGroupId())) {
 
-				StagedModelDataHandler stagedModelDataHandler =
+				StagedModelDataHandler<?> stagedModelDataHandler =
 					StagedModelDataHandlerRegistryUtil.
 						getStagedModelDataHandler(stagedModelClass.getName());
 
@@ -324,7 +324,7 @@ public class StagedModelDataHandlerUtil {
 		PortletDataContext portletDataContext, StagedModel stagedModel,
 		Element referenceElement) {
 
-		StagedModelDataHandler stagedModelDataHandler =
+		StagedModelDataHandler<StagedModel> stagedModelDataHandler =
 			_getStagedModelDataHandler(stagedModel);
 
 		Map<String, String> referenceAttributes =
