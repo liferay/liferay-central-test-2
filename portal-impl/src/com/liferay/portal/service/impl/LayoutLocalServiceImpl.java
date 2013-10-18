@@ -1972,12 +1972,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		long companyId = user.getCompanyId();
-
-		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			user.getCompanyId());
 
 		Group controlPanelGroup = groupPersistence.findByC_F(
-			companyId, GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
+			user.getCompanyId(), GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 
 		Layout controlPanelLayout = layoutPersistence.findByG_P_T_First(
 			controlPanelGroup.getGroupId(), true,
@@ -1990,9 +1989,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	@Override
 	public void importPortletInfo(
-		long userId, String portletId, Map<String, String[]> parameterMap,
-		InputStream is)
-	throws PortalException, SystemException {
+			long userId, String portletId, Map<String, String[]> parameterMap,
+			InputStream is)
+		throws PortalException, SystemException {
 
 		File file = null;
 
@@ -2067,12 +2066,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		long companyId = user.getCompanyId();
-
-		Group companyGroup = groupLocalService.getCompanyGroup(companyId);
+		Group companyGroup = groupLocalService.getCompanyGroup(
+			user.getCompanyId());
 
 		Group controlPanelGroup = groupPersistence.findByC_F(
-			companyId, GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
+			user.getCompanyId(), GroupConstants.CONTROL_PANEL_FRIENDLY_URL);
 
 		Layout controlPanelLayout = layoutPersistence.findByG_P_T_First(
 			controlPanelGroup.getGroupId(), true,
