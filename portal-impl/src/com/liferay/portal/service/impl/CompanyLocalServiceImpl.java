@@ -1389,7 +1389,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 		virtualHostLocalService.deleteVirtualHost(companyVirtualHost);
 
-		// Portal Instance
+		// Portal instance
 
 		Callable<Void> callable = new Callable<Void>() {
 
