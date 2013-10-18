@@ -49,7 +49,6 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
 import com.liferay.util.ContentUtil;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -449,21 +448,17 @@ public class AnnouncementsEntryLocalServiceImpl
 			}
 		}
 
-		List<User> users = new ArrayList<User>();
-
 		if (className.equals(User.class.getName())) {
 			User user = userPersistence.findByPrimaryKey(classPK);
 
-			toName = user.getFullName();
-			toAddress = user.getEmailAddress();
-
-			if (Validator.isNull(toAddress)) {
+			if (Validator.isNull(user.getEmailAddress())) {
 				return;
 			}
 
-			users.add(user);
-
-			notifyUsers(users, entry, company.getLocale(), toAddress, toName);
+			notifyUsers(
+				ListUtil.fromArray(new User[]{user}), entry,
+				company.getLocale(), user.getEmailAddress(),
+				user.getFullName());
 		}
 		else {
 			int count = userLocalService.searchCount(
@@ -477,7 +472,7 @@ public class AnnouncementsEntryLocalServiceImpl
 
 				int end = start + Indexer.DEFAULT_INTERVAL;
 
-				users = userLocalService.search(
+				List<User> users = userLocalService.search(
 					company.getCompanyId(), null,
 					WorkflowConstants.STATUS_APPROVED, params, start, end,
 					(OrderByComparator)null);
@@ -544,8 +539,9 @@ public class AnnouncementsEntryLocalServiceImpl
 		subscriptionSender.setContextAttributes(
 			"[$ENTRY_ID$]", entry.getEntryId(), "[$ENTRY_TITLE$]",
 			entry.getTitle(), "[$ENTRY_TYPE$]", "[$ENTRY_URL$]", entry.getUrl(),
-			"[$PORTLET_NAME$]", LanguageUtil.get(
-			locale, (entry.isAlert() ? "alert" : "announcement")));
+			"[$PORTLET_NAME$]",
+			LanguageUtil.get(
+				locale, (entry.isAlert() ? "alert" : "announcement")));
 		subscriptionSender.setFrom(fromAddress, fromName);
 		subscriptionSender.setHtmlFormat(true);
 		subscriptionSender.setMailId("announcements_entry", entry.getEntryId());
