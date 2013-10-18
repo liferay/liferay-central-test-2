@@ -179,7 +179,9 @@ public class PortletSessionListenerManager
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 		httpSessionEvent = getHttpSessionEvent(httpSessionEvent);
 
-		PortletSessionTracker.invalidate(httpSessionEvent.getSession().getId());
+		HttpSession httpSession = httpSessionEvent.getSession();
+
+		PortletSessionTracker.invalidate(httpSession.getId());
 
 		for (HttpSessionListener httpSessionListener : _httpSessionListeners) {
 			httpSessionListener.sessionDestroyed(httpSessionEvent);
@@ -238,8 +240,9 @@ public class PortletSessionListenerManager
 		httpSessionBindingEvent = getHttpSessionBindingEvent(
 			httpSessionBindingEvent);
 
-		PortletSessionTracker.invalidate(
-			httpSessionBindingEvent.getSession().getId());
+		HttpSession httpSession = httpSessionEvent.getSession();
+
+		PortletSessionTracker.invalidate(httpSession.getId());
 
 		for (HttpSessionBindingListener httpSessionBindingListener :
 				_httpSessionBindingListeners) {
