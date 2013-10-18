@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.SystemProperties;
 import com.liferay.portal.util.PropsImpl;
@@ -72,7 +73,7 @@ public class SPIClassPathContextListenerTest {
 	@Before
 	public void setUp() throws Exception {
 
-		// embeddedLibDir
+		// Embedded lib directory
 
 		File spiEmbeddedLibDir = new File(
 			_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME);
@@ -87,7 +88,7 @@ public class SPIClassPathContextListenerTest {
 
 		_notJarFile.createNewFile();
 
-		// embeddedLibDir/ext
+		// Embedded lib ext directory
 
 		File spiEmbeddedLibExtDir = new File(
 			_CONTEXT_PATH, _EMBEDDED_LIB_EXT_DIR_NAME);
@@ -270,21 +271,25 @@ public class SPIClassPathContextListenerTest {
 		spiClassPathContextListener.contextInitialized(
 			new ServletContextEvent(_mockServletContext));
 
-		String spiClassPath =
-			_jarFile.getAbsolutePath() + File.pathSeparator +
-				_extJarFile.getAbsolutePath() + File.pathSeparator +
-					_portalServiceJarFile.getAbsolutePath() +
-						File.pathSeparator +
-							_jdbcDriverJarFile.getAbsolutePath() +
-								File.pathSeparator + _CONTEXT_PATH +
-									"/WEB-INF/classes";
+		StringBundler sb = new StringBundler(10);
+
+		sb.append(_jarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_extJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_portalServiceJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_jdbcDriverJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_CONTEXT_PATH);
+		sb.append("/WEB-INF/classes");
 
 		Assert.assertEquals(
-			spiClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
+			sb.toString(), SPIClassPathContextListener.SPI_CLASS_PATH);
 	}
 
 	@Test
-	public void testNonTomcatMissingPortalServiceJar() throws IOException {
+	public void testNonTomcatMissingPortalServiceJar() {
 		Assert.assertTrue(_portalServiceJarFile.delete());
 
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
