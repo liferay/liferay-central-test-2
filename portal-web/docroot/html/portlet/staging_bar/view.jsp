@@ -179,7 +179,6 @@ if (layout != null) {
 				<c:otherwise>
 					<aui:nav-item anchorCssClass="staging-link" cssClass="active live-link staging-toggle" dropdown="<%= true %>" id="liveLink" label="live" toggle="<%= true %>">
 						<aui:nav-item cssClass="row-fluid">
-
 							<div class="staging-details">
 								<div class="alert alert-warning hide warning-content" id="<portlet:namespace />warningMessage">
 									<liferay-ui:message key="an-inital-staging-publication-is-in-progress" />
