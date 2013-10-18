@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.filters.compoundsessionid.CompoundSessi
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionActivationListener;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
@@ -179,9 +180,9 @@ public class PortletSessionListenerManager
 	public void sessionDestroyed(HttpSessionEvent httpSessionEvent) {
 		httpSessionEvent = getHttpSessionEvent(httpSessionEvent);
 
-		HttpSession httpSession = httpSessionEvent.getSession();
+		HttpSession session = httpSessionEvent.getSession();
 
-		PortletSessionTracker.invalidate(httpSession.getId());
+		PortletSessionTracker.invalidate(session.getId());
 
 		for (HttpSessionListener httpSessionListener : _httpSessionListeners) {
 			httpSessionListener.sessionDestroyed(httpSessionEvent);
@@ -240,9 +241,9 @@ public class PortletSessionListenerManager
 		httpSessionBindingEvent = getHttpSessionBindingEvent(
 			httpSessionBindingEvent);
 
-		HttpSession httpSession = httpSessionEvent.getSession();
+		HttpSession session = httpSessionBindingEvent.getSession();
 
-		PortletSessionTracker.invalidate(httpSession.getId());
+		PortletSessionTracker.invalidate(session.getId());
 
 		for (HttpSessionBindingListener httpSessionBindingListener :
 				_httpSessionBindingListeners) {
