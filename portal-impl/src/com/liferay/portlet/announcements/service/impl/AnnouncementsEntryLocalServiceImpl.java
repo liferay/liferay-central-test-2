@@ -456,7 +456,7 @@ public class AnnouncementsEntryLocalServiceImpl
 			}
 
 			notifyUsers(
-				ListUtil.fromArray(new User[]{user}), entry,
+				ListUtil.fromArray(new User[] {user}), entry,
 				company.getLocale(), user.getEmailAddress(),
 				user.getFullName());
 		}
@@ -469,7 +469,6 @@ public class AnnouncementsEntryLocalServiceImpl
 
 			for (int i = 0; i <= pages; i++) {
 				int start = (i * Indexer.DEFAULT_INTERVAL);
-
 				int end = start + Indexer.DEFAULT_INTERVAL;
 
 				List<User> users = userLocalService.search(
