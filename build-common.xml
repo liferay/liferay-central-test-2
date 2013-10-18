@@ -1042,7 +1042,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 						<var name="test.class" value="**/${test.package.dir}/*Test" />
 
 						<ant target="test-cmd">
-							<property name="junit.forkmode" value="once" />
+							<property name="junit.forkmode" value="perTest" />
 							<property name="test.excludes" value="**/*PersistenceTest.class" />
 							<property name="test.type" value="integration" />
 						</ant>
