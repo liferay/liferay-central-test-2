@@ -43,25 +43,25 @@
 		Map<String, List<Portlet>> siteAdministrationCategoriesMap = PortalUtil.getSiteAdministrationCategoriesMap(request);
 
 		for (String siteAdministrationCategory : siteAdministrationCategoriesMap.keySet()) {
-			String iconClass = "icon-file";
+			String iconCssClass = "icon-file";
 
 			String panelPageCategoryId = "panel-manage-" + siteAdministrationCategory;
 
 			if (siteAdministrationCategory == PortletCategoryKeys.SITE_ADMINISTRATION_CONFIGURATION) {
-				iconClass = "icon-hdd";
+				iconCssClass = "icon-hdd";
 			}
 			else if (siteAdministrationCategory == PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) {
-				iconClass = "icon-file-text";
+				iconCssClass = "icon-file-text";
 			}
 			else if (siteAdministrationCategory == PortletCategoryKeys.SITE_ADMINISTRATION_PAGES) {
-				iconClass = "icon-sitemap";
+				iconCssClass = "icon-sitemap";
 			}
 			else if (siteAdministrationCategory == PortletCategoryKeys.SITE_ADMINISTRATION_USERS) {
-				iconClass = "icon-group";
+				iconCssClass = "icon-group";
 			}
 		%>
 
-			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" iconClass="<%= iconClass %>" id="<%= panelPageCategoryId %>" persistState="<%= true %>" state='<%= siteAdministrationCategory.equals(portletCategory) ? "open" : "closed" %>' title='<%= LanguageUtil.get(pageContext, "category." + siteAdministrationCategory) %>'>
+			<liferay-ui:panel collapsible="<%= true %>" cssClass="panel-page-category unstyled" extended="<%= true %>" iconCssClass="<%= iconCssClass %>" id="<%= panelPageCategoryId %>" persistState="<%= true %>" state='<%= siteAdministrationCategory.equals(portletCategory) ? "open" : "closed" %>' title='<%= LanguageUtil.get(pageContext, "category." + siteAdministrationCategory) %>'>
 				<c:if test="<%= siteAdministrationCategory.equals(PortletCategoryKeys.SITE_ADMINISTRATION_CONTENT) %>">
 
 					<%

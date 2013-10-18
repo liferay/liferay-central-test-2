@@ -52,7 +52,7 @@ public class PanelTag extends IncludeTag {
 		}
 
 		request.setAttribute("liferay-ui:panel:helpMessage", _helpMessage);
-		request.setAttribute("liferay-ui:panel:iconClass", _iconClass);
+		request.setAttribute("liferay-ui:panel:iconCssClass", _iconCssClass);
 		request.setAttribute("liferay-ui:panel:id", _id);
 		request.setAttribute("liferay-ui:panel:parentId", _parentId);
 		request.setAttribute("liferay-ui:panel:title", _title);
@@ -94,8 +94,8 @@ public class PanelTag extends IncludeTag {
 		_helpMessage = helpMessage;
 	}
 
-	public void setIconClass(String iconClass) {
-		_iconClass = iconClass;
+	public void setIconCssClass(String iconCssClass) {
+		_iconCssClass = iconCssClass;
 	}
 
 	public void setId(String id) {
@@ -130,7 +130,7 @@ public class PanelTag extends IncludeTag {
 		_endPage = null;
 		_extended = null;
 		_helpMessage = null;
-		_iconClass = null;
+		_iconCssClass = null;
 		_id = null;
 		_parentId = StringPool.BLANK;
 		_persistState = true;
@@ -169,7 +169,7 @@ public class PanelTag extends IncludeTag {
 	private String _endPage;
 	private Boolean _extended;
 	private String _helpMessage;
-	private String _iconClass;
+	private String _iconCssClass;
 	private String _id;
 	private String _parentId = StringPool.BLANK;
 	private boolean _persistState = true;
