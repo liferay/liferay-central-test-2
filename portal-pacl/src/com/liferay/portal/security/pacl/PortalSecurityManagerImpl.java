@@ -532,8 +532,8 @@ public class PortalSecurityManagerImpl extends SecurityManager
 	private static RuntimePermission _checkMemberAccessPermission =
 		new RuntimePermission("accessDeclaredMembers");
 
-	private PortalPolicy _portalPolicy;
 	private SecurityManager _originalSecurityManager;
+	private PortalPolicy _portalPolicy;
 
 	private static class DoBeanLocatorImplPACL implements BeanLocatorImpl.PACL {
 
