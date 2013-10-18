@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.LocalizationImpl;
+import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.impl.DDMStructureImpl;
 
 import org.junit.Assert;
@@ -51,16 +52,16 @@ public class JSONSerializerTest {
 	}
 
 	@Test
-	public void testSerializeDDMStructureImpl() {
-		DDMStructureImpl ddms = new DDMStructureImpl();
+	public void testSerializeDDMStructure() {
+		DDMStructure ddmStructure = new DDMStructureImpl();
 
-		ddms.setXsd("value");
+		ddmStructure.setXsd("value");
 
 		JSONSerializer jsonSerializer = JSONFactoryUtil.createJSONSerializer();
 
 		jsonSerializer.exclude("*.class");
 
-		String json = jsonSerializer.serialize(ddms);
+		String json = jsonSerializer.serialize(ddmStructure);
 
 		Assert.assertTrue(json.contains("\"xsd\":\"value\""));
 	}
