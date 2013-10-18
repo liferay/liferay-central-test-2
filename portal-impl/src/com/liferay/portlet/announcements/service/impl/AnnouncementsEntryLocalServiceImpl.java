@@ -457,9 +457,11 @@ public class AnnouncementsEntryLocalServiceImpl
 			toName = user.getFullName();
 			toAddress = user.getEmailAddress();
 
-			if (Validator.isNotNull(toAddress)) {
-				users.add(user);
+			if (Validator.isNull(toAddress)) {
+				return;
 			}
+
+			users.add(user);
 
 			notifyUsers(users, entry, company.getLocale(), toAddress, toName);
 		}
