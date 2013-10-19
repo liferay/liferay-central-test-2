@@ -35,6 +35,7 @@ import java.io.File;
 
 import java.lang.reflect.Method;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
@@ -42,8 +43,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import scala.actors.threadpool.Arrays;
 
 /**
  * @author Shuyang Zhou
