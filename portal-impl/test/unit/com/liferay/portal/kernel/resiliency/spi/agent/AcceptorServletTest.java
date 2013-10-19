@@ -64,14 +64,16 @@ public class AcceptorServletTest {
 	public void setUp() {
 		PortalUtil portalUtil = new PortalUtil();
 
-		portalUtil.setPortal(new PortalImpl() {
+		portalUtil.setPortal(
+			new PortalImpl() {
 
-			@Override
-			public String getPathContext() {
-				return _pathContext;
+				@Override
+				public String getPathContext() {
+					return _pathContext;
+				}
+
 			}
-
-		});
+		);
 
 		ConcurrentMap<String, Object> attributes =
 			ProcessExecutor.ProcessContext.getAttributes();
