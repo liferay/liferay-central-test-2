@@ -91,15 +91,15 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 						actionResponse, siteThemeDisplay,
 						PortletKeys.SITE_TEMPLATE_SETTINGS);
 
-				String backURL = HttpUtil.setParameter(
+				String controlPanelURL = HttpUtil.setParameter(
 					themeDisplay.getURLControlPanel(), "p_p_id",
 					PortletKeys.LAYOUT_SET_PROTOTYPE);
 
-				backURL = HttpUtil.setParameter(
-					backURL, "controlPanelCategory",
+				controlPanelURL = HttpUtil.setParameter(
+					controlPanelURL, "controlPanelCategory",
 					themeDisplay.getControlPanelCategory());
 
-				siteAdministrationURL.setParameter("redirect", backURL);
+				siteAdministrationURL.setParameter("redirect", controlPanelURL);
 
 				redirect = siteAdministrationURL.toString();
 			}
