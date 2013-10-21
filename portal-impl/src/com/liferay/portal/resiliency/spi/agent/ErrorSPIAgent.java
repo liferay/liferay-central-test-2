@@ -64,33 +64,27 @@ public class ErrorSPIAgent implements SPIAgent {
 		SPIAgent.Lifecycle lifecycle = (SPIAgent.Lifecycle)request.getAttribute(
 			WebKeys.SPI_AGENT_LIFECYCLE);
 
-		switch (lifecycle) {
-			case ACTION :
-				request.setAttribute(
-					WebKeys.SPI_AGENT_ACTION_RESULT,
-					new ActionResult(
-						Collections.<Event>emptyList(), StringPool.SLASH));
+		if (lifecycle.equals(SPIAgent.Lifecycle.ACTION)) {
+			request.setAttribute(
+				WebKeys.SPI_AGENT_ACTION_RESULT,
+				new ActionResult(
+					Collections.<Event>emptyList(), StringPool.SLASH));
+		}
+		else if (lifecycle.equals(SPIAgent.Lifecycle.EVENT)) {
+			request.setAttribute(
+				WebKeys.SPI_AGENT_EVENT_RESULT, Collections.emptyList());
+		}
+		else if (lifecycle.equals(SPIAgent.Lifecycle.RENDER)) {
+			try {
+				PrintWriter printWriter = response.getWriter();
 
-				return;
-			case EVENT :
-				request.setAttribute(
-					WebKeys.SPI_AGENT_EVENT_RESULT, Collections.emptyList());
-
-				return;
-			case RENDER :
-				try {
-					PrintWriter printWriter = response.getWriter();
-
-					printWriter.write("<div class=\"alert alert-error\">");
-					printWriter.write("SPI is temporarily unavailable.");
-					printWriter.write("</div>");
-				}
-				catch (IOException ioe) {
-					throw new PortalResiliencyException(ioe);
-				}
-
-				return;
-			case RESOURCE :
+				printWriter.write("<div class=\"alert alert-error\">");
+				printWriter.write("SPI is temporarily unavailable.");
+				printWriter.write("</div>");
+			}
+			catch (IOException ioe) {
+				throw new PortalResiliencyException(ioe);
+			}
 		}
 	}
 

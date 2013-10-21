@@ -52,7 +52,7 @@ public class ErrorSPI implements SPI {
 
 	@Override
 	public SPIAgent getSPIAgent() {
-		return _SPI_AGENT;
+		return _spiAgent;
 	}
 
 	@Override
@@ -82,6 +82,6 @@ public class ErrorSPI implements SPI {
 	public void stop() {
 	}
 
-	private static final SPIAgent _SPI_AGENT = new ErrorSPIAgent();
+	private static SPIAgent _spiAgent = new ErrorSPIAgent();
 
 }
