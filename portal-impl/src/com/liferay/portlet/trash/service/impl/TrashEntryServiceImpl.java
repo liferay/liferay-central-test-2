@@ -350,8 +350,7 @@ public class TrashEntryServiceImpl extends TrashEntryServiceBaseImpl {
 		}
 
 		trashHandler.moveTrashEntry(
-			getUserId(), classPK, destinationContainerModelId,
-			serviceContext);
+			getUserId(), classPK, destinationContainerModelId, serviceContext);
 	}
 
 	@Override
