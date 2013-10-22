@@ -869,11 +869,6 @@ public abstract class BaseTrashHandlerTestCase {
 			parentTrashHandler.getTrashContainerModelsCount(
 				(Long)parentBaseModel.getPrimaryKeyObj()));
 
-		Assert.assertEquals(
-			1,
-			parentTrashHandler.getTrashContainedModelsCount(
-				(Long)parentBaseModel.getPrimaryKeyObj()));
-
 		if (isAssetableModel()) {
 			Assert.assertFalse(isAssetEntryVisible(baseModel));
 		}
