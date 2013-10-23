@@ -16,8 +16,6 @@
 
 <%@ include file="/html/common/themes/init.jsp" %>
 
-<portlet:defineObjects />
-
 <%
 String currentURL = PortalUtil.getCurrentURL(request);
 
