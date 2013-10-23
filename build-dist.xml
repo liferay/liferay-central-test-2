@@ -2395,6 +2395,10 @@ plugins.includes=</echo>
 					<then>
 						<unzip dest="${zip.executable.dir}/.." src="${patching.tool.zip}" />
 
+						<chmod dir="${zip.executable.dir}/../patching-tool" perm="u+x">
+							<include name="**/*.sh" />
+						</chmod>
+
 						<if>
 							<contains string="${zip.executable.dir}" substring="glassfish" />
 							<then>
