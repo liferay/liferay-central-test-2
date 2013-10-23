@@ -78,13 +78,13 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 
 			TermCollector termCollector = termCollectors.get(i);
 
-			long curCategoryId = GetterUtil.getLong(termCollector.getTerm());
+			long assetCategoryId = GetterUtil.getLong(termCollector.getTerm());
 
-			if (curCategoryId == 0) {
+			if (assetCategoryId == 0) {
 				continue;
 			}
 
-			AssetCategory curAssetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(curCategoryId);
+			AssetCategory curAssetCategory = AssetCategoryLocalServiceUtil.getAssetCategory(assetCategoryId);
 		%>
 
 				<c:if test="<%= fieldParam.equals(termCollector.getTerm()) %>">
@@ -109,7 +109,7 @@ boolean showAssetCount = dataJSONObject.getBoolean("showAssetCount", true);
 		%>
 
 			<li class="facet-value tag-popularity-<%= popularity %> <%= fieldParam.equals(termCollector.getTerm()) ? "current-term" : StringPool.BLANK %>">
-				<a data-value="<%= HtmlUtil.escapeAttribute(String.valueOf(curCategoryId)) %>" href="javascript:;"><%= HtmlUtil.escape(curAssetCategory.getTitle(locale)) %></a>
+				<a data-value="<%= HtmlUtil.escapeAttribute(String.valueOf(assetCategoryId)) %>" href="javascript:;"><%= HtmlUtil.escape(curAssetCategory.getTitle(locale)) %></a>
 
 				<c:if test="<%= showAssetCount %>">
 					<span class="frequency">(<%= termCollector.getFrequency() %>)</span>
