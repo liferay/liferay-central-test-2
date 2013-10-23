@@ -164,10 +164,10 @@ public class SPIClassPathContextListenerTest {
 					if (key.equals(PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME)) {
 						return driverClassName;
 					}
-	
+
 					return super.get(key);
 				}
-	
+
 			});
 
 		PortalClassLoaderUtil.setClassLoader(new ClassLoader() {
