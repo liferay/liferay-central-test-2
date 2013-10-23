@@ -156,18 +156,19 @@ public class SPIClassPathContextListenerTest {
 		putResource(
 			resources, _portalServiceJarFile, PortalException.class.getName());
 
-		PropsUtil.setProps(new PropsImpl() {
+		PropsUtil.setProps(
+			new PropsImpl() {
 
-			@Override
-			public String get(String key) {
-				if (key.equals(PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME)) {
-					return driverClassName;
+				@Override
+				public String get(String key) {
+					if (key.equals(PropsKeys.JDBC_DEFAULT_DRIVER_CLASS_NAME)) {
+						return driverClassName;
+					}
+	
+					return super.get(key);
 				}
-
-				return super.get(key);
-			}
-
-		});
+	
+			});
 
 		PortalClassLoaderUtil.setClassLoader(new ClassLoader() {
 
