@@ -183,7 +183,6 @@ cobertura.ser
 /sql/create
 /sql/create-bare
 /sql/create-sharded
-/sql/create-minimal
 /sql/indexes
 /sql/legacy
 /sql/log
@@ -197,7 +196,6 @@ cobertura.ser
 /sql/lportal*.properties
 /sql/lportal*.script
 /sql/portal
-/sql/portal-minimal
 /sql/portal-tables
 /sql/sequences
 /sql/sql.*.properties
