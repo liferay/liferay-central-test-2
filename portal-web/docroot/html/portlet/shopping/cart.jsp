@@ -71,12 +71,12 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 			ShoppingItemPrice[] itemPrices = (ShoppingItemPrice[])ShoppingItemPriceLocalServiceUtil.getItemPrices(item.getItemId()).toArray(new ShoppingItemPrice[0]);
 
-			int maxPossibleQuantity = getMaxPossibleQuantity(itemPrices);
+			int maxQuantity = _getMaxQuantity(itemPrices);
 		%>
 
 			count = document.<portlet:namespace />fm.<portlet:namespace />item_<%= item.getItemId() %>_<%= itemsCount %>_count.value;
 
-			if ((count == "") || isNaN(count) || (count < 0) || ((count > <%= maxPossibleQuantity %>) && (<%= maxPossibleQuantity %> > 0))) {
+			if ((count == "") || isNaN(count) || (count < 0) || ((count > <%= maxQuantity %>) && (<%= maxQuantity %> > 0))) {
 				if (invalidSKUs != "") {
 					invalidSKUs += ", ";
 				}
@@ -350,9 +350,9 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 		sb.setIndex(0);
 
-		int maxPossibleQuantity = getMaxPossibleQuantity(itemPrices);
+		int maxQuantity = _getMaxQuantity(itemPrices);
 
-		if (minQuantityMultiple && (item.getMinQuantity() > 1) && (maxPossibleQuantity != 0)) {
+		if (minQuantityMultiple && (item.getMinQuantity() > 1) && (maxQuantity != 0)) {
 			sb.append("<select name=\"");
 			sb.append(renderResponse.getNamespace());
 			sb.append("item_");
@@ -363,7 +363,7 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 			sb.append("<option value=\"0\">0</option>");
 
-			for (int j = 1; j <= (maxPossibleQuantity / item.getMinQuantity()); j++) {
+			for (int j = 1; j <= (maxQuantity / item.getMinQuantity()); j++) {
 				int curQuantity = item.getMinQuantity() * j;
 
 				sb.append("<option ");
@@ -540,19 +540,19 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 </aui:form>
 
 <%!
-private static int getMaxPossibleQuantity(ShoppingItemPrice[] itemPrices) {
-	int maxPossibleQuantity = 0;
+private static int _getMaxQuantity(ShoppingItemPrice[] itemPrices) {
+	int maxQuantity = 0;
 
-	for (ShoppingItemPrice itemPrice : itemPrices)
+	for (ShoppingItemPrice itemPrice : itemPrices) {
 		if (itemPrice.getMaxQuantity() == 0) {
 			return 0;
 		}
 
-		if (maxPossibleQuantity < itemPrice.getMaxQuantity()) {
-			maxPossibleQuantity = itemPrice.getMaxQuantity();
+		if (maxQuantity < itemPrice.getMaxQuantity()) {
+			maxQuantity = itemPrice.getMaxQuantity();
 		}
 	}
 
-	return maxPossibleQuantity;
+	return maxQuantity;
 }
 %>
