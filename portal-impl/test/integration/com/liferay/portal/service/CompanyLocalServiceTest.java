@@ -204,11 +204,8 @@ public class CompanyLocalServiceTest {
 
 		GroupLocalServiceUtil.updateGroup(group);
 
-		String[] invalidAccountNames = new String[] {
-			StringPool.BLANK, group.getName()
-		};
-
-		testUpdateAccountNames(company, invalidAccountNames, true);
+		testUpdateAccountNames(
+			company, new String[] {StringPool.BLANK, group.getName()}, true);
 
 		GroupLocalServiceUtil.deleteGroup(group);
 
@@ -217,11 +214,8 @@ public class CompanyLocalServiceTest {
 
 	@Test
 	public void testUpdateInvalidVirtualHostNames() throws Exception {
-		String[] invalidVirtualHostNames = new String[] {
-			StringPool.BLANK, "localhost", ".abc",
-		};
-
-		testUpdateVirtualHostNames(invalidVirtualHostNames, true);
+		testUpdateVirtualHostNames(
+			new String[] {StringPool.BLANK, "localhost", ".abc",}, true);
 	}
 
 	@Test
@@ -296,7 +290,7 @@ public class CompanyLocalServiceTest {
 	}
 
 	protected void testUpdateAccountNames(
-			Company company, String[] accountNames, boolean fail)
+			Company company, String[] accountNames, boolean expectFailure)
 		throws Exception {
 
 		Account account = AccountLocalServiceUtil.getAccount(
@@ -312,12 +306,12 @@ public class CompanyLocalServiceTest {
 					account.getTickerSymbol(), account.getIndustry(),
 					account.getType(), account.getSize());
 
-				if (fail) {
+				if (expectFailure) {
 					Assert.fail();
 				}
 			}
 			catch (AccountNameException ane) {
-				if (!fail) {
+				if (!expectFailure) {
 					Assert.fail();
 				}
 			}
@@ -373,7 +367,7 @@ public class CompanyLocalServiceTest {
 	}
 
 	protected void testUpdateVirtualHostNames(
-			String[] virtualHostNames, boolean fail)
+			String[] virtualHostNames, boolean expectFailure)
 		throws Exception {
 
 		Company company = addCompany();
@@ -384,12 +378,12 @@ public class CompanyLocalServiceTest {
 					company.getCompanyId(), virtualHostName, company.getMx(),
 					company.getMaxUsers(), company.getActive());
 
-				if (fail) {
+				if (expectFailure) {
 					Assert.fail();
 				}
 			}
 			catch (CompanyVirtualHostException cvhe) {
-				if (!fail) {
+				if (!expectFailure) {
 					Assert.fail();
 				}
 			}
