@@ -24,6 +24,7 @@ import com.liferay.portal.kernel.servlet.ServletResponseUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -71,9 +72,9 @@ public class DynamicCSSFilter extends IgnoreModuleRequestFilter {
 			CacheKeyGeneratorUtil.getCacheKeyGenerator(
 				DynamicCSSFilter.class.getName());
 
+		cacheKeyGenerator.append(HttpUtil.getProtocol(request.isSecure()));
+		cacheKeyGenerator.append(StringPool.UNDERLINE);
 		cacheKeyGenerator.append(request.getRequestURI());
-
-		cacheKeyGenerator.append(String.valueOf(request.isSecure()));
 
 		String queryString = request.getQueryString();
 
