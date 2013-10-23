@@ -223,8 +223,7 @@ public class BookmarksEntryLocalServiceImpl
 			long groupId, long folderId, int status, int start, int end)
 		throws SystemException {
 
-		return bookmarksEntryPersistence.findByG_F_S(
-			groupId, folderId, status, start, end);
+		return getEntries(groupId, folderId, start, end, null);
 	}
 
 	@Override
