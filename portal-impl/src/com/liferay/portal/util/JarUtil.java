@@ -61,8 +61,8 @@ public class JarUtil {
 
 		setProgressStatus(progressTracker, ProgressStatusConstants.COPYING);
 
-		if (!PortalContextLoaderLifecycleThreadLocal.isInitializing() &&
-				PropsValues.CLUSTER_LINK_ENABLED) {
+		if (PropsValues.CLUSTER_LINK_ENABLED &&
+			!PortalContextLoaderLifecycleThreadLocal.isInitializing()) {
 
 			try {
 				DLStoreUtil.deleteFile(
