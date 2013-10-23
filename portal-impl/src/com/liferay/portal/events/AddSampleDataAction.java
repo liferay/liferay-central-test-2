@@ -51,7 +51,7 @@ import org.apache.commons.lang.time.StopWatch;
 /**
  * @author Shinn Lok
  */
-public class AddSamplePortalDataAction extends SimpleAction {
+public class AddSampleDataAction extends SimpleAction {
 
 	@Override
 	public void run(String[] ids) throws ActionException {
@@ -240,7 +240,7 @@ public class AddSamplePortalDataAction extends SimpleAction {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		AddSamplePortalDataAction.class);
+		AddSampleDataAction.class);
 
 	private static Object[][] _organizationArrays = {
 		{
