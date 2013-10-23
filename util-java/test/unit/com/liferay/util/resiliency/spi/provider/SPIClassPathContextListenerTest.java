@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.util.PropsImpl;
 
 import java.io.File;
@@ -107,41 +108,41 @@ public class SPIClassPathContextListenerTest {
 
 		extNotJarFile.createNewFile();
 
-		// Global lib dir1 for portal-service.jar
+		// Global lib 1 directory for portal-service.jar
 
-		File globalLibDir1 = new File(_CONTEXT_PATH, _GLOBAL_LIB_DIR1_NAME);
+		File globalLib1Dir = new File(_CONTEXT_PATH, _GLOBAL_LIB_1_DIR_NAME);
 
-		globalLibDir1.mkdir();
+		globalLib1Dir.mkdir();
 
-		_portalServiceJarFile = new File(globalLibDir1, "portal-service.jar");
+		_portalServiceJarFile = new File(globalLib1Dir, "portal-service.jar");
 
 		_portalServiceJarFile.createNewFile();
 
-		_global1JarFile = new File(globalLibDir1, "global1JarFile.jar");
+		_global1JarFile = new File(globalLib1Dir, "global1JarFile.jar");
 
 		_global1JarFile.createNewFile();
 
 		File global1NotJarFile = new File(
-			globalLibDir1, "global1NotJarFile.zip");
+			globalLib1Dir, "global1NotJarFile.zip");
 
 		global1NotJarFile.createNewFile();
 
-		// Global lib dir2 for JDBC driver
+		// Global lib 2 directory for JDBC driver
 
-		File globalLibDir2 = new File(_CONTEXT_PATH, _GLOBAL_LIB_DIR2_NAME);
+		File globalLib2Dir = new File(_CONTEXT_PATH, _GLOBAL_LIB_2_DIR_NAME);
 
-		globalLibDir2.mkdir();
+		globalLib2Dir.mkdir();
 
-		_jdbcDriverJarFile = new File(globalLibDir2, "jdbcDriver.jar");
+		_jdbcDriverJarFile = new File(globalLib2Dir, "jdbcDriver.jar");
 
 		_jdbcDriverJarFile.createNewFile();
 
-		_global2JarFile = new File(globalLibDir2, "global2JarFile.jar");
+		_global2JarFile = new File(globalLib2Dir, "global2JarFile.jar");
 
 		_global2JarFile.createNewFile();
 
 		File global2NotJarFile = new File(
-			globalLibDir2, "global2NotJarFile.zip");
+			globalLib2Dir, "global2NotJarFile.zip");
 
 		global2NotJarFile.createNewFile();
 
@@ -187,8 +188,8 @@ public class SPIClassPathContextListenerTest {
 	@After
 	public void tearDown() {
 		deleteFile(new File(_CONTEXT_PATH, _EMBEDDED_LIB_DIR_NAME));
-		deleteFile(new File(_CONTEXT_PATH, _GLOBAL_LIB_DIR1_NAME));
-		deleteFile(new File(_CONTEXT_PATH, _GLOBAL_LIB_DIR2_NAME));
+		deleteFile(new File(_CONTEXT_PATH, _GLOBAL_LIB_1_DIR_NAME));
+		deleteFile(new File(_CONTEXT_PATH, _GLOBAL_LIB_2_DIR_NAME));
 	}
 
 	@Test
@@ -208,14 +209,24 @@ public class SPIClassPathContextListenerTest {
 		spiClassPathContextListener.contextInitialized(
 			new ServletContextEvent(_mockServletContext));
 
-		String spiClassPath =
-			_jarFile.getAbsolutePath() + File.pathSeparator +
-			_global1JarFile.getAbsolutePath() + File.pathSeparator +
-			_portalServiceJarFile.getAbsolutePath() + File.pathSeparator +
-			_global2JarFile.getAbsolutePath() + File.pathSeparator +
-			_jdbcDriverJarFile.getAbsolutePath() + File.pathSeparator +
-			_extJarFile.getAbsolutePath() + File.pathSeparator +
-			_CONTEXT_PATH + "/WEB-INF/classes";
+		StringBundler sb = new StringBundler();
+
+		sb.append(_jarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_global1JarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_portalServiceJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_global2JarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_jdbcDriverJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_extJarFile.getAbsolutePath());
+		sb.append(File.pathSeparator);
+		sb.append(_CONTEXT_PATH);
+		sb.append("/WEB-INF/classes");
+
+		String spiClassPath = sb.toString();
 
 		Assert.assertEquals(
 			spiClassPath, SPIClassPathContextListener.SPI_CLASS_PATH);
@@ -291,12 +302,12 @@ public class SPIClassPathContextListenerTest {
 
 	@Test
 	public void testMissingGlobalLibDir1() throws IOException {
-		testMissingDir(_GLOBAL_LIB_DIR1_NAME);
+		testMissingDir(_GLOBAL_LIB_1_DIR_NAME);
 	}
 
 	@Test
 	public void testMissingGlobalLibDir2() throws IOException {
-		testMissingDir(_GLOBAL_LIB_DIR2_NAME);
+		testMissingDir(_GLOBAL_LIB_2_DIR_NAME);
 	}
 
 	@Test
@@ -482,13 +493,13 @@ public class SPIClassPathContextListenerTest {
 
 	private static String _CONTEXT_PATH = System.getProperty("java.io.tmpdir");
 
-	private static String _EMBEDDED_LIB_DIR_NAME = "/embeddedLibDir";
+	private static String _EMBEDDED_LIB_DIR_NAME = "/embeddedLib";
 
-	private static String _EMBEDDED_LIB_EXT_DIR_NAME = "/embeddedLibDir/ext";
+	private static String _EMBEDDED_LIB_EXT_DIR_NAME = "/embeddedLib/ext";
 
-	private static String _GLOBAL_LIB_DIR1_NAME = "/globalLibDir1";
+	private static String _GLOBAL_LIB_1_DIR_NAME = "/globalLib1";
 
-	private static String _GLOBAL_LIB_DIR2_NAME = "/globalLibDir2";
+	private static String _GLOBAL_LIB_2_DIR_NAME = "/globalLib2";
 
 	private File _extJarFile;
 	private File _global1JarFile;

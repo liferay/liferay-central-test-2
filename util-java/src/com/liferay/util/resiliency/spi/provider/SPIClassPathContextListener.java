@@ -68,7 +68,7 @@ public class SPIClassPathContextListener implements ServletContextListener {
 
 		Set<File> jarFiles = new LinkedHashSet<File>();
 
-		// Load embedded tomcat
+		// Load embedded Tomcat
 
 		File spiEmbeddedLibDir = new File(contextPath, spiEmbeddedLibDirName);
 
