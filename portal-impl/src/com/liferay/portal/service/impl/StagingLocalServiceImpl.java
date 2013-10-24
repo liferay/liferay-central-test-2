@@ -402,7 +402,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	}
 
 	protected void disableRemoteStaging(String remoteURL, long remoteGroupId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		PermissionChecker permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
