@@ -29,14 +29,14 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 /**
  * @author Shuyang Zhou
+ * @author Iliyan Peych
  */
 public class BrowserSnifferImplTest {
 
 	@Test
 	public void testIsAndroid() throws IOException {
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new InputStreamReader(getClass().getResourceAsStream(
-				"dependencies/user_agents.csv")));
+		UnsyncBufferedReader unsyncBufferedReader =
+			getResourceAsUnsyncBufferedReader("dependencies/user_agents.csv");
 
 		boolean android = false;
 		String line = null;
@@ -84,9 +84,8 @@ public class BrowserSnifferImplTest {
 
 	@Test
 	public void testIsMobile() throws IOException {
-		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
-			new InputStreamReader(getClass().getResourceAsStream(
-				"dependencies/user_agents.csv")));
+		UnsyncBufferedReader unsyncBufferedReader =
+			getResourceAsUnsyncBufferedReader("dependencies/user_agents.csv");
 
 		boolean mobile = false;
 		String line = null;
@@ -168,6 +167,16 @@ public class BrowserSnifferImplTest {
 		}
 
 		unsyncBufferedReader.close();
+	}
+
+	protected UnsyncBufferedReader getResourceAsUnsyncBufferedReader(
+		String name) {
+
+		Class<?> clazz = getClass();
+
+		return new UnsyncBufferedReader(
+			new InputStreamReader(
+				clazz.getResourceAsStream("dependencies/user_agents.csv")));
 	}
 
 	private BrowserSnifferImpl _browserSnifferImpl = new BrowserSnifferImpl();
