@@ -106,12 +106,9 @@ public class DDMStructureStagedModelDataHandler
 		throws PortletDataException {
 
 		String uuid = element.attributeValue("uuid");
-
 		long classNameId = GetterUtil.getLong(
 			element.attributeValue("class-name-id"));
-
 		String structureKey = element.attributeValue("structure-key");
-
 		boolean preloaded = GetterUtil.getBoolean(
 			element.attributeValue("preloaded"));
 
