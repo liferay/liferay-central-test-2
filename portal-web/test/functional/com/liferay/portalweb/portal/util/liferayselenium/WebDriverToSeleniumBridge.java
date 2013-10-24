@@ -1277,23 +1277,23 @@ public class WebDriverToSeleniumBridge
 		if (locator.equals("relative=parent")) {
 			targetLocator.window(_defaultWindowHandle);
 
-			if (!_frameWebElementStack.isEmpty()) {
-				_frameWebElementStack.pop();
+			if (!_frameWebElements.isEmpty()) {
+				_frameWebElements.pop();
 
-				if (!_frameWebElementStack.isEmpty()) {
-					targetLocator.frame(_frameWebElementStack.peek());
+				if (!_frameWebElements.isEmpty()) {
+					targetLocator.frame(_frameWebElements.peek());
 				}
 			}
 		}
 		else if (locator.equals("relative=top")) {
-			_frameWebElementStack = new Stack<WebElement>();
+			_frameWebElements = new Stack<WebElement>();
 
 			targetLocator.window(_defaultWindowHandle);
 		}
 		else {
-			_frameWebElementStack.push(getWebElement(locator));
+			_frameWebElements.push(getWebElement(locator));
 
-			targetLocator.frame(_frameWebElementStack.peek());
+			targetLocator.frame(_frameWebElements.peek());
 		}
 	}
 
@@ -1883,7 +1883,7 @@ public class WebDriverToSeleniumBridge
 		WebDriverToSeleniumBridge.class);
 
 	private String _defaultWindowHandle;
-	private Stack<WebElement> _frameWebElementStack = new Stack<WebElement>();
+	private Stack<WebElement> _frameWebElements = new Stack<WebElement>();
 	private Keys[] _keysArray = new Keys[128];
 	private Map<String, String> _keysSpecialChars =
 		new HashMap<String, String>();
