@@ -72,8 +72,6 @@ public class LayoutStagingBackgroundTaskExecutor
 
 		MissingReferences missingReferences = null;
 
-		boolean failed = false;
-
 		try {
 			Callable layoutStagingCallable = new LayoutStagingCallable(
 				backgroundTask, sourceGroupId, targetGroupId, taskContextMap,
