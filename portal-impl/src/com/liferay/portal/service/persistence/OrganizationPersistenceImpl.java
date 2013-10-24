@@ -6846,21 +6846,21 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 */
 	@Override
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
-		Set<Long> newGroupPKSet = SetUtil.fromArray(groupPKs);
-		Set<Long> oldGroupPKSet = SetUtil.fromArray(organizationToGroupTableMapper.getRightPrimaryKeys(
+		Set<Long> newGroupPKsSet = SetUtil.fromArray(groupPKs);
+		Set<Long> oldGroupPKsSet = SetUtil.fromArray(organizationToGroupTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeGroupPKSet = new HashSet<Long>(oldGroupPKSet);
+		Set<Long> removeGroupPKsSet = new HashSet<Long>(oldGroupPKsSet);
 
-		removeGroupPKSet.removeAll(newGroupPKSet);
+		removeGroupPKsSet.removeAll(newGroupPKsSet);
 
-		for (long removeGroupPK : removeGroupPKSet) {
+		for (long removeGroupPK : removeGroupPKsSet) {
 			organizationToGroupTableMapper.deleteTableMapping(pk, removeGroupPK);
 		}
 
-		newGroupPKSet.removeAll(oldGroupPKSet);
+		newGroupPKsSet.removeAll(oldGroupPKsSet);
 
-		for (long newGroupPK : newGroupPKSet) {
+		for (long newGroupPK : newGroupPKsSet) {
 			organizationToGroupTableMapper.addTableMapping(pk, newGroupPK);
 		}
 	}
@@ -7122,21 +7122,21 @@ public class OrganizationPersistenceImpl extends BasePersistenceImpl<Organizatio
 	 */
 	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
-		Set<Long> newUserPKSet = SetUtil.fromArray(userPKs);
-		Set<Long> oldUserPKSet = SetUtil.fromArray(organizationToUserTableMapper.getRightPrimaryKeys(
+		Set<Long> newUserPKsSet = SetUtil.fromArray(userPKs);
+		Set<Long> oldUserPKsSet = SetUtil.fromArray(organizationToUserTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeUserPKSet = new HashSet<Long>(oldUserPKSet);
+		Set<Long> removeUserPKsSet = new HashSet<Long>(oldUserPKsSet);
 
-		removeUserPKSet.removeAll(newUserPKSet);
+		removeUserPKsSet.removeAll(newUserPKsSet);
 
-		for (long removeUserPK : removeUserPKSet) {
+		for (long removeUserPK : removeUserPKsSet) {
 			organizationToUserTableMapper.deleteTableMapping(pk, removeUserPK);
 		}
 
-		newUserPKSet.removeAll(oldUserPKSet);
+		newUserPKsSet.removeAll(oldUserPKsSet);
 
-		for (long newUserPK : newUserPKSet) {
+		for (long newUserPK : newUserPKsSet) {
 			organizationToUserTableMapper.addTableMapping(pk, newUserPK);
 		}
 	}

@@ -9728,22 +9728,22 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 	@Override
 	public void setDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
 		throws SystemException {
-		Set<Long> newDLFileEntryTypePKSet = SetUtil.fromArray(dlFileEntryTypePKs);
-		Set<Long> oldDLFileEntryTypePKSet = SetUtil.fromArray(ddmStructureToDLFileEntryTypeTableMapper.getRightPrimaryKeys(
+		Set<Long> newDLFileEntryTypePKsSet = SetUtil.fromArray(dlFileEntryTypePKs);
+		Set<Long> oldDLFileEntryTypePKsSet = SetUtil.fromArray(ddmStructureToDLFileEntryTypeTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeDLFileEntryTypePKSet = new HashSet<Long>(oldDLFileEntryTypePKSet);
+		Set<Long> removeDLFileEntryTypePKsSet = new HashSet<Long>(oldDLFileEntryTypePKsSet);
 
-		removeDLFileEntryTypePKSet.removeAll(newDLFileEntryTypePKSet);
+		removeDLFileEntryTypePKsSet.removeAll(newDLFileEntryTypePKsSet);
 
-		for (long removeDLFileEntryTypePK : removeDLFileEntryTypePKSet) {
+		for (long removeDLFileEntryTypePK : removeDLFileEntryTypePKsSet) {
 			ddmStructureToDLFileEntryTypeTableMapper.deleteTableMapping(pk,
 				removeDLFileEntryTypePK);
 		}
 
-		newDLFileEntryTypePKSet.removeAll(oldDLFileEntryTypePKSet);
+		newDLFileEntryTypePKsSet.removeAll(oldDLFileEntryTypePKsSet);
 
-		for (long newDLFileEntryTypePK : newDLFileEntryTypePKSet) {
+		for (long newDLFileEntryTypePK : newDLFileEntryTypePKsSet) {
 			ddmStructureToDLFileEntryTypeTableMapper.addTableMapping(pk,
 				newDLFileEntryTypePK);
 		}

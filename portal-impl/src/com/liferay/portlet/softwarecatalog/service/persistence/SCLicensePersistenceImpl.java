@@ -2656,22 +2656,22 @@ public class SCLicensePersistenceImpl extends BasePersistenceImpl<SCLicense>
 	@Override
 	public void setSCProductEntries(long pk, long[] scProductEntryPKs)
 		throws SystemException {
-		Set<Long> newSCProductEntryPKSet = SetUtil.fromArray(scProductEntryPKs);
-		Set<Long> oldSCProductEntryPKSet = SetUtil.fromArray(scLicenseToSCProductEntryTableMapper.getRightPrimaryKeys(
+		Set<Long> newSCProductEntryPKsSet = SetUtil.fromArray(scProductEntryPKs);
+		Set<Long> oldSCProductEntryPKsSet = SetUtil.fromArray(scLicenseToSCProductEntryTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeSCProductEntryPKSet = new HashSet<Long>(oldSCProductEntryPKSet);
+		Set<Long> removeSCProductEntryPKsSet = new HashSet<Long>(oldSCProductEntryPKsSet);
 
-		removeSCProductEntryPKSet.removeAll(newSCProductEntryPKSet);
+		removeSCProductEntryPKsSet.removeAll(newSCProductEntryPKsSet);
 
-		for (long removeSCProductEntryPK : removeSCProductEntryPKSet) {
+		for (long removeSCProductEntryPK : removeSCProductEntryPKsSet) {
 			scLicenseToSCProductEntryTableMapper.deleteTableMapping(pk,
 				removeSCProductEntryPK);
 		}
 
-		newSCProductEntryPKSet.removeAll(oldSCProductEntryPKSet);
+		newSCProductEntryPKsSet.removeAll(oldSCProductEntryPKsSet);
 
-		for (long newSCProductEntryPK : newSCProductEntryPKSet) {
+		for (long newSCProductEntryPK : newSCProductEntryPKsSet) {
 			scLicenseToSCProductEntryTableMapper.addTableMapping(pk,
 				newSCProductEntryPK);
 		}

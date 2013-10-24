@@ -3202,22 +3202,22 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl<SCFra
 	@Override
 	public void setSCProductVersions(long pk, long[] scProductVersionPKs)
 		throws SystemException {
-		Set<Long> newSCProductVersionPKSet = SetUtil.fromArray(scProductVersionPKs);
-		Set<Long> oldSCProductVersionPKSet = SetUtil.fromArray(scFrameworkVersionToSCProductVersionTableMapper.getRightPrimaryKeys(
+		Set<Long> newSCProductVersionPKsSet = SetUtil.fromArray(scProductVersionPKs);
+		Set<Long> oldSCProductVersionPKsSet = SetUtil.fromArray(scFrameworkVersionToSCProductVersionTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeSCProductVersionPKSet = new HashSet<Long>(oldSCProductVersionPKSet);
+		Set<Long> removeSCProductVersionPKsSet = new HashSet<Long>(oldSCProductVersionPKsSet);
 
-		removeSCProductVersionPKSet.removeAll(newSCProductVersionPKSet);
+		removeSCProductVersionPKsSet.removeAll(newSCProductVersionPKsSet);
 
-		for (long removeSCProductVersionPK : removeSCProductVersionPKSet) {
+		for (long removeSCProductVersionPK : removeSCProductVersionPKsSet) {
 			scFrameworkVersionToSCProductVersionTableMapper.deleteTableMapping(pk,
 				removeSCProductVersionPK);
 		}
 
-		newSCProductVersionPKSet.removeAll(oldSCProductVersionPKSet);
+		newSCProductVersionPKsSet.removeAll(oldSCProductVersionPKsSet);
 
-		for (long newSCProductVersionPK : newSCProductVersionPKSet) {
+		for (long newSCProductVersionPK : newSCProductVersionPKsSet) {
 			scFrameworkVersionToSCProductVersionTableMapper.addTableMapping(pk,
 				newSCProductVersionPK);
 		}
