@@ -85,10 +85,10 @@ long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
 	<aui:button cssClass="btn-primary" type="submit" value="save" />
 
 	<%
-	String taglibCancelURL = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) + "';";
+	String taglibCancel = "location.href = '" + HtmlUtil.escape(PortalUtil.escapeRedirect(redirect)) + "';";
 	%>
 
-	<aui:button onClick="<%= taglibCancelURL %>" value="cancel" />
+	<aui:button onClick="<%= taglibCancel %>" value="cancel" />
 </div>
 </form>
 
