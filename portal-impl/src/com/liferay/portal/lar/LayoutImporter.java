@@ -580,8 +580,7 @@ public class LayoutImporter {
 			// portlet permissions. The import of the portlet data assumes that
 			// portlet preferences already exist.
 
-			_portletImporter.setPortletScope(
-				portletDataContext, portletElement);
+			setPortletScope(portletDataContext, portletElement);
 
 			long portletPreferencesGroupId = groupId;
 
@@ -893,10 +892,6 @@ public class LayoutImporter {
 
 	protected void setPortletScope(
 		PortletDataContext portletDataContext, Element portletElement) {
-
-		if (ExportImportThreadLocal.isPortletImportInProcess()) {
-			return;
-		}
 
 		// Portlet data scope
 

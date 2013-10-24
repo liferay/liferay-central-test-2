@@ -541,8 +541,6 @@ public class PortletImporter {
 			throw new SystemException(de);
 		}
 
-		setPortletScope(portletDataContext, portletElement);
-
 		Element portletDataElement = portletElement.element("portlet-data");
 
 		boolean importData = importPortletData && (portletDataElement != null);
