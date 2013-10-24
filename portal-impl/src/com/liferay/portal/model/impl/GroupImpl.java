@@ -97,11 +97,6 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
-	public void clearStagingGroup() {
-		_stagingGroup = null;
-	}
-
-	@Override
 	public String buildTreePath() throws PortalException, SystemException {
 		List<Group> groups = new ArrayList<Group>();
 
@@ -125,6 +120,11 @@ public class GroupImpl extends GroupBaseImpl {
 		}
 
 		return sb.toString();
+	}
+
+	@Override
+	public void clearStagingGroup() {
+		_stagingGroup = null;
 	}
 
 	@Override
