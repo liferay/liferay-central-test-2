@@ -70,7 +70,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		layoutSet.setModifiedDate(now);
 		layoutSet.setPrivateLayout(privateLayout);
 
-		layoutSet = _initLayoutSet(layoutSet);
+		layoutSet = initLayoutSet(layoutSet);
 
 		layoutSetPersistence.update(layoutSet);
 
@@ -115,7 +115,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		if (!group.isStagingGroup() && group.isOrganization() &&
 			group.isSite()) {
 
-			layoutSet = _initLayoutSet(layoutSet);
+			layoutSet = initLayoutSet(layoutSet);
 
 			layoutSet.setLogoId(layoutSet.getLogoId());
 
@@ -479,7 +479,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 		return layoutSet;
 	}
 
-	private LayoutSet _initLayoutSet(LayoutSet layoutSet)
+	protected LayoutSet initLayoutSet(LayoutSet layoutSet)
 		throws PortalException, SystemException {
 
 		Group group = layoutSet.getGroup();
