@@ -4153,22 +4153,22 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	@Override
 	public void setAssetCategories(long pk, long[] assetCategoryPKs)
 		throws SystemException {
-		Set<Long> newAssetCategoryPKSet = SetUtil.fromArray(assetCategoryPKs);
-		Set<Long> oldAssetCategoryPKSet = SetUtil.fromArray(assetEntryToAssetCategoryTableMapper.getRightPrimaryKeys(
+		Set<Long> newAssetCategoryPKsSet = SetUtil.fromArray(assetCategoryPKs);
+		Set<Long> oldAssetCategoryPKsSet = SetUtil.fromArray(assetEntryToAssetCategoryTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeAssetCategoryPKSet = new HashSet<Long>(oldAssetCategoryPKSet);
+		Set<Long> removeAssetCategoryPKsSet = new HashSet<Long>(oldAssetCategoryPKsSet);
 
-		removeAssetCategoryPKSet.removeAll(newAssetCategoryPKSet);
+		removeAssetCategoryPKsSet.removeAll(newAssetCategoryPKsSet);
 
-		for (long removeAssetCategoryPK : removeAssetCategoryPKSet) {
+		for (long removeAssetCategoryPK : removeAssetCategoryPKsSet) {
 			assetEntryToAssetCategoryTableMapper.deleteTableMapping(pk,
 				removeAssetCategoryPK);
 		}
 
-		newAssetCategoryPKSet.removeAll(oldAssetCategoryPKSet);
+		newAssetCategoryPKsSet.removeAll(oldAssetCategoryPKsSet);
 
-		for (long newAssetCategoryPK : newAssetCategoryPKSet) {
+		for (long newAssetCategoryPK : newAssetCategoryPKsSet) {
 			assetEntryToAssetCategoryTableMapper.addTableMapping(pk,
 				newAssetCategoryPK);
 		}
@@ -4444,22 +4444,22 @@ public class AssetEntryPersistenceImpl extends BasePersistenceImpl<AssetEntry>
 	@Override
 	public void setAssetTags(long pk, long[] assetTagPKs)
 		throws SystemException {
-		Set<Long> newAssetTagPKSet = SetUtil.fromArray(assetTagPKs);
-		Set<Long> oldAssetTagPKSet = SetUtil.fromArray(assetEntryToAssetTagTableMapper.getRightPrimaryKeys(
+		Set<Long> newAssetTagPKsSet = SetUtil.fromArray(assetTagPKs);
+		Set<Long> oldAssetTagPKsSet = SetUtil.fromArray(assetEntryToAssetTagTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeAssetTagPKSet = new HashSet<Long>(oldAssetTagPKSet);
+		Set<Long> removeAssetTagPKsSet = new HashSet<Long>(oldAssetTagPKsSet);
 
-		removeAssetTagPKSet.removeAll(newAssetTagPKSet);
+		removeAssetTagPKsSet.removeAll(newAssetTagPKsSet);
 
-		for (long removeAssetTagPK : removeAssetTagPKSet) {
+		for (long removeAssetTagPK : removeAssetTagPKsSet) {
 			assetEntryToAssetTagTableMapper.deleteTableMapping(pk,
 				removeAssetTagPK);
 		}
 
-		newAssetTagPKSet.removeAll(oldAssetTagPKSet);
+		newAssetTagPKsSet.removeAll(oldAssetTagPKsSet);
 
-		for (long newAssetTagPK : newAssetTagPKSet) {
+		for (long newAssetTagPK : newAssetTagPKsSet) {
 			assetEntryToAssetTagTableMapper.addTableMapping(pk, newAssetTagPK);
 		}
 	}

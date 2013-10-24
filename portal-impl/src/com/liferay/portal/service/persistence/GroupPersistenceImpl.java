@@ -8051,22 +8051,22 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	@Override
 	public void setOrganizations(long pk, long[] organizationPKs)
 		throws SystemException {
-		Set<Long> newOrganizationPKSet = SetUtil.fromArray(organizationPKs);
-		Set<Long> oldOrganizationPKSet = SetUtil.fromArray(groupToOrganizationTableMapper.getRightPrimaryKeys(
+		Set<Long> newOrganizationPKsSet = SetUtil.fromArray(organizationPKs);
+		Set<Long> oldOrganizationPKsSet = SetUtil.fromArray(groupToOrganizationTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeOrganizationPKSet = new HashSet<Long>(oldOrganizationPKSet);
+		Set<Long> removeOrganizationPKsSet = new HashSet<Long>(oldOrganizationPKsSet);
 
-		removeOrganizationPKSet.removeAll(newOrganizationPKSet);
+		removeOrganizationPKsSet.removeAll(newOrganizationPKsSet);
 
-		for (long removeOrganizationPK : removeOrganizationPKSet) {
+		for (long removeOrganizationPK : removeOrganizationPKsSet) {
 			groupToOrganizationTableMapper.deleteTableMapping(pk,
 				removeOrganizationPK);
 		}
 
-		newOrganizationPKSet.removeAll(oldOrganizationPKSet);
+		newOrganizationPKsSet.removeAll(oldOrganizationPKsSet);
 
-		for (long newOrganizationPK : newOrganizationPKSet) {
+		for (long newOrganizationPK : newOrganizationPKsSet) {
 			groupToOrganizationTableMapper.addTableMapping(pk, newOrganizationPK);
 		}
 	}
@@ -8326,21 +8326,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 */
 	@Override
 	public void setRoles(long pk, long[] rolePKs) throws SystemException {
-		Set<Long> newRolePKSet = SetUtil.fromArray(rolePKs);
-		Set<Long> oldRolePKSet = SetUtil.fromArray(groupToRoleTableMapper.getRightPrimaryKeys(
+		Set<Long> newRolePKsSet = SetUtil.fromArray(rolePKs);
+		Set<Long> oldRolePKsSet = SetUtil.fromArray(groupToRoleTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeRolePKSet = new HashSet<Long>(oldRolePKSet);
+		Set<Long> removeRolePKsSet = new HashSet<Long>(oldRolePKsSet);
 
-		removeRolePKSet.removeAll(newRolePKSet);
+		removeRolePKsSet.removeAll(newRolePKsSet);
 
-		for (long removeRolePK : removeRolePKSet) {
+		for (long removeRolePK : removeRolePKsSet) {
 			groupToRoleTableMapper.deleteTableMapping(pk, removeRolePK);
 		}
 
-		newRolePKSet.removeAll(oldRolePKSet);
+		newRolePKsSet.removeAll(oldRolePKsSet);
 
-		for (long newRolePK : newRolePKSet) {
+		for (long newRolePK : newRolePKsSet) {
 			groupToRoleTableMapper.addTableMapping(pk, newRolePK);
 		}
 	}
@@ -8612,21 +8612,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	@Override
 	public void setUserGroups(long pk, long[] userGroupPKs)
 		throws SystemException {
-		Set<Long> newUserGroupPKSet = SetUtil.fromArray(userGroupPKs);
-		Set<Long> oldUserGroupPKSet = SetUtil.fromArray(groupToUserGroupTableMapper.getRightPrimaryKeys(
+		Set<Long> newUserGroupPKsSet = SetUtil.fromArray(userGroupPKs);
+		Set<Long> oldUserGroupPKsSet = SetUtil.fromArray(groupToUserGroupTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeUserGroupPKSet = new HashSet<Long>(oldUserGroupPKSet);
+		Set<Long> removeUserGroupPKsSet = new HashSet<Long>(oldUserGroupPKsSet);
 
-		removeUserGroupPKSet.removeAll(newUserGroupPKSet);
+		removeUserGroupPKsSet.removeAll(newUserGroupPKsSet);
 
-		for (long removeUserGroupPK : removeUserGroupPKSet) {
+		for (long removeUserGroupPK : removeUserGroupPKsSet) {
 			groupToUserGroupTableMapper.deleteTableMapping(pk, removeUserGroupPK);
 		}
 
-		newUserGroupPKSet.removeAll(oldUserGroupPKSet);
+		newUserGroupPKsSet.removeAll(oldUserGroupPKsSet);
 
-		for (long newUserGroupPK : newUserGroupPKSet) {
+		for (long newUserGroupPK : newUserGroupPKsSet) {
 			groupToUserGroupTableMapper.addTableMapping(pk, newUserGroupPK);
 		}
 	}
@@ -8886,21 +8886,21 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 	 */
 	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
-		Set<Long> newUserPKSet = SetUtil.fromArray(userPKs);
-		Set<Long> oldUserPKSet = SetUtil.fromArray(groupToUserTableMapper.getRightPrimaryKeys(
+		Set<Long> newUserPKsSet = SetUtil.fromArray(userPKs);
+		Set<Long> oldUserPKsSet = SetUtil.fromArray(groupToUserTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeUserPKSet = new HashSet<Long>(oldUserPKSet);
+		Set<Long> removeUserPKsSet = new HashSet<Long>(oldUserPKsSet);
 
-		removeUserPKSet.removeAll(newUserPKSet);
+		removeUserPKsSet.removeAll(newUserPKsSet);
 
-		for (long removeUserPK : removeUserPKSet) {
+		for (long removeUserPK : removeUserPKsSet) {
 			groupToUserTableMapper.deleteTableMapping(pk, removeUserPK);
 		}
 
-		newUserPKSet.removeAll(oldUserPKSet);
+		newUserPKsSet.removeAll(oldUserPKsSet);
 
-		for (long newUserPK : newUserPKSet) {
+		for (long newUserPK : newUserPKsSet) {
 			groupToUserTableMapper.addTableMapping(pk, newUserPK);
 		}
 	}

@@ -2049,22 +2049,22 @@ public class AssetTagPersistenceImpl extends BasePersistenceImpl<AssetTag>
 	@Override
 	public void setAssetEntries(long pk, long[] assetEntryPKs)
 		throws SystemException {
-		Set<Long> newAssetEntryPKSet = SetUtil.fromArray(assetEntryPKs);
-		Set<Long> oldAssetEntryPKSet = SetUtil.fromArray(assetTagToAssetEntryTableMapper.getRightPrimaryKeys(
+		Set<Long> newAssetEntryPKsSet = SetUtil.fromArray(assetEntryPKs);
+		Set<Long> oldAssetEntryPKsSet = SetUtil.fromArray(assetTagToAssetEntryTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeAssetEntryPKSet = new HashSet<Long>(oldAssetEntryPKSet);
+		Set<Long> removeAssetEntryPKsSet = new HashSet<Long>(oldAssetEntryPKsSet);
 
-		removeAssetEntryPKSet.removeAll(newAssetEntryPKSet);
+		removeAssetEntryPKsSet.removeAll(newAssetEntryPKsSet);
 
-		for (long removeAssetEntryPK : removeAssetEntryPKSet) {
+		for (long removeAssetEntryPK : removeAssetEntryPKsSet) {
 			assetTagToAssetEntryTableMapper.deleteTableMapping(pk,
 				removeAssetEntryPK);
 		}
 
-		newAssetEntryPKSet.removeAll(oldAssetEntryPKSet);
+		newAssetEntryPKsSet.removeAll(oldAssetEntryPKsSet);
 
-		for (long newAssetEntryPK : newAssetEntryPKSet) {
+		for (long newAssetEntryPK : newAssetEntryPKsSet) {
 			assetTagToAssetEntryTableMapper.addTableMapping(pk, newAssetEntryPK);
 		}
 	}

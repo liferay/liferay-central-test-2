@@ -4008,22 +4008,22 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	@Override
 	public void setDLFolders(long pk, long[] dlFolderPKs)
 		throws SystemException {
-		Set<Long> newDLFolderPKSet = SetUtil.fromArray(dlFolderPKs);
-		Set<Long> oldDLFolderPKSet = SetUtil.fromArray(dlFileEntryTypeToDLFolderTableMapper.getRightPrimaryKeys(
+		Set<Long> newDLFolderPKsSet = SetUtil.fromArray(dlFolderPKs);
+		Set<Long> oldDLFolderPKsSet = SetUtil.fromArray(dlFileEntryTypeToDLFolderTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeDLFolderPKSet = new HashSet<Long>(oldDLFolderPKSet);
+		Set<Long> removeDLFolderPKsSet = new HashSet<Long>(oldDLFolderPKsSet);
 
-		removeDLFolderPKSet.removeAll(newDLFolderPKSet);
+		removeDLFolderPKsSet.removeAll(newDLFolderPKsSet);
 
-		for (long removeDLFolderPK : removeDLFolderPKSet) {
+		for (long removeDLFolderPK : removeDLFolderPKsSet) {
 			dlFileEntryTypeToDLFolderTableMapper.deleteTableMapping(pk,
 				removeDLFolderPK);
 		}
 
-		newDLFolderPKSet.removeAll(oldDLFolderPKSet);
+		newDLFolderPKsSet.removeAll(oldDLFolderPKsSet);
 
-		for (long newDLFolderPK : newDLFolderPKSet) {
+		for (long newDLFolderPK : newDLFolderPKsSet) {
 			dlFileEntryTypeToDLFolderTableMapper.addTableMapping(pk,
 				newDLFolderPK);
 		}
@@ -4304,22 +4304,22 @@ public class DLFileEntryTypePersistenceImpl extends BasePersistenceImpl<DLFileEn
 	@Override
 	public void setDDMStructures(long pk, long[] ddmStructurePKs)
 		throws SystemException {
-		Set<Long> newDDMStructurePKSet = SetUtil.fromArray(ddmStructurePKs);
-		Set<Long> oldDDMStructurePKSet = SetUtil.fromArray(dlFileEntryTypeToDDMStructureTableMapper.getRightPrimaryKeys(
+		Set<Long> newDDMStructurePKsSet = SetUtil.fromArray(ddmStructurePKs);
+		Set<Long> oldDDMStructurePKsSet = SetUtil.fromArray(dlFileEntryTypeToDDMStructureTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeDDMStructurePKSet = new HashSet<Long>(oldDDMStructurePKSet);
+		Set<Long> removeDDMStructurePKsSet = new HashSet<Long>(oldDDMStructurePKsSet);
 
-		removeDDMStructurePKSet.removeAll(newDDMStructurePKSet);
+		removeDDMStructurePKsSet.removeAll(newDDMStructurePKsSet);
 
-		for (long removeDDMStructurePK : removeDDMStructurePKSet) {
+		for (long removeDDMStructurePK : removeDDMStructurePKsSet) {
 			dlFileEntryTypeToDDMStructureTableMapper.deleteTableMapping(pk,
 				removeDDMStructurePK);
 		}
 
-		newDDMStructurePKSet.removeAll(oldDDMStructurePKSet);
+		newDDMStructurePKsSet.removeAll(oldDDMStructurePKsSet);
 
-		for (long newDDMStructurePK : newDDMStructurePKSet) {
+		for (long newDDMStructurePK : newDDMStructurePKsSet) {
 			dlFileEntryTypeToDDMStructureTableMapper.addTableMapping(pk,
 				newDDMStructurePK);
 		}

@@ -9594,22 +9594,22 @@ public class DLFolderPersistenceImpl extends BasePersistenceImpl<DLFolder>
 	@Override
 	public void setDLFileEntryTypes(long pk, long[] dlFileEntryTypePKs)
 		throws SystemException {
-		Set<Long> newDLFileEntryTypePKSet = SetUtil.fromArray(dlFileEntryTypePKs);
-		Set<Long> oldDLFileEntryTypePKSet = SetUtil.fromArray(dlFolderToDLFileEntryTypeTableMapper.getRightPrimaryKeys(
+		Set<Long> newDLFileEntryTypePKsSet = SetUtil.fromArray(dlFileEntryTypePKs);
+		Set<Long> oldDLFileEntryTypePKsSet = SetUtil.fromArray(dlFolderToDLFileEntryTypeTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeDLFileEntryTypePKSet = new HashSet<Long>(oldDLFileEntryTypePKSet);
+		Set<Long> removeDLFileEntryTypePKsSet = new HashSet<Long>(oldDLFileEntryTypePKsSet);
 
-		removeDLFileEntryTypePKSet.removeAll(newDLFileEntryTypePKSet);
+		removeDLFileEntryTypePKsSet.removeAll(newDLFileEntryTypePKsSet);
 
-		for (long removeDLFileEntryTypePK : removeDLFileEntryTypePKSet) {
+		for (long removeDLFileEntryTypePK : removeDLFileEntryTypePKsSet) {
 			dlFolderToDLFileEntryTypeTableMapper.deleteTableMapping(pk,
 				removeDLFileEntryTypePK);
 		}
 
-		newDLFileEntryTypePKSet.removeAll(oldDLFileEntryTypePKSet);
+		newDLFileEntryTypePKsSet.removeAll(oldDLFileEntryTypePKsSet);
 
-		for (long newDLFileEntryTypePK : newDLFileEntryTypePKSet) {
+		for (long newDLFileEntryTypePK : newDLFileEntryTypePKsSet) {
 			dlFolderToDLFileEntryTypeTableMapper.addTableMapping(pk,
 				newDLFileEntryTypePK);
 		}

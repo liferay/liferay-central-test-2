@@ -9479,21 +9479,21 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	@Override
 	public void setGroups(long pk, long[] groupPKs) throws SystemException {
-		Set<Long> newGroupPKSet = SetUtil.fromArray(groupPKs);
-		Set<Long> oldGroupPKSet = SetUtil.fromArray(roleToGroupTableMapper.getRightPrimaryKeys(
+		Set<Long> newGroupPKsSet = SetUtil.fromArray(groupPKs);
+		Set<Long> oldGroupPKsSet = SetUtil.fromArray(roleToGroupTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeGroupPKSet = new HashSet<Long>(oldGroupPKSet);
+		Set<Long> removeGroupPKsSet = new HashSet<Long>(oldGroupPKsSet);
 
-		removeGroupPKSet.removeAll(newGroupPKSet);
+		removeGroupPKsSet.removeAll(newGroupPKsSet);
 
-		for (long removeGroupPK : removeGroupPKSet) {
+		for (long removeGroupPK : removeGroupPKsSet) {
 			roleToGroupTableMapper.deleteTableMapping(pk, removeGroupPK);
 		}
 
-		newGroupPKSet.removeAll(oldGroupPKSet);
+		newGroupPKsSet.removeAll(oldGroupPKsSet);
 
-		for (long newGroupPK : newGroupPKSet) {
+		for (long newGroupPK : newGroupPKsSet) {
 			roleToGroupTableMapper.addTableMapping(pk, newGroupPK);
 		}
 	}
@@ -9752,21 +9752,21 @@ public class RolePersistenceImpl extends BasePersistenceImpl<Role>
 	 */
 	@Override
 	public void setUsers(long pk, long[] userPKs) throws SystemException {
-		Set<Long> newUserPKSet = SetUtil.fromArray(userPKs);
-		Set<Long> oldUserPKSet = SetUtil.fromArray(roleToUserTableMapper.getRightPrimaryKeys(
+		Set<Long> newUserPKsSet = SetUtil.fromArray(userPKs);
+		Set<Long> oldUserPKsSet = SetUtil.fromArray(roleToUserTableMapper.getRightPrimaryKeys(
 					pk));
 
-		Set<Long> removeUserPKSet = new HashSet<Long>(oldUserPKSet);
+		Set<Long> removeUserPKsSet = new HashSet<Long>(oldUserPKsSet);
 
-		removeUserPKSet.removeAll(newUserPKSet);
+		removeUserPKsSet.removeAll(newUserPKsSet);
 
-		for (long removeUserPK : removeUserPKSet) {
+		for (long removeUserPK : removeUserPKsSet) {
 			roleToUserTableMapper.deleteTableMapping(pk, removeUserPK);
 		}
 
-		newUserPKSet.removeAll(oldUserPKSet);
+		newUserPKsSet.removeAll(oldUserPKsSet);
 
-		for (long newUserPK : newUserPKSet) {
+		for (long newUserPK : newUserPKsSet) {
 			roleToUserTableMapper.addTableMapping(pk, newUserPK);
 		}
 	}
