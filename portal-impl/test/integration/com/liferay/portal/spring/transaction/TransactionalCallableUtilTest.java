@@ -72,7 +72,7 @@ public class TransactionalCallableUtilTest {
 	@Test
 	public void testRollback() throws Throwable {
 		final long classNameId = CounterLocalServiceUtil.increment();
-		final Exception exception = new Exception("Trigger a rollback");
+		final Exception exception = new Exception();
 
 		try {
 			TransactionalCallableUtil.call(
@@ -112,6 +112,6 @@ public class TransactionalCallableUtilTest {
 
 	private TransactionAttribute _transactionAttribute =
 		TransactionAttributeBuilder.build(
-			Propagation.REQUIRED, new Class<?>[]{Exception.class});
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 }

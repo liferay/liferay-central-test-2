@@ -63,11 +63,6 @@ public class LayoutStagingBackgroundTaskExecutor
 
 		long sourceGroupId = MapUtil.getLong(taskContextMap, "sourceGroupId");
 
-		ServiceContext serviceContext = (ServiceContext)taskContextMap.get(
-			"serviceContext");
-
-		Group sourceGroup = GroupLocalServiceUtil.getGroup(sourceGroupId);
-
 		clearBackgroundTaskStatus(backgroundTask);
 
 		MissingReferences missingReferences = null;
@@ -82,6 +77,11 @@ public class LayoutStagingBackgroundTaskExecutor
 					_transactionAttribute, layoutStagingCallable);
 		}
 		catch (Throwable t) {
+			Group sourceGroup = GroupLocalServiceUtil.getGroup(sourceGroupId);
+
+			ServiceContext serviceContext = (ServiceContext)taskContextMap.get(
+				"serviceContext");
+
 			if (sourceGroup.hasStagingGroup()) {
 				StagingLocalServiceUtil.disableStaging(
 					sourceGroup, serviceContext);
@@ -135,7 +135,7 @@ public class LayoutStagingBackgroundTaskExecutor
 
 	private TransactionAttribute _transactionAttribute =
 		TransactionAttributeBuilder.build(
-			Propagation.REQUIRED, new Class<?>[]{Exception.class});
+			Propagation.REQUIRED, new Class<?>[] {Exception.class});
 
 	private class LayoutStagingCallable implements Callable<MissingReferences> {
 
