@@ -1189,20 +1189,20 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				 */
 				@Override
 				public void set${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws SystemException {
-					Set<Long> new${tempEntity.name}PKSet = SetUtil.fromArray(${tempEntity.varName}PKs);
-					Set<Long> old${tempEntity.name}PKSet = SetUtil.fromArray(${entity.varName}To${tempEntity.name}TableMapper.getRightPrimaryKeys(pk));
+					Set<Long> new${tempEntity.name}PKsSet = SetUtil.fromArray(${tempEntity.varName}PKs);
+					Set<Long> old${tempEntity.name}PKsSet = SetUtil.fromArray(${entity.varName}To${tempEntity.name}TableMapper.getRightPrimaryKeys(pk));
 
-					Set<Long> remove${tempEntity.name}PKSet = new HashSet<Long>(old${tempEntity.name}PKSet);
+					Set<Long> remove${tempEntity.name}PKsSet = new HashSet<Long>(old${tempEntity.name}PKsSet);
 
-					remove${tempEntity.name}PKSet.removeAll(new${tempEntity.name}PKSet);
+					remove${tempEntity.name}PKsSet.removeAll(new${tempEntity.name}PKsSet);
 
-					for (long remove${tempEntity.name}PK : remove${tempEntity.name}PKSet) {
+					for (long remove${tempEntity.name}PK : remove${tempEntity.name}PKsSet) {
 						${entity.varName}To${tempEntity.name}TableMapper.deleteTableMapping(pk, remove${tempEntity.name}PK);
 					}
 
-					new${tempEntity.name}PKSet.removeAll(old${tempEntity.name}PKSet);
+					new${tempEntity.name}PKsSet.removeAll(old${tempEntity.name}PKsSet);
 
-					for (long new${tempEntity.name}PK :new${tempEntity.name}PKSet) {
+					for (long new${tempEntity.name}PK :new${tempEntity.name}PKsSet) {
 						${entity.varName}To${tempEntity.name}TableMapper.addTableMapping(pk, new${tempEntity.name}PK);
 					}
 				}
