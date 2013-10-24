@@ -60,7 +60,6 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	public static List<TemplateHandler> getPortletDisplayTemplateHandlers() {
-
 		return getPortletDisplayTemplate().getPortletDisplayTemplateHandlers();
 	}
 
