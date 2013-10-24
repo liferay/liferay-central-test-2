@@ -73,12 +73,12 @@ public class LayoutStagingBackgroundTaskExecutor
 		MissingReferences missingReferences = null;
 
 		try {
-			Callable layoutStagingCallable = new LayoutStagingCallable(
-				backgroundTask, sourceGroupId, targetGroupId, taskContextMap,
-				userId);
+			Callable<MissingReferences> layoutStagingCallable =
+				new LayoutStagingCallable(
+					backgroundTask, sourceGroupId, targetGroupId,
+					taskContextMap, userId);
 
-			missingReferences =
-				(MissingReferences)TransactionalCallableUtil.call(
+			missingReferences = TransactionalCallableUtil.call(
 					_transactionAttribute, layoutStagingCallable);
 		}
 		catch (Throwable t) {
@@ -137,7 +137,7 @@ public class LayoutStagingBackgroundTaskExecutor
 		TransactionAttributeBuilder.build(
 			Propagation.REQUIRED, new Class<?>[]{Exception.class});
 
-	private class LayoutStagingCallable implements Callable {
+	private class LayoutStagingCallable implements Callable<MissingReferences> {
 
 		private LayoutStagingCallable(
 			BackgroundTask backgroundTask, long sourceGroupId,
@@ -151,7 +151,8 @@ public class LayoutStagingBackgroundTaskExecutor
 			_userId = userId;
 		}
 
-		public Object call() throws Exception {
+		@Override
+		public MissingReferences call() throws Exception {
 			File file = null;
 			MissingReferences missingReferences = null;
 
