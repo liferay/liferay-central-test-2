@@ -1312,10 +1312,10 @@ public class SeleniumBuilderFileUtil {
 						1003, fileName, element, "priority");
 				}
 				else if (!(priorityValue.equals("1") ||
-						 priorityValue.equals("2") ||
-						 priorityValue.equals("3") ||
-						 priorityValue.equals("4") ||
-						 priorityValue.equals("5"))) {
+						   priorityValue.equals("2") ||
+						   priorityValue.equals("3") ||
+						   priorityValue.equals("4") ||
+						   priorityValue.equals("5"))) {
 
 					throwValidationException(
 						1006, fileName, element, "priority");
