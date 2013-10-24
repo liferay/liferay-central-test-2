@@ -36,9 +36,9 @@ public class TransactionAttributeBuilder {
 
 	public static TransactionAttribute build(
 		boolean enabled, Isolation isolation, Propagation propagation,
-		boolean readOnly, int timeout, Class<?>[] rollbackFor,
-		String[] rollbackForClassName, Class<?>[] noRollbackFor,
-		String[] noRollbackForClassName) {
+		boolean readOnly, int timeout, Class<?>[] rollbackForClasses,
+		String[] rollbackForClassNames, Class<?>[] noRollbackForClasses,
+		String[] noRollbackForClassNames) {
 
 		if (!enabled) {
 			return null;
@@ -67,30 +67,30 @@ public class TransactionAttributeBuilder {
 		List<RollbackRuleAttribute> rollbackRuleAttributes =
 			new ArrayList<RollbackRuleAttribute>();
 
-		for (int i = 0; i < rollbackFor.length; i++) {
+		for (int i = 0; i < rollbackForClasses.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackFor[i]);
+				new RollbackRuleAttribute(rollbackForClasses[i]);
 
 			rollbackRuleAttributes.add(rollbackRuleAttribute);
 		}
 
-		for (int i = 0; i < rollbackForClassName.length; i++) {
+		for (int i = 0; i < rollbackForClassNames.length; i++) {
 			RollbackRuleAttribute rollbackRuleAttribute =
-				new RollbackRuleAttribute(rollbackForClassName[i]);
+				new RollbackRuleAttribute(rollbackForClassNames[i]);
 
 			rollbackRuleAttributes.add(rollbackRuleAttribute);
 		}
 
-		for (int i = 0; i < noRollbackFor.length; ++i) {
+		for (int i = 0; i < noRollbackForClasses.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackFor[i]);
+				new NoRollbackRuleAttribute(noRollbackForClasses[i]);
 
 			rollbackRuleAttributes.add(noRollbackRuleAttribute);
 		}
 
-		for (int i = 0; i < noRollbackForClassName.length; ++i) {
+		for (int i = 0; i < noRollbackForClassNames.length; ++i) {
 			NoRollbackRuleAttribute noRollbackRuleAttribute =
-				new NoRollbackRuleAttribute(noRollbackForClassName[i]);
+				new NoRollbackRuleAttribute(noRollbackForClassNames[i]);
 
 			rollbackRuleAttributes.add(noRollbackRuleAttribute);
 		}
@@ -104,12 +104,12 @@ public class TransactionAttributeBuilder {
 	}
 
 	public static TransactionAttribute build(
-		Propagation propagation, Class<?>[] rollbackFor,
-		Class<?>... noRollbackFor) {
+		Propagation propagation, Class<?>[] rollbackForClasses,
+		Class<?>... noRollbackForClasses) {
 
 		return build(
-			true, Isolation.PORTAL, propagation, false, -1, rollbackFor,
-			new String[0], noRollbackFor, new String[0]);
+			true, Isolation.PORTAL, propagation, false, -1, rollbackForClasses,
+			new String[0], noRollbackForClasses, new String[0]);
 	}
 
 	public static TransactionAttribute build(Transactional transactional) {

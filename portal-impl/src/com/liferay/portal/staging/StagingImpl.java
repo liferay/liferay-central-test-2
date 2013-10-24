@@ -475,7 +475,11 @@ public class StagingImpl implements Staging {
 			portalPreferences, layoutSetBranchId, plid);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#disableStaging(
+	 *             Group, ServiceContext)}
+	 */
 	@Override
 	public void disableStaging(
 			Group scopeGroup, Group liveGroup, ServiceContext serviceContext)
@@ -484,7 +488,11 @@ public class StagingImpl implements Staging {
 		disableStaging((PortletRequest)null, liveGroup, serviceContext);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#disableStaging(
+	 *             Group, ServiceContext)}
+	 */
 	@Override
 	public void disableStaging(Group liveGroup, ServiceContext serviceContext)
 		throws Exception {
@@ -492,7 +500,11 @@ public class StagingImpl implements Staging {
 		disableStaging((PortletRequest)null, liveGroup, serviceContext);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#disableStaging(
+	 *             PortletRequest, Group, ServiceContext)}
+	 */
 	@Override
 	public void disableStaging(
 			PortletRequest portletRequest, Group scopeGroup, Group liveGroup,
@@ -502,7 +514,11 @@ public class StagingImpl implements Staging {
 		disableStaging(portletRequest, liveGroup, serviceContext);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#disableStaging(
+	 *             PortletRequest, Group, ServiceContext)}
+	 */
 	@Override
 	public void disableStaging(
 			PortletRequest portletRequest, Group liveGroup,
@@ -513,7 +529,11 @@ public class StagingImpl implements Staging {
 			portletRequest, liveGroup, serviceContext);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#enableLocalStaging(
+	 *             long, Group, boolean, boolean, ServiceContext)}
+	 */
 	@Override
 	public void enableLocalStaging(
 			long userId, Group scopeGroup, Group liveGroup,
@@ -526,7 +546,12 @@ public class StagingImpl implements Staging {
 			serviceContext);
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated As of 6.2.0, replaced by {@link
+	 *             com.liferay.portal.service.StagingLocalService#enableRemoteStaging(
+	 *             long, Group, boolean, boolean, String, int, String, boolean,
+	 *             long, ServiceContext)}
+	 */
 	@Override
 	public void enableRemoteStaging(
 			long userId, Group scopeGroup, Group liveGroup,

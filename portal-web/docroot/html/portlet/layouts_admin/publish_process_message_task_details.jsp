@@ -26,7 +26,7 @@ JSONObject jsonObject = null;
 try {
 	jsonObject = JSONFactoryUtil.createJSONObject(backgroundTask.getStatusMessage());
 }
-catch (JSONException jsone) {
+catch (Exception e) {
 }
 %>
 

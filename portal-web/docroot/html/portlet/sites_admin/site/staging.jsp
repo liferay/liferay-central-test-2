@@ -35,17 +35,17 @@ if (stagedLocally) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-BackgroundTask lastCompletedInitialPublication = BackgroundTaskLocalServiceUtil.fetchFirstBackgroundTask(liveGroupId, LayoutStagingBackgroundTaskExecutor.class.getName(), true, new BackgroundTaskCreateDateComparator(false));
+BackgroundTask lastCompletedInitialPublicationBackgroundTask = BackgroundTaskLocalServiceUtil.fetchFirstBackgroundTask(liveGroupId, LayoutStagingBackgroundTaskExecutor.class.getName(), true, new BackgroundTaskCreateDateComparator(false));
 %>
 
-<c:if test="<%= (lastCompletedInitialPublication != null) && (lastCompletedInitialPublication.getStatus() == BackgroundTaskConstants.STATUS_FAILED) %>">
+<c:if test="<%= (lastCompletedInitialPublicationBackgroundTask != null) && (lastCompletedInitialPublicationBackgroundTask.getStatus() == BackgroundTaskConstants.STATUS_FAILED) %>">
 	<div class="alert alert-error">
-		<liferay-ui:message key="an-inital-staging-publication-has-failed" />
+		<liferay-ui:message key="an-unexpected-error-occurred--with-the-initial-staging-publication" />
 
 		<liferay-portlet:actionURL portletName="<%= PortletKeys.GROUP_PAGES %>" var="deleteBackgroundTaskURL">
 			<portlet:param name="struts_action" value="/group_pages/delete_background_task" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="backgroundTaskId" value="<%= String.valueOf(lastCompletedInitialPublication.getBackgroundTaskId()) %>" />
+			<portlet:param name="backgroundTaskId" value="<%= String.valueOf(lastCompletedInitialPublicationBackgroundTask.getBackgroundTaskId()) %>" />
 		</liferay-portlet:actionURL>
 
 		<liferay-ui:icon-delete
@@ -57,7 +57,7 @@ BackgroundTask lastCompletedInitialPublication = BackgroundTaskLocalServiceUtil.
 	</div>
 
 	<liferay-util:include page="/html/portlet/layouts_admin/publish_process_message_task_details.jsp">
-		<liferay-util:param name="backgroundTaskId" value="<%= String.valueOf(lastCompletedInitialPublication.getBackgroundTaskId()) %>" />
+		<liferay-util:param name="backgroundTaskId" value="<%= String.valueOf(lastCompletedInitialPublicationBackgroundTask.getBackgroundTaskId()) %>" />
 	</liferay-util:include>
 </c:if>
 

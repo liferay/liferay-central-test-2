@@ -60,22 +60,12 @@ public class TransactionalCallableUtil {
 		}
 
 		@Override
-		public Method getMethod() {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
 		public Object[] getArguments() {
 			throw new UnsupportedOperationException();
 		}
 
 		@Override
-		public Object proceed() throws Throwable {
-			return _callable.call();
-		}
-
-		@Override
-		public Object getThis() {
+		public Method getMethod() {
 			throw new UnsupportedOperationException();
 		}
 
@@ -84,7 +74,17 @@ public class TransactionalCallableUtil {
 			throw new UnsupportedOperationException();
 		}
 
-		private final Callable<?> _callable;
+		@Override
+		public Object getThis() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		public Object proceed() throws Throwable {
+			return _callable.call();
+		}
+
+		private Callable<?> _callable;
 
 	}
 
