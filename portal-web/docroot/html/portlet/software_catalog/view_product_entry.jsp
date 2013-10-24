@@ -232,16 +232,16 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 	<div class="btn-toolbar">
 
 		<%
-		String taglibEditProductEntryURL = "location.href = '" + editProductEntryURL.toString() + "';";
+		String taglibEditProductEntry = "location.href = '" + editProductEntryURL.toString() + "';";
 		%>
 
-		<aui:button onClick="<%= taglibEditProductEntryURL %>" value="edit-product" />
+		<aui:button onClick="<%= taglibEditProductEntry %>" value="edit-product" />
 
 		<%
-		String taglibAddProductVersionURL = "location.href = '" + addProductVersionURL.toString() + "';";
+		String taglibAddProductVersion = "location.href = '" + addProductVersionURL.toString() + "';";
 		%>
 
-		<aui:button onClick="<%= taglibAddProductVersionURL %>" value="add-product-version" />
+		<aui:button onClick="<%= taglibAddProductVersion %>" value="add-product-version" />
 	</div>
 </c:if>
 

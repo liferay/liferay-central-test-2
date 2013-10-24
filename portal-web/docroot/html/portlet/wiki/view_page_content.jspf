@@ -39,10 +39,10 @@ try {
 					<div class="btn-toolbar">
 
 						<%
-						String taglibRemoveRedirectURL = "location.href = '" + removeRedirectURL + "';";
+						String taglibRemoveRedirect = "location.href = '" + removeRedirectURL + "';";
 						%>
 
-						<aui:button onClick="<%= taglibRemoveRedirectURL %>" value="remove-redirect" />
+						<aui:button onClick="<%= taglibRemoveRedirect %>" value="remove-redirect" />
 					</div>
 				</c:if>
 			</c:when>
