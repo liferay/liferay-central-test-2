@@ -12,12 +12,14 @@
  * details.
  */
 
-package com.liferay.portal.kernel.template;
+package com.liferay.portal.kernel.template.comparator;
 
 import java.io.Serializable;
 
 import java.util.Comparator;
 import java.util.Locale;
+
+import com.liferay.portal.kernel.template.TemplateHandler;
 
 /**
  * @author Eduardo Garcia
