@@ -19,7 +19,6 @@ import com.liferay.portal.LARTypeException;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.MissingReferenceException;
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.kernel.backgroundtask.BackgroundTaskThreadLocal;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -59,7 +58,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.kernel.zip.ZipReaderFactoryUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Lock;
@@ -1661,91 +1659,6 @@ public class PortletImporter {
 		portletDataContext.setScopeGroupId(groupId);
 		portletDataContext.setScopeLayoutUuid(StringPool.BLANK);
 		portletDataContext.setScopeType(StringPool.BLANK);
-	}
-
-	protected void setPortletScope(
-		PortletDataContext portletDataContext, Element portletElement) {
-
-		if (ExportImportThreadLocal.isPortletImportInProcess()) {
-			return;
-		}
-
-		// Portlet data scope
-
-		String scopeLayoutUuid = GetterUtil.getString(
-			portletElement.attributeValue("scope-layout-uuid"));
-		String scopeLayoutType = GetterUtil.getString(
-			portletElement.attributeValue("scope-layout-type"));
-
-		portletDataContext.setScopeLayoutUuid(scopeLayoutUuid);
-		portletDataContext.setScopeType(scopeLayoutType);
-
-		// Layout scope
-
-		try {
-			Group scopeGroup = null;
-
-			if (scopeLayoutType.equals("company")) {
-				scopeGroup = GroupLocalServiceUtil.getCompanyGroup(
-					portletDataContext.getCompanyId());
-			}
-			else if (Validator.isNotNull(scopeLayoutUuid)) {
-				boolean privateLayout = GetterUtil.getBoolean(
-					portletElement.attributeValue("private-layout"));
-
-				Layout scopeLayout =
-					LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-						scopeLayoutUuid, portletDataContext.getGroupId(),
-						privateLayout);
-
-				if (scopeLayout.hasScopeGroup()) {
-					scopeGroup = scopeLayout.getScopeGroup();
-				}
-				else {
-					String name = String.valueOf(scopeLayout.getPlid());
-
-					scopeGroup = GroupLocalServiceUtil.addGroup(
-						portletDataContext.getUserId(null),
-						GroupConstants.DEFAULT_PARENT_GROUP_ID,
-						Layout.class.getName(), scopeLayout.getPlid(),
-						GroupConstants.DEFAULT_LIVE_GROUP_ID, name, null, 0,
-						true, GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,
-						null, false, true, null);
-				}
-
-				Group group = scopeLayout.getGroup();
-
-				if (group.isStaged() && !group.isStagedRemotely()) {
-					try {
-						Layout oldLayout =
-							LayoutLocalServiceUtil.getLayoutByUuidAndGroupId(
-								scopeLayoutUuid,
-								portletDataContext.getSourceGroupId(),
-								privateLayout);
-
-						Group oldScopeGroup = oldLayout.getScopeGroup();
-
-						oldScopeGroup.setLiveGroupId(scopeGroup.getGroupId());
-
-						GroupLocalServiceUtil.updateGroup(oldScopeGroup);
-					}
-					catch (NoSuchLayoutException nsle) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(nsle);
-						}
-					}
-				}
-			}
-
-			if (scopeGroup != null) {
-				portletDataContext.setScopeGroupId(scopeGroup.getGroupId());
-			}
-		}
-		catch (PortalException pe) {
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	protected void updatePortletPreferences(
