@@ -103,7 +103,6 @@ public class DLFileEntryTypeStagedModelDataHandler
 
 		String uuid = element.attributeValue("uuid");
 		String fileEntryTypeKey = element.attributeValue("file-entry-type-key");
-
 		boolean preloaded = GetterUtil.getBoolean(
 			element.attributeValue("preloaded"));
 
