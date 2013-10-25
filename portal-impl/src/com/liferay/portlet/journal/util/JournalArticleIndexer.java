@@ -655,9 +655,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 			}
 
 			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
+			protected void performAction(Object object) throws PortalException {
 				JournalArticle article = (JournalArticle)object;
 
 				Document document = getDocument(article);
