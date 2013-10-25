@@ -166,7 +166,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 	}
 
 	@Test
-	public void testDeleteTimestampFromDLReferenceUrls() throws Exception {
+	public void testDeleteTimestampFromDLReferenceURLs() throws Exception {
 		Element rootElement =
 			_portletDataContextExport.getExportDataRootElement();
 
@@ -181,12 +181,12 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			_portletDataContextExport, _referrerStagedModel,
 			rootElement.element("entry"), urlContent, true);
 
-		String[] exportedUrls = content.split(StringPool.NEW_LINE);
+		String[] exportedURLs = content.split(StringPool.NEW_LINE);
 
-		Assert.assertEquals(urls.size(), exportedUrls.length);
+		Assert.assertEquals(urls.size(), exportedURLs.length);
 
 		for (int i = 0; i < urls.size(); i++) {
-			String exportedUrl = exportedUrls[i];
+			String exportedUrl = exportedURLs[i];
 			String url = urls.get(i);
 
 			Assert.assertFalse(exportedUrl.matches("[?&]t="));
@@ -522,7 +522,7 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 				fileEntry.getTitle(), fileEntry.getUuid()
 			});
 
-		if (!content.contains("TIMESTAMP$]")) {
+		if (!content.contains("[$TIMESTAMP")) {
 			return content;
 		}
 
@@ -541,35 +541,32 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			timestampParameter + "?" + timestampParameter +
 				"&width=100&height=100";
 
-		List<String> outUrls = new ArrayList<String>();
+		List<String> outURLs = new ArrayList<String>();
 
 		for (String url : urls) {
-			if (!url.contains("TIMESTAMP$]")) {
+			if (!url.contains("[$TIMESTAMP")) {
 				continue;
 			}
 
-			outUrls.add(
+			outURLs.add(
 				StringUtil.replace(
-					url, new String[] {"[$TIMESTAMP$]", "[$ONLYTIMESTAMP$]"},
+					url, new String[] {"[$TIMESTAMP$]", "[$TIMESTAMP_ONLY$]"},
 					new String[] {"&" + parameters1, "?" + parameters1}));
-
-			outUrls.add(
+			outURLs.add(
 				StringUtil.replace(
-					url, new String[] {"[$TIMESTAMP$]", "[$ONLYTIMESTAMP$]"},
+					url, new String[] {"[$TIMESTAMP$]", "[$TIMESTAMP_ONLY$]"},
 					new String[] {"&" + parameters2, "?" + parameters2}));
-
-			outUrls.add(
+			outURLs.add(
 				StringUtil.replace(
-					url, new String[] {"[$TIMESTAMP$]", "[$ONLYTIMESTAMP$]"},
+					url, new String[] {"[$TIMESTAMP$]", "[$TIMESTAMP_ONLY$]"},
 					new String[] {"&" + parameters3, "?" + parameters3}));
-
-			outUrls.add(
+			outURLs.add(
 				StringUtil.replace(
-					url, new String[] {"[$TIMESTAMP$]", "[$ONLYTIMESTAMP$]"},
+					url, new String[] {"[$TIMESTAMP$]", "[$TIMESTAMP_ONLY$]"},
 					new String[] {StringPool.BLANK, "?" + parameters4}));
 		}
 
-		return StringUtil.merge(outUrls, StringPool.NEW_LINE);
+		return StringUtil.merge(outURLs, StringPool.NEW_LINE);
 	}
 
 	protected void setFinalStaticField(Field field, Object newValue)
