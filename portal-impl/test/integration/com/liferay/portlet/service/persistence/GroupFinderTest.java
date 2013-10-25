@@ -105,7 +105,7 @@ public class GroupFinderTest {
 	public void testFindByC_C_N_DJoinByRoleResourcePermissions()
 		throws Exception {
 
-		List<Group> groups = doFindByC_C_N_D(
+		List<Group> groups = findByC_C_N_D(
 			_arbitraryResourceAction.getActionId(),
 			_resourcePermission.getName(), _resourcePermission.getRoleId());
 
@@ -124,7 +124,7 @@ public class GroupFinderTest {
 	public void testFindByC_C_N_DJoinByRoleResourceTypePermissions()
 		throws Exception {
 
-		List<Group> groups = doFindByC_C_N_D(
+		List<Group> groups = findByC_C_N_D(
 			_bookmarkFolderResourceAction.getActionId(),
 			_resourceTypePermission.getName(),
 			_resourceTypePermission.getRoleId());
@@ -142,34 +142,40 @@ public class GroupFinderTest {
 
 	@Test
 	public void testFindByLayouts() throws Exception {
-		List<Group> groups = doFindByLayouts(
+		List<Group> groups = findByLayouts(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID);
 
 		int initialGroupCount = groups.size();
 
-		GroupTestUtil.addGroup("rootGroup");
-		Group parentGroup = GroupTestUtil.addGroup("parentGroup");
-		Group childGroup1 = GroupTestUtil.addGroup(
-			parentGroup.getGroupId(), "childGroup1");
-		Group childGroup2 = GroupTestUtil.addGroup(
-			parentGroup.getGroupId(), "childGroup2");
+		GroupTestUtil.addGroup(ServiceTestUtil.randomString());
+
+		Group parentGroup = GroupTestUtil.addGroup(
+			ServiceTestUtil.randomString());
 
 		LayoutTestUtil.addLayout(
 			parentGroup.getGroupId(), ServiceTestUtil.randomString(), false);
+
+		Group childGroup1 = GroupTestUtil.addGroup(
+			parentGroup.getGroupId(), ServiceTestUtil.randomString());
+
 		LayoutTestUtil.addLayout(
 			childGroup1.getGroupId(), ServiceTestUtil.randomString(), false);
+
+		Group childGroup2 = GroupTestUtil.addGroup(
+			parentGroup.getGroupId(), ServiceTestUtil.randomString());
+
 		LayoutTestUtil.addLayout(
 			childGroup2.getGroupId(), ServiceTestUtil.randomString(), true);
 
-		groups = doFindByLayouts(GroupConstants.DEFAULT_PARENT_GROUP_ID);
+		groups = findByLayouts(GroupConstants.DEFAULT_PARENT_GROUP_ID);
 
 		Assert.assertEquals(initialGroupCount + 1, groups.size());
 
-		groups = doFindByLayouts(parentGroup.getGroupId());
+		groups = findByLayouts(parentGroup.getGroupId());
 
 		Assert.assertEquals(2, groups.size());
 
-		groups = doFindByLayouts(childGroup1.getGroupId());
+		groups = findByLayouts(childGroup1.getGroupId());
 
 		Assert.assertTrue(groups.isEmpty());
 	}
@@ -181,7 +187,7 @@ public class GroupFinderTest {
 		LayoutTestUtil.addLayout(groupId, ServiceTestUtil.randomString(), true);
 	}
 
-	protected List<Group> doFindByC_C_N_D(
+	protected List<Group> findByC_C_N_D(
 			String actionId, String name, long roleId)
 		throws Exception {
 
@@ -206,7 +212,7 @@ public class GroupFinderTest {
 			QueryUtil.ALL_POS, null);
 	}
 
-	protected List<Group> doFindByLayouts(long parentGroupId) throws Exception {
+	protected List<Group> findByLayouts(long parentGroupId) throws Exception {
 		return GroupFinderUtil.findByLayouts(
 			TestPropsValues.getCompanyId(), parentGroupId, true, -1, -1);
 	}
