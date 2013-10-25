@@ -545,7 +545,8 @@ public class DDMXSDImpl implements DDMXSD {
 			return structure.getCompleteXsd();
 		}
 		else if (classNameId == ddmTemplateClassNameId) {
-			DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(classPK);
+			DDMTemplate template = DDMTemplateLocalServiceUtil.getTemplate(
+				classPK);
 
 			return template.getScript();
 		}
