@@ -598,7 +598,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 				sb.replace(beginPos, endPos, "[$dl-reference=" + path + "$]");
 
-				deleteTimestampFromUrlParams(sb, beginPos);
+				deleteTimestampParameters(sb, beginPos);
 			}
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
@@ -1507,9 +1507,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		}
 	}
 
-	protected void deleteTimestampFromUrlParams(
-		StringBuilder sb, int beginPos) {
-
+	protected void deleteTimestampParameters(StringBuilder sb, int beginPos) {
 		beginPos = sb.indexOf(StringPool.CLOSE_BRACKET, beginPos);
 
 		if ((beginPos == -1) || (beginPos == (sb.length() - 1)) ||
