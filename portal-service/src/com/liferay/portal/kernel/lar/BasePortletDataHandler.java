@@ -191,7 +191,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 					if ((portletDataHandlerControls != null) &&
 						(portletDataHandlerControls.length > 0)) {
 
-						namespace = portletDataHandlerControls[0].getNamespace();
+						namespace =
+							portletDataHandlerControls[0].getNamespace();
 					}
 				}
 
