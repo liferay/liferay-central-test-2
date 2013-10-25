@@ -182,23 +182,24 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 				companyId, PortletKeys.PREFS_OWNER_TYPE_COMPANY,
 				portlet.getRootPortletId(), false) > 0)) {
 
-				PortletDataHandlerControl[] childrenControl = null;
+				PortletDataHandlerControl[] portletDataHandlerControls = null;
 				String namespace = null;
 
 				if (isDisplayPortlet()) {
-					childrenControl = getExportControls();
+					portletDataHandlerControls = getExportControls();
 
-					if ((childrenControl != null) &&
-						(childrenControl.length > 0)) {
+					if ((portletDataHandlerControls != null) &&
+						(portletDataHandlerControls.length > 0)) {
 
-						namespace = childrenControl[0].getNamespace();
+						namespace = portletDataHandlerControls[0].getNamespace();
 					}
 				}
 
 				configurationControls.add(
 					new PortletDataHandlerBoolean(
 						namespace, PortletDataHandlerKeys.PORTLET_SETUP,
-						"setup", true, false, childrenControl, null, null));
+						"setup", true, false, portletDataHandlerControls, null,
+						null));
 		}
 
 		// Archived setups
