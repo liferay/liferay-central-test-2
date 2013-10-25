@@ -1353,7 +1353,7 @@ public class ServicePreAction extends Action {
 
 				if ((firstPortlet == null) &&
 					controlPanelCategory.startsWith(
-						PortletCategoryKeys.SITE_ADMINISTRATION)){
+						PortletCategoryKeys.SITE_ADMINISTRATION)) {
 
 					firstPortlet = PortalUtil.getFirstSiteAdministrationPortlet(
 						themeDisplay);
