@@ -716,9 +716,7 @@ public class DLStoreImpl implements DLStore {
 		return true;
 	}
 
-	protected void isValidVersion(String versionLabel)
-		throws PortalException, SystemException {
-
+	protected void isValidVersion(String versionLabel) throws PortalException {
 		if (Validator.isNull(versionLabel)) {
 			return;
 		}
