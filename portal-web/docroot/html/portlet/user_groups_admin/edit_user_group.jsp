@@ -111,7 +111,6 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 	%>
 
 	<c:if test="<%= (userGroupGroup != null) || !layoutSetPrototypes.isEmpty() %>">
-
 		<aui:fieldset helpMessage="user-group-site-help" label="user-group-site">
 
 			<%
