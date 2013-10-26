@@ -742,7 +742,6 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 					@Override
 					public void println(String string) {
-						//
 					}
 
 				}
@@ -762,7 +761,8 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
-
+		}
+		finally {
 			System.setErr(err);
 		}
 
