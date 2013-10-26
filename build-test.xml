@@ -2029,6 +2029,12 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 					/>
 				</unzip>
 
+				<chmod perm="a+x">
+					<fileset dir="${app.server.tomcat.bin.dir}">
+						<include name="*.sh" />
+					</fileset>
+				</chmod>
+
 				<delete file="${tstamp.value}.zip" />
 			</then>
 			<else>
