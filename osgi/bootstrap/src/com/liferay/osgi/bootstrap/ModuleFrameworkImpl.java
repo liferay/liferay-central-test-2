@@ -742,6 +742,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 					@Override
 					public void println(String string) {
+						if (_log.isDebugEnabled()) {
+							_log.debug(string);
+						}
 					}
 
 				}
