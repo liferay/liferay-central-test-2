@@ -2005,15 +2005,24 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 		<antcall target="start" inheritAll="false" />
 
 		<if>
-			<isset property="test.build.bundle.zip.url" />
+			<and>
+				<isset property="test.build.bundle.zip.url" />
+				<not>
+					<equals arg1="${test.build.bundle.zip.url}" arg2="" />
+				</not>
+			</and>
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
-				<get dest="test.build.bundle.zip" src="${test.build.bundle.zip.url}" />
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<get dest="${tstamp.value}.zip" src="${test.build.bundle.zip.url}" />
 
 				<unzip
 					dest="${app.server.parent.dir}"
-					src="test.build.bundle.zip"
+					src="${tstamp.value}.zip"
 				>
 					<patternset
 						includes="liferay-portal-*/tomcat-*/**"
@@ -2025,7 +2034,7 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 					/>
 				</unzip>
 
-				<delete file="test.build.bundle.zip" />
+				<delete file="${tstamp.value}.zip" />
 			</then>
 			<else>
 				<ant antfile="build-dist.xml" target="unzip-tomcat" inheritAll="false" />
