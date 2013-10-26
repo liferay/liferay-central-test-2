@@ -2005,7 +2005,7 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 		<antcall target="start" inheritAll="false" />
 
 		<if>
-			<startswith string="test.build.bundle.zip.url" with="http" />
+			<matches pattern="http" string="${test.build.bundle.zip.url}" />
 			<then>
 				<mkdir dir="${app.server.parent.dir}" />
 
