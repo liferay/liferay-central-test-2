@@ -869,8 +869,7 @@ public class PortalImpl implements Portal {
 			sb.append(StringPool.UNDERLINE);
 			sb.append(request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS));
 
-			return StringUtil.replace(
-				sb.toString(), StringPool.DASH, StringPool.UNDERLINE);
+			return JS.getSafeName(sb.toString());
 		}
 	}
 
