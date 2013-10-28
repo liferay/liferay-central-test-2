@@ -47,13 +47,13 @@ plugins.includes=${plugins.includes}</echo>
 		</if>
 
 		<if>
-			<equals arg1="${release.plugin}" arg2="true" />
+			<matches pattern="http" string="${test.build.plugins.war.zip.url}" />
 			<then>
 				<for list="${plugins.includes}" param="plugin.includes">
 					<sequential>
 						<copy todir="${liferay.home}/deploy">
 							<fileset
-								dir="${release.dir}/${release.plugins.dir}"
+								dir="plugins"
 								includes="@{plugin.includes}*.war"
 							/>
 						</copy>
