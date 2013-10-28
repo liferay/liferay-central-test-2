@@ -256,7 +256,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 				occur = BooleanClause.Occur.SHOULD;
 			}
 
-			_includeIfUnique(booleanQuery, query, occur, queryParser, like);
+			_includeIfUnique(booleanQuery, like, queryParser, query, occur);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -783,8 +783,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	private void _includeIfUnique(
-		BooleanQuery booleanQuery, Query query, BooleanClause.Occur occur,
-		QueryParser queryParser, boolean like) {
+		BooleanQuery booleanQuery, boolean like, QueryParser queryParser,
+		Query query, BooleanClause.Occur occur) {
 
 		if (query instanceof TermQuery) {
 			Set<Term> terms = new HashSet<Term>();
@@ -833,8 +833,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 
 			for (BooleanClause booleanClause : curBooleanQuery.getClauses()) {
 				_includeIfUnique(
-					containerBooleanQuery, booleanClause.getQuery(),
-					booleanClause.getOccur(), queryParser, like);
+					containerBooleanQuery, like, queryParser,
+					booleanClause.getQuery(), booleanClause.getOccur());
 			}
 
 			if (containerBooleanQuery.getClauses().length > 0) {
