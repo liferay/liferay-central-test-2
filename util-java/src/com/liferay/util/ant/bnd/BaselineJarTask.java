@@ -73,6 +73,116 @@ public class BaselineJarTask extends BaseBndTask {
 	public void trace(String format, Object... args) {
 	}
 
+	protected void doBaselineJar(
+			Jar jar, File output, aQute.bnd.build.Project bndProject)
+		throws Exception {
+
+		if (_reportLevelIsOff) {
+			return;
+		}
+
+		ProjectBuilder projectBuilder = new ProjectBuilder(bndProject);
+
+		Jar baselineJar = projectBuilder.getBaselineJar();
+
+		try {
+			if (baselineJar == null) {
+				String name = bndProject.getProperty(Constants.BASELINEREPO);
+
+				bndProject.deploy(name, output);
+
+				return;
+			}
+
+			Baseline baseline = new Baseline(this, _diffPluginImpl);
+
+			Set<Info> infos = baseline.baseline(jar, baselineJar, null);
+
+			if (infos.isEmpty()) {
+				return;
+			}
+
+			BundleInfo bundleInfo = baseline.getBundleInfo();
+
+			Info[] infosArray = infos.toArray(new Info[infos.size()]);
+
+			Arrays.sort(
+				infosArray, new Comparator<Info>() {
+
+					@Override
+					public int compare(Info info1, Info info2) {
+						return info1.packageName.compareTo(info2.packageName);
+					}
+
+				}
+			);
+
+			for (Info info : infosArray) {
+				String warnings = "-";
+
+				Version newerVersion = info.newerVersion;
+				Version suggestedVersion = info.suggestedVersion;
+
+				if (suggestedVersion != null) {
+					if (newerVersion.compareTo(suggestedVersion) > 0) {
+						warnings = "EXCESSIVE VERSION INCREASE";
+					}
+					else if (newerVersion.compareTo(suggestedVersion) < 0) {
+						warnings = "VERSION INCREASE REQUIRED";
+					}
+				}
+
+				Diff packageDiff = info.packageDiff;
+
+				Delta delta = packageDiff.getDelta();
+
+				if (delta == Delta.REMOVED) {
+					warnings = "PACKAGE REMOVED";
+				}
+				else if (delta == Delta.UNCHANGED) {
+					boolean newVersionSuggested = false;
+
+					if ((suggestedVersion.getMajor() !=
+							newerVersion.getMajor()) ||
+						(suggestedVersion.getMicro() !=
+							newerVersion.getMicro()) ||
+						(suggestedVersion.getMinor() !=
+							newerVersion.getMinor())) {
+
+						warnings = "VERSION INCREASE SUGGESTED";
+
+						newVersionSuggested = true;
+					}
+
+					if (!newVersionSuggested && !info.mismatch) {
+						continue;
+					}
+				}
+
+				if (_reportLevelIsStandard && warnings.equals("-")) {
+					continue;
+				}
+
+				doInfo(bundleInfo, info, warnings);
+
+				if (_reportLevelIsDiff && (delta != Delta.REMOVED)) {
+					doPackageDiff(packageDiff);
+				}
+			}
+		}
+		finally {
+			if (baselineJar != null) {
+				baselineJar.close();
+			}
+
+			if (_printWriter != null) {
+				_printWriter.close();
+			}
+
+			projectBuilder.close();
+		}
+	}
+
 	@Override
 	protected void doBeforeExecute() throws Exception {
 		super.doBeforeExecute();
@@ -182,116 +292,6 @@ public class BaselineJarTask extends BaseBndTask {
 
 		if (!baselineRepoDir.exists()) {
 			baselineRepoDir.mkdir();
-		}
-	}
-
-	protected void doBaselineJar(
-			Jar jar, File output, aQute.bnd.build.Project bndProject)
-		throws Exception {
-
-		if (_reportLevelIsOff) {
-			return;
-		}
-
-		ProjectBuilder projectBuilder = new ProjectBuilder(bndProject);
-
-		Jar baselineJar = projectBuilder.getBaselineJar();
-
-		try {
-			if (baselineJar == null) {
-				String name = bndProject.getProperty(Constants.BASELINEREPO);
-
-				bndProject.deploy(name, output);
-
-				return;
-			}
-
-			Baseline baseline = new Baseline(this, _diffPluginImpl);
-
-			Set<Info> infos = baseline.baseline(jar, baselineJar, null);
-
-			if (infos.isEmpty()) {
-				return;
-			}
-
-			BundleInfo bundleInfo = baseline.getBundleInfo();
-
-			Info[] infosArray = infos.toArray(new Info[infos.size()]);
-
-			Arrays.sort(
-				infosArray, new Comparator<Info>() {
-
-					@Override
-					public int compare(Info info1, Info info2) {
-						return info1.packageName.compareTo(info2.packageName);
-					}
-
-				}
-			);
-
-			for (Info info : infosArray) {
-				String warnings = "-";
-
-				Version newerVersion = info.newerVersion;
-				Version suggestedVersion = info.suggestedVersion;
-
-				if (suggestedVersion != null) {
-					if (newerVersion.compareTo(suggestedVersion) > 0) {
-						warnings = "EXCESSIVE VERSION INCREASE";
-					}
-					else if (newerVersion.compareTo(suggestedVersion) < 0) {
-						warnings = "VERSION INCREASE REQUIRED";
-					}
-				}
-
-				Diff packageDiff = info.packageDiff;
-
-				Delta delta = packageDiff.getDelta();
-
-				if (delta == Delta.REMOVED) {
-					warnings = "PACKAGE REMOVED";
-				}
-				else if (delta == Delta.UNCHANGED) {
-					boolean newVersionSuggested = false;
-
-					if ((suggestedVersion.getMajor() !=
-							newerVersion.getMajor()) ||
-						(suggestedVersion.getMicro() !=
-							newerVersion.getMicro()) ||
-						(suggestedVersion.getMinor() !=
-							newerVersion.getMinor())) {
-
-						warnings = "VERSION INCREASE SUGGESTED";
-
-						newVersionSuggested = true;
-					}
-
-					if (!newVersionSuggested && !info.mismatch) {
-						continue;
-					}
-				}
-
-				if (_reportLevelIsStandard && warnings.equals("-")) {
-					continue;
-				}
-
-				doInfo(bundleInfo, info, warnings);
-
-				if (_reportLevelIsDiff && (delta != Delta.REMOVED)) {
-					doPackageDiff(packageDiff);
-				}
-			}
-		}
-		finally {
-			if (baselineJar != null) {
-				baselineJar.close();
-			}
-
-			if (_printWriter != null) {
-				_printWriter.close();
-			}
-
-			projectBuilder.close();
 		}
 	}
 
