@@ -14,7 +14,6 @@
 
 package com.liferay.util.ant.bnd;
 
-
 import java.io.File;
 
 import org.apache.tools.ant.BuildException;
@@ -39,13 +38,13 @@ public class ReleaseToRepoTask extends BaseBndTask {
 
 		if ((_file == null) || !_file.exists() || _file.isDirectory()) {
 			if (_file != null) {
-				_project.log(
+				project.log(
 					"file is either missing or is a directory " +
 						_file.getAbsolutePath(),
 					Project.MSG_ERR);
 			}
 
-			throw new BuildException("file is not set correctly");
+			throw new BuildException("file is invalid");
 		}
 	}
 
@@ -63,27 +62,27 @@ public class ReleaseToRepoTask extends BaseBndTask {
 				}
 			}
 			else {
-				_project.log(
-					"Not a jar file " + _file.getAbsolutePath(),
+				project.log(
+					"Not a JAR file " + _file.getAbsolutePath(),
 					Project.MSG_ERR);
 			}
 		}
 		catch (Exception e) {
 			throw new BuildException(
-				e.getMessage(), e, new org.apache.tools.ant.Location(
-					_file.getAbsolutePath()));
+				e.getMessage(), e,
+				new org.apache.tools.ant.Location(_file.getAbsolutePath()));
 		}
 
 		report(bndProject);
 
 		if (bndProject.getErrors().size() > 0) {
 			throw new BuildException(
-				"Deploy failed!", new org.apache.tools.ant.Location(
-					_file.getAbsolutePath()));
+				"Unable to deploy",
+				new org.apache.tools.ant.Location(_file.getAbsolutePath()));
 		}
 	}
 
-	private String _deployRepo = null;
+	private String _deployRepo;
 	private File _file;
 
 }
