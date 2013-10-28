@@ -174,11 +174,6 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws Exception {
 
-		ActionableDynamicQuery recordSetActionableDynamicQuery =
-			new DDLRecordSetExportActionableDynamicQuery(portletDataContext);
-
-		recordSetActionableDynamicQuery.performCount();
-
 		List<DDMTemplate> ddmTemplates = new ArrayList<DDMTemplate>();
 
 		ActionableDynamicQuery ddmStructureActionableDynamicQuery =
@@ -186,6 +181,11 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 				portletDataContext, ddmTemplates);
 
 		ddmStructureActionableDynamicQuery.performCount();
+
+		ActionableDynamicQuery recordSetActionableDynamicQuery =
+			new DDLRecordSetExportActionableDynamicQuery(portletDataContext);
+
+		recordSetActionableDynamicQuery.performCount();
 	}
 
 	protected ActionableDynamicQuery getDDMStructureActionableDynamicQuery(
