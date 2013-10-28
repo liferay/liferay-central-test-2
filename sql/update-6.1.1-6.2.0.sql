@@ -599,7 +599,7 @@ create table TrashVersion (
 	entryId LONG,
 	classNameId LONG,
 	classPK LONG,
-	typeSettings VARCHAR(75) null,
+	typeSettings TEXT null,
 	status INTEGER
 );
 

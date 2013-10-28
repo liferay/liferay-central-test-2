@@ -63,10 +63,10 @@ public class TrashVersionModelImpl extends BaseModelImpl<TrashVersion>
 			{ "entryId", Types.BIGINT },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "typeSettings", Types.VARCHAR },
+			{ "typeSettings", Types.CLOB },
 			{ "status", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TrashVersion (versionId LONG not null primary key,entryId LONG,classNameId LONG,classPK LONG,typeSettings VARCHAR(75) null,status INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table TrashVersion (versionId LONG not null primary key,entryId LONG,classNameId LONG,classPK LONG,typeSettings TEXT null,status INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table TrashVersion";
 	public static final String ORDER_BY_JPQL = " ORDER BY trashVersion.versionId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY TrashVersion.versionId ASC";
