@@ -248,7 +248,7 @@ AUI.add(
 
 							bodyNode.html(STR_BLANK);
 
-							var searchForm = A.Node.create(A.Lang.sub(TPL_SEARCH_FORM, [Liferay.Language.get('search')]));
+							var searchForm = A.Node.create(Lang.sub(TPL_SEARCH_FORM, [Liferay.Language.get('search')]));
 
 							bodyNode.append(searchForm);
 
@@ -551,7 +551,7 @@ AUI.add(
 								if (results) {
 									var resultData = results.Result;
 
-									if (!A.Lang.isArray(resultData)) {
+									if (!Lang.isArray(resultData)) {
 										resultData = [resultData];
 									}
 
