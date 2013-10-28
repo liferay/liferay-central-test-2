@@ -123,8 +123,7 @@ public class JournalArticlePermission {
 			if (folderId != JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
 				try {
 					JournalFolder folder =
-						JournalFolderLocalServiceUtil.getFolder(
-							folderId);
+						JournalFolderLocalServiceUtil.getFolder(folderId);
 
 					if (!JournalFolderPermission.contains(
 							permissionChecker, folder, ActionKeys.ACCESS) &&
