@@ -113,9 +113,9 @@ public class WikiTestUtil {
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 
 			WikiPage page = WikiPageLocalServiceUtil.addPage(
-			userId, nodeId, title, WikiPageConstants.VERSION_DEFAULT, content,
-			"Summary", true, WikiPageConstants.DEFAULT_FORMAT, false,
-			parentTitle, null, serviceContext);
+				userId, nodeId, title, WikiPageConstants.VERSION_DEFAULT,
+				content, "Summary", true, WikiPageConstants.DEFAULT_FORMAT,
+				false, parentTitle, null, serviceContext);
 
 			if (approved) {
 				page = WikiPageLocalServiceUtil.updateStatus(
