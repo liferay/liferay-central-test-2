@@ -341,9 +341,8 @@ public class UpdateLayoutAction extends JSONAction {
 			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		// This operation is actually also an ADD operation and so there can be
-		// no logic which prevents it from executing. Place optional logic later
-		// in the method.
+		// We need to get the portlet setup before doing anything else to ensure
+		// that it is created in the database
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
