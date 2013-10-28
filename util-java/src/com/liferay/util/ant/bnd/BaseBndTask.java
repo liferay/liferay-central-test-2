@@ -32,7 +32,7 @@ public abstract class BaseBndTask extends BndTask {
 	@Override
 	public void execute() throws BuildException {
 		try {
-			_project = getProject();
+			project = getProject();
 
 			doBeforeExecute();
 			doExecute();
@@ -56,15 +56,15 @@ public abstract class BaseBndTask extends BndTask {
 		aQute.bnd.build.Project bndProject = new aQute.bnd.build.Project(
 			workspace, bndRootFile.getParentFile());
 
-		bndProject.setProperties(bndRootFile);
 		bndProject.setFileMustExist(true);
+		bndProject.setProperties(bndRootFile);
 
-		Properties projectProperties = new Properties();
+		Properties properties = new Properties();
 
-		projectProperties.putAll(_project.getProperties());
-		projectProperties.putAll(bndProject.getProperties());
+		properties.putAll(project.getProperties());
+		properties.putAll(bndProject.getProperties());
 
-		bndProject.setProperties(projectProperties);
+		bndProject.setProperties(properties);
 
 		return bndProject;
 	}
@@ -82,26 +82,26 @@ public abstract class BaseBndTask extends BndTask {
 			_bndRootFile.isDirectory()) {
 
 			if (_bndRootFile != null) {
-				_project.log(
+				project.log(
 					"bndRootFile is either missing or is a directory " +
 						_bndRootFile.getAbsolutePath(),
 					Project.MSG_ERR);
 			}
 
-			throw new Exception("bndRootFile is not set correctly");
+			throw new Exception("bndRootFile is invalid");
 		}
 
 		_bndRootFile = _bndRootFile.getAbsoluteFile();
 	}
 
-	abstract protected void doExecute() throws Exception;
+	protected abstract void doExecute() throws Exception;
 
 	protected String getBndDirName() {
 		if (_bndDirName != null) {
 			return _bndDirName;
 		}
 
-		_bndDirName = _project.getProperty("baseline.jar.bnddir.name");
+		_bndDirName = project.getProperty("baseline.jar.bnddir.name");
 
 		if (_bndDirName == null) {
 			_bndDirName = _BND_DIR;
@@ -110,13 +110,11 @@ public abstract class BaseBndTask extends BndTask {
 		return _bndDirName;
 	}
 
-	private File _bndRootFile;
+	protected Project project;
 
 	private static final String _BND_DIR = ".bnd";
 
-	protected Project _project;
-
 	private String _bndDirName;
-
+	private File _bndRootFile;
 
 }

@@ -1147,7 +1147,7 @@
 			</license>
 		</licenses>
 		<comments>
-			Applied https://github.com/bndtools/bnd/pull/417 until new release.
+			Applied https://github.com/bndtools/bnd/pull/417.
 		</comments>
 	</library>
 	<library>
