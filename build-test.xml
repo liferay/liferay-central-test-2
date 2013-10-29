@@ -2152,6 +2152,8 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 		<if>
 			<matches pattern="http" string="${test.build.license.xml.zip.url}" />
 			<then>
+				<mkdir dir="${liferay.home}/deploy" />
+
 				<get dest="${liferay.home}/deploy/license.xml" src="${test.build.license.xml.zip.url}" />
 			</then>
 		</if>
