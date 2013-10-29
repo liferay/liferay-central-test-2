@@ -62,6 +62,7 @@ import org.junit.runner.RunWith;
 public class DLFileVersionTest extends BaseDLAppTestCase {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -105,6 +106,7 @@ public class DLFileVersionTest extends BaseDLAppTestCase {
 	}
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 
