@@ -35,8 +35,8 @@ import java.util.regex.Pattern;
 public class RuntimeVariables {
 
 	public static String evaluateLocator(
-		String locator, Map<String, String> context)
-	throws Exception {
+			String locator, Map<String, String> context)
+		throws Exception {
 
 		String locatorValue = locator;
 
