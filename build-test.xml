@@ -2164,6 +2164,7 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 				<get dest="plugins.war.zip" src="${test.build.plugins.war.zip.url}" />
 
 				<unzip
+					dest="."
 					src="plugins.war.zip"
 				/>
 
