@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -294,13 +293,9 @@ public class DLFileEntryTypeStagedModelDataHandler
 					fetchDLFileEntryTypeByUuidAndGroupId(uuid, groupId);
 		}
 		else {
-			try {
-				existingDLFileEntryType =
-					DLFileEntryTypeLocalServiceUtil.getFileEntryType(
-						groupId, fileEntryTypeKey);
-			}
-			catch (NoSuchFileEntryException nsfee) {
-			}
+			existingDLFileEntryType =
+				DLFileEntryTypeLocalServiceUtil.fetchFileEntryType(
+					groupId, fileEntryTypeKey);
 		}
 
 		return existingDLFileEntryType;
