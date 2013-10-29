@@ -1029,7 +1029,7 @@
 				<then>
 					<copy todir="${todir}">
 						<fileset
-							dir="${jdbc.drivers.optional.dir}/mysql/5.0.7"
+							dir="lib/development"
 							includes="${jdbc.mysql.driver}"
 						/>
 					</copy>
