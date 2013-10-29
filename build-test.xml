@@ -2005,15 +2005,107 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 		<antcall target="start" inheritAll="false" />
 
 		<if>
-			<matches pattern="http" string="${test.build.plugins.war.zip.url}" />
+			<matches pattern="http" string="${test.build.bundle.jetty.zip.url}" />
 			<then>
-				<get dest="plugins.war.zip" src="${test.build.plugins.war.zip.url}" />
+				<mkdir dir="${app.server.parent.dir}" />
+
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<get dest="${tstamp.value}.zip" src="${test.build.bundle.jetty.zip.url}" />
 
 				<unzip
-					src="plugins.war.zip"
-				/>
+					dest="${app.server.parent.dir}"
+					src="${tstamp.value}.zip"
+				>
+					<patternset
+						includes="liferay-portal-*/jetty-*/**"
+					/>
+					<mapper
+						from="[^/]+/(.*)"
+						to="\1"
+						type="regexp"
+					/>
+				</unzip>
 
-				<delete file="plugins.war.zip" />
+				<chmod perm="a+x">
+					<fileset dir="${app.server.jetty.bin.dir}">
+						<include name="*.sh" />
+					</fileset>
+				</chmod>
+
+				<delete file="${tstamp.value}.zip" />
+			</then>
+		</if>
+
+		<if>
+			<matches pattern="http" string="${test.build.bundle.glassfish.zip.url}" />
+			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<get dest="${tstamp.value}.zip" src="${test.build.bundle.glassfish.zip.url}" />
+
+				<unzip
+					dest="${app.server.parent.dir}"
+					src="${tstamp.value}.zip"
+				>
+					<patternset
+						includes="liferay-portal-*/glassfish-*/**"
+					/>
+					<mapper
+						from="[^/]+/(.*)"
+						to="\1"
+						type="regexp"
+					/>
+				</unzip>
+
+				<chmod perm="a+x">
+					<fileset dir="${app.server.glassfish.bin.dir}">
+						<include name="*.sh" />
+					</fileset>
+				</chmod>
+
+				<delete file="${tstamp.value}.zip" />
+			</then>
+		</if>
+
+		<if>
+			<matches pattern="http" string="${test.build.bundle.jboss.zip.url}" />
+			<then>
+				<mkdir dir="${app.server.parent.dir}" />
+
+				<tstamp>
+					<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<get dest="${tstamp.value}.zip" src="${test.build.bundle.jboss.zip.url}" />
+
+				<unzip
+					dest="${app.server.parent.dir}"
+					src="${tstamp.value}.zip"
+				>
+					<patternset
+						includes="liferay-portal-*/jboss-*/**"
+					/>
+					<mapper
+						from="[^/]+/(.*)"
+						to="\1"
+						type="regexp"
+					/>
+				</unzip>
+
+				<chmod perm="a+x">
+					<fileset dir="${app.server.jboss.bin.dir}">
+						<include name="*.sh" />
+					</fileset>
+				</chmod>
+
+				<delete file="${tstamp.value}.zip" />
 			</then>
 		</if>
 
@@ -2055,6 +2147,26 @@ svn --username ${svn.username} --password ${svn.password} update -r ${svn.info.r
 
 				<antcall target="deploy" inheritAll="false" />
 			</else>
+		</if>
+
+		<if>
+			<matches pattern="http" string="${test.build.license.xml.zip.url}" />
+			<then>
+				<get dest="${liferay.home}/deploy/license.xml" src="${test.build.license.xml.zip.url}" />
+			</then>
+		</if>
+
+		<if>
+			<matches pattern="http" string="${test.build.plugins.war.zip.url}" />
+			<then>
+				<get dest="plugins.war.zip" src="${test.build.plugins.war.zip.url}" />
+
+				<unzip
+					src="plugins.war.zip"
+				/>
+
+				<delete file="plugins.war.zip" />
+			</then>
 		</if>
 
 		<ant dir="portal-impl" target="build-selenium-new" inheritAll="false" />
