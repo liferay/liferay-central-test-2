@@ -31,6 +31,7 @@ import java.util.Map;
 public class QueryConfig implements Serializable {
 
 	public static final String LOCALE = "locale";
+
 	public static final String SEARCH_SUBFOLDERS = "search.subfolders";
 
 	public Serializable getAttribute(String name) {
