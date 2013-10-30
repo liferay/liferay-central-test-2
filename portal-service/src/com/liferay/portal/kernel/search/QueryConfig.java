@@ -31,6 +31,7 @@ import java.util.Map;
 public class QueryConfig implements Serializable {
 
 	public static final String LOCALE = "locale";
+	public static final String SEARCH_SUBFOLDERS = "search.subfolders";
 
 	public Serializable getAttribute(String name) {
 		return _attributes.get(name);
@@ -127,6 +128,10 @@ public class QueryConfig implements Serializable {
 			_INDEX_SEARCH_SCORING_ENABLED);
 	}
 
+	public boolean isSearchSubfolders() {
+		return GetterUtil.getBoolean(_attributes.get(SEARCH_SUBFOLDERS));
+	}
+
 	public Serializable removeAttribute(String name) {
 		return _attributes.remove(name);
 	}
@@ -212,6 +217,10 @@ public class QueryConfig implements Serializable {
 
 	public void setScoreEnabled(boolean scoreEnabled) {
 		_attributes.put(PropsKeys.INDEX_SEARCH_SCORING_ENABLED, scoreEnabled);
+	}
+
+	public void setSearchSubfolders(boolean searchSubfolders) {
+		_attributes.put(SEARCH_SUBFOLDERS, searchSubfolders);
 	}
 
 	private static final String _HITS_PROCESSING_ENABLED =
