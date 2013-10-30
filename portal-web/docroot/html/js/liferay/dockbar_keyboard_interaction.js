@@ -147,7 +147,7 @@ AUI.add(
 
 						host.focusManager.after(
 							'focusedChange',
-							function (event) {
+							function(event) {
 								var instance = this;
 
 								if (!event.newVal) {
