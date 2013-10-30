@@ -186,9 +186,7 @@ public class EvaluateLogTest extends BaseTestCase {
 
 			if (line.contains(
 					"[org.hibernate.engine.jdbc.JdbcSupportLoader] (MSC " +
-						"service thread 1-15) Disabling contextual LOB " +
-						"creation as createClob() method threw error : " +
-						"java.lang.reflect.InvocationTargetException")) {
+						"service thread 1-15) Disabling contextual LOB ")) {
 
 				continue;
 			}
