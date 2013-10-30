@@ -20,7 +20,7 @@ import com.liferay.portal.model.Organization;
 /**
  * @author Shinn Lok
  */
-public class OrganizationIdComparator extends OrderByComparator {
+public class OrganizationOrganizationIdComparator extends OrderByComparator {
 
 	public static final String ORDER_BY_ASC =
 		"Organization_.organizationId ASC";
@@ -30,11 +30,11 @@ public class OrganizationIdComparator extends OrderByComparator {
 
 	public static final String[] ORDER_BY_FIELDS = {"organizationId"};
 
-	public OrganizationIdComparator() {
+	public OrganizationOrganizationIdComparator() {
 		this(false);
 	}
 
-	public OrganizationIdComparator(boolean ascending) {
+	public OrganizationOrganizationIdComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 

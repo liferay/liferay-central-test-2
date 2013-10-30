@@ -12,44 +12,44 @@
  * details.
  */
 
-package com.liferay.portlet.bookmarks.util.comparator;
+package com.liferay.portal.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portal.model.Group;
 
 /**
  * @author Shinn Lok
  */
-public class FolderIdComparator extends OrderByComparator {
+public class GroupGroupIdComparator extends OrderByComparator {
 
-	public static final String ORDER_BY_ASC = "BookmarksFolder.folderId ASC";
+	public static final String ORDER_BY_ASC = "Group_.groupId ASC";
 
-	public static final String ORDER_BY_DESC = "BookmarksFolder.folderId DESC";
+	public static final String ORDER_BY_DESC = "Group_.groupId DESC";
 
-	public static final String[] ORDER_BY_FIELDS = {"folderId"};
+	public static final String[] ORDER_BY_FIELDS = {"groupId"};
 
-	public FolderIdComparator() {
+	public GroupGroupIdComparator() {
 		this(false);
 	}
 
-	public FolderIdComparator(boolean ascending) {
+	public GroupGroupIdComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(Object obj1, Object obj2) {
-		BookmarksFolder folder1 = (BookmarksFolder)obj1;
-		BookmarksFolder folder2 = (BookmarksFolder)obj2;
+		Group group1 = (Group)obj1;
+		Group group2 = (Group)obj2;
 
-		long folderId1 = folder1.getFolderId();
-		long folderId2 = folder2.getFolderId();
+		long groupId1 = group1.getGroupId();
+		long groupId2 = group2.getGroupId();
 
 		int value = 0;
 
-		if (folderId1 < folderId2) {
+		if (groupId1 < groupId2) {
 			value = -1;
 		}
-		else if (folderId1 > folderId2) {
+		else if (groupId1 > groupId2) {
 			value = 1;
 		}
 
