@@ -12,34 +12,34 @@
  * details.
  */
 
-package com.liferay.portlet.bookmarks.util.comparator;
+package com.liferay.portlet.documentlibrary.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 
 /**
  * @author Shinn Lok
  */
-public class FolderFolderIdComparator extends OrderByComparator {
+public class FolderIdComparator extends OrderByComparator {
 
-	public static final String ORDER_BY_ASC = "BookmarksFolder.folderId ASC";
+	public static final String ORDER_BY_ASC = "DLFolder.folderId ASC";
 
-	public static final String ORDER_BY_DESC = "BookmarksFolder.folderId DESC";
+	public static final String ORDER_BY_DESC = "DLFolder.folderId DESC";
 
 	public static final String[] ORDER_BY_FIELDS = {"folderId"};
 
-	public FolderFolderIdComparator() {
+	public FolderIdComparator() {
 		this(false);
 	}
 
-	public FolderFolderIdComparator(boolean ascending) {
+	public FolderIdComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 
 	@Override
 	public int compare(Object obj1, Object obj2) {
-		BookmarksFolder folder1 = (BookmarksFolder)obj1;
-		BookmarksFolder folder2 = (BookmarksFolder)obj2;
+		DLFolder folder1 = (DLFolder)obj1;
+		DLFolder folder2 = (DLFolder)obj2;
 
 		long folderId1 = folder1.getFolderId();
 		long folderId2 = folder2.getFolderId();
