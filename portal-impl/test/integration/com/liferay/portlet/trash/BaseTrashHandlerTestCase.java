@@ -316,7 +316,7 @@ public abstract class BaseTrashHandlerTestCase {
 			BaseModel<?> parentBaseModel)
 		throws Exception {
 
-		return Collections.EMPTY_LIST;
+		return Collections.emptyList();
 	}
 
 	protected long getDeletionSystemEventCount(
@@ -1163,7 +1163,7 @@ public abstract class BaseTrashHandlerTestCase {
 				getSearchKeywords(), serviceContext);
 		}
 
-		List<Integer> originalStatus = new ArrayList<Integer>();
+		List<Integer> originalStatuses = new ArrayList<Integer>();
 
 		baseModel = addBaseModel(parentBaseModel, true, serviceContext);
 
@@ -1171,7 +1171,7 @@ public abstract class BaseTrashHandlerTestCase {
 
 		WorkflowedModel workflowedModel = getWorkflowedModel(baseModel);
 
-		originalStatus.add(workflowedModel.getStatus());
+		originalStatuses.add(workflowedModel.getStatus());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -1180,7 +1180,7 @@ public abstract class BaseTrashHandlerTestCase {
 
 		workflowedModel = getWorkflowedModel(baseModel);
 
-		originalStatus.add(workflowedModel.getStatus());
+		originalStatuses.add(workflowedModel.getStatus());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
@@ -1189,7 +1189,7 @@ public abstract class BaseTrashHandlerTestCase {
 
 		workflowedModel = getWorkflowedModel(baseModel);
 
-		originalStatus.add(workflowedModel.getStatus());
+		originalStatuses.add(workflowedModel.getStatus());
 
 		Assert.assertEquals(
 			initialBaseModelsCount + 1,
@@ -1244,15 +1244,18 @@ public abstract class BaseTrashHandlerTestCase {
 			restoreParentBaseModelFromTrash(
 				(Long)parentBaseModel.getPrimaryKeyObj());
 
-			List<? extends WorkflowedModel> children =
+			List<? extends WorkflowedModel> childrenWorkflowedModels =
 				getChildrenWorkflowedModels(parentBaseModel);
 
-			for (int i = 1; i <= children.size(); i++) {
-				WorkflowedModel child = children.get(i - 1);
+			for (int i = 1; i <= childrenWorkflowedModels.size(); i++) {
+				WorkflowedModel childrenWorkflowedModel =
+					childrenWorkflowedModels.get(i - 1);
+
+				int originalStatus = originalStatuses.get(
+					childrenWorkflowedModels.size() - i);
 
 				Assert.assertEquals(
-					originalStatus.get(children.size() - i).intValue(),
-					child.getStatus());
+					originalStatus, childrenWorkflowedModel.getStatus());
 			}
 		}
 	}
