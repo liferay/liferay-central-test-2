@@ -1512,6 +1512,7 @@ public class StagingImpl implements Staging {
 		}
 
 		long sourcePlid = sourceLayout.getPlid();
+
 		long targetPlid = LayoutConstants.DEFAULT_PLID;
 
 		if (targetLayout != null) {
