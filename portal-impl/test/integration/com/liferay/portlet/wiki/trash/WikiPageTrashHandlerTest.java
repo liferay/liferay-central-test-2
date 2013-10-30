@@ -116,6 +116,12 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	public void testTrashVersionParentBaseModel() throws Exception {
 	}
 
+	@Ignore()
+	@Override
+	@Test
+	public void testTrashVersionParentBaseModelAndRestore() throws Exception {
+	}
+
 	@Override
 	protected BaseModel<?> addBaseModelWithWorkflow(
 			BaseModel<?> parentBaseModel, boolean approved,
