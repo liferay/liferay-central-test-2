@@ -73,7 +73,6 @@
 					<aui:nav-item href="<%= manageSiteTemplateURL.toString() %>" label="manage-site-template" />
 				</c:if>
 			</aui:nav-item>
-
 		</c:otherwise>
 	</c:choose>
 </c:if>
