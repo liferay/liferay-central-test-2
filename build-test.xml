@@ -2921,7 +2921,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 					<![CDATA[
 						#!/bin/bash
 
-						for i in `ps -o pid,args -e | grep "java" | grep -v grep | grep -v jenkins | cut -c1-5`
+						for i in `ps -o pid,args -e | grep java | grep -v grep | grep -v jenkins | cut -c1-5`
 						do
 							echo "Killing $i"
 
