@@ -64,7 +64,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to update classNameId " + classNameId, e);
+				_log.warn(sqle, sqle);
 			}
 		}
 
@@ -116,7 +116,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to update structure " + structureId, sqle);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
