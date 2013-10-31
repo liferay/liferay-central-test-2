@@ -29,13 +29,10 @@ import com.liferay.portal.service.RepositoryEntryLocalService;
 import com.liferay.portal.service.RepositoryEntryLocalServiceUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portlet.documentlibrary.service.DLAppService;
-import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.lang.reflect.Field;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -164,8 +161,6 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Test
 	public void testFolderQuery() throws Exception {
-		DLAppService dlAppService = getMockPortalService(
-			DLAppServiceUtil.class, DLAppService.class);
 		RepositoryEntryLocalService repositoryEntryLocalService =
 			getMockPortalService(
 				RepositoryEntryLocalServiceUtil.class,
@@ -291,8 +286,6 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Test
 	public void testSubfolderQuery() throws Exception {
-		DLAppService dlAppService = getMockPortalService(
-			DLAppServiceUtil.class, DLAppService.class);
 		RepositoryEntryLocalService repositoryEntryLocalService =
 			getMockPortalService(
 				RepositoryEntryLocalServiceUtil.class,
@@ -399,7 +392,6 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		"SELECT cmis:objectId, SCORE() AS HITS FROM cmis:document WHERE (";
 
 	private BeanLocator _portalBeanLocator;
-	private Map<String, Object> _serviceMocks = new HashMap<String, Object>();
 	private List<Class<?>> _serviceUtilClasses = new ArrayList<Class<?>>();
 
 	private class WrapperBeanLocator implements BeanLocator {
@@ -411,24 +403,29 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			_mockBeanLocator = mockBeanLocator;
 		}
 
+		@Override
 		public ClassLoader getClassLoader() {
 			return _beanLocator.getClassLoader();
 		}
 
+		@Override
 		public String[] getNames() {
 			return _beanLocator.getNames();
 		}
 
+		@Override
 		public Class<?> getType(String name) throws BeanLocatorException {
 			return _beanLocator.getType(name);
 		}
 
+		@Override
 		public <T> Map<String, T> locate(Class<T> clazz)
 			throws BeanLocatorException {
 
 			return _beanLocator.locate(clazz);
 		}
 
+		@Override
 		public Object locate(String name) throws BeanLocatorException {
 			Object bean = _mockBeanLocator.locate(name);
 
