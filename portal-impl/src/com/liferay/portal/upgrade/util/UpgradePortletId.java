@@ -213,9 +213,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update typeSetting for layout with plid " + plid,
-					sqle);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
@@ -250,9 +248,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update layout " + oldPortletId + " with " +
-						newPortletId, e);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
@@ -333,9 +329,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update portlet " + oldRootPortletId + " with " +
-						newRootPortletId, e);
+				_log.warn(e, e);
 			}
 		}
 	}
@@ -360,10 +354,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update portletPreference " +
-						portletPreferencesId + " for portlet " + portletId,
-					sqle);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
@@ -392,9 +383,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update resourcePermission " +
-						resourcePermissionId, sqle);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
@@ -459,9 +448,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to update resourcePermission for portlet " +
-					oldRootPortletId, sqle);
+				_log.warn(sqle, sqle);
 			}
 		}
 		finally {
