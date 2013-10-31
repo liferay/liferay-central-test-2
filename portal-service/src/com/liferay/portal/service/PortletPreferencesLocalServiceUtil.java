@@ -300,18 +300,18 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static javax.portlet.PortletPreferences fetchPreferences(
-		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().fetchPreferences(portletPreferencesIds);
-	}
-
-	public static javax.portlet.PortletPreferences fetchPreferences(
 		long companyId, long ownerId, int ownerType, long plid,
 		java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .fetchPreferences(companyId, ownerId, ownerType, plid,
 			portletId);
+	}
+
+	public static javax.portlet.PortletPreferences fetchPreferences(
+		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().fetchPreferences(portletPreferencesIds);
 	}
 
 	public static javax.portlet.PortletPreferences getDefaultPreferences(

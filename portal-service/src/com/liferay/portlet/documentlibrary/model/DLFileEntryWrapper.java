@@ -1055,6 +1055,12 @@ public class DLFileEntryWrapper implements DLFileEntry,
 	}
 
 	@Override
+	public void updateTreePath(java.lang.String treePath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dlFileEntry.updateTreePath(treePath);
+	}
+
+	@Override
 	public java.lang.String buildTreePath()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

@@ -842,6 +842,12 @@ public class DLFileShortcutWrapper implements DLFileShortcut,
 	}
 
 	@Override
+	public void updateTreePath(java.lang.String treePath)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		_dlFileShortcut.updateTreePath(treePath);
+	}
+
+	@Override
 	public java.lang.String buildTreePath()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {

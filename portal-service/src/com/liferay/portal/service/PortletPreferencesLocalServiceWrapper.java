@@ -316,18 +316,18 @@ public class PortletPreferencesLocalServiceWrapper
 	}
 
 	@Override
-	public javax.portlet.PortletPreferences fetchPreferences(
-		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _portletPreferencesLocalService.fetchPreferences(portletPreferencesIds);
-	}
-
-	@Override
 	public javax.portlet.PortletPreferences fetchPreferences(long companyId,
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return _portletPreferencesLocalService.fetchPreferences(companyId,
 			ownerId, ownerType, plid, portletId);
+	}
+
+	@Override
+	public javax.portlet.PortletPreferences fetchPreferences(
+		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _portletPreferencesLocalService.fetchPreferences(portletPreferencesIds);
 	}
 
 	@Override

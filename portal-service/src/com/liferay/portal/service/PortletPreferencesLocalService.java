@@ -262,13 +262,13 @@ public interface PortletPreferencesLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public javax.portlet.PortletPreferences fetchPreferences(
-		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
+	public javax.portlet.PortletPreferences fetchPreferences(long companyId,
+		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public javax.portlet.PortletPreferences fetchPreferences(long companyId,
-		long ownerId, int ownerType, long plid, java.lang.String portletId)
+	public javax.portlet.PortletPreferences fetchPreferences(
+		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
