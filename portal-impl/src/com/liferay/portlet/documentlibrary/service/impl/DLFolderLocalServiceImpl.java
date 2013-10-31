@@ -1156,7 +1156,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		DLStoreUtil.validateDirectory(name);
+		DLStoreUtil.validateDirectoryName(name);
 
 		try {
 			dlFileEntryLocalService.getFileEntry(groupId, parentFolderId, name);
