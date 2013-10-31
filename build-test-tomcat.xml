@@ -254,8 +254,33 @@ web.server.display.node=true</echo>
 			<param name="simple.server.start.executable.arg.line" value="run" />
 			<param name="simple.server.stop.executable" value="shutdown${file.suffix.bat}" />
 			<param name="simple.server.stop.executable.arg.line" value="" />
-			<param name="simple.server.type" value="tomcat" />
 		</antcall>
+
+		<if>
+			<and>
+				<os family="unix" />
+			</and>
+			<then>
+				<echo file="forceshutdown.sh">
+					<![CDATA[
+						#!/bin/bash
+
+						for i in `ps -o pid,args -e | grep "catalina.home" | grep -v grep | cut -c1-5`
+						do
+							echo "Killing $i"
+
+							kill -9 $i
+						done
+					]]>
+				</echo>
+
+				<chmod file="forceshutdown.sh" perm="a+x" />
+
+				<exec executable="forceshutdown.sh" />
+
+				<delete file="forceshutdown.sh" />
+			</then>
+		</if>
 
 		<record action="stop" name="log" />
 
