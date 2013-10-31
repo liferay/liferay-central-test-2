@@ -675,7 +675,8 @@ public class JournalTestUtil {
 			article.getUserId(), article.getGroupId(), article.getFolderId(),
 			article.getArticleId(), article.getVersion(), titleMap,
 			article.getDescriptionMap(),
-			createLocalizedContent(content, LocaleUtil.getSiteDefault()),
+			createLocalizedContent(
+				content, PortalUtil.getSiteDefaultLocale(article.getGroupId())),
 			article.getType(), article.getStructureId(),
 			article.getTemplateId(), article.getLayoutUuid(), displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
