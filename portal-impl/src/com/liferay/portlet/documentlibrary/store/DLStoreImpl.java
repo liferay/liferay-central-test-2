@@ -719,8 +719,8 @@ public class DLStoreImpl implements DLStore {
 	}
 
 	@Override
-	public void validateDirectory(String directoryName)
-		throws PortalException, SystemException {
+	public void validateDirectoryName(String directoryName)
+		throws PortalException {
 
 		if (!isValidName(directoryName)) {
 			throw new FolderNameException(directoryName);

@@ -48,7 +48,7 @@ import org.junit.runner.RunWith;
 		EnvironmentExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class DLValidFileNameTest {
+public class DLDirectoryNameAndFileNameTest {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -63,15 +63,15 @@ public class DLValidFileNameTest {
 	}
 
 	@Test
-	public void testAddNotValidFileEntry() throws Exception {
-		String name = StringUtil.randomString(20).concat(BLACKLIST_CHARS[0]);
+	public void testAddFileEntry() throws Exception {
+		String name = StringUtil.randomString(20) + _BLACKLIST_CHARS[0];
 
 		try {
 			DLAppTestUtil.addFileEntry(
 				_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				true, name);
 
-			Assert.fail(name + " is not a valid name.");
+			Assert.fail(name + " is an invalid name");
 		}
 		catch (Exception e) {
 			Assert.assertTrue(e instanceof FileNameException);
@@ -79,15 +79,15 @@ public class DLValidFileNameTest {
 	}
 
 	@Test
-	public void testAddNotValidFolder() throws Exception {
-		String name = StringUtil.randomString(20).concat(BLACKLIST_CHARS[0]);
+	public void testAddFolder() throws Exception {
+		String name = StringUtil.randomString(20) + _BLACKLIST_CHARS[0];
 
 		try {
 			DLAppTestUtil.addFolder(
 				_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 				name);
 
-			Assert.fail(name + " is not a valid name.");
+			Assert.fail(name + " is an invalid name");
 		}
 		catch (Exception e) {
 			Assert.assertTrue(e instanceof FolderNameException);
@@ -95,29 +95,26 @@ public class DLValidFileNameTest {
 	}
 
 	@Test
-	public void testNameStartingWithPeriodUnderscore() throws Exception {
-		String name = "._".concat(StringUtil.randomString(20)).concat(".tmp");
+	public void testIsValidNameHiddenOSX() throws Exception {
+		String name = "._" + StringUtil.randomString(20) + ".tmp";
 
 		Assert.assertTrue(name, DLStoreUtil.isValidName(name));
 	}
 
 	@Test
-	public void testNullName() {
+	public void testIsValidNameNull() {
 		Assert.assertFalse("null", DLStoreUtil.isValidName(null));
 	}
 
 	@Test
-	public void testRandomStrings() throws Exception {
+	public void testIsValidNameRandom() throws Exception {
 		for (int i = 0; i < 100; i++) {
 			String name = StringUtil.randomString(20);
 
 			Assert.assertTrue(name, DLStoreUtil.isValidName(name));
 		}
-	}
 
-	@Test
-	public void testRandomStringsWithBlacklistedChar() throws Exception {
-		for (String blacklistChar : BLACKLIST_CHARS) {
+		for (String blacklistChar : _BLACKLIST_CHARS) {
 			StringBuilder sb = new StringBuilder(4);
 
 			sb.append(StringUtil.randomString(10));
@@ -135,18 +132,18 @@ public class DLValidFileNameTest {
 	}
 
 	@Test
-	public void testUpdateNotValidFileEntry() throws Exception {
+	public void testUpdateFileEntry() throws Exception {
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			true, StringUtil.randomString(20));
 
-		String name = StringUtil.randomString(20).concat(BLACKLIST_CHARS[0]);
+		String name = StringUtil.randomString(20) + _BLACKLIST_CHARS[0];
 
 		try {
 			DLAppTestUtil.updateFileEntry(
 				_group.getGroupId(), fileEntry.getFileEntryId(), name, name);
 
-			Assert.fail(name + " is not a valid name.");
+			Assert.fail(name + " is an invalid name");
 		}
 		catch (Exception e) {
 			Assert.assertTrue(e instanceof FileNameException);
@@ -154,28 +151,29 @@ public class DLValidFileNameTest {
 	}
 
 	@Test
-	public void testUpdateNotValidFolder() throws Exception {
+	public void testUpdateFolder() throws Exception {
 		Folder folder = DLAppTestUtil.addFolder(
 			_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			StringUtil.randomString(20));
 
-		String name = StringUtil.randomString(20).concat(BLACKLIST_CHARS[0]);
+		String name = StringUtil.randomString(20) + _BLACKLIST_CHARS[0];
 
 		try {
 			DLAppServiceUtil.updateFolder(
 				folder.getFolderId(), name, StringPool.BLANK,
 				ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
-			Assert.fail(name + " is not a valid name.");
+			Assert.fail(name + " is an invalid name");
 		}
 		catch (Exception e) {
 			Assert.assertTrue(e instanceof FolderNameException);
 		}
 	}
 
-	private static final String[] BLACKLIST_CHARS = new String[] {
+	private static final String[] _BLACKLIST_CHARS = {
 		"\\", "\\\\", "//", ":", "*", "?", "\"", "<", ">", "|", "[", "]", "../",
-		"/.."};
+		"/.."
+	};
 
 	private static Group _group;
 
