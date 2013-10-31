@@ -863,7 +863,7 @@
 					<![CDATA[
 						#!/bin/bash
 
-						for i in `ps -o pid,args -e | grep java | grep -v ant |grep -v grep | grep -v jenkins | cut -c1-5`
+						for i in `ps -o pid,args -e | grep /opt/java/jdk | grep -v ant | grep -v grep | grep -v jenkins | cut -c1-5`
 						do
 							echo "Killing $i"
 
