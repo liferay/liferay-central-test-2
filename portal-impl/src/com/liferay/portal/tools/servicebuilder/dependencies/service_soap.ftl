@@ -62,7 +62,11 @@ import java.util.Map;
 </#if>
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}ServiceSoap {
 
 	<#assign hasMethods = false>

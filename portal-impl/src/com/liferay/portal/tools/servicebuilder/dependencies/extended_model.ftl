@@ -15,7 +15,11 @@ import com.liferay.portal.model.PersistedModel;
  * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public interface ${entity.name} extends
 	${entity.name}Model
 

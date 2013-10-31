@@ -50,7 +50,11 @@ import java.util.Map;
  * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public interface ${entity.name}Model extends
 	<#assign overrideColumnNames = []>
 

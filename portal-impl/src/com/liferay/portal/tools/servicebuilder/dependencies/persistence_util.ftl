@@ -27,7 +27,11 @@ import java.util.List;
  * @see ${entity.name}PersistenceImpl
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}Util {
 
 	/*

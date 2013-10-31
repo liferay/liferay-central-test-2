@@ -47,7 +47,9 @@ import com.liferay.portal.service.PersistedModelLocalService;
  */
 </#if>
 
-@ProviderType
+<#if pluginName == "">
+	@ProviderType
+</#if>
 
 <#if entity.hasRemoteService() && sessionTypeName != "Local">
 	@AccessControlled

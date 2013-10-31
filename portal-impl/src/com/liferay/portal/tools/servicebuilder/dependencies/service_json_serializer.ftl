@@ -16,7 +16,11 @@ import java.util.List;
  * @author ${author}
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}JSONSerializer {
 
 	public static JSONObject toJSONObject(${entity.name} model) {

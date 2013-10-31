@@ -6,7 +6,10 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
-@ProviderType
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}FinderUtil {
 
 	<#list methods as method>
