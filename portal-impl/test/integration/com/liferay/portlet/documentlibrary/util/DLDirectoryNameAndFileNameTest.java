@@ -128,17 +128,17 @@ public class DLDirectoryNameAndFileNameTest {
 	}
 
 	@Test
-	public void testIsValidNameEmptyString() {
-		Assert.assertFalse(DLStoreUtil.isValidName(StringPool.BLANK));
-	}
-
-	@Test
-	public void testIsValidNameEndCharacter() throws Exception {
-		for (String invalidEndCharacter : _DL_CHAR_END_BLACLIST) {
-			String name = StringUtil.randomString(20) + invalidEndCharacter;
+	public void testIsValidNameBlacklistLastCharacter() throws Exception {
+		for (String blacklistLastChar : _DL_CHAR_LAST_BLACKLIST) {
+			String name = StringUtil.randomString(20) + blacklistLastChar;
 
 			Assert.assertFalse(name, DLStoreUtil.isValidName(name));
 		}
+	}
+
+	@Test
+	public void testIsValidNameEmptyString() {
+		Assert.assertFalse(DLStoreUtil.isValidName(StringPool.BLANK));
 	}
 
 	@Test
@@ -221,7 +221,7 @@ public class DLDirectoryNameAndFileNameTest {
 
 	private static Group _group;
 
-	private String[] _DL_CHAR_END_BLACLIST =
+	private String[] _DL_CHAR_LAST_BLACKLIST =
 		{StringPool.SPACE, StringPool.PERIOD};
 
 }

@@ -365,13 +365,13 @@ public class DLStoreImpl implements DLStore {
 			}
 		}
 
-		for (String blacklistCharEnd : PropsValues.DL_CHAR_END_BLACKLIST) {
-			if (blacklistCharEnd.startsWith(_UNICODE_PREFIX)) {
-				blacklistCharEnd = UnicodeFormatter.parseString(
-					blacklistCharEnd);
+		for (String blacklistLastChar : PropsValues.DL_CHAR_LAST_BLACKLIST) {
+			if (blacklistLastChar.startsWith(_UNICODE_PREFIX)) {
+				blacklistLastChar = UnicodeFormatter.parseString(
+					blacklistLastChar);
 			}
 
-			if (name.endsWith(blacklistCharEnd)) {
+			if (name.endsWith(blacklistLastChar)) {
 				return false;
 			}
 		}
