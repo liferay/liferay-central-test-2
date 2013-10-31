@@ -25,7 +25,11 @@ import java.util.Map;
  * @see ${entity.name}
  * @generated
  */
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${entity.name}> {
 
 	public ${entity.name}Wrapper(${entity.name} ${entity.varName}) {

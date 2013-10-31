@@ -44,7 +44,11 @@ import com.liferay.portal.service.Invokable${sessionTypeName}Service;
  * @generated
  */
 </#if>
-@ProviderType
+
+<#if pluginName == "">
+	@ProviderType
+</#if>
+
 public class ${entity.name}${sessionTypeName}ServiceUtil {
 
 	/*
