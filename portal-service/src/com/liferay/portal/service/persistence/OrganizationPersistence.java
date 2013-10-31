@@ -14,6 +14,8 @@
 
 package com.liferay.portal.service.persistence;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.model.Organization;
 
 /**
@@ -28,6 +30,7 @@ import com.liferay.portal.model.Organization;
  * @see OrganizationUtil
  * @generated
  */
+@ProviderType
 public interface OrganizationPersistence extends BasePersistence<Organization> {
 	/*
 	 * NOTE FOR DEVELOPERS:
