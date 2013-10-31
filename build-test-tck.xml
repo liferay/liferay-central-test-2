@@ -89,6 +89,8 @@ work.dir=${basedir.unix}/tools/tck/work</echo>
 	</target>
 
 	<target name="run-tck-tomcat">
+		<antcall target="clean-up-java-processes" inheritAll="false" />
+
 		<antcall target="prepare-portal-ext-properties">
 			<param name="tck.url" value="true" />
 		</antcall>
