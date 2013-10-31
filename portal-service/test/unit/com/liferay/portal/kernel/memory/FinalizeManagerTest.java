@@ -79,8 +79,6 @@ public class FinalizeManagerTest {
 
 		gc();
 
-		// Time wait 10 sec for the async mark
-
 		long startTime = System.currentTimeMillis();
 
 		while (!markFinalizeAction.isMarked() &&
@@ -140,6 +138,7 @@ public class FinalizeManagerTest {
 
 		while (weakReference.get() != null) {
 			System.gc();
+
 			System.runFinalization();
 		}
 
