@@ -248,7 +248,7 @@ public class UpgradePortletId extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(sqle, sqle);
+				_log.warn(e, e);
 			}
 		}
 		finally {
