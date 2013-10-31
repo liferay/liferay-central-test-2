@@ -29,6 +29,8 @@ import com.liferay.portal.service.RepositoryEntryLocalService;
 import com.liferay.portal.service.RepositoryEntryLocalServiceUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portlet.documentlibrary.service.DLAppService;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 
 import java.lang.reflect.Field;
 
@@ -161,6 +163,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Test
 	public void testFolderQuery() throws Exception {
+		getService(DLAppServiceUtil.class, DLAppService.class);
+
 		RepositoryEntryLocalService repositoryEntryLocalService =
 			getService(
 				RepositoryEntryLocalServiceUtil.class,
@@ -290,6 +294,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Test
 	public void testSubfolderQuery() throws Exception {
+		getService(DLAppServiceUtil.class, DLAppService.class);
+
 		RepositoryEntryLocalService repositoryEntryLocalService =
 			getService(
 				RepositoryEntryLocalServiceUtil.class,
