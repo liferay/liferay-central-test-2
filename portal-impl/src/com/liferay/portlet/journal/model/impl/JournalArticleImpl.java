@@ -61,7 +61,9 @@ public class JournalArticleImpl extends JournalArticleBaseImpl {
 
 	@Override
 	public String buildTreePath() throws PortalException, SystemException {
-		return getFolder().buildTreePath();
+		JournalFolder folder = getFolder();
+
+		return folder.buildTreePath();
 	}
 
 	@Override
