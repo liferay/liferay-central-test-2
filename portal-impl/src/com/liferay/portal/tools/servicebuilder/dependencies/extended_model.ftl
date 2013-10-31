@@ -24,6 +24,8 @@ import com.liferay.portal.model.TreeModel;
 public interface ${entity.name} extends
 	${entity.name}Model
 
+	<#assign overrideColumnNames = []>
+
 	<#if entity.hasLocalService() && entity.hasColumns()>
 		<#if entity.isPermissionedModel()>
 			, PermissionedModel
@@ -32,7 +34,9 @@ public interface ${entity.name} extends
 		</#if>
 
 		<#if entity.isTreeModel()>
-		, TreeModel
+			, TreeModel
+
+			<#assign overrideColumnNames = overrideColumnNames + ["buildTreePath", "updateTreePath"]>
 		</#if>
 	</#if>
 
@@ -89,6 +93,10 @@ public interface ${entity.name} extends
 					</#if>
 				</#if>
 			</#list>
+
+			<#if overrideColumnNames?seq_index_of(method.name) != -1>
+				@Override
+			</#if>
 
 			public ${serviceBuilder.getTypeGenericsName(method.returns)} ${method.name} (
 
