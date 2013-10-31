@@ -99,8 +99,7 @@ public class DLDirectoryNameAndFileNameTest {
 
 	@Test
 	public void testIsValidNameEmptyString() {
-		Assert.assertFalse(
-			"[EMPTY STRING]", DLStoreUtil.isValidName(StringPool.BLANK));
+		Assert.assertFalse(DLStoreUtil.isValidName(StringPool.BLANK));
 	}
 
 	@Test
@@ -112,7 +111,7 @@ public class DLDirectoryNameAndFileNameTest {
 
 	@Test
 	public void testIsValidNameNull() {
-		Assert.assertFalse("null", DLStoreUtil.isValidName(null));
+		Assert.assertFalse(DLStoreUtil.isValidName(null));
 	}
 
 	@Test

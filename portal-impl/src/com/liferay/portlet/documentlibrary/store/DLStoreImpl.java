@@ -358,8 +358,8 @@ public class DLStoreImpl implements DLStore {
 			return false;
 		}
 
-		for (String charBlackist : PropsValues.DL_CHAR_BLACKLIST) {
-			if (name.contains(charBlackist)) {
+		for (String blackListChar : PropsValues.DL_CHAR_BLACKLIST) {
+			if (name.contains(blackListChar)) {
 				return false;
 			}
 		}
