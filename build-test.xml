@@ -2914,6 +2914,30 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 	</target>
 
 	<target name="run-simple-server" depends="generate-test-properties">
+		<if>
+			<os family="unix" />
+			<then>
+				<echo file="cleanjava.sh">
+					<![CDATA[
+						#!/bin/bash
+
+						for i in `ps -o pid,args -e | grep "java" | grep -v grep | grep -v jenkins | cut -c1-5`
+						do
+							echo "Killing $i"
+
+							kill -9 $i
+						done
+					]]>
+				</echo>
+
+				<chmod file="cleanjava.sh" perm="a+x" />
+
+				<exec executable="${basedir}/cleanjava.sh" />
+
+				<delete file="cleanjava.sh" />
+			</then>
+		</if>
+
 		<antcall target="rebuild-database" inheritAll="false" />
 
 		<antcall target="copy-optional-jars" inheritAll="false">
