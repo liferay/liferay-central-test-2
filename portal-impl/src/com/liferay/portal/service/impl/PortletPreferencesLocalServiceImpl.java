@@ -117,6 +117,7 @@ public class PortletPreferencesLocalServiceImpl
 		portletPreferencesPersistence.removeByPlid(plid);
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences fetchPreferences(
 			PortletPreferencesIds portletPreferencesIds)
 		throws SystemException {
@@ -129,6 +130,7 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferencesIds.getPortletId());
 	}
 
+	@Override
 	public javax.portlet.PortletPreferences fetchPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId)
