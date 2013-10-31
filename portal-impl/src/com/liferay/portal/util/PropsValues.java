@@ -636,7 +636,7 @@ public class PropsValues {
 
 	public static final String[] DL_CHAR_BLACKLIST = PropsUtil.getArray(PropsKeys.DL_CHAR_BLACKLIST);
 
-	public static final String[] DL_CHAR_END_BLACKLIST = PropsUtil.getArray(PropsKeys.DL_CHAR_END_BLACKLIST);
+	public static final String[] DL_CHAR_LAST_BLACKLIST = PropsUtil.getArray(PropsKeys.DL_CHAR_LAST_BLACKLIST);
 
 	public static final String[] DL_NAME_BLACKLIST = PropsUtil.getArray(PropsKeys.DL_NAME_BLACKLIST);
 

@@ -623,7 +623,7 @@ public interface PropsKeys {
 
 	public static final String DL_CHAR_BLACKLIST = "dl.char.blacklist";
 
-	public static final String DL_CHAR_END_BLACKLIST = "dl.char.end.blacklist";
+	public static final String DL_CHAR_LAST_BLACKLIST = "dl.char.last.blacklist";
 
 	public static final String DL_COMPARABLE_FILE_EXTENSIONS = "dl.comparable.file.extensions";
 
