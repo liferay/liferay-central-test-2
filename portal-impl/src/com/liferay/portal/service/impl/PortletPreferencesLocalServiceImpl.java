@@ -119,19 +119,6 @@ public class PortletPreferencesLocalServiceImpl
 
 	@Override
 	public javax.portlet.PortletPreferences fetchPreferences(
-			PortletPreferencesIds portletPreferencesIds)
-		throws SystemException {
-
-		return fetchPreferences(
-			portletPreferencesIds.getCompanyId(),
-			portletPreferencesIds.getOwnerId(),
-			portletPreferencesIds.getOwnerType(),
-			portletPreferencesIds.getPlid(),
-			portletPreferencesIds.getPortletId());
-	}
-
-	@Override
-	public javax.portlet.PortletPreferences fetchPreferences(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId)
 		throws SystemException {
@@ -150,6 +137,19 @@ public class PortletPreferencesLocalServiceImpl
 				portletPreferences.getPreferences());
 
 		return portletPreferencesImpl;
+	}
+
+	@Override
+	public javax.portlet.PortletPreferences fetchPreferences(
+			PortletPreferencesIds portletPreferencesIds)
+		throws SystemException {
+
+		return fetchPreferences(
+			portletPreferencesIds.getCompanyId(),
+			portletPreferencesIds.getOwnerId(),
+			portletPreferencesIds.getOwnerType(),
+			portletPreferencesIds.getPlid(),
+			portletPreferencesIds.getPortletId());
 	}
 
 	@Override

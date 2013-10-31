@@ -129,7 +129,8 @@ public class PortletPreferencesFactoryImpl
 			return;
 		}
 
-		PortletPreferencesLocalServiceUtil.getPreferences(portletPreferencesIds);
+		PortletPreferencesLocalServiceUtil.getPreferences(
+			portletPreferencesIds);
 	}
 
 	@Override
