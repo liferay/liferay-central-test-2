@@ -42,7 +42,9 @@ public class DLFileVersionImpl extends DLFileVersionBaseImpl {
 
 	@Override
 	public String buildTreePath() throws PortalException, SystemException {
-		return getFolder().buildTreePath();
+		DLFolder dlFolder = getFolder();
+
+		return dlFolder.buildTreePath();
 	}
 
 	@Override

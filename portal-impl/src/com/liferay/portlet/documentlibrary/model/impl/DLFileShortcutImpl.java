@@ -37,7 +37,9 @@ public class DLFileShortcutImpl extends DLFileShortcutBaseImpl {
 
 	@Override
 	public String buildTreePath() throws PortalException, SystemException {
-		return getDLFolder().buildTreePath();
+		DLFolder dlFolder = getDLFolder();
+
+		return dlFolder.buildTreePath();
 	}
 
 	@Override

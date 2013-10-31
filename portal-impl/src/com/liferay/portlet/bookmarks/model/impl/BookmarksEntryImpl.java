@@ -29,7 +29,9 @@ public class BookmarksEntryImpl extends BookmarksEntryBaseImpl {
 
 	@Override
 	public String buildTreePath() throws PortalException, SystemException {
-		return getFolder().buildTreePath();
+		BookmarksFolder folder = getFolder();
+
+		return folder.buildTreePath();
 	}
 
 	@Override

@@ -66,7 +66,9 @@ public class DLFileEntryImpl extends DLFileEntryBaseImpl {
 
 	@Override
 	public String buildTreePath() throws PortalException, SystemException {
-		return getFolder().buildTreePath();
+		DLFolder dlFolder = getFolder();
+
+		return dlFolder.buildTreePath();
 	}
 
 	@Override
