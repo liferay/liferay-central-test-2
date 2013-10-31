@@ -856,99 +856,29 @@
 	</target>
 
 	<target name="clean-up-java-processes">
-		<loadfile property="java.processes.old.content" srcfile="java-processes" />
-
-		<delete file="java-processes" />
-
-		<script classpathref="project.classpath" language="beanshell">
-			String javaProcessesOldContent = project.getProperty("java.processes.old.content");
-
-			if (javaProcessesOldContent.contains("File Not Found")) {
-				javaProcessesOldContent = "";
-			}
-
-			String javaProcessesOldList = javaProcessesOldContent.replaceAll("\r\n", ",");
-
-			if (javaProcessesOldList.endsWith(",")) {
-				javaProcessesOldList = javaProcessesOldList.substring(0, javaProcessesOldList.length() - 1);
-			}
-
-			project.setProperty("java.processes.old.list", javaProcessesOldList);
-		</script>
-
 		<if>
-			<os family="windows" />
+			<os family="unix" />
 			<then>
-				<exec executable="${shell.executable}" output="java-processes">
-					<arg line="/c jps -l" />
-				</exec>
+				<echo file="cleanjava.sh">
+					<![CDATA[
+						#!/bin/bash
+
+						for i in `ps -o pid,args -e | grep java | grep -v ant |grep -v grep | grep -v jenkins | cut -c1-5`
+						do
+							echo "Killing $i"
+
+							kill -9 $i
+						done
+					]]>
+				</echo>
+
+				<chmod file="cleanjava.sh" perm="a+x" />
+
+				<exec executable="${basedir}/cleanjava.sh" />
+
+				<delete file="cleanjava.sh" />
 			</then>
-			<else>
-				<exec executable="${shell.executable}" output="java-processes">
-					<arg line="-c jps -l" />
-				</exec>
-			</else>
 		</if>
-
-		<loadfile property="java.processes.new.content" srcfile="java-processes" />
-
-		<delete file="java-processes" />
-
-		<script classpathref="project.classpath" language="beanshell">
-			String javaProcessesNewContent = project.getProperty("java.processes.new.content");
-
-			if (javaProcessesNewContent.contains("File Not Found")) {
-				javaProcessesNewContent = "";
-			}
-
-			String javaProcessesNewList = javaProcessesNewContent.replaceAll("\r\n", ",");
-
-			if (javaProcessesNewList.endsWith(",")) {
-				javaProcessesNewList = javaProcessesNewList.substring(0, javaProcessesNewList.length() - 1);
-			}
-
-			project.setProperty("java.processes.new.list", javaProcessesNewList);
-		</script>
-
-		<for list="${java.processes.new.list}" param="java.processes.new.current">
-			<sequential>
-				<if>
-					<or>
-						<contains string="@{java.processes.new.current}" substring="admin-cli.jar" />
-						<contains string="@{java.processes.new.current}" substring="ASMain" />
-						<contains string="@{java.processes.new.current}" substring="Bootstrap" />
-						<contains string="@{java.processes.new.current}" substring="ClientAdmin" />
-						<contains string="@{java.processes.new.current}" substring="gshell-bootstrap.jar" />
-						<contains string="@{java.processes.new.current}" substring="jboss-modules.jar" />
-						<contains string="@{java.processes.new.current}" substring="selenium-server.jar" />
-						<contains string="@{java.processes.new.current}" substring="server.jar" />
-						<contains string="@{java.processes.new.current}" substring="start.jar" />
-					</or>
-					<then>
-						<antcall target="kill-java-process">
-							<param name="java.process.to.kill" value="@{java.processes.new.current}" />
-						</antcall>
-					</then>
-					<elseif>
-						<contains string="@{java.processes.new.current}" substring="Launcher" />
-						<then>
-							<for list="${java.processes.old.list}" param="java.processes.old.current">
-								<sequential>
-									<if>
-										<contains string="@{java.processes.new.current}" substring="@{java.processes.old.current}" />
-										<then>
-											<antcall target="kill-java-process">
-												<param name="java.process.to.kill" value="@{java.processes.new.current}" />
-											</antcall>
-										</then>
-									</if>
-								</sequential>
-							</for>
-						</then>
-					</elseif>
-				</if>
-			</sequential>
-		</for>
 	</target>
 
 	<target name="clean-up-logs">
@@ -1303,24 +1233,6 @@
 		<antcall target="execute-remote-command">
 			<param name="vm.host" value="${vm.host}" />
 		</antcall>
-	</target>
-
-	<target name="kill-java-process">
-		<echo>Killing Java process "${java.process.to.kill}"</echo>
-
-		<script classpathref="project.classpath" language="beanshell">
-			String javaProcessToKill = project.getProperty("java.process.to.kill");
-
-			int x = javaProcessToKill.indexOf(" ");
-
-			String javaProcessPid = javaProcessToKill.substring(0, x).trim();
-
-			project.setProperty("java.process.pid", javaProcessPid);
-		</script>
-
-		<exec executable="taskkill.exe">
-			<arg line="/f /fi &quot;pid eq ${java.process.pid}&quot;" />
-		</exec>
 	</target>
 
 	<target name="merge-test-results">
@@ -2665,22 +2577,6 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<delete file="create.sql" />
 	</target>
 
-	<target name="record-java-processes">
-		<if>
-			<os family="windows" />
-			<then>
-				<exec executable="${shell.executable}" output="java-processes">
-					<arg line="/c jps -q" />
-				</exec>
-			</then>
-			<else>
-				<exec executable="${shell.executable}" output="java-processes">
-					<arg line="-c jps -q" />
-				</exec>
-			</else>
-		</if>
-	</target>
-
 	<target name="record-test-package-names">
 		<script classpathref="project.classpath" language="beanshell">
 			import com.liferay.portal.kernel.util.OSDetector;
@@ -2914,29 +2810,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 	</target>
 
 	<target name="run-simple-server" depends="generate-test-properties">
-		<if>
-			<os family="unix" />
-			<then>
-				<echo file="cleanjava.sh">
-					<![CDATA[
-						#!/bin/bash
-
-						for i in `ps -o pid,args -e | grep java | grep -v ant |grep -v grep | grep -v jenkins | cut -c1-5`
-						do
-							echo "Killing $i"
-
-							kill -9 $i
-						done
-					]]>
-				</echo>
-
-				<chmod file="cleanjava.sh" perm="a+x" />
-
-				<exec executable="${basedir}/cleanjava.sh" />
-
-				<delete file="cleanjava.sh" />
-			</then>
-		</if>
+		<antcall target="clean-up-java-processes" inheritAll="false" />
 
 		<antcall target="rebuild-database" inheritAll="false" />
 
