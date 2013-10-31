@@ -112,11 +112,11 @@ public class DLDirectoryNameAndFileNameTest {
 			String name = blacklistName;
 
 			Assert.assertFalse(name, DLStoreUtil.isValidName(name));
-			
+
 			name = blacklistName + ".txt";
 
 			Assert.assertFalse(name, DLStoreUtil.isValidName(name));
-			
+
 			name = blacklistName + StringUtil.randomString(10);
 
 			Assert.assertTrue(name, DLStoreUtil.isValidName(name));
