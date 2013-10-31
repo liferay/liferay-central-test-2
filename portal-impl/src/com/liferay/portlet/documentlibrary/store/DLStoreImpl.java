@@ -358,8 +358,8 @@ public class DLStoreImpl implements DLStore {
 			return false;
 		}
 
-		for (String charBlacklist : PropsValues.DL_CHAR_BLACKLIST) {
-			if (name.contains(charBlacklist)) {
+		for (String blacklistChar : PropsValues.DL_CHAR_BLACKLIST) {
+			if (name.contains(blacklistChar)) {
 				return false;
 			}
 		}
@@ -367,14 +367,14 @@ public class DLStoreImpl implements DLStore {
 		String nameWithoutExtension = name;
 
 		if (name.contains(StringPool.PERIOD)) {
-			int pos = name.lastIndexOf(StringPool.PERIOD);
+			int index = name.lastIndexOf(StringPool.PERIOD);
 
-			nameWithoutExtension = name.substring(0, pos);
+			nameWithoutExtension = name.substring(0, index);
 		}
 
-		for (String nameBlacklist : PropsValues.DL_NAME_BLACKLIST) {
+		for (String blacklistName : PropsValues.DL_NAME_BLACKLIST) {
 			if (StringUtil.equalsIgnoreCase(
-					nameWithoutExtension, nameBlacklist)) {
+					nameWithoutExtension, blacklistName)) {
 
 				return false;
 			}
