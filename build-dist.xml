@@ -2414,10 +2414,6 @@ plugins.includes=</echo>
 					<then>
 						<unzip dest="${zip.executable.dir}/.." src="${patching.tool.zip}" />
 
-						<chmod dir="${zip.executable.dir}/../patching-tool" perm="u+x">
-							<include name="**/*.sh" />
-						</chmod>
-
 						<if>
 							<contains string="${zip.executable.dir}" substring="glassfish" />
 							<then>
@@ -2452,6 +2448,13 @@ plugins.includes=</echo>
 						>
 							<zipfileset
 								dir="${zip.executable.dir}/../patching-tool"
+								excludes="**/*.sh"
+								prefix="liferay-portal-${lp.version}/patching-tool"
+							/>
+							<zipfileset
+								dir="${zip.executable.dir}/../patching-tool"
+								includes="**/*.sh"
+								filemode="744"
 								prefix="liferay-portal-${lp.version}/patching-tool"
 							/>
 						</zip>
