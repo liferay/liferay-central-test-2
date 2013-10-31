@@ -143,7 +143,7 @@ public abstract class BaseJSONWebServiceTestCase extends PowerMockito {
 	}
 
 	protected void setServletContext(
-			MockHttpServletRequest mockHttpServletRequest, String contextPath) {
+		MockHttpServletRequest mockHttpServletRequest, String contextPath) {
 
 		mockHttpServletRequest.setContextPath(contextPath);
 
