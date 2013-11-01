@@ -15,8 +15,8 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.deploy.DeployUtil;
-import com.liferay.portal.deploy.RequiredPluginsUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.deploy.RequiredPluginsUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -312,7 +312,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Plugins
 
-		RequiredPluginsUtil.startCheckingRequiredPlugins();
+		RequiredPluginsUtil.startUpCheckRequiredPlugins();
 
 		// POP server
 

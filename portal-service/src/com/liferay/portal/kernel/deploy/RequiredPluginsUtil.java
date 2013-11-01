@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.deploy;
+package com.liferay.portal.kernel.deploy;
 
-import com.liferay.portal.kernel.deploy.DeployManagerUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.log.Log;
@@ -43,15 +42,15 @@ import java.util.concurrent.TimeUnit;
  */
 public class RequiredPluginsUtil {
 
-	public static synchronized void stopCheckingRequiredPlugins() {
+	public static synchronized void shutdown() {
 		unschedule(true);
 	}
 
-	public static synchronized void startCheckingRequiredPlugins() {
+	public static synchronized void startUpCheckRequiredPlugins() {
 		schedule();
 	}
 
-	public static synchronized void onUndeployCheckRequiredPlugins() {
+	public static synchronized void undeployCheckRequiredPlugins() {
 
 		// On undeployment, we do a synchronously check to bring back missing
 		// required plugin asap. Restart the periodical scanning to prevent
@@ -59,27 +58,26 @@ public class RequiredPluginsUtil {
 
 		unschedule(false);
 
-		checkRequiredPlugins();
+		doCheckRequiredPlugins();
 
 		schedule();
 	}
 
 	protected static void schedule() {
-		_scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(
-			new NamedThreadFactory(
-				RequiredPluginsUtil.class.getName(), Thread.NORM_PRIORITY,
-				null));
+		_scheduledExecutorService =
+			Executors.newSingleThreadScheduledExecutor(
+				new NamedThreadFactory(
+					RequiredPluginsUtil.class.getName(), Thread.NORM_PRIORITY,
+					null));
 
 		_scheduledExecutorService.scheduleWithFixedDelay(
 			new Runnable() {
 
 				@Override
 				public void run() {
-					checkRequiredPlugins();
+					doCheckRequiredPlugins();
 				}
-
-			},
-			_DELAYED_TIME, _DELAYED_TIME, TimeUnit.MILLISECONDS);
+			}, _DELAYED_TIME, _DELAYED_TIME, TimeUnit.MILLISECONDS);
 	}
 
 	protected static void unschedule(boolean awaitTermination) {
@@ -100,7 +98,7 @@ public class RequiredPluginsUtil {
 		}
 	}
 
-	protected synchronized static void checkRequiredPlugins() {
+	protected synchronized static void doCheckRequiredPlugins() {
 		List<String[]> levelsRequiredDeploymentContexts =
 			DeployManagerUtil.getLevelsRequiredDeploymentContexts();
 		List<String[]> levelsRequiredDeploymentWARFileNames =
