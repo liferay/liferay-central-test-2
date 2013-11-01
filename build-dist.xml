@@ -1035,13 +1035,12 @@ release was successful.</echo>
 						<![CDATA[
 							<jvm-options>-Dfile.encoding=UTF8</jvm-options>
 							<jvm-options>-Djava.net.preferIPv4Stack=true</jvm-options>
-							<jvm-options>@java.security.manager.option@</jvm-options>
+							<jvm-options>${java.security.manager.option}</jvm-options>
 							<jvm-options>-Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false</jvm-options>
 							<jvm-options>-Duser.timezone=GMT</jvm-options>
 							<jvm-options>-Xmx1024m</jvm-options>
 						]]>
 					</replacevalue>
-					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 				</replace>
 			</else>
 		</if>
