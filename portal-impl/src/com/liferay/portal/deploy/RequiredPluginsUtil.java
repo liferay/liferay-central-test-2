@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
 public class RequiredPluginsUtil {
 
 	public static synchronized void stopCheckingRequiredPlugins() {
-		_unschedule(true);
+		unschedule(true);
 	}
 
 	public static synchronized void startCheckingRequiredPlugins() {
@@ -53,11 +53,11 @@ public class RequiredPluginsUtil {
 
 	public static synchronized void onUndeployCheckRequiredPlugins() {
 
-		// During an undeploy event, we synchronously and immediately check for
-		// required plugins. We also schedule a required plugins check in case
-		// the required plugins failed to deploy.
+		// On undeployment, we do a synchronously check to bring back missing
+		// required plugin asap. Restart the periodical scanning to prevent
+		// failure deployment.
 
-		_unschedule(false);
+		unschedule(false);
 
 		checkRequiredPlugins();
 
@@ -79,7 +79,25 @@ public class RequiredPluginsUtil {
 				}
 
 			},
-			Time.MINUTE, Time.MINUTE, TimeUnit.MILLISECONDS);
+			_DELAYED_TIME, _DELAYED_TIME, TimeUnit.MILLISECONDS);
+	}
+
+	protected static void unschedule(boolean awaitTermination) {
+		if (_scheduledExecutorService != null) {
+			_scheduledExecutorService.shutdownNow();
+
+			if (awaitTermination) {
+				try {
+					_scheduledExecutorService.awaitTermination(
+						1, TimeUnit.MINUTES);
+				}
+				catch (InterruptedException ie) {
+					_log.error(ie, ie);
+				}
+			}
+
+			_scheduledExecutorService = null;
+		}
 	}
 
 	protected synchronized static void checkRequiredPlugins() {
@@ -155,32 +173,16 @@ public class RequiredPluginsUtil {
 
 		if (!deployed) {
 
-			// If all the required plugins were already in place, then we can
-			// safely unschedule our required plugins check to conserve
-			// processing power. Removal of plugins would trigger an undeploy			
-			// event which would restart the scheduled required plugins check.
+			// On an unchanged scan, we know for sure all required plugins are
+			// in place. Any further plugin removal must trigger the
+			// undeployment process which will restart the periodical scanning.
+			// So it is safe to stop scanning here to safe some cpu power.
 
-			_unschedule(false);
+			unschedule(false);
 		}
 	}
 
-	private static void _unschedule(boolean awaitTermination) {
-		if (_scheduledExecutorService != null) {
-			_scheduledExecutorService.shutdownNow();
-	
-			if (awaitTermination) {
-				try {
-					_scheduledExecutorService.awaitTermination(
-						1, TimeUnit.MINUTES);
-				}
-				catch (InterruptedException ie) {
-					_log.error(ie, ie);
-				}
-			}
-	
-			_scheduledExecutorService = null;
-		}
-	}
+	private static final long _DELAYED_TIME = Time.MINUTE;
 
 	private static Log _log = LogFactoryUtil.getLog(RequiredPluginsUtil.class);
 
