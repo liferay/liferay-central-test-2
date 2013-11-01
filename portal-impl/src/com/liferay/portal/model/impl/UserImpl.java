@@ -731,6 +731,7 @@ public class UserImpl extends UserBaseImpl {
 		}
 	}
 
+	@Override
 	public boolean isEmailAddressComplete() {
 		if (Validator.isNull(getEmailAddress()) ||
 			(PropsValues.USERS_EMAIL_ADDRESS_REQUIRED &&
@@ -742,6 +743,7 @@ public class UserImpl extends UserBaseImpl {
 		return true;
 	}
 
+	@Override
 	public boolean isEmailAddressVerificationComplete() {
 		boolean emailAddressVerificationRequired = false;
 
@@ -777,6 +779,7 @@ public class UserImpl extends UserBaseImpl {
 		return _passwordModified;
 	}
 
+	@Override
 	public boolean isReminderQueryComplete() {
 		if (PropsValues.USERS_REMINDER_QUERIES_ENABLED) {
 			if (Validator.isNull(getReminderQueryQuestion()) ||
@@ -789,13 +792,19 @@ public class UserImpl extends UserBaseImpl {
 		return true;
 	}
 
-	public boolean isSetup() {
-		return
-			isEmailAddressComplete() && isEmailAddressVerificationComplete() &&
+	@Override
+	public boolean isSetupComplete() {
+		if (isEmailAddressComplete() && isEmailAddressVerificationComplete() &&
 			!isPasswordReset() && isReminderQueryComplete() &&
-			isTermsOfUseComplete();
+			isTermsOfUseComplete()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
+	@Override
 	public boolean isTermsOfUseComplete() {
 		boolean termsOfUseRequired = false;
 

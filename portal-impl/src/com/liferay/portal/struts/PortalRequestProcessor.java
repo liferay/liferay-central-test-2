@@ -759,7 +759,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			if ((user != null) && !user.isDefaultUser() &&
 				!user.isReminderQueryComplete()) {
 
-					return _PATH_PORTAL_UPDATE_REMINDER_QUERY;
+				return _PATH_PORTAL_UPDATE_REMINDER_QUERY;
 			}
 		}
 
