@@ -2017,11 +2017,9 @@ closeTemplate()
 
 							set "MW_HOME=${app.server.weblogic.dir.windows}"
 
-							set "JAVA_OPTIONS=%JAVA_OPTIONS% -Dfile.encoding=UTF-8 @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
+							set "JAVA_OPTIONS=%JAVA_OPTIONS% -Dfile.encoding=UTF-8 ${java.security.manager.option} -da:org.apache.lucene... -da:org.aspectj..."
 						]]>
 					</replacevalue>
-					<replacefilter token="@app.server.weblogic.instance.dir@" value="${app.server.weblogic.instance.dir}" />
-					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 				</replace>
 
 				<replace file="${app.server.weblogic.instance.dir}/startWebLogic.cmd">
@@ -2108,11 +2106,9 @@ closeTemplate()
 
 							export MW_HOME="${app.server.weblogic.dir}"
 
-							export JAVA_OPTIONS="${JAVA_OPTIONS} @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
+							export JAVA_OPTIONS="${JAVA_OPTIONS} ${java.security.manager.option} -da:org.apache.lucene... -da:org.aspectj..."
 						]]>
 					</replacevalue>
-					<replacefilter token="@app.server.weblogic.instance.dir@" value="${app.server.weblogic.instance.dir}" />
-					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 				</replace>
 
 				<replace file="${app.server.weblogic.instance.dir}/startWebLogic.sh">
