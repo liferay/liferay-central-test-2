@@ -451,9 +451,7 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	@Override
-	public void rebuildTree(long companyId)
-		throws PortalException, SystemException {
-
+	public void rebuildTree(long companyId) throws SystemException {
 		TreePathUtil.rebuildTree(
 			companyId, BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			new TreeModelFinder<BookmarksFolder>() {
