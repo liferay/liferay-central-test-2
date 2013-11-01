@@ -141,7 +141,7 @@ public class DLFileVersionLocalServiceImpl
 		try {
 			TreePathUtil.rebuildTree(
 				session, companyId, DLFileVersionModelImpl.TABLE_NAME,
-				DLFolderModelImpl.TABLE_NAME, true);
+				DLFolderModelImpl.TABLE_NAME, "folderId", true);
 		}
 		finally {
 			dlFileVersionPersistence.closeSession(session);

@@ -791,12 +791,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 				@Override
 				public List<DLFolder> findTreeModels(
-						long previousId, long companyId, long parentId,
+						long previousId, long companyId, long parentPrimaryKey,
 						int size)
 					throws SystemException {
 
 					return dlFolderPersistence.findByF_C_P_NotS(
-						previousId, companyId, parentId,
+						previousId, companyId, parentPrimaryKey,
 						WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
 						size, new FolderIdComparator());
 				}

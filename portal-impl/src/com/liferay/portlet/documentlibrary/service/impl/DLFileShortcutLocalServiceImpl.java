@@ -298,7 +298,7 @@ public class DLFileShortcutLocalServiceImpl
 		try {
 			TreePathUtil.rebuildTree(
 				session, companyId, DLFileShortcutModelImpl.TABLE_NAME,
-				DLFolderModelImpl.TABLE_NAME, true);
+				DLFolderModelImpl.TABLE_NAME, "folderId", true);
 		}
 		finally {
 			dlFileShortcutPersistence.closeSession(session);
