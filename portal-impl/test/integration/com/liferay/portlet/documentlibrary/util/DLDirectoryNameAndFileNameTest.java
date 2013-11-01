@@ -173,15 +173,8 @@ public class DLDirectoryNameAndFileNameTest {
 		String name =
 			StringUtil.randomString(20) + PropsValues.DL_CHAR_BLACKLIST[0];
 
-		try {
-			DLAppTestUtil.updateFileEntry(
-				_group.getGroupId(), fileEntry.getFileEntryId(), name, name);
-
-			Assert.fail(name + " is an invalid name");
-		}
-		catch (Exception e) {
-			Assert.assertTrue(e instanceof FileNameException);
-		}
+		DLAppTestUtil.updateFileEntry(
+			_group.getGroupId(), fileEntry.getFileEntryId(), name, name);
 	}
 
 	@Test(expected = FolderNameException.class)
@@ -193,16 +186,9 @@ public class DLDirectoryNameAndFileNameTest {
 		String name =
 			StringUtil.randomString(20) + PropsValues.DL_CHAR_BLACKLIST[0];
 
-		try {
-			DLAppServiceUtil.updateFolder(
-				folder.getFolderId(), name, StringPool.BLANK,
-				ServiceTestUtil.getServiceContext(_group.getGroupId()));
-
-			Assert.fail(name + " is an invalid name");
-		}
-		catch (Exception e) {
-			Assert.assertTrue(e instanceof FolderNameException);
-		}
+		DLAppServiceUtil.updateFolder(
+			folder.getFolderId(), name, StringPool.BLANK,
+			ServiceTestUtil.getServiceContext(_group.getGroupId()));
 	}
 
 	private static Group _group;
