@@ -57,27 +57,27 @@ public class DLFileVersionLocalServiceTreeTestCase {
 		createTree();
 
 		for (FileEntry fileEntry : _fileEntries) {
-			DLFileVersion fileVersion =
+			DLFileVersion dlFileVersion =
 				DLFileVersionLocalServiceUtil.getFileVersion(
 					fileEntry.getFileEntryId(),
 					DLFileEntryConstants.VERSION_DEFAULT);
 
-			fileVersion.setTreePath(null);
+			dlFileVersion.setTreePath(null);
 
-			DLFileVersionLocalServiceUtil.updateDLFileVersion(fileVersion);
+			DLFileVersionLocalServiceUtil.updateDLFileVersion(dlFileVersion);
 		}
 
 		DLFileVersionLocalServiceUtil.rebuildTree(
 			TestPropsValues.getCompanyId());
 
 		for (FileEntry fileEntry : _fileEntries) {
-			DLFileVersion fileVersion =
+			DLFileVersion dlFileVersion =
 				DLFileVersionLocalServiceUtil.getFileVersion(
 					fileEntry.getFileEntryId(),
 					DLFileEntryConstants.VERSION_DEFAULT);
 
 			Assert.assertEquals(
-				fileVersion.buildTreePath(), fileVersion.getTreePath());
+				dlFileVersion.buildTreePath(), dlFileVersion.getTreePath());
 		}
 	}
 

@@ -114,6 +114,8 @@ import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
+import com.liferay.portlet.journal.model.impl.JournalArticleModelImpl;
+import com.liferay.portlet.journal.model.impl.JournalFolderModelImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.social.JournalActivityKeys;
 import com.liferay.portlet.journal.util.JournalUtil;
@@ -3468,17 +3470,15 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	@Override
-	public void rebuildTree(long companyId)
-		throws PortalException, SystemException {
-
+	public void rebuildTree(long companyId) throws SystemException {
 		journalFolderLocalService.rebuildTree(companyId);
 
 		Session session = journalArticlePersistence.openSession();
 
 		try {
 			TreePathUtil.rebuildTree(
-				session, companyId, JournalArticle.class.getSimpleName(),
-				JournalFolder.class.getSimpleName(), true);
+				session, companyId, JournalArticleModelImpl.TABLE_NAME,
+				JournalFolderModelImpl.TABLE_NAME, true);
 		}
 		finally {
 			journalArticlePersistence.closeSession(session);

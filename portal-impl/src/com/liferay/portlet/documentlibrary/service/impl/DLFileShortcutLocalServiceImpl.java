@@ -27,6 +27,8 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -288,17 +290,15 @@ public class DLFileShortcutLocalServiceImpl
 	}
 
 	@Override
-	public void rebuildTree(long companyId)
-		throws PortalException, SystemException {
-
+	public void rebuildTree(long companyId) throws SystemException {
 		dlFolderLocalService.rebuildTree(companyId);
 
 		Session session = dlFileShortcutPersistence.openSession();
 
 		try {
 			TreePathUtil.rebuildTree(
-				session, companyId, DLFileShortcut.class.getSimpleName(),
-				DLFolder.class.getSimpleName(), true);
+				session, companyId, DLFileShortcutModelImpl.TABLE_NAME,
+				DLFolderModelImpl.TABLE_NAME, true);
 		}
 		finally {
 			dlFileShortcutPersistence.closeSession(session);

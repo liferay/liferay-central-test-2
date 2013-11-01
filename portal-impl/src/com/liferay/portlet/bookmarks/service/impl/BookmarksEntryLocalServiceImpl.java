@@ -50,6 +50,8 @@ import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.social.BookmarksActivityKeys;
 import com.liferay.portlet.bookmarks.util.BookmarksUtil;
@@ -430,17 +432,15 @@ public class BookmarksEntryLocalServiceImpl
 	}
 
 	@Override
-	public void rebuildTree(long companyId)
-		throws PortalException, SystemException {
-
+	public void rebuildTree(long companyId) throws SystemException {
 		bookmarksFolderLocalService.rebuildTree(companyId);
 
 		Session session = bookmarksEntryPersistence.openSession();
 
 		try {
 			TreePathUtil.rebuildTree(
-				session, companyId, BookmarksEntry.class.getSimpleName(),
-				BookmarksFolder.class.getSimpleName(), true);
+				session, companyId, BookmarksEntryModelImpl.TABLE_NAME,
+				BookmarksFolderModelImpl.TABLE_NAME, true);
 		}
 		finally {
 			bookmarksEntryPersistence.closeSession(session);

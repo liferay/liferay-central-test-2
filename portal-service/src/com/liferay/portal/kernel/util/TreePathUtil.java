@@ -78,15 +78,14 @@ public class TreePathUtil {
 	}
 
 	public static void rebuildTree(
-		Session session, long companyId, String modelName,
-		String parentModelName, boolean statusColumn) {
+		Session session, long companyId, String tableName,
+		String parentTableName, boolean statusColumn) {
 
 		rebuildTree(
-			session, companyId, modelName, parentModelName, statusColumn,
+			session, companyId, tableName, parentTableName, statusColumn,
 			false);
-
 		rebuildTree(
-			session, companyId, modelName, parentModelName, statusColumn, true);
+			session, companyId, tableName, parentTableName, statusColumn, true);
 	}
 
 	protected static void rebuildTree(

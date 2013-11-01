@@ -90,6 +90,8 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.model.DLSyncConstants;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
 import com.liferay.portlet.documentlibrary.util.DL;
@@ -1352,17 +1354,15 @@ public class DLFileEntryLocalServiceImpl
 	}
 
 	@Override
-	public void rebuildTree(long companyId)
-		throws PortalException, SystemException {
-
+	public void rebuildTree(long companyId) throws SystemException {
 		dlFolderLocalService.rebuildTree(companyId);
 
 		Session session = dlFileEntryPersistence.openSession();
 
 		try {
 			TreePathUtil.rebuildTree(
-				session, companyId, DLFileEntry.class.getSimpleName(),
-				DLFolder.class.getSimpleName(), false);
+				session, companyId, DLFileEntryModelImpl.TABLE_NAME,
+				DLFolderModelImpl.TABLE_NAME, false);
 		}
 		finally {
 			dlFileEntryPersistence.closeSession(session);
