@@ -621,8 +621,7 @@ public interface DLFileEntryLocalService extends BaseLocalService,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	public void rebuildTree(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		throws com.liferay.portal.kernel.exception.SystemException;
 
 	public void revertFileEntry(long userId, long fileEntryId,
 		java.lang.String version,
