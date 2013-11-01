@@ -931,7 +931,7 @@ release was successful.</echo>
 				<var name="java.security.config" value="" />
 			</then>
 			<else>
-				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=@app.server.geronimo.dir@/etc/server.policy" />
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==@app.server.geronimo.dir@/etc/server.policy" />
 			</else>
 		</if>
 
@@ -1231,7 +1231,7 @@ release was successful.</echo>
 						<var name="java.security.config" value="" />
 					</then>
 					<else>
-						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=${app.server.jboss.dir}/bin/server.policy -Djboss.home.dir=${app.server.jboss.dir}" />
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==${app.server.jboss.dir}/bin/server.policy -Djboss.home.dir=${app.server.jboss.dir}" />
 					</else>
 				</if>
 
@@ -1445,7 +1445,7 @@ release was successful.</echo>
 				<var name="java.security.config" value="" />
 			</then>
 			<else>
-				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=${app.server.jetty.dir}/lib/policy/server.policy -Djetty.home=${app.server.jetty.dir}" />
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==${app.server.jetty.dir}/lib/policy/server.policy -Djetty.home=${app.server.jetty.dir}" />
 			</else>
 		</if>
 
@@ -1628,7 +1628,7 @@ release was successful.</echo>
 				<var name="java.security.config" value="" />
 			</then>
 			<else>
-				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=$JONAS_ROOT/conf/java.policy" />
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$JONAS_ROOT/conf/java.policy" />
 			</else>
 		</if>
 
@@ -1704,7 +1704,7 @@ release was successful.</echo>
 				<var name="java.security.config" value="" />
 			</then>
 			<else>
-				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=${app.server.resin.dir}/conf/server.policy" />
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==${app.server.resin.dir}/conf/server.policy" />
 			</else>
 		</if>
 
@@ -1818,7 +1818,7 @@ release was successful.</echo>
 				<var name="java.security.config" value="" />
 			</then>
 			<else>
-				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy===$CATALINA_BASE/conf/catalina.policy" />
 			</else>
 		</if>
 
