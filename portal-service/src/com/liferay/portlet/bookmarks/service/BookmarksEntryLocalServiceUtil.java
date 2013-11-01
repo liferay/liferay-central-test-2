@@ -482,8 +482,7 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static void rebuildTree(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		getService().rebuildTree(companyId);
 	}
 

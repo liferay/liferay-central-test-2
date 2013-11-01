@@ -2391,8 +2391,7 @@ public class JournalArticleLocalServiceWrapper
 
 	@Override
 	public void rebuildTree(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_journalArticleLocalService.rebuildTree(companyId);
 	}
 

@@ -839,8 +839,7 @@ public class DLFileEntryLocalServiceWrapper implements DLFileEntryLocalService,
 
 	@Override
 	public void rebuildTree(long companyId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		_dlFileEntryLocalService.rebuildTree(companyId);
 	}
 
