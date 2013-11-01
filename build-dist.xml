@@ -1439,13 +1439,22 @@ release was successful.</echo>
 			};
 		</echo>
 
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=${app.server.jetty.dir}/lib/policy/server.policy -Djetty.home=${app.server.jetty.dir}" />
+			</else>
+		</if>
+
 		<copy
 			file="tools/servers/jetty/bin/run.bat"
 			tofile="${app.server.jetty.bin.dir}/run.bat"
 		>
 			<filterset>
-				<filter token="app.server.jetty.dir" value="${app.server.jetty.dir}" />
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
 
@@ -1467,8 +1476,7 @@ release was successful.</echo>
 			tofile="${app.server.jetty.bin.dir}/run.sh"
 		>
 			<filterset>
-				<filter token="app.server.jetty.dir" value="${app.server.jetty.dir}" />
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
 
