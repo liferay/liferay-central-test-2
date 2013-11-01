@@ -311,13 +311,15 @@ public class FriendlyURLServlet extends HttpServlet {
 						if (localizedFriendlyURL.indexOf(
 								CharPool.QUESTION) == -1) {
 
-							localizedFriendlyURL = localizedFriendlyURL.concat(
-								actualURL.substring(index));
+							localizedFriendlyURL =
+								localizedFriendlyURL.concat(
+									actualURL.substring(index));
 						}
 						else {
-							localizedFriendlyURL = localizedFriendlyURL.concat(
-								StringPool.AMPERSAND).concat(
-									actualURL.substring(index + 1));
+							localizedFriendlyURL =
+								localizedFriendlyURL.concat(
+									StringPool.AMPERSAND).concat(
+										actualURL.substring(index + 1));
 						}
 					}
 
