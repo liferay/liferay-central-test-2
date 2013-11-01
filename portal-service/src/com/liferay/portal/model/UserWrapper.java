@@ -1825,8 +1825,8 @@ public class UserWrapper implements User, ModelWrapper<User> {
 	}
 
 	@Override
-	public boolean isSetup() {
-		return _user.isSetup();
+	public boolean isSetupComplete() {
+		return _user.isSetupComplete();
 	}
 
 	@Override

@@ -300,7 +300,7 @@ public interface User extends UserModel, PersistedModel {
 
 	public boolean isReminderQueryComplete();
 
-	public boolean isSetup();
+	public boolean isSetupComplete();
 
 	public boolean isTermsOfUseComplete();
 
