@@ -234,7 +234,7 @@ public class UpgradeDynamicDataMapping extends UpgradeProcess {
 				"width",
 			},
 			new String[] {
-				"displayChildLabelAsValue", "fieldCssClass", "acceptFiles"
+				"acceptFiles", "displayChildLabelAsValue", "fieldCssClass"
 			});
 
 		List<Element> dynamicElementElements = element.elements(
