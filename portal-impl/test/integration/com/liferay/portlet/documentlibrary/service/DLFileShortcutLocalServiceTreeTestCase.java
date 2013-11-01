@@ -42,9 +42,9 @@ public class DLFileShortcutLocalServiceTreeTestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		for (int i = _fileShortcuts.size() - 1; i >= 0; i--) {
+		for (int i = _dlFileShortcuts.size() - 1; i >= 0; i--) {
 			DLFileShortcutLocalServiceUtil.deleteDLFileShortcut(
-				_fileShortcuts.get(i));
+				_dlFileShortcuts.get(i));
 		}
 
 		DLAppLocalServiceUtil.deleteFileEntry(_fileEntry.getFileEntryId());
@@ -55,21 +55,21 @@ public class DLFileShortcutLocalServiceTreeTestCase {
 	public void testRebuildTree() throws Exception {
 		createTree();
 
-		for (DLFileShortcut fileShortcut : _fileShortcuts) {
-			fileShortcut.setTreePath(null);
+		for (DLFileShortcut dlFileShortcut : _dlFileShortcuts) {
+			dlFileShortcut.setTreePath(null);
 
-			DLFileShortcutLocalServiceUtil.updateDLFileShortcut(fileShortcut);
+			DLFileShortcutLocalServiceUtil.updateDLFileShortcut(dlFileShortcut);
 		}
 
 		DLFileShortcutLocalServiceUtil.rebuildTree(
 			TestPropsValues.getCompanyId());
 
-		for (DLFileShortcut fileShortcut : _fileShortcuts) {
-			fileShortcut = DLFileShortcutLocalServiceUtil.getDLFileShortcut(
-				fileShortcut.getFileShortcutId());
+		for (DLFileShortcut dlFileShortcut : _dlFileShortcuts) {
+			dlFileShortcut = DLFileShortcutLocalServiceUtil.getDLFileShortcut(
+				dlFileShortcut.getFileShortcutId());
 
 			Assert.assertEquals(
-				fileShortcut.buildTreePath(), fileShortcut.getTreePath());
+				dlFileShortcut.buildTreePath(), dlFileShortcut.getTreePath());
 		}
 	}
 
@@ -78,25 +78,25 @@ public class DLFileShortcutLocalServiceTreeTestCase {
 			TestPropsValues.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Entry A.txt");
 
-		DLFileShortcut fileShortcutA = DLAppTestUtil.addDLFileShortcut(
+		DLFileShortcut dlFileShortcutA = DLAppTestUtil.addDLFileShortcut(
 			_fileEntry, TestPropsValues.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 
-		_fileShortcuts.add(fileShortcutA);
+		_dlFileShortcuts.add(dlFileShortcutA);
 
 		_folder = DLAppTestUtil.addFolder(
 			TestPropsValues.getGroupId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Folder A");
 
-		DLFileShortcut fileShortcutAA = DLAppTestUtil.addDLFileShortcut(
+		DLFileShortcut dlFileShortcutAA = DLAppTestUtil.addDLFileShortcut(
 			_fileEntry, TestPropsValues.getGroupId(), _folder.getFolderId());
 
-		_fileShortcuts.add(fileShortcutAA);
+		_dlFileShortcuts.add(dlFileShortcutAA);
 	}
 
-	private FileEntry _fileEntry;
-	private List<DLFileShortcut> _fileShortcuts =
+	private List<DLFileShortcut> _dlFileShortcuts =
 		new ArrayList<DLFileShortcut>();
+	private FileEntry _fileEntry;
 	private Folder _folder;
 
 }
