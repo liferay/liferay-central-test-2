@@ -1030,12 +1030,13 @@ release was successful.</echo>
 			</then>
 			<else>
 				<replace file="${app.server.glassfish.instance.dir}/config/domain.xml">
+					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 					<replacetoken><![CDATA[<jvm-options>-Xmx512m</jvm-options>]]></replacetoken>
 					<replacevalue>
 						<![CDATA[
 							<jvm-options>-Dfile.encoding=UTF8</jvm-options>
 							<jvm-options>-Djava.net.preferIPv4Stack=true</jvm-options>
-							<jvm-options>${java.security.manager.option}</jvm-options>
+							<jvm-options>@java.security.manager.option@</jvm-options>
 							<jvm-options>-Dorg.apache.catalina.loader.WebappClassLoader.ENABLE_CLEAR_REFERENCES=false</jvm-options>
 							<jvm-options>-Duser.timezone=GMT</jvm-options>
 							<jvm-options>-Xmx1024m</jvm-options>
@@ -2011,6 +2012,7 @@ closeTemplate()
 				</exec>
 
 				<replace file="${app.server.weblogic.instance.dir}/startWebLogic.cmd">
+					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 					<replacetoken><![CDATA[SETLOCAL]]></replacetoken>
 					<replacevalue>
 						<![CDATA[
@@ -2020,7 +2022,7 @@ closeTemplate()
 
 							set "MW_HOME=${app.server.weblogic.dir.windows}"
 
-							set "JAVA_OPTIONS=%JAVA_OPTIONS% -Dfile.encoding=UTF-8 ${java.security.manager.option} -da:org.apache.lucene... -da:org.aspectj..."
+							set "JAVA_OPTIONS=%JAVA_OPTIONS% -Dfile.encoding=UTF-8 @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
 						]]>
 					</replacevalue>
 				</replace>
@@ -2100,6 +2102,7 @@ closeTemplate()
 				</exec>
 
 				<replace file="${app.server.weblogic.instance.dir}/startWebLogic.sh">
+					<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 					<replacetoken><![CDATA[# Any changes to this script may be lost when adding extensions to this configuration.]]></replacetoken>
 					<replacevalue>
 						<![CDATA[
@@ -2109,7 +2112,7 @@ closeTemplate()
 
 							export MW_HOME="${app.server.weblogic.dir}"
 
-							export JAVA_OPTIONS="${JAVA_OPTIONS} ${java.security.manager.option} -da:org.apache.lucene... -da:org.aspectj..."
+							export JAVA_OPTIONS="${JAVA_OPTIONS} @java.security.manager.option@ -da:org.apache.lucene... -da:org.aspectj..."
 						]]>
 					</replacevalue>
 				</replace>
