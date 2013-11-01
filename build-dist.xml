@@ -1632,10 +1632,11 @@ release was successful.</echo>
 		</if>
 
 		<replace file="${app.server.jonas.bin.dir}/setenv">
+			<replacefilter token="@java.security.config@" value="${java.security.config}" />
 			<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
 			<replacevalue>
 				<![CDATA[
-					JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true ${java.security.config} -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+					JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
 					export JAVA_OPTS
 				]]>
@@ -1643,12 +1644,13 @@ release was successful.</echo>
 		</replace>
 
 		<replace file="${app.server.jonas.bin.dir}/setenv.bat">
+			<replacefilter token="@java.security.config@" value="${java.security.config}" />
 			<replacetoken><![CDATA[set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%]]></replacetoken>
 			<replacevalue>
 				<![CDATA[
 					set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
 
-					set "JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true ${java.security.config} -Djava.security.policy=%JONAS_ROOT%/conf/java.policy -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+					set "JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 				]]>
 			</replacevalue>
 		</replace>
@@ -1706,8 +1708,9 @@ release was successful.</echo>
 		</if>
 
 		<replace file="${app.server.resin.dir}/conf/resin.properties">
+			<replacefilter token="@java.security.config@" value="${java.security.config}" />
 			<replacetoken><![CDATA[# jvm_args  : -Xmx2048m -XX:MaxPermSize=256m]]></replacetoken>
-			<replacevalue><![CDATA[jvm_args  : -Dfile.encoding=UTF-8 -Dcaucho.environment.class.loader=com.liferay.support.resin.EnvironmentClassLoader -Djava.net.preferIPv4Stack=true ${java.security.config} -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
+			<replacevalue><![CDATA[jvm_args  : -Dfile.encoding=UTF-8 -Dcaucho.environment.class.loader=com.liferay.support.resin.EnvironmentClassLoader -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
 		</replace>
 
 		<replace file="${app.server.resin.dir}/conf/resin.xml">
