@@ -940,7 +940,6 @@ release was successful.</echo>
 			tofile="${app.server.geronimo.bin.dir}/setenv.bat"
 		>
 			<filterset>
-				<filter token="app.server.geronimo.dir" value="${app.server.geronimo.dir}" />
 				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
@@ -950,7 +949,6 @@ release was successful.</echo>
 			tofile="${app.server.geronimo.bin.dir}/setenv.sh"
 		>
 			<filterset>
-				<filter token="app.server.geronimo.dir" value="${app.server.geronimo.dir}" />
 				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
