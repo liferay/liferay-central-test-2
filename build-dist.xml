@@ -1808,12 +1808,22 @@ release was successful.</echo>
 			</then>
 		</if>
 
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
+			</else>
+		</if>
+
 		<copy
 			file="tools/servers/tomcat/bin/setenv.bat"
 			tofile="${app.server.tomcat.bin.dir}/setenv.bat"
 		>
 			<filterset>
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.manager.option" value="${java.security.config}" />
 				<filter token="java.version" value="${jdk.windows.version}" />
 			</filterset>
 		</copy>
@@ -1823,7 +1833,7 @@ release was successful.</echo>
 			tofile="${app.server.tomcat.bin.dir}/setenv.sh"
 		>
 			<filterset>
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.manager.option" value="${java.security.config}" />
 			</filterset>
 		</copy>
 
