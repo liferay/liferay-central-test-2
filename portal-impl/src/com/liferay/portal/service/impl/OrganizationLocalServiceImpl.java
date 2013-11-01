@@ -1013,13 +1013,14 @@ public class OrganizationLocalServiceImpl
 
 				@Override
 				public List<Organization> findTreeModels(
-						long previousId, long companyId, long parentId,
+						long previousId, long companyId, long parentPrimaryKey,
 						int size)
 					throws SystemException {
 
 					return organizationPersistence.findByO_C_P(
-						previousId, companyId, parentId, QueryUtil.ALL_POS,
-						size, new OrganizationIdComparator());
+						previousId, companyId, parentPrimaryKey,
+						QueryUtil.ALL_POS, size,
+						new OrganizationIdComparator());
 				}
 
 			}

@@ -3478,7 +3478,7 @@ public class JournalArticleLocalServiceImpl
 		try {
 			TreePathUtil.rebuildTree(
 				session, companyId, JournalArticleModelImpl.TABLE_NAME,
-				JournalFolderModelImpl.TABLE_NAME, true);
+				JournalFolderModelImpl.TABLE_NAME, "folderId", true);
 		}
 		finally {
 			journalArticlePersistence.closeSession(session);

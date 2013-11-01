@@ -542,12 +542,12 @@ public class JournalFolderLocalServiceImpl
 
 				@Override
 				public List<JournalFolder> findTreeModels(
-						long previousId, long companyId, long parentId,
+						long previousId, long companyId, long parentPrimaryKey,
 						int size)
 					throws SystemException {
 
 					return journalFolderPersistence.findByF_C_P_NotS(
-						previousId, companyId, parentId,
+						previousId, companyId, parentPrimaryKey,
 						WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
 						size, new FolderIdComparator());
 				}

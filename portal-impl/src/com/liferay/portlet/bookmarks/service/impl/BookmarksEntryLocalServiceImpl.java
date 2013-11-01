@@ -440,7 +440,7 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			TreePathUtil.rebuildTree(
 				session, companyId, BookmarksEntryModelImpl.TABLE_NAME,
-				BookmarksFolderModelImpl.TABLE_NAME, true);
+				BookmarksFolderModelImpl.TABLE_NAME, "folderId", true);
 		}
 		finally {
 			bookmarksEntryPersistence.closeSession(session);

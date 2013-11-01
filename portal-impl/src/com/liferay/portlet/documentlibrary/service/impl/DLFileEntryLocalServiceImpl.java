@@ -1362,7 +1362,7 @@ public class DLFileEntryLocalServiceImpl
 		try {
 			TreePathUtil.rebuildTree(
 				session, companyId, DLFileEntryModelImpl.TABLE_NAME,
-				DLFolderModelImpl.TABLE_NAME, false);
+				DLFolderModelImpl.TABLE_NAME, "folderId", false);
 		}
 		finally {
 			dlFileEntryPersistence.closeSession(session);

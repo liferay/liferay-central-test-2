@@ -31,7 +31,7 @@ import java.util.List;
 public class TreePathUtil {
 
 	public static void rebuildTree(
-			long companyId, long defaultParentId,
+			long companyId, long defaultParentPrimaryKey,
 			TreeModelFinder<?> treeModelFinder)
 		throws SystemException {
 
@@ -41,18 +41,19 @@ public class TreePathUtil {
 
 		Deque<Object[]> traces = new LinkedList<Object[]>();
 
-		traces.push(new Object[] {defaultParentId, StringPool.SLASH, 0L});
+		traces.push(
+			new Object[] {defaultParentPrimaryKey, StringPool.SLASH, 0L});
 
 		Object[] trace = null;
 
 		while ((trace = traces.poll()) != null) {
-			Long parentId = (Long)trace[0];
+			Long parentPrimaryKey = (Long)trace[0];
 			String parentPath = (String)trace[1];
-			Long previousId = (Long)trace[2];
+			Long previousPrimaryKey = (Long)trace[2];
 
 			List<? extends TreeModel> treeModels =
 				treeModelFinder.findTreeModels(
-					previousId, companyId, parentId, size);
+					previousPrimaryKey, companyId, parentPrimaryKey, size);
 
 			if (treeModels.isEmpty()) {
 				continue;
@@ -79,18 +80,21 @@ public class TreePathUtil {
 
 	public static void rebuildTree(
 		Session session, long companyId, String tableName,
-		String parentTableName, boolean statusColumn) {
+		String parentTableName, String parentPrimaryKeyColumnName,
+		boolean rootParent) {
 
 		rebuildTree(
-			session, companyId, tableName, parentTableName, statusColumn,
-			false);
+			session, companyId, tableName, parentTableName,
+			parentPrimaryKeyColumnName, rootParent, false);
 		rebuildTree(
-			session, companyId, tableName, parentTableName, statusColumn, true);
+			session, companyId, tableName, parentTableName,
+			parentPrimaryKeyColumnName, rootParent, true);
 	}
 
 	protected static void rebuildTree(
 		Session session, long companyId, String tableName,
-		String parentTableName, boolean statusColumn, boolean rootFolder) {
+		String parentTableName, String parentPrimaryKeyColumnName,
+		boolean statusColumn, boolean rootParent) {
 
 		StringBundler sb = new StringBundler(18);
 
@@ -98,7 +102,7 @@ public class TreePathUtil {
 		sb.append(tableName);
 		sb.append(" set ");
 
-		if (rootFolder) {
+		if (rootParent) {
 			sb.append("treePath = \"/0/\" ");
 		}
 		else {
@@ -108,16 +112,22 @@ public class TreePathUtil {
 			sb.append(parentTableName);
 			sb.append(" where ");
 			sb.append(parentTableName);
-			sb.append(".folderId = ");
+			sb.append(".");
+			sb.append(parentPrimaryKeyColumnName);
+			sb.append(" = ");
 			sb.append(tableName);
-			sb.append(".folderId)");
+			sb.append(".");
+			sb.append(parentPrimaryKeyColumnName);
+			sb.append(")");
 		}
 
 		sb.append("where (");
 
-		if (rootFolder) {
+		if (rootParent) {
 			sb.append(tableName);
-			sb.append(".folderId = 0) AND (");
+			sb.append(".");
+			sb.append(parentPrimaryKeyColumnName);
+			sb.append(" = 0) AND (");
 		}
 
 		sb.append(tableName);
