@@ -146,10 +146,6 @@ public class GlobalShutdownAction extends SimpleAction {
 
 		DocumentConversionUtil.disconnect();
 
-		// Plugins
-
-		RequiredPluginsUtil.stopCheckingRequiredPlugins();
-
 		// Thread local registry
 
 		ThirdPartyThreadLocalRegistry.resetThreadLocals();
@@ -197,6 +193,10 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 		catch (Exception e) {
 		}
+
+		// Plugins
+
+		RequiredPluginsUtil.stopCheckingRequiredPlugins();
 
 		// Wait 1 second so Quartz threads can cleanly shutdown
 
