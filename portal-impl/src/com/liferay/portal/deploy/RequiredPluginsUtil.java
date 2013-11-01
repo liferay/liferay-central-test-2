@@ -43,14 +43,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class RequiredPluginsUtil {
 
-	public static synchronized void stopCheckingRequiredPlugins() {
-		_unschedule(true);
-	}
-
-	public static synchronized void startCheckingRequiredPlugins() {
-		schedule();
-	}
-
 	public static synchronized void onUndeployCheckRequiredPlugins() {
 
 		// During an undeploy event, we synchronously and immediately check for
@@ -62,6 +54,14 @@ public class RequiredPluginsUtil {
 		checkRequiredPlugins();
 
 		schedule();
+	}
+
+	public static synchronized void startCheckingRequiredPlugins() {
+		schedule();
+	}
+
+	public static synchronized void stopCheckingRequiredPlugins() {
+		_unschedule(true);
 	}
 
 	protected static void schedule() {
@@ -157,7 +157,7 @@ public class RequiredPluginsUtil {
 
 			// If all the required plugins were already in place, then we can
 			// safely unschedule our required plugins check to conserve
-			// processing power. Removal of plugins would trigger an undeploy			
+			// processing power. Removal of plugins would trigger an undeploy
 			// event which would restart the scheduled required plugins check.
 
 			_unschedule(false);
@@ -167,7 +167,7 @@ public class RequiredPluginsUtil {
 	private static void _unschedule(boolean awaitTermination) {
 		if (_scheduledExecutorService != null) {
 			_scheduledExecutorService.shutdownNow();
-	
+
 			if (awaitTermination) {
 				try {
 					_scheduledExecutorService.awaitTermination(
@@ -177,7 +177,7 @@ public class RequiredPluginsUtil {
 					_log.error(ie, ie);
 				}
 			}
-	
+
 			_scheduledExecutorService = null;
 		}
 	}
