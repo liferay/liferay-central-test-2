@@ -297,7 +297,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 		throws Exception {
 
 		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			true, LocaleUtil.US, null,  "/home");
+			true, LocaleUtil.US, null, "/home");
 	}
 
 	@Test
@@ -313,7 +313,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 		throws Exception {
 
 		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			true, LocaleUtil.US, "/-/blogs/one",  "/home");
+			true, LocaleUtil.US, "/-/blogs/one", "/home");
 	}
 
 	@Test
@@ -329,7 +329,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 		throws Exception {
 
 		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			true, LocaleUtil.US, "?param=value",  "/home");
+			true, LocaleUtil.US, "?param=value", "/home");
 	}
 
 	@Test
@@ -345,7 +345,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 		throws Exception {
 
 		testWronglyLocalizedVirtualLayoutFriendlyURL(
-			true, LocaleUtil.US, "/tags/one",  "/home");
+			true, LocaleUtil.US, "/tags/one", "/home");
 	}
 
 	@Test
