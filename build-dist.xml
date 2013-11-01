@@ -1621,16 +1621,25 @@ release was successful.</echo>
 			<replacevalue><![CDATA[javase-packages ${javase-${javase.version}}, com.sun.crypto.provider, com.sun.jmx.interceptor, com.sun.jmx.mbeanserver, org.apache.felix.framework]]></replacevalue>
 		</replace>
 
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=$JONAS_ROOT/conf/java.policy" />
+			</else>
+		</if>
+
 		<replace file="${app.server.jonas.bin.dir}/setenv">
 			<replacetoken><![CDATA[export JAVA_OPTS]]></replacetoken>
 			<replacevalue>
 				<![CDATA[
-					JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true @java.security.manager.option@ -Djava.security.policy=$JONAS_ROOT/conf/java.policy -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+					JAVA_OPTS="-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true ${java.security.config} -Djonas.felix.configuration.file=\"$JONAS_ROOT/conf/felix-config.properties\" -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
 					export JAVA_OPTS
 				]]>
 			</replacevalue>
-			<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 		</replace>
 
 		<replace file="${app.server.jonas.bin.dir}/setenv.bat">
@@ -1639,10 +1648,9 @@ release was successful.</echo>
 				<![CDATA[
 					set JONAS_CLASSPATH=%JONAS_BASE%\conf;%JONAS_CLASSPATH%
 
-					set "JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true @java.security.manager.option@ -Djava.security.policy=%JONAS_ROOT%/conf/java.policy -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+					set "JAVA_OPTS=-Dfile.encoding=UTF8 -Djava.net.preferIPv4Stack=true ${java.security.config} -Djava.security.policy=%JONAS_ROOT%/conf/java.policy -Djonas.felix.configuration.file=%JONAS_ROOT%/conf/felix-config.properties -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 				]]>
 			</replacevalue>
-			<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
 		</replace>
 
 		<chmod perm="a+x">
