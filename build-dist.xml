@@ -2453,8 +2453,8 @@ plugins.includes=</echo>
 							/>
 							<zipfileset
 								dir="${zip.executable.dir}/../patching-tool"
-								includes="**/*.sh"
 								filemode="744"
+								includes="**/*.sh"
 								prefix="liferay-portal-${lp.version}/patching-tool"
 							/>
 						</zip>
