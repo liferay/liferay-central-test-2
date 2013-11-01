@@ -1695,11 +1695,19 @@ release was successful.</echo>
 			};
 		</echo>
 
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=${app.server.resin.dir}/conf/server.policy" />
+			</else>
+		</if>
+
 		<replace file="${app.server.resin.dir}/conf/resin.properties">
 			<replacetoken><![CDATA[# jvm_args  : -Xmx2048m -XX:MaxPermSize=256m]]></replacetoken>
-			<replacevalue><![CDATA[jvm_args  : -Dfile.encoding=UTF-8 -Dcaucho.environment.class.loader=com.liferay.support.resin.EnvironmentClassLoader -Djava.net.preferIPv4Stack=true @java.security.manager.option@ -Djava.security.policy=@app.server.resin.dir@/conf/server.policy -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
-			<replacefilter token="@app.server.resin.dir@" value="${app.server.resin.dir}" />
-			<replacefilter token="@java.security.manager.option@" value="${java.security.manager.option}" />
+			<replacevalue><![CDATA[jvm_args  : -Dfile.encoding=UTF-8 -Dcaucho.environment.class.loader=com.liferay.support.resin.EnvironmentClassLoader -Djava.net.preferIPv4Stack=true ${java.security.config} -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m]]></replacevalue>
 		</replace>
 
 		<replace file="${app.server.resin.dir}/conf/resin.xml">
