@@ -925,13 +925,23 @@ release was successful.</echo>
 			/>
 		</unzip>
 
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy=@app.server.geronimo.dir@/etc/server.policy" />
+			</else>
+		</if>
+
 		<copy
 			file="tools/servers/geronimo/bin/setenv.bat"
 			tofile="${app.server.geronimo.bin.dir}/setenv.bat"
 		>
 			<filterset>
 				<filter token="app.server.geronimo.dir" value="${app.server.geronimo.dir}" />
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
 
@@ -941,7 +951,7 @@ release was successful.</echo>
 		>
 			<filterset>
 				<filter token="app.server.geronimo.dir" value="${app.server.geronimo.dir}" />
-				<filter token="java.security.manager.option" value="${java.security.manager.option}" />
+				<filter token="java.security.config" value="${java.security.config}" />
 			</filterset>
 		</copy>
 
