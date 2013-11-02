@@ -1247,10 +1247,11 @@ release was successful.</echo>
 				</replace>
 
 				<replace file="${app.server.jboss.bin.dir}/standalone.conf.bat">
+					<replacefilter token="@java.security.config@" value="${java.security.config}" />
 					<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
 					<replacevalue>
 						<![CDATA[
-							set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true ${java.security.config} -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+							set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
 							:JAVA_OPTS_SET
 						]]>
