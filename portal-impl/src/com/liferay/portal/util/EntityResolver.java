@@ -565,6 +565,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD User Notification Definition 6.2.0//EN",
+			"liferay-user-notification-definitions_6_2_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//MuleSource //DTD mule-configuration XML V1.0//EN",
 			"mule-configuration.dtd"
 		),

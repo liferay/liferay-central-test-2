@@ -324,6 +324,7 @@
 		<dtd publicId="-//Liferay//DTD Theme Loader 6.0.0//EN" location="${definitions.dir}/liferay-theme-loader_6_0_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 6.1.0//EN" location="${definitions.dir}/liferay-theme-loader_6_1_0.dtd" />
 		<dtd publicId="-//Liferay//DTD Theme Loader 6.2.0//EN" location="${definitions.dir}/liferay-theme-loader_6_2_0.dtd" />
+		<dtd publicId="-//Liferay//DTD User Notification Definition 6.2.0//EN" location="${definitions.dir}/liferay-user-notification-definitions_6_2_0.dtd" />
 		<dtd publicId="-//MuleSource //DTD mule-configuration XML V1.0//EN" location="${definitions.dir}/mule-configuration.dtd" />
 		<dtd publicId="-//SPRING//DTD BEAN//EN" location="${definitions.dir}/spring-beans.dtd" />
 		<dtd publicId="-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" location="${definitions.dir}/struts-config_1_2.dtd" />
