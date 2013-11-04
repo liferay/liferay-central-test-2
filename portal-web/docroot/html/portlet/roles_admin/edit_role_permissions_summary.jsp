@@ -29,8 +29,8 @@ PortletURL permissionsAllURL = liferayPortletResponse.createRenderURL();
 permissionsAllURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
 permissionsAllURL.setParameter(Constants.CMD, Constants.VIEW);
 permissionsAllURL.setParameter("tabs1", "roles");
-permissionsAllURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 permissionsAllURL.setParameter("backURL", backURL);
+permissionsAllURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 
 List<String> headerNames = new ArrayList<String>();
 
