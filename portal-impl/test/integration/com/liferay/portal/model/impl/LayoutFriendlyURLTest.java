@@ -174,7 +174,7 @@ public class LayoutFriendlyURLTest {
 		}
 	}
 
-	@Test (expected = LayoutFriendlyURLException.class)
+	@Test(expected = LayoutFriendlyURLException.class)
 	@Transactional
 	public void testInvalidFriendlyURLMapperURLInNonDefaultLocale()
 		throws Exception {
