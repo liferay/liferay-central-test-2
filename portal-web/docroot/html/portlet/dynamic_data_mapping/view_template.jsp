@@ -47,11 +47,7 @@ if (layout != null) {
 	controlPanel = group.isControlPanel();
 }
 
-TemplateSearch templateSearch = new TemplateSearch(renderRequest, portletURL);
-
-TemplateSearchTerms searchTerms = (TemplateSearchTerms)templateSearch.getSearchTerms();
-
-String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, searchTerms.isSearch(), locale);
+String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, locale);
 %>
 
 <liferay-ui:error exception="<%= RequiredTemplateException.class %>">
@@ -93,7 +89,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, searchT
 		orderByComparator="<%= orderByComparator %>"
 		orderByType="<%= orderByType %>"
 		rowChecker="<%= new RowChecker(renderResponse) %>"
-		searchContainer="<%= templateSearch %>"
+		searchContainer="<%= new TemplateSearch(renderRequest, portletURL) %>"
 	>
 		<liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
 			<liferay-util:param name="redirect" value="<%= currentURL %>" />
