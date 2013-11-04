@@ -15,7 +15,6 @@
 package com.liferay.portal.kernel.dao.search;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 
 import javax.portlet.PortletRequest;
 
@@ -54,10 +53,6 @@ public class DisplayTerms {
 
 	public boolean isAndOperator() {
 		return andOperator;
-	}
-
-	public boolean isSearch() {
-		return advancedSearch || Validator.isNotNull(keywords);
 	}
 
 	public void setAdvancedSearch(boolean advancedSearch) {
