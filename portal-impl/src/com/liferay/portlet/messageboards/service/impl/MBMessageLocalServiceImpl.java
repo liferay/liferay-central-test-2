@@ -300,7 +300,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				categoryId, message, serviceContext);
 		}
 		else if (thread == null) {
-			throw new NoSuchThreadException("No thread found: " + threadId);
+			throw new NoSuchThreadException();
 		}
 
 		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
