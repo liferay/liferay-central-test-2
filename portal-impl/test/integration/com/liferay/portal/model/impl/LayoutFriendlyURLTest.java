@@ -129,7 +129,7 @@ public class LayoutFriendlyURLTest {
 
 	@Test
 	@Transactional
-	public void testNotValidFriendlyURLMapperURLInDefaultLocale()
+	public void testInvalidFriendlyURLMapperURLInDefaultLocale()
 		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
@@ -176,7 +176,7 @@ public class LayoutFriendlyURLTest {
 
 	@Test (expected = LayoutFriendlyURLException.class)
 	@Transactional
-	public void testNotValidFriendlyURLMapperURLInNonDefaultLocale()
+	public void testInvalidFriendlyURLMapperURLInNonDefaultLocale()
 		throws Exception {
 
 		Group group = GroupTestUtil.addGroup();
