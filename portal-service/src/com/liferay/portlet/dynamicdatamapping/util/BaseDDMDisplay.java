@@ -275,7 +275,7 @@ public abstract class BaseDDMDisplay implements DDMDisplay {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 6.2.1
 	 */
 	@Override
 	public String getViewTemplatesTitle(

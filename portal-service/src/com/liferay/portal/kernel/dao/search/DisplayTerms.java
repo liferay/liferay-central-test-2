@@ -57,11 +57,7 @@ public class DisplayTerms {
 	}
 
 	public boolean isSearch() {
-		if (advancedSearch || Validator.isNotNull(keywords)) {
-			return true;
-		}
-
-		return false;
+		return advancedSearch || Validator.isNotNull(keywords);
 	}
 
 	public void setAdvancedSearch(boolean advancedSearch) {
