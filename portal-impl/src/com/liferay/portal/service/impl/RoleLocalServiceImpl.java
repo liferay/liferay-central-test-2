@@ -23,8 +23,6 @@ import com.liferay.portal.kernel.cache.Lifecycle;
 import com.liferay.portal.kernel.cache.ThreadLocalCachable;
 import com.liferay.portal.kernel.cache.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
-import com.liferay.portal.kernel.dao.db.DB;
-import com.liferay.portal.kernel.dao.db.DBFactoryUtil;
 import com.liferay.portal.kernel.dao.shard.ShardUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -67,8 +65,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.usersadmin.util.UsersAdminUtil;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -337,25 +333,11 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 			// LPS-34324
 
-			DB db = DBFactoryUtil.getDB();
-
-			try {
-				runSQL(
-					db.buildSQL(
-						"alter table Role_ add uuid_ VARCHAR(75) null"));
-				runSQL(db.buildSQL("alter table Role_ add userId LONG"));
-				runSQL(
-					db.buildSQL(
-						"alter table Role_ add userName VARCHAR(75) null"));
-				runSQL(
-					db.buildSQL("alter table Role_ add createDate DATE null"));
-				runSQL(
-					db.buildSQL(
-						"alter table Role_ add modifiedDate DATE null"));
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			runSQL("alter table Role_ add uuid_ VARCHAR(75) null");
+			runSQL("alter table Role_ add userId LONG");
+			runSQL("alter table Role_ add userName VARCHAR(75) null");
+			runSQL("alter table Role_ add createDate DATE null");
+			runSQL("alter table Role_ add modifiedDate DATE null");
 
 			roles = roleFinder.findBySystem(companyId);
 		}
