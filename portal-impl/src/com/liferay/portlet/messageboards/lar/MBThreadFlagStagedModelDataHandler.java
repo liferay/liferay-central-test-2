@@ -107,8 +107,6 @@ public class MBThreadFlagStagedModelDataHandler
 			return;
 		}
 
-		long userId = user.getUserId();
-
 		Element element = portletDataContext.getImportDataStagedModelElement(
 			threadFlag);
 
@@ -143,7 +141,7 @@ public class MBThreadFlagStagedModelDataHandler
 		serviceContext.setUuid(threadFlag.getUuid());
 
 		MBThreadFlagLocalServiceUtil.addThreadFlag(
-			userId, thread, serviceContext);
+			user.getUserId(), thread, serviceContext);
 	}
 
 }
