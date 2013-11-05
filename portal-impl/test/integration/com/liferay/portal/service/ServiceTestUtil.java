@@ -75,7 +75,7 @@ public class ServiceTestUtil {
 	public static final int THREAD_COUNT = 25;
 
 	/**
-	 * @deprecated As of 6.2.1
+	 * @deprecated As of 7.0.0
 	 */
 	public static void addResourcePermission(
 			Role role, String resourceName, int scope, String primKey,
@@ -87,7 +87,7 @@ public class ServiceTestUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.2.1
+	 * @deprecated As of 7.0.0
 	 */
 	public static void addResourcePermission(
 			String roleName, String resourceName, int scope, String primKey,
@@ -99,14 +99,14 @@ public class ServiceTestUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.2.1
+	 * @deprecated As of 7.0.0
 	 */
 	public static Role addRole(String roleName, int roleType) throws Exception {
 		return RoleTestUtil.addRole(roleName, roleType);
 	}
 
 	/**
-	 * @deprecated As of 6.2.1
+	 * @deprecated As of 7.0.0
 	 */
 	public static Role addRole(
 			String roleName, int roleType, String resourceName, int scope,

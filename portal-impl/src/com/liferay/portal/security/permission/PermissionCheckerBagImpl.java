@@ -133,8 +133,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 	@Override
 	public boolean isContentReviewer(
-		PermissionChecker permissionChecker, Group group)
-
+			PermissionChecker permissionChecker, Group group)
 		throws Exception {
 
 		Boolean value = _contentReviewers.get(group.getCompanyId());
