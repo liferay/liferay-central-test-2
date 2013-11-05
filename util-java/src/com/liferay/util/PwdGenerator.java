@@ -62,7 +62,7 @@ public class PwdGenerator {
 			fullKeyLength += key.length();
 		}
 
-		// Calculate reseed period. Assuming chars from keys are unique.
+		// Calculate reseed period assuming that characters from keys are unique
 
 		int reseedPeriod = (int)(_MULTIPLIER / Math.log(fullKeyLength));
 
