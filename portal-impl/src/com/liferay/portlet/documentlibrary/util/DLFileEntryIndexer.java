@@ -59,12 +59,14 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryMetadata;
+import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryActionableDynamicQuery;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderActionableDynamicQuery;
@@ -255,26 +257,28 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			Document document, DLFileVersion dlFileVersion)
 		throws PortalException, SystemException {
 
-		List<DLFileEntryMetadata> dlFileEntryMetadatas =
-			DLFileEntryMetadataLocalServiceUtil.
-				getFileVersionFileEntryMetadatas(
-					dlFileVersion.getFileVersionId());
+		DLFileEntryType dlFileEntryType =
+			DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
+				dlFileVersion.getFileEntryTypeId());
 
-		for (DLFileEntryMetadata dlFileEntryMetadata : dlFileEntryMetadatas) {
+		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
+
+		for (DDMStructure ddmStructure : ddmStructures) {
 			Fields fields = null;
 
 			try {
+				DLFileEntryMetadata fileEntryMetadata =
+					DLFileEntryMetadataLocalServiceUtil.getFileEntryMetadata(
+						ddmStructure.getStructureId(),
+						dlFileVersion.getFileVersionId());
+
 				fields = StorageEngineUtil.getFields(
-					dlFileEntryMetadata.getDDMStorageId());
+					fileEntryMetadata.getDDMStorageId());
 			}
 			catch (Exception e) {
 			}
 
 			if (fields != null) {
-				DDMStructure ddmStructure =
-					DDMStructureLocalServiceUtil.getStructure(
-						dlFileEntryMetadata.getDDMStructureId());
-
 				DDMIndexerUtil.addAttributes(document, ddmStructure, fields);
 			}
 		}
@@ -534,28 +538,35 @@ public class DLFileEntryIndexer extends BaseIndexer {
 			DLFileVersion dlFileVersion, Locale locale)
 		throws Exception {
 
-		List<DLFileEntryMetadata> dlFileEntryMetadatas =
-			DLFileEntryMetadataLocalServiceUtil.
-				getFileVersionFileEntryMetadatas(
+		DLFileEntryType dlFileEntryType =
+			DLFileEntryTypeLocalServiceUtil.getDLFileEntryType(
+				dlFileVersion.getFileEntryTypeId());
+
+		List<DDMStructure> ddmStructures = dlFileEntryType.getDDMStructures();
+
+		StringBundler sb = new StringBundler(ddmStructures.size());
+
+		for (DDMStructure ddmStructure : ddmStructures) {
+			DLFileEntryMetadata fileEntryMetadata =
+				DLFileEntryMetadataLocalServiceUtil.fetchFileEntryMetadata(
+					ddmStructure.getStructureId(),
 					dlFileVersion.getFileVersionId());
 
-		StringBundler sb = new StringBundler(dlFileEntryMetadatas.size());
+			if (fileEntryMetadata == null) {
+				continue;
+			}
 
-		for (DLFileEntryMetadata dlFileEntryMetadata : dlFileEntryMetadatas) {
 			Fields fields = null;
 
 			try {
 				fields = StorageEngineUtil.getFields(
-					dlFileEntryMetadata.getDDMStorageId());
+					fileEntryMetadata.getDDMStorageId());
 			}
 			catch (Exception e) {
+				continue;
 			}
 
 			if (fields != null) {
-				DDMStructure ddmStructure =
-					DDMStructureLocalServiceUtil.getStructure(
-						dlFileEntryMetadata.getDDMStructureId());
-
 				sb.append(
 					DDMIndexerUtil.extractAttributes(
 						ddmStructure, fields, locale));
