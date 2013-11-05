@@ -417,15 +417,13 @@ public class Logger {
 	protected void log(String log, String message) {
 		StringBundler sb = new StringBundler();
 
-		String formattedMessage = StringEscapeUtils.escapeEcmaScript(message);
-
 		sb.append("logger = window.document.getElementById('");
 		sb.append(log);
 		sb.append("');");
 		sb.append("var newLine = window.document.createElement('div');");
 		sb.append("newLine.setAttribute('class', 'line');");
 		sb.append("newLine.innerHTML = '");
-		sb.append(formattedMessage);
+		sb.append(StringEscapeUtils.escapeEcmaScript(message));
 		sb.append("';");
 		sb.append("logger.appendChild(newLine);");
 		sb.append("logger.scrollTop = logger.scrollHeight;");
