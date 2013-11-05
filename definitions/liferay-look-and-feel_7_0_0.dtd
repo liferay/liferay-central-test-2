@@ -110,8 +110,8 @@ See the comments in the group-id element.
 The theme element contains the declarative data of a theme.
 -->
 <!ELEMENT theme (root-path?, templates-path?, css-path?, images-path?,
-javascript-path?, virtual-path?, template-extension?, settings?, wap-theme?,
-page-theme?, control-panel-theme?, roles?, color-scheme*,
+javascript-path?, virtual-path?, template-extension?, settings?,
+control-panel-theme?, page-theme?, wap-theme?, roles?, color-scheme*,
 layout-templates?)>
 
 <!--
@@ -265,22 +265,22 @@ See the comments in the settings element.
 >
 
 <!--
-Set the wap-theme value to true if the theme is designed for cellular phones or
-other mobile devices. The default value is false.
+Set the control-panel-theme value to true if the theme is designed for the
+Control Panel. The default value is false.
 -->
-<!ELEMENT wap-theme (#PCDATA)>
+<!ELEMENT control-panel-theme (#PCDATA)>
 
 <!--
-Set the page-theme value to false if the theme is not designed for pages. (e.g.,
-it could be used for the control panel. The default value is true.
+Set the page-theme value to true if the theme is designed for regular pages. The
+default value is true.
 -->
 <!ELEMENT page-theme (#PCDATA)>
 
 <!--
-Set the control-panel-theme value to true if the theme is designed for the
-control panel. The default value is false.
+Set the wap-theme value to true if the theme is designed for cellular phones or
+other mobile devices. The default value is false.
 -->
-<!ELEMENT control-panel-theme (#PCDATA)>
+<!ELEMENT wap-theme (#PCDATA)>
 
 <!--
 The roles element contains a list of role names. Users which have any of these
