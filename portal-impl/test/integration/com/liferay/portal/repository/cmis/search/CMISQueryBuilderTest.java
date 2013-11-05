@@ -59,16 +59,50 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		// save current status
+		_beanLocator = PortalBeanLocatorUtil.getBeanLocator();
 
-		_currentBeanLocator = PortalBeanLocatorUtil.getBeanLocator();
+		_mockBeanLocator = mock(BeanLocator.class);
 
-		_beanLocator = mock(BeanLocator.class);
+		PortalBeanLocatorUtil.setBeanLocator(
+			new BeanLocator() {
 
-		BeanLocator beanLocator = new WrapperBeanLocator(
-			_beanLocator, _currentBeanLocator);
+				@Override
+				public ClassLoader getClassLoader() {
+					return _beanLocator.getClassLoader();
+				}
 
-		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
+				@Override
+				public String[] getNames() {
+					return _beanLocator.getNames();
+				}
+
+				@Override
+				public Class<?> getType(String name)
+					throws BeanLocatorException {
+
+					return _beanLocator.getType(name);
+				}
+
+				@Override
+				public <T> Map<String, T> locate(Class<T> clazz)
+					throws BeanLocatorException {
+
+					return _beanLocator.locate(clazz);
+				}
+
+				@Override
+				public Object locate(String name) throws BeanLocatorException {
+					Object bean = _mockBeanLocator.locate(name);
+
+					if (bean != null) {
+						return bean;
+					}
+
+					return _beanLocator.locate(name);
+				}
+
+			}
+		);
 	}
 
 	@After
@@ -85,9 +119,7 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			}
 		}
 
-		// restore original status
-
-		PortalBeanLocatorUtil.setBeanLocator(_currentBeanLocator);
+		PortalBeanLocatorUtil.setBeanLocator(_beanLocator);
 	}
 
 	@Test
@@ -399,7 +431,7 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		T service = mock(serviceClass);
 
 		when(
-			_beanLocator.locate(
+			_mockBeanLocator.locate(
 				Mockito.eq(serviceClass.getName()))
 		).thenReturn(
 			service
@@ -414,54 +446,7 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		"SELECT cmis:objectId, SCORE() AS HITS FROM cmis:document WHERE (";
 
 	private BeanLocator _beanLocator;
-	private BeanLocator _currentBeanLocator;
+	private BeanLocator _mockBeanLocator;
 	private List<Class<?>> _serviceUtilClasses = new ArrayList<Class<?>>();
-
-	private class WrapperBeanLocator implements BeanLocator {
-
-		public WrapperBeanLocator(
-			BeanLocator mockBeanLocator, BeanLocator actualBeanLocator) {
-
-			_actualBeanLocator = actualBeanLocator;
-			_mockBeanLocator = mockBeanLocator;
-		}
-
-		@Override
-		public ClassLoader getClassLoader() {
-			return _actualBeanLocator.getClassLoader();
-		}
-
-		@Override
-		public String[] getNames() {
-			return _actualBeanLocator.getNames();
-		}
-
-		@Override
-		public Class<?> getType(String name) throws BeanLocatorException {
-			return _actualBeanLocator.getType(name);
-		}
-
-		@Override
-		public <T> Map<String, T> locate(Class<T> clazz)
-			throws BeanLocatorException {
-
-			return _actualBeanLocator.locate(clazz);
-		}
-
-		@Override
-		public Object locate(String name) throws BeanLocatorException {
-			Object bean = _mockBeanLocator.locate(name);
-
-			if (bean != null) {
-				return bean;
-			}
-
-			return _actualBeanLocator.locate(name);
-		}
-
-		private BeanLocator _actualBeanLocator;
-		private BeanLocator _mockBeanLocator;
-
-	}
 
 }
