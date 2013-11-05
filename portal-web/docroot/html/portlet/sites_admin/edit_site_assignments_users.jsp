@@ -214,8 +214,8 @@ searchContainer.setEmptyResultsMessage(emptyResultsMessage);
 			<c:when test='<%= tabs2.equals("current") %>'>
 
 				<%
-				viewUsersURL.setParameter("redirect", currentURL);
 				viewUsersURL.setParameter("tabs2", "available");
+				viewUsersURL.setParameter("redirect", currentURL);
 				%>
 
 				<liferay-ui:icon
