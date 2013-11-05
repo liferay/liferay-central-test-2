@@ -54,5 +54,9 @@
 		.dropup .btn .caret {
 			border-bottom-width: 5px;
 		}
+
+		button.close, button.btn.close {
+			width: auto;
+		}
 	}
 }
