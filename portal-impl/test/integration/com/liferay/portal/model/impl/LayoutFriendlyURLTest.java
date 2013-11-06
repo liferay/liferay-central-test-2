@@ -238,6 +238,33 @@ public class LayoutFriendlyURLTest {
 
 	@Test
 	@Transactional
+	public void testMultipleInvalidFriendlyURLMapperURL() throws Exception {
+		Group group = GroupTestUtil.addGroup();
+
+		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
+
+		friendlyURLMap.put(LocaleUtil.SPAIN, "/tags/dos");
+		friendlyURLMap.put(LocaleUtil.US, "/tags/two");
+
+		try {
+			addLayout(group.getGroupId(), false, friendlyURLMap);
+		}
+		catch (LayoutFriendlyURLsException lfurlse) {
+			List<LayoutFriendlyURLException> layoutFriendlyURLExceptions =
+				lfurlse.getLayoutFriendlyURLExceptions();
+
+			Assert.assertEquals(2, layoutFriendlyURLExceptions.size());
+
+			for (LayoutFriendlyURLException lfurle :
+					layoutFriendlyURLExceptions) {
+
+				Assert.assertEquals(lfurle.getKeywordConflict(), "tags");
+			}
+		}
+	}
+
+	@Test
+	@Transactional
 	public void testSameFriendlyURLDifferentLocaleDifferentGroup()
 		throws Exception {
 
@@ -375,32 +402,6 @@ public class LayoutFriendlyURLTest {
 			Assert.fail();
 		}
 		catch (LayoutFriendlyURLsException lfurle) {
-		}
-	}
-
-	@Transactional
-	public void testMultipleInvalidFriendlyURLMapperURL() throws Exception {
-		Group group = GroupTestUtil.addGroup();
-
-		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
-
-		friendlyURLMap.put(LocaleUtil.SPAIN, "/tags/dos");
-		friendlyURLMap.put(LocaleUtil.US, "/tags/two");
-
-		try {
-			addLayout(group.getGroupId(), false, friendlyURLMap);
-		}
-		catch (LayoutFriendlyURLsException lfurlse) {
-			List<LayoutFriendlyURLException> layoutFriendlyURLExceptions =
-				lfurlse.getLayoutFriendlyURLExceptions();
-
-			Assert.assertEquals(2, layoutFriendlyURLExceptions.size());
-
-			for (LayoutFriendlyURLException lfurle :
-				layoutFriendlyURLExceptions) {
-
-				Assert.assertEquals(lfurle.getKeywordConflict(), "tags");
-			}
 		}
 	}
 
