@@ -143,32 +143,32 @@ public class QueryUtilTest {
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder1a() throws Exception {
+	public void testSQLWithLimitWithOuterOrder1Ascending() throws Exception {
 		testSQLWithLimitWithOuterOrder("ASC", 0, 10, 0, 9);
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder1d() throws Exception {
+	public void testSQLWithLimitWithOuterOrder1Descending() throws Exception {
 		testSQLWithLimitWithOuterOrder("DESC", 0, 10, 19, 10);
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder2a() throws Exception {
+	public void testSQLWithLimitWithOuterOrder2Ascending() throws Exception {
 		testSQLWithLimitWithOuterOrder("ASC", 5, 15, 5, 14);
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder2d() throws Exception {
+	public void testSQLWithLimitWithOuterOrder2Descending() throws Exception {
 		testSQLWithLimitWithOuterOrder("DESC", 5, 15, 14, 5);
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder3a() throws Exception {
+	public void testSQLWithLimitWithOuterOrder3Ascending() throws Exception {
 		testSQLWithLimitWithOuterOrder("ASC", 10, 20, 10, 19);
 	}
 
 	@Test
-	public void testSQLWithLimitWithOuterOrder3d() throws Exception {
+	public void testSQLWithLimitWithOuterOrder3Descending() throws Exception {
 		testSQLWithLimitWithOuterOrder("DESC", 10, 20, 9, 0);
 	}
 
