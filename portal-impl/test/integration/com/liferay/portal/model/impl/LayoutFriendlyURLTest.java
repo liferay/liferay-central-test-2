@@ -379,7 +379,7 @@ public class LayoutFriendlyURLTest {
 	}
 
 	@Transactional
-	public void testSeveralInvalidFriendlyURLMapperURL() throws Exception {
+	public void testMultipleInvalidFriendlyURLMapperURL() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
