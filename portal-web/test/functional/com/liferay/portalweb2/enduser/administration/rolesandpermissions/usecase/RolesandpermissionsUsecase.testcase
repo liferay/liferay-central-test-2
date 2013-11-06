@@ -44,11 +44,10 @@
 			<var name="roleName" value="${roleName}" />
 		</execute>
 
-		<var name="key_permissionNavigationValue" value="${permissionNavigation3Value}" />
-		<var name="key_permissionDefinitionValue" value="${permissionDefinition3Value}" />
-
-		<execute action="CPRolesDefinepermissions#assertTextEquals" locator-key1="PERMISSION_TABLE_PERMISSIONS" value1="${permissionNavigation3Value}" />
-		<execute action="CPRolesDefinepermissions#assertTextEquals" locator-key1="PERMISSION_TABLE_PERMISSIONS" value1="${permissionDefinition3Value}" />
+		<execute macro="Role#viewPermissionCP">
+			<var name="permissionNavigationValue" value="${permissionNavigation3Value}" />
+			<var name="permissionDefinitionValue" value="${permissionDefinition3Value}" />
+		</execute>
 
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Roles" />
@@ -62,11 +61,10 @@
 			<var name="roleName" value="${roleName}" />
 		</execute>
 
-		<var name="key_permissionNavigationValue" value="${permissionNavigation4Value}" />
-		<var name="key_permissionDefinitionValue" value="${permissionDefinition4Value}" />
-
-		<execute action="CPRolesDefinepermissions#assertTextEquals" locator-key1="PERMISSION_TABLE_PERMISSIONS" value1="${permissionNavigation4Value}" />
-		<execute action="CPRolesDefinepermissions#assertTextEquals" locator-key1="PERMISSION_TABLE_PERMISSIONS" value1="${permissionDefinition4Value}" />
+		<execute macro="Role#viewPermissionCP">
+			<var name="permissionNavigationValue" value="${permissionNavigation4Value}" />
+			<var name="permissionDefinitionValue" value="${permissionDefinition4Value}" />
+		</execute>
 	</command>
 
 	<command name="ViewDocumentsAndMediaAddRepositoryPermissionSiteMemberRole" priority="5">
