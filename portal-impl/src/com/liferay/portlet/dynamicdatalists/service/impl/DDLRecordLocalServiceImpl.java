@@ -696,13 +696,13 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 	}
 
 	/**
-	 * @see com.liferay.portlet.documentlibrary.service.impl.DLFileEntryLocalServiceImpl#isKeepFileVersionLabel(
-	 *      DLFileEntry, DLFileVersion, DLFileVersion, int)}
+	 * @see DLFileEntryLocalServiceImpl#isKeepFileVersionLabel(DLFileEntry,
+	 *      DLFileVersion, DLFileVersion, int)}
 	 */
 	protected boolean isKeepRecordVersionLabel(
 			DDLRecordVersion lastRecordVersion,
 			DDLRecordVersion latestRecordVersion, int workflowContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (workflowContext == WorkflowConstants.ACTION_SAVE_DRAFT) {
 			return false;
