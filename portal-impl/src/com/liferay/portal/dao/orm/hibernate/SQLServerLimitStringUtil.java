@@ -171,10 +171,6 @@ public class SQLServerLimitStringUtil {
 		return innerSelectFrom;
 	}
 
-	private static Pattern _columnAliasPattern = Pattern.compile(
-		"[\\w\\.]+(?:\\(.+?\\))? AS (\\w+)", Pattern.CASE_INSENSITIVE);
-	private static Pattern _distinctPattern = Pattern.compile(
-		" DISTINCT ", Pattern.CASE_INSENSITIVE);
 	private static Pattern _qualifiedColumnPattern = Pattern.compile(
 		"\\w+\\.([\\w\\*]+)");
 	private static Pattern _selectPattern = Pattern.compile(
