@@ -1216,7 +1216,9 @@ public class GroupFinderImpl
 				if (value instanceof Integer) {
 					Integer valueInteger = (Integer)value;
 
-					qPos.add(valueInteger);
+					if (Validator.isNotNull(valueInteger)) {
+						qPos.add(valueInteger);
+					}
 				}
 				else if (value instanceof Long) {
 					Long valueLong = (Long)value;
