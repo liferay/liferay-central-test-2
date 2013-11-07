@@ -57,6 +57,25 @@ public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Ignore()
 	@Override
 	@Test
+	public void testTrashBaseModelAndParentAndDeleteGroupTrashEntries()
+		throws Exception {
+	}
+
+	@Ignore()
+	@Override
+	@Test
+	public void testTrashBaseModelAndParentAndDeleteParent() throws Exception {
+	}
+
+	@Ignore()
+	@Override
+	@Test
+	public void testTrashBaseModelAndParentAndRestoreModel() throws Exception {
+	}
+
+	@Ignore()
+	@Override
+	@Test
 	public void testTrashDuplicate() throws Exception {
 	}
 
@@ -105,19 +124,13 @@ public class BlogsEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Ignore()
 	@Override
 	@Test
+	public void testTrashParentAndDeleteGroupTrashEntries() throws Exception {
+	}
+
+	@Ignore()
+	@Override
+	@Test
 	public void testTrashParentAndDeleteParent() throws Exception {
-	}
-
-	@Ignore()
-	@Override
-	@Test
-	public void testTrashParentAndDeleteTrashEntries() throws Exception {
-	}
-
-	@Ignore()
-	@Override
-	@Test
-	public void testTrashParentAndRestoreModel() throws Exception {
 	}
 
 	@Ignore()
