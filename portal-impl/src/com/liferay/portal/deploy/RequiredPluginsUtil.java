@@ -43,28 +43,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class RequiredPluginsUtil {
 
-	public static synchronized void onUndeployCheckRequiredPlugins() {
-
-		// During an undeploy event, we synchronously and immediately check for
-		// required plugins. We also schedule a required plugins check in case
-		// the required plugins failed to deploy.
-
-		_unschedule(false);
-
-		checkRequiredPlugins();
-
-		schedule();
-	}
-
 	public static synchronized void startCheckingRequiredPlugins() {
-		schedule();
-	}
+		if (_scheduledExecutorService != null) {
+			return;
+		}
 
-	public static synchronized void stopCheckingRequiredPlugins() {
-		_unschedule(true);
-	}
-
-	protected static void schedule() {
 		_scheduledExecutorService = Executors.newSingleThreadScheduledExecutor(
 			new NamedThreadFactory(
 				RequiredPluginsUtil.class.getName(), Thread.NORM_PRIORITY,
@@ -80,6 +63,10 @@ public class RequiredPluginsUtil {
 
 			},
 			Time.MINUTE, Time.MINUTE, TimeUnit.MILLISECONDS);
+	}
+
+	public static synchronized void stopCheckingRequiredPlugins() {
+		_unschedule(true);
 	}
 
 	protected synchronized static void checkRequiredPlugins() {

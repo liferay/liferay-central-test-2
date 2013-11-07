@@ -128,7 +128,7 @@ public class HotDeployImpl implements HotDeploy {
 
 		_pacl.unregister(classLoader);
 
-		RequiredPluginsUtil.onUndeployCheckRequiredPlugins();
+		RequiredPluginsUtil.startCheckingRequiredPlugins();
 	}
 
 	@Override
