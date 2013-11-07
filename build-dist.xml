@@ -1631,12 +1631,12 @@ release was successful.</echo>
 			<else>
 				<if>
 					<os family="windows" />
-				<then>
-					<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%JONAS_ROOT%/conf/java.policy" />
-				</then>
-				<else>
-					<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$JONAS_ROOT/conf/java.policy" />
-				</else>
+					<then>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%JONAS_ROOT%/conf/java.policy" />
+					</then>
+					<else>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$JONAS_ROOT/conf/java.policy" />
+					</else>
 				</if>
 			</else>
 		</if>
@@ -1829,15 +1829,13 @@ release was successful.</echo>
 			<else>
 				<if>
 					<os family="windows" />
-				<then>
-					<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%CATALINA_BASE%/conf/catalina.policy" />
-				</then>
-				<else>
-					<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
-				</else>
+					<then>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%CATALINA_BASE%/conf/catalina.policy" />
+					</then>
+					<else>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
+					</else>
 				</if>
-
-
 			</else>
 		</if>
 
