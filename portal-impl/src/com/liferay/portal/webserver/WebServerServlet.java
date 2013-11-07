@@ -669,12 +669,12 @@ public class WebServerServlet extends HttpServlet {
 				queryString = "&imageThumbnail=3";
 			}
 
-			LiferayFileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
+			FileEntry fileEntry = new LiferayFileEntry(dlFileEntry);
 
-			LiferayFileVersion fileVersion = new LiferayFileVersion(
+			FileVersion fileVersion = new LiferayFileVersion(
 				dlFileEntry.getFileVersion());
 
-			if (PropsValues.DL_FILE_ENTRY_IG_THUMBNAIL_LEGACY_GENERATION &&
+			if (PropsValues.DL_FILE_ENTRY_IG_THUMBNAIL_GENERATION &&
 				Validator.isNotNull(queryString)) {
 
 				ImageProcessorUtil.hasImages(fileVersion);
