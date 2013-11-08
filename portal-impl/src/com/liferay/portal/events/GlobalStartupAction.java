@@ -315,18 +315,20 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Plugins
 
-		PortalLifecycleUtil.register(new BasePortalLifecycle() {
+		PortalLifecycleUtil.register(
+			new BasePortalLifecycle() {
 
-			@Override
-			protected void doPortalDestroy() {
-			}
+				@Override
+				protected void doPortalDestroy() {
+				}
 
-			@Override
-			protected void doPortalInit() {
-				RequiredPluginsUtil.startCheckingRequiredPlugins();
-			}
+				@Override
+				protected void doPortalInit() {
+					RequiredPluginsUtil.startCheckingRequiredPlugins();
+				}
 
-		}, PortalLifecycle.METHOD_INIT);
+			},
+			PortalLifecycle.METHOD_INIT);
 
 		// POP server
 
