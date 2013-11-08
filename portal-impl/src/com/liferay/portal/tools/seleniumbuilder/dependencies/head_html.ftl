@@ -147,6 +147,15 @@
 			margin-right: 5px;
 		}
 
+		.parameter-border {
+			border-style: inset;
+			margin-left: 38px;
+		}
+
+		.parameter-color {
+			color: darkgray;
+		}
+
 		.pass {
 			background-color: #B5FF8B;
 		}

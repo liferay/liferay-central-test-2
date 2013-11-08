@@ -22,10 +22,10 @@
 
 <div>
 	<div class="expand-line">
+		<#assign displayElementAttributes = displayElement.attributes()>
+
 		<span class="arrow">&lt;</span>
 		<span class="tag">${displayElementName}</span>
-
-		<#assign displayElementAttributes = displayElement.attributes()>
 
 		<#list displayElementAttributes as displayElementAttribute>
 			<#if displayElementAttribute.getName() != "line-number">
@@ -38,6 +38,48 @@
 		<span class="arrow">&gt;</span>
 
 		<div class="line-number">${lineNumber}</div>
+
+		<#if collapsed>
+			<#assign displayChildElements = displayElement.elements()>
+
+			<#assign displayChildElementsSize = displayChildElements?size>
+
+			<#if
+				(displayElementName == "execute") &&
+				(displayChildElementsSize != 0)
+			>
+				<div class="parameter-border">
+					<#assign displayChildElements = displayElement.elements() />
+
+					<#list displayChildElements as displayChildElement>
+						<span class="parameter-color">&lt;</span>
+						<span class="parameter-color"> ${displayChildElement.getName()} </span>
+
+						<#assign displayChildElementAttributes = displayChildElement.attributes()/>
+
+						<#list displayChildElementAttributes as displayChildElementAttribute>
+							<#if displayChildElementAttribute.getName() != "line-number">
+								<span class="parameter-color"> ${displayChildElementAttribute.getName()} </span>
+								<span class="parameter-color"> = </span>
+								<span>&quot;${displayChildElementAttribute.getValue()}&quot;</span>
+							</#if>
+						</#list>
+
+						<span class="parameter-color">&gt;</span>
+
+						<div class="line-number">
+							<#list displayChildElementAttributes as displayChildElementAttribute>
+								<#if displayChildElementAttribute.getName() == "line-number">
+									${displayChildElementAttribute.getValue()}
+								</#if>
+							</#list>
+						</div>
+
+						<br />
+					</#list>
+				</div>
+			</#if>
+		</#if>
 	</div>
 </div>
 
