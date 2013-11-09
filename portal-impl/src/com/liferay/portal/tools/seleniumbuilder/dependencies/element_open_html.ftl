@@ -49,23 +49,23 @@
 				(displayChildElementsSize != 0)
 			>
 				<div class="parameter-border">
-					<#assign displayChildElements = displayElement.elements() />
+					<#assign displayChildElements = displayElement.elements()>
 
 					<#list displayChildElements as displayChildElement>
-						<span class="parameter-color">&lt;</span>
-						<span class="parameter-color"> ${displayChildElement.getName()} </span>
+						<span>&lt;</span>
+						<span>${displayChildElement.getName()}</span>
 
-						<#assign displayChildElementAttributes = displayChildElement.attributes()/>
+						<#assign displayChildElementAttributes = displayChildElement.attributes()>
 
 						<#list displayChildElementAttributes as displayChildElementAttribute>
 							<#if displayChildElementAttribute.getName() != "line-number">
-								<span class="parameter-color"> ${displayChildElementAttribute.getName()} </span>
-								<span class="parameter-color"> = </span>
-								<span>&quot;${displayChildElementAttribute.getValue()}&quot;</span>
+								<span>${displayChildElementAttribute.getName()}</span>
+								<span>=</span>
+								<span class="parameter-value">&quot;${displayChildElementAttribute.getValue()}&quot;</span>
 							</#if>
 						</#list>
 
-						<span class="parameter-color">&gt;</span>
+						<span>/&gt;</span>
 
 						<div class="line-number">
 							<#list displayChildElementAttributes as displayChildElementAttribute>
