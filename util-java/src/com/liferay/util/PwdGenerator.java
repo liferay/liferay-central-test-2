@@ -44,7 +44,7 @@ public class PwdGenerator {
 
 	public static String getPassword(int length, String... keys) {
 		if (keys == null) {
-			throw new IllegalArgumentException("Keys must be defined!");
+			throw new IllegalArgumentException("Keys are null");
 		}
 
 		StringBundler fullKeySB = new StringBundler(keys);
