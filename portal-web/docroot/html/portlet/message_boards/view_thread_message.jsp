@@ -22,9 +22,9 @@ String className = (String)request.getAttribute("edit_message.jsp-className");
 Integer depth = (Integer)request.getAttribute("edit_message.jsp-depth");
 Boolean editable = (Boolean)request.getAttribute("edit_message.jsp-editable");
 MBMessage message = (MBMessage)request.getAttribute("edit_message.jsp-message");
-Boolean showDeletedAttachments = (Boolean)request.getAttribute("edit-message.jsp-showDeletedAttachments");
+Boolean showDeletedAttachmentsFileEntries = (Boolean)request.getAttribute("edit-message.jsp-showDeletedAttachmentsFileEntries");
 Boolean showPermanentLink = (Boolean)request.getAttribute("edit-message.jsp-showPermanentLink");
-Boolean showRecentPost = (Boolean)request.getAttribute("edit-message.jsp-showRecentPost");
+Boolean showRecentPosts = (Boolean)request.getAttribute("edit-message.jsp-showRecentPosts");
 MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 %>
 
@@ -70,7 +70,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 							<span><liferay-ui:message key="join-date" />:</span> <%= dateFormatDate.format(userDisplay.getCreateDate()) %>
 						</div>
 
-						<c:if test="<%= showRecentPost %>">
+						<c:if test="<%= showRecentPosts %>">
 							<portlet:renderURL var="recentPostsURL">
 								<portlet:param name="struts_action" value="/message_boards/view" />
 								<portlet:param name="topLink" value="recent-posts" />
@@ -359,7 +359,7 @@ MBThread thread = (MBThread)request.getAttribute("edit_message.jsp-thread");
 								}
 								%>
 
-								<c:if test="<%= showDeletedAttachments && (deletedAttachmentsFileEntriesCount > 0) && TrashUtil.isTrashEnabled(scopeGroupId) && MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
+								<c:if test="<%= showDeletedAttachmentsFileEntries && (deletedAttachmentsFileEntriesCount > 0) && TrashUtil.isTrashEnabled(scopeGroupId) && MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
 									<li class="message-attachment">
 										<portlet:renderURL var="viewTrashAttachmentsURL">
 											<portlet:param name="struts_action" value="/message_boards/view_deleted_message_attachments" />
