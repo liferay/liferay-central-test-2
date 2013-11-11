@@ -22,10 +22,10 @@
 
 <div>
 	<div class="expand-line">
-		<#assign displayElementAttributes = displayElement.attributes()>
-
 		<span class="arrow">&lt;</span>
 		<span class="tag">${displayElementName}</span>
+
+		<#assign displayElementAttributes = displayElement.attributes()>
 
 		<#list displayElementAttributes as displayElementAttribute>
 			<#if displayElementAttribute.getName() != "line-number">

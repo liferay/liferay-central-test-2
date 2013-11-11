@@ -7,8 +7,6 @@
 	(displayChildElementsSize != 0)
 >
 	<div class="parameter-border">
-		<#assign displayChildElements = displayElement.elements()>
-
 		<#list displayChildElements as displayChildElement>
 			<span>&lt;</span>
 			<span>${displayChildElement.getName()}</span>

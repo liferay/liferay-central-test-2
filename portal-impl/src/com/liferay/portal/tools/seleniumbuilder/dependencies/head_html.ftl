@@ -149,6 +149,7 @@
 		}
 
 		.parameter-border {
+			background-color: white;
 			border-style: inset;
 			color: darkgray;
 			margin-left: 38px;
