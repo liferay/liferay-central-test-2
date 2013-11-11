@@ -228,7 +228,7 @@
 </tr>
 <tr>
 	<td>COMMENTS_ADD</td>
-	<td>//span[@class='taglib-text' and contains(.,'Add Comment')]</td>
+	<td>//span/a/span[contains(.,'Add Comment')]</td>
 	<td></td>
 </tr>
 <tr>
