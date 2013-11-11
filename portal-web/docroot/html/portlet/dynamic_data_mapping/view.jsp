@@ -36,7 +36,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 	<c:choose>
 		<c:when test="<%= rse.getType() == RequiredStructureException.REFERENCED_TEMPLATE %>">
-			<liferay-ui:message key="required-structures-could-not-be-deleted-they-are-referenced-by-templates" />
+			<liferay-ui:message key="required-structures-could-not-be-deleted.-they-are-referenced-by-templates" />
 		</c:when>
 		<c:otherwise>
 			<liferay-ui:message key="required-structures-could-not-be-deleted" />
