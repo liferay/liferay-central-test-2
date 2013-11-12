@@ -164,7 +164,8 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 				className.lastIndexOf(StringPool.PERIOD) + 1);
 
 			if (!isClassOrVariableRequired(
-					fileName, className, includeFileNames, checkedFileNames)) {
+					fileName, className, "class", includeFileNames,
+					checkedFileNames)) {
 
 				unneededImports.add(importLine);
 			}
@@ -907,11 +908,12 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		Set<String> checkedFileNames = new HashSet<String>();
 
 		return !isClassOrVariableRequired(
-			fileName, variableName, includeFileNames, checkedFileNames);
+			fileName, variableName, "variable", includeFileNames,
+			checkedFileNames);
 	}
 
 	protected boolean isClassOrVariableRequired(
-		String fileName, String name, Set<String> includeFileNames,
+		String fileName, String name, String type, Set<String> includeFileNames,
 		Set<String> checkedFileNames) {
 
 		if (checkedFileNames.contains(fileName)) {
@@ -927,12 +929,13 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		}
 
 		Pattern pattern = Pattern.compile(
-			"[^A-Za-z0-9_]" + name + "[^A-Za-z0-9_]");
+			"[^A-Za-z0-9_\"]" + name + "[^A-Za-z0-9_\"]");
 
 		Matcher matcher = pattern.matcher(content);
 
 		if (matcher.find() &&
-			((checkedFileNames.size() > 1) || matcher.find())) {
+			(type.equals("class") || (checkedFileNames.size() > 1) ||
+			 matcher.find())) {
 
 			return true;
 		}
@@ -956,7 +959,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		for (String includeFileName : includeFileNamesArray) {
 			if (!checkedFileNames.contains(includeFileName) &&
 				isClassOrVariableRequired(
-					includeFileName, name, includeFileNames,
+					includeFileName, name, type, includeFileNames,
 					checkedFileNames)) {
 
 				return true;
