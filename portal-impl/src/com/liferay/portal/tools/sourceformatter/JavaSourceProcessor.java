@@ -1077,7 +1077,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				fileName,
 				"Use SecureRandomUtil or com.liferay.portal.kernel.security." +
 					"SecureRandom instead of java.security.SecureRandom: " +
-					fileName);
+						fileName);
 		}
 
 		// LPS-41315
