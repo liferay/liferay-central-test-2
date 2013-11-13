@@ -63,7 +63,6 @@ public class PACLExecutionTestListener
 		ClassLoaderPool.register(
 			hotDeployEvent.getServletContextName(),
 			hotDeployEvent.getContextClassLoader());
-
 		PortletClassLoaderUtil.setServletContextName(
 			hotDeployEvent.getServletContextName());
 
@@ -73,7 +72,6 @@ public class PACLExecutionTestListener
 		}
 		finally {
 			ClassLoaderPool.unregister(hotDeployEvent.getServletContextName());
-
 			PortletClassLoaderUtil.setServletContextName(null);
 		}
 	}
@@ -121,7 +119,6 @@ public class PACLExecutionTestListener
 		ClassLoaderPool.register(
 			hotDeployEvent.getServletContextName(),
 			hotDeployEvent.getContextClassLoader());
-
 		PortletClassLoaderUtil.setServletContextName(
 			hotDeployEvent.getServletContextName());
 
@@ -131,7 +128,6 @@ public class PACLExecutionTestListener
 		}
 		finally {
 			ClassLoaderPool.unregister(hotDeployEvent.getServletContextName());
-
 			PortletClassLoaderUtil.setServletContextName(null);
 		}
 
