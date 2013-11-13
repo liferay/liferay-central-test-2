@@ -50,7 +50,7 @@ public class PortletClassLoaderUtil {
 
 		if (servletContextName == null) {
 			throw new IllegalStateException(
-				"No servlet context name specified");
+				"No servlet context name attached in current context");
 		}
 
 		return servletContextName;

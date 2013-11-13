@@ -569,13 +569,14 @@ public abstract class BaseClusterExecutorImplTestCase
 			new MockPortalExecutorManager());
 
 		if (loadSpringXML) {
-			String servletContextName = StringUtil.randomId();
-
 			Class<?> clazz = getClass();
 
 			ClassLoader classLoader = clazz.getClassLoader();
 
+			String servletContextName = StringUtil.randomId();
+
 			ClassLoaderPool.register(servletContextName, classLoader);
+
 			PortletClassLoaderUtil.setServletContextName(servletContextName);
 
 			try {
@@ -593,8 +594,8 @@ public abstract class BaseClusterExecutorImplTestCase
 					SERVLET_CONTEXT_NAME, beanLocator);
 			}
 			finally {
-				ClassLoaderPool.unregister(servletContextName);
 				PortletClassLoaderUtil.setServletContextName(null);
+				ClassLoaderPool.unregister(servletContextName);
 			}
 		}
 
