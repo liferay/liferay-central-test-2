@@ -162,21 +162,21 @@ public class CMISRepository extends BaseCmisRepository {
 			ContentStream contentStream = new ContentStreamImpl(
 				title, BigInteger.valueOf(size), mimeType, is);
 
-			Document doc;
+			Document document = null;
 
 			if (_cmisRepositoryDetector.isNuxeo5_5OrHigher()) {
-				doc = cmisFolder.createDocument(
+				document = cmisFolder.createDocument(
 					properties, contentStream, VersioningState.NONE);
 
-				doc.checkIn(
+				document.checkIn(
 					true, Collections.EMPTY_MAP, null, StringPool.BLANK);
 			}
 			else {
-				doc = cmisFolder.createDocument(
+				document = cmisFolder.createDocument(
 					properties, contentStream, null);
 			}
 
-			return toFileEntry(doc);
+			return toFileEntry(document);
 		}
 		catch (PortalException pe) {
 			throw pe;
@@ -875,7 +875,7 @@ public class CMISRepository extends BaseCmisRepository {
 
 		setCachedSession(session);
 
-		_initCMISRepositoryDetector();
+		initCMISRepositoryDetector();
 
 		return session;
 	}
@@ -2114,6 +2114,16 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	protected void initCMISRepositoryDetector()
+		throws PortalException, SystemException {
+
+		Session session = getSession();
+
+		RepositoryInfo repositoryInfo = session.getRepositoryInfo();
+
+		_cmisRepositoryDetector = new CMISRepositoryDetector(repositoryInfo);
+	}
+
 	protected boolean isActionAllowable(String objectId, Action action)
 		throws PortalException, SystemException {
 
@@ -2388,16 +2398,6 @@ public class CMISRepository extends BaseCmisRepository {
 		if (objectId != null) {
 			throw new DuplicateFolderNameException(title);
 		}
-	}
-
-	private void _initCMISRepositoryDetector()
-		throws PortalException, SystemException {
-
-		Session session = getSession();
-
-		RepositoryInfo repositoryInfo = session.getRepositoryInfo();
-
-		_cmisRepositoryDetector = new CMISRepositoryDetector(repositoryInfo);
 	}
 
 	private static final int _DELETE_DEEP = -1;

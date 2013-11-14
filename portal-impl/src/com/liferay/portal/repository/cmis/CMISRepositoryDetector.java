@@ -26,7 +26,7 @@ import org.apache.chemistry.opencmis.commons.data.RepositoryInfo;
 public class CMISRepositoryDetector {
 
 	public CMISRepositoryDetector(RepositoryInfo repositoryInfo) {
-		_detectVendor(repositoryInfo);
+		detectVendor(repositoryInfo);
 	}
 
 	public boolean isNuxeo() {
@@ -45,7 +45,7 @@ public class CMISRepositoryDetector {
 		return _nuxeo5_8OrHigher;
 	}
 
-	private void _detectNuxeo(RepositoryInfo repositoryInfo) {
+	protected void detectNuxeo(RepositoryInfo repositoryInfo) {
 		String productVersion = repositoryInfo.getProductVersion();
 
 		String[] versionParts = StringUtil.split(
@@ -73,13 +73,13 @@ public class CMISRepositoryDetector {
 		}
 	}
 
-	private void _detectVendor(RepositoryInfo repositoryInfo) {
+	private void detectVendor(RepositoryInfo repositoryInfo) {
 		String productName = repositoryInfo.getProductName();
 
 		if (productName.contains(_NUXEO_ID)) {
 			_nuxeo = true;
 
-			_detectNuxeo(repositoryInfo);
+			detectNuxeo(repositoryInfo);
 		}
 	}
 
