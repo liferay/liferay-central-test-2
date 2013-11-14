@@ -132,7 +132,7 @@ portletURL.setParameter("tabs3", tabs3);
 								<portlet:param name="tabs2" value="users" />
 								<portlet:param name="tabs3" value="current" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="passwordPolicyId" value="<%= String.valueOf(curPasswordPolicy.getPasswordPolicyId())%>" />
+								<portlet:param name="passwordPolicyId" value="<%= String.valueOf(curPasswordPolicy.getPasswordPolicyId()) %>" />
 							</portlet:renderURL>
 
 							<liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "this-user-is-already-assigned-to-password-policy-x", new Object[] {assignMembersURL, curPasswordPolicy.getName()}) %>' />
@@ -226,7 +226,7 @@ portletURL.setParameter("tabs3", tabs3);
 								<portlet:param name="tabs2" value="organizations" />
 								<portlet:param name="tabs3" value="current" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="passwordPolicyId" value="<%= String.valueOf(curPasswordPolicy.getPasswordPolicyId())%>" />
+								<portlet:param name="passwordPolicyId" value="<%= String.valueOf(curPasswordPolicy.getPasswordPolicyId()) %>" />
 							</portlet:renderURL>
 
 							<liferay-ui:icon-help message='<%= LanguageUtil.format(pageContext, "this-organization-is-already-assigned-to-password-policy-x", new Object[] {assignMembersURL, curPasswordPolicy.getName()}) %>' />
