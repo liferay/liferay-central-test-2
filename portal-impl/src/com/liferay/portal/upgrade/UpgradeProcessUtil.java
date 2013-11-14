@@ -61,7 +61,7 @@ public class UpgradeProcessUtil {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				String languageId = rs.getString("languageId");
+				languageId = rs.getString("languageId");
 
 				_languageIds.put(companyId, languageId);
 
