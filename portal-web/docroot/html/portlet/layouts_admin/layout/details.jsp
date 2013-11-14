@@ -55,8 +55,8 @@ StringBuilder friendlyURLBase = new StringBuilder();
 	<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>" focusField="friendlyURL">
 
 		<%
+		Locale exceptionLocale = null;
 		LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)errorException;
-		Locale localeException = null;
 		%>
 
 		<%@ include file="/html/portlet/layouts_admin/error_friendly_url_exception.jspf" %>
@@ -69,9 +69,9 @@ StringBuilder friendlyURLBase = new StringBuilder();
 
 		Map<Locale, Exception> localizedExceptionsMap = lfurlse.getLocalizedExceptionsMap();
 
-		for (Map.Entry<Locale, Exception> localizedException : localizedExceptionsMap.entrySet()) {
-			LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)localizedException.getValue();
-			Locale localeException = localizedException.getKey();
+		for (Map.Entry<Locale, Exception> entry : localizedExceptionsMap.entrySet()) {
+			Locale exceptionLocale = entry.getKey();
+			LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)entry.getValue();
 		%>
 
 			<%@ include file="/html/portlet/layouts_admin/error_friendly_url_exception.jspf" %>
