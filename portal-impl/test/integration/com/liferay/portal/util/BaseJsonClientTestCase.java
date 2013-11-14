@@ -35,7 +35,8 @@ import org.apache.http.client.CredentialsProvider;
 import org.apache.http.client.HttpResponseException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.entity.mime.MultipartEntity;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.ContentBody;
 import org.apache.http.entity.mime.content.StringBody;
@@ -129,23 +130,27 @@ public class BaseJsonClientTestCase {
 			byte[] bytes, String mimeType, String fileName)
 		throws Exception {
 
-		return new ByteArrayBody(bytes, mimeType, fileName);
+		return new ByteArrayBody(bytes, ContentType.create(mimeType), fileName);
 	}
 
-	public MultipartEntity getMultipartEntity(String[] names, Object[] values)
+	public MultipartEntityBuilder getMultipartEntityBuilder(
+			String[] names, Object[] values)
 		throws Exception {
 
-		MultipartEntity multipartEntity = new MultipartEntity();
+		MultipartEntityBuilder multipartEntityBuilder =
+			MultipartEntityBuilder.create();
 
 		for (int i = 0; i < names.length; i++) {
-			multipartEntity.addPart(names[i], getStringBody(values[i]));
+			multipartEntityBuilder.addPart(names[i], getStringBody(values[i]));
 		}
 
-		return multipartEntity;
+		return multipartEntityBuilder;
 	}
 
 	public ContentBody getStringBody(Object value) throws Exception {
-		return new StringBody(String.valueOf(value), Charset.defaultCharset());
+		return new StringBody(
+			String.valueOf(value),
+			ContentType.create(null, Charset.defaultCharset()));
 	}
 
 	public String parseResponseContent(
