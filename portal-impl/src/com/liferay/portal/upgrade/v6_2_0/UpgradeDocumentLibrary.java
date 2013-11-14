@@ -149,6 +149,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 		throws Exception {
 
 		String languageId = UpgradeProcessUtil.getDefaultLanguageId(companyId);
+
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		Map<Locale, String> localizationMap = new HashMap<Locale, String>();

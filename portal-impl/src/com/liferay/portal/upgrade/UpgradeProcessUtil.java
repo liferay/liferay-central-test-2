@@ -38,7 +38,7 @@ import java.util.Map;
 public class UpgradeProcessUtil {
 
 	public static String getDefaultLanguageId(long companyId) throws Exception {
-		String languageId = _languageIdCache.get(companyId);
+		String languageId = _languageIds.get(companyId);
 
 		if (languageId != null) {
 			return languageId;
@@ -48,30 +48,32 @@ public class UpgradeProcessUtil {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		languageId = StringPool.BLANK;
-
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select languageId from User_ where defaultUser = ? and " +
-					"companyId = " + companyId);
+				"select languageId from User_ where companyId = ? and " +
+					"defaultUser = ?");
 
-			ps.setBoolean(1, true);
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
 
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				languageId = rs.getString("languageId");
+				String languageId = rs.getString("languageId");
 
-				_languageIdCache.put(companyId, languageId);
+				_languageIds.put(companyId, languageId);
+
+				return languageId;
+			}
+			else {
+				return StringPool.BLANK;
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		return languageId;
 	}
 
 	public static boolean isCreateIGImageDocumentType() {
@@ -177,11 +179,9 @@ public class UpgradeProcessUtil {
 		return false;
 	}
 
-	private static final Map<Long, String> _languageIdCache =
-		new HashMap<Long, String>();
-
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcessUtil.class);
 
 	private static boolean _createIGImageDocumentType = false;
+	private static Map<Long, String> _languageIds = new HashMap<Long, String>();
 
 }
