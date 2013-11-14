@@ -70,10 +70,10 @@ public interface PortletDataHandler {
 	public DataLevel getDataLevel();
 
 	/**
-	 * @return     A String array
-	 * @deprecated As of 7.0.0  Returns an array of the portlet preferences that
-	 *             reference data. These preferences should only be updated if
-	 *             the referenced data is imported.
+	 * Returns an array of the portlet preferences that reference data. These
+	 * preferences should only be updated if the referenced data is imported.
+	 *
+	 * @return A String array
 	 */
 	public String[] getDataPortletPreferences();
 
@@ -173,10 +173,6 @@ public interface PortletDataHandler {
 
 	public boolean isDataSiteLevel();
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #isDataPortletInstanceLevel()}
-	 */
 	public boolean isDisplayPortlet();
 
 	/**
