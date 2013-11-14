@@ -111,14 +111,15 @@ public class PortletRenderer {
 		BufferCacheServletResponse bufferCacheServletResponse =
 			new BufferCacheServletResponse(response);
 
-		Object portletParallelRender = request.getAttribute(
-			WebKeys.PORTLET_PARALLEL_RENDER);
-
 		Object lock = request.getAttribute(
 			WebKeys.PARALLEL_RENDERING_MERGE_LOCK);
 
-		request.setAttribute(WebKeys.PORTLET_PARALLEL_RENDER, Boolean.FALSE);
 		request.setAttribute(WebKeys.PARALLEL_RENDERING_MERGE_LOCK, null);
+
+		Object portletParallelRender = request.getAttribute(
+			WebKeys.PORTLET_PARALLEL_RENDER);
+
+		request.setAttribute(WebKeys.PORTLET_PARALLEL_RENDER, Boolean.FALSE);
 
 		try {
 			PortletContainerUtil.render(
@@ -130,9 +131,9 @@ public class PortletRenderer {
 			throw new PortletContainerException(ioe);
 		}
 		finally {
+			request.setAttribute(WebKeys.PARALLEL_RENDERING_MERGE_LOCK, lock);
 			request.setAttribute(
 				WebKeys.PORTLET_PARALLEL_RENDER, portletParallelRender);
-			request.setAttribute(WebKeys.PARALLEL_RENDERING_MERGE_LOCK, lock);
 		}
 	}
 
