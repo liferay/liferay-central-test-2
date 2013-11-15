@@ -56,13 +56,13 @@ if (Validator.isNull(displayStyle)) {
 			<aui:field-wrapper label="social-bookmarks">
 
 				<%
-				String[] socialBookmarksTypesArray = StringUtil.split(types);
+				String[] typesArray = StringUtil.split(types);
 
 				for (String type : PropsUtil.getArray(PropsKeys.SOCIAL_BOOKMARK_TYPES)) {
 				%>
 
 					<aui:field-wrapper inlineLabel="right" label="<%= type %>" name='<%= "socialBookmarksTypes" + type %>'>
-						<input <%= ArrayUtil.contains(socialBookmarksTypesArray, type) ? "checked": "" %> id="<portlet:namespace />socialBookmarksTypes<%= type %>" name="<portlet:namespace />preferences--socialBookmarksTypes--" type="checkbox" value="<%= type %>" />
+						<input <%= ArrayUtil.contains(typesArray, type) ? "checked": "" %> id="<portlet:namespace />socialBookmarksTypes<%= type %>" name="<portlet:namespace />preferences--socialBookmarksTypes--" type="checkbox" value="<%= type %>" />
 					</aui:field-wrapper>
 
 				<%

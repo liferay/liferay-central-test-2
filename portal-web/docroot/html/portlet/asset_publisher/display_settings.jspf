@@ -132,7 +132,11 @@
 
 	<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 
-	<liferay-ui:social-bookmarks-settings displayPosition="<%= socialBookmarksDisplayPosition %>" displayStyle="<%= socialBookmarksDisplayStyle %>" enabled="<%= enableSocialBookmarks %>" />
+	<liferay-ui:social-bookmarks-settings
+		displayPosition="<%= socialBookmarksDisplayPosition %>"
+		displayStyle="<%= socialBookmarksDisplayStyle %>"
+		enabled="<%= enableSocialBookmarks %>"
+	/>
 
 	<c:if test='<%= selectionStyle.equals("manual") %>'>
 		<aui:input helpMessage="enable-tag-based-navigation-help" label="enable-tag-based-navigation" name="preferences--enableTagBasedNavigation--" type="checkbox" value="<%= enableTagBasedNavigation %>" />

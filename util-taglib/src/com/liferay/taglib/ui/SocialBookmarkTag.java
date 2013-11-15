@@ -143,9 +143,9 @@ public class SocialBookmarkTag extends IncludeTag {
 				}
 			}
 
+			request.setAttribute("liferay-ui:social-bookmark:icon", icon);
 			request.setAttribute(
 				"liferay-ui:social-bookmark:postUrl", getPostUrl());
-			request.setAttribute("liferay-ui:social-bookmark:icon", icon);
 		}
 
 		request.setAttribute(

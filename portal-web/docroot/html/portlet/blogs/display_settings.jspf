@@ -66,5 +66,10 @@
 		<aui:input name="preferences--enableCommentRatings--" type="checkbox" value="<%= enableCommentRatings %>" />
 	</c:if>
 
-	<liferay-ui:social-bookmarks-settings displayPosition="<%= socialBookmarksDisplayPosition %>" displayStyle="<%= socialBookmarksDisplayStyle %>" enabled="<%= enableSocialBookmarks %>" types="<%= socialBookmarkTypes %>" />
+	<liferay-ui:social-bookmarks-settings
+		displayPosition="<%= socialBookmarksDisplayPosition %>"
+		displayStyle="<%= socialBookmarksDisplayStyle %>"
+		enabled="<%= enableSocialBookmarks %>"
+		types="<%= socialBookmarkTypes %>"
+	/>
 </aui:fieldset>
