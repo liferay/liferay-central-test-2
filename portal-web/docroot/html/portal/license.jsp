@@ -622,14 +622,14 @@ dateFormatDateTime.setTimeZone(timeZone);
 
 					<c:choose>
 						<c:when test='<%= key.equals("basic") %>'>
-							<option value="basic"><liferay-ui:message arguments='<%= new String[]{licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="single-production-server-x-x-left" /></option>
-							<option value="basic-cluster"><liferay-ui:message arguments='<%= new String[]{licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="create-new-cluster-production-servers-x-x-left" /></option>
+							<option value="basic"><liferay-ui:message arguments='<%= new String[] {licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="single-production-server-x-x-left" /></option>
+							<option value="basic-cluster"><liferay-ui:message arguments='<%= new String[] {licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="create-new-cluster-production-servers-x-x-left" /></option>
 						</c:when>
 						<c:when test='<%= key.startsWith("basic-") %>'>
-							<option value="<%= key %>"><liferay-ui:message arguments='<%= new String[]{licensesLeft, licensesLeft.equals("1") ? "server" : "servers"} %>' key="join-existing-cluster-x-x-left" /></option>
+							<option value="<%= key %>"><liferay-ui:message arguments='<%= new String[] {licensesLeft, licensesLeft.equals("1") ? "server" : "servers"} %>' key="join-existing-cluster-x-x-left" /></option>
 						</c:when>
 						<c:otherwise>
-							<option value="<%= key %>"><liferay-ui:message arguments='<%= new String[]{key, licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="x-x-x-left" /></option>
+							<option value="<%= key %>"><liferay-ui:message arguments='<%= new String[] {key, licensesLeft, licensesLeft.equals("1") ? "license" : "licenses"} %>' key="x-x-x-left" /></option>
 						</c:otherwise>
 					</c:choose>
 
