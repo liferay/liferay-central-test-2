@@ -165,14 +165,12 @@ public class TrashImpl implements Trash {
 
 		Map<String, String[]> data = new HashMap<String, String[]>();
 
-		data.put(Constants.CMD, new String[]{cmd});
+		data.put(Constants.CMD, new String[] {cmd});
 
 		data.put(
 			"deleteEntryClassName",
 			ArrayUtil.toStringArray(classNames.toArray()));
-
 		data.put("deleteEntryTitle", ArrayUtil.toStringArray(titles.toArray()));
-
 		data.put(
 			"restoreTrashEntryIds",
 			ArrayUtil.toStringArray(restoreTrashEntryIds.toArray()));

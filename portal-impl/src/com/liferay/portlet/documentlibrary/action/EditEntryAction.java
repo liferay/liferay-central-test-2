@@ -321,7 +321,7 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		if (moveToTrash && (trashedModels.size() > 0)) {
+		if (moveToTrash && !trashedModels.isEmpty()) {
 			TrashUtil.addTrashSessionMessages(actionRequest, trashedModels);
 
 			hideDefaultSuccessMessage(actionRequest);
