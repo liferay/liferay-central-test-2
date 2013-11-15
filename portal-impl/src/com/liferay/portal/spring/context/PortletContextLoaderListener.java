@@ -71,12 +71,12 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		super.contextDestroyed(servletContextEvent);
 
 		Object parentApplicationContext = servletContext.getAttribute(
-			_PARENT_APPLICATION_CONTEXT);
+			_PARENT_APPLICATION_CONTEXT_KEY);
 
 		if (parentApplicationContext instanceof
 				ConfigurableApplicationContext) {
 
-			servletContext.removeAttribute(_PARENT_APPLICATION_CONTEXT);
+			servletContext.removeAttribute(_PARENT_APPLICATION_CONTEXT_KEY);
 
 			ConfigurableApplicationContext configurableApplicationContext =
 				(ConfigurableApplicationContext)parentApplicationContext;
@@ -169,13 +169,14 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 				PropsValues.SPRING_PORTLET_CONFIGS, true);
 
 		servletContext.setAttribute(
-			_PARENT_APPLICATION_CONTEXT, applicationContext);
+			_PARENT_APPLICATION_CONTEXT_KEY, applicationContext);
 
 		return applicationContext;
 	}
 
-	private static final String _PARENT_APPLICATION_CONTEXT =
-		"PARENT_APPLICATION_CONTEXT";
+	private static final String _PARENT_APPLICATION_CONTEXT_KEY =
+		PortletContextLoaderListener.class.getName() +
+			"#parentApplicationContext";
 
 	private static final String _PORTAL_CONFIG_LOCATION_PARAM =
 		"portalContextConfigLocation";
