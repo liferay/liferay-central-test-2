@@ -18,6 +18,7 @@ import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.LayoutFriendlyURLsException;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
@@ -150,7 +151,7 @@ public class LayoutFriendlyURLTest {
 				lfurlse.getLocalizedExceptionsMap();
 
 			List<Exception> layoutFriendlyURLExceptions =
-				(List<Exception>)localizedExceptionsMap.values();
+				ListUtil.fromCollection(localizedExceptionsMap.values());
 
 			Assert.assertEquals(1, layoutFriendlyURLExceptions.size());
 
@@ -174,7 +175,7 @@ public class LayoutFriendlyURLTest {
 				lfurlse.getLocalizedExceptionsMap();
 
 			List<Exception> layoutFriendlyURLExceptions =
-				(List<Exception>)localizedExceptionsMap.values();
+				ListUtil.fromCollection(localizedExceptionsMap.values());
 
 			Assert.assertEquals(1, layoutFriendlyURLExceptions.size());
 
@@ -198,7 +199,7 @@ public class LayoutFriendlyURLTest {
 				lfurlse.getLocalizedExceptionsMap();
 
 			List<Exception> layoutFriendlyURLExceptions =
-				(List<Exception>)localizedExceptionsMap.values();
+				ListUtil.fromCollection(localizedExceptionsMap.values());
 
 			Assert.assertEquals(1, layoutFriendlyURLExceptions.size());
 
@@ -222,7 +223,7 @@ public class LayoutFriendlyURLTest {
 				lfurlse.getLocalizedExceptionsMap();
 
 			List<Exception> layoutFriendlyURLExceptions =
-				(List<Exception>)localizedExceptionsMap.values();
+				ListUtil.fromCollection(localizedExceptionsMap.values());
 
 			Assert.assertEquals(1, layoutFriendlyURLExceptions.size());
 
@@ -266,7 +267,7 @@ public class LayoutFriendlyURLTest {
 				lfurlse.getLocalizedExceptionsMap();
 
 			List<Exception> layoutFriendlyURLExceptions =
-				(List<Exception>)localizedExceptionsMap.values();
+				ListUtil.fromCollection(localizedExceptionsMap.values());
 
 			Assert.assertEquals(2, layoutFriendlyURLExceptions.size());
 
