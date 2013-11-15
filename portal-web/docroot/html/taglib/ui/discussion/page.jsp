@@ -481,13 +481,15 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 
 											<span id="lfr-discussion-reply-user-info">
 												<div class="lfr-discussion-reply-user-avatar">
-														<img alt="<%= parentMessage.getUserName() %>" class="user-status-avatar-image" src="<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, imageId) %>" width="30" />
+													<img alt="<%= parentMessage.getUserName() %>" class="user-status-avatar-image" src="<%= UserConstants.getPortraitURL(themeDisplay.getPathImage(), true, imageId) %>" width="30" />
 												</div>
+
 												<div class="lfr-discussion-reply-user-name">
 														<%= parentMessage.getUserName() %>
 												</div>
+
 												<div class="lfr-discussion-reply-creation-date">
-														<%= dateFormatDateTime.format(parentMessage.getCreateDate()) %>
+													<%= dateFormatDateTime.format(parentMessage.getCreateDate()) %>
 												</div>
 											</span>
 										</liferay-util:buffer>
@@ -505,7 +507,6 @@ Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZo
 										%>
 
 										<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sb.toString()}) %>
-
 									</c:otherwise>
 								</c:choose>
 							</div>
