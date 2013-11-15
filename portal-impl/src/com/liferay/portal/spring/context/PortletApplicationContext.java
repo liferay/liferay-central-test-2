@@ -84,7 +84,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 			return configLocations;
 		}
 
-		// For backward compatibility, remove template spring xmls
+		// Remove old spring XMLs to ensure they are not read
 
 		List<String> serviceBuilderPropertiesConfigLocations =
 			ListUtil.fromArray(
@@ -94,11 +94,11 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 		serviceBuilderPropertiesConfigLocations.remove(
 			"WEB-INF/classes/META-INF/base-spring.xml");
 		serviceBuilderPropertiesConfigLocations.remove(
+			"WEB-INF/classes/META-INF/cluster-spring.xml");
+		serviceBuilderPropertiesConfigLocations.remove(
 			"WEB-INF/classes/META-INF/hibernate-spring.xml");
 		serviceBuilderPropertiesConfigLocations.remove(
 			"WEB-INF/classes/META-INF/infrastructure-spring.xml");
-		serviceBuilderPropertiesConfigLocations.remove(
-			"WEB-INF/classes/META-INF/cluster-spring.xml");
 		serviceBuilderPropertiesConfigLocations.remove(
 			"WEB-INF/classes/META-INF/shard-data-source-spring.xml");
 
