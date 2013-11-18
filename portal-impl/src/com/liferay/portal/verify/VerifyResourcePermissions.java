@@ -108,8 +108,8 @@ public class VerifyResourcePermissions extends VerifyProcess {
 		if (_log.isInfoEnabled() && ((cur % 100) == 0)) {
 			_log.info(
 				"Processed " + cur + " of " + total + " resource permissions " +
-					"for companyId = " + role.getCompanyId() + ", modelName " +
-						"= " + name);
+					"for company = " + role.getCompanyId() + " and model " +
+						name);
 		}
 
 		ResourcePermission resourcePermission = null;
