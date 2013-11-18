@@ -170,9 +170,6 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 				PortletClassLoaderUtil.getClassLoader(), "service");
 		}
 		catch (Exception e) {
-
-			// Not a service builder plugin, don't create parent context
-
 			return null;
 		}
 
