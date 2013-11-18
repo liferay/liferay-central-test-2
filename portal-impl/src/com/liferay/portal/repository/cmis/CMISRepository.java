@@ -2114,6 +2114,13 @@ public class CMISRepository extends BaseCmisRepository {
 		}
 	}
 
+	/**
+	 * Loads {@link RepositoryInfo} from the cached session and creates a {@link
+	 * CMISRepositoryDetector} for this repository
+	 *
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	protected void initCMISRepositoryDetector()
 		throws PortalException, SystemException {
 
