@@ -1,5 +1,5 @@
 <definition>
-	<command name="AddWikiFrontPageContentJavascript">
+	<command name="AddWikiFrontPageContentJavascript" priority="5">
 		<![CDATA[
 			<p id='demo'>PASS</p>
 
