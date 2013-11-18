@@ -87,9 +87,7 @@ public abstract class BaseWebDriverImpl
 	}
 
 	@Override
-	public void assertEmailBody(String index, String body)
-		throws Exception {
-
+	public void assertEmailBody(String index, String body) throws Exception {
 		LiferaySeleniumHelper.assertEmailBody(this, index, body);
 	}
 
