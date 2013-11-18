@@ -97,42 +97,43 @@ public class ImageToolImplTest {
 	}
 
 	protected void crop(String fileName) throws Exception {
+
+		// Crop bottom right
+
 		File file = getFile(fileName);
 
 		ImageBag imageBag = ImageToolUtil.read(file);
 
 		RenderedImage image =  imageBag.getRenderedImage();
 
-		// Crop Bottom Right
-
 		testCrop(
 			image, image.getHeight() / 2, image.getWidth() / 2,
 			image.getWidth() / 2, image.getHeight() / 2);
 
-		// Crop Center
+		// Crop center
 
 		testCrop(
 			image, image.getHeight() - (image.getHeight() / 2),
 			image.getWidth() - (image.getWidth() / 2), image.getWidth() / 4,
 			image.getHeight() / 4);
 
-		// Move Down and Right
+		// Move down and right
 
 		testCrop(
 			image, image.getHeight(), image.getWidth(), image.getWidth() / 4,
 			image.getHeight() / 4);
 
-		// Move Up and Left
+		// Move up and left
 
 		testCrop(
 			image, image.getHeight(), image.getWidth(), -(image.getWidth() / 4),
 			-(image.getHeight() / 4));
 
-		// Crop Same Image
+		// Crop same image
 
 		testCrop(image, image.getHeight(), image.getWidth(), 0, 0);
 
-		// Crop Top Left
+		// Crop top left
 
 		testCrop(
 			image, image.getHeight() - (image.getHeight() / 2),
@@ -190,19 +191,20 @@ public class ImageToolImplTest {
 	}
 
 	protected void testCrop(
-				RenderedImage image, int height, int width, int x, int y)
+			RenderedImage renderedImage, int height, int width, int x, int y)
 		throws Exception {
 
-		RenderedImage croppedImage = ImageToolUtil.crop(
-			image, height, width, x, y);
+		RenderedImage croppedRenderedImage = ImageToolUtil.crop(
+			renderedImage, height, width, x, y);
 
-		int maxHeight = image.getHeight() - Math.abs(y);
-		int maxWidth = image.getWidth() - Math.abs(x);
+		int maxHeight = renderedImage.getHeight() - Math.abs(y);
+		int maxWidth = renderedImage.getWidth() - Math.abs(x);
 
 		Assert.assertEquals(
-			croppedImage.getHeight(), Math.min(maxHeight, height));
+			croppedRenderedImage.getHeight(), Math.min(maxHeight, height));
 
-		Assert.assertEquals(croppedImage.getWidth(), Math.min(maxWidth, width));
+		Assert.assertEquals(
+			croppedRenderedImage.getWidth(), Math.min(maxWidth, width));
 	}
 
 }
