@@ -21,16 +21,17 @@ import com.liferay.portal.kernel.util.StringUtil;
 import org.apache.chemistry.opencmis.commons.data.RepositoryInfo;
 
 /**
- * This class implements the logic for CMIS repository vendor and version
- * detection.
+ * Implements the logic for CMIS repository vendor and version detection.
+ *
  * @author Ivan Zaera
  */
 public class CMISRepositoryDetector {
 
 	/**
-	 * Create a detector for the given repository. The detection routines are
-     * run once and cached inside the object for future reference.
-     * @param repositoryInfo the repository description
+	 * Creates a detector for the given CMIS repository. The detection routines
+	 * are run once and cached inside the object for future reference.
+	 *
+	 * @param repositoryInfo the repository description
 	 */
 	public CMISRepositoryDetector(RepositoryInfo repositoryInfo) {
 		detectVendor(repositoryInfo);
@@ -53,8 +54,9 @@ public class CMISRepositoryDetector {
 	}
 
 	/**
-	 * Detects version number for a Nuxeo repository
-     * @param repositoryInfo the repository description
+	 * Detects the version number for the Nuxeo repository.
+	 *
+	 * @param repositoryInfo the repository description
 	 */
 	protected void detectNuxeo(RepositoryInfo repositoryInfo) {
 		String productVersion = repositoryInfo.getProductVersion();
@@ -85,8 +87,9 @@ public class CMISRepositoryDetector {
 	}
 
 	/**
-	 * Detects vendor for a CMIS repository
-     * @param repositoryInfo the repository description
+	 * Detects the vendor's name for the CMIS repository.
+	 *
+	 * @param repositoryInfo the repository description
 	 */
 	private void detectVendor(RepositoryInfo repositoryInfo) {
 		String productName = repositoryInfo.getProductName();
