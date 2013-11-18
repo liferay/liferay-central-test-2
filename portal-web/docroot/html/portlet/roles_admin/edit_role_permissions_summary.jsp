@@ -164,15 +164,6 @@ for (int i = 0; i < results.size(); i++) {
 		continue;
 	}
 
-	PortletURL editPermissionsURL = liferayPortletResponse.createRenderURL();
-
-	editPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
-	editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
-	editPermissionsURL.setParameter("tabs1", "roles");
-	editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
-	editPermissionsURL.setParameter("redirect", permissionsAllURL.toString());
-	editPermissionsURL.setParameter("portletResource", curPortletName);
-
 	ResourceURL editPermissionsResourceURL = liferayPortletResponse.createResourceURL();
 
 	editPermissionsResourceURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
@@ -181,6 +172,15 @@ for (int i = 0; i < results.size(); i++) {
 	editPermissionsResourceURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 	editPermissionsResourceURL.setParameter("redirect", permissionsAllURL.toString());
 	editPermissionsResourceURL.setParameter("portletResource", curPortletName);
+
+	PortletURL editPermissionsURL = liferayPortletResponse.createRenderURL();
+
+	editPermissionsURL.setParameter("struts_action", "/roles_admin/edit_role_permissions");
+	editPermissionsURL.setParameter(Constants.CMD, Constants.EDIT);
+	editPermissionsURL.setParameter("tabs1", "roles");
+	editPermissionsURL.setParameter("roleId", String.valueOf(role.getRoleId()));
+	editPermissionsURL.setParameter("redirect", permissionsAllURL.toString());
+	editPermissionsURL.setParameter("portletResource", curPortletName);
 
 	StringBundler sb = new StringBundler();
 
