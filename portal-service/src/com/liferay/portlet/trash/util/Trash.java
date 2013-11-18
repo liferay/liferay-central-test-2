@@ -49,21 +49,17 @@ public interface Trash {
 		throws PortalException, SystemException;
 
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels)
-		throws SystemException;
+		ActionRequest actionRequest, List<TrashedModel> trashedModels);
 
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels,
-			String cmd)
-		throws SystemException;
+		ActionRequest actionRequest, List<TrashedModel> trashedModels,
+		String cmd);
 
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel)
-		throws SystemException;
+		ActionRequest actionRequest, TrashedModel trashedModel);
 
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel, String cmd)
-		throws SystemException;
+		ActionRequest actionRequest, TrashedModel trashedModel, String cmd);
 
 	public void deleteEntriesAttachments(
 			long companyId, long repositoryId, Date date,

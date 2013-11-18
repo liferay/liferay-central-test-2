@@ -56,30 +56,26 @@ public class TrashUtil {
 	}
 
 	public static void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels)
-		throws SystemException {
+		ActionRequest actionRequest, List<TrashedModel> trashedModels) {
 
 		getTrash().addTrashSessionMessages(actionRequest, trashedModels);
 	}
 
 	public static void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels,
-			String cmd)
-		throws SystemException {
+		ActionRequest actionRequest, List<TrashedModel> trashedModels,
+		String cmd) {
 
 		getTrash().addTrashSessionMessages(actionRequest, trashedModels, cmd);
 	}
 
 	public static void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel)
-		throws SystemException {
+		ActionRequest actionRequest, TrashedModel trashedModel) {
 
 		getTrash().addTrashSessionMessages(actionRequest, trashedModel);
 	}
 
 	public static void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel, String cmd)
-		throws SystemException {
+		ActionRequest actionRequest, TrashedModel trashedModel, String cmd) {
 
 		getTrash().addTrashSessionMessages(actionRequest, trashedModel, cmd);
 	}

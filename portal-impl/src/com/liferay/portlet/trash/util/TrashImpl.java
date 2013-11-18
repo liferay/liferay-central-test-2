@@ -124,8 +124,7 @@ public class TrashImpl implements Trash {
 
 	@Override
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels)
-		throws SystemException {
+		ActionRequest actionRequest, List<TrashedModel> trashedModels) {
 
 		addTrashSessionMessages(
 			actionRequest, trashedModels, Constants.MOVE_TO_TRASH);
@@ -133,9 +132,8 @@ public class TrashImpl implements Trash {
 
 	@Override
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, List<TrashedModel> trashedModels,
-			String cmd)
-		throws SystemException {
+		ActionRequest actionRequest, List<TrashedModel> trashedModels,
+		String cmd) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -183,8 +181,7 @@ public class TrashImpl implements Trash {
 
 	@Override
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel)
-		throws SystemException {
+		ActionRequest actionRequest, TrashedModel trashedModel) {
 
 		addTrashSessionMessages(
 			actionRequest, trashedModel, Constants.MOVE_TO_TRASH);
@@ -192,8 +189,7 @@ public class TrashImpl implements Trash {
 
 	@Override
 	public void addTrashSessionMessages(
-			ActionRequest actionRequest, TrashedModel trashedModel, String cmd)
-		throws SystemException {
+		ActionRequest actionRequest, TrashedModel trashedModel, String cmd) {
 
 		List<TrashedModel> trashedModels = new ArrayList<TrashedModel>();
 
