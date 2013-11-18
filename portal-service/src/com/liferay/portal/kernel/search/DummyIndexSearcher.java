@@ -28,7 +28,7 @@ public class DummyIndexSearcher implements IndexSearcher {
 
 	@Override
 	public Hits search(SearchContext searchContext, Query query) {
-		return _emptyHits();
+		return _getHits();
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class DummyIndexSearcher implements IndexSearcher {
 		String searchEngineId, long companyId, Query query, Sort[] sort,
 		int start, int end) {
 
-		return _emptyHits();
+		return _getHits();
 	}
 
 	@Override
@@ -48,37 +48,36 @@ public class DummyIndexSearcher implements IndexSearcher {
 	public Map<String, List<String>> spellCheckKeywords(
 		SearchContext searchContext, int max) {
 
-		return _emptyMap;
+		return Collections.emptyMap();
 	}
 
 	@Override
 	public String[] suggestKeywordQueries(
 		SearchContext searchContext, int max) {
 
-		return _emptyStrings;
+		return new String[0];
 	}
 
-	private Hits _emptyHits() {
-		Hits dummyHits = new HitsImpl();
+	private Hits _getHits() {
+		Hits hits = new HitsImpl();
 
-		dummyHits.setCollatedSpellCheckResult(StringPool.BLANK);
-		dummyHits.setDocs(new Document[0]);
-		dummyHits.setLength(0);
-		dummyHits.setQuery(new StringQueryImpl(StringPool.BLANK));
-		dummyHits.setQuerySuggestions(_emptyStrings);
-		dummyHits.setQueryTerms(_emptyStrings);
-		dummyHits.setLength(0);
-		dummyHits.setScores(_emptyFloats);
-		dummyHits.setSearchTime(0);
-		dummyHits.setSnippets(_emptyStrings);
-		dummyHits.setSpellCheckResults(_emptyMap);
-		dummyHits.setStart(0);
+		hits.setCollatedSpellCheckResult(StringPool.BLANK);
+		hits.setDocs(new Document[0]);
+		hits.setLength(0);
+		hits.setQuery(new StringQueryImpl(StringPool.BLANK));
+		hits.setQuerySuggestions(new String[0]);
+		hits.setQueryTerms(new String[0]);
+		hits.setLength(0);
+		hits.setScores(new float[0]);
+		hits.setSearchTime(0);
+		hits.setSnippets(new String[0]);
+		hits.setSpellCheckResults(_spellCheckResults);
+		hits.setStart(0);
 
-		return dummyHits;
+		return hits;
 	}
 
-	private static float[] _emptyFloats = new float[0];
-	private static Map<String, List<String>> _emptyMap = Collections.emptyMap();
-	private static String[] _emptyStrings = new String[0];
+	private static Map<String, List<String>> _spellCheckResults =
+		Collections.emptyMap();
 
 }
