@@ -502,6 +502,10 @@ public class PortletImporter {
 		portletDataContext.setSourceUserPersonalSiteGroupId(
 			sourceUserPersonalSiteGroupId);
 
+		// Read asset categories, asset tags, comments, locks, and ratings
+		// entries to make them available to the data handlers through the
+		// context
+
 		Element portletElement = null;
 
 		try {
@@ -518,10 +522,6 @@ public class PortletImporter {
 		}
 
 		LayoutCache layoutCache = new LayoutCache();
-
-		// Read asset categories, asset tags, comments, locks, and ratings
-		// entries to make them available to the data handlers through the
-		// context
 
 		if (importPermissions) {
 			_permissionImporter.checkRoles(
