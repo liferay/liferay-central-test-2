@@ -842,8 +842,9 @@ Portal: ${lp.source.dir}
 Plugins: ${lp.plugins.dir}</echo>
 	</target>
 
-	<target name="setup-jrebel">
-		<echo file="${app.server.lib.global.dir}/rebel.xml"><![CDATA[<?xml version="1.0"?>
+	<macrodef name="setup-jrebel">
+		<sequential>
+			<echo file="${app.server.lib.global.dir}/rebel.xml"><![CDATA[<?xml version="1.0"?>
 
 <application
 	xmlns="http://www.zeroturnaround.com"
@@ -878,27 +879,32 @@ Plugins: ${lp.plugins.dir}</echo>
 	</web>
 </application>]]></echo>
 
-		<loadfile failonerror="false" property="system-ext.properties.content" srcfile="portal-impl/src/system-ext.properties" />
+			<loadfile failonerror="false" property="system-ext.properties.content" srcfile="portal-impl/src/system-ext.properties" />
 
-		<if>
-			<not>
-				<contains string="${system-ext.properties.content}"  substring="liferay.lib.portal.dir" />
-			</not>
-			<then>
-				<echo
-					append="true"
-					file="portal-impl/src/system-ext.properties"
-				>
-					liferay.lib.portal.dir=${app.server.lib.portal.dir}
-				</echo>
+			<if>
+				<not>
+					<contains string="${system-ext.properties.content}"  substring="liferay.lib.portal.dir" />
+				</not>
+				<then>
+					<echo
+						append="true"
+						file="portal-impl/src/system-ext.properties"
+					>
+						liferay.lib.portal.dir=${app.server.lib.portal.dir}
+					</echo>
 
-				<copy
-					file="portal-impl/src/system-ext.properties"
-					overwrite="true"
-					tofile="portal-impl/classes/system-ext.properties"
-				/>
-			</then>
-		</if>
+					<copy
+						file="portal-impl/src/system-ext.properties"
+						overwrite="true"
+						tofile="portal-impl/classes/system-ext.properties"
+					/>
+				</then>
+			</if>
+		</sequential>
+	</macrodef>
+
+	<target name="setup-jrebel">
+		<setup-jrebel />
 	</target>
 
 	<target name="sort-xml-attributes">
@@ -926,7 +932,7 @@ Plugins: ${lp.plugins.dir}</echo>
 
 		<antcall target="jar" />
 
-		<antcall target="setup-jrebel" />
+		<setup-jrebel />
 
 		<antcall target="print-current-time" />
 	</target>
