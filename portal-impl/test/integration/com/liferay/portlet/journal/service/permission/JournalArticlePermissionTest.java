@@ -41,7 +41,6 @@ public class JournalArticlePermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			JournalArticlePermission.contains(
 				permissionChecker, _article, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			JournalArticlePermission.contains(
 				permissionChecker, _subarticle, ActionKeys.VIEW));
@@ -51,7 +50,6 @@ public class JournalArticlePermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			JournalArticlePermission.contains(
 				permissionChecker, _article, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			JournalArticlePermission.contains(
 				permissionChecker, _subarticle, ActionKeys.VIEW));

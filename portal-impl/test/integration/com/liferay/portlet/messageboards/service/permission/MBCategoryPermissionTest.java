@@ -39,7 +39,6 @@ public class MBCategoryPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			MBCategoryPermission.contains(
 				permissionChecker, _category, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			MBCategoryPermission.contains(
 				permissionChecker, _subcategory, ActionKeys.VIEW));
@@ -49,7 +48,6 @@ public class MBCategoryPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			MBCategoryPermission.contains(
 				permissionChecker, _category, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			MBCategoryPermission.contains(
 				permissionChecker, _subcategory, ActionKeys.VIEW));

@@ -107,12 +107,11 @@ public class RoleTestUtil {
 			String actionId)
 		throws Exception {
 
-		long companyId = TestPropsValues.getCompanyId();
-
-		Role role = RoleLocalServiceUtil.getRole(companyId, roleName);
+		Role role = RoleLocalServiceUtil.getRole(
+			TestPropsValues.getCompanyId(), roleName);
 
 		ResourcePermissionLocalServiceUtil.removeResourcePermission(
-			companyId, resourceName, scope, primKey, role.getRoleId(),
+			role.getCompanyId(), resourceName, scope, primKey, role.getRoleId(),
 			actionId);
 	}
 

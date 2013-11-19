@@ -40,7 +40,6 @@ public class JournalFolderPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			JournalFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			JournalFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));
@@ -50,7 +49,6 @@ public class JournalFolderPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			JournalFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			JournalFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));

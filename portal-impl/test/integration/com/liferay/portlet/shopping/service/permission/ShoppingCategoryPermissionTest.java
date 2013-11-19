@@ -39,7 +39,6 @@ public class ShoppingCategoryPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			ShoppingCategoryPermission.contains(
 				permissionChecker, _category, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			ShoppingCategoryPermission.contains(
 				permissionChecker, _subcategory, ActionKeys.VIEW));
@@ -49,7 +48,6 @@ public class ShoppingCategoryPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			ShoppingCategoryPermission.contains(
 				permissionChecker, _category, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			ShoppingCategoryPermission.contains(
 				permissionChecker, _subcategory, ActionKeys.VIEW));

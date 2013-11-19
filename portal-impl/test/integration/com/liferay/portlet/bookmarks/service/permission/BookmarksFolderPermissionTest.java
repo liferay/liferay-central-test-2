@@ -40,7 +40,6 @@ public class BookmarksFolderPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			BookmarksFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			BookmarksFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));
@@ -50,7 +49,6 @@ public class BookmarksFolderPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			BookmarksFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			BookmarksFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));

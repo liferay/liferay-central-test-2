@@ -42,20 +42,18 @@ public class DLFileEntryPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			DLFileEntryPermission.contains(
 				permissionChecker, _fileEntry, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			DLFileEntryPermission.contains(
-				permissionChecker, _subFileEntry, ActionKeys.VIEW));
+				permissionChecker, _subfileEntry, ActionKeys.VIEW));
 
 		removePortletModelViewPermission();
 
 		Assert.assertFalse(
 			DLFileEntryPermission.contains(
 				permissionChecker, _fileEntry, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			DLFileEntryPermission.contains(
-				permissionChecker, _subFileEntry, ActionKeys.VIEW));
+				permissionChecker, _subfileEntry, ActionKeys.VIEW));
 	}
 
 	@Override
@@ -68,7 +66,7 @@ public class DLFileEntryPermissionTest extends BasePermissionTest {
 			group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			ServiceTestUtil.randomString(), true);
 
-		_subFileEntry = DLAppTestUtil.addFileEntry(
+		_subfileEntry = DLAppTestUtil.addFileEntry(
 			group.getGroupId(), folder.getFolderId(), false,
 			ServiceTestUtil.randomString());
 	}
@@ -79,6 +77,6 @@ public class DLFileEntryPermissionTest extends BasePermissionTest {
 	}
 
 	private FileEntry _fileEntry;
-	private FileEntry _subFileEntry;
+	private FileEntry _subfileEntry;
 
 }

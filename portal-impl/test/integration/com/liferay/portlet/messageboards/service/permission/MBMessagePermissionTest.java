@@ -40,7 +40,6 @@ public class MBMessagePermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			MBMessagePermission.contains(
 				permissionChecker, _message, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			MBMessagePermission.contains(
 				permissionChecker, _submessage, ActionKeys.VIEW));
@@ -50,7 +49,6 @@ public class MBMessagePermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			MBMessagePermission.contains(
 				permissionChecker, _message, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			MBMessagePermission.contains(
 				permissionChecker, _submessage, ActionKeys.VIEW));

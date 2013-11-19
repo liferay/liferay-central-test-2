@@ -41,7 +41,6 @@ public class DLFolderPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			DLFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			DLFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));
@@ -51,7 +50,6 @@ public class DLFolderPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			DLFolderPermission.contains(
 				permissionChecker, _folder, ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			DLFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));

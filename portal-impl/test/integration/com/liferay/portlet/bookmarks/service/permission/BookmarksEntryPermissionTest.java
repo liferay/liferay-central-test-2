@@ -41,7 +41,6 @@ public class BookmarksEntryPermissionTest extends BasePermissionTest {
 		Assert.assertTrue(
 			BookmarksEntryPermission.contains(
 				permissionChecker, _entry.getEntryId(), ActionKeys.VIEW));
-
 		Assert.assertTrue(
 			BookmarksEntryPermission.contains(
 				permissionChecker, _subentry.getEntryId(), ActionKeys.VIEW));
@@ -51,7 +50,6 @@ public class BookmarksEntryPermissionTest extends BasePermissionTest {
 		Assert.assertFalse(
 			BookmarksEntryPermission.contains(
 				permissionChecker, _entry.getEntryId(), ActionKeys.VIEW));
-
 		Assert.assertFalse(
 			BookmarksEntryPermission.contains(
 				permissionChecker, _subentry.getEntryId(), ActionKeys.VIEW));
