@@ -154,8 +154,7 @@ import java.util.Set;
  * <p>
  * The <code>type</code> field helps distinguish between a group used strictly
  * for scoping and a group that also has pages (in which case the type is
- * <code>SITE</code>). For a list of types, see {@link
- * com.liferay.portal.model.GroupConstants}.
+ * <code>SITE</code>). For a list of types, see {@link GroupConstants}.
  * </p>
  *
  * <p>
@@ -222,12 +221,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * @param  description the group's description (optionally
 	 *         <code>null</code>)
 	 * @param  type the group's type. For more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         GroupConstants}.
 	 * @param  manualMembership whether manual membership is allowed for the
 	 *         group
 	 * @param  membershipRestriction the group's membership restriction. For
-	 *         more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         more information see {@link GroupConstants}.
 	 * @param  friendlyURL the group's friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  site whether the group is to be associated with a main site
@@ -426,7 +424,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * @param      description the group's description (optionally
 	 *             <code>null</code>)
 	 * @param      type the group's type. For more information see {@link
-	 *             com.liferay.portal.model.GroupConstants}.
+	 *             GroupConstants}.
 	 * @param      friendlyURL the group's friendlyURL
 	 * @param      site whether the group is to be associated with a main site
 	 * @param      active whether the group is active
@@ -468,7 +466,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * @param      description the group's description (optionally
 	 *             <code>null</code>)
 	 * @param      type the group's type. For more information see {@link
-	 *             com.liferay.portal.model.GroupConstants}.
+	 *             GroupConstants}.
 	 * @param      friendlyURL the group's friendlyURL (optionally
 	 *             <code>null</code>)
 	 * @param      site whether the group is to be associated with a main site
@@ -510,7 +508,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * @param      description the group's description (optionally
 	 *             <code>null</code>)
 	 * @param      type the group's type. For more information see {@link
-	 *             com.liferay.portal.model.GroupConstants}.
+	 *             GroupConstants}.
 	 * @param      friendlyURL the group's friendlyURL
 	 * @param      site whether the group is to be associated with a main site
 	 * @param      active whether the group is active
@@ -3341,12 +3339,11 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	 * @param  description the group's new description (optionally
 	 *         <code>null</code>)
 	 * @param  type the group's new type. For more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         GroupConstants}.
 	 * @param  manualMembership whether manual membership is allowed for the
 	 *         group
 	 * @param  membershipRestriction the group's membership restriction. For
-	 *         more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         more information see {@link GroupConstants}.
 	 * @param  friendlyURL the group's new friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  active whether the group is active

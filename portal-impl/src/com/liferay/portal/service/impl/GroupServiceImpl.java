@@ -77,12 +77,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @param  description the group's description (optionally
 	 *         <code>null</code>)
 	 * @param  type the group's type. For more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         GroupConstants}.
 	 * @param  manualMembership whether manual membership is allowed for the
 	 *         group
 	 * @param  membershipRestriction the group's membership restriction. For
-	 *         more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         more information see {@link GroupConstants}.
 	 * @param  friendlyURL the group's friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  site whether the group is to be associated with a main site
@@ -135,7 +134,7 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @param      description the group's description (optionally
 	 *             <code>null</code>)
 	 * @param      type the group's type. For more information see {@link
-	 *             com.liferay.portal.model.GroupConstants}.
+	 *             GroupConstants}.
 	 * @param      friendlyURL the group's friendlyURL
 	 * @param      site whether the group is to be associated with a main site
 	 * @param      active whether the group is active
@@ -1056,12 +1055,11 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 	 * @param  description the group's new description (optionally
 	 *         <code>null</code>)
 	 * @param  type the group's new type. For more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         GroupConstants}.
 	 * @param  manualMembership whether manual membership is allowed for the
 	 *         group
 	 * @param  membershipRestriction the group's membership restriction. For
-	 *         more information see {@link
-	 *         com.liferay.portal.model.GroupConstants}.
+	 *         more information see {@link GroupConstants}.
 	 * @param  friendlyURL the group's new friendlyURL (optionally
 	 *         <code>null</code>)
 	 * @param  active whether the group is active
