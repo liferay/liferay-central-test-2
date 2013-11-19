@@ -926,6 +926,8 @@ Plugins: ${lp.plugins.dir}</echo>
 
 		<antcall target="jar" />
 
+		<antcall target="setup-jrebel" />
+
 		<antcall target="print-current-time" />
 	</target>
 
