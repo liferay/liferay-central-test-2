@@ -14,6 +14,8 @@
 
 package com.liferay.portal.test;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AbstractExecutionTestListener;
 import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.search.lucene.LuceneHelperUtil;
@@ -34,7 +36,7 @@ public class EnvironmentExecutionTestListener
 			LuceneHelperUtil.delete(TestPropsValues.getCompanyId());
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 	}
 
@@ -43,5 +45,8 @@ public class EnvironmentExecutionTestListener
 		ServiceTestUtil.initServices();
 		ServiceTestUtil.initPermissions();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		EnvironmentExecutionTestListener.class);
 
 }
