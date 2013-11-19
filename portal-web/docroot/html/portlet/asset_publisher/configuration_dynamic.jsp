@@ -407,7 +407,7 @@ String selectStyle = (String)request.getAttribute("configuration.jsp-selectStyle
 						<span class="field-row">
 
 							<%
-							long assetVocabularyId = GetterUtil.getLong(portletPreferences.getValue("assetVocabularyId", StringPool.BLANK));
+							long assetVocabularyId = GetterUtil.getLong(portletPreferences.getValue("assetVocabularyId", null));
 							%>
 
 							<aui:select inlineField="<%= true %>" inlineLabel="left" label="group-by" name="preferences--assetVocabularyId--">

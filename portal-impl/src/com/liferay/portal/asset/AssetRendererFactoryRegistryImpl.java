@@ -135,7 +135,7 @@ public class AssetRendererFactoryRegistryImpl
 			assetRendererFactory.getType());
 	}
 
-	private Map<String, AssetRendererFactory> filterAssetRendererFactories(
+	protected Map<String, AssetRendererFactory> filterAssetRendererFactories(
 		long companyId,
 		Map<String, AssetRendererFactory> assetRendererFactories,
 		boolean filterSelectable) {
