@@ -1,0 +1,59 @@
+<definition>
+	<set-up>
+		<execute macro="SOUser#firstLoginPG" />
+	</set-up>
+
+	<command name="AssignSORoleAdminUser" priority="5">
+		<var name="roleName" value="Social Office" />
+		<var name="userName" value="Test Test" />
+		<var name="userScreenName" value="test" />
+	
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
+		</execute>
+
+		<execute macro="Role#unassignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
+		</execute>
+
+		<execute macro="Role#assignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="Roles" />
+		</execute>
+
+		<execute macro="Role#unassignRegRoleCP">
+			<var name="roleName" value="${roleName}" />
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+	</command>
+
+	<command name="AssignSORoleAdminUserConfigurations" priority="5">
+		<var name="userName" value="Test Test" />
+		<var name="userScreenName" value="test" />
+
+		<execute macro="SOConfigurations#unassignUserRoleCP">
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute macro="SOConfigurations#assignUserRoleCP">
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+
+		<execute action="SOUserBar#click" locator-key1="DASHBOARD" />
+
+		<execute macro="SOConfigurations#unassignUserRoleCP">
+			<var name="userScreenName" value="${userScreenName}" />
+		</execute>
+	</command>
+</definition>
