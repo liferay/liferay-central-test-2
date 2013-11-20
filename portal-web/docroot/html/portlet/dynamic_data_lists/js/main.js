@@ -51,10 +51,10 @@ AUI.add(
 
 						instance.toolbar.add(
 							{
+								label: Liferay.Language.get('clear'),
 								on: {
 									click: A.bind('_onClickClear', instance)
-								},
-								label: Liferay.Language.get('clear')
+								}
 							},
 							2
 						);
