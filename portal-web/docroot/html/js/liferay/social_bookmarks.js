@@ -46,7 +46,7 @@ AUI.add(
 
 									var url = event.currentTarget.attr('href');
 
-									WIN.getDOM().open(url, null, shareWindowFeatures.join(',')).focus();
+									WIN.getDOM().open(url, null, shareWindowFeatures.join()).focus();
 								},
 								'.social-bookmark .taglib-icon'
 							);
