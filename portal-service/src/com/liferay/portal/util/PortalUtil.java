@@ -237,6 +237,19 @@ public class PortalUtil {
 		return getPortal().getAlternateLocales(request);
 	}
 
+	/**
+	 * Returns the alternate url for another url and a particular locale. An
+	 * alternate url page is to let search engines now that a page is available
+	 * in other languages. More information can be found here:
+	 * https://support.google.com/webmasters/answer/189077?hl=en
+	 *
+	 * @param  canonicalURL the canonical url being requested. See {@link #getCanonicalURL}
+	 * @param  themeDisplay the theme display
+	 * @param  locale the locale of the alternate url being generated
+	 * @param  layout the page being requested
+	 * @return the alternate url for the requested canonical url in a given
+	 *         locale
+	 */
 	public static String getAlternateURL(
 			String canonicalURL, ThemeDisplay themeDisplay, Locale locale,
 			Layout layout)
@@ -288,6 +301,21 @@ public class PortalUtil {
 		return getPortal().getBasicAuthUserId(request, companyId);
 	}
 
+	/**
+	 * Returns the canonical url for another url. A canonical page is the
+	 * preferred version of a set of pages with highly similar (or identical)
+	 * content. This is used to specify the search engines that several urls
+	 * point to the same page using the tag <link rel="canonical" />. It is also
+	 * used to generate the urls for the sitemaps, the url that social bookmarks
+	 * publish (twitter, facebook links...) and the urls in the emails sent.
+	 * More information can be found here:
+	 * https://support.google.com/webmasters/answer/139394?hl=en
+	 *
+	 * @param  completeURL the original url being requested
+	 * @param  themeDisplay the theme display
+	 * @param  layout the page being requested
+	 * @return the canonical url for the requested completeURL
+	 */
 	public static String getCanonicalURL(
 			String completeURL, ThemeDisplay themeDisplay, Layout layout)
 		throws PortalException, SystemException {
