@@ -369,11 +369,11 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 	protected void deleteThumbnail(
 		long companyId, long groupId, long fileEntryId, long fileVersionId,
-		int index, String thumbnailType) {
+		String thumbnailType, int index) {
 
 		try {
 			String dirName = getThumbnailFilePath(
-				groupId, fileEntryId, fileVersionId, index, thumbnailType);
+				groupId, fileEntryId, fileVersionId, thumbnailType, index);
 
 			DLStoreUtil.deleteFile(companyId, REPOSITORY_ID, dirName);
 		}
@@ -386,16 +386,16 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 		String thumbnailType) {
 
 		deleteThumbnail(
-			companyId, groupId, fileEntryId, fileVersionId,
-			THUMBNAIL_INDEX_DEFAULT, thumbnailType);
+			companyId, groupId, fileEntryId, fileVersionId, thumbnailType,
+			THUMBNAIL_INDEX_DEFAULT);
 
 		deleteThumbnail(
-			companyId, groupId, fileEntryId, fileVersionId,
-			THUMBNAIL_INDEX_CUSTOM_1, thumbnailType);
+			companyId, groupId, fileEntryId, fileVersionId, thumbnailType,
+			THUMBNAIL_INDEX_CUSTOM_1);
 
 		deleteThumbnail(
-			companyId, groupId, fileEntryId, fileVersionId,
-			THUMBNAIL_INDEX_CUSTOM_2, thumbnailType);
+			companyId, groupId, fileEntryId, fileVersionId, thumbnailType,
+			THUMBNAIL_INDEX_CUSTOM_2);
 	}
 
 	protected void destroyProcess(String processIdentity) {
@@ -871,12 +871,12 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 		return getThumbnailFilePath(
 			fileVersion.getGroupId(), fileVersion.getFileEntryId(),
-			fileVersion.getFileVersionId(), index, type);
+			fileVersion.getFileVersionId(), type, index);
 	}
 
 	protected String getThumbnailFilePath(
-		long groupId, long fileEntryId, long fileVersionId, int index,
-		String type) {
+		long groupId, long fileEntryId, long fileVersionId,
+		String thumbnailType, int index) {
 
 		StringBundler sb = new StringBundler(5);
 
@@ -889,7 +889,7 @@ public abstract class DLPreviewableProcessor implements DLProcessor {
 
 		if (fileVersionId > 0) {
 			sb.append(StringPool.PERIOD);
-			sb.append(type);
+			sb.append(thumbnailType);
 		}
 
 		return sb.toString();
