@@ -192,11 +192,11 @@ public class GroupFinderTest {
 		groupParams.put("site", Boolean.TRUE);
 		groupParams.put("usersGroups", TestPropsValues.getUserId());
 
-		List<Group> list = GroupFinderUtil.findByCompanyId(
+		List<Group> groups = GroupFinderUtil.findByCompanyId(
 			TestPropsValues.getCompanyId(), groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, new GroupNameComparator(true));
 
-		Assert.assertFalse(list.isEmpty());
+		Assert.assertFalse(groups.isEmpty());
 	}
 
 	protected void addLayout(long groupId) throws Exception {
