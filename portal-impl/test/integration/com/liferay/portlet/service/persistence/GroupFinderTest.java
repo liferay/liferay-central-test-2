@@ -142,6 +142,22 @@ public class GroupFinderTest {
 	}
 
 	@Test
+	public void testFindByCompanyId() throws Exception {
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
+
+		groupParams.put("inherit", Boolean.TRUE);
+		groupParams.put("site", Boolean.TRUE);
+		groupParams.put("usersGroups", TestPropsValues.getUserId());
+
+		List<Group> groups = GroupFinderUtil.findByCompanyId(
+			TestPropsValues.getCompanyId(), groupParams, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, new GroupNameComparator(true));
+
+		Assert.assertFalse(groups.isEmpty());
+	}
+
+	@Test
 	public void testFindByLayouts() throws Exception {
 		List<Group> groups = findByLayouts(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID);
@@ -179,24 +195,6 @@ public class GroupFinderTest {
 		groups = findByLayouts(childGroup1.getGroupId());
 
 		Assert.assertTrue(groups.isEmpty());
-	}
-
-	@Test
-	public void testFindByCompanyId()
-		throws Exception {
-
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
-
-		groupParams.put("inherit", Boolean.TRUE);
-		groupParams.put("site", Boolean.TRUE);
-		groupParams.put("usersGroups", TestPropsValues.getUserId());
-
-		List<Group> groups = GroupFinderUtil.findByCompanyId(
-			TestPropsValues.getCompanyId(), groupParams, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS, new GroupNameComparator(true));
-
-		Assert.assertFalse(groups.isEmpty());
 	}
 
 	protected void addLayout(long groupId) throws Exception {
