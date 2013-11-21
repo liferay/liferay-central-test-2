@@ -25,8 +25,6 @@ if (portletResource.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 
 String redirect = ParamUtil.getString(request, "redirect");
 
-String portletNameSpace = PortalUtil.getPortletNamespace(portletResource);
-
 try {
 	Folder rootFolder = DLAppLocalServiceUtil.getFolder(rootFolderId);
 
@@ -277,7 +275,7 @@ catch (NoSuchFolderException nsfe) {
 			valueMap.delta2 = fileEntriesPerPageInput.val();
 		}
 
-		var portlet = Liferay.Util.getTop().AUI().one('#p_p_id<%= HtmlUtil.escapeJS(portletNameSpace) %>');
+		var portlet = Liferay.Util.getTop().AUI().one('#p_p_id<%= HtmlUtil.escapeJS(PortalUtil.getPortletNamespace(portletResource)) %>');
 
 		portlet.refreshURL = portlet.refreshURL.replace(
 			/(cur\d{1}|delta[12])(=|%3D)[^%&]+/g,
