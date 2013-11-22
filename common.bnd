@@ -30,8 +30,7 @@ Liferay-Portal-Version: ${release.info.version}
 		locations='http://obr.liferay.com/r5/liferay-portal/index.xml.gz';\
 		name=remoterepo;\
 		phase=any;\
-		type=R5,\
-	aQute.bnd.signing.JartoolSigner
+		type=R5
 -pluginpath: ${workspace}/osgi/lib/plugin/bnd-repository.jar
 -releaserepo: localrepo
 -sources: false
