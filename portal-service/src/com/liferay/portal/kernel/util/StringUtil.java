@@ -3649,6 +3649,10 @@ public class StringUtil {
 	}
 
 	public static String stripCDATA(String s) {
+		if (s == null) {
+			return s;
+		}
+
 		if (s.startsWith(StringPool.CDATA_OPEN) &&
 			s.endsWith(StringPool.CDATA_CLOSE)) {
 
