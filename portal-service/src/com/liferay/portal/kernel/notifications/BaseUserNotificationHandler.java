@@ -42,6 +42,7 @@ public abstract class BaseUserNotificationHandler
 	}
 
 	@Override
+	@SuppressWarnings("unused")
 	public UserNotificationFeedEntry interpret(
 			UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)
