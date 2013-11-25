@@ -42,19 +42,13 @@ public class ThemeDeployerTest extends BaseDeployerTestCase {
 
 	@Test
 	public void testProcessPluginPackageProperties() throws Exception {
+		processPluginPackageProperties();
 
-		Map<String, String> filterMap = processPluginPackageProperties();
-
-		Assert.assertNotNull("FilterMap must not be null.", filterMap);
-
-		Assert.assertFalse("FilterMap must not be empty.", filterMap.isEmpty());
-
-		File xmlFile = new File(
-			getWebInfFolder(), "liferay-plugin-package.xml");
+		File xmlFile = new File(getWebInfDir(), "liferay-plugin-package.xml");
 
 		validateLiferayPluginPackageXMLFile(xmlFile);
 
-		xmlFile = new File(getWebInfFolder(),"liferay-look-and-feel.xml");
+		xmlFile = new File(getWebInfDir(),"liferay-look-and-feel.xml");
 
 		validateLiferayLookAndFeelXMLFile(xmlFile);
 	}
@@ -63,7 +57,6 @@ public class ThemeDeployerTest extends BaseDeployerTestCase {
 		throws Exception {
 
 		String displayName = "test-theme";
-
 		Properties properties = getLiferayPluginPackageProperties();
 
 		PluginPackage pluginPackage =
@@ -71,18 +64,15 @@ public class ThemeDeployerTest extends BaseDeployerTestCase {
 				displayName, properties);
 
 		Assert.assertNotNull(pluginPackage);
+		Assert.assertEquals("Test Theme", pluginPackage.getName());
 
-		Assert.assertEquals("Test Theme EE", pluginPackage.getName());
+		Deployer deployer = getDeployer();
 
-		Deployer themeDeployer = getDeployer();
+		Map<String, String> filterMap = deployer.processPluginPackageProperties(
+			getRootDir(), displayName, pluginPackage);
 
-		Map<String, String> filterMap =
-			themeDeployer.processPluginPackageProperties(
-				getRootDeploymentFolder(), displayName, pluginPackage);
-
-		Assert.assertNotNull("FilterMap must not be null.", filterMap);
-
-		Assert.assertFalse("FilterMap must not be empty.", filterMap.isEmpty());
+		Assert.assertNotNull(filterMap);
+		Assert.assertFalse(filterMap.isEmpty());
 
 		return filterMap;
 	}
@@ -90,13 +80,11 @@ public class ThemeDeployerTest extends BaseDeployerTestCase {
 	protected void validateLiferayLookAndFeelXMLFile(File xmlFile)
 		throws Exception {
 
-		Assert.assertTrue(
-			"liferay-look-and-feel.xml must be created.", xmlFile.exists());
+		Assert.assertTrue(xmlFile.exists());
 
 		String liferayLookAndFeelXML = FileUtil.read(xmlFile);
 
-		Assert.assertNotNull(
-			"XML file content must not be null.", liferayLookAndFeelXML);
+		Assert.assertNotNull(liferayLookAndFeelXML);
 
 		Document document = SAXReaderUtil.read(liferayLookAndFeelXML, true);
 
@@ -104,11 +92,11 @@ public class ThemeDeployerTest extends BaseDeployerTestCase {
 
 		Element element = rootElement.element("theme");
 
-		String value = element.attribute("name").getValue();
+		String value = element.attributeValue("name");
 
-		Assert.assertEquals("Test Theme EE", value);
+		Assert.assertEquals("Test Theme", value);
 
-		value = element.attribute("id").getValue();
+		value = element.attributeValue("id");
 
 		Assert.assertNotNull(value);
 

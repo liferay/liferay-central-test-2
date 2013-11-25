@@ -35,16 +35,19 @@ import java.io.OutputStream;
 
 import java.util.Properties;
 
+import org.junit.After;
 import org.junit.Assert;
-import org.junit.BeforeClass;
+import org.junit.Before;
 
 /**
  * @author Igor Beslic
  */
 public abstract class BaseDeployerTestCase {
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
+	public abstract Deployer getDeployer();
+
+	@Before
+	public void setUp() throws Exception {
 		FileUtil fileUtil = new FileUtil();
 
 		fileUtil.setFile(new FileImpl());
@@ -53,20 +56,43 @@ public abstract class BaseDeployerTestCase {
 
 		saxReaderUtil.setSAXReader(new SAXReaderImpl());
 
-		transferPropertiesToTempFile();
+		setUpLiferayPluginPackageProperties();
 	}
 
-	public abstract Deployer getDeployer();
-
-	public File getRootDeploymentFolder() {
-		return getWebInfFolder().getParentFile();
+	@After
+	public void tearDown() throws Exception {
+		FileUtil.deltree(getRootDir());
 	}
 
-	public File getWebInfFolder() {
-		return new File(WEB_INF_FOLDER);
+	protected Properties getLiferayPluginPackageProperties()
+		throws IOException {
+
+		InputStream inputStream = new FileInputStream(
+			new File(getWebInfDir(), "liferay-plugin-package.properties"));
+
+		Properties properties = PropertiesUtil.load(
+			StringUtil.read(inputStream));
+
+		Assert.assertFalse(properties.isEmpty());
+
+		return properties;
 	}
 
-	protected static void transferPropertiesToTempFile() throws IOException {
+	protected File getRootDir() {
+		if (_rootDir == null) {
+			_rootDir = new File(
+				SystemProperties.get(SystemProperties.TMP_DIR),
+				StringUtil.randomId());
+		}
+
+		return _rootDir;
+	}
+
+	protected File getWebInfDir() {
+		return new File(getRootDir(), "WEB-INF");
+	}
+
+	protected void setUpLiferayPluginPackageProperties() throws Exception {
 		InputStream inputStream = null;
 		OutputStream outputStream = null;
 
@@ -74,10 +100,12 @@ public abstract class BaseDeployerTestCase {
 			inputStream = BaseDeployerTestCase.class.getResourceAsStream(
 				"dependencies/liferay-plugin-package.properties");
 
-			FileUtil.mkdirs(WEB_INF_FOLDER);
+			File webInfDir = getWebInfDir();
+
+			webInfDir.mkdirs();
 
 			outputStream = new FileOutputStream(
-				new File(WEB_INF_FOLDER, "liferay-plugin-package.properties"));
+				new File(webInfDir, "liferay-plugin-package.properties"));
 
 			StreamUtil.transfer(inputStream, outputStream);
 		}
@@ -87,33 +115,14 @@ public abstract class BaseDeployerTestCase {
 		}
 	}
 
-	protected Properties getLiferayPluginPackageProperties()
-		throws IOException {
-
-		InputStream inputStream = new FileInputStream(
-			WEB_INF_FOLDER + "/liferay-plugin-package.properties");
-
-		String stringProperties = StringUtil.read(inputStream);
-
-		Properties properties = PropertiesUtil.load(stringProperties);
-
-		Assert.assertFalse(
-			"Test properties have not been loaded properly.",
-			properties.isEmpty());
-
-		return properties;
-	}
-
 	protected void validateLiferayPluginPackageXMLFile(File xmlFile)
 		throws Exception {
 
-		Assert.assertTrue(
-			"liferay-plugin-package.xml must be created.", xmlFile.exists());
+		Assert.assertTrue(xmlFile.exists());
 
 		String liferayPluginPackageXML = FileUtil.read(xmlFile);
 
-		Assert.assertNotNull(
-			"XML file content must not be null.", liferayPluginPackageXML);
+		Assert.assertNotNull(liferayPluginPackageXML);
 
 		Document document = SAXReaderUtil.read(liferayPluginPackageXML, true);
 
@@ -121,40 +130,34 @@ public abstract class BaseDeployerTestCase {
 
 		Element element = rootElement.element("name");
 
-		Assert.assertNotNull("Name element missing.", element);
+		Assert.assertNotNull(element);
 
 		element = rootElement.element("tags");
 
 		Assert.assertNotNull(element);
-
 		Assert.assertNotNull(element.getTextTrim());
 
 		element = rootElement.element("short-description");
 
 		Assert.assertNotNull(element);
-
 		Assert.assertEquals("Test", element.getTextTrim());
 
 		element = rootElement.element("page-url");
 
 		Assert.assertNotNull(element);
-
 		Assert.assertNotNull(element.getTextTrim());
 
 		element = rootElement.element("author");
 
 		Assert.assertNotNull(element);
-
 		Assert.assertNotNull(element.getTextTrim());
 
 		element = rootElement.element("liferay-versions");
 
 		Assert.assertNotNull(element);
-
 		Assert.assertNotNull(element.getTextTrim());
 	}
 
-	private static final String WEB_INF_FOLDER = SystemProperties.get(
-		SystemProperties.TMP_DIR) + "/WEB-INF";
+	private File _rootDir;
 
 }
