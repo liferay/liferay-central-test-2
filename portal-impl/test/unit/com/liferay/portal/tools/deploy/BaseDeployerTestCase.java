@@ -41,7 +41,7 @@ import org.junit.BeforeClass;
 /**
  * @author Igor Beslic
  */
-public abstract class BaseDeployerTest {
+public abstract class BaseDeployerTestCase {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
@@ -71,7 +71,7 @@ public abstract class BaseDeployerTest {
 		OutputStream outputStream = null;
 
 		try {
-			inputStream = BaseDeployerTest.class.getResourceAsStream(
+			inputStream = BaseDeployerTestCase.class.getResourceAsStream(
 				"dependencies/liferay-plugin-package.properties");
 
 			FileUtil.mkdirs(WEB_INF_FOLDER);

@@ -33,7 +33,7 @@ import org.junit.Test;
 /**
  * @author Igor Beslic
  */
-public class ThemeDeployerTest extends BaseDeployerTest {
+public class ThemeDeployerTest extends BaseDeployerTestCase {
 
 	@Override
 	public Deployer getDeployer() {
