@@ -58,7 +58,7 @@
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByHidden">
 		<![CDATA[
 			SELECT
-				DISTINCT {AnnouncementsEntry.*}
+				{AnnouncementsEntry.*}
 			FROM
 				AnnouncementsEntry
 			LEFT JOIN
@@ -79,7 +79,7 @@
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByNotHidden">
 		<![CDATA[
 			SELECT
-				DISTINCT {AnnouncementsEntry.*}
+				{AnnouncementsEntry.*}
 			FROM
 				AnnouncementsEntry
 			WHERE
