@@ -524,9 +524,9 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 * AssetPublisherImpl#getAssetEntries(
-	 *  PortletRequest, PortletPreferences, PermissionChecker, long[], long[],
-	 *  String[], boolean , boolean)}
+	 *             AssetPublisherImpl#getAssetEntries( PortletRequest,
+	 *             PortletPreferences, PermissionChecker, long[], long[],
+	 *             String[], boolean , boolean)}
 	 */
 	@Override
 	public List<AssetEntry> getAssetEntries(
@@ -546,9 +546,9 @@ public class AssetPublisherImpl implements AssetPublisher {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 * AssetPublisherImpl#getAssetEntries(
-	 *  PortletRequest, PortletPreferences, PermissionChecker, long[], boolean,
-	 *  boolean)}
+	 *             AssetPublisherImpl#getAssetEntries( PortletRequest,
+	 *             PortletPreferences, PermissionChecker, long[], boolean,
+	 *             boolean)}
 	 */
 	@Override
 	public List<AssetEntry> getAssetEntries(
