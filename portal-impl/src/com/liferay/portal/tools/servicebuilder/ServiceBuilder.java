@@ -799,7 +799,7 @@ public class ServiceBuilder {
 
 				_createProps();
 
-				_deleteJPALegacyXml();
+				_deleteOrmXml();
 				_deleteSpringLegacyXml();
 			}
 		}
@@ -3569,7 +3569,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _deleteJPALegacyXml() throws Exception {
+	private void _deleteOrmXml() throws Exception {
 		if (Validator.isNull(_pluginName)) {
 			return;
 		}
