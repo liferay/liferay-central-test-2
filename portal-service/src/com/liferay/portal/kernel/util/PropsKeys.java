@@ -1599,7 +1599,7 @@ public interface PropsKeys {
 
 	public static final String MAIL_SESSION_MAIL_TRANSPORT_PROTOCOL = "mail.session.mail.transport.protocol";
 
-	public static final String MAIL_THROW_EXCEPTION_WHEN_FAILS = "mail.throw.exception.when.fails";
+	public static final String MAIL_THROWS_EXCEPTION_ON_FAILURE = "mail.throws.exception.on.failure";
 
 	public static final String MEMBERSHIP_POLICY_AUTO_VERIFY = "membership.policy.auto.verify";
 

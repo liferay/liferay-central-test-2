@@ -523,20 +523,21 @@ public class MailEngine {
 
 		try {
 			failOnException = PrefsPropsUtil.getBoolean(
-				PropsKeys.MAIL_THROW_EXCEPTION_WHEN_FAILS, false);
+				PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE);
 		}
-		catch (SystemException e) {
+		catch (SystemException se) {
 			_log.error(
 				"Error getting preference: " +
-				PropsKeys.MAIL_THROW_EXCEPTION_WHEN_FAILS);
+				PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE);
 		}
 
 		return failOnException;
 	}
 
 	private static void _send(
-		Session session, Message message, InternetAddress[] bulkAddresses,
-		int batchSize) throws MailEngineException {
+			Session session, Message message, InternetAddress[] bulkAddresses,
+			int batchSize)
+		throws MailEngineException {
 
 		try {
 			boolean smtpAuth = GetterUtil.getBoolean(
