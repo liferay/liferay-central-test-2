@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
-import com.liferay.portal.kernel.util.PrefsPropsUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -519,19 +518,8 @@ public class MailEngine {
 	}
 
 	private static boolean _isFailOnException() {
-		boolean failOnException = false;
-
-		try {
-			failOnException = PrefsPropsUtil.getBoolean(
-				PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE);
-		}
-		catch (SystemException se) {
-			_log.error(
-				"Error getting preference: " +
-				PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE);
-		}
-
-		return failOnException;
+		return GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE));
 	}
 
 	private static void _send(
