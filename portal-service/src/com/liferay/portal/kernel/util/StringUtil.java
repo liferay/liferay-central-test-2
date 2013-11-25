@@ -3648,6 +3648,28 @@ public class StringUtil {
 		return sb.toString();
 	}
 
+	/**
+	 * Returns a string representing the string <code>s</code> with
+	 * <pre>&lt;![CDATA[]]&gt;</pre>
+	 * expression removed.
+	 *
+	 * <p>
+	 * Example:
+	 * <p>
+	 *
+	 * <p>
+	 * <pre>
+	 * <code>
+	 * stripCDATA("&lt;![CDATA[One small step for man]]&gt;") returns "One small step for man"
+	 * </code>
+	 * </pre>
+	 * </p>
+	 *
+	 * @param  s the from which to strip a CDATA wrapper
+	 * @return a string representing the string <code>s</code> with
+	 *         <pre>&lt;![CDATA[]]&gt;</pre>expression removed, or the original string if the value of
+	 *         <code>s</code> is <code>null</code>
+	 */
 	public static String stripCDATA(String s) {
 		if (s == null) {
 			return s;
