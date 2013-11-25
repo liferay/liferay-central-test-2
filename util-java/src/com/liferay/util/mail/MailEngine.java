@@ -358,7 +358,7 @@ public class MailEngine {
 		catch (SendFailedException sfe) {
 			_log.error(sfe);
 
-			if (_isFailOnException()) {
+			if (_isThrowsExceptionOnFailure()) {
 				throw new MailEngineException(sfe);
 			}
 		}
@@ -517,7 +517,7 @@ public class MailEngine {
 		}
 	}
 
-	private static boolean _isFailOnException() {
+	private static boolean _isThrowsExceptionOnFailure() {
 		return GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.MAIL_THROWS_EXCEPTION_ON_FAILURE));
 	}
@@ -603,7 +603,7 @@ public class MailEngine {
 				LogUtil.log(_log, me);
 			}
 
-			if (_isFailOnException()) {
+			if (_isThrowsExceptionOnFailure()) {
 				throw new MailEngineException(me);
 			}
 		}
