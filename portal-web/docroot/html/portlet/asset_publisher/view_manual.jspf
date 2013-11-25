@@ -15,9 +15,9 @@
 --%>
 
 <%
-boolean isEnablePermissions = AssetUtil.isEnablePermissions(portletPreferences, portletName);
+boolean enablePermissions = AssetUtil.isEnablePermissions(portletPreferences, portletName);
 
-List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(renderRequest, portletPreferences, permissionChecker, groupIds, allAssetCategoryIds, allAssetTagNames, false, isEnablePermissions);
+List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(renderRequest, portletPreferences, permissionChecker, groupIds, allAssetCategoryIds, allAssetTagNames, false, enablePermissions);
 
 searchContainer.setTotal(assetEntries.size());
 
