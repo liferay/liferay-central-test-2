@@ -73,25 +73,34 @@ public class FriendlyURLServletTest {
 		Layout layout = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString());
 
-		doTestGetRedirect(
+		testGetRedirect(
 			getPath(group, layout), Portal.PATH_MAIN,
 			new Object[] {getURL(layout), false});
 	}
 
 	@Test
 	public void testGetRedirectWithInvalidPath() throws Exception {
-		doTestGetRedirect(
+		testGetRedirect(
 			null, Portal.PATH_MAIN, new Object[] {Portal.PATH_MAIN, false});
-		doTestGetRedirect(
+		testGetRedirect(
 			"test", Portal.PATH_MAIN, new Object[] {Portal.PATH_MAIN, false});
 	}
 
 	@Test(expected = NoSuchGroupException.class)
 	public void testGetRedirectWithNonExistentSite() throws Exception {
-		doTestGetRedirect("/non-existent-site/home", Portal.PATH_MAIN, null);
+		testGetRedirect("/non-existent-site/home", Portal.PATH_MAIN, null);
 	}
 
-	protected void doTestGetRedirect(
+	protected String getPath(Group group, Layout layout) {
+		return group.getFriendlyURL() + layout.getFriendlyURL();
+	}
+
+	protected String getURL(Layout layout) {
+		return "/c/portal/layout?p_l_id=" + layout.getPlid() +
+			"&p_v_l_s_g_id=0";
+	}
+
+	protected void testGetRedirect(
 			String path, String mainPath, Object[] expectedRedirectArray)
 		throws Exception {
 
@@ -99,15 +108,6 @@ public class FriendlyURLServletTest {
 			_request, path, mainPath, Collections.<String, String[]>emptyMap());
 
 		Assert.assertEquals(actualRedirectArray, expectedRedirectArray);
-	}
-
-	protected String getPath(Group group, Layout layout) {
- 		return group.getFriendlyURL() + layout.getFriendlyURL();
-	}
-
-	protected String getURL(Layout layout) {
-		return "/c/portal/layout?p_l_id=" + layout.getPlid() +
-			"&p_v_l_s_g_id=0";
 	}
 
 	private FriendlyURLServlet _friendlyURLServlet = new FriendlyURLServlet();
