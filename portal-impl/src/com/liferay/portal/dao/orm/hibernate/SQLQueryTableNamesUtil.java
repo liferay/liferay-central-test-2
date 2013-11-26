@@ -47,7 +47,7 @@ public class SQLQueryTableNamesUtil {
 			statement = _jSqlParser.parse(new UnsyncStringReader(sql));
 		}
 		catch (JSQLParserException jsqlpe) {
-			_log.error("Unable to parse sql : " + sql, jsqlpe);
+			_log.error("Unable to parse SQL: " + sql, jsqlpe);
 		}
 
 		if ((statement == null) || !(statement instanceof Select)) {

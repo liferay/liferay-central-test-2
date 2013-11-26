@@ -44,7 +44,8 @@ public interface Session {
 		throws ORMException;
 
 	public SQLQuery createSynchronizedSQLQuery(
-		String queryString, boolean strictName) throws ORMException;
+			String queryString, boolean strictName)
+		throws ORMException;
 
 	public void delete(Object object) throws ORMException;
 
