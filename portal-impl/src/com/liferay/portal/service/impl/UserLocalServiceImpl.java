@@ -2060,11 +2060,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
-	 * Returns the user with the portraitId.
+	 * Returns the user with the portrait ID.
 	 *
-	 * @param  portraitId the user's portraitId
-	 * @return the user with the portraitId, or <code>null</code> if a user with
-	 *         the portraitId could not be found
+	 * @param  portraitId the user's portrait ID
+	 * @return the user with the portrait ID, or <code>null</code> if a user
+	 *         with the portrait ID could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
