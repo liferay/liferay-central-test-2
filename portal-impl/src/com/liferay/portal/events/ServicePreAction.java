@@ -959,10 +959,6 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			if (layout.isLayoutPrototypeLinkActive()) {
-				themeDisplay.setShowPageCustomizationIcon(false);
-			}
-
 			if (hasUpdateLayoutPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
 
@@ -1236,6 +1232,10 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowAddContentIcon(false);
 			themeDisplay.setShowMyAccountIcon(false);
 			themeDisplay.setShowPageSettingsIcon(false);
+		}
+
+		if (layout.isLayoutPrototypeLinkActive()) {
+			themeDisplay.setShowPageCustomizationIcon(false);
 		}
 
 		if (group.isLayoutPrototype()) {
