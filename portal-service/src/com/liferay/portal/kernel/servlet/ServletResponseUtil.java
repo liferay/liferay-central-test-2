@@ -540,17 +540,19 @@ public class ServletResponseUtil {
 		}
 	}
 
-	public static void write(HttpServletResponse response, InputStream is)
+	public static void write(
+			HttpServletResponse response, InputStream inputStream)
 		throws IOException {
 
-		write(response, is, 0);
+		write(response, inputStream, 0);
 	}
 
 	public static void write(
-			HttpServletResponse response, InputStream is, long contentLength)
+			HttpServletResponse response, InputStream inputStream,
+			long contentLength)
 		throws IOException {
 
-		OutputStream os = null;
+		OutputStream outputStream = null;
 
 		try {
 			if (response.isCommitted()) {
@@ -564,10 +566,10 @@ public class ServletResponseUtil {
 
 			response.flushBuffer();
 
-			StreamUtil.transfer(is, response.getOutputStream(), false);
+			StreamUtil.transfer(inputStream, response.getOutputStream(), false);
 		}
 		finally {
-			StreamUtil.cleanUp(is, os);
+			StreamUtil.cleanUp(inputStream, outputStream);
 		}
 	}
 
