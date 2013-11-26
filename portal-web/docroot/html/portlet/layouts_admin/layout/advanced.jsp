@@ -57,17 +57,12 @@ UnicodeProperties layoutTypeSettings = selLayout.getTypeSettingsProperties();
 			<portlet:param name="imageId" value="<%= String.valueOf(selLayout.getIconImageId()) %>" />
 		</portlet:renderURL>
 
-		<%
-		String editLogoFn = liferayPortletResponse.getNamespace() + "editLayoutLogo";
-		String logoDisplaySelector = ".layout-logo-" + selLayout.getPlid();
-		%>
-
 		<liferay-ui:logo-selector
 			defaultLogoURL='<%= themeDisplay.getPathThemeImages() + "/spacer.png" %>'
-			editLogoFn="<%= editLogoFn %>"
+			editLogoFn='<%= liferayPortletResponse.getNamespace() + "editLayoutLogo" %>'
 			editLogoURL="<%= editLayoutIconImageURL %>"
 			imageId="<%= selLayout.isIconImage() ? selLayout.getIconImageId() : 0 %>"
-			logoDisplaySelector="<%= logoDisplaySelector %>"
+			logoDisplaySelector='<%= ".layout-logo-" + selLayout.getPlid() %>'
 		/>
 	</aui:field-wrapper>
 </aui:fieldset>
