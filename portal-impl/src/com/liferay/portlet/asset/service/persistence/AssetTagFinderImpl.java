@@ -274,11 +274,9 @@ public class AssetTagFinderImpl
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
-
-			q.addSynchronizedQuerySpace(AssetEntryModelImpl.TABLE_NAME);
-			q.addSynchronizedQuerySpace(
-				AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME);
-			q.addSynchronizedQuerySpace(AssetTagModelImpl.TABLE_NAME);
+			q.addSynchronizedQuerySpaces(
+				AssetEntryModelImpl.MAPPING_TABLE_ASSETENTRIES_ASSETTAGS_NAME,
+				AssetEntryModelImpl.TABLE_NAME, AssetTagModelImpl.TABLE_NAME);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
