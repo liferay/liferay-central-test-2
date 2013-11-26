@@ -25,8 +25,14 @@ public interface SQLQuery extends Query {
 
 	public SQLQuery addSynchronizedEntityClass(Class<?> entityClass);
 
+	public SQLQuery addSynchronizedEntityClasses(Class<?>... entityClasses);
+
 	public SQLQuery addSynchronizedEntityName(String entityName);
 
+	public SQLQuery addSynchronizedEntityNames(String... entityNames);
+
 	public SQLQuery addSynchronizedQuerySpace(String querySpace);
+
+	public SQLQuery addSynchronizedQuerySpaces(String... querySpaces);
 
 }
