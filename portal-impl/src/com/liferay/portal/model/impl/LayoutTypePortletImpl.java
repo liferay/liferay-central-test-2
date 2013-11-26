@@ -1667,7 +1667,7 @@ public class LayoutTypePortletImpl
 			}
 
 			if (PortletConstants.hasInstanceId(portletId) ||
-				 preferencesUniquePerLayout) {
+				preferencesUniquePerLayout) {
 
 				String instanceId = null;
 
