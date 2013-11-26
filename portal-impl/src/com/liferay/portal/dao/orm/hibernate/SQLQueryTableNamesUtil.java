@@ -35,7 +35,7 @@ import net.sf.jsqlparser.util.TablesNamesFinder;
 public class SQLQueryTableNamesUtil {
 
 	public static String[] getTableNames(String sql) {
-		String[] tableNames = _sqlQueryTableNamesCache.get(sql);
+		String[] tableNames = _portalCache.get(sql);
 
 		if (tableNames != null) {
 			return tableNames;
@@ -53,7 +53,7 @@ public class SQLQueryTableNamesUtil {
 		if ((statement == null) || !(statement instanceof Select)) {
 			tableNames = new String[0];
 
-			_sqlQueryTableNamesCache.put(sql, tableNames);
+			_portalCache.put(sql, tableNames);
 
 			return tableNames;
 		}
@@ -65,7 +65,7 @@ public class SQLQueryTableNamesUtil {
 
 		tableNames = tableNameList.toArray(new String[tableNameList.size()]);
 
-		_sqlQueryTableNamesCache.put(sql, tableNames);
+		_portalCache.put(sql, tableNames);
 
 		return tableNames;
 	}
@@ -74,7 +74,7 @@ public class SQLQueryTableNamesUtil {
 		SQLQueryTableNamesUtil.class);
 
 	private static JSqlParser _jSqlParser = new CCJSqlParserManager();
-	private static PortalCache<String, String[]> _sqlQueryTableNamesCache =
+	private static PortalCache<String, String[]> _portalCache =
 		SingleVMPoolUtil.getCache(SQLQueryTableNamesUtil.class.getName());
 
 }
