@@ -73,11 +73,9 @@ public class FriendlyURLServletTest {
 		Layout layout = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString());
 
-		String[] pathAndURL = getPathAndURL(group, layout);
-
 		doTestGetRedirect(
-			pathAndURL[0], Portal.PATH_MAIN,
-			new Object[] {pathAndURL[1], false});
+			getPath(group, layout), Portal.PATH_MAIN,
+			new Object[] {getURL(layout), false});
 	}
 
 	@Test
@@ -103,14 +101,13 @@ public class FriendlyURLServletTest {
 		Assert.assertEquals(actualRedirectArray, expectedRedirectArray);
 	}
 
-	protected String[] getPathAndURL(Group group, Layout layout) {
-		String[] pathAndURL = new String[2];
+	protected String getPath(Group group, Layout layout) {
+ 		return group.getFriendlyURL() + layout.getFriendlyURL();
+	}
 
-		pathAndURL[0] = group.getFriendlyURL() + layout.getFriendlyURL();
-		pathAndURL[1] =
-			"/c/portal/layout?p_l_id=" + layout.getPlid() + "&p_v_l_s_g_id=0";
-
-		return pathAndURL;
+	protected String getURL(Layout layout) {
+		return "/c/portal/layout?p_l_id=" + layout.getPlid() +
+			"&p_v_l_s_g_id=0";
 	}
 
 	private FriendlyURLServlet _friendlyURLServlet = new FriendlyURLServlet();
