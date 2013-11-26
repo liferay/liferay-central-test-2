@@ -17,7 +17,6 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.ServiceContext;
@@ -32,9 +31,10 @@ import com.liferay.portal.util.Portal;
 
 import java.util.Collections;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -54,18 +54,11 @@ import org.testng.Assert;
 @Transactional
 public class FriendlyURLServletTest {
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
-		_friendlyURLServlet = new FriendlyURLServlet();
-
-		_serviceContext = ServiceTestUtil.getServiceContext();
-	}
-
 	@Before
 	public void setUp() throws Exception {
-		_mockHttpServletRequest = new MockHttpServletRequest();
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
-		ServiceContextThreadLocal.pushServiceContext(_serviceContext);
+		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 	}
 
 	@After
@@ -83,22 +76,16 @@ public class FriendlyURLServletTest {
 		String[] pathAndURL = getPathAndURL(group, layout);
 
 		doTestGetRedirect(
-			pathAndURL[0], Portal.PATH_MAIN, new Object[] {
-				pathAndURL[1], false
-			});
+			pathAndURL[0], Portal.PATH_MAIN,
+			new Object[] {pathAndURL[1], false});
 	}
 
 	@Test
 	public void testGetRedirectWithInvalidPath() throws Exception {
 		doTestGetRedirect(
-			null, Portal.PATH_MAIN, new Object[] {
-				Portal.PATH_MAIN, false
-			});
-
+			null, Portal.PATH_MAIN, new Object[] {Portal.PATH_MAIN, false});
 		doTestGetRedirect(
-			"test", Portal.PATH_MAIN, new Object[] {
-				Portal.PATH_MAIN, false
-			});
+			"test", Portal.PATH_MAIN, new Object[] {Portal.PATH_MAIN, false});
 	}
 
 	@Test(expected = NoSuchGroupException.class)
@@ -111,8 +98,7 @@ public class FriendlyURLServletTest {
 		throws Exception {
 
 		Object[] actualRedirectArray = _friendlyURLServlet.getRedirect(
-			_mockHttpServletRequest, path, mainPath,
-			Collections.<String, String[]>emptyMap());
+			_request, path, mainPath, Collections.<String, String[]>emptyMap());
 
 		Assert.assertEquals(actualRedirectArray, expectedRedirectArray);
 	}
@@ -120,21 +106,14 @@ public class FriendlyURLServletTest {
 	protected String[] getPathAndURL(Group group, Layout layout) {
 		String[] pathAndURL = new String[2];
 
-		StringBundler sb = new StringBundler(4);
-
-		sb.append(group.getFriendlyURL());
-		sb.append(layout.getFriendlyURL());
-
-		pathAndURL[0] = sb.toString();
+		pathAndURL[0] = group.getFriendlyURL() + layout.getFriendlyURL();
 		pathAndURL[1] =
 			"/c/portal/layout?p_l_id=" + layout.getPlid() + "&p_v_l_s_g_id=0";
 
 		return pathAndURL;
 	}
 
-	private static FriendlyURLServlet _friendlyURLServlet;
-	private static ServiceContext _serviceContext;
-
-	private MockHttpServletRequest _mockHttpServletRequest;
+	private FriendlyURLServlet _friendlyURLServlet = new FriendlyURLServlet();
+	private HttpServletRequest _request = new MockHttpServletRequest();
 
 }
