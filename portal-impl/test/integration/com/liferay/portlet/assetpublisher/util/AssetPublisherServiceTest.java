@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.ReadOnlyException;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -71,9 +72,7 @@ public class AssetPublisherServiceTest {
 	@Transactional
 	public void testGetAssetEntries() throws Exception {
 		PortletPreferences mockPortletPreferences =
-			new MockPortletPreferences();
-
-		mockPortletPreferences.setValues("assetEntryXml", _assetEntryXmls);
+			getAssetPublisherPortletPreferences();
 
 		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
 			new MockPortletRequest(), mockPortletPreferences,
@@ -97,9 +96,7 @@ public class AssetPublisherServiceTest {
 			allAssetCategoryIds, _NO_ASSET_TAG_NAMES, 2, true);
 
 		PortletPreferences mockPortletPreferences =
-			new MockPortletPreferences();
-
-		mockPortletPreferences.setValues("assetEntryXml", _assetEntryXmls);
+			getAssetPublisherPortletPreferences();
 
 		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
 			new MockPortletRequest(), mockPortletPreferences,
@@ -136,9 +133,7 @@ public class AssetPublisherServiceTest {
 			allCategoyIds, allAssetTagNames, 2, true);
 
 		PortletPreferences mockPortletPreferences =
-			new MockPortletPreferences();
-
-		mockPortletPreferences.setValues("assetEntryXml", _assetEntryXmls);
+			getAssetPublisherPortletPreferences();
 
 		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
 			new MockPortletRequest(), mockPortletPreferences,
@@ -167,9 +162,7 @@ public class AssetPublisherServiceTest {
 			_NO_ASSET_CATEGORY_IDS, allAssetTagNames, 2, true);
 
 		PortletPreferences mockPortletPreferences =
-			new MockPortletPreferences();
-
-		mockPortletPreferences.setValues("assetEntryXml", _assetEntryXmls);
+			getAssetPublisherPortletPreferences();
 
 		List<AssetEntry> assetEntries = AssetPublisherUtil.getAssetEntries(
 			new MockPortletRequest(), mockPortletPreferences,
@@ -254,6 +247,17 @@ public class AssetPublisherServiceTest {
 					TestPropsValues.getGroupId()));
 
 		addAssetCategories(assetVocabulary.getVocabularyId());
+	}
+
+	protected PortletPreferences getAssetPublisherPortletPreferences()
+		throws ReadOnlyException {
+
+		PortletPreferences mockPortletPreferences =
+			new MockPortletPreferences();
+
+		mockPortletPreferences.setValues("assetEntryXml", _assetEntryXmls);
+
+		return mockPortletPreferences;
 	}
 
 	private static final String[] _ASSET_CATEGORY_NAMES =
