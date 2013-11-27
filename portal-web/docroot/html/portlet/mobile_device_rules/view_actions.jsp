@@ -18,7 +18,6 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
 long ruleGroupInstanceId = ParamUtil.getLong(request, "ruleGroupInstanceId");
