@@ -74,8 +74,10 @@ public abstract class BaseTemplateHandler implements TemplateHandler {
 		String content = StringPool.BLANK;
 
 		try {
+			Class<?> clazz = getClass();
+
 			content = StringUtil.read(
-				getClass().getClassLoader(), getTemplatesHelpPath(language));
+				clazz.getClassLoader(), getTemplatesHelpPath(language));
 		}
 		catch (IOException ioe1) {
 			try {
