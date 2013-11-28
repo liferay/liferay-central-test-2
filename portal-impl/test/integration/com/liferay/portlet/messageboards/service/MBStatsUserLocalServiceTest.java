@@ -178,7 +178,6 @@ public class MBStatsUserLocalServiceTest {
 	protected void updateMessage(int workflowAction) throws Exception {
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			Collections.emptyList();
-
 		List<String> existingFiles = Collections.emptyList();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
