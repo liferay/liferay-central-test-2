@@ -30,7 +30,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -46,49 +45,34 @@ import org.junit.runner.RunWith;
 @Transactional
 public class AssetTagStatsServiceTest {
 
-	@Before
-	public void setUp() throws Exception {
+	@Test
+	@Transactional
+	public void testGetTagStats() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			TestPropsValues.getGroupId());
 
-		serviceContext.setAssetTagNames(_ASSET_TAG_NAMES);
+		serviceContext.setAssetTagNames(new String[] {"basketball"});
 
-		_article = JournalTestUtil.addArticle(
+		JournalArticle journalArticle = JournalTestUtil.addArticle(
 			TestPropsValues.getGroupId(), ServiceTestUtil.randomString(),
 			ServiceTestUtil.randomString(100), serviceContext);
 
-		AssetTag assetTag = AssetTagLocalServiceUtil.getTag(
-			TestPropsValues.getGroupId(), _ASSET_TAG_NAME);
+		AssetTag tag = AssetTagLocalServiceUtil.getTag(
+			TestPropsValues.getGroupId(), "basketball");
 
-		_tagId = assetTag.getTagId();
+		long classNameId = PortalUtil.getClassNameId(JournalArticle.class);
+
+		AssetTagStats tagStats = AssetTagStatsLocalServiceUtil.getTagStats(
+			tag.getTagId(), classNameId);
+
+		Assert.assertEquals(1, tagStats.getAssetCount());
+
+		JournalArticleLocalServiceUtil.deleteArticle(journalArticle);
+
+		tagStats = AssetTagStatsLocalServiceUtil.getTagStats(
+			tag.getTagId(), classNameId);
+
+		Assert.assertEquals(0, tagStats.getAssetCount());
 	}
-
-	@Test
-	@Transactional
-	public void testGetTagStatsAfterAddingAsset() throws Exception {
-		AssetTagStats assetTagStats = AssetTagStatsLocalServiceUtil.getTagStats(
-			_tagId, _classNameId);
-
-		Assert.assertEquals(1, assetTagStats.getAssetCount());
-	}
-
-	@Test
-	@Transactional
-	public void testGetTagStatsAfterDeletingAsset() throws Exception {
-		JournalArticleLocalServiceUtil.deleteArticle(_article);
-
-		AssetTagStats assetTagStats = AssetTagStatsLocalServiceUtil.getTagStats(
-			_tagId, _classNameId);
-
-		Assert.assertEquals(0, assetTagStats.getAssetCount());
-	}
-
-	private static final String _ASSET_TAG_NAME = "basketball";
-
-	private static final String[] _ASSET_TAG_NAMES = {_ASSET_TAG_NAME};
-
-	private JournalArticle _article = null;
-	private long _classNameId = PortalUtil.getClassNameId(JournalArticle.class);
-	private long _tagId = 0;
 
 }
