@@ -516,44 +516,29 @@ public class Logger {
 
 				sb.append(
 					"var newAction = window.document.createElement('ul');");
-
 				sb.append("newAction.setAttribute('class', 'collapse');");
 				sb.append("newAction.setAttribute('id', 'collapseAction");
 				sb.append(_actionCount - 1);
-				sb.append("');");
-
-				sb.append("logger.appendChild(newAction);");
+				sb.append("'); logger.appendChild(newAction);");
 			}
 
 			sb.append("var actionLog = window.document.getElementById('");
 			sb.append("collapseAction");
 			sb.append(_actionCount - 1);
-			sb.append("');");
-
-			sb.append("var newLine = window.document.createElement('div');");
-
-			sb.append("newLine.setAttribute('class', 'line');");
-
+			sb.append("'); var newLine = window.document.createElement(");
+			sb.append("'div'); newLine.setAttribute('class', 'line'); ");
 			sb.append("newLine.innerHTML = '");
 			sb.append(StringEscapeUtils.escapeEcmaScript(message));
-			sb.append("';");
-
-			sb.append("actionLog.appendChild(newLine);");
-
+			sb.append("'; actionLog.appendChild(newLine);");
 			sb.append("actionLog.scrollTop = logger.scrollHeight;");
 		}
 		else {
 			sb.append("var newLine = window.document.createElement('div');");
-
 			sb.append("newLine.setAttribute('class', 'line');");
-
 			sb.append("newLine.innerHTML = '");
 			sb.append(StringEscapeUtils.escapeEcmaScript(message));
-			sb.append("';");
-
-			sb.append("logger.appendChild(newLine);");
-
-			sb.append("logger.scrollTop = logger.scrollHeight;");
+			sb.append("'; logger.appendChild(newLine); logger.scrollTop = ");
+			sb.append("logger.scrollHeight;");
 		}
 
 		_javascriptExecutor.executeScript(sb.toString());
