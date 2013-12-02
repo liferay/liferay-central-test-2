@@ -418,7 +418,7 @@ ECJ was automatically installed. Please rerun your task.
 .
 
 Please manually copy ${project.dir}/lib/development/error-prone-ant.jar to
-${ant.home}/lib to install Google Error-Prone Compiler. Then rerun your task.
+${ant.home}/lib to install Error-Prone. Then rerun your task.
 							</fail>
 						</catch>
 					</trycatch>
@@ -429,9 +429,9 @@ ${ant.home}/lib to install Google Error-Prone Compiler. Then rerun your task.
 							<fail>
 .
 
-Task cannot continue because Google Error-Prone Compiler is not installed.
+Task cannot continue because Error-Prone is not installed.
 
-Google Error-Prone Compiler was automatically installed. Please rerun your task.
+Error-Prone was automatically installed. Please rerun your task.
 							</fail>
 						</then>
 					</if>
