@@ -792,10 +792,10 @@ public class EditFileEntryAction extends PortletAction {
 						WebKeys.UPLOAD_EXCEPTION);
 
 				if (uploadException != null) {
-					String uploadServletErrorRedirect = ParamUtil.getString(
-						actionRequest, "uploadServletErrorRedirect");
+					String uploadExceptionRedirect = ParamUtil.getString(
+						actionRequest, "uploadExceptionRedirect");
 
-					actionResponse.sendRedirect(uploadServletErrorRedirect);
+					actionResponse.sendRedirect(uploadExceptionRedirect);
 				}
 
 				SessionErrors.add(actionRequest, e.getClass());
