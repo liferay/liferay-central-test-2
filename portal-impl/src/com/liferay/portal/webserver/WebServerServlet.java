@@ -546,14 +546,18 @@ public class WebServerServlet extends HttpServlet {
 			}
 		}
 
-		if (PropsValues.USERS_IMAGE_CHECK_TOKEN && (imageId > 0)) {
-			String imageIdToken = ParamUtil.getString(request, "img_id_token");
+		if (PropsValues.USERS_IMAGE_PORTRAIT_ENUMERATION_CHECK &&
+			(imageId > 0)) {
+
+			String uipec = ParamUtil.get(request, "uipec", StringPool.BLANK);
 
 			if (user == null) {
 				user = UserLocalServiceUtil.fetchUserByPortraitId(imageId);
 			}
 
-			if (!imageIdToken.equals(DigesterUtil.digest(user.getUserUuid()))) {
+			String uuidDigest = DigesterUtil.digest(user.getUserUuid());
+
+			if (!uipec.equals(uuidDigest)) {
 				return 0;
 			}
 		}

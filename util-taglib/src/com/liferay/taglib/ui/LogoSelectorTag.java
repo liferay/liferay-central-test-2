@@ -44,8 +44,8 @@ public class LogoSelectorTag extends IncludeTag {
 		_logoDisplaySelector = logoDisplaySelector;
 	}
 
-	public void setPortraitUser(User portraitUser) {
-		_portraitUser = portraitUser;
+	public void setPortraitUser(User user) {
+		this._portraitUser = user;
 	}
 
 	public void setShowBackground(boolean showBackground) {
@@ -96,7 +96,7 @@ public class LogoSelectorTag extends IncludeTag {
 	private String _editLogoURL;
 	private long _imageId;
 	private String _logoDisplaySelector;
-	private User _portraitUser;
+	private User _portraitUser = null;
 	private boolean _showBackground = true;
 
 }
