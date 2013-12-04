@@ -1909,6 +1909,7 @@ public class UserServiceHttp {
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		boolean portrait, byte[] portraitBytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1926,7 +1927,8 @@ public class UserServiceHttp {
 					msnSn, mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle,
 					groupIds, organizationIds, roleIds, userGroupRoles,
 					userGroupIds, addresses, emailAddresses, phones, websites,
-					announcementsDelivers, serviceContext);
+					announcementsDelivers, portrait, portraitBytes,
+					serviceContext);
 
 			Object returnObj = null;
 
@@ -2230,8 +2232,8 @@ public class UserServiceHttp {
 			java.lang.String.class, java.lang.String.class, long[].class,
 			long[].class, long[].class, java.util.List.class, long[].class,
 			java.util.List.class, java.util.List.class, java.util.List.class,
-			java.util.List.class, java.util.List.class,
-			com.liferay.portal.service.ServiceContext.class
+			java.util.List.class, java.util.List.class, boolean.class,
+			byte[].class, com.liferay.portal.service.ServiceContext.class
 		};
 	private static final Class<?>[] _updateUserParameterTypes50 = new Class[] {
 			long.class, java.lang.String.class, java.lang.String.class,

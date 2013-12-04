@@ -2960,7 +2960,7 @@ public interface UserLocalService extends BaseLocalService,
 		java.lang.String jobTitle, long[] groupIds, long[] organizationIds,
 		long[] roleIds,
 		java.util.List<com.liferay.portal.model.UserGroupRole> userGroupRoles,
-		long[] userGroupIds,
+		long[] userGroupIds, boolean portrait, byte[] portraitBytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

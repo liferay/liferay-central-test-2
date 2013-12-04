@@ -1277,6 +1277,7 @@ public class UserServiceWrapper implements UserService,
 		java.util.List<com.liferay.portal.model.Phone> phones,
 		java.util.List<com.liferay.portal.model.Website> websites,
 		java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> announcementsDelivers,
+		boolean portrait, byte[] portraitBytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -1288,8 +1289,8 @@ public class UserServiceWrapper implements UserService,
 			birthdayYear, smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn,
 			mySpaceSn, skypeSn, twitterSn, ymSn, jobTitle, groupIds,
 			organizationIds, roleIds, userGroupRoles, userGroupIds, addresses,
-			emailAddresses, phones, websites, announcementsDelivers,
-			serviceContext);
+			emailAddresses, phones, websites, announcementsDelivers, portrait,
+			portraitBytes, serviceContext);
 	}
 
 	/**
