@@ -1618,7 +1618,6 @@ public class UserServiceSoap {
 		com.liferay.portal.model.PhoneSoap[] phones,
 		com.liferay.portal.model.WebsiteSoap[] websites,
 		com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap[] announcementsDelivers,
-		boolean portrait, byte[] portraitBytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -1642,8 +1641,7 @@ public class UserServiceSoap {
 					com.liferay.portal.model.impl.WebsiteModelImpl.toModels(
 						websites),
 					com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl.toModels(
-						announcementsDelivers), portrait, portraitBytes,
-					serviceContext);
+						announcementsDelivers), serviceContext);
 
 			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
