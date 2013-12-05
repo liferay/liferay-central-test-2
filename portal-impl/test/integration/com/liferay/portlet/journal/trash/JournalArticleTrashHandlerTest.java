@@ -94,11 +94,10 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 		String content = StringUtil.read(
 			getFile("test-journal-content-image-field.xml"));
 
-		byte[] fileBytes = FileUtil.getBytes(getFile("liferay.png"));
-
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
-		images.put("_image_1_0_en_US", fileBytes);
+		images.put(
+			"_image_1_0_en_US", FileUtil.getBytes(getFile("liferay.png")));
 
 		baseModel = JournalTestUtil.addArticleWithXMLContent(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, content,

@@ -576,10 +576,7 @@ public class EditArticleAction extends PortletAction {
 				languageId = defaultLanguageId;
 			}
 
-			Locale locale = LocaleUtil.fromLanguageId(languageId);
-
 			long id = 0;
-
 			boolean inherited = false;
 
 			if (cmd.equals(Constants.TRANSLATE)) {
@@ -591,14 +588,13 @@ public class EditArticleAction extends PortletAction {
 						article.getAvailableLanguageIds(), languageId)) {
 
 					id = article.getId();
-
 					inherited = true;
 				}
 			}
 
 			Object[] contentAndImages = ActionUtil.getContentAndImages(
-				ddmStructure, id, locale, defaultLocale, inherited,
-				serviceContext);
+				ddmStructure, id, LocaleUtil.fromLanguageId(languageId),
+				defaultLocale, inherited, serviceContext);
 
 			content = (String)contentAndImages[0];
 			images = (HashMap<String, byte[]>)contentAndImages[1];
