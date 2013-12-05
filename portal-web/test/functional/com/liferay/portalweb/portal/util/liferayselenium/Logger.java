@@ -279,7 +279,7 @@ public class Logger {
 		Map<String, String> context = new HashMap<String, String>();
 
 		if (arguments.length > 2) {
-			context = (HashMap)arguments[2];
+			context = (HashMap<String, String>)arguments[2];
 		}
 
 		send(id, status, context);
