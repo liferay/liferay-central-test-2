@@ -298,7 +298,7 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 			long primaryKey, ServiceContext serviceContext)
 		throws Exception {
 
-		DLFileShortcut fileShortcut =
+		DLFileShortcut dlFileShortcut =
 			DLFileShortcutLocalServiceUtil.getFileShortcut(primaryKey);
 
 		if (serviceContext.getWorkflowAction() ==
@@ -309,7 +309,7 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 				WorkflowConstants.STATUS_DRAFT, serviceContext);
 		}
 
-		return fileShortcut;
+		return dlFileShortcut;
 	}
 
 }

@@ -232,17 +232,17 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 			long primaryKey, ServiceContext serviceContext)
 		throws Exception {
 
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(primaryKey);
+		DLFolder dlFolder = DLFolderLocalServiceUtil.getFolder(primaryKey);
 
 		if (serviceContext.getWorkflowAction() ==
 				WorkflowConstants.ACTION_SAVE_DRAFT) {
 
-			folder = DLFolderLocalServiceUtil.updateStatus(
+			dlFolder = DLFolderLocalServiceUtil.updateStatus(
 				TestPropsValues.getUserId(), primaryKey,
 				WorkflowConstants.STATUS_DRAFT, null, serviceContext);
 		}
 
-		return folder;
+		return dlFolder;
 	}
 
 	private static final int _FOLDER_NAME_MAX_LENGTH = 100;
