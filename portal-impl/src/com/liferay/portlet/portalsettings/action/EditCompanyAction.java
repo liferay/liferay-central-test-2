@@ -151,7 +151,6 @@ public class EditCompanyAction extends PortletAction {
 			actionRequest, "virtualHostname");
 		String mx = ParamUtil.getString(actionRequest, "mx");
 		String homeURL = ParamUtil.getString(actionRequest, "homeURL");
-
 		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
 
 		byte[] logoBytes = null;

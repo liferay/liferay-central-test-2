@@ -568,6 +568,19 @@ public class EditUserAction extends PortletAction {
 			user, actionRequest, "emailAddress");
 		long facebookId = user.getFacebookId();
 		String openId = BeanParamUtil.getString(user, actionRequest, "openId");
+		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
+
+		byte[] portraitBytes = null;
+
+		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+
+		if (fileEntryId > 0) {
+			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
+				fileEntryId);
+
+			portraitBytes = FileUtil.getBytes(fileEntry.getContentStream());
+		}
+
 		String languageId = BeanParamUtil.getString(
 			user, actionRequest, "languageId");
 		String timeZoneId = BeanParamUtil.getString(
@@ -643,18 +656,6 @@ public class EditUserAction extends PortletAction {
 			actionRequest, user.getWebsites());
 		List<AnnouncementsDelivery> announcementsDeliveries =
 			getAnnouncementsDeliveries(actionRequest, user);
-
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
-		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
-
-		byte[] portraitBytes = null;
-
-		if (fileEntryId > 0) {
-			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-				fileEntryId);
-
-			portraitBytes = FileUtil.getBytes(fileEntry.getContentStream());
-		}
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			User.class.getName(), actionRequest);

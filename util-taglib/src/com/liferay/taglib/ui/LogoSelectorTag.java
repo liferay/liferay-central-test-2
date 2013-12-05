@@ -77,7 +77,6 @@ public class LogoSelectorTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
-
 		request.setAttribute(
 			"liferay-ui:logo-selector:currentLogoURL", _currentLogoURL);
 		request.setAttribute(
@@ -103,6 +102,7 @@ public class LogoSelectorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:logo-selector:maxFileSize",
 			String.valueOf(_maxFileSize));
+
 		request.setAttribute(
 			"liferay-ui:logo-selector:showBackground",
 			String.valueOf(_showBackground));
