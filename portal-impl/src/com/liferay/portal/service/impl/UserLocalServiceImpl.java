@@ -5161,7 +5161,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *             long[], boolean, byte[], ServiceContext)}
 	 */
 	@Override
-	@SuppressWarnings("deprecation")
 	public User updateUser(
 			long userId, String oldPassword, String newPassword1,
 			String newPassword2, boolean passwordReset,
