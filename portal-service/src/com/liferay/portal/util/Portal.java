@@ -1358,8 +1358,8 @@ public interface Portal {
 	public String transformSQL(String sql);
 
 	public void updateImageId(
-			BaseModel baseModel, boolean image, byte[] bytes, String fieldName,
-			long maxSize, int maxHeight, int maxWidth)
+			BaseModel<?> baseModel, boolean image, byte[] bytes,
+			String fieldName, long maxSize, int maxHeight, int maxWidth)
 		throws PortalException, SystemException;
 
 	public PortletMode updatePortletMode(

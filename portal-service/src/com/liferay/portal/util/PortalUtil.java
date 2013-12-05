@@ -1971,8 +1971,8 @@ public class PortalUtil {
 	}
 
 	public static void updateImageId(
-			BaseModel baseModel, boolean image, byte[] bytes, String fieldName,
-			long maxSize, int maxHeight, int maxWidth)
+			BaseModel<?> baseModel, boolean image, byte[] bytes,
+			String fieldName, long maxSize, int maxHeight, int maxWidth)
 		throws PortalException, SystemException {
 
 		getPortal().updateImageId(

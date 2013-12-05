@@ -6756,8 +6756,8 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public void updateImageId(
-			BaseModel baseModel, boolean image, byte[] bytes, String fieldName,
-			long maxSize, int maxHeight, int maxWidth)
+			BaseModel<?> baseModel, boolean image, byte[] bytes,
+			String fieldName, long maxSize, int maxHeight, int maxWidth)
 		throws PortalException, SystemException {
 
 		long imageId = BeanPropertiesUtil.getLong(baseModel, fieldName);
