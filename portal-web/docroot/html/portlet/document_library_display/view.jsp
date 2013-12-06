@@ -220,7 +220,7 @@ request.setAttribute("view.jsp-useAssetEntryQuery", String.valueOf(useAssetEntry
 				backURL="<%= redirect %>"
 				title="<%= topLink %>"
 			/>
-asdfadfsfs
+
 			<%
 			long groupFileEntriesUserId = 0;
 
