@@ -56,9 +56,6 @@ public class UserGroupRolePermissionImpl implements UserGroupRolePermission {
 			PermissionChecker permissionChecker, Group group, Role role)
 		throws PortalException, SystemException {
 
-		long groupId = group.getGroupId();
-		long roleId = role.getRoleId();
-
 		if (role.getType() == RoleConstants.TYPE_REGULAR) {
 			return false;
 		}
@@ -69,7 +66,7 @@ public class UserGroupRolePermissionImpl implements UserGroupRolePermission {
 		}
 
 		if (!permissionChecker.isCompanyAdmin() &&
-			!permissionChecker.isGroupOwner(groupId)) {
+			!permissionChecker.isGroupOwner(group.getGroupId())) {
 
 			String roleName = role.getName();
 
@@ -83,14 +80,14 @@ public class UserGroupRolePermissionImpl implements UserGroupRolePermission {
 			}
 		}
 
-		if (permissionChecker.isGroupOwner(groupId) ||
+		if (permissionChecker.isGroupOwner(group.getGroupId()) ||
 			GroupPermissionUtil.contains(
 				permissionChecker, group, ActionKeys.ASSIGN_USER_ROLES) ||
 			OrganizationPermissionUtil.contains(
 				permissionChecker, group.getOrganizationId(),
 				ActionKeys.ASSIGN_USER_ROLES) ||
 			RolePermissionUtil.contains(
-				permissionChecker, groupId, roleId,
+				permissionChecker, group.getGroupId(), role.getRoleId(),
 				ActionKeys.ASSIGN_MEMBERS)) {
 
 			return true;
@@ -106,7 +103,6 @@ public class UserGroupRolePermissionImpl implements UserGroupRolePermission {
 		throws PortalException, SystemException {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		Role role = RoleLocalServiceUtil.getRole(roleId);
 
 		return contains(permissionChecker, group, role);
