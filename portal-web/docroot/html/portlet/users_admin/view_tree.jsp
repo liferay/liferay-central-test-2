@@ -145,7 +145,6 @@ if (organization != null) {
 			<aui:col cssClass="lfr-asset-column lfr-asset-column-details" width="<%= (organization != null) ? 75 : 100 %>">
 				<liferay-ui:panel-container extended="<%= false %>" id="usersAdminOrganizationPanelContainer" persistState="<%= true %>">
 					<c:if test="<%= organization != null %>">
-
 						<aui:input name="organizationId" type="hidden" value="<%= organizationId %>" />
 
 						<span class="entry-categories">
