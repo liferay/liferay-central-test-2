@@ -37,7 +37,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{layoutSetBranchId=");
 		sb.append(layoutSetBranchId);
@@ -61,6 +61,8 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		sb.append(description);
 		sb.append(", master=");
 		sb.append(master);
+		sb.append(", logo=");
+		sb.append(logo);
 		sb.append(", logoId=");
 		sb.append(logoId);
 		sb.append(", themeId=");
@@ -131,6 +133,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		}
 
 		layoutSetBranchImpl.setMaster(master);
+		layoutSetBranchImpl.setLogo(logo);
 		layoutSetBranchImpl.setLogoId(logoId);
 
 		if (themeId == null) {
@@ -202,6 +205,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		name = objectInput.readUTF();
 		description = objectInput.readUTF();
 		master = objectInput.readBoolean();
+		logo = objectInput.readBoolean();
 		logoId = objectInput.readLong();
 		themeId = objectInput.readUTF();
 		colorSchemeId = objectInput.readUTF();
@@ -247,6 +251,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		}
 
 		objectOutput.writeBoolean(master);
+		objectOutput.writeBoolean(logo);
 		objectOutput.writeLong(logoId);
 
 		if (themeId == null) {
@@ -312,6 +317,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 	public String name;
 	public String description;
 	public boolean master;
+	public boolean logo;
 	public long logoId;
 	public String themeId;
 	public String colorSchemeId;

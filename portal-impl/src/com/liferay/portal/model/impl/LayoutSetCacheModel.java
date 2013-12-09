@@ -37,7 +37,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{layoutSetId=");
 		sb.append(layoutSetId);
@@ -51,6 +51,8 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		sb.append(modifiedDate);
 		sb.append(", privateLayout=");
 		sb.append(privateLayout);
+		sb.append(", logo=");
+		sb.append(logo);
 		sb.append(", logoId=");
 		sb.append(logoId);
 		sb.append(", themeId=");
@@ -99,6 +101,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		}
 
 		layoutSetImpl.setPrivateLayout(privateLayout);
+		layoutSetImpl.setLogo(logo);
 		layoutSetImpl.setLogoId(logoId);
 
 		if (themeId == null) {
@@ -170,6 +173,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		privateLayout = objectInput.readBoolean();
+		logo = objectInput.readBoolean();
 		logoId = objectInput.readLong();
 		themeId = objectInput.readUTF();
 		colorSchemeId = objectInput.readUTF();
@@ -193,6 +197,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		objectOutput.writeLong(createDate);
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeBoolean(privateLayout);
+		objectOutput.writeBoolean(logo);
 		objectOutput.writeLong(logoId);
 
 		if (themeId == null) {
@@ -257,6 +262,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	public long createDate;
 	public long modifiedDate;
 	public boolean privateLayout;
+	public boolean logo;
 	public long logoId;
 	public String themeId;
 	public String colorSchemeId;
