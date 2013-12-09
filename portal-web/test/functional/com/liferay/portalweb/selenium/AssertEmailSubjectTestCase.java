@@ -30,7 +30,7 @@ public class AssertEmailSubjectTestCase extends BaseSeleniumTestCase {
 
 		selenium.sendEmail(
 			TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
-			"This is a test message");
+			"This is a test message.");
 
 		selenium.deleteAllEmails();
 
@@ -51,7 +51,7 @@ public class AssertEmailSubjectTestCase extends BaseSeleniumTestCase {
 
 			selenium.sendEmail(
 				TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
-				"This is a test message");
+				"This is a test message.");
 
 			selenium.deleteAllEmails();
 
@@ -75,7 +75,7 @@ public class AssertEmailSubjectTestCase extends BaseSeleniumTestCase {
 
 			selenium.sendEmail(
 				TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
-				"This is a test message");
+				"This is a test message.");
 
 			selenium.deleteAllEmails();
 

@@ -32,7 +32,7 @@ public class SendEmailTestCase extends BaseSeleniumTestCase {
 
 			selenium.sendEmail(
 				"ThisIsNotCorrectEmailAddress", "Email Test",
-				"This is a test message");
+				"This is a test message.");
 		}
 		catch (Throwable t) {
 			assertEquals(t.getMessage(), "Invalid Addresses");
@@ -46,7 +46,7 @@ public class SendEmailTestCase extends BaseSeleniumTestCase {
 
 		selenium.sendEmail(
 			TestPropsValues.EMAIL_ADDRESS_2, "Email Test",
-			"This is a test message");
+			"This is a test message.");
 
 		selenium.deleteAllEmails();
 

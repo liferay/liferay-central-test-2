@@ -37,7 +37,9 @@ public class ConnectEmailTestCase extends BaseSeleniumTestCase {
 				"ThisIsNotCorrectEmailPassword");
 		}
 		catch (Throwable t) {
-			assertTrue(t.getMessage().contains("Invalid credentials"));
+			String message = t.getMessage();
+
+			assertTrue(message.contains("Invalid credentials"));
 		}
 	}
 
