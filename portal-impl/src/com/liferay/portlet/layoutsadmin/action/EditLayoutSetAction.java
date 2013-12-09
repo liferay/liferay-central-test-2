@@ -17,15 +17,16 @@ package com.liferay.portlet.layoutsadmin.action;
 import com.liferay.portal.ImageTypeException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.io.ByteArrayFileInputStream;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.upload.UploadException;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesParamUtil;
+import com.liferay.portal.kernel.util.StreamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -43,7 +44,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.FileSizeException;
-import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+
+import java.io.File;
+import java.io.InputStream;
 
 import java.util.Map;
 
@@ -205,7 +208,9 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			layoutSetId);
 
-		updateLogo(actionRequest, liveGroupId, stagingGroupId, privateLayout);
+		updateLogo(
+			actionRequest, liveGroupId, stagingGroupId, privateLayout,
+			layoutSet.isLogo());
 
 		updateLookAndFeel(
 			actionRequest, themeDisplay.getCompanyId(), liveGroupId,
@@ -221,30 +226,43 @@ public class EditLayoutSetAction extends EditLayoutsAction {
 
 	protected void updateLogo(
 			ActionRequest actionRequest, long liveGroupId, long stagingGroupId,
-			boolean privateLayout)
+			boolean privateLayout, boolean hasLogo)
 		throws Exception {
 
-		boolean deleteLogo = ParamUtil.getBoolean(actionRequest, "deleteLogo");
+		UploadPortletRequest uploadPortletRequest =
+			PortalUtil.getUploadPortletRequest(actionRequest);
 
-		byte[] logoBytes = null;
+		boolean useLogo = ParamUtil.getBoolean(actionRequest, "useLogo");
 
-		long fileEntryId = ParamUtil.getLong(actionRequest, "fileEntryId");
+		InputStream inputStream = null;
 
-		if (fileEntryId > 0) {
-			FileEntry fileEntry = DLAppLocalServiceUtil.getFileEntry(
-				fileEntryId);
+		try {
+			File file = uploadPortletRequest.getFile("logoFileName");
 
-			logoBytes = FileUtil.getBytes(fileEntry.getContentStream());
+			if (useLogo && !file.exists()) {
+				if (hasLogo) {
+					return;
+				}
+
+				throw new UploadException("No logo uploaded for use");
+			}
+
+			if ((file != null) && file.exists()) {
+				inputStream = new ByteArrayFileInputStream(file, 1024);
+			}
+
+			long groupId = liveGroupId;
+
+			if (stagingGroupId > 0) {
+				groupId = stagingGroupId;
+			}
+
+			LayoutSetServiceUtil.updateLogo(
+				groupId, privateLayout, useLogo, inputStream, false);
 		}
-
-		long groupId = liveGroupId;
-
-		if (stagingGroupId > 0) {
-			groupId = stagingGroupId;
+		finally {
+			StreamUtil.cleanUp(inputStream);
 		}
-
-		LayoutSetServiceUtil.updateLogo(
-			groupId, privateLayout, !deleteLogo, logoBytes);
 	}
 
 	protected void updateLookAndFeel(
