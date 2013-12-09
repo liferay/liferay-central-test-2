@@ -79,12 +79,12 @@ ${ifType} (
 	</#if>
 
 	<#if ifType == "while">
-		if(_whileCounter == 15){
+		if(_whileCount == 15){
 			break;
 		}
 
 		Thread.sleep(1000);
 
-		_whileCounter++;
+		_whileCount++;
 	</#if>
 }

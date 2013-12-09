@@ -169,7 +169,7 @@
 
 		executeScopeVariables.putAll(commandScopeVariables);
 
-		_whileCounter = 0;
+		_whileCount = 0;
 
 		<#assign ifElement = element>
 

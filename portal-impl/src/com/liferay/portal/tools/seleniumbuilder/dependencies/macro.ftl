@@ -93,6 +93,6 @@ public class ${seleniumBuilderContext.getMacroSimpleClassName(macroName)}
 		}
 	</#list>
 
-	private int _whileCounter;
+	private int _whileCount;
 
 }
