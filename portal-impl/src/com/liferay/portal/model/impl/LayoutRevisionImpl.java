@@ -99,15 +99,6 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 	}
 
 	@Override
-	public boolean getIconImage() {
-		if (getIconImageId() > 0) {
-			return true;
-		}
-
-		return false;
-	}
-
-	@Override
 	public LayoutBranch getLayoutBranch()
 		throws PortalException, SystemException {
 
@@ -256,11 +247,6 @@ public class LayoutRevisionImpl extends LayoutRevisionBaseImpl {
 		else {
 			return false;
 		}
-	}
-
-	@Override
-	public boolean isIconImage() {
-		return getIconImage();
 	}
 
 	@Override
