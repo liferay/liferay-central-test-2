@@ -98,7 +98,7 @@ public class Entity {
 		boolean uuidAccessor, boolean localService, boolean remoteService,
 		String persistenceClass, String finderClass, String dataSource,
 		String sessionFactory, String txManager, boolean cacheEnabled,
-		boolean jsonEnabled, boolean trashEnabled, boolean dynamicUpdate,
+		boolean dynamicUpdateEnabled, boolean jsonEnabled, boolean trashEnabled,
 		boolean deprecated, List<EntityColumn> pkList,
 		List<EntityColumn> regularColList, List<EntityColumn> blobList,
 		List<EntityColumn> collectionList, List<EntityColumn> columnList,
@@ -124,9 +124,9 @@ public class Entity {
 			sessionFactory, DEFAULT_SESSION_FACTORY);
 		_txManager = GetterUtil.getString(txManager, DEFAULT_TX_MANAGER);
 		_cacheEnabled = cacheEnabled;
+		_dynamicUpdateEnabled = dynamicUpdateEnabled;
 		_jsonEnabled = jsonEnabled;
 		_trashEnabled = trashEnabled;
-		_dynamicUpdate = dynamicUpdate;
 		_deprecated = deprecated;
 		_pkList = pkList;
 		_regularColList = regularColList;
@@ -643,8 +643,8 @@ public class Entity {
 		return _deprecated;
 	}
 
-	public boolean isDynamicUpdate() {
-		return _dynamicUpdate;
+	public boolean isDynamicUpdateEnabled() {
+		return _dynamicUpdateEnabled;
 	}
 
 	public boolean isGroupedModel() {
@@ -840,7 +840,7 @@ public class Entity {
 	private boolean _containerModel;
 	private String _dataSource;
 	private boolean _deprecated;
-	private boolean _dynamicUpdate;
+	private boolean _dynamicUpdateEnabled;
 	private String _finderClass;
 	private List<EntityColumn> _finderColumnsList;
 	private List<EntityFinder> _finderList;
