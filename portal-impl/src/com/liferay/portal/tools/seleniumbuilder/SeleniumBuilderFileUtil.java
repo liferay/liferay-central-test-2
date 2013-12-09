@@ -527,7 +527,7 @@ public class SeleniumBuilderFileUtil {
 		}
 		else if (errorCode == 2003) {
 			throw new IllegalArgumentException(
-				prefix + "Illegal Xpath " + string1 + " in " + suffix);
+				prefix + "Illegal XPath " + string1 + " in " + suffix);
 		}
 		else {
 			throw new IllegalArgumentException(prefix + suffix);
