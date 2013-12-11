@@ -63,49 +63,6 @@ public class AssetPublisherDisplayContext {
 		_portletPreferences = portletPreferences;
 	}
 
-	protected void setDDMStructure() throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		_ddmStructureDisplayFieldValue = StringPool.BLANK;
-		_ddmStructureFieldLabel = StringPool.BLANK;
-		_ddmStructureFieldName = StringPool.BLANK;
-		_ddmStructureFieldValue = null;
-
-		long[] classNameIds = getClassNameIds();
-		long[] classTypeIds = getClassTypeIds();
-
-		if (isSubtypeFieldsFilterEnabled() && (classNameIds.length == 1) &&
-			(classTypeIds.length == 1)) {
-
-			_ddmStructureDisplayFieldValue = GetterUtil.getString(
-				_portletPreferences.getValue(
-					"ddmStructureDisplayFieldValue", StringPool.BLANK));
-			_ddmStructureFieldName = GetterUtil.getString(
-				_portletPreferences.getValue(
-					"ddmStructureFieldName", StringPool.BLANK));
-			_ddmStructureFieldValue = _portletPreferences.getValue(
-				"ddmStructureFieldValue", StringPool.BLANK);
-
-			if (Validator.isNotNull(_ddmStructureFieldName) &&
-				Validator.isNotNull(_ddmStructureFieldValue)) {
-
-				AssetRendererFactory assetRendererFactory =
-					AssetRendererFactoryRegistryUtil.
-						getAssetRendererFactoryByClassName(
-							PortalUtil.getClassName(classNameIds[0]));
-
-				Tuple classTypeFieldName =
-					assetRendererFactory.getClassTypeFieldName(
-						classTypeIds[0], _ddmStructureFieldName,
-						themeDisplay.getLocale());
-
-				_ddmStructureFieldLabel = (String)classTypeFieldName.getObject(
-					0);
-			}
-		}
-	}
-
 	public int getAbstractLength() {
 		if (_abstractLength == null) {
 			_abstractLength = GetterUtil.getInteger(
@@ -850,6 +807,49 @@ public class AssetPublisherDisplayContext {
 		}
 
 		return portletConfig.getPortletName();
+	}
+
+	protected void setDDMStructure() throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		_ddmStructureDisplayFieldValue = StringPool.BLANK;
+		_ddmStructureFieldLabel = StringPool.BLANK;
+		_ddmStructureFieldName = StringPool.BLANK;
+		_ddmStructureFieldValue = null;
+
+		long[] classNameIds = getClassNameIds();
+		long[] classTypeIds = getClassTypeIds();
+
+		if (isSubtypeFieldsFilterEnabled() && (classNameIds.length == 1) &&
+			(classTypeIds.length == 1)) {
+
+			_ddmStructureDisplayFieldValue = GetterUtil.getString(
+				_portletPreferences.getValue(
+					"ddmStructureDisplayFieldValue", StringPool.BLANK));
+			_ddmStructureFieldName = GetterUtil.getString(
+				_portletPreferences.getValue(
+					"ddmStructureFieldName", StringPool.BLANK));
+			_ddmStructureFieldValue = _portletPreferences.getValue(
+				"ddmStructureFieldValue", StringPool.BLANK);
+
+			if (Validator.isNotNull(_ddmStructureFieldName) &&
+				Validator.isNotNull(_ddmStructureFieldValue)) {
+
+				AssetRendererFactory assetRendererFactory =
+					AssetRendererFactoryRegistryUtil.
+						getAssetRendererFactoryByClassName(
+							PortalUtil.getClassName(classNameIds[0]));
+
+				Tuple classTypeFieldName =
+					assetRendererFactory.getClassTypeFieldName(
+						classTypeIds[0], _ddmStructureFieldName,
+						themeDisplay.getLocale());
+
+				_ddmStructureFieldLabel = (String)classTypeFieldName.getObject(
+					0);
+			}
+		}
 	}
 
 	private Integer _abstractLength;
