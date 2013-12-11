@@ -714,6 +714,26 @@
 		<execute action="PGBlogsRSS#assertTextEquals" locator-key1="ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="viewStagingLockedPG">
+		<execute action="PGBlogs#assertTextEquals" locator-key1="PORTLET_TITLE" value1="Blogs"/>
+		<execute action="PGBlogs#assertTextNotPresent" locator-key1="ADD_ENTRY_BUTTON" value1="Add Blog Entry"/>
+		<execute action="PGBlogs#assertTextNotPresent" locator-key1="PERMISSIONS_BUTTON" value1="Permissions" />
+		<execute action="PGBlogs#assertTextNotPresent" locator-key1="SUBSCRIBE_LINK" value1="Subscribe" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_LINK" value1="RSS" />
+
+		<var name="key_entryContent" value="${entryContent}" />
+
+		<execute action="PGBlogsEntry#assertElementNotPresent" locator-key1="ENTRY_CONTENT_CKE_EDIT" />
+	</command>
+
+	<command name="viewStagingUnlockedPG">
+		<execute macro="BlogsPortlet#viewPG" />
+
+		<var name="key_entryContent" value="${entryContent}" />
+
+		<execute action="PGBlogsEntry#assertElementPresent" locator-key1="ENTRY_CONTENT_CKE_EDIT" />
+	</command>
+
 	<command name="viewViewCountCP">
 		<var name="key_portletName" value="Blogs" />
 

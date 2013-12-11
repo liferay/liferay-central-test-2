@@ -12,20 +12,150 @@
 			</then>
 		</if>
 
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_APPLICATION_DISPLAY_TEMPLATES_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_BLOGS_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_BOOKMARKS_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_DOCUMENTS_AND_MEDIA_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_DYNAMIC_DATA_LISTS_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_MESSAGE_BOARDS_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_MOBILE_DEVICE_FAMILIES_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_POLLS_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_WEB_CONTENT_CHECKBOX" />
-		<execute action="CPSitesEdit#check" locator-key1="STAGING_WIKI_CHECKBOX" />
+		<if>
+			<equals arg1="${stagingApplicationDisplayTemplate}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Application Display Templates" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Application Display Templates" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingBlogs}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Blogs" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Blogs" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingBookmarks}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Bookmarks" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Bookmarks" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingDocumentsAndMedia}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Documents and Media" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Documents and Media" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingDynamicDataLists}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Dynamic Data Lists" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Dynamic Data Lists" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingMessageBoards}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Message Boards" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Message Boards" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingMobileDeviceFamilies}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Mobile Device Families" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Mobile Device Families" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingPolls}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Polls" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Polls" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingWebContent}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Web Content" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Web Content" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingWiki}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Wiki" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Wiki" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+
 		<execute action="CPSitesEdit#assertClick" locator-key1="MENU_SAVE" value1="Save" />
 		<execute action="CPSitesEdit#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to activate local staging for ${siteName}?" />
 		<execute action="CPSitesEdit#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
-		<execute action="CPSitesEdit#assertTextEquals" locator-key1="SITE_TITLE" value1="${siteName}" />
 	</command>
 
 	<command name="addPageVariationPG">
@@ -108,6 +238,164 @@
 		<execute action="CPSitesEdit#assertElementNotPresent" locator-key1="STAGING_ENABLED_ON_PUBLIC_PAGES_CHECKBOX" />
 	</command>
 
+	<command name="editActivateStagingCP">
+		<execute action="CPSitesEdit#assertClick" locator-key1="MENU_STAGING" value1="Staging" />
+		<execute action="CPSitesEdit#assertTextEquals" locator-key1="SITE_TITLE" value1="${siteName}" />
+		<execute action="CPSitesEdit#check" locator-key1="STAGING_LOCAL_LIVE" />
+
+		<if>
+			<equals arg1="${pageVersioningEnabled}" arg2="true" />
+			<then>
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_ENABLED_ON_PUBLIC_PAGES_CHECKBOX" />
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_ENABLED_ON_PRIVATE_PAGES_CHECKBOX" />
+			</then>
+		</if>
+
+		<if>
+			<equals arg1="${stagingApplicationDisplayTemplate}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Application Display Templates" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Application Display Templates" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingBlogs}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Blogs" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Blogs" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingBookmarks}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Bookmarks" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Bookmarks" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingDocumentsAndMedia}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Documents and Media" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Documents and Media" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingDynamicDataLists}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Dynamic Data Lists" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Dynamic Data Lists" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingMessageBoards}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Message Boards" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Message Boards" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingMobileDeviceFamilies}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Mobile Device Families" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Mobile Device Families" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingPolls}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Polls" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Polls" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingWebContent}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Web Content" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Web Content" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${stagingWiki}" arg2="false" />
+			<then>
+				<var name="key_contentName" value="Wiki" />
+
+				<execute action="CPSitesEdit#uncheck" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+				<var name="key_contentName" value="Wiki" />
+
+				<execute action="CPSitesEdit#check" locator-key1="STAGING_CONTENT_CHECKBOX" />
+			</else>
+		</if>
+
+
+		<execute action="CPSitesEdit#assertClick" locator-key1="MENU_SAVE" value1="Save" />
+		<execute action="CPSitesEdit#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
 	<command name="publishToLiveNowPG">
 		<if>
 			<condition action="PGStaging#isElementNotPresent" locator-key1="STAGING_MENULIST_PUBLISH_TO_LIVE_NOW" />
@@ -117,7 +405,15 @@
 			</then>
 		</if>
 
-		<execute action="PGStaging#assertClick" locator-key1="STAGING_MENULIST_PUBLISH_TO_LIVE_NOW" value1="Publish to Live" />
+		<if>
+			<condition action="PGStaging#isElementPresent" locator-key1="STAGING_MENU_MARK_AS_READY_FOR_PUBLICATION_BUTTON" />
+			<then>
+				<execute action="PGStaging#assertClick" locator-key1="STAGING_MENU_MARK_AS_READY_FOR_PUBLICATION_BUTTON" value1="Mark as Ready for Publication" />
+				<execute action="PGStaging#assertTextEquals" locator-key1="STAGING_MENU_READY_FOR_PUBLICATION" value1="Ready for Publication" />
+			</then>
+		</if>
+
+		<execute action="PGStaging#click" locator-key1="STAGING_MENULIST_PUBLISH_TO_LIVE_NOW" />
 
 		<execute action="PGStagingPublishtolivenow#selectFrame" locator-key1="PUBLISH_TO_LIVE_IFRAME" />
 		<execute action="PGStagingPublishtolivenow#check" locator-key1="DATE_NOW_RADIO" />
@@ -130,7 +426,34 @@
 			</then>
 		</if>
 
-		<execute action="PGStagingPublishtolivenow#check" locator-key1="CONTENT_ALL_CONTENT_RADIO" />
+		<if>
+			<equals arg1="${uncheckApplication}" arg2="true" />
+			<then>
+				<execute action="PGStagingPublishtolivenow#check" locator-key1="APPLICATION_CONFIGURATION_CHOOSE_APPLICATIONS_RADIO" />
+
+				<var name="key_applicationName" value="${applicationName}" />
+
+				<execute action="PGStagingPublishtolivenow#uncheck" locator-key1="APPLICATION_CONFIGURATION_CHOOSE_APPLICATIONS_APPLICATION_CHECKBOX" />
+			</then>
+			<else>
+			<execute action="PGStagingPublishtolivenow#check" locator-key1="APPLICATION_CONFIGURATION_ALL_APPLICATIONS_RADIO" />
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${uncheckContent}" arg2="true" />
+			<then>
+				<execute action="PGStagingPublishtolivenow#check" locator-key1="CONTENT_CHOOSE_CONTENT_RADIO" />
+
+				<var name="key_contentName" value="${contentName}" />
+
+				<execute action="PGStagingPublishtolivenow#uncheck" locator-key1="CONTENT_CHOOSE_CONTENT_CONTENT_CHECKBOX" />
+			</then>
+			<else>
+			<execute action="PGStagingPublishtolivenow#check" locator-key1="CONTENT_ALL_CONTENT_RADIO" />
+			</else>
+		</if>
+
 		<execute action="PGStagingPublishtolivenow#assertClick" locator-key1="PUBLISH_BUTTON" value1="Publish" />
 		<execute action="PGStagingPublishtolivenow#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to publish these pages?" />
 		<execute action="PGStagingPublishtolivenow#assertTextEquals" locator-key1="CURRENT_AND_PREVIOUS_TABLE_STATUS" value1="Successful" />
@@ -143,15 +466,13 @@
 		<execute action="PGStaging#assertTextEquals" locator-key1="PAGE_VARIATION" value1="${pageVariationName}" />
 	</command>
 
-	<command name="viewStagingLocalLivePG">
-		<execute action="PGStaging#assertTextEquals" locator-key1="STAGING_BUTTON" value1="Staging" />
-		<execute action="PGStaging#assertClick" locator-key1="STAGING_BUTTON" value1="Staging" />
-		<execute action="PGStaging#assertTextEquals" locator-key1="LIVE_BUTTON" value1="Live" />
-	</command>
-
 	<command name="viewSitePagesVariationPG">
 		<var name="key_sitePagesVariationName" value="${sitePagesVariationName}" />
 
 		<execute action="PGStaging#assertTextEquals" locator-key1="SITE_PAGES_VARIATION" value1="${sitePagesVariationName}" />
+	</command>
+
+	<command name="viewStagingLocalLivePG">
+		<execute action="PGStaging#assertElementPresent" locator-key1="STAGING_VIEW" />
 	</command>
 </definition>
