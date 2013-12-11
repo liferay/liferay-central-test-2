@@ -43,7 +43,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupConstants;
-import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.OrganizationConstants;
@@ -383,8 +382,7 @@ public class OrganizationLocalServiceImpl
 
 		Organization organization = getOrganization(organizationId);
 
-		PortalUtil.updateImageId(
-			organization, false, null, "logoId", 0, 0, 0);
+		PortalUtil.updateImageId(organization, false, null, "logoId", 0, 0, 0);
 	}
 
 	/**
