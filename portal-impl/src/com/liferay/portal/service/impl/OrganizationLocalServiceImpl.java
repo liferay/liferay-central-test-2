@@ -1640,8 +1640,8 @@ public class OrganizationLocalServiceImpl
 	 *             information was invalid
 	 * @throws     SystemException if a system exception occurred
 	 * @deprecated As of 6.2.0, replaced by {@link #updateOrganization(long,
-	 *             long, long, String, String, long, long, int, String,
-	 *             boolean, byte[], boolean, ServiceContext)}
+	 *             long, long, String, String, long, long, int, String, boolean,
+	 *             byte[], boolean, ServiceContext)}
 	 */
 	@Override
 	public Organization updateOrganization(
