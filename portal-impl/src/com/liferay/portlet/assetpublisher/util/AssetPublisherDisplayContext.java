@@ -63,7 +63,7 @@ public class AssetPublisherDisplayContext {
 		_portletPreferences = portletPreferences;
 	}
 
-	public void _setDDMStructure() throws Exception {
+	protected void setDDMStructure() throws Exception {
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -326,7 +326,7 @@ public class AssetPublisherDisplayContext {
 
 	public String getDDMStructureDisplayFieldValue() throws Exception {
 		if (_ddmStructureDisplayFieldValue == null) {
-			_setDDMStructure();
+			setDDMStructure();
 		}
 
 		return _ddmStructureDisplayFieldValue;
@@ -334,7 +334,7 @@ public class AssetPublisherDisplayContext {
 
 	public String getDDMStructureFieldLabel() throws Exception {
 		if (_ddmStructureFieldLabel == null) {
-			_setDDMStructure();
+			setDDMStructure();
 		}
 
 		return _ddmStructureFieldLabel;
@@ -342,7 +342,7 @@ public class AssetPublisherDisplayContext {
 
 	public String getDDMStructureFieldName() throws Exception {
 		if (_ddmStructureFieldName == null) {
-			_setDDMStructure();
+			setDDMStructure();
 		}
 
 		return _ddmStructureFieldName;
@@ -350,7 +350,7 @@ public class AssetPublisherDisplayContext {
 
 	public String getDDMStructureFieldValue() throws Exception {
 		if (_ddmStructureFieldValue == null) {
-			_setDDMStructure();
+			setDDMStructure();
 		}
 
 		return _ddmStructureFieldValue;
