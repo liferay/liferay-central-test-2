@@ -385,7 +385,10 @@ public class AssetTagFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-			qPos.add(name);
+
+			String lowerCaseName = StringUtil.toLowerCase(name);
+
+			qPos.add(lowerCaseName);
 
 			List<AssetTag> tags = q.list();
 
