@@ -325,7 +325,6 @@ public class AggregateClassLoader extends ClassLoader {
 
 	private List<EqualityWeakReference<ClassLoader>> _classLoaderReferences =
 		new ArrayList<EqualityWeakReference<ClassLoader>>();
-
 	private WeakReference<ClassLoader> _parentClassLoaderReference;
 
 	static {
