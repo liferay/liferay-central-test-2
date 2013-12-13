@@ -82,16 +82,6 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 		</#list>
 	}
 
-	@Override
-	public boolean isEntityCacheEnabled() {
-		return _${entity.varName}.isEntityCacheEnabled();
-	}
-
-	@Override
-	public boolean isFinderCacheEnabled() {
-		return _${entity.varName}.isFinderCacheEnabled();
-	}
-
 	<#list methods as method>
 		<#if !method.isConstructor() && !method.isStatic() && method.isPublic() && !serviceBuilder.isDuplicateMethod(method, tempMap) && !(method.name == "equals" && (parameters?size == 1))>
 			<#if method.name == "getStagedModelType">
@@ -188,6 +178,16 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 	@Override
 	public ${entity.name} getWrappedModel() {
 		return _${entity.varName};
+	}
+
+	@Override
+	public boolean isEntityCacheEnabled() {
+		return _${entity.varName}.isEntityCacheEnabled();
+	}
+
+	@Override
+	public boolean isFinderCacheEnabled() {
+		return _${entity.varName}.isFinderCacheEnabled();
 	}
 
 	@Override
