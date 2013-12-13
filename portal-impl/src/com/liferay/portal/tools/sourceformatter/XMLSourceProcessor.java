@@ -171,20 +171,22 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		while (matcher.find()) {
 			String statement = matcher.group();
 
-			String closingElement = matcher.group(1);
+			String closingElementName = matcher.group(1);
 
-			if (StringUtil.equalsIgnoreCase("</and>", matcher.group(1)) ||
-				StringUtil.equalsIgnoreCase("</elseif>", matcher.group(1)) ||
-				StringUtil.equalsIgnoreCase("</not>", matcher.group(1)) ||
-				StringUtil.equalsIgnoreCase("</or>", matcher.group(1)) ||
-				StringUtil.equalsIgnoreCase("</then>", matcher.group(1))) {
+			if (StringUtil.equalsIgnoreCase("</and>", closingElementName) ||
+				StringUtil.equalsIgnoreCase("</elseif>", closingElementName) ||
+				StringUtil.equalsIgnoreCase("</not>", closingElementName) ||
+				StringUtil.equalsIgnoreCase("</or>", closingElementName) ||
+				StringUtil.equalsIgnoreCase("</then>", closingElementName)) {
 
 				String newStatement = StringUtil.replace(
 					statement, matcher.group(2), "\n");
 
 				content = StringUtil.replace(content, statement, newStatement);
 			}
-			else if (!StringUtil.equalsIgnoreCase("</var>", matcher.group(1))) {
+			else if (!StringUtil.equalsIgnoreCase(
+						"</var>", closingElementName)) {
+
 				String newStatement =
 					StringUtil.replace(statement, matcher.group(2), "\n\n");
 
@@ -536,9 +538,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		return document.formattedString();
 	}
 
-	protected String formatPoshiXML(String fileName, String content)
-		throws DocumentException, IOException {
-
+	protected String formatPoshiXML(String fileName, String content) {
 		String newContent = content;
 
 		newContent = fixPoshiXMLElementWithNoChild(newContent);
