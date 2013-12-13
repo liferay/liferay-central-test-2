@@ -6340,11 +6340,7 @@ public class PortalImpl implements Portal {
 
 		String langDir = LanguageUtil.get(locale, "lang.dir");
 
-		if (langDir.equals("rtl")) {
-			return true;
-		}
-
-		return false;
+		return langDir.equals("rtl");
 	}
 
 	@Override
