@@ -101,7 +101,7 @@ public class UserAssetRenderer extends BaseAssetRenderer {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				com.liferay.portal.kernel.util.WebKeys.THEME_DISPLAY);
+				WebKeys.THEME_DISPLAY);
 
 		try {
 			return _user.getDisplayURL(themeDisplay);
