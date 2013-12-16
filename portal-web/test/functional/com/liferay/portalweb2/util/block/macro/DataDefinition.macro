@@ -121,12 +121,11 @@
 					<var name="fieldName" value="${optionsNames}" />
 				</then>
 			</elseif>
-
 		</if>
 
 		<execute action="CPDynamicdatalistsDatadefinitionsEdit#assertTextEquals" locator-key1="${settingsFieldKey}" value1="${fieldName}" />
 		<execute action="CPDynamicdatalistsDatadefinitionsEdit#doubleClick" locator-key1="${settingsFieldKey}" value1="${fieldName}" />
-		
+
 		<if>
 			<equals arg1="${settingsFieldKey}" arg2="SETTINGS_OPTIONS" />
 			<then>

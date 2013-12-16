@@ -744,10 +744,10 @@
 	</command>
 
 	<command name="EditFieldRadioOptionsUTF8CP" priority="5">
-		<var name="dataDefinitionDescription" value="Data Definition Description" />
-		<var name="dataDefinitionName" value="Data Definition" />
 		<var name="cellEditorFieldName" value="りんご, バナナ, クランベリー" />
 		<var name="cellEditorTypeKey" value="SETTINGS_CELL_EDITOR_OPTIONS_NAME" />
+		<var name="dataDefinitionDescription" value="Data Definition Description" />
+		<var name="dataDefinitionName" value="Data Definition" />
 		<var name="fieldName" value="Radio" />
 		<var name="formFieldKey" value="FORM_RADIO_FIELD_1" />
 		<var name="settingsFieldKey" value="SETTINGS_OPTIONS" />
@@ -768,6 +768,7 @@
 		</execute>
 
 		<execute macro="DataDefinition#editFieldSettingsFieldCP">
+			<var name="cellEditorFieldName" value="${cellEditorFieldName}" />
 			<var name="cellEditorTypeKey" value="${cellEditorTypeKey}" />
 			<var name="dataDefinitionName" value="Data Definition" />
 			<var name="fieldName" value="${fieldName}" />
@@ -790,10 +791,10 @@
 	</command>
 
 	<command name="EditFieldSelectOptionsUTF8CP" priority="5">
-		<var name="dataDefinitionDescription" value="Data Definition Description" />
-		<var name="dataDefinitionName" value="Data Definition" />
 		<var name="cellEditorFieldName" value="りんご, バナナ, クランベリー" />
 		<var name="cellEditorTypeKey" value="SETTINGS_CELL_EDITOR_OPTIONS_NAME" />
+		<var name="dataDefinitionDescription" value="Data Definition Description" />
+		<var name="dataDefinitionName" value="Data Definition" />
 		<var name="fieldName" value="Select" />
 		<var name="formFieldKey" value="FORM_SELECT_FIELD_1" />
 		<var name="settingsFieldKey" value="SETTINGS_OPTIONS" />
@@ -814,6 +815,7 @@
 		</execute>
 
 		<execute macro="DataDefinition#editFieldSettingsFieldCP">
+			<var name="cellEditorFieldName" value="${cellEditorFieldName}" />
 			<var name="cellEditorTypeKey" value="${cellEditorTypeKey}" />
 			<var name="dataDefinitionName" value="Data Definition" />
 			<var name="fieldName" value="${fieldName}" />
