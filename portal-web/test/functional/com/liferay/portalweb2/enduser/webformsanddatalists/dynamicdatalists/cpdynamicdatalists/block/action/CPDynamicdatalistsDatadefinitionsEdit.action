@@ -3,9 +3,11 @@
 		<case locator-key1="FORM_RADIO_FIELD_1">
 			<execute function="AssertClick#assertPartialTextClickAtAndWait" />
 		</case>
+
 		<case locator-key1="FORM_SELECT_FIELD_1">
 			<execute function="AssertClick#assertPartialTextClickAtAndWait" />
 		</case>
+
 		<case locator-key1="SAVE_BUTTON">
 			<execute function="AssertClick#pauseAssertTextClickAtAndWait" />
 		</case>
