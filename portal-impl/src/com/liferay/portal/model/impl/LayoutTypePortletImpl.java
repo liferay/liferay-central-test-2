@@ -1372,30 +1372,30 @@ public class LayoutTypePortletImpl
 	}
 
 	protected String getColumn(String portletId) {
-		List<String> columns = getColumns();
+		String portletIdColumnId = StringPool.BLANK;
 
-		String columnWithIdenticalRootPortletId = StringPool.BLANK;
+		List<String> columnIds = getColumns();
 
-		for (String column : columns) {
-			String columnValue = getColumnValue(column);
+		for (String columnId : columnIds) {
+			String columnValue = getColumnValue(columnId);
 
 			String[] portletIds = StringUtil.split(columnValue);
 
 			for (String columnPortletId : portletIds) {
 				if (columnPortletId.equals(portletId)) {
-					return column;
+					return columnId;
 				}
 
-				if (Validator.isNull(columnWithIdenticalRootPortletId) &&
+				if (Validator.isNull(portletIdColumnId) &&
 					PortletConstants.hasIdenticalRootPortletId(
 						columnPortletId, portletId)) {
 
-					columnWithIdenticalRootPortletId = column;
+					portletIdColumnId = columnId;
 				}
 			}
 		}
 
-		return columnWithIdenticalRootPortletId;
+		return portletIdColumnId;
 	}
 
 	protected List<String> getColumns() {
