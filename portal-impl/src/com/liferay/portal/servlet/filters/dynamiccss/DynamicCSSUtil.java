@@ -182,11 +182,11 @@ public class DynamicCSSUtil {
 					String rtlCustomContent = StringUtil.read(
 						rtlCustomResourceURLConnection.getInputStream());
 
-					String rtlCustomParsedContent = _parseSass(
+					String parsedRtlCustomContent = _parseSass(
 						servletContext, request, themeDisplay, theme,
 						resourcePath, rtlCustomContent);
 
-					parsedContent += rtlCustomParsedContent;
+					parsedContent += parsedRtlCustomContent;
 				}
 			}
 
