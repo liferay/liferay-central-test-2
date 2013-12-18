@@ -351,12 +351,12 @@ public class GroupServiceTest {
 			parentOrganizationGroup.getGroupId(),
 			ServiceTestUtil.randomString());
 
-		Organization childOrganization = OrganizationTestUtil.addOrganization(
+		Organization organization = OrganizationTestUtil.addOrganization(
 			parentOrganization.getOrganizationId(),
 			ServiceTestUtil.randomString(), false);
 
 		UserLocalServiceUtil.addOrganizationUsers(
-			childOrganization.getOrganizationId(),
+			organization.getOrganizationId(),
 			new long[] {TestPropsValues.getUserId()});
 
 		List<Group> groups = GroupServiceUtil.getUserSitesGroups(
