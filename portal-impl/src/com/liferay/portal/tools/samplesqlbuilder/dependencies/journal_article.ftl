@@ -17,7 +17,7 @@
 		_layoutModel = layoutModel
 	/>
 
-	<#assign portletPreferencesModels = dataFactory.newPortletPreferencesModelsForJournal(layoutModel.plid)>
+	<#assign portletPreferencesModels = dataFactory.newJournalPortletPreferencesModels(layoutModel.plid)>
 
 	<#list portletPreferencesModels as portletPreferencesModel>
 		<@insertPortletPreferences

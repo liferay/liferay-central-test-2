@@ -1893,7 +1893,7 @@ public class DataFactory {
 	}
 
 	public List<PortletPreferencesModel>
-		newPortletPreferencesModelsForDDL(long plid) {
+		newDDLPortletPreferencesModels(long plid) {
 
 		List<PortletPreferencesModel> portletPreferencesModels =
 			new ArrayList<PortletPreferencesModel>(2);
@@ -1904,11 +1904,11 @@ public class DataFactory {
 				PortletConstants.DEFAULT_PREFERENCES));
 		portletPreferencesModels.add(
 			newPortletPreferencesModel(
-				plid, PortletKeys.DYNAMIC_DATA_LISTS,
+				plid, PortletKeys.DYNAMIC_DATA_LIST_DISPLAY,
 				PortletConstants.DEFAULT_PREFERENCES));
 		portletPreferencesModels.add(
 			newPortletPreferencesModel(
-				plid, PortletKeys.DYNAMIC_DATA_LIST_DISPLAY,
+				plid, PortletKeys.DYNAMIC_DATA_LISTS,
 				PortletConstants.DEFAULT_PREFERENCES));
 		portletPreferencesModels.add(
 			newPortletPreferencesModel(
@@ -1919,7 +1919,7 @@ public class DataFactory {
 	}
 
 	public List<PortletPreferencesModel>
-		newPortletPreferencesModelsForJournal(long plid) {
+		newJournalPortletPreferencesModels(long plid) {
 
 		List<PortletPreferencesModel> portletPreferencesModels =
 			new ArrayList<PortletPreferencesModel>(2);
