@@ -416,7 +416,7 @@ public class DynamicCSSUtil {
 
 			if (pos == -1) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("DynamicCSS compilation may not work.");
+					_log.warn("Dynamic CSS compilation may not work");
 				}
 			}
 			else {
