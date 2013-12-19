@@ -322,15 +322,11 @@
 		<execute action="CPMyworkflowtasks#assertElementPresent" locator-key1="ASSIGNED_TO_MY_ROLES_TABLE_DUE_DATE" />
 	</command>
 
-	<command name="viewMySubmissionsCP">
-		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
+	<command name="viewDefaultMySubmissionsCP">
+		<execute action="CPMysubmissions#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no pending publications requested by me." />
+		<execute action="CPMysubmissions#assertClick" locator-key1="NAVIGATION_COMPLETED" value1="Completed" />
 
-		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_DEFINITION" value1="${workflowDefinition}" />
-		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
-		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_ASSET_TYPE" value1="${workflowAssetType}" />
-		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_STATUS" value1="${workflowTask}" />
-		<execute action="CPMysubmissions#assertElementPresent" locator-key1="PENDING_TABLE_LAST_ACTIVITY_DATE" />
-		<execute action="CPMysubmissions#assertElementPresent" locator-key1="PENDING_TABLE_END_DATE" />
+		<execute action="CPMysubmissionsCompleted#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no completed publications requested by me." />
 	</command>
 
 	<command name="viewDefaultMyWorkflowTasksCP">
@@ -341,11 +337,15 @@
 		<execute action="CPMyworkflowtasksCompleted#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no completed tasks." />
 	</command>
 
-	<command name="viewDefaultMySubmissionsCP">
-		<execute action="CPMysubmissions#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no pending publications requested by me." />
-		<execute action="CPMysubmissions#assertClick" locator-key1="NAVIGATION_COMPLETED" value1="Completed" />
+	<command name="viewMySubmissionsCP">
+		<var name="key_workflowAssetTitle" value="${workflowAssetTitle}" />
 
-		<execute action="CPMysubmissionsCompleted#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no completed publications requested by me." />
+		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_DEFINITION" value1="${workflowDefinition}" />
+		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_ASSET_TITLE" value1="${workflowAssetTitle}" />
+		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_ASSET_TYPE" value1="${workflowAssetType}" />
+		<execute action="CPMysubmissions#assertTextEquals" locator-key1="PENDING_TABLE_STATUS" value1="${workflowTask}" />
+		<execute action="CPMysubmissions#assertElementPresent" locator-key1="PENDING_TABLE_LAST_ACTIVITY_DATE" />
+		<execute action="CPMysubmissions#assertElementPresent" locator-key1="PENDING_TABLE_END_DATE" />
 	</command>
 
 	<command name="viewRejectTask">
