@@ -53,10 +53,14 @@
 		<echo message="override" />
 	</command>
 
-	<command name="PublishCustomPortletTitle" priority="5">
-		<execute test-case="super#AddSitePagesVariation"/>
+	<command name="StagingPublishPortlet" priority="5">
+		<echo message="override" />
+	</command>
 
-		<var name="defaultPortletTitle" value="Sites Directory" />
+	<command name="PublishCustomPortletTitle" priority="5">
+		<execute test-case="super#AddSitePagesVariation" />
+
+		<var name="portletName" value="Sites Directory" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
@@ -66,7 +70,7 @@
 		</execute>
 
 		<execute macro="Portlet#addPG">
-			<var name="portletName" value="Sites Directory" />
+			<var name="portletName" value="${portletName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -76,8 +80,8 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitesDirectory#viewSitesDirectoryPortletTitlePG">
-			<var name="defaultPortletTitle" value="${defaultPortletTitle}" />
+		<execute macro="SitesDirectory#viewPortletTitlePG">
+			<var name="portletName" value="${portletName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -85,10 +89,14 @@
 			<var name="pageStaging" value="true" />
 			<var name="siteName" value="${siteName}" />
 			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="Portlet#gotoPortletOptions">
+			<var name="portletOption" value="Look and Feel" />
 		</execute>
 
 		<execute macro="SitesDirectory#configureCustomTitleViaLookandfeelPG">
-			<var name="customPortletTitle" value="Sites Directory Custom" />
+			<var name="portletName" value="${portletName}" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -98,14 +106,34 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitesDirectory#viewSitesDirectoryPortletTitlePG">
-			<var name="customPortletTitle" value="Sites Directory Custom" />
+		<execute macro="SitesDirectory#viewPortletTitlePG">
+			<var name="portletName" value="${portletName} Custom" />
 		</execute>
 
 		<execute macro="Staging#publishToLiveNowPG">
-			<var name="uncheckApplication" value="true" />
 			<var name="applicationName" value="Sites Directory" />
+			<var name="markAsReadyForPublication" value="true" />
+			<var name="uncheckApplication" value="true" />
 		</execute>
+
+		<execute macro="Page#gotoPG">
+       		<var name="pageName" value="${pageName}" />
+       		<var name="siteName" value="${siteName}" />
+       		<var name="siteURL" value="true" />
+    	</execute>
+ 
+	    <execute macro="SitesDirectory#viewPortletTitlePG">
+			<var name="portletName" value="${portletName}" />
+		</execute>
+ 
+     	<execute macro="Page#gotoPG">
+       		<var name="pageName" value="${pageName}" />
+      		<var name="pageStaging" value="true" />
+       		<var name="siteName" value="${siteName}" />
+       		<var name="siteURL" value="true" />
+     	</execute>
+ 
+     	<execute macro="Staging#publishToLiveNowPG" />
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
@@ -113,27 +141,8 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="SitesDirectory#viewSitesDirectoryPortletTitlePG">
-			<var name="defaultPortletTitle" value="${defaultPortletTitle}" />
-		</execute>
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-			<var name="pageStaging" value="true" />
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="Staging#publishToLiveNowPG" />
-
-		<execute macro="Page#gotoPG">
-			<var name="pageName" value="${pageName}" />
-			<var name="siteName" value="${siteName}" />
-			<var name="siteURL" value="true" />
-		</execute>
-
-		<execute macro="SitesDirectory#viewSitesDirectoryPortletTitlePG">
-			<var name="customPortletTitle" value="Sites Directory Custom" />
+		<execute macro="SitesDirectory#viewPortletTitlePG">
+			<var name="portletName" value="${portletName} Custom" />
 		</execute>
 	</command>
 
@@ -183,8 +192,9 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewStagingLockedPG">
+		<execute macro="BlogsEntry#viewNoEditLinkPG">
 			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
 
 		<execute macro="Page#gotoConfigurationCP">
@@ -193,8 +203,9 @@
 			<var name="portletName" value="Site Settings" />
 		</execute>
 
-		<execute macro="Staging#editActivateStagingCP">
-			<var name="stagingBlogs" value="false" />
+		<execute macro="Staging#activateStagingCP">
+			<var name="editActivateStaging" value="true" />
+			<var name="uncheckContent" value="Blogs" />
 		</execute>
 
 		<execute macro="Page#gotoPG">
@@ -203,12 +214,9 @@
 			<var name="siteURL" value="true" />
 		</execute>
 
-		<execute macro="BlogsEntry#viewStagingUnlockedPG">
+		<execute macro="BlogsEntry#viewEditLinkPG">
 			<var name="entryContent" value="${entryContent}" />
+			<var name="entryTitle" value="${entryTitle}" />
 		</execute>
-	</command>
-
-	<command name="StagingPublishPortlet" priority="5">
-		<echo message="override" />
 	</command>
 </definition>

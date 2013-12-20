@@ -621,6 +621,22 @@
 		<execute action="PGBlogsEntry#assertTextEquals" locator-key1="ENTRY_CONTENT" value1="${entryContent}" />
 	</command>
 
+	<command name="viewEditLinkPG">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_CONTENT" value1="${entryContent}" />
+		<execute action="PGBlogs#assertElementPresent" locator-key1="ENTRY_EDIT" />
+	</command>
+
+	<command name="viewNoEditLinkPG">
+		<var name="key_entryTitle" value="${entryTitle}" />
+
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />
+		<execute action="PGBlogs#assertTextEquals" locator-key1="ENTRY_CONTENT" value1="${entryContent}" />
+		<execute action="PGBlogs#assertElementNotPresent" locator-key1="ENTRY_EDIT" />
+	</command>
+
 	<command name="viewNoPG">
 		<execute action="PGBlogs#assertTextNotPresent" value1="${entryTitle}" />
 	</command>
@@ -712,26 +728,6 @@
 		<execute action="PGBlogsRSS#assertTextEquals" locator-key1="FEED_SUBTITLE" value1="Liferay" />
 		<execute action="PGBlogsRSS#assertTextEquals" locator-key1="ENTRY_TITLE" value1="${entryTitle}" />
 		<execute action="PGBlogsRSS#assertTextEquals" locator-key1="ENTRY_CONTENT" value1="${entryContent}" />
-	</command>
-
-	<command name="viewStagingLockedPG">
-		<execute action="PGBlogs#assertTextEquals" locator-key1="PORTLET_TITLE" value1="Blogs"/>
-		<execute action="PGBlogs#assertTextNotPresent" locator-key1="ADD_ENTRY_BUTTON" value1="Add Blog Entry"/>
-		<execute action="PGBlogs#assertTextNotPresent" locator-key1="PERMISSIONS_BUTTON" value1="Permissions" />
-		<execute action="PGBlogs#assertTextNotPresent" locator-key1="SUBSCRIBE_LINK" value1="Subscribe" />
-		<execute action="PGBlogs#assertTextEquals" locator-key1="RSS_LINK" value1="RSS" />
-
-		<var name="key_entryContent" value="${entryContent}" />
-
-		<execute action="PGBlogsEntry#assertElementNotPresent" locator-key1="ENTRY_CONTENT_CKE_EDIT" />
-	</command>
-
-	<command name="viewStagingUnlockedPG">
-		<execute macro="BlogsPortlet#viewPG" />
-
-		<var name="key_entryContent" value="${entryContent}" />
-
-		<execute action="PGBlogsEntry#assertElementPresent" locator-key1="ENTRY_CONTENT_CKE_EDIT" />
 	</command>
 
 	<command name="viewViewCountCP">
