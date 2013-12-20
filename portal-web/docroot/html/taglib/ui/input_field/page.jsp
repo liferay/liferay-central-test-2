@@ -363,6 +363,7 @@ if (hints != null) {
 				secret = GetterUtil.getBoolean(hints.get("secret"), secret);
 				upperCase = GetterUtil.getBoolean(hints.get("upper-case"), upperCase);
 			}
+
 			if (autoSize) {
 				displayHeight = "auto";
 			}
