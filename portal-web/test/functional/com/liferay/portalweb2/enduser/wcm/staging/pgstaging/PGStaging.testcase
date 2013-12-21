@@ -1,5 +1,5 @@
 <definition>
-		<var name="siteName" value="Site Name" />
+	<var name="siteName" value="Site Name" />
 
 	<set-up>
 		<execute macro="User#firstLoginPG" />
