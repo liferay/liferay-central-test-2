@@ -368,20 +368,19 @@ if (hints != null) {
 				displayHeight = "auto";
 			}
 
-
 			if (Validator.isDigit(displayWidth)) {
 				int displayWidthInt = GetterUtil.getInteger(displayWidth);
 
 				if (displayWidthInt <= 60) {
 					cssClass += " input-mini";
 				}
-				else if (displayWidthInt > 60 && displayWidthInt <= 90) {
+				else if ((displayWidthInt > 60) && (displayWidthInt <= 90)) {
 					cssClass += " input-small";
 				}
-				else if (displayWidthInt > 90 && displayWidthInt <= 150) {
+				else if ((displayWidthInt > 90) && (displayWidthInt <= 150)) {
 					cssClass += " input-medium";
 				}
-				else if (displayWidthInt > 210 && displayWidthInt <= 270) {
+				else if ((displayWidthInt > 210) && (displayWidthInt <= 270)) {
 					cssClass += " input-xlarge";
 				}
 				else if (displayWidthInt > 270) {
