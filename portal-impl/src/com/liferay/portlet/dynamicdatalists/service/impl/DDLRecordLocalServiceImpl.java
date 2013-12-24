@@ -710,7 +710,8 @@ public class DDLRecordLocalServiceImpl extends DDLRecordLocalServiceBaseImpl {
 			return false;
 		}
 
-		if (lastRecordVersion.getVersion().equals(
+		if (Validator.equals(
+				lastRecordVersion.getVersion(),
 				latestRecordVersion.getVersion())) {
 
 			return false;
