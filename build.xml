@@ -862,8 +862,6 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 					pluginsDir = new File(projectDir.getParent(), pluginsDirName);
 				}
 				else {
-					lpPluginsDirName = lpPluginsDirName.substring(0, lpPluginsDirName.lastIndexOf("/"));
-
 					pluginsDir = new File(lpPluginsDirName);
 				}
 
