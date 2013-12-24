@@ -848,23 +848,23 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 	<target name="record-git-commit-plugins">
 		<script classpathref="project.classpath" language="beanshell">
 			<![CDATA[
-				String lpPluginsDir = project.getProperty("lp.plugins.dir");
-
 				File pluginsDir = null;
 
-				if (lpPluginsDir == null || lpPluginsDir.equals("")) {
+				String lpPluginsDirName = project.getProperty("lp.plugins.dir");
+
+				if ((lpPluginsDirName == null) || lpPluginsDirName.equals("")) {
 					File projectDir = new File(project.getProperty("project.dir"));
 
 					String projectDirName = projectDir.getName();
 
-					lpPluginsDir = "liferay-plugins" + projectDirName.substring("liferay-portal".length());
+					String pluginsDirName = "liferay-plugins" + projectDirName.substring("liferay-portal".length());
 
-					pluginsDir = new File(projectDir.getParent(), lpPluginsDir);
+					pluginsDir = new File(projectDir.getParent(), pluginsDirName);
 				}
 				else {
-					lpPluginsDir = lpPluginsDir.substring(0, lpPluginsDir.lastIndexOf("/"));
+					lpPluginsDirName = lpPluginsDirName.substring(0, lpPluginsDirName.lastIndexOf("/"));
 
-					pluginsDir = new File(lpPluginsDir);
+					pluginsDir = new File(lpPluginsDirName);
 				}
 
 				project.setProperty("git.plugins.dir", pluginsDir.toString());
