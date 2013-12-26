@@ -511,6 +511,7 @@ public class JournalConverterImpl implements JournalConverter {
 		}
 
 		dynamicElementElement.addAttribute("type", type);
+
 		dynamicElementElement.addAttribute("index-type", indexType);
 
 		for (Locale locale : ddmField.getAvailableLocales()) {
