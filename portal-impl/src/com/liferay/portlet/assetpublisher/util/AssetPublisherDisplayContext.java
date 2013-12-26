@@ -182,7 +182,7 @@ public class AssetPublisherDisplayContext {
 
 		assetEntryQuery.setAllCategoryIds(getAllAssetCategoryIds());
 
-		if (hasPageScope(groupIds)) {
+		if (hasLayoutGroup(groupIds)) {
 			assetEntryQuery.setAllTagIds(
 				AssetTagLocalServiceUtil.getTagIds(
 					groupIds, getAllAssetTagNames()));
@@ -820,7 +820,7 @@ public class AssetPublisherDisplayContext {
 		return portletConfig.getPortletName();
 	}
 
-	protected boolean hasPageScope(long[] groupIds) throws SystemException {
+	protected boolean hasLayoutGroup(long[] groupIds) throws SystemException {
 		for (long groupId : groupIds) {
 			Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
