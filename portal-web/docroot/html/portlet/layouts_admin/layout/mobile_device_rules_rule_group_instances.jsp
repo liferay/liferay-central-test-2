@@ -21,7 +21,7 @@ long groupId = ParamUtil.getLong(request, "groupId");
 String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
 
-PortletURL portletURL = (PortletURL)request.getAttribute("mobile_device_rules.jsp-portletURL");
+PortletURL portletURL = (PortletURL)request.getAttribute("mobile_device_rules_header.jspf-portletURL");
 %>
 
 <%@ include file="/html/portlet/layouts_admin/layout/mobile_device_rules_toolbar.jspf" %>
