@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
@@ -120,14 +119,7 @@ public class LiferaySeleniumHelper {
 			return;
 		}
 
-		StringBundler sb = new StringBundler();
-
-		sb.append("<log4j>");
-		sb.append(content);
-		sb.append("</log4j>");
-
-		content = sb.toString();
-
+		content = "<log4j>" + content + "</log4j>";
 		content = content.replaceAll("log4j:", "");
 
 		Document document = SAXReaderUtil.read(content, true);

@@ -136,7 +136,6 @@ public class Logger {
 		String stackTrace = generateStackTrace(throwable);
 
 		stackTrace = StringEscapeUtils.escapeEcmaScript(stackTrace);
-
 		stackTrace = StringUtil.replace(stackTrace, "\\\\n", "\\n");
 		stackTrace = StringUtil.replace(stackTrace, "\\\\t", "\\t");
 
