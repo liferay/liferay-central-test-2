@@ -20,7 +20,7 @@
 
 	<appender name="XML_FILE" class="org.apache.log4j.rolling.RollingFileAppender">
 		<rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
-			<param name="FileNamePattern" value="@liferay.home@/logs/liferay@spi.id@.%d{yyyy-MM-dd}.log.xml" />
+			<param name="FileNamePattern" value="@liferay.home@/logs/liferay@spi.id@.%d{yyyy-MM-dd}.xml" />
 		</rollingPolicy>
 
 		<layout class="org.apache.log4j.xml.XMLLayout">
