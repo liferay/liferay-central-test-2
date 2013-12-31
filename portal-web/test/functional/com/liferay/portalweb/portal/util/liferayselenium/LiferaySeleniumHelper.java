@@ -615,11 +615,11 @@ public class LiferaySeleniumHelper {
 
 		file.mkdirs();
 
+		Robot robot = new Robot();
+
 		Toolkit toolkit = Toolkit.getDefaultToolkit();
 
 		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
-
-		Robot robot = new Robot();
 
 		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
 
