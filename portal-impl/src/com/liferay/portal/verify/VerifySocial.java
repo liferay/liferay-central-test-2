@@ -17,6 +17,7 @@ package com.liferay.portal.verify;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
@@ -40,21 +41,25 @@ public class VerifySocial extends VerifyProcess {
 
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
-				Property classNameId = PropertyFactoryUtil.forName(
+				Property classNameIdProperty = PropertyFactoryUtil.forName(
 					"classNameId");
 
-				dynamicQuery.add(
-					classNameId.eq(PortalUtil.getClassNameId(Group.class)));
+				long classNameId = PortalUtil.getClassNameId(Group.class);
 
-				Property classPK = PropertyFactoryUtil.forName("classPK");
+				dynamicQuery.add(classNameIdProperty.eq(classNameId));
+
+				Property classPKProperty = PropertyFactoryUtil.forName(
+					"classPK");
 
 				DynamicQuery groupDynamicQuery =
 					DynamicQueryFactoryUtil.forClass(Group.class);
 
-				groupDynamicQuery.setProjection(
-					ProjectionFactoryUtil.property("groupId"));
+				Projection projection = ProjectionFactoryUtil.property(
+					"groupId");
 
-				dynamicQuery.add(classPK.notIn(groupDynamicQuery));
+				groupDynamicQuery.setProjection(projection);
+
+				dynamicQuery.add(classPKProperty.notIn(groupDynamicQuery));
 			}
 
 			@Override
