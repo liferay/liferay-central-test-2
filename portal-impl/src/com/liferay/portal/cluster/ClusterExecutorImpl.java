@@ -98,10 +98,10 @@ public class ClusterExecutorImpl
 			Http.HTTPS, PropsValues.WEB_SERVER_PROTOCOL);
 
 		if (_secure) {
-			_configuredPort = PropsValues.PORTAL_INSTANCE_HTTPS_PORT;
+			_port = PropsValues.PORTAL_INSTANCE_HTTPS_PORT;
 		}
 		else {
-			_configuredPort = PropsValues.PORTAL_INSTANCE_HTTP_PORT;
+			_port = PropsValues.PORTAL_INSTANCE_HTTP_PORT;
 		}
 
 		super.afterPropertiesSet();
@@ -309,7 +309,7 @@ public class ClusterExecutorImpl
 
 	@Override
 	public void portalPortConfigured(int port) {
-		if (!isEnabled() || (_localClusterNode.getPort() == _configuredPort)) {
+		if (!isEnabled() || (_localClusterNode.getPort() == _port)) {
 			return;
 		}
 
@@ -425,7 +425,7 @@ public class ClusterExecutorImpl
 		ClusterNode localClusterNode = new ClusterNode(
 			PortalUUIDUtil.generate(), inetAddress);
 
-		int port = _configuredPort;
+		int port = _port;
 
 		if (port <= 0) {
 			port = PortalUtil.getPortalPort(_secure);
@@ -569,7 +569,6 @@ public class ClusterExecutorImpl
 		new CopyOnWriteArrayList<ClusterEventListener>();
 	private Map<String, Address> _clusterNodeAddresses =
 		new ConcurrentHashMap<String, Address>();
-	private int _configuredPort;
 	private JChannel _controlJChannel;
 	private ExecutorService _executorService;
 	private Map<String, FutureClusterResponses> _futureClusterResponses =
@@ -578,6 +577,7 @@ public class ClusterExecutorImpl
 		new ConcurrentHashMap<Address, ClusterNode>();
 	private Address _localAddress;
 	private ClusterNode _localClusterNode;
+	private int _port;
 	private boolean _secure;
 	private boolean _shortcutLocalMethod;
 

@@ -46,6 +46,7 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnsyncPrintWriterPool;
@@ -821,11 +822,16 @@ public class LuceneHelperImpl implements LuceneHelper {
 			int port = clusterNode.getPort();
 
 			if (port <= 0) {
-				throw new Exception(
-					"Invalid port " + port + " of ClusterNode, port is " +
-						"detected by the first request arrived, or configured" +
-							" by \"portal.instance.http.port\" and " +
-								"\"portal.instance.https.port\"");
+				StringBundler sb = new StringBundler(6);
+
+				sb.append("Invalid cluster node port ");
+				sb.append(port);
+				sb.append(". The port is set by the first request or ");
+				sb.append("configured in portal.properties by the properties ");
+				sb.append("\"portal.instance.http.port\" and ");
+				sb.append("\"portal.instance.https.port\"".);
+
+				throw new Exception(sb.toString());
 			}
 
 			InetAddress inetAddress = clusterNode.getInetAddress();
