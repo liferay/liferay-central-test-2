@@ -295,20 +295,20 @@ public class Logger {
 
 	public void send(String id, String status, Map<String, String> context) {
 		if (status.equals("pending")) {
-			_xpathIdStack.push(id);
+			_xPathIdStack.push(id);
 		}
 		else if (status.equals("start")) {
-			_xpathIdStack = new Stack<String>();
+			_xPathIdStack = new Stack<String>();
 
 			return;
 		}
 
-		String xpath = generateXpath(_xpathIdStack);
+		String xPath = generateXPath(_xPathIdStack);
 
-		List<WebElement> webElements = _webDriver.findElements(By.xpath(xpath));
+		List<WebElement> webElements = _webDriver.findElements(By.xpath(xPath));
 
 		if (status.equals("pass")) {
-			_xpathIdStack.pop();
+			_xPathIdStack.pop();
 		}
 
 		StringBundler sb = new StringBundler();
@@ -323,7 +323,7 @@ public class Logger {
 		}
 
 		webElements = _webDriver.findElements(
-			By.xpath(xpath + "//span[@class='quote']"));
+			By.xpath(xPath + "//span[@class='quote']"));
 
 		sb = new StringBundler();
 
@@ -400,21 +400,21 @@ public class Logger {
 	}
 
 	protected String generateStackTrace(Throwable throwable) {
-		Stack<String> xpathIdStack = (Stack<String>)_xpathIdStack.clone();
+		Stack<String> xPathIdStack = (Stack<String>)_xPathIdStack.clone();
 
 		StringBundler sb = new StringBundler();
 
 		sb.append("<p>");
 
-		Queue<String> xpathQueue = new LinkedList<String>();
+		Queue<String> xPathQueue = new LinkedList<String>();
 
-		while (xpathIdStack.size() > 1) {
-			String xpath = generateXpath(xpathIdStack);
+		while (xPathIdStack.size() > 1) {
+			String xPath = generateXPath(xPathIdStack);
 
-			xpathIdStack.pop();
+			xPathIdStack.pop();
 
 			String commandTag = getLogElementText(
-				xpath + "/div/span[@class='tag'][1]");
+				xPath + "/div/span[@class='tag'][1]");
 
 			if (!commandTag.equals("echo") && !commandTag.equals("execute") &&
 				!commandTag.equals("fail")) {
@@ -422,19 +422,19 @@ public class Logger {
 				continue;
 			}
 
-			xpathQueue.add(xpath);
+			xPathQueue.add(xPath);
 		}
 
-		while (xpathQueue.peek() != null) {
-			String xpath = xpathQueue.poll();
+		while (xPathQueue.peek() != null) {
+			String xPath = xPathQueue.poll();
 
 			String command = getLogElementText(
-				xpath + "/div/span[@class='quote'][1]");
+				xPath + "/div/span[@class='quote'][1]");
 
 			command = StringUtil.replace(command, "\"", "");
 
 			String commandType = getLogElementText(
-				xpath + "/div/span[@class='attribute'][1]");
+				xPath + "/div/span[@class='attribute'][1]");
 
 			sb.append("Failed Line: ");
 
@@ -443,28 +443,28 @@ public class Logger {
 			sb.append(command);
 			sb.append("</b> ");
 
-			if (xpathQueue.peek() != null) {
-				String parentXpath = xpathQueue.peek();
+			if (xPathQueue.peek() != null) {
+				String parentXPath = xPathQueue.peek();
 
 				String parentCommand = getLogElementText(
-					parentXpath + "/div/span[@class='quote'][1]");
+					parentXPath + "/div/span[@class='quote'][1]");
 
 				parentCommand = StringUtil.replace(parentCommand, "\"", "");
 
 				String parentCommandType = getLogElementText(
-					parentXpath + "/div/span[@class='attribute'][1]");
+					parentXPath + "/div/span[@class='attribute'][1]");
 
-				int x = parentCommand.indexOf("#");
+				int pos = parentCommand.indexOf("#");
 
 				sb.append("(from ");
-				sb.append(parentCommand.substring(0, x));
+				sb.append(parentCommand.substring(0, pos));
 				sb.append(".");
 				sb.append(parentCommandType);
 				sb.append(") ");
 			}
 
 			String lineNumber = getLogElementText(
-				xpath + "/div/div[@class='line-number']");
+				xPath + "/div/div[@class='line-number']");
 
 			sb.append("at line ");
 			sb.append(lineNumber);
@@ -472,7 +472,7 @@ public class Logger {
 		}
 
 		String testCaseCommand = getLogElementText(
-			generateXpath(xpathIdStack) + "/div/h3");
+			generateXPath(xPathIdStack) + "/div/h3");
 
 		sb.append("in test case command <b>");
 		sb.append(testCaseCommand.trim());
@@ -497,7 +497,7 @@ public class Logger {
 		return sb.toString();
 	}
 
-	protected String generateXpath(Stack<String> ids) {
+	protected String generateXPath(Stack<String> ids) {
 		StringBundler sb = new StringBundler();
 
 		sb.append("/");
@@ -554,9 +554,9 @@ public class Logger {
 		return sb.toString();
 	}
 
-	protected String getLogElementText(String xpath) {
+	protected String getLogElementText(String xPath) {
 		try {
-			WebElement webElement = _webDriver.findElement(By.xpath(xpath));
+			WebElement webElement = _webDriver.findElement(By.xpath(xPath));
 
 			return (String)_javascriptExecutor.executeScript(
 				"var element = arguments[0]; return element.innerHTML;",
@@ -619,6 +619,6 @@ public class Logger {
 	private String _screenshotFileName = "";
 	private int _seleniumCount = 1;
 	private WebDriver _webDriver = new FirefoxDriver();
-	private Stack<String> _xpathIdStack = new Stack<String>();
+	private Stack<String> _xPathIdStack = new Stack<String>();
 
 }
