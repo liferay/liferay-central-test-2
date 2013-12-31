@@ -116,7 +116,6 @@ public class SeleniumBuilder {
 		}
 
 		_writeTestCaseMethodNamesFile();
-
 		_writeTestCasePropertiesFile();
 
 		System.out.println(
@@ -212,11 +211,12 @@ public class SeleniumBuilder {
 			}
 		}
 
+		sb.append("\nTEST_CASE_METHOD_NAMES=");
+
 		String testCaseMethodNamesString = StringUtil.merge(
 			testCaseMethodNames.toArray(new String[testCaseMethodNames.size()]),
 			StringPool.SPACE);
 
-		sb.append("\nTEST_CASE_METHOD_NAMES=");
 		sb.append(testCaseMethodNamesString);
 
 		_seleniumBuilderFileUtil.writeFile(
@@ -281,7 +281,7 @@ public class SeleniumBuilder {
 			false);
 	}
 
-	private static SeleniumBuilderContext _seleniumBuilderContext;
-	private static SeleniumBuilderFileUtil _seleniumBuilderFileUtil;
+	private SeleniumBuilderContext _seleniumBuilderContext;
+	private SeleniumBuilderFileUtil _seleniumBuilderFileUtil;
 
 }
