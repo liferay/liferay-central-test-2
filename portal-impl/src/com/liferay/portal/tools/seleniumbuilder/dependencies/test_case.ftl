@@ -39,12 +39,6 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)}
 		extends BaseTestCase {
 	</#if>
 
-	static {
-		if(java.awt.GraphicsEnvironment.isHeadless() == true) {
-			System.setProperty("java.awt.headless", "false");
-		}
-	}
-
 	public ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)}() {
 		super();
 
