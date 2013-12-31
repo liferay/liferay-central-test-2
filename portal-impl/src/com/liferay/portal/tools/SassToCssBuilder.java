@@ -204,11 +204,10 @@ public class SassToCssBuilder {
 		// Append custom CSS for RTL
 
 		String rtlCustomFileName = getRtlCustomFileName(fileName);
-		String rtlCustomFilePath = docrootDirName.concat(rtlCustomFileName);
 
-		if (FileUtil.exists(rtlCustomFilePath)) {
-			File rtlCustomFile = new File(rtlCustomFilePath);
+		File rtlCustomFile = new File(docrootDirName, rtlCustomFileName);
 
+		if (rtlCustomFile.exists()) {
 			lastModified = rtlCustomFile.lastModified();
 
 			String rtlCustomCss = _parseSassFile(
