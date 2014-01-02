@@ -269,18 +269,6 @@
 		<execute action="CPDocumentsandmedia#assertTextEquals" locator-key1="INFO_MESSAGE" value1="There are no documents or media files in this folder." />
 	</command>
 
-	<command name="searchContentPG">
-		<execute action="PGDocumentsandmediaSearch#type" locator-key1="SEARCH_FIELD" value1="${entryContent}" />
-		<execute action="PGDocumentsandmediaSearch#assertClick" locator-key1="SEARCH_BUTTON" value1="Search" />
-		<execute action="PGDocumentsandmediaSearch#assertTextEquals" locator-key1="SEARCH_RESULTS_TITLE" value1="${entryTitle}" />
-	</command>
-
-	<command name="searchPG">
-		<execute action="PGDocumentsandmediaSearch#type" locator-key1="SEARCH_FIELD" value1="${entryTitle}" />
-		<execute action="PGDocumentsandmediaSearch#assertClick" locator-key1="SEARCH_BUTTON" value1="Search" />
-		<execute action="PGDocumentsandmediaSearch#assertTextEquals" locator-key1="SEARCH_RESULTS_TITLE" value1="${entryTitle}" />
-	</command>
-
 	<command name="revertPG">
 		<var name="key_dmDocumentVersionNumber" value="${dmDocumentVersionNumber}" />
 
@@ -288,6 +276,28 @@
 		<execute action="PGDocumentsandmediaDocument#click" locator-key1="VERSION_HISTORY_TABLE_DROPDOWN" />
 		<execute action="PGDocumentsandmediaDocument#assertClick" locator-key1="VERSION_HISTORY_MENULIST_REVERT" value1="Revert" />
 		<execute action="PGDocumentsandmediaDocument#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="searchPG">
+		<if>
+			<isset var="dmDocumentTitle" />
+			<then>
+				<execute action="PGDocumentsandmedia#type" locator-key1="BASIC_SEARCH_FIELD" value1="${dmDocumentTitle}" />
+				<execute action="PGDocumentsandmedia#assertClick" locator-key1="BASIC_SEARCH_BUTTON" value1="Search" />
+
+				<execute action="PGDocumentsandmediaSearch#assertTextEquals" locator-key1="SEARCH_RESULTS_TITLE" value1="${dmDocumentTitle}" />
+			</then>
+		</if>
+
+		<if>
+			<isset var="dmDocumentContent" />
+			<then>
+				<execute action="PGDocumentsandmedia#type" locator-key1="BASIC_SEARCH_FIELD" value1="${dmDocumentContent}" />
+				<execute action="PGDocumentsandmedia#assertClick" locator-key1="BASIC_SEARCH_BUTTON" value1="Search" />
+
+				<execute action="PGDocumentsandmediaSearch#assertTextEquals" locator-key1="SEARCH_RESULTS_TITLE" value1="${dmDocumentTitle}" />
+			</then>
+		</if>
 	</command>
 
 	<command name="tearDownCP">
