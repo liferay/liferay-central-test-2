@@ -63,7 +63,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion eq(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.eq(dynamicQueryImpl.getDetachedCriteria()));
@@ -76,7 +76,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion eqAll(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.eqAll(dynamicQueryImpl.getDetachedCriteria()));
@@ -97,7 +97,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion ge(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.ge(dynamicQueryImpl.getDetachedCriteria()));
@@ -110,7 +110,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion geAll(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.geAll(dynamicQueryImpl.getDetachedCriteria()));
@@ -131,7 +131,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion geSome(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.geSome(dynamicQueryImpl.getDetachedCriteria()));
@@ -153,7 +153,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion gt(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.gt(dynamicQueryImpl.getDetachedCriteria()));
@@ -166,7 +166,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion gtAll(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.gtAll(dynamicQueryImpl.getDetachedCriteria()));
@@ -187,7 +187,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion gtSome(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.gtSome(dynamicQueryImpl.getDetachedCriteria()));
@@ -210,7 +210,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion in(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.in(dynamicQueryImpl.getDetachedCriteria()));
@@ -263,7 +263,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion le(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.le(dynamicQueryImpl.getDetachedCriteria()));
@@ -276,7 +276,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion leAll(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.leAll(dynamicQueryImpl.getDetachedCriteria()));
@@ -297,7 +297,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion leSome(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.leSome(dynamicQueryImpl.getDetachedCriteria()));
@@ -310,7 +310,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion lt(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.lt(dynamicQueryImpl.getDetachedCriteria()));
@@ -323,7 +323,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion ltAll(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.ltAll(dynamicQueryImpl.getDetachedCriteria()));
@@ -344,7 +344,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion ltSome(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.ltSome(dynamicQueryImpl.getDetachedCriteria()));
@@ -362,7 +362,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion ne(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.ne(dynamicQueryImpl.getDetachedCriteria()));
@@ -388,13 +388,13 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 
 	@Override
 	public Criterion notIn(DynamicQuery subselect) {
-		DynamicQueryImpl dynamicQueryImpl = _getDynamicQueryImpl(subselect);
+		DynamicQueryImpl dynamicQueryImpl = getDynamicQueryImpl(subselect);
 
 		return new CriterionImpl(
 			_property.notIn(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
-	private DynamicQueryImpl _getDynamicQueryImpl(DynamicQuery subselect) {
+	protected DynamicQueryImpl getDynamicQueryImpl(DynamicQuery subselect) {
 		if (subselect instanceof DynamicQueryImpl) {
 			return (DynamicQueryImpl)subselect;
 		}
@@ -406,8 +406,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 			return (DynamicQueryImpl)doPrivilegedHandler.getActualBean();
 		}
 
-		throw new IllegalArgumentException(
-			subselect + " can not be converted to " + DynamicQueryImpl.class);
+		throw new IllegalArgumentException("Uanble to unwrap " + subselect);
 	}
 
 	private org.hibernate.criterion.Property _property;
