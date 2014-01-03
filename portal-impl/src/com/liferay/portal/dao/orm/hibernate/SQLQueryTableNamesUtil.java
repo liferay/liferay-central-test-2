@@ -38,28 +38,28 @@ public class SQLQueryTableNamesUtil {
 
 		Set<String> tableNameSet = new HashSet<String>();
 
-		// Find table name from "from" clause
+		// Find table name from the "from" clause
 
 		int index = 0;
 
 		while ((index = lowerCaseSQL.indexOf(" from ", index)) != -1) {
 			index += 6;
 
-			int[] indexes = findWord(lowerCaseSQL, index);
+			int[] indexes = _getTableNameIndexes(lowerCaseSQL, index);
 
 			if (indexes != null) {
 				tableNameSet.add(sql.substring(indexes[0], indexes[1]));
 			}
 		}
 
-		// Find table name from "join" clause
+		// Find table name from the "join" clause
 
 		index = 0;
 
 		while ((index = lowerCaseSQL.indexOf(" join ", index)) != -1) {
 			index += 6;
 
-			int[] indexes = findWord(lowerCaseSQL, index);
+			int[] indexes = _getTableNameIndexes(lowerCaseSQL, index);
 
 			if (indexes != null) {
 				tableNameSet.add(sql.substring(indexes[0], indexes[1]));
@@ -73,7 +73,7 @@ public class SQLQueryTableNamesUtil {
 		return tableNames;
 	}
 
-	private static int[] findWord(String sql, int index) {
+	private static int[] _getTableNameIndexes(String sql, int index) {
 		int start = -1;
 		int end = sql.length();
 
@@ -82,7 +82,7 @@ public class SQLQueryTableNamesUtil {
 
 			if (c == CharPool.OPEN_PARENTHESIS) {
 
-				// Subquery in clause, no need to parse table name.
+				// Subquery "in" clause, no need to parse for table name
 
 				break;
 			}

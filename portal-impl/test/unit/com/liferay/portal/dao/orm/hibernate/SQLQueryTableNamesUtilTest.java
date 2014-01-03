@@ -58,40 +58,41 @@ public class SQLQueryTableNamesUtilTest {
 
 	@Test
 	public void testGetTableNames() throws Exception {
-		UnsyncBufferedReader unsyncBufferedReader =
-			new UnsyncBufferedReader(
-				new InputStreamReader(
-					SQLQueryTableNamesUtilTest.class.getResourceAsStream(
-						"dependencies/sql.txt")));
+		UnsyncBufferedReader unsyncBufferedReader = new UnsyncBufferedReader(
+			new InputStreamReader(
+				SQLQueryTableNamesUtilTest.class.getResourceAsStream(
+					"dependencies/sql.txt")));
 
 		String line = null;
 
 		while ((line = unsyncBufferedReader.readLine()) != null) {
 			int index = line.indexOf(CharPool.POUND);
 
-			if (index != -1) {
-				String sql = line.substring(0, index);
-
-				String[] expectedTableNames = StringUtil.split(
-					line.substring(index + 1), CharPool.COMMA);
-
-				String[] actualTableNames =
-					SQLQueryTableNamesUtil.getTableNames(sql);
-
-				Arrays.sort(actualTableNames);
-
-				Assert.assertArrayEquals(
-					"For sql " + sql, expectedTableNames, actualTableNames);
-
-				// Try again to hit the cache
-
-				actualTableNames = SQLQueryTableNamesUtil.getTableNames(sql);
-
-				Arrays.sort(actualTableNames);
-
-				Assert.assertArrayEquals(
-					"For sql " + sql, expectedTableNames, actualTableNames);
+			if (index == -1) {
+				continue;
 			}
+
+			String sql = line.substring(0, index);
+
+			String[] expectedTableNames = StringUtil.split(
+				line.substring(index + 1), CharPool.COMMA);
+
+			String[] actualTableNames =
+				SQLQueryTableNamesUtil.getTableNames(sql);
+
+			Arrays.sort(actualTableNames);
+
+			Assert.assertArrayEquals(
+				"For SQL " + sql, expectedTableNames, actualTableNames);
+
+			// Access from cache
+
+			actualTableNames = SQLQueryTableNamesUtil.getTableNames(sql);
+
+			Arrays.sort(actualTableNames);
+
+			Assert.assertArrayEquals(
+				"For SQL " + sql, expectedTableNames, actualTableNames);
 		}
 
 		unsyncBufferedReader.close();
