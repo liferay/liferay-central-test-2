@@ -216,6 +216,13 @@ public class ClpSerializer {
 
 				_useReflectionToTranslateThrowable = false;
 			}
+			catch (ClassNotFoundException cnfe) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Do not use reflection to translate throwable");
+				}
+
+				_useReflectionToTranslateThrowable = false;
+			}
 			catch (Throwable throwable2) {
 				_log.error(throwable2, throwable2);
 
