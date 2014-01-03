@@ -209,14 +209,14 @@ public class ClpSerializer {
 
 				return throwable;
 			}
-			catch (SecurityException se) {
+			catch (ClassNotFoundException cnfe) {
 				if (_log.isInfoEnabled()) {
 					_log.info("Do not use reflection to translate throwable");
 				}
 
 				_useReflectionToTranslateThrowable = false;
 			}
-			catch (ClassNotFoundException cnfe) {
+			catch (SecurityException se) {
 				if (_log.isInfoEnabled()) {
 					_log.info("Do not use reflection to translate throwable");
 				}
