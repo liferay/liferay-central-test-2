@@ -236,7 +236,7 @@ public class ClpSerializer {
 
 		<#list exceptions as exception>
 			if (className.equals("${packagePath}.${exception}Exception")) {
-				return new ${packagePath}.${exception}Exception();
+				return new ${packagePath}.${exception}Exception(throwable.getMessage(), throwable.getCause());
 			}
 		</#list>
 
