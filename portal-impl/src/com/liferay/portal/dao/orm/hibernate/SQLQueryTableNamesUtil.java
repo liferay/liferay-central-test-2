@@ -82,8 +82,8 @@ public class SQLQueryTableNamesUtil {
 
 			if (c == CharPool.OPEN_PARENTHESIS) {
 
-				// There is a subquery in current clause, no need to parse for
-				// table name
+				// There is a subquery in the current clause, so no need to
+				// parse for a table name
 
 				break;
 			}
