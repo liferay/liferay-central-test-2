@@ -73,6 +73,10 @@ public class EventsProcessorUtil {
 		_instance.registerEvent(key, event);
 	}
 
+	public static void setEventsProcessor(EventsProcessor eventsProcessor) {
+		_instance = eventsProcessor;
+	}
+
 	public static void unregisterEvent(String key, Object event) {
 		_instance.unregisterEvent(key, event);
 	}
