@@ -1479,23 +1479,23 @@ public class Creole10Parser]]></replacevalue>
 	</target>
 
 	<target name="format-source">
-		<if>
-			<not>
-				<isset property="dir" />
-			</not>
-			<then>
-				<property name="dir" value="${project.dir}" />
-			</then>
-		</if>
-
 		<copy todir="${project.dir}/portal-impl/classes" overwrite="true" preservelastmodified="true">
 			<fileset dir="${project.dir}/portal-impl/src" includes="com/liferay/portal/tools/dependencies/*.properties" />
 		</copy>
 
+		<if>
+			<not>
+				<isset property="source.formatter.dir" />
+			</not>
+			<then>
+				<property name="source.formatter.dir" value="${project.dir}" />
+			</then>
+		</if>
+
 		<java
 			classname="com.liferay.portal.tools.sourceformatter.SourceFormatter"
 			classpathref="project.classpath"
-			dir="${dir}"
+			dir="${source.formatter.dir}"
 			fork="true"
 			newenvironment="true"
 		>
