@@ -20,7 +20,7 @@ package com.liferay.portal.kernel.events;
 public abstract class SimpleAction implements LifecycleAction {
 
 	@Override
-	public final void processEvent(LifecycleEvent lifecycleEvent)
+	public final void processLifecycleEvent(LifecycleEvent lifecycleEvent)
 		throws ActionException {
 
 		run(lifecycleEvent.getIds());

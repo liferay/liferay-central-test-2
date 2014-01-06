@@ -22,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public abstract class SessionAction implements LifecycleAction {
 
 	@Override
-	public final void processEvent(LifecycleEvent lifecycleEvent)
+	public final void processLifecycleEvent(LifecycleEvent lifecycleEvent)
 		throws ActionException {
 
 		run(lifecycleEvent.getSession());

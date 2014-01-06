@@ -15,19 +15,11 @@
 package com.liferay.portal.kernel.events;
 
 /**
- * A marker interface for the lifecycle actions of the portal.
- *
- * <ul>
- * <li>{@link Action}</li>
- * <li>{@link SessionAction}</li>
- * <li>{@link SimpleAction}</li>
- * </ul>
- *
  * @author Raymond Augé
  */
 public interface LifecycleAction {
 
-	public void processEvent(LifecycleEvent lifecycleEvent)
+	public void processLifecycleEvent(LifecycleEvent lifecycleEvent)
 		throws ActionException;
 
 }

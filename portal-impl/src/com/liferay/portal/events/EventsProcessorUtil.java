@@ -35,13 +35,6 @@ public class EventsProcessorUtil {
 	}
 
 	public static void process(
-			String key, String[] classes, LifecycleEvent lifecycleEvent)
-		throws ActionException {
-
-		_instance.process(key, classes, lifecycleEvent);
-	}
-
-	public static void process(
 			String key, String[] classes, HttpServletRequest request,
 			HttpServletResponse response)
 		throws ActionException {
@@ -54,6 +47,13 @@ public class EventsProcessorUtil {
 		throws ActionException {
 
 		_instance.process(key, classes, new LifecycleEvent(session));
+	}
+
+	public static void process(
+			String key, String[] classes, LifecycleEvent lifecycleEvent)
+		throws ActionException {
+
+		_instance.process(key, classes, lifecycleEvent);
 	}
 
 	public static void process(String key, String[] classes, String[] ids)
@@ -69,18 +69,10 @@ public class EventsProcessorUtil {
 		_instance.processEvent(lifecycleAction, lifecycleEvent);
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.service.registry.ServiceRegistry}
-	 */
 	public static void registerEvent(String key, Object event) {
 		_instance.registerEvent(key, event);
 	}
 
-	/**
-	 * @deprecated As of 6.2.0, replaced by {@link
-	 *             com.liferay.portal.service.registry.ServiceRegistry}
-	 */
 	public static void unregisterEvent(String key, Object event) {
 		_instance.unregisterEvent(key, event);
 	}

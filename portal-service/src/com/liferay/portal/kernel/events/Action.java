@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class Action implements LifecycleAction {
 
 	@Override
-	public final void processEvent(LifecycleEvent lifecycleEvent)
+	public final void processLifecycleEvent(LifecycleEvent lifecycleEvent)
 		throws ActionException {
 
 		run(lifecycleEvent.getRequest(), lifecycleEvent.getResponse());

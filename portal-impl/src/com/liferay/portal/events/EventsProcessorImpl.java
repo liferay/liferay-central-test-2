@@ -48,18 +48,18 @@ public class EventsProcessorImpl implements EventsProcessor {
 				_log.debug("Process event " + className);
 			}
 
-			LifecycleAction lifecycleAction =
-				(LifecycleAction)InstancePool.get(className);
+			LifecycleAction lifecycleAction = (LifecycleAction)InstancePool.get(
+				className);
 
-			lifecycleAction.processEvent(lifecycleEvent);
+			lifecycleAction.processLifecycleEvent(lifecycleEvent);
 		}
 
 		if (Validator.isNull(key)) {
 			return;
 		}
 
-		for (LifecycleAction lifecycleAction : _getEvents(key)) {
-			lifecycleAction.processEvent(lifecycleEvent);
+		for (LifecycleAction lifecycleAction : getLifecycleActions(key)) {
+			lifecycleAction.processLifecycleEvent(lifecycleEvent);
 		}
 	}
 
@@ -68,38 +68,38 @@ public class EventsProcessorImpl implements EventsProcessor {
 			LifecycleAction lifecycleAction, LifecycleEvent lifecycleEvent)
 		throws ActionException {
 
-		lifecycleAction.processEvent(lifecycleEvent);
+		lifecycleAction.processLifecycleEvent(lifecycleEvent);
 	}
 
 	@Override
 	public void registerEvent(String key, Object event) {
-		List<LifecycleAction> events = _getEvents(key);
+		List<LifecycleAction> lifecycleActions = getLifecycleActions(key);
 
-		events.add((LifecycleAction)event);
+		lifecycleActions.add((LifecycleAction)event);
 	}
 
 	@Override
 	public void unregisterEvent(String key, Object event) {
-		List<LifecycleAction> events = _getEvents(key);
+		List<LifecycleAction> lifecycleActions = getLifecycleActions(key);
 
-		events.remove(event);
+		lifecycleActions.remove(event);
 	}
 
-	private List<LifecycleAction> _getEvents(String key) {
-		List<LifecycleAction> events = _eventsMap.get(key);
+	private List<LifecycleAction> getLifecycleActions(String key) {
+		List<LifecycleAction> lifecycleActions = _lifecycleActions.get(key);
 
-		if (events == null) {
-			events = new ArrayList<LifecycleAction>();
+		if (lifecycleActions == null) {
+			lifecycleActions = new ArrayList<LifecycleAction>();
 
-			_eventsMap.put(key, events);
+			_lifecycleActions.put(key, lifecycleActions);
 		}
 
-		return events;
+		return lifecycleActions;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EventsProcessorImpl.class);
 
-	private Map<String, List<LifecycleAction>> _eventsMap =
+	private Map<String, List<LifecycleAction>> _lifecycleActions =
 		new HashMap<String, List<LifecycleAction>>();
 
 }

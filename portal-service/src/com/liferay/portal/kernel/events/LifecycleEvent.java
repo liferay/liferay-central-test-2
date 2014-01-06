@@ -27,10 +27,6 @@ public class LifecycleEvent {
 		this(null, null, null, null);
 	}
 
-	public LifecycleEvent(String[] ids) {
-		this(ids, null, null, null);
-	}
-
 	public LifecycleEvent(
 		HttpServletRequest request, HttpServletResponse response) {
 
@@ -39,6 +35,10 @@ public class LifecycleEvent {
 
 	public LifecycleEvent(HttpSession session) {
 		this(null, null, null, session);
+	}
+
+	public LifecycleEvent(String[] ids) {
+		this(ids, null, null, null);
 	}
 
 	public LifecycleEvent(
