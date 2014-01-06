@@ -19,11 +19,11 @@
 </c:if>
 
 <%
+SearchContainer searchContainer = new UserSearch(renderRequest, "cur2", currentURLObj);
+
 RowChecker rowChecker = new RowChecker(renderResponse);
 
 rowChecker.setRowIds("rowIdsUserCheckbox");
-
-SearchContainer searchContainer = new UserSearch(renderRequest, "cur2", currentURLObj);
 
 searchContainer.setRowChecker(rowChecker);
 
