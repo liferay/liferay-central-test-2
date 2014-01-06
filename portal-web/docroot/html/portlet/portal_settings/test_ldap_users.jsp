@@ -98,8 +98,6 @@ boolean showMissingAttributeMessage = false;
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/portal_settings/test_ldap_users");
 portletURL.setParameter("ldapServerId", String.valueOf(ldapServerId));
 portletURL.setParameter("baseProviderURL", baseProviderURL);
@@ -115,6 +113,7 @@ portletURL.setParameter("userMappingFirstName", ParamUtil.getString(request, "us
 portletURL.setParameter("userMappingLastName", ParamUtil.getString(request, "userMappingLastName"));
 portletURL.setParameter("userMappingJobTitle", ParamUtil.getString(request, "userMappingJobTitle"));
 portletURL.setParameter("userMappingGroup", ParamUtil.getString(request, "userMappingGroup"));
+portletURL.setWindowState(LiferayWindowState.POP_UP);
 %>
 
 <liferay-ui:search-container
