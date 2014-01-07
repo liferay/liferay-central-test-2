@@ -50,11 +50,11 @@ public class NavTag extends BaseNavTag {
 			ThemeDisplay themeDisplay = (ThemeDisplay)pageContext.getAttribute(
 				"themeDisplay");
 
-			String cssClass = getCssClass();
-
 			StringBundler sb = navBarTag.getResponsiveButtonsSB();
 
 			sb.append("<a class=\"btn btn-navbar");
+
+			String cssClass = getCssClass();
 
 			if (Validator.isNotNull(cssClass)) {
 				sb.append(StringPool.SPACE);
