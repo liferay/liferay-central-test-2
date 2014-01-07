@@ -943,7 +943,7 @@ public class HttpImpl implements Http {
 	}
 
 	@Override
-	public String removePathParameters(String uri) {
+	public String removeParameters(String uri) {
 		if (Validator.isNull(uri)) {
 			return uri;
 		}

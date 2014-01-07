@@ -161,21 +161,21 @@ public class HttpImplTest extends PowerMockito {
 	}
 
 	@Test
-	public void testRemovePathParameters() {
+	public void testRemoveParameters() {
 		Assert.assertEquals(
 			"/TestServlet/one/two",
-			_httpImpl.removePathParameters(
+			_httpImpl.removeParameters(
 				"/TestServlet;jsessionid=ae01b0f2af/one;test=$one@two/two"));
 
 		Assert.assertEquals(
 			"/TestServlet/one/two",
-			_httpImpl.removePathParameters(
+			_httpImpl.removeParameters(
 				"/TestServlet;jsessionid=ae01b0f2af;test2=123,456" +
 					"/one;test=$one@two/two"));
 
 		Assert.assertEquals(
 			"/TestServlet/one/two",
-			_httpImpl.removePathParameters(
+			_httpImpl.removeParameters(
 				"/TestServlet/one;test=$one@two/two;jsessionid=ae01b0f2af" +
 					";test2=123,456"));
 	}
