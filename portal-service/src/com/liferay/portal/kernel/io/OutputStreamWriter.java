@@ -69,7 +69,7 @@ public class OutputStreamWriter extends Writer {
 		_outputStream = outputStream;
 		_charsetName = charsetName;
 		_charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(charsetName);
-		_outputBuffer = ByteBuffer.allocate(outputBufferSize);
+		_outputByteBuffer = ByteBuffer.allocate(outputBufferSize);
 		_autoFlush = autoFlush;
 	}
 
@@ -82,13 +82,13 @@ public class OutputStreamWriter extends Writer {
 
 	@Override
 	public void flush() throws IOException {
-		if (_outputBuffer.position() > 0) {
+		if (_outputByteBuffer.position() > 0) {
 			_outputStream.write(
-				_outputBuffer.array(), 0, _outputBuffer.position());
+				_outputByteBuffer.array(), 0, _outputByteBuffer.position());
 
 			_outputStream.flush();
 
-			_outputBuffer.rewind();
+			_outputByteBuffer.rewind();
 		}
 	}
 
@@ -110,9 +110,9 @@ public class OutputStreamWriter extends Writer {
 	public void write(int c) throws IOException {
 		_inputArray[0] = (char)c;
 
-		_doWrite(_inputBuffer);
+		_doWrite(_inputCharBuffer);
 
-		_inputBuffer.clear();
+		_inputCharBuffer.clear();
 	}
 
 	@Override
@@ -127,10 +127,10 @@ public class OutputStreamWriter extends Writer {
 		_doWrite(CharBuffer.wrap(string, offset, offset + length));
 	}
 
-	private void _doWrite(CharBuffer inputBuffer) throws IOException {
+	private void _doWrite(CharBuffer inputCharBuffer) throws IOException {
 		while (true) {
 			CoderResult coderResult = _charsetEncoder.encode(
-				inputBuffer, _outputBuffer, true);
+				inputCharBuffer, _outputByteBuffer, true);
 
 			if (coderResult.isOverflow()) {
 				flush();
@@ -154,8 +154,8 @@ public class OutputStreamWriter extends Writer {
 	private CharsetEncoder _charsetEncoder;
 	private String _charsetName;
 	private char[] _inputArray = new char[1];
-	private CharBuffer _inputBuffer = CharBuffer.wrap(_inputArray);
-	private ByteBuffer _outputBuffer;
+	private CharBuffer _inputCharBuffer = CharBuffer.wrap(_inputArray);
+	private ByteBuffer _outputByteBuffer;
 	private OutputStream _outputStream;
 
 }

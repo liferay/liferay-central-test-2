@@ -76,17 +76,18 @@ public class WriterOutputStream extends OutputStream {
 		CharsetEncoder charsetEncoder = CharsetEncoderUtil.getCharsetEncoder(
 			charsetName);
 
-		_inputBuffer = ByteBuffer.allocate(
+		_inputByteBuffer = ByteBuffer.allocate(
 			(int)Math.ceil(charsetEncoder.maxBytesPerChar()));
-		_inputBuffer.limit(0);
 
-		_outputBuffer = CharBuffer.allocate(outputBufferSize);
+		_inputByteBuffer.limit(0);
+
+		_outputCharBuffer = CharBuffer.allocate(outputBufferSize);
 		_autoFlush = autoFlush;
 	}
 
 	@Override
 	public void close() throws IOException {
-		_doDecode(_inputBuffer, true);
+		_doDecode(_inputByteBuffer, true);
 
 		flush();
 
@@ -95,12 +96,13 @@ public class WriterOutputStream extends OutputStream {
 
 	@Override
 	public void flush() throws IOException {
-		if (_outputBuffer.position() > 0) {
-			_writer.write(_outputBuffer.array(), 0, _outputBuffer.position());
+		if (_outputCharBuffer.position() > 0) {
+			_writer.write(
+				_outputCharBuffer.array(), 0, _outputCharBuffer.position());
 
 			_writer.flush();
 
-			_outputBuffer.rewind();
+			_outputCharBuffer.rewind();
 		}
 	}
 
@@ -115,46 +117,48 @@ public class WriterOutputStream extends OutputStream {
 
 	@Override
 	public void write(byte[] bytes, int offset, int length) throws IOException {
-		while (_inputBuffer.hasRemaining()) {
+		while (_inputByteBuffer.hasRemaining()) {
 			write(bytes[offset++]);
 
 			length--;
 		}
 
-		ByteBuffer inputBuffer = ByteBuffer.wrap(bytes, offset, length);
+		ByteBuffer inputByteBuffer = ByteBuffer.wrap(bytes, offset, length);
 
-		_doDecode(inputBuffer, false);
+		_doDecode(inputByteBuffer, false);
 
-		if (inputBuffer.hasRemaining()) {
-			_inputBuffer.limit(inputBuffer.remaining());
-			_inputBuffer.put(inputBuffer);
+		if (inputByteBuffer.hasRemaining()) {
+			_inputByteBuffer.limit(inputByteBuffer.remaining());
 
-			_inputBuffer.flip();
+			_inputByteBuffer.put(inputByteBuffer);
+
+			_inputByteBuffer.flip();
 		}
 	}
 
 	@Override
 	public void write(int b) throws IOException {
-		int limit = _inputBuffer.limit();
+		int limit = _inputByteBuffer.limit();
 
-		_inputBuffer.limit(limit + 1);
+		_inputByteBuffer.limit(limit + 1);
 
-		_inputBuffer.put(limit, (byte)b);
+		_inputByteBuffer.put(limit, (byte)b);
 
-		_doDecode(_inputBuffer, false);
+		_doDecode(_inputByteBuffer, false);
 
-		if (!_inputBuffer.hasRemaining()) {
-			_inputBuffer.position(0);
-			_inputBuffer.limit(0);
+		if (!_inputByteBuffer.hasRemaining()) {
+			_inputByteBuffer.position(0);
+
+			_inputByteBuffer.limit(0);
 		}
 	}
 
-	private void _doDecode(ByteBuffer inputBuffer, boolean endOfInput)
+	private void _doDecode(ByteBuffer inputByteBuffer, boolean endOfInput)
 		throws IOException {
 
 		while (true) {
 			CoderResult coderResult = _charsetDecoder.decode(
-				inputBuffer, _outputBuffer, endOfInput);
+				inputByteBuffer, _outputCharBuffer, endOfInput);
 
 			if (coderResult.isOverflow()) {
 				flush();
@@ -177,8 +181,8 @@ public class WriterOutputStream extends OutputStream {
 	private boolean _autoFlush;
 	private CharsetDecoder _charsetDecoder;
 	private String _charsetName;
-	private ByteBuffer _inputBuffer;
-	private CharBuffer _outputBuffer;
+	private ByteBuffer _inputByteBuffer;
+	private CharBuffer _outputCharBuffer;
 	private Writer _writer;
 
 }

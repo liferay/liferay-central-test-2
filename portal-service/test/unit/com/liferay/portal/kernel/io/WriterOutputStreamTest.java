@@ -1,4 +1,3 @@
-
 /**
  * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
@@ -153,10 +152,10 @@ public class WriterOutputStreamTest {
 
 		int charNumber = 0;
 
-		String nonAlignOutput = "非对齐测试中文输出";
-		byte[] nonAlignInput = nonAlignOutput.getBytes(StringPool.UTF8);
+		String unalignedOutput = "非对齐测试中文输出";
+		byte[] unalignedInput = unalignedOutput.getBytes(StringPool.UTF8);
 
-		for (byte b : nonAlignInput) {
+		for (byte b : unalignedInput) {
 			writerOutputStream.write(b);
 
 			int currentCharNumber = charArrayWriter.size();
@@ -165,37 +164,37 @@ public class WriterOutputStreamTest {
 				charNumber = currentCharNumber;
 
 				Assert.assertEquals(
-					nonAlignOutput.charAt(charNumber - 1),
+					unalignedOutput.charAt(charNumber - 1),
 					charArrayWriter.toCharArray()[charNumber - 1]);
 			}
 		}
 
-		Assert.assertEquals(nonAlignOutput, charArrayWriter.toString());
+		Assert.assertEquals(unalignedOutput, charArrayWriter.toString());
 	}
 
 	@Test
 	public void testWriteBlock() throws IOException {
-		doTestWriteBlock(false);
-		doTestWriteBlock(true);
+		_testWriteBlock(false);
+		_testWriteBlock(true);
 	}
 
 	@Test
-	public void testWriteBlockNotAlign() throws IOException {
+	public void testWriteBlockUnaligned() throws IOException {
 		CharArrayWriter charArrayWriter = new CharArrayWriter();
 
 		WriterOutputStream writerOutputStream = new WriterOutputStream(
 			charArrayWriter, StringPool.UTF8, true);
 
-		String nonAlignOutput = "非对齐测试中文输出";
-		byte[] nonAlignInput = nonAlignOutput.getBytes(StringPool.UTF8);
+		String unalignedOutput = "非对齐测试中文输出";
+		byte[] unalignedInput = unalignedOutput.getBytes(StringPool.UTF8);
 
-		writerOutputStream.write(nonAlignInput[0]);
-		writerOutputStream.write(nonAlignInput, 1, nonAlignInput.length - 2);
-		writerOutputStream.write(nonAlignInput[nonAlignInput.length - 1]);
+		writerOutputStream.write(unalignedInput[0]);
+		writerOutputStream.write(unalignedInput, 1, unalignedInput.length - 2);
+		writerOutputStream.write(unalignedInput[unalignedInput.length - 1]);
 
 		writerOutputStream.close();
 
-		Assert.assertEquals(nonAlignOutput, charArrayWriter.toString());
+		Assert.assertEquals(unalignedOutput, charArrayWriter.toString());
 	}
 
 	@Test
@@ -239,18 +238,18 @@ public class WriterOutputStreamTest {
 		throws Exception {
 
 		Field field = ReflectionUtil.getDeclaredField(
-			WriterOutputStream.class, "_inputBuffer");
+			WriterOutputStream.class, "_inputByteBuffer");
 
-		ByteBuffer inputBuffer = (ByteBuffer)field.get(writerOutputStream);
+		ByteBuffer inputByteBuffer = (ByteBuffer)field.get(writerOutputStream);
 
-		return inputBuffer.capacity();
+		return inputByteBuffer.capacity();
 	}
 
 	private int _getOutputBufferSize(WriterOutputStream writerOutputStream)
 		throws Exception {
 
 		Field field = ReflectionUtil.getDeclaredField(
-			WriterOutputStream.class, "_outputBuffer");
+			WriterOutputStream.class, "_outputCharBuffer");
 
 		CharBuffer outputBuffer = (CharBuffer)field.get(writerOutputStream);
 
@@ -275,7 +274,7 @@ public class WriterOutputStreamTest {
 		return field.getBoolean(writerOutputStream);
 	}
 
-	private void doTestWriteBlock(boolean autoFlush) throws IOException {
+	private void _testWriteBlock(boolean autoFlush) throws IOException {
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter();
 
 		WriterOutputStream writerOutputStream = new WriterOutputStream(

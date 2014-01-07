@@ -160,8 +160,8 @@ public class OutputStreamWriterTest {
 
 	@Test
 	public void testWriteCharArray() throws IOException {
-		doTestWriteCharArray(false);
-		doTestWriteCharArray(true);
+		_testWriteCharArray(false);
+		_testWriteCharArray(true);
 	}
 
 	@Test
@@ -192,6 +192,7 @@ public class OutputStreamWriterTest {
 			markerOutputStream);
 
 		outputStreamWriter.write('a');
+
 		outputStreamWriter.flush();
 
 		Assert.assertEquals((byte)'a', markerOutputStream._bytes[0]);
@@ -201,8 +202,8 @@ public class OutputStreamWriterTest {
 
 	@Test
 	public void testWriteString() throws IOException {
-		doTestWriteString(false);
-		doTestWriteString(true);
+		_testWriteString(false);
+		_testWriteString(true);
 	}
 
 	private CharsetEncoder _getCharsetEncoder(
@@ -226,18 +227,18 @@ public class OutputStreamWriterTest {
 		throws Exception {
 
 		Field field = ReflectionUtil.getDeclaredField(
-			OutputStreamWriter.class, "_inputBuffer");
+			OutputStreamWriter.class, "_inputCharBuffer");
 
-		CharBuffer inputBuffer = (CharBuffer)field.get(outputStreamWriter);
+		CharBuffer inputCharBuffer = (CharBuffer)field.get(outputStreamWriter);
 
-		return inputBuffer.capacity();
+		return inputCharBuffer.capacity();
 	}
 
 	private int _getOutputBufferSize(OutputStreamWriter outputStreamWriter)
 		throws Exception {
 
 		Field field = ReflectionUtil.getDeclaredField(
-			OutputStreamWriter.class, "_outputBuffer");
+			OutputStreamWriter.class, "_outputByteBuffer");
 
 		ByteBuffer outputBuffer = (ByteBuffer)field.get(outputStreamWriter);
 
@@ -262,7 +263,7 @@ public class OutputStreamWriterTest {
 		return field.getBoolean(outputStreamWriter);
 	}
 
-	private void doTestWriteCharArray(boolean autoFlush) throws IOException {
+	private void _testWriteCharArray(boolean autoFlush) throws IOException {
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
@@ -295,7 +296,7 @@ public class OutputStreamWriterTest {
 			unsyncByteArrayOutputStream.toByteArray());
 	}
 
-	private void doTestWriteString(boolean autoFlush) throws IOException {
+	private void _testWriteString(boolean autoFlush) throws IOException {
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream();
 
