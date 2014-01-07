@@ -65,7 +65,7 @@ public class FilterMappingTest extends PowerMockito {
 	}
 
 	@Test
-	public void testIsMatchUrlPattern() {
+	public void testIsMatchURLPattern() {
 		List<String> urlPatterns = new ArrayList<String>();
 
 		urlPatterns.add("/c/portal/login");

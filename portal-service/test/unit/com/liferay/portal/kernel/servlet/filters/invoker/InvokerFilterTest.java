@@ -45,10 +45,10 @@ public class InvokerFilterTest extends PowerMockito {
 	public void testGetURIWithJSessionId() {
 		InvokerFilter invokerFilter = new InvokerFilter();
 
-		String uri = "/c/portal/login;jsessionid=ae01b0f2af.worker1";
-
 		MockHttpServletRequest mockHttpServletRequest =
-			new MockHttpServletRequest(HttpMethods.GET, uri);
+			new MockHttpServletRequest(
+				HttpMethods.GET,
+				"/c/portal/login;jsessionid=ae01b0f2af.worker1");
 
 		Assert.assertEquals(
 			"/c/portal/login", invokerFilter.getURI(mockHttpServletRequest));
