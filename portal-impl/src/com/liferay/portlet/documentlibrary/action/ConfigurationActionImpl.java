@@ -47,7 +47,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		if (Validator.isNotNull(cmd)) {
 			if (tabs2.equals("display-settings")) {
 				validateDisplayStyleViews(actionRequest);
-
 				validateRootFolder(actionRequest);
 			}
 			else if (tabs2.equals("document-added-email")) {
