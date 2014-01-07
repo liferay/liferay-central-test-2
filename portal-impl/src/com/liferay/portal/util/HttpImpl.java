@@ -954,21 +954,21 @@ public class HttpImpl implements Http {
 			return uri;
 		}
 
-		String[] pathSegments = StringUtil.split(
+		String[] uriParts = StringUtil.split(
 			uri.substring(1), StringPool.SLASH);
 
-		StringBundler sb = new StringBundler(pathSegments.length * 2);
+		StringBundler sb = new StringBundler(uriParts.length * 2);
 
-		for (String pathSegment : pathSegments) {
-			pos = pathSegment.indexOf(StringPool.SEMICOLON);
+		for (String uriPart : uriParts) {
+			pos = uriPart.indexOf(StringPool.SEMICOLON);
 
 			if (pos == -1) {
 				sb.append(StringPool.SLASH);
-				sb.append(pathSegment);
+				sb.append(uriPart);
 			}
 			else {
 				sb.append(StringPool.SLASH);
-				sb.append(pathSegment.substring(0, pos));
+				sb.append(uriPart.substring(0, pos));
 			}
 		}
 
