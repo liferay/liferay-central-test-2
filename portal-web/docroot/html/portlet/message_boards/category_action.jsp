@@ -23,10 +23,10 @@ MBCategory category = (MBCategory)row.getObject();
 
 Set<Long> categorySubscriptionClassPKs = (Set<Long>)row.getParameter("categorySubscriptionClassPKs");
 
-boolean isDefaultParentCategory = false;
+boolean defaultParentCategory = false;
 
 if (category.getCategoryId() == MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID) {
-	isDefaultParentCategory = true;
+	defaultParentCategory = true;
 }
 
 String modelResource = null;
@@ -35,7 +35,7 @@ String resourcePrimKey = null;
 
 boolean showPermissionsURL = false;
 
-if (!isDefaultParentCategory) {
+if (!defaultParentCategory) {
 	modelResource = MBCategory.class.getName();
 	modelResourceDescription = category.getName();
 	resourcePrimKey = String.valueOf(category.getCategoryId());
@@ -52,7 +52,7 @@ else {
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !isDefaultParentCategory && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.UPDATE) %>">
+	<c:if test="<%= !defaultParentCategory && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.UPDATE) %>">
 		<portlet:renderURL var="editURL">
 			<portlet:param name="struts_action" value="/message_boards/edit_category" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -119,7 +119,7 @@ else {
 
 		boolean hasSubscriptionPermission = false;
 
-		if (!isDefaultParentCategory) {
+		if (!defaultParentCategory) {
 			categorySubscriptionClassPK = category.getCategoryId();
 
 			hasSubscriptionPermission = MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE);
@@ -163,7 +163,7 @@ else {
 		</c:if>
 	</c:if>
 
-	<c:if test="<%= !isDefaultParentCategory && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.DELETE) %>">
+	<c:if test="<%= !defaultParentCategory && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/message_boards/edit_category" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= TrashUtil.isTrashEnabled(scopeGroupId) ? Constants.MOVE_TO_TRASH : Constants.DELETE %>" />
