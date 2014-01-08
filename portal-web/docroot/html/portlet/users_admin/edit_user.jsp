@@ -153,10 +153,10 @@ if (!organizations.isEmpty()) {
 List<Group> allGroups = new ArrayList<Group>();
 
 allGroups.addAll(groups);
-allGroups.addAll(GroupLocalServiceUtil.getOrganizationsGroups(organizations));
-allGroups.addAll(organizationsRelatedGroups);
-allGroups.addAll(GroupLocalServiceUtil.getUserGroupsGroups(userGroups));
 allGroups.addAll(inheritedSites);
+allGroups.addAll(organizationsRelatedGroups);
+allGroups.addAll(GroupLocalServiceUtil.getOrganizationsGroups(organizations));
+allGroups.addAll(GroupLocalServiceUtil.getUserGroupsGroups(userGroups));
 
 String[] mainSections = PropsValues.USERS_FORM_ADD_MAIN;
 String[] identificationSections = PropsValues.USERS_FORM_ADD_IDENTIFICATION;
