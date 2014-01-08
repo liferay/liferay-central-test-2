@@ -504,8 +504,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			}
 			catch (NoSuchFileException nsfe) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to find the attachment " + attachment, nsfe);
+					_log.warn("Unable to find attachment " + attachment, nsfe);
 				}
 			}
 
@@ -515,8 +514,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to delete the attachment " + attachment, e);
+					_log.warn("Unable to delete attachment " + attachment, e);
 				}
 			}
 		}
