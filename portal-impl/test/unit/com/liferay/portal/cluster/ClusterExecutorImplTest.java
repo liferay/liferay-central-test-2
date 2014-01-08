@@ -244,7 +244,6 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 			EnableClusterLinkAdvice.class, InetAddressUtilExceptionAdvice.class,
 			JChannelExceptionAdvice.class
 		}
-
 	)
 	@Test
 	public void testErrorLogAndExceptions() throws Exception {
