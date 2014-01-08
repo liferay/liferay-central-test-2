@@ -20,15 +20,15 @@
 	</c:if>
 
 	<%
-	String imageURL = HtmlUtil.escape(user.getPortraitURL(themeDisplay));
+	String portraitURL = HtmlUtil.escape(user.getPortraitURL(themeDisplay));
 	%>
 
 	<c:choose>
 		<c:when test="<%= BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) < 9) %>">
-			<img class="user-avatar-image" src="<%= imageURL %>" />
+			<img class="user-avatar-image" src="<%= portraitURL %>" />
 		</c:when>
 		<c:otherwise>
-			<span class="user-avatar-image" style="background-image: url('<%= imageURL %>');"></span>
+			<span class="user-avatar-image" style="background-image: url('<%= portraitURL %>');"></span>
 		</c:otherwise>
 	</c:choose>
 
