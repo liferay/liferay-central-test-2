@@ -19,8 +19,6 @@ import com.liferay.portalweb.portal.util.LiferaySeleneseTestCase;
 import com.liferay.portalweb.portal.util.SeleniumUtil;
 import com.liferay.portalweb.portal.util.TestPropsValues;
 
-import java.awt.GraphicsEnvironment;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,12 +26,6 @@ import java.util.Map;
  * @author Brian Wing Shun Chan
  */
 public class BaseTestCase extends LiferaySeleneseTestCase {
-
-	static {
-		if (GraphicsEnvironment.isHeadless()) {
-			System.setProperty("java.awt.headless", Boolean.FALSE.toString());
-		}
-	}
 
 	public BaseTestCase() {
 		InitUtil.initWithSpring();
