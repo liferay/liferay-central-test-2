@@ -234,8 +234,8 @@ public class HttpUtil {
 		return getHttp().removeParameter(url, name);
 	}
 
-	public static String removeParameters(String uri) {
-		return getHttp().removeParameters(uri);
+	public static String removePathParameters(String uri) {
+		return getHttp().removePathParameters(uri);
 	}
 
 	public static String removeProtocol(String url) {

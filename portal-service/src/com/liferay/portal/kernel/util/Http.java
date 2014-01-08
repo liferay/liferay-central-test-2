@@ -143,7 +143,7 @@ public interface Http {
 
 	public String removeParameter(String url, String name);
 
-	public String removeParameters(String uri);
+	public String removePathParameters(String uri);
 
 	public String removeProtocol(String url);
 
