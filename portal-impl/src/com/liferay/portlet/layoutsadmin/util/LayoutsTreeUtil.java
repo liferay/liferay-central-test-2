@@ -65,15 +65,10 @@ public class LayoutsTreeUtil {
 
 		List<LayoutTreeNode> layoutTreeNodes = new ArrayList<LayoutTreeNode>();
 
-		// Private layouts
-
 		layoutTreeNodes.addAll(
 			_getLayoutTreeNodes(
 				request, groupId, true,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, false, null));
-
-		// Public layouts
-
 		layoutTreeNodes.addAll(
 			_getLayoutTreeNodes(
 				request, groupId, false,
@@ -103,7 +98,7 @@ public class LayoutsTreeUtil {
 		return _toJSON(request, groupId, layoutTreeNodes);
 	}
 
-	private static List<Layout> _getLayoutAncestors(HttpServletRequest request)
+	private static List<Layout> _getAncestorLayouts(HttpServletRequest request)
 		throws Exception {
 
 		long selPlid = ParamUtil.getLong(request, "selPlid");
@@ -112,14 +107,14 @@ public class LayoutsTreeUtil {
 			return Collections.emptyList();
 		}
 
-		List<Layout> layoutAncestors = LayoutServiceUtil.getAncestorLayouts(
+		List<Layout> ancestorLayouts = LayoutServiceUtil.getAncestorLayouts(
 			selPlid);
 
-		Layout selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+		Layout layout = LayoutLocalServiceUtil.getLayout(selPlid);
 
-		layoutAncestors.add(selLayout);
+		ancestorLayouts.add(layout);
 
-		return layoutAncestors;
+		return ancestorLayouts;
 	}
 
 	private static List<Layout> _getLayouts(
@@ -145,7 +140,7 @@ public class LayoutsTreeUtil {
 
 		List<LayoutTreeNode> layoutTreeNodes = new ArrayList<LayoutTreeNode>();
 
-		List<Layout> layoutAncestors = _getLayoutAncestors(request);
+		List<Layout> ancestorLayouts = _getAncestorLayouts(request);
 
 		List<Layout> layouts = _getLayouts(
 			request, groupId, privateLayout, parentLayoutId, incomplete);
@@ -153,28 +148,28 @@ public class LayoutsTreeUtil {
 		for (Layout layout : layouts) {
 			LayoutTreeNode layoutTreeNode = new LayoutTreeNode(layout);
 
-			boolean isLayoutExpandable = _isLayoutExpandable(
-				request, layoutAncestors, expandedLayoutIds, layout);
+			if (_isExpandableLayout(
+					request, ancestorLayouts, expandedLayoutIds, layout)) {
 
-			if (isLayoutExpandable) {
-				List<LayoutTreeNode> children = new ArrayList<LayoutTreeNode>();
+				List<LayoutTreeNode> childLayoutTreeNodes =
+					new ArrayList<LayoutTreeNode>();
 
 				if (layout instanceof VirtualLayout) {
 					VirtualLayout virtualLayout = (VirtualLayout)layout;
 
-					children = _getLayoutTreeNodes(
+					childLayoutTreeNodes = _getLayoutTreeNodes(
 						request, virtualLayout.getSourceGroupId(),
 						virtualLayout.isPrivateLayout(),
 						virtualLayout.getLayoutId(), incomplete,
 						expandedLayoutIds);
 				}
 				else {
-					children = _getLayoutTreeNodes(
+					childLayoutTreeNodes = _getLayoutTreeNodes(
 						request, groupId, layout.isPrivateLayout(),
 						layout.getLayoutId(), incomplete, expandedLayoutIds);
 				}
 
-				layoutTreeNode.setChildren(children);
+				layoutTreeNode.setChildLayoutTreeNodes(childLayoutTreeNodes);
 			}
 
 			layoutTreeNodes.add(layoutTreeNode);
@@ -189,17 +184,24 @@ public class LayoutsTreeUtil {
 
 		HttpSession session = request.getSession();
 
-		String treeId = ParamUtil.getString(request, "treeId");
-		long groupId = ParamUtil.getLong(request, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
-
 		StringBundler sb = new StringBundler(7);
 
+		String treeId = ParamUtil.getString(request, "treeId");
+
 		sb.append(treeId);
+
 		sb.append(StringPool.COLON);
+
+		long groupId = ParamUtil.getLong(request, "groupId");
+
 		sb.append(groupId);
+
 		sb.append(StringPool.COLON);
+
+		boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
+
 		sb.append(privateLayout);
+
 		sb.append(StringPool.COLON);
 		sb.append("Pagination");
 
@@ -212,14 +214,14 @@ public class LayoutsTreeUtil {
 		return paginationJSONObject.getInt(String.valueOf(layoutId), 0);
 	}
 
-	private static boolean _isLayoutExpandable(
-		HttpServletRequest request, List<Layout> layoutAncestors,
+	private static boolean _isExpandableLayout(
+		HttpServletRequest request, List<Layout> ancestorLayouts,
 		long[] expandedLayoutIds, Layout layout) {
 
 		boolean expandParentLayouts = ParamUtil.getBoolean(
 			request, "expandParentLayouts");
 
-		if (expandParentLayouts || layoutAncestors.contains(layout) ||
+		if (expandParentLayouts || ancestorLayouts.contains(layout) ||
 			ArrayUtil.contains(expandedLayoutIds, layout.getLayoutId())) {
 
 			return true;
@@ -283,7 +285,7 @@ public class LayoutsTreeUtil {
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
 			String childrenJSON = _toJSON(
-				request, groupId, layoutTreeNode.getChildren());
+				request, groupId, layoutTreeNode.getChildLayoutTreeNodes());
 
 			jsonObject.put(
 				"children", JSONFactoryUtil.createJSONObject(childrenJSON));
@@ -382,17 +384,19 @@ public class LayoutsTreeUtil {
 			return _layout;
 		}
 
-		public List<LayoutTreeNode> getChildren() {
-			return _children;
+		public List<LayoutTreeNode> getChildLayoutTreeNodes() {
+			return _childLayoutTreeNodes;
 		}
 
-		public void setChildren(List<LayoutTreeNode> children) {
-			_children = children;
+		public void setChildLayoutTreeNodes(
+			List<LayoutTreeNode> childLayoutTreeNodes) {
+
+			_childLayoutTreeNodes = childLayoutTreeNodes;
 		}
 
-		private Layout _layout;
-		private List<LayoutTreeNode> _children =
+		private List<LayoutTreeNode> _childLayoutTreeNodes =
 			new ArrayList<LayoutTreeNode>();
+		private Layout _layout;
 
 	}
 
