@@ -158,7 +158,7 @@ public class ViewAction extends PortletAction {
 		}
 
 		int lifecycle = GetterUtil.getInteger(
-			HttpUtil.getParameter(queryString, "p_p_lifecycle", false), 0);
+			HttpUtil.getParameter(queryString, "p_p_lifecycle", false));
 
 		if (lifecycle == 0) {
 			redirect = redirect + queryString;
