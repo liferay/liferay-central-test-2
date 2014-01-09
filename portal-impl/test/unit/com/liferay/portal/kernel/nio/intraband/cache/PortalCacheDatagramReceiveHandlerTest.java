@@ -35,7 +35,6 @@ import java.lang.reflect.Method;
 
 import java.net.URL;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -351,10 +350,6 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	private SystemDataType _portalCacheSystemDataType =
 		SystemDataType.PORTAL_CACHE;
 	private byte _portalCacheType = _portalCacheSystemDataType.getValue();
-	private List<String> _testKeys = Arrays.asList(
-		"testKey1", "testKey2", "testKey3");
-	private List<String> _testValues = Arrays.asList(
-		"testValue1", "testValue2", "testValue3");
 
 	private class MockPortalCache implements PortalCache<String, String> {
 
