@@ -130,10 +130,10 @@ public class SeleniumBuilder {
 
 	/**
 	 * Returns the number of all the commands inside each testcase files and
-	 * adds them all together in order to calculate the number of
-	 * testcase methods
+	 * adds them all together in order to calculate the number of testcase
+	 * methods
 	 *
-	 * @return the number of testcase methods currently existing 
+	 * @return the number of testcase methods currently existing
 	 */
 	private int _getTestCaseMethodCount() {
 		int testCaseCount = 0;
@@ -173,9 +173,10 @@ public class SeleniumBuilder {
 	}
 
 	/**
-	 * Gets the list of all the testcase methods names along with component-name 
+	 * Gets the list of all the testcase methods names along with component-name
 	 * and writes them to test.case.method.names.properties in this format
-	 * componentName + "_TEST_CASE_METHOD_NAMES=" + testCaseName + "TestCase#test" + commandName
+	 * componentName + "_TEST_CASE_METHOD_NAMES=" + testCaseName +
+	 * "TestCase#test" + commandName
 	 */
 	private void _writeTestCaseMethodNamesFile() throws Exception {
 		Map<String, Set<String>> testCaseMethodNameMap =
@@ -286,11 +287,10 @@ public class SeleniumBuilder {
 	}
 
 	/**
-	 * Gets the list of all the testcase methods names with property tag
-	 * and writes them to test.generated.properties in this format
-	 * testCaseName + "all" + propertyName = propertyValue
-	 * however, if it finds more than one command that contains property tag
-	 * then it writes them in this format
+	 * Gets the list of all the testcase methods names with property tag and
+	 * writes them to test.generated.properties in this format testCaseName +
+	 * "all" + propertyName = propertyValue however, if it finds more than one
+	 * command that contains property tag then it writes them in this format
 	 * testCaseName + "test" + commandName + propertyName = propertyValue
 	 */
 	private void _writeTestCasePropertiesFile() throws Exception {
