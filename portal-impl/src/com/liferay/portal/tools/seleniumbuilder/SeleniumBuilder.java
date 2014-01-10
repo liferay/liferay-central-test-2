@@ -40,6 +40,11 @@ public class SeleniumBuilder {
 		new SeleniumBuilder(args);
 	}
 
+	/**
+	 * Constructs a SeleniumBuilder with argument array of String
+	 *
+	 * @param args the array of string
+	 */
 	public SeleniumBuilder(String[] args) throws Exception {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
@@ -123,6 +128,13 @@ public class SeleniumBuilder {
 			"\nThere are " + _getTestCaseMethodCount() + " test cases.");
 	}
 
+	/**
+	 * Returns the number of all the commands inside each testcase files and
+	 * adds them all together in order to calculate the number of
+	 * testcase methods
+	 *
+	 * @return the number of testcase methods currently existing 
+	 */
 	private int _getTestCaseMethodCount() {
 		int testCaseCount = 0;
 
@@ -160,6 +172,11 @@ public class SeleniumBuilder {
 		return testCaseCount;
 	}
 
+	/**
+	 * Gets the list of all the testcase methods names along with component-name 
+	 * and writes them to test.case.method.names.properties in this format
+	 * componentName + "_TEST_CASE_METHOD_NAMES=" + testCaseName + "TestCase#test" + commandName
+	 */
 	private void _writeTestCaseMethodNamesFile() throws Exception {
 		Map<String, Set<String>> testCaseMethodNameMap =
 			new TreeMap<String, Set<String>>();
@@ -268,6 +285,14 @@ public class SeleniumBuilder {
 			"../../../test.case.method.names.properties", sb.toString(), false);
 	}
 
+	/**
+	 * Gets the list of all the testcase methods names with property tag
+	 * and writes them to test.generated.properties in this format
+	 * testCaseName + "all" + propertyName = propertyValue
+	 * however, if it finds more than one command that contains property tag
+	 * then it writes them in this format
+	 * testCaseName + "test" + commandName + propertyName = propertyValue
+	 */
 	private void _writeTestCasePropertiesFile() throws Exception {
 		Set<String> testCaseProperties = new TreeSet<String>();
 
