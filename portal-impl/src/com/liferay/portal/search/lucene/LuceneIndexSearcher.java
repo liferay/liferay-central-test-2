@@ -629,17 +629,16 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		List<Document> subsetDocs = new ArrayList<Document>(subsetTotal);
 		List<Float> subsetScores = new ArrayList<Float>(subsetTotal);
 
+		FieldSelector fieldSelector = null;
+
 		QueryConfig queryConfig = query.getQueryConfig();
 
 		String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
 
-		FieldSelector fieldSelector = null;
-
-		if ((selectedFieldNames != null) && (selectedFieldNames.length > 0)) {
-			Set<String> selectedFields = SetUtil.fromArray(selectedFieldNames);
-
+		if (ArrayUtil.isNotEmpty(selectedFieldNames)) {
 			fieldSelector = new SetBasedFieldSelector(
-				selectedFields, Collections.<String>emptySet());
+				SetUtil.fromArray(selectedFieldNames),
+				Collections.<String>emptySet());
 		}
 
 		for (int i = start; i < start + subsetTotal; i++) {
