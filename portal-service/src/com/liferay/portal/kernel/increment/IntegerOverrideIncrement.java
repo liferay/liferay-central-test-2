@@ -14,20 +14,20 @@
 
 package com.liferay.portal.kernel.increment;
 
-import java.util.Date;
-
 /**
  * @author László Csontos
  */
-public class LastDateOverrideIncrement extends OverrideIncrement<Date> {
+public class IntegerOverrideIncrement extends OverrideIncrement<Integer> {
 
-	public LastDateOverrideIncrement(Date date) {
-		super(date);
+	public IntegerOverrideIncrement(Integer integerValue) {
+		super(integerValue);
 	}
 
 	@Override
-	protected LastDateOverrideIncrement createOverrideIncrement(Date date) {
-		return new LastDateOverrideIncrement(date);
+	protected IntegerOverrideIncrement createOverrideIncrement(
+		Integer integerValue) {
+
+		return new IntegerOverrideIncrement(integerValue);
 	}
 
 }

@@ -66,7 +66,7 @@ public abstract class OverrideIncrement<T extends Comparable<T>>
 		this.value = value;
 	}
 
-	protected abstract OverrideIncrement<T> createOverrideIncrement(T t);
+	protected abstract OverrideIncrement<T> createOverrideIncrement(T value);
 
 	protected T value;
 

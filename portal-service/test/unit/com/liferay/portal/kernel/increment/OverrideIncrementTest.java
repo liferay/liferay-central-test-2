@@ -34,19 +34,20 @@ public class OverrideIncrementTest {
 
 	@Test
 	public void testConstructorAndFactory() {
-		IntegerOverrideIncrement integerOverrideIncrement =
+		IntegerOverrideIncrement integerOverrideIncrement1 =
 			new IntegerOverrideIncrement(1);
 
-		Assert.assertEquals(Integer.valueOf(1), integerOverrideIncrement.value);
+		Assert.assertEquals(
+			Integer.valueOf(1), integerOverrideIncrement1.value);
 
-		IntegerOverrideIncrement anotherIntegerOverrideIncrement =
-			integerOverrideIncrement.createOverrideIncrement(2);
+		IntegerOverrideIncrement integerOverrideIncrement2 =
+			integerOverrideIncrement1.createOverrideIncrement(2);
 
 		Assert.assertNotSame(
-			integerOverrideIncrement, anotherIntegerOverrideIncrement);
+			integerOverrideIncrement1, integerOverrideIncrement2);
 
 		Assert.assertEquals(
-			Integer.valueOf(2), anotherIntegerOverrideIncrement.value);
+			Integer.valueOf(2), integerOverrideIncrement2.value);
 	}
 
 	@Test
@@ -59,13 +60,11 @@ public class OverrideIncrementTest {
 
 		integerOverrideIncrement.setValue(2);
 
-		Method bridgeGetValue = ReflectionUtil.getBridgeMethod(
+		Method method = ReflectionUtil.getBridgeMethod(
 			OverrideIncrement.class, "getValue");
 
 		Assert.assertEquals(
-			Integer.valueOf(2),
-			bridgeGetValue.invoke(integerOverrideIncrement));
-
+			Integer.valueOf(2), method.invoke(integerOverrideIncrement));
 		Assert.assertEquals(
 			Integer.valueOf(2), integerOverrideIncrement.getValue());
 	}
@@ -129,22 +128,6 @@ public class OverrideIncrementTest {
 		Assert.assertEquals(
 			Integer.valueOf(1), integerOverrideIncrement.getValue());
 		Assert.assertEquals(Integer.valueOf(1), overrideIncrement.getValue());
-	}
-
-	private static class IntegerOverrideIncrement
-		extends OverrideIncrement<Integer> {
-
-		public IntegerOverrideIncrement(Integer value) {
-			super(value);
-		}
-
-		@Override
-		protected IntegerOverrideIncrement createOverrideIncrement(
-			Integer value) {
-
-			return new IntegerOverrideIncrement(value);
-		}
-
 	}
 
 }
