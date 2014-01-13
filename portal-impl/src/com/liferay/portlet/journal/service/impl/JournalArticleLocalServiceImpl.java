@@ -4450,12 +4450,11 @@ public class JournalArticleLocalServiceImpl
 				description, content, type, status, ddmStructureKey,
 				ddmTemplateKey, params, andSearch, start, end, sort);
 
-			List<JournalArticle> journalArticles = JournalUtil.getArticles(
-				hits);
+			List<JournalArticle> articles = JournalUtil.getArticles(hits);
 
-			if (journalArticles != null) {
+			if (articles != null) {
 				return new BaseModelSearchResult<JournalArticle>(
-					journalArticles, hits.getLength());
+					articles, hits.getLength());
 			}
 		}
 
@@ -4473,12 +4472,11 @@ public class JournalArticleLocalServiceImpl
 			Hits hits = search(
 				groupId, userId, creatorUserId, status, start, end);
 
-			List<JournalArticle> journalArticles = JournalUtil.getArticles(
-				hits);
+			List<JournalArticle> articles = JournalUtil.getArticles(hits);
 
-			if (journalArticles != null) {
+			if (articles != null) {
 				return new BaseModelSearchResult<JournalArticle>(
-					journalArticles, hits.getLength());
+					articles, hits.getLength());
 			}
 		}
 
