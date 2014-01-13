@@ -138,7 +138,6 @@ for (Group group : allGroups) {
 	headerNames="title,group"
 	id="inheritedRolesSearchContainer"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= roleGroups %>"
 		total="<%= roleGroups.size() %>"
