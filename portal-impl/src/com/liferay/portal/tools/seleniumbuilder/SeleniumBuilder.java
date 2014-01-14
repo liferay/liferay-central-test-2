@@ -14,6 +14,7 @@
 
 package com.liferay.portal.tools.seleniumbuilder;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -131,9 +132,9 @@ public class SeleniumBuilder {
 			Element rootElement =
 				_seleniumBuilderContext.getTestCaseRootElement(testCaseName);
 
-			String ignore = rootElement.attributeValue("ignore");
+			if (GetterUtil.getBoolean(
+					rootElement.attributeValue("ignore"))) {
 
-			if ((ignore != null) && ignore.equals("true")) {
 				continue;
 			}
 
@@ -173,9 +174,9 @@ public class SeleniumBuilder {
 			Element rootElement =
 				_seleniumBuilderContext.getTestCaseRootElement(testCaseName);
 
-			String ignore = rootElement.attributeValue("ignore");
+			if (GetterUtil.getBoolean(
+					rootElement.attributeValue("ignore"))) {
 
-			if ((ignore != null) && ignore.equals("true")) {
 				continue;
 			}
 
