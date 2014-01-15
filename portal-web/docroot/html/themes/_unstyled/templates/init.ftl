@@ -316,7 +316,6 @@
 	<#assign logo_css_class = logo_css_class + " custom-logo" />
 </#if>
 
-
 <#assign show_site_name_supported = getterUtil.getBoolean(theme_settings["show-site-name-supported"]!"", true) />
 
 <#assign show_site_name_default = getterUtil.getBoolean(theme_settings["show-site-name-default"]!"", show_site_name_supported) />
