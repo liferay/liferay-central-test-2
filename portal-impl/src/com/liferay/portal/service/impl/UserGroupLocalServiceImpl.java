@@ -663,12 +663,12 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				UserGroup.class);
+
 			SearchContext searchContext = buildSearchContext(
 				companyId, name, description, params, andSearch, start, end,
 				sort);
-
-			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				UserGroup.class);
 
 			return indexer.search(searchContext);
 		}
@@ -759,11 +759,11 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			int end, Sort sort)
 		throws PortalException, SystemException {
 
-		SearchContext searchContext = buildSearchContext(
-			companyId, name, description, params, andSearch, start, end, sort);
-
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			UserGroup.class);
+
+		SearchContext searchContext = buildSearchContext(
+			companyId, name, description, params, andSearch, start, end, sort);
 
 		for (int i = 0; i < 10; i++) {
 			Hits hits = indexer.search(

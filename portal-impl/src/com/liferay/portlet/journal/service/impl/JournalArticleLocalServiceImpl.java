@@ -4094,13 +4094,13 @@ public class JournalArticleLocalServiceImpl
 		throws SystemException {
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				JournalArticle.class);
+
 			SearchContext searchContext = buildSearchContext(
 				companyId, groupId, folderIds, classNameId, articleId, title,
 				description, content, type, status, ddmStructureKey,
 				ddmTemplateKey, params, andSearch, start, end, sort);
-
-			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				JournalArticle.class);
 
 			return indexer.search(searchContext);
 		}

@@ -1361,12 +1361,12 @@ public class OrganizationLocalServiceImpl
 		throws SystemException {
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				Organization.class);
+
 			SearchContext searchContext = buildSearchContext(
 				companyId, parentOrganizationId, name, type, street, city, zip,
 				region, country, params, andSearch, start, end, sort);
-
-			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				Organization.class);
 
 			return indexer.search(searchContext);
 		}
@@ -1513,12 +1513,12 @@ public class OrganizationLocalServiceImpl
 			boolean andSearch, int start, int end, Sort sort)
 		throws PortalException, SystemException {
 
+		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+			Organization.class);
+
 		SearchContext searchContext = buildSearchContext(
 			companyId, parentOrganizationId, name, type, street, city, zip,
 			region, country, params, andSearch, start, end, sort);
-
-		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-			Organization.class);
 
 		for (int i = 0; i < 10; i++) {
 			Hits hits = indexer.search(

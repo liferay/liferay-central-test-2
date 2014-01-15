@@ -3109,13 +3109,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
+
 			SearchContext searchContext = buildSearchContext(
 				companyId, firstName, middleName, lastName, fullName,
 				screenName, emailAddress, street, city, zip, region, country,
 				status, params, andOperator, start, end, sort);
-
-			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				User.class);
 
 			return indexer.search(searchContext);
 		}
@@ -3225,13 +3225,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
+			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
+				User.class);
+
 			SearchContext searchContext = buildSearchContext(
 				companyId, firstName, middleName, lastName, null, screenName,
 				emailAddress, null, null, null, null, null, status, params,
 				andSearch, start, end, sort);
-
-			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-				User.class);
 
 			return indexer.search(searchContext);
 		}
