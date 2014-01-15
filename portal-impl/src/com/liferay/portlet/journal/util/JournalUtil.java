@@ -123,7 +123,7 @@ public class JournalUtil {
 	public static final int MAX_STACK_SIZE = 20;
 
 	public static final String[] SELECTED_FIELD_NAMES =
-		{"articleId", Field.COMPANY_ID, Field.GROUP_ID, Field.UID};
+		{Field.COMPANY_ID, Field.GROUP_ID, Field.UID, "articleId"};
 
 	public static void addAllReservedEls(
 		Element rootElement, Map<String, String> tokens, JournalArticle article,
