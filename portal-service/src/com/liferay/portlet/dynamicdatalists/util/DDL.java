@@ -63,10 +63,16 @@ public interface DDL {
 			RenderResponse renderResponse)
 		throws Exception;
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	public boolean isEditable(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception;
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	public boolean isEditable(
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception;

@@ -90,6 +90,9 @@ public class DDLUtil {
 			renderResponse);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	public static boolean isEditable(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception {
@@ -97,6 +100,9 @@ public class DDLUtil {
 		return getDDL().isEditable(request, portletId, groupId);
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
 	public static boolean isEditable(
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception {
