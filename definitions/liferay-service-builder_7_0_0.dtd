@@ -111,7 +111,8 @@ entity. Set this to false if data in the table will be updated by other
 programs. The default value is true.
 
 The dynamic-update-enabled value specifies whether or not unmodified properties
-are excluded in the SQL update statement. The default value is false.
+are excluded in the SQL update statement. The default value is the value of the
+attribute mvcc-enabled.
 
 The mvcc-enabled value specifies whether or not to enable MVCC for this
 entity to prevent lost updates. The default value is based on the mvcc-enabled
