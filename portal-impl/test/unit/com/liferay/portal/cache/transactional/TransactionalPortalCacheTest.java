@@ -15,7 +15,6 @@
 package com.liferay.portal.cache.transactional;
 
 import com.liferay.portal.cache.memory.MemoryPortalCache;
-import com.liferay.portal.kernel.cache.CacheListener;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.test.CodeCoverageAssertor;
 import com.liferay.portal.test.AdviseWith;
@@ -324,39 +323,5 @@ public class TransactionalPortalCacheTest {
 
 	private PortalCache<String, String> _portalCache;
 	private TransactionalPortalCache<String, String> _transactionalPortalCache;
-
-	private static class MockCacheListener
-		implements CacheListener<String, String> {
-
-		@Override
-		public void notifyEntryEvicted(
-			PortalCache<String, String> portalCache, String key, String value) {
-		}
-
-		@Override
-		public void notifyEntryExpired(
-			PortalCache<String, String> portalCache, String key, String value) {
-		}
-
-		@Override
-		public void notifyEntryPut(
-			PortalCache<String, String> portalCache, String key, String value) {
-		}
-
-		@Override
-		public void notifyEntryRemoved(
-			PortalCache<String, String> portalCache, String key, String value) {
-		}
-
-		@Override
-		public void notifyEntryUpdated(
-			PortalCache<String, String> portalCache, String key, String value) {
-		}
-
-		@Override
-		public void notifyRemoveAll(PortalCache<String, String> portalCache) {
-		}
-
-	}
 
 }
