@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.dynamicdatalists.util;
 
+import aQute.bnd.annotation.ProviderType;
+
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.search.Hits;
@@ -35,6 +37,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author Eduardo Lundgren
  * @author Marcellus Tavares
  */
+@ProviderType
 public class DDLUtil {
 
 	public static DDL getDDL() {
