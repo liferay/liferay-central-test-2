@@ -279,6 +279,9 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				super.addCriteria(dynamicQuery);
 
+				Property recordIdProperty = PropertyFactoryUtil.forName(
+					"recordId");
+
 				DynamicQuery recordVersionDynamicQuery =
 					DynamicQueryFactoryUtil.forClass(
 						DDLRecordVersion.class, "recordVersion",
@@ -287,15 +290,14 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 				recordVersionDynamicQuery.setProjection(
 					ProjectionFactoryUtil.property("recordId"));
 
-				Property workflowStatusProperty = PropertyFactoryUtil.forName(
-					"status");
+				Property statusProperty = PropertyFactoryUtil.forName("status");
 
 				StagedModelDataHandler<?> stagedModelDataHandler =
 					StagedModelDataHandlerRegistryUtil.
 						getStagedModelDataHandler(DDLRecord.class.getName());
 
 				recordVersionDynamicQuery.add(
-					workflowStatusProperty.in(
+					statusProperty.in(
 						stagedModelDataHandler.getExportableStatuses()));
 
 				recordVersionDynamicQuery.add(
@@ -305,9 +307,6 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 				recordVersionDynamicQuery.add(
 					RestrictionsFactoryUtil.eqProperty(
 						"recordVersion.recordId", "recordId"));
-
-				Property recordIdProperty = PropertyFactoryUtil.forName(
-					"recordId");
 
 				dynamicQuery.add(
 					recordIdProperty.in(recordVersionDynamicQuery));

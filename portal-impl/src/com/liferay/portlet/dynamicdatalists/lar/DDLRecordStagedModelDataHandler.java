@@ -76,10 +76,10 @@ public class DDLRecordStagedModelDataHandler
 			portletDataContext, record, record.getRecordSet(),
 			PortletDataContext.REFERENCE_TYPE_STRONG);
 
-		DDLRecordVersion currentRecordVersion = record.getRecordVersion();
+		DDLRecordVersion recordVersion = record.getRecordVersion();
 
 		Fields fields = StorageEngineUtil.getFields(
-			currentRecordVersion.getDDMStorageId());
+			recordVersion.getDDMStorageId());
 
 		String fieldsPath = ExportImportPathUtil.getModelPath(
 			record, "fields.xml");

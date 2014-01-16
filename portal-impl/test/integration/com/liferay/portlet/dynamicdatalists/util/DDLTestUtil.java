@@ -41,15 +41,15 @@ public class DDLTestUtil {
 	public static DDLRecord addRecord(long groupId, long recordSetId)
 		throws Exception {
 
+		Map<String, Serializable> fieldsMap =
+			new HashMap<String, Serializable>();
+
 		DDLRecordSet recordSet = DDLRecordSetLocalServiceUtil.getRecordSet(
 			recordSetId);
 
 		DDMStructure ddmStructure = recordSet.getDDMStructure();
 
 		Set<String> fieldNames = ddmStructure.getFieldNames();
-
-		Map<String, Serializable> fieldsMap =
-			new HashMap<String, Serializable>();
 
 		for (String fieldName : fieldNames) {
 			if (ddmStructure.isFieldPrivate(fieldName)) {
