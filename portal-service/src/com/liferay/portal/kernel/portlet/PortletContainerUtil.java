@@ -174,8 +174,8 @@ public class PortletContainerUtil {
 
 	public static HttpServletRequest setupOptionalRenderParameters(
 		HttpServletRequest request, String renderPath, String columnId,
-		Integer columnPos, Integer columnCount, Boolean portletBoundary,
-		Boolean portletDecorate) {
+		Integer columnPos, Integer columnCount, Boolean boundary,
+		Boolean decorate) {
 
 		if ((_LAYOUT_PARALLEL_RENDER_ENABLE && ServerDetector.isTomcat()) ||
 			_PORTLET_CONTAINER_RESTRICT) {
@@ -203,14 +203,14 @@ public class PortletContainerUtil {
 					WebKeys.RENDER_PORTLET_COLUMN_COUNT, columnCount);
 			}
 
-			if (portletBoundary != null) {
+			if (boundary != null) {
 				restrictPortletServletRequest.setAttribute(
-					WebKeys.RENDER_PORTLET_BOUNDARY, portletBoundary);
+					WebKeys.RENDER_PORTLET_BOUNDARY, boundary);
 			}
 
-			if (portletDecorate != null) {
+			if (decorate != null) {
 				restrictPortletServletRequest.setAttribute(
-					WebKeys.PORTLET_DECORATE, portletDecorate);
+					WebKeys.PORTLET_DECORATE, decorate);
 			}
 
 			return restrictPortletServletRequest;
