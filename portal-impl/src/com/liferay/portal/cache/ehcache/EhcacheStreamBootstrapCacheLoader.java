@@ -60,7 +60,7 @@ public class EhcacheStreamBootstrapCacheLoader implements BootstrapCacheLoader {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to load cache data from cluster", e);
+				_log.warn("Unable to load cache data from the cluster", e);
 			}
 		}
 		finally {
@@ -102,7 +102,7 @@ public class EhcacheStreamBootstrapCacheLoader implements BootstrapCacheLoader {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to load cache data from cluster", e);
+				_log.warn("Unable to load cache data from the cluster", e);
 			}
 		}
 	}

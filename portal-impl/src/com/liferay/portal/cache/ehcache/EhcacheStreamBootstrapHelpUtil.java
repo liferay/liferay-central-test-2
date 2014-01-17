@@ -157,7 +157,7 @@ public class EhcacheStreamBootstrapHelpUtil {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Start to load cache data from cluster node " +
+				"Load cache data from cluster node " +
 					clusterNodeResponse.getClusterNode());
 		}
 
@@ -221,7 +221,8 @@ public class EhcacheStreamBootstrapHelpUtil {
 		catch (Exception e) {
 			throw new Exception(
 				"Unable to load cache data from cluster node " +
-					clusterNodeResponse.getClusterNode(), e);
+					clusterNodeResponse.getClusterNode(),
+				e);
 		}
 		finally {
 			if (objectInputStream != null) {
