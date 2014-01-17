@@ -851,17 +851,17 @@ Please set the environment variable ANT_OPTS to the recommended value of
 			</fileset>
 		</cobertura-merge>
 
-		<for list="${sonar.modules}" delimiter="," param="module">
+		<for list="${sonar.modules}" delimiter="," param="sonar.module">
 			<sequential>
 				<if>
-					<available file="@{module}/${sonar.cobertura.itReportPath}/cobertura.ser" />
+					<available file="@{sonar.module}/${sonar.cobertura.itReportPath}/cobertura.ser" />
 					<then>
 						<cobertura-report
-							datafile="@{module}/${sonar.cobertura.itReportPath}/cobertura.ser"
-							destdir="@{module}/${sonar.cobertura.itReportPath}"
+							datafile="@{sonar.module}/${sonar.cobertura.itReportPath}/cobertura.ser"
+							destdir="@{sonar.module}/${sonar.cobertura.itReportPath}"
 							format="${junit.cobertura.report.format}"
 						>
-							<fileset dir="@{module}/src">
+							<fileset dir="@{sonar.module}/src">
 								<include name="**/*.java" />
 							</fileset>
 						</cobertura-report>
@@ -869,14 +869,14 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				</if>
 
 				<if>
-					<available file="@{module}/${sonar.cobertura.reportPath}/cobertura.ser" />
+					<available file="@{sonar.module}/${sonar.cobertura.reportPath}/cobertura.ser" />
 					<then>
 						<cobertura-report
-							datafile="@{module}/${sonar.cobertura.reportPath}/cobertura.ser"
-							destdir="@{module}/${sonar.cobertura.reportPath}"
+							datafile="@{sonar.module}/${sonar.cobertura.reportPath}/cobertura.ser"
+							destdir="@{sonar.module}/${sonar.cobertura.reportPath}"
 							format="${junit.cobertura.report.format}"
 						>
-							<fileset dir="@{module}/src">
+							<fileset dir="@{sonar.module}/src">
 								<include name="**/*.java" />
 							</fileset>
 						</cobertura-report>
@@ -884,27 +884,27 @@ Please set the environment variable ANT_OPTS to the recommended value of
 				</if>
 
 				<if>
-					<available file="@{module}/test-results/integration" type="dir" />
+					<available file="@{sonar.module}/test-results/integration" type="dir" />
 					<then>
-						<copy todir="@{module}/test-results">
-							<fileset dir="@{module}/test-results/integration">
-								<include name="TEST*.xml"/>
-								<size value="0" when="more"/>
+						<copy todir="@{sonar.module}/test-results">
+							<fileset dir="@{sonar.module}/test-results/integration">
+								<include name="TEST*.xml" />
+								<size value="0" when="more" />
 							</fileset>
-							<globmapper from="TEST*" to="TEST-integration*"/>
+							<globmapper from="TEST*" to="TEST-integration*" />
 						</copy>
 					</then>
 				</if>
 
 				<if>
-					<available file="@{module}/test-results/unit" type="dir" />
+					<available file="@{sonar.module}/test-results/unit" type="dir" />
 					<then>
-						<copy todir="@{module}/test-results">
-							<fileset dir="@{module}/test-results/unit">
-								<include name="TEST*.xml"/>
-								<size value="0" when="more"/>
+						<copy todir="@{sonar.module}/test-results">
+							<fileset dir="@{sonar.module}/test-results/unit">
+								<include name="TEST*.xml" />
+								<size value="0" when="more" />
 							</fileset>
-							<globmapper from="TEST*" to="TEST-unit*"/>
+							<globmapper from="TEST*" to="TEST-unit*" />
 						</copy>
 					</then>
 				</if>
@@ -917,10 +917,10 @@ Please set the environment variable ANT_OPTS to the recommended value of
 
 		<sonar:sonar />
 
-		<for list="${sonar.modules}" delimiter="," param="module">
+		<for list="${sonar.modules}" delimiter="," param="sonar.module">
 			<sequential>
-				<delete dir="@{module}/${sonar.cobertura.report.folder}" />
-				<delete dir="@{module}/${sonar.junit.reportsPath}" />
+				<delete dir="@{sonar.module}/${sonar.cobertura.report.folder}" />
+				<delete dir="@{sonar.module}/${sonar.junit.reportsPath}" />
 			</sequential>
 		</for>
 	</target>
