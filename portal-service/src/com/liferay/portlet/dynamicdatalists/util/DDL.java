@@ -67,15 +67,17 @@ public interface DDL {
 		throws Exception;
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public boolean isEditable(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception;
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public boolean isEditable(
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception;

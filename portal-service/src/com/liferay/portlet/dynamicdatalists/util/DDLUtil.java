@@ -94,8 +94,9 @@ public class DDLUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public static boolean isEditable(
 			HttpServletRequest request, String portletId, long groupId)
 		throws Exception {
@@ -104,8 +105,9 @@ public class DDLUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	public static boolean isEditable(
 			PortletPreferences preferences, String portletId, long groupId)
 		throws Exception {
