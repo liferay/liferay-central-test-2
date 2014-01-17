@@ -415,6 +415,218 @@
 		<antcall target="clean-up-logs" />
 	</target>
 
+	<target name="generate-changelog">
+		<tstamp>
+			<format
+				property="tstamp.date.formatted"
+				pattern="EEEE, d MMMM yyyy, hh:mm aa"
+			/>
+		</tstamp>
+
+		<math
+			datatype="int"
+			operand1="${env.BUILD_NUMBER}"
+			operand2="1"
+			operation="-"
+			result="previous.build.number"
+		/>
+
+		<property
+			name="changelog.dir"
+			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}"
+		/>
+
+		<property
+			name="changelog.dir.previous"
+			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${previous.build.number}"
+		/>
+
+		<execute dir="${lp.plugins.dir}">
+			git rev-parse HEAD > ${changelog.dir}/git.plugins.commit
+		</execute>
+
+		<execute dir="${project.dir}">
+			git rev-parse HEAD > ${changelog.dir}/git.portal.commit
+		</execute>
+
+		<loadfile
+			property="git.plugins.commit"
+			srcfile="${changelog.dir}/git.plugins.commit"
+		/>
+
+		<loadfile
+			property="git.portal.commit"
+			srcfile="${changelog.dir}/git.portal.commit"
+		/>
+
+		<if>
+			<and>
+				<available file="${changelog.dir.previous}/git.build.log.html" />
+				<available file="${changelog.dir.previous}/git.plugins.commit" />
+				<available file="${changelog.dir.previous}/git.portal.commit" />
+			</and>
+			<then>
+				<loadfile
+					property="git.plugins.commit.previous"
+					srcfile="${changelog.dir.previous}/git.plugins.commit"
+				/>
+
+				<loadfile
+					property="git.portal.commit.previous"
+					srcfile="${changelog.dir.previous}/git.portal.commit"
+				/>
+
+				<copy
+					file="${changelog.dir.previous}/git.build.log.html"
+					tofile="${changelog.dir}/git.build.log.html"
+				/>
+
+				<if>
+					<equals arg1="${git.plugins.commit}" arg2="${git.plugins.commit.previous}" />
+					<then>
+						<property
+							name="git.plugins.log"
+							value="No changes"
+						/>
+					</then>
+					<else>
+						<execute dir="${lp.plugins.dir}">
+							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-plugins-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.plugins.commit.previous}...${git.plugins.commit} > ${changelog.dir}/git.plugins.log
+						</execute>
+
+						<!--
+							git log -pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.plugins.commit.previous}...${git.plugins.commit} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.plugins.log
+						-->
+
+						<loadfile
+							property="git.plugins.log"
+							srcfile="${changelog.dir}/git.plugins.log"
+						/>
+					</else>
+				</if>
+
+				<if>
+					<equals arg1="${git.portal.commit}" arg2="${git.portal.commit.previous}" />
+					<then>
+						<property
+							name="git.portal.log"
+							value="No changes"
+						/>
+					</then>
+					<else>
+						<execute dir="${project.dir}">
+							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-portal-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.portal.commit.previous}...${git.portal.commit} > ${changelog.dir}/git.portal.log
+						</execute>
+
+						<!--
+							git log -pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.portal.commit.previous}...${git.portal.commit} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.portal.log
+						-->
+
+						<loadfile
+							property="git.portal.log"
+							srcfile="${changelog.dir}/git.portal.log"
+						/>
+					</else>
+				</if>
+
+				<replace file="${changelog.dir}/git.build.log.html">
+					<replacetoken><![CDATA[<!-- NEXT -->]]></replacetoken>
+					<replacevalue expandproperties="true"><![CDATA[<!-- NEXT -->
+		<div id="updatewrapper">
+			<hr noshade size="10" width="80%"><br>
+			<div id="update">
+				<h2>
+					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.date.formatted}<br>
+					Portal: ${git.portal.commit}<br>
+					Plugins: ${git.plugins.commit}
+				</h2>
+				<div id="portal">
+					<h4>
+						Portal Git Log:
+					</h4>
+					<p>
+						${git.portal.log}
+					</p>
+				</div>
+				<div id="plugins">
+					<h4>
+						Plugins Git Log:
+					</h4>
+					<p>
+						${git.plugins.log}
+					</p>
+				</div>
+			</div>
+		</div>
+				]]></replacevalue>
+				</replace>
+			</then>
+			<else>
+				<echo file="${changelog.dir}/git.build.log.html"><![CDATA[<!DOCTYPE html>
+<html>
+	<head>
+		<title>Git Build Log</title>
+		<meta charset="UTF-8">
+		<style>
+			body {
+				background:#F5ECCE;
+				margin:5%;
+				padding:0;
+			}
+			h2 {
+				font-family:Arial,Helvetica,sans-serif;
+				font-size:17px;
+			}
+			h4 {
+				font-family:Arial,Helvetica,sans-serif;
+				margin-left:50px;
+				margin-right:50px;
+			}
+			p {
+				border-style:dashed;
+				border-width:1px;
+				font-family:"Courier New",Courier,monospace;
+				font-size:12px;
+			}
+			#plugins {
+				float:right;
+				margin-right:5%;
+				width:43%;
+			}
+			#portal {
+				float:left;
+				margin-left:5%;
+				width:43%;
+			}
+			#update {
+				background:#FFFFFF;
+				border-style:solid;
+			}
+			#updatewrapper {
+				clear:both;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- NEXT -->
+		<div id="updatewrapper">
+			<hr noshade size="10" width="80%"><br>
+			<div id="update">
+				<h2>
+					Initial Commit<br>
+					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.date.formatted}<br>
+					Portal: ${git.portal.commit}<br>
+					Plugins: ${git.plugins.commit}
+				</h2>
+			</div>
+		</div>
+	</body>
+</html>
+				]]></echo>
+			</else>
+		</if>
+	</target>
+
 	<target name="generate-test-properties" depends="check-config">
 		<if>
 			<contains string="${test.class}" substring="#" />
