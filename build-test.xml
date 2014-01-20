@@ -533,7 +533,7 @@
 					<replacetoken><![CDATA[<!-- NEXT -->]]></replacetoken>
 					<replacevalue expandproperties="true"><![CDATA[<!-- NEXT -->
 		<div id="updatewrapper">
-			<hr noshade size="10" width="80%"><br>
+			<div class="divider"></div>
 			<div id="update">
 				<h2>
 					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.date.formatted}<br>
@@ -569,48 +569,92 @@
 		<meta charset="UTF-8">
 		<style>
 			body {
-				background:#F5ECCE;
-				margin:5%;
-				padding:0;
+				font-family: Helvetica, Arial, sans-serif;
+				margin: 5%;
+				padding: 0;
 			}
+
 			h2 {
-				font-family:Arial,Helvetica,sans-serif;
-				font-size:17px;
+				font-size: 17px;
+				letter-spacing: 0.04em;
 			}
+
 			h4 {
-				font-family:Arial,Helvetica,sans-serif;
-				margin-left:50px;
-				margin-right:50px;
+				border-left: 1px solid #BABABA;
+				color: #555;
+				font-size: 20px;
+				font-weight: 100;
+				line-height: 30px;
+				margin: 20px 20px 0;
+				padding: 0 0 20px 10px;
 			}
+
 			p {
-				border-style:dashed;
-				border-width:1px;
-				font-family:"Courier New",Courier,monospace;
-				font-size:12px;
+				font-size: 12px;
 			}
+
+			#updatewrapper:after {
+				clear: both;
+				content: "";
+				display: table;
+			}
+
+			#update h2 {
+				background-color: #4D9CD1;
+				color: #FFF;
+				padding: 15px;
+			}
+
+			.divider {
+				background-color: #999;
+				box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+				-moz-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+				-webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.5);
+				height: 1px;
+				margin: 15px 0 25px;
+				width: 100%;
+			}
+
 			#plugins {
-				float:right;
-				margin-right:5%;
-				width:43%;
+				float: right;
 			}
+
 			#portal {
-				float:left;
-				margin-left:5%;
-				width:43%;
+				float: left;
 			}
-			#update {
-				background:#FFFFFF;
-				border-style:solid;
+
+			#plugins, #portal {
+				width: 48%;
 			}
-			#updatewrapper {
-				clear:both;
+
+			#plugins p, #portal p {
+				border-radius: 8px;
+				-moz-border-radius: 8px;
+				-webkit-border-radius: 8px;
+				box-shadow: inset 0px 1px 6px -1px rgba(0, 0, 0, 0.5);
+				-moz-box-shadow: inset 0px 1px 6px -1px rgba(0, 0, 0, 0.5);
+				-webkit-box-shadow: inset 0px 1px 6px -1px rgba(0, 0, 0, 0.5);
+				margin-top: 0;
+				padding: 10px;
+				word-wrap: break-word;
+			}
+
+			#plugins a, #portal a {
+				color: #3D7CA6;
+				font-family: Monaco, "Liberation Mono", Courier, monospace;
+				font-weight: bold;
+				text-decoration: none;
+			}
+
+			#plugins a:hover, #portal a:hover {
+				text-decoration: underline;
 			}
 		</style>
 	</head>
 	<body>
 		<!-- NEXT -->
 		<div id="updatewrapper">
-			<hr noshade size="10" width="80%"><br>
+			<div class="divider"></div><br>
 			<div id="update">
 				<h2>
 					Initial Commit<br>
