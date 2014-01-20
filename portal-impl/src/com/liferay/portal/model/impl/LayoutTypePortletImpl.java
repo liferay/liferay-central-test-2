@@ -1433,6 +1433,24 @@ public class LayoutTypePortletImpl
 		return layout.getCompanyId();
 	}
 
+	protected LayoutTypePortletImpl getDefault() {
+		if (!isCustomizedView()) {
+			return this;
+		}
+
+		LayoutTypePortletImpl defaultLayoutType = new LayoutTypePortletImpl(
+			getLayout());
+
+		defaultLayoutType._customizedView = false;
+		defaultLayoutType._portalPreferences = null;
+
+		defaultLayoutType._embeddedPortlets = _embeddedPortlets;
+		defaultLayoutType._layoutSetPrototypeLayout = _layoutSetPrototypeLayout;
+		defaultLayoutType._updatePermission = _updatePermission;
+
+		return defaultLayoutType;
+	}
+
 	protected List<Portlet> getEmbeddedPortlets(
 			List<Portlet> columnPortlets, List<Portlet> staticPortlets)
 		throws SystemException {
