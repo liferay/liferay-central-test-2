@@ -495,28 +495,35 @@ public class Creole10Parser]]></replacevalue>
 		<copy file="${liferay.doclet.dir}/liferay-doclet.jar" todir="${project.dir}/lib/development" />
 	</target>
 
-	<!-- Requires nodejs, npm and browserify -->
-
 	<target name="build-r2-js">
-		<property name="dependencies.dir" value="${project.dir}/portal-impl/src/com/liferay/portal/servlet/filters/dynamiccss/dependencies" />
+		<tstamp>
+			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<property name="r2.dir" value="${tstamp.value}/R2-${r2.version}" />
 		<property name="r2.version" value="liferay-0.1" />
-		<property name="r2.temp" value="${dependencies.dir}/temp/R2-${r2.version}" />
 
-		<unzip src="${project.dir}/portal-web/third-party/R2-${r2.version}.zip" dest="${dependencies.dir}/temp" />
+		<unzip
+			dest="${tstamp.value}"
+			src="${project.dir}/portal-web/third-party/R2-${r2.version}.zip"
+		/>
 
-		<exec dir="${r2.temp}" executable="npm">
+		<exec dir="${r2.dir}" executable="npm">
 			<arg value="install" />
 		</exec>
 
-		<copy file="${dependencies.dir}/r2_liferay.js" tofile="${r2.temp}/r2_liferay.js" />
+		<copy
+			file="${tstamp.value}/r2_liferay.js"
+			tofile="${r2.dir}/r2_liferay.js"
+		/>
 
-		<exec dir="${r2.temp}" executable="browserify">
+		<exec dir="${r2.dir}" executable="browserify">
 			<arg value="r2_liferay.js" />
 			<arg value="-o" />
-			<arg value="${dependencies.dir}/r2.js" />
+			<arg value="${tstamp.value}/r2.js" />
 		</exec>
 
-		<delete dir="${dependencies.dir}/temp" />
+		<delete dir="${tstamp.value}" />
 	</target>
 
 	<target name="build-releaseinfo" if="release.info">
