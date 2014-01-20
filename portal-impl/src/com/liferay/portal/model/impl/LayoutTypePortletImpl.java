@@ -592,9 +592,10 @@ public class LayoutTypePortletImpl
 		}
 
 		if (isCustomizable() && isCustomizedView()) {
-			LayoutTypePortletImpl defaultLayoutTypePortlet = getDefault();
+			LayoutTypePortletImpl defaultLayoutTypePortletImpl =
+				getDefaultLayoutTypePortletImpl();
 
-			if (defaultLayoutTypePortlet.hasNonstaticPortletId(portletId)) {
+			if (defaultLayoutTypePortletImpl.hasNonstaticPortletId(portletId)) {
 				return false;
 			}
 		}
@@ -1441,22 +1442,20 @@ public class LayoutTypePortletImpl
 		return layout.getCompanyId();
 	}
 
-	protected LayoutTypePortletImpl getDefault() {
+	protected LayoutTypePortletImpl getDefaultLayoutTypePortletImpl() {
 		if (!isCustomizedView()) {
 			return this;
 		}
 
-		LayoutTypePortletImpl defaultLayoutType = new LayoutTypePortletImpl(
-			getLayout());
+		LayoutTypePortletImpl defaultLayoutTypePortletImpl =
+			new LayoutTypePortletImpl(getLayout());
 
-		defaultLayoutType._customizedView = false;
-		defaultLayoutType._portalPreferences = null;
+		defaultLayoutTypePortletImpl._embeddedPortlets = _embeddedPortlets;
+		defaultLayoutTypePortletImpl._layoutSetPrototypeLayout =
+			_layoutSetPrototypeLayout;
+		defaultLayoutTypePortletImpl._updatePermission = _updatePermission;
 
-		defaultLayoutType._embeddedPortlets = _embeddedPortlets;
-		defaultLayoutType._layoutSetPrototypeLayout = _layoutSetPrototypeLayout;
-		defaultLayoutType._updatePermission = _updatePermission;
-
-		return defaultLayoutType;
+		return defaultLayoutTypePortletImpl;
 	}
 
 	protected List<Portlet> getEmbeddedPortlets(
