@@ -197,10 +197,10 @@ String socialBookmarkTypes = portletPreferences.getValue("socialBookmarksTypes",
 
 				<dl>
 					<dt>
-						[$BLOGS_ENTRY_TITLE$]
+						[$BLOGS_ENTRY_CONTENT$]
 					</dt>
 					<dd>
-						<liferay-ui:message key="the-blog-entry-title" />
+						<liferay-ui:message key="the-blog-entry-content" />
 					</dd>
 					<dt>
 						[$BLOGS_ENTRY_DESCRIPTION$]
@@ -209,16 +209,16 @@ String socialBookmarkTypes = portletPreferences.getValue("socialBookmarksTypes",
 						<liferay-ui:message key="the-blog-entry-description" />
 					</dd>
 					<dt>
-						[$BLOGS_ENTRY_CONTENT$]
-					</dt>
-					<dd>
-						<liferay-ui:message key="the-blog-entry-content" />
-					</dd>
-					<dt>
 						[$BLOGS_ENTRY_STATUS_BY_USER_NAME$]
 					</dt>
 					<dd>
 						<liferay-ui:message key="the-user-who-updated-the-blog-entry" />
+					</dd>
+					<dt>
+						[$BLOGS_ENTRY_TITLE$]
+					</dt>
+					<dd>
+						<liferay-ui:message key="the-blog-entry-title" />
 					</dd>
 					<dt>
 						[$BLOGS_ENTRY_USER_ADDRESS$]
