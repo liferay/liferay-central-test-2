@@ -31,6 +31,7 @@ public interface IndexSearcher extends QuerySuggester {
 	 * @deprecated As of 7.0.0, replaced by {@link #search(SearchContext,
 	 *             Query)}
 	 */
+	@Deprecated
 	public Hits search(
 			String searchEngineId, long companyId, Query query, Sort[] sort,
 			int start, int end)

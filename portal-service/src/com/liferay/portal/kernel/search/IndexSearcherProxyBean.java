@@ -55,6 +55,7 @@ public class IndexSearcherProxyBean
 	 * @deprecated As of 7.0.0, replaced by {@link #search(SearchContext,
 	 *             Query)}
 	 */
+	@Deprecated
 	@Override
 	public Hits search(
 		String searchEngineId, long companyId, Query query, Sort[] sort,

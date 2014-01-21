@@ -286,9 +286,9 @@ public class DocumentImplTest {
 			SearchContext searchContext, Sort sort, String[] screenNames)
 		throws Exception {
 
-		Query query = _indexer.getFullQuery(searchContext);
-
 		searchContext.setSorts(sort);
+
+		Query query = _indexer.getFullQuery(searchContext);
 
 		Hits results = SearchEngineUtil.search(searchContext, query);
 

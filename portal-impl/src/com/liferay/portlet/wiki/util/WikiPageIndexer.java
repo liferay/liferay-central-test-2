@@ -143,7 +143,6 @@ public class WikiPageIndexer extends BaseIndexer {
 
 	@Override
 	protected void doDelete(Object obj) throws Exception {
-
 		if (obj instanceof Object[]) {
 			Object[] array = (Object[])obj;
 
