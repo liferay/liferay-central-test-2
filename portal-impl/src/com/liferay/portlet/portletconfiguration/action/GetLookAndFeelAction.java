@@ -76,8 +76,6 @@ public class GetLookAndFeelAction extends JSONAction {
 		JSONObject portletSetupJSONObject = PortletSetupUtil.cssToJSONObject(
 			portletSetup);
 
-		String rootPortletId = PortletConstants.getRootPortletId(portletId);
-
 		JSONObject defaultPortletTitlesJSONObject =
 			JSONFactoryUtil.createJSONObject();
 
@@ -85,6 +83,7 @@ public class GetLookAndFeelAction extends JSONAction {
 			themeDisplay.getSiteGroupId());
 
 		for (Locale locale : availableLocales) {
+			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 			String languageId = LocaleUtil.toLanguageId(locale);
 
 			defaultPortletTitlesJSONObject.put(
