@@ -458,7 +458,7 @@
 
 		<if>
 			<and>
-				<available file="${changelog.dir.previous}/git.build.log.html" />
+				<available file="${changelog.dir.previous}/git-build-log.html" />
 				<available file="${changelog.dir.previous}/git-commit-plugins" />
 				<available file="${changelog.dir.previous}/git-commit-portal" />
 			</and>
@@ -474,8 +474,8 @@
 				/>
 
 				<copy
-					file="${changelog.dir.previous}/git.build.log.html"
-					tofile="${changelog.dir}/git.build.log.html"
+					file="${changelog.dir.previous}/git-build-log.html"
+					tofile="${changelog.dir}/git-build-log.html"
 				/>
 
 				<if>
@@ -488,12 +488,8 @@
 					</then>
 					<else>
 						<execute dir="${lp.plugins.dir}">
-							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-plugins-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${changelog.dir}/git.plugins.log
+							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br>'%an'<br>'%s'<br><br>' ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${changelog.dir}/git.plugins.log]]>
 						</execute>
-
-						<!--
-							git log -pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.plugins.log
-						-->
 
 						<loadfile
 							property="git.plugins.log"
@@ -512,12 +508,8 @@
 					</then>
 					<else>
 						<execute dir="${project.dir}">
-							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-portal-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${changelog.dir}/git.portal.log
+							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br>'%an'<br>'%s'<br><br>' ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${changelog.dir}/git.portal.log]]>
 						</execute>
-
-						<!--
-							git log -pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.portal.log
-						-->
 
 						<loadfile
 							property="git.portal.log"
@@ -526,7 +518,7 @@
 					</else>
 				</if>
 
-				<replace file="${changelog.dir}/git.build.log.html">
+				<replace file="${changelog.dir}/git-build-log.html">
 					<replacetoken><![CDATA[<!-- NEXT -->]]></replacetoken>
 					<replacevalue expandproperties="true"><![CDATA[<!-- NEXT -->
 		<div id="updatewrapper">
@@ -559,7 +551,7 @@
 				</replace>
 			</then>
 			<else>
-				<echo file="${changelog.dir}/git.build.log.html"><![CDATA[<!DOCTYPE html>
+				<echo file="${changelog.dir}/git-build-log.html"><![CDATA[<!DOCTYPE html>
 <html>
 	<head>
 		<title>Git Build Log</title>
