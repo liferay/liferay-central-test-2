@@ -33,8 +33,7 @@ import javax.portlet.PortletPreferences;
  */
 public class PortletSetupUtil {
 
-	public static JSONObject cssToJSONObject(
-			PortletPreferences portletSetup)
+	public static JSONObject cssToJSONObject(PortletPreferences portletSetup)
 		throws Exception {
 
 		String css = portletSetup.getValue("portletSetupCss", StringPool.BLANK);
