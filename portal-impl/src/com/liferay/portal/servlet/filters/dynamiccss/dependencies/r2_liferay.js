@@ -1,7 +1,9 @@
 function getGlobal() {
-	return (function() {
-		return this;
-	}).call(null);
+	return (
+		function() {
+			return this;
+		}
+	).call(null);
 }
 
 var console = {
