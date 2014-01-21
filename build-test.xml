@@ -415,7 +415,12 @@
 		<antcall target="clean-up-logs" />
 	</target>
 
-	<target name="generate-changelog">
+	<target
+		depends="
+			record-git-commit-plugins,
+			record-git-commit-portal"
+		name="generate-changelog"
+	>
 		<tstamp>
 			<format
 				property="tstamp.date.formatted"
@@ -428,7 +433,7 @@
 			operand1="${env.BUILD_NUMBER}"
 			operand2="1"
 			operation="-"
-			result="previous.build.number"
+			result="build.number.previous"
 		/>
 
 		<property
@@ -438,42 +443,34 @@
 
 		<property
 			name="changelog.dir.previous"
-			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${previous.build.number}"
+			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${build.number.previous}"
 		/>
 
-		<execute dir="${lp.plugins.dir}">
-			git rev-parse HEAD > ${changelog.dir}/git.plugins.commit
-		</execute>
-
-		<execute dir="${project.dir}">
-			git rev-parse HEAD > ${changelog.dir}/git.portal.commit
-		</execute>
-
-		<loadfile
-			property="git.plugins.commit"
-			srcfile="${changelog.dir}/git.plugins.commit"
+		<copy
+			file="git-commit-plugins"
+			todir="${changelog.dir}"
 		/>
 
-		<loadfile
-			property="git.portal.commit"
-			srcfile="${changelog.dir}/git.portal.commit"
+		<copy
+			file="git-commit-portal"
+			todir="${changelog.dir}"
 		/>
 
 		<if>
 			<and>
 				<available file="${changelog.dir.previous}/git.build.log.html" />
-				<available file="${changelog.dir.previous}/git.plugins.commit" />
-				<available file="${changelog.dir.previous}/git.portal.commit" />
+				<available file="${changelog.dir.previous}/git-commit-plugins" />
+				<available file="${changelog.dir.previous}/git-commit-portal" />
 			</and>
 			<then>
 				<loadfile
-					property="git.plugins.commit.previous"
-					srcfile="${changelog.dir.previous}/git.plugins.commit"
+					property="git.commit.plugins.rev.parse.previous"
+					srcfile="${changelog.dir.previous}/git-commit-plugins"
 				/>
 
 				<loadfile
-					property="git.portal.commit.previous"
-					srcfile="${changelog.dir.previous}/git.portal.commit"
+					property="git.commit.portal.rev.parse.previous"
+					srcfile="${changelog.dir.previous}/git-commit-portal"
 				/>
 
 				<copy
@@ -482,7 +479,7 @@
 				/>
 
 				<if>
-					<equals arg1="${git.plugins.commit}" arg2="${git.plugins.commit.previous}" />
+					<equals arg1="${git.commit.plugins.rev.parse}" arg2="${git.commit.plugins.rev.parse.previous}" />
 					<then>
 						<property
 							name="git.plugins.log"
@@ -491,11 +488,11 @@
 					</then>
 					<else>
 						<execute dir="${lp.plugins.dir}">
-							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-plugins-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.plugins.commit.previous}...${git.plugins.commit} > ${changelog.dir}/git.plugins.log
+							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-plugins-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${changelog.dir}/git.plugins.log
 						</execute>
 
 						<!--
-							git log -pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.plugins.commit.previous}...${git.plugins.commit} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.plugins.log
+							git log -pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.plugins.log
 						-->
 
 						<loadfile
@@ -506,7 +503,7 @@
 				</if>
 
 				<if>
-					<equals arg1="${git.portal.commit}" arg2="${git.portal.commit.previous}" />
+					<equals arg1="${git.commit.portal.rev.parse}" arg2="${git.commit.portal.rev.parse.previous}" />
 					<then>
 						<property
 							name="git.portal.log"
@@ -515,11 +512,11 @@
 					</then>
 					<else>
 						<execute dir="${project.dir}">
-							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-portal-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.portal.commit.previous}...${git.portal.commit} > ${changelog.dir}/git.portal.log
+							git log --pretty=format:&#39;&lt;a href=&quot;https://github.com/liferay/liferay-portal-ee/commit/&#39;%H&#39;&quot; target=&quot;_blank&quot;&gt;&#39;%H&#39;&lt;/a&gt;&#39;&#39;&lt;br&gt;&#39;%an&#39;&lt;br&gt;&#39;%s&#39;&lt;br&gt;&lt;br&gt;&#39; ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${changelog.dir}/git.portal.log
 						</execute>
 
 						<!--
-							git log -pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.portal.commit.previous}...${git.portal.commit} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.portal.log
+							git log -pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br/>'%an'<br/>'%s'<br/>' ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}/git.portal.log
 						-->
 
 						<loadfile
@@ -537,8 +534,8 @@
 			<div id="update">
 				<h2>
 					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.date.formatted}<br>
-					Portal: ${git.portal.commit}<br>
-					Plugins: ${git.plugins.commit}
+					Portal: ${git.commit.portal.rev.parse}<br>
+					Plugins: ${git.commit.plugins.rev.parse}
 				</h2>
 				<div id="portal">
 					<h4>
@@ -659,8 +656,8 @@
 				<h2>
 					Initial Commit<br>
 					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.date.formatted}<br>
-					Portal: ${git.portal.commit}<br>
-					Plugins: ${git.plugins.commit}
+					Portal: ${git.commit.portal.rev.parse}<br>
+					Plugins: ${git.commit.plugins.rev.parse}
 				</h2>
 			</div>
 		</div>
