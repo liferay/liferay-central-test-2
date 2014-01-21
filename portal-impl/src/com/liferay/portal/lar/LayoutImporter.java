@@ -739,9 +739,9 @@ public class LayoutImporter {
 				PortletDataHandlerKeys.
 					LAYOUTS_IMPORT_MODE_CREATED_FROM_PROTOTYPE)) {
 
-			// The LayoutUtil.update(layout) in previous loop may cause
-			// LayoutSetPrototypeLayoutListener updated LayoutSet in the backend
-			// already, the current layoutSet object needs a refresh.
+			// The layout set may be stale because LayoutUtil#update(layout)
+			// triggers LayoutSetPrototypeLayoutListener and that may have
+			// updated this layout set
 
 			layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				layoutSet.getLayoutSetId());
