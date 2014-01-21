@@ -63,6 +63,22 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this subscription.
+	 *
+	 * @return the mvcc version of this subscription
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this subscription.
+	 *
+	 * @param mvccVersion the mvcc version of this subscription
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the subscription ID of this subscription.
 	 *
 	 * @return the subscription ID of this subscription
@@ -230,22 +246,6 @@ public interface SubscriptionModel extends AttachedModel, AuditedModel,
 	 * @param frequency the frequency of this subscription
 	 */
 	public void setFrequency(String frequency);
-
-	/**
-	 * Returns the mvcc version of this subscription.
-	 *
-	 * @return the mvcc version of this subscription
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this subscription.
-	 *
-	 * @param mvccVersion the mvcc version of this subscription
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

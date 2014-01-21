@@ -1233,13 +1233,13 @@ public class PluginSettingPersistenceImpl extends BasePersistenceImpl<PluginSett
 		pluginSettingImpl.setNew(pluginSetting.isNew());
 		pluginSettingImpl.setPrimaryKey(pluginSetting.getPrimaryKey());
 
+		pluginSettingImpl.setMvccVersion(pluginSetting.getMvccVersion());
 		pluginSettingImpl.setPluginSettingId(pluginSetting.getPluginSettingId());
 		pluginSettingImpl.setCompanyId(pluginSetting.getCompanyId());
 		pluginSettingImpl.setPluginId(pluginSetting.getPluginId());
 		pluginSettingImpl.setPluginType(pluginSetting.getPluginType());
 		pluginSettingImpl.setRoles(pluginSetting.getRoles());
 		pluginSettingImpl.setActive(pluginSetting.isActive());
-		pluginSettingImpl.setMvccVersion(pluginSetting.getMvccVersion());
 
 		return pluginSettingImpl;
 	}

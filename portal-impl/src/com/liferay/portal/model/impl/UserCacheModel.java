@@ -38,7 +38,9 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(83);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", userId=");
 		sb.append(userId);
@@ -118,8 +120,6 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		sb.append(emailAddressVerified);
 		sb.append(", status=");
 		sb.append(status);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -128,6 +128,8 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 	@Override
 	public User toEntityModel() {
 		UserImpl userImpl = new UserImpl();
+
+		userImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			userImpl.setUuid(StringPool.BLANK);
@@ -326,7 +328,6 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		userImpl.setAgreedToTermsOfUse(agreedToTermsOfUse);
 		userImpl.setEmailAddressVerified(emailAddressVerified);
 		userImpl.setStatus(status);
-		userImpl.setMvccVersion(mvccVersion);
 
 		userImpl.resetOriginalValues();
 
@@ -335,6 +336,7 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		userId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -375,12 +377,13 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		agreedToTermsOfUse = objectInput.readBoolean();
 		emailAddressVerified = objectInput.readBoolean();
 		status = objectInput.readInt();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -536,9 +539,9 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 		objectOutput.writeBoolean(agreedToTermsOfUse);
 		objectOutput.writeBoolean(emailAddressVerified);
 		objectOutput.writeInt(status);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long userId;
 	public long companyId;
@@ -579,5 +582,4 @@ public class UserCacheModel implements CacheModel<User>, Externalizable {
 	public boolean agreedToTermsOfUse;
 	public boolean emailAddressVerified;
 	public int status;
-	public long mvccVersion;
 }

@@ -29,11 +29,11 @@ public class ResourceActionSoap implements Serializable {
 	public static ResourceActionSoap toSoapModel(ResourceAction model) {
 		ResourceActionSoap soapModel = new ResourceActionSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setResourceActionId(model.getResourceActionId());
 		soapModel.setName(model.getName());
 		soapModel.setActionId(model.getActionId());
 		soapModel.setBitwiseValue(model.getBitwiseValue());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -86,6 +86,14 @@ public class ResourceActionSoap implements Serializable {
 		setResourceActionId(pk);
 	}
 
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
+	}
+
 	public long getResourceActionId() {
 		return _resourceActionId;
 	}
@@ -118,17 +126,9 @@ public class ResourceActionSoap implements Serializable {
 		_bitwiseValue = bitwiseValue;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _resourceActionId;
 	private String _name;
 	private String _actionId;
 	private long _bitwiseValue;
-	private long _mvccVersion;
 }

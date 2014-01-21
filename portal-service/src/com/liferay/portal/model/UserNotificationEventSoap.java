@@ -30,6 +30,7 @@ public class UserNotificationEventSoap implements Serializable {
 		UserNotificationEvent model) {
 		UserNotificationEventSoap soapModel = new UserNotificationEventSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setUserNotificationEventId(model.getUserNotificationEventId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -40,7 +41,6 @@ public class UserNotificationEventSoap implements Serializable {
 		soapModel.setDelivered(model.getDelivered());
 		soapModel.setPayload(model.getPayload());
 		soapModel.setArchived(model.getArchived());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -94,6 +94,14 @@ public class UserNotificationEventSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setUserNotificationEventId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -184,14 +192,7 @@ public class UserNotificationEventSoap implements Serializable {
 		_archived = archived;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _userNotificationEventId;
 	private long _companyId;
@@ -202,5 +203,4 @@ public class UserNotificationEventSoap implements Serializable {
 	private boolean _delivered;
 	private String _payload;
 	private boolean _archived;
-	private long _mvccVersion;
 }

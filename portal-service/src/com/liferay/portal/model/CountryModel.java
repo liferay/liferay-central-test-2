@@ -59,6 +59,22 @@ public interface CountryModel extends BaseModel<Country>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this country.
+	 *
+	 * @return the mvcc version of this country
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this country.
+	 *
+	 * @param mvccVersion the mvcc version of this country
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the country ID of this country.
 	 *
 	 * @return the country ID of this country
@@ -188,22 +204,6 @@ public interface CountryModel extends BaseModel<Country>, MVCCModel {
 	 * @param active the active of this country
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the mvcc version of this country.
-	 *
-	 * @return the mvcc version of this country
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this country.
-	 *
-	 * @param mvccVersion the mvcc version of this country
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

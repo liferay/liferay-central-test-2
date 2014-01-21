@@ -65,6 +65,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	 */
 	public static final String TABLE_NAME = "Contact_";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "contactId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
@@ -97,10 +98,9 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			{ "employeeNumber", Types.VARCHAR },
 			{ "jobTitle", Types.VARCHAR },
 			{ "jobClass", Types.VARCHAR },
-			{ "hoursOfOperation", Types.VARCHAR },
-			{ "mvccVersion", Types.BIGINT }
+			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,accountId LONG,parentContactId LONG,emailAddress VARCHAR(75) null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,twitterSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table Contact_ (mvccVersion LONG default 0,contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,accountId LONG,parentContactId LONG,emailAddress VARCHAR(75) null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,twitterSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contact_";
 	public static final String ORDER_BY_JPQL = " ORDER BY contact.contactId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contact_.contactId ASC";
@@ -135,6 +135,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 		Contact model = new ContactImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setContactId(soapModel.getContactId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
@@ -168,7 +169,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		model.setJobTitle(soapModel.getJobTitle());
 		model.setJobClass(soapModel.getJobClass());
 		model.setHoursOfOperation(soapModel.getHoursOfOperation());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -233,6 +233,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("contactId", getContactId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -266,7 +267,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		attributes.put("jobTitle", getJobTitle());
 		attributes.put("jobClass", getJobClass());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -276,6 +276,12 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long contactId = (Long)attributes.get("contactId");
 
 		if (contactId != null) {
@@ -473,12 +479,17 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		if (hoursOfOperation != null) {
 			setHoursOfOperation(hoursOfOperation);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -1027,17 +1038,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		_hoursOfOperation = hoursOfOperation;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -1069,6 +1069,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	public Object clone() {
 		ContactImpl contactImpl = new ContactImpl();
 
+		contactImpl.setMvccVersion(getMvccVersion());
 		contactImpl.setContactId(getContactId());
 		contactImpl.setCompanyId(getCompanyId());
 		contactImpl.setUserId(getUserId());
@@ -1102,7 +1103,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		contactImpl.setJobTitle(getJobTitle());
 		contactImpl.setJobClass(getJobClass());
 		contactImpl.setHoursOfOperation(getHoursOfOperation());
-		contactImpl.setMvccVersion(getMvccVersion());
 
 		contactImpl.resetOriginalValues();
 
@@ -1187,6 +1187,8 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	@Override
 	public CacheModel<Contact> toCacheModel() {
 		ContactCacheModel contactCacheModel = new ContactCacheModel();
+
+		contactCacheModel.mvccVersion = getMvccVersion();
 
 		contactCacheModel.contactId = getContactId();
 
@@ -1395,8 +1397,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			contactCacheModel.hoursOfOperation = null;
 		}
 
-		contactCacheModel.mvccVersion = getMvccVersion();
-
 		return contactCacheModel;
 	}
 
@@ -1404,7 +1404,9 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	public String toString() {
 		StringBundler sb = new StringBundler(69);
 
-		sb.append("{contactId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", contactId=");
 		sb.append(getContactId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -1470,8 +1472,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		sb.append(getJobClass());
 		sb.append(", hoursOfOperation=");
 		sb.append(getHoursOfOperation());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -1485,6 +1485,10 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 		sb.append("com.liferay.portal.model.Contact");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>contactId</column-name><column-value><![CDATA[");
 		sb.append(getContactId());
@@ -1617,10 +1621,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
 		sb.append(getHoursOfOperation());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1631,6 +1631,7 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Contact.class
 		};
+	private long _mvccVersion;
 	private long _contactId;
 	private long _companyId;
 	private long _originalCompanyId;
@@ -1673,7 +1674,6 @@ public class ContactModelImpl extends BaseModelImpl<Contact>
 	private String _jobTitle;
 	private String _jobClass;
 	private String _hoursOfOperation;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private Contact _escapedModel;
 }

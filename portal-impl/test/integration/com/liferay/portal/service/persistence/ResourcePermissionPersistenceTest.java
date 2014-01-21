@@ -113,6 +113,8 @@ public class ResourcePermissionPersistenceTest {
 
 		ResourcePermission newResourcePermission = _persistence.create(pk);
 
+		newResourcePermission.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newResourcePermission.setCompanyId(ServiceTestUtil.nextLong());
 
 		newResourcePermission.setName(ServiceTestUtil.randomString());
@@ -127,12 +129,12 @@ public class ResourcePermissionPersistenceTest {
 
 		newResourcePermission.setActionIds(ServiceTestUtil.nextLong());
 
-		newResourcePermission.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newResourcePermission);
 
 		ResourcePermission existingResourcePermission = _persistence.findByPrimaryKey(newResourcePermission.getPrimaryKey());
 
+		Assert.assertEquals(existingResourcePermission.getMvccVersion(),
+			newResourcePermission.getMvccVersion());
 		Assert.assertEquals(existingResourcePermission.getResourcePermissionId(),
 			newResourcePermission.getResourcePermissionId());
 		Assert.assertEquals(existingResourcePermission.getCompanyId(),
@@ -149,8 +151,6 @@ public class ResourcePermissionPersistenceTest {
 			newResourcePermission.getOwnerId());
 		Assert.assertEquals(existingResourcePermission.getActionIds(),
 			newResourcePermission.getActionIds());
-		Assert.assertEquals(existingResourcePermission.getMvccVersion(),
-			newResourcePermission.getMvccVersion());
 	}
 
 	@Test
@@ -189,9 +189,9 @@ public class ResourcePermissionPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("ResourcePermission",
-			"resourcePermissionId", true, "companyId", true, "name", true,
-			"scope", true, "primKey", true, "roleId", true, "ownerId", true,
-			"actionIds", true, "mvccVersion", true);
+			"mvccVersion", true, "resourcePermissionId", true, "companyId",
+			true, "name", true, "scope", true, "primKey", true, "roleId", true,
+			"ownerId", true, "actionIds", true);
 	}
 
 	@Test
@@ -339,6 +339,8 @@ public class ResourcePermissionPersistenceTest {
 
 		ResourcePermission resourcePermission = _persistence.create(pk);
 
+		resourcePermission.setMvccVersion(ServiceTestUtil.nextLong());
+
 		resourcePermission.setCompanyId(ServiceTestUtil.nextLong());
 
 		resourcePermission.setName(ServiceTestUtil.randomString());
@@ -352,8 +354,6 @@ public class ResourcePermissionPersistenceTest {
 		resourcePermission.setOwnerId(ServiceTestUtil.nextLong());
 
 		resourcePermission.setActionIds(ServiceTestUtil.nextLong());
-
-		resourcePermission.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(resourcePermission);
 

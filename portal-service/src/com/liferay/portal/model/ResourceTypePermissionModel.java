@@ -60,6 +60,22 @@ public interface ResourceTypePermissionModel extends BaseModel<ResourceTypePermi
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this resource type permission.
+	 *
+	 * @return the mvcc version of this resource type permission
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this resource type permission.
+	 *
+	 * @param mvccVersion the mvcc version of this resource type permission
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the resource type permission ID of this resource type permission.
 	 *
 	 * @return the resource type permission ID of this resource type permission
@@ -143,22 +159,6 @@ public interface ResourceTypePermissionModel extends BaseModel<ResourceTypePermi
 	 * @param actionIds the action IDs of this resource type permission
 	 */
 	public void setActionIds(long actionIds);
-
-	/**
-	 * Returns the mvcc version of this resource type permission.
-	 *
-	 * @return the mvcc version of this resource type permission
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this resource type permission.
-	 *
-	 * @param mvccVersion the mvcc version of this resource type permission
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

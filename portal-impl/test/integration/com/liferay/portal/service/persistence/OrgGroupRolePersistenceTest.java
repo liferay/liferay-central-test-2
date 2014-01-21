@@ -113,14 +113,14 @@ public class OrgGroupRolePersistenceTest {
 
 		OrgGroupRole existingOrgGroupRole = _persistence.findByPrimaryKey(newOrgGroupRole.getPrimaryKey());
 
+		Assert.assertEquals(existingOrgGroupRole.getMvccVersion(),
+			newOrgGroupRole.getMvccVersion());
 		Assert.assertEquals(existingOrgGroupRole.getOrganizationId(),
 			newOrgGroupRole.getOrganizationId());
 		Assert.assertEquals(existingOrgGroupRole.getGroupId(),
 			newOrgGroupRole.getGroupId());
 		Assert.assertEquals(existingOrgGroupRole.getRoleId(),
 			newOrgGroupRole.getRoleId());
-		Assert.assertEquals(existingOrgGroupRole.getMvccVersion(),
-			newOrgGroupRole.getMvccVersion());
 	}
 
 	@Test

@@ -50,18 +50,24 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("id", getId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("portletId", getPortletId());
 		attributes.put("roles", getRoles());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long id = (Long)attributes.get("id");
 
 		if (id != null) {
@@ -91,12 +97,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -117,6 +117,26 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_portlet.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this portlet.
+	*
+	* @return the mvcc version of this portlet
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _portlet.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this portlet.
+	*
+	* @param mvccVersion the mvcc version of this portlet
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_portlet.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -227,26 +247,6 @@ public class PortletWrapper implements Portlet, ModelWrapper<Portlet> {
 	@Override
 	public void setActive(boolean active) {
 		_portlet.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this portlet.
-	*
-	* @return the mvcc version of this portlet
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _portlet.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this portlet.
-	*
-	* @param mvccVersion the mvcc version of this portlet
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_portlet.setMvccVersion(mvccVersion);
 	}
 
 	@Override

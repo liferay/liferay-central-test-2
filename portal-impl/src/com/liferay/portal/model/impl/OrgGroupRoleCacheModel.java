@@ -36,14 +36,14 @@ public class OrgGroupRoleCacheModel implements CacheModel<OrgGroupRole>,
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{organizationId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", organizationId=");
 		sb.append(organizationId);
 		sb.append(", groupId=");
 		sb.append(groupId);
 		sb.append(", roleId=");
 		sb.append(roleId);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -53,10 +53,10 @@ public class OrgGroupRoleCacheModel implements CacheModel<OrgGroupRole>,
 	public OrgGroupRole toEntityModel() {
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
+		orgGroupRoleImpl.setMvccVersion(mvccVersion);
 		orgGroupRoleImpl.setOrganizationId(organizationId);
 		orgGroupRoleImpl.setGroupId(groupId);
 		orgGroupRoleImpl.setRoleId(roleId);
-		orgGroupRoleImpl.setMvccVersion(mvccVersion);
 
 		orgGroupRoleImpl.resetOriginalValues();
 
@@ -65,23 +65,23 @@ public class OrgGroupRoleCacheModel implements CacheModel<OrgGroupRole>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		organizationId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		roleId = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(organizationId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(roleId);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long organizationId;
 	public long groupId;
 	public long roleId;
-	public long mvccVersion;
 }

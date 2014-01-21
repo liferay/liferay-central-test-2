@@ -61,6 +61,22 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket>, MVCCModel
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this ticket.
+	 *
+	 * @return the mvcc version of this ticket
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this ticket.
+	 *
+	 * @param mvccVersion the mvcc version of this ticket
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the ticket ID of this ticket.
 	 *
 	 * @return the ticket ID of this ticket
@@ -201,22 +217,6 @@ public interface TicketModel extends AttachedModel, BaseModel<Ticket>, MVCCModel
 	 * @param expirationDate the expiration date of this ticket
 	 */
 	public void setExpirationDate(Date expirationDate);
-
-	/**
-	 * Returns the mvcc version of this ticket.
-	 *
-	 * @return the mvcc version of this ticket
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this ticket.
-	 *
-	 * @param mvccVersion the mvcc version of this ticket
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

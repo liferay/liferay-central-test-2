@@ -788,13 +788,13 @@ public class ImagePersistenceImpl extends BasePersistenceImpl<Image>
 		imageImpl.setNew(image.isNew());
 		imageImpl.setPrimaryKey(image.getPrimaryKey());
 
+		imageImpl.setMvccVersion(image.getMvccVersion());
 		imageImpl.setImageId(image.getImageId());
 		imageImpl.setModifiedDate(image.getModifiedDate());
 		imageImpl.setType(image.getType());
 		imageImpl.setHeight(image.getHeight());
 		imageImpl.setWidth(image.getWidth());
 		imageImpl.setSize(image.getSize());
-		imageImpl.setMvccVersion(image.getMvccVersion());
 
 		return imageImpl;
 	}

@@ -111,18 +111,20 @@ public class UserTrackerPathPersistenceTest {
 
 		UserTrackerPath newUserTrackerPath = _persistence.create(pk);
 
+		newUserTrackerPath.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newUserTrackerPath.setUserTrackerId(ServiceTestUtil.nextLong());
 
 		newUserTrackerPath.setPath(ServiceTestUtil.randomString());
 
 		newUserTrackerPath.setPathDate(ServiceTestUtil.nextDate());
 
-		newUserTrackerPath.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newUserTrackerPath);
 
 		UserTrackerPath existingUserTrackerPath = _persistence.findByPrimaryKey(newUserTrackerPath.getPrimaryKey());
 
+		Assert.assertEquals(existingUserTrackerPath.getMvccVersion(),
+			newUserTrackerPath.getMvccVersion());
 		Assert.assertEquals(existingUserTrackerPath.getUserTrackerPathId(),
 			newUserTrackerPath.getUserTrackerPathId());
 		Assert.assertEquals(existingUserTrackerPath.getUserTrackerId(),
@@ -132,8 +134,6 @@ public class UserTrackerPathPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingUserTrackerPath.getPathDate()),
 			Time.getShortTimestamp(newUserTrackerPath.getPathDate()));
-		Assert.assertEquals(existingUserTrackerPath.getMvccVersion(),
-			newUserTrackerPath.getMvccVersion());
 	}
 
 	@Test
@@ -172,8 +172,8 @@ public class UserTrackerPathPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("UserTrackerPath",
-			"userTrackerPathId", true, "userTrackerId", true, "path", true,
-			"pathDate", true, "mvccVersion", true);
+			"mvccVersion", true, "userTrackerPathId", true, "userTrackerId",
+			true, "path", true, "pathDate", true);
 	}
 
 	@Test
@@ -293,13 +293,13 @@ public class UserTrackerPathPersistenceTest {
 
 		UserTrackerPath userTrackerPath = _persistence.create(pk);
 
+		userTrackerPath.setMvccVersion(ServiceTestUtil.nextLong());
+
 		userTrackerPath.setUserTrackerId(ServiceTestUtil.nextLong());
 
 		userTrackerPath.setPath(ServiceTestUtil.randomString());
 
 		userTrackerPath.setPathDate(ServiceTestUtil.nextDate());
-
-		userTrackerPath.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(userTrackerPath);
 

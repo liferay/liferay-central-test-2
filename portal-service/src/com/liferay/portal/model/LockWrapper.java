@@ -51,6 +51,7 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("lockId", getLockId());
 		attributes.put("companyId", getCompanyId());
@@ -62,13 +63,18 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 		attributes.put("owner", getOwner());
 		attributes.put("inheritable", getInheritable());
 		attributes.put("expirationDate", getExpirationDate());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -134,12 +140,6 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 		if (expirationDate != null) {
 			setExpirationDate(expirationDate);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -160,6 +160,26 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_lock.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this lock.
+	*
+	* @return the mvcc version of this lock
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _lock.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this lock.
+	*
+	* @param mvccVersion the mvcc version of this lock
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_lock.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -412,26 +432,6 @@ public class LockWrapper implements Lock, ModelWrapper<Lock> {
 	@Override
 	public void setExpirationDate(java.util.Date expirationDate) {
 		_lock.setExpirationDate(expirationDate);
-	}
-
-	/**
-	* Returns the mvcc version of this lock.
-	*
-	* @return the mvcc version of this lock
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _lock.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this lock.
-	*
-	* @param mvccVersion the mvcc version of this lock
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_lock.setMvccVersion(mvccVersion);
 	}
 
 	@Override

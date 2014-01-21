@@ -66,6 +66,22 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout revision.
+	 *
+	 * @return the mvcc version of this layout revision
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout revision.
+	 *
+	 * @param mvccVersion the mvcc version of this layout revision
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the layout revision ID of this layout revision.
 	 *
 	 * @return the layout revision ID of this layout revision
@@ -995,22 +1011,6 @@ public interface LayoutRevisionModel extends BaseModel<LayoutRevision>,
 	 */
 	@Override
 	public void setStatusDate(Date statusDate);
-
-	/**
-	 * Returns the mvcc version of this layout revision.
-	 *
-	 * @return the mvcc version of this layout revision
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout revision.
-	 *
-	 * @param mvccVersion the mvcc version of this layout revision
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #isApproved()}

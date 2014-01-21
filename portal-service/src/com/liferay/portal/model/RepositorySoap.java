@@ -31,6 +31,7 @@ public class RepositorySoap implements Serializable {
 	public static RepositorySoap toSoapModel(Repository model) {
 		RepositorySoap soapModel = new RepositorySoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setGroupId(model.getGroupId());
@@ -45,7 +46,6 @@ public class RepositorySoap implements Serializable {
 		soapModel.setPortletId(model.getPortletId());
 		soapModel.setTypeSettings(model.getTypeSettings());
 		soapModel.setDlFolderId(model.getDlFolderId());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -96,6 +96,14 @@ public class RepositorySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setRepositoryId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -210,14 +218,7 @@ public class RepositorySoap implements Serializable {
 		_dlFolderId = dlFolderId;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _repositoryId;
 	private long _groupId;
@@ -232,5 +233,4 @@ public class RepositorySoap implements Serializable {
 	private String _portletId;
 	private String _typeSettings;
 	private long _dlFolderId;
-	private long _mvccVersion;
 }

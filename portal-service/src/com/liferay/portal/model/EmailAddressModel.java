@@ -63,6 +63,22 @@ public interface EmailAddressModel extends AttachedModel, BaseModel<EmailAddress
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this email address.
+	 *
+	 * @return the mvcc version of this email address
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this email address.
+	 *
+	 * @param mvccVersion the mvcc version of this email address
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this email address.
 	 *
 	 * @return the uuid of this email address
@@ -282,22 +298,6 @@ public interface EmailAddressModel extends AttachedModel, BaseModel<EmailAddress
 	 * @param primary the primary of this email address
 	 */
 	public void setPrimary(boolean primary);
-
-	/**
-	 * Returns the mvcc version of this email address.
-	 *
-	 * @return the mvcc version of this email address
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this email address.
-	 *
-	 * @param mvccVersion the mvcc version of this email address
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

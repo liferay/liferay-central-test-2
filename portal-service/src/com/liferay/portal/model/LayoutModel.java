@@ -66,6 +66,22 @@ public interface LayoutModel extends BaseModel<Layout>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout.
+	 *
+	 * @return the mvcc version of this layout
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout.
+	 *
+	 * @param mvccVersion the mvcc version of this layout
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this layout.
 	 *
 	 * @return the uuid of this layout
@@ -977,22 +993,6 @@ public interface LayoutModel extends BaseModel<Layout>, MVCCModel,
 	 * @param sourcePrototypeLayoutUuid the source prototype layout uuid of this layout
 	 */
 	public void setSourcePrototypeLayoutUuid(String sourcePrototypeLayoutUuid);
-
-	/**
-	 * Returns the mvcc version of this layout.
-	 *
-	 * @return the mvcc version of this layout
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout.
-	 *
-	 * @param mvccVersion the mvcc version of this layout
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

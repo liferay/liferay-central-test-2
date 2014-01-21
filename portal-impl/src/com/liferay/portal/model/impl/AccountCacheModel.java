@@ -38,7 +38,9 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(35);
 
-		sb.append("{accountId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", accountId=");
 		sb.append(accountId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -70,8 +72,6 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		sb.append(type);
 		sb.append(", size=");
 		sb.append(size);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -81,6 +81,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public Account toEntityModel() {
 		AccountImpl accountImpl = new AccountImpl();
 
+		accountImpl.setMvccVersion(mvccVersion);
 		accountImpl.setAccountId(accountId);
 		accountImpl.setCompanyId(companyId);
 		accountImpl.setUserId(userId);
@@ -171,8 +172,6 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 			accountImpl.setSize(size);
 		}
 
-		accountImpl.setMvccVersion(mvccVersion);
-
 		accountImpl.resetOriginalValues();
 
 		return accountImpl;
@@ -180,6 +179,7 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		accountId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -196,12 +196,12 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		industry = objectInput.readUTF();
 		type = objectInput.readUTF();
 		size = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(accountId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -279,10 +279,9 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 		else {
 			objectOutput.writeUTF(size);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long accountId;
 	public long companyId;
 	public long userId;
@@ -299,5 +298,4 @@ public class AccountCacheModel implements CacheModel<Account>, Externalizable {
 	public String industry;
 	public String type;
 	public String size;
-	public long mvccVersion;
 }

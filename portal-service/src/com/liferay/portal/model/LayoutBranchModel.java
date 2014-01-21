@@ -60,6 +60,22 @@ public interface LayoutBranchModel extends BaseModel<LayoutBranch>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout branch.
+	 *
+	 * @return the mvcc version of this layout branch
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout branch.
+	 *
+	 * @param mvccVersion the mvcc version of this layout branch
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the layout branch ID of this layout branch.
 	 *
 	 * @return the layout branch ID of this layout branch
@@ -223,22 +239,6 @@ public interface LayoutBranchModel extends BaseModel<LayoutBranch>, MVCCModel {
 	 * @param master the master of this layout branch
 	 */
 	public void setMaster(boolean master);
-
-	/**
-	 * Returns the mvcc version of this layout branch.
-	 *
-	 * @return the mvcc version of this layout branch
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout branch.
-	 *
-	 * @param mvccVersion the mvcc version of this layout branch
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

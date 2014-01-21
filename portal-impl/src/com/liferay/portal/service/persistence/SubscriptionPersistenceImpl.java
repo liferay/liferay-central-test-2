@@ -2725,6 +2725,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		subscriptionImpl.setNew(subscription.isNew());
 		subscriptionImpl.setPrimaryKey(subscription.getPrimaryKey());
 
+		subscriptionImpl.setMvccVersion(subscription.getMvccVersion());
 		subscriptionImpl.setSubscriptionId(subscription.getSubscriptionId());
 		subscriptionImpl.setCompanyId(subscription.getCompanyId());
 		subscriptionImpl.setUserId(subscription.getUserId());
@@ -2734,7 +2735,6 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 		subscriptionImpl.setClassNameId(subscription.getClassNameId());
 		subscriptionImpl.setClassPK(subscription.getClassPK());
 		subscriptionImpl.setFrequency(subscription.getFrequency());
-		subscriptionImpl.setMvccVersion(subscription.getMvccVersion());
 
 		return subscriptionImpl;
 	}

@@ -60,6 +60,22 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this service component.
+	 *
+	 * @return the mvcc version of this service component
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this service component.
+	 *
+	 * @param mvccVersion the mvcc version of this service component
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the service component ID of this service component.
 	 *
 	 * @return the service component ID of this service component
@@ -130,22 +146,6 @@ public interface ServiceComponentModel extends BaseModel<ServiceComponent>,
 	 * @param data the data of this service component
 	 */
 	public void setData(String data);
-
-	/**
-	 * Returns the mvcc version of this service component.
-	 *
-	 * @return the mvcc version of this service component
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this service component.
-	 *
-	 * @param mvccVersion the mvcc version of this service component
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

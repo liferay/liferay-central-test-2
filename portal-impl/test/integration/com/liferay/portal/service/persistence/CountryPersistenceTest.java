@@ -111,6 +111,8 @@ public class CountryPersistenceTest {
 
 		Country newCountry = _persistence.create(pk);
 
+		newCountry.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newCountry.setName(ServiceTestUtil.randomString());
 
 		newCountry.setA2(ServiceTestUtil.randomString());
@@ -125,12 +127,12 @@ public class CountryPersistenceTest {
 
 		newCountry.setActive(ServiceTestUtil.randomBoolean());
 
-		newCountry.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newCountry);
 
 		Country existingCountry = _persistence.findByPrimaryKey(newCountry.getPrimaryKey());
 
+		Assert.assertEquals(existingCountry.getMvccVersion(),
+			newCountry.getMvccVersion());
 		Assert.assertEquals(existingCountry.getCountryId(),
 			newCountry.getCountryId());
 		Assert.assertEquals(existingCountry.getName(), newCountry.getName());
@@ -141,8 +143,6 @@ public class CountryPersistenceTest {
 		Assert.assertEquals(existingCountry.getZipRequired(),
 			newCountry.getZipRequired());
 		Assert.assertEquals(existingCountry.getActive(), newCountry.getActive());
-		Assert.assertEquals(existingCountry.getMvccVersion(),
-			newCountry.getMvccVersion());
 	}
 
 	@Test
@@ -179,9 +179,9 @@ public class CountryPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Country", "countryId",
-			true, "name", true, "a2", true, "a3", true, "number", true, "idd",
-			true, "zipRequired", true, "active", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Country", "mvccVersion",
+			true, "countryId", true, "name", true, "a2", true, "a3", true,
+			"number", true, "idd", true, "zipRequired", true, "active", true);
 	}
 
 	@Test
@@ -301,6 +301,8 @@ public class CountryPersistenceTest {
 
 		Country country = _persistence.create(pk);
 
+		country.setMvccVersion(ServiceTestUtil.nextLong());
+
 		country.setName(ServiceTestUtil.randomString());
 
 		country.setA2(ServiceTestUtil.randomString());
@@ -314,8 +316,6 @@ public class CountryPersistenceTest {
 		country.setZipRequired(ServiceTestUtil.randomBoolean());
 
 		country.setActive(ServiceTestUtil.randomBoolean());
-
-		country.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(country);
 

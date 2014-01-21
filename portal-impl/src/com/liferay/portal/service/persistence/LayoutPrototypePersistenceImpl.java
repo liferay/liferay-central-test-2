@@ -4145,6 +4145,7 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		layoutPrototypeImpl.setNew(layoutPrototype.isNew());
 		layoutPrototypeImpl.setPrimaryKey(layoutPrototype.getPrimaryKey());
 
+		layoutPrototypeImpl.setMvccVersion(layoutPrototype.getMvccVersion());
 		layoutPrototypeImpl.setUuid(layoutPrototype.getUuid());
 		layoutPrototypeImpl.setLayoutPrototypeId(layoutPrototype.getLayoutPrototypeId());
 		layoutPrototypeImpl.setCompanyId(layoutPrototype.getCompanyId());
@@ -4156,7 +4157,6 @@ public class LayoutPrototypePersistenceImpl extends BasePersistenceImpl<LayoutPr
 		layoutPrototypeImpl.setDescription(layoutPrototype.getDescription());
 		layoutPrototypeImpl.setSettings(layoutPrototype.getSettings());
 		layoutPrototypeImpl.setActive(layoutPrototype.isActive());
-		layoutPrototypeImpl.setMvccVersion(layoutPrototype.getMvccVersion());
 
 		return layoutPrototypeImpl;
 	}

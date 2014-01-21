@@ -63,6 +63,22 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy>, MVCCMode
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this password policy.
+	 *
+	 * @return the mvcc version of this password policy
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this password policy.
+	 *
+	 * @param mvccVersion the mvcc version of this password policy
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this password policy.
 	 *
 	 * @return the uuid of this password policy
@@ -634,22 +650,6 @@ public interface PasswordPolicyModel extends BaseModel<PasswordPolicy>, MVCCMode
 	 * @param resetTicketMaxAge the reset ticket max age of this password policy
 	 */
 	public void setResetTicketMaxAge(long resetTicketMaxAge);
-
-	/**
-	 * Returns the mvcc version of this password policy.
-	 *
-	 * @return the mvcc version of this password policy
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this password policy.
-	 *
-	 * @param mvccVersion the mvcc version of this password policy
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

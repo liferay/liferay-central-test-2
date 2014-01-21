@@ -53,6 +53,7 @@ public class EmailAddressWrapper implements EmailAddress,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("emailAddressId", getEmailAddressId());
 		attributes.put("companyId", getCompanyId());
@@ -65,13 +66,18 @@ public class EmailAddressWrapper implements EmailAddress,
 		attributes.put("address", getAddress());
 		attributes.put("typeId", getTypeId());
 		attributes.put("primary", getPrimary());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -143,12 +149,6 @@ public class EmailAddressWrapper implements EmailAddress,
 		if (primary != null) {
 			setPrimary(primary);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -169,6 +169,26 @@ public class EmailAddressWrapper implements EmailAddress,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_emailAddress.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this email address.
+	*
+	* @return the mvcc version of this email address
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _emailAddress.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this email address.
+	*
+	* @param mvccVersion the mvcc version of this email address
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_emailAddress.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -456,26 +476,6 @@ public class EmailAddressWrapper implements EmailAddress,
 	@Override
 	public void setPrimary(boolean primary) {
 		_emailAddress.setPrimary(primary);
-	}
-
-	/**
-	* Returns the mvcc version of this email address.
-	*
-	* @return the mvcc version of this email address
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _emailAddress.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this email address.
-	*
-	* @param mvccVersion the mvcc version of this email address
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_emailAddress.setMvccVersion(mvccVersion);
 	}
 
 	@Override

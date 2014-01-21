@@ -50,6 +50,7 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("orgLaborId", getOrgLaborId());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("typeId", getTypeId());
@@ -67,13 +68,18 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 		attributes.put("friClose", getFriClose());
 		attributes.put("satOpen", getSatOpen());
 		attributes.put("satClose", getSatClose());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long orgLaborId = (Long)attributes.get("orgLaborId");
 
 		if (orgLaborId != null) {
@@ -175,12 +181,6 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 		if (satClose != null) {
 			setSatClose(satClose);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -201,6 +201,26 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_orgLabor.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this org labor.
+	*
+	* @return the mvcc version of this org labor
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _orgLabor.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this org labor.
+	*
+	* @param mvccVersion the mvcc version of this org labor
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_orgLabor.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -541,26 +561,6 @@ public class OrgLaborWrapper implements OrgLabor, ModelWrapper<OrgLabor> {
 	@Override
 	public void setSatClose(int satClose) {
 		_orgLabor.setSatClose(satClose);
-	}
-
-	/**
-	* Returns the mvcc version of this org labor.
-	*
-	* @return the mvcc version of this org labor
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _orgLabor.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this org labor.
-	*
-	* @param mvccVersion the mvcc version of this org labor
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_orgLabor.setMvccVersion(mvccVersion);
 	}
 
 	@Override

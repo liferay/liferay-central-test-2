@@ -53,6 +53,7 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("workflowInstanceLinkId", getWorkflowInstanceLinkId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -63,13 +64,18 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 		attributes.put("classNameId", getClassNameId());
 		attributes.put("classPK", getClassPK());
 		attributes.put("workflowInstanceId", getWorkflowInstanceId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long workflowInstanceLinkId = (Long)attributes.get(
 				"workflowInstanceLinkId");
 
@@ -130,12 +136,6 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 		if (workflowInstanceId != null) {
 			setWorkflowInstanceId(workflowInstanceId);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -156,6 +156,26 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_workflowInstanceLink.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this workflow instance link.
+	*
+	* @return the mvcc version of this workflow instance link
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _workflowInstanceLink.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this workflow instance link.
+	*
+	* @param mvccVersion the mvcc version of this workflow instance link
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_workflowInstanceLink.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -393,26 +413,6 @@ public class WorkflowInstanceLinkWrapper implements WorkflowInstanceLink,
 	@Override
 	public void setWorkflowInstanceId(long workflowInstanceId) {
 		_workflowInstanceLink.setWorkflowInstanceId(workflowInstanceId);
-	}
-
-	/**
-	* Returns the mvcc version of this workflow instance link.
-	*
-	* @return the mvcc version of this workflow instance link
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _workflowInstanceLink.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this workflow instance link.
-	*
-	* @param mvccVersion the mvcc version of this workflow instance link
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_workflowInstanceLink.setMvccVersion(mvccVersion);
 	}
 
 	@Override

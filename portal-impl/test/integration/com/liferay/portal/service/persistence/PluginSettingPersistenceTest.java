@@ -113,6 +113,8 @@ public class PluginSettingPersistenceTest {
 
 		PluginSetting newPluginSetting = _persistence.create(pk);
 
+		newPluginSetting.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPluginSetting.setCompanyId(ServiceTestUtil.nextLong());
 
 		newPluginSetting.setPluginId(ServiceTestUtil.randomString());
@@ -123,12 +125,12 @@ public class PluginSettingPersistenceTest {
 
 		newPluginSetting.setActive(ServiceTestUtil.randomBoolean());
 
-		newPluginSetting.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPluginSetting);
 
 		PluginSetting existingPluginSetting = _persistence.findByPrimaryKey(newPluginSetting.getPrimaryKey());
 
+		Assert.assertEquals(existingPluginSetting.getMvccVersion(),
+			newPluginSetting.getMvccVersion());
 		Assert.assertEquals(existingPluginSetting.getPluginSettingId(),
 			newPluginSetting.getPluginSettingId());
 		Assert.assertEquals(existingPluginSetting.getCompanyId(),
@@ -141,8 +143,6 @@ public class PluginSettingPersistenceTest {
 			newPluginSetting.getRoles());
 		Assert.assertEquals(existingPluginSetting.getActive(),
 			newPluginSetting.getActive());
-		Assert.assertEquals(existingPluginSetting.getMvccVersion(),
-			newPluginSetting.getMvccVersion());
 	}
 
 	@Test
@@ -181,9 +181,8 @@ public class PluginSettingPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("PluginSetting",
-			"pluginSettingId", true, "companyId", true, "pluginId", true,
-			"pluginType", true, "roles", true, "active", true, "mvccVersion",
-			true);
+			"mvccVersion", true, "pluginSettingId", true, "companyId", true,
+			"pluginId", true, "pluginType", true, "roles", true, "active", true);
 	}
 
 	@Test
@@ -325,6 +324,8 @@ public class PluginSettingPersistenceTest {
 
 		PluginSetting pluginSetting = _persistence.create(pk);
 
+		pluginSetting.setMvccVersion(ServiceTestUtil.nextLong());
+
 		pluginSetting.setCompanyId(ServiceTestUtil.nextLong());
 
 		pluginSetting.setPluginId(ServiceTestUtil.randomString());
@@ -334,8 +335,6 @@ public class PluginSettingPersistenceTest {
 		pluginSetting.setRoles(ServiceTestUtil.randomString());
 
 		pluginSetting.setActive(ServiceTestUtil.randomBoolean());
-
-		pluginSetting.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(pluginSetting);
 

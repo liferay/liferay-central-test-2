@@ -51,18 +51,24 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("serviceComponentId", getServiceComponentId());
 		attributes.put("buildNamespace", getBuildNamespace());
 		attributes.put("buildNumber", getBuildNumber());
 		attributes.put("buildDate", getBuildDate());
 		attributes.put("data", getData());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long serviceComponentId = (Long)attributes.get("serviceComponentId");
 
 		if (serviceComponentId != null) {
@@ -92,12 +98,6 @@ public class ServiceComponentWrapper implements ServiceComponent,
 		if (data != null) {
 			setData(data);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -118,6 +118,26 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_serviceComponent.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this service component.
+	*
+	* @return the mvcc version of this service component
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _serviceComponent.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this service component.
+	*
+	* @param mvccVersion the mvcc version of this service component
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_serviceComponent.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -218,26 +238,6 @@ public class ServiceComponentWrapper implements ServiceComponent,
 	@Override
 	public void setData(java.lang.String data) {
 		_serviceComponent.setData(data);
-	}
-
-	/**
-	* Returns the mvcc version of this service component.
-	*
-	* @return the mvcc version of this service component
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _serviceComponent.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this service component.
-	*
-	* @param mvccVersion the mvcc version of this service component
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_serviceComponent.setMvccVersion(mvccVersion);
 	}
 
 	@Override

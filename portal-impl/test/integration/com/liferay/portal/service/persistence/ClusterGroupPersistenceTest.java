@@ -110,18 +110,20 @@ public class ClusterGroupPersistenceTest {
 
 		ClusterGroup newClusterGroup = _persistence.create(pk);
 
+		newClusterGroup.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newClusterGroup.setName(ServiceTestUtil.randomString());
 
 		newClusterGroup.setClusterNodeIds(ServiceTestUtil.randomString());
 
 		newClusterGroup.setWholeCluster(ServiceTestUtil.randomBoolean());
 
-		newClusterGroup.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newClusterGroup);
 
 		ClusterGroup existingClusterGroup = _persistence.findByPrimaryKey(newClusterGroup.getPrimaryKey());
 
+		Assert.assertEquals(existingClusterGroup.getMvccVersion(),
+			newClusterGroup.getMvccVersion());
 		Assert.assertEquals(existingClusterGroup.getClusterGroupId(),
 			newClusterGroup.getClusterGroupId());
 		Assert.assertEquals(existingClusterGroup.getName(),
@@ -130,8 +132,6 @@ public class ClusterGroupPersistenceTest {
 			newClusterGroup.getClusterNodeIds());
 		Assert.assertEquals(existingClusterGroup.getWholeCluster(),
 			newClusterGroup.getWholeCluster());
-		Assert.assertEquals(existingClusterGroup.getMvccVersion(),
-			newClusterGroup.getMvccVersion());
 	}
 
 	@Test
@@ -170,8 +170,8 @@ public class ClusterGroupPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("ClusterGroup",
-			"clusterGroupId", true, "name", true, "clusterNodeIds", true,
-			"wholeCluster", true, "mvccVersion", true);
+			"mvccVersion", true, "clusterGroupId", true, "name", true,
+			"clusterNodeIds", true, "wholeCluster", true);
 	}
 
 	@Test
@@ -291,13 +291,13 @@ public class ClusterGroupPersistenceTest {
 
 		ClusterGroup clusterGroup = _persistence.create(pk);
 
+		clusterGroup.setMvccVersion(ServiceTestUtil.nextLong());
+
 		clusterGroup.setName(ServiceTestUtil.randomString());
 
 		clusterGroup.setClusterNodeIds(ServiceTestUtil.randomString());
 
 		clusterGroup.setWholeCluster(ServiceTestUtil.randomBoolean());
-
-		clusterGroup.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(clusterGroup);
 

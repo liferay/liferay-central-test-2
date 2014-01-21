@@ -61,14 +61,14 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	 */
 	public static final String TABLE_NAME = "Region";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "regionId", Types.BIGINT },
 			{ "countryId", Types.BIGINT },
 			{ "regionCode", Types.VARCHAR },
 			{ "name", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN },
-			{ "mvccVersion", Types.BIGINT }
+			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Region (regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table Region (mvccVersion LONG default 0,regionId LONG not null primary key,countryId LONG,regionCode VARCHAR(75) null,name VARCHAR(75) null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Region";
 	public static final String ORDER_BY_JPQL = " ORDER BY region.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Region.name ASC";
@@ -102,12 +102,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 		Region model = new RegionImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setRegionId(soapModel.getRegionId());
 		model.setCountryId(soapModel.getCountryId());
 		model.setRegionCode(soapModel.getRegionCode());
 		model.setName(soapModel.getName());
 		model.setActive(soapModel.getActive());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -172,12 +172,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("regionId", getRegionId());
 		attributes.put("countryId", getCountryId());
 		attributes.put("regionCode", getRegionCode());
 		attributes.put("name", getName());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -187,6 +187,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long regionId = (Long)attributes.get("regionId");
 
 		if (regionId != null) {
@@ -216,12 +222,17 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		if (active != null) {
 			setActive(active);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -330,17 +341,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		return _originalActive;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -372,12 +372,12 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	public Object clone() {
 		RegionImpl regionImpl = new RegionImpl();
 
+		regionImpl.setMvccVersion(getMvccVersion());
 		regionImpl.setRegionId(getRegionId());
 		regionImpl.setCountryId(getCountryId());
 		regionImpl.setRegionCode(getRegionCode());
 		regionImpl.setName(getName());
 		regionImpl.setActive(getActive());
-		regionImpl.setMvccVersion(getMvccVersion());
 
 		regionImpl.resetOriginalValues();
 
@@ -455,6 +455,8 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	public CacheModel<Region> toCacheModel() {
 		RegionCacheModel regionCacheModel = new RegionCacheModel();
 
+		regionCacheModel.mvccVersion = getMvccVersion();
+
 		regionCacheModel.regionId = getRegionId();
 
 		regionCacheModel.countryId = getCountryId();
@@ -477,8 +479,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 		regionCacheModel.active = getActive();
 
-		regionCacheModel.mvccVersion = getMvccVersion();
-
 		return regionCacheModel;
 	}
 
@@ -486,7 +486,9 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 
-		sb.append("{regionId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", regionId=");
 		sb.append(getRegionId());
 		sb.append(", countryId=");
 		sb.append(getCountryId());
@@ -496,8 +498,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		sb.append(getName());
 		sb.append(", active=");
 		sb.append(getActive());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -511,6 +511,10 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 		sb.append("com.liferay.portal.model.Region");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>regionId</column-name><column-value><![CDATA[");
 		sb.append(getRegionId());
@@ -531,10 +535,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -543,6 +543,7 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 
 	private static ClassLoader _classLoader = Region.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Region.class };
+	private long _mvccVersion;
 	private long _regionId;
 	private long _countryId;
 	private long _originalCountryId;
@@ -553,7 +554,6 @@ public class RegionModelImpl extends BaseModelImpl<Region>
 	private boolean _active;
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private Region _escapedModel;
 }

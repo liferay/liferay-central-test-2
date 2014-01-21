@@ -112,18 +112,20 @@ public class ResourceBlockPermissionPersistenceTest {
 
 		ResourceBlockPermission newResourceBlockPermission = _persistence.create(pk);
 
+		newResourceBlockPermission.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newResourceBlockPermission.setResourceBlockId(ServiceTestUtil.nextLong());
 
 		newResourceBlockPermission.setRoleId(ServiceTestUtil.nextLong());
 
 		newResourceBlockPermission.setActionIds(ServiceTestUtil.nextLong());
 
-		newResourceBlockPermission.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newResourceBlockPermission);
 
 		ResourceBlockPermission existingResourceBlockPermission = _persistence.findByPrimaryKey(newResourceBlockPermission.getPrimaryKey());
 
+		Assert.assertEquals(existingResourceBlockPermission.getMvccVersion(),
+			newResourceBlockPermission.getMvccVersion());
 		Assert.assertEquals(existingResourceBlockPermission.getResourceBlockPermissionId(),
 			newResourceBlockPermission.getResourceBlockPermissionId());
 		Assert.assertEquals(existingResourceBlockPermission.getResourceBlockId(),
@@ -132,8 +134,6 @@ public class ResourceBlockPermissionPersistenceTest {
 			newResourceBlockPermission.getRoleId());
 		Assert.assertEquals(existingResourceBlockPermission.getActionIds(),
 			newResourceBlockPermission.getActionIds());
-		Assert.assertEquals(existingResourceBlockPermission.getMvccVersion(),
-			newResourceBlockPermission.getMvccVersion());
 	}
 
 	@Test
@@ -173,8 +173,8 @@ public class ResourceBlockPermissionPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("ResourceBlockPermission",
-			"resourceBlockPermissionId", true, "resourceBlockId", true,
-			"roleId", true, "actionIds", true, "mvccVersion", true);
+			"mvccVersion", true, "resourceBlockPermissionId", true,
+			"resourceBlockId", true, "roleId", true, "actionIds", true);
 	}
 
 	@Test
@@ -320,13 +320,13 @@ public class ResourceBlockPermissionPersistenceTest {
 
 		ResourceBlockPermission resourceBlockPermission = _persistence.create(pk);
 
+		resourceBlockPermission.setMvccVersion(ServiceTestUtil.nextLong());
+
 		resourceBlockPermission.setResourceBlockId(ServiceTestUtil.nextLong());
 
 		resourceBlockPermission.setRoleId(ServiceTestUtil.nextLong());
 
 		resourceBlockPermission.setActionIds(ServiceTestUtil.nextLong());
-
-		resourceBlockPermission.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(resourceBlockPermission);
 

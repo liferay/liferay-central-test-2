@@ -63,6 +63,22 @@ public interface OrganizationModel extends BaseModel<Organization>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this organization.
+	 *
+	 * @return the mvcc version of this organization
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this organization.
+	 *
+	 * @param mvccVersion the mvcc version of this organization
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this organization.
 	 *
 	 * @return the uuid of this organization
@@ -340,22 +356,6 @@ public interface OrganizationModel extends BaseModel<Organization>, MVCCModel,
 	 * @param logoId the logo ID of this organization
 	 */
 	public void setLogoId(long logoId);
-
-	/**
-	 * Returns the mvcc version of this organization.
-	 *
-	 * @return the mvcc version of this organization
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this organization.
-	 *
-	 * @param mvccVersion the mvcc version of this organization
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

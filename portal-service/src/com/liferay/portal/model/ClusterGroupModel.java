@@ -59,6 +59,22 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this cluster group.
+	 *
+	 * @return the mvcc version of this cluster group
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this cluster group.
+	 *
+	 * @param mvccVersion the mvcc version of this cluster group
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the cluster group ID of this cluster group.
 	 *
 	 * @return the cluster group ID of this cluster group
@@ -122,22 +138,6 @@ public interface ClusterGroupModel extends BaseModel<ClusterGroup>, MVCCModel {
 	 * @param wholeCluster the whole cluster of this cluster group
 	 */
 	public void setWholeCluster(boolean wholeCluster);
-
-	/**
-	 * Returns the mvcc version of this cluster group.
-	 *
-	 * @return the mvcc version of this cluster group
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this cluster group.
-	 *
-	 * @param mvccVersion the mvcc version of this cluster group
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

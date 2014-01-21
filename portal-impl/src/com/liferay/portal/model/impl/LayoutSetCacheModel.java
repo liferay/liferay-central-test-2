@@ -39,7 +39,9 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	public String toString() {
 		StringBundler sb = new StringBundler(35);
 
-		sb.append("{layoutSetId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", layoutSetId=");
 		sb.append(layoutSetId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -71,8 +73,6 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		sb.append(layoutSetPrototypeUuid);
 		sb.append(", layoutSetPrototypeLinkEnabled=");
 		sb.append(layoutSetPrototypeLinkEnabled);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -82,6 +82,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	public LayoutSet toEntityModel() {
 		LayoutSetImpl layoutSetImpl = new LayoutSetImpl();
 
+		layoutSetImpl.setMvccVersion(mvccVersion);
 		layoutSetImpl.setLayoutSetId(layoutSetId);
 		layoutSetImpl.setGroupId(groupId);
 		layoutSetImpl.setCompanyId(companyId);
@@ -155,7 +156,6 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		}
 
 		layoutSetImpl.setLayoutSetPrototypeLinkEnabled(layoutSetPrototypeLinkEnabled);
-		layoutSetImpl.setMvccVersion(mvccVersion);
 
 		layoutSetImpl.resetOriginalValues();
 
@@ -167,6 +167,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+		mvccVersion = objectInput.readLong();
 		layoutSetId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -183,7 +184,6 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		settings = objectInput.readUTF();
 		layoutSetPrototypeUuid = objectInput.readUTF();
 		layoutSetPrototypeLinkEnabled = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 
 		_virtualHostname = (java.lang.String)objectInput.readObject();
 	}
@@ -191,6 +191,7 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(layoutSetId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -251,11 +252,11 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 		}
 
 		objectOutput.writeBoolean(layoutSetPrototypeLinkEnabled);
-		objectOutput.writeLong(mvccVersion);
 
 		objectOutput.writeObject(_virtualHostname);
 	}
 
+	public long mvccVersion;
 	public long layoutSetId;
 	public long groupId;
 	public long companyId;
@@ -272,6 +273,5 @@ public class LayoutSetCacheModel implements CacheModel<LayoutSet>,
 	public String settings;
 	public String layoutSetPrototypeUuid;
 	public boolean layoutSetPrototypeLinkEnabled;
-	public long mvccVersion;
 	public java.lang.String _virtualHostname;
 }

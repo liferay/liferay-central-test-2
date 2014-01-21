@@ -36,7 +36,9 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 
-		sb.append("{id=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", id=");
 		sb.append(id);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -46,8 +48,6 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		sb.append(roles);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -57,6 +57,7 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 	public Portlet toEntityModel() {
 		PortletImpl portletImpl = new PortletImpl();
 
+		portletImpl.setMvccVersion(mvccVersion);
 		portletImpl.setId(id);
 		portletImpl.setCompanyId(companyId);
 
@@ -75,7 +76,6 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		}
 
 		portletImpl.setActive(active);
-		portletImpl.setMvccVersion(mvccVersion);
 
 		portletImpl.resetOriginalValues();
 
@@ -84,17 +84,18 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		id = objectInput.readLong();
 		companyId = objectInput.readLong();
 		portletId = objectInput.readUTF();
 		roles = objectInput.readUTF();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(id);
 		objectOutput.writeLong(companyId);
 
@@ -113,13 +114,12 @@ public class PortletCacheModel implements CacheModel<Portlet>, Externalizable {
 		}
 
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long id;
 	public long companyId;
 	public String portletId;
 	public String roles;
 	public boolean active;
-	public long mvccVersion;
 }

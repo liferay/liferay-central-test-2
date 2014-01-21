@@ -114,6 +114,8 @@ public class TeamPersistenceTest {
 
 		Team newTeam = _persistence.create(pk);
 
+		newTeam.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newTeam.setCompanyId(ServiceTestUtil.nextLong());
 
 		newTeam.setUserId(ServiceTestUtil.nextLong());
@@ -130,12 +132,12 @@ public class TeamPersistenceTest {
 
 		newTeam.setDescription(ServiceTestUtil.randomString());
 
-		newTeam.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newTeam);
 
 		Team existingTeam = _persistence.findByPrimaryKey(newTeam.getPrimaryKey());
 
+		Assert.assertEquals(existingTeam.getMvccVersion(),
+			newTeam.getMvccVersion());
 		Assert.assertEquals(existingTeam.getTeamId(), newTeam.getTeamId());
 		Assert.assertEquals(existingTeam.getCompanyId(), newTeam.getCompanyId());
 		Assert.assertEquals(existingTeam.getUserId(), newTeam.getUserId());
@@ -149,8 +151,6 @@ public class TeamPersistenceTest {
 		Assert.assertEquals(existingTeam.getName(), newTeam.getName());
 		Assert.assertEquals(existingTeam.getDescription(),
 			newTeam.getDescription());
-		Assert.assertEquals(existingTeam.getMvccVersion(),
-			newTeam.getMvccVersion());
 	}
 
 	@Test
@@ -198,10 +198,10 @@ public class TeamPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Team", "teamId", true,
-			"companyId", true, "userId", true, "userName", true, "createDate",
-			true, "modifiedDate", true, "groupId", true, "name", true,
-			"description", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Team", "mvccVersion", true,
+			"teamId", true, "companyId", true, "userId", true, "userName",
+			true, "createDate", true, "modifiedDate", true, "groupId", true,
+			"name", true, "description", true);
 	}
 
 	@Test
@@ -337,6 +337,8 @@ public class TeamPersistenceTest {
 
 		Team team = _persistence.create(pk);
 
+		team.setMvccVersion(ServiceTestUtil.nextLong());
+
 		team.setCompanyId(ServiceTestUtil.nextLong());
 
 		team.setUserId(ServiceTestUtil.nextLong());
@@ -352,8 +354,6 @@ public class TeamPersistenceTest {
 		team.setName(ServiceTestUtil.randomString());
 
 		team.setDescription(ServiceTestUtil.randomString());
-
-		team.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(team);
 

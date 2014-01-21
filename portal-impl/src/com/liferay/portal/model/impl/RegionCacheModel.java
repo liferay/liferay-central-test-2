@@ -36,7 +36,9 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(13);
 
-		sb.append("{regionId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", regionId=");
 		sb.append(regionId);
 		sb.append(", countryId=");
 		sb.append(countryId);
@@ -46,8 +48,6 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		sb.append(name);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -57,6 +57,7 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 	public Region toEntityModel() {
 		RegionImpl regionImpl = new RegionImpl();
 
+		regionImpl.setMvccVersion(mvccVersion);
 		regionImpl.setRegionId(regionId);
 		regionImpl.setCountryId(countryId);
 
@@ -75,7 +76,6 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		}
 
 		regionImpl.setActive(active);
-		regionImpl.setMvccVersion(mvccVersion);
 
 		regionImpl.resetOriginalValues();
 
@@ -84,17 +84,18 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		regionId = objectInput.readLong();
 		countryId = objectInput.readLong();
 		regionCode = objectInput.readUTF();
 		name = objectInput.readUTF();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(regionId);
 		objectOutput.writeLong(countryId);
 
@@ -113,13 +114,12 @@ public class RegionCacheModel implements CacheModel<Region>, Externalizable {
 		}
 
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long regionId;
 	public long countryId;
 	public String regionCode;
 	public String name;
 	public boolean active;
-	public long mvccVersion;
 }

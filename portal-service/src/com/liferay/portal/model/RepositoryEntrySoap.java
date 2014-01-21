@@ -30,6 +30,7 @@ public class RepositoryEntrySoap implements Serializable {
 	public static RepositoryEntrySoap toSoapModel(RepositoryEntry model) {
 		RepositoryEntrySoap soapModel = new RepositoryEntrySoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setRepositoryEntryId(model.getRepositoryEntryId());
 		soapModel.setGroupId(model.getGroupId());
@@ -41,7 +42,6 @@ public class RepositoryEntrySoap implements Serializable {
 		soapModel.setRepositoryId(model.getRepositoryId());
 		soapModel.setMappedId(model.getMappedId());
 		soapModel.setManualCheckInRequired(model.getManualCheckInRequired());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -94,6 +94,14 @@ public class RepositoryEntrySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setRepositoryEntryId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -188,14 +196,7 @@ public class RepositoryEntrySoap implements Serializable {
 		_manualCheckInRequired = manualCheckInRequired;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _repositoryEntryId;
 	private long _groupId;
@@ -207,5 +208,4 @@ public class RepositoryEntrySoap implements Serializable {
 	private long _repositoryId;
 	private String _mappedId;
 	private boolean _manualCheckInRequired;
-	private long _mvccVersion;
 }

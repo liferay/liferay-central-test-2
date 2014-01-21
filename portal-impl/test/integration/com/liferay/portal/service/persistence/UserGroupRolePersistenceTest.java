@@ -115,14 +115,14 @@ public class UserGroupRolePersistenceTest {
 
 		UserGroupRole existingUserGroupRole = _persistence.findByPrimaryKey(newUserGroupRole.getPrimaryKey());
 
+		Assert.assertEquals(existingUserGroupRole.getMvccVersion(),
+			newUserGroupRole.getMvccVersion());
 		Assert.assertEquals(existingUserGroupRole.getUserId(),
 			newUserGroupRole.getUserId());
 		Assert.assertEquals(existingUserGroupRole.getGroupId(),
 			newUserGroupRole.getGroupId());
 		Assert.assertEquals(existingUserGroupRole.getRoleId(),
 			newUserGroupRole.getRoleId());
-		Assert.assertEquals(existingUserGroupRole.getMvccVersion(),
-			newUserGroupRole.getMvccVersion());
 	}
 
 	@Test

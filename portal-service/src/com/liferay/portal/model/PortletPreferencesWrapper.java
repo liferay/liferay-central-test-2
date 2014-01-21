@@ -51,19 +51,25 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("portletPreferencesId", getPortletPreferencesId());
 		attributes.put("ownerId", getOwnerId());
 		attributes.put("ownerType", getOwnerType());
 		attributes.put("plid", getPlid());
 		attributes.put("portletId", getPortletId());
 		attributes.put("preferences", getPreferences());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long portletPreferencesId = (Long)attributes.get("portletPreferencesId");
 
 		if (portletPreferencesId != null) {
@@ -99,12 +105,6 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 		if (preferences != null) {
 			setPreferences(preferences);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -125,6 +125,26 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_portletPreferences.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this portlet preferences.
+	*
+	* @return the mvcc version of this portlet preferences
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _portletPreferences.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this portlet preferences.
+	*
+	* @param mvccVersion the mvcc version of this portlet preferences
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_portletPreferences.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -245,26 +265,6 @@ public class PortletPreferencesWrapper implements PortletPreferences,
 	@Override
 	public void setPreferences(java.lang.String preferences) {
 		_portletPreferences.setPreferences(preferences);
-	}
-
-	/**
-	* Returns the mvcc version of this portlet preferences.
-	*
-	* @return the mvcc version of this portlet preferences
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _portletPreferences.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this portlet preferences.
-	*
-	* @param mvccVersion the mvcc version of this portlet preferences
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_portletPreferences.setMvccVersion(mvccVersion);
 	}
 
 	@Override

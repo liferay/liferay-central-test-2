@@ -51,19 +51,25 @@ public class PluginSettingWrapper implements PluginSetting,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("pluginSettingId", getPluginSettingId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("pluginId", getPluginId());
 		attributes.put("pluginType", getPluginType());
 		attributes.put("roles", getRoles());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long pluginSettingId = (Long)attributes.get("pluginSettingId");
 
 		if (pluginSettingId != null) {
@@ -99,12 +105,6 @@ public class PluginSettingWrapper implements PluginSetting,
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -125,6 +125,26 @@ public class PluginSettingWrapper implements PluginSetting,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_pluginSetting.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this plugin setting.
+	*
+	* @return the mvcc version of this plugin setting
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _pluginSetting.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this plugin setting.
+	*
+	* @param mvccVersion the mvcc version of this plugin setting
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_pluginSetting.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -255,26 +275,6 @@ public class PluginSettingWrapper implements PluginSetting,
 	@Override
 	public void setActive(boolean active) {
 		_pluginSetting.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this plugin setting.
-	*
-	* @return the mvcc version of this plugin setting
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _pluginSetting.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this plugin setting.
-	*
-	* @param mvccVersion the mvcc version of this plugin setting
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_pluginSetting.setMvccVersion(mvccVersion);
 	}
 
 	@Override

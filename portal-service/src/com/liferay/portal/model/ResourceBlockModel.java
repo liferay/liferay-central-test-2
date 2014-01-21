@@ -59,6 +59,22 @@ public interface ResourceBlockModel extends BaseModel<ResourceBlock>, MVCCModel 
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this resource block.
+	 *
+	 * @return the mvcc version of this resource block
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this resource block.
+	 *
+	 * @param mvccVersion the mvcc version of this resource block
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the resource block ID of this resource block.
 	 *
 	 * @return the resource block ID of this resource block
@@ -143,22 +159,6 @@ public interface ResourceBlockModel extends BaseModel<ResourceBlock>, MVCCModel 
 	 * @param referenceCount the reference count of this resource block
 	 */
 	public void setReferenceCount(long referenceCount);
-
-	/**
-	 * Returns the mvcc version of this resource block.
-	 *
-	 * @return the mvcc version of this resource block
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this resource block.
-	 *
-	 * @param mvccVersion the mvcc version of this resource block
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

@@ -36,7 +36,9 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{shardId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", shardId=");
 		sb.append(shardId);
 		sb.append(", classNameId=");
 		sb.append(classNameId);
@@ -44,8 +46,6 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		sb.append(classPK);
 		sb.append(", name=");
 		sb.append(name);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -55,6 +55,7 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 	public Shard toEntityModel() {
 		ShardImpl shardImpl = new ShardImpl();
 
+		shardImpl.setMvccVersion(mvccVersion);
 		shardImpl.setShardId(shardId);
 		shardImpl.setClassNameId(classNameId);
 		shardImpl.setClassPK(classPK);
@@ -66,8 +67,6 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 			shardImpl.setName(name);
 		}
 
-		shardImpl.setMvccVersion(mvccVersion);
-
 		shardImpl.resetOriginalValues();
 
 		return shardImpl;
@@ -75,16 +74,17 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		shardId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();
 		name = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(shardId);
 		objectOutput.writeLong(classNameId);
 		objectOutput.writeLong(classPK);
@@ -95,13 +95,11 @@ public class ShardCacheModel implements CacheModel<Shard>, Externalizable {
 		else {
 			objectOutput.writeUTF(name);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long shardId;
 	public long classNameId;
 	public long classPK;
 	public String name;
-	public long mvccVersion;
 }

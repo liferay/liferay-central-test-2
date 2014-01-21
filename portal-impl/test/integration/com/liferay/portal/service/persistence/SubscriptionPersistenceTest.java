@@ -113,6 +113,8 @@ public class SubscriptionPersistenceTest {
 
 		Subscription newSubscription = _persistence.create(pk);
 
+		newSubscription.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newSubscription.setCompanyId(ServiceTestUtil.nextLong());
 
 		newSubscription.setUserId(ServiceTestUtil.nextLong());
@@ -129,12 +131,12 @@ public class SubscriptionPersistenceTest {
 
 		newSubscription.setFrequency(ServiceTestUtil.randomString());
 
-		newSubscription.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newSubscription);
 
 		Subscription existingSubscription = _persistence.findByPrimaryKey(newSubscription.getPrimaryKey());
 
+		Assert.assertEquals(existingSubscription.getMvccVersion(),
+			newSubscription.getMvccVersion());
 		Assert.assertEquals(existingSubscription.getSubscriptionId(),
 			newSubscription.getSubscriptionId());
 		Assert.assertEquals(existingSubscription.getCompanyId(),
@@ -155,8 +157,6 @@ public class SubscriptionPersistenceTest {
 			newSubscription.getClassPK());
 		Assert.assertEquals(existingSubscription.getFrequency(),
 			newSubscription.getFrequency());
-		Assert.assertEquals(existingSubscription.getMvccVersion(),
-			newSubscription.getMvccVersion());
 	}
 
 	@Test
@@ -195,10 +195,10 @@ public class SubscriptionPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("Subscription",
-			"subscriptionId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true,
-			"classNameId", true, "classPK", true, "frequency", true,
-			"mvccVersion", true);
+			"mvccVersion", true, "subscriptionId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "classNameId", true, "classPK", true,
+			"frequency", true);
 	}
 
 	@Test
@@ -340,6 +340,8 @@ public class SubscriptionPersistenceTest {
 
 		Subscription subscription = _persistence.create(pk);
 
+		subscription.setMvccVersion(ServiceTestUtil.nextLong());
+
 		subscription.setCompanyId(ServiceTestUtil.nextLong());
 
 		subscription.setUserId(ServiceTestUtil.nextLong());
@@ -355,8 +357,6 @@ public class SubscriptionPersistenceTest {
 		subscription.setClassPK(ServiceTestUtil.nextLong());
 
 		subscription.setFrequency(ServiceTestUtil.randomString());
-
-		subscription.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(subscription);
 

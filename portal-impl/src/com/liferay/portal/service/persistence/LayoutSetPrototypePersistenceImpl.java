@@ -4151,6 +4151,7 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		layoutSetPrototypeImpl.setNew(layoutSetPrototype.isNew());
 		layoutSetPrototypeImpl.setPrimaryKey(layoutSetPrototype.getPrimaryKey());
 
+		layoutSetPrototypeImpl.setMvccVersion(layoutSetPrototype.getMvccVersion());
 		layoutSetPrototypeImpl.setUuid(layoutSetPrototype.getUuid());
 		layoutSetPrototypeImpl.setLayoutSetPrototypeId(layoutSetPrototype.getLayoutSetPrototypeId());
 		layoutSetPrototypeImpl.setCompanyId(layoutSetPrototype.getCompanyId());
@@ -4162,7 +4163,6 @@ public class LayoutSetPrototypePersistenceImpl extends BasePersistenceImpl<Layou
 		layoutSetPrototypeImpl.setDescription(layoutSetPrototype.getDescription());
 		layoutSetPrototypeImpl.setSettings(layoutSetPrototype.getSettings());
 		layoutSetPrototypeImpl.setActive(layoutSetPrototype.isActive());
-		layoutSetPrototypeImpl.setMvccVersion(layoutSetPrototype.getMvccVersion());
 
 		return layoutSetPrototypeImpl;
 	}

@@ -2342,6 +2342,7 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 		layoutBranchImpl.setNew(layoutBranch.isNew());
 		layoutBranchImpl.setPrimaryKey(layoutBranch.getPrimaryKey());
 
+		layoutBranchImpl.setMvccVersion(layoutBranch.getMvccVersion());
 		layoutBranchImpl.setLayoutBranchId(layoutBranch.getLayoutBranchId());
 		layoutBranchImpl.setGroupId(layoutBranch.getGroupId());
 		layoutBranchImpl.setCompanyId(layoutBranch.getCompanyId());
@@ -2352,7 +2353,6 @@ public class LayoutBranchPersistenceImpl extends BasePersistenceImpl<LayoutBranc
 		layoutBranchImpl.setName(layoutBranch.getName());
 		layoutBranchImpl.setDescription(layoutBranch.getDescription());
 		layoutBranchImpl.setMaster(layoutBranch.isMaster());
-		layoutBranchImpl.setMvccVersion(layoutBranch.getMvccVersion());
 
 		return layoutBranchImpl;
 	}

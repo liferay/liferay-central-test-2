@@ -39,7 +39,9 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 	public String toString() {
 		StringBundler sb = new StringBundler(43);
 
-		sb.append("{layoutSetBranchId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", layoutSetBranchId=");
 		sb.append(layoutSetBranchId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -79,8 +81,6 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		sb.append(layoutSetPrototypeUuid);
 		sb.append(", layoutSetPrototypeLinkEnabled=");
 		sb.append(layoutSetPrototypeLinkEnabled);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -90,6 +90,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 	public LayoutSetBranch toEntityModel() {
 		LayoutSetBranchImpl layoutSetBranchImpl = new LayoutSetBranchImpl();
 
+		layoutSetBranchImpl.setMvccVersion(mvccVersion);
 		layoutSetBranchImpl.setLayoutSetBranchId(layoutSetBranchId);
 		layoutSetBranchImpl.setGroupId(groupId);
 		layoutSetBranchImpl.setCompanyId(companyId);
@@ -185,7 +186,6 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		}
 
 		layoutSetBranchImpl.setLayoutSetPrototypeLinkEnabled(layoutSetPrototypeLinkEnabled);
-		layoutSetBranchImpl.setMvccVersion(mvccVersion);
 
 		layoutSetBranchImpl.resetOriginalValues();
 
@@ -194,6 +194,7 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		layoutSetBranchId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -214,12 +215,12 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		settings = objectInput.readUTF();
 		layoutSetPrototypeUuid = objectInput.readUTF();
 		layoutSetPrototypeLinkEnabled = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(layoutSetBranchId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -303,9 +304,9 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 		}
 
 		objectOutput.writeBoolean(layoutSetPrototypeLinkEnabled);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long layoutSetBranchId;
 	public long groupId;
 	public long companyId;
@@ -326,5 +327,4 @@ public class LayoutSetBranchCacheModel implements CacheModel<LayoutSetBranch>,
 	public String settings;
 	public String layoutSetPrototypeUuid;
 	public boolean layoutSetPrototypeLinkEnabled;
-	public long mvccVersion;
 }

@@ -50,18 +50,24 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("regionId", getRegionId());
 		attributes.put("countryId", getCountryId());
 		attributes.put("regionCode", getRegionCode());
 		attributes.put("name", getName());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long regionId = (Long)attributes.get("regionId");
 
 		if (regionId != null) {
@@ -91,12 +97,6 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -117,6 +117,26 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_region.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this region.
+	*
+	* @return the mvcc version of this region
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _region.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this region.
+	*
+	* @param mvccVersion the mvcc version of this region
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_region.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -227,26 +247,6 @@ public class RegionWrapper implements Region, ModelWrapper<Region> {
 	@Override
 	public void setActive(boolean active) {
 		_region.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this region.
-	*
-	* @return the mvcc version of this region
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _region.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this region.
-	*
-	* @param mvccVersion the mvcc version of this region
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_region.setMvccVersion(mvccVersion);
 	}
 
 	@Override

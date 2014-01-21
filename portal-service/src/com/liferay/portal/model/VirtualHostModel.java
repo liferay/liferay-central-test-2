@@ -59,6 +59,22 @@ public interface VirtualHostModel extends BaseModel<VirtualHost>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this virtual host.
+	 *
+	 * @return the mvcc version of this virtual host
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this virtual host.
+	 *
+	 * @param mvccVersion the mvcc version of this virtual host
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the virtual host ID of this virtual host.
 	 *
 	 * @return the virtual host ID of this virtual host
@@ -114,22 +130,6 @@ public interface VirtualHostModel extends BaseModel<VirtualHost>, MVCCModel {
 	 * @param hostname the hostname of this virtual host
 	 */
 	public void setHostname(String hostname);
-
-	/**
-	 * Returns the mvcc version of this virtual host.
-	 *
-	 * @return the mvcc version of this virtual host
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this virtual host.
-	 *
-	 * @param mvccVersion the mvcc version of this virtual host
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

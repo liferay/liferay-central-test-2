@@ -112,18 +112,20 @@ public class PortalPreferencesPersistenceTest {
 
 		PortalPreferences newPortalPreferences = _persistence.create(pk);
 
+		newPortalPreferences.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPortalPreferences.setOwnerId(ServiceTestUtil.nextLong());
 
 		newPortalPreferences.setOwnerType(ServiceTestUtil.nextInt());
 
 		newPortalPreferences.setPreferences(ServiceTestUtil.randomString());
 
-		newPortalPreferences.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPortalPreferences);
 
 		PortalPreferences existingPortalPreferences = _persistence.findByPrimaryKey(newPortalPreferences.getPrimaryKey());
 
+		Assert.assertEquals(existingPortalPreferences.getMvccVersion(),
+			newPortalPreferences.getMvccVersion());
 		Assert.assertEquals(existingPortalPreferences.getPortalPreferencesId(),
 			newPortalPreferences.getPortalPreferencesId());
 		Assert.assertEquals(existingPortalPreferences.getOwnerId(),
@@ -132,8 +134,6 @@ public class PortalPreferencesPersistenceTest {
 			newPortalPreferences.getOwnerType());
 		Assert.assertEquals(existingPortalPreferences.getPreferences(),
 			newPortalPreferences.getPreferences());
-		Assert.assertEquals(existingPortalPreferences.getMvccVersion(),
-			newPortalPreferences.getMvccVersion());
 	}
 
 	@Test
@@ -172,8 +172,8 @@ public class PortalPreferencesPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("PortalPreferences",
-			"portalPreferencesId", true, "ownerId", true, "ownerType", true,
-			"preferences", true, "mvccVersion", true);
+			"mvccVersion", true, "portalPreferencesId", true, "ownerId", true,
+			"ownerType", true, "preferences", true);
 	}
 
 	@Test
@@ -312,13 +312,13 @@ public class PortalPreferencesPersistenceTest {
 
 		PortalPreferences portalPreferences = _persistence.create(pk);
 
+		portalPreferences.setMvccVersion(ServiceTestUtil.nextLong());
+
 		portalPreferences.setOwnerId(ServiceTestUtil.nextLong());
 
 		portalPreferences.setOwnerType(ServiceTestUtil.nextInt());
 
 		portalPreferences.setPreferences(ServiceTestUtil.randomString());
-
-		portalPreferences.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(portalPreferences);
 

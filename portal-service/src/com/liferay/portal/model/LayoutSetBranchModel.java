@@ -63,6 +63,22 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout set branch.
+	 *
+	 * @return the mvcc version of this layout set branch
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout set branch.
+	 *
+	 * @param mvccVersion the mvcc version of this layout set branch
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the layout set branch ID of this layout set branch.
 	 *
 	 * @return the layout set branch ID of this layout set branch
@@ -402,22 +418,6 @@ public interface LayoutSetBranchModel extends BaseModel<LayoutSetBranch>,
 	 */
 	public void setLayoutSetPrototypeLinkEnabled(
 		boolean layoutSetPrototypeLinkEnabled);
-
-	/**
-	 * Returns the mvcc version of this layout set branch.
-	 *
-	 * @return the mvcc version of this layout set branch
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout set branch.
-	 *
-	 * @param mvccVersion the mvcc version of this layout set branch
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

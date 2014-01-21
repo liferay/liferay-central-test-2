@@ -114,6 +114,8 @@ public class ReleasePersistenceTest {
 
 		Release newRelease = _persistence.create(pk);
 
+		newRelease.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newRelease.setCreateDate(ServiceTestUtil.nextDate());
 
 		newRelease.setModifiedDate(ServiceTestUtil.nextDate());
@@ -130,12 +132,12 @@ public class ReleasePersistenceTest {
 
 		newRelease.setTestString(ServiceTestUtil.randomString());
 
-		newRelease.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newRelease);
 
 		Release existingRelease = _persistence.findByPrimaryKey(newRelease.getPrimaryKey());
 
+		Assert.assertEquals(existingRelease.getMvccVersion(),
+			newRelease.getMvccVersion());
 		Assert.assertEquals(existingRelease.getReleaseId(),
 			newRelease.getReleaseId());
 		Assert.assertEquals(Time.getShortTimestamp(
@@ -156,8 +158,6 @@ public class ReleasePersistenceTest {
 		Assert.assertEquals(existingRelease.getState(), newRelease.getState());
 		Assert.assertEquals(existingRelease.getTestString(),
 			newRelease.getTestString());
-		Assert.assertEquals(existingRelease.getMvccVersion(),
-			newRelease.getMvccVersion());
 	}
 
 	@Test
@@ -194,11 +194,10 @@ public class ReleasePersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Release_", "releaseId",
-			true, "createDate", true, "modifiedDate", true,
+		return OrderByComparatorFactoryUtil.create("Release_", "mvccVersion",
+			true, "releaseId", true, "createDate", true, "modifiedDate", true,
 			"servletContextName", true, "buildNumber", true, "buildDate", true,
-			"verified", true, "state", true, "testString", true, "mvccVersion",
-			true);
+			"verified", true, "state", true, "testString", true);
 	}
 
 	@Test
@@ -333,6 +332,8 @@ public class ReleasePersistenceTest {
 
 		Release release = _persistence.create(pk);
 
+		release.setMvccVersion(ServiceTestUtil.nextLong());
+
 		release.setCreateDate(ServiceTestUtil.nextDate());
 
 		release.setModifiedDate(ServiceTestUtil.nextDate());
@@ -348,8 +349,6 @@ public class ReleasePersistenceTest {
 		release.setState(ServiceTestUtil.nextInt());
 
 		release.setTestString(ServiceTestUtil.randomString());
-
-		release.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(release);
 

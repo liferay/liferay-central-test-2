@@ -108,22 +108,22 @@ public class ListTypePersistenceTest {
 
 		ListType newListType = _persistence.create(pk);
 
+		newListType.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newListType.setName(ServiceTestUtil.randomString());
 
 		newListType.setType(ServiceTestUtil.randomString());
-
-		newListType.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(newListType);
 
 		ListType existingListType = _persistence.findByPrimaryKey(newListType.getPrimaryKey());
 
+		Assert.assertEquals(existingListType.getMvccVersion(),
+			newListType.getMvccVersion());
 		Assert.assertEquals(existingListType.getListTypeId(),
 			newListType.getListTypeId());
 		Assert.assertEquals(existingListType.getName(), newListType.getName());
 		Assert.assertEquals(existingListType.getType(), newListType.getType());
-		Assert.assertEquals(existingListType.getMvccVersion(),
-			newListType.getMvccVersion());
 	}
 
 	@Test
@@ -160,8 +160,8 @@ public class ListTypePersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("ListType", "listTypeId",
-			true, "name", true, "type", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("ListType", "mvccVersion",
+			true, "listTypeId", true, "name", true, "type", true);
 	}
 
 	@Test
@@ -259,11 +259,11 @@ public class ListTypePersistenceTest {
 
 		ListType listType = _persistence.create(pk);
 
+		listType.setMvccVersion(ServiceTestUtil.nextLong());
+
 		listType.setName(ServiceTestUtil.randomString());
 
 		listType.setType(ServiceTestUtil.randomString());
-
-		listType.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(listType);
 

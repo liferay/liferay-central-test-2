@@ -38,7 +38,9 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
-		sb.append("{teamId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", teamId=");
 		sb.append(teamId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -56,8 +58,6 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		sb.append(name);
 		sb.append(", description=");
 		sb.append(description);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -67,6 +67,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 	public Team toEntityModel() {
 		TeamImpl teamImpl = new TeamImpl();
 
+		teamImpl.setMvccVersion(mvccVersion);
 		teamImpl.setTeamId(teamId);
 		teamImpl.setCompanyId(companyId);
 		teamImpl.setUserId(userId);
@@ -108,8 +109,6 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 			teamImpl.setDescription(description);
 		}
 
-		teamImpl.setMvccVersion(mvccVersion);
-
 		teamImpl.resetOriginalValues();
 
 		return teamImpl;
@@ -117,6 +116,7 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		teamId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		userId = objectInput.readLong();
@@ -126,12 +126,12 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		groupId = objectInput.readLong();
 		name = objectInput.readUTF();
 		description = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(teamId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(userId);
@@ -160,10 +160,9 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 		else {
 			objectOutput.writeUTF(description);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long teamId;
 	public long companyId;
 	public long userId;
@@ -173,5 +172,4 @@ public class TeamCacheModel implements CacheModel<Team>, Externalizable {
 	public long groupId;
 	public String name;
 	public String description;
-	public long mvccVersion;
 }

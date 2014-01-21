@@ -59,6 +59,22 @@ public interface RegionModel extends BaseModel<Region>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this region.
+	 *
+	 * @return the mvcc version of this region
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this region.
+	 *
+	 * @param mvccVersion the mvcc version of this region
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the region ID of this region.
 	 *
 	 * @return the region ID of this region
@@ -136,22 +152,6 @@ public interface RegionModel extends BaseModel<Region>, MVCCModel {
 	 * @param active the active of this region
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the mvcc version of this region.
-	 *
-	 * @return the mvcc version of this region
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this region.
-	 *
-	 * @param mvccVersion the mvcc version of this region
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

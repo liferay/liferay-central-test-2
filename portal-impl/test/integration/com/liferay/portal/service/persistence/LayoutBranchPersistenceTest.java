@@ -113,6 +113,8 @@ public class LayoutBranchPersistenceTest {
 
 		LayoutBranch newLayoutBranch = _persistence.create(pk);
 
+		newLayoutBranch.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newLayoutBranch.setGroupId(ServiceTestUtil.nextLong());
 
 		newLayoutBranch.setCompanyId(ServiceTestUtil.nextLong());
@@ -131,12 +133,12 @@ public class LayoutBranchPersistenceTest {
 
 		newLayoutBranch.setMaster(ServiceTestUtil.randomBoolean());
 
-		newLayoutBranch.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newLayoutBranch);
 
 		LayoutBranch existingLayoutBranch = _persistence.findByPrimaryKey(newLayoutBranch.getPrimaryKey());
 
+		Assert.assertEquals(existingLayoutBranch.getMvccVersion(),
+			newLayoutBranch.getMvccVersion());
 		Assert.assertEquals(existingLayoutBranch.getLayoutBranchId(),
 			newLayoutBranch.getLayoutBranchId());
 		Assert.assertEquals(existingLayoutBranch.getGroupId(),
@@ -157,8 +159,6 @@ public class LayoutBranchPersistenceTest {
 			newLayoutBranch.getDescription());
 		Assert.assertEquals(existingLayoutBranch.getMaster(),
 			newLayoutBranch.getMaster());
-		Assert.assertEquals(existingLayoutBranch.getMvccVersion(),
-			newLayoutBranch.getMvccVersion());
 	}
 
 	@Test
@@ -197,10 +197,10 @@ public class LayoutBranchPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("LayoutBranch",
-			"LayoutBranchId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "layoutSetBranchId", true,
-			"plid", true, "name", true, "description", true, "master", true,
-			"mvccVersion", true);
+			"mvccVersion", true, "LayoutBranchId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true,
+			"layoutSetBranchId", true, "plid", true, "name", true,
+			"description", true, "master", true);
 	}
 
 	@Test
@@ -341,6 +341,8 @@ public class LayoutBranchPersistenceTest {
 
 		LayoutBranch layoutBranch = _persistence.create(pk);
 
+		layoutBranch.setMvccVersion(ServiceTestUtil.nextLong());
+
 		layoutBranch.setGroupId(ServiceTestUtil.nextLong());
 
 		layoutBranch.setCompanyId(ServiceTestUtil.nextLong());
@@ -358,8 +360,6 @@ public class LayoutBranchPersistenceTest {
 		layoutBranch.setDescription(ServiceTestUtil.randomString());
 
 		layoutBranch.setMaster(ServiceTestUtil.randomBoolean());
-
-		layoutBranch.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(layoutBranch);
 

@@ -61,6 +61,22 @@ public interface LayoutSetModel extends BaseModel<LayoutSet>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout set.
+	 *
+	 * @return the mvcc version of this layout set
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout set.
+	 *
+	 * @param mvccVersion the mvcc version of this layout set
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the layout set ID of this layout set.
 	 *
 	 * @return the layout set ID of this layout set
@@ -305,22 +321,6 @@ public interface LayoutSetModel extends BaseModel<LayoutSet>, MVCCModel {
 	 */
 	public void setLayoutSetPrototypeLinkEnabled(
 		boolean layoutSetPrototypeLinkEnabled);
-
-	/**
-	 * Returns the mvcc version of this layout set.
-	 *
-	 * @return the mvcc version of this layout set
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout set.
-	 *
-	 * @param mvccVersion the mvcc version of this layout set
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

@@ -52,6 +52,7 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("userGroupId", getUserGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -63,13 +64,18 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 		attributes.put("name", getName());
 		attributes.put("description", getDescription());
 		attributes.put("addedByLDAPImport", getAddedByLDAPImport());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -135,12 +141,6 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 		if (addedByLDAPImport != null) {
 			setAddedByLDAPImport(addedByLDAPImport);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -161,6 +161,26 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_userGroup.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this user group.
+	*
+	* @return the mvcc version of this user group
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _userGroup.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this user group.
+	*
+	* @param mvccVersion the mvcc version of this user group
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_userGroup.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -413,26 +433,6 @@ public class UserGroupWrapper implements UserGroup, ModelWrapper<UserGroup> {
 	@Override
 	public void setAddedByLDAPImport(boolean addedByLDAPImport) {
 		_userGroup.setAddedByLDAPImport(addedByLDAPImport);
-	}
-
-	/**
-	* Returns the mvcc version of this user group.
-	*
-	* @return the mvcc version of this user group
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _userGroup.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this user group.
-	*
-	* @param mvccVersion the mvcc version of this user group
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_userGroup.setMvccVersion(mvccVersion);
 	}
 
 	@Override

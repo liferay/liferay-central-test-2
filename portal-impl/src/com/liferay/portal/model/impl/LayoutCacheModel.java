@@ -38,7 +38,9 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(63);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", plid=");
 		sb.append(plid);
@@ -98,8 +100,6 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 		sb.append(layoutPrototypeLinkEnabled);
 		sb.append(", sourcePrototypeLayoutUuid=");
 		sb.append(sourcePrototypeLayoutUuid);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -108,6 +108,8 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 	@Override
 	public Layout toEntityModel() {
 		LayoutImpl layoutImpl = new LayoutImpl();
+
+		layoutImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			layoutImpl.setUuid(StringPool.BLANK);
@@ -259,8 +261,6 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 			layoutImpl.setSourcePrototypeLayoutUuid(sourcePrototypeLayoutUuid);
 		}
 
-		layoutImpl.setMvccVersion(mvccVersion);
-
 		layoutImpl.resetOriginalValues();
 
 		return layoutImpl;
@@ -268,6 +268,7 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		plid = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -298,12 +299,13 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 		layoutPrototypeUuid = objectInput.readUTF();
 		layoutPrototypeLinkEnabled = objectInput.readBoolean();
 		sourcePrototypeLayoutUuid = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -441,10 +443,9 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 		else {
 			objectOutput.writeUTF(sourcePrototypeLayoutUuid);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long plid;
 	public long groupId;
@@ -475,5 +476,4 @@ public class LayoutCacheModel implements CacheModel<Layout>, Externalizable {
 	public String layoutPrototypeUuid;
 	public boolean layoutPrototypeLinkEnabled;
 	public String sourcePrototypeLayoutUuid;
-	public long mvccVersion;
 }

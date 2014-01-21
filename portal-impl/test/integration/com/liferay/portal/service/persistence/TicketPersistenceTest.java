@@ -114,6 +114,8 @@ public class TicketPersistenceTest {
 
 		Ticket newTicket = _persistence.create(pk);
 
+		newTicket.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newTicket.setCompanyId(ServiceTestUtil.nextLong());
 
 		newTicket.setCreateDate(ServiceTestUtil.nextDate());
@@ -130,12 +132,12 @@ public class TicketPersistenceTest {
 
 		newTicket.setExpirationDate(ServiceTestUtil.nextDate());
 
-		newTicket.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newTicket);
 
 		Ticket existingTicket = _persistence.findByPrimaryKey(newTicket.getPrimaryKey());
 
+		Assert.assertEquals(existingTicket.getMvccVersion(),
+			newTicket.getMvccVersion());
 		Assert.assertEquals(existingTicket.getTicketId(),
 			newTicket.getTicketId());
 		Assert.assertEquals(existingTicket.getCompanyId(),
@@ -153,8 +155,6 @@ public class TicketPersistenceTest {
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingTicket.getExpirationDate()),
 			Time.getShortTimestamp(newTicket.getExpirationDate()));
-		Assert.assertEquals(existingTicket.getMvccVersion(),
-			newTicket.getMvccVersion());
 	}
 
 	@Test
@@ -191,10 +191,10 @@ public class TicketPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Ticket", "ticketId", true,
-			"companyId", true, "createDate", true, "classNameId", true,
-			"classPK", true, "key", true, "type", true, "extraInfo", true,
-			"expirationDate", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Ticket", "mvccVersion",
+			true, "ticketId", true, "companyId", true, "createDate", true,
+			"classNameId", true, "classPK", true, "key", true, "type", true,
+			"extraInfo", true, "expirationDate", true);
 	}
 
 	@Test
@@ -328,6 +328,8 @@ public class TicketPersistenceTest {
 
 		Ticket ticket = _persistence.create(pk);
 
+		ticket.setMvccVersion(ServiceTestUtil.nextLong());
+
 		ticket.setCompanyId(ServiceTestUtil.nextLong());
 
 		ticket.setCreateDate(ServiceTestUtil.nextDate());
@@ -343,8 +345,6 @@ public class TicketPersistenceTest {
 		ticket.setExtraInfo(ServiceTestUtil.randomString());
 
 		ticket.setExpirationDate(ServiceTestUtil.nextDate());
-
-		ticket.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(ticket);
 

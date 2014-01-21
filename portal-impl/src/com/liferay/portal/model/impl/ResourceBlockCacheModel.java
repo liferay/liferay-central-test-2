@@ -37,7 +37,9 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 
-		sb.append("{resourceBlockId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", resourceBlockId=");
 		sb.append(resourceBlockId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -49,8 +51,6 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		sb.append(permissionsHash);
 		sb.append(", referenceCount=");
 		sb.append(referenceCount);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,6 +60,7 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 	public ResourceBlock toEntityModel() {
 		ResourceBlockImpl resourceBlockImpl = new ResourceBlockImpl();
 
+		resourceBlockImpl.setMvccVersion(mvccVersion);
 		resourceBlockImpl.setResourceBlockId(resourceBlockId);
 		resourceBlockImpl.setCompanyId(companyId);
 		resourceBlockImpl.setGroupId(groupId);
@@ -79,7 +80,6 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		}
 
 		resourceBlockImpl.setReferenceCount(referenceCount);
-		resourceBlockImpl.setMvccVersion(mvccVersion);
 
 		resourceBlockImpl.resetOriginalValues();
 
@@ -88,18 +88,19 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		resourceBlockId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		name = objectInput.readUTF();
 		permissionsHash = objectInput.readUTF();
 		referenceCount = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(resourceBlockId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(groupId);
@@ -119,14 +120,13 @@ public class ResourceBlockCacheModel implements CacheModel<ResourceBlock>,
 		}
 
 		objectOutput.writeLong(referenceCount);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long resourceBlockId;
 	public long companyId;
 	public long groupId;
 	public String name;
 	public String permissionsHash;
 	public long referenceCount;
-	public long mvccVersion;
 }

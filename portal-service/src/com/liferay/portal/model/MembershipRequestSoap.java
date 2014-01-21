@@ -31,6 +31,7 @@ public class MembershipRequestSoap implements Serializable {
 	public static MembershipRequestSoap toSoapModel(MembershipRequest model) {
 		MembershipRequestSoap soapModel = new MembershipRequestSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setMembershipRequestId(model.getMembershipRequestId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -41,7 +42,6 @@ public class MembershipRequestSoap implements Serializable {
 		soapModel.setReplyDate(model.getReplyDate());
 		soapModel.setReplierUserId(model.getReplierUserId());
 		soapModel.setStatusId(model.getStatusId());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -95,6 +95,14 @@ public class MembershipRequestSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setMembershipRequestId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public long getMembershipRequestId() {
@@ -177,14 +185,7 @@ public class MembershipRequestSoap implements Serializable {
 		_statusId = statusId;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _membershipRequestId;
 	private long _groupId;
 	private long _companyId;
@@ -195,5 +196,4 @@ public class MembershipRequestSoap implements Serializable {
 	private Date _replyDate;
 	private long _replierUserId;
 	private int _statusId;
-	private long _mvccVersion;
 }

@@ -37,7 +37,9 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{clusterGroupId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", clusterGroupId=");
 		sb.append(clusterGroupId);
 		sb.append(", name=");
 		sb.append(name);
@@ -45,8 +47,6 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		sb.append(clusterNodeIds);
 		sb.append(", wholeCluster=");
 		sb.append(wholeCluster);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -56,6 +56,7 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 	public ClusterGroup toEntityModel() {
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
+		clusterGroupImpl.setMvccVersion(mvccVersion);
 		clusterGroupImpl.setClusterGroupId(clusterGroupId);
 
 		if (name == null) {
@@ -73,7 +74,6 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		}
 
 		clusterGroupImpl.setWholeCluster(wholeCluster);
-		clusterGroupImpl.setMvccVersion(mvccVersion);
 
 		clusterGroupImpl.resetOriginalValues();
 
@@ -82,16 +82,17 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		clusterGroupId = objectInput.readLong();
 		name = objectInput.readUTF();
 		clusterNodeIds = objectInput.readUTF();
 		wholeCluster = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(clusterGroupId);
 
 		if (name == null) {
@@ -109,12 +110,11 @@ public class ClusterGroupCacheModel implements CacheModel<ClusterGroup>,
 		}
 
 		objectOutput.writeBoolean(wholeCluster);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long clusterGroupId;
 	public String name;
 	public String clusterNodeIds;
 	public boolean wholeCluster;
-	public long mvccVersion;
 }

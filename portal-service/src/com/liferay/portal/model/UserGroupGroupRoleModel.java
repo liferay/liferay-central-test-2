@@ -60,6 +60,22 @@ public interface UserGroupGroupRoleModel extends BaseModel<UserGroupGroupRole>,
 	public void setPrimaryKey(UserGroupGroupRolePK primaryKey);
 
 	/**
+	 * Returns the mvcc version of this user group group role.
+	 *
+	 * @return the mvcc version of this user group group role
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this user group group role.
+	 *
+	 * @param mvccVersion the mvcc version of this user group group role
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the user group ID of this user group group role.
 	 *
 	 * @return the user group ID of this user group group role
@@ -100,22 +116,6 @@ public interface UserGroupGroupRoleModel extends BaseModel<UserGroupGroupRole>,
 	 * @param roleId the role ID of this user group group role
 	 */
 	public void setRoleId(long roleId);
-
-	/**
-	 * Returns the mvcc version of this user group group role.
-	 *
-	 * @return the mvcc version of this user group group role
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this user group group role.
-	 *
-	 * @param mvccVersion the mvcc version of this user group group role
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

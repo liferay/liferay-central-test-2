@@ -39,7 +39,9 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{passwordTrackerId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", passwordTrackerId=");
 		sb.append(passwordTrackerId);
 		sb.append(", userId=");
 		sb.append(userId);
@@ -47,8 +49,6 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		sb.append(createDate);
 		sb.append(", password=");
 		sb.append(password);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -58,6 +58,7 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 	public PasswordTracker toEntityModel() {
 		PasswordTrackerImpl passwordTrackerImpl = new PasswordTrackerImpl();
 
+		passwordTrackerImpl.setMvccVersion(mvccVersion);
 		passwordTrackerImpl.setPasswordTrackerId(passwordTrackerId);
 		passwordTrackerImpl.setUserId(userId);
 
@@ -75,8 +76,6 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 			passwordTrackerImpl.setPassword(password);
 		}
 
-		passwordTrackerImpl.setMvccVersion(mvccVersion);
-
 		passwordTrackerImpl.resetOriginalValues();
 
 		return passwordTrackerImpl;
@@ -84,16 +83,17 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		passwordTrackerId = objectInput.readLong();
 		userId = objectInput.readLong();
 		createDate = objectInput.readLong();
 		password = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(passwordTrackerId);
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(createDate);
@@ -104,13 +104,11 @@ public class PasswordTrackerCacheModel implements CacheModel<PasswordTracker>,
 		else {
 			objectOutput.writeUTF(password);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long passwordTrackerId;
 	public long userId;
 	public long createDate;
 	public String password;
-	public long mvccVersion;
 }

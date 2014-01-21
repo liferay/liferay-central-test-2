@@ -113,6 +113,8 @@ public class ServiceComponentPersistenceTest {
 
 		ServiceComponent newServiceComponent = _persistence.create(pk);
 
+		newServiceComponent.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newServiceComponent.setBuildNamespace(ServiceTestUtil.randomString());
 
 		newServiceComponent.setBuildNumber(ServiceTestUtil.nextLong());
@@ -121,12 +123,12 @@ public class ServiceComponentPersistenceTest {
 
 		newServiceComponent.setData(ServiceTestUtil.randomString());
 
-		newServiceComponent.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newServiceComponent);
 
 		ServiceComponent existingServiceComponent = _persistence.findByPrimaryKey(newServiceComponent.getPrimaryKey());
 
+		Assert.assertEquals(existingServiceComponent.getMvccVersion(),
+			newServiceComponent.getMvccVersion());
 		Assert.assertEquals(existingServiceComponent.getServiceComponentId(),
 			newServiceComponent.getServiceComponentId());
 		Assert.assertEquals(existingServiceComponent.getBuildNamespace(),
@@ -137,8 +139,6 @@ public class ServiceComponentPersistenceTest {
 			newServiceComponent.getBuildDate());
 		Assert.assertEquals(existingServiceComponent.getData(),
 			newServiceComponent.getData());
-		Assert.assertEquals(existingServiceComponent.getMvccVersion(),
-			newServiceComponent.getMvccVersion());
 	}
 
 	@Test
@@ -177,8 +177,8 @@ public class ServiceComponentPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("ServiceComponent",
-			"serviceComponentId", true, "buildNamespace", true, "buildNumber",
-			true, "buildDate", true, "data", true, "mvccVersion", true);
+			"mvccVersion", true, "serviceComponentId", true, "buildNamespace",
+			true, "buildNumber", true, "buildDate", true, "data", true);
 	}
 
 	@Test
@@ -317,6 +317,8 @@ public class ServiceComponentPersistenceTest {
 
 		ServiceComponent serviceComponent = _persistence.create(pk);
 
+		serviceComponent.setMvccVersion(ServiceTestUtil.nextLong());
+
 		serviceComponent.setBuildNamespace(ServiceTestUtil.randomString());
 
 		serviceComponent.setBuildNumber(ServiceTestUtil.nextLong());
@@ -324,8 +326,6 @@ public class ServiceComponentPersistenceTest {
 		serviceComponent.setBuildDate(ServiceTestUtil.nextLong());
 
 		serviceComponent.setData(ServiceTestUtil.randomString());
-
-		serviceComponent.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(serviceComponent);
 

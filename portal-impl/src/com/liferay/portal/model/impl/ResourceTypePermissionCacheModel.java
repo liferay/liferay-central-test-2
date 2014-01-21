@@ -37,7 +37,9 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 
-		sb.append("{resourceTypePermissionId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", resourceTypePermissionId=");
 		sb.append(resourceTypePermissionId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -49,8 +51,6 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 		sb.append(roleId);
 		sb.append(", actionIds=");
 		sb.append(actionIds);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,6 +60,7 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 	public ResourceTypePermission toEntityModel() {
 		ResourceTypePermissionImpl resourceTypePermissionImpl = new ResourceTypePermissionImpl();
 
+		resourceTypePermissionImpl.setMvccVersion(mvccVersion);
 		resourceTypePermissionImpl.setResourceTypePermissionId(resourceTypePermissionId);
 		resourceTypePermissionImpl.setCompanyId(companyId);
 		resourceTypePermissionImpl.setGroupId(groupId);
@@ -73,7 +74,6 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 
 		resourceTypePermissionImpl.setRoleId(roleId);
 		resourceTypePermissionImpl.setActionIds(actionIds);
-		resourceTypePermissionImpl.setMvccVersion(mvccVersion);
 
 		resourceTypePermissionImpl.resetOriginalValues();
 
@@ -82,18 +82,19 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		resourceTypePermissionId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		name = objectInput.readUTF();
 		roleId = objectInput.readLong();
 		actionIds = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(resourceTypePermissionId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(groupId);
@@ -107,14 +108,13 @@ public class ResourceTypePermissionCacheModel implements CacheModel<ResourceType
 
 		objectOutput.writeLong(roleId);
 		objectOutput.writeLong(actionIds);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long resourceTypePermissionId;
 	public long companyId;
 	public long groupId;
 	public String name;
 	public long roleId;
 	public long actionIds;
-	public long mvccVersion;
 }

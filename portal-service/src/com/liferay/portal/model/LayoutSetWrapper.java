@@ -51,6 +51,7 @@ public class LayoutSetWrapper implements LayoutSet, ModelWrapper<LayoutSet> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("layoutSetId", getLayoutSetId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -68,13 +69,18 @@ public class LayoutSetWrapper implements LayoutSet, ModelWrapper<LayoutSet> {
 		attributes.put("layoutSetPrototypeUuid", getLayoutSetPrototypeUuid());
 		attributes.put("layoutSetPrototypeLinkEnabled",
 			getLayoutSetPrototypeLinkEnabled());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long layoutSetId = (Long)attributes.get("layoutSetId");
 
 		if (layoutSetId != null) {
@@ -172,12 +178,6 @@ public class LayoutSetWrapper implements LayoutSet, ModelWrapper<LayoutSet> {
 		if (layoutSetPrototypeLinkEnabled != null) {
 			setLayoutSetPrototypeLinkEnabled(layoutSetPrototypeLinkEnabled);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -198,6 +198,26 @@ public class LayoutSetWrapper implements LayoutSet, ModelWrapper<LayoutSet> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_layoutSet.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this layout set.
+	*
+	* @return the mvcc version of this layout set
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _layoutSet.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this layout set.
+	*
+	* @param mvccVersion the mvcc version of this layout set
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_layoutSet.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -540,26 +560,6 @@ public class LayoutSetWrapper implements LayoutSet, ModelWrapper<LayoutSet> {
 	public void setLayoutSetPrototypeLinkEnabled(
 		boolean layoutSetPrototypeLinkEnabled) {
 		_layoutSet.setLayoutSetPrototypeLinkEnabled(layoutSetPrototypeLinkEnabled);
-	}
-
-	/**
-	* Returns the mvcc version of this layout set.
-	*
-	* @return the mvcc version of this layout set
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _layoutSet.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this layout set.
-	*
-	* @param mvccVersion the mvcc version of this layout set
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_layoutSet.setMvccVersion(mvccVersion);
 	}
 
 	@Override

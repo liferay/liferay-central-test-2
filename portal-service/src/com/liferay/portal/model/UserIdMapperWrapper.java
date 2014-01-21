@@ -51,18 +51,24 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("userIdMapperId", getUserIdMapperId());
 		attributes.put("userId", getUserId());
 		attributes.put("type", getType());
 		attributes.put("description", getDescription());
 		attributes.put("externalUserId", getExternalUserId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long userIdMapperId = (Long)attributes.get("userIdMapperId");
 
 		if (userIdMapperId != null) {
@@ -92,12 +98,6 @@ public class UserIdMapperWrapper implements UserIdMapper,
 		if (externalUserId != null) {
 			setExternalUserId(externalUserId);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -118,6 +118,26 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_userIdMapper.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this user ID mapper.
+	*
+	* @return the mvcc version of this user ID mapper
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _userIdMapper.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this user ID mapper.
+	*
+	* @param mvccVersion the mvcc version of this user ID mapper
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_userIdMapper.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -240,26 +260,6 @@ public class UserIdMapperWrapper implements UserIdMapper,
 	@Override
 	public void setExternalUserId(java.lang.String externalUserId) {
 		_userIdMapper.setExternalUserId(externalUserId);
-	}
-
-	/**
-	* Returns the mvcc version of this user ID mapper.
-	*
-	* @return the mvcc version of this user ID mapper
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _userIdMapper.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this user ID mapper.
-	*
-	* @param mvccVersion the mvcc version of this user ID mapper
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_userIdMapper.setMvccVersion(mvccVersion);
 	}
 
 	@Override

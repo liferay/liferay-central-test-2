@@ -63,6 +63,22 @@ public interface UserGroupModel extends BaseModel<UserGroup>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this user group.
+	 *
+	 * @return the mvcc version of this user group
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this user group.
+	 *
+	 * @param mvccVersion the mvcc version of this user group
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this user group.
 	 *
 	 * @return the uuid of this user group
@@ -255,22 +271,6 @@ public interface UserGroupModel extends BaseModel<UserGroup>, MVCCModel,
 	 * @param addedByLDAPImport the added by l d a p import of this user group
 	 */
 	public void setAddedByLDAPImport(boolean addedByLDAPImport);
-
-	/**
-	 * Returns the mvcc version of this user group.
-	 *
-	 * @return the mvcc version of this user group
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this user group.
-	 *
-	 * @param mvccVersion the mvcc version of this user group
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

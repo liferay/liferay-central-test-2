@@ -59,16 +59,16 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	 */
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "webDavPropsId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "createDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "classNameId", Types.BIGINT },
 			{ "classPK", Types.BIGINT },
-			{ "props", Types.CLOB },
-			{ "mvccVersion", Types.BIGINT }
+			{ "props", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WebDAVProps (webDavPropsId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,props TEXT null,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table WebDAVProps (mvccVersion LONG default 0,webDavPropsId LONG not null primary key,companyId LONG,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,props TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table WebDAVProps";
 	public static final String ORDER_BY_JPQL = " ORDER BY webDAVProps.webDavPropsId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY WebDAVProps.webDavPropsId ASC";
@@ -127,6 +127,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("webDavPropsId", getWebDavPropsId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("createDate", getCreateDate());
@@ -134,7 +135,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		attributes.put("classNameId", getClassNameId());
 		attributes.put("classPK", getClassPK());
 		attributes.put("props", getProps());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -144,6 +144,12 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long webDavPropsId = (Long)attributes.get("webDavPropsId");
 
 		if (webDavPropsId != null) {
@@ -185,12 +191,16 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		if (props != null) {
 			setProps(props);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -312,16 +322,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		_props = props;
 	}
 
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -353,6 +353,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public Object clone() {
 		WebDAVPropsImpl webDAVPropsImpl = new WebDAVPropsImpl();
 
+		webDAVPropsImpl.setMvccVersion(getMvccVersion());
 		webDAVPropsImpl.setWebDavPropsId(getWebDavPropsId());
 		webDAVPropsImpl.setCompanyId(getCompanyId());
 		webDAVPropsImpl.setCreateDate(getCreateDate());
@@ -360,7 +361,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		webDAVPropsImpl.setClassNameId(getClassNameId());
 		webDAVPropsImpl.setClassPK(getClassPK());
 		webDAVPropsImpl.setProps(getProps());
-		webDAVPropsImpl.setMvccVersion(getMvccVersion());
 
 		webDAVPropsImpl.resetOriginalValues();
 
@@ -438,6 +438,8 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public CacheModel<WebDAVProps> toCacheModel() {
 		WebDAVPropsCacheModel webDAVPropsCacheModel = new WebDAVPropsCacheModel();
 
+		webDAVPropsCacheModel.mvccVersion = getMvccVersion();
+
 		webDAVPropsCacheModel.webDavPropsId = getWebDavPropsId();
 
 		webDAVPropsCacheModel.companyId = getCompanyId();
@@ -472,8 +474,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 			webDAVPropsCacheModel.props = null;
 		}
 
-		webDAVPropsCacheModel.mvccVersion = getMvccVersion();
-
 		return webDAVPropsCacheModel;
 	}
 
@@ -481,7 +481,9 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	public String toString() {
 		StringBundler sb = new StringBundler(17);
 
-		sb.append("{webDavPropsId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", webDavPropsId=");
 		sb.append(getWebDavPropsId());
 		sb.append(", companyId=");
 		sb.append(getCompanyId());
@@ -495,8 +497,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		sb.append(getClassPK());
 		sb.append(", props=");
 		sb.append(getProps());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -510,6 +510,10 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 		sb.append("com.liferay.portal.model.WebDAVProps");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>webDavPropsId</column-name><column-value><![CDATA[");
 		sb.append(getWebDavPropsId());
@@ -538,10 +542,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 			"<column><column-name>props</column-name><column-value><![CDATA[");
 		sb.append(getProps());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -552,6 +552,7 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			WebDAVProps.class
 		};
+	private long _mvccVersion;
 	private long _webDavPropsId;
 	private long _companyId;
 	private Date _createDate;
@@ -563,7 +564,6 @@ public class WebDAVPropsModelImpl extends BaseModelImpl<WebDAVProps>
 	private long _originalClassPK;
 	private boolean _setOriginalClassPK;
 	private String _props;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private WebDAVProps _escapedModel;
 }

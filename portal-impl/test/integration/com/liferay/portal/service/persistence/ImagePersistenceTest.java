@@ -111,6 +111,8 @@ public class ImagePersistenceTest {
 
 		Image newImage = _persistence.create(pk);
 
+		newImage.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newImage.setModifiedDate(ServiceTestUtil.nextDate());
 
 		newImage.setType(ServiceTestUtil.randomString());
@@ -121,12 +123,12 @@ public class ImagePersistenceTest {
 
 		newImage.setSize(ServiceTestUtil.nextInt());
 
-		newImage.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newImage);
 
 		Image existingImage = _persistence.findByPrimaryKey(newImage.getPrimaryKey());
 
+		Assert.assertEquals(existingImage.getMvccVersion(),
+			newImage.getMvccVersion());
 		Assert.assertEquals(existingImage.getImageId(), newImage.getImageId());
 		Assert.assertEquals(Time.getShortTimestamp(
 				existingImage.getModifiedDate()),
@@ -135,8 +137,6 @@ public class ImagePersistenceTest {
 		Assert.assertEquals(existingImage.getHeight(), newImage.getHeight());
 		Assert.assertEquals(existingImage.getWidth(), newImage.getWidth());
 		Assert.assertEquals(existingImage.getSize(), newImage.getSize());
-		Assert.assertEquals(existingImage.getMvccVersion(),
-			newImage.getMvccVersion());
 	}
 
 	@Test
@@ -173,9 +173,9 @@ public class ImagePersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Image", "imageId", true,
-			"modifiedDate", true, "type", true, "height", true, "width", true,
-			"size", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Image", "mvccVersion",
+			true, "imageId", true, "modifiedDate", true, "type", true,
+			"height", true, "width", true, "size", true);
 	}
 
 	@Test
@@ -293,6 +293,8 @@ public class ImagePersistenceTest {
 
 		Image image = _persistence.create(pk);
 
+		image.setMvccVersion(ServiceTestUtil.nextLong());
+
 		image.setModifiedDate(ServiceTestUtil.nextDate());
 
 		image.setType(ServiceTestUtil.randomString());
@@ -302,8 +304,6 @@ public class ImagePersistenceTest {
 		image.setWidth(ServiceTestUtil.nextInt());
 
 		image.setSize(ServiceTestUtil.nextInt());
-
-		image.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(image);
 

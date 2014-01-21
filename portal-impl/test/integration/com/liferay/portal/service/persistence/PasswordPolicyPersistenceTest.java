@@ -114,6 +114,8 @@ public class PasswordPolicyPersistenceTest {
 
 		PasswordPolicy newPasswordPolicy = _persistence.create(pk);
 
+		newPasswordPolicy.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPasswordPolicy.setUuid(ServiceTestUtil.randomString());
 
 		newPasswordPolicy.setCompanyId(ServiceTestUtil.nextLong());
@@ -180,12 +182,12 @@ public class PasswordPolicyPersistenceTest {
 
 		newPasswordPolicy.setResetTicketMaxAge(ServiceTestUtil.nextLong());
 
-		newPasswordPolicy.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPasswordPolicy);
 
 		PasswordPolicy existingPasswordPolicy = _persistence.findByPrimaryKey(newPasswordPolicy.getPrimaryKey());
 
+		Assert.assertEquals(existingPasswordPolicy.getMvccVersion(),
+			newPasswordPolicy.getMvccVersion());
 		Assert.assertEquals(existingPasswordPolicy.getUuid(),
 			newPasswordPolicy.getUuid());
 		Assert.assertEquals(existingPasswordPolicy.getPasswordPolicyId(),
@@ -256,8 +258,6 @@ public class PasswordPolicyPersistenceTest {
 			newPasswordPolicy.getResetFailureCount());
 		Assert.assertEquals(existingPasswordPolicy.getResetTicketMaxAge(),
 			newPasswordPolicy.getResetTicketMaxAge());
-		Assert.assertEquals(existingPasswordPolicy.getMvccVersion(),
-			newPasswordPolicy.getMvccVersion());
 	}
 
 	@Test
@@ -295,19 +295,19 @@ public class PasswordPolicyPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("PasswordPolicy", "uuid",
-			true, "passwordPolicyId", true, "companyId", true, "userId", true,
-			"userName", true, "createDate", true, "modifiedDate", true,
-			"defaultPolicy", true, "name", true, "description", true,
-			"changeable", true, "changeRequired", true, "minAge", true,
-			"checkSyntax", true, "allowDictionaryWords", true,
+		return OrderByComparatorFactoryUtil.create("PasswordPolicy",
+			"mvccVersion", true, "uuid", true, "passwordPolicyId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "defaultPolicy", true, "name", true,
+			"description", true, "changeable", true, "changeRequired", true,
+			"minAge", true, "checkSyntax", true, "allowDictionaryWords", true,
 			"minAlphanumeric", true, "minLength", true, "minLowerCase", true,
 			"minNumbers", true, "minSymbols", true, "minUpperCase", true,
 			"regex", true, "history", true, "historyCount", true, "expireable",
 			true, "maxAge", true, "warningTime", true, "graceLimit", true,
 			"lockout", true, "maxFailure", true, "lockoutDuration", true,
 			"requireUnlock", true, "resetFailureCount", true,
-			"resetTicketMaxAge", true, "mvccVersion", true);
+			"resetTicketMaxAge", true);
 	}
 
 	@Test
@@ -451,6 +451,8 @@ public class PasswordPolicyPersistenceTest {
 
 		PasswordPolicy passwordPolicy = _persistence.create(pk);
 
+		passwordPolicy.setMvccVersion(ServiceTestUtil.nextLong());
+
 		passwordPolicy.setUuid(ServiceTestUtil.randomString());
 
 		passwordPolicy.setCompanyId(ServiceTestUtil.nextLong());
@@ -516,8 +518,6 @@ public class PasswordPolicyPersistenceTest {
 		passwordPolicy.setResetFailureCount(ServiceTestUtil.nextLong());
 
 		passwordPolicy.setResetTicketMaxAge(ServiceTestUtil.nextLong());
-
-		passwordPolicy.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(passwordPolicy);
 

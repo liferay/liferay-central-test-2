@@ -61,6 +61,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	 */
 	public static final String TABLE_NAME = "Company";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
 			{ "accountId", Types.BIGINT },
 			{ "webId", Types.VARCHAR },
@@ -70,10 +71,9 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			{ "logoId", Types.BIGINT },
 			{ "system", Types.BOOLEAN },
 			{ "maxUsers", Types.INTEGER },
-			{ "active_", Types.BOOLEAN },
-			{ "mvccVersion", Types.BIGINT }
+			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Company (companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN,maxUsers INTEGER,active_ BOOLEAN,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table Company (mvccVersion LONG default 0,companyId LONG not null primary key,accountId LONG,webId VARCHAR(75) null,key_ TEXT null,mx VARCHAR(75) null,homeURL STRING null,logoId LONG,system BOOLEAN,maxUsers INTEGER,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Company";
 	public static final String ORDER_BY_JPQL = " ORDER BY company.companyId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Company.companyId ASC";
@@ -108,6 +108,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 		Company model = new CompanyImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setAccountId(soapModel.getAccountId());
 		model.setWebId(soapModel.getWebId());
@@ -118,7 +119,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		model.setSystem(soapModel.getSystem());
 		model.setMaxUsers(soapModel.getMaxUsers());
 		model.setActive(soapModel.getActive());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -183,6 +183,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("accountId", getAccountId());
 		attributes.put("webId", getWebId());
@@ -193,7 +194,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		attributes.put("system", getSystem());
 		attributes.put("maxUsers", getMaxUsers());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -203,6 +203,12 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long companyId = (Long)attributes.get("companyId");
 
 		if (companyId != null) {
@@ -262,12 +268,17 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		if (active != null) {
 			setActive(active);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -454,17 +465,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		_active = active;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public java.security.Key getKeyObj() {
 		return null;
 	}
@@ -510,6 +510,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public Object clone() {
 		CompanyImpl companyImpl = new CompanyImpl();
 
+		companyImpl.setMvccVersion(getMvccVersion());
 		companyImpl.setCompanyId(getCompanyId());
 		companyImpl.setAccountId(getAccountId());
 		companyImpl.setWebId(getWebId());
@@ -520,7 +521,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		companyImpl.setSystem(getSystem());
 		companyImpl.setMaxUsers(getMaxUsers());
 		companyImpl.setActive(getActive());
-		companyImpl.setMvccVersion(getMvccVersion());
 
 		companyImpl.resetOriginalValues();
 
@@ -606,6 +606,8 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public CacheModel<Company> toCacheModel() {
 		CompanyCacheModel companyCacheModel = new CompanyCacheModel();
 
+		companyCacheModel.mvccVersion = getMvccVersion();
+
 		companyCacheModel.companyId = getCompanyId();
 
 		companyCacheModel.accountId = getAccountId();
@@ -650,8 +652,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 
 		companyCacheModel.active = getActive();
 
-		companyCacheModel.mvccVersion = getMvccVersion();
-
 		companyCacheModel._keyObj = getKeyObj();
 
 		companyCacheModel._virtualHostname = getVirtualHostname();
@@ -663,7 +663,9 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{companyId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", companyId=");
 		sb.append(getCompanyId());
 		sb.append(", accountId=");
 		sb.append(getAccountId());
@@ -683,8 +685,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		sb.append(getMaxUsers());
 		sb.append(", active=");
 		sb.append(getActive());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -698,6 +698,10 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 		sb.append("com.liferay.portal.model.Company");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>companyId</column-name><column-value><![CDATA[");
 		sb.append(getCompanyId());
@@ -738,10 +742,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -752,6 +752,7 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			Company.class
 		};
+	private long _mvccVersion;
 	private long _companyId;
 	private long _accountId;
 	private String _webId;
@@ -768,7 +769,6 @@ public class CompanyModelImpl extends BaseModelImpl<Company>
 	private boolean _setOriginalSystem;
 	private int _maxUsers;
 	private boolean _active;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private Company _escapedModel;
 }

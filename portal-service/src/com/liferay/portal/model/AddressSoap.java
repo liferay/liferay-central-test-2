@@ -31,6 +31,7 @@ public class AddressSoap implements Serializable {
 	public static AddressSoap toSoapModel(Address model) {
 		AddressSoap soapModel = new AddressSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setAddressId(model.getAddressId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -50,7 +51,6 @@ public class AddressSoap implements Serializable {
 		soapModel.setTypeId(model.getTypeId());
 		soapModel.setMailing(model.getMailing());
 		soapModel.setPrimary(model.getPrimary());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -101,6 +101,14 @@ public class AddressSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setAddressId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -263,14 +271,7 @@ public class AddressSoap implements Serializable {
 		_primary = primary;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _addressId;
 	private long _companyId;
@@ -290,5 +291,4 @@ public class AddressSoap implements Serializable {
 	private int _typeId;
 	private boolean _mailing;
 	private boolean _primary;
-	private long _mvccVersion;
 }

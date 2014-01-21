@@ -36,7 +36,9 @@ public class PasswordPolicyRelCacheModel implements CacheModel<PasswordPolicyRel
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{passwordPolicyRelId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", passwordPolicyRelId=");
 		sb.append(passwordPolicyRelId);
 		sb.append(", passwordPolicyId=");
 		sb.append(passwordPolicyId);
@@ -44,8 +46,6 @@ public class PasswordPolicyRelCacheModel implements CacheModel<PasswordPolicyRel
 		sb.append(classNameId);
 		sb.append(", classPK=");
 		sb.append(classPK);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -55,11 +55,11 @@ public class PasswordPolicyRelCacheModel implements CacheModel<PasswordPolicyRel
 	public PasswordPolicyRel toEntityModel() {
 		PasswordPolicyRelImpl passwordPolicyRelImpl = new PasswordPolicyRelImpl();
 
+		passwordPolicyRelImpl.setMvccVersion(mvccVersion);
 		passwordPolicyRelImpl.setPasswordPolicyRelId(passwordPolicyRelId);
 		passwordPolicyRelImpl.setPasswordPolicyId(passwordPolicyId);
 		passwordPolicyRelImpl.setClassNameId(classNameId);
 		passwordPolicyRelImpl.setClassPK(classPK);
-		passwordPolicyRelImpl.setMvccVersion(mvccVersion);
 
 		passwordPolicyRelImpl.resetOriginalValues();
 
@@ -68,26 +68,26 @@ public class PasswordPolicyRelCacheModel implements CacheModel<PasswordPolicyRel
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		passwordPolicyRelId = objectInput.readLong();
 		passwordPolicyId = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(passwordPolicyRelId);
 		objectOutput.writeLong(passwordPolicyId);
 		objectOutput.writeLong(classNameId);
 		objectOutput.writeLong(classPK);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long passwordPolicyRelId;
 	public long passwordPolicyId;
 	public long classNameId;
 	public long classPK;
-	public long mvccVersion;
 }

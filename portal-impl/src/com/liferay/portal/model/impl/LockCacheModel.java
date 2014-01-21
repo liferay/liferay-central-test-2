@@ -38,7 +38,9 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", lockId=");
 		sb.append(lockId);
@@ -60,8 +62,6 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		sb.append(inheritable);
 		sb.append(", expirationDate=");
 		sb.append(expirationDate);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,6 +70,8 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 	@Override
 	public Lock toEntityModel() {
 		LockImpl lockImpl = new LockImpl();
+
+		lockImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			lockImpl.setUuid(StringPool.BLANK);
@@ -126,8 +128,6 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 			lockImpl.setExpirationDate(new Date(expirationDate));
 		}
 
-		lockImpl.setMvccVersion(mvccVersion);
-
 		lockImpl.resetOriginalValues();
 
 		return lockImpl;
@@ -135,6 +135,7 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		lockId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -146,12 +147,13 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 		owner = objectInput.readUTF();
 		inheritable = objectInput.readBoolean();
 		expirationDate = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -195,9 +197,9 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 
 		objectOutput.writeBoolean(inheritable);
 		objectOutput.writeLong(expirationDate);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long lockId;
 	public long companyId;
@@ -209,5 +211,4 @@ public class LockCacheModel implements CacheModel<Lock>, Externalizable {
 	public String owner;
 	public boolean inheritable;
 	public long expirationDate;
-	public long mvccVersion;
 }

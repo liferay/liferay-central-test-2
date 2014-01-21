@@ -62,6 +62,22 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this team.
+	 *
+	 * @return the mvcc version of this team
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this team.
+	 *
+	 * @param mvccVersion the mvcc version of this team
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the team ID of this team.
 	 *
 	 * @return the team ID of this team
@@ -218,22 +234,6 @@ public interface TeamModel extends BaseModel<Team>, GroupedModel, MVCCModel {
 	 * @param description the description of this team
 	 */
 	public void setDescription(String description);
-
-	/**
-	 * Returns the mvcc version of this team.
-	 *
-	 * @return the mvcc version of this team
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this team.
-	 *
-	 * @param mvccVersion the mvcc version of this team
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

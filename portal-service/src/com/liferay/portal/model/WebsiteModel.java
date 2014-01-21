@@ -63,6 +63,22 @@ public interface WebsiteModel extends AttachedModel, BaseModel<Website>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this website.
+	 *
+	 * @return the mvcc version of this website
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this website.
+	 *
+	 * @param mvccVersion the mvcc version of this website
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this website.
 	 *
 	 * @return the uuid of this website
@@ -282,22 +298,6 @@ public interface WebsiteModel extends AttachedModel, BaseModel<Website>,
 	 * @param primary the primary of this website
 	 */
 	public void setPrimary(boolean primary);
-
-	/**
-	 * Returns the mvcc version of this website.
-	 *
-	 * @return the mvcc version of this website
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this website.
-	 *
-	 * @param mvccVersion the mvcc version of this website
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

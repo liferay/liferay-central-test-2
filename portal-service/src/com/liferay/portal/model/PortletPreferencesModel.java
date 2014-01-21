@@ -60,6 +60,22 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this portlet preferences.
+	 *
+	 * @return the mvcc version of this portlet preferences
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this portlet preferences.
+	 *
+	 * @param mvccVersion the mvcc version of this portlet preferences
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the portlet preferences ID of this portlet preferences.
 	 *
 	 * @return the portlet preferences ID of this portlet preferences
@@ -144,22 +160,6 @@ public interface PortletPreferencesModel extends BaseModel<PortletPreferences>,
 	 * @param preferences the preferences of this portlet preferences
 	 */
 	public void setPreferences(String preferences);
-
-	/**
-	 * Returns the mvcc version of this portlet preferences.
-	 *
-	 * @return the mvcc version of this portlet preferences
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this portlet preferences.
-	 *
-	 * @param mvccVersion the mvcc version of this portlet preferences
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

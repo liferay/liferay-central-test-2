@@ -2201,12 +2201,12 @@ public class RegionPersistenceImpl extends BasePersistenceImpl<Region>
 		regionImpl.setNew(region.isNew());
 		regionImpl.setPrimaryKey(region.getPrimaryKey());
 
+		regionImpl.setMvccVersion(region.getMvccVersion());
 		regionImpl.setRegionId(region.getRegionId());
 		regionImpl.setCountryId(region.getCountryId());
 		regionImpl.setRegionCode(region.getRegionCode());
 		regionImpl.setName(region.getName());
 		regionImpl.setActive(region.isActive());
-		regionImpl.setMvccVersion(region.getMvccVersion());
 
 		return regionImpl;
 	}

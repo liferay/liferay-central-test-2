@@ -63,6 +63,22 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this portlet item.
+	 *
+	 * @return the mvcc version of this portlet item
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this portlet item.
+	 *
+	 * @param mvccVersion the mvcc version of this portlet item
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the portlet item ID of this portlet item.
 	 *
 	 * @return the portlet item ID of this portlet item
@@ -245,22 +261,6 @@ public interface PortletItemModel extends BaseModel<PortletItem>, GroupedModel,
 	 */
 	@Override
 	public void setClassNameId(long classNameId);
-
-	/**
-	 * Returns the mvcc version of this portlet item.
-	 *
-	 * @return the mvcc version of this portlet item
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this portlet item.
-	 *
-	 * @param mvccVersion the mvcc version of this portlet item
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

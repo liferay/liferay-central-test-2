@@ -3511,6 +3511,7 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 		layoutSetBranchImpl.setNew(layoutSetBranch.isNew());
 		layoutSetBranchImpl.setPrimaryKey(layoutSetBranch.getPrimaryKey());
 
+		layoutSetBranchImpl.setMvccVersion(layoutSetBranch.getMvccVersion());
 		layoutSetBranchImpl.setLayoutSetBranchId(layoutSetBranch.getLayoutSetBranchId());
 		layoutSetBranchImpl.setGroupId(layoutSetBranch.getGroupId());
 		layoutSetBranchImpl.setCompanyId(layoutSetBranch.getCompanyId());
@@ -3531,7 +3532,6 @@ public class LayoutSetBranchPersistenceImpl extends BasePersistenceImpl<LayoutSe
 		layoutSetBranchImpl.setSettings(layoutSetBranch.getSettings());
 		layoutSetBranchImpl.setLayoutSetPrototypeUuid(layoutSetBranch.getLayoutSetPrototypeUuid());
 		layoutSetBranchImpl.setLayoutSetPrototypeLinkEnabled(layoutSetBranch.isLayoutSetPrototypeLinkEnabled());
-		layoutSetBranchImpl.setMvccVersion(layoutSetBranch.getMvccVersion());
 
 		return layoutSetBranchImpl;
 	}

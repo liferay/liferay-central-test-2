@@ -1157,11 +1157,11 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistenceImpl<Passwo
 		passwordPolicyRelImpl.setNew(passwordPolicyRel.isNew());
 		passwordPolicyRelImpl.setPrimaryKey(passwordPolicyRel.getPrimaryKey());
 
+		passwordPolicyRelImpl.setMvccVersion(passwordPolicyRel.getMvccVersion());
 		passwordPolicyRelImpl.setPasswordPolicyRelId(passwordPolicyRel.getPasswordPolicyRelId());
 		passwordPolicyRelImpl.setPasswordPolicyId(passwordPolicyRel.getPasswordPolicyId());
 		passwordPolicyRelImpl.setClassNameId(passwordPolicyRel.getClassNameId());
 		passwordPolicyRelImpl.setClassPK(passwordPolicyRel.getClassPK());
-		passwordPolicyRelImpl.setMvccVersion(passwordPolicyRel.getMvccVersion());
 
 		return passwordPolicyRelImpl;
 	}

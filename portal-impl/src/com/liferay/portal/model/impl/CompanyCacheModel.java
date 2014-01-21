@@ -36,7 +36,9 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{companyId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", companyId=");
 		sb.append(companyId);
 		sb.append(", accountId=");
 		sb.append(accountId);
@@ -56,8 +58,6 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		sb.append(maxUsers);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -67,6 +67,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	public Company toEntityModel() {
 		CompanyImpl companyImpl = new CompanyImpl();
 
+		companyImpl.setMvccVersion(mvccVersion);
 		companyImpl.setCompanyId(companyId);
 		companyImpl.setAccountId(accountId);
 
@@ -102,7 +103,6 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		companyImpl.setSystem(system);
 		companyImpl.setMaxUsers(maxUsers);
 		companyImpl.setActive(active);
-		companyImpl.setMvccVersion(mvccVersion);
 
 		companyImpl.resetOriginalValues();
 
@@ -116,6 +116,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	@Override
 	public void readExternal(ObjectInput objectInput)
 		throws ClassNotFoundException, IOException {
+		mvccVersion = objectInput.readLong();
 		companyId = objectInput.readLong();
 		accountId = objectInput.readLong();
 		webId = objectInput.readUTF();
@@ -126,7 +127,6 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		system = objectInput.readBoolean();
 		maxUsers = objectInput.readInt();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 
 		_keyObj = (java.security.Key)objectInput.readObject();
 		_virtualHostname = (java.lang.String)objectInput.readObject();
@@ -135,6 +135,7 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(accountId);
 
@@ -170,12 +171,12 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 		objectOutput.writeBoolean(system);
 		objectOutput.writeInt(maxUsers);
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 
 		objectOutput.writeObject(_keyObj);
 		objectOutput.writeObject(_virtualHostname);
 	}
 
+	public long mvccVersion;
 	public long companyId;
 	public long accountId;
 	public String webId;
@@ -186,7 +187,6 @@ public class CompanyCacheModel implements CacheModel<Company>, Externalizable {
 	public boolean system;
 	public int maxUsers;
 	public boolean active;
-	public long mvccVersion;
 	public java.security.Key _keyObj;
 	public java.lang.String _virtualHostname;
 }

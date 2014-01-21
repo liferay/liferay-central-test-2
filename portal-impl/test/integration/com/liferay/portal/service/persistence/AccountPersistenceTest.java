@@ -111,6 +111,8 @@ public class AccountPersistenceTest {
 
 		Account newAccount = _persistence.create(pk);
 
+		newAccount.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newAccount.setCompanyId(ServiceTestUtil.nextLong());
 
 		newAccount.setUserId(ServiceTestUtil.nextLong());
@@ -141,12 +143,12 @@ public class AccountPersistenceTest {
 
 		newAccount.setSize(ServiceTestUtil.randomString());
 
-		newAccount.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newAccount);
 
 		Account existingAccount = _persistence.findByPrimaryKey(newAccount.getPrimaryKey());
 
+		Assert.assertEquals(existingAccount.getMvccVersion(),
+			newAccount.getMvccVersion());
 		Assert.assertEquals(existingAccount.getAccountId(),
 			newAccount.getAccountId());
 		Assert.assertEquals(existingAccount.getCompanyId(),
@@ -177,8 +179,6 @@ public class AccountPersistenceTest {
 			newAccount.getIndustry());
 		Assert.assertEquals(existingAccount.getType(), newAccount.getType());
 		Assert.assertEquals(existingAccount.getSize(), newAccount.getSize());
-		Assert.assertEquals(existingAccount.getMvccVersion(),
-			newAccount.getMvccVersion());
 	}
 
 	@Test
@@ -215,12 +215,12 @@ public class AccountPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Account_", "accountId",
-			true, "companyId", true, "userId", true, "userName", true,
-			"createDate", true, "modifiedDate", true, "parentAccountId", true,
-			"name", true, "legalName", true, "legalId", true, "legalType",
-			true, "sicCode", true, "tickerSymbol", true, "industry", true,
-			"type", true, "size", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Account_", "mvccVersion",
+			true, "accountId", true, "companyId", true, "userId", true,
+			"userName", true, "createDate", true, "modifiedDate", true,
+			"parentAccountId", true, "name", true, "legalName", true,
+			"legalId", true, "legalType", true, "sicCode", true,
+			"tickerSymbol", true, "industry", true, "type", true, "size", true);
 	}
 
 	@Test
@@ -338,6 +338,8 @@ public class AccountPersistenceTest {
 
 		Account account = _persistence.create(pk);
 
+		account.setMvccVersion(ServiceTestUtil.nextLong());
+
 		account.setCompanyId(ServiceTestUtil.nextLong());
 
 		account.setUserId(ServiceTestUtil.nextLong());
@@ -367,8 +369,6 @@ public class AccountPersistenceTest {
 		account.setType(ServiceTestUtil.randomString());
 
 		account.setSize(ServiceTestUtil.randomString());
-
-		account.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(account);
 

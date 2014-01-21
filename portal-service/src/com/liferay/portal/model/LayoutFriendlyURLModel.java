@@ -63,6 +63,22 @@ public interface LayoutFriendlyURLModel extends BaseModel<LayoutFriendlyURL>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this layout friendly u r l.
+	 *
+	 * @return the mvcc version of this layout friendly u r l
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this layout friendly u r l.
+	 *
+	 * @param mvccVersion the mvcc version of this layout friendly u r l
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this layout friendly u r l.
 	 *
 	 * @return the uuid of this layout friendly u r l
@@ -271,22 +287,6 @@ public interface LayoutFriendlyURLModel extends BaseModel<LayoutFriendlyURL>,
 	 * @param languageId the language ID of this layout friendly u r l
 	 */
 	public void setLanguageId(String languageId);
-
-	/**
-	 * Returns the mvcc version of this layout friendly u r l.
-	 *
-	 * @return the mvcc version of this layout friendly u r l
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this layout friendly u r l.
-	 *
-	 * @param mvccVersion the mvcc version of this layout friendly u r l
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

@@ -5316,6 +5316,7 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 		layoutFriendlyURLImpl.setNew(layoutFriendlyURL.isNew());
 		layoutFriendlyURLImpl.setPrimaryKey(layoutFriendlyURL.getPrimaryKey());
 
+		layoutFriendlyURLImpl.setMvccVersion(layoutFriendlyURL.getMvccVersion());
 		layoutFriendlyURLImpl.setUuid(layoutFriendlyURL.getUuid());
 		layoutFriendlyURLImpl.setLayoutFriendlyURLId(layoutFriendlyURL.getLayoutFriendlyURLId());
 		layoutFriendlyURLImpl.setGroupId(layoutFriendlyURL.getGroupId());
@@ -5328,7 +5329,6 @@ public class LayoutFriendlyURLPersistenceImpl extends BasePersistenceImpl<Layout
 		layoutFriendlyURLImpl.setPrivateLayout(layoutFriendlyURL.isPrivateLayout());
 		layoutFriendlyURLImpl.setFriendlyURL(layoutFriendlyURL.getFriendlyURL());
 		layoutFriendlyURLImpl.setLanguageId(layoutFriendlyURL.getLanguageId());
-		layoutFriendlyURLImpl.setMvccVersion(layoutFriendlyURL.getMvccVersion());
 
 		return layoutFriendlyURLImpl;
 	}

@@ -59,6 +59,22 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker>, MVCCMode
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this browser tracker.
+	 *
+	 * @return the mvcc version of this browser tracker
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this browser tracker.
+	 *
+	 * @param mvccVersion the mvcc version of this browser tracker
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the browser tracker ID of this browser tracker.
 	 *
 	 * @return the browser tracker ID of this browser tracker
@@ -114,22 +130,6 @@ public interface BrowserTrackerModel extends BaseModel<BrowserTracker>, MVCCMode
 	 * @param browserKey the browser key of this browser tracker
 	 */
 	public void setBrowserKey(long browserKey);
-
-	/**
-	 * Returns the mvcc version of this browser tracker.
-	 *
-	 * @return the mvcc version of this browser tracker
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this browser tracker.
-	 *
-	 * @param mvccVersion the mvcc version of this browser tracker
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

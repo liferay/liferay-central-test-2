@@ -63,6 +63,22 @@ public interface PhoneModel extends AttachedModel, BaseModel<Phone>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this phone.
+	 *
+	 * @return the mvcc version of this phone
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this phone.
+	 *
+	 * @param mvccVersion the mvcc version of this phone
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this phone.
 	 *
 	 * @return the uuid of this phone
@@ -297,22 +313,6 @@ public interface PhoneModel extends AttachedModel, BaseModel<Phone>, MVCCModel,
 	 * @param primary the primary of this phone
 	 */
 	public void setPrimary(boolean primary);
-
-	/**
-	 * Returns the mvcc version of this phone.
-	 *
-	 * @return the mvcc version of this phone
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this phone.
-	 *
-	 * @param mvccVersion the mvcc version of this phone
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

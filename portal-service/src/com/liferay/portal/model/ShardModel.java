@@ -59,6 +59,22 @@ public interface ShardModel extends AttachedModel, BaseModel<Shard>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this shard.
+	 *
+	 * @return the mvcc version of this shard
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this shard.
+	 *
+	 * @param mvccVersion the mvcc version of this shard
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the shard ID of this shard.
 	 *
 	 * @return the shard ID of this shard
@@ -128,22 +144,6 @@ public interface ShardModel extends AttachedModel, BaseModel<Shard>, MVCCModel {
 	 * @param name the name of this shard
 	 */
 	public void setName(String name);
-
-	/**
-	 * Returns the mvcc version of this shard.
-	 *
-	 * @return the mvcc version of this shard
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this shard.
-	 *
-	 * @param mvccVersion the mvcc version of this shard
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

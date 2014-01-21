@@ -53,6 +53,7 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("layoutPrototypeId", getLayoutPrototypeId());
 		attributes.put("companyId", getCompanyId());
@@ -64,13 +65,18 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 		attributes.put("description", getDescription());
 		attributes.put("settings", getSettings());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -136,12 +142,6 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -162,6 +162,26 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_layoutPrototype.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this layout prototype.
+	*
+	* @return the mvcc version of this layout prototype
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _layoutPrototype.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this layout prototype.
+	*
+	* @param mvccVersion the mvcc version of this layout prototype
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_layoutPrototype.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -534,26 +554,6 @@ public class LayoutPrototypeWrapper implements LayoutPrototype,
 	@Override
 	public void setActive(boolean active) {
 		_layoutPrototype.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this layout prototype.
-	*
-	* @return the mvcc version of this layout prototype
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _layoutPrototype.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this layout prototype.
-	*
-	* @param mvccVersion the mvcc version of this layout prototype
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_layoutPrototype.setMvccVersion(mvccVersion);
 	}
 
 	@Override

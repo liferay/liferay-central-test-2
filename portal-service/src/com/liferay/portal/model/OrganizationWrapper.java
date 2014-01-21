@@ -53,6 +53,7 @@ public class OrganizationWrapper implements Organization,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("companyId", getCompanyId());
@@ -70,13 +71,18 @@ public class OrganizationWrapper implements Organization,
 		attributes.put("statusId", getStatusId());
 		attributes.put("comments", getComments());
 		attributes.put("logoId", getLogoId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -178,12 +184,6 @@ public class OrganizationWrapper implements Organization,
 		if (logoId != null) {
 			setLogoId(logoId);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -204,6 +204,26 @@ public class OrganizationWrapper implements Organization,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_organization.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this organization.
+	*
+	* @return the mvcc version of this organization
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _organization.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this organization.
+	*
+	* @param mvccVersion the mvcc version of this organization
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_organization.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -576,26 +596,6 @@ public class OrganizationWrapper implements Organization,
 	@Override
 	public void setLogoId(long logoId) {
 		_organization.setLogoId(logoId);
-	}
-
-	/**
-	* Returns the mvcc version of this organization.
-	*
-	* @return the mvcc version of this organization
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _organization.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this organization.
-	*
-	* @param mvccVersion the mvcc version of this organization
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_organization.setMvccVersion(mvccVersion);
 	}
 
 	@Override

@@ -113,6 +113,8 @@ public class PortletPersistenceTest {
 
 		Portlet newPortlet = _persistence.create(pk);
 
+		newPortlet.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPortlet.setCompanyId(ServiceTestUtil.nextLong());
 
 		newPortlet.setPortletId(ServiceTestUtil.randomString());
@@ -121,12 +123,12 @@ public class PortletPersistenceTest {
 
 		newPortlet.setActive(ServiceTestUtil.randomBoolean());
 
-		newPortlet.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPortlet);
 
 		Portlet existingPortlet = _persistence.findByPrimaryKey(newPortlet.getPrimaryKey());
 
+		Assert.assertEquals(existingPortlet.getMvccVersion(),
+			newPortlet.getMvccVersion());
 		Assert.assertEquals(existingPortlet.getId(), newPortlet.getId());
 		Assert.assertEquals(existingPortlet.getCompanyId(),
 			newPortlet.getCompanyId());
@@ -134,8 +136,6 @@ public class PortletPersistenceTest {
 			newPortlet.getPortletId());
 		Assert.assertEquals(existingPortlet.getRoles(), newPortlet.getRoles());
 		Assert.assertEquals(existingPortlet.getActive(), newPortlet.getActive());
-		Assert.assertEquals(existingPortlet.getMvccVersion(),
-			newPortlet.getMvccVersion());
 	}
 
 	@Test
@@ -172,9 +172,9 @@ public class PortletPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Portlet", "id", true,
-			"companyId", true, "portletId", true, "roles", true, "active",
-			true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Portlet", "mvccVersion",
+			true, "id", true, "companyId", true, "portletId", true, "roles",
+			true, "active", true);
 	}
 
 	@Test
@@ -309,6 +309,8 @@ public class PortletPersistenceTest {
 
 		Portlet portlet = _persistence.create(pk);
 
+		portlet.setMvccVersion(ServiceTestUtil.nextLong());
+
 		portlet.setCompanyId(ServiceTestUtil.nextLong());
 
 		portlet.setPortletId(ServiceTestUtil.randomString());
@@ -316,8 +318,6 @@ public class PortletPersistenceTest {
 		portlet.setRoles(ServiceTestUtil.randomString());
 
 		portlet.setActive(ServiceTestUtil.randomBoolean());
-
-		portlet.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(portlet);
 

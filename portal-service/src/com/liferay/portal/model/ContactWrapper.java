@@ -51,6 +51,7 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("contactId", getContactId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -84,13 +85,18 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 		attributes.put("jobTitle", getJobTitle());
 		attributes.put("jobClass", getJobClass());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long contactId = (Long)attributes.get("contactId");
 
 		if (contactId != null) {
@@ -288,12 +294,6 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 		if (hoursOfOperation != null) {
 			setHoursOfOperation(hoursOfOperation);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -314,6 +314,26 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_contact.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this contact.
+	*
+	* @return the mvcc version of this contact
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _contact.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this contact.
+	*
+	* @param mvccVersion the mvcc version of this contact
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_contact.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -1021,26 +1041,6 @@ public class ContactWrapper implements Contact, ModelWrapper<Contact> {
 	@Override
 	public void setHoursOfOperation(java.lang.String hoursOfOperation) {
 		_contact.setHoursOfOperation(hoursOfOperation);
-	}
-
-	/**
-	* Returns the mvcc version of this contact.
-	*
-	* @return the mvcc version of this contact
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _contact.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this contact.
-	*
-	* @param mvccVersion the mvcc version of this contact
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_contact.setMvccVersion(mvccVersion);
 	}
 
 	@Override

@@ -3815,6 +3815,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		passwordPolicyImpl.setNew(passwordPolicy.isNew());
 		passwordPolicyImpl.setPrimaryKey(passwordPolicy.getPrimaryKey());
 
+		passwordPolicyImpl.setMvccVersion(passwordPolicy.getMvccVersion());
 		passwordPolicyImpl.setUuid(passwordPolicy.getUuid());
 		passwordPolicyImpl.setPasswordPolicyId(passwordPolicy.getPasswordPolicyId());
 		passwordPolicyImpl.setCompanyId(passwordPolicy.getCompanyId());
@@ -3849,7 +3850,6 @@ public class PasswordPolicyPersistenceImpl extends BasePersistenceImpl<PasswordP
 		passwordPolicyImpl.setRequireUnlock(passwordPolicy.isRequireUnlock());
 		passwordPolicyImpl.setResetFailureCount(passwordPolicy.getResetFailureCount());
 		passwordPolicyImpl.setResetTicketMaxAge(passwordPolicy.getResetTicketMaxAge());
-		passwordPolicyImpl.setMvccVersion(passwordPolicy.getMvccVersion());
 
 		return passwordPolicyImpl;
 	}

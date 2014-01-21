@@ -62,6 +62,22 @@ public interface LockModel extends BaseModel<Lock>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this lock.
+	 *
+	 * @return the mvcc version of this lock
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this lock.
+	 *
+	 * @param mvccVersion the mvcc version of this lock
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this lock.
 	 *
 	 * @return the uuid of this lock
@@ -241,22 +257,6 @@ public interface LockModel extends BaseModel<Lock>, MVCCModel {
 	 * @param expirationDate the expiration date of this lock
 	 */
 	public void setExpirationDate(Date expirationDate);
-
-	/**
-	 * Returns the mvcc version of this lock.
-	 *
-	 * @return the mvcc version of this lock
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this lock.
-	 *
-	 * @param mvccVersion the mvcc version of this lock
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

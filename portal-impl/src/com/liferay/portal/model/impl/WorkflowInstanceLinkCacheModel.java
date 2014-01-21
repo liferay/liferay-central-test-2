@@ -39,7 +39,9 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{workflowInstanceLinkId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", workflowInstanceLinkId=");
 		sb.append(workflowInstanceLinkId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -59,8 +61,6 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		sb.append(classPK);
 		sb.append(", workflowInstanceId=");
 		sb.append(workflowInstanceId);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,6 +70,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 	public WorkflowInstanceLink toEntityModel() {
 		WorkflowInstanceLinkImpl workflowInstanceLinkImpl = new WorkflowInstanceLinkImpl();
 
+		workflowInstanceLinkImpl.setMvccVersion(mvccVersion);
 		workflowInstanceLinkImpl.setWorkflowInstanceLinkId(workflowInstanceLinkId);
 		workflowInstanceLinkImpl.setGroupId(groupId);
 		workflowInstanceLinkImpl.setCompanyId(companyId);
@@ -99,7 +100,6 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		workflowInstanceLinkImpl.setClassNameId(classNameId);
 		workflowInstanceLinkImpl.setClassPK(classPK);
 		workflowInstanceLinkImpl.setWorkflowInstanceId(workflowInstanceId);
-		workflowInstanceLinkImpl.setMvccVersion(mvccVersion);
 
 		workflowInstanceLinkImpl.resetOriginalValues();
 
@@ -108,6 +108,7 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		workflowInstanceLinkId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -118,12 +119,12 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		classNameId = objectInput.readLong();
 		classPK = objectInput.readLong();
 		workflowInstanceId = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(workflowInstanceLinkId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -141,9 +142,9 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 		objectOutput.writeLong(classNameId);
 		objectOutput.writeLong(classPK);
 		objectOutput.writeLong(workflowInstanceId);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long workflowInstanceLinkId;
 	public long groupId;
 	public long companyId;
@@ -154,5 +155,4 @@ public class WorkflowInstanceLinkCacheModel implements CacheModel<WorkflowInstan
 	public long classNameId;
 	public long classPK;
 	public long workflowInstanceId;
-	public long mvccVersion;
 }

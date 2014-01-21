@@ -51,6 +51,7 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("accountId", getAccountId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -67,13 +68,18 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 		attributes.put("industry", getIndustry());
 		attributes.put("type", getType());
 		attributes.put("size", getSize());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long accountId = (Long)attributes.get("accountId");
 
 		if (accountId != null) {
@@ -169,12 +175,6 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 		if (size != null) {
 			setSize(size);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -195,6 +195,26 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_account.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this account.
+	*
+	* @return the mvcc version of this account
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _account.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this account.
+	*
+	* @param mvccVersion the mvcc version of this account
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_account.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -537,26 +557,6 @@ public class AccountWrapper implements Account, ModelWrapper<Account> {
 	@Override
 	public void setSize(java.lang.String size) {
 		_account.setSize(size);
-	}
-
-	/**
-	* Returns the mvcc version of this account.
-	*
-	* @return the mvcc version of this account
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _account.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this account.
-	*
-	* @param mvccVersion the mvcc version of this account
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_account.setMvccVersion(mvccVersion);
 	}
 
 	@Override

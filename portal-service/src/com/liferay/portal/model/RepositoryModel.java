@@ -63,6 +63,22 @@ public interface RepositoryModel extends BaseModel<Repository>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this repository.
+	 *
+	 * @return the mvcc version of this repository
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this repository.
+	 *
+	 * @param mvccVersion the mvcc version of this repository
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this repository.
 	 *
 	 * @return the uuid of this repository
@@ -306,22 +322,6 @@ public interface RepositoryModel extends BaseModel<Repository>, MVCCModel,
 	 * @param dlFolderId the dl folder ID of this repository
 	 */
 	public void setDlFolderId(long dlFolderId);
-
-	/**
-	 * Returns the mvcc version of this repository.
-	 *
-	 * @return the mvcc version of this repository
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this repository.
-	 *
-	 * @param mvccVersion the mvcc version of this repository
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

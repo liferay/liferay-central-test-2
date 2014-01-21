@@ -39,7 +39,9 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", layoutSetPrototypeId=");
 		sb.append(layoutSetPrototypeId);
@@ -61,8 +63,6 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		sb.append(settings);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -71,6 +71,8 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 	@Override
 	public LayoutSetPrototype toEntityModel() {
 		LayoutSetPrototypeImpl layoutSetPrototypeImpl = new LayoutSetPrototypeImpl();
+
+		layoutSetPrototypeImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			layoutSetPrototypeImpl.setUuid(StringPool.BLANK);
@@ -126,7 +128,6 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		}
 
 		layoutSetPrototypeImpl.setActive(active);
-		layoutSetPrototypeImpl.setMvccVersion(mvccVersion);
 
 		layoutSetPrototypeImpl.resetOriginalValues();
 
@@ -135,6 +136,7 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		layoutSetPrototypeId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -146,12 +148,13 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		description = objectInput.readUTF();
 		settings = objectInput.readUTF();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -195,9 +198,9 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 		}
 
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long layoutSetPrototypeId;
 	public long companyId;
@@ -209,5 +212,4 @@ public class LayoutSetPrototypeCacheModel implements CacheModel<LayoutSetPrototy
 	public String description;
 	public String settings;
 	public boolean active;
-	public long mvccVersion;
 }

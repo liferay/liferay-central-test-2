@@ -63,6 +63,22 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this membership request.
+	 *
+	 * @return the mvcc version of this membership request
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this membership request.
+	 *
+	 * @param mvccVersion the mvcc version of this membership request
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the membership request ID of this membership request.
 	 *
 	 * @return the membership request ID of this membership request
@@ -233,22 +249,6 @@ public interface MembershipRequestModel extends BaseModel<MembershipRequest>,
 	 * @param statusId the status ID of this membership request
 	 */
 	public void setStatusId(int statusId);
-
-	/**
-	 * Returns the mvcc version of this membership request.
-	 *
-	 * @return the mvcc version of this membership request
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this membership request.
-	 *
-	 * @param mvccVersion the mvcc version of this membership request
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

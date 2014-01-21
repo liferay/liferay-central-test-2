@@ -58,6 +58,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	 */
 	public static final String TABLE_NAME = "Lock_";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "uuid_", Types.VARCHAR },
 			{ "lockId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -68,10 +69,9 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 			{ "key_", Types.VARCHAR },
 			{ "owner", Types.VARCHAR },
 			{ "inheritable", Types.BOOLEAN },
-			{ "expirationDate", Types.TIMESTAMP },
-			{ "mvccVersion", Types.BIGINT }
+			{ "expirationDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Lock_ (uuid_ VARCHAR(75) null,lockId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,className VARCHAR(75) null,key_ VARCHAR(200) null,owner VARCHAR(255) null,inheritable BOOLEAN,expirationDate DATE null,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table Lock_ (mvccVersion LONG default 0,uuid_ VARCHAR(75) null,lockId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,className VARCHAR(75) null,key_ VARCHAR(200) null,owner VARCHAR(255) null,inheritable BOOLEAN,expirationDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Lock_";
 	public static final String ORDER_BY_JPQL = " ORDER BY lock.lockId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Lock_.lockId ASC";
@@ -133,6 +133,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("lockId", getLockId());
 		attributes.put("companyId", getCompanyId());
@@ -144,7 +145,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		attributes.put("owner", getOwner());
 		attributes.put("inheritable", getInheritable());
 		attributes.put("expirationDate", getExpirationDate());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -154,6 +154,12 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -219,12 +225,16 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		if (expirationDate != null) {
 			setExpirationDate(expirationDate);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -427,16 +437,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		return _originalExpirationDate;
 	}
 
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -468,6 +468,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public Object clone() {
 		LockImpl lockImpl = new LockImpl();
 
+		lockImpl.setMvccVersion(getMvccVersion());
 		lockImpl.setUuid(getUuid());
 		lockImpl.setLockId(getLockId());
 		lockImpl.setCompanyId(getCompanyId());
@@ -479,7 +480,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		lockImpl.setOwner(getOwner());
 		lockImpl.setInheritable(getInheritable());
 		lockImpl.setExpirationDate(getExpirationDate());
-		lockImpl.setMvccVersion(getMvccVersion());
 
 		lockImpl.resetOriginalValues();
 
@@ -561,6 +561,8 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public CacheModel<Lock> toCacheModel() {
 		LockCacheModel lockCacheModel = new LockCacheModel();
 
+		lockCacheModel.mvccVersion = getMvccVersion();
+
 		lockCacheModel.uuid = getUuid();
 
 		String uuid = lockCacheModel.uuid;
@@ -627,8 +629,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 			lockCacheModel.expirationDate = Long.MIN_VALUE;
 		}
 
-		lockCacheModel.mvccVersion = getMvccVersion();
-
 		return lockCacheModel;
 	}
 
@@ -636,7 +636,9 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", uuid=");
 		sb.append(getUuid());
 		sb.append(", lockId=");
 		sb.append(getLockId());
@@ -658,8 +660,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		sb.append(getInheritable());
 		sb.append(", expirationDate=");
 		sb.append(getExpirationDate());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -673,6 +673,10 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 		sb.append("com.liferay.portal.model.Lock");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
@@ -717,10 +721,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 			"<column><column-name>expirationDate</column-name><column-value><![CDATA[");
 		sb.append(getExpirationDate());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -729,6 +729,7 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 
 	private static ClassLoader _classLoader = Lock.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Lock.class };
+	private long _mvccVersion;
 	private String _uuid;
 	private String _originalUuid;
 	private long _lockId;
@@ -747,7 +748,6 @@ public class LockModelImpl extends BaseModelImpl<Lock> implements LockModel {
 	private boolean _inheritable;
 	private Date _expirationDate;
 	private Date _originalExpirationDate;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private Lock _escapedModel;
 }

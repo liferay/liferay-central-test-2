@@ -37,12 +37,12 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{classNameId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", classNameId=");
 		sb.append(classNameId);
 		sb.append(", value=");
 		sb.append(value);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -52,6 +52,7 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 	public ClassName toEntityModel() {
 		ClassNameImpl classNameImpl = new ClassNameImpl();
 
+		classNameImpl.setMvccVersion(mvccVersion);
 		classNameImpl.setClassNameId(classNameId);
 
 		if (value == null) {
@@ -61,8 +62,6 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 			classNameImpl.setValue(value);
 		}
 
-		classNameImpl.setMvccVersion(mvccVersion);
-
 		classNameImpl.resetOriginalValues();
 
 		return classNameImpl;
@@ -70,14 +69,15 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		classNameId = objectInput.readLong();
 		value = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(classNameId);
 
 		if (value == null) {
@@ -86,11 +86,9 @@ public class ClassNameCacheModel implements CacheModel<ClassName>,
 		else {
 			objectOutput.writeUTF(value);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long classNameId;
 	public String value;
-	public long mvccVersion;
 }

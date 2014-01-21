@@ -37,7 +37,9 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{resourceActionId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", resourceActionId=");
 		sb.append(resourceActionId);
 		sb.append(", name=");
 		sb.append(name);
@@ -45,8 +47,6 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		sb.append(actionId);
 		sb.append(", bitwiseValue=");
 		sb.append(bitwiseValue);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -56,6 +56,7 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 	public ResourceAction toEntityModel() {
 		ResourceActionImpl resourceActionImpl = new ResourceActionImpl();
 
+		resourceActionImpl.setMvccVersion(mvccVersion);
 		resourceActionImpl.setResourceActionId(resourceActionId);
 
 		if (name == null) {
@@ -73,7 +74,6 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		}
 
 		resourceActionImpl.setBitwiseValue(bitwiseValue);
-		resourceActionImpl.setMvccVersion(mvccVersion);
 
 		resourceActionImpl.resetOriginalValues();
 
@@ -82,16 +82,17 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		resourceActionId = objectInput.readLong();
 		name = objectInput.readUTF();
 		actionId = objectInput.readUTF();
 		bitwiseValue = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(resourceActionId);
 
 		if (name == null) {
@@ -109,12 +110,11 @@ public class ResourceActionCacheModel implements CacheModel<ResourceAction>,
 		}
 
 		objectOutput.writeLong(bitwiseValue);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long resourceActionId;
 	public String name;
 	public String actionId;
 	public long bitwiseValue;
-	public long mvccVersion;
 }

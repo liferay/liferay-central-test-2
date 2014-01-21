@@ -57,12 +57,12 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	 */
 	public static final String TABLE_NAME = "ListType";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "listTypeId", Types.INTEGER },
 			{ "name", Types.VARCHAR },
-			{ "type_", Types.VARCHAR },
-			{ "mvccVersion", Types.BIGINT }
+			{ "type_", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ListType (listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table ListType (mvccVersion LONG default 0,listTypeId INTEGER not null primary key,name VARCHAR(75) null,type_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ListType";
 	public static final String ORDER_BY_JPQL = " ORDER BY listType.name ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY ListType.name ASC";
@@ -94,10 +94,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 		ListType model = new ListTypeImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setListTypeId(soapModel.getListTypeId());
 		model.setName(soapModel.getName());
 		model.setType(soapModel.getType());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -162,10 +162,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("listTypeId", getListTypeId());
 		attributes.put("name", getName());
 		attributes.put("type", getType());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -175,6 +175,12 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Integer listTypeId = (Integer)attributes.get("listTypeId");
 
 		if (listTypeId != null) {
@@ -192,12 +198,17 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		if (type != null) {
 			setType(type);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -255,17 +266,6 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		return GetterUtil.getString(_originalType);
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -284,10 +284,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	public Object clone() {
 		ListTypeImpl listTypeImpl = new ListTypeImpl();
 
+		listTypeImpl.setMvccVersion(getMvccVersion());
 		listTypeImpl.setListTypeId(getListTypeId());
 		listTypeImpl.setName(getName());
 		listTypeImpl.setType(getType());
-		listTypeImpl.setMvccVersion(getMvccVersion());
 
 		listTypeImpl.resetOriginalValues();
 
@@ -357,6 +357,8 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	public CacheModel<ListType> toCacheModel() {
 		ListTypeCacheModel listTypeCacheModel = new ListTypeCacheModel();
 
+		listTypeCacheModel.mvccVersion = getMvccVersion();
+
 		listTypeCacheModel.listTypeId = getListTypeId();
 
 		listTypeCacheModel.name = getName();
@@ -375,8 +377,6 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 			listTypeCacheModel.type = null;
 		}
 
-		listTypeCacheModel.mvccVersion = getMvccVersion();
-
 		return listTypeCacheModel;
 	}
 
@@ -384,14 +384,14 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{listTypeId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", listTypeId=");
 		sb.append(getListTypeId());
 		sb.append(", name=");
 		sb.append(getName());
 		sb.append(", type=");
 		sb.append(getType());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -406,6 +406,10 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 		sb.append("</model-name>");
 
 		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>listTypeId</column-name><column-value><![CDATA[");
 		sb.append(getListTypeId());
 		sb.append("]]></column-value></column>");
@@ -417,10 +421,6 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 			"<column><column-name>type</column-name><column-value><![CDATA[");
 		sb.append(getType());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -431,11 +431,11 @@ public class ListTypeModelImpl extends BaseModelImpl<ListType>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ListType.class
 		};
+	private long _mvccVersion;
 	private int _listTypeId;
 	private String _name;
 	private String _type;
 	private String _originalType;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private ListType _escapedModel;
 }

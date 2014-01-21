@@ -30,6 +30,7 @@ public class ResourcePermissionSoap implements Serializable {
 	public static ResourcePermissionSoap toSoapModel(ResourcePermission model) {
 		ResourcePermissionSoap soapModel = new ResourcePermissionSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setResourcePermissionId(model.getResourcePermissionId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
@@ -38,7 +39,6 @@ public class ResourcePermissionSoap implements Serializable {
 		soapModel.setRoleId(model.getRoleId());
 		soapModel.setOwnerId(model.getOwnerId());
 		soapModel.setActionIds(model.getActionIds());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -92,6 +92,14 @@ public class ResourcePermissionSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setResourcePermissionId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public long getResourcePermissionId() {
@@ -158,14 +166,7 @@ public class ResourcePermissionSoap implements Serializable {
 		_actionIds = actionIds;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _resourcePermissionId;
 	private long _companyId;
 	private String _name;
@@ -174,5 +175,4 @@ public class ResourcePermissionSoap implements Serializable {
 	private long _roleId;
 	private long _ownerId;
 	private long _actionIds;
-	private long _mvccVersion;
 }

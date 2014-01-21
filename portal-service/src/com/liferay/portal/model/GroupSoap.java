@@ -30,6 +30,7 @@ public class GroupSoap implements Serializable {
 	public static GroupSoap toSoapModel(Group model) {
 		GroupSoap soapModel = new GroupSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -49,7 +50,6 @@ public class GroupSoap implements Serializable {
 		soapModel.setSite(model.getSite());
 		soapModel.setRemoteStagingGroupCount(model.getRemoteStagingGroupCount());
 		soapModel.setActive(model.getActive());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -100,6 +100,14 @@ public class GroupSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setGroupId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -266,14 +274,7 @@ public class GroupSoap implements Serializable {
 		_active = active;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _groupId;
 	private long _companyId;
@@ -293,5 +294,4 @@ public class GroupSoap implements Serializable {
 	private boolean _site;
 	private int _remoteStagingGroupCount;
 	private boolean _active;
-	private long _mvccVersion;
 }

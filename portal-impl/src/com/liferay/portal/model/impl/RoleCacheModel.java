@@ -38,7 +38,9 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(31);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", roleId=");
 		sb.append(roleId);
@@ -66,8 +68,6 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		sb.append(type);
 		sb.append(", subtype=");
 		sb.append(subtype);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -76,6 +76,8 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 	@Override
 	public Role toEntityModel() {
 		RoleImpl roleImpl = new RoleImpl();
+
+		roleImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			roleImpl.setUuid(StringPool.BLANK);
@@ -142,8 +144,6 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 			roleImpl.setSubtype(subtype);
 		}
 
-		roleImpl.setMvccVersion(mvccVersion);
-
 		roleImpl.resetOriginalValues();
 
 		return roleImpl;
@@ -151,6 +151,7 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		roleId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -165,12 +166,13 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		description = objectInput.readUTF();
 		type = objectInput.readInt();
 		subtype = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -223,10 +225,9 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 		else {
 			objectOutput.writeUTF(subtype);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long roleId;
 	public long companyId;
@@ -241,5 +242,4 @@ public class RoleCacheModel implements CacheModel<Role>, Externalizable {
 	public String description;
 	public int type;
 	public String subtype;
-	public long mvccVersion;
 }

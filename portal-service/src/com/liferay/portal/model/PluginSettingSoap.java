@@ -30,13 +30,13 @@ public class PluginSettingSoap implements Serializable {
 	public static PluginSettingSoap toSoapModel(PluginSetting model) {
 		PluginSettingSoap soapModel = new PluginSettingSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setPluginSettingId(model.getPluginSettingId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setPluginId(model.getPluginId());
 		soapModel.setPluginType(model.getPluginType());
 		soapModel.setRoles(model.getRoles());
 		soapModel.setActive(model.getActive());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -87,6 +87,14 @@ public class PluginSettingSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setPluginSettingId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public long getPluginSettingId() {
@@ -141,19 +149,11 @@ public class PluginSettingSoap implements Serializable {
 		_active = active;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _pluginSettingId;
 	private long _companyId;
 	private String _pluginId;
 	private String _pluginType;
 	private String _roles;
 	private boolean _active;
-	private long _mvccVersion;
 }

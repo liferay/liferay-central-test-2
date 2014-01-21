@@ -1239,12 +1239,12 @@ public class ServiceComponentPersistenceImpl extends BasePersistenceImpl<Service
 		serviceComponentImpl.setNew(serviceComponent.isNew());
 		serviceComponentImpl.setPrimaryKey(serviceComponent.getPrimaryKey());
 
+		serviceComponentImpl.setMvccVersion(serviceComponent.getMvccVersion());
 		serviceComponentImpl.setServiceComponentId(serviceComponent.getServiceComponentId());
 		serviceComponentImpl.setBuildNamespace(serviceComponent.getBuildNamespace());
 		serviceComponentImpl.setBuildNumber(serviceComponent.getBuildNumber());
 		serviceComponentImpl.setBuildDate(serviceComponent.getBuildDate());
 		serviceComponentImpl.setData(serviceComponent.getData());
-		serviceComponentImpl.setMvccVersion(serviceComponent.getMvccVersion());
 
 		return serviceComponentImpl;
 	}

@@ -36,7 +36,9 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{resourceBlockPermissionId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", resourceBlockPermissionId=");
 		sb.append(resourceBlockPermissionId);
 		sb.append(", resourceBlockId=");
 		sb.append(resourceBlockId);
@@ -44,8 +46,6 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 		sb.append(roleId);
 		sb.append(", actionIds=");
 		sb.append(actionIds);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -55,11 +55,11 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 	public ResourceBlockPermission toEntityModel() {
 		ResourceBlockPermissionImpl resourceBlockPermissionImpl = new ResourceBlockPermissionImpl();
 
+		resourceBlockPermissionImpl.setMvccVersion(mvccVersion);
 		resourceBlockPermissionImpl.setResourceBlockPermissionId(resourceBlockPermissionId);
 		resourceBlockPermissionImpl.setResourceBlockId(resourceBlockId);
 		resourceBlockPermissionImpl.setRoleId(roleId);
 		resourceBlockPermissionImpl.setActionIds(actionIds);
-		resourceBlockPermissionImpl.setMvccVersion(mvccVersion);
 
 		resourceBlockPermissionImpl.resetOriginalValues();
 
@@ -68,26 +68,26 @@ public class ResourceBlockPermissionCacheModel implements CacheModel<ResourceBlo
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		resourceBlockPermissionId = objectInput.readLong();
 		resourceBlockId = objectInput.readLong();
 		roleId = objectInput.readLong();
 		actionIds = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(resourceBlockPermissionId);
 		objectOutput.writeLong(resourceBlockId);
 		objectOutput.writeLong(roleId);
 		objectOutput.writeLong(actionIds);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long resourceBlockPermissionId;
 	public long resourceBlockId;
 	public long roleId;
 	public long actionIds;
-	public long mvccVersion;
 }

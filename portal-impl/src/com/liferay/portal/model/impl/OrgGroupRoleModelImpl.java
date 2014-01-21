@@ -52,12 +52,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	 */
 	public static final String TABLE_NAME = "OrgGroupRole";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "organizationId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
-			{ "roleId", Types.BIGINT },
-			{ "mvccVersion", Types.BIGINT }
+			{ "roleId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table OrgGroupRole (organizationId LONG not null,groupId LONG not null,roleId LONG not null,mvccVersion LONG default 0,primary key (organizationId, groupId, roleId))";
+	public static final String TABLE_SQL_CREATE = "create table OrgGroupRole (mvccVersion LONG default 0,organizationId LONG not null,groupId LONG not null,roleId LONG not null,primary key (organizationId, groupId, roleId))";
 	public static final String TABLE_SQL_DROP = "drop table OrgGroupRole";
 	public static final String ORDER_BY_JPQL = " ORDER BY orgGroupRole.id.organizationId ASC, orgGroupRole.id.groupId ASC, orgGroupRole.id.roleId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY OrgGroupRole.organizationId ASC, OrgGroupRole.groupId ASC, OrgGroupRole.roleId ASC";
@@ -118,10 +118,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("organizationId", getOrganizationId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("roleId", getRoleId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -131,6 +131,12 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long organizationId = (Long)attributes.get("organizationId");
 
 		if (organizationId != null) {
@@ -148,12 +154,16 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		if (roleId != null) {
 			setRoleId(roleId);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -210,16 +220,6 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		return _originalRoleId;
 	}
 
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -238,10 +238,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public Object clone() {
 		OrgGroupRoleImpl orgGroupRoleImpl = new OrgGroupRoleImpl();
 
+		orgGroupRoleImpl.setMvccVersion(getMvccVersion());
 		orgGroupRoleImpl.setOrganizationId(getOrganizationId());
 		orgGroupRoleImpl.setGroupId(getGroupId());
 		orgGroupRoleImpl.setRoleId(getRoleId());
-		orgGroupRoleImpl.setMvccVersion(getMvccVersion());
 
 		orgGroupRoleImpl.resetOriginalValues();
 
@@ -311,13 +311,13 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public CacheModel<OrgGroupRole> toCacheModel() {
 		OrgGroupRoleCacheModel orgGroupRoleCacheModel = new OrgGroupRoleCacheModel();
 
+		orgGroupRoleCacheModel.mvccVersion = getMvccVersion();
+
 		orgGroupRoleCacheModel.organizationId = getOrganizationId();
 
 		orgGroupRoleCacheModel.groupId = getGroupId();
 
 		orgGroupRoleCacheModel.roleId = getRoleId();
-
-		orgGroupRoleCacheModel.mvccVersion = getMvccVersion();
 
 		return orgGroupRoleCacheModel;
 	}
@@ -326,14 +326,14 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	public String toString() {
 		StringBundler sb = new StringBundler(9);
 
-		sb.append("{organizationId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", organizationId=");
 		sb.append(getOrganizationId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
 		sb.append(", roleId=");
 		sb.append(getRoleId());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -348,6 +348,10 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 		sb.append("</model-name>");
 
 		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>organizationId</column-name><column-value><![CDATA[");
 		sb.append(getOrganizationId());
 		sb.append("]]></column-value></column>");
@@ -359,10 +363,6 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
 		sb.append(getRoleId());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -373,6 +373,7 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			OrgGroupRole.class
 		};
+	private long _mvccVersion;
 	private long _organizationId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -380,7 +381,6 @@ public class OrgGroupRoleModelImpl extends BaseModelImpl<OrgGroupRole>
 	private long _roleId;
 	private long _originalRoleId;
 	private boolean _setOriginalRoleId;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private OrgGroupRole _escapedModel;
 }

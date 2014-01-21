@@ -59,6 +59,22 @@ public interface PasswordPolicyRelModel extends AttachedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this password policy rel.
+	 *
+	 * @return the mvcc version of this password policy rel
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this password policy rel.
+	 *
+	 * @param mvccVersion the mvcc version of this password policy rel
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the password policy rel ID of this password policy rel.
 	 *
 	 * @return the password policy rel ID of this password policy rel
@@ -127,22 +143,6 @@ public interface PasswordPolicyRelModel extends AttachedModel,
 	 */
 	@Override
 	public void setClassPK(long classPK);
-
-	/**
-	 * Returns the mvcc version of this password policy rel.
-	 *
-	 * @return the mvcc version of this password policy rel
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this password policy rel.
-	 *
-	 * @param mvccVersion the mvcc version of this password policy rel
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

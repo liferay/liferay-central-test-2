@@ -52,18 +52,24 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("resourceBlockPermissionId",
 			getResourceBlockPermissionId());
 		attributes.put("resourceBlockId", getResourceBlockId());
 		attributes.put("roleId", getRoleId());
 		attributes.put("actionIds", getActionIds());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long resourceBlockPermissionId = (Long)attributes.get(
 				"resourceBlockPermissionId");
 
@@ -88,12 +94,6 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 		if (actionIds != null) {
 			setActionIds(actionIds);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -114,6 +114,26 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_resourceBlockPermission.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this resource block permission.
+	*
+	* @return the mvcc version of this resource block permission
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _resourceBlockPermission.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this resource block permission.
+	*
+	* @param mvccVersion the mvcc version of this resource block permission
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_resourceBlockPermission.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -194,26 +214,6 @@ public class ResourceBlockPermissionWrapper implements ResourceBlockPermission,
 	@Override
 	public void setActionIds(long actionIds) {
 		_resourceBlockPermission.setActionIds(actionIds);
-	}
-
-	/**
-	* Returns the mvcc version of this resource block permission.
-	*
-	* @return the mvcc version of this resource block permission
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _resourceBlockPermission.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this resource block permission.
-	*
-	* @param mvccVersion the mvcc version of this resource block permission
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_resourceBlockPermission.setMvccVersion(mvccVersion);
 	}
 
 	@Override

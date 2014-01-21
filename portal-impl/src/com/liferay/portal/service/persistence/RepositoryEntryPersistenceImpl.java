@@ -2644,6 +2644,7 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		repositoryEntryImpl.setNew(repositoryEntry.isNew());
 		repositoryEntryImpl.setPrimaryKey(repositoryEntry.getPrimaryKey());
 
+		repositoryEntryImpl.setMvccVersion(repositoryEntry.getMvccVersion());
 		repositoryEntryImpl.setUuid(repositoryEntry.getUuid());
 		repositoryEntryImpl.setRepositoryEntryId(repositoryEntry.getRepositoryEntryId());
 		repositoryEntryImpl.setGroupId(repositoryEntry.getGroupId());
@@ -2655,7 +2656,6 @@ public class RepositoryEntryPersistenceImpl extends BasePersistenceImpl<Reposito
 		repositoryEntryImpl.setRepositoryId(repositoryEntry.getRepositoryId());
 		repositoryEntryImpl.setMappedId(repositoryEntry.getMappedId());
 		repositoryEntryImpl.setManualCheckInRequired(repositoryEntry.isManualCheckInRequired());
-		repositoryEntryImpl.setMvccVersion(repositoryEntry.getMvccVersion());
 
 		return repositoryEntryImpl;
 	}

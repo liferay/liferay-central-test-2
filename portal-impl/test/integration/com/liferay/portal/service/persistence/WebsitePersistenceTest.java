@@ -111,6 +111,8 @@ public class WebsitePersistenceTest {
 
 		Website newWebsite = _persistence.create(pk);
 
+		newWebsite.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newWebsite.setUuid(ServiceTestUtil.randomString());
 
 		newWebsite.setCompanyId(ServiceTestUtil.nextLong());
@@ -133,12 +135,12 @@ public class WebsitePersistenceTest {
 
 		newWebsite.setPrimary(ServiceTestUtil.randomBoolean());
 
-		newWebsite.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newWebsite);
 
 		Website existingWebsite = _persistence.findByPrimaryKey(newWebsite.getPrimaryKey());
 
+		Assert.assertEquals(existingWebsite.getMvccVersion(),
+			newWebsite.getMvccVersion());
 		Assert.assertEquals(existingWebsite.getUuid(), newWebsite.getUuid());
 		Assert.assertEquals(existingWebsite.getWebsiteId(),
 			newWebsite.getWebsiteId());
@@ -161,8 +163,6 @@ public class WebsitePersistenceTest {
 		Assert.assertEquals(existingWebsite.getTypeId(), newWebsite.getTypeId());
 		Assert.assertEquals(existingWebsite.getPrimary(),
 			newWebsite.getPrimary());
-		Assert.assertEquals(existingWebsite.getMvccVersion(),
-			newWebsite.getMvccVersion());
 	}
 
 	@Test
@@ -199,11 +199,11 @@ public class WebsitePersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Website", "uuid", true,
-			"websiteId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "classNameId",
-			true, "classPK", true, "url", true, "typeId", true, "primary",
-			true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Website", "mvccVersion",
+			true, "uuid", true, "websiteId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"classNameId", true, "classPK", true, "url", true, "typeId", true,
+			"primary", true);
 	}
 
 	@Test
@@ -321,6 +321,8 @@ public class WebsitePersistenceTest {
 
 		Website website = _persistence.create(pk);
 
+		website.setMvccVersion(ServiceTestUtil.nextLong());
+
 		website.setUuid(ServiceTestUtil.randomString());
 
 		website.setCompanyId(ServiceTestUtil.nextLong());
@@ -342,8 +344,6 @@ public class WebsitePersistenceTest {
 		website.setTypeId(ServiceTestUtil.nextInt());
 
 		website.setPrimary(ServiceTestUtil.randomBoolean());
-
-		website.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(website);
 

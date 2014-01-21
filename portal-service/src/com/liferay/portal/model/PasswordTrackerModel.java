@@ -63,6 +63,22 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this password tracker.
+	 *
+	 * @return the mvcc version of this password tracker
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this password tracker.
+	 *
+	 * @param mvccVersion the mvcc version of this password tracker
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the password tracker ID of this password tracker.
 	 *
 	 * @return the password tracker ID of this password tracker
@@ -133,22 +149,6 @@ public interface PasswordTrackerModel extends BaseModel<PasswordTracker>,
 	 * @param password the password of this password tracker
 	 */
 	public void setPassword(String password);
-
-	/**
-	 * Returns the mvcc version of this password tracker.
-	 *
-	 * @return the mvcc version of this password tracker
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this password tracker.
-	 *
-	 * @param mvccVersion the mvcc version of this password tracker
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

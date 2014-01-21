@@ -59,6 +59,22 @@ public interface ListTypeModel extends BaseModel<ListType>, MVCCModel {
 	public void setPrimaryKey(int primaryKey);
 
 	/**
+	 * Returns the mvcc version of this list type.
+	 *
+	 * @return the mvcc version of this list type
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this list type.
+	 *
+	 * @param mvccVersion the mvcc version of this list type
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the list type ID of this list type.
 	 *
 	 * @return the list type ID of this list type
@@ -101,22 +117,6 @@ public interface ListTypeModel extends BaseModel<ListType>, MVCCModel {
 	 * @param type the type of this list type
 	 */
 	public void setType(String type);
-
-	/**
-	 * Returns the mvcc version of this list type.
-	 *
-	 * @return the mvcc version of this list type
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this list type.
-	 *
-	 * @param mvccVersion the mvcc version of this list type
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

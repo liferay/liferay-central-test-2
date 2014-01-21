@@ -1660,6 +1660,7 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		countryImpl.setNew(country.isNew());
 		countryImpl.setPrimaryKey(country.getPrimaryKey());
 
+		countryImpl.setMvccVersion(country.getMvccVersion());
 		countryImpl.setCountryId(country.getCountryId());
 		countryImpl.setName(country.getName());
 		countryImpl.setA2(country.getA2());
@@ -1668,7 +1669,6 @@ public class CountryPersistenceImpl extends BasePersistenceImpl<Country>
 		countryImpl.setIdd(country.getIdd());
 		countryImpl.setZipRequired(country.isZipRequired());
 		countryImpl.setActive(country.isActive());
-		countryImpl.setMvccVersion(country.getMvccVersion());
 
 		return countryImpl;
 	}

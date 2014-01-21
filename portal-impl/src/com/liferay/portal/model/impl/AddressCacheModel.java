@@ -38,7 +38,9 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(41);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", addressId=");
 		sb.append(addressId);
@@ -76,8 +78,6 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		sb.append(mailing);
 		sb.append(", primary=");
 		sb.append(primary);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -86,6 +86,8 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 	@Override
 	public Address toEntityModel() {
 		AddressImpl addressImpl = new AddressImpl();
+
+		addressImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			addressImpl.setUuid(StringPool.BLANK);
@@ -162,7 +164,6 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		addressImpl.setTypeId(typeId);
 		addressImpl.setMailing(mailing);
 		addressImpl.setPrimary(primary);
-		addressImpl.setMvccVersion(mvccVersion);
 
 		addressImpl.resetOriginalValues();
 
@@ -171,6 +172,7 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		addressId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -190,12 +192,13 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		typeId = objectInput.readInt();
 		mailing = objectInput.readBoolean();
 		primary = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -259,9 +262,9 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 		objectOutput.writeInt(typeId);
 		objectOutput.writeBoolean(mailing);
 		objectOutput.writeBoolean(primary);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long addressId;
 	public long companyId;
@@ -281,5 +284,4 @@ public class AddressCacheModel implements CacheModel<Address>, Externalizable {
 	public int typeId;
 	public boolean mailing;
 	public boolean primary;
-	public long mvccVersion;
 }

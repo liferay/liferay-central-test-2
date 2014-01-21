@@ -1983,13 +1983,13 @@ public class ResourceBlockPersistenceImpl extends BasePersistenceImpl<ResourceBl
 		resourceBlockImpl.setNew(resourceBlock.isNew());
 		resourceBlockImpl.setPrimaryKey(resourceBlock.getPrimaryKey());
 
+		resourceBlockImpl.setMvccVersion(resourceBlock.getMvccVersion());
 		resourceBlockImpl.setResourceBlockId(resourceBlock.getResourceBlockId());
 		resourceBlockImpl.setCompanyId(resourceBlock.getCompanyId());
 		resourceBlockImpl.setGroupId(resourceBlock.getGroupId());
 		resourceBlockImpl.setName(resourceBlock.getName());
 		resourceBlockImpl.setPermissionsHash(resourceBlock.getPermissionsHash());
 		resourceBlockImpl.setReferenceCount(resourceBlock.getReferenceCount());
-		resourceBlockImpl.setMvccVersion(resourceBlock.getMvccVersion());
 
 		return resourceBlockImpl;
 	}

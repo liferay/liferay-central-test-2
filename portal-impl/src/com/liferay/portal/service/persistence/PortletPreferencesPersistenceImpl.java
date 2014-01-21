@@ -4858,13 +4858,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistenceImpl<Portl
 		portletPreferencesImpl.setNew(portletPreferences.isNew());
 		portletPreferencesImpl.setPrimaryKey(portletPreferences.getPrimaryKey());
 
+		portletPreferencesImpl.setMvccVersion(portletPreferences.getMvccVersion());
 		portletPreferencesImpl.setPortletPreferencesId(portletPreferences.getPortletPreferencesId());
 		portletPreferencesImpl.setOwnerId(portletPreferences.getOwnerId());
 		portletPreferencesImpl.setOwnerType(portletPreferences.getOwnerType());
 		portletPreferencesImpl.setPlid(portletPreferences.getPlid());
 		portletPreferencesImpl.setPortletId(portletPreferences.getPortletId());
 		portletPreferencesImpl.setPreferences(portletPreferences.getPreferences());
-		portletPreferencesImpl.setMvccVersion(portletPreferences.getMvccVersion());
 
 		return portletPreferencesImpl;
 	}

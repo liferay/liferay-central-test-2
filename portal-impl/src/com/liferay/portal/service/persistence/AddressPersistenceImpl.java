@@ -4883,6 +4883,7 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		addressImpl.setNew(address.isNew());
 		addressImpl.setPrimaryKey(address.getPrimaryKey());
 
+		addressImpl.setMvccVersion(address.getMvccVersion());
 		addressImpl.setUuid(address.getUuid());
 		addressImpl.setAddressId(address.getAddressId());
 		addressImpl.setCompanyId(address.getCompanyId());
@@ -4902,7 +4903,6 @@ public class AddressPersistenceImpl extends BasePersistenceImpl<Address>
 		addressImpl.setTypeId(address.getTypeId());
 		addressImpl.setMailing(address.isMailing());
 		addressImpl.setPrimary(address.isPrimary());
-		addressImpl.setMvccVersion(address.getMvccVersion());
 
 		return addressImpl;
 	}

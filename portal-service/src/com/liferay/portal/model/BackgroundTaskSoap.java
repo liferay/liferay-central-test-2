@@ -31,6 +31,7 @@ public class BackgroundTaskSoap implements Serializable {
 	public static BackgroundTaskSoap toSoapModel(BackgroundTask model) {
 		BackgroundTaskSoap soapModel = new BackgroundTaskSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setBackgroundTaskId(model.getBackgroundTaskId());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -46,7 +47,6 @@ public class BackgroundTaskSoap implements Serializable {
 		soapModel.setCompletionDate(model.getCompletionDate());
 		soapModel.setStatus(model.getStatus());
 		soapModel.setStatusMessage(model.getStatusMessage());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -97,6 +97,14 @@ public class BackgroundTaskSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setBackgroundTaskId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public long getBackgroundTaskId() {
@@ -223,14 +231,7 @@ public class BackgroundTaskSoap implements Serializable {
 		_statusMessage = statusMessage;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _backgroundTaskId;
 	private long _groupId;
 	private long _companyId;
@@ -246,5 +247,4 @@ public class BackgroundTaskSoap implements Serializable {
 	private Date _completionDate;
 	private int _status;
 	private String _statusMessage;
-	private long _mvccVersion;
 }

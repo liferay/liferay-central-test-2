@@ -39,7 +39,9 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 	public String toString() {
 		StringBundler sb = new StringBundler(63);
 
-		sb.append("{layoutRevisionId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", layoutRevisionId=");
 		sb.append(layoutRevisionId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -99,8 +101,6 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		sb.append(statusByUserName);
 		sb.append(", statusDate=");
 		sb.append(statusDate);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -110,6 +110,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 	public LayoutRevision toEntityModel() {
 		LayoutRevisionImpl layoutRevisionImpl = new LayoutRevisionImpl();
 
+		layoutRevisionImpl.setMvccVersion(mvccVersion);
 		layoutRevisionImpl.setLayoutRevisionId(layoutRevisionId);
 		layoutRevisionImpl.setGroupId(groupId);
 		layoutRevisionImpl.setCompanyId(companyId);
@@ -240,8 +241,6 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 			layoutRevisionImpl.setStatusDate(new Date(statusDate));
 		}
 
-		layoutRevisionImpl.setMvccVersion(mvccVersion);
-
 		layoutRevisionImpl.resetOriginalValues();
 
 		return layoutRevisionImpl;
@@ -249,6 +248,7 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		layoutRevisionId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -279,12 +279,12 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		statusByUserId = objectInput.readLong();
 		statusByUserName = objectInput.readUTF();
 		statusDate = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(layoutRevisionId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -397,9 +397,9 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 		}
 
 		objectOutput.writeLong(statusDate);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long layoutRevisionId;
 	public long groupId;
 	public long companyId;
@@ -430,5 +430,4 @@ public class LayoutRevisionCacheModel implements CacheModel<LayoutRevision>,
 	public long statusByUserId;
 	public String statusByUserName;
 	public long statusDate;
-	public long mvccVersion;
 }

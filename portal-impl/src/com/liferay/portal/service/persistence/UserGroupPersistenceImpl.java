@@ -4442,6 +4442,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		userGroupImpl.setNew(userGroup.isNew());
 		userGroupImpl.setPrimaryKey(userGroup.getPrimaryKey());
 
+		userGroupImpl.setMvccVersion(userGroup.getMvccVersion());
 		userGroupImpl.setUuid(userGroup.getUuid());
 		userGroupImpl.setUserGroupId(userGroup.getUserGroupId());
 		userGroupImpl.setCompanyId(userGroup.getCompanyId());
@@ -4453,7 +4454,6 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl<UserGroup>
 		userGroupImpl.setName(userGroup.getName());
 		userGroupImpl.setDescription(userGroup.getDescription());
 		userGroupImpl.setAddedByLDAPImport(userGroup.isAddedByLDAPImport());
-		userGroupImpl.setMvccVersion(userGroup.getMvccVersion());
 
 		return userGroupImpl;
 	}

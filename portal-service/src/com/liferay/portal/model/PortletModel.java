@@ -59,6 +59,22 @@ public interface PortletModel extends BaseModel<Portlet>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this portlet.
+	 *
+	 * @return the mvcc version of this portlet
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this portlet.
+	 *
+	 * @param mvccVersion the mvcc version of this portlet
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the ID of this portlet.
 	 *
 	 * @return the ID of this portlet
@@ -136,22 +152,6 @@ public interface PortletModel extends BaseModel<Portlet>, MVCCModel {
 	 * @param active the active of this portlet
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the mvcc version of this portlet.
-	 *
-	 * @return the mvcc version of this portlet
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this portlet.
-	 *
-	 * @param mvccVersion the mvcc version of this portlet
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

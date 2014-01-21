@@ -39,7 +39,9 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", emailAddressId=");
 		sb.append(emailAddressId);
@@ -63,8 +65,6 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 		sb.append(typeId);
 		sb.append(", primary=");
 		sb.append(primary);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -73,6 +73,8 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 	@Override
 	public EmailAddress toEntityModel() {
 		EmailAddressImpl emailAddressImpl = new EmailAddressImpl();
+
+		emailAddressImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			emailAddressImpl.setUuid(StringPool.BLANK);
@@ -118,7 +120,6 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 
 		emailAddressImpl.setTypeId(typeId);
 		emailAddressImpl.setPrimary(primary);
-		emailAddressImpl.setMvccVersion(mvccVersion);
 
 		emailAddressImpl.resetOriginalValues();
 
@@ -127,6 +128,7 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		emailAddressId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -139,12 +141,13 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 		address = objectInput.readUTF();
 		typeId = objectInput.readInt();
 		primary = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -177,9 +180,9 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 
 		objectOutput.writeInt(typeId);
 		objectOutput.writeBoolean(primary);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long emailAddressId;
 	public long companyId;
@@ -192,5 +195,4 @@ public class EmailAddressCacheModel implements CacheModel<EmailAddress>,
 	public String address;
 	public int typeId;
 	public boolean primary;
-	public long mvccVersion;
 }

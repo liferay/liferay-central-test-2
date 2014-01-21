@@ -840,6 +840,7 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		orgLaborImpl.setNew(orgLabor.isNew());
 		orgLaborImpl.setPrimaryKey(orgLabor.getPrimaryKey());
 
+		orgLaborImpl.setMvccVersion(orgLabor.getMvccVersion());
 		orgLaborImpl.setOrgLaborId(orgLabor.getOrgLaborId());
 		orgLaborImpl.setOrganizationId(orgLabor.getOrganizationId());
 		orgLaborImpl.setTypeId(orgLabor.getTypeId());
@@ -857,7 +858,6 @@ public class OrgLaborPersistenceImpl extends BasePersistenceImpl<OrgLabor>
 		orgLaborImpl.setFriClose(orgLabor.getFriClose());
 		orgLaborImpl.setSatOpen(orgLabor.getSatOpen());
 		orgLaborImpl.setSatClose(orgLabor.getSatClose());
-		orgLaborImpl.setMvccVersion(orgLabor.getMvccVersion());
 
 		return orgLaborImpl;
 	}

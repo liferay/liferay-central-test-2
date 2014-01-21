@@ -60,6 +60,22 @@ public interface GroupModel extends AttachedModel, BaseModel<Group>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this group.
+	 *
+	 * @return the mvcc version of this group
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this group.
+	 *
+	 * @param mvccVersion the mvcc version of this group
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this group.
 	 *
 	 * @return the uuid of this group
@@ -380,22 +396,6 @@ public interface GroupModel extends AttachedModel, BaseModel<Group>, MVCCModel {
 	 * @param active the active of this group
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the mvcc version of this group.
-	 *
-	 * @return the mvcc version of this group
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this group.
-	 *
-	 * @param mvccVersion the mvcc version of this group
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

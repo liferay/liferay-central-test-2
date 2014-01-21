@@ -30,12 +30,12 @@ public class RegionSoap implements Serializable {
 	public static RegionSoap toSoapModel(Region model) {
 		RegionSoap soapModel = new RegionSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setRegionId(model.getRegionId());
 		soapModel.setCountryId(model.getCountryId());
 		soapModel.setRegionCode(model.getRegionCode());
 		soapModel.setName(model.getName());
 		soapModel.setActive(model.getActive());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -88,6 +88,14 @@ public class RegionSoap implements Serializable {
 		setRegionId(pk);
 	}
 
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
+	}
+
 	public long getRegionId() {
 		return _regionId;
 	}
@@ -132,18 +140,10 @@ public class RegionSoap implements Serializable {
 		_active = active;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _regionId;
 	private long _countryId;
 	private String _regionCode;
 	private String _name;
 	private boolean _active;
-	private long _mvccVersion;
 }

@@ -63,6 +63,22 @@ public interface AddressModel extends AttachedModel, BaseModel<Address>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this address.
+	 *
+	 * @return the mvcc version of this address
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this address.
+	 *
+	 * @param mvccVersion the mvcc version of this address
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this address.
 	 *
 	 * @return the uuid of this address
@@ -391,22 +407,6 @@ public interface AddressModel extends AttachedModel, BaseModel<Address>,
 	 * @param primary the primary of this address
 	 */
 	public void setPrimary(boolean primary);
-
-	/**
-	 * Returns the mvcc version of this address.
-	 *
-	 * @return the mvcc version of this address
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this address.
-	 *
-	 * @param mvccVersion the mvcc version of this address
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

@@ -62,6 +62,22 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this web d a v props.
+	 *
+	 * @return the mvcc version of this web d a v props
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this web d a v props.
+	 *
+	 * @param mvccVersion the mvcc version of this web d a v props
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the web dav props ID of this web d a v props.
 	 *
 	 * @return the web dav props ID of this web d a v props
@@ -173,22 +189,6 @@ public interface WebDAVPropsModel extends AttachedModel, BaseModel<WebDAVProps>,
 	 * @param props the props of this web d a v props
 	 */
 	public void setProps(String props);
-
-	/**
-	 * Returns the mvcc version of this web d a v props.
-	 *
-	 * @return the mvcc version of this web d a v props
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this web d a v props.
-	 *
-	 * @param mvccVersion the mvcc version of this web d a v props
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

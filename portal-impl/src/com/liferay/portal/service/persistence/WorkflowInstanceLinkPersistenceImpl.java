@@ -971,6 +971,7 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		workflowInstanceLinkImpl.setNew(workflowInstanceLink.isNew());
 		workflowInstanceLinkImpl.setPrimaryKey(workflowInstanceLink.getPrimaryKey());
 
+		workflowInstanceLinkImpl.setMvccVersion(workflowInstanceLink.getMvccVersion());
 		workflowInstanceLinkImpl.setWorkflowInstanceLinkId(workflowInstanceLink.getWorkflowInstanceLinkId());
 		workflowInstanceLinkImpl.setGroupId(workflowInstanceLink.getGroupId());
 		workflowInstanceLinkImpl.setCompanyId(workflowInstanceLink.getCompanyId());
@@ -981,7 +982,6 @@ public class WorkflowInstanceLinkPersistenceImpl extends BasePersistenceImpl<Wor
 		workflowInstanceLinkImpl.setClassNameId(workflowInstanceLink.getClassNameId());
 		workflowInstanceLinkImpl.setClassPK(workflowInstanceLink.getClassPK());
 		workflowInstanceLinkImpl.setWorkflowInstanceId(workflowInstanceLink.getWorkflowInstanceId());
-		workflowInstanceLinkImpl.setMvccVersion(workflowInstanceLink.getMvccVersion());
 
 		return workflowInstanceLinkImpl;
 	}

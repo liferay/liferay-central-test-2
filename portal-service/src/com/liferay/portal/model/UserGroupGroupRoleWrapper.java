@@ -51,16 +51,22 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("userGroupId", getUserGroupId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("roleId", getRoleId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long userGroupId = (Long)attributes.get("userGroupId");
 
 		if (userGroupId != null) {
@@ -77,12 +83,6 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 
 		if (roleId != null) {
 			setRoleId(roleId);
-		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
 		}
 	}
 
@@ -105,6 +105,26 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	public void setPrimaryKey(
 		com.liferay.portal.service.persistence.UserGroupGroupRolePK primaryKey) {
 		_userGroupGroupRole.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this user group group role.
+	*
+	* @return the mvcc version of this user group group role
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _userGroupGroupRole.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this user group group role.
+	*
+	* @param mvccVersion the mvcc version of this user group group role
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_userGroupGroupRole.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -165,26 +185,6 @@ public class UserGroupGroupRoleWrapper implements UserGroupGroupRole,
 	@Override
 	public void setRoleId(long roleId) {
 		_userGroupGroupRole.setRoleId(roleId);
-	}
-
-	/**
-	* Returns the mvcc version of this user group group role.
-	*
-	* @return the mvcc version of this user group group role
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _userGroupGroupRole.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this user group group role.
-	*
-	* @param mvccVersion the mvcc version of this user group group role
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_userGroupGroupRole.setMvccVersion(mvccVersion);
 	}
 
 	@Override

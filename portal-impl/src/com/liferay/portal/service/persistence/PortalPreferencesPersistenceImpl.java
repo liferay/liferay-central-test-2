@@ -630,11 +630,11 @@ public class PortalPreferencesPersistenceImpl extends BasePersistenceImpl<Portal
 		portalPreferencesImpl.setNew(portalPreferences.isNew());
 		portalPreferencesImpl.setPrimaryKey(portalPreferences.getPrimaryKey());
 
+		portalPreferencesImpl.setMvccVersion(portalPreferences.getMvccVersion());
 		portalPreferencesImpl.setPortalPreferencesId(portalPreferences.getPortalPreferencesId());
 		portalPreferencesImpl.setOwnerId(portalPreferences.getOwnerId());
 		portalPreferencesImpl.setOwnerType(portalPreferences.getOwnerType());
 		portalPreferencesImpl.setPreferences(portalPreferences.getPreferences());
-		portalPreferencesImpl.setMvccVersion(portalPreferences.getMvccVersion());
 
 		return portalPreferencesImpl;
 	}

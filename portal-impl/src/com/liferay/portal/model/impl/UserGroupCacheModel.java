@@ -39,7 +39,9 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", userGroupId=");
 		sb.append(userGroupId);
@@ -61,8 +63,6 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		sb.append(description);
 		sb.append(", addedByLDAPImport=");
 		sb.append(addedByLDAPImport);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -71,6 +71,8 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 	@Override
 	public UserGroup toEntityModel() {
 		UserGroupImpl userGroupImpl = new UserGroupImpl();
+
+		userGroupImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			userGroupImpl.setUuid(StringPool.BLANK);
@@ -121,7 +123,6 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		}
 
 		userGroupImpl.setAddedByLDAPImport(addedByLDAPImport);
-		userGroupImpl.setMvccVersion(mvccVersion);
 
 		userGroupImpl.resetOriginalValues();
 
@@ -130,6 +131,7 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		userGroupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -141,12 +143,13 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		name = objectInput.readUTF();
 		description = objectInput.readUTF();
 		addedByLDAPImport = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -184,9 +187,9 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 		}
 
 		objectOutput.writeBoolean(addedByLDAPImport);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long userGroupId;
 	public long companyId;
@@ -198,5 +201,4 @@ public class UserGroupCacheModel implements CacheModel<UserGroup>,
 	public String name;
 	public String description;
 	public boolean addedByLDAPImport;
-	public long mvccVersion;
 }

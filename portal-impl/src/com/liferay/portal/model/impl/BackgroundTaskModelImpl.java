@@ -65,6 +65,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	 */
 	public static final String TABLE_NAME = "BackgroundTask";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "backgroundTaskId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -79,10 +80,9 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 			{ "completed", Types.BOOLEAN },
 			{ "completionDate", Types.TIMESTAMP },
 			{ "status", Types.INTEGER },
-			{ "statusMessage", Types.CLOB },
-			{ "mvccVersion", Types.BIGINT }
+			{ "statusMessage", Types.CLOB }
 		};
-	public static final String TABLE_SQL_CREATE = "create table BackgroundTask (backgroundTaskId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,servletContextNames VARCHAR(255) null,taskExecutorClassName VARCHAR(200) null,taskContext TEXT null,completed BOOLEAN,completionDate DATE null,status INTEGER,statusMessage TEXT null,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table BackgroundTask (mvccVersion LONG default 0,backgroundTaskId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,servletContextNames VARCHAR(255) null,taskExecutorClassName VARCHAR(200) null,taskContext TEXT null,completed BOOLEAN,completionDate DATE null,status INTEGER,statusMessage TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table BackgroundTask";
 	public static final String ORDER_BY_JPQL = " ORDER BY backgroundTask.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY BackgroundTask.createDate ASC";
@@ -119,6 +119,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 
 		BackgroundTask model = new BackgroundTaskImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setBackgroundTaskId(soapModel.getBackgroundTaskId());
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -134,7 +135,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		model.setCompletionDate(soapModel.getCompletionDate());
 		model.setStatus(soapModel.getStatus());
 		model.setStatusMessage(soapModel.getStatusMessage());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -199,6 +199,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("backgroundTaskId", getBackgroundTaskId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -214,7 +215,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		attributes.put("completionDate", getCompletionDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusMessage", getStatusMessage());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -224,6 +224,12 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long backgroundTaskId = (Long)attributes.get("backgroundTaskId");
 
 		if (backgroundTaskId != null) {
@@ -315,12 +321,17 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		if (statusMessage != null) {
 			setStatusMessage(statusMessage);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -603,17 +614,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		_statusMessage = statusMessage;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -645,6 +645,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	public Object clone() {
 		BackgroundTaskImpl backgroundTaskImpl = new BackgroundTaskImpl();
 
+		backgroundTaskImpl.setMvccVersion(getMvccVersion());
 		backgroundTaskImpl.setBackgroundTaskId(getBackgroundTaskId());
 		backgroundTaskImpl.setGroupId(getGroupId());
 		backgroundTaskImpl.setCompanyId(getCompanyId());
@@ -660,7 +661,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		backgroundTaskImpl.setCompletionDate(getCompletionDate());
 		backgroundTaskImpl.setStatus(getStatus());
 		backgroundTaskImpl.setStatusMessage(getStatusMessage());
-		backgroundTaskImpl.setMvccVersion(getMvccVersion());
 
 		backgroundTaskImpl.resetOriginalValues();
 
@@ -748,6 +748,8 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	@Override
 	public CacheModel<BackgroundTask> toCacheModel() {
 		BackgroundTaskCacheModel backgroundTaskCacheModel = new BackgroundTaskCacheModel();
+
+		backgroundTaskCacheModel.mvccVersion = getMvccVersion();
 
 		backgroundTaskCacheModel.backgroundTaskId = getBackgroundTaskId();
 
@@ -838,8 +840,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 			backgroundTaskCacheModel.statusMessage = null;
 		}
 
-		backgroundTaskCacheModel.mvccVersion = getMvccVersion();
-
 		return backgroundTaskCacheModel;
 	}
 
@@ -847,7 +847,9 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	public String toString() {
 		StringBundler sb = new StringBundler(33);
 
-		sb.append("{backgroundTaskId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", backgroundTaskId=");
 		sb.append(getBackgroundTaskId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -877,8 +879,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		sb.append(getStatus());
 		sb.append(", statusMessage=");
 		sb.append(getStatusMessage());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -892,6 +892,10 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 		sb.append("com.liferay.portal.model.BackgroundTask");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>backgroundTaskId</column-name><column-value><![CDATA[");
 		sb.append(getBackgroundTaskId());
@@ -952,10 +956,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 			"<column><column-name>statusMessage</column-name><column-value><![CDATA[");
 		sb.append(getStatusMessage());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -966,6 +966,7 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			BackgroundTask.class
 		};
+	private long _mvccVersion;
 	private long _backgroundTaskId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -992,7 +993,6 @@ public class BackgroundTaskModelImpl extends BaseModelImpl<BackgroundTask>
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private String _statusMessage;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private BackgroundTask _escapedModel;
 }

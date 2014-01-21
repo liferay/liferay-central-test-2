@@ -8624,6 +8624,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		layoutImpl.setNew(layout.isNew());
 		layoutImpl.setPrimaryKey(layout.getPrimaryKey());
 
+		layoutImpl.setMvccVersion(layout.getMvccVersion());
 		layoutImpl.setUuid(layout.getUuid());
 		layoutImpl.setPlid(layout.getPlid());
 		layoutImpl.setGroupId(layout.getGroupId());
@@ -8654,7 +8655,6 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl<Layout>
 		layoutImpl.setLayoutPrototypeUuid(layout.getLayoutPrototypeUuid());
 		layoutImpl.setLayoutPrototypeLinkEnabled(layout.isLayoutPrototypeLinkEnabled());
 		layoutImpl.setSourcePrototypeLayoutUuid(layout.getSourcePrototypeLayoutUuid());
-		layoutImpl.setMvccVersion(layout.getMvccVersion());
 
 		return layoutImpl;
 	}

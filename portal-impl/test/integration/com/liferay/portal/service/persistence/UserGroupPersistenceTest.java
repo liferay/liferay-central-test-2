@@ -114,6 +114,8 @@ public class UserGroupPersistenceTest {
 
 		UserGroup newUserGroup = _persistence.create(pk);
 
+		newUserGroup.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newUserGroup.setUuid(ServiceTestUtil.randomString());
 
 		newUserGroup.setCompanyId(ServiceTestUtil.nextLong());
@@ -134,12 +136,12 @@ public class UserGroupPersistenceTest {
 
 		newUserGroup.setAddedByLDAPImport(ServiceTestUtil.randomBoolean());
 
-		newUserGroup.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newUserGroup);
 
 		UserGroup existingUserGroup = _persistence.findByPrimaryKey(newUserGroup.getPrimaryKey());
 
+		Assert.assertEquals(existingUserGroup.getMvccVersion(),
+			newUserGroup.getMvccVersion());
 		Assert.assertEquals(existingUserGroup.getUuid(), newUserGroup.getUuid());
 		Assert.assertEquals(existingUserGroup.getUserGroupId(),
 			newUserGroup.getUserGroupId());
@@ -162,8 +164,6 @@ public class UserGroupPersistenceTest {
 			newUserGroup.getDescription());
 		Assert.assertEquals(existingUserGroup.getAddedByLDAPImport(),
 			newUserGroup.getAddedByLDAPImport());
-		Assert.assertEquals(existingUserGroup.getMvccVersion(),
-			newUserGroup.getMvccVersion());
 	}
 
 	@Test
@@ -200,11 +200,11 @@ public class UserGroupPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("UserGroup", "uuid", true,
-			"userGroupId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true,
-			"parentUserGroupId", true, "name", true, "description", true,
-			"addedByLDAPImport", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("UserGroup", "mvccVersion",
+			true, "uuid", true, "userGroupId", true, "companyId", true,
+			"userId", true, "userName", true, "createDate", true,
+			"modifiedDate", true, "parentUserGroupId", true, "name", true,
+			"description", true, "addedByLDAPImport", true);
 	}
 
 	@Test
@@ -341,6 +341,8 @@ public class UserGroupPersistenceTest {
 
 		UserGroup userGroup = _persistence.create(pk);
 
+		userGroup.setMvccVersion(ServiceTestUtil.nextLong());
+
 		userGroup.setUuid(ServiceTestUtil.randomString());
 
 		userGroup.setCompanyId(ServiceTestUtil.nextLong());
@@ -360,8 +362,6 @@ public class UserGroupPersistenceTest {
 		userGroup.setDescription(ServiceTestUtil.randomString());
 
 		userGroup.setAddedByLDAPImport(ServiceTestUtil.randomBoolean());
-
-		userGroup.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(userGroup);
 

@@ -30,12 +30,12 @@ public class PortletSoap implements Serializable {
 	public static PortletSoap toSoapModel(Portlet model) {
 		PortletSoap soapModel = new PortletSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setId(model.getId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setPortletId(model.getPortletId());
 		soapModel.setRoles(model.getRoles());
 		soapModel.setActive(model.getActive());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -88,6 +88,14 @@ public class PortletSoap implements Serializable {
 		setId(pk);
 	}
 
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
+	}
+
 	public long getId() {
 		return _id;
 	}
@@ -132,18 +140,10 @@ public class PortletSoap implements Serializable {
 		_active = active;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private long _id;
 	private long _companyId;
 	private String _portletId;
 	private String _roles;
 	private boolean _active;
-	private long _mvccVersion;
 }

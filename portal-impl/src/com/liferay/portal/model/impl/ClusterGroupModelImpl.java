@@ -56,13 +56,13 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	 */
 	public static final String TABLE_NAME = "ClusterGroup";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "clusterGroupId", Types.BIGINT },
 			{ "name", Types.VARCHAR },
 			{ "clusterNodeIds", Types.VARCHAR },
-			{ "wholeCluster", Types.BOOLEAN },
-			{ "mvccVersion", Types.BIGINT }
+			{ "wholeCluster", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (clusterGroupId LONG not null primary key,name VARCHAR(75) null,clusterNodeIds VARCHAR(75) null,wholeCluster BOOLEAN,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table ClusterGroup (mvccVersion LONG default 0,clusterGroupId LONG not null primary key,name VARCHAR(75) null,clusterNodeIds VARCHAR(75) null,wholeCluster BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table ClusterGroup";
 	public static final String ORDER_BY_JPQL = " ORDER BY clusterGroup.clusterGroupId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY ClusterGroup.clusterGroupId ASC";
@@ -116,11 +116,11 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("clusterGroupId", getClusterGroupId());
 		attributes.put("name", getName());
 		attributes.put("clusterNodeIds", getClusterNodeIds());
 		attributes.put("wholeCluster", getWholeCluster());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -130,6 +130,12 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long clusterGroupId = (Long)attributes.get("clusterGroupId");
 
 		if (clusterGroupId != null) {
@@ -153,12 +159,16 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		if (wholeCluster != null) {
 			setWholeCluster(wholeCluster);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -217,16 +227,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	}
 
 	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
-	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
 			ClusterGroup.class.getName(), getPrimaryKey());
@@ -253,11 +253,11 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public Object clone() {
 		ClusterGroupImpl clusterGroupImpl = new ClusterGroupImpl();
 
+		clusterGroupImpl.setMvccVersion(getMvccVersion());
 		clusterGroupImpl.setClusterGroupId(getClusterGroupId());
 		clusterGroupImpl.setName(getName());
 		clusterGroupImpl.setClusterNodeIds(getClusterNodeIds());
 		clusterGroupImpl.setWholeCluster(getWholeCluster());
-		clusterGroupImpl.setMvccVersion(getMvccVersion());
 
 		clusterGroupImpl.resetOriginalValues();
 
@@ -324,6 +324,8 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public CacheModel<ClusterGroup> toCacheModel() {
 		ClusterGroupCacheModel clusterGroupCacheModel = new ClusterGroupCacheModel();
 
+		clusterGroupCacheModel.mvccVersion = getMvccVersion();
+
 		clusterGroupCacheModel.clusterGroupId = getClusterGroupId();
 
 		clusterGroupCacheModel.name = getName();
@@ -344,8 +346,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 
 		clusterGroupCacheModel.wholeCluster = getWholeCluster();
 
-		clusterGroupCacheModel.mvccVersion = getMvccVersion();
-
 		return clusterGroupCacheModel;
 	}
 
@@ -353,7 +353,9 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{clusterGroupId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", clusterGroupId=");
 		sb.append(getClusterGroupId());
 		sb.append(", name=");
 		sb.append(getName());
@@ -361,8 +363,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		sb.append(getClusterNodeIds());
 		sb.append(", wholeCluster=");
 		sb.append(getWholeCluster());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -376,6 +376,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 		sb.append("com.liferay.portal.model.ClusterGroup");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>clusterGroupId</column-name><column-value><![CDATA[");
 		sb.append(getClusterGroupId());
@@ -392,10 +396,6 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 			"<column><column-name>wholeCluster</column-name><column-value><![CDATA[");
 		sb.append(getWholeCluster());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -406,10 +406,10 @@ public class ClusterGroupModelImpl extends BaseModelImpl<ClusterGroup>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			ClusterGroup.class
 		};
+	private long _mvccVersion;
 	private long _clusterGroupId;
 	private String _name;
 	private String _clusterNodeIds;
 	private boolean _wholeCluster;
-	private long _mvccVersion;
 	private ClusterGroup _escapedModel;
 }

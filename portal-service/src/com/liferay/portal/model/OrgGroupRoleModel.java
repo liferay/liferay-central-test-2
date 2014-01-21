@@ -59,6 +59,22 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole>, MVCCModel {
 	public void setPrimaryKey(OrgGroupRolePK primaryKey);
 
 	/**
+	 * Returns the mvcc version of this org group role.
+	 *
+	 * @return the mvcc version of this org group role
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this org group role.
+	 *
+	 * @param mvccVersion the mvcc version of this org group role
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the organization ID of this org group role.
 	 *
 	 * @return the organization ID of this org group role
@@ -99,22 +115,6 @@ public interface OrgGroupRoleModel extends BaseModel<OrgGroupRole>, MVCCModel {
 	 * @param roleId the role ID of this org group role
 	 */
 	public void setRoleId(long roleId);
-
-	/**
-	 * Returns the mvcc version of this org group role.
-	 *
-	 * @return the mvcc version of this org group role
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this org group role.
-	 *
-	 * @param mvccVersion the mvcc version of this org group role
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

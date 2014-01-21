@@ -52,6 +52,7 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("plid", getPlid());
 		attributes.put("groupId", getGroupId());
@@ -84,13 +85,18 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 			getLayoutPrototypeLinkEnabled());
 		attributes.put("sourcePrototypeLayoutUuid",
 			getSourcePrototypeLayoutUuid());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -273,12 +279,6 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 		if (sourcePrototypeLayoutUuid != null) {
 			setSourcePrototypeLayoutUuid(sourcePrototypeLayoutUuid);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -299,6 +299,26 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_layout.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this layout.
+	*
+	* @return the mvcc version of this layout
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _layout.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this layout.
+	*
+	* @param mvccVersion the mvcc version of this layout
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_layout.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -1557,26 +1577,6 @@ public class LayoutWrapper implements Layout, ModelWrapper<Layout> {
 	public void setSourcePrototypeLayoutUuid(
 		java.lang.String sourcePrototypeLayoutUuid) {
 		_layout.setSourcePrototypeLayoutUuid(sourcePrototypeLayoutUuid);
-	}
-
-	/**
-	* Returns the mvcc version of this layout.
-	*
-	* @return the mvcc version of this layout
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _layout.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this layout.
-	*
-	* @param mvccVersion the mvcc version of this layout
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_layout.setMvccVersion(mvccVersion);
 	}
 
 	@Override

@@ -7911,6 +7911,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		groupImpl.setNew(group.isNew());
 		groupImpl.setPrimaryKey(group.getPrimaryKey());
 
+		groupImpl.setMvccVersion(group.getMvccVersion());
 		groupImpl.setUuid(group.getUuid());
 		groupImpl.setGroupId(group.getGroupId());
 		groupImpl.setCompanyId(group.getCompanyId());
@@ -7930,7 +7931,6 @@ public class GroupPersistenceImpl extends BasePersistenceImpl<Group>
 		groupImpl.setSite(group.isSite());
 		groupImpl.setRemoteStagingGroupCount(group.getRemoteStagingGroupCount());
 		groupImpl.setActive(group.isActive());
-		groupImpl.setMvccVersion(group.getMvccVersion());
 
 		return groupImpl;
 	}

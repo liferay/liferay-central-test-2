@@ -53,6 +53,7 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("layoutSetPrototypeId", getLayoutSetPrototypeId());
 		attributes.put("companyId", getCompanyId());
@@ -64,13 +65,18 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 		attributes.put("description", getDescription());
 		attributes.put("settings", getSettings());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -136,12 +142,6 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -162,6 +162,26 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_layoutSetPrototype.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this layout set prototype.
+	*
+	* @return the mvcc version of this layout set prototype
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _layoutSetPrototype.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this layout set prototype.
+	*
+	* @param mvccVersion the mvcc version of this layout set prototype
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_layoutSetPrototype.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -534,26 +554,6 @@ public class LayoutSetPrototypeWrapper implements LayoutSetPrototype,
 	@Override
 	public void setActive(boolean active) {
 		_layoutSetPrototype.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this layout set prototype.
-	*
-	* @return the mvcc version of this layout set prototype
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _layoutSetPrototype.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this layout set prototype.
-	*
-	* @param mvccVersion the mvcc version of this layout set prototype
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_layoutSetPrototype.setMvccVersion(mvccVersion);
 	}
 
 	@Override

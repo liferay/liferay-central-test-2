@@ -111,6 +111,8 @@ public class PhonePersistenceTest {
 
 		Phone newPhone = _persistence.create(pk);
 
+		newPhone.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPhone.setUuid(ServiceTestUtil.randomString());
 
 		newPhone.setCompanyId(ServiceTestUtil.nextLong());
@@ -135,12 +137,12 @@ public class PhonePersistenceTest {
 
 		newPhone.setPrimary(ServiceTestUtil.randomBoolean());
 
-		newPhone.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPhone);
 
 		Phone existingPhone = _persistence.findByPrimaryKey(newPhone.getPrimaryKey());
 
+		Assert.assertEquals(existingPhone.getMvccVersion(),
+			newPhone.getMvccVersion());
 		Assert.assertEquals(existingPhone.getUuid(), newPhone.getUuid());
 		Assert.assertEquals(existingPhone.getPhoneId(), newPhone.getPhoneId());
 		Assert.assertEquals(existingPhone.getCompanyId(),
@@ -161,8 +163,6 @@ public class PhonePersistenceTest {
 			newPhone.getExtension());
 		Assert.assertEquals(existingPhone.getTypeId(), newPhone.getTypeId());
 		Assert.assertEquals(existingPhone.getPrimary(), newPhone.getPrimary());
-		Assert.assertEquals(existingPhone.getMvccVersion(),
-			newPhone.getMvccVersion());
 	}
 
 	@Test
@@ -199,11 +199,11 @@ public class PhonePersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Phone", "uuid", true,
-			"phoneId", true, "companyId", true, "userId", true, "userName",
-			true, "createDate", true, "modifiedDate", true, "classNameId",
-			true, "classPK", true, "number", true, "extension", true, "typeId",
-			true, "primary", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Phone", "mvccVersion",
+			true, "uuid", true, "phoneId", true, "companyId", true, "userId",
+			true, "userName", true, "createDate", true, "modifiedDate", true,
+			"classNameId", true, "classPK", true, "number", true, "extension",
+			true, "typeId", true, "primary", true);
 	}
 
 	@Test
@@ -321,6 +321,8 @@ public class PhonePersistenceTest {
 
 		Phone phone = _persistence.create(pk);
 
+		phone.setMvccVersion(ServiceTestUtil.nextLong());
+
 		phone.setUuid(ServiceTestUtil.randomString());
 
 		phone.setCompanyId(ServiceTestUtil.nextLong());
@@ -344,8 +346,6 @@ public class PhonePersistenceTest {
 		phone.setTypeId(ServiceTestUtil.nextInt());
 
 		phone.setPrimary(ServiceTestUtil.randomBoolean());
-
-		phone.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(phone);
 

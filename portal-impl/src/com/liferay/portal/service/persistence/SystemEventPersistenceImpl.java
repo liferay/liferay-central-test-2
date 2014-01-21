@@ -2601,6 +2601,7 @@ public class SystemEventPersistenceImpl extends BasePersistenceImpl<SystemEvent>
 		systemEventImpl.setNew(systemEvent.isNew());
 		systemEventImpl.setPrimaryKey(systemEvent.getPrimaryKey());
 
+		systemEventImpl.setMvccVersion(systemEvent.getMvccVersion());
 		systemEventImpl.setSystemEventId(systemEvent.getSystemEventId());
 		systemEventImpl.setGroupId(systemEvent.getGroupId());
 		systemEventImpl.setCompanyId(systemEvent.getCompanyId());
@@ -2615,7 +2616,6 @@ public class SystemEventPersistenceImpl extends BasePersistenceImpl<SystemEvent>
 		systemEventImpl.setSystemEventSetKey(systemEvent.getSystemEventSetKey());
 		systemEventImpl.setType(systemEvent.getType());
 		systemEventImpl.setExtraData(systemEvent.getExtraData());
-		systemEventImpl.setMvccVersion(systemEvent.getMvccVersion());
 
 		return systemEventImpl;
 	}

@@ -38,7 +38,9 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", websiteId=");
 		sb.append(websiteId);
@@ -62,8 +64,6 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 		sb.append(typeId);
 		sb.append(", primary=");
 		sb.append(primary);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -72,6 +72,8 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 	@Override
 	public Website toEntityModel() {
 		WebsiteImpl websiteImpl = new WebsiteImpl();
+
+		websiteImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			websiteImpl.setUuid(StringPool.BLANK);
@@ -117,7 +119,6 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 
 		websiteImpl.setTypeId(typeId);
 		websiteImpl.setPrimary(primary);
-		websiteImpl.setMvccVersion(mvccVersion);
 
 		websiteImpl.resetOriginalValues();
 
@@ -126,6 +127,7 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		websiteId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -138,12 +140,13 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 		url = objectInput.readUTF();
 		typeId = objectInput.readInt();
 		primary = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -176,9 +179,9 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 
 		objectOutput.writeInt(typeId);
 		objectOutput.writeBoolean(primary);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long websiteId;
 	public long companyId;
@@ -191,5 +194,4 @@ public class WebsiteCacheModel implements CacheModel<Website>, Externalizable {
 	public String url;
 	public int typeId;
 	public boolean primary;
-	public long mvccVersion;
 }

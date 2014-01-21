@@ -61,6 +61,22 @@ public interface ReleaseModel extends BaseModel<Release>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this release.
+	 *
+	 * @return the mvcc version of this release
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this release.
+	 *
+	 * @param mvccVersion the mvcc version of this release
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the release ID of this release.
 	 *
 	 * @return the release ID of this release
@@ -194,22 +210,6 @@ public interface ReleaseModel extends BaseModel<Release>, MVCCModel {
 	 * @param testString the test string of this release
 	 */
 	public void setTestString(String testString);
-
-	/**
-	 * Returns the mvcc version of this release.
-	 *
-	 * @return the mvcc version of this release
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this release.
-	 *
-	 * @param mvccVersion the mvcc version of this release
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

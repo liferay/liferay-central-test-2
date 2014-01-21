@@ -61,6 +61,22 @@ public interface UserNotificationDeliveryModel extends BaseModel<UserNotificatio
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this user notification delivery.
+	 *
+	 * @return the mvcc version of this user notification delivery
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this user notification delivery.
+	 *
+	 * @param mvccVersion the mvcc version of this user notification delivery
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the user notification delivery ID of this user notification delivery.
 	 *
 	 * @return the user notification delivery ID of this user notification delivery
@@ -206,22 +222,6 @@ public interface UserNotificationDeliveryModel extends BaseModel<UserNotificatio
 	 * @param deliver the deliver of this user notification delivery
 	 */
 	public void setDeliver(boolean deliver);
-
-	/**
-	 * Returns the mvcc version of this user notification delivery.
-	 *
-	 * @return the mvcc version of this user notification delivery
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this user notification delivery.
-	 *
-	 * @param mvccVersion the mvcc version of this user notification delivery
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

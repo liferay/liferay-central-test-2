@@ -39,7 +39,9 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{membershipRequestId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", membershipRequestId=");
 		sb.append(membershipRequestId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -59,8 +61,6 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		sb.append(replierUserId);
 		sb.append(", statusId=");
 		sb.append(statusId);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,6 +70,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 	public MembershipRequest toEntityModel() {
 		MembershipRequestImpl membershipRequestImpl = new MembershipRequestImpl();
 
+		membershipRequestImpl.setMvccVersion(mvccVersion);
 		membershipRequestImpl.setMembershipRequestId(membershipRequestId);
 		membershipRequestImpl.setGroupId(groupId);
 		membershipRequestImpl.setCompanyId(companyId);
@@ -105,7 +106,6 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 
 		membershipRequestImpl.setReplierUserId(replierUserId);
 		membershipRequestImpl.setStatusId(statusId);
-		membershipRequestImpl.setMvccVersion(mvccVersion);
 
 		membershipRequestImpl.resetOriginalValues();
 
@@ -114,6 +114,7 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		membershipRequestId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -124,12 +125,12 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		replyDate = objectInput.readLong();
 		replierUserId = objectInput.readLong();
 		statusId = objectInput.readInt();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(membershipRequestId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -153,9 +154,9 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 		objectOutput.writeLong(replyDate);
 		objectOutput.writeLong(replierUserId);
 		objectOutput.writeInt(statusId);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long membershipRequestId;
 	public long groupId;
 	public long companyId;
@@ -166,5 +167,4 @@ public class MembershipRequestCacheModel implements CacheModel<MembershipRequest
 	public long replyDate;
 	public long replierUserId;
 	public int statusId;
-	public long mvccVersion;
 }

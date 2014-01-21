@@ -1506,6 +1506,7 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		teamImpl.setNew(team.isNew());
 		teamImpl.setPrimaryKey(team.getPrimaryKey());
 
+		teamImpl.setMvccVersion(team.getMvccVersion());
 		teamImpl.setTeamId(team.getTeamId());
 		teamImpl.setCompanyId(team.getCompanyId());
 		teamImpl.setUserId(team.getUserId());
@@ -1515,7 +1516,6 @@ public class TeamPersistenceImpl extends BasePersistenceImpl<Team>
 		teamImpl.setGroupId(team.getGroupId());
 		teamImpl.setName(team.getName());
 		teamImpl.setDescription(team.getDescription());
-		teamImpl.setMvccVersion(team.getMvccVersion());
 
 		return teamImpl;
 	}

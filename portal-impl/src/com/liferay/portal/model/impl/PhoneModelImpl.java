@@ -66,6 +66,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	 */
 	public static final String TABLE_NAME = "Phone";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "uuid_", Types.VARCHAR },
 			{ "phoneId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -78,10 +79,9 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 			{ "number_", Types.VARCHAR },
 			{ "extension", Types.VARCHAR },
 			{ "typeId", Types.INTEGER },
-			{ "primary_", Types.BOOLEAN },
-			{ "mvccVersion", Types.BIGINT }
+			{ "primary_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Phone (uuid_ VARCHAR(75) null,phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table Phone (mvccVersion LONG default 0,uuid_ VARCHAR(75) null,phoneId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,number_ VARCHAR(75) null,extension VARCHAR(75) null,typeId INTEGER,primary_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table Phone";
 	public static final String ORDER_BY_JPQL = " ORDER BY phone.createDate ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Phone.createDate ASC";
@@ -118,6 +118,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 		Phone model = new PhoneImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setUuid(soapModel.getUuid());
 		model.setPhoneId(soapModel.getPhoneId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -131,7 +132,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		model.setExtension(soapModel.getExtension());
 		model.setTypeId(soapModel.getTypeId());
 		model.setPrimary(soapModel.getPrimary());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -196,6 +196,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("phoneId", getPhoneId());
 		attributes.put("companyId", getCompanyId());
@@ -209,7 +210,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		attributes.put("extension", getExtension());
 		attributes.put("typeId", getTypeId());
 		attributes.put("primary", getPrimary());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -219,6 +219,12 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -296,12 +302,17 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		if (primary != null) {
 			setPrimary(primary);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -572,17 +583,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		return _originalPrimary;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -620,6 +620,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public Object clone() {
 		PhoneImpl phoneImpl = new PhoneImpl();
 
+		phoneImpl.setMvccVersion(getMvccVersion());
 		phoneImpl.setUuid(getUuid());
 		phoneImpl.setPhoneId(getPhoneId());
 		phoneImpl.setCompanyId(getCompanyId());
@@ -633,7 +634,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		phoneImpl.setExtension(getExtension());
 		phoneImpl.setTypeId(getTypeId());
 		phoneImpl.setPrimary(getPrimary());
-		phoneImpl.setMvccVersion(getMvccVersion());
 
 		phoneImpl.resetOriginalValues();
 
@@ -723,6 +723,8 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public CacheModel<Phone> toCacheModel() {
 		PhoneCacheModel phoneCacheModel = new PhoneCacheModel();
 
+		phoneCacheModel.mvccVersion = getMvccVersion();
+
 		phoneCacheModel.uuid = getUuid();
 
 		String uuid = phoneCacheModel.uuid;
@@ -787,8 +789,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 		phoneCacheModel.primary = getPrimary();
 
-		phoneCacheModel.mvccVersion = getMvccVersion();
-
 		return phoneCacheModel;
 	}
 
@@ -796,7 +796,9 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	public String toString() {
 		StringBundler sb = new StringBundler(29);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", uuid=");
 		sb.append(getUuid());
 		sb.append(", phoneId=");
 		sb.append(getPhoneId());
@@ -822,8 +824,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		sb.append(getTypeId());
 		sb.append(", primary=");
 		sb.append(getPrimary());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -837,6 +837,10 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 		sb.append("com.liferay.portal.model.Phone");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
@@ -889,10 +893,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 			"<column><column-name>primary</column-name><column-value><![CDATA[");
 		sb.append(getPrimary());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -901,6 +901,7 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 
 	private static ClassLoader _classLoader = Phone.class.getClassLoader();
 	private static Class<?>[] _escapedModelInterfaces = new Class[] { Phone.class };
+	private long _mvccVersion;
 	private String _uuid;
 	private String _originalUuid;
 	private long _phoneId;
@@ -926,7 +927,6 @@ public class PhoneModelImpl extends BaseModelImpl<Phone> implements PhoneModel {
 	private boolean _primary;
 	private boolean _originalPrimary;
 	private boolean _setOriginalPrimary;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private Phone _escapedModel;
 }

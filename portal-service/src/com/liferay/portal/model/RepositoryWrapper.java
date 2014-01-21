@@ -52,6 +52,7 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("repositoryId", getRepositoryId());
 		attributes.put("groupId", getGroupId());
@@ -66,13 +67,18 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 		attributes.put("portletId", getPortletId());
 		attributes.put("typeSettings", getTypeSettings());
 		attributes.put("dlFolderId", getDlFolderId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -156,12 +162,6 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 		if (dlFolderId != null) {
 			setDlFolderId(dlFolderId);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -182,6 +182,26 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_repository.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this repository.
+	*
+	* @return the mvcc version of this repository
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _repository.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this repository.
+	*
+	* @param mvccVersion the mvcc version of this repository
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_repository.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -499,26 +519,6 @@ public class RepositoryWrapper implements Repository, ModelWrapper<Repository> {
 	@Override
 	public void setDlFolderId(long dlFolderId) {
 		_repository.setDlFolderId(dlFolderId);
-	}
-
-	/**
-	* Returns the mvcc version of this repository.
-	*
-	* @return the mvcc version of this repository
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _repository.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this repository.
-	*
-	* @param mvccVersion the mvcc version of this repository
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_repository.setMvccVersion(mvccVersion);
 	}
 
 	@Override

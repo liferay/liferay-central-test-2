@@ -60,6 +60,22 @@ public interface ClassNameModel extends BaseModel<ClassName>, MVCCModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this class name.
+	 *
+	 * @return the mvcc version of this class name
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this class name.
+	 *
+	 * @param mvccVersion the mvcc version of this class name
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the fully qualified class name of this class name.
 	 *
 	 * @return the fully qualified class name of this class name
@@ -99,22 +115,6 @@ public interface ClassNameModel extends BaseModel<ClassName>, MVCCModel,
 	 * @param value the value of this class name
 	 */
 	public void setValue(String value);
-
-	/**
-	 * Returns the mvcc version of this class name.
-	 *
-	 * @return the mvcc version of this class name
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this class name.
-	 *
-	 * @param mvccVersion the mvcc version of this class name
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

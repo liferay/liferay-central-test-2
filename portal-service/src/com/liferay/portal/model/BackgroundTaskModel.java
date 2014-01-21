@@ -63,6 +63,22 @@ public interface BackgroundTaskModel extends BaseModel<BackgroundTask>,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this background task.
+	 *
+	 * @return the mvcc version of this background task
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this background task.
+	 *
+	 * @param mvccVersion the mvcc version of this background task
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the background task ID of this background task.
 	 *
 	 * @return the background task ID of this background task
@@ -313,22 +329,6 @@ public interface BackgroundTaskModel extends BaseModel<BackgroundTask>,
 	 * @param statusMessage the status message of this background task
 	 */
 	public void setStatusMessage(String statusMessage);
-
-	/**
-	 * Returns the mvcc version of this background task.
-	 *
-	 * @return the mvcc version of this background task
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this background task.
-	 *
-	 * @param mvccVersion the mvcc version of this background task
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

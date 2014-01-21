@@ -72,6 +72,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	 */
 	public static final String TABLE_NAME = "LayoutSetPrototype";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "uuid_", Types.VARCHAR },
 			{ "layoutSetPrototypeId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -82,10 +83,9 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 			{ "name", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "settings_", Types.VARCHAR },
-			{ "active_", Types.BOOLEAN },
-			{ "mvccVersion", Types.BIGINT }
+			{ "active_", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table LayoutSetPrototype (uuid_ VARCHAR(75) null,layoutSetPrototypeId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table LayoutSetPrototype (mvccVersion LONG default 0,uuid_ VARCHAR(75) null,layoutSetPrototypeId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name STRING null,description STRING null,settings_ STRING null,active_ BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSetPrototype";
 	public static final String ORDER_BY_JPQL = " ORDER BY layoutSetPrototype.layoutSetPrototypeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY LayoutSetPrototype.layoutSetPrototypeId ASC";
@@ -119,6 +119,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 		LayoutSetPrototype model = new LayoutSetPrototypeImpl();
 
+		model.setMvccVersion(soapModel.getMvccVersion());
 		model.setUuid(soapModel.getUuid());
 		model.setLayoutSetPrototypeId(soapModel.getLayoutSetPrototypeId());
 		model.setCompanyId(soapModel.getCompanyId());
@@ -130,7 +131,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		model.setDescription(soapModel.getDescription());
 		model.setSettings(soapModel.getSettings());
 		model.setActive(soapModel.getActive());
-		model.setMvccVersion(soapModel.getMvccVersion());
 
 		return model;
 	}
@@ -196,6 +196,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("uuid", getUuid());
 		attributes.put("layoutSetPrototypeId", getLayoutSetPrototypeId());
 		attributes.put("companyId", getCompanyId());
@@ -207,7 +208,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		attributes.put("description", getDescription());
 		attributes.put("settings", getSettings());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -217,6 +217,12 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		String uuid = (String)attributes.get("uuid");
 
 		if (uuid != null) {
@@ -282,12 +288,17 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		if (active != null) {
 			setActive(active);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@JSON
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@JSON
@@ -566,17 +577,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		return _originalActive;
 	}
 
-	@JSON
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	@Override
 	public StagedModelType getStagedModelType() {
 		return new StagedModelType(PortalUtil.getClassNameId(
@@ -666,6 +666,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public Object clone() {
 		LayoutSetPrototypeImpl layoutSetPrototypeImpl = new LayoutSetPrototypeImpl();
 
+		layoutSetPrototypeImpl.setMvccVersion(getMvccVersion());
 		layoutSetPrototypeImpl.setUuid(getUuid());
 		layoutSetPrototypeImpl.setLayoutSetPrototypeId(getLayoutSetPrototypeId());
 		layoutSetPrototypeImpl.setCompanyId(getCompanyId());
@@ -677,7 +678,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		layoutSetPrototypeImpl.setDescription(getDescription());
 		layoutSetPrototypeImpl.setSettings(getSettings());
 		layoutSetPrototypeImpl.setActive(getActive());
-		layoutSetPrototypeImpl.setMvccVersion(getMvccVersion());
 
 		layoutSetPrototypeImpl.resetOriginalValues();
 
@@ -757,6 +757,8 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public CacheModel<LayoutSetPrototype> toCacheModel() {
 		LayoutSetPrototypeCacheModel layoutSetPrototypeCacheModel = new LayoutSetPrototypeCacheModel();
 
+		layoutSetPrototypeCacheModel.mvccVersion = getMvccVersion();
+
 		layoutSetPrototypeCacheModel.uuid = getUuid();
 
 		String uuid = layoutSetPrototypeCacheModel.uuid;
@@ -823,8 +825,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 
 		layoutSetPrototypeCacheModel.active = getActive();
 
-		layoutSetPrototypeCacheModel.mvccVersion = getMvccVersion();
-
 		return layoutSetPrototypeCacheModel;
 	}
 
@@ -832,7 +832,9 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	public String toString() {
 		StringBundler sb = new StringBundler(25);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", uuid=");
 		sb.append(getUuid());
 		sb.append(", layoutSetPrototypeId=");
 		sb.append(getLayoutSetPrototypeId());
@@ -854,8 +856,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		sb.append(getSettings());
 		sb.append(", active=");
 		sb.append(getActive());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -869,6 +869,10 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 		sb.append("com.liferay.portal.model.LayoutSetPrototype");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>uuid</column-name><column-value><![CDATA[");
 		sb.append(getUuid());
@@ -913,10 +917,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 			"<column><column-name>active</column-name><column-value><![CDATA[");
 		sb.append(getActive());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -927,6 +927,7 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			LayoutSetPrototype.class
 		};
+	private long _mvccVersion;
 	private String _uuid;
 	private String _originalUuid;
 	private long _layoutSetPrototypeId;
@@ -945,7 +946,6 @@ public class LayoutSetPrototypeModelImpl extends BaseModelImpl<LayoutSetPrototyp
 	private boolean _active;
 	private boolean _originalActive;
 	private boolean _setOriginalActive;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private LayoutSetPrototype _escapedModel;
 }

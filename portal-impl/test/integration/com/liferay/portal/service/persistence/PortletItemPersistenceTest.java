@@ -114,6 +114,8 @@ public class PortletItemPersistenceTest {
 
 		PortletItem newPortletItem = _persistence.create(pk);
 
+		newPortletItem.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPortletItem.setGroupId(ServiceTestUtil.nextLong());
 
 		newPortletItem.setCompanyId(ServiceTestUtil.nextLong());
@@ -132,12 +134,12 @@ public class PortletItemPersistenceTest {
 
 		newPortletItem.setClassNameId(ServiceTestUtil.nextLong());
 
-		newPortletItem.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPortletItem);
 
 		PortletItem existingPortletItem = _persistence.findByPrimaryKey(newPortletItem.getPrimaryKey());
 
+		Assert.assertEquals(existingPortletItem.getMvccVersion(),
+			newPortletItem.getMvccVersion());
 		Assert.assertEquals(existingPortletItem.getPortletItemId(),
 			newPortletItem.getPortletItemId());
 		Assert.assertEquals(existingPortletItem.getGroupId(),
@@ -160,8 +162,6 @@ public class PortletItemPersistenceTest {
 			newPortletItem.getPortletId());
 		Assert.assertEquals(existingPortletItem.getClassNameId(),
 			newPortletItem.getClassNameId());
-		Assert.assertEquals(existingPortletItem.getMvccVersion(),
-			newPortletItem.getMvccVersion());
 	}
 
 	@Test
@@ -200,10 +200,10 @@ public class PortletItemPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("PortletItem",
-			"portletItemId", true, "groupId", true, "companyId", true,
-			"userId", true, "userName", true, "createDate", true,
-			"modifiedDate", true, "name", true, "portletId", true,
-			"classNameId", true, "mvccVersion", true);
+			"mvccVersion", true, "portletItemId", true, "groupId", true,
+			"companyId", true, "userId", true, "userName", true, "createDate",
+			true, "modifiedDate", true, "name", true, "portletId", true,
+			"classNameId", true);
 	}
 
 	@Test
@@ -347,6 +347,8 @@ public class PortletItemPersistenceTest {
 
 		PortletItem portletItem = _persistence.create(pk);
 
+		portletItem.setMvccVersion(ServiceTestUtil.nextLong());
+
 		portletItem.setGroupId(ServiceTestUtil.nextLong());
 
 		portletItem.setCompanyId(ServiceTestUtil.nextLong());
@@ -364,8 +366,6 @@ public class PortletItemPersistenceTest {
 		portletItem.setPortletId(ServiceTestUtil.randomString());
 
 		portletItem.setClassNameId(ServiceTestUtil.nextLong());
-
-		portletItem.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(portletItem);
 

@@ -50,6 +50,7 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("accountId", getAccountId());
 		attributes.put("webId", getWebId());
@@ -60,13 +61,18 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 		attributes.put("system", getSystem());
 		attributes.put("maxUsers", getMaxUsers());
 		attributes.put("active", getActive());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long companyId = (Long)attributes.get("companyId");
 
 		if (companyId != null) {
@@ -126,12 +132,6 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 		if (active != null) {
 			setActive(active);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -152,6 +152,26 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_company.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this company.
+	*
+	* @return the mvcc version of this company
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _company.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this company.
+	*
+	* @param mvccVersion the mvcc version of this company
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_company.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -372,26 +392,6 @@ public class CompanyWrapper implements Company, ModelWrapper<Company> {
 	@Override
 	public void setActive(boolean active) {
 		_company.setActive(active);
-	}
-
-	/**
-	* Returns the mvcc version of this company.
-	*
-	* @return the mvcc version of this company
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _company.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this company.
-	*
-	* @param mvccVersion the mvcc version of this company
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_company.setMvccVersion(mvccVersion);
 	}
 
 	@Override

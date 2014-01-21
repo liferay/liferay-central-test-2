@@ -37,7 +37,9 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 	public String toString() {
 		StringBundler sb = new StringBundler(15);
 
-		sb.append("{pluginSettingId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", pluginSettingId=");
 		sb.append(pluginSettingId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -49,8 +51,6 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		sb.append(roles);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -60,6 +60,7 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 	public PluginSetting toEntityModel() {
 		PluginSettingImpl pluginSettingImpl = new PluginSettingImpl();
 
+		pluginSettingImpl.setMvccVersion(mvccVersion);
 		pluginSettingImpl.setPluginSettingId(pluginSettingId);
 		pluginSettingImpl.setCompanyId(companyId);
 
@@ -85,7 +86,6 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		}
 
 		pluginSettingImpl.setActive(active);
-		pluginSettingImpl.setMvccVersion(mvccVersion);
 
 		pluginSettingImpl.resetOriginalValues();
 
@@ -94,18 +94,19 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		pluginSettingId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		pluginId = objectInput.readUTF();
 		pluginType = objectInput.readUTF();
 		roles = objectInput.readUTF();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(pluginSettingId);
 		objectOutput.writeLong(companyId);
 
@@ -131,14 +132,13 @@ public class PluginSettingCacheModel implements CacheModel<PluginSetting>,
 		}
 
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long pluginSettingId;
 	public long companyId;
 	public String pluginId;
 	public String pluginType;
 	public String roles;
 	public boolean active;
-	public long mvccVersion;
 }

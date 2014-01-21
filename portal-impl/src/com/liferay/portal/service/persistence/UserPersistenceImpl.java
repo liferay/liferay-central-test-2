@@ -7136,6 +7136,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setNew(user.isNew());
 		userImpl.setPrimaryKey(user.getPrimaryKey());
 
+		userImpl.setMvccVersion(user.getMvccVersion());
 		userImpl.setUuid(user.getUuid());
 		userImpl.setUserId(user.getUserId());
 		userImpl.setCompanyId(user.getCompanyId());
@@ -7176,7 +7177,6 @@ public class UserPersistenceImpl extends BasePersistenceImpl<User>
 		userImpl.setAgreedToTermsOfUse(user.isAgreedToTermsOfUse());
 		userImpl.setEmailAddressVerified(user.isEmailAddressVerified());
 		userImpl.setStatus(user.getStatus());
-		userImpl.setMvccVersion(user.getMvccVersion());
 
 		return userImpl;
 	}

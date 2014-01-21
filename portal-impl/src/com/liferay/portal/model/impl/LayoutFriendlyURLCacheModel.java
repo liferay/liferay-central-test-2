@@ -39,7 +39,9 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 	public String toString() {
 		StringBundler sb = new StringBundler(27);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", layoutFriendlyURLId=");
 		sb.append(layoutFriendlyURLId);
@@ -63,8 +65,6 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 		sb.append(friendlyURL);
 		sb.append(", languageId=");
 		sb.append(languageId);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -73,6 +73,8 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 	@Override
 	public LayoutFriendlyURL toEntityModel() {
 		LayoutFriendlyURLImpl layoutFriendlyURLImpl = new LayoutFriendlyURLImpl();
+
+		layoutFriendlyURLImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			layoutFriendlyURLImpl.setUuid(StringPool.BLANK);
@@ -124,8 +126,6 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 			layoutFriendlyURLImpl.setLanguageId(languageId);
 		}
 
-		layoutFriendlyURLImpl.setMvccVersion(mvccVersion);
-
 		layoutFriendlyURLImpl.resetOriginalValues();
 
 		return layoutFriendlyURLImpl;
@@ -133,6 +133,7 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		layoutFriendlyURLId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -145,12 +146,13 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 		privateLayout = objectInput.readBoolean();
 		friendlyURL = objectInput.readUTF();
 		languageId = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -188,10 +190,9 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 		else {
 			objectOutput.writeUTF(languageId);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long layoutFriendlyURLId;
 	public long groupId;
@@ -204,5 +205,4 @@ public class LayoutFriendlyURLCacheModel implements CacheModel<LayoutFriendlyURL
 	public boolean privateLayout;
 	public String friendlyURL;
 	public String languageId;
-	public long mvccVersion;
 }

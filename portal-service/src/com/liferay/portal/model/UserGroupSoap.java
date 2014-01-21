@@ -31,6 +31,7 @@ public class UserGroupSoap implements Serializable {
 	public static UserGroupSoap toSoapModel(UserGroup model) {
 		UserGroupSoap soapModel = new UserGroupSoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setUserGroupId(model.getUserGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -42,7 +43,6 @@ public class UserGroupSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setAddedByLDAPImport(model.getAddedByLDAPImport());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -93,6 +93,14 @@ public class UserGroupSoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setUserGroupId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -187,14 +195,7 @@ public class UserGroupSoap implements Serializable {
 		_addedByLDAPImport = addedByLDAPImport;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _userGroupId;
 	private long _companyId;
@@ -206,5 +207,4 @@ public class UserGroupSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private boolean _addedByLDAPImport;
-	private long _mvccVersion;
 }

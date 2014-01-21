@@ -36,7 +36,9 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(19);
 
-		sb.append("{countryId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", countryId=");
 		sb.append(countryId);
 		sb.append(", name=");
 		sb.append(name);
@@ -52,8 +54,6 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		sb.append(zipRequired);
 		sb.append(", active=");
 		sb.append(active);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -63,6 +63,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 	public Country toEntityModel() {
 		CountryImpl countryImpl = new CountryImpl();
 
+		countryImpl.setMvccVersion(mvccVersion);
 		countryImpl.setCountryId(countryId);
 
 		if (name == null) {
@@ -102,7 +103,6 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 
 		countryImpl.setZipRequired(zipRequired);
 		countryImpl.setActive(active);
-		countryImpl.setMvccVersion(mvccVersion);
 
 		countryImpl.resetOriginalValues();
 
@@ -111,6 +111,7 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		countryId = objectInput.readLong();
 		name = objectInput.readUTF();
 		a2 = objectInput.readUTF();
@@ -119,12 +120,12 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 		idd = objectInput.readUTF();
 		zipRequired = objectInput.readBoolean();
 		active = objectInput.readBoolean();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(countryId);
 
 		if (name == null) {
@@ -164,9 +165,9 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 
 		objectOutput.writeBoolean(zipRequired);
 		objectOutput.writeBoolean(active);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long countryId;
 	public String name;
 	public String a2;
@@ -175,5 +176,4 @@ public class CountryCacheModel implements CacheModel<Country>, Externalizable {
 	public String idd;
 	public boolean zipRequired;
 	public boolean active;
-	public long mvccVersion;
 }

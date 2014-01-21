@@ -39,7 +39,9 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 	public String toString() {
 		StringBundler sb = new StringBundler(37);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", organizationId=");
 		sb.append(organizationId);
@@ -73,8 +75,6 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		sb.append(comments);
 		sb.append(", logoId=");
 		sb.append(logoId);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -83,6 +83,8 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 	@Override
 	public Organization toEntityModel() {
 		OrganizationImpl organizationImpl = new OrganizationImpl();
+
+		organizationImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			organizationImpl.setUuid(StringPool.BLANK);
@@ -152,7 +154,6 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		}
 
 		organizationImpl.setLogoId(logoId);
-		organizationImpl.setMvccVersion(mvccVersion);
 
 		organizationImpl.resetOriginalValues();
 
@@ -161,6 +162,7 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		organizationId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -178,12 +180,13 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		statusId = objectInput.readInt();
 		comments = objectInput.readUTF();
 		logoId = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -240,9 +243,9 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 		}
 
 		objectOutput.writeLong(logoId);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long organizationId;
 	public long companyId;
@@ -260,5 +263,4 @@ public class OrganizationCacheModel implements CacheModel<Organization>,
 	public int statusId;
 	public String comments;
 	public long logoId;
-	public long mvccVersion;
 }

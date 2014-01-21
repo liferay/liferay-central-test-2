@@ -39,7 +39,9 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 	public String toString() {
 		StringBundler sb = new StringBundler(71);
 
-		sb.append("{uuid=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", uuid=");
 		sb.append(uuid);
 		sb.append(", passwordPolicyId=");
 		sb.append(passwordPolicyId);
@@ -107,8 +109,6 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		sb.append(resetFailureCount);
 		sb.append(", resetTicketMaxAge=");
 		sb.append(resetTicketMaxAge);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -117,6 +117,8 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 	@Override
 	public PasswordPolicy toEntityModel() {
 		PasswordPolicyImpl passwordPolicyImpl = new PasswordPolicyImpl();
+
+		passwordPolicyImpl.setMvccVersion(mvccVersion);
 
 		if (uuid == null) {
 			passwordPolicyImpl.setUuid(StringPool.BLANK);
@@ -197,7 +199,6 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		passwordPolicyImpl.setRequireUnlock(requireUnlock);
 		passwordPolicyImpl.setResetFailureCount(resetFailureCount);
 		passwordPolicyImpl.setResetTicketMaxAge(resetTicketMaxAge);
-		passwordPolicyImpl.setMvccVersion(mvccVersion);
 
 		passwordPolicyImpl.resetOriginalValues();
 
@@ -206,6 +207,7 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		uuid = objectInput.readUTF();
 		passwordPolicyId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -240,12 +242,13 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		requireUnlock = objectInput.readBoolean();
 		resetFailureCount = objectInput.readLong();
 		resetTicketMaxAge = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
+
 		if (uuid == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -313,9 +316,9 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 		objectOutput.writeBoolean(requireUnlock);
 		objectOutput.writeLong(resetFailureCount);
 		objectOutput.writeLong(resetTicketMaxAge);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public String uuid;
 	public long passwordPolicyId;
 	public long companyId;
@@ -350,5 +353,4 @@ public class PasswordPolicyCacheModel implements CacheModel<PasswordPolicy>,
 	public boolean requireUnlock;
 	public long resetFailureCount;
 	public long resetTicketMaxAge;
-	public long mvccVersion;
 }

@@ -318,11 +318,11 @@ public class ClusterGroupPersistenceImpl extends BasePersistenceImpl<ClusterGrou
 		clusterGroupImpl.setNew(clusterGroup.isNew());
 		clusterGroupImpl.setPrimaryKey(clusterGroup.getPrimaryKey());
 
+		clusterGroupImpl.setMvccVersion(clusterGroup.getMvccVersion());
 		clusterGroupImpl.setClusterGroupId(clusterGroup.getClusterGroupId());
 		clusterGroupImpl.setName(clusterGroup.getName());
 		clusterGroupImpl.setClusterNodeIds(clusterGroup.getClusterNodeIds());
 		clusterGroupImpl.setWholeCluster(clusterGroup.isWholeCluster());
-		clusterGroupImpl.setMvccVersion(clusterGroup.getMvccVersion());
 
 		return clusterGroupImpl;
 	}

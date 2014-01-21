@@ -113,6 +113,8 @@ public class CompanyPersistenceTest {
 
 		Company newCompany = _persistence.create(pk);
 
+		newCompany.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newCompany.setAccountId(ServiceTestUtil.nextLong());
 
 		newCompany.setWebId(ServiceTestUtil.randomString());
@@ -131,12 +133,12 @@ public class CompanyPersistenceTest {
 
 		newCompany.setActive(ServiceTestUtil.randomBoolean());
 
-		newCompany.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newCompany);
 
 		Company existingCompany = _persistence.findByPrimaryKey(newCompany.getPrimaryKey());
 
+		Assert.assertEquals(existingCompany.getMvccVersion(),
+			newCompany.getMvccVersion());
 		Assert.assertEquals(existingCompany.getCompanyId(),
 			newCompany.getCompanyId());
 		Assert.assertEquals(existingCompany.getAccountId(),
@@ -151,8 +153,6 @@ public class CompanyPersistenceTest {
 		Assert.assertEquals(existingCompany.getMaxUsers(),
 			newCompany.getMaxUsers());
 		Assert.assertEquals(existingCompany.getActive(), newCompany.getActive());
-		Assert.assertEquals(existingCompany.getMvccVersion(),
-			newCompany.getMvccVersion());
 	}
 
 	@Test
@@ -189,10 +189,10 @@ public class CompanyPersistenceTest {
 	}
 
 	protected OrderByComparator getOrderByComparator() {
-		return OrderByComparatorFactoryUtil.create("Company", "companyId",
-			true, "accountId", true, "webId", true, "key", true, "mx", true,
-			"homeURL", true, "logoId", true, "system", true, "maxUsers", true,
-			"active", true, "mvccVersion", true);
+		return OrderByComparatorFactoryUtil.create("Company", "mvccVersion",
+			true, "companyId", true, "accountId", true, "webId", true, "key",
+			true, "mx", true, "homeURL", true, "logoId", true, "system", true,
+			"maxUsers", true, "active", true);
 	}
 
 	@Test
@@ -333,6 +333,8 @@ public class CompanyPersistenceTest {
 
 		Company company = _persistence.create(pk);
 
+		company.setMvccVersion(ServiceTestUtil.nextLong());
+
 		company.setAccountId(ServiceTestUtil.nextLong());
 
 		company.setWebId(ServiceTestUtil.randomString());
@@ -350,8 +352,6 @@ public class CompanyPersistenceTest {
 		company.setMaxUsers(ServiceTestUtil.nextInt());
 
 		company.setActive(ServiceTestUtil.randomBoolean());
-
-		company.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(company);
 

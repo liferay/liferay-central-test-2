@@ -63,6 +63,22 @@ public interface WorkflowDefinitionLinkModel extends AttachedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this workflow definition link.
+	 *
+	 * @return the mvcc version of this workflow definition link
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this workflow definition link.
+	 *
+	 * @param mvccVersion the mvcc version of this workflow definition link
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the workflow definition link ID of this workflow definition link.
 	 *
 	 * @return the workflow definition link ID of this workflow definition link
@@ -274,22 +290,6 @@ public interface WorkflowDefinitionLinkModel extends AttachedModel,
 	 * @param workflowDefinitionVersion the workflow definition version of this workflow definition link
 	 */
 	public void setWorkflowDefinitionVersion(int workflowDefinitionVersion);
-
-	/**
-	 * Returns the mvcc version of this workflow definition link.
-	 *
-	 * @return the mvcc version of this workflow definition link
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this workflow definition link.
-	 *
-	 * @param mvccVersion the mvcc version of this workflow definition link
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

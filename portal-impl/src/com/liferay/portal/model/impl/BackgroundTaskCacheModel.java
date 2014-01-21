@@ -39,7 +39,9 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 	public String toString() {
 		StringBundler sb = new StringBundler(33);
 
-		sb.append("{backgroundTaskId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", backgroundTaskId=");
 		sb.append(backgroundTaskId);
 		sb.append(", groupId=");
 		sb.append(groupId);
@@ -69,8 +71,6 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 		sb.append(status);
 		sb.append(", statusMessage=");
 		sb.append(statusMessage);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -80,6 +80,7 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 	public BackgroundTask toEntityModel() {
 		BackgroundTaskImpl backgroundTaskImpl = new BackgroundTaskImpl();
 
+		backgroundTaskImpl.setMvccVersion(mvccVersion);
 		backgroundTaskImpl.setBackgroundTaskId(backgroundTaskId);
 		backgroundTaskImpl.setGroupId(groupId);
 		backgroundTaskImpl.setCompanyId(companyId);
@@ -152,8 +153,6 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 			backgroundTaskImpl.setStatusMessage(statusMessage);
 		}
 
-		backgroundTaskImpl.setMvccVersion(mvccVersion);
-
 		backgroundTaskImpl.resetOriginalValues();
 
 		return backgroundTaskImpl;
@@ -161,6 +160,7 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		backgroundTaskId = objectInput.readLong();
 		groupId = objectInput.readLong();
 		companyId = objectInput.readLong();
@@ -176,12 +176,12 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 		completionDate = objectInput.readLong();
 		status = objectInput.readInt();
 		statusMessage = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(backgroundTaskId);
 		objectOutput.writeLong(groupId);
 		objectOutput.writeLong(companyId);
@@ -235,10 +235,9 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 		else {
 			objectOutput.writeUTF(statusMessage);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long backgroundTaskId;
 	public long groupId;
 	public long companyId;
@@ -254,5 +253,4 @@ public class BackgroundTaskCacheModel implements CacheModel<BackgroundTask>,
 	public long completionDate;
 	public int status;
 	public String statusMessage;
-	public long mvccVersion;
 }

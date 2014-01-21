@@ -111,18 +111,20 @@ public class PasswordTrackerPersistenceTest {
 
 		PasswordTracker newPasswordTracker = _persistence.create(pk);
 
+		newPasswordTracker.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newPasswordTracker.setUserId(ServiceTestUtil.nextLong());
 
 		newPasswordTracker.setCreateDate(ServiceTestUtil.nextDate());
 
 		newPasswordTracker.setPassword(ServiceTestUtil.randomString());
 
-		newPasswordTracker.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newPasswordTracker);
 
 		PasswordTracker existingPasswordTracker = _persistence.findByPrimaryKey(newPasswordTracker.getPrimaryKey());
 
+		Assert.assertEquals(existingPasswordTracker.getMvccVersion(),
+			newPasswordTracker.getMvccVersion());
 		Assert.assertEquals(existingPasswordTracker.getPasswordTrackerId(),
 			newPasswordTracker.getPasswordTrackerId());
 		Assert.assertEquals(existingPasswordTracker.getUserId(),
@@ -132,8 +134,6 @@ public class PasswordTrackerPersistenceTest {
 			Time.getShortTimestamp(newPasswordTracker.getCreateDate()));
 		Assert.assertEquals(existingPasswordTracker.getPassword(),
 			newPasswordTracker.getPassword());
-		Assert.assertEquals(existingPasswordTracker.getMvccVersion(),
-			newPasswordTracker.getMvccVersion());
 	}
 
 	@Test
@@ -172,8 +172,8 @@ public class PasswordTrackerPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("PasswordTracker",
-			"passwordTrackerId", true, "userId", true, "createDate", true,
-			"password", true, "mvccVersion", true);
+			"mvccVersion", true, "passwordTrackerId", true, "userId", true,
+			"createDate", true, "password", true);
 	}
 
 	@Test
@@ -293,13 +293,13 @@ public class PasswordTrackerPersistenceTest {
 
 		PasswordTracker passwordTracker = _persistence.create(pk);
 
+		passwordTracker.setMvccVersion(ServiceTestUtil.nextLong());
+
 		passwordTracker.setUserId(ServiceTestUtil.nextLong());
 
 		passwordTracker.setCreateDate(ServiceTestUtil.nextDate());
 
 		passwordTracker.setPassword(ServiceTestUtil.randomString());
-
-		passwordTracker.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(passwordTracker);
 

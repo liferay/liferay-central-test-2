@@ -1914,6 +1914,7 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		workflowDefinitionLinkImpl.setNew(workflowDefinitionLink.isNew());
 		workflowDefinitionLinkImpl.setPrimaryKey(workflowDefinitionLink.getPrimaryKey());
 
+		workflowDefinitionLinkImpl.setMvccVersion(workflowDefinitionLink.getMvccVersion());
 		workflowDefinitionLinkImpl.setWorkflowDefinitionLinkId(workflowDefinitionLink.getWorkflowDefinitionLinkId());
 		workflowDefinitionLinkImpl.setGroupId(workflowDefinitionLink.getGroupId());
 		workflowDefinitionLinkImpl.setCompanyId(workflowDefinitionLink.getCompanyId());
@@ -1926,7 +1927,6 @@ public class WorkflowDefinitionLinkPersistenceImpl extends BasePersistenceImpl<W
 		workflowDefinitionLinkImpl.setTypePK(workflowDefinitionLink.getTypePK());
 		workflowDefinitionLinkImpl.setWorkflowDefinitionName(workflowDefinitionLink.getWorkflowDefinitionName());
 		workflowDefinitionLinkImpl.setWorkflowDefinitionVersion(workflowDefinitionLink.getWorkflowDefinitionVersion());
-		workflowDefinitionLinkImpl.setMvccVersion(workflowDefinitionLink.getMvccVersion());
 
 		return workflowDefinitionLinkImpl;
 	}

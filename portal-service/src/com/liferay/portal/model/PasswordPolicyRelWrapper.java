@@ -51,17 +51,23 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("passwordPolicyRelId", getPasswordPolicyRelId());
 		attributes.put("passwordPolicyId", getPasswordPolicyId());
 		attributes.put("classNameId", getClassNameId());
 		attributes.put("classPK", getClassPK());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long passwordPolicyRelId = (Long)attributes.get("passwordPolicyRelId");
 
 		if (passwordPolicyRelId != null) {
@@ -85,12 +91,6 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel,
 		if (classPK != null) {
 			setClassPK(classPK);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -111,6 +111,26 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_passwordPolicyRel.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this password policy rel.
+	*
+	* @return the mvcc version of this password policy rel
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _passwordPolicyRel.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this password policy rel.
+	*
+	* @param mvccVersion the mvcc version of this password policy rel
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_passwordPolicyRel.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -206,26 +226,6 @@ public class PasswordPolicyRelWrapper implements PasswordPolicyRel,
 	@Override
 	public void setClassPK(long classPK) {
 		_passwordPolicyRel.setClassPK(classPK);
-	}
-
-	/**
-	* Returns the mvcc version of this password policy rel.
-	*
-	* @return the mvcc version of this password policy rel
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _passwordPolicyRel.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this password policy rel.
-	*
-	* @param mvccVersion the mvcc version of this password policy rel
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_passwordPolicyRel.setMvccVersion(mvccVersion);
 	}
 
 	@Override

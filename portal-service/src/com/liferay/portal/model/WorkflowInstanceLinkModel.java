@@ -63,6 +63,22 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this workflow instance link.
+	 *
+	 * @return the mvcc version of this workflow instance link
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this workflow instance link.
+	 *
+	 * @param mvccVersion the mvcc version of this workflow instance link
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the workflow instance link ID of this workflow instance link.
 	 *
 	 * @return the workflow instance link ID of this workflow instance link
@@ -245,22 +261,6 @@ public interface WorkflowInstanceLinkModel extends AttachedModel,
 	 * @param workflowInstanceId the workflow instance ID of this workflow instance link
 	 */
 	public void setWorkflowInstanceId(long workflowInstanceId);
-
-	/**
-	 * Returns the mvcc version of this workflow instance link.
-	 *
-	 * @return the mvcc version of this workflow instance link
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this workflow instance link.
-	 *
-	 * @param mvccVersion the mvcc version of this workflow instance link
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

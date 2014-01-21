@@ -37,7 +37,9 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{portalPreferencesId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", portalPreferencesId=");
 		sb.append(portalPreferencesId);
 		sb.append(", ownerId=");
 		sb.append(ownerId);
@@ -45,8 +47,6 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		sb.append(ownerType);
 		sb.append(", preferences=");
 		sb.append(preferences);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -56,6 +56,7 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 	public PortalPreferences toEntityModel() {
 		PortalPreferencesImpl portalPreferencesImpl = new PortalPreferencesImpl();
 
+		portalPreferencesImpl.setMvccVersion(mvccVersion);
 		portalPreferencesImpl.setPortalPreferencesId(portalPreferencesId);
 		portalPreferencesImpl.setOwnerId(ownerId);
 		portalPreferencesImpl.setOwnerType(ownerType);
@@ -67,8 +68,6 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 			portalPreferencesImpl.setPreferences(preferences);
 		}
 
-		portalPreferencesImpl.setMvccVersion(mvccVersion);
-
 		portalPreferencesImpl.resetOriginalValues();
 
 		return portalPreferencesImpl;
@@ -76,16 +75,17 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		portalPreferencesId = objectInput.readLong();
 		ownerId = objectInput.readLong();
 		ownerType = objectInput.readInt();
 		preferences = objectInput.readUTF();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(portalPreferencesId);
 		objectOutput.writeLong(ownerId);
 		objectOutput.writeInt(ownerType);
@@ -96,13 +96,11 @@ public class PortalPreferencesCacheModel implements CacheModel<PortalPreferences
 		else {
 			objectOutput.writeUTF(preferences);
 		}
-
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long portalPreferencesId;
 	public long ownerId;
 	public int ownerType;
 	public String preferences;
-	public long mvccVersion;
 }

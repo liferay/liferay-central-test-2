@@ -585,10 +585,10 @@ public class BrowserTrackerPersistenceImpl extends BasePersistenceImpl<BrowserTr
 		browserTrackerImpl.setNew(browserTracker.isNew());
 		browserTrackerImpl.setPrimaryKey(browserTracker.getPrimaryKey());
 
+		browserTrackerImpl.setMvccVersion(browserTracker.getMvccVersion());
 		browserTrackerImpl.setBrowserTrackerId(browserTracker.getBrowserTrackerId());
 		browserTrackerImpl.setUserId(browserTracker.getUserId());
 		browserTrackerImpl.setBrowserKey(browserTracker.getBrowserKey());
-		browserTrackerImpl.setMvccVersion(browserTracker.getMvccVersion());
 
 		return browserTrackerImpl;
 	}

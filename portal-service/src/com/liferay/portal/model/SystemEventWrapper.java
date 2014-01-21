@@ -52,6 +52,7 @@ public class SystemEventWrapper implements SystemEvent,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("systemEventId", getSystemEventId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -66,13 +67,18 @@ public class SystemEventWrapper implements SystemEvent,
 		attributes.put("systemEventSetKey", getSystemEventSetKey());
 		attributes.put("type", getType());
 		attributes.put("extraData", getExtraData());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long systemEventId = (Long)attributes.get("systemEventId");
 
 		if (systemEventId != null) {
@@ -156,12 +162,6 @@ public class SystemEventWrapper implements SystemEvent,
 		if (extraData != null) {
 			setExtraData(extraData);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -182,6 +182,26 @@ public class SystemEventWrapper implements SystemEvent,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_systemEvent.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this system event.
+	*
+	* @return the mvcc version of this system event
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _systemEvent.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this system event.
+	*
+	* @param mvccVersion the mvcc version of this system event
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_systemEvent.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -499,26 +519,6 @@ public class SystemEventWrapper implements SystemEvent,
 	@Override
 	public void setExtraData(java.lang.String extraData) {
 		_systemEvent.setExtraData(extraData);
-	}
-
-	/**
-	* Returns the mvcc version of this system event.
-	*
-	* @return the mvcc version of this system event
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _systemEvent.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this system event.
-	*
-	* @param mvccVersion the mvcc version of this system event
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_systemEvent.setMvccVersion(mvccVersion);
 	}
 
 	@Override

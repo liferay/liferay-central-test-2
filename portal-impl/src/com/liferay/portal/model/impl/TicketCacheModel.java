@@ -38,7 +38,9 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
-		sb.append("{ticketId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", ticketId=");
 		sb.append(ticketId);
 		sb.append(", companyId=");
 		sb.append(companyId);
@@ -56,8 +58,6 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		sb.append(extraInfo);
 		sb.append(", expirationDate=");
 		sb.append(expirationDate);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -67,6 +67,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 	public Ticket toEntityModel() {
 		TicketImpl ticketImpl = new TicketImpl();
 
+		ticketImpl.setMvccVersion(mvccVersion);
 		ticketImpl.setTicketId(ticketId);
 		ticketImpl.setCompanyId(companyId);
 
@@ -103,8 +104,6 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 			ticketImpl.setExpirationDate(new Date(expirationDate));
 		}
 
-		ticketImpl.setMvccVersion(mvccVersion);
-
 		ticketImpl.resetOriginalValues();
 
 		return ticketImpl;
@@ -112,6 +111,7 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		ticketId = objectInput.readLong();
 		companyId = objectInput.readLong();
 		createDate = objectInput.readLong();
@@ -121,12 +121,12 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		type = objectInput.readInt();
 		extraInfo = objectInput.readUTF();
 		expirationDate = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(ticketId);
 		objectOutput.writeLong(companyId);
 		objectOutput.writeLong(createDate);
@@ -150,9 +150,9 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 		}
 
 		objectOutput.writeLong(expirationDate);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long ticketId;
 	public long companyId;
 	public long createDate;
@@ -162,5 +162,4 @@ public class TicketCacheModel implements CacheModel<Ticket>, Externalizable {
 	public int type;
 	public String extraInfo;
 	public long expirationDate;
-	public long mvccVersion;
 }

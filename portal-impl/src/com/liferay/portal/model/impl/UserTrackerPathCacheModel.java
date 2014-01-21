@@ -39,7 +39,9 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 	public String toString() {
 		StringBundler sb = new StringBundler(11);
 
-		sb.append("{userTrackerPathId=");
+		sb.append("{mvccVersion=");
+		sb.append(mvccVersion);
+		sb.append(", userTrackerPathId=");
 		sb.append(userTrackerPathId);
 		sb.append(", userTrackerId=");
 		sb.append(userTrackerId);
@@ -47,8 +49,6 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 		sb.append(path);
 		sb.append(", pathDate=");
 		sb.append(pathDate);
-		sb.append(", mvccVersion=");
-		sb.append(mvccVersion);
 		sb.append("}");
 
 		return sb.toString();
@@ -58,6 +58,7 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 	public UserTrackerPath toEntityModel() {
 		UserTrackerPathImpl userTrackerPathImpl = new UserTrackerPathImpl();
 
+		userTrackerPathImpl.setMvccVersion(mvccVersion);
 		userTrackerPathImpl.setUserTrackerPathId(userTrackerPathId);
 		userTrackerPathImpl.setUserTrackerId(userTrackerId);
 
@@ -75,8 +76,6 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 			userTrackerPathImpl.setPathDate(new Date(pathDate));
 		}
 
-		userTrackerPathImpl.setMvccVersion(mvccVersion);
-
 		userTrackerPathImpl.resetOriginalValues();
 
 		return userTrackerPathImpl;
@@ -84,16 +83,17 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 
 	@Override
 	public void readExternal(ObjectInput objectInput) throws IOException {
+		mvccVersion = objectInput.readLong();
 		userTrackerPathId = objectInput.readLong();
 		userTrackerId = objectInput.readLong();
 		path = objectInput.readUTF();
 		pathDate = objectInput.readLong();
-		mvccVersion = objectInput.readLong();
 	}
 
 	@Override
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
+		objectOutput.writeLong(mvccVersion);
 		objectOutput.writeLong(userTrackerPathId);
 		objectOutput.writeLong(userTrackerId);
 
@@ -105,12 +105,11 @@ public class UserTrackerPathCacheModel implements CacheModel<UserTrackerPath>,
 		}
 
 		objectOutput.writeLong(pathDate);
-		objectOutput.writeLong(mvccVersion);
 	}
 
+	public long mvccVersion;
 	public long userTrackerPathId;
 	public long userTrackerId;
 	public String path;
 	public long pathDate;
-	public long mvccVersion;
 }

@@ -52,6 +52,7 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("backgroundTaskId", getBackgroundTaskId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -67,13 +68,18 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 		attributes.put("completionDate", getCompletionDate());
 		attributes.put("status", getStatus());
 		attributes.put("statusMessage", getStatusMessage());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long backgroundTaskId = (Long)attributes.get("backgroundTaskId");
 
 		if (backgroundTaskId != null) {
@@ -165,12 +171,6 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 		if (statusMessage != null) {
 			setStatusMessage(statusMessage);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -191,6 +191,26 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_backgroundTask.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this background task.
+	*
+	* @return the mvcc version of this background task
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _backgroundTask.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this background task.
+	*
+	* @param mvccVersion the mvcc version of this background task
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_backgroundTask.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -523,26 +543,6 @@ public class BackgroundTaskWrapper implements BackgroundTask,
 	@Override
 	public void setStatusMessage(java.lang.String statusMessage) {
 		_backgroundTask.setStatusMessage(statusMessage);
-	}
-
-	/**
-	* Returns the mvcc version of this background task.
-	*
-	* @return the mvcc version of this background task
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _backgroundTask.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this background task.
-	*
-	* @param mvccVersion the mvcc version of this background task
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_backgroundTask.setMvccVersion(mvccVersion);
 	}
 
 	@Override

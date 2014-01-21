@@ -59,6 +59,22 @@ public interface CompanyModel extends BaseModel<Company>, MVCCModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this company.
+	 *
+	 * @return the mvcc version of this company
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this company.
+	 *
+	 * @param mvccVersion the mvcc version of this company
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the company ID of this company.
 	 *
 	 * @return the company ID of this company
@@ -215,22 +231,6 @@ public interface CompanyModel extends BaseModel<Company>, MVCCModel {
 	 * @param active the active of this company
 	 */
 	public void setActive(boolean active);
-
-	/**
-	 * Returns the mvcc version of this company.
-	 *
-	 * @return the mvcc version of this company
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this company.
-	 *
-	 * @param mvccVersion the mvcc version of this company
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

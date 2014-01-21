@@ -113,6 +113,8 @@ public class UserIdMapperPersistenceTest {
 
 		UserIdMapper newUserIdMapper = _persistence.create(pk);
 
+		newUserIdMapper.setMvccVersion(ServiceTestUtil.nextLong());
+
 		newUserIdMapper.setUserId(ServiceTestUtil.nextLong());
 
 		newUserIdMapper.setType(ServiceTestUtil.randomString());
@@ -121,12 +123,12 @@ public class UserIdMapperPersistenceTest {
 
 		newUserIdMapper.setExternalUserId(ServiceTestUtil.randomString());
 
-		newUserIdMapper.setMvccVersion(ServiceTestUtil.nextLong());
-
 		_persistence.update(newUserIdMapper);
 
 		UserIdMapper existingUserIdMapper = _persistence.findByPrimaryKey(newUserIdMapper.getPrimaryKey());
 
+		Assert.assertEquals(existingUserIdMapper.getMvccVersion(),
+			newUserIdMapper.getMvccVersion());
 		Assert.assertEquals(existingUserIdMapper.getUserIdMapperId(),
 			newUserIdMapper.getUserIdMapperId());
 		Assert.assertEquals(existingUserIdMapper.getUserId(),
@@ -137,8 +139,6 @@ public class UserIdMapperPersistenceTest {
 			newUserIdMapper.getDescription());
 		Assert.assertEquals(existingUserIdMapper.getExternalUserId(),
 			newUserIdMapper.getExternalUserId());
-		Assert.assertEquals(existingUserIdMapper.getMvccVersion(),
-			newUserIdMapper.getMvccVersion());
 	}
 
 	@Test
@@ -177,8 +177,8 @@ public class UserIdMapperPersistenceTest {
 
 	protected OrderByComparator getOrderByComparator() {
 		return OrderByComparatorFactoryUtil.create("UserIdMapper",
-			"userIdMapperId", true, "userId", true, "type", true,
-			"description", true, "externalUserId", true, "mvccVersion", true);
+			"mvccVersion", true, "userIdMapperId", true, "userId", true,
+			"type", true, "description", true, "externalUserId", true);
 	}
 
 	@Test
@@ -324,6 +324,8 @@ public class UserIdMapperPersistenceTest {
 
 		UserIdMapper userIdMapper = _persistence.create(pk);
 
+		userIdMapper.setMvccVersion(ServiceTestUtil.nextLong());
+
 		userIdMapper.setUserId(ServiceTestUtil.nextLong());
 
 		userIdMapper.setType(ServiceTestUtil.randomString());
@@ -331,8 +333,6 @@ public class UserIdMapperPersistenceTest {
 		userIdMapper.setDescription(ServiceTestUtil.randomString());
 
 		userIdMapper.setExternalUserId(ServiceTestUtil.randomString());
-
-		userIdMapper.setMvccVersion(ServiceTestUtil.nextLong());
 
 		_persistence.update(userIdMapper);
 

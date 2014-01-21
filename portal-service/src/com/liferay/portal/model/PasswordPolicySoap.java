@@ -31,6 +31,7 @@ public class PasswordPolicySoap implements Serializable {
 	public static PasswordPolicySoap toSoapModel(PasswordPolicy model) {
 		PasswordPolicySoap soapModel = new PasswordPolicySoap();
 
+		soapModel.setMvccVersion(model.getMvccVersion());
 		soapModel.setUuid(model.getUuid());
 		soapModel.setPasswordPolicyId(model.getPasswordPolicyId());
 		soapModel.setCompanyId(model.getCompanyId());
@@ -65,7 +66,6 @@ public class PasswordPolicySoap implements Serializable {
 		soapModel.setRequireUnlock(model.getRequireUnlock());
 		soapModel.setResetFailureCount(model.getResetFailureCount());
 		soapModel.setResetTicketMaxAge(model.getResetTicketMaxAge());
-		soapModel.setMvccVersion(model.getMvccVersion());
 
 		return soapModel;
 	}
@@ -116,6 +116,14 @@ public class PasswordPolicySoap implements Serializable {
 
 	public void setPrimaryKey(long pk) {
 		setPasswordPolicyId(pk);
+	}
+
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
+
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	public String getUuid() {
@@ -426,14 +434,7 @@ public class PasswordPolicySoap implements Serializable {
 		_resetTicketMaxAge = resetTicketMaxAge;
 	}
 
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
+	private long _mvccVersion;
 	private String _uuid;
 	private long _passwordPolicyId;
 	private long _companyId;
@@ -468,5 +469,4 @@ public class PasswordPolicySoap implements Serializable {
 	private boolean _requireUnlock;
 	private long _resetFailureCount;
 	private long _resetTicketMaxAge;
-	private long _mvccVersion;
 }

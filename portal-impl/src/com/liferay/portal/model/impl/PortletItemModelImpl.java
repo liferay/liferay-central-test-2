@@ -60,6 +60,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	 */
 	public static final String TABLE_NAME = "PortletItem";
 	public static final Object[][] TABLE_COLUMNS = {
+			{ "mvccVersion", Types.BIGINT },
 			{ "portletItemId", Types.BIGINT },
 			{ "groupId", Types.BIGINT },
 			{ "companyId", Types.BIGINT },
@@ -69,10 +70,9 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "name", Types.VARCHAR },
 			{ "portletId", Types.VARCHAR },
-			{ "classNameId", Types.BIGINT },
-			{ "mvccVersion", Types.BIGINT }
+			{ "classNameId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PortletItem (portletItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,portletId VARCHAR(200) null,classNameId LONG,mvccVersion LONG default 0)";
+	public static final String TABLE_SQL_CREATE = "create table PortletItem (mvccVersion LONG default 0,portletItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,portletId VARCHAR(200) null,classNameId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PortletItem";
 	public static final String ORDER_BY_JPQL = " ORDER BY portletItem.portletItemId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY PortletItem.portletItemId ASC";
@@ -133,6 +133,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("portletItemId", getPortletItemId());
 		attributes.put("groupId", getGroupId());
 		attributes.put("companyId", getCompanyId());
@@ -143,7 +144,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		attributes.put("name", getName());
 		attributes.put("portletId", getPortletId());
 		attributes.put("classNameId", getClassNameId());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		attributes.put("entityCacheEnabled", isEntityCacheEnabled());
 		attributes.put("finderCacheEnabled", isFinderCacheEnabled());
@@ -153,6 +153,12 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long portletItemId = (Long)attributes.get("portletItemId");
 
 		if (portletItemId != null) {
@@ -212,12 +218,16 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		if (classNameId != null) {
 			setClassNameId(classNameId);
 		}
+	}
 
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
+	@Override
+	public long getMvccVersion() {
+		return _mvccVersion;
+	}
 
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_mvccVersion = mvccVersion;
 	}
 
 	@Override
@@ -409,16 +419,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		return _originalClassNameId;
 	}
 
-	@Override
-	public long getMvccVersion() {
-		return _mvccVersion;
-	}
-
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_mvccVersion = mvccVersion;
-	}
-
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -450,6 +450,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public Object clone() {
 		PortletItemImpl portletItemImpl = new PortletItemImpl();
 
+		portletItemImpl.setMvccVersion(getMvccVersion());
 		portletItemImpl.setPortletItemId(getPortletItemId());
 		portletItemImpl.setGroupId(getGroupId());
 		portletItemImpl.setCompanyId(getCompanyId());
@@ -460,7 +461,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		portletItemImpl.setName(getName());
 		portletItemImpl.setPortletId(getPortletId());
 		portletItemImpl.setClassNameId(getClassNameId());
-		portletItemImpl.setMvccVersion(getMvccVersion());
 
 		portletItemImpl.resetOriginalValues();
 
@@ -542,6 +542,8 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public CacheModel<PortletItem> toCacheModel() {
 		PortletItemCacheModel portletItemCacheModel = new PortletItemCacheModel();
 
+		portletItemCacheModel.mvccVersion = getMvccVersion();
+
 		portletItemCacheModel.portletItemId = getPortletItemId();
 
 		portletItemCacheModel.groupId = getGroupId();
@@ -594,8 +596,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 
 		portletItemCacheModel.classNameId = getClassNameId();
 
-		portletItemCacheModel.mvccVersion = getMvccVersion();
-
 		return portletItemCacheModel;
 	}
 
@@ -603,7 +603,9 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	public String toString() {
 		StringBundler sb = new StringBundler(23);
 
-		sb.append("{portletItemId=");
+		sb.append("{mvccVersion=");
+		sb.append(getMvccVersion());
+		sb.append(", portletItemId=");
 		sb.append(getPortletItemId());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
@@ -623,8 +625,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		sb.append(getPortletId());
 		sb.append(", classNameId=");
 		sb.append(getClassNameId());
-		sb.append(", mvccVersion=");
-		sb.append(getMvccVersion());
 		sb.append("}");
 
 		return sb.toString();
@@ -638,6 +638,10 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 		sb.append("com.liferay.portal.model.PortletItem");
 		sb.append("</model-name>");
 
+		sb.append(
+			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
+		sb.append(getMvccVersion());
+		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>portletItemId</column-name><column-value><![CDATA[");
 		sb.append(getPortletItemId());
@@ -678,10 +682,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 			"<column><column-name>classNameId</column-name><column-value><![CDATA[");
 		sb.append(getClassNameId());
 		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>mvccVersion</column-name><column-value><![CDATA[");
-		sb.append(getMvccVersion());
-		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -692,6 +692,7 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	private static Class<?>[] _escapedModelInterfaces = new Class[] {
 			PortletItem.class
 		};
+	private long _mvccVersion;
 	private long _portletItemId;
 	private long _groupId;
 	private long _originalGroupId;
@@ -709,7 +710,6 @@ public class PortletItemModelImpl extends BaseModelImpl<PortletItem>
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;
-	private long _mvccVersion;
 	private long _columnBitmask;
 	private PortletItem _escapedModel;
 }

@@ -59,6 +59,22 @@ public interface ResourceActionModel extends BaseModel<ResourceAction>, MVCCMode
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this resource action.
+	 *
+	 * @return the mvcc version of this resource action
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this resource action.
+	 *
+	 * @param mvccVersion the mvcc version of this resource action
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the resource action ID of this resource action.
 	 *
 	 * @return the resource action ID of this resource action
@@ -115,22 +131,6 @@ public interface ResourceActionModel extends BaseModel<ResourceAction>, MVCCMode
 	 * @param bitwiseValue the bitwise value of this resource action
 	 */
 	public void setBitwiseValue(long bitwiseValue);
-
-	/**
-	 * Returns the mvcc version of this resource action.
-	 *
-	 * @return the mvcc version of this resource action
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this resource action.
-	 *
-	 * @param mvccVersion the mvcc version of this resource action
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();

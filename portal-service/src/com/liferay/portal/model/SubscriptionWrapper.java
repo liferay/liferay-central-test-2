@@ -52,6 +52,7 @@ public class SubscriptionWrapper implements Subscription,
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
+		attributes.put("mvccVersion", getMvccVersion());
 		attributes.put("subscriptionId", getSubscriptionId());
 		attributes.put("companyId", getCompanyId());
 		attributes.put("userId", getUserId());
@@ -61,13 +62,18 @@ public class SubscriptionWrapper implements Subscription,
 		attributes.put("classNameId", getClassNameId());
 		attributes.put("classPK", getClassPK());
 		attributes.put("frequency", getFrequency());
-		attributes.put("mvccVersion", getMvccVersion());
 
 		return attributes;
 	}
 
 	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
+		Long mvccVersion = (Long)attributes.get("mvccVersion");
+
+		if (mvccVersion != null) {
+			setMvccVersion(mvccVersion);
+		}
+
 		Long subscriptionId = (Long)attributes.get("subscriptionId");
 
 		if (subscriptionId != null) {
@@ -121,12 +127,6 @@ public class SubscriptionWrapper implements Subscription,
 		if (frequency != null) {
 			setFrequency(frequency);
 		}
-
-		Long mvccVersion = (Long)attributes.get("mvccVersion");
-
-		if (mvccVersion != null) {
-			setMvccVersion(mvccVersion);
-		}
 	}
 
 	/**
@@ -147,6 +147,26 @@ public class SubscriptionWrapper implements Subscription,
 	@Override
 	public void setPrimaryKey(long primaryKey) {
 		_subscription.setPrimaryKey(primaryKey);
+	}
+
+	/**
+	* Returns the mvcc version of this subscription.
+	*
+	* @return the mvcc version of this subscription
+	*/
+	@Override
+	public long getMvccVersion() {
+		return _subscription.getMvccVersion();
+	}
+
+	/**
+	* Sets the mvcc version of this subscription.
+	*
+	* @param mvccVersion the mvcc version of this subscription
+	*/
+	@Override
+	public void setMvccVersion(long mvccVersion) {
+		_subscription.setMvccVersion(mvccVersion);
 	}
 
 	/**
@@ -364,26 +384,6 @@ public class SubscriptionWrapper implements Subscription,
 	@Override
 	public void setFrequency(java.lang.String frequency) {
 		_subscription.setFrequency(frequency);
-	}
-
-	/**
-	* Returns the mvcc version of this subscription.
-	*
-	* @return the mvcc version of this subscription
-	*/
-	@Override
-	public long getMvccVersion() {
-		return _subscription.getMvccVersion();
-	}
-
-	/**
-	* Sets the mvcc version of this subscription.
-	*
-	* @param mvccVersion the mvcc version of this subscription
-	*/
-	@Override
-	public void setMvccVersion(long mvccVersion) {
-		_subscription.setMvccVersion(mvccVersion);
 	}
 
 	@Override

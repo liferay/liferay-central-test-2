@@ -62,6 +62,22 @@ public interface UserModel extends BaseModel<User>, MVCCModel, StagedModel {
 	public void setPrimaryKey(long primaryKey);
 
 	/**
+	 * Returns the mvcc version of this user.
+	 *
+	 * @return the mvcc version of this user
+	 */
+	@Override
+	public long getMvccVersion();
+
+	/**
+	 * Sets the mvcc version of this user.
+	 *
+	 * @param mvccVersion the mvcc version of this user
+	 */
+	@Override
+	public void setMvccVersion(long mvccVersion);
+
+	/**
 	 * Returns the uuid of this user.
 	 *
 	 * @return the uuid of this user
@@ -703,22 +719,6 @@ public interface UserModel extends BaseModel<User>, MVCCModel, StagedModel {
 	 * @param status the status of this user
 	 */
 	public void setStatus(int status);
-
-	/**
-	 * Returns the mvcc version of this user.
-	 *
-	 * @return the mvcc version of this user
-	 */
-	@Override
-	public long getMvccVersion();
-
-	/**
-	 * Sets the mvcc version of this user.
-	 *
-	 * @param mvccVersion the mvcc version of this user
-	 */
-	@Override
-	public void setMvccVersion(long mvccVersion);
 
 	@Override
 	public boolean isNew();
