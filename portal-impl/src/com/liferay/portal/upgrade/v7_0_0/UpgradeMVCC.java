@@ -37,6 +37,29 @@ public class UpgradeMVCC extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
+		Connection connection = null;
+
+		try {
+			connection = DataAccess.getUpgradeOptimizedConnection();
+
+			DatabaseMetaData databaseMetaData = connection.getMetaData();
+
+			List<Element> classElements = getClassElements();
+
+			for (Element classElement : classElements) {
+				if (classElement.element("version") == null) {
+					continue;
+				}
+
+				upgradeMVCC(databaseMetaData, classElement);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(connection);
+		}
+	}
+
+	protected List<Element> getClassElements() throws Exception {
 		Thread currentThread = Thread.currentThread();
 
 		ClassLoader classLoader = currentThread.getContextClassLoader();
@@ -48,62 +71,46 @@ public class UpgradeMVCC extends UpgradeProcess {
 
 		Element rootElement = document.getRootElement();
 
-		List<Element> classElements = rootElement.elements("class");
+		return rootElement.elements("class");
+	}
 
-		Connection con = DataAccess.getUpgradeOptimizedConnection();
+	protected void upgradeMVCC(
+			DatabaseMetaData databaseMetaData, Element classElement)
+		throws Exception {
+
+		String table = classElement.attributeValue("table");
+
+		ResultSet tableResultSet = databaseMetaData.getTables(
+			null, null, table, null);
 
 		try {
-			DatabaseMetaData databaseMetaData = con.getMetaData();
+			if (!tableResultSet.next()) {
+				_log.error("Table " + table + " does not exist");
 
-			for (Element classElement : classElements) {
-				if (classElement.element("version") == null) {
-					continue;
+				return;
+			}
+
+			ResultSet columnResultSet = databaseMetaData.getColumns(
+				null, null, table, "mvccVersion");
+
+			try {
+				if (columnResultSet.next()) {
+					return;
 				}
 
-				String versionedTable = classElement.attributeValue("table");
+				runSQL(
+					"alter table " + table + " add mvccVersion LONG default 0");
 
-				ResultSet tableResultSet = databaseMetaData.getTables(
-					null, null, versionedTable, null);
-
-				try {
-					if (!tableResultSet.next()) {
-						_log.error(
-							"Table " + versionedTable + " does not exist!");
-
-						continue;
-					}
-
-					ResultSet columnResultSet = databaseMetaData.getColumns(
-						null, null, versionedTable, "mvccVersion");
-
-					try {
-						if (columnResultSet.next()) {
-							continue;
-						}
-
-						String addColumnSQL =
-							"alter table ".concat(versionedTable).concat(
-								" add mvccVersion LONG default 0");
-
-						runSQL(addColumnSQL);
-
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Added mvccVersion column to table " +
-									versionedTable);
-						}
-					}
-					finally {
-						DataAccess.cleanUp(columnResultSet);
-					}
+				if (_log.isDebugEnabled()) {
+					_log.debug("Added column mvccVersion to table " + table);
 				}
-				finally {
-					DataAccess.cleanUp(tableResultSet);
-				}
+			}
+			finally {
+				DataAccess.cleanUp(columnResultSet);
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con);
+			DataAccess.cleanUp(tableResultSet);
 		}
 	}
 
