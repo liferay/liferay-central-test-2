@@ -84,10 +84,10 @@ public class UploadImageAction extends PortletAction {
 				addTempImageFile(actionRequest);
 			}
 			else {
+				FileEntry fileEntry = null;
+
 				boolean imageUploaded = ParamUtil.getBoolean(
 					actionRequest, "imageUploaded");
-
-				FileEntry fileEntry = null;
 
 				if (imageUploaded) {
 					fileEntry = saveTempImageFile(actionRequest);
