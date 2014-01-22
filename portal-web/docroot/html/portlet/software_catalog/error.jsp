@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/software_catalog/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= NoSuchFrameworkVersionException.class %>" message="the-framework-version-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchLicenseException.class %>" message="the-license-could-not-be-found" />

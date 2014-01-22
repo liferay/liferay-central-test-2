@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="please-enter-a-valid-page-title" />
 

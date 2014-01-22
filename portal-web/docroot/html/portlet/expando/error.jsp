@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/expando/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= NoSuchColumnException.class %>" message="the-custom-field-could-not-be-found" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= DuplicateLockException.class %>">
 

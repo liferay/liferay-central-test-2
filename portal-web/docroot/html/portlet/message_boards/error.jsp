@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= BannedUserException.class %>" message="you-have-been-banned-by-the-moderator" />
 <liferay-ui:error exception="<%= LockedThreadException.class %>" message="thread-is-locked" />

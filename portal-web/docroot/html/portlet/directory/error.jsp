@@ -16,7 +16,7 @@
 
 <%@ include file="/html/portlet/directory/init.jsp" %>
 
-<liferay-ui:error-header/>
+<liferay-ui:error-header />
 
 <liferay-ui:error exception="<%= NoSuchOrganizationException.class %>" message="the-organization-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchUserException.class %>" message="the-user-could-not-be-found" />
