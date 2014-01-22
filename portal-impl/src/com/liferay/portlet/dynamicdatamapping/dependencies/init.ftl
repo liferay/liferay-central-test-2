@@ -9,12 +9,12 @@
 <#assign cssClass = "">
 
 <#if fieldStructure.width??>
-	<#if fieldStructure.width == "small">
-		<#assign cssClass = "input-small">
+	<#if fieldStructure.width == "large">
+		<#assign cssClass = "input-large">
 	<#elseif fieldStructure.width == "medium">
 		<#assign cssClass = "input-medium">
-	<#elseif fieldStructure.width == "large">
-		<#assign cssClass = "input-large">
+	<#elseif fieldStructure.width == "small">
+		<#assign cssClass = "input-small">
 	</#if>
 </#if>
 
