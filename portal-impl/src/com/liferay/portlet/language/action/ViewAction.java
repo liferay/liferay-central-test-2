@@ -188,11 +188,12 @@ public class ViewAction extends PortletAction {
 
 		int pos = layoutURL.lastIndexOf(CharPool.SLASH);
 
-		layoutURL = layoutURL.substring(pos + 1);
+		String layoutURLLanguageId = layoutURL.substring(pos + 1);
 
-		Locale curLocale = LocaleUtil.fromLanguageId(layoutURL, true, false);
+		Locale layoutURLLocale = LocaleUtil.fromLanguageId(
+			layoutURLLanguageId, true, false);
 
-		if (curLocale != null) {
+		if (layoutURLLocale != null) {
 			return true;
 		}
 
