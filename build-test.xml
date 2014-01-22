@@ -311,6 +311,10 @@ create database lportal2 character set utf8;</echo>
 		<delete file="portal-web/test-ant-scripts/log" />
 	</target>
 
+	<target name="clean-up-sikuli-libs">
+		<delete dir="lib/development/libs" />
+	</target>
+
 	<target name="copy-log-file">
 		<for param="log.file">
 			<path>
@@ -2463,6 +2467,8 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<antcall target="run-selenium-test" />
 
 		<antcall target="stop-app-server" />
+
+		<antcall target="clean-up-sikuli-libs" />
 
 		<if>
 			<equals arg1="${test.browser}" arg2="googlechrome" />
