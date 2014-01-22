@@ -132,9 +132,11 @@ public class PortalCacheDatagramReceiveHandlerTest {
 		Assert.assertEquals(_TEST_VALUE, deserializer.readObject());
 	}
 
-	@AdviseWith(adviceClasses = {
-		PortalExecutorManagerUtilAdvice.class, PortalCacheActionTypeAdvice.class
-	})
+	@AdviseWith(
+		adviceClasses = {
+			PortalExecutorManagerUtilAdvice.class,
+			PortalCacheActionTypeAdvice.class
+		})
 	@Test
 	public void testMockValue() throws Exception {
 		PortalCacheActionType[] portalCacheActionTypes =
@@ -274,15 +276,15 @@ public class PortalCacheDatagramReceiveHandlerTest {
 	@AdviseWith(adviceClasses = {PortalExecutorManagerUtilAdvice.class})
 	@Test
 	public void testReconfigureCaches() throws Exception {
+		ClassLoader classLoader =
+			PortalCacheDatagramReceiveHandlerTest.class.getClassLoader();
+
 		String className =
 			PortalCacheDatagramReceiveHandlerTest.class.getName();
 
 		String resourcePath = className.replace('.', '/');
 
 		resourcePath = resourcePath.concat(".class");
-
-		ClassLoader classLoader =
-			PortalCacheDatagramReceiveHandlerTest.class.getClassLoader();
 
 		URL url = classLoader.getResource(resourcePath);
 

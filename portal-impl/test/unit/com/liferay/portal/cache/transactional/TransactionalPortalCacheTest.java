@@ -519,6 +519,7 @@ public class TransactionalPortalCacheTest {
 			PortalCache<String, String> portalCache, String key, String value) {
 
 			_put = true;
+			
 			_key = key;
 			_value = value;
 		}
@@ -528,6 +529,7 @@ public class TransactionalPortalCacheTest {
 			PortalCache<String, String> portalCache, String key, String value) {
 
 			_removed = true;
+			
 			_key = key;
 			_value = value;
 		}
@@ -537,6 +539,7 @@ public class TransactionalPortalCacheTest {
 			PortalCache<String, String> portalCache, String key, String value) {
 
 			_updated = true;
+
 			_key = key;
 			_value = value;
 		}
@@ -604,6 +607,7 @@ public class TransactionalPortalCacheTest {
 			_removeAll = false;
 			_removed = false;
 			_updated = false;
+
 			_key = null;
 			_value = null;
 		}
