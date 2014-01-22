@@ -417,7 +417,7 @@
 
 	<target name="generate-changelog" depends="record-git-commit-plugins,record-git-commit-portal">
 		<tstamp>
-			<format property="tstamp.value" pattern="EEEE, d MMMM yyyy, hh:mm aa" />
+			<format property="build.tstamp.value" pattern="EEEE, d MMMM yyyy, hh:mm aa" />
 		</tstamp>
 
 		<property
@@ -431,6 +431,11 @@
 			operand2="1"
 			operation="-"
 			result="previous.build.number"
+		/>
+
+		<property
+			name="changelog.dir"
+			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}"
 		/>
 
 		<property
@@ -456,12 +461,12 @@
 			</and>
 			<then>
 				<loadfile
-					property="git.commit.plugins.rev.parse.previous"
+					property="previous.git.commit.plugins.rev.parse"
 					srcfile="${previous.changelog.dir}/git-commit-plugins"
 				/>
 
 				<loadfile
-					property="git.commit.portal.rev.parse.previous"
+					property="previous.git.commit.portal.rev.parse"
 					srcfile="${previous.changelog.dir}/git-commit-portal"
 				/>
 
@@ -471,7 +476,7 @@
 				/>
 
 				<if>
-					<equals arg1="${git.commit.plugins.rev.parse}" arg2="${git.commit.plugins.rev.parse.previous}" />
+					<equals arg1="${git.commit.plugins.rev.parse}" arg2="${previous.git.commit.plugins.rev.parse}" />
 					<then>
 						<property
 							name="git.log.content.plugins"
@@ -480,7 +485,7 @@
 					</then>
 					<else>
 						<execute dir="${lp.plugins.dir}">
-							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br />'%an'<br />'%s'<br /><br />' ${git.commit.plugins.rev.parse.previous}...${git.commit.plugins.rev.parse} > ${changelog.dir}/git.log]]>
+							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-plugins-ee/commit/'%H'" target="_blank">'%H'</a>''<br />'%an'<br />'%s'<br /><br />' ${previous.git.commit.plugins.rev.parse}...${git.commit.plugins.rev.parse} > ${changelog.dir}/git.log]]>
 						</execute>
 
 						<loadfile
@@ -491,7 +496,7 @@
 				</if>
 
 				<if>
-					<equals arg1="${git.commit.portal.rev.parse}" arg2="${git.commit.portal.rev.parse.previous}" />
+					<equals arg1="${git.commit.portal.rev.parse}" arg2="${previous.git.commit.portal.rev.parse}" />
 					<then>
 						<property
 							name="git.log.content.portal"
@@ -500,7 +505,7 @@
 					</then>
 					<else>
 						<execute dir="${project.dir}">
-							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br />'%an'<br />'%s'<br /><br />' ${git.commit.portal.rev.parse.previous}...${git.commit.portal.rev.parse} > ${changelog.dir}/git.log]]>
+							<![CDATA[git log --pretty=format:'<a href="https://github.com/liferay/liferay-portal-ee/commit/'%H'" target="_blank">'%H'</a>''<br />'%an'<br />'%s'<br /><br />' ${previous.git.commit.portal.rev.parse}...${git.commit.portal.rev.parse} > ${changelog.dir}/git.log]]>
 						</execute>
 
 						<loadfile
@@ -517,7 +522,7 @@
 			<div class="divider"></div>
 			<div id="update">
 				<h2>
-					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.value}<br />
+					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${build.tstamp.value}<br />
 					Portal: ${git.commit.portal.rev.parse}<br />
 					Plugins: ${git.commit.plugins.rev.parse}
 				</h2>
@@ -645,7 +650,7 @@
 			<div id="update">
 				<h2>
 					Initial Commit<br />
-					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${tstamp.value}<br />
+					Build #${env.BUILD_NUMBER} - ${env.JOB_NAME} - ${build.tstamp.value}<br />
 					Portal: ${git.commit.portal.rev.parse}<br />
 					Plugins: ${git.commit.plugins.rev.parse}
 				</h2>
