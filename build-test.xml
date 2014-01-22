@@ -434,11 +434,6 @@
 		/>
 
 		<property
-			name="changelog.dir"
-			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${env.BUILD_NUMBER}"
-		/>
-
-		<property
 			name="previous.changelog.dir"
 			value="${env.JENKINS_HOME}/jobs/${env.JOB_NAME}/builds/${previous.build.number}"
 		/>
