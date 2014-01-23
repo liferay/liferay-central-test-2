@@ -117,11 +117,11 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			Map<String, Long> bitwiseValues = getBitwiseValues(
 				DLFileEntry.class.getName());
 
-			List<String> actions = new ArrayList<String>();
+			List<String> actionIds = new ArrayList<String>();
 
-			actions.add(ActionKeys.VIEW);
+			actionIds.add(ActionKeys.VIEW);
 
-			long bitwiseValue = getBitwiseValue(bitwiseValues, actions);
+			long bitwiseValue = getBitwiseValue(bitwiseValues, actionIds);
 
 			addResourcePermission(
 				companyId, DLFileEntry.class.getName(), fileEntryId,
