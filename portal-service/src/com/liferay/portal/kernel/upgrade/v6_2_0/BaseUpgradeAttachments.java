@@ -305,50 +305,6 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		}
 	}
 
-	protected void addResourcePermission(
-			long companyId, String className, long primKey, long roleId,
-			long actionIds)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-
-		try {
-			long resourcePermissionId = increment();
-
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("insert into ResourcePermission (resourcePermissionId, ");
-			sb.append("companyId, name, scope, primKey, roleId, ownerId, ");
-			sb.append("actionIds) values (?, ?, ?, ?, ?, ?, ?, ?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
-
-			ps.setLong(1, resourcePermissionId);
-			ps.setLong(2, companyId);
-			ps.setString(3, className);
-			ps.setInt(4, ResourceConstants.SCOPE_INDIVIDUAL);
-			ps.setLong(5, primKey);
-			ps.setLong(6, roleId);
-			ps.setLong(7, 0);
-			ps.setLong(8, actionIds);
-
-			ps.executeUpdate();
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to add resource permission " + className, e);
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-		}
-	}
-
 	protected long addRepository(
 			long groupId, long companyId, long userId, String userName,
 			Timestamp createDate, long classNameId, String portletId)
@@ -407,6 +363,50 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			}
 
 			return -1;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+	}
+
+	protected void addResourcePermission(
+			long companyId, String className, long primKey, long roleId,
+			long actionIds)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+
+		try {
+			long resourcePermissionId = increment();
+
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			StringBundler sb = new StringBundler(3);
+
+			sb.append("insert into ResourcePermission (resourcePermissionId, ");
+			sb.append("companyId, name, scope, primKey, roleId, ownerId, ");
+			sb.append("actionIds) values (?, ?, ?, ?, ?, ?, ?, ?)");
+
+			String sql = sb.toString();
+
+			ps = con.prepareStatement(sql);
+
+			ps.setLong(1, resourcePermissionId);
+			ps.setLong(2, companyId);
+			ps.setString(3, className);
+			ps.setInt(4, ResourceConstants.SCOPE_INDIVIDUAL);
+			ps.setLong(5, primKey);
+			ps.setLong(6, roleId);
+			ps.setLong(7, 0);
+			ps.setLong(8, actionIds);
+
+			ps.executeUpdate();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to add resource permission " + className, e);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
