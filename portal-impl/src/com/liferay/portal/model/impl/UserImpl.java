@@ -241,7 +241,7 @@ public class UserImpl extends UserBaseImpl {
 
 	/**
 	 * Returns the user's display URL, discounting the URL of the user's default
-	 * site intranet home page.
+	 * intranet site home page.
 	 *
 	 * <p>
 	 * The logic for the display URL to return is as follows:
@@ -256,7 +256,7 @@ public class UserImpl extends UserBaseImpl {
 	 * friendly URL.
 	 * </li>
 	 * <li>
-	 * Otherwise, return the URL of the default site extranet home page.
+	 * Otherwise, return the URL of the user's default extranet site home page.
 	 * </li>
 	 * </ol>
 	 *
@@ -290,18 +290,18 @@ public class UserImpl extends UserBaseImpl {
 	 * </li>
 	 * <li>
 	 * Else, if <code>privateLayout</code> is <code>true</code>, return the URL
-	 * of the default site intranet home page.
+	 * of the user's default intranet site home page.
 	 * </li>
 	 * <li>
-	 * Otherwise, return the URL of the default site extranet home page.
+	 * Otherwise, return the URL of the user's default extranet site home page.
 	 * </li>
 	 * </ol>
 	 *
 	 * @param  portalURL the portal's URL
 	 * @param  mainPath the main path
-	 * @param  privateLayout whether to use the URL of the default site intranet
-	 *         (versus extranet) home page, if no friendly URL is available for
-	 *         the user's profile
+	 * @param  privateLayout whether to use the URL of the user's default
+	 *         intranet(versus extranet)  site home page, if no friendly URL is
+	 *         available for the user's profile
 	 * @return the user's display URL
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
@@ -349,7 +349,7 @@ public class UserImpl extends UserBaseImpl {
 
 	/**
 	 * Returns the user's display URL based on the theme display, discounting
-	 * the URL of the user's default site intranet home page.
+	 * the URL of the user's default intranet site home page.
 	 *
 	 * <p>
 	 * The logic for the display URL to return is as follows:
@@ -364,7 +364,7 @@ public class UserImpl extends UserBaseImpl {
 	 * friendly URL.
 	 * </li>
 	 * <li>
-	 * Otherwise, return the URL of the default site extranet home page.
+	 * Otherwise, return the URL of the user's default extranet site home page.
 	 * </li>
 	 * </ol>
 	 *
@@ -398,17 +398,17 @@ public class UserImpl extends UserBaseImpl {
 	 * </li>
 	 * <li>
 	 * Else, if <code>privateLayout</code> is <code>true</code>, return the URL
-	 * of the default site intranet home page.
+	 * of the user's default intranet site home page.
 	 * </li>
 	 * <li>
-	 * Otherwise, return the URL of the default site extranet home page.
+	 * Otherwise, return the URL of the user's default extranet site home page.
 	 * </li>
 	 * </ol>
 	 *
 	 * @param  themeDisplay the theme display
-	 * @param  privateLayout whether to use the URL of the default site intranet
-	 *         (versus extranet) home page, if no friendly URL is available for
-	 *         the user's profile
+	 * @param  privateLayout whether to use the URL of the user's default
+	 *         intranet (versus extranet) site home page, if no friendly URL is
+	 *         available for the user's profile
 	 * @return the user's display URL
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
