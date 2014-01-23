@@ -44,8 +44,6 @@
 				src="${app.server.dir}/patching-tool/patches/@{test.build.fix.pack.zip.file.name}"
 			/>
 
-			<antelope:unset name="patch.requirements" />
-
 			<xmlproperty file="${app.server.dir}/patching-tool/patches/temp/fixpack_documentation.xml" />
 
 			<delete dir="${app.server.dir}/patching-tool/patches/temp" />
@@ -54,6 +52,8 @@
 				<antelope:replace regex="!" replacement="" />
 				<antelope:replace regex="&gt;=" replacement="-" />
 			</antelope:stringutil>
+
+			<var name="patch.requirements" unset="true" />
 
 			<if>
 				<not>
@@ -96,7 +96,9 @@
 										src="http://mirrors/files.liferay.com/private/ee/fix-packs/${test.build.fix.pack.portal.version}/${fix.pack.requirement.type}/${requirement.fix.pack.zip.file.name}"
 									/>
 
-									<check-fix-pack-requirements test.build.fix.pack.zip.file.name="${requirement.fix.pack.zip.file.name}" />
+									<check-fix-pack-requirements
+										test.build.fix.pack.zip.file.name="${requirement.fix.pack.zip.file.name}"
+									/>
 								</then>
 							</if>
 						</sequential>
