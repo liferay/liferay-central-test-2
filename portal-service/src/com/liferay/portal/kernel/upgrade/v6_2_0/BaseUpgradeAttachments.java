@@ -123,11 +123,10 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 
 			long bitwiseValue = getBitwiseValue(bitwiseValues, actions);
 
-			addDLPermission(
+			addResourcePermission(
 				companyId, DLFileEntry.class.getName(), fileEntryId,
 				getRoleId(companyId, RoleConstants.GUEST), bitwiseValue);
-
-			addDLPermission(
+			addResourcePermission(
 				companyId, DLFileEntry.class.getName(), fileEntryId,
 				getRoleId(companyId, RoleConstants.SITE_MEMBER), bitwiseValue);
 
@@ -267,27 +266,27 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 			Map<String, Long> bitwiseValues = getBitwiseValues(
 				DLFolder.class.getName());
 
-			List<String> guestActions = new ArrayList<String>();
+			List<String> guestActionIds = new ArrayList<String>();
 
-			guestActions.add(ActionKeys.VIEW);
+			guestActionIds.add(ActionKeys.VIEW);
 
 			long guestBitwiseValue = getBitwiseValue(
-				bitwiseValues, guestActions);
+				bitwiseValues, guestActionIds);
 
-			addDLPermission(
+			addResourcePermission(
 				companyId, DLFolder.class.getName(), folderId,
 				getRoleId(companyId, RoleConstants.GUEST), guestBitwiseValue);
 
-			List<String> siteMemberActions = new ArrayList<String>();
+			List<String> siteMemberActionIds = new ArrayList<String>();
 
-			siteMemberActions.add(ActionKeys.VIEW);
-			siteMemberActions.add(ActionKeys.ADD_DOCUMENT);
-			siteMemberActions.add(ActionKeys.ADD_SUBFOLDER);
+			siteMemberActionIds.add(ActionKeys.ADD_DOCUMENT);
+			siteMemberActionIds.add(ActionKeys.ADD_SUBFOLDER);
+			siteMemberActionIds.add(ActionKeys.VIEW);
 
 			long siteMemberBitwiseValue = getBitwiseValue(
-				bitwiseValues, siteMemberActions);
+				bitwiseValues, siteMemberActionIds);
 
-			addDLPermission(
+			addResourcePermission(
 				companyId, DLFolder.class.getName(), folderId,
 				getRoleId(companyId, RoleConstants.SITE_MEMBER),
 				siteMemberBitwiseValue);
@@ -306,7 +305,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		}
 	}
 
-	protected void addDLPermission(
+	protected void addResourcePermission(
 			long companyId, String className, long primKey, long roleId,
 			long actionIds)
 		throws Exception {
@@ -342,7 +341,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to add permission " + className, e);
+				_log.warn("Unable to add resource permission " + className, e);
 			}
 		}
 		finally {
