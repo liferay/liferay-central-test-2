@@ -603,7 +603,9 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 	}
 
 	protected long getRoleId(long companyId, String name) throws Exception {
-		Long roleId = _roleIds.get(name);
+		String roleIdsKey = companyId + StringPool.POUND + name;
+
+		Long roleId = _roleIds.get(roleIdsKey);
 
 		if (roleId != null) {
 			return roleId;
@@ -628,7 +630,7 @@ public abstract class BaseUpgradeAttachments extends UpgradeProcess {
 				roleId = rs.getLong("roleId");
 			}
 
-			_roleIds.put(name, roleId);
+			_roleIds.put(roleIdsKey, roleId);
 
 			return roleId;
 		}
