@@ -339,6 +339,11 @@
 	<td>//input[@value='com.liferay.portlet.documentlibraryADD_REPOSITORY']</td>
 	<td></td>
 </tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+</tr>
 <!--SITE_ADMIN_CONTENT_DOCUMENTS_AND_MEDIA_DOCUMENT-->
 <tr>
 	<td>SITE_ADMIN_CONTENT_DOCUMENTS_AND_MEDIA_DOCUMENT_ACTION_CHECKBOX</td>
