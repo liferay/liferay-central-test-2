@@ -63,8 +63,24 @@ public interface TemplateHandler {
 	 */
 	public String getResourceName();
 
+	/**
+	 * Returns the list of restricted variables that are excluded from the
+	 * template context.
+	 *
+	 * @param  language the language of the template for which the variables are
+	 *         restricted
+	 * @return the list of restricted variables that are excluded from the
+	 *         template context
+	 */
 	public String[] getRestrictedVariables(String language);
 
+	/**
+	 * Returns the specific content help for the template.
+	 *
+	 * @param  language the language of the template for which the content help
+	 *         applies
+	 * @return the specific content help for the template
+	 */
 	public String getTemplatesHelpContent(String language);
 
 	/**
@@ -85,6 +101,20 @@ public interface TemplateHandler {
 	 */
 	public String getTemplatesHelpPropertyKey();
 
+	/**
+	 * Returns the map of variable groups that the template exposes as hints to
+	 * the palette of the template editor.
+	 *
+	 * @param  classPK the class p k of the entity that defines the specific
+	 *         variable groups for this template. For example, the class pk of
+	 *         the structure associated to the template
+	 * @param  language the language of the template
+	 * @param  locale the locale of the variable groups to get
+	 * @return the map of variable groups that the template exposes as hints to
+	 *         the palette of the template editor
+	 * @throws Exception if an exception occurred retrieving the template
+	 *         variable groups
+	 */
 	public Map<String, TemplateVariableGroup> getTemplateVariableGroups(
 			long classPK, String language, Locale locale)
 		throws Exception;
