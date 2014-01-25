@@ -30,7 +30,7 @@ public class IndexMetadataFactoryUtil {
 		boolean unique, String tableName, String... columnNames) {
 
 		if (columnNames == null) {
-			throw new NullPointerException("column names is missing");
+			throw new NullPointerException("Column names are missing");
 		}
 
 		StringBundler sb = new StringBundler(4 + columnNames.length * 2);
@@ -68,7 +68,7 @@ public class IndexMetadataFactoryUtil {
 
 		if (start < 0) {
 			throw new IllegalArgumentException(
-				"Can not find index name start " + createSQL);
+				"Unable to find index name start " + createSQL);
 		}
 
 		int end = createSQL.indexOf(CharPool.SPACE, start + 3);
@@ -79,7 +79,7 @@ public class IndexMetadataFactoryUtil {
 
 		if (start < 0) {
 			throw new IllegalArgumentException(
-				"Can not find table name start " + createSQL);
+				"Unable to find table name start " + createSQL);
 		}
 
 		start += 3;
@@ -88,7 +88,7 @@ public class IndexMetadataFactoryUtil {
 
 		if (end < 0) {
 			throw new IllegalArgumentException(
-				"Can not find table name end " + createSQL);
+				"Unable to find table name end " + createSQL);
 		}
 
 		String tableName = createSQL.substring(start, end);
@@ -97,7 +97,7 @@ public class IndexMetadataFactoryUtil {
 
 		if (start < 0) {
 			throw new IllegalArgumentException(
-				"Can not find column names start " + createSQL);
+				"Unable to find column names start " + createSQL);
 		}
 
 		start += 1;
@@ -106,7 +106,7 @@ public class IndexMetadataFactoryUtil {
 
 		if (end < 0) {
 			throw new IllegalArgumentException(
-				"Can not find column names end " + createSQL);
+				"Unable to find column names end " + createSQL);
 		}
 
 		String[] columnNames = StringUtil.split(

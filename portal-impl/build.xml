@@ -849,7 +849,6 @@ public class Creole10Parser]]></replacevalue>
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
-		<delete file="service.sql.dir=${basedir}/../sql/indexes.properties" />
 
 		<echo>${build-service.output}</echo>
 

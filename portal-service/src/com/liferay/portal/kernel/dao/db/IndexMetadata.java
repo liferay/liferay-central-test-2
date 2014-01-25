@@ -36,7 +36,7 @@ public class IndexMetadata extends Index implements Comparable<IndexMetadata> {
 		super(indexName, tableName, unique);
 
 		if (columnNames == null) {
-			throw new NullPointerException("column names is missing");
+			throw new NullPointerException("Column names are missing");
 		}
 
 		_columnNames = columnNames;
@@ -85,10 +85,10 @@ public class IndexMetadata extends Index implements Comparable<IndexMetadata> {
 	public int compareTo(IndexMetadata indexMetadata) {
 		String columnNames = StringUtil.merge(_columnNames);
 
-		String anotherColumnNames = StringUtil.merge(
+		String indexMetadataColumnNames = StringUtil.merge(
 			indexMetadata._columnNames);
 
-		return columnNames.compareTo(anotherColumnNames);
+		return columnNames.compareTo(indexMetadataColumnNames);
 	}
 
 	@Override
@@ -136,11 +136,11 @@ public class IndexMetadata extends Index implements Comparable<IndexMetadata> {
 	}
 
 	public Boolean redundantTo(IndexMetadata indexMetadata) {
-		String[] anotherColumnNames = indexMetadata._columnNames;
+		String[] indexMetadataColumnNames = indexMetadata._columnNames;
 
-		if (_columnNames.length <= anotherColumnNames.length) {
+		if (_columnNames.length <= indexMetadataColumnNames.length) {
 			for (int i = 0; i < _columnNames.length; i++) {
-				if (!_columnNames[i].equals(anotherColumnNames[i])) {
+				if (!_columnNames[i].equals(indexMetadataColumnNames[i])) {
 					return null;
 				}
 			}
