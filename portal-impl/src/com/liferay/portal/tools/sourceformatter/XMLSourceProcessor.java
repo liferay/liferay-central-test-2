@@ -32,11 +32,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -136,8 +136,8 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	protected String fixPoshiXMLAlphabetizedCommands(String content) {
 		Matcher matcher = _poshiCommandsPattern.matcher(content);
 
-		Map<String, String> commandBlockMap = new HashMap<String, String>();
-		List<String> commandNames = new ArrayList<String>();
+		Map<String, String> commandBlocksMap = new TreeMap<String, String>(
+			String.CASE_INSENSITIVE_ORDER);
 
 		String previousName = StringPool.BLANK;
 
@@ -147,9 +147,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			String commandBlock = matcher.group();
 			String commandName = matcher.group(1);
 
-			commandBlockMap.put(commandName, commandBlock);
-
-			commandNames.add(commandName);
+			commandBlocksMap.put(commandName, commandBlock);
 
 			if (commandName.compareToIgnoreCase(previousName) < 0) {
 				outOfOrder = true;
@@ -181,13 +179,11 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 				sb.append(tearDownBlock);
 			}
 
-			Collections.sort(commandNames, String.CASE_INSENSITIVE_ORDER);
-
-			for (int i = 0; i < commandNames.size(); i++) {
-				String commandName = commandNames.get(i);
+			for (Map.Entry<String, String> entry :
+					commandBlocksMap.entrySet()) {
 
 				sb.append("\n\t");
-				sb.append(commandBlockMap.get(commandName));
+				sb.append(entry.getValue());
 				sb.append("\n");
 			}
 
@@ -216,8 +212,8 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			String previousName = StringPool.BLANK;
 			String tabs = StringPool.BLANK;
 
-			Map<String, String> variableLineMap = new HashMap<String, String>();
-			List<String> variableNames = new ArrayList<String>();
+			Map<String, String> variableLinesMap = new TreeMap<String, String>(
+				String.CASE_INSENSITIVE_ORDER);
 
 			String variableBlock = matcher.group(1);
 
@@ -234,9 +230,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 				String variableLine = variableLineMatcher.group(2);
 				String variableName = variableLineMatcher.group(3);
 
-				variableNames.add(variableName);
-
-				variableLineMap.put(variableName, variableLine);
+				variableLinesMap.put(variableName, variableLine);
 
 				if (variableName.compareToIgnoreCase(previousName) < 0) {
 					outOfOrder = true;
@@ -246,13 +240,13 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			}
 
 			if (outOfOrder) {
-				Collections.sort(variableNames, String.CASE_INSENSITIVE_ORDER);
-
 				StringBundler sb = new StringBundler();
 
-				for (String variableName : variableNames) {
+				for (Map.Entry<String, String> entry :
+						variableLinesMap.entrySet()) {
+
 					sb.append(tabs);
-					sb.append(variableLineMap.get(variableName));
+					sb.append(entry.getValue());
 					sb.append("\n");
 				}
 
