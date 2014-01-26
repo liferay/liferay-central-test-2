@@ -141,7 +141,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		String previousName = StringPool.BLANK;
 
-		boolean outOfOrder = false;
+		boolean hasUnsortedCommands = false;
 
 		while (matcher.find()) {
 			String commandBlock = matcher.group();
@@ -149,66 +149,63 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 			commandBlocksMap.put(commandName, commandBlock);
 
-			if (commandName.compareToIgnoreCase(previousName) < 0) {
-				outOfOrder = true;
+			if (!hasUnsortedCommands &&
+				(commandName.compareToIgnoreCase(previousName) < 0)) {
+
+				hasUnsortedCommands = true;
 			}
 
 			previousName = commandName;
 		}
 
-		if (outOfOrder) {
-			StringBundler sb = new StringBundler();
-
-			matcher = _poshiSetUpPattern.matcher(content);
-
-			if (matcher.find()) {
-				String setUpBlock = matcher.group();
-
-				content = content.replace(setUpBlock, "");
-
-				sb.append(setUpBlock);
-			}
-
-			matcher = _poshiTearDownPattern.matcher(content);
-
-			if (matcher.find()) {
-				String tearDownBlock = matcher.group();
-
-				content = content.replace(tearDownBlock, "");
-
-				sb.append(tearDownBlock);
-			}
-
-			for (Map.Entry<String, String> entry :
-					commandBlocksMap.entrySet()) {
-
-				sb.append("\n\t");
-				sb.append(entry.getValue());
-				sb.append("\n");
-			}
-
-			int x = content.indexOf("<command");
-			int y = content.lastIndexOf("</command>");
-
-			String commandBlock = content.substring(x, y);
-
-			commandBlock = "\n\t" + commandBlock + "</command>\n";
-
-			String newCommandBlock = sb.toString();
-
-			content = StringUtil.replaceFirst(
-				content, commandBlock, newCommandBlock);
+		if (!hasUnsortedCommands) {
+			return content;
 		}
 
-		return content;
+		StringBundler sb = new StringBundler();
+
+		matcher = _poshiSetUpPattern.matcher(content);
+
+		if (matcher.find()) {
+			String setUpBlock = matcher.group();
+
+			content = content.replace(setUpBlock, "");
+
+			sb.append(setUpBlock);
+		}
+
+		matcher = _poshiTearDownPattern.matcher(content);
+
+		if (matcher.find()) {
+			String tearDownBlock = matcher.group();
+
+			content = content.replace(tearDownBlock, "");
+
+			sb.append(tearDownBlock);
+		}
+
+		for (Map.Entry<String, String> entry : commandBlocksMap.entrySet()) {
+			sb.append("\n\t");
+			sb.append(entry.getValue());
+			sb.append("\n");
+		}
+
+		int x = content.indexOf("<command");
+		int y = content.lastIndexOf("</command>");
+
+		String commandBlock = content.substring(x, y);
+
+		commandBlock = "\n\t" + commandBlock + "</command>\n";
+
+		String newCommandBlock = sb.toString();
+
+		return StringUtil.replaceFirst(content, commandBlock, newCommandBlock);
 	}
 
 	protected String fixPoshiXMLAlphabetizedVariables(String content) {
 		Matcher matcher = _poshiVariablesBlockPattern.matcher(content);
 
 		while (matcher.find()) {
-			boolean outOfOrder = false;
-
 			String previousName = StringPool.BLANK;
 			String tabs = StringPool.BLANK;
 
@@ -222,6 +219,8 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 			Matcher variableLineMatcher = _poshiVariableLinePattern.matcher(
 				variableBlock);
 
+			boolean hasUnsortedVariables = false;
+
 			while (variableLineMatcher.find()) {
 				if (tabs.equals(StringPool.BLANK)) {
 					tabs = variableLineMatcher.group(1);
@@ -232,31 +231,35 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 				variableLinesMap.put(variableName, variableLine);
 
-				if (variableName.compareToIgnoreCase(previousName) < 0) {
-					outOfOrder = true;
+				if (!hasUnsortedVariables &&
+					(variableName.compareToIgnoreCase(previousName) < 0)) {
+
+					hasUnsortedVariables = true;
 				}
 
 				previousName = variableName;
 			}
 
-			if (outOfOrder) {
-				StringBundler sb = new StringBundler();
-
-				for (Map.Entry<String, String> entry :
-						variableLinesMap.entrySet()) {
-
-					sb.append(tabs);
-					sb.append(entry.getValue());
-					sb.append("\n");
-				}
-
-				String newVariableBlock = sb.toString();
-
-				newVariableBlock = newVariableBlock.trim();
-
-				content = StringUtil.replaceFirst(
-					content, variableBlock, newVariableBlock);
+			if (!hasUnsortedVariables) {
+				continue;
 			}
+
+			StringBundler sb = new StringBundler();
+
+			for (Map.Entry<String, String> entry :
+					variableLinesMap.entrySet()) {
+
+				sb.append(tabs);
+				sb.append(entry.getValue());
+				sb.append("\n");
+			}
+
+			String newVariableBlock = sb.toString();
+
+			newVariableBlock = newVariableBlock.trim();
+
+			content = StringUtil.replaceFirst(
+				content, variableBlock, newVariableBlock);
 		}
 
 		return content;
