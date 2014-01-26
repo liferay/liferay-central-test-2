@@ -133,138 +133,6 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		return content;
 	}
 
-	protected String sortPoshiCommands(String content) {
-		Matcher matcher = _poshiCommandsPattern.matcher(content);
-
-		Map<String, String> commandBlocksMap = new TreeMap<String, String>(
-			String.CASE_INSENSITIVE_ORDER);
-
-		String previousName = StringPool.BLANK;
-
-		boolean hasUnsortedCommands = false;
-
-		while (matcher.find()) {
-			String commandBlock = matcher.group();
-			String commandName = matcher.group(1);
-
-			commandBlocksMap.put(commandName, commandBlock);
-
-			if (!hasUnsortedCommands &&
-				(commandName.compareToIgnoreCase(previousName) < 0)) {
-
-				hasUnsortedCommands = true;
-			}
-
-			previousName = commandName;
-		}
-
-		if (!hasUnsortedCommands) {
-			return content;
-		}
-
-		StringBundler sb = new StringBundler();
-
-		matcher = _poshiSetUpPattern.matcher(content);
-
-		if (matcher.find()) {
-			String setUpBlock = matcher.group();
-
-			content = content.replace(setUpBlock, "");
-
-			sb.append(setUpBlock);
-		}
-
-		matcher = _poshiTearDownPattern.matcher(content);
-
-		if (matcher.find()) {
-			String tearDownBlock = matcher.group();
-
-			content = content.replace(tearDownBlock, "");
-
-			sb.append(tearDownBlock);
-		}
-
-		for (Map.Entry<String, String> entry : commandBlocksMap.entrySet()) {
-			sb.append("\n\t");
-			sb.append(entry.getValue());
-			sb.append("\n");
-		}
-
-		int x = content.indexOf("<command");
-		int y = content.lastIndexOf("</command>");
-
-		String commandBlock = content.substring(x, y);
-
-		commandBlock = "\n\t" + commandBlock + "</command>\n";
-
-		String newCommandBlock = sb.toString();
-
-		return StringUtil.replaceFirst(content, commandBlock, newCommandBlock);
-	}
-
-	protected String sortPoshiVariables(String content) {
-		Matcher matcher = _poshiVariablesBlockPattern.matcher(content);
-
-		while (matcher.find()) {
-			String previousName = StringPool.BLANK;
-			String tabs = StringPool.BLANK;
-
-			Map<String, String> variableLinesMap = new TreeMap<String, String>(
-				String.CASE_INSENSITIVE_ORDER);
-
-			String variableBlock = matcher.group(1);
-
-			variableBlock = variableBlock.trim();
-
-			Matcher variableLineMatcher = _poshiVariableLinePattern.matcher(
-				variableBlock);
-
-			boolean hasUnsortedVariables = false;
-
-			while (variableLineMatcher.find()) {
-				if (tabs.equals(StringPool.BLANK)) {
-					tabs = variableLineMatcher.group(1);
-				}
-
-				String variableLine = variableLineMatcher.group(2);
-				String variableName = variableLineMatcher.group(3);
-
-				variableLinesMap.put(variableName, variableLine);
-
-				if (!hasUnsortedVariables &&
-					(variableName.compareToIgnoreCase(previousName) < 0)) {
-
-					hasUnsortedVariables = true;
-				}
-
-				previousName = variableName;
-			}
-
-			if (!hasUnsortedVariables) {
-				continue;
-			}
-
-			StringBundler sb = new StringBundler();
-
-			for (Map.Entry<String, String> entry :
-					variableLinesMap.entrySet()) {
-
-				sb.append(tabs);
-				sb.append(entry.getValue());
-				sb.append("\n");
-			}
-
-			String newVariableBlock = sb.toString();
-
-			newVariableBlock = newVariableBlock.trim();
-
-			content = StringUtil.replaceFirst(
-				content, variableBlock, newVariableBlock);
-		}
-
-		return content;
-	}
-
 	protected String fixPoshiXMLElementWithNoChild(String content) {
 		Matcher matcher = _poshiElementWithNoChildPattern.matcher(content);
 
@@ -976,6 +844,138 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 		return newContent.substring(0, x) + sb.toString() +
 			newContent.substring(y);
+	}
+
+	protected String sortPoshiCommands(String content) {
+		Matcher matcher = _poshiCommandsPattern.matcher(content);
+
+		Map<String, String> commandBlocksMap = new TreeMap<String, String>(
+			String.CASE_INSENSITIVE_ORDER);
+
+		String previousName = StringPool.BLANK;
+
+		boolean hasUnsortedCommands = false;
+
+		while (matcher.find()) {
+			String commandBlock = matcher.group();
+			String commandName = matcher.group(1);
+
+			commandBlocksMap.put(commandName, commandBlock);
+
+			if (!hasUnsortedCommands &&
+				(commandName.compareToIgnoreCase(previousName) < 0)) {
+
+				hasUnsortedCommands = true;
+			}
+
+			previousName = commandName;
+		}
+
+		if (!hasUnsortedCommands) {
+			return content;
+		}
+
+		StringBundler sb = new StringBundler();
+
+		matcher = _poshiSetUpPattern.matcher(content);
+
+		if (matcher.find()) {
+			String setUpBlock = matcher.group();
+
+			content = content.replace(setUpBlock, "");
+
+			sb.append(setUpBlock);
+		}
+
+		matcher = _poshiTearDownPattern.matcher(content);
+
+		if (matcher.find()) {
+			String tearDownBlock = matcher.group();
+
+			content = content.replace(tearDownBlock, "");
+
+			sb.append(tearDownBlock);
+		}
+
+		for (Map.Entry<String, String> entry : commandBlocksMap.entrySet()) {
+			sb.append("\n\t");
+			sb.append(entry.getValue());
+			sb.append("\n");
+		}
+
+		int x = content.indexOf("<command");
+		int y = content.lastIndexOf("</command>");
+
+		String commandBlock = content.substring(x, y);
+
+		commandBlock = "\n\t" + commandBlock + "</command>\n";
+
+		String newCommandBlock = sb.toString();
+
+		return StringUtil.replaceFirst(content, commandBlock, newCommandBlock);
+	}
+
+	protected String sortPoshiVariables(String content) {
+		Matcher matcher = _poshiVariablesBlockPattern.matcher(content);
+
+		while (matcher.find()) {
+			String previousName = StringPool.BLANK;
+			String tabs = StringPool.BLANK;
+
+			Map<String, String> variableLinesMap = new TreeMap<String, String>(
+				String.CASE_INSENSITIVE_ORDER);
+
+			String variableBlock = matcher.group(1);
+
+			variableBlock = variableBlock.trim();
+
+			Matcher variableLineMatcher = _poshiVariableLinePattern.matcher(
+				variableBlock);
+
+			boolean hasUnsortedVariables = false;
+
+			while (variableLineMatcher.find()) {
+				if (tabs.equals(StringPool.BLANK)) {
+					tabs = variableLineMatcher.group(1);
+				}
+
+				String variableLine = variableLineMatcher.group(2);
+				String variableName = variableLineMatcher.group(3);
+
+				variableLinesMap.put(variableName, variableLine);
+
+				if (!hasUnsortedVariables &&
+					(variableName.compareToIgnoreCase(previousName) < 0)) {
+
+					hasUnsortedVariables = true;
+				}
+
+				previousName = variableName;
+			}
+
+			if (!hasUnsortedVariables) {
+				continue;
+			}
+
+			StringBundler sb = new StringBundler();
+
+			for (Map.Entry<String, String> entry :
+					variableLinesMap.entrySet()) {
+
+				sb.append(tabs);
+				sb.append(entry.getValue());
+				sb.append("\n");
+			}
+
+			String newVariableBlock = sb.toString();
+
+			newVariableBlock = newVariableBlock.trim();
+
+			content = StringUtil.replaceFirst(
+				content, variableBlock, newVariableBlock);
+		}
+
+		return content;
 	}
 
 	private static Pattern _commentPattern1 = Pattern.compile(
