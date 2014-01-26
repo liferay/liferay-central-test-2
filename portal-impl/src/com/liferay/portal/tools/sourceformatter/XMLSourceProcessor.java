@@ -340,10 +340,11 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 
 				newContent = formatPortletXML(newContent);
 			}
-			else if (portalSource && fileName.endsWith(".action") ||
-					 portalSource && fileName.endsWith(".function") ||
-					 portalSource && fileName.endsWith(".macro") ||
-					 portalSource && fileName.endsWith(".testcase")) {
+			else if (portalSource &&
+					 (fileName.endsWith(".action") ||
+					  fileName.endsWith(".function") ||
+					  fileName.endsWith(".macro") ||
+					  fileName.endsWith(".testcase"))) {
 
 				newContent = formatPoshiXML(newContent);
 			}
