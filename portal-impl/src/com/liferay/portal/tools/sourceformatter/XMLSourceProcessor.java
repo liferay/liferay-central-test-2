@@ -133,7 +133,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		return content;
 	}
 
-	protected String fixPoshiXMLAlphabetizedCommands(String content) {
+	protected String sortPoshiCommands(String content) {
 		Matcher matcher = _poshiCommandsPattern.matcher(content);
 
 		Map<String, String> commandBlocksMap = new TreeMap<String, String>(
@@ -202,7 +202,7 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 		return StringUtil.replaceFirst(content, commandBlock, newCommandBlock);
 	}
 
-	protected String fixPoshiXMLAlphabetizedVariables(String content) {
+	protected String sortPoshiVariables(String content) {
 		Matcher matcher = _poshiVariablesBlockPattern.matcher(content);
 
 		while (matcher.find()) {
@@ -744,9 +744,9 @@ public class XMLSourceProcessor extends BaseSourceProcessor {
 	}
 
 	protected String formatPoshiXML(String content) {
-		content = fixPoshiXMLAlphabetizedCommands(content);
+		content = sortPoshiCommands(content);
 
-		content = fixPoshiXMLAlphabetizedVariables(content);
+		content = sortPoshiVariables(content);
 
 		content = fixPoshiXMLElementWithNoChild(content);
 
