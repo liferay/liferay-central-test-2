@@ -47,7 +47,7 @@ LayoutSet selLayoutSet = ((LayoutSet)request.getAttribute("edit_pages.jsp-selLay
 
 	<c:if test="<%= liveGroup.isLayoutSetPrototype() %>">
 		<div class="alert alert-block">
-			<liferay-ui:message key="modifying-the-site-template-logo-will-only-affect-sites-that-are-created-after" />
+			<liferay-ui:message key="modifying-the-site-template-logo-will-only-affect-sites-that-are-not-yet-created" />
 		</div>
 	</c:if>
 
