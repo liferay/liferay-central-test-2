@@ -295,19 +295,17 @@ public class SeleniumBuilder {
 
 		sb.append("\n");
 
-		String[] products = new String[] {
-			"marketplace", "portal", "social-office"
-		};
+		String[] productNames = {"marketplace", "portal", "social-office"};
 
-		for (String product : products) {
+		for (String productName : productNames) {
 			Set<String> productTestCaseMethodNames = new TreeSet<String>();
 
-			String productKey = product;
+			String productKey = productName;
 
-			product = StringUtil.replace(product, "-", "_");
-			product = StringUtil.upperCase(product);
+			productName = StringUtil.replace(productName, "-", "_");
+			productName = StringUtil.upperCase(productName);
 
-			sb.append(product);
+			sb.append(productName);
 			sb.append("_TEST_CASE_METHOD_NAMES=");
 
 			for (String componentName : componentNames) {
