@@ -75,7 +75,7 @@ public class ExportImportConfigurationLocalServiceImpl
 	}
 
 	@Override
-	public void deleteGroupExportImportConfigurations(long groupId)
+	public void deleteExportImportConfigurations(long groupId)
 		throws SystemException {
 
 		List<ExportImportConfiguration> exportImportConfigurations =
