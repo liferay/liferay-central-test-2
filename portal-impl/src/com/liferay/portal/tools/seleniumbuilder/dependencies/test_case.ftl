@@ -101,7 +101,6 @@ public class ${seleniumBuilderContext.getTestCaseSimpleClassName(testCaseName)}
 			</#if>
 
 			(String commandName, boolean nested) throws Exception {
-
 				<#if methodName == "set-up">
 					selenium.sendTestCaseCommandLogger("${testCaseName}#SetUp");
 				<#elseif methodName == "tear-down">
