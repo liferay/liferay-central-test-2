@@ -82,7 +82,6 @@ public class FreeMarkerTemplateTaglibSupportProvider
 		HttpServletRequestWrapper httpServletRequestWrapper =
 			new HttpServletRequestWrapper(
 				PortalUtil.getHttpServletRequest(portletRequest));
-
 		HttpServletResponseWrapper httpServletResponseWrapper =
 			new HttpServletResponseWrapper(
 				PortalUtil.getHttpServletResponse(portletResponse));
