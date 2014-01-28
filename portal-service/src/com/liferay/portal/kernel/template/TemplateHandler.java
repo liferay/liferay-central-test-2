@@ -75,18 +75,18 @@ public interface TemplateHandler {
 	public String[] getRestrictedVariables(String language);
 
 	/**
-	 * Returns the specific content help for the template.
+	 * Returns the content help for the template.
 	 *
 	 * @param  language the language of the template for which the content help
 	 *         applies
-	 * @return the specific content help for the template
+	 * @return the content help for the template
 	 */
 	public String getTemplatesHelpContent(String language);
 
 	/**
 	 * Returns the path to the help template.
 	 *
-	 * @param  language the language of the template
+	 * @param  language the template's language
 	 * @return the path to the help template. This template will be shown as a
 	 *         help message when the user creates a new template.
 	 */
@@ -102,15 +102,15 @@ public interface TemplateHandler {
 	public String getTemplatesHelpPropertyKey();
 
 	/**
-	 * Returns the map of variable groups that the template exposes as hints to
+	 * Returns the map of variable groups that the template displays as hints to
 	 * the palette of the template editor.
 	 *
-	 * @param  classPK the class p k of the entity that defines the specific
-	 *         variable groups for this template. For example, the class pk of
-	 *         the structure associated to the template
-	 * @param  language the language of the template
+	 * @param  classPK the primary key of the entity that defines the specific
+	 *         variable groups for the template. For example, the primary key of
+	 *         the structure associated to the template.
+	 * @param  language the template's language
 	 * @param  locale the locale of the variable groups to get
-	 * @return the map of variable groups that the template exposes as hints to
+	 * @return the map of variable groups that the template displays as hints to
 	 *         the palette of the template editor
 	 * @throws Exception if an exception occurred retrieving the template
 	 *         variable groups
