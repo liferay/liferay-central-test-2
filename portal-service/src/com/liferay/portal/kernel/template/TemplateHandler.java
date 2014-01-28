@@ -105,9 +105,9 @@ public interface TemplateHandler {
 	 * Returns the map of variable groups that the template displays as hints to
 	 * the palette of the template editor.
 	 *
-	 * @param  classPK the primary key of the entity that defines the specific
-	 *         variable groups for the template. For example, the primary key of
-	 *         the structure associated to the template.
+	 * @param  classPK the primary key of the entity that defines the variable
+	 *         groups for the template. For example, the primary key of the
+	 *         structure associated to the template.
 	 * @param  language the template's language
 	 * @param  locale the locale of the variable groups to get
 	 * @return the map of variable groups that the template displays as hints to
