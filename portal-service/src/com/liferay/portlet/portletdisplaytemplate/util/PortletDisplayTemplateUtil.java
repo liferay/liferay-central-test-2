@@ -57,12 +57,12 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the UUID of the portlet display template's DDM template with the
+	 * Returns the UUID of the portlet display template's DDM template from the
 	 * display style stored in the portlet configuration.
 	 *
 	 * @param  displayStyle the display style stored in the portlet
 	 *         configuration
-	 * @return the UUID of the portlet display template's DDM template with the
+	 * @return the UUID of the portlet display template's DDM template from the
 	 *         display style stored in the portlet configuration
 	 */
 	public static String getDDMTemplateUuid(String displayStyle) {
@@ -97,21 +97,25 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns a list of the portlet display template handlers.
+	 * Returns the portlet display template handlers.
 	 *
-	 * @return a list of the portlet display template handlers
+	 * @return the portlet display template handlers
 	 */
 	public static List<TemplateHandler> getPortletDisplayTemplateHandlers() {
 		return getPortletDisplayTemplate().getPortletDisplayTemplateHandlers();
 	}
 
 	/**
-	 * Returns the map of variable groups that the portlet display template
-	 * displays as hints to the palette of the template editor.
+	 * Returns the portlet display template's map of script variable groups for
+	 * which hints are displayed in the template editor palette.
 	 *
-	 * @param  language the template's language
-	 * @return the map of variable groups that the portlet display template
-	 *         displays as hints to the palette of the template editor
+	 * @param  language the portlet display template's scripting language.
+	 *         Acceptable values for the FreeMarker, Velocity, or XSL languages
+	 *         are {@link TemplateConstants.LANG_TYPE_FTL}, {@link
+	 *         TemplateConstants.LANG_TYPE_VM}, or {@link
+	 *         TemplateConstants.LANG_TYPE_XSL}, respectively.
+	 * @return the portlet display template's map of script variable groups for
+	 *         which hints are displayed in the template editor palette
 	 * @see    TemplateHandler#getTemplateVariableGroups(long, String, Locale)
 	 */
 	public static Map<String, TemplateVariableGroup>
@@ -121,15 +125,15 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the result of rendering the DDM template with the list of entries
-	 * in the page context.
+	 * Returns the result of rendering the DDM template with the entries in the
+	 * page context.
 	 *
 	 * @param  pageContext the page context in which the template is rendered.
-	 *         For example, the context of the JSP view.
+	 *         For example, this could be the context of the JSP view.
 	 * @param  ddmTemplateId the primary key of the DDM template
-	 * @param  entries the list of entries that are rendered in the template
-	 * @return the result of rendering the DDM template with the list of entries
-	 *         in the page context
+	 * @param  entries the entries that are rendered in the template
+	 * @return the result of rendering the DDM template with the entries in the
+	 *         page context
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
@@ -141,17 +145,17 @@ public class PortletDisplayTemplateUtil {
 	}
 
 	/**
-	 * Returns the result of rendering the DDM template with the list of entries
-	 * in the page context and template context.
+	 * Returns the result of rendering the DDM template with the entries in the
+	 * page context and template context.
 	 *
 	 * @param  pageContext the page context in which the template is rendered.
-	 *         For example, the context of the JSP view.
+	 *         For example, this could be the context of the JSP view.
 	 * @param  ddmTemplateId the primary key of the DDM template
-	 * @param  entries the list of entries that are rendered in the template
+	 * @param  entries the entries that are rendered in the template
 	 * @param  contextObjects the map of objects defining the context in which
 	 *         the template is rendered
-	 * @return the result of rendering the DDM template with the list of entries
-	 *         in the page context and template context
+	 * @return the result of rendering the DDM template with the entries in the
+	 *         page context and template context
 	 * @throws Exception if the DDM template could not be rendered
 	 */
 	public static String renderDDMTemplate(
