@@ -150,26 +150,23 @@ public class BlogsTestUtil {
 		return addEntry(userId, title, approved, false, serviceContext);
 	}
 
-	public static void assertEqualEntry(
+	public static void assertEquals(
 		BlogsEntry blogsEntry, BlogsEntry blogEntryOther) {
-			Assert.assertEquals(
-				blogsEntry.getUserId(), blogEntryOther.getUserId());
-			Assert.assertEquals(
-				blogsEntry.getTitle(), blogEntryOther.getTitle());
-			Assert.assertEquals(
-				blogsEntry.getDescription(), blogEntryOther.getDescription());
-			Assert.assertEquals(
-				blogsEntry.getContent(), blogEntryOther.getContent());
-			Assert.assertEquals(
-				blogsEntry.getDisplayDate(), blogEntryOther.getDisplayDate());
-			Assert.assertEquals(
-				blogsEntry.isAllowPingbacks(),
-				blogEntryOther.isAllowPingbacks());
-			Assert.assertEquals(
-				blogsEntry.isAllowTrackbacks(),
-				blogEntryOther.isAllowTrackbacks());
-			Assert.assertEquals(
-				blogsEntry.isSmallImage(), blogEntryOther.isSmallImage());
+
+		Assert.assertEquals(blogsEntry.getUserId(), blogEntryOther.getUserId());
+		Assert.assertEquals(blogsEntry.getTitle(), blogEntryOther.getTitle());
+		Assert.assertEquals(
+			blogsEntry.getDescription(), blogEntryOther.getDescription());
+		Assert.assertEquals(
+			blogsEntry.getContent(), blogEntryOther.getContent());
+		Assert.assertEquals(
+			blogsEntry.getDisplayDate(), blogEntryOther.getDisplayDate());
+		Assert.assertEquals(
+			blogsEntry.isAllowPingbacks(), blogEntryOther.isAllowPingbacks());
+		Assert.assertEquals(
+			blogsEntry.isAllowTrackbacks(), blogEntryOther.isAllowTrackbacks());
+		Assert.assertEquals(
+			blogsEntry.isSmallImage(), blogEntryOther.isSmallImage());
 	}
 
 }

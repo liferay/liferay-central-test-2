@@ -60,21 +60,17 @@ public class BlogsEntryLocalServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_user = TestPropsValues.getUser();
-
 		_group = GroupTestUtil.addGroup();
-
-		_queryStatusInTrash = new QueryDefinition(
-				WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
-
-		_queryStatusNotInTrash = new QueryDefinition(
-				WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
-
-		_queryStatusApproved = new QueryDefinition(
-				WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS, null);
+		_statusAnyQueryDefinition = new QueryDefinition(
+			WorkflowConstants.STATUS_ANY, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+		_statusApprovedQueryDefinition = new QueryDefinition(
+			WorkflowConstants.STATUS_APPROVED, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+		_statusInTrashQueryDefinition = new QueryDefinition(
+			WorkflowConstants.STATUS_IN_TRASH, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+		_user = TestPropsValues.getUser();
 	}
 
 	@After
@@ -84,22 +80,22 @@ public class BlogsEntryLocalServiceTest {
 
 	@Test
 	public void testAddEntryWithoutSmallImage() throws Exception {
-		BlogsEntry originalEntry = testAddEntry(false);
+		BlogsEntry expectedEntry = testAddEntry(false);
 
 		BlogsEntry actualEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
-			originalEntry.getEntryId());
+			expectedEntry.getEntryId());
 
-		BlogsTestUtil.assertEqualEntry(originalEntry, actualEntry);
+		BlogsTestUtil.assertEquals(expectedEntry, actualEntry);
 	}
 
 	@Test
 	public void testAddEntryWithSmallImage() throws Exception {
-		BlogsEntry originalEntry = testAddEntry(true);
+		BlogsEntry expectedEntry = testAddEntry(true);
 
 		BlogsEntry actualEntry = BlogsEntryLocalServiceUtil.getBlogsEntry(
-			originalEntry.getEntryId());
+			expectedEntry.getEntryId());
 
-		BlogsTestUtil.assertEqualEntry(originalEntry, actualEntry);
+		BlogsTestUtil.assertEquals(expectedEntry, actualEntry);
 	}
 
 	@Test
@@ -134,150 +130,133 @@ public class BlogsEntryLocalServiceTest {
 		}
 		catch (Exception e) {
 			Assert.fail(
-				"The initial discussion has not been found for the blog " +
-					"entry " + entry.getEntryId());
+				"The initial discussion does not exist for entry " +
+					entry.getEntryId());
 		}
 	}
 
 	@Test
-	public void testGetEntriesPrevAndNextCenterElement() throws Exception {
-		BlogsEntry entryPrev = addEntry(false);
+	public void testGetEntriesPrevAndNextRelativeToCurrentEntry()
+		throws Exception {
 
-		BlogsEntry entryCenter = addEntry(false);
+		BlogsEntry previousEntry = addEntry(false);
 
-		BlogsEntry entryNext = addEntry(false);
+		BlogsEntry currentEntry = addEntry(false);
 
-		BlogsEntry[] entriesPrevAndNextForCenter =
+		BlogsEntry nextEntry = addEntry(false);
+
+		BlogsEntry[] entries =
 			BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(
-				entryCenter.getEntryId());
+				currentEntry.getEntryId());
 
 		Assert.assertNotNull(
-			"The previous element of the blog entry " +
-				entryCenter.getEntryId() + " should be " +
-					entryPrev.getEntryId() + " but is null instead",
-			entriesPrevAndNextForCenter[0]);
-
+			"The previous entry relative to entry " +
+				currentEntry.getEntryId() + " should be " +
+					previousEntry.getEntryId() + " but is null",
+			entries[0]);
 		Assert.assertNotNull(
-			"The center element of the blog entry " + entryCenter.getEntryId() +
-				" should be " + entryCenter.getEntryId() +
-					" but is null instead",
-			entriesPrevAndNextForCenter[1]);
-
+			"The current entry relative to entry " + currentEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId() + " but is null",
+			entries[1]);
 		Assert.assertNotNull(
-			"The next element of the blog entry " + entryCenter.getEntryId() +
-				" should be " + entryNext.getEntryId() + " but is null instead",
-			entriesPrevAndNextForCenter[2]);
-
+			"The next entry relative to entry " + currentEntry.getEntryId() +
+				" should be " + nextEntry.getEntryId() + " but is null",
+			entries[2]);
 		Assert.assertEquals(
-			"The previous element of the blog entry" +
-				entryCenter.getEntryId() + " should be " +
-					entryPrev.getEntryId(),
-			entriesPrevAndNextForCenter[0].getEntryId(),
-			entryPrev.getEntryId());
-
+			"The previous entry relative to entry" +
+				currentEntry.getEntryId() + " should be " +
+					previousEntry.getEntryId(),
+			entries[0].getEntryId(), previousEntry.getEntryId());
 		Assert.assertEquals(
-			"The center element of the blog entry " + entryCenter.getEntryId() +
-				" should be " + entryCenter.getEntryId(),
-			entriesPrevAndNextForCenter[1].getEntryId(),
-			entryCenter.getEntryId());
-
+			"The current entry relative to entry " + currentEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId(),
+			entries[1].getEntryId(), currentEntry.getEntryId());
 		Assert.assertEquals(
-			"The next element of the blog entry " + entryCenter.getEntryId() +
-				" should be " + entryNext.getEntryId(),
-			entriesPrevAndNextForCenter[2].getEntryId(),
-			entryNext.getEntryId());
+			"The next entry relative to entry " + currentEntry.getEntryId() +
+				" should be " + nextEntry.getEntryId(),
+			entries[2].getEntryId(), nextEntry.getEntryId());
 	}
 
 	@Test
-	public void testGetEntriesPrevAndNextTopLeftElement() throws Exception {
-		BlogsEntry entryPrev = addEntry(false);
-
-		BlogsEntry entryCenter = addEntry(false);
+	public void testGetEntriesPrevAndNextRelativeToNextEntry()
+		throws Exception {
 
 		addEntry(false);
 
-		BlogsEntry[] entriesPrevAndNextForTopLeft =
-			BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(
-				entryPrev.getEntryId());
+		BlogsEntry currentEntry = addEntry(false);
+
+		BlogsEntry nextEntry = addEntry(false);
+
+		BlogsEntry[] entries = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(
+			nextEntry.getEntryId());
 
 		Assert.assertNull(
-			"The previous element of the blog entry " + entryPrev.getEntryId() +
+			"The next entry relative to entry " + nextEntry.getEntryId() +
 				" should be null",
-			entriesPrevAndNextForTopLeft[0]);
-
+			entries[2]);
 		Assert.assertNotNull(
-			"The center element of the blog entry " + entryPrev.getEntryId() +
-				" should be " + entryPrev.getEntryId() + " but is null instead",
-			entriesPrevAndNextForTopLeft[1]);
-
+			"The current entry relative to entry " + nextEntry.getEntryId() +
+				" should be " + nextEntry.getEntryId() + " but is null",
+			entries[1]);
 		Assert.assertNotNull(
-			"The next element of the blog entry " + entryPrev.getEntryId() +
-				" should be " + entryCenter.getEntryId() +
-					" but is null instead",
-			entriesPrevAndNextForTopLeft[2]);
-
+			"The previous entry relative to entry " + nextEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId() + " but is null",
+			entries[0]);
 		Assert.assertEquals(
-			"The center element of the blog entry " + entryPrev.getEntryId() +
-				" should be " + entryPrev.getEntryId(),
-			entriesPrevAndNextForTopLeft[1].getEntryId(),
-			entryPrev.getEntryId());
-
+			"The previous entry relative to entry " + nextEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId(),
+			entries[0].getEntryId(), currentEntry.getEntryId());
 		Assert.assertEquals(
-			"The next element of the blog entry " + entryPrev.getEntryId() +
-				" should be " + entryCenter.getEntryId(),
-			entriesPrevAndNextForTopLeft[2].getEntryId(),
-			entryCenter.getEntryId());
+			"The current entry relative to entry" + nextEntry.getEntryId() +
+				" should be " + nextEntry.getEntryId(),
+			entries[1].getEntryId(), nextEntry.getEntryId());
 	}
 
 	@Test
-	public void testGetEntriesPrevAndNextTopRightElement() throws Exception {
+	public void testGetEntriesPrevAndNextRelativeToPreviousEntry()
+		throws Exception {
+
+		BlogsEntry previousEntry = addEntry(false);
+
+		BlogsEntry currentEntry = addEntry(false);
+
 		addEntry(false);
 
-		BlogsEntry entryCenter = addEntry(false);
-
-		BlogsEntry entryNext = addEntry(false);
-
-		BlogsEntry[] entriesPrevAndNextForTopRight =
-			BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(
-				entryNext.getEntryId());
+		BlogsEntry[] entries = BlogsEntryLocalServiceUtil.getEntriesPrevAndNext(
+			previousEntry.getEntryId());
 
 		Assert.assertNull(
-			"The next element of the blog entry " + entryNext.getEntryId() +
-				" should be null",
-			entriesPrevAndNextForTopRight[2]);
-
+			"The previous entry relative to entry " +
+				previousEntry.getEntryId() + " should be null",
+			entries[0]);
 		Assert.assertNotNull(
-			"The center element of the blog entry " + entryNext.getEntryId() +
-				" should be " + entryNext.getEntryId() + " but is null instead",
-			entriesPrevAndNextForTopRight[1]);
-
+			"The current entry relative to entry " +
+				previousEntry.getEntryId() + " should be " +
+					previousEntry.getEntryId() + " but is null",
+			entries[1]);
 		Assert.assertNotNull(
-			"The previous element of the blog entry " + entryNext.getEntryId() +
-				" should be " + entryCenter.getEntryId() +
-					" but is null instead",
-			entriesPrevAndNextForTopRight[0]);
-
+			"The next entry relative to entry " + previousEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId() + " but is null",
+			entries[2]);
 		Assert.assertEquals(
-			"The previous element of the blog entry " + entryNext.getEntryId() +
-				" should be " + entryCenter.getEntryId(),
-			entriesPrevAndNextForTopRight[0].getEntryId(),
-			entryCenter.getEntryId());
-
+			"The current entry relative to entry " +
+				previousEntry.getEntryId() + " should be " +
+					previousEntry.getEntryId(),
+			entries[1].getEntryId(), previousEntry.getEntryId());
 		Assert.assertEquals(
-			"The center element of the blog entry" + entryNext.getEntryId() +
-				" should be " + entryNext.getEntryId(),
-			entriesPrevAndNextForTopRight[1].getEntryId(),
-			entryNext.getEntryId());
+			"The next entry relative to entry " + previousEntry.getEntryId() +
+				" should be " + currentEntry.getEntryId(),
+			entries[2].getEntryId(), currentEntry.getEntryId());
 	}
 
 	@Test
 	public void testGetEntryByGroupAndUrlTitle() throws Exception {
-		BlogsEntry originalEntry = addEntry(false);
+		BlogsEntry expectedEntry = addEntry(false);
 
 		BlogsEntry actualEntry = BlogsEntryLocalServiceUtil.getEntry(
-			originalEntry.getGroupId(), originalEntry.getUrlTitle());
+			expectedEntry.getGroupId(), expectedEntry.getUrlTitle());
 
-		BlogsTestUtil.assertEqualEntry(originalEntry, actualEntry);
+		BlogsTestUtil.assertEquals(expectedEntry, actualEntry);
 	}
 
 	@Test
@@ -339,34 +318,31 @@ public class BlogsEntryLocalServiceTest {
 		List<BlogsEntry> groupsEntries =
 			BlogsEntryLocalServiceUtil.getGroupsEntries(
 				_user.getCompanyId(), _group.getGroupId(), new Date(),
-				_queryStatusInTrash);
+				_statusInTrashQueryDefinition);
 
 		int initialCount = groupsEntries.size();
 
 		addEntry(false);
-
 		addEntry(true);
 
 		List<BlogsEntry> groupsEntriesInTrash =
 			BlogsEntryLocalServiceUtil.getGroupsEntries(
 				_user.getCompanyId(), _group.getGroupId(), new Date(),
-				_queryStatusInTrash);
+				_statusInTrashQueryDefinition);
 
 		Assert.assertEquals(initialCount + 1, groupsEntriesInTrash.size());
 
 		for (BlogsEntry groupsEntry : groupsEntriesInTrash) {
 			if (WorkflowConstants.STATUS_IN_TRASH != groupsEntry.getStatus()) {
 				Assert.fail(
-					"The blog entry " + groupsEntry.getEntryId() +
-						" is not in trash");
+					"Entry " + groupsEntry.getEntryId() + " is not in trash");
 			}
 
 			if (groupsEntry.getCompanyId() != _user.getCompanyId()) {
 				Assert.fail(
-					"The companyId of the blog entry " +
-						groupsEntry.getEntryId() + " should be " +
-							_user.getCompanyId() + " but is " +
-								groupsEntry.getCompanyId() + " instead");
+					"Entry belongs to company " + groupsEntry.getCompanyId() +
+						" but should belong to company " +
+							_user.getCompanyId());
 			}
 		}
 	}
@@ -478,28 +454,26 @@ public class BlogsEntryLocalServiceTest {
 				(WorkflowConstants.STATUS_IN_TRASH != entry.getStatus())) {
 
 				Assert.fail(
-					"The blogs entry " + entry.getEntryId() +
-						" should be in trash");
+					"The entry " + entry.getEntryId() + " should be in trash");
 			}
 			else if (!statusInTrash &&
 					 (WorkflowConstants.STATUS_IN_TRASH == entry.getStatus())) {
 
 				Assert.fail(
-					"The blogs entry " + entry.getEntryId() +
-						" shouldn't be in trash");
+					"Entry " + entry.getEntryId() + " should not be in trash");
 			}
 		}
 	}
 
 	protected BlogsEntry testAddEntry(boolean smallImage) throws Exception {
 		int initialCount = BlogsEntryLocalServiceUtil.getGroupEntriesCount(
-			_group.getGroupId(), _queryStatusApproved);
+			_group.getGroupId(), _statusApprovedQueryDefinition);
 
 		BlogsEntry entry = BlogsTestUtil.addEntry(
 			TestPropsValues.getUserId(), _group, true, smallImage);
 
 		int actualCount = BlogsEntryLocalServiceUtil.getGroupEntriesCount(
-			_group.getGroupId(), _queryStatusApproved);
+			_group.getGroupId(), _statusApprovedQueryDefinition);
 
 		Assert.assertEquals(initialCount + 1, actualCount);
 
@@ -516,10 +490,10 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetCompanyEntries(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		List<BlogsEntry> initialEntries =
@@ -529,7 +503,6 @@ public class BlogsEntryLocalServiceTest {
 		int initialCount = initialEntries.size();
 
 		addEntry(false);
-
 		addEntry(true);
 
 		List<BlogsEntry> actualEntries =
@@ -544,17 +517,16 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetCompanyEntriesCount(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		int initialCount = BlogsEntryLocalServiceUtil.getCompanyEntriesCount(
 			_user.getCompanyId(), new Date(), queryDefinition);
 
 		addEntry(false);
-
 		addEntry(true);
 
 		int actualCount = BlogsEntryLocalServiceUtil.getCompanyEntriesCount(
@@ -567,10 +539,10 @@ public class BlogsEntryLocalServiceTest {
 			boolean statusInTrash, boolean displayDate)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		List<BlogsEntry> initialEntries = null;
@@ -587,7 +559,6 @@ public class BlogsEntryLocalServiceTest {
 		int initialCount = initialEntries.size();
 
 		addEntry(false);
-
 		addEntry(true);
 
 		List<BlogsEntry> actualEntries = null;
@@ -610,10 +581,10 @@ public class BlogsEntryLocalServiceTest {
 			boolean statusInTrash, boolean displayDate)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		int initialCount = 0;
@@ -628,7 +599,6 @@ public class BlogsEntryLocalServiceTest {
 		}
 
 		addEntry(false);
-
 		addEntry(true);
 
 		int actualCount = 0;
@@ -648,10 +618,10 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetGroupUserEntries(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		List<BlogsEntry> initialEntries =
@@ -662,7 +632,6 @@ public class BlogsEntryLocalServiceTest {
 		int initialCount = initialEntries.size();
 
 		addEntry(false);
-
 		addEntry(true);
 
 		List<BlogsEntry> actualEntries =
@@ -678,10 +647,10 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetGroupUserEntriesCount(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		int initialCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(
@@ -689,7 +658,6 @@ public class BlogsEntryLocalServiceTest {
 			queryDefinition);
 
 		addEntry(false);
-
 		addEntry(true);
 
 		int actualCount = BlogsEntryLocalServiceUtil.getGroupUserEntriesCount(
@@ -702,10 +670,10 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetOrganizationEntries(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		Organization organization = OrganizationTestUtil.addOrganization();
@@ -719,7 +687,6 @@ public class BlogsEntryLocalServiceTest {
 		int initialCount = initialEntries.size();
 
 		addEntry(user.getUserId(), false);
-
 		addEntry(user.getUserId(), true);
 
 		List<BlogsEntry> actualEntries =
@@ -734,10 +701,10 @@ public class BlogsEntryLocalServiceTest {
 	protected void testGetOrganizationEntriesCount(boolean statusInTrash)
 		throws Exception {
 
-		QueryDefinition queryDefinition = _queryStatusInTrash;
+		QueryDefinition queryDefinition = _statusInTrashQueryDefinition;
 
 		if (!statusInTrash) {
-			queryDefinition = _queryStatusNotInTrash;
+			queryDefinition = _statusAnyQueryDefinition;
 		}
 
 		Organization organization = OrganizationTestUtil.addOrganization();
@@ -749,7 +716,6 @@ public class BlogsEntryLocalServiceTest {
 				organization.getOrganizationId(), new Date(), queryDefinition);
 
 		addEntry(user.getUserId(), false);
-
 		addEntry(user.getUserId(), true);
 
 		int actualCount =
@@ -760,9 +726,9 @@ public class BlogsEntryLocalServiceTest {
 	}
 
 	private Group _group;
-	private QueryDefinition _queryStatusApproved;
-	private QueryDefinition _queryStatusInTrash;
-	private QueryDefinition _queryStatusNotInTrash;
+	private QueryDefinition _statusAnyQueryDefinition;
+	private QueryDefinition _statusApprovedQueryDefinition;
+	private QueryDefinition _statusInTrashQueryDefinition;
 	private User _user;
 
 }
