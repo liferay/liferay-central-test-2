@@ -1176,10 +1176,10 @@ release was successful.</echo>
 					<if>
 						<equals arg1="${app.server.jboss.major.version}" arg2="6" />
 						<then>
-							<property name="app.server.jboss.module.file" value="${app.server.jboss.dir}/modules/system/layers/base/sun/jdk/main/module.xml"/>
+							<property name="app.server.jboss.module.file" value="${app.server.jboss.dir}/modules/system/layers/base/sun/jdk/main/module.xml" />
 						</then>
 						<else>
-							<property name="app.server.jboss.module.file" value="${app.server.jboss.dir}/modules/sun/jdk/main/module.xml"/>
+							<property name="app.server.jboss.module.file" value="${app.server.jboss.dir}/modules/sun/jdk/main/module.xml" />
 						</else>
 					</if>
 
@@ -1278,35 +1278,35 @@ release was successful.</echo>
 						<replacevalue><![CDATA[rem set "JAVA_OPTS=-Xms64M ]]></replacevalue>
 					</replace>
 
-				<if>
-					<equals arg1="${app.server.jboss.major.version}" arg2="6" />
-					<then>
-						<replace file="${app.server.jboss.bin.dir}/standalone.conf.bat">
-							<replacefilter token="@java.security.config@" value="${java.security.config}" />
-							<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
-							<replacevalue>
-								<![CDATA[
-									set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT"
+					<if>
+						<equals arg1="${app.server.jboss.major.version}" arg2="6" />
+						<then>
+							<replace file="${app.server.jboss.bin.dir}/standalone.conf.bat">
+								<replacefilter token="@java.security.config@" value="${java.security.config}" />
+								<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
+								<replacevalue>
+									<![CDATA[
+										set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT"
 
-									:JAVA_OPTS_SET
-								]]>
-							</replacevalue>
-						</replace>
-					</then>
-					<else>
-						<replace file="${app.server.jboss.bin.dir}/standalone.conf.bat">
-							<replacefilter token="@java.security.config@" value="${java.security.config}" />
-							<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
-							<replacevalue>
-								<![CDATA[
-									set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
+										:JAVA_OPTS_SET
+									]]>
+								</replacevalue>
+							</replace>
+						</then>
+						<else>
+							<replace file="${app.server.jboss.bin.dir}/standalone.conf.bat">
+								<replacefilter token="@java.security.config@" value="${java.security.config}" />
+								<replacetoken><![CDATA[:JAVA_OPTS_SET]]></replacetoken>
+								<replacevalue>
+									<![CDATA[
+										set "JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -Djava.net.preferIPv4Stack=true @java.security.config@ -Duser.timezone=GMT -Xmx1024m -XX:MaxPermSize=256m"
 
-									:JAVA_OPTS_SET
-								]]>
-							</replacevalue>
-						</replace>
-					</else>
-				</if>
+										:JAVA_OPTS_SET
+									]]>
+								</replacevalue>
+							</replace>
+						</else>
+					</if>
 
 					<replace file="${app.server.jboss.instance.dir}/configuration/standalone.xml">
 						<replacetoken><![CDATA[<subsystem xmlns="urn:jboss:domain:web:1.1" default-virtual-server="default-host" native="false">]]></replacetoken>
@@ -1322,7 +1322,7 @@ release was successful.</echo>
 				</then>
 			</elseif>
 			<else>
-				<fail>Unsupported JBoss version: ${app.server.jboss.version}</fail>
+				<fail>JBoss ${app.server.jboss.version} is unsupported.</fail>
 			</else>
 		</if>
 
@@ -1385,13 +1385,13 @@ release was successful.</echo>
 				<configuration>
 					<jsp-configuration development="true" />
 				</configuration>
-				<connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http"/>]]>
+				<connector name="http" protocol="HTTP/1.1" scheme="http" socket-binding="http" />]]>
 			</replacevalue>
 		</replace>
 
 		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
 			<replacetoken><![CDATA[<deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-interval="5000"/>]]></replacetoken>
-			<replacevalue><![CDATA[<deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-enabled="true" scan-interval="5000" deployment-timeout="120"/>]]></replacevalue>
+			<replacevalue><![CDATA[<deployment-scanner path="deployments" relative-to="jboss.server.base.dir" scan-enabled="true" scan-interval="5000" deployment-timeout="120" />]]></replacevalue>
 		</replace>
 
 		<replace file="${app.server.jboss.dir}/standalone/configuration/standalone.xml">
@@ -1440,7 +1440,7 @@ release was successful.</echo>
 					<path name="sun/text" />
 					<path name="META-INF/services" />
 					<path name="com/sun/crypto" />
-					<path name="com/sun/crypto/provider"/>]]>
+					<path name="com/sun/crypto/provider" />]]>
 			</replacevalue>
 		</replace>
 	</target>
