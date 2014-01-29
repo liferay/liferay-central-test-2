@@ -8128,11 +8128,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				qPos.add(userId);
 
 				if (classNameIds != null) {
-					for (int i = 0; i < classNameIds.length; i++) {
-						if (Validator.isNotNull(classNameIds[i])) {
-							qPos.add(classNameIds[i]);
-						}
-					}
+					qPos.add(classNameIds);
 				}
 
 				if (!pagination) {
@@ -8309,11 +8305,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				qPos.add(userId);
 
 				if (classNameIds != null) {
-					for (int i = 0; i < classNameIds.length; i++) {
-						if (Validator.isNotNull(classNameIds[i])) {
-							qPos.add(classNameIds[i]);
-						}
-					}
+					qPos.add(classNameIds);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -15109,11 +15101,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				qPos.add(userId);
 
 				if (classNameIds != null) {
-					for (int i = 0; i < classNameIds.length; i++) {
-						if (Validator.isNotNull(classNameIds[i])) {
-							qPos.add(classNameIds[i]);
-						}
-					}
+					qPos.add(classNameIds);
 				}
 
 				qPos.add(status);
@@ -15307,11 +15295,7 @@ public class MBMessagePersistenceImpl extends BasePersistenceImpl<MBMessage>
 				qPos.add(userId);
 
 				if (classNameIds != null) {
-					for (int i = 0; i < classNameIds.length; i++) {
-						if (Validator.isNotNull(classNameIds[i])) {
-							qPos.add(classNameIds[i]);
-						}
-					}
+					qPos.add(classNameIds);
 				}
 
 				qPos.add(status);

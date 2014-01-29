@@ -2326,11 +2326,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groupIds != null) {
-				for (int i = 0; i < groupIds.length; i++) {
-					if (Validator.isNotNull(groupIds[i])) {
-						qPos.add(groupIds[i]);
-					}
-				}
+				qPos.add(groupIds);
 			}
 
 			return (List<DDMStructure>)QueryUtil.list(q, getDialect(), start,
@@ -2479,11 +2475,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (groupIds != null) {
-					for (int i = 0; i < groupIds.length; i++) {
-						if (Validator.isNotNull(groupIds[i])) {
-							qPos.add(groupIds[i]);
-						}
-					}
+					qPos.add(groupIds);
 				}
 
 				if (!pagination) {
@@ -2638,11 +2630,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (groupIds != null) {
-					for (int i = 0; i < groupIds.length; i++) {
-						if (Validator.isNotNull(groupIds[i])) {
-							qPos.add(groupIds[i]);
-						}
-					}
+					qPos.add(groupIds);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -2769,11 +2757,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groupIds != null) {
-				for (int i = 0; i < groupIds.length; i++) {
-					if (Validator.isNotNull(groupIds[i])) {
-						qPos.add(groupIds[i]);
-					}
-				}
+				qPos.add(groupIds);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -6166,11 +6150,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groupIds != null) {
-				for (int i = 0; i < groupIds.length; i++) {
-					if (Validator.isNotNull(groupIds[i])) {
-						qPos.add(groupIds[i]);
-					}
-				}
+				qPos.add(groupIds);
 			}
 
 			qPos.add(classNameId);
@@ -6335,11 +6315,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (groupIds != null) {
-					for (int i = 0; i < groupIds.length; i++) {
-						if (Validator.isNotNull(groupIds[i])) {
-							qPos.add(groupIds[i]);
-						}
-					}
+					qPos.add(groupIds);
 				}
 
 				qPos.add(classNameId);
@@ -6516,11 +6492,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (groupIds != null) {
-					for (int i = 0; i < groupIds.length; i++) {
-						if (Validator.isNotNull(groupIds[i])) {
-							qPos.add(groupIds[i]);
-						}
-					}
+					qPos.add(groupIds);
 				}
 
 				qPos.add(classNameId);
@@ -6665,11 +6637,7 @@ public class DDMStructurePersistenceImpl extends BasePersistenceImpl<DDMStructur
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (groupIds != null) {
-				for (int i = 0; i < groupIds.length; i++) {
-					if (Validator.isNotNull(groupIds[i])) {
-						qPos.add(groupIds[i]);
-					}
-				}
+				qPos.add(groupIds);
 			}
 
 			qPos.add(classNameId);

@@ -3730,11 +3730,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			if (parentCategoryIds != null) {
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					if (Validator.isNotNull(parentCategoryIds[i])) {
-						qPos.add(parentCategoryIds[i]);
-					}
-				}
+				qPos.add(parentCategoryIds);
 			}
 
 			return (List<MBCategory>)QueryUtil.list(q, getDialect(), start, end);
@@ -3901,11 +3897,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				qPos.add(groupId);
 
 				if (parentCategoryIds != null) {
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						if (Validator.isNotNull(parentCategoryIds[i])) {
-							qPos.add(parentCategoryIds[i]);
-						}
-					}
+					qPos.add(parentCategoryIds);
 				}
 
 				if (!pagination) {
@@ -4082,11 +4074,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				qPos.add(groupId);
 
 				if (parentCategoryIds != null) {
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						if (Validator.isNotNull(parentCategoryIds[i])) {
-							qPos.add(parentCategoryIds[i]);
-						}
-					}
+					qPos.add(parentCategoryIds);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -4231,11 +4219,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			if (parentCategoryIds != null) {
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					if (Validator.isNotNull(parentCategoryIds[i])) {
-						qPos.add(parentCategoryIds[i]);
-					}
-				}
+				qPos.add(parentCategoryIds);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -6685,11 +6669,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			if (parentCategoryIds != null) {
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					if (Validator.isNotNull(parentCategoryIds[i])) {
-						qPos.add(parentCategoryIds[i]);
-					}
-				}
+				qPos.add(parentCategoryIds);
 			}
 
 			qPos.add(status);
@@ -6870,11 +6850,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				qPos.add(groupId);
 
 				if (parentCategoryIds != null) {
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						if (Validator.isNotNull(parentCategoryIds[i])) {
-							qPos.add(parentCategoryIds[i]);
-						}
-					}
+					qPos.add(parentCategoryIds);
 				}
 
 				qPos.add(status);
@@ -7068,11 +7044,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 				qPos.add(groupId);
 
 				if (parentCategoryIds != null) {
-					for (int i = 0; i < parentCategoryIds.length; i++) {
-						if (Validator.isNotNull(parentCategoryIds[i])) {
-							qPos.add(parentCategoryIds[i]);
-						}
-					}
+					qPos.add(parentCategoryIds);
 				}
 
 				qPos.add(status);
@@ -7233,11 +7205,7 @@ public class MBCategoryPersistenceImpl extends BasePersistenceImpl<MBCategory>
 			qPos.add(groupId);
 
 			if (parentCategoryIds != null) {
-				for (int i = 0; i < parentCategoryIds.length; i++) {
-					if (Validator.isNotNull(parentCategoryIds[i])) {
-						qPos.add(parentCategoryIds[i]);
-					}
-				}
+				qPos.add(parentCategoryIds);
 			}
 
 			qPos.add(status);

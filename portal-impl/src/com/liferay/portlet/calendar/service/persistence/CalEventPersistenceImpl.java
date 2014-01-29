@@ -4266,11 +4266,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			qPos.add(groupId);
 
 			if (types != null) {
-				for (int i = 0; i < types.length; i++) {
-					if (Validator.isNotNull(types[i])) {
-						qPos.add(types[i]);
-					}
-				}
+				qPos.add(types);
 			}
 
 			return (List<CalEvent>)QueryUtil.list(q, getDialect(), start, end);
@@ -4442,11 +4438,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(groupId);
 
 				if (types != null) {
-					for (int i = 0; i < types.length; i++) {
-						if (Validator.isNotNull(types[i])) {
-							qPos.add(types[i]);
-						}
-					}
+					qPos.add(types);
 				}
 
 				if (!pagination) {
@@ -4644,11 +4636,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(groupId);
 
 				if (types != null) {
-					for (int i = 0; i < types.length; i++) {
-						if (Validator.isNotNull(types[i])) {
-							qPos.add(types[i]);
-						}
-					}
+					qPos.add(types);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -4817,11 +4805,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			qPos.add(groupId);
 
 			if (types != null) {
-				for (int i = 0; i < types.length; i++) {
-					if (Validator.isNotNull(types[i])) {
-						qPos.add(types[i]);
-					}
-				}
+				qPos.add(types);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -6822,11 +6806,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			qPos.add(groupId);
 
 			if (types != null) {
-				for (int i = 0; i < types.length; i++) {
-					if (Validator.isNotNull(types[i])) {
-						qPos.add(types[i]);
-					}
-				}
+				qPos.add(types);
 			}
 
 			qPos.add(repeating);
@@ -7016,11 +6996,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(groupId);
 
 				if (types != null) {
-					for (int i = 0; i < types.length; i++) {
-						if (Validator.isNotNull(types[i])) {
-							qPos.add(types[i]);
-						}
-					}
+					qPos.add(types);
 				}
 
 				qPos.add(repeating);
@@ -7238,11 +7214,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 				qPos.add(groupId);
 
 				if (types != null) {
-					for (int i = 0; i < types.length; i++) {
-						if (Validator.isNotNull(types[i])) {
-							qPos.add(types[i]);
-						}
-					}
+					qPos.add(types);
 				}
 
 				qPos.add(repeating);
@@ -7427,11 +7399,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl<CalEvent>
 			qPos.add(groupId);
 
 			if (types != null) {
-				for (int i = 0; i < types.length; i++) {
-					if (Validator.isNotNull(types[i])) {
-						qPos.add(types[i]);
-					}
-				}
+				qPos.add(types);
 			}
 
 			qPos.add(repeating);

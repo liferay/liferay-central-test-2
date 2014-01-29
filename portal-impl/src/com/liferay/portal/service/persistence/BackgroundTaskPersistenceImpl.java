@@ -2222,11 +2222,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				if (!pagination) {
@@ -2429,11 +2425,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -3649,11 +3641,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(status);
@@ -3855,11 +3843,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(status);
@@ -5271,11 +5255,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(completed);
@@ -5497,11 +5477,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(completed);
@@ -6249,11 +6225,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(status);
@@ -6475,11 +6447,7 @@ public class BackgroundTaskPersistenceImpl extends BasePersistenceImpl<Backgroun
 				qPos.add(groupId);
 
 				if (taskExecutorClassNames != null) {
-					for (int i = 0; i < taskExecutorClassNames.length; i++) {
-						if (Validator.isNotNull(taskExecutorClassNames[i])) {
-							qPos.add(taskExecutorClassNames[i]);
-						}
-					}
+					qPos.add(taskExecutorClassNames);
 				}
 
 				qPos.add(status);

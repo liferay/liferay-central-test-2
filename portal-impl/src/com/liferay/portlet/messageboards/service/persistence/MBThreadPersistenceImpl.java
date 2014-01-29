@@ -3453,11 +3453,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			return (List<MBThread>)QueryUtil.list(q, getDialect(), start, end);
@@ -3622,11 +3618,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				if (!pagination) {
@@ -3803,11 +3795,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -3952,11 +3940,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -8895,11 +8879,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			qPos.add(status);
@@ -9080,11 +9060,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				qPos.add(status);
@@ -9278,11 +9254,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				qPos.add(status);
@@ -9443,11 +9415,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			qPos.add(status);
@@ -10439,11 +10407,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			qPos.add(status);
@@ -10624,11 +10588,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				qPos.add(status);
@@ -10822,11 +10782,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 				qPos.add(groupId);
 
 				if (categoryIds != null) {
-					for (int i = 0; i < categoryIds.length; i++) {
-						if (Validator.isNotNull(categoryIds[i])) {
-							qPos.add(categoryIds[i]);
-						}
-					}
+					qPos.add(categoryIds);
 				}
 
 				qPos.add(status);
@@ -10987,11 +10943,7 @@ public class MBThreadPersistenceImpl extends BasePersistenceImpl<MBThread>
 			qPos.add(groupId);
 
 			if (categoryIds != null) {
-				for (int i = 0; i < categoryIds.length; i++) {
-					if (Validator.isNotNull(categoryIds[i])) {
-						qPos.add(categoryIds[i]);
-					}
-				}
+				qPos.add(categoryIds);
 			}
 
 			qPos.add(status);

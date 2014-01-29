@@ -3309,11 +3309,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			return (List<BookmarksEntry>)QueryUtil.list(q, getDialect(), start,
@@ -3479,11 +3475,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				if (!pagination) {
@@ -3658,11 +3650,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				count = (Long)q.uniqueResult();
@@ -3803,11 +3791,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			Long count = (Long)q.uniqueResult();
@@ -8746,11 +8730,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
@@ -8932,11 +8912,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -9130,11 +9106,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -9291,11 +9263,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
@@ -10205,11 +10173,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
@@ -10391,11 +10355,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -10589,11 +10549,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(groupId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -10750,11 +10706,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(groupId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
@@ -11745,11 +11697,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(userId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
@@ -11947,11 +11895,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(userId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -12162,11 +12106,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 				qPos.add(userId);
 
 				if (folderIds != null) {
-					for (int i = 0; i < folderIds.length; i++) {
-						if (Validator.isNotNull(folderIds[i])) {
-							qPos.add(folderIds[i]);
-						}
-					}
+					qPos.add(folderIds);
 				}
 
 				qPos.add(status);
@@ -12339,11 +12279,7 @@ public class BookmarksEntryPersistenceImpl extends BasePersistenceImpl<Bookmarks
 			qPos.add(userId);
 
 			if (folderIds != null) {
-				for (int i = 0; i < folderIds.length; i++) {
-					if (Validator.isNotNull(folderIds[i])) {
-						qPos.add(folderIds[i]);
-					}
-				}
+				qPos.add(folderIds);
 			}
 
 			qPos.add(status);
