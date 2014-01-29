@@ -518,53 +518,6 @@ app.server.jboss.zip.name=jboss-eap-$${app.server.jboss.version}.zip</echo>
 		</antcall>
 	</target>
 
-	<target name="configure-java-security-tomcat">
-		<if>
-			<equals arg1="${java.security.manager.option}" arg2="" />
-			<then>
-				<var name="java.security.config" value="" />
-			</then>
-			<else>
-				<if>
-					<os family="windows" />
-					<then>
-						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%CATALINA_BASE%/conf/catalina.policy" />
-					</then>
-					<else>
-						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
-					</else>
-				</if>
-			</else>
-		</if>
-
-		<copy
-			file="tools/servers/tomcat/bin/setenv.bat"
-			overwrite="true"
-			tofile="${app.server.tomcat.bin.dir}/setenv.bat"
-		>
-			<filterset>
-				<filter token="java.security.config" value="${java.security.config}" />
-				<filter token="java.version" value="${jdk.windows.version}" />
-			</filterset>
-		</copy>
-
-		<copy
-			file="tools/servers/tomcat/bin/setenv.sh"
-			overwrite="true"
-			tofile="${app.server.tomcat.bin.dir}/setenv.sh"
-		>
-			<filterset>
-				<filter token="java.security.config" value="${java.security.config}" />
-			</filterset>
-		</copy>
-
-		<chmod perm="a+x">
-			<fileset dir="${app.server.tomcat.bin.dir}">
-				<include name="*.sh" />
-			</fileset>
-		</chmod>
-	</target>
-
 	<target name="deploy-plugins">
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
@@ -941,6 +894,53 @@ release was successful.</echo>
 		<delete file="prepare-generated-files.txt" />
 
 		<echo file="prepare-generated-files.tstamp">${prepare-generated-files.tstamp}</echo>
+	</target>
+
+	<target name="update-java-security-tomcat">
+		<if>
+			<equals arg1="${java.security.manager.option}" arg2="" />
+			<then>
+				<var name="java.security.config" value="" />
+			</then>
+			<else>
+				<if>
+					<os family="windows" />
+					<then>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==%CATALINA_BASE%/conf/catalina.policy" />
+					</then>
+					<else>
+						<var name="java.security.config" value="${java.security.manager.option} -Djava.security.policy==$CATALINA_BASE/conf/catalina.policy" />
+					</else>
+				</if>
+			</else>
+		</if>
+
+		<copy
+			file="tools/servers/tomcat/bin/setenv.bat"
+			overwrite="true"
+			tofile="${app.server.tomcat.bin.dir}/setenv.bat"
+		>
+			<filterset>
+				<filter token="java.security.config" value="${java.security.config}" />
+				<filter token="java.version" value="${jdk.windows.version}" />
+			</filterset>
+		</copy>
+
+		<copy
+			file="tools/servers/tomcat/bin/setenv.sh"
+			overwrite="true"
+			tofile="${app.server.tomcat.bin.dir}/setenv.sh"
+		>
+			<filterset>
+				<filter token="java.security.config" value="${java.security.config}" />
+			</filterset>
+		</copy>
+
+		<chmod perm="a+x">
+			<fileset dir="${app.server.tomcat.bin.dir}">
+				<include name="*.sh" />
+			</fileset>
+		</chmod>
 	</target>
 
 	<target name="unzip-geronimo">
@@ -1922,13 +1922,13 @@ release was successful.</echo>
 			</then>
 		</if>
 
-		<antcall target="configure-java-security-tomcat" />
-
 		<chmod perm="a+x">
 			<fileset dir="${app.server.tomcat.bin.dir}">
 				<include name="*.sh" />
 			</fileset>
 		</chmod>
+
+		<antcall target="update-java-security-tomcat" />
 	</target>
 
 	<target name="unzip-weblogic">

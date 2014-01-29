@@ -2246,7 +2246,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
-				<ant antfile="build-dist.xml" target="configure-java-security-tomcat" />
+				<ant antfile="build-dist.xml" target="update-java-security-tomcat" />
 			</then>
 		</if>
 
