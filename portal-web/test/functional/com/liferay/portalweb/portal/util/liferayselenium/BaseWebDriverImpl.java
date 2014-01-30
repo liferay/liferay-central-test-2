@@ -99,7 +99,7 @@ public abstract class BaseWebDriverImpl
 			return;
 		}
 
-		String pageSource;
+		String pageSource = null;
 
 		try {
 			pageSource = getPageSource();
