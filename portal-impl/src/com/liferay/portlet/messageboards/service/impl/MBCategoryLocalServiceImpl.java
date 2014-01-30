@@ -331,6 +331,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			groupId, parentCategoryId, status, start, end);
 	}
 
+	@Override
 	public List<MBCategory> getCategories(
 			long groupId, long excludedCategoryId, long parentCategoryId,
 			int status, int start, int end)
@@ -369,6 +370,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			groupId, parentCategoryIds, status, start, end);
 	}
 
+	@Override
 	public List<MBCategory> getCategories(
 			long groupId, long[] excludedCategoryIds, long[] parentCategoryIds,
 			int status, int start, int end)
@@ -436,6 +438,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			groupId, parentCategoryId, status);
 	}
 
+	@Override
 	public int getCategoriesCount(
 			long groupId, long excludedCategoryId, long parentCategoryId,
 			int status)
@@ -470,6 +473,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			groupId, parentCategoryIds, status);
 	}
 
+	@Override
 	public int getCategoriesCount(
 			long groupId, long[] excludedCategoryIds, long[] parentCategoryIds,
 			int status)
