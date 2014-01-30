@@ -169,10 +169,10 @@ public class SassToCssBuilder {
 
 		rubyExecutor.setExecuteInSeparateThread(false);
 
-		List<String> fileNames = new ArrayList<String>();
+		List<String> fileNameList = new ArrayList<String>();
 
 		for (String dirName : dirNames) {
-			_collectSassFiles(fileNames, dirName, docrootDirName);
+			_collectSassFiles(fileNameList, dirName, docrootDirName);
 		}
 
 		Runtime runtime = Runtime.getRuntime();
@@ -180,17 +180,17 @@ public class SassToCssBuilder {
 		ExecutorService executorService = Executors.newFixedThreadPool(
 			runtime.availableProcessors());
 
-		List<Future<String>> futures = new ArrayList<Future<String>>(
-			fileNames.size());
+		List<Future<String>> futureList = new ArrayList<Future<String>>(
+			fileNameList.size());
 
-		for (String fileName : fileNames) {
+		for (String fileName : fileNameList) {
 			Callable<String> callable = new CacheSassCallable(
 				rubyExecutor, docrootDirName, portalCommonDirName, fileName);
 
-			futures.add(executorService.submit(callable));
+			futureList.add(executorService.submit(callable));
 		}
 
-		for (Future<String> future : futures) {
+		for (Future<String> future : futureList) {
 			System.out.println(future.get());
 		}
 
@@ -198,7 +198,7 @@ public class SassToCssBuilder {
 	}
 
 	private void _collectSassFiles(
-			List<String> fileNames, String dirName, String docrootDirName)
+			List<String> fileNameList, String dirName, String docrootDirName)
 		throws Exception {
 
 		DirectoryScanner directoryScanner = new DirectoryScanner();
@@ -217,18 +217,18 @@ public class SassToCssBuilder {
 
 		directoryScanner.scan();
 
-		String[] fileNamesArray = directoryScanner.getIncludedFiles();
+		String[] fileNames = directoryScanner.getIncludedFiles();
 
-		if (!_isModified(basedir, fileNamesArray)) {
+		if (!_isModified(basedir, fileNames)) {
 			return;
 		}
 
-		for (String fileName : fileNamesArray) {
+		for (String fileName : fileNames) {
 			if (fileName.contains("_rtl")) {
 				continue;
 			}
 
-			fileNames.add(_normalizeFileName(dirName, fileName));
+			fileNameList.add(_normalizeFileName(dirName, fileName));
 		}
 	}
 
@@ -386,10 +386,10 @@ public class SassToCssBuilder {
 				(end - start) + " ms";
 		}
 
-		private String _docrootDirName;
-		private String _fileName;
-		private String _portalCommonDirName;
 		private RubyExecutor _rubyExecutor;
+		private String _docrootDirName;
+		private String _portalCommonDirName;
+		private String _fileName;
 
 	}
 
