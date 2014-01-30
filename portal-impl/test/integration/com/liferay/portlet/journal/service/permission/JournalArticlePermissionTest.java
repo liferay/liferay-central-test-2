@@ -20,7 +20,6 @@ import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.permission.BasePermissionTestCase;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.util.JournalTestUtil;
@@ -48,12 +47,10 @@ public class JournalArticlePermissionTest extends BasePermissionTestCase {
 
 		removePortletModelViewPermission();
 
-		Assert.assertNotEquals(
-			PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED,
+		Assert.assertFalse(
 			JournalArticlePermission.contains(
 				permissionChecker, _article, ActionKeys.VIEW));
-		Assert.assertNotEquals(
-			PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED,
+		Assert.assertFalse(
 			JournalArticlePermission.contains(
 				permissionChecker, _subarticle, ActionKeys.VIEW));
 	}
