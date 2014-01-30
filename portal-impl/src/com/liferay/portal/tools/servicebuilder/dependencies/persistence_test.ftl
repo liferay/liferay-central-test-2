@@ -247,6 +247,7 @@ public class ${entity.name}PersistenceTest {
 				_persistence.countBy${finder.name}(
 
 				<#list finder.getColumns() as finderCol>
+
 					<#if finderCol.type == "boolean">
 						ServiceTestUtil.randomBoolean()
 					<#elseif finderCol.type == "double">
