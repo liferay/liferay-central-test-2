@@ -108,7 +108,7 @@ public interface TemplateHandler {
 	 * defines the path to the template's help content.
 	 *
 	 * @return the name of the property in <code>portal.properties</code> that
-	 *         defines the path to the template's help content.
+	 *         defines the path to the template's help content
 	 */
 	public String getTemplatesHelpPropertyKey();
 
