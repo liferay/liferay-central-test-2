@@ -85,8 +85,8 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String xsd = StringUtil.read(
 			classLoader,
-			"com/liferay/portlet/journal/dependencies/" +
-				"test-ddm-structure-image-field.xml"));
+			"com/liferay/portlet/journal/dependencies" +
+				"/test-ddm-structure-image-field.xml");
 
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			serviceContext.getScopeGroupId(), JournalArticle.class.getName(),
@@ -97,8 +97,8 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String content = StringUtil.read(
 			classLoader,
-			"com/liferay/portlet/journal/dependencies/" +
-				"test-journal-content-image-field.xml"));
+			"com/liferay/portlet/journal/dependencies" +
+				"/test-journal-content-image-field.xml");
 
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
