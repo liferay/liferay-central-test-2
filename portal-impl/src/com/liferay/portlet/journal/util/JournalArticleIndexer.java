@@ -272,11 +272,11 @@ public class JournalArticleIndexer extends BaseIndexer {
 			searchContext.getLocale(), field);
 
 		if (Validator.isNull(searchContext.getKeywords())) {
-			BooleanQuery multiFieldQuery = BooleanQueryFactoryUtil.create(
+			BooleanQuery localizedQuery = BooleanQueryFactoryUtil.create(
 				searchContext);
 
-			multiFieldQuery.addTerm(field, value, like);
-			multiFieldQuery.addTerm(localizedField, value, like);
+			localizedQuery.addTerm(field, value, like);
+			localizedQuery.addTerm(localizedField, value, like);
 
 			BooleanClauseOccur booleanClauseOccur = BooleanClauseOccur.SHOULD;
 
@@ -284,7 +284,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 				booleanClauseOccur = BooleanClauseOccur.MUST;
 			}
 
-			searchQuery.add(multiFieldQuery, booleanClauseOccur);
+			searchQuery.add(localizedQuery, booleanClauseOccur);
 		}
 		else {
 			searchQuery.addTerm(localizedField, value, like);
