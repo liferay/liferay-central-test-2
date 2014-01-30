@@ -55,7 +55,8 @@ public class AlloyPermission {
 		String controller, String actionId) {
 
 		actionId =
-			_formatName(actionId) + StringPool.POUND + controller.toUpperCase();
+			_formatActionId(actionId) + StringPool.POUND +
+				StringUtil.toUpperCase(controller);
 
 		try {
 			ResourceActionsUtil.checkAction(portletId, actionId);
@@ -78,14 +79,14 @@ public class AlloyPermission {
 			portletDisplay.getRootPortletId(), controller, actionId);
 	}
 
-	private static String _formatName(String name) {
-		StringBuilder sb = new StringBuilder(name.toUpperCase());
+	private static String _formatActionId(String actionId) {
+		StringBuilder sb = new StringBuilder(actionId.toUpperCase());
 
-		for (int i = 0; i < name.length(); i++) {
-			char c = name.charAt(i);
+		for (int i = 0; i < actionId.length(); i++) {
+			char c = actionId.charAt(i);
 
 			if (Character.isUpperCase(c) && (i > 0)) {
-				int delta = sb.length() - name.length();
+				int delta = sb.length() - actionId.length();
 
 				sb.insert(i + delta, CharPool.UNDERLINE);
 			}
