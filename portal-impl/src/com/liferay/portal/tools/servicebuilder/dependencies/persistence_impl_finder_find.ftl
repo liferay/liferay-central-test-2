@@ -280,7 +280,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<@FinderQPos />
+				<@finderQPos />
 
 				if (!pagination) {
 					list = (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end, false);
@@ -568,7 +568,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			<@FinderQPos />
+			<@finderQPos />
 
 			if (orderByComparator != null) {
 				Object[] values = orderByComparator.getOrderByConditionValues(${entity.varName});
@@ -700,7 +700,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos />
+					<@finderQPos />
 
 					return (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
@@ -772,7 +772,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos />
+					<@finderQPos />
 
 					return (List<${entity.name}>)QueryUtil.list(q, getDialect(), start, end);
 				}
@@ -878,7 +878,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos />
+					<@finderQPos />
 
 					if (orderByComparator != null) {
 						Object[] values = orderByComparator.getOrderByConditionValues(${entity.varName});
@@ -1015,7 +1015,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos />
+					<@finderQPos />
 
 					if (orderByComparator != null) {
 						Object[] values = orderByComparator.getOrderByConditionValues(${entity.varName});
@@ -1200,7 +1200,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
-						<@FinderQPos
+						<@finderQPos
 							_arrayable=true
 						/>
 
@@ -1275,7 +1275,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 						QueryPos qPos = QueryPos.getInstance(q);
 
-						<@FinderQPos
+						<@finderQPos
 							_arrayable=true
 						/>
 
@@ -1565,7 +1565,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos
+					<@finderQPos
 						_arrayable=true
 					/>
 
@@ -1769,7 +1769,7 @@ that may or may not be enforced with a unique index at the database level. Case
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<@FinderQPos />
+				<@finderQPos />
 
 				List<${entity.name}> list = q.list();
 

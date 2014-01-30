@@ -54,7 +54,7 @@ public int countBy${finder.name}(
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			<@FinderQPos />
+			<@finderQPos />
 
 			count = (Long)q.uniqueResult();
 
@@ -133,7 +133,7 @@ public int countBy${finder.name}(
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<@FinderQPos
+				<@finderQPos
 					_arrayable=true
 				/>
 
@@ -205,7 +205,7 @@ public int countBy${finder.name}(
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<@FinderQPos />
+				<@finderQPos />
 
 				Long count = (Long)q.uniqueResult();
 
@@ -241,7 +241,7 @@ public int countBy${finder.name}(
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				<@FinderQPos />
+				<@finderQPos />
 
 				Long count = (Long)q.uniqueResult();
 
@@ -334,7 +334,7 @@ public int countBy${finder.name}(
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos
+					<@finderQPos
 						_arrayable=true
 					/>
 
@@ -380,7 +380,7 @@ public int countBy${finder.name}(
 
 					QueryPos qPos = QueryPos.getInstance(q);
 
-					<@FinderQPos
+					<@finderQPos
 						_arrayable=true
 					/>
 
