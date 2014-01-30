@@ -524,8 +524,8 @@ Please set the environment variable ANT_OPTS to the recommended value of
 	</macrodef>
 
 	<macrodef name="check-fix-pack-requirements">
-		<attribute name="fix.pack.file.name" />
 		<attribute default="${app.server.dir}/patching-tool/patches" name="fix.pack.dir" />
+		<attribute name="fix.pack.file.name" />
 
 		<sequential>
 			<propertyregex
