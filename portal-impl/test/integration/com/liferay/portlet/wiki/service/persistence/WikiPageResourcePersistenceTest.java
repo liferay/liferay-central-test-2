@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.OrderByComparatorFactoryUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.BasePersistence;
@@ -133,26 +132,6 @@ public class WikiPageResourcePersistenceTest {
 			newWikiPageResource.getNodeId());
 		Assert.assertEquals(existingWikiPageResource.getTitle(),
 			newWikiPageResource.getTitle());
-	}
-
-	@Test
-	public void testCountByUuid() {
-		try {
-			_persistence.countByUuid(StringPool.BLANK);
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
-	public void testCountByN_T() {
-		try {
-			_persistence.countByN_T(ServiceTestUtil.nextLong(), StringPool.BLANK);
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
 	}
 
 	@Test

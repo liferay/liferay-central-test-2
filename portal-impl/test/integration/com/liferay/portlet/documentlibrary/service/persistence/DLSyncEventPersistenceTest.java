@@ -138,26 +138,6 @@ public class DLSyncEventPersistenceTest {
 	}
 
 	@Test
-	public void testCountByModifiedTime() {
-		try {
-			_persistence.countByModifiedTime(ServiceTestUtil.nextLong());
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
-	public void testCountByTypePK() {
-		try {
-			_persistence.countByTypePK(ServiceTestUtil.nextLong());
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		DLSyncEvent newDLSyncEvent = addDLSyncEvent();
 

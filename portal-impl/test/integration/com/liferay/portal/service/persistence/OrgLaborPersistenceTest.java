@@ -187,16 +187,6 @@ public class OrgLaborPersistenceTest {
 	}
 
 	@Test
-	public void testCountByOrganizationId() {
-		try {
-			_persistence.countByOrganizationId(ServiceTestUtil.nextLong());
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		OrgLabor newOrgLabor = addOrgLabor();
 

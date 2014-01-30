@@ -137,16 +137,6 @@ public class UserTrackerPathPersistenceTest {
 	}
 
 	@Test
-	public void testCountByUserTrackerId() {
-		try {
-			_persistence.countByUserTrackerId(ServiceTestUtil.nextLong());
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		UserTrackerPath newUserTrackerPath = addUserTrackerPath();
 

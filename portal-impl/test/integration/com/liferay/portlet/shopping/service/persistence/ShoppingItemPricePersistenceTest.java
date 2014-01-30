@@ -157,16 +157,6 @@ public class ShoppingItemPricePersistenceTest {
 	}
 
 	@Test
-	public void testCountByItemId() {
-		try {
-			_persistence.countByItemId(ServiceTestUtil.nextLong());
-		}
-		catch (Exception e) {
-			Assert.fail(e.getMessage());
-		}
-	}
-
-	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		ShoppingItemPrice newShoppingItemPrice = addShoppingItemPrice();
 
