@@ -34,19 +34,39 @@
 	</trycatch>
 
 	<macrodef name="check-fix-pack-requirements">
-		<attribute name="test.build.fix.pack.zip.file.name" />
+		<attribute name="fix.pack.file.name" />
+		<attribute default="${app.server.dir}/patching-tool/patches" name="fix.pack.dir" />
 
 		<sequential>
-			<mkdir dir="${app.server.dir}/patching-tool/patches/temp" />
-
-			<unzip
-				dest="${app.server.dir}/patching-tool/patches/temp"
-				src="${app.server.dir}/patching-tool/patches/@{test.build.fix.pack.zip.file.name}"
+			<propertyregex
+				input="@{fix.pack.file.name}"
+				property="fix.pack.build.version"
+				regexp=".+(\d{4})\.zip"
+				replace="\1"
 			/>
 
-			<xmlproperty file="${app.server.dir}/patching-tool/patches/temp/fixpack_documentation.xml" />
+			<propertyregex
+				input="@{fix.pack.file.name}"
+				property="fix.pack.portal.version"
+				regexp=".+(\d)(\d)(\d\d)\.zip"
+				replace="\1.\2.\3"
+			/>
 
-			<delete dir="${app.server.dir}/patching-tool/patches/temp" />
+			<property
+				name="fix.pack.temp.dir"
+				value="@{fix.pack.dir}/temp"
+			/>
+
+			<mkdir dir="${fix.pack.temp.dir}" />
+
+			<unzip
+				dest="${fix.pack.temp.dir}"
+				src="@{fix.pack.dir}/@{fix.pack.file.name}"
+			/>
+
+			<xmlproperty file="${fix.pack.temp.dir}/fixpack_documentation.xml" />
+
+			<delete dir="${fix.pack.temp.dir}" />
 
 			<antelope:stringutil property="fix.pack.requirements" string="${patch.requirements}">
 				<antelope:replace regex="!" replacement="" />
@@ -74,30 +94,31 @@
 								<equals arg1="${fix.pack.requirement.type}" arg2="hotfix" />
 								<then>
 									<var
-										name="requirement.fix.pack.zip.file.name"
-										value="liferay-@{fix.pack.requirement}-${test.build.fix.pack.build.version}.zip"
+										name="fix.pack.requirement.file.name"
+										value="liferay-@{fix.pack.requirement}-${fix.pack.build.version}.zip"
 									/>
 								</then>
 								<else>
 									<var
-										name="requirement.fix.pack.zip.file.name"
-										value="liferay-fix-pack-@{fix.pack.requirement}-${test.build.fix.pack.build.version}.zip"
+										name="fix.pack.requirement.file.name"
+										value="liferay-fix-pack-@{fix.pack.requirement}-${fix.pack.build.version}.zip"
 									/>
 								</else>
 							</if>
 
 							<if>
 								<not>
-									<available file="${app.server.dir}/patching-tool/patches/${requirement.fix.pack.zip.file.name}" />
+									<available file="@{fix.pack.dir}/${fix.pack.requirement.file.name}" />
 								</not>
 								<then>
 									<get
-										dest="${app.server.dir}/patching-tool/patches"
-										src="http://mirrors/files.liferay.com/private/ee/fix-packs/${test.build.fix.pack.portal.version}/${fix.pack.requirement.type}/${requirement.fix.pack.zip.file.name}"
+										dest="@{fix.pack.dir}"
+										src="http://mirrors/files.liferay.com/private/ee/fix-packs/${fix.pack.portal.version}/${fix.pack.requirement.type}/${fix.pack.requirement.file.name}"
 									/>
 
 									<check-fix-pack-requirements
-										test.build.fix.pack.zip.file.name="${requirement.fix.pack.zip.file.name}"
+										fix.pack.dir="@{fix.pack.dir}"
+										fix.pack.file.name="${fix.pack.requirement.file.name}"
 									/>
 								</then>
 							</if>
@@ -1830,21 +1851,10 @@ tck.url=true</echo>
 							replace=""
 						/>
 
-						<propertyregex
-							input="${test.build.fix.pack.zip.file.name}"
-							property="test.build.fix.pack.build.version"
-							regexp=".+(\d{4})\.zip"
-							replace="\1"
+						<check-fix-pack-requirements
+							fix.pack.dir="${app.server.dir}/patching-tool/patches"
+							fix.pack.file.name="${test.build.fix.pack.zip.file.name}"
 						/>
-
-						<propertyregex
-							input="${test.build.fix.pack.zip.file.name}"
-							property="test.build.fix.pack.portal.version"
-							regexp=".+(\d)(\d)(\d\d)\.zip"
-							replace="\1.\2.\3"
-						/>
-
-						<check-fix-pack-requirements test.build.fix.pack.zip.file.name="${test.build.fix.pack.zip.file.name}" />
 
 						<execute dir="${app.server.dir}/patching-tool">
 							patching-tool${file.suffix.bat} auto-discovery
