@@ -103,7 +103,8 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 		images.put(
 			"_image_1_0_en_US",
 			FileUtil.getBytes(
-				clazz, "/com/liferay/portlet/journal/dependencies/liferay.png"));
+				clazz,
+				"/com/liferay/portlet/journal/dependencies/liferay.png"));
 
 		baseModel = JournalTestUtil.addArticleWithXMLContent(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, content,
