@@ -407,12 +407,12 @@ public class EntityColumn implements Cloneable, Comparable<EntityColumn> {
 
 	public void validate() {
 		if (Validator.isNotNull(_arrayableOperator)) {
-			if (!_type.equals("short") && !_type.equals("char") &&
-				!_type.equals("int") && !_type.equals("long") &&
+			if (!_type.equals("char") && !_type.equals("int") &&
+				!_type.equals("long") && !_type.equals("short") &&
 				!_type.equals("String")) {
 
 				throw new IllegalArgumentException(
-					"Type " + _type + " can not be arrayable");
+					"Type " + _type + " cannot be arrayable");
 			}
 		}
 
