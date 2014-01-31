@@ -54,7 +54,7 @@ public class LiferaySeleniumHelper {
 
 		Runtime runtime = Runtime.getRuntime();
 
-		String command;
+		String command = null;
 
 		if (!OSDetector.isWindows()) {
 			String projectDir = liferaySelenium.getProjectDir();
