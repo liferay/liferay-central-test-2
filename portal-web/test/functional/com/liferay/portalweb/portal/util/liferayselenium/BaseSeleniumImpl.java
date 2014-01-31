@@ -213,8 +213,8 @@ public abstract class BaseSeleniumImpl
 	}
 
 	@Override
-	public void clickImageElement(String imageUrl) throws Exception {
-		LiferaySeleniumHelper.clickImageElement(this, imageUrl);
+	public void clickImageElement(String image) throws Exception {
+		LiferaySeleniumHelper.clickImageElement(this, image);
 	}
 
 	@Override
@@ -753,8 +753,7 @@ public abstract class BaseSeleniumImpl
 	private String _outputDir = TestPropsValues.OUTPUT_DIR;
 	private String _primaryTestSuiteName;
 	private String _projectDir;
-	private String _sikuliImagesDir =
-		_dependenciesDir + "sikuli//linux-images//";
+	private String _sikuliImagesDir = _dependenciesDir + "sikuli//linux//";
 	private String _timeout = "90000";
 
 }

@@ -311,7 +311,7 @@ create database lportal2 character set utf8;</echo>
 		<delete file="portal-web/test-ant-scripts/log" />
 	</target>
 
-	<target name="clean-up-sikuli-libs">
+	<target name="clean-up-sikuli-temp-files">
 		<delete dir="lib/development/libs" />
 	</target>
 
@@ -924,7 +924,7 @@ ${custom.properties}</echo>
 				<equals arg1="${database.sharding}" arg2="true" />
 			</and>
 			<then>
-				<echo file="portal-impl/src/portal-ext.properties" append="true">
+				<echo file="portal-impl/src/portal-ext.properties" append="true"><![CDATA[
 
 jdbc.one.driverClassName=com.mysql.jdbc.Driver
 jdbc.one.url=jdbc:mysql://${database.host}/lportal1?useUnicode=true&characterEncoding=UTF-8&useFastDateParsing=false
@@ -978,7 +978,7 @@ spring.configs=\
 	#META-INF/dynamic-data-source-spring.xml,\
 	META-INF/shard-data-source-spring.xml,\
 	\
-	classpath*:META-INF/ext-spring.xml</echo>
+	classpath*:META-INF/ext-spring.xml]]></echo>
 			</then>
 		</if>
 
@@ -2468,7 +2468,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 
 		<antcall target="stop-app-server" />
 
-		<antcall target="clean-up-sikuli-libs" />
+		<antcall target="clean-up-sikuli-temp-files" />
 
 		<if>
 			<equals arg1="${test.browser}" arg2="googlechrome" />

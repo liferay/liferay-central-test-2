@@ -83,7 +83,7 @@ public interface LiferaySelenium extends Selenium {
 
 	public void clickAtAndWait(String locator, String coordString);
 
-	public void clickImageElement(String imageUrl) throws Exception;
+	public void clickImageElement(String image) throws Exception;
 
 	public void connectToEmailAccount(String emailAddress, String emailPassword)
 		throws Exception;

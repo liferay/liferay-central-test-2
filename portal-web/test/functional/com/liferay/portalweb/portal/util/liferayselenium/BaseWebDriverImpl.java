@@ -791,7 +791,6 @@ public abstract class BaseWebDriverImpl
 	private String _outputDir = TestPropsValues.OUTPUT_DIR;
 	private String _primaryTestSuiteName;
 	private String _projectDir;
-	private String _sikuliImagesDir =
-		_dependenciesDir + "sikuli//linux-images//";
+	private String _sikuliImagesDir = _dependenciesDir + "sikuli//linux//";
 
 }
