@@ -40,26 +40,6 @@ configurationRenderURL.setParameter("struts_action", "/portlet_configuration/edi
 configurationRenderURL.setParameter("redirect", configurationURL.toString());
 configurationRenderURL.setParameter("backURL", redirect);
 configurationRenderURL.setParameter("portletResource", portletResource);
-
-JournalArticle headerArticle = null;
-
-if (Validator.isNotNull(headerArticleId)) {
-	try {
-		headerArticle = JournalArticleLocalServiceUtil.getArticle(headerArticleGroupId, headerArticleId);
-	}
-	catch (NoSuchArticleException nsae) {
-	}
-}
-
-JournalArticle footerArticle = null;
-
-if (Validator.isNotNull(footerArticleId)) {
-	try {
-		footerArticle = JournalArticleLocalServiceUtil.getArticle(footerArticleGroupId, footerArticleId);
-	}
-	catch (NoSuchArticleException nsae) {
-	}
-}
 %>
 
 <aui:form action="<%= configurationURL %>" method="post" name="fm">
@@ -179,6 +159,19 @@ if (Validator.isNotNull(footerArticleId)) {
 
 						<aui:field-wrapper label="header-web-content">
 							<div class="input-append">
+
+								<%
+								JournalArticle headerArticle = null;
+
+								if (Validator.isNotNull(headerArticleId)) {
+									try {
+										headerArticle = JournalArticleLocalServiceUtil.getArticle(headerArticleGroupId, headerArticleId);
+									}
+									catch (NoSuchArticleException nsae) {
+									}
+								}
+								%>
+
 								<liferay-ui:input-resource url="<%= (headerArticle != null) ? headerArticle.getTitle(locale) : StringPool.BLANK %>" />
 
 								<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForHeader();" %>' value="select" />
@@ -189,6 +182,19 @@ if (Validator.isNotNull(footerArticleId)) {
 
 						<aui:field-wrapper label="footer-web-content">
 							<div class="input-append">
+
+								<%
+								JournalArticle footerArticle = null;
+
+								if (Validator.isNotNull(footerArticleId)) {
+									try {
+										footerArticle = JournalArticleLocalServiceUtil.getArticle(footerArticleGroupId, footerArticleId);
+									}
+									catch (NoSuchArticleException nsae) {
+									}
+								}
+								%>
+
 								<liferay-ui:input-resource url="<%= (footerArticle != null) ? footerArticle.getTitle(locale) : StringPool.BLANK %>" />
 
 								<aui:button name="selectButton" onClick='<%= renderResponse.getNamespace() + "selectionForFooter();" %>' value="select" />
