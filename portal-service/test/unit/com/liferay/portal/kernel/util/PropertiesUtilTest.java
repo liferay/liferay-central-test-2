@@ -28,7 +28,7 @@ import org.junit.Test;
 public class PropertiesUtilTest {
 
 	@Test
-	public void testLoad() throws Exception {
+	public void testLoad1() throws Exception {
 		Properties properties = PropertiesUtil.load(_PROPERTIES_STRING);
 
 		for (String[] property : _PROPERTIES_ARRAY) {
