@@ -979,8 +979,8 @@ ${custom.properties}</echo>
 							META-INF/shard-data-source-spring.xml,\
 							\
 							classpath*:META-INF/ext-spring.xml
-						]]>
-					</echo>
+					]]>
+				</echo>
 			</then>
 		</if>
 
