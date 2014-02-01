@@ -2472,8 +2472,7 @@ public class ServiceBuilder {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
-		context.put(
-			"referenceList", _mergeReferenceList(entity.getReferenceList()));
+		context.put("referenceList", _mergeReferenceList(entity));
 
 		// Content
 
@@ -2764,8 +2763,7 @@ public class ServiceBuilder {
 		context.put("entity", entity);
 		context.put("methods", methods);
 		context.put("sessionTypeName",_getSessionTypeName(sessionType));
-		context.put(
-			"referenceList", _mergeReferenceList(entity.getReferenceList()));
+		context.put("referenceList", _mergeReferenceList(entity));
 
 		context = _putDeprecatedKeys(context, javaClass);
 
@@ -4278,11 +4276,19 @@ public class ServiceBuilder {
 		return value.equals(type.getValue());
 	}
 
-	private List<Entity> _mergeReferenceList(List<Entity> referenceList) {
+	private List<Entity> _mergeReferenceList(Entity entity) {
+		List<Entity> referenceList = entity.getReferenceList();
+
 		List<Entity> list = new ArrayList<Entity>(
 			_ejbList.size() + referenceList.size());
 
-		list.addAll(_ejbList);
+		if (_autoImportDefaultReferences) {
+			list.addAll(_ejbList);
+		}
+		else {
+			list.add(entity);
+		}
+
 		list.addAll(referenceList);
 
 		return list;
