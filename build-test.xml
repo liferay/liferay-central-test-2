@@ -38,7 +38,7 @@
 		</catch>
 	</trycatch>
 
-	<macrodef name="record-app-server-information">
+	<macrodef name="record-env-app-server">
 		<sequential>
 			<propertyregex
 				input="${app.server.version}"
@@ -56,27 +56,22 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="record-browser-information">
+	<macrodef name="record-env-browser">
 		<sequential>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="record-database-information">
+	<macrodef name="record-env-database">
 		<sequential>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="record-java-information">
+	<macrodef name="record-env-jdk">
 		<sequential>
 		</sequential>
 	</macrodef>
 
-	<macrodef name="record-os-information">
-		<sequential>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="record-liferay-version-information">
+	<macrodef name="record-env-os">
 		<sequential>
 		</sequential>
 	</macrodef>
@@ -223,76 +218,11 @@ create database lportal2 character set utf8;</echo>
 	</target>
 
 	<target name="build-test-results-xml">
-		<record-app-server-information />
-		<record-browser-information />
-		<record-database-information />
-		<record-java-information />
-		<record-os-information />
-		<record-liferay-version-information />
-
-		<property name="file.properties">
-			<![CDATA[
-				<environment-properties>
-					<property name="app.server.type" value="${app.server.type}" />
-					<property name="app.server.version" value="${app.server.version}" />
-					<property name="browser.type" value="${browser.type}" />
-					<property name="browser.version" value="${browser.version}" />
-					<property name="database.type" value="${database.type}" />
-					<property name="database.version" value="${database.version}" />
-					<property name="java.name" value="${java.name}" />
-					<property name="java.version" value="${java.version}" />
-					<property name="os.name" value="${os.name}" />
-					<property name="os.version" value="${os.version}" />
-					<property name="unique.id" value="${env.key.app.server}${env.key.browser}${env.key.database}${env.key.java}${env.key.os}" />
-				</environment-properties>
-				<liferay-version-properties>
-					<property name="liferay.plugins.edition" value="${liferay.plugins.edition}" />
-					<property name="liferay.plugins.git.id" value="${liferay.plugins.git.id}" />
-					<property name="liferay.plugins.version" value="${liferay.plugins.version}" />
-					<property name="liferay.plugins.version.major" value="${liferay.plugins.version.major}" />
-					<property name="liferay.portal.edition" value="${liferay.portal.edition}" />
-					<property name="liferay.portal.git.id" value="${liferay.portal.git.id}" />
-					<property name="liferay.portal.version" value="${liferay.portal.version}" />
-					<property name="liferay.portal.version.major" value="${liferay.portal.version.major}" />
-				</liferay-version-properties>
-			]]>
-		</property>
-
-		<for param="file.name">
-			<path>
-				<fileset
-					dir="portal-web/test-results/functional"
-					includes="TEST-*.xml"
-				/>
-			</path>
-			<sequential>
-				<var name="file.name" value="@{file.name}" />
-
-				<for list="environment-properties,properties,property,liferay-version-properties" param="property.tag.name">
-					<sequential>
-						<replaceregexp
-							file="@{file.name}"
-							flags="g"
-							match="\s*\&lt;/?@{property.tag.name}[^\n^\r]*[\n\r]"
-							replace=""
-						/>
-					</sequential>
-				</for>
-
-				<replaceregexp
-					file="@{file.name}"
-					match="(&lt;testcase)"
-					replace="${file.properties}\1"
-				/>
-
-				<replaceregexp
-					file="@{file.name}"
-					flags="g"
-					match="\&gt;[\n\s]*\&lt;"
-					replace="\&gt;${line.separator}\&lt;"
-				/>
-			</sequential>
-		</for>
+		<record-env-app-server />
+		<record-env-browser />
+		<record-env-database />
+		<record-env-jdk />
+		<record-env-os />
 	</target>
 
 	<target name="check-config">
