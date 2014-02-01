@@ -17,6 +17,9 @@ service-builder-import*)>
 <!--
 The package-path value specifies the package of the generated code.
 
+The auto-import-default-references value specifies whether or not to
+automatically default references. The default value is true.
+
 The auto-namespace-tables value specifies whether or not to automatically
 namespace tables. The default value is false for core services and true for
 plugin services.
@@ -26,6 +29,7 @@ entities to prevent lost updates. The default value is false.
 -->
 <!ATTLIST service-builder
 	package-path CDATA #REQUIRED
+	auto-import-default-references CDATA #IMPLIED
 	auto-namespace-tables CDATA #IMPLIED
 	mvcc-enabled CDATA #IMPLIED
 >

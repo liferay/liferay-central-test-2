@@ -112,6 +112,7 @@ import org.dom4j.DocumentException;
  * @author Prashant Dighe
  * @author Shuyang Zhou
  * @author James Lefeu
+ * @author Miguel Pastor
  */
 public class ServiceBuilder {
 
@@ -230,6 +231,7 @@ public class ServiceBuilder {
 		String sqlFileName = arguments.get("service.sql.file");
 		String sqlIndexesFileName = arguments.get("service.sql.indexes.file");
 		String sqlSequencesFileName = arguments.get("service.sql.sequences.file");
+		boolean autoImportDefaultReferences = GetterUtil.getBoolean(arguments.get("service.auto.import.default.references"), true);
 		boolean autoNamespaceTables = GetterUtil.getBoolean(arguments.get("service.auto.namespace.tables"));
 		String beanLocatorUtil = arguments.get("service.bean.locator.util");
 		String propsUtil = arguments.get("service.props.util");
@@ -243,7 +245,8 @@ public class ServiceBuilder {
 			new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
 				apiDir, implDir, remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlSequencesFileName, autoNamespaceTables,
+				sqlIndexesFileName, sqlSequencesFileName,
+				autoImportDefaultReferences, autoNamespaceTables,
 				beanLocatorUtil, propsUtil, pluginName, targetEntityName,
 				testDir, true, buildNumber, buildNumberIncrement);
 		}
@@ -501,14 +504,16 @@ public class ServiceBuilder {
 		String springFileName, String apiDir, String implDir,
 		String remotingFileName, String sqlDir, String sqlFileName,
 		String sqlIndexesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String pluginName, String targetEntityName, String testDir) {
+		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String targetEntityName, String testDir) {
 
 		this(
 			fileName, hbmFileName, modelHintsFileName, springFileName, apiDir,
 			implDir, remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-			propsUtil, pluginName, targetEntityName, testDir, true, 1, true);
+			sqlSequencesFileName, autoImportDefaultReferences,
+			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
+			targetEntityName, testDir, true, 1, true);
 	}
 
 	public ServiceBuilder(
@@ -516,9 +521,10 @@ public class ServiceBuilder {
 		String springFileName, String apiDir, String implDir,
 		String remotingFileName, String sqlDir, String sqlFileName,
 		String sqlIndexesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String pluginName, String targetEntityName, String testDir,
-		boolean build, long buildNumber, boolean buildNumberIncrement) {
+		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String targetEntityName, String testDir, boolean build,
+		long buildNumber, boolean buildNumberIncrement) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
@@ -587,6 +593,7 @@ public class ServiceBuilder {
 			_sqlFileName = sqlFileName;
 			_sqlIndexesFileName = sqlIndexesFileName;
 			_sqlSequencesFileName = sqlSequencesFileName;
+			_autoImportDefaultReferences = autoImportDefaultReferences;
 			_autoNamespaceTables = autoNamespaceTables;
 			_beanLocatorUtil = beanLocatorUtil;
 			_beanLocatorUtilShortName = _beanLocatorUtil.substring(
@@ -625,6 +632,9 @@ public class ServiceBuilder {
 
 			_packagePath = packagePath;
 
+			_autoImportDefaultReferences = GetterUtil.getBoolean(
+				rootElement.attributeValue("auto-import-default-references"),
+				_autoImportDefaultReferences);
 			_autoNamespaceTables = GetterUtil.getBoolean(
 				rootElement.attributeValue("auto-namespace-tables"),
 				_autoNamespaceTables);
@@ -982,7 +992,8 @@ public class ServiceBuilder {
 		ServiceBuilder serviceBuilder = new ServiceBuilder(
 			refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
 			_apiDir, _implDir, _remotingFileName, _sqlDir, _sqlFileName,
-			_sqlIndexesFileName, _sqlSequencesFileName, _autoNamespaceTables,
+			_sqlIndexesFileName, _sqlSequencesFileName,
+			_autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _propsUtil, _pluginName, _targetEntityName,
 			_testDir, false, _buildNumber, _buildNumberIncrement);
 
@@ -4788,6 +4799,7 @@ public class ServiceBuilder {
 
 	private String _apiDir;
 	private String _author;
+	private boolean _autoImportDefaultReferences;
 	private boolean _autoNamespaceTables;
 	private Set<String> _badAliasNames;
 	private Set<String> _badColumnNames;
