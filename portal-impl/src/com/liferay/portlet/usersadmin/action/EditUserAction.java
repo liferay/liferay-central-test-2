@@ -723,11 +723,15 @@ public class EditUserAction extends PortletAction {
 			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
 				actionRequest, "privateLayoutSetPrototypeLinkEnabled");
 
-			SitesUtil.updateLayoutSetPrototypesLinks(
-				user.getGroup(), publicLayoutSetPrototypeId,
-				privateLayoutSetPrototypeId,
-				publicLayoutSetPrototypeLinkEnabled,
-				privateLayoutSetPrototypeLinkEnabled);
+			if ((publicLayoutSetPrototypeId > 0) ||
+				(privateLayoutSetPrototypeId > 0)) {
+
+				SitesUtil.updateLayoutSetPrototypesLinks(
+					user.getGroup(), publicLayoutSetPrototypeId,
+					privateLayoutSetPrototypeId,
+					publicLayoutSetPrototypeLinkEnabled,
+					privateLayoutSetPrototypeLinkEnabled);
+			}
 		}
 
 		Company company = PortalUtil.getCompany(actionRequest);
