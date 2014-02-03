@@ -42,8 +42,7 @@ public class UpgradeShopping extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
-				ShoppingOrderTable.TABLE_NAME,
-				ShoppingOrderTable.TABLE_COLUMNS,
+				ShoppingOrderTable.TABLE_NAME, ShoppingOrderTable.TABLE_COLUMNS,
 				ShoppingOrderTable.TABLE_SQL_CREATE,
 				ShoppingOrderTable.TABLE_SQL_ADD_INDEXES);
 		}
