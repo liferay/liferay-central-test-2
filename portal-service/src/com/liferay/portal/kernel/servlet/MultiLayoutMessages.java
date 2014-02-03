@@ -34,66 +34,66 @@ import javax.servlet.http.HttpSession;
 public class MultiLayoutMessages {
 
 	public static void add(PortletRequest portletRequest, Class<?> clazz) {
-		add(portletRequest.getPortletSession(false), clazz.getName());
+		SessionMessages.add(portletRequest, clazz.getName());
 	}
 
 	public static void add(
 		PortletRequest portletRequest, Class<?> clazz, Object value) {
 
-		add(portletRequest.getPortletSession(false), clazz.getName(), value);
+		SessionMessages.add(portletRequest, clazz.getName(), value);
 	}
 
 	public static void add(PortletRequest portletRequest, String key) {
-		add(portletRequest.getPortletSession(false), key);
+		SessionMessages.add(portletRequest, key);
 	}
 
 	public static void add(
 		PortletRequest portletRequest, String key, Object value) {
 
-		add(portletRequest.getPortletSession(false), key, value);
+		SessionMessages.add(portletRequest, key, value);
 	}
 
 	public static void clear(PortletRequest portletRequest) {
-		clear(portletRequest.getPortletSession(false));
+		SessionMessages.clear(portletRequest);
 	}
 
 	public static boolean contains(
 		PortletRequest portletRequest, Class<?> clazz) {
 
-		return contains(
-			portletRequest.getPortletSession(false), clazz.getName());
+		return SessionMessages.contains(
+			portletRequest, clazz.getName());
 	}
 
 	public static boolean contains(PortletRequest portletRequest, String key) {
-		return contains(portletRequest.getPortletSession(false), key);
+		return SessionMessages.contains(portletRequest, key);
 	}
 
 	public static Object get(PortletRequest portletRequest, Class<?> clazz) {
-		return get(portletRequest.getPortletSession(false), clazz.getName());
+		return SessionMessages.get(portletRequest, clazz.getName());
 	}
 
 	public static Object get(PortletRequest portletRequest, String key) {
-		return get(portletRequest.getPortletSession(false), key);
+		return SessionMessages.get(portletRequest, key);
 	}
 
 	public static boolean isEmpty(PortletRequest portletRequest) {
-		return isEmpty(portletRequest.getPortletSession(false));
+		return SessionMessages.isEmpty(portletRequest);
 	}
 
 	public static Iterator<String> iterator(PortletRequest portletRequest) {
-		return iterator(portletRequest.getPortletSession(false));
+		return SessionMessages.iterator(portletRequest);
 	}
 
 	public static Set<String> keySet(PortletRequest portletRequest) {
-		return keySet(portletRequest.getPortletSession(false));
+		return SessionMessages.keySet(portletRequest);
 	}
 
 	public static void print(PortletRequest portletRequest) {
-		print(portletRequest.getPortletSession(false));
+		SessionMessages.print(portletRequest);
 	}
 
 	public static int size(PortletRequest portletRequest) {
-		return size(portletRequest.getPortletSession(false));
+		return SessionMessages.size(portletRequest);
 	}
 
 }
