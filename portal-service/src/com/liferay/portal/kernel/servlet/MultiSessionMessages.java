@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import com.liferay.portal.util.PortalUtil;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -23,8 +25,6 @@ import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.util.PortalUtil;
-
 /**
  * @author Julio Camarero
  * @author Brian Wing Shun Chan
@@ -33,7 +33,7 @@ public class MultiSessionMessages {
 
 	public static void add(PortletRequest portletRequest, Class<?> clazz) {
 		SessionMessages.add(portletRequest, clazz.getName());
-		
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
@@ -88,10 +88,10 @@ public class MultiSessionMessages {
 
 		if (SessionMessages.contains(portletRequest, clazz.getName()) ||
 			SessionMessages.contains(request, clazz.getName())) {
-				
+
 			return true;
 		}
-		
+
 		return false;
 	}
 
@@ -101,23 +101,23 @@ public class MultiSessionMessages {
 
 		if (SessionMessages.contains(portletRequest, key) ||
 			SessionMessages.contains(request, key)) {
-				
+
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	public static Object get(PortletRequest portletRequest, Class<?> clazz) {
 		Object value = SessionMessages.get(portletRequest, clazz.getName());
-		
+
 		if (value != null) {
 			return value;
 		}
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
-		
+
 		return SessionMessages.get(request, clazz.getName());
 	}
 
@@ -130,7 +130,7 @@ public class MultiSessionMessages {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
-		
+
 		return SessionMessages.get(request, key);
 	}
 
@@ -140,16 +140,16 @@ public class MultiSessionMessages {
 
 		if (SessionMessages.isEmpty(portletRequest) &&
 			SessionMessages.isEmpty(request)) {
-				
+
 			return true;
 		}
-		
+
 		return false;
 	}
 
 	public static Iterator<String> iterator(PortletRequest portletRequest) {
 		Set<String> set = keySet(portletRequest);
-		
+
 		return set.iterator();
 	}
 
@@ -171,7 +171,7 @@ public class MultiSessionMessages {
 
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
-			
+
 		SessionMessages.print(request);
 	}
 
