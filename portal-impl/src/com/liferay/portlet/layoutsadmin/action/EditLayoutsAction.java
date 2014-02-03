@@ -1250,8 +1250,11 @@ public class EditLayoutsAction extends PortletAction {
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 				}
 				catch (Exception e) {
+				}
+
+				if (layout == null) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("First layout can not be found");
+						_log.debug("Unable to fetch first layout");
 					}
 				}
 			}
