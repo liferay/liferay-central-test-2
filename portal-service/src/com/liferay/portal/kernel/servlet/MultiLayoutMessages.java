@@ -31,7 +31,7 @@ import javax.servlet.http.HttpSession;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class SessionMessages {
+public class MultiLayoutMessages {
 
 	public static final String KEY_SUFFIX_CLOSE_REDIRECT = ".closeRedirect";
 
