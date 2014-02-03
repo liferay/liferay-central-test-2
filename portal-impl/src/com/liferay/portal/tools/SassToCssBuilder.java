@@ -160,19 +160,18 @@ public class SassToCssBuilder {
 
 		_initUtil(classLoader);
 
-		String rubyScript = StringUtil.read(
-			classLoader,
-			"com/liferay/portal/servlet/filters/dynamiccss" +
-				"/dependencies/main.rb");
-
-		_tempDir = SystemProperties.get(SystemProperties.TMP_DIR);
-
 		RubyExecutor rubyExecutor = new RubyExecutor();
 
 		rubyExecutor.setExecuteInSeparateThread(false);
 
 		ScriptingContainer scriptingContainer =
 			rubyExecutor.getScriptingContainer();
+
+		String rubyScript = StringUtil.read(
+			classLoader,
+			"com/liferay/portal/servlet/filters/dynamiccss" +
+				"/dependencies/main.rb");
+
 		Object scriptObject = scriptingContainer.runScriptlet(rubyScript);
 
 		List<String> fileNames = new ArrayList<String>();
@@ -301,37 +300,36 @@ public class SassToCssBuilder {
 			String docrootDirName, String portalCommonDirName, String fileName)
 		throws Exception {
 
+		String content = getContent(docrootDirName, fileName);
 		String filePath = docrootDirName.concat(fileName);
 
-		String content = getContent(docrootDirName, fileName);
-
-		Object args[] = new Object[] {
-			content, portalCommonDirName, filePath,
-			_getCssThemePath(filePath), _tempDir, false
+		Object[] arguments = new Object[] {
+			content, portalCommonDirName, filePath, _getCssThemePath(filePath),
+			_tempDir, false
 		};
 
 		try {
 			content = scriptingContainer.callMethod(
-				scriptObject, "process", args, String.class);
+				scriptObject, "process", arguments, String.class);
 		}
 		catch (Exception e) {
 			if (e instanceof RaiseException) {
 				RaiseException raiseException = (RaiseException)e;
 
-				RubyException exception = raiseException.getException();
+				RubyException rubyException = raiseException.getException();
 
 				System.err.println(
-					String.valueOf(exception.message.toJava(String.class)));
+					String.valueOf(rubyException.message.toJava(String.class)));
 
-				IRubyObject backtrace = exception.getBacktrace();
+				IRubyObject iRubyObject = rubyException.getBacktrace();
 
-				RubyArray rubyArray = (RubyArray)backtrace.toJava(
+				RubyArray rubyArray = (RubyArray)iRubyObject.toJava(
 					RubyArray.class);
 
 				for (int i = 0; i < rubyArray.size(); i++) {
-					Object item = rubyArray.get(i);
+					Object object = rubyArray.get(i);
 
-					System.err.println(String.valueOf(item));
+					System.err.println(String.valueOf(object));
 				}
 			}
 			else {
@@ -342,7 +340,7 @@ public class SassToCssBuilder {
 		return content;
 	}
 
-	private String _tempDir;
+	private String _tempDir = SystemProperties.get(SystemProperties.TMP_DIR);
 
 	private class CacheSassCallable implements Callable<String> {
 

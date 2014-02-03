@@ -67,14 +67,15 @@ public class DynamicCSSUtil {
 
 	public static void init() {
 		try {
+			RubyExecutor rubyExecutor = new RubyExecutor();
+
+			_scriptingContainer = rubyExecutor.getScriptingContainer();
+
 			String rubyScript = StringUtil.read(
 				ClassLoaderUtil.getPortalClassLoader(),
 				"com/liferay/portal/servlet/filters/dynamiccss" +
 					"/dependencies/main.rb");
 
-			RubyExecutor rubyExecutor = new RubyExecutor();
-
-			_scriptingContainer = rubyExecutor.getScriptingContainer();
 			_scriptObject = _scriptingContainer.runScriptlet(rubyScript);
 
 			RTLCSSUtil.init();
@@ -435,34 +436,33 @@ public class DynamicCSSUtil {
 
 		File sassTempDir = _getSassTempDir(servletContext);
 
-		Object args[] = new Object[] {
-			content, commonSassPath, resourcePath,
-			cssThemePath, sassTempDir.getCanonicalPath(),
-			_log.isDebugEnabled()
+		Object[] arguments = new Object[] {
+			content, commonSassPath, resourcePath, cssThemePath,
+			sassTempDir.getCanonicalPath(), _log.isDebugEnabled()
 		};
 
 		try {
 			content = _scriptingContainer.callMethod(
-				_scriptObject, "process", args, String.class);
+				_scriptObject, "process", arguments, String.class);
 		}
 		catch (Exception e) {
 			if (e instanceof RaiseException) {
 				RaiseException raiseException = (RaiseException)e;
 
-				RubyException exception = raiseException.getException();
+				RubyException rubyException = raiseException.getException();
 
 				_log.error(
-					String.valueOf(exception.message.toJava(String.class)));
+					String.valueOf(rubyException.message.toJava(String.class)));
 
-				IRubyObject backtrace = exception.getBacktrace();
+				IRubyObject iRubyObject = rubyException.getBacktrace();
 
-				RubyArray rubyArray = (RubyArray)backtrace.toJava(
+				RubyArray rubyArray = (RubyArray)iRubyObject.toJava(
 					RubyArray.class);
 
 				for (int i = 0; i < rubyArray.size(); i++) {
-					Object item = rubyArray.get(i);
+					Object object = rubyArray.get(i);
 
-					_log.error(String.valueOf(item));
+					_log.error(String.valueOf(object));
 				}
 			}
 			else {
