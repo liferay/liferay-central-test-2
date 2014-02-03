@@ -716,6 +716,12 @@ public class EditUserAction extends PortletAction {
 		String portletId = serviceContext.getPortletId();
 
 		if (!portletId.equals(PortletKeys.MY_ACCOUNT)) {
+			Group group = user.getGroup();
+
+			boolean hasGroupUpdatePermission = GroupPermissionUtil.contains(
+				themeDisplay.getPermissionChecker(), group.getGroupId(),
+				ActionKeys.UPDATE);
+
 			long publicLayoutSetPrototypeId = ParamUtil.getLong(
 				actionRequest, "publicLayoutSetPrototypeId");
 			long privateLayoutSetPrototypeId = ParamUtil.getLong(
@@ -724,12 +730,6 @@ public class EditUserAction extends PortletAction {
 				actionRequest, "publicLayoutSetPrototypeLinkEnabled");
 			boolean privateLayoutSetPrototypeLinkEnabled = ParamUtil.getBoolean(
 				actionRequest, "privateLayoutSetPrototypeLinkEnabled");
-
-			Group group = user.getGroup();
-
-			boolean hasGroupUpdatePermission = GroupPermissionUtil.contains(
-				themeDisplay.getPermissionChecker(), group.getGroupId(),
-				ActionKeys.UPDATE);
 
 			if (hasGroupUpdatePermission &&
 				((publicLayoutSetPrototypeId > 0) ||
