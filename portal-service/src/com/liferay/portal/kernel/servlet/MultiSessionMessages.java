@@ -29,7 +29,7 @@ import com.liferay.portal.util.PortalUtil;
  * @author Brian Wing Shun Chan
  * @author Shuyang Zhou
  */
-public class MultiLayoutMessages {
+public class MultiSessionMessages {
 
 	public static void add(PortletRequest portletRequest, Class<?> clazz) {
 		SessionMessages.add(portletRequest, clazz.getName());
