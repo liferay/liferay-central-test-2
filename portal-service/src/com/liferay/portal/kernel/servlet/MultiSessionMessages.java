@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import com.liferay.portal.util.PortalUtil;
 
 /**
+ * @author Julio Camarero
  * @author Brian Wing Shun Chan
- * @author Shuyang Zhou
  */
 public class MultiSessionMessages {
 
