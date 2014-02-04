@@ -45,36 +45,37 @@ import javax.portlet.PortletRequest;
 @ProviderType
 public class ExportImportConfigurationHelper {
 
-	public static ExportImportConfiguration createExportLayoutConfiguration(
-			PortletRequest portletRequest)
+	public static ExportImportConfiguration
+			addExportLayoutExportImportConfiguration(
+				PortletRequest portletRequest)
 		throws Exception {
 
-		return doCreateConfiguration(
+		return addExportImportConfiguration(
 			portletRequest,
 			ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT);
 	}
 
 	public static ExportImportConfiguration
-			createPublishLayoutLocalConfiguration(
+			addPublishLayoutLocalExportImportConfiguration(
 				PortletRequest portletRequest)
 		throws Exception {
 
-		return doCreateConfiguration(
+		return addExportImportConfiguration(
 			portletRequest,
 			ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_LOCAL);
 	}
 
 	public static ExportImportConfiguration
-			createPublishLayoutRemoteConfiguration(
+			addPublishLayoutRemoteExportImportConfiguration(
 				PortletRequest portletRequest)
 		throws Exception {
 
-		return doCreateConfiguration(
+		return addExportImportConfiguration(
 			portletRequest,
 			ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE);
 	}
 
-	protected static ExportImportConfiguration doCreateConfiguration(
+	protected static ExportImportConfiguration addExportImportConfiguration(
 			PortletRequest portletRequest, int configurationType)
 		throws Exception {
 
