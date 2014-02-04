@@ -220,7 +220,6 @@ public class AssetPublisherDisplayContext {
 		assetEntryQuery.setOrderByType1(getOrderByType1());
 		assetEntryQuery.setOrderByType2(getOrderByType2());
 
-
 		AssetPublisherUtil.processAssetEntryQuery(
 			themeDisplay.getUser(), _portletPreferences, assetEntryQuery);
 
