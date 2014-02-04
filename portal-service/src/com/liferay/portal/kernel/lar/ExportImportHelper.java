@@ -80,7 +80,7 @@ public interface ExportImportHelper {
 
 	/**
 	 * @deprecated As of 7.0.0, moved to {@link
-	 *             ExportImportDateUtil.getCalendar(PortletRequest, String,
+	 *             ExportImportDateUtil#getCalendar(PortletRequest, String,
 	 *             boolean)}
 	 */
 	@Deprecated
@@ -90,7 +90,7 @@ public interface ExportImportHelper {
 
 	/**
 	 * @deprecated As of 7.0.0, moved to {@link
-	 *             ExportImportDateUtil.getDateRange(PortletRequest, long,
+	 *             ExportImportDateUtil#getDateRange(PortletRequest, long,
 	 *             boolean, long, String, String)}
 	 */
 	@Deprecated
