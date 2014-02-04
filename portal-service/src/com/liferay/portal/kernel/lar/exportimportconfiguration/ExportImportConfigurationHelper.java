@@ -82,38 +82,37 @@ public class ExportImportConfigurationHelper {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long userId = themeDisplay.getUserId();
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 
-		Map<String, Serializable> configurationContextMap = null;
+		Map<String, Serializable> settingsMap = null;
 
 		if (configurationType ==
 				ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
 
-			configurationContextMap = doCreateConfigurationContextMap(
-				portletRequest, userId, groupId, true,
+			settingsMap = buildSettingsMap(
+				portletRequest, themeDisplay.getUserId(), groupId, true,
 				ExportImportDateUtil.RANGE_ALL);
 		}
 		else {
-			configurationContextMap = doCreateConfigurationContextMap(
-				portletRequest, userId, groupId, false,
+			settingsMap = buildSettingsMap(
+				portletRequest, themeDisplay.getUserId(), groupId, false,
 				ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE);
 		}
 
 		String exportImportConfigurationName = ParamUtil.getString(
 			portletRequest, "exportImportConfigurationName");
-
 		String exportImportConfigurationDescription = ParamUtil.getString(
 			portletRequest, "exportImportConfigurationDescription");
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
-				userId, groupId, exportImportConfigurationName,
+				themeDisplay.getUserId(), groupId,
+				exportImportConfigurationName,
 				exportImportConfigurationDescription, configurationType,
-				configurationContextMap, new ServiceContext());
+				settingsMap, new ServiceContext());
 	}
 
-	protected static Map<String, Serializable> doCreateConfigurationContextMap(
+	protected static Map<String, Serializable> buildSettingsMap(
 			PortletRequest portletRequest, long userId, long groupId,
 			boolean exportConfiguration, String defaultDateRange)
 		throws Exception {
