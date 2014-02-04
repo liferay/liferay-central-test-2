@@ -208,10 +208,6 @@ public abstract class BaseSearchTestCase {
 			message.getMessageId(), message.getSubject(), body, serviceContext);
 	}
 
-	protected boolean isCheckBaseModelPermission() {
-		return CHECK_BASE_MODEL_PERMISSION;
-	}
-
 	protected void expireBaseModelVersions(
 			BaseModel<?> baseModel, boolean expireAllVersions,
 			ServiceContext serviceContext)
@@ -253,6 +249,10 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected abstract String getSearchKeywords();
+
+	protected boolean isCheckBaseModelPermission() {
+		return CHECK_BASE_MODEL_PERMISSION;
+	}
 
 	protected boolean isExpirableAllVersions() {
 		return false;
