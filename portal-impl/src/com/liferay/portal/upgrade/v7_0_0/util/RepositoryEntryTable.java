@@ -39,7 +39,7 @@ public class RepositoryEntryTable {
 		{"manualCheckInRequired", Types.BOOLEAN}
 	};
 
-	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (mvccVersion LONG default 0,uuid_ VARCHAR(75) null,repositoryEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,mappedId VARCHAR(200) null,manualCheckInRequired BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table RepositoryEntry (mvccVersion LONG default 0,uuid_ VARCHAR(75) null,repositoryEntryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,repositoryId LONG,mappedId VARCHAR(255) null,manualCheckInRequired BOOLEAN)";
 
 	public static final String TABLE_SQL_DROP = "drop table RepositoryEntry";
 

@@ -28,7 +28,7 @@ public class UpgradeRepositoryEntry extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL(
-				"alter_column_type RepositoryEntry mappedId varchar(200) null");
+				"alter_column_type RepositoryEntry mappedId VARCHAR(255) null");
 		}
 		catch (SQLException sqle) {
 			upgradeTable(
