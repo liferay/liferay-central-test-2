@@ -1597,7 +1597,7 @@
 		<file-name>lib/portal/crypt.jar</file-name>
 		<version></version>
 		<project-name>Manticore UFC Crypt</project-name>
-		<project-url>http://manticore.2y.net/Java/examples/crypt.zip</project-url>
+		<project-url>http://manticore.2y.net/Java/examples/Crypt.html</project-url>
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
