@@ -95,23 +95,13 @@ public class ExportImportConfigurationHelper {
 			addExportImportConfiguration(
 				themeDisplay.getUserId(), groupId,
 				exportImportConfigurationName,
-				exportImportConfigurationDescription, type,
-				settingsMap, new ServiceContext());
+				exportImportConfigurationDescription, type, settingsMap,
+				new ServiceContext());
 	}
 
 	protected static Map<String, Serializable> buildSettingsMap(
-			PortletRequest portletRequest, long userId, long groupId,
-			int type)
+			PortletRequest portletRequest, long userId, long groupId, int type)
 		throws Exception {
-		
-		boolean exportConfiguration = false;
-		String defaultDateRange =
-			ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE;
-
-		if (type == ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
-			exportConfiguration = true;
-			defaultDateRange = ExportImportDateUtil.RANGE_ALL;
-		}
 
 		boolean privateLayout = true;
 
@@ -125,10 +115,17 @@ public class ExportImportConfigurationHelper {
 				portletRequest, "privateLayout");
 		}
 
+		String defaultDateRange =
+			ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE;
+
+		if (type == ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
+			defaultDateRange = ExportImportDateUtil.RANGE_ALL;
+		}
+
 		DateRange dateRange = ExportImportDateUtil.getDateRange(
 			portletRequest, groupId, privateLayout, 0, null, defaultDateRange);
 
-		if (exportConfiguration) {
+		if (type == ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
 			return ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
 				userId, groupId, privateLayout, null,
 				portletRequest.getParameterMap(), dateRange.getStartDate(),
@@ -148,6 +145,7 @@ public class ExportImportConfigurationHelper {
 		}
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(groupId);
+
 		Group liveGroup = stagingGroup.getLiveGroup();
 
 		Map<String, String[]> parameterMap = StagingUtil.getStagingParameters(
@@ -180,21 +178,17 @@ public class ExportImportConfigurationHelper {
 			portletRequest, "remotePort",
 			GetterUtil.getInteger(
 				groupTypeSettingsProperties.getProperty("remotePort")));
-
 		String remotePathContext = ParamUtil.getString(
 			portletRequest, "remotePathContext",
 			groupTypeSettingsProperties.getProperty("remotePathContext"));
-
 		boolean secureConnection = ParamUtil.getBoolean(
 			portletRequest, "secureConnection",
 			GetterUtil.getBoolean(
 				groupTypeSettingsProperties.getProperty("secureConnection")));
-
 		long remoteGroupId = ParamUtil.getLong(
 			portletRequest, "remoteGroupId",
 			GetterUtil.getLong(
 				groupTypeSettingsProperties.getProperty("remoteGroupId")));
-
 		boolean remotePrivateLayout = ParamUtil.getBoolean(
 			portletRequest, "remotePrivateLayout");
 
