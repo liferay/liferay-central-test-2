@@ -3409,7 +3409,7 @@
 	<library>
 		<file-name>lib/portal/streambuffer.jar</file-name>
 		<version>0.9</version>
-		http://stax-ex.java.net</<project-name>XML Stream Buffer</project-name>
+		<project-name>XML Stream Buffer</project-name>
 		<project-url>http://java.net/projects/xmlstreambuffer</project-url>
 		<licenses>
 			<license>
