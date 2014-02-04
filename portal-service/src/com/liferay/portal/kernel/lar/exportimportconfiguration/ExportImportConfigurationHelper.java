@@ -43,7 +43,7 @@ import javax.portlet.PortletRequest;
  * @author Levente Hudák
  */
 @ProviderType
-public class ExportImportConfigurationUtil {
+public class ExportImportConfigurationHelper {
 
 	public static ExportImportConfiguration createExportLayoutConfiguration(
 			PortletRequest portletRequest)
