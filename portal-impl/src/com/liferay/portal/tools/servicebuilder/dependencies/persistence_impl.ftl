@@ -1730,9 +1730,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 >
 	<#list finderColsList as finderCol>
 		<#if _arrayable && finderCol.hasArrayableOperator()>
-			if (${finderCol.names}.length > 0) {
-				qPos.add(${finderCol.names});
-			}
+			<#if finderCol.type == "String">
+				if (${finderCol.names}.length > 0) {
+					qPos.add(${finderCol.names});
+				}
+			</#if>
 		<#elseif finderCol.isPrimitiveType()>
 			qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
