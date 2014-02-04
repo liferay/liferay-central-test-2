@@ -76,46 +76,42 @@ public class ExportImportConfigurationHelper {
 	}
 
 	protected static ExportImportConfiguration addExportImportConfiguration(
-			PortletRequest portletRequest, int configurationType)
+			PortletRequest portletRequest, int type)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-
-		Map<String, Serializable> settingsMap = null;
-
-		if (configurationType ==
-				ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
-
-			settingsMap = buildSettingsMap(
-				portletRequest, themeDisplay.getUserId(), groupId, true,
-				ExportImportDateUtil.RANGE_ALL);
-		}
-		else {
-			settingsMap = buildSettingsMap(
-				portletRequest, themeDisplay.getUserId(), groupId, false,
-				ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE);
-		}
-
 		String exportImportConfigurationName = ParamUtil.getString(
 			portletRequest, "exportImportConfigurationName");
 		String exportImportConfigurationDescription = ParamUtil.getString(
 			portletRequest, "exportImportConfigurationDescription");
 
+		Map<String, Serializable> settingsMap = buildSettingsMap(
+			portletRequest, themeDisplay.getUserId(), groupId, type);
+
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
 				themeDisplay.getUserId(), groupId,
 				exportImportConfigurationName,
-				exportImportConfigurationDescription, configurationType,
+				exportImportConfigurationDescription, type,
 				settingsMap, new ServiceContext());
 	}
 
 	protected static Map<String, Serializable> buildSettingsMap(
 			PortletRequest portletRequest, long userId, long groupId,
-			boolean exportConfiguration, String defaultDateRange)
+			int type)
 		throws Exception {
+		
+		boolean exportConfiguration = false;
+		String defaultDateRange =
+			ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE;
+
+		if (type == ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
+			exportConfiguration = true;
+			defaultDateRange = ExportImportDateUtil.RANGE_ALL;
+		}
 
 		boolean privateLayout = true;
 
