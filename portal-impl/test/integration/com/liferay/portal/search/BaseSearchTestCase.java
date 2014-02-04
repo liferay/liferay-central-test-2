@@ -208,8 +208,8 @@ public abstract class BaseSearchTestCase {
 			message.getMessageId(), message.getSubject(), body, serviceContext);
 	}
 
-	protected boolean checkBaseModelPermission() {
-		return CHECK_BASEMODEL_PERMISSION;
+	protected boolean isCheckBaseModelPermission() {
+		return CHECK_BASE_MODEL_PERMISSION;
 	}
 
 	protected void expireBaseModelVersions(
@@ -845,7 +845,7 @@ public abstract class BaseSearchTestCase {
 
 			int baseModelsCount =  initialBaseModelsSearchCount;
 
-			if (addBaseModelPermission && !checkBaseModelPermission()) {
+			if (addBaseModelPermission && !isCheckBaseModelPermission()) {
 				baseModelsCount++;
 			}
 
@@ -872,7 +872,7 @@ public abstract class BaseSearchTestCase {
 		throws Exception {
 	}
 
-	protected final boolean CHECK_BASEMODEL_PERMISSION = true;
+	protected final boolean CHECK_BASE_MODEL_PERMISSION = true;
 
 	protected BaseModel<?> baseModel;
 	protected Group group;
