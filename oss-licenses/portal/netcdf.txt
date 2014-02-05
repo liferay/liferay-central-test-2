@@ -1,3 +1,5 @@
+http://www.unidata.ucar.edu/software/netcdf/copyright.html
+
 Copyright 1993-2013 University Corporation for Atmospheric Research/Unidata
 
 Portions of this software were developed by the Unidata Program at the University Corporation for Atmospheric Research.
