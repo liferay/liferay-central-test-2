@@ -14,7 +14,6 @@
 
 package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -38,7 +37,7 @@ public class AssetCategoryUtil {
 
 	public static long[] filterCategoryIds(
 			long vocabularyId, long[] categoryIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<Long> filteredCategoryIds = new ArrayList<Long>();
 
@@ -62,7 +61,7 @@ public class AssetCategoryUtil {
 	public static String[] getCategoryIdsTitles(
 			String categoryIds, String categoryNames, long vocabularyId,
 			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (Validator.isNotNull(categoryIds)) {
 			long[] categoryIdsArray = GetterUtil.getLongValues(
