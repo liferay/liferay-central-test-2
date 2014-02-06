@@ -17,6 +17,17 @@ subprojects {
 	ext.jarFile = "${buildLibDir}/${project.name}.jar"
 	ext.liferayProjectDir = "${rootDir}/../../"
 
+	configurations {
+		bnd
+	}
+
+	dependencies {
+		bnd files(["${liferayProjectDir}/portal-service/classes"])
+		bnd files(["${liferayProjectDir}/util-java/classes"])
+
+		bnd fileTree(dir:"${liferayProjectDir}/lib/portal", includes: ['**/bnd.jar'])
+	}
+
 	dependencies {
 		compile files(["${liferayProjectDir}/portal-service/classes"])
 		compile files(["${liferayProjectDir}/util-java/classes"])
