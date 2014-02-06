@@ -111,7 +111,7 @@ public int countBy${finder.name}(
 				else {
 					${finderCol.names} =
 						<#if finderCol.type == "String">
-							ArrayUtil.distinct(${finderCol.names}, nullSafeStringComparator);
+							ArrayUtil.distinct(${finderCol.names}, _stringComparator);
 						<#else>
 							ArrayUtil.unique(${finderCol.names});
 						</#if>
@@ -338,7 +338,7 @@ public int countBy${finder.name}(
 					else {
 						${finderCol.names} =
 							<#if finderCol.type == "String">
-								ArrayUtil.distinct(${finderCol.names}, nullSafeStringComparator);
+								ArrayUtil.distinct(${finderCol.names}, _stringComparator);
 							<#else>
 								ArrayUtil.unique(${finderCol.names});
 							</#if>

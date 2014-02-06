@@ -240,7 +240,6 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	<#list entity.getFinderList() as finder>
-
 		@Test
 		public void testCountBy${finder.name}() {
 			try {
