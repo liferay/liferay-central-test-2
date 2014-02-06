@@ -27,8 +27,6 @@ long questionId = BeanParamUtil.getLong(question, request, "questionId");
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
 
-boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
-
 if (question != null) {
 	if (question.getExpirationDate() != null) {
 		neverExpire = false;
@@ -58,6 +56,8 @@ boolean deleteChoice = false;
 if (choiceName > 0) {
 	deleteChoice = true;
 }
+
+boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
 %>
 
 <liferay-portlet:actionURL refererPlid="<%= themeDisplay.getRefererPlid() %>" var="editQuestionURL">
