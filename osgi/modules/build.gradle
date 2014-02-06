@@ -36,6 +36,29 @@ subprojects {
 		compile fileTree(dir:"${liferayProjectDir}/lib/global", includes: ['**/*.jar'])
 		compile fileTree(dir:"${liferayProjectDir}/lib/portal", includes: ['**/*.jar'])
 	}
+
+	task baseline << {
+		ant.property(name: 'ant.project.name', project.name)
+		ant.property(name: 'sdk.dir', liferayProjectDir)
+
+		ant.taskdef(name: 'manifestHelper', classname: 'com.liferay.util.ant.ManifestHelperTask', classpath: configurations.bnd.asPath)
+
+		ant.manifestHelper(projectDirPropertyName: 'sdk.dir')
+
+		ant.taskdef(name: 'bnd', classname: 'com.liferay.util.ant.bnd.BaselineJarTask', classpath: configurations.bnd.asPath)
+
+		buildLibDir.mkdir()
+
+		ant.bnd(
+			bndRootFile: "${liferayProjectDir}/common.bnd",
+			file: "${project.name}.bnd",
+			outputPath: "${jarFile}",
+			sourcePath: '.') {
+		    	classpath {
+		        	files(['build/classes/main'])
+		    	}
+		}
+	}
 }
 
 task installGradleWrapper(type: Wrapper) {
