@@ -14,27 +14,6 @@
  */
 --%>
 
-<%
-ListType addressListType = address.getType();
-
-String mailingName = LanguageUtil.get(pageContext, addressListType.getName());
-
-String street1 = address.getStreet1();
-String street2 = address.getStreet2();
-String street3 = address.getStreet3();
-
-String zipCode = address.getZip();
-String city = address.getCity();
-
-Region region = address.getRegion();
-
-String regionName = region.getName();
-
-Country country = address.getCountry();
-
-String countryName = country.getName(locale);
-%>
-
 <em class="mailing-name"><%= mailingName %></em>
 
 <c:if test="<%= Validator.isNotNull(street1) %>">
