@@ -1725,8 +1725,6 @@ public interface PropsKeys {
 
 	public static final String MULTI_VALUE_MAP = "multi.value.map.";
 
-	public static final String MVCC_ENTITY_CACHE_ENABLED = "mvcc.entity.cache.enabled";
-
 	public static final String MY_SITES_DIRECTORY_SITE_EXCLUDES = "my.sites.directory.site.excludes";
 
 	public static final String MY_SITES_DISPLAY_STYLE = "my.sites.display.style";
@@ -2568,6 +2566,8 @@ public interface PropsKeys {
 	public static final String VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE = "value.object.finder.thread.local.cache.max.size";
 
 	public static final String VALUE_OBJECT_LISTENER = "value.object.listener.";
+
+	public static final String VALUE_OBJECT_MVCC_ENTITY_CACHE_ENABLED = "value.object.mvcc.entity.cache.enabled";
 
 	public static final String VELOCITY_ENGINE_DIRECTIVE_IF_TO_STRING_NULL_CHECK = "velocity.engine.directive.if.to.string.null.check";
 

@@ -22,16 +22,19 @@ import java.util.Date;
  * @generated
  */
 public class ${entity.name}CacheModel implements CacheModel<${entity.name}>, Externalizable
-<#if entity.isMvccEnabled()>
-	, MVCCModel
-</#if>
-{
+	<#if entity.isMvccEnabled()>
+		, MVCCModel
+	</#if>
+
+	{
 
 	<#if entity.isMvccEnabled()>
+		@Override
 		public long getMvccVersion() {
 			return mvccVersion;
 		}
 
+		@Override
 		public void setMvccVersion(long mvccVersion) {
 			this.mvccVersion = mvccVersion;
 		}

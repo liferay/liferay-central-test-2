@@ -30,7 +30,6 @@ import net.sf.ehcache.Element;
 public class MVCCEhcachePortalCache<K extends Serializable, V extends MVCCModel>
 	extends PortalCacheWrapper<K, V> {
 
-	@SuppressWarnings("unchecked")
 	public static <K extends Serializable>
 		PortalCache<K, ?> createMVCCEhcachePortalCache(
 			PortalCache<K, ?> portalCache) {

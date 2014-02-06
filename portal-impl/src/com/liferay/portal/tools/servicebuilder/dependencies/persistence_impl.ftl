@@ -1737,13 +1737,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			public ${entity.name} toEntityModel() {
 				return _null${entity.name};
 			}
+
 		}
 	<#else>
 		new CacheModel<${entity.name}>() {
+
 			@Override
 			public ${entity.name} toEntityModel() {
 				return _null${entity.name};
 			}
+
 		};
 	</#if>
 

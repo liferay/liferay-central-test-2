@@ -353,7 +353,7 @@ public class EntityCacheImpl
 				(PortalCache<Serializable, Serializable>)_multiVMPool.getCache(
 					groupKey, PropsValues.VALUE_OBJECT_ENTITY_BLOCKING_CACHE);
 
-			if (PropsValues.MVCC_ENTITY_CACHE_ENABLED &&
+			if (PropsValues.VALUE_OBJECT_MVCC_ENTITY_CACHE_ENABLED &&
 				MVCCModel.class.isAssignableFrom(clazz)) {
 
 				portalCache =

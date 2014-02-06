@@ -1274,8 +1274,6 @@ public class PropsValues {
 
 	public static final boolean MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MONITORING_SHOW_PER_REQUEST_DATA_SAMPLE));
 
-	public static final boolean MVCC_ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.MVCC_ENTITY_CACHE_ENABLED));
-
 	public static final String[] MY_SITES_DIRECTORY_SITE_EXCLUDES = PropsUtil.getArray(PropsKeys.MY_SITES_DIRECTORY_SITE_EXCLUDES);
 
 	public static final String MY_SITES_DISPLAY_STYLE = PropsUtil.get(PropsKeys.MY_SITES_DISPLAY_STYLE);
@@ -1937,6 +1935,8 @@ public class PropsValues {
 	public static final boolean VALUE_OBJECT_FINDER_CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED));
 
 	public static final int VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_THREAD_LOCAL_CACHE_MAX_SIZE));
+
+	public static final boolean VALUE_OBJECT_MVCC_ENTITY_CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.VALUE_OBJECT_MVCC_ENTITY_CACHE_ENABLED));
 
 	public static final boolean VELOCITY_ENGINE_DIRECTIVE_IF_TO_STRING_NULL_CHECK = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.VELOCITY_ENGINE_DIRECTIVE_IF_TO_STRING_NULL_CHECK));
 
