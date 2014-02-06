@@ -23,30 +23,6 @@ import org.junit.Test;
 public class PortalImplGroupFriendlyURLTest {
 
 	@Test
-	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL1() {
-		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
-			"/web-content-page");
-
-		Assert.assertNull(groupFriendlyURLIndex);
-	}
-
-	@Test
-	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL2() {
-		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
-			"/group-content-page");
-
-		Assert.assertNull(groupFriendlyURLIndex);
-	}
-
-	@Test
-	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL3() {
-		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
-			"/user-content-page");
-
-		Assert.assertNull(groupFriendlyURLIndex);
-	}
-
-	@Test
 	public void testGroupFriendlyURLIndexWithConflictiveLayoutFullURL1() {
 		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
 			"/web/guest/web-content-page");
@@ -71,6 +47,30 @@ public class PortalImplGroupFriendlyURLTest {
 
 		Assert.assertEquals(4, groupFriendlyURLIndex[0]);
 		Assert.assertEquals(10, groupFriendlyURLIndex[1]);
+	}
+
+	@Test
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL1() {
+		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
+			"/web-content-page");
+
+		Assert.assertNull(groupFriendlyURLIndex);
+	}
+
+	@Test
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL2() {
+		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
+			"/group-content-page");
+
+		Assert.assertNull(groupFriendlyURLIndex);
+	}
+
+	@Test
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutURL3() {
+		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
+			"/user-content-page");
+
+		Assert.assertNull(groupFriendlyURLIndex);
 	}
 
 	@Test
