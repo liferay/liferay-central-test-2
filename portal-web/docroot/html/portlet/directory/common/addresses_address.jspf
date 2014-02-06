@@ -15,6 +15,10 @@
 --%>
 
 <%
+ListType addressListType = address.getType();
+
+String mailingName = LanguageUtil.get(pageContext, addressListType.getName());
+
 String street1 = address.getStreet1();
 String street2 = address.getStreet2();
 String street3 = address.getStreet3();
@@ -29,8 +33,6 @@ String regionName = region.getName();
 Country country = address.getCountry();
 
 String countryName = country.getName(locale);
-
-String mailingName = LanguageUtil.get(pageContext, address.getType().getName());
 %>
 
 <em class="mailing-name"><%= mailingName %></em>
