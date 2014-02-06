@@ -1,12 +1,12 @@
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+}
+
 project.ext {
 	gradleDir = new File("../../tools/gradle")
 	propertiesFile = "${gradleDir}/gradle-wrapper.properties"
-}
-
-allprojects { 
-	repositories { 
-		mavenCentral()
-	}
 }
 
 subprojects {
