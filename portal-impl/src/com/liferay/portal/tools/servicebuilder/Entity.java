@@ -103,8 +103,8 @@ public class Entity {
 		List<EntityColumn> regularColList, List<EntityColumn> blobList,
 		List<EntityColumn> collectionList, List<EntityColumn> columnList,
 		EntityOrder order, List<EntityFinder> finderList,
-		List<Entity> referenceList, List<String> txRequiredList,
-		List<String> unresolvedReferences) {
+		List<Entity> referenceList, List<String> unresolvedReferenceList,
+		List<String> txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -138,8 +138,8 @@ public class Entity {
 		_order = order;
 		_finderList = finderList;
 		_referenceList = referenceList;
+		_unresolvedReferenceList = unresolvedReferenceList;
 		_txRequiredList = txRequiredList;
-		_unresolvedReferences = unresolvedReferences;
 
 		if (_finderList != null) {
 			Set<EntityColumn> finderColumns = new HashSet<EntityColumn>();
@@ -436,12 +436,12 @@ public class Entity {
 		return finderList;
 	}
 
-	public List<String> getUnresolvedReferences() {
-		if (_unresolvedReferences == null) {
+	public List<String> getUnresolvedReferenceList() {
+		if (_unresolvedReferenceList == null) {
 			return new ArrayList<String>();
 		}
 
-		return _unresolvedReferences;
+		return _unresolvedReferenceList;
 	}
 
 	public String getVarName() {
@@ -754,8 +754,13 @@ public class Entity {
 	}
 
 	public boolean isResolved() {
-		return (_unresolvedReferences != null) &&
-					_unresolvedReferences.isEmpty();
+		if ((_unresolvedReferenceList != null) &&
+			_unresolvedReferenceList.isEmpty()) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public boolean isResourcedModel() {
@@ -844,7 +849,7 @@ public class Entity {
 	}
 
 	public void setResolved() {
-		_unresolvedReferences = null;
+		_unresolvedReferenceList = null;
 	}
 
 	public void setTransients(List<String> transients) {
@@ -894,7 +899,7 @@ public class Entity {
 	private boolean _trashEnabled;
 	private String _txManager;
 	private List<String> _txRequiredList;
-	private List<String> _unresolvedReferences;
+	private List<String> _unresolvedReferenceList;
 	private boolean _uuid;
 	private boolean _uuidAccessor;
 

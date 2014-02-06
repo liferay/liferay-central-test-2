@@ -4683,7 +4683,7 @@ public class ServiceBuilder {
 		}
 
 		List<Entity> referenceList = new ArrayList<Entity>();
-		List<String> unresolvedReferences = new ArrayList<String>();
+		List<String> unresolvedReferenceList = new ArrayList<String>();
 
 		if (_build) {
 			if (Validator.isNotNull(_pluginName)) {
@@ -4727,7 +4727,7 @@ public class ServiceBuilder {
 					referenceList.add(getEntity(referenceName));
 				}
 				catch (RuntimeException re) {
-					unresolvedReferences.add(referenceName);
+					unresolvedReferenceList.add(referenceName);
 				}
 			}
 		}
@@ -4751,8 +4751,8 @@ public class ServiceBuilder {
 				sessionFactory, txManager, cacheEnabled, dynamicUpdateEnabled,
 				jsonEnabled, mvccEnabled, trashEnabled, deprecated, pkList,
 				regularColList, blobList, collectionList, columnList, order,
-				finderList, referenceList, txRequiredList,
-				unresolvedReferences));
+				finderList, referenceList, unresolvedReferenceList,
+				txRequiredList));
 	}
 
 	private String _processTemplate(String name, Map<String, Object> context)
@@ -4791,12 +4791,12 @@ public class ServiceBuilder {
 			return;
 		}
 
-		for (String reference : entity.getUnresolvedReferences()) {
-			Entity entityReference = getEntity(reference);
+		for (String referenceName : entity.getUnresolvedReferenceList()) {
+			Entity referenceEntity = getEntity(referenceName);
 
-			if (entityReference == null) {
+			if (referenceEntity == null) {
 				throw new RuntimeException(
-					"Cannot find forward defined " + reference + " in " +
+					"Unable to resolve reference " + referenceName + " in " +
 						ListUtil.toString(_ejbList, Entity.NAME_ACCESSOR));
 			}
 
