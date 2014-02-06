@@ -47,7 +47,7 @@ public class PortalImplGroupFriendlyURLTest {
 	}
 
 	@Test
-	public void testGroupFriendlyURLIndexWithFullLayoutConflictiveURL1() {
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutFullURL1() {
 		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
 			"/web/guest/web-content-page");
 
@@ -56,7 +56,7 @@ public class PortalImplGroupFriendlyURLTest {
 	}
 
 	@Test
-	public void testGroupFriendlyURLIndexWithFullLayoutConflictiveURL2() {
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutFullURL2() {
 		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
 			"/web/guest/group-content-page");
 
@@ -65,7 +65,7 @@ public class PortalImplGroupFriendlyURLTest {
 	}
 
 	@Test
-	public void testGroupFriendlyURLIndexWithFullLayoutConflictiveURL3() {
+	public void testGroupFriendlyURLIndexWithConflictiveLayoutFullURL3() {
 		int[] groupFriendlyURLIndex = _portalImpl.getGroupFriendlyURLIndex(
 			"/web/guest/user-content-page");
 
