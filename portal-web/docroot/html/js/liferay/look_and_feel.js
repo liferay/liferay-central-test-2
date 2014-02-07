@@ -658,7 +658,9 @@ AUI.add(
 					insertContainer.appendChild(addClassLink);
 					insertContainer.appendChild(updateOnTypeHolder);
 
-					insertContainer.after(customNote);
+					customNote.hide();
+
+					insertContainer.placeAfter(customNote);
 
 					customCSS.on(KEYUP, refreshStyles);
 				}
