@@ -218,9 +218,8 @@ public class UserNotificationManagerImpl implements UserNotificationManager {
 			if (deliveryType == UserNotificationDeliveryConstants.TYPE_EMAIL) {
 				return true;
 			}
-			else {
-				return false;
-			}
+
+			return false;
 		}
 
 		return userNotificationHandler.isDeliver(
