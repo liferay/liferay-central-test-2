@@ -465,34 +465,32 @@ public class BreadcrumbTag extends IncludeTag {
 
 		Group group = layoutSet.getGroup();
 
-		LayoutSet parentLayoutSet = null;
-
 		if (group.isSite()) {
-			Group parentSite = group.getParentGroup();
+			Group parentGroup = group.getParentGroup();
 
-			if (parentSite != null) {
-				parentLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					parentSite.getGroupId(), layoutSet.isPrivateLayout());
+			if (parentGroup != null) {
+				return LayoutSetLocalServiceUtil.getLayoutSet(
+					parentGroup.getGroupId(), layoutSet.isPrivateLayout());
 			}
 		}
 		else if (group.isUser()) {
-			User groupUser = UserLocalServiceUtil.getUser(group.getClassPK());
+			User user = UserLocalServiceUtil.getUser(group.getClassPK());
 
 			List<Organization> organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(
-					groupUser.getUserId());
+					user.getUserId());
 
 			if (!organizations.isEmpty()) {
 				Organization organization = organizations.get(0);
 
 				Group parentGroup = organization.getGroup();
 
-				parentLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+				return LayoutSetLocalServiceUtil.getLayoutSet(
 					parentGroup.getGroupId(), layoutSet.isPrivateLayout());
 			}
 		}
 
-		return parentLayoutSet;
+		return null;
 	}
 
 	protected void initShowParentGroups(HttpServletRequest request) {
