@@ -644,7 +644,7 @@ AUI.add(
 					var updateOnTypeHolder = A.Node.create('<span class="field"><span class="field-content"></span></span>');
 					var updateOnTypeLabel = A.Node.create('<label>' + Liferay.Language.get('update-my-styles-as-i-type') + ' </label>');
 
-					updateOnType = A.Node.create('<input id="lfr-update-on-type" type=CHECKBOX />');
+					updateOnType = A.Node.create('<input id="lfr-update-on-type" type="' + CHECKBOX + '" />');
 
 					updateOnTypeLabel.appendChild(updateOnType);
 					updateOnTypeHolder.get(FIRST_CHILD).appendChild(updateOnTypeLabel);
