@@ -625,10 +625,6 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			_browseHits = browseHits;
 		}
 
-		public HitDocs(TopFieldDocs topFieldDocs) {
-			_topFieldDocs = topFieldDocs;
-		}
-
 		public int getDocId(int i) {
 			if (_topFieldDocs != null) {
 				ScoreDoc scoreDoc = _topFieldDocs.scoreDocs[i];
