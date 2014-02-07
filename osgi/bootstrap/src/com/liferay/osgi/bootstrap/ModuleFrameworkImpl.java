@@ -839,6 +839,23 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return false;
 	}
 
+	private boolean _hasMatchingHashcode(
+		File hashcodeFile, String expectedHashcode) {
+
+		try {
+			String actualHashcode = FileUtil.read(hashcodeFile);
+
+			if (actualHashcode.equals(expectedHashcode)) {
+				return true;
+			}
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+
+		return false;
+	}
+
 	private void _installInitialBundle(
 		String location, List<Bundle> lazyActivationBundles,
 		List<Bundle> startBundles, List<Bundle> refreshBundles) {
@@ -922,23 +939,6 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		finally {
 			StreamUtil.cleanUp(inputStream);
 		}
-	}
-
-	private boolean _hasMatchingHashcode(
-		File hashcodeFile, String expectedHashcode) {
-
-		try {
-			String actualHashcode = FileUtil.read(hashcodeFile);
-
-			if (actualHashcode.equals(expectedHashcode)) {
-				return true;
-			}
-		}
-		catch (IOException ioe) {
-			_log.error(ioe, ioe);
-		}
-
-		return false;
 	}
 
 	private void _processURL(
