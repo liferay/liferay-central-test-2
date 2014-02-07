@@ -21,14 +21,14 @@ def wrapTask(String task) {
 	}
 }
 
-wrapTasks.each {
-	wrapTask(it)
-}
-
 task installGradleWrapper(type: Wrapper) {
 	project.gradleDir.mkdir()
 
 	gradleVersion = "1.10"
 	jarFile	= "${project.gradleDir}/gradle-wrapper.jar"
 	scriptFile = "${project.gradleDir}/gradlew"
+}
+
+wrapTasks.each {
+	wrapTask(it)
 }
