@@ -688,12 +688,12 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return String.valueOf(level);
 	}
 
-	private String _getHashcode(String[] systemPackagesExtraValue) {
+	private String _getHashcode(String[] keys) {
 		try {
-			CacheKeyGenerator keyGenerator = new JavaMD5CacheKeyGenerator(128);
+			CacheKeyGenerator cacheKeyGenerator = new JavaMD5CacheKeyGenerator(
+				128);
 
-			return String.valueOf(
-				keyGenerator.getCacheKey(systemPackagesExtraValue));
+			return String.valueOf(cacheKeyGenerator.getCacheKey(keys));
 		}
 		catch (NoSuchAlgorithmException nsae) {
 			throw new RuntimeException(nsae);
@@ -721,10 +721,10 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 	}
 
 	private String _getSystemPackagesExtra() {
-		String[] systemPackagesExtraValue =
+		String[] systemPackagesExtra =
 			PropsValues.MODULE_FRAMEWORK_SYSTEM_PACKAGES_EXTRA;
 
-		String hashcode = _getHashcode(systemPackagesExtraValue);
+		String hashcode = _getHashcode(systemPackagesExtra);
 
 		File coreDir = new File(
 			PropsValues.LIFERAY_WEB_PORTAL_CONTEXT_TEMPDIR, "osgi");
@@ -733,7 +733,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		File hashcodeFile = new File(coreDir, "system-packages.hash");
 
 		if (cacheFile.exists() && hashcodeFile.exists() &&
-			_matchesExistingPackages(hashcodeFile, hashcode)) {
+			_hasMatchingHashcode(hashcodeFile, hashcode)) {
 
 			try {
 				return FileUtil.read(cacheFile);
@@ -747,7 +747,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 
 		StringBundler sb = new StringBundler();
 
-		for (String extraPackage : systemPackagesExtraValue) {
+		for (String extraPackage : systemPackagesExtra) {
 			sb.append(extraPackage);
 			sb.append(StringPool.COMMA);
 		}
@@ -924,18 +924,18 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		}
 	}
 
-	private boolean _matchesExistingPackages(
-		File hashcodeFile, String hashcode) {
+	private boolean _hasMatchingHashcode(
+		File hashcodeFile, String expectedHashcode) {
 
 		try {
-			String storedHashcode = FileUtil.read(hashcodeFile);
+			String actualHashcode = FileUtil.read(hashcodeFile);
 
-			if (storedHashcode.equals(hashcode)) {
+			if (actualHashcode.equals(expectedHashcode)) {
 				return true;
 			}
 		}
-		catch (IOException e) {
-			_log.error(e, e);
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 		}
 
 		return false;
