@@ -2601,7 +2601,6 @@
 			<finder-column name="key" />
 		</finder>
 
-
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="ClassName" />
