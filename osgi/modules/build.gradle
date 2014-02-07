@@ -4,24 +4,26 @@ allprojects {
 	}
 }
 
-ext{
+ext {
 	gradleDir = new File("../../tools/gradle")
-	wrapTasks = ["build","clean", "compileJava", "jar"]
+	wrapTasks = ["build", "clean", "compileJava", "jar"]
 }
 
 def wrapTask(String task) {
-	def newTasks = rootProject.subprojects.each { project ->
-		def taskName = "$task${project.name}"
+	def newTasks = rootProject.subprojects.each {
+		project ->
+			def taskName = "$task${project.name}"
 
-		tasks.create(name: taskName, type: GradleBuild) {
-			dir = "${project.name}"
-			tasks = [ task ]
-		}
+			tasks.create(name: taskName, type: GradleBuild) {
+				dir = "${project.name}"
+				tasks = [ task ]
+			}
 	}
 }
 
-wrapTasks.each { wrapTask(it) }
-
+wrapTasks.each {
+	wrapTask(it)
+}
 
 task installGradleWrapper(type: Wrapper) {
 	project.gradleDir.mkdir()
