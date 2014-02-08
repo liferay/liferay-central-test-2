@@ -17,7 +17,6 @@ package com.liferay.portal.util;
 import com.germinus.easyconf.ConfigurationSerializer;
 
 import com.liferay.portal.json.JSONArrayImpl;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -118,7 +117,7 @@ public class LayoutListUtilTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetLayoutView() throws PortalException, SystemException {
+	public void testGetLayoutView() throws SystemException {
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {

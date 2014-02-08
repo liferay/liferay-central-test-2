@@ -17,7 +17,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.cache.Lifecycle;
 import com.liferay.portal.kernel.cache.ThreadLocalCache;
 import com.liferay.portal.kernel.cache.ThreadLocalCacheManager;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -45,7 +44,7 @@ public class LayoutListUtil {
 	public static List<LayoutDescription> getLayoutDescriptions(
 			long groupId, boolean privateLayout, String rootNodeName,
 			Locale locale)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		ThreadLocalCache<List<LayoutDescription>> threadLocalCache =
 			ThreadLocalCacheManager.getThreadLocalCache(
@@ -86,7 +85,7 @@ public class LayoutListUtil {
 	protected static List<LayoutDescription> doGetLayoutDescriptions(
 			long groupId, boolean privateLayout, String rootNodeName,
 			Locale locale)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<LayoutDescription> list = new ArrayList<LayoutDescription>();
 
