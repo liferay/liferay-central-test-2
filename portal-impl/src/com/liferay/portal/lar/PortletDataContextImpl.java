@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.dao.orm.Property;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.lar.ExportImportClassUtil;
+import com.liferay.portal.kernel.lar.ExportImportClassedModelUtil;
 import com.liferay.portal.kernel.lar.ExportImportPathUtil;
 import com.liferay.portal.kernel.lar.ManifestSummary;
 import com.liferay.portal.kernel.lar.PortletDataContext;
@@ -592,7 +592,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		return addReferenceElement(
 			referrerClassedModel, element, classedModel,
-			ExportImportClassUtil.getModelClassName(classedModel),
+			ExportImportClassedModelUtil.getClassName(classedModel),
 			StringPool.BLANK, referenceType, missing);
 	}
 
@@ -604,7 +604,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 		return addReferenceElement(
 			referrerClassedModel, element, classedModel,
-			ExportImportClassUtil.getModelClassName(classedModel), binPath,
+			ExportImportClassedModelUtil.getClassName(classedModel), binPath,
 			referenceType, missing);
 	}
 
@@ -929,7 +929,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	public Element getExportDataElement(ClassedModel classedModel) {
 		return getExportDataElement(
 			classedModel,
-			ExportImportClassUtil.getModelClassSimpleName(classedModel));
+			ExportImportClassedModelUtil.getClassSimpleName(classedModel));
 	}
 
 	/**
@@ -1010,7 +1010,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Override
 	public Element getImportDataElement(StagedModel stagedModel) {
 		return getImportDataElement(
-			ExportImportClassUtil.getModelClassSimpleName(stagedModel), "uuid",
+			ExportImportClassedModelUtil.getClassSimpleName(stagedModel), "uuid",
 			stagedModel.getUuid());
 	}
 
@@ -1040,7 +1040,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		String path = ExportImportPathUtil.getModelPath(stagedModel);
 
 		return getImportDataElement(
-			ExportImportClassUtil.getModelClassSimpleName(stagedModel), "path",
+			ExportImportClassedModelUtil.getClassSimpleName(stagedModel), "path",
 			path);
 	}
 
@@ -2242,7 +2242,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		if (missing) {
 			referenceElement.addAttribute(
 				"referrer-class-name",
-				ExportImportClassUtil.getModelClassName(referrerClassedModel));
+				ExportImportClassedModelUtil.getClassName(referrerClassedModel));
 
 			if (referrerClassedModel instanceof PortletModel) {
 				Portlet portlet = (Portlet)referrerClassedModel;
@@ -2375,7 +2375,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		StringBundler sb = new StringBundler(5);
 
 		sb.append("missing-reference[@class-name='");
-		sb.append(ExportImportClassUtil.getModelClassName(classedModel));
+		sb.append(ExportImportClassedModelUtil.getClassName(classedModel));
 		sb.append("' and @class-pk='");
 		sb.append(String.valueOf(classedModel.getPrimaryKeyObj()));
 		sb.append("']");
@@ -2514,7 +2514,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	protected String getReferenceKey(ClassedModel classedModel) {
-		String referenceKey = ExportImportClassUtil.getModelClassName(
+		String referenceKey = ExportImportClassedModelUtil.getClassName(
 			classedModel);
 
 		return referenceKey.concat(StringPool.POUND).concat(

@@ -23,13 +23,14 @@ import com.liferay.portal.model.StagedModel;
  * @author Mate Thurzo
  */
 @ProviderType
-public class ExportImportClassUtil {
+public class ExportImportClassedModelUtil {
 
-	public static String getModelClassName(ClassedModel classedModel) {
+	public static String getClassName(ClassedModel classedModel) {
 		String modelClassName = classedModel.getModelClassName();
 
 		if (classedModel instanceof StagedModel) {
 			StagedModel stagedModel = (StagedModel)classedModel;
+
 			StagedModelType stagedModelType = stagedModel.getStagedModelType();
 
 			modelClassName = stagedModelType.getClassName();
@@ -38,12 +39,14 @@ public class ExportImportClassUtil {
 		return modelClassName;
 	}
 
-	public static String getModelClassSimpleName(ClassedModel classedModel) {
+	public static String getClassSimpleName(ClassedModel classedModel) {
 		Class<?> modelClass = classedModel.getModelClass();
+
 		String modelClassSimpleName = modelClass.getSimpleName();
 
 		if (classedModel instanceof StagedModel) {
 			StagedModel stagedModel = (StagedModel)classedModel;
+
 			StagedModelType stagedModelType = stagedModel.getStagedModelType();
 
 			modelClassSimpleName = stagedModelType.getClassSimpleName();
