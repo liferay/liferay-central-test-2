@@ -53,16 +53,17 @@ public class LayoutListUtil {
 		String cacheKey = buildCacheKey(
 			groupId, privateLayout, rootNodeName, locale);
 
-		List<LayoutDescription> list = threadLocalCache.get(cacheKey);
+		List<LayoutDescription> layoutDescriptions = threadLocalCache.get(
+			cacheKey);
 
-		if (list == null) {
-			list = doGetLayoutDescriptions(
+		if (layoutDescriptions == null) {
+			layoutDescriptions = doGetLayoutDescriptions(
 				groupId, privateLayout, rootNodeName, locale);
 
-			threadLocalCache.put(cacheKey, list);
+			threadLocalCache.put(cacheKey, layoutDescriptions);
 		}
 
-		return list;
+		return layoutDescriptions;
 	}
 
 	protected static String buildCacheKey(
@@ -87,7 +88,8 @@ public class LayoutListUtil {
 			Locale locale)
 		throws SystemException {
 
-		List<LayoutDescription> list = new ArrayList<LayoutDescription>();
+		List<LayoutDescription> layoutDescriptions =
+			new ArrayList<LayoutDescription>();
 
 		List<Layout> layouts = new ArrayList<Layout>(
 			LayoutLocalServiceUtil.getLayouts(groupId, privateLayout));
@@ -102,14 +104,14 @@ public class LayoutListUtil {
 
 		deque.push(new ObjectValuePair<Layout, Integer>(rootLayout, 0));
 
-		ObjectValuePair<Layout, Integer> current = null;
+		ObjectValuePair<Layout, Integer> objectValuePair = null;
 
-		while ((current = deque.pollFirst()) != null) {
-			Layout currentLayout = current.getKey();
+		while ((objectValuePair = deque.pollFirst()) != null) {
+			Layout currentLayout = objectValuePair.getKey();
 
-			Integer currentDepth = current.getValue();
+			Integer currentDepth = objectValuePair.getValue();
 
-			list.add(
+			layoutDescriptions.add(
 				new LayoutDescription(
 					currentLayout.getPlid(), currentLayout.getName(locale),
 					currentDepth));
@@ -118,19 +120,21 @@ public class LayoutListUtil {
 				layouts.size());
 
 			while (listIterator.hasPrevious()) {
-				Layout layout = listIterator.previous();
+				Layout previousLayout = listIterator.previous();
 
-				if (layout.getParentLayoutId() == currentLayout.getLayoutId()) {
+				if (previousLayout.getParentLayoutId() ==
+						currentLayout.getLayoutId()) {
+
 					listIterator.remove();
 
 					deque.push(
 						new ObjectValuePair<Layout, Integer>(
-							layout, currentDepth + 1));
+							previousLayout, currentDepth + 1));
 				}
 			}
 		}
 
-		return list;
+		return layoutDescriptions;
 	}
 
 }
