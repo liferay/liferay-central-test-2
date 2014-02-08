@@ -33,12 +33,12 @@ if (selLayout != null) {
 	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_DESCRIPTIONS);
 
 	for (LayoutDescription layoutDescription : layoutDescriptions) {
-		Layout linkableLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
+		Layout layoutDescriptionLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
 
-		if (linkableLayout != null) {
+		if (layoutDescriptionLayout != null) {
 	%>
 
-			<aui:option disabled="<%= (selLayout != null) && (selLayout.getPlid() == linkableLayout.getPlid()) %>" label="<%= layoutDescription.getDisplayName() %>" selected="<%= (linkToLayoutId == linkableLayout.getLayoutId()) %>" value="<%= linkableLayout.getLayoutId() %>" />
+			<aui:option disabled="<%= (selLayout != null) && (selLayout.getPlid() == layoutDescriptionLayout.getPlid()) %>" label="<%= layoutDescription.getDisplayName() %>" selected="<%= (linkToLayoutId == layoutDescriptionLayout.getLayoutId()) %>" value="<%= layoutDescriptionLayout.getLayoutId() %>" />
 
 	<%
 		}

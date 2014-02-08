@@ -26,12 +26,12 @@ String copyLayoutIdPrefix = ParamUtil.getString(request, "copyLayoutIdPrefix");
 	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_DESCRIPTIONS);
 
 	for (LayoutDescription layoutDescription : layoutDescriptions) {
-		Layout copiableLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
+		Layout layoutDescriptionLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
 
-		if (copiableLayout != null) {
+		if (layoutDescriptionLayout != null) {
 	%>
 
-			<aui:option disabled="<%= (selLayout != null) && selLayout.getPlid() == copiableLayout.getPlid() %>" label="<%= layoutDescription.getDisplayName() %>" value="<%= copiableLayout.getLayoutId() %>" />
+			<aui:option disabled="<%= (selLayout != null) && selLayout.getPlid() == layoutDescriptionLayout.getPlid() %>" label="<%= layoutDescription.getDisplayName() %>" value="<%= layoutDescriptionLayout.getLayoutId() %>" />
 
 	<%
 		}
