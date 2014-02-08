@@ -1,3 +1,0 @@
-include
-	'liferay-registry-api',
-	'liferay-registry-impl'
