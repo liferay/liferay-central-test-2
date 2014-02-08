@@ -240,7 +240,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Repository" />
-    </entity>
+	</entity>
 	<entity name="Company" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -1726,6 +1726,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="Portal" local-service="true" remote-service="true">
+
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="ClassName" />
