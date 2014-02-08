@@ -58,12 +58,12 @@ public class LayoutDescription implements Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{plid=");
-		sb.append(_plid);
+		sb.append("{depth=");
+		sb.append(_depth);
 		sb.append(", name=");
 		sb.append(_name);
-		sb.append(", depth=");
-		sb.append(_depth);
+		sb.append(", plid=");
+		sb.append(_plid);
 		sb.append("}");
 
 		return sb.toString();
