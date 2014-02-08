@@ -155,7 +155,7 @@ else {
 						%>
 
 						<%
-						liferayPortletRequest.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutDescriptions);
+						liferayPortletRequest.setAttribute(WebKeys.LAYOUT_DESCRIPTIONS, layoutDescriptions);
 
 						int layoutsCount = LayoutLocalServiceUtil.getLayoutsCount(group, privateLayout);
 

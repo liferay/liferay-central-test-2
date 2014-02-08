@@ -23,7 +23,7 @@ String copyLayoutIdPrefix = ParamUtil.getString(request, "copyLayoutIdPrefix");
 <aui:select id='<%= copyLayoutIdPrefix + "copyLayoutId" %>' label="copy-from-page" name="copyLayoutId" showEmptyOption="<%= true %>">
 
 	<%
-	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_LISTER_LIST);
+	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_DESCRIPTIONS);
 
 	for (LayoutDescription layoutDescription : layoutDescriptions) {
 		Layout copiableLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());

@@ -30,7 +30,7 @@ if (selLayout != null) {
 <aui:select label="link-to-layout" name="TypeSettingsProperties--linkToLayoutId--" showEmptyOption="<%= true %>">
 
 	<%
-	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_LISTER_LIST);
+	List<LayoutDescription> layoutDescriptions = (List<LayoutDescription>)request.getAttribute(WebKeys.LAYOUT_DESCRIPTIONS);
 
 	for (LayoutDescription layoutDescription : layoutDescriptions) {
 		Layout linkableLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());

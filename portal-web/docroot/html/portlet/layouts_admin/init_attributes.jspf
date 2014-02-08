@@ -181,7 +181,7 @@ String rootNodeName = liveGroup.getLayoutRootNodeName(privateLayout, locale);
 
 List<LayoutDescription> layoutDescriptions = LayoutListUtil.getLayoutDescriptions(groupId, privateLayout, rootNodeName, locale);
 
-request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutDescriptions);
+request.setAttribute(WebKeys.LAYOUT_DESCRIPTIONS, layoutDescriptions);
 %>
 
 <liferay-portlet:renderURL varImpl="redirectURL">
