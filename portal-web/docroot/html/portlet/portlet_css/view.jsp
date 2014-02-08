@@ -72,12 +72,12 @@ if (PropsValues.MOBILE_DEVICE_STYLING_WAP_ENABLED) {
 						List<LayoutDescription> layoutDescriptions = LayoutListUtil.getLayoutDescriptions(layout.getGroup().getGroupId(), layout.isPrivateLayout(), group.getName(), locale);
 
 						for (LayoutDescription layoutDescription : layoutDescriptions) {
-							Layout linkableLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
+							Layout layoutDescriptionLayout = LayoutLocalServiceUtil.fetchLayout(layoutDescription.getPlid());
 
-							if (linkableLayout != null) {
+							if (layoutDescriptionLayout != null) {
 						%>
 
-								<aui:option label="<%= layoutDescription.getDisplayName() %>" selected="<%= linkableLayout.getUuid().equals(linkToLayoutUuid) %>" value="<%= linkableLayout.getUuid() %>" />
+								<aui:option label="<%= layoutDescription.getDisplayName() %>" selected="<%= layoutDescriptionLayout.getUuid().equals(linkToLayoutUuid) %>" value="<%= layoutDescriptionLayout.getUuid() %>" />
 
 						<%
 							}
