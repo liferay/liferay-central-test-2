@@ -36,8 +36,10 @@ import java.util.Locale;
 
 import org.apache.commons.lang.time.StopWatch;
 
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -51,15 +53,17 @@ import org.powermock.modules.junit4.PowerMockRunner;
 /**
  * @author László Csontos
  */
-@PrepareForTest( {
-	ConfigurationSerializer.class, LayoutLocalServiceUtil.class,
-	LocalizationUtil.class, PropsUtil.class
-})
+@PrepareForTest(
+	{
+		ConfigurationSerializer.class, LayoutLocalServiceUtil.class,
+		LocalizationUtil.class, PropsUtil.class
+	}
+)
 @RunWith(PowerMockRunner.class)
 public class LayoutListUtilTest extends PowerMockito {
 
-	@BeforeClass
-	public static void setUpClass() throws Exception {
+	@Before
+	public void setUp() throws Exception {
 		mockStatic(ConfigurationSerializer.class);
 
 		when(
@@ -111,13 +115,13 @@ public class LayoutListUtilTest extends PowerMockito {
 			_expectedLayoutViewArray, 1, _expectedLayoutViewArray.length);
 	}
 
-	@AfterClass
-	public static void tearDownClass() {
+	@After
+	public void tearDownClass() {
 		_layouts.clear();
 	}
 
 	@Test
-	public void testGetLayoutView() throws SystemException {
+	public void testGetLayoutDescriptions() throws SystemException {
 		StopWatch stopWatch = null;
 
 		if (_log.isDebugEnabled()) {
