@@ -22,13 +22,13 @@ import javax.portlet.PortletPreferences;
 public class SitePortletSettings extends CompanyPortletSettings {
 
 	public SitePortletSettings(PortletPreferences portletPreferences) {
-		super.sitePortletPreferences = portletPreferences;
+		sitePortletPreferences = portletPreferences;
 	}
 
 	public PortletSettings setCompanyDefaults(
 		PortletPreferences portletPreferences) {
 
-		super.companyPortletPreferences = portletPreferences;
+		companyPortletPreferences = portletPreferences;
 
 		return this;
 	}
@@ -38,7 +38,7 @@ public class SitePortletSettings extends CompanyPortletSettings {
 
 	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
-		return super.sitePortletPreferences;
+		return sitePortletPreferences;
 	}
 
 }

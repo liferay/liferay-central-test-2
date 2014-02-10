@@ -22,20 +22,20 @@ import javax.portlet.PortletPreferences;
 public class InstancePortletSettings extends SitePortletSettings {
 
 	public InstancePortletSettings(PortletPreferences portletPreferences) {
-		super.instancePortletPreferences = portletPreferences;
+		instancePortletPreferences = portletPreferences;
 	}
 
 	public PortletSettings setSiteDefaults(
 		PortletPreferences portletPreferences) {
 
-		super.sitePortletPreferences = portletPreferences;
+		sitePortletPreferences = portletPreferences;
 
 		return this;
 	}
 
 	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
-		return super.instancePortletPreferences;
+		return instancePortletPreferences;
 	}
 
 }
