@@ -72,6 +72,7 @@ String emailBody = PrefsParamUtil.getString(portletPreferences, request, emailBo
 %>
 
 <liferay-portlet:actionURL portletConfiguration="true" var="configurationActionURL" />
+
 <liferay-portlet:renderURL portletConfiguration="true" var="configurationRenderURL">
 	<portlet:param name="tabs2" value="<%= tabs2 %>" />
 </liferay-portlet:renderURL>
