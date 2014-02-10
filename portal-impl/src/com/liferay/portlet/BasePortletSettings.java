@@ -129,11 +129,14 @@ public abstract class BasePortletSettings implements PortletSettings {
 	@Override
 	public PortletSettings setValue(String key, String value) {
 		try {
-			getWriteablePortletPreferences().setValue(key, value);
+			PortletPreferences writeablePortletPreferences =
+				getWriteablePortletPreferences();
+
+			writeablePortletPreferences.setValue(key, value);
 		}
 		catch (ReadOnlyException roe) {
 
-			// This should never occur
+			// This should never happen
 
 		}
 
@@ -143,11 +146,14 @@ public abstract class BasePortletSettings implements PortletSettings {
 	@Override
 	public PortletSettings setValues(String key, String[] values) {
 		try {
-			getWriteablePortletPreferences().setValues(key, values);
+			PortletPreferences writeablePortletPreferences =
+				getWriteablePortletPreferences();
+
+			writeablePortletPreferences.setValues(key, values);
 		}
 		catch (ReadOnlyException roe) {
 
-			// This should never occur
+			// This should never happen
 
 		}
 
