@@ -23,8 +23,10 @@ import javax.portlet.PortletPreferences;
  */
 public class CompanyPortletSettings extends BasePortletSettings {
 
-	public CompanyPortletSettings(PortletPreferences portletPreferences) {
-		companyPortletPreferences = portletPreferences;
+	public CompanyPortletSettings(
+		PortletPreferences companyPortletPreferences) {
+
+		this.companyPortletPreferences = companyPortletPreferences;
 	}
 
 	public PortletSettings setPortalProperties(Properties portalProperties) {

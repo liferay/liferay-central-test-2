@@ -21,14 +21,14 @@ import javax.portlet.PortletPreferences;
  */
 public class GroupPortletSettings extends CompanyPortletSettings {
 
-	public GroupPortletSettings(PortletPreferences portletPreferences) {
-		groupPortletPreferences = portletPreferences;
+	public GroupPortletSettings(PortletPreferences groupPortletPreferences) {
+		this.groupPortletPreferences = groupPortletPreferences;
 	}
 
 	public PortletSettings setCompanyPortletPreferences(
-		PortletPreferences portletPreferences) {
+		PortletPreferences companyPortletPreferences) {
 
-		companyPortletPreferences = portletPreferences;
+		this.companyPortletPreferences = companyPortletPreferences;
 
 		return this;
 	}

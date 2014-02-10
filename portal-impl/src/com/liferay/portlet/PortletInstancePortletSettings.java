@@ -22,15 +22,16 @@ import javax.portlet.PortletPreferences;
 public class PortletInstancePortletSettings extends GroupPortletSettings {
 
 	public PortletInstancePortletSettings(
-		PortletPreferences portletPreferences) {
+		PortletPreferences portletInstancePortletPreferences) {
 
-		portletInstancePortletPreferences = portletPreferences;
+		this.portletInstancePortletPreferences =
+			portletInstancePortletPreferences;
 	}
 
 	public PortletSettings setGroupPortletPreferences(
-		PortletPreferences portletPreferences) {
+		PortletPreferences groupPortletPreferences) {
 
-		groupPortletPreferences = portletPreferences;
+		this.groupPortletPreferences = groupPortletPreferences;
 
 		return this;
 	}
