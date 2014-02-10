@@ -38,5 +38,4 @@ subprojects {
 			tasks.baseline.execute()
 		}
 	}
-
 }
