@@ -35,7 +35,7 @@ public interface PortletSettingsFactory {
 			long groupId, String portletId)
 		throws PortalException, SystemException;
 
-	public PortletSettings getInstancePortletSettings(
+	public PortletSettings getPortletInstancePortletSettings(
 			Layout layout, String portletId)
 		throws SystemException;
 

@@ -87,7 +87,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 	}
 
 	@Override
-	public PortletSettings getInstancePortletSettings(
+	public PortletSettings getPortletInstancePortletSettings(
 			Layout layout, String portletId)
 		throws SystemException {
 
@@ -104,8 +104,8 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 				layout.getCompanyId(), ownerId, ownerType, layout.getPlid(),
 				portletId);
 
-		InstancePortletSettings instancePortletSettings =
-			new InstancePortletSettings(instancePortletPreferences);
+		PortletInstancePortletSettings instancePortletSettings =
+			new PortletInstancePortletSettings(instancePortletPreferences);
 
 		PortletPreferences sitePortletPreferences =
 			PortletPreferencesLocalServiceUtil.getPreferences(

@@ -23,12 +23,13 @@ import org.junit.Test;
 /**
  * @author Jorge Ferrer
  */
-public class InstancePortletSettingsTest extends GroupPortletSettingsTest {
+public class PortletInstancePortletSettingsTest
+	extends GroupPortletSettingsTest {
 
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		portletSettings = new InstancePortletSettings(getSettings());
+		portletSettings = new PortletInstancePortletSettings(getSettings());
 	}
 
 	@Test
@@ -45,8 +46,8 @@ public class InstancePortletSettingsTest extends GroupPortletSettingsTest {
 
 		siteDefaultSettings.setValue(name, value);
 
-		InstancePortletSettings instancePortletSettings =
-			(InstancePortletSettings)portletSettings;
+		PortletInstancePortletSettings instancePortletSettings =
+			(PortletInstancePortletSettings)portletSettings;
 
 		instancePortletSettings.setSiteDefaults(siteDefaultSettings);
 	}

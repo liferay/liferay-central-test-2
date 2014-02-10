@@ -44,11 +44,11 @@ public class PortletSettingsFactoryUtil {
 			groupId, portletId);
 	}
 
-	public static PortletSettings getInstancePortletSettings(
+	public static PortletSettings getPortletInstancePortletSettings(
 			Layout layout, String portletId)
 		throws SystemException {
 
-		return getPortletSettingsFactory().getInstancePortletSettings(
+		return getPortletSettingsFactory().getPortletInstancePortletSettings(
 			layout, portletId);
 	}
 

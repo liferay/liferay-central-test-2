@@ -19,10 +19,12 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Jorge Ferrer
  */
-public class InstancePortletSettings extends GroupPortletSettings {
+public class PortletInstancePortletSettings extends GroupPortletSettings {
 
-	public InstancePortletSettings(PortletPreferences portletPreferences) {
-		instancePortletPreferences = portletPreferences;
+	public PortletInstancePortletSettings(
+		PortletPreferences portletPreferences) {
+
+		portletInstancePortletPreferences = portletPreferences;
 	}
 
 	public PortletSettings setSiteDefaults(
@@ -35,7 +37,7 @@ public class InstancePortletSettings extends GroupPortletSettings {
 
 	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
-		return instancePortletPreferences;
+		return portletInstancePortletPreferences;
 	}
 
 }

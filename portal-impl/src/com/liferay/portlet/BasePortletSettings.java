@@ -37,8 +37,8 @@ public abstract class BasePortletSettings implements PortletSettings {
 
 		String value = null;
 
-		if (instancePortletPreferences != null) {
-			value = instancePortletPreferences.getValue(key, null);
+		if (portletInstancePortletPreferences != null) {
+			value = portletInstancePortletPreferences.getValue(key, null);
 		}
 
 		if (_isNull(value) && (groupPortletPreferences != null)) {
@@ -68,8 +68,8 @@ public abstract class BasePortletSettings implements PortletSettings {
 
 		String[] values = groupPortletPreferences.getValues(key, defaultValue);
 
-		if (instancePortletPreferences != null) {
-			values = instancePortletPreferences.getValues(key, null);
+		if (portletInstancePortletPreferences != null) {
+			values = portletInstancePortletPreferences.getValues(key, null);
 		}
 
 		if (ArrayUtil.isEmpty(values) && (groupPortletPreferences != null)) {
@@ -163,7 +163,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 	protected abstract PortletPreferences getWriteablePortletPreferences();
 
 	protected PortletPreferences companyPortletPreferences;
-	protected PortletPreferences instancePortletPreferences;
+	protected PortletPreferences portletInstancePortletPreferences;
 	protected Properties portalProperties;
 	protected PortletPreferences groupPortletPreferences;
 

@@ -61,7 +61,7 @@ public class PortletSettingsFactoryTest {
 	@Test
 	public void testPortletInstanceSettings() throws Exception {
 		PortletSettings portletInstanceSettings =
-			_portletSettingsFactory.getInstancePortletSettings(
+			_portletSettingsFactory.getPortletInstancePortletSettings(
 				_layout, _portletId);
 
 		String[] values = portletInstanceSettings.getValues(
