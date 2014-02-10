@@ -41,19 +41,19 @@ public abstract class BasePortletSettings implements PortletSettings {
 			value = _instancePortletPreferences.getValue(key, null);
 		}
 
-		if (isNull(value) && (_sitePortletPreferences != null)) {
+		if (_isNull(value) && (_sitePortletPreferences != null)) {
 			value = _sitePortletPreferences.getValue(key, null);
 		}
 
-		if (isNull(value) && (_companyPortletPreferences != null)) {
+		if (_isNull(value) && (_companyPortletPreferences != null)) {
 			value = _companyPortletPreferences.getValue(key, null);
 		}
 
-		if (isNull(value) && (_portalProperties != null)) {
+		if (_isNull(value) && (_portalProperties != null)) {
 			value = _portalProperties.getProperty(key, null);
 		}
 
-		if (!isNull(value)) {
+		if (!_isNull(value)) {
 			return normalizeValue(value);
 		}
 
@@ -95,7 +95,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 	}
 
 	protected String normalizeValue(String value) {
-		if (isNull(value)) {
+		if (_isNull(value)) {
 			return null;
 		}
 
@@ -161,8 +161,12 @@ public abstract class BasePortletSettings implements PortletSettings {
 	protected Properties _portalProperties;
 	protected PortletPreferences _sitePortletPreferences;
 
-	private boolean isNull(String value) {
-		return (value == null) || value.equals(_NULL_VALUE);
+	private boolean _isNull(String value) {
+		if ((value == null) || value.equals(_NULL_VALUE)) {
+			return true;
+		}
+		
+		return false;
 	}
 
 	private static final String _NULL_VALUE = "NULL_VALUE";
