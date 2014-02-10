@@ -136,7 +136,6 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.polls" entity="PollsChoice" />
 		<reference package-path="com.liferay.portlet.polls" entity="PollsQuestion" />
-
 	</entity>
 	<exceptions>
 		<exception>DuplicateVote</exception>
