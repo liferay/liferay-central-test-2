@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
@@ -48,34 +49,32 @@ public class PortletSettingsFactoryTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
-		_layout = LayoutTestUtil.addLayout(_group.getGroupId(), "testSettings");
+
+		_layout = LayoutTestUtil.addLayout(
+			_group.getGroupId(), ServiceTestUtil.randomString());
 
 		_preferenceMap = new HashMap<String, String[]>();
 
-		_preferenceMap.put(_TEST_SETTINGS_NAME, _TEST_SETTINGS_VALUES);
+		_preferenceMap.put(_NAME, _VALUES);
 
 		_portletId = LayoutTestUtil.addPortletToLayout(
 			_layout, _portletId, _preferenceMap);
 	}
 
 	@Test
-	public void testPortletInstanceSettings() throws Exception {
-		PortletSettings portletInstanceSettings =
+	public void testGetPortletInstancePortletSettings() throws Exception {
+		PortletSettings portletInstancePortletSettings =
 			_portletSettingsFactory.getPortletInstancePortletSettings(
 				_layout, _portletId);
 
-		String[] values = portletInstanceSettings.getValues(
-			_TEST_SETTINGS_NAME, null);
+		String[] values = portletInstancePortletSettings.getValues(_NAME, null);
 
-		Assert.assertArrayEquals(
-			"The value obtained does not correspond to the preferences set.",
-			_TEST_SETTINGS_VALUES, values);
+		Assert.assertArrayEquals(_VALUES, values);
 	}
 
-	protected static final String _TEST_SETTINGS_NAME = "testSettingsName";
+	protected static final String _NAME = "name";
 
-	protected static final String[] _TEST_SETTINGS_VALUES =
-		{"testSettingsValue"};
+	protected static final String[] _VALUES = {"values"};
 
 	private Group _group;
 	private Layout _layout;
