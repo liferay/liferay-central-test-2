@@ -29,32 +29,40 @@ public class PortletInstancePortletSettingsTest
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		portletSettings = new PortletInstancePortletSettings(getSettings());
+		portletSettings = new PortletInstancePortletSettings(
+			getPortletPreferences());
 	}
 
 	@Test
-	public void testGetDefaultFromSiteDefaults() throws Exception {
-		setSiteDefaults(_TEST_SITE_SETTING_NAME, _TEST_SITE_SETTING_VALUE);
+	public void testGetValueFromGroupPortletPreferences() throws Exception {
+		setGroupPortletPreferences(
+			_GROUP_PORTLET_PREFERENCES_NAME, _GROUP_PORTLET_PREFERENCES_VALUE);
 
-		String value = portletSettings.getValue(_TEST_SITE_SETTING_NAME, null);
+		String value = portletSettings.getValue(
+			_GROUP_PORTLET_PREFERENCES_NAME, null);
 
-		Assert.assertEquals(_TEST_SITE_SETTING_VALUE, value);
+		Assert.assertEquals(_GROUP_PORTLET_PREFERENCES_VALUE, value);
 	}
 
-	protected void setSiteDefaults(String name, String value) throws Exception {
-		PortletPreferences siteDefaultSettings = new PortletPreferencesImpl();
+	protected void setGroupPortletPreferences(String name, String value)
+		throws Exception {
 
-		siteDefaultSettings.setValue(name, value);
-
-		PortletInstancePortletSettings instancePortletSettings =
+		PortletInstancePortletSettings portletInstancePortletSettings =
 			(PortletInstancePortletSettings)portletSettings;
 
-		instancePortletSettings.setGroupPortletPreferences(siteDefaultSettings);
+		PortletPreferences groupPortletPreferences =
+			new PortletPreferencesImpl();
+
+		groupPortletPreferences.setValue(name, value);
+
+		portletInstancePortletSettings.setGroupPortletPreferences(
+			groupPortletPreferences);
 	}
 
-	private static final String _TEST_SITE_SETTING_NAME = "testSiteSettingName";
+	private static final String _GROUP_PORTLET_PREFERENCES_NAME =
+		"groupPortletPreferencesName";
 
-	private static final String _TEST_SITE_SETTING_VALUE =
-		"testSiteSettingValue";
+	private static final String _GROUP_PORTLET_PREFERENCES_VALUE =
+		"groupPortletPreferencesValue";
 
 }

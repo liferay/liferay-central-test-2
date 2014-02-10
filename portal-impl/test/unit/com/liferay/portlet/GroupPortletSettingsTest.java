@@ -28,38 +28,40 @@ public class GroupPortletSettingsTest extends CompanyPortletSettingsTest {
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		portletSettings = new GroupPortletSettings(getSettings());
+		portletSettings = new GroupPortletSettings(getPortletPreferences());
 	}
 
 	@Test
-	public void testGetDefaultFromCompanyDefaults() throws Exception {
-		setCompanyDefaults(
-			_TEST_COMPANY_SETTING_NAME, _TEST_COMPANY_SETTING_VALUE);
+	public void testGetValueFromCompanyPortletPreferences() throws Exception {
+		setCompanyPortletPreferences(
+			_COMPANY_PORTLET_PREFERENCES_NAME,
+			_COMPANY_PORTLET_PREFERENCES_VALUE);
 
 		String value = portletSettings.getValue(
-			_TEST_COMPANY_SETTING_NAME, null);
+			_COMPANY_PORTLET_PREFERENCES_NAME, null);
 
-		Assert.assertEquals(_TEST_COMPANY_SETTING_VALUE, value);
+		Assert.assertEquals(_COMPANY_PORTLET_PREFERENCES_VALUE, value);
 	}
 
-	protected void setCompanyDefaults(String name, String value)
+	protected void setCompanyPortletPreferences(String name, String value)
 		throws Exception {
 
-		PortletPreferences companyDefaultSettings =
-			new PortletPreferencesImpl();
-
-		companyDefaultSettings.setValue(name, value);
-
-		GroupPortletSettings sitePortletSettings =
+		GroupPortletSettings groupPortletSettings =
 			(GroupPortletSettings)portletSettings;
 
-		sitePortletSettings.setCompanyPortletPreferences(companyDefaultSettings);
+		PortletPreferences companyPortletPreferences =
+			new PortletPreferencesImpl();
+
+		companyPortletPreferences.setValue(name, value);
+
+		groupPortletSettings.setCompanyPortletPreferences(
+			companyPortletPreferences);
 	}
 
-	private static final String _TEST_COMPANY_SETTING_NAME =
-		"testSiteSettingName";
+	private static final String _COMPANY_PORTLET_PREFERENCES_NAME =
+		"companyPortletPreferencesName";
 
-	private static final String _TEST_COMPANY_SETTING_VALUE =
-		"testSiteSettingValue";
+	private static final String _COMPANY_PORTLET_PREFERENCES_VALUE =
+		"companyPortletPreferencesValue";
 
 }

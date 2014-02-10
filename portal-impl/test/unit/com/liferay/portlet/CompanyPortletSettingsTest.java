@@ -27,38 +27,44 @@ public class CompanyPortletSettingsTest extends BasePortletSettingsTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-		portletSettings = new CompanyPortletSettings(getSettings());
+		portletSettings = new CompanyPortletSettings(getPortletPreferences());
 	}
 
 	@Test
-	public void testGetDefaultFromProperties() {
-		setPortalProperties(TEST_PROPERTY_NAME, TEST_PROPERTY_VALUE);
+	public void testGetValueFromPortalProperties() {
+		setPortalProperties(_PORTAL_PROPERTIES_NAME, _PORTAL_PROPERTIES_VALUE);
 
-		String value = portletSettings.getValue(TEST_PROPERTY_NAME, null);
+		String value = portletSettings.getValue(_PORTAL_PROPERTIES_NAME, null);
 
-		Assert.assertEquals(TEST_PROPERTY_VALUE, value);
+		Assert.assertEquals(_PORTAL_PROPERTIES_VALUE, value);
 	}
 
 	@Test
-	public void testSetValueWithProperty() {
-		setPortalProperties(TEST_PROPERTY_NAME, TEST_PROPERTY_VALUE);
+	public void testSetValue() {
+		setPortalProperties(_PORTAL_PROPERTIES_NAME, _PORTAL_PROPERTIES_VALUE);
 
-		portletSettings.setValue(TEST_PROPERTY_NAME, "newValue");
+		portletSettings.setValue(_PORTAL_PROPERTIES_NAME, "newValue");
 
-		String value = portletSettings.getValue(TEST_PROPERTY_NAME, null);
+		String value = portletSettings.getValue(_PORTAL_PROPERTIES_NAME, null);
 
 		Assert.assertEquals("newValue", value);
 	}
 
 	protected void setPortalProperties(String name, String value) {
-		Properties properties = new Properties();
-
-		properties.setProperty(name, value);
-
 		CompanyPortletSettings companyPortletSettings =
 			(CompanyPortletSettings)portletSettings;
 
-		companyPortletSettings.setPortalProperties(properties);
+		Properties portalProperties = new Properties();
+
+		portalProperties.setProperty(name, value);
+
+		companyPortletSettings.setPortalProperties(portalProperties);
 	}
+
+	private static final String _PORTAL_PROPERTIES_NAME =
+		"portalPropertiesName";
+
+	private static final String _PORTAL_PROPERTIES_VALUE =
+		"portalPropertiesValue";
 
 }

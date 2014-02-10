@@ -91,41 +91,6 @@ public abstract class BasePortletSettings implements PortletSettings {
 		return normalizeValues(defaultValue);
 	}
 
-	protected BasePortletSettings() {
-	}
-
-	protected String normalizeValue(String value) {
-		if (_isNull(value)) {
-			return null;
-		}
-
-		return XMLFormatter.fromCompactSafe(value);
-	}
-
-	protected String[] normalizeValues(String[] values) {
-		if (values == null) {
-			return null;
-		}
-
-		if (values.length == 1) {
-			String actualValue = normalizeValue(values[0]);
-
-			if (actualValue == null) {
-				return null;
-			}
-
-			return new String[] {actualValue};
-		}
-
-		String[] actualValues = new String[values.length];
-
-		for (int i = 0; i < actualValues.length; i++) {
-			actualValues[i] = normalizeValue(values[i]);
-		}
-
-		return actualValues;
-	}
-
 	@Override
 	public PortletSettings setValue(String key, String value) {
 		try {
@@ -160,12 +125,47 @@ public abstract class BasePortletSettings implements PortletSettings {
 		return this;
 	}
 
+	protected BasePortletSettings() {
+	}
+
 	protected abstract PortletPreferences getWriteablePortletPreferences();
 
+	protected String normalizeValue(String value) {
+		if (_isNull(value)) {
+			return null;
+		}
+
+		return XMLFormatter.fromCompactSafe(value);
+	}
+
+	protected String[] normalizeValues(String[] values) {
+		if (values == null) {
+			return null;
+		}
+
+		if (values.length == 1) {
+			String actualValue = normalizeValue(values[0]);
+
+			if (actualValue == null) {
+				return null;
+			}
+
+			return new String[] {actualValue};
+		}
+
+		String[] actualValues = new String[values.length];
+
+		for (int i = 0; i < actualValues.length; i++) {
+			actualValues[i] = normalizeValue(values[i]);
+		}
+
+		return actualValues;
+	}
+
 	protected PortletPreferences companyPortletPreferences;
+	protected PortletPreferences groupPortletPreferences;
 	protected PortletPreferences portletInstancePortletPreferences;
 	protected Properties portalProperties;
-	protected PortletPreferences groupPortletPreferences;
 
 	private boolean _isNull(String value) {
 		if ((value == null) || value.equals(_NULL_VALUE)) {

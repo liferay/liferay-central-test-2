@@ -26,53 +26,53 @@ import org.junit.Test;
 public abstract class BasePortletSettingsTestCase {
 
 	@Test
-	public void testGetInexistentValue() {
-		String value = portletSettings.getValue("inexistentName", null);
+	public void testGetNonnexistentValue() {
+		String value = portletSettings.getValue("nonexistentName", null);
 
 		Assert.assertNull(value);
 	}
 
 	@Test
 	public void testGetValidValue() {
-		String value = portletSettings.getValue(TEST_SETTINGS_NAME, null);
+		String value = portletSettings.getValue(_PORTLET_SETTINGS_NAME, null);
 
-		Assert.assertEquals(TEST_SETTINGS_VALUE, value);
+		Assert.assertEquals(_PORTLET_SETTINGS_VALUE, value);
 	}
 
 	@Test
 	public void testSetExistentValue() {
-		portletSettings.setValue(TEST_SETTINGS_NAME, "newValue");
+		portletSettings.setValue(_PORTLET_SETTINGS_NAME, "newValue");
 
-		String value = portletSettings.getValue(TEST_SETTINGS_NAME, null);
+		String value = portletSettings.getValue(_PORTLET_SETTINGS_NAME, null);
 
 		Assert.assertEquals("newValue", value);
 	}
 
 	@Test
-	public void testSetInexistentValue() {
-		portletSettings.setValue("inexistentName", "newValue");
+	public void testSetNonexistentValue() {
+		portletSettings.setValue("nonexistentName", "newValue");
 
-		String value = portletSettings.getValue("inexistentName", null);
+		String value = portletSettings.getValue("nonexistentName", null);
 
 		Assert.assertEquals("newValue", value);
 	}
 
-	protected PortletPreferences getSettings() throws ReadOnlyException {
-		PortletPreferences settings = new PortletPreferencesImpl();
+	protected PortletPreferences getPortletPreferences()
+		throws ReadOnlyException {
 
-		settings.setValue(TEST_SETTINGS_NAME, TEST_SETTINGS_VALUE);
+		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 
-		return settings;
+		portletPreferences.setValue(
+			_PORTLET_SETTINGS_NAME, _PORTLET_SETTINGS_VALUE);
+
+		return portletPreferences;
 	}
 
-	protected static final String TEST_PROPERTY_NAME = "testPropertyName";
+	protected PortletSettings portletSettings;
 
-	protected static final String TEST_PROPERTY_VALUE = "testPropertyValue";
+	private static final String _PORTLET_SETTINGS_NAME = "portletSettingsName";
 
-	protected static final String TEST_SETTINGS_NAME = "testSettingsName";
-
-	protected static final String TEST_SETTINGS_VALUE = "testSettingsValue";
-
-	protected PortletSettings portletSettings = null;
+	private static final String _PORTLET_SETTINGS_VALUE =
+		"portletSettingsValue";
 
 }
