@@ -41,8 +41,8 @@ public abstract class BasePortletSettings implements PortletSettings {
 			value = instancePortletPreferences.getValue(key, null);
 		}
 
-		if (_isNull(value) && (sitePortletPreferences != null)) {
-			value = sitePortletPreferences.getValue(key, null);
+		if (_isNull(value) && (groupPortletPreferences != null)) {
+			value = groupPortletPreferences.getValue(key, null);
 		}
 
 		if (_isNull(value) && (companyPortletPreferences != null)) {
@@ -66,14 +66,14 @@ public abstract class BasePortletSettings implements PortletSettings {
 			throw new IllegalArgumentException();
 		}
 
-		String[] values = sitePortletPreferences.getValues(key, defaultValue);
+		String[] values = groupPortletPreferences.getValues(key, defaultValue);
 
 		if (instancePortletPreferences != null) {
 			values = instancePortletPreferences.getValues(key, null);
 		}
 
-		if (ArrayUtil.isEmpty(values) && (sitePortletPreferences != null)) {
-			values = sitePortletPreferences.getValues(key, null);
+		if (ArrayUtil.isEmpty(values) && (groupPortletPreferences != null)) {
+			values = groupPortletPreferences.getValues(key, null);
 		}
 
 		if (ArrayUtil.isEmpty(values) && (companyPortletPreferences != null)) {
@@ -165,7 +165,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 	protected PortletPreferences companyPortletPreferences;
 	protected PortletPreferences instancePortletPreferences;
 	protected Properties portalProperties;
-	protected PortletPreferences sitePortletPreferences;
+	protected PortletPreferences groupPortletPreferences;
 
 	private boolean _isNull(String value) {
 		if ((value == null) || value.equals(_NULL_VALUE)) {

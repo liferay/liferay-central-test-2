@@ -19,10 +19,10 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Jorge Ferrer
  */
-public class SitePortletSettings extends CompanyPortletSettings {
+public class GroupPortletSettings extends CompanyPortletSettings {
 
-	public SitePortletSettings(PortletPreferences portletPreferences) {
-		sitePortletPreferences = portletPreferences;
+	public GroupPortletSettings(PortletPreferences portletPreferences) {
+		groupPortletPreferences = portletPreferences;
 	}
 
 	public PortletSettings setCompanyDefaults(
@@ -33,12 +33,12 @@ public class SitePortletSettings extends CompanyPortletSettings {
 		return this;
 	}
 
-	protected SitePortletSettings() {
+	protected GroupPortletSettings() {
 	}
 
 	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
-		return sitePortletPreferences;
+		return groupPortletPreferences;
 	}
 
 }

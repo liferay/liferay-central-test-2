@@ -51,11 +51,11 @@ public class PortletSettingsFactoryUtil {
 		return _portletSettingsFactory;
 	}
 
-	public static PortletSettings getSitePortletSettings(
+	public static PortletSettings getGroupPortletSettings(
 			long groupId, String portletId)
 		throws PortalException, SystemException {
 
-		return getPortletSettingsFactory().getSitePortletSettings(
+		return getPortletSettingsFactory().getGroupPortletSettings(
 			groupId, portletId);
 	}
 

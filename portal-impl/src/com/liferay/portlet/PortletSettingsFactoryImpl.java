@@ -101,7 +101,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 	}
 
 	@Override
-	public PortletSettings getSitePortletSettings(
+	public PortletSettings getGroupPortletSettings(
 			long groupId, String portletId)
 		throws PortalException, SystemException {
 
@@ -112,7 +112,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 				group.getCompanyId(), groupId,
 				PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, portletId);
 
-		SitePortletSettings sitePortletSettings = new SitePortletSettings(
+		GroupPortletSettings sitePortletSettings = new GroupPortletSettings(
 			sitePortletPreferences);
 
 		PortletPreferences companyPortletPreferences =

@@ -19,7 +19,7 @@ import javax.portlet.PortletPreferences;
 /**
  * @author Jorge Ferrer
  */
-public class InstancePortletSettings extends SitePortletSettings {
+public class InstancePortletSettings extends GroupPortletSettings {
 
 	public InstancePortletSettings(PortletPreferences portletPreferences) {
 		instancePortletPreferences = portletPreferences;
@@ -28,7 +28,7 @@ public class InstancePortletSettings extends SitePortletSettings {
 	public PortletSettings setSiteDefaults(
 		PortletPreferences portletPreferences) {
 
-		sitePortletPreferences = portletPreferences;
+		groupPortletPreferences = portletPreferences;
 
 		return this;
 	}

@@ -23,12 +23,12 @@ import org.junit.Test;
 /**
  * @author Jorge Ferrer
  */
-public class SitePortletSettingsTest extends CompanyPortletSettingsTest {
+public class GroupPortletSettingsTest extends CompanyPortletSettingsTest {
 
 	@Before
 	@Override
 	public void setUp() throws Exception {
-		portletSettings = new SitePortletSettings(getSettings());
+		portletSettings = new GroupPortletSettings(getSettings());
 	}
 
 	@Test
@@ -50,8 +50,8 @@ public class SitePortletSettingsTest extends CompanyPortletSettingsTest {
 
 		companyDefaultSettings.setValue(name, value);
 
-		SitePortletSettings sitePortletSettings =
-			(SitePortletSettings)portletSettings;
+		GroupPortletSettings sitePortletSettings =
+			(GroupPortletSettings)portletSettings;
 
 		sitePortletSettings.setCompanyDefaults(companyDefaultSettings);
 	}
