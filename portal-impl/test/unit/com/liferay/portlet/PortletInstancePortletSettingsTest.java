@@ -49,7 +49,7 @@ public class PortletInstancePortletSettingsTest
 		PortletInstancePortletSettings instancePortletSettings =
 			(PortletInstancePortletSettings)portletSettings;
 
-		instancePortletSettings.setSiteDefaults(siteDefaultSettings);
+		instancePortletSettings.setGroupPortletPreferences(siteDefaultSettings);
 	}
 
 	private static final String _TEST_SITE_SETTING_NAME = "testSiteSettingName";

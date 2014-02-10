@@ -27,7 +27,7 @@ public class PortletInstancePortletSettings extends GroupPortletSettings {
 		portletInstancePortletPreferences = portletPreferences;
 	}
 
-	public PortletSettings setSiteDefaults(
+	public PortletSettings setGroupPortletPreferences(
 		PortletPreferences portletPreferences) {
 
 		groupPortletPreferences = portletPreferences;

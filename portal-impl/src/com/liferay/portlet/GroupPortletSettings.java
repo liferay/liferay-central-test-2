@@ -25,7 +25,7 @@ public class GroupPortletSettings extends CompanyPortletSettings {
 		groupPortletPreferences = portletPreferences;
 	}
 
-	public PortletSettings setCompanyDefaults(
+	public PortletSettings setCompanyPortletPreferences(
 		PortletPreferences portletPreferences) {
 
 		companyPortletPreferences = portletPreferences;

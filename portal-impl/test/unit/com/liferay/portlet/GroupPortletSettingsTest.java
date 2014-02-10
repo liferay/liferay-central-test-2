@@ -53,7 +53,7 @@ public class GroupPortletSettingsTest extends CompanyPortletSettingsTest {
 		GroupPortletSettings sitePortletSettings =
 			(GroupPortletSettings)portletSettings;
 
-		sitePortletSettings.setCompanyDefaults(companyDefaultSettings);
+		sitePortletSettings.setCompanyPortletPreferences(companyDefaultSettings);
 	}
 
 	private static final String _TEST_COMPANY_SETTING_NAME =
