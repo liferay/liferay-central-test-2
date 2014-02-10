@@ -47,7 +47,7 @@
 <#elseif ifConditionalElement.getName() == "isset">
 	<#assign var = ifConditionalElement.attributeValue("var")>
 
-	RuntimeVariables.variableIsset(RuntimeVariables.evaluateVariable("${seleniumBuilderFileUtil.escapeJava(var)}", ${variableContext}), ${variableContext})
+	RuntimeVariables.isVariableSet(RuntimeVariables.evaluateVariable("${seleniumBuilderFileUtil.escapeJava(var)}", ${variableContext}), ${variableContext})
 <#elseif ifConditionalElement.getName() == "not">
 	!(
 		<#if ifConditionalElement.element("and")??>

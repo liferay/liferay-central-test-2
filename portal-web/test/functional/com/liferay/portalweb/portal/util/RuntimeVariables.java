@@ -174,15 +174,7 @@ public class RuntimeVariables {
 		return _instance._getValue(key);
 	}
 
-	public static String replace(String text) {
-		return _instance._replace(text);
-	}
-
-	public static void setValue(String key, String value) {
-		_instance._setValue(key, value);
-	}
-
-	public static boolean variableIsset(
+	public static boolean isVariableSet(
 		String varName, Map<String, String> context) {
 
 		if (!context.containsKey(varName)) {
@@ -196,6 +188,14 @@ public class RuntimeVariables {
 		}
 
 		return true;
+	}
+
+	public static String replace(String text) {
+		return _instance._replace(text);
+	}
+
+	public static void setValue(String key, String value) {
+		_instance._setValue(key, value);
 	}
 
 	private RuntimeVariables() {
