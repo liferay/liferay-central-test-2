@@ -721,15 +721,15 @@
 		</execute>
 
 		<execute macro="Page#gotoUsersCP">
-			<var name="siteScopeName" value="Site Name" />
 			<var name="portletName" value="Site Memberships" />
+			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
 		<execute macro="Site#addAllMembersCP" />
 
 		<execute macro="Page#gotoUsersCP">
-			<var name="siteScopeName" value="Site Name" />
 			<var name="portletName" value="Site Memberships" />
+			<var name="siteScopeName" value="Site Name" />
 		</execute>
 
 		<execute macro="Site#viewMemberListCP">

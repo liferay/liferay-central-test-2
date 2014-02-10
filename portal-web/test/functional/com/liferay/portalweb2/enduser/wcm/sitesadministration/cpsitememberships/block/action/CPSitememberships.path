@@ -221,7 +221,7 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--USER_PAGE_NAVIGATION_ITEMS_PER_PAGE_MENULIST-->
+<!--USER_ITEMS_PER_PAGE_MENULIST-->
 <tr>
 	<td>USER_ITEMS_PER_PAGE_MENULIST_FIVE_ITEMS_PER_PAGE</td>
 	<td>//a[contains(@id,'5')]</td>
@@ -232,7 +232,7 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--ORGANIZATION-->
+<!--ORGANIZATION_SEARCH-->
 <tr>
 	<td>ORGANIZATION_SEARCH_FIELD</td>
 	<td>//button[contains(.,'Search')]/../input[contains(@name,'_174_keywords')]</td>
@@ -264,7 +264,7 @@
 	<td></td>
 	<td></td>
 </tr>
-<!--USER_GROUP-->
+<!--USER_GROUP_SEARCH-->
 <tr>
 	<td>USER_GROUP_SEARCH_FIELD</td>
 	<td>//button[contains(.,'Search')]/../input[contains(@name,'_174_keywords')]</td>
