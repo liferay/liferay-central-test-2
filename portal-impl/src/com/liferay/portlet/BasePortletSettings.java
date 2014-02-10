@@ -14,6 +14,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -100,9 +102,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 			writeablePortletPreferences.setValue(key, value);
 		}
 		catch (ReadOnlyException roe) {
-
-			// This should never happen
-
+			_log.error("This should never happen", roe);
 		}
 
 		return this;
@@ -117,9 +117,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 			writeablePortletPreferences.setValues(key, values);
 		}
 		catch (ReadOnlyException roe) {
-
-			// This should never happen
-
+			_log.error("This should never happen", roe);
 		}
 
 		return this;
@@ -164,8 +162,8 @@ public abstract class BasePortletSettings implements PortletSettings {
 
 	protected PortletPreferences companyPortletPreferences;
 	protected PortletPreferences groupPortletPreferences;
-	protected PortletPreferences portletInstancePortletPreferences;
 	protected Properties portalProperties;
+	protected PortletPreferences portletInstancePortletPreferences;
 
 	private boolean _isNull(String value) {
 		if ((value == null) || value.equals(_NULL_VALUE)) {
@@ -176,5 +174,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 	}
 
 	private static final String _NULL_VALUE = "NULL_VALUE";
+
+	private static Log _log = LogFactoryUtil.getLog(BasePortletSettings.class);
 
 }
