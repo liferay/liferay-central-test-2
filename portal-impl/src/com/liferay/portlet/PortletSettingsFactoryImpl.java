@@ -57,6 +57,36 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 	}
 
 	@Override
+	public PortletSettings getGroupPortletSettings(
+			long groupId, String portletId)
+		throws PortalException, SystemException {
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		PortletPreferences sitePortletPreferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				group.getCompanyId(), groupId,
+				PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, portletId);
+
+		GroupPortletSettings sitePortletSettings = new GroupPortletSettings(
+			sitePortletPreferences);
+
+		PortletPreferences companyPortletPreferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				group.getCompanyId(), group.getCompanyId(),
+				PortletKeys.PREFS_OWNER_TYPE_GROUP_DEFAULTS_COMPANY, 0,
+				portletId);
+
+		sitePortletSettings.setCompanyDefaults(companyPortletPreferences);
+
+		Properties portalProperties = PropsUtil.getProperties(portletId, false);
+
+		sitePortletSettings.setPortalDefaults(portalProperties);
+
+		return sitePortletSettings;
+	}
+
+	@Override
 	public PortletSettings getInstancePortletSettings(
 			Layout layout, String portletId)
 		throws SystemException {
@@ -98,36 +128,6 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 		instancePortletSettings.setPortalDefaults(portalProperties);
 
 		return instancePortletSettings;
-	}
-
-	@Override
-	public PortletSettings getGroupPortletSettings(
-			long groupId, String portletId)
-		throws PortalException, SystemException {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		PortletPreferences sitePortletPreferences =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				group.getCompanyId(), groupId,
-				PortletKeys.PREFS_OWNER_TYPE_GROUP, 0, portletId);
-
-		GroupPortletSettings sitePortletSettings = new GroupPortletSettings(
-			sitePortletPreferences);
-
-		PortletPreferences companyPortletPreferences =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				group.getCompanyId(), group.getCompanyId(),
-				PortletKeys.PREFS_OWNER_TYPE_GROUP_DEFAULTS_COMPANY, 0,
-				portletId);
-
-		sitePortletSettings.setCompanyDefaults(companyPortletPreferences);
-
-		Properties portalProperties = PropsUtil.getProperties(portletId, false);
-
-		sitePortletSettings.setPortalDefaults(portalProperties);
-
-		return sitePortletSettings;
 	}
 
 }

@@ -36,6 +36,14 @@ public class PortletSettingsFactoryUtil {
 			companyId, portletId);
 	}
 
+	public static PortletSettings getGroupPortletSettings(
+			long groupId, String portletId)
+		throws PortalException, SystemException {
+
+		return getPortletSettingsFactory().getGroupPortletSettings(
+			groupId, portletId);
+	}
+
 	public static PortletSettings getInstancePortletSettings(
 			Layout layout, String portletId)
 		throws SystemException {
@@ -49,14 +57,6 @@ public class PortletSettingsFactoryUtil {
 			PortletSettingsFactoryUtil.class);
 
 		return _portletSettingsFactory;
-	}
-
-	public static PortletSettings getGroupPortletSettings(
-			long groupId, String portletId)
-		throws PortalException, SystemException {
-
-		return getPortletSettingsFactory().getGroupPortletSettings(
-			groupId, portletId);
 	}
 
 	public void setPortletSettingsFactory(

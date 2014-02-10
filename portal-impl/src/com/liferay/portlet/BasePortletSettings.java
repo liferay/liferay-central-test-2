@@ -171,7 +171,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 		if ((value == null) || value.equals(_NULL_VALUE)) {
 			return true;
 		}
-		
+
 		return false;
 	}
 

@@ -31,12 +31,12 @@ public interface PortletSettingsFactory {
 			long companyId, String portletId)
 		throws SystemException;
 
-	public PortletSettings getInstancePortletSettings(
-			Layout layout, String portletId)
-		throws SystemException;
-
 	public PortletSettings getGroupPortletSettings(
 			long groupId, String portletId)
 		throws PortalException, SystemException;
+
+	public PortletSettings getInstancePortletSettings(
+			Layout layout, String portletId)
+		throws SystemException;
 
 }
