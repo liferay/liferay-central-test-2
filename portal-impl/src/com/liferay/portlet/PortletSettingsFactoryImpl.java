@@ -51,7 +51,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 
 		Properties portalProperties = PropsUtil.getProperties(portletId, false);
 
-		companyPortletSettings.setPortalDefaults(portalProperties);
+		companyPortletSettings.setPortalProperties(portalProperties);
 
 		return companyPortletSettings;
 	}
@@ -81,7 +81,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 
 		Properties portalProperties = PropsUtil.getProperties(portletId, false);
 
-		sitePortletSettings.setPortalDefaults(portalProperties);
+		sitePortletSettings.setPortalProperties(portalProperties);
 
 		return sitePortletSettings;
 	}
@@ -125,7 +125,7 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 
 		Properties portalProperties = PropsUtil.getProperties(portletId, false);
 
-		instancePortletSettings.setPortalDefaults(portalProperties);
+		instancePortletSettings.setPortalProperties(portalProperties);
 
 		return instancePortletSettings;
 	}

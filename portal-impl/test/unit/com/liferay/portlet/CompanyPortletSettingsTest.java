@@ -58,7 +58,7 @@ public class CompanyPortletSettingsTest extends BasePortletSettingsTestCase {
 		CompanyPortletSettings companyPortletSettings =
 			(CompanyPortletSettings)portletSettings;
 
-		companyPortletSettings.setPortalDefaults(properties);
+		companyPortletSettings.setPortalProperties(properties);
 	}
 
 }

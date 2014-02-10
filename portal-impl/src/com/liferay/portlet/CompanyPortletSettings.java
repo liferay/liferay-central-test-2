@@ -27,7 +27,7 @@ public class CompanyPortletSettings extends BasePortletSettings {
 		companyPortletPreferences = portletPreferences;
 	}
 
-	public PortletSettings setPortalDefaults(Properties portalProperties) {
+	public PortletSettings setPortalProperties(Properties portalProperties) {
 		this.portalProperties = portalProperties;
 
 		return this;
