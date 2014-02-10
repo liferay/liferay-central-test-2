@@ -24,11 +24,11 @@ import javax.portlet.PortletPreferences;
 public class CompanyPortletSettings extends BasePortletSettings {
 
 	public CompanyPortletSettings(PortletPreferences portletPreferences) {
-		super._companyPortletPreferences = portletPreferences;
+		super.companyPortletPreferences = portletPreferences;
 	}
 
 	public PortletSettings setPortalDefaults(Properties portalProperties) {
-		super._portalProperties = portalProperties;
+		super.portalProperties = portalProperties;
 
 		return this;
 	}
@@ -38,7 +38,7 @@ public class CompanyPortletSettings extends BasePortletSettings {
 
 	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
-		return super._companyPortletPreferences;
+		return super.companyPortletPreferences;
 	}
 
 }

@@ -37,20 +37,20 @@ public abstract class BasePortletSettings implements PortletSettings {
 
 		String value = null;
 
-		if (_instancePortletPreferences != null) {
-			value = _instancePortletPreferences.getValue(key, null);
+		if (instancePortletPreferences != null) {
+			value = instancePortletPreferences.getValue(key, null);
 		}
 
-		if (_isNull(value) && (_sitePortletPreferences != null)) {
-			value = _sitePortletPreferences.getValue(key, null);
+		if (_isNull(value) && (sitePortletPreferences != null)) {
+			value = sitePortletPreferences.getValue(key, null);
 		}
 
-		if (_isNull(value) && (_companyPortletPreferences != null)) {
-			value = _companyPortletPreferences.getValue(key, null);
+		if (_isNull(value) && (companyPortletPreferences != null)) {
+			value = companyPortletPreferences.getValue(key, null);
 		}
 
-		if (_isNull(value) && (_portalProperties != null)) {
-			value = _portalProperties.getProperty(key, null);
+		if (_isNull(value) && (portalProperties != null)) {
+			value = portalProperties.getProperty(key, null);
 		}
 
 		if (!_isNull(value)) {
@@ -66,22 +66,22 @@ public abstract class BasePortletSettings implements PortletSettings {
 			throw new IllegalArgumentException();
 		}
 
-		String[] values = _sitePortletPreferences.getValues(key, defaultValue);
+		String[] values = sitePortletPreferences.getValues(key, defaultValue);
 
-		if (_instancePortletPreferences != null) {
-			values = _instancePortletPreferences.getValues(key, null);
+		if (instancePortletPreferences != null) {
+			values = instancePortletPreferences.getValues(key, null);
 		}
 
-		if (ArrayUtil.isEmpty(values) && (_sitePortletPreferences != null)) {
-			values = _sitePortletPreferences.getValues(key, null);
+		if (ArrayUtil.isEmpty(values) && (sitePortletPreferences != null)) {
+			values = sitePortletPreferences.getValues(key, null);
 		}
 
-		if (ArrayUtil.isEmpty(values) && (_companyPortletPreferences != null)) {
-			values = _companyPortletPreferences.getValues(key, null);
+		if (ArrayUtil.isEmpty(values) && (companyPortletPreferences != null)) {
+			values = companyPortletPreferences.getValues(key, null);
 		}
 
-		if (ArrayUtil.isEmpty(values) && (_portalProperties != null)) {
-			values = StringUtil.split(_portalProperties.getProperty(key));
+		if (ArrayUtil.isEmpty(values) && (portalProperties != null)) {
+			values = StringUtil.split(portalProperties.getProperty(key));
 		}
 
 		if (ArrayUtil.isNotEmpty(values)) {
@@ -162,10 +162,10 @@ public abstract class BasePortletSettings implements PortletSettings {
 
 	protected abstract PortletPreferences getWriteablePortletPreferences();
 
-	protected PortletPreferences _companyPortletPreferences;
-	protected PortletPreferences _instancePortletPreferences;
-	protected Properties _portalProperties;
-	protected PortletPreferences _sitePortletPreferences;
+	protected PortletPreferences companyPortletPreferences;
+	protected PortletPreferences instancePortletPreferences;
+	protected Properties portalProperties;
+	protected PortletPreferences sitePortletPreferences;
 
 	private boolean _isNull(String value) {
 		if ((value == null) || value.equals(_NULL_VALUE)) {
