@@ -33,6 +33,7 @@ public class InstancePortletSettings extends SitePortletSettings {
 		return this;
 	}
 
+	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
 		return super._instancePortletPreferences;
 	}

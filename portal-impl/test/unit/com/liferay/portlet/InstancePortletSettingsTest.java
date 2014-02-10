@@ -26,6 +26,7 @@ import org.junit.Test;
 public class InstancePortletSettingsTest extends SitePortletSettingsTest {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		portletSettings = new InstancePortletSettings(getSettings());
 	}

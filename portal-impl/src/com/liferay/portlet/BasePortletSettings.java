@@ -126,6 +126,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 		return actualValues;
 	}
 
+	@Override
 	public PortletSettings setValue(String key, String value) {
 		try {
 			getWriteablePortletPreferences().setValue(key, value);
@@ -139,6 +140,7 @@ public abstract class BasePortletSettings implements PortletSettings {
 		return this;
 	}
 
+	@Override
 	public PortletSettings setValues(String key, String[] values) {
 		try {
 			getWriteablePortletPreferences().setValues(key, values);

@@ -36,6 +36,7 @@ public class SitePortletSettings extends CompanyPortletSettings {
 	protected SitePortletSettings() {
 	}
 
+	@Override
 	protected PortletPreferences getWriteablePortletPreferences() {
 		return super._sitePortletPreferences;
 	}
