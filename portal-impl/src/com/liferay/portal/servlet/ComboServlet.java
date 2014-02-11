@@ -216,8 +216,9 @@ public class ComboServlet extends HttpServlet {
 		int colonIndex = resourcePath.indexOf(CharPool.COLON);
 
 		if (colonIndex > 0) {
-			resourcePath = resourcePath.substring(0, colonIndex) +
-				resourcePath.substring(colonIndex + 1);
+			resourcePath =
+				resourcePath.substring(0, colonIndex) +
+					resourcePath.substring(colonIndex + 1);
 		}
 
 		String fileContentKey = resourcePath.concat(StringPool.QUESTION).concat(
