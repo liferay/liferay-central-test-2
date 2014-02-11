@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+
 import java.net.URI;
 
 import javax.servlet.ServletConfig;
@@ -79,7 +80,7 @@ public class ComboServletTest extends PowerMockito {
 		_portalServletContext.setContextPath("portal");
 
 		File tempFile = _temporaryFolder.newFile();
-		
+
 		URI tempFileURI = tempFile.toURI();
 
 		when(
@@ -112,7 +113,7 @@ public class ComboServletTest extends PowerMockito {
 		_comboServlet.getResourceURL("plugin-context:/js/javascript.js");
 
 		verify(_pluginServletContext);
-		
+
 		_pluginServletContext.getResource("/js/javascript.js");
 	}
 
@@ -123,7 +124,7 @@ public class ComboServletTest extends PowerMockito {
 		_comboServlet.getResourceURL("/plugin-context:/js/javascript.js");
 
 		verify(_pluginServletContext);
-		
+
 		_pluginServletContext.getResource("/js/javascript.js");
 	}
 
@@ -134,7 +135,7 @@ public class ComboServletTest extends PowerMockito {
 		_comboServlet.getResourceURL("/js/javascript.js");
 
 		verify(_portalServletContext);
-		
+
 		_portalServletContext.getResource(path);
 	}
 
