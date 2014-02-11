@@ -66,16 +66,18 @@ public abstract class BaseModelUserNotificationHandler<T extends AuditedModel>
 			return null;
 		}
 
+		StringBundler sb = new StringBundler(5);
+
+		sb.append("<div class=\"title\">");
+
 		int notificationType = jsonObject.getInt("notificationType");
 
 		String title = getTitle(notificationType);
 
-		StringBundler sb = new StringBundler(5);
-
-		sb.append("<div class=\"title\">");
 		sb.append(
 			serviceContext.translate(
 				title, HtmlUtil.escape(getUserName(baseModel))));
+
 		sb.append("</div><div class=\"body\">");
 		sb.append(
 			HtmlUtil.escape(
