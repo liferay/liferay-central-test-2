@@ -533,9 +533,8 @@ public class LayoutExporter {
 				exportPortletControls[3]);
 		}
 
-		portletDataContext.setScopeGroupId(previousScopeGroupId);
-
 		portletDataContext.setExportDataRootElement(rootElement);
+		portletDataContext.setScopeGroupId(previousScopeGroupId);
 
 		exportAssetCategories(
 			portletDataContext, exportPortletDataAll, exportCategories,

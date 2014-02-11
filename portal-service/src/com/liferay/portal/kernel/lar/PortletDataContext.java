@@ -93,7 +93,9 @@ public interface PortletDataContext extends Serializable {
 	public static final String ROOT_PATH_PORTLETS = "/portlets/";
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link com.liferay.portal.kernel.lar.BaseStagedModelDataHandler#exportAssetCategories(PortletDataContext, StagedModel)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             BaseStagedModelDataHandler#exportAssetCategories(
+	 *             PortletDataContext, StagedModel)}
 	 */
 	@Deprecated
 	public void addAssetCategories(Class<?> clazz, long classPK)

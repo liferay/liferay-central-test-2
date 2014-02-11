@@ -152,14 +152,13 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link com.liferay.portal.kernel.lar.BaseStagedModelDataHandler#exportAssetCategories(PortletDataContext, StagedModel)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             com.liferay.portal.kernel.lar.BaseStagedModelDataHandler#exportAssetCategories(
+	 *             PortletDataContext, StagedModel)}
 	 */
 	@Deprecated
 	@Override
-	public void addAssetCategories(Class<?> clazz, long classPK)
-		throws SystemException {
-
-		return;
+	public void addAssetCategories(Class<?> clazz, long classPK) {
 	}
 
 	@Override
@@ -809,7 +808,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Deprecated
 	@Override
 	public Map<String, long[]> getAssetCategoryIdsMap() {
-		return Collections.EMPTY_MAP;
+		return Collections.emptyMap();
 	}
 
 	/**
@@ -818,7 +817,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Deprecated
 	@Override
 	public Map<String, String[]> getAssetCategoryUuidsMap() {
-		return Collections.EMPTY_MAP;
+		return Collections.emptyMap();
 	}
 
 	@Override

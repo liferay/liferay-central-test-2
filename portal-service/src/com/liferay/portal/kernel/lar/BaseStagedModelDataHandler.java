@@ -270,7 +270,8 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			portletDataContext.getReferenceElements(
 				stagedModel, AssetCategory.class);
 
-		List<Long> categoryIds = new ArrayList<Long>(referenceElements.size());
+		List<Long> assetCategoryIds = new ArrayList<Long>(
+			referenceElements.size());
 
 		for (Element referenceElement : referenceElements) {
 			long classPK = GetterUtil.getLong(
@@ -279,26 +280,26 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 			StagedModelDataHandlerUtil.importReferenceStagedModel(
 				portletDataContext, stagedModel, AssetCategory.class, classPK);
 
-			categoryIds.add(classPK);
+			assetCategoryIds.add(classPK);
 		}
 
-		Map<Long, Long> categoryIdsMap =
+		Map<Long, Long> assetCategoryIdsMap =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
 				AssetCategory.class);
 
-		long[] importedCategoryIds = new long[categoryIds.size()];
+		long[] importedAssetCategoryIds = new long[assetCategoryIds.size()];
 
-		for (int i = 0; i < categoryIds.size(); i++) {
-			long categoryId = categoryIds.get(i);
+		for (int i = 0; i < assetCategoryIds.size(); i++) {
+			long categoryId = assetCategoryIds.get(i);
 
-			importedCategoryIds[i] = MapUtil.getLong(
-				categoryIdsMap, categoryId, categoryId);
+			importedAssetCategoryIds[i] = MapUtil.getLong(
+				assetCategoryIdsMap, categoryId, categoryId);
 		}
 
 		portletDataContext.addAssetCategories(
 			ExportImportClassedModelUtil.getClassName(stagedModel),
 			ExportImportClassedModelUtil.getClassPK(stagedModel),
-			importedCategoryIds);
+			importedAssetCategoryIds);
 	}
 
 	protected void validateExport(
