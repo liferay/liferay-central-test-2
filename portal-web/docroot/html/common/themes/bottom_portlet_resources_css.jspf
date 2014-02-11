@@ -76,7 +76,7 @@
 		}
 	}
 
-	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
+	if (hasComboScript) {
 	%>
 
 		<link href="<%= sb.toString() %>" rel="stylesheet" type="text/css" />
@@ -131,7 +131,7 @@
 		}
 	}
 
-	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
+	if (hasComboScript) {
 	%>
 
 		<link href="<%= sb.toString() %>" rel="stylesheet" type="text/css" />
