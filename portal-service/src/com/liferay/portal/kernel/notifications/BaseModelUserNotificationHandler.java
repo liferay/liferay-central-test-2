@@ -140,13 +140,13 @@ public abstract class BaseModelUserNotificationHandler
 		Group group = user.getGroup();
 
 		long portletPlid = PortalUtil.getPlidFromPortletId(
-			group.getGroupId(), true, PortletKeys.BLOGS);
+			group.getGroupId(), true, getPortletId());
 
 		PortletURL portletURL = null;
 
 		if (portletPlid != 0) {
 			portletURL = PortletURLFactoryUtil.create(
-				serviceContext.getLiferayPortletRequest(), PortletKeys.BLOGS,
+				serviceContext.getLiferayPortletRequest(), getPortletId(),
 				portletPlid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setParameter("struts_action", "/blogs/view_entry");
@@ -158,7 +158,7 @@ public abstract class BaseModelUserNotificationHandler
 				serviceContext.getLiferayPortletResponse();
 
 			portletURL = liferayPortletResponse.createRenderURL(
-				PortletKeys.BLOGS);
+				getPortletId());
 
 			portletURL.setParameter("struts_action", "/blogs/view_entry");
 			portletURL.setParameter(
