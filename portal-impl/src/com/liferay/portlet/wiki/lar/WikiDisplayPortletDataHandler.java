@@ -168,9 +168,7 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 			}
 
 			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
+			protected void performAction(Object object) throws PortalException {
 				WikiPage page = (WikiPage)object;
 
 				StagedModelDataHandlerUtil.exportReferenceStagedModel(
