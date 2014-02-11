@@ -2182,42 +2182,42 @@ public class PortletImpl extends PortletBaseImpl {
 
 	@Override
 	public boolean hasFooterPortalCss() {
-		return _footerPortalCss.size() > 0;
+		return !_footerPortalCss.isEmpty();
 	}
 
 	@Override
 	public boolean hasFooterPortalJavaScript() {
-		return _footerPortalJavaScript.size() > 0;
+		return !_footerPortalJavaScript.isEmpty();
 	}
 
 	@Override
 	public boolean hasFooterPortletCss() {
-		return _footerPortletCss.size() > 0;
+		return !_footerPortletCss.isEmpty();
 	}
 
 	@Override
 	public boolean hasFooterPortletJavaScript() {
-		return _footerPortletJavaScript.size() > 0;
+		return !_footerPortletJavaScript.isEmpty();
 	}
 
 	@Override
 	public boolean hasHeaderPortalCss() {
-		return _headerPortalCss.size() > 0;
+		return !_headerPortalCss.isEmpty();
 	}
 
 	@Override
 	public boolean hasHeaderPortalJavaScript() {
-		return _headerPortalJavaScript.size() > 0;
+		return !_headerPortalJavaScript.isEmpty();
 	}
 
 	@Override
 	public boolean hasHeaderPortletCss() {
-		return _headerPortletCss.size() > 0;
+		return !_headerPortletCss.isEmpty();
 	}
 
 	@Override
 	public boolean hasHeaderPortletJavaScript() {
-		return _headerPortletJavaScript.size() > 0;
+		return !_headerPortletJavaScript.isEmpty();
 	}
 
 	/**

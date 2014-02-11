@@ -213,11 +213,11 @@ public class ComboServlet extends HttpServlet {
 			URL resourceURL, String resourcePath, String minifierType)
 		throws IOException {
 
-		int colonPosition = resourcePath.indexOf(":");
+		int colonIndex = resourcePath.indexOf(CharPool.COLON);
 
-		if (colonPosition > 0) {
-			resourcePath = resourcePath.substring(
-				0, colonPosition) + resourcePath.substring(colonPosition + 1);
+		if (colonIndex > 0) {
+			resourcePath = resourcePath.substring(0, colonIndex) +
+				resourcePath.substring(colonIndex + 1);
 		}
 
 		String fileContentKey = resourcePath.concat(StringPool.QUESTION).concat(
@@ -284,10 +284,10 @@ public class ComboServlet extends HttpServlet {
 
 					String baseURL = StringPool.BLANK;
 
-					int index = resourcePath.lastIndexOf(CharPool.SLASH);
+					int slashIndex = resourcePath.lastIndexOf(CharPool.SLASH);
 
-					if (index != -1) {
-						baseURL = resourcePath.substring(0, index + 1);
+					if (slashIndex != -1) {
+						baseURL = resourcePath.substring(0, slashIndex + 1);
 					}
 
 					stringFileContent = AggregateUtil.updateRelativeURLs(
@@ -318,44 +318,45 @@ public class ComboServlet extends HttpServlet {
 		return fileContentBag._fileContent;
 	}
 
-	protected URL getResourceURL(String modulePathString) throws Exception {
-		ModulePath modulePath = new ModulePath(modulePathString);
+	protected URL getResourceURL(String modulePath) throws Exception {
+		ModulePathContainer modulePathContainer = new ModulePathContainer(
+			modulePath);
 
-		ServletContext servletContext = getServletContextFromPath(
-			modulePath.getModuleContextPath());
+		ServletContext servletContext = getServletContext(
+			modulePathContainer.getModuleContextPath());
 
-		URL url = servletContext.getResource(modulePath.getResourcePath());
+		URL url = servletContext.getResource(
+			modulePathContainer.getResourcePath());
 
 		if (url == null) {
 			throw new ServletException(
-				"Resource " + modulePath.getResourcePath() + " not found in " +
-				modulePath.getModuleContextPath());
+				"Resource " + modulePathContainer.getResourcePath() +
+					" does not exist in " +
+						modulePathContainer.getModuleContextPath());
 		}
 
 		return url;
 	}
 
-	protected ServletContext getServletContextFromPath(String moduleContextPath)
+	protected ServletContext getServletContext(String contextPath)
 		throws ServletException {
 
-		if (Validator.isNull(moduleContextPath)) {
+		if (Validator.isNull(contextPath)) {
 			return getServletContext();
 		}
 
-		if (moduleContextPath.startsWith(StringPool.SLASH)) {
-			moduleContextPath = moduleContextPath.substring(1);
+		if (contextPath.startsWith(StringPool.SLASH)) {
+			contextPath = contextPath.substring(1);
 		}
 
-		ServletContext moduleServletContext = ServletContextPool.get(
-			moduleContextPath);
+		ServletContext servletContext = ServletContextPool.get(contextPath);
 
-		if (moduleServletContext != null) {
-			return moduleServletContext;
+		if (servletContext != null) {
+			return servletContext;
 		}
 
 		throw new ServletException(
-			"ServletContext " + moduleContextPath + " " +
-				"not found in portal");
+			"Servlet context " + contextPath + " does not exist");
 	}
 
 	protected boolean validateModuleExtension(String moduleName)
@@ -396,7 +397,8 @@ public class ComboServlet extends HttpServlet {
 		SingleVMPoolUtil.getCache(FileContentBag.class.getName());
 	private Set<String> _protectedParameters = SetUtil.fromArray(
 		new String[] {
-			"b", "browserId", "minifierType", "languageId", "t", "themeId"});
+			"b", "browserId", "minifierType", "languageId", "t", "themeId"
+		});
 
 	private static class FileContentBag implements Serializable {
 
@@ -410,7 +412,7 @@ public class ComboServlet extends HttpServlet {
 
 	}
 
-	private static class ModulePath {
+	private static class ModulePathContainer {
 
 		public String getResourcePath() {
 			return _resourcePath;
@@ -420,21 +422,20 @@ public class ComboServlet extends HttpServlet {
 			return _moduleContextPath;
 		}
 
-		private ModulePath(String modulePath) {
-			int colonPosition = modulePath.indexOf(":");
+		private ModulePathContainer(String modulePathString) {
+			int index = modulePathString.indexOf(CharPool.COLON);
 
-			if (colonPosition > 0) {
-				String moduleContextPath = modulePath.substring(
-					0, colonPosition);
+			if (index > 0) {
+				String moduleContextPath = modulePathString.substring(0, index);
 
-				String resourcePath = modulePath.substring(colonPosition + 1);
+				String resourcePath = modulePathString.substring(index + 1);
 
 				_moduleContextPath = moduleContextPath;
 				_resourcePath = resourcePath;
 			}
 			else {
 				_moduleContextPath = StringPool.BLANK;
-				_resourcePath = modulePath;
+				_resourcePath = modulePathString;
 			}
 		}
 
