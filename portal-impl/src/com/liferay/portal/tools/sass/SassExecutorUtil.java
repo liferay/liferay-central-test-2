@@ -65,7 +65,8 @@ public class SassExecutorUtil {
 		throws IOException {
 
 		_executorService = Executors.newFixedThreadPool(
-			2, new NamedThreadFactory(
+			2,
+			new NamedThreadFactory(
 				"SassExecutor", Thread.NORM_PRIORITY,
 				SassExecutorUtil.class.getClassLoader()));
 
@@ -102,8 +103,9 @@ public class SassExecutorUtil {
 				_scriptObject, "process",
 				new Object[] {
 					content, _portalCommonDirName, filePath, cssThemePath,
-					_TEP_DIR, false
-				}, String.class);
+					_TMP_DIR, false
+				},
+				String.class);
 		}
 		catch (Exception e) {
 			if (e instanceof RaiseException) {
@@ -140,7 +142,7 @@ public class SassExecutorUtil {
 				_WAIT_MINTUES, TimeUnit.MINUTES)) {
 
 			System.err.println(
-				"Abort Sass files processing after waited " + _WAIT_MINTUES +
+				"Abort processing Sass files after waiting " + _WAIT_MINTUES +
 					" minutes");
 		}
 
@@ -151,7 +153,7 @@ public class SassExecutorUtil {
 		}
 	}
 
-	private static final String _TEP_DIR = SystemProperties.get(
+	private static final String _TMP_DIR = SystemProperties.get(
 		SystemProperties.TMP_DIR);
 
 	private static final int _WAIT_MINTUES = 30;
