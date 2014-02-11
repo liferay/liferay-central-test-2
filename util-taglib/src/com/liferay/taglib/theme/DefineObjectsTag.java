@@ -80,12 +80,19 @@ public class DefineObjectsTag extends TagSupport {
 		String portletId = portletDisplay.getId();
 
 		try {
-			PortletSettings portletCompanyPortletSettings =
+			PortletSettings companyPortletSettings =
 				PortletSettingsFactoryUtil.getCompanyPortletSettings(
 					themeDisplay.getCompanyId(), portletId);
 
 			pageContext.setAttribute(
-				"portletCompanyPortletSettings", portletCompanyPortletSettings);
+				"companyPortletSettings", companyPortletSettings);
+
+			PortletSettings groupPortletSettings =
+				PortletSettingsFactoryUtil.getGroupPortletSettings(
+					themeDisplay.getSiteGroupId(), portletId);
+
+			pageContext.setAttribute(
+				"groupPortletSettings", groupPortletSettings);
 
 			PortletSettings portletInstancePortletSettings =
 				PortletSettingsFactoryUtil.getPortletInstancePortletSettings(
@@ -94,13 +101,6 @@ public class DefineObjectsTag extends TagSupport {
 			pageContext.setAttribute(
 				"portletInstancePortletSettings",
 				portletInstancePortletSettings);
-
-			PortletSettings portletGroupPortletSettings =
-				PortletSettingsFactoryUtil.getGroupPortletSettings(
-					themeDisplay.getSiteGroupId(), portletId);
-
-			pageContext.setAttribute(
-				"portletGroupPortletSettings", portletGroupPortletSettings);
 		}
 		catch (SystemException se) {
 			throw new RuntimeException(se);
