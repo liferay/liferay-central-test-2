@@ -33,7 +33,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -64,17 +63,17 @@ public abstract class BaseModelUserNotificationHandler
 		return StringPool.BLANK;
 	}
 
-	protected String getTitle(BaseModel baseModel) {
+	protected String getTitle(BaseModel<?> baseModel) {
 		BlogsEntry entry = (BlogsEntry)baseModel;
 	
 		return entry.getTitle();
 	}
 
-	protected BaseModel fetchBaseModel(long classPK) throws SystemException {
+	protected BaseModel<?> fetchBaseModel(long classPK) throws SystemException {
 		return BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
 	}
 
-	protected String getUserName(BaseModel baseModel) {
+	protected String getUserName(BaseModel<?> baseModel) {
 		AuditedModel auditedModel = (AuditedModel)baseModel;
 
 		return PortalUtil.getUserName(
@@ -92,7 +91,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BaseModel baseModel = fetchBaseModel(classPK);
+		BaseModel<?> baseModel = fetchBaseModel(classPK);
 
 		if (baseModel == null) {
 			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvent(
@@ -120,7 +119,7 @@ public abstract class BaseModelUserNotificationHandler
 	}
 
 	protected void setLinkParameters(
-		PortletURL portletURL, BaseModel baseModel) {
+		PortletURL portletURL, BaseModel<?> baseModel) {
 
 		BlogsEntry entry = (BlogsEntry)baseModel;
 
@@ -139,7 +138,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BaseModel baseModel = fetchBaseModel(classPK);
+		BaseModel<?> baseModel = fetchBaseModel(classPK);
 
 		if (baseModel == null) {
 			return null;
