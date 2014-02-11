@@ -37,7 +37,7 @@
 
 	String comboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=", lastModifiedTimestamp);
 
-	StringBundler sb = new StringBundler(comboURL);
+	StringBundler comboURLSB = new StringBundler(comboURL);
 
 	boolean hasComboScript = false;
 
@@ -46,8 +46,8 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(headerPortalJavaScript) && !portletResourceStaticURLs.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
 				portletResourceStaticURLs.add(headerPortalJavaScript);
 
-				sb.append(StringPool.AMPERSAND);
-				sb.append(HtmlUtil.escape(headerPortalJavaScript));
+				comboURLSB.append(StringPool.AMPERSAND);
+				comboURLSB.append(HtmlUtil.escape(headerPortalJavaScript));
 
 				hasComboScript = true;
 			}
@@ -79,12 +79,12 @@
 	if (hasComboScript) {
 	%>
 
-		<script src="<%= sb.toString() %>" type="text/javascript"></script>
+		<script src="<%= comboURLSB.toString() %>" type="text/javascript"></script>
 
 	<%
 	}
 
-	sb = new StringBundler(comboURL);
+	comboURLSB = new StringBundler(comboURL);
 
 	hasComboScript = false;
 
@@ -93,16 +93,16 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(headerPortletJavaScript) && !portletResourceStaticURLs.contains(headerPortletJavaScript)) {
 				portletResourceStaticURLs.add(headerPortletJavaScript);
 
-				sb.append(StringPool.AMPERSAND);
+				comboURLSB.append(StringPool.AMPERSAND);
 
 				String curPortletContextPath = curPortlet.getContextPath();
 
 				if ((curPortletContextPath != null) && !curPortletContextPath.equals(PortalUtil.getPathContext())) {
-					sb.append(curPortletContextPath);
-					sb.append(StringPool.COLON);
+					comboURLSB.append(curPortletContextPath);
+					comboURLSB.append(StringPool.COLON);
 				}
 
-				sb.append(HtmlUtil.escape(headerPortletJavaScript));
+				comboURLSB.append(HtmlUtil.escape(headerPortletJavaScript));
 
 				hasComboScript = true;
 			}
@@ -134,7 +134,7 @@
 	if (hasComboScript) {
 	%>
 
-		<script src="<%= sb.toString() %>" type="text/javascript"></script>
+		<script src="<%= comboURLSB.toString() %>" type="text/javascript"></script>
 
 	<%
 	}
