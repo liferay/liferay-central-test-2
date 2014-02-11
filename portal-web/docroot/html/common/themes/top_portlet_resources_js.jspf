@@ -27,8 +27,6 @@
 		}
 	}
 
-	String portletComboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=", lastModifiedTimestamp);
-
 	Set<String> portletResourceStaticURLs = (Set<String>)request.getAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS);
 
 	if (portletResourceStaticURLs == null) {
@@ -36,6 +34,8 @@
 
 		request.setAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS, portletResourceStaticURLs);
 	}
+
+	String portletComboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=", lastModifiedTimestamp);
 
 	StringBundler sb = new StringBundler(portletComboURL);
 
@@ -77,9 +77,11 @@
 	}
 
 	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
-		%>
+	%>
+
 		<script src="<%= sb.toString() %> " type="text/javascript"></script>
-		<%
+	
+	<%
 	}
 
 	sb = new StringBundler(portletComboURL);
