@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.notifications;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
@@ -23,6 +24,8 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.AuditedModel;
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationEvent;
@@ -110,7 +113,7 @@ public abstract class BaseModelUserNotificationHandler
 				title, HtmlUtil.escape(getUserName(baseModel))));
 		sb.append("</div><div class=\"body\">");
 		sb.append(
-			HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50)));
+			HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50));
 		sb.append("</div>");
 
 		return sb.toString();
