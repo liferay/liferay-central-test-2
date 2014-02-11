@@ -79,7 +79,7 @@
 	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
 	%>
 
-		<script src="<%= sb.toString() %> " type="text/javascript"></script>
+		<script src="<%= sb.toString() %>" type="text/javascript"></script>
 	
 	<%
 	}
@@ -134,7 +134,7 @@
 	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
 	%>
 
-		<script src="<%= sb.toString() %> " type="text/javascript"></script>
+		<script src="<%= sb.toString() %>" type="text/javascript"></script>
 
 	<%
 	}
