@@ -111,11 +111,11 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 		StagedModelDataHandlerUtil.exportReferenceStagedModel(
 			portletDataContext, portletId, node);
 
-		ActionableDynamicQuery pageActionableDynamicQuery =
+		ActionableDynamicQuery actionableDynamicQuery =
 			getPageActionableDynamicQuery(
 				portletDataContext, node.getNodeId(), portletId);
 
-		pageActionableDynamicQuery.performActions();
+		actionableDynamicQuery.performActions();
 
 		return portletPreferences;
 	}
@@ -162,9 +162,9 @@ public class WikiDisplayPortletDataHandler extends WikiPortletDataHandler {
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 				super.addCriteria(dynamicQuery);
 
-				Property nodeIdProperty = PropertyFactoryUtil.forName("nodeId");
+				Property property = PropertyFactoryUtil.forName("nodeId");
 
-				dynamicQuery.add(nodeIdProperty.eq(nodeId));
+				dynamicQuery.add(property.eq(nodeId));
 			}
 
 			@Override
