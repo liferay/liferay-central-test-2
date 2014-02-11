@@ -18,8 +18,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.AuditedModel;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -31,21 +29,19 @@ import javax.portlet.PortletURL;
  * @author Sergio González
  */
 public class BlogsUserNotificationHandler
-	extends BaseModelUserNotificationHandler {
+	extends BaseModelUserNotificationHandler<BlogsEntry> {
 
 	public BlogsUserNotificationHandler() {
 		setPortletId(PortletKeys.BLOGS);
 	}
 
 	@Override
-	protected BaseModel<?> fetchBaseModel(long classPK) throws SystemException {
+	protected BlogsEntry fetchBaseModel(long classPK) throws SystemException {
 		return BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
 	}
 
 	@Override
-	protected String getTitle(BaseModel<?> baseModel) {
-		BlogsEntry entry = (BlogsEntry)baseModel;
-
+	protected String getTitle(BlogsEntry entry) {
 		return entry.getTitle();
 	}
 
@@ -66,19 +62,12 @@ public class BlogsUserNotificationHandler
 	}
 
 	@Override
-	protected String getUserName(BaseModel<?> baseModel) {
-		AuditedModel auditedModel = (AuditedModel)baseModel;
-
-		return PortalUtil.getUserName(
-			auditedModel.getUserId(), StringPool.BLANK);
+	protected String getUserName(BlogsEntry entry) {
+		return PortalUtil.getUserName(entry.getUserId(), StringPool.BLANK);
 	}
 
 	@Override
-	protected void setLinkParameters(
-		PortletURL portletURL, BaseModel<?> baseModel) {
-
-		BlogsEntry entry = (BlogsEntry)baseModel;
-
+	protected void setLinkParameters(PortletURL portletURL, BlogsEntry entry) {
 		portletURL.setParameter("struts_action", "/blogs/view_entry");
 		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 	}

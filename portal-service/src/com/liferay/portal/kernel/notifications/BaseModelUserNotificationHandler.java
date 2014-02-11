@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationEvent;
@@ -39,10 +38,10 @@ import javax.portlet.WindowState;
  * @author Brian Wing Shun Chan
  * @author Sergio González
  */
-public abstract class BaseModelUserNotificationHandler
+public abstract class BaseModelUserNotificationHandler<T>
 	extends BaseUserNotificationHandler {
 
-	protected abstract BaseModel<?> fetchBaseModel(long classPK)
+	protected abstract T fetchBaseModel(long classPK)
 		throws SystemException;
 
 	@Override
@@ -56,7 +55,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BaseModel<?> baseModel = fetchBaseModel(classPK);
+		T baseModel = fetchBaseModel(classPK);
 
 		if (baseModel == null) {
 			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvent(
@@ -93,7 +92,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BaseModel<?> baseModel = fetchBaseModel(classPK);
+		T baseModel = fetchBaseModel(classPK);
 
 		if (baseModel == null) {
 			return null;
@@ -131,13 +130,13 @@ public abstract class BaseModelUserNotificationHandler
 		return portletURL.toString();
 	}
 
-	protected abstract String getTitle(BaseModel<?> baseModel);
-
 	protected abstract String getTitle(int notificationType);
 
-	protected abstract String getUserName(BaseModel<?> baseModel);
+	protected abstract String getTitle(T baseModel);
+
+	protected abstract String getUserName(T baseModel);
 
 	protected abstract void setLinkParameters(
-		PortletURL portletURL, BaseModel<?> baseModel);
+		PortletURL portletURL, T baseModel);
 
 }
