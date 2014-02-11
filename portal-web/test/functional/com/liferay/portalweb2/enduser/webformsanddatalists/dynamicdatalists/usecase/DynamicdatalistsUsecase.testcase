@@ -633,8 +633,8 @@
 		</execute>
 
 		<execute macro="DataDefinitionTemplate#viewFormTemplateCP">
-			<var name="dataDefinitionTemplateName" value="Template Rev" />
 			<var name="dataDefinitionName" value="Data Definition Clone With Form Template" />
+			<var name="dataDefinitionTemplateName" value="Template Rev" />
 		</execute>
 	</command>
 </definition>
