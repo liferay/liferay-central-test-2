@@ -64,9 +64,9 @@ public class PortletDisplay implements Serializable {
 		_modePrint = master.isModePrint();
 		_modeView = master.isModeView();
 		_namespace = master.getNamespace();
-		_portletName = master.getPortletName();
 		_portletInstancePortletSettings =
 			master.getPortletInstancePortletSettings();
+		_portletName = master.getPortletName();
 		_portletSetup = master.getPortletSetup();
 		_resourcePK = master.getResourcePK();
 		_restoreCurrentView = master.isRestoreCurrentView();
