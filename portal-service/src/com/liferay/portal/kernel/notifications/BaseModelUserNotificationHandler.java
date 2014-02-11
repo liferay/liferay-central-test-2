@@ -116,6 +116,15 @@ public abstract class BaseModelUserNotificationHandler
 		return sb.toString();
 	}
 
+	protected void setLinkParameters(
+		PortletURL portletURL, BaseModel baseModel) {
+
+		BlogsEntry entry = (BlogsEntry)baseModel;
+
+		portletURL.setParameter("struts_action", "/blogs/view_entry");
+		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+	}
+
 	@Override
 	protected String getLink(
 			UserNotificationEvent userNotificationEvent,
@@ -149,9 +158,7 @@ public abstract class BaseModelUserNotificationHandler
 				serviceContext.getLiferayPortletRequest(), getPortletId(),
 				portletPlid, PortletRequest.RENDER_PHASE);
 
-			portletURL.setParameter("struts_action", "/blogs/view_entry");
-			portletURL.setParameter(
-				"entryId", String.valueOf(entry.getEntryId()));
+			setLinkParameters(portletURL, baseModel);
 		}
 		else {
 			LiferayPortletResponse liferayPortletResponse =
@@ -160,9 +167,8 @@ public abstract class BaseModelUserNotificationHandler
 			portletURL = liferayPortletResponse.createRenderURL(
 				getPortletId());
 
-			portletURL.setParameter("struts_action", "/blogs/view_entry");
-			portletURL.setParameter(
-				"entryId", String.valueOf(entry.getEntryId()));
+			setLinkParameters(portletURL, baseModel);
+
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 		}
 
