@@ -27,7 +27,7 @@
 		}
 	}
 
-	String portletComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=", lastModifiedTimestamp);
+	String portletComboURL = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=", lastModifiedTimestamp);
 
 	Set<String> portletResourceStaticURLs = (Set<String>)request.getAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS);
 
@@ -37,7 +37,7 @@
 		request.setAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS, portletResourceStaticURLs);
 	}
 
-	StringBundler sb = new StringBundler(portletComboPath);
+	StringBundler sb = new StringBundler(portletComboURL);
 
 	boolean hasComboScript = false;
 
@@ -82,7 +82,7 @@
 		<%
 	}
 
-	sb = new StringBundler(portletComboPath);
+	sb = new StringBundler(portletComboURL);
 
 	hasComboScript = false;
 
