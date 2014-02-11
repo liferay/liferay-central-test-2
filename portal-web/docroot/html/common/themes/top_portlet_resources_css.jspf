@@ -17,7 +17,7 @@
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-	long lastModifiedTimestamp = themeDisplay.getTheme().getTimestamp();
+	long lastModifiedTimestamp = theme.getTimestamp();
 
 	if (themeDisplay.isThemeJsFastLoad()) {
 		for (Portlet curPortlet : portlets) {
@@ -66,23 +66,26 @@
 
 				if (!portletResourceStaticURLs.contains(headerPortalCss)) {
 					portletResourceStaticURLs.add(headerPortalCss);
-		%>
+	%>
 
 					<link href="<%= HtmlUtil.escape(headerPortalCss) %>" rel="stylesheet" type="text/css" />
 
-		<%
+	<%
 				}
 			}
 		}
 	}
 
 	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
-		%>
+	%>
+
 		<link href="<%= sb.toString() %>" rel="stylesheet" type="text/css" />
-		<%
+
+	<%
 	}
 
 	sb = new StringBuilder(portletComboPath);
+
 	hasComboScript = false;
 
 	for (Portlet curPortlet : portlets) {
@@ -91,10 +94,12 @@
 				portletResourceStaticURLs.add(headerPortletCss);
 
 				sb.append("&");
+
 				if ((curPortlet.getContextPath() != null) && (curPortlet.getContextPath() != PortalUtil.getPathContext())) {
 					sb.append(curPortlet.getContextPath());
 					sb.append(':');
 				}
+
 				sb.append(HtmlUtil.escape(headerPortletCss));
 
 				hasComboScript = true;
@@ -114,20 +119,22 @@
 
 				if (!portletResourceStaticURLs.contains(headerPortletCss)) {
 					portletResourceStaticURLs.add(headerPortletCss);
-		%>
+	%>
 
 					<link href="<%= HtmlUtil.escape(headerPortletCss) %>" rel="stylesheet" type="text/css" />
 
-		<%
+	<%
 				}
 			}
 		}
 	}
 
 	if (themeDisplay.isThemeJsFastLoad() && hasComboScript) {
-		%>
+	%>
+
 		<link href="<%= sb.toString() %>" rel="stylesheet" type="text/css" />
-		<%
+
+	<%
 	}
 	%>
 

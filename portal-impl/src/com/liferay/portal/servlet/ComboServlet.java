@@ -414,12 +414,12 @@ public class ComboServlet extends HttpServlet {
 
 	private static class ModulePathContainer {
 
-		public String getResourcePath() {
-			return _resourcePath;
-		}
-
 		public String getModuleContextPath() {
 			return _moduleContextPath;
+		}
+
+		public String getResourcePath() {
+			return _resourcePath;
 		}
 
 		private ModulePathContainer(String modulePathString) {
@@ -439,8 +439,8 @@ public class ComboServlet extends HttpServlet {
 			}
 		}
 
-		private String _resourcePath;
 		private String _moduleContextPath;
+		private String _resourcePath;
 	}
 
 }
