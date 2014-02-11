@@ -37,7 +37,7 @@
 		request.setAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS, portletResourceStaticURLs);
 	}
 
-	StringBuilder sb = new StringBuilder(portletComboPath);
+	StringBundler sb = new StringBundler(portletComboPath);
 
 	boolean hasComboScript = false;
 
@@ -82,7 +82,7 @@
 		<%
 	}
 
-	sb = new StringBuilder(portletComboPath);
+	sb = new StringBundler(portletComboPath);
 
 	hasComboScript = false;
 
