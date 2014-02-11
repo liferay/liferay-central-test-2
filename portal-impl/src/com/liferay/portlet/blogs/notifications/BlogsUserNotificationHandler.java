@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -40,7 +41,7 @@ public class BlogsUserNotificationHandler
 	}
 
 	@Override
-	protected String getTitle(BlogsEntry entry) {
+	protected String getTitle(BlogsEntry entry, ServiceContext serviceContext) {
 		return entry.getTitle();
 	}
 

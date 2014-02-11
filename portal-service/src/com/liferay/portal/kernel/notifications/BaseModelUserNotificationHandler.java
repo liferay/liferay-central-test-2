@@ -77,7 +77,9 @@ public abstract class BaseModelUserNotificationHandler<T extends AuditedModel>
 			serviceContext.translate(
 				title, HtmlUtil.escape(getUserName(baseModel))));
 		sb.append("</div><div class=\"body\">");
-		sb.append(HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50));
+		sb.append(
+			HtmlUtil.escape(
+				StringUtil.shorten(getTitle(baseModel, serviceContext)), 50));
 		sb.append("</div>");
 
 		return sb.toString();
@@ -134,7 +136,8 @@ public abstract class BaseModelUserNotificationHandler<T extends AuditedModel>
 
 	protected abstract String getTitle(int notificationType);
 
-	protected abstract String getTitle(T baseModel);
+	protected abstract String getTitle(
+		T baseModel, ServiceContext serviceContext);
 
 	protected String getUserName(T baseModel) {
 		return PortalUtil.getUserName(baseModel.getUserId(), StringPool.BLANK);

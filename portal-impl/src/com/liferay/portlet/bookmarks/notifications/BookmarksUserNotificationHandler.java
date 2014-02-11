@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
@@ -42,7 +43,9 @@ public class BookmarksUserNotificationHandler
 	}
 
 	@Override
-	protected String getTitle(BookmarksEntry entry) {
+	protected String getTitle(
+		BookmarksEntry entry, ServiceContext serviceContext) {
+
 		return entry.getName();
 	}
 

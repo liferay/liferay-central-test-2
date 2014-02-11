@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
@@ -46,7 +47,9 @@ public class DocumentLibraryUserNotificationHandler
 	}
 
 	@Override
-	protected String getTitle(FileEntry fileEntry) {
+	protected String getTitle(
+		FileEntry fileEntry, ServiceContext serviceContext) {
+
 		return fileEntry.getTitle();
 	}
 
