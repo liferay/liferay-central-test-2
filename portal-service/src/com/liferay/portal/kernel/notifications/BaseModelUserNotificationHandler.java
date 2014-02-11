@@ -46,6 +46,21 @@ import javax.portlet.WindowState;
 public abstract class BaseModelUserNotificationHandler
 	extends BaseUserNotificationHandler {
 
+	protected String getTitle(int notificationType) {
+		if (notificationType ==
+				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
+
+			return "x-added-a-new-blog-entry";
+		}
+		else if (notificationType ==
+					UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY) {
+
+			return "x-updated-a-blog-entry";
+		}
+
+		return StringPool.BLANK;
+	}
+
 	@Override
 	protected String getBody(
 			UserNotificationEvent userNotificationEvent,
@@ -68,18 +83,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		int notificationType = jsonObject.getInt("notificationType");
 
-		String title = StringPool.BLANK;
-
-		if (notificationType ==
-				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
-
-			title = "x-added-a-new-blog-entry";
-		}
-		else if (notificationType ==
-					UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY) {
-
-			title = "x-updated-a-blog-entry";
-		}
+		String title = getTitle(notificationType);
 
 		StringBundler sb = new StringBundler(5);
 
