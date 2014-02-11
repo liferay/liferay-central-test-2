@@ -46,7 +46,7 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(footerPortalCss) && !portletResourceStaticURLs.contains(footerPortalCss)) {
 				portletResourceStaticURLs.add(footerPortalCss);
 
-				sb.append("&");
+				sb.append(StringPool.AMPERSAND);
 				sb.append(HtmlUtil.escape(footerPortalCss));
 
 				hasComboScript = true;
@@ -93,13 +93,13 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(footerPortletCss) && !portletResourceStaticURLs.contains(footerPortletCss)) {
 				portletResourceStaticURLs.add(footerPortletCss);
 
-				sb.append("&");
+				sb.append(StringPool.AMPERSAND);
 
 				String curPortletContextPath = curPortlet.getContextPath();
 
 				if ((curPortletContextPath != null) && !curPortletContextPath.equals(PortalUtil.getPathContext())) {
 					sb.append(curPortletContextPath);
-					sb.append(':');
+					sb.append(StringPool.COLON);
 				}
 
 				sb.append(HtmlUtil.escape(footerPortletCss));

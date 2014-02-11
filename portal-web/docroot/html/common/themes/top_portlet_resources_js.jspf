@@ -46,7 +46,7 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(headerPortalJavaScript) && !portletResourceStaticURLs.contains(headerPortalJavaScript) && !themeDisplay.isIncludedJs(headerPortalJavaScript)) {
 				portletResourceStaticURLs.add(headerPortalJavaScript);
 
-				sb.append("&");
+				sb.append(StringPool.AMPERSAND);
 				sb.append(HtmlUtil.escape(headerPortalJavaScript));
 
 				hasComboScript = true;
@@ -93,13 +93,13 @@
 			if (themeDisplay.isThemeJsFastLoad() && !HttpUtil.hasProtocol(headerPortletJavaScript) && !portletResourceStaticURLs.contains(headerPortletJavaScript)) {
 				portletResourceStaticURLs.add(headerPortletJavaScript);
 
-				sb.append("&");
+				sb.append(StringPool.AMPERSAND);
 
 				String curPortletContextPath = curPortlet.getContextPath();
 
 				if ((curPortletContextPath != null) && !curPortletContextPath.equals(PortalUtil.getPathContext())) {
 					sb.append(curPortletContextPath);
-					sb.append(':');
+					sb.append(StringPool.COLON);
 				}
 
 				sb.append(HtmlUtil.escape(headerPortletJavaScript));
