@@ -27,7 +27,7 @@
 		}
 	}
 
-	String portletComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo/", "minifierType=&themeId=" + themeDisplay.getThemeId(), lastModifiedTimestamp);
+	String portletComboPath = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=&themeId=" + themeDisplay.getThemeId(), lastModifiedTimestamp);
 
 	Set<String> portletResourceStaticURLs = (Set<String>)request.getAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS);
 
