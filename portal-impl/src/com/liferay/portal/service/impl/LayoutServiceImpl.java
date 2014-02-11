@@ -1188,22 +1188,21 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), targetGroupId, ActionKeys.PUBLISH_STAGING);
 
-		String jobName = PortalUUIDUtil.generate();
-
 		Trigger trigger = new CronTrigger(
-			jobName, groupName, schedulerStartDate, schedulerEndDate, cronText);
+			PortalUUIDUtil.generate(), groupName, schedulerStartDate,
+			schedulerEndDate, cronText);
 
-		Map<String, Serializable> configurationSettingsMap =
+		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
 				getUserId(), sourceGroupId, targetGroupId, privateLayout,
 				layoutIdMap, parameterMap, startDate, endDate);
 
 		ExportImportConfiguration exportImportConfiguration =
 			exportImportConfigurationLocalService.addExportImportConfiguration(
-				getUserId(), sourceGroupId, jobName, description,
+				getUserId(), sourceGroupId, trigger.getJobName(), description,
 				ExportImportConfigurationConstants.
 					TYPE_SCHEDULED_PUBLISH_LAYOUT_LOCAL,
-				configurationSettingsMap, new ServiceContext());
+				settingsMap, new ServiceContext());
 
 		SchedulerEngineHelperUtil.schedule(
 			trigger, StorageType.PERSISTED, description,
@@ -1255,12 +1254,11 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 		GroupPermissionUtil.check(
 			getPermissionChecker(), sourceGroupId, ActionKeys.PUBLISH_STAGING);
 
-		String jobName = PortalUUIDUtil.generate();
-
 		Trigger trigger = new CronTrigger(
-			jobName, groupName, schedulerStartDate, schedulerEndDate, cronText);
+			PortalUUIDUtil.generate(), groupName, schedulerStartDate,
+			schedulerEndDate, cronText);
 
-		Map<String, Serializable> configurationSettingsMap =
+		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
 				getUserId(), sourceGroupId, privateLayout, layoutIdMap,
 				parameterMap, remoteAddress, remotePort, remotePathContext,
@@ -1269,10 +1267,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		ExportImportConfiguration exportImportConfiguration =
 			exportImportConfigurationLocalService.addExportImportConfiguration(
-				getUserId(), sourceGroupId, jobName, description,
+				getUserId(), sourceGroupId, trigger.getJobName(), description,
 				ExportImportConfigurationConstants.
 					TYPE_SCHEDULED_PUBLISH_LAYOUT_REMOTE,
-				configurationSettingsMap, new ServiceContext());
+				settingsMap, new ServiceContext());
 
 		SchedulerEngineHelperUtil.schedule(
 			trigger, StorageType.PERSISTED, description,

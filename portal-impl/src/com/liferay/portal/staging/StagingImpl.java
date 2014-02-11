@@ -2297,7 +2297,7 @@ public class StagingImpl implements Staging {
 			finally {
 				messageStatus.stopTimer();
 
-				Map<String, Serializable> configurationSettingsMap =
+				Map<String, Serializable> settingsMap =
 					ExportImportConfigurationSettingsMapFactory.
 						buildSettingsMap(
 							themeDisplay.getUserId(), sourceGroupId,
@@ -2312,7 +2312,7 @@ public class StagingImpl implements Staging {
 							PortalUUIDUtil.generate(), StringPool.BLANK,
 							ExportImportConfigurationConstants.
 								TYPE_PUBLISH_LAYOUT_LOCAL,
-							configurationSettingsMap, new ServiceContext());
+							settingsMap, new ServiceContext());
 
 				messageStatus.setPayload(exportImportConfiguration);
 
@@ -2450,7 +2450,7 @@ public class StagingImpl implements Staging {
 			finally {
 				messageStatus.stopTimer();
 
-				Map<String, Serializable> configurationSettingsMap =
+				Map<String, Serializable> settingsMap =
 					ExportImportConfigurationSettingsMapFactory.
 						buildSettingsMap(
 							themeDisplay.getUserId(), groupId, privateLayout,
@@ -2466,7 +2466,7 @@ public class StagingImpl implements Staging {
 							PortalUUIDUtil.generate(), StringPool.BLANK,
 							ExportImportConfigurationConstants.
 								TYPE_PUBLISH_LAYOUT_REMOTE,
-							configurationSettingsMap, new ServiceContext());
+							settingsMap, new ServiceContext());
 
 				messageStatus.setPayload(exportImportConfiguration);
 
