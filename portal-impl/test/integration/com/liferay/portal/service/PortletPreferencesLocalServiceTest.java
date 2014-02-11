@@ -69,13 +69,13 @@ public class PortletPreferencesLocalServiceTest {
 
 		assertNullLayoutJxPortletPreferences(_layout, _portlet);
 
-		String portletPreferencesAsXML =
+		String portletPreferencesXML =
 			PortletPreferencesTestUtil.getPortletPreferencesXML(
 				_NAME, _MULTIPLE_VALUES);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesTestUtil.addLayoutPortletPreferences(
-				_layout, _portlet, portletPreferencesAsXML);
+				_layout, _portlet, portletPreferencesXML);
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			PortletPreferencesTestUtil.toPortletPreferencesImpl(
@@ -135,13 +135,13 @@ public class PortletPreferencesLocalServiceTest {
 
 		assertNullLayoutJxPortletPreferences(_layout, _portlet);
 
-		String portletPreferencesAsXML =
+		String portletPreferencesXML =
 			PortletPreferencesTestUtil.getPortletPreferencesXML(
 				_NAME, _SINGLE_VALUE);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesTestUtil.addLayoutPortletPreferences(
-				_layout, _portlet, portletPreferencesAsXML);
+				_layout, _portlet, portletPreferencesXML);
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			PortletPreferencesTestUtil.toPortletPreferencesImpl(
@@ -156,11 +156,11 @@ public class PortletPreferencesLocalServiceTest {
 
 		assertNullLayoutJxPortletPreferences(_layout, _portlet);
 
-		String portletPreferencesAsXML =
+		String portletPreferencesXML =
 			PortletPreferencesTestUtil.getPortletPreferencesXML(
 				_NAME, _SINGLE_VALUE);
 
-		_portlet.setDefaultPreferences(portletPreferencesAsXML);
+		_portlet.setDefaultPreferences(portletPreferencesXML);
 
 		PortletPreferences portletPreferences =
 			PortletPreferencesTestUtil.addLayoutPortletPreferences(
