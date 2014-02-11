@@ -22,7 +22,9 @@ import com.liferay.portal.kernel.servlet.ServletContextPool;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URI;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 
 import org.junit.Before;
@@ -50,18 +52,19 @@ public class ComboServletTest extends PowerMockito {
 
 	@BeforeClass
 	public static void setUpClass() throws Exception {
-
 		MemoryPortalCacheManager<Serializable, Serializable>
 			memoryPortalCacheManager =
 				new MemoryPortalCacheManager<Serializable, Serializable>();
 
 		memoryPortalCacheManager.afterPropertiesSet();
 
-		SingleVMPoolImpl singleVMPool = new SingleVMPoolImpl();
+		SingleVMPoolImpl singleVMPoolImpl = new SingleVMPoolImpl();
 
-		singleVMPool.setPortalCacheManager(memoryPortalCacheManager);
+		singleVMPoolImpl.setPortalCacheManager(memoryPortalCacheManager);
 
-		new SingleVMPoolUtil().setSingleVMPool(singleVMPool);
+		SingleVMPoolUtil singleVMPoolUtil = new SingleVMPoolUtil();
+
+		singleVMPoolUtil.setSingleVMPool(singleVMPoolImpl);
 	}
 
 	@Before
@@ -70,65 +73,69 @@ public class ComboServletTest extends PowerMockito {
 
 		_portalServletContext = spy(new MockServletContext());
 
-		MockServletConfig mockServletConfig = new MockServletConfig(
+		ServletConfig servletConfig = new MockServletConfig(
 			_portalServletContext);
 
 		_portalServletContext.setContextPath("portal");
 
 		File tempFile = _temporaryFolder.newFile();
+		
+		URI tempFileURI = tempFile.toURI();
 
 		when(
 			_portalServletContext.getResource(Mockito.anyString())
 		).thenReturn(
-			tempFile.toURI().toURL()
+			tempFileURI.toURL()
 		);
 
-		_comboServlet.init(mockServletConfig);
+		_comboServlet.init(servletConfig);
 
 		_pluginServletContext = spy(new MockServletContext("plugin-context"));
 
 		when(
 			_pluginServletContext.getResource(Mockito.anyString())
 		).thenReturn(
-			tempFile.toURI().toURL()
+			tempFileURI.toURL()
 		);
 
 		ServletContextPool.put("plugin-context", _pluginServletContext);
 	}
 
 	@Test(expected = ServletException.class)
-	public void testGetResourceFromNonExistingPluginContext() throws Exception {
+	public void testGetResourceFromNonexistingPluginContext() throws Exception {
 		_comboServlet.getResourceURL(
 			"non-existing-plugin-context:/js/javascript.js");
 	}
 
 	@Test
 	public void testGetResourceFromPluginContext() throws Exception {
-		String resource = "plugin-context:/js/javascript.js";
+		_comboServlet.getResourceURL("plugin-context:/js/javascript.js");
 
-		_comboServlet.getResourceURL(resource);
-
-		verify(_pluginServletContext).getResource("/js/javascript.js");
+		verify(_pluginServletContext);
+		
+		_pluginServletContext.getResource("/js/javascript.js");
 	}
 
 	@Test
 	public void testGetResourceFromPluginContextWithInitialSlash()
 		throws Exception {
 
-		String resource = "/plugin-context:/js/javascript.js";
+		_comboServlet.getResourceURL("/plugin-context:/js/javascript.js");
 
-		_comboServlet.getResourceURL(resource);
-
-		verify(_pluginServletContext).getResource("/js/javascript.js");
+		verify(_pluginServletContext);
+		
+		_pluginServletContext.getResource("/js/javascript.js");
 	}
 
 	@Test
 	public void testGetResourceFromPortalContext() throws Exception {
-		String resource = "/js/javascript.js";
+		String path = "/js/javascript.js";
 
-		_comboServlet.getResourceURL(resource);
+		_comboServlet.getResourceURL("/js/javascript.js");
 
-		verify(_portalServletContext).getResource(resource);
+		verify(_portalServletContext);
+		
+		_portalServletContext.getResource(path);
 	}
 
 	private ComboServlet _comboServlet;

@@ -31,7 +31,6 @@ public class ModulePathContainerTest {
 
 		Assert.assertEquals(
 			StringPool.BLANK, modulePathContainer.getModuleContextPath());
-
 		Assert.assertEquals(
 			"/js/javascript.js", modulePathContainer.getResourcePath());
 	}
@@ -44,7 +43,6 @@ public class ModulePathContainerTest {
 
 		Assert.assertEquals(
 			"plugin-context", modulePathContainer.getModuleContextPath());
-
 		Assert.assertEquals(
 			"/js/javascript.js", modulePathContainer.getResourcePath());
 	}
@@ -56,7 +54,6 @@ public class ModulePathContainerTest {
 
 		Assert.assertEquals(
 			"/plugin-context", modulePathContainer.getModuleContextPath());
-
 		Assert.assertEquals(
 			StringPool.BLANK, modulePathContainer.getResourcePath());
 	}
@@ -69,7 +66,6 @@ public class ModulePathContainerTest {
 
 		Assert.assertEquals(
 			"/plugin-context", modulePathContainer.getModuleContextPath());
-
 		Assert.assertEquals(
 			"/js/javascript.js", modulePathContainer.getResourcePath());
 	}
