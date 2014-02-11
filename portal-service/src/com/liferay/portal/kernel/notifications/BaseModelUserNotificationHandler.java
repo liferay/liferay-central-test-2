@@ -20,9 +20,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -32,8 +30,6 @@ import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletURLFactoryUtil;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
@@ -46,9 +42,8 @@ import javax.portlet.WindowState;
 public abstract class BaseModelUserNotificationHandler
 	extends BaseUserNotificationHandler {
 
-	protected BaseModel<?> fetchBaseModel(long classPK) throws SystemException {
-		return BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
-	}
+	protected abstract BaseModel<?> fetchBaseModel(long classPK)
+		throws SystemException;
 
 	@Override
 	protected String getBody(
@@ -136,41 +131,13 @@ public abstract class BaseModelUserNotificationHandler
 		return portletURL.toString();
 	}
 
-	protected String getTitle(BaseModel<?> baseModel) {
-		BlogsEntry entry = (BlogsEntry)baseModel;
+	protected abstract String getTitle(BaseModel<?> baseModel);
 
-		return entry.getTitle();
-	}
+	protected abstract String getTitle(int notificationType);
 
-	protected String getTitle(int notificationType) {
-		if (notificationType ==
-				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
+	protected abstract String getUserName(BaseModel<?> baseModel);
 
-			return "x-added-a-new-blog-entry";
-		}
-		else if (notificationType ==
-					UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY) {
-
-			return "x-updated-a-blog-entry";
-		}
-
-		return StringPool.BLANK;
-	}
-
-	protected String getUserName(BaseModel<?> baseModel) {
-		AuditedModel auditedModel = (AuditedModel)baseModel;
-
-		return PortalUtil.getUserName(
-			auditedModel.getUserId(), StringPool.BLANK);
-	}
-
-	protected void setLinkParameters(
-		PortletURL portletURL, BaseModel<?> baseModel) {
-
-		BlogsEntry entry = (BlogsEntry)baseModel;
-
-		portletURL.setParameter("struts_action", "/blogs/view_entry");
-		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
-	}
+	protected abstract void setLinkParameters(
+		PortletURL portletURL, BaseModel<?> baseModel);
 
 }
