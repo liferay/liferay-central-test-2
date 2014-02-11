@@ -61,6 +61,23 @@ public abstract class BaseModelUserNotificationHandler
 		return StringPool.BLANK;
 	}
 
+	protected String getTitle(BaseModel baseModel) {
+		BlogsEntry entry = (BlogsEntry)baseModel;
+	
+		return entry.getTitle();
+	}
+
+	protected BaseModel fetchBaseModel(long classPK) throws SystemException {
+		return BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
+	}
+
+	protected String getUserName(BaseModel baseModel) {
+		AuditedModel auditedModel = (AuditedModel)baseModel;
+
+		return PortalUtil.getUserName(
+			auditedModel.getUserId(), StringPool.BLANK);
+	}
+
 	@Override
 	protected String getBody(
 			UserNotificationEvent userNotificationEvent,
@@ -72,9 +89,9 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
+		BaseModel baseModel = fetchBaseModel(classPK);
 
-		if (entry == null) {
+		if (baseModel == null) {
 			UserNotificationEventLocalServiceUtil.deleteUserNotificationEvent(
 				userNotificationEvent.getUserNotificationEventId());
 
@@ -90,12 +107,10 @@ public abstract class BaseModelUserNotificationHandler
 		sb.append("<div class=\"title\">");
 		sb.append(
 			serviceContext.translate(
-				title,
-				HtmlUtil.escape(
-					PortalUtil.getUserName(
-						entry.getUserId(), StringPool.BLANK))));
+				title, HtmlUtil.escape(getUserName(baseModel))));
 		sb.append("</div><div class=\"body\">");
-		sb.append(HtmlUtil.escape(StringUtil.shorten(entry.getTitle(), 50)));
+		sb.append(
+			HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50)));
 		sb.append("</div>");
 
 		return sb.toString();
@@ -112,9 +127,9 @@ public abstract class BaseModelUserNotificationHandler
 
 		long classPK = jsonObject.getLong("classPK");
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
+		BaseModel baseModel = fetchBaseModel(classPK);
 
-		if (entry == null) {
+		if (baseModel == null) {
 			return null;
 		}
 
