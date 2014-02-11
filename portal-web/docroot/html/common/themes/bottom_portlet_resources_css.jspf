@@ -105,7 +105,6 @@
 				hasComboScript = true;
 			}
 			else {
-
 				if (!HttpUtil.hasProtocol(footerPortletCss)) {
 					Portlet curRootPortlet = curPortlet.getRootPortlet();
 
