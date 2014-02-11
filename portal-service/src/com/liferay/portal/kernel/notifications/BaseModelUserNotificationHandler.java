@@ -17,8 +17,6 @@ package com.liferay.portal.kernel.notifications;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
-import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -48,36 +46,8 @@ import javax.portlet.WindowState;
 public abstract class BaseModelUserNotificationHandler
 	extends BaseUserNotificationHandler {
 
-	protected String getTitle(int notificationType) {
-		if (notificationType ==
-				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
-
-			return "x-added-a-new-blog-entry";
-		}
-		else if (notificationType ==
-					UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY) {
-
-			return "x-updated-a-blog-entry";
-		}
-
-		return StringPool.BLANK;
-	}
-
-	protected String getTitle(BaseModel<?> baseModel) {
-		BlogsEntry entry = (BlogsEntry)baseModel;
-	
-		return entry.getTitle();
-	}
-
 	protected BaseModel<?> fetchBaseModel(long classPK) throws SystemException {
 		return BlogsEntryLocalServiceUtil.fetchBlogsEntry(classPK);
-	}
-
-	protected String getUserName(BaseModel<?> baseModel) {
-		AuditedModel auditedModel = (AuditedModel)baseModel;
-
-		return PortalUtil.getUserName(
-			auditedModel.getUserId(), StringPool.BLANK);
 	}
 
 	@Override
@@ -111,20 +81,10 @@ public abstract class BaseModelUserNotificationHandler
 			serviceContext.translate(
 				title, HtmlUtil.escape(getUserName(baseModel))));
 		sb.append("</div><div class=\"body\">");
-		sb.append(
-			HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50));
+		sb.append(HtmlUtil.escape(StringUtil.shorten(getTitle(baseModel)), 50));
 		sb.append("</div>");
 
 		return sb.toString();
-	}
-
-	protected void setLinkParameters(
-		PortletURL portletURL, BaseModel<?> baseModel) {
-
-		BlogsEntry entry = (BlogsEntry)baseModel;
-
-		portletURL.setParameter("struts_action", "/blogs/view_entry");
-		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 	}
 
 	@Override
@@ -166,8 +126,7 @@ public abstract class BaseModelUserNotificationHandler
 			LiferayPortletResponse liferayPortletResponse =
 				serviceContext.getLiferayPortletResponse();
 
-			portletURL = liferayPortletResponse.createRenderURL(
-				getPortletId());
+			portletURL = liferayPortletResponse.createRenderURL(getPortletId());
 
 			setLinkParameters(portletURL, baseModel);
 
@@ -175,6 +134,43 @@ public abstract class BaseModelUserNotificationHandler
 		}
 
 		return portletURL.toString();
+	}
+
+	protected String getTitle(BaseModel<?> baseModel) {
+		BlogsEntry entry = (BlogsEntry)baseModel;
+
+		return entry.getTitle();
+	}
+
+	protected String getTitle(int notificationType) {
+		if (notificationType ==
+				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
+
+			return "x-added-a-new-blog-entry";
+		}
+		else if (notificationType ==
+					UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY) {
+
+			return "x-updated-a-blog-entry";
+		}
+
+		return StringPool.BLANK;
+	}
+
+	protected String getUserName(BaseModel<?> baseModel) {
+		AuditedModel auditedModel = (AuditedModel)baseModel;
+
+		return PortalUtil.getUserName(
+			auditedModel.getUserId(), StringPool.BLANK);
+	}
+
+	protected void setLinkParameters(
+		PortletURL portletURL, BaseModel<?> baseModel) {
+
+		BlogsEntry entry = (BlogsEntry)baseModel;
+
+		portletURL.setParameter("struts_action", "/blogs/view_entry");
+		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 	}
 
 }
