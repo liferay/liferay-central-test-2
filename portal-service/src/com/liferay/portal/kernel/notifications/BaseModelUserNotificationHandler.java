@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.blogs.notifications;
+package com.liferay.portal.kernel.notifications;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -40,13 +40,11 @@ import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 /**
+ * @author Brian Wing Shun Chan
  * @author Sergio González
  */
-public class BlogsUserNotificationHandler extends BaseUserNotificationHandler {
-
-	public BlogsUserNotificationHandler() {
-		setPortletId(PortletKeys.BLOGS);
-	}
+public abstract class BaseModelUserNotificationHandler
+	extends BaseUserNotificationHandler {
 
 	@Override
 	protected String getBody(
