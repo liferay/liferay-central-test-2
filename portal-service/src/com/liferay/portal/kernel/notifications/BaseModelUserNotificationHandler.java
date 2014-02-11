@@ -20,7 +20,9 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.AuditedModel;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationEvent;
@@ -38,7 +40,7 @@ import javax.portlet.WindowState;
  * @author Brian Wing Shun Chan
  * @author Sergio González
  */
-public abstract class BaseModelUserNotificationHandler<T>
+public abstract class BaseModelUserNotificationHandler<T extends AuditedModel>
 	extends BaseUserNotificationHandler {
 
 	protected abstract T fetchBaseModel(long classPK)
@@ -134,7 +136,9 @@ public abstract class BaseModelUserNotificationHandler<T>
 
 	protected abstract String getTitle(T baseModel);
 
-	protected abstract String getUserName(T baseModel);
+	protected String getUserName(T baseModel) {
+		return PortalUtil.getUserName(baseModel.getUserId(), StringPool.BLANK);
+	}
 
 	protected abstract void setLinkParameters(
 		PortletURL portletURL, T baseModel);

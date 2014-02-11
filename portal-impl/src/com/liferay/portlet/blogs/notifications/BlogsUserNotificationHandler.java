@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
@@ -59,11 +58,6 @@ public class BlogsUserNotificationHandler
 		}
 
 		return StringPool.BLANK;
-	}
-
-	@Override
-	protected String getUserName(BlogsEntry entry) {
-		return PortalUtil.getUserName(entry.getUserId(), StringPool.BLANK);
 	}
 
 	@Override

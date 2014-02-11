@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.notifications.BaseModelUserNotificationHandler;
 import com.liferay.portal.kernel.notifications.UserNotificationDefinition;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
@@ -59,11 +58,6 @@ public class WikiUserNotificationHandler
 	@Override
 	protected String getTitle(WikiPage page) {
 		return page.getTitle();
-	}
-
-	@Override
-	protected String getUserName(WikiPage page) {
-		return PortalUtil.getUserName(page.getUserId(), StringPool.BLANK);
 	}
 
 	@Override
