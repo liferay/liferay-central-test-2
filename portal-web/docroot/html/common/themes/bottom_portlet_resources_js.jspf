@@ -95,8 +95,10 @@
 
 				sb.append("&");
 
-				if ((curPortlet.getContextPath() != null) && (curPortlet.getContextPath() != PortalUtil.getPathContext())) {
-					sb.append(curPortlet.getContextPath());
+				String curPortletContextPath = curPortlet.getContextPath();
+
+				if ((curPortletContextPath != null) && !curPortletContextPath.equals(PortalUtil.getPathContext())) {
+					sb.append(curPortletContextPath);
 					sb.append(':');
 				}
 
