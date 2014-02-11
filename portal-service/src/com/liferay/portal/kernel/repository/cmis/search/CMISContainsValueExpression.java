@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.StringPool;
 public class CMISContainsValueExpression implements CMISCriterion {
 
 	public CMISContainsValueExpression(String value) {
-
 		_value = value;
 	}
 

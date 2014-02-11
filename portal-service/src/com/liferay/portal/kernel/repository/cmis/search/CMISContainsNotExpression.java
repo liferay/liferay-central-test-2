@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.repository.cmis.search;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * @author Mika Koivisto
  */
@@ -25,7 +27,7 @@ public class CMISContainsNotExpression implements CMISCriterion {
 
 	@Override
 	public String toQueryFragment() {
-		return "-".concat(_cmisCriterion.toQueryFragment());
+		return StringPool.DASH.concat(_cmisCriterion.toQueryFragment());
 	}
 
 	private CMISCriterion _cmisCriterion;

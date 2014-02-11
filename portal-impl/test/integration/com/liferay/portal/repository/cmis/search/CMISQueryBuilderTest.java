@@ -157,8 +157,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"((cmis:name = 'test' OR cmis:createdBy = 'test') " +
-				"OR CONTAINS('test'))",
+			"((cmis:name = 'test' OR cmis:createdBy = 'test') OR " +
+				"CONTAINS('test'))",
 			cmisQuery);
 	}
 
@@ -180,9 +180,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"((cmis:name LIKE 'test%.jpg' " +
-				"OR cmis:createdBy LIKE 'test%.jpg') " +
-				"OR CONTAINS('(test AND .jpg)'))",
+			"((cmis:name LIKE 'test%.jpg' OR cmis:createdBy LIKE " +
+				"'test%.jpg') OR CONTAINS('(test AND .jpg)'))",
 			cmisQuery);
 	}
 
@@ -370,8 +369,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"((IN_FOLDER('1000') AND (cmis:name = 'test' OR " +
-				"cmis:createdBy = 'test')) OR CONTAINS('test'))",
+			"((IN_FOLDER('1000') AND (cmis:name = 'test' OR cmis:createdBy " +
+				"= 'test')) OR CONTAINS('test'))",
 			cmisQuery);
 	}
 
@@ -405,8 +404,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"(cmis:name = 'My test document.jpg' OR " +
-				"cmis:createdBy = 'My test document.jpg')",
+			"(cmis:name = 'My test document.jpg' OR cmis:createdBy = 'My " +
+				"test document.jpg')",
 			cmisQuery);
 	}
 
@@ -440,8 +439,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"(cmis:name = 'test document' OR " +
-				"cmis:createdBy = 'test document')",
+			"(cmis:name = 'test document' OR cmis:createdBy = 'test " +
+				"document')",
 			cmisQuery);
 	}
 
@@ -504,8 +503,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 			searchContext, searchQuery);
 
 		assertQueryEquals(
-			"((IN_TREE('1000') AND (cmis:name = 'test' OR " +
-				"cmis:createdBy = 'test')) OR CONTAINS('test'))",
+			"((IN_TREE('1000') AND (cmis:name = 'test' OR cmis:createdBy = " +
+				"'test')) OR CONTAINS('test'))",
 			cmisQuery);
 	}
 
