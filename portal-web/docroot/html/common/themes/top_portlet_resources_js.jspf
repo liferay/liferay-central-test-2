@@ -80,7 +80,7 @@
 	%>
 
 		<script src="<%= sb.toString() %>" type="text/javascript"></script>
-	
+
 	<%
 	}
 
