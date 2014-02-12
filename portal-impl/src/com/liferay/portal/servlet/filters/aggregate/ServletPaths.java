@@ -37,7 +37,7 @@ public class ServletPaths {
 
 	public static String getParentPath(String resourcePath) {
 		if (Validator.isNull(resourcePath)) {
-			throw new IllegalArgumentException("ResourcePath is null");
+			throw new IllegalArgumentException("Resource path is null");
 		}
 
 		if (resourcePath.charAt(resourcePath.length() - 1) == CharPool.SLASH) {
@@ -57,11 +57,11 @@ public class ServletPaths {
 		throws MalformedURLException {
 
 		if (servletContext == null) {
-			throw new NullPointerException("ServletContext is null");
+			throw new NullPointerException("Servlet context is null");
 		}
 
 		if (Validator.isNull(resourcePath)) {
-			throw new IllegalArgumentException("ResourcePath is null");
+			throw new IllegalArgumentException("Resource path is null");
 		}
 
 		_servletContext = servletContext;

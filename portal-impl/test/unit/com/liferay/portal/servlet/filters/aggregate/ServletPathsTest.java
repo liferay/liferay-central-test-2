@@ -75,7 +75,7 @@ public class ServletPathsTest {
 			Assert.fail();
 		}
 		catch (NullPointerException npe) {
-			Assert.assertEquals("ServletContext is null", npe.getMessage());
+			Assert.assertEquals("Servlet context is null", npe.getMessage());
 		}
 
 		try {
@@ -84,7 +84,7 @@ public class ServletPathsTest {
 			Assert.fail();
 		}
 		catch (IllegalArgumentException iae) {
-			Assert.assertEquals("ResourcePath is null", iae.getMessage());
+			Assert.assertEquals("Resource path is null", iae.getMessage());
 		}
 
 		ServletContext servletContext = _prepareServletContext(
@@ -110,7 +110,6 @@ public class ServletPathsTest {
 		ServletPaths servletPaths1 = new ServletPaths(servletContext, "/test1");
 
 		Assert.assertSame(servletPaths1, servletPaths1.down(null));
-
 		Assert.assertSame(servletPaths1, servletPaths1.down(StringPool.SLASH));
 
 		ServletPaths servletPaths2 = servletPaths1.down("test2/");
@@ -164,7 +163,6 @@ public class ServletPathsTest {
 		servletPaths = new ServletPaths(servletContext, file1.getName());
 
 		Assert.assertNull(servletPaths.getContent());
-
 		Assert.assertEquals(1, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
@@ -186,16 +184,13 @@ public class ServletPathsTest {
 			Assert.fail();
 		}
 		catch (IllegalArgumentException iae) {
-			Assert.assertEquals("ResourcePath is null", iae.getMessage());
+			Assert.assertEquals("Resource path is null", iae.getMessage());
 		}
 
 		Assert.assertEquals(
 			"test1", ServletPaths.getParentPath("test1/test2/"));
-
 		Assert.assertEquals("test1", ServletPaths.getParentPath("test1/test2"));
-
 		Assert.assertEquals("test1", ServletPaths.getParentPath("test1/"));
-
 		Assert.assertEquals("test1", ServletPaths.getParentPath("test1"));
 	}
 
