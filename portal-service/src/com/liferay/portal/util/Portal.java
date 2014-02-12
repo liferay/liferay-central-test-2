@@ -133,15 +133,6 @@ public interface Portal {
 	 */
 	public void addPageTitle(String title, HttpServletRequest request);
 
-	/**
-	 * Adds the portal InetSocketAddress listener to the portal. The listener
-	 * will be notified whenever the portal host and port is set.
-	 *
-	 * @param portalInetSocketAddressEventListener the portal event listener to
-	 *		  add
-	 * @return true if the portalInetSocketAddressEventListener has been added,
-	 *		  otherwise false.
-	 */
 	public boolean addPortalInetSocketAddressEventListener(
 		PortalInetSocketAddressEventListener
 			portalInetSocketAddressEventListener);
@@ -151,7 +142,7 @@ public interface Portal {
 	 * notified whenever the portal port is set.
 	 *
 	 * @param portalPortEventListener the portal port event listener to add
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link #addPortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	public void addPortalPortEventListener(
@@ -1332,7 +1323,7 @@ public interface Portal {
 			portalInetSocketAddressEventListener);
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link #removePortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	public void removePortalPortEventListener(
@@ -1409,8 +1400,8 @@ public interface Portal {
 
 	/**
 	 * Sets the port obtained on the first request to the portal.
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #setPortalAddresses(HttpServletRequest)}
+	 *
+	 * @deprecated As of 7.0.0, replaced by {@link #setPortalInetSocketAddresses(HttpServletRequest)}
 	 */
 	@Deprecated
 	public void setPortalPort(HttpServletRequest request);

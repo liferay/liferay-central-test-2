@@ -575,7 +575,11 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * Adds the portal port event listener to the portal. The listener will be
+	 * notified whenever the portal port is set.
+	 *
+	 * @param portalPortEventListener the portal port event listener to add
+	 * @deprecated As of 7.0.0, replaced by {@link #addPortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	@Override
@@ -6618,7 +6622,7 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link #removePortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	@Override
@@ -6956,8 +6960,9 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by the more general {@link
-	 *             #setPortalAddresses(HttpServletRequest)}
+	 * Sets the port obtained on the first request to the portal.
+	 *
+	 * @deprecated As of 7.0.0, replaced by {@link #setPortalInetSocketAddresses(HttpServletRequest)}
 	 */
 	@Deprecated
 	@Override
