@@ -8142,7 +8142,13 @@ public class PortalImpl implements Portal {
 	private final AtomicReference<InetSocketAddress>
 		_securePortalLocalInetSocketAddress =
 			new AtomicReference<InetSocketAddress>();
+
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #_securePortalServerInetSocketAddress}
+	 */
 	private final AtomicInteger _securePortalPort = new AtomicInteger(-1);
+
 	private final AtomicReference<InetSocketAddress>
 		_securePortalServerInetSocketAddress =
 			new AtomicReference<InetSocketAddress>();
