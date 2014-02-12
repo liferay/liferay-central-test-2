@@ -773,7 +773,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
-	<macrodef name="gradle-task-executor">
+	<macrodef name="gradle-execute">
 		<attribute name="gradleTask" />
 		<attribute name="gradleTaskArgs" default="" />
 		<attribute name="gradleModuleDir" default="" />
