@@ -201,8 +201,6 @@ public class Logger {
 	public void logScreenShots(Object[] arguments) throws Exception {
 		StringBundler sb = new StringBundler();
 
-		String fileName = (String)arguments[0];
-
 		_screenshotCount++;
 
 		sb.append("<img alt=\"");
