@@ -42,11 +42,9 @@ public class DefineObjectsTag extends TagSupport {
 			return SKIP_BODY;
 		}
 
-		pageContext.setAttribute("themeDisplay", themeDisplay);
-		pageContext.setAttribute("company", themeDisplay.getCompany());
 		pageContext.setAttribute("account", themeDisplay.getAccount());
-		pageContext.setAttribute("user", themeDisplay.getUser());
-		pageContext.setAttribute("realUser", themeDisplay.getRealUser());
+		pageContext.setAttribute("colorScheme", themeDisplay.getColorScheme());
+		pageContext.setAttribute("company", themeDisplay.getCompany());
 		pageContext.setAttribute("contact", themeDisplay.getContact());
 
 		if (themeDisplay.getLayout() != null) {
@@ -57,25 +55,24 @@ public class DefineObjectsTag extends TagSupport {
 			pageContext.setAttribute("layouts", themeDisplay.getLayouts());
 		}
 
-		pageContext.setAttribute("plid", new Long(themeDisplay.getPlid()));
-
 		if (themeDisplay.getLayoutTypePortlet() != null) {
 			pageContext.setAttribute(
 				"layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
 		}
 
-		pageContext.setAttribute(
-			"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
+		pageContext.setAttribute("locale", themeDisplay.getLocale());
 		pageContext.setAttribute(
 			"permissionChecker", themeDisplay.getPermissionChecker());
-		pageContext.setAttribute("locale", themeDisplay.getLocale());
-		pageContext.setAttribute("timeZone", themeDisplay.getTimeZone());
+		pageContext.setAttribute("plid", new Long(themeDisplay.getPlid()));
+		pageContext.setAttribute(
+			"portletDisplay", themeDisplay.getPortletDisplay());
+		pageContext.setAttribute("realUser", themeDisplay.getRealUser());
+		pageContext.setAttribute(
+			"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
 		pageContext.setAttribute("theme", themeDisplay.getTheme());
-		pageContext.setAttribute("colorScheme", themeDisplay.getColorScheme());
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		pageContext.setAttribute("portletDisplay", portletDisplay);
+		pageContext.setAttribute("themeDisplay", themeDisplay);
+		pageContext.setAttribute("timeZone", themeDisplay.getTimeZone());
+		pageContext.setAttribute("user", themeDisplay.getUser());
 
 		setPortletSettings(themeDisplay);
 
