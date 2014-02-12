@@ -7996,6 +7996,10 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	protected void notifyPortalPortEventListeners(int portalPort) {
 		for (PortalPortEventListener portalPortEventListener :
 				_portalPortEventListeners) {
@@ -8117,8 +8121,14 @@ public class PortalImpl implements Portal {
 		_portalLocalInetSocketAddress =
 			new AtomicReference<InetSocketAddress>();
 	private final AtomicInteger _portalPort = new AtomicInteger(-1);
+
+	/**
+	 * @deprecated As of 7.0.0
+	 */
+	@Deprecated
 	private List<PortalPortEventListener> _portalPortEventListeners =
 		new ArrayList<PortalPortEventListener>();
+
 	private final AtomicReference<InetSocketAddress>
 		_portalServerInetSocketAddress =
 			new AtomicReference<InetSocketAddress>();

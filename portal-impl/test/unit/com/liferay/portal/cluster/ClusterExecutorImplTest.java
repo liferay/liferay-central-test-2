@@ -1089,9 +1089,6 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 		ClusterExecutorImpl clusterExecutorImpl = null;
 
 		try {
-			List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
-				ClusterExecutorImpl.class.getName(), Level.SEVERE);
-
 			clusterExecutorImpl = getClusterExecutorImpl(false, false);
 
 			ClusterNode clusterNode = clusterExecutorImpl.getLocalClusterNode();

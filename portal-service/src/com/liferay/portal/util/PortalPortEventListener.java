@@ -15,9 +15,9 @@
 package com.liferay.portal.util;
 
 /**
- * @author Michael C. Han
+ * @author     Michael C. Han
  * @deprecated As of 7.0.0, replaced by {@link
- *             com.liferay.portal.util.PortalEventListener}
+ *             com.liferay.portal.util.PortalInetSocketAddressEventListener}
  */
 @Deprecated
 public interface PortalPortEventListener {
