@@ -929,7 +929,7 @@ public interface Portal {
 
 	public Properties getPortalProperties();
 
-	public InetAddress getPortalServerAddress(boolean secure);
+	public InetAddress getPortalServerInetAddress(boolean secure);
 
 	public int getPortalServerPort(boolean secure);
 

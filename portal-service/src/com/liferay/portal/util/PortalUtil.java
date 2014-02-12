@@ -1138,8 +1138,8 @@ public class PortalUtil {
 		return getPortal().getPortalProperties();
 	}
 
-	public static InetAddress getPortalServerAddress(boolean secure) {
-		return getPortal().getPortalServerAddress(secure);
+	public static InetAddress getPortalServerInetAddress(boolean secure) {
+		return getPortal().getPortalServerInetAddress(secure);
 	}
 
 	public static int getPortalServerPort(boolean secure) {
