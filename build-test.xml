@@ -265,7 +265,7 @@ create database lportal2 character set utf8;</echo>
 				</or>
 			</not>
 			<then>
-				<fail>Please set "app.server.type" to one of the following:${line.separator}geronimo, glassfish, jboss, jetty, jonas, resin, tomcat, weblogic, websphere</fail>
+				<fail>Please set "app.server.type" to one of the following:${line.separator}geronimo, glassfish, jboss, jetty, jonas, resin, tomcat, weblogic, or websphere.</fail>
 			</then>
 		</if>
 
