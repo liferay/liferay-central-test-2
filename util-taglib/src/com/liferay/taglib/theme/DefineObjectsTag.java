@@ -77,27 +77,38 @@ public class DefineObjectsTag extends TagSupport {
 
 		pageContext.setAttribute("portletDisplay", portletDisplay);
 
-		String portletId = portletDisplay.getId();
+		setPortletSettings(themeDisplay);
 
+		// Deprecated
+
+		pageContext.setAttribute(
+			"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
+
+		return SKIP_BODY;
+	}
+	
+	protected void setPortletSettings(ThemeDisplay themeDisplay) {
 		try {
+			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+	
 			PortletSettings companyPortletSettings =
 				PortletSettingsFactoryUtil.getCompanyPortletSettings(
-					themeDisplay.getCompanyId(), portletId);
-
+					themeDisplay.getCompanyId(), portletDisplay.getId());
+	
 			pageContext.setAttribute(
 				"companyPortletSettings", companyPortletSettings);
-
+	
 			PortletSettings groupPortletSettings =
 				PortletSettingsFactoryUtil.getGroupPortletSettings(
-					themeDisplay.getSiteGroupId(), portletId);
-
+					themeDisplay.getSiteGroupId(), portletDisplay.getId());
+	
 			pageContext.setAttribute(
 				"groupPortletSettings", groupPortletSettings);
-
+	
 			PortletSettings portletInstancePortletSettings =
 				PortletSettingsFactoryUtil.getPortletInstancePortletSettings(
-					themeDisplay.getLayout(), portletId);
-
+					themeDisplay.getLayout(), portletDisplay.getId());
+	
 			pageContext.setAttribute(
 				"portletInstancePortletSettings",
 				portletInstancePortletSettings);
@@ -108,13 +119,6 @@ public class DefineObjectsTag extends TagSupport {
 		catch (PortalException pe) {
 			throw new RuntimeException(pe);
 		}
-
-		// Deprecated
-
-		pageContext.setAttribute(
-			"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
-
-		return SKIP_BODY;
 	}
 
 }

@@ -53,10 +53,8 @@ PortletPreferences portletPreferences = PortletPreferencesLocalServiceUtil.getSt
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getStrictLayoutPortletSetup(layout, portletId);
 
 PortletSettings companyPortletSettings = PortletSettingsFactoryUtil.getCompanyPortletSettings(layout.getCompanyId(), portletId);
-PortletSettings portletInstancePortletSettings = PortletSettingsFactoryUtil.getPortletInstancePortletSettings(
-		layout, portletId);
-PortletSettings groupPortletSettings = PortletSettingsFactoryUtil.getGroupPortletSettings(
-		themeDisplay.getSiteGroupId(), portletId);
+PortletSettings groupPortletSettings = PortletSettingsFactoryUtil.getGroupPortletSettings(themeDisplay.getSiteGroupId(), portletId);
+PortletSettings portletInstancePortletSettings = PortletSettingsFactoryUtil.getPortletInstancePortletSettings(layout, portletId);
 
 Group group = null;
 boolean privateLayout = false;
