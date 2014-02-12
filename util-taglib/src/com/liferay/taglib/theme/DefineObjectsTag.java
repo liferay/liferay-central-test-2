@@ -79,33 +79,33 @@ public class DefineObjectsTag extends TagSupport {
 		// Deprecated
 
 		pageContext.setAttribute(
-			"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
+			"portletGroupId", themeDisplay.getScopeGroupId());
 
 		return SKIP_BODY;
 	}
-	
+
 	protected void setPortletSettings(ThemeDisplay themeDisplay) {
 		try {
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-	
+
 			PortletSettings companyPortletSettings =
 				PortletSettingsFactoryUtil.getCompanyPortletSettings(
 					themeDisplay.getCompanyId(), portletDisplay.getId());
-	
+
 			pageContext.setAttribute(
 				"companyPortletSettings", companyPortletSettings);
-	
+
 			PortletSettings groupPortletSettings =
 				PortletSettingsFactoryUtil.getGroupPortletSettings(
 					themeDisplay.getSiteGroupId(), portletDisplay.getId());
-	
+
 			pageContext.setAttribute(
 				"groupPortletSettings", groupPortletSettings);
-	
+
 			PortletSettings portletInstancePortletSettings =
 				PortletSettingsFactoryUtil.getPortletInstancePortletSettings(
 					themeDisplay.getLayout(), portletDisplay.getId());
-	
+
 			pageContext.setAttribute(
 				"portletInstancePortletSettings",
 				portletInstancePortletSettings);
