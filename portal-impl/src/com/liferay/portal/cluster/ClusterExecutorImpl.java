@@ -455,20 +455,19 @@ public class ClusterExecutorImpl
 	}
 
 	protected void initLocalClusterNode() {
-		InetAddress bindInetAddress = getBindInetAddress(_controlJChannel);
+		InetAddress inetAddress = getBindInetAddress(_controlJChannel);
 
-		ClusterNode localClusterNode = new ClusterNode(
-			PortalUUIDUtil.generate(), bindInetAddress);
+		ClusterNode clusterNode = new ClusterNode(
+			PortalUUIDUtil.generate(), inetAddress);
 
-		InetSocketAddress portalInetSocketAddress =
+		InetSocketAddress inetSocketAddress =
 			getConfiguredPortalInetSockAddress(_secure);
 
-		if (portalInetSocketAddress != null) {
-			localClusterNode.setPortalInetSocketAddress(
-				portalInetSocketAddress);
+		if (inetSocketAddress != null) {
+			clusterNode.setPortalInetSocketAddress(inetSocketAddress);
 		}
 
-		_localClusterNode = localClusterNode;
+		_localClusterNode = clusterNode;
 	}
 
 	protected boolean isShortcutLocalMethod() {
