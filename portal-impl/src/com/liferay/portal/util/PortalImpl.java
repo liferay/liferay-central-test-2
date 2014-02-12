@@ -3993,40 +3993,38 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public InetAddress getPortalServerInetAddress(boolean secure) {
-		InetSocketAddress serverInetSocketAddress = null;
+		InetSocketAddress inetSocketAddress = null;
 
 		if (secure) {
-			serverInetSocketAddress =
-				_securePortalServerInetSocketAddress.get();
+			inetSocketAddress = _securePortalServerInetSocketAddress.get();
 		}
 		else {
-			serverInetSocketAddress = _portalServerInetSocketAddress.get();
+			inetSocketAddress = _portalServerInetSocketAddress.get();
 		}
 
-		if (serverInetSocketAddress == null) {
+		if (inetSocketAddress == null) {
 			return null;
 		}
 
-		return serverInetSocketAddress.getAddress();
+		return inetSocketAddress.getAddress();
 	}
 
 	@Override
 	public int getPortalServerPort(boolean secure) {
-		InetSocketAddress serverInetSocketAddress = null;
+		InetSocketAddress inetSocketAddress = null;
 
 		if (secure) {
-			serverInetSocketAddress =
-				_securePortalServerInetSocketAddress.get();
+			inetSocketAddress = _securePortalServerInetSocketAddress.get();
 		}
 		else {
-			serverInetSocketAddress = _portalServerInetSocketAddress.get();
+			inetSocketAddress = _portalServerInetSocketAddress.get();
 		}
 
-		if (serverInetSocketAddress == null) {
+		if (inetSocketAddress == null) {
 			return -1;
 		}
 
-		return serverInetSocketAddress.getPort();
+		return inetSocketAddress.getPort();
 	}
 
 	@Override
