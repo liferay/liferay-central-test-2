@@ -8,10 +8,10 @@ subprojects {
 	apply from: "../../gradle/baseline.gradle"
 	apply plugin: "java"
 
+	ext.liferayProjectDir = "${rootDir}/../../.."
+
 	sourceCompatibility = 1.6
 	targetCompatibility = 1.6
-
-	ext.liferayProjectDir = "${rootDir}/../../.."
 
 	dependencies {
 		compile files(["${liferayProjectDir}/portal-service/classes"])
