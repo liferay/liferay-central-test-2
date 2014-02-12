@@ -3927,7 +3927,7 @@ public class PortalImpl implements Portal {
 	}
 
 	@Override
-	public InetAddress getPortalLocalAddress(boolean secure) {
+	public InetAddress getPortalLocalInetAddress(boolean secure) {
 		InetSocketAddress localInetSocketAddress = null;
 
 		if (secure) {

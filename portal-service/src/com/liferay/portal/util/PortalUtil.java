@@ -1109,8 +1109,8 @@ public class PortalUtil {
 		return getPortal().getPortalLibDir();
 	}
 
-	public static InetAddress getPortalLocalAddress(boolean secure) {
-		return getPortal().getPortalLocalAddress(secure);
+	public static InetAddress getPortalLocalInetAddress(boolean secure) {
+		return getPortal().getPortalLocalInetAddress(secure);
 	}
 
 	public static int getPortalLocalPort(boolean secure) {

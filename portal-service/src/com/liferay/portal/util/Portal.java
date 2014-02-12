@@ -909,7 +909,7 @@ public interface Portal {
 
 	public String getPortalLibDir();
 
-	public InetAddress getPortalLocalAddress(boolean secure);
+	public InetAddress getPortalLocalInetAddress(boolean secure);
 
 	public int getPortalLocalPort(boolean secure);
 
