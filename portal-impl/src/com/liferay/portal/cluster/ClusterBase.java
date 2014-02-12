@@ -164,7 +164,7 @@ public abstract class ClusterBase {
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Setting JGroups outgoing IP address to " +
-					inetAddress.getHostAddress() + " and interface " + "to " +
+					inetAddress.getHostAddress() + " and interface to " +
 						networkInterface.getName());
 		}
 	}
