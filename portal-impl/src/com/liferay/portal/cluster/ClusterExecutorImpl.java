@@ -398,20 +398,20 @@ public class ClusterExecutorImpl
 
 		InetSocketAddress inetSocketAddress = null;
 
-		String portalInetSocketAddress = null;
+		String portalInetSocketAddressValue = null;
 
 		if (secure) {
-			portalInetSocketAddress =
+			portalInetSocketAddressValue =
 				PropsValues.PORTAL_INSTANCE_HTTPS_INET_SOCKET_ADDRESS;
 		}
 		else {
-			portalInetSocketAddress =
+			portalInetSocketAddressValue =
 				PropsValues.PORTAL_INSTANCE_HTTP_INET_SOCKET_ADDRESS;
 		}
 
-		if (Validator.isNotNull(portalInetSocketAddress)) {
+		if (Validator.isNotNull(portalInetSocketAddressValue)) {
 			String[] parts = StringUtil.split(
-				portalInetSocketAddress, CharPool.COLON);
+				portalInetSocketAddressValue, CharPool.COLON);
 
 			if (parts.length == 2) {
 				try {
@@ -421,8 +421,8 @@ public class ClusterExecutorImpl
 				}
 				catch (Exception e) {
 					_log.error(
-						"Unable to parse portal InetSocketAddress from :" +
-							portalInetSocketAddress,
+						"Unable to parse portal InetSocketAddress from " +
+							portalInetSocketAddressValue,
 						e);
 				}
 			}
