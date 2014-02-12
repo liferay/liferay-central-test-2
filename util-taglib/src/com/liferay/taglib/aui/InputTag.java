@@ -217,12 +217,6 @@ public class InputTag extends BaseInputTag {
 			}
 		}
 
-		String label = getLabel();
-
-		if (label == null) {
-			label = TextFormatter.format(name, TextFormatter.K);
-		}
-
 		String forLabel = id;
 
 		if (Validator.equals(type,"assetTags")) {
@@ -231,6 +225,12 @@ public class InputTag extends BaseInputTag {
 
 		if (Validator.equals(type, "checkbox")) {
 			forLabel = forLabel.concat("Checkbox");
+		}
+
+		String label = getLabel();
+
+		if (label == null) {
+			label = TextFormatter.format(name, TextFormatter.K);
 		}
 
 		String languageId = getLanguageId();
