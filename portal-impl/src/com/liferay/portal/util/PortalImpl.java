@@ -6900,17 +6900,12 @@ public class PortalImpl implements Portal {
 			return;
 		}
 
-		String localAddress = request.getLocalAddr();
-		int localPort = request.getLocalPort();
-		String serverAddress = request.getServerName();
-		int serverPort = request.getServerPort();
-
 		InetAddress localInetAddress = null;
 		InetAddress serverInetAddress = null;
 
 		try {
-			localInetAddress = InetAddress.getByName(localAddress);
-			serverInetAddress = InetAddress.getByName(serverAddress);
+			localInetAddress = InetAddress.getByName(request.getLocalAddr());
+			serverInetAddress = InetAddress.getByName(request.getServerName());
 		}
 		catch (UnknownHostException uhe) {
 			if (_log.isWarnEnabled()) {
@@ -6921,9 +6916,9 @@ public class PortalImpl implements Portal {
 		}
 
 		InetSocketAddress localInetSocketAddress = new InetSocketAddress(
-			localInetAddress, localPort);
+			localInetAddress, request.getLocalPort());
 		InetSocketAddress serverInetSocketAddress = new InetSocketAddress(
-			serverInetAddress, serverPort);
+			serverInetAddress, request.getServerPort());
 
 		if (secure) {
 			if (StringUtil.equalsIgnoreCase(
@@ -8005,7 +8000,9 @@ public class PortalImpl implements Portal {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #notifyPortalInetSocketAddressEventListeners(
+	 *             InetSocketAddress, boolean)}
 	 */
 	@Deprecated
 	protected void notifyPortalPortEventListeners(int portalPort) {
