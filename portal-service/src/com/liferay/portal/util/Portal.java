@@ -921,7 +921,7 @@ public interface Portal {
 	public int getPortalPort();
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by the more general {@link
+	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #getPortalServerPort(boolean)}
 	 */
 	@Deprecated
