@@ -159,9 +159,11 @@ public abstract class BaseClusterExecutorImplTestCase
 	public static class SetPortalInetSocketAddressAdvice {
 
 		public static final String PORTAL_ADDRESS = "127.0.0.1";
+
 		public static final int PORTAL_PORT = 80;
 
 		public static final String SECURE_PORTAL_ADDRESS = "127.0.1.1";
+
 		public static final int SECURE_PORTAL_PORT = 81;
 
 		@Around(
@@ -185,7 +187,8 @@ public abstract class BaseClusterExecutorImplTestCase
 			return proceedingJoinPoint.proceed(
 				new Object[] {
 					SECURE_PORTAL_ADDRESS + StringPool.COLON +
-						SECURE_PORTAL_PORT});
+						SECURE_PORTAL_PORT
+					});
 		}
 
 	}

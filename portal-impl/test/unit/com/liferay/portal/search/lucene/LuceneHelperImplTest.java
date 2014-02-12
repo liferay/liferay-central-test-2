@@ -155,13 +155,13 @@ public class LuceneHelperImplTest {
 
 		mockServer.start();
 
+		InetAddress inetAddress = mockServer.getInetAddress();
 		int port = mockServer.getPort();
-		InetAddress inetAddress = mockServer.getAddress();
 
 		_mockClusterExecutor.setNodeNumber(2);
 
 		_mockClusterExecutor.setPort(port);
-		_mockClusterExecutor.setPortalAddress(inetAddress);
+		_mockClusterExecutor.setPortalInetAddress(inetAddress);
 
 		_clusterNode.setPortalInetSocketAddress(
 			new InetSocketAddress(inetAddress, port));
@@ -256,7 +256,7 @@ public class LuceneHelperImplTest {
 
 		_mockClusterExecutor.setNodeNumber(2);
 		_mockClusterExecutor.setPort(mockServer.getPort());
-		_mockClusterExecutor.setPortalAddress(mockServer.getAddress());
+		_mockClusterExecutor.setPortalInetAddress(mockServer.getInetAddress());
 
 		JDKLoggerTestUtil.configureJDKLogger(
 			LuceneHelperImpl.class.getName(), Level.INFO);
@@ -641,7 +641,7 @@ public class LuceneHelperImplTest {
 
 				try {
 					clusterNode.setPortalInetSocketAddress(
-						new InetSocketAddress(_portalAddress, _port));
+						new InetSocketAddress(_portalInetAddress, _port));
 				}
 				catch (IllegalArgumentException iae) {
 				}
@@ -771,8 +771,8 @@ public class LuceneHelperImplTest {
 			_port = port;
 		}
 
-		public void setPortalAddress(InetAddress portalAddress) {
-			_portalAddress = portalAddress;
+		public void setPortalInetAddress(InetAddress portalInetAddress) {
+			_portalInetAddress = portalInetAddress;
 		}
 
 		public void setNodeNumber(int nodeNumber) {
@@ -814,7 +814,7 @@ public class LuceneHelperImplTest {
 			LuceneHelperUtil.class, "getLastGeneration", long.class);
 		private boolean _invokeMethodThrowException = false;
 		private int _port = -1;
-		private InetAddress _portalAddress;
+		private InetAddress _portalInetAddress;
 		private boolean _throwException = false;
 
 	}
@@ -892,12 +892,12 @@ public class LuceneHelperImplTest {
 			_serverSocket = serverSocketChannel.socket();
 		}
 
-		public int getPort() {
-			return _serverSocket.getLocalPort();
+		public InetAddress getInetAddress() {
+			return _serverSocket.getInetAddress();
 		}
 
-		public InetAddress getAddress() {
-			return _serverSocket.getInetAddress();
+		public int getPort() {
+			return _serverSocket.getLocalPort();
 		}
 
 		@Override

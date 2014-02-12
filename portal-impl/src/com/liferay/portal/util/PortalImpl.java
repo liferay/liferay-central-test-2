@@ -3928,38 +3928,38 @@ public class PortalImpl implements Portal {
 
 	@Override
 	public InetAddress getPortalLocalInetAddress(boolean secure) {
-		InetSocketAddress localInetSocketAddress = null;
+		InetSocketAddress inetSocketAddress = null;
 
 		if (secure) {
-			localInetSocketAddress = _securePortalLocalInetSocketAddress.get();
+			inetSocketAddress = _securePortalLocalInetSocketAddress.get();
 		}
 		else {
-			localInetSocketAddress = _portalLocalInetSocketAddress.get();
+			inetSocketAddress = _portalLocalInetSocketAddress.get();
 		}
 
-		if (localInetSocketAddress == null) {
+		if (inetSocketAddress == null) {
 			return null;
 		}
 
-		return localInetSocketAddress.getAddress();
+		return inetSocketAddress.getAddress();
 	}
 
 	@Override
 	public int getPortalLocalPort(boolean secure) {
-		InetSocketAddress localInetSocketAddress = null;
+		InetSocketAddress inetSocketAddress = null;
 
 		if (secure) {
-			localInetSocketAddress = _securePortalLocalInetSocketAddress.get();
+			inetSocketAddress = _securePortalLocalInetSocketAddress.get();
 		}
 		else {
-			localInetSocketAddress = _portalLocalInetSocketAddress.get();
+			inetSocketAddress = _portalLocalInetSocketAddress.get();
 		}
 
-		if (localInetSocketAddress == null) {
+		if (inetSocketAddress == null) {
 			return -1;
 		}
 
-		return localInetSocketAddress.getPort();
+		return inetSocketAddress.getPort();
 	}
 
 	/**

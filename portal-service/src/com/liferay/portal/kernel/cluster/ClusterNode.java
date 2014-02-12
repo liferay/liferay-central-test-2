@@ -33,7 +33,7 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 		}
 
 		if (bindInetAddress == null) {
-			throw new IllegalArgumentException("Inet address is null");
+			throw new IllegalArgumentException("Bind inet address is null");
 		}
 
 		_clusterNodeId = clusterNodeId;
@@ -42,11 +42,11 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 
 	@Override
 	public int compareTo(ClusterNode clusterNode) {
-		InetAddress inetAddress = clusterNode._bindInetAddress;
+		InetAddress bindInetAddress = clusterNode._bindInetAddress;
 
 		String hostAddress = _bindInetAddress.getHostAddress();
 
-		int value = hostAddress.compareTo(inetAddress.getHostAddress());
+		int value = hostAddress.compareTo(bindInetAddress.getHostAddress());
 
 		if (value != 0) {
 			return value;
@@ -66,15 +66,15 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 			return 0;
 		}
 
+		InetAddress thisInetAddress = _portalInetSocketAddress.getAddress();
+
+		String thisHostAddress = thisInetAddress.getHostAddress();
+
 		InetSocketAddress otherPortalInetSocketAddress =
 			clusterNode._portalInetSocketAddress;
 
 		InetAddress otherInetAddress =
 			otherPortalInetSocketAddress.getAddress();
-
-		InetAddress thisInetAddress = _portalInetSocketAddress.getAddress();
-
-		String thisHostAddress = thisInetAddress.getHostAddress();
 
 		value = thisHostAddress.compareTo(otherInetAddress.getHostAddress());
 
@@ -158,10 +158,10 @@ public class ClusterNode implements Comparable<ClusterNode>, Serializable {
 	public String toString() {
 		StringBundler sb = new StringBundler(7);
 
-		sb.append("{clusterNodeId=");
-		sb.append(_clusterNodeId);
-		sb.append(", clusterInetAddress=");
+		sb.append("{bindInetAddress=");
 		sb.append(_bindInetAddress);
+		sb.append(", clusterNodeId=");
+		sb.append(_clusterNodeId);
 		sb.append(", portalInetSocketAddress=");
 		sb.append(_portalInetSocketAddress);
 		sb.append("}");

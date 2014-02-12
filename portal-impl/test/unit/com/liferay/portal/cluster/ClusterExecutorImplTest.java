@@ -289,8 +289,8 @@ public class ClusterExecutorImplTest extends BaseClusterExecutorImplTestCase {
 			LogRecord logRecord = logRecords.get(0);
 
 			Assert.assertEquals(
-				"Unable to parse portal InetSocketAddress from :" +
-					"bad address:8080",
+				"Unable to parse portal InetSocketAddress from bad " +
+					"address:8080",
 				logRecord.getMessage());
 
 			Throwable throwable = logRecord.getThrown();
