@@ -56,9 +56,9 @@ subprojects {
 			}
 		}
 		else {
-			logger.quiet "Skipping deploy because ${project.name}'s 'deployDir' property is not set."
-			logger.quiet "First, see if it's build.gradle file contains the property"
-			logger.quiet "'project.ext.deployDir'. Second, make sure to execute the deploy using Ant."
+			logger.quiet "Skipping deploy because ${project.name}\"s \"deployDir\" property is not set."
+			logger.quiet "First, see if it\"s build.gradle file contains the property"
+			logger.quiet "\"project.ext.deployDir\". Second, make sure to execute the deploy using Ant."
 		}
 	}
 }
