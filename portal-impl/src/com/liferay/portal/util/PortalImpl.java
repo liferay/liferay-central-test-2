@@ -8128,7 +8128,8 @@ public class PortalImpl implements Portal {
 	private final AtomicInteger _portalPort = new AtomicInteger(-1);
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #_portalInetSocketAddressEventListeners}
 	 */
 	@Deprecated
 	private List<PortalPortEventListener> _portalPortEventListeners =
