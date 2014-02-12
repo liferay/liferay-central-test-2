@@ -328,7 +328,7 @@ public class AuthVerifierPipeline {
 			catch (Exception e) {
 				if (_log.isDebugEnabled()) {
 					Class<?> authVerifierClass = authVerifier.getClass();
-	
+
 					_log.debug("Skipping " + authVerifierClass.getName(), e);
 				}
 
