@@ -21,6 +21,6 @@
 	</target>
 
 	<target name="jar">
-		<gradle-task-executor gradleTask="jar" />
+		<gradle-execute gradleTask="jar" />
 	</target>
 </project>
