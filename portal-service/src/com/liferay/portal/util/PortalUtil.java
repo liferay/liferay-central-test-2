@@ -135,8 +135,10 @@ public class PortalUtil {
 	 * Adds the portal port event listener to the portal. The listener will be
 	 * notified whenever the portal port is set.
 	 *
-	 * @param portalPortEventListener the portal port event listener to add
-	 * @deprecated As of 7.0.0, replaced by {@link #addPortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
+	 * @param      portalPortEventListener the portal port event listener to add
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #addPortalInetSocketAddressEventListener(
+	 *             PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	public static void addPortalPortEventListener(
@@ -1127,6 +1129,7 @@ public class PortalUtil {
 	 * @deprecated As of 7.0.0, replaced by the more general {@link
 	 *             #getPortalServerPort(boolean)}
 	 */
+	@Deprecated
 	public static int getPortalPort(boolean secure) {
 		return getPortal().getPortalPort(secure);
 	}
@@ -2027,7 +2030,8 @@ public class PortalUtil {
 	/**
 	 * Sets the port obtained on the first request to the portal.
 	 *
-	 * @deprecated As of 7.0.0, replaced by {@link #setPortalInetSocketAddresses(HttpServletRequest)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #setPortalInetSocketAddresses(HttpServletRequest)}
 	 */
 	@Deprecated
 	public static void setPortalPort(HttpServletRequest request) {
@@ -2092,7 +2096,9 @@ public class PortalUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #removePortalInetSocketAddressEventListener(PortalInetSocketAddressEventListener)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #removePortalInetSocketAddressEventListener(
+	 *             PortalInetSocketAddressEventListener)}
 	 */
 	@Deprecated
 	public void removePortalPortEventListener(
