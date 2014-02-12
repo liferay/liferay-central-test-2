@@ -38,10 +38,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, HttpServletRequest request,
 		String param, boolean defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		boolean getterUtilValue = GetterUtil.getBoolean(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
@@ -58,10 +58,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, PortletRequest portletRequest,
 		String param, boolean defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		boolean getterUtilValue = GetterUtil.getBoolean(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
@@ -78,10 +78,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, HttpServletRequest request,
 		String param, double defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		double getterUtilValue = GetterUtil.getDouble(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
@@ -98,10 +98,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, PortletRequest portletRequest,
 		String param, double defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		double getterUtilValue = GetterUtil.getDouble(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
@@ -118,10 +118,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, HttpServletRequest request,
 		String param, int defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		int getterUtilValue = GetterUtil.getInteger(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
@@ -138,10 +138,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, PortletRequest portletRequest,
 		String param, int defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		int getterUtilValue = GetterUtil.getInteger(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
@@ -158,9 +158,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, HttpServletRequest request,
 		String param, long defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
-		long getterUtilValue = GetterUtil.getLong(settingsValue, defaultValue);
+		long getterUtilValue = GetterUtil.getLong(
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
@@ -177,9 +178,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, PortletRequest portletRequest,
 		String param, long defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
-		long getterUtilValue = GetterUtil.getLong(settingsValue, defaultValue);
+		long getterUtilValue = GetterUtil.getLong(
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
@@ -196,10 +198,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, HttpServletRequest request,
 		String param, String defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		String getterUtilValue = GetterUtil.getString(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(request, param, getterUtilValue);
 	}
@@ -216,10 +218,10 @@ public class PortletSettingsParamUtil {
 		PortletSettings portletSettings, PortletRequest portletRequest,
 		String param, String defaultValue) {
 
-		String settingsValue = portletSettings.getValue(param, null);
+		String portletSettingsValue = portletSettings.getValue(param, null);
 
 		String getterUtilValue = GetterUtil.getString(
-			settingsValue, defaultValue);
+			portletSettingsValue, defaultValue);
 
 		return ParamUtil.get(portletRequest, param, getterUtilValue);
 	}
