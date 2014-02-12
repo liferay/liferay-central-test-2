@@ -198,7 +198,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testDeletePortletPreferencesByPlidAndGroupOwner()
+	public void testDeleteGroupPortletPreferencesByPlid()
 		throws Exception {
 
 		PortletPreferences portletPreferences1 =
@@ -229,7 +229,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testDeletePortletPreferencesByPlidAndGroupOwnerAndPortletId()
+	public void testDeleteGroupPortletPreferencesByPlidAndPortletId()
 		throws Exception {
 
 		PortletPreferences portletPreferences1 =
@@ -260,7 +260,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testDeletePortletPreferencesByPlidAndLayoutOwner()
+	public void testDeleteLayoutPortletPreferencesByPlid()
 		throws Exception {
 
 		PortletPreferences portletPreferences1 =
@@ -292,7 +292,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testDeletePortletPreferencesByPlidAndLayoutOwnerAndPortletId()
+	public void testDeleteLayoutPortletPreferencesByPlidAndPortletId()
 		throws Exception {
 
 		PortletPreferences portletPreferences1 =
