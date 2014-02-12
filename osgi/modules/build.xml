@@ -6,7 +6,7 @@
 	<import file="../../build-common-java.xml" />
 
 	<target name="clean">
-		<gradle-task-executor gradleTask="clean" />
+		<gradle-execute gradleTask="clean" />
 	</target>
 
 	<target name="compile">
