@@ -29,6 +29,7 @@ import java.util.List;
 public abstract class BaseSearchResultPermissionFilter
 	implements SearchResultPermissionFilter {
 
+	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
 		int start = searchContext.getStart();
 		int end = searchContext.getEnd();

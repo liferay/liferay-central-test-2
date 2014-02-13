@@ -250,7 +250,9 @@ public class FacetedSearcher extends BaseIndexer {
 			BooleanQuery fullQuery = createFullQuery(
 				contextQuery, searchContext);
 
-			fullQuery.setQueryConfig(searchContext.getQueryConfig());
+			QueryConfig queryConfig = searchContext.getQueryConfig();
+
+			fullQuery.setQueryConfig(queryConfig);
 
 			return SearchEngineUtil.search(searchContext, fullQuery);
 		}
