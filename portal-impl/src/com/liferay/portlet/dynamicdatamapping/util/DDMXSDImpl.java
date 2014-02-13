@@ -129,9 +129,9 @@ public class DDMXSDImpl implements DDMXSD {
 
 		String name = element.attributeValue("name");
 
-		boolean isFieldDisplayable = isFieldDisplayable(fields, name);
+		boolean fieldDisplayable = isFieldDisplayable(fields, name);
 
-		if (isFieldDisplayable) {
+		if (fieldDisplayable) {
 			Field fieldsDisplayField = fields.get(DDMImpl.FIELDS_DISPLAY_NAME);
 
 			String[] fieldsDisplayValues = DDMUtil.getFieldsDisplayValues(
@@ -155,7 +155,7 @@ public class DDMXSDImpl implements DDMXSD {
 			fieldStructure.put("fieldNamespace", StringUtil.randomId());
 			fieldStructure.put("valueIndex", ddmFieldsCounter.get(name));
 
-			if (isFieldDisplayable) {
+			if (fieldDisplayable) {
 				ddmFieldsCounter.incrementKey(name);
 				ddmFieldsCounter.incrementKey(DDMImpl.FIELDS_DISPLAY_NAME);
 			}
