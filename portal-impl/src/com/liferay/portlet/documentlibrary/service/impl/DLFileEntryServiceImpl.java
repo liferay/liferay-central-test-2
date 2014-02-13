@@ -685,7 +685,7 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	private boolean _hasOverrideCheckoutPermission(long fileEntryId)
-		throws PortalException, PrincipalException, SystemException {
+		throws PortalException, SystemException {
 
 		return DLFileEntryPermission.contains(
 			getPermissionChecker(), fileEntryId, ActionKeys.OVERRIDE_CHECKOUT);
