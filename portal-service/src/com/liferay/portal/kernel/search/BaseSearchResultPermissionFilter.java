@@ -31,13 +31,13 @@ public abstract class BaseSearchResultPermissionFilter
 
 	@Override
 	public Hits search(SearchContext searchContext) throws SearchException {
-		int start = searchContext.getStart();
 		int end = searchContext.getEnd();
+		int start = searchContext.getStart();
 
-		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
-			Hits hits = getResults(searchContext);
+		if ((end == QueryUtil.ALL_POS) && (start == QueryUtil.ALL_POS)) {
+			Hits hits = getHits(searchContext);
 
-			filterResults(hits);
+			filterHits(hits);
 
 			return hits;
 		}
@@ -46,10 +46,10 @@ public abstract class BaseSearchResultPermissionFilter
 			return new HitsImpl();
 		}
 
+		int excludedDocsSize = 0;
+		int hitsSize = 0;
 		int offset = 0;
-		int totalHits = 0;
 		long startTime = 0;
-		int totalExcludedDocs = 0;
 
 		List<Document> documents = new ArrayList<Document>();
 		List<Float> scores = new ArrayList<Float>();
@@ -62,33 +62,33 @@ public abstract class BaseSearchResultPermissionFilter
 
 			int amplifiedEnd = offset + amplifiedCount;
 
-			searchContext.setStart(offset);
 			searchContext.setEnd(amplifiedEnd);
+			searchContext.setStart(offset);
 
-			Hits hits = getResults(searchContext);
+			Hits hits = getHits(searchContext);
 
 			if (startTime == 0) {
-				totalHits = hits.getLength();
+				hitsSize = hits.getLength();
 				startTime = hits.getStart();
 			}
 
-			Document[] orginalDocs = hits.getDocs();
+			Document[] oldDocs = hits.getDocs();
 
-			filterResults(hits);
+			filterHits(hits);
 
-			Document[] finalDocs = hits.getDocs();
+			Document[] newDocs = hits.getDocs();
 
-			totalExcludedDocs += orginalDocs.length - finalDocs.length;
+			excludedDocsSize += oldDocs.length - newDocs.length;
 
-			collectResults(hits, documents, scores, count);
+			collectHits(hits, documents, scores, count);
 
-			if ((finalDocs.length >= count) ||
-				(orginalDocs.length < amplifiedCount) ||
-				(amplifiedEnd >= totalHits)) {
+			if ((newDocs.length >= count) ||
+				(oldDocs.length < amplifiedCount) ||
+				(amplifiedEnd >= hitsSize)) {
 
-				updateResults(
+				updateHits(
 					hits, documents, scores, start, end,
-					totalHits - totalExcludedDocs, startTime);
+					hitsSize - excludedDocsSize, startTime);
 
 				return hits;
 			}
@@ -97,7 +97,7 @@ public abstract class BaseSearchResultPermissionFilter
 		}
 	}
 
-	protected void collectResults(
+	protected void collectHits(
 		Hits hits, List<Document> documents, List<Float> scores, int count) {
 
 		Document[] docs = hits.getDocs();
@@ -113,14 +113,14 @@ public abstract class BaseSearchResultPermissionFilter
 		}
 	}
 
-	protected abstract void filterResults(Hits hits);
+	protected abstract void filterHits(Hits hits);
 
-	protected abstract Hits getResults(SearchContext searchContext)
+	protected abstract Hits getHits(SearchContext searchContext)
 		throws SearchException;
 
-	protected void updateResults(
+	protected void updateHits(
 		Hits hits, List<Document> documents, List<Float> scores, int start,
-		int end, int totalHits, long startTime) {
+		int end, int size, long startTime) {
 
 		if (documents.size() < end) {
 			end = documents.size();
@@ -131,7 +131,7 @@ public abstract class BaseSearchResultPermissionFilter
 
 		hits.setDocs(documents.toArray(new Document[documents.size()]));
 		hits.setScores(scores.toArray(new Float[scores.size()]));
-		hits.setLength(totalHits);
+		hits.setLength(size);
 		hits.setSearchTime(
 			(float)(System.currentTimeMillis() - startTime) / Time.SECOND);
 	}

@@ -39,7 +39,7 @@ public class DefaultSearchResultPermissionFilter
 	}
 
 	@Override
-	protected void filterResults(Hits hits) {
+	protected void filterHits(Hits hits) {
 		List<Document> docs = new ArrayList<Document>();
 		List<Float> scores = new ArrayList<Float>();
 
@@ -86,9 +86,7 @@ public class DefaultSearchResultPermissionFilter
 	}
 
 	@Override
-	protected Hits getResults(SearchContext searchContext)
-		throws SearchException {
-
+	protected Hits getHits(SearchContext searchContext) throws SearchException {
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
