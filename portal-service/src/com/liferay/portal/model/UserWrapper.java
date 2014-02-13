@@ -1487,7 +1487,9 @@ public class UserWrapper implements User, ModelWrapper<User> {
 	* @return the user's display URL
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 7.0.0, replaced by {@link #getDisplayURL(ThemeDisplay)}
 	*/
+	@Deprecated
 	@Override
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
 		java.lang.String mainPath)
@@ -1523,12 +1525,14 @@ public class UserWrapper implements User, ModelWrapper<User> {
 	* @param portalURL the portal's URL
 	* @param mainPath the main path
 	* @param privateLayout whether to use the URL of the user's default
-	intranet(versus extranet)  site home page, if no friendly URL is
-	available for the user's profile
+	intranet(versus extranet)  site home page, if no friendly URL
+	is available for the user's profile
 	* @return the user's display URL
 	* @throws PortalException if a portal exception occurred
 	* @throws SystemException if a system exception occurred
+	* @deprecated As of 7.0.0, replaced by {@link #getDisplayURL(ThemeDisplay)}
 	*/
+	@Deprecated
 	@Override
 	public java.lang.String getDisplayURL(java.lang.String portalURL,
 		java.lang.String mainPath, boolean privateLayout)
