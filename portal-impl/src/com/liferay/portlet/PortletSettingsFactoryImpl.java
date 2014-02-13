@@ -51,7 +51,8 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 		CompanyPortletSettings companyPortletSettings =
 			new CompanyPortletSettings(companyPortletPreferences);
 
-		companyPortletSettings.setPortalProperties(getPortalProperties(portletId));
+		companyPortletSettings.setPortalProperties(
+			getPortalProperties(portletId));
 
 		return companyPortletSettings;
 	}
@@ -80,7 +81,8 @@ public class PortletSettingsFactoryImpl implements PortletSettingsFactory {
 		groupPortletSettings.setCompanyPortletPreferences(
 			companyPortletPreferences);
 
-		groupPortletSettings.setPortalProperties(getPortalProperties(portletId));
+		groupPortletSettings.setPortalProperties(
+			getPortalProperties(portletId));
 
 		return groupPortletSettings;
 	}
