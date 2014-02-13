@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -54,7 +53,6 @@ import com.liferay.portal.model.ResourcedModel;
 import com.liferay.portal.model.TrashedModel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.WorkflowedModel;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.CountryServiceUtil;
@@ -87,7 +85,6 @@ import com.liferay.portlet.trash.model.TrashEntry;
 import java.io.Serializable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -504,7 +501,8 @@ public abstract class BaseIndexer implements Indexer {
 				isUseSearchResultPermissionFilter(searchContext)) {
 
 				SearchResultPermissionFilter searchResultPermissionFilter =
-					new IndexerSearchResultPermissionFilter(permissionChecker);
+					new DefaultSearchResultPermissionFilter(
+						this, permissionChecker);
 
 				hits = searchResultPermissionFilter.search(searchContext);
 			}
@@ -1654,9 +1652,6 @@ public abstract class BaseIndexer implements Indexer {
 		_stagingAware = stagingAware;
 	}
 
-	private static final List<String> _PERMISSION_SELECTED_FIELD_NAMES =
-		Arrays.asList(Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK);
-
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
 	private Document _document;
@@ -1667,89 +1662,5 @@ public abstract class BaseIndexer implements Indexer {
 	private boolean _permissionAware;
 	private String _searchEngineId;
 	private boolean _stagingAware = true;
-
-	private class IndexerSearchResultPermissionFilter
-		extends BaseSearchResultPermissionFilter {
-
-		public IndexerSearchResultPermissionFilter(
-			PermissionChecker permissionChecker) {
-
-			_permissionChecker = permissionChecker;
-		}
-
-		@Override
-		protected void filterResults(Hits hits) {
-			List<Document> docs = new ArrayList<Document>();
-			List<Float> scores = new ArrayList<Float>();
-
-			Document[] documents = hits.getDocs();
-
-			int excludeDocsSize = 0;
-
-			for (int i = 0; i < documents.length; i++) {
-				Document document = documents[i];
-
-				String entryClassName = document.get(Field.ENTRY_CLASS_NAME);
-
-				Indexer indexer = IndexerRegistryUtil.getIndexer(
-					entryClassName);
-
-				long entryClassPK = GetterUtil.getLong(
-					document.get(Field.ENTRY_CLASS_PK));
-
-				try {
-					if ((indexer == null) || (indexer.isFilterSearch() &&
-						 indexer.hasPermission(
-							 _permissionChecker, entryClassName, entryClassPK,
-							 ActionKeys.VIEW)) ||
-						!indexer.isFilterSearch() ||
-						!indexer.isPermissionAware()) {
-
-						docs.add(document);
-						scores.add(hits.score(i));
-					}
-					else {
-						excludeDocsSize++;
-					}
-				}
-				catch (Exception e) {
-					excludeDocsSize++;
-				}
-			}
-
-			hits.setDocs(docs.toArray(new Document[docs.size()]));
-			hits.setScores(scores.toArray(new Float[scores.size()]));
-			hits.setSearchTime(
-				(float)(System.currentTimeMillis() - hits.getStart()) /
-					Time.SECOND);
-			hits.setLength(hits.getLength() - excludeDocsSize);
-		}
-
-		@Override
-		protected Hits getResults(SearchContext searchContext)
-			throws SearchException {
-
-			QueryConfig queryConfig = searchContext.getQueryConfig();
-
-			String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
-
-			if (selectedFieldNames != null) {
-				Set<String> selectedFieldNameSet = SetUtil.fromArray(
-					selectedFieldNames);
-
-				selectedFieldNameSet.addAll(_PERMISSION_SELECTED_FIELD_NAMES);
-
-				selectedFieldNames = selectedFieldNameSet.toArray(
-					new String[selectedFieldNameSet.size()]);
-
-				queryConfig.setSelectedFieldNames(selectedFieldNames);
-			}
-
-			return doSearch(searchContext);
-		}
-
-		private PermissionChecker _permissionChecker;
-
-	}
 
 }
