@@ -779,9 +779,19 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		<attribute name="gradleModuleDir" default="" />
 
 		<sequential>
-			<exec append="true" dir="${project.dir}/osgi/modules@{gradleModuleDir}" executable="${project.dir}/tools/gradle/gradlew">
-				<arg line="@{gradleTask} @{gradleTaskArgs}" />
-			</exec>
+			<if>
+				<os family="unix" />
+				<then>
+					<exec append="true" dir="${project.dir}/osgi/modules@{gradleModuleDir}" executable="${project.dir}/tools/gradle/gradlew">
+						<arg line="@{gradleTask} @{gradleTaskArgs}" />
+					</exec>
+				</then>
+				<else>
+					<exec append="true" dir="${project.dir}/osgi/modules@{gradleModuleDir}" executable="${project.dir}/tools/gradle/gradlew.bat">
+						<arg line="@{gradleTask} @{gradleTaskArgs}" />
+					</exec>
+				</else>
+			</if>
 		</sequential>
 	</macrodef>
 
