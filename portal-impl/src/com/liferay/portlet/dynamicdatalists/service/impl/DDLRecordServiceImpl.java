@@ -65,6 +65,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 			serviceContext);
 	}
 
+	@Override
 	public void deleteRecord(long recordId)
 		throws PortalException, SystemException {
 
@@ -102,6 +103,7 @@ public class DDLRecordServiceImpl extends DDLRecordServiceBaseImpl {
 		return record;
 	}
 
+	@Override
 	public void revertRecordVersion(
 			long recordId, String version, ServiceContext serviceContext)
 		throws PortalException, SystemException {
