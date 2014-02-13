@@ -25,7 +25,7 @@
 	<propertycopy from="database.${database.type}.${database.version}.username" name="database.username" />
 	<propertycopy from="database.${database.type}.${database.version}.url" name="database.url" />
 
-	<propertycopy from="jdk.${jdk.type}.version" name="jdk.version" />
+	<propertycopy from="java.${java.type}.version" name="java.version" />
 
 	<property name="plink.executable" location="${project.dir}/tools/putty/plink.exe" />
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
@@ -104,11 +104,11 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="record-env-jdk">
+	<macrodef name="record-env-java">
 		<sequential>
 			<propertycopy
-				from="env.key.jdk.${jdk.type}.${jdk.version}"
-				name="env.key.jdk"
+				from="env.key.java.${java.type}.${java.version}"
+				name="env.key.java"
 				override="true"
 			/>
 		</sequential>
@@ -264,7 +264,7 @@ create database lportal2 character set utf8;</echo>
 		<record-env-app-server />
 		<record-env-browser />
 		<record-env-database />
-		<record-env-jdk />
+		<record-env-java />
 		<record-env-os />
 	</target>
 
