@@ -587,15 +587,13 @@ public class SeleniumBuilderFileUtil {
 		}
 
 		for (Element element : elements) {
-			List<Element> descriptionChildElements = element.elements(
-				"description");
+			List<Element> descriptionElements = element.elements("description");
 
 			String elementName = element.getName();
 
-			if (descriptionChildElements.size() > 1) {
+			if (descriptionElements.size() > 1) {
 				throwValidationException(
-					2000, fileName, descriptionChildElements.get(1),
-					elementName);
+					2000, fileName, descriptionElements.get(1), elementName);
 			}
 
 			List<Element> executeChildElements = element.elements("execute");
