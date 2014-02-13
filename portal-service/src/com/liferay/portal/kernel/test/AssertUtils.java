@@ -67,7 +67,7 @@ public class AssertUtils {
 
 	public static void assertEquals(List<?> expectedList, List<?> actualList) {
 		Assert.assertEquals(
-			"The lists are different sizes", expectedList.size(),
+			"The lists have different sizes", expectedList.size(),
 			actualList.size());
 
 		Assert.assertTrue(expectedList.containsAll(actualList));
@@ -77,7 +77,7 @@ public class AssertUtils {
 		Map<String, ?> expectedMap, Map<String, ?> actualMap) {
 
 		Assert.assertEquals(
-			"The maps are different sizes", expectedMap.size(),
+			"The maps have different sizes", expectedMap.size(),
 			actualMap.size());
 
 		for (String name : expectedMap.keySet()) {
