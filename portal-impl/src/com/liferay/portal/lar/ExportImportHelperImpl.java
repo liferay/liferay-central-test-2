@@ -505,7 +505,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 				layouts.add(layout);
 			}
 
-			List<Layout> parentLayouts = Collections.EMPTY_LIST;
+			List<Layout> parentLayouts = Collections.emptyList();
 
 			if (targetGroupId != GroupConstants.DEFAULT_LIVE_GROUP_ID) {
 				parentLayouts = getMissingParentLayouts(layout, targetGroupId);
@@ -619,7 +619,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 					parentLayout.getUuid(), liveGroupId,
 					parentLayout.isPrivateLayout());
 
-				// If one parent is found all others are assumed to exist
+				// If one parent is found, all others are assumed to exist
 
 				break;
 			}
