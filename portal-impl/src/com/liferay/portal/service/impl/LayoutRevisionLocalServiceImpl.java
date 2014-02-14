@@ -614,11 +614,11 @@ public class LayoutRevisionLocalServiceImpl
 	protected LayoutRevision updateMajor(LayoutRevision layoutRevision)
 		throws PortalException, SystemException {
 
-		long parentLayoutRevisionId =
-			layoutRevision.getParentLayoutRevisionId();
-
 		List<LayoutRevision> parentLayoutRevisions =
 			new ArrayList<LayoutRevision>();
+
+		long parentLayoutRevisionId =
+			layoutRevision.getParentLayoutRevisionId();
 
 		while (parentLayoutRevisionId !=
 					LayoutRevisionConstants.DEFAULT_PARENT_LAYOUT_REVISION_ID) {
