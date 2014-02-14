@@ -43,7 +43,6 @@ public abstract class BaseModelUserNotificationHandler
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			userNotificationEvent.getPayload());
 
-
 		String className = jsonObject.getString("className");
 
 		AssetRendererFactory assetRendererFactory =
