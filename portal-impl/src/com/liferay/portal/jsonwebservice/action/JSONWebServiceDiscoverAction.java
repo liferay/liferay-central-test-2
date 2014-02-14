@@ -41,7 +41,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.portal.kernel.util.Validator;
 import jodd.util.Wildcard;
 
 /**
@@ -51,14 +50,10 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 	public JSONWebServiceDiscoverAction(HttpServletRequest request) {
 		_basePath = request.getServletPath();
-		_baseURL = request.getRequestURL().toString();
-
+		_baseURL = String.valueOf(request.getRequestURL());
 		_contextPath = ParamUtil.getString(
 			request, "contextPath", request.getContextPath());
-
-		String discover = request.getParameter("discover");
-
-		_discover = StringUtil.split(discover);
+		_discover = StringUtil.split(request.getParameter("discover"));
 	}
 
 	@Override
