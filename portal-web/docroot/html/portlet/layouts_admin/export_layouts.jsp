@@ -17,6 +17,8 @@
 <%@ include file="/html/portlet/layouts_admin/init.jsp" %>
 
 <%
+String exportNav = ParamUtil.getString(request, "exportNav", "custom");
+
 long groupId = ParamUtil.getLong(request, "groupId");
 
 Group group = null;
@@ -35,8 +37,6 @@ if (group.isStagingGroup() && !group.isStagedRemotely()) {
 
 	liveGroupId = ParamUtil.getLong(request, "liveGroupId", liveGroup.getGroupId());
 }
-
-String exportNav = ParamUtil.getString(request, "exportNav", "custom");
 
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
@@ -110,8 +110,17 @@ portletURL.setParameter("rootNodeName", rootNodeName);
 	<liferay-ui:section>
 		<aui:nav-bar>
 			<aui:nav id="exportNav">
-				<aui:nav-item data-value="custom" iconCssClass="icon-puzzle" label="custom" />
-				<aui:nav-item data-value="export-configurations" iconCssClass="icon-archive" label="export-templates" />
+				<aui:nav-item
+					data-value="custom"
+					iconCssClass="icon-puzzle"
+					label="custom"
+				/>
+
+				<aui:nav-item
+					data-value="export-configurations"
+					iconCssClass="icon-archive"
+					label="export-templates"
+				/>
 			</aui:nav>
 		</aui:nav-bar>
 
