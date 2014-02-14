@@ -1244,6 +1244,10 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		Matcher matcher = _importLinksToLayoutPattern.matcher(content);
 
 		while (matcher.find()) {
+			long oldGroupId = GetterUtil.getLong(matcher.group(6));
+
+			long newGroupId = oldGroupId;
+
 			long oldLayoutId = GetterUtil.getLong(matcher.group(1));
 
 			long newLayoutId = oldLayoutId;
@@ -1254,10 +1258,6 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 			String layoutUuid = matcher.group(3);
 			String friendlyURL = matcher.group(4);
-
-			long oldGroupId = GetterUtil.getLong(matcher.group(6));
-
-			long newGroupId = oldGroupId;
 
 			try {
 				Layout layout =
