@@ -91,15 +91,13 @@ public class ExportImportDateUtil {
 			ExportImportConfiguration configuration)
 		throws Exception {
 
-		Map<String, Serializable> configurationSettingsMap =
-			configuration.getSettingsMap();
+		Map<String, Serializable> settingsMap = configuration.getSettingsMap();
 
 		Map<String, String[]> parameterMap =
-			(Map<String, String[]>)configurationSettingsMap.get("parameterMap");
+			(Map<String, String[]>)settingsMap.get("parameterMap");
 
 		String range = MapUtil.getString(parameterMap, "range");
 		int rangeLast = MapUtil.getInteger(parameterMap, "last");
-
 		int startDateAmPm = MapUtil.getInteger(parameterMap, "startDateAmPm");
 		int startDateYear = MapUtil.getInteger(parameterMap, "startDateYear");
 		int startDateMonth = MapUtil.getInteger(parameterMap, "startDateMonth");
@@ -107,7 +105,6 @@ public class ExportImportDateUtil {
 		int startDateHour = MapUtil.getInteger(parameterMap, "startDateHour");
 		int startDateMinute = MapUtil.getInteger(
 			parameterMap, "startDateMinute");
-
 		int endDateAmPm = MapUtil.getInteger(parameterMap, "endDateAmPm");
 		int endDateYear = MapUtil.getInteger(parameterMap, "endDateYear");
 		int endDateMonth = MapUtil.getInteger(parameterMap, "endDateMonth");
@@ -115,14 +112,11 @@ public class ExportImportDateUtil {
 		int endDateHour = MapUtil.getInteger(parameterMap, "endDateHour");
 		int endDateMinute = MapUtil.getInteger(parameterMap, "endDateMinute");
 
-		long groupId = MapUtil.getLong(
-			configurationSettingsMap, "sourceGroupId");
-
+		long groupId = MapUtil.getLong(settingsMap, "sourceGroupId");
 		boolean privateLayout = MapUtil.getBoolean(
-			configurationSettingsMap, "privateLayout");
-
-		Locale locale = (Locale)configurationSettingsMap.get("locale");
-		TimeZone timeZone = (TimeZone)configurationSettingsMap.get("timezone");
+			settingsMap, "privateLayout");
+		Locale locale = (Locale)settingsMap.get("locale");
+		TimeZone timeZone = (TimeZone)settingsMap.get("timezone");
 
 		return getDateRange(
 			range, rangeLast, startDateAmPm, startDateYear, startDateMonth,
@@ -152,7 +146,6 @@ public class ExportImportDateUtil {
 		String range = ParamUtil.getString(
 			portletRequest, "range", defaultRange);
 		int rangeLast = ParamUtil.getInteger(portletRequest, "last");
-
 		int startDateAmPm = ParamUtil.getInteger(
 			portletRequest, "startDateAmPm");
 		int startDateYear = ParamUtil.getInteger(
@@ -164,7 +157,6 @@ public class ExportImportDateUtil {
 			portletRequest, "startDateHour");
 		int startDateMinute = ParamUtil.getInteger(
 			portletRequest, "startDateMinute");
-
 		int endDateAmPm = ParamUtil.getInteger(portletRequest, "endDateAmPm");
 		int endDateYear = ParamUtil.getInteger(portletRequest, "endDateYear");
 		int endDateMonth = ParamUtil.getInteger(portletRequest, "endDateMonth");
