@@ -40,7 +40,7 @@ ExportImportConfiguration exportImportConfiguration = (ExportImportConfiguration
 	<portlet:param name="struts_action" value="/layouts_admin/edit_export_configuration" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.EXPORT %>" />
 	<portlet:param name="redirect" value="<%= exportRedirectURL %>" />
-	<portlet:param name="configurationId" value="<%= String.valueOf(exportImportConfiguration.getExportImportConfigurationId()) %>" />
+	<portlet:param name="exportImportConfigurationId" value="<%= String.valueOf(exportImportConfiguration.getExportImportConfigurationId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon
@@ -63,7 +63,7 @@ ExportImportConfiguration exportImportConfiguration = (ExportImportConfiguration
 	<portlet:param name="struts_action" value="/layouts_admin/edit_export_configuration" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= deleteRedirectURL %>" />
-	<portlet:param name="configurationId" value="<%= String.valueOf(exportImportConfiguration.getExportImportConfigurationId()) %>" />
+	<portlet:param name="exportImportConfigurationId" value="<%= String.valueOf(exportImportConfiguration.getExportImportConfigurationId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon

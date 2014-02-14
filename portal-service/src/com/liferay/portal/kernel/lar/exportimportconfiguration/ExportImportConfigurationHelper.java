@@ -78,12 +78,12 @@ public class ExportImportConfigurationHelper {
 	}
 
 	public static void exportLayoutsByExportImportConfiguration(
-			long configurationId)
+			long exportImportConfigurationId)
 		throws Exception {
 
 		ExportImportConfiguration exportImportConfiguration =
 			ExportImportConfigurationLocalServiceUtil.
-				getExportImportConfiguration(configurationId);
+				getExportImportConfiguration(exportImportConfigurationId);
 
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
@@ -94,7 +94,6 @@ public class ExportImportConfigurationHelper {
 		String taskName = MapUtil.getString(parameterMap, "exportFileName");
 
 		long groupId = MapUtil.getLong(settingsMap, "sourceGroupId");
-
 		boolean privateLayout = GetterUtil.getBoolean(
 			settingsMap.get("privateLayout"));
 
