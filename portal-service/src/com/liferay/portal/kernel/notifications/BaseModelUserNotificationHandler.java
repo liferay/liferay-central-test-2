@@ -130,7 +130,7 @@ public abstract class BaseModelUserNotificationHandler
 
 		return serviceContext.translate(
 			message, HtmlUtil.escape(assetRenderer.getUserName()),
-			HtmlUtil.escape(typeName));
+			StringUtil.toLowerCase(HtmlUtil.escape(typeName)));
 	}
 
 }
