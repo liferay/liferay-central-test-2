@@ -43,10 +43,8 @@ public abstract class BaseModelUserNotificationHandler
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject(
 			userNotificationEvent.getPayload());
 
-		String entryTitle = jsonObject.getString("entryTitle");
 
 		String className = jsonObject.getString("className");
-		long classPK = jsonObject.getLong("classPK");
 
 		AssetRendererFactory assetRendererFactory =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(
@@ -59,6 +57,8 @@ public abstract class BaseModelUserNotificationHandler
 		AssetRenderer assetRenderer = null;
 
 		try {
+			long classPK = jsonObject.getLong("classPK");
+
 			assetRenderer = assetRendererFactory.getAssetRenderer(classPK);
 		}
 		catch (Exception e) {
@@ -81,7 +81,11 @@ public abstract class BaseModelUserNotificationHandler
 		sb.append("<div class=\"title\">");
 		sb.append(title);
 		sb.append("</div><div class=\"body\">");
+
+		String entryTitle = jsonObject.getString("entryTitle");
+
 		sb.append(HtmlUtil.escape(StringUtil.shorten(entryTitle), 50));
+
 		sb.append("</div>");
 
 		return sb.toString();
