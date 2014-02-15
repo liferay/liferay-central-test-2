@@ -40,9 +40,9 @@ public interface ServiceTracker<S, T> {
 
 	public T[] getServices(T[] services);
 
-	public SortedMap<ServiceReference<S>, T> getTracked();
+	public SortedMap<ServiceReference<S>, T> getTrackedServiceReferences();
 
-	public int getTrackingCount();
+	public int getTrackingServiceReferencesCount();
 
 	@Override
 	public int hashCode();
