@@ -303,11 +303,11 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		}
 
 		@Override
-		public S addingService(ServiceReference<S> serviceReference) {
+		public S addedService(ServiceReference<S> serviceReference) {
 			S service;
 
 			if (_delegate != null) {
-				service = _delegate.addingService(serviceReference);
+				service = _delegate.addedService(serviceReference);
 			}
 			else {
 				service = getRegistry().getService(serviceReference);
