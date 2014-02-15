@@ -61,7 +61,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		_filter = filter;
 		_properties = Collections.unmodifiableMap(properties);
 		
-		Registry registry = _getRegistry();
+		Registry registry = RegistryUtil.getRegistry();
 
 		if (filter != null) {
 			filter = _getFilter(filter, _clazz);
@@ -103,14 +103,13 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	public ServiceTrackerCollection(Class<S> clazz, String filterName) {
 		this(
-			clazz, _getRegistry().getFilter(filterName), null,
-			new HashMap<String, Object>());
+			clazz, _getFilter(filterName), null, new HashMap<String, Object>());
 	}
 
 	public ServiceTrackerCollection(
 		Class<S> clazz, String filterName, Map<String, Object> properties) {
 
-		this(clazz, _getRegistry().getFilter(filterName), null, properties);
+		this(clazz, _getFilter(filterName), null, properties);
 	}
 
 	public ServiceTrackerCollection(
@@ -118,8 +117,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
 
 		this(
-			clazz, _getRegistry().getFilter(filterName),
-			serviceTrackerCustomizer, new HashMap<String, Object>());
+			clazz, _getFilter(filterName), serviceTrackerCustomizer,
+			new HashMap<String, Object>());
 	}
 
 	public ServiceTrackerCollection(
@@ -128,8 +127,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		Map<String, Object> properties) {
 
 		this(
-			clazz, _getRegistry().getFilter(filterName),
-			serviceTrackerCustomizer, properties);
+			clazz, _getFilter(filterName), serviceTrackerCustomizer,
+			properties);
 	}
 
 	@Override
@@ -141,8 +140,10 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 			return false;
 		}
 
+		Registry registry = RegistryUtil.getRegistry();
+
 		ServiceRegistration<S> serviceRegistration =
-			_getRegistry().registerService(_clazz, element, properties);
+			registry.registerService(_clazz, element, properties);
 
 		_serviceRegistrations.put(element, serviceRegistration);
 
@@ -158,8 +159,10 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 			return false;
 		}
 
+		Registry registry = RegistryUtil.getRegistry();
+
 		ServiceRegistration<S> serviceRegistration =
-			_getRegistry().registerService(_clazz, element, properties);
+			registry.registerService(_clazz, element, properties);
 
 		_serviceRegistrations.put(element, serviceRegistration);
 
@@ -265,8 +268,10 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		return _services.toArray(array);
 	}
 
-	private static Registry _getRegistry() {
-		return RegistryUtil.getRegistry();
+	private static Filter _getFilter(String filterName) {
+		Registry registry = RegistryUtil.getRegistry();
+		
+		return registry.getFilter(filterName);
 	}
 
 	private Filter _getFilter(Filter filter, Class<S> clazz) {
@@ -319,7 +324,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 					serviceReference);
 			}
 			else {
-				Registry registry = _getRegistry(); 
+				Registry registry = RegistryUtil.getRegistry(); 
 
 				service = registry.getService(serviceReference);
 			}
@@ -348,7 +353,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 					serviceReference, service);
 			}
 			else {
-				Registry registry = _getRegistry();
+				Registry registry = RegistryUtil.getRegistry();
 
 				registry.ungetService(serviceReference);
 			}
