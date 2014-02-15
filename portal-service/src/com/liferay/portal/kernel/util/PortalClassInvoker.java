@@ -24,6 +24,18 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class PortalClassInvoker {
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #invoke(MethodKey,
+	 *             Object...)}
+	 */
+	@Deprecated
+	public static Object invoke(
+			boolean newInstance, MethodKey methodKey, Object... arguments)
+		throws Exception {
+
+		return invoke(methodKey, arguments);
+	}
+
 	public static Object invoke(MethodKey methodKey, Object... arguments)
 		throws Exception {
 
