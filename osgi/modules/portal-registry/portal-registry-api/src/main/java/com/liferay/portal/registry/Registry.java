@@ -24,15 +24,6 @@ public interface Registry {
 
 	public Filter getFilter(String filterString) throws RuntimeException;
 
-	/**
-	 * This method is only intended for use by the RegistryUtil. It provides an
-	 * opportunity for security checks to be performed on get. If the security
-	 * check fails a security exception is thrown. Otherwise the registry is
-	 * returned.
-	 *
-	 * @return the registry
-	 * @throws SecurityException
-	 */
 	public Registry getRegistry() throws SecurityException;
 
 	public <T> T getService(Class<T> clazz);
@@ -77,16 +68,6 @@ public interface Registry {
 	public <T> ServiceRegistration<T> registerService(
 		String[] classNames, T service, Map<String, Object> map);
 
-	/**
-	 * This method is only intended for use by the RegistryUtil. It provides an
-	 * opportunity for security checks to be performed on set.  If the security
-	 * check fails a security exception is thrown. If the check succeeds, the
-	 * value of the registry param is return.
-	 *
-	 * @param  registry the registry to be checked
-	 * @return the registry
-	 * @throws SecurityException
-	 */
 	public Registry setRegistry(Registry registry) throws SecurityException;
 
 	public <S, T> ServiceTracker<S, T> trackServices(Class<S> clazz);
