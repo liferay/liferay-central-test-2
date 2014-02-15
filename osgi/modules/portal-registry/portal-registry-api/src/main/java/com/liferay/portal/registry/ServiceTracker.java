@@ -25,6 +25,7 @@ public interface ServiceTracker<S, T> {
 
 	public void close();
 
+	@Override
 	public boolean equals(Object obj);
 
 	public T getService();
@@ -43,6 +44,7 @@ public interface ServiceTracker<S, T> {
 
 	public int getTrackingCount();
 
+	@Override
 	public int hashCode();
 
 	public boolean isEmpty();
@@ -60,6 +62,7 @@ public interface ServiceTracker<S, T> {
 
 	public int size();
 
+	@Override
 	public String toString();
 
 	public T waitForService(long timeout) throws InterruptedException;
