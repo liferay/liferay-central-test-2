@@ -138,7 +138,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		Map<String, Object> properties = new HashMap<String, Object>(
 			_properties);
 
-		if ((_filter != null) && (!_filter.matches(properties))) {
+		if ((_filter != null) && !_filter.matches(properties)) {
 			return false;
 		}
 
