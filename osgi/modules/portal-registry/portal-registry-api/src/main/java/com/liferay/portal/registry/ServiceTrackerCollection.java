@@ -21,6 +21,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -150,7 +151,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		return true;
 	}
 
-	public boolean add(S element, Map<String, Object> properties) {
+	public boolean add(S service, Map<String, Object> properties) {
 		properties = new HashMap<String, Object>(properties);
 
 		properties.putAll(_properties);
@@ -162,23 +163,23 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistration<S> serviceRegistration =
-			registry.registerService(_clazz, element, properties);
+			registry.registerService(_clazz, service, properties);
 
-		_serviceRegistrations.put(element, serviceRegistration);
+		_serviceRegistrations.put(service, serviceRegistration);
 
 		return true;
 	}
 
 	@Override
-	public boolean addAll(Collection<? extends S> collection) {
-		if (this == collection) {
+	public boolean addAll(Collection<? extends S> services) {
+		if (this == services) {
 			return false;
 		}
 
 		boolean modified = false;
 
-		for (S element : collection) {
-			modified = add(element);
+		for (S service : services) {
+			modified = add(service);
 		}
 
 		return modified;
@@ -186,29 +187,34 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	@Override
 	public void clear() {
-		Iterator<Entry<S, ServiceRegistration<S>>> iterator =
-			_serviceRegistrations.entrySet().iterator();
+		Set<Map.Entry<S, ServiceRegistration<S>>> set =
+			_serviceRegistrations.entrySet(); 
+			
+		Iterator<Entry<S, ServiceRegistration<S>>> iterator = set.iterator();
 
 		while (iterator.hasNext()) {
 			Entry<S, ServiceRegistration<S>> entry = iterator.next();
 
-			entry.getValue().unregister();
+			ServiceRegistration<S> serviceRegistration = entry.getValue();
+			
+			serviceRegistration.unregister();
+
 			iterator.remove();
 		}
 	}
 
 	@Override
-	public boolean contains(Object element) {
-		return _services.contains(element);
+	public boolean contains(Object service) {
+		return _services.contains(service);
 	}
 
 	@Override
-	public boolean containsAll(Collection<?> collection) {
-		if (this == collection) {
+	public boolean containsAll(Collection<?> services) {
+		if (this == services) {
 			return true;
 		}
 
-		for (Object element : collection) {
+		for (Object element : services) {
 			if (!contains(element)) {
 				return false;
 			}
@@ -228,9 +234,9 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	}
 
 	@Override
-	public boolean remove(Object element) {
+	public boolean remove(Object service) {
 		ServiceRegistration<S> serviceRegistration =
-			_serviceRegistrations.remove(element);
+			_serviceRegistrations.remove(service);
 
 		if (serviceRegistration == null) {
 			return false;
@@ -242,13 +248,12 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	}
 
 	@Override
-	public boolean removeAll(Collection<?> collection) {
+	public boolean removeAll(Collection<?> services) {
 		return false;
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public boolean retainAll(Collection<?> collection) {
+	public boolean retainAll(Collection<?> services) {
 		return false;
 	}
 
@@ -263,9 +268,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
-	public <T> T[] toArray(T[] array) {
-		return _services.toArray(array);
+	public <T> T[] toArray(T[] services) {
+		return _services.toArray(services);
 	}
 
 	private static Filter _getFilter(String filterName) {
