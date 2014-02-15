@@ -12,18 +12,17 @@
  * details.
  */
 
-package com.liferay.registry;
+package com.liferay.portal.registry;
 
 /**
  * @author Raymond Augé
  */
-public interface ServiceTrackerCustomizer<S, T> {
+public interface ServiceReference<S> extends Comparable<Object> {
 
-	public T addingService(ServiceReference<S> serviceReference);
+	public int compareTo(Object reference);
 
-	public void modifiedService(
-		ServiceReference<S> serviceReference, T service);
+	public Object getProperty(String key);
 
-	public void removedService(ServiceReference<S> serviceReference, T service);
+	public String[] getPropertyKeys();
 
 }

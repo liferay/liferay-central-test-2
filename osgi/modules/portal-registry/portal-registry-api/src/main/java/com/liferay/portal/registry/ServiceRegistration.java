@@ -12,32 +12,20 @@
  * details.
  */
 
-package com.liferay.registry;
+package com.liferay.portal.registry;
+
+import java.util.Map;
+
 
 /**
  * @author Raymond Augé
  */
-public class RegistryUtil {
+public interface ServiceRegistration<T> {
 
-	public static Registry getRegistry() {
-		if (_registry != null) {
-			return _registry.getRegistry();
-		}
+	public ServiceReference<T> getReference();
 
-		throw new NullPointerException("A Registry instance was never set.");
-	}
+	public void setProperties(Map<String, Object> map);
 
-	public static void setRegistry(Registry registry) {
-		if (_registry != null) {
-			registry = _registry.setRegistry(registry);
-		}
-		else if (registry != null) {
-			registry = registry.setRegistry(registry);
-		}
-
-		_registry = registry;
-	}
-
-	private static Registry _registry;
+	public void unregister();
 
 }

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.registry;
+package com.liferay.portal.registry;
 
 import java.util.Collection;
 import java.util.Collections;
