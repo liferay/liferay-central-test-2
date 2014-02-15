@@ -38,7 +38,7 @@ public interface ServiceTracker<S, T> {
 
 	public Object[] getServices();
 
-	public T[] getServices(T[] array);
+	public T[] getServices(T[] services);
 
 	public SortedMap<ServiceReference<S>, T> getTracked();
 

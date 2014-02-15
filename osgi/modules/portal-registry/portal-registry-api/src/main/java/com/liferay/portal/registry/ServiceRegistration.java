@@ -21,7 +21,7 @@ import java.util.Map;
  */
 public interface ServiceRegistration<T> {
 
-	public ServiceReference<T> getReference();
+	public ServiceReference<T> getServiceReference();
 
 	public void setProperties(Map<String, Object> map);
 
