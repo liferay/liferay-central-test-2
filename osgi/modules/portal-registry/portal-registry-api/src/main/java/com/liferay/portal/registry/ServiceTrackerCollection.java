@@ -67,11 +67,11 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 			filter = fixFilter(filter, _clazz);
 
 			_serviceTracker = getRegistry().trackServices(
-				filter, new CachingCustomizer(serviceTrackerCustomizer));
+				filter, new DefaultServiceTrackerCustomizer(serviceTrackerCustomizer));
 		}
 		else {
 			_serviceTracker = getRegistry().trackServices(
-				clazz, new CachingCustomizer(serviceTrackerCustomizer));
+				clazz, new DefaultServiceTrackerCustomizer(serviceTrackerCustomizer));
 		}
 
 		_serviceTracker.open();
@@ -299,9 +299,10 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	private final Map<S, ServiceRegistration<S>> _serviceRegistrations;
 	private final ServiceTracker<S, S> _serviceTracker;
 
-	private class CachingCustomizer implements ServiceTrackerCustomizer<S, S> {
+	private class DefaultServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<S, S> {
 
-		public CachingCustomizer(
+		public DefaultServiceTrackerCustomizer(
 			ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
 
 			_delegate = serviceTrackerCustomizer;
