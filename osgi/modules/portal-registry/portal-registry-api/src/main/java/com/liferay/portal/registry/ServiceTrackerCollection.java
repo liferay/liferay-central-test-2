@@ -293,8 +293,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	private final Map<S, ServiceRegistration<S>> _serviceRegistrations;
 	private final ServiceTracker<S, S> _serviceTracker;
 
-	private class CachingCustomizer
-		implements ServiceTrackerCustomizer<S, S> {
+	private class CachingCustomizer implements ServiceTrackerCustomizer<S, S> {
 
 		public CachingCustomizer(
 			ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {

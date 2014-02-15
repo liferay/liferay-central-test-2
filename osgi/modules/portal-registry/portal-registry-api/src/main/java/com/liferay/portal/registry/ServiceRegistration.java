@@ -16,7 +16,6 @@ package com.liferay.portal.registry;
 
 import java.util.Map;
 
-
 /**
  * @author Raymond Augé
  */
