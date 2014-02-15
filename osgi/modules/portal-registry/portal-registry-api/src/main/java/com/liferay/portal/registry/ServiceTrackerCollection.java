@@ -130,14 +130,15 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	@Override
 	public boolean add(S element) {
-		Map<String, Object> map = new HashMap<String, Object>(_properties);
+		Map<String, Object> properties = new HashMap<String, Object>(
+			_properties);
 
-		if ((_filter != null) && (!_filter.matches(map))) {
+		if ((_filter != null) && (!_filter.matches(properties))) {
 			return false;
 		}
 
 		ServiceRegistration<S> serviceRegistration =
-			getRegistry().registerService(_clazz, element, map);
+			getRegistry().registerService(_clazz, element, properties);
 
 		_serviceRegistrations.put(element, serviceRegistration);
 
@@ -145,16 +146,16 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	}
 
 	public boolean add(S element, Map<String, Object> properties) {
-		Map<String, Object> map = new HashMap<String, Object>(properties);
+		properties = new HashMap<String, Object>(properties);
 
-		map.putAll(_properties);
+		properties.putAll(_properties);
 
-		if ((_filter != null) && !_filter.matches(map)) {
+		if ((_filter != null) && !_filter.matches(properties)) {
 			return false;
 		}
 
 		ServiceRegistration<S> serviceRegistration =
-			getRegistry().registerService(_clazz, element, map);
+			getRegistry().registerService(_clazz, element, properties);
 
 		_serviceRegistrations.put(element, serviceRegistration);
 
@@ -267,11 +268,11 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	private Filter fixFilter(Filter filter, Class<S> clazz) {
 		String className = clazz.getName();
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		map.put("objectClass", className);
+		properties.put("objectClass", className);
 
-		if (filter.matches(map)) {
+		if (filter.matches(properties)) {
 			return filter;
 		}
 

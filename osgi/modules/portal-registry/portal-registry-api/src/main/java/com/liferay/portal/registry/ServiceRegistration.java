@@ -23,7 +23,7 @@ public interface ServiceRegistration<T> {
 
 	public ServiceReference<T> getServiceReference();
 
-	public void setProperties(Map<String, Object> map);
+	public void setProperties(Map<String, Object> properties);
 
 	public void unregister();
 

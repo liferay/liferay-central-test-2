@@ -54,19 +54,19 @@ public interface Registry {
 		Class<T> clazz, T service);
 
 	public <T> ServiceRegistration<T> registerService(
-		Class<T> clazz, T service, Map<String, Object> map);
+		Class<T> clazz, T service, Map<String, Object> properties);
 
 	public <T> ServiceRegistration<T> registerService(
 		String className, T service);
 
 	public <T> ServiceRegistration<T> registerService(
-		String className, T service, Map<String, Object> map);
+		String className, T service, Map<String, Object> properties);
 
 	public <T> ServiceRegistration<T> registerService(
 		String[] classNames, T service);
 
 	public <T> ServiceRegistration<T> registerService(
-		String[] classNames, T service, Map<String, Object> map);
+		String[] classNames, T service, Map<String, Object> properties);
 
 	public Registry setRegistry(Registry registry) throws SecurityException;
 
