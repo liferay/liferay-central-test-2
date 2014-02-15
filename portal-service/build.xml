@@ -11,7 +11,10 @@
 	<target name="compile">
 		<mkdir dir="classes" />
 
-		<gradle-execute gradleTask=":portal-registry-api:compileJava" gradleModuleDir="/portal-registry" />
+		<gradle-execute
+			gradleModuleDir="/portal-registry"
+			gradleTask=":portal-registry-api:compileJava"
+		/>
 
 		<copy todir="classes" preservelastmodified="true">
 			<fileset dir="src" excludes="**/*.java" />

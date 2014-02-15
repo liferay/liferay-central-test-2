@@ -6,18 +6,26 @@
 	<import file="../../build-common-java.xml" />
 
 	<target name="clean">
-		<gradle-execute gradleTask="clean" />
+		<gradle-execute
+			gradleTask="clean"
+		/>
 	</target>
 
 	<target name="compile">
-		<gradle-execute gradleTask="compileJava" />
+		<gradle-execute
+			gradleTask="compileJava"
+		/>
 	</target>
 
 	<target name="deploy">
-		<gradle-execute gradleTask="deploy" />
+		<gradle-execute
+			gradleTask="deploy"
+		/>
 	</target>
 
 	<target name="jar">
-		<gradle-execute gradleTask="jar" />
+		<gradle-execute
+			gradleTask="jar"
+		/>
 	</target>
 </project>

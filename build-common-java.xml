@@ -49,7 +49,10 @@
 					</then>
 				</if>
 
-				<gradle-execute gradleTask=":portal-registry-api:compileJava" gradleModuleDir="/portal-registry" />
+				<gradle-execute
+					gradleModuleDir="/portal-registry"
+					gradleTask=":portal-registry-api:compileJava"
+				/>
 
 				<mkdir dir="classes" />
 
