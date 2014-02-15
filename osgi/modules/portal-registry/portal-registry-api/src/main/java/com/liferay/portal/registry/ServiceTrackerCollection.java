@@ -275,11 +275,9 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	}
 
 	private Filter _getFilter(Filter filter, Class<S> clazz) {
-		String className = clazz.getName();
-
 		Map<String, Object> properties = new HashMap<String, Object>();
 
-		properties.put("objectClass", className);
+		properties.put("objectClass", clazz.getName());
 
 		if (filter.matches(properties)) {
 			return filter;
@@ -290,7 +288,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		StringBuilder sb = new StringBuilder(5);
 
 		sb.append("(&(objectClass=");
-		sb.append(className);
+		sb.append(clazz.getName());
 		sb.append(")");
 		sb.append(filter.toString());
 		sb.append(")");
