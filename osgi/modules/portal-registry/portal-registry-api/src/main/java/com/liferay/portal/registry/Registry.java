@@ -22,7 +22,7 @@ import java.util.Map;
  */
 public interface Registry {
 
-	public Filter getFilter(String filterString) throws RuntimeException;
+	public Filter getFilter(String filterName) throws RuntimeException;
 
 	public Registry getRegistry() throws SecurityException;
 
@@ -37,17 +37,17 @@ public interface Registry {
 	public <T> ServiceReference<T> getServiceReference(String className);
 
 	public <T> Collection<ServiceReference<T>> getServiceReferences(
-			Class<T> clazz, String filter)
+			Class<T> clazz, String filterName)
 		throws Exception;
 
 	public <T> ServiceReference<T>[] getServiceReferences(
-			String className, String filter)
+			String className, String filterName)
 		throws Exception;
 
-	public <T> Collection<T> getServices(Class<T> clazz, String filter)
+	public <T> Collection<T> getServices(Class<T> clazz, String filterName)
 		throws Exception;
 
-	public <T> T[] getServices(String className, String filter)
+	public <T> T[] getServices(String className, String filterName)
 		throws Exception;
 
 	public <T> ServiceRegistration<T> registerService(
