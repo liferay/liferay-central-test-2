@@ -74,9 +74,6 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		}
 
 		_serviceTracker.open();
-
-		_serviceRegistrations =
-			new ConcurrentHashMap<S, ServiceRegistration<S>>();
 	}
 
 	public ServiceTrackerCollection(
@@ -295,7 +292,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	private final Class<S> _clazz;
 	private final Filter _filter;
 	private final Map<String, Object> _properties;
-	private final Map<S, ServiceRegistration<S>> _serviceRegistrations;
+	private final Map<S, ServiceRegistration<S>> _serviceRegistrations =
+		new ConcurrentHashMap<S, ServiceRegistration<S>>();
 	private final ServiceTracker<S, S> _serviceTracker;
 
 	private class DefaultServiceTrackerCustomizer
