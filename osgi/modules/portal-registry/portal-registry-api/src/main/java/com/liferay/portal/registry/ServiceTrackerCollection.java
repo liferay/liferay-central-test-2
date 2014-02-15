@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
@@ -60,8 +61,6 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		_clazz = clazz;
 		_filter = filter;
 		_properties = Collections.unmodifiableMap(properties);
-
-		_services = new CopyOnWriteArrayList<S>();
 
 		if (filter != null) {
 			filter = fixFilter(filter, _clazz);
@@ -292,7 +291,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		return RegistryUtil.getRegistry().getFilter(sb.toString());
 	}
 
-	private final CopyOnWriteArrayList<S> _services;
+	private final List<S> _services = new CopyOnWriteArrayList<S>();
 	private final Class<S> _clazz;
 	private final Filter _filter;
 	private final Map<String, Object> _properties;
