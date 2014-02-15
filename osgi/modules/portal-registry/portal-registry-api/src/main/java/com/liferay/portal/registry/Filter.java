@@ -21,8 +21,10 @@ import java.util.Map;
  */
 public interface Filter {
 
+	@Override
 	public boolean equals(Object obj);
 
+	@Override
 	public int hashCode();
 
 	public boolean matches(Map<String, Object> map);
@@ -31,6 +33,7 @@ public interface Filter {
 
 	public boolean matchesCase(Map<String, Object> map);
 
+	@Override
 	public String toString();
 
 }
