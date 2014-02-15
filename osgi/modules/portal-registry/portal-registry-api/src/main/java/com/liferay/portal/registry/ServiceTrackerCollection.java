@@ -305,21 +305,24 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		public DefaultServiceTrackerCustomizer(
 			ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
 
-			_delegate = serviceTrackerCustomizer;
+			_serviceTrackerCustomizer = serviceTrackerCustomizer;
 		}
 
 		@Override
 		public S addedService(ServiceReference<S> serviceReference) {
-			S service;
+			S service = null;
 
-			if (_delegate != null) {
-				service = _delegate.addedService(serviceReference);
+			if (_serviceTrackerCustomizer != null) {
+				service = _serviceTrackerCustomizer.addedService(
+					serviceReference);
 			}
 			else {
-				service = getRegistry().getService(serviceReference);
+				Registry registry = getRegistry(); 
+
+				service = registry.getService(serviceReference);
 			}
 
-			ServiceTrackerCollection.this._cachedCollection.add(service);
+			_cachedCollection.add(service);
 
 			return service;
 		}
@@ -328,8 +331,9 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		public void modifiedService(
 			ServiceReference<S> serviceReference, S service) {
 
-			if (_delegate != null) {
-				_delegate.modifiedService(serviceReference, service);
+			if (_serviceTrackerCustomizer != null) {
+				_serviceTrackerCustomizer.modifiedService(
+					serviceReference, service);
 			}
 		}
 
@@ -337,17 +341,20 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		public void removedService(
 			ServiceReference<S> serviceReference, S service) {
 
-			if (_delegate != null) {
-				_delegate.removedService(serviceReference, service);
+			if (_serviceTrackerCustomizer != null) {
+				_serviceTrackerCustomizer.removedService(
+					serviceReference, service);
 			}
 			else {
-				getRegistry().ungetService(serviceReference);
+				Registry registry = getRegistry();
+
+				registry.ungetService(serviceReference);
 			}
 
-			ServiceTrackerCollection.this._cachedCollection.remove(service);
+			_cachedCollection.remove(service);
 		}
 
-		private final ServiceTrackerCustomizer<S, S> _delegate;
+		private final ServiceTrackerCustomizer<S, S> _serviceTrackerCustomizer;
 
 	}
 
