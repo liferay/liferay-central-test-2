@@ -61,7 +61,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		_filter = filter;
 		_properties = Collections.unmodifiableMap(properties);
 
-		_cachedCollection = new CopyOnWriteArrayList<S>();
+		_services = new CopyOnWriteArrayList<S>();
 
 		if (filter != null) {
 			filter = fixFilter(filter, _clazz);
@@ -197,7 +197,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	@Override
 	public boolean contains(Object element) {
-		return _cachedCollection.contains(element);
+		return _services.contains(element);
 	}
 
 	@Override
@@ -217,12 +217,12 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	@Override
 	public boolean isEmpty() {
-		return _cachedCollection.isEmpty();
+		return _services.isEmpty();
 	}
 
 	@Override
 	public Iterator<S> iterator() {
-		return _cachedCollection.iterator();
+		return _services.iterator();
 	}
 
 	@Override
@@ -252,18 +252,18 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	@Override
 	public int size() {
-		return _cachedCollection.size();
+		return _services.size();
 	}
 
 	@Override
 	public Object[] toArray() {
-		return _cachedCollection.toArray();
+		return _services.toArray();
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T[] toArray(T[] array) {
-		return _cachedCollection.toArray(array);
+		return _services.toArray(array);
 	}
 
 	private static Registry getRegistry() {
@@ -292,7 +292,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		return RegistryUtil.getRegistry().getFilter(sb.toString());
 	}
 
-	private final CopyOnWriteArrayList<S> _cachedCollection;
+	private final CopyOnWriteArrayList<S> _services;
 	private final Class<S> _clazz;
 	private final Filter _filter;
 	private final Map<String, Object> _properties;
@@ -322,7 +322,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 				service = registry.getService(serviceReference);
 			}
 
-			_cachedCollection.add(service);
+			_services.add(service);
 
 			return service;
 		}
@@ -351,7 +351,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 				registry.ungetService(serviceReference);
 			}
 
-			_cachedCollection.remove(service);
+			_services.remove(service);
 		}
 
 		private final ServiceTrackerCustomizer<S, S> _serviceTrackerCustomizer;
