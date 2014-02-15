@@ -28,7 +28,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * @author Raymond Augé
  */
-public class ServiceTrackerCollection <S> implements Collection<S> {
+public class ServiceTrackerCollection<S> implements Collection<S> {
 
 	public ServiceTrackerCollection(Class<S> clazz) {
 		this(clazz, (Filter)null, null, new HashMap<String, Object>());
@@ -61,7 +61,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		_clazz = clazz;
 		_filter = filter;
 		_properties = Collections.unmodifiableMap(properties);
-		
+
 		Registry registry = RegistryUtil.getRegistry();
 
 		if (filter != null) {
@@ -143,8 +143,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		ServiceRegistration<S> serviceRegistration =
-			registry.registerService(_clazz, element, properties);
+		ServiceRegistration<S> serviceRegistration = registry.registerService(
+			_clazz, element, properties);
 
 		_serviceRegistrations.put(element, serviceRegistration);
 
@@ -162,8 +162,8 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		ServiceRegistration<S> serviceRegistration =
-			registry.registerService(_clazz, service, properties);
+		ServiceRegistration<S> serviceRegistration = registry.registerService(
+			_clazz, service, properties);
 
 		_serviceRegistrations.put(service, serviceRegistration);
 
@@ -188,15 +188,15 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 	@Override
 	public void clear() {
 		Set<Map.Entry<S, ServiceRegistration<S>>> set =
-			_serviceRegistrations.entrySet(); 
-			
+			_serviceRegistrations.entrySet();
+
 		Iterator<Entry<S, ServiceRegistration<S>>> iterator = set.iterator();
 
 		while (iterator.hasNext()) {
 			Entry<S, ServiceRegistration<S>> entry = iterator.next();
 
 			ServiceRegistration<S> serviceRegistration = entry.getValue();
-			
+
 			serviceRegistration.unregister();
 
 			iterator.remove();
@@ -274,7 +274,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 
 	private static Filter _getFilter(String filterName) {
 		Registry registry = RegistryUtil.getRegistry();
-		
+
 		return registry.getFilter(filterName);
 	}
 
@@ -300,12 +300,12 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 		return registry.getFilter(sb.toString());
 	}
 
-	private final List<S> _services = new CopyOnWriteArrayList<S>();
 	private final Class<S> _clazz;
 	private final Filter _filter;
 	private final Map<String, Object> _properties;
 	private final Map<S, ServiceRegistration<S>> _serviceRegistrations =
 		new ConcurrentHashMap<S, ServiceRegistration<S>>();
+	private final List<S> _services = new CopyOnWriteArrayList<S>();
 	private final ServiceTracker<S, S> _serviceTracker;
 
 	private class DefaultServiceTrackerCustomizer
@@ -326,7 +326,7 @@ public class ServiceTrackerCollection <S> implements Collection<S> {
 					serviceReference);
 			}
 			else {
-				Registry registry = RegistryUtil.getRegistry(); 
+				Registry registry = RegistryUtil.getRegistry();
 
 				service = registry.getService(serviceReference);
 			}
