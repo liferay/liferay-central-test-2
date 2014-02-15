@@ -1422,13 +1422,15 @@ public class SeleniumBuilderFileUtil {
 		}
 
 		Element keyElement = elements.get(0);
-		Element descriptionElement = elements.get(2);
 
 		String key = keyElement.getText();
+
+		Element descriptionElement = elements.get(2);
+
 		String description = descriptionElement.getText();
 
-		if (!description.equals("") && !key.equals("") &&
-			!key.equals("PAGE_NAME") && !key.equals("EXTEND_ACTION_PATH")) {
+		if (!key.equals("") && !key.equals("EXTEND_ACTION_PATH") &&
+			!key.equals("PAGE_NAME") && !description.equals("")) {
 
 			if (description.endsWith(".")) {
 				throwValidationException(2004, fileName, description);
