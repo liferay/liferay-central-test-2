@@ -21,16 +21,16 @@ import java.util.Map;
  */
 public interface Filter {
 
-	boolean equals(Object obj);
+	public boolean equals(Object obj);
 
-	int hashCode();
+	public int hashCode();
 
-	boolean matches(Map<String, Object> map);
+	public boolean matches(Map<String, Object> map);
 
-	boolean matches(ServiceReference<?> reference);
+	public boolean matches(ServiceReference<?> reference);
 
-	boolean matchesCase(Map<String, Object> map);
+	public boolean matchesCase(Map<String, Object> map);
 
-	String toString();
+	public String toString();
 
 }
