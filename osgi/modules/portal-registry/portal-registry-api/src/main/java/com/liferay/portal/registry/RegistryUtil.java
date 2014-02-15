@@ -24,7 +24,7 @@ public class RegistryUtil {
 			return _registry.getRegistry();
 		}
 
-		throw new NullPointerException("A Registry instance was never set.");
+		throw new NullPointerException("A registry instance was never set");
 	}
 
 	public static void setRegistry(Registry registry) {
