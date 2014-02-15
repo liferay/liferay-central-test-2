@@ -26,7 +26,7 @@
 				<source-folder>
 					<label>osgi\modules\portal-registry\portal-registry-api\src\main\java</label>
 					<type>java</type>
-					<location>osgi\modules\portal-registry\portal-registry-api\src\main\java</location>
+					<location>osgi/modules/portal-registry/portal-registry-api/src/main/java</location>
 					<encoding>UTF-8</encoding>
 				</source-folder>
 				<source-folder>
