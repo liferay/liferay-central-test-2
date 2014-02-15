@@ -20,7 +20,7 @@ package com.liferay.portal.registry;
 public interface ServiceReference<S> extends Comparable<Object> {
 
 	@Override
-	public int compareTo(Object reference);
+	public int compareTo(Object serviceReference);
 
 	public Object getProperty(String key);
 
