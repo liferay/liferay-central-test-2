@@ -29,7 +29,7 @@ public interface Filter {
 
 	public boolean matches(Map<String, Object> map);
 
-	public boolean matches(ServiceReference<?> reference);
+	public boolean matches(ServiceReference<?> serviceReference);
 
 	public boolean matchesCase(Map<String, Object> map);
 
