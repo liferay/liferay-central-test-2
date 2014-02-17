@@ -324,11 +324,11 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
 		Set<String> visitedURLs = new HashSet<String>();
 
 		comboServletStaticURLGenerator.setVisitedURLs(visitedURLs);
-
-		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 
 		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
 
@@ -346,16 +346,16 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		PortletImpl portlet = spy(new PortletImpl());
 		
-		List<String> resourcesList = Arrays.asList(portletResources);
+		List<String> portletResourcesList = Arrays.asList(portletResources);
 
-		portlet.setFooterPortalCss(resourcesList);
-		portlet.setFooterPortalJavaScript(resourcesList);
-		portlet.setFooterPortletCss(resourcesList);
-		portlet.setFooterPortletJavaScript(resourcesList);
-		portlet.setHeaderPortalCss(resourcesList);
-		portlet.setHeaderPortalJavaScript(resourcesList);
-		portlet.setHeaderPortletCss(resourcesList);
-		portlet.setHeaderPortletJavaScript(resourcesList);
+		portlet.setFooterPortalCss(portletResourcesList);
+		portlet.setFooterPortalJavaScript(portletResourcesList);
+		portlet.setFooterPortletCss(portletResourcesList);
+		portlet.setFooterPortletJavaScript(portletResourcesList);
+		portlet.setHeaderPortalCss(portletResourcesList);
+		portlet.setHeaderPortalJavaScript(portletResourcesList);
+		portlet.setHeaderPortletCss(portletResourcesList);
+		portlet.setHeaderPortletJavaScript(portletResourcesList);
 
 		portlet.setPortletName(contextPath);
 
