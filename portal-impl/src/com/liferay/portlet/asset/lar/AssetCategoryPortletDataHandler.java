@@ -144,9 +144,8 @@ public class AssetCategoryPortletDataHandler extends BasePortletDataHandler {
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 
-				// Omit date range filter by override
+				// Override date range criteria
 
-				return;
 			}
 
 		};
@@ -162,9 +161,8 @@ public class AssetCategoryPortletDataHandler extends BasePortletDataHandler {
 			@Override
 			protected void addCriteria(DynamicQuery dynamicQuery) {
 
-				// Omit date range filter by override
+				// Override date range criteria
 
-				return;
 			}
 
 		};
