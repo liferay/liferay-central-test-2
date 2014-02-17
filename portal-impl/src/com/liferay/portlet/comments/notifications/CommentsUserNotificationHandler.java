@@ -62,8 +62,8 @@ public class CommentsUserNotificationHandler
 
 	@Override
 	protected String getTitle(
-		int notificationType, AssetRenderer assetRenderer,
-		JSONObject jsonObject, ServiceContext serviceContext) {
+		JSONObject jsonObject, AssetRenderer assetRenderer,
+		ServiceContext serviceContext) {
 
 		MBMessage message = fetchMBMessage(jsonObject);
 
@@ -72,6 +72,8 @@ public class CommentsUserNotificationHandler
 		}
 
 		String title = StringPool.BLANK;
+
+		int notificationType = jsonObject.getInt("notificationType");
 
 		if (notificationType ==
 				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {

@@ -79,10 +79,7 @@ public abstract class BaseModelUserNotificationHandler
 			return null;
 		}
 
-		int notificationType = jsonObject.getInt("notificationType");
-
-		String title = getTitle(
-			notificationType, assetRenderer, jsonObject, serviceContext);
+		String title = getTitle(jsonObject, assetRenderer, serviceContext);
 
 		StringBundler sb = new StringBundler(5);
 
@@ -112,8 +109,8 @@ public abstract class BaseModelUserNotificationHandler
 	}
 
 	protected String getTitle(
-		int notificationType, AssetRenderer assetRenderer,
-		JSONObject jsonObject, ServiceContext serviceContext) {
+		JSONObject jsonObject, AssetRenderer assetRenderer,
+		ServiceContext serviceContext) {
 
 		String message = StringPool.BLANK;
 
@@ -123,6 +120,8 @@ public abstract class BaseModelUserNotificationHandler
 
 		String typeName = assetRendererFactory.getTypeName(
 			serviceContext.getLocale(), true);
+
+		int notificationType = jsonObject.getInt("notificationType");
 
 		if (notificationType ==
 				UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY) {
