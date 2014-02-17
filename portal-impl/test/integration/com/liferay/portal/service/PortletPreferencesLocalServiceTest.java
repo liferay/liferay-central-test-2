@@ -516,12 +516,12 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetGroupPortletPreferencesByPortletAndPlid()
 		throws Exception {
 
+		PortletPreferencesTestUtil.addGroupPortletPreferences(
+			_layout, _portlet);
+
 		Group group = GroupTestUtil.addGroup();
 
 		Layout layout = LayoutTestUtil.addLayout(group);
-
-		PortletPreferencesTestUtil.addGroupPortletPreferences(
-			_layout, _portlet);
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, _portlet);
 
