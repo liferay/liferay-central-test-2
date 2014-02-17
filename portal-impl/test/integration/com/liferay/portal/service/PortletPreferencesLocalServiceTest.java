@@ -420,7 +420,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetGroupPortletPreferencesByCompanyAndGroupAndPortlet()
+	public void testGetGroupPortletPreferencesByCompanyAndGroupAndPortletId()
 		throws Exception {
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(
@@ -480,7 +480,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetGroupPortletPreferencesByPlidAndOwnerAndPortlet()
+	public void testGetGroupPortletPreferencesByPlidAndOwnerAndPortletId()
 		throws Exception {
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(
@@ -513,7 +513,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetGroupPortletPreferencesByPortletAndPlid()
+	public void testGetGroupPortletPreferencesByPortletIdAndPlid()
 		throws Exception {
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(
@@ -540,7 +540,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetLayoutPortletPreferencesByCompanyAndGroupAndPortlet()
+	public void testGetLayoutPortletPreferencesByCompanyAndGroupAndPortletId()
 		throws Exception {
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
@@ -567,7 +567,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetLayoutPortletPreferencesByPortletAndPlid()
+	public void testGetLayoutPortletPreferencesByPortletIdAndPlid()
 		throws Exception {
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
