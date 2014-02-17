@@ -37,20 +37,20 @@ List<String> resourceURLs = new ArrayList<String>();
 		comboServletURLGenerator.setComboURLPrefix(comboURLPrefix);
 
 		comboServletURLGenerator.setPredicateFilter(predicateFilter);
-		comboServletURLGenerator.setPortletResourcesAccessors(portletResourcesAccessors);
+		comboServletURLGenerator.setPortletResourceAccessors(portletResourceAccessors);
 		comboServletURLGenerator.setTimestamp(theme.getTimestamp());
 		comboServletURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		resourceURLs.addAll(comboServletURLGenerator.generate(portlets));
 	}
 	else {
-		PortletResourcesURLGenerator portletResourcesURLGenerator = new PortletResourcesURLGenerator();
+		PortletResourceURsGenerator portletResourceURsGenerator = new PortletResourceURsGenerator();
 
-		portletResourcesURLGenerator.setRequest(request);
-		portletResourcesURLGenerator.setVisitedURLs(portletResourceStaticURLs);
+		portletResourceURsGenerator.setRequest(request);
+		portletResourceURsGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		for (Portlet curPortlet : portlets) {
-			resourceURLs.addAll(portletResourcesURLGenerator.generate(curPortlet, portletResourcesAccessors));
+			resourceURLs.addAll(portletResourceURsGenerator.generate(curPortlet, portletResourceAccessors));
 		}
 	}
 	%>

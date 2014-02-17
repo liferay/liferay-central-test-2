@@ -45,7 +45,7 @@ public class ComboServletURLGenerator {
 		long timestamp = _timestamp;
 
 		for (Portlet portlet : portlets) {
-			for (PortletResourcesAccessor portletResourcesAccessor :
+			for (PortletResourceAccessor portletResourcesAccessor :
 					_portletResourcesAccessors) {
 
 				List<String> resources = ListUtil.sort(
@@ -105,7 +105,7 @@ public class ComboServletURLGenerator {
 	}
 
 	public void setPortletResourcesAccessors(
-		PortletResourcesAccessor ... portletResourcesAccessors) {
+		PortletResourceAccessor ... portletResourcesAccessors) {
 
 		_portletResourcesAccessors = portletResourcesAccessors;
 	}
@@ -126,7 +126,7 @@ public class ComboServletURLGenerator {
 	private long _timestamp;
 	private final PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
-	private PortletResourcesAccessor[] _portletResourcesAccessors;
+	private PortletResourceAccessor[] _portletResourcesAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
 	private Set<String> _visitedURLs;
 

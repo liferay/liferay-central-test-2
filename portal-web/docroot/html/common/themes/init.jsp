@@ -25,8 +25,8 @@ page import="com.liferay.portal.model.Portlet" %><%@
 page import="com.liferay.portal.monitoring.statistics.portal.PortalRequestDataSample" %><%@
 page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %><%@
 page import="com.liferay.portal.servlet.ComboServletURLGenerator" %><%@
-page import="com.liferay.portal.servlet.PortletResourcesAccessor" %><%@
-page import="com.liferay.portal.servlet.PortletResourcesURLGenerator" %><%@
+page import="com.liferay.portal.servlet.PortletResourceAccessor" %><%@
+page import="com.liferay.portal.servlet.PortletResourceURLsGenerator" %><%@
 page import="com.liferay.taglib.aui.ScriptTag" %>
 
 <%@ page import="org.apache.struts.taglib.tiles.ComponentConstants" %><%@

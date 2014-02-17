@@ -30,17 +30,17 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Carlos Sierra Andrés
  */
-public class PortletResourcesURLGenerator {
+public class PortletResourceURLsGenerator {
 
 	public List<String> generate(
 		Portlet portlet,
-		PortletResourcesAccessor ... portletResourcesAccessors) {
+		PortletResourceAccessor ... portletResourceAccessors) {
 
 		List<String> urls = new ArrayList<String>();
 
 		for (
-			PortletResourcesAccessor portletResourcesAccessor :
-				portletResourcesAccessors) {
+			PortletResourceAccessor portletResourcesAccessor :
+				portletResourceAccessors) {
 
 			String contextPath = null;
 
