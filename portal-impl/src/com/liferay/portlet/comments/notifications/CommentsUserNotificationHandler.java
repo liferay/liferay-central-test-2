@@ -38,17 +38,20 @@ public class CommentsUserNotificationHandler
 		setPortletId(PortletKeys.COMMENTS);
 	}
 
-	@Override
-	protected AssetRenderer getAssetRenderer(JSONObject jsonObject) {
+	protected MBMessage fetchMBMessage(JSONObject jsonObject) {
 		long classPK = jsonObject.getLong("classPK");
 
-		MBMessage message = null;
-
 		try {
-			message = MBMessageLocalServiceUtil.fetchMBMessage(classPK);
+			return MBMessageLocalServiceUtil.fetchMBMessage(classPK);
 		}
 		catch (SystemException se) {
+			return null;
 		}
+	}
+
+	@Override
+	protected AssetRenderer getAssetRenderer(JSONObject jsonObject) {
+		MBMessage message = fetchMBMessage(jsonObject);
 
 		if (message == null) {
 			return null;
@@ -62,15 +65,7 @@ public class CommentsUserNotificationHandler
 		int notificationType, AssetRenderer assetRenderer,
 		JSONObject jsonObject, ServiceContext serviceContext) {
 
-		long classPK = jsonObject.getLong("classPK");
-
-		MBMessage message = null;
-
-		try {
-			message = MBMessageLocalServiceUtil.fetchMBMessage(classPK);
-		}
-		catch (SystemException se) {
-		}
+		MBMessage message = fetchMBMessage(jsonObject);
 
 		if (message == null) {
 			return null;
