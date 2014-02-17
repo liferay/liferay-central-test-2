@@ -47,20 +47,20 @@ public class ComboServletStaticURLGenerator {
 			for (PortletResourceAccessor portletResourcesAccessor :
 					_portletResourcesAccessors) {
 
-				List<String> resources = ListUtil.sort(
+				List<String> portletResources = ListUtil.sort(
 					portletResourcesAccessor.get(portlet));
 
-				for (String resource : resources) {
-					if (!_predicateFilter.filter(resource)) {
+				for (String portletResource : portletResources) {
+					if (!_predicateFilter.filter(portletResource)) {
 						continue;
 					}
 
-					if (_visitedURLs.contains(resource)) {
+					if (_visitedURLs.contains(portletResource)) {
 						continue;
 					}
 
-					if (HttpUtil.hasProtocol(resource)) {
-						urls.add(resource);
+					if (HttpUtil.hasProtocol(portletResource)) {
+						urls.add(portletResource);
 					}
 					else {
 						sb.append(StringPool.AMPERSAND);
@@ -75,12 +75,12 @@ public class ComboServletStaticURLGenerator {
 							sb.append(StringPool.COLON);
 						}
 
-						sb.append(HtmlUtil.escape(resource));
+						sb.append(HtmlUtil.escape(portletResource));
 
 						timestamp = Math.max(timestamp, portlet.getTimestamp());
 					}
 
-					_visitedURLs.add(resource);
+					_visitedURLs.add(portletResource);
 				}
 			}
 		}

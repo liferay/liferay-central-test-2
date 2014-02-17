@@ -76,12 +76,12 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
 
 		Portlet portlet = buildPortlet(
-			"/portlet", "/css/main.css", "/css/main1.css");
+			"/portlet", "/css/main.css", "/css/more.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(urls, _URL_PREFIX + "&/css/main1.css&t=0");
+		assertURLs(urls, _URL_PREFIX + "&/css/more.css&t=0");
 	}
 
 	@Test
@@ -94,21 +94,21 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(
 				new String[] {
-					"http://www.terminus.com/main.css", "/css/main.css"
+					"http://www.test.com/test1.css", "/css/main.css"
 				}));
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 
 		Portlet portlet = buildPortlet(
-			"/portlet", "/css/main.css", "/css/main1.css",
-			"http://www.terminus.com/main.css",
-			"http://www.terminus.com/main2.css");
+			"/portlet", "/css/main.css", "/css/more.css",
+			"http://www.test.com/test1.css",
+			"http://www.test.com/test2.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
-			urls, "http://www.terminus.com/main2.css",
-			_URL_PREFIX + "&/css/main1.css&t=0");
+			urls, "http://www.test.com/test2.css",
+			_URL_PREFIX + "&/css/more.css&t=0");
 	}
 
 	@Test
@@ -260,9 +260,9 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 
 		Portlet portlet1 = buildPortlet(
-			"/portlet1", "/css/main1.css", "/css/main.css");
+			"/portlet1", "/css/main2.css", "/css/main1.css");
 		Portlet portlet2 = buildPortlet(
-			"/portlet2", "/css/main2.css", "/css/main3.css");
+			"/portlet2", "/css/main3.css", "/css/main4.css");
 
 		List<String> urls1 = comboServletStaticURLGenerator.generate(
 			toList(portlet1, portlet2));
@@ -337,8 +337,8 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		Assert.assertTrue(visitedURLs.contains("/css/main.css"));
 	}
 
-	protected void assertURLs(List<String> urlList, String... urls) {
-		Assert.assertEquals(urlList, Arrays.asList(urls));
+	protected void assertURLs(List<String> urlsList, String... urls) {
+		Assert.assertEquals(urlsList, Arrays.asList(urls));
 	}
 
 	protected Portlet buildPortlet(
