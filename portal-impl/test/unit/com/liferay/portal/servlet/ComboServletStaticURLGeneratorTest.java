@@ -17,6 +17,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.HtmlImpl;
@@ -73,9 +74,9 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>()
-			{{add("/css/main.css");}}
-		);
+		comboServletStaticURLGenerator.setVisitedURLs(
+			SetUtil.fromArray(new String[] {"/css/main.css"}));
+
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
 		Collection<String> urls = comboServletStaticURLGenerator.generate(
@@ -96,12 +97,11 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-
-		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>() { {
-			add("http://www.terminus.com/main.css");
-			add("/css/main.css");
-		}}
-		);
+		comboServletStaticURLGenerator.setVisitedURLs(
+			SetUtil.fromArray(
+				new String[] {
+					"http://www.terminus.com/main.css", "/css/main.css"
+				}));
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
 		Collection<String> urls = comboServletStaticURLGenerator.generate(
@@ -122,10 +122,8 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>() { {
-			add("/css/main.css");
-		}}
-		);
+		comboServletStaticURLGenerator.setVisitedURLs(
+			SetUtil.fromArray(new String[] {"/css/main.css"}));
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
 		Collection<String> urls = comboServletStaticURLGenerator.generate(
@@ -280,7 +278,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		Collection<String> first = comboServletStaticURLGenerator.generate(
 			portlets(portlet, portlet2));
 
-		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>()); //clean
+		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
 		Collection<String> second = comboServletStaticURLGenerator.generate(
 			portlets(portlet2, portlet));
