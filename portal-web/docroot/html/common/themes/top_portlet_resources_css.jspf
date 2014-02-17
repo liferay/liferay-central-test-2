@@ -17,7 +17,7 @@
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-	PredicateFilter<String> resourcePredicateFilter = PredicateFilter.ALL;
+	PredicateFilter<String> predicateFilter = PredicateFilter.ALL;
 
 	PortletResourcesAccessor[] portletResourcesAccessors = new PortletResourcesAccessor[] {PortletResourcesAccessor.headerPortalCss, PortletResourcesAccessor.headerPortletCss};
 	%>
