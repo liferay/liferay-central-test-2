@@ -131,7 +131,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 	}
 
 	@Test
-	public void testFilterIsHonored() {
+	public void testPredicateFilter() {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
@@ -302,7 +302,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-		comboServletStaticURLGenerator.setTimestamp(20000L);
+		comboServletStaticURLGenerator.setTimestamp(20000);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
