@@ -24,9 +24,9 @@
 					<encoding>UTF-8</encoding>
 				</source-folder>
 				<source-folder>
-					<label>osgi\modules\portal-registry\portal-registry-api\src\main\java</label>
+					<label>osgi\modules\registry\registry-api\src\main\java</label>
 					<type>java</type>
-					<location>osgi/modules/portal-registry/portal-registry-api/src/main/java</location>
+					<location>osgi/modules/registry/registry-api/src/main/java</location>
 					<encoding>UTF-8</encoding>
 				</source-folder>
 				<source-folder>
@@ -154,8 +154,8 @@
 						<location>osgi/bootstrap/src</location>
 					</source-folder>
 					<source-folder style="packages">
-						<label>osgi\modules\portal-registry\portal-registry-api\src\main\java</label>
-						<location>osgi/modules/portal-registry/portal-registry-api/src/main/java</location>
+						<label>osgi\modules\registry\registry-api\src\main\java</label>
+						<location>osgi/modules/registry/registry-api/src/main/java</location>
 					</source-folder>
 					<source-folder style="packages">
 						<label>portal-impl\src</label>

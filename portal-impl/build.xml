@@ -1437,8 +1437,8 @@ public class Creole10Parser]]></replacevalue>
 			</and>
 			<then>
 				<gradle-execute
-					gradleModuleDir="/portal-registry"
-					gradleTask=":portal-registry-api:compileJava"
+					gradleModuleDir="/registry"
+					gradleTask=":registry-api:compileJava"
 				/>
 
 				<javac

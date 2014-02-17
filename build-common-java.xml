@@ -50,8 +50,8 @@
 				</if>
 
 				<gradle-execute
-					gradleModuleDir="/portal-registry"
-					gradleTask=":portal-registry-api:compileJava"
+					gradleModuleDir="/registry"
+					gradleTask=":registry-api:compileJava"
 				/>
 
 				<mkdir dir="classes" />
