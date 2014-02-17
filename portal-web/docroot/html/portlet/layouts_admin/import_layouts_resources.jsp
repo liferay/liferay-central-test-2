@@ -520,14 +520,14 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 			</aui:fieldset>
 
 			<aui:button-row>
-				<portlet:renderURL var="importPagesURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+				<portlet:renderURL var="backURL">
 					<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VALIDATE %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
 				</portlet:renderURL>
 
-				<aui:button href="<%= importPagesURL %>" name="back1" value="back" />
+				<aui:button href="<%= backURL %>" name="back1" value="back" />
 
 				<aui:button name="continue" primary="<%= true %>" value="continue" />
 			</aui:button-row>
