@@ -34,7 +34,7 @@ import java.util.Set;
  */
 public class ComboServletURLGenerator {
 
-	public Collection<String> generate(List<Portlet> portlets) {
+	public List<String> generate(List<Portlet> portlets) {
 		List<String> urls = new ArrayList<String>();
 
 		portlets = ListUtil.sort(portlets, _portletNameComparator);
