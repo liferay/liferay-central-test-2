@@ -41,7 +41,7 @@ List<String> resourceURLs = new ArrayList<String>();
 		comboServletURLGenerator.setPortletResourcesAccessors(portletResourcesAccessors);
 		comboServletURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
-		resourceURLs.addAll(comboServletURLGenerator.generateURLsFor(portlets));
+		resourceURLs.addAll(comboServletURLGenerator.generate(portlets));
 	}
 	else {
 		PortletResourcesURLGenerator portletResourcesURLGenerator = new PortletResourcesURLGenerator();
