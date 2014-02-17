@@ -28,9 +28,9 @@ import com.liferay.portlet.PortletResourceAccessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +47,7 @@ import org.testng.Assert;
 @RunWith(PowerMockRunner.class)
 public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
-	private static final String URL_PREFIX = "/combo?minifier=";
+	private static final String _URL_PREFIX = "/combo?minifier=";
 
 	@Before
 	public void setUp() {
@@ -71,26 +71,21 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
 
-		Portlet portlet = createPortlet(
+		Portlet portlet = buildPortlet(
 			"/portlet", "/css/main.css", "/css/main1.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(urls, URL_PREFIX + "&/css/main1.css&t=0");
+		assertURLs(urls, _URL_PREFIX + "&/css/main1.css&t=0");
 	}
 
 	@Test
 	public void testDoNotReturnVisitedExternalResources() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css", "/css/main1.css",
-			"http://www.terminus.com/main.css",
-			"http://www.terminus.com/main2.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
@@ -101,21 +96,23 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 				new String[] {
 					"http://www.terminus.com/main.css", "/css/main.css"
 				}));
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "/css/main.css", "/css/main1.css",
+			"http://www.terminus.com/main.css",
+			"http://www.terminus.com/main2.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
 			urls, "http://www.terminus.com/main2.css",
-			URL_PREFIX + "&/css/main1.css&t=0");
+			_URL_PREFIX + "&/css/main1.css&t=0");
 	}
 
 	@Test
 	public void testDoNotReturnVisitedResources() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
@@ -123,7 +120,9 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
@@ -140,9 +139,9 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setPredicateFilter(PredicateFilter.NONE);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 
-		Portlet portlet = createPortlet("/portlet", "/css/main.css");
+		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
@@ -152,198 +151,197 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 	@Test
 	public void testPortletWithStaticContextPortletResource() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css", "/css/main1.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortletCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "/css/main.css", "/css/more.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
-			urls, URL_PREFIX + "&/pluginContextPath:/css/main.css" +
-			"&/pluginContextPath:/css/main1.css&t=0");
+			urls,
+			_URL_PREFIX + "&/portlet:/css/main.css&/portlet:/css/more.css&t=0");
 	}
 
 	@Test
 	public void testPortletWithStaticPortalExternalResource() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "http://www.someserver.com/someResource.css",
-			"/css/main.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "http://www.test.com/test.css", "/css/main.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
-			urls, "http://www.someserver.com/someResource.css",
-			URL_PREFIX + "&/css/main.css&t=0");
+			urls, "http://www.test.com/test.css",
+			_URL_PREFIX + "&/css/main.css&t=0");
 	}
 
 	@Test
 	public void testPortletWithStaticPortalOnlyExternalResource() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "http://www.someserver.com/someResource.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "http://www.test.com/test.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(urls, "http://www.someserver.com/someResource.css");
+		assertURLs(urls, "http://www.test.com/test.css");
 	}
 
 	@Test
 	public void testPortletWithStaticPortalResource() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css", "/css/main1.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "/css/main.css", "/css/more.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(
-			urls, URL_PREFIX + "&/css/main.css&/css/main1.css&t=0");
+		assertURLs(urls, _URL_PREFIX + "&/css/main.css&/css/more.css&t=0");
 	}
 
 	@Test
 	public void testPortletWithStaticPortalResourceNotAffectedByOrder() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main1.css", "/css/main.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet(
+			"/portlet", "/css/more.css", "/css/main.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
-			urls, URL_PREFIX + "&/css/main.css&/css/main1.css&t=0");
+			urls, _URL_PREFIX + "&/css/main.css&/css/more.css&t=0");
 	}
 
 	@Test
-	public void testPortletWithStaticPortalResourceNotAffectedByPortletOrder() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main1.css", "/css/main.css");
-		final Portlet portlet2 = createPortlet(
-			"/pluginContextPath2", "/css/main2.css", "/css/main3.css");
-
+	public void testPortletWithStaticPortalResourceNotAffectedByPortletOrder() {		
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 
-		Collection<String> first = comboServletStaticURLGenerator.generate(
-			toList(portlet, portlet2));
+		Portlet portlet1 = buildPortlet(
+			"/portlet1", "/css/main1.css", "/css/main.css");
+		Portlet portlet2 = buildPortlet(
+			"/portlet2", "/css/main2.css", "/css/main3.css");
+
+		List<String> urls1 = comboServletStaticURLGenerator.generate(
+			toList(portlet1, portlet2));
 
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
-		Collection<String> second = comboServletStaticURLGenerator.generate(
-			toList(portlet2, portlet));
+		List<String> urls2 = comboServletStaticURLGenerator.generate(
+			toList(portlet2, portlet1));
 
-		Assert.assertEquals(first, second);
+		Assert.assertEquals(urls1, urls2);
 	}
 
 	@Test
 	public void testTimestamp() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css");
-		portlet.setTimestamp(10000L);
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
+
+		portlet.setTimestamp(10000);
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(urls, URL_PREFIX + "&/css/main.css&t=10000");
+		assertURLs(urls, _URL_PREFIX + "&/css/main.css&t=10000");
 	}
 
 	@Test
 	public void testTimestampReverse() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css");
-		portlet.setTimestamp(10000L);
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
-		comboServletStaticURLGenerator.setTimestamp(20000L);
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
+		comboServletStaticURLGenerator.setTimestamp(20000L);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
+
+		portlet.setTimestamp(10000);
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
-		assertURLs(urls, URL_PREFIX + "&/css/main.css&t=20000");
+		assertURLs(urls, _URL_PREFIX + "&/css/main.css&t=20000");
 	}
 
 	@Test
 	public void testUpdateVisitedResources() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
 
-		HashSet<String> visited = new HashSet<String>();
-		comboServletStaticURLGenerator.setVisitedURLs(visited);
-		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
+		Set<String> visitedURLs = new HashSet<String>();
+
+		comboServletStaticURLGenerator.setVisitedURLs(visitedURLs);
+
+		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
+
+		Portlet portlet = buildPortlet("/portlet", "/css/main.css");
 
 		comboServletStaticURLGenerator.generate(toList(portlet));
 
-		Assert.assertTrue(visited.contains("/css/main.css"));
+		Assert.assertTrue(visitedURLs.contains("/css/main.css"));
 	}
 
-	private void assertURLs(List<String> urlList, String... urls) {
+	protected void assertURLs(List<String> urlList, String... urls) {
 		Assert.assertEquals(urlList, Arrays.asList(urls));
 	}
 
-	private Portlet createPortlet(
+	protected Portlet buildPortlet(
 		String contextPath, String... portletResources) {
 
 		PortletImpl portlet = spy(new PortletImpl());
