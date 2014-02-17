@@ -44,13 +44,13 @@ List<String> resourceURLs = new ArrayList<String>();
 		resourceURLs.addAll(comboServletURLGenerator.generate(portlets));
 	}
 	else {
-		PortletResourceURsGenerator portletResourceURsGenerator = new PortletResourceURsGenerator();
+		PortletResourceURLGenerator portletResourceURLGenerator = new PortletResourceURLGenerator();
 
-		portletResourceURsGenerator.setRequest(request);
-		portletResourceURsGenerator.setVisitedURLs(portletResourceStaticURLs);
+		portletResourceURLGenerator.setRequest(request);
+		portletResourceURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		for (Portlet curPortlet : portlets) {
-			resourceURLs.addAll(portletResourceURsGenerator.generate(curPortlet, portletResourceAccessors));
+			resourceURLs.addAll(portletResourceURLGenerator.generate(curPortlet, portletResourceAccessors));
 		}
 	}
 	%>

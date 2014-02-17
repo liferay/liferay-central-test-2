@@ -12,17 +12,18 @@
  * details.
  */
 
-package com.liferay.portal.kernel.util;
+package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.PredicateFilter;
 import com.liferay.portal.theme.ThemeDisplay;
 
 /**
  * @author Carlos Sierra Andrés
  */
-public class JavascriptPortletResourcePredicateFilter
+public class PortletJavaScriptResourcePredicateFilter
 	implements PredicateFilter<String> {
 
-	public JavascriptPortletResourcePredicateFilter(ThemeDisplay themeDisplay) {
+	public PortletJavaScriptResourcePredicateFilter(ThemeDisplay themeDisplay) {
 		_themeDisplay = themeDisplay;
 	}
 

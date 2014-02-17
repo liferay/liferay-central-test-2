@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.Accessor;
 import com.liferay.portal.model.Portlet;

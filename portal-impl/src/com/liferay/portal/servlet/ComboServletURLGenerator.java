@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.comparator.PortletNameComparator;
+import com.liferay.portlet.PortletResourceAccessor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,11 +124,11 @@ public class ComboServletURLGenerator {
 	}
 
 	private String _comboURLPrefix;
-	private long _timestamp;
 	private final PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
 	private PortletResourceAccessor[] _portletResourcesAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
+	private long _timestamp;
 	private Set<String> _visitedURLs;
 
 }

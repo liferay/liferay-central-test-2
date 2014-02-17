@@ -23,6 +23,7 @@ import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletResourceAccessor;
 
 import java.util.ArrayList;
 import java.util.Arrays;

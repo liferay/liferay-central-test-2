@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -30,11 +30,10 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Carlos Sierra Andrés
  */
-public class PortletResourceURLsGenerator {
+public class PortletResourceURLGenerator {
 
 	public List<String> generate(
-		Portlet portlet,
-		PortletResourceAccessor ... portletResourceAccessors) {
+		Portlet portlet, PortletResourceAccessor ... portletResourceAccessors) {
 
 		List<String> urls = new ArrayList<String>();
 
