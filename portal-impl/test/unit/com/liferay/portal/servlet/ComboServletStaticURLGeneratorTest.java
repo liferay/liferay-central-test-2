@@ -103,7 +103,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 				}));
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
@@ -125,7 +125,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		Assert.assertEquals(urls, new ArrayList<String>());
@@ -135,8 +135,6 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 	public void testFilterIsHonored() {
 		final Portlet portlet = createPortlet(
 			"/pluginContextPath", "/css/main.css");
-		final Portlet portlet2 = createPortlet(
-			"/pluginContextPath2", "/css/main2.css");
 
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
@@ -151,7 +149,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 		comboServletStaticURLGenerator.setPredicateFilter(PredicateFilter.NONE);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		Assert.assertTrue(urls.isEmpty());
@@ -170,7 +168,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
@@ -192,7 +190,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
@@ -213,7 +211,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(urls, "http://www.someserver.com/someResource.css");
@@ -232,7 +230,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
@@ -252,7 +250,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(
@@ -299,7 +297,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(urls, URL_PREFIX + "&/css/main.css&t=10000");
@@ -320,7 +318,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		Collection<String> urls = comboServletStaticURLGenerator.generate(
+		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
 
 		assertURLs(urls, URL_PREFIX + "&/css/main.css&t=20000");
@@ -346,8 +344,8 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 		Assert.assertTrue(visited.contains("/css/main.css"));
 	}
 
-	private void assertURLs(Collection<String> urlCollection, String... urls) {
-		Assert.assertEquals(urlCollection, Arrays.asList(urls));
+	private void assertURLs(List<String> urlList, String... urls) {
+		Assert.assertEquals(urlList, Arrays.asList(urls));
 	}
 
 	private Portlet createPortlet(
