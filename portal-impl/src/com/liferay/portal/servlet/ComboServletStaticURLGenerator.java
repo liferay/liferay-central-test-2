@@ -37,9 +37,7 @@ public class ComboServletStaticURLGenerator {
 	public List<String> generate(List<Portlet> portlets) {
 		List<String> urls = new ArrayList<String>();
 
-		StringBundler sb = new StringBundler(_comboURLPrefix);
-
-		boolean hasComboURL = false;
+		StringBundler sb = new StringBundler();
 
 		long timestamp = _timestamp;
 
@@ -81,8 +79,6 @@ public class ComboServletStaticURLGenerator {
 						sb.append(HtmlUtil.escape(resource));
 
 						timestamp = Math.max(timestamp, portlet.getTimestamp());
-
-						hasComboURL = true;
 					}
 
 					_visitedURLs.add(resource);
@@ -90,8 +86,8 @@ public class ComboServletStaticURLGenerator {
 			}
 		}
 
-		if (hasComboURL) {
-			String comboURL = sb.toString();
+		if (sb.length() > 0) {
+			String comboURL = _comboURLPrefix + sb.toString();
 
 			comboURL = HttpUtil.addParameter(comboURL, "t", timestamp);
 
