@@ -119,8 +119,9 @@ public class ComboServletStaticURLGenerator {
 		_visitedURLs = visitedURLs;
 	}
 
-	private final PortletNameComparator _portletNameComparator =
+	private static PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
+
 	private PortletResourceAccessor[] _portletResourcesAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
 	private long _timestamp;
