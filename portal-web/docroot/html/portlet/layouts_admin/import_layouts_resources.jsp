@@ -568,7 +568,7 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 	A.one('#<portlet:namespace />continue').on(
 		'click',
 		function() {
-			A.one('#<portlet:namespace />importConfiguration').hide()
+			A.one('#<portlet:namespace />importConfiguration').hide();
 			A.one('#<portlet:namespace />importStrategy').show();
 		}
 	);
@@ -577,7 +577,7 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 		'click',
 		function() {
 			A.one('#<portlet:namespace />importStrategy').hide();
-			A.one('#<portlet:namespace />importConfiguration').show()
+			A.one('#<portlet:namespace />importConfiguration').show();
 		}
 	);
 </aui:script>
