@@ -42,7 +42,7 @@ public class PortletResourcesURLGenerator {
 			PortletResourcesAccessor portletResourcesAccessor :
 				portletResourcesAccessors) {
 
-			String contextPath;
+			String contextPath = null;
 
 			if (portletResourcesAccessor.isPortalResource()) {
 				contextPath = PortalUtil.getPathContext();
@@ -83,8 +83,8 @@ public class PortletResourcesURLGenerator {
 			WebKeys.THEME_DISPLAY);
 	}
 
-	public void setVisited(Set<String> visited) {
-		_visited = visited;
+	public void setVisitedURLs(Set<String> visitedURLs) {
+		_visited = visitedURLs;
 	}
 
 	private HttpServletRequest _request;

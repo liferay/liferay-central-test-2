@@ -46,8 +46,7 @@ public class ComboServletURLGenerator {
 		long timestamp = _minTimestamp;
 
 		for (Portlet portlet : portlets) {
-			for (
-				PortletResourcesAccessor portletResourcesAccessor :
+			for (PortletResourcesAccessor portletResourcesAccessor :
 					_portletResourcesAccessors) {
 
 				List<String> resources = ListUtil.sort(

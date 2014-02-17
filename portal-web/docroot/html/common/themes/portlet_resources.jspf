@@ -47,7 +47,7 @@ List<String> resourceURLs = new ArrayList<String>();
 		PortletResourcesURLGenerator portletResourcesURLGenerator = new PortletResourcesURLGenerator();
 
 		portletResourcesURLGenerator.setRequest(request);
-		portletResourcesURLGenerator.setVisited(portletResourceStaticURLs);
+		portletResourcesURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		for (Portlet curPortlet : portlets) {
 			resourceURLs.addAll(portletResourcesURLGenerator.generate(curPortlet, portletResourcesAccessors));
