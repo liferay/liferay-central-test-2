@@ -17,7 +17,7 @@
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-	PredicateFilter<String> predicateFilter = new JavascriptPortletResourceFilter(themeDisplay);
+	PredicateFilter<String> predicateFilter = new JavascriptPortletResourcePredicateFilter(themeDisplay);
 
 	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.footerPortalJavaScript, PortletResourceAccessor.footerPortletJavaScript};
 	%>
