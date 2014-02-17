@@ -37,13 +37,13 @@ public class ComboServletStaticURLGenerator {
 	public List<String> generate(List<Portlet> portlets) {
 		List<String> urls = new ArrayList<String>();
 
-		portlets = ListUtil.sort(portlets, _portletNameComparator);
-
-		StringBundler comboURLSB = new StringBundler(_comboURLPrefix);
+		StringBundler sb = new StringBundler(_comboURLPrefix);
 
 		boolean hasComboURL = false;
 
 		long timestamp = _timestamp;
+
+		portlets = ListUtil.sort(portlets, _portletNameComparator);
 
 		for (Portlet portlet : portlets) {
 			for (PortletResourceAccessor portletResourcesAccessor :
@@ -65,7 +65,7 @@ public class ComboServletStaticURLGenerator {
 						urls.add(resource);
 					}
 					else {
-						comboURLSB.append(StringPool.AMPERSAND);
+						sb.append(StringPool.AMPERSAND);
 
 						String curPortletContextPath = portlet.getContextPath();
 
@@ -74,11 +74,11 @@ public class ComboServletStaticURLGenerator {
 							!curPortletContextPath.equals(
 								PortalUtil.getPathContext())) {
 
-							comboURLSB.append(curPortletContextPath);
-							comboURLSB.append(StringPool.COLON);
+							sb.append(curPortletContextPath);
+							sb.append(StringPool.COLON);
 						}
 
-						comboURLSB.append(HtmlUtil.escape(resource));
+						sb.append(HtmlUtil.escape(resource));
 
 						timestamp = Math.max(timestamp, portlet.getTimestamp());
 
@@ -91,7 +91,7 @@ public class ComboServletStaticURLGenerator {
 		}
 
 		if (hasComboURL) {
-			String comboURL = comboURLSB.toString();
+			String comboURL = sb.toString();
 
 			comboURL = HttpUtil.addParameter(comboURL, "t", timestamp);
 
