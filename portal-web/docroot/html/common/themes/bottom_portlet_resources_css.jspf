@@ -28,7 +28,7 @@
 	for (String url : resourceURLs) {
 	%>
 
-	<link href="<%= url %>" rel="stylesheet" type="text/css" />
+		<link href="<%= url %>" rel="stylesheet" type="text/css" />
 
 	<%
 	}

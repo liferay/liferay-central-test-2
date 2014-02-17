@@ -25,13 +25,13 @@
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
 
 	<%
-		for (String url : resourceURLs) {
+	for (String url : resourceURLs) {
 	%>
 
 		<script src="<%= url %>" type="text/javascript"></script>
 
 	<%
-		}
+	}
 	%>
 
 </c:if>
