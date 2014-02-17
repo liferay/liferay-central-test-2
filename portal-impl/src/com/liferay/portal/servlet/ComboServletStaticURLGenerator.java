@@ -97,8 +97,8 @@ public class ComboServletStaticURLGenerator {
 		return urls;
 	}
 
-	public void setPortletResourcesAccessors(
-		PortletResourceAccessor ... portletResourcesAccessors) {
+	public void setPortletResourceAccessors(
+		PortletResourceAccessor... portletResourcesAccessors) {
 
 		_portletResourcesAccessors = portletResourcesAccessors;
 	}
