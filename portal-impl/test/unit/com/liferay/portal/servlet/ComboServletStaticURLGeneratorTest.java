@@ -133,21 +133,16 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 
 	@Test
 	public void testFilterIsHonored() {
-		final Portlet portlet = createPortlet(
-			"/pluginContextPath", "/css/main.css");
-
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
 			PortletResourceAccessor.headerPortalCss);
-
-		HashSet<String> visited = new HashSet<String>();
-
-		comboServletStaticURLGenerator.setVisitedURLs(visited);
+		comboServletStaticURLGenerator.setPredicateFilter(PredicateFilter.NONE);
+		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 		comboServletStaticURLGenerator.setURLPrefix(URL_PREFIX);
 
-		comboServletStaticURLGenerator.setPredicateFilter(PredicateFilter.NONE);
+		Portlet portlet = createPortlet("/portlet", "/css/main.css");
 
 		List<String> urls = comboServletStaticURLGenerator.generate(
 			toList(portlet));
