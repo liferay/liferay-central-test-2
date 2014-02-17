@@ -543,10 +543,10 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetLayoutPortletPreferencesByCompanyAndGroupAndPortlet()
 		throws Exception {
 
-		Layout layout = LayoutTestUtil.addLayout(_layout.getGroup());
-
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			_layout, _portlet);
+
+		Layout layout = LayoutTestUtil.addLayout(_layout.getGroup());
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			layout, _portlet);
@@ -570,12 +570,12 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetLayoutPortletPreferencesByPortletAndPlid()
 		throws Exception {
 
+		PortletPreferencesTestUtil.addLayoutPortletPreferences(
+			_layout, _portlet);
+
 		Group group = GroupTestUtil.addGroup();
 
 		Layout layout = LayoutTestUtil.addLayout(group);
-
-		PortletPreferencesTestUtil.addLayoutPortletPreferences(
-			_layout, _portlet);
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			layout, _portlet);
@@ -630,18 +630,18 @@ public class PortletPreferencesLocalServiceTest {
 
 	@Test
 	public void testGetPortletPreferencesByPlid() throws Exception {
+		PortletPreferencesTestUtil.addLayoutPortletPreferences(
+			_layout, _portlet);
+
 		Layout layout = LayoutTestUtil.addLayout(_group);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 1));
 
+		PortletPreferencesTestUtil.addLayoutPortletPreferences(layout, portlet);
+
 		Portlet portlet2 = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 2));
-
-		PortletPreferencesTestUtil.addLayoutPortletPreferences(
-			_layout, _portlet);
-
-		PortletPreferencesTestUtil.addLayoutPortletPreferences(layout, portlet);
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			layout, portlet2);
