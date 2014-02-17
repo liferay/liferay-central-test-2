@@ -24,12 +24,12 @@ public class HtmlImplTest {
 
 	@Test
 	public void testEscapeBlank() {
-		_assertUnchangedEscape("");
+		assertUnchangedEscape("");
 	}
 
 	@Test
 	public void testEscapeCaseSensitive() {
-		_assertUnchangedEscape("CAPITAL lowercase Text");
+		assertUnchangedEscape("CAPITAL lowercase Text");
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class HtmlImplTest {
 
 	@Test
 	public void testEscapeNoTrimmingPerformed() {
-		_assertUnchangedEscape("  no trimming performed ");
+		assertUnchangedEscape("  no trimming performed ");
 	}
 
 	@Test
@@ -83,17 +83,17 @@ public class HtmlImplTest {
 
 	@Test
 	public void testEscapeSemiColon() {
-		_assertUnchangedEscape(";");
+		assertUnchangedEscape(";");
 	}
 
 	@Test
 	public void testEscapeText() {
-		_assertUnchangedEscape("text");
+		assertUnchangedEscape("text");
 	}
 
 	@Test
 	public void testEscapeWhitespace() {
-		_assertUnchangedEscape(" ");
+		assertUnchangedEscape(" ");
 	}
 
 	@Test
@@ -228,7 +228,7 @@ public class HtmlImplTest {
 		Assert.assertNull(_htmlImpl.stripComments(null));
 	}
 
-	private void _assertUnchangedEscape(String input) {
+	protected void assertUnchangedEscape(String input) {
 		Assert.assertEquals(input, _htmlImpl.escape(input));
 	}
 
