@@ -635,10 +635,10 @@ public class PortletPreferencesLocalServiceTest {
 
 		Layout layout = LayoutTestUtil.addLayout(_group);
 
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+		Portlet portlet1 = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 1));
 
-		PortletPreferencesTestUtil.addLayoutPortletPreferences(layout, portlet);
+		PortletPreferencesTestUtil.addLayoutPortletPreferences(layout, portlet1);
 
 		Portlet portlet2 = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 2));
