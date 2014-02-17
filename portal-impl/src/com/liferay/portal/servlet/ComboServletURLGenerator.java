@@ -42,7 +42,7 @@ public class ComboServletURLGenerator {
 
 		boolean hasComboURL = false;
 
-		long timestamp = _minTimestamp;
+		long timestamp = _timestamp;
 
 		for (Portlet portlet : portlets) {
 			for (PortletResourcesAccessor portletResourcesAccessor :
@@ -104,10 +104,6 @@ public class ComboServletURLGenerator {
 		_comboURLPrefix = comboURLPrefix;
 	}
 
-	public void setMinTimestamp(long minTimestamp) {
-		_minTimestamp = minTimestamp;
-	}
-
 	public void setPortletResourcesAccessors(
 		PortletResourcesAccessor ... portletResourcesAccessors) {
 
@@ -118,12 +114,16 @@ public class ComboServletURLGenerator {
 		_predicateFilter = predicateFilter;
 	}
 
+	public void setTimestamp(long timestamp) {
+		_timestamp = timestamp;
+	}
+
 	public void setVisitedURLs(Set<String> visitedURLs) {
 		_visitedURLs = visitedURLs;
 	}
 
 	private String _comboURLPrefix;
-	private long _minTimestamp;
+	private long _timestamp;
 	private final PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
 	private PortletResourcesAccessor[] _portletResourcesAccessors;

@@ -36,9 +36,9 @@ List<String> resourceURLs = new ArrayList<String>();
 
 		comboServletURLGenerator.setComboURLPrefix(comboURLPrefix);
 
-		comboServletURLGenerator.setMinTimestamp(theme.getTimestamp());
 		comboServletURLGenerator.setPredicateFilter(predicateFilter);
 		comboServletURLGenerator.setPortletResourcesAccessors(portletResourcesAccessors);
+		comboServletURLGenerator.setTimestamp(theme.getTimestamp());
 		comboServletURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		resourceURLs.addAll(comboServletURLGenerator.generate(portlets));

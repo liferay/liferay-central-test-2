@@ -308,7 +308,7 @@ public class ComboServletURLGeneratorTest extends PowerMockito {
 		ComboServletURLGenerator comboServletURLGenerator =
 			new ComboServletURLGenerator();
 
-		comboServletURLGenerator.setMinTimestamp(20000L);
+		comboServletURLGenerator.setTimestamp(20000L);
 		comboServletURLGenerator.setPortletResourcesAccessors(
 			PortletResourcesAccessor.headerPortalCss);
 		comboServletURLGenerator.setVisitedURLs(new HashSet<String>());
