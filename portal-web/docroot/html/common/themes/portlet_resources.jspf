@@ -32,13 +32,10 @@ List<String> resourceURLs = new ArrayList<String>();
 	if (themeDisplay.isThemeCssFastLoad()) {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator = new ComboServletStaticURLGenerator();
 
-		String comboURLPrefix = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=&themeId=" + themeDisplay.getThemeId(), -1);
-
-		comboServletStaticURLGenerator.setComboURLPrefix(comboURLPrefix);
-
 		comboServletStaticURLGenerator.setPredicateFilter(predicateFilter);
 		comboServletStaticURLGenerator.setPortletResourceAccessors(portletResourceAccessors);
 		comboServletStaticURLGenerator.setTimestamp(theme.getTimestamp());
+		comboServletStaticURLGenerator.setURLPrefix(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=&themeId=" + themeDisplay.getThemeId(), -1));
 		comboServletStaticURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		resourceURLs.addAll(comboServletStaticURLGenerator.generate(portlets));

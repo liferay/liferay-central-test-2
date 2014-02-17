@@ -87,18 +87,14 @@ public class ComboServletStaticURLGenerator {
 		}
 
 		if (sb.length() > 0) {
-			String comboURL = _comboURLPrefix + sb.toString();
+			String url = _urlPrefix + sb.toString();
 
-			comboURL = HttpUtil.addParameter(comboURL, "t", timestamp);
+			url = HttpUtil.addParameter(url, "t", timestamp);
 
-			urls.add(comboURL);
+			urls.add(url);
 		}
 
 		return urls;
-	}
-
-	public void setComboURLPrefix(String comboURLPrefix) {
-		_comboURLPrefix = comboURLPrefix;
 	}
 
 	public void setPortletResourcesAccessors(
@@ -115,16 +111,20 @@ public class ComboServletStaticURLGenerator {
 		_timestamp = timestamp;
 	}
 
+	public void setURLPrefix(String urlPrefix) {
+		_urlPrefix = urlPrefix;
+	}
+
 	public void setVisitedURLs(Set<String> visitedURLs) {
 		_visitedURLs = visitedURLs;
 	}
 
-	private String _comboURLPrefix;
 	private final PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
 	private PortletResourceAccessor[] _portletResourcesAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
 	private long _timestamp;
+	private String _urlPrefix;
 	private Set<String> _visitedURLs;
 
 }
