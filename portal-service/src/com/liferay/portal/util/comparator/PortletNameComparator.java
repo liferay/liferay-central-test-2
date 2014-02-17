@@ -25,18 +25,18 @@ import java.util.Comparator;
 public class PortletNameComparator implements Comparator<Portlet> {
 
 	@Override
-	public int compare(Portlet portlet, Portlet portlet2) {
-		String portletName;
+	public int compare(Portlet portlet1, Portlet portlet2) {
+		String portletName1;
 		String portletName2;
 
-		if (portlet == null) {
-			portletName = StringPool.BLANK;
+		if (portlet1 == null) {
+			portletName1 = StringPool.BLANK;
 		}
 		else {
-			portletName = portlet.getPortletName();
+			portletName1 = portlet1.getPortletName();
 
-			if (portletName == null) {
-				portletName = StringPool.BLANK;
+			if (portletName1 == null) {
+				portletName1 = StringPool.BLANK;
 			}
 		}
 
@@ -51,7 +51,7 @@ public class PortletNameComparator implements Comparator<Portlet> {
 			}
 		}
 
-		return portletName.compareTo(portletName2);
+		return portletName1.compareTo(portletName2);
 	}
 
 }
