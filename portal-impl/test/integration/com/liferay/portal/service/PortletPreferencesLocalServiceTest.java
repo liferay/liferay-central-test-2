@@ -423,10 +423,10 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetGroupPortletPreferencesByCompanyAndGroupAndPortlet()
 		throws Exception {
 
-		Layout layout = LayoutTestUtil.addLayout(GroupTestUtil.addGroup());
-
 		PortletPreferencesTestUtil.addGroupPortletPreferences(
 			_layout, _portlet);
+
+		Layout layout = LayoutTestUtil.addLayout(GroupTestUtil.addGroup());
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, _portlet);
 
@@ -447,6 +447,9 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetGroupPortletPreferencesByPlidAndOwner()
 		throws Exception {
 
+		PortletPreferencesTestUtil.addGroupPortletPreferences(
+			_layout, _portlet);
+
 		Group group = GroupTestUtil.addGroup();
 
 		Layout layout = LayoutTestUtil.addLayout(group);
@@ -454,13 +457,10 @@ public class PortletPreferencesLocalServiceTest {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 1));
 
+		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet);
+
 		Portlet portlet2 = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 2));
-
-		PortletPreferencesTestUtil.addGroupPortletPreferences(
-			_layout, _portlet);
-
-		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet);
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet2);
 
