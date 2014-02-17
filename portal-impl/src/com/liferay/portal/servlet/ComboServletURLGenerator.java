@@ -58,7 +58,7 @@ public class ComboServletURLGenerator {
 						continue;
 					}
 
-					if (_visited.contains(resource)) {
+					if (_visitedURLs.contains(resource)) {
 						continue;
 					}
 
@@ -86,14 +86,16 @@ public class ComboServletURLGenerator {
 						hasComboURL = true;
 					}
 
-					_visited.add(resource);
+					_visitedURLs.add(resource);
 				}
 			}
 		}
 
 		if (hasComboURL) {
 			String comboURL = comboURLSB.toString();
+
 			comboURL = HttpUtil.addParameter(comboURL, "t", timestamp);
+
 			urls.add(comboURL);
 		}
 
@@ -109,17 +111,17 @@ public class ComboServletURLGenerator {
 	}
 
 	public void setPortletResourcesAccessors(
-		PortletResourcesAccessor ... portletResourcesAccessor) {
+		PortletResourcesAccessor ... portletResourcesAccessors) {
 
-		_portletResourcesAccessors = portletResourcesAccessor;
+		_portletResourcesAccessors = portletResourcesAccessors;
 	}
 
 	public void setPredicateFilter(PredicateFilter<String> predicateFilter) {
 		_predicateFilter = predicateFilter;
 	}
 
-	public void setVisited(Set<String> visited) {
-		_visited = visited;
+	public void setVisitedURLs(Set<String> visitedURLs) {
+		_visitedURLs = visitedURLs;
 	}
 
 	private String _comboURLPrefix;
@@ -128,6 +130,6 @@ public class ComboServletURLGenerator {
 		new PortletNameComparator();
 	private PortletResourcesAccessor[] _portletResourcesAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
-	private Set<String> _visited;
+	private Set<String> _visitedURLs;
 
 }
