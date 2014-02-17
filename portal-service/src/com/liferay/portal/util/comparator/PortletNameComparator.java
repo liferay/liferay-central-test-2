@@ -26,8 +26,8 @@ public class PortletNameComparator implements Comparator<Portlet> {
 
 	@Override
 	public int compare(Portlet portlet1, Portlet portlet2) {
-		String portletName1;
-		String portletName2;
+		String portletName1 = null;
+		String portletName2 = null;
 
 		if (portlet1 == null) {
 			portletName1 = StringPool.BLANK;
