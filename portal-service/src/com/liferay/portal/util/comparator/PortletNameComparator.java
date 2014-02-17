@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 
@@ -26,29 +27,16 @@ public class PortletNameComparator implements Comparator<Portlet> {
 
 	@Override
 	public int compare(Portlet portlet1, Portlet portlet2) {
-		String portletName1 = null;
-		String portletName2 = null;
+		String portletName1 = StringPool.BLANK;
 
-		if (portlet1 == null) {
-			portletName1 = StringPool.BLANK;
-		}
-		else {
-			portletName1 = portlet1.getPortletName();
-
-			if (portletName1 == null) {
-				portletName1 = StringPool.BLANK;
-			}
+		if (portlet1 != null) {
+			portletName1 = GetterUtil.getString(portlet1.getPortletName());
 		}
 
-		if (portlet2 == null) {
-			portletName2 = StringPool.BLANK;
-		}
-		else {
-			portletName2 = portlet2.getPortletName();
+		String portletName2 = StringPool.BLANK;
 
-			if (portletName2 == null) {
-				portletName2 = StringPool.BLANK;
-			}
+		if (portlet2 != null) {
+			portletName2 = GetterUtil.getString(portlet2.getPortletName());
 		}
 
 		return portletName1.compareTo(portletName2);
