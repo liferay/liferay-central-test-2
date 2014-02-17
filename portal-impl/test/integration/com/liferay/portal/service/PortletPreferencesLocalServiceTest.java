@@ -483,18 +483,18 @@ public class PortletPreferencesLocalServiceTest {
 	public void testGetGroupPortletPreferencesByPlidAndOwnerAndPortlet()
 		throws Exception {
 
+		PortletPreferencesTestUtil.addGroupPortletPreferences(
+			_layout, _portlet);
+
 		Layout layout = LayoutTestUtil.addLayout(GroupTestUtil.addGroup());
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 1));
 
+		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet);
+
 		Portlet portlet2 = PortletLocalServiceUtil.getPortletById(
 			TestPropsValues.getCompanyId(), String.valueOf(_PORTLET_ID + 2));
-
-		PortletPreferencesTestUtil.addGroupPortletPreferences(
-			_layout, _portlet);
-
-		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet);
 
 		PortletPreferencesTestUtil.addGroupPortletPreferences(layout, portlet2);
 
