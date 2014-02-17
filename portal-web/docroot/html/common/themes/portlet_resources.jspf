@@ -30,27 +30,27 @@ List<String> resourceURLs = new ArrayList<String>();
 	}
 
 	if (themeDisplay.isThemeCssFastLoad()) {
-		ComboServletURLGenerator comboServletURLGenerator = new ComboServletURLGenerator();
+		ComboServletStaticURLGenerator comboServletStaticURLGenerator = new ComboServletStaticURLGenerator();
 
 		String comboURLPrefix = PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=&themeId=" + themeDisplay.getThemeId(), -1);
 
-		comboServletURLGenerator.setComboURLPrefix(comboURLPrefix);
+		comboServletStaticURLGenerator.setComboURLPrefix(comboURLPrefix);
 
-		comboServletURLGenerator.setPredicateFilter(predicateFilter);
-		comboServletURLGenerator.setPortletResourceAccessors(portletResourceAccessors);
-		comboServletURLGenerator.setTimestamp(theme.getTimestamp());
-		comboServletURLGenerator.setVisitedURLs(portletResourceStaticURLs);
+		comboServletStaticURLGenerator.setPredicateFilter(predicateFilter);
+		comboServletStaticURLGenerator.setPortletResourceAccessors(portletResourceAccessors);
+		comboServletStaticURLGenerator.setTimestamp(theme.getTimestamp());
+		comboServletStaticURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
-		resourceURLs.addAll(comboServletURLGenerator.generate(portlets));
+		resourceURLs.addAll(comboServletStaticURLGenerator.generate(portlets));
 	}
 	else {
-		PortletResourceURLGenerator portletResourceURLGenerator = new PortletResourceURLGenerator();
+		PortletResourceStaticURLGenerator portletResourceStaticURLGenerator = new PortletResourceStaticURLGenerator();
 
-		portletResourceURLGenerator.setRequest(request);
-		portletResourceURLGenerator.setVisitedURLs(portletResourceStaticURLs);
+		portletResourceStaticURLGenerator.setRequest(request);
+		portletResourceStaticURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		for (Portlet curPortlet : portlets) {
-			resourceURLs.addAll(portletResourceURLGenerator.generate(curPortlet, portletResourceAccessors));
+			resourceURLs.addAll(portletResourceStaticURLGenerator.generate(curPortlet, portletResourceAccessors));
 		}
 	}
 	%>

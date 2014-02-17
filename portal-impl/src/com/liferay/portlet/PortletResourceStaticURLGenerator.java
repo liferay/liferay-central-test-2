@@ -30,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @author Carlos Sierra Andrés
  */
-public class PortletResourceURLGenerator {
+public class PortletResourceStaticURLGenerator {
 
 	public List<String> generate(
 		Portlet portlet, PortletResourceAccessor ... portletResourceAccessors) {
@@ -38,19 +38,19 @@ public class PortletResourceURLGenerator {
 		List<String> urls = new ArrayList<String>();
 
 		for (
-			PortletResourceAccessor portletResourcesAccessor :
+			PortletResourceAccessor portletResourceAccessor :
 				portletResourceAccessors) {
 
 			String contextPath = null;
 
-			if (portletResourcesAccessor.isPortalResource()) {
+			if (portletResourceAccessor.isPortalResource()) {
 				contextPath = PortalUtil.getPathContext();
 			}
 			else {
 				contextPath = portlet.getContextPath();
 			}
 
-			for (String resource : portletResourcesAccessor.get(portlet)) {
+			for (String resource : portletResourceAccessor.get(portlet)) {
 				if (!HttpUtil.hasProtocol(resource)) {
 					Portlet curRootPortlet = portlet.getRootPortlet();
 

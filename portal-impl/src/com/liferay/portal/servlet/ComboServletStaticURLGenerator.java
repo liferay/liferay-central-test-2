@@ -32,7 +32,7 @@ import java.util.Set;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ComboServletURLGenerator {
+public class ComboServletStaticURLGenerator {
 
 	public List<String> generate(List<Portlet> portlets) {
 		List<String> urls = new ArrayList<String>();
