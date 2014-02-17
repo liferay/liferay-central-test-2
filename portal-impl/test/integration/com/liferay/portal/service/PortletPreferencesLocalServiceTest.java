@@ -654,7 +654,7 @@ public class PortletPreferencesLocalServiceTest {
 	}
 
 	@Test
-	public void testGetPortletPreferencesByPortletAndPlid() throws Exception {
+	public void testGetPortletPreferencesByPortletIdAndPlid() throws Exception {
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			_layout, _portlet);
 
