@@ -17,16 +17,15 @@
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-		PredicateFilter<String> resourcePredicateFilter = new JavascriptPortletResourceFilter(themeDisplay);
-		PortletResourcesAccessor[] portletResourcesAccessors = new PortletResourcesAccessor[] {PortletResourcesAccessor.headerPortalJavaScript, PortletResourcesAccessor.headerPortletJavaScript};
-		List<String> resourceUrls = new ArrayList<String>();
-		boolean resourceFastLoad = themeDisplay.isThemeJsFastLoad();
+	PredicateFilter<String> resourcePredicateFilter = new JavascriptPortletResourceFilter(themeDisplay);
+
+	PortletResourcesAccessor[] portletResourcesAccessors = new PortletResourcesAccessor[] {PortletResourcesAccessor.headerPortalJavaScript, PortletResourcesAccessor.headerPortletJavaScript};
 	%>
 
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
 
 	<%
-		for (String url : resourceUrls) {
+		for (String url : resourceURLs) {
 	%>
 
 		<script src="<%= url %>" type="text/javascript"></script>
