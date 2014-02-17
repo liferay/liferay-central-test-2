@@ -102,33 +102,34 @@ public class ServiceTrackerCollection<S> implements Collection<S> {
 		this(clazz, (Filter)null, serviceTrackerCustomizer, properties);
 	}
 
-	public ServiceTrackerCollection(Class<S> clazz, String filterName) {
+	public ServiceTrackerCollection(Class<S> clazz, String filterString) {
 		this(
-			clazz, _getFilter(filterName), null, new HashMap<String, Object>());
-	}
-
-	public ServiceTrackerCollection(
-		Class<S> clazz, String filterName, Map<String, Object> properties) {
-
-		this(clazz, _getFilter(filterName), null, properties);
-	}
-
-	public ServiceTrackerCollection(
-		Class<S> clazz, String filterName,
-		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
-
-		this(
-			clazz, _getFilter(filterName), serviceTrackerCustomizer,
+			clazz, _getFilter(filterString), null,
 			new HashMap<String, Object>());
 	}
 
 	public ServiceTrackerCollection(
-		Class<S> clazz, String filterName,
+		Class<S> clazz, String filterString, Map<String, Object> properties) {
+
+		this(clazz, _getFilter(filterString), null, properties);
+	}
+
+	public ServiceTrackerCollection(
+		Class<S> clazz, String filterString,
+		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer) {
+
+		this(
+			clazz, _getFilter(filterString), serviceTrackerCustomizer,
+			new HashMap<String, Object>());
+	}
+
+	public ServiceTrackerCollection(
+		Class<S> clazz, String filterString,
 		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer,
 		Map<String, Object> properties) {
 
 		this(
-			clazz, _getFilter(filterName), serviceTrackerCustomizer,
+			clazz, _getFilter(filterString), serviceTrackerCustomizer,
 			properties);
 	}
 
@@ -272,10 +273,10 @@ public class ServiceTrackerCollection<S> implements Collection<S> {
 		return _services.toArray(services);
 	}
 
-	private static Filter _getFilter(String filterName) {
+	private static Filter _getFilter(String filterString) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		return registry.getFilter(filterName);
+		return registry.getFilter(filterString);
 	}
 
 	private Filter _getFilter(Filter filter, Class<S> clazz) {
