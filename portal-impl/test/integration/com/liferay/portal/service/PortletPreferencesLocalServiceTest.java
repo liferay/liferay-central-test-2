@@ -655,10 +655,10 @@ public class PortletPreferencesLocalServiceTest {
 
 	@Test
 	public void testGetPortletPreferencesByPortletAndPlid() throws Exception {
-		Layout layout = LayoutTestUtil.addLayout(_group);
-
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			_layout, _portlet);
+
+		Layout layout = LayoutTestUtil.addLayout(_group);
 
 		PortletPreferencesTestUtil.addLayoutPortletPreferences(
 			layout, _portlet);
@@ -672,7 +672,6 @@ public class PortletPreferencesLocalServiceTest {
 		PortletPreferences portletPreferences = portletPreferencesList.get(0);
 
 		Assert.assertEquals(_layout.getPlid(), portletPreferences.getPlid());
-
 		Assert.assertEquals(
 			_portlet.getPortletId(), portletPreferences.getPortletId());
 	}
