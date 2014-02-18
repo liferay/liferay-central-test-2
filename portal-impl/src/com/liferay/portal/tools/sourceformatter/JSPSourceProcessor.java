@@ -291,10 +291,15 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 					matcher.start());
 			}
 
-			if (isAutoFix() && !content.equals(newContent)) {
-				fileUtil.write(file, newContent);
+			if (!content.equals(newContent)) {
+				if (isAutoFix()) {
+					fileUtil.write(file, newContent);
+				}
+				else {
+					processMismatch(file, content, newContent);
+				}
 
-				sourceFormatterHelper.printError(fileName, file);
+				printError(fileName, file);
 			}
 
 			if (portalSource &&
@@ -435,12 +440,15 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		checkLanguageKeys(fileName, newContent, _taglibLanguageKeyPattern);
 		checkXSS(fileName, newContent);
 
-		if (isAutoFix() && (newContent != null) &&
-			!content.equals(newContent)) {
+		if (!content.equals(newContent)) {
+			if (isAutoFix()) {
+				fileUtil.write(file, newContent);
+			}
+			else {
+				processMismatch(file, content, newContent);
+			}
 
-			fileUtil.write(file, newContent);
-
-			sourceFormatterHelper.printError(fileName, file);
+			printError(fileName, file);
 		}
 
 		return newContent;

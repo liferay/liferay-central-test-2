@@ -66,12 +66,15 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 			newContent = newContent.substring(0, newContent.length() - 1);
 		}
 
-		if (isAutoFix() && (newContent != null) &&
-			!_portalPortalProperties.equals(newContent)) {
+		if (!_portalPortalProperties.equals(newContent)) {
+			if (isAutoFix()) {
+				fileUtil.write(file, newContent);
+			}
+			else {
+				processMismatch(file, _portalPortalProperties, newContent);
+			}
 
-			fileUtil.write(file, newContent);
-
-			sourceFormatterHelper.printError(fileName, file);
+			printError(fileName, file);
 		}
 	}
 
