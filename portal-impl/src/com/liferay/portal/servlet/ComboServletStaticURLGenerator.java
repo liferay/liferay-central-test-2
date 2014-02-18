@@ -44,11 +44,11 @@ public class ComboServletStaticURLGenerator {
 		portlets = ListUtil.sort(portlets, _portletNameComparator);
 
 		for (Portlet portlet : portlets) {
-			for (PortletResourceAccessor portletResourcesAccessor :
-					_portletResourcesAccessors) {
+			for (PortletResourceAccessor portletResourceAccessor :
+					_portletResourceAccessors) {
 
 				List<String> portletResources = ListUtil.sort(
-					portletResourcesAccessor.get(portlet));
+					portletResourceAccessor.get(portlet));
 
 				for (String portletResource : portletResources) {
 					if (!_predicateFilter.filter(portletResource)) {
@@ -67,7 +67,7 @@ public class ComboServletStaticURLGenerator {
 
 						String contextPath = portlet.getContextPath();
 
-						if (!portletResourcesAccessor.isPortalResource() &&
+						if (!portletResourceAccessor.isPortalResource() &&
 							(contextPath != null) &&
 							!contextPath.equals(PortalUtil.getPathContext())) {
 
@@ -97,9 +97,9 @@ public class ComboServletStaticURLGenerator {
 	}
 
 	public void setPortletResourceAccessors(
-		PortletResourceAccessor... portletResourcesAccessors) {
+		PortletResourceAccessor... portletResourceAccessors) {
 
-		_portletResourcesAccessors = portletResourcesAccessors;
+		_portletResourceAccessors = portletResourceAccessors;
 	}
 
 	public void setPredicateFilter(PredicateFilter<String> predicateFilter) {
@@ -121,7 +121,7 @@ public class ComboServletStaticURLGenerator {
 	private static PortletNameComparator _portletNameComparator =
 		new PortletNameComparator();
 
-	private PortletResourceAccessor[] _portletResourcesAccessors;
+	private PortletResourceAccessor[] _portletResourceAccessors;
 	private PredicateFilter<String> _predicateFilter = PredicateFilter.ALL;
 	private long _timestamp;
 	private String _urlPrefix;

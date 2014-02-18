@@ -26,87 +26,105 @@ public interface PortletResourceAccessor
 	extends Accessor<Portlet, List<String>> {
 
 	public static PortletResourceAccessor FOOTER_PORTAL_CSS =
-		new PortletPortalResourcesAccessor() {
+		new PortalPortletResourceAccessor() {
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortalCss();
 			}
+
 		};
 
 	public static PortletResourceAccessor FOOTER_PORTAL_JAVASCRIPT =
-		new PortletPortalResourcesAccessor() {
+		new PortalPortletResourceAccessor() {
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortalJavaScript();
 			}
+
 		};
 
 	public static PortletResourceAccessor FOOTER_PORTLET_CSS =
-		new PortletResourceDefaultAccessor() {
+		new DefaultPortletResourceAccessor() {
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortletCss();
 			}
+
 		};
 
 	public static PortletResourceAccessor FOOTER_PORTLET_JAVASCRIPT =
-		new PortletResourceDefaultAccessor() {
+		new DefaultPortletResourceAccessor() {
+			
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortletJavaScript();
 			}
+
 		};
 
 	public static PortletResourceAccessor HEADER_PORTAL_CSS =
-		new PortletPortalResourcesAccessor() {
+		new PortalPortletResourceAccessor() {
+			
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalCss();
 			}
+
 		};
 
 	public static PortletResourceAccessor HEADER_PORTAL_JAVASCRIPT =
-		new PortletPortalResourcesAccessor() {
+		new PortalPortletResourceAccessor() {
+			
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalJavaScript();
 			}
+
 		};
 
 	public static PortletResourceAccessor HEADER_PORTLET_CSS =
-		new PortletResourceDefaultAccessor() {
+		new DefaultPortletResourceAccessor() {
+			
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortletCss();
 			}
+
 		};
 
 	public static PortletResourceAccessor HEADER_PORTLET_JAVASCRIPT =
-		new PortletResourceDefaultAccessor() {
+		new DefaultPortletResourceAccessor() {
+			
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortletJavaScript();
 			}
+
 		};
 
 	public boolean isPortalResource();
 
-	public static abstract class PortletPortalResourcesAccessor
-		implements PortletResourceAccessor {
-
-		@Override
-		public boolean isPortalResource() {
-			return true;
-		}
-	}
-
-	public static abstract class PortletResourceDefaultAccessor
+	public static abstract class DefaultPortletResourceAccessor
 		implements PortletResourceAccessor {
 
 		@Override
 		public boolean isPortalResource() {
 			return false;
 		}
+
+	}
+
+	public static abstract class PortalPortletResourceAccessor
+		implements PortletResourceAccessor {
+
+		@Override
+		public boolean isPortalResource() {
+			return true;
+		}
+
 	}
 
 }
