@@ -20,6 +20,8 @@
 	PredicateFilter<String> predicateFilter = PredicateFilter.ALL;
 
 	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.HEADER_PORTAL_CSS, PortletResourceAccessor.HEADER_PORTLET_CSS};
+
+	boolean staticPortletResourceFastLoad = themeDisplay.isThemeCssFastLoad();
 	%>
 
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
