@@ -957,6 +957,12 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return false;
 	}
 
+	protected void printError(String fileName, File file) {
+		if (_printErrors) {
+			sourceFormatterHelper.printError(fileName, file);
+		}
+	}
+
 	protected void processErrorMessage(String fileName, String message) {
 		_errorMessages.add(message);
 

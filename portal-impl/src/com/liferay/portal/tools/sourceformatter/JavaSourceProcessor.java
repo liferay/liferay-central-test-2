@@ -1092,12 +1092,11 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		}
 
 		if (!content.equals(newContent)) {
-
 			if (isAutoFix()) {
 				fileUtil.write(file, newContent);
 			}
 
-			sourceFormatterHelper.printError(fileName, file);
+			printError(fileName, file);
 
 			processMismatch(file, content, newContent);
 		}
