@@ -25,56 +25,63 @@ import java.util.List;
 public interface PortletResourceAccessor
 	extends Accessor<Portlet, List<String>> {
 
-	public static PortletResourceAccessor footerPortalCss =
+	public static PortletResourceAccessor FOOTER_PORTAL_CSS =
 		new PortletPortalResourcesAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortalCss();
 			}
 		};
-	public static PortletResourceAccessor footerPortalJavaScript =
+
+	public static PortletResourceAccessor FOOTER_PORTAL_JAVASCRIPT =
 		new PortletPortalResourcesAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortalJavaScript();
 			}
 		};
-	public static PortletResourceAccessor footerPortletCss =
+
+	public static PortletResourceAccessor FOOTER_PORTLET_CSS =
 		new PortletResourceDefaultAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortletCss();
 			}
 		};
-	public static PortletResourceAccessor footerPortletJavaScript =
+
+	public static PortletResourceAccessor FOOTER_PORTLET_JAVASCRIPT =
 		new PortletResourceDefaultAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortletJavaScript();
 			}
 		};
-	public static PortletResourceAccessor headerPortalCss =
+
+	public static PortletResourceAccessor HEADER_PORTAL_CSS =
 		new PortletPortalResourcesAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalCss();
 			}
 		};
-	public static PortletResourceAccessor headerPortalJavaScript =
+
+	public static PortletResourceAccessor HEADER_PORTAL_JAVASCRIPT =
 		new PortletPortalResourcesAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalJavaScript();
 			}
 		};
-	public static PortletResourceAccessor headerPortletCss =
+
+	public static PortletResourceAccessor HEADER_PORTLET_CSS =
 		new PortletResourceDefaultAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortletCss();
 			}
 		};
-	public static PortletResourceAccessor headerPortletJavaScript =
+
+	public static PortletResourceAccessor HEADER_PORTLET_JAVASCRIPT =
 		new PortletResourceDefaultAccessor() {
 			@Override
 			public List<String> get(Portlet portlet) {

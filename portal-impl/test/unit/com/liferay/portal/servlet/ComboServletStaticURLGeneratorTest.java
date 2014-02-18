@@ -70,7 +70,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
@@ -90,7 +90,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(
@@ -117,7 +117,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(
 			SetUtil.fromArray(new String[] {"/css/main.css"}));
@@ -136,7 +136,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setPredicateFilter(PredicateFilter.NONE);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
@@ -155,7 +155,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortletCss);
+			PortletResourceAccessor.HEADER_PORTLET_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -176,7 +176,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -197,7 +197,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -216,7 +216,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -235,7 +235,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -255,7 +255,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -281,7 +281,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
 
@@ -301,7 +301,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 		comboServletStaticURLGenerator.setTimestamp(20000);
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 		comboServletStaticURLGenerator.setVisitedURLs(new HashSet<String>());
@@ -322,7 +322,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 			new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPortletResourceAccessors(
-			PortletResourceAccessor.headerPortalCss);
+			PortletResourceAccessor.HEADER_PORTAL_CSS);
 
 		comboServletStaticURLGenerator.setURLPrefix(_URL_PREFIX);
 

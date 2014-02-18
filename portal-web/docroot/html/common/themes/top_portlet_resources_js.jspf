@@ -19,7 +19,7 @@
 	<%
 	PredicateFilter<String> predicateFilter = new PortletJavaScriptResourcePredicateFilter(themeDisplay);
 
-	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.headerPortalJavaScript, PortletResourceAccessor.headerPortletJavaScript};
+	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.HEADER_PORTAL_JAVASCRIPT, PortletResourceAccessor.HEADER_PORTLET_JAVASCRIPT};
 	%>
 
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
