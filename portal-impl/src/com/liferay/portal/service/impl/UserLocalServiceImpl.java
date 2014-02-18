@@ -1599,8 +1599,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *         a password should be generated (with the
 	 *         <code>autoPassword</code> attribute) and whether the confirmation
 	 *         email should be sent (with the <code>sendEmail</code> attribute)
-	 *         for the user. It also receives the user's custom password at
-	 *         <code>passwordUnencrypted</code> if custom password is configured
+	 *         for the user.
 	 * @throws PortalException if a portal exception occurred
 	 * @throws SystemException if a system exception occurred
 	 */
@@ -4844,9 +4843,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *
 	 * @param  userId the primary key of the user
 	 * @param  status the user's new workflow status
-	 * @param  serviceContext the service context to be applied. Can set the
-	 *         unencrypted password (with the <code>passwordUnencrypted</code>
-	 *         attribute), used by LDAP listener.
+	 * @param  serviceContext the service context to be applied
 	 * @return the user
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
