@@ -79,15 +79,7 @@ public class SourceFormatter {
 						XMLSourceProcessor.class.newInstance());
 
 					for (SourceProcessor sourceProcessor : sourceProcessors) {
-						sourceProcessor.format(
-							_useProperties, _printErrors, _autoFix,
-							_mainReleaseVersion);
-
-						_errorMessages.addAll(
-							sourceProcessor.getErrorMessages());
-
-						processMismatch(
-							sourceProcessor.getFirstSourceMismatchException());
+						_runSourceProcessor(sourceProcessor);
 					}
 				}
 				catch (Exception e) {
@@ -105,14 +97,7 @@ public class SourceFormatter {
 					SourceProcessor sourceProcessor =
 						JSPSourceProcessor.class.newInstance();
 
-					sourceProcessor.format(
-						_useProperties, _printErrors, _autoFix,
-						_mainReleaseVersion);
-
-					_errorMessages.addAll(sourceProcessor.getErrorMessages());
-
-					processMismatch(
-						sourceProcessor.getFirstSourceMismatchException());
+					_runSourceProcessor(sourceProcessor);
 				}
 				catch (Exception e) {
 					e.printStackTrace();
@@ -160,11 +145,17 @@ public class SourceFormatter {
 		return _mainReleaseVersion;
 	}
 
-	void processMismatch(SourceMismatchException sourceMismatchException) {
-		if ((sourceMismatchException != null) &&
-			(_firstSourceMismatchException == null)) {
+	private void _runSourceProcessor(SourceProcessor sourceProcessor)
+		throws Exception {
 
-			_firstSourceMismatchException = sourceMismatchException;
+		sourceProcessor.format(
+			_useProperties, _printErrors, _autoFix, _mainReleaseVersion);
+
+		_errorMessages.addAll(sourceProcessor.getErrorMessages());
+
+		if (_firstSourceMismatchException == null) {
+			_firstSourceMismatchException =
+				sourceProcessor.getFirstSourceMismatchException();
 		}
 	}
 
