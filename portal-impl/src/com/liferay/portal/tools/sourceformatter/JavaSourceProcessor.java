@@ -1095,10 +1095,11 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			if (isAutoFix()) {
 				fileUtil.write(file, newContent);
 			}
+			else {
+				processMismatch(file, content, newContent);
+			}
 
 			printError(fileName, file);
-
-			processMismatch(file, content, newContent);
 		}
 
 		return newContent;
