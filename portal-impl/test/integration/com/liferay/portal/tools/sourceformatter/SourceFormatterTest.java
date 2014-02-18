@@ -31,12 +31,8 @@ public class SourceFormatterTest {
 			sourceFormatter.format();
 		}
 		catch (SourceMismatchException sme) {
-			/*
-			Convert to org.junit.ComparisonFailure, so that your favorite IDE's
-			Result Comparison will render the diff graphically.
-			*/
 			Assert.assertEquals(
-				sme.getFileName().toString(), sme.getFormattedSource(),
+				sme.getFileName(), sme.getFormattedSource(),
 				sme.getOriginalSource());
 		}
 	}
