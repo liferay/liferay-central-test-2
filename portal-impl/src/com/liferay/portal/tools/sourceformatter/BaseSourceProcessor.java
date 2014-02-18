@@ -89,8 +89,8 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	}
 
 	@Override
-	public MismatchException getFirstMismatch() {
-		return _firstMismatch;
+	public SourceMismatchException getFirstSourceMismatchException() {
+		return _firstSourceMismatchException;
 	}
 
 	protected static String formatImports(String imports, int classStartPos)
@@ -382,17 +382,18 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			return;
 		}
 
+		fileName = StringUtil.replace(
+			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
 		if (_autoFix) {
 			fileUtil.write(file, newContent);
 		}
-		else if (_firstMismatch == null) {
-			_firstMismatch = new MismatchException(file, content, newContent);
+		else if (_firstSourceMismatchException == null) {
+			_firstSourceMismatchException =
+				new SourceMismatchException(fileName, content, newContent);
 		}
 
 		if (_printErrors) {
-			fileName = StringUtil.replace(
-				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
-
 			sourceFormatterHelper.printError(fileName, file);
 		}
 	}
@@ -1247,9 +1248,9 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	private String _copyright;
 	private List<String> _errorMessages = new ArrayList<String>();
 	private String[] _excludes;
+	private SourceMismatchException _firstSourceMismatchException;
 	private boolean _initialized;
 	private String _oldCopyright;
-	private MismatchException _firstMismatch;
 	private int _pluginsDirectorylevel;
 	private Properties _portalLanguageKeysProperties;
 	private boolean _printErrors;

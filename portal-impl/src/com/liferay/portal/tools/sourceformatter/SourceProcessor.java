@@ -52,6 +52,6 @@ public interface SourceProcessor {
 	 * there's a lot of them.
 	 * </ol>
 	 */
-	public MismatchException getFirstMismatch();
+	public SourceMismatchException getFirstSourceMismatchException();
 
 }

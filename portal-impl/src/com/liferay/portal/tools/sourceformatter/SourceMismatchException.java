@@ -14,36 +14,36 @@
 
 package com.liferay.portal.tools.sourceformatter;
 
-import java.io.File;
+import com.liferay.portal.kernel.exception.PortalException;
 
 /**
  * @author André de Oliveira
+ * @author Hugo Huijser
  */
-class MismatchException extends RuntimeException {
+public class SourceMismatchException extends PortalException {
 
-	MismatchException(File file, String original, String formatted) {
-		_file = file;
-		_original = original;
-		_formatted = formatted;
+	public SourceMismatchException(
+		String fileName, String originalSource, String formattedSource) {
+
+		_fileName = fileName;
+		_originalSource = originalSource;
+		_formattedSource = formattedSource;
 	}
 
-	File getFile() {
-
-		return _file;
+	String getFileName() {
+		return _fileName;
 	}
 
-	String getFormatted() {
-
-		return _formatted;
+	String getFormattedSource() {
+		return _formattedSource;
 	}
 
-	String getOriginal() {
-
-		return _original;
+	String getOriginalSource() {
+		return _originalSource;
 	}
 
-	private final File _file;
-	private final String _formatted;
-	private final String _original;
+	private String _fileName;
+	private String _formattedSource;
+	private String _originalSource;
 
 }
