@@ -109,16 +109,7 @@ public class CSSSourceProcessor extends BaseSourceProcessor {
 
 		newContent = fixHexColors(newContent);
 
-		if (!content.equals(newContent)) {
-			if (isAutoFix()) {
-				fileUtil.write(file, newContent);
-			}
-			else {
-				processMismatch(file, content, newContent);
-			}
-
-			printError(fileName, file);
-		}
+		compareAndAutoFixContent(file, fileName, content, newContent);
 
 		return newContent;
 	}

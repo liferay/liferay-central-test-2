@@ -291,16 +291,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 					matcher.start());
 			}
 
-			if (!content.equals(newContent)) {
-				if (isAutoFix()) {
-					fileUtil.write(file, newContent);
-				}
-				else {
-					processMismatch(file, content, newContent);
-				}
-
-				printError(fileName, file);
-			}
+			compareAndAutoFixContent(file, fileName, content, newContent);
 
 			if (portalSource &&
 				!mainReleaseVersion.equals(MAIN_RELEASE_VERSION_6_1_0) &&
@@ -440,16 +431,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		checkLanguageKeys(fileName, newContent, _taglibLanguageKeyPattern);
 		checkXSS(fileName, newContent);
 
-		if (!content.equals(newContent)) {
-			if (isAutoFix()) {
-				fileUtil.write(file, newContent);
-			}
-			else {
-				processMismatch(file, content, newContent);
-			}
-
-			printError(fileName, file);
-		}
+		compareAndAutoFixContent(file, fileName, content, newContent);
 
 		return newContent;
 	}

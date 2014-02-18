@@ -374,6 +374,29 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		processErrorMessage(fileName, "plus: " + fileName + " " + lineCount);
 	}
 
+	protected void compareAndAutoFixContent(
+			File file, String fileName, String content, String newContent)
+		throws IOException {
+
+		if (content.equals(newContent)) {
+			return;
+		}
+
+		if (_autoFix) {
+			fileUtil.write(file, newContent);
+		}
+		else if (_firstMismatch == null) {
+			_firstMismatch = new MismatchException(file, content, newContent);
+		}
+
+		if (_printErrors) {
+			fileName = StringUtil.replace(
+				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
+
+			sourceFormatterHelper.printError(fileName, file);
+		}
+	}
+
 	protected String fixCompatClassImports(File file, String content)
 		throws IOException {
 
@@ -914,10 +937,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return false;
 	}
 
-	protected boolean isAutoFix() {
-		return _autoFix;
-	}
-
 	protected boolean isExcluded(Properties properties, String fileName) {
 		return isExcluded(properties, fileName, -1);
 	}
@@ -957,25 +976,11 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return false;
 	}
 
-	protected void printError(String fileName, File file) {
-		if (_printErrors) {
-			sourceFormatterHelper.printError(fileName, file);
-		}
-	}
-
 	protected void processErrorMessage(String fileName, String message) {
 		_errorMessages.add(message);
 
 		if (_printErrors) {
 			sourceFormatterHelper.printError(fileName, message);
-		}
-	}
-
-	protected void processMismatch(File file, String original,
-		String formatted) {
-
-		if (_firstMismatch == null) {
-			_firstMismatch = new MismatchException(file, original, formatted);
 		}
 	}
 

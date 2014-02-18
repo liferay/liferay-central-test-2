@@ -66,16 +66,8 @@ public class PropertiesSourceProcessor extends BaseSourceProcessor {
 			newContent = newContent.substring(0, newContent.length() - 1);
 		}
 
-		if (!_portalPortalProperties.equals(newContent)) {
-			if (isAutoFix()) {
-				fileUtil.write(file, newContent);
-			}
-			else {
-				processMismatch(file, _portalPortalProperties, newContent);
-			}
-
-			printError(fileName, file);
-		}
+		compareAndAutoFixContent(
+			file, fileName, _portalPortalProperties, newContent);
 	}
 
 	protected void formatPortalProperties() throws Exception {

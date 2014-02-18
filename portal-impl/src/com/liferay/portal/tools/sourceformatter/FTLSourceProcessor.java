@@ -49,19 +49,7 @@ public class FTLSourceProcessor extends BaseSourceProcessor {
 
 		String newContent = trimContent(content, false);
 
-		if (!content.equals(newContent)) {
-			if (isAutoFix()) {
-				fileUtil.write(file, newContent);
-			}
-			else {
-				processMismatch(file, content, newContent);
-			}
-
-			fileName = StringUtil.replace(
-				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
-
-			printError(fileName, file);
-		}
+		compareAndAutoFixContent(file, fileName, content, newContent);
 
 		return newContent;
 	}

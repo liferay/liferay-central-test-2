@@ -51,19 +51,7 @@ public class SQLSourceProcessor extends BaseSourceProcessor {
 
 		String newContent = formatSQL(content);
 
-		if (!content.equals(newContent)) {
-			if (isAutoFix()) {
-				fileUtil.write(file, newContent);
-			}
-			else {
-				processMismatch(file, content, newContent);
-			}
-
-			fileName = StringUtil.replace(
-				fileName, StringPool.BACK_SLASH, StringPool.SLASH);
-
-			printError(fileName, file);
-		}
+		compareAndAutoFixContent(file, fileName, content, newContent);
 
 		return newContent;
 	}
