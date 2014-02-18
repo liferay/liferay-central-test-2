@@ -27,7 +27,7 @@
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
 
 	<%
-	for (String url : resourceURLs) {
+	for (String url : staticPortletResourceURLStrings) {
 	%>
 
 		<link href="<%= url %>" rel="stylesheet" type="text/css" />

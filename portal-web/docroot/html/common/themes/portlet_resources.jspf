@@ -15,7 +15,7 @@
 --%>
 
 <%
-List<String> resourceURLs = new ArrayList<String>();
+List<String> staticPortletResourceURLStrings = new ArrayList<String>();
 %>
 
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
@@ -38,7 +38,7 @@ List<String> resourceURLs = new ArrayList<String>();
 		comboServletStaticURLGenerator.setURLPrefix(PortalUtil.getStaticResourceURL(request, themeDisplay.getCDNDynamicResourcesHost() + themeDisplay.getPathContext() + "/combo", "minifierType=&themeId=" + themeDisplay.getThemeId(), -1));
 		comboServletStaticURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
-		resourceURLs.addAll(comboServletStaticURLGenerator.generate(portlets));
+		staticPortletResourceURLStrings.addAll(comboServletStaticURLGenerator.generate(portlets));
 	}
 	else {
 		PortletResourceStaticURLGenerator portletResourceStaticURLGenerator = new PortletResourceStaticURLGenerator();
@@ -47,7 +47,7 @@ List<String> resourceURLs = new ArrayList<String>();
 		portletResourceStaticURLGenerator.setVisitedURLs(portletResourceStaticURLs);
 
 		for (Portlet curPortlet : portlets) {
-			resourceURLs.addAll(portletResourceStaticURLGenerator.generate(curPortlet, portletResourceAccessors));
+			staticPortletResourceURLStrings.addAll(portletResourceStaticURLGenerator.generate(curPortlet, portletResourceAccessors));
 		}
 	}
 	%>
