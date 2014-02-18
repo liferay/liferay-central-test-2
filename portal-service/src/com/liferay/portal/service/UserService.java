@@ -1048,9 +1048,7 @@ public interface UserService extends BaseService {
 	*
 	* @param userId the primary key of the user
 	* @param status the user's new workflow status
-	* @param serviceContext the service context to be applied. Can set the
-	unencrypted password (with the <code>passwordUnencrypted</code>
-	attribute), used by LDAP listener.
+	* @param serviceContext the service context to be applied
 	* @return the user
 	* @throws PortalException if a user with the primary key could not be
 	found, if the current user was updating her own status to
