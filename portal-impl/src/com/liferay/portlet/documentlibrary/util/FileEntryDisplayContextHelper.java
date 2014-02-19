@@ -133,7 +133,12 @@ public class FileEntryDisplayContextHelper {
 
 	public boolean isDLFileEntry() {
 		if (_dlFileEntry == null) {
-			_dlFileEntry = (_fileEntry.getModel() instanceof DLFileEntry);
+			if (_fileEntry.getModel() instanceof DLFileEntry) {
+				_dlFileEntry = true;
+			}
+			else {
+				_dlFileEntry = false;
+			}
 		}
 
 		return _dlFileEntry;
