@@ -37,8 +37,7 @@ public class PortletResourceStaticURLGenerator {
 
 		List<String> urls = new ArrayList<String>();
 
-		for (
-			PortletResourceAccessor portletResourceAccessor :
+		for (PortletResourceAccessor portletResourceAccessor :
 				portletResourceAccessors) {
 
 			String contextPath = null;
@@ -50,25 +49,28 @@ public class PortletResourceStaticURLGenerator {
 				contextPath = portlet.getContextPath();
 			}
 
-			for (String resource : portletResourceAccessor.get(portlet)) {
-				if (!HttpUtil.hasProtocol(resource)) {
-					Portlet curRootPortlet = portlet.getRootPortlet();
+			List<String> portletResources = portletResourceAccessor.get(
+				portlet);
 
-					resource = PortalUtil.getStaticResourceURL(
-						_request, contextPath + resource,
-						curRootPortlet.getTimestamp());
+			for (String portletResource : portletResources) {
+				if (!HttpUtil.hasProtocol(portletResource)) {
+					Portlet rootPortlet = portlet.getRootPortlet();
+
+					portletResource = PortalUtil.getStaticResourceURL(
+						_request, contextPath + portletResource,
+						rootPortlet.getTimestamp());
 				}
 
-				if (!resource.contains(Http.PROTOCOL_DELIMITER)) {
+				if (!portletResource.contains(Http.PROTOCOL_DELIMITER)) {
 					String cdnBaseURL = _themeDisplay.getCDNBaseURL();
 
-					resource = cdnBaseURL.concat(resource);
+					portletResource = cdnBaseURL.concat(portletResource);
 				}
 
-				if (!_visited.contains(resource)) {
-					urls.add(resource);
+				if (!_visitedURLs.contains(portletResource)) {
+					urls.add(portletResource);
 
-					_visited.add(resource);
+					_visitedURLs.add(portletResource);
 				}
 			}
 		}
@@ -83,11 +85,11 @@ public class PortletResourceStaticURLGenerator {
 	}
 
 	public void setVisitedURLs(Set<String> visitedURLs) {
-		_visited = visitedURLs;
+		_visitedURLs = visitedURLs;
 	}
 
 	private HttpServletRequest _request;
 	private ThemeDisplay _themeDisplay;
-	private Set<String> _visited;
+	private Set<String> _visitedURLs;
 
 }
