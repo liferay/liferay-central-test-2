@@ -20,10 +20,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 /**
  * @author Carlos Sierra Andrés
  */
-public class PortletJavaScriptResourcePredicateFilter
+public class JavaScriptPortletResourcePredicateFilter
 	implements PredicateFilter<String> {
 
-	public PortletJavaScriptResourcePredicateFilter(ThemeDisplay themeDisplay) {
+	public JavaScriptPortletResourcePredicateFilter(ThemeDisplay themeDisplay) {
 		_themeDisplay = themeDisplay;
 	}
 
