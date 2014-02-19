@@ -127,7 +127,7 @@ public class LayoutTemplateImpl
 		String layoutTemplateId = StringUtil.replace(
 			_layoutTemplateId, CharPool.UNDERLINE, CharPool.DASH);
 
-		return LanguageUtil.get(locale, layoutTemplateId);
+		return LanguageUtil.get(locale, "layout-template-" + layoutTemplateId);
 	}
 
 	@Override
