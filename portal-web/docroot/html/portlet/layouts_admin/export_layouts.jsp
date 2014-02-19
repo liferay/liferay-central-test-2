@@ -78,19 +78,19 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/layouts_admin/export_layouts");
 portletURL.setParameter(Constants.CMD, Constants.EXPORT);
-portletURL.setParameter("groupId", String.valueOf(groupId));
-portletURL.setParameter("liveGroupId", String.valueOf(liveGroupId));
-portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
-portletURL.setParameter("rootNodeName", rootNodeName);
 
 if (cmd.equals(Constants.ADD)) {
 	portletURL.setParameter("tabs2", "new-export-process");
-
 	portletURL.setParameter("exportNav", "export-configurations");
 }
 else {
 	portletURL.setParameter("tabs2", "current-and-previous");
 }
+
+portletURL.setParameter("groupId", String.valueOf(groupId));
+portletURL.setParameter("liveGroupId", String.valueOf(liveGroupId));
+portletURL.setParameter("privateLayout", String.valueOf(privateLayout));
+portletURL.setParameter("rootNodeName", rootNodeName);
 
 String tabs2Names = StringPool.BLANK;
 

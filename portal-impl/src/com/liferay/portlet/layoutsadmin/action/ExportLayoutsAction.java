@@ -71,6 +71,10 @@ public class ExportLayoutsAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
+		if (Validator.isNull(cmd)) {
+			return;
+		}
+
 		try {
 			long groupId = ParamUtil.getLong(actionRequest, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(
@@ -90,17 +94,15 @@ public class ExportLayoutsAction extends PortletAction {
 
 			fileName = fileName + StringPool.DASH + Time.getShortTimestamp();
 
-			if (Validator.isNotNull(cmd)) {
-				LayoutServiceUtil.exportLayoutsAsFileInBackground(
-					fileName, groupId, privateLayout, layoutIds,
-					actionRequest.getParameterMap(), dateRange.getStartDate(),
-					dateRange.getEndDate(), fileName);
+			LayoutServiceUtil.exportLayoutsAsFileInBackground(
+				fileName, groupId, privateLayout, layoutIds,
+				actionRequest.getParameterMap(), dateRange.getStartDate(),
+				dateRange.getEndDate(), fileName);
 
-				String redirect = ParamUtil.getString(
-					actionRequest, "redirect");
+			String redirect = ParamUtil.getString(actionRequest, "redirect");
 
-				sendRedirect(actionRequest, actionResponse, redirect);
-			}
+			sendRedirect(actionRequest, actionResponse, redirect);
+		}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
