@@ -153,7 +153,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGenerateUpdatesVisitedResources() {
+	public void testGenerateUpdatesVisitedURLs() {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
@@ -215,7 +215,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGenerateWithAbsoluteAndRelativePortalResourceURLs() {
+	public void testGenerateWithAbsoluteAndRelativePortalResources() {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
@@ -274,7 +274,7 @@ public class ComboServletStaticURLGeneratorTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGenerateWithRelativeAndPluginContextResources() {
+	public void testGenerateWithRelativeAndPortletResources() {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator =
 			new ComboServletStaticURLGenerator();
 
