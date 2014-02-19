@@ -557,7 +557,8 @@ public class LayoutPermissionImpl
 
 		for (Layout curLayout : layouts) {
 			if (containsWithoutViewableGroup(
-					permissionChecker, curLayout, ActionKeys.VIEW)) {
+					permissionChecker, curLayout, ActionKeys.VIEW) &&
+				!curLayout.isHidden()) {
 
 				return true;
 			}
