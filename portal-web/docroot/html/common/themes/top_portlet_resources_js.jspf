@@ -17,17 +17,15 @@
 <c:if test="<%= (portlets != null) && !portlets.isEmpty() %>">
 
 	<%
-	PredicateFilter<String> predicateFilter = new PortletJavaScriptResourcePredicateFilter(themeDisplay);
-
 	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.HEADER_PORTAL_JAVASCRIPT, PortletResourceAccessor.HEADER_PORTLET_JAVASCRIPT};
-
+	PredicateFilter<String> predicateFilter = new PortletJavaScriptResourcePredicateFilter(themeDisplay);
 	boolean useComboServletStaticURLGenerator = themeDisplay.isThemeJsFastLoad();
 	%>
 
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>
 
 	<%
-	for (String url : staticPortletResourceURLStrings) {
+	for (String url : urls) {
 	%>
 
 		<script src="<%= url %>" type="text/javascript"></script>
