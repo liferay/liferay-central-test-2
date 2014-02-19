@@ -84,9 +84,9 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 				data.put("teamname", curTeam.getName());
 				data.put("teamsearchcontainername", "teams");
 
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 				boolean disabled = false;
+
+				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 				long[] defaultTeamIds = StringUtil.split(group.getTypeSettingsProperties().getProperty("defaultTeamIds"), 0L);
 
