@@ -21,7 +21,7 @@
 
 	PortletResourceAccessor[] portletResourceAccessors = new PortletResourceAccessor[] {PortletResourceAccessor.FOOTER_PORTAL_JAVASCRIPT, PortletResourceAccessor.FOOTER_PORTLET_JAVASCRIPT};
 
-	boolean staticPortletResourceFastLoad = themeDisplay.isThemeJsFastLoad();
+	boolean useComboServletStaticURLGenerator = themeDisplay.isThemeJsFastLoad();
 	%>
 
 	<%@ include file="/html/common/themes/portlet_resources.jspf" %>

@@ -29,7 +29,7 @@ List<String> staticPortletResourceURLStrings = new ArrayList<String>();
 		request.setAttribute(WebKeys.PORTLET_RESOURCE_STATIC_URLS, portletResourceStaticURLs);
 	}
 
-	if (staticPortletResourceFastLoad) {
+	if (useComboServletStaticURLGenerator) {
 		ComboServletStaticURLGenerator comboServletStaticURLGenerator = new ComboServletStaticURLGenerator();
 
 		comboServletStaticURLGenerator.setPredicateFilter(predicateFilter);

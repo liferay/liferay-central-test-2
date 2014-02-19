@@ -57,7 +57,7 @@ public interface PortletResourceAccessor
 
 	public static PortletResourceAccessor FOOTER_PORTLET_JAVASCRIPT =
 		new DefaultPortletResourceAccessor() {
-			
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getFooterPortletJavaScript();
@@ -67,7 +67,7 @@ public interface PortletResourceAccessor
 
 	public static PortletResourceAccessor HEADER_PORTAL_CSS =
 		new PortalPortletResourceAccessor() {
-			
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalCss();
@@ -77,7 +77,7 @@ public interface PortletResourceAccessor
 
 	public static PortletResourceAccessor HEADER_PORTAL_JAVASCRIPT =
 		new PortalPortletResourceAccessor() {
-			
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortalJavaScript();
@@ -87,7 +87,7 @@ public interface PortletResourceAccessor
 
 	public static PortletResourceAccessor HEADER_PORTLET_CSS =
 		new DefaultPortletResourceAccessor() {
-			
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortletCss();
@@ -97,7 +97,7 @@ public interface PortletResourceAccessor
 
 	public static PortletResourceAccessor HEADER_PORTLET_JAVASCRIPT =
 		new DefaultPortletResourceAccessor() {
-			
+
 			@Override
 			public List<String> get(Portlet portlet) {
 				return portlet.getHeaderPortletJavaScript();
