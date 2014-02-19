@@ -116,11 +116,10 @@ if ((assetRendererFactory == null) && viewInContext) {
 
 viewURL = _checkViewURL(themeDisplay, viewURL, currentURL, inheritRedirect);
 
+boolean highlightEnabled = (Boolean)request.getAttribute("search.jsp-highlightEnabled");
 String[] queryTerms = (String[])request.getAttribute("search.jsp-queryTerms");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("search.jsp-portletURL");
-
-boolean highlightEnabled = (Boolean)request.getAttribute("search.jsp-highlightEnabled");
 %>
 
 <span class="asset-entry">
