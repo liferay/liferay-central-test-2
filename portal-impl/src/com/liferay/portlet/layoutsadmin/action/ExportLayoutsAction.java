@@ -103,7 +103,6 @@ public class ExportLayoutsAction extends PortletAction {
 
 			sendRedirect(actionRequest, actionResponse, redirect);
 		}
-		}
 		catch (Exception e) {
 			_log.error(e, e);
 
