@@ -90,32 +90,32 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 	}
 
 	protected boolean checkBaseModelPermission(
-			PermissionChecker permissionChecker, long groupId,
-			String className, long classPK)
+			PermissionChecker permissionChecker, long groupId, String className,
+			long classPK)
 		throws PortalException, SystemException {
-	
+
 		String actionId = ActionKeys.PERMISSIONS;
-	
+
 		if (className.equals(Team.class.getName())) {
 			className = Group.class.getName();
-			
+
 			Team team = teamLocalService.fetchTeam(classPK);
-	
+
 			groupId = team.getGroupId();
-	
+
 			actionId = ActionKeys.MANAGE_TEAMS;
 		}
-	
+
 		BaseModelPermissionChecker baseModelPermissionChecker =
 			_baseModelPermissionCheckers.get(className);
-	
+
 		if (baseModelPermissionChecker != null) {
 			baseModelPermissionChecker.checkBaseModel(
 				permissionChecker, groupId, classPK, actionId);
-	
+
 			return true;
 		}
-	
+
 		return false;
 	}
 

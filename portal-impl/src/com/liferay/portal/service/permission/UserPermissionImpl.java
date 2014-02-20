@@ -85,18 +85,18 @@ public class UserPermissionImpl
 			String actionId)
 		throws PortalException, SystemException {
 
-		List<Organization> userOrganizations =
+		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getUserOrganizations(primaryKey);
 
-		long[] userOrganizationsIds = new long[userOrganizations.size()];
+		long[] organizationsIds = new long[organizations.size()];
 
-		for (int i = 0; i < userOrganizations.size(); i++) {
-			Organization organization = userOrganizations.get(i);
+		for (int i = 0; i < organizations.size(); i++) {
+			Organization organization = organizations.get(i);
 
-			userOrganizationsIds[i] = organization.getOrganizationId();
+			organizationsIds[i] = organization.getOrganizationId();
 		}
 
-		check(permissionChecker, primaryKey, userOrganizationsIds, actionId);
+		check(permissionChecker, primaryKey, organizationsIds, actionId);
 	}
 
 	/**
