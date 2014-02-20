@@ -1053,55 +1053,55 @@
 	</bean>
 
 	<util:map id="baseModelPermissionCheckers" key-type="java.lang.String" value-type="com.liferay.portal.security.permission.BaseModelPermissionChecker">
-		<entry key="com.liferay.portlet.blogs.model.BlogsEntry.permission.checker">
+		<entry key="com.liferay.portlet.blogs.model.BlogsEntry">
 			<bean class="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.bookmarks.model.BookmarksEntry.permission.checker">
+		<entry key="com.liferay.portlet.bookmarks.model.BookmarksEntry">
 			<bean class="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.bookmarks.model.BookmarksFolder.permission.checker">
+		<entry key="com.liferay.portlet.bookmarks.model.BookmarksFolder">
 			<bean class="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.documentlibrary.model.DLFileEntry.permission.checker">
+		<entry key="com.liferay.portlet.documentlibrary.model.DLFileEntry">
 			<bean class="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.documentlibrary.model.DLFolder.permission.checker">
+		<entry key="com.liferay.portlet.documentlibrary.model.DLFolder">
 			<bean class="com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission" />
 		</entry>
-		<entry key="com.liferay.portal.model.Group.permission.checker" value-ref="com.liferay.portal.service.permission.GroupPermissionImpl" />
-		<entry key="com.liferay.portlet.journal.model.JournalArticle.permission.checker">
+		<entry key="com.liferay.portal.model.Group" value-ref="com.liferay.portal.service.permission.GroupPermissionImpl" />
+		<entry key="com.liferay.portlet.journal.model.JournalArticle">
 			<bean class="com.liferay.portlet.journal.service.permission.JournalArticlePermission" />
 		</entry>
-		<entry key="com.liferay.portlet.journal.model.JournalFeed.permission.checker">
+		<entry key="com.liferay.portlet.journal.model.JournalFeed">
 			<bean class="com.liferay.portlet.journal.service.permission.JournalFeedPermission" />
 		</entry>
-		<entry key="com.liferay.portal.model.Layout.permission.checker" value-ref="com.liferay.portal.service.permission.LayoutPermissionImpl" />
-		<entry key="com.liferay.portlet.messageboards.model.MBCategory.permission.checker">
+		<entry key="com.liferay.portal.model.Layout" value-ref="com.liferay.portal.service.permission.LayoutPermissionImpl" />
+		<entry key="com.liferay.portlet.messageboards.model.MBCategory">
 			<bean class="com.liferay.portlet.messageboards.service.permission.MBCategoryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.messageboards.model.MBMessage.permission.checker">
+		<entry key="com.liferay.portlet.messageboards.model.MBMessage">
 			<bean class="com.liferay.portlet.messageboards.service.permission.MBMessagePermission" />
 		</entry>
-		<entry key="com.liferay.portlet.polls.model.PollsQuestion.permission.checker">
+		<entry key="com.liferay.portlet.polls.model.PollsQuestion">
 			<bean class="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion.permission.checker">
+		<entry key="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion">
 			<bean class="com.liferay.portlet.softwarecatalog.service.permission.SCFrameworkVersionPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.softwarecatalog.model.SCProductEntry.permission.checker">
+		<entry key="com.liferay.portlet.softwarecatalog.model.SCProductEntry">
 			<bean class="com.liferay.portlet.softwarecatalog.service.permission.SCProductEntryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.shopping.model.ShoppingCategory.permission.checker">
+		<entry key="com.liferay.portlet.shopping.model.ShoppingCategory">
 			<bean class="com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission" />
 		</entry>
-		<entry key="com.liferay.portlet.shopping.model.ShoppingItem.permission.checker">
+		<entry key="com.liferay.portlet.shopping.model.ShoppingItem">
 			<bean class="com.liferay.portlet.shopping.service.permission.ShoppingItemPermission" />
 		</entry>
-		<entry key="com.liferay.portal.model.User.permission.checker" value-ref="com.liferay.portal.service.permission.UserPermissionImpl" />
-		<entry key="com.liferay.portlet.wiki.model.WikiNode.permission.checker">
+		<entry key="com.liferay.portal.model.User" value-ref="com.liferay.portal.service.permission.UserPermissionImpl" />
+		<entry key="com.liferay.portlet.wiki.model.WikiNode">
 			<bean class="com.liferay.portlet.wiki.service.permission.WikiNodePermission" />
 		</entry>
-		<entry key="com.liferay.portlet.wiki.model.WikiPage.permission.checker">
+		<entry key="com.liferay.portlet.wiki.model.WikiPage">
 			<bean class="com.liferay.portlet.wiki.service.permission.WikiPagePermission" />
 		</entry>
 	</util:map>

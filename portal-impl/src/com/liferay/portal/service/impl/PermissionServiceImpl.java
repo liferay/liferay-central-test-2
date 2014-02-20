@@ -216,7 +216,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 
 		BaseModelPermissionChecker baseModelPermissionChecker =
-			_baseModelPermissionCheckers.get(className + ".permission.checker");
+			_baseModelPermissionCheckers.get(className);
 
 		if (baseModelPermissionChecker != null) {
 			baseModelPermissionChecker.checkBaseModel(
