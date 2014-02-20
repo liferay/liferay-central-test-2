@@ -389,7 +389,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 	protected void importComments(
 			PortletDataContext portletDataContext, T stagedModel)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!MapUtil.getBoolean(
 				portletDataContext.getParameterMap(),
@@ -407,7 +407,7 @@ public abstract class BaseStagedModelDataHandler<T extends StagedModel>
 
 	protected void importRatings(
 			PortletDataContext portletDataContext, T stagedModel)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		if (!MapUtil.getBoolean(
 				portletDataContext.getParameterMap(),

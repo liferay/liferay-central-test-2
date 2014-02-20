@@ -293,8 +293,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	 */
 	@Deprecated
 	@Override
-	public void addComments(Class<?> clazz, long classPK)
-		throws SystemException {
+	public void addComments(Class<?> clazz, long classPK) {
 	}
 
 	/**
@@ -478,8 +477,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	 */
 	@Deprecated
 	@Override
-	public void addRatingsEntries(Class<?> clazz, long classPK)
-		throws SystemException {
+	public void addRatingsEntries(Class<?> clazz, long classPK) {
 	}
 
 	/**
@@ -1465,8 +1463,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Deprecated
 	@Override
 	public void importComments(
-			Class<?> clazz, long classPK, long newClassPK, long groupId)
-		throws PortalException, SystemException {
+		Class<?> clazz, long classPK, long newClassPK, long groupId) {
 	}
 
 	@Override
@@ -1605,8 +1602,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	@Deprecated
 	@Override
 	public void importRatingsEntries(
-			Class<?> clazz, long classPK, long newClassPK)
-		throws PortalException, SystemException {
+		Class<?> clazz, long classPK, long newClassPK) {
 	}
 
 	@Override
