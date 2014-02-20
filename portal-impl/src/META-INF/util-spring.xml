@@ -1052,7 +1052,7 @@
 		<property name="usersAdmin" ref="com.liferay.portlet.usersadmin.util.UsersAdmin" />
 	</bean>
 
-	<util:map id="entityPermissionCheckers" key-type="java.lang.String" value-type="com.liferay.portal.security.permission.BaseModelPermissionChecker">
+	<util:map id="baseModelPermissionCheckers" key-type="java.lang.String" value-type="com.liferay.portal.security.permission.BaseModelPermissionChecker">
 		<entry key="com.liferay.portlet.blogs.model.BlogsEntry.permission.checker">
 			<bean class="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" />
 		</entry>

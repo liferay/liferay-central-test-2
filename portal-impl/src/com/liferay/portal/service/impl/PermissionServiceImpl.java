@@ -94,10 +94,10 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 			String primKey)
 		throws PortalException, SystemException {
 
-		boolean isCheckedModel = _checkModelPermission(
-			permissionChecker, groupId, name, primKey);
+		if (checkBaseModelPermission(
+				permissionChecker, groupId, name,
+				GetterUtil.getLong(primKey))) {
 
-		if (isCheckedModel) {
 			return;
 		}
 
@@ -198,28 +198,29 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		}
 	}
 
-	private boolean _checkModelPermission(
+	protected boolean checkBaseModelPermission(
 			PermissionChecker permissionChecker, long groupId,
-			String modelResource, String resourcePrimKey)
+			String className, long classPK)
 		throws PortalException, SystemException {
 
 		String actionId = ActionKeys.PERMISSIONS;
 
-		long primKey = GetterUtil.getLong(resourcePrimKey);
+		if (className.equals(Team.class.getName())) {
+			className = Group.class.getName();
+			
+			Team team = teamLocalService.fetchTeam(classPK);
 
-		if (Team.class.getName().equals(modelResource)) {
+			groupId = team.getGroupId();
+
 			actionId = ActionKeys.MANAGE_TEAMS;
-			groupId = teamLocalService.fetchTeam(primKey).getGroupId();
-			modelResource = Group.class.getName();
 		}
 
-		BaseModelPermissionChecker entityPermissionChecker =
-			_entityPermissionCheckerMap.get(
-				modelResource + ".permission.checker");
+		BaseModelPermissionChecker baseModelPermissionChecker =
+			_baseModelPermissionCheckers.get(className + ".permission.checker");
 
-		if (entityPermissionChecker != null) {
-			entityPermissionChecker.checkBaseModel(
-				permissionChecker, groupId, primKey, actionId);
+		if (baseModelPermissionChecker != null) {
+			baseModelPermissionChecker.checkBaseModel(
+				permissionChecker, groupId, classPK, actionId);
 
 			return true;
 		}
@@ -227,7 +228,8 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 		return false;
 	}
 
-	@BeanReference(name = "entityPermissionCheckers")
-	private Map<String, BaseModelPermissionChecker> _entityPermissionCheckerMap;
+	@BeanReference(name = "baseModelPermissionCheckers")
+	private Map<String, BaseModelPermissionChecker>
+		_baseModelPermissionCheckers;
 
 }
