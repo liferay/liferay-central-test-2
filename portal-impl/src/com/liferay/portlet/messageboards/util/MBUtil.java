@@ -347,17 +347,13 @@ public class MBUtil {
 		return classPKs;
 	}
 
-	public static String getEmailFromAddress(PortletSettings portletSettings)
-		throws SystemException {
-
+	public static String getEmailFromAddress(PortletSettings portletSettings) {
 		return portletSettings.getValue(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS,
 			PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
 	}
 
-	public static String getEmailFromName(PortletSettings portletSettings)
-		throws SystemException {
-
+	public static String getEmailFromName(PortletSettings portletSettings) {
 		return portletSettings.getValue(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME,
 			PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME);
