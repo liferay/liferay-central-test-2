@@ -106,7 +106,7 @@ public class BlogsEntryPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		BlogsEntryPermission.contains(permissionChecker, primaryKey, actionId);
+		contains(permissionChecker, primaryKey, actionId);
 	}
 
 }
