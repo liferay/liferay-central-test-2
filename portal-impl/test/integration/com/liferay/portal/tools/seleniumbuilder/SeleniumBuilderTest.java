@@ -742,7 +742,7 @@ public class SeleniumBuilderTest {
 			"MacroAndElement1001_3.macro",
 			"Error 1001: Missing (and|condition|contains|equals|isset|not|or)" +
 				" child element in " + _DIR_NAME +
-				"/MacroAndElement1001_3.macro:4");
+					"/MacroAndElement1001_3.macro:4");
 	}
 
 	@Test
@@ -751,7 +751,7 @@ public class SeleniumBuilderTest {
 			"MacroAndElement1001_4.macro",
 			"Error 1001: Missing (and|condition|contains|equals|isset|not|or)" +
 				" child element in " + _DIR_NAME +
-				"/MacroAndElement1001_4.macro:4");
+					"/MacroAndElement1001_4.macro:4");
 	}
 
 	@Test
