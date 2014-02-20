@@ -80,7 +80,7 @@ public class UserPermissionImpl
 	}
 
 	@Override
-	public void checkPermission(
+	public void checkBaseModel(
 			PermissionChecker permissionChecker, long groupId, long primaryKey,
 			String actionId)
 		throws PortalException, SystemException {

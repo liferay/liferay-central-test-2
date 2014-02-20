@@ -218,7 +218,7 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				modelResource + ".permission.checker");
 
 		if (entityPermissionChecker != null) {
-			entityPermissionChecker.checkPermission(
+			entityPermissionChecker.checkBaseModel(
 				permissionChecker, groupId, primKey, actionId);
 
 			return true;

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.exception.SystemException;
  */
 public interface BaseModelPermissionChecker {
 
-	public void checkPermission(
+	public void checkBaseModel(
 			PermissionChecker permissionChecker, long groupId, long primaryKey,
 			String actionId)
 		throws PortalException, SystemException;
