@@ -64,9 +64,10 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		MockitoAnnotations.initMocks(this);
 
 		_beanLocator = PortalBeanLocatorUtil.getBeanLocator();
-		_beanLocatorProxy = Mockito.spy(_beanLocator);
 
-		PortalBeanLocatorUtil.setBeanLocator(_beanLocatorProxy);
+		_mockBeanLocator = Mockito.spy(_beanLocator);
+
+		PortalBeanLocatorUtil.setBeanLocator(_mockBeanLocator);
 	}
 
 	@After
@@ -291,7 +292,8 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 		assertQueryEquals(
 			"((IN_FOLDER('1000') AND (cmis:name = 'test' OR cmis:createdBy " +
-				"= 'test')) OR CONTAINS('test'))", folderQuery);
+				"= 'test')) OR CONTAINS('test'))",
+			folderQuery);
 	}
 
 	@Test
@@ -385,11 +387,12 @@ public class CMISQueryBuilderTest extends PowerMockito {
 
 	@Test
 	public void testSubfolderQuery() throws Exception {
-		String subFolderQuery = buildFolderQuery(true);
+		String subfolderQuery = buildFolderQuery(true);
 
 		assertQueryEquals(
 			"((IN_TREE('1000') AND (cmis:name = 'test' OR cmis:createdBy = " +
-				"'test')) OR CONTAINS('test'))", subFolderQuery);
+				"'test')) OR CONTAINS('test'))",
+			subfolderQuery);
 	}
 
 	@Test
@@ -447,14 +450,14 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		);
 
 		when(
-			_beanLocatorProxy.locate(
+			_mockBeanLocator.locate(
 				RepositoryEntryLocalService.class.getName())
 		).thenReturn(
 			_repositoryEntryLocalService
 		);
 
 		when(
-			_beanLocatorProxy.locate(
+			_mockBeanLocator.locate(
 				DLAppService.class.getName())
 		).thenReturn(
 			_dlAppService
@@ -509,7 +512,7 @@ public class CMISQueryBuilderTest extends PowerMockito {
 		"SELECT cmis:objectId, SCORE() AS HITS FROM cmis:document WHERE ";
 
 	private BeanLocator _beanLocator;
-	private BeanLocator _beanLocatorProxy;
+	private BeanLocator _mockBeanLocator;
 
 	@Mock
 	private DLAppService _dlAppService;
