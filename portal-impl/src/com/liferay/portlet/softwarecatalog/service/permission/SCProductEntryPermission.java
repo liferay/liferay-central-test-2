@@ -82,7 +82,7 @@ public class SCProductEntryPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		SCProductEntryPermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }

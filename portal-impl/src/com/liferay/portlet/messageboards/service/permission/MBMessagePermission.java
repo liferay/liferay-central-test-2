@@ -156,7 +156,7 @@ public class MBMessagePermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		MBMessagePermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }

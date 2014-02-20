@@ -157,8 +157,7 @@ public class MBCategoryPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		MBCategoryPermission.check(
-			permissionChecker, groupId, primaryKey, actionId);
+		check(permissionChecker, groupId, primaryKey, actionId);
 	}
 
 	private static boolean _hasPermission(

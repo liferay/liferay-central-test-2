@@ -202,7 +202,7 @@ public class WikiPagePermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		WikiPagePermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 	private static boolean _hasPermission(

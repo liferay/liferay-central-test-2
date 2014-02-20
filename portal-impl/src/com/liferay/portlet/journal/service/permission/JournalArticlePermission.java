@@ -225,7 +225,7 @@ public class JournalArticlePermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		JournalArticlePermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }

@@ -152,8 +152,7 @@ public class DLFolderPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFolderPermission.check(
-			permissionChecker, groupId, primaryKey, actionId);
+		check(permissionChecker, groupId, primaryKey, actionId);
 	}
 
 	private static boolean _hasPermission(

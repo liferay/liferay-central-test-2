@@ -128,7 +128,7 @@ public class BookmarksEntryPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		BookmarksEntryPermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }

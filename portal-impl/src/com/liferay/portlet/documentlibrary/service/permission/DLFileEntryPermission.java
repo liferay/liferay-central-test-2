@@ -140,8 +140,8 @@ public class DLFileEntryPermission implements BaseModelPermissionChecker {
 		}
 
 		return permissionChecker.hasPermission(
-				dlFileEntry.getGroupId(), DLFileEntry.class.getName(),
-				dlFileEntry.getFileEntryId(), actionId);
+			dlFileEntry.getGroupId(), DLFileEntry.class.getName(),
+			dlFileEntry.getFileEntryId(), actionId);
 	}
 
 	public static boolean contains(
@@ -168,7 +168,7 @@ public class DLFileEntryPermission implements BaseModelPermissionChecker {
 			String actionId)
 		throws PortalException, SystemException {
 
-		DLFileEntryPermission.check(permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }

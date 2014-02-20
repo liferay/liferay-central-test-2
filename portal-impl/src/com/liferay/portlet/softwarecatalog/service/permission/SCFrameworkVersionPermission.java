@@ -85,8 +85,7 @@ public class SCFrameworkVersionPermission
 			String actionId)
 		throws PortalException, SystemException {
 
-		SCFrameworkVersionPermission.check(
-			permissionChecker, primaryKey, actionId);
+		check(permissionChecker, primaryKey, actionId);
 	}
 
 }
