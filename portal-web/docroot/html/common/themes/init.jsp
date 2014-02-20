@@ -26,6 +26,7 @@ page import="com.liferay.portal.security.ldap.LDAPSettingsUtil" %><%@
 page import="com.liferay.portal.servlet.ComboServletStaticURLGenerator" %><%@
 page import="com.liferay.portlet.JavaScriptPortletResourcePredicateFilter" %><%@
 page import="com.liferay.portlet.PortletResourceAccessor" %><%@
+page import="com.liferay.portlet.PortletResourceStaticURLGenerator" %><%@
 page import="com.liferay.taglib.aui.ScriptTag" %>
 
 <%@ page import="org.apache.struts.taglib.tiles.ComponentConstants" %><%@
