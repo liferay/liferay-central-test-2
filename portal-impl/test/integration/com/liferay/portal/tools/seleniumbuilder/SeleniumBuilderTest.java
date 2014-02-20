@@ -733,7 +733,7 @@ public class SeleniumBuilderTest {
 			"MacroAndElement1001_2.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroAndElement1001_2.macro:8");
+					"/MacroAndElement1001_2.macro:8");
 	}
 
 	@Test
@@ -784,7 +784,7 @@ public class SeleniumBuilderTest {
 			"MacroCommandElement1001.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroCommandElement1001.macro:2");
+					"/MacroCommandElement1001.macro:2");
 	}
 
 	@Test
@@ -1049,7 +1049,7 @@ public class SeleniumBuilderTest {
 			"MacroElseElement1001.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroElseElement1001.macro:8");
+					"/MacroElseElement1001.macro:8");
 	}
 
 	@Test
@@ -1382,7 +1382,7 @@ public class SeleniumBuilderTest {
 			"MacroNotElement1001_2.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroNotElement1001_2.macro:7");
+					"/MacroNotElement1001_2.macro:7");
 	}
 
 	@Test
@@ -1433,7 +1433,7 @@ public class SeleniumBuilderTest {
 			"MacroOrElement1001_2.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroOrElement1001_2.macro:8");
+				"	/MacroOrElement1001_2.macro:8");
 	}
 
 	@Test
@@ -1509,7 +1509,7 @@ public class SeleniumBuilderTest {
 			"MacroThenElement1001.macro",
 			"Error 1001: Missing (description|echo|execute|fail|for|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/MacroThenElement1001.macro:5");
+					"/MacroThenElement1001.macro:5");
 	}
 
 	@Test
@@ -2053,7 +2053,7 @@ public class SeleniumBuilderTest {
 			"TestCaseSetUpElement1001.testcase",
 			"Error 1001: Missing (description|echo|execute|fail|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/TestCaseSetUpElement1001.testcase:2");
+					"/TestCaseSetUpElement1001.testcase:2");
 	}
 
 	@Test
@@ -2102,7 +2102,7 @@ public class SeleniumBuilderTest {
 			"TestCaseTearDownElement1001.testcase",
 			"Error 1001: Missing (description|echo|execute|fail|if|" +
 				"take-screenshot|var|while) child element in " + _DIR_NAME +
-				"/TestCaseTearDownElement1001.testcase:6");
+					"/TestCaseTearDownElement1001.testcase:6");
 	}
 
 	@Test
