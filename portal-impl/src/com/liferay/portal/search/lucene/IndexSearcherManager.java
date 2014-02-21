@@ -41,17 +41,13 @@ public class IndexSearcherManager {
 
 					if (indexSearcher == null) {
 						throw new AlreadyClosedException(
-							"IndexSearcherManager is closed");
+							"Index searcher manager is closed");
 					}
 
 					IndexReader newIndexReader = IndexReader.openIfChanged(
 						indexSearcher.getIndexReader());
 
 					if (newIndexReader != null) {
-
-						// Must update _indexSearcher before release previous
-						// IndexSearcher.
-
 						_indexSearcher = _createIndexSearcher(newIndexReader);
 
 						release(indexSearcher);
@@ -71,13 +67,9 @@ public class IndexSearcherManager {
 				return indexSearcher;
 			}
 
-			// IndexReader is closed. If it is caused by a concurrent reopen,
-			// _indexSearcher must have already been updated, otherwise it must
-			// be caused by an illegal external close.
-
 			if (indexSearcher == _indexSearcher) {
 				throw new IllegalStateException(
-					"IndexReader has been closed externally");
+					"Index reader was closed externally");
 			}
 		}
 
@@ -85,9 +77,6 @@ public class IndexSearcherManager {
 	}
 
 	public synchronized void close() throws IOException {
-
-		// Must update _indexSearcher before release previous IndexSearcher.
-
 		IndexSearcher indexSearcher = _indexSearcher;
 
 		_indexSearcher = null;
