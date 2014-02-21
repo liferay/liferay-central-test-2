@@ -106,10 +106,9 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 
 		IndexSearcher indexSearcher = null;
 
-		long companyId = searchContext.getCompanyId();
-
 		try {
-			indexSearcher = LuceneHelperUtil.getSearcher(companyId);
+			indexSearcher = LuceneHelperUtil.getSearcher(
+				searchContext.getCompanyId());
 
 			String localizedKeywordFieldName = DocumentImpl.getLocalizedName(
 				searchContext.getLanguageId(), Field.KEYWORD_SEARCH);
@@ -129,7 +128,8 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 		}
 		finally {
 			try {
-				LuceneHelperUtil.releaseSearcher(companyId, indexSearcher);
+				LuceneHelperUtil.releaseSearcher(
+					searchContext.getCompanyId(), indexSearcher);
 			}
 			catch (IOException ioe) {
 				_log.error("Unable to release searcher", ioe);
@@ -304,8 +304,6 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 
 		IndexSearcher indexSearcher = null;
 
-		long companyId = searchContext.getCompanyId();
-
 		try {
 			Map<String, List<String>> suggestions =
 				new LinkedHashMap<String, List<String>>();
@@ -316,7 +314,8 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 				scoresThreshold = _SCORES_THRESHOLD_DEFAULT;
 			}
 
-			indexSearcher = LuceneHelperUtil.getSearcher(companyId);
+			indexSearcher = LuceneHelperUtil.getSearcher(
+				searchContext.getCompanyId());
 
 			List<IndexReader> indexReaders = new ArrayList<IndexReader>();
 
@@ -366,7 +365,8 @@ public class LuceneQuerySuggester extends BaseQuerySuggester {
 		}
 		finally {
 			try {
-				LuceneHelperUtil.releaseSearcher(companyId, indexSearcher);
+				LuceneHelperUtil.releaseSearcher(
+					searchContext.getCompanyId(), indexSearcher);
 			}
 			catch (IOException ioe) {
 				_log.error("Unable to release searcher", ioe);

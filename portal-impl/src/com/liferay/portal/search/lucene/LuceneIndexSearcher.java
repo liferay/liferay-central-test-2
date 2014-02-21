@@ -106,10 +106,9 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 		BoboBrowser boboBrowser = null;
 		BrowseRequest browseRequest = null;
 
-		long companyId = searchContext.getCompanyId();
-
 		try {
-			indexSearcher = LuceneHelperUtil.getSearcher(companyId);
+			indexSearcher = LuceneHelperUtil.getSearcher(
+				searchContext.getCompanyId());
 
 			List<FacetHandler<?>> facetHandlers =
 				new ArrayList<FacetHandler<?>>();
@@ -317,7 +316,8 @@ public class LuceneIndexSearcher extends BaseIndexSearcher {
 			cleanUp(boboBrowser);
 
 			try {
-				LuceneHelperUtil.releaseSearcher(companyId, indexSearcher);
+				LuceneHelperUtil.releaseSearcher(
+					searchContext.getCompanyId(), indexSearcher);
 			}
 			catch (IOException ioe) {
 				_log.error("Unable to release searcher", ioe);
