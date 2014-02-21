@@ -285,8 +285,8 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #releaseSearcher(long, IndexSearcher)}
+	 * @deprecated As of 7.0.0, replaced by {@link #releaseIndexSearcher(long,
+	 *             IndexSearcher)}
 	 */
 	@Deprecated
 	@Override
@@ -526,15 +526,14 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	@Override
-	public IndexSearcher getSearcher(long companyId) throws IOException {
+	public IndexSearcher getIndexSearcher(long companyId) throws IOException {
 		IndexAccessor indexAccessor = getIndexAccessor(companyId);
 
 		return indexAccessor.acquireIndexSearcher();
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *				#getSearcher(long)}
+	 * @deprecated As of 7.0.0, replaced by {@link #getIndexSearcher(long)}
 	 */
 	@Deprecated
 	@Override
@@ -665,7 +664,7 @@ public class LuceneHelperImpl implements LuceneHelper {
 	}
 
 	@Override
-	public void releaseSearcher(long companyId, IndexSearcher indexSearcher)
+	public void releaseIndexSearcher(long companyId, IndexSearcher indexSearcher)
 		throws IOException {
 
 		IndexAccessor indexAccessor = getIndexAccessor(companyId);

@@ -284,8 +284,8 @@ public class LuceneHelperUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #releaseSearcher(long, IndexSearcher)}
+	 * @deprecated As of 7.0.0, replaced by {@link #releaseIndexSearcher(long,
+	 *             IndexSearcher)}
 	 */
 	@Deprecated
 	public static void cleanUp(IndexSearcher indexSearcher) {
@@ -340,13 +340,14 @@ public class LuceneHelperUtil {
 		return getLuceneHelper().getQueryTerms(query);
 	}
 
-	public static IndexSearcher getSearcher(long companyId) throws IOException {
-		return getLuceneHelper().getSearcher(companyId);
+	public static IndexSearcher getIndexSearcher(long companyId)
+		throws IOException {
+
+		return getLuceneHelper().getIndexSearcher(companyId);
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *				#getSearcher(long)}
+	 * @deprecated As of 7.0.0, replaced by {@link #getIndexSearcher(long)}
 	 */
 	@Deprecated
 	public static IndexSearcher getSearcher(long companyId, boolean readOnly)
@@ -401,11 +402,11 @@ public class LuceneHelperUtil {
 		getLuceneHelper().loadIndexesFromCluster(companyId);
 	}
 
-	public static void releaseSearcher(
+	public static void releaseIndexSearcher(
 			long companyId, IndexSearcher indexSearcher)
 		throws IOException {
 
-		getLuceneHelper().releaseSearcher(companyId, indexSearcher);
+		getLuceneHelper().releaseIndexSearcher(companyId, indexSearcher);
 	}
 
 	public static void shutdown() {
