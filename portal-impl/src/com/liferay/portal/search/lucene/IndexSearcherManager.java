@@ -83,7 +83,7 @@ public class IndexSearcherManager {
 		release(indexSearcher);
 
 		PortalExecutorManagerUtil.shutdown(
-			_LUCENE_SEARCHER_MANAGER_THREAD_POOL);
+			IndexSearcherManager.class.getName());
 	}
 
 	public synchronized void invalidate() {
@@ -104,16 +104,13 @@ public class IndexSearcherManager {
 		IndexSearcher indexSearcher = new IndexSearcher(
 			indexReader,
 			PortalExecutorManagerUtil.getPortalExecutor(
-				_LUCENE_SEARCHER_MANAGER_THREAD_POOL));
+				IndexSearcherManager.class.getName()));
 
 		indexSearcher.setDefaultFieldSortScoring(true, false);
 		indexSearcher.setSimilarity(new FieldWeightSimilarity());
 
 		return indexSearcher;
 	}
-
-	private static final String _LUCENE_SEARCHER_MANAGER_THREAD_POOL =
-		"LUCENE_SEARCHER_MANAGER_THREAD_POOL";
 
 	private volatile IndexSearcher _indexSearcher;
 	private volatile boolean _invalid;
