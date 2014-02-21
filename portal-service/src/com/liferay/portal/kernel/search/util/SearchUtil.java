@@ -28,14 +28,12 @@ import java.util.regex.Pattern;
  */
 public class SearchUtil {
 
-	public static final String DEFAULT_HIGHLIGHT_1 =
-		"<span class=\"highlight\">";
+	public static final String HIGHLIGHT_1 = "<span class=\"highlight\">";
 
-	public static final String DEFAULT_HIGHLIGHT_2 = "</span>";
+	public static final String HIGHLIGHT_2 = "</span>";
 
 	public static String highlight(String s, String[] queryTerms) {
-		return highlight(
-			s, queryTerms, DEFAULT_HIGHLIGHT_1, DEFAULT_HIGHLIGHT_2);
+		return highlight(s, queryTerms, HIGHLIGHT_1, HIGHLIGHT_2);
 	}
 
 	public static String highlight(
@@ -85,12 +83,15 @@ public class SearchUtil {
 			if (matcher.find()) {
 				StringBuffer hightlighted = new StringBuffer();
 
-				do {
+				while (true) {
 					matcher.appendReplacement(
 						hightlighted,
 						highlight1 + matcher.group() + highlight2);
+
+					if (!matcher.find()) {
+						break;
+					}
 				}
-				while (matcher.find());
 
 				matcher.appendTail(hightlighted);
 

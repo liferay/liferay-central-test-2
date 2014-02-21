@@ -655,21 +655,19 @@ public class StringUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, moved to {@link
-	 *             com.liferay.portal.kernel.search.util.SearchUtil
-	 *             #highlight(String, String[])}}
+	 * @deprecated As of 7.0.0, moved to {@link SearchUtil#highlight(String,
+	 *             String[])}}
 	 */
 	@Deprecated
 	public static String highlight(String s, String[] queryTerms) {
 		return SearchUtil.highlight(
-			s, queryTerms, SearchUtil.DEFAULT_HIGHLIGHT_1,
-			SearchUtil.DEFAULT_HIGHLIGHT_2);
+			s, queryTerms, SearchUtil.HIGHLIGHT_1,
+			SearchUtil.HIGHLIGHT_2);
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, moved to {@link
-	 *             com.liferay.portal.kernel.search.util.SearchUtil
-	 *             #highlight(String, String[], String, String)}}
+	 * @deprecated As of 7.0.0, moved to {@link SearchUtil#highlight(String,
+	 *             String[], String, String)}}
 	 */
 	@Deprecated
 	public static String highlight(

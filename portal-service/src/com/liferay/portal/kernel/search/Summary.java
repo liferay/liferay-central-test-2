@@ -137,10 +137,7 @@ public class Summary {
 			text = StringUtil.replace(
 				text,
 				new String[] {ESCAPE_SAFE_HIGHLIGHT_1, ESCAPE_SAFE_HIGHLIGHT_2},
-				new String[] {
-					SearchUtil.DEFAULT_HIGHLIGHT_1,
-					SearchUtil.DEFAULT_HIGHLIGHT_2
-				});
+				new String[] {SearchUtil.HIGHLIGHT_1, SearchUtil.HIGHLIGHT_2});
 		}
 
 		return text;

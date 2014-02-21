@@ -17,20 +17,27 @@ package com.liferay.portal.kernel.search.util;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.liferay.portal.kernel.util.StringBundler;
+
 /**
- *
  * @author Tibor Lipusz
- *
  */
 public class SearchUtilTest {
 
 	@Test
 	public void testHighlight() throws Exception {
+		StringBundler sb = new StringBundler(7); 
+		
+		sb.append(SearchUtil.HIGHLIGHT_1);
+		sb.append("Hello");
+		sb.append(SearchUtil.HIGHLIGHT_2);
+		sb.append(" World ");
+		sb.append(SearchUtil.HIGHLIGHT_1);
+		sb.append("Liferay");
+		sb.append(SearchUtil.HIGHLIGHT_2);
+						
 		Assert.assertEquals(
-			SearchUtil.DEFAULT_HIGHLIGHT_1 + "Hello" +
-			SearchUtil.DEFAULT_HIGHLIGHT_2 + " World " +
-			SearchUtil.DEFAULT_HIGHLIGHT_1 + "Liferay" +
-			SearchUtil.DEFAULT_HIGHLIGHT_2,
+			sb.toString(),
 			SearchUtil.highlight(
 				"Hello World Liferay", new String[] {"Hello","Liferay"}));
 	}
