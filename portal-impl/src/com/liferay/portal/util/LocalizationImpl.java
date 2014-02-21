@@ -396,11 +396,10 @@ public class LocalizationImpl implements Localization {
 		for (Locale locale : locales) {
 			String languageId = LocaleUtil.toLanguageId(locale);
 
-			String localizedContent = getLocalization(
-				xml, languageId, useDefault);
+			String value = getLocalization(xml, languageId, useDefault);
 
-			if (Validator.isNotNull(localizedContent)) {
-				map.put(locale, localizedContent);
+			if (Validator.isNotNull(value)) {
+				map.put(locale, value);
 			}
 		}
 
