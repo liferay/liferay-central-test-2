@@ -33,33 +33,11 @@ public class SearchUtil {
 
 	public static final String DEFAULT_HIGHLIGHT_2 = "</span>";
 
-	/**
-	 * Returns the string <code>s</code> with any of the query terms found
-	 * within it highlighted with HTML.
-	 *
-	 * @param  s the string to search (optionally <code>null</code>)
-	 * @param  queryTerms the terms to search for in the string (optionally
-	 *         <code>null</code>)
-	 * @return the string <code>s</code> with any of the query terms found
-	 *         within it highlighted with HTML
-	 */
 	public static String highlight(String s, String[] queryTerms) {
 		return highlight(
 			s, queryTerms, DEFAULT_HIGHLIGHT_1, DEFAULT_HIGHLIGHT_2);
 	}
 
-	/**
-	 * Returns the string <code>s</code> with any of the query terms found
-	 * within it highlighted with the syntax highlighting tags.
-	 *
-	 * @param  s the string to search (optionally <code>null</code>)
-	 * @param  queryTerms the terms to search for in the string (optionally
-	 *         <code>null</code>)
-	 * @param  highlight1 the beginning highlight tag
-	 * @param  highlight2 the ending highlight tag
-	 * @return the string <code>s</code> with any of the query terms found
-	 *         within it highlighted with the syntax highlighting tags
-	 */
 	public static String highlight(
 		String s, String[] queryTerms, String highlight1, String highlight2) {
 
