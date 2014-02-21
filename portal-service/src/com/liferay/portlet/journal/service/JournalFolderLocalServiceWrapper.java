@@ -602,6 +602,20 @@ public class JournalFolderLocalServiceWrapper
 	}
 
 	@Override
+	public void subscribe(long userId, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalFolderLocalService.subscribe(userId, groupId, folderId);
+	}
+
+	@Override
+	public void unsubscribe(long userId, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_journalFolderLocalService.unsubscribe(userId, groupId, folderId);
+	}
+
+	@Override
 	public void updateAsset(long userId,
 		com.liferay.portlet.journal.model.JournalFolder folder,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,

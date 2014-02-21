@@ -459,6 +459,14 @@ public interface JournalFolderLocalService extends BaseLocalService,
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public void subscribe(long userId, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void unsubscribe(long userId, long groupId, long folderId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void updateAsset(long userId,
 		com.liferay.portlet.journal.model.JournalFolder folder,
 		long[] assetCategoryIds, java.lang.String[] assetTagNames,
