@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.ExportImportConfiguration;
 import com.liferay.portal.model.Group;
@@ -151,17 +150,11 @@ public class ExportImportConfigurationHelper {
 			long groupId, int type)
 		throws Exception {
 
-		boolean privateLayout = true;
+		boolean privateLayout = ParamUtil.getBoolean(
+			portletRequest, "privateLayout");
 
-		String tabs1 = ParamUtil.getString(portletRequest, "tabs1");
-
-		if (tabs1.equals("public-pages")) {
-			privateLayout = false;
-		}
-		else {
-			privateLayout = ParamUtil.getBoolean(
-				portletRequest, "privateLayout");
-		}
+		Map<Long, Boolean> layoutIdMap = ExportImportHelperUtil.getLayoutIdMap(
+			portletRequest);
 
 		String defaultDateRange =
 			ExportImportDateUtil.RANGE_FROM_LAST_PUBLISH_DATE;
@@ -175,22 +168,10 @@ public class ExportImportConfigurationHelper {
 
 		if (type == ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT) {
 			return ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
-				themeDisplay.getUserId(), groupId, privateLayout, null,
+				themeDisplay.getUserId(), groupId, privateLayout, layoutIdMap,
 				portletRequest.getParameterMap(), dateRange.getStartDate(),
 				dateRange.getEndDate(), themeDisplay.getLocale(),
 				themeDisplay.getTimeZone());
-		}
-
-		String scope = ParamUtil.getString(portletRequest, "scope");
-
-		if (Validator.isNull(scope)) {
-			scope = "all-pages";
-		}
-
-		Map<Long, Boolean> layoutIdMap = null;
-
-		if (scope.equals("selected-pages")) {
-			layoutIdMap = ExportImportHelperUtil.getLayoutIdMap(portletRequest);
 		}
 
 		Group stagingGroup = GroupLocalServiceUtil.getGroup(groupId);
