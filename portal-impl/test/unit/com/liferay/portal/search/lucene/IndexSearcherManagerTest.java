@@ -85,13 +85,13 @@ public class IndexSearcherManagerTest {
 	@AdviseWith(adviceClasses = {IndexReaderAdvice.class})
 	@Test
 	public void testAquire() throws Exception {
-		IndexSearcher indexSearcher = _indexSearcherManager.aquire();
+		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		IndexReader indexReader = indexSearcher.getIndexReader();
 
 		int referenceCount = indexReader.getRefCount();
 
-		Assert.assertSame(indexSearcher, _indexSearcherManager.aquire());
+		Assert.assertSame(indexSearcher, _indexSearcherManager.acquire());
 
 		Assert.assertEquals(referenceCount + 1, indexReader.getRefCount());
 
@@ -138,7 +138,7 @@ public class IndexSearcherManagerTest {
 
 				@Override
 				public IndexSearcher call() throws Exception {
-					return _indexSearcherManager.aquire();
+					return _indexSearcherManager.acquire();
 				}
 
 			});
@@ -158,7 +158,7 @@ public class IndexSearcherManagerTest {
 
 				@Override
 				public IndexSearcher call() throws Exception {
-					return _indexSearcherManager.aquire();
+					return _indexSearcherManager.acquire();
 				}
 
 			});
@@ -179,7 +179,7 @@ public class IndexSearcherManagerTest {
 		_drainRefs(0);
 
 		try {
-			_indexSearcherManager.aquire();
+			_indexSearcherManager.acquire();
 
 			Assert.fail();
 		}
@@ -191,7 +191,7 @@ public class IndexSearcherManagerTest {
 
 	@Test
 	public void testClose() throws Exception {
-		IndexSearcher indexSearcher = _indexSearcherManager.aquire();
+		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		IndexReader indexReader = indexSearcher.getIndexReader();
 
@@ -202,7 +202,7 @@ public class IndexSearcherManagerTest {
 		Assert.assertEquals(referenceCount - 1, indexReader.getRefCount());
 
 		try {
-			_indexSearcherManager.aquire();
+			_indexSearcherManager.acquire();
 
 			Assert.fail();
 		}
@@ -214,7 +214,7 @@ public class IndexSearcherManagerTest {
 		_indexSearcherManager.invalid();
 
 		try {
-			_indexSearcherManager.aquire();
+			_indexSearcherManager.acquire();
 
 			Assert.fail();
 		}
@@ -238,14 +238,14 @@ public class IndexSearcherManagerTest {
 
 		_indexSearcherManager.invalid();
 
-		Assert.assertSame(indexSearcher, _indexSearcherManager.aquire());
+		Assert.assertSame(indexSearcher, _indexSearcherManager.acquire());
 	}
 
 	@Test
 	public void testRelase() throws Exception {
 		_indexSearcherManager.release(null);
 
-		IndexSearcher indexSearcher = _indexSearcherManager.aquire();
+		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		IndexReader indexReader = indexSearcher.getIndexReader();
 
@@ -312,7 +312,7 @@ public class IndexSearcherManagerTest {
 	private IndexSearcher _assertHits(String fieldValue, int totalHits)
 		throws Exception {
 
-		IndexSearcher indexSearcher = _indexSearcherManager.aquire();
+		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		Term term = new Term(_FIELD_NAME, fieldValue);
 
@@ -326,7 +326,7 @@ public class IndexSearcherManagerTest {
 	}
 
 	private void _drainRefs(int leftCount) throws IOException {
-		IndexSearcher indexSearcher = _indexSearcherManager.aquire();
+		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		IndexReader indexReader = indexSearcher.getIndexReader();
 

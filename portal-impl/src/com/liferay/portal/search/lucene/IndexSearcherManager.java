@@ -33,7 +33,7 @@ public class IndexSearcherManager {
 		_indexSearcher = _createIndexSearcher(IndexReader.open(writer, true));
 	}
 
-	public IndexSearcher aquire() throws IOException {
+	public IndexSearcher acquire() throws IOException {
 		if (_invalid) {
 			synchronized (this) {
 				if (_invalid) {
