@@ -84,7 +84,7 @@ public class IndexSearcherManagerTest {
 
 	@AdviseWith(adviceClasses = {IndexReaderAdvice.class})
 	@Test
-	public void testAquire() throws Exception {
+	public void testAcquire() throws Exception {
 		IndexSearcher indexSearcher = _indexSearcherManager.acquire();
 
 		IndexReader indexReader = indexSearcher.getIndexReader();
@@ -92,7 +92,6 @@ public class IndexSearcherManagerTest {
 		int referenceCount = indexReader.getRefCount();
 
 		Assert.assertSame(indexSearcher, _indexSearcherManager.acquire());
-
 		Assert.assertEquals(referenceCount + 1, indexReader.getRefCount());
 
 		// Concurrent aquire, double check locking
@@ -185,7 +184,7 @@ public class IndexSearcherManagerTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"IndexReader has been closed externally", ise.getMessage());
+				"Index reader was closed externally", ise.getMessage());
 		}
 	}
 
@@ -208,7 +207,7 @@ public class IndexSearcherManagerTest {
 		}
 		catch (AlreadyClosedException ace) {
 			Assert.assertEquals(
-				"IndexSearcherManager is closed", ace.getMessage());
+				"Index searcher manager is closed", ace.getMessage());
 		}
 
 		_indexSearcherManager.invalidate();
@@ -220,13 +219,13 @@ public class IndexSearcherManagerTest {
 		}
 		catch (AlreadyClosedException ace) {
 			Assert.assertEquals(
-				"IndexSearcherManager is closed", ace.getMessage());
+				"Index searcher manager is closed", ace.getMessage());
 		}
 	}
 
 	@Test
-	public void testInvalid() throws Exception {
-		String fieldValue = "testvalue";
+	public void testInvalidate() throws Exception {
+		String fieldValue = "test";
 
 		_addDocument(fieldValue);
 

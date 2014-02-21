@@ -68,7 +68,8 @@ public class IndexSearcherManager {
 			}
 
 			if (indexSearcher == _indexSearcher) {
-				throw new IllegalStateException();
+				throw new IllegalStateException(
+					"Index reader was closed externally");
 			}
 		}
 
