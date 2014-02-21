@@ -831,7 +831,7 @@ public class LuceneHelperImplTest {
 		}
 
 		@Override
-		public IndexSearcher aquireIndexSearcher() {
+		public IndexSearcher acquireIndexSearcher() {
 			return null;
 		}
 

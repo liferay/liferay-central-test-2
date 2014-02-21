@@ -106,7 +106,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	}
 
 	@Override
-	public IndexSearcher aquireIndexSearcher() throws IOException {
+	public IndexSearcher acquireIndexSearcher() throws IOException {
 		return _indexSearcherManager.aquire();
 	}
 

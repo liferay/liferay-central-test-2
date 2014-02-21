@@ -37,7 +37,7 @@ public interface IndexAccessor {
 
 	public void addDocuments(Collection<Document> documents) throws IOException;
 
-	public IndexSearcher aquireIndexSearcher() throws IOException;
+	public IndexSearcher acquireIndexSearcher() throws IOException;
 
 	public void close();
 
