@@ -98,7 +98,7 @@ public class IndexSearcherManager {
 			_LUCENE_SEARCHER_MANAGER_THREAD_POOL);
 	}
 
-	public synchronized void invalid() {
+	public synchronized void invalidate() {
 		_invalid = true;
 	}
 

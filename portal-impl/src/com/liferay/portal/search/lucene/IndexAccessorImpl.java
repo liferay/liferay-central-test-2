@@ -157,7 +157,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 				outputStream, _indexWriter, _commitLock);
 		}
 		finally {
-			_indexSearcherManager.invalid();
+			_indexSearcherManager.invalidate();
 		}
 	}
 
@@ -332,7 +332,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 			finally {
 				_commitLock.unlock();
 
-				_indexSearcherManager.invalid();
+				_indexSearcherManager.invalidate();
 			}
 		}
 

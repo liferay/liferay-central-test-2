@@ -101,7 +101,7 @@ public class IndexSearcherManagerTest {
 
 		_addDocument(fieldValue);
 
-		_indexSearcherManager.invalid();
+		_indexSearcherManager.invalidate();
 
 		Thread thread = new Thread() {
 
@@ -151,7 +151,7 @@ public class IndexSearcherManagerTest {
 
 		_addDocument(fieldValue);
 
-		_indexSearcherManager.invalid();
+		_indexSearcherManager.invalidate();
 
 		FutureTask<IndexSearcher> futureTask2 = new FutureTask<IndexSearcher>(
 			new Callable<IndexSearcher>() {
@@ -211,7 +211,7 @@ public class IndexSearcherManagerTest {
 				"IndexSearcherManager is closed", ace.getMessage());
 		}
 
-		_indexSearcherManager.invalid();
+		_indexSearcherManager.invalidate();
 
 		try {
 			_indexSearcherManager.acquire();
@@ -232,11 +232,11 @@ public class IndexSearcherManagerTest {
 
 		_assertHits(fieldValue, 0);
 
-		_indexSearcherManager.invalid();
+		_indexSearcherManager.invalidate();
 
 		IndexSearcher indexSearcher = _assertHits(fieldValue, 1);
 
-		_indexSearcherManager.invalid();
+		_indexSearcherManager.invalidate();
 
 		Assert.assertSame(indexSearcher, _indexSearcherManager.acquire());
 	}
