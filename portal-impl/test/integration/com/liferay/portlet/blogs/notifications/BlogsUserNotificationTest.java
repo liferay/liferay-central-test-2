@@ -432,6 +432,21 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 		return userNotificationDeliveries;
 	}
 
+	protected void updateBlogsEntry(BlogsEntry blogsEntry) throws Exception {
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+
+		serviceContext.setCommand(Constants.UPDATE);
+		serviceContext.setLayoutFullURL("http://localhost");
+		serviceContext.setScopeGroupId(_group.getGroupId());
+
+		BlogsEntryLocalServiceUtil.updateEntry(
+			blogsEntry.getUserId(), blogsEntry.getEntryId(),
+			ServiceTestUtil.randomString(), blogsEntry.getDescription(),
+			blogsEntry.getContent(), 1, 1, 2012, 12, 00, true, true,
+			new String[0], blogsEntry.getSmallImage(),
+			blogsEntry.getSmallImageURL(), StringPool.BLANK, null, serviceContext);
+	}
+
 	protected void updateUserNotificationDelivery(
 			int notificationType, int deliveryType, boolean deliver)
 		throws Exception {
@@ -442,7 +457,7 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 			if ((userNotificationDelivery.getNotificationType() !=
 					notificationType) ||
 				(userNotificationDelivery.getDeliveryType() != deliveryType)) {
-				
+
 				continue;
 			}
 
@@ -468,21 +483,6 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 					userNotificationDelivery.getUserNotificationDeliveryId(),
 					deliver);
 		}
-	}
-
-	protected void updateBlogsEntry(BlogsEntry blogsEntry) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
-
-		serviceContext.setCommand(Constants.UPDATE);
-		serviceContext.setLayoutFullURL("http://localhost");
-		serviceContext.setScopeGroupId(_group.getGroupId());
-
-		BlogsEntryLocalServiceUtil.updateEntry(
-			blogsEntry.getUserId(), blogsEntry.getEntryId(),
-			ServiceTestUtil.randomString(), blogsEntry.getDescription(),
-			blogsEntry.getContent(), 1, 1, 2012, 12, 00, true, true,
-			new String[0], blogsEntry.getSmallImage(),
-			blogsEntry.getSmallImageURL(), StringPool.BLANK, null, serviceContext);
 	}
 
 	private Group _group;

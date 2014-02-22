@@ -14,8 +14,6 @@
 
 package com.liferay.portal.servlet;
 
-import static org.mockito.Mockito.verify;
-
 import com.liferay.portal.cache.SingleVMPoolImpl;
 import com.liferay.portal.cache.memory.MemoryPortalCacheManager;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
@@ -44,6 +42,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 import org.springframework.mock.web.MockServletConfig;
 import org.springframework.mock.web.MockServletContext;
+
+import static org.mockito.Mockito.verify;
 
 /**
  * @author Carlos Sierra Andrés
