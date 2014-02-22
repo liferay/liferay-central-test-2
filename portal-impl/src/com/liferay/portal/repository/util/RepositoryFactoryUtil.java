@@ -68,11 +68,11 @@ public class RepositoryFactoryUtil {
 			new ConcurrentHashMap<String, RepositoryFactory>();
 
 	static {
-		ClassLoader portalClassLoader = PortalClassLoaderUtil.getClassLoader();
+		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
 		for (String className : PropsValues.DL_REPOSITORY_IMPL) {
 			RepositoryFactory repositoryFactory = new RepositoryFactoryImpl(
-				className, portalClassLoader);
+				className, classLoader);
 
 			_repositoryFactories.put(className, repositoryFactory);
 		}
