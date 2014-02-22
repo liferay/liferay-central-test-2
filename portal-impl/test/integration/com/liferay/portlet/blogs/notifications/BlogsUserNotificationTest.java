@@ -101,7 +101,7 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 
 	@Test
 	public void testAddBlogsUserNotification() throws Exception {
-		BlogsEntry entry = addBlogsEntry();
+		BlogsEntry blogsEntry = addBlogsEntry();
 
 		Assert.assertEquals(1, _logRecords.size());
 
@@ -111,7 +111,7 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 
 		List<JSONObject> userNotificationEventsJSONObjects =
 			getUserNotificationEventsJSONObjects(
-				_user.getUserId(), entry.getEntryId());
+				_user.getUserId(), blogsEntry.getEntryId());
 
 		Assert.assertEquals(1, userNotificationEventsJSONObjects.size());
 
@@ -220,8 +220,7 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 
 			notificationTypes = ArrayUtil.append(
 				notificationTypes,
-				userNotificationEventsJSONObject.getInt(
-					"notificationType"));
+				userNotificationEventsJSONObject.getInt("notificationType"));
 		}
 
 		Assert.assertNotEquals(notificationTypes[0], notificationTypes[1]);
@@ -265,8 +264,7 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 
 			notificationTypes = ArrayUtil.append(
 				notificationTypes,
-				userNotificationEventsJSONObject.getInt(
-					"notificationType"));
+				userNotificationEventsJSONObject.getInt("notificationType"));
 		}
 
 		Assert.assertNotEquals(notificationTypes[0], notificationTypes[1]);
@@ -363,37 +361,6 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 		}
 	}
 
-	protected List<JSONObject> getUserNotificationEventsJSONObjects(
-			long userId, long blogsEntryId)
-		throws Exception {
-
-		List<UserNotificationEvent> userNotificationEvents =
-			UserNotificationEventLocalServiceUtil.getUserNotificationEvents(
-				userId);
-
-		List<JSONObject> userNotificationEventJSONObjects =
-			new ArrayList<JSONObject>(userNotificationEvents.size());
-
-		for (UserNotificationEvent userNotificationEvent :
-				userNotificationEvents) {
-
-			JSONObject userNotificationEventJSONObject =
-				JSONFactoryUtil.createJSONObject(
-					userNotificationEvent.getPayload());
-
-			long classPK = userNotificationEventJSONObject.getLong("classPK");
-
-			if (classPK != blogsEntryId) {
-				continue;
-			}
-
-			userNotificationEventJSONObjects.add(
-				userNotificationEventJSONObject);
-		}
-
-		return userNotificationEventJSONObjects;
-	}
-
 	protected List<UserNotificationDelivery> getUserNotificationDeliveries(
 			long userId)
 		throws Exception {
@@ -429,6 +396,37 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 		return userNotificationDeliveries;
 	}
 
+	protected List<JSONObject> getUserNotificationEventsJSONObjects(
+			long userId, long blogsEntryId)
+		throws Exception {
+
+		List<UserNotificationEvent> userNotificationEvents =
+			UserNotificationEventLocalServiceUtil.getUserNotificationEvents(
+				userId);
+
+		List<JSONObject> userNotificationEventJSONObjects =
+			new ArrayList<JSONObject>(userNotificationEvents.size());
+
+		for (UserNotificationEvent userNotificationEvent :
+				userNotificationEvents) {
+
+			JSONObject userNotificationEventJSONObject =
+				JSONFactoryUtil.createJSONObject(
+					userNotificationEvent.getPayload());
+
+			long classPK = userNotificationEventJSONObject.getLong("classPK");
+
+			if (classPK != blogsEntryId) {
+				continue;
+			}
+
+			userNotificationEventJSONObjects.add(
+				userNotificationEventJSONObject);
+		}
+
+		return userNotificationEventJSONObjects;
+	}
+
 	protected void updateBlogsEntry(BlogsEntry blogsEntry) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
 
@@ -441,7 +439,8 @@ public class BlogsUserNotificationTest extends BaseMailTestCase {
 			ServiceTestUtil.randomString(), blogsEntry.getDescription(),
 			blogsEntry.getContent(), 1, 1, 2012, 12, 00, true, true,
 			new String[0], blogsEntry.getSmallImage(),
-			blogsEntry.getSmallImageURL(), StringPool.BLANK, null, serviceContext);
+			blogsEntry.getSmallImageURL(), StringPool.BLANK, null,
+			serviceContext);
 	}
 
 	protected void updateUserNotificationDelivery(
