@@ -6,4 +6,4 @@
 	<#assign variableAltName = "cur_" + variableAltName>
 </#if>
 
-<img alt='${getVariableReferenceCode(variableAltName)}' src="${getVariableReferenceCode(variableName)}" />
+<img alt="${getVariableReferenceCode(variableAltName)}" src="${getVariableReferenceCode(variableName)}" />

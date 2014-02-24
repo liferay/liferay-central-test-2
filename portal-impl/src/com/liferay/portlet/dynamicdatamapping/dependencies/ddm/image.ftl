@@ -14,8 +14,8 @@
 	<#if fieldRawValue?has_content>
 		<#assign fileJSONObject = getFileJSONObject(fieldRawValue)>
 
-		<#assign alt = fileJSONObject.getString('alt')>
-		<#assign src = fileJSONObject.getString('data')>
+		<#assign alt = fileJSONObject.getString("alt")>
+		<#assign src = fileJSONObject.getString("data")>
 	</#if>
 
 	<#if src?has_content>
