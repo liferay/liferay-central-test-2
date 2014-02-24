@@ -164,8 +164,8 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 			DDMStructureLocalServiceUtil.getStructures();
 
 		for (DDMStructure ddmStructure : ddmStructures) {
-			verifyStructure(ddmStructure);
-			verifyTemplates(ddmStructure);
+			verifyDDMStructure(ddmStructure);
+			verifyDDMTemplates(ddmStructure);
 
 			updateFileUploadReferences(ddmStructure);
 		}
@@ -525,14 +525,16 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return DDMXMLUtil.formatXML(document.asXML());
 	}
 
-	protected void verifyStructure(DDMStructure ddmStructure) throws Exception {
+	protected void verifyDDMStructure(DDMStructure ddmStructure)
+		throws Exception {
+
 		String xsd = verifySchema(
 			ddmStructure.getXsd(), ddmStructure.getDefaultLanguageId());
 
 		updateDDMStructure(ddmStructure, xsd);
 	}
 
-	protected void verifyTemplate(DDMTemplate ddmTemplate) throws Exception {
+	protected void verifyDDMTemplate(DDMTemplate ddmTemplate) throws Exception {
 		if (ddmTemplate.getType() != DDMTemplateConstants.TEMPLATE_TYPE_FORM) {
 			return;
 		}
@@ -543,11 +545,13 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		updateDDMTemplate(ddmTemplate, script);
 	}
 
-	protected void verifyTemplates(DDMStructure ddmStructure) throws Exception {
-		List<DDMTemplate> templates = getFormDDMTemplates(ddmStructure);
+	protected void verifyDDMTemplates(DDMStructure ddmStructure)
+		throws Exception {
 
-		for (DDMTemplate template : templates) {
-			verifyTemplate(template);
+		List<DDMTemplate> ddmTemplates = getFormDDMTemplates(ddmStructure);
+
+		for (DDMTemplate ddmTemplate : ddmTemplates) {
+			verifyDDMTemplate(ddmTemplate);
 		}
 	}
 
