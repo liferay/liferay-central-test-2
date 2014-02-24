@@ -163,11 +163,9 @@ public class WikiPageLocalServiceTest {
 		Assert.assertEquals(pageA.getRedirectTitle(), "C");
 		Assert.assertEquals(pageB.getRedirectTitle(), StringPool.BLANK);
 		Assert.assertEquals(pageC.getRedirectTitle(), StringPool.BLANK);
-
 		Assert.assertEquals(pageA.getSummary(), "Moved to C");
 		Assert.assertEquals(pageB.getSummary(), "Summary");
 		Assert.assertEquals(pageC.getSummary(), StringPool.BLANK);
-
 		Assert.assertEquals(pageA.getContent(), "[[C]]");
 		Assert.assertEquals(pageC.getContent(), "[[B]]");
 	}
