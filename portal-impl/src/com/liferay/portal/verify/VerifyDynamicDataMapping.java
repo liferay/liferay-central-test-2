@@ -160,14 +160,14 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 	protected void doVerify() throws Exception {
 		setUpClassNameIds();
 
-		List<DDMStructure> structures =
+		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getStructures();
 
-		for (DDMStructure structure : structures) {
-			verifyStructure(structure);
-			verifyTemplates(structure);
+		for (DDMStructure ddmStructure : ddmStructures) {
+			verifyStructure(ddmStructure);
+			verifyTemplates(ddmStructure);
 
-			updateFileUploadReferences(structure);
+			updateFileUploadReferences(ddmStructure);
 		}
 	}
 
@@ -217,12 +217,12 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return sb.toString();
 	}
 
-	protected List<DDMTemplate> getFormTemplates(DDMStructure structure)
+	protected List<DDMTemplate> getFormDDMTemplates(DDMStructure ddmStructure)
 		throws Exception {
 
 		return DDMTemplateLocalServiceUtil.getTemplates(
-			structure.getGroupId(), _ddmStructureClassNameId,
-			structure.getStructureId(),
+			ddmStructure.getGroupId(), _ddmStructureClassNameId,
+			ddmStructure.getStructureId(),
 			DDMTemplateConstants.TEMPLATE_TYPE_FORM);
 	}
 
@@ -252,10 +252,10 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return false;
 	}
 
-	protected boolean hasFileUploadFields(DDMStructure structure)
+	protected boolean hasFileUploadFields(DDMStructure ddmStructure)
 		throws Exception {
 
-		Map<String, Map<String, String>> fieldsMap = structure.getFieldsMap();
+		Map<String, Map<String, String>> fieldsMap = ddmStructure.getFieldsMap();
 
 		for (Map<String, String> field : fieldsMap.values()) {
 			String dataType = field.get(FieldConstants.DATA_TYPE);
@@ -343,45 +343,45 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 			workflowContext, serviceContext);
 	}
 
-	protected void updateFileUploadReferences(DDMStructure structure)
+	protected void updateFileUploadReferences(DDMStructure ddmStructure)
 		throws Exception {
 
-		if (!hasFileUploadFields(structure)) {
+		if (!hasFileUploadFields(ddmStructure)) {
 			return;
 		}
 
-		List<DDMStructureLink> structureLinks =
+		List<DDMStructureLink> ddmStructureLinks =
 			DDMStructureLinkLocalServiceUtil.getStructureLinks(
-				structure.getStructureId(), QueryUtil.ALL_POS,
+				ddmStructure.getStructureId(), QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
-		for (DDMStructureLink structureLink : structureLinks) {
-			updateFileUploadReferences(structureLink);
+		for (DDMStructureLink ddmStructureLink : ddmStructureLinks) {
+			updateFileUploadReferences(ddmStructureLink);
 		}
 
-		String xsd = updateFileUploadReferences(structure.getXsd());
+		String xsd = updateFileUploadReferences(ddmStructure.getXsd());
 
-		updateStructure(structure, xsd);
+		updateDDMStructure(ddmStructure, xsd);
 
-		List<DDMTemplate> templates = getFormTemplates(structure);
+		List<DDMTemplate> ddmTemplates = getFormDDMTemplates(ddmStructure);
 
-		for (DDMTemplate template : templates) {
-			String script = updateFileUploadReferences(template.getScript());
+		for (DDMTemplate ddmTemplate : ddmTemplates) {
+			String script = updateFileUploadReferences(ddmTemplate.getScript());
 
-			updateTemplate(template, script);
+			updateDDMTemplate(ddmTemplate, script);
 		}
 	}
 
-	protected void updateFileUploadReferences(DDMStructureLink structureLink)
+	protected void updateFileUploadReferences(DDMStructureLink ddmStructureLink)
 		throws Exception {
 
-		long classNameId = structureLink.getClassNameId();
+		long classNameId = ddmStructureLink.getClassNameId();
 
 		if (classNameId == _ddlRecordSetClassNameId) {
-			updateDDLFileUploadReferences(structureLink.getClassPK());
+			updateDDLFileUploadReferences(ddmStructureLink.getClassPK());
 		}
 		else if (classNameId == _dlFileEntryMetadataClassNameId) {
-			updateDLFileUploadReferences(structureLink.getClassPK());
+			updateDLFileUploadReferences(ddmStructureLink.getClassPK());
 		}
 	}
 
@@ -452,19 +452,19 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return DDMXMLUtil.formatXML(document.asXML());
 	}
 
-	protected void updateStructure(DDMStructure structure, String xsd)
+	protected void updateDDMStructure(DDMStructure ddmStructure, String xsd)
 		throws Exception {
 
-		if (xsd.equals(structure.getXsd())) {
+		if (xsd.equals(ddmStructure.getXsd())) {
 			return;
 		}
 
-		structure.setXsd(xsd);
+		ddmStructure.setXsd(xsd);
 
-		DDMStructureLocalServiceUtil.updateDDMStructure(structure);
+		DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure);
 	}
 
-	protected void updateTemplate(DDMTemplate template, String script)
+	protected void updateDDMTemplate(DDMTemplate template, String script)
 		throws Exception {
 
 		if (script.equals(template.getScript())) {
@@ -525,26 +525,26 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return DDMXMLUtil.formatXML(document.asXML());
 	}
 
-	protected void verifyStructure(DDMStructure structure) throws Exception {
+	protected void verifyStructure(DDMStructure ddmStructure) throws Exception {
 		String xsd = verifySchema(
-			structure.getXsd(), structure.getDefaultLanguageId());
+			ddmStructure.getXsd(), ddmStructure.getDefaultLanguageId());
 
-		updateStructure(structure, xsd);
+		updateDDMStructure(ddmStructure, xsd);
 	}
 
-	protected void verifyTemplate(DDMTemplate template) throws Exception {
-		if (template.getType() != DDMTemplateConstants.TEMPLATE_TYPE_FORM) {
+	protected void verifyTemplate(DDMTemplate ddmTemplate) throws Exception {
+		if (ddmTemplate.getType() != DDMTemplateConstants.TEMPLATE_TYPE_FORM) {
 			return;
 		}
 
 		String script = verifySchema(
-			template.getScript(), template.getDefaultLanguageId());
+			ddmTemplate.getScript(), ddmTemplate.getDefaultLanguageId());
 
-		updateTemplate(template, script);
+		updateDDMTemplate(ddmTemplate, script);
 	}
 
-	protected void verifyTemplates(DDMStructure structure) throws Exception {
-		List<DDMTemplate> templates = getFormTemplates(structure);
+	protected void verifyTemplates(DDMStructure ddmStructure) throws Exception {
+		List<DDMTemplate> templates = getFormDDMTemplates(ddmStructure);
 
 		for (DDMTemplate template : templates) {
 			verifyTemplate(template);
