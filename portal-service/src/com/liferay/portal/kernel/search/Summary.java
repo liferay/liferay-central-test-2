@@ -123,8 +123,8 @@ public class Summary {
 	}
 
 	private String _escapeAndHighlight(String text) {
-		if (Validator.isNull(text) || ArrayUtil.isEmpty(_queryTerms) ||
-			!_highlight) {
+		if (!_highlight || Validator.isNull(text) ||
+			ArrayUtil.isEmpty(_queryTerms)) {
 
 			return HtmlUtil.escape(text);
 		}
