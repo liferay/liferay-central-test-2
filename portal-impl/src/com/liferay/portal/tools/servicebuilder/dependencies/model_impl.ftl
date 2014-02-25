@@ -645,7 +645,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			@Override
 			public void set${column.methodUserUuidName}(String ${column.userUuidName}) {
-				_${column.userUuidName} = ${column.userUuidName};
 			}
 		</#if>
 
@@ -1319,10 +1318,6 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 
 			<#if column.localized>
 				private String _${column.name}CurrentLanguageId;
-			</#if>
-
-			<#if column.userUuid>
-				private String _${column.userUuidName};
 			</#if>
 
 			<#if column.isFinderPath() || ((parentPKColumn != "") && (parentPKColumn.name == column.name))>
