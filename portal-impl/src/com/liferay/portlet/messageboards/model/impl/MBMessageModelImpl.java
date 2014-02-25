@@ -538,7 +538,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -898,7 +897,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
 	}
 
 	@JSON
@@ -1606,7 +1604,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private String _userName;
@@ -1641,7 +1638,6 @@ public class MBMessageModelImpl extends BaseModelImpl<MBMessage>
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private long _statusByUserId;
-	private String _statusByUserUuid;
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;

@@ -223,7 +223,6 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -469,7 +468,6 @@ public class PasswordTrackerModelImpl extends BaseModelImpl<PasswordTracker>
 	private long _mvccVersion;
 	private long _passwordTrackerId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private Date _createDate;

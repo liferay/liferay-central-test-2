@@ -666,7 +666,6 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -2034,7 +2033,6 @@ public class UserModelImpl extends BaseModelImpl<User> implements UserModel {
 	private String _uuid;
 	private String _originalUuid;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private long _companyId;

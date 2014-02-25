@@ -374,7 +374,6 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -452,7 +451,6 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 
 	@Override
 	public void setBanUserUuid(String banUserUuid) {
-		_banUserUuid = banUserUuid;
 	}
 
 	public long getOriginalBanUserId() {
@@ -728,14 +726,12 @@ public class MBBanModelImpl extends BaseModelImpl<MBBan> implements MBBanModel {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _banUserId;
-	private String _banUserUuid;
 	private long _originalBanUserId;
 	private boolean _setOriginalBanUserId;
 	private long _columnBitmask;

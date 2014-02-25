@@ -487,7 +487,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@JSON
@@ -599,7 +598,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	@Override
 	public void setRootMessageUserUuid(String rootMessageUserUuid) {
-		_rootMessageUserUuid = rootMessageUserUuid;
 	}
 
 	@JSON
@@ -649,7 +647,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	@Override
 	public void setLastPostByUserUuid(String lastPostByUserUuid) {
-		_lastPostByUserUuid = lastPostByUserUuid;
 	}
 
 	@JSON
@@ -760,7 +757,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 
 	@Override
 	public void setStatusByUserUuid(String statusByUserUuid) {
-		_statusByUserUuid = statusByUserUuid;
 	}
 
 	@JSON
@@ -1436,7 +1432,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
@@ -1447,11 +1442,9 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private long _originalRootMessageId;
 	private boolean _setOriginalRootMessageId;
 	private long _rootMessageUserId;
-	private String _rootMessageUserUuid;
 	private int _messageCount;
 	private int _viewCount;
 	private long _lastPostByUserId;
-	private String _lastPostByUserUuid;
 	private Date _lastPostDate;
 	private Date _originalLastPostDate;
 	private double _priority;
@@ -1462,7 +1455,6 @@ public class MBThreadModelImpl extends BaseModelImpl<MBThread>
 	private int _originalStatus;
 	private boolean _setOriginalStatus;
 	private long _statusByUserId;
-	private String _statusByUserUuid;
 	private String _statusByUserName;
 	private Date _statusDate;
 	private long _columnBitmask;

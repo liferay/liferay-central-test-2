@@ -365,7 +365,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -453,7 +452,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 
 	@Override
 	public void setReplierUserUuid(String replierUserUuid) {
-		_replierUserUuid = replierUserUuid;
 	}
 
 	@JSON
@@ -754,7 +752,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private Date _createDate;
@@ -762,7 +759,6 @@ public class MembershipRequestModelImpl extends BaseModelImpl<MembershipRequest>
 	private String _replyComments;
 	private Date _replyDate;
 	private long _replierUserId;
-	private String _replierUserUuid;
 	private int _statusId;
 	private int _originalStatusId;
 	private boolean _setOriginalStatusId;

@@ -249,7 +249,6 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@Override
@@ -600,7 +599,6 @@ public class AssetLinkModelImpl extends BaseModelImpl<AssetLink>
 	private long _linkId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private long _entryId1;

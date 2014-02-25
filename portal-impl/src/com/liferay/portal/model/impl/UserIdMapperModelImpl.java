@@ -231,7 +231,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -516,7 +515,6 @@ public class UserIdMapperModelImpl extends BaseModelImpl<UserIdMapper>
 	private long _mvccVersion;
 	private long _userIdMapperId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private String _type;

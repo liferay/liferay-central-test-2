@@ -294,7 +294,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -666,7 +665,6 @@ public class ShoppingCartModelImpl extends BaseModelImpl<ShoppingCart>
 	private boolean _setOriginalGroupId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private String _userName;

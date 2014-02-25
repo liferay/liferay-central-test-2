@@ -271,7 +271,6 @@ public class UserNotificationDeliveryModelImpl extends BaseModelImpl<UserNotific
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -643,7 +642,6 @@ public class UserNotificationDeliveryModelImpl extends BaseModelImpl<UserNotific
 	private long _userNotificationDeliveryId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private String _portletId;

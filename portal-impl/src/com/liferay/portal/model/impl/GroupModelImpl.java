@@ -503,7 +503,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 
 	@Override
 	public void setCreatorUserUuid(String creatorUserUuid) {
-		_creatorUserUuid = creatorUserUuid;
 	}
 
 	@Override
@@ -1229,7 +1228,6 @@ public class GroupModelImpl extends BaseModelImpl<Group> implements GroupModel {
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _creatorUserId;
-	private String _creatorUserUuid;
 	private long _classNameId;
 	private long _originalClassNameId;
 	private boolean _setOriginalClassNameId;

@@ -453,7 +453,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@JSON
@@ -1341,7 +1340,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	private long _originalCompanyId;
 	private boolean _setOriginalCompanyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;

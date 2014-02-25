@@ -343,7 +343,6 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	@JSON
@@ -744,7 +743,6 @@ public class LayoutBranchModelImpl extends BaseModelImpl<LayoutBranch>
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private String _userUuid;
 	private String _userName;
 	private long _layoutSetBranchId;
 	private long _originalLayoutSetBranchId;

@@ -213,7 +213,6 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 
 	@Override
 	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
 	}
 
 	public long getOriginalUserId() {
@@ -403,7 +402,6 @@ public class BrowserTrackerModelImpl extends BaseModelImpl<BrowserTracker>
 	private long _mvccVersion;
 	private long _browserTrackerId;
 	private long _userId;
-	private String _userUuid;
 	private long _originalUserId;
 	private boolean _setOriginalUserId;
 	private long _browserKey;
