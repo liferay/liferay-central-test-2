@@ -1152,8 +1152,16 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 		socialBookmarksTag.runTag();
 	}
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #stagingMenu}
+	 */
 	@Override
 	public void staging() throws Exception {
+		stagingMenu();
+	}
+
+	@Override
+	public void stagingMenu() throws Exception {
 		MenuTag menuTag = new MenuTag();
 
 		setUp(menuTag);
