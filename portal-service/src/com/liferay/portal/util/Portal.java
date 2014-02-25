@@ -1193,7 +1193,7 @@ public interface Portal {
 	public String getUserPassword(PortletRequest portletRequest);
 
 	/**
-	 * @deprecated As of 7.0.0 with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public String getUserValue(long userId, String param, String defaultValue)
@@ -1228,7 +1228,7 @@ public interface Portal {
 		throws Exception;
 
 	/**
-	 * @deprecated As of 6.2.0 with no direct replacement
+	 * @deprecated As of 6.2.0, with no direct replacement
 	 */
 	@Deprecated
 	public boolean isAllowAddPortletDefaultResource(

@@ -1654,7 +1654,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0 with no direct replacement
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static String getUserValue(
@@ -1720,7 +1720,7 @@ public class PortalUtil {
 	}
 
 	/**
-	 * @deprecated As of 6.2.0 with no direct replacement
+	 * @deprecated As of 6.2.0, with no direct replacement
 	 */
 	@Deprecated
 	public static boolean isAllowAddPortletDefaultResource(
