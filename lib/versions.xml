@@ -86,6 +86,10 @@
 				<license-name>MIT License</license-name>
 			</license>
 		</licenses>
+		<comments>
+			Removed javax.*, junit.*, org.hamcrest.*, org.json.*, and
+			org.junit.*.
+		</comments>
 	</library>
 	<library>
 		<file-name>lib/development/antelope.jar</file-name>
