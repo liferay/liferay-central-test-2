@@ -78,7 +78,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 	public void testAddUserNotification() throws Exception {
 		subscribeToContainer();
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -111,7 +111,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY,
 			UserNotificationDeliveryConstants.TYPE_EMAIL, false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		Assert.assertEquals(0, logRecords.size());
 
@@ -138,7 +138,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 
 		updateUserNotificationsDelivery(false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		Assert.assertEquals(0, logRecords.size());
 
@@ -159,7 +159,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 			UserNotificationDefinition.NOTIFICATION_TYPE_ADD_ENTRY,
 			UserNotificationDeliveryConstants.TYPE_WEBSITE, false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -176,11 +176,11 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 
 	@Test
 	public void testUpdateUserNotification() throws Exception {
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		subscribeToContainer();
 
-		BaseModel updatedBasemodel = updateBaseModel(baseModel);
+		BaseModel<?> updatedBasemodel = updateBaseModel(baseModel);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -219,11 +219,11 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 			UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY,
 			UserNotificationDeliveryConstants.TYPE_EMAIL, false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		subscribeToContainer();
 
-		BaseModel updatedBasemodel = updateBaseModel(baseModel);
+		BaseModel<?> updatedBasemodel = updateBaseModel(baseModel);
 
 		Assert.assertEquals(0, logRecords.size());
 
@@ -253,11 +253,11 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 
 		updateUserNotificationsDelivery(false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		subscribeToContainer();
 
-		BaseModel updatedBasemodel = updateBaseModel(baseModel);
+		BaseModel<?> updatedBasemodel = updateBaseModel(baseModel);
 
 		Assert.assertEquals(0, logRecords.size());
 
@@ -280,11 +280,11 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 			UserNotificationDefinition.NOTIFICATION_TYPE_UPDATE_ENTRY,
 			UserNotificationDeliveryConstants.TYPE_WEBSITE, false);
 
-		BaseModel baseModel = addBaseModel();
+		BaseModel<?> baseModel = addBaseModel();
 
 		subscribeToContainer();
 
-		BaseModel updatedBasemodel = updateBaseModel(baseModel);
+		BaseModel<?> updatedBasemodel = updateBaseModel(baseModel);
 
 		Assert.assertEquals(1, logRecords.size());
 
@@ -299,7 +299,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 		Assert.assertEquals(0, userNotificationEventsJSONObjects.size());
 	}
 
-	protected abstract BaseModel addBaseModel() throws Exception;
+	protected abstract BaseModel<?> addBaseModel() throws Exception;
 
 	protected void addContainerModel() throws Exception {
 		return;
@@ -393,7 +393,7 @@ public abstract class BaseUserNotificationTestCase extends BaseMailTestCase {
 
 	protected abstract void subscribeToContainer() throws Exception;
 
-	protected abstract BaseModel updateBaseModel(BaseModel baseModel)
+	protected abstract BaseModel<?> updateBaseModel(BaseModel<?> baseModel)
 		throws Exception;
 
 	protected void updateUserNotificationDelivery(

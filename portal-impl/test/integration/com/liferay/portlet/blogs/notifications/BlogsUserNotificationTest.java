@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 public class BlogsUserNotificationTest extends BaseUserNotificationTestCase {
 
 	@Override
-	protected BaseModel addBaseModel() throws Exception {
+	protected BaseModel<?> addBaseModel() throws Exception {
 		return BlogsTestUtil.addEntry(user.getUserId(), group, true);
 	}
 
@@ -62,7 +62,9 @@ public class BlogsUserNotificationTest extends BaseUserNotificationTestCase {
 	}
 
 	@Override
-	protected BaseModel updateBaseModel(BaseModel baseModel) throws Exception {
+	protected BaseModel<?> updateBaseModel(BaseModel<?> baseModel)
+		throws Exception {
+
 		BlogsEntry blogsEntry = (BlogsEntry)baseModel;
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();

@@ -45,7 +45,7 @@ import org.junit.runner.RunWith;
 public class WikiUserNotificationTest extends BaseUserNotificationTestCase {
 
 	@Override
-	protected BaseModel addBaseModel() throws Exception {
+	protected BaseModel<?> addBaseModel() throws Exception {
 		return WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), group.getGroupId(), _node.getNodeId(),
 			ServiceTestUtil.randomString(), true);
@@ -70,7 +70,9 @@ public class WikiUserNotificationTest extends BaseUserNotificationTestCase {
 	}
 
 	@Override
-	protected BaseModel updateBaseModel(BaseModel baseModel) throws Exception {
+	protected BaseModel<?> updateBaseModel(BaseModel<?> baseModel)
+		throws Exception {
+
 		return WikiTestUtil.updatePage((WikiPage)baseModel);
 	}
 
