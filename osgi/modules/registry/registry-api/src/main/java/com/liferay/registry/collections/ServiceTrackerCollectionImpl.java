@@ -145,7 +145,9 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public boolean contains(Object service) {
-		return _servicesList.get().contains(service);
+		List<S> services = _servicesList.get();
+		
+		return services.contains(service);
 	}
 
 	@Override
@@ -155,12 +157,16 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public S get(int index) {
-		return _servicesList.get().get(index);
+		List<S> services = _servicesList.get();
+		
+		return services.get(index);
 	}
 
 	@Override
 	public int indexOf(Object service) {
-		return _servicesList.get().indexOf(service);
+		List<S> services = _servicesList.get();
+		
+		return services.indexOf(service);
 	}
 
 	@Override
@@ -170,22 +176,30 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public Iterator<S> iterator() {
-		return _servicesList.get().iterator();
+		List<S> services = _servicesList.get();
+		
+		return services.iterator();
 	}
 
 	@Override
 	public int lastIndexOf(Object service) {
-		return _servicesList.get().lastIndexOf(service);
+		List<S> services = _servicesList.get();
+		
+		return services.lastIndexOf(service);
 	}
 
 	@Override
 	public ListIterator<S> listIterator() {
-		return _servicesList.get().listIterator();
+		List<S> services = _servicesList.get();
+		
+		return services.listIterator();
 	}
 
 	@Override
 	public ListIterator<S> listIterator(int index) {
-		return _servicesList.get().listIterator(index);
+		List<S> services = _servicesList.get();
+		
+		return services.listIterator(index);
 	}
 
 	@Override
@@ -229,17 +243,23 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public java.util.List<S> subList(int fromIndex, int toIndex) {
-		return _servicesList.get().subList(fromIndex, toIndex);
+		List<S> services = _servicesList.get();
+		
+		return services.subList(fromIndex, toIndex);
 	}
 
 	@Override
 	public Object[] toArray() {
-		return _servicesList.get().toArray();
+		List<S> services = _servicesList.get();
+		
+		return services.toArray();
 	}
 
 	@Override
-	public <T> T[] toArray(T[] services) {
-		return _servicesList.get().toArray(services);
+	public <T> T[] toArray(T[] servicesArray) {
+		List<S> services = _servicesList.get();
+		
+		return services.toArray(servicesArray);
 	}
 
 	private Filter _getFilter(Filter filter, Class<S> clazz) {
