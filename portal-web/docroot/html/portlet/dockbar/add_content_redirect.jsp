@@ -24,9 +24,9 @@ Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId
 String className = ParamUtil.getString(request, "className");
 long classPK = ParamUtil.getLong(request, "classPK");
 
-Map<String, Object> data = new HashMap<String, Object>();
-
 AssetRenderer assetRenderer = null;
+
+Map<String, Object> data = new HashMap<String, Object>();
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
 	AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
