@@ -50,7 +50,6 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 		names="any-website,facebook,opensocial-gadget,netvibes,friends"
 		refresh="<%= false %>"
 	>
-
 		<liferay-ui:section>
 			<aui:fieldset>
 
