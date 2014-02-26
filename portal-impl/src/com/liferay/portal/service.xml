@@ -3311,6 +3311,7 @@
 		<exception>InvalidLock</exception>
 		<exception>InvalidRepository</exception>
 		<exception>LARFile</exception>
+		<exception>LARFileName</exception>
 		<exception>LARFileSize</exception>
 		<exception>LARType</exception>
 		<exception>LayoutBranchName</exception>
