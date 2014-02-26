@@ -42,9 +42,9 @@ import java.util.concurrent.atomic.AtomicReference;
  *
  * @author Raymond Augé
  */
-class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
+public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
-	ServiceTrackerCollectionImpl(
+	public ServiceTrackerCollectionImpl(
 		Class<S> clazz, Filter filter,
 		ServiceTrackerCustomizer<S, S> serviceTrackerCustomizer,
 		Map<String, Object> properties) {
