@@ -578,51 +578,6 @@ public class JournalUtil {
 		return articles;
 	}
 
-	public static Map<String, String> getEmailDefinitionTerms(
-		RenderRequest request, String emailFromAddress, String emailFromName) {
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Map<String, String> definitionTerms = new HashMap<String, String>();
-
-		definitionTerms.put(
-			"[$ARTICLE_ID$]",
-			LanguageUtil.get(themeDisplay.getLocale(), "the-web-content-id"));
-		definitionTerms.put(
-			"[$ARTICLE_TITLE$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(), "the-web-content-title"));
-		definitionTerms.put(
-			"[$ARTICLE_URL$]",
-			LanguageUtil.get(themeDisplay.getLocale(), "the-web-content-url"));
-		definitionTerms.put(
-			"[$ARTICLE_VERSION$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(), "the-web-content-version"));
-		definitionTerms.put(
-			"[$FROM_ADDRESS$]", HtmlUtil.escape(emailFromAddress));
-		definitionTerms.put("[$FROM_NAME$]", HtmlUtil.escape(emailFromName));
-
-		Company company = themeDisplay.getCompany();
-
-		definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
-
-		definitionTerms.put(
-			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
-		definitionTerms.put(
-			"[$TO_ADDRESS$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(),
-				"the-address-of-the-email-recipient"));
-		definitionTerms.put(
-			"[$TO_NAME$]",
-			LanguageUtil.get(
-				themeDisplay.getLocale(), "the-name-of-the-email-recipient"));
-
-		return definitionTerms;
-	}
-
 	public static String getEmailArticleAddedBody(
 		PortletPreferences preferences) {
 
@@ -902,6 +857,51 @@ public class JournalUtil {
 			return ContentUtil.get(
 				PropsUtil.get(PropsKeys.JOURNAL_EMAIL_ARTICLE_UPDATED_SUBJECT));
 		}
+	}
+
+	public static Map<String, String> getEmailDefinitionTerms(
+		RenderRequest request, String emailFromAddress, String emailFromName) {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Map<String, String> definitionTerms = new HashMap<String, String>();
+
+		definitionTerms.put(
+			"[$ARTICLE_ID$]",
+			LanguageUtil.get(themeDisplay.getLocale(), "the-web-content-id"));
+		definitionTerms.put(
+			"[$ARTICLE_TITLE$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(), "the-web-content-title"));
+		definitionTerms.put(
+			"[$ARTICLE_URL$]",
+			LanguageUtil.get(themeDisplay.getLocale(), "the-web-content-url"));
+		definitionTerms.put(
+			"[$ARTICLE_VERSION$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(), "the-web-content-version"));
+		definitionTerms.put(
+			"[$FROM_ADDRESS$]", HtmlUtil.escape(emailFromAddress));
+		definitionTerms.put("[$FROM_NAME$]", HtmlUtil.escape(emailFromName));
+
+		Company company = themeDisplay.getCompany();
+
+		definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
+
+		definitionTerms.put(
+			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
+		definitionTerms.put(
+			"[$TO_ADDRESS$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(),
+				"the-address-of-the-email-recipient"));
+		definitionTerms.put(
+			"[$TO_NAME$]",
+			LanguageUtil.get(
+				themeDisplay.getLocale(), "the-name-of-the-email-recipient"));
+
+		return definitionTerms;
 	}
 
 	public static String getEmailFromAddress(

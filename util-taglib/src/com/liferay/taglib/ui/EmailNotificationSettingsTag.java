@@ -30,14 +30,14 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
+	public void setEmailBody(String emailBody) {
+		_emailBody = emailBody;
+	}
+
 	public void setEmailDefinitionTerms(
 		Map<String, String> emailDefinitionTerms) {
 
 		_emailDefinitionTerms = emailDefinitionTerms;
-	}
-
-	public void setEmailBody(String emailBody) {
-		_emailBody = emailBody;
 	}
 
 	public void setEmailEnabled(boolean emailEnabled) {
@@ -93,8 +93,8 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/email_notification_settings/page.jsp";
 
-	private Map<String, String> _emailDefinitionTerms;
 	private String _emailBody;
+	private Map<String, String> _emailDefinitionTerms;
 	private boolean _emailEnabled;
 	private String _emailParam;
 	private String _emailSubject;
