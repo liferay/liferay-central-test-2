@@ -146,7 +146,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public boolean contains(Object service) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.contains(service);
 	}
 
@@ -158,14 +158,14 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public S get(int index) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.get(index);
 	}
 
 	@Override
 	public int indexOf(Object service) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.indexOf(service);
 	}
 
@@ -177,28 +177,28 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public Iterator<S> iterator() {
 		List<S> services = _servicesList.get();
-		
+
 		return services.iterator();
 	}
 
 	@Override
 	public int lastIndexOf(Object service) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.lastIndexOf(service);
 	}
 
 	@Override
 	public ListIterator<S> listIterator() {
 		List<S> services = _servicesList.get();
-		
+
 		return services.listIterator();
 	}
 
 	@Override
 	public ListIterator<S> listIterator(int index) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.listIterator(index);
 	}
 
@@ -244,21 +244,21 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public List<S> subList(int fromIndex, int toIndex) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.subList(fromIndex, toIndex);
 	}
 
 	@Override
 	public Object[] toArray() {
 		List<S> services = _servicesList.get();
-		
+
 		return services.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] servicesArray) {
 		List<S> services = _servicesList.get();
-		
+
 		return services.toArray(servicesArray);
 	}
 
