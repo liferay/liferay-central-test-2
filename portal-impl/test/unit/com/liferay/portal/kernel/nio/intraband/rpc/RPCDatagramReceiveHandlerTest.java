@@ -104,7 +104,8 @@ public class RPCDatagramReceiveHandlerTest {
 		Exception exception = rpcResponse.getException();
 
 		Assert.assertSame(ProcessException.class, exception.getClass());
-		Assert.assertEquals("Execution error", exception.getMessage());
+		Assert.assertEquals(
+			ErrorTestProcessCallable.class.getName(), exception.getMessage());
 	}
 
 	private static class ErrorTestProcessCallable
@@ -112,7 +113,8 @@ public class RPCDatagramReceiveHandlerTest {
 
 		@Override
 		public String call() throws ProcessException {
-			throw new ProcessException("Execution error");
+			throw new ProcessException(
+				ErrorTestProcessCallable.class.getName());
 		}
 
 		private static final long serialVersionUID = 1L;

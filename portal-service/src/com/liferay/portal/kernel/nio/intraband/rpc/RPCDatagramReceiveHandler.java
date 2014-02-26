@@ -42,6 +42,7 @@ public class RPCDatagramReceiveHandler extends BaseAsyncDatagramReceiveHandler {
 		try {
 			ProcessCallable<? extends Serializable> processCallable =
 				deserializer.readObject();
+
 			serializer.writeObject(new RPCResponse(processCallable.call()));
 		}
 		catch (Exception e) {
