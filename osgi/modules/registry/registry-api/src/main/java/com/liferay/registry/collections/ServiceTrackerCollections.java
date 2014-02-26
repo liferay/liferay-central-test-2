@@ -129,7 +129,6 @@ public class ServiceTrackerCollections {
 	}
 
 	private ServiceTrackerCollections() {
-		// Ensure it can't be instantiated or extended.
 	}
 
 }
