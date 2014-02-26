@@ -17,8 +17,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-Map<String, String> definitionTerms = (Map<String, String>)request.getAttribute("liferay-ui:email-notification-settings:definitionTerms");
 String emailBody = (String)request.getAttribute("liferay-ui:email-notification-settings:emailBody");
+Map<String, String> emailDefinitionTerms = (Map<String, String>)request.getAttribute("liferay-ui:email-notification-settings:emailDefinitionTerms");
 boolean emailEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:email-notification-settings:emailEnabled"));
 String emailParam = (String)request.getAttribute("liferay-ui:email-notification-settings:emailParam");
 String emailSubject = (String)request.getAttribute("liferay-ui:email-notification-settings:emailSubject");
@@ -36,19 +36,19 @@ String emailSubject = (String)request.getAttribute("liferay-ui:email-notificatio
 	</aui:field-wrapper>
 </aui:fieldset>
 
-<if test="<%= (definitionTerms != null) && (definitionTerms.size() > 0) %>">
+<if test="<%= (emailDefinitionTerms != null) && !emailDefinitionTerms.isEmpty() %>">
 	<aui:fieldset cssClass="definition-of-terms" label="definition-of-terms">
 		<dl>
 
 			<%
-			for (Map.Entry<String, String> definitionTerm : definitionTerms.entrySet()) {
+			for (Map.Entry<String, String> entry : emailDefinitionTerms.entrySet()) {
 			%>
 
 				<dt>
-					<%= definitionTerm.getKey() %>
+					<%= entry.getKey() %>
 				</dt>
 				<dd>
-					<%= definitionTerm.getValue() %>
+					<%= entry.getValue() %>
 				</dd>
 
 			<%

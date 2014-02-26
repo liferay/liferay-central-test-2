@@ -41,7 +41,6 @@ String emailFromAddress = ParamUtil.getString(request, "preferences--emailFromAd
 		names="<%= tabs1Names %>"
 		refresh="<%= false %>"
 	>
-
 		<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 		<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 		<liferay-ui:error key="emailArticleAddedBody" message="please-enter-a-valid-body" />

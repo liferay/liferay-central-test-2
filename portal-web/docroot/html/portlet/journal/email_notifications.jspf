@@ -22,7 +22,7 @@ boolean emailArticleApprovalRequestedEnabled = ParamUtil.getBoolean(request, "pr
 boolean emailArticleReviewEnabled = ParamUtil.getBoolean(request, "preferences--emailArticleReviewEnabled--", JournalUtil.getEmailArticleReviewEnabled(portletPreferences));
 boolean emailArticleUpdatedEnabled = ParamUtil.getBoolean(request, "preferences--emailArticleUpdatedEnabled--", JournalUtil.getEmailArticleUpdatedEnabled(portletPreferences));
 
-Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderRequest, emailFromAddress, emailFromName);
+Map<String, String> emailDefinitionTerms = JournalUtil.getEmailDefinitionTerms(renderRequest, emailFromAddress, emailFromName);
 %>
 
 <liferay-ui:section>
@@ -33,8 +33,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 	%>
 
 	<liferay-ui:email-notifications-settings
-		definitionTerms="<%= definitionTerms %>"
 		emailBody="<%= emailBody %>"
+		emailDefinitionTerms="<%= emailDefinitionTerms %>"
 		emailEnabled="<%= emailArticleAddedEnabled %>"
 		emailParam="emailArticleAdded"
 		emailSubject="<%= emailSubject %>"
@@ -49,8 +49,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 	%>
 
 	<liferay-ui:email-notifications-settings
-		definitionTerms="<%= definitionTerms %>"
 		emailBody="<%= emailBody %>"
+		emailDefinitionTerms="<%= emailDefinitionTerms %>"
 		emailEnabled="<%= emailArticleReviewEnabled %>"
 		emailParam="emailArticleReview"
 		emailSubject="<%= emailSubject %>"
@@ -65,8 +65,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 	%>
 
 	<liferay-ui:email-notifications-settings
-		definitionTerms="<%= definitionTerms %>"
 		emailBody="<%= emailBody %>"
+		emailDefinitionTerms="<%= emailDefinitionTerms %>"
 		emailEnabled="<%= emailArticleUpdatedEnabled %>"
 		emailParam="emailArticleUpdated"
 		emailSubject="<%= emailSubject %>"
@@ -82,8 +82,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 		%>
 
 		<liferay-ui:email-notifications-settings
-			definitionTerms="<%= definitionTerms %>"
 			emailBody="<%= emailBody %>"
+			emailDefinitionTerms="<%= emailDefinitionTerms %>"
 			emailEnabled="<%= emailArticleApprovalDeniedEnabled %>"
 			emailParam="emailArticleApprovalDenied"
 			emailSubject="<%= emailSubject %>"
@@ -98,8 +98,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 		%>
 
 		<liferay-ui:email-notifications-settings
-			definitionTerms="<%= definitionTerms %>"
 			emailBody="<%= emailBody %>"
+			emailDefinitionTerms="<%= emailDefinitionTerms %>"
 			emailEnabled="<%= emailArticleApprovalGrantedEnabled %>"
 			emailParam="emailArticleApprovalGranted"
 			emailSubject="<%= emailSubject %>"
@@ -114,8 +114,8 @@ Map<String, String> definitionTerms = JournalUtil.getDefinitionTerms(renderReque
 		%>
 
 		<liferay-ui:email-notifications-settings
-			definitionTerms="<%= definitionTerms %>"
 			emailBody="<%= emailBody %>"
+			emailDefinitionTerms="<%= emailDefinitionTerms %>"
 			emailEnabled="<%= emailArticleApprovalRequestedEnabled %>"
 			emailParam="emailArticleApprovalRequested"
 			emailSubject="<%= emailSubject %>"

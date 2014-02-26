@@ -930,12 +930,12 @@
 		<tag-class>com.liferay.taglib.ui.EmailNotificationSettingsTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>definitionTerms</name>
+			<name>emailBody</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>emailBody</name>
+			<name>emailDefinitionTerms</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

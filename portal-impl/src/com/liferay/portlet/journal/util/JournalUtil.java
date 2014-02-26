@@ -578,7 +578,7 @@ public class JournalUtil {
 		return articles;
 	}
 
-	public static Map<String, String> getDefinitionTerms(
+	public static Map<String, String> getEmailDefinitionTerms(
 		RenderRequest request, String emailFromAddress, String emailFromName) {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(

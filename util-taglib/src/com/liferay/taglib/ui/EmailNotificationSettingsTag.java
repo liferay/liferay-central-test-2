@@ -30,8 +30,10 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 		return EVAL_BODY_INCLUDE;
 	}
 
-	public void setDefinitionTerms(Map<String, String> definitionTerms) {
-		_definitionTerms = definitionTerms;
+	public void setEmailDefinitionTerms(
+		Map<String, String> emailDefinitionTerms) {
+
+		_emailDefinitionTerms = emailDefinitionTerms;
 	}
 
 	public void setEmailBody(String emailBody) {
@@ -52,7 +54,7 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 
 	@Override
 	protected void cleanUp() {
-		_definitionTerms = null;
+		_emailDefinitionTerms = null;
 		_emailBody = null;
 		_emailEnabled = false;
 		_emailParam = null;
@@ -72,8 +74,8 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute(
-			"liferay-ui:email-notification-settings:definitionTerms",
-			_definitionTerms);
+			"liferay-ui:email-notification-settings:emailDefinitionTerms",
+			_emailDefinitionTerms);
 		request.setAttribute(
 			"liferay-ui:email-notification-settings:emailBody", _emailBody);
 		request.setAttribute(
@@ -91,7 +93,7 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/email_notification_settings/page.jsp";
 
-	private Map<String, String> _definitionTerms;
+	private Map<String, String> _emailDefinitionTerms;
 	private String _emailBody;
 	private boolean _emailEnabled;
 	private String _emailParam;
