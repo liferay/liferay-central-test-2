@@ -607,6 +607,7 @@ public class JournalFolderLocalServiceImpl
 			extraDataJSONObject.toString(), 0);
 	}
 
+	@Override
 	public void subscribe(long userId, long groupId, long folderId)
 		throws PortalException, SystemException {
 
@@ -618,6 +619,7 @@ public class JournalFolderLocalServiceImpl
 			userId, groupId, JournalFolder.class.getName(), folderId);
 	}
 
+	@Override
 	public void unsubscribe(long userId, long groupId, long folderId)
 		throws PortalException, SystemException {
 

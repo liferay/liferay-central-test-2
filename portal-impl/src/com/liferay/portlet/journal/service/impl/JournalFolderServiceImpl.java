@@ -327,6 +327,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 		journalFolderLocalService.restoreFolderFromTrash(getUserId(), folderId);
 	}
 
+	@Override
 	public void subscribe(long groupId, long folderId)
 		throws PortalException, SystemException {
 
@@ -336,6 +337,7 @@ public class JournalFolderServiceImpl extends JournalFolderServiceBaseImpl {
 		journalFolderLocalService.subscribe(getUserId(), groupId, folderId);
 	}
 
+	@Override
 	public void unsubscribe(long groupId, long folderId)
 		throws PortalException, SystemException {
 
