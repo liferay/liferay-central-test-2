@@ -228,7 +228,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	}
 
 	@Override
-	public java.util.List<S> subList(int fromIndex, int toIndex) {
+	public List<S> subList(int fromIndex, int toIndex) {
 		List<S> list = new ArrayList<S>();
 
 		List<EntryWrapper> subList = _services.subList(fromIndex, toIndex);
