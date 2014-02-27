@@ -771,7 +771,6 @@ public class LiferaySeleniumHelper {
 		liferaySelenium.selectFrame(locator);
 
 		value = value.replace("\\", "\\\\");
-
 		value = HtmlUtil.escapeJS(value);
 
 		liferaySelenium.runScript(
