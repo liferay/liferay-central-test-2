@@ -29,15 +29,13 @@ import java.io.Serializable;
 
 import java.net.URL;
 
-import java.rmi.RemoteException;
-
 /**
  * @author Shuyang Zhou
  */
 public class PortalCacheDatagramReceiveHandler
 	extends BaseAsyncDatagramReceiveHandler {
 
-	public PortalCacheDatagramReceiveHandler() throws RemoteException {
+	public PortalCacheDatagramReceiveHandler() {
 		_portalCacheManager =
 			(PortalCacheManager<Serializable, Serializable>)
 				PortalBeanLocatorUtil.locate(
