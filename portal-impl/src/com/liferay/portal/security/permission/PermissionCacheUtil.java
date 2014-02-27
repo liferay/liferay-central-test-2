@@ -46,7 +46,7 @@ public class PermissionCacheUtil {
 	public static final String RESOURCE_BLOCK_IDS_BAG_CACHE_NAME =
 		PermissionCacheUtil.class.getName() + "_RESOURCE_BLOCK_IDS_BAG";
 
-	public static final String USER_PERMISSION_CHECKER_BAG_PORTAL_CACHE =
+	public static final String USER_PERMISSION_CHECKER_BAG_CACHE_NAME =
 		PermissionCacheUtil.class.getName() + "_USER_PERMISSION_CHECKER";
 
 	public static void clearCache() {
@@ -193,7 +193,7 @@ public class PermissionCacheUtil {
 			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 	private static PortalCache<Long, UserPermissionCheckerBag>
 		_userPermissionCheckerBagPortalCache = MultiVMPoolUtil.getCache(
-			USER_PERMISSION_CHECKER_BAG_PORTAL_CACHE,
+			USER_PERMISSION_CHECKER_BAG_CACHE_NAME,
 			PropsValues.PERMISSIONS_OBJECT_BLOCKING_CACHE);
 
 	private static class BagKey implements Serializable {
