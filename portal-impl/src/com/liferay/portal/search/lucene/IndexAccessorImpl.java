@@ -94,7 +94,8 @@ public class IndexAccessorImpl implements IndexAccessor {
 		}
 		catch (IOException ioe) {
 			_log.error(
-				"Initializing Lucene searcher manager failed for " + _companyId,
+				"Unable to initialize index searcher manager for company " +
+					_companyId,
 				ioe);
 		}
 	}
@@ -296,8 +297,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 			}
 			catch (Exception e) {
 				_log.error(
-					"Unable to invalidate spi " + spi + " for company " +
-						companyId, e);
+					"Unable to invalidate SPI " + spi + " for company " +
+						companyId,
+					e);
 			}
 		}
 	}
