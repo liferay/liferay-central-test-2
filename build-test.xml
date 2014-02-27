@@ -610,9 +610,11 @@ create database lportal2 character set utf8;</echo>
 		<if>
 			<os family="unix" />
 			<then>
-				<copy file="tools/selenium/sikuli/linux/libJXGrabKey.so" tofile="lib/development/libs/libJXGrabKey.so" />
-				<copy file="tools/selenium/sikuli/linux/libVisionProxy.so" tofile="lib/development/libs/libVisionProxy.so" />
-				<copy file="tools/selenium/sikuli/linux/MadeForSikuliX64L.txt" tofile="lib/development/libs/MadeForSikuliX64L.txt" />
+				<mkdir dir="lib/development/libs" />
+
+				<copy todir="lib/development/libs">
+					<fileset dir="tools/selenium/sikuli/linux" />
+				</copy>
 			</then>
 		</if>
 	</target>
