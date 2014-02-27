@@ -801,6 +801,11 @@
 			</set>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.settings.SettingsFactoryUtil" class="com.liferay.portal.settings.SettingsFactoryUtil">
+		<property name="settingsFactory">
+			<bean class="com.liferay.portal.settings.impl.SettingsFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.struts.StrutsActionRegistryUtil" class="com.liferay.portal.struts.StrutsActionRegistryUtil">
 		<property name="strutsActionRegistry">
 			<bean class="com.liferay.portal.struts.StrutsActionRegistryImpl" />

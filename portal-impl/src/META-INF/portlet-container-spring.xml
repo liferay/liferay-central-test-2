@@ -34,9 +34,4 @@
 			<bean class="com.liferay.portlet.PortletURLFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.SettingsFactoryUtil" class="com.liferay.portlet.SettingsFactoryUtil">
-		<property name="settingsFactory">
-			<bean class="com.liferay.portlet.SettingsFactoryImpl" />
-		</property>
-	</bean>
 </beans>
