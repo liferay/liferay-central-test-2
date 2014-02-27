@@ -392,8 +392,18 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 		}
 
 		@Override
+		public void add(S entryWrapper) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
 		public boolean hasNext() {
 			return _listIterator.hasNext();
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return _listIterator.hasPrevious();
 		}
 
 		@Override
@@ -404,8 +414,8 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 		}
 
 		@Override
-		public boolean hasPrevious() {
-			return _listIterator.hasPrevious();
+		public int nextIndex() {
+			return _listIterator.nextIndex();
 		}
 
 		@Override
@@ -413,11 +423,6 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 			EntryWrapper entryWrapper = _listIterator.previous();
 
 			return entryWrapper._service;
-		}
-
-		@Override
-		public int nextIndex() {
-			return _listIterator.nextIndex();
 		}
 
 		@Override
@@ -431,12 +436,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 		}
 
 		@Override
-		public void set(S e) {
-			throw new UnsupportedOperationException();
-		}
-
-		@Override
-		public void add(S e) {
+		public void set(S entryWrapper) {
 			throw new UnsupportedOperationException();
 		}
 
