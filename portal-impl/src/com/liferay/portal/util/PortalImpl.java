@@ -181,6 +181,7 @@ import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.expando.ValueDataException;
@@ -1252,6 +1253,9 @@ public class PortalImpl implements Portal {
 		String canonicalLayoutFriendlyURL = StringPool.BLANK;
 
 		String layoutFriendlyURL = layout.getFriendlyURL(
+			themeDisplay.getLocale());
+
+		String defaultLayoutFriendlyURL = layout.getFriendlyURL(
 			getSiteDefaultLocale(layout.getGroupId()));
 
 		if ((groupFriendlyURL.contains(layoutFriendlyURL) ||
@@ -1259,10 +1263,10 @@ public class PortalImpl implements Portal {
 				StringPool.SLASH + layout.getLayoutId())) &&
 			(!layout.isFirstParent() || Validator.isNotNull(parametersURL))) {
 
-			canonicalLayoutFriendlyURL = layoutFriendlyURL;
+			canonicalLayoutFriendlyURL = defaultLayoutFriendlyURL;
 		}
 		else if (forceLayoutFriendlyURL) {
-			canonicalLayoutFriendlyURL = layoutFriendlyURL;
+			canonicalLayoutFriendlyURL = defaultLayoutFriendlyURL;
 		}
 
 		Group group = layout.getGroup();
@@ -2426,6 +2430,7 @@ public class PortalImpl implements Portal {
 
 		String i18nLanguageId = themeDisplay.getI18nLanguageId();
 		String i18nPath = themeDisplay.getI18nPath();
+		Locale originalLocale = themeDisplay.getLocale();
 
 		try {
 			setThemeDisplayI18n(themeDisplay, locale);
@@ -2433,7 +2438,8 @@ public class PortalImpl implements Portal {
 			return getGroupFriendlyURL(group, privateLayoutSet, themeDisplay);
 		}
 		finally {
-			resetThemeDisplayI18n(themeDisplay, i18nLanguageId, i18nPath);
+			resetThemeDisplayI18n(
+				themeDisplay, i18nLanguageId, i18nPath, originalLocale);
 		}
 	}
 
@@ -2845,6 +2851,7 @@ public class PortalImpl implements Portal {
 
 		String i18nLanguageId = themeDisplay.getI18nLanguageId();
 		String i18nPath = themeDisplay.getI18nPath();
+		Locale originalLocale = themeDisplay.getLocale();
 
 		try {
 			setThemeDisplayI18n(themeDisplay, locale);
@@ -2852,7 +2859,8 @@ public class PortalImpl implements Portal {
 			return getLayoutFriendlyURL(layout, themeDisplay);
 		}
 		finally {
-			resetThemeDisplayI18n(themeDisplay, i18nLanguageId, i18nPath);
+			resetThemeDisplayI18n(
+				themeDisplay, i18nLanguageId, i18nPath, originalLocale);
 		}
 	}
 
@@ -4771,7 +4779,8 @@ public class PortalImpl implements Portal {
 			};
 		}
 		else if (scopeGroup.isLayoutSetPrototype() ||
-				 scopeGroup.isRegularSite()) {
+				 scopeGroup.isOrganization() || scopeGroup.isRegularSite() ||
+				 scopeGroup.isUser()) {
 
 			return new long[] {groupId, companyGroup.getGroupId()};
 		}
@@ -5645,6 +5654,7 @@ public class PortalImpl implements Portal {
 				"BOOKMARKSENTRY$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL." +
 				"BOOKMARKSFOLDER$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.CALENDAR.MODEL.CALEVENT$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL." +
 				"DLFILEENTRY$]",
 			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL." +
@@ -5681,8 +5691,8 @@ public class PortalImpl implements Portal {
 			getClassNameId(BlogsEntry.class),
 			getClassNameId(BookmarksEntry.class),
 			getClassNameId(BookmarksFolder.class),
-			getClassNameId(DLFileEntry.class), getClassNameId(DLFolder.class),
-			getClassNameId(JournalFolder.class),
+			getClassNameId(CalEvent.class), getClassNameId(DLFileEntry.class),
+			getClassNameId(DLFolder.class), getClassNameId(JournalFolder.class),
 			getClassNameId(MBMessage.class), getClassNameId(MBThread.class),
 			getClassNameId(WikiPage.class), ResourceConstants.SCOPE_COMPANY,
 			ResourceConstants.SCOPE_GROUP,
@@ -7620,10 +7630,12 @@ public class PortalImpl implements Portal {
 	}
 
 	protected void resetThemeDisplayI18n(
-		ThemeDisplay themeDisplay, String languageId, String path) {
+		ThemeDisplay themeDisplay, String languageId, String path,
+		Locale locale) {
 
 		themeDisplay.setI18nLanguageId(languageId);
 		themeDisplay.setI18nPath(path);
+		themeDisplay.setLocale(locale);
 	}
 
 	protected void setLocale(
@@ -7654,6 +7666,7 @@ public class PortalImpl implements Portal {
 
 		themeDisplay.setI18nLanguageId(i18nLanguageId);
 		themeDisplay.setI18nPath(i18nPath);
+		themeDisplay.setLocale(locale);
 	}
 
 	private static final String _J_SECURITY_CHECK = "j_security_check";

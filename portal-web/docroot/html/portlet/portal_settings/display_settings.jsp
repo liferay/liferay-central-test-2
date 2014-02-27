@@ -196,6 +196,10 @@
 		}
 
 		for (Theme curTheme: themes) {
+			if (Validator.equals("classic", curTheme.getThemeId())) {
+				continue;
+			}
+
 			if (Validator.equals(defaultControlPanelThemeId, curTheme.getThemeId())) {
 				deployed = true;
 			}

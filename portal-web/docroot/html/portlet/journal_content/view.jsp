@@ -31,13 +31,13 @@ boolean expired = true;
 
 <c:choose>
 	<c:when test="<%= article == null %>">
+
+		<%
+		renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
+		%>
+
 		<c:choose>
 			<c:when test="<%= Validator.isNull(articleId) %>">
-
-				<%
-				renderRequest.setAttribute(WebKeys.PORTLET_CONFIGURATOR_VISIBILITY, Boolean.TRUE);
-				%>
-
 				<div class="alert alert-info">
 					<liferay-ui:message key="select-existing-web-content-or-add-some-web-content-to-be-displayed-in-this-portlet" />
 				</div>
@@ -134,7 +134,7 @@ boolean expired = true;
 												<liferay-ui:icon
 													image="print"
 													label="<%= true %>"
-													message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"hide-accessible", articleDisplay.getTitle()}) %>'
+													message='<%= LanguageUtil.format(pageContext, "print-x-x", new Object[] {"hide-accessible", HtmlUtil.escape(articleDisplay.getTitle())}) %>'
 													url='<%= "javascript:" + renderResponse.getNamespace() + "printPage();" %>'
 												/>
 											</div>

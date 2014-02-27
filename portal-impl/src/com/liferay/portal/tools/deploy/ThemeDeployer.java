@@ -16,6 +16,7 @@ package com.liferay.portal.tools.deploy;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
@@ -121,7 +122,7 @@ public class ThemeDeployer extends BaseDeployer {
 
 		String themeName = filterMap.get("plugin_name");
 
-		filterMap.put("theme_name", themeName);
+		filterMap.put("theme_name", stripCDATA(themeName));
 
 		String liferayVersions = filterMap.get("liferay_versions");
 
@@ -133,6 +134,22 @@ public class ThemeDeployer extends BaseDeployer {
 			"liferay-look-and-feel.xml", srcFile + "/WEB-INF", filterMap, true);
 
 		return filterMap;
+	}
+
+	protected static String stripCDATA(String s) {
+		if (s == null) {
+			return s;
+		}
+
+		if (s.startsWith(StringPool.CDATA_OPEN) &&
+			s.endsWith(StringPool.CDATA_CLOSE)) {
+
+			s = s.substring(
+				StringPool.CDATA_OPEN.length(),
+				s.length() - StringPool.CDATA_CLOSE.length());
+		}
+
+		return s;
 	}
 
 }

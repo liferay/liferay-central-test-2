@@ -48,6 +48,8 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
+import com.liferay.portal.repository.liferayrepository.model.LiferayFileVersion;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.WorkflowDefinitionLinkLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -100,6 +102,22 @@ import javax.servlet.http.HttpServletRequest;
  * @author Julio Camarero
  */
 public class DLImpl implements DL {
+
+	public static FileVersion getLatestFileVersion(
+			FileEntry fileEntry, boolean trusted)
+		throws PortalException, SystemException {
+
+		if (fileEntry instanceof LiferayFileEntry) {
+			LiferayFileEntry liferayFileEntry = (LiferayFileEntry)fileEntry;
+
+			DLFileEntry dlFileEntry = liferayFileEntry.getDLFileEntry();
+
+			return new LiferayFileVersion(
+				dlFileEntry.getLatestFileVersion(trusted));
+		}
+
+		return fileEntry.getLatestFileVersion();
+	}
 
 	@Override
 	public void addPortletBreadcrumbEntries(

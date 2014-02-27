@@ -713,8 +713,8 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 					for (Organization ancestorOrganization :
 							organization.getAncestors()) {
 
-						if (!organization.hasPrivateLayouts() &&
-							!organization.hasPublicLayouts()) {
+						if (!ancestorOrganization.hasPrivateLayouts() &&
+							!ancestorOrganization.hasPublicLayouts()) {
 
 							continue;
 						}

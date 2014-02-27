@@ -56,6 +56,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryMetadataLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.util.DLImpl;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
 import com.liferay.portlet.documentlibrary.util.DLProcessorThreadLocal;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
@@ -370,7 +371,7 @@ public class FileEntryStagedModelDataHandler
 			}
 			else {
 				FileVersion latestExistingFileVersion =
-					existingFileEntry.getLatestFileVersion();
+					DLImpl.getLatestFileVersion(existingFileEntry, true);
 
 				boolean indexEnabled = serviceContext.isIndexingEnabled();
 

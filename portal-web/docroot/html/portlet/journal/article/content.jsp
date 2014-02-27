@@ -168,6 +168,7 @@ if (Validator.isNotNull(content)) {
 		<liferay-ui:error exception="<%= ArticleTitleException.class %>" message="please-enter-a-valid-name" />
 		<liferay-ui:error exception="<%= ArticleVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
 		<liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
+		<liferay-ui:error exception="<%= StorageFieldRequiredException.class %>" message="please-fill-out-all-required-fields" />
 
 		<liferay-ui:error exception="<%= LocaleException.class %>">
 
@@ -628,6 +629,7 @@ if (Validator.isNotNull(content)) {
 				eventName: '<portlet:namespace />selectTemplate',
 				groupId: <%= groupId %>,
 				refererPortletName: '<%= PortletKeys.JOURNAL_CONTENT %>',
+				showGlobalScope: true,
 				struts_action: '/dynamic_data_mapping/select_template',
 				templateId: <%= (ddmTemplate != null) ? ddmTemplate.getTemplateId() : 0 %>,
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "templates") %>'
@@ -699,10 +701,6 @@ if (Validator.isNotNull(content)) {
 							id: windowId,
 							title: '<%= UnicodeLanguageUtil.get(pageContext, "templates") %>',
 
-							<%
-							DDMTemplate curDDMTemplate = DDMTemplateLocalServiceUtil.fetchTemplate(groupId, PortalUtil.getClassNameId(DDMStructure.class), templateId);
-							%>
-
 							<liferay-portlet:renderURL portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>" var="editTemplateURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
 								<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_template" />
 								<portlet:param name="closeRedirect" value="<%= currentURL %>" />
@@ -710,7 +708,7 @@ if (Validator.isNotNull(content)) {
 								<portlet:param name="refererPortletName" value="<%= PortletKeys.JOURNAL %>" />
 								<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 								<portlet:param name="classNameId" value="<%= String.valueOf(classNameId) %>" />
-								<portlet:param name="templateId" value="<%= (curDDMTemplate != null) ? String.valueOf(curDDMTemplate.getTemplateId()) : StringPool.BLANK %>" />
+								<portlet:param name="templateId" value="<%= (ddmTemplate != null) ? String.valueOf(ddmTemplate.getTemplateId()) : StringPool.BLANK %>" />
 							</liferay-portlet:renderURL>
 
 							uri: '<%= editTemplateURL %>'
@@ -734,6 +732,7 @@ if (Validator.isNotNull(content)) {
 						Liferay.Util.openWindow(
 							{
 								id: windowId,
+								refreshWindow: window,
 								title: '<%= UnicodeLanguageUtil.get(pageContext, "structures") %>',
 
 								<liferay-portlet:renderURL portletName="<%= PortletKeys.DYNAMIC_DATA_MAPPING %>" var="editStructureURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">

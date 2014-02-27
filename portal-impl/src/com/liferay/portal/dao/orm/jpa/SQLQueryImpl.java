@@ -122,6 +122,36 @@ public class SQLQueryImpl extends QueryImpl implements SQLQuery {
 	}
 
 	@Override
+	public SQLQuery addSynchronizedEntityClass(Class<?> entityClass) {
+		return this;
+	}
+
+	@Override
+	public SQLQuery addSynchronizedEntityClasses(Class<?>... entityClasses) {
+		return this;
+	}
+
+	@Override
+	public SQLQuery addSynchronizedEntityName(String entityName) {
+		return this;
+	}
+
+	@Override
+	public SQLQuery addSynchronizedEntityNames(String... entityNames) {
+		return this;
+	}
+
+	@Override
+	public SQLQuery addSynchronizedQuerySpace(String querySpace) {
+		return this;
+	}
+
+	@Override
+	public SQLQuery addSynchronizedQuerySpaces(String... querySpaces) {
+		return this;
+	}
+
+	@Override
 	public List<?> list(boolean copy, boolean unmodifiable)
 		throws ORMException {
 

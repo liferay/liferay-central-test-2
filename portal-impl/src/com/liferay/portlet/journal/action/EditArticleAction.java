@@ -48,6 +48,7 @@ import com.liferay.portlet.asset.AssetTagException;
 import com.liferay.portlet.assetpublisher.util.AssetPublisherUtil;
 import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 import com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
+import com.liferay.portlet.dynamicdatamapping.StorageFieldRequiredException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -233,6 +234,12 @@ public class EditArticleAction extends PortletAction {
 				redirect = getSaveAndContinueRedirect(
 					portletConfig, actionRequest, article, redirect);
 
+				if (cmd.equals(Constants.PREVIEW)) {
+					SessionMessages.add(actionRequest, "previewRequested");
+
+					hideDefaultSuccessMessage(actionRequest);
+				}
+
 				sendRedirect(actionRequest, actionResponse, redirect);
 			}
 			else {
@@ -284,7 +291,8 @@ public class EditArticleAction extends PortletAction {
 					 e instanceof ArticleTitleException ||
 					 e instanceof ArticleTypeException ||
 					 e instanceof ArticleVersionException ||
-					 e instanceof DuplicateArticleIdException) {
+					 e instanceof DuplicateArticleIdException ||
+					 e instanceof StorageFieldRequiredException) {
 
 				SessionErrors.add(actionRequest, e.getClass());
 			}
@@ -426,8 +434,6 @@ public class EditArticleAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
-
 		String referringPortletResource = ParamUtil.getString(
 			actionRequest, "referringPortletResource");
 
@@ -438,7 +444,6 @@ public class EditArticleAction extends PortletAction {
 			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");
-		portletURL.setParameter(Constants.CMD, cmd, false);
 		portletURL.setParameter("redirect", redirect, false);
 		portletURL.setParameter(
 			"referringPortletResource", referringPortletResource, false);

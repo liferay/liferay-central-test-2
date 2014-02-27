@@ -1680,10 +1680,7 @@ public class PortletImporter {
 		PortletDataHandler portletDataHandler =
 			portlet.getPortletDataHandlerInstance();
 
-		if (importData ||
-			(portletDataHandler.isDisplayPortlet() &&
-			 !MergeLayoutPrototypesThreadLocal.isInProgress())) {
-
+		if (importData || !MergeLayoutPrototypesThreadLocal.isInProgress()) {
 			PortletPreferencesLocalServiceUtil.updatePreferences(
 				ownerId, ownerType, plid, portletId, xml);
 

@@ -14,12 +14,21 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeException;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsValues;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Brian Wing Shun Chan
@@ -27,6 +36,45 @@ import com.liferay.portal.util.PropsValues;
  * @author Raymond Augé
  */
 public class UpgradeProcessUtil {
+
+	public static String getDefaultLanguageId(long companyId) throws Exception {
+		String languageId = _languageIds.get(companyId);
+
+		if (languageId != null) {
+			return languageId;
+		}
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select languageId from User_ where companyId = ? and " +
+					"defaultUser = ?");
+
+			ps.setLong(1, companyId);
+			ps.setBoolean(2, true);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				languageId = rs.getString("languageId");
+
+				_languageIds.put(companyId, languageId);
+
+				return languageId;
+			}
+			else {
+				return StringPool.BLANK;
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
 
 	public static boolean isCreateIGImageDocumentType() {
 		return _createIGImageDocumentType;
@@ -134,5 +182,6 @@ public class UpgradeProcessUtil {
 	private static Log _log = LogFactoryUtil.getLog(UpgradeProcessUtil.class);
 
 	private static boolean _createIGImageDocumentType = false;
+	private static Map<Long, String> _languageIds = new HashMap<Long, String>();
 
 }

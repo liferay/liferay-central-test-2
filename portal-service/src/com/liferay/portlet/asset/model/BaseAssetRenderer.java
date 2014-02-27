@@ -184,7 +184,6 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		editPortletURL.setDoAsGroupId(getGroupId());
 
 		editPortletURL.setParameter("redirect", redirectURL.toString());
-		editPortletURL.setParameter("originalRedirect", redirectURL.toString());
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 

@@ -69,6 +69,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
+import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
@@ -292,11 +293,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread = mbThreadPersistence.fetchByPrimaryKey(threadId);
 		}
 
-		if ((thread == null) ||
+		if ((thread == null) &&
 			(parentMessageId == MBMessageConstants.DEFAULT_PARENT_MESSAGE_ID)) {
 
 			thread = mbThreadLocalService.addThread(
 				categoryId, message, serviceContext);
+		}
+		else if (thread == null) {
+			throw new NoSuchThreadException();
 		}
 
 		if ((priority != MBThreadConstants.PRIORITY_NOT_GIVEN) &&
@@ -1684,17 +1688,18 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							}
 
 							socialActivityLocalService.addActivity(
-								userId, message.getGroupId(),
+								message.getUserId(), message.getGroupId(),
 								MBMessage.class.getName(),
 								message.getMessageId(),
 								MBActivityKeys.ADD_MESSAGE,
 								extraDataJSONObject.toString(), receiverUserId);
 
 							if ((parentMessage != null) &&
-								(receiverUserId != userId)) {
+								(receiverUserId != message.getUserId())) {
 
 								socialActivityLocalService.addActivity(
-									userId, parentMessage.getGroupId(),
+									message.getUserId(),
+									parentMessage.getGroupId(),
 									MBMessage.class.getName(),
 									parentMessage.getMessageId(),
 									MBActivityKeys.REPLY_MESSAGE,
@@ -1721,8 +1726,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 									"messageId", message.getMessageId());
 
 								socialActivityLocalService.addActivity(
-									userId, assetEntry.getGroupId(), className,
-									classPK,
+									message.getUserId(),
+									assetEntry.getGroupId(), className, classPK,
 									SocialActivityConstants.TYPE_ADD_COMMENT,
 									extraDataJSONObject.toString(),
 									assetEntry.getUserId());

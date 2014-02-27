@@ -1775,6 +1775,10 @@ public class StagingImpl implements Staging {
 			long groupId, boolean privateLayout, Date lastPublishDate)
 		throws Exception {
 
+		if (lastPublishDate == null) {
+			lastPublishDate = new Date();
+		}
+
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 			groupId, privateLayout);
 
@@ -1794,6 +1798,10 @@ public class StagingImpl implements Staging {
 			String portletId, PortletPreferences portletPreferences,
 			Date lastPublishDate)
 		throws Exception {
+
+		if (lastPublishDate == null) {
+			lastPublishDate = new Date();
+		}
 
 		try {
 			portletPreferences.setValue(

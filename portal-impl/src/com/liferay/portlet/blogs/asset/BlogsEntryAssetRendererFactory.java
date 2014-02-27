@@ -24,7 +24,6 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletURLFactoryUtil;
 import com.liferay.portlet.asset.model.AssetRenderer;
 import com.liferay.portlet.asset.model.BaseAssetRendererFactory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -83,9 +82,8 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	@Override
 	public PortletURL getURLAdd(
-			LiferayPortletRequest liferayPortletRequest,
-			LiferayPortletResponse liferayPortletResponse)
-		throws PortalException, SystemException {
+		LiferayPortletRequest liferayPortletRequest,
+		LiferayPortletResponse liferayPortletResponse) {
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
@@ -98,9 +96,8 @@ public class BlogsEntryAssetRendererFactory extends BaseAssetRendererFactory {
 			return null;
 		}
 
-		PortletURL portletURL = PortletURLFactoryUtil.create(
-			liferayPortletRequest, PortletKeys.BLOGS,
-			getControlPanelPlid(themeDisplay), PortletRequest.RENDER_PHASE);
+		PortletURL portletURL = liferayPortletResponse.createRenderURL(
+			PortletKeys.BLOGS);
 
 		portletURL.setParameter("struts_action", "/blogs/edit_entry");
 
