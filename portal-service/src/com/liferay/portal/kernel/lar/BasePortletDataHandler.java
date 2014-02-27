@@ -361,6 +361,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 	}
 
+	@Override
 	public boolean isDataAlwaysStaged() {
 		return _dataAlwaysStaged;
 	}
