@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.language.LanguageResources;
-import com.liferay.portlet.Settings;
+import com.liferay.portal.settings.Settings;
 
 import java.util.HashMap;
 import java.util.Locale;

@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
 import com.liferay.portal.kernel.xml.Document;
-import com.liferay.portlet.Settings;
+import com.liferay.portal.settings.Settings;
 
 import java.util.ArrayList;
 import java.util.Collections;
