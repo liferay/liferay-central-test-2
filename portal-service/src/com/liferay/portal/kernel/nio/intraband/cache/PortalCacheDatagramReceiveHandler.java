@@ -38,9 +38,10 @@ public class PortalCacheDatagramReceiveHandler
 	extends BaseAsyncDatagramReceiveHandler {
 
 	public PortalCacheDatagramReceiveHandler() throws RemoteException {
-		_portalCacheManager = (PortalCacheManager<Serializable, Serializable>)
-			PortalBeanLocatorUtil.locate(
-				_MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
+		_portalCacheManager =
+			(PortalCacheManager<Serializable, Serializable>)
+				PortalBeanLocatorUtil.locate(
+					_MULTI_VM_PORTAL_CACHE_MANAGER_BEAN_NAME);
 	}
 
 	@Override
