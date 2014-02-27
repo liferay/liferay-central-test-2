@@ -217,6 +217,7 @@ if (!defaultFolderView && (folder != null) && portletName.equals(PortletKeys.DOC
 			%>
 
 			decimalSeparator: '<%= decimalFormatSymbols.getDecimalSeparator() %>',
+
 			folders: {
 				defaultParams: {
 					p_p_id: <%= HtmlUtil.escapeJS(portletId) %>,

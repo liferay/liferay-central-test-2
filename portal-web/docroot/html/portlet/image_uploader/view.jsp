@@ -96,6 +96,7 @@ String randomNamespace = ParamUtil.getString(request, "randomNamespace");
 					%>
 
 					decimalSeparator: '<%= decimalFormatSymbols.getDecimalSeparator() %>',
+
 					maxFileSize: <%= maxFileSize %>,
 					namespace: '<portlet:namespace />',
 					on: {

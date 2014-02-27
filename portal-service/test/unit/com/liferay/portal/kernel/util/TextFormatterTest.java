@@ -195,7 +195,6 @@ public class TextFormatterTest {
 
 		Assert.assertEquals(
 			"1GB", TextFormatter.formatStorageSize(bytes, LocaleUtil.SPAIN));
-
 		Assert.assertEquals(
 			"1GB", TextFormatter.formatStorageSize(bytes, LocaleUtil.US));
 	}
@@ -206,7 +205,6 @@ public class TextFormatterTest {
 
 		Assert.assertEquals(
 			"1k", TextFormatter.formatStorageSize(bytes, LocaleUtil.SPAIN));
-
 		Assert.assertEquals(
 			"1k", TextFormatter.formatStorageSize(bytes, LocaleUtil.US));
 	}
@@ -217,7 +215,6 @@ public class TextFormatterTest {
 
 		Assert.assertEquals(
 			"1MB", TextFormatter.formatStorageSize(bytes, LocaleUtil.SPAIN));
-
 		Assert.assertEquals(
 			"1MB", TextFormatter.formatStorageSize(bytes, LocaleUtil.US));
 	}
