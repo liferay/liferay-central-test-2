@@ -153,7 +153,9 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public S get(int index) {
-		return _services.get(index).service;
+		EntryWrapper entryWrapper = _services.get(index);
+
+		return entryWrapper._service;
 	}
 
 	@Override
@@ -227,12 +229,12 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 	@Override
 	public java.util.List<S> subList(int fromIndex, int toIndex) {
-		List<EntryWrapper> subList = _services.subList(fromIndex, toIndex);
-
 		List<S> list = new ArrayList<S>();
 
+		List<EntryWrapper> subList = _services.subList(fromIndex, toIndex);
+
 		for (EntryWrapper entryWrapper : subList) {
-			list.add(entryWrapper.service);
+			list.add(entryWrapper._service);
 		}
 
 		return list;
@@ -346,16 +348,15 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 				serviceReference, service);
 
 			synchronized(_services) {
-				int position = Collections.binarySearch(
-					_services, entryWrapper);
+				int index = Collections.binarySearch(_services, entryWrapper);
 
 				if (remove) {
-					if (position >= 0) {
-						_services.remove(position);
+					if (index >= 0) {
+						_services.remove(index);
 					}
 				}
-				else if (position < 0) {
-					_services.add(((-position) - 1), entryWrapper);
+				else if (index < 0) {
+					_services.add(((-index) - 1), entryWrapper);
 				}
 			}
 		}
@@ -367,21 +368,20 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	private class EntryWrapper implements Comparable<EntryWrapper> {
 
 		public EntryWrapper(ServiceReference<S> serviceReference, S service) {
-			this.serviceReference = serviceReference;
-			this.service = service;
+			_serviceReference = serviceReference;
+			_service = service;
 		}
 
 		@Override
 		public int compareTo(EntryWrapper entryWrapper) {
 
-			// Note the order is deliberately reversed
+			// The order is deliberately reversed
 
-			return entryWrapper.serviceReference.compareTo(
-				this.serviceReference);
+			return entryWrapper._serviceReference.compareTo(_serviceReference);
 		}
 
-		S service;
-		ServiceReference<S> serviceReference;
+		private S _service;
+		private ServiceReference<S> _serviceReference;
 
 	}
 
@@ -398,7 +398,9 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 		@Override
 		public S next() {
-			return _listIterator.next().service;
+			EntryWrapper entryWrapper = _listIterator.next();
+
+			return entryWrapper._service;
 		}
 
 		@Override
@@ -408,7 +410,9 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 
 		@Override
 		public S previous() {
-			return _listIterator.previous().service;
+			EntryWrapper entryWrapper = _listIterator.previous();
+
+			return entryWrapper._service;
 		}
 
 		@Override
@@ -436,7 +440,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 			throw new UnsupportedOperationException();
 		}
 
-		ListIterator<EntryWrapper> _listIterator;
+		private ListIterator<EntryWrapper> _listIterator;
 
 	}
 
