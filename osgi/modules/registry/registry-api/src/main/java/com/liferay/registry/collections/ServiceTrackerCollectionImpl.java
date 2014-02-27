@@ -392,7 +392,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 		}
 
 		@Override
-		public void add(S entryWrapper) {
+		public void add(S service) {
 			throw new UnsupportedOperationException();
 		}
 
@@ -436,7 +436,7 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 		}
 
 		@Override
-		public void set(S entryWrapper) {
+		public void set(S service) {
 			throw new UnsupportedOperationException();
 		}
 
