@@ -47,15 +47,13 @@ public class ExportImportConfigurationTestUtil {
 			long groupId, int type, Map<String, Serializable> settingsMap)
 		throws Exception {
 
-		long userId = TestPropsValues.getUserId();
-
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
-				userId, groupId, "name", "description", type, settingsMap,
-				serviceContext);
+				TestPropsValues.getUserId(), groupId, "name", "description",
+				type, settingsMap, serviceContext);
 	}
 
 	public static Map<String, Serializable> getDefaultSettingsMap(
