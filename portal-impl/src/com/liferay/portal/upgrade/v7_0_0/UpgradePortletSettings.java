@@ -29,11 +29,10 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		for (Map.Entry<String, String> serviceNameMapEntry :
-				_serviceNameMap.entrySet()) {
+		for (Map.Entry<String, String> entry : _serviceNames.entrySet()) {
 
-			String portletId = serviceNameMapEntry.getKey();
-			String serviceName = serviceNameMapEntry.getValue();
+			String portletId = entry.getKey();
+			String serviceName = entry.getValue();
 
 			upgradePortletSettings(portletId, serviceName);
 		}
@@ -55,11 +54,11 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		runSQL(sb.toString());
 	}
 
-	private static Map<String, String> _serviceNameMap =
+	private static Map<String, String> _serviceNames =
 		new HashMap<String, String>();
 
 	static {
-		_serviceNameMap.put("19", MBConstants.SERVICE_NAME);
+		_serviceNames.put(PortletKeys.MESSAGE_BOARDS, MBConstants.SERVICE_NAME);
 	}
 
 }
