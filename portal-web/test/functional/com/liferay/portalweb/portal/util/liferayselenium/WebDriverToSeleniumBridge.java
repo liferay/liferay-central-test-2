@@ -791,8 +791,7 @@ public class WebDriverToSeleniumBridge
 		try {
 			WebDriverWait webDriverWait = new WebDriverWait(this, 1);
 
-			Alert alert = webDriverWait.until(
-				ExpectedConditions.alertIsPresent());
+			webDriverWait.until(ExpectedConditions.alertIsPresent());
 
 			alertPresent = true;
 		}
