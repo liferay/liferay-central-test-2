@@ -158,10 +158,9 @@ public class SetUtil {
 		return set;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static <E> Set<E> fromCollection(Collection<? extends E> c) {
 		if ((c != null) && Set.class.isAssignableFrom(c.getClass())) {
-			return (Set)c;
+			return (Set<E>)c;
 		}
 
 		if ((c == null) || (c.size() == 0)) {
