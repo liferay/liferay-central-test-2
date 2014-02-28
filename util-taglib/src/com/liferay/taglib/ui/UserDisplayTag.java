@@ -15,6 +15,7 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -96,16 +97,16 @@ public class UserDisplayTag extends TagSupport {
 		}
 	}
 
-	public void setDisplayStyle(int displayStyle) {
-		_displayStyle = displayStyle;
+	public void setDisplayStyle(Object displayStyle) {
+		_displayStyle = GetterUtil.getInteger(displayStyle);
 	}
 
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
 	}
 
-	public void setHeight(int height) {
-		_height = height;
+	public void setHeight(Object height) {
+		_height = GetterUtil.getInteger(height);
 	}
 
 	public void setStartPage(String startPage) {
@@ -124,8 +125,8 @@ public class UserDisplayTag extends TagSupport {
 		_userName = userName;
 	}
 
-	public void setWidth(int width) {
-		_width = width;
+	public void setWidth(Object width) {
+		_width = GetterUtil.getInteger(width);
 	}
 
 	protected String getEndPage() {
