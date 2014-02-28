@@ -64,6 +64,7 @@ public class ExportImportConfigurationTestUtil {
 		User user = UserLocalServiceUtil.getUser(userId);
 
 		Date startDate = new Date();
+
 		Date endDate = startDate;
 
 		return ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
