@@ -27,6 +27,10 @@ import java.util.Map;
  */
 public class UpgradePortletSettings extends UpgradeProcess {
 
+	public UpgradePortletSettings() {
+		_serviceNames.put(PortletKeys.MESSAGE_BOARDS, MBConstants.SERVICE_NAME);
+	}
+
 	@Override
 	protected void doUpgrade() throws Exception {
 		for (Map.Entry<String, String> entry : _serviceNames.entrySet()) {
@@ -54,11 +58,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		runSQL(sb.toString());
 	}
 
-	private static Map<String, String> _serviceNames =
-		new HashMap<String, String>();
-
-	static {
-		_serviceNames.put(PortletKeys.MESSAGE_BOARDS, MBConstants.SERVICE_NAME);
-	}
+	private Map<String, String> _serviceNames = new HashMap<String, String>();
 
 }
