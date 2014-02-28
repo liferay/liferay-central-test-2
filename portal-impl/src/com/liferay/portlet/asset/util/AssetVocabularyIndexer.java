@@ -71,11 +71,11 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 			long entryClassPK, String actionId)
 		throws Exception {
 
-		AssetVocabulary assetVocabulary =
+		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.getVocabulary(entryClassPK);
 
 		return AssetVocabularyPermission.contains(
-			permissionChecker, assetVocabulary, ActionKeys.VIEW);
+			permissionChecker, vocabulary, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -88,36 +88,36 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 
 	@Override
 	protected void doDelete(Object obj) throws Exception {
-		AssetVocabulary assetVocabulary = (AssetVocabulary)obj;
+		AssetVocabulary vocabulary = (AssetVocabulary)obj;
 
 		Document document = new DocumentImpl();
 
-		document.addUID(PORTLET_ID, assetVocabulary.getVocabularyId());
+		document.addUID(PORTLET_ID, vocabulary.getVocabularyId());
 
 		SearchEngineUtil.deleteDocument(
-			getSearchEngineId(), assetVocabulary.getCompanyId(),
+			getSearchEngineId(), vocabulary.getCompanyId(),
 			document.get(Field.UID));
 	}
 
 	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
-		AssetVocabulary assetVocabulary = (AssetVocabulary)obj;
+		AssetVocabulary vocabulary = (AssetVocabulary)obj;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing vocabulary " + assetVocabulary);
+			_log.debug("Indexing vocabulary " + vocabulary);
 		}
 
-		Document document = getBaseModelDocument(PORTLET_ID, assetVocabulary);
+		Document document = getBaseModelDocument(PORTLET_ID, vocabulary);
 
 		document.addKeyword(
-			Field.ASSET_VOCABULARY_ID, assetVocabulary.getVocabularyId());
+			Field.ASSET_VOCABULARY_ID, vocabulary.getVocabularyId());
 		document.addLocalizedText(
-			Field.DESCRIPTION, assetVocabulary.getDescriptionMap());
-		document.addText(Field.NAME, assetVocabulary.getName());
-		document.addLocalizedText(Field.TITLE, assetVocabulary.getTitleMap());
+			Field.DESCRIPTION, vocabulary.getDescriptionMap());
+		document.addText(Field.NAME, vocabulary.getName());
+		document.addLocalizedText(Field.TITLE, vocabulary.getTitleMap());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + assetVocabulary + " indexed successfully");
+			_log.debug("Document " + vocabulary + " indexed successfully");
 		}
 
 		return document;
@@ -133,29 +133,29 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 
 	@Override
 	protected void doReindex(Object obj) throws Exception {
-		AssetVocabulary assetVocabulary = (AssetVocabulary)obj;
+		AssetVocabulary vocabulary = (AssetVocabulary)obj;
 
-		Document document = getDocument(assetVocabulary);
+		Document document = getDocument(vocabulary);
 
 		if (document != null) {
 			SearchEngineUtil.updateDocument(
-				getSearchEngineId(), assetVocabulary.getCompanyId(), document);
+				getSearchEngineId(), vocabulary.getCompanyId(), document);
 		}
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		AssetVocabulary assetVocabulary =
+		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.getVocabulary(classPK);
 
-		doReindex(assetVocabulary);
+		doReindex(vocabulary);
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexAssetVocabularies(companyId);
+		reindexVocabularies(companyId);
 	}
 
 	@Override
@@ -163,7 +163,7 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexAssetVocabularies(final long companyId)
+	protected void reindexVocabularies(final long companyId)
 		throws PortalException, SystemException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
@@ -179,6 +179,7 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 					addDocument(document);
 				}
 			}
+
 		};
 
 		actionableDynamicQuery.setCompanyId(companyId);

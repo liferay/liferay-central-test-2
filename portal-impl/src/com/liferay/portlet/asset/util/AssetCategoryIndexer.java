@@ -73,11 +73,11 @@ public class AssetCategoryIndexer extends BaseIndexer {
 			long entryClassPK, String actionId)
 		throws Exception {
 
-		AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(
+		AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(
 			entryClassPK);
 
 		return AssetCategoryPermission.contains(
-			permissionChecker, assetCategory, ActionKeys.VIEW);
+			permissionChecker, category, ActionKeys.VIEW);
 	}
 
 	@Override
@@ -124,25 +124,24 @@ public class AssetCategoryIndexer extends BaseIndexer {
 
 	@Override
 	protected Document doGetDocument(Object obj) throws Exception {
-		AssetCategory assetCategory = (AssetCategory)obj;
+		AssetCategory category = (AssetCategory)obj;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing category " + assetCategory);
+			_log.debug("Indexing category " + category);
 		}
 
-		Document document = getBaseModelDocument(PORTLET_ID, assetCategory);
+		Document document = getBaseModelDocument(PORTLET_ID, category);
 
+		document.addKeyword(Field.ASSET_CATEGORY_ID, category.getCategoryId());
 		document.addKeyword(
-			Field.ASSET_CATEGORY_ID, assetCategory.getCategoryId());
-		document.addKeyword(
-			Field.ASSET_VOCABULARY_ID, assetCategory.getVocabularyId());
+			Field.ASSET_VOCABULARY_ID, category.getVocabularyId());
 		document.addLocalizedText(
-			Field.DESCRIPTION, assetCategory.getDescriptionMap());
-		document.addText(Field.NAME, assetCategory.getName());
-		document.addLocalizedText(Field.TITLE, assetCategory.getTitleMap());
+			Field.DESCRIPTION, category.getDescriptionMap());
+		document.addText(Field.NAME, category.getName());
+		document.addLocalizedText(Field.TITLE, category.getTitleMap());
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Document " + assetCategory + " indexed successfully");
+			_log.debug("Document " + category + " indexed successfully");
 		}
 
 		return document;
@@ -158,29 +157,29 @@ public class AssetCategoryIndexer extends BaseIndexer {
 
 	@Override
 	protected void doReindex(Object obj) throws Exception {
-		AssetCategory assetCategory = (AssetCategory)obj;
+		AssetCategory category = (AssetCategory)obj;
 
-		Document document = getDocument(assetCategory);
+		Document document = getDocument(category);
 
 		if (document != null) {
 			SearchEngineUtil.updateDocument(
-				getSearchEngineId(), assetCategory.getCompanyId(), document);
+				getSearchEngineId(), category.getCompanyId(), document);
 		}
 	}
 
 	@Override
 	protected void doReindex(String className, long classPK) throws Exception {
-		AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(
+		AssetCategory category = AssetCategoryLocalServiceUtil.getCategory(
 			classPK);
 
-		doReindex(assetCategory);
+		doReindex(category);
 	}
 
 	@Override
 	protected void doReindex(String[] ids) throws Exception {
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		reindexAssetCategories(companyId);
+		reindexCategories(companyId);
 	}
 
 	@Override
@@ -188,7 +187,7 @@ public class AssetCategoryIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
-	protected void reindexAssetCategories(final long companyId)
+	protected void reindexCategories(final long companyId)
 		throws PortalException, SystemException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
@@ -196,9 +195,9 @@ public class AssetCategoryIndexer extends BaseIndexer {
 
 			@Override
 			protected void performAction(Object object) throws PortalException {
-				AssetCategory assetCategory = (AssetCategory)object;
+				AssetCategory category = (AssetCategory)object;
 
-				Document document = getDocument(assetCategory);
+				Document document = getDocument(category);
 
 				if (document != null) {
 					addDocument(document);
