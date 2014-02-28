@@ -171,7 +171,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 
 	@Override
 	public List<AssetVocabulary> getGroupsVocabularies(long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getGroupsVocabularies(groupIds, null);
 	}
@@ -179,7 +179,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	@Override
 	public List<AssetVocabulary> getGroupsVocabularies(
 			long[] groupIds, String className)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<AssetVocabulary> vocabularies =
 			assetVocabularyPersistence.filterFindByGroupId(groupIds);
@@ -241,7 +241,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 
 	@Override
 	public List<AssetVocabulary> getGroupVocabularies(long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetVocabularyPersistence.filterFindByGroupId(groupIds);
 	}
@@ -260,7 +260,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 
 	@Override
 	public int getGroupVocabulariesCount(long[] groupIds)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return assetVocabularyPersistence.filterCountByGroupId(groupIds);
 	}
