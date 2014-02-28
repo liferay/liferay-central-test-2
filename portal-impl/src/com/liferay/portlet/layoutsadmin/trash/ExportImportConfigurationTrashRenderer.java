@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.trash.BaseTrashRenderer;
 import com.liferay.portal.model.ExportImportConfiguration;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.WebKeys;
 
 import java.util.Locale;
 
@@ -79,7 +80,7 @@ public class ExportImportConfigurationTrashRenderer extends BaseTrashRenderer {
 		throws Exception {
 
 		renderRequest.setAttribute(
-			"exportImportConfigurationId",
+			WebKeys.EXPORT_IMPORT_CONFIGURATION_ID,
 			_exportImportConfiguration.getExportImportConfigurationId());
 
 		return "/html/portlet/layouts_admin/view_configuration.jsp";
