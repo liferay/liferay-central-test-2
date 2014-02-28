@@ -73,13 +73,12 @@ public class UserDisplayTag extends TagSupport {
 				pageContext.removeAttribute("userDisplay");
 			}
 
-			request.setAttribute("liferay-ui:user-display:url", _url);
 			request.setAttribute(
 				"liferay-ui:user-display:displayStyle",
 				String.valueOf(_displayStyle));
-
 			request.setAttribute(
 				"liferay-ui:user-display:height", String.valueOf(_height));
+			request.setAttribute("liferay-ui:user-display:url", _url);
 			request.setAttribute(
 				"liferay-ui:user-display:width", String.valueOf(_width));
 
