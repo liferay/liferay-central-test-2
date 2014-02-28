@@ -15,6 +15,8 @@
 package com.liferay.portal.kernel.test;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import org.junit.Assume;
 
@@ -28,9 +30,8 @@ public class FixedIssuesUtils {
 	}
 
 	private FixedIssuesUtils() {
-		String property = System.getProperty("fixed.issues", "");
-
-		_fixedIssues = property.split(",");
+		_fixedIssues = StringUtil.split(
+			GetterUtil.getString(System.getProperty("fixed.issues")));
 	}
 
 	private static FixedIssuesUtils _instance = new FixedIssuesUtils();
