@@ -29,31 +29,23 @@ import javax.portlet.ReadOnlyException;
  */
 public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
-	protected boolean getEmailHtmlFormat(
-		PortletPreferences portletPreferences) {
-
-		String emailHtmlFormat = portletPreferences.getValue(
-			"emailHtmlFormat", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailHtmlFormat)) {
-			return GetterUtil.getBoolean(emailHtmlFormat);
-		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_HTML_FORMAT;
-		}
-	}
-
 	protected String getEmailSignatureSeparator(
 		PortletPreferences portletPreferences) {
 
-		boolean emailHtmlFormat = getEmailHtmlFormat(portletPreferences);
+		boolean emailHtmlFormat = PropsValues.MESSAGE_BOARDS_EMAIL_HTML_FORMAT;
+
+		String emailHtmlFormatString = portletPreferences.getValue(
+			"emailHtmlFormat", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailHtmlFormatString)) {
+			emailHtmlFormat = GetterUtil.getBoolean(emailHtmlFormatString);
+		}
 
 		if (emailHtmlFormat) {
 			return "<br />--<br />";
 		}
-		else {
-			return "\n--\n";
-		}
+
+		return "\n--\n";
 	}
 
 	@Override
@@ -98,13 +90,10 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 
 		upgradeEmailSignature(
 			portletPreferences, "emailMessageAddedBody",
-			"emailMessageAddedSignature"
-		);
-
+			"emailMessageAddedSignature");
 		upgradeEmailSignature(
 			portletPreferences, "emailMessageUpdatedBody",
-			"emailMessageUpdatedSignature"
-		);
+			"emailMessageUpdatedSignature");
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
 	}

@@ -27,6 +27,12 @@ import javax.portlet.ReadOnlyException;
  */
 public class UpgradeWiki extends BaseUpgradePortletPreferences {
 
+	protected String getEmailSignatureSeparator(
+		PortletPreferences portletPreferences) {
+
+		return StringPool.NEW_LINE;
+	}
+
 	@Override
 	protected String[] getPortletIds() {
 		return new String[] {"36"};
@@ -45,8 +51,10 @@ public class UpgradeWiki extends BaseUpgradePortletPreferences {
 			String emailMessageBody = portletPreferences.getValue(
 				emailMessageBodyPortletPreferencesKey, StringPool.BLANK);
 
-			emailMessageBody =
-				emailMessageBody + StringPool.NEW_LINE + emailMessageSignature;
+			String signatureSeparator = getEmailSignatureSeparator(
+				portletPreferences);
+
+			emailMessageBody += signatureSeparator + emailMessageSignature;
 
 			portletPreferences.setValue(
 				emailMessageBodyPortletPreferencesKey, emailMessageBody);
@@ -68,7 +76,6 @@ public class UpgradeWiki extends BaseUpgradePortletPreferences {
 		upgradeEmailSignature(
 			portletPreferences, "emailPageAddedBody",
 			"emailPageAddedSignature");
-
 		upgradeEmailSignature(
 			portletPreferences, "emailPageUpdatedBody",
 			"emailPageUpdatedSignature");
