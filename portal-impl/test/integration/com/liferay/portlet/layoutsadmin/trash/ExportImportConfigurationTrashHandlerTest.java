@@ -169,7 +169,7 @@ public class ExportImportConfigurationTrashHandlerTest
 
 		Group group = (Group)parentBaseModel;
 
-		return ExportImportConfigurationTestUtil.addConfiguration(
+		return ExportImportConfigurationTestUtil.addExportImportConfiguration(
 			group.getGroupId(),
 			ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT);
 	}

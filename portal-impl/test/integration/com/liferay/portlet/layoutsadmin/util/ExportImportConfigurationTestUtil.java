@@ -33,17 +33,17 @@ import java.util.Map;
  */
 public class ExportImportConfigurationTestUtil {
 
-	public static ExportImportConfiguration addConfiguration(
+	public static ExportImportConfiguration addExportImportConfiguration(
 			long groupId, int type)
 		throws Exception {
 
 		Map<String, Serializable> settingsMap = getDefaultSettingsMap(
 			TestPropsValues.getUserId(), groupId);
 
-		return addConfiguration(groupId, type, settingsMap);
+		return addExportImportConfiguration(groupId, type, settingsMap);
 	}
 
-	public static ExportImportConfiguration addConfiguration(
+	public static ExportImportConfiguration addExportImportConfiguration(
 			long groupId, int type, Map<String, Serializable> settingsMap)
 		throws Exception {
 
