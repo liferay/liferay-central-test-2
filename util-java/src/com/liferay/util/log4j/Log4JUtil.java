@@ -62,23 +62,23 @@ import org.dom4j.io.SAXReader;
 public class Log4JUtil {
 
 	public static void configureLog4J(ClassLoader classLoader) {
-		if (_isLog4jCleanUp()) {
+		if (_isLog4jCleanup()) {
 			Runtime runtime = Runtime.getRuntime();
 
-			final File liferayHomeDir = new File(_getLiferayHome());
+			final File liferayHome = new File(_getLiferayHome());
 
 			runtime.addShutdownHook(
 				new Thread() {
 
 					@Override
 					public void run() {
-						Queue<File> queue = new LinkedList<File>();
+						Queue<File> fileQueue = new LinkedList<File>();
 
-						queue.offer(liferayHomeDir);
+						fileQueue.offer(liferayHome);
 
 						File file = null;
 
-						while ((file = queue.poll()) != null) {
+						while ((file = fileQueue.poll()) != null) {
 							if (file.isFile()) {
 								file.delete();
 							}
@@ -89,8 +89,8 @@ public class Log4JUtil {
 									file.delete();
 								}
 								else {
-									queue.addAll(Arrays.asList(files));
-									queue.add(file);
+									fileQueue.addAll(Arrays.asList(files));
+									fileQueue.add(file);
 								}
 							}
 						}
@@ -351,18 +351,18 @@ public class Log4JUtil {
 		return urlContent;
 	}
 
-	private static boolean _isLog4jCleanUp() {
-		if (_log4jCleanUp == null) {
-			_log4jCleanUp = GetterUtil.getBoolean(
-				PropsUtil.get(PropsKeys.LOG4J_CLEAN_UP));
+	private static boolean _isLog4jCleanup() {
+		if (_log4jCleanup == null) {
+			_log4jCleanup = GetterUtil.getBoolean(
+				PropsUtil.get(PropsKeys.LOG4J_CLEANUP), false);
 		}
 
-		return _log4jCleanUp;
+		return _log4jCleanup;
 	}
 
 	private static Map<String, String> _customLogSettings =
 		new ConcurrentHashMap<String, String>();
 	private static String _liferayHome;
-	private static Boolean _log4jCleanUp;
+	private static Boolean _log4jCleanup;
 
 }
