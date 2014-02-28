@@ -291,13 +291,17 @@ public class VerifyProperties extends VerifyProcess {
 		"lucene.store.jdbc.dialect.mysql", "lucene.store.jdbc.dialect.oracle",
 		"lucene.store.jdbc.dialect.postgresql",
 		"memory.cluster.scheduler.lock.cache.enabled",
+		"message.boards.email.message.added.signature",
+		"message.boards.email.message.updated.signature",
 		"message.boards.thread.locking.enabled", "portal.ctx",
 		"portal.security.manager.enable", "permissions.user.check.algorithm",
 		"persistence.provider", "scheduler.classes", "schema.run.minimal",
 		"shard.available.names", "velocity.engine.resource.manager",
 		"velocity.engine.resource.manager.cache.enabled",
 		"webdav.storage.class", "webdav.storage.show.edit.url",
-		"webdav.storage.show.view.url", "webdav.storage.tokens", "xss.allow"
+		"webdav.storage.show.view.url", "webdav.storage.tokens",
+		"wiki.email.page.added.signature", "wiki.email.page.updated.signature",
+		"xss.allow"
 	};
 
 	private static final String[] _OBSOLETE_SYSTEM_KEYS = new String[] {
