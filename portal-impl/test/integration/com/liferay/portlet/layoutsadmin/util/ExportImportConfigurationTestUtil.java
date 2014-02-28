@@ -52,7 +52,8 @@ public class ExportImportConfigurationTestUtil {
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
-				TestPropsValues.getUserId(), groupId, "name", "description",
+				TestPropsValues.getUserId(), groupId,
+				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
 				type, settingsMap, serviceContext);
 	}
 
