@@ -255,15 +255,14 @@ public class AssetVocabularyLocalServiceImpl
 			long[] groupIds, String className)
 		throws PortalException, SystemException {
 
-		List<AssetVocabulary> groupVocabularies =
+		List<AssetVocabulary> vocabularies =
 			assetVocabularyPersistence.findByGroupId(groupIds);
 
 		if (Validator.isNull(className)) {
-			return groupVocabularies;
+			return vocabularies;
 		}
 
-		return AssetUtil.filterVocabulariesBySelectedClassName(
-			groupVocabularies, className);
+		return AssetUtil.filterVocabularies(vocabularies, className);
 	}
 
 	@Override

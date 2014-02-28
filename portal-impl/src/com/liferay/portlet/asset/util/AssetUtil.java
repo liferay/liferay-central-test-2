@@ -252,15 +252,15 @@ public class AssetUtil {
 			new long[viewableTagIdsArray.size()][]);
 	}
 
-	public static List<AssetVocabulary> filterVocabulariesBySelectedClassName(
+	public static List<AssetVocabulary> filterVocabularies(
 		List<AssetVocabulary> vocabularies, String className) {
 
 		List<AssetVocabulary> filteredVocabularies =
 			new ArrayList<AssetVocabulary>();
 
-		for (AssetVocabulary groupVocabulary : vocabularies) {
+		for (AssetVocabulary vocabulary : vocabularies) {
 			UnicodeProperties settingsProperties =
-				groupVocabulary.getSettingsProperties();
+				vocabulary.getSettingsProperties();
 
 			long[] selectedClassNameIds = StringUtil.split(
 				settingsProperties.getProperty("selectedClassNameIds"), 0L);
@@ -270,7 +270,7 @@ public class AssetUtil {
 				(selectedClassNameIds[0] == 0) ||
 				ArrayUtil.contains(selectedClassNameIds, classNameId)) {
 
-				filteredVocabularies.add(groupVocabulary);
+				filteredVocabularies.add(vocabulary);
 			}
 		}
 

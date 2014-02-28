@@ -181,15 +181,14 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 			long[] groupIds, String className)
 		throws PortalException, SystemException {
 
-		List<AssetVocabulary> groupVocabularies =
+		List<AssetVocabulary> vocabularies =
 			assetVocabularyPersistence.filterFindByGroupId(groupIds);
 
 		if (Validator.isNull(className)) {
-			return groupVocabularies;
+			return vocabularies;
 		}
 
-		return AssetUtil.filterVocabulariesBySelectedClassName(
-			groupVocabularies, className);
+		return AssetUtil.filterVocabularies(vocabularies, className);
 	}
 
 	@Override
@@ -211,10 +210,10 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 			return vocabularies;
 		}
 
+		vocabularies = new ArrayList<AssetVocabulary>();
+
 		AssetVocabulary vocabulary =
 			assetVocabularyLocalService.addDefaultVocabulary(groupId);
-
-		vocabularies = new ArrayList<AssetVocabulary>();
 
 		vocabularies.add(vocabulary);
 
@@ -356,6 +355,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #AssetUtil.filterVocabularyIds(PermissionChecker, long[])}
 	 */
+	@Deprecated
 	@Override
 	public List<AssetVocabulary> getVocabularies(long[] vocabularyIds)
 		throws PortalException, SystemException {
@@ -407,8 +407,9 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, this method is only used by deprecated methods
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
+	@Deprecated
 	protected List<AssetVocabulary> filterVocabularies(
 			List<AssetVocabulary> vocabularies)
 		throws PortalException {

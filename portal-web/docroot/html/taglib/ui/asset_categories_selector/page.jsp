@@ -44,7 +44,7 @@ if (scopeGroupId != themeDisplay.getCompanyGroupId()) {
 }
 
 if (Validator.isNotNull(className)) {
-	vocabularies = AssetUtil.filterVocabulariesBySelectedClassName(vocabularies, className);
+	vocabularies = AssetUtil.filterVocabularies(vocabularies, className);
 
 	long classNameId = PortalUtil.getClassNameId(className);
 
