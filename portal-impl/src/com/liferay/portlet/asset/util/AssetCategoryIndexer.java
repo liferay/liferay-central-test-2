@@ -127,7 +127,7 @@ public class AssetCategoryIndexer extends BaseIndexer {
 		AssetCategory assetCategory = (AssetCategory)obj;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing folder " + assetCategory);
+			_log.debug("Indexing category " + assetCategory);
 		}
 
 		Document document = getBaseModelDocument(PORTLET_ID, assetCategory);

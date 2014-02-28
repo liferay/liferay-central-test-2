@@ -45,9 +45,8 @@ import javax.portlet.PortletURL;
  */
 public class AssetVocabularyIndexer extends BaseIndexer {
 
-	public static final String[] CLASS_NAMES = {
-		AssetVocabulary.class.getName()
-	};
+	public static final String[] CLASS_NAMES =
+		{AssetVocabulary.class.getName()};
 
 	public static final String PORTLET_ID = PortletKeys.ASSET_CATEGORIES_ADMIN;
 
@@ -105,7 +104,7 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 		AssetVocabulary assetVocabulary = (AssetVocabulary)obj;
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Indexing folder " + assetVocabulary);
+			_log.debug("Indexing vocabulary " + assetVocabulary);
 		}
 
 		Document document = getBaseModelDocument(PORTLET_ID, assetVocabulary);
