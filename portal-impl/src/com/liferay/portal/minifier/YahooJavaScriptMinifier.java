@@ -47,7 +47,7 @@ public class YahooJavaScriptMinifier implements JavaScriptMinifier {
 				PropsValues.YUI_COMPRESSOR_JS_DISABLE_OPTIMIZATIONS);
 		}
 		catch (Exception e) {
-			_log.error("JavaScript Minifier failed for\n" + content);
+			_log.error("Unable to minify:\n" + content);
 
 			unsyncStringWriter.append(content);
 		}
