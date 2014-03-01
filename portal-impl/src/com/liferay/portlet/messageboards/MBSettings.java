@@ -33,8 +33,8 @@ import com.liferay.util.RSSUtil;
  */
 public class MBSettings {
 
-	public MBSettings(Settings serviceGroupSettings) {
-		_settings = serviceGroupSettings;
+	public MBSettings(Settings settings) {
+		_settings = settings;
 	}
 
 	public String getEmailFromAddress() {
@@ -134,8 +134,7 @@ public class MBSettings {
 	}
 
 	public String getRSSFeedType() {
-		return _settings.getValue(
-			"rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
+		return _settings.getValue("rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
 	}
 
 	public Settings getServiceGroupSettings() {
@@ -211,6 +210,6 @@ public class MBSettings {
 			_settings.getValue("threadAsQuestionByDefault", null));
 	}
 
-	private final Settings _settings;
+	private Settings _settings;
 
 }
