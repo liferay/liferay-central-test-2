@@ -84,12 +84,12 @@ MBSettings mbSettings = MBUtil.getMBSettings(themeDisplay.getSiteGroupId());
 String[] priorities = mbSettings.getPriorities(currentLanguageId);
 
 boolean allowAnonymousPosting = mbSettings.isAllowAnonymousPosting();
-boolean subscribeByDefault = mbSettings.isSubscribeByDefault();
-String messageFormat = mbSettings.getMessageFormat();
 boolean enableFlags = mbSettings.isEnableFlags();
 boolean enableRatings = mbSettings.isEnableRatings();
-boolean threadAsQuestionByDefault = mbSettings.isThreadAsQuestionByDefault();
+String messageFormat = mbSettings.getMessageFormat();
 String recentPostsDateOffset = mbSettings.getRecentPostsDateOffset();
+boolean subscribeByDefault = mbSettings.isSubscribeByDefault();
+boolean threadAsQuestionByDefault = mbSettings.isThreadAsQuestionByDefault();
 
 boolean enableRSS = mbSettings.isEnableRSS();
 int rssDelta = mbSettings.getRSSDelta();
