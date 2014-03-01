@@ -127,21 +127,18 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 
 	private static class SimpleMessageFormatter implements MessageFormatter {
 
-		private String _format(JSError error) {
+		@Override
+		public String formatError(JSError jsError) {
 			return String.format(
-				"(%s:%d): %s", error.sourceName, error.lineNumber,
-				error.description);
+				"(%s:%d): %s", jsError.sourceName, jsError.lineNumber,
+				jsError.description);
 		}
 
 		@Override
-		public String formatError(JSError error) {
-			return _format(error);
+		public String formatWarning(JSError jsError) {
+			return formatError(jsError);
 		}
 
-		@Override
-		public String formatWarning(JSError warning) {
-			return _format(warning);
-		}
 	}
 
 }
