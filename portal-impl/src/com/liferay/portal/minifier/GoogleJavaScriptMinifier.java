@@ -48,8 +48,8 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		_applySimpleCompileLevelOptions(compilerOptions);
 
 		compiler.compile(
-			SourceFile.fromCode(
-				"extern", StringPool.BLANK), sourceFile, compilerOptions);
+			SourceFile.fromCode("extern", StringPool.BLANK),
+			sourceFile, compilerOptions);
 
 		return compiler.toSource();
 	}
