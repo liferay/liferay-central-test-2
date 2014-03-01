@@ -418,6 +418,15 @@ public class MBUtil {
 		return entries;
 	}
 
+	public static MBSettings getMBSettings(long groupId)
+		throws PortalException, SystemException {
+
+		Settings settings = SettingsFactoryUtil.getServiceGroupSettings(
+			groupId, MBConstants.SERVICE_NAME);
+
+		return new MBSettings(settings);
+	}
+
 	public static long getMessageId(String mailId) {
 		int x = mailId.indexOf(CharPool.LESS_THAN) + 1;
 		int y = mailId.indexOf(CharPool.AT);
@@ -518,15 +527,6 @@ public class MBUtil {
 		sb.append(mx);
 
 		return sb.toString();
-	}
-
-	public static MBSettings getMBSettings(long groupId)
-		throws PortalException, SystemException {
-
-		Settings settings = SettingsFactoryUtil.getServiceGroupSettings(
-			groupId, MBConstants.SERVICE_NAME);
-
-		return new MBSettings(settings);
 	}
 
 	public static String getSubjectWithoutMessageId(Message message)
