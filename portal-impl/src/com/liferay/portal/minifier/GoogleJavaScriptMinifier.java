@@ -45,7 +45,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		compilerOptions.setWarningLevel(
 			DiagnosticGroups.NON_STANDARD_JSDOC, CheckLevel.OFF);
 
-		_applySimpleCompileLevelOptions(compilerOptions);
+		setDefaultCompileOptions(compilerOptions);
 
 		compiler.compile(
 			SourceFile.fromCode("extern", StringPool.BLANK),
@@ -54,7 +54,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		return compiler.toSource();
 	}
 
-	private void _applySimpleCompileLevelOptions(
+	protected void setDefaultCompileOptions(
 		CompilerOptions compilerOptions) {
 
 		compilerOptions.closurePass = true;
