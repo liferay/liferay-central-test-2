@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("searchContainer");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 
 long groupId = ParamUtil.getLong(request, "groupId", scopeGroupId);
@@ -27,7 +25,7 @@ String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 %>
 
 <aui:nav-bar>
-	<aui:nav searchContainer="<%= searchContainer %>">
+	<aui:nav>
 		<portlet:renderURL var="viewStructureURL">
 			<portlet:param name="struts_action" value="/dynamic_data_mapping/select_structure" />
 			<portlet:param name="classPK" value="<%= String.valueOf(classPK) %>" />
@@ -45,5 +43,5 @@ String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 		</c:if>
 	</aui:nav>
 
-	<aui:nav-bar-search cssClass="navbar-search-advanced" file="/html/portlet/dynamic_data_mapping/structure_search.jsp" searchContainer="<%= searchContainer %>" />
+	<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/dynamic_data_mapping/structure_search.jsp" />
 </aui:nav-bar>

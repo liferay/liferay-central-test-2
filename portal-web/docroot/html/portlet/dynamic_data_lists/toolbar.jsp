@@ -17,13 +17,11 @@
 <%@ include file="/html/portlet/dynamic_data_lists/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute("searchContainer");
-
 String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 %>
 
 <aui:nav-bar>
-	<aui:nav searchContainer="<%= searchContainer %>">
+	<aui:nav>
 		<portlet:renderURL var="viewRecordsURL">
 			<portlet:param name="struts_action" value="/dynamic_data_lists/view" />
 		</portlet:renderURL>
@@ -40,7 +38,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 		</c:if>
 	</aui:nav>
 
-	<aui:nav-bar-search cssClass="navbar-search-advanced" file="/html/portlet/dynamic_data_lists/record_set_search.jsp" searchContainer="<%= searchContainer %>" />
+	<aui:nav-bar-search cssClass="pull-right" file="/html/portlet/dynamic_data_lists/record_set_search.jsp" />
 </aui:nav-bar>
 
 <c:if test="<%= DDLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_RECORD_SET) %>">
