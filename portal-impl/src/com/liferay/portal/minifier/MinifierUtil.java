@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.io.unsync.UnsyncStringReader;
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.util.PropsValues;
 
 import com.yahoo.platform.yui.compressor.CssCompressor;
@@ -46,18 +47,12 @@ public class MinifierUtil {
 
 	private static JavaScriptMinifier _getJavaScriptMinifier() {
 		try {
-			Class<JavaScriptMinifier> javaScriptMinifierClass =
-				(Class<JavaScriptMinifier>)Class.forName(
-					PropsValues.MINIFIER_JAVASCRIPT);
-
-			return javaScriptMinifierClass.newInstance();
+			return (JavaScriptMinifier)InstanceFactory.newInstance(
+				PropsValues.MINIFIER_JAVASCRIPT);
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Could not instantiate "+ PropsValues.MINIFIER_JAVASCRIPT +
-						". Returning GoogleClosureCompileJavaScriptMinifier as default");
-			}
+			_log.error(
+				"Unable to instantiate "+ PropsValues.MINIFIER_JAVASCRIPT);
 
 			return new GoogleJavaScriptMinifier();
 		}
@@ -78,7 +73,7 @@ public class MinifierUtil {
 				unsyncStringWriter, PropsValues.YUI_COMPRESSOR_CSS_LINE_BREAK);
 		}
 		catch (Exception e) {
-			_log.error("CSS Minifier failed for\n" + content);
+			_log.error("Unable to minfiy CSS:\n" + content);
 
 			unsyncStringWriter.append(content);
 		}
