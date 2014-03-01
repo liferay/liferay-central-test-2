@@ -31,7 +31,7 @@ import com.liferay.util.RSSUtil;
 /**
  * @author Jorge Ferrer
  */
-public class MBSettings {
+public class MBSettings implements Settings {
 
 	public MBSettings(Settings settings) {
 		_settings = settings;
@@ -141,6 +141,16 @@ public class MBSettings {
 		return _settings;
 	}
 
+	@Override
+	public String getValue(String key, String defaultValue) {
+		return _settings.getValue(key, defaultValue);
+	}
+
+	@Override
+	public String[] getValues(String key, String[] defaultValue) {
+		return _settings.getValues(key, defaultValue);
+	}
+
 	public boolean isAllowAnonymousPosting() {
 		return GetterUtil.getBoolean(
 			_settings.getValue("allowAnonymousPosting", null),
@@ -208,6 +218,16 @@ public class MBSettings {
 	public boolean isThreadAsQuestionByDefault() {
 		return GetterUtil.getBoolean(
 			_settings.getValue("threadAsQuestionByDefault", null));
+	}
+
+	@Override
+	public Settings setValue(String key, String value) {
+		return _settings.setValue(key, value);
+	}
+
+	@Override
+	public Settings setValues(String key, String[] values) {
+		return _settings.setValues(key, values);
 	}
 
 	private Settings _settings;
