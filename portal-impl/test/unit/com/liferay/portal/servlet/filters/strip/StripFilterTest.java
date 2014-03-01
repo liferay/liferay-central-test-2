@@ -18,7 +18,7 @@ import com.liferay.portal.cache.key.HashCodeCacheKeyGenerator;
 import com.liferay.portal.kernel.cache.key.CacheKeyGeneratorUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
-import com.liferay.portal.util.MinifierUtil;
+import com.liferay.portal.minifier.MinifierUtil;
 
 import java.io.StringWriter;
 
