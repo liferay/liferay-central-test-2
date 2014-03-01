@@ -57,22 +57,23 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 	protected void setDefaultCompileOptions(
 		CompilerOptions compilerOptions) {
 
-		compilerOptions.closurePass = true;
-		compilerOptions.setRenamingPolicy(
-			VariableRenamingPolicy.LOCAL, PropertyRenamingPolicy.OFF);
-		compilerOptions.setInlineVariables(CompilerOptions.Reach.LOCAL_ONLY);
-		compilerOptions.flowSensitiveInlineVariables = true;
-		compilerOptions.setInlineFunctions(CompilerOptions.Reach.LOCAL_ONLY);
-		compilerOptions.setAssumeClosuresOnlyCaptureReferences(false);
 		compilerOptions.checkGlobalThisLevel = CheckLevel.OFF;
-		compilerOptions.foldConstants = true;
+		compilerOptions.closurePass = true;
 		compilerOptions.coalesceVariableNames = true;
-		compilerOptions.deadAssignmentElimination = true;
 		compilerOptions.collapseVariableDeclarations = true;
 		compilerOptions.convertToDottedProperties = true;
+		compilerOptions.deadAssignmentElimination = true;
+		compilerOptions.flowSensitiveInlineVariables = true;
+		compilerOptions.foldConstants = true;
 		compilerOptions.labelRenaming = true;
 		compilerOptions.removeDeadCode = true;
 		compilerOptions.optimizeArgumentsArray = true;
+
+		compilerOptions.setAssumeClosuresOnlyCaptureReferences(false);
+		compilerOptions.setInlineFunctions(CompilerOptions.Reach.LOCAL_ONLY);
+		compilerOptions.setInlineVariables(CompilerOptions.Reach.LOCAL_ONLY);
+		compilerOptions.setRenamingPolicy(
+			VariableRenamingPolicy.LOCAL, PropertyRenamingPolicy.OFF);
 		compilerOptions.setRemoveUnusedVariables(
 			CompilerOptions.Reach.LOCAL_ONLY);
 	}
