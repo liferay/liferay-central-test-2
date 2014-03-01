@@ -114,17 +114,6 @@ public class AssetCategoryStagedModelDataHandlerTest
 			Group group)
 		throws Exception {
 
-		List<StagedModel> vocabularyDependentStagedModels =
-			dependentStagedModelsMap.get(AssetVocabulary.class.getSimpleName());
-
-		Assert.assertEquals(1, vocabularyDependentStagedModels.size());
-
-		AssetVocabulary vocabulary =
-			(AssetVocabulary)vocabularyDependentStagedModels.get(0);
-
-		AssetVocabularyLocalServiceUtil.getAssetVocabularyByUuidAndGroupId(
-			vocabulary.getUuid(), group.getGroupId());
-
 		List<StagedModel> categoryDependentStagedModels =
 			dependentStagedModelsMap.get(AssetCategory.class.getSimpleName());
 
@@ -135,6 +124,17 @@ public class AssetCategoryStagedModelDataHandlerTest
 
 		AssetCategoryLocalServiceUtil.getAssetCategoryByUuidAndGroupId(
 			category.getUuid(), group.getGroupId());
+
+		List<StagedModel> vocabularyDependentStagedModels =
+			dependentStagedModelsMap.get(AssetVocabulary.class.getSimpleName());
+
+		Assert.assertEquals(1, vocabularyDependentStagedModels.size());
+
+		AssetVocabulary vocabulary =
+			(AssetVocabulary)vocabularyDependentStagedModels.get(0);
+
+		AssetVocabularyLocalServiceUtil.getAssetVocabularyByUuidAndGroupId(
+			vocabulary.getUuid(), group.getGroupId());
 	}
 
 }
