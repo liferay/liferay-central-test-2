@@ -39,17 +39,15 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 		id="<%= renderResponse.getNamespace() %>"
 	>
 		<aui:fieldset>
-			<aui:input inlineField="<%= true %>" label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
+			<aui:input label="id" name="<%= displayTerms.ARTICLE_ID %>" size="20" value="<%= displayTerms.getArticleId() %>" />
 
-			<aui:input inlineField="<%= true %>" name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
+			<aui:input name="<%= displayTerms.TITLE %>" size="20" type="text" value="<%= displayTerms.getTitle() %>" />
 
-			<aui:input inlineField="<%= true %>" name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
-		</aui:fieldset>
+			<aui:input name="<%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= displayTerms.getDescription() %>" />
 
-		<aui:fieldset>
-			<aui:input inlineField="<%= true %>" name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
+			<aui:input name="<%= displayTerms.CONTENT %>" size="20" type="text" value="<%= displayTerms.getContent() %>" />
 
-			<aui:select inlineField="<%= true %>" name="<%= displayTerms.TYPE %>">
+			<aui:select name="<%= displayTerms.TYPE %>">
 				<aui:option value=""></aui:option>
 
 				<%
@@ -75,7 +73,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				scopeLayouts.addAll(LayoutLocalServiceUtil.getScopeGroupLayouts(themeDisplay.getSiteGroupId(), true));
 				%>
 
-				<aui:select inlineField="<%= true %>" label="my-sites" name="<%= displayTerms.GROUP_ID %>" showEmptyOption="<%= (themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId())) %>">
+				<aui:select label="my-sites" name="<%= displayTerms.GROUP_ID %>" showEmptyOption="<%= (themeDisplay.getScopeGroupId() == themeDisplay.getCompanyGroupId()) && (Validator.isNotNull(displayTerms.getStructureId()) || Validator.isNotNull(displayTerms.getTemplateId())) %>">
 					<aui:option label="global" selected="<%= displayTerms.getGroupId() == themeDisplay.getCompanyGroupId() %>" value="<%= themeDisplay.getCompanyGroupId() %>" />
 
 					<%
@@ -112,7 +110,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			</c:if>
 
 			<c:if test="<%= portletName.equals(PortletKeys.JOURNAL) %>">
-				<aui:select inlineField="<%= true %>" name="<%= displayTerms.STATUS %>" value="<%= displayTerms.getStatus() %>">
+				<aui:select name="<%= displayTerms.STATUS %>" value="<%= displayTerms.getStatus() %>">
 					<aui:option value=""></aui:option>
 					<aui:option label="draft" />
 					<aui:option label="pending" />
