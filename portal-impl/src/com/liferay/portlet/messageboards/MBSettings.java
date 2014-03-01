@@ -56,10 +56,9 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageAddedBody)) {
 			return emailMessageAddedBody;
 		}
-		else {
-			return ContentUtil.get(
-				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
-		}
+
+		return ContentUtil.get(
+			PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
 	}
 
 	public String getEmailMessageAddedSubject() {
@@ -69,10 +68,9 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageAddedSubject)) {
 			return emailMessageAddedSubject;
 		}
-		else {
-			return ContentUtil.get(
-				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT);
-		}
+
+		return ContentUtil.get(
+			PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT);
 	}
 
 	public String getEmailMessageUpdatedBody() {
@@ -82,10 +80,9 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageUpdatedBody)) {
 			return emailMessageUpdatedBody;
 		}
-		else {
-			return ContentUtil.get(
-				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
-		}
+
+		return ContentUtil.get(
+			PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
 	}
 
 	public String getEmailMessageUpdatedSubject() {
@@ -95,10 +92,9 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
 			return emailMessageUpdatedSubject;
 		}
-		else {
-			return ContentUtil.get(
-				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT);
-		}
+
+		return ContentUtil.get(
+			PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT);
 	}
 
 	public String getMessageFormat() {
@@ -159,9 +155,8 @@ public class MBSettings {
 		if (Validator.isNotNull(emailHtmlFormat)) {
 			return GetterUtil.getBoolean(emailHtmlFormat);
 		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_HTML_FORMAT;
-		}
+
+		return PropsValues.MESSAGE_BOARDS_EMAIL_HTML_FORMAT;
 	}
 
 	public boolean isEmailMessageAddedEnabled() {
@@ -171,9 +166,8 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageAddedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageAddedEnabled);
 		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED;
-		}
+
+		return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED;
 	}
 
 	public boolean isEmailMessageUpdatedEnabled() {
@@ -183,9 +177,8 @@ public class MBSettings {
 		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
 		}
-		else {
-			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED;
-		}
+
+		return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED;
 	}
 
 	public boolean isEnableFlags() {
