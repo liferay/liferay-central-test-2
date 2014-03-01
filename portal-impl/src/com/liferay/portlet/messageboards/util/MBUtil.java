@@ -520,7 +520,7 @@ public class MBUtil {
 		return sb.toString();
 	}
 
-	public static MBSettings getSettings(long groupId)
+	public static MBSettings getMBSettings(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getServiceGroupSettings(

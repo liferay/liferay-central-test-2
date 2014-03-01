@@ -224,7 +224,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		subject = ModelHintsUtil.trimString(
 			MBMessage.class.getName(), "subject", subject);
 
-		MBSettings mbSettings = MBUtil.getSettings(groupId);
+		MBSettings mbSettings = MBUtil.getMBSettings(groupId);
 
 		if (mbSettings != null) {
 			if (!mbSettings.isAllowAnonymousPosting()) {
