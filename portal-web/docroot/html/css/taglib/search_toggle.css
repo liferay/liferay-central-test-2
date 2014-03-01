@@ -1,5 +1,6 @@
 .taglib-search-toggle-advanced-wrapper .taglib-search-toggle-advanced {
-	border: 1px solid transparent;
+	background-color: #FCFCFC;
+	border: 1px solid #DDD;
 	margin-top: 5px;
 	padding: 20px;
 }
@@ -22,11 +23,4 @@
 			margin-top: 0;
 		}
 	}
-}
-
-/*Skin*/
-
-.taglib-search-toggle-advanced-wrapper .taglib-search-toggle-advanced {
-	background-color: #FCFCFC;
-	border-color: #DDD;
 }
