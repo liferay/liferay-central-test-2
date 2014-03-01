@@ -83,53 +83,45 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 
 	private static class LogErrorManager extends BasicErrorManager {
 
-		private MessageFormatter _simpleMessageFormatter =
-			new SimpleMessageFormatter();
-
 		private LogErrorManager(Log log) {
 			_log = log;
 		}
 
 		@Override
-		public void println(CheckLevel level, JSError error) {
-			switch (level) {
-				case ERROR:
-					if (_log.isErrorEnabled()) {
-						_log.error(
-							error.format(level, _simpleMessageFormatter));
-					}
-
-					break;
-				case WARNING:
-					if (_log.isWarnEnabled()) {
-						_log.warn(error.format(level, _simpleMessageFormatter));
-					}
-
-					break;
-
-				default:
-					break;
+		public void println(CheckLevel checkLevel, JSError jsError) {
+			if (checkLevel == CheckLevel.ERROR) {
+				if (_log.isErrorEnabled()) {
+					_log.error(
+						jsError.format(checkLevel, _simpleMessageFormatter));
+				}
+			}
+			else if (checkLevel == CheckLevel.WARNING) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						jsError.format(checkLevel, _simpleMessageFormatter));
+				}
 			}
 		}
 
 		@Override
 		protected void printSummary() {
-			if ((getErrorCount() > 0) && _log.isErrorEnabled()) {
+			if (_log.isErrorEnabled() && (getErrorCount() > 0)) {
 				_log.error(generateMessage());
 			}
-			else if ((getWarningCount() > 0) && _log.isWarnEnabled()) {
+			else if (_log.isWarnEnabled() && (getWarningCount() > 0)) {
 				_log.warn(generateMessage());
 			}
 		}
 
 		private String generateMessage() {
 			return String.format(
-				"{0} error(s), {1} warning(s)",
-				getErrorCount(), getWarningCount()
-			);
+				"{0} error(s), {1} warning(s)", getErrorCount(),
+				getWarningCount());
 		}
 
-		private static Log _log;
+		private Log _log;
+		private MessageFormatter _simpleMessageFormatter =
+			new SimpleMessageFormatter();
 
 	}
 
