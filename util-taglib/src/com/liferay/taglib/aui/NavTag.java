@@ -65,7 +65,8 @@ public class NavTag extends BaseNavTag {
 			}
 
 			if (_hasSearchResults()) {
-				sb.append(" hide");
+				sb.append(StringPool.SPACE);
+				sb.append("hide");
 			}
 
 			sb.append("\" id=\"");
