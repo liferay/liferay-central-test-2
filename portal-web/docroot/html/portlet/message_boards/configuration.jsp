@@ -43,10 +43,8 @@ else if (tabs2.equals("message-updated-email")) {
 String emailSubjectParam = emailParam + "Subject";
 String emailBodyParam = emailParam + "Body";
 
-Settings serviceGroupSettings = mbSettings.getServiceGroupSettings();
-
-String emailSubject = SettingsParamUtil.getString(serviceGroupSettings, request, emailSubjectParam, defaultEmailSubject);
-String emailBody = SettingsParamUtil.getString(serviceGroupSettings, request, emailBodyParam, defaultEmailBody);
+String emailSubject = SettingsParamUtil.getString(mbSettings, request, emailSubjectParam, defaultEmailSubject);
+String emailBody = SettingsParamUtil.getString(mbSettings, request, emailBodyParam, defaultEmailBody);
 %>
 
 <liferay-portlet:renderURL portletConfiguration="<%= true %>" var="portletURL">
@@ -471,7 +469,7 @@ String emailBody = SettingsParamUtil.getString(serviceGroupSettings, request, em
 							continue;
 						}
 
-						String[] tempPriorities = LocalizationUtil.getSettingsValues(serviceGroupSettings, "priorities", LocaleUtil.toLanguageId(locales[i]));
+						String[] tempPriorities = LocalizationUtil.getSettingsValues(mbSettings, "priorities", LocaleUtil.toLanguageId(locales[i]));
 
 						for (int j = 0; j < 10; j++) {
 							String name = StringPool.BLANK;
