@@ -42,7 +42,7 @@ String eventName = ParamUtil.getString(request, "eventName", "selectStructure");
 		<c:if test="<%= showToolbar %>">
 
 			<%
-			request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
+			request.setAttribute("searchContainer", searchContainer);
 			%>
 
 			<liferay-util:include page="/html/portlet/dynamic_data_mapping/structure_toolbar.jsp">

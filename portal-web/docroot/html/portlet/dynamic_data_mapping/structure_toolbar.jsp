@@ -17,7 +17,7 @@
 <%@ include file="/html/portlet/dynamic_data_mapping/init.jsp" %>
 
 <%
-SearchContainer searchContainer = (SearchContainer)request.getAttribute(WebKeys.SEARCH_CONTAINER);
+SearchContainer searchContainer = (SearchContainer)request.getAttribute("searchContainer");
 
 String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 

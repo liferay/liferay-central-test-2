@@ -34,7 +34,7 @@ portletURL.setParameter("struts_action", "/dynamic_data_lists/view");
 		RecordSetDisplayTerms displayTerms = (RecordSetDisplayTerms)searchContainer.getDisplayTerms();
 		RecordSetSearchTerms searchTerms = (RecordSetSearchTerms)searchContainer.getSearchTerms();
 
-		request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
+		request.setAttribute("searchContainer", searchContainer);
 		%>
 
 		<liferay-util:include page="/html/portlet/dynamic_data_lists/toolbar.jsp" />

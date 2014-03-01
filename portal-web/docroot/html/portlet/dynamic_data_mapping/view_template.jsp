@@ -95,7 +95,7 @@ String title = ddmDisplay.getViewTemplatesTitle(structure, controlPanel, templat
 	>
 
 		<%
-		request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
+		request.setAttribute("searchContainer", searchContainer);
 		%>
 
 		<liferay-util:include page="/html/portlet/dynamic_data_mapping/template_toolbar.jsp">
