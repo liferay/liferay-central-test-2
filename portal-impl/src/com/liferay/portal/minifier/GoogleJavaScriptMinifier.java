@@ -81,9 +81,9 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 	private static Log _log = LogFactoryUtil.getLog(
 		GoogleJavaScriptMinifier.class);
 
-	private static class LogErrorManager extends BasicErrorManager {
+	private class LogErrorManager extends BasicErrorManager {
 
-		private LogErrorManager(Log log) {
+		public LogErrorManager(Log log) {
 			_log = log;
 		}
 
@@ -106,14 +106,14 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		@Override
 		protected void printSummary() {
 			if (_log.isErrorEnabled() && (getErrorCount() > 0)) {
-				_log.error(generateMessage());
+				_log.error(_buildMessage());
 			}
 			else if (_log.isWarnEnabled() && (getWarningCount() > 0)) {
-				_log.warn(generateMessage());
+				_log.warn(_buildMessage());
 			}
 		}
 
-		private String generateMessage() {
+		private String _buildMessage() {
 			return String.format(
 				"{0} error(s), {1} warning(s)", getErrorCount(),
 				getWarningCount());
@@ -125,7 +125,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 
 	}
 
-	private static class SimpleMessageFormatter implements MessageFormatter {
+	private class SimpleMessageFormatter implements MessageFormatter {
 
 		@Override
 		public String formatError(JSError jsError) {
