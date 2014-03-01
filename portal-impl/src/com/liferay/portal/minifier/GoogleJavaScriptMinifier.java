@@ -36,7 +36,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 
 	@Override
 	public String compress(String resourceName, String content) {
-		Compiler compiler = new Compiler(new LogErrorManager(_log));
+		Compiler compiler = new Compiler(new LogErrorManager());
 
 		SourceFile sourceFile = SourceFile.fromCode(resourceName, content);
 
@@ -45,7 +45,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		compilerOptions.setWarningLevel(
 			DiagnosticGroups.NON_STANDARD_JSDOC, CheckLevel.OFF);
 
-		setDefaultCompileOptions(compilerOptions);
+		setCompileOptions(compilerOptions);
 
 		compiler.compile(
 			SourceFile.fromCode("extern", StringPool.BLANK), sourceFile,
@@ -54,7 +54,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		return compiler.toSource();
 	}
 
-	protected void setDefaultCompileOptions(CompilerOptions compilerOptions) {
+	protected void setCompileOptions(CompilerOptions compilerOptions) {
 		compilerOptions.checkGlobalThisLevel = CheckLevel.OFF;
 		compilerOptions.closurePass = true;
 		compilerOptions.coalesceVariableNames = true;
@@ -80,10 +80,6 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		GoogleJavaScriptMinifier.class);
 
 	private class LogErrorManager extends BasicErrorManager {
-
-		public LogErrorManager(Log log) {
-			_log = log;
-		}
 
 		@Override
 		public void println(CheckLevel checkLevel, JSError jsError) {
@@ -117,7 +113,6 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 				getWarningCount());
 		}
 
-		private static Log _log;
 		private MessageFormatter _simpleMessageFormatter =
 			new SimpleMessageFormatter();
 
