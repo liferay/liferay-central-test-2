@@ -49,7 +49,7 @@ public class LoggingOutputProcessorTest extends BaseOutputProcessorTestCase {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LoggingOutputProcessor.class.getName(), Level.OFF);
 
-		String stdErrString = "This is stdErr message!";
+		String stdErrString = "This is standard error message.";
 
 		byte[] stdErrBytes = stdErrString.getBytes(
 			StringPool.DEFAULT_CHARSET_NAME);
@@ -57,7 +57,6 @@ public class LoggingOutputProcessorTest extends BaseOutputProcessorTestCase {
 		Assert.assertNull(
 			loggingOutputProcessor.processStdErr(
 				new UnsyncByteArrayInputStream(stdErrBytes)));
-
 		Assert.assertTrue(logRecords.isEmpty());
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
@@ -67,24 +66,23 @@ public class LoggingOutputProcessorTest extends BaseOutputProcessorTestCase {
 			invokeProcessStdErr(
 				loggingOutputProcessor,
 				new UnsyncByteArrayInputStream(stdErrBytes)));
-
 		Assert.assertEquals(1, logRecords.size());
 
 		LogRecord logRecord = logRecords.get(0);
 
 		Assert.assertEquals(stdErrString, logRecord.getMessage());
 
-		String stdOutString = "This is stdOut message!";
+		String stdOutString = "This is standard out message.";
 
 		byte[] stdOutBytes = stdOutString.getBytes(
 			StringPool.DEFAULT_CHARSET_NAME);
 
-		logRecords = JDKLoggerTestUtil.configureJDKLogger(
-			LoggingOutputProcessor.class.getName(), Level.SEVERE);
-
 		Assert.assertNull(
 			loggingOutputProcessor.processStdOut(
 				new UnsyncByteArrayInputStream(stdOutBytes)));
+
+		logRecords = JDKLoggerTestUtil.configureJDKLogger(
+			LoggingOutputProcessor.class.getName(), Level.SEVERE);
 
 		Assert.assertTrue(logRecords.isEmpty());
 
@@ -95,7 +93,6 @@ public class LoggingOutputProcessorTest extends BaseOutputProcessorTestCase {
 			invokeProcessStdOut(
 				loggingOutputProcessor,
 				new UnsyncByteArrayInputStream(stdOutBytes)));
-
 		Assert.assertEquals(1, logRecords.size());
 
 		logRecord = logRecords.get(0);

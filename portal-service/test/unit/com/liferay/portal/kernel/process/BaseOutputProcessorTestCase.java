@@ -113,22 +113,20 @@ public class BaseOutputProcessorTestCase {
 			OutputProcessor<T, ?> outputProcessor, InputStream inputStream)
 		throws Exception {
 
-		Method processStdErrBridgeMethod = ReflectionUtil.getBridgeMethod(
+		Method method = ReflectionUtil.getBridgeMethod(
 			outputProcessor.getClass(), "processStdErr", InputStream.class);
 
-		return (T)processStdErrBridgeMethod.invoke(
-			outputProcessor, inputStream);
+		return (T)method.invoke(outputProcessor, inputStream);
 	}
 
 	protected static <T> T invokeProcessStdOut(
 			OutputProcessor<?, T> outputProcessor, InputStream inputStream)
 		throws Exception {
 
-		Method processStdOutBridgeMethod = ReflectionUtil.getBridgeMethod(
+		Method method = ReflectionUtil.getBridgeMethod(
 			outputProcessor.getClass(), "processStdOut", InputStream.class);
 
-		return (T)processStdOutBridgeMethod.invoke(
-			outputProcessor, inputStream);
+		return (T)method.invoke(outputProcessor, inputStream);
 	}
 
 }

@@ -45,7 +45,6 @@ public class ConsumerOutputProcessorTest extends BaseOutputProcessorTestCase {
 
 		Assert.assertNull(
 			consumerOutputProcessor.processStdErr(unsyncByteArrayInputStream));
-
 		Assert.assertEquals(0, unsyncByteArrayInputStream.available());
 
 		unsyncByteArrayInputStream = new UnsyncByteArrayInputStream(
@@ -54,7 +53,6 @@ public class ConsumerOutputProcessorTest extends BaseOutputProcessorTestCase {
 		Assert.assertNull(
 			invokeProcessStdErr(
 				consumerOutputProcessor, unsyncByteArrayInputStream));
-
 		Assert.assertEquals(0, unsyncByteArrayInputStream.available());
 
 		unsyncByteArrayInputStream = new UnsyncByteArrayInputStream(
@@ -62,7 +60,6 @@ public class ConsumerOutputProcessorTest extends BaseOutputProcessorTestCase {
 
 		Assert.assertNull(
 			consumerOutputProcessor.processStdOut(unsyncByteArrayInputStream));
-
 		Assert.assertEquals(0, unsyncByteArrayInputStream.available());
 
 		unsyncByteArrayInputStream = new UnsyncByteArrayInputStream(
@@ -71,7 +68,6 @@ public class ConsumerOutputProcessorTest extends BaseOutputProcessorTestCase {
 		Assert.assertNull(
 			invokeProcessStdOut(
 				consumerOutputProcessor, unsyncByteArrayInputStream));
-
 		Assert.assertEquals(0, unsyncByteArrayInputStream.available());
 	}
 
