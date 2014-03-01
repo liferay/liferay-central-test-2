@@ -47,7 +47,8 @@ public class NavBarSearchTag extends BaseNavBarSearchTag {
 			sb.append("<a class=\"btn btn-navbar");
 
 			if (_hasSearchResults()) {
-				sb.append(" hide");
+				sb.append(StringPool.SPACE);
+				sb.append("hide");
 			}
 
 			sb.append("\" id=\"");
