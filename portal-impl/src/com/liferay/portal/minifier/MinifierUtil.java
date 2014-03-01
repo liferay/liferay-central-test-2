@@ -48,11 +48,11 @@ public class MinifierUtil {
 	private static JavaScriptMinifier _getJavaScriptMinifier() {
 		try {
 			return (JavaScriptMinifier)InstanceFactory.newInstance(
-				PropsValues.MINIFIER_JAVASCRIPT);
+				PropsValues.MINIFIER_JAVASCRIPT_IMPL);
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to instantiate "+ PropsValues.MINIFIER_JAVASCRIPT);
+				"Unable to instantiate "+ PropsValues.MINIFIER_JAVASCRIPT_IMPL);
 
 			return new GoogleJavaScriptMinifier();
 		}
