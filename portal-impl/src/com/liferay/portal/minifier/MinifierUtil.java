@@ -48,14 +48,14 @@ public class MinifierUtil {
 		try {
 			Class<JavaScriptMinifier> javaScriptMinifierClass =
 				(Class<JavaScriptMinifier>)Class.forName(
-					PropsValues.JAVASCRIPT_MINIFIER);
+					PropsValues.MINIFIER_JAVASCRIPT);
 
 			return javaScriptMinifierClass.newInstance();
 		}
 		catch (Exception e) {
 			if (_log.isErrorEnabled()) {
 				_log.error(
-					"Could not instantiate "+ PropsValues.JAVASCRIPT_MINIFIER +
+					"Could not instantiate "+ PropsValues.MINIFIER_JAVASCRIPT +
 						". Returning GoogleClosureCompileJavaScriptMinifier as default");
 			}
 

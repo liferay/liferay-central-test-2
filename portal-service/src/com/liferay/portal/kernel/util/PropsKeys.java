@@ -1077,9 +1077,9 @@ public interface PropsKeys {
 
 	public static final String JAVASCRIPT_LOG_ENABLED = "javascript.log.enabled";
 
-	public static final String JAVASCRIPT_MINIFIER = "javascript.minifier"; public static final String JCR_JACKRABBIT_CONFIG_FILE_PATH = "jcr.jackrabbit.config.file.path";
-
 	public static final String JCR_INITIALIZE_ON_STARTUP = "jcr.initialize.on.startup";
+
+	public static final String JCR_JACKRABBIT_CONFIG_FILE_PATH = "jcr.jackrabbit.config.file.path";
 
 	public static final String JCR_JACKRABBIT_CREDENTIALS_PASSWORD = "jcr.jackrabbit.credentials.password";
 
@@ -1660,6 +1660,8 @@ public interface PropsKeys {
 	public static final String MINIFIER_INLINE_CONTENT_CACHE_SKIP_CSS = "minifier.inline.content.cache.skip.css";
 
 	public static final String MINIFIER_INLINE_CONTENT_CACHE_SKIP_JAVASCRIPT = "minifier.inline.content.cache.skip.javascript";
+
+	public static final String MINIFIER_JAVASCRIPT = "minifier.javascript";
 
 	public static final String MOBILE_DEVICE_RULES_PUBLISH_TO_LIVE_BY_DEFAULT = "mobile.device.rules.publish.to.live.by.default";
 
