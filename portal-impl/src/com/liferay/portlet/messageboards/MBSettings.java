@@ -34,23 +34,23 @@ import com.liferay.util.RSSUtil;
 public class MBSettings {
 
 	public MBSettings(Settings serviceGroupSettings) {
-		_serviceGroupSettings = serviceGroupSettings;
+		_settings = serviceGroupSettings;
 	}
 
 	public String getEmailFromAddress() {
-		return _serviceGroupSettings.getValue(
+		return _settings.getValue(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS,
 			PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
 	}
 
 	public String getEmailFromName() {
-		return _serviceGroupSettings.getValue(
+		return _settings.getValue(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME,
 			PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME);
 	}
 
 	public String getEmailMessageAddedBody() {
-		String emailMessageAddedBody = _serviceGroupSettings.getValue(
+		String emailMessageAddedBody = _settings.getValue(
 			"emailMessageAddedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedBody)) {
@@ -62,7 +62,7 @@ public class MBSettings {
 	}
 
 	public String getEmailMessageAddedSubject() {
-		String emailMessageAddedSubject = _serviceGroupSettings.getValue(
+		String emailMessageAddedSubject = _settings.getValue(
 			"emailMessageAddedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSubject)) {
@@ -74,7 +74,7 @@ public class MBSettings {
 	}
 
 	public String getEmailMessageUpdatedBody() {
-		String emailMessageUpdatedBody = _serviceGroupSettings.getValue(
+		String emailMessageUpdatedBody = _settings.getValue(
 			"emailMessageUpdatedBody", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedBody)) {
@@ -86,7 +86,7 @@ public class MBSettings {
 	}
 
 	public String getEmailMessageUpdatedSubject() {
-		String emailMessageUpdatedSubject = _serviceGroupSettings.getValue(
+		String emailMessageUpdatedSubject = _settings.getValue(
 			"emailMessageUpdatedSubject", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
@@ -98,7 +98,7 @@ public class MBSettings {
 	}
 
 	public String getMessageFormat() {
-		String messageFormat = _serviceGroupSettings.getValue(
+		String messageFormat = _settings.getValue(
 			"messageFormat", MBMessageConstants.DEFAULT_FORMAT);
 
 		if (MBUtil.isValidMessageFormat(messageFormat)) {
@@ -110,46 +110,46 @@ public class MBSettings {
 
 	public String[] getPriorities(String currentLanguageId) {
 		return LocalizationUtil.getSettingsValues(
-			_serviceGroupSettings, "priorities", currentLanguageId);
+			_settings, "priorities", currentLanguageId);
 	}
 
 	public String[] getRanks(String languageId) {
 		return LocalizationUtil.getSettingsValues(
-			_serviceGroupSettings, "ranks", languageId);
+			_settings, "ranks", languageId);
 	}
 
 	public String getRecentPostsDateOffset() {
-		return _serviceGroupSettings.getValue("recentPostsDateOffset", "7");
+		return _settings.getValue("recentPostsDateOffset", "7");
 	}
 
 	public int getRSSDelta() {
 		return GetterUtil.getInteger(
-			_serviceGroupSettings.getValue("rssDelta", StringPool.BLANK),
+			_settings.getValue("rssDelta", StringPool.BLANK),
 			SearchContainer.DEFAULT_DELTA);
 	}
 
 	public String getRSSDisplayStyle() {
-		return _serviceGroupSettings.getValue(
+		return _settings.getValue(
 			"rssDisplayStyle", RSSUtil.DISPLAY_STYLE_DEFAULT);
 	}
 
 	public String getRSSFeedType() {
-		return _serviceGroupSettings.getValue(
+		return _settings.getValue(
 			"rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
 	}
 
 	public Settings getServiceGroupSettings() {
-		return _serviceGroupSettings;
+		return _settings;
 	}
 
 	public boolean isAllowAnonymousPosting() {
 		return GetterUtil.getBoolean(
-			_serviceGroupSettings.getValue("allowAnonymousPosting", null),
+			_settings.getValue("allowAnonymousPosting", null),
 			PropsValues.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED);
 	}
 
 	public boolean isEmailHtmlFormat() {
-		String emailHtmlFormat = _serviceGroupSettings.getValue(
+		String emailHtmlFormat = _settings.getValue(
 			"emailHtmlFormat", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailHtmlFormat)) {
@@ -160,7 +160,7 @@ public class MBSettings {
 	}
 
 	public boolean isEmailMessageAddedEnabled() {
-		String emailMessageAddedEnabled = _serviceGroupSettings.getValue(
+		String emailMessageAddedEnabled = _settings.getValue(
 			"emailMessageAddedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedEnabled)) {
@@ -171,7 +171,7 @@ public class MBSettings {
 	}
 
 	public boolean isEmailMessageUpdatedEnabled() {
-		String emailMessageUpdatedEnabled = _serviceGroupSettings.getValue(
+		String emailMessageUpdatedEnabled = _settings.getValue(
 			"emailMessageUpdatedEnabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
@@ -183,18 +183,18 @@ public class MBSettings {
 
 	public boolean isEnableFlags() {
 		return GetterUtil.getBoolean(
-			_serviceGroupSettings.getValue("enableFlags", null), true);
+			_settings.getValue("enableFlags", null), true);
 	}
 
 	public boolean isEnableRatings() {
 		return GetterUtil.getBoolean(
-			_serviceGroupSettings.getValue("enableRatings", null), true);
+			_settings.getValue("enableRatings", null), true);
 	}
 
 	public boolean isEnableRSS() {
 		if (PortalUtil.isRSSFeedsEnabled()) {
 			return GetterUtil.getBoolean(
-				_serviceGroupSettings.getValue("enableRss", null), true);
+				_settings.getValue("enableRss", null), true);
 		}
 
 		return false;
@@ -202,15 +202,15 @@ public class MBSettings {
 
 	public boolean isSubscribeByDefault() {
 		return GetterUtil.getBoolean(
-			_serviceGroupSettings.getValue("subscribeByDefault", null),
+			_settings.getValue("subscribeByDefault", null),
 			PropsValues.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT);
 	}
 
 	public boolean isThreadAsQuestionByDefault() {
 		return GetterUtil.getBoolean(
-			_serviceGroupSettings.getValue("threadAsQuestionByDefault", null));
+			_settings.getValue("threadAsQuestionByDefault", null));
 	}
 
-	private final Settings _serviceGroupSettings;
+	private final Settings _settings;
 
 }
