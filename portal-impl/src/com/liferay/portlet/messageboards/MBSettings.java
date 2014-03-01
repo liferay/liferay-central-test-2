@@ -137,10 +137,6 @@ public class MBSettings implements Settings {
 		return _settings.getValue("rssFeedType", RSSUtil.FEED_TYPE_DEFAULT);
 	}
 
-	public Settings getServiceGroupSettings() {
-		return _settings;
-	}
-
 	@Override
 	public String getValue(String key, String defaultValue) {
 		return _settings.getValue(key, defaultValue);
