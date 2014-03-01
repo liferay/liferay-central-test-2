@@ -27,7 +27,7 @@ import com.yahoo.platform.yui.mozilla.javascript.EvaluatorException;
 /**
  * @author Carlos Sierra Andrés
  */
-public class YUIJavaScriptMinifier implements JavaScriptMinifier {
+public class YahooJavaScriptMinifier implements JavaScriptMinifier {
 
 	@Override
 	public String compress(String resourceName, String content) {
@@ -56,7 +56,7 @@ public class YUIJavaScriptMinifier implements JavaScriptMinifier {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		YUIJavaScriptMinifier.class);
+		YahooJavaScriptMinifier.class);
 
 	private class JavaScriptErrorReporter implements ErrorReporter {
 

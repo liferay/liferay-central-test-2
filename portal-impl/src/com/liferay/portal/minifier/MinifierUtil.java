@@ -59,7 +59,7 @@ public class MinifierUtil {
 						". Returning GoogleClosureCompileJavaScriptMinifier as default");
 			}
 
-			return new GoogleClosureCompileJavaScriptMinifier();
+			return new GoogleJavaScriptMinifier();
 		}
 	}
 

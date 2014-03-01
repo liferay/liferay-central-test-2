@@ -32,8 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 /**
  * @author Carlos Sierra Andrés
  */
-public class GoogleClosureCompileJavaScriptMinifier
-	implements JavaScriptMinifier {
+public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 
 	@Override
 	public String compress(String resourceName, String content) {
@@ -79,7 +78,7 @@ public class GoogleClosureCompileJavaScriptMinifier
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
-		GoogleClosureCompileJavaScriptMinifier.class);
+		GoogleJavaScriptMinifier.class);
 
 	private static class LogErrorManager extends BasicErrorManager {
 
