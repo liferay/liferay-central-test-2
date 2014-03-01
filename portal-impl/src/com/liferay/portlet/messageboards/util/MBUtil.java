@@ -523,11 +523,10 @@ public class MBUtil {
 	public static MBSettings getSettings(long groupId)
 		throws PortalException, SystemException {
 
-		Settings serviceGroupSettings =
-			SettingsFactoryUtil.getServiceGroupSettings(
-				groupId, MBConstants.SERVICE_NAME);
+		Settings settings = SettingsFactoryUtil.getServiceGroupSettings(
+			groupId, MBConstants.SERVICE_NAME);
 
-		return new MBSettings(serviceGroupSettings);
+		return new MBSettings(settings);
 	}
 
 	public static String getSubjectWithoutMessageId(Message message)
