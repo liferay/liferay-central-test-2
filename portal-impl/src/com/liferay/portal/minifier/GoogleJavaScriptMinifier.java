@@ -48,15 +48,13 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 		setDefaultCompileOptions(compilerOptions);
 
 		compiler.compile(
-			SourceFile.fromCode("extern", StringPool.BLANK),
-			sourceFile, compilerOptions);
+			SourceFile.fromCode("extern", StringPool.BLANK), sourceFile,
+			compilerOptions);
 
 		return compiler.toSource();
 	}
 
-	protected void setDefaultCompileOptions(
-		CompilerOptions compilerOptions) {
-
+	protected void setDefaultCompileOptions(CompilerOptions compilerOptions) {
 		compilerOptions.checkGlobalThisLevel = CheckLevel.OFF;
 		compilerOptions.closurePass = true;
 		compilerOptions.coalesceVariableNames = true;
@@ -119,7 +117,7 @@ public class GoogleJavaScriptMinifier implements JavaScriptMinifier {
 				getWarningCount());
 		}
 
-		private Log _log;
+		private static Log _log;
 		private MessageFormatter _simpleMessageFormatter =
 			new SimpleMessageFormatter();
 
