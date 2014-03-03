@@ -90,12 +90,10 @@ public class UploadServletRequestImpl
 
 			_liferayServletRequest = new LiferayServletRequest(request);
 
-			List<org.apache.commons.fileupload.FileItem> liferayFileItemsList =
+			List<org.apache.commons.fileupload.FileItem> fileItems =
 				servletFileUpload.parseRequest(_liferayServletRequest);
 
-			for (org.apache.commons.fileupload.FileItem fileItem :
-					liferayFileItemsList) {
-
+			for (org.apache.commons.fileupload.FileItem fileItem : fileItems) {
 				LiferayFileItem liferayFileItem = (LiferayFileItem)fileItem;
 
 				if (liferayFileItem.isFormField()) {
