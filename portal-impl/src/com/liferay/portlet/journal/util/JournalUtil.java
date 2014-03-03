@@ -627,16 +627,17 @@ public class JournalUtil {
 	public static boolean getEmailArticleAnyEventEnabled(
 		PortletPreferences preferences) {
 
-		return JournalUtil.getEmailArticleAddedEnabled(preferences) ||
-			JournalUtil.getEmailArticleApprovalDeniedEnabled(
-				preferences) ||
-			JournalUtil.getEmailArticleApprovalGrantedEnabled(
-				preferences) ||
-			JournalUtil.getEmailArticleApprovalRequestedEnabled(
-				preferences) ||
-			JournalUtil.getEmailArticleReviewEnabled(
-				preferences) ||
-			JournalUtil.getEmailArticleUpdatedEnabled(preferences);
+		if (JournalUtil.getEmailArticleAddedEnabled(preferences) ||
+			JournalUtil.getEmailArticleApprovalDeniedEnabled(preferences) ||
+			JournalUtil.getEmailArticleApprovalGrantedEnabled(preferences) ||
+			JournalUtil.getEmailArticleApprovalRequestedEnabled(preferences) ||
+			JournalUtil.getEmailArticleReviewEnabled(preferences) ||
+			JournalUtil.getEmailArticleUpdatedEnabled(preferences)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public static String getEmailArticleApprovalDeniedBody(
@@ -1204,10 +1205,9 @@ public class JournalUtil {
 			ancestorFolderIds.add(groupId);
 		}
 
-		long[] folderIdsArray = ArrayUtil.toLongArray(ancestorFolderIds);
-
 		return SubscriptionLocalServiceUtil.isSubscribed(
-			companyId, userId, JournalFolder.class.getName(), folderIdsArray);
+			companyId, userId, JournalFolder.class.getName(),
+			ArrayUtil.toLongArray(ancestorFolderIds));
 	}
 
 	public static String mergeArticleContent(
