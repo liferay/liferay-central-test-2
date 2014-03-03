@@ -93,16 +93,10 @@ public class DefaultConfigurationAction
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			actionRequest, PREFERENCES_PREFIX);
+		Layout layout = PortletConfigurationLayoutUtil.getLayout(themeDisplay);
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
-		String settingsScope = ParamUtil.getString(
-			actionRequest, "settingsScope");
-		String serviceName = ParamUtil.getString(actionRequest, "serviceName");
-
-		Layout layout = PortletConfigurationLayoutUtil.getLayout(themeDisplay);
 
 		PortletPermissionUtil.check(
 			themeDisplay.getPermissionChecker(), themeDisplay.getScopeGroupId(),
@@ -110,6 +104,12 @@ public class DefaultConfigurationAction
 
 		PortletPreferences portletPreferences = null;
 		Settings settings = null;
+
+		String settingsScope = ParamUtil.getString(
+			actionRequest, "settingsScope");
+
+		UnicodeProperties properties = PropertiesParamUtil.getProperties(
+			actionRequest, PREFERENCES_PREFIX);
 
 		if (Validator.isNull(settingsScope)) {
 			portletPreferences = actionRequest.getPreferences();
@@ -137,6 +137,9 @@ public class DefaultConfigurationAction
 			}
 		}
 		else {
+			String serviceName = ParamUtil.getString(
+				actionRequest, "serviceName");
+
 			if (settingsScope.equals("company")) {
 				settings = SettingsFactoryUtil.getServiceCompanySettings(
 					themeDisplay.getCompanyId(), serviceName);
