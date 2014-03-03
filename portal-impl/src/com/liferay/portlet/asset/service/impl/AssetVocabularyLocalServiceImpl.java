@@ -420,8 +420,7 @@ public class AssetVocabularyLocalServiceImpl
 	}
 
 	protected SearchContext buildSearchContext(
-			long companyId, long groupId, String title, int start, int end)
-		throws SystemException {
+		long companyId, long groupId, String title, int start, int end) {
 
 		SearchContext searchContext = new SearchContext();
 
