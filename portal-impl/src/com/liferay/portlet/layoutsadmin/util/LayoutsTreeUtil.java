@@ -396,14 +396,16 @@ public class LayoutsTreeUtil {
 		}
 
 		public LayoutTreeNodes(
-			List<LayoutTreeNode> layoutTreeNodes, int total) {
+			List<LayoutTreeNode> layoutTreeNodesList, int total) {
 
-			_layoutTreeNodeList = layoutTreeNodes;
+			_layoutTreeNodesList = layoutTreeNodesList;
 			_total = total;
 		}
 
 		public void addAll(LayoutTreeNodes layoutTreeNodes) {
-			_layoutTreeNodeList.addAll(layoutTreeNodes.getLayoutTreeNodeList());
+			_layoutTreeNodesList.addAll(
+				layoutTreeNodes.getLayoutTreeNodesList());
+
 			_total += layoutTreeNodes.getTotal();
 		}
 
@@ -411,16 +413,16 @@ public class LayoutsTreeUtil {
 			return _total;
 		}
 
-		public List<LayoutTreeNode> getLayoutTreeNodeList() {
-			return _layoutTreeNodeList;
+		public List<LayoutTreeNode> getLayoutTreeNodesList() {
+			return _layoutTreeNodesList;
 		}
 
 		@Override
 		public Iterator<LayoutTreeNode> iterator() {
-			return _layoutTreeNodeList.iterator();
+			return _layoutTreeNodesList.iterator();
 		}
 
-		private List<LayoutTreeNode> _layoutTreeNodeList =
+		private List<LayoutTreeNode> _layoutTreeNodesList =
 			new ArrayList<LayoutTreeNode>();
 		private int _total;
 
