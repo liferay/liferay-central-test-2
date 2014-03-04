@@ -189,7 +189,8 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
 		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
@@ -250,7 +251,8 @@ public class RegistryTest {
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
+			_registry.registerService(
+				InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -331,7 +333,8 @@ public class RegistryTest {
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
+			_registry.registerService(
+				InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -375,28 +378,29 @@ public class RegistryTest {
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
+			_registry.registerService(
+				InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
 		String filterString = "(a.property=G)";
 
-		Collection<InterfaceOne> services = _registry.getServices(
+		Collection<InterfaceOne> interfaceOnes = _registry.getServices(
 			InterfaceOne.class, filterString);
 
-		Assert.assertEquals(1, services.size());
+		Assert.assertEquals(1, interfaceOnes.size());
 
 		serviceRegistrationA.unregister();
 
-		services = _registry.getServices(InterfaceOne.class, filterString);
+		interfaceOnes = _registry.getServices(InterfaceOne.class, filterString);
 
-		Assert.assertEquals(1, services.size());
+		Assert.assertEquals(1, interfaceOnes.size());
 
 		serviceRegistrationB.unregister();
 
-		services = _registry.getServices(InterfaceOne.class, filterString);
+		interfaceOnes = _registry.getServices(InterfaceOne.class, filterString);
 
-		Assert.assertEquals(0, services.size());
+		Assert.assertEquals(0, interfaceOnes.size());
 	}
 
 	@Test
@@ -435,7 +439,8 @@ public class RegistryTest {
 		properties.put("b.property", "B");
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, interfaceOne, properties);
+			_registry.registerService(
+				InterfaceOne.class, interfaceOne, properties);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -449,7 +454,8 @@ public class RegistryTest {
 
 		serviceRegistration.unregister();
 
-		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
 		Assert.assertNull(registeredInterfaceOne);
 	}
@@ -566,7 +572,8 @@ public class RegistryTest {
 
 		serviceRegistration.unregister();
 
-		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
 		Assert.assertNull(registeredInterfaceOne);
 	}
@@ -775,7 +782,8 @@ public class RegistryTest {
 			properties.put("a.property", "G");
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationB =
-				_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
+				_registry.registerService(
+					InterfaceOne.class, interfaceOneB, properties);
 
 			Assert.assertNotNull(serviceRegistrationB);
 			Assert.assertFalse(serviceTracker.isEmpty());
@@ -869,7 +877,8 @@ public class RegistryTest {
 			properties.put("a.property", "G");
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationB =
-				_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
+				_registry.registerService(
+					InterfaceOne.class, interfaceOneB, properties);
 
 			Assert.assertNotNull(serviceRegistrationB);
 			Assert.assertFalse(serviceTracker.isEmpty());
