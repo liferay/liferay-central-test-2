@@ -133,8 +133,11 @@ public class JavaDetector {
 		if (_javaVendor != null) {
 			_ibm = _javaVendor.startsWith("IBM");
 
-			_oracle = _javaVendor.startsWith("Sun") ||
-				_javaVendor.startsWith("Oracle");
+			if (_javaVendor.startsWith("Oracle") ||
+				_javaVendor.startsWith("Sun")) {
+
+				_oracle = true;
+			}
 		}
 
 		if (_javaRuntimeName != null) {

@@ -33,7 +33,7 @@ public class HeapUtil {
 	public static int getProcessId() {
 		if (!_supported) {
 			throw new IllegalStateException(
-				HeapUtil.class.getName() + " does not support current JVM");
+				HeapUtil.class.getName() + " does not support the current JVM");
 		}
 
 		return _processId;
@@ -50,7 +50,7 @@ public class HeapUtil {
 
 		if (!_supported) {
 			throw new IllegalStateException(
-				HeapUtil.class.getName() + " does not support current JVM");
+				HeapUtil.class.getName() + " does not support the current JVM");
 		}
 
 		StringBundler sb = new StringBundler(5);
@@ -87,7 +87,7 @@ public class HeapUtil {
 		return _supported;
 	}
 
-	private static void _checkJmap(int processId) throws Exception {
+	private static void _checkJMap(int processId) throws Exception {
 		Future<ObjectValuePair<byte[], byte[]>> future =
 			ProcessUtil.execute(
 				ProcessUtil.COLLECTOR_OUTPUT_PROCESSOR, "jmap", "-histo:live",
@@ -99,18 +99,18 @@ public class HeapUtil {
 
 		if (!stdOutString.contains("#instances")) {
 			throw new IllegalStateException(
-				"jmap can not connect to process id : " + processId);
+				"JMap cannot connect to process ID " + processId);
 		}
 
 		byte[] stdErrBytes = objectValuePair.getValue();
 
 		if (stdErrBytes.length != 0) {
 			throw new IllegalStateException(
-				"jmap returns with error message : " + new String(stdErrBytes));
+				"JMap returns with error: " + new String(stdErrBytes));
 		}
 	}
 
-	private static void _checkJps(int processId) throws Exception {
+	private static void _checkJPS(int processId) throws Exception {
 		Future<ObjectValuePair<byte[], byte[]>> future = ProcessUtil.execute(
 			ProcessUtil.COLLECTOR_OUTPUT_PROCESSOR, "jps");
 
@@ -120,14 +120,14 @@ public class HeapUtil {
 
 		if (!stdOutString.contains(String.valueOf(processId))) {
 			throw new IllegalStateException(
-				"jps can not detect expected process id : " + processId);
+				"JPS cannot detect expected process ID " + processId);
 		}
 
 		byte[] stdErrBytes = objectValuePair.getValue();
 
 		if (stdErrBytes.length != 0) {
 			throw new IllegalStateException(
-				"jps returns with error message : " + new String(stdErrBytes));
+				"JPS returns with error: " + new String(stdErrBytes));
 		}
 	}
 
@@ -151,40 +151,37 @@ public class HeapUtil {
 		return pid;
 	}
 
-	private static final int _processId;
-	private static final boolean _supported;
 	private static Log _log = LogFactoryUtil.getLog(HeapUtil.class);
 
-	static {
-		boolean supported = false;
+	private static int _processId;
+	private static boolean _supported;
 
+	static {
 		int processId = -1;
+		boolean supported = false;
 
 		if (JavaDetector.isOracle()) {
 			try {
 				processId = _getProcessId();
 
-				_checkJps(processId);
-				_checkJmap(processId);
+				_checkJPS(processId);
+				_checkJMap(processId);
 
 				supported = true;
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(
-						HeapUtil.class.getName() +
-							" has been disabled due to detection failure.", e);
+					_log.warn(HeapUtil.class.getName() + " is disabled", e);
 				}
 			}
 		}
 		else if (_log.isDebugEnabled()) {
 			_log.debug(
-				HeapUtil.class.getName() +
-					" is not supported on non-Oracle JVM");
+				HeapUtil.class.getName() + " is only supported on Oracle JVMs");
 		}
 
-		_supported = supported;
 		_processId = processId;
+		_supported = supported;
 	}
 
 }
