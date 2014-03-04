@@ -80,7 +80,7 @@ public class NaturalOrderStringComparator
 				continue;
 			}
 
-			if (checkSpecialCharacters() && Validator.isAscii(c1) &&
+			if (isCheckSpecialCharacters() && Validator.isAscii(c1) &&
 				Validator.isAscii(c2)) {
 
 				boolean isDigitOrLetter1 = _isDigitOrLetter(c1);
@@ -144,7 +144,7 @@ public class NaturalOrderStringComparator
 		}
 	}
 
-	protected boolean checkSpecialCharacters() {
+	protected boolean isCheckSpecialCharacters() {
 		return true;
 	}
 

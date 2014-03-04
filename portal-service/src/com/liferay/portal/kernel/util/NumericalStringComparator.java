@@ -28,7 +28,7 @@ public class NumericalStringComparator extends NaturalOrderStringComparator {
 	}
 
 	@Override
-	protected boolean checkSpecialCharacters() {
+	protected boolean isCheckSpecialCharacters() {
 		return false;
 	}
 
