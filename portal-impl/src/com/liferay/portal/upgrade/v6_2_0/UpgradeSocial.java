@@ -95,25 +95,35 @@ public class UpgradeSocial extends UpgradeProcess {
 		updateWikiPageActivities();
 	}
 
-	protected String generateEntryKey(
+	protected Timestamp getUniqueModifiedDate(
 		long groupId, long userId, Timestamp modifiedDate, long classNameId,
 		long resourcePrimKey, double type) {
 
-		StringBundler sb = new StringBundler(11);
+		while (true) {
+			StringBundler sb = new StringBundler(11);
 
-		sb.append(groupId);
-		sb.append(StringPool.DASH);
-		sb.append(userId);
-		sb.append(StringPool.DASH);
-		sb.append(modifiedDate);
-		sb.append(StringPool.DASH);
-		sb.append(classNameId);
-		sb.append(StringPool.DASH);
-		sb.append(resourcePrimKey);
-		sb.append(StringPool.DASH);
-		sb.append(type);
+			sb.append(groupId);
+			sb.append(StringPool.DASH);
+			sb.append(userId);
+			sb.append(StringPool.DASH);
+			sb.append(modifiedDate);
+			sb.append(StringPool.DASH);
+			sb.append(classNameId);
+			sb.append(StringPool.DASH);
+			sb.append(resourcePrimKey);
+			sb.append(StringPool.DASH);
+			sb.append(type);
 
-		return sb.toString();
+			String key = sb.toString();
+
+			modifiedDate = new Timestamp(modifiedDate.getTime() + 1);
+
+			if (_keys.contains(key)) {
+				continue;
+			}
+
+			return modifiedDate;
+		}
 	}
 
 	protected void updateJournalActivities() throws Exception {
@@ -192,8 +202,6 @@ public class UpgradeSocial extends UpgradeProcess {
 
 			rs = ps.executeQuery();
 
-			Set<String> entryKeySet = new HashSet<String>();
-
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
@@ -208,29 +216,19 @@ public class UpgradeSocial extends UpgradeProcess {
 					type = WikiActivityKeys.UPDATE_PAGE;
 				}
 
+				modifiedDate = getUniqueModifiedDate(
+					groupId, userId, modifiedDate, classNameId, resourcePrimKey,
+					type);
+
 				JSONObject extraDataJSONObject =
 					JSONFactoryUtil.createJSONObject();
 
 				extraDataJSONObject.put("version", version);
 
-				String entryKey = generateEntryKey(
-					groupId, userId, modifiedDate, classNameId, resourcePrimKey,
-					type);
-
-				while (entryKeySet.contains(entryKey)) {
-					modifiedDate = new Timestamp(modifiedDate.getTime() + 1);
-
-					entryKey = generateEntryKey(
-						groupId, userId, modifiedDate, classNameId,
-						resourcePrimKey, type);
-				}
-
 				addActivity(
 					increment(), groupId, companyId, userId, modifiedDate, 0,
 					classNameId, resourcePrimKey, type,
 					extraDataJSONObject.toString(), 0);
-
-				entryKeySet.add(entryKey);
 			}
 		}
 		finally {
@@ -239,5 +237,7 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeSocial.class);
+
+	private Set<String> _keys = new HashSet<String>();
 
 }
