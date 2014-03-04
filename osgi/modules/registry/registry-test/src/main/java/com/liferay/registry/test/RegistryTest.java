@@ -78,85 +78,87 @@ public class RegistryTest {
 
 	@Test
 	public void testGetServiceByClass() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one);
+			_registry.registerService(InterfaceOne.class, interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
-		InterfaceOne registeredOne = _registry.getService(InterfaceOne.class);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			InterfaceOne.class);
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 	}
 
 	@Test
 	public void testGetServiceByClassName() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one);
+			_registry.registerService(InterfaceOne.class, interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
-		InterfaceOne registeredOne = _registry.getService(
+		InterfaceOne registeredInterfaceOne = _registry.getService(
 			InterfaceOne.class.getName());
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 	}
 
 	@Test
 	public void testGetServiceByClassNameAndFilterString() throws Exception {
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB, properties);
+			_registry.registerService(
+				InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
 		String filterString = "(a.property=G)";
 
-		InterfaceOne[] services = _registry.getServices(
+		InterfaceOne[] interfaceOnes = _registry.getServices(
 			InterfaceOne.class.getName(), filterString);
 
-		Assert.assertEquals(1, services.length);
+		Assert.assertEquals(1, interfaceOnes.length);
 
 		serviceRegistrationA.unregister();
 
-		services = _registry.getServices(
+		interfaceOnes = _registry.getServices(
 			InterfaceOne.class.getName(), filterString);
 
-		Assert.assertEquals(1, services.length);
+		Assert.assertEquals(1, interfaceOnes.length);
 
 		serviceRegistrationB.unregister();
 
-		services = _registry.getServices(
+		interfaceOnes = _registry.getServices(
 			InterfaceOne.class.getName(), filterString);
 
-		Assert.assertNull(services);
+		Assert.assertNull(interfaceOnes);
 	}
 
 	@Test
 	public void testGetServiceReferenceByClass() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one);
+			_registry.registerService(InterfaceOne.class, interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -165,19 +167,20 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 	}
 
 	@Test
 	public void testGetServiceReferenceByClassName() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one);
+			_registry.registerService(InterfaceOne.class, interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -186,26 +189,26 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 	}
 
 	@Test
 	public void testGetServiceReferencesByClass() throws Exception {
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB);
+			_registry.registerService(InterfaceOne.class, interfaceOneB);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -233,21 +236,21 @@ public class RegistryTest {
 	public void testGetServiceReferencesByClassAndFilterString()
 		throws Exception {
 
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB, properties);
+			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -275,17 +278,17 @@ public class RegistryTest {
 
 	@Test
 	public void testGetServiceReferencesByClassName() throws Exception {
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB);
+			_registry.registerService(InterfaceOne.class, interfaceOneB);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -314,21 +317,21 @@ public class RegistryTest {
 	public void testGetServiceReferencesByClassNameAndFilterString()
 		throws Exception {
 
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB, properties);
+			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -358,21 +361,21 @@ public class RegistryTest {
 
 	@Test
 	public void testGetServicesByClassAndFilterString() throws Exception {
-		InterfaceOne oneA = getInstance();
+		InterfaceOne interfaceOneA = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			_registry.registerService(InterfaceOne.class, oneA);
+			_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
 
-		InterfaceOne oneB = getInstance();
+		InterfaceOne interfaceOneB = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
 		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			_registry.registerService(InterfaceOne.class, oneB, properties);
+			_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
 
 		Assert.assertNotNull(serviceRegistrationB);
 
@@ -398,10 +401,10 @@ public class RegistryTest {
 
 	@Test
 	public void testRegisterServiceByClass() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one);
+			_registry.registerService(InterfaceOne.class, interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -410,20 +413,21 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 
-		registeredOne = _registry.getService(serviceReference);
+		registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
 	public void testRegisterServiceByClassAndProperties() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
@@ -431,7 +435,7 @@ public class RegistryTest {
 		properties.put("b.property", "B");
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class, one, properties);
+			_registry.registerService(InterfaceOne.class, interfaceOne, properties);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -445,20 +449,20 @@ public class RegistryTest {
 
 		serviceRegistration.unregister();
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
 	public void testRegisterServiceByClassNames() {
-		InterfaceBoth one = new InterfaceBoth() {};
+		InterfaceBoth interfaceOne = new InterfaceBoth() {};
 
 		ServiceRegistration<?> serviceRegistration = _registry.registerService(
 			new String[] {
 				InterfaceOne.class.getName(), InterfaceTwo.class.getName()
 			},
-			one);
+			interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -467,17 +471,17 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		Object registeredOne = _registry.getService(serviceReference);
+		Object registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertEquals(one, registeredOne);
-		Assert.assertTrue(registeredOne instanceof InterfaceOne);
-		Assert.assertTrue(registeredOne instanceof InterfaceTwo);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
+		Assert.assertTrue(registeredInterfaceOne instanceof InterfaceOne);
+		Assert.assertTrue(registeredInterfaceOne instanceof InterfaceTwo);
 
 		serviceRegistration.unregister();
 
-		registeredOne = _registry.getService(serviceReference);
+		registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
@@ -505,17 +509,18 @@ public class RegistryTest {
 
 		serviceRegistration.unregister();
 
-		Object registeredOne = _registry.getService(serviceReference);
+		Object registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
 	public void testRegisterServiceByFilterString() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
-			_registry.registerService(InterfaceOne.class.getName(), one);
+			_registry.registerService(
+				InterfaceOne.class.getName(), interfaceOne);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -524,20 +529,21 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceReference);
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(
+			serviceReference);
 
-		Assert.assertEquals(one, registeredOne);
+		Assert.assertEquals(interfaceOne, registeredInterfaceOne);
 
 		serviceRegistration.unregister();
 
-		registeredOne = _registry.getService(serviceReference);
+		registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
 	public void testRegisterServiceByFilterStringAndProperties() {
-		InterfaceOne one = getInstance();
+		InterfaceOne interfaceOne = getInstance();
 
 		Map<String, Object> properties = new HashMap<String, Object>();
 
@@ -546,7 +552,7 @@ public class RegistryTest {
 
 		ServiceRegistration<InterfaceOne> serviceRegistration =
 			_registry.registerService(
-				InterfaceOne.class.getName(), one, properties);
+				InterfaceOne.class.getName(), interfaceOne, properties);
 
 		Assert.assertNotNull(serviceRegistration);
 
@@ -560,9 +566,9 @@ public class RegistryTest {
 
 		serviceRegistration.unregister();
 
-		InterfaceOne registeredOne = _registry.getService(serviceReference);
+		InterfaceOne registeredInterfaceOne = _registry.getService(serviceReference);
 
-		Assert.assertNull(registeredOne);
+		Assert.assertNull(registeredInterfaceOne);
 	}
 
 	@Test
@@ -694,12 +700,12 @@ public class RegistryTest {
 		implements ServiceTrackerCustomizer<InterfaceOne, TrackedOne> {
 
 		public MockServiceTrackerCustomizer(
-			InterfaceOne oneA, InterfaceOne oneB,
+			InterfaceOne interfaceOneA, InterfaceOne interfaceOneB,
 			AtomicReference<TrackedOne> referenceA,
 			AtomicReference<TrackedOne> referenceB) {
 
-			_oneA = oneA;
-			_oneB = oneB;
+			_interfaceOneA = interfaceOneA;
+			_interfaceOneB = interfaceOneB;
 			_referenceA = referenceA;
 			_referenceB = referenceB;
 		}
@@ -712,10 +718,10 @@ public class RegistryTest {
 
 			TrackedOne trackedOne = new TrackedOne();
 
-			if (service == _oneA) {
+			if (service == _interfaceOneA) {
 				_referenceA.set(trackedOne);
 			}
-			else if (service == _oneB) {
+			else if (service == _interfaceOneB) {
 				_referenceB.set(trackedOne);
 			}
 
@@ -734,8 +740,8 @@ public class RegistryTest {
 			TrackedOne trackedOne) {
 		}
 
-		private InterfaceOne _oneA;
-		private InterfaceOne _oneB;
+		private InterfaceOne _interfaceOneA;
+		private InterfaceOne _interfaceOneB;
 		private AtomicReference<TrackedOne> _referenceA;
 		private AtomicReference<TrackedOne> _referenceB;
 
@@ -755,29 +761,29 @@ public class RegistryTest {
 			Assert.assertTrue(serviceTracker.isEmpty());
 			Assert.assertEquals(0, serviceTracker.size());
 
-			InterfaceOne oneA = getInstance();
+			InterfaceOne interfaceOneA = getInstance();
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationA =
-				_registry.registerService(InterfaceOne.class, oneA);
+				_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 			Assert.assertNotNull(serviceRegistrationA);
 
-			InterfaceOne oneB = getInstance();
+			InterfaceOne interfaceOneB = getInstance();
 
 			Map<String, Object> properties = new HashMap<String, Object>();
 
 			properties.put("a.property", "G");
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationB =
-				_registry.registerService(InterfaceOne.class, oneB, properties);
+				_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
 
 			Assert.assertNotNull(serviceRegistrationB);
 			Assert.assertFalse(serviceTracker.isEmpty());
 			Assert.assertEquals(
-				(expectedServicesCount == 2) ? oneA : oneB,
+				(expectedServicesCount == 2) ? interfaceOneA : interfaceOneB,
 				serviceTracker.getService());
 			Assert.assertEquals(
-				oneB,
+				interfaceOneB,
 				serviceTracker.getService(
 					serviceRegistrationB.getServiceReference()));
 
@@ -799,11 +805,11 @@ public class RegistryTest {
 			Assert.assertEquals(
 				expectedServicesCount, trackedServiceReferences.size());
 			Assert.assertEquals(
-				(expectedServicesCount == 2) ? oneA : oneB,
+				(expectedServicesCount == 2) ? interfaceOneA : interfaceOneB,
 				trackedServiceReferences.get(
 					trackedServiceReferences.firstKey()));
 			Assert.assertEquals(
-				oneB,
+				interfaceOneB,
 				trackedServiceReferences.get(
 					trackedServiceReferences.lastKey()));
 
@@ -833,8 +839,8 @@ public class RegistryTest {
 					serviceTrackerCustomizer);
 
 		public void test(int expectedServicesCount) {
-			InterfaceOne oneA = getInstance();
-			InterfaceOne oneB = getInstance();
+			InterfaceOne interfaceOneA = getInstance();
+			InterfaceOne interfaceOneB = getInstance();
 			AtomicReference<TrackedOne> referenceA =
 				new AtomicReference<TrackedOne>();
 			AtomicReference<TrackedOne> referenceB =
@@ -843,7 +849,7 @@ public class RegistryTest {
 			ServiceTrackerCustomizer<InterfaceOne, TrackedOne>
 				serviceTrackerCustomizer =
 					new MockServiceTrackerCustomizer(
-						oneA, oneB, referenceA, referenceB);
+						interfaceOneA, interfaceOneB, referenceA, referenceB);
 
 			ServiceTracker<InterfaceOne, TrackedOne> serviceTracker =
 				getServiceTracker(serviceTrackerCustomizer);
@@ -854,7 +860,7 @@ public class RegistryTest {
 			Assert.assertEquals(0, serviceTracker.size());
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationA =
-				_registry.registerService(InterfaceOne.class, oneA);
+				_registry.registerService(InterfaceOne.class, interfaceOneA);
 
 			Assert.assertNotNull(serviceRegistrationA);
 
@@ -863,7 +869,7 @@ public class RegistryTest {
 			properties.put("a.property", "G");
 
 			ServiceRegistration<InterfaceOne> serviceRegistrationB =
-				_registry.registerService(InterfaceOne.class, oneB, properties);
+				_registry.registerService(InterfaceOne.class, interfaceOneB, properties);
 
 			Assert.assertNotNull(serviceRegistrationB);
 			Assert.assertFalse(serviceTracker.isEmpty());
