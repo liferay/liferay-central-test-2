@@ -186,7 +186,7 @@ public class ServiceTrackerCollectionTest {
 		AtomicInteger counter = new AtomicInteger();
 
 		ServiceTrackerCustomizer<InterfaceOne, InterfaceOne>
-			serviceTrackerCustomizer = new TestServiceTrackerCustomizer(
+			serviceTrackerCustomizer = new MockServiceTrackerCustomizer(
 				counter);
 
 		ServiceTrackerList<InterfaceOne> serviceTrackerList =
@@ -250,7 +250,7 @@ public class ServiceTrackerCollectionTest {
 		AtomicInteger counter = new AtomicInteger();
 
 		ServiceTrackerCustomizer<InterfaceOne, InterfaceOne>
-			serviceTrackerCustomizer = new TestServiceTrackerCustomizer(
+			serviceTrackerCustomizer = new MockServiceTrackerCustomizer(
 				counter);
 
 		Map<String, Object> properties = new HashMap<String, Object>();
@@ -361,7 +361,7 @@ public class ServiceTrackerCollectionTest {
 		AtomicInteger counter = new AtomicInteger();
 
 		ServiceTrackerCustomizer<InterfaceOne, InterfaceOne>
-			serviceTrackerCustomizer = new TestServiceTrackerCustomizer(
+			serviceTrackerCustomizer = new MockServiceTrackerCustomizer(
 				counter);
 
 		ServiceTrackerList<InterfaceOne> serviceTrackerList =
@@ -409,7 +409,7 @@ public class ServiceTrackerCollectionTest {
 		AtomicInteger counter = new AtomicInteger();
 
 		ServiceTrackerCustomizer<InterfaceOne, InterfaceOne>
-			serviceTrackerCustomizer = new TestServiceTrackerCustomizer(
+			serviceTrackerCustomizer = new MockServiceTrackerCustomizer(
 				counter);
 
 		Map<String, Object> properties = new HashMap<String, Object>();
@@ -472,7 +472,7 @@ public class ServiceTrackerCollectionTest {
 		AtomicInteger counter = new AtomicInteger();
 
 		ServiceTrackerCustomizer<InterfaceOne, InterfaceOne>
-			serviceTrackerCustomizer = new TestServiceTrackerCustomizer(
+			serviceTrackerCustomizer = new MockServiceTrackerCustomizer(
 				counter);
 
 		Map<String, Object> properties = new HashMap<String, Object>();
@@ -532,10 +532,10 @@ public class ServiceTrackerCollectionTest {
 		return new InterfaceOne() {};
 	}
 
-	private class TestServiceTrackerCustomizer
+	private class MockServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<InterfaceOne, InterfaceOne> {
 
-		public TestServiceTrackerCustomizer(AtomicInteger counter) {
+		public MockServiceTrackerCustomizer(AtomicInteger counter) {
 			_counter = counter;
 		}
 
@@ -543,8 +543,9 @@ public class ServiceTrackerCollectionTest {
 		public InterfaceOne addingService(
 			ServiceReference<InterfaceOne> serviceReference) {
 
-			InterfaceOne service = RegistryUtil.getRegistry().getService(
-				serviceReference);
+			Registry registry = RegistryUtil.getRegistry();
+
+			InterfaceOne service = registry.getService(serviceReference);
 
 			_counter.incrementAndGet();
 
@@ -564,7 +565,9 @@ public class ServiceTrackerCollectionTest {
 			ServiceReference<InterfaceOne> serviceReference,
 			InterfaceOne service) {
 
-			RegistryUtil.getRegistry().ungetService(serviceReference);
+			Registry registry = RegistryUtil.getRegistry();
+			
+			registry.ungetService(serviceReference);
 
 			_counter.incrementAndGet();
 		}

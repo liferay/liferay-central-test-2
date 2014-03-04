@@ -622,7 +622,7 @@ public class RegistryTest {
 
 		ServiceTrackerCustomizer<InterfaceOne, TrackedOne>
 			serviceTrackerCustomizer =
-				new TestServiceTrackerCustomizer(
+				new MockServiceTrackerCustomizer(
 					oneA, oneB, referenceA, referenceB);
 
 		ServiceTracker<InterfaceOne, TrackedOne> serviceTracker =
@@ -715,7 +715,7 @@ public class RegistryTest {
 
 		ServiceTrackerCustomizer<InterfaceOne, TrackedOne>
 			serviceTrackerCustomizer =
-				new TestServiceTrackerCustomizer(
+				new MockServiceTrackerCustomizer(
 					oneA, oneB, referenceA, referenceB);
 
 		ServiceTracker<InterfaceOne, TrackedOne> serviceTracker =
@@ -814,7 +814,7 @@ public class RegistryTest {
 
 		ServiceTrackerCustomizer<InterfaceOne, TrackedOne>
 			serviceTrackerCustomizer =
-				new TestServiceTrackerCustomizer(
+				new MockServiceTrackerCustomizer(
 					oneA, oneB, referenceA, referenceB);
 
 		ServiceTracker<InterfaceOne, TrackedOne> serviceTracker =
@@ -965,16 +965,16 @@ public class RegistryTest {
 
 	private BundleContext _bundleContext;
 
-	private class TestServiceTrackerCustomizer
+	private class MockServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<InterfaceOne, TrackedOne> {
 
-		public TestServiceTrackerCustomizer(
-			InterfaceOne a, InterfaceOne b,
+		public MockServiceTrackerCustomizer(
+			InterfaceOne oneA, InterfaceOne oneB,
 			AtomicReference<TrackedOne> referenceA,
 			AtomicReference<TrackedOne> referenceB) {
 
-			_a = a;
-			_b = b;
+			_oneA = oneA;
+			_oneB = oneB;
 			_referenceA = referenceA;
 			_referenceB = referenceB;
 		}
@@ -983,18 +983,20 @@ public class RegistryTest {
 		public TrackedOne addingService(
 			ServiceReference<InterfaceOne> serviceReference) {
 
-			InterfaceOne service = RegistryUtil.getRegistry().getService(
-				serviceReference);
-			TrackedOne testWrapper = new TrackedOne();
+			Registry registry = RegistryUtil.getRegistry();
 
-			if (service == _a) {
-				_referenceA.set(testWrapper);
+			InterfaceOne service = registry.getService(serviceReference);
+
+			TrackedOne trackedOne = new TrackedOne();
+
+			if (service == _oneA) {
+				_referenceA.set(trackedOne);
 			}
-			else if (service == _b) {
-				_referenceB.set(testWrapper);
+			else if (service == _oneB) {
+				_referenceB.set(trackedOne);
 			}
 
-			return testWrapper;
+			return trackedOne;
 		}
 
 		@Override
@@ -1009,10 +1011,10 @@ public class RegistryTest {
 			TrackedOne service) {
 		}
 
+		private InterfaceOne _oneA;
+		private InterfaceOne _oneB;
 		private AtomicReference<TrackedOne> _referenceA;
 		private AtomicReference<TrackedOne> _referenceB;
-		private InterfaceOne _a;
-		private InterfaceOne _b;
 
 	}
 
