@@ -606,7 +606,7 @@ public class RegistryTest {
 		ServiceTracker<InterfaceOne, InterfaceOne> serviceTracker =
 			registry.trackServices(InterfaceOne.class);
 
-		testTrackServices(serviceTracker);
+		testTrackServices(serviceTracker, 2);
 	}
 
 	@Test
@@ -699,7 +699,7 @@ public class RegistryTest {
 		ServiceTracker<InterfaceOne, InterfaceOne> serviceTracker =
 			registry.trackServices(InterfaceOne.class.getName());
 
-		testTrackServices(serviceTracker);
+		testTrackServices(serviceTracker, 2);
 	}
 
 	@Test
@@ -794,71 +794,7 @@ public class RegistryTest {
 		ServiceTracker<InterfaceOne, InterfaceOne> serviceTracker =
 			registry.trackServices(filter);
 
-		serviceTracker.open();
-
-		Assert.assertTrue(serviceTracker.isEmpty());
-		Assert.assertEquals(0, serviceTracker.size());
-
-		InterfaceOne oneA = getInstance();
-
-		ServiceRegistration<InterfaceOne> serviceRegistrationA =
-			registry.registerService(InterfaceOne.class, oneA);
-
-		Assert.assertNotNull(serviceRegistrationA);
-
-		InterfaceOne oneB = getInstance();
-
-		Map<String, Object> properties = new HashMap<String, Object>();
-
-		properties.put("a.property", "G");
-
-		ServiceRegistration<InterfaceOne> serviceRegistrationB =
-			registry.registerService(InterfaceOne.class, oneB, properties);
-
-		Assert.assertNotNull(serviceRegistrationB);
-		Assert.assertFalse(serviceTracker.isEmpty());
-		Assert.assertEquals(oneB, serviceTracker.getService());
-		Assert.assertEquals(
-			oneB,
-			serviceTracker.getService(
-				serviceRegistrationB.getServiceReference()));
-
-		ServiceReference<InterfaceOne>[] serviceReferences =
-			serviceTracker.getServiceReferences();
-
-		Assert.assertEquals(1, serviceReferences.length);
-
-		Object[] services = serviceTracker.getServices();
-
-		Assert.assertEquals(1, services.length);
-
-		SortedMap<ServiceReference<InterfaceOne>, InterfaceOne>
-			trackedServiceReferences =
-				serviceTracker.getTrackedServiceReferences();
-
-		Assert.assertNotNull(trackedServiceReferences);
-		Assert.assertEquals(1, trackedServiceReferences.size());
-		Assert.assertEquals(
-			oneB,
-			trackedServiceReferences.get(trackedServiceReferences.firstKey()));
-		Assert.assertEquals(
-			oneB,
-			trackedServiceReferences.get(trackedServiceReferences.lastKey()));
-
-		serviceRegistrationA.unregister();
-
-		Assert.assertEquals(1, serviceTracker.size());
-
-		serviceRegistrationB.unregister();
-
-		Assert.assertEquals(0, serviceTracker.size());
-
-		trackedServiceReferences = serviceTracker.getTrackedServiceReferences();
-
-		Assert.assertNotNull(trackedServiceReferences);
-		Assert.assertEquals(0, trackedServiceReferences.size());
-
-		serviceTracker.close();
+		testTrackServices(serviceTracker, 1);
 	}
 
 	@Test
@@ -952,7 +888,8 @@ public class RegistryTest {
 	}
 
 	protected void testTrackServices(
-		ServiceTracker<InterfaceOne, InterfaceOne> serviceTracker) {
+		ServiceTracker<InterfaceOne, InterfaceOne> serviceTracker,
+		int expectedServicesCount) {
 
 		serviceTracker.open();
 
@@ -979,7 +916,9 @@ public class RegistryTest {
 
 		Assert.assertNotNull(serviceRegistrationB);
 		Assert.assertFalse(serviceTracker.isEmpty());
-		Assert.assertEquals(oneA, serviceTracker.getService());
+		Assert.assertEquals(
+			(expectedServicesCount == 2) ? oneA : oneB,
+			serviceTracker.getService());
 		Assert.assertEquals(
 			oneB,
 			serviceTracker.getService(
@@ -988,20 +927,21 @@ public class RegistryTest {
 		ServiceReference<InterfaceOne>[] serviceReferences =
 			serviceTracker.getServiceReferences();
 
-		Assert.assertEquals(2, serviceReferences.length);
+		Assert.assertEquals(expectedServicesCount, serviceReferences.length);
 
 		Object[] services = serviceTracker.getServices();
 
-		Assert.assertEquals(2, services.length);
+		Assert.assertEquals(expectedServicesCount, services.length);
 
 		SortedMap<ServiceReference<InterfaceOne>, InterfaceOne>
 			trackedServiceReferences =
 				serviceTracker.getTrackedServiceReferences();
 
 		Assert.assertNotNull(trackedServiceReferences);
-		Assert.assertEquals(2, trackedServiceReferences.size());
 		Assert.assertEquals(
-			oneA,
+			expectedServicesCount, trackedServiceReferences.size());
+		Assert.assertEquals(
+			(expectedServicesCount == 2) ? oneA : oneB,
 			trackedServiceReferences.get(trackedServiceReferences.firstKey()));
 		Assert.assertEquals(
 			oneB,
