@@ -1002,13 +1002,13 @@ public class RegistryTest {
 		@Override
 		public void modifiedService(
 			ServiceReference<InterfaceOne> serviceReference,
-			TrackedOne service) {
+			TrackedOne trackedOne) {
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<InterfaceOne> serviceReference,
-			TrackedOne service) {
+			TrackedOne trackedOne) {
 		}
 
 		private InterfaceOne _oneA;

@@ -545,25 +545,23 @@ public class ServiceTrackerCollectionTest {
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			InterfaceOne service = registry.getService(serviceReference);
+			InterfaceOne one = registry.getService(serviceReference);
 
 			_counter.incrementAndGet();
 
-			return service;
+			return one;
 		}
 
 		@Override
 		public void modifiedService(
-			ServiceReference<InterfaceOne> serviceReference,
-			InterfaceOne service) {
+			ServiceReference<InterfaceOne> serviceReference, InterfaceOne one) {
 
 			_counter.incrementAndGet();
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<InterfaceOne> serviceReference,
-			InterfaceOne service) {
+			ServiceReference<InterfaceOne> serviceReference, InterfaceOne one) {
 
 			Registry registry = RegistryUtil.getRegistry();
 			
