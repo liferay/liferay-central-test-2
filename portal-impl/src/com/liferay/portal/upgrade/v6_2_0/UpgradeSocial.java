@@ -96,8 +96,8 @@ public class UpgradeSocial extends UpgradeProcess {
 	}
 
 	protected Timestamp getUniqueModifiedDate(
-		long groupId, long userId, Timestamp modifiedDate, long classNameId,
-		long resourcePrimKey, double type, Set<String> keys) {
+		Set<String> keys, long groupId, long userId, Timestamp modifiedDate,
+		long classNameId, long resourcePrimKey, double type) {
 
 		while (true) {
 			StringBundler sb = new StringBundler(11);
@@ -194,6 +194,8 @@ public class UpgradeSocial extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
+			Set<String> keys = new HashSet<String>();
+
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
@@ -201,8 +203,6 @@ public class UpgradeSocial extends UpgradeProcess {
 					"resourcePrimKey, version from WikiPage");
 
 			rs = ps.executeQuery();
-
-			Set<String> keys = new HashSet<String>();
 
 			while (rs.next()) {
 				long groupId = rs.getLong("groupId");
@@ -219,8 +219,8 @@ public class UpgradeSocial extends UpgradeProcess {
 				}
 
 				modifiedDate = getUniqueModifiedDate(
-					groupId, userId, modifiedDate, classNameId, resourcePrimKey,
-					type, keys);
+					keys, groupId, userId, modifiedDate, classNameId,
+					resourcePrimKey, type);
 
 				JSONObject extraDataJSONObject =
 					JSONFactoryUtil.createJSONObject();
