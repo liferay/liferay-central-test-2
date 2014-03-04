@@ -886,9 +886,7 @@ public class RegistryTest {
 		public TrackedOne addingService(
 			ServiceReference<InterfaceOne> serviceReference) {
 
-			Registry registry = RegistryUtil.getRegistry();
-
-			InterfaceOne service = registry.getService(serviceReference);
+			InterfaceOne service = _registry.getService(serviceReference);
 
 			TrackedOne trackedOne = new TrackedOne();
 
