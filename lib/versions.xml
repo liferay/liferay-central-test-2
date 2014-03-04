@@ -1380,7 +1380,7 @@
 			</license>
 		</licenses>
 		<comments>
-			Removed META-INF/beans.xml to prevent CDI.
+			Removed META-INF/beans.xml to prevent CDI autowiring.
 		</comments>
 	</library>
 	<library>
