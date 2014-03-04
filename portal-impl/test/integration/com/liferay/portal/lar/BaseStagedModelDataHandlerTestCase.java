@@ -310,7 +310,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 			assetEntry.getClassName(), assetEntry.getClassPK(),
 			new long[] {
 				assetCategory.getCategoryId(),
-				companAssetCategory.getCategoryId()
+				companyAssetCategory.getCategoryId()
 			},
 			new String[] {assetTag.getName()});
 
