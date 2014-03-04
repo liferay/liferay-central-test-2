@@ -564,7 +564,7 @@ public class ServiceTrackerCollectionTest {
 			ServiceReference<InterfaceOne> serviceReference, InterfaceOne one) {
 
 			Registry registry = RegistryUtil.getRegistry();
-			
+
 			registry.ungetService(serviceReference);
 
 			_counter.incrementAndGet();
