@@ -634,14 +634,14 @@ public class RegistryTest {
 		Assert.assertTrue(serviceTracker.isEmpty());
 		Assert.assertEquals(0, serviceTracker.size());
 
-		Map<String, Object> properties = new HashMap<String, Object>();
-
-		properties.put("a.property", "G");
-
 		ServiceRegistration<InterfaceOne> serviceRegistrationA =
 			registry.registerService(InterfaceOne.class, oneA);
 
 		Assert.assertNotNull(serviceRegistrationA);
+
+		Map<String, Object> properties = new HashMap<String, Object>();
+
+		properties.put("a.property", "G");
 
 		ServiceRegistration<InterfaceOne> serviceRegistrationB =
 			registry.registerService(InterfaceOne.class, oneB, properties);
@@ -664,17 +664,17 @@ public class RegistryTest {
 		Assert.assertEquals(2, services.length);
 
 		SortedMap<ServiceReference<InterfaceOne>, TrackedOne>
-			trackedServiceReference =
+			trackedServiceReferences =
 				serviceTracker.getTrackedServiceReferences();
 
-		Assert.assertNotNull(trackedServiceReference);
-		Assert.assertEquals(2, trackedServiceReference.size());
+		Assert.assertNotNull(trackedServiceReferences);
+		Assert.assertEquals(2, trackedServiceReferences.size());
 		Assert.assertEquals(
 			referenceA.get(),
-			trackedServiceReference.get(trackedServiceReference.firstKey()));
+			trackedServiceReferences.get(trackedServiceReferences.firstKey()));
 		Assert.assertEquals(
 			referenceB.get(),
-			trackedServiceReference.get(trackedServiceReference.lastKey()));
+			trackedServiceReferences.get(trackedServiceReferences.lastKey()));
 
 		serviceRegistrationA.unregister();
 
@@ -684,10 +684,10 @@ public class RegistryTest {
 
 		Assert.assertEquals(0, serviceTracker.size());
 
-		trackedServiceReference = serviceTracker.getTrackedServiceReferences();
+		trackedServiceReferences = serviceTracker.getTrackedServiceReferences();
 
-		Assert.assertNotNull(trackedServiceReference);
-		Assert.assertEquals(0, trackedServiceReference.size());
+		Assert.assertNotNull(trackedServiceReferences);
+		Assert.assertEquals(0, trackedServiceReferences.size());
 
 		serviceTracker.close();
 	}
