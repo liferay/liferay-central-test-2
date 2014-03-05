@@ -118,16 +118,15 @@ public class StrutsActionRegistryUtil {
 		Registry registry = RegistryUtil.getRegistry();
 
 		_serviceTracker = registry.trackServices(
-			_FILTER_STRING, new DefaultServiceTrackerCustomizer());
+			"(&(|(objectClass=" + StrutsAction.class.getName() +
+				")(objectClass=" + StrutsPortletAction.class.getName() +
+					"))(path=*))",
+			new DefaultServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
 
 	private static final String _KEY_PATH = "path";
-
-	private static final String _FILTER_STRING =
-		"(&(|(objectClass=" + StrutsAction.class.getName() + ")(objectClass=" +
-			StrutsPortletAction.class.getName() + "))(path=*))";
 
 	private static StrutsActionRegistryUtil _instance =
 		new StrutsActionRegistryUtil();
