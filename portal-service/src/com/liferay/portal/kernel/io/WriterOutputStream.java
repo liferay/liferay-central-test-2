@@ -169,12 +169,12 @@ public class WriterOutputStream extends OutputStream {
 		}
 	}
 
-	private void _flush(boolean flushUnderNeath) throws IOException {
+	private void _flush(boolean flushWriter) throws IOException {
 		if (_outputCharBuffer.position() > 0) {
 			_writer.write(
 				_outputCharBuffer.array(), 0, _outputCharBuffer.position());
 
-			if (flushUnderNeath) {
+			if (flushWriter) {
 				_writer.flush();
 			}
 
