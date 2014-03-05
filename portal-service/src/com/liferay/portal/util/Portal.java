@@ -60,7 +60,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 
@@ -1022,9 +1021,9 @@ public interface Portal {
 
 	public String getPortletTitle(Portlet portlet, User user);
 
-	public String getPortletTitle(RenderRequest renderRequest);
+	public String getPortletTitle(PortletRequest portletRequest);
 
-	public String getPortletTitle(RenderResponse renderResponse);
+	public String getPortletTitle(PortletResponse portletResponse);
 
 	public String getPortletTitle(String portletId, Locale locale);
 

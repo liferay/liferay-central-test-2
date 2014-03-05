@@ -68,7 +68,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 
@@ -1329,12 +1328,12 @@ public class PortalUtil {
 		return getPortal().getPortletTitle(portlet, user);
 	}
 
-	public static String getPortletTitle(RenderRequest renderRequest) {
-		return getPortal().getPortletTitle(renderRequest);
+	public static String getPortletTitle(PortletRequest portletRequest) {
+		return getPortal().getPortletTitle(portletRequest);
 	}
 
-	public static String getPortletTitle(RenderResponse renderResponse) {
-		return getPortal().getPortletTitle(renderResponse);
+	public static String getPortletTitle(PortletResponse portletResponse) {
+		return getPortal().getPortletTitle(portletResponse);
 	}
 
 	public static String getPortletTitle(String portletId, Locale locale) {
