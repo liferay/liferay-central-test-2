@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.events.LifecycleEvent;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.registry.collections.ServiceTrackerCollections;
 
@@ -146,18 +145,12 @@ public class EventsProcessorUtil {
 			key);
 
 		if (lifecycleActions == null) {
-			StringBundler sb = new StringBundler(3);
+			Map<String, Object> properties = new HashMap<String, Object>();
 
-			sb.append("(key=");
-			sb.append(key);
-			sb.append(")");
-
-			Map<String, Object> map = new HashMap<String, Object>();
-
-			map.put("key", key);
+			properties.put("key", key);
 
 			lifecycleActions = ServiceTrackerCollections.list(
-				LifecycleAction.class, sb.toString(), map);
+				LifecycleAction.class, "(key=" + key + ")", properties);
 
 			_lifecycleActions.putIfAbsent(key, lifecycleActions);
 		}
@@ -168,9 +161,9 @@ public class EventsProcessorUtil {
 	private EventsProcessorUtil() {
 	}
 
-	private static EventsProcessorUtil _instance = new EventsProcessorUtil();
-
 	private static Log _log = LogFactoryUtil.getLog(EventsProcessorUtil.class);
+
+	private static EventsProcessorUtil _instance = new EventsProcessorUtil();
 
 	private ConcurrentMap<String, Collection<LifecycleAction>>
 		_lifecycleActions =
