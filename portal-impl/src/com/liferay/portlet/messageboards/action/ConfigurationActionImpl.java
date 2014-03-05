@@ -50,8 +50,6 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
-
 		validateEmailFrom(actionRequest);
 		validateEmailMessageAdded(actionRequest);
 		validateEmailMessageUpdated(actionRequest);
