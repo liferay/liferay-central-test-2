@@ -64,7 +64,7 @@ public class StrutsActionRegistryUtil {
 		Filter filter = registry.getFilter(
 			"(&(|(objectClass=" + StrutsAction.class.getName() +
 				")(objectClass=" + StrutsPortletAction.class.getName() +
-				"))(path=*))");
+					"))(path=*))");
 
 		_serviceTracker = registry.trackServices(
 			filter, new StrutsActionServiceTrackerCustomizer());
