@@ -64,7 +64,7 @@ public class StrutsActionRegistryUtil {
 			"(&(|(objectClass=" + StrutsAction.class.getName() +
 				")(objectClass=" + StrutsPortletAction.class.getName() +
 					"))(path=*))",
-			new DefaultServiceTrackerCustomizer());
+			new StrutsActionServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -135,7 +135,7 @@ public class StrutsActionRegistryUtil {
 		new ConcurrentHashMap<String, ServiceRegistration<?>>();
 	private ServiceTracker<?, Action> _serviceTracker;
 
-	private class DefaultServiceTrackerCustomizer
+	private class StrutsActionServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Action> {
 
 		@Override
