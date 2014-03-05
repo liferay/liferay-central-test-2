@@ -55,13 +55,14 @@ public class TranslationToXHTMLTest extends PowerMockito {
 	@Before
 	public void setUp() {
 		mockStatic(HtmlUtil.class);
-		mockStatic(PropsUtil.class);
 
 		when(
 			HtmlUtil.escape(Mockito.anyString())
 		).then(
 			new ReturnArgumentCalledAnswer<String>(0)
 		);
+
+		mockStatic(PropsUtil.class);
 
 		when(
 			PropsUtil.getArray(
