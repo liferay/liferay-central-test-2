@@ -57,6 +57,18 @@ public class StrutsActionRegistryUtil {
 		_instance._unregister(path);
 	}
 
+	private StrutsActionRegistryUtil() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		_serviceTracker = registry.trackServices(
+			"(&(|(objectClass=" + StrutsAction.class.getName() +
+				")(objectClass=" + StrutsPortletAction.class.getName() +
+					"))(path=*))",
+			new DefaultServiceTrackerCustomizer());
+
+		_serviceTracker.open();
+	}
+
 	private Action _getAction(String path) {
 		Action action = _actions.get(path);
 
@@ -114,18 +126,6 @@ public class StrutsActionRegistryUtil {
 		}
 	}
 
-	private StrutsActionRegistryUtil() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		_serviceTracker = registry.trackServices(
-			"(&(|(objectClass=" + StrutsAction.class.getName() +
-				")(objectClass=" + StrutsPortletAction.class.getName() +
-					"))(path=*))",
-			new DefaultServiceTrackerCustomizer());
-
-		_serviceTracker.open();
-	}
-
 	private static StrutsActionRegistryUtil _instance =
 		new StrutsActionRegistryUtil();
 
@@ -150,8 +150,7 @@ public class StrutsActionRegistryUtil {
 				action = new ActionAdapter((StrutsAction)service);
 			}
 			else if (service instanceof StrutsPortletAction) {
-				action = new PortletActionAdapter(
-					(StrutsPortletAction)service);
+				action = new PortletActionAdapter((StrutsPortletAction)service);
 			}
 
 			String path = (String)serviceReference.getProperty("path");
