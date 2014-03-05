@@ -188,14 +188,14 @@ public class LiferaySeleniumHelper {
 		String currentDate = DateUtil.getCurrentDate(
 			"yyyy-MM-dd", LocaleUtil.getDefault());
 
-		String log4jXMLFile =
+		String fileName =
 			PropsValues.LIFERAY_HOME + "/logs/liferay." + currentDate + ".xml";
 
-		if (!FileUtil.exists(log4jXMLFile)) {
+		if (!FileUtil.exists(fileName)) {
 			return;
 		}
 
-		String content = FileUtil.read(log4jXMLFile);
+		String content = FileUtil.read(fileName);
 
 		if (content.equals("")) {
 			return;
@@ -222,7 +222,7 @@ public class LiferaySeleniumHelper {
 					continue;
 				}
 
-				FileUtil.write(log4jXMLFile, "");
+				FileUtil.write(fileName, "");
 
 				Element throwableElement = eventElement.element("throwable");
 
@@ -475,10 +475,10 @@ public class LiferaySeleniumHelper {
 		String currentDate = DateUtil.getCurrentDate(
 			"yyyy-MM-dd", LocaleUtil.getDefault());
 
-		String log4jXMLFile =
+		String fileName =
 			PropsValues.LIFERAY_HOME + "/logs/liferay." + currentDate + ".log";
 
-		String content = FileUtil.read(log4jXMLFile);
+		String content = FileUtil.read(fileName);
 
 		Pattern pattern = Pattern.compile(text);
 
