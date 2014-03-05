@@ -99,7 +99,6 @@ import javax.mail.internet.MimeMultipart;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -351,9 +350,10 @@ public class MBUtil {
 	}
 
 	public static Map<String, String> getEmailDefinitionTerms(
-		RenderRequest request, String emailFromAddress, String emailFromName) {
+		PortletRequest portletRequest, String emailFromAddress,
+		String emailFromName) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Map<String, String> definitionTerms = new HashMap<String, String>();
@@ -417,7 +417,7 @@ public class MBUtil {
 		definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
 
 		definitionTerms.put(
-			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
+			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(portletRequest));
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
@@ -441,9 +441,9 @@ public class MBUtil {
 	}
 
 	public static Map<String, String> getEmailFromDefinitionTerms(
-		RenderRequest request) {
+		PortletRequest portletRequest) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Map<String, String> definitionTerms = new HashMap<String, String>();
@@ -482,7 +482,7 @@ public class MBUtil {
 			LanguageUtil.get(
 				themeDisplay.getLocale(), "the-user-who-added-the-message"));
 		definitionTerms.put(
-			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
+			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(portletRequest));
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
