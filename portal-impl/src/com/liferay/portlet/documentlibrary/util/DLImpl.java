@@ -94,7 +94,6 @@ import java.util.TreeSet;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
@@ -460,9 +459,10 @@ public class DLImpl implements DL {
 
 	@Override
 	public Map<String, String> getEmailDefinitionTerms(
-		RenderRequest request, String emailFromAddress, String emailFromName) {
+		PortletRequest portletRequest, String emailFromAddress,
+		String emailFromName) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Map<String, String> definitionTerms = new HashMap<String, String>();
@@ -514,7 +514,7 @@ public class DLImpl implements DL {
 		definitionTerms.put("[$PORTAL_URL$]", company.getVirtualHostname());
 
 		definitionTerms.put(
-			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
+			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(portletRequest));
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
@@ -666,9 +666,10 @@ public class DLImpl implements DL {
 
 	@Override
 	public Map<String, String> getEmailFromDefinitionTerms(
-		RenderRequest request, String emailFromAddress, String emailFromName) {
+		PortletRequest portletRequest, String emailFromAddress,
+		String emailFromName) {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Map<String, String> definitionTerms = new HashMap<String, String>();
@@ -702,7 +703,7 @@ public class DLImpl implements DL {
 			LanguageUtil.get(
 				themeDisplay.getLocale(), "the-user-who-added-the-document"));
 		definitionTerms.put(
-			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(request));
+			"[$PORTLET_NAME$]", PortalUtil.getPortletTitle(portletRequest));
 		definitionTerms.put(
 			"[$SITE_NAME$]",
 			LanguageUtil.get(
