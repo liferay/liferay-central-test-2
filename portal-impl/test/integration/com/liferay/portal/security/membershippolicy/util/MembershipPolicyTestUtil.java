@@ -257,22 +257,16 @@ public class MembershipPolicyTestUtil {
 			Company company = CompanyLocalServiceUtil.getCompany(
 				TestPropsValues.getCompanyId());
 
-			ServiceContext serviceContextCompany = new ServiceContext();
-
-			serviceContextCompany.setScopeGroupId(company.getGroupId());
+			serviceContext.setScopeGroupId(company.getGroupId());
 
 			AssetVocabulary vocabulary =
 				AssetVocabularyLocalServiceUtil.addVocabulary(
 					TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
-					serviceContextCompany);
-
-			ServiceContext serviceContextCategory = new ServiceContext();
-
-			serviceContextCategory.setScopeGroupId(company.getGroupId());
+					serviceContext);
 
 			AssetCategory category = AssetCategoryLocalServiceUtil.addCategory(
 				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
-				vocabulary.getVocabularyId(), serviceContextCategory);
+				vocabulary.getVocabularyId(), serviceContext);
 
 			serviceContext.setAssetCategoryIds(
 				new long[] {category.getCategoryId()});
