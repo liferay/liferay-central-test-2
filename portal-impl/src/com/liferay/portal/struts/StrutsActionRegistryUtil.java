@@ -132,11 +132,11 @@ public class StrutsActionRegistryUtil {
 	private static StrutsActionRegistryUtil _instance =
 		new StrutsActionRegistryUtil();
 
-	private final Map<String, Action> _actions =
+	private Map<String, Action> _actions =
 		new ConcurrentHashMap<String, Action>();
-	private final Map<String, ServiceRegistration<?>> _serviceRegistrations =
+	private Map<String, ServiceRegistration<?>> _serviceRegistrations =
 		new ConcurrentHashMap<String, ServiceRegistration<?>>();
-	private final ServiceTracker<?, Action> _serviceTracker;
+	private ServiceTracker<?, Action> _serviceTracker;
 
 	private class DefaultServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Action> {
