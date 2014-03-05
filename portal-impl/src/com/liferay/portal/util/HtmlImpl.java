@@ -465,7 +465,7 @@ public class HtmlImpl implements Html {
 		int lastWrite = 0;
 		int pos = 0;
 
-		Matcher matcher = _wordBreakPattern.matcher(text);
+		Matcher matcher = _pattern.matcher(text);
 
 		while (matcher.find()) {
 			if (matcher.start() < pos) {
@@ -604,6 +604,6 @@ public class HtmlImpl implements Html {
 		'(', ')', '[', ']', '.', '@', ',', ':', '/', '|', '+', '-', '=', '!',
 		'<', '>', '*', '$', '"', '"', ' ', 9, 10, 13, 133, 8232};
 
-	private Pattern _wordBreakPattern = Pattern.compile("([\\s<&]|$)");
+	private Pattern _pattern = Pattern.compile("([\\s<&]|$)");
 
 }
