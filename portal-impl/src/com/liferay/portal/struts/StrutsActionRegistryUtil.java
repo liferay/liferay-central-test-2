@@ -67,7 +67,7 @@ public class StrutsActionRegistryUtil {
 					"))(path=*))");
 
 		_serviceTracker = registry.trackServices(
-			filter, new StrutsActionServiceTrackerCustomizer());
+			filter, new ActionServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -138,7 +138,7 @@ public class StrutsActionRegistryUtil {
 		new ConcurrentHashMap<String, ServiceRegistration<?>>();
 	private ServiceTracker<?, Action> _serviceTracker;
 
-	private class StrutsActionServiceTrackerCustomizer
+	private class ActionServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Object, Action> {
 
 		@Override
