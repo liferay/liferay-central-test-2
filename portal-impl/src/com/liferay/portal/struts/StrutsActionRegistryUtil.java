@@ -126,8 +126,6 @@ public class StrutsActionRegistryUtil {
 		_serviceTracker.open();
 	}
 
-	private static final String _KEY_PATH = "path";
-
 	private static StrutsActionRegistryUtil _instance =
 		new StrutsActionRegistryUtil();
 
@@ -156,7 +154,7 @@ public class StrutsActionRegistryUtil {
 					(StrutsPortletAction)service);
 			}
 
-			String path = (String)serviceReference.getProperty(_KEY_PATH);
+			String path = (String)serviceReference.getProperty("path");
 
 			_actions.put(path, action);
 
