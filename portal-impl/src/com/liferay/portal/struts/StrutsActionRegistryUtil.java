@@ -80,12 +80,12 @@ public class StrutsActionRegistryUtil {
 	private void _register(String path, StrutsAction strutsAction) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		map.put("path", path);
+		properties.put("path", path);
 
 		ServiceRegistration<?> serviceRegistration = registry.registerService(
-			StrutsAction.class, strutsAction, map);
+			StrutsAction.class, strutsAction, properties);
 
 		_serviceRegistrations.put(path, serviceRegistration);
 	}
@@ -95,12 +95,12 @@ public class StrutsActionRegistryUtil {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		map.put("path", path);
+		properties.put("path", path);
 
 		ServiceRegistration<?> serviceRegistration = registry.registerService(
-			StrutsPortletAction.class, strutsPortletAction, map);
+			StrutsPortletAction.class, strutsPortletAction, properties);
 
 		_serviceRegistrations.put(path, serviceRegistration);
 	}
