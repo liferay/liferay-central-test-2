@@ -861,8 +861,8 @@ public class SearchEngineUtil {
 		Registry registry = RegistryUtil.getRegistry();
 
 		_serviceTracker = registry.trackServices(
-			AbstractSearchEngineConfigurator.class,
-				new ConfiguratorServiceTrackerCustomizer());
+			SearchEngineConfigurator.class,
+			new SearchEngineConfiguratorServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
@@ -876,46 +876,44 @@ public class SearchEngineUtil {
 	private static Map<String, SearchEngine> _searchEngines =
 		new ConcurrentHashMap<String, SearchEngine>();
 	private static SearchPermissionChecker _searchPermissionChecker;
-	private final ServiceTracker
-		<AbstractSearchEngineConfigurator, AbstractSearchEngineConfigurator>
-			_serviceTracker;
 
-	private class ConfiguratorServiceTrackerCustomizer
+	private ServiceTracker<SearchEngineConfigurator, SearchEngineConfigurator>
+		_serviceTracker;
+
+	private class SearchEngineConfiguratorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
-			<AbstractSearchEngineConfigurator,
-				AbstractSearchEngineConfigurator> {
+			<SearchEngineConfigurator, SearchEngineConfigurator> {
 
 		@Override
-		public AbstractSearchEngineConfigurator addingService(
-			ServiceReference<AbstractSearchEngineConfigurator>
-				serviceReference) {
+		public SearchEngineConfigurator addingService(
+			ServiceReference<SearchEngineConfigurator> serviceReference) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			AbstractSearchEngineConfigurator abstractSearchEngineConfigurator =
+			SearchEngineConfigurator searchEngineConfigurator =
 				registry.getService(serviceReference);
 
-			abstractSearchEngineConfigurator.afterPropertiesSet();
+			searchEngineConfigurator.afterPropertiesSet();
 
-			return abstractSearchEngineConfigurator;
+			return searchEngineConfigurator;
 		}
 
 		@Override
 		public void modifiedService(
-			ServiceReference<AbstractSearchEngineConfigurator> serviceReference,
-			AbstractSearchEngineConfigurator abstractSearchEngineConfigurator) {
+			ServiceReference<SearchEngineConfigurator> serviceReference,
+			SearchEngineConfigurator searchEngineConfigurator) {
 		}
 
 		@Override
 		public void removedService(
-			ServiceReference<AbstractSearchEngineConfigurator> serviceReference,
-			AbstractSearchEngineConfigurator abstractSearchEngineConfigurator) {
+			ServiceReference<SearchEngineConfigurator> serviceReference,
+			SearchEngineConfigurator searchEngineConfigurator) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 
-			abstractSearchEngineConfigurator.destroy();
+			searchEngineConfigurator.destroy();
 		}
 
 	}
