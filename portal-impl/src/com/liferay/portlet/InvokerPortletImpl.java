@@ -742,32 +742,32 @@ public class InvokerPortletImpl implements InvokerPortlet {
 					_liferayPortletContext.getPortlet().getPortletId());
 		}
 
-		StringBundler sb = new StringBundler(3);
+		String filterString = "(javax.portlet.name=" + _portletId + ")";
 
-		sb.append("(javax.portlet.name=");
-		sb.append(_portletId);
-		sb.append(")");
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("javax.portlet.name", _portletId);
+		properties.put("javax.portlet.name", _portletId);
 
 		_actionFilters = ServiceTrackerCollections.list(
-			ActionFilter.class, sb.toString(),
-			new PortletFilterCustomizer<ActionFilter>(_liferayPortletContext),
-			map);
+			ActionFilter.class, filterString,
+			new PortletFilterServiceTrackerCustomizer<ActionFilter>(
+				_liferayPortletContext),
+			properties);
 		_eventFilters = ServiceTrackerCollections.list(
-			EventFilter.class, sb.toString(),
-			new PortletFilterCustomizer<EventFilter>(_liferayPortletContext),
-			map);
+			EventFilter.class, filterString,
+			new PortletFilterServiceTrackerCustomizer<EventFilter>(
+				_liferayPortletContext),
+			properties);
 		_renderFilters = ServiceTrackerCollections.list(
-			RenderFilter.class, sb.toString(),
-			new PortletFilterCustomizer<RenderFilter>(_liferayPortletContext),
-			map);
+			RenderFilter.class, filterString,
+			new PortletFilterServiceTrackerCustomizer<RenderFilter>(
+				_liferayPortletContext),
+			properties);
 		_resourceFilters = ServiceTrackerCollections.list(
-			ResourceFilter.class, sb.toString(),
-			new PortletFilterCustomizer<ResourceFilter>(_liferayPortletContext),
-			map);
+			ResourceFilter.class, filterString,
+			new PortletFilterServiceTrackerCustomizer<ResourceFilter>(
+				_liferayPortletContext),
+			properties);
 
 		setPortletFilters();
 	}
@@ -792,10 +792,12 @@ public class InvokerPortletImpl implements InvokerPortlet {
 	private List<PortletFilter> _systemPortletFilters =
 		new ArrayList<PortletFilter>();
 
-	private class PortletFilterCustomizer<T extends PortletFilter>
+	private class PortletFilterServiceTrackerCustomizer<T extends PortletFilter>
 		implements ServiceTrackerCustomizer<T, T> {
 
-		public PortletFilterCustomizer(PortletContext portletContext) {
+		public PortletFilterServiceTrackerCustomizer(
+			PortletContext portletContext) {
+
 			_portletContext = portletContext;
 		}
 
@@ -807,19 +809,19 @@ public class InvokerPortletImpl implements InvokerPortlet {
 
 			String filterName = GetterUtil.getString(
 				serviceReference.getProperty("service.pid"),
-				portletFilter.getClass().getName());
+				ClassUtil.getClassName(portletFilter));
 
-			Map<String, String> initParams = new HashMap<String, String>();
+			Map<String, String> params = new HashMap<String, String>();
 
 			for (String key : serviceReference.getPropertyKeys()) {
 				String value = GetterUtil.getString(
 					serviceReference.getProperty(key));
 
-				initParams.put(key, value);
+				params.put(key, value);
 			}
 
 			FilterConfig filterConfig = new FilterConfigImpl(
-				filterName, _portletContext, initParams);
+				filterName, _portletContext, params);
 
 			try {
 				portletFilter.init(filterConfig);
