@@ -89,6 +89,27 @@ public class EventsProcessorUtil {
 		_instance._unregisterEvent(key, event);
 	}
 
+	private EventsProcessorUtil() {
+	}
+
+	private Collection<LifecycleAction> _getLifecycleActions(String key) {
+		Collection<LifecycleAction> lifecycleActions = _lifecycleActions.get(
+			key);
+
+		if (lifecycleActions == null) {
+			Map<String, Object> properties = new HashMap<String, Object>();
+
+			properties.put("key", key);
+
+			lifecycleActions = ServiceTrackerCollections.list(
+				LifecycleAction.class, "(key=" + key + ")", properties);
+
+			_lifecycleActions.putIfAbsent(key, lifecycleActions);
+		}
+
+		return lifecycleActions;
+	}
+
 	private void _process(
 			String key, String[] classes, LifecycleEvent lifecycleEvent)
 		throws ActionException {
@@ -138,27 +159,6 @@ public class EventsProcessorUtil {
 			_instance._getLifecycleActions(key);
 
 		lifecycleActions.remove(event);
-	}
-
-	private Collection<LifecycleAction> _getLifecycleActions(String key) {
-		Collection<LifecycleAction> lifecycleActions = _lifecycleActions.get(
-			key);
-
-		if (lifecycleActions == null) {
-			Map<String, Object> properties = new HashMap<String, Object>();
-
-			properties.put("key", key);
-
-			lifecycleActions = ServiceTrackerCollections.list(
-				LifecycleAction.class, "(key=" + key + ")", properties);
-
-			_lifecycleActions.putIfAbsent(key, lifecycleActions);
-		}
-
-		return lifecycleActions;
-	}
-
-	private EventsProcessorUtil() {
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(EventsProcessorUtil.class);
