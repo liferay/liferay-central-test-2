@@ -1542,9 +1542,7 @@ public class DDMStructureLocalServiceImpl
 		return structureIds;
 	}
 
-	protected Set<String> getElementNames(Document document)
-		throws PortalException {
-
+	protected Set<String> getElementNames(Document document) {
 		Set<String> elementNames = new HashSet<String>();
 
 		XPath xPathSelector = SAXReaderUtil.createXPath("//dynamic-element");
