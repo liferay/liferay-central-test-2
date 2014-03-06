@@ -48,11 +48,9 @@ public abstract class BaseDefaultLayoutPrototypesAction extends SimpleAction {
 
 		Group group = layoutSet.getGroup();
 
-		ServiceContext serviceContext = new ServiceContext();
+		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
-
-		Map<Locale, String> nameMap = new HashMap<Locale, String>();
 
 		for (Locale locale : locales) {
 			nameMap.put(locale, LanguageUtil.get(locale, nameKey));
@@ -61,6 +59,8 @@ public abstract class BaseDefaultLayoutPrototypesAction extends SimpleAction {
 		Map<Locale, String> friendlyURLMap = new HashMap<Locale, String>();
 
 		friendlyURLMap.put(LocaleUtil.getDefault(), friendlyURL);
+
+		ServiceContext serviceContext = new ServiceContext();
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			group.getCreatorUserId(), group.getGroupId(),

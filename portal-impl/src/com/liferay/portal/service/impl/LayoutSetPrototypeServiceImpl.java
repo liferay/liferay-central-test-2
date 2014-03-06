@@ -139,8 +139,9 @@ public class LayoutSetPrototypeServiceImpl
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #updateLayoutSetPrototype(
-	 *             long, Map, Map, boolean, boolean, ServiceContext)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #updateLayoutSetPrototype(long, Map, Map, boolean, boolean,
+	 *             ServiceContext)}
 	 */
 	@Deprecated
 	@Override
