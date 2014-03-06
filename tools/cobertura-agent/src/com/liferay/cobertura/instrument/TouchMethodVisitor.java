@@ -101,7 +101,7 @@ public class TouchMethodVisitor extends MethodVisitor {
 	public void visitJumpInsn(int opcode, Label label) {
 		_touchBranch();
 
-		if ((_currentLine != 0) && !"<clinit>".equals(_name) &&
+		if ((_currentLine != 0) && !_name.equals("<clinit>") &&
 			(opcode != Opcodes.GOTO) && (opcode != Opcodes.JSR)) {
 
 			_lastJump = new JumpHolder(_currentLine, _currentJump++);

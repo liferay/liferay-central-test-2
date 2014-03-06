@@ -19,25 +19,9 @@ import org.objectweb.asm.tree.LabelNode;
 import org.objectweb.asm.tree.MethodNode;
 
 /**
- * At ASM SVN rev1641, a change was made to fix an infinite loops bug during
- * MethodNode clone. However it raised another issue made the
- * {@link MethodNode#getLabelNode(Label)} returned LabelNode lost the track of
- * the orginal input {@link Label}. This breaks cobertura's instrumentment.
  * <p>
- * {@link BackwardCompatibleMethodNode} class extends {@link MethodNode} and
- * override the {@link MethodNode#getLabelNode(Label)} to restore the old
- * behavior to overcome this issue.
- * <p>
- * Since cobertura does not do clone on MethodNode, this won't cause the
- * infinite loops problem.
- * <p>
- * For more detail see :
- * <p>
- * <a href="http://forge.ow2.org/tracker/?group_id=23&atid=100023&func=detail&aid=306920">
- * [ #306920 ] MethodNode.labelNode(label) smashes "user" data Label.info</a>
- * <p>
- * <a href="http://websvn.ow2.org/comp.php?repname=asm&compare[]=%2F@1640&compare[]=%2F@1641">
- * ASM SVN rev1641</a>
+ * See http://issues.liferay.com/browse/LPS-44718.
+ * </p>
  *
  * @author Shuyang Zhou
  */

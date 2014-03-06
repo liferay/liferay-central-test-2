@@ -43,8 +43,6 @@ public class CoberturaClassVisitor extends ClassVisitor {
 
 		_classData.setContainsInstrumentationInfo();
 
-		// Don't instrument interfaces
-
 		if ((access & Opcodes.ACC_INTERFACE) == 0) {
 			_instrument = true;
 		}
@@ -66,7 +64,7 @@ public class CoberturaClassVisitor extends ClassVisitor {
 
 	@Override
 	public MethodVisitor visitMethod(
-		int access, final String name, String desc, final String signature,
+		int access, String name, String desc, String signature,
 		String[] exceptions) {
 
 		MethodVisitor methodVisitor = cv.visitMethod(
@@ -91,7 +89,7 @@ public class CoberturaClassVisitor extends ClassVisitor {
 	private static final Logger _logger = LoggerFactory.getLogger(
 		CoberturaClassVisitor.class);
 
-	private final ClassData _classData;;
+	private ClassData _classData;
 	private boolean _instrument;
 
 }
