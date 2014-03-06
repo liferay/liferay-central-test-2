@@ -68,9 +68,9 @@ int entryEnd = ParamUtil.getInteger(request, "entryEnd", entriesPerPage);
 int folderStart = ParamUtil.getInteger(request, "folderStart");
 int folderEnd = ParamUtil.getInteger(request, "folderEnd", SearchContainer.DEFAULT_DELTA);
 
-long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId);
-
 int total = 0;
+
+long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId);
 
 if (browseBy.equals("file-entry-type")) {
 	total = DLFileEntryTypeServiceUtil.getFileEntryTypesCount(groupIds);

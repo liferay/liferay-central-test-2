@@ -51,9 +51,9 @@ int entryEnd = ParamUtil.getInteger(request, "entryEnd", SearchContainer.DEFAULT
 int folderStart = ParamUtil.getInteger(request, "folderStart");
 int folderEnd = ParamUtil.getInteger(request, "folderEnd", SearchContainer.DEFAULT_DELTA);
 
-long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId);
-
 int total = 0;
+
+long[] groupIds = PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId);
 
 if (browseBy.equals("structure")) {
 	total = DDMStructureLocalServiceUtil.getStructuresCount(groupIds, PortalUtil.getClassNameId(JournalArticle.class));

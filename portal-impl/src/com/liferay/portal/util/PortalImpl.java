@@ -8248,6 +8248,7 @@ public class PortalImpl implements Portal {
 	 * @deprecated As of 7.0.0, replaced by {@link
 	 *             #_securePortalServerInetSocketAddress}
 	 */
+	@Deprecated
 	private final AtomicInteger _securePortalPort = new AtomicInteger(-1);
 
 	private final AtomicReference<InetSocketAddress>
