@@ -539,6 +539,15 @@ public abstract class BaseSeleniumImpl
 	}
 
 	@Override
+	public void saveScreenshotBeforeFailure() throws Exception {
+		if (!TestPropsValues.SAVE_SCREENSHOT) {
+			return;
+		}
+
+		LiferaySeleniumHelper.saveScreenshotBeforeFailure(this);
+	}
+
+	@Override
 	public void selectAndWait(String selectLocator, String optionLocator) {
 		super.select(selectLocator, optionLocator);
 		super.waitForPageToLoad("30000");
@@ -696,6 +705,15 @@ public abstract class BaseSeleniumImpl
 
 	@Override
 	public void stopLogger() {
+	}
+
+	@Override
+	public void takeScreenshot() throws Exception {
+		if (!TestPropsValues.SAVE_SCREENSHOT) {
+			return;
+		}
+
+		LiferaySeleniumHelper.takeScreenshot(this);
 	}
 
 	@Override

@@ -881,6 +881,30 @@ public class LiferaySeleniumHelper {
 		ImageIO.write(bufferedImage, "jpg", file);
 	}
 
+	public static void saveScreenshotBeforeFailure(
+			LiferaySelenium liferaySelenium)
+		throws Exception {
+
+		_screenshotErrorCount++;
+
+		File file = new File(
+			liferaySelenium.getProjectDir() + "portal-web/test-results/" +
+				"functional/screenshots/" + "ScreenshotBeforeAction" +
+					_screenshotErrorCount + ".jpg");
+
+		file.mkdirs();
+
+		Robot robot = new Robot();
+
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
+
+		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
+
+		ImageIO.write(bufferedImage, "jpg", file);
+	}
+
 	public static void sendEmail(
 			LiferaySelenium liferaySelenium, String to, String subject,
 			String body)
@@ -1114,6 +1138,27 @@ public class LiferaySeleniumHelper {
 			liferaySelenium.getOutputDirName() + slash + value);
 
 		_screen.type(Key.ENTER);
+	}
+
+	public static void takeScreenshot(LiferaySelenium liferaySelenium)
+		throws Exception {
+
+		File file = new File(
+			liferaySelenium.getProjectDir() + "portal-web/test-results/" +
+				"functional/screenshots/" + "ScreenshotBeforeAction" +
+					_screenshotErrorCount + ".jpg");
+
+		file.mkdirs();
+
+		Robot robot = new Robot();
+
+		Toolkit toolkit = Toolkit.getDefaultToolkit();
+
+		Rectangle rectangle = new Rectangle(toolkit.getScreenSize());
+
+		BufferedImage bufferedImage = robot.createScreenCapture(rectangle);
+
+		ImageIO.write(bufferedImage, "jpg", file);
 	}
 
 	public static void typeAceEditor(
@@ -1493,5 +1538,6 @@ public class LiferaySeleniumHelper {
 
 	private static Screen _screen = new Screen();
 	private static int _screenshotCount = 0;
+	private static int _screenshotErrorCount = 0;
 
 }
