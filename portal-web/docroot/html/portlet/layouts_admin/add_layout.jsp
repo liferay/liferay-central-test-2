@@ -133,7 +133,7 @@ else {
 						List<LayoutPrototype> layoutPrototypes = LayoutPrototypeServiceUtil.search(company.getCompanyId(), Boolean.TRUE, null);
 
 						for (LayoutPrototype layoutPrototype : layoutPrototypes) {
-							String name = HtmlUtil.escape(layoutPrototype.getName(user.getLanguageId()));
+							String name = HtmlUtil.escape(layoutPrototype.getName(locale));
 						%>
 
 							<aui:nav-item cssClass="lfr-page-template" data-search="<%= name %>">
@@ -141,7 +141,7 @@ else {
 									<aui:input id='<%= "addLayoutSelectedPageTemplate" + layoutPrototype.getUuid() %>' label="<%= name %>" name="selectedPageTemplate" type="radio" />
 
 									<div class="lfr-page-template-description">
-										<small><%= HtmlUtil.escape(layoutPrototype.getDescription(user.getLanguageId())) %></small>
+										<small><%= HtmlUtil.escape(layoutPrototype.getDescription(locale)) %></small>
 									</div>
 								</div>
 
