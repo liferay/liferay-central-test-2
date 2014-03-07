@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -121,9 +122,11 @@ public class ExportImportConfigurationSettingsMapFactory {
 	}
 
 	public static Map<String, Serializable> buildSettingsMap(
-			ThemeDisplay themeDisplay, PortletRequest portletRequest,
-			long groupId, int type)
+			PortletRequest portletRequest, long groupId, int type)
 		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		boolean privateLayout = ParamUtil.getBoolean(
 			portletRequest, "privateLayout");

@@ -131,7 +131,7 @@ public class ExportImportConfigurationHelper {
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
-				themeDisplay, portletRequest, groupId, type);
+				portletRequest, groupId, type);
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
