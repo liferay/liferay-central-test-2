@@ -26,6 +26,7 @@ String errorMessageKey = StringPool.BLANK;
 Group group = themeDisplay.getScopeGroup();
 
 Group stagingGroup = group;
+
 Group liveGroup = stagingGroup.getLiveGroup();
 
 Layout targetLayout = null;

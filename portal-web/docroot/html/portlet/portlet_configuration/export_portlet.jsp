@@ -22,8 +22,6 @@ Layout exportableLayout = ExportImportHelperUtil.getExportableLayout(themeDispla
 PortletURL portletURL = currentURLObj;
 
 portletURL.setParameter("tabs3", "current-and-previous");
-
-Group group = themeDisplay.getScopeGroup();
 %>
 
 <liferay-ui:tabs
@@ -386,6 +384,11 @@ Group group = themeDisplay.getScopeGroup();
 					</c:if>
 
 					<aui:fieldset cssClass="options-group" label="permissions">
+
+						<%
+						Group group = themeDisplay.getScopeGroup();
+						%>
+
 						<%@ include file="/html/portlet/layouts_admin/export_configuration/permissions.jspf" %>
 					</aui:fieldset>
 				</c:if>
