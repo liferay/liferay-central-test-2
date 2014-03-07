@@ -143,7 +143,7 @@ public class EmailNotificationSettingsTag extends IncludeTag {
 	private String _emailSubject;
 	private String _helpMessage;
 	private String _languageId;
-	private boolean _showEmailEnabled;
-	private boolean _showSubject;
+	private boolean _showEmailEnabled = true;
+	private boolean _showSubject = true;
 
 }
