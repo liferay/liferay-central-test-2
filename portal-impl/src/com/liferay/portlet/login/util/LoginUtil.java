@@ -553,7 +553,6 @@ public class LoginUtil {
 			}
 
 			jsonObject.put("command", "signOut");
-
 			jsonObject.put("companyId", companyId);
 			jsonObject.put("sessionId", userTracker.getSessionId());
 			jsonObject.put("userId", userId);
