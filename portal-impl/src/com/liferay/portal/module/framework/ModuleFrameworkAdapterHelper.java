@@ -51,10 +51,10 @@ public class ModuleFrameworkAdapterHelper {
 				fileUtil.setFile(DoPrivilegedUtil.wrap(new FileImpl()));
 			}
 
-			List<ClasspathResolver> resolvers = ServiceLoader.load(
+			List<ClasspathResolver> classpathResolvers = ServiceLoader.load(
 				ClasspathResolver.class);
 
-			ClasspathResolver classpathResolver = resolvers.get(0);
+			ClasspathResolver classpathResolver = classpathResolvers.get(0);
 
 			URL[] classpathURLs = classpathResolver.getClasspathURLs();
 

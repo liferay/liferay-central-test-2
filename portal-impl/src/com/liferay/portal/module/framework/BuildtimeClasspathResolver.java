@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,28 +29,32 @@ public class BuildtimeClasspathResolver implements ClasspathResolver {
 
 	@Override
 	public URL[] getClasspathURLs() throws Exception {
-		URL url = this.getClass().getResource("/jars.txt");
+		Class<?> clazz = getClass();
 
-		URLConnection urlConnection = url.openConnection();
+		URL url = clazz.getResource("/jars.txt");
 
 		File jarsTxtFile = new File(url.toURI());
 
-		File projectRootDir = jarsTxtFile.getParentFile().getParentFile();
+		File projectRootDir = jarsTxtFile.getParentFile();
+
+		projectRootDir = projectRootDir.getParentFile();
 
 		URI projectRootURI = projectRootDir.toURI();
 
-		String[] jarFiles = StringUtil.split(
+		URLConnection urlConnection = url.openConnection();
+
+		String[] jarFileNames = StringUtil.split(
 			StringUtil.read(urlConnection.getInputStream()));
 
-		URL[] urls = new URL[jarFiles.length];
+		URL[] jarURLs = new URL[jarFileNames.length];
 
-		for (int i = 0; i < urls.length; i++) {
-			URI resolvedURI = projectRootURI.resolve(jarFiles[i]);
+		for (int i = 0; i < jarURLs.length; i++) {
+			URI jarURI = projectRootURI.resolve(jarFileNames[i]);
 
-			urls[i] = resolvedURI.toURL();
+			jarURLs[i] = jarURI.toURL();
 		}
 
-		return urls;
+		return jarURLs;
 	}
 
 }
