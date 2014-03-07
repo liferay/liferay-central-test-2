@@ -6872,13 +6872,13 @@ public class PortalImpl implements Portal {
 
 		String redirect = PATH_MAIN + "/portal/status";
 
-		if ((e instanceof NoSuchLayoutException) &&
+		if ((e instanceof NoSuchGroupException) &&
 			Validator.isNotNull(
-				PropsValues.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND)) {
+				PropsValues.SITES_FRIENDLY_URL_PAGE_NOT_FOUND)) {
 
 			response.setStatus(status);
 
-			redirect = PropsValues.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND;
+			redirect = PropsValues.SITES_FRIENDLY_URL_PAGE_NOT_FOUND;
 
 			RequestDispatcher requestDispatcher =
 				servletContext.getRequestDispatcher(redirect);
@@ -6887,13 +6887,13 @@ public class PortalImpl implements Portal {
 				requestDispatcher.forward(request, response);
 			}
 		}
-		else if ((e instanceof NoSuchGroupException) &&
+		else if ((e instanceof NoSuchLayoutException) &&
 				 Validator.isNotNull(
-					PropsValues.SITES_FRIENDLY_URL_PAGE_NOT_FOUND)) {
+					PropsValues.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND)) {
 
 			response.setStatus(status);
 
-			redirect = PropsValues.SITES_FRIENDLY_URL_PAGE_NOT_FOUND;
+			redirect = PropsValues.LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND;
 
 			RequestDispatcher requestDispatcher =
 				servletContext.getRequestDispatcher(redirect);
