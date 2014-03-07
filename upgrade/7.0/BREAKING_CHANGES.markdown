@@ -12,7 +12,7 @@ Here are some of the types of changes documented in this file:
 * Changes to context variables available to templates
 * Changes in CSS classes available to Liferay themes and portlets
 * Configuration changes: Changes in configuration files, like
-`portal.properties`, `system.properties`, etc.
+ portal.properties`, `system.properties`, etc.
 * Execution requirements: Java version, J2EE Version, browser versions, etc.
 * Deprecations or end of support: For example, warning that a certain
 feature or API will be dropped in an upcoming version.
@@ -34,9 +34,9 @@ was made.
 * **Who is affected?** Are end users affected? Are developers affected? If the
 only affected people are those using a certain feature or API, say so.
 * **How should I update my code?** Explain any client code changes required.
-* **Why was this change made?** Explain the reason for the change. If applicable,
-justify why the breaking change was made instead of following a deprecation
-process.
+* **Why was this change made?** Explain the reason for the change. If
+applicable, justify why the breaking change was made instead of following a
+deprecation process.
 
 Here's the template to use for each breaking change:
 
