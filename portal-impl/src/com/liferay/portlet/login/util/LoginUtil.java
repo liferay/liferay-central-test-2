@@ -528,8 +528,7 @@ public class LoginUtil {
 	}
 
 	public static void signOutSimultaneousLogins(long userId) throws Exception {
-		long companyId = CompanyLocalServiceUtil.getCompanyIdByUserId(
-			userId);
+		long companyId = CompanyLocalServiceUtil.getCompanyIdByUserId(userId);
 
 		Map<String, UserTracker> sessionUsers = LiveUsers.getSessionUsers(
 			companyId);
@@ -544,12 +543,10 @@ public class LoginUtil {
 
 			JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-			ClusterNode clusterNode =
-				ClusterExecutorUtil.getLocalClusterNode();
+			ClusterNode clusterNode = ClusterExecutorUtil.getLocalClusterNode();
 
 			if (clusterNode != null) {
-				jsonObject.put(
-					"clusterNodeId", clusterNode.getClusterNodeId());
+				jsonObject.put("clusterNodeId", clusterNode.getClusterNodeId());
 			}
 
 			jsonObject.put("command", "signOut");
