@@ -192,8 +192,8 @@ public class InitUtil {
 		}
 
 		try {
-			PropsValues.LIFERAY_WEB_PORTAL_CONTEXT_TEMPDIR =
-				System.getProperty(SystemProperties.TMP_DIR);
+			PropsValues.LIFERAY_WEB_PORTAL_CONTEXT_TEMPDIR = System.getProperty(
+				SystemProperties.TMP_DIR);
 
 			init();
 
