@@ -209,10 +209,10 @@ public class ActionCommandCache {
 
 			_actionCommandCache.remove(actionCommandName);
 
-			for (List<ActionCommand> chains :
+			for (List<ActionCommand> actionCommands :
 					_actionCommandChainCache.values()) {
 
-				chains.remove(actionCommand);
+				actionCommands.remove(actionCommand);
 			}
 		}
 
