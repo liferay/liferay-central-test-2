@@ -404,37 +404,35 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 			Group group)
 		throws Exception {
 
-		List<MBMessage> discussionMessages =
+		List<MBMessage> discussionMBMessages =
 			MBMessageLocalServiceUtil.getMessages(
 				ExportImportClassedModelUtil.getClassName(stagedModel),
 				ExportImportClassedModelUtil.getClassPK(stagedModel),
 				WorkflowConstants.STATUS_ANY);
 
-		// Not every StagedModel supports comments
-
-		if (ListUtil.isEmpty(discussionMessages)) {
+		if (ListUtil.isEmpty(discussionMBMessages)) {
 			return;
 		}
 
-		int importedDiscussionMessagesCount =
+		int importedDiscussionMBMessagesCount =
 			MBMessageLocalServiceUtil.getDiscussionMessagesCount(
 				ExportImportClassedModelUtil.getClassName(importedStagedModel),
 				ExportImportClassedModelUtil.getClassPK(importedStagedModel),
 				WorkflowConstants.STATUS_ANY);
 
 		Assert.assertEquals(
-			discussionMessages.size(), importedDiscussionMessagesCount + 1);
+			discussionMBMessages.size(), importedDiscussionMBMessagesCount + 1);
 
-		for (MBMessage discussionMessage : discussionMessages) {
-			if (discussionMessage.isRoot()) {
+		for (MBMessage discussionMBMessage : discussionMBMessages) {
+			if (discussionMBMessage.isRoot()) {
 				continue;
 			}
 
-			MBMessage importedDiscussionMessage =
+			MBMessage importedDiscussionMBMessage =
 				MBMessageLocalServiceUtil.fetchMBMessageByUuidAndGroupId(
-					discussionMessage.getUuid(), group.getGroupId());
+					discussionMBMessage.getUuid(), group.getGroupId());
 
-			Assert.assertNotNull(importedDiscussionMessage);
+			Assert.assertNotNull(importedDiscussionMBMessage);
 		}
 	}
 
