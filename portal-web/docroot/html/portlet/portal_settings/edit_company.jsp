@@ -36,8 +36,6 @@ request.setAttribute("addresses.classPK", company.getAccountId());
 request.setAttribute("emailAddresses.classPK", company.getAccountId());
 request.setAttribute("phones.classPK", company.getAccountId());
 request.setAttribute("websites.classPK", company.getAccountId());
-
-PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
 %>
 
 <portlet:actionURL var="editCompanyURL">
