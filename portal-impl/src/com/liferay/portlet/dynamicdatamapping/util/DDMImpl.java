@@ -562,10 +562,9 @@ public class DDMImpl implements DDM {
 			byte[] bytes = getImageBytes(uploadRequest, fieldNameValue);
 
 			if (ArrayUtil.isNotEmpty(bytes)) {
-				jsonObject.put("data", UnicodeFormatter.bytesToHex(bytes));
-
 				jsonObject.put(
 					"alt", uploadRequest.getParameter(fieldNameValue + "Alt"));
+				jsonObject.put("data", UnicodeFormatter.bytesToHex(bytes));
 			}
 		}
 		catch (Exception e) {
