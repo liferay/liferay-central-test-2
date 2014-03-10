@@ -150,7 +150,7 @@ public abstract class BaseUserNotificationHandler
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseUserNotificationHandler.class);
 
-	private boolean _openDialog = false;
+	private boolean _openDialog;
 	private String _portletId;
 	private String _selector = StringPool.BLANK;
 
