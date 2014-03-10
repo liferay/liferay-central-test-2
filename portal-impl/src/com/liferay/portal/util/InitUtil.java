@@ -209,13 +209,7 @@ public class InitUtil {
 	}
 
 	public synchronized static void initWithSpringAndModuleFramework(
-			List<String> extraConfigLocations) {
-
-		initWithSpringAndModuleFramework(false, extraConfigLocations);
-	}
-
-	public synchronized static void initWithSpringAndModuleFramework(
-			boolean force, List<String> extraConfigLocations) {
+		boolean force, List<String> extraConfigLocations) {
 
 		if (force) {
 			_initialized = false;
@@ -255,6 +249,12 @@ public class InitUtil {
 		}
 
 		_initialized = true;
+	}
+
+	public synchronized static void initWithSpringAndModuleFramework(
+		List<String> extraConfigLocations) {
+
+		initWithSpringAndModuleFramework(false, extraConfigLocations);
 	}
 
 	public synchronized static void stopModuleFramework() throws Exception {
