@@ -40,7 +40,6 @@ import com.liferay.portlet.shopping.ShoppingSettings;
 import com.liferay.portlet.shopping.model.ShoppingCart;
 import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.ShoppingConstants;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingCouponConstants;
 import com.liferay.portlet.shopping.model.ShoppingItem;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.shopping.model;
+package com.liferay.portlet.shopping.util;
 
 /**
  * @author Eduardo Garcia

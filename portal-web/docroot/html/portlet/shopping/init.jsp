@@ -72,7 +72,6 @@ page import="com.liferay.portlet.shopping.model.ShoppingCart" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingCartItem" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingCategory" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingCategoryConstants" %><%@
-page import="com.liferay.portlet.shopping.model.ShoppingConstants" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingCoupon" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingCouponConstants" %><%@
 page import="com.liferay.portlet.shopping.model.ShoppingItem" %><%@
@@ -101,6 +100,7 @@ page import="com.liferay.portlet.shopping.service.permission.ShoppingCategoryPer
 page import="com.liferay.portlet.shopping.service.permission.ShoppingItemPermission" %><%@
 page import="com.liferay.portlet.shopping.service.permission.ShoppingOrderPermission" %><%@
 page import="com.liferay.portlet.shopping.service.permission.ShoppingPermission" %><%@
+page import="com.liferay.portlet.shopping.util.ShoppingConstants" %><%@
 page import="com.liferay.portlet.shopping.util.ShoppingUtil" %>
 
 <%
