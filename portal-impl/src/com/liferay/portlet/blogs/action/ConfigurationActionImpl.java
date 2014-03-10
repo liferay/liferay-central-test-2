@@ -38,9 +38,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
 		if (Validator.isNotNull(cmd)) {
-			validateEmailFrom(actionRequest);
 			validateEmail(actionRequest, "emailEntryAdded");
 			validateEmail(actionRequest, "emailEntryUpdated");
+			validateEmailFrom(actionRequest);
 		}
 
 		super.processAction(portletConfig, actionRequest, actionResponse);

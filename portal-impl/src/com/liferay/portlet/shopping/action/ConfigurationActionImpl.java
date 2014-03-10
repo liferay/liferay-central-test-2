@@ -40,11 +40,12 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		throws Exception {
 
 		validateEmail(actionRequest, "emailOrderConfirmation");
+		validateEmail(actionRequest, "emailOrderShipping");
 		validateEmailFrom(actionRequest);
+
 		updateInsuranceCalculation(actionRequest);
 		updatePayment(actionRequest);
 		updateShippingCalculation(actionRequest);
-		validateEmail(actionRequest, "emailOrderShipping");
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}

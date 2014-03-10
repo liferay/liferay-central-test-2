@@ -49,9 +49,9 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			ActionResponse actionResponse)
 		throws Exception {
 
-		validateEmailFrom(actionRequest);
 		validateEmail(actionRequest, "emailMessageAdded");
 		validateEmail(actionRequest, "emailMessageUpdated");
+		validateEmailFrom(actionRequest);
 		updateThreadPriorities(actionRequest);
 		updateUserRanks(actionRequest);
 
