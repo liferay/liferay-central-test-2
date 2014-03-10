@@ -682,7 +682,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	protected void validate(
-			ShoppingSettings shoppingPrefs, String billingFirstName,
+			ShoppingSettings shoppingSettings, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingStreet, String billingCity, String billingState,
 			String billingZip, String billingCountry, String billingPhone,
@@ -752,8 +752,8 @@ public class ShoppingOrderLocalServiceImpl
 			}
 		}
 
-		if (!shoppingPrefs.usePayPal() &&
-			(shoppingPrefs.getCcTypes().length > 0)) {
+		if (!shoppingSettings.usePayPal() &&
+			(shoppingSettings.getCcTypes().length > 0)) {
 
 			if (Validator.isNull(ccName)) {
 				throw new CCNameException();

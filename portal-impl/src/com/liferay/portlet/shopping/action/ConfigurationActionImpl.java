@@ -16,6 +16,7 @@ package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.kernel.portlet.DefaultConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -73,7 +74,8 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			themeDisplay.getLocale());
 
 		try {
-			double taxRate = percentFormat.parse(taxRatePercent).doubleValue();
+			double taxRate = GetterUtil.getDouble(
+				percentFormat.parse(taxRatePercent));
 
 			setPreference(actionRequest, "taxRate", String.valueOf(taxRate));
 		}
