@@ -37,7 +37,6 @@ String emailFromAddress = ParamUtil.getString(request, "preferences--emailFromAd
 		names="payment-settings,shipping-calculation,insurance-calculation,email-from,confirmation-email,shipping-email"
 		refresh="<%= false %>"
 	>
-
 		<liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 		<liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 		<liferay-ui:error key="emailOrderShippingBody" message="please-enter-a-valid-body" />
