@@ -3478,10 +3478,7 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
+			<role-name>administrator</role-name>
 		</security-role-ref>
 	</portlet>
 	<custom-portlet-mode>
