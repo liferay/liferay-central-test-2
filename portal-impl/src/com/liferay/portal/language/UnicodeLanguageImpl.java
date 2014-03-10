@@ -143,8 +143,9 @@ public class UnicodeLanguageImpl implements UnicodeLanguage {
 	}
 
 	@Override
-	public String format(ResourceBundle resourceBundle, String pattern,
-		Object argument, boolean translateArguments) {
+	public String format(
+		ResourceBundle resourceBundle, String pattern, Object argument,
+		boolean translateArguments) {
 
 		return UnicodeFormatter.toString(
 			LanguageUtil.format(
