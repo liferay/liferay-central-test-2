@@ -33,11 +33,6 @@ public abstract class BaseUserNotificationHandler
 	implements UserNotificationHandler {
 
 	@Override
-	public boolean getOpenDialog() {
-		return _openDialog;
-	}
-
-	@Override
 	public String getPortletId() {
 		return _portletId;
 	}
@@ -59,7 +54,7 @@ public abstract class BaseUserNotificationHandler
 				userNotificationEvent, serviceContext);
 
 			if (userNotificationFeedEntry != null) {
-				userNotificationFeedEntry.setOpenDialog(getOpenDialog());
+				userNotificationFeedEntry.setOpenDialog(isOpenDialog());
 				userNotificationFeedEntry.setPortletId(getPortletId());
 			}
 
@@ -101,6 +96,11 @@ public abstract class BaseUserNotificationHandler
 					deliveryType, userNotificationDeliveryType.isDefault());
 
 		return userNotificationDelivery.isDeliver();
+	}
+
+	@Override
+	public boolean isOpenDialog() {
+		return _openDialog;
 	}
 
 	protected UserNotificationFeedEntry doInterpret(
@@ -150,7 +150,7 @@ public abstract class BaseUserNotificationHandler
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseUserNotificationHandler.class);
 
-	private boolean _openDialog;
+	private boolean _openDialog = false;
 	private String _portletId;
 	private String _selector = StringPool.BLANK;
 

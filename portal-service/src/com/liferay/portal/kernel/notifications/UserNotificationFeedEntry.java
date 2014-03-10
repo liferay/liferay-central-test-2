@@ -35,12 +35,12 @@ public class UserNotificationFeedEntry {
 		return _link;
 	}
 
-	public boolean getOpenDialog() {
-		return _openDialog;
-	}
-
 	public String getPortletId() {
 		return _portletId;
+	}
+
+	public boolean isOpenDialog() {
+		return _openDialog;
 	}
 
 	public void setBody(String body) {

@@ -33,11 +33,6 @@ public class UserNotificationHandlerImpl implements UserNotificationHandler {
 	}
 
 	@Override
-	public boolean getOpenDialog() {
-		return _userNotificationHandler.getOpenDialog();
-	}
-
-	@Override
 	public String getPortletId() {
 		return _userNotificationHandler.getPortletId();
 	}
@@ -66,6 +61,11 @@ public class UserNotificationHandlerImpl implements UserNotificationHandler {
 		return _userNotificationHandler.isDeliver(
 			userId, classNameId, notificationType, deliveryType,
 			serviceContext);
+	}
+
+	@Override
+	public boolean isOpenDialog() {
+		return _userNotificationHandler.isOpenDialog();
 	}
 
 	private UserNotificationHandler _userNotificationHandler;
