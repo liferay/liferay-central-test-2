@@ -5536,17 +5536,17 @@ public class JournalArticleLocalServiceImpl
 		StringBundler sb = new StringBundler(13);
 
 		sb.append(articleURL);
-		sb.append("&_");
-		sb.append(PortletKeys.JOURNAL);
-		sb.append("_groupId=");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(PortalUtil.getPortletNamespace(PortletKeys.JOURNAL));
+		sb.append("groupId=");
 		sb.append(groupId);
-		sb.append("&_");
-		sb.append(PortletKeys.JOURNAL);
-		sb.append("_folderId=");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(PortalUtil.getPortletNamespace(PortletKeys.JOURNAL));
+		sb.append("folderId=");
 		sb.append(folderId);
-		sb.append("&_");
-		sb.append(PortletKeys.JOURNAL);
-		sb.append("_articleId=");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(PortalUtil.getPortletNamespace(PortletKeys.JOURNAL));
+		sb.append("articleId=");
 		sb.append(articleId);
 
 		return sb.toString();
