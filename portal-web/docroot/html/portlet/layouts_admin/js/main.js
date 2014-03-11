@@ -866,12 +866,12 @@ AUI.add(
 
 							portletURL.setParameter("struts_action", "/group_pages/edit_export_configuration");
 							portletURL.setParameter("cmd", cmdNode.val());
+							portletURL.setParameter("tabs2", "new-export-process");
 							portletURL.setParameter("exportNav", "custom");
 							portletURL.setParameter("groupId", groupIdNode.val());
 							portletURL.setParameter("liveGroupId", liveGroupIdNode.val());
 							portletURL.setParameter("privateLayout", privateLayoutNode.val());
 							portletURL.setParameter("rootNodeName", rootNodeNameNode.val());
-							portletURL.setParameter("tabs2", "new-export-process");
 
 							redirectNode.val(portletURL.toString());
 						}
