@@ -4390,8 +4390,16 @@ public class JournalArticleLocalServiceImpl
 			long groupId, long userId, long ddmStructureId)
 		throws PortalException, SystemException {
 
+		String className = DDMStructure.class.getName();
+		long classPK = ddmStructureId;
+
+		if (ddmStructureId == 0) {
+			className += JournalArticle.class.getName();
+			classPK = groupId;
+		}
+
 		subscriptionLocalService.addSubscription(
-			userId, groupId, DDMStructure.class.getName(), ddmStructureId);
+			userId, groupId, className, classPK);
 	}
 
 	/**
@@ -4410,8 +4418,15 @@ public class JournalArticleLocalServiceImpl
 		long groupId, long userId, long ddmStructureId) throws PortalException,
 		SystemException {
 
-		subscriptionLocalService.deleteSubscription(
-			userId, DDMStructure.class.getName(), ddmStructureId);
+		String className = DDMStructure.class.getName();
+		long classPK = ddmStructureId;
+
+		if (ddmStructureId == 0) {
+			className += JournalArticle.class.getName();
+			classPK = groupId;
+		}
+
+		subscriptionLocalService.deleteSubscription(userId, className, classPK);
 	}
 
 	/**
