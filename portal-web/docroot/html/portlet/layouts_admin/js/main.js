@@ -855,7 +855,7 @@ AUI.add(
 
 						var cmdNode = instance.byId('cmd');
 
-						if (cmdNode.val() === 'update' || cmdNode.val() === 'add') {
+						if ((cmdNode.val() === 'add') || (cmdNode.val() === 'update')) {
 							var groupIdNode = instance.byId('groupId');
 							var liveGroupIdNode = instance.byId('liveGroupId');
 							var privateLayoutNode = instance.byId('privateLayout');
