@@ -48,6 +48,7 @@ import com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil;
 import com.liferay.portal.kernel.trash.TrashHandler;
 import com.liferay.portal.kernel.trash.TrashHandlerRegistryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -478,24 +479,16 @@ public class PortletBagFactory {
 		return inputStream;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected <S> ServiceTrackerList<S> getServiceTrackinList(
-		Portlet portlet, Class<S> clazz) {
+	protected <S> ServiceTrackerList<S> getServiceTrackerList(
+		Class<S> clazz, Portlet portlet) {
 
-		StringBundler sb = new StringBundler(3);
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		sb.append("(javax.portlet.name=");
-		sb.append(portlet.getPortletId());
-		sb.append(")");
+		properties.put("javax.portlet.name", portlet.getPortletId());
 
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		map.put("javax.portlet.name", portlet.getPortletId());
-
-		ServiceTrackerList<S> list = ServiceTrackerCollections.list(
-			clazz, sb.toString(), map);
-
-		return list;
+		return ServiceTrackerCollections.list(
+			clazz, "(javax.portlet.name=" + portlet.getPortletId() + ")",
+			properties);
 	}
 
 	protected void initResourceBundle(
@@ -820,8 +813,8 @@ public class PortletBagFactory {
 	}
 
 	protected List<Indexer> newIndexers(Portlet portlet) throws Exception {
-		ServiceTrackerList<Indexer> indexerInstances =
-			getServiceTrackinList(portlet, Indexer.class);
+		ServiceTrackerList<Indexer> indexerInstances = getServiceTrackerList(
+			Indexer.class, portlet);
 
 		List<String> indexerClasses = portlet.getIndexerClasses();
 
@@ -829,15 +822,15 @@ public class PortletBagFactory {
 			Indexer indexerInstance = (Indexer)newInstance(
 				Indexer.class, indexerClass);
 
+			Map<String, Object> properties = new HashMap<String, Object>();
+
 			String[] classNames = ArrayUtil.append(
 				indexerInstance.getClassNames(),
-				indexerInstance.getClass().getName());
+				ClassUtil.getClassName(indexerInstance));
 
-			Map<String, Object> map = new HashMap<String, Object>();
+			properties.put("indexer.classNames", classNames);
 
-			map.put("indexer.classNames", classNames);
-
-			indexerInstances.add(indexerInstance , map);
+			indexerInstances.add(indexerInstance, properties);
 		}
 
 		return indexerInstances;

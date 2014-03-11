@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.search;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;
 import com.liferay.registry.ServiceReference;
@@ -46,10 +47,10 @@ public class IndexerRegistryUtil {
 	}
 
 	public static List<Indexer> getIndexers() {
-		List<Indexer> list = new ArrayList<Indexer>(
+		List<Indexer> indexers = new ArrayList<Indexer>(
 			_instance._indexers.values());
 
-		return Collections.unmodifiableList(list);
+		return Collections.unmodifiableList(indexers);
 	}
 
 	public static Indexer nullSafeGetIndexer(Class<?> clazz) {
@@ -85,7 +86,7 @@ public class IndexerRegistryUtil {
 		_serviceTracker.open();
 	}
 
-	private Set<String> _collectClassNames(
+	private Set<String> _aggregrateClassNames(
 		String[] classNames, String... moreClassNames) {
 
 		Set<String> set = new HashSet<String>();
@@ -130,17 +131,20 @@ public class IndexerRegistryUtil {
 	private void _register(String className, Indexer indexer) {
 		Registry registry = RegistryUtil.getRegistry();
 
-		Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		Set<String> classNames = _collectClassNames(
-			indexer.getClassNames(), indexer.getClass().getName(), className);
+		Set<String> classNames = _aggregrateClassNames(
+			indexer.getClassNames(), ClassUtil.getClassName(indexer),
+			className);
 
-		map.put(
-			_KEY_CLASSNAMES, classNames.toArray(new String[classNames.size()]));
-		map.put(_KEY_PORTLET_NAME, indexer.getPortletId());
+		properties.put(
+			"indexer.classNames",
+			classNames.toArray(new String[classNames.size()]));
+
+		properties.put("javax.portlet.name", indexer.getPortletId());
 
 		ServiceRegistration<Indexer> serviceRegistration =
-			registry.registerService(Indexer.class, indexer, map);
+			registry.registerService(Indexer.class, indexer, properties);
 
 		for (String curClassName : classNames) {
 			_serviceRegistrations.put(curClassName, serviceRegistration);
@@ -148,8 +152,8 @@ public class IndexerRegistryUtil {
 	}
 
 	private void _unregister(Indexer indexer) {
-		Set<String> classNames = _collectClassNames(
-			indexer.getClassNames(), indexer.getClass().getName());
+		Set<String> classNames = _aggregrateClassNames(
+			indexer.getClassNames(), ClassUtil.getClassName(indexer));
 
 		for (String className : classNames) {
 			_unregister(className);
@@ -165,22 +169,17 @@ public class IndexerRegistryUtil {
 		}
 	}
 
-	private static final String _KEY_CLASSNAMES = "indexer.classNames";
-
-	private static final String _KEY_PORTLET_NAME = "javax.portlet.name";
-
 	private static Log _log = LogFactoryUtil.getLog(IndexerRegistryUtil.class);
 
 	private static IndexerRegistryUtil _instance = new IndexerRegistryUtil();
 
 	private static Indexer _dummyIndexer = new DummyIndexer();
 
-	private final Map<String, Indexer> _indexers =
+	private Map<String, Indexer> _indexers =
 		new ConcurrentHashMap<String, Indexer>();
-	private final Map<String, ServiceRegistration<Indexer>>
-		_serviceRegistrations =
-			new ConcurrentHashMap<String, ServiceRegistration<Indexer>>();
-	private final ServiceTracker<Indexer, Indexer> _serviceTracker;
+	private Map<String, ServiceRegistration<Indexer>> _serviceRegistrations =
+		new ConcurrentHashMap<String, ServiceRegistration<Indexer>>();
+	private ServiceTracker<Indexer, Indexer> _serviceTracker;
 
 	private class IndexerServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Indexer, Indexer> {
@@ -193,10 +192,8 @@ public class IndexerRegistryUtil {
 
 			Indexer indexer = registry.getService(serviceReference);
 
-			String[] classNamesProperty =
-				(String[])serviceReference.getProperty(_KEY_CLASSNAMES);
-
-			Set<String> classNames = _collectClassNames(classNamesProperty);
+			Set<String> classNames = _aggregrateClassNames(
+				(String[])serviceReference.getProperty("indexer.classNames"));
 
 			for (String className : classNames) {
 				_indexers.put(className, indexer);
@@ -218,10 +215,8 @@ public class IndexerRegistryUtil {
 
 			registry.ungetService(serviceReference);
 
-			String[] classNamesProperty =
-				(String[])serviceReference.getProperty(_KEY_CLASSNAMES);
-
-			Set<String> classNames = _collectClassNames(classNamesProperty);
+			Set<String> classNames = _aggregrateClassNames(
+				(String[])serviceReference.getProperty("indexer.classNames"));
 
 			for (String className : classNames) {
 				_indexers.remove(className);

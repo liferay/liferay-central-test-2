@@ -138,10 +138,10 @@ public class PortletBagImpl implements PortletBag {
 
 	@Override
 	public void destroy() {
-		ServiceTrackerList<Indexer> indexerInstancesTrackerList =
+		ServiceTrackerList<Indexer> serviceTrackerList =
 			(ServiceTrackerList<Indexer>)_indexerInstances;
 
-		indexerInstancesTrackerList.close();
+		serviceTrackerList.close();
 	}
 
 	@Override
