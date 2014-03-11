@@ -23,12 +23,14 @@ if (Validator.isNull(cmd)) {
 	cmd = Constants.EXPORT;
 }
 
+String exportNav = ParamUtil.getString(request, "exportNav", "custom");
+
 long exportImportConfigurationId = 0;
 
 ExportImportConfiguration exportImportConfiguration = null;
-Map<String, Serializable> exportImportConfigurationSettingsMap = Collections.EMPTY_MAP;
-Map<String, String[]> parameterMap = Collections.EMPTY_MAP;
-Map<Long, Boolean> layoutIdMap = Collections.EMPTY_MAP;
+Map<String, Serializable> exportImportConfigurationSettingsMap = Collections.emptyMap();
+Map<String, String[]> parameterMap = Collections.emptyMap();
+Map<Long, Boolean> layoutIdMap = Collections.emptyMap();
 
 if (SessionMessages.contains(liferayPortletRequest, portletDisplay.getId() + "exportImportConfigurationId")) {
 	exportImportConfigurationId = (Long)SessionMessages.get(liferayPortletRequest, portletDisplay.getId() + "exportImportConfigurationId");
@@ -54,8 +56,6 @@ else {
 		layoutIdMap = (Map<Long, Boolean>)exportImportConfigurationSettingsMap.get("layoutIdMap");
 	}
 }
-
-String exportNav = ParamUtil.getString(request, "exportNav", "custom");
 
 long groupId = ParamUtil.getLong(request, "groupId");
 
@@ -200,11 +200,11 @@ if (!cmd.equals(Constants.ADD)) {
 
 			<aui:form action='<%= cmd.equals(Constants.EXPORT) ? exportPagesURL : updateExportConfigurationURL + "&etag=0&strip=0" %>' cssClass="lfr-export-dialog" method="post" name="fm1">
 				<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= cmd %>" />
+				<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 				<aui:input name="exportImportConfigurationId" type="hidden" value="<%= exportImportConfigurationId %>" />
 				<aui:input name="groupId" type="hidden" value="<%= String.valueOf(groupId) %>" />
 				<aui:input name="liveGroupId" type="hidden" value="<%= String.valueOf(liveGroupId) %>" />
 				<aui:input name="privateLayout" type="hidden" value="<%= String.valueOf(privateLayout) %>" />
-				<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
 				<aui:input name="rootNodeName" type="hidden" value="<%= rootNodeName %>" />
 
 				<liferay-ui:error exception="<%= LARFileNameException.class %>" message="please-enter-a-file-with-a-valid-file-name" />
@@ -473,10 +473,15 @@ if (!cmd.equals(Constants.ADD)) {
 															<ul class="hide unstyled" id="<portlet:namespace />rangeLastInputs">
 																<li>
 																	<aui:select cssClass="relative-range" label="" name="last">
-																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "12", false) %>' selected='<%= MapUtil.getString(parameterMap, "last").equals("12") %>' value="12" />
-																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "24", false) %>' selected='<%= MapUtil.getString(parameterMap, "last").equals("24") %>' value="24" />
-																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "48", false) %>' selected='<%= MapUtil.getString(parameterMap, "last").equals("48") %>' value="48" />
-																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-days", "7", false) %>' selected='<%= MapUtil.getString(parameterMap, "last").equals("168") %>' value="168" />
+
+																		<%
+																		String last = MapUtil.getString(parameterMap, "last");
+																		%>
+
+																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "12", false) %>' selected='<%= last.equals("12") %>' value="12" />
+																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "24", false) %>' selected='<%= last.equals("24") %>' value="24" />
+																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-hours", "48", false) %>' selected='<%= last.equals("48") %>' value="48" />
+																		<aui:option label='<%= LanguageUtil.format(pageContext, "x-days", "7", false) %>' selected='<%= last.equals("168") %>' value="168" />
 																	</aui:select>
 																</li>
 															</ul>

@@ -88,7 +88,7 @@ public class EditExportConfigurationAction extends PortletAction {
 					exportLayoutsByExportImportConfiguration(actionRequest);
 			}
 			else if (Validator.isNull(cmd)) {
-				saveSessionParameters(actionRequest);
+				addSessionMessages(actionRequest);
 			}
 
 			String redirect = ParamUtil.getString(actionRequest, "redirect");
@@ -196,7 +196,7 @@ public class EditExportConfigurationAction extends PortletAction {
 		}
 	}
 
-	protected void saveSessionParameters(ActionRequest actionRequest)
+	protected void addSessionMessages(ActionRequest actionRequest)
 		throws Exception {
 
 		long exportImportConfigurationId = ParamUtil.getLong(

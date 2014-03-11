@@ -102,10 +102,8 @@ public class ExportImportConfigurationHelper {
 			WebKeys.THEME_DISPLAY);
 
 		long groupId = ParamUtil.getLong(portletRequest, "groupId");
-		String exportImportConfigurationName = ParamUtil.getString(
-			portletRequest, "name");
-		String exportImportConfigurationDescription = ParamUtil.getString(
-			portletRequest, "description");
+		String name = ParamUtil.getString(portletRequest, "name");
+		String description = ParamUtil.getString(portletRequest, "description");
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
@@ -113,10 +111,8 @@ public class ExportImportConfigurationHelper {
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
-				themeDisplay.getUserId(), groupId,
-				exportImportConfigurationName,
-				exportImportConfigurationDescription, type, settingsMap,
-				new ServiceContext());
+				themeDisplay.getUserId(), groupId, name, description, type,
+				settingsMap, new ServiceContext());
 	}
 
 	protected static void exportLayoutsByExportImportConfiguration(
@@ -168,13 +164,12 @@ public class ExportImportConfigurationHelper {
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = ParamUtil.getLong(portletRequest, "groupId");
 		long exportImportConfigurationId = ParamUtil.getLong(
 			portletRequest, "exportImportConfigurationId");
-		String exportImportConfigurationName = ParamUtil.getString(
-			portletRequest, "name");
-		String exportImportConfigurationDescription = ParamUtil.getString(
-			portletRequest, "description");
+
+		long groupId = ParamUtil.getLong(portletRequest, "groupId");
+		String name = ParamUtil.getString(portletRequest, "name");
+		String description = ParamUtil.getString(portletRequest, "description");
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
@@ -182,10 +177,8 @@ public class ExportImportConfigurationHelper {
 
 		return ExportImportConfigurationLocalServiceUtil.
 			updateExportImportConfiguration(
-				themeDisplay.getUserId(), exportImportConfigurationId,
-				exportImportConfigurationName,
-				exportImportConfigurationDescription, settingsMap,
-				new ServiceContext());
+				themeDisplay.getUserId(), exportImportConfigurationId, name,
+				description, settingsMap, new ServiceContext());
 	}
 
 }
