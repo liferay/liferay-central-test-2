@@ -856,11 +856,7 @@ AUI.add(
 						var cmdNode = instance.byId('cmd');
 
 						if ((cmdNode.val() === 'add') || (cmdNode.val() === 'update')) {
-							var groupIdNode = instance.byId('groupId');
-							var liveGroupIdNode = instance.byId('liveGroupId');
-							var privateLayoutNode = instance.byId('privateLayout');
 							var redirectNode = instance.byId('redirect');
-							var rootNodeNameNode = instance.byId('rootNodeName');
 
 							var portletURL = Liferay.PortletURL.createURL(redirectNode.val());
 
@@ -868,9 +864,21 @@ AUI.add(
 							portletURL.setParameter("cmd", cmdNode.val());
 							portletURL.setParameter("tabs2", "new-export-process");
 							portletURL.setParameter("exportNav", "custom");
+
+							var groupIdNode = instance.byId('groupId');
+
 							portletURL.setParameter("groupId", groupIdNode.val());
+
+							var liveGroupIdNode = instance.byId('liveGroupId');
+
 							portletURL.setParameter("liveGroupId", liveGroupIdNode.val());
+
+							var privateLayoutNode = instance.byId('privateLayout');
+
 							portletURL.setParameter("privateLayout", privateLayoutNode.val());
+
+							var rootNodeNameNode = instance.byId('rootNodeName');
+
 							portletURL.setParameter("rootNodeName", rootNodeNameNode.val());
 
 							redirectNode.val(portletURL.toString());
