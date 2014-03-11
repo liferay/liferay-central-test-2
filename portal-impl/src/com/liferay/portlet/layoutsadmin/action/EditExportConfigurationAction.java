@@ -150,6 +150,31 @@ public class EditExportConfigurationAction extends PortletAction {
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
+	protected void addSessionMessages(ActionRequest actionRequest)
+		throws Exception {
+
+		long exportImportConfigurationId = ParamUtil.getLong(
+			actionRequest, "exportImportConfigurationId");
+
+		SessionMessages.add(
+			actionRequest,
+			PortalUtil.getPortletId(actionRequest) +
+				"exportImportConfigurationId",
+			exportImportConfigurationId);
+
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		Map<String, Serializable> settingsMap =
+			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
+				actionRequest, groupId,
+				ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT);
+
+		SessionMessages.add(
+			actionRequest,
+			PortalUtil.getPortletId(actionRequest) + "settingsMap",
+			settingsMap);
+	}
+
 	protected void deleteExportImportConfiguration(
 			ActionRequest actionRequest, boolean moveToTrash)
 		throws PortalException, SystemException {
@@ -194,31 +219,6 @@ public class EditExportConfigurationAction extends PortletAction {
 
 			hideDefaultSuccessMessage(actionRequest);
 		}
-	}
-
-	protected void addSessionMessages(ActionRequest actionRequest)
-		throws Exception {
-
-		long exportImportConfigurationId = ParamUtil.getLong(
-			actionRequest, "exportImportConfigurationId");
-
-		SessionMessages.add(
-			actionRequest,
-			PortalUtil.getPortletId(actionRequest) +
-				"exportImportConfigurationId",
-			exportImportConfigurationId);
-
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		Map<String, Serializable> settingsMap =
-			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(
-				actionRequest, groupId,
-				ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT);
-
-		SessionMessages.add(
-			actionRequest,
-			PortalUtil.getPortletId(actionRequest) + "settingsMap",
-			settingsMap);
 	}
 
 	protected ExportImportConfiguration updateExportConfiguration(
