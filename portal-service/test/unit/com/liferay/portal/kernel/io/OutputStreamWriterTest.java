@@ -266,14 +266,14 @@ public class OutputStreamWriterTest {
 	}
 
 	private void _testWriteCharArray(boolean autoFlush) throws IOException {
-		final AtomicBoolean flushedFlag = new AtomicBoolean();
+		final AtomicBoolean flushed = new AtomicBoolean();
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream() {
 
 				@Override
-				public void flush() throws IOException {
-					flushedFlag.set(true);
+				public void flush() {
+					flushed.set(true);
 				}
 
 			};
@@ -283,14 +283,14 @@ public class OutputStreamWriterTest {
 
 		outputStreamWriter.write("abcdefg".toCharArray(), 1, 5);
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			outputStreamWriter.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertArrayEquals(
@@ -304,14 +304,14 @@ public class OutputStreamWriterTest {
 
 		outputStreamWriter.write("abc".toCharArray());
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			outputStreamWriter.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertArrayEquals(
@@ -320,14 +320,14 @@ public class OutputStreamWriterTest {
 	}
 
 	private void _testWriteString(boolean autoFlush) throws IOException {
-		final AtomicBoolean flushedFlag = new AtomicBoolean();
+		final AtomicBoolean flushed = new AtomicBoolean();
 
 		UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 			new UnsyncByteArrayOutputStream() {
 
 				@Override
-				public void flush() throws IOException {
-					flushedFlag.set(true);
+				public void flush() {
+					flushed.set(true);
 				}
 
 			};
@@ -337,14 +337,14 @@ public class OutputStreamWriterTest {
 
 		outputStreamWriter.write("abcdefg", 1, 5);
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			outputStreamWriter.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertArrayEquals(
@@ -358,14 +358,14 @@ public class OutputStreamWriterTest {
 
 		outputStreamWriter.write("abcdefg", 1, 5);
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			outputStreamWriter.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertArrayEquals(
@@ -379,14 +379,14 @@ public class OutputStreamWriterTest {
 
 		outputStreamWriter.write("abc");
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			outputStreamWriter.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertArrayEquals(

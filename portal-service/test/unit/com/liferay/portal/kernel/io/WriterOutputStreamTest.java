@@ -324,13 +324,13 @@ public class WriterOutputStreamTest {
 	}
 
 	private void _testWriteBlock(boolean autoFlush) throws IOException {
-		final AtomicBoolean flushedFlag = new AtomicBoolean();
+		final AtomicBoolean flushed = new AtomicBoolean();
 
 		UnsyncStringWriter unsyncStringWriter = new UnsyncStringWriter() {
 
 			@Override
 			public void flush() {
-				flushedFlag.set(true);
+				flushed.set(true);
 			}
 
 		};
@@ -344,14 +344,14 @@ public class WriterOutputStreamTest {
 				(byte)'f', (byte)'g'},
 			1, 5);
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			writerOutputStream.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertEquals("bcdef", unsyncStringWriter.toString());
@@ -367,14 +367,14 @@ public class WriterOutputStreamTest {
 				(byte)'f', (byte)'g'},
 			1, 5);
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			writerOutputStream.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertEquals("bcdef", unsyncStringWriter.toString());
@@ -386,14 +386,14 @@ public class WriterOutputStreamTest {
 
 		writerOutputStream.write(new byte[]{(byte)'a', (byte)'b', (byte)'c'});
 
-		Assert.assertFalse(flushedFlag.get());
+		Assert.assertFalse(flushed.get());
 
 		if (!autoFlush) {
 			writerOutputStream.flush();
 
-			Assert.assertTrue(flushedFlag.get());
+			Assert.assertTrue(flushed.get());
 
-			flushedFlag.set(false);
+			flushed.set(false);
 		}
 
 		Assert.assertEquals("abc", unsyncStringWriter.toString());
