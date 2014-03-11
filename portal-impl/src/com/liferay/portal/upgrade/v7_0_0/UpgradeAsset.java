@@ -28,7 +28,6 @@ public class UpgradeAsset extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		try {
 			runSQL("alter_column_type AssetEntry description TEXT null");
-
 			runSQL("alter_column_type AssetEntry summary TEXT null");
 		}
 		catch (SQLException sqle) {
