@@ -12,6 +12,8 @@
 
 		<execute macro="WebContentTemplates#tearDownCP" />
 
+		<execute macro="WebContentStructures#tearDownCP" />
+
 		<execute macro="WebContentStructures#tearDownCP">
 			<var name="siteScopeName" value="${globalSiteName}" />
 		</execute>

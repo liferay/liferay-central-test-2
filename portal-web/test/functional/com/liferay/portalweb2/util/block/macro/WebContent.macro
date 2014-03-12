@@ -911,6 +911,8 @@
 				</if>
 			</then>
 		</if>
+
+		<execute action="PGWebcontentdisplayEditwebcontent#selectFrame" value1="relative=top" />
 	</command>
 
 	<command name="viewWithWorkflowCP">
