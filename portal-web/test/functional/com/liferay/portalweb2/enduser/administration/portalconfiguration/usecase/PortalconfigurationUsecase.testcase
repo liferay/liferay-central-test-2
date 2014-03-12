@@ -10,7 +10,6 @@
 	</tear-down>
 
 	<command name="ViewDeactivatedPortalInstance" priority="4">
-
 		<execute macro="Page#gotoCP">
 			<var name="portletName" value="Portal Instances" />
 		</execute>
