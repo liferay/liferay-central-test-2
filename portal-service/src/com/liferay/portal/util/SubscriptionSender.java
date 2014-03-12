@@ -151,7 +151,7 @@ public class SubscriptionSender implements Serializable {
 						notifyPersistedSubscriber(
 							subscription, inferredClassName, inferredClassPK);
 					}
-					catch (PortalException pe) {
+					catch (Exception e) {
 						_log.error(
 							"Unable to process subscription: " + subscription);
 					}
@@ -729,60 +729,50 @@ public class SubscriptionSender implements Serializable {
 		MailServiceUtil.sendEmail(mailMessage);
 	}
 
-	protected void sendEmailNotification(User user) {
-		try {
-			if (UserNotificationManagerUtil.isDeliver(
-					user.getUserId(), portletId, _notificationClassNameId,
-					_notificationType,
-					UserNotificationDeliveryConstants.TYPE_EMAIL)) {
+	protected void sendEmailNotification(User user) throws Exception {
+		if (UserNotificationManagerUtil.isDeliver(
+				user.getUserId(), portletId, _notificationClassNameId,
+				_notificationType,
+				UserNotificationDeliveryConstants.TYPE_EMAIL)) {
 
-				InternetAddress to = new InternetAddress(
-					user.getEmailAddress(), user.getFullName());
+			InternetAddress to = new InternetAddress(
+				user.getEmailAddress(), user.getFullName());
 
-				sendEmail(to, user.getLocale());
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			sendEmail(to, user.getLocale());
 		}
 	}
 
-	protected void sendNotification(User user) {
+	protected void sendNotification(User user) throws Exception {
 		sendEmailNotification(user);
 		sendWebsiteNotification(user);
 	}
 
-	protected void sendWebsiteNotification(User user) {
-		try {
-			if (UserNotificationManagerUtil.isDeliver(
-					user.getUserId(), portletId, _notificationClassNameId,
-					_notificationType,
-					UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
+	protected void sendWebsiteNotification(User user) throws Exception {
+		if (UserNotificationManagerUtil.isDeliver(
+				user.getUserId(), portletId, _notificationClassNameId,
+				_notificationType,
+				UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
 
-				JSONObject notificationEventJSONObject =
-					JSONFactoryUtil.createJSONObject();
+			JSONObject notificationEventJSONObject =
+				JSONFactoryUtil.createJSONObject();
 
-				notificationEventJSONObject.put("className", _className);
-				notificationEventJSONObject.put("classPK", _classPK);
-				notificationEventJSONObject.put("entryTitle", _entryTitle);
-				notificationEventJSONObject.put("entryURL", _entryURL);
-				notificationEventJSONObject.put(
-					"notificationType", _notificationType);
-				notificationEventJSONObject.put("userId", user.getUserId());
+			notificationEventJSONObject.put("className", _className);
+			notificationEventJSONObject.put("classPK", _classPK);
+			notificationEventJSONObject.put("entryTitle", _entryTitle);
+			notificationEventJSONObject.put("entryURL", _entryURL);
+			notificationEventJSONObject.put(
+				"notificationType", _notificationType);
+			notificationEventJSONObject.put("userId", user.getUserId());
 
-				NotificationEvent notificationEvent =
-					NotificationEventFactoryUtil.createNotificationEvent(
-						System.currentTimeMillis(), portletId,
-						notificationEventJSONObject);
+			NotificationEvent notificationEvent =
+				NotificationEventFactoryUtil.createNotificationEvent(
+					System.currentTimeMillis(), portletId,
+					notificationEventJSONObject);
 
-				notificationEvent.setDeliveryRequired(0);
+			notificationEvent.setDeliveryRequired(0);
 
-				UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
-					user.getUserId(), notificationEvent);
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
+			UserNotificationEventLocalServiceUtil.addUserNotificationEvent(
+				user.getUserId(), notificationEvent);
 		}
 	}
 
