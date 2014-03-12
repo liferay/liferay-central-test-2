@@ -1003,6 +1003,7 @@ public class PortletBagFactory {
 		return socialActivityInterpreterInstances;
 	}
 
+	@SuppressWarnings("unchecked")
 	protected List<StagedModelDataHandler<?>> newStagedModelDataHandler(
 			Portlet portlet)
 		throws Exception {
