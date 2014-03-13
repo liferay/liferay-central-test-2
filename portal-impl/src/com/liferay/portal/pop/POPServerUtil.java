@@ -32,12 +32,11 @@ import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceRegistration;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.registry.collections.ServiceRegistrationMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -142,10 +141,8 @@ public class POPServerUtil {
 	private static POPServerUtil _instance = new POPServerUtil();
 
 	private List<MessageListener> _listeners = new ArrayList<MessageListener>();
-	private Map<MessageListener, ServiceRegistration<MessageListener>>
-		_serviceRegistrations =
-			new ConcurrentHashMap
-				<MessageListener, ServiceRegistration<MessageListener>>();
+	private ServiceRegistrationMap<MessageListener> _serviceRegistrations =
+		new ServiceRegistrationMap<MessageListener>();
 	private ServiceTracker<MessageListener, MessageListenerWrapper>
 		_serviceTracker;
 

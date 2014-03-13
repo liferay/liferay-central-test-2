@@ -39,12 +39,12 @@ import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceRegistration;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.registry.collections.ServiceRegistrationMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -67,20 +67,6 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class SocialActivityInterpreterLocalServiceImpl
 	extends SocialActivityInterpreterLocalServiceBaseImpl {
-
-	@Override
-	public void afterPropertiesSet() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		Filter filter = registry.getFilter(
-			"(&(javax.portlet.name=*)(objectClass="
-				+ SocialActivityInterpreter.class.getName() + "))");
-
-		_serviceTracker = registry.trackServices(filter,
-			new SocialActivityInterpreterServiceTrackerCustomizer());
-
-		_serviceTracker.open();
-	}
 
 	/**
 	 * Adds the activity interpreter to the list of available interpreters.
@@ -107,6 +93,20 @@ public class SocialActivityInterpreterLocalServiceImpl
 				properties);
 
 		_serviceRegistrations.put(activityInterpreter, serviceRegistration);
+	}
+
+	@Override
+	public void afterPropertiesSet() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		Filter filter = registry.getFilter(
+			"(&(javax.portlet.name=*)(objectClass=" +
+				SocialActivityInterpreter.class.getName() + "))");
+
+		_serviceTracker = registry.trackServices(filter,
+			new SocialActivityInterpreterServiceTrackerCustomizer());
+
+		_serviceTracker.open();
 	}
 
 	/**
@@ -336,12 +336,9 @@ public class SocialActivityInterpreterLocalServiceImpl
 
 	private Map<String, List<SocialActivityInterpreter>> _activityInterpreters =
 		new HashMap<String, List<SocialActivityInterpreter>>();
-	private Map
-		<SocialActivityInterpreter,
-			ServiceRegistration<SocialActivityInterpreter>>
-				_serviceRegistrations = new ConcurrentHashMap<
-					SocialActivityInterpreter,
-					ServiceRegistration<SocialActivityInterpreter>>();
+	private ServiceRegistrationMap<SocialActivityInterpreter>
+		_serviceRegistrations =
+			new ServiceRegistrationMap<SocialActivityInterpreter>();
 	private ServiceTracker<SocialActivityInterpreter, SocialActivityInterpreter>
 		_serviceTracker;
 
@@ -358,7 +355,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 			SocialActivityInterpreter socialActivityInterpreter =
 				registry.getService(serviceReference);
 
-			String portletId = (String) serviceReference.getProperty(
+			String portletId = (String)serviceReference.getProperty(
 				"javax.portlet.name");
 
 			if (!(socialActivityInterpreter instanceof
