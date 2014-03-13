@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.template.TemplateHandler;
 import com.liferay.portal.kernel.trash.TrashHandler;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.webdav.WebDAVStorage;
 import com.liferay.portal.kernel.workflow.WorkflowHandler;
@@ -139,13 +140,13 @@ public class PortletBagImpl implements PortletBag {
 
 	@Override
 	public void destroy() {
-		close((Closeable)_configurationActionInstances);
-		close((Closeable)_friendlyURLMapperInstances);
-		close((Closeable)_indexerInstances);
-		close((Closeable)_openSearchInstances);
-		close((Closeable)_portletDataHandlerInstances);
-		close((Closeable)_templateHandlerInstances);
-		close((Closeable)_urlEncoderInstances);
+		close(_configurationActionInstances);
+		close(_friendlyURLMapperInstances);
+		close(_indexerInstances);
+		close(_openSearchInstances);
+		close(_portletDataHandlerInstances);
+		close(_templateHandlerInstances);
+		close(_urlEncoderInstances);
 	}
 
 	@Override
@@ -321,12 +322,15 @@ public class PortletBagImpl implements PortletBag {
 		_portletName = portletName;
 	}
 
-	protected void close(Closeable closeable) {
+	protected void close(Object object) {
 		try {
+			Closeable closeable = (Closeable)object;
+
 			closeable.close();
 		}
 		catch (Exception e) {
-			throw new AssertionError("This should never happen!", e);
+			throw new RuntimeException(
+				"Unable to close " + ClassUtil.getClassName(object), e);
 		}
 	}
 
