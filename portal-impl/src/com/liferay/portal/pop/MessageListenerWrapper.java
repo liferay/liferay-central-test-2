@@ -86,13 +86,13 @@ public class MessageListenerWrapper implements MessageListener {
 		return _listener.getId();
 	}
 
+	public MessageListener getMessageListener() {
+		return _listener;
+	}
+
 	@Override
 	public int hashCode() {
 		return _listener.getId().hashCode();
-	}
-
-	public MessageListener getMessageListener() {
-		return _listener;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(

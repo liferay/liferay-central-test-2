@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEntryImpl;
 import com.liferay.portal.kernel.scheduler.StorageType;
 import com.liferay.portal.kernel.scheduler.TimeUnit;
 import com.liferay.portal.kernel.scheduler.TriggerType;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.pop.messaging.POPNotificationsMessageListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.registry.Registry;
@@ -200,7 +201,8 @@ public class POPServerUtil {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug(
-					"Delete listener " + messageListener.getClass().getName());
+					"Delete listener " +
+						ClassUtil.getClassName(messageListener));
 			}
 
 			_listeners.remove(messageListenerWrapper);
