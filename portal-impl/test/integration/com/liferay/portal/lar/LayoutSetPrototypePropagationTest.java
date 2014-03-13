@@ -139,14 +139,12 @@ public class LayoutSetPrototypePropagationTest
 
 		propagateChanges(group);
 
-		boolean hasCustomizePermission =
+		Assert.assertTrue(
 			ResourcePermissionLocalServiceUtil.hasResourcePermission(
 				layout.getCompanyId(), Layout.class.getName(),
 				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(layout.getPrimaryKey()), role.getRoleId(),
-				ActionKeys.CUSTOMIZE);
-
-		Assert.assertTrue(hasCustomizePermission);
+				ActionKeys.CUSTOMIZE));
 	}
 
 	@Test
@@ -198,7 +196,8 @@ public class LayoutSetPrototypePropagationTest
 	}
 
 	@Test
-	public void testPortletPreferencesPropagationWithPreferencesUniquePerLayoutEnabled()
+	public void
+			testPortletPreferencesPropagationWithPreferencesUniquePerLayoutEnabled()
 		throws Exception {
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
