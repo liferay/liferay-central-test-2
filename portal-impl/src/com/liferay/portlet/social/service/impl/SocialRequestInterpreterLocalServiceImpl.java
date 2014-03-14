@@ -56,20 +56,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class SocialRequestInterpreterLocalServiceImpl
 	extends SocialRequestInterpreterLocalServiceBaseImpl {
 
-	@Override
-	public void afterPropertiesSet() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		Filter filter = registry.getFilter(
-			"(&(javax.portlet.name=*)(objectClass="
-				+ SocialRequestInterpreter.class.getName() + "))");
-
-		_serviceTracker = registry.trackServices(filter,
-			new SocialRequestInterpreterServiceTrackerCustomizer());
-
-		_serviceTracker.open();
-	}
-
 	/**
 	 * Adds the social request interpreter to the list of available
 	 * interpreters.
@@ -92,10 +78,23 @@ public class SocialRequestInterpreterLocalServiceImpl
 
 		ServiceRegistration<SocialRequestInterpreter> serviceRegistration =
 			registry.registerService(
-				SocialRequestInterpreter.class, requestInterpreter,
-				properties);
+				SocialRequestInterpreter.class, requestInterpreter, properties);
 
 		_serviceRegistrations.put(requestInterpreter, serviceRegistration);
+	}
+
+	@Override
+	public void afterPropertiesSet() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		Filter filter = registry.getFilter(
+			"(&(javax.portlet.name=*)(objectClass=" +
+				SocialRequestInterpreter.class.getName() + "))");
+
+		_serviceTracker = registry.trackServices(
+			filter, new SocialRequestInterpreterServiceTrackerCustomizer());
+
+		_serviceTracker.open();
 	}
 
 	/**
@@ -247,40 +246,38 @@ public class SocialRequestInterpreterLocalServiceImpl
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			SocialRequestInterpreter socialRequestInterpreter =
-				registry.getService(serviceReference);
+			SocialRequestInterpreter requestInterpreter = registry.getService(
+				serviceReference);
 
-			String portletId = (String) serviceReference.getProperty(
+			String portletId = (String)serviceReference.getProperty(
 				"javax.portlet.name");
 
-			if (!(socialRequestInterpreter instanceof
-					SocialRequestInterpreterImpl)) {
-
-				socialRequestInterpreter = new SocialRequestInterpreterImpl(
-					portletId, socialRequestInterpreter);
+			if (!(requestInterpreter instanceof SocialRequestInterpreterImpl)) {
+				requestInterpreter = new SocialRequestInterpreterImpl(
+					portletId, requestInterpreter);
 			}
 
-			_requestInterpreters.add(socialRequestInterpreter);
+			_requestInterpreters.add(requestInterpreter);
 
-			return socialRequestInterpreter;
+			return requestInterpreter;
 		}
 
 		@Override
 		public void modifiedService(
 			ServiceReference<SocialRequestInterpreter> serviceReference,
-			SocialRequestInterpreter socialRequestInterpreter) {
+			SocialRequestInterpreter requestInterpreter) {
 		}
 
 		@Override
 		public void removedService(
 			ServiceReference<SocialRequestInterpreter> serviceReference,
-			SocialRequestInterpreter socialRequestInterpreter) {
+			SocialRequestInterpreter requestInterpreter) {
 
 			Registry registry = RegistryUtil.getRegistry();
 
 			registry.ungetService(serviceReference);
 
-			_requestInterpreters.remove(socialRequestInterpreter);
+			_requestInterpreters.remove(requestInterpreter);
 		}
 
 	}
