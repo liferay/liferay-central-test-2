@@ -355,6 +355,13 @@ public class DDMStructureServiceWrapper implements DDMStructureService,
 		return _ddmStructureService.getStructures(groupIds);
 	}
 
+	@Override
+	public java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getStructures(
+		long[] groupIds, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return _ddmStructureService.getStructures(groupIds, classNameId);
+	}
+
 	/**
 	* Returns an ordered range of all the structures matching the groups and
 	* class name IDs, and matching the keywords in the structure names and

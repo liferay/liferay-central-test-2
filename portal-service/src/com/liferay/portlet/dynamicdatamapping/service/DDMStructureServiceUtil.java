@@ -353,6 +353,12 @@ public class DDMStructureServiceUtil {
 		return getService().getStructures(groupIds);
 	}
 
+	public static java.util.List<com.liferay.portlet.dynamicdatamapping.model.DDMStructure> getStructures(
+		long[] groupIds, long classNameId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getService().getStructures(groupIds, classNameId);
+	}
+
 	/**
 	* Returns an ordered range of all the structures matching the groups and
 	* class name IDs, and matching the keywords in the structure names and
