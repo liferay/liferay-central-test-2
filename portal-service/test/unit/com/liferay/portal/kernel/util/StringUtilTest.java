@@ -60,7 +60,6 @@ public class StringUtilTest {
 			StringUtil.equalsIgnoreBreakLine("\nHello World", "Hello World"));
 		Assert.assertTrue(
 			StringUtil.equalsIgnoreBreakLine("Hello World\n", "Hello World"));
-
 		Assert.assertFalse(StringUtil.equalsIgnoreBreakLine("Hello World", ""));
 		Assert.assertFalse(
 			StringUtil.equalsIgnoreBreakLine("Hello World\n", null));
@@ -72,7 +71,6 @@ public class StringUtilTest {
 			StringUtil.equalsIgnoreCase("HELLO WORLD", "Hello World"));
 		Assert.assertTrue(
 			StringUtil.equalsIgnoreCase("Hello \n World", "hello \n worlD"));
-
 		Assert.assertFalse(StringUtil.equalsIgnoreCase("Hello \n World", ""));
 		Assert.assertFalse(StringUtil.equalsIgnoreCase("Hello \n World", null));
 	}
