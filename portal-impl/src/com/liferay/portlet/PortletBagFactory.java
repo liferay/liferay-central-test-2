@@ -636,8 +636,8 @@ public class PortletBagFactory {
 		throws Exception {
 
 		ServiceTrackerList<CustomAttributesDisplay>
-			customAttributesDisplayInstances =
-				getServiceTrackerList(CustomAttributesDisplay.class, portlet);
+			customAttributesDisplayInstances = getServiceTrackerList(
+				CustomAttributesDisplay.class, portlet);
 
 		for (String customAttributesDisplayClass :
 				portlet.getCustomAttributesDisplayClasses()) {
