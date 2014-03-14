@@ -144,7 +144,7 @@ public class LocalizationImplTest {
 			xml, "greeting", _germanHello, _germanLanguageId,
 			_englishLanguageId);
 
-		String defaultValue = "default value";
+		String defaultValue = "Default Value";
 
 		Assert.assertEquals(
 			defaultValue,
