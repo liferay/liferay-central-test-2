@@ -272,23 +272,23 @@ public class UserNotificationManagerUtil {
 	private static UserNotificationManagerUtil _instance =
 		new UserNotificationManagerUtil();
 
-	private StringServiceRegistrationMap<UserNotificationDefinition>
-		_userNotificationDefinitionServiceRegistrations =
-			new StringServiceRegistrationMap<UserNotificationDefinition>();
-	private ServiceRegistrationMap<UserNotificationHandler>
-		_userNotificationHandlerServiceRegistrations =
-			new ServiceRegistrationMap<UserNotificationHandler>();
-	private ServiceTracker
-		<UserNotificationDefinition, UserNotificationDefinition>
-			_userNotificationDefinitionServiceTracker;
-	private ServiceTracker<UserNotificationHandler, UserNotificationHandler>
-		_userNotificationHandlerServiceTracker;
 	private Map<String, List<UserNotificationDefinition>>
 		_userNotificationDefinitions =
 			new ConcurrentHashMap<String, List<UserNotificationDefinition>>();
+	private StringServiceRegistrationMap<UserNotificationDefinition>
+		_userNotificationDefinitionServiceRegistrations =
+			new StringServiceRegistrationMap<UserNotificationDefinition>();
+	private ServiceTracker
+		<UserNotificationDefinition, UserNotificationDefinition>
+			_userNotificationDefinitionServiceTracker;
 	private Map<String, Map<String, UserNotificationHandler>>
 		_userNotificationHandlers = new ConcurrentHashMap
 			<String, Map<String, UserNotificationHandler>>();
+	private ServiceRegistrationMap<UserNotificationHandler>
+		_userNotificationHandlerServiceRegistrations =
+			new ServiceRegistrationMap<UserNotificationHandler>();
+	private ServiceTracker<UserNotificationHandler, UserNotificationHandler>
+		_userNotificationHandlerServiceTracker;
 
 	private class UserNotificationDefinitionServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer
