@@ -76,7 +76,6 @@ public class AtomCollectionAdapterRegistryUtil {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private AtomCollectionAdapterRegistryUtil() {
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -98,14 +97,14 @@ public class AtomCollectionAdapterRegistryUtil {
 		return ListUtil.fromMapValues(_atomCollectionAdapters);
 	}
 
-	@SuppressWarnings("unchecked")
 	private void _register(AtomCollectionAdapter<?> atomCollectionAdapter) {
 		Registry registry = RegistryUtil.getRegistry();
 
 		ServiceRegistration<AtomCollectionAdapter<?>> serviceRegistration =
 			registry.registerService(
 				(Class<AtomCollectionAdapter<?>>)(Class<?>)
-					AtomCollectionAdapter.class, atomCollectionAdapter);
+					AtomCollectionAdapter.class,
+				atomCollectionAdapter);
 
 		_serviceRegistrations.put(atomCollectionAdapter, serviceRegistration);
 	}

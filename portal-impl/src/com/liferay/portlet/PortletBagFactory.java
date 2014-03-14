@@ -570,16 +570,14 @@ public class PortletBagFactory {
 		return assetRendererFactoryInstances;
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<AtomCollectionAdapter<?>> newAtomCollectionAdapterInstances(
 			Portlet portlet)
 		throws Exception {
 
 		ServiceTrackerList<AtomCollectionAdapter<?>>
-			atomCollectionAdapterInstances =
-				getServiceTrackerList(
-					(Class<AtomCollectionAdapter<?>>)(Class<?>)
-						AtomCollectionAdapter.class, portlet);
+			atomCollectionAdapterInstances = getServiceTrackerList(
+				(Class<AtomCollectionAdapter<?>>)(Class<?>)
+					AtomCollectionAdapter.class, portlet);
 
 		for (String atomCollectionAdapterClass :
 				portlet.getAtomCollectionAdapterClasses()) {
