@@ -414,8 +414,7 @@ public class WebDAVUtil {
 
 			Registry registry = RegistryUtil.getRegistry();
 
-			WebDAVStorage webDAVStorage = registry.getService(
-				serviceReference);
+			WebDAVStorage webDAVStorage = registry.getService(serviceReference);
 
 			if (webDAVStorage.getToken() == null) {
 				return null;
