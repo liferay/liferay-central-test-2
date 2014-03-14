@@ -371,7 +371,8 @@ public interface PortletDataContext extends Serializable {
 	public Element getMissingReferencesElement();
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link #getNewPrimaryKeysMap(String)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getNewPrimaryKeysMap(String)}
 	 */
 	@Deprecated
 	public List<Layout> getNewLayouts();

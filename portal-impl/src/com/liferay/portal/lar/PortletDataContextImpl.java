@@ -1000,7 +1000,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, see {@link #getNewPrimaryKeysMap(String)}
+	 * @deprecated As of 7.0.0, replaced by {@link
+	 *             #getNewPrimaryKeysMap(String)}
 	 */
 	@Deprecated
 	@Override
