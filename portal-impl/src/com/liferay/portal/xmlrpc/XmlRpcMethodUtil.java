@@ -66,10 +66,10 @@ public class XmlRpcMethodUtil {
 	protected Method _getMethod(String token, String methodName) {
 		Method method = null;
 
-		Map<String, Method> tokenMethods = _methodRegistry.get(token);
+		Map<String, Method> methods = _methodRegistry.get(token);
 
-		if (tokenMethods != null) {
-			method = tokenMethods.get(methodName);
+		if (methods != null) {
+			method = methods.get(methodName);
 		}
 
 		return method;
@@ -117,15 +117,15 @@ public class XmlRpcMethodUtil {
 			String token = method.getToken();
 			String methodName = method.getMethodName();
 
-			Map<String, Method> tokenMethods = _methodRegistry.get(token);
+			Map<String, Method> methods = _methodRegistry.get(token);
 
-			if (tokenMethods == null) {
-				tokenMethods = new HashMap<String, Method>();
+			if (methods == null) {
+				methods = new HashMap<String, Method>();
 
-				_methodRegistry.put(token, tokenMethods);
+				_methodRegistry.put(token, methods);
 			}
 
-			Method registeredMethod = tokenMethods.get(methodName);
+			Method registeredMethod = methods.get(methodName);
 
 			if (registeredMethod != null) {
 				if (_log.isWarnEnabled()) {
@@ -135,7 +135,7 @@ public class XmlRpcMethodUtil {
 				}
 			}
 			else {
-				tokenMethods.put(methodName, method);
+				methods.put(methodName, method);
 			}
 
 			return method;
@@ -157,15 +157,15 @@ public class XmlRpcMethodUtil {
 			String token = method.getToken();
 			String methodName = method.getMethodName();
 
-			Map<String, Method> tokenMethods = _methodRegistry.get(token);
+			Map<String, Method> methods = _methodRegistry.get(token);
 
-			if (tokenMethods == null) {
+			if (methods == null) {
 				return;
 			}
 
-			tokenMethods.remove(methodName);
+			methods.remove(methodName);
 
-			if (tokenMethods.isEmpty()) {
+			if (methods.isEmpty()) {
 				_methodRegistry.remove(token);
 			}
 		}
