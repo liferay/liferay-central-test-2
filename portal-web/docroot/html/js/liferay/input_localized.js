@@ -302,8 +302,6 @@ AUI.add(
 						var name = instance.get('name');
 						var namespace = instance.get('namespace');
 
-						var inputLanguage = boundingBox.one('#' + namespace + id + '_' + languageId);
-
 						var fieldNamePrefix = STR_BLANK;
 						var fieldNameSuffix = STR_BLANK;
 
@@ -311,6 +309,8 @@ AUI.add(
 							fieldNamePrefix = fieldPrefix + fieldPrefixSeparator;
 							fieldNameSuffix = fieldPrefixSeparator;
 						}
+
+						var inputLanguage = boundingBox.one('#' + namespace + id + '_' + languageId);
 
 						if (!inputLanguage) {
 							inputLanguage = A.Node.create(
