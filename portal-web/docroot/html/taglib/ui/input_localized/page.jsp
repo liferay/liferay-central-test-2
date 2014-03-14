@@ -314,13 +314,13 @@ if ((exception != null) && fieldName.equals(focusField)) {
 					boundingBox: '#<portlet:namespace /><%= id %>BoundingBox',
 					columns: 20,
 					contentBox: '#<portlet:namespace /><%= id %>ContentBox',
-					fieldPrefix: '<%= fieldPrefix %>',
-					fieldPrefixSeparator: '<%= fieldPrefixSeparator %>',
 
 					<c:if test='<%= type.equals("editor") %>'>
 						editor: window['<portlet:namespace /><%= fieldName %>'],
 					</c:if>
 
+					fieldPrefix: '<%= fieldPrefix %>',
+					fieldPrefixSeparator: '<%= fieldPrefixSeparator %>',
 					id: '<%= id %>',
 					inputPlaceholder: '#<portlet:namespace /><%= HtmlUtil.escapeJS(id + fieldSuffix) %>',
 					items: availableLanguageIds,
