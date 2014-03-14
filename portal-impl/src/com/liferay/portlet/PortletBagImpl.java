@@ -81,12 +81,12 @@ public class PortletBagImpl implements PortletBag {
 		List<AssetRendererFactory> assetRendererFactoryInstances,
 		List<AtomCollectionAdapter<?>> atomCollectionAdapters,
 		List<CustomAttributesDisplay> customAttributesDisplayInstances,
+		List<DDMDisplay> ddmDisplayInstances,
 		List<PermissionPropagator> permissionPropagatorInstances,
 		List<TrashHandler> trashHandlerInstances,
 		List<WorkflowHandler> workflowHandlerInstances,
 		List<PreferencesValidator> preferencesValidatorInstances,
-		Map<String, ResourceBundle> resourceBundles,
-		List<DDMDisplay> ddmDisplayInstances) {
+		Map<String, ResourceBundle> resourceBundles) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
@@ -137,9 +137,9 @@ public class PortletBagImpl implements PortletBag {
 			getAssetRendererFactoryInstances(),
 			getAtomCollectionAdapterInstances(),
 			getCustomAttributesDisplayInstances(),
-			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
-			getWorkflowHandlerInstances(), getPreferencesValidatorInstances(),
-			getResourceBundles(), getDdmDisplayInstances());
+			getDdmDisplayInstances(), getPermissionPropagatorInstances(),
+			getTrashHandlerInstances(), getWorkflowHandlerInstances(),
+			getPreferencesValidatorInstances(), getResourceBundles());
 	}
 
 	@Override

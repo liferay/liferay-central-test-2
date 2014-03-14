@@ -220,9 +220,9 @@ public class PortletBagFactory {
 			webDAVStorageInstances, xmlRpcMethodInstances,
 			controlPanelEntryInstances, assetRendererFactoryInstances,
 			atomCollectionAdapterInstances, customAttributesDisplayInstances,
-			permissionPropagatorInstances, trashHandlerInstances,
-			workflowHandlerInstances, preferencesValidatorInstances,
-			resourceBundles, ddmDisplayInstances);
+			ddmDisplayInstances, permissionPropagatorInstances,
+			trashHandlerInstances, workflowHandlerInstances,
+			preferencesValidatorInstances, resourceBundles);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
