@@ -1124,8 +1124,7 @@ public class PortletBagFactory {
 		return webDAVStorageInstances;
 	}
 
-	protected List<WorkflowHandler> newWorkflowHandlerInstances(
-			Portlet portlet)
+	protected List<WorkflowHandler> newWorkflowHandlerInstances(Portlet portlet)
 		throws Exception {
 
 		ServiceTrackerList<WorkflowHandler> workflowHandlerInstances =
