@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -54,15 +54,6 @@ public class XmlRpcMethodUtil {
 		_instance._unregisterMethod(method);
 	}
 
-	private XmlRpcMethodUtil() {
-		Registry registry = RegistryUtil.getRegistry();
-
-		_serviceTracker = registry.trackServices(
-			Method.class, new MethodServiceTrackerCustomizer());
-
-		_serviceTracker.open();
-	}
-
 	protected Method _getMethod(String token, String methodName) {
 		Method method = null;
 
@@ -73,6 +64,15 @@ public class XmlRpcMethodUtil {
 		}
 
 		return method;
+	}
+
+	private XmlRpcMethodUtil() {
+		Registry registry = RegistryUtil.getRegistry();
+
+		_serviceTracker = registry.trackServices(
+			Method.class, new MethodServiceTrackerCustomizer());
+
+		_serviceTracker.open();
 	}
 
 	private void _registerMethod(Method method) {
@@ -107,15 +107,12 @@ public class XmlRpcMethodUtil {
 		implements ServiceTrackerCustomizer<Method, Method> {
 
 		@Override
-		public Method addingService(
-			ServiceReference<Method> serviceReference) {
-
+		public Method addingService(ServiceReference<Method> serviceReference) {
 			Registry registry = RegistryUtil.getRegistry();
 
 			Method method = registry.getService(serviceReference);
 
 			String token = method.getToken();
-			String methodName = method.getMethodName();
 
 			Map<String, Method> methods = _methodRegistry.get(token);
 
@@ -124,6 +121,8 @@ public class XmlRpcMethodUtil {
 
 				_methodRegistry.put(token, methods);
 			}
+
+			String methodName = method.getMethodName();
 
 			Method registeredMethod = methods.get(methodName);
 
@@ -155,13 +154,14 @@ public class XmlRpcMethodUtil {
 			registry.ungetService(serviceReference);
 
 			String token = method.getToken();
-			String methodName = method.getMethodName();
 
 			Map<String, Method> methods = _methodRegistry.get(token);
 
 			if (methods == null) {
 				return;
 			}
+
+			String methodName = method.getMethodName();
 
 			methods.remove(methodName);
 
