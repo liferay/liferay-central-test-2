@@ -61,7 +61,7 @@ public class PortletBagImpl implements PortletBag {
 
 	public PortletBagImpl(
 		String portletName, ServletContext servletContext,
-		Portlet portletInstance,
+		Portlet portletInstance, ResourceBundleTracker resourceBundleTracker,
 		List<ConfigurationAction> configurationActionInstances,
 		List<Indexer> indexerInstances, List<OpenSearch> openSearchInstances,
 		List<FriendlyURLMapper> friendlyURLMapperInstances,
@@ -85,12 +85,12 @@ public class PortletBagImpl implements PortletBag {
 		List<PermissionPropagator> permissionPropagatorInstances,
 		List<TrashHandler> trashHandlerInstances,
 		List<WorkflowHandler> workflowHandlerInstances,
-		List<PreferencesValidator> preferencesValidatorInstances,
-		ResourceBundleTracker resourceBundleTracker) {
+		List<PreferencesValidator> preferencesValidatorInstances) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
 		_portletInstance = portletInstance;
+		_resourceBundleTracker = resourceBundleTracker;
 		_configurationActionInstances = configurationActionInstances;
 		_indexerInstances = indexerInstances;
 		_openSearchInstances = openSearchInstances;
@@ -117,29 +117,28 @@ public class PortletBagImpl implements PortletBag {
 		_trashHandlerInstances = trashHandlerInstances;
 		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstances = preferencesValidatorInstances;
-		_resourceBundleTracker = resourceBundleTracker;
 	}
 
 	@Override
 	public Object clone() {
 		return new PortletBagImpl(
 			getPortletName(), getServletContext(), getPortletInstance(),
-			getConfigurationActionInstances(), getIndexerInstances(),
-			getOpenSearchInstances(), getFriendlyURLMapperInstances(),
-			getURLEncoderInstances(), getPortletDataHandlerInstances(),
-			getStagedModelDataHandlerInstances(), getTemplateHandlerInstances(),
-			getPortletLayoutListenerInstances(), getPollerProcessorInstances(),
+			getResourceBundleTracker(), getConfigurationActionInstances(),
+			getIndexerInstances(), getOpenSearchInstances(),
+			getFriendlyURLMapperInstances(), getURLEncoderInstances(),
+			getPortletDataHandlerInstances(), getStagedModelDataHandlerInstances(),
+			getTemplateHandlerInstances(), getPortletLayoutListenerInstances(),
+			getPollerProcessorInstances(),
 			getPopMessageListenerInstances(),
 			getSocialActivityInterpreterInstances(),
-			getSocialRequestInterpreterInstances(),
-			getUserNotificationHandlerInstances(), getWebDAVStorageInstances(),
-			getXmlRpcMethodInstances(), getControlPanelEntryInstances(),
+			getSocialRequestInterpreterInstances(), getUserNotificationHandlerInstances(),
+			getWebDAVStorageInstances(), getXmlRpcMethodInstances(),
+			getControlPanelEntryInstances(),
 			getAssetRendererFactoryInstances(),
-			getAtomCollectionAdapterInstances(),
-			getCustomAttributesDisplayInstances(), getDdmDisplayInstances(),
-			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
-			getWorkflowHandlerInstances(), getPreferencesValidatorInstances(),
-			getResourceBundleTracker());
+			getAtomCollectionAdapterInstances(), getCustomAttributesDisplayInstances(),
+			getDdmDisplayInstances(), getPermissionPropagatorInstances(),
+			getTrashHandlerInstances(), getWorkflowHandlerInstances(),
+			getPreferencesValidatorInstances());
 	}
 
 	@Override

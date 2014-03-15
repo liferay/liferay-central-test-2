@@ -210,19 +210,19 @@ public class PortletBagFactory {
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,
-			configurationActionInstances, indexerInstances, openSearchInstances,
-			friendlyURLMapperInstances, urlEncoderInstances,
-			portletDataHandlerInstances, stagedModelDataHandlerInstances,
-			templateHandlerInstances, portletLayoutListenerInstances,
-			pollerProcessorInstances, popMessageListenerInstances,
-			socialActivityInterpreterInstances,
-			socialRequestInterpreterInstances, userNotificationHandlerInstances,
-			webDAVStorageInstances, xmlRpcMethodInstances,
-			controlPanelEntryInstances, assetRendererFactoryInstances,
-			atomCollectionAdapterInstances, customAttributesDisplayInstances,
-			ddmDisplayInstances, permissionPropagatorInstances,
-			trashHandlerInstances, workflowHandlerInstances,
-			preferencesValidatorInstances, resourceBundleTracker);
+			resourceBundleTracker, configurationActionInstances, indexerInstances,
+			openSearchInstances, friendlyURLMapperInstances,
+			urlEncoderInstances, portletDataHandlerInstances,
+			stagedModelDataHandlerInstances, templateHandlerInstances,
+			portletLayoutListenerInstances, pollerProcessorInstances,
+			popMessageListenerInstances,
+			socialActivityInterpreterInstances, socialRequestInterpreterInstances,
+			userNotificationHandlerInstances, webDAVStorageInstances,
+			xmlRpcMethodInstances, controlPanelEntryInstances,
+			assetRendererFactoryInstances, atomCollectionAdapterInstances,
+			customAttributesDisplayInstances, ddmDisplayInstances,
+			permissionPropagatorInstances, trashHandlerInstances,
+			workflowHandlerInstances, preferencesValidatorInstances);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
