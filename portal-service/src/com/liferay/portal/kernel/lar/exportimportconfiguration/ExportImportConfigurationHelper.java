@@ -128,9 +128,9 @@ public class ExportImportConfigurationHelper {
 	}
 
 	public static ExportImportConfiguration
-		updatePublishLayoutLocalExportImportConfiguration(
-			PortletRequest portletRequest)
-	throws Exception {
+			updatePublishLayoutLocalExportImportConfiguration(
+				PortletRequest portletRequest)
+		throws Exception {
 
 		return updateExportImportConfiguration(
 			portletRequest,
@@ -138,9 +138,9 @@ public class ExportImportConfigurationHelper {
 	}
 
 	public static ExportImportConfiguration
-		updatePublishLayoutRemoteExportImportConfiguration(
-			PortletRequest portletRequest)
-	throws Exception {
+			updatePublishLayoutRemoteExportImportConfiguration(
+				PortletRequest portletRequest)
+		throws Exception {
 
 		return updateExportImportConfiguration(
 			portletRequest,
