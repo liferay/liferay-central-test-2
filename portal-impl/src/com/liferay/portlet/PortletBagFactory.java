@@ -408,8 +408,7 @@ public class PortletBagFactory {
 					languageId = LocaleUtil.toLanguageId(locale);
 				}
 
-				resourceBundleTracker.register(
-					languageId, resourceBundle);
+				resourceBundleTracker.register(languageId, resourceBundle);
 			}
 		}
 		catch (Exception e) {

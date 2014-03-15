@@ -112,11 +112,11 @@ public class PortletBagImpl implements PortletBag {
 		_assetRendererFactoryInstances = assetRendererFactoryInstances;
 		_atomCollectionAdapterInstances = atomCollectionAdapters;
 		_customAttributesDisplayInstances = customAttributesDisplayInstances;
+		_ddmDisplayInstances = ddmDisplayInstances;
 		_permissionPropagatorInstances = permissionPropagatorInstances;
 		_trashHandlerInstances = trashHandlerInstances;
 		_workflowHandlerInstances = workflowHandlerInstances;
 		_preferencesValidatorInstances = preferencesValidatorInstances;
-		_ddmDisplayInstances = ddmDisplayInstances;
 		_resourceBundleTracker = resourceBundleTracker;
 	}
 
@@ -136,10 +136,10 @@ public class PortletBagImpl implements PortletBag {
 			getXmlRpcMethodInstances(), getControlPanelEntryInstances(),
 			getAssetRendererFactoryInstances(),
 			getAtomCollectionAdapterInstances(),
-			getCustomAttributesDisplayInstances(),
-			getDdmDisplayInstances(), getPermissionPropagatorInstances(),
-			getTrashHandlerInstances(), getWorkflowHandlerInstances(),
-			getPreferencesValidatorInstances(), getResourceBundleTracker());
+			getCustomAttributesDisplayInstances(), getDdmDisplayInstances(),
+			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstances(),
+			getResourceBundleTracker());
 	}
 
 	@Override
@@ -380,8 +380,8 @@ public class PortletBagImpl implements PortletBag {
 	private Portlet _portletInstance;
 	private List<PortletLayoutListener> _portletLayoutListenerInstances;
 	private String _portletName;
-	private ResourceBundleTracker _resourceBundleTracker;
 	private List<PreferencesValidator> _preferencesValidatorInstances;
+	private ResourceBundleTracker _resourceBundleTracker;
 	private ServletContext _servletContext;
 	private List<SocialActivityInterpreter> _socialActivityInterpreterInstances;
 	private List<SocialRequestInterpreter> _socialRequestInterpreterInstances;
