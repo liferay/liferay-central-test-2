@@ -210,19 +210,19 @@ public class PortletBagFactory {
 
 		PortletBag portletBag = new PortletBagImpl(
 			portlet.getPortletId(), _servletContext, portletInstance,
-			resourceBundleTracker, configurationActionInstances, indexerInstances,
-			openSearchInstances, friendlyURLMapperInstances,
+			resourceBundleTracker, configurationActionInstances,
+			indexerInstances, openSearchInstances, friendlyURLMapperInstances,
 			urlEncoderInstances, portletDataHandlerInstances,
 			stagedModelDataHandlerInstances, templateHandlerInstances,
 			portletLayoutListenerInstances, pollerProcessorInstances,
-			popMessageListenerInstances,
-			socialActivityInterpreterInstances, socialRequestInterpreterInstances,
-			userNotificationHandlerInstances, webDAVStorageInstances,
-			xmlRpcMethodInstances, controlPanelEntryInstances,
-			assetRendererFactoryInstances, atomCollectionAdapterInstances,
-			customAttributesDisplayInstances, ddmDisplayInstances,
-			permissionPropagatorInstances, trashHandlerInstances,
-			workflowHandlerInstances, preferencesValidatorInstances);
+			popMessageListenerInstances, socialActivityInterpreterInstances,
+			socialRequestInterpreterInstances, userNotificationHandlerInstances,
+			webDAVStorageInstances, xmlRpcMethodInstances,
+			controlPanelEntryInstances, assetRendererFactoryInstances,
+			atomCollectionAdapterInstances, customAttributesDisplayInstances,
+			ddmDisplayInstances, permissionPropagatorInstances,
+			trashHandlerInstances, workflowHandlerInstances,
+			preferencesValidatorInstances);
 
 		PortletBagPool.put(portlet.getRootPortletId(), portletBag);
 
