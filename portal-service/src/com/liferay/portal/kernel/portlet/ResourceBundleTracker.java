@@ -115,9 +115,8 @@ public class ResourceBundleTracker implements Closeable {
 	private String _portletId;
 	private Map<String, ResourceBundle> _resourceBundles =
 		new ConcurrentHashMap<String, ResourceBundle>();
-	private StringServiceRegistrationMap<ResourceBundle>
-		_serviceRegistrations =
-			new StringServiceRegistrationMap<ResourceBundle>();
+	private StringServiceRegistrationMap<ResourceBundle> _serviceRegistrations =
+		new StringServiceRegistrationMap<ResourceBundle>();
 	private ServiceTracker<ResourceBundle, ResourceBundle> _serviceTracker;
 
 	private class ResourceBundleServiceTrackerCustomizer

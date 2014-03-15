@@ -126,19 +126,19 @@ public class PortletBagImpl implements PortletBag {
 			getResourceBundleTracker(), getConfigurationActionInstances(),
 			getIndexerInstances(), getOpenSearchInstances(),
 			getFriendlyURLMapperInstances(), getURLEncoderInstances(),
-			getPortletDataHandlerInstances(), getStagedModelDataHandlerInstances(),
-			getTemplateHandlerInstances(), getPortletLayoutListenerInstances(),
-			getPollerProcessorInstances(),
+			getPortletDataHandlerInstances(),
+			getStagedModelDataHandlerInstances(), getTemplateHandlerInstances(),
+			getPortletLayoutListenerInstances(), getPollerProcessorInstances(),
 			getPopMessageListenerInstances(),
 			getSocialActivityInterpreterInstances(),
-			getSocialRequestInterpreterInstances(), getUserNotificationHandlerInstances(),
-			getWebDAVStorageInstances(), getXmlRpcMethodInstances(),
-			getControlPanelEntryInstances(),
+			getSocialRequestInterpreterInstances(),
+			getUserNotificationHandlerInstances(), getWebDAVStorageInstances(),
+			getXmlRpcMethodInstances(), getControlPanelEntryInstances(),
 			getAssetRendererFactoryInstances(),
-			getAtomCollectionAdapterInstances(), getCustomAttributesDisplayInstances(),
-			getDdmDisplayInstances(), getPermissionPropagatorInstances(),
-			getTrashHandlerInstances(), getWorkflowHandlerInstances(),
-			getPreferencesValidatorInstances());
+			getAtomCollectionAdapterInstances(),
+			getCustomAttributesDisplayInstances(), getDdmDisplayInstances(),
+			getPermissionPropagatorInstances(), getTrashHandlerInstances(),
+			getWorkflowHandlerInstances(), getPreferencesValidatorInstances());
 	}
 
 	@Override
