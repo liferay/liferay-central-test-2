@@ -3708,22 +3708,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			// behavior in the future because a bad plugin could disallow
 			// creation of groups.
 
-			boolean rollbackIfExceptionOccursInDataHandler = true;
-
 			try {
 				portletDataHandler.addDefaultData(
 					portletDataContext, portletDataHandler.getPortletId(),
 					null);
 			}
-			catch (PortletDataHandler e) {
+			catch (PortletDataHandler pe) {
 				_log.error(
 					"Unable to add default data for portlet " +
 						portletDataHandler.getPortletId() + " in group " +
-						group.getGroupId());
+							group.getGroupId());
 
-				if (rollbackIfExceptionOccursInDataHandler) {
-					throw new PortalException(e);
-				}
+				throw new PortalException(e);
 			}
 		}
 	}
@@ -3748,22 +3744,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			// behavior in the future because a bad plugin could disallow
 			// deletion of groups.
 
-			boolean rollbackIfExceptionOccursInDataHandler = true;
-
 			try {
 				portletDataHandler.deleteData(
 					portletDataContext, portletDataHandler.getPortletId(),
 					null);
 			}
-			catch (PortletDataHandler e) {
+			catch (PortletDataHandler pe) {
 				_log.error(
 					"Unable to delete data for portlet " +
 						portletDataHandler.getPortletId() + " in group " +
 							group.getGroupId());
 
-				if (rollbackIfExceptionOccursInDataHandler) {
-					throw new PortalException(e);
-				}
+				throw new PortalException(e);
 			}
 		}
 	}
