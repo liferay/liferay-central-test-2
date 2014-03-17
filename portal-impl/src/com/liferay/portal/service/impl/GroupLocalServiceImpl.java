@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataContextFactoryUtil;
+import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
@@ -3713,13 +3714,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					portletDataContext, portletDataHandler.getPortletId(),
 					null);
 			}
-			catch (PortletDataHandler pe) {
+			catch (PortletDataException pde) {
 				_log.error(
 					"Unable to add default data for portlet " +
 						portletDataHandler.getPortletId() + " in group " +
 							group.getGroupId());
 
-				throw new PortalException(e);
+				throw new PortalException(pde);
 			}
 		}
 	}
@@ -3749,13 +3750,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					portletDataContext, portletDataHandler.getPortletId(),
 					null);
 			}
-			catch (PortletDataHandler pe) {
+			catch (PortletDataException pde) {
 				_log.error(
 					"Unable to delete data for portlet " +
 						portletDataHandler.getPortletId() + " in group " +
 							group.getGroupId());
 
-				throw new PortalException(e);
+				throw new PortalException(pde);
 			}
 		}
 	}
@@ -4127,7 +4128,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return name + ORGANIZATION_NAME_SUFFIX;
 	}
 
-	protected List<PortletDataHandler> getPortletDataHandlers(Group group) {
+	protected List<PortletDataHandler> getPortletDataHandlers(Group group)
+		throws SystemException {
+
 		List<Portlet> portlets = portletLocalService.getPortlets(
 			group.getCompanyId());
 
