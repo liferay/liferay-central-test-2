@@ -15,7 +15,7 @@ dependencies {
 
 	bnd fileTree(
 		dir:"${liferayProjectDir}/lib/portal",
-		includes: ["**/bnd.jar","portal-ant-shared.jar"]
+		includes: ["**/bnd.jar", "portal-ant-shared.jar"]
 	)
 }
 
