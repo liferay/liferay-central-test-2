@@ -77,7 +77,7 @@ if (ddmStructureId > 0) {
 	<aui:fieldset>
 		<c:if test="<%= (recordSet != null) && (DDMStorageLinkLocalServiceUtil.getStructureStorageLinksCount(recordSet.getDDMStructureId()) > 0) %>">
 			<div class="alert alert-warning">
-				<liferay-ui:message key="updating-the-data-definition-will-cause-loss-of-data" />
+				<liferay-ui:message key="updating-the-data-definition-may-cause-data-loss" />
 			</div>
 		</c:if>
 
