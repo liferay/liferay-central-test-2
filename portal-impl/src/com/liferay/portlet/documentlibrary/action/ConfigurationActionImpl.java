@@ -54,24 +54,24 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			portletRequest, portletPreferences, "emailFromName",
 			DLUtil.getEmailFromName(portletPreferences, companyId));
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
+		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());
 
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailFileEntryAddedBody_" + defaultLanguageId,
+			"emailFileEntryAddedBody_" + languageId,
 			ContentUtil.get(PropsValues.DL_EMAIL_FILE_ENTRY_ADDED_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailFileEntryAddedSubject_" + defaultLanguageId,
+			"emailFileEntryAddedSubject_" + languageId,
 			ContentUtil.get(PropsValues.DL_EMAIL_FILE_ENTRY_ADDED_SUBJECT));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailFileEntryUpdatedBody_" + defaultLanguageId,
+			"emailFileEntryUpdatedBody_" + languageId,
 			ContentUtil.get(PropsValues.DL_EMAIL_FILE_ENTRY_UPDATED_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailFileEntryUpdatedSubject_" + defaultLanguageId,
+			"emailFileEntryUpdatedSubject_" + languageId,
 			ContentUtil.get(PropsValues.DL_EMAIL_FILE_ENTRY_UPDATED_SUBJECT));
 	}
 

@@ -99,17 +99,17 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			portletRequest, portletPreferences, "emailFromName",
 			AssetPublisherUtil.getEmailFromName(portletPreferences, companyId));
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
+		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());
 
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailAssetEntryAddedBody_" + defaultLanguageId,
+			"emailAssetEntryAddedBody_" + languageId,
 			ContentUtil.get(
 				PropsValues.ASSET_PUBLISHER_EMAIL_ASSET_ENTRY_ADDED_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailAssetEntryAddedSubject_" + defaultLanguageId,
+			"emailAssetEntryAddedSubject_" + languageId,
 			ContentUtil.get(
 				PropsValues.ASSET_PUBLISHER_EMAIL_ASSET_ENTRY_ADDED_SUBJECT));
 	}

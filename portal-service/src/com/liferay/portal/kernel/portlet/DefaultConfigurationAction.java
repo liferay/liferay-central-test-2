@@ -332,13 +332,13 @@ public class DefaultConfigurationAction
 		String emailBody = null;
 
 		if (localized) {
-			String defaultLanguageId = LocaleUtil.toLanguageId(
+			String languageId = LocaleUtil.toLanguageId(
 				LocaleUtil.getSiteDefault());
 
 			emailSubject = getLocalizedParameter(
-				actionRequest, emailParam + "Subject", defaultLanguageId);
+				actionRequest, emailParam + "Subject", languageId);
 			emailBody = getLocalizedParameter(
-				actionRequest, emailParam + "Body", defaultLanguageId);
+				actionRequest, emailParam + "Body", languageId);
 		}
 		else {
 			emailSubject = getParameter(actionRequest, emailParam + "Subject");

@@ -49,24 +49,24 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			portletRequest, portletPreferences, "emailFromName",
 			BookmarksUtil.getEmailFromName(portletPreferences, companyId));
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
+		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());
 
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailEntryAddedBody_" + defaultLanguageId,
+			"emailEntryAddedBody_" + languageId,
 			ContentUtil.get(PropsValues.BOOKMARKS_EMAIL_ENTRY_ADDED_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailEntryAddedSubject_" + defaultLanguageId,
+			"emailEntryAddedSubject_" + languageId,
 			ContentUtil.get(PropsValues.BOOKMARKS_EMAIL_ENTRY_ADDED_SUBJECT));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailEntryUpdatedBody_" + defaultLanguageId,
+			"emailEntryUpdatedBody_" + languageId,
 			ContentUtil.get(PropsValues.BOOKMARKS_EMAIL_ENTRY_UPDATED_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailEntryUpdatedSubject_" + defaultLanguageId,
+			"emailEntryUpdatedSubject_" + languageId,
 			ContentUtil.get(PropsValues.BOOKMARKS_EMAIL_ENTRY_UPDATED_SUBJECT));
 	}
 

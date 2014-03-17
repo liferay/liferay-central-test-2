@@ -45,24 +45,24 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			portletRequest, portletPreferences, "emailFromName",
 			LoginUtil.getEmailFromName(portletPreferences, companyId));
 
-		String defaultLanguageId = LocaleUtil.toLanguageId(
+		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());
 
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailPasswordResetBody_" + defaultLanguageId,
+			"emailPasswordResetBody_" + languageId,
 			ContentUtil.get(PropsValues.ADMIN_EMAIL_PASSWORD_RESET_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailPasswordResetSubject_" + defaultLanguageId,
+			"emailPasswordResetSubject_" + languageId,
 			ContentUtil.get(PropsValues.ADMIN_EMAIL_PASSWORD_RESET_SUBJECT));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailPasswordSentBody_" + defaultLanguageId,
+			"emailPasswordSentBody_" + languageId,
 			ContentUtil.get(PropsValues.ADMIN_EMAIL_PASSWORD_SENT_BODY));
 		removeDefaultValue(
 			portletRequest, portletPreferences,
-			"emailPasswordSentSubject_" + defaultLanguageId,
+			"emailPasswordSentSubject_" + languageId,
 			ContentUtil.get(PropsValues.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT));
 	}
 
