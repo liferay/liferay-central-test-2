@@ -4128,7 +4128,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected List<PortletDataHandler> getPortletDataHandlers(Group group) {
-
 		List<Portlet> portlets = portletLocalService.getPortlets(
 			group.getCompanyId());
 
