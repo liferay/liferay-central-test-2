@@ -16,7 +16,6 @@ package com.liferay.portlet.layoutsetprototypes.action;
 
 import com.liferay.portal.NoSuchLayoutSetPrototypeException;
 import com.liferay.portal.RequiredLayoutSetPrototypeException;
-import com.liferay.portal.kernel.servlet.MultiSessionMessages;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -104,11 +103,6 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 
 				if (cmd.equals(Constants.ADD)) {
 					hideDefaultSuccessMessage(actionRequest);
-
-					MultiSessionMessages.add(
-						actionRequest,
-						PortletKeys.SITE_TEMPLATE_SETTINGS +
-							"requestProcessed");
 				}
 			}
 			else if (cmd.equals(Constants.DELETE)) {
