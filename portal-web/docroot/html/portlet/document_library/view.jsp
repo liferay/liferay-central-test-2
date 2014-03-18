@@ -18,6 +18,7 @@
 
 <%
 String strutsAction = ParamUtil.getString(request, "struts_action");
+
 String navigation = ParamUtil.getString(request, "navigation");
 String browseBy = ParamUtil.getString(request, "browseBy");
 
