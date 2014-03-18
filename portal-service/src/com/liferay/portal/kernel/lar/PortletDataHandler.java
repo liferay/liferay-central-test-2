@@ -102,7 +102,7 @@ public interface PortletDataHandler {
 	 * @return true if the current transaction should be rolled back when an
 	 * exception occurs in the data handler
 	 */
-	public boolean getExceptionWillRollback();
+	public boolean isRollbackOnException();
 
 	public PortletDataHandlerControl[] getExportConfigurationControls(
 			long companyId, long groupId, Portlet portlet,

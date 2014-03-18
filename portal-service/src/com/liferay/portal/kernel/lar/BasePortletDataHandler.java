@@ -188,7 +188,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public boolean getExceptionWillRollback() {
+	public boolean isRollbackOnException() {
 
 		// For now, we are going to throw an exception if one portlet data
 		// handler has an exception to ensure that the transaction is rolled

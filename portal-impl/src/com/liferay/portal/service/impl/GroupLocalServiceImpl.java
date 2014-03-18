@@ -3753,7 +3753,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 						portletDataHandler.getPortletId() + " in group " +
 							group.getGroupId());
 
-				if (portletDataHandler.getExceptionWillRollback()) {
+				if (portletDataHandler.isRollbackOnException()) {
 					throw new SystemException(e);
 				}
 			}
@@ -3782,7 +3782,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 						portletDataHandler.getPortletId() + " in group " +
 							group.getGroupId());
 
-				if (portletDataHandler.getExceptionWillRollback()) {
+				if (portletDataHandler.isRollbackOnException()) {
 					throw new SystemException(e);
 				}
 			}
