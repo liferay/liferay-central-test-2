@@ -329,8 +329,6 @@ public abstract class DLAppTestUtil {
 			boolean deleteExisting, ServiceContext serviceContext)
 		throws Exception {
 
-		long userId = TestPropsValues.getUserId();
-
 		String description = StringPool.BLANK;
 
 		if (deleteExisting) {
@@ -343,8 +341,8 @@ public abstract class DLAppTestUtil {
 		}
 
 		return DLAppLocalServiceUtil.addFolder(
-			userId, repositoryId, parentFolderId, name, description,
-			serviceContext);
+			TestPropsValues.getUserId(), repositoryId, parentFolderId, name,
+			description, serviceContext);
 	}
 
 	public static Folder addFolder(
