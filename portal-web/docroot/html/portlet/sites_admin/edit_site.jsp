@@ -124,8 +124,13 @@ if ((group != null) && (group.hasStagingGroup() || (group.hasRemoteStagingGroup(
 }
 
 String[][] categorySections = {mainSections, seoSections, advancedSections, miscellaneousSections};
+%>
 
-if (!portletName.equals(PortletKeys.SITE_SETTINGS)) {
+<liferay-ui:success key='<%= PortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
+
+<c:if test="<%= !portletName.equals(PortletKeys.SITE_SETTINGS) %>">
+
+	<%
 	if (group != null) {
 		PortalUtil.addPortletBreadcrumbEntry(request, group.getDescriptiveName(locale), null);
 		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(pageContext, "edit"), currentURL);
@@ -135,10 +140,9 @@ if (!portletName.equals(PortletKeys.SITE_SETTINGS)) {
 
 		PortalUtil.addPortletBreadcrumbEntry(request, parentGroup.getDescriptiveName(locale), null);
 	}
-}
-%>
+	%>
 
-<liferay-ui:success key='<%= PortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
+</c:if>
 
 <c:if test="<%= (group == null) || !layout.isTypeControlPanel() %>">
 
