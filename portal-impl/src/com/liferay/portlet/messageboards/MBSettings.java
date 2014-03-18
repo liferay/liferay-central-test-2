@@ -33,7 +33,7 @@ import java.util.Map;
 public class MBSettings extends BaseServiceSettings {
 
 	public MBSettings(Settings settings) {
-		super(settings, _FALLBACK_KEYS);
+		super(settings, _fallbackKeys);
 	}
 
 	public String getEmailFromAddress() {
@@ -174,66 +174,66 @@ public class MBSettings extends BaseServiceSettings {
 		return typedSettings.getBooleanValue("threadAsQuestionByDefault");
 	}
 
-	private static final Map<String, String> _FALLBACK_KEYS =
+	private static Map<String, String> _fallbackKeys =
 		new HashMap<String, String>();
 
 	static {
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"allowAnonymousPosting",
 			PropsKeys.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"emailFromAddress", PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"emailFromName", PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME);
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"emailHtmlFormat", PropsKeys.MESSAGE_BOARDS_EMAIL_HTML_FORMAT);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"emailMessageAddedEnabled",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"emailMessageUpdatedEnabled",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"enableFlags", PropsKeys.MESSAGE_BOARDS_FLAGS_ENABLED);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"enableRatings", PropsKeys.MESSAGE_BOARDS_RATINGS_ENABLED);
 
-		_FALLBACK_KEYS.put("enableRss", PropsKeys.MESSAGE_BOARDS_RSS_ENABLED);
+		_fallbackKeys.put("enableRss", PropsKeys.MESSAGE_BOARDS_RSS_ENABLED);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"messageFormat", PropsKeys.MESSAGE_BOARDS_MESSAGE_FORMATS_DEFAULT);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"priorities", PropsKeys.MESSAGE_BOARDS_THREAD_PRIORITIES);
 
-		_FALLBACK_KEYS.put("ranks", PropsKeys.MESSAGE_BOARDS_USER_RANKS);
+		_fallbackKeys.put("ranks", PropsKeys.MESSAGE_BOARDS_USER_RANKS);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"recentPostsDateOffset",
 			PropsKeys.MESSAGE_BOARDS_RECENT_POSTS_DATE_OFFSET);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT);
 
-		_FALLBACK_KEYS.put("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
+		_fallbackKeys.put("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
 
-		_FALLBACK_KEYS.put(
+		_fallbackKeys.put(
 			"subscribeByDefault",
 			PropsKeys.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT);
 	}
