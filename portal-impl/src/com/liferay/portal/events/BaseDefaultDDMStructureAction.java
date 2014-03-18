@@ -84,10 +84,10 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 
 			String xsd = structureElementRootElement.asXML();
 
-			Locale[] locales = LanguageUtil.getAvailableLocales(groupId);
-
 			Map<Locale, String> nameMap = new HashMap<Locale, String>();
 			Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
+			Locale[] locales = LanguageUtil.getAvailableLocales(groupId);
 
 			for (Locale curLocale : locales) {
 				nameMap.put(curLocale, LanguageUtil.get(curLocale, name));
@@ -116,17 +116,17 @@ public abstract class BaseDefaultDDMStructureAction extends SimpleAction {
 				ddmStructureKey, nameMap, descriptionMap, xsd, "xml",
 				DDMStructureConstants.TYPE_DEFAULT, serviceContext);
 
-			String template = structureElement.elementText("template");
+			String templateFileName = structureElement.elementText("template");
 
-			if (Validator.isNotNull(template)) {
+			if (Validator.isNotNull(templateFileName)) {
 				DDMTemplateLocalServiceUtil.addTemplate(
 					userId, groupId,
 					PortalUtil.getClassNameId(DDMStructure.class),
 					ddmStructure.getStructureId(), nameMap, null,
 					DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY,
 					DDMTemplateConstants.TEMPLATE_MODE_CREATE,
-					TemplateConstants.LANG_TYPE_FTL, getContent(template),
-					serviceContext);
+					TemplateConstants.LANG_TYPE_FTL,
+					getContent(templateFileName), serviceContext);
 			}
 		}
 	}

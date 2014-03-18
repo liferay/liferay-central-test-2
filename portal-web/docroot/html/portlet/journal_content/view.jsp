@@ -410,7 +410,6 @@ boolean showIconsActions = themeDisplay.isSignedIn() && !layout.isLayoutPrototyp
 					%>
 
 				</liferay-ui:icon-menu>
-
 			</c:if>
 		</div>
 	</div>
