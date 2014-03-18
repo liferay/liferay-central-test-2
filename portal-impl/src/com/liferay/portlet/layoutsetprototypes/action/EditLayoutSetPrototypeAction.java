@@ -71,6 +71,8 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+				hideDefaultSuccessMessage(actionRequest);
+
 				LayoutSetPrototype layoutSetPrototype =
 					updateLayoutSetPrototype(actionRequest);
 
@@ -100,10 +102,6 @@ public class EditLayoutSetPrototypeAction extends PortletAction {
 				siteAdministrationURL.setParameter("redirect", controlPanelURL);
 
 				redirect = siteAdministrationURL.toString();
-
-				if (cmd.equals(Constants.ADD)) {
-					hideDefaultSuccessMessage(actionRequest);
-				}
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteLayoutSetPrototypes(actionRequest);
