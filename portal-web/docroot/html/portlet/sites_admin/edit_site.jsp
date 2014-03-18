@@ -126,8 +126,6 @@ if ((group != null) && (group.hasStagingGroup() || (group.hasRemoteStagingGroup(
 String[][] categorySections = {mainSections, seoSections, advancedSections, miscellaneousSections};
 %>
 
-<liferay-ui:success key='<%= PortletKeys.SITE_SETTINGS + "requestProcessed" %>' message="site-was-added" />
-
 <c:if test="<%= !portletName.equals(PortletKeys.SITE_SETTINGS) %>">
 
 	<%
