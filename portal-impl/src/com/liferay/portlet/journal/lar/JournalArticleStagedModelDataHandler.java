@@ -260,11 +260,10 @@ public class JournalArticleStagedModelDataHandler
 				PortletDataContext.REFERENCE_TYPE_PARENT);
 		}
 
-		DDMStructure ddmStructure =
-			DDMStructureLocalServiceUtil.getStructure(
-				article.getGroupId(),
-				PortalUtil.getClassNameId(JournalArticle.class),
-				article.getStructureId(), true);
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
+			article.getGroupId(),
+			PortalUtil.getClassNameId(JournalArticle.class),
+			article.getStructureId(), true);
 
 		StagedModelDataHandlerUtil.exportReferenceStagedModel(
 			portletDataContext, article, ddmStructure,
