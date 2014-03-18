@@ -23,9 +23,9 @@ if (Validator.isNull(cmd)) {
 	cmd = ParamUtil.getString(request, "originalCmd", "publish_to_live");
 }
 
-String publishConfigurationButtons = ParamUtil.getString(request, "publishConfigurationButtons", "custom");
-
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
+
+String publishConfigurationButtons = ParamUtil.getString(request, "publishConfigurationButtons", "custom");
 
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 

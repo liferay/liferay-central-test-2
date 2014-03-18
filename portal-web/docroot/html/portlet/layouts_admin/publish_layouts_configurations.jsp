@@ -25,10 +25,10 @@ boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 <liferay-portlet:renderURL varImpl="portletURL">
 	<portlet:param name="struts_action" value="/layouts_admin/publish_layouts" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.PUBLISH %>" />
+	<portlet:param name="tabs2" value="new-publication-process" />
 	<portlet:param name="publishConfigurationButtons" value="saved" />
 	<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<portlet:param name="privateLayout" value="<%= String.valueOf(privateLayout) %>" />
-	<portlet:param name="tabs2" value="new-publication-process" />
 </liferay-portlet:renderURL>
 
 <%
