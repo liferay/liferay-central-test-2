@@ -86,8 +86,8 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		String description = structureElement.elementText("description");
 
-		String nameLocalized = localize(groupId, name, defaultLanguageId);
-		String descriptionLocalized = localize(
+		String localizedName = localize(groupId, name, defaultLanguageId);
+		String localizedDescription = localize(
 			groupId, description, defaultLanguageId);
 
 		Element structureElementRootElement = structureElement.element("root");
@@ -95,23 +95,23 @@ public class UpgradeJournal extends UpgradeProcess {
 		String xsd = structureElementRootElement.asXML();
 
 		long ddmStructureId = addDDMStructure(
-			groupId, companyId, name, nameLocalized, descriptionLocalized, xsd);
+			increment(), groupId, companyId, name, localizedName,
+			localizedDescription, xsd);
 
-		String template = structureElement.elementText("template");
+		String templateFileName = structureElement.elementText("template");
 
 		addDDMTemplate(
-			groupId, companyId, ddmStructureId, name, nameLocalized,
-			descriptionLocalized, getContent(template));
+			increment(), groupId, companyId, ddmStructureId, name,
+			localizedName, localizedDescription, getContent(templateFileName));
 
 		return name;
 	}
 
 	protected long addDDMStructure(
-			long groupId, long companyId, String ddmStructureKey,
-			String nameLocalized, String descriptionLocalized, String xsd)
+			long ddmStructureId, long groupId, long companyId,
+			String ddmStructureKey, String localizedName,
+			String localizedDescription, String xsd)
 		throws Exception {
-
-		long ddmStructureId = increment();
 
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
@@ -145,8 +145,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			ps.setLong(9, DDMStructureConstants.DEFAULT_PARENT_STRUCTURE_ID);
 			ps.setLong(10, PortalUtil.getClassNameId(JournalArticle.class));
 			ps.setString(11, ddmStructureKey);
-			ps.setString(12, nameLocalized);
-			ps.setString(13, descriptionLocalized);
+			ps.setString(12, localizedName);
+			ps.setString(13, localizedDescription);
 			ps.setString(14, xsd);
 			ps.setString(15, "xml");
 			ps.setInt(16, DDMStructureConstants.TYPE_DEFAULT);
@@ -182,12 +182,10 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	protected long addDDMTemplate(
-			long groupId, long companyId, long ddmStructureId,
-			String templateKey, String nameLocalized,
-			String descriptionLocalized, String script)
+			long ddmTemplateId, long groupId, long companyId,
+			long ddmStructureId, String templateKey, String localizedName,
+			String localizedDescription, String script)
 		throws Exception {
-
-		long ddmTemplateId = increment();
 
 		Timestamp now = new Timestamp(System.currentTimeMillis());
 
@@ -221,8 +219,8 @@ public class UpgradeJournal extends UpgradeProcess {
 			ps.setLong(9, PortalUtil.getClassNameId(DDMStructure.class));
 			ps.setLong(10, ddmStructureId);
 			ps.setString(11, templateKey);
-			ps.setString(12, nameLocalized);
-			ps.setString(13, descriptionLocalized);
+			ps.setString(12, localizedName);
+			ps.setString(13, localizedDescription);
 			ps.setString(14, DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY);
 			ps.setString(15, DDMTemplateConstants.TEMPLATE_MODE_CREATE);
 			ps.setString(16, TemplateConstants.LANG_TYPE_FTL);
