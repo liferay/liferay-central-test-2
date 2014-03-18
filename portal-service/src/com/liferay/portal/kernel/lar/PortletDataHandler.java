@@ -95,15 +95,6 @@ public interface PortletDataHandler {
 
 	public StagedModelType[] getDeletionSystemEventStagedModelTypes();
 
-	/**
-	 * This flag controls whether an exception occurred in a data handler
-	 * will stop current operation and rollback the transaction or not.
-	 *
-	 * @return true if the current transaction should be rolled back when an
-	 * exception occurs in the data handler
-	 */
-	public boolean isRollbackOnException();
-
 	public PortletDataHandlerControl[] getExportConfigurationControls(
 			long companyId, long groupId, Portlet portlet,
 			boolean privateLayout)
@@ -223,6 +214,15 @@ public interface PortletDataHandler {
 	 * @return <code>true</code> to publish to live by default
 	 */
 	public boolean isPublishToLiveByDefault();
+
+	/**
+	 * This flag controls whether an exception occurred in a data handler
+	 * will stop current operation and rollback the transaction or not.
+	 *
+	 * @return true if the current transaction should be rolled back when an
+	 * exception occurs in the data handler
+	 */
+	public boolean isRollbackOnException();
 
 	public boolean isSupportsDataStrategyCopyAsNew();
 

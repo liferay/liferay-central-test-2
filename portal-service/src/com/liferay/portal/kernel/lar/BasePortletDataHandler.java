@@ -188,20 +188,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	}
 
 	@Override
-	public boolean isRollbackOnException() {
-
-		// For now, we are going to throw an exception if one portlet data
-		// handler has an exception to ensure that the transaction is rolled
-		// back for data integrity. We may decide that this is not the best
-		// behavior in the future because a bad plugin could disallow deletion
-		// of groups.
-		//
-		// You can override this method in children for a finer configuration
-
-		return true;
-	}
-
-	@Override
 	public PortletDataHandlerControl[] getExportConfigurationControls(
 			long companyId, long groupId, Portlet portlet,
 			boolean privateLayout)
@@ -449,6 +435,22 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 	@Override
 	public boolean isPublishToLiveByDefault() {
 		return _publishToLiveByDefault;
+	}
+
+	@Override
+	public boolean isRollbackOnException() {
+
+		// For now, we are going to throw an exception if one portlet data
+		// handler has an exception to ensure that the transaction is rolled
+		// back for data integrity. We may decide that this is not the best
+		// behavior in the future because a bad plugin could disallow deletion
+		// of groups.
+
+		//
+
+		// You can override this method in children for a finer configuration
+
+		return true;
 	}
 
 	@Override
