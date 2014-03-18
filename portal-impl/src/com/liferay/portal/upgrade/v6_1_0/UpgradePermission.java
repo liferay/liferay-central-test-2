@@ -21,8 +21,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.model.GroupedModel;
-import com.liferay.portal.model.PermissionedModel;
 import com.liferay.portal.model.ResourceBlock;
 import com.liferay.portal.model.ResourceBlockPermissionsContainer;
 import com.liferay.portal.model.ResourceConstants;
@@ -50,19 +48,8 @@ import java.util.List;
 public class UpgradePermission extends UpgradeProcess {
 
 	protected ResourceBlock convertResourcePermissions(
-			long companyId, String name, long primKey)
+			long companyId, long groupId, String name, long primKey)
 		throws PortalException, SystemException {
-
-		PermissionedModel permissionedModel =
-			ResourceBlockLocalServiceUtil.getPermissionedModel(name, primKey);
-
-		long groupId = 0;
-
-		if (permissionedModel instanceof GroupedModel) {
-			GroupedModel groupedModel = (GroupedModel)permissionedModel;
-
-			groupId = groupedModel.getGroupId();
-		}
 
 		ResourceBlockPermissionsContainer resourceBlockPermissionsContainer =
 			getResourceBlockPermissionsContainer(
@@ -91,16 +78,18 @@ public class UpgradePermission extends UpgradeProcess {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
 			ps = con.prepareStatement(
-				"select " + pkColumnName + ", companyId from " + tableName);
+				"select " + pkColumnName + ", groupId, companyId from " +
+					tableName);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				long primKey = rs.getLong(pkColumnName);
+				long groupId = rs.getLong("groupId");
 				long companyId = rs.getLong("companyId");
 
 				ResourceBlock resourceBlock = convertResourcePermissions(
-					companyId, name, primKey);
+					companyId, groupId, name, primKey);
 
 				if (_log.isInfoEnabled() &&
 					((resourceBlock.getResourceBlockId() % 100) == 0)) {
