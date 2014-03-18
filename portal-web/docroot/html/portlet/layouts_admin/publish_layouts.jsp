@@ -378,9 +378,9 @@ else {
 	<liferay-ui:section>
 		<div class="process-list" id="<portlet:namespace />publishProcesses">
 			<liferay-util:include page="/html/portlet/layouts_admin/publish_layouts_processes.jsp">
+				<liferay-util:param name="closeRedirect" value="<%= closeRedirect %>" />
 				<liferay-util:param name="groupId" value="<%= String.valueOf(stagingGroupId) %>" />
 				<liferay-util:param name="liveGroupId" value="<%= String.valueOf(liveGroupId) %>" />
-				<liferay-util:param name="closeRedirect" value="<%= closeRedirect %>" />
 				<liferay-util:param name="localPublishing" value="<%= String.valueOf(localPublishing) %>" />
 			</liferay-util:include>
 		</div>
