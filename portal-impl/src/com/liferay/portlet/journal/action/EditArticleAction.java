@@ -495,8 +495,6 @@ public class EditArticleAction extends PortletAction {
 		boolean autoArticleId = ParamUtil.getBoolean(
 			uploadPortletRequest, "autoArticleId");
 		double version = ParamUtil.getDouble(uploadPortletRequest, "version");
-		boolean localized = ParamUtil.getBoolean(
-			uploadPortletRequest, "localized");
 
 		String defaultLanguageId = ParamUtil.getString(
 			uploadPortletRequest, "defaultLanguageId");
