@@ -1855,11 +1855,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			if (Validator.isNull(serviceContext.getLayoutFullURL())) {
 				return StringPool.BLANK;
 			}
-			else {
-				return serviceContext.getLayoutFullURL() +
-					Portal.FRIENDLY_URL_SEPARATOR +
-					"message_boards/view_message/" + message.getMessageId();
-			}
+
+			return serviceContext.getLayoutFullURL() +
+				Portal.FRIENDLY_URL_SEPARATOR + "message_boards/view_message/" +
+					message.getMessageId();
 		}
 
 		String layoutURL = getLayoutURL(
