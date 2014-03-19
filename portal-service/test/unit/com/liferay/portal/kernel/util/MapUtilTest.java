@@ -66,7 +66,7 @@ public class MapUtilTest {
 		try {
 			MapUtil.fromArray(new String[] {"one", "two", "three"});
 
-			Assert.fail("An IllegalArgument exception should have been thrown");
+			Assert.fail();
 		}
 		catch (IllegalArgumentException iae) {
 			Assert.assertEquals(
