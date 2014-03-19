@@ -49,10 +49,10 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradeSubscription.class);
 		upgrade(UpgradeWiki.class);
 
-		// This must be the last upgrade process. Otherwise upgrades based on
-		// BaseUpgradePortletPreferences will fail because the portletId won't
-		// be found after UpgradePortletSettings translates it to the service
-		// name.
+		// This must be the last upgrade process. Otherwise, upgrades based on
+		// BaseUpgradePortletPreferences will fail because the portlet ID will
+		// not be found after UpgradePortletSettings translates it to the
+		// service name.
 
 		upgrade(UpgradePortletSettings.class);
 	}

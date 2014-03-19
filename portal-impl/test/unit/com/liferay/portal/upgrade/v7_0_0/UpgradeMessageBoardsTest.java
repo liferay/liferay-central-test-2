@@ -29,11 +29,10 @@ public class UpgradeMessageBoardsTest {
 
 	@Test
 	public void testUpgradeEmailSignatureWithHtmlFormat() throws Exception {
-		_portletPreferences.setValue("emailHtmlFormat", String.valueOf(true));
-
-		_portletPreferences.setValue("messageBody", "the body");
-
-		_portletPreferences.setValue("messageSignature", "the signature");
+		_portletPreferences.setValue(
+			"emailHtmlFormat", Boolean.TRUE.toString());
+		_portletPreferences.setValue("messageBody", "The Body");
+		_portletPreferences.setValue("messageSignature", "The Signature");
 
 		_upgradeMessageBoards.upgradeEmailSignature(
 			_portletPreferences, "messageBody", "messageSignature");
@@ -41,21 +40,20 @@ public class UpgradeMessageBoardsTest {
 		String messageBody = _portletPreferences.getValue(
 			"messageBody", StringPool.BLANK);
 
+		Assert.assertEquals("The Body<br />--<br />The Signature", messageBody);
+
 		String messageSignature = _portletPreferences.getValue(
 			"messageSignature", StringPool.BLANK);
-
-		Assert.assertEquals("the body<br />--<br />the signature", messageBody);
 
 		Assert.assertEquals(messageSignature, StringPool.BLANK);
 	}
 
 	@Test
 	public void testUpgradeEmailSignatureWithNonHtmlFormat() throws Exception {
-		_portletPreferences.setValue("emailHtmlFormat", String.valueOf(false));
-
-		_portletPreferences.setValue("messageBody", "the body");
-
-		_portletPreferences.setValue("messageSignature", "the signature");
+		_portletPreferences.setValue(
+			"emailHtmlFormat", Boolean.FALSE.toString());
+		_portletPreferences.setValue("messageBody", "The Body");
+		_portletPreferences.setValue("messageSignature", "The Signature");
 
 		_upgradeMessageBoards.upgradeEmailSignature(
 			_portletPreferences, "messageBody", "messageSignature");
@@ -63,10 +61,10 @@ public class UpgradeMessageBoardsTest {
 		String messageBody = _portletPreferences.getValue(
 			"messageBody", StringPool.BLANK);
 
+		Assert.assertEquals("The Body\n--\nThe Signature", messageBody);
+
 		String messageSignature = _portletPreferences.getValue(
 			"messageSignature", StringPool.BLANK);
-
-		Assert.assertEquals("the body\n--\nthe signature", messageBody);
 
 		Assert.assertEquals(messageSignature, StringPool.BLANK);
 	}
@@ -74,12 +72,12 @@ public class UpgradeMessageBoardsTest {
 	@Test
 	public void testUpgradeThreadPriorities() throws Exception {
 		_portletPreferences.setValues(
-			"priorities", new String[] {
+			"priorities",
+			new String[] {
 				"Urgent,/message_boards/priority_urgent.png,3.0",
 				"Sticky,/message_boards/priority_sticky.png,2.0",
 				"Announcement,/message_boards/priority_announcement.png,1.0"
-			}
-		);
+			});
 
 		_upgradeMessageBoards.upgradeThreadPriorities(_portletPreferences);
 
@@ -91,7 +89,8 @@ public class UpgradeMessageBoardsTest {
 				"Urgent|/message_boards/priority_urgent.png|3.0",
 				"Sticky|/message_boards/priority_sticky.png|2.0",
 				"Announcement|/message_boards/priority_announcement.png|1.0"
-			}, values);
+			},
+			values);
 	}
 
 	private PortletPreferences _portletPreferences =

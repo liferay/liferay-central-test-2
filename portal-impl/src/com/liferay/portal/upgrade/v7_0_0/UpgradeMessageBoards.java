@@ -94,11 +94,9 @@ public class UpgradeMessageBoards extends BaseUpgradePortletPreferences {
 		upgradeEmailSignature(
 			portletPreferences, "emailMessageAddedBody",
 			"emailMessageAddedSignature");
-
 		upgradeEmailSignature(
 			portletPreferences, "emailMessageUpdatedBody",
 			"emailMessageUpdatedSignature");
-
 		upgradeThreadPriorities(portletPreferences);
 
 		return PortletPreferencesFactoryUtil.toXML(portletPreferences);
