@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.diff;
 
-import com.liferay.portal.kernel.util.DiffResult;
+import com.liferay.portal.kernel.diff.DiffResult;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -37,7 +37,7 @@ import org.incava.util.diff.Difference;
  *
  * @author Bruno Farache
  */
-public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
+public class DiffImpl implements com.liferay.portal.kernel.diff.Diff {
 
 	/**
 	 * This is a diff method with default values.
