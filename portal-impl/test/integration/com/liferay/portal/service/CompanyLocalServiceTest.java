@@ -237,17 +237,16 @@ public class CompanyLocalServiceTest {
 	public void testUpdateDisplay() throws Exception {
 		Company company = addCompany();
 
-		long companyId = company.getCompanyId();
-
-		User user = UserLocalServiceUtil.getDefaultUser(companyId);
+		User user = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
 
 		user.setFirstName(StringUtil.randomString());
 
 		UserLocalServiceUtil.updateUser(user);
 
-		CompanyLocalServiceUtil.updateDisplay(companyId, "hu", "CET");
+		CompanyLocalServiceUtil.updateDisplay(
+			company.getCompanyId(), "hu", "CET");
 
-		user = UserLocalServiceUtil.getDefaultUser(companyId);
+		user = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
 
 		Assert.assertEquals("hu", user.getLanguageId());
 		Assert.assertEquals("CET", user.getTimeZoneId());
