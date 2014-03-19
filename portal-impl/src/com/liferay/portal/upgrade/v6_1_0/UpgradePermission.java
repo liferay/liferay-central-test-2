@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.portal.model.PermissionedModel;
 import com.liferay.portal.model.ResourceBlock;
 import com.liferay.portal.model.ResourceBlockPermissionsContainer;
 import com.liferay.portal.model.ResourceConstants;
@@ -48,8 +50,12 @@ import java.util.List;
 public class UpgradePermission extends UpgradeProcess {
 
 	protected ResourceBlock convertResourcePermissions(
-			long companyId, long groupId, String name, long primKey)
+			String tableName, String pkColumnName, long companyId, long groupId,
+			String name, long primKey)
 		throws PortalException, SystemException {
+
+		PermissionedModel permissionedModel = new UpgradePermissionedModel(
+			tableName, pkColumnName, primKey);
 
 		ResourceBlockPermissionsContainer resourceBlockPermissionsContainer =
 			getResourceBlockPermissionsContainer(
@@ -89,7 +95,7 @@ public class UpgradePermission extends UpgradeProcess {
 				long companyId = rs.getLong("companyId");
 
 				ResourceBlock resourceBlock = convertResourcePermissions(
-					companyId, groupId, name, primKey);
+					tableName, pkColumnName, companyId, groupId, name, primKey);
 
 				if (_log.isInfoEnabled() &&
 					((resourceBlock.getResourceBlockId() % 100) == 0)) {
@@ -197,6 +203,50 @@ public class UpgradePermission extends UpgradeProcess {
 
 		ResourcePermissionLocalServiceUtil.addResourcePermissions(
 			name, RoleConstants.OWNER, scope, actionIdsLong);
+	}
+
+	protected class UpgradePermissionedModel implements PermissionedModel {
+
+		public UpgradePermissionedModel(
+			String tableName, String pkColumnName, long primKey) {
+
+			_pkColumnName = pkColumnName;
+			_primKey = primKey;
+			_tableName = tableName;
+		}
+
+		public long getResourceBlockId() {
+			return _resourceBlockId;
+		}
+
+		public void persist() throws SystemException {
+			try {
+				StringBundler sb = new StringBundler();
+
+				sb.append("update ");
+				sb.append(_tableName);
+				sb.append(" set resourceBlockId = ");
+				sb.append(_resourceBlockId);
+				sb.append(" where ");
+				sb.append(_pkColumnName);
+				sb.append(" = ");
+				sb.append(_primKey);
+
+				runSQL(sb.toString());
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+		}
+
+		public void setResourceBlockId(long resourceBlockId) {
+			_resourceBlockId = resourceBlockId;
+		}
+
+		private String _pkColumnName;
+		private long _primKey;
+		private long _resourceBlockId;
+		private String _tableName;
 	}
 
 	private static final int[] _SCOPES = {
