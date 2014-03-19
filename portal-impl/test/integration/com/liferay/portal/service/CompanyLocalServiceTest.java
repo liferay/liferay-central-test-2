@@ -22,7 +22,6 @@ import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
@@ -237,17 +236,14 @@ public class CompanyLocalServiceTest {
 	public void testUpdateDisplay() throws Exception {
 		Company company = addCompany();
 
-		long companyId = company.getCompanyId();
-
-		User user = UserLocalServiceUtil.getDefaultUser(companyId);
-
-		user.setFirstName(StringUtil.randomString());
+		User user = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
 
 		UserLocalServiceUtil.updateUser(user);
 
-		CompanyLocalServiceUtil.updateDisplay(companyId, "hu", "CET");
+		CompanyLocalServiceUtil.updateDisplay(
+			company.getCompanyId(), "hu", "CET");
 
-		user = UserLocalServiceUtil.getDefaultUser(companyId);
+		user = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
 
 		Assert.assertEquals("hu", user.getLanguageId());
 		Assert.assertEquals("CET", user.getTimeZoneId());
