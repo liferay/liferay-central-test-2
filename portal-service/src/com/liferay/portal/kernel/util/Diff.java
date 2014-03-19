@@ -14,10 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.io.Reader;
-
-import java.util.List;
-
 /**
  * @author     Bruno Farache
  * @deprecated As of 7.0.0, moved to {@link com.liferay.portal.kernel.diff.Diff}

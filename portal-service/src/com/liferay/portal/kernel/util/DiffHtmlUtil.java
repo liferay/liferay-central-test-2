@@ -14,10 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.security.pacl.permission.PortalRuntimePermission;
-
-import java.io.Reader;
-
 /**
  * @author     Julio Camarero
  * @deprecated As of 7.0.0, moved to {@link

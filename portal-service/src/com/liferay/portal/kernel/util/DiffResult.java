@@ -14,11 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.HashCode;
-import com.liferay.portal.kernel.util.HashCodeFactoryUtil;
-import com.liferay.portal.kernel.util.StringBundler;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
