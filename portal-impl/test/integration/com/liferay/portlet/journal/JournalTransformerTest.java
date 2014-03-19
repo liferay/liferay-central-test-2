@@ -132,8 +132,8 @@ public class JournalTransformerTest {
 
 		Map<Locale, String> contents = new HashMap<Locale, String>();
 
-		contents.put(LocaleUtil.US, "Joe Bloggs");
 		contents.put(LocaleUtil.BRAZIL, "Joao da Silva");
+		contents.put(LocaleUtil.US, "Joe Bloggs");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
 			contents, LanguageUtil.getLanguageId(LocaleUtil.US));

@@ -149,13 +149,13 @@ public class JournalIndexerTest {
 			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
+		String content = DDMStructureTestUtil.getSampleStructuredContent(
+			"Architectural Approach");
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
-		String content = DDMStructureTestUtil.getSampleStructuredContent(
-			"Architectural Approach");
 
 		JournalTestUtil.updateArticle(
 			article1, article1.getTitle(), content, serviceContext);
@@ -542,10 +542,10 @@ public class JournalIndexerTest {
 			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
-		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
-
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			"Apple tablet");
+
+		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
 		article = JournalTestUtil.updateArticle(
 			article, article.getTitle(), content, serviceContext);
@@ -789,6 +789,9 @@ public class JournalIndexerTest {
 			initialSearchCount1 + 1,
 			searchCount(_group.getGroupId(), searchContext1));
 
+		String content = DDMStructureTestUtil.getSampleStructuredContent(
+			"Apple tablet");
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());
 
@@ -798,9 +801,6 @@ public class JournalIndexerTest {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
-
-		String content = DDMStructureTestUtil.getSampleStructuredContent(
-			"Apple tablet");
 
 		JournalTestUtil.updateArticle(
 			article, article.getTitle(), content, serviceContext);

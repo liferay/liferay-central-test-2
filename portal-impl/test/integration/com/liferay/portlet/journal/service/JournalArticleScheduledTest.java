@@ -113,6 +113,16 @@ public class JournalArticleScheduledTest {
 		descriptionMap.put(
 			LocaleUtil.getDefault(), ServiceTestUtil.randomString());
 
+		String content = DDMStructureTestUtil.getSampleStructuredContent();
+
+		String xsd = DDMStructureTestUtil.getSampleStructureXSD();
+
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+			groupId, JournalArticle.class.getName(), xsd);
+
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
+			groupId, ddmStructure.getStructureId());
+
 		Calendar displayDateCalendar = getCalendar(displayDate, when);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
@@ -125,16 +135,6 @@ public class JournalArticleScheduledTest {
 			serviceContext.setWorkflowAction(
 				WorkflowConstants.ACTION_SAVE_DRAFT);
 		}
-
-		String xsd = DDMStructureTestUtil.getSampleStructureXSD();
-
-		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-			groupId, JournalArticle.class.getName(), xsd);
-
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
-			groupId, ddmStructure.getStructureId());
-
-		String content = DDMStructureTestUtil.getSampleStructuredContent();
 
 		return JournalArticleLocalServiceUtil.addArticle(
 			TestPropsValues.getUserId(), groupId,

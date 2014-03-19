@@ -108,17 +108,16 @@ public class JournalTestUtil {
 			ServiceContext serviceContext)
 		throws Exception {
 
-		if (workflowEnabled) {
-			serviceContext = (ServiceContext)serviceContext.clone();
+		String content = DDMStructureTestUtil.getSampleStructuredContent(
+			contentMap, LocaleUtil.toLanguageId(defaultLocale));
 
-			serviceContext.setWorkflowAction(
-				WorkflowConstants.ACTION_SAVE_DRAFT);
+		String xsd = DDMStructureTestUtil.getSampleStructureXSD();
 
-			if (approved) {
-				serviceContext.setWorkflowAction(
-					WorkflowConstants.ACTION_PUBLISH);
-			}
-		}
+		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
+			groupId, JournalArticle.class.getName(), xsd);
+
+		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
+			groupId, ddmStructure.getStructureId());
 
 		boolean neverExpire = true;
 
@@ -147,16 +146,17 @@ public class JournalTestUtil {
 			}
 		}
 
-		String xsd = DDMStructureTestUtil.getSampleStructureXSD();
+		if (workflowEnabled) {
+			serviceContext = (ServiceContext)serviceContext.clone();
 
-		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
-			groupId, JournalArticle.class.getName(), xsd);
+			serviceContext.setWorkflowAction(
+				WorkflowConstants.ACTION_SAVE_DRAFT);
 
-		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
-			groupId, ddmStructure.getStructureId());
-
-		String content = DDMStructureTestUtil.getSampleStructuredContent(
-			contentMap, LocaleUtil.toLanguageId(defaultLocale));
+			if (approved) {
+				serviceContext.setWorkflowAction(
+					WorkflowConstants.ACTION_PUBLISH);
+			}
+		}
 
 		return JournalArticleLocalServiceUtil.addArticle(
 			serviceContext.getUserId(), groupId, folderId, classNameId, 0,
