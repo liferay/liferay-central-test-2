@@ -16,16 +16,12 @@ package com.liferay.portal.kernel.upgrade;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 
-import java.io.IOException;
-
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-import javax.portlet.ReadOnlyException;
-import javax.portlet.ValidatorException;
 
 /**
  * @author Iván Zaera
@@ -84,24 +80,22 @@ public class MockPortletPreferences implements PortletPreferences {
 	}
 
 	@Override
-	public void reset(String key) throws ReadOnlyException {
+	public void reset(String key) {
 		_map.remove(key);
 	}
 
 	@Override
-	public void setValue(String key, String value) throws ReadOnlyException {
+	public void setValue(String key, String value) {
 		_map.put(key, new String[] { value });
 	}
 
 	@Override
-	public void setValues(String key, String[] values)
-		throws ReadOnlyException {
-
+	public void setValues(String key, String[] values) {
 		_map.put(key, values);
 	}
 
 	@Override
-	public void store() throws IOException, ValidatorException {
+	public void store() {
 	}
 
 	private Map<String, String[]> _map = new HashMap<String, String[]>();
