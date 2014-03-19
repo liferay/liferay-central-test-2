@@ -16,9 +16,9 @@ package com.liferay.portal.kernel.upgrade;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -35,21 +35,7 @@ public class MockPortletPreferences implements PortletPreferences {
 
 	@Override
 	public Enumeration<String> getNames() {
-		return new Enumeration<String>() {
-
-			private Iterator<String> _iterator = _map.keySet().iterator();
-
-			@Override
-			public boolean hasMoreElements() {
-				return _iterator.hasNext();
-			}
-
-			@Override
-			public String nextElement() {
-				return _iterator.next();
-			}
-
-		};
+		return Collections.enumeration(_map.keySet());
 	}
 
 	@Override
