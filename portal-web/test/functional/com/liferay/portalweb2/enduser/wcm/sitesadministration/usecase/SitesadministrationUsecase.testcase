@@ -339,7 +339,7 @@
 			<var name="siteName" value="Site1 Name" />
 		</execute>
 
-		<execute macro="Site#pagesOptions">
+		<execute macro="Site#selectPageType">
 			<var name="selectPublicPages" value="true" />
 			<var name="siteTemplate" value="Community Site" />
 		</execute>
@@ -411,7 +411,7 @@
 			<var name="siteScopeName" value="Site1 Name" />
 		</execute>
 
-		<execute macro="Site#inactiveCP">
+		<execute macro="Site#inactivateCP">
 			<var name="siteName" value="Site1 Name" />
 		</execute>
 
