@@ -205,6 +205,13 @@ public class UpgradePermission extends UpgradeProcess {
 			name, RoleConstants.OWNER, scope, actionIdsLong);
 	}
 
+	private static final int[] _SCOPES = {
+		ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP,
+		ResourceConstants.SCOPE_GROUP_TEMPLATE
+	};
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
+
 	private class UpgradePermissionedModel implements PermissionedModel {
 
 		public UpgradePermissionedModel(
@@ -249,12 +256,5 @@ public class UpgradePermission extends UpgradeProcess {
 		private String _tableName;
 
 	}
-
-	private static final int[] _SCOPES = {
-		ResourceConstants.SCOPE_COMPANY, ResourceConstants.SCOPE_GROUP,
-		ResourceConstants.SCOPE_GROUP_TEMPLATE
-	};
-
-	private static Log _log = LogFactoryUtil.getLog(UpgradePermission.class);
 
 }
