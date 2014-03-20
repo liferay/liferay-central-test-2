@@ -37,6 +37,7 @@ if (!ArrayUtil.contains(displayViews, displayStyle)) {
 }
 
 long ddmStructureId = 0;
+
 String ddmStructureName = LanguageUtil.get(pageContext, "basic-web-content");
 
 PortletURL portletURL = liferayPortletResponse.createRenderURL();
@@ -87,8 +88,9 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	try {
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(themeDisplay.getSiteGroupId(), PortalUtil.getClassNameId(JournalArticle.class), displayTerms.getStructureId(), true);
 
-		ddmStructureName = ddmStructure.getName(locale);
 		ddmStructureId = ddmStructure.getStructureId();
+
+		ddmStructureName = ddmStructure.getName(locale);
 	}
 	catch (NoSuchStructureException nsse) {
 	}

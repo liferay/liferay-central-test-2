@@ -1835,8 +1835,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	@Override
 	public void unsubscribeStructure(
-		long groupId, long userId, long ddmStructureId) throws PortalException,
-		SystemException {
+			long groupId, long userId, long ddmStructureId)
+		throws PortalException, SystemException {
 
 		JournalPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.SUBSCRIBE);
