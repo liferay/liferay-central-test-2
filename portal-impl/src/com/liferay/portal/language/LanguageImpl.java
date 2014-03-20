@@ -359,10 +359,10 @@ public class LanguageImpl implements Language {
 
 	@Override
 	public String get(Locale locale, String key, String defaultValue) {
-		ResourceBundle bundle = LanguageResources.getBundle(locale);
+		ResourceBundle resourceBundle = LanguageResources.getResourceBundle(locale);
 
 		try {
-			return _get(bundle, key, defaultValue);
+			return _get(resourceBundle, key, defaultValue);
 		}
 		catch (Exception e) {
 			return defaultValue;
@@ -888,18 +888,18 @@ public class LanguageImpl implements Language {
 		HttpServletRequest request =
 			(HttpServletRequest)pageContext.getRequest();
 
-		Locale locale = _getLocale(request);
-
 		PortletConfig portletConfig = (PortletConfig)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
+		Locale locale = _getLocale(request);
+
 		if (portletConfig == null) {
-			return LanguageResources.getBundle(locale);
+			return LanguageResources.getResourceBundle(locale);
 		}
 
 		return new AggregateResourceBundle(
 			portletConfig.getResourceBundle(locale),
-			LanguageResources.getBundle(locale));
+			LanguageResources.getResourceBundle(locale));
 	}
 
 	private void _initGroupLocales(long groupId) {

@@ -71,7 +71,7 @@ public class LanguageResources {
 		}
 	}
 
-	public static ResourceBundle getBundle(Locale locale) {
+	public static ResourceBundle getResourceBundle(Locale locale) {
 		ResourceBundle resourceBundle = _resourceBundles.get(locale);
 
 		if (resourceBundle == null) {
