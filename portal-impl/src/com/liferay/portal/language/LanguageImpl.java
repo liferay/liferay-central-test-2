@@ -359,7 +359,8 @@ public class LanguageImpl implements Language {
 
 	@Override
 	public String get(Locale locale, String key, String defaultValue) {
-		ResourceBundle resourceBundle = LanguageResources.getResourceBundle(locale);
+		ResourceBundle resourceBundle = LanguageResources.getResourceBundle(
+			locale);
 
 		try {
 			return _get(resourceBundle, key, defaultValue);

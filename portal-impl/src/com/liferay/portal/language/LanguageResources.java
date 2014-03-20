@@ -71,18 +71,6 @@ public class LanguageResources {
 		}
 	}
 
-	public static ResourceBundle getResourceBundle(Locale locale) {
-		ResourceBundle resourceBundle = _resourceBundles.get(locale);
-
-		if (resourceBundle == null) {
-			resourceBundle = new LanguageResourcesBundle(locale);
-
-			_resourceBundles.put(locale, resourceBundle);
-		}
-
-		return resourceBundle;
-	}
-
 	public static Set<String> getKeys(Locale locale) {
 		Map<String, String> languageMap = _languageMaps.get(locale);
 
@@ -112,6 +100,18 @@ public class LanguageResources {
 		else {
 			return value;
 		}
+	}
+
+	public static ResourceBundle getResourceBundle(Locale locale) {
+		ResourceBundle resourceBundle = _resourceBundles.get(locale);
+
+		if (resourceBundle == null) {
+			resourceBundle = new LanguageResourcesBundle(locale);
+
+			_resourceBundles.put(locale, resourceBundle);
+		}
+
+		return resourceBundle;
 	}
 
 	public static Locale getSuperLocale(Locale locale) {
@@ -253,6 +253,15 @@ public class LanguageResources {
 		return properties;
 	}
 
+	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
+
+	private static Locale _blankLocale = new Locale(StringPool.BLANK);
+	private static String[] _configNames;
+	private static Map<Locale, Map<String, String>> _languageMaps =
+		new ConcurrentHashMap<Locale, Map<String, String>>(64);
+	private static Map<Locale, ResourceBundle> _resourceBundles =
+		new ConcurrentHashMap<Locale, ResourceBundle>(64);
+
 	private static class LanguageResourcesBundle extends ResourceBundle {
 
 		private LanguageResourcesBundle(Locale locale) {
@@ -276,19 +285,9 @@ public class LanguageResources {
 			return _languageMap.keySet();
 		}
 
-		private final Map<String,String> _languageMap;
+		private final Map<String, String> _languageMap;
 
 		private final Locale _locale;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(LanguageResources.class);
-
-	private static Locale _blankLocale = new Locale(StringPool.BLANK);
-	private static String[] _configNames;
-	private static Map<Locale, Map<String, String>> _languageMaps =
-		new ConcurrentHashMap<Locale, Map<String, String>>(64);
-
-	private static Map<Locale, ResourceBundle> _resourceBundles =
-		new ConcurrentHashMap<Locale, ResourceBundle>(64);
 
 }
