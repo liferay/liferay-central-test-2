@@ -114,8 +114,28 @@ public class PortalImplGetSitesTest {
 
 		Assert.assertTrue(
 			ArrayUtil.contains(
-				getSharedContentSiteGroupIds(),
-				layoutScopeGroup.getGroupId()));
+				getSharedContentSiteGroupIds(), layoutScopeGroup.getGroupId()));
+	}
+
+	protected long[] getSharedContentSiteGroupIds() throws Exception {
+		return PortalUtil.getSharedContentSiteGroupIds(
+			_group.getCompanyId(), _group.getGroupId(),
+			_groupAdminUser.getUserId());
+	}
+
+	protected void setContentSharingWithChildrenEnabled(
+			Group group, int contentSharingWithChildrenEnabled)
+		throws Exception {
+
+		UnicodeProperties typeSettingsProperties =
+			group.getTypeSettingsProperties();
+
+		typeSettingsProperties.setProperty(
+			"contentSharingWithChildrenEnabled",
+			String.valueOf(contentSharingWithChildrenEnabled));
+
+		GroupServiceUtil.updateGroup(
+			group.getGroupId(), typeSettingsProperties.toString());
 	}
 
 	protected void testGetSharedContentSiteGroupIdsFromAncestors(
@@ -148,27 +168,6 @@ public class PortalImplGetSitesTest {
 		Assert.assertEquals(
 			contentSharingWithChildrenEnabled,
 			ArrayUtil.contains(groupIds, parentGroup.getGroupId()));
-	}
-
-	protected long[] getSharedContentSiteGroupIds() throws Exception {
-		return PortalUtil.getSharedContentSiteGroupIds(
-			_group.getCompanyId(), _group.getGroupId(),
-			_groupAdminUser.getUserId());
-	}
-
-	protected void setContentSharingWithChildrenEnabled(
-			Group group, int contentSharingWithChildrenEnabled)
-		throws Exception {
-
-		UnicodeProperties typeSettingsProperties =
-			group.getTypeSettingsProperties();
-
-		typeSettingsProperties.setProperty(
-			"contentSharingWithChildrenEnabled",
-			String.valueOf(contentSharingWithChildrenEnabled));
-
-		GroupServiceUtil.updateGroup(
-			group.getGroupId(), typeSettingsProperties.toString());
 	}
 
 	private Group _group;
