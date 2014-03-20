@@ -160,9 +160,9 @@ public class GroupImpl extends GroupBaseImpl {
 	public List<Group> getDescendants(boolean site) throws SystemException {
 		List<Group> descendants = new UniqueList<Group>();
 
-		for (Group childGroup : getChildren(site)) {
-			descendants.add(childGroup);
-			descendants.addAll(childGroup.getDescendants(site));
+		for (Group group : getChildren(site)) {
+			descendants.add(group);
+			descendants.addAll(group.getDescendants(site));
 		}
 
 		return descendants;

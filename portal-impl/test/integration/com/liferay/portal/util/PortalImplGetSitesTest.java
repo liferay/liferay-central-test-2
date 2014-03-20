@@ -58,21 +58,20 @@ public class PortalImplGetSitesTest {
 	public void testGetSharedContentSiteGroupIdsFromAdministered()
 		throws Exception {
 
-		Group administeredGroup = GroupTestUtil.addGroup();
+		Group group = GroupTestUtil.addGroup();
 
-		_groupAdminUser = UserTestUtil.addGroupAdminUser(administeredGroup);
+		_groupAdminUser = UserTestUtil.addGroupAdminUser(group);
 
 		Assert.assertTrue(
 			ArrayUtil.contains(
-				_getSharedContentSiteGroupIds(),
-				administeredGroup.getGroupId()));
+				getSharedContentSiteGroupIds(), group.getGroupId()));
 	}
 
 	@Test
 	public void testGetSharedContentSiteGroupIdsFromAncestors()
 		throws Exception {
 
-		doTestGetSharedContentSiteGroupIdsFromAncestors(true);
+		testGetSharedContentSiteGroupIdsFromAncestors(true);
 	}
 
 	@Test
@@ -85,7 +84,7 @@ public class PortalImplGetSitesTest {
 		Group grandChildGroup = GroupTestUtil.addGroup(
 			childGroup.getGroupId(), StringUtil.randomString());
 
-		long[] groupIds = _getSharedContentSiteGroupIds();
+		long[] groupIds = getSharedContentSiteGroupIds();
 
 		Assert.assertTrue(
 			ArrayUtil.contains(groupIds, childGroup.getGroupId()));
@@ -101,7 +100,7 @@ public class PortalImplGetSitesTest {
 
 		Assert.assertTrue(
 			ArrayUtil.contains(
-				_getSharedContentSiteGroupIds(), company.getGroupId()));
+				getSharedContentSiteGroupIds(), company.getGroupId()));
 	}
 
 	@Test
@@ -115,11 +114,11 @@ public class PortalImplGetSitesTest {
 
 		Assert.assertTrue(
 			ArrayUtil.contains(
-				_getSharedContentSiteGroupIds(),
+				getSharedContentSiteGroupIds(),
 				layoutScopeGroup.getGroupId()));
 	}
 
-	protected void doTestGetSharedContentSiteGroupIdsFromAncestors(
+	protected void testGetSharedContentSiteGroupIdsFromAncestors(
 			boolean contentSharingWithChildrenEnabled)
 		throws Exception {
 
@@ -134,31 +133,30 @@ public class PortalImplGetSitesTest {
 		_groupAdminUser = UserTestUtil.addGroupAdminUser(_group);
 
 		if (!contentSharingWithChildrenEnabled) {
-			_setContentSharingWithChildrenEnabled(
+			setContentSharingWithChildrenEnabled(
 				grandParentGroup, Sites.CONTENT_SHARING_WITH_CHILDREN_DISABLED);
 
-			_setContentSharingWithChildrenEnabled(
+			setContentSharingWithChildrenEnabled(
 				parentGroup, Sites.CONTENT_SHARING_WITH_CHILDREN_DISABLED);
 		}
 
-		long[] groupIds = _getSharedContentSiteGroupIds();
+		long[] groupIds = getSharedContentSiteGroupIds();
 
 		Assert.assertEquals(
 			contentSharingWithChildrenEnabled,
 			ArrayUtil.contains(groupIds, grandParentGroup.getGroupId()));
-
 		Assert.assertEquals(
 			contentSharingWithChildrenEnabled,
 			ArrayUtil.contains(groupIds, parentGroup.getGroupId()));
 	}
 
-	private long[] _getSharedContentSiteGroupIds() throws Exception {
+	protected long[] getSharedContentSiteGroupIds() throws Exception {
 		return PortalUtil.getSharedContentSiteGroupIds(
 			_group.getCompanyId(), _group.getGroupId(),
 			_groupAdminUser.getUserId());
 	}
 
-	private void _setContentSharingWithChildrenEnabled(
+	protected void setContentSharingWithChildrenEnabled(
 			Group group, int contentSharingWithChildrenEnabled)
 		throws Exception {
 

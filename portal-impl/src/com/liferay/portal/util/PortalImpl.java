@@ -4984,13 +4984,14 @@ public class PortalImpl implements Portal {
 
 		if (PrefsPropsUtil.getBoolean(
 				companyId,
-			PropsKeys.SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED)) {
+				PropsKeys.
+					SITES_CONTENT_SHARING_THROUGH_ADMINISTRATORS_ENABLED)) {
 
 			LinkedHashMap<String, Object> groupParams =
 				new LinkedHashMap<String, Object>();
 
-			groupParams.put("usersGroups", userId);
 			groupParams.put("site", Boolean.TRUE);
+			groupParams.put("usersGroups", userId);
 
 			groups.addAll(
 				GroupLocalServiceUtil.search(
@@ -5004,10 +5005,11 @@ public class PortalImpl implements Portal {
 
 		// Ancestor sites and global site
 
-		if (PrefsPropsUtil.getInteger(
-				companyId,
-				PropsKeys.SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED) !=
-			Sites.CONTENT_SHARING_WITH_CHILDREN_DISABLED) {
+		int sitesContentSharingWithChildrenEnabled = PrefsPropsUtil.getInteger(
+			companyId, PropsKeys.SITES_CONTENT_SHARING_WITH_CHILDREN_ENABLED);
+
+		if (sitesContentSharingWithChildrenEnabled !=
+				Sites.CONTENT_SHARING_WITH_CHILDREN_DISABLED) {
 
 			groups.addAll(doGetAncestorSiteGroups(groupId, true));
 		}
