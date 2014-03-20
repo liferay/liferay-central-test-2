@@ -61,7 +61,6 @@ public class IntrabandPortalCacheManagerTest {
 		Assert.assertSame(
 			Collections.emptySet(),
 			intrabandPortalCacheManager.getCacheManagerListeners());
-
 		Assert.assertFalse(
 			intrabandPortalCacheManager.registerCacheManagerListener(null));
 		Assert.assertFalse(
