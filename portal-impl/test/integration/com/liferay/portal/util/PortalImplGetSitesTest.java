@@ -55,23 +55,20 @@ public class PortalImplGetSitesTest {
 	}
 
 	@Test
-	public void testGetSharedContentSiteGroupIdsFromGroup()
-		throws Exception {
-
-		Group group = GroupTestUtil.addGroup();
-
-		_user = UserTestUtil.addGroupAdminUser(group);
-
-		Assert.assertTrue(
-			ArrayUtil.contains(
-				getSharedContentSiteGroupIds(), group.getGroupId()));
-	}
-
-	@Test
 	public void testGetSharedContentSiteGroupIdsFromAncestors()
 		throws Exception {
 
 		testGetSharedContentSiteGroupIdsFromAncestors(true);
+	}
+
+	@Test
+	public void testGetSharedContentSiteGroupIdsFromCompany() throws Exception {
+		Company company = CompanyLocalServiceUtil.getCompany(
+			_group.getCompanyId());
+
+		Assert.assertTrue(
+			ArrayUtil.contains(
+				getSharedContentSiteGroupIds(), company.getGroupId()));
 	}
 
 	@Test
@@ -93,19 +90,18 @@ public class PortalImplGetSitesTest {
 	}
 
 	@Test
-	public void testGetSharedContentSiteGroupIdsFromCompany() throws Exception {
-		Company company = CompanyLocalServiceUtil.getCompany(
-			_group.getCompanyId());
+	public void testGetSharedContentSiteGroupIdsFromGroup() throws Exception {
+		Group group = GroupTestUtil.addGroup();
+
+		_user = UserTestUtil.addGroupAdminUser(group);
 
 		Assert.assertTrue(
 			ArrayUtil.contains(
-				getSharedContentSiteGroupIds(), company.getGroupId()));
+				getSharedContentSiteGroupIds(), group.getGroupId()));
 	}
 
 	@Test
-	public void testGetSharedContentSiteGroupIdsFromLayout()
-		throws Exception {
-
+	public void testGetSharedContentSiteGroupIdsFromLayout() throws Exception {
 		Layout layout = LayoutTestUtil.addLayout(_group);
 
 		Group group = GroupTestUtil.addGroup(_user.getUserId(), layout);
