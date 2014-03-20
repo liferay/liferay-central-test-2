@@ -322,10 +322,9 @@ public class BlogsUtil {
 			preferences, companyId, PropsValues.BLOGS_EMAIL_FROM_NAME);
 	}
 
-	public static SearchContainerResults<AssetEntry>
-		getSearchContainerResultsByTagsAndCategories(
-				SearchContainer searchContainer)
-			throws PortalException, SystemException {
+	public static SearchContainerResults<AssetEntry> getSearchContainerResults(
+			SearchContainer<?> searchContainer)
+		throws PortalException, SystemException {
 
 		AssetEntryQuery assetEntryQuery = new AssetEntryQuery(
 			BlogsEntry.class.getName(), searchContainer);
@@ -341,7 +340,7 @@ public class BlogsUtil {
 		List<AssetEntry> assetEntries = AssetEntryServiceUtil.getEntries(
 			assetEntryQuery);
 
-		return new SearchContainerResults(assetEntries, total);
+		return new SearchContainerResults<AssetEntry>(assetEntries, total);
 	}
 
 	public static String getUrlTitle(long entryId, String title) {

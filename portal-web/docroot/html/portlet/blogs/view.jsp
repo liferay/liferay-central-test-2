@@ -45,7 +45,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	List results = null;
 
 	if ((assetCategoryId != 0) || Validator.isNotNull(assetTagName)) {
-		SearchContainerResults<AssetEntry> searchContainerResults = BlogsUtil.getSearchContainerResultsByTagsAndCategories(searchContainer);
+		SearchContainerResults<AssetEntry> searchContainerResults = BlogsUtil.getSearchContainerResults(searchContainer);
 
 		searchContainer.setTotal(searchContainerResults.getTotal());
 
