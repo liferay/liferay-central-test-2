@@ -164,10 +164,8 @@
 									}
 								}
 
-								&.sign-in {
-									> a {
-										padding: 15px;
-									}
+								&.sign-in > a {
+									padding: 15px;
 								}
 							}
 						}

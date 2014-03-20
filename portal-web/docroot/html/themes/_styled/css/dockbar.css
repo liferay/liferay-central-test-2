@@ -702,8 +702,8 @@ $editLayoutPanelWidth: 460px;
 				li > span {
 					color: #FFF;
 					display: block;
-					padding: 10px 15px;
 					line-height: 31px;
+					padding: 10px 15px;
 				}
 			}
 		}
@@ -1113,9 +1113,9 @@ $editLayoutPanelWidth: 460px;
 	}
 
 	.page-customization-bar-container {
-		top: -1px;
 		position: absolute;
 		right: 100%;
+		top: -1px;
 		width: 320px;
 	}
 
