@@ -205,7 +205,7 @@ public class UpgradePermission extends UpgradeProcess {
 			name, RoleConstants.OWNER, scope, actionIdsLong);
 	}
 
-	protected class UpgradePermissionedModel implements PermissionedModel {
+	private class UpgradePermissionedModel implements PermissionedModel {
 
 		public UpgradePermissionedModel(
 			String tableName, String pkColumnName, long primKey) {
@@ -221,7 +221,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		public void persist() throws SystemException {
 			try {
-				StringBundler sb = new StringBundler();
+				StringBundler sb = new StringBundler(8);
 
 				sb.append("update ");
 				sb.append(_tableName);
@@ -247,6 +247,7 @@ public class UpgradePermission extends UpgradeProcess {
 		private long _primKey;
 		private long _resourceBlockId;
 		private String _tableName;
+
 	}
 
 	private static final int[] _SCOPES = {
