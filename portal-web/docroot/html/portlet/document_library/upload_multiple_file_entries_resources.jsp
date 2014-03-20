@@ -79,6 +79,8 @@ if (fileEntryTypeId > 0) {
 }
 
 long assetClassPK = 0;
+
+DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, fileEntry, fileVersion);
 %>
 
 <portlet:actionURL var="uploadMultipleFileEntriesURL">
@@ -256,15 +258,7 @@ long assetClassPK = 0;
 
 	<span id="<portlet:namespace />selectedFileNameContainer"></span>
 
-	<%
-	String publishButtonLabel = "save";
-
-	if (DLUtil.hasWorkflowDefinitionLink(themeDisplay.getCompanyId(), scopeGroupId, folderId, fileEntryTypeId)) {
-		publishButtonLabel = "submit-for-publication";
-	}
-	%>
-
-	<aui:button type="submit" value="<%= publishButtonLabel %>" />
+	<aui:button type="submit" value="<%= dlActionsDisplayContext.getPublishButtonLabel() %>" />
 </aui:form>
 
 <aui:script>
