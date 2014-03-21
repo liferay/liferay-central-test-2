@@ -30,8 +30,6 @@ if (Validator.isNotNull(onChangeMethod)) {
 
 boolean resizable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:resizable"));
 boolean skipEditorLoading = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-editor:skipEditorLoading"));
-
-String cssPath = themeDisplay.getPathThemeCss();
 %>
 
 <c:if test="<%= !skipEditorLoading %>">
@@ -138,8 +136,7 @@ String cssPath = themeDisplay.getPathThemeCss();
 
 	tinyMCE.init(
 		{
-
-			content_css: '<%= HtmlUtil.escapeJS(cssPath) %>/aui.css,<%= HtmlUtil.escapeJS(cssPath) %>/main.css',
+			content_css: '<%= HtmlUtil.escapeJS(themeDisplay.getPathThemeCss()) %>/aui.css,<%= HtmlUtil.escapeJS(themeDisplay.getPathThemeCss()) %>/main.css',
 			convert_urls: false,
 			elements: '<%= name %>',
 			extended_valid_elements: 'a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name|usemap],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]',
