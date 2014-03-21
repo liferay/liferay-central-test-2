@@ -36,8 +36,6 @@ import org.junit.runner.RunWith;
  * @author Vilmos Papp
  * @author Akos Thurzo
  */
-@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
-@RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class PortalImplBaseURLTestCase {
 
 	@Before

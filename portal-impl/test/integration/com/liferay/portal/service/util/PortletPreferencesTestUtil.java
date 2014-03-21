@@ -89,7 +89,7 @@ public class PortletPreferencesTestUtil {
 
 		sb.append("<portlet-preferences>");
 
-		if (name != null || values != null) {
+		if ((name != null) || (values != null)) {
 			sb.append("<preference>");
 
 			if (name != null) {

@@ -14,17 +14,23 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Vilmos Papp
  * @author Akos Thurzo
  */
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
+@RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class PortalImplLayoutURLTest extends PortalImplBaseURLTestCase {
 
 	@Test

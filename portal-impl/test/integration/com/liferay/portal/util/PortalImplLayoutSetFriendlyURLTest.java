@@ -14,6 +14,7 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.model.Group;
@@ -21,17 +22,22 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.portal.test.EnvironmentExecutionTestListener;
+import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.lang.reflect.Field;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  * @author Carlos Sierra
  * @author Akos Thurzo
  */
+@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
+@RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class PortalImplLayoutSetFriendlyURLTest
 	extends PortalImplBaseURLTestCase {
 
