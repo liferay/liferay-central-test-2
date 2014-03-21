@@ -145,17 +145,16 @@ public class JournalArticleAssetRenderer
 		}
 
 		try {
-			ThemeDisplay themeDisplay = null;
 			String xmlRequest = null;
+			ThemeDisplay themeDisplay = null;
 
 			if (_article.isTemplateDriven() &&
 				(portletRequest != null) && (portletResponse != null)) {
 
-				themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-					WebKeys.THEME_DISPLAY);
-
 				xmlRequest = PortletRequestUtil.toXML(
 					portletRequest, portletResponse);
+				themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+					WebKeys.THEME_DISPLAY);
 			}
 
 			JournalArticleDisplay articleDisplay =
