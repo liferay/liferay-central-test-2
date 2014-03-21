@@ -679,29 +679,18 @@
 		<var name="key_wikiPageTitle" value="FrontPage" />
 
 		<while>
-			<condition action="CPWikiAllpages#isTextEqual" locator-key1="WIKI_PAGE_TABLE_REVISION" value1="1.1" />
+			<condition action="CPWikiAllpages#isTextNotEqual" locator-key1="WIKI_PAGE_TABLE_REVISION" value1="1.0 (Minor Edit)" />
 			<then>
-				<var name="key_wikiPageTitle" value="FrontPage" />
-
-				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_TABLE_ACTIONS" value1="Actions" />
+				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_TABLE_ACTIONS_GENERIC" value1="Actions" />
 				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_MENULIST_RECYCLE_BIN" value1="Move to the Recycle Bin" />
 				<execute action="CPWikiAllpages#assertTextEquals" locator-key1="SUCCESS_MESSAGE_RECYCLE_BIN" value1="moved to the Recycle Bin. Undo" />
 			</then>
 		</while>
 
 		<while>
-			<condition action="CPWikiAllpages#isTextNotEqual" locator1="//tr[1]/td[1]/a" value1="FrontPage" />
+			<condition action="CPWikiAllpages#isElementPresent" locator-key1="WIKI_PAGE_TABLE_ACTIONS_GENERIC_2" />
 			<then>
-				<execute action="CPWikiAllpages#assertClick" locator1="//tr[1]/td[6]/div/a[@title='Actions']" value1="Actions" />
-				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_MENULIST_RECYCLE_BIN" value1="Move to the Recycle Bin" />
-				<execute action="CPWikiAllpages#assertTextEquals" locator-key1="SUCCESS_MESSAGE_RECYCLE_BIN" value1="moved to the Recycle Bin. Undo" />
-			</then>
-		</while>
-
-		<while>
-			<condition action="CPWikiAllpages#isElementPresent" locator1="//tr[2]/td[1]/a" />
-			<then>
-				<execute action="CPWikiAllpages#assertClick" locator1="//tr[2]/td[6]/div/a[@title='Actions']" value1="Actions" />
+				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_TABLE_ACTIONS_GENERIC_2" value1="Actions" />
 				<execute action="CPWikiAllpages#assertClick" locator-key1="WIKI_PAGE_MENULIST_RECYCLE_BIN" value1="Move to the Recycle Bin" />
 				<execute action="CPWikiAllpages#assertTextEquals" locator-key1="SUCCESS_MESSAGE_RECYCLE_BIN" value1="moved to the Recycle Bin. Undo" />
 			</then>
