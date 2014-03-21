@@ -15,9 +15,11 @@
 package com.liferay.portlet.dynamicdatamapping.util;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.Localization;
 import com.liferay.portal.kernel.util.LocalizationUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.LocalizationImpl;
 import com.liferay.portal.xml.SAXReaderImpl;
@@ -170,16 +172,16 @@ public class DDMXSDImplTest extends PowerMockito {
 			_saxReader
 		);
 	}
-	
+
 	private static final String _NAMESPACE = "_namespace_";
-	
+
 	private static final String _PORTLET_NAMESPACE = "_portletNamespace_";
-	
+
 	private DDMXSDImpl _ddmXSD = new DDMXSDImpl();
 	private Document _document;
 	private String _fieldsContextKey;
-	private LocalizationImpl _localization = new LocalizationImpl();
+	private Localization _localization = new LocalizationImpl();
 	private MockPageContext _mockPageContext = new MockPageContext();
-	private SAXReaderImpl _saxReader = new SAXReaderImpl();
+	private SAXReader _saxReader = new SAXReaderImpl();
 
 }
