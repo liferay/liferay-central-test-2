@@ -53,6 +53,7 @@ public class DLActionsDisplayContext {
 			WebKeys.THEME_DISPLAY);
 
 		_companyId = themeDisplay.getCompanyId();
+
 		_fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
 
 		if ((_fileEntryTypeId == -1) && (fileEntry != null) &&
