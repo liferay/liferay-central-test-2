@@ -48,27 +48,27 @@ public class DDMXSDImplTest extends PowerMockito {
 
 		_document = createSampleDocument();
 
-		_fieldsContextKey = _portletNamespace.concat(
-			_namespace).concat("fieldsContext");
+		_fieldsContextKey = _PORTLET_NAMESPACE.concat(
+			_NAMESPACE).concat("fieldsContext");
 	}
 
 	@Test
 	public void testGetFieldsContext() throws Exception {
 		_ddmXSD.getFieldsContext(
-			_mockPageContext, _portletNamespace, _namespace);
+			_mockPageContext, _PORTLET_NAMESPACE, _NAMESPACE);
 
 		Assert.assertNotNull(_mockPageContext.getAttribute(_fieldsContextKey));
 	}
 
 	@Test
 	public void testGetLocalizableFieldContext() throws Exception {
-		Element root = _document.getRootElement();
+		Element rootElement = _document.getRootElement();
 
-		Element field = addTextElement(
-			root, "Localizable", "Localizable", true);
+		Element fieldElement = addTextElement(
+			rootElement, "Localizable", "Localizable", true);
 
 		Map<String, Object> fieldContext = _ddmXSD.getFieldContext(
-			_mockPageContext, _portletNamespace, _namespace, field,
+			_mockPageContext, _PORTLET_NAMESPACE, _NAMESPACE, fieldElement,
 			LocaleUtil.US);
 
 		Assert.assertFalse(fieldContext.containsKey("disabled"));
@@ -76,13 +76,13 @@ public class DDMXSDImplTest extends PowerMockito {
 
 	@Test
 	public void testGetTranslatingLocalizableFieldContext() throws Exception {
-		Element root = _document.getRootElement();
+		Element rootElement = _document.getRootElement();
 
-		Element field = addTextElement(
-			root, "Localizable", "Localizable", true);
+		Element fieldElement = addTextElement(
+			rootElement, "Localizable", "Localizable", true);
 
 		Map<String, Object> fieldContext = _ddmXSD.getFieldContext(
-			_mockPageContext, _portletNamespace, _namespace, field,
+			_mockPageContext, _PORTLET_NAMESPACE, _NAMESPACE, fieldElement,
 			LocaleUtil.BRAZIL);
 
 		Assert.assertFalse(fieldContext.containsKey("disabled"));
@@ -90,13 +90,13 @@ public class DDMXSDImplTest extends PowerMockito {
 
 	@Test
 	public void testGetTranslatingUnlocalizableFieldContext() throws Exception {
-		Element root = _document.getRootElement();
+		Element rootElement = _document.getRootElement();
 
-		Element field = addTextElement(
-			root, "Unlocalizable", "Unlocalizable", false);
+		Element fieldElement = addTextElement(
+			rootElement, "Unlocalizable", "Unlocalizable", false);
 
 		Map<String, Object> fieldContext = _ddmXSD.getFieldContext(
-			_mockPageContext, _portletNamespace, _namespace, field,
+			_mockPageContext, _PORTLET_NAMESPACE, _NAMESPACE, fieldElement,
 			LocaleUtil.BRAZIL);
 
 		Assert.assertEquals(
@@ -105,13 +105,13 @@ public class DDMXSDImplTest extends PowerMockito {
 
 	@Test
 	public void testGetUnlocalizableFieldContext() throws Exception {
-		Element root = _document.getRootElement();
+		Element rootElement = _document.getRootElement();
 
-		Element field = addTextElement(
-			root, "Unlocalizable", "Unlocalizable", false);
+		Element fieldElement = addTextElement(
+			rootElement, "Unlocalizable", "Unlocalizable", false);
 
 		Map<String, Object> fieldContext = _ddmXSD.getFieldContext(
-			_mockPageContext, _portletNamespace, _namespace, field,
+			_mockPageContext, _PORTLET_NAMESPACE, _NAMESPACE, fieldElement,
 			LocaleUtil.US);
 
 		Assert.assertFalse(fieldContext.containsKey("disabled"));
@@ -170,14 +170,16 @@ public class DDMXSDImplTest extends PowerMockito {
 			_saxReader
 		);
 	}
-
+	
+	private static final String _NAMESPACE = "_namespace_";
+	
+	private static final String _PORTLET_NAMESPACE = "_portletNamespace_";
+	
 	private DDMXSDImpl _ddmXSD = new DDMXSDImpl();
 	private Document _document;
 	private String _fieldsContextKey;
 	private LocalizationImpl _localization = new LocalizationImpl();
 	private MockPageContext _mockPageContext = new MockPageContext();
-	private String _namespace = "_namespace_";
-	private String _portletNamespace = "_portletNamespace_";
 	private SAXReaderImpl _saxReader = new SAXReaderImpl();
 
 }

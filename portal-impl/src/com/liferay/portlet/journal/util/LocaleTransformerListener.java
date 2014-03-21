@@ -58,13 +58,13 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 	protected void filterByLanguage(
 		Element root, String languageId, String defaultLanguageId) {
 
-		List<Element> elements = root.elements();
-
-		int listIndex = elements.size() - 1;
-
 		Element defaultLanguageElement = null;
 
 		boolean hasLanguageIdElement = false;
+
+		List<Element> elements = root.elements();
+
+		int listIndex = elements.size() - 1;
 
 		while (listIndex >= 0) {
 			Element element = elements.get(listIndex);
