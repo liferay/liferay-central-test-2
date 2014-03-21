@@ -46,35 +46,35 @@ import org.testng.Assert;
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 @Transactional
-public class LayoutServiceTest {
+public class LayoutLocalServiceTest {
 
 	@Test
 	public void testDeleteGuestGroupLastPrivateLayout() throws Exception {
-		doTestDeleteGuestGroupLastLayout(true);
+		testDeleteGuestGroupLastLayout(true);
 	}
 
 	@Test
 	public void testDeleteGuestGroupLastPublicLayout() throws Exception {
-		doTestDeleteGuestGroupLastLayout(false);
+		testDeleteGuestGroupLastLayout(false);
 	}
 
-	protected void doTestDeleteGuestGroupLastLayout(boolean privateLayout)
+	protected void testDeleteGuestGroupLastLayout(boolean privateLayout)
 		throws Exception {
 
-		Group guestGroup = GroupLocalServiceUtil.getGroup(
+		List<Layout> layouts = new ArrayList<Layout>();
+
+		Group group = GroupLocalServiceUtil.getGroup(
 			TestPropsValues.getCompanyId(), GroupConstants.GUEST);
 
-		List<Layout> rootLayoutList = new ArrayList<Layout>();
-
-		rootLayoutList.addAll(
+		layouts.addAll(
 			LayoutLocalServiceUtil.getLayouts(
-				guestGroup.getGroupId(), privateLayout,
+				group.getGroupId(), privateLayout,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID));
 
-		if (rootLayoutList.isEmpty()) {
-			rootLayoutList.add(
+		if (layouts.isEmpty()) {
+			layouts.add(
 				LayoutTestUtil.addLayout(
-					guestGroup.getGroupId(), StringUtil.randomString(),
+					group.getGroupId(), StringUtil.randomString(),
 					privateLayout));
 		}
 
@@ -82,18 +82,18 @@ public class LayoutServiceTest {
 
 		try {
 			LayoutLocalServiceUtil.deleteLayouts(
-				guestGroup.getGroupId(), privateLayout, serviceContext);
+				group.getGroupId(), privateLayout, serviceContext);
 		}
 		catch (RequiredLayoutException rle) {
 			if (privateLayout) {
-				Assert.fail("Guest site may not have any private pages");
+				Assert.fail("Guest group must not have any private pages");
 			}
 
 			return;
 		}
 
 		if (!privateLayout) {
-			Assert.fail("Guest site must have at least one public page");
+			Assert.fail("Guest group must have at least one public page");
 		}
 	}
 
