@@ -393,7 +393,9 @@ public class WikiUtil {
 
 		WikiSettings wikiSettings = WikiUtil.getWikiSettings(
 			themeDisplay.getScopeGroupId());
+
 		String[] visibleNodeNames = wikiSettings.getVisibleNodes();
+
 		nodes = orderNodes(nodes, visibleNodeNames);
 
 		String[] hiddenNodes = wikiSettings.getHiddenNodes();
