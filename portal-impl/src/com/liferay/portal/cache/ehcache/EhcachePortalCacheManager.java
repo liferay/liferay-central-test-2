@@ -170,14 +170,14 @@ public class EhcachePortalCacheManager<K extends Serializable, V>
 
 	@Override
 	public Set<CacheManagerListener> getCacheManagerListeners() {
+		Set<CacheManagerListener> cacheManagerListeners =
+			new HashSet<CacheManagerListener>();
+
 		CacheManagerEventListenerRegistry cacheManagerEventListenerRegistry =
 			_cacheManager.getCacheManagerEventListenerRegistry();
 
 		Set<CacheManagerEventListener> cacheManagerEventListeners =
 			cacheManagerEventListenerRegistry.getRegisteredListeners();
-
-		Set<CacheManagerListener> cacheManagerListeners =
-			new HashSet<CacheManagerListener>();
 
 		for (CacheManagerEventListener cacheManagerEventListener :
 				cacheManagerEventListeners) {
