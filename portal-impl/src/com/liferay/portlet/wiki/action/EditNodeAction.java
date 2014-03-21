@@ -150,6 +150,9 @@ public class EditNodeAction extends PortletAction {
 
 		WikiNode wikiNode = WikiNodeServiceUtil.getNode(nodeId);
 
+		WikiSettings wikiSettings = WikiUtil.getWikiSettings(
+			wikiNode.getGroupId());
+
 		String oldName = wikiNode.getName();
 
 		WikiCacheThreadLocal.setClearCache(false);
@@ -166,9 +169,6 @@ public class EditNodeAction extends PortletAction {
 		WikiCacheUtil.clearCache(nodeId);
 
 		WikiCacheThreadLocal.setClearCache(true);
-
-		WikiSettings wikiSettings = WikiUtil.getWikiSettings(
-				wikiNode.getGroupId());
 
 		updateSettings(wikiSettings, oldName, StringPool.BLANK);
 
@@ -214,13 +214,13 @@ public class EditNodeAction extends PortletAction {
 
 			WikiNode wikiNode = WikiNodeServiceUtil.getNode(nodeId);
 
+			WikiSettings wikiSettings = WikiUtil.getWikiSettings(
+				wikiNode.getGroupId());
+
 			String oldName = wikiNode.getName();
 
 			WikiNodeServiceUtil.updateNode(
 				nodeId, name, description, serviceContext);
-
-			WikiSettings wikiSettings = WikiUtil.getWikiSettings(
-				wikiNode.getGroupId());
 
 			updateSettings(wikiSettings, oldName, name);
 		}
@@ -231,12 +231,15 @@ public class EditNodeAction extends PortletAction {
 		throws Exception {
 
 		String[] hiddenNodes = wikiSettings.getHiddenNodes();
-		String[] visibleNodes = wikiSettings.getVisibleNodes();
 
 		ArrayUtil.replace(hiddenNodes, oldName, newName);
-		ArrayUtil.replace(visibleNodes, oldName, newName);
 
 		wikiSettings.setHiddenNodes(hiddenNodes);
+
+		String[] visibleNodes = wikiSettings.getVisibleNodes();
+
+		ArrayUtil.replace(visibleNodes, oldName, newName);
+
 		wikiSettings.setVisibleNodes(visibleNodes);
 
 		wikiSettings.store();

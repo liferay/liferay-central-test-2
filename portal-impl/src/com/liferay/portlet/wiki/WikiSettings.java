@@ -163,25 +163,15 @@ public class WikiSettings extends BaseServiceSettings {
 	private static Map<String, String> _fallbackKeys = MapUtil.fromArray(
 		"emailFromAddress", PropsKeys.WIKI_EMAIL_FROM_ADDRESS,
 		PropsKeys.WIKI_EMAIL_FROM_ADDRESS, PropsKeys.ADMIN_EMAIL_FROM_ADDRESS,
-
 		"emailFromName", PropsKeys.WIKI_EMAIL_FROM_NAME,
 		PropsKeys.WIKI_EMAIL_FROM_NAME, PropsKeys.ADMIN_EMAIL_FROM_NAME,
-
 		"emailPageAddedEnabled", PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED,
-
 		"emailPageAddedSubject", PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT,
-
 		"emailPageUpdatedEnabled", PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED,
-
 		"enableCommentRatings", PropsKeys.WIKI_COMMENT_RATINGS_ENABLED,
-
 		"enableRelatedAssets", PropsKeys.WIKI_RELATED_ASSETS_ENABLED,
-
 		"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA,
-
 		"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT,
-
-		"rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT
-	);
+		"rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
 
 }
