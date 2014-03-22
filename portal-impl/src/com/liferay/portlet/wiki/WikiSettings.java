@@ -17,7 +17,7 @@ package com.liferay.portlet.wiki;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.settings.BaseServiceSettings;
-import com.liferay.portal.settings.FallbackPaths;
+import com.liferay.portal.settings.FallbackKeys;
 import com.liferay.portal.settings.Settings;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -29,7 +29,7 @@ import com.liferay.util.ContentUtil;
 public class WikiSettings extends BaseServiceSettings {
 
 	public WikiSettings(Settings settings) {
-		super(settings, _fallbackPaths);
+		super(settings, _fallbackKeys);
 	}
 
 	public String getDisplayStyle() {
@@ -157,44 +157,31 @@ public class WikiSettings extends BaseServiceSettings {
 		typedSettings.setValues("visibleNodes", visibleNodes);
 	}
 
-	private static FallbackPaths _getFallbackPaths() {
-		FallbackPaths fallbackPaths = new FallbackPaths();
+	private static FallbackKeys _fallbackKeys = new FallbackKeys();
 
-		fallbackPaths.addPath(
+	static {
+		_fallbackKeys.add(
 			"emailFromAddress", PropsKeys.WIKI_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"emailFromName", PropsKeys.WIKI_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"emailPageAddedEnabled", PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"emailPageAddedSubject", PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"emailPageUpdatedEnabled",
 			PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"enableCommentRatings", PropsKeys.WIKI_COMMENT_RATINGS_ENABLED);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"enableRelatedAssets", PropsKeys.WIKI_RELATED_ASSETS_ENABLED);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-
-		fallbackPaths.addPath(
+		_fallbackKeys.add(
 			"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT);
-
-		fallbackPaths.addPath("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
-
-		return fallbackPaths;
+		_fallbackKeys.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
 	}
-
-	private static FallbackPaths _fallbackPaths = _getFallbackPaths();
 
 }
