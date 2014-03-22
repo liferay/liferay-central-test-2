@@ -190,6 +190,59 @@ public class WikiUtil {
 		return sb.toString();
 	}
 
+	public static DiffVersionsInfo getDiffVersionsInfo(
+			long nodeId, String title, double sourceVersion,
+			double targetVersion, PageContext pageContext)
+		throws SystemException {
+
+		List<WikiPage> intermediatePages = new ArrayList<WikiPage>();
+
+		double previousVersion = 0;
+		double nextVersion = 0;
+
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
+			nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			new PageVersionComparator());
+
+		for (WikiPage page : pages) {
+			if ((page.getVersion() < sourceVersion) &&
+				(page.getVersion() > previousVersion)) {
+
+				previousVersion = page.getVersion();
+			}
+
+			if ((page.getVersion() > targetVersion) &&
+				((page.getVersion() < nextVersion) || (nextVersion == 0))) {
+
+				nextVersion = page.getVersion();
+			}
+
+			if ((page.getVersion() > sourceVersion) &&
+				(page.getVersion() <= targetVersion)) {
+
+				intermediatePages.add(page);
+			}
+		}
+
+		List<DiffVersion> diffVersions = new ArrayList<DiffVersion>();
+
+		for (WikiPage page : intermediatePages) {
+			String extraInfo = StringPool.BLANK;
+
+			if (page.isMinorEdit()) {
+				extraInfo = LanguageUtil.get(pageContext, "minor-edit");
+			}
+
+			DiffVersion diffVersion = new DiffVersion(
+				page.getUserId(), page.getVersion(), page.getSummary(),
+				extraInfo);
+
+			diffVersions.add(diffVersion);
+		}
+
+		return new DiffVersionsInfo(diffVersions, previousVersion, nextVersion);
+	}
+
 	public static String getEditPage(String format) {
 		return _instance._getEditPage(format);
 	}
@@ -531,59 +584,6 @@ public class WikiUtil {
 		}
 
 		return orderByComparator;
-	}
-
-	public static DiffVersionsInfo getDiffVersionsInfo(
-			long nodeId, String title, double sourceVersion,
-			double targetVersion, PageContext pageContext)
-		throws SystemException {
-
-		List<WikiPage> intermediatePages = new ArrayList<WikiPage>();
-
-		double previousVersion = 0;
-		double nextVersion = 0;
-
-		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
-			nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-			new PageVersionComparator());
-
-		for (WikiPage page : pages) {
-			if ((page.getVersion() < sourceVersion) &&
-				(page.getVersion() > previousVersion)) {
-
-				previousVersion = page.getVersion();
-			}
-
-			if ((page.getVersion() > targetVersion) &&
-				((page.getVersion() < nextVersion) || (nextVersion == 0))) {
-
-				nextVersion = page.getVersion();
-			}
-
-			if ((page.getVersion() > sourceVersion) &&
-				(page.getVersion() <= targetVersion)) {
-
-				intermediatePages.add(page);
-			}
-		}
-
-		List<DiffVersion> diffVersions = new ArrayList<DiffVersion>();
-
-		for (WikiPage page : intermediatePages) {
-			String extraInfo = StringPool.BLANK;
-
-			if (page.isMinorEdit()) {
-				extraInfo = LanguageUtil.get(pageContext, "minor-edit");
-			}
-
-			DiffVersion diffVersion = new DiffVersion(
-				page.getUserId(), page.getVersion(), page.getSummary(),
-				extraInfo);
-
-			diffVersions.add(diffVersion);
-		}
-
-		return new DiffVersionsInfo(diffVersions, previousVersion, nextVersion);
 	}
 
 	public static WikiSettings getWikiSettings(long groupId)

@@ -582,6 +582,54 @@ public class JournalUtil {
 		return articles;
 	}
 
+	public static DiffVersionsInfo getDiffVersionsInfo(
+			long groupId, String articleId, double sourceVersion,
+			double targetVersion)
+		throws SystemException {
+
+		List<JournalArticle> intermediateArticles =
+			new ArrayList<JournalArticle>();
+
+		double previousVersion = 0;
+		double nextVersion = 0;
+
+		List<JournalArticle> articles =
+			JournalArticleServiceUtil.getArticlesByArticleId(
+				groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+				new ArticleVersionComparator());
+
+		for (JournalArticle article : articles) {
+			if ((article.getVersion() < sourceVersion) &&
+				(article.getVersion() > previousVersion)) {
+
+				previousVersion = article.getVersion();
+			}
+
+			if ((article.getVersion() > targetVersion) &&
+				((article.getVersion() < nextVersion) || (nextVersion == 0))) {
+
+				nextVersion = article.getVersion();
+			}
+
+			if ((article.getVersion() > sourceVersion) &&
+				(article.getVersion() <= targetVersion)) {
+
+				intermediateArticles.add(article);
+			}
+		}
+
+		List<DiffVersion> diffVersions = new ArrayList<DiffVersion>();
+
+		for (JournalArticle article : intermediateArticles) {
+			DiffVersion diffVersion = new DiffVersion(
+				article.getUserId(), article.getVersion());
+
+			diffVersions.add(diffVersion);
+		}
+
+		return new DiffVersionsInfo(diffVersions, previousVersion, nextVersion);
+	}
+
 	public static String getEmailArticleAddedBody(
 		PortletPreferences preferences) {
 
@@ -940,54 +988,6 @@ public class JournalUtil {
 
 		return PortalUtil.getEmailFromName(
 			preferences, companyId, PropsValues.JOURNAL_EMAIL_FROM_NAME);
-	}
-
-	public static DiffVersionsInfo getDiffVersionsInfo(
-			long groupId, String articleId, double sourceVersion,
-			double targetVersion)
-		throws SystemException {
-
-		List<JournalArticle> intermediateArticles =
-			new ArrayList<JournalArticle>();
-
-		double previousVersion = 0;
-		double nextVersion = 0;
-
-		List<JournalArticle> articles =
-			JournalArticleServiceUtil.getArticlesByArticleId(
-				groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				new ArticleVersionComparator());
-
-		for (JournalArticle article : articles) {
-			if ((article.getVersion() < sourceVersion) &&
-				(article.getVersion() > previousVersion)) {
-
-				previousVersion = article.getVersion();
-			}
-
-			if ((article.getVersion() > targetVersion) &&
-				((article.getVersion() < nextVersion) || (nextVersion == 0))) {
-
-				nextVersion = article.getVersion();
-			}
-
-			if ((article.getVersion() > sourceVersion) &&
-				(article.getVersion() <= targetVersion)) {
-
-				intermediateArticles.add(article);
-			}
-		}
-
-		List<DiffVersion> diffVersions = new ArrayList<DiffVersion>();
-
-		for (JournalArticle article : intermediateArticles) {
-			DiffVersion diffVersion = new DiffVersion(
-				article.getUserId(), article.getVersion());
-
-			diffVersions.add(diffVersion);
-		}
-
-		return new DiffVersionsInfo(diffVersions, previousVersion, nextVersion);
 	}
 
 	public static String getJournalControlPanelLink(
