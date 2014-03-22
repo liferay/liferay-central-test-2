@@ -533,52 +533,52 @@ public class WikiUtil {
 		return orderByComparator;
 	}
 
-	public static DiffVersionsInfo getWikiPageVersionsInfo(
+	public static DiffVersionsInfo getDiffVersionsInfo(
 			long nodeId, String title, double sourceVersion,
 			double targetVersion, PageContext pageContext)
 		throws SystemException {
 
+		List<WikiPage> intermediatePages = new ArrayList<WikiPage>();
+
 		double previousVersion = 0;
 		double nextVersion = 0;
 
-		List<WikiPage> allPages = WikiPageLocalServiceUtil.getPages(
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
 			nodeId, title, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			new PageVersionComparator());
 
-		List<WikiPage> intermediatePages = new ArrayList<WikiPage>();
+		for (WikiPage page : pages) {
+			if ((page.getVersion() < sourceVersion) &&
+				(page.getVersion() > previousVersion)) {
 
-		for (WikiPage wikiPage : allPages) {
-			if ((wikiPage.getVersion() < sourceVersion) &&
-				(wikiPage.getVersion() > previousVersion)) {
-
-				previousVersion = wikiPage.getVersion();
+				previousVersion = page.getVersion();
 			}
 
-			if ((wikiPage.getVersion() > targetVersion) &&
-				((wikiPage.getVersion() < nextVersion) || (nextVersion == 0))) {
+			if ((page.getVersion() > targetVersion) &&
+				((page.getVersion() < nextVersion) || (nextVersion == 0))) {
 
-				nextVersion = wikiPage.getVersion();
+				nextVersion = page.getVersion();
 			}
 
-			if ((wikiPage.getVersion() > sourceVersion) &&
-				(wikiPage.getVersion() <= targetVersion)) {
+			if ((page.getVersion() > sourceVersion) &&
+				(page.getVersion() <= targetVersion)) {
 
-				intermediatePages.add(wikiPage);
+				intermediatePages.add(page);
 			}
 		}
 
 		List<DiffVersion> diffVersions = new ArrayList<DiffVersion>();
 
-		for (WikiPage wikiPage : intermediatePages) {
+		for (WikiPage page : intermediatePages) {
 			String extraInfo = StringPool.BLANK;
 
-			if (wikiPage.isMinorEdit()) {
+			if (page.isMinorEdit()) {
 				extraInfo = LanguageUtil.get(pageContext, "minor-edit");
 			}
 
 			DiffVersion diffVersion = new DiffVersion(
-				wikiPage.getUserId(), wikiPage.getVersion(),
-				wikiPage.getSummary(), extraInfo);
+				page.getUserId(), page.getVersion(), page.getSummary(),
+				extraInfo);
 
 			diffVersions.add(diffVersion);
 		}

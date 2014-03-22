@@ -86,11 +86,12 @@ public class CompareVersionsAction extends PortletAction {
 		WikiPage targetPage = WikiPageServiceUtil.getPage(
 			nodeId, title, targetVersion);
 
-		WikiNode sourceNode = sourcePage.getNode();
-
 		PortletURL viewPageURL = renderResponse.createRenderURL();
 
 		viewPageURL.setParameter("struts_action", "/wiki/view");
+
+		WikiNode sourceNode = sourcePage.getNode();
+
 		viewPageURL.setParameter("nodeName", sourceNode.getName());
 
 		PortletURL editPageURL = renderResponse.createRenderURL();
@@ -107,10 +108,10 @@ public class CompareVersionsAction extends PortletAction {
 			attachmentURLPrefix);
 
 		renderRequest.setAttribute(WebKeys.DIFF_HTML_RESULTS, htmlDiffResult);
-		renderRequest.setAttribute(WebKeys.WIKI_NODE_ID, nodeId);
-		renderRequest.setAttribute(WebKeys.TITLE, title);
 		renderRequest.setAttribute(WebKeys.SOURCE_VERSION, sourceVersion);
 		renderRequest.setAttribute(WebKeys.TARGET_VERSION, targetVersion);
+		renderRequest.setAttribute(WebKeys.TITLE, title);
+		renderRequest.setAttribute(WebKeys.WIKI_NODE_ID, nodeId);
 	}
 
 }

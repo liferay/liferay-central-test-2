@@ -25,9 +25,6 @@ double targetVersion = (Double)request.getAttribute("liferay-ui:diff-version-com
 
 double nextVersion = diffVersionsInfo.getNextVersion();
 double previousVersion = diffVersionsInfo.getPreviousVersion();
-
-String sourceVersionString = (previousVersion != 0) ? String.valueOf(sourceVersion) : String.valueOf(sourceVersion) + " (" + LanguageUtil.get(pageContext, "first-version") + ")";
-String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) : String.valueOf(targetVersion) + " (" + LanguageUtil.get(pageContext, "last-version") + ")";
 %>
 
 <div class="diff-version-comparator">
@@ -47,11 +44,17 @@ String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) 
 	</c:choose>
 
 	<div class="central-info">
+
+		<%
+		String sourceVersionMessage = (previousVersion != 0) ? String.valueOf(sourceVersion) : String.valueOf(sourceVersion) + " (" + LanguageUtil.get(pageContext, "first-version") + ")";
+		String targetVersionMessage = (nextVersion != 0) ? String.valueOf(targetVersion) : String.valueOf(targetVersion) + " (" + LanguageUtil.get(pageContext, "last-version") + ")";
+		%>
+
 		<liferay-ui:icon
 			cssClass="central-title"
 			image="pages"
 			label="<%= true %>"
-			message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[] {sourceVersionString, targetVersionString}, false) %>'
+			message='<%= LanguageUtil.format(pageContext, "comparing-versions-x-and-x", new Object[] {sourceVersionMessage, targetVersionMessage}, false) %>'
 		/>
 
 		<div class="central-author">
@@ -60,13 +63,13 @@ String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) 
 			List<DiffVersion> diffVersions = diffVersionsInfo.getDiffVersions();
 
 			for (DiffVersion diffVersion : diffVersions) {
-				User author = UserLocalServiceUtil.getUser(diffVersion.getUserId());
+				User diffVersionUser = UserLocalServiceUtil.getUser(diffVersion.getUserId());
 			%>
 
 				<liferay-ui:icon
 					image="user_icon"
 					label="<%= true %>"
-					message="<%= HtmlUtil.escape(author.getFullName()) %>"
+					message="<%= HtmlUtil.escape(diffVersionUser.getFullName()) %>"
 					toolTip="author"
 				/>
 
@@ -76,12 +79,15 @@ String targetVersionString = (nextVersion != 0) ? String.valueOf(targetVersion) 
 
 					<%
 					String summary = diffVersion.getSummary();
-					String extraInfo = diffVersion.getExtraInfo();
 					%>
 
 					<c:if test="<%= Validator.isNotNull(summary) %>">
 						<%= summary %>
 					</c:if>
+
+					<%
+					String extraInfo = diffVersion.getExtraInfo();
+					%>
 
 					<c:if test="<%= Validator.isNotNull(extraInfo) %>">
 						<%= extraInfo %>

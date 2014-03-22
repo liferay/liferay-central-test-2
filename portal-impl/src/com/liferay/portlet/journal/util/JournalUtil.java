@@ -942,10 +942,13 @@ public class JournalUtil {
 			preferences, companyId, PropsValues.JOURNAL_EMAIL_FROM_NAME);
 	}
 
-	public static DiffVersionsInfo getJournalArticleVersionsInfo(
+	public static DiffVersionsInfo getDiffVersionsInfo(
 			long groupId, String articleId, double sourceVersion,
 			double targetVersion)
 		throws SystemException {
+
+		List<JournalArticle> intermediateArticles =
+			new ArrayList<JournalArticle>();
 
 		double previousVersion = 0;
 		double nextVersion = 0;
@@ -954,8 +957,6 @@ public class JournalUtil {
 			JournalArticleServiceUtil.getArticlesByArticleId(
 				groupId, articleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				new ArticleVersionComparator());
-		List<JournalArticle> intermediateArticles =
-			new ArrayList<JournalArticle>();
 
 		for (JournalArticle article : articles) {
 			if ((article.getVersion() < sourceVersion) &&

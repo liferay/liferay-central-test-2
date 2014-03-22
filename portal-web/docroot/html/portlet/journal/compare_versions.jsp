@@ -17,8 +17,8 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
-String articleId = ParamUtil.getString(request, "articleId");
 long groupId = ParamUtil.getLong(request, "groupId");
+String articleId = ParamUtil.getString(request, "articleId");
 
 String diffHtmlResults = (String)request.getAttribute(WebKeys.DIFF_HTML_RESULTS);
 double sourceVersion = (Double)request.getAttribute(WebKeys.SOURCE_VERSION);

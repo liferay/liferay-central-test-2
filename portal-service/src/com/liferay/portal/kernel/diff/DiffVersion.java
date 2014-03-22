@@ -27,10 +27,10 @@ public class DiffVersion {
 	public DiffVersion(
 		long userId, double version, String summary, String extraInfo) {
 
-		_extraInfo = extraInfo;
-		_version = version;
 		_userId = userId;
+		_version = version;
 		_summary = summary;
+		_extraInfo = extraInfo;
 	}
 
 	public String getExtraInfo() {
