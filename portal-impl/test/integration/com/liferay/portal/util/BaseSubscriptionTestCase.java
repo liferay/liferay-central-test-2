@@ -159,18 +159,18 @@ public abstract class BaseSubscriptionTestCase {
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		List<SmtpMessage> messageList = MailServiceTestUtil.getMessages(
+		List<SmtpMessage> smtpMessages = MailServiceTestUtil.getMessages(
 			"Body", _GERMAN_BODY);
 
-		Assert.assertEquals(1, messageList.size());
+		Assert.assertEquals(1, smtpMessages.size());
 
 		LocaleThreadLocal.setDefaultLocale(LocaleUtil.SPAIN);
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		messageList = MailServiceTestUtil.getMessages("Body", _SPANISH_BODY);
+		smtpMessages = MailServiceTestUtil.getMessages("Body", _SPANISH_BODY);
 
-		Assert.assertEquals(1, messageList.size());
+		Assert.assertEquals(1, smtpMessages.size());
 	}
 
 	@Test
