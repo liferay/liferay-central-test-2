@@ -24,8 +24,6 @@ int delta = ParamUtil.getInteger(request, "delta", deltaDefault);
 String displayStyleDefault = GetterUtil.getString(SessionClicks.get(request, "liferay_addpanel_displaystyle", "descriptive"));
 
 String displayStyle = ParamUtil.getString(request, "displayStyle", displayStyleDefault);
-
-String[] displayViews = {"icon", "descriptive", "list"};
 %>
 
 <portlet:resourceURL var="updateContentListURL">
@@ -61,7 +59,7 @@ String[] displayViews = {"icon", "descriptive", "list"};
 				<aui:nav-item cssClass="display-style-buttons-container">
 					<liferay-ui:app-view-display-style
 						displayStyle="<%= displayStyle %>"
-						displayStyles="<%= displayViews %>"
+						displayStyles="<%= _DISPLAY_VIEWS %>"
 						eventName='<%= "AddContent:changeDisplayStyle" %>'
 					/>
 				</aui:nav-item>
@@ -127,3 +125,7 @@ String[] displayViews = {"icon", "descriptive", "list"};
 		}
 	);
 </aui:script>
+
+<%!
+private static final String[] _DISPLAY_VIEWS = {"icon", "descriptive", "list"};
+%>

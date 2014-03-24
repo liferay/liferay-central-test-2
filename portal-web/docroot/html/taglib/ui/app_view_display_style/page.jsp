@@ -92,7 +92,8 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 					changeDisplayStyle(displayStyle);
 				}
 				else if (<%= eventName != null %>) {
-					Liferay.fire('<%= eventName %>',
+					Liferay.fire(
+						'<%= eventName %>',
 						{
 							displayStyle: displayStyle
 						}
