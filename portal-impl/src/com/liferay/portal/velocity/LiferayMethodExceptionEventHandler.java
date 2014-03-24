@@ -48,7 +48,7 @@ public class LiferayMethodExceptionEventHandler
 		sb.append("exception=");
 		sb.append(e);
 		sb.append(StringPool.COMMA_AND_SPACE);
-		sb.append(getClassMessage(clazz));
+		sb.append(getKeyValuePair(clazz));
 		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 		_log.error(sb.toString(), e);
@@ -56,19 +56,19 @@ public class LiferayMethodExceptionEventHandler
 		return null;
 	}
 
-	protected String getClassMessage(Class<?> clazz) {
+	protected String getKeyValuePair(Class<?> clazz) {
 		if (clazz == null) {
 			return "class=null";
 		}
 
 		if (!ProxyUtil.isProxyClass(clazz)) {
-			return "className=".concat(clazz.getName());
+			return "className=" + clazz.getName();
 		}
 
 		Class<?>[] interfaceClasses = clazz.getInterfaces();
 
 		if (interfaceClasses == null) {
-			return "className=".concat(clazz.getName());
+			return "className=" + clazz.getName();
 		}
 
 		List<String> proxyInterfaceClassNames = new ArrayList<String>();
@@ -77,9 +77,9 @@ public class LiferayMethodExceptionEventHandler
 			proxyInterfaceClassNames.add(interfaceClass.getName());
 		}
 
-		return "proxyInterfaceClassNames=".concat(
+		return "proxyInterfaceClassNames=" +
 			StringUtil.merge(
-				proxyInterfaceClassNames, StringPool.COMMA_AND_SPACE));
+				proxyInterfaceClassNames, StringPool.COMMA_AND_SPACE);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(
