@@ -17,8 +17,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
-String searchJsp = (String)request.getAttribute("liferay-ui:app_view_toolbar:searchJsp");
 boolean includeSelectAll = GetterUtil.getBoolean(request.getAttribute("liferay-ui:app_view_toolbar:includeSelectAll"));
+String searchJsp = (String)request.getAttribute("liferay-ui:app_view_toolbar:searchJsp");
 
 String cssClass = "select-all-entries";
 
