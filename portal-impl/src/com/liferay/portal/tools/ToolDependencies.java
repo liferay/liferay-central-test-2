@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2014 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -48,39 +48,6 @@ import com.liferay.portal.xml.SAXReaderImpl;
  * @author Raymond Augé
  */
 public class ToolDependencies {
-
-	public static void wireDeployers() {
-		wireBasic();
-
-		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
-
-		MultiVMPoolImpl multiVMPoolImpl = new MultiVMPoolImpl();
-
-		MemoryPortalCacheManager<String, String> memoryPortalCacheManager =
-			new MemoryPortalCacheManager<String, String>();
-
-		memoryPortalCacheManager.afterPropertiesSet();
-
-		multiVMPoolImpl.setPortalCacheManager(memoryPortalCacheManager);
-
-		multiVMPoolUtil.setMultiVMPool(multiVMPoolImpl);
-
-		PortalUtil portalUtil = new PortalUtil();
-
-		portalUtil.setPortal(new PortalImpl());
-	}
-
-	public static void wireServiceBuilder() {
-		wireDeployers();
-
-		ResourceActionsUtil resourceActionsUtil = new ResourceActionsUtil();
-
-		ResourceActionsImpl resourceActionsImpl = new ResourceActionsImpl();
-
-		resourceActionsImpl.afterPropertiesSet();
-
-		resourceActionsUtil.setResourceActions(resourceActionsImpl);
-	}
 
 	public static void wireBasic() {
 		InitUtil.init();
@@ -158,6 +125,39 @@ public class ToolDependencies {
 		singleVMPoolImpl.setPortalCacheManager(memoryPortalCacheManager);
 
 		singleVMPoolUtil.setSingleVMPool(singleVMPoolImpl);
+	}
+
+	public static void wireDeployers() {
+		wireBasic();
+
+		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
+
+		MultiVMPoolImpl multiVMPoolImpl = new MultiVMPoolImpl();
+
+		MemoryPortalCacheManager<String, String> memoryPortalCacheManager =
+			new MemoryPortalCacheManager<String, String>();
+
+		memoryPortalCacheManager.afterPropertiesSet();
+
+		multiVMPoolImpl.setPortalCacheManager(memoryPortalCacheManager);
+
+		multiVMPoolUtil.setMultiVMPool(multiVMPoolImpl);
+
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(new PortalImpl());
+	}
+
+	public static void wireServiceBuilder() {
+		wireDeployers();
+
+		ResourceActionsUtil resourceActionsUtil = new ResourceActionsUtil();
+
+		ResourceActionsImpl resourceActionsImpl = new ResourceActionsImpl();
+
+		resourceActionsImpl.afterPropertiesSet();
+
+		resourceActionsUtil.setResourceActions(resourceActionsImpl);
 	}
 
 }
