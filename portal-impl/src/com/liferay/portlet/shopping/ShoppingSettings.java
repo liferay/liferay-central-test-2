@@ -36,8 +36,8 @@ public class ShoppingSettings extends BaseServiceSettings {
 
 	public static final String CC_NONE = "none";
 
-	public static final String[] CC_TYPES = {
-		"visa", "mastercard", "discover", "amex"};
+	public static final String[] CC_TYPES =
+		{"visa", "mastercard", "discover", "amex"};
 
 	public static final String[] CURRENCY_IDS;
 

@@ -44,10 +44,10 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 		validateEmail(actionRequest, "emailOrderShipping", false);
 		validateEmailFrom(actionRequest);
 
+		updateCcTypes(actionRequest);
 		updateInsuranceCalculation(actionRequest);
 		updatePayment(actionRequest);
 		updateShippingCalculation(actionRequest);
-		updateCcTypes(actionRequest);
 
 		super.processAction(portletConfig, actionRequest, actionResponse);
 	}
