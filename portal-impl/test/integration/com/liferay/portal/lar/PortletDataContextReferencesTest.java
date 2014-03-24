@@ -107,7 +107,6 @@ public class PortletDataContextReferencesTest {
 			missingReferencesElement.elements();
 
 		Assert.assertFalse(missingReferenceElements.isEmpty());
-
 		Assert.assertEquals(1, missingReferenceElements.size());
 
 		StagedModelDataHandlerUtil.exportStagedModel(
