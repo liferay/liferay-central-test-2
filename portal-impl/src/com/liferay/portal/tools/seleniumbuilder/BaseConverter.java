@@ -27,7 +27,6 @@ public class BaseConverter {
 		SeleniumBuilderFileUtil seleniumBuilderFileUtil) {
 
 		this.seleniumBuilderContext = seleniumBuilderContext;
-
 		this.seleniumBuilderFileUtil = seleniumBuilderFileUtil;
 	}
 
