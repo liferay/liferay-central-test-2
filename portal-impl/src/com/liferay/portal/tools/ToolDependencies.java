@@ -132,6 +132,7 @@ public class ToolDependencies {
 		SAXReaderImpl saxReaderImpl = new SAXReaderImpl();
 
 		modelHintsImpl.setSAXReader(saxReaderImpl);
+
 		modelHintsImpl.afterPropertiesSet();
 
 		modelHintsUtil.setModelHints(modelHintsImpl);
