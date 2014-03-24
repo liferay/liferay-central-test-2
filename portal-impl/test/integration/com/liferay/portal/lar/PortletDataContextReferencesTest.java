@@ -204,7 +204,6 @@ public class PortletDataContextReferencesTest {
 			portlet, _portletDataContext.getExportDataRootElement(),
 			_bookmarksEntry, PortletDataContext.REFERENCE_TYPE_DEPENDENCY,
 			true);
-
 		_portletDataContext.addReferenceElement(
 			portlet, _portletDataContext.getExportDataRootElement(),
 			_bookmarksEntry, PortletDataContext.REFERENCE_TYPE_DEPENDENCY,
@@ -217,7 +216,6 @@ public class PortletDataContextReferencesTest {
 			missingReferencesElement.elements();
 
 		Assert.assertFalse(missingReferenceElements.isEmpty());
-
 		Assert.assertEquals(1, missingReferenceElements.size());
 
 		Element missingReferenceElement = missingReferenceElements.get(0);
@@ -225,7 +223,6 @@ public class PortletDataContextReferencesTest {
 		Assert.assertEquals(
 			BookmarksEntry.class.getName(),
 			missingReferenceElement.attributeValue("class-name"));
-
 		Assert.assertEquals(
 			String.valueOf(_bookmarksEntry.getEntryId()),
 			missingReferenceElement.attributeValue("class-pk"));
