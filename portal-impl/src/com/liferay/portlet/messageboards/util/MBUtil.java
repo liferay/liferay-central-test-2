@@ -583,10 +583,10 @@ public class MBUtil {
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
 			groupId, MBConstants.SERVICE_NAME);
 
-		ParameterMapSettings configurationSettings = new ParameterMapSettings(
+		ParameterMapSettings parameterMapSettings = new ParameterMapSettings(
 			settings, request.getParameterMap());
 
-		return new MBSettings(configurationSettings);
+		return new MBSettings(parameterMapSettings);
 	}
 
 	public static long getMessageId(String mailId) {

@@ -604,10 +604,10 @@ public class WikiUtil {
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
 			groupId, WikiConstants.SERVICE_NAME);
 
-		ParameterMapSettings configurationSettings = new ParameterMapSettings(
+		ParameterMapSettings parameterMapSettings = new ParameterMapSettings(
 			settings, request.getParameterMap());
 
-		return new WikiSettings(configurationSettings);
+		return new WikiSettings(parameterMapSettings);
 	}
 
 	public static List<WikiNode> orderNodes(
