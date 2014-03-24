@@ -49,8 +49,8 @@ import com.liferay.portal.xml.SAXReaderImpl;
  */
 public class ToolDependencies {
 
-	public static void deployers() {
-		wire();
+	public static void wireDeployers() {
+		wireBasic();
 
 		MultiVMPoolUtil multiVMPoolUtil = new MultiVMPoolUtil();
 
@@ -70,8 +70,8 @@ public class ToolDependencies {
 		portalUtil.setPortal(new PortalImpl());
 	}
 
-	public static void serviceBuilder() {
-		deployers();
+	public static void wireServiceBuilder() {
+		wireDeployers();
 
 		ResourceActionsUtil resourceActionsUtil = new ResourceActionsUtil();
 
@@ -82,7 +82,7 @@ public class ToolDependencies {
 		resourceActionsUtil.setResourceActions(resourceActionsImpl);
 	}
 
-	public static void wire() {
+	public static void wireBasic() {
 		InitUtil.init();
 
 		DigesterUtil digesterUtil = new DigesterUtil();

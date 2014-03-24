@@ -30,7 +30,7 @@ import java.util.List;
 public class WebXML23Converter {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 2) {
 			new WebXML23Converter(args[0], args[1]);

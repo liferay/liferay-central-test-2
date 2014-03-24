@@ -35,7 +35,7 @@ import java.util.TreeSet;
 public class SeleniumBuilder {
 
 	public static void main(String[] args) throws Exception {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		new SeleniumBuilder(args);
 	}

@@ -38,7 +38,7 @@ import java.io.IOException;
 public class WebXMLBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 3) {
 			new WebXMLBuilder(args[0], args[1], args[2]);

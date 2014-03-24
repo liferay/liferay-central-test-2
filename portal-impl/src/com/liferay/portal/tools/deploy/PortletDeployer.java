@@ -49,7 +49,7 @@ public class PortletDeployer extends BaseDeployer {
 		"javax.portlet.faces.GenericFacesPortlet";
 
 	public static void main(String[] args) {
-		ToolDependencies.deployers();
+		ToolDependencies.wireDeployers();
 
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();

@@ -35,7 +35,7 @@ import java.util.Properties;
 public class TCKtoJUnitConverter {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 2) {
 			new TCKtoJUnitConverter(args[0], args[1]);

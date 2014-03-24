@@ -34,7 +34,7 @@ import java.util.TreeMap;
 public class WSDDMerger {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		new WSDDMerger(args[0], args[1]);
 	}

@@ -41,7 +41,7 @@ import java.util.TreeSet;
 public class CopyInterfaceBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 2) {
 			new CopyInterfaceBuilder(args[0], args[1]);

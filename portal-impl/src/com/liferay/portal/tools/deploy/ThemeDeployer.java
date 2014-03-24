@@ -33,7 +33,7 @@ import java.util.Map;
 public class ThemeDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
-		ToolDependencies.deployers();
+		ToolDependencies.wireDeployers();
 
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();

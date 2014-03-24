@@ -219,7 +219,7 @@ public class ServiceBuilder {
 	public static void main(String[] args) {
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 
-		ToolDependencies.serviceBuilder();
+		ToolDependencies.wireServiceBuilder();
 
 		String fileName = arguments.get("service.input.file");
 		String hbmFileName = arguments.get("service.hbm.file");

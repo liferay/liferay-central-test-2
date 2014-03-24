@@ -94,7 +94,7 @@ public class BaseDeployer implements AutoDeployer, Deployer {
 	public static final String DEPLOY_TO_PREFIX = "DEPLOY_TO__";
 
 	public static void main(String[] args) {
-		ToolDependencies.deployers();
+		ToolDependencies.wireDeployers();
 
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();

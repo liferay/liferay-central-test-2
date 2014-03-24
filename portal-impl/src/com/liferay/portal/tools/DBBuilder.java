@@ -32,7 +32,7 @@ import java.util.Map;
 public class DBBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		Map<String, String> arguments = ArgumentsUtil.parseArguments(args);
 

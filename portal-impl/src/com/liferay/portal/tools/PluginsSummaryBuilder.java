@@ -41,7 +41,7 @@ import org.apache.tools.ant.DirectoryScanner;
 public class PluginsSummaryBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		File pluginsDir = new File(System.getProperty("plugins.dir"));
 

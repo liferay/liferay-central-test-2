@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.util.Validator;
 public class XMLFormatter {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		String fileName = System.getProperty("xml.formatter.file");
 		boolean stripComments = GetterUtil.getBoolean(

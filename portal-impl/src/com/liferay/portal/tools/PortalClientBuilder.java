@@ -35,7 +35,7 @@ import java.util.List;
 public class PortalClientBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 4) {
 			new PortalClientBuilder(args[0], args[1], args[2], args[3]);

@@ -30,7 +30,7 @@ import java.io.File;
 public class EARBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 3) {
 			new EARBuilder(args[0], StringUtil.split(args[1]), args[2]);

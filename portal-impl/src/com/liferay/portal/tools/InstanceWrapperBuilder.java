@@ -44,7 +44,7 @@ import java.util.Set;
 public class InstanceWrapperBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		if (args.length == 1) {
 			new InstanceWrapperBuilder(args[0]);

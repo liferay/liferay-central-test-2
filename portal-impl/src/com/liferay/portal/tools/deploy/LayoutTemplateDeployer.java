@@ -26,7 +26,7 @@ import java.util.List;
 public class LayoutTemplateDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
-		ToolDependencies.deployers();
+		ToolDependencies.wireDeployers();
 
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();

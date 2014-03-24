@@ -38,7 +38,7 @@ public class TLDFormatter {
 
 	public static void main(String[] args) {
 		try {
-			ToolDependencies.wire();
+			ToolDependencies.wireBasic();
 
 			_formatTLD();
 		}

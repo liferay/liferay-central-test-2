@@ -47,7 +47,7 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SeleneseToJavaBuilder {
 
 	public static void main(String[] args) throws Exception {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		new SeleneseToJavaBuilder(args);
 	}

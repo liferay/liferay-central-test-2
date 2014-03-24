@@ -55,7 +55,7 @@ import java.util.Properties;
 public class SampleSQLBuilder {
 
 	public static void main(String[] args) {
-		ToolDependencies.wire();
+		ToolDependencies.wireBasic();
 
 		Reader reader = null;
 
