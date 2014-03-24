@@ -35,7 +35,6 @@
 	<property name="pscp.executable" location="${project.dir}/tools/putty/pscp.exe" />
 
 	<propertycopy from="testray.build.${testray.build.type}.name" name="testray.build.name" />
-
 	<propertycopy from="testray.product.${testray.product.type}.version" name="testray.product.version" />
 
 	<taskdef classname="com.liferay.portal.ant.FormatTask" classpathref="project.classpath" name="liferay-format" />
