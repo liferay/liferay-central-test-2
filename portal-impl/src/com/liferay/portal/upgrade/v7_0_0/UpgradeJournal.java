@@ -375,40 +375,6 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	protected int hasDDMStructure(long groupId, String ddmStructureKey)
-		throws Exception {
-
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-
-		try {
-			con = DataAccess.getUpgradeOptimizedConnection();
-
-			ps = con.prepareStatement(
-				"select count(*) from DDMStructure where groupId = ? and " +
-					"classNameId = ? and structureKey = ?");
-
-			ps.setLong(1, groupId);
-			ps.setLong(
-				2, PortalUtil.getClassNameId(JournalArticle.class.getName()));
-			ps.setString(3, ddmStructureKey);
-
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				int count = rs.getInt(1);
-
-				return count;
-			}
-
-			return 0;
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-		}
-	}
-
 	protected long getBitwiseValue(
 		Map<String, Long> bitwiseValues, List<String> actionIds) {
 
@@ -582,6 +548,40 @@ public class UpgradeJournal extends UpgradeProcess {
 			_roleIds.put(roleIdsKey, roleId);
 
 			return roleId;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected int hasDDMStructure(long groupId, String ddmStructureKey)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"select count(*) from DDMStructure where groupId = ? and " +
+					"classNameId = ? and structureKey = ?");
+
+			ps.setLong(1, groupId);
+			ps.setLong(
+				2, PortalUtil.getClassNameId(JournalArticle.class.getName()));
+			ps.setString(3, ddmStructureKey);
+
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				int count = rs.getInt(1);
+
+				return count;
+			}
+
+			return 0;
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
