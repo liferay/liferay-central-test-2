@@ -1098,8 +1098,7 @@ public class LayoutLocalServiceUtil {
 
 	public static int getLayoutsCount(com.liferay.portal.model.Group group,
 		boolean privateLayout, long parentLayoutId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getLayoutsCount(group, privateLayout, parentLayoutId);
 	}
 
