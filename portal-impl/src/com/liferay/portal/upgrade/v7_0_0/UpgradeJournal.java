@@ -94,7 +94,7 @@ public class UpgradeJournal extends UpgradeProcess {
 
 		String xsd = structureElementRootElement.asXML();
 
-		if (existsDDMStructure(groupId, name) > 0) {
+		if (hasDDMStructure(groupId, name) > 0) {
 			return name;
 		}
 
@@ -375,7 +375,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	protected int existsDDMStructure(long groupId, String name)
+	protected int hasDDMStructure(long groupId, String ddmStructureKey)
 		throws Exception {
 
 		Connection con = null;
@@ -387,12 +387,12 @@ public class UpgradeJournal extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"select count(*) from DDMStructure where groupId = ? and " +
-				"classNameId = ? and structureKey = ?");
+					"classNameId = ? and structureKey = ?");
 
 			ps.setLong(1, groupId);
 			ps.setLong(
 				2, PortalUtil.getClassNameId(JournalArticle.class.getName()));
-			ps.setString(3, name);
+			ps.setString(3, ddmStructureKey);
 
 			rs = ps.executeQuery();
 
