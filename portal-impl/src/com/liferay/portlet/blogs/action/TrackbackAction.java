@@ -31,10 +31,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.NoSuchEntryException;
+import com.liferay.portlet.blogs.TrackbackValidationException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.trackback.Trackback;
 import com.liferay.portlet.blogs.trackback.TrackbackImpl;
-import com.liferay.portlet.blogs.trackback.TrackbackValidationException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

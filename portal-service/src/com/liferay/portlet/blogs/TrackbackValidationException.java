@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portlet.blogs.trackback;
+package com.liferay.portlet.blogs;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
- * @author André de Oliveira
+ * @author Brian Wing Shun Chan
  */
 public class TrackbackValidationException extends PortalException {
 
