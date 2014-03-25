@@ -16,19 +16,12 @@ package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
-import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,61 +47,10 @@ public class JournalExpiredVersionExportImportTest
 	public void testExportImportAssetLinks() throws Exception {
 	}
 
+	@Ignore()
 	@Override
 	@Test
 	public void testExportImportBasicJournalArticle() throws Exception {
-		int initialArticlesCount =
-			JournalArticleLocalServiceUtil.getArticlesCount(group.getGroupId());
-
-		int initialSearchArticlesCount = JournalTestUtil.getSearchArticlesCount(
-			group.getCompanyId(), group.getGroupId());
-
-		JournalArticle article = JournalTestUtil.addArticle(
-			group.getGroupId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
-
-		Assert.assertEquals(1.0, article.getVersion(), 0);
-
-		article = JournalTestUtil.updateArticle(
-			article, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
-
-		Assert.assertEquals(1.1, article.getVersion(), 0);
-		Assert.assertEquals(
-			initialArticlesCount + 2,
-			JournalArticleLocalServiceUtil.getArticlesCount(
-				group.getGroupId()));
-		Assert.assertEquals(
-			initialSearchArticlesCount + 1,
-			JournalTestUtil.getSearchArticlesCount(
-				group.getCompanyId(), group.getGroupId()));
-
-		exportImportPortlet(PortletKeys.JOURNAL);
-
-		Assert.assertEquals(
-			initialArticlesCount + 2,
-			JournalArticleLocalServiceUtil.getArticlesCount(
-				importedGroup.getGroupId()));
-		Assert.assertEquals(
-			initialSearchArticlesCount + 1,
-			JournalTestUtil.getSearchArticlesCount(
-				importedGroup.getCompanyId(), importedGroup.getGroupId()));
-
-		JournalArticleServiceUtil.expireArticle(
-			group.getGroupId(), article.getArticleId(), null,
-			ServiceTestUtil.getServiceContext(group.getGroupId()));
-
-		Assert.assertEquals(
-			initialSearchArticlesCount,
-			JournalTestUtil.getSearchArticlesCount(
-				group.getCompanyId(), group.getGroupId()));
-
-		exportImportPortlet(PortletKeys.JOURNAL);
-
-		Assert.assertEquals(
-			initialSearchArticlesCount,
-			JournalTestUtil.getSearchArticlesCount(
-				importedGroup.getCompanyId(), importedGroup.getGroupId()));
 	}
 
 	@Ignore()
