@@ -18,6 +18,7 @@
 
 <%
 String backURL = ParamUtil.getString(request, "backURL");
+
 boolean hideControls = ParamUtil.getBoolean(request, "hideControls");
 
 long nodeId = (Long)request.getAttribute(WebKeys.WIKI_NODE_ID);

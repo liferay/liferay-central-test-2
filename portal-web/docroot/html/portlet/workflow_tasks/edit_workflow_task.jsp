@@ -54,7 +54,6 @@ if ((workflowTask.getAssigneeUserId() == user.getUserId()) && !workflowTask.isCo
 }
 
 PortletURL editPortletURL = workflowHandler.getURLEdit(classPK, liferayPortletRequest, liferayPortletResponse);
-
 PortletURL viewDiffsPortletURL = workflowHandler.getURLViewDiffs(classPK, liferayPortletRequest, liferayPortletResponse);
 
 String viewFullContentURLString = null;

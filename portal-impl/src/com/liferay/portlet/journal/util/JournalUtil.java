@@ -485,7 +485,6 @@ public class JournalUtil {
 			JournalArticleLocalServiceUtil.getArticleDisplay(
 				groupId, articleId, sourceVersion, null, Constants.VIEW,
 				languageId, 1, xmlRequest, themeDisplay);
-
 		JournalArticleDisplay targetArticleDisplay =
 			JournalArticleLocalServiceUtil.getArticleDisplay(
 				groupId, articleId, targetVersion, null, Constants.VIEW,
