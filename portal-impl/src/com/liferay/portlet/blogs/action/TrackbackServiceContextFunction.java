@@ -34,16 +34,15 @@ public class TrackbackServiceContextFunction
 
 	@Override
 	public ServiceContext apply(String className) {
-
 		try {
 			return ServiceContextFactory.getInstance(
 				className, _portletRequest);
 		}
-		catch (PortalException e) {
-			throw new RuntimeException(e);
+		catch (PortalException pe) {
+			throw new RuntimeException(pe);
 		}
-		catch (SystemException e) {
-			throw new RuntimeException(e);
+		catch (SystemException se) {
+			throw new RuntimeException(se);
 		}
 	}
 

@@ -65,7 +65,7 @@ public class TrackbackImpl implements Trackback {
 	}
 
 	private String _buildBody(
-			ThemeDisplay themeDisplay, String excerpt, String url) {
+		ThemeDisplay themeDisplay, String excerpt, String url) {
 
 		StringBundler sb = new StringBundler(7);
 
