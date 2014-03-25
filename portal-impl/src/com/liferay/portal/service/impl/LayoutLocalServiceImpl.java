@@ -1522,7 +1522,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	@Override
 	public int getLayoutsCount(
 			Group group, boolean privateLayout, long parentLayoutId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return layoutPersistence.countByG_P_P(
 			group.getGroupId(), privateLayout, parentLayoutId);
