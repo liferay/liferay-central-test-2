@@ -764,7 +764,7 @@
 		<file-name>lib/development/sikuli-api.jar</file-name>
 		<version>1.0.2</version>
 		<project-name>Sikuli API</project-name>
-		<project-url>http://www.sikuli.org/</project-url>
+		<project-url>http://www.sikuli.org</project-url>
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
@@ -776,7 +776,7 @@
 		<file-name>lib/development/sikuli-script.jar</file-name>
 		<version>1.0.1</version>
 		<project-name>Sikuli Script</project-name>
-		<project-url>http://www.sikuli.org/</project-url>
+		<project-url>http://www.sikuli.org</project-url>
 		<licenses>
 			<license>
 				<license-name>MIT License</license-name>
