@@ -51,7 +51,6 @@ public abstract class BaseSubscriptionTestCase {
 	@After
 	public void tearDown() throws Exception {
 		GroupLocalServiceUtil.deleteGroup(group);
-
 		LocaleThreadLocal.setDefaultLocale(defaultLocale);
 	}
 
@@ -142,11 +141,16 @@ public abstract class BaseSubscriptionTestCase {
 
 	@Test
 	public void testSubscriptionDefaultClassType() throws Exception {
-		addSubscriptionClassType(_CLASS_TYPE_ID_DEFAULT);
+		Long classTypeId = getDefaultClassTypeId();
 
-		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
+		if (classTypeId != null) {
+			addSubscriptionClassType(classTypeId);
 
-		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
+			addBaseModelWithClassType(
+				_PARENT_CONTAINER_MODEL_ID_DEFAULT, classTypeId);
+
+			Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
+		}
 	}
 
 	@Test
@@ -242,6 +246,10 @@ public abstract class BaseSubscriptionTestCase {
 
 	protected abstract void addSubscriptionContainerModel(long containerModelId)
 		throws Exception;
+
+	protected Long getDefaultClassTypeId() throws Exception {
+		return null;
+	}
 
 	protected abstract String getPortletId();
 
