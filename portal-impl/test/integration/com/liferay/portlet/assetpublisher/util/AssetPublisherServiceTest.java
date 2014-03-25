@@ -57,6 +57,7 @@ import org.springframework.mock.web.portlet.MockPortletRequest;
 		TransactionalExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
+@Transactional
 public class AssetPublisherServiceTest {
 
 	@Before
@@ -68,7 +69,6 @@ public class AssetPublisherServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testGetAssetEntries() throws Exception {
 		PortletPreferences portletPreferences =
 			getAssetPublisherPortletPreferences();
@@ -82,7 +82,6 @@ public class AssetPublisherServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testGetAssetEntriesFilteredByAssetCategoryIds()
 		throws Exception {
 
@@ -116,7 +115,6 @@ public class AssetPublisherServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testGetAssetEntriesFilteredByAssetCategoryIdsAndAssetTagNames()
 		throws Exception {
 
@@ -153,7 +151,6 @@ public class AssetPublisherServiceTest {
 	}
 
 	@Test
-	@Transactional
 	public void testGetAssetEntriesFilteredByAssetTagNames() throws Exception {
 		String[] allAssetTagNames = {_ASSET_TAG_NAMES[0], _ASSET_TAG_NAMES[1]};
 
