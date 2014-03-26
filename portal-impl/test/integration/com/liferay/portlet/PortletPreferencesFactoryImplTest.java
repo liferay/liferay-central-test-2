@@ -47,8 +47,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
-			expectedXML);
+		portletPreferencesImpl =
+			PortletPreferencesTestUtil.toPortletPreferencesImpl(expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -95,8 +95,8 @@ public class PortletPreferencesFactoryImplTest {
 		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
-		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
-			actualXML);
+		portletPreferencesImpl =
+			PortletPreferencesTestUtil.toPortletPreferencesImpl(actualXML);
 
 		preferencesMap = portletPreferencesImpl.getPreferences();
 
@@ -192,8 +192,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
-			expectedXML);
+		portletPreferencesImpl =
+			PortletPreferencesTestUtil.toPortletPreferencesImpl(expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -226,8 +226,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
-			expectedXML);
+		portletPreferencesImpl =
+			PortletPreferencesTestUtil.toPortletPreferencesImpl(expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -261,8 +261,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
-			expectedXML);
+		portletPreferencesImpl =
+			PortletPreferencesTestUtil.toPortletPreferencesImpl(expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();

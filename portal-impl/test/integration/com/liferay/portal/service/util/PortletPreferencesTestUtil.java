@@ -63,16 +63,6 @@ public class PortletPreferencesTestUtil {
 			portlet.getPortletId(), portlet, defaultPreferences);
 	}
 
-	public static PortletPreferencesImpl deserialize(String xml)
-		throws Exception {
-
-		PortletPreferencesImpl portletPreferencesImpl =
-			(PortletPreferencesImpl)
-				PortletPreferencesFactoryUtil.fromDefaultXML(xml);
-
-		return portletPreferencesImpl;
-	}
-
 	public static javax.portlet.PortletPreferences
 			fetchLayoutJxPortletPreferences(
 				Layout layout, Portlet portlet)
@@ -116,6 +106,16 @@ public class PortletPreferencesTestUtil {
 			portletPreferences.getOwnerType(), portletPreferences.getPlid(),
 			portletPreferences.getPortletId(),
 			portletPreferences.getPreferences());
+	}
+
+	public static PortletPreferencesImpl toPortletPreferencesImpl(String xml)
+		throws Exception {
+
+		PortletPreferencesImpl portletPreferencesImpl =
+			(PortletPreferencesImpl)
+				PortletPreferencesFactoryUtil.fromDefaultXML(xml);
+
+		return portletPreferencesImpl;
 	}
 
 }
