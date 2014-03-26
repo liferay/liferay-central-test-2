@@ -435,7 +435,7 @@ public class SubscriptionSender implements Serializable {
 	protected void notifyPersistedSubscriber(Subscription subscription)
 		throws Exception {
 
-		_notifyPersistedSubscriber(subscription, _className, _classPK);
+		notifyPersistedSubscriber(subscription, _className, _classPK);
 	}
 
 	protected void notifyRuntimeSubscriber(InternetAddress to, Locale locale)
@@ -457,7 +457,7 @@ public class SubscriptionSender implements Serializable {
 	protected void notifySubscriber(Subscription subscription)
 		throws Exception {
 
-		_notifyPersistedSubscriber(subscription, null, 0);
+		notifyPersistedSubscriber(subscription, null, 0);
 	}
 
 	/**
@@ -470,7 +470,7 @@ public class SubscriptionSender implements Serializable {
 			long inferredClassPK)
 		throws Exception {
 
-		_notifyPersistedSubscriber(
+		notifyPersistedSubscriber(
 			subscription, inferredClassName, inferredClassPK);
 	}
 
@@ -732,7 +732,7 @@ public class SubscriptionSender implements Serializable {
 			subscription.getClassPK(), className, classPK);
 	}
 
-	private void _notifyPersistedSubscriber(
+	protected void notifyPersistedSubscriber(
 			Subscription subscription, String className, long classPK)
 		throws Exception {
 
