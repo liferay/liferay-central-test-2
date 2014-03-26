@@ -412,24 +412,23 @@ public class SubscriptionSender implements Serializable {
 			subscription.getSubscriptionId());
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             #hasPermission(Subscription, User)}
-	 */
-	@Deprecated
 	protected boolean hasPermission(
-			Subscription subscription, String inferredClassName,
-			long inferredClassPK, User user)
+			Subscription subscription, String className, long classPK,
+			User user)
 		throws Exception {
 
-		return _hasPermission(
-			subscription, inferredClassName, inferredClassPK, user);
+		PermissionChecker permissionChecker =
+			PermissionCheckerFactoryUtil.create(user);
+
+		return SubscriptionPermissionUtil.contains(
+			permissionChecker, subscription.getClassName(),
+			subscription.getClassPK(), className, classPK);
 	}
 
 	protected boolean hasPermission(Subscription subscription, User user)
 		throws Exception {
 
-		return _hasPermission(subscription, _className, _classPK, user);
+		return hasPermission(subscription, _className, _classPK, user);
 	}
 
 	protected void notifyPersistedSubscriber(Subscription subscription)
@@ -719,19 +718,6 @@ public class SubscriptionSender implements Serializable {
 	protected String subject;
 	protected long userId;
 
-	private boolean _hasPermission(
-			Subscription subscription, String className, long classPK,
-			User user)
-		throws Exception {
-
-		PermissionChecker permissionChecker =
-			PermissionCheckerFactoryUtil.create(user);
-
-		return SubscriptionPermissionUtil.contains(
-			permissionChecker, subscription.getClassName(),
-			subscription.getClassPK(), className, classPK);
-	}
-
 	protected void notifyPersistedSubscriber(
 			Subscription subscription, String className, long classPK)
 		throws Exception {
@@ -779,7 +765,7 @@ public class SubscriptionSender implements Serializable {
 		}
 
 		try {
-			if (!_hasPermission(subscription, className, classPK, user)) {
+			if (!hasPermission(subscription, className, classPK, user)) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Skip unauthorized user " + user.getUserId());
 				}
