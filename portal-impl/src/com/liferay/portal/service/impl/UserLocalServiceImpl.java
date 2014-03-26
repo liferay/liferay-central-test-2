@@ -3448,7 +3448,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			LocalizationUtil.getLocalizationMap(
 				companyPortletPreferences, "adminEmailVerificationSubject",
 				PropsKeys.ADMIN_EMAIL_VERIFICATION_SUBJECT);
-
 		Map<Locale, String> localizedBodyMap =
 			LocalizationUtil.getLocalizationMap(
 				companyPortletPreferences, "adminEmailVerificationBody",
@@ -3609,11 +3608,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
-		Map<Locale, String> localizedSubjectMap = null;
-		Map<Locale, String> localizedBodyMap = null;
-
 		PortletPreferences companyPortletPreferences =
 			PrefsPropsUtil.getPreferences(company.getCompanyId(), true);
+
+		Map<Locale, String> localizedSubjectMap = null;
+		Map<Locale, String> localizedBodyMap = null;
 
 		if (Validator.isNull(subject)) {
 			if (company.isSendPasswordResetLink()) {
