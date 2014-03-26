@@ -437,6 +437,84 @@ public class SubscriptionSender implements Serializable {
 		notifyPersistedSubscriber(subscription, _className, _classPK);
 	}
 
+	protected void notifyPersistedSubscriber(
+			Subscription subscription, String className, long classPK)
+		throws Exception {
+
+		User user = UserLocalServiceUtil.fetchUserById(
+			subscription.getUserId());
+
+		if (user == null) {
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Subscription " + subscription.getSubscriptionId() +
+						" is stale and will be deleted");
+			}
+
+			deleteSubscription(subscription);
+
+			return;
+		}
+
+		String emailAddress = user.getEmailAddress();
+
+		if (_sentEmailAddresses.contains(emailAddress)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Do not send a duplicate email to " + emailAddress);
+			}
+
+			return;
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Add " + emailAddress +
+						" to the list of users who have received an email");
+			}
+
+			_sentEmailAddresses.add(emailAddress);
+		}
+
+		if (!user.isActive()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Skip inactive user " + user.getUserId());
+			}
+
+			return;
+		}
+
+		try {
+			if (!hasPermission(subscription, className, classPK, user)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Skip unauthorized user " + user.getUserId());
+				}
+
+				return;
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return;
+		}
+
+		if (bulk) {
+			InternetAddress bulkAddress = new InternetAddress(
+				user.getEmailAddress(), user.getFullName());
+
+			if (_bulkAddresses == null) {
+				_bulkAddresses = new ArrayList<InternetAddress>();
+			}
+
+			_bulkAddresses.add(bulkAddress);
+
+			sendNotification(user);
+		}
+		else {
+			sendNotification(user);
+		}
+	}
+
 	protected void notifyRuntimeSubscriber(InternetAddress to, Locale locale)
 		throws Exception {
 
@@ -717,84 +795,6 @@ public class SubscriptionSender implements Serializable {
 	protected SMTPAccount smtpAccount;
 	protected String subject;
 	protected long userId;
-
-	protected void notifyPersistedSubscriber(
-			Subscription subscription, String className, long classPK)
-		throws Exception {
-
-		User user = UserLocalServiceUtil.fetchUserById(
-			subscription.getUserId());
-
-		if (user == null) {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Subscription " + subscription.getSubscriptionId() +
-						" is stale and will be deleted");
-			}
-
-			deleteSubscription(subscription);
-
-			return;
-		}
-
-		String emailAddress = user.getEmailAddress();
-
-		if (_sentEmailAddresses.contains(emailAddress)) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Do not send a duplicate email to " + emailAddress);
-			}
-
-			return;
-		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Add " + emailAddress +
-						" to the list of users who have received an email");
-			}
-
-			_sentEmailAddresses.add(emailAddress);
-		}
-
-		if (!user.isActive()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Skip inactive user " + user.getUserId());
-			}
-
-			return;
-		}
-
-		try {
-			if (!hasPermission(subscription, className, classPK, user)) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Skip unauthorized user " + user.getUserId());
-				}
-
-				return;
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return;
-		}
-
-		if (bulk) {
-			InternetAddress bulkAddress = new InternetAddress(
-				user.getEmailAddress(), user.getFullName());
-
-			if (_bulkAddresses == null) {
-				_bulkAddresses = new ArrayList<InternetAddress>();
-			}
-
-			_bulkAddresses.add(bulkAddress);
-
-			sendNotification(user);
-		}
-		else {
-			sendNotification(user);
-		}
-	}
 
 	private void readObject(ObjectInputStream objectInputStream)
 		throws ClassNotFoundException, IOException {
