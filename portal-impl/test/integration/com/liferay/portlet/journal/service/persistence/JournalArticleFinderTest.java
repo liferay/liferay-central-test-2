@@ -75,18 +75,18 @@ public class JournalArticleFinderTest {
 
 		_folder = JournalTestUtil.addFolder(_group.getGroupId(), "Folder 1");
 
-		_basicWebContentStructure =
+		_basicWebContentDDMStructure =
 			DDMStructureTestUtil.addStructure(
 				_group.getGroupId(), JournalArticle.class.getName());
 
 		DDMTemplate basicWebContentTemplate = DDMTemplateTestUtil.addTemplate(
-			_group.getGroupId(), _basicWebContentStructure.getStructureId());
+			_group.getGroupId(), _basicWebContentDDMStructure.getStructureId());
 
 		_article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), _folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 1</title>",
-			_basicWebContentStructure.getStructureKey(),
+			_basicWebContentDDMStructure.getStructureKey(),
 			basicWebContentTemplate.getTemplateKey());
 
 		JournalFolder folder = JournalTestUtil.addFolder(
@@ -105,7 +105,7 @@ public class JournalArticleFinderTest {
 			_group.getGroupId(), folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 3</title>",
-			_basicWebContentStructure.getStructureKey(),
+			_basicWebContentDDMStructure.getStructureKey(),
 			basicWebContentTemplate.getTemplateKey());
 
 		article.setUserId(_USER_ID);
@@ -251,7 +251,7 @@ public class JournalArticleFinderTest {
 
 		doQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-			_basicWebContentStructure.getStructureKey(), queryDefinition, 2);
+			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 2);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
@@ -261,7 +261,7 @@ public class JournalArticleFinderTest {
 
 		doQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-			_basicWebContentStructure.getStructureKey(), queryDefinition, 1);
+			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
@@ -271,7 +271,7 @@ public class JournalArticleFinderTest {
 
 		doQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-			_basicWebContentStructure.getStructureKey(), queryDefinition, 1);
+			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
 	}
 
 	@Test
@@ -402,7 +402,7 @@ public class JournalArticleFinderTest {
 	private static final long _USER_ID = 1234L;
 
 	private JournalArticle _article;
-	private DDMStructure _basicWebContentStructure;
+	private DDMStructure _basicWebContentDDMStructure;
 	private DDMStructure _ddmStructure;
 	private JournalFolder _folder;
 	private List<Long> _folderIds = new ArrayList<Long>();
