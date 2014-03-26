@@ -202,25 +202,24 @@ public class TrackbackAction extends PortletAction {
 	}
 
 	protected void validate(
-			ActionRequest actionRequest, String remoteIp, String url)
+			ActionRequest actionRequest, String remoteIP, String url)
 		throws Exception {
 
 		if (!isCommentsEnabled(actionRequest)) {
-			throw new TrackbackValidationException(
-				"Comments have been disabled for this blog entry.");
+			throw new TrackbackValidationException("Comments are disabled");
 		}
 
 		if (Validator.isNull(url)) {
 			throw new TrackbackValidationException(
-				"Trackback requires a valid permanent URL.");
+				"Trackback requires a valid permanent URL");
 		}
 
-		String trackbackIp = HttpUtil.getIpAddress(url);
+		String trackbackIP = HttpUtil.getIpAddress(url);
 
-		if (!remoteIp.equals(trackbackIp)) {
+		if (!remoteIP.equals(trackbackIP)) {
 			throw new TrackbackValidationException(
-				"Remote IP " + remoteIp +
-					" does not match trackback URL's IP " + trackbackIp + ".");
+				"Remote IP " + remoteIP +
+					" does not match the trackback URL's IP " + trackbackIP);
 		}
 	}
 
@@ -229,7 +228,7 @@ public class TrackbackAction extends PortletAction {
 
 		if (!entry.isAllowTrackbacks()) {
 			throw new TrackbackValidationException(
-				"Trackbacks are not enabled on this blog entry.");
+				"Trackbacks are not enabled");
 		}
 	}
 

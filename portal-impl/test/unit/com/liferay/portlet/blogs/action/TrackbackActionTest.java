@@ -82,31 +82,31 @@ public class TrackbackActionTest extends PowerMockito {
 
 		addTrackback();
 
-		assertError("Comments have been disabled for this blog entry.");
+		assertError("Comments are disabled");
 	}
 
 	@Test
-	public void testMismatchedIpAddress() throws Exception {
-		initUrl("BOGUS-IP");
+	public void testMismatchedIPAddress() throws Exception {
+		initURL("123");
 
 		addTrackback();
 
 		assertError(
-			"Remote IP 127.0.0.1 does not match trackback URL's IP BOGUS-IP.");
+			"Remote IP 127.0.0.1 does not match the trackback URL's IP 123");
 	}
 
 	@Test
 	public void testMissingURL() throws Exception {
 		addTrackback();
 
-		assertError("Trackback requires a valid permanent URL.");
+		assertError("Trackback requires a valid permanent URL");
 	}
 
 	@Test(expected = NoSuchEntryException.class)
 	public void testNoSuchEntryException() throws Exception {
 		whenGetEntryThenThrow(new NoSuchEntryException());
 
-		initValidUrl();
+		initValidURL();
 
 		addTrackback();
 
@@ -117,31 +117,23 @@ public class TrackbackActionTest extends PowerMockito {
 	public void testPrincipalException() throws Exception {
 		whenGetEntryThenThrow(new PrincipalException());
 
-		initValidUrl();
+		initValidURL();
 
 		addTrackback();
 
 		assertError(
-			"Blog entry must have guest view permissions to enable trackbacks."
-		);
+			"Blog entry must have guest view permissions to enable trackbacks.");
 	}
 
 	@Test
 	public void testSuccess() throws Exception {
-
-		// Prepare
-
 		_mockOriginalServletRequest.setParameter("blog_name", "__blogName__");
-		_mockOriginalServletRequest.setParameter("title", "__title__");
 		_mockOriginalServletRequest.setParameter("excerpt", "__excerpt__");
+		_mockOriginalServletRequest.setParameter("title", "__title__");
 
-		initValidUrl();
-
-		// Execute
+		initValidURL();
 
 		addTrackback();
-
-		// Verify
 
 		assertSuccess();
 
@@ -163,11 +155,11 @@ public class TrackbackActionTest extends PowerMockito {
 			false
 		);
 
-		initValidUrl();
+		initValidURL();
 
 		addTrackback();
 
-		assertError("Trackbacks are not enabled on this blog entry.");
+		assertError("Trackbacks are not enabled");
 	}
 
 	protected void addTrackback() throws Exception {
@@ -178,11 +170,8 @@ public class TrackbackActionTest extends PowerMockito {
 
 	protected void assertError(String msg) throws Exception {
 		assertResponseContent(
-			"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-				"<response><error>1</error><message>" +
-				msg +
-				"</message></response>"
-		);
+			"<?xml version=\"1.0\" encoding=\"utf-8\"?><response><error>1" +
+				"</error><message>" + msg + "</message></response>");
 	}
 
 	protected void assertResponseContent(String expected) throws Exception {
@@ -192,25 +181,24 @@ public class TrackbackActionTest extends PowerMockito {
 
 	protected void assertSuccess() throws Exception {
 		assertResponseContent(
-			"<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
-				"<response><error>0</error></response>"
-		);
+			"<?xml version=\"1.0\" encoding=\"utf-8\"?><response><error>0" +
+				"</error></response>");
 	}
 
-	protected void initUrl(String remoteIp) {
+	protected void initURL(String remoteIP) {
 		String url = "__url__";
 
 		when(
 			_http.getIpAddress(url)
 		).thenReturn(
-			remoteIp
+			remoteIP
 		);
 
 		_mockOriginalServletRequest.addParameter("url", url);
 	}
 
-	protected void initValidUrl() {
-		initUrl(_mockHttpServletRequest.getRemoteAddr());
+	protected void initValidURL() {
+		initURL(_mockHttpServletRequest.getRemoteAddr());
 	}
 
 	protected void setUpActionRequest() {
@@ -266,11 +254,15 @@ public class TrackbackActionTest extends PowerMockito {
 			_mockHttpServletResponse
 		);
 
-		new PortalUtil().setPortal(portal);
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(portal);
 
 		PropsUtil.setProps(mock(Props.class));
 
-		new HttpUtil().setHttp(_http);
+		HttpUtil httpUtil = new HttpUtil();
+
+		httpUtil.setHttp(_http);
 	}
 
 	protected void whenGetEntryThenThrow(Throwable toBeThrown)
