@@ -20,10 +20,11 @@ import com.liferay.portal.kernel.util.ReflectionUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.lang.reflect.Field;
@@ -36,7 +37,7 @@ import org.junit.runner.RunWith;
  * @author Carlos Sierra
  * @author Akos Thurzo
  */
-@ExecutionTestListeners(listeners = {EnvironmentExecutionTestListener.class})
+@ExecutionTestListeners(listeners = {MainServletExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 public class PortalImplLayoutSetFriendlyURLTest
 	extends PortalImplBaseURLTestCase {
@@ -48,9 +49,9 @@ public class PortalImplLayoutSetFriendlyURLTest
 
 		Object value = field.get(null);
 
-		try {
-			Group defaultGroup = GroupTestUtil.addGroup();
+		Group defaultGroup = GroupTestUtil.addGroup();
 
+		try {
 			field.set(null, defaultGroup.getName());
 
 			ThemeDisplay themeDisplay = initThemeDisplay(
@@ -68,6 +69,8 @@ public class PortalImplLayoutSetFriendlyURLTest
 		}
 		finally {
 			field.set(null, value);
+
+			GroupLocalServiceUtil.deleteGroup(defaultGroup);
 		}
 	}
 
