@@ -22,6 +22,7 @@ import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.model.impl.EmailAddressModelImpl;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
+import com.liferay.portal.test.TransactionalExecutionTestListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,7 +31,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import com.liferay.portal.test.TransactionalExecutionTestListener;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
