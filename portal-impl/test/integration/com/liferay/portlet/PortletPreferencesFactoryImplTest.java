@@ -157,7 +157,8 @@ public class PortletPreferencesFactoryImplTest {
 
 	@Test
 	public void testEmptyPortletPreferences() throws SystemException {
-		String expectedXML = "<portlet-preferences></portlet-preferences>";
+		String expectedXML =
+			PortletPreferencesTestUtil.getPortletPreferencesXML();
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
@@ -210,14 +211,13 @@ public class PortletPreferencesFactoryImplTest {
 
 	@Test
 	public void testMultiplePreferences() throws Exception {
+		String[] values = {"value1", "value2"};
+
 		String expectedXML =
-			PortletPreferencesTestUtil.getPortletPreferencesXML(
-				"name", new String[] {"value1", "value2"});
+			PortletPreferencesTestUtil.getPortletPreferencesXML("name", values);
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
-
-		String[] values = {"value1", "value2"};
 
 		portletPreferencesImpl.setValues("name", values);
 
