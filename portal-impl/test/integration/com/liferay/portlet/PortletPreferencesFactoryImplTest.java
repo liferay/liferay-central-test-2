@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.util.PortletPreferencesTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
@@ -34,8 +35,8 @@ public class PortletPreferencesFactoryImplTest {
 	@Test
 	public void testBlankPreference() throws Exception {
 		String expectedXML =
-			"<portlet-preferences><preference><name>name</name><value>" +
-				"</value></preference></portlet-preferences>";
+			PortletPreferencesTestUtil.getPortletPreferencesXML(
+				"name", new String[] {StringPool.BLANK});
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
@@ -179,8 +180,8 @@ public class PortletPreferencesFactoryImplTest {
 	@Test
 	public void testEmptyPreference() throws Exception {
 		String expectedXML =
-			"<portlet-preferences><preference><name>name</name></preference>" +
-				"</portlet-preferences>";
+			PortletPreferencesTestUtil.getPortletPreferencesXML(
+				"name", new String[0]);
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
@@ -210,9 +211,8 @@ public class PortletPreferencesFactoryImplTest {
 	@Test
 	public void testMultiplePreferences() throws Exception {
 		String expectedXML =
-			"<portlet-preferences><preference><name>name</name><value>value1" +
-				"</value><value>value2</value></preference>" +
-					"</portlet-preferences>";
+			PortletPreferencesTestUtil.getPortletPreferencesXML(
+				"name", new String[] {"value1", "value2"});
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
@@ -248,8 +248,8 @@ public class PortletPreferencesFactoryImplTest {
 	@Test
 	public void testSinglePreference() throws Exception {
 		String expectedXML =
-			"<portlet-preferences><preference><name>name</name><value>value" +
-				"</value></preference></portlet-preferences>";
+			PortletPreferencesTestUtil.getPortletPreferencesXML(
+				"name", new String[] {"value"});
 
 		PortletPreferencesImpl portletPreferencesImpl =
 			new PortletPreferencesImpl();
