@@ -56,15 +56,10 @@ public class LocaleUtilTest extends PowerMockito {
 		List<LogRecord> logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			LocaleUtil.class.getName(), Level.WARNING);
 
-		// US locale
-
 		Assert.assertEquals(Locale.US, LocaleUtil.fromLanguageId("en_US"));
-
 		Assert.assertEquals(0,  logRecords.size());
 
 		logRecords.clear();
-
-		// Illegal argument exception
 
 		LocaleUtil.fromLanguageId("en");
 
