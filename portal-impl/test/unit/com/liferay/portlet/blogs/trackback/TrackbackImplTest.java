@@ -25,7 +25,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -52,9 +51,8 @@ public class TrackbackImplTest extends PowerMockito {
 	public static void addNewTrackback(
 		long messageId, String url, String entryURL) {
 
-		List<Object> list = Arrays.<Object>asList(messageId, url, entryURL);
-
-		_linkback = list.toString();
+		_linkback = String.valueOf(
+			Arrays.<Object>asList(messageId, url, entryURL));
 	}
 
 	@Before
@@ -69,27 +67,12 @@ public class TrackbackImplTest extends PowerMockito {
 
 	@Test
 	public void testAddTrackback() throws Exception {
-
-		// Prepare
-
-		long userId = 42;
+		long entryId = 142857;
 
 		when(
-			_userLocalService.getDefaultUserId(Matchers.anyLong())
+			_blogsEntry.getEntryId()
 		).thenReturn(
-			userId
-		);
-
-		when(
-			_themeDisplay.translate("read-more")
-		).thenReturn(
-			"__read-more__"
-		);
-
-		when(
-			_portal.getLayoutFullURL(_themeDisplay)
-		).thenReturn(
-			"__LayoutFullURL__"
+			entryId
 		);
 
 		long groupId = 16;
@@ -100,18 +83,30 @@ public class TrackbackImplTest extends PowerMockito {
 			groupId
 		);
 
-		long classPK = 142857;
-
-		when(
-			_blogsEntry.getEntryId()
-		).thenReturn(
-			classPK
-		);
-
 		when(
 			_blogsEntry.getUrlTitle()
 		).thenReturn(
 			"__UrlTitle__"
+		);
+
+		when(
+			_portal.getLayoutFullURL(_themeDisplay)
+		).thenReturn(
+			"__LayoutFullURL__"
+		);
+
+		when(
+			_themeDisplay.translate("read-more")
+		).thenReturn(
+			"__read-more__"
+		);
+
+		long userId = 42;
+
+		when(
+			_userLocalService.getDefaultUserId(Matchers.anyLong())
+		).thenReturn(
+			userId
 		);
 
 		when(
@@ -125,25 +120,19 @@ public class TrackbackImplTest extends PowerMockito {
 			99999L
 		);
 
-		// Execute
+		Trackback trackback = new TrackbackImpl(_trackbackComments);
 
-		TrackbackImpl _trackbacks = new TrackbackImpl(_trackbackComments);
-
-		_trackbacks.addTrackback(
+		trackback.addTrackback(
 			_blogsEntry, _themeDisplay, "__excerpt__", "__url__",
 			"__blogName__", "__title__", _serviceContextFunction
 		);
 
-		// Verify
-
-		String className = BlogsEntry.class.getName();
-
 		Mockito.verify(
 			_trackbackComments
 		).addTrackbackComment(
-			Matchers.eq(userId), Matchers.eq(groupId), Matchers.eq(className),
-			Matchers.eq(classPK), Matchers.eq("__blogName__"),
-			Matchers.eq("__title__"),
+			Matchers.eq(userId), Matchers.eq(groupId),
+			Matchers.eq(BlogsEntry.class.getName()), Matchers.eq(entryId),
+			Matchers.eq("__blogName__"), Matchers.eq("__title__"),
 			Matchers.eq(
 				"[...] __excerpt__ [...] [url=__url__]__read-more__[/url]"),
 			Matchers.same(_serviceContextFunction)
@@ -157,16 +146,20 @@ public class TrackbackImplTest extends PowerMockito {
 	protected void setUpLinkbackConsumer() throws Exception {
 		mockStatic(LinkbackConsumerUtil.class, new CallsRealMethods());
 
+		Class<?> clazz = getClass();
+
 		replace(
 			method(LinkbackConsumerUtil.class, "addNewTrackback")
 		).with(
-			getClass().getMethod(
+			clazz.getMethod(
 				"addNewTrackback", Long.TYPE,String.class, String.class)
 		);
 	}
 
 	protected void setUpPortal() {
-		new PortalUtil().setPortal(_portal);
+		PortalUtil portalUtil = new PortalUtil();
+
+		portalUtil.setPortal(_portal);
 	}
 
 	protected void setUpThemeDisplay() throws Exception {

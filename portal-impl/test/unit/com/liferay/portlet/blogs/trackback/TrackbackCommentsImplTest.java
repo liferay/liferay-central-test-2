@@ -56,12 +56,12 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 
 	@Test
 	public void testAddTrackbackComment() throws Exception {
-		long threadId = 7;
+		long messageId = 99999L;
 
 		when(
-			_mbThread.getThreadId()
+			_mbMessage.getMessageId()
 		).thenReturn(
-			threadId
+			messageId
 		);
 
 		long parentMessageId = 37;
@@ -72,12 +72,12 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 			parentMessageId
 		);
 
-		long messageId = 99999L;
+		long threadId = 7;
 
 		when(
-			_mbMessage.getMessageId()
+			_mbThread.getThreadId()
 		).thenReturn(
-			messageId
+			threadId
 		);
 
 		long userId = 42;
@@ -85,11 +85,11 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 		String className = BlogsEntry.class.getName();
 		long classPK = 142857;
 
-		long result = _trackbackComments.addTrackbackComment(
-			userId, groupId, className, classPK, "__blogName__", "__title__",
-			"__body__", _serviceContextFunction);
-
-		Assert.assertEquals(messageId, result);
+		Assert.assertEquals(
+			messageId,
+			_trackbackComments.addTrackbackComment(
+				userId, groupId, className, classPK, "__blogName__",
+				"__title__", "__body__", _serviceContextFunction));
 
 		Mockito.verify(
 			_mbMessageLocalService
@@ -154,8 +154,6 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 		);
 	}
 
-	private TrackbackComments _trackbackComments = new TrackbackCommentsImpl();
-
 	@Mock
 	private MBMessage _mbMessage;
 
@@ -172,5 +170,7 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 
 	@Mock
 	private Function<String, ServiceContext> _serviceContextFunction;
+
+	private TrackbackComments _trackbackComments = new TrackbackCommentsImpl();
 
 }

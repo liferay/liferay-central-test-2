@@ -33,7 +33,7 @@ import com.liferay.portlet.blogs.util.LinkbackConsumerUtil;
 public class TrackbackImpl implements Trackback {
 
 	public TrackbackImpl() {
-		_comments = new TrackbackCommentsImpl();
+		_trackbackComments = new TrackbackCommentsImpl();
 	}
 
 	@Override
@@ -49,22 +49,22 @@ public class TrackbackImpl implements Trackback {
 		String className = BlogsEntry.class.getName();
 		long classPK = entry.getEntryId();
 
-		String body = _buildBody(themeDisplay, excerpt, url);
+		String body = buildBody(themeDisplay, excerpt, url);
 
-		long messageId = _comments.addTrackbackComment(
+		long messageId = _trackbackComments.addTrackbackComment(
 			userId, groupId, className, classPK, blogName, title, body,
 			serviceContextFunction);
 
-		String entryURL = _buildEntryURL(entry, themeDisplay);
+		String entryURL = buildEntryURL(entry, themeDisplay);
 
 		LinkbackConsumerUtil.addNewTrackback(messageId, url, entryURL);
 	}
 
-	protected TrackbackImpl(TrackbackComments comments) {
-		_comments = comments;
+	protected TrackbackImpl(TrackbackComments trackbackComments) {
+		_trackbackComments = trackbackComments;
 	}
 
-	private String _buildBody(
+	protected String buildBody(
 		ThemeDisplay themeDisplay, String excerpt, String url) {
 
 		StringBundler sb = new StringBundler(7);
@@ -80,7 +80,7 @@ public class TrackbackImpl implements Trackback {
 		return sb.toString();
 	}
 
-	private String _buildEntryURL(BlogsEntry entry, ThemeDisplay themeDisplay)
+	protected String buildEntryURL(BlogsEntry entry, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		StringBundler sb = new StringBundler(4);
@@ -93,6 +93,6 @@ public class TrackbackImpl implements Trackback {
 		return sb.toString();
 	}
 
-	private TrackbackComments _comments;
+	private TrackbackComments _trackbackComments;
 
 }

@@ -129,7 +129,7 @@ public class TrackbackAction extends PortletAction {
 		catch (PrincipalException pe) {
 			throw new TrackbackValidationException(
 				"Blog entry must have guest view permissions to enable " +
-					"trackbacks.");
+					"trackbacks");
 		}
 
 		return (BlogsEntry)actionRequest.getAttribute(WebKeys.BLOGS_ENTRY);

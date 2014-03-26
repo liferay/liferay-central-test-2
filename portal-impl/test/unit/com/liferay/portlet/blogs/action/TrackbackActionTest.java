@@ -122,7 +122,7 @@ public class TrackbackActionTest extends PowerMockito {
 		addTrackback();
 
 		assertError(
-			"Blog entry must have guest view permissions to enable trackbacks.");
+			"Blog entry must have guest view permissions to enable trackbacks");
 	}
 
 	@Test
