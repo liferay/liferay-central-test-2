@@ -56,9 +56,6 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 
 	@Test
 	public void testAddTrackbackComment() throws Exception {
-
-		// Prepare
-
 		long threadId = 7;
 
 		when(
@@ -83,18 +80,14 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 			messageId
 		);
 
-		// Execute
-
 		long userId = 42;
 		long groupId = 16;
 		String className = BlogsEntry.class.getName();
 		long classPK = 142857;
 
-		long result = _comments.addTrackbackComment(
+		long result = _trackbackComments.addTrackbackComment(
 			userId, groupId, className, classPK, "__blogName__", "__title__",
 			"__body__", _serviceContextFunction);
-
-		// Verify
 
 		Assert.assertEquals(messageId, result);
 
@@ -112,27 +105,15 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 			Matchers.eq(groupId), Matchers.eq(className), Matchers.eq(classPK),
 			Matchers.eq(threadId), Matchers.eq(parentMessageId),
 			Matchers.eq("__title__"), Matchers.eq("__body__"),
-			Matchers.same(_mockServiceContext)
+			Matchers.same(_serviceContext)
 		);
 	}
 
 	protected void setUpMessageBoards() throws Exception {
-		mockStatic(MBMessageLocalServiceUtil.class, new CallsRealMethods());
-
-		stub(
-			method(MBMessageLocalServiceUtil.class, "getService")
-		).toReturn(
-			_mbMessageLocalService
-		);
-
 		when(
-			_mbMessageLocalService.getDiscussionMessageDisplay(
-				Matchers.anyLong(), Matchers.anyLong(),
-				Matchers.eq(BlogsEntry.class.getName()), Matchers.anyLong(),
-				Matchers.eq(WorkflowConstants.STATUS_APPROVED)
-			)
+			_mbMessageDisplay.getThread()
 		).thenReturn(
-			_mbMessageDisplay
+			_mbThread
 		);
 
 		when(
@@ -147,9 +128,21 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 		);
 
 		when(
-			_mbMessageDisplay.getThread()
+			_mbMessageLocalService.getDiscussionMessageDisplay(
+				Matchers.anyLong(), Matchers.anyLong(),
+				Matchers.eq(BlogsEntry.class.getName()), Matchers.anyLong(),
+				Matchers.eq(WorkflowConstants.STATUS_APPROVED)
+			)
 		).thenReturn(
-			_mbThread
+			_mbMessageDisplay
+		);
+
+		mockStatic(MBMessageLocalServiceUtil.class, new CallsRealMethods());
+
+		stub(
+			method(MBMessageLocalServiceUtil.class, "getService")
+		).toReturn(
+			_mbMessageLocalService
 		);
 	}
 
@@ -157,11 +150,11 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 		when(
 			_serviceContextFunction.apply(MBMessage.class.getName())
 		).thenReturn(
-			_mockServiceContext
+			_serviceContext
 		);
 	}
 
-	private TrackbackCommentsImpl _comments = new TrackbackCommentsImpl();
+	private TrackbackComments _trackbackComments = new TrackbackCommentsImpl();
 
 	@Mock
 	private MBMessage _mbMessage;
@@ -175,7 +168,7 @@ public class TrackbackCommentsImplTest extends PowerMockito {
 	@Mock
 	private MBThread _mbThread;
 
-	private ServiceContext _mockServiceContext = new ServiceContext();
+	private ServiceContext _serviceContext = new ServiceContext();
 
 	@Mock
 	private Function<String, ServiceContext> _serviceContextFunction;

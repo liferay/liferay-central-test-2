@@ -50,9 +50,9 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class TrackbackImplTest extends PowerMockito {
 
 	public static void addNewTrackback(
-		long messageId, String url, String entryUrl) {
+		long messageId, String url, String entryURL) {
 
-		List<Object> list = Arrays.<Object>asList(messageId, url, entryUrl);
+		List<Object> list = Arrays.<Object>asList(messageId, url, entryURL);
 
 		_linkback = list.toString();
 	}
