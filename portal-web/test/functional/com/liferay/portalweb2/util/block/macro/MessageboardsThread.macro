@@ -74,17 +74,10 @@
 			<then>
 				<execute macro="MessageboardsThread#addTagPG" />
 			</then>
-		</if>		
-		
+		</if>
+
 		<execute action="PGMessageboardsPostthread#click" locator-key1="PUBLISH_BUTTON" />
 		<execute action="PGMessageboards#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
-
-		<if>
-			<equals arg1="${threadAddTag}" arg2="true" />
-			<then>
-				<execute macro="MessageboardsThread#viewTagPG" />
-			</then>
-		</if>
 	</command>
 
 	<command name="addTagPG">
@@ -356,7 +349,7 @@
 		<execute action="Permissions#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
 		<execute action="Permissions#selectFrame" value1="relative=top" />
 	</command>
-	
+
 	<command name="replyCP">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
@@ -620,7 +613,7 @@
 			</elseif>
 		</if>
 	</command>
-	
+
 	<command name="viewReplyCP">
 		<var name="key_threadSubject" value="${threadSubject}" />
 
@@ -771,7 +764,7 @@
 			</else>
 		</if>
 	</command>
-	
+
 	<command name="viewWaitingForAnswerPG">
 		<var name="key_threadSubject" value="${threadSubject}" />
 

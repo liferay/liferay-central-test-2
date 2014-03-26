@@ -145,6 +145,13 @@
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_BODY_1" value1="${threadBody}" />
 		<execute action="PGMessageboardsThread#assertTextEquals" locator-key1="MESSAGE_RATING_1" value1="0 (0 Votes)" />
 		<execute action="PGMessageboardsThread#assertElementNotPresent" locator-key1="MESSAGE_WORKFLOW_STATUS_1" />
+
+		<if>
+			<equals arg1="${threadAddTag}" arg2="true" />
+			<then>
+				<execute macro="MessageboardsThread#viewTagPG" />
+			</then>
+		</if>
 	</command>
 
 	<command name="viewRecentPostsPG">
@@ -213,23 +220,6 @@
 	</command>
 
 	<command name="viewReplyPG">
-		<var name="key_threadSubject" value="${threadSubject}" />
-
-		<if>
-			<condition action="SOUserBar#isElementNotPresent" locator-key1="VISIBLE_PAGE_CONTROLS" />
-			<then>
-				<execute action="SOUserBar#click" locator-key1="TOGGLE_DOCKBAR" />
-			</then>
-		</if>
-
-		<if>
-			<condition action="SOUserBar#isElementPresent" locator-key1="EDIT_CONTROLS_NOT_FLAGGED" />
-			<then>
-				<execute action="Dockbar#mouseOver" locator-key1="EDIT_CONTROLS" />
-				<execute action="Dockbar#click" locator-key1="EDIT_CONTROLS" />
-			</then>
-		</if>
-
 		<if>
 			<isset var="postCount" />
 			<then>
@@ -237,6 +227,16 @@
 			</then>
 			<else>
 				<var name="postCount" value="2" />
+			</else>
+		</if>
+
+		<if>
+			<isset var="categoryPostCount" />
+			<then>
+				<var name="categoryPostCount" value="${categoryPostCount}" />
+			</then>
+			<else>
+				<var name="categoryPostCount" value="2" />
 			</else>
 		</if>
 

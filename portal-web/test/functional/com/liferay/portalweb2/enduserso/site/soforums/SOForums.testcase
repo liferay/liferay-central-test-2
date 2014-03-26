@@ -421,13 +421,26 @@
 		</execute>
 
 		<execute macro="MessageboardsThread#addPG">
+			<var name="tagName" value="${tagName}" />
 			<var name="threadAddTag" value="true" />
 			<var name="threadBody" value="${threadBody}" />
 			<var name="threadSubject" value="${threadSubject}" />
 		</execute>
 
-		<execute macro="MessageboardsThread#viewTagPG">
+		<execute macro="Page#gotoPG">
+			<var name="siteName" value="${siteName}" />
+			<var name="siteURL" value="true" />
+		</execute>
+
+		<execute macro="SOForumsCategoryThread#viewPG">
+			<var name="categoryName" value="${categoryName}" />
+			<var name="pageName" value="${pageName}" />
+			<var name="siteName" value="${siteName}" />
 			<var name="tagName" value="${tagName}" />
+			<var name="threadAddTag" value="true" />
+			<var name="threadBody" value="${threadBody}" />
+			<var name="threadSubject" value="${threadSubject}" />
+			<var name="userName" value="${adminName}" />
 		</execute>
 	</command>
 
@@ -781,7 +794,7 @@
 		</execute>
 	</command>
 
-	<command name="ViewMBCategoryThreadAsGuest" priority="4">
+	<command name="ViewMBCategoryThreadAsGuest" known-issues="LPS-45435" priority="4">
 		<var name="categoryName1" value="MB Category 1 Name" />
 		<var name="categoryName2" value="MB Category 2 Name" />
 		<var name="postCount" value="1" />
