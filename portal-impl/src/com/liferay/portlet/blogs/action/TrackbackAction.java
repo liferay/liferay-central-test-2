@@ -87,6 +87,10 @@ public class TrackbackAction extends PortletAction {
 		throws Exception {
 
 		try {
+			BlogsEntry entry = getBlogsEntry(actionRequest);
+
+			validate(entry);
+
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
@@ -96,16 +100,12 @@ public class TrackbackAction extends PortletAction {
 			HttpServletRequest originalRequest =
 				PortalUtil.getOriginalServletRequest(request);
 
-			String title = ParamUtil.getString(originalRequest, "title");
 			String excerpt = ParamUtil.getString(originalRequest, "excerpt");
 			String url = ParamUtil.getString(originalRequest, "url");
 			String blogName = ParamUtil.getString(originalRequest, "blog_name");
+			String title = ParamUtil.getString(originalRequest, "title");
 
 			validate(actionRequest, request.getRemoteAddr(), url);
-
-			BlogsEntry entry = getBlogsEntry(actionRequest);
-
-			validate(entry);
 
 			_trackback.addTrackback(
 				entry, themeDisplay, excerpt, url, blogName, title,

@@ -45,8 +45,8 @@ import org.powermock.modules.junit4.PowerMockRunner;
 /**
  * @author André de Oliveira
  */
+@PrepareForTest({LinkbackConsumerUtil.class, UserLocalServiceUtil.class})
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({UserLocalServiceUtil.class, LinkbackConsumerUtil.class})
 public class TrackbackImplTest extends PowerMockito {
 
 	public static void addNewTrackback(
