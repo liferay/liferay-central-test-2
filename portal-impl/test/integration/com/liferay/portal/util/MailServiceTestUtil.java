@@ -14,14 +14,12 @@
 
 package com.liferay.portal.util;
 
+import com.dumbster.smtp.MailMessage;
 import com.dumbster.smtp.ServerOptions;
 import com.dumbster.smtp.SmtpServer;
 import com.dumbster.smtp.SmtpServerFactory;
-import com.dumbster.smtp.MailMessage;
-import com.dumbster.smtp.SmtpServerFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**

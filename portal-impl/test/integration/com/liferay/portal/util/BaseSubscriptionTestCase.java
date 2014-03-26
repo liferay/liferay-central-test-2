@@ -51,6 +51,7 @@ public abstract class BaseSubscriptionTestCase {
 	@After
 	public void tearDown() throws Exception {
 		GroupLocalServiceUtil.deleteGroup(group);
+
 		LocaleThreadLocal.setDefaultLocale(defaultLocale);
 	}
 
