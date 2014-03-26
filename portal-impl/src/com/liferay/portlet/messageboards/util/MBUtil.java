@@ -313,7 +313,7 @@ public class MBUtil {
 	public static String getBBCodeHTML(String msgBody, String pathThemeImages) {
 		return StringUtil.replace(
 			BBCodeTranslatorUtil.getHTML(msgBody),
-			ThemeConstants.THEME_IMAGES_PATH + EMOTICONS,
+			ThemeConstants.TOKEN_THEME_IMAGES_PATH + EMOTICONS,
 			pathThemeImages + EMOTICONS);
 	}
 
@@ -943,7 +943,7 @@ public class MBUtil {
 		return StringUtil.replace(
 			messageBody,
 			new String[] {
-				ThemeConstants.THEME_IMAGES_PATH, "href=\"/", "src=\"/"
+				ThemeConstants.TOKEN_THEME_IMAGES_PATH, "href=\"/", "src=\"/"
 			},
 			new String[] {
 				themeDisplay.getPathThemeImages(),

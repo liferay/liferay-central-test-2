@@ -19,6 +19,6 @@ package com.liferay.portal.model;
  */
 public class ThemeConstants {
 
-	public static final String THEME_IMAGES_PATH = "@theme_images_path@";
+	public static final String TOKEN_THEME_IMAGES_PATH = "@theme_images_path@";
 
 }

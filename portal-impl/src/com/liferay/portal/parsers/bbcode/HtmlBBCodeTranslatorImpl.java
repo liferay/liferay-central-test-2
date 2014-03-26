@@ -86,7 +86,7 @@ public class HtmlBBCodeTranslatorImpl implements BBCodeTranslator {
 			StringBuilder sb = new StringBuilder(6);
 
 			sb.append("<img alt=\"emoticon\" src=\"");
-			sb.append(ThemeConstants.THEME_IMAGES_PATH);
+			sb.append(ThemeConstants.TOKEN_THEME_IMAGES_PATH);
 			sb.append(MBUtil.EMOTICONS);
 			sb.append("/");
 			sb.append(image);
