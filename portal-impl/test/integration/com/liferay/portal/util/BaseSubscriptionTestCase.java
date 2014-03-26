@@ -14,7 +14,7 @@
 
 package com.liferay.portal.util;
 
-import com.dumbster.smtp.SmtpMessage;
+import com.dumbster.smtp.MailMessage;
 
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -163,18 +163,18 @@ public abstract class BaseSubscriptionTestCase {
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		List<SmtpMessage> smtpMessages = MailServiceTestUtil.getMessages(
+		List<MailMessage> messages = MailServiceTestUtil.getMessages(
 			"Body", _GERMAN_BODY);
 
-		Assert.assertEquals(1, smtpMessages.size());
+		Assert.assertEquals(1, messages.size());
 
 		LocaleThreadLocal.setDefaultLocale(LocaleUtil.SPAIN);
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		smtpMessages = MailServiceTestUtil.getMessages("Body", _SPANISH_BODY);
+		messages = MailServiceTestUtil.getMessages("Body", _SPANISH_BODY);
 
-		Assert.assertEquals(1, smtpMessages.size());
+		Assert.assertEquals(1, messages.size());
 	}
 
 	@Test
