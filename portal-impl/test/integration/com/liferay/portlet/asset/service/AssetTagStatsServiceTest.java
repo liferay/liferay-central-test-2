@@ -46,7 +46,6 @@ import org.junit.runner.RunWith;
 public class AssetTagStatsServiceTest {
 
 	@Test
-	@Transactional
 	public void testGetTagStats() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			TestPropsValues.getGroupId());
