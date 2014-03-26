@@ -63,6 +63,16 @@ public class PortletPreferencesTestUtil {
 			portlet.getPortletId(), portlet, defaultPreferences);
 	}
 
+	public static PortletPreferencesImpl deserialize(String xml)
+		throws Exception {
+
+		PortletPreferencesImpl portletPreferencesImpl =
+			(PortletPreferencesImpl)
+				PortletPreferencesFactoryUtil.fromDefaultXML(xml);
+
+		return portletPreferencesImpl;
+	}
+
 	public static javax.portlet.PortletPreferences
 			fetchLayoutJxPortletPreferences(
 				Layout layout, Portlet portlet)

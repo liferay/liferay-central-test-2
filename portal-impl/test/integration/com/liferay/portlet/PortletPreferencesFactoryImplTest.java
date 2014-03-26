@@ -15,6 +15,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.util.PortletPreferencesTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
 import java.util.Map;
@@ -46,7 +47,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = deserialize(expectedXML);
+		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
+			expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -93,7 +95,8 @@ public class PortletPreferencesFactoryImplTest {
 		String actualXML = PortletPreferencesFactoryUtil.toXML(
 			portletPreferencesImpl);
 
-		portletPreferencesImpl = deserialize(actualXML);
+		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
+			actualXML);
 
 		preferencesMap = portletPreferencesImpl.getPreferences();
 
@@ -189,7 +192,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = deserialize(expectedXML);
+		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
+			expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -222,7 +226,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = deserialize(expectedXML);
+		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
+			expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -256,7 +261,8 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(expectedXML, actualXML);
 
-		portletPreferencesImpl = deserialize(expectedXML);
+		portletPreferencesImpl = PortletPreferencesTestUtil.deserialize(
+			expectedXML);
 
 		Map<String, Preference> preferencesMap =
 			portletPreferencesImpl.getPreferences();
@@ -271,14 +277,6 @@ public class PortletPreferencesFactoryImplTest {
 
 		Assert.assertEquals(1, values.length);
 		Assert.assertEquals("value", values[0]);
-	}
-
-	protected PortletPreferencesImpl deserialize(String xml) throws Exception {
-		PortletPreferencesImpl portletPreferencesImpl =
-			(PortletPreferencesImpl)
-				PortletPreferencesFactoryUtil.fromDefaultXML(xml);
-
-		return portletPreferencesImpl;
 	}
 
 }
