@@ -1223,7 +1223,7 @@ $editLayoutPanelWidth: 460px;
 		@include background-image(none);
 	}
 
-	/* -------- Media Queries -------- */
+	/* -------- Media queries -------- */
 
 	@media (min-width: 1400px) {
 		.dockbar-split {
