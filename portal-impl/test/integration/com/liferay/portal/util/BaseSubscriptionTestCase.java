@@ -164,7 +164,7 @@ public abstract class BaseSubscriptionTestCase {
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		List<MailMessage> messages = MailServiceTestUtil.getMessages(
+		List<MailMessage> messages = MailServiceTestUtil.getMailMessages(
 			"Body", _GERMAN_BODY);
 
 		Assert.assertEquals(1, messages.size());
@@ -173,7 +173,7 @@ public abstract class BaseSubscriptionTestCase {
 
 		addBaseModel(_PARENT_CONTAINER_MODEL_ID_DEFAULT);
 
-		messages = MailServiceTestUtil.getMessages("Body", _SPANISH_BODY);
+		messages = MailServiceTestUtil.getMailMessages("Body", _SPANISH_BODY);
 
 		Assert.assertEquals(1, messages.size());
 	}
@@ -286,8 +286,6 @@ public abstract class BaseSubscriptionTestCase {
 	protected Locale defaultLocale;
 	protected Group group;
 	protected Layout layout;
-
-	private static final long _CLASS_TYPE_ID_DEFAULT = 0;
 
 	private static final String _GERMAN_BODY = "Hallo Welt";
 

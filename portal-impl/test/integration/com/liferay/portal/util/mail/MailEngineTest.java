@@ -49,19 +49,19 @@ public class MailEngineTest {
 
 		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
 
-		List<com.dumbster.smtp.MailMessage> messages =
-			MailServiceTestUtil.getMessages(
+		List<com.dumbster.smtp.MailMessage> mailMessages =
+			MailServiceTestUtil.getMailMessages(
 				"Body", "My name is Inigo Montoya.");
 
-		Assert.assertEquals(1, messages.size());
+		Assert.assertEquals(1, mailMessages.size());
 
-		messages = MailServiceTestUtil.getMessages("Subject", "Hello");
+		mailMessages = MailServiceTestUtil.getMailMessages("Subject", "Hello");
 
-		Assert.assertEquals(1, messages.size());
+		Assert.assertEquals(1, mailMessages.size());
 
-		messages = MailServiceTestUtil.getMessages("To", "to@test.com");
+		mailMessages = MailServiceTestUtil.getMailMessages("To", "to@test.com");
 
-		Assert.assertEquals(1, messages.size());
+		Assert.assertEquals(1, mailMessages.size());
 	}
 
 }

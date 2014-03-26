@@ -14,6 +14,8 @@
 
 package com.liferay.portlet.journal.service;
 
+import java.util.List;
+
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -81,18 +83,22 @@ public class JournalSubscriptionTest extends BaseSubscriptionTestCase {
 	protected long addBaseModelWithClassType(long containerId, long classTypeId)
 		throws Exception {
 
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
+			classTypeId);
+
+		List<DDMTemplate> ddmTemplates = ddmStructure.getTemplates();
+
+		DDMTemplate ddmTemplate = ddmTemplates.get(0);
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
-		serviceContext.setLayoutFullURL("http://layout_url");
 
-		DDMStructure structure = DDMStructureLocalServiceUtil.getStructure(
-			classTypeId);
-		DDMTemplate template = structure.getTemplates().get(0);
+		serviceContext.setLayoutFullURL("http://layout_url");
 
 		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
 			containerId, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-			"<title>Test Article</title>", structure.getStructureKey(),
-			template.getTemplateKey(), LocaleUtil.getSiteDefault(), null,
+			"<title>Test Article</title>", ddmStructure.getStructureKey(),
+			ddmTemplate.getTemplateKey(), LocaleUtil.getSiteDefault(), null,
 			serviceContext);
 
 		return article.getResourcePrimKey();
@@ -134,19 +140,17 @@ public class JournalSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	protected Long getDefaultClassTypeId() throws Exception {
-
 		Company company = CompanyLocalServiceUtil.getCompany(
 			group.getCompanyId());
 
-		DDMStructure defaultStructure =
-			DDMStructureLocalServiceUtil.getStructure(
-				company.getGroupId(),
-				PortalUtil.getClassNameId(JournalArticle.class),
-				"BASIC-WEB-CONTENT");
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
+			company.getGroupId(),
+			PortalUtil.getClassNameId(JournalArticle.class),
+			"BASIC-WEB-CONTENT");
 
-		Assert.assertNotNull(defaultStructure);
+		Assert.assertNotNull(ddmStructure);
 
-		return defaultStructure.getStructureId();
+		return ddmStructure.getStructureId();
 	}
 
 	@Override

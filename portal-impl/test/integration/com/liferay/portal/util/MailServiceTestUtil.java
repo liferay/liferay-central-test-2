@@ -32,10 +32,10 @@ public class MailServiceTestUtil {
 		return _smtpServer.getEmailCount();
 	}
 
-	public static List<MailMessage> getMessages(
+	public static List<MailMessage> getMailMessages(
 		String headerName, String headerValue) {
 
-		List<MailMessage> messages = new ArrayList<MailMessage>();
+		List<MailMessage> mailMessages = new ArrayList<MailMessage>();
 
 		for (int i = 0; i < _smtpServer.getEmailCount(); ++i) {
 			MailMessage message = _smtpServer.getMessage(i);
@@ -44,7 +44,7 @@ public class MailServiceTestUtil {
 				String body = message.getBody();
 
 				if (body.equals(headerValue)) {
-					messages.add(message);
+					mailMessages.add(message);
 				}
 			}
 			else {
@@ -52,12 +52,12 @@ public class MailServiceTestUtil {
 					headerName);
 
 				if (messageHeaderValue.equals(headerValue)) {
-					messages.add(message);
+					mailMessages.add(message);
 				}
 			}
 		}
 
-		return messages;
+		return mailMessages;
 	}
 
 	public static void start() {
