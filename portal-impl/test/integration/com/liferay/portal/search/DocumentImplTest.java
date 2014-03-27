@@ -27,17 +27,18 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.SortFactoryUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
-import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
-import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.portal.util.GroupTestUtil;
 import com.liferay.portal.util.UserTestUtil;
 import com.liferay.portlet.usersadmin.util.UserIndexer;
 
@@ -59,16 +60,16 @@ import org.junit.runner.RunWith;
 @ExecutionTestListeners(
 	listeners = {
 		EnvironmentExecutionTestListener.class,
-		SynchronousDestinationExecutionTestListener.class,
-		TransactionalExecutionTestListener.class
+		SynchronousDestinationExecutionTestListener.class
 	})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
 @Sync
-@Transactional
 public class DocumentImplTest {
 
 	@Before
 	public void setUp() throws Exception {
+		_group = GroupTestUtil.addGroup();
+
 		_indexer = IndexerRegistryUtil.getIndexer(UserIndexer.class);
 
 		_indexerPostProcessor = new BaseIndexerPostProcessor() {
@@ -113,6 +114,8 @@ public class DocumentImplTest {
 	@After
 	public void tearDown() throws Exception {
 		_indexer.unregisterIndexerPostProcessor(_indexerPostProcessor);
+
+		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
 	@Test
@@ -498,6 +501,7 @@ public class DocumentImplTest {
 	private Map<String, Double> _doubles = new HashMap<String, Double>();
 	private Map<String, Float[]> _floatArrays = new HashMap<String, Float[]>();
 	private Map<String, Float> _floats = new HashMap<String, Float>();
+	private Group _group;
 	private Indexer _indexer;
 	private IndexerPostProcessor _indexerPostProcessor;
 	private Map<String, Integer[]> _integerArrays =
