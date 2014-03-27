@@ -21,7 +21,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "browse");
 
 long groupId = ParamUtil.getLong(request, "groupId", themeDisplay.getScopeGroupId());
 String typeSelection = ParamUtil.getString(request, "typeSelection");
-long subtypeSelection = ParamUtil.getLong(request, "subtypeSelection");
+long subtypeSelectionId = ParamUtil.getLong(request, "subtypeSelectionId");
 
 PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 
@@ -31,10 +31,10 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 <aui:nav-item href="<%= portletURL %>" label="browse" selected='<%= toolbarItem.equals("browse") %>' />
 
 <c:choose>
-	<c:when test="<%= assetRendererFactory.isSupportsClassTypes() && (subtypeSelection > 0) %>">
+	<c:when test="<%= assetRendererFactory.isSupportsClassTypes() && (subtypeSelectionId > 0) %>">
 
 		<%
-		PortletURL addPortletURL = AssetUtil.getAddPortletURL(liferayPortletRequest, liferayPortletResponse, groupId, typeSelection, subtypeSelection, null, null, portletURL.toString());
+		PortletURL addPortletURL = AssetUtil.getAddPortletURL(liferayPortletRequest, liferayPortletResponse, groupId, typeSelection, subtypeSelectionId, null, null, portletURL.toString());
 		%>
 
 		<c:if test="<%= addPortletURL != null %>">
@@ -48,7 +48,7 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			addPortletURLString = HttpUtil.addParameter(addPortletURLString, "refererPlid", plid);
 			%>
 
-			<aui:nav-item href="<%= addPortletURLString %>" label='<%= LanguageUtil.format(pageContext, "add-x", assetRendererFactory.getTypeName(locale, subtypeSelection)) %>' />
+			<aui:nav-item href="<%= addPortletURLString %>" label='<%= LanguageUtil.format(pageContext, "add-x", assetRendererFactory.getTypeName(locale, subtypeSelectionId)) %>' />
 		</c:if>
 	</c:when>
 	<c:otherwise>

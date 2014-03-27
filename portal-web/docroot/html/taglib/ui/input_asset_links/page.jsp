@@ -124,7 +124,7 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 				data.put("title", LanguageUtil.format(pageContext, "select-x", type, false));
 				data.put("type", type);
-			%>
+	%>
 
 				<liferay-ui:icon
 					cssClass="asset-selector"
@@ -135,13 +135,13 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 					url="javascript:;"
 				/>
 
-			<%
+	<%
 			}
 			else {
 				Map<Long, String> assetAvailableClassTypes = assetRendererFactory.getClassTypes(PortalUtil.getCurrentAndAncestorSiteGroupIds(groupId), locale);
 
 				for (Map.Entry<Long, String> assetAvailableClassType : assetAvailableClassTypes.entrySet()) {
-					assetBrowserURL.setParameter("subtypeSelection", String.valueOf(assetAvailableClassType.getKey()));
+					assetBrowserURL.setParameter("subtypeSelectionId", String.valueOf(assetAvailableClassType.getKey()));
 
 					data.put("href", assetBrowserURL.toString());
 
@@ -149,18 +149,18 @@ assetBrowserURL.setWindowState(LiferayWindowState.POP_UP);
 
 					data.put("title", LanguageUtil.format(pageContext, "select-x", type, false));
 					data.put("type", type);
-					%>
+	%>
 
-						<liferay-ui:icon
-							cssClass="asset-selector"
-							data="<%= data %>"
-							id="<%= groupId + FriendlyURLNormalizerUtil.normalize(type) %>"
-							message="<%= type %>"
-							src="<%= assetRendererFactory.getIconPath(portletRequest) %>"
-							url="javascript:;"
-						/>
+					<liferay-ui:icon
+						cssClass="asset-selector"
+						data="<%= data %>"
+						id="<%= groupId + FriendlyURLNormalizerUtil.normalize(type) %>"
+						message="<%= type %>"
+						src="<%= assetRendererFactory.getIconPath(portletRequest) %>"
+						url="javascript:;"
+					/>
 
-					 <%
+	<%
 				}
 			}
 		}
