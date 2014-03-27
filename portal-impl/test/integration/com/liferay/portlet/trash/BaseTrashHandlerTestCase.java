@@ -804,7 +804,6 @@ public abstract class BaseTrashHandlerTestCase {
 
 		Assert.assertTrue(isInTrashContainer(baseModel));
 		Assert.assertTrue(isInTrashContainer(parentBaseModel));
-
 		Assert.assertEquals(
 			initialBaseModelsCount,
 			getNotInTrashBaseModelsCount(grandParentBaseModel));
@@ -1357,7 +1356,6 @@ public abstract class BaseTrashHandlerTestCase {
 		Assert.assertEquals(
 			initialTrashEntriesCount + 1,
 			getTrashEntriesCount(group.getGroupId()));
-
 		Assert.assertTrue(isInTrashContainer(baseModel));
 
 		if (isAssetableModel()) {
