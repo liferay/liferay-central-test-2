@@ -24,6 +24,7 @@ import com.liferay.portal.model.UserNotificationDelivery;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.model.UserNotificationEvent;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationDeliveryLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 
@@ -61,6 +62,8 @@ public abstract class BaseUserNotificationTestCase {
 		deleteUserNotificationEvents(user.getUserId());
 
 		deleteUserNotificationDeliveries();
+
+		UserLocalServiceUtil.deleteUser(user);
 	}
 
 	@Test
