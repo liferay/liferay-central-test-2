@@ -44,7 +44,6 @@ public abstract class BaseUserNotificationTestCase {
 
 	@Before
 	public void setUp() throws Exception {
-
 		user = UserTestUtil.addOmniAdmin();
 
 		group = GroupTestUtil.addGroup();
@@ -57,11 +56,11 @@ public abstract class BaseUserNotificationTestCase {
 
 	@After
 	public void tearDown() throws Exception {
-		GroupLocalServiceUtil.deleteGroup(group);
-
 		deleteUserNotificationEvents(user.getUserId());
 
 		deleteUserNotificationDeliveries();
+
+		GroupLocalServiceUtil.deleteGroup(group);
 
 		UserLocalServiceUtil.deleteUser(user);
 	}
