@@ -231,22 +231,22 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	@Override
 	public boolean isCategorizable() {
-		return true;
+		return _categorizable;
 	}
 
 	@Override
 	public boolean isLinkable() {
-		return _LINKABLE;
+		return _linkable;
 	}
 
 	@Override
 	public boolean isSelectable() {
-		return _SELECTABLE;
+		return _selectable;
 	}
 
 	@Override
 	public boolean isSupportsClassTypes() {
-		return _SUPPORTS_CLASS_TYPES;
+		return _supportsClassTypes;
 	}
 
 	@Override
@@ -301,20 +301,34 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		return themeDisplay.getPathThemeImages() + "/common/page.png";
 	}
 
-	private static final boolean _LINKABLE = false;
+	protected void setCategorizable(boolean categorizable) {
+		_categorizable = categorizable;
+	}
+
+	protected void setLinkable(boolean linkable) {
+		_linkable = linkable;
+	}
+
+	protected void setSelectable(boolean selectable) {
+		_selectable = selectable;
+	}
+
+	protected void setSupportsClassTypes(boolean supportsClassTypes) {
+		_supportsClassTypes = supportsClassTypes;
+	}
 
 	private static final boolean _PERMISSION = true;
-
-	private static final boolean _SELECTABLE = true;
 
 	private static final String[] _SELECTABLE_DDM_STRUCTURE_FIELDS = {
 		"checkbox", "ddm-date", "ddm-decimal", "ddm-integer", "ddm-number",
 		"radio", "select", "text"
 	};
 
-	private static final boolean _SUPPORTS_CLASS_TYPES = false;
-
+	private boolean _categorizable = true;
 	private String _className;
+	private boolean _linkable;
 	private String _portletId;
+	private boolean _selectable = true;
+	private boolean _supportsClassTypes;
 
 }

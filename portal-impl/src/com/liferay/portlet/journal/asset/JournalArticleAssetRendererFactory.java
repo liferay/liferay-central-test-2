@@ -63,6 +63,11 @@ public class JournalArticleAssetRendererFactory
 
 	public static final String TYPE = "content";
 
+	public JournalArticleAssetRendererFactory() {
+		setLinkable(true);
+		setSupportsClassTypes(true);
+	}
+
 	@Override
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
@@ -246,22 +251,8 @@ public class JournalArticleAssetRendererFactory
 	}
 
 	@Override
-	public boolean isLinkable() {
-		return _LINKABLE;
-	}
-
-	@Override
-	public boolean isSupportsClassTypes() {
-		return _SUPPORTS_CLASS_TYPES;
-	}
-
-	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/history.png";
 	}
-
-	private static final boolean _LINKABLE = true;
-
-	private static final boolean _SUPPORTS_CLASS_TYPES = true;
 
 }

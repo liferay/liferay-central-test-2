@@ -61,6 +61,11 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 
 	public static final String TYPE = "document";
 
+	public DLFileEntryAssetRendererFactory() {
+		setLinkable(true);
+		setSupportsClassTypes(true);
+	}
+
 	@Override
 	public AssetRenderer getAssetRenderer(long classPK, int type)
 		throws PortalException, SystemException {
@@ -231,22 +236,8 @@ public class DLFileEntryAssetRendererFactory extends BaseAssetRendererFactory {
 	}
 
 	@Override
-	public boolean isLinkable() {
-		return _LINKABLE;
-	}
-
-	@Override
-	public boolean isSupportsClassTypes() {
-		return _SUPPORTS_CLASS_TYPES;
-	}
-
-	@Override
 	protected String getIconPath(ThemeDisplay themeDisplay) {
 		return themeDisplay.getPathThemeImages() + "/common/clip.png";
 	}
-
-	private static final boolean _LINKABLE = true;
-
-	private static final boolean _SUPPORTS_CLASS_TYPES = true;
 
 }
