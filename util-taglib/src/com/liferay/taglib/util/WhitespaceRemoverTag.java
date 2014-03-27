@@ -25,7 +25,7 @@ import javax.servlet.jsp.tagext.BodyTagSupport;
 /**
  * @author Brian Wing Shun Chan
  */
-public class WhitespaceTag extends BodyTagSupport {
+public class WhitespaceRemoverTag extends BodyTagSupport {
 
 	@Override
 	public int doEndTag() throws JspException {
