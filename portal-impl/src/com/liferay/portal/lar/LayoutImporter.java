@@ -743,7 +743,7 @@ public class LayoutImporter {
 
 		// Update priorities
 
-		updatePriorities(portletDataContext, previousLayouts);
+		updatePriorities(portletDataContext);
 
 		// Deletion system events
 
@@ -898,8 +898,7 @@ public class LayoutImporter {
 		}
 	}
 
-	protected void updatePriorities(
-			PortletDataContext portletDataContext, List<Layout> previousLayouts)
+	protected void updatePriorities(PortletDataContext portletDataContext)
 		throws PortalException, SystemException {
 
 		Map<Long, Layout> layoutMap =
@@ -934,8 +933,11 @@ public class LayoutImporter {
 			}
 		}
 
-		List<Layout> unmodifiedLayouts = new LinkedList<Layout>(
-			previousLayouts);
+		List<Layout> layouts = LayoutUtil.findByG_P(
+			portletDataContext.getGroupId(),
+			portletDataContext.isPrivateLayout());
+
+		List<Layout> unmodifiedLayouts = new LinkedList<Layout>(layouts);
 
 		unmodifiedLayouts.removeAll(newLayouts);
 
