@@ -411,7 +411,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
-			long classType, String keywords, int status, int start, int end)
+			long classTypeId, String keywords, int status, int start, int end)
 		throws SystemException {
 
 		try {
@@ -431,15 +431,15 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			searchContext.setAttribute("paginationType", "regular");
 			searchContext.setAttribute("status", status);
+
+			if (classTypeId > 0) {
+				searchContext.setClassTypeIds(new long[] {classTypeId});
+			}
+
 			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(
 				getClassNames(companyId, className));
-
-			if (classType > 0) {
-				searchContext.setClassTypeIds(new long[] {classType});
-			}
-
 			searchContext.setGroupIds(groupIds);
 			searchContext.setKeywords(keywords);
 
@@ -465,7 +465,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 	@Override
 	public Hits search(
 			long companyId, long[] groupIds, long userId, String className,
-			long classType, String userName, String title, String description,
+			long classTypeId, String userName, String title, String description,
 			String assetCategoryIds, String assetTagNames, int status,
 			boolean andSearch, int start, int end)
 		throws SystemException {
@@ -494,12 +494,12 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 			searchContext.setAttribute(Field.USER_NAME, userName);
 			searchContext.setAttribute("paginationType", "regular");
 			searchContext.setAttribute("status", status);
-			searchContext.setCompanyId(companyId);
 
-			if (classType > 0L) {
-				searchContext.setClassTypeIds(new long[] {classType});
+			if (classTypeId > 0) {
+				searchContext.setClassTypeIds(new long[] {classTypeId});
 			}
 
+			searchContext.setCompanyId(companyId);
 			searchContext.setEnd(end);
 			searchContext.setEntryClassNames(
 				getClassNames(companyId, className));
@@ -547,7 +547,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, groupIds, userId, className, 0L, keywords, status, start,
+			companyId, groupIds, userId, className, 0, keywords, status, start,
 			end);
 	}
 
@@ -580,7 +580,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		return search(
-			companyId, groupIds, userId, className, 0L, userName, title,
+			companyId, groupIds, userId, className, 0, userName, title,
 			description, assetCategoryIds, assetTagNames, status, andSearch,
 			start, end);
 	}
