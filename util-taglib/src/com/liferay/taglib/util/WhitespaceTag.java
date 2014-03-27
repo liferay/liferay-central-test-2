@@ -53,7 +53,7 @@ public class WhitespaceTag extends BodyTagSupport {
 
 		bodyContentString = StringUtil.replace(
 			bodyContentString,
-			new String[] {"\n", "\t"},
+			new String[] {StringPool.NEW_LINE, StringPool.TAB},
 			new String[] {StringPool.BLANK, StringPool.BLANK});
 
 		return bodyContentString;
