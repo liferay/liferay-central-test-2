@@ -47,16 +47,12 @@ public class PortalImplBaseURLTestCase {
 
 		privateLayout = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString(), true);
-
 		publicLayout = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString());
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		LayoutLocalServiceUtil.deleteLayout(privateLayout);
-		LayoutLocalServiceUtil.deleteLayout(publicLayout);
-
 		GroupLocalServiceUtil.deleteGroup(group);
 	}
 
