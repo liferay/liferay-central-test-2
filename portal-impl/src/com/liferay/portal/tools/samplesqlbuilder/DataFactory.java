@@ -249,7 +249,7 @@ public class DataFactory {
 		_dlDDMStructureContent = StringUtil.read(
 			getResourceInputStream("ddm_structure_basic_document.xml"));
 
-		_contentDDMStructureContent = StringUtil.read(
+		_journalDDMStructureContent = StringUtil.read(
 			getResourceInputStream("ddm_structure_basic_web_content.xml"));
 
 		String defaultAssetPublisherPreference = StringUtil.read(
@@ -433,11 +433,11 @@ public class DataFactory {
 	}
 
 	public DDMStructureModel getDefaultContentDDMStructureModel() {
-		return _defaultContentDDMStructureModel;
+		return _defaultJournalDDMStructureModel;
 	}
 
 	public DDMTemplateModel getDefaultContentDDMTemplateModel() {
-		return _defaultContentDDMTemplateModel;
+		return _defaultJournalDDMTemplateModel;
 	}
 
 	public long getDefaultDLDDMStructureId() {
@@ -812,13 +812,13 @@ public class DataFactory {
 			_globalGroupId, _defaultUserId, getDLFileEntryClassNameId(),
 			RawMetadataProcessor.TIKA_RAW_METADATA, _dlDDMStructureContent);
 
-		_defaultContentDDMStructureModel = newDDMStructureModel(
+		_defaultJournalDDMStructureModel = newDDMStructureModel(
 			_globalGroupId, _defaultUserId, getJournalArticleClassNameId(),
-			"BASIC-WEB-CONTENT", _contentDDMStructureContent);
+			"BASIC-WEB-CONTENT", _journalDDMStructureContent);
 
-		_defaultContentDDMTemplateModel = newDDMTemplateModel(
+		_defaultJournalDDMTemplateModel = newDDMTemplateModel(
 			_globalGroupId, _defaultUserId,
-			_defaultContentDDMStructureModel.getStructureId());
+			_defaultJournalDDMStructureModel.getStructureId());
 	}
 
 	public void initGroupModels() throws Exception {
@@ -1034,7 +1034,7 @@ public class DataFactory {
 			journalArticleModel.getCreateDate(),
 			journalArticleModel.getModifiedDate(),
 			getJournalArticleClassNameId(), resourcePrimKey, resourceUuid,
-			_defaultContentDDMStructureModel.getStructureId(), true,
+			_defaultJournalDDMStructureModel.getStructureId(), true,
 			ContentTypes.TEXT_HTML, journalArticleModel.getTitle());
 	}
 
@@ -1544,9 +1544,9 @@ public class DataFactory {
 		journalArticleModel.setContent(_journalArticleContent);
 		journalArticleModel.setType("general");
 		journalArticleModel.setStructureId(
-			_defaultContentDDMStructureModel.getStructureKey());
+			_defaultJournalDDMStructureModel.getStructureKey());
 		journalArticleModel.setTemplateId(
-			_defaultContentDDMTemplateModel.getTemplateKey());
+			_defaultJournalDDMTemplateModel.getTemplateKey());
 		journalArticleModel.setDisplayDate(new Date());
 		journalArticleModel.setExpirationDate(nextFutureDate());
 		journalArticleModel.setReviewDate(new Date());
@@ -2581,6 +2581,7 @@ public class DataFactory {
 			"<name language-id=\"en_US\">Basic Web Content</name></root>");
 
 		ddmTemplateModel.setName(sb.toString());
+
 		ddmTemplateModel.setType(DDMTemplateConstants.TEMPLATE_TYPE_DISPLAY);
 		ddmTemplateModel.setMode(DDMTemplateConstants.TEMPLATE_MODE_CREATE);
 		ddmTemplateModel.setLanguage(TemplateConstants.LANG_TYPE_FTL);
@@ -3006,12 +3007,12 @@ public class DataFactory {
 	private Map<String, Long> _classNameModelsMap = new HashMap<String, Long>();
 	private long _companyId;
 	private CompanyModel _companyModel;
-	private String _contentDDMStructureContent;
+	private String _journalDDMStructureContent;
 	private SimpleCounter _counter;
 	private PortletPreferencesImpl _defaultAssetPublisherPortletPreference;
 	private AssetVocabularyModel _defaultAssetVocabularyModel;
-	private DDMStructureModel _defaultContentDDMStructureModel;
-	private DDMTemplateModel _defaultContentDDMTemplateModel;
+	private DDMStructureModel _defaultJournalDDMStructureModel;
+	private DDMTemplateModel _defaultJournalDDMTemplateModel;
 	private DDMStructureModel _defaultDLDDMStructureModel;
 	private DLFileEntryTypeModel _defaultDLFileEntryTypeModel;
 	private long _defaultUserId;
