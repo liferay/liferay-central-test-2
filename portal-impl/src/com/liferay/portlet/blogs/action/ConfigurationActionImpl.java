@@ -45,12 +45,13 @@ public class ConfigurationActionImpl extends DefaultConfigurationAction {
 			portletPreferences, companyId,
 			PropsValues.BLOGS_EMAIL_FROM_ADDRESS);
 
-		String emailFromName = PortalUtil.getEmailFromName(
-			portletPreferences, companyId, PropsValues.BLOGS_EMAIL_FROM_NAME);
-
 		removeDefaultValue(
 			portletRequest, portletPreferences, "emailFromAddress",
 			emailFromAddress);
+
+		String emailFromName = PortalUtil.getEmailFromName(
+			portletPreferences, companyId, PropsValues.BLOGS_EMAIL_FROM_NAME);
+
 		removeDefaultValue(
 			portletRequest, portletPreferences, "emailFromName", emailFromName);
 
