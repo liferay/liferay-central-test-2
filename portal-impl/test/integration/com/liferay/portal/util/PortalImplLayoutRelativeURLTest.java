@@ -40,7 +40,6 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		privateLayoutRelativeURL =
 			PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING +
 				group.getFriendlyURL() + privateLayout.getFriendlyURL();
-
 		publicLayoutRelativeURL =
 			PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING +
 				group.getFriendlyURL() + publicLayout.getFriendlyURL();
@@ -51,10 +50,9 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, privateLayout, LOCALHOST);
 
-		String relativeURL = PortalUtil.getLayoutRelativeURL(
-			privateLayout, themeDisplay);
-
-		Assert.assertEquals(privateLayoutRelativeURL, relativeURL);
+		Assert.assertEquals(
+			privateLayoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
 	}
 
 	@Test
@@ -64,10 +62,9 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
 
-		String relativeURL = PortalUtil.getLayoutRelativeURL(
-			privateLayout, themeDisplay);
-
-		Assert.assertEquals(privateLayoutRelativeURL, relativeURL);
+		Assert.assertEquals(
+			privateLayoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
 	}
 
 	@Test
@@ -75,10 +72,9 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, publicLayout, LOCALHOST);
 
-		String relativeURL = PortalUtil.getLayoutRelativeURL(
-			publicLayout, themeDisplay);
-
-		Assert.assertEquals(publicLayoutRelativeURL, relativeURL);
+		Assert.assertEquals(
+			publicLayoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
 	}
 
 	@Test
@@ -88,14 +84,13 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, publicLayout, LOCALHOST, VIRTUAL_HOSTNAME);
 
-		String relativeURL = PortalUtil.getLayoutRelativeURL(
+		String publicLayoutFriendlyURL = publicLayout.getFriendlyURL();
+		String layoutRelativeURL = PortalUtil.getLayoutRelativeURL(
 			publicLayout, themeDisplay);
 
-		String publicLayoutFriendlyURL = publicLayout.getFriendlyURL();
-
 		Assert.assertTrue(
-			publicLayoutRelativeURL.equals(relativeURL) ||
-			publicLayoutFriendlyURL.equals(relativeURL));
+			publicLayoutFriendlyURL.equals(layoutRelativeURL) ||
+			publicLayoutRelativeURL.equals(layoutRelativeURL));
 	}
 
 	protected String privateLayoutRelativeURL;

@@ -38,12 +38,7 @@ public class PortalImplLayoutFullURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, publicLayout, "company.com");
 
-		String fullURL = PortalUtil.getLayoutFullURL(
-			publicLayout, themeDisplay);
-
-		// Check if url is malformed
-
-		new URL(fullURL);
+		new URL(PortalUtil.getLayoutFullURL(publicLayout, themeDisplay));
 	}
 
 }
