@@ -198,8 +198,7 @@
 
 		<execute macro="WikiPage#removeViewPermissionPG">
 			<var name="roleName" value="Guest" />
-			<var name="wikiChildPage" value="true" />
-			<var name="wikiChildPageTitle" value="${wikiChildPageTitle2}" />
+			<var name="wikiPageTitle" value="${wikiChildPageTitle2}" />
 		</execute>
 
 		<execute macro="User#logoutAndLoginPG">

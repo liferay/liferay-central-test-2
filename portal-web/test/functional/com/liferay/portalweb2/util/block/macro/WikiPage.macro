@@ -599,21 +599,19 @@
 
 	<command name="removeViewPermissionPG">
 		<var name="key_roleName" value="${key_roleName?lowercase()}" />
-		<var name="key_wikiChildPageTitle" value="${wikiChildPageTitle}" />
 
-		<if>
-			<equals arg1="${wikiChildPage}" arg2="true" />
-			<then>
-				<execute action="PGWiki#assertClick" locator-key1="WIKI_PAGE_CHILD_PAGE_TITLE" value1="${wikiChildPageTitle}" />
-			</then>
-		</if>
+		<execute action="PGWiki#assertClick" locator-key1="NAVIGATION_ALL_PAGES" value1="All Pages" />
+
+		<var name="key_wikiPageTitle" value="${wikiPageTitle}" />
+
+		<execute action="PGWikiAllpages#assertClick" locator-key1="WIKI_PAGE_TABLE_PAGE" value1="${wikiPageTitle}" />
 
 		<execute action="PGWiki#assertClick" locator-key1="DETAILS_BUTTON" value1="Details" />
 
 		<execute action="PGWikiWikipageDetails#assertClick" locator-key1="PERMISSIONS_LINK" value1="Permissions" />
 
 		<execute action="Permissions#selectFrame" locator-key1="PERMISSIONS_IFRAME" />
-		<execute action="Permissions#assertTextEquals" locator-key1="HEADER_TITLE" value1="${wikiChildPageTitle}" />
+		<execute action="Permissions#assertTextEquals" locator-key1="HEADER_TITLE" value1="${wikiPageTitle}" />
 		<execute action="Permissions#uncheck" locator-key1="CONFIGURATION_PERMISSIONS_VIEW_CHECKBOX" />
 		<execute action="Permissions#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
 		<execute action="Permissions#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
