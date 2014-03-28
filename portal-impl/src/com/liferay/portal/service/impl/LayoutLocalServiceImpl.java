@@ -936,7 +936,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			exportImportConfigurationLocalService.addExportImportConfiguration(
 				userId, groupId, taskName, StringPool.BLANK,
 				ExportImportConfigurationConstants.TYPE_EXPORT_LAYOUT,
-				WorkflowConstants.STATUS_DRAFT, settingsMap, serviceContext);
+				settingsMap, WorkflowConstants.STATUS_DRAFT, serviceContext);
 
 		Map<String, Serializable> taskContextMap =
 			new HashMap<String, Serializable>();

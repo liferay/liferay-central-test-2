@@ -43,7 +43,7 @@ public class ExportImportConfigurationLocalServiceImpl
 	@Override
 	public ExportImportConfiguration addExportImportConfiguration(
 			long userId, long groupId, String name, String description,
-			int type, int status, Map<String, Serializable> settingsMap,
+			int type, Map<String, Serializable> settingsMap, int status,
 			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
@@ -67,16 +67,17 @@ public class ExportImportConfigurationLocalServiceImpl
 		exportImportConfiguration.setName(name);
 		exportImportConfiguration.setDescription(description);
 		exportImportConfiguration.setType(type);
-		exportImportConfiguration.setStatus(status);
-		exportImportConfiguration.setStatusByUserId(userId);
-		exportImportConfiguration.setStatusByUserName(user.getScreenName());
-		exportImportConfiguration.setStatusDate(now);
 
 		if (settingsMap != null) {
 			String settings = JSONFactoryUtil.serialize(settingsMap);
 
 			exportImportConfiguration.setSettings(settings);
 		}
+
+		exportImportConfiguration.setStatus(status);
+		exportImportConfiguration.setStatusByUserId(userId);
+		exportImportConfiguration.setStatusByUserName(user.getScreenName());
+		exportImportConfiguration.setStatusDate(now);
 
 		return exportImportConfigurationPersistence.update(
 			exportImportConfiguration);
@@ -90,8 +91,8 @@ public class ExportImportConfigurationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addExportImportConfiguration(
-			userId, groupId, name, description, type,
-			WorkflowConstants.STATUS_APPROVED, settingsMap, serviceContext);
+			userId, groupId, name, description, type, settingsMap,
+			WorkflowConstants.STATUS_APPROVED, serviceContext);
 	}
 
 	@Override
