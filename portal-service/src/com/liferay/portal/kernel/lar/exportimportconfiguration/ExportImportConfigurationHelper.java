@@ -98,10 +98,8 @@ public class ExportImportConfigurationHelper {
 			settingsMap.get("privateLayout"));
 		long[] layoutIds = GetterUtil.getLongValues(
 			settingsMap.get("layoutIds"));
-
 		Map<String, String[]> parameterMap =
 			(Map<String, String[]>)settingsMap.get("parameterMap");
-
 		DateRange dateRange = ExportImportDateUtil.getDateRange(
 			exportImportConfiguration);
 
@@ -180,10 +178,8 @@ public class ExportImportConfigurationHelper {
 			settingsMap.get("privateLayout"));
 		long[] layoutIds = GetterUtil.getLongValues(
 			settingsMap.get("layoutIds"));
-
 		DateRange dateRange = ExportImportDateUtil.getDateRange(
 			exportImportConfiguration);
-
 		String fileName = exportImportConfiguration.getName();
 
 		LayoutServiceUtil.exportLayoutsAsFileInBackground(
