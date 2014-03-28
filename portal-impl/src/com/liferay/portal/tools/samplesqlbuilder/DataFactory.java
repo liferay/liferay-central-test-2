@@ -432,14 +432,6 @@ public class DataFactory {
 		return _classNameModelsMap.get(DDLRecordSet.class.getName());
 	}
 
-	public DDMStructureModel getDefaultContentDDMStructureModel() {
-		return _defaultJournalDDMStructureModel;
-	}
-
-	public DDMTemplateModel getDefaultContentDDMTemplateModel() {
-		return _defaultJournalDDMTemplateModel;
-	}
-
 	public long getDefaultDLDDMStructureId() {
 		return _defaultDLDDMStructureModel.getStructureId();
 	}
@@ -450,6 +442,14 @@ public class DataFactory {
 
 	public DLFileEntryTypeModel getDefaultDLFileEntryTypeModel() {
 		return _defaultDLFileEntryTypeModel;
+	}
+
+	public DDMStructureModel getDefaultJournalDDMStructureModel() {
+		return _defaultJournalDDMStructureModel;
+	}
+
+	public DDMTemplateModel getDefaultJournalDDMTemplateModel() {
+		return _defaultJournalDDMTemplateModel;
 	}
 
 	public UserModel getDefaultUserModel() {
