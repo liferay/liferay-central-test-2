@@ -248,7 +248,6 @@ public class DataFactory {
 
 		_dlDDMStructureContent = StringUtil.read(
 			getResourceInputStream("ddm_structure_basic_document.xml"));
-
 		_journalDDMStructureContent = StringUtil.read(
 			getResourceInputStream("ddm_structure_basic_web_content.xml"));
 
@@ -811,11 +810,9 @@ public class DataFactory {
 		_defaultDLDDMStructureModel = newDDMStructureModel(
 			_globalGroupId, _defaultUserId, getDLFileEntryClassNameId(),
 			RawMetadataProcessor.TIKA_RAW_METADATA, _dlDDMStructureContent);
-
 		_defaultJournalDDMStructureModel = newDDMStructureModel(
 			_globalGroupId, _defaultUserId, getJournalArticleClassNameId(),
 			"BASIC-WEB-CONTENT", _journalDDMStructureContent);
-
 		_defaultJournalDDMTemplateModel = newDDMTemplateModel(
 			_globalGroupId, _defaultUserId,
 			_defaultJournalDDMStructureModel.getStructureId());
@@ -3007,14 +3004,13 @@ public class DataFactory {
 	private Map<String, Long> _classNameModelsMap = new HashMap<String, Long>();
 	private long _companyId;
 	private CompanyModel _companyModel;
-	private String _journalDDMStructureContent;
 	private SimpleCounter _counter;
 	private PortletPreferencesImpl _defaultAssetPublisherPortletPreference;
 	private AssetVocabularyModel _defaultAssetVocabularyModel;
-	private DDMStructureModel _defaultJournalDDMStructureModel;
-	private DDMTemplateModel _defaultJournalDDMTemplateModel;
 	private DDMStructureModel _defaultDLDDMStructureModel;
 	private DLFileEntryTypeModel _defaultDLFileEntryTypeModel;
+	private DDMStructureModel _defaultJournalDDMStructureModel;
+	private DDMTemplateModel _defaultJournalDDMTemplateModel;
 	private long _defaultUserId;
 	private UserModel _defaultUserModel;
 	private String _dlDDMStructureContent;
@@ -3030,6 +3026,7 @@ public class DataFactory {
 	private String _journalArticleContent;
 	private Map<Long, String> _journalArticleResourceUUIDs =
 		new HashMap<Long, String>();
+	private String _journalDDMStructureContent;
 	private List<String> _lastNames;
 	private Map<Long, SimpleCounter> _layoutCounters =
 		new HashMap<Long, SimpleCounter>();
