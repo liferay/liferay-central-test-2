@@ -14,22 +14,6 @@
 		}
 	}
 
-	.lfr-nav-item .lfr-nav-child-toggle {
-		padding: 10px;
-
-		i {
-			margin: 0;
-		}
-
-		@include respond-to(phone, tablet) {
-			line-height: 1em;
-			padding: 14px;
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-	}
-
 	.add-page-editor-input {
 		width: 150px;
 	}
