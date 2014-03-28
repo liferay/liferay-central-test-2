@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.blogs;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.settings.BaseServiceSettings;
 import com.liferay.portal.settings.FallbackKeys;
@@ -41,7 +40,7 @@ public class BlogsSettings extends BaseServiceSettings {
 	}
 
 	public LocalizedValuesMap getEmailEntryAddedBody() {
-		return typedSettings.getLocalizedValue("emailEntryAddedBody");
+		return typedSettings.getLocalizedValuesMap("emailEntryAddedBody");
 	}
 
 	public boolean getEmailEntryAddedEnabled() {
@@ -49,11 +48,11 @@ public class BlogsSettings extends BaseServiceSettings {
 	}
 
 	public LocalizedValuesMap getEmailEntryAddedSubject() {
-		return typedSettings.getLocalizedValue("emailEntryAddedSubject");
+		return typedSettings.getLocalizedValuesMap("emailEntryAddedSubject");
 	}
 
 	public LocalizedValuesMap getEmailEntryUpdatedBody() {
-		return typedSettings.getLocalizedValue("emailEntryUpdatedBody");
+		return typedSettings.getLocalizedValuesMap("emailEntryUpdatedBody");
 	}
 
 	public boolean getEmailEntryUpdatedEnabled() {
@@ -61,14 +60,14 @@ public class BlogsSettings extends BaseServiceSettings {
 	}
 
 	public LocalizedValuesMap getEmailEntryUpdatedSubject() {
-		return typedSettings.getLocalizedValue("emailEntryUpdatedSubject");
+		return typedSettings.getLocalizedValuesMap("emailEntryUpdatedSubject");
 	}
 
-	public String getEmailFromAddress() throws SystemException {
+	public String getEmailFromAddress() {
 		return typedSettings.getValue("emailFromAddress");
 	}
 
-	public String getEmailFromName() throws SystemException {
+	public String getEmailFromName() {
 		return typedSettings.getValue("emailFromName");
 	}
 
