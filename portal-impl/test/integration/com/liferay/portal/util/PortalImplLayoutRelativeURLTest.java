@@ -28,6 +28,7 @@ import org.junit.Test;
 public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
