@@ -19,6 +19,7 @@ import com.dumbster.smtp.MailMessage;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -252,7 +253,9 @@ public abstract class BaseSubscriptionTestCase {
 		return null;
 	}
 
-	protected abstract String getPortletId();
+	protected String getPortletId() {
+		return StringPool.BLANK;
+	}
 
 	protected abstract String getSubscriptionBodyPreferenceName()
 		throws Exception;
