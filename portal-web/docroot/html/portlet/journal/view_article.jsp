@@ -24,7 +24,7 @@ String articleId = ParamUtil.getString(request, "articleId");
 String languageId = LanguageUtil.getLanguageId(request);
 int articlePage = ParamUtil.getInteger(renderRequest, "page", 1);
 
-JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, themeDisplay, articlePage, new PortletRequestModel(renderRequest, renderResponse));
+JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(groupId, articleId, null, null, languageId, articlePage, new PortletRequestModel(renderRequest, renderResponse), themeDisplay);
 
 try {
 	article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId, WorkflowConstants.STATUS_ANY);
