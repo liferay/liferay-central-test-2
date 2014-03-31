@@ -104,15 +104,18 @@ public class Transformer {
 		this(errorTemplatePropertyKey, restricted);
 
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+		
+		Set<String> transformerListenerClassNames = SetUtil.fromArray(
+			PropsUtil.getArray(transformerListenerPropertyKey));
 
 		for (String transformerListenerClassName :
-				SetUtil.fromArray(
-					PropsUtil.getArray(transformerListenerPropertyKey))) {
+				transformerListenerClassNames) {
 
 			try {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
-						"Instantiate listener " + transformerListenerClassName);
+						"Instantiating transformer listener " +
+							transformerListenerClassName);
 				}
 
 				TransformerListener transformerListener =
@@ -310,7 +313,7 @@ public class Transformer {
 						}
 					}
 
-					if (TemplateConstants.LANG_TYPE_XSL.equals(langType)) {
+					if (langType.equals(TemplateConstants.LANG_TYPE_XSL)) {
 						Element requestElement = null;
 
 						if (portletRequestModel != null) {
