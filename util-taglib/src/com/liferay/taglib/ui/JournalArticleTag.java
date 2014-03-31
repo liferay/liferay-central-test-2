@@ -69,10 +69,10 @@ public class JournalArticleTag extends IncludeTag {
 		_articleResourcePrimKey = 0;
 		_groupId = 0;
 		_languageId = null;
+		_portletRequestModel = null;
 		_showAvailableLocales = false;
 		_showTitle = false;
 		_templateId = null;
-		_portletRequestModel = null;
 	}
 
 	@Override
@@ -95,15 +95,15 @@ public class JournalArticleTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:journal-article:languageId", _languageId);
 		request.setAttribute(
+			"liferay-ui:journal-article:portletRequestModel",
+			_portletRequestModel);
+		request.setAttribute(
 			"liferay-ui:journal-article:showAvailableLocales",
 			String.valueOf(_showAvailableLocales));
 		request.setAttribute(
 			"liferay-ui:journal-article:showTitle", String.valueOf(_showTitle));
 		request.setAttribute(
 			"liferay-ui:journal-article:templateId", _templateId);
-		request.setAttribute(
-			"liferay-ui:journal-article:portletRequestModel",
-			_portletRequestModel);
 	}
 
 	private static final String _PAGE =
