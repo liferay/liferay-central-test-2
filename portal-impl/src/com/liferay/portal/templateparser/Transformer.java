@@ -104,7 +104,7 @@ public class Transformer {
 		this(errorTemplatePropertyKey, restricted);
 
 		ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
-		
+
 		Set<String> transformerListenerClassNames = SetUtil.fromArray(
 			PropsUtil.getArray(transformerListenerPropertyKey));
 
