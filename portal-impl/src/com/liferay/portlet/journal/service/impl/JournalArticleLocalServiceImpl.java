@@ -6051,13 +6051,13 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkStructure(Document contentDoc, Element root)
+	protected void checkStructure(Document contentDocument, Element root)
 		throws PortalException {
 
 		for (Element el : root.elements()) {
-			checkStructureField(el, contentDoc);
+			checkStructureField(el, contentDocument);
 
-			checkStructure(contentDoc, el);
+			checkStructure(contentDocument, el);
 		}
 	}
 
@@ -6105,7 +6105,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkStructureField(Element el, Document contentDoc)
+	protected void checkStructureField(Element el, Document contentDocument)
 		throws PortalException {
 
 		StringBuilder elPath = new StringBuilder();
@@ -6127,7 +6127,7 @@ public class JournalArticleLocalServiceImpl
 
 		String[] elPathNames = StringUtil.split(elPath.toString());
 
-		Element contentEl = contentDoc.getRootElement();
+		Element contentEl = contentDocument.getRootElement();
 
 		for (String _elPathName : elPathNames) {
 			boolean foundEl = false;
@@ -6160,14 +6160,14 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle oldArticle, JournalArticle newArticle)
 		throws Exception {
 
-		Document contentDoc = oldArticle.getDocument();
+		Document contentDocument = oldArticle.getDocument();
 
-		contentDoc = contentDoc.clone();
+		contentDocument = contentDocument.clone();
 
 		XPath xPathSelector = SAXReaderUtil.createXPath(
 			"//dynamic-element[@type='image']");
 
-		List<Node> imageNodes = xPathSelector.selectNodes(contentDoc);
+		List<Node> imageNodes = xPathSelector.selectNodes(contentDocument);
 
 		for (Node imageNode : imageNodes) {
 			Element imageEl = (Element)imageNode;
@@ -6208,7 +6208,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		newArticle.setContent(contentDoc.formattedString());
+		newArticle.setContent(contentDocument.formattedString());
 	}
 
 	protected void format(
