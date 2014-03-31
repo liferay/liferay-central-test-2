@@ -88,7 +88,6 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.taglib.util.VelocityTaglibImpl;
-import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.lang.reflect.Method;
 
@@ -262,8 +261,11 @@ public class TemplateContextHelper {
 
 					@Override
 					public String toString() {
-						return PortletRequestUtil.toXML(
-							portletRequest, portletResponse);
+						PortletRequestModel portletRequestModel =
+							new PortletRequestModel(
+								portletRequest, portletResponse);
+
+						return portletRequestModel.toXML();
 					}
 
 				}
