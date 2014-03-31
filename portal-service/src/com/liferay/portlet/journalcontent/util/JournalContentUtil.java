@@ -42,19 +42,6 @@ public class JournalContentUtil {
 			groupId, articleId, viewMode, languageId, portletRequestModel);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	public static String getContent(
-		long groupId, String articleId, String viewMode, String languageId,
-		String xmlRequest) {
-
-		return getJournalContent().getContent(
-			groupId, articleId, viewMode, languageId, xmlRequest);
-	}
-
 	public static String getContent(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
 		String languageId, PortletRequestModel portletRequestModel) {
@@ -62,20 +49,6 @@ public class JournalContentUtil {
 		return getJournalContent().getContent(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
 			portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	public static String getContent(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, String xmlRequest) {
-
-		return getJournalContent().getContent(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			xmlRequest);
 	}
 
 	public static String getContent(
@@ -97,21 +70,6 @@ public class JournalContentUtil {
 			themeDisplay, portletRequestModel);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, String, ThemeDisplay,
-	 *			   PortletRequestModel)}
-	 */
-	@Deprecated
-	public static String getContent(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, String xmlRequest) {
-
-		return getJournalContent().getContent(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, xmlRequest);
-	}
-
 	public static String getContent(
 		long groupId, String articleId, String viewMode, String languageId,
 		ThemeDisplay themeDisplay) {
@@ -130,41 +88,12 @@ public class JournalContentUtil {
 			themeDisplay, page, portletRequestModel);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, double, String, String, String, ThemeDisplay,
-	 *			   int, PortletRequestModel)}
-	 */
-	@Deprecated
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, double version, String ddmTemplateKey,
-		String viewMode, String languageId, ThemeDisplay themeDisplay, int page,
-		String xmlRequest) {
-
-		return getJournalContent().getDisplay(
-			groupId, articleId, version, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, page, xmlRequest);
-	}
-
 	public static JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		PortletRequestModel portletRequestModel) {
 
 		return getJournalContent().getDisplay(
 			groupId, articleId, viewMode, languageId, portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String viewMode, String languageId,
-		String xmlRequest) {
-
-		return getJournalContent().getDisplay(
-			groupId, articleId, viewMode, languageId, xmlRequest);
 	}
 
 	public static JournalArticleDisplay getDisplay(
@@ -174,20 +103,6 @@ public class JournalContentUtil {
 		return getJournalContent().getDisplay(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
 			portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, String xmlRequest) {
-
-		return getJournalContent().getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			xmlRequest);
 	}
 
 	public static JournalArticleDisplay getDisplay(
@@ -207,22 +122,6 @@ public class JournalContentUtil {
 		return getJournalContent().getDisplay(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
 			themeDisplay, page, portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, String, ThemeDisplay, int,
-	 *			   PortletRequestModel)}
-	 */
-	@Deprecated
-	public static JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, int page,
-		String xmlRequest) {
-
-		return getJournalContent().getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, page, xmlRequest);
 	}
 
 	public static JournalArticleDisplay getDisplay(

@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -74,20 +73,6 @@ public class JournalContentImpl implements JournalContent {
 			portletRequestModel);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public String getContent(
-		long groupId, String articleId, String viewMode, String languageId,
-		String xmlRequest) {
-
-		return getContent(
-			groupId, articleId, null, viewMode, languageId, null, xmlRequest);
-	}
-
 	@Override
 	public String getContent(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
@@ -96,21 +81,6 @@ public class JournalContentImpl implements JournalContent {
 		return getContent(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId, null,
 			portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public String getContent(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, String xmlRequest) {
-
-		return getContent(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId, null,
-			xmlRequest);
 	}
 
 	@Override
@@ -132,29 +102,6 @@ public class JournalContentImpl implements JournalContent {
 		JournalArticleDisplay articleDisplay = getDisplay(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
 			themeDisplay, 1, portletRequestModel);
-
-		if (articleDisplay != null) {
-			return articleDisplay.getContent();
-		}
-		else {
-			return null;
-		}
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getContent(
-	 *			   long, String, String, String, String, ThemeDisplay,
-	 *			   PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public String getContent(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, String xmlRequest) {
-
-		JournalArticleDisplay articleDisplay = getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, 1, xmlRequest);
 
 		if (articleDisplay != null) {
 			return articleDisplay.getContent();
@@ -248,84 +195,6 @@ public class JournalContentImpl implements JournalContent {
 		return articleDisplay;
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, double, String, String, String, ThemeDisplay,
-	 *			   int, PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, double version, String ddmTemplateKey,
-		String viewMode, String languageId, ThemeDisplay themeDisplay, int page,
-		String xmlRequest) {
-
-		StopWatch stopWatch = null;
-
-		if (_log.isDebugEnabled()) {
-			stopWatch = new StopWatch();
-
-			stopWatch.start();
-		}
-
-		articleId = StringUtil.toUpperCase(GetterUtil.getString(articleId));
-		ddmTemplateKey = StringUtil.toUpperCase(
-			GetterUtil.getString(ddmTemplateKey));
-
-		long layoutSetId = 0;
-		boolean secure = false;
-
-		if (themeDisplay != null) {
-			try {
-				if (!JournalArticlePermission.contains(
-						themeDisplay.getPermissionChecker(), groupId, articleId,
-						ActionKeys.VIEW)) {
-
-					return null;
-				}
-
-				Layout layout = themeDisplay.getLayout();
-
-				LayoutSet layoutSet = layout.getLayoutSet();
-
-				layoutSetId = layoutSet.getLayoutSetId();
-			}
-			catch (Exception e) {
-			}
-
-			secure = themeDisplay.isSecure();
-		}
-
-		String key = encodeKey(
-			groupId, articleId, version, ddmTemplateKey, layoutSetId, viewMode,
-			languageId, page, secure);
-
-		JournalArticleDisplay articleDisplay = portalCache.get(key);
-
-		boolean lifecycleRender = isLifecycleRender(themeDisplay, xmlRequest);
-
-		if ((articleDisplay == null) || !lifecycleRender) {
-			articleDisplay = getArticleDisplay(
-				groupId, articleId, ddmTemplateKey, viewMode, languageId, page,
-				xmlRequest, themeDisplay);
-
-			if ((articleDisplay != null) && articleDisplay.isCacheable() &&
-				lifecycleRender) {
-
-				portalCache.put(key, articleDisplay);
-			}
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"getDisplay for {" + groupId + ", " + articleId + ", " +
-					ddmTemplateKey + ", " + viewMode + ", " + languageId +
-						", " + page + "} takes " + stopWatch.getTime() + " ms");
-		}
-
-		return articleDisplay;
-	}
-
 	@Override
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
@@ -336,21 +205,6 @@ public class JournalContentImpl implements JournalContent {
 			portletRequestModel);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String viewMode, String languageId,
-		String xmlRequest) {
-
-		return getDisplay(
-			groupId, articleId, null, viewMode, languageId, null, 1,
-			xmlRequest);
-	}
-
 	@Override
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
@@ -359,21 +213,6 @@ public class JournalContentImpl implements JournalContent {
 		return getDisplay(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId, null, 1,
 			portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, String, PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, String xmlRequest) {
-
-		return getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId, null, 1,
-			xmlRequest);
 	}
 
 	@Override
@@ -395,23 +234,6 @@ public class JournalContentImpl implements JournalContent {
 		return getDisplay(
 			groupId, articleId, 0, ddmTemplateKey, viewMode, languageId,
 			themeDisplay, 1, portletRequestModel);
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getDisplay(
-	 *			   long, String, String, String, String, ThemeDisplay, int,
-	 *			   PortletRequestModel)}
-	 */
-	@Deprecated
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, int page,
-		String xmlRequest) {
-
-		return getDisplay(
-			groupId, articleId, 0, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, 1, xmlRequest);
 	}
 
 	@Override
@@ -489,39 +311,6 @@ public class JournalContentImpl implements JournalContent {
 			return JournalArticleLocalServiceUtil.getArticleDisplay(
 				groupId, articleId, ddmTemplateKey, viewMode, languageId, page,
 				portletRequestModel, themeDisplay);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to get display for " + groupId + " " +
-						articleId + " " + languageId);
-			}
-
-			return null;
-		}
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getArticleDisplay(
-	 *			   long, String, String, String, String, int,
-	 *			   PortletRequestModel, ThemeDisplay)}
-	 */
-	@Deprecated
-	protected JournalArticleDisplay getArticleDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, int page, String xmlRequest,
-		ThemeDisplay themeDisplay) {
-
-		try {
-			if (_log.isInfoEnabled()) {
-				_log.info(
-					"Get article display {" + groupId + ", " + articleId +
-						", " + ddmTemplateKey + "}");
-			}
-
-			return JournalArticleLocalServiceUtil.getArticleDisplay(
-				groupId, articleId, ddmTemplateKey, viewMode, languageId, page,
-				xmlRequest, themeDisplay);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
