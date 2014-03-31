@@ -572,13 +572,11 @@ public class JournalArticleIndexer extends BaseIndexer {
 			long groupId = GetterUtil.getLong(document.get(Field.GROUP_ID));
 			String articleId = document.get("articleId");
 			double version = GetterUtil.getDouble(document.get(Field.VERSION));
-
+			PortletRequestModel portletRequestModel = new PortletRequestModel(
+				portletRequest, portletResponse);
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)portletRequest.getAttribute(
 					WebKeys.THEME_DISPLAY);
-
-			PortletRequestModel portletRequestModel = new PortletRequestModel(
-				portletRequest, portletResponse);
 
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
