@@ -48,7 +48,7 @@ public class ContentTransformerListener extends BaseTransformerListener {
 			_log.debug("onScript");
 		}
 
-		return injectEditInPlace(document, script);
+		return injectEditInPlace(script, document);
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		return GetterUtil.getString(content);
 	}
 
-	protected String injectEditInPlace(Document document, String script) {
+	protected String injectEditInPlace(String script, Document document) {
 		try {
 			List<Node> nodes = document.selectNodes("//dynamic-element");
 
@@ -109,21 +109,6 @@ public class ContentTransformerListener extends BaseTransformerListener {
 						script, name, type, "getData()");
 				}
 			}
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
-			}
-		}
-
-		return script;
-	}
-
-	protected String injectEditInPlace(String xml, String script) {
-		try {
-			Document document = SAXReaderUtil.read(xml);
-
-			script = injectEditInPlace(document, script);
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
