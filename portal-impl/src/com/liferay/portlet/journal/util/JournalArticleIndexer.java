@@ -583,8 +583,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
 					groupId, articleId, version, null, Constants.VIEW,
-					LocaleUtil.toLanguageId(snippetLocale), themeDisplay, 1,
-					portletRequestModel);
+					LocaleUtil.toLanguageId(snippetLocale), 1,
+					portletRequestModel, themeDisplay);
 
 			content = HtmlUtil.escape(articleDisplay.getDescription());
 			content = HtmlUtil.replaceNewLine(content);

@@ -273,7 +273,7 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
 					feed.getGroupId(), article.getArticleId(),
-					rendererTemplateId, null, languageId, themeDisplay, 1,
+					rendererTemplateId, null, languageId, 1,
 					new PortletRequestModel() {
 
 						@Override
@@ -281,7 +281,8 @@ public class RSSAction extends com.liferay.portal.struts.RSSAction {
 							return _XML_REQUUEST;
 						}
 
-					});
+					},
+					themeDisplay);
 
 			if (articleDisplay != null) {
 				content = articleDisplay.getContent();

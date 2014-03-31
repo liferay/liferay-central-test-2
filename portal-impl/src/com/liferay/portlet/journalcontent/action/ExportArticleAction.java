@@ -112,8 +112,8 @@ public class ExportArticleAction extends PortletAction {
 		try {
 			JournalArticleDisplay articleDisplay =
 				JournalContentUtil.getDisplay(
-					groupId, articleId, null, "export", languageId,
-					themeDisplay, 1, portletRequestModel);
+					groupId, articleId, null, "export", languageId, 1,
+					portletRequestModel, themeDisplay);
 
 			int pages = articleDisplay.getNumberOfPages();
 
@@ -136,7 +136,7 @@ public class ExportArticleAction extends PortletAction {
 
 			for (int i = 2; i <= pages; i++) {
 				articleDisplay = JournalContentUtil.getDisplay(
-					groupId, articleId, "export", languageId, themeDisplay, i);
+					groupId, articleId, "export", languageId, i, themeDisplay);
 
 				sb.append(articleDisplay.getContent());
 			}

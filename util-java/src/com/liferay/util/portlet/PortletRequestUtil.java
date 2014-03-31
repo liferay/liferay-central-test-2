@@ -32,7 +32,7 @@ public class PortletRequestUtil {
 
 		PortletRequestModel portletRequestModel = new PortletRequestModel(
 			portletRequest, portletResponse);
-			
+
 		return portletRequestModel.toXML();
 	}
 

@@ -102,15 +102,15 @@ public class ViewAction extends WebContentAction {
 
 				articleDisplay = JournalContentUtil.getDisplay(
 					articleGroupId, articleId, version, ddmTemplateKey,
-					viewMode, languageId, themeDisplay, page,
-					portletRequestModel);
+					viewMode, languageId, page, portletRequestModel,
+					themeDisplay);
 			}
 			catch (Exception e) {
 				renderRequest.removeAttribute(WebKeys.JOURNAL_ARTICLE);
 
 				articleDisplay = JournalContentUtil.getDisplay(
 					articleGroupId, articleId, ddmTemplateKey, viewMode,
-					languageId, themeDisplay, page, portletRequestModel);
+					languageId, page, portletRequestModel, themeDisplay);
 			}
 		}
 

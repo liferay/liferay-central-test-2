@@ -79,9 +79,9 @@ public class WebContentAction extends PortletAction {
 
 		if ((groupId > 0) && Validator.isNotNull(articleId)) {
 			JournalContentUtil.getDisplay(
-				groupId, articleId, ddmTemplateKey, viewMode, languageId,
-				themeDisplay, page,
-				new PortletRequestModel(actionRequest, actionResponse));
+				groupId, articleId, ddmTemplateKey, viewMode, languageId, page,
+				new PortletRequestModel(actionRequest, actionResponse),
+				themeDisplay);
 		}
 	}
 
@@ -140,8 +140,9 @@ public class WebContentAction extends PortletAction {
 			if ((groupId > 0) && Validator.isNotNull(articleId)) {
 				articleDisplay = JournalContentUtil.getDisplay(
 					groupId, articleId, ddmTemplateKey, viewMode, languageId,
-					themeDisplay, page,
-					new PortletRequestModel(resourceRequest, resourceResponse));
+					page,
+					new PortletRequestModel(resourceRequest, resourceResponse),
+					themeDisplay);
 			}
 
 			if (articleDisplay != null) {

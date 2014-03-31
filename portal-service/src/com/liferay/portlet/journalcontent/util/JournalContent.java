@@ -54,12 +54,12 @@ public interface JournalContent {
 
 	public String getContent(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay);
+		String languageId, PortletRequestModel portletRequestModel,
+		ThemeDisplay themeDisplay);
 
 	public String getContent(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay,
-		PortletRequestModel portletRequestModel);
+		String languageId, ThemeDisplay themeDisplay);
 
 	public String getContent(
 		long groupId, String articleId, String viewMode, String languageId,
@@ -67,12 +67,21 @@ public interface JournalContent {
 
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, double version, String ddmTemplateKey,
-		String viewMode, String languageId, ThemeDisplay themeDisplay, int page,
-		PortletRequestModel portletRequestModel);
+		String viewMode, String languageId, int page,
+		PortletRequestModel portletRequestModel, ThemeDisplay themeDisplay);
+
+	public JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String viewMode, String languageId,
+		int page, ThemeDisplay themeDisplay);
 
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		PortletRequestModel portletRequestModel);
+
+	public JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String ddmTemplateKey, String viewMode,
+		String languageId, int page, PortletRequestModel portletRequestModel,
+		ThemeDisplay themeDisplay);
 
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String ddmTemplateKey, String viewMode,
@@ -83,16 +92,7 @@ public interface JournalContent {
 		String languageId, ThemeDisplay themeDisplay);
 
 	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, int page,
-		PortletRequestModel portletRequestModel);
-
-	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
 		ThemeDisplay themeDisplay);
-
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String viewMode, String languageId,
-		ThemeDisplay themeDisplay, int page);
 
 }

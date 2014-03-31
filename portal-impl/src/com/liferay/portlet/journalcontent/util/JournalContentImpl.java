@@ -69,8 +69,8 @@ public class JournalContentImpl implements JournalContent {
 		PortletRequestModel portletRequestModel) {
 
 		return getContent(
-			groupId, articleId, null, viewMode, languageId, null,
-			portletRequestModel);
+			groupId, articleId, null, viewMode, languageId, portletRequestModel,
+			null);
 	}
 
 	@Override
@@ -79,8 +79,26 @@ public class JournalContentImpl implements JournalContent {
 		String languageId, PortletRequestModel portletRequestModel) {
 
 		return getContent(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId, null,
-			portletRequestModel);
+			groupId, articleId, ddmTemplateKey, viewMode, languageId,
+			portletRequestModel, null);
+	}
+
+	@Override
+	public String getContent(
+		long groupId, String articleId, String ddmTemplateKey, String viewMode,
+		String languageId, PortletRequestModel portletRequestModel,
+		ThemeDisplay themeDisplay) {
+
+		JournalArticleDisplay articleDisplay = getDisplay(
+			groupId, articleId, ddmTemplateKey, viewMode, languageId, 1,
+			portletRequestModel, themeDisplay);
+
+		if (articleDisplay != null) {
+			return articleDisplay.getContent();
+		}
+		else {
+			return null;
+		}
 	}
 
 	@Override
@@ -90,25 +108,7 @@ public class JournalContentImpl implements JournalContent {
 
 		return getContent(
 			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, (PortletRequestModel)null);
-	}
-
-	@Override
-	public String getContent(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay,
-		PortletRequestModel portletRequestModel) {
-
-		JournalArticleDisplay articleDisplay = getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, 1, portletRequestModel);
-
-		if (articleDisplay != null) {
-			return articleDisplay.getContent();
-		}
-		else {
-			return null;
-		}
+			(PortletRequestModel)null, themeDisplay);
 	}
 
 	@Override
@@ -123,8 +123,8 @@ public class JournalContentImpl implements JournalContent {
 	@Override
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, double version, String ddmTemplateKey,
-		String viewMode, String languageId, ThemeDisplay themeDisplay, int page,
-		PortletRequestModel portletRequestModel) {
+		String viewMode, String languageId, int page,
+		PortletRequestModel portletRequestModel, ThemeDisplay themeDisplay) {
 
 		StopWatch stopWatch = null;
 
@@ -198,11 +198,32 @@ public class JournalContentImpl implements JournalContent {
 	@Override
 	public JournalArticleDisplay getDisplay(
 		long groupId, String articleId, String viewMode, String languageId,
+		int page, ThemeDisplay themeDisplay) {
+
+		return getDisplay(
+			groupId, articleId, null, viewMode, languageId, page,
+			(PortletRequestModel)null, themeDisplay);
+	}
+
+	@Override
+	public JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String viewMode, String languageId,
 		PortletRequestModel portletRequestModel) {
 
 		return getDisplay(
-			groupId, articleId, null, viewMode, languageId, null, 1,
-			portletRequestModel);
+			groupId, articleId, null, viewMode, languageId, 1,
+			portletRequestModel, null);
+	}
+
+	@Override
+	public JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String ddmTemplateKey, String viewMode,
+		String languageId, int page, PortletRequestModel portletRequestModel,
+		ThemeDisplay themeDisplay) {
+
+		return getDisplay(
+			groupId, articleId, 0, ddmTemplateKey, viewMode, languageId, 1,
+			portletRequestModel, themeDisplay);
 	}
 
 	@Override
@@ -211,8 +232,8 @@ public class JournalContentImpl implements JournalContent {
 		String languageId, PortletRequestModel portletRequestModel) {
 
 		return getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId, null, 1,
-			portletRequestModel);
+			groupId, articleId, ddmTemplateKey, viewMode, languageId, 1,
+			portletRequestModel, null);
 	}
 
 	@Override
@@ -221,19 +242,8 @@ public class JournalContentImpl implements JournalContent {
 		String languageId, ThemeDisplay themeDisplay) {
 
 		return getDisplay(
-			groupId, articleId, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, 1, (PortletRequestModel)null);
-	}
-
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String ddmTemplateKey, String viewMode,
-		String languageId, ThemeDisplay themeDisplay, int page,
-		PortletRequestModel portletRequestModel) {
-
-		return getDisplay(
-			groupId, articleId, 0, ddmTemplateKey, viewMode, languageId,
-			themeDisplay, 1, portletRequestModel);
+			groupId, articleId, ddmTemplateKey, viewMode, languageId, 1,
+			(PortletRequestModel)null, themeDisplay);
 	}
 
 	@Override
@@ -242,17 +252,7 @@ public class JournalContentImpl implements JournalContent {
 		ThemeDisplay themeDisplay) {
 
 		return getDisplay(
-			groupId, articleId, viewMode, languageId, themeDisplay, 1);
-	}
-
-	@Override
-	public JournalArticleDisplay getDisplay(
-		long groupId, String articleId, String viewMode, String languageId,
-		ThemeDisplay themeDisplay, int page) {
-
-		return getDisplay(
-			groupId, articleId, null, viewMode, languageId, themeDisplay, page,
-			(PortletRequestModel)null);
+			groupId, articleId, viewMode, languageId, 1, themeDisplay);
 	}
 
 	protected String encodeKey(
