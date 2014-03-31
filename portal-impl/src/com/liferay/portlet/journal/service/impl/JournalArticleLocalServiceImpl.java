@@ -1750,7 +1750,7 @@ public class JournalArticleLocalServiceImpl
 		boolean cacheable = true;
 
 		Map<String, String> tokens = JournalUtil.getTokens(
-			article.getGroupId(), themeDisplay, portletRequestModel);
+			article.getGroupId(), portletRequestModel, themeDisplay);
 
 		if ((themeDisplay == null) && (portletRequestModel == null)) {
 			tokens.put("company_id", String.valueOf(article.getCompanyId()));

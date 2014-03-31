@@ -1115,12 +1115,12 @@ public class JournalUtil {
 		throws PortalException, SystemException {
 
 		return getTokens(
-			articleGroupId, themeDisplay, (PortletRequestModel)null);
+			articleGroupId, (PortletRequestModel)null, themeDisplay);
 	}
 
 	public static Map<String, String> getTokens(
-			long articleGroupId, ThemeDisplay themeDisplay,
-			PortletRequestModel portletRequestModel)
+			long articleGroupId, PortletRequestModel portletRequestModel,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Map<String, String> tokens = new HashMap<String, String>();

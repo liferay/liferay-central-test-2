@@ -265,7 +265,7 @@ public class JournalTestUtilTest {
 
 	protected Map<String, String> getTokens() throws Exception {
 		Map<String, String> tokens = JournalUtil.getTokens(
-			TestPropsValues.getGroupId(), null, (PortletRequestModel)null);
+			TestPropsValues.getGroupId(), (PortletRequestModel)null, null);
 
 		tokens.put(
 			"article_group_id", String.valueOf(TestPropsValues.getGroupId()));
