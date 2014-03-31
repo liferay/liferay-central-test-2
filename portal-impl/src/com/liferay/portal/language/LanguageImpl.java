@@ -973,17 +973,6 @@ public class LanguageImpl implements Language, Serializable {
 	private static PortalCache<Long, Serializable> _portalCache =
 		MultiVMPoolUtil.getCache(LanguageImpl.class.getName());
 
-	private Map<String, String> _charEncodings;
-	private Set<String> _duplicateLanguageCodes;
-	private Map<Long, Locale[]> _groupLocalesMap =
-		new HashMap<Long, Locale[]>();
-	private Map<Long, Set<Locale>> _groupLocalesSet =
-		new HashMap<Long, Set<Locale>>();
-	private Locale[] _locales;
-	private Set<Locale> _localesBetaSet;
-	private Map<String, Locale> _localesMap;
-	private Set<Locale> _localesSet;
-
 	static {
 		PortalCacheMapSynchronizeUtil.<Long, Serializable>synchronize(
 			_portalCache, _instances,
@@ -999,5 +988,16 @@ public class LanguageImpl implements Language, Serializable {
 
 			});
 	}
+
+	private Map<String, String> _charEncodings;
+	private Set<String> _duplicateLanguageCodes;
+	private Map<Long, Locale[]> _groupLocalesMap =
+		new HashMap<Long, Locale[]>();
+	private Map<Long, Set<Locale>> _groupLocalesSet =
+		new HashMap<Long, Set<Locale>>();
+	private Locale[] _locales;
+	private Set<Locale> _localesBetaSet;
+	private Map<String, Locale> _localesMap;
+	private Set<Locale> _localesSet;
 
 }
