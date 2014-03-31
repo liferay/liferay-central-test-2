@@ -78,13 +78,10 @@ public class ExportArticleAction extends PortletAction {
 				"extensions", null);
 
 			String languageId = LanguageUtil.getLanguageId(actionRequest);
-
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
 			PortletRequestModel portletRequestModel = new PortletRequestModel(
 				actionRequest, actionResponse);
-
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				actionRequest);
 			HttpServletResponse response = PortalUtil.getHttpServletResponse(
@@ -92,7 +89,7 @@ public class ExportArticleAction extends PortletAction {
 
 			getFile(
 				groupId, articleId, targetExtension, allowedExtensions,
-				languageId, themeDisplay, portletRequestModel, request,
+				languageId, portletRequestModel, themeDisplay, request,
 				response);
 
 			setForward(actionRequest, ActionConstants.COMMON_NULL);
@@ -105,7 +102,7 @@ public class ExportArticleAction extends PortletAction {
 	protected void getFile(
 			long groupId, String articleId, String targetExtension,
 			String[] allowedExtensions, String languageId,
-			ThemeDisplay themeDisplay, PortletRequestModel portletRequestModel,
+			PortletRequestModel portletRequestModel, ThemeDisplay themeDisplay,
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 

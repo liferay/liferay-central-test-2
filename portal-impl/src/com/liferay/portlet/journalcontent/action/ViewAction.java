@@ -85,9 +85,6 @@ public class ViewAction extends WebContentAction {
 			String languageId = LanguageUtil.getLanguageId(renderRequest);
 			int page = ParamUtil.getInteger(renderRequest, "page", 1);
 
-			PortletRequestModel portletRequestModel = new PortletRequestModel(
-				renderRequest, renderResponse);
-
 			article = JournalArticleLocalServiceUtil.fetchLatestArticle(
 				articleGroupId, articleId, WorkflowConstants.STATUS_APPROVED);
 
@@ -102,7 +99,8 @@ public class ViewAction extends WebContentAction {
 
 				articleDisplay = JournalContentUtil.getDisplay(
 					articleGroupId, articleId, version, ddmTemplateKey,
-					viewMode, languageId, page, portletRequestModel,
+					viewMode, languageId, page,
+					new PortletRequestModel(renderRequest, renderResponse),
 					themeDisplay);
 			}
 			catch (Exception e) {
@@ -110,7 +108,9 @@ public class ViewAction extends WebContentAction {
 
 				articleDisplay = JournalContentUtil.getDisplay(
 					articleGroupId, articleId, ddmTemplateKey, viewMode,
-					languageId, page, portletRequestModel, themeDisplay);
+					languageId, page,
+					new PortletRequestModel(renderRequest, renderResponse),
+					themeDisplay);
 			}
 		}
 
