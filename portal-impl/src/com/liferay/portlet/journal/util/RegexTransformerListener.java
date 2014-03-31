@@ -52,23 +52,6 @@ public class RegexTransformerListener extends BaseTransformerListener {
 		return replace(script);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #onScript(
-	 *			   String, Document, String, Map)}
-	 */
-	@Deprecated
-	@Override
-	public String onScript(
-		String script, String xml, String languageId,
-		Map<String, String> tokens) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onScript");
-		}
-
-		return replace(script);
-	}
-
 	protected String replace(String s) {
 		if (s == null) {
 			return s;

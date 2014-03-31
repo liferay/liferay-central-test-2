@@ -51,23 +51,6 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		return injectEditInPlace(document, script);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #onScript(
-	 *			   String, Document, String, Map)}
-	 */
-	@Deprecated
-	@Override
-	public String onScript(
-		String script, String xml, String languageId,
-		Map<String, String> tokens) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onScript");
-		}
-
-		return injectEditInPlace(xml, script);
-	}
-
 	@Override
 	public Document onXml(
 		Document document, String languageId, Map<String, String> tokens) {
@@ -79,22 +62,6 @@ public class ContentTransformerListener extends BaseTransformerListener {
 		replace(document, tokens);
 
 		return document;
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #onXml(
-	 *			   Document, String, Map)}
-	 */
-	@Deprecated
-	@Override
-	public String onXml(
-		String xml, String languageId, Map<String, String> tokens) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
-		}
-
-		return replace(xml, tokens);
 	}
 
 	protected String getDynamicContent(Document document, String elementName) {

@@ -44,23 +44,6 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 		return StringUtil.replace(script, "@language_id@", languageId);
 	}
 
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #onScript(
-	 *			   String, Document, String, Map)}
-	 */
-	@Deprecated
-	@Override
-	public String onScript(
-		String script, String xml, String languageId,
-		Map<String, String> tokens) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onScript");
-		}
-
-		return StringUtil.replace(script, "@language_id@", languageId);
-	}
-
 	@Override
 	public Document onXml(
 		Document document, String languageId, Map<String, String> tokens) {
@@ -72,22 +55,6 @@ public class LocaleTransformerListener extends BaseTransformerListener {
 		filterByLanguage(document, languageId);
 
 		return document;
-	}
-
-	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #onXml(
-	 *			   Document, String, Map)}
-	 */
-	@Deprecated
-	@Override
-	public String onXml(
-		String xml, String languageId, Map<String, String> tokens) {
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("onXml");
-		}
-
-		return filterByLanguage(xml, languageId);
 	}
 
 	protected void filterByLanguage(Document document, String languageId) {
