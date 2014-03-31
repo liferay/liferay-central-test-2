@@ -1111,14 +1111,6 @@ public class JournalUtil {
 	}
 
 	public static Map<String, String> getTokens(
-			long articleGroupId, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		return getTokens(
-			articleGroupId, (PortletRequestModel)null, themeDisplay);
-	}
-
-	public static Map<String, String> getTokens(
 			long articleGroupId, PortletRequestModel portletRequestModel,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -1145,6 +1137,14 @@ public class JournalUtil {
 		}
 
 		return tokens;
+	}
+
+	public static Map<String, String> getTokens(
+			long articleGroupId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getTokens(
+			articleGroupId, (PortletRequestModel)null, themeDisplay);
 	}
 
 	public static String getUrlTitle(long id, String title) {
