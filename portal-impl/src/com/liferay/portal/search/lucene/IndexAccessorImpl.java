@@ -77,8 +77,7 @@ public class IndexAccessorImpl implements IndexAccessor {
 	public IndexAccessorImpl(long companyId) {
 		_companyId = companyId;
 
-		_path = PropsValues.LUCENE_DIR.concat(
-			String.valueOf(_companyId)).concat(StringPool.SLASH);
+		_path = PropsValues.LUCENE_DIR + _companyId + StringPool.SLASH;
 
 		try {
 			if (!SPIUtil.isSPI()) {
