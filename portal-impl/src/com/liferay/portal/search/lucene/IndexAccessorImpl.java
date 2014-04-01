@@ -138,7 +138,9 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		try {
 			_indexSearcherManager.close();
+
 			_indexWriter.close();
+
 			_directory.close();
 		}
 		catch (Exception e) {
