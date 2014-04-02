@@ -184,7 +184,6 @@ public class MBMessageStagedModelDataHandlerTest
 
 		Assert.assertEquals(
 			1, importedMessage.getAttachmentsFileEntriesCount());
-
 		Assert.assertTrue(importedMessage.isAnswer());
 	}
 
