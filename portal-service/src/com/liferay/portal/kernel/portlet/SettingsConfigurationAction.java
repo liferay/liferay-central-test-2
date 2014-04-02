@@ -59,7 +59,8 @@ import javax.servlet.ServletContext;
 /**
  * @author Iván Zaera
  */
-public class SettingsConfigurationAction extends LiferayPortlet
+public class SettingsConfigurationAction
+	extends LiferayPortlet
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
 	public SettingsConfigurationAction() {
@@ -278,6 +279,7 @@ public class SettingsConfigurationAction extends LiferayPortlet
 			"Invalid settings scope " + settingsScope);
 	}
 
+	@SuppressWarnings("unused")
 	protected void postProcess(
 			long companyId, PortletRequest portletRequest, Settings settings)
 		throws PortalException, SystemException {
