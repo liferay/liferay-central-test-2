@@ -28,13 +28,12 @@ import javax.portlet.ReadOnlyException;
 /**
  * @author Iván Zaera
  */
-public class DefaultConfigurationAction extends SettingsConfigurationAction
+public class DefaultConfigurationAction
+	extends SettingsConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
-	public static final String PREFERENCES_PREFIX = "preferences--";
-
 	public DefaultConfigurationAction() {
-		setConfigurationParametersPrefix(PREFERENCES_PREFIX);
+		setConfigurationParametersPrefix("preferences--");
 	}
 
 	@Override

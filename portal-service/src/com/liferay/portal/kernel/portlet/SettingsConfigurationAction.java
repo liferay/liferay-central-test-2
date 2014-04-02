@@ -61,10 +61,8 @@ import javax.servlet.ServletContext;
 public class SettingsConfigurationAction extends LiferayPortlet
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
-	public static final String SETTINGS_PREFIX = "preferences--";
-
 	public SettingsConfigurationAction() {
-		setConfigurationParametersPrefix(SETTINGS_PREFIX);
+		setConfigurationParametersPrefix("preferences--");
 	}
 
 	public String getLocalizedParameter(
