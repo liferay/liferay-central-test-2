@@ -33,7 +33,7 @@ public class DefaultConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
 	public DefaultConfigurationAction() {
-		setConfigurationParametersPrefix("preferences--");
+		setParameterNamePrefix("preferences--");
 	}
 
 	@Override

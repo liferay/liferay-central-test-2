@@ -64,7 +64,7 @@ public class SettingsConfigurationAction
 	implements ConfigurationAction, ResourceServingConfigurationAction {
 
 	public SettingsConfigurationAction() {
-		setConfigurationParametersPrefix("preferences--");
+		setParameterNamePrefix("preferences--");
 	}
 
 	public String getLocalizedParameter(
@@ -84,7 +84,7 @@ public class SettingsConfigurationAction
 	}
 
 	public String getParameter(PortletRequest portletRequest, String name) {
-		name = _configurationParametersPrefix + name + StringPool.DOUBLE_DASH;
+		name = _parameterNamePrefix + name + StringPool.DOUBLE_DASH;
 
 		return ParamUtil.getString(portletRequest, name);
 	}
@@ -114,7 +114,7 @@ public class SettingsConfigurationAction
 			layout, portletResource, ActionKeys.CONFIGURATION);
 
 		UnicodeProperties properties = PropertiesParamUtil.getProperties(
-			actionRequest, _configurationParametersPrefix);
+			actionRequest, _parameterNamePrefix);
 
 		Settings settings = getSettings(actionRequest);
 
@@ -307,10 +307,8 @@ public class SettingsConfigurationAction
 		}
 	}
 
-	protected void setConfigurationParametersPrefix(
-		String configurationParametersPrefix) {
-
-		_configurationParametersPrefix = configurationParametersPrefix;
+	protected void setParameterNamePrefix(String parameterNamePrefix) {
+		_parameterNamePrefix = parameterNamePrefix;
 	}
 
 	protected void validateEmail(
@@ -360,6 +358,6 @@ public class SettingsConfigurationAction
 		}
 	}
 
-	private String _configurationParametersPrefix;
+	private String _parameterNamePrefix;
 
 }
