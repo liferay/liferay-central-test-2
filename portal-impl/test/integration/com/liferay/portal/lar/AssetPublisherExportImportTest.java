@@ -212,8 +212,8 @@ public class AssetPublisherExportImportTest
 				null, portletPreferences.getValue("scopeId", null));
 			Assert.assertTrue(
 				"The child group ID should have been filtered out on import",
-				ArrayUtil.isEmpty(portletPreferences.getValues(
-					"scopeIds", null)));
+				ArrayUtil.isEmpty(
+					portletPreferences.getValues("scopeIds", null)));
 		}
 		finally {
 			GroupLocalServiceUtil.deleteGroup(childGroup);
