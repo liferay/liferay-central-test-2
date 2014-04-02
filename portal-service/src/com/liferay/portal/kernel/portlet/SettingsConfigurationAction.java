@@ -288,7 +288,7 @@ public class SettingsConfigurationAction
 	protected void removeDefaultValue(
 		PortletRequest portletRequest, Settings settings, String key,
 		LocalizedValuesMap localizedValuesMap) {
-		
+
 		removeDefaultValue(
 			portletRequest, settings, key,
 			localizedValuesMap.getDefaultValue());

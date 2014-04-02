@@ -62,8 +62,10 @@ public class DefaultConfigurationAction
 	}
 
 	protected void removeDefaultValue(
-		PortletRequest portletRequest, PortletPreferences portletPreferences,
-		String key, String defaultValue) throws SystemException {
+			PortletRequest portletRequest,
+			PortletPreferences portletPreferences, String key,
+			String defaultValue)
+		throws SystemException {
 
 		String value = getParameter(portletRequest, key);
 
