@@ -90,12 +90,6 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		_dataSource = dataSource;
 	}
 
-	protected void putSessionFactory(
-		DataSource dataSource, SessionFactory sessionFactory) {
-
-		_sessionFactories.put(dataSource, sessionFactory);
-	}
-
 	protected SessionFactory createSessionFactory(DataSource dataSource) {
 		String servletContextName =
 			PortletClassLoaderUtil.getServletContextName();
@@ -128,10 +122,6 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		finally {
 			PortletClassLoaderUtil.setServletContextName(servletContextName);
 		}
-	}
-
-	protected SessionFactory getSessionFactory(DataSource dataSource) {
-		return _sessionFactories.get(dataSource);
 	}
 
 	protected DataSource getDataSource() {
@@ -171,6 +161,16 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		}
 
 		return sessionFactory;
+	}
+
+	protected SessionFactory getSessionFactory(DataSource dataSource) {
+		return _sessionFactories.get(dataSource);
+	}
+
+	protected void putSessionFactory(
+		DataSource dataSource, SessionFactory sessionFactory) {
+
+		_sessionFactories.put(dataSource, sessionFactory);
 	}
 
 	@Override
