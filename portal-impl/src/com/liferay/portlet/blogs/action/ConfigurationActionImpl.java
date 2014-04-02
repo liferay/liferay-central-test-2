@@ -56,16 +56,16 @@ public class ConfigurationActionImpl extends SettingsConfigurationAction {
 
 		removeDefaultValue(
 			portletRequest, settings, "emailEntryAddedBody_" + languageId,
-			blogsSettings.getEmailEntryAddedBody().getDefaultValue());
+			blogsSettings.getEmailEntryAddedBody());
 		removeDefaultValue(
 			portletRequest, settings, "emailEntryAddedSubject_" + languageId,
-			blogsSettings.getEmailEntryAddedSubject().getDefaultValue());
+			blogsSettings.getEmailEntryAddedSubject());
 		removeDefaultValue(
 			portletRequest, settings, "emailEntryUpdatedBody_" + languageId,
-			blogsSettings.getEmailEntryUpdatedBody().getDefaultValue());
+			blogsSettings.getEmailEntryUpdatedBody());
 		removeDefaultValue(
 			portletRequest, settings, "emailEntryUpdatedSubject_" + languageId,
-			blogsSettings.getEmailEntryUpdatedSubject().getDefaultValue());
+			blogsSettings.getEmailEntryUpdatedSubject());
 	}
 
 	@Override
