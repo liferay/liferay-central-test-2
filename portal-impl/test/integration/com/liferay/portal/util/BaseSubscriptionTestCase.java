@@ -284,7 +284,6 @@ public abstract class BaseSubscriptionTestCase {
 		return 0;
 	};
 
-
 	protected static final String GERMAN_BODY = "Hallo Welt";
 
 	protected static final String SPANISH_BODY = "Hola Mundo";

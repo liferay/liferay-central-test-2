@@ -183,9 +183,7 @@ public class BlogsTestUtil {
 			expectedEntry.isSmallImage(), actualEntry.isSmallImage());
 	}
 
-	public static BlogsEntry updateEntry(BlogsEntry entry)
-		throws Exception {
-
+	public static BlogsEntry updateEntry(BlogsEntry entry) throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			entry.getGroupId());
 
@@ -195,9 +193,9 @@ public class BlogsTestUtil {
 		return BlogsEntryLocalServiceUtil.updateEntry(
 			entry.getUserId(), entry.getEntryId(),
 			ServiceTestUtil.randomString(), entry.getDescription(),
-			entry.getContent(), 1, 1, 2012, 12, 00, true, true,
-			new String[0], entry.getSmallImage(), entry.getSmallImageURL(),
-			StringPool.BLANK, null, serviceContext);
+			entry.getContent(), 1, 1, 2012, 12, 00, true, true, new String[0],
+			entry.getSmallImage(), entry.getSmallImageURL(), StringPool.BLANK,
+			null, serviceContext);
 	}
 
 }
