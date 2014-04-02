@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.blogs.action;
 
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.SettingsConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -36,8 +35,7 @@ public class ConfigurationActionImpl extends SettingsConfigurationAction {
 
 	@Override
 	public void postProcess(
-			long companyId, PortletRequest portletRequest, Settings settings)
-		throws SystemException {
+		long companyId, PortletRequest portletRequest, Settings settings) {
 
 		BlogsSettings blogsSettings = new BlogsSettings(settings);
 
