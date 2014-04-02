@@ -284,7 +284,6 @@ public abstract class BaseSubscriptionTestCase {
 		return 0;
 	};
 
-	protected static final long _PARENT_CONTAINER_MODEL_ID_DEFAULT = 0;
 
 	protected static final String GERMAN_BODY = "Hallo Welt";
 
@@ -293,5 +292,7 @@ public abstract class BaseSubscriptionTestCase {
 	protected Locale defaultLocale;
 	protected Group group;
 	protected Layout layout;
+
+	private static final long _PARENT_CONTAINER_MODEL_ID_DEFAULT = 0;
 
 }
