@@ -90,7 +90,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		_dataSource = dataSource;
 	}
 
-	protected void cacheSessionFactory(
+	protected void putSessionFactory(
 		DataSource dataSource, SessionFactory sessionFactory) {
 
 		_sessionFactories.put(dataSource, sessionFactory);
@@ -111,7 +111,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
 			portletHibernateConfiguration.setDataSource(dataSource);
 
-			SessionFactory sessionFactory;
+			SessionFactory sessionFactory = null;
 
 			try {
 				sessionFactory =
@@ -130,7 +130,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		}
 	}
 
-	protected SessionFactory getCachedSessionFactory(DataSource dataSource) {
+	protected SessionFactory getSessionFactory(DataSource dataSource) {
 		return _sessionFactories.get(dataSource);
 	}
 
@@ -158,7 +158,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 
 		DataSource dataSource = shardDataSourceTargetSource.getDataSource();
 
-		SessionFactory sessionFactory = getCachedSessionFactory(dataSource);
+		SessionFactory sessionFactory = getSessionFactory(dataSource);
 
 		if (sessionFactory != null) {
 			return sessionFactory;
@@ -167,7 +167,7 @@ public class PortletSessionFactoryImpl extends SessionFactoryImpl {
 		sessionFactory = createSessionFactory(dataSource);
 
 		if (sessionFactory != null) {
-			cacheSessionFactory(dataSource, sessionFactory);
+			putSessionFactory(dataSource, sessionFactory);
 		}
 
 		return sessionFactory;
