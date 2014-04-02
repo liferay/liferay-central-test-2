@@ -165,40 +165,39 @@ public class BlogsTestUtil {
 	}
 
 	public static void assertEquals(
-		BlogsEntry blogsEntry, BlogsEntry blogEntryOther) {
+		BlogsEntry expectedEntry, BlogsEntry actualEntry) {
 
-		Assert.assertEquals(blogsEntry.getUserId(), blogEntryOther.getUserId());
-		Assert.assertEquals(blogsEntry.getTitle(), blogEntryOther.getTitle());
+		Assert.assertEquals(expectedEntry.getUserId(), actualEntry.getUserId());
+		Assert.assertEquals(expectedEntry.getTitle(), actualEntry.getTitle());
 		Assert.assertEquals(
-			blogsEntry.getDescription(), blogEntryOther.getDescription());
+			expectedEntry.getDescription(), actualEntry.getDescription());
 		Assert.assertEquals(
-			blogsEntry.getContent(), blogEntryOther.getContent());
+			expectedEntry.getContent(), actualEntry.getContent());
 		Assert.assertEquals(
-			blogsEntry.getDisplayDate(), blogEntryOther.getDisplayDate());
+			expectedEntry.getDisplayDate(), actualEntry.getDisplayDate());
 		Assert.assertEquals(
-			blogsEntry.isAllowPingbacks(), blogEntryOther.isAllowPingbacks());
+			expectedEntry.isAllowPingbacks(), actualEntry.isAllowPingbacks());
 		Assert.assertEquals(
-			blogsEntry.isAllowTrackbacks(), blogEntryOther.isAllowTrackbacks());
+			expectedEntry.isAllowTrackbacks(), actualEntry.isAllowTrackbacks());
 		Assert.assertEquals(
-			blogsEntry.isSmallImage(), blogEntryOther.isSmallImage());
+			expectedEntry.isSmallImage(), actualEntry.isSmallImage());
 	}
 
-	public static BlogsEntry updateEntry(BlogsEntry blogsEntry)
+	public static BlogsEntry updateEntry(BlogsEntry entry)
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			blogsEntry.getGroupId());
+			entry.getGroupId());
 
 		serviceContext.setCommand(Constants.UPDATE);
 		serviceContext.setLayoutFullURL("http://localhost");
 
 		return BlogsEntryLocalServiceUtil.updateEntry(
-			blogsEntry.getUserId(), blogsEntry.getEntryId(),
-			ServiceTestUtil.randomString(), blogsEntry.getDescription(),
-			blogsEntry.getContent(), 1, 1, 2012, 12, 00, true, true,
-			new String[0], blogsEntry.getSmallImage(),
-			blogsEntry.getSmallImageURL(), StringPool.BLANK, null,
-			serviceContext);
+			entry.getUserId(), entry.getEntryId(),
+			ServiceTestUtil.randomString(), entry.getDescription(),
+			entry.getContent(), 1, 1, 2012, 12, 00, true, true,
+			new String[0], entry.getSmallImage(), entry.getSmallImageURL(),
+			StringPool.BLANK, null, serviceContext);
 	}
 
 }

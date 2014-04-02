@@ -59,7 +59,6 @@ public class BlogsEntryStagedModelDataHandlerTest
 		List<StagedModel> stagedModels = new ArrayList<StagedModel>();
 
 		stagedModels.add(BlogsTestUtil.addEntry(group, true));
-
 		stagedModels.add(BlogsTestUtil.addEntry(group, false));
 
 		return stagedModels;
