@@ -199,13 +199,11 @@ public class RuntimeVariables {
 
 		Matcher matcher = pattern.matcher(content);
 
-		String statement = "";
-
 		if (matcher.find()) {
-			statement = matcher.group(group);
+			return matcher.group(group);
 		}
 
-		return statement;
+		return StringPool.BLANK;
 	}
 
 	public static void setValue(String key, String value) {
