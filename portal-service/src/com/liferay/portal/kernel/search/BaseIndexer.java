@@ -1109,10 +1109,10 @@ public abstract class BaseIndexer implements Indexer {
 
 		Set<String> selectedFieldNameSet = SetUtil.fromArray(
 			selectedFieldNames);
+			
+		Map<String, Facet> facets = searchContext.getFacets();
 
-		Set<String> facetNames = searchContext.getFacets().keySet();
-
-		selectedFieldNameSet.addAll(facetNames);
+		selectedFieldNameSet.addAll(facets.keySet());
 
 		selectedFieldNames = selectedFieldNameSet.toArray(
 			new String[selectedFieldNameSet.size()]);
