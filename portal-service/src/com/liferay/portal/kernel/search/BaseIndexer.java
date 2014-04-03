@@ -635,6 +635,31 @@ public abstract class BaseIndexer implements Indexer {
 		document.addKeyword("visible", assetEntry.isVisible());
 	}
 
+	protected void addFacetSelectedFieldNames(
+		SearchContext searchContext, QueryConfig queryConfig) {
+
+		String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
+
+		if (ArrayUtil.isEmpty(selectedFieldNames) ||
+			(selectedFieldNames.length == 1) &&
+			selectedFieldNames[0].equals(Field.ANY)) {
+
+			return;
+		}
+
+		Set<String> selectedFieldNameSet = SetUtil.fromArray(
+			selectedFieldNames);
+
+		Map<String, Facet> facets = searchContext.getFacets();
+
+		selectedFieldNameSet.addAll(facets.keySet());
+
+		selectedFieldNames = selectedFieldNameSet.toArray(
+			new String[selectedFieldNameSet.size()]);
+
+		queryConfig.setSelectedFieldNames(selectedFieldNames);
+	}
+
 	/**
 	 * @deprecated As of 6.2.0, replaced by {@link
 	 *             #addSearchLocalizedTerm(BooleanQuery, SearchContext, String,
@@ -1093,31 +1118,6 @@ public abstract class BaseIndexer implements Indexer {
 		}
 
 		searchContext.addFacet(multiValueFacet);
-	}
-
-	protected void addFacetSelectedFieldNames(
-		SearchContext searchContext, QueryConfig queryConfig) {
-
-		String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
-
-		if (ArrayUtil.isEmpty(selectedFieldNames) ||
-			(selectedFieldNames.length == 1) &&
-			selectedFieldNames[0].equals(Field.ANY)) {
-
-			return;
-		}
-
-		Set<String> selectedFieldNameSet = SetUtil.fromArray(
-			selectedFieldNames);
-			
-		Map<String, Facet> facets = searchContext.getFacets();
-
-		selectedFieldNameSet.addAll(facets.keySet());
-
-		selectedFieldNames = selectedFieldNameSet.toArray(
-			new String[selectedFieldNameSet.size()]);
-
-		queryConfig.setSelectedFieldNames(selectedFieldNames);
 	}
 
 	protected void addStagingGroupKeyword(Document document, long groupId)
