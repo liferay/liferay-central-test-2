@@ -1366,7 +1366,6 @@ public class DLFileEntryFinderTest {
 				_defaultRepositoryFolder.getRepositoryId(),
 				_newRepositoryFolder.getRepositoryId()
 			});
-
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {
 				_defaultRepositoryFolder.getFolderId(),
