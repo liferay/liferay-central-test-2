@@ -44,13 +44,8 @@ public abstract class BaseSearchResultPermissionFilter
 			(selectedFieldNames.length == 1) &&
 			selectedFieldNames[0].equals(Field.ANY)) {
 
-			Set<String> selectedFieldNameSet = SetUtil.fromArray(
-				selectedFieldNames);
-
-			selectedFieldNameSet.addAll(_PERMISSION_SELECTED_FIELD_NAMES);
-
-			selectedFieldNames = selectedFieldNameSet.toArray(
-				new String[selectedFieldNameSet.size()]);
+			selectedFieldNames = ArrayUtil.append(
+				selectedFieldNames, _PERMISSION_SELECTED_FIELD_NAMES);
 
 			queryConfig.setSelectedFieldNames(selectedFieldNames);
 		}
@@ -162,8 +157,8 @@ public abstract class BaseSearchResultPermissionFilter
 			(float)(System.currentTimeMillis() - startTime) / Time.SECOND);
 	}
 
-	private static final List<String> _PERMISSION_SELECTED_FIELD_NAMES =
-		Arrays.asList(Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK);
+	private static final String[] _PERMISSION_SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK};
 
 	private static double _INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR =
 		GetterUtil.getDouble(
