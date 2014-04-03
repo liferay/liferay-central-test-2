@@ -120,16 +120,6 @@ public class DLFileEntryFinderImpl
 	}
 
 	@Override
-	public int countByG_R_F(
-			long groupId, List<Long> repositoryIds, List<Long> folderIds,
-			QueryDefinition queryDefinition)
-		throws SystemException {
-
-		return doCountByG_U_R_F_M(
-			groupId, 0, repositoryIds, folderIds, null, queryDefinition, false);
-	}
-
-	@Override
 	public int countByG_F(
 			long groupId, List<Long> folderIds, QueryDefinition queryDefinition)
 		throws SystemException {
@@ -207,15 +197,13 @@ public class DLFileEntryFinderImpl
 	}
 
 	@Override
-	public int countByG_U_R_F_M(
-			long groupId, long userId, List<Long> repositoryIds,
-			List<Long> folderIds, String[] mimeTypes,
+	public int countByG_R_F(
+			long groupId, List<Long> repositoryIds, List<Long> folderIds,
 			QueryDefinition queryDefinition)
 		throws SystemException {
-
+	
 		return doCountByG_U_R_F_M(
-			groupId, userId, repositoryIds, folderIds, mimeTypes,
-			queryDefinition, false);
+			groupId, 0, repositoryIds, folderIds, null, queryDefinition, false);
 	}
 
 	@Override
@@ -232,15 +220,15 @@ public class DLFileEntryFinderImpl
 	}
 
 	@Override
-	public int filterCountByG_U_R_F_M(
+	public int countByG_U_R_F_M(
 			long groupId, long userId, List<Long> repositoryIds,
 			List<Long> folderIds, String[] mimeTypes,
 			QueryDefinition queryDefinition)
 		throws SystemException {
-
+	
 		return doCountByG_U_R_F_M(
 			groupId, userId, repositoryIds, folderIds, mimeTypes,
-			queryDefinition, true);
+			queryDefinition, false);
 	}
 
 	@Override
@@ -251,6 +239,18 @@ public class DLFileEntryFinderImpl
 
 		List<Long> repositoryIds = Collections.emptyList();
 
+		return doCountByG_U_R_F_M(
+			groupId, userId, repositoryIds, folderIds, mimeTypes,
+			queryDefinition, true);
+	}
+
+	@Override
+	public int filterCountByG_U_R_F_M(
+			long groupId, long userId, List<Long> repositoryIds,
+			List<Long> folderIds, String[] mimeTypes,
+			QueryDefinition queryDefinition)
+		throws SystemException {
+	
 		return doCountByG_U_R_F_M(
 			groupId, userId, repositoryIds, folderIds, mimeTypes,
 			queryDefinition, true);
