@@ -522,7 +522,7 @@ public abstract class BaseIndexer implements Indexer {
 					getDefaultSelectedFieldNames());
 			}
 
-			addSelectedFacetFieldNames(searchContext, queryConfig);
+			addFacetSelectedFieldNames(searchContext, queryConfig);
 
 			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
@@ -1095,7 +1095,7 @@ public abstract class BaseIndexer implements Indexer {
 		searchContext.addFacet(multiValueFacet);
 	}
 
-	protected void addSelectedFacetFieldNames(
+	protected void addFacetSelectedFieldNames(
 		SearchContext searchContext, QueryConfig queryConfig) {
 
 		String[] selectedFieldNames = queryConfig.getSelectedFieldNames();
