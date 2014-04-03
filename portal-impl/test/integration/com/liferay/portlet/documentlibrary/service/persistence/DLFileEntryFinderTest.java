@@ -1483,8 +1483,8 @@ public class DLFileEntryFinderTest {
 
 	private DLFileVersion _defaultRepositoryDLFileVersion;
 	private Folder _defaultRepositoryFolder;
-	private Folder _newRepositoryFolder;
 	private Group _group;
+	private Folder _newRepositoryFolder;
 	private Repository _repository;
 
 }
