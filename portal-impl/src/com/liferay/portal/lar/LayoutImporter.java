@@ -91,7 +91,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NavigableSet;
-import java.util.SortedSet;
+import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -905,13 +905,13 @@ public class LayoutImporter {
 			(Map<Long, Layout>)portletDataContext.getNewPrimaryKeysMap(
 				Layout.class + ".layout");
 
-		Map<Long, NavigableSet<Layout>> layoutMap =
+		Map<Long, NavigableSet<Layout>> navigableSets =
 			new HashMap<Long, NavigableSet<Layout>>();
 
 		List<Layout> importedLayouts = new LinkedList<Layout>();
 
-		// Gathering imported layouts and create a NavigableSet for each
-		// parentLayoutId to handle each priority queue separately
+		// Gathering imported layouts and create a navigable set for each parent
+		// layout ID to handle each priority queue separately
 
 		for (Element layoutElement : _layoutElements) {
 			String action = layoutElement.attributeValue(Constants.ACTION);
@@ -922,11 +922,11 @@ public class LayoutImporter {
 
 				Layout layout = layouts.get(layoutId);
 
-				NavigableSet<Layout> childLayouts = layoutMap.get(
+				NavigableSet<Layout> navigableSet = navigableSets.get(
 					layout.getParentLayoutId());
 
-				if (childLayouts == null) {
-					layoutMap.put(
+				if (navigableSet == null) {
+					navigableSets.put(
 						layout.getParentLayoutId(),
 						new TreeSet<Layout>(new LayoutPriorityComparator()));
 				}
@@ -936,52 +936,47 @@ public class LayoutImporter {
 			}
 		}
 
-		List<Layout> groupLayouts = LayoutLocalServiceUtil.getLayouts(
-			portletDataContext.getGroupId(),
-			portletDataContext.isPrivateLayout());
-
-		List<Layout> unmodifiedLayouts = new LinkedList<Layout>(groupLayouts);
+		List<Layout> unmodifiedLayouts = new LinkedList<Layout>(
+			LayoutLocalServiceUtil.getLayouts(
+				portletDataContext.getGroupId(),
+				portletDataContext.isPrivateLayout()));
 
 		unmodifiedLayouts.removeAll(importedLayouts);
 
-		// Priorities are up-to date if there are no unmodified layouts
+		// Priorities are up to date if there are no unmodified layouts
 
 		if (unmodifiedLayouts.isEmpty()) {
 			return;
 		}
 
-		// Fill the sets with the layouts which weren't updated by the import.
-		// If there isn't any updated/new layout under a parent, there is
-		// nothing to do
+		// Fill the navigable sets with layouts that were not updated by the
+		// import
 
 		for (Layout unmodifiedLayout : unmodifiedLayouts) {
-			NavigableSet<Layout> childLayouts = layoutMap.get(
+			NavigableSet<Layout> navigableSet = navigableSets.get(
 				unmodifiedLayout.getParentLayoutId());
 
-			if (childLayouts != null) {
-				childLayouts.add(unmodifiedLayout);
+			if (navigableSet != null) {
+				navigableSet.add(unmodifiedLayout);
 			}
 		}
 
 		for (Layout importedLayout : importedLayouts) {
-			NavigableSet<Layout> childLayouts = layoutMap.get(
+			NavigableSet<Layout> navigableSet = navigableSets.get(
 				importedLayout.getParentLayoutId());
 
-			if (childLayouts.isEmpty()) {
+			if (navigableSet.isEmpty()) {
 				continue;
 			}
 
-			SortedSet<Layout> tailSet = childLayouts.tailSet(
+			// Ensure that priorities are unique
+
+			Set<Layout> tailLayouts = navigableSet.tailSet(
 				importedLayout, true);
 
 			int priority = importedLayout.getPriority();
 
-			// If a layout's priority collides with an existing one, then we
-			// "push it back" by 1, and do it until there is no collision.
-			// Break, if there was a "hole" in the priority queue and we don't
-			// have to push back more layouts
-
-			for (Layout tailLayout : tailSet) {
+			for (Layout tailLayout : tailLayouts) {
 				if (tailLayout.getPriority() == priority) {
 					tailLayout.setPriority(++priority);
 				}
@@ -990,12 +985,12 @@ public class LayoutImporter {
 				}
 			}
 
-			childLayouts.add(importedLayout);
+			navigableSet.add(importedLayout);
 		}
 
-		for (NavigableSet<Layout> childLayouts : layoutMap.values()) {
-			for (Layout childLayout : childLayouts) {
-				LayoutUtil.update(childLayout);
+		for (NavigableSet<Layout> navigableSet : navigableSets.values()) {
+			for (Layout layout : navigableSet) {
+				LayoutUtil.update(layout);
 			}
 		}
 	}
