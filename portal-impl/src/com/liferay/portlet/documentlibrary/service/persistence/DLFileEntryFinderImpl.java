@@ -631,12 +631,12 @@ public class DLFileEntryFinderImpl
 
 			qPos.add(queryDefinition.getStatus());
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
 			for (Long repositoryId : repositoryIds) {
 				qPos.add(repositoryId);
+			}
+
+			for (Long folderId : folderIds) {
+				qPos.add(folderId);
 			}
 
 			if (mimeTypes != null) {
@@ -704,12 +704,12 @@ public class DLFileEntryFinderImpl
 
 			qPos.add(queryDefinition.getStatus());
 
-			for (Long folderId : folderIds) {
-				qPos.add(folderId);
-			}
-
 			for (Long repositoryId : repositoryIds) {
 				qPos.add(repositoryId);
+			}
+
+			for (Long folderId : folderIds) {
+				qPos.add(folderId);
 			}
 
 			if (mimeTypes != null) {
@@ -776,21 +776,21 @@ public class DLFileEntryFinderImpl
 
 		StringBundler sb = new StringBundler(7);
 
-		if (ListUtil.isNotEmpty(folderIds) ||
-			ListUtil.isNotEmpty(repositoryIds) ||
+		if (ListUtil.isNotEmpty(repositoryIds) ||
+			ListUtil.isNotEmpty(folderIds) ||
 			ArrayUtil.isNotEmpty(mimeTypes)) {
-
-			if (ListUtil.isNotEmpty(folderIds)) {
-				sb.append(WHERE_AND);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(getFolderIds(folderIds, tableName));
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
 
 			if (ListUtil.isNotEmpty(repositoryIds)) {
 				sb.append(WHERE_AND);
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(getRepositoryIds(repositoryIds, tableName));
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+			}
+
+			if (ListUtil.isNotEmpty(folderIds)) {
+				sb.append(WHERE_AND);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(getFolderIds(folderIds, tableName));
 				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
