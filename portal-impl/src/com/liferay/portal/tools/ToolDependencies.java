@@ -17,14 +17,17 @@ package com.liferay.portal.tools;
 import com.liferay.portal.cache.MultiVMPoolImpl;
 import com.liferay.portal.cache.SingleVMPoolImpl;
 import com.liferay.portal.cache.memory.MemoryPortalCacheManager;
+import com.liferay.portal.json.JSONFactoryImpl;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.microsofttranslator.MicrosoftTranslatorFactoryUtil;
 import com.liferay.portal.kernel.util.DigesterUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.microsofttranslator.MicrosoftTranslatorFactoryImpl;
 import com.liferay.portal.model.ModelHintsImpl;
@@ -39,6 +42,7 @@ import com.liferay.portal.util.FastDateFormatFactoryImpl;
 import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.FriendlyURLNormalizerImpl;
 import com.liferay.portal.util.HtmlImpl;
+import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -85,6 +89,14 @@ public class ToolDependencies {
 		HtmlUtil htmlUtil = new HtmlUtil();
 
 		htmlUtil.setHtml(new HtmlImpl());
+
+		HttpUtil httpUtil = new HttpUtil();
+
+		httpUtil.setHttp(new HttpImpl());
+
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
+
+		jsonFactoryUtil.setJSONFactory(new JSONFactoryImpl());
 
 		MicrosoftTranslatorFactoryUtil microsoftTranslatorFactoryUtil =
 			new MicrosoftTranslatorFactoryUtil();
