@@ -95,13 +95,13 @@ public class DLFileEntryFinderTest {
 		Object[] objects = setUp(
 			_group.getGroupId(), StringPool.BLANK, serviceContext);
 
-		_folderDefaultRepository = (Folder)objects[0];
-		_dlFileVersionDefaultRepository = (DLFileVersion)objects[1];
+		_defaultRepositoryFolder = (Folder)objects[0];
+		_defaultRepositoryDLFileVersion = (DLFileVersion)objects[1];
 
 		objects = setUp(
 			_repository.getRepositoryId(), "-NewRepository", serviceContext);
 
-		_folderNewRepository = (Folder)objects[0];
+		_newRepositoryFolder = (Folder)objects[0];
 	}
 
 	@After
@@ -143,7 +143,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -157,7 +157,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -246,7 +246,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -260,7 +260,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -293,7 +293,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -307,7 +307,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_F_M(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -426,7 +426,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			4,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -440,7 +440,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -454,7 +454,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			4,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -468,7 +468,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -483,7 +483,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -499,7 +499,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -515,7 +515,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -531,7 +531,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -594,7 +594,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -608,7 +608,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -622,7 +622,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -636,7 +636,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -651,7 +651,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -667,7 +667,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -683,7 +683,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -699,7 +699,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -818,7 +818,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -832,7 +832,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -846,7 +846,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			2,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -860,7 +860,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			1,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), null, queryDefinition));
+				_defaultRepositoryFolder.getUserId(), null, queryDefinition));
 	}
 
 	@Test
@@ -875,7 +875,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_BothRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -891,7 +891,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_DefaultRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -907,7 +907,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_EmptyRepositories(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -923,7 +923,7 @@ public class DLFileEntryFinderTest {
 		Assert.assertEquals(
 			0,
 			doCountBy_G_U_R_F_M_NewRepository(
-				_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+				_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 				queryDefinition));
 	}
 
@@ -943,7 +943,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_F_M(
-			_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+			_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 			queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
@@ -962,7 +962,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_BothRepositories(
-			_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+			_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 			queryDefinition);
 
 		Assert.assertEquals(2, dlFileEntries.size());
@@ -977,7 +977,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_DefaultRepository(
-			_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+			_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 			queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
@@ -996,7 +996,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_EmptyRepositories(
-			_folderDefaultRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+			_defaultRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 			queryDefinition);
 
 		Assert.assertEquals(2, dlFileEntries.size());
@@ -1009,7 +1009,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_NewRepository(
-			_folderNewRepository.getUserId(), ContentTypes.TEXT_PLAIN,
+			_newRepositoryFolder.getUserId(), ContentTypes.TEXT_PLAIN,
 			queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
@@ -1026,7 +1026,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_F_M(
-			_folderDefaultRepository.getUserId(), null, queryDefinition);
+			_defaultRepositoryFolder.getUserId(), null, queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
 
@@ -1044,7 +1044,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_BothRepositories(
-			_folderDefaultRepository.getUserId(), null, queryDefinition);
+			_defaultRepositoryFolder.getUserId(), null, queryDefinition);
 
 		Assert.assertEquals(2, dlFileEntries.size());
 	}
@@ -1058,7 +1058,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_DefaultRepository(
-			_folderDefaultRepository.getUserId(), null, queryDefinition);
+			_defaultRepositoryFolder.getUserId(), null, queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
 
@@ -1076,7 +1076,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_EmptyRepositories(
-			_folderDefaultRepository.getUserId(), null, queryDefinition);
+			_defaultRepositoryFolder.getUserId(), null, queryDefinition);
 
 		Assert.assertEquals(2, dlFileEntries.size());
 	}
@@ -1090,7 +1090,7 @@ public class DLFileEntryFinderTest {
 		queryDefinition.setStatus(WorkflowConstants.STATUS_APPROVED);
 
 		List<DLFileEntry> dlFileEntries = doFindBy_G_U_R_F_M_NewRepository(
-			_folderNewRepository.getUserId(), null, queryDefinition);
+			_newRepositoryFolder.getUserId(), null, queryDefinition);
 
 		Assert.assertEquals(1, dlFileEntries.size());
 
@@ -1181,14 +1181,14 @@ public class DLFileEntryFinderTest {
 
 	@Test
 	public void testFindByMisversioned() throws Exception {
-		long oldFileEntryId =  _dlFileVersionDefaultRepository.getFileEntryId();
+		long oldFileEntryId =  _defaultRepositoryDLFileVersion.getFileEntryId();
 
 		try {
-			_dlFileVersionDefaultRepository.setFileEntryId(
+			_defaultRepositoryDLFileVersion.setFileEntryId(
 				ServiceTestUtil.randomLong());
 
 			DLFileVersionLocalServiceUtil.updateDLFileVersion(
-				_dlFileVersionDefaultRepository);
+				_defaultRepositoryDLFileVersion);
 
 			List<DLFileEntry> dlFileEntries =
 				DLFileEntryLocalServiceUtil.getMisversionedFileEntries();
@@ -1200,10 +1200,10 @@ public class DLFileEntryFinderTest {
 			Assert.assertEquals("FE1.txt", dlFileEntry.getTitle());
 		}
 		finally {
-			_dlFileVersionDefaultRepository.setFileEntryId(oldFileEntryId);
+			_defaultRepositoryDLFileVersion.setFileEntryId(oldFileEntryId);
 
 			DLFileVersionLocalServiceUtil.updateDLFileVersion(
-				_dlFileVersionDefaultRepository);
+				_defaultRepositoryDLFileVersion);
 		}
 	}
 
@@ -1211,7 +1211,7 @@ public class DLFileEntryFinderTest {
 	public void testFindByNoAssets() throws Exception {
 		AssetEntryLocalServiceUtil.deleteEntry(
 			DLFileEntry.class.getName(),
-			_dlFileVersionDefaultRepository.getFileEntryId());
+			_defaultRepositoryDLFileVersion.getFileEntryId());
 
 		LastSessionRecorderUtil.syncLastSessionState();
 
@@ -1230,7 +1230,7 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getFolderId()});
+			new long[] {_defaultRepositoryFolder.getFolderId()});
 
 		String[] mimeTypes = null;
 
@@ -1247,9 +1247,9 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> repositoryIds = ListUtil.toList(
-			new long[] {_folderNewRepository.getRepositoryId()});
+			new long[] {_newRepositoryFolder.getRepositoryId()});
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderNewRepository.getFolderId()});
+			new long[] {_newRepositoryFolder.getFolderId()});
 
 		return doCountBy_G_U_R_F_M(
 			userId, repositoryIds, folderIds, mimeType, queryDefinition);
@@ -1260,9 +1260,9 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> repositoryIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getRepositoryId()});
+			new long[] {_defaultRepositoryFolder.getRepositoryId()});
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getFolderId()});
+			new long[] {_defaultRepositoryFolder.getFolderId()});
 
 		return doCountBy_G_U_R_F_M(
 			userId, repositoryIds, folderIds, mimeType, queryDefinition);
@@ -1274,13 +1274,13 @@ public class DLFileEntryFinderTest {
 
 		List<Long> repositoryIds = ListUtil.toList(
 			new long[] {
-				_folderDefaultRepository.getRepositoryId(),
-				_folderNewRepository.getRepositoryId()
+				_defaultRepositoryFolder.getRepositoryId(),
+				_newRepositoryFolder.getRepositoryId()
 			});
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {
-				_folderDefaultRepository.getFolderId(),
-				_folderNewRepository.getFolderId(),
+				_defaultRepositoryFolder.getFolderId(),
+				_newRepositoryFolder.getFolderId(),
 			});
 
 		return doCountBy_G_U_R_F_M(
@@ -1319,7 +1319,7 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getFolderId()});
+			new long[] {_defaultRepositoryFolder.getFolderId()});
 
 		String[] mimeTypes = null;
 
@@ -1336,9 +1336,9 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> repositoryIds = ListUtil.toList(
-			new long[] {_folderNewRepository.getRepositoryId()});
+			new long[] {_newRepositoryFolder.getRepositoryId()});
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderNewRepository.getFolderId()});
+			new long[] {_newRepositoryFolder.getFolderId()});
 
 		return doFindBy_G_U_R_F_M(
 			userId, repositoryIds, folderIds, mimeType, queryDefinition);
@@ -1349,9 +1349,9 @@ public class DLFileEntryFinderTest {
 		throws Exception {
 
 		List<Long> repositoryIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getRepositoryId()});
+			new long[] {_defaultRepositoryFolder.getRepositoryId()});
 		List<Long> folderIds = ListUtil.toList(
-			new long[] {_folderDefaultRepository.getFolderId()});
+			new long[] {_defaultRepositoryFolder.getFolderId()});
 
 		return doFindBy_G_U_R_F_M(
 			userId, repositoryIds, folderIds, mimeType, queryDefinition);
@@ -1363,14 +1363,14 @@ public class DLFileEntryFinderTest {
 
 		List<Long> repositoryIds = ListUtil.toList(
 			new long[] {
-				_folderDefaultRepository.getRepositoryId(),
-				_folderNewRepository.getRepositoryId()
+				_defaultRepositoryFolder.getRepositoryId(),
+				_newRepositoryFolder.getRepositoryId()
 			});
 
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {
-				_folderDefaultRepository.getFolderId(),
-				_folderNewRepository.getFolderId(),
+				_defaultRepositoryFolder.getFolderId(),
+				_newRepositoryFolder.getFolderId(),
 			});
 
 		return doFindBy_G_U_R_F_M(
@@ -1481,9 +1481,9 @@ public class DLFileEntryFinderTest {
 
 	private static final long _SMALL_IMAGE_ID = 1234L;
 
-	private DLFileVersion _dlFileVersionDefaultRepository;
-	private Folder _folderDefaultRepository;
-	private Folder _folderNewRepository;
+	private DLFileVersion _defaultRepositoryDLFileVersion;
+	private Folder _defaultRepositoryFolder;
+	private Folder _newRepositoryFolder;
 	private Group _group;
 	private Repository _repository;
 
