@@ -76,15 +76,15 @@ public class DLFileEntryFinderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_group = GroupTestUtil.addGroup();
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId());
-
 		long classNameId = PortalUtil.getClassNameId(
 			LiferayRepository.class.getName());
 
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
+
+		_group = GroupTestUtil.addGroup();
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			_group.getGroupId());
 
 		_repository = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,

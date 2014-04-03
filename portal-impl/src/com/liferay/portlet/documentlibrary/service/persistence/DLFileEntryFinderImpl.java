@@ -201,7 +201,7 @@ public class DLFileEntryFinderImpl
 			long groupId, List<Long> repositoryIds, List<Long> folderIds,
 			QueryDefinition queryDefinition)
 		throws SystemException {
-	
+
 		return doCountByG_U_R_F_M(
 			groupId, 0, repositoryIds, folderIds, null, queryDefinition, false);
 	}
@@ -225,7 +225,7 @@ public class DLFileEntryFinderImpl
 			List<Long> folderIds, String[] mimeTypes,
 			QueryDefinition queryDefinition)
 		throws SystemException {
-	
+
 		return doCountByG_U_R_F_M(
 			groupId, userId, repositoryIds, folderIds, mimeTypes,
 			queryDefinition, false);
@@ -250,7 +250,7 @@ public class DLFileEntryFinderImpl
 			List<Long> folderIds, String[] mimeTypes,
 			QueryDefinition queryDefinition)
 		throws SystemException {
-	
+
 		return doCountByG_U_R_F_M(
 			groupId, userId, repositoryIds, folderIds, mimeTypes,
 			queryDefinition, true);
