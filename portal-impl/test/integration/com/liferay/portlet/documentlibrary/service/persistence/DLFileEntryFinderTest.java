@@ -1248,7 +1248,6 @@ public class DLFileEntryFinderTest {
 
 		List<Long> repositoryIds = ListUtil.toList(
 			new long[] {_folderNewRepository.getRepositoryId()});
-
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {_folderNewRepository.getFolderId()});
 
@@ -1262,7 +1261,6 @@ public class DLFileEntryFinderTest {
 
 		List<Long> repositoryIds = ListUtil.toList(
 			new long[] {_folderDefaultRepository.getRepositoryId()});
-
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {_folderDefaultRepository.getFolderId()});
 
@@ -1279,7 +1277,6 @@ public class DLFileEntryFinderTest {
 				_folderDefaultRepository.getRepositoryId(),
 				_folderNewRepository.getRepositoryId()
 			});
-
 		List<Long> folderIds = ListUtil.toList(
 			new long[] {
 				_folderDefaultRepository.getFolderId(),
@@ -1294,8 +1291,8 @@ public class DLFileEntryFinderTest {
 			long userId, String mimeType, QueryDefinition queryDefinition)
 		throws Exception {
 
-		List<Long> folderIds = new ArrayList<Long>();
 		List<Long> repositoryIds = new ArrayList<Long>();
+		List<Long> folderIds = new ArrayList<Long>();
 
 		return doCountBy_G_U_R_F_M(
 			userId, repositoryIds, folderIds, mimeType, queryDefinition);
