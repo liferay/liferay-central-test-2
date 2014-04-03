@@ -157,12 +157,14 @@ public abstract class BaseSearchResultPermissionFilter
 			(float)(System.currentTimeMillis() - startTime) / Time.SECOND);
 	}
 
+	private static final double
+		_INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR =
+			GetterUtil.getDouble(
+				PropsUtil.get(
+					PropsKeys.
+						INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR));
+
 	private static final String[] _PERMISSION_SELECTED_FIELD_NAMES =
 		{Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK};
-
-	private static double _INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR =
-		GetterUtil.getDouble(
-			PropsUtil.get(
-				PropsKeys.INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR));
 
 }
