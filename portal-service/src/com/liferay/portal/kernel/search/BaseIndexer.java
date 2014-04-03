@@ -1102,7 +1102,7 @@ public abstract class BaseIndexer implements Indexer {
 
 		if (ArrayUtil.isEmpty(selectedFieldNames) ||
 			(selectedFieldNames.length == 1) &&
-			selectedFieldNames[0].equals(Field.ALL_FIELDS_ID)) {
+			selectedFieldNames[0].equals(Field.ANY)) {
 
 			return;
 		}

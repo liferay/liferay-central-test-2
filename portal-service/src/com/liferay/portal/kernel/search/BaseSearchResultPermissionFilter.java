@@ -42,7 +42,7 @@ public abstract class BaseSearchResultPermissionFilter
 
 		if (ArrayUtil.isNotEmpty(selectedFieldNames) &&
 			(selectedFieldNames.length == 1) &&
-			selectedFieldNames[0].equals(Field.ALL_FIELDS_ID)) {
+			selectedFieldNames[0].equals(Field.ANY)) {
 
 			Set<String> selectedFieldNameSet = SetUtil.fromArray(
 				selectedFieldNames);

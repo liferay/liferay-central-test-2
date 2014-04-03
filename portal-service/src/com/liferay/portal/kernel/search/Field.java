@@ -30,7 +30,7 @@ import java.util.Map;
  */
 public class Field implements Serializable {
 
-	public static final String ALL_FIELDS_ID = StringPool.STAR;
+	public static final String ANY = StringPool.STAR;
 
 	public static final String ASSET_CATEGORY_ID = "assetCategoryId";
 
