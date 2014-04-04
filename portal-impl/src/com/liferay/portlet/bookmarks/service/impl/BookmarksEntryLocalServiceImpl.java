@@ -511,15 +511,14 @@ public class BookmarksEntryLocalServiceImpl
 
 		searchContext.setEnd(end);
 		searchContext.setGroupIds(new long[] {groupId});
+		searchContext.setSorts(new Sort(Field.MODIFIED_DATE, true));
+		searchContext.setStart(start);
+		searchContext.setUserId(userId);
 
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		queryConfig.setHighlightEnabled(false);
 		queryConfig.setScoreEnabled(false);
-
-		searchContext.setSorts(new Sort(Field.MODIFIED_DATE, true));
-		searchContext.setStart(start);
-		searchContext.setUserId(userId);
 
 		return indexer.search(searchContext);
 	}

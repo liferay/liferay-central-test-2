@@ -105,11 +105,6 @@ import javax.portlet.PortletURL;
  */
 public abstract class BaseIndexer implements Indexer {
 
-	public static final String[] DEFAULT_SELECTED_FIELD_NAMES =
-		{Field.COMPANY_ID, Field.GROUP_ID, Field.UID, Field.CLASS_NAME_ID,
-			Field.CLASS_PK, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
-			Field.VERSION};
-
 	@Override
 	public void addRelatedEntryFields(Document document, Object obj)
 		throws Exception {
@@ -1726,7 +1721,11 @@ public abstract class BaseIndexer implements Indexer {
 
 	private static Log _log = LogFactoryUtil.getLog(BaseIndexer.class);
 
-	private String[] _defaultSelectedFieldNames;
+	private String[] _defaultSelectedFieldNames = {
+		Field.CLASS_NAME_ID, Field.CLASS_PK, Field.COMPANY_ID,
+		Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK, Field.GROUP_ID, Field.UID,
+		Field.VERSION
+	};
 	private Document _document = new DocumentImpl();
 	private boolean _filterSearch;
 	private boolean _indexerEnabled = true;
