@@ -58,8 +58,8 @@ public class AssetVocabularyIndexer extends BaseIndexer {
 	public AssetVocabularyIndexer() {
 		setDefaultSelectedFieldNames(
 			new String[] {
-				Field.COMPANY_ID, Field.GROUP_ID, Field.UID,
-				Field.ASSET_VOCABULARY_ID
+				Field.ASSET_VOCABULARY_ID, Field.COMPANY_ID, Field.GROUP_ID,
+				Field.UID,
 			});
 		setFilterSearch(true);
 		setPermissionAware(true);
