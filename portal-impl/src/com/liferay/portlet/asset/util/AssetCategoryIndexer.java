@@ -59,7 +59,8 @@ public class AssetCategoryIndexer extends BaseIndexer {
 		setDefaultSelectedFieldNames(
 			new String[] {
 				Field.COMPANY_ID, Field.GROUP_ID, Field.UID,
-				Field.ASSET_CATEGORY_ID});
+				Field.ASSET_CATEGORY_ID
+			});
 		setFilterSearch(true);
 		setPermissionAware(true);
 	}
