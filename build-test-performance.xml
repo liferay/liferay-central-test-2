@@ -9,10 +9,10 @@
 				export ANT_HOME=/opt/ant
 				export ANT_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
 				export JAVA_HOME=/opt/jvms/default_jdk
-				export PATH=$PATH:$JAVA_HOME/bin:$ANT_HOME/bin
+				export PATH=${PATH}:${ANT_HOME}/bin:${JAVA_HOME}/bin
 				export SSH_TTY=/dev/pts/7
 
-				cd /home/trunks/svn/benchmark/trunk/
+				cd /home/trunks/svn/benchmark/trunk
 
 				ant stop all-database all-portal start-visualvm all-grinder all-sample stop
 			]]>
