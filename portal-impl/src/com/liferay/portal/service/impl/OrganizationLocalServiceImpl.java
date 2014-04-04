@@ -1443,7 +1443,7 @@ public class OrganizationLocalServiceImpl
 			}
 
 			Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
-							Organization.class);
+				Organization.class);
 
 			SearchContext searchContext = buildSearchContext(
 				companyId, parentOrganizationId, name, type, street, city, zip,
@@ -1935,20 +1935,20 @@ public class OrganizationLocalServiceImpl
 			boolean andSearch, int start, int end, Sort sort)
 		throws PortalException, SystemException {
 
-		String countryName = null;
-
-		if (countryId != null) {
-			Country country = countryService.fetchCountry(countryId);
-
-			countryName = country.getName();
-		}
-
 		String regionCode = null;
 
 		if (regionId != null) {
 			Region region = regionService.fetchRegion(regionId);
 
 			regionCode = region.getRegionCode();
+		}
+
+		String countryName = null;
+
+		if (countryId != null) {
+			Country country = countryService.fetchCountry(countryId);
+
+			countryName = country.getName();
 		}
 
 		return buildSearchContext(
@@ -1993,16 +1993,16 @@ public class OrganizationLocalServiceImpl
 			}
 		}
 
-		QueryConfig queryConfig = searchContext.getQueryConfig();
-
-		queryConfig.setHighlightEnabled(false);
-		queryConfig.setScoreEnabled(false);
-
 		if (sort != null) {
 			searchContext.setSorts(sort);
 		}
 
 		searchContext.setStart(start);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
 
 		return searchContext;
 	}
