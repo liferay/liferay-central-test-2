@@ -216,7 +216,7 @@
 		<licenses>
 			<license>
 				<license-name>Initial Developer's Public License 1.0</license-name>
-				<license-url>http://www.firebirdsql.org/en/initial-developer-s-public-license-version-1-0/</license-url>
+				<license-url>http://www.firebirdsql.org/en/initial-developer-s-public-license-version-1-0</license-url>
 			</license>
 			<license>
 				<license-name>Public Domain</license-name>
@@ -275,7 +275,7 @@
 		<licenses>
 			<license>
 				<license-name>InterBase Public License 1.0 and Amendments</license-name>
-				<license-url>http://www.firebirdsql.org/en/interbase-public-license/</license-url>
+				<license-url>http://www.firebirdsql.org/en/interbase-public-license</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1262,7 +1262,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
-				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
+				<license-url>http://www.mozilla.org/MPL/1.1</license-url>
 			</license>
 		</licenses>
 		<comments>
@@ -2058,7 +2058,7 @@
 		<file-name>lib/portal/java-diff.jar</file-name>
 		<version>1.0.5</version>
 		<project-name>Java Diff</project-name>
-		<project-url>http://repo1.maven.org/maven2/org/incava/java-diff/1.1/</project-url>
+		<project-url>http://repo1.maven.org/maven2/org/incava/java-diff/1.1</project-url>
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
@@ -2461,7 +2461,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
-				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
+				<license-url>http://www.mozilla.org/MPL/1.1</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2988,7 +2988,7 @@
 		<licenses>
 			<license>
 				<license-name>MPL 1.1</license-name>
-				<license-url>http://www.mozilla.org/MPL/1.1/</license-url>
+				<license-url>http://www.mozilla.org/MPL/1.1</license-url>
 			</license>
 		</licenses>
 		<comments>
