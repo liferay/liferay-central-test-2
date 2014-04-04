@@ -77,7 +77,6 @@ public class SeleniumBuilderFileUtil {
 
 		_componentNames = ListUtil.fromArray(
 			StringUtil.split(properties.getProperty("component.names")));
-
 		_testrayAvailableComponentNames = ListUtil.fromArray(
 			StringUtil.split(
 				properties.getProperty("testray.available.component.names")));
