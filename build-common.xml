@@ -776,7 +776,7 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
-	<macrodef name="execute-ssh">
+	<macrodef name="ssh-execute">
 		<attribute name="ssh.host" default="${ssh.host}" />
 		<attribute name="ssh.password" default="${ssh.password}" />
 		<attribute name="ssh.username" default="${ssh.username}" />
@@ -830,7 +830,8 @@ JSch was automatically installed. Please rerun your task.
 					<fail>
 .
 
-Please set $${ssh.host}, $${ssh.password}, $${ssh.username}. Then rerun your task.
+Please set the properties "ssh.host", "ssh.password", and "ssh.username". Then
+rerun your task.
 					</fail>
 				</then>
 			</if>

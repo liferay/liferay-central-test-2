@@ -4,7 +4,7 @@
 	<import file="build-test.xml" />
 
 	<target name="run-performance-test">
-		<execute-ssh>
+		<ssh-execute>
 			<![CDATA[
 				export ANT_HOME=/opt/ant
 				export ANT_OPTS="-Xmx1024m -XX:MaxPermSize=512m"
@@ -17,6 +17,6 @@
 
 				ant stop all-database all-portal start-visualvm all-grinder all-sample stop
 			]]>
-		</execute-ssh>
+		</ssh-execute>
 	</target>
 </project>

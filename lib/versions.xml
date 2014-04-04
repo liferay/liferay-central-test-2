@@ -438,7 +438,7 @@
 		<file-name>lib/development/jsch.jar</file-name>
 		<version>0.1.51</version>
 		<project-name>JSch</project-name>
-		<project-url>http://www.jcraft.com/jsch/</project-url>
+		<project-url>http://www.jcraft.com/jsch</project-url>
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
