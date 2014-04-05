@@ -93,7 +93,7 @@ public class JavadocBuilder {
 
 		String comment = _getCDATA(javaClass);
 
-		if (comment.startsWith("Copyright (c) 2000-2010 Liferay, Inc.")) {
+		if (comment.startsWith("Copyright (c) 2000-present Liferay, Inc.")) {
 			comment = StringPool.BLANK;
 		}
 
