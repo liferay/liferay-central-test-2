@@ -35,9 +35,9 @@ if (article.getVersion() > JournalArticleConstants.VERSION_DEFAULT) {
 	}
 }
 
-String articleImageURL = article.getArticleImageURL(themeDisplay);
-
 DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(themeDisplay.getSiteGroupId(), PortalUtil.getClassNameId(JournalArticle.class), article.getStructureId(), true);
+
+String articleImageURL = article.getArticleImageURL(themeDisplay);
 %>
 
 <liferay-ui:app-view-entry
