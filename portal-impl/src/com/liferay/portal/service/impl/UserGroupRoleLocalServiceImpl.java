@@ -41,14 +41,14 @@ public class UserGroupRoleLocalServiceImpl
 
 		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
-		groupPersistence.addUser(groupId, userId);
-
 		for (long roleId : roleIds) {
 			UserGroupRole userGroupRole = addUserGroupRole(
 				userId, groupId, roleId);
 
 			userGroupRoles.add(userGroupRole);
 		}
+
+		groupPersistence.addUser(groupId, userId);
 
 		PermissionCacheUtil.clearCache();
 
@@ -62,14 +62,14 @@ public class UserGroupRoleLocalServiceImpl
 
 		List<UserGroupRole> userGroupRoles = new ArrayList<UserGroupRole>();
 
-		groupPersistence.addUsers(groupId, userIds);
-
 		for (long userId : userIds) {
 			UserGroupRole userGroupRole = addUserGroupRole(
 				userId, groupId, roleId);
 
 			userGroupRoles.add(userGroupRole);
 		}
+
+		groupPersistence.addUsers(groupId, userIds);
 
 		PermissionCacheUtil.clearCache();
 
