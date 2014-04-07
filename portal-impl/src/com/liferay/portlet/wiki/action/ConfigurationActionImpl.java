@@ -33,14 +33,13 @@ public class ConfigurationActionImpl extends SettingsConfigurationAction {
 
 	@Override
 	public void postProcess(
-			long companyId, PortletRequest portletRequest, Settings settings) {
+		long companyId, PortletRequest portletRequest, Settings settings) {
 
 		WikiSettings wikiSettings = new WikiSettings(settings);
 
 		removeDefaultValue(
 			portletRequest, settings, "emailFromAddress",
 			wikiSettings.getEmailFromAddress());
-
 		removeDefaultValue(
 			portletRequest, settings, "emailFromName",
 			wikiSettings.getEmailFromName());
