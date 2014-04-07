@@ -104,22 +104,18 @@ public class ViewAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		WikiNode node = null;
-
 		String nodeName = ParamUtil.getString(renderRequest, "nodeName");
 
 		if (Validator.isNotNull(nodeName)) {
-			node = WikiNodeServiceUtil.getNode(
+			return WikiNodeServiceUtil.getNode(
 				themeDisplay.getScopeGroupId(), nodeName);
 		}
 		else {
 			long nodeId = GetterUtil.getLong(
 				portletPreferences.getValue("nodeId", StringPool.BLANK));
 
-			node = WikiNodeServiceUtil.getNode(nodeId);
+			return WikiNodeServiceUtil.getNode(nodeId);
 		}
-
-		return node;
 	}
 
 }
