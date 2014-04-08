@@ -136,6 +136,17 @@ public class UploadImageAction extends PortletAction {
 	}
 
 	@Override
+	public ActionForward render(
+			ActionMapping actionMapping, ActionForm actionForm,
+			PortletConfig portletConfig, RenderRequest renderRequest,
+			RenderResponse renderResponse)
+		throws Exception {
+
+		return actionMapping.findForward(
+			getForward(renderRequest, "portlet.image_uploader.view"));
+	}
+
+	@Override
 	public void serveResource(
 			ActionMapping actionMapping, ActionForm actionForm,
 			PortletConfig portletConfig, ResourceRequest resourceRequest,
@@ -378,17 +389,6 @@ public class UploadImageAction extends PortletAction {
 		mimeResponse.setContentType(contentType);
 
 		PortletResponseUtil.write(mimeResponse, bytes);
-	}
-
-	@Override
-		public ActionForward render(
-			ActionMapping actionMapping, ActionForm actionForm,
-			PortletConfig portletConfig, RenderRequest renderRequest,
-			RenderResponse renderResponse)
-		throws Exception {
-
-		return actionMapping.findForward(
-			getForward(renderRequest, "portlet.image_uploader.view"));
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UploadImageAction.class);
