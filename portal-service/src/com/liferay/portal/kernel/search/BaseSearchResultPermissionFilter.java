@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.Time;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +40,9 @@ public abstract class BaseSearchResultPermissionFilter
 			Set<String> selectedFieldNameSet = SetUtil.fromArray(
 				queryConfig.getSelectedFieldNames());
 
-			selectedFieldNameSet.addAll(_PERMISSION_SELECTED_FIELD_NAMES);
+			for (String selectedFieldName : _PERMISSION_SELECTED_FIELD_NAMES) {
+				selectedFieldNameSet.add(selectedFieldName);
+			}
 
 			queryConfig.setSelectedFieldNames(
 				selectedFieldNameSet.toArray(
@@ -162,7 +163,7 @@ public abstract class BaseSearchResultPermissionFilter
 					PropsKeys.
 						INDEX_PERMISSION_FILTER_SEARCH_AMPLIFICATION_FACTOR));
 
-	private static final List<String> _PERMISSION_SELECTED_FIELD_NAMES =
-		Arrays.asList(Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK);
+	private static final String[] _PERMISSION_SELECTED_FIELD_NAMES =
+		{Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK};
 
 }
