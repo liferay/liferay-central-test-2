@@ -32,7 +32,7 @@ public class Field implements Serializable {
 
 	public static final String ANY = StringPool.STAR;
 
-	public static final String ARTICLE_ID = "articleId";
+	public static final String JOURNAL_ARTICLE_ID = "journalArticleId";
 
 	public static final String ASSET_CATEGORY_ID = "assetCategoryId";
 
