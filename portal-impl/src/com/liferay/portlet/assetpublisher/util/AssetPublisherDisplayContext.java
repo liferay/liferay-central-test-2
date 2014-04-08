@@ -598,7 +598,7 @@ public class AssetPublisherDisplayContext {
 				return _enablePermissions;
 			}
 
-			if (!PropsValues.ASSET_PUBLISHER_SHOW_PERMISSIONS_ENABLED) {
+			if (!PropsValues.ASSET_PUBLISHER_PERMISSION_CHECKING_CONFIGURABLE) {
 				_enablePermissions = true;
 
 				return _enablePermissions;
