@@ -12,7 +12,7 @@
 
 	var SUPPORTS_INPUT_SELECTION = ((typeof INPUT_EL.selectionStart === 'number') && (typeof INPUT_EL.selectionEnd === 'number'));
 
-	var testTouch = function(A){
+	var testTouch = function(A) {
 		return A.UA.touch;
 	};
 
