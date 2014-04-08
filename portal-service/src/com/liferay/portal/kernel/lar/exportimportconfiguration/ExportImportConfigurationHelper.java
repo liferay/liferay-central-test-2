@@ -82,14 +82,13 @@ public class ExportImportConfigurationHelper {
 		Map<String, Serializable> settingsMap =
 			exportImportConfiguration.getSettingsMap();
 
-		Map<String, String[]> parameterMap =
-			(Map<String, String[]>)settingsMap.get("parameterMap");
-
 		long groupId = MapUtil.getLong(settingsMap, "sourceGroupId");
 		boolean privateLayout = GetterUtil.getBoolean(
 			settingsMap.get("privateLayout"));
 		long[] layoutIds = GetterUtil.getLongValues(
 			settingsMap.get("layoutIds"));
+		Map<String, String[]> parameterMap =
+			(Map<String, String[]>)settingsMap.get("parameterMap");
 		DateRange dateRange = ExportImportDateUtil.getDateRange(
 			exportImportConfiguration);
 		String fileName = exportImportConfiguration.getName();
