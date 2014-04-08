@@ -37,8 +37,8 @@ public class JournalSearcher extends BaseSearcher {
 	public JournalSearcher() {
 		setDefaultSelectedFieldNames(
 			new String[] {
-				Field.JOURNAL_ARTICLE_ID, Field.COMPANY_ID, Field.ENTRY_CLASS_NAME,
-				Field.ENTRY_CLASS_PK, Field.GROUP_ID, Field.TITLE,
+				Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
+				Field.GROUP_ID, Field.JOURNAL_ARTICLE_ID, Field.TITLE,
 				Field.VERSION, Field.UID});
 		setFilterSearch(true);
 		setPermissionAware(true);

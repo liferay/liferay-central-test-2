@@ -91,8 +91,8 @@ public class JournalArticleIndexer extends BaseIndexer {
 	public JournalArticleIndexer() {
 		setDefaultSelectedFieldNames(
 			new String[] {
-				Field.JOURNAL_ARTICLE_ID, Field.COMPANY_ID, Field.ENTRY_CLASS_NAME,
-				Field.ENTRY_CLASS_PK, Field.GROUP_ID, Field.TITLE,
+				Field.COMPANY_ID, Field.ENTRY_CLASS_NAME, Field.ENTRY_CLASS_PK,
+				Field.GROUP_ID, Field.JOURNAL_ARTICLE_ID, Field.TITLE,
 				Field.VERSION, Field.UID});
 		setFilterSearch(true);
 		setPermissionAware(true);
@@ -223,11 +223,11 @@ public class JournalArticleIndexer extends BaseIndexer {
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.DESCRIPTION, false);
 		addSearchTerm(searchQuery, searchContext, Field.ENTRY_CLASS_PK, false);
+		addSearchTerm(
+			searchQuery, searchContext, Field.JOURNAL_ARTICLE_ID, false);
 		addSearchLocalizedTerm(searchQuery, searchContext, Field.TITLE, false);
 		addSearchTerm(searchQuery, searchContext, Field.TYPE, false);
 		addSearchTerm(searchQuery, searchContext, Field.USER_NAME, false);
-
-		addSearchTerm(searchQuery, searchContext, Field.JOURNAL_ARTICLE_ID, false);
 
 		LinkedHashMap<String, Object> params =
 			(LinkedHashMap<String, Object>)searchContext.getAttribute("params");
@@ -368,12 +368,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		document.addKeyword(Field.FOLDER_ID, article.getFolderId());
-		document.addKeyword(Field.LAYOUT_UUID, article.getLayoutUuid());
-		document.addKeyword(
-			Field.TREE_PATH,
-			StringUtil.split(article.getTreePath(), CharPool.SLASH));
-		document.addKeyword(Field.TYPE, article.getType());
-		document.addKeyword(Field.VERSION, article.getVersion());
 
 		String articleId = article.getArticleId();
 
@@ -382,6 +376,14 @@ public class JournalArticleIndexer extends BaseIndexer {
 		}
 
 		document.addKeyword(Field.JOURNAL_ARTICLE_ID, articleId);
+
+		document.addKeyword(Field.LAYOUT_UUID, article.getLayoutUuid());
+		document.addKeyword(
+			Field.TREE_PATH,
+			StringUtil.split(article.getTreePath(), CharPool.SLASH));
+		document.addKeyword(Field.TYPE, article.getType());
+		document.addKeyword(Field.VERSION, article.getVersion());
+
 		document.addKeyword("ddmStructureKey", article.getStructureId());
 		document.addKeyword("ddmTemplateKey", article.getTemplateId());
 		document.addDate("displayDate", article.getDisplayDate());
