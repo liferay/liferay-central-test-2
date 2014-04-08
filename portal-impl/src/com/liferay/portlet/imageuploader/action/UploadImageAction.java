@@ -102,11 +102,13 @@ public class UploadImageAction extends PortletAction {
 				throw new PortalException(uploadException.getCause());
 			}
 			else if (cmd.equals(Constants.ADD_TEMP)) {
-				FileEntry tempImageFile = addTempImageFile(actionRequest);
+				FileEntry tempImageFileEntry = addTempImageFileEntry(
+					actionRequest);
 
 				JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
-				jsonObject.put("tempImageFileName", tempImageFile.getTitle());
+				jsonObject.put(
+					"tempImageFileName", tempImageFileEntry.getTitle());
 
 				writeJSON(actionRequest, actionResponse, jsonObject);
 			}
@@ -117,7 +119,7 @@ public class UploadImageAction extends PortletAction {
 					actionRequest, "imageUploaded");
 
 				if (imageUploaded) {
-					fileEntry = saveTempImageFile(actionRequest);
+					fileEntry = saveTempImageFileEntry(actionRequest);
 
 					if (fileEntry.getSize() > maxFileSize) {
 						throw new FileSizeException();
@@ -171,7 +173,7 @@ public class UploadImageAction extends PortletAction {
 		}
 	}
 
-	protected FileEntry addTempImageFile(PortletRequest portletRequest)
+	protected FileEntry addTempImageFileEntry(PortletRequest portletRequest)
 		throws Exception {
 
 		UploadPortletRequest uploadPortletRequest =
@@ -301,7 +303,7 @@ public class UploadImageAction extends PortletAction {
 		}
 	}
 
-	protected FileEntry saveTempImageFile(ActionRequest actionRequest)
+	protected FileEntry saveTempImageFileEntry(ActionRequest actionRequest)
 		throws Exception {
 
 		FileEntry tempFileEntry = null;
