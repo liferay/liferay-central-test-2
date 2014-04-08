@@ -54,10 +54,9 @@ public class AntivirusScannerException extends PortalException {
 
 	public String getMessageKey() {
 		if (_type == EXECUTION_FAILURE) {
-			return "antivirus-scan-failed";
+			return "unable-to-scan-file-for-viruses";
 		}
-
-		if (_type == VIRUS_DETECTED) {
+		else if (_type == VIRUS_DETECTED) {
 			return "a-virus-was-detected-in-the-file";
 		}
 

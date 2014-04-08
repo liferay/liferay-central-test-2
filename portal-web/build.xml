@@ -758,7 +758,7 @@
 								alert( 'A category is required for this file. Please use the Documents and Media application to upload the file.' );
 								break ;
 							case 211:
-								alert( 'File contains virus or an error occurred while scanning the file' );
+								alert( 'File may contain a virus.' );
 								break ;
 							case 220:
 								alert( 'You cannot upload a video file if video preview generation is disabled.' );
