@@ -407,16 +407,17 @@ public class TrashEntryLocalServiceImpl extends TrashEntryLocalServiceBaseImpl {
 		searchContext.setKeywords(keywords);
 		searchContext.setGroupIds(new long[] {groupId});
 
-		QueryConfig queryConfig = searchContext.getQueryConfig();
-		queryConfig.setHighlightEnabled(false);
-		queryConfig.setScoreEnabled(false);
-
 		if (sort != null) {
 			searchContext.setSorts(sort);
 		}
 
 		searchContext.setStart(start);
 		searchContext.setUserId(userId);
+
+		QueryConfig queryConfig = searchContext.getQueryConfig();
+
+		queryConfig.setHighlightEnabled(false);
+		queryConfig.setScoreEnabled(false);
 
 		return searchContext;
 	}
