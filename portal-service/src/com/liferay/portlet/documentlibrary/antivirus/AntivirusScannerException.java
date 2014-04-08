@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.exception.PortalException;
  */
 public class AntivirusScannerException extends PortalException {
 
-	public static final int EXECUTION_FAILURE = 1;
+	public static final int PROCESS_FAILURE = 1;
 
 	public static final int VIRUS_DETECTED = 2;
 
@@ -53,7 +53,7 @@ public class AntivirusScannerException extends PortalException {
 	}
 
 	public String getMessageKey() {
-		if (_type == EXECUTION_FAILURE) {
+		if (_type == PROCESS_FAILURE) {
 			return "unable-to-scan-file-for-viruses";
 		}
 		else if (_type == VIRUS_DETECTED) {

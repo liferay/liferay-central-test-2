@@ -44,12 +44,12 @@ public class ClamAntivirusScannerImpl extends BaseFileAntivirusScanner {
 			}
 			else if (exitValue >= 2) {
 				throw new AntivirusScannerException(
-					AntivirusScannerException.EXECUTION_FAILURE);
+					AntivirusScannerException.PROCESS_FAILURE);
 			}
 		}
 		catch (Exception e) {
 			throw new AntivirusScannerException(
-				AntivirusScannerException.EXECUTION_FAILURE);
+				AntivirusScannerException.PROCESS_FAILURE);
 		}
 		finally {
 			if (process != null) {
