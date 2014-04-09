@@ -41,7 +41,7 @@ public class ETagFilter extends BasePortalFilter {
 		HttpServletRequest request, HttpServletResponse response) {
 
 		if (ParamUtil.getBoolean(request, _ETAG, true) &&
-			(request.getAttribute(SKIP_FILTER) == null)) {
+			!isAlreadyFiltered(request)) {
 
 			return true;
 		}
@@ -50,7 +50,16 @@ public class ETagFilter extends BasePortalFilter {
 		}
 	}
 
-	protected boolean isEligibleForEtag(int status) {
+	protected boolean isAlreadyFiltered(HttpServletRequest request) {
+		if (request.getAttribute(SKIP_FILTER) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	protected boolean isEligibleForETag(int status) {
 		if ((status >= HttpServletResponse.SC_OK) &&
 			(status < HttpServletResponse.SC_MULTIPLE_CHOICES)) {
 
@@ -67,12 +76,12 @@ public class ETagFilter extends BasePortalFilter {
 			FilterChain filterChain)
 		throws Exception {
 
+		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
+
 		RestrictedByteBufferCacheServletResponse
 			restrictedByteBufferCacheServletResponse =
 				new RestrictedByteBufferCacheServletResponse(
 					response, PropsValues.ETAG_RESPONSE_SIZE_MAX);
-
-		request.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 		processFilter(
 			ETagFilter.class, request, restrictedByteBufferCacheServletResponse,
@@ -82,7 +91,7 @@ public class ETagFilter extends BasePortalFilter {
 			ByteBuffer byteBuffer =
 				restrictedByteBufferCacheServletResponse.getByteBuffer();
 
-			if (!isEligibleForEtag(
+			if (!isEligibleForETag(
 					restrictedByteBufferCacheServletResponse.getStatus()) ||
 				!ETagUtil.processETag(request, response, byteBuffer)) {
 
