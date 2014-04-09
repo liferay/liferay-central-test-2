@@ -179,8 +179,8 @@ public class SanitizerLogWrapper extends LogWrapper {
 		}
 
 		char[] chars = message.toCharArray();
-		boolean sanitized = false;
 		boolean hasLessThanCharacter = false;
+		boolean sanitized = false;
 
 		for (int i = 0; i < chars.length; i++) {
 			int c = chars[i];
@@ -197,8 +197,11 @@ public class SanitizerLogWrapper extends LogWrapper {
 			}
 		}
 
-		boolean escapeHTML =
-			_LOG_SANITIZER_ESCAPE_HTML_ENABLED && hasLessThanCharacter;
+		boolean escapeHTML = false;
+
+		if (_LOG_SANITIZER_ESCAPE_HTML_ENABLED && hasLessThanCharacter) {
+			escapeHTML = true;
+		}
 
 		if (sanitized || escapeHTML) {
 			String sanitizedMessage = new String(chars);
