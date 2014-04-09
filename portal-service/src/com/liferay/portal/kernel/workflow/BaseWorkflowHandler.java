@@ -83,19 +83,19 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		throws PortalException, SystemException {
 
 		try {
-			LiferayPortletURL portletURL = PortletURLFactoryUtil.create(
+			LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
 				serviceContext.getRequest(), PortletKeys.MY_WORKFLOW_TASKS,
 				PortalUtil.getControlPanelPlid(serviceContext.getCompanyId()),
 				PortletRequest.RENDER_PHASE);
 
-			portletURL.setControlPanelCategory("my");
-			portletURL.setParameter(
+			liferayPortletURL.setControlPanelCategory("my");
+			liferayPortletURL.setParameter(
 				"struts_action", "/my_workflow_tasks/edit_workflow_task");
-			portletURL.setParameter(
+			liferayPortletURL.setParameter(
 				"workflowTaskId", String.valueOf(workflowTaskId));
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
 
-			return portletURL.toString();
+			return liferayPortletURL.toString();
 		}
 		catch (WindowStateException wse) {
 			throw new PortalException(wse);
