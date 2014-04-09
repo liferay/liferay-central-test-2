@@ -12,7 +12,7 @@ compileJava {
 		ClassLoader classLoader = org.apache.tools.ant.Project.class.classLoader
 
 		configurations.jdt.each {
-			File file -> InjectJarFile:{
+			File file -> injectJarFile: {
 				URI uri = file.toURI()
 
 				classLoader.addURL(uri.toURL())
@@ -34,7 +34,7 @@ dependencies {
 	bnd files(["${liferayProjectDir}/util-java/classes"])
 
 	bnd fileTree(
-		dir:"${liferayProjectDir}/lib/portal",
+		dir: "${liferayProjectDir}/lib/portal",
 		includes: ["**/bnd.jar", "portal-ant-shared.jar"]
 	)
 }
@@ -44,17 +44,17 @@ dependencies {
 	compile files(["${liferayProjectDir}/util-java/classes"])
 
 	compile fileTree(
-		dir:"${liferayProjectDir}/lib/development",
+		dir: "${liferayProjectDir}/lib/development",
 		includes: ["**/*.jar"]
 	)
 
 	compile fileTree(
-		dir:"${liferayProjectDir}/lib/global",
+		dir: "${liferayProjectDir}/lib/global",
 		includes: ["**/*.jar"]
 	)
 
 	compile fileTree(
-		dir:"${liferayProjectDir}/lib/portal",
+		dir: "${liferayProjectDir}/lib/portal",
 		includes: ["**/*.jar"]
 	)
 }
