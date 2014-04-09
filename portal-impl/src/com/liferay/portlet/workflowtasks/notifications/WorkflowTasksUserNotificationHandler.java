@@ -67,7 +67,7 @@ public class WorkflowTasksUserNotificationHandler
 
 		long workflowTaskId = jsonObject.getLong("workflowTaskId");
 
-		return workflowHandler.getEditWorkflowTaskURL(
+		return workflowHandler.getURLEditWorkflowTask(
 			workflowTaskId, serviceContext);
 	}
 

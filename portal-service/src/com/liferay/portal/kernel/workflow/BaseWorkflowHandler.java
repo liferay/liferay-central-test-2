@@ -78,7 +78,7 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	@Override
-	public String getEditWorkflowTaskURL(
+	public String getURLEditWorkflowTask(
 			long workflowTaskId, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 

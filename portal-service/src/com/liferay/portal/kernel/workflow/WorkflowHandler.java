@@ -49,7 +49,7 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
-	public String getEditWorkflowTaskURL(
+	public String getURLEditWorkflowTask(
 			long workflowTaskId, ServiceContext serviceContext)
 		throws PortalException, SystemException;
 
