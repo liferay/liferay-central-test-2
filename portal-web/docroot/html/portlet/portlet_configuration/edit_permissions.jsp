@@ -203,7 +203,7 @@ definePermissionsURL.setRefererPlid(plid);
 				actions.remove(ActionKeys.VIEW);
 			}
 
-			if ((modelResourceRole.getType() == RoleConstants.TYPE_SITE) || (modelResourceRole.getType() == RoleConstants.TYPE_ORGANIZATION)) {
+			if ((modelResourceRole.getType() == RoleConstants.TYPE_ORGANIZATION) || (modelResourceRole.getType() == RoleConstants.TYPE_SITE)) {
 				filterGroupRoles = true;
 			}
 		}
