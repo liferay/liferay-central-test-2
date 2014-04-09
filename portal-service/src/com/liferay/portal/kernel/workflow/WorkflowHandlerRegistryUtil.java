@@ -225,29 +225,6 @@ public class WorkflowHandlerRegistryUtil {
 		return null;
 	}
 
-	private boolean _hasWorkflowInstanceInProgress(
-			long companyId, long groupId, String className, long classPK)
-		throws PortalException, SystemException {
-
-		WorkflowInstanceLink workflowInstanceLink =
-			WorkflowInstanceLinkLocalServiceUtil.fetchWorkflowInstanceLink(
-				companyId, groupId, className, classPK);
-
-		if (workflowInstanceLink == null) {
-			return false;
-		}
-
-		WorkflowInstance workflowInstance =
-			WorkflowInstanceManagerUtil.getWorkflowInstance(
-				companyId, workflowInstanceLink.getWorkflowInstanceId());
-
-		if (!workflowInstance.isComplete()) {
-			return true;
-		}
-
-		return false;
-	}
-
 	private WorkflowHandlerRegistryUtil() {
 		Registry registry = RegistryUtil.getRegistry();
 
@@ -268,6 +245,29 @@ public class WorkflowHandlerRegistryUtil {
 
 	private List<WorkflowHandler> _getWorkflowHandlers() {
 		return ListUtil.fromMapValues(_workflowHandlerMap);
+	}
+
+	private boolean _hasWorkflowInstanceInProgress(
+			long companyId, long groupId, String className, long classPK)
+		throws PortalException, SystemException {
+	
+		WorkflowInstanceLink workflowInstanceLink =
+			WorkflowInstanceLinkLocalServiceUtil.fetchWorkflowInstanceLink(
+				companyId, groupId, className, classPK);
+	
+		if (workflowInstanceLink == null) {
+			return false;
+		}
+	
+		WorkflowInstance workflowInstance =
+			WorkflowInstanceManagerUtil.getWorkflowInstance(
+				companyId, workflowInstanceLink.getWorkflowInstanceId());
+	
+		if (!workflowInstance.isComplete()) {
+			return true;
+		}
+	
+		return false;
 	}
 
 	private void _register(WorkflowHandler workflowHandler) {
