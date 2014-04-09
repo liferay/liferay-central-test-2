@@ -5,14 +5,6 @@ ext.liferayProjectDir = "${rootDir}/../../.."
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-configurations {
-	jdt
-}
-
-dependencies {
-	jdt files(["${liferayProjectDir}/lib/development/ecj.jar"])
-}
-
 compileJava {
 	options.compiler = "org.eclipse.jdt.core.JDTCompilerAdapter"
 
@@ -27,6 +19,10 @@ compileJava {
 
 configurations {
 	bnd
+}
+
+configurations {
+	jdt
 }
 
 dependencies {
@@ -57,6 +53,10 @@ dependencies {
 		dir:"${liferayProjectDir}/lib/portal",
 		includes: ["**/*.jar"]
 	)
+}
+
+dependencies {
+	jdt files(["${liferayProjectDir}/lib/development/ecj.jar"])
 }
 
 jar {
