@@ -63,6 +63,10 @@ public abstract class BaseWebDriverImpl
 				_sikuliImagesDirName, "linux", "windows");
 		}
 
+		WebDriver.Options options = webDriver.manage();
+
+		WebDriver.Window window = options.window();
+
 		int x = 1065;
 		int y = 1250;
 
@@ -73,10 +77,6 @@ public abstract class BaseWebDriverImpl
 			x = GetterUtil.getInteger(screenResolution[0]);
 			y = GetterUtil.getInteger(screenResolution[1]);
 		}
-
-		WebDriver.Options options = webDriver.manage();
-
-		WebDriver.Window window = options.window();
 
 		window.setSize(new Dimension(x, y));
 
