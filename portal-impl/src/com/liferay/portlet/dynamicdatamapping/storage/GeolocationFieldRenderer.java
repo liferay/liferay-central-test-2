@@ -78,17 +78,21 @@ public class GeolocationFieldRenderer extends BaseFieldRenderer {
 			return StringPool.BLANK;
 		}
 
-		double latitude = jsonObject.getDouble("latitude");
-		double longitude = jsonObject.getDouble("longitude");
-
 		StringBundler sb = new StringBundler(7);
 
 		sb.append(LanguageUtil.get(locale, "latitude"));
 		sb.append(": ");
+
+		double latitude = jsonObject.getDouble("latitude");
+
 		sb.append(latitude);
+
 		sb.append(StringPool.COMMA_AND_SPACE);
 		sb.append(LanguageUtil.get(locale, "longitude"));
 		sb.append(": ");
+
+		double longitude = jsonObject.getDouble("longitude");
+
 		sb.append(longitude);
 
 		return sb.toString();
