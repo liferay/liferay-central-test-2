@@ -49,10 +49,6 @@ public interface WorkflowHandler {
 
 	public String getClassName();
 
-	public String getURLEditWorkflowTask(
-			long workflowTaskId, ServiceContext serviceContext)
-		throws PortalException, SystemException;
-
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest);
 
 	/**
@@ -73,6 +69,10 @@ public interface WorkflowHandler {
 	public PortletURL getURLEdit(
 		long classPK, LiferayPortletRequest liferayPortletRequest,
 		LiferayPortletResponse liferayPortletResponse);
+
+	public String getURLEditWorkflowTask(
+			long workflowTaskId, ServiceContext serviceContext)
+		throws PortalException, SystemException;
 
 	public PortletURL getURLViewDiffs(
 		long classPK, LiferayPortletRequest liferayPortletRequest,

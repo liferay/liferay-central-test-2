@@ -78,31 +78,6 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 	}
 
 	@Override
-	public String getURLEditWorkflowTask(
-			long workflowTaskId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
-		try {
-			LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
-				serviceContext.getRequest(), PortletKeys.MY_WORKFLOW_TASKS,
-				PortalUtil.getControlPanelPlid(serviceContext.getCompanyId()),
-				PortletRequest.RENDER_PHASE);
-
-			liferayPortletURL.setControlPanelCategory("my");
-			liferayPortletURL.setParameter(
-				"struts_action", "/my_workflow_tasks/edit_workflow_task");
-			liferayPortletURL.setParameter(
-				"workflowTaskId", String.valueOf(workflowTaskId));
-			liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
-
-			return liferayPortletURL.toString();
-		}
-		catch (WindowStateException wse) {
-			throw new PortalException(wse);
-		}
-	}
-
-	@Override
 	public String getIconPath(LiferayPortletRequest liferayPortletRequest) {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)liferayPortletRequest.getAttribute(
@@ -181,6 +156,31 @@ public abstract class BaseWorkflowHandler implements WorkflowHandler {
 		}
 
 		return null;
+	}
+
+	@Override
+	public String getURLEditWorkflowTask(
+			long workflowTaskId, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+
+		try {
+			LiferayPortletURL liferayPortletURL = PortletURLFactoryUtil.create(
+				serviceContext.getRequest(), PortletKeys.MY_WORKFLOW_TASKS,
+				PortalUtil.getControlPanelPlid(serviceContext.getCompanyId()),
+				PortletRequest.RENDER_PHASE);
+
+			liferayPortletURL.setControlPanelCategory("my");
+			liferayPortletURL.setParameter(
+				"struts_action", "/my_workflow_tasks/edit_workflow_task");
+			liferayPortletURL.setParameter(
+				"workflowTaskId", String.valueOf(workflowTaskId));
+			liferayPortletURL.setWindowState(WindowState.MAXIMIZED);
+
+			return liferayPortletURL.toString();
+		}
+		catch (WindowStateException wse) {
+			throw new PortalException(wse);
+		}
 	}
 
 	@Override
