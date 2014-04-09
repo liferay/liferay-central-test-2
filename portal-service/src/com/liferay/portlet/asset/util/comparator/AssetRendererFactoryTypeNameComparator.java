@@ -24,10 +24,10 @@ import java.util.Locale;
 /**
  * @author Eduardo Garcia
  */
-public class AssetRendererFactoryTypeComparator
+public class AssetRendererFactoryTypeNameComparator
 	implements Comparator<AssetRendererFactory>, Serializable {
 
-	public AssetRendererFactoryTypeComparator(Locale locale) {
+	public AssetRendererFactoryTypeNameComparator(Locale locale) {
 		_locale = locale;
 	}
 
