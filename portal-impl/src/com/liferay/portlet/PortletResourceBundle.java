@@ -42,10 +42,17 @@ public class PortletResourceBundle extends ResourceBundle {
 
 		parent = parentResourceBundle;
 
-		String title = portletInfo.getTitle();
+		String description = portletInfo.getDescription();
 
-		if (title != null) {
-			_portletInfos.put(JavaConstants.JAVAX_PORTLET_TITLE, title);
+		if (description != null) {
+			_portletInfos.put(
+				JavaConstants.JAVAX_PORTLET_DESCRIPTION, description);
+		}
+
+		String keywords = portletInfo.getKeywords();
+
+		if (keywords != null) {
+			_portletInfos.put(JavaConstants.JAVAX_PORTLET_KEYWORDS, keywords);
 		}
 
 		String shortTitle = portletInfo.getShortTitle();
@@ -55,17 +62,10 @@ public class PortletResourceBundle extends ResourceBundle {
 				JavaConstants.JAVAX_PORTLET_SHORT_TITLE, shortTitle);
 		}
 
-		String keywords = portletInfo.getKeywords();
+		String title = portletInfo.getTitle();
 
-		if (keywords != null) {
-			_portletInfos.put(JavaConstants.JAVAX_PORTLET_KEYWORDS, keywords);
-		}
-
-		String description = portletInfo.getDescription();
-
-		if (description != null) {
-			_portletInfos.put(
-				JavaConstants.JAVAX_PORTLET_DESCRIPTION, description);
+		if (title != null) {
+			_portletInfos.put(JavaConstants.JAVAX_PORTLET_TITLE, title);
 		}
 	}
 
@@ -75,11 +75,11 @@ public class PortletResourceBundle extends ResourceBundle {
 			return Collections.enumeration(_portletInfos.keySet());
 		}
 
-		Set<String> keySet = new HashSet<String>(parent.keySet());
+		Set<String> keys = new HashSet<String>(parent.keySet());
 
-		keySet.addAll(_portletInfos.keySet());
+		keys.addAll(_portletInfos.keySet());
 
-		return Collections.enumeration(keySet);
+		return Collections.enumeration(keys);
 	}
 
 	@Override

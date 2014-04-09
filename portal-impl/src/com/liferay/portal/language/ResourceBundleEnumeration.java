@@ -35,40 +35,42 @@ public class ResourceBundleEnumeration implements Enumeration<String> {
 
 	@Override
 	public boolean hasMoreElements() {
-		if (_next == null) {
+		if (_nextElement == null) {
 			if (_iterator.hasNext()) {
-				_next = _iterator.next();
+				_nextElement = _iterator.next();
 			}
 			else if (_enumeration != null) {
-				while ((_next == null) && _enumeration.hasMoreElements()) {
-					_next = _enumeration.nextElement();
+				while ((_nextElement == null) &&
+					   _enumeration.hasMoreElements()) {
 
-					if (_set.contains(_next)) {
-						_next = null;
+					_nextElement = _enumeration.nextElement();
+
+					if (_set.contains(_nextElement)) {
+						_nextElement = null;
 					}
 				}
 			}
 		}
 
-		return _next != null;
+		return _nextElement != null;
 	}
 
 	@Override
 	public String nextElement() {
 		if (hasMoreElements()) {
-			String result = _next;
+			String nextElement = _nextElement;
 
-			_next = null;
+			_nextElement = null;
 
-			return result;
+			return nextElement;
 		}
 
 		throw new NoSuchElementException();
 	}
 
-	private final Enumeration<String> _enumeration;
-	private final Iterator<String> _iterator;
-	private String _next;
-	private final Set<String> _set;
+	private Enumeration<String> _enumeration;
+	private Iterator<String> _iterator;
+	private String _nextElement;
+	private Set<String> _set;
 
 }

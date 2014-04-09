@@ -63,13 +63,13 @@ public class LiferayResourceBundle extends ResourceBundle {
 
 	@Override
 	public Enumeration<String> getKeys() {
-		Set<String> keySet = _map.keySet();
+		Set<String> keys = _map.keySet();
 
 		if (parent == null) {
-			return Collections.enumeration(keySet);
+			return Collections.enumeration(keys);
 		}
 
-		return new ResourceBundleEnumeration(keySet, parent.getKeys());
+		return new ResourceBundleEnumeration(keys, parent.getKeys());
 	}
 
 	@Override

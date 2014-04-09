@@ -110,8 +110,6 @@ public class LanguageFilter extends BasePortalFilter {
 
 		Matcher matcher = _pattern.matcher(content);
 
-		int x = 0;
-
 		ResourceBundle resourceBundle = null;
 
 		if (_portletConfig != null) {
@@ -121,6 +119,8 @@ public class LanguageFilter extends BasePortalFilter {
 		if (resourceBundle == null) {
 			resourceBundle = LanguageResources.getResourceBundle(locale);
 		}
+
+		int x = 0;
 
 		while (matcher.find()) {
 			int y = matcher.start(0);

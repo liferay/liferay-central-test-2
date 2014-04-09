@@ -43,7 +43,6 @@ public class ResourceBundleEnumerationTest {
 	public void testWithEnumeration() throws Exception {
 		Set<String> set = new LinkedHashSet<String>(
 			Arrays.asList("key1", "key2"));
-
 		Enumeration<String> enumeration = Collections.enumeration(
 			Arrays.asList("key2", "key3"));
 
@@ -53,11 +52,11 @@ public class ResourceBundleEnumerationTest {
 		Assert.assertTrue(resourceBundleEnumeration.hasMoreElements());
 		Assert.assertEquals("key1", resourceBundleEnumeration.nextElement());
 
-		Method bridgeNextElementMethod = ReflectionUtil.getBridgeMethod(
+		Method nextElementMethod = ReflectionUtil.getBridgeMethod(
 			ResourceBundleEnumeration.class, "nextElement");
 
 		Assert.assertEquals(
-			"key2", bridgeNextElementMethod.invoke(resourceBundleEnumeration));
+			"key2", nextElementMethod.invoke(resourceBundleEnumeration));
 		Assert.assertTrue(resourceBundleEnumeration.hasMoreElements());
 		Assert.assertEquals("key3", resourceBundleEnumeration.nextElement());
 
@@ -81,11 +80,11 @@ public class ResourceBundleEnumerationTest {
 		Assert.assertTrue(resourceBundleEnumeration.hasMoreElements());
 		Assert.assertEquals("key1", resourceBundleEnumeration.nextElement());
 
-		Method bridgeNextElementMethod = ReflectionUtil.getBridgeMethod(
+		Method nextElementMethod = ReflectionUtil.getBridgeMethod(
 			ResourceBundleEnumeration.class, "nextElement");
 
 		Assert.assertEquals(
-			"key2", bridgeNextElementMethod.invoke(resourceBundleEnumeration));
+			"key2", nextElementMethod.invoke(resourceBundleEnumeration));
 
 		try {
 			resourceBundleEnumeration.nextElement();

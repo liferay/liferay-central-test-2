@@ -73,18 +73,18 @@ public class AggregateResourceBundle extends ResourceBundle {
 
 	@Override
 	protected Set<String> handleKeySet() {
-		if (_keySet == null) {
-			_keySet = new HashSet<String>();
+		if (_keys == null) {
+			_keys = new HashSet<String>();
 
 			for (ResourceBundle resourceBundle : _resourceBundles) {
-				_keySet.addAll(resourceBundle.keySet());
+				_keys.addAll(resourceBundle.keySet());
 			}
 		}
 
-		return _keySet;
+		return _keys;
 	}
 
-	private Set<String> _keySet;
+	private Set<String> _keys;
 	private ResourceBundle[] _resourceBundles;
 
 }
