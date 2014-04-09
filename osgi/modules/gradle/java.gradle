@@ -15,10 +15,12 @@ dependencies {
 
 compileJava {
 	options.compiler = "org.eclipse.jdt.core.JDTCompilerAdapter"
+
 	doFirst {
-		ClassLoader antClassLoader = org.apache.tools.ant.Project.class.classLoader
+		ClassLoader classLoader = org.apache.tools.ant.Project.class.classLoader
+
 		configurations.jdt.each {
-			File file -> antClassLoader.addURL(file.toURI().toURL())
+			File file -> classLoader.addURL(file.toURI().toURL())
 		}
 	}
 }
