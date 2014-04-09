@@ -111,8 +111,9 @@ public class WorkflowHandlerRegistryUtil {
 			return;
 		}
 
-		boolean hasWorkflowInstanceInProgress = _hasWorkflowInstanceInProgress(
-			companyId, groupId, className, classPK);
+		boolean hasWorkflowInstanceInProgress =
+			_instance._hasWorkflowInstanceInProgress(
+				companyId, groupId, className, classPK);
 
 		if (hasWorkflowInstanceInProgress) {
 			if (_log.isWarnEnabled()) {
@@ -224,7 +225,7 @@ public class WorkflowHandlerRegistryUtil {
 		return null;
 	}
 
-	private static boolean _hasWorkflowInstanceInProgress(
+	private boolean _hasWorkflowInstanceInProgress(
 			long companyId, long groupId, String className, long classPK)
 		throws PortalException, SystemException {
 
