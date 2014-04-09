@@ -6972,7 +6972,9 @@ public class PortalImpl implements Portal {
 		}
 
 		if (Validator.equals(redirect, request.getRequestURI())) {
-			_log.warn("Unable to redirect to not found page: " + redirect);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to redirect to missing URI: " + redirect);
+			}
 
 			redirect = null;
 		}
@@ -6984,11 +6986,11 @@ public class PortalImpl implements Portal {
 				session = request.getSession();
 			}
 
-			ServletContext servletContext = session.getServletContext();
-
 			response.setStatus(status);
 
 			SessionErrors.add(session, e.getClass(), e);
+
+			ServletContext servletContext = session.getServletContext();
 
 			RequestDispatcher requestDispatcher =
 				servletContext.getRequestDispatcher(redirect);
