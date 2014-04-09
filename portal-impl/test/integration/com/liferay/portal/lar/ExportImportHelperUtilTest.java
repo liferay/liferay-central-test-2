@@ -40,6 +40,7 @@ import com.liferay.portal.kernel.zip.ZipWriterFactoryUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.StagedModel;
+import com.liferay.portal.model.User;
 import com.liferay.portal.repository.liferayrepository.model.LiferayFileEntry;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceTestUtil;
@@ -360,15 +361,19 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			_portletDataContextExport, _referrerStagedModel,
 			rootElement.element("entry"), content, true);
 
-		assertLinksToLayouts(content, _stagingPrivateLayout, false);
-		assertLinksToLayouts(content, _stagingPrivateLayout, true);
-		assertLinksToLayouts(content, _stagingPublicLayout, false);
-		assertLinksToLayouts(content, _stagingPublicLayout, true);
+		assertLinksToLayouts(content, _stagingPrivateLayout, 0);
+		assertLinksToLayouts(
+			content, _stagingPrivateLayout, _stagingPrivateLayout.getGroupId());
+		assertLinksToLayouts(content, _stagingPublicLayout, 0);
+		assertLinksToLayouts(
+			content, _stagingPublicLayout, _stagingPublicLayout.getGroupId());
 	}
 
 	@Test
-	public void testExportLinksToLayoutsUserGroup() throws Exception {
-		Group group = TestPropsValues.getUser().getGroup();
+	public void testExportLinksToUserLayouts() throws Exception {
+		User user = TestPropsValues.getUser();
+
+		Group group = user.getGroup();
 
 		Layout privateLayout = LayoutTestUtil.addLayout(
 			group.getGroupId(), ServiceTestUtil.randomString(), true);
@@ -398,10 +403,11 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 			portletDataContextExport, journalArticle,
 			rootElement.element("entry"), content, true);
 
-		assertLinksToLayouts(content, privateLayout, false);
-		assertLinksToLayouts(content, privateLayout, true);
-		assertLinksToLayouts(content, publicLayout, false);
-		assertLinksToLayouts(content, publicLayout, true);
+		assertLinksToLayouts(content, privateLayout, 0);
+		assertLinksToLayouts(
+			content, privateLayout, privateLayout.getGroupId());
+		assertLinksToLayouts(content, publicLayout, 0);
+		assertLinksToLayouts(content, publicLayout, publicLayout.getGroupId());
 	}
 
 	@Test
@@ -512,22 +518,16 @@ public class ExportImportHelperUtilTest extends PowerMockito {
 	}
 
 	protected void assertLinksToLayouts(
-			String content, Layout layout, boolean addGroupId)
+			String content, Layout layout, long groupId)
 		throws SystemException {
 
-		long groupId = 0;
-
-		if (addGroupId) {
-			groupId = layout.getGroupId();
-		}
-
-		Group group = GroupLocalServiceUtil.fetchGroup(groupId);
-
-		StringBundler sb = new StringBundler((group == null) ? 9 : 11);
+		StringBundler sb = new StringBundler();
 
 		sb.append(StringPool.OPEN_BRACKET);
 		sb.append(layout.getLayoutId());
 		sb.append(CharPool.AT);
+
+		Group group = GroupLocalServiceUtil.fetchGroup(groupId);
 
 		if (layout.isPrivateLayout()) {
 			if (group == null) {

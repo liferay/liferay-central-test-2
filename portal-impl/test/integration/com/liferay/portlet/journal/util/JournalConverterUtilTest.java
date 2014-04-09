@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -419,16 +420,19 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 
 		expectedFields.put(linkToLayoutField);
 
+		StringBundler sb = new StringBundler();
+
+		sb.append("link_to_layout_INSTANCE_MiO7vIJu,");
+		sb.append("link_to_layout_INSTANCE_9FLzJNUX,");
+		sb.append("link_to_layout_INSTANCE_WqABvmxw,");
+		sb.append("link_to_layout_INSTANCE_31abnWkB,");
+		sb.append("link_to_layout_INSTANCE_pWIUF15B,");
+		sb.append("link_to_layout_INSTANCE_OGQypdcj,");
+		sb.append("link_to_layout_INSTANCE_TB2XZ3wn,");
+		sb.append("link_to_layout_INSTANCE_3IRNS4jM");
+
 		Field fieldsDisplayField = getFieldsDisplayField(
-			_ddmStructure.getStructureId(),
-			"link_to_layout_INSTANCE_MiO7vIJu," +
-			"link_to_layout_INSTANCE_9FLzJNUX," +
-			"link_to_layout_INSTANCE_WqABvmxw," +
-			"link_to_layout_INSTANCE_31abnWkB," +
-			"link_to_layout_INSTANCE_pWIUF15B," +
-			"link_to_layout_INSTANCE_OGQypdcj," +
-			"link_to_layout_INSTANCE_TB2XZ3wn," +
-			"link_to_layout_INSTANCE_3IRNS4jM");
+			_ddmStructure.getStructureId(), sb.toString());
 
 		expectedFields.put(fieldsDisplayField);
 

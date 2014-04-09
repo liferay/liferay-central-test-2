@@ -2306,9 +2306,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		ExportImportHelperImpl.class);
 
 	private Pattern _exportLinksToLayoutPattern = Pattern.compile(
-		"\\[([\\d]+)@(public|private(-user|-group)?)(@([\\d]+))?\\]");
+		"\\[([\\d]+)@(private|public(-group|-user)?)(@([\\d]+))?\\]");
 	private Pattern _importLinksToLayoutPattern = Pattern.compile(
-		"\\[([\\d]+)@(public|private(-user|-group)?)@(\\p{XDigit}{8}\\-" +
+		"\\[([\\d]+)@(private|public(-group|-user)?)@(\\p{XDigit}{8}\\-" +
 			"(?:\\p{XDigit}{4}\\-){3}\\p{XDigit}{12})@([a-z0-9./_-]*)" +
 				"(@([\\d]+))?\\]");
 
