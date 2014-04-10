@@ -80,9 +80,9 @@ boolean enableCommentRatings = dlSettings.getEnableCommentRatings();
 String displayStyle = portletPreferences.getValue("displayStyle", StringPool.BLANK);
 long displayStyleGroupId = GetterUtil.getLong(portletPreferences.getValue("displayStyleGroupId", null), themeDisplay.getScopeGroupId());
 
-Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
-
 dlSettings = DLUtil.getDLSettings(scopeGroupId, request);
+
+Format dateFormatDate = FastDateFormatFactoryUtil.getDate(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/image_gallery_display/init-ext.jsp" %>

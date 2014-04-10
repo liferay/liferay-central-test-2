@@ -170,12 +170,13 @@ public class DLImpl implements DL {
 
 		portletURL.setParameter("struts_action", "/document_library/view");
 
-		DLSettings dlSettings = getDLSettings(
-			themeDisplay.getScopeGroupId(), request);
-
 		Map<String, Object> data = new HashMap<String, Object>();
 
 		data.put("direction-right", Boolean.TRUE.toString());
+
+		DLSettings dlSettings = getDLSettings(
+			themeDisplay.getScopeGroupId(), request);
+
 		data.put("folder-id", dlSettings.getDefaultFolderId());
 
 		PortalUtil.addPortletBreadcrumbEntry(
