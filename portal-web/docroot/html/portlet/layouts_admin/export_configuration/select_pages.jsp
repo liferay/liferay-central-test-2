@@ -29,13 +29,13 @@ if (groupId > 0) {
 
 long layoutSetBranchId = ParamUtil.getLong(request, "layoutSetBranchId");
 
-Map<String, String[]> parameterMap = (Map<String, String[]>)GetterUtil.getObject(request.getAttribute("select_pages.jsp-parameterMap"), Collections.emptyMap());
-
 boolean privateLayout = ParamUtil.getBoolean(request, "privateLayout");
 
 String treeId = ParamUtil.getString(request, "treeId");
 
 long[] selectedLayoutIds = StringUtil.split(ParamUtil.getString(request, "selectedLayoutIds"), 0L);
+
+Map<String, String[]> parameterMap = (Map<String, String[]>)GetterUtil.getObject(request.getAttribute("select_pages.jsp-parameterMap"), Collections.emptyMap());
 %>
 
 <aui:input name="layoutIds" type="hidden" />

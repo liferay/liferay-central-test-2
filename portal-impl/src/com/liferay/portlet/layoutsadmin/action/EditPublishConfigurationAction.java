@@ -155,22 +155,12 @@ public class EditPublishConfigurationAction
 		portletRequestDispatcher.include(resourceRequest, resourceResponse);
 	}
 
+	@Override
 	protected void addSessionMessages(ActionRequest actionRequest)
 		throws Exception {
 
 		long exportImportConfigurationId = ParamUtil.getLong(
 			actionRequest, "exportImportConfigurationId");
-
-		boolean localPublishing = ParamUtil.getBoolean(
-			actionRequest, "localPublishing");
-
-		int exportImportConfigurationType =
-			ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE;
-
-		if (localPublishing) {
-			exportImportConfigurationType =
-				ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_LOCAL;
-		}
 
 		SessionMessages.add(
 			actionRequest,
@@ -179,6 +169,17 @@ public class EditPublishConfigurationAction
 			exportImportConfigurationId);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
+
+		int exportImportConfigurationType =
+			ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_REMOTE;
+
+		boolean localPublishing = ParamUtil.getBoolean(
+			actionRequest, "localPublishing");
+
+		if (localPublishing) {
+			exportImportConfigurationType =
+				ExportImportConfigurationConstants.TYPE_PUBLISH_LAYOUT_LOCAL;
+		}
 
 		Map<String, Serializable> settingsMap =
 			ExportImportConfigurationSettingsMapFactory.buildSettingsMap(

@@ -25,12 +25,16 @@ if (Validator.isNull(cmd)) {
 
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
+String closeRedirect = ParamUtil.getString(request, "closeRedirect");
+
 String publishConfigurationButtons = ParamUtil.getString(request, "publishConfigurationButtons", "custom");
 
 long exportImportConfigurationId = 0;
 
 ExportImportConfiguration exportImportConfiguration = null;
+
 Map<String, Serializable> exportImportConfigurationSettingsMap = Collections.emptyMap();
+
 Map<String, String[]> parameterMap = Collections.emptyMap();
 
 if (SessionMessages.contains(liferayPortletRequest, portletDisplay.getId() + "exportImportConfigurationId")) {
@@ -55,8 +59,6 @@ else {
 		parameterMap = (Map<String, String[]>)exportImportConfigurationSettingsMap.get("parameterMap");
 	}
 }
-
-String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
