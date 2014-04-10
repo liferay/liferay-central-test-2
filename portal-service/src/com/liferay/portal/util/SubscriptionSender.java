@@ -532,8 +532,8 @@ public class SubscriptionSender implements Serializable {
 		if (user == null) {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"User with verified e-mail address " + emailAddress +
-						" does not exist");
+					"User with email address " + emailAddress +
+						" does not exist for company " + company);
 			}
 
 			sendEmail(to, locale);
