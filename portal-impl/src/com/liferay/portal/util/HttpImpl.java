@@ -262,8 +262,7 @@ public class HttpImpl implements Http {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, unescapeSpaces is useless, just use
-	 *             {@link #decodeURL(java.lang.String)}
+	 * @deprecated As of 7.0.0, replaced by {@link #decodeURL(String)}
 	 */
 	@Deprecated
 	@Override

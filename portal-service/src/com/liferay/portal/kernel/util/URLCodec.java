@@ -34,7 +34,6 @@ import java.util.BitSet;
 public class URLCodec {
 
 	public static String decodeURL(String encodedURLString) {
-
 		return decodeURL(encodedURLString, StringPool.UTF8);
 	}
 
