@@ -2011,7 +2011,7 @@ public class ServiceBuilder {
 		}
 
 		JavaClass javaClass = _getJavaClass(
-			_outputPath + "/service/persistence/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"FinderImpl.java");
 
 		Map<String, Object> context = _getContext();
@@ -2050,7 +2050,7 @@ public class ServiceBuilder {
 		}
 
 		JavaClass javaClass = _getJavaClass(
-			_outputPath + "/service/persistence/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"FinderImpl.java");
 
 		Map<String, Object> context = _getContext();
@@ -4344,8 +4344,45 @@ public class ServiceBuilder {
 				_outputPath + "/service/persistence/" + ejbName +
 					"FinderImpl.java")) {
 
+			FileUtil.move(
+				_outputPath + "/service/persistence/" + ejbName +
+					"FinderImpl.java",
+				_outputPath + "/service/persistence/impl/" + ejbName +
+					"FinderImpl.java");
+
+			String content = FileUtil.read(
+				_outputPath + "/service/persistence/impl/" + ejbName +
+					"FinderImpl.java");
+
+			StringBundler sb = new StringBundler();
+
+			sb.append(
+				"package " + _packagePath + ".service.persistence.impl;\n\n");
+			sb.append(
+				"import " + _packagePath + ".service.persistence." + ejbName +
+					"Finder;\n");
+			sb.append(
+				"import " + _packagePath + ".service.persistence." + ejbName +
+					"Util;");
+
+			content = StringUtil.replace(
+				content,
+				"package " + _packagePath + ".service.persistence;",
+				sb.toString());
+
+			FileUtil.write(
+				_outputPath + "/service/persistence/impl/" + ejbName +
+					"FinderImpl.java",
+				content);
+		}
+
+		if (FileUtil.exists(
+				_outputPath + "/service/persistence/impl/" + ejbName +
+					"FinderImpl.java")) {
+
 			finderClass =
-				_packagePath + ".service.persistence." + ejbName + "FinderImpl";
+				_packagePath +
+					".service.persistence.impl." + ejbName + "FinderImpl";
 		}
 
 		String dataSource = entityElement.attributeValue("data-source");
