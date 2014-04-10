@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.TransactionAttribute;
 import com.liferay.portal.kernel.transaction.TransactionInvokerUtil;
 import com.liferay.portal.model.BaseModel;
@@ -128,6 +129,13 @@ public abstract class BaseActionableDynamicQuery
 		_searchEngineId = searchEngineId;
 	}
 
+	@Override
+	public void setTransactionAttribute(
+		TransactionAttribute transactionAttribute) {
+
+		_transactionAttribute = transactionAttribute;
+	}
+
 	protected void addCriteria(DynamicQuery dynamicQuery) {
 	}
 
@@ -183,15 +191,15 @@ public abstract class BaseActionableDynamicQuery
 
 		dynamicQuery.add(property.gt(previousPrimaryKey));
 
-		dynamicQuery.setLimit(0, _interval);
-
 		dynamicQuery.addOrder(OrderFactoryUtil.asc(_primaryKeyPropertyName));
+
+		dynamicQuery.setLimit(0, _interval);
 
 		addDefaultCriteria(dynamicQuery);
 
 		addCriteria(dynamicQuery);
 
-		Callable<Long> performActionsCallable = new Callable<Long>() {
+		Callable<Long> callable = new Callable<Long>() {
 
 			@Override
 			public Long call() throws Exception {
@@ -222,11 +230,11 @@ public abstract class BaseActionableDynamicQuery
 
 		try {
 			if (transactionAttribute == null) {
-				return performActionsCallable.call();
+				return callable.call();
 			}
 			else {
 				return TransactionInvokerUtil.invoke(
-					transactionAttribute, performActionsCallable);
+					transactionAttribute, callable);
 			}
 		}
 		catch (Throwable t) {
@@ -278,7 +286,7 @@ public abstract class BaseActionableDynamicQuery
 	}
 
 	protected TransactionAttribute getTransactionAttribute() {
-		return null;
+		return _transactionAttribute;
 	}
 
 	protected void indexInterval() throws PortalException {
@@ -300,6 +308,19 @@ public abstract class BaseActionableDynamicQuery
 	protected abstract void performAction(Object object)
 		throws PortalException, SystemException;
 
+	private static TransactionAttribute _defaultTransactionAttribute;
+
+	static {
+		TransactionAttribute.Builder builder =
+			new TransactionAttribute.Builder();
+
+		builder.propagation(Propagation.REQUIRES_NEW);
+		builder.rollbackForClasses(
+			PortalException.class, SystemException.class);
+
+		_defaultTransactionAttribute = builder.build();
+	}
+
 	private BaseLocalService _baseLocalService;
 	private ClassLoader _classLoader;
 	private Class<?> _clazz;
@@ -312,5 +333,7 @@ public abstract class BaseActionableDynamicQuery
 	private int _interval = Indexer.DEFAULT_INTERVAL;
 	private String _primaryKeyPropertyName;
 	private String _searchEngineId;
+	private TransactionAttribute _transactionAttribute =
+		_defaultTransactionAttribute;
 
 }

@@ -109,6 +109,7 @@ public class TransactionAttribute {
 		private String[] _rollbackForClassNames = {};
 		private Class<?>[] _rollbackForClasses = {};
 		private int _timeout = TransactionDefinition.TIMEOUT_DEFAULT;
+
 	}
 
 	private TransactionAttribute(Builder builder) {
