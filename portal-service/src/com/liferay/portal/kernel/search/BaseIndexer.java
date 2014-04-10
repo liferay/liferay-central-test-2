@@ -658,8 +658,7 @@ public abstract class BaseIndexer implements Indexer {
 				addSelectedLocalizedFieldNames(
 					selectedFieldNames,
 					LocaleUtil.toLanguageIds(
-						LanguageUtil.getSupportedLocales())
-				);
+						LanguageUtil.getSupportedLocales()));
 			}
 			else {
 				addSelectedLocalizedFieldNames(
@@ -1798,7 +1797,7 @@ public abstract class BaseIndexer implements Indexer {
 		new IndexerPostProcessor[0];
 	private boolean _permissionAware;
 	private String _searchEngineId;
-	private boolean _selectAllLocales = false;
+	private boolean _selectAllLocales;
 	private boolean _stagingAware = true;
 
 }
