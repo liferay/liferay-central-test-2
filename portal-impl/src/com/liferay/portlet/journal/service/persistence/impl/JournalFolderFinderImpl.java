@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.journal.service.persistence.impl;
 
+import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalFolderFinder;
 import com.liferay.portlet.journal.service.persistence.JournalFolderUtil;
 

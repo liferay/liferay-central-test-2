@@ -43,7 +43,7 @@ public class LockFinderImpl
 		throws SystemException {
 
 		if (lockMode == null) {
-			return lockPersistence.fetchByC_K(className, key);
+			return LockUtil.fetchByC_K(className, key);
 		}
 
 		Session session = null;
@@ -77,8 +77,5 @@ public class LockFinderImpl
 			closeSession(session);
 		}
 	}
-
-	@BeanReference(type = LockPersistence.class)
-	protected LockPersistence lockPersistence;
 
 }

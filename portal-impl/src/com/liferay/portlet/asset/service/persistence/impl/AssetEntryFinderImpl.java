@@ -14,7 +14,9 @@
 
 package com.liferay.portlet.asset.service.persistence.impl;
 
+import com.liferay.portlet.asset.service.persistence.AssetCategoryFinderUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryFinder;
+import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
 import com.liferay.portlet.asset.service.persistence.AssetEntryUtil;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;

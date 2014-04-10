@@ -15,7 +15,6 @@
 package com.liferay.portlet.asset.service.persistence.impl;
 
 import com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyFinder;
-import com.liferay.portlet.asset.service.persistence.AssetTagPropertyKeyUtil;
 
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;

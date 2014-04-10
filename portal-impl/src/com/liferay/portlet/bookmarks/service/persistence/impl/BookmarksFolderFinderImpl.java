@@ -14,6 +14,7 @@
 
 package com.liferay.portlet.bookmarks.service.persistence.impl;
 
+import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 
