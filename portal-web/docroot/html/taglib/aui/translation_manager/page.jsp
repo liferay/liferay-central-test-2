@@ -21,9 +21,14 @@
 		<label class="lfr-translation-manager-default-locale-label" for="<portlet:namespace />defaultLanguageId"><liferay-ui:message key="web-content-default-language" />:</label>
 
 		<span class="lfr-translation-manager-default-locale-text lfr-translation-manager-translation lfr-translation-manager-translation-editing">
-			<img alt="<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>" src='<%= HtmlUtil.escapeAttribute(themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png") %>' />
 
-			<%= LocaleUtil.fromLanguageId(defaultLanguageId).getDisplayName(locale) %>
+			<%
+			Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
+			%>
+
+			<img alt="<%= defaultLocale.getDisplayName(locale) %>" src='<%= HtmlUtil.escapeAttribute(themeDisplay.getPathThemeImages() + "/language/" + defaultLanguageId + ".png") %>' />
+
+			<%= defaultLocale.getDisplayName(locale) %>
 		</span>
 
 		<select class="hide lfr-translation-manager-default-locale">
