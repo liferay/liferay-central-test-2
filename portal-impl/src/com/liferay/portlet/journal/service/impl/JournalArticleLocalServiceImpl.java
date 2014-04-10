@@ -1715,6 +1715,7 @@ public class JournalArticleLocalServiceImpl
 			themeDisplay);
 	}
 
+	@Override
 	public String getArticleContent(
 			long groupId, String articleId, String viewMode,
 			String ddmTemplateKey, String languageId,
