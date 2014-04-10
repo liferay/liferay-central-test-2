@@ -2438,7 +2438,7 @@ public class ServiceBuilder {
 
 	private void _createPersistence(Entity entity) throws Exception {
 		JavaClass javaClass = _getJavaClass(
-			_outputPath + "/service/persistence/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"PersistenceImpl.java");
 
 		Map<String, Object> context = _getContext();
@@ -2488,10 +2488,20 @@ public class ServiceBuilder {
 		// Write file
 
 		File ejbFile = new File(
-			_outputPath + "/service/persistence/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"PersistenceImpl.java");
 
 		writeFile(ejbFile, content, _author);
+
+		ejbFile = new File(
+			_outputPath + "/service/persistence/" + entity.getName() +
+				"PersistenceImpl.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createPersistenceTest(Entity entity) throws Exception {
@@ -2514,7 +2524,7 @@ public class ServiceBuilder {
 
 	private void _createPersistenceUtil(Entity entity) throws Exception {
 		JavaClass javaClass = _getJavaClass(
-			_outputPath + "/service/persistence/" + entity.getName() +
+			_outputPath + "/service/persistence/impl/" + entity.getName() +
 				"PersistenceImpl.java");
 
 		Map<String, Object> context = _getContext();
@@ -4325,7 +4335,7 @@ public class ServiceBuilder {
 			entityElement.attributeValue("remote-service"), true);
 		String persistenceClass = GetterUtil.getString(
 			entityElement.attributeValue("persistence-class"),
-			_packagePath + ".service.persistence." + ejbName +
+			_packagePath + ".service.persistence.impl." + ejbName +
 				"PersistenceImpl");
 
 		String finderClass = "";
