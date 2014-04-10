@@ -408,12 +408,22 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			checkSystemRole(companyId, name, descriptionMap, type);
 		}
 
-		// Assign view permission to all users on system roles
+		// All users should be able to view all system roles
+
+		Role userRole = getRole(companyId, RoleConstants.USER);
 
 		String[] userViewableRoles = ArrayUtil.append(
 			systemRoles, systemOrganizationRoles, systemSiteRoles);
 
-		addUserViewPermission(companyId, userViewableRoles);
+		for (String roleName : userViewableRoles) {
+			Role role = getRole(companyId, roleName);
+
+			resourcePermissionLocalService.setResourcePermissions(
+				companyId, Role.class.getName(),
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				String.valueOf(role.getRoleId()), userRole.getRoleId(),
+				new String[] {ActionKeys.VIEW});
+		}
 	}
 
 	/**
@@ -1493,24 +1503,6 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		rolePersistence.update(role);
 
 		return role;
-	}
-
-	protected void addUserViewPermission(long companyId, String[] roleNames)
-		throws PortalException, SystemException {
-
-		Role userRole = getRole(companyId, RoleConstants.USER);
-
-		for (String roleName : roleNames) {
-			Role role = getRole(companyId, roleName);
-
-			String name = Role.class.getName();
-			String[] actionIds = new String[]{ActionKeys.VIEW};
-
-			resourcePermissionLocalService.setResourcePermissions(
-				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
-				String.valueOf(role.getRoleId()), userRole.getRoleId(),
-				actionIds);
-		}
 	}
 
 	protected void checkSystemRole(
