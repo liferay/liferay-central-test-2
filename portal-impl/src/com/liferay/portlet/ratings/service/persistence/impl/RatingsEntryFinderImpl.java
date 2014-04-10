@@ -14,9 +14,6 @@
 
 package com.liferay.portlet.ratings.service.persistence.impl;
 
-import com.liferay.portlet.ratings.service.persistence.RatingsEntryFinder;
-import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
-
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
@@ -28,6 +25,7 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryModelImpl;
+import com.liferay.portlet.ratings.service.persistence.RatingsEntryFinder;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
 import java.util.List;
