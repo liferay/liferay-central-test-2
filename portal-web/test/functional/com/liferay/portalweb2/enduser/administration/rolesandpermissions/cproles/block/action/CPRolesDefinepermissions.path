@@ -125,7 +125,7 @@
 <!--CONTROL_PANEL_SITES-->
 <tr>
 	<td>CONTROL_PANEL_SITES_SITES</td>
-	<td>//div[contains(.,'Sites') and contains(@class,'permission-navigation-item-header')]/following-sibling::div//span[contains(@class,'permission-navigation-item')]/a[contains(.,'Sites')]</td>
+	<td>//div[contains(.,'Sites') and contains(@class,'permission-navigation-item-header')]/following-sibling::ul//span[contains(@class,'permission-navigation-item')]/a[contains(.,'Sites')]</td>
 	<td></td>
 </tr>
 <tr>
