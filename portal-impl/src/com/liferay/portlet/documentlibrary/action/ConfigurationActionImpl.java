@@ -15,7 +15,6 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.NoSuchRepositoryEntryException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.SettingsConfigurationAction;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
@@ -42,8 +41,7 @@ public class ConfigurationActionImpl extends SettingsConfigurationAction {
 
 	@Override
 	public void postProcess(
-			long companyId, PortletRequest portletRequest, Settings settings)
-		throws SystemException {
+		long companyId, PortletRequest portletRequest, Settings settings) {
 
 		String languageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getSiteDefault());

@@ -464,6 +464,7 @@ public class DLImpl implements DL {
 		return portletURL.toString();
 	}
 
+	@Override
 	public DLSettings getDLSettings(long groupId)
 		throws PortalException, SystemException {
 
