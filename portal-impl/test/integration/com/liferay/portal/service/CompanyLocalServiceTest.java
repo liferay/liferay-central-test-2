@@ -464,7 +464,7 @@ public class CompanyLocalServiceTest {
 		CompanyLocalServiceUtil.deleteCompany(company.getCompanyId());
 	}
 
-	private MockServletContext _mockServletContext;
 	private long _companyId;
+	private MockServletContext _mockServletContext;
 
 }
