@@ -219,8 +219,7 @@ public class JournalArticleIndexer extends BaseIndexer {
 			BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
 
-		addSearchTerm(
-			searchQuery, searchContext, Field.ARTICLE_ID, false);
+		addSearchTerm(searchQuery, searchContext, Field.ARTICLE_ID, false);
 		addSearchTerm(searchQuery, searchContext, Field.CLASS_PK, false);
 		addSearchLocalizedTerm(
 			searchQuery, searchContext, Field.CONTENT, false);
