@@ -29,53 +29,76 @@ public class ListUtilTest {
 
 	@Test
 	public void testFilterWithoutOutputList() {
-		List<String> list = new ArrayList<String>();
-		list.add("a");
-		list.add("b");
-		list.add("c");
+		List<String> expectedOutputList = new ArrayList<String>();
 
-		List<String> expectedList = new ArrayList<String>();
-		expectedList.add("a");
-		expectedList.add("c");
+		expectedOutputList.add("a");
+		expectedOutputList.add("c");
 
-		PredicateFilter predicate = new PredicateFilter() {
+		PredicateFilter predicateFilter = new PredicateFilter() {
+
 			@Override
-			public boolean filter(Object o) {
-				return !o.toString().equals("b");
+			public boolean filter(Object object) {
+				String string = String.valueOf(object);
+
+				if (!string.equals("b")) {
+					return true;
+				}
+
+				return false;
 			}
+
 		};
 
-		List<String> actualList = ListUtil.filter(list, predicate);
+		List<String> inputList = new ArrayList<String>();
 
-		Assert.assertEquals(expectedList, actualList);
+		inputList.add("a");
+		inputList.add("b");
+		inputList.add("c");
+
+		List<String> actualOutputList = ListUtil.filter(
+			inputList, predicateFilter);
+
+		Assert.assertEquals(expectedOutputList, actualOutputList);
 	}
 
 	@Test
 	public void testFilterWithOutputList() {
-		List<String> list = new ArrayList<String>();
-		list.add("a");
-		list.add("b");
-		list.add("c");
+		List<String> expectedOutputList = new ArrayList<String>();
 
-		List<String> expectedList = new ArrayList<String>();
-		expectedList.add("0");
-		expectedList.add("a");
-		expectedList.add("c");
+		expectedOutputList.add("0");
+		expectedOutputList.add("a");
+		expectedOutputList.add("c");
+
+		List<String> inputList = new ArrayList<String>();
+
+		inputList.add("a");
+		inputList.add("b");
+		inputList.add("c");
 
 		List<String> outputList = new ArrayList<String>();
+
 		outputList.add("0");
 
-		PredicateFilter predicate = new PredicateFilter() {
+		PredicateFilter predicateFilter = new PredicateFilter() {
+
 			@Override
-			public boolean filter(Object o) {
-				return !o.toString().equals("b");
+			public boolean filter(Object object) {
+				String string = String.valueOf(object);
+
+				if (!string.equals("b")) {
+					return true;
+				}
+
+				return false;
 			}
+
 		};
 
-		List<String> actualList = ListUtil.filter(list, outputList, predicate);
+		List<String> actualOutputList = ListUtil.filter(
+			inputList, outputList, predicateFilter);
 
-		Assert.assertSame(outputList, actualList);
-		Assert.assertEquals(expectedList, actualList);
+		Assert.assertSame(outputList, actualOutputList);
+		Assert.assertEquals(expectedOutputList, actualOutputList);
 	}
 
 	@Test

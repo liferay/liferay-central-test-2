@@ -90,10 +90,10 @@ public class ListUtil {
 
 	public static <T> List<T> filter(
 		List<? extends T> inputList, List<T> outputList,
-		PredicateFilter<T> predicate) {
+		PredicateFilter<T> predicateFilter) {
 
 		for (T item : inputList) {
-			if (predicate.filter(item)) {
+			if (predicateFilter.filter(item)) {
 				outputList.add(item);
 			}
 		}
@@ -102,9 +102,10 @@ public class ListUtil {
 	}
 
 	public static <T> List<T> filter(
-		List<? extends T> inputList, PredicateFilter<T> predicate) {
+		List<? extends T> inputList, PredicateFilter<T> predicateFilter) {
 
-		return filter(inputList, new ArrayList<T>(inputList.size()), predicate);
+		return filter(
+			inputList, new ArrayList<T>(inputList.size()), predicateFilter);
 	}
 
 	public static <E> List<E> fromArray(E[] array) {

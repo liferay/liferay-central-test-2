@@ -18,11 +18,13 @@
 List<AssetRendererFactory> availableAssetFactories = ListUtil.filter(
 	AssetRendererFactoryRegistryUtil.getAssetRendererFactories(company.getCompanyId()),
 	new PredicateFilter() {
+
 		public boolean filter(Object object) {
 			AssetRendererFactory assetRendererFactory = (AssetRendererFactory)object;
 
 			return assetRendererFactory.isCategorizable();
 		}
+
 	});
 
 boolean required = false;
