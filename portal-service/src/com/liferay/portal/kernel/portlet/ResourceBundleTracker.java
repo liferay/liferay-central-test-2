@@ -46,8 +46,8 @@ public class ResourceBundleTracker implements Closeable {
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter filter = registry.getFilter(
-			"(&(javax.portlet.name=" + _portletId + ")" +
-				"(objectClass=" + ResourceBundle.class.getName() + "))");
+			"(&(javax.portlet.name=" + _portletId + ")(objectClass=" +
+				ResourceBundle.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
 			filter, new ResourceBundleServiceTrackerCustomizer());
