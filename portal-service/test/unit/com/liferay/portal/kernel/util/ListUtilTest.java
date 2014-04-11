@@ -34,12 +34,11 @@ public class ListUtilTest {
 		expectedOutputList.add("a");
 		expectedOutputList.add("c");
 
-		PredicateFilter predicateFilter = new PredicateFilter() {
+		PredicateFilter<String> predicateFilter =
+			new PredicateFilter<String>() {
 
 			@Override
-			public boolean filter(Object object) {
-				String string = String.valueOf(object);
-
+			public boolean filter(String string) {
 				if (!string.equals("b")) {
 					return true;
 				}
@@ -79,12 +78,11 @@ public class ListUtilTest {
 
 		outputList.add("0");
 
-		PredicateFilter predicateFilter = new PredicateFilter() {
+		PredicateFilter<String> predicateFilter =
+			new PredicateFilter<String>() {
 
 			@Override
-			public boolean filter(Object object) {
-				String string = String.valueOf(object);
-
+			public boolean filter(String string) {
 				if (!string.equals("b")) {
 					return true;
 				}
