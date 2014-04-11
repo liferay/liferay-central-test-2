@@ -112,7 +112,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 	public void testExportImportLayoutPrototypeInvalidLARType()
 		throws Exception {
 
-		// Import LayoutPrototype to LayoutSet
+		// Import a layout prototype to a layout set
 
 		LayoutPrototype layoutPrototype = LayoutTestUtil.addLayoutPrototype(
 			ServiceTestUtil.randomString());
@@ -130,7 +130,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		catch (LARTypeException lte) {
 		}
 
-		// Import LayoutPrototype to LayoutSetPrototype
+		// Import a layout prototype to a layout set pototype
 
 		LayoutSetPrototype layoutSetPrototype =
 			LayoutTestUtil.addLayoutSetPrototype(
@@ -166,7 +166,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 	public void testExportImportLayoutSetInvalidLARType() throws Exception {
 		LayoutSetUtil.removeAll();
 
-		// Import LayoutSet to LayoutPrototype
+		// Import a layout set to a layout prototype
 
 		group = GroupTestUtil.addGroup();
 
@@ -185,7 +185,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		catch (LARTypeException lte) {
 		}
 
-		// Import LayoutSet to LayoutSetPrototype
+		// Import a layout set to a layout set prototype
 
 		LayoutSetPrototype layoutSetPrototype =
 			LayoutTestUtil.addLayoutSetPrototype(
