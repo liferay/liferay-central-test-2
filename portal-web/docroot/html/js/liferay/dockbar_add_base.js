@@ -272,7 +272,7 @@ AUI.add(
 						return instance._searchData;
 					},
 
-					_instanceablePortletFeedback: function (portletId) {
+					_instanceablePortletFeedback: function(portletId) {
 						var instance = this;
 
 						var addedMessagePortlet = instance.byId('portletName');
