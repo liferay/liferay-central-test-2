@@ -16,6 +16,7 @@ package com.liferay.portlet.asset.service;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
@@ -41,67 +42,73 @@ import org.junit.runner.RunWith;
 public class AssetCategoryServiceTest {
 
 	@Test
-	public void testRemoveVocabularyShouldUpdateCategoriesTree()
+	public void testDeleteVocabularyAlsoUpdatesCategoriesTree()
 		throws Exception {
 
-		long groupId = GroupTestUtil.addGroup().getGroupId();
+		Group group = GroupTestUtil.addGroup();
 
-		AssetVocabulary v1 = AssetTestUtil.addVocabulary(groupId);
-		AssetVocabulary v2 = AssetTestUtil.addVocabulary(groupId);
+		long groupId = group.getGroupId();
 
-		AssetCategory c1a = AssetTestUtil.addCategory(
-			groupId, v1.getVocabularyId());
+		AssetVocabulary vocabulary1 = AssetTestUtil.addVocabulary(groupId);
+		AssetVocabulary vocabulary2 = AssetTestUtil.addVocabulary(groupId);
 
-		assertLeftRightCategory(2, c1a);
+		AssetCategory category1a = AssetTestUtil.addCategory(
+			groupId, vocabulary1.getVocabularyId());
 
-		AssetCategory c1b = AssetTestUtil.addCategory(
-			groupId, v1.getVocabularyId());
+		assertLeftRightCategory(2, category1a);
 
-		assertLeftRightCategory(4, c1b);
+		AssetCategory category1b = AssetTestUtil.addCategory(
+			groupId, vocabulary1.getVocabularyId());
 
-		AssetCategory c1c = AssetTestUtil.addCategory(
-			groupId, v1.getVocabularyId());
+		assertLeftRightCategory(4, category1b);
 
-		assertLeftRightCategory(6, c1c);
+		AssetCategory category1c = AssetTestUtil.addCategory(
+			groupId, vocabulary1.getVocabularyId());
 
-		AssetCategory c2a = AssetTestUtil.addCategory(
-			groupId, v2.getVocabularyId());
+		assertLeftRightCategory(6, category1c);
 
-		assertLeftRightCategory(8, c2a);
+		AssetCategory category2a = AssetTestUtil.addCategory(
+			groupId, vocabulary2.getVocabularyId());
 
-		AssetCategory c2b = AssetTestUtil.addCategory(
-			groupId, v2.getVocabularyId());
+		assertLeftRightCategory(8, category2a);
 
-		assertLeftRightCategory(10, c2b);
+		AssetCategory category2b = AssetTestUtil.addCategory(
+			groupId, vocabulary2.getVocabularyId());
 
-		AssetCategory c2c = AssetTestUtil.addCategory(
-			groupId, v2.getVocabularyId());
+		assertLeftRightCategory(10, category2b);
 
-		assertLeftRightCategory(12, c2c);
+		AssetCategory category2c = AssetTestUtil.addCategory(
+			groupId, vocabulary2.getVocabularyId());
 
-		AssetVocabularyServiceUtil.deleteVocabulary(v1.getVocabularyId());
+		assertLeftRightCategory(12, category2c);
+
+		AssetVocabularyServiceUtil.deleteVocabulary(
+			vocabulary1.getVocabularyId());
 
 		int count = AssetCategoryServiceUtil.getVocabularyCategoriesCount(
-			groupId, v1.getVocabularyId());
+			groupId, vocabulary1.getVocabularyId());
 
 		Assert.assertEquals(0, count);
 
 		count = AssetCategoryServiceUtil.getVocabularyCategoriesCount(
-			groupId, v2.getVocabularyId());
+			groupId, vocabulary2.getVocabularyId());
 
 		Assert.assertEquals(3, count);
 
-		c2a = AssetCategoryServiceUtil.getCategory(c2a.getCategoryId());
+		category2a = AssetCategoryServiceUtil.getCategory(
+			category2a.getCategoryId());
 
-		assertLeftRightCategory(2, c2a);
+		assertLeftRightCategory(2, category2a);
 
-		c2b = AssetCategoryServiceUtil.getCategory(c2b.getCategoryId());
+		category2b = AssetCategoryServiceUtil.getCategory(
+			category2b.getCategoryId());
 
-		assertLeftRightCategory(4, c2b);
+		assertLeftRightCategory(4, category2b);
 
-		c2c = AssetCategoryServiceUtil.getCategory(c2c.getCategoryId());
+		category2c = AssetCategoryServiceUtil.getCategory(
+			category2c.getCategoryId());
 
-		assertLeftRightCategory(6, c2c);
+		assertLeftRightCategory(6, category2c);
 	}
 
 	protected void assertLeftRightCategory(
