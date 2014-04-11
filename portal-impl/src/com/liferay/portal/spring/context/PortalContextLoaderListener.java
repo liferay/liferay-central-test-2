@@ -249,7 +249,7 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			_log.error(e, e);
 		}
 
-		if (PropsValues.CLEAR_CACHE_ON_CONTEXT_INITIALIZATION) {
+		if (PropsValues.CACHE_CLEAR_ON_CONTEXT_INITIALIZATION) {
 			FinderCacheUtil.clearCache();
 			FinderCacheUtil.clearLocalCache();
 			EntityCacheUtil.clearCache();

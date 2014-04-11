@@ -304,6 +304,10 @@ public class PropsValues {
 
 	public static final long BUFFERED_INCREMENT_STANDBY_TIME_UPPER_LIMIT = GetterUtil.getLong(PropsUtil.get(PropsKeys.BUFFERED_INCREMENT_STANDBY_TIME_UPPER_LIMIT));
 
+	public static final boolean CACHE_CLEAR_ON_CONTEXT_INITIALIZATION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CACHE_CLEAR_ON_CONTEXT_INITIALIZATION));
+
+	public static final boolean CACHE_CLEAR_ON_PLUGIN_UNDEPLOY = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CACHE_CLEAR_ON_PLUGIN_UNDEPLOY));
+
 	public static final int CACHE_CONTENT_THRESHOLD_SIZE = GetterUtil.getInteger(PropsUtil.get(PropsKeys.CACHE_CONTENT_THRESHOLD_SIZE));
 
 	public static final String CALENDAR_EMAIL_FROM_ADDRESS = PropsUtil.get(PropsKeys.CALENDAR_EMAIL_FROM_ADDRESS);
@@ -377,10 +381,6 @@ public class PropsValues {
 	public static final String CDN_HOST_HTTP = PropsUtil.get(PropsKeys.CDN_HOST_HTTP);
 
 	public static final String CDN_HOST_HTTPS = PropsUtil.get(PropsKeys.CDN_HOST_HTTPS);
-
-	public static final boolean CLEAR_CACHE_ON_CONTEXT_INITIALIZATION = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CLEAR_CACHE_ON_CONTEXT_INITIALIZATION));
-
-	public static final boolean CLEAR_CACHE_ON_PLUGIN_UNDEPLOY = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CLEAR_CACHE_ON_PLUGIN_UNDEPLOY));
 
 	public static final boolean CLUSTER_EXECUTOR_DEBUG_ENABLED = GetterUtil.getBoolean(PropsUtil.get(PropsKeys.CLUSTER_EXECUTOR_DEBUG_ENABLED));
 

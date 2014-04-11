@@ -357,6 +357,10 @@ public interface PropsKeys {
 
 	public static final String BUFFERED_INCREMENT_THREADPOOL_MAX_SIZE = "buffered.increment.threadpool.max.size";
 
+	public static final String CACHE_CLEAR_ON_CONTEXT_INITIALIZATION = "cache.clear.on.context.initialization";
+
+	public static final String CACHE_CLEAR_ON_PLUGIN_UNDEPLOY = "cache.clear.on.plugin.undeploy";
+
 	public static final String CACHE_CONTENT_THRESHOLD_SIZE = "cache.content.threshold.size";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
@@ -438,10 +442,6 @@ public interface PropsKeys {
 	public static final String CDN_HOST_HTTP = "cdn.host.http";
 
 	public static final String CDN_HOST_HTTPS = "cdn.host.https";
-
-	public static final String CLEAR_CACHE_ON_CONTEXT_INITIALIZATION = "clear.cache.on.context.initialization";
-
-	public static final String CLEAR_CACHE_ON_PLUGIN_UNDEPLOY = "clear.cache.on.plugin.undeploy";
 
 	public static final String CLUSTER_EXECUTOR_DEBUG_ENABLED = "cluster.executor.debug.enabled";
 

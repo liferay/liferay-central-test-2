@@ -297,7 +297,7 @@ public class ServiceComponentLocalServiceImpl
 
 		CacheRegistryUtil.clear();
 
-		if (PropsValues.CLEAR_CACHE_ON_PLUGIN_UNDEPLOY) {
+		if (PropsValues.CACHE_CLEAR_ON_PLUGIN_UNDEPLOY) {
 			EntityCacheUtil.clearCache();
 			FinderCacheUtil.clearCache();
 		}
