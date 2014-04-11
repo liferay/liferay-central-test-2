@@ -20,7 +20,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 /**
  * @author Shuyang Zhou
  */
-public class AssetCategoryComparator extends OrderByComparator {
+public class AssetCategoryLeftCategoryIdComparator extends OrderByComparator {
 
 	public static final String ORDER_BY_ASC = "leftCategoryId ASC";
 
@@ -28,11 +28,11 @@ public class AssetCategoryComparator extends OrderByComparator {
 
 	public static final String[] ORDER_BY_FIELDS = {"leftCategoryId"};
 
-	public AssetCategoryComparator() {
+	public AssetCategoryLeftCategoryIdComparator() {
 		this(false);
 	}
 
-	public AssetCategoryComparator(boolean ascending) {
+	public AssetCategoryLeftCategoryIdComparator(boolean ascending) {
 		_ascending = ascending;
 	}
 

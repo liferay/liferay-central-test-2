@@ -50,7 +50,7 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.asset.util.AssetCategoryUtil;
-import com.liferay.portlet.asset.util.comparator.AssetCategoryComparator;
+import com.liferay.portlet.asset.util.comparator.AssetCategoryLeftCategoryIdComparator;
 
 import java.io.Serializable;
 
@@ -242,7 +242,7 @@ public class AssetCategoryLocalServiceImpl
 			assetCategoryPersistence.findByP_V(
 				AssetCategoryConstants.DEFAULT_PARENT_CATEGORY_ID, vocabularyId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS,
-				new AssetCategoryComparator(false));
+				new AssetCategoryLeftCategoryIdComparator(false));
 
 		for (AssetCategory category : categories) {
 			deleteCategory(category.getCategoryId());
