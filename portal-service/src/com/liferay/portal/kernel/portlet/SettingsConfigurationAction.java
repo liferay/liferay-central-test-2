@@ -286,6 +286,7 @@ public class SettingsConfigurationAction
 			"Invalid settings scope " + settingsScope);
 	}
 
+	@SuppressWarnings("unused")
 	protected void postProcess(
 			long companyId, PortletRequest portletRequest, Settings settings)
 		throws PortalException, SystemException {
