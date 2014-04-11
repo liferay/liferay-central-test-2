@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util.comparator;
+package com.liferay.portlet.asset.util.comparator;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.asset.model.AssetCategory;

@@ -42,7 +42,6 @@ import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.util.comparator.AssetCategoryComparator;
 import com.liferay.portlet.asset.AssetCategoryNameException;
 import com.liferay.portlet.asset.DuplicateCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
@@ -51,6 +50,7 @@ import com.liferay.portlet.asset.model.AssetCategoryProperty;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.base.AssetCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.asset.util.AssetCategoryUtil;
+import com.liferay.portlet.asset.util.comparator.AssetCategoryComparator;
 
 import java.io.Serializable;
 
