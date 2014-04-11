@@ -150,7 +150,6 @@
 		<var name="key_fieldFieldLabel" value="${fieldFieldLabel}" />
 
 		<execute action="Dynamicdatamapping#click" locator-key1="FORM_FIELD" />
-
 		<execute action="Dynamicdatamapping#doubleClick" locator-key1="SETTINGS_OPTIONS" />
 
 		<var name="i" value="0" />
