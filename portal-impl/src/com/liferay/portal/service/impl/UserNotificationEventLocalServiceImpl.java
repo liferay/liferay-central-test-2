@@ -281,38 +281,40 @@ public class UserNotificationEventLocalServiceImpl
 			UserNotificationManagerUtil.fetchUserNotificationDefinition(
 				portletId, classNameId, notificationType);
 
-		Map<Integer, UserNotificationDeliveryType> deliveryTypeMaps =
-			userNotificationDefinition.getUserNotificationDeliveryTypes();
+		Map<Integer, UserNotificationDeliveryType>
+			userNotificationDeliveryTypes =
+				userNotificationDefinition.getUserNotificationDeliveryTypes();
 
-		for (Map.Entry<Integer, UserNotificationDeliveryType>
-			deliveryTypeEntry : deliveryTypeMaps.entrySet()) {
-
-			UserNotificationDeliveryType userNotificationDeliveryType =
-				deliveryTypeEntry.getValue();
+		for (Map.Entry<Integer, UserNotificationDeliveryType> entry :
+				userNotificationDeliveryTypes.entrySet()) {
 
 			NotificationEvent notificationEvent =
 				NotificationEventFactoryUtil.createNotificationEvent(
 					System.currentTimeMillis(), portletId,
 					notificationEventJSONObject);
 
-			notificationEvent.setDeliveryRequired(0);
+			UserNotificationDeliveryType userNotificationDeliveryType =
+				entry.getValue();
+
 			notificationEvent.setDeliveryType(
 				userNotificationDeliveryType.getType());
 
-			if (UserNotificationManagerUtil.isDeliver(
+			if (!UserNotificationManagerUtil.isDeliver(
 					userId, notificationEvent.getType(), classNameId,
 					notificationType, userNotificationDeliveryType.getType())) {
 
-				UserNotificationEvent userNotificationEvent =
-					addUserNotificationEvent(userId, notificationEvent);
+				continue;
+			}
 
-				userNotificationEvents.add(userNotificationEvent);
+			UserNotificationEvent userNotificationEvent =
+				addUserNotificationEvent(userId, notificationEvent);
 
-				if (userNotificationDeliveryType.getType() ==
-						UserNotificationDeliveryConstants.TYPE_PUSH) {
+			userNotificationEvents.add(userNotificationEvent);
 
-					sendPushNotitication(userNotificationEvent);
-				}
+			if (userNotificationDeliveryType.getType() ==
+					UserNotificationDeliveryConstants.TYPE_PUSH) {
+
+				sendPushNotitication(userNotificationEvent);
 			}
 		}
 
@@ -367,8 +369,8 @@ public class UserNotificationEventLocalServiceImpl
 				public Void call() throws Exception {
 					Message message = new Message();
 
-					message.put("userId", userNotificationEvent.getUserId());
 					message.put("data", userNotificationEvent.getPayload());
+					message.put("userId", userNotificationEvent.getUserId());
 
 					MessageBusUtil.sendMessage(
 						DestinationNames.PUSH_NOTIFICATION, message);
@@ -376,8 +378,7 @@ public class UserNotificationEventLocalServiceImpl
 					return null;
 				}
 
-			}
-		);
+			});
 	}
 
 }
