@@ -1322,13 +1322,12 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 		"(?:confirmation|label|(?:M|m)essage|message key|names|title)=\"[^A-Z" +
 			"<=%\\[\\s]+\"");
 	private Pattern _taglibLanguageKeyPattern2 = Pattern.compile(
-		"(aui:)(?:input|select|field-wrapper) " +
-			"(?!.*label=(?:'|\").+(?:'|\").*name=\"[^<=%\\[\\s]+\")" +
-				"(?!.*name=\"[^<=%\\[\\s]+\".*type=\"hidden\")" +
-					".*name=\"([^<=%\\[\\s]+)\"");
+		"(aui:)(?:input|select|field-wrapper) (?!.*label=(?:'|\").+(?:'|\").*" +
+			"name=\"[^<=%\\[\\s]+\")(?!.*name=\"[^<=%\\[\\s]+\".*type=\"" +
+				"hidden\").*name=\"([^<=%\\[\\s]+)\"");
 	private Pattern _taglibLanguageKeyPattern3 = Pattern.compile(
-		"(liferay-ui:)(?:input-resource) " +
-			".*id=\"([^<=%\\[\\s]+)\"(?!.*label=(?:'|\").+(?:'|\"))");
+		"(liferay-ui:)(?:input-resource) .*id=\"([^<=%\\[\\s]+)\"(?!.*label=" +
+			"(?:'|\").+(?:'|\"))");
 	private Properties _unusedVariablesExclusions;
 	private Pattern _xssPattern = Pattern.compile(
 		"\\s+([^\\s]+)\\s*=\\s*(Bean)?ParamUtil\\.getString\\(");
