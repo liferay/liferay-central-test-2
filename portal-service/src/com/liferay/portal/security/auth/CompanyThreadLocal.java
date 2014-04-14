@@ -52,10 +52,10 @@ public class CompanyThreadLocal {
 		}
 
 		if (companyId > 0) {
+			_companyId.set(companyId);
+
 			try {
 				Company company = CompanyLocalServiceUtil.getCompany(companyId);
-
-				_companyId.set(companyId);
 
 				LocaleThreadLocal.setDefaultLocale(company.getLocale());
 				TimeZoneThreadLocal.setDefaultTimeZone(company.getTimeZone());
@@ -65,10 +65,10 @@ public class CompanyThreadLocal {
 			}
 		}
 		else {
+			_companyId.set(CompanyConstants.SYSTEM);
+
 			LocaleThreadLocal.setDefaultLocale(null);
 			TimeZoneThreadLocal.setDefaultTimeZone(null);
-
-			_companyId.set(CompanyConstants.SYSTEM);
 		}
 	}
 
