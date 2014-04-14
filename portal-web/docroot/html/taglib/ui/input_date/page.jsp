@@ -33,6 +33,11 @@ String name = namespace + GetterUtil.getString((String)request.getAttribute("lif
 String yearParam = namespace + request.getAttribute("liferay-ui:input-date:yearParam");
 int yearValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearValue"));
 
+String dayParamId = HtmlUtil.getAUICompatibleId(dayParam);
+String monthParamId = HtmlUtil.getAUICompatibleId(monthParam);
+String nameId = HtmlUtil.getAUICompatibleId(name);
+String yearParamId = HtmlUtil.getAUICompatibleId(yearParam);
+
 Calendar calendar = CalendarFactoryUtil.getCalendar(yearValue, monthValue, dayValue);
 
 String mask = _MASK_MDY;
@@ -59,11 +64,6 @@ else {
 }
 
 Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPattern, locale);
-
-String dayParamId = HtmlUtil.getAUICompatibleId(dayParam);
-String monthParamId = HtmlUtil.getAUICompatibleId(monthParam);
-String nameId = HtmlUtil.getAUICompatibleId(name);
-String yearParamId = HtmlUtil.getAUICompatibleId(yearParam);
 %>
 
 <span class="lfr-input-date <%= cssClass %>" id="<%= randomNamespace %>displayDate">

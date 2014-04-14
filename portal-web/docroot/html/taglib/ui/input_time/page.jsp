@@ -42,6 +42,12 @@ if (amPmValue == Calendar.PM) {
 	hourOfDayValue += 12;
 }
 
+String amPmParamId = HtmlUtil.getAUICompatibleId(amPmParam);
+String dateParamId = HtmlUtil.getAUICompatibleId(dateParam);
+String hourParamId = HtmlUtil.getAUICompatibleId(hourParam);
+String minuteParamId = HtmlUtil.getAUICompatibleId(minuteParam);
+String nameId = HtmlUtil.getAUICompatibleId(name);
+
 Calendar calendar = CalendarFactoryUtil.getCalendar(1970, 0, 1, hourOfDayValue, minuteValue);
 
 String simpleDateFormatPattern = _SIMPLE_DATE_FORMAT_PATTERN_ISO;
@@ -60,12 +66,6 @@ if (!DateUtil.isFormatAmPm(locale)) {
 }
 
 Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(simpleDateFormatPattern, locale);
-
-String amPmParamId = HtmlUtil.getAUICompatibleId(amPmParam);
-String dateParamId = HtmlUtil.getAUICompatibleId(dateParam);
-String hourParamId = HtmlUtil.getAUICompatibleId(hourParam);
-String minuteParamId = HtmlUtil.getAUICompatibleId(minuteParam);
-String nameId = HtmlUtil.getAUICompatibleId(name);
 %>
 
 <span class="lfr-input-time <%= cssClass %>" id="<%= randomNamespace %>displayTime">

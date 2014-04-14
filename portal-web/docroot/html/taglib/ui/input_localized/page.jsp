@@ -27,7 +27,7 @@ String defaultLanguageId = (String)request.getAttribute("liferay-ui:input-locali
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-localized:disabled"));
 String fieldPrefix = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:fieldPrefix"));
 String fieldPrefixSeparator = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-localized:fieldPrefixSeparator"));
-String id = (String)request.getAttribute("liferay-ui:input-localized:id");
+String id = HtmlUtil.getAUICompatibleId((String)request.getAttribute("liferay-ui:input-localized:id"));
 Map<String, Object> dynamicAttributes = (Map<String, Object>)request.getAttribute("liferay-ui:input-localized:dynamicAttributes");
 boolean ignoreRequestValue = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-localized:ignoreRequestValue"));
 String languageId = (String)request.getAttribute("liferay-ui:input-localized:languageId");
@@ -35,8 +35,6 @@ String maxLength = GetterUtil.getString((String)request.getAttribute("liferay-ui
 String name = (String)request.getAttribute("liferay-ui:input-localized:name");
 String xml = (String)request.getAttribute("liferay-ui:input-localized:xml");
 String type = (String)request.getAttribute("liferay-ui:input-localized:type");
-
-id = HtmlUtil.getAUICompatibleId(id);
 
 Locale defaultLocale = null;
 
