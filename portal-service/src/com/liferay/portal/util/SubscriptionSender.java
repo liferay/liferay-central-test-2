@@ -775,22 +775,22 @@ public class SubscriptionSender implements Serializable {
 		if (UserNotificationManagerUtil.isDeliver(
 				user.getUserId(), portletId, _notificationClassNameId,
 				_notificationType,
-				UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
+				UserNotificationDeliveryConstants.TYPE_PUSH)) {
 
 			UserNotificationEventLocalServiceUtil.sendUserNotificationEvents(
 				user.getUserId(), portletId,
-				UserNotificationDeliveryConstants.TYPE_WEBSITE,
+				UserNotificationDeliveryConstants.TYPE_PUSH,
 				notificationEventJSONObject);
 		}
 
 		if (UserNotificationManagerUtil.isDeliver(
 				user.getUserId(), portletId, _notificationClassNameId,
 				_notificationType,
-				UserNotificationDeliveryConstants.TYPE_PUSH)) {
+				UserNotificationDeliveryConstants.TYPE_WEBSITE)) {
 
 			UserNotificationEventLocalServiceUtil.sendUserNotificationEvents(
 				user.getUserId(), portletId,
-				UserNotificationDeliveryConstants.TYPE_PUSH,
+				UserNotificationDeliveryConstants.TYPE_WEBSITE,
 				notificationEventJSONObject);
 		}
 	}
