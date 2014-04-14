@@ -1361,13 +1361,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 				FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-				if (
-					<#if pluginName != "">
-						_SPRING_HIBERNATE_SESSION_DELEGATED
-					<#else>
-						com.liferay.portal.util.PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED
-					</#if>
-					) {
+				if (<#if pluginName != "">_SPRING_HIBERNATE_SESSION_DELEGATED<#else>com.liferay.portal.util.PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED</#if>) {
 					Session session = getCurrentSession();
 
 					session.clear();
@@ -1510,13 +1504,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_ENTITY);
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
 
-			if (
-				<#if pluginName != "">
-					_SPRING_HIBERNATE_SESSION_DELEGATED
-				<#else>
-					com.liferay.portal.util.PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED
-				</#if>
-				) {
+			if (<#if pluginName != "">_SPRING_HIBERNATE_SESSION_DELEGATED<#else>com.liferay.portal.util.PropsValues.SPRING_HIBERNATE_SESSION_DELEGATED</#if>) {
 				Session session = getCurrentSession();
 
 				session.clear();
