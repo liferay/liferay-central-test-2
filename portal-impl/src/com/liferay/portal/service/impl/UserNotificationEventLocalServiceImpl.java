@@ -288,13 +288,19 @@ public class UserNotificationEventLocalServiceImpl
 		for (Map.Entry<Integer, UserNotificationDeliveryType> entry :
 				userNotificationDeliveryTypes.entrySet()) {
 
+			UserNotificationDeliveryType userNotificationDeliveryType =
+				entry.getValue();
+
+			if (userNotificationDeliveryType.getType() ==
+					UserNotificationDeliveryConstants.TYPE_EMAIL) {
+
+				continue;
+			}
+
 			NotificationEvent notificationEvent =
 				NotificationEventFactoryUtil.createNotificationEvent(
 					System.currentTimeMillis(), portletId,
 					notificationEventJSONObject);
-
-			UserNotificationDeliveryType userNotificationDeliveryType =
-				entry.getValue();
 
 			notificationEvent.setDeliveryType(
 				userNotificationDeliveryType.getType());
