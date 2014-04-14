@@ -18,10 +18,8 @@
 
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
-
-PortletRequestModel portletRequestModel = new PortletRequestModel(renderRequest, renderResponse);
 %>
 
-<%= JournalArticleLocalServiceUtil.getArticleContent(article, article.getTemplateId(), null, themeDisplay.getLanguageId(), portletRequestModel, themeDisplay) %>
+<%= JournalArticleLocalServiceUtil.getArticleContent(article, article.getTemplateId(), null, themeDisplay.getLanguageId(), new PortletRequestModel(renderRequest, renderResponse), themeDisplay) %>
 
 <liferay-util:include page="/html/common/themes/bottom.jsp" />
