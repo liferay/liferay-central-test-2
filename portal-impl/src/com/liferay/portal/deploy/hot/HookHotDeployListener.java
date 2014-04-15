@@ -776,8 +776,8 @@ public class HookHotDeployListener
 				"model-listener-class");
 
 			ModelListener<BaseModel<?>> modelListener = initModelListener(
-				servletContextName, modelName, modelListenerClassName,
-				portletClassLoader);
+				servletContextName, portletClassLoader, modelName,
+				modelListenerClassName);
 
 			if (modelListener != null) {
 				modelListenersContainer.registerModelListener(
@@ -1579,8 +1579,8 @@ public class HookHotDeployListener
 
 	@SuppressWarnings("rawtypes")
 	protected ModelListener<BaseModel<?>> initModelListener(
-			String servletContextName, String modelName,
-			String modelListenerClassName, ClassLoader portletClassLoader)
+			String servletContextName, ClassLoader portletClassLoader,
+			String modelName, String modelListenerClassName)
 		throws Exception {
 
 		ModelListener<BaseModel<?>> modelListener =
@@ -1621,8 +1621,8 @@ public class HookHotDeployListener
 
 			for (String modelListenerClassName : modelListenerClassNames) {
 				ModelListener<BaseModel<?>> modelListener = initModelListener(
-					servletContextName, modelName, modelListenerClassName,
-					portletClassLoader);
+					servletContextName, portletClassLoader, modelName,
+					modelListenerClassName);
 
 				if (modelListener != null) {
 					modelListenersContainer.registerModelListener(
