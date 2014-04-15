@@ -319,8 +319,8 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #getSummary(Document, Locale,
-	 *             String, PortletURL, PortletRequest, PortletResponse)}
+	 * @deprecated As of 7.0.0, replaced by {@link #getSummary(Document, String,
+	 *             PortletURL, PortletRequest, PortletResponse)}
 	 */
 	@Deprecated
 	@Override
