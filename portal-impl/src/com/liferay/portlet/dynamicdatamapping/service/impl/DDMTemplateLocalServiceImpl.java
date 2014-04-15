@@ -534,9 +534,11 @@ public class DDMTemplateLocalServiceImpl
 			return null;
 		}
 
-		for (long curGroupId : PortalUtil.getAncestorSiteGroupIds(groupId)) {
+		for (long ancestorSiteGroupId :
+				PortalUtil.getAncestorSiteGroupIds(groupId)) {
+
 			template = ddmTemplatePersistence.fetchByG_C_T(
-				curGroupId, classNameId, templateKey);
+				ancestorSiteGroupId, classNameId, templateKey);
 
 			if (template != null) {
 				return template;
@@ -623,9 +625,11 @@ public class DDMTemplateLocalServiceImpl
 				"No DDMTemplate exists with the template key " + templateKey);
 		}
 
-		for (long curGroupId : PortalUtil.getAncestorSiteGroupIds(groupId)) {
+		for (long ancestorSiteGroupId :
+				PortalUtil.getAncestorSiteGroupIds(groupId)) {
+
 			template = ddmTemplatePersistence.fetchByG_C_T(
-				curGroupId, classNameId, templateKey);
+				ancestorSiteGroupId, classNameId, templateKey);
 
 			if (template != null) {
 				return template;
