@@ -2626,23 +2626,6 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	@Override
-	public JournalArticle getOldestArticle(long groupId, String articleId)
-		throws PortalException, SystemException {
-
-		return getOldestArticle(
-			groupId, articleId, WorkflowConstants.STATUS_ANY);
-	}
-
-	@Override
-	public JournalArticle getOldestArticle(
-			long groupId, String articleId, int status)
-		throws PortalException, SystemException {
-
-		return getFirstArticle(
-			groupId, articleId, status, new ArticleVersionComparator(false));
-	}
-
-	@Override
 	public List<JournalArticle> getIndexableArticlesByResourcePrimKey(
 			long resourcePrimKey)
 		throws SystemException {
@@ -2929,6 +2912,23 @@ public class JournalArticleLocalServiceImpl
 
 		return journalArticleFinder.countByG_F(
 			groupId, folderIds, queryDefinition);
+	}
+
+	@Override
+	public JournalArticle getOldestArticle(long groupId, String articleId)
+		throws PortalException, SystemException {
+
+		return getOldestArticle(
+			groupId, articleId, WorkflowConstants.STATUS_ANY);
+	}
+
+	@Override
+	public JournalArticle getOldestArticle(
+			long groupId, String articleId, int status)
+		throws PortalException, SystemException {
+
+		return getFirstArticle(
+			groupId, articleId, status, new ArticleVersionComparator(false));
 	}
 
 	@Override
