@@ -84,6 +84,7 @@ public class UserDisplayTag extends TagSupport {
 
 			request.setAttribute(
 				"liferay-ui:user-display:imageCssClass", _imageCssClass);
+
 			request.setAttribute(
 				"liferay-ui:user-display:showUserDetails",
 				String.valueOf(_showUserDetails));
