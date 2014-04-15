@@ -2626,15 +2626,15 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	@Override
-	public JournalArticle getEarliestArticle(long groupId, String articleId)
+	public JournalArticle getOldestArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		return getEarliestArticle(
+		return getOldestArticle(
 			groupId, articleId, WorkflowConstants.STATUS_ANY);
 	}
 
 	@Override
-	public JournalArticle getEarliestArticle(
+	public JournalArticle getOldestArticle(
 			long groupId, String articleId, int status)
 		throws PortalException, SystemException {
 
