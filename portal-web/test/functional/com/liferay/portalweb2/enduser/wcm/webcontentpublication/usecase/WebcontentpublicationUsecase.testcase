@@ -1338,7 +1338,7 @@
 		<execute macro="User#loginPG" />
 	</command>
 
-	<command name="ViewWebContentInConfiguredPortletViaAP" priority="5">
+	<command name="ViewWebContentWithConfiguredDisplayPageViaAP" priority="5">
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="${pageName}" />
 		</execute>
@@ -1393,7 +1393,7 @@
 			<var name="pageName" value="${pageName}" />
 		</execute>
 
-		<execute macro="WebContent#gotoAndViewLinkedAssetPGViaAP">
+		<execute macro="WebContent#viewLinkedAssetPGViaAP">
 			<var name="webContentContent" value="WC WebContent Content" />
 			<var name="webContentTitle" value="WC WebContent Title" />
 		</execute>

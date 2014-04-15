@@ -635,15 +635,6 @@
 		<execute action="CPWebcontentEditwebcontent#confirm" locator-key1="CONFIRMATION" value1="Are you sure you want to expire the selected version?" />
 	</command>
 
-	<command name="gotoAndViewLinkedAssetPGViaAP">
-		<var name="key_assetTitle" value="${webContentTitle}" />
-
-		<execute action="PGAssetpublisher#assertClick" locator-key1="ASSET_ABSTRACT_VIEW" value1="View" />
-
-		<execute action="PGAssetpublisherAsset#assertTextEquals" locator-key1="ASSET_TITLE" value1="${webContentTitle}" />
-		<execute action="PGAssetpublisherAsset#assertTextEquals" locator-key1="ASSET_CONTENT" value1="${webContentContent}" />
-	</command>
-
 	<command name="gotoCP">
 		<execute action="CPWebcontent#click" locator-key1="TOOLBAR_DISPLAY_STYLE_BUTTON" />
 		<execute action="CPWebcontent#assertClick" locator-key1="DISPLAY_STYLE_MENULIST_DESCRIPTIVE" value1="Descriptive" />
@@ -944,6 +935,15 @@
 	<command name="viewEditWCViaWCD">
 		<execute action="PGWebcontentdisplay#assertElementPresent" locator-key1="WEB_CONTENT_CONTENT" value1="${webContentContent}" />
 		<execute action="PGWebcontentdisplay#assertElementPresent" locator-key1="EDIT_WEB_CONTENT" />
+	</command>
+
+	<command name="viewLinkedAssetPGViaAP">
+		<var name="key_assetTitle" value="${webContentTitle}" />
+
+		<execute action="PGAssetpublisher#assertClick" locator-key1="ASSET_ABSTRACT_VIEW" value1="View" />
+
+		<execute action="PGAssetpublisherAsset#assertTextEquals" locator-key1="ASSET_TITLE" value1="${webContentTitle}" />
+		<execute action="PGAssetpublisherAsset#assertTextEquals" locator-key1="ASSET_CONTENT" value1="${webContentContent}" />
 	</command>
 
 	<command name="viewNoContentAsGuestPGViaWCD">
