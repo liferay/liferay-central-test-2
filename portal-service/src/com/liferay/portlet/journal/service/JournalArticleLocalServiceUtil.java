@@ -1730,20 +1730,6 @@ public class JournalArticleLocalServiceUtil {
 		return getService().getDisplayArticleByUrlTitle(groupId, urlTitle);
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticle getEarliestArticle(
-		long groupId, java.lang.String articleId)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEarliestArticle(groupId, articleId);
-	}
-
-	public static com.liferay.portlet.journal.model.JournalArticle getEarliestArticle(
-		long groupId, java.lang.String articleId, int status)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEarliestArticle(groupId, articleId, status);
-	}
-
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getIndexableArticlesByResourcePrimKey(
 		long resourcePrimKey)
 		throws com.liferay.portal.kernel.exception.SystemException {
@@ -1953,6 +1939,20 @@ public class JournalArticleLocalServiceUtil {
 	public static int getNotInTrashArticlesCount(long groupId, long folderId)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getService().getNotInTrashArticlesCount(groupId, folderId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getOldestArticle(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOldestArticle(groupId, articleId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle getOldestArticle(
+		long groupId, java.lang.String articleId, int status)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getOldestArticle(groupId, articleId, status);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getPreviousApprovedArticle(
