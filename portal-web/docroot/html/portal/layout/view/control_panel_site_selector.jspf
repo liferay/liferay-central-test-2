@@ -41,7 +41,7 @@ String switchGroupURL = HttpUtil.setParameter(PortalUtil.getCurrentURL(request),
 
 String portletId = themeDisplay.getPpid();
 
-switchGroupURL = PortalUtil.resetPortletParams(switchGroupURL, portletId);
+switchGroupURL = PortalUtil.resetPortletParameters(switchGroupURL, portletId);
 %>
 
 <c:choose>
