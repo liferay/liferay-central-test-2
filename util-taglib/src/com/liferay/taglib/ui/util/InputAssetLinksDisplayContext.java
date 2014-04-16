@@ -467,8 +467,6 @@ public class InputAssetLinksDisplayContext {
 			return _stagedReferrerPortlet;
 		}
 
-		_stagedReferrerPortlet = false;
-
 		if (_isStagedLocally()) {
 			String className = (String)_request.getAttribute(
 				"liferay-ui:input-asset-links:className");
@@ -479,6 +477,9 @@ public class InputAssetLinksDisplayContext {
 
 			_stagedReferrerPortlet = _scopeGroup.isStagedPortlet(
 				assetRendererFactory.getPortletId());
+		}
+		else {
+			_stagedReferrerPortlet = false;
 		}
 
 		return _stagedReferrerPortlet;
