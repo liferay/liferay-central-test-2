@@ -352,8 +352,7 @@ public abstract class DLAppTestUtil {
 
 		return addFileEntry(
 			groupId, repositoryId, folderId, ServiceTestUtil.randomString(),
-			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL,
-			true, approved);
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL, true, approved);
 	}
 
 	public static Folder addFolder(long groupId, long parentFolderId)
