@@ -61,7 +61,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author Jose M Navarro
+ * @author José Manuel Navarro
  */
 public class InputAssetLinksDisplayContext {
 
