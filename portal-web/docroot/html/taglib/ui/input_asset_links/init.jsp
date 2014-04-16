@@ -19,5 +19,5 @@
 <%@ page import="com.liferay.taglib.ui.util.InputAssetLinksDisplayContext" %>
 
 <%
-InputAssetLinksDisplayContext displayContext = new InputAssetLinksDisplayContext(pageContext);
+InputAssetLinksDisplayContext inputAssetLinksDisplayContext = new InputAssetLinksDisplayContext(pageContext);
 %>

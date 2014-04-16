@@ -19,13 +19,13 @@
 <liferay-ui:icon-menu
 	cssClass="select-existing-selector"
 	icon='<%= themeDisplay.getPathThemeImages() + "/common/search.png" %>'
-	id='<%= displayContext.getRandomNamespace() + "inputAssetLinks" %>'
+	id='<%= inputAssetLinksDisplayContext.getRandomNamespace() + "inputAssetLinks" %>'
 	message="select"
 	showWhenSingleIcon="<%= true %>"
 >
 
 	<%
-	for (Map<String, Object> entry : displayContext.getSelectorEntries()) {
+	for (Map<String, Object> entry : inputAssetLinksDisplayContext.getSelectorEntries()) {
 	%>
 
 		<liferay-ui:icon
@@ -59,8 +59,8 @@
 	headerNames="type,title,scope,null"
 >
 	<liferay-ui:search-container-results
-		results="<%= displayContext.getAssetLinks() %>"
-		total="<%= displayContext.getAssetLinks().size() %>"
+		results="<%= inputAssetLinksDisplayContext.getAssetLinks() %>"
+		total="<%= inputAssetLinksDisplayContext.getAssetLinks().size() %>"
 	/>
 
 	<liferay-ui:search-container-row
@@ -70,12 +70,12 @@
 	>
 
 		<%
-		AssetEntry assetLinkEntry = displayContext.getAssetLinkEntry(assetLink);
+		AssetEntry assetLinkEntry = inputAssetLinksDisplayContext.getAssetLinkEntry(assetLink);
 		%>
 
 		<liferay-ui:search-container-column-text
 			name="type"
-			value="<%= displayContext.getAssetType(assetLinkEntry) %>"
+			value="<%= inputAssetLinksDisplayContext.getAssetType(assetLinkEntry) %>"
 		/>
 
 		<liferay-ui:search-container-column-text
@@ -85,7 +85,7 @@
 
 		<liferay-ui:search-container-column-text
 			name="scope"
-			value="<%= HtmlUtil.escape(displayContext.getGroupDescriptiveName(assetLinkEntry)) %>"
+			value="<%= HtmlUtil.escape(inputAssetLinksDisplayContext.getGroupDescriptiveName(assetLinkEntry)) %>"
 		/>
 
 		<liferay-ui:search-container-column-text>
@@ -110,8 +110,8 @@
 						constrain: true,
 						modal: true
 					},
-					eventName: '<%= displayContext.getEventName() %>',
-					id: '<%= displayContext.getEventName() %>' + event.currentTarget.attr('id'),
+					eventName: '<%= inputAssetLinksDisplayContext.getEventName() %>',
+					id: '<%= inputAssetLinksDisplayContext.getEventName() %>' + event.currentTarget.attr('id'),
 					title: event.currentTarget.attr('data-title'),
 					uri: event.currentTarget.attr('data-href')
 				},
