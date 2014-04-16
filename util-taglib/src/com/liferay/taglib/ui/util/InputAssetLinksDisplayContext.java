@@ -65,9 +65,7 @@ import javax.servlet.jsp.PageContext;
  */
 public class InputAssetLinksDisplayContext {
 
-	public InputAssetLinksDisplayContext(PageContext pageContext)
-		throws PortalException, SystemException {
-
+	public InputAssetLinksDisplayContext(PageContext pageContext) {
 		_pageContext = pageContext;
 		_request = (HttpServletRequest)pageContext.getRequest();
 		_portletRequest = (PortletRequest)_request.getAttribute(
@@ -117,11 +115,11 @@ public class InputAssetLinksDisplayContext {
 		List<AssetRendererFactory> assetRendererFactories = ListUtil.filter(
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
 				_company.getCompanyId()),
-				new PredicateFilter() {
+				new PredicateFilter<AssetRendererFactory>() {
 
-					public boolean filter(Object object) {
-						AssetRendererFactory assetRendererFactory =
-							(AssetRendererFactory)object;
+					@Override
+					public boolean filter(
+						AssetRendererFactory assetRendererFactory) {
 
 						return assetRendererFactory.isLinkable() &&
 							assetRendererFactory.isSelectable();
