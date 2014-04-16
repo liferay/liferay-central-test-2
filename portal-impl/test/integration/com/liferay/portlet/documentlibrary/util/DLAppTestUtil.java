@@ -171,12 +171,12 @@ public abstract class DLAppTestUtil {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
-		serviceContext.setCommand(Constants.ADD);
-		serviceContext.setLayoutFullURL("http://localhost");
-
 		if (fileEntryTypeId != -1) {
 			serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
 		}
+
+		serviceContext.setCommand(Constants.ADD);
+		serviceContext.setLayoutFullURL("http://localhost");
 
 		if (workflowEnabled && !approved) {
 			serviceContext.setWorkflowAction(

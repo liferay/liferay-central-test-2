@@ -330,8 +330,9 @@ public class MBTestUtil {
 			message = MBMessageLocalServiceUtil.updateMessage(
 				TestPropsValues.getUserId(), message.getMessageId(),
 				ServiceTestUtil.randomString(),
-				ServiceTestUtil.randomString(50), Collections.EMPTY_LIST,
-				Collections.EMPTY_LIST, message.getPriority(),
+				ServiceTestUtil.randomString(50),
+				Collections.<ObjectValuePair<String, InputStream>>emptyList(),
+				Collections.<String>emptyList(), message.getPriority(),
 				message.isAllowPingbacks(), serviceContext);
 
 			if (approved) {
