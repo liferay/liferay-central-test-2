@@ -67,9 +67,9 @@ public class InputAssetLinksDisplayContext {
 
 	public InputAssetLinksDisplayContext(PageContext pageContext) {
 		_pageContext = pageContext;
-		
+
 		_request = (HttpServletRequest)pageContext.getRequest();
-		
+
 		_portletRequest = (PortletRequest)_request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
@@ -124,10 +124,10 @@ public class InputAssetLinksDisplayContext {
 
 						if (assetRendererFactory.isLinkable() &&
 							assetRendererFactory.isSelectable()) {
-							
+
 							return true;
 						}
-						
+
 						return false;
 					}
 
@@ -380,25 +380,6 @@ public class InputAssetLinksDisplayContext {
 		return selectorEntries;
 	}
 
-	private String _getSelectorEntryId(
-		AssetRendererFactory assetRendererFactory) {
-
-		return FriendlyURLNormalizerUtil.normalize(
-			assetRendererFactory.getTypeName(_locale));
-	}
-
-	private String _getSelectorEntryMessage(
-		AssetRendererFactory assetRendererFactory) {
-
-		return assetRendererFactory.getTypeName(_locale);
-	}
-
-	private String _getSelectorEntrySrc(
-		AssetRendererFactory assetRendererFactory) {
-
-		return assetRendererFactory.getIconPath(_portletRequest);
-	}
-
 	private Map<String, Object> _getSelectorEntryData(
 			AssetRendererFactory assetRendererFactory,
 			Map.Entry<Long, String> assetAvailableClassType)
@@ -428,6 +409,13 @@ public class InputAssetLinksDisplayContext {
 	}
 
 	private String _getSelectorEntryId(
+		AssetRendererFactory assetRendererFactory) {
+
+		return FriendlyURLNormalizerUtil.normalize(
+			assetRendererFactory.getTypeName(_locale));
+	}
+
+	private String _getSelectorEntryId(
 		AssetRendererFactory assetRendererFactory,
 		Map.Entry<Long, String> assetAvailableClassType) {
 
@@ -442,9 +430,21 @@ public class InputAssetLinksDisplayContext {
 	}
 
 	private String _getSelectorEntryMessage(
+		AssetRendererFactory assetRendererFactory) {
+
+		return assetRendererFactory.getTypeName(_locale);
+	}
+
+	private String _getSelectorEntryMessage(
 		Map.Entry<Long, String> assetAvailableClassType) {
 
 		return assetAvailableClassType.getValue();
+	}
+
+	private String _getSelectorEntrySrc(
+		AssetRendererFactory assetRendererFactory) {
+
+		return assetRendererFactory.getIconPath(_portletRequest);
 	}
 
 	private boolean _isStagedLocally() {
