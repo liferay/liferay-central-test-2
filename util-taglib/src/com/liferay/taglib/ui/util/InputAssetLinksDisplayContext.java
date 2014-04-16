@@ -67,17 +67,19 @@ public class InputAssetLinksDisplayContext {
 
 	public InputAssetLinksDisplayContext(PageContext pageContext) {
 		_pageContext = pageContext;
+		
 		_request = (HttpServletRequest)pageContext.getRequest();
+		
 		_portletRequest = (PortletRequest)_request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_locale = themeDisplay.getLocale();
 		_company = themeDisplay.getCompany();
-		_user = themeDisplay.getUser();
+		_locale = themeDisplay.getLocale();
 		_scopeGroup = themeDisplay.getScopeGroup();
+		_user = themeDisplay.getUser();
 
 		_assetEntryId = GetterUtil.getLong(
 			(String)_request.getAttribute(
@@ -90,9 +92,8 @@ public class InputAssetLinksDisplayContext {
 		if ((_assetEntryId > 0) || (assetLink.getEntryId1() == _assetEntryId)) {
 			return AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId2());
 		}
-		else {
-			return AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId1());
-		}
+
+		return AssetEntryLocalServiceUtil.getEntry(assetLink.getEntryId1());
 	}
 
 	public List<AssetLink> getAssetLinks()
@@ -121,8 +122,13 @@ public class InputAssetLinksDisplayContext {
 					public boolean filter(
 						AssetRendererFactory assetRendererFactory) {
 
-						return assetRendererFactory.isLinkable() &&
-							assetRendererFactory.isSelectable();
+						if (assetRendererFactory.isLinkable() &&
+							assetRendererFactory.isSelectable()) {
+							
+							return true;
+						}
+						
+						return false;
 					}
 
 				});
@@ -170,29 +176,34 @@ public class InputAssetLinksDisplayContext {
 	}
 
 	public List<Map<String, Object>> getSelectorEntries() throws Exception {
-		List<Map<String, Object>> entries =
+		List<Map<String, Object>> selectorEntries =
 			new ArrayList<Map<String, Object>>();
 
 		for (AssetRendererFactory assetRendererFactory :
 				getAssetRendererFactories()) {
 
 			if (assetRendererFactory.isSupportsClassTypes()) {
-				entries.addAll(_getAvailableClassTypes(assetRendererFactory));
+				selectorEntries.addAll(
+					_getSelectorEntries(assetRendererFactory));
 			}
 			else {
-				Map<String, Object> entry = new HashMap<String, Object>();
+				Map<String, Object> selectorEntry =
+					new HashMap<String, Object>();
 
-				entry.put("data", _geSelectorAssetData(assetRendererFactory));
-				entry.put("id", _getSelectorAssetId(assetRendererFactory));
-				entry.put(
-					"message", _getSelectorAssetMessage(assetRendererFactory));
-				entry.put("src", _getSelectorAssetSrc(assetRendererFactory));
+				selectorEntry.put(
+					"data", _geSelectorEntryData(assetRendererFactory));
+				selectorEntry.put(
+					"id", _getSelectorEntryId(assetRendererFactory));
+				selectorEntry.put(
+					"message", _getSelectorEntryMessage(assetRendererFactory));
+				selectorEntry.put(
+					"src", _getSelectorEntrySrc(assetRendererFactory));
 
-				entries.add(entry);
+				selectorEntries.add(selectorEntry);
 			}
 		}
 
-		return entries;
+		return selectorEntries;
 	}
 
 	private List<AssetLink> _createAssetLinks()
@@ -252,25 +263,25 @@ public class InputAssetLinksDisplayContext {
 		return assetLinks;
 	}
 
-	private Map<String, Object> _geSelectorAssetData(
+	private Map<String, Object> _geSelectorEntryData(
 			AssetRendererFactory assetRendererFactory)
 		throws Exception {
 
-		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> selectorEntryData = new HashMap<String, Object>();
 
-		data.put(
+		selectorEntryData.put(
 			"href",
 			_getAssetBrowserPortletURL(assetRendererFactory).toString());
 
 		String typeName = assetRendererFactory.getTypeName(_locale);
 
-		data.put(
+		selectorEntryData.put(
 			"title", LanguageUtil.format(
 				_pageContext , "select-x", typeName, false));
 
-		data.put("type", assetRendererFactory.getClassName());
+		selectorEntryData.put("type", assetRendererFactory.getClassName());
 
-		return data;
+		return selectorEntryData;
 	}
 
 	private long _getAssetBrowserGroupId(
@@ -328,108 +339,109 @@ public class InputAssetLinksDisplayContext {
 		return portletURL;
 	}
 
-	private List<Map<String, Object>> _getAvailableClassTypes(
+	private List<Map<String, Object>> _getSelectorEntries(
 			AssetRendererFactory assetRendererFactory)
 		throws Exception {
 
 		long groupId = _getAssetBrowserGroupId(assetRendererFactory);
 
-		Map<Long, String> assetAvailableClassTypes =
+		Map<Long, String> classTypes =
 			assetRendererFactory.getClassTypes(
 				PortalUtil.getCurrentAndAncestorSiteGroupIds(groupId), _locale);
 
-		if (assetAvailableClassTypes.isEmpty()) {
+		if (classTypes.isEmpty()) {
 			return null;
 		}
 
-		List<Map<String, Object>> entries =
+		List<Map<String, Object>> selectorEntries =
 			new ArrayList<Map<String, Object>>();
 
 		for (Map.Entry<Long, String> assetAvailableClassType :
-				assetAvailableClassTypes.entrySet()) {
+				classTypes.entrySet()) {
 
-			Map<String, Object> entry = new HashMap<String, Object>();
+			Map<String, Object> selectorEntry = new HashMap<String, Object>();
 
-			entry.put(
+			selectorEntry.put(
 				"data",
-				_getSelectorClassTypeData(
+				_getSelectorEntryData(
 					assetRendererFactory, assetAvailableClassType));
-			entry.put(
+			selectorEntry.put(
 				"id",
-				_getSelectorClassTypeId(
+				_getSelectorEntryId(
 					assetRendererFactory, assetAvailableClassType));
-			entry.put(
-				"message",
-				_getSelectorClassTypeMessage(assetAvailableClassType));
-			entry.put("src", _getSelectorAssetSrc(assetRendererFactory));
+			selectorEntry.put(
+				"message", _getSelectorEntryMessage(assetAvailableClassType));
+			selectorEntry.put(
+				"src", _getSelectorEntrySrc(assetRendererFactory));
 
-			entries.add(entry);
+			selectorEntries.add(selectorEntry);
 		}
 
-		return entries;
+		return selectorEntries;
 	}
 
-	private String _getSelectorAssetId(
+	private String _getSelectorEntryId(
 		AssetRendererFactory assetRendererFactory) {
 
 		return FriendlyURLNormalizerUtil.normalize(
 			assetRendererFactory.getTypeName(_locale));
 	}
 
-	private String _getSelectorAssetMessage(
+	private String _getSelectorEntryMessage(
 		AssetRendererFactory assetRendererFactory) {
 
 		return assetRendererFactory.getTypeName(_locale);
 	}
 
-	private String _getSelectorAssetSrc(
+	private String _getSelectorEntrySrc(
 		AssetRendererFactory assetRendererFactory) {
 
 		return assetRendererFactory.getIconPath(_portletRequest);
 	}
 
-	private Map<String, Object> _getSelectorClassTypeData(
+	private Map<String, Object> _getSelectorEntryData(
 			AssetRendererFactory assetRendererFactory,
 			Map.Entry<Long, String> assetAvailableClassType)
 		throws Exception {
 
-		Map<String, Object> data = new HashMap<String, Object>();
+		Map<String, Object> selectorEntryData = new HashMap<String, Object>();
 
 		PortletURL portletURL = _getAssetBrowserPortletURL(
 			assetRendererFactory);
+
 		portletURL.setParameter(
 			"subtypeSelectionId",
 			String.valueOf(assetAvailableClassType.getKey()));
 
-		data.put("href", portletURL.toString());
+		selectorEntryData.put("href", portletURL.toString());
 
 		String title =
 			LanguageUtil.format(
 				_pageContext, "select-x", assetAvailableClassType.getValue(),
 				false);
 
-		data.put("title", title);
+		selectorEntryData.put("title", title);
 
-		data.put("type", assetAvailableClassType.getValue());
+		selectorEntryData.put("type", assetAvailableClassType.getValue());
 
-		return data;
+		return selectorEntryData;
 	}
 
-	private String _getSelectorClassTypeId(
+	private String _getSelectorEntryId(
 		AssetRendererFactory assetRendererFactory,
 		Map.Entry<Long, String> assetAvailableClassType) {
 
-		StringBundler classTypeId = new StringBundler(2);
+		StringBundler sb = new StringBundler(2);
 
-		classTypeId.append(_getAssetBrowserGroupId(assetRendererFactory));
-		classTypeId.append(
+		sb.append(_getAssetBrowserGroupId(assetRendererFactory));
+		sb.append(
 			FriendlyURLNormalizerUtil.normalize(
 				assetAvailableClassType.getValue()));
 
-		return classTypeId.toString();
+		return sb.toString();
 	}
 
-	private String _getSelectorClassTypeMessage(
+	private String _getSelectorEntryMessage(
 		Map.Entry<Long, String> assetAvailableClassType) {
 
 		return assetAvailableClassType.getValue();
@@ -440,8 +452,12 @@ public class InputAssetLinksDisplayContext {
 			return _stagedLocally;
 		}
 
-		_stagedLocally =
-			_scopeGroup.isStaged() && !_scopeGroup.isStagedRemotely();
+		if (_scopeGroup.isStaged() && !_scopeGroup.isStagedRemotely()) {
+			_stagedLocally = true;
+		}
+		else {
+			_stagedLocally = false;
+		}
 
 		return _stagedLocally;
 	}

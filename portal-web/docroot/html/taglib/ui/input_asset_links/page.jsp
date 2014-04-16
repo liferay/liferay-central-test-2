@@ -25,15 +25,15 @@
 >
 
 	<%
-	for (Map<String, Object> entry : inputAssetLinksDisplayContext.getSelectorEntries()) {
+	for (Map<String, Object> selectorEntry : inputAssetLinksDisplayContext.getSelectorEntries()) {
 	%>
 
 		<liferay-ui:icon
 			cssClass="asset-selector"
-			data='<%= (Map<String, Object>)entry.get("data") %>'
-			id='<%= (String)entry.get("id") %>'
-			message='<%= (String)entry.get("message") %>'
-			src='<%= (String)entry.get("src") %>'
+			data='<%= (Map<String, Object>)selectorEntry.get("data") %>'
+			id='<%= (String)selectorEntry.get("id") %>'
+			message='<%= (String)selectorEntry.get("message") %>'
+			src='<%= (String)selectorEntry.get("src") %>'
 			url="javascript:;"
 		/>
 
