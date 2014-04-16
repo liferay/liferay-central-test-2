@@ -145,7 +145,7 @@ public class AssetPublisherDisplayContext {
 		assetEntryQuery.setEnablePermissions(isEnablePermissions());
 		assetEntryQuery.setExcludeZeroViewCount(isExcludeZeroViewCount());
 
-		configureSubTypeFieldFilter(assetEntryQuery, themeDisplay.getLocale());
+		configureSubtypeFieldFilter(assetEntryQuery, themeDisplay.getLocale());
 
 		if (isShowOnlyLayoutAssets()) {
 			assetEntryQuery.setLayout(themeDisplay.getLayout());
@@ -774,7 +774,7 @@ public class AssetPublisherDisplayContext {
 		_showContextLink = showContextLink;
 	}
 
-	protected void configureSubTypeFieldFilter(
+	protected void configureSubtypeFieldFilter(
 			AssetEntryQuery assetEntryQuery, Locale locale)
 		throws Exception {
 

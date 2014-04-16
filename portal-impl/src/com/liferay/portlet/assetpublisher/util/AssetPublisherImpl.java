@@ -611,6 +611,7 @@ public class AssetPublisherImpl implements AssetPublisher {
 	 *             AssetPublisherImpl#getAssetEntryQuery(PortletPreferences,
 	 *             long[], long[], String[])}
 	 */
+	@Deprecated
 	@Override
 	public AssetEntryQuery getAssetEntryQuery(
 			PortletPreferences portletPreferences, long[] scopeGroupIds)
@@ -1371,16 +1372,16 @@ public class AssetPublisherImpl implements AssetPublisher {
 			getSubscriptionClassPK(plid, portletId));
 	}
 
-	protected long[] getSiteGroupIds(long[] scopeGroupIds)
+	protected long[] getSiteGroupIds(long[] groupIds)
 		throws PortalException, SystemException {
 
-		Set<Long> siteIds = new HashSet<Long>();
+		Set<Long> siteGroupIds = new HashSet<Long>();
 
-		for (long groupId : scopeGroupIds) {
-			siteIds.add(PortalUtil.getSiteGroupId(groupId));
+		for (long groupId : groupIds) {
+			siteGroupIds.add(PortalUtil.getSiteGroupId(groupId));
 		}
 
-		return ArrayUtil.toLongArray(siteIds);
+		return ArrayUtil.toLongArray(siteGroupIds);
 	}
 
 	private void _checkAssetEntries(
