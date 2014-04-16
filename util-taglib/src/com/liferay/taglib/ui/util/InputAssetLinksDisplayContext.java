@@ -329,8 +329,7 @@ public class InputAssetLinksDisplayContext {
 			StringUtil.merge(
 				PortalUtil.getSharedContentSiteGroupIds(
 					_company.getCompanyId(), groupId, _user.getUserId())
-			)
-		);
+			));
 
 		portletURL.setParameter(
 			"typeSelection", assetRendererFactory.getClassName());
