@@ -140,8 +140,8 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFileEntry(
-			groupId, repositoryId, folderId, ServiceTestUtil.randomString(), -1,
-			false, true);
+			groupId, repositoryId, folderId, ServiceTestUtil.randomString(),
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL, false, true);
 	}
 
 	public static FileEntry addFileEntry(
@@ -171,7 +171,9 @@ public abstract class DLAppTestUtil {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
-		if (fileEntryTypeId != -1) {
+		if (fileEntryTypeId !=
+				DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL) {
+
 			serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
 		}
 
@@ -349,7 +351,8 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFileEntry(
-			groupId, repositoryId, folderId, ServiceTestUtil.randomString(), -1,
+			groupId, repositoryId, folderId, ServiceTestUtil.randomString(),
+			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL,
 			true, approved);
 	}
 
