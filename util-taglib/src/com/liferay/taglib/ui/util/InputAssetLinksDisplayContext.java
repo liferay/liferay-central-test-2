@@ -315,8 +315,6 @@ public class InputAssetLinksDisplayContext {
 
 		portletURL.setParameter("struts_action", "/asset_browser/view");
 		portletURL.setParameter("eventName", getEventName());
-		portletURL.setPortletMode(PortletMode.VIEW);
-		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		if (_assetEntryId > 0) {
 			portletURL.setParameter(
@@ -333,8 +331,12 @@ public class InputAssetLinksDisplayContext {
 					_company.getCompanyId(), groupId, _user.getUserId())
 			)
 		);
+
 		portletURL.setParameter(
 			"typeSelection", assetRendererFactory.getClassName());
+
+		portletURL.setPortletMode(PortletMode.VIEW);
+		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 		return portletURL;
 	}
