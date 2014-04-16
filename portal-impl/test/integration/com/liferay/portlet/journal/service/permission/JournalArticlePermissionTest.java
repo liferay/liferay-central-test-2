@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.permission;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.permission.BasePermissionTestCase;
@@ -47,7 +46,7 @@ public class JournalArticlePermissionTest extends BasePermissionTestCase {
 			JournalArticlePermission.contains(
 				permissionChecker, _subarticle, ActionKeys.VIEW));
 
-		removePortletModelViewPermission(ResourceConstants.SCOPE_GROUP);
+		removePortletModelViewPermission();
 
 		if (PropsValues.JOURNAL_ARTICLE_VIEW_PERMISSION_CHECK_ENABLED) {
 			Assert.assertFalse(

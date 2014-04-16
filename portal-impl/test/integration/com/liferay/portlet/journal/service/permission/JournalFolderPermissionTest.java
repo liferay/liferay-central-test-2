@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.service.permission;
 
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.permission.BasePermissionTestCase;
@@ -45,7 +44,7 @@ public class JournalFolderPermissionTest extends BasePermissionTestCase {
 			JournalFolderPermission.contains(
 				permissionChecker, _subfolder, ActionKeys.VIEW));
 
-		removePortletModelViewPermission(ResourceConstants.SCOPE_GROUP);
+		removePortletModelViewPermission();
 
 		Assert.assertFalse(
 			JournalFolderPermission.contains(
