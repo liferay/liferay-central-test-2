@@ -357,21 +357,16 @@ public class InputAssetLinksDisplayContext {
 		List<Map<String, Object>> selectorEntries =
 			new ArrayList<Map<String, Object>>();
 
-		for (Map.Entry<Long, String> assetAvailableClassType :
-				classTypes.entrySet()) {
-
+		for (Map.Entry<Long, String> classType : classTypes.entrySet()) {
 			Map<String, Object> selectorEntry = new HashMap<String, Object>();
 
 			selectorEntry.put(
 				"data",
-				_getSelectorEntryData(
-					assetRendererFactory, assetAvailableClassType));
+				_getSelectorEntryData(assetRendererFactory, classType));
 			selectorEntry.put(
 				"id",
-				_getSelectorEntryId(
-					assetRendererFactory, assetAvailableClassType));
-			selectorEntry.put(
-				"message", _getSelectorEntryMessage(assetAvailableClassType));
+				_getSelectorEntryId(assetRendererFactory, classType));
+			selectorEntry.put("message", _getSelectorEntryMessage(classType));
 			selectorEntry.put(
 				"src", _getSelectorEntrySrc(assetRendererFactory));
 
@@ -383,7 +378,7 @@ public class InputAssetLinksDisplayContext {
 
 	private Map<String, Object> _getSelectorEntryData(
 			AssetRendererFactory assetRendererFactory,
-			Map.Entry<Long, String> assetAvailableClassType)
+			Map.Entry<Long, String> classType)
 		throws Exception {
 
 		Map<String, Object> selectorEntryData = new HashMap<String, Object>();
@@ -392,19 +387,14 @@ public class InputAssetLinksDisplayContext {
 			assetRendererFactory);
 
 		portletURL.setParameter(
-			"subtypeSelectionId",
-			String.valueOf(assetAvailableClassType.getKey()));
+			"subtypeSelectionId", String.valueOf(classType.getKey()));
 
 		selectorEntryData.put("href", portletURL.toString());
 
-		String title =
-			LanguageUtil.format(
-				_pageContext, "select-x", assetAvailableClassType.getValue(),
-				false);
-
-		selectorEntryData.put("title", title);
-
-		selectorEntryData.put("type", assetAvailableClassType.getValue());
+		selectorEntryData.put(
+			"title", LanguageUtil.format(
+				_pageContext, "select-x", classType.getValue(), false));
+		selectorEntryData.put("type", classType.getValue());
 
 		return selectorEntryData;
 	}
@@ -418,14 +408,12 @@ public class InputAssetLinksDisplayContext {
 
 	private String _getSelectorEntryId(
 		AssetRendererFactory assetRendererFactory,
-		Map.Entry<Long, String> assetAvailableClassType) {
+		Map.Entry<Long, String> classType) {
 
 		StringBundler sb = new StringBundler(2);
 
 		sb.append(_getAssetBrowserGroupId(assetRendererFactory));
-		sb.append(
-			FriendlyURLNormalizerUtil.normalize(
-				assetAvailableClassType.getValue()));
+		sb.append(FriendlyURLNormalizerUtil.normalize(classType.getValue()));
 
 		return sb.toString();
 	}
@@ -436,10 +424,8 @@ public class InputAssetLinksDisplayContext {
 		return assetRendererFactory.getTypeName(_locale);
 	}
 
-	private String _getSelectorEntryMessage(
-		Map.Entry<Long, String> assetAvailableClassType) {
-
-		return assetAvailableClassType.getValue();
+	private String _getSelectorEntryMessage(Map.Entry<Long, String> classType) {
+		return classType.getValue();
 	}
 
 	private String _getSelectorEntrySrc(
