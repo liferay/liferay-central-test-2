@@ -60,7 +60,7 @@
 >
 	<liferay-ui:search-container-results
 		results="<%= inputAssetLinksDisplayContext.getAssetLinks() %>"
-		total="<%= inputAssetLinksDisplayContext.getAssetLinks().size() %>"
+		total="<%= inputAssetLinksDisplayContext.getAssetLinksCount() %>"
 	/>
 
 	<liferay-ui:search-container-row

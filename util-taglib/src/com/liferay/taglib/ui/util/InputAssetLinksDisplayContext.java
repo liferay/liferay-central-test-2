@@ -61,7 +61,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
 
 /**
- * @author José Manuel Navarro
+ * @author Josï¿½ Manuel Navarro
  */
 public class InputAssetLinksDisplayContext {
 
@@ -105,6 +105,12 @@ public class InputAssetLinksDisplayContext {
 		}
 
 		return _assetLinks;
+	}
+
+	public int getAssetLinksCount() throws PortalException, SystemException {
+		List<AssetLink> assetLinks = getAssetLinks();
+
+		return assetLinks.size();
 	}
 
 	public List<AssetRendererFactory> getAssetRendererFactories() {
