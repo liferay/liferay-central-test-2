@@ -155,10 +155,10 @@ public class InputAssetLinksDisplayContext {
 		return _eventName;
 	}
 
-	public String getGroupDescriptiveName(AssetEntry entry)
+	public String getGroupDescriptiveName(AssetEntry assetEntry)
 		throws PortalException, SystemException {
 
-		Group group = GroupLocalServiceUtil.getGroup(entry.getGroupId());
+		Group group = GroupLocalServiceUtil.getGroup(assetEntry.getGroupId());
 
 		return group.getDescriptiveName(_locale);
 	}
