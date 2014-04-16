@@ -6858,9 +6858,9 @@ public class PortalImpl implements Portal {
 
 		Map<String, String[]> parameterMap = HttpUtil.getParameterMap(url);
 
-		for (String parameter : parameterMap.keySet()) {
-			if (parameter.startsWith(portletNamespace)) {
-				url = HttpUtil.removeParameter(url, parameter);
+		for (String name : parameterMap.keySet()) {
+			if (name.startsWith(portletNamespace)) {
+				url = HttpUtil.removeParameter(url, name);
 			}
 		}
 
