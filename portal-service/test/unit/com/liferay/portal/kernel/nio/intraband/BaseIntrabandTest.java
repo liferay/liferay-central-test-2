@@ -767,7 +767,7 @@ public class BaseIntrabandTest {
 
 		Assert.assertTrue(logRecord.getThrown() instanceof RuntimeException);
 
-		// Request dispatching successfully
+		// Request dispatching without failure
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			BaseIntraband.class.getName(), Level.SEVERE);
