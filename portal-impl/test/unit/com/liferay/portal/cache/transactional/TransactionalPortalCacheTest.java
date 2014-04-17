@@ -70,9 +70,6 @@ public class TransactionalPortalCacheTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new TransactionalPortalCacheHelper();
 	}
 

@@ -58,9 +58,6 @@ public class SQLQueryTableNamesUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new SQLQueryTableNamesUtil();
 	}
 

@@ -41,9 +41,6 @@ public class IntrabandFactoryUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new IntrabandFactoryUtil();
 	}
 

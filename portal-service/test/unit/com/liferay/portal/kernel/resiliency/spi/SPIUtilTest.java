@@ -37,9 +37,6 @@ public class SPIUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new SPIUtil();
 	}
 

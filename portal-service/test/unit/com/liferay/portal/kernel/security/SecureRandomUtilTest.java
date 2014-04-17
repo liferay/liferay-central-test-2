@@ -94,9 +94,6 @@ public class SecureRandomUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new SecureRandomUtil();
 	}
 

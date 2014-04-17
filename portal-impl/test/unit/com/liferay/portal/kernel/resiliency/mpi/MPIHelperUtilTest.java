@@ -200,9 +200,6 @@ public class MPIHelperUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new MPIHelperUtil();
 	}
 

@@ -34,9 +34,6 @@ public class RandomUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new RandomUtil();
 	}
 

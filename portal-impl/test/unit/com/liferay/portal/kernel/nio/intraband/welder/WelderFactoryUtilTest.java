@@ -43,9 +43,6 @@ public class WelderFactoryUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new WelderFactoryUtil();
 	}
 

@@ -31,9 +31,6 @@ public class ThreadLocalDistributorRegistryTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new ThreadLocalDistributorRegistry();
 	}
 

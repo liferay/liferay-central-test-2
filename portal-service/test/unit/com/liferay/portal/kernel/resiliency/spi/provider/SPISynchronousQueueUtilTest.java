@@ -39,9 +39,6 @@ public class SPISynchronousQueueUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new SPISynchronousQueueUtil();
 	}
 

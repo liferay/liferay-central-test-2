@@ -58,9 +58,6 @@ public class FIFOUtilTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new FIFOUtil();
 	}
 

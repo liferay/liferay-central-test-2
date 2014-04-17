@@ -59,9 +59,6 @@ public class MailboxUtilTest {
 	@AdviseWith(adviceClasses = {PropsUtilAdvice.class})
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new MailboxUtil();
 	}
 

@@ -44,9 +44,6 @@ public class FinalizeManagerTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new FinalizeManager();
 	}
 

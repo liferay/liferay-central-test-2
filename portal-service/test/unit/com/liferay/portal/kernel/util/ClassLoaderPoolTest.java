@@ -60,9 +60,6 @@ public class ClassLoaderPoolTest {
 
 	@Test
 	public void testConstructor() {
-
-		// Satisfy test coverage
-
 		new ClassLoaderPool();
 	}
 

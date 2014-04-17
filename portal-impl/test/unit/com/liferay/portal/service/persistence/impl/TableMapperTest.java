@@ -229,6 +229,8 @@ public class TableMapperTest {
 
 	@Test
 	public void testConstructor() {
+		new TableMapperFactory();
+
 		Assert.assertTrue(
 			_tableMapperImpl.addTableMappingSqlUpdate
 				instanceof MockAddMappingSqlUpdate);
@@ -270,10 +272,6 @@ public class TableMapperTest {
 		Assert.assertEquals(
 			TableMapper.class.getName() + "-" + _tableName + "-RightToLeft",
 			rightToLeftPortalCache.getName());
-
-		// Satisfy test coverage
-
-		new TableMapperFactory();
 	}
 
 	@Test
