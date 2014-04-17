@@ -2524,7 +2524,7 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 					<fileset dir="portal-web/test-results/functional/" includes="TEST-com.liferay.portalweb2.*.xml" />
 				</first>
 
-				<property name="jenkins.results.xml.file" value="${toString:first}"/>
+				<property name="jenkins.results.xml.file" value="${toString:first}" />
 
 				<if>
 					<available file="${jenkins.results.xml.file}" />
