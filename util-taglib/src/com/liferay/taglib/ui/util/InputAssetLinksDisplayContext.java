@@ -25,7 +25,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
-import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -405,12 +404,13 @@ public class InputAssetLinksDisplayContext {
 		AssetRendererFactory assetRendererFactory,
 		Map.Entry<Long, String> classType) {
 
-		StringBundler sb = new StringBundler(2);
+		String selectorEntryId = String.valueOf(
+			_getAssetBrowserGroupId(assetRendererFactory));
 
-		sb.append(_getAssetBrowserGroupId(assetRendererFactory));
-		sb.append(FriendlyURLNormalizerUtil.normalize(classType.getValue()));
+		selectorEntryId += FriendlyURLNormalizerUtil.normalize(
+			classType.getValue());
 
-		return sb.toString();
+		return selectorEntryId;
 	}
 
 	private String _getSelectorEntryMessage(
