@@ -81,7 +81,7 @@ public abstract class BaseModelUserNotificationHandler
 			return null;
 		}
 
-		String body = getNotificationTemplate();
+		String body = getBodyTemplate();
 
 		body = StringUtil.replace(
 			body, new String[] {"[$BODY$]", "[$TITLE$]"},

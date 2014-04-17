@@ -140,7 +140,7 @@ public abstract class BaseUserNotificationHandler
 		return StringPool.BLANK;
 	}
 
-	protected String getNotificationTemplate() throws Exception {
+	protected String getBodyTemplate() throws Exception {
 		if (isActionable()) {
 			StringBundler sb = new StringBundler(5);
 
