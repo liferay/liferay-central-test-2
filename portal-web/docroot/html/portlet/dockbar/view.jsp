@@ -171,7 +171,7 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 	</c:if>
 
 	<%
-	boolean userSetupComplete = fales;
+	boolean userSetupComplete = false;
 
 	if (user.isSetupComplete() || themeDisplay.isImpersonated()) {
 		userSetupComplete = true;
