@@ -445,7 +445,7 @@ public class HttpClientSPIAgentTest {
 
 		Assert.assertSame(IOException.class, throwable.getClass());
 
-		// Successfully
+		// Successfully destroy
 
 		logRecords = JDKLoggerTestUtil.configureJDKLogger(
 			HttpClientSPIAgent.class.getName(), Level.WARNING);
