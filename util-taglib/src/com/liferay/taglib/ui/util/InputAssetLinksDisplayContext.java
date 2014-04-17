@@ -309,12 +309,6 @@ public class InputAssetLinksDisplayContext {
 			PortletRequest.RENDER_PHASE);
 
 		portletURL.setParameter("struts_action", "/asset_browser/view");
-		portletURL.setParameter("eventName", getEventName());
-
-		if (_assetEntryId > 0) {
-			portletURL.setParameter(
-				"refererAssetEntryId", String.valueOf(_assetEntryId));
-		}
 
 		long groupId = _getAssetBrowserGroupId(assetRendererFactory);
 
@@ -326,9 +320,14 @@ public class InputAssetLinksDisplayContext {
 					_themeDisplay.getCompanyId(), groupId,
 					_themeDisplay.getUserId())));
 
+		if (_assetEntryId > 0) {
+			portletURL.setParameter(
+				"refererAssetEntryId", String.valueOf(_assetEntryId));
+		}
+
 		portletURL.setParameter(
 			"typeSelection", assetRendererFactory.getClassName());
-
+		portletURL.setParameter("eventName", getEventName());
 		portletURL.setPortletMode(PortletMode.VIEW);
 		portletURL.setWindowState(LiferayWindowState.POP_UP);
 
