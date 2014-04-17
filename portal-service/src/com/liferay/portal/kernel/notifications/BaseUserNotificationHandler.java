@@ -142,37 +142,19 @@ public abstract class BaseUserNotificationHandler
 
 	protected String getNotificationTemplate() throws Exception {
 		if (isActionable()) {
-			StringBundler sb = new StringBundler(15);
+			StringBundler sb = new StringBundler(5);
 
-			sb.append("<div class=\"title\">");
-			sb.append("[$TITLE$]");
-			sb.append("</div>");
-			sb.append("<div class=\"body\">");
-			sb.append("<a class=\"btn btn-action btn-success\" href=\"");
-			sb.append("[$CONFIRM_URL$]");
-			sb.append("\">");
-			sb.append("[$CONFIRM$]");
-			sb.append("</a>");
+			sb.append("<div class=\"title\">[$TITLE$]</div><div ");
+			sb.append("class=\"body\"><a class=\"btn btn-action ");
+			sb.append("btn-success\" href=\"[$CONFIRM_URL$]\">[$CONFIRM$]</a>");
 			sb.append("<a class=\"btn btn-action btn-warning\" href=\"");
-			sb.append("[$IGNORE_URL$]");
-			sb.append("\">");
-			sb.append("[$IGNORE$]");
-			sb.append("</a>");
-			sb.append("</div>");
+			sb.append("[$IGNORE_URL$]\">[$IGNORE$]</a></div>");
 
 			return sb.toString();
 		}
 		else {
-			StringBundler sb = new StringBundler(6);
-
-			sb.append("<div class=\"title\">");
-			sb.append("[$TITLE$]");
-			sb.append("</div>");
-			sb.append("<div class=\"body\">");
-			sb.append("[$BODY$]");
-			sb.append("</div>");
-
-			return sb.toString();
+			return "<div class=\"title\">[$TITLE$]</div><div class=\"body\">" +
+				"[$BODY$]</div>";
 		}
 	}
 
@@ -199,7 +181,7 @@ public abstract class BaseUserNotificationHandler
 	private static Log _log = LogFactoryUtil.getLog(
 		BaseUserNotificationHandler.class);
 
-	private boolean _actionable = false;
+	private boolean _actionable;
 	private boolean _openDialog;
 	private String _portletId;
 	private String _selector = StringPool.BLANK;

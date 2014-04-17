@@ -84,14 +84,13 @@ public abstract class BaseModelUserNotificationHandler
 		String body = getNotificationTemplate();
 
 		body = StringUtil.replace(
-				body, new String[] {"[$BODY$]", "[$TITLE$]"},
-				new String[] {
-					HtmlUtil.escape(
-						StringUtil.shorten(jsonObject.getString("entryTitle")),
-						50),
-					getTitle(jsonObject, assetRenderer, serviceContext)
-				}
-			);
+			body, new String[] {"[$BODY$]", "[$TITLE$]"},
+			new String[] {
+				HtmlUtil.escape(
+					StringUtil.shorten(jsonObject.getString("entryTitle")),
+					50),
+				getTitle(jsonObject, assetRenderer, serviceContext)
+			});
 
 		return body;
 	}
