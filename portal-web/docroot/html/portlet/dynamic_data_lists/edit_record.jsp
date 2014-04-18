@@ -173,15 +173,16 @@ if (translating) {
 							var defaultLocale = translationManager.get('defaultLocale');
 
 							if (editingLocale !== defaultLocale) {
-								<liferay-portlet:renderURL copyCurrentRenderParameters="<%= true %>" var="translateRecordURL" windowState="pop_up">
-									<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
-								</liferay-portlet:renderURL>
-
 								Liferay.Util.openWindow(
 									{
 										cache: false,
 										id: event.newVal,
 										title: '<%= UnicodeLanguageUtil.get(pageContext, "record-translation") %>',
+
+										<liferay-portlet:renderURL copyCurrentRenderParameters="<%= true %>" var="translateRecordURL" windowState="pop_up">
+											<portlet:param name="struts_action" value="/dynamic_data_lists/edit_record" />
+										</liferay-portlet:renderURL>
+
 										uri: '<%= translateRecordURL %>' + '&<portlet:namespace />languageId=' + editingLocale
 									},
 									function(translationWindow) {
