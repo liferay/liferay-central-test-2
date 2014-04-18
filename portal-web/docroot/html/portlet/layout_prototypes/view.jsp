@@ -53,7 +53,6 @@ portletURL.setParameter("struts_action", "/layout_prototypes/view");
 				name="name"
 				orderable="<%= true %>"
 			>
-
 				<liferay-portlet:renderURL varImpl="rowURL">
 					<portlet:param name="struts_action" value="/layout_prototypes/edit_layout_prototype" />
 					<portlet:param name="redirect" value="<%= searchContainer.getIteratorURL().toString() %>" />
