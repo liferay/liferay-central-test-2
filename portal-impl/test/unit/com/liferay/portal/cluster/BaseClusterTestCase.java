@@ -40,7 +40,7 @@ import org.junit.Before;
 public class BaseClusterTestCase {
 
 	@Before
-	public void setup() {
+	public void setUp() {
 		_captureHandler = JDKLoggerTestUtil.configureJDKLogger(
 			ClusterBase.class.getName(), Level.OFF);
 	}
