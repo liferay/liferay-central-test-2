@@ -46,7 +46,6 @@ public class UpgradeMessageBoardsTest extends PowerMockito {
 		PropsUtil.setProps(props);
 
 		_portletPreferences = new MockPortletPreferences();
-
 		_upgradeMessageBoards = new UpgradeMessageBoards();
 	}
 
