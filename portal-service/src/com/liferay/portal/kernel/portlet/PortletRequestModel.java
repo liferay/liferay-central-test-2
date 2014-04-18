@@ -32,6 +32,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.MimeResponse;
@@ -701,15 +702,17 @@ public class PortletRequestModel implements Serializable {
 	protected Map<String, Object> filterInvalidAttributes(
 		Map<String, Object> map) {
 
-		Iterator<Map.Entry<String, Object>> it = map.entrySet().iterator();
+		Set<Map.Entry<String, Object>> set = map.entrySet();
 
-		while (it.hasNext()) {
-			Map.Entry<String, Object> entry = it.next();
+		Iterator<Map.Entry<String, Object>> iterator = set.iterator();
+
+		while (iterator.hasNext()) {
+			Map.Entry<String, Object> entry = iterator.next();
 
 			if (!_isValidAttributeName(entry.getKey()) ||
 				!_isValidAttributeValue(entry.getValue())) {
 
-				it.remove();
+				iterator.remove();
 			}
 		}
 
