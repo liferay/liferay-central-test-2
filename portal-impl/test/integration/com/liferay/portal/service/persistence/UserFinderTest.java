@@ -109,8 +109,6 @@ public class UserFinderTest {
 			TestPropsValues.getCompanyId(), null,
 			WorkflowConstants.STATUS_APPROVED, _inheritedUserGroupsParams);
 
-		// inherit user roles
-
 		_roleId = RoleTestUtil.addRegularRole(_group.getGroupId());
 
 		_inheritedUserRolesParams = new LinkedHashMap<String, Object>();
@@ -230,8 +228,6 @@ public class UserFinderTest {
 			WorkflowConstants.STATUS_APPROVED, _inheritedUserRolesParams,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		int expectedUsersCount = expectedUsers.size();
-
 		RoleLocalServiceUtil.addGroupRole(_organization.getGroupId(), _roleId);
 		RoleLocalServiceUtil.addGroupRole(_userGroup.getGroupId(), _roleId);
 
@@ -244,7 +240,7 @@ public class UserFinderTest {
 		Assert.assertTrue(users.contains(_organizationUser));
 		Assert.assertTrue(users.contains(_userGroupUser));
 		Assert.assertTrue(users.contains(TestPropsValues.getUser()));
-		Assert.assertEquals(expectedUsersCount + 2, users.size());
+		Assert.assertEquals(expectedUsers.size() + 2, users.size());
 	}
 
 	@Test
@@ -255,8 +251,6 @@ public class UserFinderTest {
 			TestPropsValues.getCompanyId(), null,
 			WorkflowConstants.STATUS_APPROVED, _inheritedUserRolesParams,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
-
-		int expectedUsersCount = expectedUsers.size();
 
 		GroupLocalServiceUtil.addOrganizationGroup(
 			_organization.getOrganizationId(), _group);
@@ -272,7 +266,7 @@ public class UserFinderTest {
 		Assert.assertTrue(users.contains(_organizationUser));
 		Assert.assertTrue(users.contains(_userGroupUser));
 		Assert.assertTrue(users.contains(TestPropsValues.getUser()));
-		Assert.assertEquals(expectedUsersCount + 2, users.size());
+		Assert.assertEquals(expectedUsers.size() + 2, users.size());
 	}
 
 	private static Group _group;
