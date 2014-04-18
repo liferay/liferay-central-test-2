@@ -112,7 +112,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 	@Transactional
 	public void testExportImportCompanyGroupInvalidLARType() throws Exception {
 
-		// Import a layout set to the company layout set
+		// Import a layout set to a company layout set
 
 		Group originalImportedGroup = importedGroup;
 		Group originalGroup = group;
@@ -135,7 +135,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 			importedGroup = originalImportedGroup;
 		}
 
-		// Import the company layout set to a layout set
+		// Import a company layout set to a layout set
 
 		group = company.getGroup();
 		importedGroup = originalGroup;

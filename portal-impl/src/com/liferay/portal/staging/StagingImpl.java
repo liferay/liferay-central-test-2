@@ -2493,20 +2493,23 @@ public class StagingImpl implements Staging {
 			remoteURL, user.getEmailAddress(), user.getPassword(),
 			user.getPasswordEncrypted());
 
-		// Ping remote host and verify that the group exists in the same company
-		// as the remote user and also verify that the groups are both company
-		// groups or not
-
 		try {
+
+			// Ping the remote host and verify that the remote group exists in
+			// the same company as the remote user
+
 			GroupServiceHttp.checkRemoteStagingGroup(
 				httpPrincipal, remoteGroupId);
+
+			// Ensure that the local group and the remote group are not both
+			// company groups
+
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 			Group remoteGroup = GroupServiceHttp.getGroup(
 				httpPrincipal, remoteGroupId);
 
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-			if (remoteGroup.isCompany() ^ group.isCompany()) {
+			if (group.isCompany() ^ remoteGroup.isCompany()) {
 				RemoteExportException ree = new RemoteExportException(
 					RemoteExportException.INVALID_GROUP);
 
