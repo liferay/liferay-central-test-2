@@ -1909,7 +1909,7 @@ public class StagingImpl implements Staging {
 	@Override
 	public void validateRemote(
 		String remoteAddress, int remotePort, String remotePathContext,
-		boolean secureConnection, long remoteGroupId)  {
+		boolean secureConnection, long remoteGroupId) {
 	}
 
 	protected void addDefaultLayoutSetBranch(
