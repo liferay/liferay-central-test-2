@@ -20,9 +20,9 @@
 String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 %>
 
-<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_PROTOTYPE) %>">
-	<aui:nav-bar>
-		<aui:nav>
+<aui:nav-bar>
+	<aui:nav>
+		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LAYOUT_PROTOTYPE) %>">
 			<portlet:renderURL var="viewLayoutPrototypesURL">
 				<portlet:param name="struts_action" value="/layout_prototypes/view" />
 			</portlet:renderURL>
@@ -34,6 +34,6 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem");
 			</portlet:renderURL>
 
 			<aui:nav-item href="<%= addLayoutPrototypeURL %>" iconCssClass="icon-plus" label="add" selected='<%= toolbarItem.equals("add") %>' />
-		</aui:nav>
-	</aui:nav-bar>
-</c:if>
+		</c:if>
+	</aui:nav>
+</aui:nav-bar>
