@@ -795,9 +795,6 @@ public class ProcessExecutorTest {
 
 	@Test
 	public void testLeadingLog() throws Exception {
-		String leadingLog = "Test leading log.\n";
-		String bodyLog = "Test body log.\n";
-
 		CaptureHandler captureHandler = null;
 
 		try {
@@ -808,6 +805,9 @@ public class ProcessExecutorTest {
 				ProcessExecutor.class.getName(), Level.WARNING);
 
 			List<LogRecord> logRecords = captureHandler.getLogRecords();
+
+			String leadingLog = "Test leading log.\n";
+			String bodyLog = "Test body log.\n";
 
 			LeadingLogProcessCallable leadingLogProcessCallable =
 				new LeadingLogProcessCallable(leadingLog, bodyLog);
