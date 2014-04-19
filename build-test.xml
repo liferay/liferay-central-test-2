@@ -1157,7 +1157,7 @@ create database lportal2 character set utf8;</echo>
 			replace="&lt;testsuite&gt;${line.separator}"
 		/>
 
-		<echo file="${jenkins.results.xml.suite.file}" message="${jenkins.results.xml.suite.file.header}" />
+		<echo file="${jenkins.results.xml.suite.file}">${jenkins.results.xml.suite.file.header}</echo>
 
 		<for param="jenkins.results.xml.file">
 			<path>
@@ -1186,11 +1186,11 @@ create database lportal2 character set utf8;</echo>
 					replace="&lt;/testcase&gt;${line.separator}"
 				/>
 
-				<echo file="${jenkins.results.xml.suite.file}" append="true" message="${jenkins.results.xml.suite.file.body}" />
+				<echo append="true" file="${jenkins.results.xml.suite.file}">${jenkins.results.xml.suite.file.body}</echo>
 			</sequential>
 		</for>
 
-		<echo file="${jenkins.results.xml.suite.file}" append="true" message="&lt;/testsuite&gt;" />
+		<echo append="true" file="${jenkins.results.xml.suite.file}">&lt;/testsuite&gt;</echo>
 	</target>
 
 	<target name="merge-test-results">
