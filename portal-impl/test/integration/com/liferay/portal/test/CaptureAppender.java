@@ -51,14 +51,14 @@ public class CaptureAppender extends AppenderSkeleton {
 	public void close() {
 		_logger.removeAppender(this);
 
+		_logger.setLevel(_level);
+
 		try {
 			_parentField.set(_logger, _parentCategory);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
 		}
-
-		_logger.setLevel(_level);
 	}
 
 	public List<LoggingEvent> getLoggingEvents() {
