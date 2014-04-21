@@ -1953,12 +1953,12 @@ public class DLAppHelperLocalServiceImpl
 			return StringPool.BLANK;
 		}
 
+		String portletId = PortletKeys.DOCUMENT_LIBRARY;
+
 		long plid = serviceContext.getPlid();
 
 		long controlPanelPlid = PortalUtil.getControlPanelPlid(
 			serviceContext.getCompanyId());
-
-		String portletId = PortletKeys.DOCUMENT_LIBRARY;
 
 		if (plid == controlPanelPlid) {
 			plid = PortalUtil.getPlidFromPortletId(
@@ -1966,8 +1966,8 @@ public class DLAppHelperLocalServiceImpl
 		}
 
 		if (plid == LayoutConstants.DEFAULT_PLID) {
-			plid = controlPanelPlid;
 			portletId = PortletKeys.DOCUMENT_LIBRARY_ADMIN;
+			plid = controlPanelPlid;
 		}
 
 		PortletURL portletURL = PortletURLFactoryUtil.create(

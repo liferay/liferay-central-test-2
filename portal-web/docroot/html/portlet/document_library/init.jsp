@@ -90,8 +90,8 @@ PortalPreferences portalPreferences = PortletPreferencesFactoryUtil.getPortalPre
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-DLSettings dlSettings = DLUtil.getDLSettings(scopeGroupId);
 DLPortletInstanceSettings dlPortletInstanceSettings = new DLPortletInstanceSettings(portletDisplay.getPortletInstanceSettings());
+DLSettings dlSettings = DLUtil.getDLSettings(scopeGroupId);
 
 int entriesPerPage = dlPortletInstanceSettings.getEntriesPerPage();
 
