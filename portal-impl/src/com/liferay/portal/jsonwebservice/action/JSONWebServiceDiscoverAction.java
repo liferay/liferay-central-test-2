@@ -136,6 +136,9 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			Map<String, Object> jsonWebServiceActionMappingMap =
 				new LinkedHashMap<String, Object>();
 
+			jsonWebServiceActionMappingMap.put(
+				"method", jsonWebServiceActionMapping.getMethod());
+
 			JavadocMethod javadocMethod =
 				JavadocManagerUtil.lookupJavadocMethod(
 					jsonWebServiceActionMapping.getRealActionMethod());
@@ -148,9 +151,6 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 						"description", javadocMethod.getComment());
 				}
 			}
-
-			jsonWebServiceActionMappingMap.put(
-				"method", jsonWebServiceActionMapping.getMethod());
 
 			MethodParameter[] methodParameters =
 				jsonWebServiceActionMapping.getMethodParameters();
