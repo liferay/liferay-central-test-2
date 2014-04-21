@@ -297,18 +297,22 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			return type.getSimpleName();
 		}
 
-		if (type.equals(Boolean.class)) {
+		if (type.equals(File.class)) {
+			return "file";
+		}
+		else if (type.equals(Boolean.class)) {
 			return "boolean";
 		}
 		else if (type.equals(Date.class)) {
 			return "long";
 		}
-		else if (type.equals(File.class)) {
-			return "file";
+		else if (type.equals(Locale.class)) {
+			return "string";
 		}
-		else if (type.equals(Locale.class) || type.equals(String.class) ||
-				 type.equals(TimeZone.class)) {
-
+		else if (type.equals(TimeZone.class)) {
+			return "string";
+		}
+		else if (type.equals(String.class)) {
 			return "string";
 		}
 		else if (type.equals(Object.class) || type.equals(Serializable.class)) {
@@ -317,11 +321,11 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		else if (ReflectUtil.isSubclass(type, Number.class)) {
 			String typeName = null;
 
-			if (type == Character.class) {
-				typeName = "char";
-			}
-			else if (type == Integer.class) {
+			if (type == Integer.class) {
 				typeName = "int";
+			}
+			else if (type == Character.class) {
+				typeName = "char";
 			}
 			else {
 				typeName = StringUtil.toLowerCase(type.getSimpleName());
@@ -332,15 +336,16 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 		String typeName = type.getName();
 
-		if ((type == Collection.class) || (type == List.class) ||
-			ReflectUtil.isSubclass(type, List.class)) {
-
+		if ((type == List.class) || ReflectUtil.isSubclass(type, List.class)) {
 			typeName = "list";
 		}
 		else if ((type == Map.class) ||
 				 ReflectUtil.isSubclass(type, Map.class)) {
 
 			typeName = "map";
+		}
+		else if (type == Collection.class) {
+			typeName = "list";
 		}
 		else {
 			if (!_types.contains(type)) {
