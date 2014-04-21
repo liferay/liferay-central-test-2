@@ -105,28 +105,26 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 		return array;
 	}
 
-	private Object _convertType(Object inputObject, Class<?> targetType) {
-		Object outputObject = null;
+	private Object _convertType(Object value, Class<?> targetType) {
+		Object destination = null;
 
 		try {
-			outputObject = TypeConverterManager.convertType(
-				inputObject, targetType);
+			destination = TypeConverterManager.convertType(value, targetType);
 		}
 		catch (TypeConversionException tce) {
-			if (inputObject instanceof Map) {
+			if (value instanceof Map) {
 				try {
 					if (targetType.isInterface()) {
-						Class<?> clazz = getClass();
-
-						ClassLoader classLoader = clazz.getClassLoader();
-
 						String className = targetType.getName();
 
 						className = StringUtil.replace(
 							className, ".model.", ".model.impl.");
 
 						className += "Impl";
-						
+
+						ClassLoader classLoader =
+							this.getClass().getClassLoader();
+
 						try {
 							targetType = classLoader.loadClass(className);
 						}
@@ -134,12 +132,9 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 						}
 					}
 
-					outputObject = targetType.newInstance();
+					destination = targetType.newInstance();
 
-					BeanCopy beanCopy = BeanCopy.beans(
-						inputObject, outputObject);
-
-					beanCopy.copy();
+					BeanCopy.beans(value, destination).copy();
 				}
 				catch (Exception e) {
 					throw new TypeConversionException(e);
@@ -149,7 +144,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 			throw tce;
 		}
 
-		return outputObject;
+		return destination;
 	}
 
 	private Object _convertValueToParameterValue(
