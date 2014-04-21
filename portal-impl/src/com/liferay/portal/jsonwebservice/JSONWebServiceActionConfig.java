@@ -57,13 +57,6 @@ public class JSONWebServiceActionConfig
 		}
 
 		_signature = sb.toString();
-
-		try {
-			_realActionMethod = _actionClass.getDeclaredMethod(
-				actionMethod.getName(), actionMethod.getParameterTypes());
-		}
-		catch (NoSuchMethodException e) {
-		}
 	}
 
 	public JSONWebServiceActionConfig(
@@ -156,11 +149,6 @@ public class JSONWebServiceActionConfig
 	}
 
 	@Override
-	public Method getRealActionMethod() {
-		return _realActionMethod;
-	}
-
-	@Override
 	public String getSignature() {
 		return _signature;
 	}
@@ -203,7 +191,6 @@ public class JSONWebServiceActionConfig
 	private String _method;
 	private MethodParameter[] _methodParameters;
 	private String _path;
-	private Method _realActionMethod;
 	private String _signature;
 
 }
