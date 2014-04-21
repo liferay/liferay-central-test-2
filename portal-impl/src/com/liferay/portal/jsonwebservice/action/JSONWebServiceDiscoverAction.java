@@ -82,7 +82,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 		resultsMap.put("services", jsonWebServiceActionMappingMaps);
 
-		List<Map<String, Object>> types = _buildTypesList(_types);
+		List<Map> types = _buildTypesList(_types);
 
 		resultsMap.put("types", types);
 
@@ -200,7 +200,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			Method realActionMethod =
 				jsonWebServiceActionMapping.getRealActionMethod();
 
-			Class<?>[] genericReturnTypes = null;
+			Class[] genericReturnTypes = null;
 
 			Type genericReturnType = realActionMethod.getGenericReturnType();
 
@@ -232,12 +232,8 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		return jsonWebServiceActionMappingMaps;
 	}
 
-	private Map<String, Map<String, String>> _buildPropertiesMap(Class<?> type) {
-		Package pkg = type.getPackage(); 
-		
-		String packageName = pkg.getName();
-
-		if (packageName.startsWith("java.")) {
+	private Map<String, Map> _buildPropertiesMap(Class type) {
+		if (type.getPackage().getName().startsWith("java.")) {
 			return null;
 		}
 
@@ -279,7 +275,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 			flexjsonBeanAnalyzerTransformer.transform(type);
 
-			Map<String, Map<String, String>> propertiesMap =
+			Map<String, Map> propertiesMap =
 				flexjsonBeanAnalyzerTransformer.getPropertiesMap();
 
 			return propertiesMap;
@@ -289,22 +285,20 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		}
 	}
 
-	private List<Map<String, Object>> _buildTypesList(List<Class<?>> allTypes) {
-		List<Map<String, Object>> types = new ArrayList<Map<String, Object>>();
+	private List<Map> _buildTypesList(List<Class<?>> allTypes) {
+		List<Map> types = new ArrayList<Map>();
 
 		for (int i = 0; i < allTypes.size(); i++) {
 			Class<?> type = allTypes.get(i);
 
 			Map<String, Object> map = new LinkedHashMap<String, Object>();
-
 			types.add(map);
 
 			map.put("type", type.getName());
 
 			// properties
 
-			Map<String, Map<String, String>> properties =
-				_buildPropertiesMap(type);
+			Map<String, Map> properties = _buildPropertiesMap(type);
 
 			if (properties != null) {
 				map.put("properties", properties);
