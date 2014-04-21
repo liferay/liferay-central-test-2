@@ -57,7 +57,7 @@ public class FlexjsonBeanAnalyzerTransformer
 
 		String path = getPath();
 
-		addExcludesAndIncludesType(type, _pathExpressions, path);
+		addIncludesAndExcludesForType(type, _pathExpressions, path);
 
 		BeanAnalyzer analyzer = BeanAnalyzer.analyze(type);
 

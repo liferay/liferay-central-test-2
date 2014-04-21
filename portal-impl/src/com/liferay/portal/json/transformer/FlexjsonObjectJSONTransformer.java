@@ -16,6 +16,8 @@ package com.liferay.portal.json.transformer;
 
 import com.liferay.portal.kernel.json.JSONIncludesManagerUtil;
 import com.liferay.portal.kernel.json.JSONTransformer;
+import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
@@ -45,12 +47,12 @@ public class FlexjsonObjectJSONTransformer
 
 		String path = getPath();
 
-		addExcludesAndIncludesType(type, pathExpressions, path);
+		addIncludesAndExcludesForType(type, pathExpressions, path);
 
 		super.transform(object);
 	}
 
-	protected void addExcludesAndIncludesType(
+	protected void addIncludesAndExcludesForType(
 		Class<?> type, List<PathExpression> pathExpressions, String path) {
 
 		String[] excludes = JSONIncludesManagerUtil.lookupExcludes(type);
