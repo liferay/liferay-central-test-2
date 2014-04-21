@@ -64,6 +64,7 @@ public class JSONWebServiceActionConfig
 		}
 
 		_signature = sb.toString();
+
 	}
 
 	public JSONWebServiceActionConfig(
