@@ -19,7 +19,6 @@ import com.liferay.portal.kernel.json.JSONTransformer;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 
 import flexjson.JSONContext;
 import flexjson.Path;
@@ -69,7 +68,20 @@ public class FlexjsonObjectJSONTransformer
 
 		Path path = jsonContext.getPath();
 
-		return StringUtil.merge(path.getPath(), StringPool.PERIOD);
+		List<String> paths = path.getPath();
+
+		if (paths.isEmpty()) {
+			return StringPool.BLANK;
+		}
+
+		StringBundler sb = new StringBundler(paths.size() * 2);
+
+		for (String curPath : paths) {
+			sb.append(curPath);
+			sb.append(CharPool.PERIOD);
+		}
+
+		return sb.toString();
 	}
 
 	private void _exclude(
