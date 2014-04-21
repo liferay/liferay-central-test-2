@@ -29,7 +29,6 @@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryP
 page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %><%@
 page import="com.liferay.portlet.documentlibrary.util.AudioProcessorUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.util.DLActionsDisplayContext" %><%@
-page import="com.liferay.portlet.documentlibrary.util.DLConstants" %><%@
 page import="com.liferay.portlet.documentlibrary.util.ImageProcessorUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.util.PDFProcessorUtil" %><%@
 page import="com.liferay.portlet.documentlibrary.util.VideoProcessorUtil" %><%@
