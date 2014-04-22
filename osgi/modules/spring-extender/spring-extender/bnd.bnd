@@ -35,32 +35,20 @@ Import-Package:\
 	org.springframework.aop.config,\
 	org.springframework.aop.framework,\
 	org.springframework.aop.framework.autoproxy,\
-	\
 	org.springframework.beans.factory,\
 	org.springframework.beans.factory.config,\
 	org.springframework.beans.factory.xml,\
-	\
 	org.springframework.context.config,\
 	org.springframework.context.support,\
-	\
 	org.springframework.core.io,\
-	\
 	org.springframework.ejb.config,\
-	\
 	org.springframework.scripting.config,\
-	\
 	org.springframework.scheduling.config,\
-	\
 	org.springframework.jdbc.config,\
-	\
 	org.springframework.jms.config,\
-	\
 	org.springframework.oxm.config,\
-	\
 	org.springframework.transaction.config,\
-	\
 	org.springframework.web.servlet.config
 Include-Resource:\
 	build/classes/main,\
 	build/resources/main
-
