@@ -31,6 +31,8 @@ public interface ActionableDynamicQuery {
 
 	public PerformActionMethod getPerformActionMethod();
 
+	public PerformCountMethod getPerformCountMethod();
+
 	public void performActions() throws PortalException, SystemException;
 
 	public long performCount() throws PortalException, SystemException;
@@ -54,6 +56,8 @@ public interface ActionableDynamicQuery {
 
 	public void setPerformActionMethod(PerformActionMethod performActionMethod);
 
+	public void setPerformCountMethod(PerformCountMethod performCountMethod);
+
 	public void setPrimaryKeyPropertyName(String primaryKeyPropertyName);
 
 	public void setSearchEngineId(String searchEngineId);
@@ -71,6 +75,12 @@ public interface ActionableDynamicQuery {
 
 		public void performAction(Object object)
 			throws PortalException, SystemException;
+
+	}
+
+	public interface PerformCountMethod {
+
+		public long performCount() throws PortalException, SystemException;
 
 	}
 

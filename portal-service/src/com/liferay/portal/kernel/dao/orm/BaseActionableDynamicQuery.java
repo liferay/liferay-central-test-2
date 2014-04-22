@@ -64,6 +64,11 @@ public abstract class BaseActionableDynamicQuery
 	}
 
 	@Override
+	public PerformCountMethod getPerformCountMethod() {
+		return _performCountMethod;
+	}
+
+	@Override
 	public void performActions() throws PortalException, SystemException {
 		long previousPrimaryKey = -1;
 
@@ -82,6 +87,10 @@ public abstract class BaseActionableDynamicQuery
 
 	@Override
 	public long performCount() throws PortalException, SystemException {
+		if (_performCountMethod != null) {
+			return _performCountMethod.performCount();
+		}
+
 		DynamicQuery dynamicQuery = DynamicQueryFactoryUtil.forClass(
 			_clazz, _classLoader);
 
@@ -152,6 +161,11 @@ public abstract class BaseActionableDynamicQuery
 		PerformActionMethod performActionMethod) {
 
 		_performActionMethod = performActionMethod;
+	}
+
+	@Override
+	public void setPerformCountMethod(PerformCountMethod performCountMethod) {
+		_performCountMethod = performCountMethod;
 	}
 
 	@Override
@@ -365,6 +379,7 @@ public abstract class BaseActionableDynamicQuery
 	private String _groupIdPropertyName = "groupId";
 	private int _interval = Indexer.DEFAULT_INTERVAL;
 	private PerformActionMethod _performActionMethod;
+	private PerformCountMethod _performCountMethod;
 	private String _primaryKeyPropertyName;
 	private String _searchEngineId;
 	private TransactionAttribute _transactionAttribute;
