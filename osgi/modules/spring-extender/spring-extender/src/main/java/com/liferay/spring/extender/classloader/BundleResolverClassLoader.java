@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,7 @@ public class BundleResolverClassLoader extends ClassLoader {
 	public BundleResolverClassLoader(Bundle ... bundles) {
 		if (bundles.length == 0) {
 			throw new IllegalArgumentException(
-				"At least one valid bundle is required!");
+				"At least one bundle is required");
 		}
 
 		_bundles = bundles;
@@ -43,7 +43,7 @@ public class BundleResolverClassLoader extends ClassLoader {
 	}
 
 	@Override
-	public Enumeration<URL> getResources(String name) throws IOException {
+	public Enumeration<URL> getResources(String name) {
 		return findResources(name);
 	}
 
@@ -75,7 +75,7 @@ public class BundleResolverClassLoader extends ClassLoader {
 	}
 
 	@Override
-	protected Enumeration<URL> findResources(String name) throws IOException {
+	protected Enumeration<URL> findResources(String name) {
 		for (Bundle bundle : _bundles) {
 			try {
 				Enumeration<URL> resources = bundle.getResources(name);
@@ -91,6 +91,7 @@ public class BundleResolverClassLoader extends ClassLoader {
 		return Collections.emptyEnumeration();
 	}
 
+	@Override
 	protected Class<?> loadClass(String name, boolean resolve)
 		throws ClassNotFoundException {
 
@@ -103,6 +104,6 @@ public class BundleResolverClassLoader extends ClassLoader {
 		return clazz;
 	}
 
-	private final Bundle[] _bundles;
+	private Bundle[] _bundles;
 
 }

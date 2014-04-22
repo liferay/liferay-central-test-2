@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -29,8 +29,8 @@ import org.osgi.framework.BundleContext;
 /**
  * @author Miguel Pastor
  */
-public class OsgiBundleSessionFactory extends PortletSessionFactoryImpl
-	implements BundleContextAware {
+public class OsgiBundleSessionFactory
+	extends PortletSessionFactoryImpl implements BundleContextAware {
 
 	@Override
 	public ClassLoader getSessionFactoryClassLoader() {
@@ -50,17 +50,12 @@ public class OsgiBundleSessionFactory extends PortletSessionFactoryImpl
 
 		osgiBundleHibernateConfiguration.setDataSource(dataSource);
 
-		SessionFactory sessionFactory;
-
 		try {
-			sessionFactory =
-				osgiBundleHibernateConfiguration.buildSessionFactory();
+			return osgiBundleHibernateConfiguration.buildSessionFactory();
 		}
 		catch (Exception e) {
 			return null;
 		}
-
-		return sessionFactory;
 	}
 
 	private ClassLoader _classLoader;

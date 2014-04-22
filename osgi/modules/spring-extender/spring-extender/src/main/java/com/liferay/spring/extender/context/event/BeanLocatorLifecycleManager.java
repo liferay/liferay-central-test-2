@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -30,38 +30,48 @@ import org.osgi.framework.Bundle;
  * @author Miguel Pastor
  */
 public class BeanLocatorLifecycleManager
-	implements OsgiBundleApplicationContextListener {
+	implements OsgiBundleApplicationContextListener<OsgiBundleApplicationContextEvent> {
 
 	@Override
 	public void onOsgiApplicationEvent(
-		OsgiBundleApplicationContextEvent event) {
+		OsgiBundleApplicationContextEvent osgiBundleApplicationContextEvent) {
 
-		String symbolicName = event.getBundle().getSymbolicName();
+		Bundle bundle = osgiBundleApplicationContextEvent.getBundle();
 
-		if (event instanceof OsgiBundleContextRefreshedEvent) {
+		String symbolicName = bundle.getSymbolicName();
+
+		if (osgiBundleApplicationContextEvent
+				instanceof OsgiBundleContextRefreshedEvent) {
+
 			PortletBeanLocatorUtil.setBeanLocator(
-				symbolicName, _buildBeanLocator(event));
+				symbolicName,
+				_buildBeanLocator(osgiBundleApplicationContextEvent));
 		}
-		else if (event instanceof OsgiBundleContextClosedEvent) {
-			OsgiBundleContextClosedEvent closedEvent =
-				(OsgiBundleContextClosedEvent)event;
+		else if (osgiBundleApplicationContextEvent
+					instanceof OsgiBundleContextClosedEvent) {
 
-			Throwable error = closedEvent.getFailureCause();
+			OsgiBundleContextClosedEvent osgiBundleContextClosedEvent =
+				(OsgiBundleContextClosedEvent)osgiBundleApplicationContextEvent;
 
-			if (error != null) {
+			Throwable throwable =
+				osgiBundleContextClosedEvent.getFailureCause();
+
+			if (throwable != null) {
 				PortletBeanLocatorUtil.setBeanLocator(symbolicName, null);
 			}
 		}
 	}
 
 	private BeanLocator _buildBeanLocator(
-		OsgiBundleApplicationContextEvent event) {
+		OsgiBundleApplicationContextEvent osgiBundleApplicationContextEvent) {
 
-		Bundle bundle = event.getBundle();
+		Bundle bundle = osgiBundleApplicationContextEvent.getBundle();
 
 		ClassLoader classLoader = new BundleResolverClassLoader(bundle);
 
-		return new BeanLocatorImpl(classLoader, event.getApplicationContext());
+		return new BeanLocatorImpl(
+			classLoader,
+			osgiBundleApplicationContextEvent.getApplicationContext());
 	}
 
 }

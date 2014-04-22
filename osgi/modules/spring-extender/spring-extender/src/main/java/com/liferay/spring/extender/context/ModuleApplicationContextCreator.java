@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -49,9 +49,10 @@ public class ModuleApplicationContextCreator
 	public DelegatedExecutionOsgiBundleApplicationContext
 			createApplicationContext(BundleContext bundleContext)
 		throws Exception {
+		
+		Bundle bundle = bundleContext.getBundle();
 
-		Dictionary<String, String> headers =
-			bundleContext.getBundle().getHeaders();
+		Dictionary<String, String> headers = bundle.getHeaders();
 
 		String configs = headers.get("Spring-Context");
 
@@ -59,7 +60,10 @@ public class ModuleApplicationContextCreator
 			return null;
 		}
 
-		Bundle bundle = bundleContext.getBundle();
+		String[] locations = ConfigUtils.getHeaderLocations(headers);
+
+		ApplicationContext applicationContext = null;
+
 		Bundle extenderBundle = _getExtenderBundle();
 
 		ClassLoader classLoader = new BundleResolverClassLoader(
@@ -67,16 +71,13 @@ public class ModuleApplicationContextCreator
 
 		String liferayService = headers.get("Liferay-Service");
 
-		ApplicationContext parentAppContext = null;
-
 		if (liferayService != null) {
-			parentAppContext = _buildParentContext(extenderBundle, classLoader);
+			applicationContext = _buildParentContext(
+				extenderBundle, classLoader);
 		}
 
-		String[] locations = ConfigUtils.getHeaderLocations(headers);
-
 		OsgiBundleXmlApplicationContext osgiBundleXmlApplicationContext =
-			new OsgiBundleXmlApplicationContext(locations, parentAppContext);
+			new OsgiBundleXmlApplicationContext(locations, applicationContext);
 
 		osgiBundleXmlApplicationContext.setBundleContext(bundleContext);
 
@@ -90,42 +91,41 @@ public class ModuleApplicationContextCreator
 			Bundle bundle, ClassLoader classLoader)
 		throws IOException {
 
-		BundleContext bundleContext = bundle.getBundleContext();
+		Dictionary<String, String> headers = bundle.getHeaders();
 
-		String liferayService = bundleContext.getBundle().getHeaders().get(
-			"Liferay-Service");
+		String liferayService = headers.get("Liferay-Service");
 
 		if (liferayService == null) {
 			return null;
 		}
 
-		GenericApplicationContext applicationContext =
+		GenericApplicationContext genericApplicationContext =
 			new GenericApplicationContext();
 
+		genericApplicationContext.setClassLoader(classLoader);
+
 		XmlBeanDefinitionReader xmlBeanDefinitionReader =
-			new XmlBeanDefinitionReader(applicationContext);
+			new XmlBeanDefinitionReader(genericApplicationContext);
 
 		xmlBeanDefinitionReader.setValidating(false);
 		xmlBeanDefinitionReader.setValidationMode(
 			XmlBeanDefinitionReader.VALIDATION_NONE);
 
-		Enumeration<URL> entries = bundle.findEntries(
+		Enumeration<URL> enumeration = bundle.findEntries(
 			"META-INF/spring/parent", "*.xml", true);
 
-		applicationContext.setClassLoader(classLoader);
+		while (enumeration.hasMoreElements()) {
+			URL url = enumeration.nextElement();
 
-		while (entries.hasMoreElements()) {
-			URL xmlBeanDefinitionUrl = entries.nextElement();
-
-			InputStream inputStream = xmlBeanDefinitionUrl.openStream();
+			InputStream inputStream = url.openStream();
 
 			xmlBeanDefinitionReader.loadBeanDefinitions(
 				new InputStreamResource(inputStream));
 		}
 
-		applicationContext.refresh();
+		genericApplicationContext.refresh();
 
-		return applicationContext;
+		return genericApplicationContext;
 	}
 
 	private Bundle _getExtenderBundle() {
