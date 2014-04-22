@@ -310,7 +310,7 @@ public abstract class OrganizationLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -356,13 +356,10 @@ public abstract class OrganizationLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(Organization.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				Organization.class.getName()));
 	}
 
 	@Override

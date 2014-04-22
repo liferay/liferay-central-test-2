@@ -298,7 +298,7 @@ public abstract class MBThreadFlagLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -346,13 +346,10 @@ public abstract class MBThreadFlagLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(MBThreadFlag.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				MBThreadFlag.class.getName()));
 	}
 
 	@Override

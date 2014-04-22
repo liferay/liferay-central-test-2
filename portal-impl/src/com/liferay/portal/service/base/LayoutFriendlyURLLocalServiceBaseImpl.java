@@ -298,7 +298,7 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -346,13 +346,10 @@ public abstract class LayoutFriendlyURLLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(LayoutFriendlyURL.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				LayoutFriendlyURL.class.getName()));
 	}
 
 	@Override

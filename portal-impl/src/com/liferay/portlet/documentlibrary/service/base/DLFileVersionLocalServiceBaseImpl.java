@@ -305,7 +305,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -361,13 +361,10 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(DLFileVersion.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				DLFileVersion.class.getName()));
 	}
 
 	@Override

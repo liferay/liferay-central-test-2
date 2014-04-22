@@ -310,7 +310,7 @@ public abstract class DLFileEntryTypeLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -358,13 +358,10 @@ public abstract class DLFileEntryTypeLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(DLFileEntryType.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				DLFileEntryType.class.getName()));
 	}
 
 	@Override

@@ -287,7 +287,7 @@ public abstract class EmailAddressLocalServiceBaseImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -318,12 +318,14 @@ public abstract class EmailAddressLocalServiceBaseImpl
 					portletDataContext.addDateRangeCriteria(dynamicQuery,
 						"modifiedDate");
 
-					if (getStagedModelType().getReferrerClassNameId() >= 0) {
+					StagedModelType stagedModelType = exportActionableDynamicQuery.getStagedModelType();
+
+					if (stagedModelType.getReferrerClassNameId() >= 0) {
 						Property classNameIdProperty = PropertyFactoryUtil.forName(
 								"classNameId");
 
 						dynamicQuery.add(classNameIdProperty.eq(
-								getStagedModelType().getReferrerClassNameId()));
+								stagedModelType.getReferrerClassNameId()));
 					}
 				}
 			});
@@ -341,13 +343,10 @@ public abstract class EmailAddressLocalServiceBaseImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(EmailAddress.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				EmailAddress.class.getName()));
 	}
 
 	@Override

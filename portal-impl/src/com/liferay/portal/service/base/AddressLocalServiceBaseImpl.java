@@ -282,7 +282,7 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 	@Override
 	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
 		final PortletDataContext portletDataContext) throws SystemException {
-		ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+		final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 				@Override
 				public long performCount()
 					throws PortalException, SystemException {
@@ -313,12 +313,14 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 					portletDataContext.addDateRangeCriteria(dynamicQuery,
 						"modifiedDate");
 
-					if (getStagedModelType().getReferrerClassNameId() >= 0) {
+					StagedModelType stagedModelType = exportActionableDynamicQuery.getStagedModelType();
+
+					if (stagedModelType.getReferrerClassNameId() >= 0) {
 						Property classNameIdProperty = PropertyFactoryUtil.forName(
 								"classNameId");
 
 						dynamicQuery.add(classNameIdProperty.eq(
-								getStagedModelType().getReferrerClassNameId()));
+								stagedModelType.getReferrerClassNameId()));
 					}
 				}
 			});
@@ -336,13 +338,10 @@ public abstract class AddressLocalServiceBaseImpl extends BaseLocalServiceImpl
 						stagedModel);
 				}
 			});
+		exportActionableDynamicQuery.setStagedModelType(new StagedModelType(
+				PortalUtil.getClassNameId(Address.class.getName())));
 
 		return exportActionableDynamicQuery;
-	}
-
-	protected StagedModelType getStagedModelType() {
-		return new StagedModelType(PortalUtil.getClassNameId(
-				Address.class.getName()));
 	}
 
 	@Override
