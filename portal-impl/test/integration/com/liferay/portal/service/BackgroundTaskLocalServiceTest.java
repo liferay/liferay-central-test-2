@@ -183,7 +183,7 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskFailedStatus() throws Exception {
+	public void testAmendBackgroundTaskWithStatusFailed() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		BackgroundTask backgroundTask =
@@ -209,7 +209,7 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskNotFailedNotSuccessful()
+	public void testAmendBackgroundTaskWithStatusInProgress()
 		throws Exception {
 
 		ServiceContext serviceContext = new ServiceContext();
@@ -237,7 +237,9 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskNullBackgroundTaskId() throws Exception {
+	public void testAmendBackgroundTaskWithInvalidBackgroundTaskId()
+		throws Exception {
+
 		ServiceContext serviceContext = new ServiceContext();
 
 		BackgroundTask amendBackgroundTask =
@@ -249,7 +251,7 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskSuccessfulStatus() throws Exception {
+	public void testAmendBackgroundTaskWithStatusSuccessful() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		BackgroundTask backgroundTask =
@@ -275,7 +277,7 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskTaskContextMap() throws Exception {
+	public void testAmendBackgroundTaskWithTaskContextMap() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		BackgroundTask backgroundTask =
