@@ -140,6 +140,8 @@ public class UpgradePermission extends UpgradeProcess {
 	@Override
 	protected void doUpgrade() throws Exception {
 
+		// LPS-46141
+
 		List<String> modelActions = ResourceActionsUtil.getModelResourceActions(
 			Role.class.getName());
 
