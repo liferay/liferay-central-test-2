@@ -254,9 +254,10 @@ public class ServiceBuilder {
 		}
 		catch (RuntimeException re) {
 			System.out.println(
-				"Please set these required arguments. Sample values are:\n" +
+				"Please set these arguments. Sample values are:\n" +
 				"\n" +
 				"\tservice.api.dir=${basedir}/../portal-service/src\n" +
+				"\tservice.auto.namespace.tables=false\n" +
 				"\tservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil\n" +
 				"\tservice.build.number=1\n" +
 				"\tservice.build.number.increment=true\n" +
@@ -265,6 +266,7 @@ public class ServiceBuilder {
 				"\tservice.input.file=${service.file}\n" +
 				"\tservice.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml\n" +
 				"\tservice.osgi.module=false\n" +
+				"\tservice.plugin.name=\n" +
 				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
 				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
