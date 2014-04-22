@@ -294,21 +294,22 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 		clearFilteredPropertyDescriptorsCache(autowireCapableBeanFactory);
 
 		try {
+			PortalLifecycleUtil.register(
+				new PortalLifecycle() {
+
+					@Override
+					public void portalInit() {
+						ModuleFrameworkUtilAdapter.registerContext(
+							servletContext);
+					}
+
+					@Override
+					public void portalDestroy() {
+					}
+
+				});
+
 			ModuleFrameworkUtilAdapter.registerContext(applicationContext);
-
-			PortalLifecycle portalLifecycle = new PortalLifecycle() {
-
-				@Override
-				public void portalInit() {
-					ModuleFrameworkUtilAdapter.registerContext(servletContext);
-				}
-
-				@Override
-				public void portalDestroy() {
-				}
-			};
-
-			PortalLifecycleUtil.register(portalLifecycle);
 
 			ModuleFrameworkUtilAdapter.startRuntime();
 		}
