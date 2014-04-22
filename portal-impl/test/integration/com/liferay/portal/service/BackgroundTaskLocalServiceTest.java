@@ -99,7 +99,7 @@ public class BackgroundTaskLocalServiceTest {
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
 
-		URL url = getClass().getResource(_FILE_PATH);
+		URL url = getClass().getResource(_RESOURCE_NAME);
 
 		File file = new File(url.toURI());
 
@@ -127,7 +127,7 @@ public class BackgroundTaskLocalServiceTest {
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
 
-		InputStream inputStream = getClass().getResourceAsStream(_FILE_PATH);
+		InputStream inputStream = getClass().getResourceAsStream(_RESOURCE_NAME);
 		
 		String fileName = ServiceTestUtil.randomString();
 
@@ -306,9 +306,10 @@ public class BackgroundTaskLocalServiceTest {
 		return taskContext;
 	}
 
-	private static final String _BACKGROUND_TASK_NAME = "Name";
+	private static final String _BACKGROUND_TASK_NAME =
+		BackgroundTaskLocalServiceTest.class.getName();
 
-	private static final String _FILE_PATH =
+	private static final String _RESOURCE_NAME =
 		"/com/liferay/portal/util/dependencies/test.txt";
 
 	private static final Class<?> _TASK_EXECUTOR_CLASS =
