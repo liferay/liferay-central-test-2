@@ -229,7 +229,7 @@ public class ServiceBuilder {
 		boolean buildNumberIncrement = GetterUtil.getBoolean(arguments.get("service.build.number.increment"), true);
 		String hbmFileName = arguments.get("service.hbm.file");
 		String implDir = arguments.get("service.impl.dir");
-		String fileName = arguments.get("service.input.file");
+		String inputFileName = arguments.get("service.input.file");
 		String modelHintsFileName = arguments.get("service.model.hints.file");
 		boolean osgiModule = GetterUtil.getBoolean(arguments.get("service.osgi.module"));
 		String pluginName = arguments.get("service.plugin.name");
@@ -247,7 +247,7 @@ public class ServiceBuilder {
 
 		try {
 			new ServiceBuilder(
-				fileName, hbmFileName, modelHintsFileName, springFileName,
+				inputFileName, hbmFileName, modelHintsFileName, springFileName,
 				springNamespaces, apiDir, implDir, resourcesDir,
 				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlSequencesFileName, autoImportDefaultReferences,
@@ -511,7 +511,7 @@ public class ServiceBuilder {
 	}
 
 	public ServiceBuilder(
-		String fileName, String hbmFileName, String modelHintsFileName,
+		String inputFileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String[] springNamespaces, String apiDir,
 		String implDir, String resourcesDir, String remotingFileName,
 		String sqlDir, String sqlFileName, String sqlIndexesFileName,
@@ -521,7 +521,7 @@ public class ServiceBuilder {
 		boolean osgiModule) {
 
 		this(
-			fileName, hbmFileName, modelHintsFileName, springFileName,
+			inputFileName, hbmFileName, modelHintsFileName, springFileName,
 			springNamespaces, apiDir, implDir, resourcesDir, remotingFileName,
 			sqlDir, sqlFileName, sqlIndexesFileName, sqlSequencesFileName,
 			autoImportDefaultReferences, autoNamespaceTables,
@@ -530,7 +530,7 @@ public class ServiceBuilder {
 	}
 
 	public ServiceBuilder(
-		String fileName, String hbmFileName, String modelHintsFileName,
+		String inputFileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String[] springNamespaces, String apiDir,
 		String implDir, String remotingFileName, String resourcesDir,
 		String sqlDir, String sqlFileName, String sqlIndexesFileName,
@@ -630,7 +630,7 @@ public class ServiceBuilder {
 			_buildNumberIncrement = buildNumberIncrement;
 			_osgiModule = osgiModule;
 
-			String content = getContent(fileName);
+			String content = getContent(inputFileName);
 
 			Document document = SAXReaderUtil.read(content, true);
 
