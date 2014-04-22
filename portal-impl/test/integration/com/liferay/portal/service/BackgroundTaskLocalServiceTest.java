@@ -80,11 +80,9 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(_user.getUserId(), backgroundTask.getUserId());
 		Assert.assertEquals(_group.getGroupId(), backgroundTask.getGroupId());
 		Assert.assertEquals(_BACKGROUND_TASK_NAME, backgroundTask.getName());
-
 		Assert.assertEquals(
 			_TASK_EXECUTOR_CLASS.getCanonicalName(),
 			backgroundTask.getTaskExecutorClassName());
-
 		AssertUtils.assertEquals(
 			taskContextMap, backgroundTask.getTaskContextMap());
 	}
@@ -98,8 +96,10 @@ public class BackgroundTaskLocalServiceTest {
 				new ServiceContext());
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
+		
+		Class<?> clazz = getClass();
 
-		URL url = getClass().getResource(_RESOURCE_NAME);
+		URL url = clazz.getResource(_RESOURCE_NAME);
 
 		File file = new File(url.toURI());
 
@@ -107,12 +107,10 @@ public class BackgroundTaskLocalServiceTest {
 			_user.getUserId(), backgroundTask.getBackgroundTaskId(),
 			ServiceTestUtil.randomString(), file);
 
-		BackgroundTask backgroundTaskWithAttachedFile =
-			BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
-				backgroundTask.getBackgroundTaskId());
+		backgroundTask = BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
+			backgroundTask.getBackgroundTaskId());
 
-		Assert.assertEquals(
-			backgroundTaskWithAttachedFile.getAttachmentsFileEntriesCount(), 1);
+		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 1);
 	}
 
 	@Test
@@ -126,25 +124,24 @@ public class BackgroundTaskLocalServiceTest {
 				new ServiceContext());
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
-
-		InputStream inputStream = getClass().getResourceAsStream(
-			_RESOURCE_NAME);
-
+		
 		String fileName = ServiceTestUtil.randomString();
+
+		Class<?> clazz = getClass();
+
+		InputStream inputStream = clazz.getResourceAsStream(_RESOURCE_NAME);
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
 			_user.getUserId(), backgroundTask.getBackgroundTaskId(), fileName,
 			inputStream);
 
-		BackgroundTask backgroundTaskWithAttachedFile =
-			BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
-				backgroundTask.getBackgroundTaskId());
+		backgroundTask = BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
+			backgroundTask.getBackgroundTaskId());
 
-		Assert.assertEquals(
-			backgroundTaskWithAttachedFile.getAttachmentsFileEntriesCount(), 1);
+		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 1);
 
 		List<FileEntry> attachmentsFileEntries =
-			backgroundTaskWithAttachedFile.getAttachmentsFileEntries();
+			backgroundTask.getAttachmentsFileEntries();
 
 		FileEntry attachment = attachmentsFileEntries.get(0);
 
@@ -178,7 +175,6 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(
 			_TASK_EXECUTOR_CLASS.getCanonicalName(),
 			backgroundTask.getTaskExecutorClassName());
-
 		AssertUtils.assertEquals(
 			taskContextMap, backgroundTask.getTaskContextMap());
 	}
@@ -189,12 +185,11 @@ public class BackgroundTaskLocalServiceTest {
 
 		ServiceContext serviceContext = new ServiceContext();
 
-		BackgroundTask amendBackgroundTask =
+		BackgroundTask backgroundTask =
 			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				Long.MIN_VALUE, null, BackgroundTaskConstants.STATUS_NEW,
-				serviceContext);
+				0, null, BackgroundTaskConstants.STATUS_NEW, serviceContext);
 
-		Assert.assertNull(amendBackgroundTask);
+		Assert.assertNull(backgroundTask);
 	}
 
 	@Test
@@ -210,17 +205,14 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_NEW, backgroundTask.getStatus());
 
-		BackgroundTask ammendBackgroundTask =
-			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				backgroundTask.getBackgroundTaskId(),
-				backgroundTask.getTaskContextMap(),
-				BackgroundTaskConstants.STATUS_FAILED, serviceContext);
+		backgroundTask = BackgroundTaskLocalServiceUtil.amendBackgroundTask(
+			backgroundTask.getBackgroundTaskId(),
+			backgroundTask.getTaskContextMap(),
+			BackgroundTaskConstants.STATUS_FAILED, serviceContext);
 
 		Assert.assertEquals(
-			BackgroundTaskConstants.STATUS_FAILED,
-			ammendBackgroundTask.getStatus());
-
-		Assert.assertTrue(ammendBackgroundTask.isCompleted());
+			BackgroundTaskConstants.STATUS_FAILED, backgroundTask.getStatus());
+		Assert.assertTrue(backgroundTask.isCompleted());
 	}
 
 	@Test
@@ -236,17 +228,15 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_NEW, backgroundTask.getStatus());
 
-		BackgroundTask ammendBackgroundTask =
-			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				backgroundTask.getBackgroundTaskId(),
-				backgroundTask.getTaskContextMap(),
-				BackgroundTaskConstants.STATUS_IN_PROGRESS, serviceContext);
+		backgroundTask = BackgroundTaskLocalServiceUtil.amendBackgroundTask(
+			backgroundTask.getBackgroundTaskId(),
+			backgroundTask.getTaskContextMap(),
+			BackgroundTaskConstants.STATUS_IN_PROGRESS, serviceContext);
 
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_IN_PROGRESS,
-			ammendBackgroundTask.getStatus());
-
-		Assert.assertFalse(ammendBackgroundTask.isCompleted());
+			backgroundTask.getStatus());
+		Assert.assertFalse(backgroundTask.isCompleted());
 	}
 
 	@Test
@@ -262,17 +252,15 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_NEW, backgroundTask.getStatus());
 
-		BackgroundTask ammendBackgroundTask =
-			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				backgroundTask.getBackgroundTaskId(),
-				backgroundTask.getTaskContextMap(),
-				BackgroundTaskConstants.STATUS_SUCCESSFUL, serviceContext);
+		backgroundTask = BackgroundTaskLocalServiceUtil.amendBackgroundTask(
+			backgroundTask.getBackgroundTaskId(),
+			backgroundTask.getTaskContextMap(),
+			BackgroundTaskConstants.STATUS_SUCCESSFUL, serviceContext);
 
 		Assert.assertEquals(
 			BackgroundTaskConstants.STATUS_SUCCESSFUL,
-			ammendBackgroundTask.getStatus());
-
-		Assert.assertTrue(ammendBackgroundTask.isCompleted());
+			backgroundTask.getStatus());
+		Assert.assertTrue(backgroundTask.isCompleted());
 	}
 
 	@Test
@@ -285,14 +273,14 @@ public class BackgroundTaskLocalServiceTest {
 				null, _TASK_EXECUTOR_CLASS, getTaskContextMap(),
 				serviceContext);
 
-		Map<String, Serializable> map = getTaskContextMap();
+		Map<String, Serializable> taskContextMap = getTaskContextMap();
 
-		BackgroundTask ammendBackgroundTask =
-			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				backgroundTask.getBackgroundTaskId(), map,
-				backgroundTask.getStatus(), serviceContext);
+		backgroundTask = BackgroundTaskLocalServiceUtil.amendBackgroundTask(
+			backgroundTask.getBackgroundTaskId(), taskContextMap,
+			backgroundTask.getStatus(), serviceContext);
 
-		AssertUtils.assertEquals(ammendBackgroundTask.getTaskContextMap(), map);
+		AssertUtils.assertEquals(
+			backgroundTask.getTaskContextMap(), taskContextMap);
 	}
 
 	protected Map<String, Serializable> getTaskContextMap() throws Exception {
