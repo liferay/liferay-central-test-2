@@ -241,6 +241,7 @@ public class ServiceBuilder {
 		String testDir = arguments.get("service.test.dir");
 		long buildNumber = GetterUtil.getLong(arguments.get("service.build.number"), 1);
 		boolean buildNumberIncrement = GetterUtil.getBoolean(arguments.get("service.build.number.increment"), true);
+		boolean osgiModule = GetterUtil.getBoolean(arguments.get("service.osgi.module"));
 
 		try {
 			new ServiceBuilder(
@@ -249,7 +250,7 @@ public class ServiceBuilder {
 				sqlIndexesFileName, sqlSequencesFileName,
 				autoImportDefaultReferences, autoNamespaceTables,
 				beanLocatorUtil, propsUtil, pluginName, targetEntityName,
-				testDir, true, buildNumber, buildNumberIncrement);
+				testDir, true, buildNumber, buildNumberIncrement, osgiModule);
 		}
 		catch (RuntimeException re) {
 			System.out.println(
@@ -272,6 +273,7 @@ public class ServiceBuilder {
 				"\tservice.test.dir=${basedir}/test/integration\n" +
 				"\tservice.build.number=1\n" +
 				"\tservice.build.number.increment=true\n" +
+				"\tservice.osgi.module=false\n" +
 				"\n" +
 				"You can also customize the generated code by overriding the default templates with these optional system properties:\n" +
 				"\n" +
@@ -507,14 +509,14 @@ public class ServiceBuilder {
 		String sqlIndexesFileName, String sqlSequencesFileName,
 		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
 		String beanLocatorUtil, String propsUtil, String pluginName,
-		String targetEntityName, String testDir) {
+		String targetEntityName, String testDir, boolean osgiModule) {
 
 		this(
 			fileName, hbmFileName, modelHintsFileName, springFileName, apiDir,
 			implDir, remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 			sqlSequencesFileName, autoImportDefaultReferences,
 			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
-			targetEntityName, testDir, true, 1, true);
+			targetEntityName, testDir, true, 1, true, osgiModule);
 	}
 
 	public ServiceBuilder(
@@ -525,7 +527,7 @@ public class ServiceBuilder {
 		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
 		String beanLocatorUtil, String propsUtil, String pluginName,
 		String targetEntityName, String testDir, boolean build,
-		long buildNumber, boolean buildNumberIncrement) {
+		long buildNumber, boolean buildNumberIncrement, boolean osgiModule) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
@@ -606,6 +608,7 @@ public class ServiceBuilder {
 			_build = build;
 			_buildNumber = buildNumber;
 			_buildNumberIncrement = buildNumberIncrement;
+			_osgiModule = osgiModule;
 
 			String content = getContent(fileName);
 
@@ -998,7 +1001,7 @@ public class ServiceBuilder {
 			_sqlIndexesFileName, _sqlSequencesFileName,
 			_autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _propsUtil, _pluginName, _targetEntityName,
-			_testDir, false, _buildNumber, _buildNumberIncrement);
+			_testDir, false, _buildNumber, _buildNumberIncrement, _osgiModule);
 
 		entity = serviceBuilder.getEntity(refEntity);
 
@@ -3766,6 +3769,7 @@ public class ServiceBuilder {
 		context.put("implDir", _implDir);
 		context.put("modelHintsFileName", _modelHintsFileName);
 		context.put("modelHintsUtil", ModelHintsUtil.getModelHints());
+		context.put("osgiModule", _osgiModule);
 		context.put("outputPath", _outputPath);
 		context.put("packagePath", _packagePath);
 		context.put("pluginName", _pluginName);
@@ -4892,6 +4896,7 @@ public class ServiceBuilder {
 		new HashMap<String, JavaClass>();
 	private String _modelHintsFileName;
 	private boolean _mvccEnabled;
+	private boolean _osgiModule;
 	private String _outputPath;
 	private String _packagePath;
 	private String _pluginName;
