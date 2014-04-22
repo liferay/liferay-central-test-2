@@ -3757,30 +3757,29 @@ public class ServiceBuilder {
 
 		Map<String, Object> context = new HashMap<String, Object>();
 
-		context.put("hbmFileName", _hbmFileName);
-		context.put("modelHintsFileName", _modelHintsFileName);
-		context.put("springFileName", _springFileName);
 		context.put("apiDir", _apiDir);
-		context.put("implDir", _implDir);
-		context.put("sqlDir", _sqlDir);
-		context.put("sqlFileName", _sqlFileName);
+		context.put("arrayUtil", ArrayUtil_IW.getInstance());
+		context.put("author", _author);
 		context.put("beanLocatorUtil", _beanLocatorUtil);
 		context.put("beanLocatorUtilShortName", _beanLocatorUtilShortName);
-		context.put("propsUtil", _propsUtil);
-		context.put("portletName", _portletName);
-		context.put("portletShortName", _portletShortName);
-		context.put("portletPackageName", _portletPackageName);
+		context.put("hbmFileName", _hbmFileName);
+		context.put("implDir", _implDir);
+		context.put("modelHintsFileName", _modelHintsFileName);
+		context.put("modelHintsUtil", ModelHintsUtil.getModelHints());
 		context.put("outputPath", _outputPath);
-		context.put("serviceOutputPath", _serviceOutputPath);
 		context.put("packagePath", _packagePath);
 		context.put("pluginName", _pluginName);
-		context.put("author", _author);
-		context.put("serviceBuilder", this);
-
-		context.put("arrayUtil", ArrayUtil_IW.getInstance());
-		context.put("modelHintsUtil", ModelHintsUtil.getModelHints());
+		context.put("portletName", _portletName);
+		context.put("portletPackageName", _portletPackageName);
+		context.put("portletShortName", _portletShortName);
+		context.put("propsUtil", _propsUtil);
 		context.put(
 			"resourceActionsUtil", ResourceActionsUtil.getResourceActions());
+		context.put("serviceBuilder", this);
+		context.put("serviceOutputPath", _serviceOutputPath);
+		context.put("springFileName", _springFileName);
+		context.put("sqlDir", _sqlDir);
+		context.put("sqlFileName", _sqlFileName);
 		context.put("stringUtil", StringUtil_IW.getInstance());
 		context.put("system", staticModels.get("java.lang.System"));
 		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));
