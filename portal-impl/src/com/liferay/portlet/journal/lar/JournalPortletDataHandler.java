@@ -41,11 +41,10 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.permission.JournalPermission;
 import com.liferay.portlet.journal.service.persistence.JournalArticleExportActionableDynamicQuery;
-import com.liferay.portlet.journal.service.persistence.JournalFeedExportActionableDynamicQuery;
-import com.liferay.portlet.journal.service.persistence.JournalFolderExportActionableDynamicQuery;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -159,7 +158,8 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "feeds")) {
 			ActionableDynamicQuery feedActionableDynamicQuery =
-				new JournalFeedExportActionableDynamicQuery(portletDataContext);
+				JournalFeedLocalServiceUtil.getExportActionableDynamicQuery(
+					portletDataContext);
 
 			feedActionableDynamicQuery.performActions();
 		}
@@ -190,7 +190,7 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "web-content")) {
 			ActionableDynamicQuery folderActionableDynamicQuery =
-				new JournalFolderExportActionableDynamicQuery(
+				JournalFolderLocalServiceUtil.getExportActionableDynamicQuery(
 					portletDataContext);
 
 			folderActionableDynamicQuery.performActions();
@@ -309,12 +309,14 @@ public class JournalPortletDataHandler extends BasePortletDataHandler {
 				ddmTemplates.size());
 
 		ActionableDynamicQuery feedActionableDynamicQuery =
-			new JournalFeedExportActionableDynamicQuery(portletDataContext);
+			JournalFeedLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
 
 		feedActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery folderActionableDynamicQuery =
-			new JournalFolderExportActionableDynamicQuery(portletDataContext);
+			JournalFolderLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
 
 		folderActionableDynamicQuery.performCount();
 	}

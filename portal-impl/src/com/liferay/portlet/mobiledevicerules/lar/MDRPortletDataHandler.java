@@ -29,10 +29,9 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRule;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
+import com.liferay.portlet.mobiledevicerules.service.MDRRuleLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.permission.MDRPermission;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRActionExportActionableDynamicQuery;
-import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleExportActionableDynamicQuery;
-import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleGroupExportActionableDynamicQuery;
 import com.liferay.portlet.mobiledevicerules.service.persistence.MDRRuleGroupInstanceExportActionableDynamicQuery;
 
 import java.util.List;
@@ -95,7 +94,8 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "rules")) {
 			ActionableDynamicQuery rulesActionableDynamicQuery =
-				new MDRRuleExportActionableDynamicQuery(portletDataContext);
+				MDRRuleLocalServiceUtil.getExportActionableDynamicQuery(
+					portletDataContext);
 
 			rulesActionableDynamicQuery.performActions();
 		}
@@ -175,12 +175,14 @@ public class MDRPortletDataHandler extends BasePortletDataHandler {
 		actionsActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery rulesActionableDynamicQuery =
-			new MDRRuleExportActionableDynamicQuery(portletDataContext);
+			MDRRuleLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
 
 		rulesActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery ruleGroupsActionableDynamicQuery =
-			new MDRRuleGroupExportActionableDynamicQuery(portletDataContext);
+			MDRRuleGroupLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
 
 		ruleGroupsActionableDynamicQuery.performCount();
 

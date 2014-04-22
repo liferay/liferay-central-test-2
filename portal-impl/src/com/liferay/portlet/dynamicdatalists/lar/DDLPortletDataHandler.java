@@ -39,7 +39,6 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.permission.DDLPermission;
 import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordExportActionableDynamicQuery;
-import com.liferay.portlet.dynamicdatalists.service.persistence.DDLRecordSetExportActionableDynamicQuery;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.persistence.DDMStructureExportActionableDynamicQuery;
@@ -120,7 +119,7 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 
 		if (portletDataContext.getBooleanParameter(NAMESPACE, "record-sets")) {
 			ActionableDynamicQuery recordSetActionableDynamicQuery =
-				new DDLRecordSetExportActionableDynamicQuery(
+				DDLRecordSetLocalServiceUtil.getExportActionableDynamicQuery(
 					portletDataContext);
 
 			recordSetActionableDynamicQuery.performActions();
@@ -214,7 +213,8 @@ public class DDLPortletDataHandler extends BasePortletDataHandler {
 		ddmStructureActionableDynamicQuery.performCount();
 
 		ActionableDynamicQuery recordSetActionableDynamicQuery =
-			new DDLRecordSetExportActionableDynamicQuery(portletDataContext);
+			DDLRecordSetLocalServiceUtil.getExportActionableDynamicQuery(
+				portletDataContext);
 
 		recordSetActionableDynamicQuery.performCount();
 
