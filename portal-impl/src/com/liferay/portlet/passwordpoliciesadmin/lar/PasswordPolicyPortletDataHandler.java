@@ -132,12 +132,6 @@ public class PasswordPolicyPortletDataHandler extends BasePortletDataHandler {
 			portletDataContext) {
 
 			@Override
-			protected void addCriteria(DynamicQuery dynamicQuery) {
-				portletDataContext.addDateRangeCriteria(
-					dynamicQuery, "modifiedDate");
-			}
-
-			@Override
 			protected void performAction(Object object) throws PortalException {
 				if (!export) {
 					return;
