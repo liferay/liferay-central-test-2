@@ -41,6 +41,19 @@ public abstract class BaseActionableDynamicQuery
 	implements ActionableDynamicQuery {
 
 	@Override
+	public void addDocument(Document document) throws PortalException {
+		if (_documents == null) {
+			_documents = new ArrayList<Document>();
+		}
+
+		_documents.add(document);
+
+		if (_documents.size() >= _interval) {
+			indexInterval();
+		}
+	}
+
+	@Override
 	public AddCriteriaMethod getAddCriteriaMethod() {
 		return _addCriteriaMethod;
 	}
@@ -176,18 +189,6 @@ public abstract class BaseActionableDynamicQuery
 				_groupIdPropertyName);
 
 			dynamicQuery.add(property.eq(_groupId));
-		}
-	}
-
-	protected void addDocument(Document document) throws PortalException {
-		if (_documents == null) {
-			_documents = new ArrayList<Document>();
-		}
-
-		_documents.add(document);
-
-		if (_documents.size() >= _interval) {
-			indexInterval();
 		}
 	}
 

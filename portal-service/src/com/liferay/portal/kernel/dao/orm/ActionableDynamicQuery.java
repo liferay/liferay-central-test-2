@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.dao.orm;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.transaction.TransactionAttribute;
 import com.liferay.portal.service.BaseLocalService;
 
@@ -23,6 +24,8 @@ import com.liferay.portal.service.BaseLocalService;
  * @author Brian Wing Shun Chan
  */
 public interface ActionableDynamicQuery {
+
+	public void addDocument(Document document) throws PortalException;
 
 	public AddCriteriaMethod getAddCriteriaMethod();
 
