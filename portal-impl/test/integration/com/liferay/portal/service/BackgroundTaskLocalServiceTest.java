@@ -296,10 +296,10 @@ public class BackgroundTaskLocalServiceTest {
 		Map<String, Serializable> taskContext =
 			new HashMap<String, Serializable>();
 
-		taskContext.put("Param1", ServiceTestUtil.randomBoolean());
-		taskContext.put("Param2", ServiceTestUtil.randomString());
-		taskContext.put("Param3", ServiceTestUtil.randomInt());
-		taskContext.put("Param4", new Date());
+		taskContext.put("param1", ServiceTestUtil.randomBoolean());
+		taskContext.put("param2", ServiceTestUtil.randomString());
+		taskContext.put("param3", ServiceTestUtil.randomInt());
+		taskContext.put("param4", new Date());
 
 		return taskContext;
 	}
