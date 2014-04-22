@@ -30,7 +30,9 @@ import org.osgi.framework.Bundle;
  * @author Miguel Pastor
  */
 public class BeanLocatorLifecycleManager
-	implements OsgiBundleApplicationContextListener<OsgiBundleApplicationContextEvent> {
+	implements
+		OsgiBundleApplicationContextListener
+			<OsgiBundleApplicationContextEvent> {
 
 	@Override
 	public void onOsgiApplicationEvent(

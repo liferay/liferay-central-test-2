@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,7 +16,6 @@ package com.liferay.spring.extender.classloader;
 
 import java.io.IOException;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.Enumeration;
@@ -41,121 +40,110 @@ public class BundleResolverClassLoaderTest extends PowerMockito {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testEmptyClassLoaders() {
-		BundleResolverClassLoader bundleResolverClassLoader =
-			new BundleResolverClassLoader();
+		new BundleResolverClassLoader();
 
-		Assert.fail("This code should not be executed");
+		Assert.fail("IllegalArgumentException was not thrown");
 	}
 
 	@Test
-	public void testGetResourceDefinedInFirstClassLoader()
-		throws ClassNotFoundException, MalformedURLException {
+	public void testGetResourceDefinedInFirstClassLoader() {
+		ClassLoader classLoader = _buildClassLoader();
 
-		ClassLoader bundleResolverClassLoader =
-			_buildBundleResolverClassLoader();
+		_mockGetResource(_bundle1, _NAME, _url);
 
-		_mockGetResource(_bundle1, _RESOURCE, _url);
+		classLoader.getResource(_NAME);
 
-		bundleResolverClassLoader.getResource(_RESOURCE);
-
-		_verifyGetResource(_bundle1, _RESOURCE);
+		_verifyGetResource(_bundle1, _NAME);
 	}
 
 	@Test
-	public void testGetResourceDefinedInSecondClassLoader()
-		throws ClassNotFoundException, MalformedURLException {
+	public void testGetResourceDefinedInSecondClassLoader() {
+		ClassLoader classLoader = _buildClassLoader();
 
-		ClassLoader bundleResolverClassLoader =
-			_buildBundleResolverClassLoader();
+		_mockGetResource(_bundle1, _NAME, null);
+		_mockGetResource(_bundle2, _NAME, _url);
 
-		_mockGetResource(_bundle1, _RESOURCE, null);
-		_mockGetResource(_bundle2, _RESOURCE, _url);
+		classLoader.getResource(_NAME);
 
-		bundleResolverClassLoader.getResource(_RESOURCE);
-
-		_verifyGetResource(_bundle1, _RESOURCE);
-		_verifyGetResource(_bundle2, _RESOURCE);
+		_verifyGetResource(_bundle1, _NAME);
+		_verifyGetResource(_bundle2, _NAME);
 	}
 
 	@Test
-	public void testGetResourcesDefinedInFirstClassLoader()
-		throws ClassNotFoundException, IOException {
+	public void testGetResourcesDefinedInFirstClassLoader() throws IOException {
+		ClassLoader classLoader = _buildClassLoader();
 
-		ClassLoader bundleResolverClassLoader =
-			_buildBundleResolverClassLoader();
+		_mockGetResources(_bundle1, _NAME, _enumeration);
 
-		_mockGetResources(_bundle1, _RESOURCE, _enumeration);
+		classLoader.getResources(_NAME);
 
-		bundleResolverClassLoader.getResources(_RESOURCE);
-
-		_verifyGetResources(_bundle1, _RESOURCE);
+		_verifyGetResources(_bundle1, _NAME);
 	}
 
 	@Test
 	public void testGetResourcesDefinedInSecondClassLoader()
-		throws ClassNotFoundException, IOException {
+		throws IOException {
 
-		ClassLoader bundleResolverClassLoader =
-			_buildBundleResolverClassLoader();
+		ClassLoader classLoader = _buildClassLoader();
 
-		_mockGetResources(_bundle1, _RESOURCE, null);
-		_mockGetResources(_bundle2, _RESOURCE, _enumeration);
+		_mockGetResources(_bundle1, _NAME, null);
+		_mockGetResources(_bundle2, _NAME, _enumeration);
 
-		bundleResolverClassLoader.getResources(_RESOURCE);
+		classLoader.getResources(_NAME);
 
-		_verifyGetResources(_bundle1, _RESOURCE);
-		_verifyGetResources(_bundle2, _RESOURCE);
+		_verifyGetResources(_bundle1, _NAME);
+		_verifyGetResources(_bundle2, _NAME);
 	}
 
-	private ClassLoader _buildBundleResolverClassLoader() {
+	private ClassLoader _buildClassLoader() {
 		return new BundleResolverClassLoader(_bundle1, _bundle2);
 	}
 
-	private void _mockGetResource(Bundle bundle, String resource, URL url)
-		throws ClassNotFoundException, MalformedURLException {
-
+	private void _mockGetResource(Bundle bundle, String name, URL url) {
 		when(
-			bundle.getResource(resource)
+			bundle.getResource(name)
 		).thenReturn(
 			url
 		);
 	}
 
 	private void _mockGetResources(
-			Bundle bundle, String resource, Enumeration enumeration)
-		throws ClassNotFoundException, IOException {
+			Bundle bundle, String name, Enumeration<URL> enumeration)
+		throws IOException {
 
 		when(
-			bundle.getResources(resource)
+			bundle.getResources(name)
 		).thenReturn(
 			enumeration
 		);
 	}
 
-	private void _verifyGetResource(Bundle mockBundle, String resource) {
+	private void _verifyGetResource(Bundle mockBundle, String name) {
 		Bundle bundle = Mockito.verify(mockBundle);
 
-		bundle.getResource(resource);
+		bundle.getResource(name);
 	}
 
-	private void _verifyGetResources(Bundle mockBundle, String resource)
+	private void _verifyGetResources(Bundle mockBundle, String name)
 		throws IOException {
 
 		Bundle bundle = Mockito.verify(mockBundle);
 
-		bundle.getResources(resource);
+		bundle.getResources(name);
 	}
 
-	private static final String _RESOURCE = "resource";
+	private static final String _NAME = "name";
 
 	@Mock
 	private Bundle _bundle1;
 
 	@Mock
 	private Bundle _bundle2;
+
 	@Mock
-	Enumeration _enumeration;
+	private Enumeration<URL> _enumeration;
+
 	@Mock
-	URL _url;
+	private URL _url;
 
 }

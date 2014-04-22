@@ -49,7 +49,7 @@ public class ModuleApplicationContextCreator
 	public DelegatedExecutionOsgiBundleApplicationContext
 			createApplicationContext(BundleContext bundleContext)
 		throws Exception {
-		
+
 		Bundle bundle = bundleContext.getBundle();
 
 		Dictionary<String, String> headers = bundle.getHeaders();

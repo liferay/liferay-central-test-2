@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -25,14 +25,14 @@ public class OsgiBundleHibernateConfigurationTest {
 	@Test
 	public void testConfigurationPaths() {
 		String[] configurationResources =
-			_configuration.getConfigurationResources();
+			_osgiBundleHibernateConfiguration.getConfigurationResources();
 
 		Assert.assertEquals(1, configurationResources.length);
 		Assert.assertEquals(
 			"META-INF/module-hbm.xml", configurationResources[0]);
 	}
 
-	private OsgiBundleHibernateConfiguration _configuration =
+	private OsgiBundleHibernateConfiguration _osgiBundleHibernateConfiguration =
 		new OsgiBundleHibernateConfiguration();
 
 }
