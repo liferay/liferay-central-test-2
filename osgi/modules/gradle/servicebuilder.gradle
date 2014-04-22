@@ -56,6 +56,7 @@ task buildService(type: JavaExec) {
 	args "service.remoting.file=${project.ext.webDir}/${project.ext.resourcesDir}/WEB-INF/remoting-servlet.xml"
 	args "service.resources.dir=${project.ext.resourcesDir}"
 	args "service.spring.file=${project.ext.resourcesDir}/META-INF/spring/module.xml"
+	args "service.spring.namespaces=beans,osgi"
 	args "service.sql.dir=${project.ext.resourcesDir}/WEB-INF/sql"
 	args "service.sql.file=tables.sql"
 	args "service.sql.indexes.file=indexes.sql"

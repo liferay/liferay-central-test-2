@@ -225,6 +225,7 @@ public class ServiceBuilder {
 		String hbmFileName = arguments.get("service.hbm.file");
 		String modelHintsFileName = arguments.get("service.model.hints.file");
 		String springFileName = arguments.get("service.spring.file");
+		String[] springNamespaces = StringUtil.split(arguments.get("service.spring.namespaces"));
 		String apiDir = arguments.get("service.api.dir");
 		String implDir = arguments.get("service.impl.dir");
 		String resourcesDir = arguments.get("service.resources.dir");
@@ -247,11 +248,12 @@ public class ServiceBuilder {
 		try {
 			new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				apiDir, implDir, resourcesDir, remotingFileName, sqlDir,
-				sqlFileName, sqlIndexesFileName, sqlSequencesFileName,
-				autoImportDefaultReferences, autoNamespaceTables,
-				beanLocatorUtil, propsUtil, pluginName, targetEntityName,
-				testDir, true, buildNumber, buildNumberIncrement, osgiModule);
+				springNamespaces, apiDir, implDir, resourcesDir,
+				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
+				sqlSequencesFileName, autoImportDefaultReferences,
+				autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
+				targetEntityName, testDir, true, buildNumber,
+				buildNumberIncrement, osgiModule);
 		}
 		catch (RuntimeException re) {
 			System.out.println(
@@ -272,6 +274,7 @@ public class ServiceBuilder {
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
 				"\tservice.resources.dir=${basedir}/src\n" +
 				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
+				"\tservice.spring.namespaces=beans\n" +
 				"\tservice.sql.dir=${basedir}/../sql\n" +
 				"\tservice.sql.file=portal-tables.sql\n" +
 				"\tservice.sql.indexes.file=indexes.sql\n" +
@@ -508,18 +511,18 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String apiDir, String implDir,
-		String resourcesDir, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
+		String springFileName, String[] springNamespaces, String apiDir,
+		String implDir, String resourcesDir, String remotingFileName,
+		String sqlDir, String sqlFileName, String sqlIndexesFileName,
 		String sqlSequencesFileName, boolean autoImportDefaultReferences,
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String targetEntityName, String testDir,
 		boolean osgiModule) {
 
 		this(
-			fileName, hbmFileName, modelHintsFileName, springFileName, apiDir,
-			implDir, resourcesDir, remotingFileName, sqlDir, sqlFileName,
-			sqlIndexesFileName, sqlSequencesFileName,
+			fileName, hbmFileName, modelHintsFileName, springFileName,
+			springNamespaces, apiDir, implDir, resourcesDir, remotingFileName,
+			sqlDir, sqlFileName, sqlIndexesFileName, sqlSequencesFileName,
 			autoImportDefaultReferences, autoNamespaceTables,
 			beanLocatorUtil, propsUtil, pluginName, targetEntityName, testDir,
 			true, 1, true, osgiModule);
@@ -527,9 +530,9 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String apiDir, String implDir,
-		String remotingFileName, String resourcesDir, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
+		String springFileName, String[] springNamespaces, String apiDir,
+		String implDir, String remotingFileName, String resourcesDir,
+		String sqlDir, String sqlFileName, String sqlIndexesFileName,
 		String sqlSequencesFileName, boolean autoImportDefaultReferences,
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String pluginName, String targetEntityName, String testDir,
@@ -596,6 +599,14 @@ public class ServiceBuilder {
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
+
+			_springNamespaces = springNamespaces;
+
+			if (!ArrayUtil.contains(_springNamespaces, "beans")) {
+				_springNamespaces = ArrayUtil.append(
+					_springNamespaces, "beans");
+			}
+
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_resourcesDir = resourcesDir;
@@ -1004,9 +1015,10 @@ public class ServiceBuilder {
 		}
 
 		ServiceBuilder serviceBuilder = new ServiceBuilder(
-			refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-			_apiDir, _implDir, _resourcesDir, _remotingFileName, _sqlDir,
-			_sqlFileName, _sqlIndexesFileName, _sqlSequencesFileName,
+			refFileName, _hbmFileName, _modelHintsFileName,
+			_springFileName, _springNamespaces, _apiDir, _implDir,
+			_resourcesDir, _remotingFileName, _sqlDir, _sqlFileName,
+			_sqlIndexesFileName, _sqlSequencesFileName,
 			_autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _propsUtil, _pluginName, _targetEntityName,
 			_testDir, false, _buildNumber, _buildNumberIncrement, _osgiModule);
@@ -3171,9 +3183,9 @@ public class ServiceBuilder {
 			"<beans\n" +
 			"\tdefault-destroy-method=\"destroy\"\n" +
 			"\tdefault-init-method=\"afterPropertiesSet\"\n" +
-			"\txmlns=\"http://www.springframework.org/schema/beans\"\n" +
+			_getSpringNamespacesDeclarations() +
 			"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
-			"\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd\"\n" +
+			_getSpringSchemaLocations() +
 			">\n" +
 			"</beans>";
 
@@ -4192,6 +4204,34 @@ public class ServiceBuilder {
 		}
 	}
 
+	private String _getSpringNamespacesDeclarations() {
+		StringBundler sb = new StringBundler(_springNamespaces.length * 4);
+
+		for (String namespace : _springNamespaces) {
+			sb.append("\txmlns:");
+			sb.append(namespace);
+			sb.append("=\"http://www.springframework.org/schema/");
+			sb.append(namespace + "\"\n");
+		}
+
+		return sb.toString();
+	}
+
+	private String _getSpringSchemaLocations() {
+		StringBundler sb = new StringBundler(_springNamespaces.length * 6);
+
+		for (String namespace : _springNamespaces) {
+			sb.append("\thttp://www.springframework.org/schema/");
+			sb.append(namespace);
+			sb.append(" http://www.springframework.org/schema/");
+			sb.append(namespace);
+			sb.append("/spring-" + namespace);
+			sb.append(".xsd");
+		}
+
+		return sb.toString();
+	}
+
 	private String _getTplProperty(String key, String defaultValue) {
 		return System.getProperty("service.tpl." + key, defaultValue);
 	}
@@ -4934,6 +4974,7 @@ public class ServiceBuilder {
 	private String _resourcesDir;
 	private String _serviceOutputPath;
 	private String _springFileName;
+	private String[] _springNamespaces;
 	private String _sqlDir;
 	private String _sqlFileName;
 	private String _sqlIndexesFileName;
