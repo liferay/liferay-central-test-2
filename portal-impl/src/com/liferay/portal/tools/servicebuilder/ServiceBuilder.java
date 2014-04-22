@@ -1749,6 +1749,10 @@ public class ServiceBuilder {
 	}
 
 	private void _createActionableDynamicQuery(Entity entity) throws Exception {
+		if (_osgiModule) {
+			return;
+		}
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
@@ -1889,6 +1893,10 @@ public class ServiceBuilder {
 
 	private void _createExportActionableDynamicQuery(Entity entity)
 		throws Exception {
+
+		if (_osgiModule) {
+			return;
+		}
 
 		Map<String, Object> context = _getContext();
 
