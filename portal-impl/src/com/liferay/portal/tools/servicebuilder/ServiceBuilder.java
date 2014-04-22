@@ -256,24 +256,24 @@ public class ServiceBuilder {
 			System.out.println(
 				"Please set these required arguments. Sample values are:\n" +
 				"\n" +
-				"\tservice.input.file=${service.file}\n" +
-				"\tservice.hbm.file=${basedir}/src/META-INF/portal-hbm.xml\n" +
-				"\tservice.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml\n" +
-				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
 				"\tservice.api.dir=${basedir}/../portal-service/src\n" +
+				"\tservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil\n" +
+				"\tservice.build.number=1\n" +
+				"\tservice.build.number.increment=true\n" +
+				"\tservice.hbm.file=${basedir}/src/META-INF/portal-hbm.xml\n" +
 				"\tservice.impl.dir=${basedir}/src\n" +
+				"\tservice.input.file=${service.file}\n" +
+				"\tservice.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml\n" +
+				"\tservice.osgi.module=false\n" +
+				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
+				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
 				"\tservice.sql.dir=${basedir}/../sql\n" +
 				"\tservice.sql.file=portal-tables.sql\n" +
 				"\tservice.sql.indexes.file=indexes.sql\n" +
 				"\tservice.sql.sequences.file=sequences.sql\n" +
-				"\tservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil\n" +
-				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
 				"\tservice.target.entity.name=${service.target.entity.name}\n" +
 				"\tservice.test.dir=${basedir}/test/integration\n" +
-				"\tservice.build.number=1\n" +
-				"\tservice.build.number.increment=true\n" +
-				"\tservice.osgi.module=false\n" +
 				"\n" +
 				"You can also customize the generated code by overriding the default templates with these optional system properties:\n" +
 				"\n" +

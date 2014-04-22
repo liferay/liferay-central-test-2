@@ -831,19 +831,20 @@ public class Creole10Parser]]></replacevalue>
 			<jvmarg value="-XX:MaxPermSize=512m" />
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-			<arg value="service.input.file=${service.file}" />
-			<arg value="service.hbm.file=${basedir}/src/META-INF/portal-hbm.xml" />
-			<arg value="service.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml" />
-			<arg value="service.spring.file=${basedir}/src/META-INF/portal-spring.xml" />
 			<arg value="service.api.dir=${basedir}/../portal-service/src" />
+			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
+			<arg value="service.hbm.file=${basedir}/src/META-INF/portal-hbm.xml" />
 			<arg value="service.impl.dir=${basedir}/src" />
+			<arg value="service.input.file=${service.file}" />
+			<arg value="service.model.hints.file=${basedir}/src/META-INF/portal-model-hints.xml" />
+			<arg value="service.osgi.module=false" />
+			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
 			<arg value="service.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml" />
+			<arg value="service.spring.file=${basedir}/src/META-INF/portal-spring.xml" />
 			<arg value="service.sql.dir=${basedir}/../sql" />
 			<arg value="service.sql.file=portal-tables.sql" />
 			<arg value="service.sql.indexes.file=indexes.sql" />
 			<arg value="service.sql.sequences.file=sequences.sql" />
-			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
-			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
 			<arg value="service.target.entity.name=${service.target.entity.name}" />
 			<arg value="service.test.dir=${basedir}/test/integration" />
 		</java>
