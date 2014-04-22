@@ -104,8 +104,8 @@ public class BackgroundTaskLocalServiceTest {
 		File file = new File(url.toURI());
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
-			_user.getUserId(), backgroundTask.getBackgroundTaskId(), _FILE_NAME,
-			file);
+			_user.getUserId(), backgroundTask.getBackgroundTaskId(),
+			ServiceTestUtil.randomString(), file);
 
 		BackgroundTask backgroundTaskWithAttachedFile =
 			BackgroundTaskLocalServiceUtil.fetchBackgroundTask(
@@ -128,9 +128,11 @@ public class BackgroundTaskLocalServiceTest {
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
 
 		InputStream inputStream = getClass().getResourceAsStream(_FILE_PATH);
+		
+		String fileName = ServiceTestUtil.randomString();
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
-			_user.getUserId(), backgroundTask.getBackgroundTaskId(), _FILE_NAME,
+			_user.getUserId(), backgroundTask.getBackgroundTaskId(), fileName,
 			inputStream);
 
 		BackgroundTask backgroundTaskWithAttachedFile =
@@ -145,7 +147,7 @@ public class BackgroundTaskLocalServiceTest {
 
 		FileEntry attachment = attachmentsFileEntries.get(0);
 
-		Assert.assertEquals(_FILE_NAME, attachment.getTitle());
+		Assert.assertEquals(fileName, attachment.getTitle());
 	}
 
 	@Test
@@ -304,14 +306,12 @@ public class BackgroundTaskLocalServiceTest {
 		return taskContext;
 	}
 
-	private final static String _BACKGROUND_TASK_NAME = "Name";
+	private static final String _BACKGROUND_TASK_NAME = "Name";
 
-	private final static String _FILE_NAME = "backgroundTaskAttachmentTest.txt";
-
-	private final static String _FILE_PATH =
+	private static final String _FILE_PATH =
 		"/com/liferay/portal/util/dependencies/test.txt";
 
-	private final static Class<?> _TASK_EXECUTOR_CLASS =
+	private static final Class<?> _TASK_EXECUTOR_CLASS =
 		PortletStagingBackgroundTaskExecutor.class;
 
 	private Group _group;
