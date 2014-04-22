@@ -54,6 +54,7 @@ task buildService(type: JavaExec) {
 	args "service.plugin.name="
 	args "service.props.util=com.liferay.portal.util.PropsUtil"
 	args "service.remoting.file=${project.ext.webDir}/${project.ext.resourcesDir}/WEB-INF/remoting-servlet.xml"
+	args "service.resources.dir=${project.ext.resourcesDir}"
 	args "service.spring.file=${project.ext.resourcesDir}/META-INF/spring/module.xml"
 	args "service.sql.dir=${project.ext.resourcesDir}/WEB-INF/sql"
 	args "service.sql.file=tables.sql"

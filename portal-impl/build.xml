@@ -844,6 +844,7 @@ public class Creole10Parser]]></replacevalue>
 			<arg value="service.plugin.name=" />
 			<arg value="service.props.util=com.liferay.portal.util.PropsUtil" />
 			<arg value="service.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml" />
+			<arg value="service.resources.dir=${basedir}/src" />
 			<arg value="service.spring.file=${basedir}/src/META-INF/portal-spring.xml" />
 			<arg value="service.sql.dir=${basedir}/../sql" />
 			<arg value="service.sql.file=portal-tables.sql" />

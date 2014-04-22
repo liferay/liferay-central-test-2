@@ -227,6 +227,7 @@ public class ServiceBuilder {
 		String springFileName = arguments.get("service.spring.file");
 		String apiDir = arguments.get("service.api.dir");
 		String implDir = arguments.get("service.impl.dir");
+		String resourcesDir = arguments.get("service.resources.dir");
 		String remotingFileName = arguments.get("service.remoting.file");
 		String sqlDir = arguments.get("service.sql.dir");
 		String sqlFileName = arguments.get("service.sql.file");
@@ -246,8 +247,8 @@ public class ServiceBuilder {
 		try {
 			new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				apiDir, implDir, remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlSequencesFileName,
+				apiDir, implDir, resourcesDir, remotingFileName, sqlDir,
+				sqlFileName, sqlIndexesFileName, sqlSequencesFileName,
 				autoImportDefaultReferences, autoNamespaceTables,
 				beanLocatorUtil, propsUtil, pluginName, targetEntityName,
 				testDir, true, buildNumber, buildNumberIncrement, osgiModule);
@@ -269,6 +270,7 @@ public class ServiceBuilder {
 				"\tservice.plugin.name=\n" +
 				"\tservice.props.util=com.liferay.portal.util.PropsUtil\n" +
 				"\tservice.remoting.file=${basedir}/../portal-web/docroot/WEB-INF/remoting-servlet.xml\n" +
+				"\tservice.resources.dir=${basedir}/src\n" +
 				"\tservice.spring.file=${basedir}/src/META-INF/portal-spring.xml\n" +
 				"\tservice.sql.dir=${basedir}/../sql\n" +
 				"\tservice.sql.file=portal-tables.sql\n" +
@@ -507,29 +509,32 @@ public class ServiceBuilder {
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String apiDir, String implDir,
-		String remotingFileName, String sqlDir, String sqlFileName,
-		String sqlIndexesFileName, String sqlSequencesFileName,
-		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String pluginName,
-		String targetEntityName, String testDir, boolean osgiModule) {
+		String resourcesDir, String remotingFileName, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName,
+		String sqlSequencesFileName, boolean autoImportDefaultReferences,
+		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
+		String pluginName, String targetEntityName, String testDir,
+		boolean osgiModule) {
 
 		this(
 			fileName, hbmFileName, modelHintsFileName, springFileName, apiDir,
-			implDir, remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-			sqlSequencesFileName, autoImportDefaultReferences,
-			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
-			targetEntityName, testDir, true, 1, true, osgiModule);
+			implDir, resourcesDir, remotingFileName, sqlDir, sqlFileName,
+			sqlIndexesFileName, sqlSequencesFileName,
+			autoImportDefaultReferences, autoNamespaceTables,
+			beanLocatorUtil, propsUtil, pluginName, targetEntityName, testDir,
+			true, 1, true, osgiModule);
 	}
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
 		String springFileName, String apiDir, String implDir,
-		String remotingFileName, String sqlDir, String sqlFileName,
-		String sqlIndexesFileName, String sqlSequencesFileName,
-		boolean autoImportDefaultReferences, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String pluginName,
-		String targetEntityName, String testDir, boolean build,
-		long buildNumber, boolean buildNumberIncrement, boolean osgiModule) {
+		String remotingFileName, String resourcesDir, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName,
+		String sqlSequencesFileName, boolean autoImportDefaultReferences,
+		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
+		String pluginName, String targetEntityName, String testDir,
+		boolean build, long buildNumber, boolean buildNumberIncrement,
+		boolean osgiModule) {
 
 		_tplBadAliasNames = _getTplProperty(
 			"bad_alias_names", _tplBadAliasNames);
@@ -593,6 +598,7 @@ public class ServiceBuilder {
 			_springFileName = springFileName;
 			_apiDir = apiDir;
 			_implDir = implDir;
+			_resourcesDir = resourcesDir;
 			_remotingFileName = remotingFileName;
 			_sqlDir = sqlDir;
 			_sqlFileName = sqlFileName;
@@ -999,8 +1005,8 @@ public class ServiceBuilder {
 
 		ServiceBuilder serviceBuilder = new ServiceBuilder(
 			refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-			_apiDir, _implDir, _remotingFileName, _sqlDir, _sqlFileName,
-			_sqlIndexesFileName, _sqlSequencesFileName,
+			_apiDir, _implDir, _resourcesDir, _remotingFileName, _sqlDir,
+			_sqlFileName, _sqlIndexesFileName, _sqlSequencesFileName,
 			_autoImportDefaultReferences, _autoNamespaceTables,
 			_beanLocatorUtil, _propsUtil, _pluginName, _targetEntityName,
 			_testDir, false, _buildNumber, _buildNumberIncrement, _osgiModule);
@@ -2589,7 +2595,17 @@ public class ServiceBuilder {
 
 		// Content
 
-		File propsFile = new File(_implDir + "/service.properties");
+		File propsFile = null;
+
+		if (Validator.isNotNull(_resourcesDir)) {
+			propsFile = new File(_resourcesDir + "/service.properties");
+		}
+		else {
+
+			// Backwards compatibility
+
+			propsFile = new File(_implDir + "/service.properties");
+		}
 
 		long buildNumber = 1;
 		long buildDate = System.currentTimeMillis();
@@ -4915,6 +4931,7 @@ public class ServiceBuilder {
 	private String _portletShortName = StringPool.BLANK;
 	private String _propsUtil;
 	private String _remotingFileName;
+	private String _resourcesDir;
 	private String _serviceOutputPath;
 	private String _springFileName;
 	private String _sqlDir;
