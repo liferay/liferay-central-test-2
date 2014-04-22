@@ -221,29 +221,29 @@ public class ServiceBuilder {
 
 		ToolDependencies.wireServiceBuilder();
 
-		String fileName = arguments.get("service.input.file");
+		String apiDir = arguments.get("service.api.dir");
+		boolean autoImportDefaultReferences = GetterUtil.getBoolean(arguments.get("service.auto.import.default.references"), true);
+		boolean autoNamespaceTables = GetterUtil.getBoolean(arguments.get("service.auto.namespace.tables"));
+		String beanLocatorUtil = arguments.get("service.bean.locator.util");
+		long buildNumber = GetterUtil.getLong(arguments.get("service.build.number"), 1);
+		boolean buildNumberIncrement = GetterUtil.getBoolean(arguments.get("service.build.number.increment"), true);
 		String hbmFileName = arguments.get("service.hbm.file");
+		String implDir = arguments.get("service.impl.dir");
+		String fileName = arguments.get("service.input.file");
 		String modelHintsFileName = arguments.get("service.model.hints.file");
+		boolean osgiModule = GetterUtil.getBoolean(arguments.get("service.osgi.module"));
+		String pluginName = arguments.get("service.plugin.name");
+		String propsUtil = arguments.get("service.props.util");
+		String remotingFileName = arguments.get("service.remoting.file");
+		String resourcesDir = arguments.get("service.resources.dir");
 		String springFileName = arguments.get("service.spring.file");
 		String[] springNamespaces = StringUtil.split(arguments.get("service.spring.namespaces"));
-		String apiDir = arguments.get("service.api.dir");
-		String implDir = arguments.get("service.impl.dir");
-		String resourcesDir = arguments.get("service.resources.dir");
-		String remotingFileName = arguments.get("service.remoting.file");
 		String sqlDir = arguments.get("service.sql.dir");
 		String sqlFileName = arguments.get("service.sql.file");
 		String sqlIndexesFileName = arguments.get("service.sql.indexes.file");
 		String sqlSequencesFileName = arguments.get("service.sql.sequences.file");
-		boolean autoImportDefaultReferences = GetterUtil.getBoolean(arguments.get("service.auto.import.default.references"), true);
-		boolean autoNamespaceTables = GetterUtil.getBoolean(arguments.get("service.auto.namespace.tables"));
-		String beanLocatorUtil = arguments.get("service.bean.locator.util");
-		String propsUtil = arguments.get("service.props.util");
-		String pluginName = arguments.get("service.plugin.name");
 		String targetEntityName = arguments.get("service.target.entity.name");
 		String testDir = arguments.get("service.test.dir");
-		long buildNumber = GetterUtil.getLong(arguments.get("service.build.number"), 1);
-		boolean buildNumberIncrement = GetterUtil.getBoolean(arguments.get("service.build.number.increment"), true);
-		boolean osgiModule = GetterUtil.getBoolean(arguments.get("service.osgi.module"));
 
 		try {
 			new ServiceBuilder(
