@@ -27,8 +27,7 @@ public class RuntimeClasspathResolver implements ClasspathResolver {
 
 	@Override
 	public URL[] getClasspathURLs() throws Exception {
-		File coreDir = new File(
-			PropsValues.MODULE_FRAMEWORK_BASE_DIR, "core");
+		File coreDir = new File(PropsValues.MODULE_FRAMEWORK_BASE_DIR, "core");
 
 		File[] files = coreDir.listFiles();
 
