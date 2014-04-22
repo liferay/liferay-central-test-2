@@ -127,8 +127,9 @@ public class BackgroundTaskLocalServiceTest {
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
 
-		InputStream inputStream = getClass().getResourceAsStream(_RESOURCE_NAME);
-		
+		InputStream inputStream = getClass().getResourceAsStream(
+			_RESOURCE_NAME);
+
 		String fileName = ServiceTestUtil.randomString();
 
 		BackgroundTaskLocalServiceUtil.addBackgroundTaskAttachment(
@@ -183,6 +184,20 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
+	public void testAmendBackgroundTaskWithInvalidBackgroundTaskId()
+		throws Exception {
+
+		ServiceContext serviceContext = new ServiceContext();
+
+		BackgroundTask amendBackgroundTask =
+			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
+				Long.MIN_VALUE, null, BackgroundTaskConstants.STATUS_NEW,
+				serviceContext);
+
+		Assert.assertNull(amendBackgroundTask);
+	}
+
+	@Test
 	public void testAmendBackgroundTaskWithStatusFailed() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
@@ -209,9 +224,7 @@ public class BackgroundTaskLocalServiceTest {
 	}
 
 	@Test
-	public void testAmendBackgroundTaskWithStatusInProgress()
-		throws Exception {
-
+	public void testAmendBackgroundTaskWithStatusInProgress() throws Exception {
 		ServiceContext serviceContext = new ServiceContext();
 
 		BackgroundTask backgroundTask =
@@ -234,20 +247,6 @@ public class BackgroundTaskLocalServiceTest {
 			ammendBackgroundTask.getStatus());
 
 		Assert.assertFalse(ammendBackgroundTask.isCompleted());
-	}
-
-	@Test
-	public void testAmendBackgroundTaskWithInvalidBackgroundTaskId()
-		throws Exception {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		BackgroundTask amendBackgroundTask =
-			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
-				Long.MIN_VALUE, null, BackgroundTaskConstants.STATUS_NEW,
-				serviceContext);
-
-		Assert.assertNull(amendBackgroundTask);
 	}
 
 	@Test
