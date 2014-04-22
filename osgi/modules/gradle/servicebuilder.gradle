@@ -6,7 +6,7 @@ dependencies {
 	servicebuilder files(["${liferayProjectDir}/osgi/modules/gradle/servicebuilder"])
 	servicebuilder files(["${liferayProjectDir}/portal-impl/classes"])
 	servicebuilder files(["${liferayProjectDir}/portal-service/classes"])
-	servicebuilder files(["${liferayProjectDir}/tools/"])
+	servicebuilder files(["${liferayProjectDir}/tools"])
 	servicebuilder files(["${liferayProjectDir}/util-java/classes"])
 	servicebuilder files(["${liferayProjectDir}/util-taglib/classes"])
 
@@ -14,10 +14,12 @@ dependencies {
 		dir:"${liferayProjectDir}/lib/development",
 		includes: ["**/*.jar"]
 	)
-        servicebuilder fileTree(
+
+	servicebuilder fileTree(
 		dir:"${liferayProjectDir}/lib/global",
 		includes: ["**/*.jar"]
-        )
+	)
+
 	servicebuilder fileTree(
 		dir:"${liferayProjectDir}/lib/portal",
 		includes: ["*.jar"]
@@ -25,18 +27,18 @@ dependencies {
 }
 
 ext {
-        liferayProjectDir = "${rootDir}/../../.."
-        resourcesDir = "src/main/resources"
-        sourcesDir = "src/main/java"
-        targetEntityName = ""
+	liferayProjectDir = "${rootDir}/../../.."
+	resourcesDir = "src/main/resources"
+	sourcesDir = "src/main/java"
+	targetEntityName = ""
 }
 
 task buildService(type: JavaExec) {
 	classpath = configurations.servicebuilder
-	maxHeapSize '1024M'
-	minHeapSize '512M'
-	jvmArgs = ['-Xss2048k', '-XX:MaxPermSize=512m']
-	main = 'com.liferay.portal.tools.servicebuilder.ServiceBuilder'
+	main = "com.liferay.portal.tools.servicebuilder.ServiceBuilder"
+	maxHeapSize "1024M"
+	minHeapSize "512M"
+	jvmArgs = ["-Xss2048k", "-XX:MaxPermSize=512m"]
 	args "-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties"
 	args "-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger"
 	args "service.input.file=${project.ext.resourcesDir}/service.xml"
@@ -55,6 +57,5 @@ task buildService(type: JavaExec) {
 	args "service.props.util=com.liferay.portal.util.PropsUtil"
 	args "service.target.entity.name=${project.ext.targetEntityName}"
 	args "service.test.dir=src/test/java"
-    	args "service.osgi.module=true"
-	args "-Dservice.tpl.spring.extra.namespaces=osgi"
+	args "service.osgi.module=true"
 }
