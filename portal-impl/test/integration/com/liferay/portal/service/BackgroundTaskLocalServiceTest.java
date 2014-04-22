@@ -62,7 +62,8 @@ public class BackgroundTaskLocalServiceTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		_user = UserTestUtil.addUser("BackgroundUser", _group.getGroupId());
+		_user = UserTestUtil.addUser(
+			ServiceTestUtil.randomString(), _group.getGroupId());
 	}
 
 	@Test
