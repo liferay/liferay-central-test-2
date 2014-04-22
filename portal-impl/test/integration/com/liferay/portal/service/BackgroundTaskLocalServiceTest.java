@@ -281,7 +281,7 @@ public class BackgroundTaskLocalServiceTest {
 				null, _TASK_EXECUTOR_CLASS, getTaskContextMap(),
 				serviceContext);
 
-		Map map = getTaskContextMap();
+		Map<String, Serializable> map = getTaskContextMap();
 
 		BackgroundTask ammendBackgroundTask =
 			BackgroundTaskLocalServiceUtil.amendBackgroundTask(
@@ -310,7 +310,7 @@ public class BackgroundTaskLocalServiceTest {
 	private final static String _FILE_PATH =
 		"/com/liferay/portal/util/dependencies/test.txt";
 
-	private final static Class _TASK_EXECUTOR_CLASS =
+	private final static Class<?> _TASK_EXECUTOR_CLASS =
 		PortletStagingBackgroundTaskExecutor.class;
 
 	private Group _group;
