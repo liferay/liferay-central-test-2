@@ -260,6 +260,7 @@ public class ServiceBuilder {
 				"Please set these arguments. Sample values are:\n" +
 				"\n" +
 				"\tservice.api.dir=${basedir}/../portal-service/src\n" +
+				"\tservice.auto.import.default.references=true\n" +
 				"\tservice.auto.namespace.tables=false\n" +
 				"\tservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil\n" +
 				"\tservice.build.number=1\n" +

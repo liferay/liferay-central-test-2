@@ -42,6 +42,7 @@ task buildService(type: JavaExec) {
 	args "-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties"
 	args "-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger"
 	args "service.api.dir=${project.ext.apiDir}/${project.ext.sourcesDir}"
+	args "service.auto.import.default.references=true"
 	args "service.auto.namespace.tables=false"
 	args "service.bean.locator.util=com.liferay.portal.kernel.bean.PortletBeanLocatorUtil"
 	args "service.build.number=1"

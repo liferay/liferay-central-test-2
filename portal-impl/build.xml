@@ -832,6 +832,7 @@ public class Creole10Parser]]></replacevalue>
 			<arg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="service.api.dir=${basedir}/../portal-service/src" />
+			<arg value="service.auto.import.default.references=true" />
 			<arg value="service.auto.namespace.tables=false" />
 			<arg value="service.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<arg value="service.build.number=1" />
