@@ -96,7 +96,7 @@ public class BackgroundTaskLocalServiceTest {
 				new ServiceContext());
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
-		
+
 		Class<?> clazz = getClass();
 
 		URL url = clazz.getResource(_RESOURCE_NAME);
@@ -124,7 +124,7 @@ public class BackgroundTaskLocalServiceTest {
 				new ServiceContext());
 
 		Assert.assertEquals(backgroundTask.getAttachmentsFileEntriesCount(), 0);
-		
+
 		String fileName = ServiceTestUtil.randomString();
 
 		Class<?> clazz = getClass();
