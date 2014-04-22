@@ -443,7 +443,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 			<#if entity.isStagedModel()>
 				@Override
 				public ExportActionableDynamicQuery getExportActionableDynamicQuery(final PortletDataContext portletDataContext) throws SystemException {
-					ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
+					final ExportActionableDynamicQuery exportActionableDynamicQuery = new ExportActionableDynamicQuery() {
 
 						@Override
 						public long performCount() throws PortalException, SystemException {
@@ -480,10 +480,12 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 								portletDataContext.addDateRangeCriteria(dynamicQuery, "modifiedDate");
 
 								<#if entity.isTypedModel()>
-									if (getStagedModelType().getReferrerClassNameId() >= 0) {
+									StagedModelType stagedModelType = exportActionableDynamicQuery.getStagedModelType();
+
+									if (stagedModelType.getReferrerClassNameId() >= 0) {
 										Property classNameIdProperty = PropertyFactoryUtil.forName("classNameId");
 
-										dynamicQuery.add(classNameIdProperty.eq(getStagedModelType().getReferrerClassNameId()));
+										dynamicQuery.add(classNameIdProperty.eq(stagedModelType.getReferrerClassNameId()));
 									}
 								</#if>
 
@@ -516,12 +518,9 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 							}
 
 						});
+					exportActionableDynamicQuery.setStagedModelType(new StagedModelType(PortalUtil.getClassNameId(${entity.name}.class.getName())));
 
 					return exportActionableDynamicQuery;
-				}
-
-				protected StagedModelType getStagedModelType() {
-					return new StagedModelType(PortalUtil.getClassNameId(${entity.name}.class.getName()));
 				}
 			</#if>
 		</#if>
