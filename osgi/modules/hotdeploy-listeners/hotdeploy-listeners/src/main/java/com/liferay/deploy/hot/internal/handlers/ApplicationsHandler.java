@@ -63,9 +63,11 @@ public class ApplicationsHandler {
 	private ApplicationsHandler() {
 		_hotDeployListeners = new ArrayList<HotDeployListener>();
 
-		_hotDeployListeners.add(new JSONWebServiceHotDeployListener());
 		_hotDeployListeners.add(new PluginPackageHotDeployListener());
+
+		_hotDeployListeners.add(new JSONWebServiceHotDeployListener());
 		_hotDeployListeners.add(new PortletHotDeployListener());
+
 		_hotDeployListeners.add(new MessagingHotDeployListener());
 	}
 
