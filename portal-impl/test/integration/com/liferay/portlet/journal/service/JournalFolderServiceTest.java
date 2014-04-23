@@ -77,9 +77,6 @@ public class JournalFolderServiceTest {
 
 	@Test
 	public void testAddArticleToRestrictedFolder() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
 		JournalFolder folder = JournalTestUtil.addFolder(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			"Test 1");
@@ -89,11 +86,17 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure1.getStructureId()};
 
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
+
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder.getFolderId(),
 			folder.getParentFolderId(), folder.getName(),
 			folder.getDescription(), ddmStructureIds, true, false,
 			serviceContext);
+
+		String xml = DDMStructureTestUtil.getSampleStructuredContent(
+			"Test article");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
@@ -101,9 +104,6 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate2 = DDMTemplateTestUtil.addTemplate(
 			group.getGroupId(), ddmStructure2.getStructureId(),
 			LocaleUtil.getDefault());
-
-		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
 
 		try {
 			JournalTestUtil.addArticleWithXMLContent(
@@ -113,7 +113,7 @@ public class JournalFolderServiceTest {
 
 			Assert.fail();
 		}
-		catch (InvalidDDMStructureException idse) {
+		catch (InvalidDDMStructureException iddmse) {
 		}
 
 		JournalFolder subfolder = JournalTestUtil.addFolder(
@@ -146,8 +146,12 @@ public class JournalFolderServiceTest {
 
 	@Test
 	public void testMoveArticleFromTrashToFolder() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
+		JournalFolder folder1 = JournalTestUtil.addFolder(
+			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			"Test 1");
+
+		String xml = DDMStructureTestUtil.getSampleStructuredContent(
+			"Test article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
@@ -155,14 +159,7 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
 			group.getGroupId(), ddmStructure1.getStructureId(),
 			LocaleUtil.getDefault());
-
-		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
-
-		JournalFolder folder1 = JournalTestUtil.addFolder(
-			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
-
+			
 		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
 			group.getGroupId(), folder1.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, xml,
@@ -179,6 +176,9 @@ public class JournalFolderServiceTest {
 			group.getGroupId(), JournalArticle.class.getName());
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder2.getFolderId(),
@@ -213,9 +213,6 @@ public class JournalFolderServiceTest {
 
 	@Test
 	public void testMoveArticleToRestrictedFolder() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
 
@@ -239,6 +236,9 @@ public class JournalFolderServiceTest {
 			group.getGroupId(), JournalArticle.class.getName());
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder.getFolderId(),
@@ -274,8 +274,15 @@ public class JournalFolderServiceTest {
 	public void testMoveFolderWithAnArticleInTrashToFolder()
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
+		JournalFolder folder1 = JournalTestUtil.addFolder(
+			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			"Test 1");
+
+		JournalFolder folder2 = JournalTestUtil.addFolder(
+			group.getGroupId(), folder1.getFolderId(), "Test 2");
+
+		String xml = DDMStructureTestUtil.getSampleStructuredContent(
+			"Test article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
@@ -283,16 +290,6 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
 			group.getGroupId(), ddmStructure1.getStructureId(),
 			LocaleUtil.getDefault());
-
-		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
-
-		JournalFolder folder1 = JournalTestUtil.addFolder(
-			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
-
-		JournalFolder folder2 = JournalTestUtil.addFolder(
-			group.getGroupId(), folder1.getFolderId(), "Test 2");
 
 		JournalTestUtil.addArticleWithXMLContent(
 			group.getGroupId(), folder2.getFolderId(),
@@ -310,6 +307,9 @@ public class JournalFolderServiceTest {
 			group.getGroupId(), JournalArticle.class.getName());
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder3.getFolderId(),
@@ -344,8 +344,12 @@ public class JournalFolderServiceTest {
 
 	@Test
 	public void testMoveFolderWithAnArticleToFolder() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
+		JournalFolder folder1 = JournalTestUtil.addFolder(
+			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			"Test 1");
+
+		String xml = DDMStructureTestUtil.getSampleStructuredContent(
+			"Test article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
@@ -353,13 +357,6 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
 			group.getGroupId(), ddmStructure1.getStructureId(),
 			LocaleUtil.getDefault());
-
-		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
-
-		JournalFolder folder1 = JournalTestUtil.addFolder(
-			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
 
 		JournalTestUtil.addArticleWithXMLContent(
 			group.getGroupId(), folder1.getFolderId(),
@@ -374,6 +371,9 @@ public class JournalFolderServiceTest {
 			group.getGroupId(), JournalArticle.class.getName());
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder2.getFolderId(),
@@ -418,22 +418,20 @@ public class JournalFolderServiceTest {
 		Assert.assertTrue(folder1.isRoot());
 		Assert.assertFalse(folder11.isRoot());
 		Assert.assertFalse(folder111.isRoot());
-
 		Assert.assertEquals(
 			folder1.getFolderId(), folder11.getParentFolderId());
-
 		Assert.assertEquals(
 			folder11.getFolderId(), folder111.getParentFolderId());
 	}
 
 	@Test
 	public void testUpdateFolderRestrictions() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			group.getGroupId());
-
 		JournalFolder folder = JournalTestUtil.addFolder(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			"Test 1");
+
+		String xml = DDMStructureTestUtil.getSampleStructuredContent(
+			"Test article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
@@ -441,9 +439,6 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
 			group.getGroupId(), ddmStructure1.getStructureId(),
 			LocaleUtil.getDefault());
-
-		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
 
 		JournalTestUtil.addArticleWithXMLContent(
 			group.getGroupId(), folder.getFolderId(),
@@ -454,6 +449,9 @@ public class JournalFolderServiceTest {
 			group.getGroupId(), JournalArticle.class.getName());
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
+
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			group.getGroupId());
 
 		try {
 			JournalFolderLocalServiceUtil.updateFolder(
