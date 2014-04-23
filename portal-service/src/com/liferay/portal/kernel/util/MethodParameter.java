@@ -159,9 +159,12 @@ public class MethodParameter {
 
 			if (className.startsWith(StringPool.OPEN_BRACKET)) {
 				try {
-					types[i] = Class.forName(className, true, contextClassLoader);
+					types[i] = Class.forName(
+						className, true, contextClassLoader);
+
 					continue;
-				} catch (ClassNotFoundException ex) {
+				}
+				catch (ClassNotFoundException cnfe) {
 				}
 			}
 

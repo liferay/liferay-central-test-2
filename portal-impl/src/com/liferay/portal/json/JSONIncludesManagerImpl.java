@@ -22,9 +22,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 
-import javax.portlet.PortletURL;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.portlet.PortletURL;
 
 /**
  * @author Igor Spasic
@@ -124,6 +126,18 @@ public class JSONIncludesManagerImpl implements JSONIncludesManager {
 			propertyName.substring(1);
 	}
 
+	private boolean _isExcludedType(Class<?> type) {
+		String typeName = type.getName();
+
+		for (String excludesTypeName : _excludesTypeNames) {
+			if (typeName.startsWith(excludesTypeName)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	private String[] _listToArray(List<String> list) {
 		if (list.isEmpty()) {
 			return _EMPTY_LIST;
@@ -131,17 +145,6 @@ public class JSONIncludesManagerImpl implements JSONIncludesManager {
 		else {
 			return list.toArray(new String[list.size()]);
 		}
-	}
-
-	private boolean _isExcludedType(Class type) {
-		String typeName = type.getName();
-		for (String excludesTypeName : _excludesTypes) {
-			if (typeName.startsWith(excludesTypeName)) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private void _scanFieldsAndMethods(
@@ -157,18 +160,16 @@ public class JSONIncludesManagerImpl implements JSONIncludesManager {
 			}
 
 			if (!include) {
-				Class fieldType = field.getType();
+				Class<?> fieldType = field.getType();
 
 				if (_isExcludedType(fieldType)) {
 					list.add(name);
 				}
 			}
 
-			JSON jsonAnnotation = field.getAnnotation(JSON.class);
+			JSON json = field.getAnnotation(JSON.class);
 
-			if ((jsonAnnotation != null) &&
-				(jsonAnnotation.include() == include)) {
-
+			if ((json != null) && (json.include() == include)) {
 				if (!list.contains(name)) {
 					list.add(name);
 				}
@@ -181,18 +182,16 @@ public class JSONIncludesManagerImpl implements JSONIncludesManager {
 			String name = _getPropertyName(method);
 
 			if (!include) {
-				Class propertyType = method.getReturnType();
+				Class<?> propertyType = method.getReturnType();
 
 				if (_isExcludedType(propertyType)) {
 					list.add(name);
 				}
 			}
 
-			JSON jsonAnnotation = method.getAnnotation(JSON.class);
+			JSON json = method.getAnnotation(JSON.class);
 
-			if ((jsonAnnotation != null) &&
-				(jsonAnnotation.include() == include)) {
-
+			if ((json != null) && (json.include() == include)) {
 				if (name != null) {
 					if (!list.contains(name)) {
 						list.add(name);
@@ -208,12 +207,12 @@ public class JSONIncludesManagerImpl implements JSONIncludesManager {
 
 	private Map<Class<?>, String[]> _excludesMap =
 		new HashMap<Class<?>, String[]>();
-	private String[] _excludesTypes =
-		{ExpandoBridge.class.getName(), InputStream.class.getName(), "javax.",
-			LiferayPortletRequest.class.getName(),
-			LiferayPortletResponse.class.getName(),
-			OutputStream.class.getName(), PortletDisplay.class.getName(),
-			PortletURL.class.getName()};
+	private String[] _excludesTypeNames = {
+		ExpandoBridge.class.getName(), InputStream.class.getName(), "javax.",
+		LiferayPortletRequest.class.getName(),
+		LiferayPortletResponse.class.getName(), OutputStream.class.getName(),
+		PortletDisplay.class.getName(), PortletURL.class.getName()
+	};
 	private Map<Class<?>, String[]> _includesMap =
 		new HashMap<Class<?>, String[]>();
 

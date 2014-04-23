@@ -93,31 +93,24 @@ public class JSONInit {
 		TypeTransformerMap transformersMap) {
 
 		transformersMap.put(
-			InputStream.class, new TransformerWrapper(new NullTransformer()));
-
-		transformersMap.put(
 			File.class, new TransformerWrapper(new FileJSONTransformer()));
-
+		transformersMap.put(
+			InputStream.class, new TransformerWrapper(new NullTransformer()));
 		transformersMap.put(
 			JSONArray.class,
 			new TransformerWrapper(new JSONArrayJSONTransformer()));
-
 		transformersMap.put(
 			JSONObject.class,
 			new TransformerWrapper(new JSONObjectJSONTransformer()));
-
 		transformersMap.put(
 			JSONSerializable.class,
 			new TransformerWrapper(new JSONSerializableJSONTransformer()));
-
 		transformersMap.put(
 			Object.class,
 			new TransformerWrapper(new FlexjsonObjectJSONTransformer()));
-
 		transformersMap.put(
 			RepositoryModel.class,
 			new TransformerWrapper(new RepositoryModelJSONTransformer()));
-
 		transformersMap.put(
 			User.class, new TransformerWrapper(new UserJSONTransformer()));
 	}

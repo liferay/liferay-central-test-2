@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.json.model;
+package com.liferay.portal.json.data;
 
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -26,16 +26,17 @@ import java.io.IOException;
 public class FileData {
 
 	public FileData(File file) {
-		byte[] fileContent;
+		byte[] bytes = null;
 
 		try {
-			fileContent = FileUtil.getBytes(file);
+			bytes = FileUtil.getBytes(file);
 		}
-		catch (IOException ex) {
-			fileContent = null;
+		catch (IOException ioe) {
+			bytes = null;
 		}
 
-		_content = Base64.encode(fileContent);
+		_content = Base64.encode(bytes);
+
 		_name = file.getName();
 		_size = file.length();
 	}
@@ -52,16 +53,16 @@ public class FileData {
 		return _size;
 	}
 
-	public void setContent(String _content) {
-		this._content = _content;
+	public void setContent(String content) {
+		_content = content;
 	}
 
-	public void setName(String _name) {
-		this._name = _name;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public void setSize(long _size) {
-		this._size = _size;
+	public void setSize(long size) {
+		_size = size;
 	}
 
 	private String _content;

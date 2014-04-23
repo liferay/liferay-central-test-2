@@ -14,7 +14,7 @@
 
 package com.liferay.portal.json.transformer;
 
-import com.liferay.portal.json.model.FileData;
+import com.liferay.portal.json.data.FileData;
 
 import java.io.File;
 

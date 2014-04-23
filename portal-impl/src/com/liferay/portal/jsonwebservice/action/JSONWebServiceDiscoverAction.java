@@ -14,7 +14,7 @@
 
 package com.liferay.portal.jsonwebservice.action;
 
-import com.liferay.portal.json.model.FileData;
+import com.liferay.portal.json.data.FileData;
 import com.liferay.portal.json.transformer.FlexjsonBeanAnalyzerTransformer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.javadoc.JavadocManagerUtil;
@@ -164,12 +164,6 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 				Map<String, String> parameterMap =
 					new HashMap<String, String>();
 
-				parameterMap.put("name", methodParameter.getName());
-				parameterMap.put(
-					"type",
-					_formatType(methodParameter.getType(), genericTypes, false)
-				);
-
 				if (javadocMethod != null) {
 					String parameterComment = javadocMethod.getParameterComment(
 						i);
@@ -178,6 +172,12 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 						parameterMap.put("description", parameterComment);
 					}
 				}
+
+				parameterMap.put("name", methodParameter.getName());
+				parameterMap.put(
+					"type",
+					_formatType(
+						methodParameter.getType(), genericTypes, false));
 
 				parametersList.add(parameterMap);
 			}
@@ -189,14 +189,6 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			Map<String, String> returnsMap =
 				new LinkedHashMap<String, String>();
 
-			Method actionMethod = jsonWebServiceActionMapping.getActionMethod();
-
-			returnsMap.put(
-				"type",
-				_formatType(
-					actionMethod.getReturnType(),
-					_getGenericReturnTypes(jsonWebServiceActionMapping), true));
-
 			if (javadocMethod != null) {
 				String returnComment = javadocMethod.getReturnComment();
 
@@ -204,6 +196,14 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 					returnsMap.put("description", returnComment);
 				}
 			}
+
+			Method actionMethod = jsonWebServiceActionMapping.getActionMethod();
+
+			returnsMap.put(
+				"type",
+				_formatType(
+					actionMethod.getReturnType(),
+					_getGenericReturnTypes(jsonWebServiceActionMapping), true));
 
 			jsonWebServiceActionMappingMap.put("returns", returnsMap);
 
@@ -290,13 +290,12 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 	}
 
 	private String _formatType(
-			Class<?> type, Class<?>[] genericTypes, boolean isReturnType) {
+		Class<?> type, Class<?>[] genericTypes, boolean returnType) {
 
 		if (type.isArray()) {
 			Class<?> componentType = type.getComponentType();
 
-			return _formatType(
-				componentType, genericTypes, isReturnType) + "[]";
+			return _formatType(componentType, genericTypes, returnType) + "[]";
 		}
 
 		if (type.isPrimitive()) {
@@ -307,7 +306,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			return "boolean";
 		}
 		else if (type.equals(Class.class)) {
-			if (!isReturnType) {
+			if (!returnType) {
 				return "string";
 			}
 		}
@@ -315,7 +314,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			return "long";
 		}
 		else if (type.equals(File.class)) {
-			if (!isReturnType) {
+			if (!returnType) {
 				return "file";
 			}
 			else {
@@ -379,7 +378,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 				sb.append(StringPool.COMMA);
 			}
 
-			sb.append(_formatType(genericType, null, isReturnType));
+			sb.append(_formatType(genericType, null, returnType));
 		}
 
 		sb.append(StringPool.GREATER_THAN);
