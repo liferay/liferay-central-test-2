@@ -271,7 +271,7 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testMoveFolderWithAnArticleFromTrashInsideToFolder()
+	public void testMoveFolderWithAnArticleInTrashToFolder()
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
@@ -343,7 +343,7 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testMoveFolderWithAnArticleInsideToFolder() throws Exception {
+	public void testMoveFolderWithAnArticleToFolder() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
 
