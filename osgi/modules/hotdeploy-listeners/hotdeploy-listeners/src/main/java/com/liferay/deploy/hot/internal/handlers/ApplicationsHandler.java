@@ -82,6 +82,18 @@ public class ApplicationsHandler {
 		return hotDeployEvent;
 	}
 
+	private ClassLoader _getClassLoader(Bundle bundle) {
+		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
+
+		return bundleWiring.getClassLoader();
+	}
+
+	private void _invokeDeploy(HotDeployEvent hotDeployEvent) {
+		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
+			_invokeDeploy(hotDeployListener, hotDeployEvent);
+		}
+	}
+
 	private void _invokeDeploy(
 		HotDeployListener hotDeployListener, HotDeployEvent hotDeployEvent) {
 
@@ -96,6 +108,12 @@ public class ApplicationsHandler {
 		}
 		finally {
 			PortletClassLoaderUtil.setServletContextName(null);
+		}
+	}
+
+	private void _invokeUndeploy(HotDeployEvent hotDeployEvent) {
+		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
+			_invokeUndeploy(hotDeployListener, hotDeployEvent);
 		}
 	}
 
@@ -116,27 +134,9 @@ public class ApplicationsHandler {
 		}
 	}
 
-	private ClassLoader _getClassLoader(Bundle bundle) {
-		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
-
-		return bundleWiring.getClassLoader();
-	}
-
-	private void _invokeDeploy(HotDeployEvent hotDeployEvent) {
-		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
-			_invokeDeploy(hotDeployListener, hotDeployEvent);
-		}
-	}
-
-	private void _invokeUndeploy(HotDeployEvent hotDeployEvent) {
-		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
-			_invokeUndeploy(hotDeployListener, hotDeployEvent);
-		}
-	}
+	private static Log _log = LogFactoryUtil.getLog(ApplicationsHandler.class);
 
 	private static ApplicationsHandler _instance = new ApplicationsHandler();
-
-	private static Log _log = LogFactoryUtil.getLog(ApplicationsHandler.class);
 
 	private List<HotDeployListener> _hotDeployListeners;
 
