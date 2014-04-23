@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.hibernate.configuration;
+package com.liferay.portal.spring.extender.internal.hibernate.configuration;
 
 import com.liferay.portal.spring.hibernate.PortletHibernateConfiguration;
 

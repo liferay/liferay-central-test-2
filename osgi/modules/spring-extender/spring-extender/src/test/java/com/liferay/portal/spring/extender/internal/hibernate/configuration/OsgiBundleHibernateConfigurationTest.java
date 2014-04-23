@@ -12,10 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.hibernate.configuration;
+package com.liferay.portal.spring.extender.internal.hibernate.configuration;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.liferay.portal.spring.extender.internal.hibernate.configuration.OsgiBundleHibernateConfiguration;
 
 /**
  * @author Miguel Pastor

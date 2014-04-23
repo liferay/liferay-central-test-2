@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.portal.spring.extender.context.event;
+package com.liferay.portal.spring.extender.internal.context.event;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
-import com.liferay.portal.spring.extender.classloader.BundleResolverClassLoader;
+import com.liferay.portal.spring.extender.internal.classloader.BundleResolverClassLoader;
 
 import org.eclipse.gemini.blueprint.context.event.OsgiBundleApplicationContextEvent;
 import org.eclipse.gemini.blueprint.context.event.OsgiBundleApplicationContextListener;
