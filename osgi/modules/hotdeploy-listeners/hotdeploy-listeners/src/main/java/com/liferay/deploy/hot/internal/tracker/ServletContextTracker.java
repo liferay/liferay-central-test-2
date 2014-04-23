@@ -24,16 +24,6 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
 
 /**
- * This Service tracker tries to mimic the behaviour of our current hot deploy
- * mechanism, but removing the dependencies with the Servlet Specs
- *
- * This is not the final solution: the next step will be removing the
- * auto-deploy and hot-deploy mechanisms, so we can decouple "service only"
- * applications from the Servlet API (mainly the ServletContext dependency).
- *
- * The newer code will fit within this module but the #HotDeployBundleListener
- * will be removed from the source code
- *
  * @author Miguel Pastor
  */
 public class ServletContextTracker
