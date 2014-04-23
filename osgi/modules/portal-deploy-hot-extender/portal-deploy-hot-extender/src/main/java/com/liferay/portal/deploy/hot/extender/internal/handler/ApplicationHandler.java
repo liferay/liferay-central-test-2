@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.deploy.hot.extender.internal.handler;
+package com.liferay.portal.deploy.hot.extender.internal.handler;
 
 import com.liferay.portal.deploy.hot.JSONWebServiceHotDeployListener;
 import com.liferay.portal.deploy.hot.MessagingHotDeployListener;

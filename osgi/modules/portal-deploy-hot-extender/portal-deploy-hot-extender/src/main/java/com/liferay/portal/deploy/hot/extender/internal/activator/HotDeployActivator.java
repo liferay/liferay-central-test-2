@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.deploy.hot.extender.internal.activator;
+package com.liferay.portal.deploy.hot.extender.internal.activator;
 
-import com.liferay.deploy.hot.extender.internal.tracker.ServletContextTracker;
+import com.liferay.portal.deploy.hot.extender.internal.tracker.ServletContextTracker;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

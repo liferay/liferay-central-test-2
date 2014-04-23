@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.deploy.hot.extender.internal.tracker;
+package com.liferay.portal.deploy.hot.extender.internal.tracker;
 
-import com.liferay.deploy.hot.extender.internal.handler.ApplicationHandler;
+import com.liferay.portal.deploy.hot.extender.internal.handler.ApplicationHandler;
 
 import javax.servlet.ServletContext;
 
