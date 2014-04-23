@@ -76,6 +76,19 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
+	public void testAddArticle() throws Exception {
+		JournalFolder folder = JournalTestUtil.addFolder(
+			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			"Test Folder");
+
+		JournalArticle article = JournalTestUtil.addArticle(
+			_group.getGroupId(), folder.getFolderId(), "Test Article",
+			"This is a test article.");
+
+		Assert.assertEquals(article.getFolderId(), folder.getFolderId());
+	}
+
+	@Test
 	public void testAddArticleToRestrictedFolder() throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -132,19 +145,6 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testAddArticle() throws Exception {
-		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test Folder");
-
-		JournalArticle article = JournalTestUtil.addArticle(
-			_group.getGroupId(), folder.getFolderId(), "Test Article",
-			"This is a test article.");
-
-		Assert.assertEquals(article.getFolderId(), folder.getFolderId());
-	}
-
-	@Test
 	public void testMoveArticleFromTrashToFolder() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
 			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -159,7 +159,7 @@ public class JournalFolderServiceTest {
 		DDMTemplate ddmTemplate1 = DDMTemplateTestUtil.addTemplate(
 			_group.getGroupId(), ddmStructure1.getStructureId(),
 			LocaleUtil.getDefault());
-			
+
 		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder1.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, xml,
@@ -271,9 +271,7 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testMoveFolderWithAnArticleInTrashToFolder()
-		throws Exception {
-
+	public void testMoveFolderWithAnArticleInTrashToFolder() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
 			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			"Test 1");
