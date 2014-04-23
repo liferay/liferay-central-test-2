@@ -256,7 +256,6 @@ public class VerifyJournal extends VerifyProcess {
 					long groupId = article.getGroupId();
 					String articleId = article.getArticleId();
 					double version = article.getVersion();
-					String structureId = article.getStructureId();
 
 					if (article.getResourcePrimKey() <= 0) {
 						article =
@@ -303,15 +302,6 @@ public class VerifyJournal extends VerifyProcess {
 
 					String newContent = HtmlUtil.replaceMsWordCharacters(
 						content);
-
-					if (Validator.isNotNull(structureId)) {
-						/*JournalStructure structure =
-							JournalStructureLocalServiceUtil.getStructure(
-								groupId, structureId);
-
-						newContent = JournalUtil.removeOldContent(
-							newContent, structure.getXsd());*/
-					}
 
 					if (!content.equals(newContent)) {
 						JournalArticleLocalServiceUtil.updateContent(
