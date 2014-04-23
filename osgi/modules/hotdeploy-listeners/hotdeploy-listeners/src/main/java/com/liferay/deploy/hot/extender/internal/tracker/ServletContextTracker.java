@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.deploy.hot.internal.tracker;
+package com.liferay.deploy.hot.extender.internal.tracker;
 
-import com.liferay.deploy.hot.internal.handlers.ApplicationsHandler;
+import com.liferay.deploy.hot.extender.internal.handler.ApplicationHandler;
 
 import javax.servlet.ServletContext;
 
@@ -45,7 +45,7 @@ public class ServletContextTracker
 
 		ServletContext servletContext = super.addingService(serviceReference);
 
-		_applicationsHandler.registerApplication(bundle, servletContext);
+		_applicationHandler.registerApplication(bundle, servletContext);
 
 		return servletContext;
 	}
@@ -61,12 +61,12 @@ public class ServletContextTracker
 			return;
 		}
 
-		_applicationsHandler.unregisterApplication(bundle, servletContext);
+		_applicationHandler.unregisterApplication(bundle, servletContext);
 
 		super.removedService(serviceReference, servletContext);
 	}
 
-	private ApplicationsHandler _applicationsHandler =
-		ApplicationsHandler.getInstance();
+	private ApplicationHandler _applicationHandler =
+		ApplicationHandler.getInstance();
 
 }

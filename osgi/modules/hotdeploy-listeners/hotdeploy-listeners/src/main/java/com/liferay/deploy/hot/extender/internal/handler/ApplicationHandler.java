@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.deploy.hot.internal.handlers;
+package com.liferay.deploy.hot.extender.internal.handler;
 
 import com.liferay.portal.deploy.hot.JSONWebServiceHotDeployListener;
 import com.liferay.portal.deploy.hot.MessagingHotDeployListener;
@@ -36,9 +36,9 @@ import org.osgi.framework.wiring.BundleWiring;
 /**
  * @author Miguel Pastor
  */
-public class ApplicationsHandler {
+public class ApplicationHandler {
 
-	public static ApplicationsHandler getInstance() {
+	public static ApplicationHandler getInstance() {
 		return _instance;
 	}
 
@@ -60,7 +60,7 @@ public class ApplicationsHandler {
 		_invokeUndeploy(hotDeployEvent);
 	}
 
-	private ApplicationsHandler() {
+	private ApplicationHandler() {
 		_hotDeployListeners = new ArrayList<HotDeployListener>();
 
 		_hotDeployListeners.add(new PluginPackageHotDeployListener());
@@ -134,9 +134,9 @@ public class ApplicationsHandler {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(ApplicationsHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(ApplicationHandler.class);
 
-	private static ApplicationsHandler _instance = new ApplicationsHandler();
+	private static ApplicationHandler _instance = new ApplicationHandler();
 
 	private List<HotDeployListener> _hotDeployListeners;
 
