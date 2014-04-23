@@ -109,7 +109,7 @@ public class JournalFolderServiceTest {
 			serviceContext);
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -151,7 +151,7 @@ public class JournalFolderServiceTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -221,7 +221,7 @@ public class JournalFolderServiceTest {
 			LocaleUtil.getDefault());
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(),
@@ -281,7 +281,7 @@ public class JournalFolderServiceTest {
 			_group.getGroupId(), folder1.getFolderId(), "Test 2");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -348,7 +348,7 @@ public class JournalFolderServiceTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -430,7 +430,7 @@ public class JournalFolderServiceTest {
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
-			"Test article");
+			"Test Article");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
