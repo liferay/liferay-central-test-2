@@ -41,7 +41,6 @@ import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.portlet.journal.service.persistence.JournalArticleActionableDynamicQuery;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -243,96 +242,102 @@ public class VerifyJournal extends VerifyProcess {
 
 	protected void verifyPermissionsAndAssets() throws Exception {
 		ActionableDynamicQuery actionableDynamicQuery =
-			new JournalArticleActionableDynamicQuery() {
+			JournalArticleLocalServiceUtil.getActionableDynamicQuery();
 
-			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
 
-				JournalArticle article = (JournalArticle)object;
+				@Override
+				public void performAction(Object object)
+					throws PortalException, SystemException {
 
-				long groupId = article.getGroupId();
-				String articleId = article.getArticleId();
-				double version = article.getVersion();
-				String structureId = article.getStructureId();
+					JournalArticle article = (JournalArticle)object;
 
-				if (article.getResourcePrimKey() <= 0) {
-					article =
-						JournalArticleLocalServiceUtil.
-							checkArticleResourcePrimKey(
-								groupId, articleId, version);
-				}
+					long groupId = article.getGroupId();
+					String articleId = article.getArticleId();
+					double version = article.getVersion();
+					String structureId = article.getStructureId();
 
-				ResourceLocalServiceUtil.addResources(
-					article.getCompanyId(), 0, 0,
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey(), false, false, false);
-
-				AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey());
-
-				if (assetEntry == null) {
-					try {
-						JournalArticleLocalServiceUtil.updateAsset(
-							article.getUserId(), article, null, null, null);
+					if (article.getResourcePrimKey() <= 0) {
+						article =
+							JournalArticleLocalServiceUtil.
+								checkArticleResourcePrimKey(
+									groupId, articleId, version);
 					}
-					catch (Exception e) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Unable to update asset for article " +
-									article.getId() + ": " + e.getMessage());
+
+					ResourceLocalServiceUtil.addResources(
+						article.getCompanyId(), 0, 0,
+						JournalArticle.class.getName(),
+						article.getResourcePrimKey(), false, false, false);
+
+					AssetEntry assetEntry =
+						AssetEntryLocalServiceUtil.fetchEntry(
+							JournalArticle.class.getName(),
+							article.getResourcePrimKey());
+
+					if (assetEntry == null) {
+						try {
+							JournalArticleLocalServiceUtil.updateAsset(
+								article.getUserId(), article, null, null, null);
+						}
+						catch (Exception e) {
+							if (_log.isWarnEnabled()) {
+								_log.warn(
+									"Unable to update asset for article " +
+										article.getId() + ": " +
+											e.getMessage());
+							}
 						}
 					}
-				}
-				else if ((article.getStatus() ==
-							WorkflowConstants.STATUS_DRAFT) &&
-						 (article.getVersion() ==
-							JournalArticleConstants.VERSION_DEFAULT)) {
+					else if ((article.getStatus() ==
+								WorkflowConstants.STATUS_DRAFT) &&
+							 (article.getVersion() ==
+								JournalArticleConstants.VERSION_DEFAULT)) {
 
-					AssetEntryLocalServiceUtil.updateEntry(
-						assetEntry.getClassName(), assetEntry.getClassPK(),
-						null, assetEntry.isVisible());
-				}
-
-				String content = GetterUtil.getString(article.getContent());
-
-				String newContent = HtmlUtil.replaceMsWordCharacters(content);
-
-				if (Validator.isNotNull(structureId)) {
-					/*JournalStructure structure =
-						JournalStructureLocalServiceUtil.getStructure(
-							groupId, structureId);
-
-					newContent = JournalUtil.removeOldContent(
-						newContent, structure.getXsd());*/
-				}
-
-				if (!content.equals(newContent)) {
-					JournalArticleLocalServiceUtil.updateContent(
-						groupId, articleId, version, newContent);
-				}
-
-				try {
-					JournalArticleLocalServiceUtil.checkStructure(
-						groupId, articleId, version);
-				}
-				catch (NoSuchStructureException nsse) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Removing reference to missing structure for " +
-								"article " + article.getId());
+						AssetEntryLocalServiceUtil.updateEntry(
+							assetEntry.getClassName(), assetEntry.getClassPK(),
+							null, assetEntry.isVisible());
 					}
 
-					article.setStructureId(StringPool.BLANK);
-					article.setTemplateId(StringPool.BLANK);
+					String content = GetterUtil.getString(article.getContent());
 
-					JournalArticleLocalServiceUtil.updateJournalArticle(
-						article);
+					String newContent = HtmlUtil.replaceMsWordCharacters(
+						content);
+
+					if (Validator.isNotNull(structureId)) {
+						/*JournalStructure structure =
+							JournalStructureLocalServiceUtil.getStructure(
+								groupId, structureId);
+
+						newContent = JournalUtil.removeOldContent(
+							newContent, structure.getXsd());*/
+					}
+
+					if (!content.equals(newContent)) {
+						JournalArticleLocalServiceUtil.updateContent(
+							groupId, articleId, version, newContent);
+					}
+
+					try {
+						JournalArticleLocalServiceUtil.checkStructure(
+							groupId, articleId, version);
+					}
+					catch (NoSuchStructureException nsse) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Removing reference to missing structure for " +
+									"article " + article.getId());
+						}
+
+						article.setStructureId(StringPool.BLANK);
+						article.setTemplateId(StringPool.BLANK);
+
+						JournalArticleLocalServiceUtil.updateJournalArticle(
+							article);
+					}
 				}
-			}
 
-		};
+			});
 
 		actionableDynamicQuery.performActions();
 
