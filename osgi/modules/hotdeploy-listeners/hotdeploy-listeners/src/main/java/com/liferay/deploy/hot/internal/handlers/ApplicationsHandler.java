@@ -132,11 +132,10 @@ public class ApplicationsHandler {
 		}
 	}
 
-	private static final ApplicationsHandler _instance =
-		new ApplicationsHandler();
+	private static ApplicationsHandler _instance = new ApplicationsHandler();
 
 	private static Log _log = LogFactoryUtil.getLog(ApplicationsHandler.class);
 
-	private final List<HotDeployListener> _hotDeployListeners;
+	private List<HotDeployListener> _hotDeployListeners;
 
 }
