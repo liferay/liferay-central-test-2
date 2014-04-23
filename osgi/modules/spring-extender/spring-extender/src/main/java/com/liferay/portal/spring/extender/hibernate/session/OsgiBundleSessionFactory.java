@@ -12,11 +12,11 @@
  * details.
  */
 
-package com.liferay.spring.extender.hibernate.session;
+package com.liferay.portal.spring.extender.hibernate.session;
 
 import com.liferay.portal.dao.orm.hibernate.PortletSessionFactoryImpl;
-import com.liferay.spring.extender.classloader.BundleResolverClassLoader;
-import com.liferay.spring.extender.hibernate.configuration.OsgiBundleHibernateConfiguration;
+import com.liferay.portal.spring.extender.classloader.BundleResolverClassLoader;
+import com.liferay.portal.spring.extender.hibernate.configuration.OsgiBundleHibernateConfiguration;
 
 import javax.sql.DataSource;
 

@@ -12,27 +12,25 @@
  * details.
  */
 
-package com.liferay.spring.extender.hibernate.configuration;
+package com.liferay.portal.spring.extender.blueprint;
 
-import org.junit.Assert;
-import org.junit.Test;
+import com.liferay.portal.spring.context.PortletBeanFactoryPostProcessor;
 
 /**
  * @author Miguel Pastor
  */
-public class OsgiBundleHibernateConfigurationTest {
+public class ModuleBeanFactoryPostProcessor
+	extends PortletBeanFactoryPostProcessor {
 
-	@Test
-	public void testConfigurationPaths() {
-		String[] configurationResources =
-			_osgiBundleHibernateConfiguration.getConfigurationResources();
-
-		Assert.assertEquals(1, configurationResources.length);
-		Assert.assertEquals(
-			"META-INF/module-hbm.xml", configurationResources[0]);
+	public ModuleBeanFactoryPostProcessor(ClassLoader classLoader) {
+		_classLoader = classLoader;
 	}
 
-	private OsgiBundleHibernateConfiguration _osgiBundleHibernateConfiguration =
-		new OsgiBundleHibernateConfiguration();
+	@Override
+	protected ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+
+	private ClassLoader _classLoader;
 
 }

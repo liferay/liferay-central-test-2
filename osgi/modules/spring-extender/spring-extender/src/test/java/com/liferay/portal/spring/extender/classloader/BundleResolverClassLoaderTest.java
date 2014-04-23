@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.spring.extender.classloader;
+package com.liferay.portal.spring.extender.classloader;
 
 import java.io.IOException;
 

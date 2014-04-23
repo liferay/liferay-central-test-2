@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.spring.extender.context;
+package com.liferay.portal.spring.extender.context;
 
-import com.liferay.spring.extender.blueprint.ModuleBeanFactoryPostProcessor;
-import com.liferay.spring.extender.classloader.BundleResolverClassLoader;
+import com.liferay.portal.spring.extender.blueprint.ModuleBeanFactoryPostProcessor;
+import com.liferay.portal.spring.extender.classloader.BundleResolverClassLoader;
 
 import java.io.IOException;
 import java.io.InputStream;
