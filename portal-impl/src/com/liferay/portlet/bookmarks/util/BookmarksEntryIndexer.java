@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.persistence.GroupActionableDynamicQuery;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -239,24 +239,26 @@ public class BookmarksEntryIndexer extends BaseIndexer {
 		throws PortalException, SystemException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
-			new GroupActionableDynamicQuery() {
-
-			@Override
-			protected void performAction(Object object)
-				throws PortalException, SystemException {
-
-				Group group = (Group)object;
-
-				long groupId = group.getGroupId();
-				long folderId =
-					BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
-
-				reindexEntries(companyId, groupId, folderId);
-			}
-
-		};
+			GroupLocalServiceUtil.getActionableDynamicQuery();
 
 		actionableDynamicQuery.setCompanyId(companyId);
+		actionableDynamicQuery.setPerformActionMethod(
+			new ActionableDynamicQuery.PerformActionMethod() {
+
+				@Override
+				public void performAction(Object object)
+					throws PortalException, SystemException {
+
+					Group group = (Group)object;
+
+					long groupId = group.getGroupId();
+					long folderId =
+						BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+
+					reindexEntries(companyId, groupId, folderId);
+				}
+
+			});
 
 		actionableDynamicQuery.performActions();
 	}
