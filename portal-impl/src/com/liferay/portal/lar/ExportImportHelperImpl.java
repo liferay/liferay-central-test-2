@@ -773,41 +773,8 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 
 				@Override
 				public void addCriteria(DynamicQuery dynamicQuery) {
-					Disjunction disjunction =
-						RestrictionsFactoryUtil.disjunction();
-
-					Property groupIdProperty = PropertyFactoryUtil.forName(
-						"groupId");
-
-					disjunction.add(groupIdProperty.eq(0L));
-					disjunction.add(
-						groupIdProperty.eq(
-							portletDataContext.getScopeGroupId()));
-
-					dynamicQuery.add(disjunction);
-
-					Property classNameIdProperty = PropertyFactoryUtil.forName(
-						"classNameId");
-
-					dynamicQuery.add(
-						classNameIdProperty.eq(
-							stagedModelType.getClassNameId()));
-
-					if (stagedModelType.getReferrerClassNameId() >= 0) {
-						Property referrerClassNameIdProperty =
-							PropertyFactoryUtil.forName("referrerClassNameId");
-
-						dynamicQuery.add(
-							referrerClassNameIdProperty.eq(
-								stagedModelType.getReferrerClassNameId()));
-					}
-
-					Property typeProperty = PropertyFactoryUtil.forName("type");
-
-					dynamicQuery.add(
-						typeProperty.eq(SystemEventConstants.TYPE_DELETE));
-
-					addCreateDateProperty(portletDataContext, dynamicQuery);
+					doAddCriteria(
+						portletDataContext, stagedModelType, dynamicQuery);
 				}
 
 			});
@@ -1839,6 +1806,42 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		urlParams = HttpUtil.removeParameter(urlParams, "t");
 
 		sb.replace(beginPos + 1, endPos, urlParams);
+	}
+
+	protected void doAddCriteria(
+		PortletDataContext portletDataContext, StagedModelType stagedModelType,
+		DynamicQuery dynamicQuery) {
+
+		Disjunction disjunction = RestrictionsFactoryUtil.disjunction();
+
+		Property groupIdProperty = PropertyFactoryUtil.forName("groupId");
+
+		disjunction.add(groupIdProperty.eq(0L));
+		disjunction.add(
+			groupIdProperty.eq(portletDataContext.getScopeGroupId()));
+
+		dynamicQuery.add(disjunction);
+
+		Property classNameIdProperty = PropertyFactoryUtil.forName(
+			"classNameId");
+
+		dynamicQuery.add(
+			classNameIdProperty.eq(stagedModelType.getClassNameId()));
+
+		if (stagedModelType.getReferrerClassNameId() >= 0) {
+			Property referrerClassNameIdProperty = PropertyFactoryUtil.forName(
+				"referrerClassNameId");
+
+			dynamicQuery.add(
+				referrerClassNameIdProperty.eq(
+					stagedModelType.getReferrerClassNameId()));
+		}
+
+		Property typeProperty = PropertyFactoryUtil.forName("type");
+
+		dynamicQuery.add(typeProperty.eq(SystemEventConstants.TYPE_DELETE));
+
+		addCreateDateProperty(portletDataContext, dynamicQuery);
 	}
 
 	protected Map<String, String[]> getDLReferenceParameters(
