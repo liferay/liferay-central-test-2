@@ -132,7 +132,7 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testContent() throws Exception {
+	public void testAddArticle() throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			"Test Folder");
