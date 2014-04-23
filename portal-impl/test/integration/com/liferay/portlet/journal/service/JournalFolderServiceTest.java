@@ -78,8 +78,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testAddArticle() throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test Folder");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test Folder");
 
 		JournalArticle article = JournalTestUtil.addArticle(
 			_group.getGroupId(), folder.getFolderId(), "Test Article",
@@ -91,8 +91,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testAddArticleToRestrictedFolder() throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -147,8 +147,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testMoveArticleFromTrashToFolder() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
 			"Test article");
@@ -169,8 +169,8 @@ public class JournalFolderServiceTest {
 			TestPropsValues.getUserId(), folder1.getFolderId());
 
 		JournalFolder folder2 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 2");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 2");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -224,13 +224,14 @@ public class JournalFolderServiceTest {
 			"Test article");
 
 		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, xml,
 			ddmStructure1.getStructureKey(), ddmTemplate1.getTemplateKey());
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -273,8 +274,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testMoveFolderWithAnArticleInTrashToFolder() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		JournalFolder folder2 = JournalTestUtil.addFolder(
 			_group.getGroupId(), folder1.getFolderId(), "Test 2");
@@ -298,8 +299,8 @@ public class JournalFolderServiceTest {
 			TestPropsValues.getUserId(), folder1.getFolderId());
 
 		JournalFolder folder3 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 3");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 3");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -343,8 +344,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testMoveFolderWithAnArticleToFolder() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
 			"Test article");
@@ -362,8 +363,8 @@ public class JournalFolderServiceTest {
 			ddmStructure1.getStructureKey(), ddmTemplate1.getTemplateKey());
 
 		JournalFolder folder2 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 2");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 2");
 
 		DDMStructure ddmStructure2 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
@@ -404,8 +405,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testSubfolders() throws Exception {
 		JournalFolder folder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		JournalFolder folder11 = JournalTestUtil.addFolder(
 			_group.getGroupId(), folder1.getFolderId(), "Test 1.1");
@@ -425,8 +426,8 @@ public class JournalFolderServiceTest {
 	@Test
 	public void testUpdateFolderRestrictions() throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			"Test 1");
+			_group.getGroupId(),
+			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Test 1");
 
 		String xml = DDMStructureTestUtil.getSampleStructuredContent(
 			"Test article");
