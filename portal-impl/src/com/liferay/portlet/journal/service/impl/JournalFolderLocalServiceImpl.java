@@ -703,7 +703,7 @@ public class JournalFolderLocalServiceImpl
 		JournalFolder folder = null;
 
 		if (folderId > JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID) {
-			folder = updateFolderAndDDMStructures(
+			folder = doUpdateFolder(
 				userId, folderId, parentFolderId, name, description,
 				ddmStructureIds, overrideDDMStructures, mergeWithParentFolder,
 				serviceContext);
@@ -1147,7 +1147,7 @@ public class JournalFolderLocalServiceImpl
 		}
 	}
 
-	protected JournalFolder updateFolderAndDDMStructures(
+	protected JournalFolder doUpdateFolder(
 			long userId, long folderId, long parentFolderId, String name,
 			String description, long[] ddmStructureIds,
 			boolean overrideDDMStructures, boolean mergeWithParentFolder,
