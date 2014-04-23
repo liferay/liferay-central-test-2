@@ -116,12 +116,12 @@ public class JournalFolderServiceTest {
 		catch (InvalidDDMStructureException idse) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder.getFolderId(), "Test 1.1");
 
 		try {
 			JournalTestUtil.addArticleWithXMLContent(
-				group.getGroupId(), subFolder.getFolderId(),
+				group.getGroupId(), subfolder.getFolderId(),
 				JournalArticleConstants.CLASSNAME_ID_DEFAULT, xml,
 				ddmStructure2.getStructureKey(), ddmTemplate2.getTemplateKey());
 
@@ -198,12 +198,12 @@ public class JournalFolderServiceTest {
 		catch (RestoreEntryException ree) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder2.getFolderId(), "Test 2.1");
 
 		try {
 			trashHandler.checkRestorableEntry(
-				article.getResourcePrimKey(), subFolder.getFolderId(), null);
+				article.getResourcePrimKey(), subfolder.getFolderId(), null);
 
 			Assert.fail();
 		}
@@ -256,13 +256,13 @@ public class JournalFolderServiceTest {
 		catch (InvalidDDMStructureException idse) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder.getFolderId(), "Test 1.1");
 
 		try {
 			JournalArticleLocalServiceUtil.moveArticle(
 				group.getGroupId(), article.getArticleId(),
-				subFolder.getFolderId());
+				subfolder.getFolderId());
 
 			Assert.fail();
 		}
@@ -329,12 +329,12 @@ public class JournalFolderServiceTest {
 		catch (RestoreEntryException ree) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder3.getFolderId(), "Test 3.1");
 
 		try {
 			trashHandler.checkRestorableEntry(
-				folder2.getFolderId(), subFolder.getFolderId(), null);
+				folder2.getFolderId(), subfolder.getFolderId(), null);
 
 			Assert.fail();
 		}
@@ -390,12 +390,12 @@ public class JournalFolderServiceTest {
 		catch (InvalidDDMStructureException idse) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder2.getFolderId(), "Test 2.1");
 
 		try {
 			JournalFolderLocalServiceUtil.moveFolder(
-				folder1.getFolderId(), subFolder.getFolderId(), serviceContext);
+				folder1.getFolderId(), subfolder.getFolderId(), serviceContext);
 
 			Assert.fail();
 		}
@@ -467,11 +467,11 @@ public class JournalFolderServiceTest {
 		catch (InvalidDDMStructureException idse) {
 		}
 
-		JournalFolder subFolder = JournalTestUtil.addFolder(
+		JournalFolder subfolder = JournalTestUtil.addFolder(
 			group.getGroupId(), folder.getFolderId(), "Test 1.1");
 
 		JournalTestUtil.addArticleWithXMLContent(
-			group.getGroupId(), subFolder.getFolderId(),
+			group.getGroupId(), subfolder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, xml,
 			ddmStructure1.getStructureKey(), ddmTemplate1.getTemplateKey());
 
