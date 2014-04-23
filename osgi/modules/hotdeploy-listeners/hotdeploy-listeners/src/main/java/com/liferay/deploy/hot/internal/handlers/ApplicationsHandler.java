@@ -74,15 +74,15 @@ public class ApplicationsHandler {
 	private HotDeployEvent _buildHotDeployEvent(
 		Bundle bundle, ServletContext servletContext) {
 
-		ClassLoader bundleClassLoader = _getBundleClassLoader(bundle);
+		ClassLoader classLoader = _getClassLoader(bundle);
 
 		HotDeployEvent hotDeployEvent = new HotDeployEvent(
-			servletContext, bundleClassLoader);
+			servletContext, classLoader);
 
 		return hotDeployEvent;
 	}
 
-	private void _executeDeploy(
+	private void _invokeDeploy(
 		HotDeployListener hotDeployListener, HotDeployEvent hotDeployEvent) {
 
 		PortletClassLoaderUtil.setServletContextName(
@@ -99,7 +99,7 @@ public class ApplicationsHandler {
 		}
 	}
 
-	private void _executeUnDeploy(
+	private void _invokeUndeploy(
 		HotDeployListener hotDeployListener, HotDeployEvent hotDeployEvent) {
 
 		PortletClassLoaderUtil.setServletContextName(
@@ -116,7 +116,7 @@ public class ApplicationsHandler {
 		}
 	}
 
-	private ClassLoader _getBundleClassLoader(Bundle bundle) {
+	private ClassLoader _getClassLoader(Bundle bundle) {
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
 		return bundleWiring.getClassLoader();
@@ -124,13 +124,13 @@ public class ApplicationsHandler {
 
 	private void _invokeDeploy(HotDeployEvent hotDeployEvent) {
 		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
-			_executeDeploy(hotDeployListener, hotDeployEvent);
+			_invokeDeploy(hotDeployListener, hotDeployEvent);
 		}
 	}
 
 	private void _invokeUndeploy(HotDeployEvent hotDeployEvent) {
 		for (HotDeployListener hotDeployListener : _hotDeployListeners) {
-			_executeUnDeploy(hotDeployListener, hotDeployEvent);
+			_invokeUndeploy(hotDeployListener, hotDeployEvent);
 		}
 	}
 
