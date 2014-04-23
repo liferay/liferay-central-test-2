@@ -784,20 +784,19 @@ public class JournalFolderLocalServiceImpl
 		JournalFolder parentFolder = journalFolderLocalService.fetchFolder(
 			parentFolderId);
 
-		List<DDMStructure> journalFolderDDMStructures =
+		List<DDMStructure> folderDDMStructures =
 			ddmStructureLocalService.getJournalFolderStructures(
 				PortalUtil.getCurrentAndAncestorSiteGroupIds(
 					parentFolder.getGroupId()),
 				parentFolder.getFolderId(),
 				!parentFolder.isOverrideDDMStructures());
 
-		long[] ddmStructureIds = new long[journalFolderDDMStructures.size()];
+		long[] ddmStructureIds = new long[folderDDMStructures.size()];
 
-		for (int i = 0; i < journalFolderDDMStructures.size(); i++) {
-			DDMStructure journalFolderDDMStructure =
-				journalFolderDDMStructures.get(i);
+		for (int i = 0; i < folderDDMStructures.size(); i++) {
+			DDMStructure folderDDMStructure = folderDDMStructures.get(i);
 
-			ddmStructureIds[i] = journalFolderDDMStructure.getStructureId();
+			ddmStructureIds[i] = folderDDMStructure.getStructureId();
 		}
 
 		validateArticleDDMStructures(folderId, ddmStructureIds);

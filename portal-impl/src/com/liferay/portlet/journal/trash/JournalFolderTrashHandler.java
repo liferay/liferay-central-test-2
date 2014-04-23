@@ -281,7 +281,7 @@ public class JournalFolderTrashHandler extends JournalBaseTrashHandler {
 			JournalFolderLocalServiceUtil.validateFolderDDMStructures(
 				classPK, containerModelId);
 		}
-		catch (InvalidDDMStructureException idse) {
+		catch (InvalidDDMStructureException iddmse) {
 			throw new RestoreEntryException(
 				RestoreEntryException.INVALID_CONTAINER);
 		}
