@@ -18,6 +18,7 @@
 
 <%
 DLEntryListDisplayContext dlEntriesListDisplayContext = new DLEntryListDisplayContext(request, dlPortletInstanceSettings);
+
 DLActionsDisplayContext dlActionsDisplayContext = dlEntriesListDisplayContext.getDLActionsDisplayContext();
 
 String topLink = ParamUtil.getString(request, "topLink", "home");
