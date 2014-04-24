@@ -148,7 +148,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 				ReferenceRegistry.registerReference(${entity.name}${sessionTypeName}ServiceUtil.class, "_service");
 			}
 
-				return _service;
+			return _service;
 		</#if>
 	}
 

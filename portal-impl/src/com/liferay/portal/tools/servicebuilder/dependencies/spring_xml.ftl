@@ -24,6 +24,7 @@
 			</bean>
 		<#else>
 			<bean id="${packagePath}.service.persistence.${entity.name}Persistence" class="${entity.getPersistenceClass()}" parent="basePersistence" />
+
 			<#if osgiModule>
 				<osgi:service ref="${packagePath}.service.persistence.${entity.name}Persistence" interface="${packagePath}.service.persistence.${entity.name}Persistence" />
 			</#if>
@@ -43,6 +44,7 @@
 			</bean>
 		<#else>
 			<bean id="${packagePath}.service.persistence.${entity.name}Finder" class="${entity.finderClass}" parent="basePersistence" />
+
 			<#if osgiModule>
 				<osgi:service ref="${packagePath}.service.persistence.${entity.name}Finder" interface="${packagePath}.service.persistence.${entity.name}Finder" />
 			</#if>
