@@ -234,8 +234,8 @@ AUI.add(
 					instance._backgroundColorPicker = new A.ColorPickerPopover(
 						{
 							constrain: true,
-							trigger: backgroundColor,
-							plugins: [Liferay.WidgetZIndex]
+							plugins: [Liferay.WidgetZIndex],
+							trigger: backgroundColor
 						}
 					).render(instance._currentPopup.get(BOUNDING_BOX));
 				}
@@ -1947,8 +1947,8 @@ AUI.add(
 					instance._fontColorPicker = new A.ColorPickerPopover(
 						{
 							constrain: true,
-							trigger: fontColor,
-							plugins: [Liferay.WidgetZIndex]
+							plugins: [Liferay.WidgetZIndex],
+							trigger: fontColor
 						}
 					).render(instance._currentPopup.get(BOUNDING_BOX));
 				}
