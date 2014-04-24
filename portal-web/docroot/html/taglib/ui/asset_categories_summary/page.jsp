@@ -32,7 +32,6 @@ for (AssetVocabulary vocabulary : vocabularies) {
 
 	<c:if test="<%= !curCategories.isEmpty() %>">
 		<span class="taglib-asset-categories-summary">
-
 			<%= AssetVocabularyUtil.getUnambiguousVocabularyTitle(vocabularies, vocabulary, themeDisplay.getSiteGroupId(), themeDisplay.getLocale()) %>:
 
 			<c:choose>

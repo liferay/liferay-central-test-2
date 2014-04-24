@@ -57,30 +57,28 @@ public class AssetVocabularyUtilTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		long userId = TestPropsValues.getUserId();
-
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
-			_group.getGroupId(), userId);
-
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
 		titleMap.put(_LOCALE, _TITLE);
 
-		_vocabulary =
-			AssetVocabularyLocalServiceUtil.addVocabulary(
-				userId, _TITLE, titleMap, null, null, serviceContext);
+		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			_group.getGroupId(), TestPropsValues.getUserId());
+
+		_vocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
+			TestPropsValues.getUserId(), _TITLE, titleMap, null, null,
+			serviceContext);
 
 		Company company = CompanyLocalServiceUtil.getCompany(
 			_group.getCompanyId());
 
-		_globalGroup = company.getGroup();
+		_companyGroup = company.getGroup();
 
 		serviceContext = ServiceTestUtil.getServiceContext(
-			_globalGroup.getGroupId(), userId);
+			_companyGroup.getGroupId(), TestPropsValues.getUserId());
 
-		_globalVocabulary =
-			AssetVocabularyLocalServiceUtil.addVocabulary(
-				userId, _TITLE, titleMap, null, null, serviceContext);
+		_companyVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
+			TestPropsValues.getUserId(), _TITLE, titleMap, null, null,
+			serviceContext);
 	}
 
 	@Test
@@ -89,16 +87,16 @@ public class AssetVocabularyUtilTest {
 
 		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
-		vocabularies.add(_globalVocabulary);
+		vocabularies.add(_companyVocabulary);
 		vocabularies.add(_vocabulary);
 
-		String unambiguousGlobalVocabularyTitle =
+		String unambiguousCompanyVocabularyTitle =
 			AssetVocabularyUtil.getUnambiguousVocabularyTitle(
-				vocabularies, _globalVocabulary, _group.getGroupId(), _LOCALE);
+				vocabularies, _companyVocabulary, _group.getGroupId(), _LOCALE);
 
 		Assert.assertTrue(
-			unambiguousGlobalVocabularyTitle.contains(
-				_globalGroup.getDescriptiveName(_LOCALE)));
+			unambiguousCompanyVocabularyTitle.contains(
+				_companyGroup.getDescriptiveName(_LOCALE)));
 
 		String unambiguousVocabularyTitle =
 			AssetVocabularyUtil.getUnambiguousVocabularyTitle(
@@ -113,21 +111,21 @@ public class AssetVocabularyUtilTest {
 
 		List<AssetVocabulary> vocabularies = new ArrayList<AssetVocabulary>();
 
-		vocabularies.add(_globalVocabulary);
+		vocabularies.add(_companyVocabulary);
 
-		String unambiguousGlobalVocabularyTitle =
+		String unambiguousCompanyVocabularyTitle =
 			AssetVocabularyUtil.getUnambiguousVocabularyTitle(
-				vocabularies, _globalVocabulary, _group.getGroupId(), _LOCALE);
+				vocabularies, _companyVocabulary, _group.getGroupId(), _LOCALE);
 
-		Assert.assertEquals(_TITLE, unambiguousGlobalVocabularyTitle);
+		Assert.assertEquals(_TITLE, unambiguousCompanyVocabularyTitle);
 	}
 
 	private static final Locale _LOCALE = LocaleUtil.US;
 
 	private static final String _TITLE = "Test Vocabulary";
 
-	private Group _globalGroup;
-	private AssetVocabulary _globalVocabulary;
+	private Group _companyGroup;
+	private AssetVocabulary _companyVocabulary;
 	private Group _group;
 	private AssetVocabulary _vocabulary;
 
