@@ -73,11 +73,11 @@ public class FlexjsonObjectJSONTransformer
 			return StringPool.BLANK;
 		}
 
-		String mergedPath = StringUtil.merge(paths, StringPool.PERIOD);
+		String pathString = StringUtil.merge(paths, StringPool.PERIOD);
 
-		mergedPath = mergedPath.concat(StringPool.PERIOD);
+		pathString = pathString.concat(StringPool.PERIOD);
 
-		return mergedPath;
+		return pathString;
 	}
 
 	private void _exclude(
