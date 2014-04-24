@@ -82,7 +82,7 @@ public class ClusterLinkPortalCacheClusterListener extends BaseMessageListener {
 			PortalCacheClusterEventType portalCacheClusterEventType =
 				portalCacheClusterEvent.getEventType();
 
-			boolean isReplicate = ClusterReplicationThreadLocal.isReplicate();
+			boolean replicate = ClusterReplicationThreadLocal.isReplicate();
 
 			ClusterReplicationThreadLocal.setReplicate(false);
 
@@ -114,7 +114,7 @@ public class ClusterLinkPortalCacheClusterListener extends BaseMessageListener {
 				}
 			}
 			finally {
-				ClusterReplicationThreadLocal.setReplicate(isReplicate);
+				ClusterReplicationThreadLocal.setReplicate(replicate);
 			}
 		}
 	}
