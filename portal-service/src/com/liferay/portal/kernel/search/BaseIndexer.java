@@ -643,7 +643,6 @@ public abstract class BaseIndexer implements Indexer {
 	}
 
 	protected void addDefaultSelectedFieldNames(SearchContext searchContext) {
-
 		QueryConfig queryConfig = searchContext.getQueryConfig();
 
 		Set<String> selectedFieldNames = null;
