@@ -18,6 +18,7 @@
 
 <%
 DLEntryListDisplayContext dlEntriesListDisplayContext = new DLEntryListDisplayContext(request, dlPortletInstanceSettings);
+
 DLActionsDisplayContext dlActionsDisplayContext = dlEntriesListDisplayContext.getDLActionsDisplayContext();
 
 String strutsAction = ParamUtil.getString(request, "struts_action");
