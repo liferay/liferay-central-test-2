@@ -477,10 +477,9 @@ public class LayoutImporter {
 
 		// Layouts
 
+		Set<Layout> modifiedLayouts = new HashSet<Layout>();
 		List<Layout> previousLayouts = LayoutUtil.findByG_P(
 			groupId, privateLayout);
-
-		Set<Layout> modifiedLayouts = new HashSet<Layout>();
 
 		// Remove layouts that were deleted from the layout set prototype
 
@@ -705,7 +704,8 @@ public class LayoutImporter {
 
 		GroupLocalServiceUtil.updateSite(groupId, true);
 
-		// Last merge time is updated only if there aren't any modified layouts
+		// Last merge time is updated only if there aren not any modified
+		// layouts
 
 		if (layoutsImportMode.equals(
 				PortletDataHandlerKeys.
@@ -744,7 +744,7 @@ public class LayoutImporter {
 					Sites.MERGE_FAIL_FRIENDLY_URL_LAYOUTS);
 
 			if (Validator.isNull(mergeFailFriendlyURLLayouts) &&
-				(modifiedLayouts.size() == 0)) {
+				modifiedLayouts.isEmpty()) {
 
 				settingsProperties.setProperty(
 					Sites.LAST_MERGE_TIME, String.valueOf(lastMergeTime));
