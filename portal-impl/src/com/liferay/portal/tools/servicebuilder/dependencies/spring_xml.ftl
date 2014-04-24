@@ -44,7 +44,7 @@
 		<#else>
 			<bean id="${packagePath}.service.persistence.${entity.name}Finder" class="${entity.finderClass}" parent="basePersistence" />
 			<#if osgiModule>
-				<osgi:service ref="${packagePath}.service.persistence.${entity.name}Finder" interface="${packagePath}.service.persistence.${entity.name}Persistence" />
+				<osgi:service ref="${packagePath}.service.persistence.${entity.name}Finder" interface="${packagePath}.service.persistence.${entity.name}Finder" />
 			</#if>
 		</#if>
 	</#if>
