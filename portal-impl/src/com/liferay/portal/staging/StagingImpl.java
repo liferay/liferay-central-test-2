@@ -1705,9 +1705,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void updateLastImportSettings(
-			Element layoutElement, Layout layout,
-			PortletDataContext portletDataContext)
-		throws PortalException, SystemException {
+		Element layoutElement, Layout layout,
+		PortletDataContext portletDataContext) {
 
 		Map<String, String[]> parameterMap =
 			portletDataContext.getParameterMap();
@@ -1794,9 +1793,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void updateLastPublishDate(
-			String portletId, PortletPreferences portletPreferences,
-			Date lastPublishDate)
-		throws PortalException, SystemException {
+		String portletId, PortletPreferences portletPreferences,
+		Date lastPublishDate) {
 
 		if (lastPublishDate == null) {
 			lastPublishDate = new Date();
