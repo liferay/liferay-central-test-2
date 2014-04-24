@@ -76,7 +76,8 @@ public class ResourceBundleEnumerationTest {
 		Assert.assertTrue(resourceBundleEnumeration.hasMoreElements());
 		Assert.assertEquals("key1", resourceBundleEnumeration.nextElement());
 		Assert.assertEquals(
-			"key2", ReflectionTestUtil.invokeBridge(
+			"key2",
+			ReflectionTestUtil.invokeBridge(
 				resourceBundleEnumeration, "nextElement", new Class<?>[0]));
 
 		try {

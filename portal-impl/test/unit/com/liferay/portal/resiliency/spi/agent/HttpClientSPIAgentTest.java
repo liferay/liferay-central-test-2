@@ -1155,7 +1155,8 @@ public class HttpClientSPIAgentTest {
 				unbindSocket, "impl");
 
 			ReflectionTestUtil.setFieldValue(
-				socketImpl, "cmdsock", new Socket() {
+				socketImpl, "cmdsock",
+				new Socket() {
 
 					@Override
 					public synchronized void close() throws IOException {
