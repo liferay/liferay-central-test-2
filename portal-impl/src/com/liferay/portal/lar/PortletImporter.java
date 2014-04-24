@@ -387,24 +387,28 @@ public class PortletImporter {
 
 		portletDataContext.setManifestSummary(manifestSummary);
 
+		Element rootElement = portletDataContext.getImportDataRootElement();
+
+		Element headerElement = rootElement.element("header");
+
 		// Company id
 
 		long sourceCompanyId = GetterUtil.getLong(
-			_headerElement.attributeValue("company-id"));
+			headerElement.attributeValue("company-id"));
 
 		portletDataContext.setSourceCompanyId(sourceCompanyId);
 
 		// Company group id
 
 		long sourceCompanyGroupId = GetterUtil.getLong(
-			_headerElement.attributeValue("company-group-id"));
+			headerElement.attributeValue("company-group-id"));
 
 		portletDataContext.setSourceCompanyGroupId(sourceCompanyGroupId);
 
 		// Group id
 
 		long sourceGroupId = GetterUtil.getLong(
-			_headerElement.attributeValue("group-id"));
+			headerElement.attributeValue("group-id"));
 
 		portletDataContext.setSourceGroupId(sourceGroupId);
 
@@ -419,7 +423,7 @@ public class PortletImporter {
 		// User personal site group id
 
 		long sourceUserPersonalSiteGroupId = GetterUtil.getLong(
-			_headerElement.attributeValue("user-personal-site-group-id"));
+			headerElement.attributeValue("user-personal-site-group-id"));
 
 		portletDataContext.setSourceUserPersonalSiteGroupId(
 			sourceUserPersonalSiteGroupId);
@@ -430,7 +434,7 @@ public class PortletImporter {
 		Element portletElement = null;
 
 		try {
-			portletElement = _rootElement.element("portlet");
+			portletElement = rootElement.element("portlet");
 
 			Document portletDocument = SAXReaderUtil.read(
 				portletDataContext.getZipEntryAsString(
@@ -1080,7 +1084,7 @@ public class PortletImporter {
 	protected void readXML(PortletDataContext portletDataContext)
 		throws Exception {
 
-		if ((_rootElement != null) && (_headerElement != null)) {
+		if (portletDataContext.getImportDataRootElement() != null) {
 			return;
 		}
 
@@ -1093,15 +1097,12 @@ public class PortletImporter {
 		try {
 			Document document = SAXReaderUtil.read(xml);
 
-			_rootElement = document.getRootElement();
-
-			portletDataContext.setImportDataRootElement(_rootElement);
+			portletDataContext.setImportDataRootElement(
+				document.getRootElement());
 		}
 		catch (Exception e) {
 			throw new LARFileException(e);
 		}
-
-		_headerElement = _rootElement.element("header");
 	}
 
 	protected void resetPortletScope(
@@ -1191,8 +1192,12 @@ public class PortletImporter {
 
 		int buildNumber = ReleaseInfo.getBuildNumber();
 
+		Element rootElement = portletDataContext.getImportDataRootElement();
+
+		Element headerElement = rootElement.element("header");
+
 		int importBuildNumber = GetterUtil.getInteger(
-			_headerElement.attributeValue("build-number"));
+			headerElement.attributeValue("build-number"));
 
 		if (buildNumber != importBuildNumber) {
 			throw new LayoutImportException(
@@ -1202,7 +1207,7 @@ public class PortletImporter {
 
 		// Type
 
-		String larType = _headerElement.attributeValue("type");
+		String larType = headerElement.attributeValue("type");
 
 		if (!larType.equals("portlet")) {
 			throw new LARTypeException(larType);
@@ -1210,7 +1215,7 @@ public class PortletImporter {
 
 		// Portlet compatibility
 
-		String rootPortletId = _headerElement.attributeValue("root-portlet-id");
+		String rootPortletId = headerElement.attributeValue("root-portlet-id");
 
 		if (!PortletConstants.getRootPortletId(portletId).equals(
 				rootPortletId)) {
@@ -1229,7 +1234,7 @@ public class PortletImporter {
 		if (portletDataHandler.isDataLocalized()) {
 			Locale[] sourceAvailableLocales = LocaleUtil.fromLanguageIds(
 				StringUtil.split(
-					_headerElement.attributeValue("available-locales")));
+					headerElement.attributeValue("available-locales")));
 
 			Locale[] targetAvailableLocales = LanguageUtil.getAvailableLocales(
 				PortalUtil.getSiteGroupId(
@@ -1258,8 +1263,6 @@ public class PortletImporter {
 
 	private DeletionSystemEventImporter _deletionSystemEventImporter =
 		new DeletionSystemEventImporter();
-	private Element _headerElement;
 	private PermissionImporter _permissionImporter = new PermissionImporter();
-	private Element _rootElement;
 
 }
