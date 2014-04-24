@@ -97,7 +97,7 @@ public class SettingsConfigurationAction
 			ActionResponse actionResponse)
 		throws Exception {
 
-		_updateMultiValuedKeys(actionRequest);
+		updateMultiValuedKeys(actionRequest);
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
@@ -305,6 +305,19 @@ public class SettingsConfigurationAction
 		_parameterNamePrefix = parameterNamePrefix;
 	}
 
+	protected void updateMultiValuedKeys(ActionRequest actionRequest) {
+		for (String multiValuedKey : _multiValuedKeys) {
+			String multiValuedValue = getParameter(
+				actionRequest, multiValuedKey);
+	
+			if (multiValuedValue != null) {
+				setPreference(
+					actionRequest, multiValuedKey,
+					StringUtil.split(multiValuedValue));
+			}
+		}
+	}
+
 	protected void validateEmail(
 		ActionRequest actionRequest, String emailParam) {
 
@@ -343,19 +356,6 @@ public class SettingsConfigurationAction
 				 !Validator.isVariableTerm(emailFromAddress)) {
 
 			SessionErrors.add(actionRequest, "emailFromAddress");
-		}
-	}
-
-	private void _updateMultiValuedKeys(ActionRequest actionRequest) {
-		for (String multiValuedKey : _multiValuedKeys) {
-			String multiValuedValue = getParameter(
-				actionRequest, multiValuedKey);
-
-			if (multiValuedValue != null) {
-				setPreference(
-					actionRequest, multiValuedKey,
-					StringUtil.split(multiValuedValue));
-			}
 		}
 	}
 
