@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-DLEntryListDisplayContext dlEntriesListDisplayContext = new DLEntryListDisplayContext(request, dlPortletInstanceSettings);
-
 String navigation = ParamUtil.getString(request, "navigation", "home");
 
 Folder folder = (Folder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
@@ -43,6 +41,8 @@ String tagName = ParamUtil.getString(request, "tag");
 boolean useAssetEntryQuery = (categoryId > 0) || Validator.isNotNull(tagName);
 
 String displayStyle = ParamUtil.getString(request, "displayStyle");
+
+DLEntryListDisplayContext dlEntriesListDisplayContext = new DLEntryListDisplayContext(request, dlPortletInstanceSettings);
 
 String[] displayViews = dlPortletInstanceSettings.getDisplayViews();
 
