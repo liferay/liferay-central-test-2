@@ -18,6 +18,7 @@
 
 <%
 dlPortletInstanceSettings = DLUtil.getDLPortletInstanceSettings(layout, portletId, request);
+
 IGConfigurationDisplayContext igConfigurationDisplayContext = new IGConfigurationDisplayContext(request, dlPortletInstanceSettings);
 %>
 
