@@ -35,8 +35,8 @@ public class DLActionsDisplayContext {
 		HttpServletRequest request,
 		DLPortletInstanceSettings dlPortletInstanceSettings) {
 
-		_dlPortletInstanceSettings = dlPortletInstanceSettings;
 		_request = request;
+		_dlPortletInstanceSettings = dlPortletInstanceSettings;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
