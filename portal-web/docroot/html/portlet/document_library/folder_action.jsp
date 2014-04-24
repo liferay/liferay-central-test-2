@@ -96,9 +96,9 @@ else {
 	showPermissionsURL = DLPermission.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS);
 }
 
-DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
-
 boolean showWhenSingleIcon = false;
+
+DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
 
 if ((row == null) || dlActionsDisplayContext.isShowWhenSingleIconActionButton()) {
 	showWhenSingleIcon = true;
