@@ -32,8 +32,6 @@ import org.osgi.framework.Bundle;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-import com.liferay.portal.spring.extender.internal.classloader.BundleResolverClassLoader;
-
 /**
  * @author Miguel Pastor
  */
