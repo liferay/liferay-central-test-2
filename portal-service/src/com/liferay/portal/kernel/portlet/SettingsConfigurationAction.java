@@ -309,7 +309,7 @@ public class SettingsConfigurationAction
 		for (String multiValuedKey : _multiValuedKeys) {
 			String multiValuedValue = getParameter(
 				actionRequest, multiValuedKey);
-	
+
 			if (multiValuedValue != null) {
 				setPreference(
 					actionRequest, multiValuedKey,
