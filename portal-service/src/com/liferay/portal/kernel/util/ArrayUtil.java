@@ -1882,6 +1882,33 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static String[] toStringArray(Collection<String> collection) {
+		String[] newArray = new String[collection.size()];
+
+		if (collection instanceof List) {
+			List<String> list = (List<String>)collection;
+
+			for (int i = 0; i < list.size(); i++) {
+				String value = list.get(i);
+
+				newArray[i] = String.valueOf(value);
+			}
+		}
+		else {
+			int i = 0;
+
+			Iterator<String> iterator = collection.iterator();
+
+			while (iterator.hasNext()) {
+				String value = iterator.next();
+
+				newArray[i++] = String.valueOf(value);
+			}
+		}
+
+		return newArray;
+	}
+
 	public static String[] toStringArray(Date[] array, DateFormat dateFormat) {
 		String[] newArray = new String[array.length];
 

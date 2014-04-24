@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.documentlibrary;
 
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.settings.BaseServiceSettings;
 import com.liferay.portal.settings.FallbackKeys;
 import com.liferay.portal.settings.Settings;
@@ -82,7 +82,7 @@ public class DLPortletInstanceSettings extends BaseServiceSettings {
 	}
 
 	public String[] getMimeTypes() {
-		return typedSettings.getValues("mimeTypes", _defaultMimeTypes);
+		return typedSettings.getValues("mimeTypes", _MIME_TYPES_DEFAULT);
 	}
 
 	public long getRootFolderId() {
@@ -110,8 +110,8 @@ public class DLPortletInstanceSettings extends BaseServiceSettings {
 		return typedSettings.getBooleanValue("showTabs");
 	}
 
-	private static final String[] _defaultMimeTypes =
-		DLUtil.getAllMediaGalleryMimeTypes().toArray(StringPool.EMPTY_ARRAY);
+	private static final String[] _MIME_TYPES_DEFAULT = ArrayUtil.toStringArray(
+		DLUtil.getAllMediaGalleryMimeTypes());
 
 	private static FallbackKeys _fallbackKeys = new FallbackKeys();
 
