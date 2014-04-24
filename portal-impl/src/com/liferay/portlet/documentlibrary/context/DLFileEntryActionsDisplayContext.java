@@ -61,8 +61,12 @@ public class DLFileEntryActionsDisplayContext {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		_portletDisplay = themeDisplay.getPortletDisplay();
 		_companyId = themeDisplay.getCompanyId();
+		_dlActionsDisplayContext = new DLActionsDisplayContext(
+			request, dlPortletInstanceSettings);
+		_dlFileEntryActionsDisplayContextHelper =
+			new DLFileEntryActionsDisplayContextHelper(
+				themeDisplay.getPermissionChecker(), fileEntry, fileVersion);
 
 		_fileEntryTypeId = ParamUtil.getLong(request, "fileEntryTypeId", -1);
 
@@ -76,14 +80,8 @@ public class DLFileEntryActionsDisplayContext {
 
 		_folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 		_permissionChecker = themeDisplay.getPermissionChecker();
+		_portletDisplay = themeDisplay.getPortletDisplay();
 		_scopeGroupId = themeDisplay.getScopeGroupId();
-
-		_dlFileEntryActionsDisplayContextHelper =
-			new DLFileEntryActionsDisplayContextHelper(
-				_permissionChecker, fileEntry, fileVersion);
-
-		_dlActionsDisplayContext = new DLActionsDisplayContext(
-			request, dlPortletInstanceSettings);
 	}
 
 	public DLActionsDisplayContext getDLActionsDisplayContext() {
