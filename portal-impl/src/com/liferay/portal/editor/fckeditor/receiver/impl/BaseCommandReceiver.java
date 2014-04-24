@@ -357,7 +357,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		ThemeDisplay themeDisplay = commandArgument.getThemeDisplay();
 
-		long scopeGroupId = themeDisplay.getScopeGroupId();
+		long doAsGroupId = themeDisplay.getDoAsGroupId();
 
 		HttpServletRequest request = commandArgument.getHttpServletRequest();
 
@@ -373,7 +373,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			if (group.hasStagingGroup()) {
 				Group stagingGroup = group.getStagingGroup();
 
-				if ((stagingGroup.getGroupId() == scopeGroupId) &&
+				if ((stagingGroup.getGroupId() == doAsGroupId) &&
 					group.isStagedPortlet(portletId) &&
 					!group.isStagedRemotely() && isStagedData(group)) {
 
