@@ -18,7 +18,6 @@ import java.io.IOException;
 
 import java.net.URL;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 
@@ -89,7 +88,7 @@ public class BundleResolverClassLoader extends ClassLoader {
 			}
 		}
 
-		return Collections.enumeration(new ArrayList<URL>());
+		return Collections.enumeration(Collections.<URL>emptyList());
 	}
 
 	@Override
