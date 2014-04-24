@@ -2038,8 +2038,7 @@ public class StagingImpl implements Staging {
 		return GetterUtil.getLong(
 			portalPreferences.getValue(
 				Staging.class.getName(),
-				getRecentLayoutBranchIdKey(layoutSetBranchId, plid))
-		);
+				getRecentLayoutBranchIdKey(layoutSetBranchId, plid)));
 	}
 
 	protected String getRecentLayoutBranchIdKey(
