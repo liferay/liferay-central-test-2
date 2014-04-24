@@ -433,7 +433,7 @@ public class ServiceBuilder {
 		}
 
 		if (!jalopyXmlFile.exists()) {
-			jalopyXmlFile = _readJalopyConfFromClasspath();
+			jalopyXmlFile = _readJalopyXmlFromClassLoader();
 		}
 
 		try {
@@ -1737,17 +1737,17 @@ public class ServiceBuilder {
 		return StringUtil.replace(fileName, "/", ".");
 	}
 
-	private static File _readJalopyConfFromClasspath() {
+	private static File _readJalopyXmlFromClassLoader() {
 		ClassLoader classLoader = ServiceBuilder.class.getClassLoader();
 
-		URL jalopyURL = classLoader.getResource("jalopy.xml");
+		URL url = classLoader.getResource("jalopy.xml");
 
 		try {
-			return new File(jalopyURL.toURI());
+			return new File(url.toURI());
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
-				"No jalopy conf could be found in classpath", e);
+				"Unable to load jalopy.xml from the class loader", e);
 		}
 	}
 
