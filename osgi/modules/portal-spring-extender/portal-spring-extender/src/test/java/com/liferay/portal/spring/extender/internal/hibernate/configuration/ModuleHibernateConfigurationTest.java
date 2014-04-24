@@ -20,19 +20,19 @@ import org.junit.Test;
 /**
  * @author Miguel Pastor
  */
-public class OsgiBundleHibernateConfigurationTest {
+public class ModuleHibernateConfigurationTest {
 
 	@Test
 	public void testConfigurationPaths() {
 		String[] configurationResources =
-			_osgiBundleHibernateConfiguration.getConfigurationResources();
+			_moduleHibernateConfiguration.getConfigurationResources();
 
 		Assert.assertEquals(1, configurationResources.length);
 		Assert.assertEquals(
 			"META-INF/module-hbm.xml", configurationResources[0]);
 	}
 
-	private OsgiBundleHibernateConfiguration _osgiBundleHibernateConfiguration =
-		new OsgiBundleHibernateConfiguration();
+	private ModuleHibernateConfiguration _moduleHibernateConfiguration =
+		new ModuleHibernateConfiguration();
 
 }

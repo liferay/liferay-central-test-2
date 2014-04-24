@@ -16,7 +16,7 @@ package com.liferay.portal.spring.extender.internal.hibernate.session;
 
 import com.liferay.portal.dao.orm.hibernate.PortletSessionFactoryImpl;
 import com.liferay.portal.spring.extender.internal.classloader.BundleResolverClassLoader;
-import com.liferay.portal.spring.extender.internal.hibernate.configuration.OsgiBundleHibernateConfiguration;
+import com.liferay.portal.spring.extender.internal.hibernate.configuration.ModuleHibernateConfiguration;
 
 import javax.sql.DataSource;
 
@@ -29,7 +29,7 @@ import org.osgi.framework.BundleContext;
 /**
  * @author Miguel Pastor
  */
-public class OsgiBundleSessionFactory
+public class ModuleSessionFactory
 	extends PortletSessionFactoryImpl implements BundleContextAware {
 
 	@Override
@@ -45,8 +45,8 @@ public class OsgiBundleSessionFactory
 
 	@Override
 	protected SessionFactory createSessionFactory(DataSource dataSource) {
-		OsgiBundleHibernateConfiguration osgiBundleHibernateConfiguration =
-			new OsgiBundleHibernateConfiguration();
+		ModuleHibernateConfiguration osgiBundleHibernateConfiguration =
+			new ModuleHibernateConfiguration();
 
 		osgiBundleHibernateConfiguration.setDataSource(dataSource);
 

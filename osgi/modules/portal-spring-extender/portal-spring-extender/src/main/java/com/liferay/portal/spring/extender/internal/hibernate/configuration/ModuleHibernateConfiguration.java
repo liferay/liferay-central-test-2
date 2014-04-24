@@ -23,7 +23,7 @@ import org.springframework.context.ApplicationContextAware;
 /**
  * @author Miguel Pastor
  */
-public class OsgiBundleHibernateConfiguration
+public class ModuleHibernateConfiguration
 	extends PortletHibernateConfiguration implements ApplicationContextAware {
 
 	@Override
