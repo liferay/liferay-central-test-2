@@ -368,7 +368,9 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			foldersElement.appendChild(folderElement);
 
-			boolean setNameAttribute = false;
+			long groupId = group.getGroupId();
+			String descriptiveName = HtmlUtil.escape(
+				group.getDescriptiveName());
 
 			if (group.hasStagingGroup()) {
 				Group stagingGroup = group.getStagingGroup();
@@ -377,21 +379,14 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 					group.isStagedPortlet(portletId) &&
 					!group.isStagedRemotely() && isStagedData(group)) {
 
-					folderElement.setAttribute(
-						"name",
-						stagingGroup.getGroupId() + " - " +
-							HtmlUtil.escape(stagingGroup.getDescriptiveName()));
-
-					setNameAttribute = true;
+					groupId = stagingGroup.getGroupId();
+					descriptiveName = HtmlUtil.escape(
+						stagingGroup.getDescriptiveName());
 				}
 			}
 
-			if (!setNameAttribute) {
-				folderElement.setAttribute(
-					"name",
-					group.getGroupId() + " - " +
-						HtmlUtil.escape(group.getDescriptiveName()));
-			}
+			folderElement.setAttribute(
+				"name", groupId + " - " + descriptiveName);
 		}
 	}
 
