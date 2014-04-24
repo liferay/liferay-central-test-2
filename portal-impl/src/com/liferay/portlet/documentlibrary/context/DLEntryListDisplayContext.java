@@ -36,13 +36,13 @@ public class DLEntryListDisplayContext {
 
 		_dlPortletInstanceSettings = dlPortletInstanceSettings;
 
+		_dlActionsDisplayContext = new DLActionsDisplayContext(
+			request, dlPortletInstanceSettings);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		_portletDisplay = themeDisplay.getPortletDisplay();
-
-		_dlActionsDisplayContext = new DLActionsDisplayContext(
-			request, dlPortletInstanceSettings);
 	}
 
 	public DLActionsDisplayContext getDLActionsDisplayContext() {
