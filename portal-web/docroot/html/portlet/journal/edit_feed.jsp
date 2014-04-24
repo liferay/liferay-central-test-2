@@ -350,11 +350,6 @@ if (feed != null) {
 </aui:form>
 
 <aui:script>
-
-	<%
-	Portlet portlet = PortletLocalServiceUtil.getPortletById(portletDisplay.getId());
-	%>
-
 	function <portlet:namespace />openStructureSelector() {
 		Liferay.Util.openDDMPortlet(
 			{
@@ -366,7 +361,13 @@ if (feed != null) {
 				eventName: '<portlet:namespace />selectStructure',
 				groupId: <%= themeDisplay.getSiteGroupId() %>,
 				refererPortletName: '<%= PortletKeys.JOURNAL %>',
+
+				<%
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(portletDisplay.getId());
+				%>
+
 				refererWebDAVToken: '<%= portlet.getWebDAVStorageToken() %>',
+
 				showAncestorScopes: true,
 				struts_action: '/dynamic_data_mapping/select_structure',
 				title: '<%= UnicodeLanguageUtil.get(pageContext, "structures") %>'
