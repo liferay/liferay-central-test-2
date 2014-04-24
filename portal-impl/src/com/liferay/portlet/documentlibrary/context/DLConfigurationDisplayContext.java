@@ -45,7 +45,6 @@ public class DLConfigurationDisplayContext {
 
 		_dlActionsDisplayContext = new DLActionsDisplayContext(
 			request, dlPortletInstanceSettings);
-
 		_themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 	}
