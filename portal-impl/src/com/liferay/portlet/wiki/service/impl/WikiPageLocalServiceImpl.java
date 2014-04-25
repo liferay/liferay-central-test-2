@@ -1493,7 +1493,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String title = page.getTitle();
 
-		moveDependentChildrenToTrash(page, title, title, trashEntryId);
+		moveDependentChildPagesToTrash(page, title, title, trashEntryId);
 
 		// Redirect pages
 
@@ -1753,7 +1753,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Child pages
 
-		moveDependentChildrenToTrash(
+		moveDependentChildPagesToTrash(
 			page, oldTitle, trashTitle, trashEntry.getEntryId());
 
 		// Redirect pages
@@ -1863,7 +1863,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		String originalTitle = TrashUtil.getOriginalTitle(trashTitle);
 
-		restoreDependentChildrenFromTrash(
+		restoreDependentChildPagesFromTrash(
 			page, originalTitle, trashTitle, trashEntryId);
 
 		// Redirect pages
@@ -1949,7 +1949,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Child pages
 
-		restoreDependentChildrenFromTrash(
+		restoreDependentChildPagesFromTrash(
 			page, originalTitle, trashTitle, trashEntry.getEntryId());
 
 		// Redirect pages
@@ -2610,7 +2610,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void moveDependentChildrenToTrash(
+	protected void moveDependentChildPagesToTrash(
 			WikiPage page, String title, String trashTitle, long trashEntryId)
 		throws PortalException, SystemException {
 
@@ -2804,7 +2804,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			expandoBridge.getAttributes());
 	}
 
-	protected void restoreDependentChildrenFromTrash(
+	protected void restoreDependentChildPagesFromTrash(
 			WikiPage page, String title, String trashTitle, long trashEntryId)
 		throws PortalException, SystemException {
 
