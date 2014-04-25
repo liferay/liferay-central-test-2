@@ -31,9 +31,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Lock;
 import com.liferay.portal.model.RepositoryEntry;
-import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.RepositoryEntryLocalService;
 import com.liferay.portal.service.ServiceContext;
@@ -240,15 +238,9 @@ public abstract class BaseRepositoryImpl implements BaseRepository {
 			getRepositoryId(), objectId);
 
 		if (repositoryEntry == null) {
-			PermissionChecker permissionChecker =
-				PermissionThreadLocal.getPermissionChecker();
-
-			User user = permissionChecker.getUser();
-
-			repositoryEntry =
-				repositoryEntryLocalService.addRepositoryEntry(
-					user.getUserId(), getGroupId(), getRepositoryId(), objectId,
-					new ServiceContext());
+			repositoryEntry = repositoryEntryLocalService.addRepositoryEntry(
+				PrincipalThreadLocal.getUserId(), getGroupId(),
+				getRepositoryId(), objectId, new ServiceContext());
 
 			newRepositoryEntry = true;
 		}
