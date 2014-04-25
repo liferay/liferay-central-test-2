@@ -60,18 +60,16 @@ public class AUIUtil {
 		boolean inlineField, String inlineLabel, String wrapperCssClass,
 		String baseType) {
 
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("control-group");
 
 		if (inlineField) {
-			sb.append(StringPool.SPACE);
-			sb.append("control-group-inline");
+			sb.append(" control-group-inline");
 		}
 
 		if (Validator.isNotNull(inlineLabel)) {
-			sb.append(StringPool.SPACE);
-			sb.append("form-inline");
+			sb.append(" form-inline");
 		}
 
 		if (Validator.isNotNull(wrapperCssClass)) {
