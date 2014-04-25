@@ -139,12 +139,11 @@ public class WikiPageLocalServiceTest {
 	public void testDeleteTrashedPageWithExplicitTrashedRedirectPage()
 		throws Exception {
 
-		WikiPage[] wikiPages =
-			WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
-				_group.getGroupId(), _node.getNodeId(), true);
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
+			_group.getGroupId(), _node.getNodeId(), true);
 
-		WikiPage page = wikiPages[0];
-		WikiPage redirectPage = wikiPages[1];
+		WikiPage page = pages[0];
+		WikiPage redirectPage = pages[1];
 
 		WikiPageLocalServiceUtil.deletePage(page);
 
@@ -165,12 +164,11 @@ public class WikiPageLocalServiceTest {
 	public void testDeleteTrashedPageWithImplicitTrashedRedirectPage()
 		throws Exception {
 
-		WikiPage[] wikiPages =
-			WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
-				_group.getGroupId(), _node.getNodeId(), false);
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
+			_group.getGroupId(), _node.getNodeId(), false);
 
-		WikiPage page = wikiPages[0];
-		WikiPage redirectPage = wikiPages[1];
+		WikiPage page = pages[0];
+		WikiPage redirectPage = pages[1];
 
 		WikiPageLocalServiceUtil.deletePage(page);
 
@@ -186,11 +184,11 @@ public class WikiPageLocalServiceTest {
 
 	@Test
 	public void testDeleteTrashedPageWithRestoredChildPage() throws Exception {
-		WikiPage[] wikiPages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
 			_group.getGroupId(), _node.getNodeId(), true);
 
-		WikiPage parentPage = wikiPages[0];
-		WikiPage childPage = wikiPages[1];
+		WikiPage parentPage = pages[0];
+		WikiPage childPage = pages[1];
 
 		WikiPageLocalServiceUtil.restorePageFromTrash(
 			TestPropsValues.getUserId(), childPage);
@@ -216,12 +214,11 @@ public class WikiPageLocalServiceTest {
 	public void testDeleteTrashedPageWithRestoredRedirectPage()
 		throws Exception {
 
-		WikiPage[] wikiPages =
-			WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
-				_group.getGroupId(), _node.getNodeId(), true);
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedRedirectPage(
+			_group.getGroupId(), _node.getNodeId(), true);
 
-		WikiPage page = wikiPages[0];
-		WikiPage redirectPage = wikiPages[1];
+		WikiPage page = pages[0];
+		WikiPage redirectPage = pages[1];
 
 		WikiPageLocalServiceUtil.restorePageFromTrash(
 			TestPropsValues.getUserId(), redirectPage);
@@ -247,11 +244,11 @@ public class WikiPageLocalServiceTest {
 	public void testDeleteTrashedParentPageWithExplicitTrashedChildPage()
 		throws Exception {
 
-		WikiPage[] wikiPages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
 			_group.getGroupId(), _node.getNodeId(), true);
 
-		WikiPage parentPage = wikiPages[0];
-		WikiPage childPage = wikiPages[1];
+		WikiPage parentPage = pages[0];
+		WikiPage childPage = pages[1];
 
 		WikiPageLocalServiceUtil.deletePage(parentPage);
 
@@ -272,11 +269,11 @@ public class WikiPageLocalServiceTest {
 	public void testDeleteTrashedParentPageWithImplicitTrashedChildPage()
 		throws Exception {
 
-		WikiPage[] wikiPages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
+		WikiPage[] pages = WikiTestUtil.addTrashedPageWithTrashedChildPage(
 			_group.getGroupId(), _node.getNodeId(), false);
 
-		WikiPage parentPage = wikiPages[0];
-		WikiPage childPage = wikiPages[1];
+		WikiPage parentPage = pages[0];
+		WikiPage childPage = pages[1];
 
 		WikiPageLocalServiceUtil.deletePage(parentPage);
 
