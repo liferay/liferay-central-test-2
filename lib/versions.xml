@@ -1843,7 +1843,7 @@
 	</library>
 	<library>
 		<file-name>lib/portal/httpclient.jar</file-name>
-		<version>4.3.1</version>
+		<version>4.3.3</version>
 		<project-name>HttpComponents</project-name>
 		<project-url>http://hc.apache.org</project-url>
 		<licenses>
