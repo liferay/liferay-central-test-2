@@ -499,9 +499,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getNodeId(), page.getTitle());
 
 		for (WikiPage childPage : childPages) {
-			if (childPage.isApproved() ||
-				childPage.isInTrashImplicitly()) {
-
+			if (childPage.isApproved() || childPage.isInTrashImplicitly()) {
 				wikiPageLocalService.deletePage(childPage);
 			}
 			else {
