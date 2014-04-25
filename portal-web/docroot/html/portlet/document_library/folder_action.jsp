@@ -423,7 +423,7 @@ String iconMenuId = null;
 
 		<br /><br />
 
-		<aui:input cssClass="webdav-url-resource" name="webdavUrl" type="resource" value="<%= DLUtil.getWebDavURL(themeDisplay, folder, null) %>" />
+		<aui:input cssClass="webdav-url-resource" name="webDavURL" type="resource" value="<%= DLUtil.getWebDavURL(themeDisplay, folder, null) %>" />
 	</div>
 </div>
 
