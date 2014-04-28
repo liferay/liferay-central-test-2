@@ -408,7 +408,7 @@ public class PortletImporter {
 
 		portletDataContext.setSourceGroupId(sourceGroupId);
 
-		// Add source and target group id to PK map
+		// Source and target group id
 
 		Map<Long, Long> groupIds =
 			(Map<Long, Long>)portletDataContext.getNewPrimaryKeysMap(
