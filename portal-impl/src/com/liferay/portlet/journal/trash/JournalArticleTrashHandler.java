@@ -323,19 +323,19 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getLatestArticle(classPK);
 
-		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
-			PortalUtil.getSiteGroupId(article.getGroupId()),
-			PortalUtil.getClassNameId(JournalArticle.class),
-			article.getStructureId(), true);
+		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
 
 		JournalFolder folder = JournalFolderLocalServiceUtil.fetchFolder(
 			containerModelId);
 
-		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
-
 		if (folder != null) {
 			restrictionType = folder.getRestrictionType();
 		}
+
+		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
+			PortalUtil.getSiteGroupId(article.getGroupId()),
+			PortalUtil.getClassNameId(JournalArticle.class),
+			article.getStructureId(), true);
 
 		List<DDMStructure> folderDDMStructures =
 			DDMStructureLocalServiceUtil.getJournalFolderStructures(
