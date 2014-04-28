@@ -926,7 +926,8 @@ public class LayoutImporter {
 		}
 	}
 
-	protected void updateLayoutPriorities(PortletDataContext portletDataContext)
+	protected void updateLayoutPriorities(
+			PortletDataContext portletDataContext, List<Element> layoutElements)
 		throws PortalException, SystemException {
 
 		Map<Long, Layout> layouts =
@@ -1130,8 +1131,7 @@ public class LayoutImporter {
 	}
 
 	protected void validateLayoutPrototypes(
-			long companyId, Element layoutsElement,
-			List<Element> layoutElements)
+			long companyId, Element layoutsElement)
 		throws Exception {
 
 		List<Tuple> missingLayoutPrototypes = new ArrayList<Tuple>();
