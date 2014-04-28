@@ -1195,12 +1195,8 @@ public class LayoutImporter {
 
 	private DeletionSystemEventImporter _deletionSystemEventImporter =
 		new DeletionSystemEventImporter();
-	private Element _headerElement;
-	private List<Element> _layoutElements;
-	private Element _layoutsElement;
 	private PermissionImporter _permissionImporter = new PermissionImporter();
 	private PortletImporter _portletImporter = new PortletImporter();
-	private Element _rootElement;
 	private ThemeImporter _themeImporter = new ThemeImporter();
 
 }
