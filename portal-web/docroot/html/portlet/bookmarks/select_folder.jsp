@@ -66,15 +66,6 @@ if (folder != null) {
 			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
 
 			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
-
-			List<Long> subfolderIds = new ArrayList<Long>();
-
-			subfolderIds.add(curFolder.getFolderId());
-
-			BookmarksFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), true);
-
-			int foldersCount = subfolderIds.size() - 1;
-			int entriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 			%>
 
 			<portlet:renderURL var="viewFolderURL">
@@ -92,6 +83,17 @@ if (folder != null) {
 					url="<%= viewFolderURL %>"
 				/>
 			</liferay-ui:search-container-column-text>
+
+			<%
+			List<Long> subfolderIds = new ArrayList<Long>();
+
+			subfolderIds.add(curFolder.getFolderId());
+
+			BookmarksFolderServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId(), true);
+
+			int foldersCount = subfolderIds.size() - 1;
+			int entriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
+			%>
 
 			<liferay-ui:search-container-column-text
 				href="<%= viewFolderURL %>"
