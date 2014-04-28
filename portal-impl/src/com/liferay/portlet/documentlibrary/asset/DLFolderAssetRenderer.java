@@ -97,7 +97,7 @@ public class DLFolderAssetRenderer
 				_folder.getRepositoryId(),
 				ListUtil.fromArray(new Long[] {_folder.getFolderId()}),
 				WorkflowConstants.STATUS_APPROVED);
-			
+
 			if (count > 0) {
 				return "icon-folder-close";
 			}

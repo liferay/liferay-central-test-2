@@ -30,8 +30,6 @@ import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUt
 import com.liferay.portlet.journal.asset.JournalArticleAssetRenderer;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleResource;
-import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
@@ -323,19 +321,12 @@ public class JournalArticleTrashHandler extends JournalBaseTrashHandler {
 		JournalArticle article =
 			JournalArticleLocalServiceUtil.getLatestArticle(classPK);
 
-		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
-
-		JournalFolder folder = JournalFolderLocalServiceUtil.fetchFolder(
-			containerModelId);
-
-		if (folder != null) {
-			restrictionType = folder.getRestrictionType();
-		}
-
 		DDMStructure ddmStructure = DDMStructureLocalServiceUtil.getStructure(
 			PortalUtil.getSiteGroupId(article.getGroupId()),
 			PortalUtil.getClassNameId(JournalArticle.class),
 			article.getStructureId(), true);
+
+		int restrictionType = JournalUtil.getRestrictionType(containerModelId);
 
 		List<DDMStructure> folderDDMStructures =
 			DDMStructureLocalServiceUtil.getJournalFolderStructures(

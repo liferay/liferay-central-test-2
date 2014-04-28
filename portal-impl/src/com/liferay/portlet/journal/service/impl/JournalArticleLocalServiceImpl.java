@@ -124,7 +124,6 @@ import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.model.impl.JournalArticleDisplayImpl;
 import com.liferay.portlet.journal.model.impl.JournalArticleModelImpl;
 import com.liferay.portlet.journal.model.impl.JournalFolderModelImpl;
@@ -6959,14 +6958,7 @@ public class JournalArticleLocalServiceImpl
 			long groupId, long folderId, String ddmStructureKey)
 		throws PortalException, SystemException {
 
-		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
-
-		JournalFolder folder = journalFolderPersistence.fetchByPrimaryKey(
-			folderId);
-
-		if (folder != null) {
-			restrictionType = folder.getRestrictionType();
-		}
+		int restrictionType = JournalUtil.getRestrictionType(folderId);
 
 		DDMStructure ddmStructure = ddmStructureLocalService.getStructure(
 			PortalUtil.getSiteGroupId(groupId),

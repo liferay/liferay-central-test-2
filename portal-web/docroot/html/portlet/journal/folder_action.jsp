@@ -113,7 +113,7 @@ else {
 
 				<%
 				boolean workflowEnabled = false;
-				
+
 				if (WorkflowEngineManagerUtil.isDeployed() && (WorkflowHandlerRegistryUtil.getWorkflowHandler(DLFileEntry.class.getName()) != null)) {
 					workflowEnabled = true;
 				}
