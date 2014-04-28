@@ -78,10 +78,7 @@ public class FileEntryStagedModelDataHandlerTest
 	@Test
 	@Transactional
 	public void testExportImportFileExtension() throws Exception {
-
-		// Export and import file entry
-
-		String sourceFileName = "liferay.is.great.pdf";
+		String sourceFileName = ServiceTestUtil.randomString() + ".pdf";
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			stagingGroup.getGroupId(),
@@ -93,17 +90,13 @@ public class FileEntryStagedModelDataHandlerTest
 			DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(
 				fileEntry.getUuid(), liveGroup.getGroupId());
 
-		Assert.assertTrue(importedFileEntry.getExtension().equals("pdf"));
+		Assert.assertEquals(importedFileEntry.getExtension(), "pdf");
 
-		// Update file entry title
-
-		String title = "liferay.is.awesome";
+		String title = ServiceTestUtil.randomString() + ".awesome";
 
 		DLAppTestUtil.updateFileEntry(
 			stagingGroup.getGroupId(), fileEntry.getFileEntryId(),
 			StringPool.BLANK, title);
-
-		// Export and import again to propagate changes
 
 		exportImportStagedModel(fileEntry);
 
