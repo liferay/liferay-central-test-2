@@ -387,11 +387,11 @@ public class PortletImporter {
 
 		portletDataContext.setManifestSummary(manifestSummary);
 
+		// Company id
+
 		Element rootElement = portletDataContext.getImportDataRootElement();
 
 		Element headerElement = rootElement.element("header");
-
-		// Company id
 
 		long sourceCompanyId = GetterUtil.getLong(
 			headerElement.attributeValue("company-id"));
