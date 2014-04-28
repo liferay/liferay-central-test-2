@@ -238,15 +238,15 @@ public class EditFolderAction extends PortletAction {
 	protected void updateWorkflowDefinitions(ActionRequest actionRequest)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			JournalFolder.class.getName(), actionRequest);
-
 		long[] ddmStructureIds = StringUtil.split(
 			ParamUtil.getString(
 				actionRequest, "ddmStructuresSearchContainerPrimaryKeys"),
 			0L);
 		int restrinctionType = ParamUtil.getInteger(
 			actionRequest, "restrictionType");
+
+		ServiceContext serviceContext = ServiceContextFactory.getInstance(
+			JournalFolder.class.getName(), actionRequest);
 
 		JournalFolderServiceUtil.updateFolder(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
