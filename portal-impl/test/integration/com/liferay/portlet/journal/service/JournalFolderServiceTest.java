@@ -146,7 +146,7 @@ public class JournalFolderServiceTest {
 	}
 
 	@Test
-	public void testInheritedWorkflowFolder() throws Exception {
+	public void testGetInheritedWorkflowFolderId() throws Exception {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());
 
@@ -156,49 +156,50 @@ public class JournalFolderServiceTest {
 			new long[0], JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW,
 			false, serviceContext);
 
-		JournalFolder countries = JournalTestUtil.addFolder(
+		JournalFolder countriesFolder = JournalTestUtil.addFolder(
 			_group.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Countries");
 
 		Assert.assertEquals(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalFolderLocalServiceUtil.getInheritedWorkflowFolderId(
-				countries.getFolderId()));
+				countriesFolder.getFolderId()));
 
-		JournalFolder germany = JournalTestUtil.addFolder(
-			_group.getGroupId(), countries.getFolderId(), "Germany");
+		JournalFolder germanyFolder = JournalTestUtil.addFolder(
+			_group.getGroupId(), countriesFolder.getFolderId(), "Germany");
 
 		Assert.assertEquals(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			JournalFolderLocalServiceUtil.getInheritedWorkflowFolderId(
-				germany.getFolderId()));
+				germanyFolder.getFolderId()));
 
-		JournalFolder spain = JournalTestUtil.addFolder(
-			_group.getGroupId(), countries.getFolderId(), "Spain");
+		JournalFolder spainFolder = JournalTestUtil.addFolder(
+			_group.getGroupId(), countriesFolder.getFolderId(), "Spain");
 
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			_group.getGroupId(), JournalArticle.class.getName());
 
-		long[] ddmStructureIds = new long[]{ddmStructure1.getStructureId()};
+		long[] ddmStructureIds = {ddmStructure1.getStructureId()};
 
 		JournalFolderServiceUtil.updateFolder(
-			spain.getFolderId(), spain.getParentFolderId(), spain.getName(),
-			spain.getDescription(), ddmStructureIds,
+			spainFolder.getFolderId(), spainFolder.getParentFolderId(),
+			spainFolder.getName(), spainFolder.getDescription(),
+			ddmStructureIds,
 			JournalFolderConstants.RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW,
 			false, serviceContext);
 
 		Assert.assertEquals(
-			spain.getFolderId(),
+			spainFolder.getFolderId(),
 			JournalFolderLocalServiceUtil.getInheritedWorkflowFolderId(
-				spain.getFolderId()));
+				spainFolder.getFolderId()));
 
-		JournalFolder madrid = JournalTestUtil.addFolder(
-			_group.getGroupId(), spain.getFolderId(), "Madrid");
+		JournalFolder madridFolder = JournalTestUtil.addFolder(
+			_group.getGroupId(), spainFolder.getFolderId(), "Madrid");
 
 		Assert.assertEquals(
-			spain.getFolderId(),
+			spainFolder.getFolderId(),
 			JournalFolderLocalServiceUtil.getInheritedWorkflowFolderId(
-				madrid.getFolderId()));
+				madridFolder.getFolderId()));
 	}
 
 	@Test
