@@ -1194,9 +1194,10 @@ public class LayoutImporter {
 	private static Log _log = LogFactoryUtil.getLog(LayoutImporter.class);
 
 	private DeletionSystemEventImporter _deletionSystemEventImporter =
-		new DeletionSystemEventImporter();
-	private PermissionImporter _permissionImporter = new PermissionImporter();
-	private PortletImporter _portletImporter = new PortletImporter();
-	private ThemeImporter _themeImporter = new ThemeImporter();
+		DeletionSystemEventImporter.getInstance();
+	private PermissionImporter _permissionImporter =
+		PermissionImporter.getInstance();
+	private PortletImporter _portletImporter = PortletImporter.getInstance();
+	private ThemeImporter _themeImporter = ThemeImporter.getInstance();
 
 }

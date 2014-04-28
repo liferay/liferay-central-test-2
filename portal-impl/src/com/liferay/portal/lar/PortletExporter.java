@@ -100,6 +100,10 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class PortletExporter {
 
+	public static PortletExporter getInstance() {
+		return _instance;
+	}
+
 	public void exportPortletData(
 			PortletDataContext portletDataContext, Portlet portlet,
 			Layout layout,
@@ -1097,10 +1101,16 @@ public class PortletExporter {
 		return sb.toString();
 	}
 
+	private PortletExporter() {
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortletExporter.class);
 
+	private static PortletExporter _instance = new PortletExporter();
+
 	private DeletionSystemEventExporter _deletionSystemEventExporter =
-		new DeletionSystemEventExporter();
-	private PermissionExporter _permissionExporter = new PermissionExporter();
+		DeletionSystemEventExporter.getInstance();
+	private PermissionExporter _permissionExporter =
+		PermissionExporter.getInstance();
 
 }

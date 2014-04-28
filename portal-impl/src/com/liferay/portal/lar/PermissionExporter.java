@@ -52,6 +52,10 @@ public class PermissionExporter {
 
 	public static final String ROLE_TEAM_PREFIX = "ROLE_TEAM_,*";
 
+	public static PermissionExporter getInstance() {
+		return _instance;
+	}
+
 	protected void exportPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
 			String resourceName, String resourcePrimKey,
@@ -183,5 +187,10 @@ public class PermissionExporter {
 			layoutCache, companyId, groupId, resourceName, resourcePrimKey,
 			permissionsElement, true);
 	}
+
+	private PermissionExporter() {
+	}
+
+	private static PermissionExporter _instance = new PermissionExporter();
 
 }

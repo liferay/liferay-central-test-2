@@ -120,6 +120,10 @@ import org.apache.commons.lang.time.StopWatch;
  */
 public class PortletImporter {
 
+	public static PortletImporter getInstance() {
+		return _instance;
+	}
+
 	public String importPortletData(
 			PortletDataContext portletDataContext, String portletId,
 			PortletPreferences portletPreferences, Element portletDataElement)
@@ -1259,10 +1263,16 @@ public class PortletImporter {
 		}
 	}
 
+	private PortletImporter() {
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortletImporter.class);
 
+	private static PortletImporter _instance = new PortletImporter();
+
 	private DeletionSystemEventImporter _deletionSystemEventImporter =
-		new DeletionSystemEventImporter();
-	private PermissionImporter _permissionImporter = new PermissionImporter();
+		DeletionSystemEventImporter.getInstance();
+	private PermissionImporter _permissionImporter =
+		PermissionImporter.getInstance();
 
 }
