@@ -21,8 +21,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String closeRedirect = ParamUtil.getString(request, "closeRedirect");
 boolean showBackURL = ParamUtil.getBoolean(request, "showBackURL", true);
 
-String editStructureURLParam = ParamUtil.getString(request, "editStructureURL");
-
 String portletResourceNamespace = ParamUtil.getString(request, "portletResourceNamespace");
 
 DDMStructure structure = (DDMStructure)request.getAttribute(WebKeys.DYNAMIC_DATA_MAPPING_STRUCTURE);
@@ -68,7 +66,15 @@ if (Validator.isNotNull(script)) {
 	<portlet:param name="struts_action" value="/dynamic_data_mapping/edit_structure" />
 </portlet:actionURL>
 
-<aui:form action="<%= Validator.isNotNull(editStructureURLParam) ? editStructureURLParam : editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
+<%
+String requestEditStructureURL = ParamUtil.getString(request, "editStructureURL");
+
+if (Validator.isNotNull(requestEditStructureURL)) {
+	editStructureURL = requestEditStructureURL;
+}
+%>
+
+<aui:form action="<%= editStructureURL %>" method="post" name="fm" onSubmit='<%= "event.preventDefault(); " + renderResponse.getNamespace() + "saveStructure();" %>'>
 	<aui:input name="<%= Constants.CMD %>" type="hidden" value="<%= (structure != null) ? Constants.UPDATE : Constants.ADD %>" />
 	<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 	<aui:input name="closeRedirect" type="hidden" value="<%= closeRedirect %>" />
