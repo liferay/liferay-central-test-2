@@ -32,11 +32,6 @@ List<DDMStructure> ddmStructures = DDMStructureServiceUtil.getJournalFolderStruc
 
 <aui:nav-item dropdown="<%= true %>" id="addButtonContainer" label="add">
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
-
-		<%
-		AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
-		%>
-
 		<portlet:renderURL var="addFolderURL">
 			<portlet:param name="struts_action" value="/journal/edit_folder" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -44,14 +39,16 @@ List<DDMStructure> ddmStructures = DDMStructureServiceUtil.getJournalFolderStruc
 			<portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" />
 		</portlet:renderURL>
 
+		<%
+		AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
+		%>
+
 		<aui:nav-item href="<%= addFolderURL %>" iconCssClass="<%= assetRendererFactory.getIconCssClass() %>" label='<%= (folder != null) ? "subfolder" : "folder" %>' />
 	</c:if>
 
 	<c:if test="<%= JournalFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_ARTICLE) %>">
 
 		<%
-		AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
 		for (DDMStructure ddmStructure : ddmStructures) {
 		%>
 
@@ -62,6 +59,10 @@ List<DDMStructure> ddmStructures = DDMStructureServiceUtil.getJournalFolderStruc
 				<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 				<portlet:param name="structureId" value="<%= ddmStructure.getStructureKey() %>" />
 			</liferay-portlet:renderURL>
+
+			<%
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+			%>
 
 			<aui:nav-item href="<%= addArticleURL %>" iconCssClass="<%= assetRendererFactory.getIconCssClass() %>" label="<%= HtmlUtil.escape(ddmStructure.getName(locale)) %>" localizeLabel="<%= false %>" />
 

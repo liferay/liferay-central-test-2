@@ -30,8 +30,6 @@ if (folder != null) {
 
 	BookmarksUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
-
-AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
 %>
 
 <aui:form method="post" name="selectFolderFm">
@@ -70,6 +68,10 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			</portlet:renderURL>
 
 			<%
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
+
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
+
 			List<Long> subfolderIds = new ArrayList<Long>();
 
 			subfolderIds.add(curFolder.getFolderId());
@@ -78,8 +80,6 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 
 			int foldersCount = subfolderIds.size() - 1;
 			int entriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
-
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 			%>
 
 			<liferay-ui:search-container-column-text

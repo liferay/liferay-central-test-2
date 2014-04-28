@@ -30,8 +30,6 @@ if (folder != null) {
 
 	JournalUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
-
-AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
 %>
 
 <aui:form method="post" name="selectFolderFm">
@@ -95,6 +93,10 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			</liferay-portlet:renderURL>
 
 			<%
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
+
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
+
 			int foldersCount = 0;
 			int articlesCount = 0;
 
@@ -111,8 +113,6 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			catch (com.liferay.portal.kernel.repository.RepositoryException re) {
 				rowURL = null;
 			}
-
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 			%>
 
 			<liferay-ui:search-container-column-text

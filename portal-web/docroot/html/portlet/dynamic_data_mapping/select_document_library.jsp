@@ -102,7 +102,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						iconCssClass="icon-plus"
 						label="add"
 					>
-
 						<c:if test="<%= DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER) %>">
 							<liferay-portlet:renderURL portletName="<%= PortletKeys.DOCUMENT_LIBRARY %>" var="addFolderURL">
 								<portlet:param name="struts_action" value="/document_library/edit_folder" />

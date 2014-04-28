@@ -34,8 +34,6 @@ if (folder != null) {
 }
 
 DLActionsDisplayContext dlActionsDisplayContext = new DLActionsDisplayContext(request, dlPortletInstanceSettings);
-
-AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
 %>
 
 <aui:form method="post" name="selectFolderFm">
@@ -97,6 +95,10 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			</liferay-portlet:renderURL>
 
 			<%
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
+
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
+
 			int foldersCount = 0;
 			int fileEntriesCount = 0;
 
@@ -116,8 +118,6 @@ AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.get
 			catch (com.liferay.portal.security.auth.PrincipalException pe) {
 				rowURL = null;
 			}
-
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 			%>
 
 			<liferay-ui:search-container-column-text

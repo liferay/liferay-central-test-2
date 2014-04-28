@@ -304,10 +304,6 @@ request.setAttribute("view_entries.jsp-entryEnd", String.valueOf(searchContainer
 </c:if>
 
 <%
-AssetRendererFactory journalFolderAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
-
-AssetRendererFactory journalArticleAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
 for (int i = 0; i < results.size(); i++) {
 	Object result = results.get(i);
 %>
@@ -348,6 +344,10 @@ for (int i = 0; i < results.size(); i++) {
 					<liferay-util:buffer var="articleTitle">
 
 						<%
+						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+
+						AssetRenderer assetRenderer = journalArticleAssetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(curArticle));
+
 						PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 						rowURL.setParameter("struts_action", "/journal/edit_article");
@@ -357,8 +357,6 @@ for (int i = 0; i < results.size(); i++) {
 						rowURL.setParameter("articleId", curArticle.getArticleId());
 
 						rowURL.setParameter("status", String.valueOf(status));
-
-						AssetRenderer assetRenderer = journalArticleAssetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(curArticle));
 						%>
 
 						<liferay-ui:icon
@@ -486,14 +484,16 @@ for (int i = 0; i < results.size(); i++) {
 						data.put("folder", true);
 						data.put("folder-id", curFolder.getFolderId());
 
+						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
+
+						AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
+
 						PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
 						rowURL.setParameter("struts_action", "/journal/view");
 						rowURL.setParameter("redirect", currentURL);
 						rowURL.setParameter("groupId", String.valueOf(curFolder.getGroupId()));
 						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-						AssetRenderer assetRenderer = journalFolderAssetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 						%>
 
 						<liferay-ui:icon

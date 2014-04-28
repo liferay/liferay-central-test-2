@@ -92,9 +92,9 @@ for (JournalArticle curArticle : articles) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
-
 				for (JournalFolder folder : validMoveFolders) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folder.getFolderId());
 				%>
 
@@ -123,9 +123,9 @@ for (JournalArticle curArticle : articles) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
-
 				for (JournalFolder folder : invalidMoveFolders) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folder.getFolderId());
 				%>
 
@@ -160,9 +160,9 @@ for (JournalArticle curArticle : articles) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
 				for (JournalArticle validMoveArticle : validMoveArticles) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(validMoveArticle));
 				%>
 
@@ -191,9 +191,9 @@ for (JournalArticle curArticle : articles) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
 				for (JournalArticle invalidMoveArticle : invalidMoveArticles) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(invalidMoveArticle));
 				%>
 
