@@ -18,9 +18,11 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
+import com.liferay.portal.kernel.repository.RepositoryException;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.trash.TrashRenderer;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -101,10 +103,10 @@ public class DLFolderAssetRenderer
 				return "icon-folder-close";
 			}
 		}
-		catch (com.liferay.portal.kernel.repository.RepositoryException re) {
+		catch (PrincipalException pe) {
 			return "icon-remove";
 		}
-		catch (com.liferay.portal.security.auth.PrincipalException pe) {
+		catch (RepositoryException re) {
 			return "icon-remove";
 		}
 
