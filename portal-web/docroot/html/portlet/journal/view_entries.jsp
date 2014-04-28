@@ -346,7 +346,7 @@ for (int i = 0; i < results.size(); i++) {
 						<%
 						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
 
-						AssetRenderer assetRenderer = journalArticleAssetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(curArticle));
+						AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(curArticle));
 
 						PortletURL rowURL = liferayPortletResponse.createRenderURL();
 
