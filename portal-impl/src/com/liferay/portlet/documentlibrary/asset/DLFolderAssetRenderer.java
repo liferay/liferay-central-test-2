@@ -81,18 +81,15 @@ public class DLFolderAssetRenderer
 	@Override
 	public String getIconCssClass() throws PortalException, SystemException {
 		try {
-			int foldersCount = 0;
-			int fileEntriesCount = 0;
-
 			List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(
 				_folder.getRepositoryId(), _folder.getFolderId(), false);
 
-			foldersCount = subfolderIds.size();
+			int foldersCount = subfolderIds.size();
 
 			subfolderIds.clear();
 			subfolderIds.add(_folder.getFolderId());
 
-			fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(
+			int fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(
 				_folder.getRepositoryId(), subfolderIds,
 				WorkflowConstants.STATUS_APPROVED);
 
