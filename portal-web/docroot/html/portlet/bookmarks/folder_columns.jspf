@@ -31,8 +31,6 @@ if (ArrayUtil.contains(folderColumns, "num-of-entries")) {
 	curEntriesCount = BookmarksEntryServiceUtil.getFoldersEntriesCount(scopeGroupId, subfolderIds);
 }
 
-AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
-
 for (int j = 0; j < folderColumns.length; j++) {
 	String folderColumn = folderColumns[j];
 %>
@@ -59,6 +57,8 @@ for (int j = 0; j < folderColumns.length; j++) {
 			>
 
 				<%
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
+
 				AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 				%>
 
