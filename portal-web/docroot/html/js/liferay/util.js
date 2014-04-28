@@ -1432,16 +1432,16 @@
 				ddmURL.setParameter('showAncestorScopes', config.showAncestorScopes);
 			}
 
+			if ('showBackURL' in config) {
+				ddmURL.setParameter('showBackURL', config.showBackURL);
+			}
+
 			if ('showHeader' in config) {
 				ddmURL.setParameter('showHeader', config.showHeader);
 			}
 
 			if ('showManageTemplates' in config) {
 				ddmURL.setParameter('showManageTemplates', config.showManageTemplates);
-			}
-
-			if ('showBackURL' in config) {
-				ddmURL.setParameter('showBackURL', config.showBackURL);
 			}
 
 			if ('showToolbar' in config) {
