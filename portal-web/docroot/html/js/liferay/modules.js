@@ -530,6 +530,14 @@
 							'aui-node'
 						]
 					},
+					'liferay-menu-filter': {
+						path: 'menu_filter.js',
+						requires: [
+							'autocomplete-base',
+							'autocomplete-filters',
+							'autocomplete-highlighters'
+						]
+					},
 					'liferay-menu-toggle': {
 						path: 'menu_toggle.js',
 						requires: [
@@ -538,14 +546,6 @@
 							'event-outside',
 							'liferay-menu-filter',
 							'liferay-store'
-						]
-					},
-					'liferay-menu-filter': {
-						path: 'menu_filter.js',
-						requires: [
-							'autocomplete-base',
-							'autocomplete-filters',
-							'autocomplete-highlighters'
 						]
 					},
 					'liferay-message': {
