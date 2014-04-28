@@ -737,8 +737,6 @@ public class JournalFolderLocalServiceImpl
 				serviceContext);
 		}
 
-		// Workflow definitions
-
 		List<ObjectValuePair<Long, String>> workflowDefinitionOVPs =
 			new ArrayList<ObjectValuePair<Long, String>>();
 
@@ -848,11 +846,11 @@ public class JournalFolderLocalServiceImpl
 
 		JournalFolder folder = journalFolderLocalService.fetchFolder(folderId);
 
-		JournalFolder parentFolder = journalFolderLocalService.fetchFolder(
-			parentFolderId);
-
 		int restrictionType =
 			JournalFolderConstants.RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW;
+
+		JournalFolder parentFolder = journalFolderLocalService.fetchFolder(
+			parentFolderId);
 
 		if (parentFolder != null) {
 			restrictionType = parentFolder.getRestrictionType();

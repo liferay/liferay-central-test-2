@@ -6959,19 +6959,19 @@ public class JournalArticleLocalServiceImpl
 			long groupId, long folderId, String ddmStructureKey)
 		throws PortalException, SystemException {
 
-		DDMStructure ddmStructure = ddmStructureLocalService.getStructure(
-			PortalUtil.getSiteGroupId(groupId),
-			classNameLocalService.getClassNameId(JournalArticle.class),
-			ddmStructureKey, true);
+		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
 
 		JournalFolder folder = journalFolderPersistence.fetchByPrimaryKey(
 			folderId);
 
-		int restrictionType = JournalFolderConstants.RESTRICTION_TYPE_INHERIT;
-
 		if (folder != null) {
 			restrictionType = folder.getRestrictionType();
 		}
+
+		DDMStructure ddmStructure = ddmStructureLocalService.getStructure(
+			PortalUtil.getSiteGroupId(groupId),
+			classNameLocalService.getClassNameId(JournalArticle.class),
+			ddmStructureKey, true);
 
 		List<DDMStructure> folderDDMStructures =
 			ddmStructureLocalService.getJournalFolderStructures(
