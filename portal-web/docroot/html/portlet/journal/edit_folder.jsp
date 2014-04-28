@@ -205,7 +205,6 @@ if (workflowEnabled) {
 								<c:if test="<%= workflowEnabled %>">
 									<liferay-ui:search-container-column-text name="workflow">
 										<aui:select label="" name='<%= "workflowDefinition" + ddmStructure.getStructureId() %>'>
-
 											<aui:option label="no-workflow" value="" />
 
 											<%
@@ -261,7 +260,6 @@ if (workflowEnabled) {
 
 					<div class='<%= (rootFolder || (folder.getRestrictionType() == JournalFolderConstants.RESTRICTION_TYPE_WORKFLOW)) ? StringPool.BLANK : "hide" %>' id="<portlet:namespace />restrictionTypeWorkflowDiv">
 						<aui:select label='<%= rootFolder ? "default-workflow-for-all-structures" : StringPool.BLANK %>' name='<%= "workflowDefinition" + JournalArticleConstants.DDM_STRUCTURE_ID_ALL %>'>
-
 							<aui:option label="no-workflow" value="" />
 
 							<%
