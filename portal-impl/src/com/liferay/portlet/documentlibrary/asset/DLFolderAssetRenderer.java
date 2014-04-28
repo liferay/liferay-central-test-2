@@ -82,20 +82,23 @@ public class DLFolderAssetRenderer
 	@Override
 	public String getIconCssClass() throws PortalException, SystemException {
 		try {
-			List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(
-				_folder.getRepositoryId(), _folder.getFolderId(), false);
-
-			int foldersCount = subfolderIds.size();
-
-			int fileEntriesCount = DLAppServiceUtil.getFoldersFileEntriesCount(
-				_folder.getRepositoryId(),
-				ListUtil.fromArray(new Long[] {_folder.getFolderId()}),
-				WorkflowConstants.STATUS_APPROVED);
-
 			if (_folder.isMountPoint()) {
 				return "icon-drive";
 			}
-			else if ((foldersCount + fileEntriesCount) > 0) {
+
+			List<Long> subfolderIds = DLAppServiceUtil.getSubfolderIds(
+				_folder.getRepositoryId(), _folder.getFolderId(), false);
+
+			if (!subfolderIds.isEmpty()) {
+				return "icon-folder-close";
+			}
+
+			int count = DLAppServiceUtil.getFoldersFileEntriesCount(
+				_folder.getRepositoryId(),
+				ListUtil.fromArray(new Long[] {_folder.getFolderId()}),
+				WorkflowConstants.STATUS_APPROVED);
+			
+			if (count > 0) {
 				return "icon-folder-close";
 			}
 		}
