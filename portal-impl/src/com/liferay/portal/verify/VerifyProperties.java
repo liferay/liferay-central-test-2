@@ -455,6 +455,9 @@ public class VerifyProperties extends VerifyProcess {
 			"field.editable.user.types"
 		},
 		new String[] {
+			"icon.menu.max.display.items", "menu.max.display.items"
+		},
+		new String[] {
 			"journal.error.template.freemarker", "journal.error.template[ftl]"
 		},
 		new String[] {
@@ -470,9 +473,6 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"journal.template.velocity.restricted.variables",
 			"velocity.engine.restricted.variables"
-		},
-		new String[] {
-			"icon.menu.max.display.items", "menu.max.display.items"
 		},
 		new String[] {
 			"portal.instance.http.port",
