@@ -129,8 +129,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							if ((folder == null) || folder.isSupportsMetadata()) {
 								fileEntryTypes = DLFileEntryTypeLocalServiceUtil.getFolderFileEntryTypes(PortalUtil.getCurrentAndAncestorSiteGroupIds(scopeGroupId), folderId, true);
 							}
-
-							AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 							%>
 
 							<c:if test="<%= fileEntryTypes.isEmpty() %>">
@@ -143,6 +141,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 									<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 								</liferay-portlet:renderURL>
 
+								<%
+								AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+								%>
+
 								<aui:nav-item
 									href="<%= editFileEntryURL %>"
 									iconCssClass="<%= assetRendererFactory.getIconCssClass() %>"
@@ -151,8 +153,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 							</c:if>
 
 							<%
-							AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folderId);
-
 							for (DLFileEntryType fileEntryType : fileEntryTypes) {
 							%>
 
@@ -164,6 +164,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 									<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 									<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryType.getFileEntryTypeId()) %>" />
 								</liferay-portlet:renderURL>
+
+								<%
+								AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+
+								AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folderId);
+								%>
 
 								<aui:nav-item
 									href="<%= addFileEntryTypeURL %>"

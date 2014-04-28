@@ -104,8 +104,6 @@ boolean hasAddDocumentPermission = DLFolderPermission.contains(permissionChecker
 		<c:when test="<%= !fileEntryTypes.isEmpty() && hasAddDocumentPermission %>">
 
 			<%
-			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
-
 			for (DLFileEntryType fileEntryType : fileEntryTypes) {
 			%>
 
@@ -117,6 +115,10 @@ boolean hasAddDocumentPermission = DLFolderPermission.contains(permissionChecker
 					<portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" />
 					<portlet:param name="fileEntryTypeId" value="<%= String.valueOf(fileEntryType.getFileEntryTypeId()) %>" />
 				</portlet:renderURL>
+
+				<%
+				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+				%>
 
 				<aui:nav-item href="<%= addFileEntryTypeURL %>" iconCssClass="<%= assetRendererFactory.getIconCssClass() %>" label="<%= HtmlUtil.escape(fileEntryType.getName(locale)) %>" localizeLabel="<%= false %>" />
 

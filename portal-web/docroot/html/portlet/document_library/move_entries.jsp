@@ -116,9 +116,9 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
-
 				for (Folder folder : validMoveFolders) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folder.getFolderId());
 				%>
 
@@ -147,9 +147,9 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
-
 				for (Folder folder : invalidMoveFolders) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFolder.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(folder.getFolderId());
 				%>
 
@@ -191,9 +191,9 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
-
 				for (FileEntry validMoveFileEntry : validMoveFileEntries) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(validMoveFileEntry.getFileEntryId());
 				%>
 
@@ -222,9 +222,9 @@ for (DLFileShortcut curFileShortcut : fileShortcuts) {
 			<ul class="unstyled">
 
 				<%
-				AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
-
 				for (FileEntry invalidMoveFileEntry : invalidMoveFileEntries) {
+					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+
 					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(invalidMoveFileEntry.getFileEntryId());
 
 					Lock lock = invalidMoveFileEntry.getLock();
