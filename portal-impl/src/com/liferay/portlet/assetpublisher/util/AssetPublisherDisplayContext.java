@@ -334,6 +334,7 @@ public class AssetPublisherDisplayContext {
 			getExtensions(),
 			new PredicateFilter<String>() {
 
+				@Override
 				public boolean filter(String extension) {
 					return ArrayUtil.contains(supportedConversions, extension);
 				}
