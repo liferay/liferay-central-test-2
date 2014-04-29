@@ -163,7 +163,7 @@ for (JournalArticle curArticle : articles) {
 				for (JournalArticle validMoveArticle : validMoveArticles) {
 					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
 
-					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetRendererFactory.getClassPK(validMoveArticle));
+					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(validMoveArticle));
 				%>
 
 					<li class="move-article">
@@ -194,7 +194,7 @@ for (JournalArticle curArticle : articles) {
 				for (JournalArticle invalidMoveArticle : invalidMoveArticles) {
 					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
 
-					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(assetRendererFactory.getClassPK(invalidMoveArticle));
+					AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(JournalArticleAssetRenderer.getClassPK(invalidMoveArticle));
 				%>
 
 					<li class="icon-warning-sign move-article move-error">
