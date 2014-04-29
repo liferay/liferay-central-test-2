@@ -340,10 +340,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<%
 				Map<String, Object> data = new HashMap<String, Object>();
 
-				data.put("url", DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, false));
-				data.put("uuid", fileEntry.getUuid());
 				data.put("groupid", fileEntry.getGroupId());
 				data.put("title", fileEntry.getTitle());
+				data.put("url", DLUtil.getPreviewURL(fileEntry, fileEntry.getFileVersion(), themeDisplay, StringPool.BLANK, false, false));
+				data.put("uuid", fileEntry.getUuid());
 				data.put("version", fileEntry.getVersion());
 				%>
 
