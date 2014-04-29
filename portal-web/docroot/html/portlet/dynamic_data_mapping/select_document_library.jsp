@@ -17,8 +17,6 @@
 <%@ include file="/html/portlet/document_library_display/init.jsp" %>
 
 <%
-String eventName = ParamUtil.getString(request, "eventName");
-
 long groupId = ParamUtil.getLong(request, FileEntryDisplayTerms.SELECTED_GROUP_ID);
 
 if (groupId == 0) {
@@ -66,6 +64,8 @@ int entryStart = ParamUtil.getInteger(request, "entryStart");
 int entryEnd = ParamUtil.getInteger(request, "entryEnd", PropsValues.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
 
 String keywords = ParamUtil.getString(request, "keywords");
+
+String eventName = ParamUtil.getString(request, "eventName");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
