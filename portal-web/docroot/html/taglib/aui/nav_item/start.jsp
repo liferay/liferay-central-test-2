@@ -14,4 +14,4 @@
  */
 --%>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/taglib/aui/nav_item/init.jsp" %>
