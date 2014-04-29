@@ -84,9 +84,9 @@
 				var portletURL = Liferay.PortletURL.createURL('${themeDisplay.getURLControlPanel()}');
 
 				portletURL.setDoAsGroupId(${scopeGroupId?c});
+				portletURL.setParameter('eventName', '${portletNamespace}selectDocumentLibrary');
 				portletURL.setParameter('groupId', ${scopeGroupId?c});
 				portletURL.setParameter('struts_action', '/dynamic_data_mapping/select_document_library');
-				portletURL.setParameter('eventName', '${portletNamespace}selectDocumentLibrary');
 				portletURL.setPortletId('166');
 				portletURL.setWindowState('pop_up');
 

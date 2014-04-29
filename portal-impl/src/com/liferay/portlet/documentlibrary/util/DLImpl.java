@@ -711,7 +711,7 @@ public class DLImpl implements DL {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"Documents and Media search index is stale and " +
-							"contains file entry {" + fileEntryId + "}");
+							"contains file entry " + fileEntryId);
 				}
 			}
 		}
