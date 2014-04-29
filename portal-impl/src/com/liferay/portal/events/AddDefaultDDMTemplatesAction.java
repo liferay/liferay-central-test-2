@@ -72,10 +72,9 @@ public class AddDefaultDDMTemplatesAction extends SimpleAction {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales(groupId);
 
-		for (Locale curLocale : locales) {
-			nameMap.put(curLocale, LanguageUtil.get(curLocale, name));
-			descriptionMap.put(
-				curLocale, LanguageUtil.get(curLocale, description));
+		for (Locale locale : locales) {
+			nameMap.put(locale, LanguageUtil.get(locale, name));
+			descriptionMap.put(locale, LanguageUtil.get(locale, description));
 		}
 
 		String script = ContentUtil.get(scriptFileName);
