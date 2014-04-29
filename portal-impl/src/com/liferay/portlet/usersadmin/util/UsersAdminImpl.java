@@ -44,6 +44,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.membershippolicy.OrganizationMembershipPolicyUtil;
 import com.liferay.portal.security.membershippolicy.SiteMembershipPolicyUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -1105,6 +1106,15 @@ public class UsersAdminImpl implements UsersAdmin {
 	public boolean hasUpdateFieldPermission(
 			User updatingUser, User updatedUser, String field)
 		throws PortalException, SystemException {
+
+		if (updatingUser == null) {
+			long updatingUserId = PrincipalThreadLocal.getUserId();
+
+			if (updatingUserId > 0) {
+				updatingUser = UserLocalServiceUtil.fetchUserById(
+					updatingUserId);
+			}
+		}
 
 		if ((updatingUser != null) && (updatingUser != updatedUser)) {
 			for (String roleName : PropsValues.FIELD_ALL_USERS_EDITABLE_ROLES) {
