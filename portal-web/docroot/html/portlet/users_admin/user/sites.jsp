@@ -121,7 +121,7 @@ List<Group> inheritedSites = (List<Group>)request.getAttribute("user.inheritedSi
 							<portlet:param name="struts_action" value="/users_admin/select_site" />
 							<portlet:param name="p_u_i_d" value="<%= String.valueOf(selUser.getUserId()) %>" />
 						</portlet:renderURL>
-						
+
 						uri: '<%= groupSelectorURL.toString() %>'
 					},
 					function(event) {

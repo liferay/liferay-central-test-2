@@ -47,7 +47,7 @@ String portletURLString = portletURL.toString();
 				<portlet:renderURL var="viewRolesURL">
 					<portlet:param name="struts_action" value="/roles_admin/view" />
 				</portlet:renderURL>
-				
+
 				<liferay-portlet:renderURL varImpl="addRoleURL">
 					<portlet:param name="struts_action" value="/roles_admin/edit_role" />
 					<portlet:param name="redirect" value="<%= viewRolesURL %>" />

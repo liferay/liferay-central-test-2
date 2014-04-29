@@ -327,7 +327,7 @@ Group parentGroup = themeDisplay.getSiteGroup();
 						<portlet:param name="expandFirstNode" value="<%= Boolean.TRUE.toString() %>" />
 						<portlet:param name="saveState" value="<%= Boolean.FALSE.toString() %>" />
 					</liferay-portlet:resourceURL>
-					
+
 					url = '<%= treeUrlPrivatePages %>';
 				}
 

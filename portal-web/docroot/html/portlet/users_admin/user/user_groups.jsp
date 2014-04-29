@@ -93,7 +93,7 @@ List<UserGroup> userGroups = (List<UserGroup>)request.getAttribute("user.userGro
 							<portlet:param name="struts_action" value="/user_groups_admin/select_user_group" />
 							<portlet:param name="p_u_i_d" value="<%= String.valueOf(selUser.getUserId()) %>" />
 						</portlet:renderURL>
-						
+
 						uri: '<%= selectUserGroupURL.toString() %>'
 					},
 					function(event) {
