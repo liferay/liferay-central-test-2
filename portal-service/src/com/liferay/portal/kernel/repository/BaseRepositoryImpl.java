@@ -14,7 +14,6 @@
 
 package com.liferay.portal.kernel.repository;
 
-import com.liferay.counter.service.CounterLocalService;
 import com.liferay.portal.NoSuchRepositoryEntryException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
