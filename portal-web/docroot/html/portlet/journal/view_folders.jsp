@@ -301,8 +301,6 @@ else {
 					/>
 
 					<%
-					AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
-
 					List<JournalFolder> folders = JournalFolderServiceUtil.getFolders(scopeGroupId, parentFolderId, searchContainer.getStart(), searchContainer.getEnd());
 
 					for (JournalFolder curFolder : folders) {
@@ -314,6 +312,8 @@ else {
 
 						dataView.put("folder-id", curFolder.getFolderId());
 						dataView.put("title", curFolder.getName());
+
+						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalFolder.class.getName());
 
 						AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(curFolder.getFolderId());
 					%>
