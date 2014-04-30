@@ -27,13 +27,13 @@ import com.liferay.registry.ServiceReference;
 import com.liferay.registry.ServiceRegistration;
 import com.liferay.registry.ServiceTracker;
 import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.registry.collections.ServiceRegistrationMap;
 import com.liferay.registry.util.StringPlus;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -148,10 +148,6 @@ public class AuthPipeline {
 		String key, AuthFailure authFailure) {
 
 		_instance._unregisterAuthFailure(key, authFailure);
-	}
-
-	private static <T> Map<T, ServiceRegistration<T>> getMap() {
-		return new ConcurrentHashMap<T, ServiceRegistration<T>>();
 	}
 
 	private AuthPipeline() {
@@ -341,11 +337,14 @@ public class AuthPipeline {
 	private Map<String, AuthFailure[]> _authFailures =
 		new HashMap<String, AuthFailure[]>();
 	private Map<Authenticator, ServiceRegistration<Authenticator>>
-		_authenticatorServiceRegistrations = getMap();
+		_authenticatorServiceRegistrations =
+			new ServiceRegistrationMap<Authenticator>();
 	private ServiceTracker<Authenticator, Authenticator>
 		_authenticatorServiceTracker;
 	private Map<AuthFailure, ServiceRegistration<AuthFailure>>
-		_authFailureServiceRegistrations = getMap();
+		_authFailureServiceRegistrations =
+			new ServiceRegistrationMap<AuthFailure>();
+
 	private ServiceTracker<AuthFailure, AuthFailure> _authFailureServiceTracker;
 
 	static {
