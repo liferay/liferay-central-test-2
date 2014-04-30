@@ -20,11 +20,20 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.registry.Filter;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
+import com.liferay.registry.ServiceReference;
+import com.liferay.registry.ServiceRegistration;
+import com.liferay.registry.ServiceTracker;
+import com.liferay.registry.ServiceTrackerCustomizer;
+import com.liferay.registry.util.StringPlus;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Brian Wing Shun Chan
@@ -141,6 +150,10 @@ public class AuthPipeline {
 		_instance._unregisterAuthFailure(key, authFailure);
 	}
 
+	private static <T> Map<T, ServiceRegistration<T>> getMap() {
+		return new ConcurrentHashMap<T, ServiceRegistration<T>>();
+	}
+
 	private AuthPipeline() {
 
 		// auth.pipeline.pre
@@ -158,6 +171,24 @@ public class AuthPipeline {
 		// auth.max.failures
 
 		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
+
+		Registry registry = RegistryUtil.getRegistry();
+
+		Filter filter = registry.getFilter(
+			"(&(objectClass=" + Authenticator.class.getName() + ")(key=*))");
+
+		_authenticatorServiceTracker = registry.trackServices(
+			filter, new AuthenticatorServiceTrackerCustomizer());
+
+		_authenticatorServiceTracker.open();
+
+		filter = registry.getFilter(
+			"(&(objectClass=" + AuthFailure.class.getName() + ")(key=*))");
+
+		_authFailureServiceTracker = registry.trackServices(
+			filter, new AuthFailureServiceTrackerCustomizer());
+
+		_authFailureServiceTracker.open();
 	}
 
 	private int _authenticate(
@@ -255,46 +286,51 @@ public class AuthPipeline {
 	private void _registerAuthenticator(
 		String key, Authenticator authenticator) {
 
-		List<Authenticator> authenticators = Arrays.asList(
-			_authenticators.get(key));
+		Registry registry = RegistryUtil.getRegistry();
 
-		authenticators.add(authenticator);
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		_authenticators.put(
-			key,
-			authenticators.toArray(new Authenticator[authenticators.size()]));
+		properties.put("key", key);
+
+		ServiceRegistration<Authenticator> serviceRegistration =
+			registry.registerService(
+				Authenticator.class, authenticator, properties);
+
+		_authenticatorServiceRegistrations.put(
+			authenticator, serviceRegistration);
 	}
 
 	private void _registerAuthFailure(String key, AuthFailure authFailure) {
-		List<AuthFailure> authFailures = Arrays.asList(_authFailures.get(key));
+		Registry registry = RegistryUtil.getRegistry();
 
-		authFailures.add(authFailure);
+		Map<String, Object> properties = new HashMap<String, Object>();
 
-		_authFailures.put(
-			key, authFailures.toArray(new AuthFailure[authFailures.size()]));
+		properties.put("key", key);
+
+		ServiceRegistration<AuthFailure> serviceRegistration =
+			registry.registerService(
+				AuthFailure.class, authFailure, properties);
+
+		_authFailureServiceRegistrations.put(authFailure, serviceRegistration);
 	}
 
 	private void _unregisterAuthenticator(
 		String key, Authenticator authenticator) {
 
-		List<Authenticator> authenticators = Arrays.asList(
-			_authenticators.get(key));
+		ServiceRegistration<Authenticator> serviceRegistration =
+			_authenticatorServiceRegistrations.remove(authenticator);
 
-		if (authenticators.remove(authenticator)) {
-			_authenticators.put(
-				key,
-				authenticators.toArray(
-					new Authenticator[authenticators.size()]));
+		if (serviceRegistration != null) {
+			serviceRegistration.unregister();
 		}
 	}
 
 	private void _unregisterAuthFailure(String key, AuthFailure authFailure) {
-		List<AuthFailure> authFailures = Arrays.asList(_authFailures.get(key));
+		ServiceRegistration<AuthFailure> serviceRegistration =
+			_authFailureServiceRegistrations.remove(authFailure);
 
-		if (authFailures.remove(authFailure)) {
-			_authFailures.put(
-				key,
-				authFailures.toArray(new AuthFailure[authFailures.size()]));
+		if (serviceRegistration != null) {
+			serviceRegistration.unregister();
 		}
 	}
 
@@ -304,6 +340,13 @@ public class AuthPipeline {
 		new HashMap<String, Authenticator[]>();
 	private Map<String, AuthFailure[]> _authFailures =
 		new HashMap<String, AuthFailure[]>();
+	private Map<Authenticator, ServiceRegistration<Authenticator>>
+		_authenticatorServiceRegistrations = getMap();
+	private ServiceTracker<Authenticator, Authenticator>
+		_authenticatorServiceTracker;
+	private Map<AuthFailure, ServiceRegistration<AuthFailure>>
+		_authFailureServiceRegistrations = getMap();
+	private ServiceTracker<AuthFailure, AuthFailure> _authFailureServiceTracker;
 
 	static {
 		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
@@ -336,6 +379,175 @@ public class AuthPipeline {
 			_instance._registerAuthFailure(
 				PropsKeys.AUTH_MAX_FAILURES, authFailure);
 		}
+	}
+
+	private class AuthenticatorServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<Authenticator, Authenticator> {
+
+		@Override
+		public Authenticator addingService(
+			ServiceReference<Authenticator> serviceReference) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			Authenticator authenticator = registry.getService(serviceReference);
+
+			List<String> keys = StringPlus.asList(
+				serviceReference.getProperty("key"));
+
+			boolean added = false;
+
+			for (String key : keys) {
+				List<Authenticator> authenticators = Arrays.asList(
+					_authenticators.get(key));
+
+				if (authenticators == null) {
+
+					// Unknown key? Do not register.
+
+					continue;
+				}
+
+				added = true;
+
+				authenticators.add(authenticator);
+
+				_authenticators.put(
+					key,
+					authenticators.toArray(
+						new Authenticator[authenticators.size()]));
+			}
+
+			if (!added) {
+
+				// No registrations? Do not track.
+
+				return null;
+			}
+
+			return authenticator;
+		}
+
+		@Override
+		public void modifiedService(
+			ServiceReference<Authenticator> serviceReference,
+			Authenticator authenticator) {
+		}
+
+		@Override
+		public void removedService(
+			ServiceReference<Authenticator> serviceReference,
+			Authenticator authenticator) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			registry.ungetService(serviceReference);
+
+			List<String> keys = StringPlus.asList(
+				serviceReference.getProperty("key"));
+
+			for (String key : keys) {
+				List<Authenticator> authenticators = Arrays.asList(
+					_authenticators.get(key));
+
+				if (authenticators == null) {
+					continue;
+				}
+
+				if (authenticators.remove(authenticator)) {
+					_authenticators.put(
+						key,
+						authenticators.toArray(
+							new Authenticator[authenticators.size()]));
+				}
+			}
+		}
+
+	}
+
+	private class AuthFailureServiceTrackerCustomizer
+		implements ServiceTrackerCustomizer<AuthFailure, AuthFailure> {
+
+		@Override
+		public AuthFailure addingService(
+			ServiceReference<AuthFailure> serviceReference) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			AuthFailure authFailure = registry.getService(serviceReference);
+
+			List<String> keys = StringPlus.asList(
+				serviceReference.getProperty("key"));
+
+			boolean added = false;
+
+			for (String key : keys) {
+				List<AuthFailure> authFailures = Arrays.asList(
+					_authFailures.get(key));
+
+				if (authFailures == null) {
+
+					// Unknown key? Do not register.
+
+					continue;
+				}
+
+				added = true;
+
+				authFailures.add(authFailure);
+
+				_authFailures.put(
+					key,
+					authFailures.toArray(new AuthFailure[authFailures.size()]));
+			}
+
+			if (!added) {
+
+				// No registrations? Do not track.
+
+				return null;
+			}
+
+			return authFailure;
+		}
+
+		@Override
+		public void
+			modifiedService(
+				ServiceReference<AuthFailure> serviceReference,
+				AuthFailure authFailure) {
+		}
+
+		@Override
+		public void
+			removedService(
+				ServiceReference<AuthFailure> serviceReference,
+				AuthFailure authFailure) {
+
+			Registry registry = RegistryUtil.getRegistry();
+
+			registry.ungetService(serviceReference);
+
+			List<String> keys = StringPlus.asList(
+				serviceReference.getProperty("key"));
+
+			for (String key : keys) {
+				List<AuthFailure> authFailures = Arrays.asList(
+					_authFailures.get(key));
+
+				if (authFailures == null) {
+					continue;
+				}
+
+				if (authFailures.remove(authFailure)) {
+					_authFailures.put(
+						key,
+						authFailures.toArray(
+							new AuthFailure[authFailures.size()]));
+				}
+			}
+		}
+
 	}
 
 }
