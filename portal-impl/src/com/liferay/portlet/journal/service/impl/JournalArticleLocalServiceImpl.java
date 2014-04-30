@@ -4125,17 +4125,17 @@ public class JournalArticleLocalServiceImpl
 	public Hits search(
 			long companyId, long groupId, List<Long> folderIds,
 			long classNameId, String articleId, String title,
-			String description, String content, String type, String status,
-			String ddmStructureKey, String ddmTemplateKey,
+			String description, String content, String type,
+			String statusString, String ddmStructureKey, String ddmTemplateKey,
 			LinkedHashMap<String, Object> params, boolean andSearch, int start,
 			int end, Sort sort)
 		throws SystemException {
 
-		int statusCode = GetterUtil.getInteger(status);
+		int status = GetterUtil.getInteger(statusString);
 
 		return search(
 			companyId, groupId, folderIds, classNameId, articleId, title,
-			description, content, type, statusCode, ddmStructureKey,
+			description, content, type, status, ddmStructureKey,
 			ddmTemplateKey, params, andSearch, start, end, sort);
 	}
 
