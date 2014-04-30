@@ -20,8 +20,8 @@
 	<c:when test='<%= Validator.isNotNull(escapedHREF)  %>'>
 		<a
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
-			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(escapedHREF) ? "href=\"" + escapedHREF + "\"" : StringPool.BLANK %>
+			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %>
 			<%= AUIUtil.buildData(data) %>
 			<%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>
@@ -31,24 +31,25 @@
 		<button
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
 			<%= disabled ? "disabled" : StringPool.BLANK %>
-			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(escapedHREF) ? "href=\"" + escapedHREF + "\"" : StringPool.BLANK %>
+			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %>
 			type='<%= type.equals("cancel") ? "button" : type %>'
 			<%= AUIUtil.buildData(data) %>
-			<%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>>
+			<%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>
+		>
 	</c:otherwise>
 </c:choose>
 
-		<c:if test='<%= Validator.isNotNull(icon) && iconAlign.equals("left") %>'>
-			<i class="<%= icon %>"></i>
-		</c:if>
+<c:if test='<%= Validator.isNotNull(icon) && iconAlign.equals("left") %>'>
+	<i class="<%= icon %>"></i>
+</c:if>
 
-		<%= LanguageUtil.get(pageContext, value) %>
+<%= LanguageUtil.get(pageContext, value) %>
 
-		<c:if test='<%= Validator.isNotNull(icon) && iconAlign.equals("right") %>'>
-			<i class="<%= icon %>"></i>
-		</c:if>
+<c:if test='<%= Validator.isNotNull(icon) && iconAlign.equals("right") %>'>
+	<i class="<%= icon %>"></i>
+</c:if>
 
 <c:choose>
 	<c:when test='<%= Validator.isNotNull(escapedHREF) %>'>
