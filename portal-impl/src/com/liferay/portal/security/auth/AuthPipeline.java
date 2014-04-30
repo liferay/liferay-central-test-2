@@ -178,7 +178,7 @@ public class AuthPipeline {
 			Authenticator authenticator = (Authenticator)InstancePool.get(
 				authenticatorClassName);
 
-			_instance._registerAuthenticator(
+			_registerAuthenticator(
 				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
 		}
 
@@ -186,7 +186,7 @@ public class AuthPipeline {
 			Authenticator authenticator = (Authenticator)InstancePool.get(
 				authenticatorClassName);
 
-			_instance._registerAuthenticator(
+			_registerAuthenticator(
 				PropsKeys.AUTH_PIPELINE_POST, authenticator);
 		}
 
@@ -194,14 +194,14 @@ public class AuthPipeline {
 			AuthFailure authFailure = (AuthFailure)InstancePool.get(
 				authFailureClassName);
 
-			_instance._registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
+			_registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
 		}
 
 		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
 			AuthFailure authFailure = (AuthFailure)InstancePool.get(
 				authFailureClassName);
 
-			_instance._registerAuthFailure(
+			_registerAuthFailure(
 				PropsKeys.AUTH_MAX_FAILURES, authFailure);
 		}
 	}
