@@ -16,7 +16,6 @@
 
 	<path id="jspc.common.classpath">
 		<pathelement path="docroot/WEB-INF/classes" />
-		<pathelement path="${classpath.jsp}" />
 		<pathelement location="${project.dir}/portal-impl/portal-impl.jar" />
 		<pathelement location="${project.dir}/portal-pacl/portal-pacl.jar" />
 		<pathelement location="${project.dir}/portal-service/portal-service.jar" />
