@@ -17,7 +17,7 @@
 <%@ include file="/html/taglib/aui/button/init.jsp" %>
 
 <c:choose>
-	<c:when test='<%= Validator.isNotNull(escapedHREF)  %>'>
+	<c:when test="<%= Validator.isNotNull(escapedHREF) %>">
 		<a
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
 			<%= Validator.isNotNull(escapedHREF) ? "href=\"" + escapedHREF + "\"" : StringPool.BLANK %>
@@ -52,7 +52,7 @@
 </c:if>
 
 <c:choose>
-	<c:when test='<%= Validator.isNotNull(escapedHREF) %>'>
+	<c:when test="<%= Validator.isNotNull(escapedHREF) %>">
 		</a>
 	</c:when>
 	<c:otherwise>
