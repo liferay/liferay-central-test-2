@@ -110,7 +110,7 @@
 		</if>
 	</target>
 
-	<target name="build-dist-jboss-eap-60">
+	<target name="build-dist-jboss-eap-6.0">
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss
 app.server.jboss.version=6.0.1
 app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.0
@@ -132,7 +132,7 @@ app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/${app.se
 		</antcall>
 	</target>
 
-	<target name="build-dist-jboss-eap-61">
+	<target name="build-dist-jboss-eap-6.1">
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss
 app.server.jboss.version=6.1.0
 app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.1
