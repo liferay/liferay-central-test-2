@@ -20,9 +20,16 @@
 	<c:when test="<%= Validator.isNotNull(escapedHREF) %>">
 		<a
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
-			<%= Validator.isNotNull(escapedHREF) ? "href=\"" + escapedHREF + "\"" : StringPool.BLANK %>
-			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
-			<%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %>
+			href="<%= escapedHREF %>"
+
+			<c:if test="<%= Validator.isNotNull(name) %>">
+				id="<%= namespace %><%= name %>"
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(onClick) %>">
+				onClick="<%= onClick %>"
+			</c:if>
+
 			<%= AUIUtil.buildData(data) %>
 			<%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>
 		>
@@ -30,10 +37,22 @@
 	<c:otherwise>
 		<button
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
-			<%= disabled ? "disabled" : StringPool.BLANK %>
-			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
-			<%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %>
-			type='<%= type.equals("cancel") ? "button" : type %>'
+
+			<c:if test="<%= disabled %>">
+				disabled
+			</c:if>
+
+			href="<%= escapedHREF %>"
+
+			<c:if test="<%= Validator.isNotNull(name) %>">
+				id="<%= namespace %><%= name %>"
+			</c:if>
+
+			<c:if test="<%= Validator.isNotNull(onClick) %>">
+				onClick="<%= onClick %>"
+			</c:if>
+
+			type="<%= type.equals("cancel") ? "button" : type %>"
 			<%= AUIUtil.buildData(data) %>
 			<%= InlineUtil.buildDynamicAttributes(dynamicAttributes) %>
 		>
