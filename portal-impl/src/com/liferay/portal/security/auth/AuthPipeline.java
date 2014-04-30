@@ -332,7 +332,6 @@ public class AuthPipeline {
 	private Map<AuthFailure, ServiceRegistration<AuthFailure>>
 		_authFailureServiceRegistrations =
 			new ServiceRegistrationMap<AuthFailure>();
-
 	private ServiceTracker<AuthFailure, AuthFailure> _authFailureServiceTracker;
 
 	static {
