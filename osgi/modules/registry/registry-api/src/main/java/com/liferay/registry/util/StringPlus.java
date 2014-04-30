@@ -11,12 +11,14 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.registry.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -24,7 +26,6 @@ import java.util.List;
  */
 public class StringPlus {
 
-	@SuppressWarnings("unchecked")
 	public static List<String> asList(Object object) {
 		if (String.class.isInstance(object)) {
 			return Collections.singletonList((String)object);
@@ -35,10 +36,12 @@ public class StringPlus {
 		else if (Collection.class.isInstance(object)) {
 			Collection<?> collection = (Collection<?>)object;
 
-			if (!collection.isEmpty() &&
-				String.class.isInstance(collection.iterator().next())) {
+			if (!collection.isEmpty()) {
+				Iterator<?> iterator = collection.iterator();
 
-				return new ArrayList<String>((Collection<String>)object);
+				if (String.class.isInstance(iterator.next())) {
+					return new ArrayList<String>((Collection<String>)object);
+				}
 			}
 		}
 
