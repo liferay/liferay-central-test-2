@@ -1300,21 +1300,21 @@ public class PortalImpl implements Portal {
 
 		List<Group> groups = new UniqueList<Group>();
 
-		LinkedHashMap<String, Object> groupParams =
+		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", new Long(userId));
+		params.put("usersGroups", new Long(userId));
 
 		groups.addAll(
 			0,
 			GroupLocalServiceUtil.search(
-				companyId, null, null, groupParams, QueryUtil.ALL_POS,
-				QueryUtil.ALL_POS));
+				companyId, null, null, params, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS));
 
-		List<Organization> userOrgs =
+		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getUserOrganizations(userId);
 
-		for (Organization organization : userOrgs) {
+		for (Organization organization : organizations) {
 			groups.add(0, organization.getGroup());
 		}
 
