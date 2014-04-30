@@ -151,21 +151,9 @@ public class AuthPipeline {
 	}
 
 	private AuthPipeline() {
-
-		// auth.pipeline.pre
-
-		_authenticators.put(PropsKeys.AUTH_PIPELINE_PRE, new Authenticator[0]);
-
-		// auth.pipeline.post
-
 		_authenticators.put(PropsKeys.AUTH_PIPELINE_POST, new Authenticator[0]);
-
-		// auth.failure
-
+		_authenticators.put(PropsKeys.AUTH_PIPELINE_PRE, new Authenticator[0]);
 		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
-
-		// auth.max.failures
-
 		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
 
 		Registry registry = RegistryUtil.getRegistry();
