@@ -146,63 +146,19 @@ public class AuthPipeline {
 
 		// auth.pipeline.pre
 
-		List<Authenticator> authenticators = new ArrayList<Authenticator>();
-
-		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
-			Authenticator authenticator = (Authenticator)InstancePool.get(
-				authenticatorClassName);
-
-			authenticators.add(authenticator);
-		}
-
-		_authenticators.put(
-			PropsKeys.AUTH_PIPELINE_PRE,
-			authenticators.toArray(new Authenticator[authenticators.size()]));
+		_authenticators.put(PropsKeys.AUTH_PIPELINE_PRE, new Authenticator[0]);
 
 		// auth.pipeline.post
 
-		authenticators.clear();
-
-		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
-			Authenticator authenticator = (Authenticator)InstancePool.get(
-				authenticatorClassName);
-
-			authenticators.add(authenticator);
-		}
-
-		_authenticators.put(
-			PropsKeys.AUTH_PIPELINE_POST,
-			authenticators.toArray(new Authenticator[authenticators.size()]));
+		_authenticators.put(PropsKeys.AUTH_PIPELINE_POST, new Authenticator[0]);
 
 		// auth.failure
 
-		List<AuthFailure> authFailures = new ArrayList<AuthFailure>();
-
-		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			authFailures.add(authFailure);
-		}
-
-		_authFailures.put(
-			PropsKeys.AUTH_FAILURE,
-			authFailures.toArray(new AuthFailure[authFailures.size()]));
+		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
 
 		// auth.max.failures
 
-		authFailures.clear();
-
-		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			authFailures.add(authFailure);
-		}
-
-		_authFailures.put(
-			PropsKeys.AUTH_MAX_FAILURES,
-			authFailures.toArray(new AuthFailure[authFailures.size()]));
+		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
 	}
 
 	private int _authenticate(
@@ -351,5 +307,38 @@ public class AuthPipeline {
 		new HashMap<String, Authenticator[]>();
 	private Map<String, AuthFailure[]> _authFailures =
 		new HashMap<String, AuthFailure[]>();
+
+	static {
+		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
+			Authenticator authenticator = (Authenticator)InstancePool.get(
+				authenticatorClassName);
+
+			_instance._registerAuthenticator(
+				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
+		}
+
+		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
+			Authenticator authenticator = (Authenticator)InstancePool.get(
+				authenticatorClassName);
+
+			_instance._registerAuthenticator(
+				PropsKeys.AUTH_PIPELINE_POST, authenticator);
+		}
+
+		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_instance._registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
+		}
+
+		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_instance._registerAuthFailure(
+				PropsKeys.AUTH_MAX_FAILURES, authFailure);
+		}
+	}
 
 }
