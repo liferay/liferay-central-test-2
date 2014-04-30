@@ -110,14 +110,36 @@
 		</if>
 	</target>
 
-	<target name="build-dist-jboss-eap">
+	<target name="build-dist-jboss-eap-60">
+		<echo file="app.server.${user.name}.properties">app.server.type=jboss
+app.server.jboss.version=6.0.1
+app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.0
+app.server.jboss.zip.name=jboss-eap-${app.server.jboss.version}.zip
+app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/${app.server.jboss.zip.name}</echo>
+
+		<antcall target="unzip-jboss" inheritAll="false" />
+
+		<delete dir="${project.dir}/portal-web/classes" />
+
+		<ant target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${user.name}.properties" />
+
+		<antcall target="deploy-plugins">
+			<param name="deployer.dest.dir" value="${app.server.jboss.deploy.dir}" />
+			<param name="deployer.app.server.type" value="jboss" />
+			<param name="deployer.app.server.lib.portal.dir" value="${app.server.jboss.portal.dir}/WEB-INF/lib" />
+		</antcall>
+	</target>
+
+	<target name="build-dist-jboss-eap-61">
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss
 app.server.jboss.version=6.1.0
 app.server.jboss.dir=${app.server.parent.dir}/jboss-eap-6.1
-app.server.jboss.zip.name=jboss-eap-$${app.server.jboss.version}.zip
-app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/${app.server.jboss.zip.name}.zip</echo>
+app.server.jboss.zip.name=jboss-eap-${app.server.jboss.version}.zip
+app.server.jboss.zip.url=http://mirrors/www.jboss.org/jbossas/downloads/${app.server.jboss.zip.name}</echo>
 
-		<antcall target="unzip-jboss-eap" inheritAll="false" />
+		<antcall target="unzip-jboss" inheritAll="false" />
 
 		<delete dir="${project.dir}/portal-web/classes" />
 
