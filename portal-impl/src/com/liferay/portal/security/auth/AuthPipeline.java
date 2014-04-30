@@ -158,19 +158,19 @@ public class AuthPipeline {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter filter = registry.getFilter(
-			"(&(objectClass=" + Authenticator.class.getName() + ")(key=*))");
+		Filter authenticatorFilter = registry.getFilter(
+			"(&(key=*)(objectClass=" + Authenticator.class.getName() + "))");
 
 		_authenticatorServiceTracker = registry.trackServices(
-			filter, new AuthenticatorServiceTrackerCustomizer());
+			authenticatorFilter, new AuthenticatorServiceTrackerCustomizer());
 
 		_authenticatorServiceTracker.open();
 
-		filter = registry.getFilter(
-			"(&(objectClass=" + AuthFailure.class.getName() + ")(key=*))");
+		Filter authFailureFilter = registry.getFilter(
+			"(&(key=*)(objectClass=" + AuthFailure.class.getName() + "))");
 
 		_authFailureServiceTracker = registry.trackServices(
-			filter, new AuthFailureServiceTrackerCustomizer());
+			authFailureFilter, new AuthFailureServiceTrackerCustomizer());
 
 		_authFailureServiceTracker.open();
 	}
