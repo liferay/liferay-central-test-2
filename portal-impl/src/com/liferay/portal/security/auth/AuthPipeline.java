@@ -153,6 +153,33 @@ public class AuthPipeline {
 	private AuthPipeline() {
 		Registry registry = RegistryUtil.getRegistry();
 
+		Filter authFailureFilter = registry.getFilter(
+			"(&(key=*)(objectClass=" + AuthFailure.class.getName() + "))");
+
+		_authFailureServiceTracker = registry.trackServices(
+			authFailureFilter, new AuthFailureServiceTrackerCustomizer());
+
+		_authFailureServiceTracker.open();
+
+		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
+
+		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
+		}
+
+		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
+
+		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_registerAuthFailure(
+				PropsKeys.AUTH_MAX_FAILURES, authFailure);
+		}
+
 		Filter authenticatorFilter = registry.getFilter(
 			"(&(key=*)(objectClass=" + Authenticator.class.getName() + "))");
 
@@ -179,33 +206,6 @@ public class AuthPipeline {
 
 			_registerAuthenticator(
 				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
-		}
-
-		Filter authFailureFilter = registry.getFilter(
-			"(&(key=*)(objectClass=" + AuthFailure.class.getName() + "))");
-
-		_authFailureServiceTracker = registry.trackServices(
-			authFailureFilter, new AuthFailureServiceTrackerCustomizer());
-
-		_authFailureServiceTracker.open();
-
-		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
-
-		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			_registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
-		}
-
-		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
-
-		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			_registerAuthFailure(
-				PropsKeys.AUTH_MAX_FAILURES, authFailure);
 		}
 	}
 
