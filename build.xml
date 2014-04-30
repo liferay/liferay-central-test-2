@@ -988,6 +988,11 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 	<target name="start">
 		<setup-sdk />
 
+		<ant-execute
+			ant.dir="${project.dir}/modules/core/registry-api"
+			ant.target="compile"
+		/>
+
 		<antcall target="compile" />
 
 		<ant dir="util-taglib" target="jar" inheritAll="false" />

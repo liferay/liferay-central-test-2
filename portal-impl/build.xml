@@ -1452,11 +1452,6 @@ public class Creole10Parser]]></replacevalue>
 		<copy todir="${portal-impl.classes.dir}" preservelastmodified="true">
 			<fileset dir="src" excludes="**/*.java,**/META-INF/javadocs-all*.xml" />
 		</copy>
-
-		<gradle-execute
-			gradleModuleDir="/registry"
-			gradleTask=":registry-api:compileJava"
-		/>
 	</target>
 
 	<target name="compile-test">
