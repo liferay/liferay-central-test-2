@@ -389,9 +389,6 @@ public class AuthPipeline {
 					_authenticators.get(key));
 
 				if (authenticators == null) {
-
-					// Unknown key? Do not register.
-
 					continue;
 				}
 
@@ -406,9 +403,6 @@ public class AuthPipeline {
 			}
 
 			if (!added) {
-
-				// No registrations? Do not track.
-
 				return null;
 			}
 
@@ -473,9 +467,6 @@ public class AuthPipeline {
 					_authFailures.get(key));
 
 				if (authFailures == null) {
-
-					// Unknown key? Do not register.
-
 					continue;
 				}
 
@@ -489,9 +480,6 @@ public class AuthPipeline {
 			}
 
 			if (!added) {
-
-				// No registrations? Do not track.
-
 				return null;
 			}
 
