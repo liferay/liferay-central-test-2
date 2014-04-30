@@ -185,7 +185,6 @@ svn://svn.liferay.com/repos/public/alloy/trunk/sandbox/taglibs.
 		</delete>
 
 		<path id="antlr.classpath">
-			<pathelement path="${classpath}" />
 			<fileset dir="${project.dir}/lib/portal" includes="antlr2.jar,antlr3.jar,antlr3-runtime.jar,stringtemplate.jar" />
 		</path>
 
