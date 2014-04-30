@@ -31,7 +31,6 @@
 		<button
 			class="<%= AUIUtil.buildCss(AUIUtil.BUTTON_PREFIX, disabled, false, false, cssClass) %>"
 			<%= disabled ? "disabled" : StringPool.BLANK %>
-			<%= Validator.isNotNull(escapedHREF) ? "href=\"" + escapedHREF + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(name) ? "id=\"" + namespace + name + "\"" : StringPool.BLANK %>
 			<%= Validator.isNotNull(onClick) ? "onClick=\"" + onClick + "\"" : StringPool.BLANK %>
 			type='<%= type.equals("cancel") ? "button" : type %>'
