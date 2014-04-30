@@ -45,8 +45,6 @@
 		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/portal" includes="*.jar" />
-		<fileset dir="${project.dir}/osgi/lib/common/core" includes="*.jar" />
-		<fileset dir="${project.dir}/osgi/lib/common/portal" includes="org.phidias.compile.jar" />
 	</path>
 
 	<path id="project.classpath">
@@ -60,7 +58,6 @@
 		<fileset dir="${project.dir}/lib/development" includes="*.jar" excludes="jalopy.jar,jetty*.jar,tomcat*.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="ant.jar" />
-		<fileset dir="${project.dir}/osgi/lib/common/core" includes="*.jar" />
 	</path>
 
 	<path id="web.classpath">
