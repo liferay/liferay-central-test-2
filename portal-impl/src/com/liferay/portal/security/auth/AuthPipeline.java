@@ -151,11 +151,6 @@ public class AuthPipeline {
 	}
 
 	private AuthPipeline() {
-		_authenticators.put(PropsKeys.AUTH_PIPELINE_POST, new Authenticator[0]);
-		_authenticators.put(PropsKeys.AUTH_PIPELINE_PRE, new Authenticator[0]);
-		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
-		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
-
 		Registry registry = RegistryUtil.getRegistry();
 
 		Filter authenticatorFilter = registry.getFilter(
@@ -174,6 +169,8 @@ public class AuthPipeline {
 
 		_authFailureServiceTracker.open();
 
+		_authenticators.put(PropsKeys.AUTH_PIPELINE_POST, new Authenticator[0]);
+
 		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
 			Authenticator authenticator = (Authenticator)InstancePool.get(
 				authenticatorClassName);
@@ -181,6 +178,8 @@ public class AuthPipeline {
 			_registerAuthenticator(
 				PropsKeys.AUTH_PIPELINE_POST, authenticator);
 		}
+
+		_authenticators.put(PropsKeys.AUTH_PIPELINE_PRE, new Authenticator[0]);
 
 		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
 			Authenticator authenticator = (Authenticator)InstancePool.get(
@@ -190,12 +189,16 @@ public class AuthPipeline {
 				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
 		}
 
+		_authFailures.put(PropsKeys.AUTH_FAILURE, new AuthFailure[0]);
+
 		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
 			AuthFailure authFailure = (AuthFailure)InstancePool.get(
 				authFailureClassName);
 
 			_registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
 		}
+
+		_authFailures.put(PropsKeys.AUTH_MAX_FAILURES, new AuthFailure[0]);
 
 		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
 			AuthFailure authFailure = (AuthFailure)InstancePool.get(
