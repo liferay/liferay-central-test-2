@@ -173,6 +173,37 @@ public class AuthPipeline {
 			authFailureFilter, new AuthFailureServiceTrackerCustomizer());
 
 		_authFailureServiceTracker.open();
+
+		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
+			Authenticator authenticator = (Authenticator)InstancePool.get(
+				authenticatorClassName);
+
+			_instance._registerAuthenticator(
+				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
+		}
+
+		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
+			Authenticator authenticator = (Authenticator)InstancePool.get(
+				authenticatorClassName);
+
+			_instance._registerAuthenticator(
+				PropsKeys.AUTH_PIPELINE_POST, authenticator);
+		}
+
+		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_instance._registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
+		}
+
+		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
+			AuthFailure authFailure = (AuthFailure)InstancePool.get(
+				authFailureClassName);
+
+			_instance._registerAuthFailure(
+				PropsKeys.AUTH_MAX_FAILURES, authFailure);
+		}
 	}
 
 	private int _authenticate(
@@ -333,39 +364,6 @@ public class AuthPipeline {
 		_authFailureServiceRegistrations =
 			new ServiceRegistrationMap<AuthFailure>();
 	private ServiceTracker<AuthFailure, AuthFailure> _authFailureServiceTracker;
-
-	static {
-		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
-			Authenticator authenticator = (Authenticator)InstancePool.get(
-				authenticatorClassName);
-
-			_instance._registerAuthenticator(
-				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
-		}
-
-		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
-			Authenticator authenticator = (Authenticator)InstancePool.get(
-				authenticatorClassName);
-
-			_instance._registerAuthenticator(
-				PropsKeys.AUTH_PIPELINE_POST, authenticator);
-		}
-
-		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			_instance._registerAuthFailure(PropsKeys.AUTH_FAILURE, authFailure);
-		}
-
-		for (String authFailureClassName : PropsValues.AUTH_MAX_FAILURES) {
-			AuthFailure authFailure = (AuthFailure)InstancePool.get(
-				authFailureClassName);
-
-			_instance._registerAuthFailure(
-				PropsKeys.AUTH_MAX_FAILURES, authFailure);
-		}
-	}
 
 	private class AuthenticatorServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<Authenticator, Authenticator> {
