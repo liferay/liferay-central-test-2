@@ -174,20 +174,20 @@ public class AuthPipeline {
 
 		_authFailureServiceTracker.open();
 
-		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
-			Authenticator authenticator = (Authenticator)InstancePool.get(
-				authenticatorClassName);
-
-			_registerAuthenticator(
-				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
-		}
-
 		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_POST) {
 			Authenticator authenticator = (Authenticator)InstancePool.get(
 				authenticatorClassName);
 
 			_registerAuthenticator(
 				PropsKeys.AUTH_PIPELINE_POST, authenticator);
+		}
+
+		for (String authenticatorClassName : PropsValues.AUTH_PIPELINE_PRE) {
+			Authenticator authenticator = (Authenticator)InstancePool.get(
+				authenticatorClassName);
+
+			_registerAuthenticator(
+				PropsKeys.AUTH_PIPELINE_PRE, authenticator);
 		}
 
 		for (String authFailureClassName : PropsValues.AUTH_FAILURE) {
