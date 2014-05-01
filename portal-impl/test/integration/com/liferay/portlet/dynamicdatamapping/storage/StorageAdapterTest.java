@@ -36,6 +36,7 @@ import com.liferay.portlet.dynamicdatamapping.service.BaseDDMServiceTestCase;
 
 import java.io.Serializable;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
