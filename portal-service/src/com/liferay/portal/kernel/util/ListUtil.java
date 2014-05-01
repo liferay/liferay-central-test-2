@@ -109,7 +109,7 @@ public class ListUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link java.util.Arrays#asList}
+	 * @deprecated As of 7.0.0, replaced by {@link Arrays#asList(Object...)}
 	 */
 	@Deprecated
 	public static <E> List<E> fromArray(E[] array) {
