@@ -256,6 +256,20 @@
 					</then>
 				</elseif>
 				<elseif>
+					<contains string="${permissionDefinitionKey}" substring="SITE_ADMIN_APPLICATIONS_BOOKMARKS" />
+					<then>
+						<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_BOOKMARKS" />
+						<var name="permissionNavigationValue" value="Bookmarks" />
+					</then>
+				</elseif>
+				<elseif>
+					<contains string="${permissionDefinitionKey}" substring="SITE_ADMIN_APPLICATIONS_DOCUMENTS_AND_MEDIA" />
+					<then>
+						<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_DOCUMENTS_AND_MEDIA" />
+						<var name="permissionNavigationValue" value="Documents and Media" />
+					</then>
+				</elseif>
+				<elseif>
 					<contains string="${permissionDefinitionKey}" substring="SITE_ADMIN_APPLICATIONS_WEB_CONTENT_DISPLAY" />
 					<then>
 						<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_WEB_CONTENT_DISPLAY" />
@@ -569,6 +583,20 @@
 				<then>
 					<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_ASSET_PUBLISHER" />
 					<var name="permissionNavigationValue" value="Asset Publisher" />
+				</then>
+			</elseif>
+			<elseif>
+				<contains string="${permissionDefinitionKey}" substring="SITE_ADMIN_APPLICATIONS_BOOKMARKS" />
+				<then>
+					<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_BOOKMARKS" />
+					<var name="permissionNavigationValue" value="Bookmarks" />
+				</then>
+			</elseif>
+			<elseif>
+				<contains string="${permissionDefinitionKey}" substring="SITE_ADMIN_APPLICATIONS_DOCUMENTS_AND_MEDIA" />
+				<then>
+					<var name="permissionNavigationKey" value="SITE_ADMIN_APPLICATIONS_DOCUMENTS_AND_MEDIA" />
+					<var name="permissionNavigationValue" value="Documents and Media" />
 				</then>
 			</elseif>
 			<elseif>
