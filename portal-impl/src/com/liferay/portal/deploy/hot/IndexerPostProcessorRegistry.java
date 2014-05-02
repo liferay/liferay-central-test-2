@@ -48,7 +48,7 @@ public class IndexerPostProcessorRegistry {
 		_serviceTracker.close();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		IndexerPostProcessorRegistry.class);
 
 	private ServiceTracker<IndexerPostProcessor, IndexerPostProcessor>
