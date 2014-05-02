@@ -505,6 +505,19 @@ public class UserPersistenceTest {
 	}
 
 	@Test
+	public void testCountByC_DU_S() {
+		try {
+			_persistence.countByC_DU_S(ServiceTestUtil.nextLong(),
+				ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt());
+
+			_persistence.countByC_DU_S(0L, ServiceTestUtil.randomBoolean(), 0);
+		}
+		catch (Exception e) {
+			Assert.fail(e.getMessage());
+		}
+	}
+
+	@Test
 	public void testFindByPrimaryKeyExisting() throws Exception {
 		User newUser = addUser();
 
