@@ -249,7 +249,10 @@ if (!defaultFolderView && (folder != null) && (portletName.equals(PortletKeys.DO
 				},
 				'listViewConfig.useTransition': false,
 
-				<liferay-portlet:resourceURL copyCurrentRenderParameters="<%= false %>" varImpl="mainURL" />
+				<liferay-portlet:resourceURL
+					copyCurrentRenderParameters="<%= false %>"
+					varImpl="mainURL"
+				/>
 				
 				mainUrl: '<%= mainURL %>',
 				strutsAction: '/document_library/view'
