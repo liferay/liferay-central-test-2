@@ -110,11 +110,12 @@ public class ServiceWrapperRegistry {
 			throws Throwable {
 		
 			Class<?> clazz = serviceWrapper.getClass();
-		
+				
+			ClassLoader classLoader = clazz.getClassLoader();
+
 			Method method = clazz.getMethod(
 				"getWrappedService", new Class<?>[0]);
-		
-			ClassLoader classLoader = clazz.getClassLoader();
+
 			Class<?> serviceTypeClass = method.getReturnType();
 		
 			Object serviceProxy = PortalBeanLocatorUtil.locate(
