@@ -139,7 +139,7 @@ public class ServiceWrapperRegistry {
 			serviceWrapper.setWrappedService((T)previousService);
 		
 			return new ServiceBag(
-				classLoader, serviceTypeClass, serviceWrapper, advisedSupport);
+				classLoader, advisedSupport, serviceTypeClass, serviceWrapper);
 		}
 
 	}

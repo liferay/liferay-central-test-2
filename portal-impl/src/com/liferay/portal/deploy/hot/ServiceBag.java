@@ -24,8 +24,8 @@ import org.springframework.aop.target.SingletonTargetSource;
 class ServiceBag {
 
 	public ServiceBag(
-		ClassLoader classLoader, Class<?> serviceTypeClass,
-		ServiceWrapper<?> serviceWrapper, AdvisedSupport advisedSupport) {
+		ClassLoader classLoader, AdvisedSupport advisedSupport,
+		Class<?> serviceTypeClass, ServiceWrapper<?> serviceWrapper) {
 
 		_advisedSupport = advisedSupport;
 
