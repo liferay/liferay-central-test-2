@@ -2151,10 +2151,10 @@ public class HookHotDeployListener
 
 	protected void initServices(
 			String servletContextName, ClassLoader portletClassLoader,
-			Element rootElement)
+			Element parentElement)
 		throws Exception {
 
-		List<Element> serviceElements = rootElement.elements("service");
+		List<Element> serviceElements = parentElement.elements("service");
 
 		for (Element serviceElement : serviceElements) {
 			String serviceType = serviceElement.elementText("service-type");
