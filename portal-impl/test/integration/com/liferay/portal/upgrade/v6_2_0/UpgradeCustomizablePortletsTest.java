@@ -113,12 +113,12 @@ public class UpgradeCustomizablePortletsTest
 		Layout layout1 = getLayout();
 		Layout layout2 = getLayout();
 
-		addPortletPreferences(layout1, "23");
-		addPortletPreferences(layout1, "71_INSTANCE_LhZwzy867qfr");
-		addPortletPreferences(layout1, "56_INSTANCE_LhZwzy867qqb");
-		addPortletPreferences(layout1, "56_INSTANCE_LhZwzy867qxc");
+		addPortletPreferences(layout1, _PORTLET_IDS[0]);
+		addPortletPreferences(layout1, _PORTLET_IDS[1]);
+		addPortletPreferences(layout1, _PORTLET_IDS[2]);
+		addPortletPreferences(layout1, _PORTLET_IDS[3]);
 
-		addPortletPreferences(layout2, "56_INSTANCE_LhZwzy867qxc");
+		addPortletPreferences(layout2, _PORTLET_IDS[3]);
 
 		long ownerId = 1234;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
@@ -131,7 +131,8 @@ public class UpgradeCustomizablePortletsTest
 				"@portlet_4@"
 			},
 			ArraysUtil.join(
-				new String[] {String.valueOf(layout1.getPlid())}, _PORTLET_IDS));
+				new String[] {String.valueOf(layout1.getPlid())},
+				_PORTLET_IDS));
 
 		PortalPreferencesWrapper portalPreferencesWrapper =
 			getPortalPreferences(ownerId, ownerType, preferences);
