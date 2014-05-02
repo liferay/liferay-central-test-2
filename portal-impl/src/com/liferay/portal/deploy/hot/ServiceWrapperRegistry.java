@@ -59,7 +59,6 @@ public class ServiceWrapperRegistry {
 		implements ServiceTrackerCustomizer<ServiceWrapper<?>, ServiceBag> {
 
 		@Override
-		@SuppressWarnings("rawtypes")
 		public ServiceBag addingService(
 			ServiceReference<ServiceWrapper<?>> serviceReference) {
 
@@ -81,11 +80,10 @@ public class ServiceWrapperRegistry {
 			return null;
 		}
 
-		@SuppressWarnings({ "rawtypes", "unchecked" })
 		private <T> ServiceBag getHolder(ServiceWrapper<T> serviceWrapper)
 			throws Throwable {
 
-			Class<? extends ServiceWrapper> clazz = serviceWrapper.getClass();
+			Class<?> clazz = serviceWrapper.getClass();
 
 			Method method = clazz.getMethod(
 				"getWrappedService", new Class<?>[0]);
