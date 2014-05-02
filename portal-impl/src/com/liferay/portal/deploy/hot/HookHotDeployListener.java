@@ -700,8 +700,7 @@ public class HookHotDeployListener
 		initIndexerPostProcessors(
 			servletContextName, portletClassLoader, rootElement);
 
-		initServices(
-			servletContextName, portletClassLoader, rootElement);
+		initServices(servletContextName, portletClassLoader, rootElement);
 
 		initServletFilters(
 			servletContext, servletContextName, portletClassLoader,

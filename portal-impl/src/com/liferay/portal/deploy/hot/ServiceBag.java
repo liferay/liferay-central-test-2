@@ -21,7 +21,10 @@ import org.springframework.aop.TargetSource;
 import org.springframework.aop.framework.AdvisedSupport;
 import org.springframework.aop.target.SingletonTargetSource;
 
-class ServiceBag {
+/**
+ * @author Raymond Augé
+ */
+public class ServiceBag {
 
 	public ServiceBag(
 		ClassLoader classLoader, AdvisedSupport advisedSupport,
@@ -48,18 +51,19 @@ class ServiceBag {
 		Object currentService = targetSource.getTarget();
 		ServiceWrapper<T> previousService = null;
 
-		// loop through the chain
+		// Loop through services
 
 		while (true) {
 
-			// stop if we match
+			// A matching service was found
 
 			if (currentService == _serviceWrapper) {
 				Object wrappedService = _serviceWrapper.getWrappedService();
 
 				if (previousService == null) {
 
-					// we're at the root, we need to change the target source
+					// There is no previous service, so we need to change the
+					// target source
 
 					TargetSource previousTargetSource =
 						new SingletonTargetSource(wrappedService);
@@ -68,8 +72,8 @@ class ServiceBag {
 				}
 				else {
 
-					// take ourselves out of the chain, by setting our
-					// wrapped service into the previous, no need to change the
+					// Take ourselves out of the chain by setting our
+					// wrapped service as the previous without changing the
 					// target source
 
 					previousService.setWrappedService((T)wrappedService);
@@ -78,14 +82,14 @@ class ServiceBag {
 				break;
 			}
 
-			// every item in the chain is a ServiceWrapper except the original
+			// Every item in the chain is a ServiceWrapper except the original
 			// service
 
 			if (!(currentService instanceof ServiceWrapper)) {
 				break;
 			}
 
-			// we didn't match, check the next
+			// Check the next service because no matching service was found
 
 			previousService = (ServiceWrapper<T>)currentService;
 

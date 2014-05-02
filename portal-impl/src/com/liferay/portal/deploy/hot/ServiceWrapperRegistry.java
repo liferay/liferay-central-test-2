@@ -51,7 +51,7 @@ public class ServiceWrapperRegistry {
 		_serviceTracker.close();
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		ServiceWrapperRegistry.class);
 
 	private ServiceTracker<ServiceWrapper<?>, ServiceBag> _serviceTracker;
@@ -108,36 +108,36 @@ public class ServiceWrapperRegistry {
 
 		private <T> ServiceBag _getServiceBag(ServiceWrapper<T> serviceWrapper)
 			throws Throwable {
-		
+
 			Class<?> clazz = serviceWrapper.getClass();
-				
+
 			ClassLoader classLoader = clazz.getClassLoader();
 
 			Method method = clazz.getMethod(
 				"getWrappedService", new Class<?>[0]);
 
 			Class<?> serviceTypeClass = method.getReturnType();
-		
+
 			Object serviceProxy = PortalBeanLocatorUtil.locate(
 				serviceTypeClass.getName());
-		
+
 			if (!ProxyUtil.isProxyClass(serviceProxy.getClass())) {
 				_log.error(
 					"Service hooks require Spring to be configured to use " +
 						"JdkDynamicProxy and will not work with CGLIB");
-		
+
 				return null;
 			}
-		
+
 			AdvisedSupport advisedSupport =
 				ServiceBeanAopProxy.getAdvisedSupport(serviceProxy);
-		
+
 			TargetSource targetSource = advisedSupport.getTargetSource();
-		
+
 			Object previousService = targetSource.getTarget();
-		
+
 			serviceWrapper.setWrappedService((T)previousService);
-		
+
 			return new ServiceBag(
 				classLoader, advisedSupport, serviceTypeClass, serviceWrapper);
 		}
