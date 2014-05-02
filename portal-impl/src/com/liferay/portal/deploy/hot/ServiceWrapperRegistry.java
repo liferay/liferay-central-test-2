@@ -81,41 +81,6 @@ public class ServiceWrapperRegistry {
 			return null;
 		}
 
-		private <T> ServiceBag _getServiceBag(ServiceWrapper<T> serviceWrapper)
-			throws Throwable {
-
-			Class<?> clazz = serviceWrapper.getClass();
-
-			Method method = clazz.getMethod(
-				"getWrappedService", new Class<?>[0]);
-
-			ClassLoader classLoader = clazz.getClassLoader();
-			Class<?> serviceTypeClass = method.getReturnType();
-
-			Object serviceProxy = PortalBeanLocatorUtil.locate(
-				serviceTypeClass.getName());
-
-			if (!ProxyUtil.isProxyClass(serviceProxy.getClass())) {
-				_log.error(
-					"Service hooks require Spring to be configured to use " +
-						"JdkDynamicProxy and will not work with CGLIB");
-
-				return null;
-			}
-
-			AdvisedSupport advisedSupport =
-				ServiceBeanAopProxy.getAdvisedSupport(serviceProxy);
-
-			TargetSource targetSource = advisedSupport.getTargetSource();
-
-			Object previousService = targetSource.getTarget();
-
-			serviceWrapper.setWrappedService((T)previousService);
-
-			return new ServiceBag(
-				advisedSupport, classLoader, serviceTypeClass, serviceWrapper);
-		}
-
 		@Override
 		public void modifiedService(
 			ServiceReference<ServiceWrapper<?>> serviceReference,
@@ -139,6 +104,41 @@ public class ServiceWrapperRegistry {
 			catch (Exception e) {
 				_log.error(e, e);
 			}
+		}
+
+		private <T> ServiceBag _getServiceBag(ServiceWrapper<T> serviceWrapper)
+			throws Throwable {
+		
+			Class<?> clazz = serviceWrapper.getClass();
+		
+			Method method = clazz.getMethod(
+				"getWrappedService", new Class<?>[0]);
+		
+			ClassLoader classLoader = clazz.getClassLoader();
+			Class<?> serviceTypeClass = method.getReturnType();
+		
+			Object serviceProxy = PortalBeanLocatorUtil.locate(
+				serviceTypeClass.getName());
+		
+			if (!ProxyUtil.isProxyClass(serviceProxy.getClass())) {
+				_log.error(
+					"Service hooks require Spring to be configured to use " +
+						"JdkDynamicProxy and will not work with CGLIB");
+		
+				return null;
+			}
+		
+			AdvisedSupport advisedSupport =
+				ServiceBeanAopProxy.getAdvisedSupport(serviceProxy);
+		
+			TargetSource targetSource = advisedSupport.getTargetSource();
+		
+			Object previousService = targetSource.getTarget();
+		
+			serviceWrapper.setWrappedService((T)previousService);
+		
+			return new ServiceBag(
+				advisedSupport, classLoader, serviceTypeClass, serviceWrapper);
 		}
 
 	}
