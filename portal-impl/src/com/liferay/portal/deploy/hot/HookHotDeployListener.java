@@ -3453,8 +3453,8 @@ public class HookHotDeployListener
 			serviceBags.put(
 				serviceType,
 				new ServiceBag(
-					advisedSupport, portletClassLoader, serviceTypeClass,
-					serviceWrapper));
+					portletClassLoader, serviceTypeClass, serviceWrapper,
+					advisedSupport));
 		}
 
 		private Map<String, Map<String, ServiceBag>> _serviceBags =
