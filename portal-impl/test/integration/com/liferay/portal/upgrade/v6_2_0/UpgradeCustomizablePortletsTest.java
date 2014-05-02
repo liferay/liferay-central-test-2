@@ -110,12 +110,15 @@ public class UpgradeCustomizablePortletsTest
 	public void testUpgrade() throws Exception {
 		_invokeSuper = true;
 
-		Layout layout = getLayout();
+		Layout layout1 = getLayout();
+		Layout layout2 = getLayout();
 
-		addPortletPreferences(layout, "23");
-		addPortletPreferences(layout, "71_INSTANCE_LhZwzy867qfr");
-		addPortletPreferences(layout, "56_INSTANCE_LhZwzy867qqb");
-		addPortletPreferences(layout, "56_INSTANCE_LhZwzy867qxc");
+		addPortletPreferences(layout1, "23");
+		addPortletPreferences(layout1, "71_INSTANCE_LhZwzy867qfr");
+		addPortletPreferences(layout1, "56_INSTANCE_LhZwzy867qqb");
+		addPortletPreferences(layout1, "56_INSTANCE_LhZwzy867qxc");
+
+		addPortletPreferences(layout2, "56_INSTANCE_LhZwzy867qxc");
 
 		long ownerId = 1234;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_USER;
@@ -128,7 +131,7 @@ public class UpgradeCustomizablePortletsTest
 				"@portlet_4@"
 			},
 			ArraysUtil.join(
-				new String[] {String.valueOf(layout.getPlid())}, _PORTLET_IDS));
+				new String[] {String.valueOf(layout1.getPlid())}, _PORTLET_IDS));
 
 		PortalPreferencesWrapper portalPreferencesWrapper =
 			getPortalPreferences(ownerId, ownerType, preferences);
@@ -153,47 +156,48 @@ public class UpgradeCustomizablePortletsTest
 
 		List<PortletPreferences> portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _newPortletIds.get(0));
+				layout1.getPlid(), _newPortletIds.get(0));
 
 		Assert.assertEquals(portletPreferencesList.size(), 1);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _newPortletIds.get(1));
+				layout1.getPlid(), _newPortletIds.get(1));
 
 		Assert.assertEquals(portletPreferencesList.size(), 1);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _PORTLET_IDS[1]);
+				layout1.getPlid(), _PORTLET_IDS[1]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _newPortletIds.get(2));
+				layout1.getPlid(), _newPortletIds.get(2));
 
 		Assert.assertEquals(portletPreferencesList.size(), 1);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _PORTLET_IDS[2]);
+				layout1.getPlid(), _PORTLET_IDS[2]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _newPortletIds.get(3));
+				layout1.getPlid(), _newPortletIds.get(3));
 
 		Assert.assertEquals(portletPreferencesList.size(), 1);
 
 		portletPreferencesList =
 			PortletPreferencesLocalServiceUtil.getPortletPreferences(
-				layout.getPlid(), _PORTLET_IDS[3]);
+				layout1.getPlid(), _PORTLET_IDS[3]);
 
 		Assert.assertEquals(portletPreferencesList.size(), 0);
 
-		GroupLocalServiceUtil.deleteGroup(layout.getGroup());
+		GroupLocalServiceUtil.deleteGroup(layout1.getGroup());
+		GroupLocalServiceUtil.deleteGroup(layout2.getGroup());
 	}
 
 	protected void addPortletPreferences(Layout layout, String portletId)
