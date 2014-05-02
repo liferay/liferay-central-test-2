@@ -69,7 +69,7 @@ public class ServiceWrapperRegistry {
 				serviceReference);
 
 			try {
-				return getHolder(serviceWrapper);
+				return _getServiceBag(serviceWrapper);
 			}
 			catch (Throwable t) {
 				_log.error(t, t);
@@ -81,7 +81,7 @@ public class ServiceWrapperRegistry {
 			return null;
 		}
 
-		private <T> ServiceBag getHolder(ServiceWrapper<T> serviceWrapper)
+		private <T> ServiceBag _getServiceBag(ServiceWrapper<T> serviceWrapper)
 			throws Throwable {
 
 			Class<?> clazz = serviceWrapper.getClass();
