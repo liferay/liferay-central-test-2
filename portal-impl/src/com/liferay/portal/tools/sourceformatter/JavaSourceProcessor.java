@@ -943,7 +943,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 				"private static Log _log"
 			});
 
-		newContent = fixCompatClassImports(file, newContent);
+		newContent = fixCompatClassImports(absolutePath, newContent);
 
 		newContent = stripJavaImports(newContent, packagePath, className);
 

@@ -352,7 +352,7 @@ public class JSPSourceProcessor extends BaseSourceProcessor {
 				"while (", ") {\n", "\n\n"
 			});
 
-		newContent = fixCompatClassImports(file, newContent);
+		newContent = fixCompatClassImports(absolutePath, newContent);
 
 		if (_stripJSPImports && !_jspContents.isEmpty()) {
 			try {
