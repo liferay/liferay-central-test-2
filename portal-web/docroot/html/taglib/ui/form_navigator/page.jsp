@@ -132,7 +132,7 @@ if (Validator.isNotNull(historyKey)) {
 								error = true;
 							}
 
-							int curStep = 1;
+							int step = 1;
 
 							for (String section : sections) {
 								String sectionId = namespace + _getSectionId(section);
@@ -166,7 +166,7 @@ if (Validator.isNotNull(historyKey)) {
 
 										<c:choose>
 											<c:when test='<%= displayStyle.equals("steps") %>'>
-												<span class="number"><liferay-ui:message key="<%= String.valueOf(curStep) %>" /></span>
+												<span class="number"><liferay-ui:message key="<%= String.valueOf(step) %>" /></span>
 
 												<span class="message"><liferay-ui:message key="<%= section %>" /></span>
 
@@ -182,7 +182,7 @@ if (Validator.isNotNull(historyKey)) {
 								</li>
 
 							<%
-								curStep++;
+								step++;
 							}
 							%>
 
