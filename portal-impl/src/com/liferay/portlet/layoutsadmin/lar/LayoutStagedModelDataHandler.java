@@ -128,9 +128,9 @@ public class LayoutStagedModelDataHandler
 		Map<String, String> referenceAttributes = new HashMap<String, String>();
 
 		referenceAttributes.put(
-			"layout-id", String.valueOf(layout.getLayoutId()));
-		referenceAttributes.put(
 			"private-layout", String.valueOf(layout.isPrivateLayout()));
+		referenceAttributes.put(
+			"layout-id", String.valueOf(layout.getLayoutId()));
 
 		return referenceAttributes;
 	}
