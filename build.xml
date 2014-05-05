@@ -84,11 +84,22 @@
 				/>
 			</unzip>
 
-			<copy
-				file="app.server.${user.name}.properties"
-				overwrite="true"
-				tofile="${project.dir}/tools/sdk/build.${user.name}.properties"
-			/>
+			<if>
+				<available file="app.server.${user.name}.properties" />
+				<then>
+					<copy
+						file="app.server.${user.name}.properties"
+						overwrite="true"
+						tofile="${project.dir}/tools/sdk/build.${user.name}.properties"
+					/>
+				</then>
+				<else>
+					<echo file="${project.dir}/tools/sdk/build.${user.name}.properties">
+						app.server.parent.dir=${app.server.parent.dir}
+						app.server.type=${app.server.type}
+					</echo>
+				</else>
+			</if>
 
 			<echo
 				append="true"
