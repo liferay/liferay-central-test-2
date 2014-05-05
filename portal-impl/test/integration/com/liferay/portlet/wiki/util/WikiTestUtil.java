@@ -40,7 +40,7 @@ import java.util.Map;
  */
 public class WikiTestUtil {
 
-	public static WikiPage[] addMovedParentPageWithChildAndGrandChild(
+	public static WikiPage[] addMovedParentPageWithChildPageAndGrandchildPage(
 			long groupId, long nodeId)
 		throws Exception {
 
@@ -184,28 +184,29 @@ public class WikiTestUtil {
 		}
 	}
 
-	public static WikiPage[] addPageWithChangedParent(long groupId, long nodeId)
+	public static WikiPage[] addPageWithChangedParentPage(
+			long groupId, long nodeId)
 		throws Exception {
+
+		WikiPage initialParentPage = WikiTestUtil.addPage(
+			TestPropsValues.getUserId(), groupId, nodeId,
+			ServiceTestUtil.randomString(), true);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
-		WikiPage initialParentPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), groupId, nodeId,
-			"InitialTestParentPage", true);
-
 		WikiPage childPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			ServiceTestUtil.randomString(), "InitialTestParentPage", true,
+			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), initialParentPage.getTitle(), true,
 			serviceContext);
 
 		WikiPage finalParentPage =  WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), groupId, nodeId, "FinalTestParentPage",
-			true);
+			TestPropsValues.getUserId(), groupId, nodeId,
+			ServiceTestUtil.randomString(), true);
 
 		WikiPageLocalServiceUtil.changeParent(
-			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			"FinalTestParentPage", serviceContext);
+			TestPropsValues.getUserId(), nodeId, childPage.getTitle(),
+			finalParentPage.getTitle(), serviceContext);
 
 		childPage = WikiPageLocalServiceUtil.getPage(
 			nodeId, childPage.getTitle());
@@ -277,26 +278,26 @@ public class WikiTestUtil {
 		return new WikiPage[] {page, redirectPage};
 	}
 
-	public static WikiPage[] addTrashedParentPageWithChildPageAndGrandChild(
+	public static WikiPage[] addTrashedParentPageWithChildPageAndGrandchildPage(
 			long groupId, long nodeId, boolean explicitMoveChildToTrash,
 			boolean explicitMoveParentToTrash)
 		throws Exception {
 
+		WikiPage parentPage = WikiTestUtil.addPage(
+			TestPropsValues.getUserId(), groupId, nodeId,
+			ServiceTestUtil.randomString(), true);
+
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
-		WikiPage parentPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), groupId, nodeId, "TestParentPage",
-			true);
-
 		WikiPage childPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			ServiceTestUtil.randomString(), "TestParentPage", true,
+			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), parentPage.getTitle(), true,
 			serviceContext);
 
 		WikiPage grandChildPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, "TestGrandChildPage",
-			ServiceTestUtil.randomString(), "TestChildPage", true,
+			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
+			ServiceTestUtil.randomString(), childPage.getTitle(), true,
 			serviceContext);
 
 		if (explicitMoveChildToTrash) {

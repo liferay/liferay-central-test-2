@@ -58,6 +58,7 @@ import org.junit.runner.RunWith;
 public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -98,18 +99,18 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), true, true);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		Assert.assertTrue(parentPage.isInTrashExplicitly());
 		Assert.assertTrue(childPage.isInTrashExplicitly());
-		Assert.assertTrue(grandChildPage.isInTrashImplicitly());
+		Assert.assertTrue(grandchildPage.isInTrashImplicitly());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -126,18 +127,18 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), true, false);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		Assert.assertFalse(parentPage.isInTrash());
 		Assert.assertTrue(childPage.isInTrashExplicitly());
-		Assert.assertTrue(grandChildPage.isInTrashImplicitly());
+		Assert.assertTrue(grandchildPage.isInTrashImplicitly());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 1, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -191,19 +192,19 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), false, true);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		Assert.assertTrue(parentPage.isInTrashExplicitly());
 		Assert.assertTrue(childPage.isInTrashImplicitly());
 		Assert.assertEquals(parentPage.getTitle(), childPage.getParentTitle());
-		Assert.assertTrue(grandChildPage.isInTrashImplicitly());
+		Assert.assertTrue(grandchildPage.isInTrashImplicitly());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -254,7 +255,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialBaseModelsCount = getNotInTrashBaseModelsCount(_node);
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
-		WikiPage[] pages = WikiTestUtil.addPageWithChangedParent(
+		WikiPage[] pages = WikiTestUtil.addPageWithChangedParentPage(
 			group.getGroupId(), _node.getNodeId());
 
 		WikiPage page = pages[0];
@@ -313,20 +314,20 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	@Transactional
 	public void
-		testMoveParentPageWithRedirectAndChildPageAndGrandChildPageToTrash()
+		testMoveParentPageWithRedirectAndChildPageAndgrandchildPageToTrash()
 			throws Exception {
 
 		int initialBaseModelsCount = getNotInTrashBaseModelsCount(_node);
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addMovedParentPageWithChildAndGrandChild(
+			WikiTestUtil.addMovedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId());
 
 		WikiPage parentPage = pages[0];
 		WikiPage redirectPage = pages[1];
 		WikiPage childPage = pages[2];
-		WikiPage grandChildPage = pages[3];
+		WikiPage grandchildPage = pages[3];
 
 		moveBaseModelToTrash(redirectPage.getPrimaryKey());
 
@@ -336,8 +337,8 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			redirectPage.getPageId());
 		childPage = WikiPageLocalServiceUtil.getPageByPageId(
 			childPage.getPageId());
-		grandChildPage = WikiPageLocalServiceUtil.getPageByPageId(
-			grandChildPage.getPageId());
+		grandchildPage = WikiPageLocalServiceUtil.getPageByPageId(
+			grandchildPage.getPageId());
 
 		Assert.assertFalse(parentPage.isInTrash());
 		Assert.assertTrue(redirectPage.isInTrashExplicitly());
@@ -345,9 +346,9 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			parentPage.getTitle(), redirectPage.getRedirectTitle());
 		Assert.assertFalse(childPage.isInTrash());
 		Assert.assertEquals(parentPage.getTitle(), childPage.getParentTitle());
-		Assert.assertFalse(grandChildPage.isInTrash());
+		Assert.assertFalse(grandchildPage.isInTrash());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 3, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -430,25 +431,25 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), true, false);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		restoreTrashEntry(childPage);
 
 		parentPage = (WikiPage)getBaseModel(parentPage.getPrimaryKey());
 		childPage = (WikiPage)getBaseModel(childPage.getPrimaryKey());
-		grandChildPage = (WikiPage)getBaseModel(grandChildPage.getPrimaryKey());
+		grandchildPage = (WikiPage)getBaseModel(grandchildPage.getPrimaryKey());
 
 		Assert.assertFalse(parentPage.isInTrash());
 		Assert.assertFalse(childPage.isInTrash());
 		Assert.assertEquals(parentPage.getTitle(), childPage.getParentTitle());
-		Assert.assertFalse(grandChildPage.isInTrash());
+		Assert.assertFalse(grandchildPage.isInTrash());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 3, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -465,25 +466,25 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), true, true);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		restoreTrashEntry(childPage);
 
 		parentPage = (WikiPage)getBaseModel(parentPage.getPrimaryKey());
 		childPage = (WikiPage)getBaseModel(childPage.getPrimaryKey());
-		grandChildPage = (WikiPage)getBaseModel(grandChildPage.getPrimaryKey());
+		grandchildPage = (WikiPage)getBaseModel(grandchildPage.getPrimaryKey());
 
 		Assert.assertTrue(parentPage.isInTrashExplicitly());
 		Assert.assertFalse(childPage.isInTrash());
 		Assert.assertEquals(StringPool.BLANK, childPage.getParentTitle());
-		Assert.assertFalse(grandChildPage.isInTrash());
+		Assert.assertFalse(grandchildPage.isInTrash());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 2, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -638,32 +639,32 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	@Transactional
 	public void
-		testRestoreExplicitlyTrashedParentPageWithChildPageAndGrandChildPageFromTrash()
+		testRestoreExplicitlyTrashedParentPageWithChildPageAndgrandchildPageFromTrash()
 			throws Exception {
 
 		int initialBaseModelsCount = getNotInTrashBaseModelsCount(_node);
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandChild(
+			WikiTestUtil.addTrashedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId(), false, true);
 
 		WikiPage parentPage = pages[0];
 		WikiPage childPage = pages[1];
-		WikiPage grandChildPage = pages[2];
+		WikiPage grandchildPage = pages[2];
 
 		restoreTrashEntry(parentPage);
 
 		parentPage = (WikiPage)getBaseModel(parentPage.getPrimaryKey());
 		childPage = (WikiPage)getBaseModel(childPage.getPrimaryKey());
-		grandChildPage = (WikiPage)getBaseModel(grandChildPage.getPrimaryKey());
+		grandchildPage = (WikiPage)getBaseModel(grandchildPage.getPrimaryKey());
 
 		Assert.assertFalse(parentPage.isInTrash());
 		Assert.assertFalse(childPage.isInTrash());
 		Assert.assertEquals(parentPage.getTitle(), childPage.getParentTitle());
-		Assert.assertFalse(grandChildPage.isInTrash());
+		Assert.assertFalse(grandchildPage.isInTrash());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 3, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
@@ -794,13 +795,13 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 		int initialTrashEntriesCount = getTrashEntriesCount(group.getGroupId());
 
 		WikiPage[] pages =
-			WikiTestUtil.addMovedParentPageWithChildAndGrandChild(
+			WikiTestUtil.addMovedParentPageWithChildPageAndGrandchildPage(
 				group.getGroupId(), _node.getNodeId());
 
 		WikiPage parentPage = pages[0];
 		WikiPage redirectPage = pages[1];
 		WikiPage childPage = pages[2];
-		WikiPage grandChildPage = pages[3];
+		WikiPage grandchildPage = pages[3];
 
 		moveBaseModelToTrash(redirectPage.getPrimaryKey());
 
@@ -812,8 +813,8 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			redirectPage.getPageId());
 		childPage = WikiPageLocalServiceUtil.getPageByPageId(
 			childPage.getPageId());
-		grandChildPage = WikiPageLocalServiceUtil.getPageByPageId(
-			grandChildPage.getPageId());
+		grandchildPage = WikiPageLocalServiceUtil.getPageByPageId(
+			grandchildPage.getPageId());
 
 		Assert.assertFalse(parentPage.isInTrash());
 		Assert.assertFalse(redirectPage.isInTrashExplicitly());
@@ -821,9 +822,9 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 			parentPage.getTitle(), redirectPage.getRedirectTitle());
 		Assert.assertFalse(childPage.isInTrash());
 		Assert.assertEquals(parentPage.getTitle(), childPage.getParentTitle());
-		Assert.assertFalse(grandChildPage.isInTrash());
+		Assert.assertFalse(grandchildPage.isInTrash());
 		Assert.assertEquals(
-			childPage.getTitle(), grandChildPage.getParentTitle());
+			childPage.getTitle(), grandchildPage.getParentTitle());
 		Assert.assertEquals(
 			initialBaseModelsCount + 4, getNotInTrashBaseModelsCount(_node));
 		Assert.assertEquals(
