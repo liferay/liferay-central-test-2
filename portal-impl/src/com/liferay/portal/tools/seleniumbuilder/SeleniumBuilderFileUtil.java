@@ -1541,7 +1541,6 @@ public class SeleniumBuilderFileUtil {
 
 		for (Attribute attribute : attributes) {
 			String attributeName = attribute.getName();
-			String attributeValue = attribute.getValue();
 
 			if (attributeName.equals("delimiter") &&
 				propertyName.equals("ignore.errors")) {
