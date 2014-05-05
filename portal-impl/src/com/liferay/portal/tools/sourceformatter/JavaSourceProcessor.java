@@ -864,6 +864,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		fileName = StringUtil.replace(
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);
 
+		String absolutePath = fileUtil.getAbsolutePath(file);
+
 		String content = fileUtil.read(file);
 
 		if (isGenerated(content) &&
@@ -1096,7 +1098,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		// LPS-39508
 
 		if (!isExcluded(_secureRandomExclusions, fileName) &&
-			!isRunsOutsidePortal(fileName) &&
+			!isRunsOutsidePortal(absolutePath) &&
 			content.contains("java.security.SecureRandom") &&
 			!content.contains("javax.crypto.KeyGenerator")) {
 
@@ -1136,7 +1138,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			newContent = fixIncorrectEmptyLineBeforeCloseCurlyBrace(
 				oldContent, fileName);
 
-			newContent = formatJava(fileName, newContent);
+			newContent = formatJava(fileName, absolutePath, newContent);
 
 			newContent = StringUtil.replace(newContent, "\n\n\n", "\n\n");
 
@@ -1181,7 +1183,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		return sortAnnotations(content, StringPool.BLANK);
 	}
 
-	protected String formatJava(String fileName, String content)
+	protected String formatJava(
+			String fileName, String absolutePath, String content)
 		throws IOException {
 
 		StringBundler sb = new StringBundler();
@@ -1331,7 +1334,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 						" " + lineCount);
 			}
 
-			checkInefficientStringMethods(line, fileName, lineCount);
+			checkInefficientStringMethods(
+				line, fileName, absolutePath, lineCount);
 
 			if (trimmedLine.startsWith(StringPool.EQUAL)) {
 				processErrorMessage(
