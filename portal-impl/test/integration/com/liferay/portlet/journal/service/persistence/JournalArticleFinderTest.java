@@ -265,7 +265,6 @@ public class JournalArticleFinderTest {
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 1);
-
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 2);
@@ -275,7 +274,6 @@ public class JournalArticleFinderTest {
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 0);
-
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
@@ -285,7 +283,6 @@ public class JournalArticleFinderTest {
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 1);
-
 		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
