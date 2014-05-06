@@ -31,7 +31,7 @@ public abstract class BaseDDMFieldReader implements DDMFieldReader {
 		Fields filteredFields = new Fields();
 
 		for (Field field : getFields()) {
-			if (field.getDataType().equals(ddmType)) {
+			if (ddmType.equals(field.getDataType()) {
 				filteredFields.put(field);
 			}
 		}
