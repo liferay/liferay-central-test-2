@@ -148,6 +148,7 @@
 				append="true"
 				file="${project.dir}/tools/sdk/build.${user.name}.properties"
 			>
+				auto.deploy.dir=${liferay.home}/osgi/apps
 				clean.delete.ivy.md5=true
 				clean.delete.lib=true
 				liferay.home=${liferay.home}
@@ -177,6 +178,10 @@
 			<mkdir dir="${app.server.lib.portal.dir}" />
 		</sequential>
 	</macrodef>
+
+	<target name="setup-sdk">
+		<setup-sdk />
+	</target>
 
 	<target name="all">
 		<antcall target="clean" />
