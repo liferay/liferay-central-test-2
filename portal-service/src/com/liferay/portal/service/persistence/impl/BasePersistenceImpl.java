@@ -454,41 +454,40 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		String orderBy = tableNameOrderByComparator.getOrderBy();
 
 		if (sqlQuery) {
-			String[] fields = StringUtil.split(orderBy, CharPool.COMMA);
-	
-			StringBundler sb = new StringBundler(fields.length);
-	
-			for (int i = 0; i < fields.length; ++i) {
-				String field = fields[i];
-	
-				String[] components = StringUtil.split(field, CharPool.SPACE);
-	
-				String orderByField = components[0];
-				String orderByDirection = components[1];
-	
-				components = StringUtil.split(orderByField, CharPool.PERIOD);
-	
-				String orderByTableName = components[0];
-				String orderByFieldName = components[1];
-	
-				sb.append(orderByTableName);
+			String[] orderByParts = StringUtil.split(orderBy, CharPool.COMMA);
+
+			StringBundler sb = new StringBundler(orderByParts.length);
+
+			for (int i = 0; i < orderByParts.length; ++i) {
+				String orderByPart = orderByParts[i];
+
+				String[] array = StringUtil.split(orderByPart, CharPool.SPACE);
+
+				String direction = array[1];
+
+				array = StringUtil.split(array[0], CharPool.PERIOD);
+
+				String tableName = array[0];
+				String columnName = array[1];
+
+				sb.append(tableName);
 				sb.append(StringPool.PERIOD);
-				sb.append(orderByFieldName);
-	
+				sb.append(columnName);
+
 				Set<String> badColumnNames = getBadColumnNames();
-	
-				if (badColumnNames.contains(orderByFieldName)) {
+
+				if (badColumnNames.contains(columnName)) {
 					sb.append(StringPool.UNDERLINE);
 				}
-	
+
 				sb.append(StringPool.SPACE);
-				sb.append(orderByDirection);
-	
-				if (i < (fields.length - 1)) {
+				sb.append(direction);
+
+				if (i < (orderByParts.length - 1)) {
 					sb.append(StringPool.COMMA);
 				}
 			}
-	
+
 			orderBy = sb.toString();
 		}
 
