@@ -34,6 +34,6 @@ public class DDLRecordDDMFieldReader extends BaseDDMFieldReader {
 		return _ddlRecord.getFields();
 	}
 
-	private final DDLRecord _ddlRecord;
+	private DDLRecord _ddlRecord;
 
 }

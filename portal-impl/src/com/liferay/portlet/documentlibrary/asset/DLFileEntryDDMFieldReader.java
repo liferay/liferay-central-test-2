@@ -44,10 +44,10 @@ public class DLFileEntryDDMFieldReader extends BaseDDMFieldReader {
 
 	@Override
 	public Fields getFields() throws PortalException, SystemException {
+		Fields fields = new Fields();
+
 		long classNameId = ClassNameLocalServiceUtil.getClassNameId(
 			DLFileEntryMetadata.class);
-
-		Fields allFields = new Fields();
 
 		List<DDMStructure> ddmStructures =
 			DDMStructureLocalServiceUtil.getClassStructures(
@@ -63,18 +63,18 @@ public class DLFileEntryDDMFieldReader extends BaseDDMFieldReader {
 				continue;
 			}
 
-			Fields fields = StorageEngineUtil.getFields(
+			Fields ddmStorageFields = StorageEngineUtil.getFields(
 				dlFileEntryMetadata.getDDMStorageId());
 
-			for (Field field : fields) {
-				allFields.put(field);
+			for (Field ddmStorageField : ddmStorageFields) {
+				fields.put(ddmStorageField);
 			}
 		}
 
-		return allFields;
+		return fields;
 	}
 
-	private final FileEntry _fileEntry;
-	private final FileVersion _fileVersion;
+	private FileEntry _fileEntry;
+	private FileVersion _fileVersion;
 
 }
