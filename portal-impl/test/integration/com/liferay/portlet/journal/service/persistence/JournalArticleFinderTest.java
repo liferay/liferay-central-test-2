@@ -344,6 +344,30 @@ public class JournalArticleFinderTest {
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, queryDefinition, 0);
 	}
 
+	protected void prepareSortedArticles() throws Exception {
+		Calendar calendar = new GregorianCalendar();
+
+		calendar.set(Calendar.DATE, 1);
+		calendar.set(Calendar.MONTH, 1);
+		calendar.set(Calendar.YEAR, 2014);
+
+		for (int i = 0; i < _articles.size(); ++i) {
+			calendar.add(Calendar.DATE, 1);
+
+			JournalArticle article = _articles.get(i);
+
+			article.setCreateDate(calendar.getTime());
+			article.setModifiedDate(calendar.getTime());
+			article.setArticleId("a" + i);
+			article.setVersion(i);
+			article.setTitle("a" + i);
+			article.setDisplayDate(calendar.getTime());
+			article.setReviewDate(calendar.getTime());
+
+			JournalArticleLocalServiceUtil.updateJournalArticle(article);
+		}
+	}
+
 	protected void testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			long companyId, long groupId, List<Long> folderIds,
 			long classNameId, String articleId, Double version, String title,
@@ -453,30 +477,6 @@ public class JournalArticleFinderTest {
 		actualCount = articles.size();
 
 		Assert.assertEquals(expectedCount, actualCount);
-	}
-
-	protected void prepareSortedArticles() throws Exception {
-		Calendar calendar = new GregorianCalendar();
-
-		calendar.set(Calendar.DATE, 1);
-		calendar.set(Calendar.MONTH, 1);
-		calendar.set(Calendar.YEAR, 2014);
-
-		for (int i = 0; i < _articles.size(); ++i) {
-			calendar.add(Calendar.DATE, 1);
-
-			JournalArticle article = _articles.get(i);
-
-			article.setCreateDate(calendar.getTime());
-			article.setModifiedDate(calendar.getTime());
-			article.setArticleId("a" + i);
-			article.setVersion(i);
-			article.setTitle("a" + i);
-			article.setDisplayDate(calendar.getTime());
-			article.setReviewDate(calendar.getTime());
-
-			JournalArticleLocalServiceUtil.updateJournalArticle(article);
-		}
 	}
 
 	private static final long _USER_ID = 1234L;
