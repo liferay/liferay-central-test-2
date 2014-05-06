@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.BaseDDMFieldReader;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -34,7 +33,7 @@ final class JournalArticleDDMFieldReader extends BaseDDMFieldReader {
 	}
 
 	@Override
-	public Fields getFields() throws PortalException, SystemException {
+	public Fields getFields() throws PortalException {
 		try {
 			DDMStructure ddmStructure =
 				DDMStructureLocalServiceUtil.getStructure(

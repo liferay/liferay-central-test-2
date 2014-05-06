@@ -425,9 +425,7 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		}
 
 		@Override
-		public Fields getFields(String ddmType)
-			throws PortalException, SystemException {
-
+		public Fields getFields(String ddmType) {
 			return getFields();
 		}
 

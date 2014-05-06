@@ -15,7 +15,6 @@
 package com.liferay.portlet.dynamicdatalists.asset;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.asset.model.BaseDDMFieldReader;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecord;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
@@ -30,7 +29,7 @@ public class DDLRecordDDMFieldReader extends BaseDDMFieldReader {
 	}
 
 	@Override
-	public Fields getFields() throws PortalException, SystemException {
+	public Fields getFields() throws PortalException {
 		return _ddlRecord.getFields();
 	}
 
