@@ -1007,7 +1007,7 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 
 	<target name="setup-sdk">
 		<setup-sdk />
-	</target>	
+	</target>
 
 	<target name="sort-xml-attributes">
 		<java
