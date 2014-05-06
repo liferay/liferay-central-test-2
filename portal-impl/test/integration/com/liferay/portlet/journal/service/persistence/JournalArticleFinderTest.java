@@ -227,13 +227,13 @@ public class JournalArticleFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		doQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			_group.getCompanyId(), _group.getGroupId(), _folderIds,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, null, null, "Article",
 			null, null, null, (String)null, null, null, null, null, true,
 			queryDefinition, 3);
 
-		doQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			_group.getCompanyId(), _group.getGroupId(), _folderIds,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, null, null, null,
 			null, null, null, _ddmStructure.getStructureKey(), null, null, null,
@@ -241,7 +241,7 @@ public class JournalArticleFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
-		doQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			_group.getCompanyId(), _group.getGroupId(), _folderIds,
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, null, null, "Article",
 			null, null, null, (String)null, null, null, null, null, true,
@@ -249,7 +249,7 @@ public class JournalArticleFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		doQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+		testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			_group.getCompanyId(), _group.getGroupId(), _folderIds,
 			PortalUtil.getClassNameId(JournalStructure.class), null, null,
 			"Article", null, null, null, (String)null, null, null, null, null,
@@ -262,31 +262,31 @@ public class JournalArticleFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 1);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 2);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 0);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_ddmStructure.getStructureKey(), queryDefinition, 1);
 
-		doQueryByG_C_S(
+		testQueryByG_C_S(
 			_group.getGroupId(), JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			_basicWebContentDDMStructure.getStructureKey(), queryDefinition, 1);
 	}
@@ -296,7 +296,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleCreateDateComparator(true));
+		testQueryByG_F(new ArticleCreateDateComparator(true));
 	}
 
 	@Test
@@ -304,7 +304,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleCreateDateComparator(false));
+		testQueryByG_F(new ArticleCreateDateComparator(false));
 	}
 
 	@Test
@@ -312,7 +312,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleDisplayDateComparator(true));
+		testQueryByG_F(new ArticleDisplayDateComparator(true));
 	}
 
 	@Test
@@ -320,21 +320,21 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleDisplayDateComparator(false));
+		testQueryByG_F(new ArticleDisplayDateComparator(false));
 	}
 
 	@Test
 	public void testQueryByG_C_S_WithComparatorIDAscending() throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleIDComparator(true));
+		testQueryByG_F(new ArticleIDComparator(true));
 	}
 
 	@Test
 	public void testQueryByG_C_S_WithComparatorIDDescending() throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleIDComparator(false));
+		testQueryByG_F(new ArticleIDComparator(false));
 	}
 
 	@Test
@@ -342,7 +342,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleModifiedDateComparator(true));
+		testQueryByG_F(new ArticleModifiedDateComparator(true));
 	}
 
 	@Test
@@ -350,7 +350,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleModifiedDateComparator(false));
+		testQueryByG_F(new ArticleModifiedDateComparator(false));
 	}
 
 	@Test
@@ -358,7 +358,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleReviewDateComparator(true));
+		testQueryByG_F(new ArticleReviewDateComparator(true));
 	}
 
 	@Test
@@ -366,7 +366,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleReviewDateComparator(false));
+		testQueryByG_F(new ArticleReviewDateComparator(false));
 	}
 
 	@Test
@@ -374,7 +374,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleTitleComparator(true));
+		testQueryByG_F(new ArticleTitleComparator(true));
 	}
 
 	@Test
@@ -382,7 +382,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleTitleComparator(false));
+		testQueryByG_F(new ArticleTitleComparator(false));
 	}
 
 	@Test
@@ -390,7 +390,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleVersionComparator(true));
+		testQueryByG_F(new ArticleVersionComparator(true));
 	}
 
 	@Test
@@ -398,7 +398,7 @@ public class JournalArticleFinderTest {
 		throws Exception {
 
 		prepareSortedArticles();
-		doQueryByG_F_CheckingOrder(new ArticleVersionComparator(false));
+		testQueryByG_F(new ArticleVersionComparator(false));
 	}
 
 	@Test
@@ -406,15 +406,15 @@ public class JournalArticleFinderTest {
 		QueryDefinition queryDefinition = new QueryDefinition();
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
-		doQueryByG_F_CheckingCount(
+		testQueryByG_F(
 			_group.getGroupId(), _folderIds, queryDefinition, 4);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
-		doQueryByG_F_CheckingCount(
+		testQueryByG_F(
 			_group.getGroupId(), _folderIds, queryDefinition, 1);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-		doQueryByG_F_CheckingCount(
+		testQueryByG_F(
 			_group.getGroupId(), _folderIds, queryDefinition, 3);
 	}
 
@@ -424,25 +424,25 @@ public class JournalArticleFinderTest {
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
 
-		doQueryByG_U_C(
+		testQueryByG_U_C(
 			_group.getGroupId(), TestPropsValues.getUserId(),
 			Collections.<Long>emptyList(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, queryDefinition, 2);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
 
-		doQueryByG_U_C(
+		testQueryByG_U_C(
 			_group.getGroupId(), _USER_ID, Collections.<Long>emptyList(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, queryDefinition, 1);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
 
-		doQueryByG_U_C(
+		testQueryByG_U_C(
 			_group.getGroupId(), _USER_ID, Collections.<Long>emptyList(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT, queryDefinition, 0);
 	}
 
-	protected void doQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
+	protected void testQueryByC_G_F_C_A_V_T_D_C_T_S_T_D_R(
 			long companyId, long groupId, List<Long> folderIds,
 			long classNameId, String articleId, Double version, String title,
 			String description, String content, String type,
@@ -472,7 +472,7 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedCount, actualCount);
 	}
 
-	protected void doQueryByG_C_S(
+	protected void testQueryByG_C_S(
 			long groupId, long classNameId, String ddmStructureKey,
 			QueryDefinition queryDefinition, int expectedCount)
 		throws Exception {
@@ -490,7 +490,7 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedCount, actualCount);
 	}
 
-	protected void doQueryByG_F_CheckingCount(
+	protected void testQueryByG_F(
 			long groupId, List<Long> folderIds, QueryDefinition queryDefinition,
 			int expectedCount)
 		throws Exception {
@@ -508,7 +508,7 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedCount, actualCount);
 	}
 
-	protected void doQueryByG_F_CheckingOrder(OrderByComparator comparator)
+	protected void testQueryByG_F(OrderByComparator comparator)
 		throws Exception {
 
 		QueryDefinition queryDefinition = new QueryDefinition();
@@ -531,7 +531,7 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedArticles, actualArticles);
 	}
 
-	protected void doQueryByG_U_C(
+	protected void testQueryByG_U_C(
 			long groupId, long userId, List<Long> folderIds, long classNameId,
 			QueryDefinition queryDefinition, int expectedCount)
 		throws Exception {
@@ -552,8 +552,8 @@ public class JournalArticleFinderTest {
 	protected void prepareSortedArticles() throws Exception {
 		Calendar calendar = new GregorianCalendar();
 
-		calendar.set(Calendar.YEAR, 2014);
 		calendar.set(Calendar.MONTH, 1);
+		calendar.set(Calendar.YEAR, 2014);
 		calendar.set(Calendar.DATE, 1);
 
 		for (int i = 0; i < _articles.size(); ++i) {
