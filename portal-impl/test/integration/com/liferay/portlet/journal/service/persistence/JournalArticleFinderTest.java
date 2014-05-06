@@ -545,12 +545,12 @@ public class JournalArticleFinderTest {
 			JournalArticle article = _articles.get(i);
 
 			article.setCreateDate(calendar.getTime());
-			article.setDisplayDate(calendar.getTime());
 			article.setModifiedDate(calendar.getTime());
-			article.setReviewDate(calendar.getTime());
 			article.setArticleId("a" + i);
-			article.setTitle("a" + i);
 			article.setVersion(i);
+			article.setTitle("a" + i);
+			article.setDisplayDate(calendar.getTime());
+			article.setReviewDate(calendar.getTime());
 
 			JournalArticleLocalServiceUtil.updateJournalArticle(article);
 		}
