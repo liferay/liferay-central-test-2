@@ -89,14 +89,14 @@ public class JournalArticleFinderTest {
 		DDMTemplate basicWebContentTemplate = DDMTemplateTestUtil.addTemplate(
 			_group.getGroupId(), _basicWebContentDDMStructure.getStructureId());
 
-		JournalArticle addedArticle = JournalTestUtil.addArticleWithXMLContent(
+		JournalArticle article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), _folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 1</title>",
 			_basicWebContentDDMStructure.getStructureKey(),
 			basicWebContentTemplate.getTemplateKey());
 
-		_articles.add(addedArticle);
+		_articles.add(article);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
 			_group.getGroupId(), "Folder 2");
@@ -104,43 +104,44 @@ public class JournalArticleFinderTest {
 		DDMTemplate ddmTemplate = DDMTemplateTestUtil.addTemplate(
 			_group.getGroupId(), _ddmStructure.getStructureId());
 
-		addedArticle = JournalTestUtil.addArticleWithXMLContent(
+		article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 2</title>", _ddmStructure.getStructureKey(),
 			ddmTemplate.getTemplateKey());
-		_articles.add(addedArticle);
 
-		addedArticle = JournalTestUtil.addArticleWithXMLContent(
+		_articles.add(article);
+
+		article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 3</title>",
 			_basicWebContentDDMStructure.getStructureKey(),
 			basicWebContentTemplate.getTemplateKey());
 
-		_articles.add(addedArticle);
+		_articles.add(article);
 
-		addedArticle.setUserId(_USER_ID);
+		article.setUserId(_USER_ID);
 
 		Calendar calendar = new GregorianCalendar();
 
 		calendar.add(Calendar.DATE, -1);
 
-		addedArticle.setExpirationDate(calendar.getTime());
-		addedArticle.setReviewDate(calendar.getTime());
+		article.setExpirationDate(calendar.getTime());
+		article.setReviewDate(calendar.getTime());
 
-		JournalArticleLocalServiceUtil.updateJournalArticle(addedArticle);
+		JournalArticleLocalServiceUtil.updateJournalArticle(article);
 
 		JournalArticleLocalServiceUtil.moveArticleToTrash(
-			TestPropsValues.getUserId(), addedArticle);
+			TestPropsValues.getUserId(), article);
 
-		addedArticle = JournalTestUtil.addArticleWithXMLContent(
+		article = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), folder.getFolderId(),
 			PortalUtil.getClassNameId(JournalStructure.class),
 			"<title>Article 4</title>", _ddmStructure.getStructureKey(),
 			ddmTemplate.getTemplateKey());
 
-		_articles.add(addedArticle);
+		_articles.add(article);
 
 		_folderIds.clear();
 
