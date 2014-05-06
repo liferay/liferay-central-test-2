@@ -700,8 +700,7 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			PortletDataContext portletDataContext =
 				PortletDataContextFactoryUtil.createImportPortletDataContext(
 					group.getCompanyId(), groupId, parameterMap,
-					getUserIdStrategy(userId, userIdStrategy),
-					zipReader);
+					getUserIdStrategy(userId, userIdStrategy), zipReader);
 
 			manifestSummary = getManifestSummary(portletDataContext);
 		}
