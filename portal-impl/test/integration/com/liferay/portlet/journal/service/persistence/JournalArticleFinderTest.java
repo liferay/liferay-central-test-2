@@ -541,17 +541,15 @@ public class JournalArticleFinderTest {
 
 		for (int i = 0; i < _articles.size(); ++i) {
 			calendar.add(Calendar.DATE, 1);
-			Date sequenceDate = calendar.getTime();
-			String sequenceString = String.valueOf((char) ('a' + i));
 
 			JournalArticle article = _articles.get(i);
 
-			article.setCreateDate(sequenceDate);
-			article.setDisplayDate(sequenceDate);
-			article.setModifiedDate(sequenceDate);
-			article.setReviewDate(sequenceDate);
-			article.setArticleId(sequenceString);
-			article.setTitle(sequenceString);
+			article.setCreateDate(calendar.getTime());
+			article.setDisplayDate(calendar.getTime());
+			article.setModifiedDate(calendar.getTime());
+			article.setReviewDate(calendar.getTime());
+			article.setArticleId("a" + i);
+			article.setTitle("a" + i);
 			article.setVersion(i);
 
 			JournalArticleLocalServiceUtil.updateJournalArticle(article);
