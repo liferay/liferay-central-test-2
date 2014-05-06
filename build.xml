@@ -179,10 +179,6 @@
 		</sequential>
 	</macrodef>
 
-	<target name="setup-sdk">
-		<setup-sdk />
-	</target>
-
 	<target name="all">
 		<antcall target="clean" />
 		<antcall target="start" />
@@ -1035,6 +1031,10 @@ print AdminControl.invoke(appManager, 'startApplication', 'liferay-portal')
 	<target name="setup-jrebel">
 		<setup-jrebel />
 	</target>
+
+	<target name="setup-sdk">
+		<setup-sdk />
+	</target>	
 
 	<target name="sort-xml-attributes">
 		<java
