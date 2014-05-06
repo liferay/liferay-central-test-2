@@ -720,7 +720,8 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 
 	@Override
 	public void language(
-			String formName, String formAction, String name, String displayStyle)
+			String formName, String formAction, String name,
+			String displayStyle)
 		throws Exception {
 
 		LanguageTag languageTag = new LanguageTag();
