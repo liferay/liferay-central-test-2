@@ -464,7 +464,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	protected String fixBadColumnNames(String orderBy) {
 		Set<String> badColumnNames = getBadColumnNames();
 		String[] fields = StringUtil.split(orderBy, CharPool.COMMA);
-		StringBundler fixedOrderBy = new StringBundler(fields.length * 1);
+		StringBundler fixedOrderBy = new StringBundler(fields.length);
 
 		for (int i = 0; i < fields.length; ++i) {
 			String field = fields[i];
