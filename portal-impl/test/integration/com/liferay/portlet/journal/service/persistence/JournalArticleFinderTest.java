@@ -387,16 +387,16 @@ public class JournalArticleFinderTest {
 		QueryDefinition queryDefinition = new QueryDefinition();
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
-		testQueryByG_F(
-			_group.getGroupId(), _folderIds, queryDefinition, 4);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 4);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
-		testQueryByG_F(
-			_group.getGroupId(), _folderIds, queryDefinition, 1);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 1);
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-		testQueryByG_F(
-			_group.getGroupId(), _folderIds, queryDefinition, 3);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 3);
 	}
 
 	@Test
