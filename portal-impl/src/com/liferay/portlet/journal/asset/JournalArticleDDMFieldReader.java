@@ -48,8 +48,7 @@ final class JournalArticleDDMFieldReader extends BaseDDMFieldReader {
 		}
 		catch (Exception e) {
 			throw new PortalException(
-				"Couldn't read fields for JournalArticle " +
-					_article.getArticleId(), e);
+				"Unable to read fields for article " + _article.getId(), e);
 		}
 	}
 
