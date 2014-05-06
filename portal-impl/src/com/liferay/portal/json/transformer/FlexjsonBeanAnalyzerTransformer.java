@@ -76,7 +76,6 @@ public class FlexjsonBeanAnalyzerTransformer
 					new LinkedHashMap<String, String>();
 
 				properties.put("name", name);
-
 				properties.put(
 					"type", getTypeName(beanProperty.getPropertyType()));
 
@@ -91,8 +90,8 @@ public class FlexjsonBeanAnalyzerTransformer
 		return type.getName();
 	}
 
-	private final List<PathExpression> _pathExpressions;
-	private final List<Map<String, String>> _propertiesList =
+	private List<PathExpression> _pathExpressions;
+	private List<Map<String, String>> _propertiesList =
 		new ArrayList<Map<String, String>>();
 
 }

@@ -235,10 +235,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 			flexjsonBeanAnalyzerTransformer.transform(type);
 
-			List<Map<String, String>> propertiesMap =
-				flexjsonBeanAnalyzerTransformer.getPropertiesList();
-
-			return propertiesMap;
+			return flexjsonBeanAnalyzerTransformer.getPropertiesList();
 		}
 		catch (Exception e) {
 			return null;
@@ -255,7 +252,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 			types.add(map);
 
-			Class modelType = type;
+			Class<?> modelType = type;
 
 			if (type.isInterface()) {
 				try {
