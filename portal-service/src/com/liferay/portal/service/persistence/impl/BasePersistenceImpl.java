@@ -435,7 +435,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		StringBundler query, String entityAlias,
 		OrderByComparator orderByComparator, boolean sqlQuery) {
 
-		TableNameOrderByComparator tableNameOrderByComparator;
+		TableNameOrderByComparator tableNameOrderByComparator = null;
 
 		if (orderByComparator instanceof TableNameOrderByComparator) {
 			tableNameOrderByComparator =
@@ -451,49 +451,49 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 				orderByComparator, entityAlias);
 		}
 
-		String orderByContent = tableNameOrderByComparator.getOrderBy();
+		String orderBy = tableNameOrderByComparator.getOrderBy();
 
 		if (sqlQuery) {
-			orderByContent = fixBadColumnNames(orderByContent);
+			String[] fields = StringUtil.split(orderBy, CharPool.COMMA);
+	
+			StringBundler sb = new StringBundler(fields.length);
+	
+			for (int i = 0; i < fields.length; ++i) {
+				String field = fields[i];
+	
+				String[] components = StringUtil.split(field, CharPool.SPACE);
+	
+				String orderByField = components[0];
+				String orderByDirection = components[1];
+	
+				components = StringUtil.split(orderByField, CharPool.PERIOD);
+	
+				String orderByTableName = components[0];
+				String orderByFieldName = components[1];
+	
+				sb.append(orderByTableName);
+				sb.append(StringPool.PERIOD);
+				sb.append(orderByFieldName);
+	
+				Set<String> badColumnNames = getBadColumnNames();
+	
+				if (badColumnNames.contains(orderByFieldName)) {
+					sb.append(StringPool.UNDERLINE);
+				}
+	
+				sb.append(StringPool.SPACE);
+				sb.append(orderByDirection);
+	
+				if (i < (fields.length - 1)) {
+					sb.append(StringPool.COMMA);
+				}
+			}
+	
+			orderBy = sb.toString();
 		}
 
 		query.append(ORDER_BY_CLAUSE);
-		query.append(orderByContent);
-	}
-
-	protected String fixBadColumnNames(String orderBy) {
-		Set<String> badColumnNames = getBadColumnNames();
-		String[] fields = StringUtil.split(orderBy, CharPool.COMMA);
-		StringBundler fixedOrderBy = new StringBundler(fields.length);
-
-		for (int i = 0; i < fields.length; ++i) {
-			String field = fields[i];
-
-			String[] components = StringUtil.split(field, CharPool.SPACE);
-			String orderByField = components[0];
-			String orderByDirection = components[1];
-
-			components = StringUtil.split(orderByField, CharPool.PERIOD);
-			String orderByTableName = components[0];
-			String orderByFieldName = components[1];
-
-			fixedOrderBy.append(orderByTableName);
-			fixedOrderBy.append(StringPool.PERIOD);
-			fixedOrderBy.append(orderByFieldName);
-
-			if (badColumnNames.contains(orderByFieldName)) {
-				fixedOrderBy.append(StringPool.UNDERLINE);
-			}
-
-			fixedOrderBy.append(StringPool.SPACE);
-			fixedOrderBy.append(orderByDirection);
-
-			if (i < (fields.length - 1)) {
-				fixedOrderBy.append(StringPool.COMMA);
-			}
-		}
-
-		return fixedOrderBy.toString();
+		query.append(orderBy);
 	}
 
 	protected Set<String> getBadColumnNames() {
