@@ -292,7 +292,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorCreateDateAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleCreateDateComparator(true));
 	}
 
@@ -300,7 +299,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorCreateDateDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleCreateDateComparator(false));
 	}
 
@@ -308,7 +306,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorDisplayDateAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleDisplayDateComparator(true));
 	}
 
@@ -316,21 +313,16 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorDisplayDateDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleDisplayDateComparator(false));
 	}
 
 	@Test
 	public void testQueryByG_C_S_WithComparatorIDAscending() throws Exception {
-
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleIDComparator(true));
 	}
 
 	@Test
 	public void testQueryByG_C_S_WithComparatorIDDescending() throws Exception {
-
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleIDComparator(false));
 	}
 
@@ -338,7 +330,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorModifiedDateAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleModifiedDateComparator(true));
 	}
 
@@ -346,7 +337,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorModifiedDateDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleModifiedDateComparator(false));
 	}
 
@@ -354,7 +344,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorReviewDateAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleReviewDateComparator(true));
 	}
 
@@ -362,7 +351,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorReviewDateDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleReviewDateComparator(false));
 	}
 
@@ -370,7 +358,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorTitleAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleTitleComparator(true));
 	}
 
@@ -378,7 +365,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorTitleDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleTitleComparator(false));
 	}
 
@@ -386,7 +372,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorVersionAscending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleVersionComparator(true));
 	}
 
@@ -394,7 +379,6 @@ public class JournalArticleFinderTest {
 	public void testQueryByG_C_S_WithComparatorVersionDescending()
 		throws Exception {
 
-		prepareSortedArticles();
 		testQueryByG_F(new ArticleVersionComparator(false));
 	}
 
@@ -507,6 +491,8 @@ public class JournalArticleFinderTest {
 
 	protected void testQueryByG_F(OrderByComparator comparator)
 		throws Exception {
+
+		prepareSortedArticles();
 
 		QueryDefinition queryDefinition = new QueryDefinition();
 		queryDefinition.setOrderByComparator(comparator);
