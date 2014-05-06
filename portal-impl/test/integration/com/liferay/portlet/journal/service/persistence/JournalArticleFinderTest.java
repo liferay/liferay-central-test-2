@@ -290,6 +290,20 @@ public class JournalArticleFinderTest {
 
 	@Test
 	public void testQueryByG_F() throws Exception {
+		QueryDefinition queryDefinition = new QueryDefinition();
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 4);
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 1);
+
+		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
+
+		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 3);
+
 		testQueryByG_F(new ArticleCreateDateComparator(true));
 		testQueryByG_F(new ArticleCreateDateComparator(false));
 		testQueryByG_F(new ArticleDisplayDateComparator(true));
@@ -304,20 +318,6 @@ public class JournalArticleFinderTest {
 		testQueryByG_F(new ArticleTitleComparator(false));
 		testQueryByG_F(new ArticleVersionComparator(true));
 		testQueryByG_F(new ArticleVersionComparator(false));
-
-		QueryDefinition queryDefinition = new QueryDefinition();
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
-
-		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 4);
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH);
-
-		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 1);
-
-		queryDefinition.setStatus(WorkflowConstants.STATUS_IN_TRASH, true);
-
-		testQueryByG_F(_group.getGroupId(), _folderIds, queryDefinition, 3);
 	}
 
 	@Test
