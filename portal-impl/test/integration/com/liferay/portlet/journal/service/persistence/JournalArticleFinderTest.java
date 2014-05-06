@@ -289,101 +289,22 @@ public class JournalArticleFinderTest {
 	}
 
 	@Test
-	public void testQueryByG_F_WithComparatorCreateDateAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleCreateDateComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorCreateDateDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleCreateDateComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorDisplayDateAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleDisplayDateComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorDisplayDateDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleDisplayDateComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorIDAscending() throws Exception {
-		testQueryByG_F(new ArticleIDComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorIDDescending() throws Exception {
-		testQueryByG_F(new ArticleIDComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorModifiedDateAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleModifiedDateComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorModifiedDateDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleModifiedDateComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorReviewDateAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleReviewDateComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorReviewDateDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleReviewDateComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorTitleAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleTitleComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorTitleDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleTitleComparator(false));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorVersionAscending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleVersionComparator(true));
-	}
-
-	@Test
-	public void testQueryByG_F_WithComparatorVersionDescending()
-		throws Exception {
-
-		testQueryByG_F(new ArticleVersionComparator(false));
-	}
-
-	@Test
 	public void testQueryByG_F() throws Exception {
+		testQueryByG_F(new ArticleCreateDateComparator(true));
+		testQueryByG_F(new ArticleCreateDateComparator(false));
+		testQueryByG_F(new ArticleDisplayDateComparator(true));
+		testQueryByG_F(new ArticleDisplayDateComparator(false));
+		testQueryByG_F(new ArticleIDComparator(true));
+		testQueryByG_F(new ArticleIDComparator(false));
+		testQueryByG_F(new ArticleModifiedDateComparator(true));
+		testQueryByG_F(new ArticleModifiedDateComparator(false));
+		testQueryByG_F(new ArticleReviewDateComparator(true));
+		testQueryByG_F(new ArticleReviewDateComparator(false));
+		testQueryByG_F(new ArticleTitleComparator(true));
+		testQueryByG_F(new ArticleTitleComparator(false));
+		testQueryByG_F(new ArticleVersionComparator(true));
+		testQueryByG_F(new ArticleVersionComparator(false));
+
 		QueryDefinition queryDefinition = new QueryDefinition();
 
 		queryDefinition.setStatus(WorkflowConstants.STATUS_ANY);
