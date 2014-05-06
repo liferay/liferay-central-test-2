@@ -1316,9 +1316,7 @@ public class TableMapperTest {
 		Assert.assertTrue(tableMappers.isEmpty());
 	}
 
-	protected void testDestroy(TableMapper<?, ?> tableMapper)
-		throws Exception {
-
+	protected void testDestroy(TableMapper<?, ?> tableMapper) throws Exception {
 		MockMultiVMPool mockMultiVMPool =
 			(MockMultiVMPool)MultiVMPoolUtil.getMultiVMPool();
 
