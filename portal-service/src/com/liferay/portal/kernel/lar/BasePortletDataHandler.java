@@ -65,7 +65,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			return doAddDefaultData(
 				portletDataContext, portletId, portletPreferences);
@@ -106,7 +108,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			return doDeleteData(
 				portletDataContext, portletId, portletPreferences);
@@ -145,7 +149,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			portletDataContext.addDeletionSystemEventStagedModelTypes(
 				getDeletionSystemEventStagedModelTypes());
@@ -389,7 +395,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			if (Validator.isXml(data)) {
 				addImportDataRootElement(portletDataContext, data);
@@ -494,7 +502,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			doPrepareManifestSummary(portletDataContext, portletPreferences);
 		}
@@ -546,7 +556,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			return doProcessExportPortletPreferences(
 				portletDataContext, portletId, portletPreferences);
@@ -571,7 +583,9 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		ClassLoader classLoader = portletDataContext.getClassLoader();
 
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
+			Class<?> clazz = getClass();
+
+			portletDataContext.setClassLoader(clazz.getClassLoader());
 
 			String displayStyle = getDisplayTemplate(
 				portletDataContext, portletId, portletPreferences);
