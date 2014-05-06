@@ -217,16 +217,16 @@ public class PortletImporter {
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
+			ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
+
+			validateFile(layout.getCompanyId(), groupId, portletId, zipReader);
+
 			String userIdStrategyString = MapUtil.getString(
 				parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 			UserIdStrategy userIdStrategy =
 				ExportImportHelperUtil.getUserIdStrategy(
 					userId, userIdStrategyString);
-
-			ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
-
-			validateFile(layout.getCompanyId(), groupId, portletId, zipReader);
 
 			PortletDataContext portletDataContext =
 				PortletDataContextFactoryUtil.createImportPortletDataContext(
@@ -368,10 +368,6 @@ public class PortletImporter {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		UserIdStrategy userIdStrategy =
-			ExportImportHelperUtil.getUserIdStrategy(
-				userId, userIdStrategyString);
-
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		// LAR validation
@@ -379,6 +375,10 @@ public class PortletImporter {
 		validateFile(layout.getCompanyId(), groupId, portletId, zipReader);
 
 		// PortletDataContext
+
+		UserIdStrategy userIdStrategy =
+			ExportImportHelperUtil.getUserIdStrategy(
+				userId, userIdStrategyString);
 
 		PortletDataContext portletDataContext =
 			PortletDataContextFactoryUtil.createImportPortletDataContext(

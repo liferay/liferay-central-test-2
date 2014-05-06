@@ -695,12 +695,12 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			Group group = GroupLocalServiceUtil.getGroup(groupId);
 			String userIdStrategy = MapUtil.getString(
 				parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
-			UserIdStrategy strategy = getUserIdStrategy(userId, userIdStrategy);
 			ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 			PortletDataContext portletDataContext =
 				PortletDataContextFactoryUtil.createImportPortletDataContext(
-					group.getCompanyId(), groupId, parameterMap, strategy,
+					group.getCompanyId(), groupId, parameterMap,
+					getUserIdStrategy(userId, userIdStrategy),
 					zipReader);
 
 			manifestSummary = getManifestSummary(portletDataContext);
@@ -719,16 +719,15 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 			PortletDataContext portletDataContext)
 		throws Exception {
 
-		final Group group = GroupLocalServiceUtil.getGroup(
-			portletDataContext.getGroupId());
+		SAXParser saxParser = new SAXParser();
 
-		final ManifestSummary manifestSummary = new ManifestSummary();
+		Group group = GroupLocalServiceUtil.getGroup(
+			portletDataContext.getGroupId());
+		ManifestSummary manifestSummary = new ManifestSummary();
 
 		ElementHandler elementHandler = new ElementHandler(
 			new ManifestSummaryElementProcessor(group, manifestSummary),
 			new String[] {"header", "portlet", "staged-model"});
-
-		SAXParser saxParser = new SAXParser();
 
 		saxParser.setContentHandler(elementHandler);
 
@@ -1766,13 +1765,12 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 		String userIdStrategy = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
-		UserIdStrategy strategy = getUserIdStrategy(userId, userIdStrategy);
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		PortletDataContext portletDataContext =
 			PortletDataContextFactoryUtil.createImportPortletDataContext(
-				group.getCompanyId(), groupId, parameterMap, strategy,
-				zipReader);
+				group.getCompanyId(), groupId, parameterMap,
+				getUserIdStrategy(userId, userIdStrategy), zipReader);
 
 		return validateMissingReferences(portletDataContext);
 	}

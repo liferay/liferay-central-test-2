@@ -121,15 +121,10 @@ public class PortletDataContextFactoryImpl
 
 		portletDataContext.setNewLayouts(new ArrayList<Layout>());
 		portletDataContext.setParameterMap(parameterMap);
-		portletDataContext.setUserIdStrategy(userIdStrategy);
-		portletDataContext.setZipReader(zipReader);
-
-		// Portlet data context listener
-
 		portletDataContext.setPortetDataContextListener(
 			new PortletDataContextListenerImpl(portletDataContext));
-
-		// XML
+		portletDataContext.setUserIdStrategy(userIdStrategy);
+		portletDataContext.setZipReader(zipReader);
 
 		readXML(portletDataContext);
 
@@ -219,34 +214,24 @@ public class PortletDataContextFactoryImpl
 			throw new PortletDataException(e);
 		}
 
-		// Elements
-
 		portletDataContext.setImportDataRootElement(rootElement);
 
 		Element headerElement = rootElement.element("header");
-
-		// Company id
 
 		long sourceCompanyId = GetterUtil.getLong(
 			headerElement.attributeValue("company-id"));
 
 		portletDataContext.setSourceCompanyId(sourceCompanyId);
 
-		// Company group id
-
 		long sourceCompanyGroupId = GetterUtil.getLong(
 			headerElement.attributeValue("company-group-id"));
 
 		portletDataContext.setSourceCompanyGroupId(sourceCompanyGroupId);
 
-		// Group id
-
 		long sourceGroupId = GetterUtil.getLong(
 			headerElement.attributeValue("group-id"));
 
 		portletDataContext.setSourceGroupId(sourceGroupId);
-
-		// User personal site group id
 
 		long sourceUserPersonalSiteGroupId = GetterUtil.getLong(
 			headerElement.attributeValue("user-personal-site-group-id"));

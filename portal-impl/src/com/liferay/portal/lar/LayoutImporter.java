@@ -142,17 +142,17 @@ public class LayoutImporter {
 			LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 				groupId, privateLayout);
 
+			ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
+
+			validateFile(
+				layoutSet.getCompanyId(), groupId, parameterMap, zipReader);
+
 			String userIdStrategyString = MapUtil.getString(
 				parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 			UserIdStrategy userIdStrategy =
 				ExportImportHelperUtil.getUserIdStrategy(
 					userId, userIdStrategyString);
-
-			ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
-
-			validateFile(
-				layoutSet.getCompanyId(), groupId, parameterMap, zipReader);
 
 			PortletDataContext portletDataContext =
 				PortletDataContextFactoryUtil.createImportPortletDataContext(
@@ -227,8 +227,6 @@ public class LayoutImporter {
 		boolean layoutSetPrototypeLinkEnabled = MapUtil.getBoolean(
 			parameterMap,
 			PortletDataHandlerKeys.LAYOUT_SET_PROTOTYPE_LINK_ENABLED);
-		String userIdStrategyString = MapUtil.getString(
-			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -239,6 +237,8 @@ public class LayoutImporter {
 		String layoutsImportMode = MapUtil.getString(
 			parameterMap, PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
 			PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_UUID);
+		String userIdStrategyString = MapUtil.getString(
+			parameterMap, PortletDataHandlerKeys.USER_ID_STRATEGY);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete portlet data " + deletePortletData);
@@ -269,10 +269,6 @@ public class LayoutImporter {
 			ServiceContextThreadLocal.pushServiceContext(serviceContext);
 		}
 
-		UserIdStrategy userIdStrategy =
-			ExportImportHelperUtil.getUserIdStrategy(
-				userId, userIdStrategyString);
-
 		ZipReader zipReader = ZipReaderFactoryUtil.getZipReader(file);
 
 		// LAR validation
@@ -280,6 +276,10 @@ public class LayoutImporter {
 		validateFile(companyId, groupId, parameterMap, zipReader);
 
 		// PortletDataContext
+
+		UserIdStrategy userIdStrategy =
+			ExportImportHelperUtil.getUserIdStrategy(
+				userId, userIdStrategyString);
 
 		PortletDataContext portletDataContext =
 			PortletDataContextFactoryUtil.createImportPortletDataContext(
