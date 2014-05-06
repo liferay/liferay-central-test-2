@@ -85,7 +85,15 @@ public class QueryDefinition {
 	}
 
 	public OrderByComparator getOrderByComparator() {
-		return _tableNameOrderByComparator;
+		return _orderByComparator;
+	}
+
+	public OrderByComparator getOrderByComparator(String tableName) {
+		if (_orderByComparator == null) {
+			return null;
+		}
+
+		return new TableNameOrderByComparator(_orderByComparator, tableName);
 	}
 
 	public int getStart() {
@@ -117,22 +125,7 @@ public class QueryDefinition {
 	}
 
 	public void setOrderByComparator(OrderByComparator orderByComparator) {
-		if (orderByComparator == null) {
-			_tableNameOrderByComparator = null;
-		}
-		else {
-			_tableNameOrderByComparator =
-				new TableNameOrderByComparator(
-					orderByComparator, _orderByComparatorTableName);
-		}
-	}
-
-	public void setOrderByComparatorTableName(String tableName) {
-		_orderByComparatorTableName = tableName;
-
-		if (_tableNameOrderByComparator != null) {
-			_tableNameOrderByComparator.setTableName(tableName);
-		}
+		_orderByComparator = orderByComparator;
 	}
 
 	public void setStart(int start) {
@@ -151,9 +144,8 @@ public class QueryDefinition {
 	private Map<String, Serializable> _attributes;
 	private int _end = QueryUtil.ALL_POS;
 	private boolean _excludeStatus;
-	private String _orderByComparatorTableName;
+	private OrderByComparator _orderByComparator;
 	private int _start = QueryUtil.ALL_POS;
 	private int _status = WorkflowConstants.STATUS_ANY;
-	private TableNameOrderByComparator _tableNameOrderByComparator;
 
 }
