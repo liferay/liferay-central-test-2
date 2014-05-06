@@ -33,6 +33,7 @@ public class UpgradeLanguagePreferences extends BaseUpgradePortletPreferences {
 		return new String[] {PortletKeys.LANGUAGE};
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void upgradeDisplayStyle(PortletPreferences portletPreferences)
 		throws ReadOnlyException {
 
