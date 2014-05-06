@@ -552,9 +552,9 @@ public class JournalArticleFinderTest {
 	protected void prepareSortedArticles() throws Exception {
 		Calendar calendar = new GregorianCalendar();
 
+		calendar.set(Calendar.DATE, 1);
 		calendar.set(Calendar.MONTH, 1);
 		calendar.set(Calendar.YEAR, 2014);
-		calendar.set(Calendar.DATE, 1);
 
 		for (int i = 0; i < _articles.size(); ++i) {
 			calendar.add(Calendar.DATE, 1);
