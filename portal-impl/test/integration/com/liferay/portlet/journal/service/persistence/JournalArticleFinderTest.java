@@ -75,8 +75,6 @@ public class JournalArticleFinderTest {
 
 	@Before
 	public void setUp() throws Exception {
-		JournalArticle addedArticle;
-
 		_group = GroupTestUtil.addGroup();
 
 		_ddmStructure = DDMStructureTestUtil.addStructure(
@@ -91,7 +89,7 @@ public class JournalArticleFinderTest {
 		DDMTemplate basicWebContentTemplate = DDMTemplateTestUtil.addTemplate(
 			_group.getGroupId(), _basicWebContentDDMStructure.getStructureId());
 
-		addedArticle = JournalTestUtil.addArticleWithXMLContent(
+		JournalArticle addedArticle = JournalTestUtil.addArticleWithXMLContent(
 			_group.getGroupId(), _folder.getFolderId(),
 			JournalArticleConstants.CLASSNAME_ID_DEFAULT,
 			"<title>Article 1</title>",
