@@ -489,21 +489,23 @@ public class JournalArticleFinderTest {
 		Assert.assertEquals(expectedCount, actualCount);
 	}
 
-	protected void testQueryByG_F(OrderByComparator comparator)
+	protected void testQueryByG_F(OrderByComparator orderByComparator)
 		throws Exception {
 
 		prepareSortedArticles();
 
 		QueryDefinition queryDefinition = new QueryDefinition();
-		queryDefinition.setOrderByComparator(comparator);
 
-		List<JournalArticle> expectedArticles;
+		queryDefinition.setOrderByComparator(orderByComparator);
 
-		if (comparator.isAscending()) {
+		List<JournalArticle> expectedArticles = null;
+
+		if (orderByComparator.isAscending()) {
 			expectedArticles = _articles;
 		}
 		else {
 			expectedArticles = new ArrayList<JournalArticle>(_articles);
+
 			Collections.reverse(expectedArticles);
 		}
 
