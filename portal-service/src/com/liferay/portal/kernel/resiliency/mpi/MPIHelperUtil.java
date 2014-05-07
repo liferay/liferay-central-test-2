@@ -328,6 +328,7 @@ public class MPIHelperUtil {
 
 					try {
 						spi.stop();
+
 						spi.destroy();
 
 						if (_log.isInfoEnabled()) {

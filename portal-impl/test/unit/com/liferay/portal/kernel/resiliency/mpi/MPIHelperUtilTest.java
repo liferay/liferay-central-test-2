@@ -480,8 +480,9 @@ public class MPIHelperUtilTest {
 			logRecords = captureHandler.resetLogLevel(Level.OFF);
 
 			mockSPI1.failOnStop = false;
-			mockSPI2.failOnStop = false;
 			mockSPI1.failOnDestroy = true;
+
+			mockSPI2.failOnStop = false;
 			mockSPI2.failOnDestroy = true;
 
 			Assert.assertTrue(
