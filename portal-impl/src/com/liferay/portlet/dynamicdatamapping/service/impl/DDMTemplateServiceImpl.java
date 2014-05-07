@@ -428,8 +428,8 @@ public class DDMTemplateServiceImpl extends DDMTemplateServiceBaseImpl {
 
 		ddmTemplates.addAll(
 			ddmTemplatePersistence.filterFindByG_C_C(
-				PortalUtil.getAncestorSiteGroupIds(groupId),
-				classNameId, classPK));
+				PortalUtil.getAncestorSiteGroupIds(groupId), classNameId,
+				classPK));
 
 		return ddmTemplates;
 	}
