@@ -170,29 +170,29 @@ public class BreadcrumbTag extends IncludeTag {
 	}
 
 	protected void buildLayoutBreadcrumb(
-			Layout selLayout, boolean selectedLayout, ThemeDisplay themeDisplay,
+			Layout layout, boolean selectedLayout, ThemeDisplay themeDisplay,
 			StringBundler sb)
 		throws Exception {
 
-		if (selLayout.getParentLayoutId() !=
+		if (layout.getParentLayoutId() !=
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 
 			Layout parentLayout = LayoutLocalServiceUtil.getParentLayout(
-				selLayout);
+				layout);
 
 			buildLayoutBreadcrumb(parentLayout, false, themeDisplay, sb);
 		}
 
 		sb.append("<li><a href=\"");
 
-		String layoutURL = PortalUtil.getLayoutFullURL(selLayout, themeDisplay);
+		String layoutURL = PortalUtil.getLayoutFullURL(layout, themeDisplay);
 
 		if (themeDisplay.isAddSessionIdToURL()) {
 			layoutURL = PortalUtil.getURLWithSessionId(
 				layoutURL, themeDisplay.getSessionId());
 		}
 
-		if (selLayout.isTypeControlPanel()) {
+		if (layout.isTypeControlPanel()) {
 			layoutURL = HttpUtil.removeParameter(
 				layoutURL, "controlPanelCategory");
 		}
@@ -201,9 +201,9 @@ public class BreadcrumbTag extends IncludeTag {
 
 		sb.append("\" ");
 
-		String layoutName = selLayout.getName(themeDisplay.getLocale());
+		String layoutName = layout.getName(themeDisplay.getLocale());
 
-		if (selLayout.isTypeControlPanel()) {
+		if (layout.isTypeControlPanel()) {
 			sb.append("target=\"_top\"");
 
 			if (layoutName.equals(LayoutConstants.NAME_CONTROL_PANEL_DEFAULT)) {
@@ -212,7 +212,7 @@ public class BreadcrumbTag extends IncludeTag {
 			}
 		}
 		else {
-			String target = PortalUtil.getLayoutTarget(selLayout);
+			String target = PortalUtil.getLayoutTarget(layout);
 
 			sb.append(target);
 		}
@@ -316,8 +316,9 @@ public class BreadcrumbTag extends IncludeTag {
 		StringBundler sb = new StringBundler();
 
 		try {
-			Layout selLayout = themeDisplay.getLayout();
-			Group group = selLayout.getGroup();
+			Layout layout = themeDisplay.getLayout();
+
+			Group group = layout.getGroup();
 
 			if (_showGuestGroup) {
 				buildGuestGroupBreadcrumb(themeDisplay, sb);
@@ -325,7 +326,7 @@ public class BreadcrumbTag extends IncludeTag {
 
 			if (_showParentGroups) {
 				LayoutSet parentLayoutSet = getParentLayoutSet(
-					selLayout.getLayoutSet());
+					layout.getLayoutSet());
 
 				if (parentLayoutSet != null) {
 					buildGroupsBreadcrumb(
@@ -335,11 +336,11 @@ public class BreadcrumbTag extends IncludeTag {
 
 			if (_showCurrentGroup) {
 				buildGroupsBreadcrumb(
-					selLayout.getLayoutSet(), themeDisplay, false, sb);
+					layout.getLayoutSet(), themeDisplay, false, sb);
 			}
 
 			if (_showLayout && !group.isLayoutPrototype()) {
-				buildLayoutBreadcrumb(selLayout, true, themeDisplay, sb);
+				buildLayoutBreadcrumb(layout, true, themeDisplay, sb);
 			}
 
 			if (_showPortletBreadcrumb) {
@@ -448,7 +449,9 @@ public class BreadcrumbTag extends IncludeTag {
 			WebKeys.THEME_DISPLAY);
 
 		try {
-			Group group = themeDisplay.getLayout().getGroup();
+			Layout layout = themeDisplay.getLayout();
+
+			Group group = layout.getGroup();
 
 			UnicodeProperties typeSettingsProperties =
 				group.getTypeSettingsProperties();
