@@ -475,7 +475,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 						session.flush();
 					}
 
-					_nestedSetsTreeManager.delete(${entity.varName});
+					nestedSetsTreeManager.delete(${entity.varName});
 
 					clearCache();
 
@@ -611,10 +611,10 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 					}
 
 					if (isNew) {
-						_nestedSetsTreeManager.insert(${entity.varName}, fetchByPrimaryKey(${entity.varName}.getParent${pkColumn.methodName}()));
+						nestedSetsTreeManager.insert(${entity.varName}, fetchByPrimaryKey(${entity.varName}.getParent${pkColumn.methodName}()));
 					}
 					else if (${entity.varName}.getParent${pkColumn.methodName}() != ${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()){
-						_nestedSetsTreeManager.move(${entity.varName}, fetchByPrimaryKey(${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()), fetchByPrimaryKey(${entity.varName}.getParent${pkColumn.methodName}()));
+						nestedSetsTreeManager.move(${entity.varName}, fetchByPrimaryKey(${entity.varName}ModelImpl.getOriginalParent${pkColumn.methodName}()), fetchByPrimaryKey(${entity.varName}.getParent${pkColumn.methodName}()));
 					}
 
 					clearCache();
@@ -1300,15 +1300,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	<#if entity.isHierarchicalTree()>
 		@Override
 		public long countAncestors(${entity.name} ${entity.varName}) throws SystemException {
-			Object[] finderArgs = new Object[] {
-				${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()
-			};
+			Object[] finderArgs = new Object[] {${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()};
 
 			Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_WITH_PAGINATION_COUNT_ANCESTORS, finderArgs, this);
 
 			if (count == null) {
 				try {
-					count = _nestedSetsTreeManager.countAncestors(${entity.varName});
+					count = nestedSetsTreeManager.countAncestors(${entity.varName});
 
 					FinderCacheUtil.putResult(FINDER_PATH_WITH_PAGINATION_COUNT_ANCESTORS, finderArgs, count);
 				}
@@ -1324,15 +1322,13 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		@Override
 		public long countDescendants(${entity.name} ${entity.varName}) throws SystemException {
-			Object[] finderArgs = new Object[] {
-				${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()
-			};
+			Object[] finderArgs = new Object[] {${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()};
 
 			Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_WITH_PAGINATION_COUNT_DESCENDANTS, finderArgs, this);
 
 			if (count == null) {
 				try {
-					count = _nestedSetsTreeManager.countDescendants(${entity.varName});
+					count = nestedSetsTreeManager.countDescendants(${entity.varName});
 
 					FinderCacheUtil.putResult(FINDER_PATH_WITH_PAGINATION_COUNT_DESCENDANTS, finderArgs, count);
 				}
@@ -1348,9 +1344,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		@Override
 		public List<${entity.name}> getAncestors(${entity.name} ${entity.varName}) throws SystemException {
-			Object[] finderArgs = new Object[] {
-				${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()
-			};
+			Object[] finderArgs = new Object[] {${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()};
 
 			List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_WITH_PAGINATION_GET_ANCESTORS, finderArgs, this);
 
@@ -1366,7 +1360,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			if (list == null) {
 				try {
-					list = _nestedSetsTreeManager.getAncestors(${entity.varName});
+					list = nestedSetsTreeManager.getAncestors(${entity.varName});
 
 					cacheResult(list);
 
@@ -1384,9 +1378,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 		@Override
 		public List<${entity.name}> getDescendants(${entity.name} ${entity.varName}) throws SystemException {
-			Object[] finderArgs = new Object[] {
-				${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()
-			};
+			Object[] finderArgs = new Object[] {${entity.varName}.get${scopeColumn.methodName}(), ${entity.varName}.getLeft${pkColumn.methodName}(), ${entity.varName}.getRight${pkColumn.methodName}()};
 
 			List<${entity.name}> list = (List<${entity.name}>)FinderCacheUtil.getResult(FINDER_PATH_WITH_PAGINATION_GET_DESCENDANTS, finderArgs, this);
 
@@ -1402,7 +1394,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 			if (list == null) {
 				try {
-					list = _nestedSetsTreeManager.getDescendants(${entity.varName});
+					list = nestedSetsTreeManager.getDescendants(${entity.varName});
 
 					cacheResult(list);
 
@@ -1493,24 +1485,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		}
 
 		protected long rebuildTree(Session session, SQLQuery selectQuery, SQLQuery updateQuery, long ${scopeColumn.name}, long parent${pkColumn.methodName}, long left${pkColumn.methodName}) throws SystemException {
+			List<Long> ${pkColumn.names} = selectQuery.list();
+
 			long right${pkColumn.methodName} = left${pkColumn.methodName} + 1;
-
-			List<Long> ${pkColumn.names} = null;
-
-
-			QueryPos qPos = QueryPos.getInstance(selectQuery);
-
-			qPos.add(${scopeColumn.name});
-			qPos.add(parent${pkColumn.methodName});
-
-			${pkColumn.names} = selectQuery.list();
 
 			for (long ${pkColumn.name} : ${pkColumn.names}) {
 				right${pkColumn.methodName} = rebuildTree(session, selectQuery, updateQuery, ${scopeColumn.name}, ${pkColumn.name}, right${pkColumn.methodName});
 			}
 
 			if (parent${pkColumn.methodName} > 0) {
-				qPos = QueryPos.getInstance(updateQuery);
+				QueryPos qPos = QueryPos.getInstance(updateQuery);
 
 				qPos.add(left${pkColumn.methodName});
 				qPos.add(right${pkColumn.methodName});
@@ -1581,8 +1565,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 	</#list>
 
 	<#if entity.isHierarchicalTree()>
-		protected NestedSetsTreeManager<${entity.name}> _nestedSetsTreeManager = new PersistenceNestedSetsTreeManager<${entity.name}>(this, "${entity.table}", "${entity.name}", ${entity.name}Impl.class, "${pkColumn.DBName}", "${scopeColumn.DBName}", "left${pkColumn.methodName}", "right${pkColumn.methodName}");
-
+		protected NestedSetsTreeManager<${entity.name}> nestedSetsTreeManager = new PersistenceNestedSetsTreeManager<${entity.name}>(this, "${entity.table}", "${entity.name}", ${entity.name}Impl.class, "${pkColumn.DBName}", "${scopeColumn.DBName}", "left${pkColumn.methodName}", "right${pkColumn.methodName}");
 		protected boolean rebuildTreeEnabled = true;
 		protected UpdateTree updateTree;
 

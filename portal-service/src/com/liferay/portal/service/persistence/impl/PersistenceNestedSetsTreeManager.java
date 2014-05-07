@@ -34,7 +34,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	public PersistenceNestedSetsTreeManager(
 		BasePersistenceImpl<?> basePersistenceImpl, String tableName,
-		String entityName, Class<?> entityImplClass, String pkName,
+		String entityName, Class<?> entityImplClass, String primaryKeyName,
 		String nestedSetsTreeNodeScopeIdName, String nestedSetsTreeNodeLeftName,
 		String nestedSetsTreeNodeRightName) {
 
@@ -42,7 +42,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		_tableName = tableName;
 		_entityName = entityName;
 		_entityImplClass = entityImplClass;
-		_pkName = pkName;
+		_primaryKeyName = primaryKeyName;
 		_nestedSetsTreeNodeScopeIdName = nestedSetsTreeNodeScopeIdName;
 		_nestedSetsTreeNodeLeftName = nestedSetsTreeNodeLeftName;
 		_nestedSetsTreeNodeRightName = nestedSetsTreeNodeRightName;
@@ -294,7 +294,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 		if (includeList != null) {
 			sb.append(" AND ");
-			sb.append(_pkName);
+			sb.append(_primaryKeyName);
 			sb.append(" IN(");
 
 			for (T t : includeList) {
@@ -466,7 +466,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 	private final String _entityName;
 	private final String _nestedSetsTreeNodeLeftName;
 	private final String _nestedSetsTreeNodeRightName;
-	private final String _pkName;
+	private final String _primaryKeyName;
 	private final String _nestedSetsTreeNodeScopeIdName;
 	private final String _tableName;
 
