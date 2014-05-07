@@ -435,105 +435,38 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 		StringBundler query, String entityAlias,
 		OrderByComparator orderByComparator, boolean sqlQuery) {
 
-		String orderBy;
+		query.append(ORDER_BY_CLAUSE);
 
-		if (sqlQuery) {
-			TableNameOrderByComparator tableNameOrderByComparator = null;
+		String[] orderByFields = orderByComparator.getOrderByFields();
 
-			if (orderByComparator instanceof TableNameOrderByComparator) {
-				tableNameOrderByComparator =
-					(TableNameOrderByComparator)orderByComparator;
+		for (int i = 0; i < orderByFields.length; i++) {
+			query.append(entityAlias);
+			query.append(orderByFields[i]);
 
-				tableNameOrderByComparator =
-					new TableNameOrderByComparator(
-						tableNameOrderByComparator.getWrappedOrderByComparator(),
-						entityAlias);
-			}
-			else {
-				tableNameOrderByComparator = new TableNameOrderByComparator(
-					orderByComparator, entityAlias);
-			}
-
-			orderBy = tableNameOrderByComparator.getOrderBy();
-
-			String[] orderByParts = StringUtil.split(orderBy, CharPool.COMMA);
-
-			StringBundler sb = new StringBundler(orderByParts.length);
-
-			for (int i = 0; i < orderByParts.length; ++i) {
-				String orderByPart = orderByParts[i];
-
-				String[] array = StringUtil.split(orderByPart, CharPool.SPACE);
-
-				String direction = array[1];
-
-				array = StringUtil.split(array[0], CharPool.PERIOD);
-
-				String tableName = array[0];
-				String columnName = array[1];
-
-				sb.append(tableName);
-				sb.append(StringPool.PERIOD);
-				sb.append(columnName);
-
+			if (sqlQuery) {
 				Set<String> badColumnNames = getBadColumnNames();
 
-				if (badColumnNames.contains(columnName)) {
-					sb.append(StringPool.UNDERLINE);
-				}
-
-				sb.append(StringPool.SPACE);
-				sb.append(direction);
-
-				if (i < (orderByParts.length - 1)) {
-					sb.append(StringPool.COMMA);
+				if (badColumnNames.contains(orderByFields[i])) {
+					query.append(StringPool.UNDERLINE);
 				}
 			}
 
-			orderBy = sb.toString();
-		}
-		else {
-			String[] fields = orderByComparator.getOrderByFields();
-			if (fields == null) {
-				orderBy = StringPool.BLANK;
+			if ((i + 1) < orderByFields.length) {
+				if (orderByComparator.isAscending(orderByFields[i])) {
+					query.append(ORDER_BY_ASC_HAS_NEXT);
+				}
+				else {
+					query.append(ORDER_BY_DESC_HAS_NEXT);
+				}
 			}
 			else {
-				StringBundler sb = new StringBundler((fields.length * 5) - 1);
-
-				boolean addPeriod = !entityAlias.endsWith(StringPool.PERIOD);
-				boolean isFirst = true;
-
-				for (String field : fields) {
-
-					if (isFirst) {
-						isFirst = false;
-					}
-					else {
-						sb.append(StringPool.COMMA_AND_SPACE);
-					}
-
-					sb.append(entityAlias);
-
-					if (addPeriod) {
-						sb.append(StringPool.PERIOD);
-					}
-
-					sb.append(field);
-
-					if (orderByComparator.isAscending()) {
-						sb.append(ORDER_BY_ASC);
-					}
-					else {
-						sb.append(ORDER_BY_DESC);
-					}
+				if (orderByComparator.isAscending(orderByFields[i])) {
+					query.append(ORDER_BY_ASC);
 				}
-				orderBy = sb.toString();
+				else {
+					query.append(ORDER_BY_DESC);
+				}
 			}
-		}
-
-		if (!orderBy.isEmpty()) {
-			query.append(ORDER_BY_CLAUSE);
-			query.append(orderBy);
 		}
 	}
 
