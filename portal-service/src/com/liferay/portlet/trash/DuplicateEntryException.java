@@ -18,8 +18,7 @@ package com.liferay.portlet.trash;
  * @author Brian Wing Shun Chan
  *
  *
- * @deprecated As of 7.0.0, moved to {@link
- *             com.liferay.portlet.trash.RestoreEntryException}
+ * @deprecated As of 7.0.0, renamed to {@link RestoreEntryException}
  */
 @Deprecated
 public class DuplicateEntryException extends RestoreEntryException {
