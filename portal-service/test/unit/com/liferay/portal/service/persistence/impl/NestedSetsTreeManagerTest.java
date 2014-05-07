@@ -44,82 +44,82 @@ public class NestedSetsTreeManagerTest {
 	public void testCountAncestors() throws SystemException {
 		testInsert();
 
-		_assertCountAncestors(1, _nestedSetsNodes[0]);
-		_assertCountAncestors(1, _nestedSetsNodes[1]);
-		_assertCountAncestors(1, _nestedSetsNodes[2]);
-		_assertCountAncestors(2, _nestedSetsNodes[3]);
-		_assertCountAncestors(2, _nestedSetsNodes[4]);
-		_assertCountAncestors(3, _nestedSetsNodes[5]);
-		_assertCountAncestors(2, _nestedSetsNodes[6]);
-		_assertCountAncestors(3, _nestedSetsNodes[7]);
-		_assertCountAncestors(3, _nestedSetsNodes[8]);
+		assertCountAncestors(1, _simpleNestedSetsTreeNodes[0]);
+		assertCountAncestors(1, _simpleNestedSetsTreeNodes[1]);
+		assertCountAncestors(1, _simpleNestedSetsTreeNodes[2]);
+		assertCountAncestors(2, _simpleNestedSetsTreeNodes[3]);
+		assertCountAncestors(2, _simpleNestedSetsTreeNodes[4]);
+		assertCountAncestors(3, _simpleNestedSetsTreeNodes[5]);
+		assertCountAncestors(2, _simpleNestedSetsTreeNodes[6]);
+		assertCountAncestors(3, _simpleNestedSetsTreeNodes[7]);
+		assertCountAncestors(3, _simpleNestedSetsTreeNodes[8]);
 	}
 
 	@Test
 	public void testCountDescendants() throws SystemException {
 		testInsert();
 
-		_assertCountDescendants(5, _nestedSetsNodes[0]);
-		_assertCountDescendants(3, _nestedSetsNodes[1]);
-		_assertCountDescendants(1, _nestedSetsNodes[2]);
-		_assertCountDescendants(2, _nestedSetsNodes[3]);
-		_assertCountDescendants(2, _nestedSetsNodes[4]);
-		_assertCountDescendants(1, _nestedSetsNodes[5]);
-		_assertCountDescendants(2, _nestedSetsNodes[6]);
-		_assertCountDescendants(1, _nestedSetsNodes[7]);
-		_assertCountDescendants(1, _nestedSetsNodes[8]);
+		assertCountDescendants(5, _simpleNestedSetsTreeNodes[0]);
+		assertCountDescendants(3, _simpleNestedSetsTreeNodes[1]);
+		assertCountDescendants(1, _simpleNestedSetsTreeNodes[2]);
+		assertCountDescendants(2, _simpleNestedSetsTreeNodes[3]);
+		assertCountDescendants(2, _simpleNestedSetsTreeNodes[4]);
+		assertCountDescendants(1, _simpleNestedSetsTreeNodes[5]);
+		assertCountDescendants(2, _simpleNestedSetsTreeNodes[6]);
+		assertCountDescendants(1, _simpleNestedSetsTreeNodes[7]);
+		assertCountDescendants(1, _simpleNestedSetsTreeNodes[8]);
 	}
 
 	@Test
 	public void testDelete() throws SystemException {
 		testInsert();
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[7]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[7]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4(7#8, 8), 9), 10)(11#1(12#6, 13), 14)" +
 				"(15#2, 16)",
 			_nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[4]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[4]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#8, 7), 8)(9#1(10#6, 11), 12)(13#2, 14)",
 			_nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[0]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#3(2#5, 3), 4)(5#8, 6)(7#1(8#6, 9), 10)(11#2, 12)",
 			_nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[8]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[8]);
 
 		Assert.assertEquals(
 			"(1#3(2#5, 3), 4)(5#1(6#6, 7), 8)(9#2, 10)",
 			_nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[2]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[2]);
 
 		Assert.assertEquals(
 			"(1#3(2#5, 3), 4)(5#1(6#6, 7), 8)",
 			_nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[5]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[5]);
 
 		Assert.assertEquals(
 			"(1#3, 2)(3#1(4#6, 5), 6)", _nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[1]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[1]);
 
 		Assert.assertEquals(
 			"(1#3, 2)(3#6, 4)", _nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[6]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[6]);
 
 		Assert.assertEquals("(1#3, 2)", _nestedSetsTreeManager.toString());
 
-		_nestedSetsTreeManager.delete(_nestedSetsNodes[3]);
+		_nestedSetsTreeManager.delete(_simpleNestedSetsTreeNodes[3]);
 
 		Assert.assertEquals("", _nestedSetsTreeManager.toString());
 	}
@@ -128,36 +128,47 @@ public class NestedSetsTreeManagerTest {
 	public void testGetAncestors() throws SystemException {
 		testInsert();
 
-		_assertGetAncestors(_nestedSetsNodes[0]);
-		_assertGetAncestors(_nestedSetsNodes[1]);
-		_assertGetAncestors(_nestedSetsNodes[2]);
-		_assertGetAncestors(_nestedSetsNodes[3], _nestedSetsNodes[0]);
-		_assertGetAncestors(_nestedSetsNodes[4], _nestedSetsNodes[0]);
-		_assertGetAncestors(
-			_nestedSetsNodes[5], _nestedSetsNodes[3], _nestedSetsNodes[0]);
-		_assertGetAncestors(_nestedSetsNodes[6], _nestedSetsNodes[1]);
-		_assertGetAncestors(
-			_nestedSetsNodes[7], _nestedSetsNodes[6], _nestedSetsNodes[1]);
-		_assertGetAncestors(
-			_nestedSetsNodes[8], _nestedSetsNodes[4], _nestedSetsNodes[0]);
+		assertGetAncestors(_simpleNestedSetsTreeNodes[0]);
+		assertGetAncestors(_simpleNestedSetsTreeNodes[1]);
+		assertGetAncestors(_simpleNestedSetsTreeNodes[2]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[3], _simpleNestedSetsTreeNodes[0]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[0]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[5], _simpleNestedSetsTreeNodes[3],
+			_simpleNestedSetsTreeNodes[0]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[6], _simpleNestedSetsTreeNodes[1]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[7], _simpleNestedSetsTreeNodes[6],
+			_simpleNestedSetsTreeNodes[1]);
+		assertGetAncestors(
+			_simpleNestedSetsTreeNodes[8], _simpleNestedSetsTreeNodes[4],
+			_simpleNestedSetsTreeNodes[0]);
 	}
 
 	@Test
 	public void testGetDescendants() throws SystemException {
 		testInsert();
 
-		_assertGetDescendants(
-			_nestedSetsNodes[0], _nestedSetsNodes[3], _nestedSetsNodes[4],
-			_nestedSetsNodes[5], _nestedSetsNodes[8]);
-		_assertGetDescendants(
-			_nestedSetsNodes[1], _nestedSetsNodes[6], _nestedSetsNodes[7]);
-		_assertGetDescendants(_nestedSetsNodes[2]);
-		_assertGetDescendants(_nestedSetsNodes[3], _nestedSetsNodes[5]);
-		_assertGetDescendants(_nestedSetsNodes[4], _nestedSetsNodes[8]);
-		_assertGetDescendants(_nestedSetsNodes[5]);
-		_assertGetDescendants(_nestedSetsNodes[6], _nestedSetsNodes[7]);
-		_assertGetDescendants(_nestedSetsNodes[7]);
-		_assertGetDescendants(_nestedSetsNodes[8]);
+		assertGetDescendants(
+			_simpleNestedSetsTreeNodes[0], _simpleNestedSetsTreeNodes[3],
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[5],
+			_simpleNestedSetsTreeNodes[8]);
+		assertGetDescendants(
+			_simpleNestedSetsTreeNodes[1], _simpleNestedSetsTreeNodes[6],
+			_simpleNestedSetsTreeNodes[7]);
+		assertGetDescendants(_simpleNestedSetsTreeNodes[2]);
+		assertGetDescendants(
+			_simpleNestedSetsTreeNodes[3], _simpleNestedSetsTreeNodes[5]);
+		assertGetDescendants(
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[8]);
+		assertGetDescendants(_simpleNestedSetsTreeNodes[5]);
+		assertGetDescendants(
+			_simpleNestedSetsTreeNodes[6], _simpleNestedSetsTreeNodes[7]);
+		assertGetDescendants(_simpleNestedSetsTreeNodes[7]);
+		assertGetDescendants(_simpleNestedSetsTreeNodes[8]);
 	}
 
 	@Test
@@ -165,27 +176,28 @@ public class NestedSetsTreeManagerTest {
 
 		// (0)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[0], null);
+		_nestedSetsTreeManager.insert(_simpleNestedSetsTreeNodes[0], null);
 
 		Assert.assertEquals("(1#0, 2)", _nestedSetsTreeManager.toString());
 
 		// (0, 1)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[1], null);
+		_nestedSetsTreeManager.insert(_simpleNestedSetsTreeNodes[1], null);
 
 		Assert.assertEquals(
 			"(1#0, 2)(3#1, 4)", _nestedSetsTreeManager.toString());
 
 		// (0, 1, 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[2], null);
+		_nestedSetsTreeManager.insert(_simpleNestedSetsTreeNodes[2], null);
 
 		Assert.assertEquals(
 			"(1#0, 2)(3#1, 4)(5#2, 6)", _nestedSetsTreeManager.toString());
 
 		// (0(3), 1, 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[3], _nestedSetsNodes[0]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[3], _simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#0(2#3, 3), 4)(5#1, 6)(7#2, 8)",
@@ -193,7 +205,8 @@ public class NestedSetsTreeManagerTest {
 
 		// (0(3, 4), 1, 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[4], _nestedSetsNodes[0]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#0(2#3, 3)(4#4, 5), 6)(7#1, 8)(9#2, 10)",
@@ -201,7 +214,8 @@ public class NestedSetsTreeManagerTest {
 
 		// (0(3(5), 4), 1, 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[5], _nestedSetsNodes[3]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[5], _simpleNestedSetsTreeNodes[3]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4, 7), 8)(9#1, 10)(11#2, 12)",
@@ -209,7 +223,8 @@ public class NestedSetsTreeManagerTest {
 
 		// (0(3(5), 4), 1(6), 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[6], _nestedSetsNodes[1]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[6], _simpleNestedSetsTreeNodes[1]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4, 7), 8)(9#1(10#6, 11), 12)(13#2, 14)",
@@ -217,7 +232,8 @@ public class NestedSetsTreeManagerTest {
 
 		// (0(3(5), 4), 1(6(7)), 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[7], _nestedSetsNodes[6]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[7], _simpleNestedSetsTreeNodes[6]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4, 7), 8)(9#1(10#6(11#7, 12), 13), 14)" +
@@ -226,7 +242,8 @@ public class NestedSetsTreeManagerTest {
 
 		// (0(3(5), 4(8)), 1(6(7)), 2)
 
-		_nestedSetsTreeManager.insert(_nestedSetsNodes[8], _nestedSetsNodes[4]);
+		_nestedSetsTreeManager.insert(
+			_simpleNestedSetsTreeNodes[8], _simpleNestedSetsTreeNodes[4]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4(7#8, 8), 9), 10)" +
@@ -238,7 +255,7 @@ public class NestedSetsTreeManagerTest {
 	public void testMove() throws SystemException {
 		testInsert();
 
-		_nestedSetsTreeManager.move(_nestedSetsNodes[4], null, null);
+		_nestedSetsTreeManager.move(_simpleNestedSetsTreeNodes[4], null, null);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4(7#8, 8), 9), 10)" +
@@ -246,7 +263,8 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[4], _nestedSetsNodes[0], _nestedSetsNodes[0]);
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[0],
+			_simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#4(7#8, 8), 9), 10)" +
@@ -254,7 +272,8 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[4], _nestedSetsNodes[0], _nestedSetsNodes[2]);
+			_simpleNestedSetsTreeNodes[4], _simpleNestedSetsTreeNodes[0],
+			_simpleNestedSetsTreeNodes[2]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5), 6)(7#1(8#6(9#7, 10), 11), 12)" +
@@ -262,7 +281,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[2], null, _nestedSetsNodes[0]);
+			_simpleNestedSetsTreeNodes[2], null, _simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#0(2#3(3#5, 4), 5)(6#2(7#4(8#8, 9), 10), 11), 12)" +
@@ -270,7 +289,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[3], _nestedSetsNodes[0], null);
+			_simpleNestedSetsTreeNodes[3], _simpleNestedSetsTreeNodes[0], null);
 
 		Assert.assertEquals(
 			"(1#0(2#2(3#4(4#8, 5), 6), 7), 8)(9#1(10#6(11#7, 12), 13), 14)" +
@@ -278,7 +297,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[1], null, _nestedSetsNodes[0]);
+			_simpleNestedSetsTreeNodes[1], null, _simpleNestedSetsTreeNodes[0]);
 
 		Assert.assertEquals(
 			"(1#0(2#2(3#4(4#8, 5), 6), 7)(8#1(9#6(10#7, 11), 12), 13), 14)" +
@@ -286,7 +305,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[3], null, _nestedSetsNodes[1]);
+			_simpleNestedSetsTreeNodes[3], null, _simpleNestedSetsTreeNodes[1]);
 
 		Assert.assertEquals(
 			"(1#0(2#2(3#4(4#8, 5), 6), 7)(8#1(9#6(10#7, 11), 12)" +
@@ -294,7 +313,8 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 
 		_nestedSetsTreeManager.move(
-			_nestedSetsNodes[2], _nestedSetsNodes[0], _nestedSetsNodes[3]);
+			_simpleNestedSetsTreeNodes[2], _simpleNestedSetsTreeNodes[0],
+			_simpleNestedSetsTreeNodes[3]);
 
 		Assert.assertEquals(
 			"(1#0(2#1(3#6(4#7, 5), 6)(7#3(8#5, 9)(10#2(11#4(12#8, 13), 14), " +
@@ -302,7 +322,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.toString());
 	}
 
-	private void _assertCountAncestors(
+	protected void assertCountAncestors(
 			long ancestorsCount,
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode)
 		throws SystemException {
@@ -312,7 +332,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.countAncestors(simpleNestedSetsTreeNode));
 	}
 
-	private void _assertCountDescendants(
+	protected void assertCountDescendants(
 			long childrenCount,
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode)
 		throws SystemException {
@@ -322,7 +342,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.countDescendants(simpleNestedSetsTreeNode));
 	}
 
-	private void _assertGetAncestors(
+	protected void assertGetAncestors(
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
 			SimpleNestedSetsTreeNode... ancestorSimpleNestedSetsTreeNodes)
 		throws SystemException {
@@ -340,7 +360,7 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.getAncestors(simpleNestedSetsTreeNode));
 	}
 
-	private void _assertGetDescendants(
+	protected void assertGetDescendants(
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
 			SimpleNestedSetsTreeNode... childSimpleNestedSetsTreeNodes)
 		throws SystemException {
@@ -358,7 +378,9 @@ public class NestedSetsTreeManagerTest {
 			_nestedSetsTreeManager.getDescendants(simpleNestedSetsTreeNode));
 	}
 
-	private SimpleNestedSetsTreeNode[] _nestedSetsNodes =
+	private NestedSetsTreeManager<SimpleNestedSetsTreeNode>
+		_nestedSetsTreeManager = new MemoryNestedSetsTreeManager();
+	private SimpleNestedSetsTreeNode[] _simpleNestedSetsTreeNodes =
 		new SimpleNestedSetsTreeNode[] {
 			new SimpleNestedSetsTreeNode(0), new SimpleNestedSetsTreeNode(1),
 			new SimpleNestedSetsTreeNode(2), new SimpleNestedSetsTreeNode(3),
@@ -366,15 +388,94 @@ public class NestedSetsTreeManagerTest {
 			new SimpleNestedSetsTreeNode(6), new SimpleNestedSetsTreeNode(7),
 			new SimpleNestedSetsTreeNode(8)
 		};
-	private NestedSetsTreeManager<SimpleNestedSetsTreeNode>
-		_nestedSetsTreeManager = new ListNestedSetsTreeManager();
 
-	private static class ListNestedSetsTreeManager
+	private static class MemoryNestedSetsTreeManager
 		extends NestedSetsTreeManager<SimpleNestedSetsTreeNode> {
 
 		@Override
+		public void delete(SimpleNestedSetsTreeNode simpleNestedSetsTreeNode)
+			throws SystemException {
+		
+			super.delete(simpleNestedSetsTreeNode);
+		
+			_simpleNestedSetsTreeNodes.remove(simpleNestedSetsTreeNode);
+		}
+
+		@Override
+		public void insert(
+				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
+				SimpleNestedSetsTreeNode parentSimpleNestedSetsTreeNode)
+			throws SystemException {
+		
+			super.insert(
+				simpleNestedSetsTreeNode, parentSimpleNestedSetsTreeNode);
+		
+			_simpleNestedSetsTreeNodes.add(simpleNestedSetsTreeNode);
+		}
+
+		@Override
+		public String toString() {
+			StringBundler sb = new StringBundler(
+				_simpleNestedSetsTreeNodes.size() * 7);
+		
+			Collections.sort(_simpleNestedSetsTreeNodes);
+		
+			Deque<SimpleNestedSetsTreeNode> deque =
+				new LinkedList<SimpleNestedSetsTreeNode>();
+		
+			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
+					_simpleNestedSetsTreeNodes) {
+		
+				long nestedSetsTreeNodeLeft =
+					simpleNestedSetsTreeNode.getNestedSetsTreeNodeLeft();
+				long nestedSetsTreeNodeRight =
+					simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
+		
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(nestedSetsTreeNodeLeft);
+				sb.append(StringPool.POUND);
+				sb.append(simpleNestedSetsTreeNode.getPrimaryKey());
+		
+				if ((nestedSetsTreeNodeLeft + 1) != nestedSetsTreeNodeRight) {
+					deque.push(simpleNestedSetsTreeNode);
+		
+					continue;
+				}
+		
+				sb.append(StringPool.COMMA_AND_SPACE);
+				sb.append(nestedSetsTreeNodeRight);
+				sb.append(StringPool.CLOSE_PARENTHESIS);
+		
+				SimpleNestedSetsTreeNode previousSimpleNestedSetsTreeNode =
+					null;
+		
+				while (((previousSimpleNestedSetsTreeNode = deque.peek()) !=
+							null) &&
+					   ((nestedSetsTreeNodeRight + 1) ==
+							previousSimpleNestedSetsTreeNode.
+								getNestedSetsTreeNodeRight())) {
+		
+					sb.append(StringPool.COMMA_AND_SPACE);
+					sb.append(
+						previousSimpleNestedSetsTreeNode.
+							getNestedSetsTreeNodeRight());
+					sb.append(StringPool.CLOSE_PARENTHESIS);
+		
+					nestedSetsTreeNodeRight =
+						previousSimpleNestedSetsTreeNode.
+							getNestedSetsTreeNodeRight();
+		
+					deque.pop();
+				}
+			}
+		
+			return sb.toString();
+		}
+
+		@Override
 		protected long doCountAncestors(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight) {
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight) {
 
 			long count = 0;
 
@@ -395,7 +496,8 @@ public class NestedSetsTreeManagerTest {
 
 		@Override
 		protected long doCountDescendants(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight) {
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight) {
 
 			long count = 0;
 
@@ -415,15 +517,9 @@ public class NestedSetsTreeManagerTest {
 		}
 
 		@Override
-		public void delete(SimpleNestedSetsTreeNode t) throws SystemException {
-			super.delete(t);
-
-			_simpleNestedSetsTreeNodes.remove(t);
-		}
-
-		@Override
 		protected List<SimpleNestedSetsTreeNode> doGetAncestors(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight) {
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight) {
 
 			List<SimpleNestedSetsTreeNode> simpleNestedSetsTreeNodes =
 				new ArrayList<SimpleNestedSetsTreeNode>();
@@ -447,7 +543,8 @@ public class NestedSetsTreeManagerTest {
 
 		@Override
 		protected List<SimpleNestedSetsTreeNode> doGetDescendants(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight) {
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight) {
 
 			List<SimpleNestedSetsTreeNode> simpleNestedSetsTreeNodes =
 				new ArrayList<SimpleNestedSetsTreeNode>();
@@ -470,21 +567,9 @@ public class NestedSetsTreeManagerTest {
 		}
 
 		@Override
-		public void insert(
-				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
-				SimpleNestedSetsTreeNode parentSimpleNestedSetsTreeNode)
-			throws SystemException {
-
-			super.insert(
-				simpleNestedSetsTreeNode, parentSimpleNestedSetsTreeNode);
-
-			_simpleNestedSetsTreeNodes.add(simpleNestedSetsTreeNode);
-		}
-
-		@Override
 		protected void doUpdate(
-			long scopeId, boolean leftOrRight, long delta, long limit,
-			boolean inclusive) {
+			long nestedSetsTreeNodeScopeId, boolean leftOrRight, long delta,
+			long limit, boolean inclusive) {
 
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodes) {
@@ -526,54 +611,26 @@ public class NestedSetsTreeManagerTest {
 			}
 		}
 
-		private boolean _isInRange(
-			long value, long start, boolean startIncluside, long end,
-			boolean endInclusive) {
-
-			if (startIncluside) {
-				if (value < start) {
-					return false;
-				}
-			}
-			else {
-				if (value <= start) {
-					return false;
-				}
-			}
-
-			if (endInclusive) {
-				if (value > end) {
-					return false;
-				}
-			}
-			else {
-				if (value >= end) {
-					return false;
-				}
-			}
-
-			return true;
-		}
-
 		@Override
 		protected void doUpdate(
-			long scopeId, long delta, long start, boolean startIncluside,
-			long end, boolean endInclusive,
-			List<SimpleNestedSetsTreeNode> inList) {
+			long nestedSetsTreeNodeScopeId, long delta, long start,
+			boolean startInclusive, long end, boolean endInclusive,
+			List<SimpleNestedSetsTreeNode> includeList) {
 
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodes) {
 
-				if ((inList != null) &&
-					!inList.contains(simpleNestedSetsTreeNode)) {
+				if ((includeList != null) &&
+					!includeList.contains(simpleNestedSetsTreeNode)) {
 
 					continue;
 				}
 
-				long nestedSetsTreeNodeLeft = simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
+				long nestedSetsTreeNodeLeft =
+					simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
 
-				if (_isInRange(
-						nestedSetsTreeNodeLeft, start, startIncluside, end,
+				if (isInRange(
+						nestedSetsTreeNodeLeft, start, startInclusive, end,
 						endInclusive)) {
 
 					simpleNestedSetsTreeNode.setNestedSetsTreeNodeLeft(
@@ -583,9 +640,9 @@ public class NestedSetsTreeManagerTest {
 				long nestedSetsTreeNodeRight =
 					simpleNestedSetsTreeNode._nestedSetsTreeNodeRight;
 
-				if (_isInRange(
-						nestedSetsTreeNodeRight, start, startIncluside, end,
-							endInclusive)) {
+				if (isInRange(
+						nestedSetsTreeNodeRight, start, startInclusive, end,
+						endInclusive)) {
 
 					simpleNestedSetsTreeNode.setNestedSetsTreeNodeRight(
 						nestedSetsTreeNodeRight + delta);
@@ -594,7 +651,9 @@ public class NestedSetsTreeManagerTest {
 		}
 
 		@Override
-		protected long getMaxNestedSetsTreeNodeRight(long scopeId) {
+		protected long getMaxNestedSetsTreeNodeRight(
+			long nestedSetsTreeNodeScopeId) {
+
 			long maxNestedSetsTreeNodeRight = 0;
 
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
@@ -611,65 +670,43 @@ public class NestedSetsTreeManagerTest {
 			return maxNestedSetsTreeNodeRight + 1;
 		}
 
-		@Override
-		public String toString() {
-			StringBundler sb = new StringBundler(
-				_simpleNestedSetsTreeNodes.size() * 7);
-
-			Collections.sort(_simpleNestedSetsTreeNodes);
-
-			Deque<SimpleNestedSetsTreeNode> deque =
-				new LinkedList<SimpleNestedSetsTreeNode>();
-
-			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
-					_simpleNestedSetsTreeNodes) {
-
-				long nestedSetsTreeNodeLeft =
-					simpleNestedSetsTreeNode.getNestedSetsTreeNodeLeft();
-				long nestedSetsTreeNodeRight =
-					simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
-
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(nestedSetsTreeNodeLeft);
-				sb.append(StringPool.POUND);
-				sb.append(simpleNestedSetsTreeNode.getPrimaryKey());
-
-				if ((nestedSetsTreeNodeLeft + 1) != nestedSetsTreeNodeRight) {
-					deque.push(simpleNestedSetsTreeNode);
-
-					continue;
-				}
-
-				sb.append(StringPool.COMMA_AND_SPACE);
-				sb.append(nestedSetsTreeNodeRight);
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-
-				SimpleNestedSetsTreeNode previousNode = null;
-
-				while (((previousNode = deque.peek()) != null) &&
-					   ((nestedSetsTreeNodeRight + 1) ==
-							previousNode.getNestedSetsTreeNodeRight())) {
-
-					sb.append(StringPool.COMMA_AND_SPACE);
-					sb.append(previousNode.getNestedSetsTreeNodeRight());
-					sb.append(StringPool.CLOSE_PARENTHESIS);
-
-					nestedSetsTreeNodeRight = previousNode.getNestedSetsTreeNodeRight();
-
-					deque.pop();
+		protected boolean isInRange(
+			long value, long start, boolean startInclusive, long end,
+			boolean endInclusive) {
+		
+			if (startInclusive) {
+				if (value < start) {
+					return false;
 				}
 			}
-
-			return sb.toString();
+			else {
+				if (value <= start) {
+					return false;
+				}
+			}
+		
+			if (endInclusive) {
+				if (value > end) {
+					return false;
+				}
+			}
+			else {
+				if (value >= end) {
+					return false;
+				}
+			}
+		
+			return true;
 		}
 
 		private List<SimpleNestedSetsTreeNode> _simpleNestedSetsTreeNodes =
 			new ArrayList<NestedSetsTreeManagerTest.SimpleNestedSetsTreeNode>();
+
 	}
 
 	private static class SimpleNestedSetsTreeNode
 		implements Comparable<SimpleNestedSetsTreeNode>,
-			NestedSetsTreeNodeModel {
+				   NestedSetsTreeNodeModel {
 
 		public SimpleNestedSetsTreeNode(long primaryKey) {
 			_primaryKey = primaryKey;
@@ -679,7 +716,8 @@ public class NestedSetsTreeManagerTest {
 		public int compareTo(
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode) {
 
-			long nestedSetsTreeNodeLeft = simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
+			long nestedSetsTreeNodeLeft =
+				simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
 
 			if (_nestedSetsTreeNodeLeft > nestedSetsTreeNodeLeft) {
 				return 1;
@@ -697,7 +735,11 @@ public class NestedSetsTreeManagerTest {
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode =
 				(SimpleNestedSetsTreeNode)obj;
 
-			return _primaryKey == simpleNestedSetsTreeNode._primaryKey;
+			if (_primaryKey == simpleNestedSetsTreeNode._primaryKey) {
+				return true;
+			}
+			
+			return false;
 		}
 
 		@Override
@@ -745,9 +787,9 @@ public class NestedSetsTreeManagerTest {
 			return sb.toString();
 		}
 
-		private final long _primaryKey;
 		private long _nestedSetsTreeNodeLeft;
 		private long _nestedSetsTreeNodeRight;
+		private long _primaryKey;
 
 	}
 
