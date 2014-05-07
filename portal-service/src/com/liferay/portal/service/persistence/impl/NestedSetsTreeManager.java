@@ -27,56 +27,56 @@ public abstract class NestedSetsTreeManager<T extends NestedSetsTreeNodeModel> {
 
 	public long countAncestors(T t) throws SystemException {
 		return doCountAncestors(
-			t.getNestedSetsScopeId(), t.getNestedSetsLeft(),
-			t.getNestedSetsRight());
+			t.getNestedSetsTreeNodeScopeId(), t.getNestedSetsTreeNodeLeft(),
+			t.getNestedSetsTreeNodeRight());
 	}
 
 	public long countDescendants(T t) throws SystemException {
 		return doCountDescendants(
-			t.getNestedSetsScopeId(), t.getNestedSetsLeft(),
-			t.getNestedSetsRight());
+			t.getNestedSetsTreeNodeScopeId(), t.getNestedSetsTreeNodeLeft(),
+			t.getNestedSetsTreeNodeRight());
 	}
 
 	public void delete(T t) throws SystemException {
-		long nestedSetsLeft = t.getNestedSetsLeft();
-		long nestedSetsRight = t.getNestedSetsRight();
+		long nestedSetsTreeNodeLeft = t.getNestedSetsTreeNodeLeft();
+		long nestedSetsTreeNodeRight = t.getNestedSetsTreeNodeRight();
 
 		doUpdate(
-			t.getNestedSetsScopeId(), -1, nestedSetsLeft, false,
-			nestedSetsRight, false, null);
-		doUpdate(t.getNestedSetsScopeId(), true, -2, nestedSetsRight, false);
-		doUpdate(t.getNestedSetsScopeId(), false, -2, nestedSetsRight, false);
+			t.getNestedSetsTreeNodeScopeId(), -1, nestedSetsTreeNodeLeft, false,
+			nestedSetsTreeNodeRight, false, null);
+		doUpdate(t.getNestedSetsTreeNodeScopeId(), true, -2, nestedSetsTreeNodeRight, false);
+		doUpdate(t.getNestedSetsTreeNodeScopeId(), false, -2, nestedSetsTreeNodeRight, false);
 	}
 
 	public List<T> getAncestors(T t) throws SystemException {
 		return doGetAncestors(
-			t.getNestedSetsScopeId(), t.getNestedSetsLeft(),
-			t.getNestedSetsRight());
+			t.getNestedSetsTreeNodeScopeId(), t.getNestedSetsTreeNodeLeft(),
+			t.getNestedSetsTreeNodeRight());
 	}
 
 	public List<T> getDescendants(T t) throws SystemException {
 		return doGetDescendants(
-			t.getNestedSetsScopeId(), t.getNestedSetsLeft(),
-			t.getNestedSetsRight());
+			t.getNestedSetsTreeNodeScopeId(), t.getNestedSetsTreeNodeLeft(),
+			t.getNestedSetsTreeNodeRight());
 	}
 
 	public void insert(T t, T parent) throws SystemException {
 		if (parent == null) {
-			long maxNestedSetsRight = getMaxNestedSetsRight(
-				t.getNestedSetsScopeId());
+			long maxNestedSetsTreeNodeRight = getMaxNestedSetsTreeNodeRight(
+				t.getNestedSetsTreeNodeScopeId());
 
-			t.setNestedSetsLeft(maxNestedSetsRight);
-			t.setNestedSetsRight(maxNestedSetsRight + 1);
+			t.setNestedSetsTreeNodeLeft(maxNestedSetsTreeNodeRight);
+			t.setNestedSetsTreeNodeRight(maxNestedSetsTreeNodeRight + 1);
 		}
 		else {
-			long nestedSetsRight = parent.getNestedSetsRight();
+			long nestedSetsTreeNodeRight = parent.getNestedSetsTreeNodeRight();
 
-			doUpdate(t.getNestedSetsScopeId(), true, 2, nestedSetsRight, true);
+			doUpdate(t.getNestedSetsTreeNodeScopeId(), true, 2, nestedSetsTreeNodeRight, true);
 
-			doUpdate(t.getNestedSetsScopeId(), false, 2, nestedSetsRight, true);
+			doUpdate(t.getNestedSetsTreeNodeScopeId(), false, 2, nestedSetsTreeNodeRight, true);
 
-			t.setNestedSetsLeft(nestedSetsRight);
-			t.setNestedSetsRight(nestedSetsRight + 1);
+			t.setNestedSetsTreeNodeLeft(nestedSetsTreeNodeRight);
+			t.setNestedSetsTreeNodeRight(nestedSetsTreeNodeRight + 1);
 		}
 	}
 
@@ -85,66 +85,66 @@ public abstract class NestedSetsTreeManager<T extends NestedSetsTreeNodeModel> {
 			return;
 		}
 
-		long nestedSetsLeft = t.getNestedSetsLeft();
-		long nestedSetsRight = t.getNestedSetsRight();
+		long nestedSetsTreeNodeLeft = t.getNestedSetsTreeNodeLeft();
+		long nestedSetsTreeNodeRight = t.getNestedSetsTreeNodeRight();
 
 		List<T> childrenList = doGetDescendants(
-			t.getNestedSetsScopeId(), nestedSetsLeft, nestedSetsRight);
+			t.getNestedSetsTreeNodeScopeId(), nestedSetsTreeNodeLeft, nestedSetsTreeNodeRight);
 
-		long newParentNestedSetsRight = 0;
+		long newParentNestedSetsTreeNodeRight = 0;
 
 		if (newParent == null) {
-			newParentNestedSetsRight = getMaxNestedSetsRight(
-				t.getNestedSetsScopeId());
+			newParentNestedSetsTreeNodeRight = getMaxNestedSetsTreeNodeRight(
+				t.getNestedSetsTreeNodeScopeId());
 		}
 		else {
-			newParentNestedSetsRight = newParent.getNestedSetsRight();
+			newParentNestedSetsTreeNodeRight = newParent.getNestedSetsTreeNodeRight();
 		}
 
 		long delta = 0;
 
-		if (nestedSetsRight < newParentNestedSetsRight) {
+		if (nestedSetsTreeNodeRight < newParentNestedSetsTreeNodeRight) {
 			doUpdate(
-				t.getNestedSetsScopeId(),
-				-(nestedSetsRight - nestedSetsLeft + 1), nestedSetsRight, false,
-				newParentNestedSetsRight, false, null);
+				t.getNestedSetsTreeNodeScopeId(),
+				-(nestedSetsTreeNodeRight - nestedSetsTreeNodeLeft + 1), nestedSetsTreeNodeRight, false,
+				newParentNestedSetsTreeNodeRight, false, null);
 
-			delta = newParentNestedSetsRight - nestedSetsRight - 1;
+			delta = newParentNestedSetsTreeNodeRight - nestedSetsTreeNodeRight - 1;
 
 			doUpdate(
-				t.getNestedSetsScopeId(), delta, nestedSetsLeft, true,
-				nestedSetsRight, true, childrenList);
+				t.getNestedSetsTreeNodeScopeId(), delta, nestedSetsTreeNodeLeft, true,
+				nestedSetsTreeNodeRight, true, childrenList);
 		}
 		else {
 			doUpdate(
-				t.getNestedSetsScopeId(), nestedSetsRight - nestedSetsLeft + 1,
-				newParentNestedSetsRight, true, nestedSetsLeft, false, null);
+				t.getNestedSetsTreeNodeScopeId(), nestedSetsTreeNodeRight - nestedSetsTreeNodeLeft + 1,
+				newParentNestedSetsTreeNodeRight, true, nestedSetsTreeNodeLeft, false, null);
 
-			delta = newParentNestedSetsRight - nestedSetsLeft;
+			delta = newParentNestedSetsTreeNodeRight - nestedSetsTreeNodeLeft;
 
 			doUpdate(
-				t.getNestedSetsScopeId(), delta, nestedSetsLeft, true,
-				nestedSetsRight, true, childrenList);
+				t.getNestedSetsTreeNodeScopeId(), delta, nestedSetsTreeNodeLeft, true,
+				nestedSetsTreeNodeRight, true, childrenList);
 		}
 
-		t.setNestedSetsLeft(nestedSetsLeft + delta);
-		t.setNestedSetsRight(nestedSetsRight + delta);
+		t.setNestedSetsTreeNodeLeft(nestedSetsTreeNodeLeft + delta);
+		t.setNestedSetsTreeNodeRight(nestedSetsTreeNodeRight + delta);
 	}
 
 	protected abstract long doCountAncestors(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException;
 
 	protected abstract long doCountDescendants(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException;
 
 	protected abstract List<T> doGetAncestors(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException;
 
 	protected abstract List<T> doGetDescendants(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException;
 
 	protected abstract void doUpdate(
@@ -157,7 +157,7 @@ public abstract class NestedSetsTreeManager<T extends NestedSetsTreeNodeModel> {
 			long end, boolean endInclusive, List<T> inList)
 		throws SystemException;
 
-	protected abstract long getMaxNestedSetsRight(long scopeId)
+	protected abstract long getMaxNestedSetsTreeNodeRight(long scopeId)
 		throws SystemException;
 
 }

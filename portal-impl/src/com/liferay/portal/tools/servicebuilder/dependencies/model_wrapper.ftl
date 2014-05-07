@@ -168,28 +168,28 @@ public class ${entity.name}Wrapper implements ${entity.name}, ModelWrapper<${ent
 
 	<#if entity.isHierarchicalTree()>
 		@Override
-		public long getNestedSetsLeft() {
-			return _${entity.varName}.getNestedSetsLeft();
+		public long getNestedSetsTreeNodeLeft() {
+			return _${entity.varName}.getNestedSetsTreeNodeLeft();
 		}
 
 		@Override
-		public long getNestedSetsRight() {
-			return _${entity.varName}.getNestedSetsRight();
+		public long getNestedSetsTreeNodeRight() {
+			return _${entity.varName}.getNestedSetsTreeNodeRight();
 		}
 
 		@Override
-		public long getNestedSetsScopeId() {
-			return _${entity.varName}.getNestedSetsScopeId();
+		public long getNestedSetsTreeNodeScopeId() {
+			return _${entity.varName}.getNestedSetsTreeNodeScopeId();
 		}
 
 		@Override
-		public void setNestedSetsLeft(long nestedSetsLeft) {
-			_${entity.varName}.setNestedSetsLeft(nestedSetsLeft);
+		public void setNestedSetsTreeNodeLeft(long nestedSetsTreeNodeLeft) {
+			_${entity.varName}.setNestedSetsTreeNodeLeft(nestedSetsTreeNodeLeft);
 		}
 
 		@Override
-		public void setNestedSetsRight(long nestedSetsRight) {
-			_${entity.varName}.setNestedSetsRight(nestedSetsRight);
+		public void setNestedSetsTreeNodeRight(long nestedSetsTreeNodeRight) {
+			_${entity.varName}.setNestedSetsTreeNodeRight(nestedSetsTreeNodeRight);
 		}
 	</#if>
 

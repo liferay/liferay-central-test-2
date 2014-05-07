@@ -19,16 +19,16 @@ package com.liferay.portal.model;
  */
 public interface NestedSetsTreeNodeModel {
 
-	public long getNestedSetsLeft();
+	public long getNestedSetsTreeNodeLeft();
 
-	public long getNestedSetsRight();
+	public long getNestedSetsTreeNodeRight();
 
-	public long getNestedSetsScopeId();
+	public long getNestedSetsTreeNodeScopeId();
 
 	public long getPrimaryKey();
 
-	public void setNestedSetsLeft(long nsLeft);
+	public void setNestedSetsTreeNodeLeft(long nestedSetsTreeNodeLeft);
 
-	public void setNestedSetsRight(long nsRight);
+	public void setNestedSetsTreeNodeRight(long nestedSetsTreeNodeRight);
 
 }

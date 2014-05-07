@@ -735,15 +735,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 	</#if>
 
 	<#if entity.isHierarchicalTree()>
-		public long getNestedSetsLeft() {
+		public long getNestedSetsTreeNodeLeft() {
 			return _left${pkColumn.methodName};
 		}
 
-		public long getNestedSetsRight() {
+		public long getNestedSetsTreeNodeRight() {
 			return _right${pkColumn.methodName};
 		}
 
-		public long getNestedSetsScopeId() {
+		public long getNestedSetsTreeNodeScopeId() {
 			<#if entity.hasColumn("groupId")>
 				<#assign scopeColumn = entity.getColumn("groupId")>
 			<#else>
@@ -753,12 +753,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 			return _${scopeColumn.name};
 		}
 
-		public void setNestedSetsLeft(long nestedSetsLeft) {
-			_left${pkColumn.methodName} = nestedSetsLeft;
+		public void setNestedSetsTreeNodeLeft(long nestedSetsTreeNodeLeft) {
+			_left${pkColumn.methodName} = nestedSetsTreeNodeLeft;
 		}
 
-		public void setNestedSetsRight(long nestedSetsRight) {
-			_right${pkColumn.methodName} = nestedSetsRight;
+		public void setNestedSetsTreeNodeRight(long nestedSetsTreeNodeRight) {
+			_right${pkColumn.methodName} = nestedSetsTreeNodeRight;
 		}
 	</#if>
 

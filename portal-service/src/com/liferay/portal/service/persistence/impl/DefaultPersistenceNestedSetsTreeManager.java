@@ -36,8 +36,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 	public DefaultPersistenceNestedSetsTreeManager(
 		BasePersistenceImpl<?> basePersistenceImpl, String tableName,
 		String entityName, Class<?> entityImplClass, String pkName,
-		String scopeIdName, String nestedSetsLeftName,
-		String nestedSetsRightName) {
+		String scopeIdName, String nestedSetsTreeNodeLeftName,
+		String nestedSetsTreeNodeRightName) {
 
 		_basePersistenceImpl = basePersistenceImpl;
 		_tableName = tableName;
@@ -45,13 +45,13 @@ public class DefaultPersistenceNestedSetsTreeManager
 		_entityImplClass = entityImplClass;
 		_pkName = pkName;
 		_scopeIdName = scopeIdName;
-		_nestedSetsLeftName = nestedSetsLeftName;
-		_nestedSetsRightName = nestedSetsRightName;
+		_nestedSetsTreeNodeLeftName = nestedSetsTreeNodeLeftName;
+		_nestedSetsTreeNodeRightName = nestedSetsTreeNodeRightName;
 	}
 
 	@Override
 	protected long doCountAncestors(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(9);
@@ -61,9 +61,9 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" WHERE ");
 		sb.append(_scopeIdName);
 		sb.append(" = ? AND ");
-		sb.append(_nestedSetsLeftName);
+		sb.append(_nestedSetsTreeNodeLeftName);
 		sb.append(" <= ? AND ");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(" >= ?");
 
 		Session session = null;
@@ -76,8 +76,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(scopeId);
-			qPos.add(nestedSetsLeft);
-			qPos.add(nestedSetsRight);
+			qPos.add(nestedSetsTreeNodeLeft);
+			qPos.add(nestedSetsTreeNodeRight);
 
 			Number number = (Number)sqlQuery.uniqueResult();
 
@@ -93,7 +93,7 @@ public class DefaultPersistenceNestedSetsTreeManager
 
 	@Override
 	protected long doCountDescendants(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(9);
@@ -103,9 +103,9 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" WHERE ");
 		sb.append(_scopeIdName);
 		sb.append(" = ? AND ");
-		sb.append(_nestedSetsLeftName);
+		sb.append(_nestedSetsTreeNodeLeftName);
 		sb.append(" >= ? AND ");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(" <= ?");
 
 		Session session = null;
@@ -118,8 +118,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(scopeId);
-			qPos.add(nestedSetsLeft);
-			qPos.add(nestedSetsRight);
+			qPos.add(nestedSetsTreeNodeLeft);
+			qPos.add(nestedSetsTreeNodeRight);
 
 			Number number = (Number)sqlQuery.uniqueResult();
 
@@ -135,7 +135,7 @@ public class DefaultPersistenceNestedSetsTreeManager
 
 	@Override
 	protected List<T> doGetAncestors(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(11);
@@ -147,9 +147,9 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" WHERE ");
 		sb.append(_scopeIdName);
 		sb.append(" = ? AND ");
-		sb.append(_nestedSetsLeftName);
+		sb.append(_nestedSetsTreeNodeLeftName);
 		sb.append(" <= ? AND ");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(" >= ?");
 
 		Session session = null;
@@ -164,8 +164,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(scopeId);
-			qPos.add(nestedSetsLeft);
-			qPos.add(nestedSetsRight);
+			qPos.add(nestedSetsTreeNodeLeft);
+			qPos.add(nestedSetsTreeNodeRight);
 
 			return (List<T>)QueryUtil.list(
 				sqlQuery, _basePersistenceImpl.getDialect(), QueryUtil.ALL_POS,
@@ -181,7 +181,7 @@ public class DefaultPersistenceNestedSetsTreeManager
 
 	@Override
 	protected List<T> doGetDescendants(
-			long scopeId, long nestedSetsLeft, long nestedSetsRight)
+			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(11);
@@ -193,9 +193,9 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" WHERE ");
 		sb.append(_scopeIdName);
 		sb.append(" = ? AND ");
-		sb.append(_nestedSetsLeftName);
+		sb.append(_nestedSetsTreeNodeLeftName);
 		sb.append(" >= ? AND ");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(" <= ?");
 
 		Session session = null;
@@ -210,8 +210,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(scopeId);
-			qPos.add(nestedSetsLeft);
-			qPos.add(nestedSetsRight);
+			qPos.add(nestedSetsTreeNodeLeft);
+			qPos.add(nestedSetsTreeNodeRight);
 
 			return (List<T>)QueryUtil.list(
 				sqlQuery, _basePersistenceImpl.getDialect(), QueryUtil.ALL_POS,
@@ -245,15 +245,15 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" SET ");
 
 		if (leftOrRight) {
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 			sb.append(" = (");
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 			sb.append(" + ?)");
 		}
 		else {
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" = (");
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" + ?)");
 		}
 
@@ -262,10 +262,10 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" = ? AND ");
 
 		if (leftOrRight) {
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 		}
 		else {
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 		}
 
 		if (startIncluside) {
@@ -276,10 +276,10 @@ public class DefaultPersistenceNestedSetsTreeManager
 		}
 
 		if (leftOrRight) {
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 		}
 		else {
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 		}
 
 		if (endInclusive) {
@@ -341,15 +341,15 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" SET ");
 
 		if (leftOrRight) {
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 			sb.append(" = (");
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 			sb.append(" + ?)");
 		}
 		else {
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" = (");
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" + ?)");
 		}
 
@@ -358,10 +358,10 @@ public class DefaultPersistenceNestedSetsTreeManager
 		sb.append(" = ? AND ");
 
 		if (leftOrRight) {
-			sb.append(_nestedSetsLeftName);
+			sb.append(_nestedSetsTreeNodeLeftName);
 		}
 		else {
-			sb.append(_nestedSetsRightName);
+			sb.append(_nestedSetsTreeNodeRightName);
 		}
 
 		if (inclusive) {
@@ -409,17 +409,17 @@ public class DefaultPersistenceNestedSetsTreeManager
 	}
 
 	@Override
-	protected long getMaxNestedSetsRight(long scopeId) throws SystemException {
+	protected long getMaxNestedSetsTreeNodeRight(long scopeId) throws SystemException {
 		StringBundler sb = new StringBundler(9);
 
 		sb.append("SELECT max(");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(") AS MAX_NSRIGHT FROM ");
 		sb.append(_tableName);
 		sb.append(" WHERE ");
 		sb.append(_scopeIdName);
 		sb.append(" = ? AND ");
-		sb.append(_nestedSetsRightName);
+		sb.append(_nestedSetsTreeNodeRightName);
 		sb.append(" > 0");
 
 		Session session = null;
@@ -458,8 +458,8 @@ public class DefaultPersistenceNestedSetsTreeManager
 	private final BasePersistenceImpl<?> _basePersistenceImpl;
 	private final Class<?> _entityImplClass;
 	private final String _entityName;
-	private final String _nestedSetsLeftName;
-	private final String _nestedSetsRightName;
+	private final String _nestedSetsTreeNodeLeftName;
+	private final String _nestedSetsTreeNodeRightName;
 	private final String _pkName;
 	private final String _scopeIdName;
 	private final String _tableName;

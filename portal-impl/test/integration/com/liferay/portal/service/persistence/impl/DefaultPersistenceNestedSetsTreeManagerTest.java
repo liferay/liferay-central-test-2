@@ -333,7 +333,7 @@ public class DefaultPersistenceNestedSetsTreeManagerTest {
 			}
 
 			try {
-				_nestedSetsTreeManager.getMaxNestedSetsRight(0);
+				_nestedSetsTreeManager.getMaxNestedSetsTreeNodeRight(0);
 
 				Assert.fail();
 			}
