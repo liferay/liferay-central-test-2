@@ -29,11 +29,10 @@ import java.util.List;
 /**
  * @author Shuyang Zhou
  */
-public class DefaultPersistenceNestedSetsTreeManager
-		<T extends NestedSetsTreeNodeModel>
+public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 	extends NestedSetsTreeManager<T> {
 
-	public DefaultPersistenceNestedSetsTreeManager(
+	public PersistenceNestedSetsTreeManager(
 		BasePersistenceImpl<?> basePersistenceImpl, String tableName,
 		String entityName, Class<?> entityImplClass, String pkName,
 		String scopeIdName, String nestedSetsTreeNodeLeftName,

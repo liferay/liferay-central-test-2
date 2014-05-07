@@ -62,7 +62,7 @@ import org.junit.runner.RunWith;
  */
 @ExecutionTestListeners(listeners = {MainServletExecutionTestListener.class})
 @RunWith(LiferayIntegrationJUnitTestRunner.class)
-public class DefaultPersistenceNestedSetsTreeManagerTest {
+public class PersistenceNestedSetsTreeManagerTest {
 
 	@ClassRule
 	public static CodeCoverageAssertor codeCoverageAssertor =
@@ -90,7 +90,7 @@ public class DefaultPersistenceNestedSetsTreeManagerTest {
 		_assetCategoryPersistence.setRebuildTreeEnabled(false);
 
 		_nestedSetsTreeManager =
-			new DefaultPersistenceNestedSetsTreeManager<AssetCategory>(
+			new PersistenceNestedSetsTreeManager<AssetCategory>(
 				basePersistenceImpl, "AssetCategory", "AssetCategory",
 				AssetCategoryImpl.class, "categoryId", "groupId",
 				"leftCategoryId", "rightCategoryId");
