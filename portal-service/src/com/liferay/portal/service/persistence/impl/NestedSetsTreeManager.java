@@ -77,8 +77,7 @@ public abstract class NestedSetsTreeManager<T extends NestedSetsTreeNodeModel> {
 				t.getNestedSetsTreeNodeScopeId(), false, 2,
 				parentT.getNestedSetsTreeNodeRight(), true);
 
-			t.setNestedSetsTreeNodeLeft(
-				parentT.getNestedSetsTreeNodeRight());
+			t.setNestedSetsTreeNodeLeft(parentT.getNestedSetsTreeNodeRight());
 			t.setNestedSetsTreeNodeRight(
 				parentT.getNestedSetsTreeNodeRight() + 1);
 		}

@@ -58,9 +58,9 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 		try {
 			session = _basePersistenceImpl.openSession();
-	
+
 			StringBundler sb = new StringBundler(9);
-	
+
 			sb.append("SELECT count(*) FROM ");
 			sb.append(_tableName);
 			sb.append(" WHERE ");
@@ -71,7 +71,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" >= ?");
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -101,9 +102,9 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 		try {
 			session =_basePersistenceImpl.openSession();
-	
+
 			StringBundler sb = new StringBundler(9);
-	
+
 			sb.append("SELECT count(*) FROM ");
 			sb.append(_tableName);
 			sb.append(" WHERE ");
@@ -114,7 +115,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" <= ?");
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -144,9 +146,9 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 		try {
 			session = _basePersistenceImpl.openSession();
-	
+
 			StringBundler sb = new StringBundler(11);
-	
+
 			sb.append("SELECT {");
 			sb.append(_entityName);
 			sb.append(".*} FROM ");
@@ -159,7 +161,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" >= ?");
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			sqlQuery.addEntity(_entityName, _entityImplClass);
 
@@ -191,9 +194,9 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 		try {
 			session = _basePersistenceImpl.openSession();
-	
+
 			StringBundler sb = new StringBundler(11);
-	
+
 			sb.append("SELECT {");
 			sb.append(_entityName);
 			sb.append(".*} FROM ");
@@ -206,7 +209,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" <= ?");
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			sqlQuery.addEntity(_entityName, _entityImplClass);
 
@@ -312,7 +316,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		try {
 			session = _basePersistenceImpl.openSession();
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -333,8 +338,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected void doUpdate(
-			long nestedSetsTreeNodeScopeId, boolean leftOrRight, long delta, long limit,
-			boolean inclusive)
+			long nestedSetsTreeNodeScopeId, boolean leftOrRight, long delta,
+			long limit, boolean inclusive)
 		throws SystemException {
 
 		StringBundler sb = new StringBundler(12);
@@ -379,7 +384,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		try {
 			session = _basePersistenceImpl.openSession();
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
@@ -422,7 +428,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			session = _basePersistenceImpl.openSession();
 
 			StringBundler sb = new StringBundler(9);
-	
+
 			sb.append("SELECT MAX(");
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(") AS maxNestedSetsTreeNodeRight FROM ");
@@ -433,7 +439,8 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 			sb.append(" > 0");
 
-			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
+			SQLQuery sqlQuery = session.createSynchronizedSQLQuery(
+				sb.toString());
 
 			sqlQuery.addScalar("maxNestedSetsTreeNodeRight", Type.LONG);
 
@@ -461,13 +468,13 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		}
 	}
 
-	private final BasePersistenceImpl<?> _basePersistenceImpl;
-	private final Class<?> _entityImplClass;
-	private final String _entityName;
-	private final String _nestedSetsTreeNodeLeftName;
-	private final String _nestedSetsTreeNodeRightName;
-	private final String _primaryKeyName;
-	private final String _nestedSetsTreeNodeScopeIdName;
-	private final String _tableName;
+	private BasePersistenceImpl<?> _basePersistenceImpl;
+	private Class<?> _entityImplClass;
+	private String _entityName;
+	private String _nestedSetsTreeNodeLeftName;
+	private String _nestedSetsTreeNodeRightName;
+	private String _nestedSetsTreeNodeScopeIdName;
+	private String _primaryKeyName;
+	private String _tableName;
 
 }

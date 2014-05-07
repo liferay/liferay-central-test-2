@@ -395,9 +395,9 @@ public class NestedSetsTreeManagerTest {
 		@Override
 		public void delete(SimpleNestedSetsTreeNode simpleNestedSetsTreeNode)
 			throws SystemException {
-		
+
 			super.delete(simpleNestedSetsTreeNode);
-		
+
 			_simpleNestedSetsTreeNodes.remove(simpleNestedSetsTreeNode);
 		}
 
@@ -406,10 +406,10 @@ public class NestedSetsTreeManagerTest {
 				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
 				SimpleNestedSetsTreeNode parentSimpleNestedSetsTreeNode)
 			throws SystemException {
-		
+
 			super.insert(
 				simpleNestedSetsTreeNode, parentSimpleNestedSetsTreeNode);
-		
+
 			_simpleNestedSetsTreeNodes.add(simpleNestedSetsTreeNode);
 		}
 
@@ -417,58 +417,58 @@ public class NestedSetsTreeManagerTest {
 		public String toString() {
 			StringBundler sb = new StringBundler(
 				_simpleNestedSetsTreeNodes.size() * 7);
-		
+
 			Collections.sort(_simpleNestedSetsTreeNodes);
-		
+
 			Deque<SimpleNestedSetsTreeNode> deque =
 				new LinkedList<SimpleNestedSetsTreeNode>();
-		
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodes) {
-		
+
 				long nestedSetsTreeNodeLeft =
 					simpleNestedSetsTreeNode.getNestedSetsTreeNodeLeft();
 				long nestedSetsTreeNodeRight =
 					simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
-		
+
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(nestedSetsTreeNodeLeft);
 				sb.append(StringPool.POUND);
 				sb.append(simpleNestedSetsTreeNode.getPrimaryKey());
-		
+
 				if ((nestedSetsTreeNodeLeft + 1) != nestedSetsTreeNodeRight) {
 					deque.push(simpleNestedSetsTreeNode);
-		
+
 					continue;
 				}
-		
+
 				sb.append(StringPool.COMMA_AND_SPACE);
 				sb.append(nestedSetsTreeNodeRight);
 				sb.append(StringPool.CLOSE_PARENTHESIS);
-		
+
 				SimpleNestedSetsTreeNode previousSimpleNestedSetsTreeNode =
 					null;
-		
+
 				while (((previousSimpleNestedSetsTreeNode = deque.peek()) !=
 							null) &&
 					   ((nestedSetsTreeNodeRight + 1) ==
 							previousSimpleNestedSetsTreeNode.
 								getNestedSetsTreeNodeRight())) {
-		
+
 					sb.append(StringPool.COMMA_AND_SPACE);
 					sb.append(
 						previousSimpleNestedSetsTreeNode.
 							getNestedSetsTreeNodeRight());
 					sb.append(StringPool.CLOSE_PARENTHESIS);
-		
+
 					nestedSetsTreeNodeRight =
 						previousSimpleNestedSetsTreeNode.
 							getNestedSetsTreeNodeRight();
-		
+
 					deque.pop();
 				}
 			}
-		
+
 			return sb.toString();
 		}
 
@@ -673,7 +673,7 @@ public class NestedSetsTreeManagerTest {
 		protected boolean isInRange(
 			long value, long start, boolean startInclusive, long end,
 			boolean endInclusive) {
-		
+
 			if (startInclusive) {
 				if (value < start) {
 					return false;
@@ -684,7 +684,7 @@ public class NestedSetsTreeManagerTest {
 					return false;
 				}
 			}
-		
+
 			if (endInclusive) {
 				if (value > end) {
 					return false;
@@ -695,7 +695,7 @@ public class NestedSetsTreeManagerTest {
 					return false;
 				}
 			}
-		
+
 			return true;
 		}
 
@@ -738,7 +738,7 @@ public class NestedSetsTreeManagerTest {
 			if (_primaryKey == simpleNestedSetsTreeNode._primaryKey) {
 				return true;
 			}
-			
+
 			return false;
 		}
 
