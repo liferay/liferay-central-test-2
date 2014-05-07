@@ -23,6 +23,7 @@ package com.liferay.portlet.trash;
 @Deprecated
 public class DuplicateEntryException extends RestoreEntryException {
 
+	@Override
 	public int getType() {
 		return _type;
 	}
