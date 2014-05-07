@@ -35,7 +35,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 	public PersistenceNestedSetsTreeManager(
 		BasePersistenceImpl<?> basePersistenceImpl, String tableName,
 		String entityName, Class<?> entityImplClass, String pkName,
-		String scopeIdName, String nestedSetsTreeNodeLeftName,
+		String nestedSetsTreeNodeScopeIdName, String nestedSetsTreeNodeLeftName,
 		String nestedSetsTreeNodeRightName) {
 
 		_basePersistenceImpl = basePersistenceImpl;
@@ -43,38 +43,39 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		_entityName = entityName;
 		_entityImplClass = entityImplClass;
 		_pkName = pkName;
-		_scopeIdName = scopeIdName;
+		_nestedSetsTreeNodeScopeIdName = nestedSetsTreeNodeScopeIdName;
 		_nestedSetsTreeNodeLeftName = nestedSetsTreeNodeLeftName;
 		_nestedSetsTreeNodeRightName = nestedSetsTreeNodeRightName;
 	}
 
 	@Override
 	protected long doCountAncestors(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+				long nestedSetsTreeNodeRight)
 		throws SystemException {
-
-		StringBundler sb = new StringBundler(9);
-
-		sb.append("SELECT count(*) FROM ");
-		sb.append(_tableName);
-		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
-		sb.append(" = ? AND ");
-		sb.append(_nestedSetsTreeNodeLeftName);
-		sb.append(" <= ? AND ");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(" >= ?");
 
 		Session session = null;
 
 		try {
 			session = _basePersistenceImpl.openSession();
+	
+			StringBundler sb = new StringBundler(9);
+	
+			sb.append("SELECT count(*) FROM ");
+			sb.append(_tableName);
+			sb.append(" WHERE ");
+			sb.append(_nestedSetsTreeNodeScopeIdName);
+			sb.append(" = ? AND ");
+			sb.append(_nestedSetsTreeNodeLeftName);
+			sb.append(" <= ? AND ");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(" >= ?");
 
 			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(nestedSetsTreeNodeLeft);
 			qPos.add(nestedSetsTreeNodeRight);
 
@@ -92,31 +93,32 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected long doCountDescendants(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight)
 		throws SystemException {
-
-		StringBundler sb = new StringBundler(9);
-
-		sb.append("SELECT count(*) FROM ");
-		sb.append(_tableName);
-		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
-		sb.append(" = ? AND ");
-		sb.append(_nestedSetsTreeNodeLeftName);
-		sb.append(" >= ? AND ");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(" <= ?");
 
 		Session session = null;
 
 		try {
 			session =_basePersistenceImpl.openSession();
+	
+			StringBundler sb = new StringBundler(9);
+	
+			sb.append("SELECT count(*) FROM ");
+			sb.append(_tableName);
+			sb.append(" WHERE ");
+			sb.append(_nestedSetsTreeNodeScopeIdName);
+			sb.append(" = ? AND ");
+			sb.append(_nestedSetsTreeNodeLeftName);
+			sb.append(" >= ? AND ");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(" <= ?");
 
 			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(nestedSetsTreeNodeLeft);
 			qPos.add(nestedSetsTreeNodeRight);
 
@@ -134,27 +136,28 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected List<T> doGetAncestors(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight)
 		throws SystemException {
-
-		StringBundler sb = new StringBundler(11);
-
-		sb.append("SELECT {");
-		sb.append(_entityName);
-		sb.append(".*} FROM ");
-		sb.append(_tableName);
-		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
-		sb.append(" = ? AND ");
-		sb.append(_nestedSetsTreeNodeLeftName);
-		sb.append(" <= ? AND ");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(" >= ?");
 
 		Session session = null;
 
 		try {
 			session = _basePersistenceImpl.openSession();
+	
+			StringBundler sb = new StringBundler(11);
+	
+			sb.append("SELECT {");
+			sb.append(_entityName);
+			sb.append(".*} FROM ");
+			sb.append(_tableName);
+			sb.append(" WHERE ");
+			sb.append(_nestedSetsTreeNodeScopeIdName);
+			sb.append(" = ? AND ");
+			sb.append(_nestedSetsTreeNodeLeftName);
+			sb.append(" <= ? AND ");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(" >= ?");
 
 			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
 
@@ -162,7 +165,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(nestedSetsTreeNodeLeft);
 			qPos.add(nestedSetsTreeNodeRight);
 
@@ -180,27 +183,28 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected List<T> doGetDescendants(
-			long scopeId, long nestedSetsTreeNodeLeft, long nestedSetsTreeNodeRight)
+			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
+			long nestedSetsTreeNodeRight)
 		throws SystemException {
-
-		StringBundler sb = new StringBundler(11);
-
-		sb.append("SELECT {");
-		sb.append(_entityName);
-		sb.append(".*} FROM ");
-		sb.append(_tableName);
-		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
-		sb.append(" = ? AND ");
-		sb.append(_nestedSetsTreeNodeLeftName);
-		sb.append(" >= ? AND ");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(" <= ?");
 
 		Session session = null;
 
 		try {
 			session = _basePersistenceImpl.openSession();
+	
+			StringBundler sb = new StringBundler(11);
+	
+			sb.append("SELECT {");
+			sb.append(_entityName);
+			sb.append(".*} FROM ");
+			sb.append(_tableName);
+			sb.append(" WHERE ");
+			sb.append(_nestedSetsTreeNodeScopeIdName);
+			sb.append(" = ? AND ");
+			sb.append(_nestedSetsTreeNodeLeftName);
+			sb.append(" >= ? AND ");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(" <= ?");
 
 			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
 
@@ -208,7 +212,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(nestedSetsTreeNodeLeft);
 			qPos.add(nestedSetsTreeNodeRight);
 
@@ -225,18 +229,18 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 	}
 
 	protected void doUpdate(
-			boolean leftOrRight, long scopeId, long delta, long start,
-			boolean startIncluside, long end, boolean endInclusive,
-			List<T> inList)
+			boolean leftOrRight, long nestedSetsTreeNodeScopeId, long delta,
+			long start, boolean startInclusive, long end, boolean endInclusive,
+			List<T> includeList)
 		throws SystemException {
 
 		StringBundler sb = null;
 
-		if (inList == null) {
+		if (includeList == null) {
 			sb = new StringBundler(14);
 		}
 		else {
-			sb = new StringBundler(17 + inList.size() * 2);
+			sb = new StringBundler(17 + includeList.size() * 2);
 		}
 
 		sb.append("UPDATE ");
@@ -257,7 +261,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		}
 
 		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
+		sb.append(_nestedSetsTreeNodeScopeIdName);
 		sb.append(" = ? AND ");
 
 		if (leftOrRight) {
@@ -267,7 +271,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(_nestedSetsTreeNodeRightName);
 		}
 
-		if (startIncluside) {
+		if (startInclusive) {
 			sb.append(" >= ? AND ");
 		}
 		else {
@@ -288,12 +292,12 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			sb.append(" < ? ");
 		}
 
-		if (inList != null) {
+		if (includeList != null) {
 			sb.append(" AND ");
 			sb.append(_pkName);
 			sb.append(" IN(");
 
-			for (T t : inList) {
+			for (T t : includeList) {
 				sb.append(t.getPrimaryKey());
 				sb.append(", ");
 			}
@@ -313,7 +317,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(delta);
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(start);
 			qPos.add(end);
 
@@ -329,7 +333,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected void doUpdate(
-			long scopeId, boolean leftOrRight, long delta, long limit,
+			long nestedSetsTreeNodeScopeId, boolean leftOrRight, long delta, long limit,
 			boolean inclusive)
 		throws SystemException {
 
@@ -353,7 +357,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 		}
 
 		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
+		sb.append(_nestedSetsTreeNodeScopeIdName);
 		sb.append(" = ? AND ");
 
 		if (leftOrRight) {
@@ -380,7 +384,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
 			qPos.add(delta);
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 			qPos.add(limit);
 
 			sqlQuery.executeUpdate();
@@ -395,44 +399,47 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 
 	@Override
 	protected void doUpdate(
-			long scopeId, long delta, long start, boolean startIncluside,
-			long end, boolean endInclusive, List<T> inList)
+			long nestedSetsTreeNodeScopeId, long delta, long start,
+			boolean startInclusive, long end, boolean endInclusive,
+			List<T> includeList)
 		throws SystemException {
 
 		doUpdate(
-			false, scopeId, delta, start, startIncluside, end, endInclusive,
-			inList);
+			false, nestedSetsTreeNodeScopeId, delta, start, startInclusive, end,
+			endInclusive, includeList);
 		doUpdate(
-			true, scopeId, delta, start, startIncluside, end, endInclusive,
-			inList);
+			true, nestedSetsTreeNodeScopeId, delta, start, startInclusive, end,
+			endInclusive, includeList);
 	}
 
 	@Override
-	protected long getMaxNestedSetsTreeNodeRight(long scopeId) throws SystemException {
-		StringBundler sb = new StringBundler(9);
-
-		sb.append("SELECT max(");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(") AS MAX_NSRIGHT FROM ");
-		sb.append(_tableName);
-		sb.append(" WHERE ");
-		sb.append(_scopeIdName);
-		sb.append(" = ? AND ");
-		sb.append(_nestedSetsTreeNodeRightName);
-		sb.append(" > 0");
+	protected long getMaxNestedSetsTreeNodeRight(long nestedSetsTreeNodeScopeId)
+		throws SystemException {
 
 		Session session = null;
 
 		try {
 			session = _basePersistenceImpl.openSession();
 
+			StringBundler sb = new StringBundler(9);
+	
+			sb.append("SELECT MAX(");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(") AS maxNestedSetsTreeNodeRight FROM ");
+			sb.append(_tableName);
+			sb.append(" WHERE ");
+			sb.append(_nestedSetsTreeNodeScopeIdName);
+			sb.append(" = ? AND ");
+			sb.append(_nestedSetsTreeNodeRightName);
+			sb.append(" > 0");
+
 			SQLQuery sqlQuery = session.createSQLQuery(sb.toString());
 
-			sqlQuery.addScalar("MAX_NSRIGHT", Type.LONG);
+			sqlQuery.addScalar("maxNestedSetsTreeNodeRight", Type.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(sqlQuery);
 
-			qPos.add(scopeId);
+			qPos.add(nestedSetsTreeNodeScopeId);
 
 			Iterator<Long> iterator = (Iterator<Long>)QueryUtil.iterate(
 				sqlQuery, _basePersistenceImpl.getDialect(), QueryUtil.ALL_POS,
@@ -460,7 +467,7 @@ public class PersistenceNestedSetsTreeManager<T extends NestedSetsTreeNodeModel>
 	private final String _nestedSetsTreeNodeLeftName;
 	private final String _nestedSetsTreeNodeRightName;
 	private final String _pkName;
-	private final String _scopeIdName;
+	private final String _nestedSetsTreeNodeScopeIdName;
 	private final String _tableName;
 
 }
