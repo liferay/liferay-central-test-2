@@ -391,198 +391,198 @@ public class NestedSetsTreeManagerTest {
 
 	private class MemoryNestedSetsTreeManager
 		extends NestedSetsTreeManager<SimpleNestedSetsTreeNode> {
-	
+
 		@Override
 		public void delete(SimpleNestedSetsTreeNode simpleNestedSetsTreeNode)
 			throws SystemException {
-	
+
 			super.delete(simpleNestedSetsTreeNode);
-	
+
 			_simpleNestedSetsTreeNodeList.remove(simpleNestedSetsTreeNode);
-	
+
 			removeSimpleNestedSetsTreeNode(simpleNestedSetsTreeNode);
 			synchronizeSimpleNestedSetsTreeNodes();
 		}
-	
+
 		@Override
 		public void insert(
 				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode,
 				SimpleNestedSetsTreeNode parentSimpleNestedSetsTreeNode)
 			throws SystemException {
-	
+
 			super.insert(
 				simpleNestedSetsTreeNode, parentSimpleNestedSetsTreeNode);
-	
+
 			_simpleNestedSetsTreeNodeList.add(simpleNestedSetsTreeNode.clone());
-	
+
 			synchronizeSimpleNestedSetsTreeNodes();
 		}
-	
+
 		@Override
 		public String toString() {
 			StringBundler sb = new StringBundler(
 				_simpleNestedSetsTreeNodeList.size() * 7);
-	
+
 			Collections.sort(_simpleNestedSetsTreeNodeList);
-	
+
 			Deque<SimpleNestedSetsTreeNode> deque =
 				new LinkedList<SimpleNestedSetsTreeNode>();
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				long nestedSetsTreeNodeLeft =
 					simpleNestedSetsTreeNode.getNestedSetsTreeNodeLeft();
 				long nestedSetsTreeNodeRight =
 					simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
-	
+
 				sb.append(StringPool.OPEN_PARENTHESIS);
 				sb.append(nestedSetsTreeNodeLeft);
 				sb.append(StringPool.POUND);
 				sb.append(simpleNestedSetsTreeNode.getPrimaryKey());
-	
+
 				if ((nestedSetsTreeNodeLeft + 1) != nestedSetsTreeNodeRight) {
 					deque.push(simpleNestedSetsTreeNode);
-	
+
 					continue;
 				}
-	
+
 				sb.append(StringPool.COMMA_AND_SPACE);
 				sb.append(nestedSetsTreeNodeRight);
 				sb.append(StringPool.CLOSE_PARENTHESIS);
-	
+
 				SimpleNestedSetsTreeNode previousSimpleNestedSetsTreeNode =
 					null;
-	
+
 				while (((previousSimpleNestedSetsTreeNode = deque.peek()) !=
 							null) &&
 					   ((nestedSetsTreeNodeRight + 1) ==
 							previousSimpleNestedSetsTreeNode.
 								getNestedSetsTreeNodeRight())) {
-	
+
 					sb.append(StringPool.COMMA_AND_SPACE);
 					sb.append(
 						previousSimpleNestedSetsTreeNode.
 							getNestedSetsTreeNodeRight());
 					sb.append(StringPool.CLOSE_PARENTHESIS);
-	
+
 					nestedSetsTreeNodeRight =
 						previousSimpleNestedSetsTreeNode.
 							getNestedSetsTreeNodeRight();
-	
+
 					deque.pop();
 				}
 			}
-	
+
 			return sb.toString();
 		}
-	
+
 		@Override
 		protected long doCountAncestors(
 			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
 			long nestedSetsTreeNodeRight) {
-	
+
 			long count = 0;
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if ((nestedSetsTreeNodeLeft >=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft) &&
 					(nestedSetsTreeNodeRight <=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeRight)) {
-	
+
 					count++;
 				}
 			}
-	
+
 			return count;
 		}
-	
+
 		@Override
 		protected long doCountDescendants(
 			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
 			long nestedSetsTreeNodeRight) {
-	
+
 			long count = 0;
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if ((nestedSetsTreeNodeLeft <=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft) &&
 					(nestedSetsTreeNodeRight >=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeRight)) {
-	
+
 					count++;
 				}
 			}
-	
+
 			return count;
 		}
-	
+
 		@Override
 		protected List<SimpleNestedSetsTreeNode> doGetAncestors(
 			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
 			long nestedSetsTreeNodeRight) {
-	
+
 			List<SimpleNestedSetsTreeNode> simpleNestedSetsTreeNodes =
 				new ArrayList<SimpleNestedSetsTreeNode>();
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if ((nestedSetsTreeNodeLeft >=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft) &&
 					(nestedSetsTreeNodeRight <=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeRight)) {
-	
+
 					simpleNestedSetsTreeNodes.add(simpleNestedSetsTreeNode);
 				}
 			}
-	
+
 			Collections.sort(simpleNestedSetsTreeNodes);
-	
+
 			return simpleNestedSetsTreeNodes;
 		}
-	
+
 		@Override
 		protected List<SimpleNestedSetsTreeNode> doGetDescendants(
 			long nestedSetsTreeNodeScopeId, long nestedSetsTreeNodeLeft,
 			long nestedSetsTreeNodeRight) {
-	
+
 			List<SimpleNestedSetsTreeNode> simpleNestedSetsTreeNodes =
 				new ArrayList<SimpleNestedSetsTreeNode>();
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if ((nestedSetsTreeNodeLeft <=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft) &&
 					(nestedSetsTreeNodeRight >=
 						simpleNestedSetsTreeNode._nestedSetsTreeNodeRight)) {
-	
+
 					simpleNestedSetsTreeNodes.add(simpleNestedSetsTreeNode);
 				}
 			}
-	
+
 			Collections.sort(simpleNestedSetsTreeNodes);
-	
+
 			return simpleNestedSetsTreeNodes;
 		}
-	
+
 		@Override
 		protected void doUpdate(
 			long nestedSetsTreeNodeScopeId, boolean leftOrRight, long delta,
 			long limit, boolean inclusive) {
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if (leftOrRight) {
 					long nestedSetsTreeNodeLeft =
 						simpleNestedSetsTreeNode.getNestedSetsTreeNodeLeft();
-	
+
 					if (inclusive) {
 						if (nestedSetsTreeNodeLeft >= limit) {
 							simpleNestedSetsTreeNode.setNestedSetsTreeNodeLeft(
@@ -599,7 +599,7 @@ public class NestedSetsTreeManagerTest {
 				else {
 					long nestedSetsTreeNodeRight =
 						simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
-	
+
 					if (inclusive) {
 						if (nestedSetsTreeNodeRight >= limit) {
 							simpleNestedSetsTreeNode.setNestedSetsTreeNodeRight(
@@ -614,75 +614,75 @@ public class NestedSetsTreeManagerTest {
 					}
 				}
 			}
-	
+
 			synchronizeSimpleNestedSetsTreeNodes();
 		}
-	
+
 		@Override
 		protected void doUpdate(
 			long nestedSetsTreeNodeScopeId, long delta, long start,
 			boolean startInclusive, long end, boolean endInclusive,
 			List<SimpleNestedSetsTreeNode> includeList) {
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				if ((includeList != null) &&
 					!includeList.contains(simpleNestedSetsTreeNode)) {
-	
+
 					continue;
 				}
-	
+
 				long nestedSetsTreeNodeLeft =
 					simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
-	
+
 				if (isInRange(
 						nestedSetsTreeNodeLeft, start, startInclusive, end,
 						endInclusive)) {
-	
+
 					simpleNestedSetsTreeNode.setNestedSetsTreeNodeLeft(
 						nestedSetsTreeNodeLeft + delta);
 				}
-	
+
 				long nestedSetsTreeNodeRight =
 					simpleNestedSetsTreeNode._nestedSetsTreeNodeRight;
-	
+
 				if (isInRange(
 						nestedSetsTreeNodeRight, start, startInclusive, end,
 						endInclusive)) {
-	
+
 					simpleNestedSetsTreeNode.setNestedSetsTreeNodeRight(
 						nestedSetsTreeNodeRight + delta);
 				}
 			}
-	
+
 			synchronizeSimpleNestedSetsTreeNodes();
 		}
-	
+
 		@Override
 		protected long getMaxNestedSetsTreeNodeRight(
 			long nestedSetsTreeNodeScopeId) {
-	
+
 			long maxNestedSetsTreeNodeRight = 0;
-	
+
 			for (SimpleNestedSetsTreeNode simpleNestedSetsTreeNode :
 					_simpleNestedSetsTreeNodeList) {
-	
+
 				long nestedSetsTreeNodeRight =
 					simpleNestedSetsTreeNode.getNestedSetsTreeNodeRight();
-	
+
 				if (nestedSetsTreeNodeRight > maxNestedSetsTreeNodeRight) {
 					maxNestedSetsTreeNodeRight = nestedSetsTreeNodeRight;
 				}
 			}
-	
+
 			return maxNestedSetsTreeNodeRight + 1;
 		}
-	
+
 		protected boolean isInRange(
 			long value, long start, boolean startInclusive, long end,
 			boolean endInclusive) {
-	
+
 			if (startInclusive) {
 				if (value < start) {
 					return false;
@@ -693,7 +693,7 @@ public class NestedSetsTreeManagerTest {
 					return false;
 				}
 			}
-	
+
 			if (endInclusive) {
 				if (value > end) {
 					return false;
@@ -704,43 +704,43 @@ public class NestedSetsTreeManagerTest {
 					return false;
 				}
 			}
-	
+
 			return true;
 		}
-	
+
 		protected void removeSimpleNestedSetsTreeNode(
 			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode) {
-	
+
 			for (int i = 0; i < _simpleNestedSetsTreeNodes.length; i++) {
 				if (_simpleNestedSetsTreeNodes[i] == simpleNestedSetsTreeNode) {
 					_simpleNestedSetsTreeNodes[i] = null;
 				}
 			}
 		}
-	
+
 		protected void synchronizeSimpleNestedSetsTreeNodes() {
 			for (int i = 0; i < _simpleNestedSetsTreeNodes.length; i++) {
 				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode =
 					_simpleNestedSetsTreeNodes[i];
-	
+
 				if (simpleNestedSetsTreeNode != null) {
 					int index = _simpleNestedSetsTreeNodeList.indexOf(
 						simpleNestedSetsTreeNode);
-	
+
 					if (index >= 0) {
 						simpleNestedSetsTreeNode =
 							_simpleNestedSetsTreeNodeList.get(index);
-	
+
 						_simpleNestedSetsTreeNodes[i] =
 							simpleNestedSetsTreeNode.clone();
 					}
 				}
 			}
 		}
-	
+
 		private List<SimpleNestedSetsTreeNode> _simpleNestedSetsTreeNodeList =
 			new ArrayList<SimpleNestedSetsTreeNode>();
-	
+
 	}
 
 	private static class SimpleNestedSetsTreeNode
