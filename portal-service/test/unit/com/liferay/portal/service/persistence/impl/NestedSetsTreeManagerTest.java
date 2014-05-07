@@ -401,6 +401,7 @@ public class NestedSetsTreeManagerTest {
 			_simpleNestedSetsTreeNodeList.remove(simpleNestedSetsTreeNode);
 
 			removeSimpleNestedSetsTreeNode(simpleNestedSetsTreeNode);
+
 			synchronizeSimpleNestedSetsTreeNodes();
 		}
 
@@ -723,18 +724,22 @@ public class NestedSetsTreeManagerTest {
 				SimpleNestedSetsTreeNode simpleNestedSetsTreeNode =
 					_simpleNestedSetsTreeNodes[i];
 
-				if (simpleNestedSetsTreeNode != null) {
-					int index = _simpleNestedSetsTreeNodeList.indexOf(
-						simpleNestedSetsTreeNode);
-
-					if (index >= 0) {
-						simpleNestedSetsTreeNode =
-							_simpleNestedSetsTreeNodeList.get(index);
-
-						_simpleNestedSetsTreeNodes[i] =
-							simpleNestedSetsTreeNode.clone();
-					}
+				if (simpleNestedSetsTreeNode == null) {
+					continue;
 				}
+
+				int index = _simpleNestedSetsTreeNodeList.indexOf(
+					simpleNestedSetsTreeNode);
+
+				if (index < 0) {
+					continue;
+				}
+
+				simpleNestedSetsTreeNode = _simpleNestedSetsTreeNodeList.get(
+					index);
+
+				_simpleNestedSetsTreeNodes[i] =
+					simpleNestedSetsTreeNode.clone();
 			}
 		}
 
