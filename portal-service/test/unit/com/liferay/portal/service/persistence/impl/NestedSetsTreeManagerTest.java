@@ -389,6 +389,105 @@ public class NestedSetsTreeManagerTest {
 			new SimpleNestedSetsTreeNode(8)
 		};
 
+	private static class SimpleNestedSetsTreeNode
+		implements Cloneable, Comparable<SimpleNestedSetsTreeNode>,
+				   NestedSetsTreeNodeModel {
+
+		public SimpleNestedSetsTreeNode(long primaryKey) {
+			_primaryKey = primaryKey;
+		}
+
+		@Override
+		public SimpleNestedSetsTreeNode clone() {
+			try {
+				return (SimpleNestedSetsTreeNode)super.clone();
+			}
+			catch (CloneNotSupportedException cnse) {
+				throw new RuntimeException(cnse);
+			}
+		}
+
+		@Override
+		public int compareTo(
+			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode) {
+
+			long nestedSetsTreeNodeLeft =
+				simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
+
+			if (_nestedSetsTreeNodeLeft > nestedSetsTreeNodeLeft) {
+				return 1;
+			}
+			else if (_nestedSetsTreeNodeLeft == nestedSetsTreeNodeLeft) {
+				return 0;
+			}
+			else {
+				return -1;
+			}
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode =
+				(SimpleNestedSetsTreeNode)obj;
+
+			if (_primaryKey == simpleNestedSetsTreeNode._primaryKey) {
+				return true;
+			}
+
+			return false;
+		}
+
+		@Override
+		public long getPrimaryKey() {
+			return _primaryKey;
+		}
+
+		@Override
+		public long getNestedSetsTreeNodeLeft() {
+			return _nestedSetsTreeNodeLeft;
+		}
+
+		@Override
+		public long getNestedSetsTreeNodeRight() {
+			return _nestedSetsTreeNodeRight;
+		}
+
+		@Override
+		public long getNestedSetsTreeNodeScopeId() {
+			return 0;
+		}
+
+		@Override
+		public void setNestedSetsTreeNodeLeft(long nestedSetsTreeNodeLeft) {
+			_nestedSetsTreeNodeLeft = nestedSetsTreeNodeLeft;
+		}
+
+		@Override
+		public void setNestedSetsTreeNodeRight(long nestedSetsTreeNodeRight) {
+			_nestedSetsTreeNodeRight = nestedSetsTreeNodeRight;
+		}
+
+		@Override
+		public String toString() {
+			StringBundler sb = new StringBundler(7);
+
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(_nestedSetsTreeNodeLeft);
+			sb.append(StringPool.POUND);
+			sb.append(_primaryKey);
+			sb.append(StringPool.COMMA_AND_SPACE);
+			sb.append(_nestedSetsTreeNodeRight);
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+
+			return sb.toString();
+		}
+
+		private long _nestedSetsTreeNodeLeft;
+		private long _nestedSetsTreeNodeRight;
+		private long _primaryKey;
+
+	}
+
 	private class MemoryNestedSetsTreeManager
 		extends NestedSetsTreeManager<SimpleNestedSetsTreeNode> {
 
@@ -745,105 +844,6 @@ public class NestedSetsTreeManagerTest {
 
 		private List<SimpleNestedSetsTreeNode> _simpleNestedSetsTreeNodeList =
 			new ArrayList<SimpleNestedSetsTreeNode>();
-
-	}
-
-	private static class SimpleNestedSetsTreeNode
-		implements Cloneable, Comparable<SimpleNestedSetsTreeNode>,
-				   NestedSetsTreeNodeModel {
-
-		public SimpleNestedSetsTreeNode(long primaryKey) {
-			_primaryKey = primaryKey;
-		}
-
-		@Override
-		public SimpleNestedSetsTreeNode clone() {
-			try {
-				return (SimpleNestedSetsTreeNode)super.clone();
-			}
-			catch (CloneNotSupportedException cnse) {
-				throw new RuntimeException(cnse);
-			}
-		}
-
-		@Override
-		public int compareTo(
-			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode) {
-
-			long nestedSetsTreeNodeLeft =
-				simpleNestedSetsTreeNode._nestedSetsTreeNodeLeft;
-
-			if (_nestedSetsTreeNodeLeft > nestedSetsTreeNodeLeft) {
-				return 1;
-			}
-			else if (_nestedSetsTreeNodeLeft == nestedSetsTreeNodeLeft) {
-				return 0;
-			}
-			else {
-				return -1;
-			}
-		}
-
-		@Override
-		public boolean equals(Object obj) {
-			SimpleNestedSetsTreeNode simpleNestedSetsTreeNode =
-				(SimpleNestedSetsTreeNode)obj;
-
-			if (_primaryKey == simpleNestedSetsTreeNode._primaryKey) {
-				return true;
-			}
-
-			return false;
-		}
-
-		@Override
-		public long getPrimaryKey() {
-			return _primaryKey;
-		}
-
-		@Override
-		public long getNestedSetsTreeNodeLeft() {
-			return _nestedSetsTreeNodeLeft;
-		}
-
-		@Override
-		public long getNestedSetsTreeNodeRight() {
-			return _nestedSetsTreeNodeRight;
-		}
-
-		@Override
-		public long getNestedSetsTreeNodeScopeId() {
-			return 0;
-		}
-
-		@Override
-		public void setNestedSetsTreeNodeLeft(long nestedSetsTreeNodeLeft) {
-			_nestedSetsTreeNodeLeft = nestedSetsTreeNodeLeft;
-		}
-
-		@Override
-		public void setNestedSetsTreeNodeRight(long nestedSetsTreeNodeRight) {
-			_nestedSetsTreeNodeRight = nestedSetsTreeNodeRight;
-		}
-
-		@Override
-		public String toString() {
-			StringBundler sb = new StringBundler(7);
-
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(_nestedSetsTreeNodeLeft);
-			sb.append(StringPool.POUND);
-			sb.append(_primaryKey);
-			sb.append(StringPool.COMMA_AND_SPACE);
-			sb.append(_nestedSetsTreeNodeRight);
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-
-			return sb.toString();
-		}
-
-		private long _nestedSetsTreeNodeLeft;
-		private long _nestedSetsTreeNodeRight;
-		private long _primaryKey;
 
 	}
 
