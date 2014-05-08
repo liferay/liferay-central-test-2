@@ -499,31 +499,31 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			deletionSystemEventStagedModelTypes);
 
 		while (matcher.find()) {
-			String stagedModelTypeEntity = matcher.group(1);
+			String stagedModelTypeClassName = matcher.group(1);
 
-			pos = stagedModelTypeEntity.indexOf(".class");
+			pos = stagedModelTypeClassName.indexOf(".class");
 
 			if (pos == -1) {
-				pos = stagedModelTypeEntity.indexOf("Constants");
+				pos = stagedModelTypeClassName.indexOf("Constants");
 			}
 
 			if (pos == -1) {
 				return;
 			}
 
-			String entityName = stagedModelTypeEntity.substring(0, pos);
+			String className = stagedModelTypeClassName.substring(0, pos);
 
-			Pattern packagePattern = Pattern.compile(
+			Pattern packageNamePattern = Pattern.compile(
 				"import (com\\.liferay\\.[a-zA-Z\\.]*)\\.model\\." +
-					entityName + ";");
+					className + ";");
 
-			Matcher packageMatcher = packagePattern.matcher(content);
+			Matcher packageNameMatcher = packageNamePattern.matcher(content);
 
-			if (!packageMatcher.find()) {
+			if (!packageNameMatcher.find()) {
 				return;
 			}
 
-			String entityPackage = packageMatcher.group(1);
+			String packageName = packageNameMatcher.group(1);
 
 			StringBundler sb = new StringBundler(6);
 
@@ -531,9 +531,9 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			sb.append("portal-impl/src/");
 			sb.append(
 				StringUtil.replace(
-					entityPackage, StringPool.PERIOD, StringPool.SLASH));
+					packageName, StringPool.PERIOD, StringPool.SLASH));
 			sb.append("/service/impl/");
-			sb.append(entityName);
+			sb.append(className);
 			sb.append("LocalServiceImpl.java");
 
 			String localServiceImplFileName = sb.toString();
