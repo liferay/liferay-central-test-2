@@ -516,7 +516,7 @@ public class MPIHelperUtil {
 		}
 
 		@Override
-		public Boolean call() throws ProcessException {
+		public Boolean call() {
 			SPI spi = getSPI(_spiProviderName, _spiId);
 
 			if (spi != null) {
