@@ -75,8 +75,11 @@ public class AssetVocabularyServiceTest {
 	}
 
 	@Test
-	public void testDeleteVocabularyWithCategories() throws Exception {
+	public void testDeleteVocabulary() throws Exception {
 		int initialAssetCategoriesCount = searchCount();
+		int initialResourcesActionsCount =
+			ResourceActionLocalServiceUtil.getResourceActionsCount(
+				AssetVocabulary.class.getName());
 
 		AssetVocabulary vocabulary = AssetTestUtil.addVocabulary(
 			_group.getGroupId());
@@ -94,37 +97,16 @@ public class AssetVocabularyServiceTest {
 			vocabulary.getVocabularyId());
 
 		Assert.assertEquals(initialAssetCategoriesCount, searchCount());
-	}
-
-	@Test
-	public void testDeleteVocabularyWithCategoriesShouldDeleteOnCascade()
-		throws Exception {
-
-		int initialResourcesActionsCount =
-			ResourceActionLocalServiceUtil.getResourceActionsCount(
-				AssetVocabulary.class.getName());
-
-		AssetVocabulary vocabulary = AssetTestUtil.addVocabulary(
-			_group.getGroupId());
-
-		AssetCategory category = AssetTestUtil.addCategory(
-			_group.getGroupId(), vocabulary.getVocabularyId());
-
-		AssetVocabularyLocalServiceUtil.deleteVocabulary(
-			vocabulary.getVocabularyId());
-
-		Assert.assertNull(
-			AssetVocabularyLocalServiceUtil.fetchAssetVocabulary(
-				vocabulary.getVocabularyId()));
-
-		Assert.assertNull(
-			AssetCategoryLocalServiceUtil.fetchAssetCategory(
-				category.getCategoryId()));
-
 		Assert.assertEquals(
 			initialResourcesActionsCount,
 			ResourceActionLocalServiceUtil.getResourceActionsCount(
 				AssetVocabulary.class.getName()));
+		Assert.assertNull(
+			AssetCategoryLocalServiceUtil.fetchAssetCategory(
+				category.getCategoryId()));
+		Assert.assertNull(
+			AssetVocabularyLocalServiceUtil.fetchAssetVocabulary(
+				vocabulary.getVocabularyId()));
 	}
 
 	@Test
