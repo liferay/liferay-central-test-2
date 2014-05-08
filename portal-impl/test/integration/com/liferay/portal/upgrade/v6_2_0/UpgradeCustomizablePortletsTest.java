@@ -111,12 +111,13 @@ public class UpgradeCustomizablePortletsTest
 		_invokeSuper = true;
 
 		Layout layout1 = getLayout();
-		Layout layout2 = getLayout();
 
 		addPortletPreferences(layout1, _PORTLET_IDS[0]);
 		addPortletPreferences(layout1, _PORTLET_IDS[1]);
 		addPortletPreferences(layout1, _PORTLET_IDS[2]);
 		addPortletPreferences(layout1, _PORTLET_IDS[3]);
+
+		Layout layout2 = getLayout();
 
 		addPortletPreferences(layout2, _PORTLET_IDS[3]);
 
