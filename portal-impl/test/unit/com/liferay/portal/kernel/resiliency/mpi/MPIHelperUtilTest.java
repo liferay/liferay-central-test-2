@@ -271,7 +271,7 @@ public class MPIHelperUtilTest {
 			logRecord = logRecords.get(2);
 
 			Assert.assertEquals(
-				"Unable to close Intraband", logRecord.getMessage());
+				"Unable to close intraband", logRecord.getMessage());
 			Assert.assertSame(ioException, logRecord.getThrown());
 		}
 		finally {

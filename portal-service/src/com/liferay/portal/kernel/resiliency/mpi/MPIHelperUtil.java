@@ -260,7 +260,7 @@ public class MPIHelperUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Unable to close Intraband", e);
+				_log.warn("Unable to close intraband", e);
 			}
 		}
 	}
