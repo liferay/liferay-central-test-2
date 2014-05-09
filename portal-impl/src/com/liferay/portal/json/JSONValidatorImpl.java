@@ -29,27 +29,26 @@ import com.liferay.portal.kernel.json.JSONValidator;
  */
 public class JSONValidatorImpl implements JSONValidator {
 
-	public JSONValidatorImpl(String json) throws JSONException {
+	public JSONValidatorImpl(String jsonSchema) throws JSONException {
 		try {
-			JsonSchemaFactory jsonSchemaFactory = JsonSchemaFactory.byDefault();
+			JsonSchemaFactory schemaFactory = JsonSchemaFactory.byDefault();
 
-			JsonNode jsonNode = JsonLoader.fromString(json);
+			JsonNode schemaNode = JsonLoader.fromString(jsonSchema);
 
-			_jsonSchema = jsonSchemaFactory.getJsonSchema(jsonNode);
+			_jsonSchema = schemaFactory.getJsonSchema(schemaNode);
 		}
 		catch (Exception e) {
 			throw new JSONException(e);
 		}
 	}
 
-	@Override
 	public boolean isValid(String json) throws JSONException {
 		try {
 			JsonNode jsonNode = JsonLoader.fromString(json);
 
-			ProcessingReport processingReport = _jsonSchema.validate(jsonNode);
+			ProcessingReport report = _jsonSchema.validate(jsonNode);
 
-			return processingReport.isSuccess();
+			return report.isSuccess();
 		}
 		catch (Exception e) {
 			throw new JSONException(e);
