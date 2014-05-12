@@ -111,7 +111,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		private Map<String, Object> _resultsMap;
 
 	}
-
+	
 	private List<Map<String, Object>> _buildJsonWebServiceActionMappingMaps()
 		throws PortalException {
 
@@ -144,17 +144,8 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 				}
 			}
 
-			Method idMethod = jsonWebServiceActionMapping.getRealActionMethod();
-			Class idClass = jsonWebServiceActionMapping.getActionClass();
-
-			String idClassName =
-				_jsonWebServiceNaming.convertServiceClassNameToSimpleName(
-					idClass);
-
-			String id = idClassName.concat(
-				StringPool.POUND).concat(idMethod.getName());
-
-			jsonWebServiceActionMappingMap.put("id", id);
+			jsonWebServiceActionMappingMap.put(
+				"id", _getId(jsonWebServiceActionMapping));
 
 			if (jsonWebServiceActionMapping.isDeprecated()) {
 				jsonWebServiceActionMappingMap.put("deprecated", Boolean.TRUE);
@@ -432,6 +423,19 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		}
 
 		return genericReturnTypes;
+	}
+
+	private String _getId(
+		JSONWebServiceActionMapping jsonWebServiceActionMapping) {
+
+		Method idMethod = jsonWebServiceActionMapping.getRealActionMethod();
+		Class idClass = jsonWebServiceActionMapping.getActionClass();
+	
+		String idClassName =
+			_jsonWebServiceNaming.convertServiceClassNameToSimpleName(
+				idClass);
+	
+		return idClassName.concat(StringPool.POUND).concat(idMethod.getName());
 	}
 
 	private String _basePath;
