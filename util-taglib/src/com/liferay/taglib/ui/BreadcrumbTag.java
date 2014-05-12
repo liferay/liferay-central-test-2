@@ -78,16 +78,18 @@ public class BreadcrumbTag extends IncludeTag {
 			ThemeDisplay themeDisplay, StringBundler sb)
 		throws Exception {
 
-		BreadcrumbEntry guestGroupBreadcrumbEntry =
+		BreadcrumbEntry breadcrumbEntry =
 			BreadcrumbUtil.getGuestGroupBreadcrumbEntry(themeDisplay);
 
-		if (guestGroupBreadcrumbEntry != null) {
-			sb.append("<li><a href=\"");
-			sb.append(guestGroupBreadcrumbEntry.getURL());
-			sb.append("\">");
-			sb.append(HtmlUtil.escape(guestGroupBreadcrumbEntry.getTitle()));
-			sb.append("</a><span class=\"divider\">/</span></li>");
+		if (breadcrumbEntry == null) {
+			return;
 		}
+
+		sb.append("<li><a href=\"");
+		sb.append(breadcrumbEntry.getURL());
+		sb.append("\">");
+		sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
+		sb.append("</a><span class=\"divider\">/</span></li>");
 	}
 
 	protected void buildLayoutBreadcrumb(
