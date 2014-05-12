@@ -103,7 +103,6 @@ public class InputAssetLinksDisplayContext {
 	}
 
 	public List<AssetRendererFactory> getAssetRendererFactories() {
-
 		Collection<AssetRendererFactory> assetRendererFactories =
 			AssetRendererFactoryRegistryUtil.getAssetRendererFactories(
 				_themeDisplay.getCompanyId());
