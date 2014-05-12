@@ -124,7 +124,7 @@ public class JSONWebServiceActionImpl implements JSONWebServiceAction {
 
 						String modelClassName =
 							_jsonWebServiceNaming.
-								convertModelClassNameToImplClassName(
+								convertModelClassToImplClassName(
 									targetType);
 
 						try {

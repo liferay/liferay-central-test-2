@@ -150,7 +150,7 @@ public class JSONWebServiceRegistrator {
 		}
 
 		String utilClassName =
-			_jsonWebServiceNaming.convertServiceImplClassNameToUtilClassName(
+			_jsonWebServiceNaming.convertServiceImplClassToUtilClassName(
 				implementationClass);
 
 		ClassLoader classLoader = implementationClass.getClassLoader();

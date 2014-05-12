@@ -272,7 +272,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 					String modelImplClassName =
 						_jsonWebServiceNaming.
-							convertModelClassNameToImplClassName(type);
+							convertModelClassToImplClassName(type);
 
 					modelType = classLoader.loadClass(modelImplClassName);
 				}
@@ -431,7 +431,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		Class<?> clazz = jsonWebServiceActionMapping.getActionClass();
 	
 		String className =
-			_jsonWebServiceNaming.convertServiceClassNameToSimpleName(clazz);
+			_jsonWebServiceNaming.convertServiceClassToSimpleName(clazz);
 
 		Method method = jsonWebServiceActionMapping.getRealActionMethod();
 	
