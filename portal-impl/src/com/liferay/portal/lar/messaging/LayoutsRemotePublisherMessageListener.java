@@ -82,7 +82,7 @@ public class LayoutsRemotePublisherMessageListener
 
 		initThreadLocals(userId, parameterMap);
 
-		User user = UserLocalServiceUtil.fetchUserById(userId);
+		User user = UserLocalServiceUtil.getUserById(userId);
 
 		CompanyThreadLocal.setCompanyId(user.getCompanyId());
 
