@@ -428,14 +428,14 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 	private String _getId(
 		JSONWebServiceActionMapping jsonWebServiceActionMapping) {
 
-		Method idMethod = jsonWebServiceActionMapping.getRealActionMethod();
-		Class<?> idClass = jsonWebServiceActionMapping.getActionClass();
+		Class<?> clazz = jsonWebServiceActionMapping.getActionClass();
 	
-		String idClassName =
-			_jsonWebServiceNaming.convertServiceClassNameToSimpleName(
-				idClass);
+		String className =
+			_jsonWebServiceNaming.convertServiceClassNameToSimpleName(clazz);
+
+		Method method = jsonWebServiceActionMapping.getRealActionMethod();
 	
-		return idClassName.concat(StringPool.POUND).concat(idMethod.getName());
+		return className.concat(StringPool.POUND).concat(method.getName());
 	}
 
 	private String _basePath;
