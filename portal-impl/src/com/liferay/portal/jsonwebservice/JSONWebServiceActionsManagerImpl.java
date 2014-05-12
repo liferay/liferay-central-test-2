@@ -241,6 +241,7 @@ public class JSONWebServiceActionsManagerImpl
 		return count;
 	}
 
+	@Override
 	public JSONWebServiceNaming getJSONWebServiceNaming() {
 		return _jsonWebServiceNaming;
 	}
