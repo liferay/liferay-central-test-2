@@ -190,7 +190,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountWithEmptyArrayShouldReturnZero() {
+	public void testCountEmptyArray() {
 		String[] array = {};
 
 		PredicateFilter<String> predicateFilter =
@@ -206,7 +206,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountWithNullArrayShouldReturnZero() {
+	public void testCountNullArray() {
 		String[] array = null;
 
 		PredicateFilter<String> predicateFilter =
@@ -223,7 +223,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountWithPopulatedArrayShouldReturnTheRightCount() {
+	public void testCountArray() {
 		String[] array = {"a", "b", "c"};
 
 		PredicateFilter<String> predicateFilter =
