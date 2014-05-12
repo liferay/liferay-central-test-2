@@ -152,8 +152,8 @@ public class PollerRequestHandlerImpl
 		throws Exception {
 
 		return createPollerRequest(
-			pollerHeader, portletId, new HashMap<String, String>(),
-			null, receiveRequest);
+			pollerHeader, portletId, new HashMap<String, String>(), null,
+			receiveRequest);
 	}
 
 	protected PollerRequest createPollerRequest(
