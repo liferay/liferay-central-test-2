@@ -47,6 +47,7 @@ public class ListUtilTest {
 
 	@Test
 	public void testCountWithNullListShouldReturnZero() {
+		List<String> list = null;
 
 		PredicateFilter<String> predicateFilter =
 			new PredicateFilter<String>() {
@@ -58,7 +59,7 @@ public class ListUtilTest {
 
 		};
 
-		Assert.assertEquals(0, ListUtil.count(null, predicateFilter));
+		Assert.assertEquals(0, ListUtil.count(list, predicateFilter));
 	}
 
 	@Test
