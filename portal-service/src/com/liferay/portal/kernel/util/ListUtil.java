@@ -67,15 +67,15 @@ public class ListUtil {
 			return 0;
 		}
 
-		int counter = 0;
+		int count = 0;
 
 		for (E element : list) {
 			if (predicateFilter.filter(element)) {
-				++counter;
+				count++;
 			}
 		}
 
-		return counter;
+		return count;
 	}
 
 	public static <E> void distinct(

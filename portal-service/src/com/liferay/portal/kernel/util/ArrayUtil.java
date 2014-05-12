@@ -810,15 +810,15 @@ public class ArrayUtil {
 			return 0;
 		}
 
-		int counter = 0;
+		int count = 0;
 
-		for (T o : array) {
-			if (predicateFilter.filter(o)) {
-				++counter;
+		for (T t : array) {
+			if (predicateFilter.filter(t)) {
+				count++;
 			}
 		}
 
-		return counter;
+		return count;
 	}
 
 	public static String[] distinct(String[] array) {
@@ -855,8 +855,8 @@ public class ArrayUtil {
 			return false;
 		}
 
-		for (T o : array) {
-			if (predicateFilter.filter(o)) {
+		for (T t : array) {
+			if (predicateFilter.filter(t)) {
 				return true;
 			}
 		}
