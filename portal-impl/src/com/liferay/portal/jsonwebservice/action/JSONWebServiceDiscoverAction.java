@@ -131,6 +131,10 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 			Map<String, Object> jsonWebServiceActionMappingMap =
 				new LinkedHashMap<String, Object>();
 
+			if (jsonWebServiceActionMapping.isDeprecated()) {
+				jsonWebServiceActionMappingMap.put("deprecated", Boolean.TRUE);
+			}
+
 			JavadocMethod javadocMethod =
 				JavadocManagerUtil.lookupJavadocMethod(
 					jsonWebServiceActionMapping.getRealActionMethod());
@@ -146,10 +150,6 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 
 			jsonWebServiceActionMappingMap.put(
 				"id", _getId(jsonWebServiceActionMapping));
-
-			if (jsonWebServiceActionMapping.isDeprecated()) {
-				jsonWebServiceActionMappingMap.put("deprecated", Boolean.TRUE);
-			}
 
 			jsonWebServiceActionMappingMap.put(
 				"method", jsonWebServiceActionMapping.getMethod());
