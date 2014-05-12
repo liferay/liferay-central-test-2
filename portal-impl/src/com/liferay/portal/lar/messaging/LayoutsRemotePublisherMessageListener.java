@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.DateRange;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
-import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.ExportImportConfiguration;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -95,8 +94,6 @@ public class LayoutsRemotePublisherMessageListener
 		}
 		finally {
 			resetThreadLocals();
-
-			CompanyThreadLocal.setCompanyId(CompanyConstants.SYSTEM);
 		}
 	}
 

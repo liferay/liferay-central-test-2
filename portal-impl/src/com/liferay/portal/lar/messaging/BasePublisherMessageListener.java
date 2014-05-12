@@ -18,7 +18,9 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.BaseMessageStatusMessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
@@ -43,11 +45,13 @@ public abstract class BasePublisherMessageListener
 			long userId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
+		User user = UserLocalServiceUtil.getUserById(userId);
+
+		CompanyThreadLocal.setCompanyId(user.getCompanyId());
+
 		PrincipalThreadLocal.setName(userId);
 
 		PermissionChecker permissionChecker = null;
-
-		User user = UserLocalServiceUtil.getUserById(userId);
 
 		try {
 			permissionChecker = PermissionCheckerFactoryUtil.create(user);
@@ -88,6 +92,7 @@ public abstract class BasePublisherMessageListener
 	}
 
 	protected void resetThreadLocals() {
+		CompanyThreadLocal.setCompanyId(CompanyConstants.SYSTEM);
 		PermissionThreadLocal.setPermissionChecker(null);
 		PrincipalThreadLocal.setName(null);
 		ServiceContextThreadLocal.popServiceContext();
