@@ -46,23 +46,6 @@ public class ListUtilTest {
 	}
 
 	@Test
-	public void testCountNullList() {
-		List<String> list = null;
-
-		PredicateFilter<String> predicateFilter =
-			new PredicateFilter<String>() {
-
-			@Override
-			public boolean filter(String string) {
-				return true;
-			}
-
-		};
-
-		Assert.assertEquals(0, ListUtil.count(list, predicateFilter));
-	}
-
-	@Test
 	public void testCountList() {
 		List<String> list = new ArrayList<String>();
 
@@ -88,8 +71,8 @@ public class ListUtilTest {
 	}
 
 	@Test
-	public void testExistsEmptyList() {
-		List<String> list = new ArrayList<String>();
+	public void testCountNullList() {
+		List<String> list = null;
 
 		PredicateFilter<String> predicateFilter =
 			new PredicateFilter<String>() {
@@ -101,12 +84,12 @@ public class ListUtilTest {
 
 		};
 
-		Assert.assertFalse(ListUtil.exists(list, predicateFilter));
+		Assert.assertEquals(0, ListUtil.count(list, predicateFilter));
 	}
 
 	@Test
-	public void testExistsNullList() {
-		List<String> list = null;
+	public void testExistsEmptyList() {
+		List<String> list = new ArrayList<String>();
 
 		PredicateFilter<String> predicateFilter =
 			new PredicateFilter<String>() {
@@ -144,6 +127,23 @@ public class ListUtilTest {
 		};
 
 		Assert.assertTrue(ListUtil.exists(list, predicateFilter));
+	}
+
+	@Test
+	public void testExistsNullList() {
+		List<String> list = null;
+
+		PredicateFilter<String> predicateFilter =
+			new PredicateFilter<String>() {
+
+			@Override
+			public boolean filter(String string) {
+				return true;
+			}
+
+		};
+
+		Assert.assertFalse(ListUtil.exists(list, predicateFilter));
 	}
 
 	@Test
