@@ -148,17 +148,18 @@ public class PollerRequestHandlerImpl
 	}
 
 	protected PollerRequest createPollerRequest(
-			boolean receiveRequest, PollerHeader pollerHeader, String portletId)
+			PollerHeader pollerHeader, String portletId, boolean receiveRequest)
 		throws Exception {
 
 		return createPollerRequest(
-			receiveRequest, pollerHeader, portletId,
-			new HashMap<String, String>(), null);
+			pollerHeader, portletId, new HashMap<String, String>(),
+			null, receiveRequest);
 	}
 
 	protected PollerRequest createPollerRequest(
-			boolean receiveRequest, PollerHeader pollerHeader, String portletId,
-			Map<String, String> parameterMap, String chunkId)
+			PollerHeader pollerHeader, String portletId,
+			Map<String, String> parameterMap, String chunkId,
+			boolean receiveRequest)
 		throws Exception {
 
 		PollerProcessor pollerProcessor =
@@ -203,8 +204,8 @@ public class PollerRequestHandlerImpl
 
 			try {
 				PollerRequest pollerRequest = createPollerRequest(
-					receiveRequest, pollerHeader, portletId, parameterMap,
-					chunkId);
+					pollerHeader, portletId, parameterMap, chunkId,
+					receiveRequest);
 
 				pollerRequests.add(pollerRequest);
 
@@ -227,7 +228,7 @@ public class PollerRequestHandlerImpl
 
 				try {
 					PollerRequest pollerRequest = createPollerRequest(
-						receiveRequest, pollerHeader, portletId);
+						pollerHeader, portletId, receiveRequest);
 
 					pollerRequests.add(pollerRequest);
 				}
