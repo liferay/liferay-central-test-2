@@ -123,16 +123,14 @@ public class BreadcrumbTag extends IncludeTag {
 			ThemeDisplay themeDisplay, StringBundler sb)
 		throws Exception {
 
-		List<BreadcrumbEntry> parentGroupBreadcrumbEntries =
+		List<BreadcrumbEntry> breadcrumbEntries =
 			BreadcrumbUtil.getParentGroupBreadcrumbEntries(themeDisplay);
 
-		for (BreadcrumbEntry parentGroupBreadcrumbEntry :
-				parentGroupBreadcrumbEntries) {
-
+		for (BreadcrumbEntry breadcrumbEntry : breadcrumbEntries) {
 			sb.append("<li><a href=\"");
-			sb.append(parentGroupBreadcrumbEntry.getURL());
+			sb.append(breadcrumbEntry.getURL());
 			sb.append("\">");
-			sb.append(HtmlUtil.escape(parentGroupBreadcrumbEntry.getTitle()));
+			sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
 			sb.append("</a><span class=\"divider\">/</span></li>");
 		}
 	}
@@ -142,16 +140,14 @@ public class BreadcrumbTag extends IncludeTag {
 			StringBundler sb)
 		throws Exception {
 
-		List<BreadcrumbEntry> portletBreadcrumbEntries =
+		List<BreadcrumbEntry> breadcrumbEntries =
 			BreadcrumbUtil.getPortletBreadcrumbEntries(request);
 
-		for (BreadcrumbEntry portletBreadcrumbEntry :
-				portletBreadcrumbEntries) {
-
+		for (BreadcrumbEntry breadcrumbEntry : breadcrumbEntries) {
 			if (!_showCurrentGroup) {
 				String siteGroupName = themeDisplay.getSiteGroupName();
 
-				if (siteGroupName.equals(portletBreadcrumbEntry.getTitle())) {
+				if (siteGroupName.equals(breadcrumbEntry.getTitle())) {
 					continue;
 				}
 			}
@@ -163,26 +159,26 @@ public class BreadcrumbTag extends IncludeTag {
 				String portletTitle = PortalUtil.getPortletTitle(
 					portletDisplay.getId(), themeDisplay.getUser());
 
-				if (portletTitle.equals(portletBreadcrumbEntry.getTitle())) {
+				if (portletTitle.equals(breadcrumbEntry.getTitle())) {
 					continue;
 				}
 			}
 
 			sb.append("<li>");
 
-			if (Validator.isNotNull(portletBreadcrumbEntry.getURL())) {
+			if (Validator.isNotNull(breadcrumbEntry.getURL())) {
 				sb.append("<a href=\"");
-				sb.append(HtmlUtil.escape(portletBreadcrumbEntry.getURL()));
+				sb.append(HtmlUtil.escape(breadcrumbEntry.getURL()));
 				sb.append("\"");
-				sb.append(AUIUtil.buildData(portletBreadcrumbEntry.getData()));
+				sb.append(AUIUtil.buildData(breadcrumbEntry.getData()));
 				sb.append(StringPool.GREATER_THAN);
 
-				sb.append(HtmlUtil.escape(portletBreadcrumbEntry.getTitle()));
+				sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
 
 				sb.append("</a>");
 			}
 			else {
-				sb.append(HtmlUtil.escape(portletBreadcrumbEntry.getTitle()));
+				sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
 			}
 
 			sb.append("<span class=\"divider\">/</span></li>");
@@ -193,17 +189,17 @@ public class BreadcrumbTag extends IncludeTag {
 			ThemeDisplay themeDisplay, StringBundler sb)
 		throws Exception {
 
-		BreadcrumbEntry scopeGroupBreadcrumbEntry =
+		BreadcrumbEntry breadcrumbEntry =
 			BreadcrumbUtil.getScopeGroupBreadcrumbEntry(themeDisplay);
 
-		if (scopeGroupBreadcrumbEntry == null) {
+		if (breadcrumbEntry == null) {
 			return;
 		}
 
 		sb.append("<li><a href=\"");
-		sb.append(scopeGroupBreadcrumbEntry.getURL());
+		sb.append(breadcrumbEntry.getURL());
 		sb.append("\">");
-		sb.append(HtmlUtil.escape(scopeGroupBreadcrumbEntry.getTitle()));
+		sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
 		sb.append("</a><span class=\"divider\">/</span></li>");
 	}
 
