@@ -60,9 +60,8 @@ public class GlobalShutdownAction extends SimpleAction {
 	public void run(String[] ids) {
 
 		// Lower shutdown levels have dependences on higher levels, therefore
-		// lower ones need to shutdown before higher ones.
-		// Components within the same shutdown level should have no dependence
-		// among each others.
+		// lower ones need to shutdown before higher ones. Components within the
+		// same shutdown level should not depend on each other.
 
 		shutdownLevel1();
 		shutdownLevel2();
