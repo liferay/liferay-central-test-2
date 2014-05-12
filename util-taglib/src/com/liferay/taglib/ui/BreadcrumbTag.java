@@ -194,13 +194,15 @@ public class BreadcrumbTag extends IncludeTag {
 		BreadcrumbEntry scopeGroupBreadcrumbEntry =
 			BreadcrumbUtil.getScopeGroupBreadcrumbEntry(themeDisplay);
 
-		if (scopeGroupBreadcrumbEntry != null) {
-			sb.append("<li><a href=\"");
-			sb.append(scopeGroupBreadcrumbEntry.getURL());
-			sb.append("\">");
-			sb.append(HtmlUtil.escape(scopeGroupBreadcrumbEntry.getTitle()));
-			sb.append("</a><span class=\"divider\">/</span></li>");
+		if (scopeGroupBreadcrumbEntry == null) {
+			return;
 		}
+
+		sb.append("<li><a href=\"");
+		sb.append(scopeGroupBreadcrumbEntry.getURL());
+		sb.append("\">");
+		sb.append(HtmlUtil.escape(scopeGroupBreadcrumbEntry.getTitle()));
+		sb.append("</a><span class=\"divider\">/</span></li>");
 	}
 
 	@Override
