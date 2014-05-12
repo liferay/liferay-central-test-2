@@ -429,7 +429,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		JSONWebServiceActionMapping jsonWebServiceActionMapping) {
 
 		Method idMethod = jsonWebServiceActionMapping.getRealActionMethod();
-		Class idClass = jsonWebServiceActionMapping.getActionClass();
+		Class<?> idClass = jsonWebServiceActionMapping.getActionClass();
 	
 		String idClassName =
 			_jsonWebServiceNaming.convertServiceClassNameToSimpleName(
