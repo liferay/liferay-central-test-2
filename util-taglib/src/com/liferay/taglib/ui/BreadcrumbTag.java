@@ -188,7 +188,7 @@ public class BreadcrumbTag extends IncludeTag {
 	}
 
 	protected void buildScopeGroupBreadcrumb(
-		ThemeDisplay themeDisplay, StringBundler sb)
+			ThemeDisplay themeDisplay, StringBundler sb)
 		throws Exception {
 
 		BreadcrumbEntry scopeGroupBreadcrumbEntry =
