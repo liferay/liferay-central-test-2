@@ -190,7 +190,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountArray() {
+	public void testCountStringArray() {
 		String[] array = {"a", "b", "c"};
 	
 		PredicateFilter<String> predicateFilter =
@@ -211,7 +211,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountEmptyArray() {
+	public void testCountStringEmptyArray() {
 		String[] array = {};
 
 		PredicateFilter<String> predicateFilter =
@@ -227,7 +227,7 @@ public class ArrayUtilTest {
 	}
 
 	@Test
-	public void testCountNullArray() {
+	public void testCountStringNullArray() {
 		String[] array = null;
 
 		PredicateFilter<String> predicateFilter =
