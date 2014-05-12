@@ -1131,7 +1131,7 @@ public class MetaInfoCacheServletResponseTest {
 		MetaInfoCacheServletResponse metaInfoCacheServletResponse =
 			new MetaInfoCacheServletResponse(stubHttpServletResponse);
 
-		// Set both status and message
+		// Set status and message
 
 		metaInfoCacheServletResponse.sendError(400, "Bad Page");
 
@@ -1158,7 +1158,7 @@ public class MetaInfoCacheServletResponseTest {
 		messageReference.set(null);
 		statusReference.set(0);
 
-		// Set both status and message after commit
+		// Set status and message after commit
 
 		metaInfoCacheServletResponse = new MetaInfoCacheServletResponse(
 			stubHttpServletResponse);
@@ -1391,7 +1391,7 @@ public class MetaInfoCacheServletResponseTest {
 		MetaInfoCacheServletResponse metaInfoCacheServletResponse =
 			new MetaInfoCacheServletResponse(stubHttpServletResponse);
 
-		// Set both status and message
+		// Set status and message
 
 		metaInfoCacheServletResponse.setStatus(400, "Bad Page");
 
@@ -1413,7 +1413,7 @@ public class MetaInfoCacheServletResponseTest {
 		messageReference.set(null);
 		statusReference.set(0);
 
-		// Set both status and message after commit
+		// Set status and message after commit
 
 		metaInfoCacheServletResponse.flushBuffer();
 
