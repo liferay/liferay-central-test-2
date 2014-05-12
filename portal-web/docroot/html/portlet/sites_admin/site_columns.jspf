@@ -18,7 +18,6 @@
 	name="name"
 	orderable="<%= true %>"
 >
-
 	<aui:a label="<%= HtmlUtil.escape(curGroup.getDescriptiveName(locale)) %>" href="<%= rowURL %>" />
 
 	<c:if test="<%= curGroup.isOrganization() %>">
