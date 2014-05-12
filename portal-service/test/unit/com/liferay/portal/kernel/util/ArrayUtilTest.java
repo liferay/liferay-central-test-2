@@ -190,6 +190,27 @@ public class ArrayUtilTest {
 	}
 
 	@Test
+	public void testCountArray() {
+		String[] array = {"a", "b", "c"};
+	
+		PredicateFilter<String> predicateFilter =
+			new PredicateFilter<String>() {
+	
+				@Override
+				public boolean filter(String string) {
+					if (string.equals("b")) {
+						return true;
+					}
+	
+					return false;
+				}
+	
+			};
+	
+		Assert.assertEquals(1, ArrayUtil.count(array, predicateFilter));
+	}
+
+	@Test
 	public void testCountEmptyArray() {
 		String[] array = {};
 
@@ -220,27 +241,6 @@ public class ArrayUtilTest {
 			};
 
 		Assert.assertEquals(0, ArrayUtil.count(array, predicateFilter));
-	}
-
-	@Test
-	public void testCountArray() {
-		String[] array = {"a", "b", "c"};
-
-		PredicateFilter<String> predicateFilter =
-			new PredicateFilter<String>() {
-
-				@Override
-				public boolean filter(String string) {
-					if (string.equals("b")) {
-						return true;
-					}
-
-					return false;
-				}
-
-			};
-
-		Assert.assertEquals(1, ArrayUtil.count(array, predicateFilter));
 	}
 
 	@Test
