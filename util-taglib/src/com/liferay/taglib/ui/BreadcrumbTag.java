@@ -104,16 +104,12 @@ public class BreadcrumbTag extends IncludeTag {
 
 			Layout layout = (Layout)layoutBreadcrumbEntry.getBaseModel();
 
-			String target;
-
 			if (layout.isTypeControlPanel()) {
-				target = "target=\"_top\"";
+				sb.append("target=\"_top\"");
 			}
 			else {
-				target = PortalUtil.getLayoutTarget(layout);
+				sb.append(PortalUtil.getLayoutTarget(layout));
 			}
-
-			sb.append(target);
 
 			sb.append(StringPool.GREATER_THAN);
 			sb.append(HtmlUtil.escape(layoutBreadcrumbEntry.getTitle()));
