@@ -30,7 +30,7 @@ public class ListUtilTest {
 
 	@Test
 	public void testCountWithEmptyListShouldReturnZero() {
-		Collection<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 
 		PredicateFilter<String> predicateFilter =
 			new PredicateFilter<String>() {
