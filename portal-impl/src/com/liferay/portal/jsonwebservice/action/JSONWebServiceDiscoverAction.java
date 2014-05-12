@@ -111,7 +111,7 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		private Map<String, Object> _resultsMap;
 
 	}
-	
+
 	private List<Map<String, Object>> _buildJsonWebServiceActionMappingMaps()
 		throws PortalException {
 
@@ -271,8 +271,8 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 					ClassLoader classLoader = clazz.getClassLoader();
 
 					String modelImplClassName =
-						_jsonWebServiceNaming.
-							convertModelClassToImplClassName(type);
+						_jsonWebServiceNaming.convertModelClassToImplClassName(
+							type);
 
 					modelType = classLoader.loadClass(modelImplClassName);
 				}
@@ -429,12 +429,12 @@ public class JSONWebServiceDiscoverAction implements JSONWebServiceAction {
 		JSONWebServiceActionMapping jsonWebServiceActionMapping) {
 
 		Class<?> clazz = jsonWebServiceActionMapping.getActionClass();
-	
+
 		String className =
 			_jsonWebServiceNaming.convertServiceClassToSimpleName(clazz);
 
 		Method method = jsonWebServiceActionMapping.getRealActionMethod();
-	
+
 		return className.concat(StringPool.POUND).concat(method.getName());
 	}
 

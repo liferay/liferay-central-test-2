@@ -80,8 +80,7 @@ public class JSONWebServiceNaming {
 		String className = clazz.getName();
 
 		if (className.endsWith("Impl")) {
-			className = className.substring(
-				0, className.length() - 4);
+			className = className.substring(0, className.length() - 4);
 		}
 
 		return StringUtil.replace(
