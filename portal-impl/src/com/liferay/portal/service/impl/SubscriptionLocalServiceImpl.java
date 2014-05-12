@@ -194,7 +194,7 @@ public class SubscriptionLocalServiceImpl
 	public Subscription deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
 
-		Subscription subscription = subscriptionPersistence.fetchByPrimaryKey(
+		Subscription subscription = subscriptionPersistence.findByPrimaryKey(
 			subscriptionId);
 
 		return deleteSubscription(subscription);
