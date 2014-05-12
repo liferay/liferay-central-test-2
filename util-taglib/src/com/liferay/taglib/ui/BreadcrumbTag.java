@@ -247,41 +247,8 @@ public class BreadcrumbTag extends IncludeTag {
 			_log.error(e, e);
 		}
 
-		return modifyBreadcrumbCssClasses(sb.toString());
-	}
+		String breadcrumbString = sb.toString();
 
-	@Override
-	protected String getPage() {
-		return _PAGE;
-	}
-
-	protected void initShowParentGroups(HttpServletRequest request) {
-		if (_showParentGroups != null) {
-			return;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		try {
-			Layout layout = themeDisplay.getLayout();
-
-			Group group = layout.getGroup();
-
-			UnicodeProperties typeSettingsProperties =
-				group.getTypeSettingsProperties();
-
-			_showParentGroups = GetterUtil.getBoolean(
-				typeSettingsProperties.getProperty(
-					"breadcrumbShowParentGroups"),
-				_SHOW_PARENT_GROUPS);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-	}
-
-	protected String modifyBreadcrumbCssClasses(String breadcrumbString) {
 		if (Validator.isNull(breadcrumbString)) {
 			return StringPool.BLANK;
 		}
@@ -329,6 +296,37 @@ public class BreadcrumbTag extends IncludeTag {
 		}
 
 		return breadcrumbString;
+	}
+
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
+
+	protected void initShowParentGroups(HttpServletRequest request) {
+		if (_showParentGroups != null) {
+			return;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		try {
+			Layout layout = themeDisplay.getLayout();
+
+			Group group = layout.getGroup();
+
+			UnicodeProperties typeSettingsProperties =
+				group.getTypeSettingsProperties();
+
+			_showParentGroups = GetterUtil.getBoolean(
+				typeSettingsProperties.getProperty(
+					"breadcrumbShowParentGroups"),
+				_SHOW_PARENT_GROUPS);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	@Override
