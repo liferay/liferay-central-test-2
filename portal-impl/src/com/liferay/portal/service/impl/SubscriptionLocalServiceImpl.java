@@ -221,7 +221,9 @@ public class SubscriptionLocalServiceImpl
 		Subscription subscription = subscriptionPersistence.fetchByC_U_C_C(
 			user.getCompanyId(), userId, classNameId, classPK);
 
-		deleteSubscription(subscription);
+		if (subscription != null) {
+			deleteSubscription(subscription);
+		}
 	}
 
 	/**
