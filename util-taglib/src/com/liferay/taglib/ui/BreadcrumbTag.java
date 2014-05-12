@@ -96,15 +96,15 @@ public class BreadcrumbTag extends IncludeTag {
 			ThemeDisplay themeDisplay, StringBundler sb)
 		throws Exception {
 
-		List<BreadcrumbEntry> layoutBreadcrumbEntries =
+		List<BreadcrumbEntry> breadcrumbEntries =
 			BreadcrumbUtil.getLayoutBreadcrumbEntries(themeDisplay);
 
-		for (BreadcrumbEntry layoutBreadcrumbEntry : layoutBreadcrumbEntries) {
+		for (BreadcrumbEntry breadcrumbEntry : breadcrumbEntries) {
 			sb.append("<li><a href=\"");
-			sb.append(layoutBreadcrumbEntry.getURL());
+			sb.append(breadcrumbEntry.getURL());
 			sb.append("\" ");
 
-			Layout layout = (Layout)layoutBreadcrumbEntry.getBaseModel();
+			Layout layout = (Layout)breadcrumbEntry.getBaseModel();
 
 			if (layout.isTypeControlPanel()) {
 				sb.append("target=\"_top\"");
@@ -114,7 +114,7 @@ public class BreadcrumbTag extends IncludeTag {
 			}
 
 			sb.append(StringPool.GREATER_THAN);
-			sb.append(HtmlUtil.escape(layoutBreadcrumbEntry.getTitle()));
+			sb.append(HtmlUtil.escape(breadcrumbEntry.getTitle()));
 			sb.append("</a><span class=\"divider\">/</span></li>");
 		}
 	}
