@@ -25,6 +25,7 @@ import org.junit.Test;
 
 /**
  * @author Olaf Kock
+ * @author José Navarro
  */
 public class ListUtilTest {
 
@@ -68,17 +69,8 @@ public class ListUtilTest {
 		};
 
 		Assert.assertEquals(1, ListUtil.count(list, predicateFilter));
-	}
 
-	@Test
-	public void testCountListNotFoundElements() {
-		List<String> list = new ArrayList<String>();
-
-		list.add("a");
-		list.add("b");
-		list.add("c");
-
-		PredicateFilter<String> predicateFilter =
+		predicateFilter =
 			new PredicateFilter<String>() {
 
 				@Override
@@ -152,17 +144,8 @@ public class ListUtilTest {
 		};
 
 		Assert.assertTrue(ListUtil.exists(list, predicateFilter));
-	}
 
-	@Test
-	public void testExistsListNotFoundElements() {
-		List<String> list = new ArrayList<String>();
-
-		list.add("a");
-		list.add("b");
-		list.add("c");
-
-		PredicateFilter<String> predicateFilter =
+		predicateFilter =
 			new PredicateFilter<String>() {
 
 				@Override
