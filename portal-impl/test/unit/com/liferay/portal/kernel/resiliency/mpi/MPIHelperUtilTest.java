@@ -609,11 +609,11 @@ public class MPIHelperUtilTest {
 
 			logRecords = captureHandler.resetLogLevel(Level.OFF);
 
-			mockSPI1.failOnStop = false;
 			mockSPI1.failOnDestroy = true;
+			mockSPI1.failOnStop = false;
 
-			mockSPI2.failOnStop = false;
 			mockSPI2.failOnDestroy = true;
+			mockSPI2.failOnStop = false;
 
 			Assert.assertTrue(
 				MPIHelperUtil.unregisterSPIProvider(mockSPIProvider2));
@@ -643,8 +643,8 @@ public class MPIHelperUtilTest {
 
 			};
 
-			mockSPI1.failOnStop = false;
 			mockSPI1.failOnDestroy = true;
+			mockSPI1.failOnStop = false;
 			mockSPI1.spiProviderName = name1;
 
 			MPIHelperUtilTestUtil.directResigterSPI(name1, mockSPI1);
