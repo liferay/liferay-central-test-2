@@ -115,10 +115,9 @@ public class RemoteSPITest {
 
 	@Before
 	public void setUp() {
-		_spiConfiguration =
-			new SPIConfiguration(
-				"spiId", null, null, MockSPIAgent.class.getName(), 8081, null,
-				new String[0], new String[0], 5000, 0, 0, null);
+		_spiConfiguration = new SPIConfiguration(
+			"spiId", null, null, MockSPIAgent.class.getName(), 8081, null,
+			new String[0], new String[0], 5000, 0, 0, null);
 
 		_mockRemoteSPI = new MockRemoteSPI(_spiConfiguration);
 
@@ -252,7 +251,7 @@ public class RemoteSPITest {
 	@Test
 	public void testDestroy() throws RemoteException {
 
-		// Unexport failure
+		// Unable to unexport
 
 		try {
 			_mockRemoteSPI.destroy();
@@ -267,7 +266,7 @@ public class RemoteSPITest {
 
 		Assert.assertEquals(0, countDownLatch.getCount());
 
-		// Destroy failure
+		// Unable to destroy
 
 		_mockRemoteSPI.setFailOnDestroy(true);
 
@@ -284,7 +283,7 @@ public class RemoteSPITest {
 
 		assertUnexported();
 
-		// Success destroy
+		// Successfully destroy
 
 		_mockRemoteSPI.countDownLatch = null;
 
@@ -300,7 +299,7 @@ public class RemoteSPITest {
 	@Test
 	public void testRegisterCallback() throws Exception {
 
-		// Success
+		// Successfully register callback
 
 		String uuid = "uuid";
 
@@ -382,9 +381,7 @@ public class RemoteSPITest {
 		Object object = objectInputStream.readObject();
 
 		Assert.assertFalse(DependencyManagementThreadLocal.isEnabled());
-
 		Assert.assertSame(MockRemoteSPI.class, object.getClass());
-
 		Assert.assertEquals(
 			ExecutorIntraband.class.getName(),
 			System.getProperty(PropsKeys.INTRABAND_IMPL));
@@ -393,7 +390,6 @@ public class RemoteSPITest {
 		Assert.assertEquals(
 			MockWelder.class.getName(),
 			System.getProperty(PropsKeys.INTRABAND_WELDER_IMPL));
-
 		Assert.assertEquals(
 			_currentDir.getAbsolutePath(),
 			System.getProperty("portal:" + PropsKeys.LIFERAY_HOME));
@@ -523,7 +519,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun2() throws RemoteException {
 
-		// Unable to unregister and MPI waiting timed out, with log
+		// Unable to unregister, MPI waiting timed out, with log
 
 		String spiProviderName = "spiProviderName";
 
@@ -581,7 +577,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun3() throws RemoteException {
 
-		// Unable to unregister and MPI waiting timed out, without log
+		// Unable to unregister, MPI waiting timed out, without log
 
 		String spiProviderName = "spiProviderName";
 
@@ -618,7 +614,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun4() throws Exception {
 
-		// Unable to unregister and MPI shutdown request received, without log
+		// Unable to unregister, MPI shutdown request received, without log
 
 		String spiProviderName = "spiProviderName";
 
@@ -666,7 +662,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun5() throws Exception {
 
-		// Unregister returns false and MPI waiting interrupts, with log
+		// Unregister returns false, MPI waiting interrupts, with log
 
 		_mockRemoteSPI = new MockRemoteSPI(
 			new SPIConfiguration(
@@ -715,7 +711,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun6() throws Exception {
 
-		// Unregister returns true and MPI shutdown request received, with log
+		// Unregister returns true, MPI shutdown request received, with log
 
 		_mockRemoteSPI = new MockRemoteSPI(
 			new SPIConfiguration(
@@ -764,7 +760,7 @@ public class RemoteSPITest {
 	@Test
 	public void testSPIShutdownHookRun7() throws Exception {
 
-		// Unregister returns true and MPI waiting timed out, with log
+		// Unregister returns true, MPI waiting timed out, with log
 
 		_mockRemoteSPI.registrationReference = mockRegistrationReference(true);
 
@@ -906,9 +902,10 @@ public class RemoteSPITest {
 
 		Assert.assertFalse(processCallable.call());
 
-		// Successful unregister SPI
+		// Successfully unregister SPI
 
 		mockSPI.mpi = MPIHelperUtil.getMPI();
+
 		mockSPI.spiConfiguration = new SPIConfiguration(
 			spiId, null, 0, null, null, new String[0], null);
 
@@ -916,7 +913,7 @@ public class RemoteSPITest {
 	}
 
 	protected Future<?> actionOnMPIWaiting(final boolean countDownOrInterrupt) {
-		final Thread mainThread = Thread.currentThread();
+		final Thread currentThread = Thread.currentThread();
 
 		FutureTask<?> futureTask = new FutureTask<Object>(
 			new Callable<Object>() {
@@ -929,10 +926,10 @@ public class RemoteSPITest {
 								_mockRemoteSPI.countDownLatch, "sync");
 
 					while (true) {
-						Collection<Thread> queuedThreads =
+						Collection<Thread> threads =
 							abstractQueuedSynchronizer.getQueuedThreads();
 
-						if (queuedThreads.contains(mainThread)) {
+						if (threads.contains(currentThread)) {
 							if (countDownOrInterrupt) {
 								CountDownLatch countDownLatch =
 									_mockRemoteSPI.countDownLatch;
@@ -940,7 +937,7 @@ public class RemoteSPITest {
 								countDownLatch.countDown();
 							}
 							else {
-								mainThread.interrupt();
+								currentThread.interrupt();
 							}
 
 							break;
