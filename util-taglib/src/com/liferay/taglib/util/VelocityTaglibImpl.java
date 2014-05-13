@@ -1189,7 +1189,6 @@ public class VelocityTaglibImpl implements VelocityTaglib {
 	@Deprecated
 	@Override
 	public void staging() throws Exception {
-		throw new UnsupportedOperationException();
 	}
 
 	@Override
