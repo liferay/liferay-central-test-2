@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.servlet;
+package com.liferay.portal.http.service.servlet;
 
 import java.util.Collections;
 import java.util.Enumeration;

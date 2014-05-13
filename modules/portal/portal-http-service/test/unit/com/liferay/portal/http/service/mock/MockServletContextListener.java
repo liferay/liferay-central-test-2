@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.mock;
+package com.liferay.portal.http.service.mock;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

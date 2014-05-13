@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.event;
+package com.liferay.portal.http.service.internal.event;
 
-import com.liferay.httpservice.internal.servlet.BundleServletContext;
+import com.liferay.portal.http.service.internal.servlet.BundleServletContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;

@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.http;
+package com.liferay.portal.http.service.internal.http;
 
-import com.liferay.httpservice.internal.servlet.BundleServletContext;
-import com.liferay.httpservice.internal.servlet.WebExtenderServlet;
+import com.liferay.portal.http.service.internal.servlet.BundleServletContext;
+import com.liferay.portal.http.service.internal.servlet.WebExtenderServlet;
 import com.liferay.portal.kernel.servlet.ServletContextPool;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.Validator;

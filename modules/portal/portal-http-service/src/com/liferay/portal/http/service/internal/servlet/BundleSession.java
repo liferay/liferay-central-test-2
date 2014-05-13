@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.servlet;
+package com.liferay.portal.http.service.internal.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpSessionWrapper;
 

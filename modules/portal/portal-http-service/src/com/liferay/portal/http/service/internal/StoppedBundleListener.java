@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.httpservice.internal;
+package com.liferay.portal.http.service.internal;
 
-import com.liferay.httpservice.internal.servlet.BundleServletContext;
+import com.liferay.portal.http.service.internal.servlet.BundleServletContext;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;

@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.servlet;
+package com.liferay.portal.http.service.internal.servlet;
 
-import com.liferay.httpservice.internal.http.ExtendedHttpService;
-import com.liferay.httpservice.internal.http.FilterTracker;
-import com.liferay.httpservice.internal.http.HttpServiceFactory;
-import com.liferay.httpservice.internal.http.HttpSupport;
-import com.liferay.httpservice.internal.http.ServletTracker;
+import com.liferay.portal.http.service.internal.http.ExtendedHttpService;
+import com.liferay.portal.http.service.internal.http.FilterTracker;
+import com.liferay.portal.http.service.internal.http.HttpServiceFactory;
+import com.liferay.portal.http.service.internal.http.HttpSupport;
+import com.liferay.portal.http.service.internal.http.ServletTracker;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PortletServlet;

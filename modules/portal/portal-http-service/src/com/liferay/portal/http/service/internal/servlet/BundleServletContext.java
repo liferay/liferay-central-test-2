@@ -12,12 +12,12 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.servlet;
+package com.liferay.portal.http.service.internal.servlet;
 
-import com.liferay.httpservice.internal.http.DefaultHttpContext;
-import com.liferay.httpservice.internal.http.HttpServiceTracker;
-import com.liferay.httpservice.servlet.BundleServletConfig;
-import com.liferay.httpservice.servlet.ResourceServlet;
+import com.liferay.portal.http.service.internal.http.DefaultHttpContext;
+import com.liferay.portal.http.service.internal.http.HttpServiceTracker;
+import com.liferay.portal.http.service.servlet.BundleServletConfig;
+import com.liferay.portal.http.service.servlet.ResourceServlet;
 import com.liferay.portal.apache.bridges.struts.LiferayServletContext;
 import com.liferay.portal.kernel.deploy.hot.DependencyManagementThreadLocal;
 import com.liferay.portal.kernel.log.Log;

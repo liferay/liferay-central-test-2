@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.definition;
+package com.liferay.portal.http.service.internal.definition;
 
 import java.util.List;
 import java.util.Map;

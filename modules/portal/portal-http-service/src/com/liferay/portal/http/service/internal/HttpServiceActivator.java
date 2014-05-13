@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.httpservice.internal;
+package com.liferay.portal.http.service.internal;
 
-import com.liferay.httpservice.internal.event.EventUtil;
-import com.liferay.httpservice.internal.http.PortalHttpContext;
-import com.liferay.httpservice.internal.servlet.BundleServletContext;
-import com.liferay.httpservice.internal.servlet.WebExtenderServlet;
-import com.liferay.httpservice.servlet.BundleServletConfig;
+import com.liferay.portal.http.service.internal.event.EventUtil;
+import com.liferay.portal.http.service.internal.http.PortalHttpContext;
+import com.liferay.portal.http.service.internal.servlet.BundleServletContext;
+import com.liferay.portal.http.service.internal.servlet.WebExtenderServlet;
+import com.liferay.portal.http.service.servlet.BundleServletConfig;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;

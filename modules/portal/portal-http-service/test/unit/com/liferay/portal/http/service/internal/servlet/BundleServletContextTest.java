@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.servlet;
+package com.liferay.portal.http.service.internal.servlet;
 
-import com.liferay.httpservice.mock.MockFilter;
-import com.liferay.httpservice.servlet.ResourceServlet;
+import com.liferay.portal.http.service.mock.MockFilter;
+import com.liferay.portal.http.service.servlet.ResourceServlet;
 import com.liferay.portal.kernel.test.CaptureHandler;
 import com.liferay.portal.kernel.test.JDKLoggerTestUtil;
 import com.liferay.portal.kernel.util.FastDateFormatFactoryUtil;

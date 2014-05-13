@@ -12,13 +12,13 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.http;
+package com.liferay.portal.http.service.internal.http;
 
-import com.liferay.httpservice.internal.definition.FilterDefinition;
-import com.liferay.httpservice.internal.definition.ListenerDefinition;
-import com.liferay.httpservice.internal.definition.ServletDefinition;
-import com.liferay.httpservice.internal.definition.WebXMLDefinition;
-import com.liferay.httpservice.internal.definition.WebXMLDefinitionLoader;
+import com.liferay.portal.http.service.internal.definition.FilterDefinition;
+import com.liferay.portal.http.service.internal.definition.ListenerDefinition;
+import com.liferay.portal.http.service.internal.definition.ServletDefinition;
+import com.liferay.portal.http.service.internal.definition.WebXMLDefinition;
+import com.liferay.portal.http.service.internal.definition.WebXMLDefinitionLoader;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.xml.DocumentException;

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.definition;
+package com.liferay.portal.http.service.internal.definition;
 
-import com.liferay.httpservice.test.MockBundle;
+import com.liferay.portal.http.service.test.MockBundle;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -110,7 +110,7 @@ public class WebXMLDefinitionLoaderTest {
 	};
 
 	private static final String[] _SERVLET_DEFAULT_CLASSE_NAMES = {
-		"com.liferay.httpservice.servlet.ResourceServlet",
+		"com.liferay.portal.http.service.servlet.ResourceServlet",
 		"org.apache.jasper.servlet.JspServlet"
 	};
 

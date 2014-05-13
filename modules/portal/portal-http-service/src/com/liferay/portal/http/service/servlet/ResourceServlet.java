@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.servlet;
+package com.liferay.portal.http.service.servlet;
 
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;

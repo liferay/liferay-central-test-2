@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.servlet;
+package com.liferay.portal.http.service.internal.servlet;
 
-import com.liferay.httpservice.servlet.BundleServletConfig;
+import com.liferay.portal.http.service.servlet.BundleServletConfig;
 
 import java.io.IOException;
 

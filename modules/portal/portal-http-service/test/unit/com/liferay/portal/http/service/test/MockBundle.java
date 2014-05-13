@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.test;
+package com.liferay.portal.http.service.test;
 
 import com.liferay.portal.kernel.util.StringPool;
 

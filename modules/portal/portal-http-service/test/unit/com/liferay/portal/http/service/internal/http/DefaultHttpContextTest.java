@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.internal.http;
+package com.liferay.portal.http.service.internal.http;
 
 import java.net.MalformedURLException;
 import java.net.URL;

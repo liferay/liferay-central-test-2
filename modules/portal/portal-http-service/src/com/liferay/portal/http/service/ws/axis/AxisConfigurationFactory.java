@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.httpservice.ws.axis;
+package com.liferay.portal.http.service.ws.axis;
 
 import org.apache.axis.EngineConfiguration;
 import org.apache.axis.EngineConfigurationFactory;
