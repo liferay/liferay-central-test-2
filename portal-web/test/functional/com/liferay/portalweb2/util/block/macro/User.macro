@@ -1178,7 +1178,7 @@
 
 		<echo message="Checking to see if TCat is enabled..." />
 
-		<var name="tcatEnabled" method="selenium#isTCatEnabled()" />
+		<var method="selenium#isTCatEnabled()" name="tcatEnabled" />
 
 		<if>
 			<equals arg1="${tcatEnabled}" arg2="true" />
