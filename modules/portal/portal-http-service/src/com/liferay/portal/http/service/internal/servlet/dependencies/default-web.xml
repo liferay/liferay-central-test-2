@@ -33,7 +33,7 @@ http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-webapp/s
 			<param-name>httpMethods</param-name>
 			<param-value>GET,POST,HEAD</param-value>
 		</init-param>
-s		<init-param>s
+		<init-param>
 			<param-name>keepgenerated</param-name>
 			<param-value>true</param-value>
 		</init-param>
