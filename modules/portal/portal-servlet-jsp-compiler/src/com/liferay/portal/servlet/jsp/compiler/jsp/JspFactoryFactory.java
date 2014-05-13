@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.servletjspcompiler.jsp;
+package com.liferay.portal.servlet.jsp.compiler.jsp;
 
 import java.util.ServiceLoader;
 

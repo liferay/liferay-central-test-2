@@ -723,7 +723,7 @@ public class PageContextImpl extends PageContext {
             celResolver.add(new ArrayELResolver());
             celResolver.add(new BeanELResolver());
             if (com.liferay.portal.kernel.util.ServerDetector.isResin()) {
-                celResolver.add(new com.liferay.servletjspcompiler.el.JSP_2_2_CompatibleElResolver());
+                celResolver.add(new com.liferay.portal.servlet.jsp.compiler.el.JSP_2_2_CompatibleElResolver());
             }
             else {
             celResolver.add(new ScopedAttributeELResolver());

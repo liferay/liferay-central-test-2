@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.servletjspcompiler.compiler.internal;
+package com.liferay.portal.servlet.jsp.compiler.compiler.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
