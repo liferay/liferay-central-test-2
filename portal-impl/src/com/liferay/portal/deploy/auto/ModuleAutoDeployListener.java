@@ -80,8 +80,9 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 			return false;
 		}
 
-		Manifest manifest = null;
 		JarInputStream jarInputStream = null;
+
+		Manifest manifest = null;
 
 		try {
 			jarInputStream = new JarInputStream(
