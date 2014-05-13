@@ -273,7 +273,7 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Wait up to " + spiConfiguration.getShutdownTimeout() +
-						" ms for MPI shutdown request);
+						" ms for MPI shutdown request");
 			}
 
 			try {
