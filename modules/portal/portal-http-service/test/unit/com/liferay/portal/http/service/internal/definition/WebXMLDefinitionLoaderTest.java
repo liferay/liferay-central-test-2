@@ -149,11 +149,7 @@ public class WebXMLDefinitionLoaderTest {
 		public URL getEntry(String path) {
 			Class<?> clazz = getClass();
 
-			ClassLoader classLoader = clazz.getClassLoader();
-
-			return classLoader.getResource(
-				"com/liferay/httpservice/internal/definition/dependencies/" +
-					"custom-web.xml");
+			return clazz.getResource("dependencies/custom-web.xml");
 		}
 
 	}

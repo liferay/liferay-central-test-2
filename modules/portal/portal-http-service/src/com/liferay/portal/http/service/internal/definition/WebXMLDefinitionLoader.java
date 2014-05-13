@@ -42,8 +42,7 @@ public class WebXMLDefinitionLoader {
 
 		Document document = SAXReaderUtil.read(
 			clazz.getResource(
-				"/com/liferay/httpservice/internal/servlet/dependencies/" +
-					"default-web.xml"));
+				"../servlet/dependencies/default-web.xml"));
 
 		_defaultWebXmlRootElement = document.getRootElement();
 	}
