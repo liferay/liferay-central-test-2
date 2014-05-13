@@ -1,12 +1,12 @@
-Bundle-Activator: com.liferay.httpservice.internal.HttpServiceActivator
+Bundle-Activator: com.liferay.portal.http.service.internal.HttpServiceActivator
 Bundle-Name: Http Service
 Export-Package:\
-	com.liferay.httpservice.servlet,\
-	com.liferay.httpservice.ws.*
+	com.liferay.portal.http.service.servlet,\
+	com.liferay.portal.http.service.ws.*
 Import-Package:\
-	com.liferay.httpservice.servlet,\
-	com.liferay.httpservice.ws.*,\
+	com.liferay.portal.http.service.servlet,\
+	com.liferay.portal.http.service.ws.*,\
 	*
 Include-Resource: classes
 Private-Package:\
-	com.liferay.httpservice.internal.*
+	com.liferay.portal.http.service.internal.*
