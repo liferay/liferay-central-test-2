@@ -835,14 +835,14 @@ public class LiferaySeleniumHelper {
 			LiferaySelenium liferaySelenium, String image, String value)
 		throws Exception {
 
-		String tcatAdminFile =
+		String tCatAdminFileName =
 			TestPropsValues.TCAT_ADMIN_REPOSITORY + "/" + value;
 
 		if (OSDetector.isWindows()) {
-			tcatAdminFile = tcatAdminFile.replace("/", "\\");
+			tCatAdminFileName = tCatAdminFileName.replace("/", "\\");
 		}
 
-		sikuliType(liferaySelenium, image, tcatAdminFile);
+		sikuliType(liferaySelenium, image, tCatAdminFileName);
 
 		_screen.type(Key.ENTER);
 	}
