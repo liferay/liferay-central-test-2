@@ -227,14 +227,16 @@ public class ServiceTrackerCollectionImpl<S> implements ServiceTrackerList<S> {
 	@Override
 	public <T> T[] toArray(T[] services) {
 		if (services.length < _services.size()) {
+			Class<?> clazz = services.getClass();
+
 			services = (T[])Array.newInstance(
-				services.getClass().getComponentType(), _services.size());
+				clazz.getComponentType(), _services.size());
 		}
 
 		for (int i = 0; i < _services.size(); i++) {
 			EntryWrapper entryWrapper = _services.get(i);
 
-			services[i] = (T) (entryWrapper._service);
+			services[i] = (T)entryWrapper._service;
 		}
 
 		if (services.length > _services.size()) {
