@@ -111,7 +111,7 @@ index 8908872..f60cca3 100644
       */
      private void genPreambleStaticInitializers() throws JasperException {
 -        out.printil("private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();");
-+        out.printil("private final JspFactory _jspxFactory = com.liferay.servletjspcompiler.jsp.JspFactoryFactory.getJspFactory();");
++        out.printil("private final JspFactory _jspxFactory = com.liferay.portal.servlet.jsp.compiler.jsp.JspFactoryFactory.getJspFactory();");
          out.println();
  
          // Static data for getDependants()
@@ -171,7 +171,7 @@ index 7400602..6ffbded 100644
              celResolver.add(new ArrayELResolver());
              celResolver.add(new BeanELResolver());
 +            if (com.liferay.portal.kernel.util.ServerDetector.isResin()) {
-+                celResolver.add(new com.liferay.servletjspcompiler.el.JSP_2_2_CompatibleElResolver());
++                celResolver.add(new com.liferay.portal.servlet.jsp.compiler.el.JSP_2_2_CompatibleElResolver());
 +            }
 +            else {
              celResolver.add(new ScopedAttributeELResolver());

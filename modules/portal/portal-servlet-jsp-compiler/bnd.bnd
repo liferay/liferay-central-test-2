@@ -1,10 +1,10 @@
-Bundle-Activator: com.liferay.servletjspcompiler.compiler.internal.JspResolverFactory
+Bundle-Activator: com.liferay.portal.servlet.jsp.compiler.compiler.internal.JspResolverFactory
 Bundle-ClassPath: ., lib/${original.lib.name}.jar
 Class-Path: . lib/${original.lib.name}.jar
 Export-Package:\
-	com.liferay.servletjspcompiler.compiler,\
-	com.liferay.servletjspcompiler.el,\
-	com.liferay.servletjspcompiler.jsp,\
+	com.liferay.portal.servlet.jsp.compiler.compiler,\
+	com.liferay.portal.servlet.jsp.compiler.el,\
+	com.liferay.portal.servlet.jsp.compiler.jsp,\
 	javax.servlet.jsp.resources;version="2.1",\
 	javax.servlet.jsp.*;version="2.1",\
 	org.apache.jasper.*;vendor=glassfish;version="6.0.0",\
@@ -41,4 +41,4 @@ Include-Resource:\
 	classes,\
 	lib/${original.lib.name}.jar=lib/${original.lib.name}.jar,\
 	META-INF/LPS-35513.patch=patches/LPS-35513.patch
-Private-Package: com.liferay.servletjspcompiler.compiler.internal
+Private-Package: com.liferay.portal.servlet.jsp.compiler.compiler.internal
