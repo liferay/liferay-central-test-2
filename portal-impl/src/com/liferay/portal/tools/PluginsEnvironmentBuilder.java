@@ -82,10 +82,25 @@ public class PluginsEnvironmentBuilder {
 		for (String fileName : directoryScanner.getIncludedFiles()) {
 			String content = _fileUtil.read(dirName + "/" + fileName);
 
-			boolean osgiProject = content.contains(
-				"<import file=\"../../build-common-osgi-plugin.xml\" />");
-			boolean sharedProject = content.contains(
-				"<import file=\"../build-common-shared.xml\" />");
+			boolean osgiProject = false;
+
+			if (content.contains(
+					"<import file=\"../../build-common-osgi-plugin.xml\" />") ||
+				content.contains(
+					"../tools/sdk/build-common-osgi-plugin.xml\" />")) {
+
+				osgiProject = true;
+			}
+
+			boolean sharedProject = false;
+
+			if (content.contains(
+					"<import file=\"../build-common-shared.xml\" />") ||
+				content.contains(
+					"../tools/sdk/build-common-shared.xml\" />")) {
+
+				sharedProject = true;
+			}
 
 			List<String> dependencyJars = Collections.emptyList();
 
