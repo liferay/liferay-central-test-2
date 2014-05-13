@@ -970,7 +970,7 @@ public class MPIHelperUtilTest {
 
 			Assert.assertTrue(spis.isEmpty());
 
-			// Unregister ThreadLocal shortcut, with log
+			// Unregister thread local shortcut, with log
 
 			mockSPI1 = new MockSPI();
 
