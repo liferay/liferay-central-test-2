@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
+<!DOCTYPE project>
 
-<project name="servlet-jsp-compiler-shared" basedir="." default="compile">
+<project>
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/portal" />
