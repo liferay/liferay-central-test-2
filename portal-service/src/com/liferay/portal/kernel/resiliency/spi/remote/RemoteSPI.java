@@ -218,8 +218,8 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 
 		private static final long serialVersionUID = 1L;
 
-		private String _spiProviderName;
 		private String _spiId;
+		private String _spiProviderName;
 
 	}
 
@@ -272,8 +272,8 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 		private boolean waitForMPI() {
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Wait for MPI initiated shutdown, up to " +
-						spiConfiguration.getShutdownTimeout() + " ms");
+					"Wait up to " + spiConfiguration.getShutdownTimeout() +
+						" ms for MPI shutdown request);
 			}
 
 			try {
@@ -292,9 +292,7 @@ public abstract class RemoteSPI implements ProcessCallable<SPI>, Remote, SPI {
 			}
 
 			if (_log.isInfoEnabled()) {
-				_log.info(
-					"MPI shutdown waiting timed out, preceeding with SPI " +
-						"shutdown");
+				_log.info("Proceed with SPI shutdown");
 			}
 
 			return false;

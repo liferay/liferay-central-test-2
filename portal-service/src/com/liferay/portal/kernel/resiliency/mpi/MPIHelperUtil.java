@@ -314,7 +314,7 @@ public class MPIHelperUtil {
 		if ((spiProviderContainer != null) &&
 			(spiProviderContainer.getSPIProvider() == spiProvider) &&
 			_spiProviderContainers.remove(
-					spiProviderName, spiProviderContainer)) {
+				spiProviderName, spiProviderContainer)) {
 
 			Collection<SPI> spis = spiProviderContainer.getSPIs();
 
@@ -397,12 +397,14 @@ public class MPIHelperUtil {
 				MessagingConfiguratorRegistry.getMessagingConfigurators(
 					servletContextName);
 
-			if (messagingConfigurators != null) {
-				for (MessagingConfigurator messagingConfigurator :
-						messagingConfigurators) {
+			if (messagingConfigurators == null) {
+				continue;
+			}
 
-					messagingConfigurator.connect();
-				}
+			for (MessagingConfigurator messagingConfigurator :
+					messagingConfigurators) {
+
+				messagingConfigurator.connect();
 			}
 		}
 
@@ -469,12 +471,12 @@ public class MPIHelperUtil {
 			_spiProvider = spiProvider;
 		}
 
-		public SPIProvider getSPIProvider() {
-			return _spiProvider;
-		}
-
 		public SPI getSPI(String spiId) {
 			return _spis.get(spiId);
+		}
+
+		public SPIProvider getSPIProvider() {
+			return _spiProvider;
 		}
 
 		public Collection<SPI> getSPIs() {
