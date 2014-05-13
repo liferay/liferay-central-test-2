@@ -483,9 +483,6 @@ public class JournalArticleIndexer extends BaseIndexer {
 			JournalArticleLocalServiceUtil.fetchJournalArticle(classPK);
 
 		if (article == null) {
-
-			// Attempt to use the classPK as if it was a resource primary key
-
 			article =
 				JournalArticleLocalServiceUtil.fetchLatestIndexableArticle(
 					classPK);

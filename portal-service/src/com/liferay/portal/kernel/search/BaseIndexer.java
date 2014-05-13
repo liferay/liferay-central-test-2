@@ -466,10 +466,7 @@ public abstract class BaseIndexer implements Indexer {
 			doReindex(className, classPK);
 		}
 		catch (NoSuchModelException nsme) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unable to index " + className + " " + classPK, nsme);
-			}
+			_log.error("Unable to index " + className + " " + classPK, nsme);
 		}
 		catch (SearchException se) {
 			throw se;
