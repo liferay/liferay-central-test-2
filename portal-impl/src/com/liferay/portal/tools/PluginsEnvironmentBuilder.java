@@ -488,6 +488,8 @@ public class PluginsEnvironmentBuilder {
 			addClasspathEntry(sb, "/portal/lib/global/" + jar, attributes);
 		}
 
+		Collections.sort(portalJars);
+
 		for (String jar : portalJars) {
 			if (!jar.equals("util-slf4j.jar")) {
 				addClasspathEntry(sb, "/portal/lib/portal/" + jar, attributes);
