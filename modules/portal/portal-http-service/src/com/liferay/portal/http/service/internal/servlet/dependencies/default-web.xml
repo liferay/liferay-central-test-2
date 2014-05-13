@@ -19,7 +19,7 @@ http://git.eclipse.org/c/jetty/org.eclipse.jetty.project.git/tree/jetty-webapp/s
 	</listener>
 	<servlet>
 		<servlet-name>default</servlet-name>
-		<servlet-class>com.liferay.httpservice.servlet.ResourceServlet</servlet-class>
+		<servlet-class>com.liferay.portal.http.service.servlet.ResourceServlet</servlet-class>
 		<load-on-startup>0</load-on-startup>
 	</servlet>
 	<servlet>
