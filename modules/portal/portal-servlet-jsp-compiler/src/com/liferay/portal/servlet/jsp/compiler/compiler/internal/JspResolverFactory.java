@@ -32,12 +32,14 @@ public class JspResolverFactory implements BundleActivator {
 		return new JspResourceResolver(_jspResourceCache);
 	}
 
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		_jspResourceCache = new JspResourceCache();
 
 		bundleContext.addBundleListener(_jspResourceCache);
 	}
 
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		bundleContext.removeBundleListener(_jspResourceCache);
 

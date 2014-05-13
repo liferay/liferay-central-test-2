@@ -29,6 +29,7 @@ import org.osgi.framework.wiring.BundleWiring;
  */
 public class JspResourceCache implements BundleListener {
 
+	@Override
 	public void bundleChanged(BundleEvent event) {
 		if ((event.getType() & BundleEvent.UNRESOLVED) !=
 				BundleEvent.UNRESOLVED) {

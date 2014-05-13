@@ -45,6 +45,7 @@ public class JspResourceResolver implements ResourceResolver {
 		_jspResourceCache = jspResourceCache;
 	}
 
+	@Override
 	public URL getResource(BundleWiring bundleWiring, String name) {
 		Bundle bundle = bundleWiring.getBundle();
 
@@ -59,6 +60,7 @@ public class JspResourceResolver implements ResourceResolver {
 		return bundle.getResource(name);
 	}
 
+	@Override
 	public Collection<String> resolveResources(
 		BundleWiring bundleWiring, String path, String filePattern,
 		int options) {
