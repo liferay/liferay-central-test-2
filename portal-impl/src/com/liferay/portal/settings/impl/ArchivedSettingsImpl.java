@@ -148,7 +148,7 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 					PortletConstants.getRootPortletId(portletId));
 		}
 		catch (SystemException se) {
-			throw new RuntimeException("Unable to load named settings", se);
+			throw new RuntimeException("Unable to load settings", se);
 		}
 
 		_portletPreferencesSettings = new PortletPreferencesSettings(
