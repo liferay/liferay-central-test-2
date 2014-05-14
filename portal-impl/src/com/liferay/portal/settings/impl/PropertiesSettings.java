@@ -43,7 +43,7 @@ public class PropertiesSettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
+	public Collection<String> getKeys() {
 		Enumeration<?> propertyNames = _properties.propertyNames();
 
 		Set<String> setKeys = new HashSet<String>();

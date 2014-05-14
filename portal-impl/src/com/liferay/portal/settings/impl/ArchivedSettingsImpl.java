@@ -72,8 +72,8 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
-		return _getSettings().getSetKeys();
+	public Collection<String> getKeys() {
+		return _getSettings().getKeys();
 	}
 
 	@Override

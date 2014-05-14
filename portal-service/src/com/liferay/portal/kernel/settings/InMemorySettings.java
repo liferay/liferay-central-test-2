@@ -34,7 +34,7 @@ public class InMemorySettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
+	public Collection<String> getKeys() {
 		return new HashSet<String>(_map.keySet());
 	}
 

@@ -22,7 +22,7 @@ import com.liferay.portal.kernel.util.StringPool;
 public class SettingsHelper {
 
 	public void setValues(Settings sourceSettings, Settings targetSettings) {
-		for (String name : sourceSettings.getSetKeys()) {
+		for (String name : sourceSettings.getKeys()) {
 			String[] values = sourceSettings.getValues(
 				name, StringPool.EMPTY_ARRAY);
 
@@ -36,7 +36,7 @@ public class SettingsHelper {
 	}
 
 	protected void reset(Settings settings) {
-		for (String name : settings.getSetKeys()) {
+		for (String name : settings.getKeys()) {
 			settings.reset(name);
 		}
 	}

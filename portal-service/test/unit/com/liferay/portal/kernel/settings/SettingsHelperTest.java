@@ -33,7 +33,7 @@ public class SettingsHelperTest extends PowerMockito {
 
 		_settingsHelper.reset(settings);
 
-		Assert.assertEquals(0, settings.getSetKeys().size());
+		Assert.assertEquals(0, settings.getKeys().size());
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class SettingsHelperTest extends PowerMockito {
 
 		_settingsHelper.setValues(sourceSettings, targetSettings);
 
-		Assert.assertEquals(3, targetSettings.getSetKeys().size());
+		Assert.assertEquals(3, targetSettings.getKeys().size());
 		Assert.assertEquals(
 			"otherValue", targetSettings.getValue("otherKey", null));
 		Assert.assertEquals("value0", targetSettings.getValue("key0", null));

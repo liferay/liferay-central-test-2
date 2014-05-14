@@ -29,7 +29,7 @@ public interface Settings {
 
 	public Settings getDefaultSettings();
 
-	public Collection<String> getSetKeys();
+	public Collection<String> getKeys();
 
 	public String getValue(String key, String defaultValue);
 

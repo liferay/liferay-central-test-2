@@ -47,7 +47,7 @@ public class ParameterMapSettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
+	public Collection<String> getKeys() {
 		Set<String> setKeys = new HashSet<String>();
 
 		for (String key : _parameterMap.keySet()) {
@@ -70,7 +70,7 @@ public class ParameterMapSettings implements Settings {
 			}
 		}
 
-		setKeys.addAll(_defaultSettings.getSetKeys());
+		setKeys.addAll(_defaultSettings.getKeys());
 
 		return setKeys;
 	}

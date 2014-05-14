@@ -36,8 +36,8 @@ public class FallbackSettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
-		return _settings.getSetKeys();
+	public Collection<String> getKeys() {
+		return _settings.getKeys();
 	}
 
 	@Override

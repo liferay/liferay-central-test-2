@@ -38,8 +38,8 @@ public class BaseServiceSettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
-		return typedSettings.getSetKeys();
+	public Collection<String> getKeys() {
+		return typedSettings.getKeys();
 	}
 
 	@Override

@@ -58,7 +58,7 @@ public class PortletPreferencesSettings implements Settings {
 	}
 
 	@Override
-	public Collection<String> getSetKeys() {
+	public Collection<String> getKeys() {
 		Enumeration<String> names = _portletPreferences.getNames();
 
 		Set<String> setKeys = new HashSet<String>();
