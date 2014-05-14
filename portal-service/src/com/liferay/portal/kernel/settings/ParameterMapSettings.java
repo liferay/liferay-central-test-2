@@ -48,31 +48,32 @@ public class ParameterMapSettings implements Settings {
 
 	@Override
 	public Collection<String> getKeys() {
-		Set<String> setKeys = new HashSet<String>();
+		Set<String> keys = new HashSet<String>();
 
 		for (String key : _parameterMap.keySet()) {
-			if (key.endsWith(StringPool.DOUBLE_DASH)) {
-				String name = null;
+			if (!key.endsWith(StringPool.DOUBLE_DASH)) {
+				continue;
+			}
 
-				if (key.startsWith(PREFERENCES_PREFIX)) {
-					name = key.substring(
-						_PREFERENCES_PREFIX_LENGTH, key.length() - 2);
-				}
+			String name = null;
 
-				if (key.startsWith(SETTINGS_PREFIX)) {
-					name = key.substring(
-						_SETTINGS_PREFIX_LENGTH, key.length() - 2);
-				}
+			if (key.startsWith(PREFERENCES_PREFIX)) {
+				name = key.substring(
+					PREFERENCES_PREFIX.length(), key.length() - 2);
+			}
+			else if (key.startsWith(SETTINGS_PREFIX)) {
+				name = key.substring(
+					PREFERENCES_PREFIX.length(), key.length() - 2);
+			}
 
-				if (name != null) {
-					setKeys.add(name);
-				}
+			if (name != null) {
+				keys.add(name);
 			}
 		}
 
-		setKeys.addAll(_defaultSettings.getKeys());
+		keys.addAll(_defaultSettings.getKeys());
 
-		return setKeys;
+		return keys;
 	}
 
 	@Override
@@ -132,11 +133,6 @@ public class ParameterMapSettings implements Settings {
 
 		return values;
 	}
-
-	private static final int _PREFERENCES_PREFIX_LENGTH =
-		PREFERENCES_PREFIX.length();
-
-	private static final int _SETTINGS_PREFIX_LENGTH = SETTINGS_PREFIX.length();
 
 	private Settings _defaultSettings;
 	private Map<String, String[]> _parameterMap;

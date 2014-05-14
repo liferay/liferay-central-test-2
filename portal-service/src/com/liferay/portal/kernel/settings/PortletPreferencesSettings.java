@@ -55,15 +55,15 @@ public class PortletPreferencesSettings implements Settings {
 
 	@Override
 	public Collection<String> getKeys() {
+		Set<String> keys = new HashSet<String>();
+
 		Enumeration<String> names = _portletPreferences.getNames();
 
-		Set<String> setKeys = new HashSet<String>();
-
 		while (names.hasMoreElements()) {
-			setKeys.add(names.nextElement());
+			keys.add(names.nextElement());
 		}
 
-		return setKeys;
+		return keys;
 	}
 
 	public PortletPreferences getPortletPreferences() {
