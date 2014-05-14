@@ -783,12 +783,12 @@ public class LiferaySeleniumHelper {
 
 		Match match = _screen.exists(
 			liferaySelenium.getProjectDirName() +
-			liferaySelenium.getSikuliImagesDirName() + image);
+				liferaySelenium.getSikuliImagesDirName() + image);
 
 		liferaySelenium.pause("1000");
 
 		if (match != null) {
-			throw new Exception ("Element is present");
+			throw new Exception("Element is present");
 		}
 	}
 
@@ -798,12 +798,12 @@ public class LiferaySeleniumHelper {
 
 		Match match = _screen.exists(
 			liferaySelenium.getProjectDirName() +
-			liferaySelenium.getSikuliImagesDirName() + image);
+				liferaySelenium.getSikuliImagesDirName() + image);
 
 		liferaySelenium.pause("1000");
 
 		if (match == null) {
-			throw new Exception ("Element is not present");
+			throw new Exception("Element is not present");
 		}
 	}
 
@@ -813,7 +813,7 @@ public class LiferaySeleniumHelper {
 
 		Match match = _screen.exists(
 			liferaySelenium.getProjectDirName() +
-			liferaySelenium.getSikuliImagesDirName() + image);
+				liferaySelenium.getSikuliImagesDirName() + image);
 
 		liferaySelenium.pause("1000");
 
@@ -832,7 +832,7 @@ public class LiferaySeleniumHelper {
 
 		Match match = _screen.exists(
 			liferaySelenium.getProjectDirName() +
-			liferaySelenium.getSikuliImagesDirName() + image);
+				liferaySelenium.getSikuliImagesDirName() + image);
 
 		liferaySelenium.pause("1000");
 
