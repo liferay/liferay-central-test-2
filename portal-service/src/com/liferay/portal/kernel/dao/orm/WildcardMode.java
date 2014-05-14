@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.dao.orm;
  */
 public enum WildcardMode {
 
-	SURROUND, TRAILING
+	LEADING, SURROUND, TRAILING
 
 }

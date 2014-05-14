@@ -745,7 +745,10 @@ public class CustomSQL {
 	}
 
 	protected String insertWildcard(String keyword, WildcardMode wildcardMode) {
-		if (wildcardMode == WildcardMode.SURROUND) {
+		if (wildcardMode == WildcardMode.LEADING) {
+			return StringPool.PERCENT.concat(keyword);
+		}
+		else if (wildcardMode == WildcardMode.SURROUND) {
 			return StringUtil.quote(keyword, StringPool.PERCENT);
 		}
 		else if (wildcardMode == WildcardMode.TRAILING) {
