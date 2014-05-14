@@ -32,6 +32,7 @@ public class BaseServiceSettings implements Settings {
 		typedSettings = new TypedSettings(fallbackSettings);
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return typedSettings.getDefaultSettings();
 	}

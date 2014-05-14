@@ -48,6 +48,7 @@ public class PortletPreferencesSettings implements Settings {
 		_defaultSettings = defaultSettings;
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return _defaultSettings;
 	}

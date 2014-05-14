@@ -41,6 +41,7 @@ public class ParameterMapSettings implements Settings {
 		_parameterMap = parameterMap;
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return _defaultSettings;
 	}

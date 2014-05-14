@@ -58,6 +58,7 @@ public class TypedSettings implements Settings {
 		return GetterUtil.getBoolean(value, defaultValue);
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return _settings.getDefaultSettings();
 	}

@@ -37,6 +37,7 @@ public class PropertiesSettings implements Settings {
 		_properties = properties;
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return null;
 	}

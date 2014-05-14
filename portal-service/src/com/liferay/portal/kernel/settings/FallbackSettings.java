@@ -30,6 +30,7 @@ public class FallbackSettings implements Settings {
 		_fallbackKeys = fallbackKeys;
 	}
 
+	@Override
 	public Settings getDefaultSettings() {
 		return _settings.getDefaultSettings();
 	}
