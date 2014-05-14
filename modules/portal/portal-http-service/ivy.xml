@@ -8,6 +8,7 @@
 	<info module="portal-http-service" organisation="com.liferay" />
 
 	<dependencies defaultconf="default">
+		<dependency name="org.eclipse.osgi.services" org="org.eclipse.birt.runtime" rev="3.3.100.v20120522-1822" />
 		<dependency name="org.osgi.compendium" org="org.osgi" rev="4.3.1" />
 		<dependency name="org.osgi.core" org="org.osgi" rev="4.3.1" />
 	</dependencies>
