@@ -44,17 +44,17 @@ public class PropertiesSettings implements Settings {
 
 	@Override
 	public Collection<String> getKeys() {
+		Set<String> keys = new HashSet<String>();
+
 		Enumeration<?> propertyNames = _properties.propertyNames();
 
-		Set<String> setKeys = new HashSet<String>();
-
 		while (propertyNames.hasMoreElements()) {
-			String propertyName = propertyNames.nextElement().toString();
+			String propertyName = (String)propertyNames.nextElement();
 
-			setKeys.add(propertyName);
+			keys.add(propertyName);
 		}
 
-		return setKeys;
+		return keys;
 	}
 
 	@Override
