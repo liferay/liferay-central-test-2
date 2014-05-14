@@ -65,7 +65,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	@Override
 	public Settings getGroupServiceCompanyDefaultSettings(
 			long companyId, String serviceName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return new PortletPreferencesSettings(
 			getCompanyPortletPreferences(companyId, serviceName));
@@ -104,7 +104,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	@Override
 	public List<ArchivedSettings> getPortletInstanceArchivedSettingsList(
 			long groupId, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		List<ArchivedSettings> archivedSettingsList =
 			new ArrayList<ArchivedSettings>();
@@ -124,7 +124,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	@Override
 	public Settings getPortletInstanceCompanyDefaultSettings(
 			long companyId, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return new PortletPreferencesSettings(
 			getCompanyPortletPreferences(companyId, portletId));

@@ -33,7 +33,7 @@ public class SettingsFactoryUtil {
 
 	public static Settings getCompanyServiceSettings(
 			long companyId, String serviceName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getSettingsFactory().getCompanyServiceSettings(
 			companyId, serviceName);
@@ -41,7 +41,7 @@ public class SettingsFactoryUtil {
 
 	public static Settings getGroupServiceCompanyDefaultSettings(
 			long companyId, String serviceName)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getSettingsFactory().getGroupServiceCompanyDefaultSettings(
 			companyId, serviceName);
@@ -65,7 +65,7 @@ public class SettingsFactoryUtil {
 
 	public static List<ArchivedSettings> getPortletInstanceArchivedSettingsList(
 			long groupId, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getSettingsFactory().getPortletInstanceArchivedSettingsList(
 			groupId, portletId);
@@ -73,7 +73,7 @@ public class SettingsFactoryUtil {
 
 	public static Settings getPortletInstanceCompanyDefaultSettings(
 			long companyId, String portletId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getSettingsFactory().getPortletInstanceCompanyDefaultSettings(
 			companyId, portletId);

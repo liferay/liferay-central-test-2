@@ -14,14 +14,10 @@
 
 package com.liferay.portal.kernel.settings;
 
-import java.io.IOException;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-
-import javax.portlet.ValidatorException;
 
 /**
  * @author Iván Zaera
@@ -84,7 +80,7 @@ public class InMemorySettings implements Settings {
 	}
 
 	@Override
-	public void store() throws IOException, ValidatorException {
+	public void store() {
 	}
 
 	private Map<String, String[]> _map;
