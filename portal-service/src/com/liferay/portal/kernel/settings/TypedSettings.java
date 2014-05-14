@@ -93,6 +93,11 @@ public class TypedSettings implements Settings {
 		return GetterUtil.getInteger(value, defaultValue);
 	}
 
+	@Override
+	public Collection<String> getKeys() {
+		return _settings.getKeys();
+	}
+
 	public LocalizedValuesMap getLocalizedValuesMap(String key) {
 		LocalizedValuesMap localizedValuesMap = new LocalizedValuesMap(
 			key, _defaultLocale, _availableLocales);
@@ -123,11 +128,6 @@ public class TypedSettings implements Settings {
 		String value = getValue(key, null);
 
 		return GetterUtil.getLong(value, defaultValue);
-	}
-
-	@Override
-	public Collection<String> getKeys() {
-		return _settings.getKeys();
 	}
 
 	public String getValue(String key) {

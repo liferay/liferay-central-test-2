@@ -53,10 +53,6 @@ public class PortletPreferencesSettings implements Settings {
 		return _defaultSettings;
 	}
 
-	public PortletPreferences getPortletPreferences() {
-		return _portletPreferences;
-	}
-
 	@Override
 	public Collection<String> getKeys() {
 		Enumeration<String> names = _portletPreferences.getNames();
@@ -68,6 +64,10 @@ public class PortletPreferencesSettings implements Settings {
 		}
 
 		return setKeys;
+	}
+
+	public PortletPreferences getPortletPreferences() {
+		return _portletPreferences;
 	}
 
 	@Override

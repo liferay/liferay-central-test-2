@@ -62,6 +62,11 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 	}
 
 	@Override
+	public Collection<String> getKeys() {
+		return _getSettings().getKeys();
+	}
+
+	@Override
 	public Date getModifiedDate() {
 		return _portletItem.getModifiedDate();
 	}
@@ -69,11 +74,6 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 	@Override
 	public String getName() {
 		return _portletItem.getName();
-	}
-
-	@Override
-	public Collection<String> getKeys() {
-		return _getSettings().getKeys();
 	}
 
 	@Override
