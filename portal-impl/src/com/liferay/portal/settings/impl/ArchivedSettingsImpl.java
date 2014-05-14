@@ -63,7 +63,9 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public Collection<String> getKeys() {
-		return _getSettings().getKeys();
+		Settings settings = _getSettings(); 
+		
+		return settings.getKeys();
 	}
 
 	@Override
@@ -83,36 +85,48 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public String getValue(String key, String defaultValue) {
-		return _getSettings().getValue(key, defaultValue);
+		Settings settings = _getSettings(); 
+		
+		return settings.getValue(key, defaultValue);
 	}
 
 	@Override
 	public String[] getValues(String key, String[] defaultValue) {
-		return _getSettings().getValues(key, defaultValue);
+		Settings settings = _getSettings(); 
+		
+		return settings.getValues(key, defaultValue);
 	}
 
 	@Override
 	public void reset(String key) {
-		_getSettings().reset(key);
+		Settings settings = _getSettings(); 
+		
+		settings.reset(key);
 	}
 
 	@Override
 	public Settings setValue(String key, String value) {
-		_getSettings().setValue(key, value);
+		Settings settings = _getSettings(); 
+		
+		settings.setValue(key, value);
 
 		return this;
 	}
 
 	@Override
 	public Settings setValues(String key, String[] values) {
-		_getSettings().setValues(key, values);
+		Settings settings = _getSettings(); 
+		
+		settings.setValues(key, values);
 
 		return this;
 	}
 
 	@Override
 	public void store() throws IOException, ValidatorException {
-		_getSettings().store();
+		Settings settings = _getSettings(); 
+		
+		settings.store();
 	}
 
 	private Settings _getSettings() {
