@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.settings;
 
+import java.util.Collection;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -26,27 +28,31 @@ public class MemorySettingsTest extends PowerMockito {
 
 	@Test
 	public void testSetAndGetValue() {
-		_inMemorySettings.setValue("key", "value");
+		_memorySettings.setValue("key", "value");
+		
+		Collection<String> keys = _memorySettings.getKeys();
 
-		Assert.assertEquals(1, _inMemorySettings.getKeys().size());
-		Assert.assertEquals("value", _inMemorySettings.getValue("key", null));
+		Assert.assertEquals(1, keys.size());
+		Assert.assertEquals("value", _memorySettings.getValue("key", null));
 	}
 
 	@Test
 	public void testSetAndGetValues() {
-		_inMemorySettings.setValues("key", new String[] {"value0", "value1"});
+		_memorySettings.setValues("key", new String[] {"value0", "value1"});
 
-		Assert.assertEquals(1, _inMemorySettings.getKeys().size());
+		Collection<String> keys = _memorySettings.getKeys();
 
-		String[] values = _inMemorySettings.getValues("key", null);
+		Assert.assertEquals(1, keys.size());
+
+		String[] values = _memorySettings.getValues("key", null);
 
 		Assert.assertEquals(2, values.length);
 		Assert.assertEquals("value0", values[0]);
 		Assert.assertEquals("value1", values[1]);
 
-		Assert.assertEquals("value0", _inMemorySettings.getValue("key", null));
+		Assert.assertEquals("value0", _memorySettings.getValue("key", null));
 	}
 
-	private MemorySettings _inMemorySettings = new MemorySettings();
+	private MemorySettings _memorySettings = new MemorySettings();
 
 }

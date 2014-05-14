@@ -24,10 +24,6 @@ import java.util.Map;
  */
 public class MemorySettings implements Settings {
 
-	public MemorySettings() {
-		_map = new HashMap<String, String[]>();
-	}
-
 	@Override
 	public Settings getDefaultSettings() {
 		return null;
@@ -83,6 +79,6 @@ public class MemorySettings implements Settings {
 	public void store() {
 	}
 
-	private Map<String, String[]> _map;
+	private Map<String, String[]> _map = new HashMap<String, String[]>();
 
 }
