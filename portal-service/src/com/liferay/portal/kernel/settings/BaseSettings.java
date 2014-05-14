@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.settings;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * @author Brian Wing Shun Chan
  */
@@ -24,6 +26,22 @@ public abstract class BaseSettings implements Settings {
 		for (String key : getKeys()) {
 			reset(key);
 		}
+	}
+
+	@Override
+	public Settings setValues(Settings settings) {
+		for (String key : settings.getKeys()) {
+			String[] values = settings.getValues(key, StringPool.EMPTY_ARRAY);
+
+			if (values.length == 1) {
+				setValue(key, values[0]);
+			}
+			else {
+				setValues(key, values);
+			}
+		}
+
+		return this;
 	}
 
 }

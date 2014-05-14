@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.settings.ArchivedSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
-import com.liferay.portal.kernel.settings.SettingsHelper;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -179,6 +178,10 @@ public class EditArchivedSetupsAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		Settings portletInstanceSettings =
+			SettingsFactoryUtil.getPortletInstanceSettings(
+				themeDisplay.getLayout(), portlet.getPortletId());
+
 		String name = ParamUtil.getString(actionRequest, "name");
 
 		ArchivedSettings archivedSettings =
@@ -186,11 +189,7 @@ public class EditArchivedSetupsAction extends PortletAction {
 				themeDisplay.getSiteGroupId(), portlet.getRootPortletId(),
 				name);
 
-		Settings portletInstanceSettings =
-			SettingsFactoryUtil.getPortletInstanceSettings(
-				themeDisplay.getLayout(), portlet.getPortletId());
-
-		_settingsHelper.setValues(archivedSettings, portletInstanceSettings);
+		portletInstanceSettings.setValues(archivedSettings);
 
 		portletInstanceSettings.store();
 	}
@@ -201,10 +200,6 @@ public class EditArchivedSetupsAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Settings portletInstanceSettings =
-			SettingsFactoryUtil.getPortletInstanceSettings(
-				themeDisplay.getLayout(), portlet.getPortletId());
-
 		String name = ParamUtil.getString(actionRequest, "name");
 
 		ArchivedSettings archivedSettings =
@@ -212,11 +207,13 @@ public class EditArchivedSetupsAction extends PortletAction {
 				themeDisplay.getSiteGroupId(), portlet.getRootPortletId(),
 				name);
 
-		_settingsHelper.setValues(portletInstanceSettings, archivedSettings);
+		Settings portletInstanceSettings =
+			SettingsFactoryUtil.getPortletInstanceSettings(
+				themeDisplay.getLayout(), portlet.getPortletId());
+
+		archivedSettings.setValues(portletInstanceSettings);
 
 		archivedSettings.store();
 	}
-
-	private SettingsHelper _settingsHelper = new SettingsHelper();
 
 }

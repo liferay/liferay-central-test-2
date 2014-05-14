@@ -41,6 +41,8 @@ public interface Settings {
 
 	public Settings setValue(String key, String value);
 
+	public Settings setValues(Settings settings);
+
 	public Settings setValues(String key, String[] values);
 
 	public void store() throws IOException, ValidatorException;

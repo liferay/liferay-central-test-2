@@ -38,7 +38,7 @@ public class MemorySettingsTest extends PowerMockito {
 
 	@Test
 	public void testSetAndGetValues() {
-		_memorySettings.setValues("key", new String[] {"value0", "value1"});
+		_memorySettings.setValues("key", new String[] {"value1", "value2"});
 
 		Collection<String> keys = _memorySettings.getKeys();
 
@@ -47,10 +47,10 @@ public class MemorySettingsTest extends PowerMockito {
 		String[] values = _memorySettings.getValues("key", null);
 
 		Assert.assertEquals(2, values.length);
-		Assert.assertEquals("value0", values[0]);
-		Assert.assertEquals("value1", values[1]);
+		Assert.assertEquals("value1", values[0]);
+		Assert.assertEquals("value2", values[1]);
 
-		Assert.assertEquals("value0", _memorySettings.getValue("key", null));
+		Assert.assertEquals("value1", _memorySettings.getValue("key", null));
 	}
 
 	private MemorySettings _memorySettings = new MemorySettings();

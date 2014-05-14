@@ -24,14 +24,14 @@ import org.powermock.api.mockito.PowerMockito;
 /**
  * @author Iván Zaera
  */
-public class SettingsHelperTest extends PowerMockito {
+public class BaseSettingsTest extends PowerMockito {
 
 	@Test
 	public void testReset() {
 		Settings settings = new MemorySettings();
 
-		settings.setValue("key0", "value0");
-		settings.setValue("key1", "value1");
+		settings.setValue("key1", "value2");
+		settings.setValue("key2", "value2");
 
 		settings.reset();
 
@@ -44,24 +44,22 @@ public class SettingsHelperTest extends PowerMockito {
 	public void testSetValues() {
 		Settings sourceSettings = new MemorySettings();
 
-		sourceSettings.setValue("key0", "value0");
 		sourceSettings.setValue("key1", "value1");
+		sourceSettings.setValue("key2", "value2");
 
 		Settings targetSettings = new MemorySettings();
 
 		targetSettings.setValue("otherKey", "otherValue");
 
-		SettingsHelper settingsHelper = new SettingsHelper();
+		sourceSettings.setValues(targetSettings);
 
-		settingsHelper.setValues(sourceSettings, targetSettings);
-
-		Collection<String> keys = targetSettings.getKeys();
+		Collection<String> keys = sourceSettings.getKeys();
 
 		Assert.assertEquals(3, keys.size());
 		Assert.assertEquals(
-			"otherValue", targetSettings.getValue("otherKey", null));
-		Assert.assertEquals("value0", targetSettings.getValue("key0", null));
-		Assert.assertEquals("value1", targetSettings.getValue("key1", null));
+			"otherValue", sourceSettings.getValue("otherKey", null));
+		Assert.assertEquals("value1", sourceSettings.getValue("key1", null));
+		Assert.assertEquals("value2", sourceSettings.getValue("key2", null));
 	}
 
 }
