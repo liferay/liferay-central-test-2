@@ -85,17 +85,16 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 		PortletItem portletItem = null;
 
-		String className = PortletPreferences.class.getName();
-
 		try {
 			portletItem = PortletItemLocalServiceUtil.getPortletItem(
-				groupId, name, portletId, className);
+				groupId, name, portletId, PortletPreferences.class.getName());
 		}
 		catch (NoSuchPortletItemException nspie) {
 			long userId = PrincipalThreadLocal.getUserId();
 
 			portletItem = PortletItemLocalServiceUtil.updatePortletItem(
-				userId, groupId, name, portletId, className);
+				userId, groupId, name, portletId,
+				PortletPreferences.class.getName());
 		}
 
 		return new ArchivedSettingsImpl(portletItem);
@@ -137,10 +136,9 @@ public class SettingsFactoryImpl implements SettingsFactory {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		long companyId = group.getCompanyId();
-
 		return new PortletPreferencesSettings(
-			getGroupPortletPreferences(companyId, groupId, portletId));
+			getGroupPortletPreferences(
+				group.getCompanyId(), groupId, portletId));
 	}
 
 	@Override
