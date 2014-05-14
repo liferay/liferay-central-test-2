@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.settings;
+package com.liferay.portal.kernel.settings;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncStringWriter;
 import com.liferay.portal.kernel.util.StringUtil;

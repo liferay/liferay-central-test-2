@@ -14,11 +14,11 @@
 
 package com.liferay.portal.settings.impl;
 
+import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.settings.Settings;
 import com.liferay.util.ContentUtil;
 
 import java.util.Collection;

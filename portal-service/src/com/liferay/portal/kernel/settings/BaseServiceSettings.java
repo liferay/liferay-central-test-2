@@ -12,81 +12,65 @@
  * details.
  */
 
-package com.liferay.portal.settings;
+package com.liferay.portal.kernel.settings;
 
 import java.io.IOException;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
 
 import javax.portlet.ValidatorException;
 
 /**
  * @author Iván Zaera
  */
-public class InMemorySettings implements Settings {
+public class BaseServiceSettings implements Settings {
 
-	public InMemorySettings() {
-		_map = new HashMap<String, String[]>();
+	public BaseServiceSettings(Settings settings, FallbackKeys fallbackKeys) {
+		FallbackSettings fallbackSettings = new FallbackSettings(
+			settings, fallbackKeys);
+
+		typedSettings = new TypedSettings(fallbackSettings);
 	}
 
-	@Override
 	public Settings getDefaultSettings() {
-		return null;
+		return typedSettings.getDefaultSettings();
 	}
 
 	@Override
 	public Collection<String> getSetKeys() {
-		return new HashSet<String>(_map.keySet());
+		return typedSettings.getSetKeys();
 	}
 
 	@Override
 	public String getValue(String key, String defaultValue) {
-		String[] values = _map.get(key);
-
-		if (values == null) {
-			return defaultValue;
-		}
-
-		return values[0];
+		return typedSettings.getValue(key, defaultValue);
 	}
 
 	@Override
 	public String[] getValues(String key, String[] defaultValue) {
-		String[] values = _map.get(key);
-
-		if (values == null) {
-			return defaultValue;
-		}
-
-		return values;
+		return typedSettings.getValues(key, defaultValue);
 	}
 
 	@Override
 	public void reset(String key) {
-		_map.remove(key);
+		typedSettings.reset(key);
 	}
 
 	@Override
 	public Settings setValue(String key, String value) {
-		_map.put(key, new String[] { value });
-
-		return this;
+		return typedSettings.setValue(key, value);
 	}
 
 	@Override
 	public Settings setValues(String key, String[] values) {
-		_map.put(key, values);
-
-		return this;
+		return typedSettings.setValues(key, values);
 	}
 
 	@Override
 	public void store() throws IOException, ValidatorException {
+		typedSettings.store();
 	}
 
-	private Map<String, String[]> _map;
+	protected TypedSettings typedSettings;
 
 }

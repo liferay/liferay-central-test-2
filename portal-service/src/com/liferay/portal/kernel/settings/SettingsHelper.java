@@ -12,10 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.settings.helper;
+package com.liferay.portal.kernel.settings;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.settings.Settings;
 
 /**
  * @author Iván Zaera
