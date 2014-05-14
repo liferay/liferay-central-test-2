@@ -14,6 +14,8 @@
 
 package com.liferay.portal.kernel.settings;
 
+import java.util.Collection;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,30 +33,35 @@ public class SettingsHelperTest extends PowerMockito {
 		settings.setValue("key0", "value0");
 		settings.setValue("key1", "value1");
 
-		_settingsHelper.reset(settings);
+		settings.reset();
 
-		Assert.assertEquals(0, settings.getKeys().size());
+		Collection<String> keys = settings.getKeys();
+
+		Assert.assertEquals(0, keys.size());
 	}
 
 	@Test
 	public void testSetValues() {
 		Settings sourceSettings = new MemorySettings();
-		Settings targetSettings = new MemorySettings();
 
 		sourceSettings.setValue("key0", "value0");
 		sourceSettings.setValue("key1", "value1");
 
+		Settings targetSettings = new MemorySettings();
+
 		targetSettings.setValue("otherKey", "otherValue");
 
-		_settingsHelper.setValues(sourceSettings, targetSettings);
+		SettingsHelper settingsHelper = new SettingsHelper();
 
-		Assert.assertEquals(3, targetSettings.getKeys().size());
+		settingsHelper.setValues(sourceSettings, targetSettings);
+
+		Collection<String> keys = targetSettings.getKeys();
+
+		Assert.assertEquals(3, keys.size());
 		Assert.assertEquals(
 			"otherValue", targetSettings.getValue("otherKey", null));
 		Assert.assertEquals("value0", targetSettings.getValue("key0", null));
 		Assert.assertEquals("value1", targetSettings.getValue("key1", null));
 	}
-
-	private SettingsHelper _settingsHelper = new SettingsHelper();
 
 }

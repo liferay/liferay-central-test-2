@@ -14,6 +14,7 @@
 
 package com.liferay.portal.settings.impl;
 
+import com.liferay.portal.kernel.settings.BaseSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -31,7 +32,7 @@ import java.util.Set;
  * @author Jorge Ferrer
  * @author Iván Zaera
  */
-public class PropertiesSettings implements Settings {
+public class PropertiesSettings extends BaseSettings {
 
 	public PropertiesSettings(Properties properties) {
 		_properties = properties;

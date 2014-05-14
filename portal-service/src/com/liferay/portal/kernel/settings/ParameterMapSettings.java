@@ -28,7 +28,7 @@ import javax.portlet.ValidatorException;
 /**
  * @author Iván Zaera
  */
-public class ParameterMapSettings implements Settings {
+public class ParameterMapSettings extends BaseSettings {
 
 	public static final String PREFERENCES_PREFIX = "preferences--";
 

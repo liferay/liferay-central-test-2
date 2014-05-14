@@ -14,24 +14,15 @@
 
 package com.liferay.portal.kernel.settings;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 /**
- * @author Iván Zaera
+ * @author Brian Wing Shun Chan
  */
-public class SettingsHelper {
+public abstract class BaseSettings implements Settings {
 
-	public void setValues(Settings sourceSettings, Settings targetSettings) {
-		for (String name : sourceSettings.getKeys()) {
-			String[] values = sourceSettings.getValues(
-				name, StringPool.EMPTY_ARRAY);
-
-			if (values.length == 1) {
-				targetSettings.setValue(name, values[0]);
-			}
-			else {
-				targetSettings.setValues(name, values);
-			}
+	@Override
+	public void reset() {
+		for (String key : getKeys()) {
+			reset(key);
 		}
 	}
 

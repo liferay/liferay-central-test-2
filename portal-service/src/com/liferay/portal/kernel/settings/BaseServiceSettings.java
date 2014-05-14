@@ -23,7 +23,7 @@ import javax.portlet.ValidatorException;
 /**
  * @author Iván Zaera
  */
-public class BaseServiceSettings implements Settings {
+public abstract class BaseServiceSettings extends BaseSettings {
 
 	public BaseServiceSettings(Settings settings, FallbackKeys fallbackKeys) {
 		FallbackSettings fallbackSettings = new FallbackSettings(

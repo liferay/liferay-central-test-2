@@ -35,7 +35,7 @@ import javax.portlet.ValidatorException;
  * @author Jorge Ferrer
  * @author Iván Zaera
  */
-public class PortletPreferencesSettings implements Settings {
+public class PortletPreferencesSettings extends BaseSettings {
 
 	public PortletPreferencesSettings(PortletPreferences portletPreferences) {
 		this(portletPreferences, null);

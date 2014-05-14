@@ -35,6 +35,8 @@ public interface Settings {
 
 	public String[] getValues(String key, String[] defaultValue);
 
+	public void reset();
+
 	public void reset(String key);
 
 	public Settings setValue(String key, String value);

@@ -23,7 +23,7 @@ import javax.portlet.ValidatorException;
 /**
  * @author Iván Zaera
  */
-public class FallbackSettings implements Settings {
+public class FallbackSettings extends BaseSettings {
 
 	public FallbackSettings(Settings settings, FallbackKeys fallbackKeys) {
 		_settings = settings;

@@ -32,7 +32,7 @@ import javax.portlet.ValidatorException;
  * @author Iván Zaera
  * @author Jorge Ferrer
  */
-public class TypedSettings implements Settings {
+public class TypedSettings extends BaseSettings {
 
 	public TypedSettings(Settings settings) {
 		this(

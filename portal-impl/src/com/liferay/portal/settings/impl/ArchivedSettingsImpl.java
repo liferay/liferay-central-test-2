@@ -17,6 +17,7 @@ package com.liferay.portal.settings.impl;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.settings.ArchivedSettings;
+import com.liferay.portal.kernel.settings.BaseSettings;
 import com.liferay.portal.kernel.settings.PortletPreferencesSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.model.PortletConstants;
@@ -36,7 +37,8 @@ import javax.portlet.ValidatorException;
 /**
  * @author Iván Zaera
  */
-public class ArchivedSettingsImpl implements ArchivedSettings {
+public class ArchivedSettingsImpl
+	extends BaseSettings implements ArchivedSettings {
 
 	public ArchivedSettingsImpl(PortletItem portletItem) {
 		_portletItem = portletItem;
@@ -63,8 +65,8 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public Collection<String> getKeys() {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		return settings.getKeys();
 	}
 
@@ -85,29 +87,29 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public String getValue(String key, String defaultValue) {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		return settings.getValue(key, defaultValue);
 	}
 
 	@Override
 	public String[] getValues(String key, String[] defaultValue) {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		return settings.getValues(key, defaultValue);
 	}
 
 	@Override
 	public void reset(String key) {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		settings.reset(key);
 	}
 
 	@Override
 	public Settings setValue(String key, String value) {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		settings.setValue(key, value);
 
 		return this;
@@ -115,8 +117,8 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public Settings setValues(String key, String[] values) {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		settings.setValues(key, values);
 
 		return this;
@@ -124,8 +126,8 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 
 	@Override
 	public void store() throws IOException, ValidatorException {
-		Settings settings = _getSettings(); 
-		
+		Settings settings = _getSettings();
+
 		settings.store();
 	}
 
@@ -133,7 +135,7 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 		if (_portletPreferencesSettings != null) {
 			return _portletPreferencesSettings;
 		}
-			
+
 		PortletPreferences portletPreferences = null;
 
 		try {

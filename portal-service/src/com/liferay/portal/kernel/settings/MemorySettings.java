@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * @author Iván Zaera
  */
-public class MemorySettings implements Settings {
+public class MemorySettings extends BaseSettings {
 
 	@Override
 	public Settings getDefaultSettings() {
