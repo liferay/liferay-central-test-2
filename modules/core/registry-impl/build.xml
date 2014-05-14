@@ -6,6 +6,6 @@
 
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/core" />
 	<property name="import.shared" value="registry-api" />
-	<property name="osgi.dependencies" value="org.eclipse.osgi.jar" />
+	<property name="osgi.runtime.dependencies" value="org.eclipse.osgi.jar" />
 	<property name="plugin.name" value="com.liferay.registry.impl" />
 </project>

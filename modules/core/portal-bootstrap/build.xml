@@ -6,7 +6,7 @@
 
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/core" />
 	<property name="import.shared" value="registry-impl" />
-	<property name="osgi.dependencies" value="org.eclipse.osgi.jar,registry-impl.jar" />
-	<property name="osgi.plugin.portal.lib.jars" value="bnd.jar,spring-beans.jar,spring-context.jar,spring-core.jar" />
+	<property name="osgi.ide.dependencies" value="bnd.jar,spring-beans.jar,spring-context.jar,spring-core.jar" />
+	<property name="osgi.runtime.dependencies" value="org.eclipse.osgi.jar,registry-impl.jar" />
 	<property name="plugin.name" value="com.liferay.portal.bootstrap" />
 </project>

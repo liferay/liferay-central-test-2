@@ -105,7 +105,7 @@ public class PluginsEnvironmentBuilder {
 			List<String> dependencyJars = Collections.emptyList();
 
 			if (osgiProject) {
-				int x = content.indexOf("osgi.plugin.portal.lib.jars");
+				int x = content.indexOf("osgi.ide.dependencies");
 
 				if (x != -1) {
 					x = content.indexOf("value=\"", x);
