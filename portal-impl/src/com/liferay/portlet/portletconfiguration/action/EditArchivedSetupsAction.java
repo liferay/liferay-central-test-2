@@ -190,7 +190,7 @@ public class EditArchivedSetupsAction extends PortletAction {
 			SettingsFactoryUtil.getPortletInstanceSettings(
 				themeDisplay.getLayout(), portlet.getPortletId());
 
-		settingsHelper.setValues(archivedSettings, portletInstanceSettings);
+		_settingsHelper.setValues(archivedSettings, portletInstanceSettings);
 
 		portletInstanceSettings.store();
 	}
@@ -201,6 +201,10 @@ public class EditArchivedSetupsAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		Settings portletInstanceSettings =
+			SettingsFactoryUtil.getPortletInstanceSettings(
+				themeDisplay.getLayout(), portlet.getPortletId());
+
 		String name = ParamUtil.getString(actionRequest, "name");
 
 		ArchivedSettings archivedSettings =
@@ -208,15 +212,11 @@ public class EditArchivedSetupsAction extends PortletAction {
 				themeDisplay.getSiteGroupId(), portlet.getRootPortletId(),
 				name);
 
-		Settings portletInstanceSettings =
-				SettingsFactoryUtil.getPortletInstanceSettings(
-					themeDisplay.getLayout(), portlet.getPortletId());
-
-		settingsHelper.setValues(portletInstanceSettings, archivedSettings);
+		_settingsHelper.setValues(portletInstanceSettings, archivedSettings);
 
 		archivedSettings.store();
 	}
 
-	protected static final SettingsHelper settingsHelper = new SettingsHelper();
+	private SettingsHelper _settingsHelper = new SettingsHelper();
 
 }
