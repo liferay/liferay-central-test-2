@@ -130,27 +130,29 @@ public class ArchivedSettingsImpl implements ArchivedSettings {
 	}
 
 	private Settings _getSettings() {
-		if (_portletPreferencesSettings == null) {
-			PortletPreferences portletPreferences = null;
-
-			try {
-				long ownerId = _portletItem.getPortletItemId();
-				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
-				long plid = 0;
-				String portletId = _portletItem.getPortletId();
-
-				portletPreferences =
-					PortletPreferencesLocalServiceUtil.getPreferences(
-						_portletItem.getCompanyId(), ownerId, ownerType, plid,
-						PortletConstants.getRootPortletId(portletId));
-			}
-			catch (SystemException se) {
-				throw new RuntimeException("Unable to load named settings", se);
-			}
-
-			_portletPreferencesSettings = new PortletPreferencesSettings(
-				portletPreferences);
+		if (_portletPreferencesSettings != null) {
+			return _portletPreferencesSettings;
 		}
+			
+		PortletPreferences portletPreferences = null;
+
+		try {
+			long ownerId = _portletItem.getPortletItemId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
+			long plid = 0;
+			String portletId = _portletItem.getPortletId();
+
+			portletPreferences =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					_portletItem.getCompanyId(), ownerId, ownerType, plid,
+					PortletConstants.getRootPortletId(portletId));
+		}
+		catch (SystemException se) {
+			throw new RuntimeException("Unable to load named settings", se);
+		}
+
+		_portletPreferencesSettings = new PortletPreferencesSettings(
+			portletPreferences);
 
 		return _portletPreferencesSettings;
 	}
