@@ -753,8 +753,7 @@ public class CustomSQL {
 		}
 		else {
 			throw new IllegalArgumentException(
-				"Expected one of: " + Arrays.toString(WildcardMode.values()) +
-					"; found: " + wildcardMode);
+				"Invalid wildcard mode " + wildcardMode);
 		}
 	}
 
