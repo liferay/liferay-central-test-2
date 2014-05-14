@@ -22,9 +22,9 @@ import java.util.Map;
 /**
  * @author Iván Zaera
  */
-public class InMemorySettings implements Settings {
+public class MemorySettings implements Settings {
 
-	public InMemorySettings() {
+	public MemorySettings() {
 		_map = new HashMap<String, String[]>();
 	}
 

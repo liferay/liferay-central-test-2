@@ -22,7 +22,7 @@ import org.powermock.api.mockito.PowerMockito;
 /**
  * @author Iván Zaera
  */
-public class InMemorySettingsTest extends PowerMockito {
+public class MemorySettingsTest extends PowerMockito {
 
 	@Test
 	public void testSetAndGetValue() {
@@ -47,6 +47,6 @@ public class InMemorySettingsTest extends PowerMockito {
 		Assert.assertEquals("value0", _inMemorySettings.getValue("key", null));
 	}
 
-	private InMemorySettings _inMemorySettings = new InMemorySettings();
+	private MemorySettings _inMemorySettings = new MemorySettings();
 
 }

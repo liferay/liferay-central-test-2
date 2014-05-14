@@ -26,7 +26,7 @@ public class SettingsHelperTest extends PowerMockito {
 
 	@Test
 	public void testReset() {
-		Settings settings = new InMemorySettings();
+		Settings settings = new MemorySettings();
 
 		settings.setValue("key0", "value0");
 		settings.setValue("key1", "value1");
@@ -38,8 +38,8 @@ public class SettingsHelperTest extends PowerMockito {
 
 	@Test
 	public void testSetValues() {
-		Settings sourceSettings = new InMemorySettings();
-		Settings targetSettings = new InMemorySettings();
+		Settings sourceSettings = new MemorySettings();
+		Settings targetSettings = new MemorySettings();
 
 		sourceSettings.setValue("key0", "value0");
 		sourceSettings.setValue("key1", "value1");
