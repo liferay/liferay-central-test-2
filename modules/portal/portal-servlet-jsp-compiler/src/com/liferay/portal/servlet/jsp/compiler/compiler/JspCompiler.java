@@ -17,8 +17,8 @@ package com.liferay.portal.servlet.jsp.compiler.compiler;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.ClassLoaderUtil;
 import com.liferay.portal.servlet.jsp.compiler.compiler.internal.JspResolverFactory;
+import com.liferay.portal.util.ClassLoaderUtil;
 
 import java.io.File;
 import java.io.IOException;

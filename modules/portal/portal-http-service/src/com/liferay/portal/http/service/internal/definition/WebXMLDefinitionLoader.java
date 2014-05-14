@@ -41,8 +41,7 @@ public class WebXMLDefinitionLoader {
 		Class<?> clazz = getClass();
 
 		Document document = SAXReaderUtil.read(
-			clazz.getResource(
-				"../servlet/dependencies/default-web.xml"));
+			clazz.getResource("../servlet/dependencies/default-web.xml"));
 
 		_defaultWebXmlRootElement = document.getRootElement();
 	}
