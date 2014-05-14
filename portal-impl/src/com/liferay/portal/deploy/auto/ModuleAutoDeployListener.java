@@ -85,8 +85,7 @@ public class ModuleAutoDeployListener extends BaseAutoDeployListener {
 		Manifest manifest = null;
 
 		try {
-			jarInputStream = new JarInputStream(
-				new FileInputStream(file));
+			jarInputStream = new JarInputStream(new FileInputStream(file));
 
 			manifest = jarInputStream.getManifest();
 		}
