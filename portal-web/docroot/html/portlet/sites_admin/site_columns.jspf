@@ -36,17 +36,13 @@
 
 	names.addAll(organizationNames);
 
-	boolean organizationUser = !organizationNames.isEmpty();
-
-	row.setParameter("organizationUser", organizationUser);
+	row.setParameter("organizationUser", !organizationNames.isEmpty());
 
 	List<String> userGroupNames = SitesUtil.getUserGroupNames(curGroup, user);
 
 	names.addAll(userGroupNames);
 
-	boolean userGroupUser = !userGroupNames.isEmpty();
-
-	row.setParameter("userGroupUser", userGroupUser);
+	row.setParameter("userGroupUser", !userGroupNames.isEmpty());
 
 	if (organizationUser || userGroupUser) {
 		String message = StringPool.BLANK;
