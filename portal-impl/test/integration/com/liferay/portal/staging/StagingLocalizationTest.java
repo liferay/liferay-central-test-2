@@ -63,9 +63,9 @@ public class StagingLocalizationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		_companyLocales = LanguageUtil.getAvailableLocales(
+		_availableLocales = LanguageUtil.getAvailableLocales(
 			TestPropsValues.getCompanyId());
-		_companyDefaultLocale = LocaleThreadLocal.getDefaultLocale();
+		_defaultLocale = LocaleThreadLocal.getDefaultLocale();
 
 		CompanyTestUtil.resetCompanyLocales(
 			TestPropsValues.getCompanyId(), _locales, Locale.US);
@@ -80,51 +80,41 @@ public class StagingLocalizationTest {
 		GroupLocalServiceUtil.deleteGroup(_targetGroup);
 
 		CompanyTestUtil.resetCompanyLocales(
-			TestPropsValues.getCompanyId(), _companyLocales,
-			_companyDefaultLocale);
-	}
-
-	@Test
-	public void testChangeDefaultLocale() throws Exception {
-		enableLocalStagingChangingLocales(
-			"es_ES", "de_DE,en_US,es_ES", "en_US");
-	}
-
-	@Test
-	public void testChangeDefaultLocaleAndDefaultContentLocale()
-		throws Exception {
-
-		enableLocalStagingChangingLocales(
-			"es_ES", "de_DE,en_US,es_ES", "de_DE");
+			TestPropsValues.getCompanyId(), _availableLocales, _defaultLocale);
 	}
 
 	@Test(expected = LocaleException.class)
 	public void testRemoveSupportedLocale() throws Exception {
-		enableLocalStagingChangingLocales("es_ES", "de_DE,es_ES", "en_US");
+		testUpdateLocales("es_ES", "de_DE,es_ES", "en_US");
 	}
 
 	@Test
-	public void testSameLocales() throws Exception {
-		enableLocalStagingChangingLocales(
-			"en_US", "de_DE,en_US,es_ES", "en_US");
+	public void testUpdateDefaultLocale() throws Exception {
+		testUpdateLocales("es_ES", "de_DE,en_US,es_ES", "en_US");
 	}
 
-	protected void enableLocalStagingChangingLocales(
-			String defaultLanguageId, String languageIds,
-			String contentDefaultLanguageId)
+	@Test
+	public void testUpdateDefaultLocaleAndDefaultContentLocale()
 		throws Exception {
 
-		// Enable Staging
+		testUpdateLocales("es_ES", "de_DE,en_US,es_ES", "de_DE");
+	}
+
+	@Test
+	public void testUpdateToTheSameLocale() throws Exception {
+		testUpdateLocales("en_US", "de_DE,en_US,es_ES", "en_US");
+	}
+
+	protected void testUpdateLocales(
+			String defaultLanguageId, String languageIds,
+			String defaultContentLanguageId)
+		throws Exception {
 
 		GroupTestUtil.enableLocalStaging(_sourceGroup);
 
-		// Create Content
-
 		JournalArticle article = JournalTestUtil.addArticle(
 			_sourceGroup.getGroupId(), "Title", "content",
-			LocaleUtil.fromLanguageId(contentDefaultLanguageId));
-
-		// Export
+			LocaleUtil.fromLanguageId(defaultContentLanguageId));
 
 		File file = LayoutLocalServiceUtil.exportLayoutsAsFile(
 			_sourceGroup.getGroupId(), false, null,
@@ -134,13 +124,9 @@ public class StagingLocalizationTest {
 		CompanyTestUtil.resetCompanyLocales(
 			TestPropsValues.getCompanyId(), languageIds, defaultLanguageId);
 
-		// Import
-
 		LayoutLocalServiceUtil.importLayouts(
 			TestPropsValues.getUserId(), _targetGroup.getGroupId(), false,
 			StagingUtil.getStagingParameters(), file);
-
-		// Check the imported content
 
 		JournalArticleResource articleResource =
 			JournalArticleResourceLocalServiceUtil.
@@ -148,15 +134,14 @@ public class StagingLocalizationTest {
 					article.getArticleResourceUuid(),
 					_targetGroup.getGroupId());
 
-		Assert.assertNotNull(
-			"Article resource must not be null", articleResource);
+		Assert.assertNotNull(articleResource);
 
 		JournalArticle stagingArticle =
 			JournalArticleLocalServiceUtil.getLatestArticle(
 				articleResource.getResourcePrimKey(),
 				WorkflowConstants.STATUS_ANY, false);
 
-		if (languageIds.contains(contentDefaultLanguageId)) {
+		if (languageIds.contains(defaultContentLanguageId)) {
 			Assert.assertEquals(
 				article.getDefaultLanguageId(),
 				stagingArticle.getDefaultLanguageId());
@@ -168,7 +153,7 @@ public class StagingLocalizationTest {
 
 		for (Locale locale : _locales) {
 			if (languageIds.contains(LocaleUtil.toLanguageId(locale)) ||
-				languageIds.contains(contentDefaultLanguageId)) {
+				languageIds.contains(defaultContentLanguageId)) {
 
 				Assert.assertEquals(
 					article.getTitle(locale), stagingArticle.getTitle(locale));
@@ -181,11 +166,10 @@ public class StagingLocalizationTest {
 		}
 	}
 
-	private Locale _companyDefaultLocale;
-	private Locale[] _companyLocales;
-	private Locale[] _locales = {
-		LocaleUtil.US, LocaleUtil.GERMANY, LocaleUtil.SPAIN
-	};
+	private Locale[] _availableLocales;
+	private Locale _defaultLocale;
+	private Locale[] _locales =
+		{LocaleUtil.US, LocaleUtil.GERMANY, LocaleUtil.SPAIN};
 	private Group _sourceGroup;
 	private Group _targetGroup;
 
