@@ -307,6 +307,11 @@
 			<bean class="com.liferay.portal.servlet.DirectServletRegistryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.settings.SettingsFactoryUtil" class="com.liferay.portal.kernel.settings.SettingsFactoryUtil">
+		<property name="settingsFactory">
+			<bean class="com.liferay.portal.settings.impl.SettingsFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.spring.util.SpringFactory" class="com.liferay.portal.spring.util.SpringFactoryImpl">
 		<property name="beanDefinitions">
 			<map />
@@ -768,11 +773,6 @@
 				<value>org.apache.catalina.core.ApplicationHttpRequest</value>
 				<value>org.apache.catalina.core.ApplicationRequest</value>
 			</set>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.settings.SettingsFactoryUtil" class="com.liferay.portal.settings.SettingsFactoryUtil">
-		<property name="settingsFactory">
-			<bean class="com.liferay.portal.settings.impl.SettingsFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.util.CustomJspRegistryUtil" class="com.liferay.portal.util.CustomJspRegistryUtil">
