@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.CollectionUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
@@ -451,7 +451,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 			return Collections.emptyList();
 		}
 
-		Set<Long> userGroupIds = CollectionUtil.intersect(
+		Set<Long> userGroupIds = SetUtil.intersect(
 			groupUserGroupIds, userUserGroupIds);
 
 		if (userGroupIds.isEmpty()) {

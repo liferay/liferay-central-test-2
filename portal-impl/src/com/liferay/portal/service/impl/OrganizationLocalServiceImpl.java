@@ -33,11 +33,11 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.systemevent.SystemEvent;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.CollectionUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TreeModelFinder;
@@ -536,7 +536,7 @@ public class OrganizationLocalServiceImpl
 			return Collections.emptyList();
 		}
 
-		Set<Long> organizationIds = CollectionUtil.intersect(
+		Set<Long> organizationIds = SetUtil.intersect(
 			groupOrganizationIds, userOrganizationIds);
 
 		if (organizationIds.isEmpty()) {

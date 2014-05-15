@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.test.CodeCoverageAssertor;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -24,64 +22,56 @@ import java.util.List;
 import java.util.Set;
 
 import org.junit.Assert;
-import org.junit.ClassRule;
 import org.junit.Test;
 
 /**
  * @author Shuyang Zhou
  */
-public class CollectionUtilTest {
-
-	@ClassRule
-	public static CodeCoverageAssertor codeCoverageAssertor =
-		new CodeCoverageAssertor();
+public class SetUtilTest {
 
 	@Test
 	public void testConstructor() {
-		new CollectionUtil();
+		new SetUtil();
 	}
 
 	@Test
 	public void testIntersectEmptyShortcut() {
 		Assert.assertSame(
 			Collections.emptySet(),
-			CollectionUtil.intersect(
+			SetUtil.intersect(
 				new ArrayList<String>(), Arrays.asList("a")));
-
 		Assert.assertSame(
 			Collections.emptySet(),
-			CollectionUtil.intersect(
+			SetUtil.intersect(
 				Arrays.asList("a"), new ArrayList<String>()));
 	}
 
 	@Test
 	public void testIntersectWithoutWrapping() {
 		Set<String> set1 = new HashSet<String>(Arrays.asList("a", "b", "c"));
-
 		Set<String> set2 = new HashSet<String>(Arrays.asList("c", "d"));
 
-		Assert.assertSame(set2, CollectionUtil.intersect(set1, set2));
+		Assert.assertSame(set2, SetUtil.intersect(set1, set2));
 		Assert.assertEquals(set2, new HashSet<String>(Arrays.asList("c")));
 
 		Set<String> set3 = new HashSet<String>(Arrays.asList("c", "d", "e"));
 
-		Assert.assertSame(set1, CollectionUtil.intersect(set1, set3));
+		Assert.assertSame(set1, SetUtil.intersect(set1, set3));
 		Assert.assertEquals(set1, new HashSet<String>(Arrays.asList("c")));
 	}
 
 	@Test
 	public void testIntersectWithWrapping() {
 		List<String> list1 = Arrays.asList("a", "b", "c");
-
 		List<String> list2 = Arrays.asList("c", "d");
 
-		Set<String> set = CollectionUtil.intersect(list1, list2);
+		Set<String> set = SetUtil.intersect(list1, list2);
 
 		Assert.assertEquals(set, new HashSet<String>(Arrays.asList("c")));
 
 		List<String> list3 = Arrays.asList("c", "d", "e");
 
-		set = CollectionUtil.intersect(list1, list3);
+		set = SetUtil.intersect(list1, list3);
 
 		Assert.assertEquals(set, new HashSet<String>(Arrays.asList("c")));
 	}
