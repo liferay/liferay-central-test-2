@@ -1390,8 +1390,8 @@
 		<project-url>http://docs.codehaus.org/display/JANINO/Home</project-url>
 		<licenses>
 			<license>
-				<license-name>New BSD License</license-name>
-				<license-url>http://dist.codehaus.org/janino/new_bsd_license.txt</license-url>
+				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -1402,8 +1402,8 @@
 		<project-url>http://docs.codehaus.org/display/JANINO/Home</project-url>
 		<licenses>
 			<license>
-				<license-name>New BSD License</license-name>
-				<license-url>http://dist.codehaus.org/janino/new_bsd_license.txt</license-url>
+				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
@@ -2085,8 +2085,8 @@
 		<project-url>http://docs.codehaus.org/display/JANINO/Home</project-url>
 		<licenses>
 			<license>
-				<license-name>New BSD License</license-name>
-				<license-url>http://dist.codehaus.org/janino/new_bsd_license.txt</license-url>
+				<license-name>BSD Style License</license-name>
+				<license-url>http://en.wikipedia.org/wiki/BSD_licenses</license-url>
 			</license>
 		</licenses>
 	</library>
