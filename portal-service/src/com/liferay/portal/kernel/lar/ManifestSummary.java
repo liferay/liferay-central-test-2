@@ -126,9 +126,9 @@ public class ManifestSummary implements Serializable {
 		manifestSummary._configurationPortletOptions =
 			new HashMap<String, String[]> (
 				manifestSummary._configurationPortletOptions);
+		manifestSummary._dataPortlets = new ArrayList<Portlet>(_dataPortlets);
 		manifestSummary._layoutPortlets = new ArrayList<Portlet>(
 			_layoutPortlets);
-		manifestSummary._dataPortlets = new ArrayList<Portlet>(_dataPortlets);
 
 		if (_exportDate != null) {
 			manifestSummary.setExportDate(new Date(_exportDate.getTime()));
