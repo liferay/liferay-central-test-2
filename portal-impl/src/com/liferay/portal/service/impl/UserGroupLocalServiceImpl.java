@@ -438,14 +438,15 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 	public List<UserGroup> getGroupUserUserGroups(long groupId, long userId)
 		throws PortalException, SystemException {
 
-		List<Long> groupUserGroupIds = groupPersistence.getUserGroupIds(
+		List<Long> groupUserGroupIds = groupPersistence.getUserGroupPrimaryKeys(
 			groupId);
 
 		if (groupUserGroupIds.isEmpty()) {
 			return Collections.emptyList();
 		}
 
-		List<Long> userUserGroupIds = userPersistence.getUserGroupIds(userId);
+		List<Long> userUserGroupIds = userPersistence.getUserGroupPrimaryKeys(
+			userId);
 
 		if (userUserGroupIds.isEmpty()) {
 			return Collections.emptyList();
