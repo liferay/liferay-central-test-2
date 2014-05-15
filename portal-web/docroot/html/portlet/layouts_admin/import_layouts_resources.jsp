@@ -119,11 +119,6 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 </portlet:actionURL>
 
 <aui:form action="<%= importPagesURL %>" cssClass="lfr-export-dialog" method="post" name="fm1">
-	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL %>" type="hidden" value="<%= true %>" />
-	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_SETUP_ALL %>" type="hidden" value="<%= true %>" />
-	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS_ALL %>" type="hidden" value="<%= true %>" />
-	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES_ALL %>" type="hidden" value="<%= true %>" />
-
 	<portlet:renderURL var="portletURL">
 		<portlet:param name="struts_action" value="/layouts_admin/import_layouts" />
 		<portlet:param name="tabs2" value="current-and-previous" />
@@ -132,6 +127,11 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 	</portlet:renderURL>
 
 	<aui:input name="redirect" type="hidden" value="<%= portletURL.toString() %>" />
+
+	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS_ALL %>" type="hidden" value="<%= true %>" />
+	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_CONFIGURATION_ALL %>" type="hidden" value="<%= true %>" />
+	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_SETUP_ALL %>" type="hidden" value="<%= true %>" />
+	<aui:input name="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES_ALL %>" type="hidden" value="<%= true %>" />
 
 	<div class="export-dialog-tree">
 		<div id="<portlet:namespace />importConfiguration">
@@ -197,9 +197,8 @@ ManifestSummary manifestSummary = ExportImportHelperUtil.getManifestSummary(user
 
 			<c:if test="<%= !dataPortlets.isEmpty() %>">
 				<aui:fieldset cssClass="options-group" label="content">
-					<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= true %>" />
-
 					<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA %>" type="hidden" value="<%= true %>" />
+					<aui:input name="<%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="<%= true %>" />
 
 					<ul class="lfr-tree unstyled">
 						<li class="tree-item">
