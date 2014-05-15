@@ -1060,17 +1060,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl<${entity.name}> imple
 		}
 
 		@Override
-		@SuppressWarnings("unused")
 		public void prepareLocalizedFieldsForImport() throws LocaleException {
-			Locale defaultLocale = LocaleUtil.fromLanguageId(
-				getDefaultLanguageId());
+			Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 
-			Locale[] availableLocales = LocaleUtil.fromLanguageIds(
-				getAvailableLanguageIds());
+			Locale[] availableLocales = LocaleUtil.fromLanguageIds(getAvailableLanguageIds());
 
-			Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(
-				${entity.name}.class.getName(), getPrimaryKey(), defaultLocale,
-				availableLocales);
+			Locale defaultImportLocale = LocalizationUtil.getDefaultImportLocale(${entity.name}.class.getName(), getPrimaryKey(), defaultLocale, availableLocales);
 
 			prepareLocalizedFieldsForImport(defaultImportLocale);
 		}
