@@ -412,26 +412,26 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			return stagingGroup;
 		}
 
-		// Copy localization settings
-
 		UnicodeProperties liveTypeSettingsProperties =
 			liveGroup.getTypeSettingsProperties();
 
-		String liveLanguageId = liveTypeSettingsProperties.getProperty(
-			"languageId", LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
-		String liveLocales = liveTypeSettingsProperties.getProperty(
-			PropsKeys.LOCALES);
-
-		UnicodeProperties stageTypeSettingsProperties =
+		UnicodeProperties stagingTypeSettingsProperties =
 			stagingGroup.getTypeSettingsProperties();
 
-		stageTypeSettingsProperties.setProperty(
+		stagingTypeSettingsProperties.setProperty(
+			PropsKeys.LOCALES,
+			liveTypeSettingsProperties.getProperty(PropsKeys.LOCALES));
+		stagingTypeSettingsProperties.setProperty(
 			"inheritLocales", Boolean.FALSE.toString());
-		stageTypeSettingsProperties.setProperty("languageId", liveLanguageId);
-		stageTypeSettingsProperties.setProperty(PropsKeys.LOCALES, liveLocales);
+		stagingTypeSettingsProperties.setProperty(
+			"languageId",
+			liveTypeSettingsProperties.getProperty(
+				"languageId",
+				LocaleUtil.toLanguageId(LocaleUtil.getDefault())));
 
 		return groupLocalService.updateGroup(
-			stagingGroup.getGroupId(), stageTypeSettingsProperties.toString());
+			stagingGroup.getGroupId(),
+			stagingTypeSettingsProperties.toString());
 	}
 
 	protected void clearLastPublishDate(long groupId, boolean privateLayout)
