@@ -412,10 +412,9 @@ public class PortalInstances {
 			long userId = 0;
 
 			try {
-				User currentUser = UserLocalServiceUtil.getUser(
-					currentThreadUserId);
+				User user = UserLocalServiceUtil.getUser(currentThreadUserId);
 
-				if (currentUser.getCompanyId() == companyId) {
+				if (user.getCompanyId() == companyId) {
 					userId = currentThreadUserId;
 				}
 			}
