@@ -636,7 +636,6 @@ public class PollsChoiceModelImpl extends BaseModelImpl<PollsChoice>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

@@ -830,7 +830,6 @@ public class MDRActionModelImpl extends BaseModelImpl<MDRAction>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

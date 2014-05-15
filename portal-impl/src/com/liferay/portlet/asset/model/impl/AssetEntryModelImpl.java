@@ -1235,7 +1235,6 @@ public class AssetEntryModelImpl extends BaseModelImpl<AssetEntry>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

@@ -1050,7 +1050,6 @@ public class DDMTemplateModelImpl extends BaseModelImpl<DDMTemplate>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

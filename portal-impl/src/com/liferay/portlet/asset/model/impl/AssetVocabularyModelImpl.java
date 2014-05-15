@@ -748,7 +748,6 @@ public class AssetVocabularyModelImpl extends BaseModelImpl<AssetVocabulary>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

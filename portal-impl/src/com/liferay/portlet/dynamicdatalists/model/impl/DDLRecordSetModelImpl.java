@@ -783,7 +783,6 @@ public class DDLRecordSetModelImpl extends BaseModelImpl<DDLRecordSet>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

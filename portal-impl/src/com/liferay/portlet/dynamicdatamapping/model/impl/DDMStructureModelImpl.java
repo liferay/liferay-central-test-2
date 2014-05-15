@@ -957,7 +957,6 @@ public class DDMStructureModelImpl extends BaseModelImpl<DDMStructure>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

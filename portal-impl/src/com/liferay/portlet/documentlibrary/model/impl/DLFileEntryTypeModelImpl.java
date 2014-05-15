@@ -748,7 +748,6 @@ public class DLFileEntryTypeModelImpl extends BaseModelImpl<DLFileEntryType>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 

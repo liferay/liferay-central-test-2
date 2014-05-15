@@ -1680,7 +1680,6 @@ public class JournalArticleModelImpl extends BaseModelImpl<JournalArticle>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public void prepareLocalizedFieldsForImport() throws LocaleException {
 		Locale defaultLocale = LocaleUtil.fromLanguageId(getDefaultLanguageId());
 
