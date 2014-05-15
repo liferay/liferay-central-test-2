@@ -1033,7 +1033,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			 * @throws SystemException if a system exception occurred
 			 */
 			@Override
-			public List<Long> get${tempEntity.name}Ids(${entity.PKClassName} pk) throws SystemException {
+			public List<Long> get${tempEntity.name}PrimaryKeys(${entity.PKClassName} pk) throws SystemException {
 				long[] pks = ${entity.varName}To${tempEntity.name}TableMapper.getRightPrimaryKeys(pk);
 
 				return ListUtil.toList(pks);
