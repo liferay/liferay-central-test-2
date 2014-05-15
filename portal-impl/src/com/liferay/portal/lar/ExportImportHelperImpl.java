@@ -1888,9 +1888,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		}
 
 		return MapUtil.getBoolean(
-				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
-					portlet.getRootPortletId());
+			parameterMap,
+			PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
+				portlet.getRootPortletId());
 	}
 
 	protected String getExportPortletPreferencesUuid(
@@ -2152,9 +2152,9 @@ public class ExportImportHelperImpl implements ExportImportHelper {
 		}
 
 		return MapUtil.getBoolean(
-				parameterMap,
-				PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
-					portlet.getRootPortletId());
+			parameterMap,
+			PortletDataHandlerKeys.PORTLET_DATA + StringPool.UNDERLINE +
+				portlet.getRootPortletId());
 	}
 
 	protected Long getImportPortletPreferencesNewPrimaryKey(
