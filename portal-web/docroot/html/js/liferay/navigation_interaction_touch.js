@@ -1,11 +1,11 @@
 AUI.add(
 	'liferay-navigation-interaction-touch',
 	function(A) {
+		var ANDROID = A.UA.android;
+
+		var ANDROID_LEGACY = (ANDROID && ANDROID < 4.4);
+
 		var STR_OPEN = 'open';
-
-		var android = A.UA.android;
-
-		var androidLegacy = (android && android < 4.4);
 
 		A.mix(
 			Liferay.NavigationInteraction.prototype,
@@ -28,7 +28,7 @@ AUI.add(
 
 						var outsideEvents = ['clickoutside', 'touchendoutside'];
 
-						if (androidLegacy) {
+						if (ANDROID_LEGACY) {
 							outsideEvents = outsideEvents[0];
 						}
 
@@ -69,7 +69,7 @@ AUI.add(
 
 						navigation.delegate('tap', instance._onTouchClick, '.lfr-nav-child-toggle', instance);
 
-						if (androidLegacy) {
+						if (ANDROID_LEGACY) {
 							navigation.delegate(
 								'click',
 								function(event) {
