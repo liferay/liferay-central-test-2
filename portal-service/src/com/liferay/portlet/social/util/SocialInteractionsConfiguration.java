@@ -28,14 +28,15 @@ public class SocialInteractionsConfiguration {
 		boolean socialInteractionsAnyUserEnabled,
 		boolean socialInteractionsSitesEnabled,
 		boolean socialInteractionsSocialRelationTypesEnabled,
-		String socialRelationTypes) {
+		String socialInteractionsSocialRelationTypes) {
 
 		_socialInteractionsEnabled = socialInteractionsEnabled;
 		_socialInteractionsAnyUserEnabled = socialInteractionsAnyUserEnabled;
 		_socialInteractionsSitesEnabled = socialInteractionsSitesEnabled;
 		_socialInteractionSocialRelationTypesEnabled =
 			socialInteractionsSocialRelationTypesEnabled;
-		_socialInteractionsSocialRelationTypes = socialRelationTypes;
+		_socialInteractionsSocialRelationTypes =
+			socialInteractionsSocialRelationTypes;
 
 		_socialInteractionsSocialRelationTypesArray =
 			GetterUtil.getIntegerValues(
