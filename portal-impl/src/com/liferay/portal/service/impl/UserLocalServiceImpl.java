@@ -1025,7 +1025,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  headerMap the header map from the authentication request
 	 * @param  parameterMap the parameter map from the authentication request
 	 * @param  resultsMap the map of authentication results (may be nil). After
-	 *         a succesful authentication the user's primary key will be placed
+	 *         a successful authentication the user's primary key will be placed
 	 *         under the key <code>userId</code>.
 	 * @return the authentication status. This can be {@link
 	 *         com.liferay.portal.security.auth.Authenticator#FAILURE}
@@ -1060,7 +1060,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  headerMap the header map from the authentication request
 	 * @param  parameterMap the parameter map from the authentication request
 	 * @param  resultsMap the map of authentication results (may be nil). After
-	 *         a succesful authentication the user's primary key will be placed
+	 *         a successful authentication the user's primary key will be placed
 	 *         under the key <code>userId</code>.
 	 * @return the authentication status. This can be {@link
 	 *         com.liferay.portal.security.auth.Authenticator#FAILURE}
@@ -1095,7 +1095,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  headerMap the header map from the authentication request
 	 * @param  parameterMap the parameter map from the authentication request
 	 * @param  resultsMap the map of authentication results (may be nil). After
-	 *         a succesful authentication the user's primary key will be placed
+	 *         a successful authentication the user's primary key will be placed
 	 *         under the key <code>userId</code>.
 	 * @return the authentication status. This can be {@link
 	 *         com.liferay.portal.security.auth.Authenticator#FAILURE}
@@ -1232,7 +1232,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  method the request method
 	 * @param  uri the request URI
 	 * @param  response the authentication response hash
-	 * @return the user's primary key if authentication is succesful;
+	 * @return the user's primary key if authentication is successful;
 	 *         <code>0</code> otherwise
 	 * @throws PortalException if a portal exception occurred
 	 */
@@ -5597,7 +5597,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @param  headerMap the header map from the authentication request
 	 * @param  parameterMap the parameter map from the authentication request
 	 * @param  resultsMap the map of authentication results (may be nil). After
-	 *         a succesful authentication the user's primary key will be placed
+	 *         a successful authentication the user's primary key will be placed
 	 *         under the key <code>userId</code>.
 	 * @return the authentication status. This can be {@link
 	 *         com.liferay.portal.security.auth.Authenticator#FAILURE}
