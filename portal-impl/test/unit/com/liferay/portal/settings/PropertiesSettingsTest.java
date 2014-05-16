@@ -14,7 +14,7 @@
 
 package com.liferay.portal.settings;
 
-import com.liferay.portal.settings.impl.PropertiesSettings;
+import com.liferay.portal.settings.PropertiesSettings;
 
 import java.util.Properties;
 
