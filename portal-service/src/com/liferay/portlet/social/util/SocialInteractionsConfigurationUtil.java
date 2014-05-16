@@ -31,38 +31,34 @@ public class SocialInteractionsConfigurationUtil {
 
 	public static SocialInteractionsConfiguration
 		getSocialInteractionsConfiguration(
-				long companyId, HttpServletRequest request)
-			throws SystemException {
+			long companyId, HttpServletRequest request)
+		throws SystemException {
 
-		PortletPreferences companyPortletPreferences =
-			PrefsPropsUtil.getPreferences(companyId, true);
-
-		boolean socialInteractionsEnabled = PrefsParamUtil.getBoolean(
-			companyPortletPreferences, request, "socialInteractionsEnabled",
-			true);
+		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
+			companyId, true);
 
 		boolean socialInteractionsAnyUserEnabled = PrefsParamUtil.getBoolean(
-			companyPortletPreferences, request,
+			portletPreferences, request,
 			"socialInteractionsAnyUserEnabled", true);
-
+		boolean socialInteractionsEnabled = PrefsParamUtil.getBoolean(
+			portletPreferences, request, "socialInteractionsEnabled",
+			true);
 		boolean socialInteractionsSitesEnabled = PrefsParamUtil.getBoolean(
-			companyPortletPreferences, request,
+			portletPreferences, request,
 			"socialInteractionsSitesEnabled", true);
-
+		String socialInteractionsSocialRelationTypes =
+			portletPreferences.getValue(
+				"socialInteractionsSocialRelationTypes", StringPool.BLANK);
 		boolean socialInteractionsSocialRelationTypesEnabled =
 			PrefsParamUtil.getBoolean(
-				companyPortletPreferences, request,
+				portletPreferences, request,
 				"socialInteractionsSocialRelationTypesEnabled", true);
 
-		String socialInteractionsSocialRelationTypes =
-			companyPortletPreferences.getValue(
-				"socialInteractionsSocialRelationTypes", StringPool.BLANK);
-
 		return new SocialInteractionsConfiguration(
-			socialInteractionsEnabled, socialInteractionsAnyUserEnabled,
+			socialInteractionsAnyUserEnabled, socialInteractionsEnabled,
 			socialInteractionsSitesEnabled,
-			socialInteractionsSocialRelationTypesEnabled,
-			socialInteractionsSocialRelationTypes);
+			socialInteractionsSocialRelationTypes,
+			socialInteractionsSocialRelationTypesEnabled);
 	}
 
 }

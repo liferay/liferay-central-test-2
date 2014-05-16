@@ -24,11 +24,11 @@ import com.liferay.portal.kernel.util.StringUtil;
 public class SocialInteractionsConfiguration {
 
 	public SocialInteractionsConfiguration(
-		boolean socialInteractionsEnabled,
 		boolean socialInteractionsAnyUserEnabled,
+		boolean socialInteractionsEnabled,
 		boolean socialInteractionsSitesEnabled,
-		boolean socialInteractionsSocialRelationTypesEnabled,
-		String socialInteractionsSocialRelationTypes) {
+		String socialInteractionsSocialRelationTypes,
+		boolean socialInteractionsSocialRelationTypesEnabled) {
 
 		_socialInteractionsEnabled = socialInteractionsEnabled;
 		_socialInteractionsAnyUserEnabled = socialInteractionsAnyUserEnabled;
