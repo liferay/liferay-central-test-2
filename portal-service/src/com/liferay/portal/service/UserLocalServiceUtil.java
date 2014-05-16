@@ -529,13 +529,8 @@ public class UserLocalServiceUtil {
 	* @param login either the user's email address, screen name, or primary
 	key depending on the value of <code>authType</code>
 	* @param password the user's password
-	* @return the authentication status. This can be {@link
-	com.liferay.portal.security.auth.Authenticator#FAILURE}
-	indicating that the user's credentials are invalid, {@link
-	com.liferay.portal.security.auth.Authenticator#SUCCESS}
-	indicating a successful login, or {@link
-	com.liferay.portal.security.auth.Authenticator#DNE} indicating
-	that a user with that login does not exist.
+	* @return the user's primary key if authentication is successful;
+	<code>0</code> otherwise
 	* @throws PortalException if a portal exception occurred
 	*/
 	public static long authenticateForBasic(long companyId,
