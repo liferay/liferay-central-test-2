@@ -249,7 +249,6 @@
 	<classpathentry kind="lib" path="lib/portal/poi-ooxml.jar"/>
 	<classpathentry kind="lib" path="lib/portal/poi-ooxml-schemas.jar"/>
 	<classpathentry kind="lib" path="lib/portal/poi-scratchpad.jar"/>
-	<classpathentry kind="lib" path="lib/portal/portal-ant-shared.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portal-client.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portals-bridges.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portletbridge-core.jar"/>
