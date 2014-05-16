@@ -37,7 +37,25 @@
 	<propertycopy from="testray.build.${testray.build.type}.name" name="testray.build.name" />
 	<propertycopy from="testray.product.${testray.product.type}.version" name="testray.product.version" />
 
-	<taskdef classname="com.liferay.portal.ant.FormatTask" classpathref="project.classpath" name="liferay-format" />
+	<trycatch>
+		<try>
+			<taskdef
+				classname="com.liferay.util.ant.FormatTask"
+				classpathref="project.classpath"
+				name="liferay-format"
+			/>
+		</try>
+		<catch>
+			<ant antfile="portal-service/build.xml" target="compile" inheritAll="false" />
+			<ant antfile="util-java/build.xml" target="compile" inheritAll="false" />
+
+			<taskdef
+				classname="com.liferay.util.ant.FormatTask"
+				classpathref="project.classpath"
+				name="liferay-format"
+			/>
+		</catch>
+	</trycatch>
 
 	<macrodef name="prepare-fix-pack-bundle" >
 		<sequential>
