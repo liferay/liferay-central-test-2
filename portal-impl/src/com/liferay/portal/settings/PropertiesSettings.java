@@ -104,6 +104,7 @@ public class PropertiesSettings extends BaseSettings {
 		String value = _properties.getProperty(key);
 
 		if (isLocationVariable("resource", value)) {
+		System.out.println("## here [" + getLocation("resource", value) + "]");
 			return ContentUtil.get(getLocation("resource", value));
 		}
 
