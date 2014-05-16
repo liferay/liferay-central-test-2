@@ -117,11 +117,11 @@ public class PropertiesSettingsTest {
 	private static final String _MULTIPLE_VALUES = "value0,value1,value2";
 
 	private static final String _RESOURCE_MULTIPLE_VALUES =
-		"${resource:com/liferay/portal/settings" +
+		"${resource:com/liferay/portal/settings/dependencies" +
 			"/PropertiesSettingsTestMultiple.tmpl}";
 
 	private static final String _RESOURCE_SINGLE_VALUE =
-		"${resource:com/liferay/portal/settings" +
+		"${resource:com/liferay/portal/settings/dependencies" +
 			"/PropertiesSettingsTestSingle.tmpl}";
 
 	private static final String _SINGLE_KEY = "key";
