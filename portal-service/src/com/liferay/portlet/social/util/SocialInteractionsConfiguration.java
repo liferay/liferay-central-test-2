@@ -30,13 +30,13 @@ public class SocialInteractionsConfiguration {
 		String socialInteractionsSocialRelationTypes,
 		boolean socialInteractionsSocialRelationTypesEnabled) {
 
-		_socialInteractionsEnabled = socialInteractionsEnabled;
 		_socialInteractionsAnyUserEnabled = socialInteractionsAnyUserEnabled;
+		_socialInteractionsEnabled = socialInteractionsEnabled;
 		_socialInteractionsSitesEnabled = socialInteractionsSitesEnabled;
-		_socialInteractionSocialRelationTypesEnabled =
-			socialInteractionsSocialRelationTypesEnabled;
 		_socialInteractionsSocialRelationTypes =
 			socialInteractionsSocialRelationTypes;
+		_socialInteractionSocialRelationTypesEnabled =
+			socialInteractionsSocialRelationTypesEnabled;
 
 		_socialInteractionsSocialRelationTypesArray =
 			GetterUtil.getIntegerValues(
