@@ -38,14 +38,13 @@ public class SocialInteractionsConfigurationUtil {
 			companyId, true);
 
 		boolean socialInteractionsAnyUserEnabled = PrefsParamUtil.getBoolean(
-			portletPreferences, request,
-			"socialInteractionsAnyUserEnabled", true);
-		boolean socialInteractionsEnabled = PrefsParamUtil.getBoolean(
-			portletPreferences, request, "socialInteractionsEnabled",
+			portletPreferences, request, "socialInteractionsAnyUserEnabled",
 			true);
+		boolean socialInteractionsEnabled = PrefsParamUtil.getBoolean(
+			portletPreferences, request, "socialInteractionsEnabled", true);
 		boolean socialInteractionsSitesEnabled = PrefsParamUtil.getBoolean(
-			portletPreferences, request,
-			"socialInteractionsSitesEnabled", true);
+			portletPreferences, request, "socialInteractionsSitesEnabled",
+			true);
 		String socialInteractionsSocialRelationTypes =
 			portletPreferences.getValue(
 				"socialInteractionsSocialRelationTypes", StringPool.BLANK);
