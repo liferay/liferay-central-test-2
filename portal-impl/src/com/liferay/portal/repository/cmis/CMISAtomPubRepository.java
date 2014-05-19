@@ -62,7 +62,6 @@ public class CMISAtomPubRepository extends CMISRepositoryHandler {
 		}
 		else {
 			login = PropsValues.DL_REPOSITORY_GUEST_USERNAME;
-
 			password = PropsValues.DL_REPOSITORY_GUEST_PASSWORD;
 		}
 
