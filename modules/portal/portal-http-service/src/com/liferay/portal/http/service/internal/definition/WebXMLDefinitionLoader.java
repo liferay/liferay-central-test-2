@@ -43,7 +43,9 @@ public class WebXMLDefinitionLoader {
 		ClassLoader classLoader = clazz.getClassLoader();
 
 		Document document = SAXReaderUtil.read(
-			classLoader.getResource(_DEFAULT_WEB_PATH));
+			classLoader.getResource(
+				"com/liferay/portal/http/service/internal/servlet" +
+					"/dependencies/default-web.xml"));
 
 		_defaultWebXmlRootElement = document.getRootElement();
 	}
@@ -247,10 +249,6 @@ public class WebXMLDefinitionLoader {
 			webXML.setServletDefinition(servletName, servletDefinition);
 		}
 	}
-
-	private static final String _DEFAULT_WEB_PATH =
-		"com/liferay/portal/http/service/internal/servlet/dependencies/" +
-			"default-web.xml";
 
 	private static final String _SLASH_STAR = "/*";
 
