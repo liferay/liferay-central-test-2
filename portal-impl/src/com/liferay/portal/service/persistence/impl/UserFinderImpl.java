@@ -326,11 +326,11 @@ public class UserFinderImpl
 						userGroupIds.add(group.getClassPK());
 					}
 					else {
-						roleGroupIds.add(group.getGroupId());
-
 						organizationIds.addAll(
 							GroupUtil.getOrganizationPrimaryKeys(
 								group.getGroupId()));
+
+						roleGroupIds.add(group.getGroupId());
 
 						userGroupIds.addAll(
 							GroupUtil.getUserGroupPrimaryKeys(
@@ -657,11 +657,11 @@ public class UserFinderImpl
 						userGroupIds.add(group.getClassPK());
 					}
 					else {
-						roleGroupIds.add(group.getGroupId());
-
 						organizationIds.addAll(
 							GroupUtil.getOrganizationPrimaryKeys(
 								group.getGroupId()));
+
+						roleGroupIds.add(group.getGroupId());
 
 						userGroupIds.addAll(
 							GroupUtil.getUserGroupPrimaryKeys(
