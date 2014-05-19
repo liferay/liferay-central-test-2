@@ -139,7 +139,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 	public InputStream getContentStream()
 		throws PortalException, SystemException {
 
-		InputStream contentStream = _dlFileEntry.getContentStream();
+		InputStream inputStream = _dlFileEntry.getContentStream();
 
 		try {
 			DLAppHelperLocalServiceUtil.getFileAsStream(
@@ -149,14 +149,14 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 			_log.error(e);
 		}
 
-		return contentStream;
+		return inputStream;
 	}
 
 	@Override
 	public InputStream getContentStream(String version)
 		throws PortalException, SystemException {
 
-		InputStream contentStream = _dlFileEntry.getContentStream(version);
+		InputStream inputStream = _dlFileEntry.getContentStream(version);
 
 		try {
 			DLAppHelperLocalServiceUtil.getFileAsStream(
@@ -166,7 +166,7 @@ public class LiferayFileEntry extends LiferayModel implements FileEntry {
 			_log.error(e);
 		}
 
-		return contentStream;
+		return inputStream;
 	}
 
 	@Override
