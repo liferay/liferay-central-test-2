@@ -485,7 +485,6 @@ public class LayoutExporter {
 					PortletDataHandlerKeys.PORTLET_SETUP),
 				exportPortletControlsMap.get(
 					PortletDataHandlerKeys.PORTLET_USER_PREFERENCES));
-
 			_portletExporter.exportService(
 				portletDataContext, portletId, servicesElement,
 				exportPortletControlsMap.get(

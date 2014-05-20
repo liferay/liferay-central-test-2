@@ -397,7 +397,6 @@ public class PortletExporter {
 			exportPortletControlsMap.get(PortletDataHandlerKeys.PORTLET_SETUP),
 			exportPortletControlsMap.get(
 				PortletDataHandlerKeys.PORTLET_USER_PREFERENCES));
-
 		exportService(
 			portletDataContext, portletId, rootElement,
 			exportPortletControlsMap.get(PortletDataHandlerKeys.PORTLET_SETUP));
