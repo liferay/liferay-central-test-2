@@ -16,9 +16,9 @@
 	</target>
 
 	<target name="run-selenium-jonas">
-		<app-server-update>
+		<app-server-properties-update>
 			app.server.type=jonas
-		</app-server-update>
+		</app-server-properties-update>
 
 		<if>
 			<not>

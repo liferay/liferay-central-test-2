@@ -16,9 +16,9 @@
 	</target>
 
 	<target name="run-selenium-jboss">
-		<app-server-update>
+		<app-server-properties-update>
 			app.server.type=jboss
-		</app-server-update>
+		</app-server-properties-update>
 
 		<if>
 			<not>

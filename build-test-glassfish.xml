@@ -16,9 +16,9 @@
 	</target>
 
 	<target name="run-selenium-glassfish">
-		<app-server-update>
+		<app-server-properties-update>
 			app.server.type=glassfish
-		</app-server-update>
+		</app-server-properties-update>
 
 		<if>
 			<not>

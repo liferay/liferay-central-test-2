@@ -14,9 +14,9 @@
 	</target>
 
 	<target name="run-selenium-resin">
-		<app-server-update>
+		<app-server-properties-update>
 			app.server.type=resin
-		</app-server-update>
+		</app-server-properties-update>
 
 		<if>
 			<not>
