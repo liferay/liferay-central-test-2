@@ -16,8 +16,8 @@
 
 <%
 for (int j = 0; j < metadataFields.length; j++) {
-	String value = null;
 	String iconCssClass = StringPool.BLANK;
+	String value = null;
 
 	if (metadataFields[j].equals("create-date")) {
 		iconCssClass = "icon-calendar";
