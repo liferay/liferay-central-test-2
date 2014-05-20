@@ -24,8 +24,8 @@ import com.liferay.portal.model.impl.ClassNameImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.persistence.ClassNameUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.test.portal.test.CaptureAppender;
-import com.liferay.test.portal.test.Log4JLoggerTestUtil;
+import com.liferay.test.portal.log.CaptureAppender;
+import com.liferay.test.portal.log.Log4JLoggerTestUtil;
 
 import java.util.List;
 

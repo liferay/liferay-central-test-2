@@ -32,8 +32,8 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.model.impl.AssetCategoryImpl;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryPersistence;
 import com.liferay.portlet.asset.service.persistence.AssetCategoryUtil;
-import com.liferay.test.portal.test.CaptureAppender;
-import com.liferay.test.portal.test.Log4JLoggerTestUtil;
+import com.liferay.test.portal.log.CaptureAppender;
+import com.liferay.test.portal.log.Log4JLoggerTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
