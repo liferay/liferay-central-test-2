@@ -64,7 +64,7 @@ public class IconPortletTag extends IconTag {
 					_portlet.getIcon());
 			}
 			else {
-				src = themeDisplay.getPathContext() + _DEFAULT_PORTLET_ICON;
+				src = themeDisplay.getPathContext() + "/html/icons/default.png";
 			}
 		}
 		else {
@@ -91,9 +91,6 @@ public class IconPortletTag extends IconTag {
 
 		request.setAttribute("liferay-portlet:icon_portlet:portlet", _portlet);
 	}
-
-	private static final String _DEFAULT_PORTLET_ICON =
-		"/html/icons/default.png";
 
 	private static final String _PAGE =
 		"/html/taglib/portlet/icon_portlet/page.jsp";
