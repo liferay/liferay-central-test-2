@@ -76,13 +76,11 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowOptions = ParamUtil.getBoolean(request, "inputPermissionsShowOptions");
 
 		String inputPermissionsViewRole = ParamUtil.getString(request, "inputPermissionsViewRole", InputPermissionsParamsTag.getDefaultViewRole(modelName, themeDisplay));
-
-		boolean supportsViewAction = supportedActions.contains(ActionKeys.VIEW);
 		%>
 
 		<input id="<%= uniqueNamespace %>inputPermissionsShowOptions" name="<%= namespace %>inputPermissionsShowOptions" type="hidden" value="<%= inputPermissionsShowOptions %>" />
 
-		<c:if test="<%= supportsViewAction %>">
+		<c:if test="<%= supportedActions.contains(ActionKeys.VIEW) %>">
 			<p>
 				<label class="inline-label" for="<%= namespace %>inputPermissionsViewRole">
 					<liferay-ui:message key="viewable-by" />
@@ -131,7 +129,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		</c:if>
 
 		<div class="permissions-table-container">
-			<table class="lfr-table responsive-table-horizontal <%= (inputPermissionsShowOptions || !supportsViewAction) ? "" : "hide" %>" id="<%= uniqueNamespace %>inputPermissionsTable">
+			<table class="lfr-table responsive-table-horizontal <%= (inputPermissionsShowOptions || !supportedActions.contains(ActionKeys.VIEW)) ? "" : "hide" %>" id="<%= uniqueNamespace %>inputPermissionsTable">
 			<thead>
 				<tr>
 					<th>
