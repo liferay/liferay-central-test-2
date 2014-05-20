@@ -25,8 +25,8 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.After;
@@ -62,7 +62,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyTestCase {
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), parentFolder.getFolderId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		DLAppServiceUtil.moveFileEntryToTrash(fileEntry.getFileEntryId());
 
@@ -84,7 +84,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyTestCase {
 
 		DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), parentFolder.getFolderId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		DLAppServiceUtil.moveFolderToTrash(parentFolder.getFolderId());
 
@@ -103,7 +103,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyTestCase {
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), parentFolder.getFolderId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		DLFileShortcut dlFileShortcut = DLAppTestUtil.addDLFileShortcut(
 			fileEntry, _group.getGroupId(), parentFolder.getFolderId());
@@ -129,7 +129,7 @@ public class VerifyDocumentLibraryTest extends BaseVerifyTestCase {
 
 		DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), parentFolder.getFolderId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		DLAppServiceUtil.moveFolderToTrash(parentFolder.getFolderId());
 

@@ -47,6 +47,7 @@ import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
@@ -111,11 +112,11 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String title = getSearchKeywords();
 
-		title += ServiceTestUtil.randomString(
+		title += RandomTestUtil.randomString(
 			_FILE_ENTRY_TITLE_MAX_LENGTH - title.length());
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
-			groupId, folderId, ServiceTestUtil.randomString() + ".txt", title,
+			groupId, folderId, RandomTestUtil.randomString() + ".txt", title,
 			approved);
 
 		return (DLFileEntry)fileEntry.getModel();
@@ -192,7 +193,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentBaseModelId,
-			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
+			RandomTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
 
 		return (DLFolder)folder.getModel();
 	}
@@ -328,7 +329,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 		String content = "Content: Enterprise. Open Source. For Life.";
 
 		FileEntry fileEntry = DLAppServiceUtil.updateFileEntry(
-			primaryKey, ServiceTestUtil.randomString() + ".txt",
+			primaryKey, RandomTestUtil.randomString() + ".txt",
 			ContentTypes.TEXT_PLAIN, dlFileEntry.getTitle(), StringPool.BLANK,
 			StringPool.BLANK, false, content.getBytes(), serviceContext);
 

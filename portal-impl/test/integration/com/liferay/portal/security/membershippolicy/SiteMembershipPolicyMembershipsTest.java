@@ -28,6 +28,7 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -271,7 +272,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		GroupServiceUtil.updateGroup(
 			group.getGroupId(), group.getParentGroupId(),
-			ServiceTestUtil.randomString(), group.getDescription(),
+			RandomTestUtil.randomString(), group.getDescription(),
 			group.getType(), group.isManualMembership(),
 			group.getMembershipRestriction(), group.getFriendlyURL(),
 			group.isActive(), ServiceTestUtil.getServiceContext());
@@ -283,7 +284,7 @@ public class SiteMembershipPolicyMembershipsTest
 	public void testVerifyWhenUpdatingGroupTypeSettings() throws Exception {
 		Group group = MembershipPolicyTestUtil.addGroup();
 
-		String typeSettings = ServiceTestUtil.randomString(50);
+		String typeSettings = RandomTestUtil.randomString(50);
 
 		GroupServiceUtil.updateGroup(group.getGroupId(), typeSettings);
 

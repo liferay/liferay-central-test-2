@@ -30,6 +30,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.UserTestUtil;
 
 import java.io.InputStream;
@@ -77,7 +78,7 @@ public class MBMessageServiceTest {
 
 		for (int i = 0; i < ServiceTestUtil.THREAD_COUNT; i++) {
 			UserTestUtil.addUser(
-				ServiceTestUtil.randomString(), _group.getGroupId());
+				RandomTestUtil.randomString(), _group.getGroupId());
 		}
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(

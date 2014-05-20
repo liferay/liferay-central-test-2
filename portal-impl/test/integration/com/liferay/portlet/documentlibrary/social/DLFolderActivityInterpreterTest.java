@@ -25,7 +25,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.runner.RunWith;
@@ -74,8 +74,8 @@ public class DLFolderActivityInterpreterTest
 	@Override
 	protected void renameModels() throws Exception {
 		DLAppServiceUtil.updateFolder(
-			_folder.getFolderId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), serviceContext);
+			_folder.getFolderId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override

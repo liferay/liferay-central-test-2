@@ -34,7 +34,7 @@ public class UserGroupTestUtil {
 
 		return UserGroupLocalServiceUtil.addUserGroup(
 			serviceContext.getUserId(), serviceContext.getCompanyId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(50),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(50),
 			serviceContext);
 	}
 

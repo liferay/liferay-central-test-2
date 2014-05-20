@@ -28,6 +28,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
@@ -60,8 +61,8 @@ public class AssetTagStatsServiceTest {
 		serviceContext.setAssetTagNames(new String[] {"basketball"});
 
 		JournalArticle journalArticle = JournalTestUtil.addArticle(
-			_group.getGroupId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(100), serviceContext);
+			_group.getGroupId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(100), serviceContext);
 
 		AssetTag tag = AssetTagLocalServiceUtil.getTag(
 			_group.getGroupId(), "basketball");

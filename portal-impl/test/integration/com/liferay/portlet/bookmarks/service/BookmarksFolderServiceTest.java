@@ -36,6 +36,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.List;
@@ -67,23 +68,23 @@ public class BookmarksFolderServiceTest {
 	@Test
 	public void testAddFolder() throws Exception {
 		BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 	}
 
 	@Test
 	public void testAddSubfolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksTestUtil.addFolder(
 			_group.getGroupId(), folder.getFolderId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 	}
 
 	@Test
 	public void testDeleteFolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksFolderServiceUtil.deleteFolder(folder.getFolderId());
 	}
@@ -91,7 +92,7 @@ public class BookmarksFolderServiceTest {
 	@Test
 	public void testGetFolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksFolderServiceUtil.getFolder(folder.getFolderId());
 	}
@@ -102,7 +103,7 @@ public class BookmarksFolderServiceTest {
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			folder.getFolderId(), true, serviceContext);
@@ -124,7 +125,7 @@ public class BookmarksFolderServiceTest {
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			folder.getFolderId(), true, serviceContext);
@@ -158,7 +159,7 @@ public class BookmarksFolderServiceTest {
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			folder.getFolderId(), true, serviceContext);

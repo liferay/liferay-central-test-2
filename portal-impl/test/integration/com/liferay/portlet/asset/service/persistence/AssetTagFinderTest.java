@@ -41,6 +41,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
@@ -70,7 +71,7 @@ public class AssetTagFinderTest {
 		Group siteGroup = scopeGroup.getParentGroup();
 
 		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 
 		int initialScopeGroupAssetTagsCount =
 			AssetTagFinderUtil.filterCountByG_C_N(
@@ -117,7 +118,7 @@ public class AssetTagFinderTest {
 
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 
 		int initialScopeGroupAssetTagsCount =
 			AssetTagFinderUtil.filterCountByG_N(
@@ -162,7 +163,7 @@ public class AssetTagFinderTest {
 
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 		String[] assetTagProperties = {
 			"key" + AssetTagConstants.PROPERTY_KEY_VALUE_SEPARATOR + "value"
 		};
@@ -212,7 +213,7 @@ public class AssetTagFinderTest {
 		Group siteGroup = scopeGroup.getParentGroup();
 
 		long classNameId = PortalUtil.getClassNameId(BlogsEntry.class);
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 
 		List<AssetTag> initialScopeGroupAssetTags =
 			AssetTagFinderUtil.filterFindByG_C_N(
@@ -265,7 +266,7 @@ public class AssetTagFinderTest {
 
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 
 		addAssetTag(siteGroup.getGroupId(), assetTagName, null);
 
@@ -308,7 +309,7 @@ public class AssetTagFinderTest {
 
 		Group siteGroup = scopeGroup.getParentGroup();
 
-		String assetTagName = ServiceTestUtil.randomString();
+		String assetTagName = RandomTestUtil.randomString();
 		String[] assetTagProperties = {
 			"key" + AssetTagConstants.PROPERTY_KEY_VALUE_SEPARATOR + "value"
 		};
@@ -379,7 +380,7 @@ public class AssetTagFinderTest {
 		serviceContext.setAssetTagNames(new String[] {assetTagName});
 
 		BlogsTestUtil.addEntry(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), true,
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(), true,
 			serviceContext);
 	}
 
@@ -387,9 +388,9 @@ public class AssetTagFinderTest {
 		Group group = GroupTestUtil.addGroup();
 
 		Layout layout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			group.getGroupId());
@@ -398,7 +399,7 @@ public class AssetTagFinderTest {
 			TestPropsValues.getUserId(), group.getParentGroupId(),
 			Layout.class.getName(), layout.getPlid(),
 			GroupConstants.DEFAULT_LIVE_GROUP_ID, name,
-			ServiceTestUtil.randomString(), GroupConstants.TYPE_SITE_OPEN, true,
+			RandomTestUtil.randomString(), GroupConstants.TYPE_SITE_OPEN, true,
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION,
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name), false,
 			true, serviceContext);

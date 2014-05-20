@@ -30,8 +30,8 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
@@ -318,7 +318,7 @@ public class WikiAttachmentsTest {
 		int initialTrashEntriesCount =
 			_page.getDeletedAttachmentsFileEntriesCount();
 
-		String fileName = ServiceTestUtil.randomString() + ".docx";
+		String fileName = RandomTestUtil.randomString() + ".docx";
 
 		WikiTestUtil.addWikiAttachment(
 			TestPropsValues.getUserId(), _node.getNodeId(), _page.getTitle(),

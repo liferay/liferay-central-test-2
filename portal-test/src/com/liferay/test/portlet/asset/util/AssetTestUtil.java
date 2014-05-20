@@ -24,6 +24,7 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.HashMap;
@@ -51,11 +52,11 @@ public class AssetTestUtil {
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
-		titleMap.put(locale, ServiceTestUtil.randomString());
+		titleMap.put(locale, RandomTestUtil.randomString());
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
-		descriptionMap.put(locale, ServiceTestUtil.randomString());
+		descriptionMap.put(locale, RandomTestUtil.randomString());
 
 		String[] categoryProperties = null;
 
@@ -76,7 +77,7 @@ public class AssetTestUtil {
 			groupId, userId);
 
 		return AssetTagLocalServiceUtil.addTag(
-			userId, ServiceTestUtil.randomString(), tagProperties,
+			userId, RandomTestUtil.randomString(), tagProperties,
 			serviceContext);
 	}
 
@@ -87,7 +88,7 @@ public class AssetTestUtil {
 			groupId, userId);
 
 		return AssetVocabularyLocalServiceUtil.addVocabulary(
-			userId, ServiceTestUtil.randomString(), serviceContext);
+			userId, RandomTestUtil.randomString(), serviceContext);
 	}
 
 }

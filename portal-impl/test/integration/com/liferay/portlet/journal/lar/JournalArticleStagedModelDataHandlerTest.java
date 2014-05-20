@@ -42,6 +42,7 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUti
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -120,7 +121,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, JournalFolder.class, folder);
@@ -149,7 +150,7 @@ public class JournalArticleStagedModelDataHandlerTest
 			dependentStagedModelsMap, DDMTemplate.class, ddmTemplate);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, JournalFolder.class, folder);

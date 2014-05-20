@@ -28,8 +28,8 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.mobiledevicerules.util.MDRTestUtil;
 
@@ -57,7 +57,7 @@ public class MDRRuleGroupInstanceStagedModelDataHandlerTest
 		super.setUp();
 
 		layout = LayoutTestUtil.addLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		ServiceContext serviceContext = new ServiceContext();
 

@@ -32,7 +32,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.documentlibrary.util.DLConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -81,8 +81,8 @@ public class DLSubscriptionTest extends BaseSubscriptionTestCase {
 		throws Exception {
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
-			group.getGroupId(), containerModelId,
-			ServiceTestUtil.randomString(), classTypeId);
+			group.getGroupId(), containerModelId, RandomTestUtil.randomString(),
+			classTypeId);
 
 		return fileEntry.getFileEntryId();
 	}

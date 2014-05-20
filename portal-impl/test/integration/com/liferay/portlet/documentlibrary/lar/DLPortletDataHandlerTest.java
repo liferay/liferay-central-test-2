@@ -42,6 +42,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -144,7 +145,7 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 		Folder folder = DLAppTestUtil.addFolder(
 			stagingGroup.getGroupId(), repository.getRepositoryId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		DLAppTestUtil.addFileEntry(
 			stagingGroup.getGroupId(), repository.getRepositoryId(),
@@ -168,7 +169,7 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			stagingGroup.getGroupId(), folder.getFolderId(),
-			ServiceTestUtil.randomString(),
+			RandomTestUtil.randomString(),
 			dlFileEntryType.getFileEntryTypeId());
 
 		DLAppTestUtil.addDLFileShortcut(

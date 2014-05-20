@@ -34,7 +34,6 @@ import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
 
 import java.util.List;
@@ -49,10 +48,10 @@ public class OrganizationTestUtil {
 
 		return AddressLocalServiceUtil.addAddress(
 			organization.getUserId(), organization.getModelClassName(),
-			organization.getOrganizationId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.nextLong(), ServiceTestUtil.randomLong(),
+			organization.getOrganizationId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.nextLong(), RandomTestUtil.randomLong(),
 			_getListTypeId(ListTypeConstants.ORGANIZATION_ADDRESS), false,
 			false, new ServiceContext());
 	}
@@ -70,13 +69,13 @@ public class OrganizationTestUtil {
 	public static Organization addOrganization() throws Exception {
 		return addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			ServiceTestUtil.randomString(), false);
+			RandomTestUtil.randomString(), false);
 	}
 
 	public static Organization addOrganization(boolean site) throws Exception {
 		return addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
-			ServiceTestUtil.randomString(), site);
+			RandomTestUtil.randomString(), site);
 	}
 
 	public static Organization addOrganization(
@@ -84,7 +83,7 @@ public class OrganizationTestUtil {
 		throws Exception {
 
 		User user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), false, null);
+			RandomTestUtil.randomString(), false, null);
 
 		return OrganizationLocalServiceUtil.addOrganization(
 			user.getUserId(), parentOrganizationId, name, site);
@@ -96,13 +95,13 @@ public class OrganizationTestUtil {
 		return OrgLaborLocalServiceUtil.addOrgLabor(
 			organization.getOrganizationId(),
 			_getListTypeId(ListTypeConstants.ORGANIZATION_SERVICE),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt());
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt());
 	}
 
 	public static PasswordPolicy addPasswordPolicyRel(

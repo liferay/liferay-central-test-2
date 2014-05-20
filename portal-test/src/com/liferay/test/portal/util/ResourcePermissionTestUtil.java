@@ -17,7 +17,6 @@ package com.liferay.test.portal.util;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 /**
  * @author Alberto Chaparro
@@ -29,8 +28,8 @@ public class ResourcePermissionTestUtil {
 		throws Exception {
 
 		return addResourcePermission(
-			actionIds, name, ServiceTestUtil.randomString(), roleId,
-			ServiceTestUtil.nextInt());
+			actionIds, name, RandomTestUtil.randomString(), roleId,
+			RandomTestUtil.nextInt());
 	}
 
 	public static ResourcePermission addResourcePermission(
@@ -38,7 +37,7 @@ public class ResourcePermissionTestUtil {
 		throws Exception {
 
 		return addResourcePermission(
-			actionIds, name, primKey, ServiceTestUtil.nextInt(), scope);
+			actionIds, name, primKey, RandomTestUtil.nextInt(), scope);
 	}
 
 	public static ResourcePermission addResourcePermission(

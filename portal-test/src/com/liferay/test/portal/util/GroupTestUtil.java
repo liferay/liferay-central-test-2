@@ -42,7 +42,7 @@ import java.util.Map;
 public class GroupTestUtil {
 
 	public static Group addGroup() throws Exception {
-		return addGroup(ServiceTestUtil.randomString());
+		return addGroup(RandomTestUtil.randomString());
 	}
 
 	public static Group addGroup(long userId, Layout layout) throws Exception {

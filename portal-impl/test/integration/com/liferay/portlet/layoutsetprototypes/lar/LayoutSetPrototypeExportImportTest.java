@@ -28,8 +28,8 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Map;
 
@@ -89,8 +89,7 @@ public class LayoutSetPrototypeExportImportTest
 		LayoutSetPrototypeUtil.removeAll();
 
 		LayoutSetPrototype exportedLayoutSetPrototype =
-			LayoutTestUtil.addLayoutSetPrototype(
-				ServiceTestUtil.randomString());
+			LayoutTestUtil.addLayoutSetPrototype(RandomTestUtil.randomString());
 
 		Group exportedLayoutSetPrototypeGroup =
 			exportedLayoutSetPrototype.getGroup();
@@ -98,17 +97,17 @@ public class LayoutSetPrototypeExportImportTest
 		if (layoutPrototype) {
 			LayoutPrototype exportedLayoutPrototype =
 				LayoutTestUtil.addLayoutPrototype(
-					ServiceTestUtil.randomString());
+					RandomTestUtil.randomString());
 
 			LayoutTestUtil.addLayout(
 				exportedLayoutSetPrototypeGroup.getGroupId(),
-				ServiceTestUtil.randomString(), true, exportedLayoutPrototype,
+				RandomTestUtil.randomString(), true, exportedLayoutPrototype,
 				true);
 		}
 		else {
 			LayoutTestUtil.addLayout(
 				exportedLayoutSetPrototypeGroup.getGroupId(),
-				ServiceTestUtil.randomString(), true);
+				RandomTestUtil.randomString(), true);
 		}
 
 		exportImportPortlet(PortletKeys.LAYOUT_SET_PROTOTYPE);

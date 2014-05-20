@@ -27,6 +27,7 @@ import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUti
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -40,8 +41,8 @@ public class MDRTestUtil {
 		throws Exception {
 
 		return addAction(
-			ruleGroupInstanceId, ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
+			ruleGroupInstanceId, RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
 			SimpleRedirectActionHandler.getHandlerType(), null);
 	}
 
@@ -58,8 +59,8 @@ public class MDRTestUtil {
 
 	public static MDRRule addRule(long ruleGroupId) throws Exception {
 		return addRule(
-			ruleGroupId, ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
+			ruleGroupId, RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
 			SimpleRuleHandler.getHandlerType(), null);
 	}
 
@@ -76,8 +77,8 @@ public class MDRTestUtil {
 
 	public static MDRRuleGroup addRuleGroup(long groupId) throws Exception {
 		return addRuleGroup(
-			groupId, ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap());
+			groupId, RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap());
 	}
 
 	public static MDRRuleGroup addRuleGroup(
@@ -95,7 +96,7 @@ public class MDRTestUtil {
 		throws Exception {
 
 		Layout layout = LayoutTestUtil.addLayout(
-			groupId, ServiceTestUtil.randomString());
+			groupId, RandomTestUtil.randomString());
 
 		return addRuleGroupInstance(
 			groupId, Layout.class.getName(), layout.getPlid(), ruleGroupId);

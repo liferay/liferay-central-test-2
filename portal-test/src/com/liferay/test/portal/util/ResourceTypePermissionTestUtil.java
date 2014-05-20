@@ -17,7 +17,6 @@ package com.liferay.test.portal.util;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.ResourceTypePermission;
 import com.liferay.portal.service.ResourceTypePermissionLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 /**
  * @author Alberto Chaparro
@@ -29,7 +28,7 @@ public class ResourceTypePermissionTestUtil {
 		throws Exception {
 
 		return addResourceTypePermission(
-			actionIds, groupId, name, ServiceTestUtil.nextLong());
+			actionIds, groupId, name, RandomTestUtil.nextLong());
 	}
 
 	public static ResourceTypePermission addResourceTypePermission(

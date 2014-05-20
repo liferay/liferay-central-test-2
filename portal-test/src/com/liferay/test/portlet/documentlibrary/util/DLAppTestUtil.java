@@ -45,6 +45,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -62,8 +63,8 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		long userId = TestPropsValues.getUserId();
-		String name = ServiceTestUtil.randomString();
-		String description = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
+		String description = RandomTestUtil.randomString();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
@@ -140,7 +141,7 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFileEntry(
-			groupId, repositoryId, folderId, ServiceTestUtil.randomString(),
+			groupId, repositoryId, folderId, RandomTestUtil.randomString(),
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL, false, true);
 	}
 
@@ -351,7 +352,7 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFileEntry(
-			groupId, repositoryId, folderId, ServiceTestUtil.randomString(),
+			groupId, repositoryId, folderId, RandomTestUtil.randomString(),
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_ALL, true, approved);
 	}
 
@@ -359,7 +360,7 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return addFolder(
-			groupId, parentFolderId, ServiceTestUtil.randomString(), false);
+			groupId, parentFolderId, RandomTestUtil.randomString(), false);
 	}
 
 	public static Folder addFolder(
@@ -442,12 +443,12 @@ public abstract class DLAppTestUtil {
 
 		Folder folder = addFolder(
 			groupId, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		long parentFolderId = folder.getFolderId();
 
-		String name = ServiceTestUtil.randomString();
-		String description = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
+		String description = RandomTestUtil.randomString();
 		String portletId = PortletKeys.DOCUMENT_LIBRARY;
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
 		boolean hidden = false;
@@ -477,7 +478,7 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		long userId = TestPropsValues.getUserId();
-		String mappedId = ServiceTestUtil.randomString();
+		String mappedId = RandomTestUtil.randomString();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
@@ -500,8 +501,8 @@ public abstract class DLAppTestUtil {
 		throws Exception {
 
 		return updateFileEntry(
-			groupId, fileEntryId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), majorVersion, true, true);
+			groupId, fileEntryId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), majorVersion, true, true);
 	}
 
 	public static FileEntry updateFileEntry(
@@ -609,8 +610,8 @@ public abstract class DLAppTestUtil {
 		serviceContext.setLayoutFullURL("http://localhost");
 
 		return updateFileEntry(
-			groupId, fileEntryId, ServiceTestUtil.randomString(),
-			ContentTypes.TEXT_PLAIN, ServiceTestUtil.randomString(),
+			groupId, fileEntryId, RandomTestUtil.randomString(),
+			ContentTypes.TEXT_PLAIN, RandomTestUtil.randomString(),
 			majorVersion, true, approved, serviceContext);
 	}
 

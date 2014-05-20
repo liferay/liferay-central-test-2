@@ -51,6 +51,7 @@ import com.liferay.test.portal.util.CompanyTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.OrganizationTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.RoleTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
@@ -190,7 +191,7 @@ public class GroupServiceTest {
 			group.getGroupId());
 
 		AssetTagLocalServiceUtil.addTag(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(), null,
 			serviceContext);
 
 		Assert.assertEquals(
@@ -198,7 +199,7 @@ public class GroupServiceTest {
 			AssetTagLocalServiceUtil.getGroupTagsCount(group.getGroupId()));
 
 		User user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), group.getGroupId());
+			RandomTestUtil.randomString(), group.getGroupId());
 
 		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(
 			user.getUserId(), group, true);
@@ -219,11 +220,11 @@ public class GroupServiceTest {
 
 	@Test
 	public void testFindGroupByDescription() throws Exception {
-		String description = ServiceTestUtil.randomString();
+		String description = RandomTestUtil.randomString();
 
 		GroupTestUtil.addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID,
-			ServiceTestUtil.randomString(), description);
+			RandomTestUtil.randomString(), description);
 
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
@@ -241,12 +242,12 @@ public class GroupServiceTest {
 	@Test
 	public void testFindGroupByDescriptionWithSpaces() throws Exception {
 		String description =
-			ServiceTestUtil.randomString() + StringPool.SPACE +
-				ServiceTestUtil.randomString();
+			RandomTestUtil.randomString() + StringPool.SPACE +
+				RandomTestUtil.randomString();
 
 		GroupTestUtil.addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID,
-			ServiceTestUtil.randomString(), description);
+			RandomTestUtil.randomString(), description);
 
 		LinkedHashMap<String, Object> groupParams =
 			new LinkedHashMap<String, Object>();
@@ -263,7 +264,7 @@ public class GroupServiceTest {
 
 	@Test
 	public void testFindGroupByName() throws Exception {
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 
 		GroupTestUtil.addGroup(GroupConstants.DEFAULT_PARENT_GROUP_ID, name);
 
@@ -282,8 +283,8 @@ public class GroupServiceTest {
 	@Test
 	public void testFindGroupByNameWithSpaces() throws Exception {
 		String name =
-			ServiceTestUtil.randomString() + StringPool.SPACE +
-				ServiceTestUtil.randomString();
+			RandomTestUtil.randomString() + StringPool.SPACE +
+				RandomTestUtil.randomString();
 
 		GroupTestUtil.addGroup(GroupConstants.DEFAULT_PARENT_GROUP_ID, name);
 
@@ -350,11 +351,11 @@ public class GroupServiceTest {
 
 		LayoutTestUtil.addLayout(
 			parentOrganizationGroup.getGroupId(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		Organization organization = OrganizationTestUtil.addOrganization(
 			parentOrganization.getOrganizationId(),
-			ServiceTestUtil.randomString(), false);
+			RandomTestUtil.randomString(), false);
 
 		UserLocalServiceUtil.addOrganizationUsers(
 			organization.getOrganizationId(),
@@ -431,7 +432,7 @@ public class GroupServiceTest {
 		themeDisplay.setScopeGroupId(group.getGroupId());
 
 		Group subgroup = GroupTestUtil.addGroup(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		String scopeLabel = subgroup.getScopeLabel(themeDisplay);
 
@@ -491,7 +492,7 @@ public class GroupServiceTest {
 		Group group = GroupTestUtil.addGroup();
 
 		Group subgroup = GroupTestUtil.addGroup(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		themeDisplay.setScopeGroupId(subgroup.getGroupId());
 
@@ -799,26 +800,24 @@ public class GroupServiceTest {
 		throws Exception {
 
 		if (site) {
-			return GroupTestUtil.addGroup(ServiceTestUtil.randomString());
+			return GroupTestUtil.addGroup(RandomTestUtil.randomString());
 		}
 		else if (layout) {
-			Group group = GroupTestUtil.addGroup(
-				ServiceTestUtil.randomString());
+			Group group = GroupTestUtil.addGroup(RandomTestUtil.randomString());
 
 			Layout scopeLayout = LayoutTestUtil.addLayout(
-				group.getGroupId(), ServiceTestUtil.randomString());
+				group.getGroupId(), RandomTestUtil.randomString());
 
 			return GroupLocalServiceUtil.addGroup(
 				TestPropsValues.getUserId(),
 				GroupConstants.DEFAULT_PARENT_GROUP_ID, Layout.class.getName(),
 				scopeLayout.getPlid(), GroupConstants.DEFAULT_LIVE_GROUP_ID,
-				ServiceTestUtil.randomString(), null, 0, true,
+				RandomTestUtil.randomString(), null, 0, true,
 				GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION, null, false,
 				true, null);
 		}
 		else if (layoutPrototype) {
-			Group group = GroupTestUtil.addGroup(
-				ServiceTestUtil.randomString());
+			Group group = GroupTestUtil.addGroup(RandomTestUtil.randomString());
 
 			group.setClassName(LayoutPrototype.class.getName());
 
@@ -1042,7 +1041,7 @@ public class GroupServiceTest {
 
 		Group group = GroupTestUtil.addGroup(
 			GroupConstants.DEFAULT_PARENT_GROUP_ID,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		try {
 			GroupTestUtil.updateDisplaySettings(

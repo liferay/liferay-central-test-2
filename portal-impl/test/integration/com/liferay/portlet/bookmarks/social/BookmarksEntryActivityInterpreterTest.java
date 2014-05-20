@@ -26,7 +26,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -72,7 +72,7 @@ public class BookmarksEntryActivityInterpreterTest
 
 	@Override
 	protected void renameModels() throws Exception {
-		_entry.setName(ServiceTestUtil.randomString());
+		_entry.setName(RandomTestUtil.randomString());
 
 		serviceContext.setCommand(Constants.UPDATE);
 

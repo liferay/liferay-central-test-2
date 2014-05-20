@@ -30,6 +30,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.HashMap;
@@ -579,11 +580,11 @@ public class LayoutFriendlyURLTest {
 		LayoutLocalServiceUtil.addLayout(
 			TestPropsValues.getUserId(), groupId, privateLayout,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(),
 			LayoutConstants.TYPE_PORTLET, StringPool.BLANK, false,
 			friendlyURLMap, serviceContext);
 	}

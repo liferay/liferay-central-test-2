@@ -24,7 +24,7 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 
 import java.util.HashMap;
@@ -57,7 +57,7 @@ public class DDMStructureStagedModelDataHandlerTest
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), DDLRecordSet.class.getName(),
 			DDMStructureTestUtil.getSampleStructureXSD(
-				ServiceTestUtil.randomString()));
+				RandomTestUtil.randomString()));
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, DDMStructure.class, ddmStructure);

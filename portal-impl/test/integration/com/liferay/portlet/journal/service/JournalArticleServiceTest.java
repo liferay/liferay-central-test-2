@@ -37,6 +37,7 @@ import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -273,7 +274,7 @@ public class JournalArticleServiceTest {
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
-			2, ServiceTestUtil.randomString());
+			2, RandomTestUtil.randomString());
 
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
@@ -300,7 +301,7 @@ public class JournalArticleServiceTest {
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
-			2, ServiceTestUtil.randomString());
+			2, RandomTestUtil.randomString());
 
 		expectedArticles.add(0, _article);
 
@@ -329,7 +330,7 @@ public class JournalArticleServiceTest {
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
-			2, ServiceTestUtil.randomString());
+			2, RandomTestUtil.randomString());
 
 		_article = updateArticleStatus(
 			_article, WorkflowConstants.STATUS_DRAFT);
@@ -356,7 +357,7 @@ public class JournalArticleServiceTest {
 		throws Exception {
 
 		List<JournalArticle> expectedArticles = addArticles(
-			2, ServiceTestUtil.randomString());
+			2, RandomTestUtil.randomString());
 
 		expectedArticles.add(0, _article);
 
@@ -432,7 +433,7 @@ public class JournalArticleServiceTest {
 			JournalArticle article = JournalTestUtil.addArticle(
 				_group.getGroupId(),
 				JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				ServiceTestUtil.randomString(), content);
+				RandomTestUtil.randomString(), content);
 
 			articles.add(article);
 		}
@@ -456,7 +457,7 @@ public class JournalArticleServiceTest {
 	protected List<JournalArticle> createArticlesWithKeyword(int count)
 		throws Exception {
 
-		_keyword = ServiceTestUtil.randomString();
+		_keyword = RandomTestUtil.randomString();
 
 		List<JournalArticle> articles = searchArticlesByKeyword(
 			_keyword, WorkflowConstants.STATUS_ANY);

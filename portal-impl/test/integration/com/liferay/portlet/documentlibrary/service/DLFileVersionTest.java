@@ -40,6 +40,7 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -267,7 +268,7 @@ public class DLFileVersionTest extends BaseDLAppTestCase {
 					ddmStructure.getStructureId(), name, StringPool.BLANK);
 
 				if (ddmStructure.isFieldPrivate(name)) {
-					field.setValue(ServiceTestUtil.randomString());
+					field.setValue(RandomTestUtil.randomString());
 				}
 
 				fields.put(field);

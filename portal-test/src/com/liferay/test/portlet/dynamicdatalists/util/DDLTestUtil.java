@@ -24,6 +24,7 @@ import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordSetLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -80,7 +81,7 @@ public class DDLTestUtil {
 	public static DDLRecordSet addRecordSet(long groupId, long structureId)
 		throws Exception {
 
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(

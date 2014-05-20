@@ -26,7 +26,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
@@ -72,7 +72,7 @@ public class BlogsActivityInterpreterTest
 
 	@Override
 	protected void renameModels() throws Exception {
-		_entry.setTitle(ServiceTestUtil.randomString());
+		_entry.setTitle(RandomTestUtil.randomString());
 
 		serviceContext.setCommand(Constants.UPDATE);
 

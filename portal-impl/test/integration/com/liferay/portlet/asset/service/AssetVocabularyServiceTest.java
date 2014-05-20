@@ -35,6 +35,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
@@ -126,14 +127,14 @@ public class AssetVocabularyServiceTest {
 	public void testLocalizedSiteAddLocalizedVocabulary() throws Exception {
 		LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
-		String title = ServiceTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
 		titleMap.put(LocaleUtil.US, title + "_US");
 		titleMap.put(LocaleUtil.SPAIN, title + "_ES");
 
-		String description = ServiceTestUtil.randomString();
+		String description = RandomTestUtil.randomString();
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
@@ -174,7 +175,7 @@ public class AssetVocabularyServiceTest {
 	public void testLocalizedSiteAddVocabulary() throws Exception {
 		LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
-		String title = ServiceTestUtil.randomString();
+		String title = RandomTestUtil.randomString();
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());

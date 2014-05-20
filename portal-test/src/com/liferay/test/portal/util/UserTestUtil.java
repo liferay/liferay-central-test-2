@@ -51,7 +51,7 @@ public class UserTestUtil {
 		throws Exception {
 
 		User groupUser = addUser(
-			ServiceTestUtil.randomString(), group.getGroupId());
+			RandomTestUtil.randomString(), group.getGroupId());
 
 		Role role = RoleLocalServiceUtil.getRole(
 			TestPropsValues.getCompanyId(), roleName);
@@ -98,7 +98,7 @@ public class UserTestUtil {
 		throws Exception {
 
 		User organizationUser = addUser(
-			ServiceTestUtil.randomString(), organization.getGroupId());
+			RandomTestUtil.randomString(), organization.getGroupId());
 
 		long[] userIds = {organizationUser.getUserId()};
 
@@ -116,13 +116,13 @@ public class UserTestUtil {
 
 	public static User addUser() throws Exception {
 		return addUser(
-			ServiceTestUtil.randomString(), TestPropsValues.getGroupId());
+			RandomTestUtil.randomString(), TestPropsValues.getGroupId());
 	}
 
 	public static User addUser(long groupId, Locale locale) throws Exception {
 		return addUser(
-			ServiceTestUtil.randomString(), false, locale,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+			RandomTestUtil.randomString(), false, locale,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			new long[] {groupId});
 	}
 
@@ -143,7 +143,7 @@ public class UserTestUtil {
 		String password1 = StringPool.BLANK;
 		String password2 = StringPool.BLANK;
 		String emailAddress =
-			ServiceTestUtil.randomString() + ServiceTestUtil.nextLong() +
+			RandomTestUtil.randomString() + RandomTestUtil.nextLong() +
 				"@liferay.com";
 		long facebookId = 0;
 		String openId = StringPool.BLANK;

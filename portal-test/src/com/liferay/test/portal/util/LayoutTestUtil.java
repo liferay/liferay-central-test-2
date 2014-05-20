@@ -51,7 +51,7 @@ public class LayoutTestUtil {
 
 	public static Layout addLayout(Group group) throws Exception {
 		return LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString(), false);
+			group.getGroupId(), RandomTestUtil.randomString(), false);
 	}
 
 	public static Layout addLayout(

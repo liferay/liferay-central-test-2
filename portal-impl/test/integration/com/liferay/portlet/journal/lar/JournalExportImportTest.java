@@ -42,7 +42,7 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -93,8 +93,8 @@ public class JournalExportImportTest extends BasePortletExportImportTestCase {
 	@Override
 	protected StagedModel addStagedModel(long groupId) throws Exception {
 		return JournalTestUtil.addArticle(
-			groupId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
+			groupId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString());
 	}
 
 	@Override

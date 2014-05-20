@@ -31,9 +31,9 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -101,14 +101,14 @@ public class JournalPortletDataHandlerTest
 	@Override
 	protected void addStagedModels() throws Exception {
 		Layout layout = LayoutTestUtil.addLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		JournalTestUtil.addArticle(
 			stagingGroup.getGroupId(), folder.getFolderId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
+			RandomTestUtil.randomString(), RandomTestUtil.randomString());
 
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			stagingGroup.getGroupId(), JournalArticle.class.getName());
@@ -125,7 +125,7 @@ public class JournalPortletDataHandlerTest
 
 		JournalTestUtil.addFeed(
 			stagingGroup.getGroupId(), layout.getPlid(),
-			ServiceTestUtil.randomString(), ddmStructure.getStructureKey(),
+			RandomTestUtil.randomString(), ddmStructure.getStructureKey(),
 			ddmTemplate.getTemplateKey(), rendererDDMTemplate.getTemplateKey());
 	}
 

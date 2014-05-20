@@ -30,6 +30,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.util.BookmarksConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -79,7 +80,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 			group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			containerModelId, ServiceTestUtil.randomString(), serviceContext);
+			containerModelId, RandomTestUtil.randomString(), serviceContext);
 
 		return folder.getFolderId();
 	}

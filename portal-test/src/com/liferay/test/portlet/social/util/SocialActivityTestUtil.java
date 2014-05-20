@@ -30,7 +30,7 @@ import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.service.SocialActivityCounterLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivityLimitLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 /**
  * @author Zsolt Berentey
@@ -58,9 +58,8 @@ public class SocialActivityTestUtil {
 		throws Exception {
 
 		return AssetEntryLocalServiceUtil.updateEntry(
-			user.getUserId(), group.getGroupId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomLong(), null,
-			null);
+			user.getUserId(), group.getGroupId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomLong(), null, null);
 	}
 
 	public static AssetEntry addAssetEntry(

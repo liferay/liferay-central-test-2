@@ -32,8 +32,8 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
@@ -70,7 +70,7 @@ public class BlogsEntryStatusTransitionTest extends BaseBlogsEntryTestCase {
 		group = GroupTestUtil.addGroup();
 
 		user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), group.getGroupId());
+			RandomTestUtil.randomString(), group.getGroupId());
 
 		entry = BlogsTestUtil.addEntry(user.getUserId(), group, false);
 	}

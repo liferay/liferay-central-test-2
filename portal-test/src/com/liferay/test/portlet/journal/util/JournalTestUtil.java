@@ -51,6 +51,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -81,8 +82,8 @@ public class JournalTestUtil {
 
 		return addArticle(
 			groupId, folderId, JournalArticleConstants.CLASSNAME_ID_DEFAULT,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
 			false, serviceContext);
 	}
 
@@ -380,7 +381,7 @@ public class JournalTestUtil {
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		for (Locale locale : _locales) {
-			descriptionMap.put(locale, ServiceTestUtil.randomString(50));
+			descriptionMap.put(locale, RandomTestUtil.randomString(50));
 		}
 
 		Map<Locale, String> contentMap = new HashMap<Locale, String>();
@@ -688,7 +689,7 @@ public class JournalTestUtil {
 	public static JournalArticle updateArticle(JournalArticle article)
 		throws Exception {
 
-		return updateArticle(article, ServiceTestUtil.randomString());
+		return updateArticle(article, RandomTestUtil.randomString());
 	}
 
 	public static JournalArticle updateArticle(
@@ -779,8 +780,8 @@ public class JournalTestUtil {
 		throws Exception {
 
 		return updateArticle(
-			article, ServiceTestUtil.randomString(), article.getContent(),
-			false, approved, ServiceTestUtil.getServiceContext());
+			article, RandomTestUtil.randomString(), article.getContent(), false,
+			approved, ServiceTestUtil.getServiceContext());
 	}
 
 	private static String _getFeedFriendlyURL(long groupId, long plid)

@@ -27,6 +27,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 /**
@@ -164,7 +165,7 @@ public class BookmarksTestUtil {
 
 		return BookmarksEntryLocalServiceUtil.updateEntry(
 			TestPropsValues.getUserId(), entry.getEntryId(), entry.getGroupId(),
-			entry.getFolderId(), ServiceTestUtil.randomString(), entry.getUrl(),
+			entry.getFolderId(), RandomTestUtil.randomString(), entry.getUrl(),
 			entry.getDescription(), serviceContext);
 	}
 

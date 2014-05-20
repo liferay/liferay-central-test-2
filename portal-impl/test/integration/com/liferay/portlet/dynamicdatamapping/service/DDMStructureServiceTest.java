@@ -32,6 +32,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class DDMStructureServiceTest extends BaseDDMServiceTestCase {
 
 	@Test
 	public void testAddStructureWithDuplicateKey() throws Exception {
-		String structureKey = ServiceTestUtil.randomString();
+		String structureKey = RandomTestUtil.randomString();
 		String storageType = StorageType.XML.getValue();
 
 		try {

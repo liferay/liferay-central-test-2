@@ -23,6 +23,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
@@ -44,8 +45,8 @@ public class WikiPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), node.getNodeId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			true, serviceContext);
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(), true,
+			serviceContext);
 	}
 
 	@Override

@@ -37,6 +37,7 @@ import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -106,12 +107,12 @@ public class JournalArticleScheduledTest {
 
 		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
-		titleMap.put(LocaleUtil.getDefault(), ServiceTestUtil.randomString());
+		titleMap.put(LocaleUtil.getDefault(), RandomTestUtil.randomString());
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
 
 		descriptionMap.put(
-			LocaleUtil.getDefault(), ServiceTestUtil.randomString());
+			LocaleUtil.getDefault(), RandomTestUtil.randomString());
 
 		String content = DDMStructureTestUtil.getSampleStructuredContent();
 

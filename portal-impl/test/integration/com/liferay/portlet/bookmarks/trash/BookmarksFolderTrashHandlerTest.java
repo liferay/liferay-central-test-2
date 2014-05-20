@@ -30,7 +30,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import org.junit.Ignore;
@@ -176,7 +176,7 @@ public class BookmarksFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return BookmarksFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), parentBaseModelId,
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
 	@Override

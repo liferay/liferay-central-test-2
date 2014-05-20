@@ -41,9 +41,9 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.upgrade.util.UpgradePortletId;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.HashMap;
@@ -110,7 +110,7 @@ public class UpgradePortletIdTest extends UpgradePortletId {
 		Group group = GroupTestUtil.addGroup();
 
 		return LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString(), false);
+			group.getGroupId(), RandomTestUtil.randomString(), false);
 	}
 
 	protected void addPortletPreferences(Layout layout, String portletId)

@@ -29,7 +29,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Set;
 
@@ -58,9 +58,9 @@ public class DDLRecordSetImplTest extends BaseDDLServiceTestCase {
 		rootElement.addAttribute("available-locales", "en_US");
 		rootElement.addAttribute("default-locale", "en_US");
 
-		addTextElement(rootElement, ServiceTestUtil.randomString(), "Text 1");
-		addTextElement(rootElement, ServiceTestUtil.randomString(), "Text 2");
-		addTextElement(rootElement, ServiceTestUtil.randomString(), "Text 3");
+		addTextElement(rootElement, RandomTestUtil.randomString(), "Text 1");
+		addTextElement(rootElement, RandomTestUtil.randomString(), "Text 2");
+		addTextElement(rootElement, RandomTestUtil.randomString(), "Text 3");
 
 		DDMStructure ddmStructure = addStructure(
 			PortalUtil.getClassNameId(DDLRecordSet.class), null,

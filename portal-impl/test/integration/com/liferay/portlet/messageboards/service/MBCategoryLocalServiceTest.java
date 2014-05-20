@@ -29,6 +29,7 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
@@ -347,11 +348,11 @@ public class MBCategoryLocalServiceTest {
 		MBCategory parentCategory = MBCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(),
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 
 		MBCategory category = MBCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(), parentCategory.getCategoryId(),
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 
 		Assert.assertNotNull(category.getParentCategory());
 		Assert.assertNull(parentCategory.getParentCategory());

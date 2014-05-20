@@ -25,7 +25,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Ignore;
@@ -133,7 +133,7 @@ public class JournalFolderSearchTest extends BaseSearchTestCase {
 
 		return JournalTestUtil.addFolder(
 			(Long)parentBaseModel.getPrimaryKeyObj(),
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override
@@ -143,7 +143,7 @@ public class JournalFolderSearchTest extends BaseSearchTestCase {
 
 		return JournalTestUtil.addFolder(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override

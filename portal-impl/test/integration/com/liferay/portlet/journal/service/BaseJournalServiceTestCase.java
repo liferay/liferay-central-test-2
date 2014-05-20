@@ -19,8 +19,8 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.io.InputStream;
 
@@ -40,7 +40,7 @@ public class BaseJournalServiceTestCase {
 	}
 
 	protected String generateId() throws Exception {
-		String id = ServiceTestUtil.randomString();
+		String id = RandomTestUtil.randomString();
 
 		return StringUtil.toUpperCase(id);
 	}

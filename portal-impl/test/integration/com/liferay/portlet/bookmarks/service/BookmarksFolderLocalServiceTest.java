@@ -26,8 +26,8 @@ import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -62,12 +62,12 @@ public class BookmarksFolderLocalServiceTest {
 	@Test
 	public void testMoveFolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		long initialParentFolderId = folder.getParentFolderId();
 
 		BookmarksFolder destinationFolder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		folder = BookmarksFolderLocalServiceUtil.moveFolder(
 			folder.getFolderId(), destinationFolder.getFolderId());
@@ -81,7 +81,7 @@ public class BookmarksFolderLocalServiceTest {
 	@Test
 	public void testSubscribeFolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		testSubscribeFolder(folder.getFolderId(), folder.getFolderId());
 	}
@@ -96,7 +96,7 @@ public class BookmarksFolderLocalServiceTest {
 	@Test
 	public void testUnsubscribeFolder() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		testUnsubscribeFolder(folder.getFolderId(), folder.getFolderId());
 	}

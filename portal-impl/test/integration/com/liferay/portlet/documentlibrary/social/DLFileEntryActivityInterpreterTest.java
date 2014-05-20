@@ -25,7 +25,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.runner.RunWith;
@@ -47,7 +47,7 @@ public class DLFileEntryActivityInterpreterTest
 	protected void addActivities() throws Exception {
 		_fileEntry = DLAppTestUtil.addFileEntry(
 			group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 	}
 
 	@Override
@@ -73,7 +73,7 @@ public class DLFileEntryActivityInterpreterTest
 	protected void renameModels() throws Exception {
 		DLAppTestUtil.updateFileEntry(
 			group.getGroupId(), _fileEntry.getFileEntryId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
+			RandomTestUtil.randomString(), RandomTestUtil.randomString());
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -56,7 +56,7 @@ public class BookmarksFolderLocalServiceTreeTest
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			TestPropsValues.getGroupId(), parentFolderId,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		folder.setTreePath(null);
 

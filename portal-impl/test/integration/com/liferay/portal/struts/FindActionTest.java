@@ -30,9 +30,9 @@ import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
@@ -138,7 +138,7 @@ public class FindActionTest {
 
 		_assetPublisherPortletId =
 			PortletKeys.ASSET_PUBLISHER + PortletConstants.INSTANCE_SEPARATOR +
-				ServiceTestUtil.randomString();
+				RandomTestUtil.randomString();
 
 		LayoutTestUtil.addPortletToLayout(
 			TestPropsValues.getUserId(), _assetLayout, _assetPublisherPortletId,

@@ -31,7 +31,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
@@ -107,7 +107,7 @@ public class WikiPageSearchTest extends BaseSearchTestCase {
 		return WikiTestUtil.addPage(
 			TestPropsValues.getUserId(),
 			(Long)parentBaseModel.getPrimaryKeyObj(),
-			ServiceTestUtil.randomString(), keywords, approved, serviceContext);
+			RandomTestUtil.randomString(), keywords, approved, serviceContext);
 	}
 
 	@Override

@@ -23,7 +23,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.Calendar;
@@ -65,7 +65,7 @@ public class UserServiceSoapTest {
 		boolean autoScreenName = true;
 		String screenName = StringPool.BLANK;
 		String emailAddress =
-			"UserServiceSoapTest." + ServiceTestUtil.nextLong() +
+			"UserServiceSoapTest." + RandomTestUtil.nextLong() +
 				"@liferay.com";
 		long facebookId = 0;
 		String openId = StringPool.BLANK;

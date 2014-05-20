@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -199,8 +200,8 @@ public class AssetPublisherServiceTest {
 
 		for (int i = 0; i < count; i++) {
 			JournalArticle article = JournalTestUtil.addArticle(
-				_group.getGroupId(), ServiceTestUtil.randomString(),
-				ServiceTestUtil.randomString(100));
+				_group.getGroupId(), RandomTestUtil.randomString(),
+				RandomTestUtil.randomString(100));
 
 			JournalArticleLocalServiceUtil.updateAsset(
 				TestPropsValues.getUserId(), article, assetCategoryIds,
@@ -238,7 +239,7 @@ public class AssetPublisherServiceTest {
 
 		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				ServiceTestUtil.getServiceContext(_group.getGroupId()));
 
 		addAssetCategories(assetVocabulary.getVocabularyId());

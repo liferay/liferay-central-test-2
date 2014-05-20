@@ -27,6 +27,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import org.junit.runner.RunWith;
@@ -57,7 +58,7 @@ public class BookmarksUserNotificationTest
 	@Override
 	protected void addContainerModel() throws Exception {
 		_folder = BookmarksTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 	}
 
 	@Override

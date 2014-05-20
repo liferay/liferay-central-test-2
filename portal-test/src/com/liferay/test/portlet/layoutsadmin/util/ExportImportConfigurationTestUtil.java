@@ -21,6 +21,7 @@ import com.liferay.portal.service.ExportImportConfigurationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -53,7 +54,7 @@ public class ExportImportConfigurationTestUtil {
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(
 				TestPropsValues.getUserId(), groupId,
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				type, settingsMap, serviceContext);
 	}
 

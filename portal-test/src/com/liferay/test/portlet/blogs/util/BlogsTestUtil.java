@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.InputStream;
@@ -203,7 +204,7 @@ public class BlogsTestUtil {
 
 			entry = BlogsEntryLocalServiceUtil.updateEntry(
 				entry.getUserId(), entry.getEntryId(),
-				ServiceTestUtil.randomString(), entry.getDescription(),
+				RandomTestUtil.randomString(), entry.getDescription(),
 				entry.getContent(), 1, 1, 2012, 12, 00, true, true,
 				new String[0], entry.getSmallImage(), entry.getSmallImageURL(),
 				StringPool.BLANK, null, serviceContext);

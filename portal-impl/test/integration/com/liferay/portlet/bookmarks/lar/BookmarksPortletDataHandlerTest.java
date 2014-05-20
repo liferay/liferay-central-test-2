@@ -28,6 +28,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class BookmarksPortletDataHandlerTest
 	@Override
 	protected void addStagedModels() throws Exception {
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			stagingGroup.getGroupId());

@@ -33,6 +33,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
@@ -66,13 +67,13 @@ public class LayoutStagedModelDataHandlerTest
 		JournalArticle journalArticle = JournalTestUtil.addArticle(
 			stagingGroup.getGroupId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
+			RandomTestUtil.randomString(), RandomTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, JournalArticle.class, journalArticle);
 
 		Layout layout = LayoutTestUtil.addTypeArticleLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
+			stagingGroup.getGroupId(), RandomTestUtil.randomString(),
 			journalArticle.getArticleId());
 
 		addDependentLayoutFriendlyURLs(dependentStagedModelsMap, layout);
@@ -99,7 +100,7 @@ public class LayoutStagedModelDataHandlerTest
 			new HashMap<String, List<StagedModel>>();
 
 		Layout linkedLayout = LayoutTestUtil.addLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString());
+			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
 		List<LayoutFriendlyURL> linkedLayoutFriendlyURLs =
 			LayoutFriendlyURLLocalServiceUtil.getLayoutFriendlyURLs(
@@ -111,7 +112,7 @@ public class LayoutStagedModelDataHandlerTest
 		addDependentLayoutFriendlyURLs(dependentStagedModelsMap, linkedLayout);
 
 		Layout layout = LayoutTestUtil.addTypeLinkToLayoutLayout(
-			stagingGroup.getGroupId(), ServiceTestUtil.randomString(),
+			stagingGroup.getGroupId(), RandomTestUtil.randomString(),
 			linkedLayout.getLayoutId());
 
 		List<LayoutFriendlyURL> layoutFriendlyURLs =
@@ -175,7 +176,7 @@ public class LayoutStagedModelDataHandlerTest
 			new HashMap<String, List<StagedModel>>();
 
 		Layout parentLayout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, Layout.class, parentLayout);
@@ -197,7 +198,7 @@ public class LayoutStagedModelDataHandlerTest
 		Layout parentLayout = (Layout)dependentStagedModels.get(0);
 
 		Layout layout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString(),
+			group.getGroupId(), RandomTestUtil.randomString(),
 			parentLayout.getPlid());
 
 		addDependentLayoutFriendlyURLs(dependentStagedModelsMap, layout);

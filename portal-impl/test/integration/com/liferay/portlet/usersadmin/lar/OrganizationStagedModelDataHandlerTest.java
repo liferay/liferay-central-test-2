@@ -39,6 +39,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.OrganizationTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -67,7 +68,7 @@ public class OrganizationStagedModelDataHandlerTest
 		Organization organization = OrganizationTestUtil.addOrganization();
 
 		Organization suborganization = OrganizationTestUtil.addOrganization(
-			organization.getOrganizationId(), ServiceTestUtil.randomString(),
+			organization.getOrganizationId(), RandomTestUtil.randomString(),
 			false);
 
 		addDependentStagedModel(

@@ -50,6 +50,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -71,7 +72,7 @@ public class MembershipPolicyTestUtil {
 	// Membership Policies
 
 	public static Group addGroup() throws Exception {
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 		String friendlyURL =
 			StringPool.SLASH + FriendlyURLNormalizerUtil.normalize(name);
 
@@ -84,7 +85,7 @@ public class MembershipPolicyTestUtil {
 	}
 
 	public static Organization addOrganization() throws Exception {
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 
 		return OrganizationServiceUtil.addOrganization(
 			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID, name,
@@ -94,12 +95,12 @@ public class MembershipPolicyTestUtil {
 	}
 
 	public static Role addRole(int type) throws Exception {
-		String name = ServiceTestUtil.randomString();
+		String name = RandomTestUtil.randomString();
 
 		return RoleServiceUtil.addRole(
-			null, 0, name, ServiceTestUtil.randomLocaleStringMap(),
-			ServiceTestUtil.randomLocaleStringMap(), type,
-			ServiceTestUtil.randomString(),
+			null, 0, name, RandomTestUtil.randomLocaleStringMap(),
+			RandomTestUtil.randomLocaleStringMap(), type,
+			RandomTestUtil.randomString(),
 			populateServiceContext(Role.class, false));
 	}
 
@@ -114,7 +115,7 @@ public class MembershipPolicyTestUtil {
 		boolean autoScreenName = true;
 		String screenName = StringPool.BLANK;
 		String emailAddress =
-			"UserServiceTest." + ServiceTestUtil.nextLong() + "@liferay.com";
+			"UserServiceTest." + RandomTestUtil.nextLong() + "@liferay.com";
 		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		Locale locale = LocaleUtil.getDefault();
@@ -141,8 +142,8 @@ public class MembershipPolicyTestUtil {
 	}
 
 	public static UserGroup addUserGroup() throws Exception {
-		String name = ServiceTestUtil.randomString();
-		String description = ServiceTestUtil.randomString(50);
+		String name = RandomTestUtil.randomString();
+		String description = RandomTestUtil.randomString(50);
 
 		return UserGroupServiceUtil.addUserGroup(
 			name, description, populateServiceContext(UserGroup.class, false));
@@ -155,21 +156,21 @@ public class MembershipPolicyTestUtil {
 
 		long userId = user.getUserId();
 		String oldPassword = user.getPassword();
-		String newPassword1 = ServiceTestUtil.randomString();
+		String newPassword1 = RandomTestUtil.randomString();
 		String newPassword2 = newPassword1;
 		boolean passwordReset = true;
-		String reminderQueryQuestion = ServiceTestUtil.randomString();
-		String reminderQueryAnswer = ServiceTestUtil.randomString();
+		String reminderQueryQuestion = RandomTestUtil.randomString();
+		String reminderQueryAnswer = RandomTestUtil.randomString();
 
-		String screenName = ServiceTestUtil.randomString();
+		String screenName = RandomTestUtil.randomString();
 		String emailAddress =
-			"UserServiceTest." + ServiceTestUtil.nextLong() + "@liferay.com";
+			"UserServiceTest." + RandomTestUtil.nextLong() + "@liferay.com";
 		long facebookId = 0;
 		String openId = StringPool.BLANK;
 		String languageId = LocaleUtil.toLanguageId(Locale.getDefault());
-		String timeZoneId = ServiceTestUtil.randomString();
-		String greeting = ServiceTestUtil.randomString();
-		String comments = ServiceTestUtil.randomString();
+		String timeZoneId = RandomTestUtil.randomString();
+		String greeting = RandomTestUtil.randomString();
+		String comments = RandomTestUtil.randomString();
 		String firstName = "UserServiceTest";
 		String middleName = StringPool.BLANK;
 		String lastName = "UserServiceTest";
@@ -181,19 +182,19 @@ public class MembershipPolicyTestUtil {
 		int birthdayYear = 1970;
 		String jobTitle = StringPool.BLANK;
 		String smsSn =
-			"UserServiceTestSmsSn." + ServiceTestUtil.nextInt() +
+			"UserServiceTestSmsSn." + RandomTestUtil.nextInt() +
 				"@liferay.com";
-		String aimSn = ServiceTestUtil.randomString();
-		String facebookSn = ServiceTestUtil.randomString();
-		String icqSn = ServiceTestUtil.randomString();
-		String jabberSn = ServiceTestUtil.randomString();
+		String aimSn = RandomTestUtil.randomString();
+		String facebookSn = RandomTestUtil.randomString();
+		String icqSn = RandomTestUtil.randomString();
+		String jabberSn = RandomTestUtil.randomString();
 		String msnSn =
-			"UserServiceTestMsnSn." + ServiceTestUtil.nextInt() +
+			"UserServiceTestMsnSn." + RandomTestUtil.nextInt() +
 				"@liferay.com";
-		String mySpaceSn = ServiceTestUtil.randomString();
-		String skypeSn = ServiceTestUtil.randomString();
-		String twitterSn = ServiceTestUtil.randomString();
-		String ymSn = ServiceTestUtil.randomString();
+		String mySpaceSn = RandomTestUtil.randomString();
+		String skypeSn = RandomTestUtil.randomString();
+		String twitterSn = RandomTestUtil.randomString();
+		String ymSn = RandomTestUtil.randomString();
 
 		List<Address> addresses = new ArrayList<Address>();
 		List<EmailAddress> emailAddresses = new ArrayList<EmailAddress>();
@@ -249,7 +250,7 @@ public class MembershipPolicyTestUtil {
 
 		if (includeCategorization) {
 			AssetTag tag = AssetTagLocalServiceUtil.addTag(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				null, new ServiceContext());
 
 			serviceContext.setAssetTagNames(new String[] {tag.getName()});
@@ -261,11 +262,11 @@ public class MembershipPolicyTestUtil {
 
 			AssetVocabulary vocabulary =
 				AssetVocabularyLocalServiceUtil.addVocabulary(
-					TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+					TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 					serviceContext);
 
 			AssetCategory category = AssetCategoryLocalServiceUtil.addCategory(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				vocabulary.getVocabularyId(), serviceContext);
 
 			serviceContext.setAssetCategoryIds(

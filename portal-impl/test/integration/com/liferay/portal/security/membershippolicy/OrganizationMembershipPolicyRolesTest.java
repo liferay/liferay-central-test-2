@@ -30,7 +30,7 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -223,9 +223,8 @@ public class OrganizationMembershipPolicyRolesTest
 			RoleConstants.TYPE_ORGANIZATION);
 
 		RoleServiceUtil.updateRole(
-			role.getRoleId(), ServiceTestUtil.randomString(),
-			role.getTitleMap(), role.getDescriptionMap(), role.getSubtype(),
-			new ServiceContext());
+			role.getRoleId(), RandomTestUtil.randomString(), role.getTitleMap(),
+			role.getDescriptionMap(), role.getSubtype(), new ServiceContext());
 
 		Assert.assertTrue(isVerify());
 	}

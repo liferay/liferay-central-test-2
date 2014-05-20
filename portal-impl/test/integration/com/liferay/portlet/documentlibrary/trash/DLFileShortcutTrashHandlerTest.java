@@ -36,6 +36,7 @@ import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
@@ -192,7 +193,7 @@ public class DLFileShortcutTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return DLFolderLocalServiceUtil.addFolder(
 			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, parentBaseModelId, ServiceTestUtil.randomString(),
+			false, parentBaseModelId, RandomTestUtil.randomString(),
 			StringPool.BLANK, false, serviceContext);
 	}
 

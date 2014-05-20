@@ -25,7 +25,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.runner.RunWith;
@@ -52,7 +52,7 @@ public class JournalUserNotificationTest extends BaseUserNotificationTestCase {
 	@Override
 	protected void addContainerModel() throws Exception {
 		_folder = JournalTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 	}
 
 	@Override

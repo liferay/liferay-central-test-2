@@ -41,6 +41,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 
@@ -79,7 +80,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				serviceContext);
 
 		_vocabularyId = vocabulary.getVocabularyId();
@@ -1140,7 +1141,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		for (Date expirationDate : expirationDates) {
 			addBaseModel(
-				parentBaseModel, ServiceTestUtil.randomString(), expirationDate,
+				parentBaseModel, RandomTestUtil.randomString(), expirationDate,
 				serviceContext);
 		}
 
@@ -1219,8 +1220,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		for (int i = 0; i < size; i++) {
 			addBaseModel(
-				parentBaseModel, ServiceTestUtil.randomString(),
-				serviceContext);
+				parentBaseModel, RandomTestUtil.randomString(), serviceContext);
 		}
 
 		Assert.assertEquals(

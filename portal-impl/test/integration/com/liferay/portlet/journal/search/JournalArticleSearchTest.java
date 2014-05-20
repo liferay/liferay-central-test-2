@@ -40,7 +40,7 @@ import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -109,7 +109,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 		return JournalTestUtil.addArticleWithWorkflow(
 			group.getGroupId(), folderId, keywords,
-			ServiceTestUtil.randomString(50), approved, serviceContext);
+			RandomTestUtil.randomString(50), approved, serviceContext);
 	}
 
 	@Override
@@ -158,7 +158,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 		return JournalTestUtil.addFolder(
 			(Long)parentBaseModel.getPrimaryKeyObj(),
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class JournalArticleSearchTest extends BaseSearchTestCase {
 
 		return JournalTestUtil.addFolder(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override

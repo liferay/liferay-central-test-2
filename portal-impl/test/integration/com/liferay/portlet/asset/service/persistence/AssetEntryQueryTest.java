@@ -44,6 +44,7 @@ import com.liferay.portlet.ratings.service.RatingsEntryServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
@@ -75,7 +76,7 @@ public class AssetEntryQueryTest {
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				serviceContext);
 
 		_vocabularyId = vocabulary.getVocabularyId();
@@ -335,7 +336,7 @@ public class AssetEntryQueryTest {
 		int[] orderedViewCounts = new int[10];
 
 		for (int i = 0; i < viewCounts.length; i++) {
-			int randomInt = ServiceTestUtil.randomInt();
+			int randomInt = RandomTestUtil.randomInt();
 
 			viewCounts[i] = randomInt;
 			orderedViewCounts[i] = randomInt;
@@ -352,7 +353,7 @@ public class AssetEntryQueryTest {
 		int[] orderedViewCounts = new int[10];
 
 		for (int i = 0; i < viewCounts.length; i++) {
-			int randomInt = ServiceTestUtil.randomInt();
+			int randomInt = RandomTestUtil.randomInt();
 
 			viewCounts[i] = randomInt;
 			orderedViewCounts[i] = randomInt;

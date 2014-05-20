@@ -27,7 +27,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -134,7 +134,7 @@ public class AssetCategorySearchTest extends BaseSearchTestCase {
 		throws Exception {
 
 		return AssetVocabularyServiceUtil.addVocabulary(
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override

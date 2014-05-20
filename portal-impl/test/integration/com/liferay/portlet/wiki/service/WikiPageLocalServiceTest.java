@@ -47,6 +47,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.expando.util.ExpandoTestUtil;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
@@ -378,7 +379,7 @@ public class WikiPageLocalServiceTest {
 	protected void addExpandoValueToPage(WikiPage page) throws Exception {
 		ExpandoValue value = ExpandoTestUtil.addValue(
 			PortalUtil.getClassNameId(WikiPage.class), page.getPrimaryKey(),
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		ExpandoBridge expandoBridge = page.getExpandoBridge();
 
@@ -511,11 +512,11 @@ public class WikiPageLocalServiceTest {
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			_group.getGroupId());
 
-		String originalContent = ServiceTestUtil.randomString();
+		String originalContent = RandomTestUtil.randomString();
 
 		WikiPage originalPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), _node.getNodeId(),
-			ServiceTestUtil.randomString(), originalContent, true,
+			RandomTestUtil.randomString(), originalContent, true,
 			serviceContext);
 
 		if (hasExpandoValues) {

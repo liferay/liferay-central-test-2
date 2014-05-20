@@ -22,7 +22,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
@@ -69,15 +69,15 @@ public class JournalArticlePermissionTest extends BasePermissionTestCase {
 	@Override
 	protected void doSetUp() throws Exception {
 		_article = JournalTestUtil.addArticle(
-			group.getGroupId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString());
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		_subarticle = JournalTestUtil.addArticle(
 			group.getGroupId(), folder.getFolderId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString());
+			RandomTestUtil.randomString(), RandomTestUtil.randomString());
 	}
 
 	@Override

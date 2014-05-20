@@ -53,6 +53,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
@@ -117,7 +118,7 @@ public class ConvertDocumentLibraryTest {
 	public void testMigrateDLWhenFileEntryInFolder() throws Exception {
 		Folder folder = DLAppTestUtil.addFolder(
 			_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		testMigrateDL(folder.getFolderId());
 	}
@@ -235,7 +236,7 @@ public class ConvertDocumentLibraryTest {
 
 		return WikiTestUtil.addPage(
 			wikiNode.getUserId(), _group.getGroupId(), wikiNode.getNodeId(),
-			ServiceTestUtil.randomString(), true);
+			RandomTestUtil.randomString(), true);
 	}
 
 	protected void addWikiPageAttachment(WikiPage wikiPage) throws Exception {
@@ -267,7 +268,7 @@ public class ConvertDocumentLibraryTest {
 	protected void testMigrateDL(long folderId) throws Exception {
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), folderId,
-			ServiceTestUtil.randomString() + ".txt");
+			RandomTestUtil.randomString() + ".txt");
 
 		_convertProcess.convert();
 

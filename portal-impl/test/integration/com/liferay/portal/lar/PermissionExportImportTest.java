@@ -40,8 +40,8 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.ResourcePermissionUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.ArrayList;
@@ -73,13 +73,12 @@ public class PermissionExportImportTest extends PowerMockito {
 		// Export
 
 		LayoutSetPrototype exportLayoutSetPrototype =
-			LayoutTestUtil.addLayoutSetPrototype(
-				ServiceTestUtil.randomString());
+			LayoutTestUtil.addLayoutSetPrototype(RandomTestUtil.randomString());
 
 		Group exportGroup = exportLayoutSetPrototype.getGroup();
 
 		Layout exportLayout = LayoutTestUtil.addLayout(
-			exportGroup.getGroupId(), ServiceTestUtil.randomString(), true);
+			exportGroup.getGroupId(), RandomTestUtil.randomString(), true);
 
 		String exportResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 			exportLayout.getPlid(), _PORTLET_ID);
@@ -95,13 +94,12 @@ public class PermissionExportImportTest extends PowerMockito {
 		// Import
 
 		LayoutSetPrototype importLayoutSetPrototype =
-			LayoutTestUtil.addLayoutSetPrototype(
-				ServiceTestUtil.randomString());
+			LayoutTestUtil.addLayoutSetPrototype(RandomTestUtil.randomString());
 
 		Group importGroup = importLayoutSetPrototype.getGroup();
 
 		Layout importLayout = LayoutTestUtil.addLayout(
-			importGroup.getGroupId(), ServiceTestUtil.randomString(), true);
+			importGroup.getGroupId(), RandomTestUtil.randomString(), true);
 
 		String importResourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 			importLayout.getPlid(), _PORTLET_ID);

@@ -23,7 +23,7 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.Locale;
@@ -93,9 +93,9 @@ public class ExpandoTestUtil {
 		throws Exception {
 
 		ExpandoTable table = addTable(
-			classNameId, ServiceTestUtil.randomString());
+			classNameId, RandomTestUtil.randomString());
 		ExpandoColumn column = addColumn(
-			table, ServiceTestUtil.randomString(),
+			table, RandomTestUtil.randomString(),
 			ExpandoColumnConstants.STRING);
 
 		return addValue(table, column, classPK, data);

@@ -27,7 +27,6 @@ import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Locale;
 
@@ -39,11 +38,11 @@ import javax.portlet.PortletPreferences;
 public class CompanyTestUtil {
 
 	public static Company addCompany() throws Exception {
-		return addCompany(ServiceTestUtil.randomString());
+		return addCompany(RandomTestUtil.randomString());
 	}
 
 	public static Company addCompany(String name) throws Exception {
-		String virtualHostname = name + "." +  ServiceTestUtil.randomString(3);
+		String virtualHostname = name + "." +  RandomTestUtil.randomString(3);
 
 		return CompanyLocalServiceUtil.addCompany(
 			name, virtualHostname, virtualHostname,

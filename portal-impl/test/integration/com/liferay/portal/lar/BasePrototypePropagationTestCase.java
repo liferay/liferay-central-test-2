@@ -29,6 +29,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -69,7 +70,7 @@ public abstract class BasePrototypePropagationTestCase {
 		// Layout prototype
 
 		layoutPrototype = LayoutTestUtil.addLayoutPrototype(
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		layoutPrototypeLayout = layoutPrototype.getLayout();
 

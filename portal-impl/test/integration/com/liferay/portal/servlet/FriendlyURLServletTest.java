@@ -28,6 +28,7 @@ import com.liferay.portal.util.Portal;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Collections;
 
@@ -71,7 +72,7 @@ public class FriendlyURLServletTest {
 		Group group = GroupTestUtil.addGroup();
 
 		Layout layout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		testGetRedirect(
 			getPath(group, layout), Portal.PATH_MAIN,

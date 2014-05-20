@@ -51,6 +51,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
@@ -85,7 +86,7 @@ public class AssetPublisherExportImportTest
 	public String getPortletId() throws Exception {
 		return PortletKeys.ASSET_PUBLISHER +
 			PortletConstants.INSTANCE_SEPARATOR +
-				ServiceTestUtil.randomString();
+				RandomTestUtil.randomString();
 	}
 
 	@Test
@@ -195,7 +196,7 @@ public class AssetPublisherExportImportTest
 		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
 
 		Group childGroup = GroupTestUtil.addGroup(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		preferenceMap.put(
 			"scopeIds",
@@ -224,7 +225,7 @@ public class AssetPublisherExportImportTest
 	public void testDisplayStyle() throws Exception {
 		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();
 
-		String displayStyle = ServiceTestUtil.randomString();
+		String displayStyle = RandomTestUtil.randomString();
 
 		preferenceMap.put("displayStyle", new String[] {displayStyle});
 
@@ -333,7 +334,7 @@ public class AssetPublisherExportImportTest
 		DLFileEntryType importedDLFileEntryType =
 			DLAppTestUtil.addDLFileEntryType(
 				TestPropsValues.getUserId(), importedGroup.getGroupId(),
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				new long[] {importedDDMStructure.getStructureId()},
 				serviceContext);
 
@@ -454,7 +455,7 @@ public class AssetPublisherExportImportTest
 		DLFileEntryType importedDLFileEntryType1 =
 			DLAppTestUtil.addDLFileEntryType(
 				TestPropsValues.getUserId(), importedGroup.getGroupId(),
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				new long[] {importedDDMStructure1.getStructureId()},
 				serviceContext);
 
@@ -475,7 +476,7 @@ public class AssetPublisherExportImportTest
 		DLFileEntryType importedDLFileEntryType2 =
 			DLAppTestUtil.addDLFileEntryType(
 				TestPropsValues.getUserId(), importedGroup.getGroupId(),
-				ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 				new long[] {importedDDMStructure2.getStructureId()},
 				serviceContext);
 
@@ -559,7 +560,7 @@ public class AssetPublisherExportImportTest
 			layout.getCompanyId());
 
 		Layout secondLayout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		GroupTestUtil.addGroup(TestPropsValues.getUserId(), secondLayout);
 
@@ -608,7 +609,7 @@ public class AssetPublisherExportImportTest
 	@Test
 	public void testSeveralLegacyLayoutScopeIds() throws Exception {
 		Layout secondLayout = LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		GroupTestUtil.addGroup(TestPropsValues.getUserId(), secondLayout);
 
@@ -719,7 +720,7 @@ public class AssetPublisherExportImportTest
 
 		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
-				TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 				ServiceTestUtil.getServiceContext(groupId));
 
 		Map<String, String[]> preferenceMap = new HashMap<String, String[]>();

@@ -36,7 +36,7 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
@@ -85,7 +85,7 @@ public class PortletDataContextReferencesTest {
 
 		_bookmarksEntry = BookmarksTestUtil.addEntry(true);
 		_bookmarksFolder = BookmarksTestUtil.addFolder(
-			TestPropsValues.getGroupId(), ServiceTestUtil.randomString());
+			TestPropsValues.getGroupId(), RandomTestUtil.randomString());
 	}
 
 	@Test

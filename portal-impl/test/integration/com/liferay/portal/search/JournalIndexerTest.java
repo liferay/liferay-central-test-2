@@ -40,6 +40,7 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -101,7 +102,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -137,7 +138,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalArticle article1 = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -205,7 +206,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		String content = "Liferay Architectural Approach";
 
@@ -287,7 +288,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -472,7 +473,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -534,7 +535,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -605,7 +606,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		String content = "Liferay Architectural Approach";
 
@@ -682,7 +683,7 @@ public class JournalIndexerTest {
 		searchContext1.setKeywords("Architectural");
 
 		JournalFolder folder1 = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		searchContext1.setFolderIds(new long[] {folder1.getFolderId()});
 
@@ -695,7 +696,7 @@ public class JournalIndexerTest {
 		searchContext2.setKeywords("Architectural");
 
 		JournalFolder folder2 = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		searchContext2.setFolderIds(new long[] {folder2.getFolderId()});
 
@@ -782,7 +783,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalArticle article = JournalTestUtil.addArticleWithWorkflow(
 			_group.getGroupId(), folder.getFolderId(), "title",
@@ -848,7 +849,7 @@ public class JournalIndexerTest {
 			_group.getGroupId(), searchContext2);
 
 		JournalFolder folder = JournalTestUtil.addFolder(
-			_group.getGroupId(), ServiceTestUtil.randomString());
+			_group.getGroupId(), RandomTestUtil.randomString());
 
 		String content = "Liferay Architectural Approach";
 

@@ -31,7 +31,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
@@ -127,7 +127,7 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String name = getSearchKeywords();
 
-		name += ServiceTestUtil.randomString(
+		name += RandomTestUtil.randomString(
 			_FOLDER_NAME_MAX_LENGTH - name.length());
 
 		Folder folder = DLAppTestUtil.addFolder(groupId, folderId, name);
@@ -180,7 +180,7 @@ public class DLFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		Folder folder = DLAppTestUtil.addFolder(
 			group.getGroupId(), parentBaseModelId,
-			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
+			RandomTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
 
 		return (DLFolder)folder.getModel();
 	}

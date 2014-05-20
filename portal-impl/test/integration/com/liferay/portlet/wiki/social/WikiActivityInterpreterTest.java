@@ -30,7 +30,7 @@ import com.liferay.portlet.trash.util.TrashUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
@@ -56,7 +56,7 @@ public class WikiActivityInterpreterTest
 		_page = WikiTestUtil.addPage(
 			group.getGroupId(), wikiNode.getNodeId(), true);
 
-		_attachmentFileName = ServiceTestUtil.randomString() + ".docx";
+		_attachmentFileName = RandomTestUtil.randomString() + ".docx";
 
 		WikiTestUtil.addWikiAttachment(
 			_page.getUserId(), _page.getNodeId(), _page.getTitle(),

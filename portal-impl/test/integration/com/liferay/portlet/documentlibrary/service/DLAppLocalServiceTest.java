@@ -27,6 +27,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import org.junit.Assert;
@@ -66,7 +67,7 @@ public class DLAppLocalServiceTest {
 	}
 
 	protected Folder addFolder(boolean rootFolder) throws Exception {
-		return addFolder(rootFolder, ServiceTestUtil.randomString());
+		return addFolder(rootFolder, RandomTestUtil.randomString());
 	}
 
 	protected Folder addFolder(boolean rootFolder, String name)

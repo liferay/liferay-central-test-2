@@ -26,7 +26,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.Ignore;
@@ -137,7 +137,7 @@ public class DLFolderSearchTest extends BaseSearchTestCase {
 
 		Folder folder = DLAppTestUtil.addFolder(
 			(Long)parentBaseModel.getPrimaryKeyObj(),
-			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH),
+			RandomTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH),
 			serviceContext);
 
 		return (DLFolder)folder.getModel();
@@ -150,7 +150,7 @@ public class DLFolderSearchTest extends BaseSearchTestCase {
 
 		Folder folder = DLAppTestUtil.addFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH),
+			RandomTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH),
 			serviceContext);
 
 		return (DLFolder)folder.getModel();

@@ -35,6 +35,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadFlagLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 
@@ -55,7 +56,7 @@ public class MBTestUtil {
 
 	public static MBBan addBan(long groupId) throws Exception {
 		User user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), TestPropsValues.getGroupId());
+			RandomTestUtil.randomString(), TestPropsValues.getGroupId());
 
 		return addBan(groupId, user.getUserId());
 	}
@@ -85,7 +86,7 @@ public class MBTestUtil {
 			groupId);
 
 		return addCategory(
-			ServiceTestUtil.randomString(), parentCategoryId, serviceContext);
+			RandomTestUtil.randomString(), parentCategoryId, serviceContext);
 	}
 
 	public static MBCategory addCategory(ServiceContext serviceContext)
@@ -94,7 +95,7 @@ public class MBTestUtil {
 		return MBCategoryServiceUtil.addCategory(
 			TestPropsValues.getUserId(),
 			MBCategoryConstants.DEFAULT_PARENT_CATEGORY_ID,
-			ServiceTestUtil.randomString(), StringPool.BLANK, serviceContext);
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
 	public static MBCategory addCategory(
@@ -103,7 +104,7 @@ public class MBTestUtil {
 
 		return MBCategoryServiceUtil.addCategory(
 			TestPropsValues.getUserId(), parentCategoryId, name,
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	public static MBMessage addDiscussionMessage(
@@ -134,7 +135,7 @@ public class MBTestUtil {
 		return MBMessageLocalServiceUtil.addDiscussionMessage(
 			user.getUserId(), user.getFullName(), groupId, className, classPK,
 			thread.getThreadId(), thread.getRootMessageId(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(50),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(50),
 			serviceContext);
 	}
 
@@ -168,9 +169,9 @@ public class MBTestUtil {
 		throws Exception {
 
 		long userId = TestPropsValues.getUserId();
-		String userName = ServiceTestUtil.randomString();
-		String subject = ServiceTestUtil.randomString();
-		String body = ServiceTestUtil.randomString();
+		String userName = RandomTestUtil.randomString();
+		String subject = RandomTestUtil.randomString();
+		String body = RandomTestUtil.randomString();
 		String format = MBMessageConstants.DEFAULT_FORMAT;
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			Collections.emptyList();
@@ -208,7 +209,7 @@ public class MBTestUtil {
 		}
 
 		MBMessage message = MBMessageLocalServiceUtil.addMessage(
-			serviceContext.getUserId(), ServiceTestUtil.randomString(),
+			serviceContext.getUserId(), RandomTestUtil.randomString(),
 			categoryId, subject, body, serviceContext);
 
 		if (!approved) {
@@ -298,7 +299,7 @@ public class MBTestUtil {
 
 		return MBMessageLocalServiceUtil.updateDiscussionMessage(
 			userId, messageId, className, classPK,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(50),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(50),
 			serviceContext);
 	}
 
@@ -329,8 +330,7 @@ public class MBTestUtil {
 
 			message = MBMessageLocalServiceUtil.updateMessage(
 				TestPropsValues.getUserId(), message.getMessageId(),
-				ServiceTestUtil.randomString(),
-				ServiceTestUtil.randomString(50),
+				RandomTestUtil.randomString(), RandomTestUtil.randomString(50),
 				Collections.<ObjectValuePair<String, InputStream>>emptyList(),
 				Collections.<String>emptyList(), message.getPriority(),
 				message.isAllowPingbacks(), serviceContext);
@@ -354,11 +354,11 @@ public class MBTestUtil {
 		throws Exception {
 
 		long userId = TestPropsValues.getUserId();
-		String userName = ServiceTestUtil.randomString();
+		String userName = RandomTestUtil.randomString();
 		long threadId = 0;
 		long parentMessageId = 0;
-		String subject = ServiceTestUtil.randomString();
-		String body = ServiceTestUtil.randomString();
+		String subject = RandomTestUtil.randomString();
+		String body = RandomTestUtil.randomString();
 		String format = MBMessageConstants.DEFAULT_FORMAT;
 		boolean anonymous = false;
 		double priority = 0.0;

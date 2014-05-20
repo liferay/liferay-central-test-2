@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -75,8 +76,8 @@ public class JournalArticleIndexableTest {
 		int total = hits.getLength();
 
 		JournalArticle article = JournalTestUtil.addArticle(
-			group.getGroupId(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString());
 
 		Assert.assertTrue(article.isIndexable());
 
@@ -113,8 +114,8 @@ public class JournalArticleIndexableTest {
 		JournalTestUtil.addArticle(
 			group.getGroupId(), JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			PortalUtil.getClassNameId(DDMStructure.class),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
 			true, ServiceTestUtil.getServiceContext(group.getGroupId()));
 
 		hits = AssetUtil.search(

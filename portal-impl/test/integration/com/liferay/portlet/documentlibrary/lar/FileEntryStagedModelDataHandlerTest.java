@@ -37,7 +37,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUt
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 
@@ -78,7 +78,7 @@ public class FileEntryStagedModelDataHandlerTest
 	@Test
 	@Transactional
 	public void testExportImportFileExtension() throws Exception {
-		String sourceFileName = ServiceTestUtil.randomString() + ".pdf";
+		String sourceFileName = RandomTestUtil.randomString() + ".pdf";
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			stagingGroup.getGroupId(),
@@ -92,7 +92,7 @@ public class FileEntryStagedModelDataHandlerTest
 
 		Assert.assertEquals(importedFileEntry.getExtension(), "pdf");
 
-		String title = ServiceTestUtil.randomString() + ".awesome";
+		String title = RandomTestUtil.randomString() + ".awesome";
 
 		DLAppTestUtil.updateFileEntry(
 			stagingGroup.getGroupId(), fileEntry.getFileEntryId(),
@@ -187,7 +187,7 @@ public class FileEntryStagedModelDataHandlerTest
 
 		return DLAppTestUtil.addFileEntry(
 			group.getGroupId(), folder.getFolderId(),
-			ServiceTestUtil.randomString(),
+			RandomTestUtil.randomString(),
 			dlFileEntryType.getFileEntryTypeId());
 	}
 

@@ -27,6 +27,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.ArrayList;
@@ -58,7 +59,7 @@ public class BookmarksEntryStagedModelDataHandlerTest
 			new HashMap<String, List<StagedModel>>();
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		addDependentStagedModel(
 			dependentStagedModelsMap, BookmarksFolder.class, folder);

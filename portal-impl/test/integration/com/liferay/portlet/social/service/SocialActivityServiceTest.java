@@ -37,6 +37,7 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.util.SocialActivityHierarchyEntryThreadLocal;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.RoleTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
@@ -89,8 +90,8 @@ public class SocialActivityServiceTest {
 	public void testFilterActivities() throws Exception {
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString() + ".txt",
-			ServiceTestUtil.randomString(), true);
+			RandomTestUtil.randomString() + ".txt",
+			RandomTestUtil.randomString(), true);
 
 		deleteGuestPermission(fileEntry);
 
@@ -115,13 +116,13 @@ public class SocialActivityServiceTest {
 		for (int i = 0; i < 4; i++) {
 			DLAppTestUtil.addFileEntry(
 				_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				ServiceTestUtil.randomString() + ".txt", String.valueOf(i),
+				RandomTestUtil.randomString() + ".txt", String.valueOf(i),
 				true);
 
 			FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 				_group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-				ServiceTestUtil.randomString() + ".txt",
-				ServiceTestUtil.randomString(), true);
+				RandomTestUtil.randomString() + ".txt",
+				RandomTestUtil.randomString(), true);
 
 			deleteGuestPermission(fileEntry);
 		}

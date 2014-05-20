@@ -24,6 +24,7 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.File;
@@ -49,14 +50,14 @@ public class ShoppingTestUtil {
 			groupId);
 
 		return addCategory(
-			ServiceTestUtil.randomString(), parentCategoryId, serviceContext);
+			RandomTestUtil.randomString(), parentCategoryId, serviceContext);
 	}
 
 	public static ShoppingCategory addCategory(ServiceContext serviceContext)
 		throws Exception {
 
 		return ShoppingCategoryServiceUtil.addCategory(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(),
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(),
 			StringPool.BLANK, serviceContext);
 	}
 
@@ -90,7 +91,7 @@ public class ShoppingTestUtil {
 			groupId);
 
 		return addItem(
-			ServiceTestUtil.randomString(), parentCategoryId, serviceContext);
+			RandomTestUtil.randomString(), parentCategoryId, serviceContext);
 	}
 
 	public static ShoppingItem addItem(
@@ -108,14 +109,14 @@ public class ShoppingTestUtil {
 		throws Exception {
 
 		long groupId = serviceContext.getScopeGroupId();
-		String sku = ServiceTestUtil.randomString();
-		String description = ServiceTestUtil.randomString();
+		String sku = RandomTestUtil.randomString();
+		String description = RandomTestUtil.randomString();
 		String properties = StringPool.BLANK;
-		String fieldsQuantities = ServiceTestUtil.randomString();
-		boolean requiresShipping = ServiceTestUtil.randomBoolean();
-		int stockQuantity = ServiceTestUtil.randomInt();
-		boolean featured = ServiceTestUtil.randomBoolean();
-		Boolean sale = ServiceTestUtil.randomBoolean();
+		String fieldsQuantities = RandomTestUtil.randomString();
+		boolean requiresShipping = RandomTestUtil.randomBoolean();
+		int stockQuantity = RandomTestUtil.randomInt();
+		boolean featured = RandomTestUtil.randomBoolean();
+		Boolean sale = RandomTestUtil.randomBoolean();
 		boolean smallImage = false;
 		String smallImageURL = null;
 		File smallImageFile = null;

@@ -23,6 +23,7 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import org.junit.Assert;
@@ -52,10 +53,10 @@ public class AssetTagServiceTest {
 			group.getGroupId());
 
 		AssetTagLocalServiceUtil.addTag(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(), null,
 			serviceContext);
 		AssetTagLocalServiceUtil.addTag(
-			TestPropsValues.getUserId(), ServiceTestUtil.randomString(), null,
+			TestPropsValues.getUserId(), RandomTestUtil.randomString(), null,
 			serviceContext);
 
 		Assert.assertEquals(

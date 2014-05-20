@@ -27,6 +27,7 @@ import com.liferay.portlet.wiki.model.WikiPageConstants;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.File;
@@ -52,11 +53,11 @@ public class WikiTestUtil {
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			ServiceTestUtil.randomString(), "TestPage", true, serviceContext);
+			RandomTestUtil.randomString(), "TestPage", true, serviceContext);
 
 		WikiPage grandChildPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, "TestGrandChildPage",
-			ServiceTestUtil.randomString(), "TestChildPage", true,
+			RandomTestUtil.randomString(), "TestChildPage", true,
 			serviceContext);
 
 		WikiPageLocalServiceUtil.movePage(
@@ -77,8 +78,8 @@ public class WikiTestUtil {
 
 	public static WikiNode addNode(long groupId) throws Exception {
 		return addNode(
-			TestPropsValues.getUserId(), groupId,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(50));
+			TestPropsValues.getUserId(), groupId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(50));
 	}
 
 	public static WikiNode addNode(
@@ -105,7 +106,7 @@ public class WikiTestUtil {
 
 		return addPage(
 			TestPropsValues.getUserId(), groupId, nodeId,
-			ServiceTestUtil.randomString(), approved);
+			RandomTestUtil.randomString(), approved);
 	}
 
 	public static WikiPage addPage(
@@ -190,19 +191,19 @@ public class WikiTestUtil {
 
 		WikiPage initialParentPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId,
-			ServiceTestUtil.randomString(), true);
+			RandomTestUtil.randomString(), true);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
 		WikiPage childPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), initialParentPage.getTitle(), true,
+			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), initialParentPage.getTitle(), true,
 			serviceContext);
 
 		WikiPage finalParentPage =  WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId,
-			ServiceTestUtil.randomString(), true);
+			RandomTestUtil.randomString(), true);
 
 		WikiPageLocalServiceUtil.changeParent(
 			TestPropsValues.getUserId(), nodeId, childPage.getTitle(),
@@ -230,7 +231,7 @@ public class WikiTestUtil {
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			ServiceTestUtil.randomString(), "TestPage", true, serviceContext);
+			RandomTestUtil.randomString(), "TestPage", true, serviceContext);
 
 		if (explicitlyRemoveChildPage) {
 			WikiPageLocalServiceUtil.movePageToTrash(
@@ -285,19 +286,19 @@ public class WikiTestUtil {
 
 		WikiPage parentPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId,
-			ServiceTestUtil.randomString(), true);
+			RandomTestUtil.randomString(), true);
 
 		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
 			groupId);
 
 		WikiPage childPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), parentPage.getTitle(), true,
+			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), parentPage.getTitle(), true,
 			serviceContext);
 
 		WikiPage grandChildPage = WikiTestUtil.addPage(
-			TestPropsValues.getUserId(), nodeId, ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), childPage.getTitle(), true,
+			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), childPage.getTitle(), true,
 			serviceContext);
 
 		if (explicitMoveChildToTrash) {
@@ -339,7 +340,7 @@ public class WikiTestUtil {
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, "TestChildPage",
-			ServiceTestUtil.randomString(), "B", true, serviceContext);
+			RandomTestUtil.randomString(), "B", true, serviceContext);
 
 		if (explicitlyRemoveChildPage) {
 			WikiPageLocalServiceUtil.movePageToTrash(
@@ -367,7 +368,7 @@ public class WikiTestUtil {
 			long userId, long nodeId, String title, Class<?> clazz)
 		throws Exception {
 
-		String fileName = ServiceTestUtil.randomString() + ".docx";
+		String fileName = RandomTestUtil.randomString() + ".docx";
 
 		return addWikiAttachment(userId, nodeId, title, fileName, clazz);
 	}
@@ -399,7 +400,7 @@ public class WikiTestUtil {
 		throws Exception {
 
 		WikiPage copyPage = addPage(
-			page.getUserId(), page.getNodeId(), ServiceTestUtil.randomString(),
+			page.getUserId(), page.getNodeId(), RandomTestUtil.randomString(),
 			page.getContent(), approved, serviceContext);
 
 		WikiPageLocalServiceUtil.copyPageAttachments(
@@ -418,7 +419,7 @@ public class WikiTestUtil {
 
 		return updatePage(
 			page, page.getUserId(), page.getTitle(),
-			ServiceTestUtil.randomString(50), true, serviceContext);
+			RandomTestUtil.randomString(50), true, serviceContext);
 	}
 
 	public static WikiPage updatePage(

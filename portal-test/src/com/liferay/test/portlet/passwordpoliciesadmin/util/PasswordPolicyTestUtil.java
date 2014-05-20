@@ -17,7 +17,7 @@ package com.liferay.test.portlet.passwordpoliciesadmin.util;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 
 /**
  * @author Daniela Zapata Riesco
@@ -29,20 +29,20 @@ public class PasswordPolicyTestUtil {
 		throws Exception {
 
 		return PasswordPolicyLocalServiceUtil.addPasswordPolicy(
-			serviceContext.getUserId(), ServiceTestUtil.randomBoolean(),
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomBoolean(),
-			ServiceTestUtil.randomLong(), ServiceTestUtil.randomBoolean(),
-			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.nextInt(), "(?=.{4})(?:[a-zA-Z0-9]*)",
-			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.randomBoolean(), ServiceTestUtil.randomLong(),
-			ServiceTestUtil.randomLong(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.randomBoolean(), ServiceTestUtil.nextInt(),
-			ServiceTestUtil.randomLong(), ServiceTestUtil.randomLong(),
-			ServiceTestUtil.randomLong(), serviceContext);
+			serviceContext.getUserId(), RandomTestUtil.randomBoolean(),
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.randomBoolean(),
+			RandomTestUtil.randomLong(), RandomTestUtil.randomBoolean(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), RandomTestUtil.nextInt(),
+			RandomTestUtil.nextInt(), "(?=.{4})(?:[a-zA-Z0-9]*)",
+			RandomTestUtil.randomBoolean(), RandomTestUtil.nextInt(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.randomLong(),
+			RandomTestUtil.randomLong(), RandomTestUtil.nextInt(),
+			RandomTestUtil.randomBoolean(), RandomTestUtil.nextInt(),
+			RandomTestUtil.randomLong(), RandomTestUtil.randomLong(),
+			RandomTestUtil.randomLong(), serviceContext);
 	}
 
 }

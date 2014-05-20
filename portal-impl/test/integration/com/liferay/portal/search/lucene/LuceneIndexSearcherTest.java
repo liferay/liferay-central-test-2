@@ -31,7 +31,7 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 
@@ -63,7 +63,7 @@ public class LuceneIndexSearcherTest {
 		int initialUsersCount = 0;
 
 		do {
-			_randomLastName = ServiceTestUtil.randomString(10);
+			_randomLastName = RandomTestUtil.randomString(10);
 
 			Hits hits = getHits(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
@@ -73,8 +73,8 @@ public class LuceneIndexSearcherTest {
 
 		for (int i = 0; i < _USERS_COUNT; i ++) {
 			User user = UserTestUtil.addUser(
-				ServiceTestUtil.randomString(), false,
-				ServiceTestUtil.randomString(), _randomLastName,
+				RandomTestUtil.randomString(), false,
+				RandomTestUtil.randomString(), _randomLastName,
 				new long[] {TestPropsValues.getGroupId()});
 
 			_users.add(user);

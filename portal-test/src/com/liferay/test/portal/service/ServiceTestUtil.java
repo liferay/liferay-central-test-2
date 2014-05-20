@@ -14,7 +14,6 @@
 
 package com.liferay.test.portal.service;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -30,9 +29,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
 import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
@@ -61,9 +58,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
 import java.util.Set;
 
 /**
@@ -326,76 +320,6 @@ public class ServiceTestUtil {
 		return calendar.getTime();
 	}
 
-	public static Date nextDate() throws Exception {
-		return new Date();
-	}
-
-	public static double nextDouble() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	public static int nextInt() throws Exception {
-		return (int)CounterLocalServiceUtil.increment();
-	}
-
-	public static long nextLong() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	public static boolean randomBoolean() throws Exception {
-		return _random.nextBoolean();
-	}
-
-	public static int randomInt() throws Exception {
-		int value = _random.nextInt();
-
-		if (value > 0) {
-			return value;
-		}
-		else if (value == 0) {
-			return randomInt();
-		}
-		else {
-			return -value;
-		}
-	}
-
-	public static Map<Locale, String> randomLocaleStringMap() throws Exception {
-		return randomLocaleStringMap(LocaleUtil.getDefault());
-	}
-
-	public static Map<Locale, String> randomLocaleStringMap(Locale locale)
-		throws Exception {
-
-		Map<Locale, String> map = new HashMap<Locale, String>();
-
-		map.put(LocaleUtil.getDefault(), randomString());
-
-		return map;
-	}
-
-	public static long randomLong() throws Exception {
-		long value = _random.nextLong();
-
-		if (value > 0) {
-			return value;
-		}
-		else if (value == 0) {
-			return randomLong();
-		}
-		else {
-			return -value;
-		}
-	}
-
-	public static String randomString() throws Exception {
-		return StringUtil.randomString();
-	}
-
-	public static String randomString(int length) throws Exception {
-		return StringUtil.randomString(length);
-	}
-
 	public static void setUser(User user) throws Exception {
 		if (user == null) {
 			return;
@@ -465,7 +389,5 @@ public class ServiceTestUtil {
 
 		messageBus.replace(baseDestination);
 	}
-
-	private static Random _random = new Random();
 
 }

@@ -46,8 +46,8 @@ import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
 import com.liferay.portlet.dynamicdatamapping.util.DDMImpl;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -634,21 +634,21 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 		layouts.put(
 			_PRIVATE_LAYOUT,
 			LayoutTestUtil.addLayout(
-				TestPropsValues.getGroupId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getGroupId(), RandomTestUtil.randomString(),
 				true));
 		layouts.put(
 			_PRIVATE_USER_LAYOUT,
 			LayoutTestUtil.addLayout(
-				user.getGroupId(), ServiceTestUtil.randomString(), true));
+				user.getGroupId(), RandomTestUtil.randomString(), true));
 		layouts.put(
 			_PUBLIC_LAYOUT,
 			LayoutTestUtil.addLayout(
-				TestPropsValues.getGroupId(), ServiceTestUtil.randomString(),
+				TestPropsValues.getGroupId(), RandomTestUtil.randomString(),
 				false));
 		layouts.put(
 			_PUBLIC_USER_LAYOUT,
 			LayoutTestUtil.addLayout(
-				user.getGroupId(), ServiceTestUtil.randomString(), false));
+				user.getGroupId(), RandomTestUtil.randomString(), false));
 
 		return layouts;
 	}

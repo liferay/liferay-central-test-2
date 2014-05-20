@@ -34,6 +34,7 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -59,7 +60,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 
 	@Test
 	public void testAddTemplateWithDuplicateKey() throws Exception {
-		String templateKey = ServiceTestUtil.randomString();
+		String templateKey = RandomTestUtil.randomString();
 		String language = TemplateConstants.LANG_TYPE_VM;
 
 		try {

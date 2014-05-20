@@ -30,7 +30,7 @@ import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -108,7 +108,7 @@ public class JournalFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String name = getSearchKeywords();
 
-		name += ServiceTestUtil.randomString(
+		name += RandomTestUtil.randomString(
 			_FOLDER_NAME_MAX_LENGTH - name.length());
 
 		return JournalTestUtil.addFolder(
@@ -122,7 +122,7 @@ public class JournalFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String name = getSearchKeywords();
 
-		name += ServiceTestUtil.randomString(
+		name += RandomTestUtil.randomString(
 			_FOLDER_NAME_MAX_LENGTH - name.length());
 
 		return JournalTestUtil.addFolder(
@@ -174,7 +174,7 @@ public class JournalFolderTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return JournalTestUtil.addFolder(
 			group.getGroupId(), parentBaseModelId,
-			ServiceTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
+			RandomTestUtil.randomString(_FOLDER_NAME_MAX_LENGTH));
 	}
 
 	@Override

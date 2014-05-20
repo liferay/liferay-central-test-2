@@ -32,9 +32,9 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortalPreferencesImpl;
 import com.liferay.portlet.PortalPreferencesWrapper;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.IOException;
@@ -215,7 +215,7 @@ public class UpgradeCustomizablePortletsTest
 		Group group = GroupTestUtil.addGroup();
 
 		return LayoutTestUtil.addLayout(
-			group.getGroupId(), ServiceTestUtil.randomString(), false);
+			group.getGroupId(), RandomTestUtil.randomString(), false);
 	}
 
 	protected PortalPreferencesWrapper getPortalPreferences(

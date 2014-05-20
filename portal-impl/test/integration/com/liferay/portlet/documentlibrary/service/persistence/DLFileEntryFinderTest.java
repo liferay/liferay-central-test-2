@@ -49,6 +49,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
@@ -1185,7 +1186,7 @@ public class DLFileEntryFinderTest {
 
 		try {
 			_defaultRepositoryDLFileVersion.setFileEntryId(
-				ServiceTestUtil.randomLong());
+				RandomTestUtil.randomLong());
 
 			DLFileVersionLocalServiceUtil.updateDLFileVersion(
 				_defaultRepositoryDLFileVersion);
@@ -1424,7 +1425,7 @@ public class DLFileEntryFinderTest {
 		DLAppServiceUtil.moveFolderToTrash(folderC.getFolderId());
 
 		User user = UserTestUtil.addUser(
-			ServiceTestUtil.randomString(), _group.getGroupId());
+			RandomTestUtil.randomString(), _group.getGroupId());
 
 		FileEntry fileEntry = DLAppTestUtil.addFileEntry(
 			user.getUserId(), _group.getGroupId(), repositoryId,

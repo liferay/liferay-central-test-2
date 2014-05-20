@@ -26,7 +26,7 @@ import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -48,7 +48,7 @@ public class JournalFolderActivityInterpreterTest
 	@Override
 	protected void addActivities() throws Exception {
 		_folder = JournalTestUtil.addFolder(
-			group.getGroupId(), ServiceTestUtil.randomString());
+			group.getGroupId(), RandomTestUtil.randomString());
 
 		JournalFolderLocalServiceUtil.moveFolderToTrash(
 			TestPropsValues.getUserId(), _folder.getFolderId());
@@ -83,8 +83,8 @@ public class JournalFolderActivityInterpreterTest
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), _folder.getFolderId(),
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			ServiceTestUtil.randomString(), ServiceTestUtil.randomString(),
-			false, serviceContext);
+			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
+			serviceContext);
 	}
 
 	@Override

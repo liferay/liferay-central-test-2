@@ -39,9 +39,9 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplate;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 
@@ -284,7 +284,7 @@ public abstract class BasePortletExportImportTestCase
 			exportParameterMap, startDate, endDate);
 
 		importedLayout = LayoutTestUtil.addLayout(
-			importedGroup.getGroupId(), ServiceTestUtil.randomString());
+			importedGroup.getGroupId(), RandomTestUtil.randomString());
 
 		MapUtil.merge(getImportParameterMap(), importParameterMap);
 

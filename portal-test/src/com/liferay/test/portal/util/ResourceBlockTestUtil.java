@@ -17,7 +17,6 @@ package com.liferay.test.portal.util;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.ResourceBlock;
 import com.liferay.portal.service.ResourceBlockLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 /**
  * @author Alberto Chaparro
@@ -36,14 +35,14 @@ public class ResourceBlockTestUtil {
 		resourceBlock.setCompanyId(TestPropsValues.getCompanyId());
 		resourceBlock.setGroupId(groupId);
 		resourceBlock.setName(name);
-		resourceBlock.setPermissionsHash(ServiceTestUtil.randomString());
+		resourceBlock.setPermissionsHash(RandomTestUtil.randomString());
 		resourceBlock.setReferenceCount(0);
 
 		return ResourceBlockLocalServiceUtil.addResourceBlock(resourceBlock);
 	}
 
 	public static ResourceBlock addResourceBlock(String name) throws Exception {
-		return addResourceBlock(ServiceTestUtil.nextLong(), name);
+		return addResourceBlock(RandomTestUtil.nextLong(), name);
 	}
 
 }

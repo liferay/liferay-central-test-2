@@ -34,6 +34,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -119,7 +120,7 @@ public class JournalSubscriptionTest extends BaseSubscriptionTestCase {
 	protected long addContainerModel(long containerModelId) throws Exception {
 		JournalFolder folder = JournalTestUtil.addFolder(
 			group.getGroupId(), containerModelId,
-			ServiceTestUtil.randomString());
+			RandomTestUtil.randomString());
 
 		return folder.getFolderId();
 	}

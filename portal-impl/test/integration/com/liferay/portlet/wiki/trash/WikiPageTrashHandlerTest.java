@@ -36,6 +36,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
@@ -910,7 +911,7 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		String title = getSearchKeywords();
 
-		title += ServiceTestUtil.randomString(
+		title += RandomTestUtil.randomString(
 			_PAGE_TITLE_MAX_LENGTH - title.length());
 
 		return WikiTestUtil.addPage(
@@ -960,8 +961,8 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return WikiNodeLocalServiceUtil.addNode(
 			TestPropsValues.getUserId(),
-			ServiceTestUtil.randomString(_NODE_NAME_MAX_LENGTH),
-			ServiceTestUtil.randomString(), serviceContext);
+			RandomTestUtil.randomString(_NODE_NAME_MAX_LENGTH),
+			RandomTestUtil.randomString(), serviceContext);
 	}
 
 	@Override
@@ -1030,8 +1031,8 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 
 		return WikiPageLocalServiceUtil.updatePage(
 			TestPropsValues.getUserId(), page.getNodeId(), page.getTitle(),
-			page.getVersion(), ServiceTestUtil.randomString(),
-			ServiceTestUtil.randomString(), false, page.getFormat(),
+			page.getVersion(), RandomTestUtil.randomString(),
+			RandomTestUtil.randomString(), false, page.getFormat(),
 			page.getParentTitle(), page.getRedirectTitle(), serviceContext);
 	}
 

@@ -41,6 +41,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 
@@ -235,8 +236,8 @@ public class DLFileEntryTypeServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
-			String name = ServiceTestUtil.randomString();
-			String description = ServiceTestUtil.randomString();
+			String name = RandomTestUtil.randomString();
+			String description = RandomTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 				DLFileEntry.class.getName(), new Locale[] {LocaleUtil.SPAIN},
 				LocaleUtil.SPAIN);
@@ -271,8 +272,8 @@ public class DLFileEntryTypeServiceTest {
 		try {
 			LocaleThreadLocal.setSiteDefaultLocale(LocaleUtil.SPAIN);
 
-			String name = ServiceTestUtil.randomString();
-			String description = ServiceTestUtil.randomString();
+			String name = RandomTestUtil.randomString();
+			String description = RandomTestUtil.randomString();
 			DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 				DLFileEntry.class.getName(), new Locale[] {LocaleUtil.SPAIN},
 				LocaleUtil.SPAIN);
@@ -283,8 +284,8 @@ public class DLFileEntryTypeServiceTest {
 					description, new long[] {ddmStructure.getStructureId()},
 					serviceContext);
 
-			name = ServiceTestUtil.randomString();
-			description = ServiceTestUtil.randomString();
+			name = RandomTestUtil.randomString();
+			description = RandomTestUtil.randomString();
 
 			DLFileEntryTypeLocalServiceUtil.updateFileEntryType(
 				TestPropsValues.getUserId(),
