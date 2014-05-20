@@ -25,9 +25,9 @@ import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.util.GroupTestUtil;
-import com.liferay.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
 
 import java.io.File;
 

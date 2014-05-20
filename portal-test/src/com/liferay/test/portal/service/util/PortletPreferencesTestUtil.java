@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service.util;
+package com.liferay.test.portal.service.util;
 
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Layout;
@@ -20,7 +20,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 

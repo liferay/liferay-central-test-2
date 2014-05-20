@@ -30,6 +30,9 @@ import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.Locale;
 
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

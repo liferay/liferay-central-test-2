@@ -22,8 +22,9 @@ import com.liferay.portal.model.TreeModel;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
-import com.liferay.portal.util.GroupTestUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 
 import org.junit.runner.RunWith;
 

@@ -25,6 +25,7 @@ import java.net.URL;
 
 import java.nio.charset.Charset;
 
+import com.liferay.test.portal.util.TestPropsValues;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;

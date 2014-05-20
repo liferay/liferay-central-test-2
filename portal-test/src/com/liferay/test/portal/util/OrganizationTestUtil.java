@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.util;
+package com.liferay.test.portal.util;
 
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.EmailAddress;
@@ -33,7 +33,7 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
 

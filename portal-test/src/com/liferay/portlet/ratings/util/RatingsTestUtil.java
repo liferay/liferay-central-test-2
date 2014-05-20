@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.ratings.util;
 
-import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 

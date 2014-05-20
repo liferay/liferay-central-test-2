@@ -16,8 +16,8 @@ package com.liferay.portlet.asset.util;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetCategoryConstants;
 import com.liferay.portlet.asset.model.AssetTag;

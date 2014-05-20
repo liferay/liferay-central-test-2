@@ -33,9 +33,7 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 

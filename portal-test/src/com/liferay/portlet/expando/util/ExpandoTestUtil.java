@@ -15,9 +15,9 @@
 package com.liferay.portlet.expando.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;

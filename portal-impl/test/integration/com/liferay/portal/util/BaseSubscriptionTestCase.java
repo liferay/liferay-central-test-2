@@ -31,6 +31,9 @@ import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.MailServiceTestUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

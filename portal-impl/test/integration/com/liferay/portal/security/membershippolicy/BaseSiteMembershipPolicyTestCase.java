@@ -15,9 +15,9 @@
 package com.liferay.portal.security.membershippolicy;
 
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.ServiceTestUtil;
-import com.liferay.portal.util.GroupTestUtil;
-import com.liferay.portal.util.RoleTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RoleTestUtil;
 
 import org.junit.After;
 

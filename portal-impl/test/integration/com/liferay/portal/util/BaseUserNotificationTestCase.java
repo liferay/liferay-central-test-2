@@ -31,6 +31,9 @@ import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.MailServiceTestUtil;
+import com.liferay.test.portal.util.UserTestUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

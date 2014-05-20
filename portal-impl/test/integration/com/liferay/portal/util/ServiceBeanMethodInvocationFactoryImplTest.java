@@ -20,7 +20,7 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.ServiceBeanMethodInvocationFactoryUtil;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 
@@ -29,6 +29,7 @@ import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.liferay.test.portal.util.TestPropsValues;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.service;
+package com.liferay.test.portal.service;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
@@ -45,13 +45,16 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.util.RoleTestUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.RoleTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.Calendar;
 import java.util.Date;

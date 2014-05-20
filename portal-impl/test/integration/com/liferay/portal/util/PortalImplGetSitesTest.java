@@ -34,6 +34,9 @@ import com.liferay.portlet.sites.util.Sites;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.UserTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
