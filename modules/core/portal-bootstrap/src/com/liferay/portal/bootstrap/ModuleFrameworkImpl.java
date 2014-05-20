@@ -736,7 +736,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return interfaces;
 	}
 
-	prieate String _getSystemPackagesExtra() {
+	private String _getSystemPackagesExtra() {
 		String[] systemPackagesExtra =
 			PropsValues.MODULE_FRAMEWORK_SYSTEM_PACKAGES_EXTRA;
 
