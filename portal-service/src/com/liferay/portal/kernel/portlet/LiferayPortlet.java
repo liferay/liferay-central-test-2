@@ -295,6 +295,17 @@ public class LiferayPortlet extends GenericPortlet {
 		return method;
 	}
 
+	protected String getJSONContentType(PortletRequest portletRequest) {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			portletRequest);
+
+		if (BrowserSnifferUtil.isIe(request)) {
+			return ContentTypes.TEXT_HTML;
+		}
+
+		return ContentTypes.APPLICATION_JSON;
+	}
+
 	protected String getRedirect(
 		ActionRequest actionRequest, ActionResponse actionResponse) {
 
@@ -385,19 +396,10 @@ public class LiferayPortlet extends GenericPortlet {
 			Object json)
 		throws IOException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		String contentType = ContentTypes.APPLICATION_JSON;
-
-		if (BrowserSnifferUtil.isIe(request)) {
-			contentType = ContentTypes.TEXT_HTML;
-		}
-
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
 			actionResponse);
 
-		response.setContentType(contentType);
+		response.setContentType(getJSONContentType(portletRequest));
 
 		ServletResponseUtil.write(response, json.toString());
 
@@ -409,16 +411,7 @@ public class LiferayPortlet extends GenericPortlet {
 			Object json)
 		throws IOException {
 
-		HttpServletRequest request = PortalUtil.getHttpServletRequest(
-			portletRequest);
-
-		String contentType = ContentTypes.APPLICATION_JSON;
-
-		if (BrowserSnifferUtil.isIe(request)) {
-			contentType = ContentTypes.TEXT_HTML;
-		}
-
-		mimeResponse.setContentType(contentType);
+		mimeResponse.setContentType(getJSONContentType(portletRequest));
 
 		PortletResponseUtil.write(mimeResponse, json.toString());
 
