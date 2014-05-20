@@ -606,9 +606,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 		// Update all layouts based on their latest published revision
 
-		for (LayoutRevision layoutRevision :
-				layoutRevisions.values()) {
-
+		for (LayoutRevision layoutRevision : layoutRevisions.values()) {
 			updateLayoutWithLayoutRevision(layoutRevision);
 		}
 
