@@ -38,7 +38,6 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.*;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -90,7 +89,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testCopyArticle() throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext.setKeywords("Architectural");
@@ -126,7 +125,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testDeleteArticles() throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext.setKeywords("Architectural");
@@ -196,7 +195,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testIndexVersions() throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		int initialSearchCount = searchCount(
@@ -276,7 +275,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testMoveArticleToTrashAndRestore() throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext.setKeywords("Architectural");
@@ -322,7 +321,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testRemoveArticleLocale() throws Exception {
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Arquitectura");
@@ -331,7 +330,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Architectural");
@@ -386,7 +385,7 @@ public class JournalIndexerTest {
 		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Arquitectura");
@@ -395,7 +394,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
@@ -461,7 +460,7 @@ public class JournalIndexerTest {
 	}
 
 	protected void addArticle(boolean approve) throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext.setKeywords("Architectural");
@@ -515,7 +514,7 @@ public class JournalIndexerTest {
 		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
@@ -523,7 +522,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
@@ -596,7 +595,7 @@ public class JournalIndexerTest {
 	}
 
 	protected void indexVersions(boolean delete, boolean all) throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		int initialSearchCount = searchCount(
@@ -674,7 +673,7 @@ public class JournalIndexerTest {
 	}
 
 	protected void moveArticle(boolean moveToTrash) throws Exception {
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
@@ -687,7 +686,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Architectural");
@@ -763,7 +762,7 @@ public class JournalIndexerTest {
 	}
 
 	protected void updateArticle(boolean approve) throws Exception {
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
@@ -771,7 +770,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Apple");
@@ -829,7 +828,7 @@ public class JournalIndexerTest {
 		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
-		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext1.setKeywords("Architectural");
@@ -837,7 +836,7 @@ public class JournalIndexerTest {
 		int initialSearchCount1 = searchCount(
 			_group.getGroupId(), searchContext1);
 
-		SearchContext searchContext2 = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext2 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
 
 		searchContext2.setKeywords("Liferay");

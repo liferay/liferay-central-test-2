@@ -24,7 +24,6 @@ import com.liferay.portal.kernel.messaging.SynchronousDestination;
 import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineHelperUtil;
-import com.liferay.portal.kernel.search.SearchContext;
 import com.liferay.portal.kernel.template.TemplateManagerUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -116,22 +115,6 @@ public class ServiceTestUtil {
 
 	public static void destroyServices() {
 		_deleteDirectories();
-	}
-
-	public static SearchContext getSearchContext() throws Exception {
-		return getSearchContext(TestPropsValues.getGroupId());
-	}
-
-	public static SearchContext getSearchContext(long groupId)
-		throws Exception {
-
-		SearchContext searchContext = new SearchContext();
-
-		searchContext.setCompanyId(TestPropsValues.getCompanyId());
-		searchContext.setGroupIds(new long[] {groupId});
-		searchContext.setUserId(TestPropsValues.getUserId());
-
-		return searchContext;
 	}
 
 	public static void initPermissions() {

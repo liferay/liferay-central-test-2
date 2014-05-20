@@ -33,8 +33,8 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.storage.Field;
 import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
+import com.liferay.test.portal.util.SearchContextTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -153,7 +153,7 @@ public class DDLRecordServiceTest extends BaseDDLServiceTestCase {
 	}
 
 	protected SearchContext getSearchContext(String keywords) throws Exception {
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			group.getGroupId());
 
 		searchContext.setAttribute("recordSetId", recordSet.getRecordSetId());

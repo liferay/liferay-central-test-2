@@ -38,8 +38,8 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.usersadmin.util.UserIndexer;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.SearchContextTestUtil;
 import com.liferay.test.portal.util.UserTestUtil;
 
 import java.util.ArrayList;
@@ -237,7 +237,7 @@ public class DocumentImplTest {
 	protected SearchContext buildSearchContext(String keywords)
 		throws Exception {
 
-		SearchContext searchContext = ServiceTestUtil.getSearchContext();
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setAttribute(Field.STATUS, WorkflowConstants.STATUS_ANY);
 		searchContext.setKeywords(keywords);

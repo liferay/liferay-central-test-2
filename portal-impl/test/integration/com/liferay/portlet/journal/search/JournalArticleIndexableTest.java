@@ -32,9 +32,9 @@ import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.SearchContextTestUtil;
 import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -65,7 +65,7 @@ public class JournalArticleIndexableTest {
 				group.getGroupId(), JournalArticle.class.getName(), null, null,
 				new long[] {}, null);
 
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			group.getGroupId());
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());
@@ -101,7 +101,7 @@ public class JournalArticleIndexableTest {
 				group.getGroupId(), JournalArticle.class.getName(), null, null,
 				new long[0], null);
 
-		SearchContext searchContext = ServiceTestUtil.getSearchContext(
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext(
 			group.getGroupId());
 
 		searchContext.setGroupIds(assetEntryQuery.getGroupIds());

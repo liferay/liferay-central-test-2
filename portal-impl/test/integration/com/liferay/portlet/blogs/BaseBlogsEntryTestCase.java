@@ -18,7 +18,7 @@ import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.SearchContextTestUtil;
 import com.liferay.test.portal.util.ServiceContextTestUtil;
 
 import java.io.InputStream;
@@ -122,7 +122,7 @@ public class BaseBlogsEntryTestCase {
 	protected int searchBlogsEntriesCount(long groupId) throws Exception {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(BlogsEntry.class);
 
-		SearchContext searchContext = ServiceTestUtil.getSearchContext();
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setGroupIds(new long[] {groupId});
 

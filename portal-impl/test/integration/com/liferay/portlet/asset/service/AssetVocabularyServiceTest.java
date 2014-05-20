@@ -33,11 +33,7 @@ import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.ServiceContextTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.*;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
 import java.util.HashMap;
@@ -192,7 +188,7 @@ public class AssetVocabularyServiceTest {
 	protected int searchCount() throws Exception {
 		Indexer indexer = IndexerRegistryUtil.getIndexer(AssetCategory.class);
 
-		SearchContext searchContext = ServiceTestUtil.getSearchContext();
+		SearchContext searchContext = SearchContextTestUtil.getSearchContext();
 
 		searchContext.setGroupIds(new long[] {_group.getGroupId()});
 
