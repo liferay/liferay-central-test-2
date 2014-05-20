@@ -845,6 +845,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userPersistence.update(user, serviceContext);
 
+		// Resources
+
 		String creatorUserName = StringPool.BLANK;
 
 		if (creatorUserId <= 0) {
@@ -860,6 +862,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			creatorUserName = creatorUser.getFullName();
 		}
+
+		resourceLocalService.addResources(
+			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
+			false, false, false);
 
 		// Contact
 
@@ -887,12 +893,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setJobTitle(jobTitle);
 
 		contactPersistence.update(contact, serviceContext);
-
-		// Resources
-
-		resourceLocalService.addResources(
-			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
-			false, false, false);
 
 		// Group
 
