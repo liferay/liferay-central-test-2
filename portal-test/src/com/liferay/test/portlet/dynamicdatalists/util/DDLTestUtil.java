@@ -69,8 +69,8 @@ public class DDLTestUtil {
 
 		long userId = TestPropsValues.getUserId();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return DDLRecordLocalServiceUtil.addRecord(
 			userId, groupId, recordSetId,
@@ -84,8 +84,8 @@ public class DDLTestUtil {
 		String name = RandomTestUtil.randomString();
 		Locale defaultLocale = LocaleUtil.getSiteDefault();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addRecordSet(
 			groupId, structureId, name, defaultLocale, serviceContext);

@@ -65,8 +65,8 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	protected long addBaseModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			containerModelId, true, serviceContext);
@@ -76,8 +76,8 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	protected long addContainerModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			containerModelId, RandomTestUtil.randomString(), serviceContext);

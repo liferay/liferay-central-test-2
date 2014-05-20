@@ -73,8 +73,8 @@ public class JournalArticleTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	@Transactional
 	public void testArticleImages() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		int initialArticleImagesCount =
 			JournalArticleImageLocalServiceUtil.getArticleImagesCount(

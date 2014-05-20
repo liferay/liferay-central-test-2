@@ -99,8 +99,8 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearch() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			_group.getGroupId(), RandomTestUtil.randomString());
@@ -121,8 +121,8 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearchAndDeleteFolderAndSearch() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			_group.getGroupId(), RandomTestUtil.randomString());
@@ -155,8 +155,8 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearchAndVerifyDocs() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			_group.getGroupId(), RandomTestUtil.randomString());

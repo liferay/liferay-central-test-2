@@ -47,8 +47,8 @@ public class DLAppServiceHttpTest {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		try {
 			DLAppServiceHttp.deleteFolder(
@@ -104,8 +104,8 @@ public class DLAppServiceHttpTest {
 		String changeLog = StringPool.BLANK;
 		byte[] bytes = _CONTENT.getBytes();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		return DLAppServiceHttp.addFileEntry(
 			TestPropsValues.getHttpPrincipal(), _group.getGroupId(), folderId,

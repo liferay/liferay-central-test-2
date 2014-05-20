@@ -58,8 +58,8 @@ public class LayoutTestUtil {
 			Map<Locale, String> friendlyURLMap)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return LayoutLocalServiceUtil.addLayout(
 			serviceContext.getUserId(), groupId, privateLayout,
@@ -101,7 +101,8 @@ public class LayoutTestUtil {
 
 		String description = "This is a test page.";
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		if (layoutPrototype != null) {
 			serviceContext.setAttribute(

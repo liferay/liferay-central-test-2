@@ -343,7 +343,8 @@ public class MBCategoryLocalServiceTest {
 
 	@Test
 	public void testGetParentCategory() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		MBCategory parentCategory = MBCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(),

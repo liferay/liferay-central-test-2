@@ -526,8 +526,8 @@ public class JournalArticleServiceTest {
 
 		String xmlContent = readText(journalArticleContent);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		for (String requiredFieldName : requiredFields.keySet()) {
 			Assert.assertTrue(ddmStructure.getFieldRequired(requiredFieldName));
@@ -561,7 +561,8 @@ public class JournalArticleServiceTest {
 			JournalArticle article, int status)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		if (status == WorkflowConstants.STATUS_DRAFT) {
 			serviceContext.setWorkflowAction(

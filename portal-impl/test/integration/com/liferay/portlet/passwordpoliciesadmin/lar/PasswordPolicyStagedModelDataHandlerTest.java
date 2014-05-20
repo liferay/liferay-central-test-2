@@ -51,8 +51,9 @@ public class PasswordPolicyStagedModelDataHandlerTest
 			Map<String, List<StagedModel>> dependentStagedModelsMap)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId(), TestPropsValues.getUserId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				group.getGroupId(), TestPropsValues.getUserId());
 
 		return PasswordPolicyTestUtil.addPasswordPolicy(serviceContext);
 	}

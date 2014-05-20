@@ -185,8 +185,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		try {
 			String name = "InvalidMime.txt";
@@ -222,8 +222,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		String description = StringPool.BLANK;
 		String changeLog = StringPool.BLANK;
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		try {
 			String name = "Bytes-null.txt";
@@ -325,8 +325,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 		String changeLog = StringPool.BLANK;
 		byte[] bytes = CONTENT.getBytes();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		String[] assetTagNames = new String[] {"hello", "world"};
 

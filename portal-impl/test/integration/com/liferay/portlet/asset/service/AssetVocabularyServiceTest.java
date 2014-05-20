@@ -33,7 +33,11 @@ import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.SearchContextTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
 import java.util.HashMap;
@@ -138,8 +142,8 @@ public class AssetVocabularyServiceTest {
 		descriptionMap.put(LocaleUtil.SPAIN, description + "_ES");
 		descriptionMap.put(LocaleUtil.US, description + "_US");
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -174,8 +178,8 @@ public class AssetVocabularyServiceTest {
 
 		String title = RandomTestUtil.randomString();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(

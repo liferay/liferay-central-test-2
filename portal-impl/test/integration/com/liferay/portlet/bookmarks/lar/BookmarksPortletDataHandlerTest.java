@@ -76,8 +76,8 @@ public class BookmarksPortletDataHandlerTest
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			stagingGroup.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(stagingGroup.getGroupId());
 
 		BookmarksTestUtil.addEntry(folder.getFolderId(), true, serviceContext);
 	}

@@ -40,8 +40,8 @@ public class WikiPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 	protected void addStagedModels() throws Exception {
 		WikiNode node = WikiTestUtil.addNode(stagingGroup.getGroupId());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			stagingGroup.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(stagingGroup.getGroupId());
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), node.getNodeId(),

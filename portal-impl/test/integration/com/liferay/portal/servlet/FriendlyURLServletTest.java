@@ -28,12 +28,12 @@ import com.liferay.portal.util.Portal;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 
 import java.util.Collections;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.liferay.test.portal.util.ServiceContextTestUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +57,8 @@ public class FriendlyURLServletTest {
 
 	@Before
 	public void setUp() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 	}

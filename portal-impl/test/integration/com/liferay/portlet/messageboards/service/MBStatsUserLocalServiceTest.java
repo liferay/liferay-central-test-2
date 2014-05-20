@@ -180,8 +180,8 @@ public class MBStatsUserLocalServiceTest {
 			Collections.emptyList();
 		List<String> existingFiles = Collections.emptyList();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setWorkflowAction(workflowAction);
 

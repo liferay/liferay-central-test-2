@@ -99,8 +99,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure1.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder.getFolderId(),
@@ -147,8 +147,8 @@ public class JournalFolderServiceTest {
 
 	@Test
 	public void testGetInheritedWorkflowFolderId() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderServiceUtil.updateFolder(
 			JournalFolderConstants.DEFAULT_PARENT_FOLDER_ID,
@@ -235,8 +235,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder2.getFolderId(),
@@ -297,8 +297,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder.getFolderId(),
@@ -367,8 +367,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder3.getFolderId(),
@@ -432,8 +432,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		JournalFolderLocalServiceUtil.updateFolder(
 			TestPropsValues.getUserId(), folder2.getFolderId(),
@@ -511,8 +511,8 @@ public class JournalFolderServiceTest {
 
 		long[] ddmStructureIds = new long[]{ddmStructure2.getStructureId()};
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		try {
 			JournalFolderLocalServiceUtil.updateFolder(

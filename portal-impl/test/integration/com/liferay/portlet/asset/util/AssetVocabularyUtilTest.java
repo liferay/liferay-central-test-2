@@ -61,8 +61,9 @@ public class AssetVocabularyUtilTest {
 
 		titleMap.put(_LOCALE, _TITLE);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId(), TestPropsValues.getUserId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				_group.getGroupId(), TestPropsValues.getUserId());
 
 		_vocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
 			TestPropsValues.getUserId(), _TITLE, titleMap, null, null,

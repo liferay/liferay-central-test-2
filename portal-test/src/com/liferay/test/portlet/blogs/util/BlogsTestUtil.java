@@ -64,8 +64,8 @@ public class BlogsTestUtil {
 			long userId, Group group, String title, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -78,8 +78,8 @@ public class BlogsTestUtil {
 			boolean smallImage)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -194,8 +194,8 @@ public class BlogsTestUtil {
 		try {
 			WorkflowThreadLocal.setEnabled(true);
 
-			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-				entry.getGroupId());
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(entry.getGroupId());
 
 			serviceContext.setCommand(Constants.UPDATE);
 			serviceContext.setLayoutFullURL("http://localhost");

@@ -82,8 +82,8 @@ public class MBMessageServiceTest {
 				RandomTestUtil.randomString(), _group.getGroupId());
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setGroupPermissions(
 			new String[] {ActionKeys.ADD_MESSAGE, ActionKeys.VIEW});

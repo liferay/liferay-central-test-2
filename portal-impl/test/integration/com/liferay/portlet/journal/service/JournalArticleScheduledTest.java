@@ -126,8 +126,8 @@ public class JournalArticleScheduledTest {
 
 		Calendar displayDateCalendar = getCalendar(displayDate, when);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		if (approved) {
 			serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);

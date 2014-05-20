@@ -81,8 +81,9 @@ public class BookmarksEntryLocalServiceTreeTest {
 
 		_folder = BookmarksTestUtil.addFolder("Folder A");
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			TestPropsValues.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				TestPropsValues.getGroupId());
 
 		BookmarksEntry entryAA = BookmarksTestUtil.addEntry(
 			_folder.getFolderId(), true, serviceContext);

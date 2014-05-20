@@ -55,8 +55,8 @@ public class AssetTagStatsServiceTest {
 
 	@Test
 	public void testGetTagStats() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setAssetTagNames(new String[] {"basketball"});
 

@@ -320,8 +320,8 @@ public class MBAttachmentsTest {
 			_group = GroupTestUtil.addGroup();
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		_category = MBTestUtil.addCategory(serviceContext);
 	}
@@ -331,8 +331,8 @@ public class MBAttachmentsTest {
 			addCategory();
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		_message = MBTestUtil.addMessage(
 			_category.getCategoryId(), serviceContext);
@@ -354,8 +354,8 @@ public class MBAttachmentsTest {
 				MBTestUtil.getInputStreamOVPs(
 					"company_logo.png", getClass(), StringPool.BLANK);
 
-			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-				_group.getGroupId());
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 			_message = MBMessageLocalServiceUtil.addMessage(
 				user.getUserId(), user.getFullName(), _group.getGroupId(),
@@ -364,8 +364,8 @@ public class MBAttachmentsTest {
 				false, 0, false, serviceContext);
 		}
 		else {
-			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-				_group.getGroupId());
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 			List<ObjectValuePair<String, InputStream>> objectValuePairs =
 				MBTestUtil.getInputStreamOVPs(
@@ -399,8 +399,8 @@ public class MBAttachmentsTest {
 			existingFiles.add(String.valueOf(fileEntry.getFileEntryId()));
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		String fileName = "OSX_Test.docx";
 

@@ -66,7 +66,8 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testChildLayoutFriendlyURL() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		UserGroup userGroup = UserGroupLocalServiceUtil.addUserGroup(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
@@ -111,7 +112,8 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testJournalArticleFriendlyURL() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		Group group = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,

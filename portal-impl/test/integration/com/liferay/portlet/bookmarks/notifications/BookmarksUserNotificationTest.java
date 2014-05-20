@@ -48,8 +48,8 @@ public class BookmarksUserNotificationTest
 
 	@Override
 	protected BaseModel<?> addBaseModel() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		return BookmarksTestUtil.addEntry(
 			_folder.getFolderId(), true, serviceContext);

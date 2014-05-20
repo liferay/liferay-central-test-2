@@ -185,7 +185,8 @@ public class DLFileEntryTypeServiceTest {
 					_contractDLFileEntryType.getPrimaryKey(),
 					_marketingBannerDLFileEntryType.getPrimaryKey()
 				}),
-			true, ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
+			true,
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		// Add file to folder
 
@@ -216,7 +217,8 @@ public class DLFileEntryTypeServiceTest {
 			_basicDocumentDLFileEntryType.getPrimaryKey(),
 			ListUtil.toList(
 				new long[] {_basicDocumentDLFileEntryType.getPrimaryKey()}),
-			true, ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
+			true,
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		fileEntry = DLAppServiceUtil.getFileEntry(fileEntry.getFileEntryId());
 
@@ -228,8 +230,8 @@ public class DLFileEntryTypeServiceTest {
 	public void testLocalizedSiteAddFileEntryType() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
 
@@ -264,8 +266,8 @@ public class DLFileEntryTypeServiceTest {
 	public void testLocalizedSiteUpdateFileEntryType() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		Locale locale = LocaleThreadLocal.getSiteDefaultLocale();
 

@@ -43,8 +43,8 @@ public class BookmarksTestUtil {
 	public static BookmarksEntry addEntry(long groupId, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addEntry(
 			BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID, approved,
@@ -99,8 +99,8 @@ public class BookmarksTestUtil {
 			long groupId, long parentFolderId, String name)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addFolder(parentFolderId, name, serviceContext);
 	}
@@ -157,8 +157,8 @@ public class BookmarksTestUtil {
 	public static BookmarksEntry updateEntry(BookmarksEntry entry)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			entry.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(entry.getGroupId());
 
 		serviceContext.setCommand(Constants.UPDATE);
 		serviceContext.setLayoutFullURL("http://localhost");

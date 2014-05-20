@@ -27,11 +27,11 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 
 import java.util.Collections;
 import java.util.List;
 
-import com.liferay.test.portal.util.ServiceContextTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

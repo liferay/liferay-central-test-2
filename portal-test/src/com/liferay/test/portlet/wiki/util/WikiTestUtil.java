@@ -45,8 +45,8 @@ public class WikiTestUtil {
 			long groupId, long nodeId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId, "TestPage", true);
@@ -88,8 +88,8 @@ public class WikiTestUtil {
 
 		WorkflowThreadLocal.setEnabled(true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);
 
@@ -114,8 +114,8 @@ public class WikiTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -193,8 +193,8 @@ public class WikiTestUtil {
 			TestPropsValues.getUserId(), groupId, nodeId,
 			RandomTestUtil.randomString(), true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
@@ -226,8 +226,8 @@ public class WikiTestUtil {
 		WikiPage page = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId, "TestPage", true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, "TestChildPage",
@@ -255,8 +255,8 @@ public class WikiTestUtil {
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId, "A", true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiPageLocalServiceUtil.movePage(
 			TestPropsValues.getUserId(), nodeId, "A", "B", serviceContext);
@@ -288,8 +288,8 @@ public class WikiTestUtil {
 			TestPropsValues.getUserId(), groupId, nodeId,
 			RandomTestUtil.randomString(), true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiPage childPage = WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), nodeId, RandomTestUtil.randomString(),
@@ -326,8 +326,8 @@ public class WikiTestUtil {
 			boolean explicitlyRemoveRedirectPage)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		WikiTestUtil.addPage(
 			TestPropsValues.getUserId(), groupId, nodeId, "A", true);
@@ -411,8 +411,8 @@ public class WikiTestUtil {
 	}
 
 	public static WikiPage updatePage(WikiPage page) throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			page.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(page.getGroupId());
 
 		serviceContext.setCommand(Constants.UPDATE);
 		serviceContext.setLayoutFullURL("http://localhost");

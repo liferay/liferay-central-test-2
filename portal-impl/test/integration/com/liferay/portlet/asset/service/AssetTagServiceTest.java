@@ -46,8 +46,8 @@ public class AssetTagServiceTest {
 	public void testDeleteGroupTags() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		int initialTagsCount = AssetTagLocalServiceUtil.getGroupTagsCount(
 			group.getGroupId());

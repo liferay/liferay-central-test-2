@@ -28,8 +28,8 @@ public class UserGroupTestUtil {
 	}
 
 	public static UserGroup addUserGroup(long groupId) throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return UserGroupLocalServiceUtil.addUserGroup(
 			serviceContext.getUserId(), serviceContext.getCompanyId(),

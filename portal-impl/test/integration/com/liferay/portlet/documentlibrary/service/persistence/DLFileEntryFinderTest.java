@@ -47,7 +47,11 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import java.util.ArrayList;
@@ -80,8 +84,8 @@ public class DLFileEntryFinderTest {
 
 		_group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		_repository = RepositoryLocalServiceUtil.addRepository(
 			TestPropsValues.getUserId(), _group.getGroupId(), classNameId,

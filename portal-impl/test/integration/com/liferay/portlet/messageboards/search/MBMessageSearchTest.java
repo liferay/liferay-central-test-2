@@ -119,8 +119,8 @@ public class MBMessageSearchTest extends BaseSearchTestCase {
 			existingFiles.add(fileEntry.getTitle());
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			message.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(message.getGroupId());
 
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			MBTestUtil.getInputStreamOVPs(

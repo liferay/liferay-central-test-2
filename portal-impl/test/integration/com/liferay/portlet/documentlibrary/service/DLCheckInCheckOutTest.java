@@ -40,7 +40,11 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RoleTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.UserTestUtil;
 
 import java.io.InputStream;
 

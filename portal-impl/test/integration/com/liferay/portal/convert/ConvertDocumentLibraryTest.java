@@ -219,8 +219,8 @@ public class ConvertDocumentLibraryTest {
 			MBTestUtil.getInputStreamOVPs(
 				"OSX_Test.docx", getClass(), StringPool.BLANK);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		User user = TestPropsValues.getUser();
 

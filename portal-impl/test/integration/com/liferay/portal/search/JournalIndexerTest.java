@@ -38,7 +38,12 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.SearchContextTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -147,8 +152,8 @@ public class JournalIndexerTest {
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			"Architectural Approach");
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -215,8 +220,8 @@ public class JournalIndexerTest {
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -382,8 +387,8 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testUpdateArticleTranslation() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
@@ -511,8 +516,8 @@ public class JournalIndexerTest {
 	protected void articleVersions(boolean delete, boolean all)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());
@@ -613,8 +618,8 @@ public class JournalIndexerTest {
 			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
 
@@ -715,8 +720,8 @@ public class JournalIndexerTest {
 				initialSearchCount1,
 				searchCount(_group.getGroupId(), searchContext1));
 
-			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-				_group.getGroupId());
+			ServiceContext serviceContext =
+				ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 			article = JournalArticleLocalServiceUtil.getArticle(
 				article.getId());
@@ -792,8 +797,8 @@ public class JournalIndexerTest {
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			"Apple tablet");
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		if (!approve) {
 			serviceContext.setWorkflowAction(
@@ -825,8 +830,8 @@ public class JournalIndexerTest {
 	}
 
 	protected void updateContent() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		SearchContext searchContext1 = SearchContextTestUtil.getSearchContext(
 			_group.getGroupId());

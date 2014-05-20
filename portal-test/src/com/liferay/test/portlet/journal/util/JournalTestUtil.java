@@ -74,8 +74,8 @@ public class JournalTestUtil {
 	public static JournalArticle addArticle(long groupId, long folderId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -254,7 +254,8 @@ public class JournalTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -328,8 +329,8 @@ public class JournalTestUtil {
 			boolean workflowEnabled, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -357,8 +358,8 @@ public class JournalTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -421,8 +422,8 @@ public class JournalTestUtil {
 			String ddmStructureKey, String ddmTemplateKey, Locale defaultLocale)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addArticleWithXMLContent(
 			folderId, classNameId, xml, ddmStructureKey, ddmTemplateKey,
@@ -557,8 +558,8 @@ public class JournalTestUtil {
 		double feedVersion = RSSUtil.getFeedTypeVersion(
 			RSSUtil.FEED_TYPE_DEFAULT);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return JournalFeedLocalServiceUtil.addFeed(
 			userId, groupId, feedId, autoFeedId, name, description, type,
@@ -571,8 +572,8 @@ public class JournalTestUtil {
 			long groupId, long parentFolderId, String name)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addFolder(parentFolderId, name, serviceContext);
 	}

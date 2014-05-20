@@ -226,7 +226,8 @@ public class LayoutStagedModelDataHandlerTest
 	protected void initExport() throws Exception {
 		super.initExport();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setAttribute("exportLAR", Boolean.TRUE);
 

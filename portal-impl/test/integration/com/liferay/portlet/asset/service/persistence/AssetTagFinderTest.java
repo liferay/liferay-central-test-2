@@ -38,7 +38,12 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import java.util.List;
@@ -359,8 +364,8 @@ public class AssetTagFinderTest {
 	protected void addAssetTag(long groupId, String name, String[] properties)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		AssetTagLocalServiceUtil.addTag(
 			TestPropsValues.getUserId(), name, properties, serviceContext);
@@ -369,8 +374,8 @@ public class AssetTagFinderTest {
 	protected void addBlogsEntry(long groupId, String assetTagName)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		serviceContext.setAssetTagNames(new String[] {assetTagName});
 
@@ -387,8 +392,8 @@ public class AssetTagFinderTest {
 
 		String name = RandomTestUtil.randomString();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		Group scopeGroup = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), group.getParentGroupId(),

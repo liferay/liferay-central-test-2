@@ -87,8 +87,8 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		liveGroup = GroupTestUtil.addGroup();
 		stagingGroup = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			stagingGroup.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(stagingGroup.getGroupId());
 
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);
 	}

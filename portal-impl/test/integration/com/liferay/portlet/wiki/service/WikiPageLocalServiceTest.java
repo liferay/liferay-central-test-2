@@ -106,7 +106,8 @@ public class WikiPageLocalServiceTest {
 			page.getAttachmentsFileEntries();
 
 		WikiPage copyPage = WikiTestUtil.copyPage(
-			page, true, ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
+			page, true,
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		List<FileEntry> copyAttachmentsFileEntries =
 			copyPage.getAttachmentsFileEntries();
@@ -305,8 +306,8 @@ public class WikiPageLocalServiceTest {
 			TestPropsValues.getUserId(), _group.getGroupId(), _node.getNodeId(),
 			"A", true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.movePage(
 			TestPropsValues.getUserId(), _node.getNodeId(), "A", "B", true,
@@ -343,8 +344,8 @@ public class WikiPageLocalServiceTest {
 		WikiPage page = WikiTestUtil.addPage(
 			_group.getGroupId(), _node.getNodeId(), true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.movePage(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
@@ -437,8 +438,8 @@ public class WikiPageLocalServiceTest {
 		WikiPage parentPage = WikiTestUtil.addPage(
 			_group.getGroupId(), _node.getNodeId(), true);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.changeParent(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
@@ -459,8 +460,8 @@ public class WikiPageLocalServiceTest {
 			addExpandoValueToPage(page);
 		}
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		WikiPageLocalServiceUtil.movePage(
 			TestPropsValues.getUserId(), _node.getNodeId(), page.getTitle(),
@@ -509,8 +510,8 @@ public class WikiPageLocalServiceTest {
 	}
 
 	protected void testRevertPage(boolean hasExpandoValues) throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		String originalContent = RandomTestUtil.randomString();
 

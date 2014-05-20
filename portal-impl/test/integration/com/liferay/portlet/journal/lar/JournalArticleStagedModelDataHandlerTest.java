@@ -207,7 +207,8 @@ public class JournalArticleStagedModelDataHandlerTest
 		expiredArticle = JournalArticleLocalServiceUtil.expireArticle(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			expiredArticle.getArticleId(), expiredArticle.getVersion(),
-			expiredArticle.getUrlTitle(), ServiceContextTestUtil.getServiceContext());
+			expiredArticle.getUrlTitle(),
+			ServiceContextTestUtil.getServiceContext());
 
 		stagedModels.add(expiredArticle);
 

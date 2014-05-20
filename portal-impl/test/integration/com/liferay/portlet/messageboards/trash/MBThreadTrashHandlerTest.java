@@ -61,8 +61,8 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	@Transactional
 	public void testCategoryMessageCount() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
 			group, serviceContext);

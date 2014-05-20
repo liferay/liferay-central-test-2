@@ -48,7 +48,11 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.test.portal.util.*;
+import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -317,7 +321,8 @@ public class AssetPublisherExportImportTest
 		DLFileEntryType dlFileEntryType = DLAppTestUtil.addDLFileEntryType(
 			group.getGroupId(), ddmStructure.getStructureId());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setUuid(ddmStructure.getUuid());
 
@@ -381,7 +386,8 @@ public class AssetPublisherExportImportTest
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setUuid(ddmStructure.getUuid());
 
@@ -438,7 +444,8 @@ public class AssetPublisherExportImportTest
 		DLFileEntryType dlFileEntryType1 = DLAppTestUtil.addDLFileEntryType(
 			group.getGroupId(), ddmStructure1.getStructureId());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setUuid(ddmStructure1.getUuid());
 
@@ -507,7 +514,8 @@ public class AssetPublisherExportImportTest
 		DDMStructure ddmStructure1 = DDMStructureTestUtil.addStructure(
 			group.getGroupId(), JournalArticle.class.getName());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setUuid(ddmStructure1.getUuid());
 

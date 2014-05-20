@@ -44,7 +44,8 @@ public class DDMStructureTestUtil {
 
 		return addStructure(
 			groupId, className, 0, getSampleStructureXSD(),
-			LocaleUtil.getSiteDefault(), ServiceContextTestUtil.getServiceContext());
+			LocaleUtil.getSiteDefault(),
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static DDMStructure addStructure(
@@ -62,7 +63,8 @@ public class DDMStructureTestUtil {
 
 		return addStructure(
 			groupId, className, parentStructureId, getSampleStructureXSD(),
-			LocaleUtil.getSiteDefault(), ServiceContextTestUtil.getServiceContext());
+			LocaleUtil.getSiteDefault(),
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static DDMStructure addStructure(
@@ -105,7 +107,8 @@ public class DDMStructureTestUtil {
 	public static DDMStructure addStructure(String className) throws Exception {
 		return addStructure(
 			TestPropsValues.getGroupId(), className, 0, getSampleStructureXSD(),
-			LocaleUtil.getSiteDefault(), ServiceContextTestUtil.getServiceContext());
+			LocaleUtil.getSiteDefault(),
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static DDMStructure addStructure(
@@ -134,7 +137,8 @@ public class DDMStructureTestUtil {
 
 		return addStructure(
 			TestPropsValues.getGroupId(), className, 0, xsd,
-			LocaleUtil.getSiteDefault(), ServiceContextTestUtil.getServiceContext());
+			LocaleUtil.getSiteDefault(),
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static DDMStructure addStructure(

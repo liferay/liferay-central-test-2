@@ -57,8 +57,8 @@ public class VerifyBookmarksTest extends BaseVerifyTestCase {
 		BookmarksFolder parentFolder = BookmarksTestUtil.addFolder(
 			group.getGroupId(), RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
 			parentFolder.getFolderId(), true, serviceContext);
@@ -85,8 +85,8 @@ public class VerifyBookmarksTest extends BaseVerifyTestCase {
 			group.getGroupId(), grandparentFolder.getFolderId(),
 			RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		BookmarksTestUtil.addEntry(
 			parentFolder.getFolderId(), true, serviceContext);

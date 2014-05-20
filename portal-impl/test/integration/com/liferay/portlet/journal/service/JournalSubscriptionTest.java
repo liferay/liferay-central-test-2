@@ -91,8 +91,8 @@ public class JournalSubscriptionTest extends BaseSubscriptionTestCase {
 
 		DDMTemplate ddmTemplate = ddmTemplates.get(0);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		serviceContext.setLayoutFullURL("http://layout_url");
 

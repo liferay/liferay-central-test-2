@@ -48,8 +48,8 @@ public class ExportImportConfigurationTestUtil {
 			long groupId, int type, Map<String, Serializable> settingsMap)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return ExportImportConfigurationLocalServiceUtil.
 			addExportImportConfiguration(

@@ -239,8 +239,8 @@ public class DLFileVersionTest extends BaseDLAppTestCase {
 	}
 
 	protected ServiceContext getServiceContext() throws Exception {
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		serviceContext.setAttribute(
 			"fileEntryTypeId", _contractDLFileEntryTypeId);

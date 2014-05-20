@@ -60,8 +60,9 @@ public class AssetTestUtil {
 
 		String[] categoryProperties = null;
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId, TestPropsValues.getUserId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(
+				groupId, TestPropsValues.getUserId());
 
 		return AssetCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(), parentCategoryId, titleMap,
@@ -73,8 +74,8 @@ public class AssetTestUtil {
 
 		String[] tagProperties = null;
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId, userId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId, userId);
 
 		return AssetTagLocalServiceUtil.addTag(
 			userId, RandomTestUtil.randomString(), tagProperties,
@@ -84,8 +85,8 @@ public class AssetTestUtil {
 	public static AssetVocabulary addVocabulary(long groupId) throws Exception {
 		long userId = TestPropsValues.getUserId();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId, userId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId, userId);
 
 		return AssetVocabularyLocalServiceUtil.addVocabulary(
 			userId, RandomTestUtil.randomString(), serviceContext);

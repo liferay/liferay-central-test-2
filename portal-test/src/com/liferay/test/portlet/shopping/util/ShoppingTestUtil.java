@@ -46,8 +46,8 @@ public class ShoppingTestUtil {
 			long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addCategory(
 			RandomTestUtil.randomString(), parentCategoryId, serviceContext);
@@ -65,8 +65,8 @@ public class ShoppingTestUtil {
 			String name, long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addCategory(name, parentCategoryId, serviceContext);
 	}
@@ -87,8 +87,8 @@ public class ShoppingTestUtil {
 	public static ShoppingItem addItem(long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addItem(
 			RandomTestUtil.randomString(), parentCategoryId, serviceContext);
@@ -98,8 +98,8 @@ public class ShoppingTestUtil {
 			String name, long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			groupId);
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(groupId);
 
 		return addItem(name, parentCategoryId, serviceContext);
 	}

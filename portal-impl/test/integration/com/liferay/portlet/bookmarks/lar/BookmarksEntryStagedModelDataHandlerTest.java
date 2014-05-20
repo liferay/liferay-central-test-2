@@ -78,8 +78,8 @@ public class BookmarksEntryStagedModelDataHandlerTest
 
 		BookmarksFolder folder = (BookmarksFolder)dependentStagedModels.get(0);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		return BookmarksTestUtil.addEntry(
 			folder.getFolderId(), true, serviceContext);

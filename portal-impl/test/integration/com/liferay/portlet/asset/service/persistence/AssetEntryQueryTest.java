@@ -72,7 +72,8 @@ public class AssetEntryQueryTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext();
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -465,8 +466,8 @@ public class AssetEntryQueryTest {
 		int initialEntries = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
-			_group.getGroupId());
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		if (assetCategoryIds1 != null) {
 			serviceContext.setAssetCategoryIds(assetCategoryIds1);
