@@ -33,8 +33,8 @@ import com.liferay.portal.service.LayoutPrototypeLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.HashMap;
 import java.util.List;

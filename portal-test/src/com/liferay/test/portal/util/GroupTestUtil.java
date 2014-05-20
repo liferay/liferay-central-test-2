@@ -30,8 +30,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.StagingLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Locale;
 import java.util.Map;

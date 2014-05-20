@@ -20,14 +20,14 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
 import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Collections;
 import java.util.List;

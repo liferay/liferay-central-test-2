@@ -14,14 +14,14 @@
 
 package com.liferay.test.portlet.polls.util;
 
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 
 /**
  * @author Shinn Lok

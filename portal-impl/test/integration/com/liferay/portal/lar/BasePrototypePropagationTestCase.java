@@ -23,13 +23,13 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutPrototype;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ServiceContextThreadLocal;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;

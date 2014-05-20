@@ -33,8 +33,8 @@ import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
 
 import java.util.List;

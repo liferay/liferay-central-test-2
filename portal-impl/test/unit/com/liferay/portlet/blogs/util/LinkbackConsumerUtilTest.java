@@ -17,9 +17,9 @@ package com.liferay.portlet.blogs.util;
 import com.liferay.portal.kernel.security.pacl.permission.PortalSocketPermission;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.io.IOException;
 

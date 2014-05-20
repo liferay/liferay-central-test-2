@@ -25,9 +25,9 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
+import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.layoutsadmin.util.ExportImportConfigurationTestUtil;
-import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 
 import org.junit.Ignore;
 import org.junit.Test;

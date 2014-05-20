@@ -21,10 +21,10 @@ import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.StagedModel;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
 

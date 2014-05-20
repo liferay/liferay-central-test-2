@@ -14,10 +14,10 @@
 
 package com.liferay.test.portlet.ratings.util;
 
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.TestPropsValues;
 
 /**
  * @author Daniel Kocsis

@@ -17,8 +17,6 @@ package com.liferay.test.portlet.mobiledevicerules.util;
 import com.liferay.portal.mobile.device.rulegroup.action.impl.SimpleRedirectActionHandler;
 import com.liferay.portal.mobile.device.rulegroup.rule.impl.SimpleRuleHandler;
 import com.liferay.portal.model.Layout;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.portlet.mobiledevicerules.model.MDRAction;
 import com.liferay.portlet.mobiledevicerules.model.MDRRule;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
@@ -27,6 +25,8 @@ import com.liferay.portlet.mobiledevicerules.service.MDRActionLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleLocalServiceUtil;
+import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.LayoutTestUtil;
 
 import java.util.Locale;
 import java.util.Map;

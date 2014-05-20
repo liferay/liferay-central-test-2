@@ -16,6 +16,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.IOException;
 
@@ -25,7 +26,6 @@ import java.net.URL;
 
 import java.nio.charset.Charset;
 
-import com.liferay.test.portal.util.TestPropsValues;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;

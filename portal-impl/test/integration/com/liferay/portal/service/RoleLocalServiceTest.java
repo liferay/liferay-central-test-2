@@ -29,11 +29,11 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
+import com.liferay.portal.util.comparator.RoleRoleIdComparator;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.portal.util.comparator.RoleRoleIdComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
