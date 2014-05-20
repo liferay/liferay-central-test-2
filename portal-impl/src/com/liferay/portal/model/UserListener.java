@@ -79,7 +79,7 @@ public class UserListener extends BaseModelListener<User> {
 	}
 
 	@Override
-	public void onBeforeUpdate(User user) throws ModelListenerException {
+	public void onBeforeUpdate(User user) {
 		UserModelImpl userModelImpl = (UserModelImpl)user;
 
 		LDAPUserTransactionThreadLocal.setOriginalEmailAddress(
