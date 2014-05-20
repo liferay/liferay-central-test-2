@@ -391,24 +391,19 @@ String toLanguageId = (String)request.getAttribute("edit_article.jsp-toLanguageI
 	var journalContent = new Liferay.Portlet.JournalContent(
 		{
 			changeDefaultLanguage: '#<portlet:namespace />changeDefaultLanguage',
-
 			'ddm.basePortletURL': '<%= PortletURLFactoryUtil.create(request, PortletKeys.DYNAMIC_DATA_MAPPING, themeDisplay.getPlid(), PortletRequest.RENDER_PHASE) %>',
 			'ddm.classNameId': '<%= PortalUtil.getClassNameId(DDMStructure.class) %>',
 			'ddm.classPK': <%= ddmStructure.getPrimaryKey() %>,
 			'ddm.groupId': <%= groupId %>,
 			'ddm.refererPortletName': '<%= PortletKeys.JOURNAL_CONTENT %>',
 			'ddm.templateId': <%= (ddmTemplate != null) ? ddmTemplate.getTemplateId() : 0 %>,
-
 			defaultLanguage: '#<portlet:namespace />defaultLanguage',
 			defaultLanguageSelector: '#<portlet:namespace />defaultLanguageSelector',
 			editStructure: '#<portlet:namespace />editDDMStructure',
 			editTemplate: '#<portlet:namespace />editDDMTemplate',
-
 			namespace: '<portlet:namespace />',
-
 			selectStructure: '#<portlet:namespace />selectStructure',
 			selectTemplate: '#<portlet:namespace />selectTemplate',
-
 			'urls.editStructure': '<%= editStructureURL %>',
 			'urls.editTemplate': '<%= editTemplateURL %>',
 			'urls.editTranslation': '<%= editArticleRenderPopUpURL %>',
