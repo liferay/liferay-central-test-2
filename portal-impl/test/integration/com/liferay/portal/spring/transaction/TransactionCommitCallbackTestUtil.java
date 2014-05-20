@@ -12,9 +12,7 @@
  * details.
  */
 
-package com.liferay.test.portal.spring.transaction;
-
-import com.liferay.portal.spring.transaction.TransactionCommitCallbackUtil;
+package com.liferay.portal.spring.transaction;
 
 import java.util.List;
 import java.util.concurrent.Callable;

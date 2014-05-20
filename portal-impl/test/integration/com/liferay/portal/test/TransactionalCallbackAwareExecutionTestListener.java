@@ -17,7 +17,7 @@ package com.liferay.portal.test;
 import com.liferay.portal.cache.transactional.TransactionalPortalCacheHelper;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.test.portal.spring.transaction.TransactionCommitCallbackTestUtil;
+import com.liferay.portal.spring.transaction.TransactionCommitCallbackTestUtil;
 
 import java.util.List;
 import java.util.concurrent.Callable;
