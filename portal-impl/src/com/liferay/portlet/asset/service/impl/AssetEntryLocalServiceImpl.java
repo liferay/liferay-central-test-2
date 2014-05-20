@@ -422,6 +422,10 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
+			Indexer indexer = AssetSearcher.getInstance();
+
+			AssetSearcher assetSearcher = (AssetSearcher)indexer;
+
 			AssetEntryQuery assetEntryQuery = new AssetEntryQuery();
 
 			assetEntryQuery.setClassNameIds(
@@ -453,10 +457,6 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 
 			queryConfig.setHighlightEnabled(false);
 			queryConfig.setScoreEnabled(false);
-
-			Indexer searcher = AssetSearcher.getInstance();
-
-			AssetSearcher assetSearcher = (AssetSearcher)searcher;
 
 			assetSearcher.setAssetEntryQuery(assetEntryQuery);
 
