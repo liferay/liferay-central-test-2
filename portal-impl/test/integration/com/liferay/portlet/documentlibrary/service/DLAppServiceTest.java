@@ -47,7 +47,7 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.DuplicateFileException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

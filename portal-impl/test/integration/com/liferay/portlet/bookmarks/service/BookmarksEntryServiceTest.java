@@ -22,7 +22,7 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import org.junit.Before;
 import org.junit.Test;

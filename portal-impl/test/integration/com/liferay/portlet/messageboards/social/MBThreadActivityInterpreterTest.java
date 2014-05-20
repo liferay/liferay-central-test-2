@@ -22,7 +22,7 @@ import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;

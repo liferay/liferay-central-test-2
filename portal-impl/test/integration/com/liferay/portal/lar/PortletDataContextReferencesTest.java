@@ -36,10 +36,10 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.util.AssetTestUtil;
+import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.HashMap;
 import java.util.List;

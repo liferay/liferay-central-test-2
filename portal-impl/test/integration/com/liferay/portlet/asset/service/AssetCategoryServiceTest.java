@@ -23,7 +23,7 @@ import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
-import com.liferay.portlet.asset.util.AssetTestUtil;
+import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
 import org.junit.Assert;
 import org.junit.Test;

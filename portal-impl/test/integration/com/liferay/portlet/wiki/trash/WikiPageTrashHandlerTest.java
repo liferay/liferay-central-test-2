@@ -37,7 +37,7 @@ import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.util.WikiTestUtil;
+import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -30,7 +30,7 @@ import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;

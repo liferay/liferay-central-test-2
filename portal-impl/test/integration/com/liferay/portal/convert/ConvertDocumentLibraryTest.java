@@ -48,15 +48,15 @@ import com.liferay.portlet.documentlibrary.store.DBStore;
 import com.liferay.portlet.documentlibrary.store.FileSystemStore;
 import com.liferay.portlet.documentlibrary.store.Store;
 import com.liferay.portlet.documentlibrary.store.StoreFactory;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.util.WikiTestUtil;
+import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
 import java.io.InputStream;
 

@@ -61,9 +61,9 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.io.File;
 import java.io.InputStream;

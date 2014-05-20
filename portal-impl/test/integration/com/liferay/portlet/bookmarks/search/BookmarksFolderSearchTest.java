@@ -26,7 +26,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

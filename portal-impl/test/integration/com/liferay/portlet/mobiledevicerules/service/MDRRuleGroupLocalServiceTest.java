@@ -30,7 +30,7 @@ import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
-import com.liferay.portlet.mobiledevicerules.util.MDRTestUtil;
+import com.liferay.test.portlet.mobiledevicerules.util.MDRTestUtil;
 
 import java.util.LinkedHashMap;
 import java.util.List;

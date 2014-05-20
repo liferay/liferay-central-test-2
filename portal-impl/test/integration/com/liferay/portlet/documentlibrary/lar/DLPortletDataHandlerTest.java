@@ -42,9 +42,9 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 
 import java.util.Map;
 

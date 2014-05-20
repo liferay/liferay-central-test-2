@@ -35,7 +35,7 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;

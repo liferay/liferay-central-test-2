@@ -38,7 +38,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portal.xml.XMLSchemaImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
@@ -61,6 +61,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

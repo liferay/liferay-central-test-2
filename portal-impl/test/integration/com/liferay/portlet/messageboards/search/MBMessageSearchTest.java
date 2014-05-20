@@ -36,7 +36,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
 import java.io.InputStream;
 

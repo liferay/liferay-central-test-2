@@ -29,7 +29,7 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;

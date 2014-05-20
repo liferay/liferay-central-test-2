@@ -21,7 +21,7 @@ import com.liferay.portal.service.permission.BasePermissionTestCase;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import org.junit.Assert;
 import org.junit.Test;

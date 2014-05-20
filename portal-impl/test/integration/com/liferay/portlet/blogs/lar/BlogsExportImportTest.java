@@ -30,7 +30,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import java.util.Map;
 

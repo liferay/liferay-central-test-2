@@ -25,7 +25,7 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 import com.liferay.portlet.social.BaseSocialActivityInterpreterTestCase;
 import com.liferay.portlet.social.model.SocialActivityConstants;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;

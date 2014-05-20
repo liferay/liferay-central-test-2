@@ -47,13 +47,13 @@ import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.portlet.asset.util.AssetTestUtil;
+import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.portlet.assetpublisher.util.AssetPublisher;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.util.HashMap;

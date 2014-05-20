@@ -51,13 +51,13 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.portlet.asset.util.AssetTestUtil;
+import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.ratings.util.RatingsTestUtil;
+import com.liferay.test.portlet.ratings.util.RatingsTestUtil;
 
 import java.io.Serializable;
 

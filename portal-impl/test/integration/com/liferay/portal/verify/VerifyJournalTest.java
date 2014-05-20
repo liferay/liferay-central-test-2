@@ -27,7 +27,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

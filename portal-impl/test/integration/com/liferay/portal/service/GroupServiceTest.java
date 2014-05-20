@@ -54,7 +54,7 @@ import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

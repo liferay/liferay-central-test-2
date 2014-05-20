@@ -27,7 +27,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

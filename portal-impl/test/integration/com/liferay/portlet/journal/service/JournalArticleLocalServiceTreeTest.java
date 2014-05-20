@@ -21,7 +21,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.ArrayList;
 import java.util.List;

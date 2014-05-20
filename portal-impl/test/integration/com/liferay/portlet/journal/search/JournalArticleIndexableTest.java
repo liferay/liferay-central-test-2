@@ -30,12 +30,12 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.service.persistence.AssetEntryQuery;
-import com.liferay.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
+import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
 import org.junit.Test;

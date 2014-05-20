@@ -28,7 +28,7 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -25,7 +25,7 @@ import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.social.util.SocialActivityHierarchyEntryThreadLocal;
-import com.liferay.portlet.social.util.SocialActivityTestUtil;
+import com.liferay.test.portlet.social.util.SocialActivityTestUtil;
 import com.liferay.portlet.social.util.SocialConfigurationUtil;
 
 import org.junit.After;

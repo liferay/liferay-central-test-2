@@ -43,7 +43,7 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagConstants;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import java.util.List;
 

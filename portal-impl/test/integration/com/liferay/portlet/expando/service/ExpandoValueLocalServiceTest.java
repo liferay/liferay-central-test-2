@@ -29,7 +29,7 @@ import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoValue;
-import com.liferay.portlet.expando.util.ExpandoTestUtil;
+import com.liferay.test.portlet.expando.util.ExpandoTestUtil;
 
 import java.io.Serializable;
 

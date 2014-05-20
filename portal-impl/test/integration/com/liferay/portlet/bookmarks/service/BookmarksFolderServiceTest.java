@@ -36,7 +36,7 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.List;
 

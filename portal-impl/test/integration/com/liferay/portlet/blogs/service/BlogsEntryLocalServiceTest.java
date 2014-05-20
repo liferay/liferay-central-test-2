@@ -33,7 +33,7 @@ import com.liferay.test.portal.util.OrganizationTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 
 import java.util.Date;

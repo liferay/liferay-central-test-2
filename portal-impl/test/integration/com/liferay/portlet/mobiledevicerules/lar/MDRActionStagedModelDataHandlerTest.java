@@ -33,7 +33,7 @@ import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
 import com.liferay.portlet.mobiledevicerules.service.MDRActionLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
-import com.liferay.portlet.mobiledevicerules.util.MDRTestUtil;
+import com.liferay.test.portlet.mobiledevicerules.util.MDRTestUtil;
 
 import java.util.HashMap;
 import java.util.List;

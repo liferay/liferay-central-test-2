@@ -27,7 +27,7 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
 import java.util.List;
 import java.util.Map;

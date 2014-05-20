@@ -24,7 +24,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.HashMap;
 import java.util.List;

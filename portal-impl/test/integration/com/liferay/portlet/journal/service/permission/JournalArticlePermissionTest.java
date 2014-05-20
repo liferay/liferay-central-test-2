@@ -23,7 +23,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
 import org.junit.Test;

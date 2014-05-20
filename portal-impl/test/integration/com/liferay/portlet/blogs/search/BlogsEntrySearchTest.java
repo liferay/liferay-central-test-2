@@ -25,7 +25,7 @@ import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

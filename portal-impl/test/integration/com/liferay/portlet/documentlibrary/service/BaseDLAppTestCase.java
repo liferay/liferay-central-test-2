@@ -25,7 +25,7 @@ import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RoleTestUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.After;
 import org.junit.Before;

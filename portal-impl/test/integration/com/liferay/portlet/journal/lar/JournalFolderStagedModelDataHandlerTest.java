@@ -24,7 +24,7 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
 import java.util.List;

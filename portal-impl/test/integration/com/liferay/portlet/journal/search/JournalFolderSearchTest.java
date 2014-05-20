@@ -26,7 +26,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

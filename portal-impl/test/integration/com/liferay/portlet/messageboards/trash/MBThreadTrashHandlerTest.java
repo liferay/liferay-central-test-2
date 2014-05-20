@@ -35,7 +35,7 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 
 import java.util.Calendar;

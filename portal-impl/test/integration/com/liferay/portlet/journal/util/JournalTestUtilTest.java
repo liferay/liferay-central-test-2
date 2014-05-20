@@ -37,8 +37,8 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.dynamicdatamapping.StructureNameException;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
-import com.liferay.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
-import com.liferay.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolder;
 
@@ -46,6 +46,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

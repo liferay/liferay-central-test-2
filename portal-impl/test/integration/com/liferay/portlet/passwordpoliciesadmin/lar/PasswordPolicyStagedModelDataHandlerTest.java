@@ -26,7 +26,7 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
+import com.liferay.test.portlet.passwordpoliciesadmin.util.PasswordPolicyTestUtil;
 
 import java.util.List;
 import java.util.Map;

@@ -38,7 +38,7 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
 import java.util.Locale;

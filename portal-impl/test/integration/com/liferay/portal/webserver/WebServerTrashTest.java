@@ -41,7 +41,7 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import java.util.HashMap;
 import java.util.Map;

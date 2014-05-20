@@ -32,10 +32,10 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
-import com.liferay.portlet.documentlibrary.util.DLAppTestUtil;
+import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.portlet.documentlibrary.util.DLConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 
 import org.junit.Assert;
 import org.junit.Ignore;

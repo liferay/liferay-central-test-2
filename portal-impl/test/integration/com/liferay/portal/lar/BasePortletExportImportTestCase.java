@@ -42,7 +42,7 @@ import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetLinkLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
-import com.liferay.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.portlet.portletdisplaytemplate.util.PortletDisplayTemplate;
 
 import java.util.Date;

@@ -25,7 +25,7 @@ import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.runner.RunWith;
 

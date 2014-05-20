@@ -30,7 +30,7 @@ import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -25,7 +25,7 @@ import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroup;
 import com.liferay.portlet.mobiledevicerules.model.MDRRuleGroupInstance;
-import com.liferay.portlet.mobiledevicerules.util.MDRTestUtil;
+import com.liferay.test.portlet.mobiledevicerules.util.MDRTestUtil;
 
 import java.util.Map;
 

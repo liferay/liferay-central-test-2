@@ -33,14 +33,14 @@ import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
-import com.liferay.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
-import com.liferay.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
+import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.portlet.journal.InvalidDDMStructureException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 import com.liferay.portlet.trash.RestoreEntryException;
 
 import org.junit.After;

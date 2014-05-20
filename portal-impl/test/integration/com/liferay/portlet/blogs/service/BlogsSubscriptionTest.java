@@ -27,7 +27,7 @@ import com.liferay.portal.util.BaseSubscriptionTestCase;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.util.BlogsConstants;
-import com.liferay.portlet.blogs.util.BlogsTestUtil;
+import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

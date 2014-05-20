@@ -29,7 +29,7 @@ import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
-import com.liferay.portlet.messageboards.util.MBTestUtil;
+import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
 import java.io.InputStream;
 

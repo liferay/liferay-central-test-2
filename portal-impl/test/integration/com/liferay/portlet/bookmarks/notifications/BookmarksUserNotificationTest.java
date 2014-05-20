@@ -27,7 +27,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.util.BookmarksTestUtil;
+import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import org.junit.runner.RunWith;
 

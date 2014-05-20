@@ -24,7 +24,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.util.WikiTestUtil;
+import com.liferay.test.portlet.wiki.util.WikiTestUtil;
 
 import org.junit.Ignore;
 import org.junit.Test;

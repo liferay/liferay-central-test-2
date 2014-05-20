@@ -30,7 +30,7 @@ import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderServiceUtil;
-import com.liferay.portlet.journal.util.JournalTestUtil;
+import com.liferay.test.portlet.journal.util.JournalTestUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
 
