@@ -1,7 +1,13 @@
-diff a/org/apache/commons/fileupload/FileUploadBase.java b/org/apache/commons/fileupload/FileUploadBase.java
---- a/org/apache/commons/fileupload/FileUploadBase.java	2014-05-08 12:25:55.020648049 +0200
-+++ b/org/apache/commons/fileupload/FileUploadBase.java	2014-05-08 12:32:33.676658725 +0200
-@@ -958,7 +958,12 @@
+diff --git a/org/apache/commons/fileupload/FileUploadBase.java b/org/apache/commons/fileupload/FileUploadBase.java
+index 4980ac1..2a14298 100644
+--- a/org/apache/commons/fileupload/FileUploadBase.java
++++ b/org/apache/commons/fileupload/FileUploadBase.java
+@@ -1,3 +1,4 @@
++/* @generated */
+ /*
+  * Licensed to the Apache Software Foundation (ASF) under one or more
+  * contributor license agreements.  See the NOTICE file distributed with
+@@ -958,7 +959,12 @@ public abstract class FileUploadBase {
  
              notifier = new MultipartStream.ProgressNotifier(listener,
                      ctx.getContentLength());
@@ -15,7 +21,7 @@ diff a/org/apache/commons/fileupload/FileUploadBase.java b/org/apache/commons/fi
              multi.setHeaderEncoding(charEncoding);
  
              skipPreamble = true;
-@@ -1129,7 +1134,7 @@
+@@ -1129,7 +1135,7 @@ public abstract class FileUploadBase {
           * detail message.
           */
          public InvalidContentTypeException() {
@@ -24,7 +30,7 @@ diff a/org/apache/commons/fileupload/FileUploadBase.java b/org/apache/commons/fi
          }
  
          /**
-@@ -1141,6 +1146,10 @@
+@@ -1141,6 +1147,10 @@ public abstract class FileUploadBase {
          public InvalidContentTypeException(String message) {
              super(message);
          }
@@ -35,10 +41,16 @@ diff a/org/apache/commons/fileupload/FileUploadBase.java b/org/apache/commons/fi
      }
  
      /**
-diff a/org/apache/commons/fileupload/MultipartStream.java b/org/apache/commons/fileupload/MultipartStream.java
---- a/org/apache/commons/fileupload/MultipartStream.java	2014-05-08 12:26:18.468648677 +0200
-+++ b/org/apache/commons/fileupload/MultipartStream.java	2014-05-08 12:26:54.136649632 +0200
-@@ -319,8 +319,7 @@
+diff --git a/org/apache/commons/fileupload/MultipartStream.java b/org/apache/commons/fileupload/MultipartStream.java
+index cc2b7b2..a30cb9a 100644
+--- a/org/apache/commons/fileupload/MultipartStream.java
++++ b/org/apache/commons/fileupload/MultipartStream.java
+@@ -1,3 +1,4 @@
++/* @generated */
+ /*
+  * Licensed to the Apache Software Foundation (ASF) under one or more
+  * contributor license agreements.  See the NOTICE file distributed with
+@@ -319,8 +320,7 @@ public class MultipartStream {
       * @param pNotifier The notifier, which is used for calling the
       *                  progress listener, if any.
       *
@@ -48,7 +60,7 @@ diff a/org/apache/commons/fileupload/MultipartStream.java b/org/apache/commons/f
       */
      MultipartStream(InputStream input,
              byte[] boundary,
-@@ -333,9 +332,14 @@
+@@ -333,9 +333,14 @@ public class MultipartStream {
  
          // We prepend CR/LF to the boundary to chop trailng CR/LF from
          // body-data tokens.
@@ -64,7 +76,7 @@ diff a/org/apache/commons/fileupload/MultipartStream.java b/org/apache/commons/f
          System.arraycopy(BOUNDARY_PREFIX, 0, this.boundary, 0,
                  BOUNDARY_PREFIX.length);
          System.arraycopy(boundary, 0, this.boundary, BOUNDARY_PREFIX.length,
-@@ -355,8 +359,7 @@
+@@ -355,8 +360,7 @@ public class MultipartStream {
       * @param pNotifier An object for calling the progress listener, if any.
       *
       *
