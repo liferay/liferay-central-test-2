@@ -558,14 +558,14 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	protected void deleteLayoutSetBranches(long groupId, boolean privateLayout)
 		throws PortalException, SystemException {
 
+		// Find the latest layout revision for all the published layouts
+
+		Map<Long, LayoutRevision> layoutRevisions =
+			new HashMap<Long, LayoutRevision>();
+
 		List<LayoutSetBranch> layoutSetBranches =
 			layoutSetBranchLocalService.getLayoutSetBranches(
 				groupId, privateLayout);
-
-		Map<Long, LayoutRevision> publishedLayoutRevisions =
-			new HashMap<Long, LayoutRevision>();
-
-		// Find the latest layout revision for all the published layouts
 
 		for (LayoutSetBranch layoutSetBranch : layoutSetBranches) {
 			String lastPublishDateString = layoutSetBranch.getSettingsProperty(
@@ -578,30 +578,28 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			Date lastPublishDate = new Date(
 				GetterUtil.getLong(lastPublishDateString));
 
-			List<LayoutRevision> headRevisions =
+			List<LayoutRevision> headLayoutRevisions =
 				layoutRevisionLocalService.getLayoutRevisions(
 					layoutSetBranch.getLayoutSetBranchId(), true);
 
-			for (LayoutRevision layoutRevision : headRevisions) {
-				LayoutRevision latestPublishedLayoutRevision =
-					publishedLayoutRevisions.get(layoutRevision.getPlid());
+			for (LayoutRevision headLayoutRevision : headLayoutRevisions) {
+				LayoutRevision layoutRevision = layoutRevisions.get(
+					headLayoutRevision.getPlid());
 
-				if (latestPublishedLayoutRevision == null) {
-					publishedLayoutRevisions.put(
-						layoutRevision.getPlid(), layoutRevision);
+				if (layoutRevision == null) {
+					layoutRevisions.put(
+						headLayoutRevision.getPlid(), headLayoutRevision);
 
 					continue;
 				}
 
-				Date statusDate = layoutRevision.getStatusDate();
-				Date lastStatusDate =
-					latestPublishedLayoutRevision.getStatusDate();
+				Date statusDate = headLayoutRevision.getStatusDate();
 
-				if (statusDate.after(lastStatusDate) &&
+				if (statusDate.after(layoutRevision.getStatusDate()) &&
 					lastPublishDate.after(statusDate)) {
 
-					publishedLayoutRevisions.put(
-						layoutRevision.getPlid(), layoutRevision);
+					layoutRevisions.put(
+						headLayoutRevision.getPlid(), headLayoutRevision);
 				}
 			}
 		}
@@ -609,7 +607,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		// Update all layouts based on their latest published revision
 
 		for (LayoutRevision layoutRevision :
-				publishedLayoutRevisions.values()) {
+				layoutRevisions.values()) {
 
 			updateLayoutWithLayoutRevision(layoutRevision);
 		}
@@ -800,9 +798,8 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 	}
 
 	protected void setCommonStagingOptions(
-			Group liveGroup, UnicodeProperties typeSettingsProperties,
-			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		Group liveGroup, UnicodeProperties typeSettingsProperties,
+		ServiceContext serviceContext) {
 
 		if (liveGroup.hasRemoteStagingGroup()) {
 			return;
@@ -825,7 +822,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 	protected Layout updateLayoutWithLayoutRevision(
 			LayoutRevision layoutRevision)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Layout layout = layoutLocalService.fetchLayout(
 			layoutRevision.getPlid());
