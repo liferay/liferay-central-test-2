@@ -13,9 +13,17 @@
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/third-party" />
 
 	<target name="compile">
+		<process-ivy
+			module.dir="${basedir}"
+		/>
+
+		<unzip
+			dest="classes"
+			src="lib/commons-fileupload.jar"
+		/>
+
 		<antcall target="patch">
-			<param name="patch.destination" value="**" />
-			<!--<param name="patch.destination" value="org/apache/commons/fileupload/FileUploadBase.java,org/apache/commons/fileupload/MultipartStream.java" />-->
+			<param name="patch.destination" value="org/apache/commons/fileupload/FileUploadBase.java,org/apache/commons/fileupload/MultipartStream.java" />
 			<param name="patch.original.lib.name" value="${original.lib.name}" />
 			<param name="patch.original.lib.version" value="${original.lib.version}" />
 			<param name="patch.original.lib.url" value="${original.lib.url}" />
