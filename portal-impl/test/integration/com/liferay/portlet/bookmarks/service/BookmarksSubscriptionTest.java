@@ -29,8 +29,8 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.util.BookmarksConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -65,7 +65,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	protected long addBaseModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
@@ -76,7 +76,7 @@ public class BookmarksSubscriptionTest extends BaseSubscriptionTestCase {
 
 	@Override
 	protected long addContainerModel(long containerModelId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(

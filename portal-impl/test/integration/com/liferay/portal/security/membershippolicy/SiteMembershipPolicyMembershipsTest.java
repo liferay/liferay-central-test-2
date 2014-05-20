@@ -27,12 +27,12 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.Collections;
 import java.util.List;
 
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -77,7 +77,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		UserServiceUtil.addGroupUsers(
 			forbiddenGroupIds[0], addUsers(),
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	@Test
@@ -89,7 +89,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		UserServiceUtil.addGroupUsers(
 			requiredGroupIds[0], addUsers(),
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		Assert.assertEquals(
 			initialGroupUsersCount + 2,
@@ -143,7 +143,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		UserServiceUtil.addGroupUsers(
 			requiredGroupIds[0], addUsers(),
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		Assert.assertTrue(isPropagateMembership());
 	}
@@ -239,7 +239,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		UserServiceUtil.unsetGroupUsers(
 			standardGroupIds[0], new long[] {user.getUserId()},
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		Assert.assertEquals(
 			initialUserGroupCount - 1,
@@ -256,7 +256,7 @@ public class SiteMembershipPolicyMembershipsTest
 
 		UserServiceUtil.unsetGroupUsers(
 			requiredGroupIds[0], new long[] {user.getUserId()},
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	@Test
@@ -275,7 +275,7 @@ public class SiteMembershipPolicyMembershipsTest
 			RandomTestUtil.randomString(), group.getDescription(),
 			group.getType(), group.isManualMembership(),
 			group.getMembershipRestriction(), group.getFriendlyURL(),
-			group.isActive(), ServiceTestUtil.getServiceContext());
+			group.isActive(), ServiceContextTestUtil.getServiceContext());
 
 		Assert.assertTrue(isVerify());
 	}

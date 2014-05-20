@@ -16,7 +16,7 @@ package com.liferay.test.portlet.ratings.util;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 /**
@@ -36,7 +36,7 @@ public class RatingsTestUtil {
 
 		return RatingsEntryLocalServiceUtil.updateEntry(
 			TestPropsValues.getUserId(), className, classPK, score,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 }

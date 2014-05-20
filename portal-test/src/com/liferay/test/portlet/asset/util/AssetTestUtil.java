@@ -23,8 +23,8 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.HashMap;
@@ -60,7 +60,7 @@ public class AssetTestUtil {
 
 		String[] categoryProperties = null;
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId, TestPropsValues.getUserId());
 
 		return AssetCategoryLocalServiceUtil.addCategory(
@@ -73,7 +73,7 @@ public class AssetTestUtil {
 
 		String[] tagProperties = null;
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId, userId);
 
 		return AssetTagLocalServiceUtil.addTag(
@@ -84,7 +84,7 @@ public class AssetTestUtil {
 	public static AssetVocabulary addVocabulary(long groupId) throws Exception {
 		long userId = TestPropsValues.getUserId();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId, userId);
 
 		return AssetVocabularyLocalServiceUtil.addVocabulary(

@@ -46,15 +46,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.CompanyTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.test.portal.util.OrganizationTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.RoleTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.test.portal.util.UserTestUtil;
+import com.liferay.test.portal.util.*;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
 import java.util.ArrayList;
@@ -184,7 +176,7 @@ public class GroupServiceTest {
 	public void testDeleteSite() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		int initialTagsCount = AssetTagLocalServiceUtil.getGroupTagsCount(
@@ -585,7 +577,7 @@ public class GroupServiceTest {
 				group1.getDescription(), group1.getType(),
 				group1.isManualMembership(), group1.getMembershipRestriction(),
 				group1.getFriendlyURL(), group1.isActive(),
-				ServiceTestUtil.getServiceContext());
+				ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A child group cannot be its parent group");
 		}
@@ -613,7 +605,7 @@ public class GroupServiceTest {
 				group1.getDescription(), group1.getType(),
 				group1.isManualMembership(), group1.getMembershipRestriction(),
 				group1.getFriendlyURL(), group1.isActive(),
-				ServiceTestUtil.getServiceContext());
+				ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A child group cannot be its parent group");
 		}
@@ -640,7 +632,7 @@ public class GroupServiceTest {
 				stagingGroup.getType(), stagingGroup.isManualMembership(),
 				stagingGroup.getMembershipRestriction(),
 				stagingGroup.getFriendlyURL(), stagingGroup.isActive(),
-				ServiceTestUtil.getServiceContext());
+				ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A group cannot have its live group as parent");
 		}
@@ -660,7 +652,7 @@ public class GroupServiceTest {
 				group.getDescription(), group.getType(),
 				group.isManualMembership(), group.getMembershipRestriction(),
 				group.getFriendlyURL(), group.isActive(),
-				ServiceTestUtil.getServiceContext());
+				ServiceContextTestUtil.getServiceContext());
 
 			Assert.fail("A group cannot be its own parent");
 		}
@@ -879,7 +871,7 @@ public class GroupServiceTest {
 
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group1.getGroupId(), user.getUserId());
 
 		if (addGroup) {

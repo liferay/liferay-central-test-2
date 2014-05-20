@@ -37,13 +37,13 @@ import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.OrganizationTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.util.List;
 import java.util.Map;
 
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
 
@@ -87,7 +87,7 @@ public class OrganizationStagedModelDataHandlerTest
 
 		OrganizationTestUtil.addOrgLabor(organization);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		PasswordPolicy passwordPolicy =

@@ -22,8 +22,8 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -81,7 +81,7 @@ public class BookmarksEntryLocalServiceTreeTest {
 
 		_folder = BookmarksTestUtil.addFolder("Folder A");
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			TestPropsValues.getGroupId());
 
 		BookmarksEntry entryAA = BookmarksTestUtil.addEntry(

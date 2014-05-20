@@ -31,7 +31,7 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.service.BaseDDMServiceTestCase;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
@@ -395,7 +395,7 @@ public class StorageAdapterTest extends BaseDDMServiceTestCase {
 
 		return storageAdapter.create(
 			TestPropsValues.getCompanyId(), ddmStructureId, fields,
-			ServiceTestUtil.getServiceContext(group.getGroupId()));
+			ServiceContextTestUtil.getServiceContext(group.getGroupId()));
 	}
 
 	protected String getDocLibraryFieldValue(FileEntry fileEntry) {

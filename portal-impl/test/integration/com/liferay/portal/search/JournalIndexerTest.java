@@ -39,10 +39,7 @@ import com.liferay.portlet.journal.model.JournalFolder;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.test.portal.util.UserTestUtil;
+import com.liferay.test.portal.util.*;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -151,7 +148,7 @@ public class JournalIndexerTest {
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			"Architectural Approach");
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
@@ -219,7 +216,7 @@ public class JournalIndexerTest {
 				_group.getGroupId(), false, WorkflowConstants.STATUS_ANY,
 				searchContext));
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
@@ -386,7 +383,7 @@ public class JournalIndexerTest {
 
 	@Test
 	public void testUpdateArticleTranslation() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
@@ -515,7 +512,7 @@ public class JournalIndexerTest {
 	protected void articleVersions(boolean delete, boolean all)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(
@@ -617,7 +614,7 @@ public class JournalIndexerTest {
 			initialSearchCount + 1,
 			searchCount(_group.getGroupId(), searchContext));
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_PUBLISH);
@@ -719,7 +716,7 @@ public class JournalIndexerTest {
 				initialSearchCount1,
 				searchCount(_group.getGroupId(), searchContext1));
 
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId());
 
 			article = JournalArticleLocalServiceUtil.getArticle(
@@ -796,7 +793,7 @@ public class JournalIndexerTest {
 		String content = DDMStructureTestUtil.getSampleStructuredContent(
 			"Apple tablet");
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		if (!approve) {
@@ -829,7 +826,7 @@ public class JournalIndexerTest {
 	}
 
 	protected void updateContent() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		SearchContext searchContext1 = ServiceTestUtil.getSearchContext(

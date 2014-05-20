@@ -20,8 +20,8 @@ import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 /**
@@ -35,14 +35,14 @@ public class PollsTestUtil {
 		return PollsChoiceLocalServiceUtil.addChoice(
 			TestPropsValues.getUserId(), questionId,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
-			ServiceTestUtil.getServiceContext(groupId));
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static PollsQuestion addQuestion(long groupId) throws Exception {
 		return PollsQuestionLocalServiceUtil.addQuestion(
 			TestPropsValues.getUserId(), RandomTestUtil.randomLocaleStringMap(),
 			RandomTestUtil.randomLocaleStringMap(), 0, 0, 0, 0, 0, true, null,
-			ServiceTestUtil.getServiceContext(groupId));
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static PollsVote addVote(
@@ -51,7 +51,7 @@ public class PollsTestUtil {
 
 		return PollsVoteLocalServiceUtil.addVote(
 			TestPropsValues.getUserId(), questionId, choiceId,
-			ServiceTestUtil.getServiceContext(groupId));
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 }

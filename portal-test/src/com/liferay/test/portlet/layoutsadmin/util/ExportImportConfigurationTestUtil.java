@@ -20,8 +20,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ExportImportConfigurationLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -48,7 +48,7 @@ public class ExportImportConfigurationTestUtil {
 			long groupId, int type, Map<String, Serializable> settingsMap)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return ExportImportConfigurationLocalServiceUtil.

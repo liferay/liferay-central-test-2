@@ -25,9 +25,9 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
@@ -57,7 +57,7 @@ public class VerifyBookmarksTest extends BaseVerifyTestCase {
 		BookmarksFolder parentFolder = BookmarksTestUtil.addFolder(
 			group.getGroupId(), RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BookmarksEntry entry = BookmarksTestUtil.addEntry(
@@ -85,7 +85,7 @@ public class VerifyBookmarksTest extends BaseVerifyTestCase {
 			group.getGroupId(), grandparentFolder.getFolderId(),
 			RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BookmarksTestUtil.addEntry(

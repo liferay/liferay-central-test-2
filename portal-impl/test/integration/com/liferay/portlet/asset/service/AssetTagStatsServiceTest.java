@@ -26,9 +26,9 @@ import com.liferay.portlet.asset.model.AssetTag;
 import com.liferay.portlet.asset.model.AssetTagStats;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import org.junit.Assert;
@@ -55,7 +55,7 @@ public class AssetTagStatsServiceTest {
 
 	@Test
 	public void testGetTagStats() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setAssetTagNames(new String[] {"basketball"});

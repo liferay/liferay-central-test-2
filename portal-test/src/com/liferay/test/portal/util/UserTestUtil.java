@@ -27,7 +27,6 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -176,7 +175,7 @@ public class UserTestUtil {
 		return addUser(
 			TestPropsValues.getCompanyId(), TestPropsValues.getUserId(),
 			screenName, autoScreenName, locale, firstName, lastName, groupIds,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static User addUser(

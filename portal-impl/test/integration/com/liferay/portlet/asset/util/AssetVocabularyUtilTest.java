@@ -26,8 +26,8 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class AssetVocabularyUtilTest {
 
 		titleMap.put(_LOCALE, _TITLE);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId(), TestPropsValues.getUserId());
 
 		_vocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -73,7 +73,7 @@ public class AssetVocabularyUtilTest {
 
 		_companyGroup = company.getGroup();
 
-		serviceContext = ServiceTestUtil.getServiceContext(
+		serviceContext = ServiceContextTestUtil.getServiceContext(
 			_companyGroup.getGroupId(), TestPropsValues.getUserId());
 
 		_companyVocabulary = AssetVocabularyLocalServiceUtil.addVocabulary(

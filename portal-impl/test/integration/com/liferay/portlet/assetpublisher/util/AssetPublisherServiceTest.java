@@ -32,9 +32,9 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -184,7 +184,7 @@ public class AssetPublisherServiceTest {
 			AssetCategory assetCategory =
 				AssetCategoryLocalServiceUtil.addCategory(
 					TestPropsValues.getUserId(), assetCategoryName,
-					vocabularyId, ServiceTestUtil.getServiceContext());
+					vocabularyId, ServiceContextTestUtil.getServiceContext());
 
 			_assetCategoryIds = ArrayUtil.append(
 				_assetCategoryIds, assetCategory.getCategoryId());
@@ -231,7 +231,7 @@ public class AssetPublisherServiceTest {
 	}
 
 	protected void addAssetVocabulary() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		serviceContext.setAddGroupPermissions(false);
@@ -240,7 +240,7 @@ public class AssetPublisherServiceTest {
 		AssetVocabulary assetVocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
 				TestPropsValues.getUserId(), RandomTestUtil.randomString(),
-				ServiceTestUtil.getServiceContext(_group.getGroupId()));
+				ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 
 		addAssetCategories(assetVocabulary.getVocabularyId());
 	}

@@ -44,8 +44,8 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryTypeLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.Serializable;
@@ -66,7 +66,7 @@ public abstract class DLAppTestUtil {
 		String name = RandomTestUtil.randomString();
 		String description = RandomTestUtil.randomString();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addDLFileEntryType(
@@ -87,7 +87,7 @@ public abstract class DLAppTestUtil {
 	public static DLFileRank addDLFileRank(long groupId, long fileEntryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return DLAppLocalServiceUtil.addFileRank(
@@ -99,7 +99,7 @@ public abstract class DLAppTestUtil {
 			FileEntry fileEntry, long groupId, long folderId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return DLAppServiceUtil.addFileShortcut(
@@ -151,7 +151,7 @@ public abstract class DLAppTestUtil {
 			long fileEntryTypeId, int workflowAction)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setAttribute("fileEntryTypeId", fileEntryTypeId);
@@ -169,7 +169,7 @@ public abstract class DLAppTestUtil {
 			boolean workflowEnabled, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		if (fileEntryTypeId !=
@@ -367,7 +367,7 @@ public abstract class DLAppTestUtil {
 			long groupId, long repositoryId, long parentFolderId, String name)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addFolder(
@@ -386,7 +386,7 @@ public abstract class DLAppTestUtil {
 			boolean deleteExisting)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addFolder(parentFolderId, name, deleteExisting, serviceContext);
@@ -453,7 +453,7 @@ public abstract class DLAppTestUtil {
 		UnicodeProperties typeSettingsProperties = new UnicodeProperties();
 		boolean hidden = false;
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addRepository(
@@ -480,7 +480,7 @@ public abstract class DLAppTestUtil {
 		long userId = TestPropsValues.getUserId();
 		String mappedId = RandomTestUtil.randomString();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addRepositoryEntry(
@@ -518,7 +518,7 @@ public abstract class DLAppTestUtil {
 			boolean majorVersion, boolean workflowEnabled, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.UPDATE);
@@ -603,7 +603,7 @@ public abstract class DLAppTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.UPDATE);
@@ -634,7 +634,7 @@ public abstract class DLAppTestUtil {
 
 		DLFolderLocalServiceUtil.updateDLFolder(dlFolder);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			folder.getGroupId());
 
 		DLFileEntryTypeLocalServiceUtil.updateFolderFileEntryTypes(

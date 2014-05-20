@@ -37,8 +37,8 @@ import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalArticleConstants;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -66,7 +66,7 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testChildLayoutFriendlyURL() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		UserGroup userGroup = UserGroupLocalServiceUtil.addUserGroup(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
@@ -111,7 +111,7 @@ public class PortalImplActualURLTest {
 
 	@Test
 	public void testJournalArticleFriendlyURL() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		Group group = GroupLocalServiceUtil.addGroup(
 			TestPropsValues.getUserId(), GroupConstants.DEFAULT_PARENT_GROUP_ID,

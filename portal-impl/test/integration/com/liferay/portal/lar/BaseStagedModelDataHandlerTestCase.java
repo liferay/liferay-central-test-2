@@ -52,8 +52,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
@@ -87,7 +87,7 @@ public abstract class BaseStagedModelDataHandlerTestCase {
 		liveGroup = GroupTestUtil.addGroup();
 		stagingGroup = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			stagingGroup.getGroupId());
 
 		ServiceContextThreadLocal.pushServiceContext(serviceContext);

@@ -16,8 +16,6 @@ package com.liferay.test.portal.service;
 
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.messaging.BaseDestination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -44,7 +42,6 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.tools.DBUpgrader;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -135,32 +132,6 @@ public class ServiceTestUtil {
 		searchContext.setUserId(TestPropsValues.getUserId());
 
 		return searchContext;
-	}
-
-	public static ServiceContext getServiceContext()
-		throws PortalException, SystemException {
-
-		return getServiceContext(TestPropsValues.getGroupId());
-	}
-
-	public static ServiceContext getServiceContext(long groupId)
-		throws PortalException, SystemException {
-
-		return getServiceContext(groupId, TestPropsValues.getUserId());
-	}
-
-	public static ServiceContext getServiceContext(long groupId, long userId)
-		throws PortalException, SystemException {
-
-		ServiceContext serviceContext = new ServiceContext();
-
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setUserId(userId);
-
-		return serviceContext;
 	}
 
 	public static void initPermissions() {

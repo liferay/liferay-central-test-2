@@ -51,9 +51,9 @@ import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
@@ -219,7 +219,7 @@ public class ConvertDocumentLibraryTest {
 			MBTestUtil.getInputStreamOVPs(
 				"OSX_Test.docx", getClass(), StringPool.BLANK);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		User user = TestPropsValues.getUser();

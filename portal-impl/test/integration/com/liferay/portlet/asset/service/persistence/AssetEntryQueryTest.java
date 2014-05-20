@@ -42,9 +42,9 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.blogs.util.BlogsTestUtil;
 
@@ -72,7 +72,7 @@ public class AssetEntryQueryTest {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		AssetVocabulary vocabulary =
 			AssetVocabularyLocalServiceUtil.addVocabulary(
@@ -465,7 +465,7 @@ public class AssetEntryQueryTest {
 		int initialEntries = AssetEntryServiceUtil.getEntriesCount(
 			assetEntryQuery);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		if (assetCategoryIds1 != null) {

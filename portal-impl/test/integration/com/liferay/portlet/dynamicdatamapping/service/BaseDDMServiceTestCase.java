@@ -25,8 +25,8 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructureConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
 import com.liferay.portlet.dynamicdatamapping.storage.StorageType;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.File;
@@ -91,7 +91,7 @@ public class BaseDDMServiceTestCase {
 			TestPropsValues.getUserId(), group.getGroupId(), parentStructureId,
 			classNameId, structureKey, getDefaultLocaleMap(name), null, xsd,
 			storageType, type,
-			ServiceTestUtil.getServiceContext(group.getGroupId()));
+			ServiceContextTestUtil.getServiceContext(group.getGroupId()));
 	}
 
 	protected DDMStructure addStructure(long classNameId, String name)
@@ -144,7 +144,7 @@ public class BaseDDMServiceTestCase {
 			TestPropsValues.getUserId(), group.getGroupId(), classNameId,
 			classPK, templateKey, getDefaultLocaleMap(name), null, type, mode,
 			language, script, cacheable, smallImage, smallImageURL, smallFile,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	protected String getBasePath() {

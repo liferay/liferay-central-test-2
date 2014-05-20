@@ -23,8 +23,8 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.InputStream;
@@ -64,7 +64,7 @@ public class BlogsTestUtil {
 			long userId, Group group, String title, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
@@ -78,7 +78,7 @@ public class BlogsTestUtil {
 			boolean smallImage)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setCommand(Constants.ADD);
@@ -194,7 +194,7 @@ public class BlogsTestUtil {
 		try {
 			WorkflowThreadLocal.setEnabled(true);
 
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 				entry.getGroupId());
 
 			serviceContext.setCommand(Constants.UPDATE);

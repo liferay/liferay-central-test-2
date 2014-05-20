@@ -27,11 +27,11 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.test.portal.security.membershippolicy.util.MembershipPolicyTestUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Collections;
 import java.util.List;
 
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -281,7 +281,7 @@ public class OrganizationMembershipPolicyMembershipsTest
 			organization.getParentOrganizationId(), organization.getName(),
 			organization.getType(), 0, 0, organization.getStatusId(),
 			organization.getComments(), false,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		Assert.assertTrue(isVerify());
 	}

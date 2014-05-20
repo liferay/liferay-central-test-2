@@ -26,11 +26,7 @@ import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.*;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
@@ -52,7 +48,7 @@ public abstract class BasePrototypePropagationTestCase {
 		FinderCacheUtil.clearCache();
 
 		ServiceContextThreadLocal.pushServiceContext(
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		// Group
 

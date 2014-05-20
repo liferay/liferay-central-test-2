@@ -27,9 +27,9 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBCategoryConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
@@ -343,7 +343,7 @@ public class MBCategoryLocalServiceTest {
 
 	@Test
 	public void testGetParentCategory() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		MBCategory parentCategory = MBCategoryLocalServiceUtil.addCategory(
 			TestPropsValues.getUserId(),

@@ -25,9 +25,9 @@ import com.liferay.portlet.mobiledevicerules.service.MDRActionLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupInstanceLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleGroupLocalServiceUtil;
 import com.liferay.portlet.mobiledevicerules.service.MDRRuleLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -54,7 +54,7 @@ public class MDRTestUtil {
 
 		return MDRActionLocalServiceUtil.addAction(
 			ruleGroupInstanceId, nameMap, descriptionMap, type, typeSettings,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static MDRRule addRule(long ruleGroupId) throws Exception {
@@ -72,7 +72,7 @@ public class MDRTestUtil {
 
 		return MDRRuleLocalServiceUtil.addRule(
 			ruleGroupId, nameMap, descriptionMap, type, typeSettings,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static MDRRuleGroup addRuleGroup(long groupId) throws Exception {
@@ -88,7 +88,7 @@ public class MDRTestUtil {
 
 		return MDRRuleGroupLocalServiceUtil.addRuleGroup(
 			groupId, nameMap, descriptionMap,
-			ServiceTestUtil.getServiceContext(groupId));
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static MDRRuleGroupInstance addRuleGroupInstance(
@@ -108,7 +108,7 @@ public class MDRTestUtil {
 
 		return MDRRuleGroupInstanceLocalServiceUtil.addRuleGroupInstance(
 			groupId, className, classPK, ruleGroupId,
-			ServiceTestUtil.getServiceContext(groupId));
+			ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 }

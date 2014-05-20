@@ -48,9 +48,9 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.sites.util.Sites;
 import com.liferay.portlet.sites.util.SitesUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
@@ -454,7 +454,7 @@ public class LayoutSetPrototypePropagationTest
 		}
 
 		LayoutLocalServiceUtil.deleteLayout(
-			layout, true, ServiceTestUtil.getServiceContext());
+			layout, true, ServiceContextTestUtil.getServiceContext());
 
 		if (linkEnabled) {
 			Assert.assertEquals(
@@ -582,7 +582,7 @@ public class LayoutSetPrototypePropagationTest
 				_layoutSetPrototype.getNameMap(),
 				_layoutSetPrototype.getDescriptionMap(),
 				_layoutSetPrototype.getActive(), layoutsUpdateable,
-				ServiceTestUtil.getServiceContext());
+				ServiceContextTestUtil.getServiceContext());
 	}
 
 	protected Layout setLayoutUpdateable(

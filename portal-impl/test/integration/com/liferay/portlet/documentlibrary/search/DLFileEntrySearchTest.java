@@ -49,6 +49,7 @@ import com.liferay.portlet.dynamicdatamapping.storage.Fields;
 import com.liferay.portlet.dynamicdatamapping.util.DDMIndexerUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -82,7 +83,7 @@ public class DLFileEntrySearchTest extends BaseSearchTestCase {
 	@Test
 	@Transactional
 	public void testSearchTikaRawMetadata() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(

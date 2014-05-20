@@ -41,8 +41,8 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -207,7 +207,7 @@ public class JournalArticleStagedModelDataHandlerTest
 		expiredArticle = JournalArticleLocalServiceUtil.expireArticle(
 			TestPropsValues.getUserId(), group.getGroupId(),
 			expiredArticle.getArticleId(), expiredArticle.getVersion(),
-			expiredArticle.getUrlTitle(), ServiceTestUtil.getServiceContext());
+			expiredArticle.getUrlTitle(), ServiceContextTestUtil.getServiceContext());
 
 		stagedModels.add(expiredArticle);
 

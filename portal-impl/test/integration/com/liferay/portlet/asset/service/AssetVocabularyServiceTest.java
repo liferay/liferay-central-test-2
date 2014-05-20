@@ -36,6 +36,7 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.util.AssetTestUtil;
 
@@ -141,7 +142,7 @@ public class AssetVocabularyServiceTest {
 		descriptionMap.put(LocaleUtil.SPAIN, description + "_ES");
 		descriptionMap.put(LocaleUtil.US, description + "_US");
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		AssetVocabulary vocabulary =
@@ -177,7 +178,7 @@ public class AssetVocabularyServiceTest {
 
 		String title = RandomTestUtil.randomString();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		AssetVocabulary vocabulary =

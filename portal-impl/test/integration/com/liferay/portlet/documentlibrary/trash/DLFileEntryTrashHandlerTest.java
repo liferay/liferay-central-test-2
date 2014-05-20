@@ -45,9 +45,9 @@ import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
 import com.liferay.portlet.trash.util.TrashUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
@@ -280,7 +280,7 @@ public class DLFileEntryTrashHandlerTest extends BaseTrashHandlerTestCase {
 	protected void trashDLFileRank() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(

@@ -42,6 +42,7 @@ import com.liferay.portlet.asset.util.AssetUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 
@@ -75,7 +76,7 @@ public abstract class BaseAssetSearchTestCase {
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		AssetVocabulary vocabulary =
@@ -561,7 +562,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		int initialEntries = searchCount(assetEntryQuery, searchContext);
 
-		ServiceContext serviceContext1 = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext1 = ServiceContextTestUtil.getServiceContext(
 			group1.getGroupId());
 
 		BaseModel<?> parentBaseModel1 = getParentBaseModel(
@@ -569,7 +570,7 @@ public abstract class BaseAssetSearchTestCase {
 
 		addBaseModel(parentBaseModel1, getSearchKeywords(), serviceContext1);
 
-		ServiceContext serviceContext2 = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext2 = ServiceContextTestUtil.getServiceContext(
 			group2.getGroupId());
 
 		BaseModel<?> parentBaseModel2 = getParentBaseModel(
@@ -1002,7 +1003,7 @@ public abstract class BaseAssetSearchTestCase {
 			AssetEntryQuery assetEntryQuery, int expectedResults)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1033,7 +1034,7 @@ public abstract class BaseAssetSearchTestCase {
 			AssetEntryQuery assetEntryQuery, int expectedResult)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1056,7 +1057,7 @@ public abstract class BaseAssetSearchTestCase {
 			AssetEntryQuery assetEntryQuery, boolean classType)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1091,7 +1092,7 @@ public abstract class BaseAssetSearchTestCase {
 			String[] titles, String[] orderedTitles)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1129,7 +1130,7 @@ public abstract class BaseAssetSearchTestCase {
 			Date[] expirationDates)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1177,7 +1178,7 @@ public abstract class BaseAssetSearchTestCase {
 			String[] titles, String[] orderedTitles)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(
@@ -1208,7 +1209,7 @@ public abstract class BaseAssetSearchTestCase {
 	protected void testPaginationType(AssetEntryQuery assetEntryQuery, int size)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(

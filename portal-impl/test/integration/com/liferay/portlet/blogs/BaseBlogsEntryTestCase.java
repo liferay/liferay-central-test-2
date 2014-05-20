@@ -19,6 +19,7 @@ import com.liferay.portlet.asset.service.AssetEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 
 import java.io.InputStream;
 import java.io.Serializable;
@@ -47,7 +48,7 @@ public class BaseBlogsEntryTestCase {
 	protected BlogsEntry addBlogsEntry(Group group, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setWorkflowAction(WorkflowConstants.ACTION_SAVE_DRAFT);

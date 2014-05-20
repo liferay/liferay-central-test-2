@@ -23,8 +23,8 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import java.io.File;
@@ -46,7 +46,7 @@ public class ShoppingTestUtil {
 			long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addCategory(
@@ -65,7 +65,7 @@ public class ShoppingTestUtil {
 			String name, long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addCategory(name, parentCategoryId, serviceContext);
@@ -87,7 +87,7 @@ public class ShoppingTestUtil {
 	public static ShoppingItem addItem(long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addItem(
@@ -98,7 +98,7 @@ public class ShoppingTestUtil {
 			String name, long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addItem(name, parentCategoryId, serviceContext);

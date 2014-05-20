@@ -34,8 +34,8 @@ import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadFlagLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portal.util.UserTestUtil;
 
@@ -68,7 +68,7 @@ public class MBTestUtil {
 	public static MBBan addBan(long userId, long groupId, long banUserId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return MBBanLocalServiceUtil.addBan(userId, banUserId, serviceContext);
@@ -82,7 +82,7 @@ public class MBTestUtil {
 	public static MBCategory addCategory(long groupId, long parentCategoryId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addCategory(
@@ -126,7 +126,7 @@ public class MBTestUtil {
 
 		MBThread thread =  messageDisplay.getThread();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.ADD);
@@ -154,7 +154,7 @@ public class MBTestUtil {
 			long groupId, long categoryId, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.ADD);
@@ -179,7 +179,7 @@ public class MBTestUtil {
 		double priority = 0.0;
 		boolean allowPingbacks = false;
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -240,7 +240,7 @@ public class MBTestUtil {
 			List<ObjectValuePair<String, InputStream>> inputStreamOVPs)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addMessage(
@@ -251,7 +251,7 @@ public class MBTestUtil {
 	public static MBThreadFlag addThreadFlag(long groupId, MBThread thread)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		MBThreadFlagLocalServiceUtil.addThreadFlag(
@@ -291,7 +291,7 @@ public class MBTestUtil {
 			long classPK)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.UPDATE);
@@ -320,7 +320,7 @@ public class MBTestUtil {
 		try {
 			WorkflowThreadLocal.setEnabled(true);
 
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 				message.getGroupId());
 
 			serviceContext.setCommand(Constants.UPDATE);

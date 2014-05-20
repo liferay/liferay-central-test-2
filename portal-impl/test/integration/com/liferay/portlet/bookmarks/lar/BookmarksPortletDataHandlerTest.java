@@ -26,9 +26,9 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.List;
@@ -76,7 +76,7 @@ public class BookmarksPortletDataHandlerTest
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
 			stagingGroup.getGroupId(), RandomTestUtil.randomString());
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			stagingGroup.getGroupId());
 
 		BookmarksTestUtil.addEntry(folder.getFolderId(), true, serviceContext);

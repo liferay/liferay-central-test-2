@@ -35,6 +35,7 @@ import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.asset.service.persistence.AssetEntryQueryTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -116,7 +117,7 @@ public class JournalArticleIndexableTest {
 			PortalUtil.getClassNameId(DDMStructure.class),
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(),
 			RandomTestUtil.randomString(), LocaleUtil.getSiteDefault(), false,
-			true, ServiceTestUtil.getServiceContext(group.getGroupId()));
+			true, ServiceContextTestUtil.getServiceContext(group.getGroupId()));
 
 		hits = AssetUtil.search(
 			searchContext, assetEntryQuery, QueryUtil.ALL_POS,

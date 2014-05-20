@@ -26,8 +26,8 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 /**
@@ -43,7 +43,7 @@ public class BookmarksTestUtil {
 	public static BookmarksEntry addEntry(long groupId, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addEntry(
@@ -99,7 +99,7 @@ public class BookmarksTestUtil {
 			long groupId, long parentFolderId, String name)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addFolder(parentFolderId, name, serviceContext);
@@ -157,7 +157,7 @@ public class BookmarksTestUtil {
 	public static BookmarksEntry updateEntry(BookmarksEntry entry)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			entry.getGroupId());
 
 		serviceContext.setCommand(Constants.UPDATE);

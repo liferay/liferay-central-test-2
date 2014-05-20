@@ -40,10 +40,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntryConstants;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.permission.DLPermission;
 import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.RoleTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.test.portal.util.UserTestUtil;
+import com.liferay.test.portal.util.*;
 
 import java.io.InputStream;
 
@@ -80,7 +77,7 @@ public class DLCheckInCheckOutTest {
 		_authorUser = UserTestUtil.addUser("author", _group.getGroupId());
 		_overriderUser = UserTestUtil.addUser("overrider", _group.getGroupId());
 
-		_serviceContext = ServiceTestUtil.getServiceContext(
+		_serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId(), 0);
 
 		_folder = createFolder("CheckInCheckOutTest");

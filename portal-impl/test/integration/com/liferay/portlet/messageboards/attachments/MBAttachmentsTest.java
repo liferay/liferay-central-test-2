@@ -36,8 +36,8 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.trash.service.TrashEntryServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
@@ -320,7 +320,7 @@ public class MBAttachmentsTest {
 			_group = GroupTestUtil.addGroup();
 		}
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		_category = MBTestUtil.addCategory(serviceContext);
@@ -331,7 +331,7 @@ public class MBAttachmentsTest {
 			addCategory();
 		}
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		_message = MBTestUtil.addMessage(
@@ -354,7 +354,7 @@ public class MBAttachmentsTest {
 				MBTestUtil.getInputStreamOVPs(
 					"company_logo.png", getClass(), StringPool.BLANK);
 
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId());
 
 			_message = MBMessageLocalServiceUtil.addMessage(
@@ -364,7 +364,7 @@ public class MBAttachmentsTest {
 				false, 0, false, serviceContext);
 		}
 		else {
-			ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+			ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 				_group.getGroupId());
 
 			List<ObjectValuePair<String, InputStream>> objectValuePairs =
@@ -399,7 +399,7 @@ public class MBAttachmentsTest {
 			existingFiles.add(String.valueOf(fileEntry.getFileEntryId()));
 		}
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		String fileName = "OSX_Test.docx";

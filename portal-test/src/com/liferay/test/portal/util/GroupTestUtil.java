@@ -31,7 +31,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.StagingLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.Locale;
 import java.util.Map;
@@ -90,7 +89,7 @@ public class GroupTestUtil {
 			userId, parentGroupId, null, 0,
 			GroupConstants.DEFAULT_LIVE_GROUP_ID, name, description, type,
 			manualMembership, membershipRestriction, friendlyURL, site, active,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static Group addGroup(long parentGroupId, String name)
@@ -134,7 +133,7 @@ public class GroupTestUtil {
 			GroupConstants.DEFAULT_MEMBERSHIP_RESTRICTION;
 
 		if (serviceContext == null) {
-			serviceContext = ServiceTestUtil.getServiceContext();
+			serviceContext = ServiceContextTestUtil.getServiceContext();
 		}
 
 		return GroupServiceUtil.addGroup(
@@ -144,7 +143,7 @@ public class GroupTestUtil {
 	}
 
 	public static void enableLocalStaging(Group group) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);

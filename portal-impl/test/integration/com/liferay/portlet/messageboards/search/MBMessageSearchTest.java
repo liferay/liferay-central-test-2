@@ -34,7 +34,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
@@ -119,7 +119,7 @@ public class MBMessageSearchTest extends BaseSearchTestCase {
 			existingFiles.add(fileEntry.getTitle());
 		}
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			message.getGroupId());
 
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =

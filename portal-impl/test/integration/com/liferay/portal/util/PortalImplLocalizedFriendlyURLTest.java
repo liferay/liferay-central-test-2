@@ -32,12 +32,7 @@ import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.CompanyTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.test.portal.util.UserGroupTestUtil;
+import com.liferay.test.portal.util.*;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -691,7 +686,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		UserGroup userGroup = UserGroupTestUtil.addUserGroup(
@@ -731,7 +726,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		UserGroup userGroup = UserGroupTestUtil.addUserGroup(
@@ -771,7 +766,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		UserGroup userGroup = UserGroupTestUtil.addUserGroup(
@@ -821,7 +816,7 @@ public class PortalImplLocalizedFriendlyURLTest {
 
 		Group group = GroupTestUtil.addGroup();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		UserGroup userGroup = UserGroupTestUtil.addUserGroup(

@@ -44,11 +44,7 @@ import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.TransactionalCallbackAwareExecutionTestListener;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
+import com.liferay.test.portal.util.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -378,7 +374,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 		LayoutTestUtil.addPortletToLayout(layout, PortletKeys.BOOKMARKS);
 		LayoutTestUtil.addPortletToLayout(layout, PortletKeys.LOGIN);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		serviceContext.setAttribute(

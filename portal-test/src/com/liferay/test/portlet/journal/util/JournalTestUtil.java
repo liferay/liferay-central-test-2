@@ -50,8 +50,8 @@ import com.liferay.portlet.journal.model.JournalFolderConstants;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalFolderLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMTemplateTestUtil;
@@ -74,7 +74,7 @@ public class JournalTestUtil {
 	public static JournalArticle addArticle(long groupId, long folderId)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.ADD);
@@ -254,7 +254,7 @@ public class JournalTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setCommand(Constants.ADD);
 		serviceContext.setLayoutFullURL("http://localhost");
@@ -328,7 +328,7 @@ public class JournalTestUtil {
 			boolean workflowEnabled, boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.ADD);
@@ -357,7 +357,7 @@ public class JournalTestUtil {
 			boolean approved)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		serviceContext.setCommand(Constants.ADD);
@@ -421,7 +421,7 @@ public class JournalTestUtil {
 			String ddmStructureKey, String ddmTemplateKey, Locale defaultLocale)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addArticleWithXMLContent(
@@ -557,7 +557,7 @@ public class JournalTestUtil {
 		double feedVersion = RSSUtil.getFeedTypeVersion(
 			RSSUtil.FEED_TYPE_DEFAULT);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return JournalFeedLocalServiceUtil.addFeed(
@@ -571,7 +571,7 @@ public class JournalTestUtil {
 			long groupId, long parentFolderId, String name)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return addFolder(parentFolderId, name, serviceContext);
@@ -621,7 +621,7 @@ public class JournalTestUtil {
 
 		JournalArticleLocalServiceUtil.expireArticle(
 			article.getUserId(), article.getGroupId(), article.getArticleId(),
-			null, ServiceTestUtil.getServiceContext(groupId));
+			null, ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static JournalArticle expireArticle(
@@ -630,7 +630,7 @@ public class JournalTestUtil {
 
 		return JournalArticleLocalServiceUtil.expireArticle(
 			article.getUserId(), article.getGroupId(), article.getArticleId(),
-			version, null, ServiceTestUtil.getServiceContext(groupId));
+			version, null, ServiceContextTestUtil.getServiceContext(groupId));
 	}
 
 	public static String getSampleTemplateXSL() {
@@ -698,7 +698,7 @@ public class JournalTestUtil {
 
 		return updateArticle(
 			article, title, article.getContent(), false, false,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static JournalArticle updateArticle(
@@ -707,7 +707,7 @@ public class JournalTestUtil {
 
 		return updateArticle(
 			article, title, content, false, false,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static JournalArticle updateArticle(
@@ -781,7 +781,7 @@ public class JournalTestUtil {
 
 		return updateArticle(
 			article, RandomTestUtil.randomString(), article.getContent(), false,
-			approved, ServiceTestUtil.getServiceContext());
+			approved, ServiceContextTestUtil.getServiceContext());
 	}
 
 	private static String _getFeedFriendlyURL(long groupId, long plid)

@@ -24,8 +24,8 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 
 import org.junit.After;
@@ -47,7 +47,7 @@ public class DLAppServiceHttpTest {
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		try {
@@ -104,7 +104,7 @@ public class DLAppServiceHttpTest {
 		String changeLog = StringPool.BLANK;
 		byte[] bytes = _CONTENT.getBytes();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		return DLAppServiceHttp.addFileEntry(

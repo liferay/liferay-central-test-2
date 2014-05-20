@@ -35,9 +35,9 @@ import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -95,7 +95,7 @@ public class StagingImplTest {
 				locale, description.concat(LocaleUtil.toLanguageId(locale)));
 		}
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		AssetVocabulary assetVocabulary =
@@ -125,7 +125,7 @@ public class StagingImplTest {
 		JournalArticle journalArticle = JournalTestUtil.addArticle(
 			_group.getGroupId(), "Title", "content");
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		Map<String, String[]> parameters = StagingUtil.getStagingParameters();
@@ -249,7 +249,7 @@ public class StagingImplTest {
 			TestPropsValues.getUserId(), category.getCategoryId(),
 			category.getParentCategoryId(), titleMap,
 			category.getDescriptionMap(), category.getVocabularyId(), null,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	private static Locale[] _locales = {

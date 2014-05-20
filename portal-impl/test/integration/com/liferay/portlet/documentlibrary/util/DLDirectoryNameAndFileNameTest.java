@@ -31,8 +31,8 @@ import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.store.DLStoreUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 
 import org.junit.AfterClass;
@@ -188,7 +188,7 @@ public class DLDirectoryNameAndFileNameTest {
 
 		DLAppServiceUtil.updateFolder(
 			folder.getFolderId(), name, StringPool.BLANK,
-			ServiceTestUtil.getServiceContext(_group.getGroupId()));
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId()));
 	}
 
 	private static Group _group;

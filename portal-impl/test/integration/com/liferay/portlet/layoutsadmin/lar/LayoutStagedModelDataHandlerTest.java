@@ -31,9 +31,9 @@ import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFolderConstants;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.LayoutTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
 import java.util.HashMap;
@@ -226,7 +226,7 @@ public class LayoutStagedModelDataHandlerTest
 	protected void initExport() throws Exception {
 		super.initExport();
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		serviceContext.setAttribute("exportLAR", Boolean.TRUE);
 

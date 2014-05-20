@@ -34,9 +34,9 @@ import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portlet.bookmarks.util.BookmarksTestUtil;
 
 import java.util.List;
@@ -99,7 +99,7 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearch() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
@@ -121,7 +121,7 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearchAndDeleteFolderAndSearch() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(
@@ -155,7 +155,7 @@ public class BookmarksFolderServiceTest {
 
 	@Test
 	public void testSearchAndVerifyDocs() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			_group.getGroupId());
 
 		BookmarksFolder folder = BookmarksTestUtil.addFolder(

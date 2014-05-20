@@ -38,10 +38,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.test.portal.service.ServiceTestUtil;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.RandomTestUtil;
-import com.liferay.test.portal.util.TestPropsValues;
-import com.liferay.test.portal.util.UserTestUtil;
+import com.liferay.test.portal.util.*;
 
 import java.util.List;
 
@@ -267,7 +264,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchAttachments() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -306,7 +303,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchBaseModel() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -352,7 +349,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchByDDMStructureField() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -386,7 +383,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchByKeywords() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -410,7 +407,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchByKeywordsInsideParentBaseModel() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -450,7 +447,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchComments() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -491,7 +488,7 @@ public abstract class BaseSearchTestCase {
 	protected void searchExpireVersions(boolean expireAllVersions)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -553,7 +550,7 @@ public abstract class BaseSearchTestCase {
 		long initialUser2SearchGroupEntriesCount = searchGroupEntriesCount(
 			group.getGroupId(), user2.getUserId());
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel1 = getParentBaseModel(
@@ -632,7 +629,7 @@ public abstract class BaseSearchTestCase {
 		long initialSearchGroupEntriesCount = searchGroupEntriesCount(
 			group.getGroupId(), 0);
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel1 = getParentBaseModel(
@@ -696,7 +693,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchStatus() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -757,7 +754,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchVersions() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -797,7 +794,7 @@ public abstract class BaseSearchTestCase {
 	}
 
 	protected void searchWithinDDMStructure() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(
@@ -825,7 +822,7 @@ public abstract class BaseSearchTestCase {
 			boolean addParentBaseModelPermission)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		SearchContext searchContext = ServiceTestUtil.getSearchContext(

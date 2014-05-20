@@ -34,7 +34,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadServiceUtil;
 import com.liferay.portlet.trash.BaseTrashHandlerTestCase;
-import com.liferay.test.portal.service.ServiceTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.messageboards.util.MBTestUtil;
 
@@ -61,7 +61,7 @@ public class MBThreadTrashHandlerTest extends BaseTrashHandlerTestCase {
 	@Test
 	@Transactional
 	public void testCategoryMessageCount() throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			group.getGroupId());
 
 		BaseModel<?> parentBaseModel = getParentBaseModel(

@@ -34,7 +34,6 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetPrototypeLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +58,7 @@ public class LayoutTestUtil {
 			Map<Locale, String> friendlyURLMap)
 		throws Exception {
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return LayoutLocalServiceUtil.addLayout(
@@ -102,7 +101,7 @@ public class LayoutTestUtil {
 
 		String description = "This is a test page.";
 
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext();
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext();
 
 		if (layoutPrototype != null) {
 			serviceContext.setAttribute(
@@ -139,7 +138,7 @@ public class LayoutTestUtil {
 		return LayoutPrototypeLocalServiceUtil.addLayoutPrototype(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
 			nameMap, (Map<Locale, String>)null, true,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static LayoutSetPrototype addLayoutSetPrototype(String name)
@@ -152,7 +151,7 @@ public class LayoutTestUtil {
 		return LayoutSetPrototypeLocalServiceUtil.addLayoutSetPrototype(
 			TestPropsValues.getUserId(), TestPropsValues.getCompanyId(),
 			nameMap, (Map<Locale, String>)null, true, true,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	public static String addPortletToLayout(Layout layout, String portletId)

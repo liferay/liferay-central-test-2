@@ -40,9 +40,9 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.GroupTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.documentlibrary.util.DLAppTestUtil;
 import com.liferay.test.portlet.dynamicdatamapping.util.DDMStructureTestUtil;
@@ -140,7 +140,7 @@ public class DLPortletDataHandlerTest extends BasePortletDataHandlerTestCase {
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			PortletKeys.BACKGROUND_TASK, StringPool.BLANK,
 			PortletKeys.BACKGROUND_TASK, new UnicodeProperties(), true,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 
 		Folder folder = DLAppTestUtil.addFolder(
 			stagingGroup.getGroupId(), repository.getRepositoryId(),

@@ -33,8 +33,8 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplateConstants;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.test.portal.service.ServiceTestUtil;
 import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.test.portal.util.ServiceContextTestUtil;
 import com.liferay.test.portal.util.TestPropsValues;
 import com.liferay.test.portlet.journal.util.JournalTestUtil;
 
@@ -249,7 +249,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 		return DDMTemplateLocalServiceUtil.copyTemplates(
 			template.getUserId(), template.getClassNameId(),
 			template.getClassPK(), -1, template.getType(),
-			ServiceTestUtil.getServiceContext(group.getGroupId()));
+			ServiceContextTestUtil.getServiceContext(group.getGroupId()));
 	}
 
 	protected DDMTemplate updateTemplate(DDMTemplate template)
@@ -261,7 +261,7 @@ public class DDMTemplateServiceTest extends BaseDDMServiceTestCase {
 			template.getType(), template.getMode(), template.getLanguage(),
 			template.getScript(), template.isCacheable(),
 			template.isSmallImage(), template.getSmallImageURL(), null,
-			ServiceTestUtil.getServiceContext());
+			ServiceContextTestUtil.getServiceContext());
 	}
 
 	private long _classNameId = PortalUtil.getClassNameId(AssetEntry.class);

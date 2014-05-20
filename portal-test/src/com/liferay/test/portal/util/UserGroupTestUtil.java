@@ -17,7 +17,6 @@ package com.liferay.test.portal.util;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
-import com.liferay.test.portal.service.ServiceTestUtil;
 
 /**
  * @author Roberto Díaz
@@ -29,7 +28,7 @@ public class UserGroupTestUtil {
 	}
 
 	public static UserGroup addUserGroup(long groupId) throws Exception {
-		ServiceContext serviceContext = ServiceTestUtil.getServiceContext(
+		ServiceContext serviceContext = ServiceContextTestUtil.getServiceContext(
 			groupId);
 
 		return UserGroupLocalServiceUtil.addUserGroup(
