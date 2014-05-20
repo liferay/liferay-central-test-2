@@ -2199,7 +2199,7 @@ public class ServicePreAction extends Action {
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
-		// Redirects
+		// Control panel redirects
 
 		processControlPanelRedirects(request, response);
 
