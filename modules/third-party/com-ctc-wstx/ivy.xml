@@ -17,6 +17,6 @@
 	</publications>
 
 	<dependencies defaultconf="default">
-		<dependency conf="optional->default" name="wstx-asl" org="woodstox" rev="3.2.4" />
+		<dependency conf="internal->default" name="wstx-asl" org="woodstox" rev="3.2.4" />
 	</dependencies>
 </ivy-module>
