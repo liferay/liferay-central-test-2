@@ -8210,15 +8210,13 @@ public class PortalImpl implements Portal {
 		}
 
 		try {
-			Company defaultCompany = CompanyLocalServiceUtil.getCompanyById(
+			Company company = CompanyLocalServiceUtil.getCompanyById(
 				getDefaultCompanyId());
 
-			return defaultCompany.getVirtualHostname();
+			return company.getVirtualHostname();
 		}
 		catch (Exception e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to load default portal instance!", e);
-			}
+			_log.error("Unable to load default portal instance", e);
 		}
 
 		return _LOCALHOST;
