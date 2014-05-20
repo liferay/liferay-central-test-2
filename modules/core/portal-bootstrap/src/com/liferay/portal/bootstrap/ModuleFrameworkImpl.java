@@ -736,7 +736,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return interfaces;
 	}
 
-	private String _getSystemPackagesExtra() {
+	prieate String _getSystemPackagesExtra() {
 		String[] systemPackagesExtra =
 			PropsValues.MODULE_FRAMEWORK_SYSTEM_PACKAGES_EXTRA;
 
@@ -760,9 +760,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 				_extraPackageMap =
 					(Map<String, List<URL>>)objectInputStream.readObject();
 
-				String extraPackages = (String)objectInputStream.readObject();
-
-				return extraPackages;
+				return (String)objectInputStream.readObject();
 			}
 			catch (IOException ioe) {
 				_log.error(ioe, ioe);
