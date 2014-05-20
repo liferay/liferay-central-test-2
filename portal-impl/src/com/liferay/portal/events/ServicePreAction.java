@@ -1069,7 +1069,7 @@ public class ServicePreAction extends Action {
 			boolean hasAddLayoutGroupPermission = GroupPermissionUtil.contains(
 				permissionChecker, scopeGroup, ActionKeys.ADD_LAYOUT);
 			boolean hasAddLayoutLayoutPermission =
-				(layout != null) && !layout.isTypeControlPanel() &&
+				!layout.isTypeControlPanel() &&
 				LayoutPermissionUtil.contains(
 					permissionChecker, layout, ActionKeys.ADD_LAYOUT);
 			boolean hasManageLayoutsGroupPermission =
