@@ -19,7 +19,7 @@
 
 		<unzip
 			dest="classes"
-			src="lib/wstx-asl.jar"
+			src="lib/${original.lib.name}.jar"
 		/>
 
 		<antcall target="patch">
