@@ -17,9 +17,7 @@
 			module.dir="${basedir}"
 		/>
 
-		<mkdir dir="classes"/>
-
-		<unjar
+		<unzip
 			dest="classes"
 			src="lib/${original.lib.name}.jar"
 		/>
