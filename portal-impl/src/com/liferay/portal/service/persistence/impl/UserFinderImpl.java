@@ -597,7 +597,6 @@ public class UserFinderImpl
 		}
 
 		boolean inherit = GetterUtil.getBoolean(params.get("inherit"));
-
 		boolean socialRelationTypeUnionUserGroups = GetterUtil.getBoolean(
 			params.get("socialRelationTypeUnionUserGroups"));
 
@@ -1195,12 +1194,10 @@ public class UserFinderImpl
 				sb.append("WHERE (SocialRelation.userId1 = ?) AND ");
 				sb.append("(SocialRelation.type_ IN (");
 
-				for (long socialRelationType : socialRelationTypes) {
+				for (int i = 1; i < socialRelationTypes.length; i++) {
 					sb.append(StringPool.QUESTION);
 					sb.append(StringPool.COMMA);
 				}
-
-				sb.setIndex(sb.index() - 1);
 
 				sb.append("))");
 
