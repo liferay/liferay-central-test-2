@@ -5,8 +5,8 @@
 	<property name="original.lib.name" value="org.eclipse.equinox.console" />
 	<property name="original.lib.url" value="https://repository.liferay.com/nexus/content/groups/public/org/eclipse/equinox/console/" />
 	<property name="original.lib.version" value="1.0.0.v20120522-1841" />
-	<property name="osgi.runtime.dependencies" value="org.apache.felix.gogo*.jar" />
-	<property name="plugin.name" value="org.eclipse.equinox.console" />
+	<property name="osgi.runtime.dependencies" value="org.apache.felix.gogo.*.jar" />
+	<property name="plugin.name" value="com.liferay.shell.support" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
@@ -24,5 +24,4 @@
 			module.dir="${basedir}"
 		/>
 	</target>
-
 </project>
