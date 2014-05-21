@@ -37,13 +37,13 @@ import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.test.RandomTestUtil;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 
-import com.liferay.test.portal.util.RandomTestUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

@@ -29,10 +29,10 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.portal.util.test.GroupTestUtil;
+import com.liferay.portal.util.test.LayoutTestUtil;
+import com.liferay.portal.util.test.UserTestUtil;
 import com.liferay.portlet.sites.util.Sites;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.LayoutTestUtil;
-import com.liferay.test.portal.util.UserTestUtil;
 
 import java.util.HashSet;
 import java.util.Set;

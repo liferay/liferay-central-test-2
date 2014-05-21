@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
-import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

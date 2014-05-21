@@ -34,13 +34,13 @@ import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.test.RandomTestUtil;
 
 import com.liferay.portlet.expando.NoSuchRowException;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 
-import com.liferay.test.portal.util.RandomTestUtil;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

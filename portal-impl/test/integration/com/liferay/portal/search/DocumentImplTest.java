@@ -37,10 +37,10 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.Sync;
 import com.liferay.portal.test.SynchronousDestinationExecutionTestListener;
+import com.liferay.portal.util.test.GroupTestUtil;
+import com.liferay.portal.util.test.SearchContextTestUtil;
+import com.liferay.portal.util.test.UserTestUtil;
 import com.liferay.portlet.usersadmin.util.UserIndexer;
-import com.liferay.test.portal.util.GroupTestUtil;
-import com.liferay.test.portal.util.SearchContextTestUtil;
-import com.liferay.test.portal.util.UserTestUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;

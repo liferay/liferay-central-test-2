@@ -21,9 +21,9 @@ import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.TransactionalExecutionTestListener;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portlet.documentlibrary.model.DLContent;
 import com.liferay.portlet.documentlibrary.store.Store;
-import com.liferay.test.portal.util.RandomTestUtil;
 
 import java.io.ByteArrayInputStream;
 

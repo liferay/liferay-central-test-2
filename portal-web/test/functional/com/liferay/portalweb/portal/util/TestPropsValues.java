@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.util.StringUtil;
  * @author Brian Wing Shun Chan
  */
 public class TestPropsValues
-	extends com.liferay.test.portal.util.TestPropsValues {
+	extends com.liferay.portal.util.test.TestPropsValues {
 
 	public static final String BROWSER_COMMANDS_DIR_NAME = TestPropsUtil.get(
 		"browser.commands.dir");
