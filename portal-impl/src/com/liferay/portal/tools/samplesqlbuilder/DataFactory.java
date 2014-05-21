@@ -273,7 +273,7 @@ public class DataFactory {
 		initUserNames();
 		initUserModels();
 		initVirtualHostModel(
-			properties.getProperty("sample.sql.virtual.host.name"));
+			properties.getProperty("sample.sql.virtual.hostname"));
 	}
 
 	public AccountModel getAccountModel() {
@@ -988,12 +988,12 @@ public class DataFactory {
 		unsyncBufferedReader.close();
 	}
 
-	public void initVirtualHostModel(String hostName) {
+	public void initVirtualHostModel(String hostname) {
 		_virtualHostModel = new VirtualHostModelImpl();
 
 		_virtualHostModel.setVirtualHostId(_counter.get());
 		_virtualHostModel.setCompanyId(_companyId);
-		_virtualHostModel.setHostname(hostName);
+		_virtualHostModel.setHostname(hostname);
 	}
 
 	public AssetEntryModel newAssetEntryModel(BlogsEntryModel blogsEntryModel) {
