@@ -17,7 +17,6 @@ package com.liferay.portlet.social.service;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -29,7 +28,6 @@ import com.liferay.portal.util.comparator.UserScreenNameComparator;
 import com.liferay.portlet.social.model.SocialRelationConstants;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -242,14 +240,11 @@ public class SocialRelationLocalServiceTest {
 		GroupLocalServiceUtil.addUserGroup(
 			dlc4User.getUserId(), TestPropsValues.getGroupId());
 
-		long[] dlc3GroupIds = dlc3User.getGroupIds();
-		long[] dlc4GroupIds = dlc4User.getGroupIds();
+		long[] groupIds = dlc4User.getGroupIds();
 
-		Set<Long> groupIdsSet = SetUtil.fromArray(dlc3GroupIds);
-
-		groupIdsSet.retainAll(SetUtil.fromArray(dlc4GroupIds));
-
-		long[] groupIds = ArrayUtil.toArray(groupIdsSet.toArray(new Long[]{}));
+		for (long groupId : dlc3User.getGroupIds()) {
+			ArrayUtil.remove(groupIds, groupId);
+		}
 
 		List<User> users = UserLocalServiceUtil.searchSocial(
 			TestPropsValues.getCompanyId(), "dlc", groupIds, QueryUtil.ALL_POS,
