@@ -3432,23 +3432,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			long companyId, long[] groupIds, String keywords, int start,
-			int end)
-		throws SystemException {
-
-		LinkedHashMap<String, Object> params =
-			new LinkedHashMap<String, Object>();
-
-		params.put("usersGroups", ArrayUtil.toLongArray(groupIds));
-		params.put("wildcardMode", WildcardMode.TRAILING);
-
-		return userFinder.findByKeywords(
-			companyId, keywords, WorkflowConstants.STATUS_APPROVED, params,
-			start, end, null);
-	}
-
-	@Override
-	public List<User> searchSocial(
 			long userId, int[] socialRelationTypes, String keywords, int start,
 			int end)
 		throws PortalException, SystemException {
@@ -3468,6 +3451,23 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return userFinder.findByKeywords(
 			user.getCompanyId(), keywords, WorkflowConstants.STATUS_APPROVED,
 			params, start, end, null);
+	}
+
+	@Override
+	public List<User> searchSocial(
+			long companyId, long[] groupIds, String keywords, int start,
+			int end)
+		throws SystemException {
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put("usersGroups", ArrayUtil.toLongArray(groupIds));
+		params.put("wildcardMode", WildcardMode.TRAILING);
+
+		return userFinder.findByKeywords(
+			companyId, keywords, WorkflowConstants.STATUS_APPROVED, params,
+			start, end, null);
 	}
 
 	@Override
