@@ -47,7 +47,7 @@ import com.liferay.portal.test.EnvironmentExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.test.portal.util.RandomTestUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 
 import java.sql.Blob;
 import java.sql.Connection;
