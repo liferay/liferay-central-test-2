@@ -280,11 +280,11 @@ public class SocialRelationLocalServiceTest {
 			SocialRelationConstants.TYPE_BI_COWORKER
 		};
 
+		// Does dlc2 should have 1 coworker and 4 friends?
+
 		List<User> users = UserLocalServiceUtil.searchSocial(
 			"dlc", dlc2User.getUserId(), types, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
-
-		// Does dlc2 should have 1 coworker and 4 friends?
 
 		Assert.assertEquals(5, users.size());
 	}
