@@ -494,7 +494,7 @@ public class LayoutExportImportTest extends BaseExportImportTestCase {
 
 		for (Portlet dataSiteLevelPortlet : dataSiteLevelPortlets) {
 			addPortlet(
-				portlets, rootPortletIds, dataSiteLevelPortlet, groupId, -1,
+				portlets, rootPortletIds, dataSiteLevelPortlet, groupId, 0,
 				false);
 		}
 

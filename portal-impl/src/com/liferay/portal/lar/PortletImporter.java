@@ -531,7 +531,7 @@ public class PortletImporter {
 			_log.info("Importing portlet takes " + stopWatch.getTime() + " ms");
 		}
 
-		// Service settings
+		// Service portlet preferences
 
 		boolean importPortletSetup = importPortletControlsMap.get(
 			PortletDataHandlerKeys.PORTLET_SETUP);
@@ -565,9 +565,9 @@ public class PortletImporter {
 		PortletPreferences portletPreferences = null;
 
 		try {
-			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) ||
-				(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
-				(ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED)) {
+			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) ||
+				(ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) ||
+				(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP)) {
 
 				portletPreferences =
 					PortletPreferencesLocalServiceUtil.getPortletPreferences(
@@ -891,12 +891,12 @@ public class PortletImporter {
 			serviceElement.remove(attribute);
 		}
 
-		String preferencesXML = serviceElement.asXML();
+		String xml = serviceElement.asXML();
 
-		portletPreferences.setPreferences(preferencesXML);
+		portletPreferences.setPreferences(xml);
 
 		javax.portlet.PortletPreferences jxPortletPreferences =
-			PortletPreferencesFactoryUtil.fromDefaultXML(preferencesXML);
+			PortletPreferencesFactoryUtil.fromDefaultXML(xml);
 
 		PortletPreferencesLocalServiceUtil.updatePreferences(
 			ownerId, ownerType, LayoutConstants.DEFAULT_PLID, serviceName,

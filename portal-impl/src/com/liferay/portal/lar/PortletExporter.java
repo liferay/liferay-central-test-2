@@ -1184,9 +1184,9 @@ public class PortletExporter {
 
 		PortletPreferences portletPreferences = null;
 
-		if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) ||
-			(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
-			(ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED)) {
+		if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) ||
+			(ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) ||
+			(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP)) {
 
 			portletPreferences =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
