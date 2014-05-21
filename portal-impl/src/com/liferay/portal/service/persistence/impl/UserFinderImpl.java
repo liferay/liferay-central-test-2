@@ -1194,9 +1194,12 @@ public class UserFinderImpl
 
 				Long[] socialRelationTypes = valueDoubleArray[1];
 
-				for (int i = 1; i < socialRelationTypes.length; i++) {
+				for (int i = 0; i < socialRelationTypes.length; i++) {
 					sb.append(StringPool.QUESTION);
-					sb.append(StringPool.COMMA);
+
+					if ((i + 1) < socialRelationTypes.length) {
+						sb.append(StringPool.COMMA);
+					}
 				}
 
 				sb.append("))");
