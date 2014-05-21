@@ -719,6 +719,7 @@ public class UserFinderImpl
 				params2 = new LinkedHashMap<String, Object>(params1);
 
 				params1.remove("socialRelationType");
+
 				params2.remove("usersGroups");
 			}
 		}
