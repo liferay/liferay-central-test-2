@@ -13,6 +13,10 @@
 	<property name="auto.deploy.dir" value="${liferay.home}/osgi/portal" />
 
 	<target name="compile">
+		<process-ivy
+			module.dir="${basedir}"
+		/>
+
 		<mkdir dir="classes"/>
 
 		<unjar
