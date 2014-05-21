@@ -275,7 +275,7 @@ public class SocialRelationLocalServiceTest {
 		GroupLocalServiceUtil.addUserGroup(
 			dlc4User.getUserId(), TestPropsValues.getGroupId());
 
-		int[] types = {
+		int[] socialRelationTypes = {
 			SocialRelationConstants.TYPE_BI_FRIEND,
 			SocialRelationConstants.TYPE_BI_COWORKER
 		};
@@ -283,7 +283,7 @@ public class SocialRelationLocalServiceTest {
 		// Does dlc2 should have 1 coworker and 4 friends?
 
 		List<User> users = UserLocalServiceUtil.searchSocial(
-			"dlc", dlc2User.getUserId(), types, QueryUtil.ALL_POS,
+			"dlc", dlc2User.getUserId(), socialRelationTypes, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		Assert.assertEquals(5, users.size());

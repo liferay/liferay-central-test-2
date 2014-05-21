@@ -3449,7 +3449,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			String keywords, long userId, int[] types, int start, int end)
+			String keywords, long userId, int[] socialRelationTypes, int start,
+			int end)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -3459,7 +3460,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialRelationType",
-			new Long[][] {new Long[] {userId}, ArrayUtil.toLongArray(types)});
+			new Long[][] {
+				new Long[] {userId}, ArrayUtil.toLongArray(socialRelationTypes)
+			});
 		params.put("wildcardMode", WildcardMode.TRAILING);
 
 		return userFinder.findByKeywords(
@@ -3469,8 +3472,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			String keywords, long userId, int[] types, long[] groupIds,
-			int start, int end)
+			String keywords, long userId, int[] socialRelationTypes,
+			long[] groupIds, int start, int end)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -3480,7 +3483,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialRelationType",
-			new Long[][] {new Long[] {userId}, ArrayUtil.toLongArray(types)});
+			new Long[][] {
+				new Long[] {userId}, ArrayUtil.toLongArray(socialRelationTypes)
+			});
 		params.put("socialRelationTypeUnionUserGroups", true);
 		params.put("usersGroups", ArrayUtil.toLongArray(groupIds));
 		params.put("wildcardMode", WildcardMode.TRAILING);
