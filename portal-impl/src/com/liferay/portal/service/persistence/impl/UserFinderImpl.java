@@ -1184,9 +1184,9 @@ public class UserFinderImpl
 				join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
 			}
 			else if (value instanceof Long[][]) {
-				Long[][] doubleArrayValue = (Long[][])value;
+				Long[][] valueDoubleArray = (Long[][])value;
 
-				Long[] socialRelationTypes = doubleArrayValue[1];
+				Long[] socialRelationTypes = valueDoubleArray[1];
 
 				StringBundler sb = new StringBundler();
 
