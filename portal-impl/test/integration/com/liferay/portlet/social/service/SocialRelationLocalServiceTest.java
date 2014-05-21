@@ -233,11 +233,11 @@ public class SocialRelationLocalServiceTest {
 		User dlc3User = UserLocalServiceUtil.getUserByScreenName(
 			TestPropsValues.getCompanyId(), "dlc3");
 
-		User dlc4User = UserLocalServiceUtil.getUserByScreenName(
-			TestPropsValues.getCompanyId(), "dlc4");
-
 		GroupLocalServiceUtil.addUserGroup(
 			dlc3User.getUserId(), TestPropsValues.getGroupId());
+
+		User dlc4User = UserLocalServiceUtil.getUserByScreenName(
+			TestPropsValues.getCompanyId(), "dlc4");
 
 		GroupLocalServiceUtil.addUserGroup(
 			dlc4User.getUserId(), TestPropsValues.getGroupId());
@@ -260,14 +260,17 @@ public class SocialRelationLocalServiceTest {
 
 	@Test
 	public void testGetMultipleRelations() throws Exception {
+		User dlc2User = UserLocalServiceUtil.getUserByScreenName(
+			TestPropsValues.getCompanyId(), "dlc2");
+
 		User dlc3User = UserLocalServiceUtil.getUserByScreenName(
 			TestPropsValues.getCompanyId(), "dlc3");
 
-		User dlc4User = UserLocalServiceUtil.getUserByScreenName(
-			TestPropsValues.getCompanyId(), "dlc4");
-
 		GroupLocalServiceUtil.addUserGroup(
 			dlc3User.getUserId(), TestPropsValues.getGroupId());
+
+		User dlc4User = UserLocalServiceUtil.getUserByScreenName(
+			TestPropsValues.getCompanyId(), "dlc4");
 
 		GroupLocalServiceUtil.addUserGroup(
 			dlc4User.getUserId(), TestPropsValues.getGroupId());
@@ -276,9 +279,6 @@ public class SocialRelationLocalServiceTest {
 			SocialRelationConstants.TYPE_BI_FRIEND,
 			SocialRelationConstants.TYPE_BI_COWORKER
 		};
-
-		User dlc2User = UserLocalServiceUtil.getUserByScreenName(
-			TestPropsValues.getCompanyId(), "dlc2");
 
 		List<User> users = UserLocalServiceUtil.searchSocial(
 			"dlc", dlc2User.getUserId(), types, QueryUtil.ALL_POS,
