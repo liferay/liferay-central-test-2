@@ -284,7 +284,7 @@ public class SocialRelationLocalServiceTest {
 			"dlc", dlc2User.getUserId(), types, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		// dlc2 should have 1 coworker and 4 friends.
+		// Does dlc2 should have 1 coworker and 4 friends?
 
 		Assert.assertEquals(5, users.size());
 	}
