@@ -2312,18 +2312,18 @@ public interface UserLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		long companyId, java.lang.String keywords, long[] groupIds, int start,
+		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		java.lang.String keywords, long userId, int[] types, int start, int end)
+		long userId, int[] types, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		java.lang.String keywords, long userId, int[] types, long[] groupIds,
+		long[] groupIds, long userId, int[] types, java.lang.String keywords,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

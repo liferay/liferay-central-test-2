@@ -3432,7 +3432,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			long companyId, String keywords, long[] groupIds, int start,
+			long companyId, long[] groupIds, String keywords, int start,
 			int end)
 		throws SystemException {
 
@@ -3449,7 +3449,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			String keywords, long userId, int[] socialRelationTypes, int start,
+			long userId, int[] socialRelationTypes, String keywords, int start,
 			int end)
 		throws PortalException, SystemException {
 
@@ -3472,8 +3472,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	@Override
 	public List<User> searchSocial(
-			String keywords, long userId, int[] socialRelationTypes,
-			long[] groupIds, int start, int end)
+			long[] groupIds, long userId, int[] socialRelationTypes,
+			String keywords, int start, int end)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);

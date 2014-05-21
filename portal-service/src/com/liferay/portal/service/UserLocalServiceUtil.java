@@ -2628,14 +2628,14 @@ public class UserLocalServiceUtil {
 		long companyId, java.lang.String keywords, long[] groupIds, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchSocial(companyId, keywords, groupIds, start, end);
+				   .searchSocial(companyId, groupIds, keywords, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> searchSocial(
 		java.lang.String keywords, long userId, int[] types, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return getService().searchSocial(keywords, userId, types, start, end);
+		return getService().searchSocial(userId, types, keywords, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> searchSocial(
@@ -2644,7 +2644,7 @@ public class UserLocalServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchSocial(keywords, userId, types, groupIds, start, end);
+				   .searchSocial(groupIds, userId, types, keywords, start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.BaseModelSearchResult<com.liferay.portal.model.User> searchUsers(

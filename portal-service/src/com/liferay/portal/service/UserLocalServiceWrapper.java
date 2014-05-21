@@ -2767,29 +2767,29 @@ public class UserLocalServiceWrapper implements UserLocalService,
 
 	@Override
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		long companyId, java.lang.String keywords, long[] groupIds, int start,
+		long companyId, long[] groupIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.searchSocial(companyId, keywords, groupIds,
+		return _userLocalService.searchSocial(companyId, groupIds, keywords,
 			start, end);
 	}
 
 	@Override
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		java.lang.String keywords, long userId, int[] types, int start, int end)
+		long userId, int[] types, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.searchSocial(keywords, userId, types, start,
+		return _userLocalService.searchSocial(userId, types, keywords, start,
 			end);
 	}
 
 	@Override
 	public java.util.List<com.liferay.portal.model.User> searchSocial(
-		java.lang.String keywords, long userId, int[] types, long[] groupIds,
+		long[] groupIds, long userId, int[] types, java.lang.String keywords,
 		int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _userLocalService.searchSocial(keywords, userId, types,
-			groupIds, start, end);
+		return _userLocalService.searchSocial(groupIds, userId, types,
+			keywords, start, end);
 	}
 
 	@Override
