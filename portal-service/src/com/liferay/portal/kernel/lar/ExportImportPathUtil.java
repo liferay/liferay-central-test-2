@@ -323,7 +323,7 @@ public class ExportImportPathUtil {
 
 		sb.append(getPortletPath(portletDataContext, portletId));
 		sb.append("/preferences/");
-		sb.append(getOwnerTypeSubpath(ownerType));
+		sb.append(getOwnerTypePath(ownerType));
 		sb.append(ownerId);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(plid);
@@ -371,7 +371,7 @@ public class ExportImportPathUtil {
 		sb.append(PATH_PREFIX_SERVICE);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(serviceName);
-		sb.append(getOwnerTypeSubpath(ownerType));
+		sb.append(getOwnerTypePath(ownerType));
 		sb.append(ownerId);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append("portlet-preferences.xml");
@@ -469,8 +469,11 @@ public class ExportImportPathUtil {
 		return sb.toString();
 	}
 
-	protected static String getOwnerTypeSubpath(int ownerType) {
-		if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+	protected static String getOwnerTypePath(int ownerType) {
+		if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+			return "archived/";
+		}
+		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
 			return "company/";
 		}
 		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
@@ -481,9 +484,6 @@ public class ExportImportPathUtil {
 		}
 		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
 			return "user/";
-		}
-		else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-			return "archived/";
 		}
 		else {
 			return StringPool.BLANK;
