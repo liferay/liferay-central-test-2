@@ -245,9 +245,7 @@ public class AssetVocabularyPersistenceTest {
 	@Test
 	public void testCountByGroupIdArrayable() {
 		try {
-			_persistence.countByGroupId(new long[] {
-					RandomTestUtil.nextLong(), 0L
-				});
+			_persistence.countByGroupId(new long[] { RandomTestUtil.nextLong(), 0L });
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());

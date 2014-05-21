@@ -355,8 +355,7 @@ public class BlogsEntryPersistenceTest {
 	@Test
 	public void testCountByG_UT() {
 		try {
-			_persistence.countByG_UT(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByG_UT(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByG_UT(0L, StringPool.NULL);
 
@@ -543,8 +542,8 @@ public class BlogsEntryPersistenceTest {
 				RandomTestUtil.nextLong(), RandomTestUtil.nextDate(),
 				RandomTestUtil.nextInt());
 
-			_persistence.countByG_U_LtD_NotS(0L, 0L,
-				RandomTestUtil.nextDate(), 0);
+			_persistence.countByG_U_LtD_NotS(0L, 0L, RandomTestUtil.nextDate(),
+				0);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());

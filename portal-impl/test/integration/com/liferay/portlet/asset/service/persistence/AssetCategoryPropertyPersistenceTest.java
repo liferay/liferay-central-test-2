@@ -215,8 +215,7 @@ public class AssetCategoryPropertyPersistenceTest {
 	@Test
 	public void testCountByCA_K() {
 		try {
-			_persistence.countByCA_K(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByCA_K(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByCA_K(0L, StringPool.NULL);
 

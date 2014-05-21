@@ -506,8 +506,7 @@ public class JournalArticlePersistenceTest {
 	@Test
 	public void testCountByG_UT() {
 		try {
-			_persistence.countByG_UT(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByG_UT(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByG_UT(0L, StringPool.NULL);
 

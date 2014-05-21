@@ -255,11 +255,11 @@ public class JournalContentSearchPersistenceTest {
 				RandomTestUtil.randomBoolean(), RandomTestUtil.nextLong(),
 				StringPool.BLANK);
 
-			_persistence.countByG_P_L_P(0L, RandomTestUtil.randomBoolean(),
-				0L, StringPool.NULL);
+			_persistence.countByG_P_L_P(0L, RandomTestUtil.randomBoolean(), 0L,
+				StringPool.NULL);
 
-			_persistence.countByG_P_L_P(0L, RandomTestUtil.randomBoolean(),
-				0L, (String)null);
+			_persistence.countByG_P_L_P(0L, RandomTestUtil.randomBoolean(), 0L,
+				(String)null);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());

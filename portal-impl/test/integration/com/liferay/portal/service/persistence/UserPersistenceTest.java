@@ -35,6 +35,8 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.service.persistence.PersistenceExecutionTestListener;
 import com.liferay.portal.test.LiferayPersistenceIntegrationJUnitTestRunner;
 import com.liferay.portal.test.persistence.TransactionalPersistenceAdvice;
 import com.liferay.portal.util.PropsValues;
@@ -421,8 +423,7 @@ public class UserPersistenceTest {
 	@Test
 	public void testCountByC_SN() {
 		try {
-			_persistence.countByC_SN(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByC_SN(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByC_SN(0L, StringPool.NULL);
 
@@ -436,8 +437,7 @@ public class UserPersistenceTest {
 	@Test
 	public void testCountByC_EA() {
 		try {
-			_persistence.countByC_EA(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByC_EA(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByC_EA(0L, StringPool.NULL);
 

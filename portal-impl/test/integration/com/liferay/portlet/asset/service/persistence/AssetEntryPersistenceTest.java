@@ -311,8 +311,7 @@ public class AssetEntryPersistenceTest {
 	@Test
 	public void testCountByG_CU() {
 		try {
-			_persistence.countByG_CU(RandomTestUtil.nextLong(),
-				StringPool.BLANK);
+			_persistence.countByG_CU(RandomTestUtil.nextLong(), StringPool.BLANK);
 
 			_persistence.countByG_CU(0L, StringPool.NULL);
 

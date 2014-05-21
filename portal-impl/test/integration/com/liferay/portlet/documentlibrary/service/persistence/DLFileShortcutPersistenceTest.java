@@ -321,8 +321,8 @@ public class DLFileShortcutPersistenceTest {
 				RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
 				RandomTestUtil.nextInt());
 
-			_persistence.countByG_F_A_S(0L, 0L,
-				RandomTestUtil.randomBoolean(), 0);
+			_persistence.countByG_F_A_S(0L, 0L, RandomTestUtil.randomBoolean(),
+				0);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());

@@ -629,8 +629,8 @@ public class WikiPagePersistenceTest {
 				RandomTestUtil.nextLong(), RandomTestUtil.randomBoolean(),
 				RandomTestUtil.nextInt());
 
-			_persistence.countByG_N_H_S(0L, 0L,
-				RandomTestUtil.randomBoolean(), 0);
+			_persistence.countByG_N_H_S(0L, 0L, RandomTestUtil.randomBoolean(),
+				0);
 		}
 		catch (Exception e) {
 			Assert.fail(e.getMessage());
