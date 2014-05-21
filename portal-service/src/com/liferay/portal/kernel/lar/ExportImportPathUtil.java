@@ -323,7 +323,7 @@ public class ExportImportPathUtil {
 
 		sb.append(getPortletPath(portletDataContext, portletId));
 		sb.append("/preferences/");
-		sb.append(getOwnerTypeSubPath(ownerType));
+		sb.append(getOwnerTypeSubpath(ownerType));
 		sb.append(ownerId);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append(plid);
@@ -371,7 +371,7 @@ public class ExportImportPathUtil {
 		sb.append(PATH_PREFIX_SERVICE);
 		sb.append(StringPool.FORWARD_SLASH);
 		sb.append(serviceName);
-		sb.append(getOwnerTypeSubPath(ownerType));
+		sb.append(getOwnerTypeSubpath(ownerType));
 		sb.append(ownerId);
 		sb.append(CharPool.FORWARD_SLASH);
 		sb.append("portlet-preferences.xml");
@@ -469,7 +469,7 @@ public class ExportImportPathUtil {
 		return sb.toString();
 	}
 
-	protected static String getOwnerTypeSubPath(int ownerType) {
+	protected static String getOwnerTypeSubpath(int ownerType) {
 		if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
 			return "company/";
 		}
