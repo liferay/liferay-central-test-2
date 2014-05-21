@@ -259,11 +259,13 @@ int firstDayOfWeek = localeCal.getFirstDayOfWeek() - 1;
 			},
 
 			<portlet:namespace />dateRange: function(val, fieldNode, ruleValue) {
+				var greaterOrEqual = true;
+
 				if (dateTo && dateFrom) {
-					return A.Date.isGreaterOrEqual(dateTo, dateFrom);
+					greaterOrEqual = A.Date.isGreaterOrEqual(dateTo, dateFrom);
 				}
 
-				return true;
+				return greaterOrEqual;
 			}
 		},
 		true
