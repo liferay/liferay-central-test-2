@@ -72,6 +72,12 @@
 					<encoding>UTF-8</encoding>
 				</source-folder>
 				<source-folder>
+					<label>portal-test\src</label>
+					<type>java</type>
+					<location>portal-test/src</location>
+					<encoding>UTF-8</encoding>
+				</source-folder>
+				<source-folder>
 					<label>portal-web\test\functional</label>
 					<type>java</type>
 					<location>portal-web/test/functional</location>
@@ -180,6 +186,10 @@
 					<source-folder style="packages">
 						<label>portal-service\test\unit</label>
 						<location>portal-service/test/unit</location>
+					</source-folder>
+					<source-folder style="packages">
+						<label>portal-test\src</label>
+						<location>portal-test/src</location>
 					</source-folder>
 					<source-folder style="packages">
 						<label>portal-web\test\functional</label>
