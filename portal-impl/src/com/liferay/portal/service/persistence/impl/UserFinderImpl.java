@@ -1184,14 +1184,14 @@ public class UserFinderImpl
 				join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
 			}
 			else if (value instanceof Long[][]) {
-				Long[][] valueDoubleArray = (Long[][])value;
-
-				Long[] socialRelationTypes = valueDoubleArray[1];
-
 				StringBundler sb = new StringBundler();
 
 				sb.append("WHERE (SocialRelation.userId1 = ?) AND ");
 				sb.append("(SocialRelation.type_ IN (");
+
+				Long[][] valueDoubleArray = (Long[][])value;
+
+				Long[] socialRelationTypes = valueDoubleArray[1];
 
 				for (int i = 1; i < socialRelationTypes.length; i++) {
 					sb.append(StringPool.QUESTION);
