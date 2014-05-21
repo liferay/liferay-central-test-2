@@ -113,9 +113,9 @@ public class ${entity.name}PersistenceTest {
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -132,9 +132,9 @@ public class ${entity.name}PersistenceTest {
 			${column.type} pk =
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -172,9 +172,9 @@ public class ${entity.name}PersistenceTest {
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -191,9 +191,9 @@ public class ${entity.name}PersistenceTest {
 			${column.type} pk =
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -218,13 +218,13 @@ public class ${entity.name}PersistenceTest {
 				<#if column.type == "boolean">
 					RandomTestUtil.randomBoolean()
 				<#elseif column.type == "double">
-					RandomTestutil.nextDouble()
+					RandomTestUtil.nextDouble()
 				<#elseif column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "Date">
-					RandomTestutil.nextDate()
+					RandomTestUtil.nextDate()
 				<#elseif column.type == "Blob">
 					 new${column.methodName}Blob
 				<#elseif column.type == "String">
@@ -266,13 +266,13 @@ public class ${entity.name}PersistenceTest {
 					<#if finderCol.type == "boolean">
 						RandomTestUtil.randomBoolean()
 					<#elseif finderCol.type == "double">
-						RandomTestutil.nextDouble()
+						RandomTestUtil.nextDouble()
 					<#elseif finderCol.type == "int">
-						RandomTestutil.nextInt()
+						RandomTestUtil.nextInt()
 					<#elseif finderCol.type == "long">
-						RandomTestutil.nextLong()
+						RandomTestUtil.nextLong()
 					<#elseif finderCol.type == "Date">
-						RandomTestutil.nextDate()
+						RandomTestUtil.nextDate()
 					<#elseif finderCol.type == "String">
 						<#assign hasString = true>
 
@@ -301,7 +301,7 @@ public class ${entity.name}PersistenceTest {
 							<#elseif finderCol.type == "long">
 								0L
 							<#elseif finderCol.type == "Date">
-								RandomTestutil.nextDate()
+								RandomTestUtil.nextDate()
 							<#elseif finderCol.type == "String">
 								StringPool.NULL
 							<#else>
@@ -328,7 +328,7 @@ public class ${entity.name}PersistenceTest {
 						<#elseif finderCol.type == "long">
 							0L
 						<#elseif finderCol.type == "Date">
-							RandomTestutil.nextDate()
+							RandomTestUtil.nextDate()
 						<#else>
 							(${finderCol.type})null
 						</#if>
@@ -358,13 +358,13 @@ public class ${entity.name}PersistenceTest {
 							<#if finderCol.type == "boolean">
 								RandomTestUtil.randomBoolean()
 							<#elseif finderCol.type == "double">
-								RandomTestutil.nextDouble(), 0D
+								RandomTestUtil.nextDouble(), 0D
 							<#elseif finderCol.type == "int">
-								RandomTestutil.nextInt(), 0
+								RandomTestUtil.nextInt(), 0
 							<#elseif finderCol.type == "long">
-								RandomTestutil.nextLong(), 0L
+								RandomTestUtil.nextLong(), 0L
 							<#elseif finderCol.type == "Date">
-								RandomTestutil.nextDate(), null
+								RandomTestUtil.nextDate(), null
 							<#elseif finderCol.type == "String">
 								RandomTestUtil.randomString(), StringPool.BLANK, StringPool.NULL, null, null
 							<#else>
@@ -374,13 +374,13 @@ public class ${entity.name}PersistenceTest {
 							<#if finderCol.type == "boolean">
 								RandomTestUtil.randomBoolean()
 							<#elseif finderCol.type == "double">
-								RandomTestutil.nextDouble()
+								RandomTestUtil.nextDouble()
 							<#elseif finderCol.type == "int">
-								RandomTestutil.nextInt()
+								RandomTestUtil.nextInt()
 							<#elseif finderCol.type == "long">
-								RandomTestutil.nextLong()
+								RandomTestUtil.nextLong()
 							<#elseif finderCol.type == "Date">
-								RandomTestutil.nextDate()
+								RandomTestUtil.nextDate()
 							<#elseif finderCol.type == "String">
 								RandomTestUtil.randomString()
 							<#else>
@@ -422,9 +422,9 @@ public class ${entity.name}PersistenceTest {
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -441,9 +441,9 @@ public class ${entity.name}PersistenceTest {
 			${column.type} pk =
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -521,9 +521,9 @@ public class ${entity.name}PersistenceTest {
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -540,9 +540,9 @@ public class ${entity.name}PersistenceTest {
 			${column.type} pk =
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -616,9 +616,9 @@ public class ${entity.name}PersistenceTest {
 				dynamicQuery.add(RestrictionsFactoryUtil.eq("id.${column.name}",
 
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -631,9 +631,9 @@ public class ${entity.name}PersistenceTest {
 			dynamicQuery.add(RestrictionsFactoryUtil.eq("${column.name}",
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -692,9 +692,9 @@ public class ${entity.name}PersistenceTest {
 		dynamicQuery.add(RestrictionsFactoryUtil.in("${propertyName}", new Object[] {
 
 		<#if column.type == "int">
-			RandomTestutil.nextInt()
+			RandomTestUtil.nextInt()
 		<#elseif column.type == "long">
-			RandomTestutil.nextLong()
+			RandomTestUtil.nextLong()
 		<#elseif column.type == "String">
 			RandomTestUtil.randomString()
 		</#if>
@@ -743,9 +743,9 @@ public class ${entity.name}PersistenceTest {
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -762,9 +762,9 @@ public class ${entity.name}PersistenceTest {
 			${column.type} pk =
 
 			<#if column.type == "int">
-				RandomTestutil.nextInt()
+				RandomTestUtil.nextInt()
 			<#elseif column.type == "long">
-				RandomTestutil.nextLong()
+				RandomTestUtil.nextLong()
 			<#elseif column.type == "String">
 				RandomTestUtil.randomString()
 			</#if>
@@ -789,15 +789,15 @@ public class ${entity.name}PersistenceTest {
 				<#if column.type == "boolean">
 					RandomTestUtil.randomBoolean()
 				<#elseif column.type == "double">
-					RandomTestutil.nextDouble()
+					RandomTestUtil.nextDouble()
 				<#elseif column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "Blob">
 					${column.name}Blob
 				<#elseif column.type == "Date">
-					RandomTestutil.nextDate()
+					RandomTestUtil.nextDate()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -814,7 +814,7 @@ public class ${entity.name}PersistenceTest {
 	<#if entity.isHierarchicalTree()>
 		@Test
 		public void testMoveTree() throws Exception {
-			long ${scopeColumn.name} = RandomTestutil.nextLong();
+			long ${scopeColumn.name} = RandomTestUtil.nextLong();
 
 			${entity.name} root${entity.name} = add${entity.name}(${scopeColumn.name}, null);
 
@@ -833,7 +833,7 @@ public class ${entity.name}PersistenceTest {
 
 		@Test
 		public void testMoveTreeFromLeft() throws Exception {
-			long ${scopeColumn.name} = RandomTestutil.nextLong();
+			long ${scopeColumn.name} = RandomTestUtil.nextLong();
 
 			${entity.name} parent${entity.name} = add${entity.name}(${scopeColumn.name}, null);
 
@@ -863,7 +863,7 @@ public class ${entity.name}PersistenceTest {
 
 		@Test
 		public void testMoveTreeFromRight() throws Exception {
-			long ${scopeColumn.name} = RandomTestutil.nextLong();
+			long ${scopeColumn.name} = RandomTestUtil.nextLong();
 
 			${entity.name} root${entity.name} = add${entity.name}(${scopeColumn.name}, null);
 
@@ -893,7 +893,7 @@ public class ${entity.name}PersistenceTest {
 
 		@Test
 		public void testMoveTreeIntoTreeFromLeft() throws Exception {
-			long ${scopeColumn.name} = RandomTestutil.nextLong();
+			long ${scopeColumn.name} = RandomTestUtil.nextLong();
 
 			${entity.name} parent${entity.name} = add${entity.name}(${scopeColumn.name}, null);
 
@@ -937,7 +937,7 @@ public class ${entity.name}PersistenceTest {
 
 		@Test
 		public void testMoveTreeIntoTreeFromRight() throws Exception {
-			long ${scopeColumn.name} = RandomTestutil.nextLong();
+			long ${scopeColumn.name} = RandomTestUtil.nextLong();
 
 			${entity.name} root${entity.name} = add${entity.name}(${scopeColumn.name}, null);
 
@@ -985,9 +985,9 @@ public class ${entity.name}PersistenceTest {
 
 				<#list entity.PKList as column>
 					<#if column.type == "int">
-						RandomTestutil.nextInt()
+						RandomTestUtil.nextInt()
 					<#elseif column.type == "long">
-						RandomTestutil.nextLong()
+						RandomTestUtil.nextLong()
 					<#elseif column.type == "String">
 						RandomTestUtil.randomString()
 					</#if>
@@ -1004,9 +1004,9 @@ public class ${entity.name}PersistenceTest {
 				${column.type} pk =
 
 				<#if column.type == "int">
-					RandomTestutil.nextInt()
+					RandomTestUtil.nextInt()
 				<#elseif column.type == "long">
-					RandomTestutil.nextLong()
+					RandomTestUtil.nextLong()
 				<#elseif column.type == "String">
 					RandomTestUtil.randomString()
 				</#if>
@@ -1034,15 +1034,15 @@ public class ${entity.name}PersistenceTest {
 						<#if column.type == "boolean">
 							RandomTestUtil.randomBoolean()
 						<#elseif column.type == "double">
-							RandomTestutil.nextDouble()
+							RandomTestUtil.nextDouble()
 						<#elseif column.type == "int">
-							RandomTestutil.nextInt()
+							RandomTestUtil.nextInt()
 						<#elseif column.type == "long">
-							RandomTestutil.nextLong()
+							RandomTestUtil.nextLong()
 						<#elseif column.type == "Blob">
 							${column.name}Blob
 						<#elseif column.type == "Date">
-							RandomTestutil.nextDate()
+							RandomTestUtil.nextDate()
 						<#elseif column.type == "String">
 							RandomTestUtil.randomString()
 						</#if>
