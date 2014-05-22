@@ -68,7 +68,7 @@ public class InterceptConnectionHandler implements InvocationHandler {
 
 				Statement statement = (Statement)returnValue;
 
-				return (Statement)ProxyUtil.newProxyInstance(
+				return ProxyUtil.newProxyInstance(
 					InterceptConnectionHandler.class.getClassLoader(),
 					getInterfaces(statement),
 					new InterceptStatementHandler(_connection, statement));
