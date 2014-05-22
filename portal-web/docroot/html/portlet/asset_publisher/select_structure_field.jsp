@@ -24,6 +24,7 @@ String eventName = ParamUtil.getString(request, "eventName", liferayPortletRespo
 AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(className);
 
 ClassTypeReader classTypeReader = assetRendererFactory.getClassTypeReader();
+
 ClassType classType = classTypeReader.getClassType(classTypeId, locale);
 
 PortletURL portletURL = renderResponse.createRenderURL();
