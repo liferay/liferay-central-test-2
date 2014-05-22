@@ -212,6 +212,26 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 	}
 
 	@Override
+	public List<LocalRepository> getGroupLocalRepositoryImpl(long groupId)
+		throws PortalException, SystemException {
+
+		List<Repository> repositories = repositoryPersistence.findByGroupId(
+			groupId);
+
+		List<LocalRepository> localRepositories =
+			new ArrayList<LocalRepository>(repositories.size() + 1);
+
+		for (Repository repository : repositories) {
+			localRepositories.add(
+				getLocalRepositoryImpl(repository.getRepositoryId()));
+		}
+
+		localRepositories.add(getLocalRepositoryImpl(groupId));
+
+		return localRepositories;
+	}
+
+	@Override
 	public LocalRepository getLocalRepositoryImpl(long repositoryId)
 		throws PortalException, SystemException {
 
@@ -287,26 +307,6 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 			repositoryEntryId, localRepositoryImpl);
 
 		return localRepositoryImpl;
-	}
-
-	@Override
-	public List<LocalRepository> getGroupLocalRepositoryImpl(long groupId)
-		throws PortalException, SystemException {
-
-		List<Repository> repositories = repositoryPersistence.findByGroupId(
-			groupId);
-
-		List<LocalRepository> localRepositories =
-			new ArrayList<LocalRepository>(repositories.size() + 1);
-
-		for (Repository repository : repositories) {
-			localRepositories.add(
-				getLocalRepositoryImpl(repository.getRepositoryId()));
-		}
-
-		localRepositories.add(getLocalRepositoryImpl(groupId));
-
-		return localRepositories;
 	}
 
 	@Override
