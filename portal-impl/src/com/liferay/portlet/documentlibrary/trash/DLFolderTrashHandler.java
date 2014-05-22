@@ -45,8 +45,9 @@ import com.liferay.portlet.trash.RestoreEntryException;
 import com.liferay.portlet.trash.TrashEntryConstants;
 import com.liferay.portlet.trash.model.TrashEntry;
 
-import javax.portlet.PortletRequest;
 import java.util.List;
+
+import javax.portlet.PortletRequest;
 
 /**
  * Implements trash handling for the folder entity.
