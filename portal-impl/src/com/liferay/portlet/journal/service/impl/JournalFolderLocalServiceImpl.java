@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.portal.NoSuchWorkflowDefinitionLinkException;
 import com.liferay.portal.kernel.dao.orm.QueryDefinition;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -944,17 +943,14 @@ public class JournalFolderLocalServiceImpl
 		}
 
 		for (long ddmStructureId : ddmStructureIds) {
-			WorkflowDefinitionLink workflowDefinitionLink = null;
+			WorkflowDefinitionLink workflowDefinitionLink =
+				workflowDefinitionLinkLocalService.
+					fetchWorkflowDefinitionLink(
+						folder.getCompanyId(), folder.getGroupId(),
+						JournalFolder.class.getName(), folder.getFolderId(),
+						ddmStructureId);
 
-			try {
-				workflowDefinitionLink =
-					workflowDefinitionLinkLocalService.
-						getWorkflowDefinitionLink(
-							folder.getCompanyId(), folder.getGroupId(),
-							JournalFolder.class.getName(), folder.getFolderId(),
-							ddmStructureId);
-			}
-			catch (NoSuchWorkflowDefinitionLinkException nswdle) {
+			if (workflowDefinitionLink == null) {
 				continue;
 			}
 
