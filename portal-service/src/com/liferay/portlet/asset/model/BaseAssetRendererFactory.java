@@ -345,7 +345,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 		@Override
 		public ClassType getClassType(long classTypeId, Locale locale)
-			throws PortalException, SystemException {
+			throws PortalException {
 
 			throw new NoSuchClassTypeException();
 		}
