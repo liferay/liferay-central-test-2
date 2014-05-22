@@ -79,6 +79,15 @@ public abstract class BaseAutoLogin implements AuthVerifier, AutoLogin {
 		}
 	}
 
+	protected void addRedirect() {
+		String redirect = ParamUtil.getString(request, "redirect");
+
+		if (Validator.isNotNull(redirect)) {
+			request.setAttribute(
+				AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE, redirect);
+		}
+	}
+
 	protected String[] doHandleException(
 			HttpServletRequest request, HttpServletResponse response,
 			Exception e)

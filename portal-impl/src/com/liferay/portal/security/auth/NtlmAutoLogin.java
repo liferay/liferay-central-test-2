@@ -56,12 +56,7 @@ public class NtlmAutoLogin extends BaseAutoLogin {
 			return null;
 		}
 
-		String redirect = ParamUtil.getString(request, "redirect");
-
-		if (Validator.isNotNull(redirect)) {
-			request.setAttribute(
-				AutoLogin.AUTO_LOGIN_REDIRECT_AND_CONTINUE, redirect);
-		}
+		addRedirect();
 
 		String[] credentials = new String[3];
 
