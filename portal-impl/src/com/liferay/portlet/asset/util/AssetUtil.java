@@ -525,7 +525,7 @@ public class AssetUtil {
 					if (addPortletURL != null) {
 						String mesage =
 							className + CLASSNAME_SEPARATOR +
-							classType.getName();
+								classType.getName();
 
 						addPortletURLs.put(mesage, addPortletURL);
 					}

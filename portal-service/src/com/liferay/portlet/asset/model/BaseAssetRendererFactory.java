@@ -236,7 +236,11 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 		ClassType classType = classTypeReader.getClassType(classTypeId, locale);
 
-		return classType.getClassTypeFieldsCount() > 0;
+		if (classType.getClassTypeFieldsCount() > 0) {
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
@@ -334,7 +338,7 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	private static final boolean _PERMISSION = true;
 
-	private static final class NullClassTypeReader implements ClassTypeReader {
+	private static class NullClassTypeReader implements ClassTypeReader {
 
 		@Override
 		public List<ClassType> getAvailableClassTypes(
