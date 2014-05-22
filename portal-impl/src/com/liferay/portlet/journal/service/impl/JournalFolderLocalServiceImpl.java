@@ -770,22 +770,8 @@ public class JournalFolderLocalServiceImpl
 			new ArrayList<ObjectValuePair<Long, String>>();
 
 		if (restrictionType ==
-				JournalFolderConstants.RESTRICTION_TYPE_INHERIT) {
-
-			if (originalDDMStructureIds.isEmpty()) {
-				originalDDMStructureIds.add(
-					JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
-			}
-
-			for (long originalDDMStructureId : originalDDMStructureIds) {
-				workflowDefinitionOVPs.add(
-					new ObjectValuePair<Long, String>(
-						originalDDMStructureId, StringPool.BLANK));
-			}
-		}
-		else if (restrictionType ==
-					JournalFolderConstants.
-						RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW) {
+				JournalFolderConstants.
+					RESTRICTION_TYPE_DDM_STRUCTURES_AND_WORKFLOW) {
 
 			workflowDefinitionOVPs.add(
 				new ObjectValuePair<Long, String>(
@@ -799,6 +785,20 @@ public class JournalFolderLocalServiceImpl
 				workflowDefinitionOVPs.add(
 					new ObjectValuePair<Long, String>(
 						ddmStructureId, workflowDefinition));
+			}
+		}
+		else if (restrictionType ==
+					JournalFolderConstants.RESTRICTION_TYPE_INHERIT) {
+
+			if (originalDDMStructureIds.isEmpty()) {
+				originalDDMStructureIds.add(
+					JournalArticleConstants.DDM_STRUCTURE_ID_ALL);
+			}
+
+			for (long originalDDMStructureId : originalDDMStructureIds) {
+				workflowDefinitionOVPs.add(
+					new ObjectValuePair<Long, String>(
+						originalDDMStructureId, StringPool.BLANK));
 			}
 		}
 		else if (restrictionType ==
