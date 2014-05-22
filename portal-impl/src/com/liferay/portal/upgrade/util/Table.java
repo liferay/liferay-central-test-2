@@ -561,8 +561,8 @@ public class Table {
 		else if (t == Types.BOOLEAN) {
 			ps.setBoolean(paramIndex, GetterUtil.getBoolean(value));
 		}
-		else if ((t == Types.CLOB) || (t == Types.VARCHAR) ||
-				 (t == Types.LONGVARCHAR)) {
+		else if ((t == Types.CLOB) || (t == Types.LONGVARCHAR) ||
+				 (t == Types.VARCHAR)) {
 
 			value = StringUtil.replace(
 				value, _SAFE_TABLE_CHARS[1], _SAFE_TABLE_CHARS[0]);
