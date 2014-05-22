@@ -93,7 +93,7 @@ public class DDMStructureClassType implements ClassType {
 	protected List<ClassTypeField> getClassTypeFields(DDMStructure ddmStructure)
 		throws PortalException, SystemException {
 
-		List<ClassTypeField> fields = new ArrayList<ClassTypeField>();
+		List<ClassTypeField> classTypeFields = new ArrayList<ClassTypeField>();
 
 		Map<String, Map<String, String>> fieldsMap = ddmStructure.getFieldsMap(
 			_languageId);
@@ -114,12 +114,12 @@ public class DDMStructureClassType implements ClassType {
 			String label = fieldMap.get("label");
 			String name = fieldMap.get("name");
 
-			fields.add(
+			classTypeFields.add(
 				new ClassTypeField(
 					label, name, type, ddmStructure.getStructureId()));
 		}
 
-		return fields;
+		return classTypeFields;
 	}
 
 	private static final String[] _SELECTABLE_DDM_STRUCTURE_FIELDS = {
@@ -127,8 +127,8 @@ public class DDMStructureClassType implements ClassType {
 		"radio", "select", "text"
 	};
 
-	private final long _classTypeId;
-	private final String _classTypeName;
-	private final String _languageId;
+	private long _classTypeId;
+	private String _classTypeName;
+	private String _languageId;
 
 }
