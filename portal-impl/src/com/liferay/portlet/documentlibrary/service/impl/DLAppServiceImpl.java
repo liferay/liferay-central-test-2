@@ -803,13 +803,13 @@ public class DLAppServiceImpl extends DLAppServiceBaseImpl {
 		List<FileEntry> fileEntries = repository.getRepositoryFileEntries(
 			0, folderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-		Folder folder = repository.getFolder(folderId);
-
-		repository.deleteFolder(folderId);
-
 		for (FileEntry fileEntry : fileEntries) {
 			dlAppHelperLocalService.deleteFileEntry(fileEntry);
 		}
+
+		Folder folder = repository.getFolder(folderId);
+
+		repository.deleteFolder(folderId);
 
 		dlAppHelperLocalService.deleteFolder(folder);
 	}
