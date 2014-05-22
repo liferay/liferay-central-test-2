@@ -41,7 +41,8 @@ import org.apache.log4j.Level;
 /**
  * @author Shuyang Zhou
  */
-public class ResetExecutionTestListener extends AbstractExecutionTestListener {
+public class ResetDatabaseExecutionTestListener
+	extends AbstractExecutionTestListener {
 
 	@Override
 	public void runAfterTest(TestContext testContext) {
