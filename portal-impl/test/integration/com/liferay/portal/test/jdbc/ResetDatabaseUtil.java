@@ -46,23 +46,23 @@ import net.sf.jsqlparser.util.TablesNamesFinder;
  */
 public class ResetDatabaseUtil {
 
-	public static void interceptSQL(Connection connection, String sql)
+	public static void processSQL(Connection connection, String sql)
 		throws Exception {
 
 		if (!_recording) {
 			return;
 		}
 
-		List<String> tableNames = getTableNames(sql);
+		List<String> tableNames = _getModifiedTableNames(sql);
 
 		if (tableNames == null) {
 			return;
 		}
 
 		for (String tableName : tableNames) {
-			Table table = createTable(connection, tableName);
+			Table table = _buildTable(connection, tableName);
 
-			if (_interceptedTables.putIfAbsent(tableName, table) ==
+			if (_modifiedTables.putIfAbsent(tableName, table) ==
 					null) {
 
 				table.generateTempFile(connection);
@@ -70,18 +70,16 @@ public class ResetDatabaseUtil {
 		}
 	}
 
-	public static void resetTables() {
+	public static void resetModifiedTables() {
 		Connection connection = null;
 
 		try {
 			connection = DataAccess.getUpgradeOptimizedConnection();
 
-			for (Table table : _interceptedTables.values()) {
-				String deleteSQL = table.getDeleteSQL();
-
+			for (Table table : _modifiedTables.values()) {
 				DB db = DBFactoryUtil.getDB();
 
-				db.runSQL(connection, deleteSQL);
+				db.runSQL(connection, table.getDeleteSQL());
 
 				table.populateTable();
 
@@ -98,17 +96,17 @@ public class ResetDatabaseUtil {
 		finally {
 			DataAccess.cleanUp(connection);
 
-			_interceptedTables.clear();
+			_modifiedTables.clear();
 
 			_recording = false;
 		}
 	}
 
-	public static void startRecordTables() {
+	public static void startRecording() {
 		_recording = true;
 	}
 
-	protected static Table createTable(
+	private static Table _buildTable(
 		Connection connection, String tableName) {
 
 		try {
@@ -152,7 +150,7 @@ public class ResetDatabaseUtil {
 		}
 	}
 
-	protected static List<String> getTableNames(String sql) {
+	private static List<String> _getModifiedTableNames(String sql) {
 		Statement statement = null;
 
 		try {
@@ -200,11 +198,10 @@ public class ResetDatabaseUtil {
 
 		return null;
 	}
-
-	private static final ConcurrentMap<String, Table> _interceptedTables =
+	
+	private static ConcurrentMap<String, Table> _modifiedTables =
 		new ConcurrentHashMap<String, Table>();
-	private static final JSqlParser _jSqlParser = new CCJSqlParserManager();
-
+	private static JSqlParser _jSqlParser = new CCJSqlParserManager();
 	private static volatile boolean _recording;
 
 }

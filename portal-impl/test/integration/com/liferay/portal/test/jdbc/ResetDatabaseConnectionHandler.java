@@ -56,7 +56,7 @@ public class ResetDatabaseConnectionHandler implements InvocationHandler {
 			if (methodName.equals("prepareCall") ||
 				methodName.equals("prepareStatement")) {
 
-				ResetDatabaseUtil.interceptSQL(
+				ResetDatabaseUtil.processSQL(
 					_connection, (String)arguments[0]);
 			}
 

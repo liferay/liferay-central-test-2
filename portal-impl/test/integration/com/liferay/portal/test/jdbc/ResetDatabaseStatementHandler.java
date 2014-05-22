@@ -60,7 +60,7 @@ public class ResetDatabaseStatementHandler implements InvocationHandler {
 				methodName.equals("executeUpdate")) {
 
 				if (ArrayUtil.isNotEmpty(arguments)) {
-					ResetDatabaseUtil.interceptSQL(
+					ResetDatabaseUtil.processSQL(
 						_connection, (String)arguments[0]);
 				}
 			}

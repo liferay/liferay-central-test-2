@@ -48,7 +48,7 @@ public class ResetDatabaseExecutionTestListener
 	public void runAfterTest(TestContext testContext) {
 		reloadLuceneStores();
 
-		ResetDatabaseUtil.resetTables();
+		ResetDatabaseUtil.resetModifiedTables();
 
 		Log4JLoggerTestUtil.setLoggerLevel(Table.class.getName(), _level);
 
@@ -64,7 +64,7 @@ public class ResetDatabaseExecutionTestListener
 		_level = Log4JLoggerTestUtil.setLoggerLevel(
 			Table.class.getName(), Level.WARN);
 
-		ResetDatabaseUtil.startRecordTables();
+		ResetDatabaseUtil.startRecording();
 
 		dumpLuceneStores();
 	}
