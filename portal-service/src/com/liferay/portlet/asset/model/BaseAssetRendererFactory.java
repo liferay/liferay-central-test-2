@@ -338,6 +338,13 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 
 	private static final boolean _PERMISSION = true;
 
+	private boolean _categorizable = true;
+	private String _className;
+	private boolean _linkable;
+	private String _portletId;
+	private boolean _selectable = true;
+	private boolean _supportsClassTypes;
+
 	private static class NullClassTypeReader implements ClassTypeReader {
 
 		@Override
@@ -355,12 +362,5 @@ public abstract class BaseAssetRendererFactory implements AssetRendererFactory {
 		}
 
 	}
-
-	private boolean _categorizable = true;
-	private String _className;
-	private boolean _linkable;
-	private String _portletId;
-	private boolean _selectable = true;
-	private boolean _supportsClassTypes;
 
 }
