@@ -14,8 +14,6 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.PortalLDAPImporterUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -56,7 +54,7 @@ public class NtlmAutoLogin extends BaseAutoLogin {
 			return null;
 		}
 
-		addRedirect();
+		addRedirect(request);
 
 		String[] credentials = new String[3];
 
