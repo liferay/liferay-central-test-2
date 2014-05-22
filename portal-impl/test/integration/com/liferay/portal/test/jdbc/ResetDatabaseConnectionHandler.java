@@ -28,9 +28,9 @@ import java.sql.Statement;
 /**
  * @author Shuyang Zhou
  */
-public class InterceptConnectionHandler implements InvocationHandler {
+public class ResetDatabaseConnectionHandler implements InvocationHandler {
 
-	public InterceptConnectionHandler(Connection connection) {
+	public ResetDatabaseConnectionHandler(Connection connection) {
 		_connection = connection;
 	}
 
@@ -69,9 +69,9 @@ public class InterceptConnectionHandler implements InvocationHandler {
 				Statement statement = (Statement)returnValue;
 
 				return ProxyUtil.newProxyInstance(
-					InterceptConnectionHandler.class.getClassLoader(),
+					ResetDatabaseConnectionHandler.class.getClassLoader(),
 					getInterfaces(statement),
-					new InterceptStatementHandler(_connection, statement));
+					new ResetDatabaseStatementHandler(_connection, statement));
 			}
 
 			return returnValue;

@@ -29,7 +29,7 @@ import javax.sql.DataSource;
 /**
  * @author Shuyang Zhou
  */
-public class InterceptDataSource extends DataSourceWrapper {
+public class ResetDatabaseUtilDataSource extends DataSourceWrapper {
 
 	public static void initialize() {
 		try {
@@ -42,16 +42,16 @@ public class InterceptDataSource extends DataSourceWrapper {
 		}
 	}
 
-	public InterceptDataSource(DataSource dataSource) {
+	public ResetDatabaseUtilDataSource(DataSource dataSource) {
 		super(dataSource);
 	}
 
 	@Override
 	public Connection getConnection() throws SQLException {
 		return (Connection)ProxyUtil.newProxyInstance(
-			InterceptDataSource.class.getClassLoader(),
+			ResetDatabaseUtilDataSource.class.getClassLoader(),
 			new Class<?>[] {Connection.class},
-			new InterceptConnectionHandler(super.getConnection()));
+			new ResetDatabaseConnectionHandler(super.getConnection()));
 	}
 
 	private static DataSourceFactoryImpl.PACL _pacl =
@@ -59,7 +59,7 @@ public class InterceptDataSource extends DataSourceWrapper {
 
 			@Override
 			public DataSource getDataSource(DataSource dataSource) {
-				return new InterceptDataSource(dataSource);
+				return new ResetDatabaseUtilDataSource(dataSource);
 			}
 
 		};
