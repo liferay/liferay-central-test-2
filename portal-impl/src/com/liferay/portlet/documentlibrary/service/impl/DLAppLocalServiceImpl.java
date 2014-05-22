@@ -394,7 +394,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<LocalRepository> localRepositories =
-			repositoryLocalService.getLocalRepositoryImplByGroupId(groupId);
+			repositoryLocalService.getGroupLocalRepositoryImpl(groupId);
 
 		for (LocalRepository localRepository : localRepositories) {
 			deleteRepository(localRepository);

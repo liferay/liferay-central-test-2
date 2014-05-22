@@ -290,7 +290,7 @@ public class RepositoryLocalServiceImpl extends RepositoryLocalServiceBaseImpl {
 	}
 
 	@Override
-	public List<LocalRepository> getLocalRepositoryImplByGroupId(long groupId)
+	public List<LocalRepository> getGroupLocalRepositoryImpl(long groupId)
 		throws PortalException, SystemException {
 
 		List<Repository> repositories = repositoryPersistence.findByGroupId(
