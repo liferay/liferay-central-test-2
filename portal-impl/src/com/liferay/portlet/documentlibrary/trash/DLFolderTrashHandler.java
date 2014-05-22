@@ -83,14 +83,14 @@ public class DLFolderTrashHandler extends DLBaseTrashHandler {
 
 		DLFolder dlFolder = DLFolderLocalServiceUtil.getDLFolder(classPK);
 
-		List<DLFileEntry> fileEntries =
+		List<DLFileEntry> dlFileEntries =
 			DLFileEntryLocalServiceUtil.getGroupFileEntries(
 				dlFolder.getGroupId(), 0, classPK, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null);
 
-		for (DLFileEntry fileEntry : fileEntries) {
+		for (DLFileEntry dlFileEntry : dlFileEntries) {
 			DLAppHelperLocalServiceUtil.deleteFileEntry(
-				new LiferayFileEntry(fileEntry));
+				new LiferayFileEntry(dlFileEntry));
 		}
 
 		DLAppHelperLocalServiceUtil.deleteFolder(new LiferayFolder(dlFolder));
