@@ -61,11 +61,12 @@ public class NavTag extends BaseNavTag implements BodyTag {
 			String cssClass = getCssClass();
 
 			if (Validator.isNotNull(cssClass)) {
-				for (String curCssClass :
-						StringUtil.split(cssClass, CharPool.SPACE)) {
+				String[] cssClassParts = StringUtil.split(
+					cssClass, CharPool.SPACE);
 
+				for (int i = 0; i < cssClassParts.length; i++) {
 					sb.append(StringPool.SPACE);
-					sb.append(curCssClass);
+					sb.append(cssClassParts[i]);
 					sb.append("-btn");
 				}
 			}
