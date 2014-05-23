@@ -5,7 +5,11 @@
 	xmlns:artifact="antlib:org.apache.maven.artifact.ant"
 	xmlns:sonar="antlib:org.sonar.ant"
 >
-	<dirname file="${ant.file.build-common}" property="project.dir" />
+	<dirname file="${ant.file.build-common}" property="project.dir.native" />
+
+	<pathconvert property="project.dir" targetos="unix">
+		<path location="${project.dir.native}" />
+	</pathconvert>
 
 	<property name="test.properties" value="com/liferay/portal/tools/dependencies/portal-tools.properties" />
 
