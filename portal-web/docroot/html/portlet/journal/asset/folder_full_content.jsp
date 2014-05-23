@@ -54,7 +54,7 @@ JournalFolder folder = (JournalFolder)request.getAttribute(WebKeys.JOURNAL_FOLDE
 					<%= foldersCount %> <liferay-ui:message key='<%= (foldersCount == 1) ? "subfolder" : "subfolders" %>' />
 				</div>
 
-				<div class="<%= journalArticleAssetRendererFactory.getIconCssClass() %> lfr-asset-icon last">
+				<div class="<%= journalArticleAssetRendererFactory.getIconCssClass() %> last lfr-asset-icon">
 					<%= entriesCount %> <liferay-ui:message key='<%= (entriesCount == 1) ? "article" : "articles" %>' />
 				</div>
 			</div>

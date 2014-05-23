@@ -106,7 +106,7 @@ BookmarksUtil.addPortletBreadcrumbEntries(entry, request, renderResponse);
 				<%= dateFormatDate.format(entry.getCreateDate()) %>
 			</div>
 
-			<div class="lfr-asset-icon lfr-asset-downloads last">
+			<div class="last lfr-asset-icon lfr-asset-downloads">
 				<%= entry.getVisits() %> <liferay-ui:message key="visits" />
 			</div>
 		</div>
