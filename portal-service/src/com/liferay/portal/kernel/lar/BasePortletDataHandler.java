@@ -62,11 +62,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			startTime = System.currentTimeMillis();
 		}
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			return doAddDefaultData(
 				portletDataContext, portletId, portletPreferences);
 		}
@@ -84,8 +80,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 					"Added default data to portlet in " +
 						Time.getDuration(duration));
 			}
-
-			portletDataContext.setClassLoader(classLoader);
 		}
 	}
 
@@ -103,11 +97,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			startTime = System.currentTimeMillis();
 		}
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			return doDeleteData(
 				portletDataContext, portletId, portletPreferences);
 		}
@@ -123,10 +113,8 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 				_log.info("Deleted portlet in " + Time.getDuration(duration));
 			}
-
-			portletDataContext.setClassLoader(classLoader);
 		}
-	};
+	}
 
 	@Override
 	public String exportData(
@@ -142,11 +130,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			startTime = System.currentTimeMillis();
 		}
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			portletDataContext.addDeletionSystemEventStagedModelTypes(
 				getDeletionSystemEventStagedModelTypes());
 
@@ -185,8 +169,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 				_log.info("Exported portlet in " + Time.getDuration(duration));
 			}
-
-			portletDataContext.setClassLoader(classLoader);
 		}
 	}
 
@@ -391,11 +373,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 		long sourceGroupId = portletDataContext.getSourceGroupId();
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			if (Validator.isXml(data)) {
 				addImportDataRootElement(portletDataContext, data);
 			}
@@ -420,8 +398,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 
 				_log.info("Imported portlet in " + Time.getDuration(duration));
 			}
-
-			portletDataContext.setClassLoader(classLoader);
 		}
 	}
 
@@ -496,11 +472,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			doPrepareManifestSummary(portletDataContext, portletPreferences);
 		}
 		catch (PortletDataException pde) {
@@ -508,9 +480,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
-		}
-		finally {
-			portletDataContext.setClassLoader(classLoader);
 		}
 	}
 
@@ -548,11 +517,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			portletDataContext.setScopeGroupId(previousScopeGroupId);
 		}
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			return doProcessExportPortletPreferences(
 				portletDataContext, portletId, portletPreferences);
 		}
@@ -562,9 +527,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
-		finally {
-			portletDataContext.setClassLoader(classLoader);
-		}
 	}
 
 	@Override
@@ -573,11 +535,7 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 			PortletPreferences portletPreferences)
 		throws PortletDataException {
 
-		ClassLoader classLoader = portletDataContext.getClassLoader();
-
 		try {
-			portletDataContext.setClassLoader(this.getClass().getClassLoader());
-
 			String displayStyle = getDisplayTemplate(
 				portletDataContext, portletId, portletPreferences);
 
@@ -701,9 +659,6 @@ public abstract class BasePortletDataHandler implements PortletDataHandler {
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
-		}
-		finally {
-			portletDataContext.setClassLoader(classLoader);
 		}
 	}
 
