@@ -84,6 +84,7 @@ String summary = StringUtil.shorten(assetRenderer.getSummary(liferayPortletReque
 
 				<div class="asset-user-info">
 					<span class="user-info"><%= userDisplay.getFullName() %></span>
+
 					<span class="date-info"><%= displayDate %></span>
 				</div>
 			</div>
