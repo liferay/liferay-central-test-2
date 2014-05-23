@@ -157,15 +157,15 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 			PredicateFilter<AssetCategory> predicateFilter =
 				new PredicateFilter<AssetCategory>() {
-	
+
 					@Override
 					public boolean filter(AssetCategory assetCategory) {
 						return ArrayUtil.contains(
 							categoryIds, assetCategory.getCategoryId());
 					}
-	
+
 				};
-	
+
 			return !ListUtil.exists(getCategories(), predicateFilter);
 		}
 
