@@ -74,8 +74,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		return applyFallbackKeys(
 			new PortletPreferencesSettings(
 				getCompanyPortletPreferences(companyId, serviceName)),
-			serviceName
-		);
+			serviceName);
 	}
 
 	@Override
@@ -136,8 +135,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		return applyFallbackKeys(
 			new PortletPreferencesSettings(
 				getCompanyPortletPreferences(companyId, portletId)),
-			PortletConstants.getRootPortletId(portletId)
-		);
+			PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
@@ -151,8 +149,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			new PortletPreferencesSettings(
 				getGroupPortletPreferences(
 					group.getCompanyId(), groupId, portletId)),
-				PortletConstants.getRootPortletId(portletId)
-		);
+				PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
@@ -163,8 +160,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 			new PortletPreferencesSettings(
 				getPortletInstancePortletPreferences(layout, portletId),
 				getGroupSettings(layout.getGroupId(), portletId)),
-			PortletConstants.getRootPortletId(portletId)
-		);
+			PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
