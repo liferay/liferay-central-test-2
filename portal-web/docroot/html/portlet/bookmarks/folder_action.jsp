@@ -175,5 +175,4 @@ if (row == null) {
 			url="<%= deleteURL %>"
 		/>
 	</c:if>
-
 </liferay-ui:icon-menu>

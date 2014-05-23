@@ -51,7 +51,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 					</div>
 				</c:if>
 
-				<div class="icon-calendar entry-date">
+				<div class="entry-date icon-calendar">
 					<span class="hide-accessible"><liferay-ui:message key="published-date" /></span>
 
 					<%= dateFormatDateTime.format(entry.getDisplayDate()) %>
@@ -203,7 +203,7 @@ AssetEntry assetEntry = (AssetEntry)request.getAttribute("view_entry_content.jsp
 			</div>
 
 			<div class="entry-footer">
-				<div class="icon-user entry-author">
+				<div class="entry-author icon-user">
 					<liferay-ui:message key="written-by" /> <%= HtmlUtil.escape(PortalUtil.getUserName(entry)) %>
 				</div>
 
