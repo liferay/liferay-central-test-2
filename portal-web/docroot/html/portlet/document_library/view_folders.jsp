@@ -365,7 +365,6 @@ else {
 						</c:if>
 
 						<%
-						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 
 						List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeServiceUtil.getFileEntryTypes(groupIds, searchContainer.getStart(), searchContainer.getEnd());
 
@@ -376,6 +375,8 @@ else {
 
 							dataView.put("browse-by", "file-entry-type");
 							dataView.put("file-entry-type-id", fileEntryType.getFileEntryTypeId());
+
+							AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
 						%>
 
 							<liferay-portlet:renderURL varImpl="viewFileEntryTypeURL">

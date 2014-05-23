@@ -23,6 +23,9 @@ BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS
 <c:if test="<%= folder != null %>">
 
 	<%
+	AssetRendererFactory bookmarksFolderAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
+	AssetRendererFactory bookmarksEntryAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksEntry.class.getName());
+
 	int status = WorkflowConstants.STATUS_APPROVED;
 
 	if (permissionChecker.isContentReviewer(user.getCompanyId(), scopeGroupId)) {
@@ -31,10 +34,6 @@ BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS
 
 	int foldersCount = BookmarksFolderServiceUtil.getFoldersCount(scopeGroupId, folder.getFolderId(), status);
 	int entriesCount = BookmarksEntryServiceUtil.getEntriesCount(scopeGroupId, folder.getFolderId(), status);
-
-	AssetRendererFactory bookmarksEntryAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksEntry.class.getName());
-
-	AssetRendererFactory bookmarksFolderAssetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(BookmarksFolder.class.getName());
 	%>
 
 	<aui:row>
