@@ -140,7 +140,9 @@ public class LayoutSetPrototypeLocalServiceImpl
 	}
 
 	@Override
-	public void deleteAll() throws PortalException, SystemException {
+	public void deleteLayoutSetPrototypes()
+		throws PortalException, SystemException {
+
 		List<LayoutSetPrototype> layoutSetPrototypes =
 			layoutSetPrototypePersistence.findAll();
 

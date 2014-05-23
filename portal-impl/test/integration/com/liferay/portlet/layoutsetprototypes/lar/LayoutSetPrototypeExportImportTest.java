@@ -83,7 +83,7 @@ public class LayoutSetPrototypeExportImportTest
 
 		// Exclude default site templates
 
-		LayoutSetPrototypeLocalServiceUtil.deleteAll();
+		LayoutSetPrototypeLocalServiceUtil.deleteLayoutSetPrototypes();
 
 		LayoutSetPrototype exportedLayoutSetPrototype =
 			LayoutTestUtil.addLayoutSetPrototype(RandomTestUtil.randomString());
