@@ -59,7 +59,7 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 
 	@Override
 	public String getUnambiguousName(
-			List<DLFileEntryType> fileEntryTypes, long groupId,
+			List<DLFileEntryType> dlFileEntryTypes, long groupId,
 			final Locale locale)
 		throws PortalException, SystemException {
 
@@ -67,25 +67,26 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 			return getName(locale);
 		}
 
-		boolean hasAmbiguousFileEntryTypes = ListUtil.exists(
-			fileEntryTypes, new PredicateFilter<DLFileEntryType>() {
-
-			@Override
-			public boolean filter(DLFileEntryType curFileEntryType) {
-				String curFileEntryTypeName = curFileEntryType.getName(locale);
-
-				if (curFileEntryTypeName.equals(getName(locale)) &&
-					(curFileEntryType.getFileEntryTypeId()
-						!= getFileEntryTypeId())) {
-
-					return true;
+		boolean hasAmbiguousName = ListUtil.exists(
+			dlFileEntryTypes,
+			new PredicateFilter<DLFileEntryType>() {
+	
+				@Override
+				public boolean filter(DLFileEntryType fileEntryType) {
+					String name = fileEntryType.getName(locale);
+	
+					if (name.equals(getName(locale)) &&
+						(fileEntryType.getFileEntryTypeId() !=
+							getFileEntryTypeId())) {
+	
+						return true;
+					}
+	
+					return false;
 				}
+			});
 
-				return false;
-			}
-		});
-
-		if (hasAmbiguousFileEntryTypes) {
+		if (hasAmbiguousName) {
 			Group group = GroupLocalServiceUtil.getGroup(getGroupId());
 
 			return group.getUnambiguousName(getName(locale), locale);

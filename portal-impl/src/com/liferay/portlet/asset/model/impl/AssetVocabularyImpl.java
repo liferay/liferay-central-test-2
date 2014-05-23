@@ -118,16 +118,16 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 			return getTitle(locale);
 		}
 
-		boolean hasAmbiguousVocabularies = ListUtil.exists(
-			vocabularies, new PredicateFilter<AssetVocabulary>() {
+		boolean hasAmbiguousTitle = ListUtil.exists(
+			vocabularies,
+			new PredicateFilter<AssetVocabulary>() {
 
 				@Override
-				public boolean filter(AssetVocabulary curVocabulary) {
-					String curVocabularyTitle = curVocabulary.getTitle(locale);
+				public boolean filter(AssetVocabulary vocabulary) {
+					String title = vocabulary.getTitle(locale);
 
-					if (curVocabularyTitle.equals(getTitle(locale)) &&
-						(curVocabulary.getVocabularyId() !=
-							getVocabularyId())) {
+					if (title.equals(getTitle(locale)) &&
+						(vocabulary.getVocabularyId() != getVocabularyId())) {
 
 						return true;
 					}
@@ -137,7 +137,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 			});
 
-		if (hasAmbiguousVocabularies) {
+		if (hasAmbiguousTitle) {
 			Group group = GroupLocalServiceUtil.getGroup(getGroupId());
 
 			return group.getUnambiguousName(getTitle(locale), locale);

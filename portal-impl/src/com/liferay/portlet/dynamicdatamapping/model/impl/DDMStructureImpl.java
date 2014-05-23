@@ -426,25 +426,26 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 			return getName(locale);
 		}
 
-		boolean hasAmbiguousStructures = ListUtil.exists(
-			structures, new PredicateFilter<DDMStructure>() {
-
-			@Override
-			public boolean filter(DDMStructure curStructure) {
-				String curStructureName = curStructure.getName(locale);
-
-				if (curStructureName.equals(getName(locale)) &&
-					(curStructure.getStructureId() != getStructureId())) {
-
-					return true;
+		boolean hasAmbiguousName = ListUtil.exists(
+			structures,
+			new PredicateFilter<DDMStructure>() {
+	
+				@Override
+				public boolean filter(DDMStructure structure) {
+					String name = structure.getName(locale);
+	
+					if (name.equals(getName(locale)) &&
+						(structure.getStructureId() != getStructureId())) {
+	
+						return true;
+					}
+	
+					return false;
 				}
+	
+			});
 
-				return false;
-			}
-
-		});
-
-		if (hasAmbiguousStructures) {
+		if (hasAmbiguousName) {
 			Group group = GroupLocalServiceUtil.getGroup(getGroupId());
 
 			return group.getUnambiguousName(getName(locale), locale);
