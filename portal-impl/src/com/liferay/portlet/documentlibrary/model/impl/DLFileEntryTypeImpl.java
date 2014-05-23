@@ -19,7 +19,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.PredicateFilter;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryType;
 import com.liferay.portlet.documentlibrary.model.DLFileEntryTypeConstants;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
@@ -85,8 +86,9 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 		});
 
 		if (hasAmbiguousFileEntryTypes) {
-			return PortalUtil.getUnambiguousName(
-				getName(locale), getGroupId(), locale);
+			Group group = GroupLocalServiceUtil.getGroup(getGroupId());
+
+			return group.getUnambiguousName(getName(locale), locale);
 		}
 
 		return getName(locale);
