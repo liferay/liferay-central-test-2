@@ -153,13 +153,13 @@ public class MBSettings {
 
 	public String[] getPriorities(String currentLanguageId) {
 		return LocalizationUtil.getSettingsValues(
-			_typedSettings.getDecoratedSettings(), "priorities",
+			_typedSettings.getWrappedSettings(), "priorities",
 			currentLanguageId);
 	}
 
 	public String[] getRanks(String languageId) {
 		return LocalizationUtil.getSettingsValues(
-			_typedSettings.getDecoratedSettings(), "ranks", languageId);
+			_typedSettings.getWrappedSettings(), "ranks", languageId);
 	}
 
 	public String getRecentPostsDateOffset() {
