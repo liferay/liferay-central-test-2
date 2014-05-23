@@ -51,8 +51,8 @@ public class ResetDatabaseExecutionTestListener
 
 	@Override
 	public void runAfterTest(TestContext testContext) {
-		resetDLStores();
-		reloadLuceneStores();
+		restoreDLStores();
+		restoreLuceneStores();
 
 		ResetDatabaseUtil.resetModifiedTables();
 
@@ -72,8 +72,8 @@ public class ResetDatabaseExecutionTestListener
 
 		ResetDatabaseUtil.startRecording();
 
-		dumpLuceneStores();
 		backupDLStores();
+		backupLuceneStores();
 	}
 
 	protected void backupDLStores() {
@@ -105,7 +105,7 @@ public class ResetDatabaseExecutionTestListener
 		}
 	}
 
-	protected void dumpLuceneStores() {
+	protected void backupLuceneStores() {
 		for (long companyId : PortalInstances.getCompanyIds()) {
 			String luceneDumpFileName =
 				SystemProperties.get(SystemProperties.TMP_DIR) +
@@ -126,7 +126,7 @@ public class ResetDatabaseExecutionTestListener
 		}
 	}
 
-	protected void reloadLuceneStores() {
+	protected void restoreLuceneStores() {
 		for (Map.Entry<Long, String> entry : _luceneDumpFileNames.entrySet()) {
 			String luceneDumpFileName = entry.getValue();
 
@@ -145,7 +145,7 @@ public class ResetDatabaseExecutionTestListener
 		_luceneDumpFileNames.clear();
 	}
 
-	protected void resetDLStores() {
+	protected void restoreDLStores() {
 		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
 		FileUtil.move(
