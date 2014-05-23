@@ -577,11 +577,11 @@ public class GroupImpl extends GroupBaseImpl {
 	}
 
 	@Override
-	public String getUnambiguousName(String title, Locale locale) {
+	public String getUnambiguousName(String name, Locale locale) {
 		try {
 			StringBundler sb = new StringBundler(5);
 
-			sb.append(title);
+			sb.append(name);
 			sb.append(StringPool.SPACE);
 			sb.append(StringPool.OPEN_PARENTHESIS);
 			sb.append(getDescriptiveName(locale));
@@ -590,7 +590,7 @@ public class GroupImpl extends GroupBaseImpl {
 			return sb.toString();
 		}
 		catch (Exception e) {
-			return title;
+			return name;
 		}
 	}
 
