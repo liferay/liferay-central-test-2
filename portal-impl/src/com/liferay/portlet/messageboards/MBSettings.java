@@ -29,59 +29,61 @@ import com.liferay.util.RSSUtil;
  */
 public class MBSettings {
 
-	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
+	public static FallbackKeys getFallbackKeys() {
+		FallbackKeys fallbackKeys = new FallbackKeys();
 
-	static {
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"allowAnonymousPosting",
 			PropsKeys.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailFromAddress", PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailFromName", PropsKeys.MESSAGE_BOARDS_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailHtmlFormat", PropsKeys.MESSAGE_BOARDS_EMAIL_HTML_FORMAT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageAddedBody",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageAddedEnabled",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageAddedSubject",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageUpdatedBody",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageUpdatedEnabled",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailMessageUpdatedSubject",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"enableFlags", PropsKeys.MESSAGE_BOARDS_FLAGS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"enableRatings", PropsKeys.MESSAGE_BOARDS_RATINGS_ENABLED);
-		FALLBACK_KEYS.add("enableRss", PropsKeys.MESSAGE_BOARDS_RSS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("enableRss", PropsKeys.MESSAGE_BOARDS_RSS_ENABLED);
+		fallbackKeys.add(
 			"messageFormat", PropsKeys.MESSAGE_BOARDS_MESSAGE_FORMATS_DEFAULT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"priorities", PropsKeys.MESSAGE_BOARDS_THREAD_PRIORITIES);
-		FALLBACK_KEYS.add("ranks", PropsKeys.MESSAGE_BOARDS_USER_RANKS);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("ranks", PropsKeys.MESSAGE_BOARDS_USER_RANKS);
+		fallbackKeys.add(
 			"recentPostsDateOffset",
 			PropsKeys.MESSAGE_BOARDS_RECENT_POSTS_DATE_OFFSET);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT);
-		FALLBACK_KEYS.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
+		fallbackKeys.add(
 			"subscribeByDefault",
 			PropsKeys.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT);
+
+		return fallbackKeys;
 	}
 
 	public MBSettings(Settings settings) {

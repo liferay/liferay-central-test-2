@@ -32,29 +32,31 @@ public class DLPortletInstanceSettings {
 		"mimeTypes"
 	};
 
-	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
+	public static FallbackKeys getFallbackKeys() {
+		FallbackKeys fallbackKeys = new FallbackKeys();
 
-	static {
-		FALLBACK_KEYS.add("displayViews", PropsKeys.DL_DISPLAY_VIEWS);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("displayViews", PropsKeys.DL_DISPLAY_VIEWS);
+		fallbackKeys.add(
 			"enableCommentRatings", PropsKeys.DL_COMMENT_RATINGS_ENABLED);
-		FALLBACK_KEYS.add("enableRatings", PropsKeys.DL_RATINGS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("enableRatings", PropsKeys.DL_RATINGS_ENABLED);
+		fallbackKeys.add(
 			"enableRelatedAssets", PropsKeys.DL_RELATED_ASSETS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"entriesPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add("entryColumns", PropsKeys.DL_ENTRY_COLUMNS);
-		FALLBACK_KEYS.add("fileEntryColumns", PropsKeys.DL_FILE_ENTRY_COLUMNS);
-		FALLBACK_KEYS.add("folderColumns", PropsKeys.DL_FOLDER_COLUMNS);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("entryColumns", PropsKeys.DL_ENTRY_COLUMNS);
+		fallbackKeys.add("fileEntryColumns", PropsKeys.DL_FILE_ENTRY_COLUMNS);
+		fallbackKeys.add("folderColumns", PropsKeys.DL_FOLDER_COLUMNS);
+		fallbackKeys.add(
 			"foldersPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"fileEntriesPerPage",
 			PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"showFoldersSearch", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"showSubfolders", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
+
+		return fallbackKeys;
 	}
 
 	public DLPortletInstanceSettings(Settings settings) {

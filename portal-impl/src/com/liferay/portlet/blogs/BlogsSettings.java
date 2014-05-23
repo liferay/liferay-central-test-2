@@ -26,58 +26,60 @@ import com.liferay.portal.util.PortalUtil;
  */
 public class BlogsSettings {
 
-	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
+	public static FallbackKeys getFallbackKeys() {
+		FallbackKeys fallbackKeys = new FallbackKeys();
 
-	static {
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"enableComments", PropsKeys.BLOGS_ENTRY_COMMENTS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"enableCommentRatings", PropsKeys.BLOGS_COMMENT_RATINGS_ENABLED);
-		FALLBACK_KEYS.add("enableFlags", PropsKeys.BLOGS_FLAGS_ENABLED);
-		FALLBACK_KEYS.add("enableRatings", PropsKeys.BLOGS_RATINGS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("enableFlags", PropsKeys.BLOGS_FLAGS_ENABLED);
+		fallbackKeys.add("enableRatings", PropsKeys.BLOGS_RATINGS_ENABLED);
+		fallbackKeys.add(
 			"enableRelatedAssets", PropsKeys.BLOGS_RELATED_ASSETS_ENABLED);
-		FALLBACK_KEYS.add("enableRss", PropsKeys.BLOGS_RSS_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("enableRss", PropsKeys.BLOGS_RSS_ENABLED);
+		fallbackKeys.add(
 			"enableSocialBookmarks", PropsKeys.BLOGS_SOCIAL_BOOKMARKS_ENABLED);
-		FALLBACK_KEYS.add("displayStyle", PropsKeys.BLOGS_DISPLAY_STYLE);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("displayStyle", PropsKeys.BLOGS_DISPLAY_STYLE);
+		fallbackKeys.add(
 			"emailEntryAddedBody", PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_BODY);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailEntryAddedEnabled",
 			PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailEntryAddedSubject",
 			PropsKeys.BLOGS_EMAIL_ENTRY_ADDED_SUBJECT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailEntryUpdatedBody", PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_BODY);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailEntryUpdatedEnabled",
 			PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_ENABLED);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailEntryUpdatedSubject",
 			PropsKeys.BLOGS_EMAIL_ENTRY_UPDATED_SUBJECT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailFromAddress", PropsKeys.BLOGS_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"emailFromName", PropsKeys.BLOGS_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"pageDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT);
-		FALLBACK_KEYS.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
+		fallbackKeys.add(
 			"socialBookmarksDisplayPosition",
 			PropsKeys.BLOGS_SOCIAL_BOOKMARKS_DISPLAY_POSITION);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"socialBookmarksDisplayStyle",
 			PropsKeys.BLOGS_SOCIAL_BOOKMARKS_DISPLAY_STYLE);
-		FALLBACK_KEYS.add(
+		fallbackKeys.add(
 			"socialBookmarksTypes", PropsKeys.SOCIAL_BOOKMARK_TYPES);
+
+		return fallbackKeys;
 	}
 
 	public BlogsSettings(Settings settings) {
