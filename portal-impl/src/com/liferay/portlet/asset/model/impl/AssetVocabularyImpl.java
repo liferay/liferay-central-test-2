@@ -127,7 +127,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 	@Override
 	public boolean isAssociatedToAssetRendererFactory(long classNameId) {
-		return isClassNameIdConfigured(classNameId, getSelectedClassNameIds());
+		return isClassNameIdSpecified(classNameId, getSelectedClassNameIds());
 	}
 
 	@Override
@@ -135,7 +135,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 			long classNameId, final long[] categoryIds)
 		throws SystemException {
 
-		if (isClassNameIdConfigured(classNameId, getRequiredClassNameIds())) {
+		if (isClassNameIdSpecified(classNameId, getRequiredClassNameIds())) {
 			return false;
 		}
 
@@ -180,7 +180,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 		super.setSettings(settingsProperties.toString());
 	}
 
-	protected boolean isClassNameIdConfigured(
+	protected boolean isClassNameIdSpecified(
 		long classNameId, long[] classNameIds) {
 
 		if (classNameIds.length == 0) {
