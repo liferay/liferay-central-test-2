@@ -140,19 +140,6 @@ public class LayoutSetPrototypeLocalServiceImpl
 	}
 
 	@Override
-	public void deleteLayoutSetPrototypes()
-		throws PortalException, SystemException {
-
-		List<LayoutSetPrototype> layoutSetPrototypes =
-			layoutSetPrototypePersistence.findAll();
-
-		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
-			layoutSetPrototypeLocalService.deleteLayoutSetPrototype(
-				layoutSetPrototype);
-		}
-	}
-
-	@Override
 	@SystemEvent(
 		action = SystemEventConstants.ACTION_SKIP,
 		type = SystemEventConstants.TYPE_DELETE)
@@ -201,6 +188,19 @@ public class LayoutSetPrototypeLocalServiceImpl
 				layoutSetPrototypeId);
 
 		return deleteLayoutSetPrototype(layoutSetPrototype);
+	}
+
+	@Override
+	public void deleteLayoutSetPrototypes()
+		throws PortalException, SystemException {
+
+		List<LayoutSetPrototype> layoutSetPrototypes =
+			layoutSetPrototypePersistence.findAll();
+
+		for (LayoutSetPrototype layoutSetPrototype : layoutSetPrototypes) {
+			layoutSetPrototypeLocalService.deleteLayoutSetPrototype(
+				layoutSetPrototype);
+		}
 	}
 
 	@Override
