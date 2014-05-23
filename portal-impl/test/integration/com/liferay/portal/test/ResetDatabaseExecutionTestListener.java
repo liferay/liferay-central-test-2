@@ -126,27 +126,6 @@ public class ResetDatabaseExecutionTestListener
 		}
 	}
 
-	protected void restoreLuceneStores() {
-		for (Map.Entry<Long, String> entry :
-				_luceneFileNames.entrySet()) {
-
-			String fileName = entry.getValue();
-
-			try {
-				LuceneHelperUtil.loadIndex(
-					entry.getKey(), new FileInputStream(fileName));
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-			finally {
-				FileUtil.delete(fileName);
-			}
-		}
-
-		_luceneFileNames.clear();
-	}
-
 	protected void restoreDLStores() {
 		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
@@ -164,6 +143,25 @@ public class ResetDatabaseExecutionTestListener
 			new File(PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT)));
 
 		_dlJCRStoreDirName = null;
+	}
+
+	protected void restoreLuceneStores() {
+		for (Map.Entry<Long, String> entry : _luceneFileNames.entrySet()) {
+			String fileName = entry.getValue();
+
+			try {
+				LuceneHelperUtil.loadIndex(
+					entry.getKey(), new FileInputStream(fileName));
+			}
+			catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+			finally {
+				FileUtil.delete(fileName);
+			}
+		}
+
+		_luceneFileNames.clear();
 	}
 
 	private String _dlFileSystemStoreDirName;
