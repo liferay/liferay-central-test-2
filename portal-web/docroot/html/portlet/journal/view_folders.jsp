@@ -240,8 +240,6 @@ else {
 					<c:if test="<%= total > 0 %>">
 
 						<%
-						AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
-
 						List<DDMStructure> ddmStructures = DDMStructureServiceUtil.getStructures(groupIds, PortalUtil.getClassNameId(JournalArticle.class), searchContainer.getStart(), searchContainer.getEnd());
 
 						for (DDMStructure ddmStructure : ddmStructures) {
@@ -249,6 +247,8 @@ else {
 
 							dataView.put("browse-by", "structure");
 							dataView.put("structure-id", ddmStructure.getStructureKey());
+
+							AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(JournalArticle.class.getName());
 						%>
 
 							<liferay-portlet:renderURL varImpl="viewDDMStructureArticlesURL">
