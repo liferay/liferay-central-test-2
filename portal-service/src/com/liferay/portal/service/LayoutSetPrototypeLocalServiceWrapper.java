@@ -365,10 +365,10 @@ public class LayoutSetPrototypeLocalServiceWrapper
 	}
 
 	@Override
-	public void deleteAll()
+	public void deleteLayoutSetPrototypes()
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_layoutSetPrototypeLocalService.deleteAll();
+		_layoutSetPrototypeLocalService.deleteLayoutSetPrototypes();
 	}
 
 	@Override
