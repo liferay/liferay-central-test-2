@@ -107,7 +107,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 	public boolean hasMoreThanOneCategorySelected(final long[] categoryIds)
 		throws SystemException {
 
-		PredicateFilter<AssetCategory> existingCategoryFilter =
+		PredicateFilter<AssetCategory> predicateFilter =
 			new PredicateFilter<AssetCategory>() {
 
 			@Override
@@ -118,7 +118,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 		};
 
-		if (ListUtil.count(getCategories(), existingCategoryFilter) > 1) {
+		if (ListUtil.count(getCategories(), predicateFilter) > 1) {
 			return true;
 		}
 
@@ -150,25 +150,23 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 		long[] requiredClassNameIds = getRequiredClassNameIds();
 
-		PredicateFilter<AssetCategory> existingCategoryFilter =
-			new PredicateFilter<AssetCategory>() {
-
-				@Override
-				public boolean filter(AssetCategory assetCategory) {
-					return ArrayUtil.contains(
-						categoryIds, assetCategory.getCategoryId());
-				}
-
-			};
-
 		if ((requiredClassNameIds.length > 0) &&
 			((requiredClassNameIds[0] ==
 				AssetCategoryConstants.ALL_CLASS_NAME_IDS) ||
 			 ArrayUtil.contains(requiredClassNameIds, classNameId))) {
 
-			if (!ListUtil.exists(getCategories(), existingCategoryFilter)) {
-				return true;
-			}
+			PredicateFilter<AssetCategory> predicateFilter =
+				new PredicateFilter<AssetCategory>() {
+	
+					@Override
+					public boolean filter(AssetCategory assetCategory) {
+						return ArrayUtil.contains(
+							categoryIds, assetCategory.getCategoryId());
+					}
+	
+				};
+	
+			return !ListUtil.exists(getCategories(), predicateFilter);
 		}
 
 		return false;
