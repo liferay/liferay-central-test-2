@@ -505,6 +505,24 @@ Please set the environment variable ANT_OPTS to the recommended value of
 		</sequential>
 	</macrodef>
 
+	<macrodef name="app-server-properties-reset">
+		<sequential>
+			<delete file="app.server.${user.name}.properties" />
+
+			<delete file="${project.dir}/tools/sdk/build.${user.name}.properties" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="app-server-properties-update">
+		<text name="properties.content" />
+
+		<sequential>
+			<echo file="app.server.${user.name}.properties">@{properties.content}</echo>
+
+			<echo file="${project.dir}/tools/sdk/build.${user.name}.properties">@{properties.content}</echo>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="baseline-jar-macro">
 		<attribute name="bndRootFile" />
 		<attribute name="file" />
