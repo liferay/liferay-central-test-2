@@ -429,20 +429,20 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		boolean hasAmbiguousName = ListUtil.exists(
 			structures,
 			new PredicateFilter<DDMStructure>() {
-	
+
 				@Override
 				public boolean filter(DDMStructure structure) {
 					String name = structure.getName(locale);
-	
+
 					if (name.equals(getName(locale)) &&
 						(structure.getStructureId() != getStructureId())) {
-	
+
 						return true;
 					}
-	
+
 					return false;
 				}
-	
+
 			});
 
 		if (hasAmbiguousName) {

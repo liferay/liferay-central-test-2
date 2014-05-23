@@ -70,18 +70,18 @@ public class DLFileEntryTypeImpl extends DLFileEntryTypeBaseImpl {
 		boolean hasAmbiguousName = ListUtil.exists(
 			dlFileEntryTypes,
 			new PredicateFilter<DLFileEntryType>() {
-	
+
 				@Override
 				public boolean filter(DLFileEntryType fileEntryType) {
 					String name = fileEntryType.getName(locale);
-	
+
 					if (name.equals(getName(locale)) &&
 						(fileEntryType.getFileEntryTypeId() !=
 							getFileEntryTypeId())) {
-	
+
 						return true;
 					}
-	
+
 					return false;
 				}
 			});
