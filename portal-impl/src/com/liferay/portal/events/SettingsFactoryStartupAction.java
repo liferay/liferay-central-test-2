@@ -39,7 +39,7 @@ import com.liferay.portlet.wiki.util.WikiConstants;
 public class SettingsFactoryStartupAction extends SimpleAction {
 
 	@Override
-	public void run(String[] ids) throws ActionException {
+	public void run(String[] ids) {
 		initSettingsFactory();
 	}
 
