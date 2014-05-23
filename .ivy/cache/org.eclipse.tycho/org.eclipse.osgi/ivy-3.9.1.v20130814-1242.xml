@@ -2,9 +2,9 @@
 <ivy-module version="2.0" xmlns:m="http://ant.apache.org/ivy/maven">
 	<info organisation="org.eclipse.tycho"
 		module="org.eclipse.osgi"
-		revision="3.8.0.v20120529-1548"
+		revision="3.9.1.v20130814-1242"
 		status="release"
-		publication="20120728111138"
+		publication="20131011044141"
 	>
 		<license name="Eclipse Public License" url="http://www.eclipse.org/legal/epl-v10.html" />
 		<description homepage="http://www.eclipse.org/tycho/">
