@@ -365,7 +365,6 @@ else {
 						</c:if>
 
 						<%
-
 						List<DLFileEntryType> fileEntryTypes = DLFileEntryTypeServiceUtil.getFileEntryTypes(groupIds, searchContainer.getStart(), searchContainer.getEnd());
 
 						for (DLFileEntryType fileEntryType : fileEntryTypes) {
