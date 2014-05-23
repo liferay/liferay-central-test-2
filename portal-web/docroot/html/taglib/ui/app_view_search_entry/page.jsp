@@ -102,6 +102,11 @@ summary.setQueryTerms(queryTerms);
 		<%
 		for (Tuple fileEntryTuple : fileEntryTuples) {
 			FileEntry fileEntry = (FileEntry)fileEntryTuple.getObject(0);
+
+			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
+
+			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
+
 			summary = (Summary)fileEntryTuple.getObject(1);
 
 			if (Validator.isNull(summary.getContent())) {
@@ -110,10 +115,6 @@ summary.setQueryTerms(queryTerms);
 
 			summary.setHighlight(highlightEnabled);
 			summary.setQueryTerms(queryTerms);
-
-			AssetRendererFactory assetRendererFactory = AssetRendererFactoryRegistryUtil.getAssetRendererFactoryByClassName(DLFileEntry.class.getName());
-
-			AssetRenderer assetRenderer = assetRendererFactory.getAssetRenderer(fileEntry.getFileEntryId());
 		%>
 
 			<div class="entry-attachment">
