@@ -77,20 +77,20 @@ public class ResetDatabaseExecutionTestListener
 	}
 
 	protected void backupDLStores() {
-		_dlFileStoreBackupDirName =
+		_dlFileSystemStoreDirName =
 			SystemProperties.get(SystemProperties.TMP_DIR) +
-				"/temp-dl-filestore-" + System.currentTimeMillis();
+				"/temp-dl-file-system-" + System.currentTimeMillis();
 
 		try {
 			FileUtil.copyDirectory(
 				new File(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR),
-				new File(_dlFileStoreBackupDirName));
+				new File(_dlFileSystemStoreDirName));
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(ioe);
 		}
 
-		_dlJCRStoreBackupDirName =
+		_dlJCRStoreDirName =
 			SystemProperties.get(SystemProperties.TMP_DIR) +
 				"/temp-dl-jcr-" + System.currentTimeMillis();
 
@@ -98,7 +98,7 @@ public class ResetDatabaseExecutionTestListener
 			FileUtil.copyDirectory(
 				new File(
 					PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT)),
-				new File(_dlJCRStoreBackupDirName));
+				new File(_dlJCRStoreDirName));
 		}
 		catch (IOException ioe) {
 			throw new RuntimeException(ioe);
@@ -107,7 +107,7 @@ public class ResetDatabaseExecutionTestListener
 
 	protected void backupLuceneStores() {
 		for (long companyId : PortalInstances.getCompanyIds()) {
-			String luceneDumpFileName =
+			String fileName =
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					"/temp-lucene-" + companyId + "-" +
 						System.currentTimeMillis();
@@ -115,58 +115,60 @@ public class ResetDatabaseExecutionTestListener
 			try {
 				LuceneHelperUtil.dumpIndex(
 					TestPropsValues.getCompanyId(),
-					new FileOutputStream(luceneDumpFileName));
+					new FileOutputStream(fileName));
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 			finally {
-				_luceneDumpFileNames.put(companyId, luceneDumpFileName);
+				_luceneFileNames.put(companyId, fileName);
 			}
 		}
 	}
 
 	protected void restoreLuceneStores() {
-		for (Map.Entry<Long, String> entry : _luceneDumpFileNames.entrySet()) {
-			String luceneDumpFileName = entry.getValue();
+		for (Map.Entry<Long, String> entry :
+				_luceneFileNames.entrySet()) {
+
+			String fileName = entry.getValue();
 
 			try {
 				LuceneHelperUtil.loadIndex(
-					entry.getKey(), new FileInputStream(luceneDumpFileName));
+					entry.getKey(), new FileInputStream(fileName));
 			}
 			catch (Exception e) {
 				throw new RuntimeException(e);
 			}
 			finally {
-				FileUtil.delete(luceneDumpFileName);
+				FileUtil.delete(fileName);
 			}
 		}
 
-		_luceneDumpFileNames.clear();
+		_luceneFileNames.clear();
 	}
 
 	protected void restoreDLStores() {
 		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
 		FileUtil.move(
-			new File(_dlFileStoreBackupDirName),
+			new File(_dlFileSystemStoreDirName),
 			new File(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR));
+
+		_dlFileSystemStoreDirName = null;
 
 		FileUtil.deltree(
 			PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT));
 
 		FileUtil.move(
-			new File(_dlJCRStoreBackupDirName),
+			new File(_dlJCRStoreDirName),
 			new File(PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT)));
 
-		_dlFileStoreBackupDirName = null;
-		_dlJCRStoreBackupDirName = null;
+		_dlJCRStoreDirName = null;
 	}
 
-	private String _dlFileStoreBackupDirName;
-	private String _dlJCRStoreBackupDirName;
+	private String _dlFileSystemStoreDirName;
+	private String _dlJCRStoreDirName;
 	private Level _level;
-	private Map<Long, String> _luceneDumpFileNames =
-		new HashMap<Long, String>();
+	private Map<Long, String> _luceneFileNames = new HashMap<Long, String>();
 
 }
