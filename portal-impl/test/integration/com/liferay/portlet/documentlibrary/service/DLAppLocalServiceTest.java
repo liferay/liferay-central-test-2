@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.ServiceContext;
@@ -77,18 +78,21 @@ public class DLAppLocalServiceTest {
 
 		FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), _group.getGroupId(),
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "foo.txt", "text/plain",
-			"foo", "foo", null, "foo".getBytes(), serviceContext);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			RandomTestUtil.randomString(), ContentTypes.TEXT_PLAIN, "Old Title",
+			RandomTestUtil.randomString(), null, RandomTestUtil.randomBytes(),
+			serviceContext);
 
 		DLAppLocalServiceUtil.updateFileEntry(
-			TestPropsValues.getUserId(), fileEntry.getFileEntryId(), "foo.txt",
-			"text/plain", "bar", "bar", null, true, "bar".getBytes(),
-			serviceContext);
+			TestPropsValues.getUserId(), fileEntry.getFileEntryId(),
+			RandomTestUtil.randomString(), ContentTypes.TEXT_PLAIN,
+			"New Title", RandomTestUtil.randomString(), null, true,
+			RandomTestUtil.randomBytes(), serviceContext);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			DLFileEntryConstants.getClassName(), fileEntry.getFileEntryId());
 
-		Assert.assertEquals("bar", assetEntry.getTitle());
+		Assert.assertEquals("New Title", assetEntry.getTitle());
 	}
 
 	@Test
@@ -96,16 +100,16 @@ public class DLAppLocalServiceTest {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
-		Folder folder = addFolder(false, "Test Folder");
+		Folder folder = addFolder(false, "Old Name");
 
 		DLAppLocalServiceUtil.updateFolder(
-			folder.getFolderId(), folder.getParentFolderId(), "foo", "bar",
-			serviceContext);
+			folder.getFolderId(), folder.getParentFolderId(), "New Name",
+			RandomTestUtil.randomString(), serviceContext);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			DLFolderConstants.getClassName(), folder.getFolderId());
 
-		Assert.assertEquals("foo", assetEntry.getTitle());
+		Assert.assertEquals("New Name", assetEntry.getTitle());
 	}
 
 	protected Folder addFolder(boolean rootFolder) throws Exception {
