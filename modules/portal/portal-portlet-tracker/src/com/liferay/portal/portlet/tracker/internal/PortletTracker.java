@@ -455,27 +455,7 @@ public class PortletTracker
 
 		Set<String> unlinkedRoles = new HashSet<String>(roleRefs);
 
-//		Map<String, String> roleMappers = portletModel.getRoleMappers();
-//
-//		for (String key : serviceReference.getPropertyKeys()) {
-//			if (!key.startsWith("javax.portlet.security-role-ref.")) {
-//				continue;
-//			}
-//
-//			String roleName = key.substring(
-//				"javax.portlet.security-role-ref.".length());
-//			String roleLink = (String)serviceReference.getProperty(key);
-//
-//			unlinkedRoles.add(roleName);
-//			roleMappers.put(roleName, roleLink);
-//		}
-//
-//		if (roleMappers.isEmpty()) {
-//			roleMappers.put("user", "User");
-//		}
-
 		portletModel.setUnlinkedRoles(unlinkedRoles);
-//		portletModel.linkRoles();
 	}
 
 	protected void collectWindowStates(
@@ -543,13 +523,14 @@ public class PortletTracker
 
 	@Deactivate
 	protected void deactivate() {
+		_componentContext = null;
+
 		_serviceTracker.close();
 
-		_componentContext = null;
 		_serviceTracker = null;
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Deactivated!");
+			_log.info("Deactivated");
 		}
 	}
 
