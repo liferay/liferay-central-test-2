@@ -7,6 +7,7 @@
 			padding: 10px 30px 10px;
 			position: relative;
 		}
+
 		.breadcrumb-arrows a:after {
 			border-bottom: 20px inset transparent;
 			border-left: 20px solid #efefef;
@@ -19,6 +20,7 @@
 			width: 0;
 			z-index: 2;
 		}
+
 		.breadcrumb-arrows a:before {
 			border-bottom: 20px inset transparent;
 			border-left: 20px solid #fff;
@@ -30,11 +32,13 @@
 			top: 0;
 			width: 0;
 		}
+
 		.breadcrumb-arrows a:first-child {
 			-moz-border-radius: 4px 0 0 4px;
 			-webkit-border-radius: 4px 0 0 4px;
 			border-radius: 4px 0 0 4px;
 		}
+
 		.breadcrumb-arrows a:last-child {
 			-moz-border-radius: 0 4px 4px 0;
 			-webkit-border-radius: 0 4px 4px 0;
@@ -42,6 +46,7 @@
 			border-radius: 0 4px 4px 0;
 			color: #fff;
 		}
+
 		.breadcrumb-arrows a:first-child:before, a:last-child:after {
 			border: none;
 		}
