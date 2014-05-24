@@ -12,9 +12,8 @@
  * details.
  */
 
-package com.liferay.portal.verify.extender.activator;
+package com.liferay.portal.verify.extender.internal;
 
-import com.liferay.portal.verify.extender.tracker.VerifyProcessTracker;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
