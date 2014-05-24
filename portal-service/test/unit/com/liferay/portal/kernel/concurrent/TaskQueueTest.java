@@ -14,13 +14,14 @@
 
 package com.liferay.portal.kernel.concurrent;
 
+import com.liferay.portal.kernel.concurrent.test.TestUtil;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import com.liferay.portal.kernel.concurrent.test.TestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

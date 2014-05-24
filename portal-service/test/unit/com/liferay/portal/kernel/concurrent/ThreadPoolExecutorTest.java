@@ -14,6 +14,9 @@
 
 package com.liferay.portal.kernel.concurrent;
 
+import com.liferay.portal.kernel.concurrent.test.MarkerBlockingJob;
+import com.liferay.portal.kernel.concurrent.test.TestUtil;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -26,8 +29,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.liferay.portal.kernel.concurrent.test.MarkerBlockingJob;
-import com.liferay.portal.kernel.concurrent.test.TestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 

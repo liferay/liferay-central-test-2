@@ -16,6 +16,7 @@ package com.liferay.portal.kernel.nio.intraband.welder.test;
 
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayInputStream;
 import com.liferay.portal.kernel.io.unsync.UnsyncByteArrayOutputStream;
+import com.liferay.portal.kernel.nio.intraband.welder.Welder;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -28,7 +29,6 @@ import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.FutureTask;
 
-import com.liferay.portal.kernel.nio.intraband.welder.Welder;
 import org.junit.Assert;
 
 /**
