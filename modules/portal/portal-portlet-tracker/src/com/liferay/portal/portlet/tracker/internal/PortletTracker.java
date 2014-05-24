@@ -100,7 +100,7 @@ public class PortletTracker
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Reading portlet " + portletId);
+			_log.info("Adding portlet " + portletId);
 		}
 
 		try {
