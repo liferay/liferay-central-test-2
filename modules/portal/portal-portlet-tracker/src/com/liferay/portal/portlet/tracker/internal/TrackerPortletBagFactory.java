@@ -24,9 +24,7 @@ import org.osgi.framework.Bundle;
 
 public class TrackerPortletBagFactory extends PortletBagFactory {
 
-	public TrackerPortletBagFactory(
-		Bundle bundle, javax.portlet.Portlet portletInstance) {
-
+	public TrackerPortletBagFactory(Bundle bundle, Portlet portletInstance) {
 		_bundle = bundle;
 		_portletInstance = portletInstance;
 	}
@@ -71,7 +69,7 @@ public class TrackerPortletBagFactory extends PortletBagFactory {
 
 	private final Bundle _bundle;
 	private ClassLoader _classLoader;
-	private final javax.portlet.Portlet _portletInstance;
+	private final Portlet _portletInstance;
 	private ServletContext _servletContext;
 
 }
