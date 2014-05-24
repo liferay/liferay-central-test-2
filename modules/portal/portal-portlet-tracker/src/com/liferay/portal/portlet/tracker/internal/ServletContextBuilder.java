@@ -85,7 +85,7 @@ public class ServletContextBuilder implements InvocationHandler {
 		return _servletContext.getRequestDispatcher(path);
 	}
 
-	public URL getResource(String name) throws MalformedURLException {
+	public URL getResource(String name) {
 		if (name == null) {
 			return null;
 		}

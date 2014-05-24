@@ -64,8 +64,7 @@ public class TrackerPortletBagFactory extends PortletBagFactory {
 
 	@Override
 	protected Portlet getPortletInstance(
-			com.liferay.portal.model.Portlet portlet)
-		throws InstantiationException, IllegalAccessException {
+		com.liferay.portal.model.Portlet portlet) {
 
 		return _portletInstance;
 	}
