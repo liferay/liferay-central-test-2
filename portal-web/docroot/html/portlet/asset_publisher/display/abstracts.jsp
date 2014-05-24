@@ -49,9 +49,9 @@ String summary = StringUtil.shorten(assetRenderer.getSummary(liferayPortletReque
 				<a href="<%= viewURL %>">
 			</c:if>
 
-				<i class="<%= assetRenderer.getIconCssClass() %>"></i>
+			<i class="<%= assetRenderer.getIconCssClass() %>"></i>
 
-				<%= HtmlUtil.escape(title) %>
+			<%= HtmlUtil.escape(title) %>
 
 			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				</a>
