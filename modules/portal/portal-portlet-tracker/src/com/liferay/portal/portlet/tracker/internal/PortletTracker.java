@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -381,34 +382,28 @@ public class PortletTracker
 		Map<String, Set<String>> portletModes =
 			new HashMap<String, Set<String>>();
 
-		Set<String> defaultModes = new HashSet<String>();
+		portletModes.put(
+			ContentTypes.TEXT_HTML,
+			SetUtil.fromArray(new String[] {toLowerCase(PortletMode.VIEW)}));
 
-		defaultModes.add(toLowerCase(PortletMode.VIEW));
-
-		portletModes.put(ContentTypes.TEXT_HTML, defaultModes);
-
-		List<String> portletModeStrings = StringPlus.asList(
+		List<String> portletModesStrings = StringPlus.asList(
 			serviceReference.getProperty("javax.portlet.portletModes"));
 
-		for (String portletModeString : portletModeStrings) {
-			String[] parts = StringUtil.split(
-				portletModeString, CharPool.SEMICOLON);
+		for (String portletModesString : portletModesStrings) {
+			String[] portletModesStringParts = StringUtil.split(
+				portletModesString, CharPool.SEMICOLON);
 
-			if (parts.length != 2) {
+			if (portletModesStringParts.length != 2) {
 				continue;
 			}
 
-			String mimeType = parts[0];
+			String mimeType = portletModesStringParts[0];
 
 			Set<String> mimeTypePortletModes = new HashSet<String>();
 
-			String[] modes = StringUtil.split(parts[1]);
-
 			mimeTypePortletModes.add(toLowerCase(PortletMode.VIEW));
-
-			for (String mode : modes) {
-				mimeTypePortletModes.add(toLowerCase(mode));
-			}
+			mimeTypePortletModes.addAll(
+				toLowerCaseSet(portletModesStringParts[1]));
 
 			portletModes.put(mimeType, mimeTypePortletModes);
 		}
@@ -463,49 +458,47 @@ public class PortletTracker
 		Map<String, Set<String>> windowStates =
 			new HashMap<String, Set<String>>();
 
-		Set<String> defaultWindowStates = new HashSet<String>();
+		windowStates.put(
+			ContentTypes.TEXT_HTML,
+			SetUtil.fromArray(
+				new String[] {
+					toLowerCase(LiferayWindowState.EXCLUSIVE),
+					toLowerCase(LiferayWindowState.POP_UP),
+					toLowerCase(WindowState.MAXIMIZED),
+					toLowerCase(WindowState.MINIMIZED),
+					toLowerCase(WindowState.NORMAL)
+				}));
 
-		defaultWindowStates.add(toLowerCase(LiferayWindowState.EXCLUSIVE));
-		defaultWindowStates.add(toLowerCase(LiferayWindowState.POP_UP));
-		defaultWindowStates.add(toLowerCase(WindowState.MAXIMIZED));
-		defaultWindowStates.add(toLowerCase(WindowState.MINIMIZED));
-		defaultWindowStates.add(toLowerCase(WindowState.NORMAL));
-
-		windowStates.put(ContentTypes.TEXT_HTML, defaultWindowStates);
-
-		List<String> windowStatesList = StringPlus.asList(
+		List<String> windowStatesStrings = StringPlus.asList(
 			serviceReference.getProperty("javax.portlet.windowStates"));
 
-		for (String windowState : windowStatesList) {
-			String[] parts = StringUtil.split(windowState, ";");
+		for (String windowStatesString : windowStatesStrings) {
+			String[] windowStatesStringParts = StringUtil.split(
+				windowStatesString, CharPool.SEMICOLON);
 
-			if (parts.length != 2) {
+			if (windowStatesStringParts.length != 2) {
 				continue;
 			}
 
-			String mimeType = parts[0];
+			String mimeType = windowStatesStringParts[0];
 
 			Set<String> mimeTypeWindowStates = new HashSet<String>();
 
-			String[] states = StringUtil.split(parts[1]);
-
 			mimeTypeWindowStates.add(toLowerCase(WindowState.NORMAL));
 
-			boolean addDefaultStates = true;
+			Set<String> windowStatesSet = toLowerCaseSet(
+				windowStatesStringParts[1]);
 
-			for (String state : states) {
-				mimeTypeWindowStates.add(toLowerCase(state));
-
-				addDefaultStates = false;
-			}
-
-			if (addDefaultStates) {
+			if (windowStatesSet.isEmpty()) {
 				mimeTypeWindowStates.add(
 					toLowerCase(LiferayWindowState.EXCLUSIVE));
 				mimeTypeWindowStates.add(
 					toLowerCase(LiferayWindowState.POP_UP));
 				mimeTypeWindowStates.add(toLowerCase(WindowState.MAXIMIZED));
 				mimeTypeWindowStates.add(toLowerCase(WindowState.MINIMIZED));
+			}
+			else {
+				mimeTypeWindowStates.addAll(windowStatesSet);
 			}
 
 			windowStates.put(mimeType, mimeTypeWindowStates);
@@ -595,6 +588,16 @@ public class PortletTracker
 		String string = String.valueOf(object);
 
 		return StringUtil.toLowerCase(string.trim());
+	}
+
+	protected Set<String> toLowerCaseSet(String string) {
+		String[] array = StringUtil.split(string);
+
+		for (int i = 0; i < array.length; i++) {
+			array[i] = toLowerCase(array[i]);
+		}
+
+		return SetUtil.fromArray(array);
 	}
 
 	protected void unsetCompanyLocalService(
