@@ -225,7 +225,7 @@ public class PortletTracker
 
 		Bundle bundle = serviceReference.getBundle();
 
-		PortletBagFactory portletBagFactory = new TrackerPortletBagFactory(
+		PortletBagFactory portletBagFactory = new BundlePortletBagFactory(
 			bundle, portlet);
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);

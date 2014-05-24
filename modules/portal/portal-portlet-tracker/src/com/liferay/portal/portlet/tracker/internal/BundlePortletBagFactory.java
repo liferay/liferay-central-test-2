@@ -26,9 +26,9 @@ import org.osgi.framework.Bundle;
 /**
  * @author Raymond Augé
  */
-public class TrackerPortletBagFactory extends PortletBagFactory {
+public class BundlePortletBagFactory extends PortletBagFactory {
 
-	public TrackerPortletBagFactory(Bundle bundle, Portlet portletInstance) {
+	public BundlePortletBagFactory(Bundle bundle, Portlet portletInstance) {
 		_bundle = bundle;
 		_portletInstance = portletInstance;
 	}
