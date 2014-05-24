@@ -26,7 +26,6 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.Enumeration;
@@ -108,69 +107,65 @@ public class ServletContextBuilder implements InvocationHandler {
 			return null;
 		}
 
-		final Enumeration<URL> enumeration = _bundle.findEntries(
-			path, null, false);
+		Enumeration<URL> enumeration = _bundle.findEntries(path, null, false);
 
 		if (enumeration == null) {
 			return null;
 		}
 
-		final Set<String> result = new HashSet<String>();
+		Set<String> paths = new HashSet<String>();
 
 		while (enumeration.hasMoreElements()) {
-			URL nextURL = enumeration.nextElement();
+			URL url = enumeration.nextElement();
 
-			result.add(nextURL.toExternalForm());
+			paths.add(url.toExternalForm());
 		}
 
-		return result;
+		return paths;
 	}
 
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
-		Method mappendMethod = _methods.get(method);
+		Method servletContextBuilderMethod = _servletContextBuilderMethods.get(
+			method);
 
-		if (mappendMethod != null) {
-			return mappendMethod.invoke(this, args);
+		if (servletContextBuilderMethod != null) {
+			return servletContextBuilderMethod.invoke(this, args);
 		}
 
 		return method.invoke(_servletContext, args);
 	}
 
-	private static Map<Method, Method> getMethodsMap() {
-		Map<Method, Method> methods = new HashMap<Method, Method>();
-
-		for (Method wrapperMethod :
-				ServletContextBuilder.class.getDeclaredMethods()) {
-
-			String name = wrapperMethod.getName();
-
-			Class<?>[] parameterTypes = wrapperMethod.getParameterTypes();
-
-			try {
-				Method method = ServletContext.class.getMethod(
-					name, parameterTypes);
-
-				methods.put(method, wrapperMethod);
-			}
-			catch (NoSuchMethodException e) {
-
-				// ignore
-
-			}
-		}
-
-		return methods;
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(
 		ServletContextBuilder.class);
-	private static Map<Method, Method> _methods;
+
+	private static Map<Method, Method> _servletContextBuilderMethods =
+		new HashMap<Method, Method>();
 
 	static {
-		_methods = getMethodsMap();
+		Method[] servletContextBuilderMethods =
+			ServletContextBuilder.class.getDeclaredMethods();
+
+		for (Method servletContextBuilderMethod :
+				servletContextBuilderMethods) {
+
+			String methodName = servletContextBuilderMethod.getName();
+
+			Class<?>[] parameterTypes =
+				servletContextBuilderMethod.getParameterTypes();
+
+			try {
+				Method servletContextMethod = ServletContext.class.getMethod(
+					methodName, parameterTypes);
+
+				_servletContextBuilderMethods.put(
+					servletContextMethod, servletContextBuilderMethod);
+			}
+			catch (NoSuchMethodException nsme) {
+			}
+		}
 	}
 
 	private Bundle _bundle;
