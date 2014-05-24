@@ -22,6 +22,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletBagPool;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -316,9 +317,6 @@ public class PortletTracker
 	protected void collectCacheScope(
 		ServiceReference<Portlet> serviceReference,
 		com.liferay.portal.model.Portlet portletModel) {
-
-		// Liferay doesn't support this
-
 	}
 
 	protected void collectExpirationCache(
@@ -344,7 +342,8 @@ public class PortletTracker
 
 			initParams.put(
 				initParamKey.substring("javax.portlet.init-param.".length()),
-				GetterUtil.getString(serviceReference.getProperty(initParamKey)));
+				GetterUtil.getString(
+					serviceReference.getProperty(initParamKey)));
 		}
 
 		portletModel.setInitParams(initParams);
@@ -384,7 +383,7 @@ public class PortletTracker
 
 		Set<String> defaultModes = new HashSet<String>();
 
-		defaultModes.add(PortletMode.VIEW.toString().toLowerCase());
+		defaultModes.add(StringUtil.toLowerCase(PortletMode.VIEW.toString()));
 
 		portletModes.put(ContentTypes.TEXT_HTML, defaultModes);
 
@@ -392,7 +391,8 @@ public class PortletTracker
 			serviceReference.getProperty("javax.portlet.portletModes"));
 
 		for (String portletModeString : portletModeStrings) {
-			String[] parts = StringUtil.split(portletModeString, ';');
+			String[] parts = StringUtil.split(
+				portletModeString, CharPool.SEMICOLON);
 
 			if (parts.length != 2) {
 				continue;
@@ -404,10 +404,12 @@ public class PortletTracker
 
 			String[] modes = StringUtil.split(parts[1]);
 
-			mimeTypePortletModes.add(PortletMode.VIEW.toString().toLowerCase());
+			mimeTypePortletModes.add(
+				StringUtil.toLowerCase(PortletMode.VIEW.toString()));
 
 			for (String mode : modes) {
-				mimeTypePortletModes.add(mode.trim().toLowerCase());
+				mimeTypePortletModes.add(
+					StringUtil.toLowerCase(mode.trim()));
 			}
 
 			portletModes.put(mimeType, mimeTypePortletModes);
@@ -565,13 +567,13 @@ public class PortletTracker
 		}
 
 		for (Company company : companies) {
-			com.liferay.portal.model.Portlet curPortletModel =
+			com.liferay.portal.model.Portlet companyPortletModel =
 				(com.liferay.portal.model.Portlet)portletModel.clone();
 
-			curPortletModel.setCompanyId(company.getCompanyId());
+			companyPortletModel.setCompanyId(company.getCompanyId());
 
 			_portletLocalService.deployRemotePortlet(
-				curPortletModel, categoryName);
+				companyPortletModel, categoryName);
 		}
 	}
 
