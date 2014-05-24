@@ -31,7 +31,6 @@ TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler
 			<aui:input name="redirect" type="hidden" value="<%= configurationRenderURL %>" />
 
 			<aui:fieldset>
-
 				<div class="display-template">
 					<liferay-ui:ddm-template-selector
 						classNameId="<%= PortalUtil.getClassNameId(templateHandler.getClassName()) %>"
@@ -42,7 +41,6 @@ TemplateHandler templateHandler = TemplateHandlerRegistryUtil.getTemplateHandler
 						showEmptyOption="<%= true %>"
 					/>
 				</div>
-
 			</aui:fieldset>
 
 			<aui:fieldset cssClass="checkBoxes">
