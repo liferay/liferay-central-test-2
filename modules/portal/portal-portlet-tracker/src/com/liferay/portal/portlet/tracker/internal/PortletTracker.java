@@ -383,7 +383,7 @@ public class PortletTracker
 
 		Set<String> defaultModes = new HashSet<String>();
 
-		defaultModes.add(StringUtil.toLowerCase(PortletMode.VIEW.toString()));
+		defaultModes.add(toLowerCase(PortletMode.VIEW));
 
 		portletModes.put(ContentTypes.TEXT_HTML, defaultModes);
 
@@ -404,12 +404,10 @@ public class PortletTracker
 
 			String[] modes = StringUtil.split(parts[1]);
 
-			mimeTypePortletModes.add(
-				StringUtil.toLowerCase(PortletMode.VIEW.toString()));
+			mimeTypePortletModes.add(toLowerCase(PortletMode.VIEW));
 
 			for (String mode : modes) {
-				mimeTypePortletModes.add(
-					StringUtil.toLowerCase(mode.trim()));
+				mimeTypePortletModes.add(toLowerCase(mode));
 			}
 
 			portletModes.put(mimeType, mimeTypePortletModes);
@@ -430,12 +428,12 @@ public class PortletTracker
 
 			Bundle bundle = serviceReference.getBundle();
 
-			URL resource = bundle.getResource(
+			URL url = bundle.getResource(
 				defaultPreferences.substring("classpath:".length()));
 
-			if (resource != null) {
+			if (url != null) {
 				try {
-					defaultPreferences = StringUtil.read(resource.openStream());
+					defaultPreferences = StringUtil.read(url.openStream());
 				}
 				catch (IOException e) {
 					_log.error(e, e);
@@ -467,21 +465,19 @@ public class PortletTracker
 
 		Set<String> defaultWindowStates = new HashSet<String>();
 
-		defaultWindowStates.add(WindowState.NORMAL.toString().toLowerCase());
-		defaultWindowStates.add(WindowState.MAXIMIZED.toString().toLowerCase());
-		defaultWindowStates.add(WindowState.MINIMIZED.toString().toLowerCase());
-		defaultWindowStates.add(
-			LiferayWindowState.EXCLUSIVE.toString().toLowerCase());
-		defaultWindowStates.add(
-			LiferayWindowState.POP_UP.toString().toLowerCase());
+		defaultWindowStates.add(toLowerCase(LiferayWindowState.EXCLUSIVE));
+		defaultWindowStates.add(toLowerCase(LiferayWindowState.POP_UP));
+		defaultWindowStates.add(toLowerCase(WindowState.MAXIMIZED));
+		defaultWindowStates.add(toLowerCase(WindowState.MINIMIZED));
+		defaultWindowStates.add(toLowerCase(WindowState.NORMAL));
 
 		windowStates.put(ContentTypes.TEXT_HTML, defaultWindowStates);
 
-		List<String> windowStateStrings = StringPlus.asList(
+		List<String> windowStatesList = StringPlus.asList(
 			serviceReference.getProperty("javax.portlet.windowStates"));
 
-		for (String windowStateString : windowStateStrings) {
-			String[] parts = StringUtil.split(windowStateString, ';');
+		for (String windowState : windowStatesList) {
+			String[] parts = StringUtil.split(windowState, ";");
 
 			if (parts.length != 2) {
 				continue;
@@ -493,26 +489,23 @@ public class PortletTracker
 
 			String[] states = StringUtil.split(parts[1]);
 
-			mimeTypeWindowStates.add(
-				WindowState.NORMAL.toString().toLowerCase());
+			mimeTypeWindowStates.add(toLowerCase(WindowState.NORMAL));
 
 			boolean addDefaultStates = true;
 
 			for (String state : states) {
-				mimeTypeWindowStates.add(state.trim().toLowerCase());
+				mimeTypeWindowStates.add(toLowerCase(state));
 
 				addDefaultStates = false;
 			}
 
 			if (addDefaultStates) {
 				mimeTypeWindowStates.add(
-					WindowState.MAXIMIZED.toString().toLowerCase());
+					toLowerCase(LiferayWindowState.EXCLUSIVE));
 				mimeTypeWindowStates.add(
-					WindowState.MINIMIZED.toString().toLowerCase());
-				mimeTypeWindowStates.add(
-					LiferayWindowState.EXCLUSIVE.toString().toLowerCase());
-				mimeTypeWindowStates.add(
-					LiferayWindowState.POP_UP.toString().toLowerCase());
+					toLowerCase(LiferayWindowState.POP_UP));
+				mimeTypeWindowStates.add(toLowerCase(WindowState.MAXIMIZED));
+				mimeTypeWindowStates.add(toLowerCase(WindowState.MINIMIZED));
 			}
 
 			windowStates.put(mimeType, mimeTypeWindowStates);
@@ -596,6 +589,12 @@ public class PortletTracker
 	)
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
+	}
+	
+	protected String toLowerCase(Object object) {
+		String string = String.valueOf(object);
+
+		return StringUtil.toLowerCase(string.trim());
 	}
 
 	protected void unsetCompanyLocalService(
