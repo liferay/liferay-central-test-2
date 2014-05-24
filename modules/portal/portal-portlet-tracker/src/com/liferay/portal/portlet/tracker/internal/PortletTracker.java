@@ -541,7 +541,7 @@ public class PortletTracker
 		throws PortalException, SystemException {
 
 		String categoryName = (String)serviceReference.getProperty(
-			"com.liferay.display.category");
+			"com.liferay.portal.portlet..display.category");
 
 		if (categoryName == null) {
 			categoryName = "category.undefined";
