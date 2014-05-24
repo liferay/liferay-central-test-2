@@ -3,7 +3,7 @@
 
 <project>
 	<property name="plugin.full.version" value="7.0.0.1" />
-	<property name="plugin.name" value="com.liferay.portal.verifier.extender" />
+	<property name="plugin.name" value="com.liferay.portal.verify.extender" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 

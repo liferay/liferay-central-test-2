@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.verifier.extender.tracker;
+package com.liferay.portal.verify.extender.tracker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -128,7 +128,7 @@ public class VerifyProcessTracker
 		catch (VerifyException ve) {
 			if (_log.isErrorEnabled()) {
 				_log.error(
-					"Unexpected error while executing the verifier " +
+					"Unexpected error while executing the verify " +
 						verifyProcess.getClass(), ve);
 			}
 		}

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.verifier.extender.activator;
+package com.liferay.portal.verify.extender.activator;
 
-import com.liferay.portal.verifier.extender.tracker.VerifyProcessTracker;
+import com.liferay.portal.verify.extender.tracker.VerifyProcessTracker;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -56,7 +56,7 @@ public class VerifyExtenderActivator implements BundleActivator {
 		serviceProperties.put(
 			"osgi.command.function",
 			new String[] { "execute", "list" });
-		serviceProperties.put("osgi.command.scope", "verifier-extender");
+		serviceProperties.put("osgi.command.scope", "verify-extender");
 
 		return bundleContext.registerService(
 			Object.class, _verifyProcessTracker, serviceProperties);
