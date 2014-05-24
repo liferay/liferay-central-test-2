@@ -16,7 +16,6 @@ package com.liferay.portal.verify.extender.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -34,9 +33,7 @@ import org.osgi.util.tracker.ServiceTracker;
 public class VerifyProcessTracker
 	extends ServiceTracker<VerifyProcess, VerifyProcess> {
 
-	public VerifyProcessTracker(BundleContext bundleContext)
-		throws DocumentException {
-
+	public VerifyProcessTracker(BundleContext bundleContext) {
 		super(bundleContext, VerifyProcess.class, null);
 
 		_bundleContext = bundleContext;

@@ -14,7 +14,6 @@
 
 package com.liferay.portal.verify.extender.internal;
 
-
 import java.util.Dictionary;
 import java.util.Hashtable;
 
