@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.verifier.tracker;
+package com.liferay.portal.verifier.extender.tracker;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
