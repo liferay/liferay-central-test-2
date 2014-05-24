@@ -53,7 +53,7 @@ String summary = StringUtil.shorten(assetRenderer.getSummary(liferayPortletReque
 
 				<%= HtmlUtil.escape(title) %>
 
-			<c:if test="<%=  %>">
+			<c:if test="<%= Validator.isNotNull(viewURL) %>">
 				</a>
 			</c:if>
 		</h4>
