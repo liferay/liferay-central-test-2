@@ -286,15 +286,15 @@ public class PortletTracker
 			List<Company> companies)
 		throws PortalException, SystemException {
 
-		List<String> modelNames = _resourceActions.getPortletModelResources(
-			portletModel.getPortletId());
-
 		List<String> portletActions =
 			_resourceActions.getPortletResourceActions(
 				portletModel.getPortletId());
 
 		_resourceActionLocalService.checkResourceActions(
 			portletModel.getPortletId(), portletActions);
+
+		List<String> modelNames = _resourceActions.getPortletModelResources(
+			portletModel.getPortletId());
 
 		for (String modelName : modelNames) {
 			List<String> modelActions =
