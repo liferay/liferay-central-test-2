@@ -214,9 +214,9 @@ public class PortletTracker
 			portletName);
 
 		portletModel.setDisplayName(displayName);
-		
+
 		Class<?> portletClazz = portlet.getClass();
-		
+
 		portletModel.setPortletClass(portletClazz.getName());
 
 		collectCacheScope(serviceReference, portletModel);
@@ -590,7 +590,7 @@ public class PortletTracker
 	protected void setServletContext(ServletContext servletContext) {
 		_servletContext = servletContext;
 	}
-	
+
 	protected String toLowerCase(Object object) {
 		String string = String.valueOf(object);
 
