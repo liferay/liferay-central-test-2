@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PluginContextListener;
 import com.liferay.portal.kernel.util.ProxyUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,7 +79,7 @@ public class ServletContextBuilder implements InvocationHandler {
 			return null;
 		}
 
-		if (name.startsWith("/")) {
+		if (name.startsWith(StringPool.SLASH)) {
 			name = name.substring(1);
 		}
 
@@ -87,13 +88,13 @@ public class ServletContextBuilder implements InvocationHandler {
 
 	public InputStream getResourceAsStream(String path) {
 		try {
-			URL resource = getResource(path);
+			URL url = getResource(path);
 
-			if (resource == null) {
+			if (url == null) {
 				return null;
 			}
 
-			return resource.openStream();
+			return url.openStream();
 		}
 		catch (MalformedURLException e) {
 			_log.error(e, e);
