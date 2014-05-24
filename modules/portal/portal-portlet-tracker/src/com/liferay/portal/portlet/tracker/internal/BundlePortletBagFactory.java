@@ -29,13 +29,13 @@ import org.osgi.framework.Bundle;
  */
 public class BundlePortletBagFactory extends PortletBagFactory {
 
-	public BundlePortletBagFactory(Bundle bundle, Portlet portletInstance) {
+	public BundlePortletBagFactory(Bundle bundle, Portlet portlet) {
 		_bundle = bundle;
-		_portletInstance = portletInstance;
+		_portlet = portlet;
 	}
 
 	@Override
-	public PortletBag create(com.liferay.portal.model.Portlet portlet)
+	public PortletBag create(com.liferay.portal.model.Portlet portletModel)
 		throws Exception {
 
 		if (_bundle == null) {
@@ -52,7 +52,7 @@ public class BundlePortletBagFactory extends PortletBagFactory {
 
 		super.setServletContext(servletContext);
 
-		return super.create(portlet);
+		return super.create(portletModel);
 	}
 
 	@Override
@@ -67,14 +67,14 @@ public class BundlePortletBagFactory extends PortletBagFactory {
 
 	@Override
 	protected Portlet getPortletInstance(
-		com.liferay.portal.model.Portlet portlet) {
+		com.liferay.portal.model.Portlet portletModel) {
 
-		return _portletInstance;
+		return _portlet;
 	}
 
 	private Bundle _bundle;
 	private ClassLoader _classLoader;
-	private Portlet _portletInstance;
+	private Portlet _portlet;
 	private ServletContext _servletContext;
 
 }

@@ -138,7 +138,7 @@ public class PortletTracker
 		}
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Removing: " + serviceReference);
+			_log.info("Removing " + serviceReference);
 		}
 
 		String portletId = JS.getSafeName(portletName);
@@ -148,7 +148,7 @@ public class PortletTracker
 
 		_portletInstanceFactory.destroy(portletModel);
 
-		List<Company> companies;
+		List<Company> companies = null;
 
 		try {
 			companies = _companyLocalService.getCompanies();
@@ -177,7 +177,7 @@ public class PortletTracker
 
 		BundleContext bundleContext = _componentContext.getBundleContext();
 
-		Filter filter;
+		Filter filter = null;
 
 		try {
 			filter = bundleContext.createFilter(
@@ -194,7 +194,7 @@ public class PortletTracker
 		_serviceTracker.open();
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Activated!");
+			_log.info("Activated");
 		}
 	}
 
@@ -213,13 +213,16 @@ public class PortletTracker
 			portletName);
 
 		portletModel.setDisplayName(displayName);
-		portletModel.setPortletClass(portlet.getClass().getName());
+		
+		Class<?> portletClazz = portlet.getClass();
+		
+		portletModel.setPortletClass(portletClazz.getName());
 
 		collectCacheScope(serviceReference, portletModel);
 		collectExpirationCache(serviceReference, portletModel);
 		collectInitParams(serviceReference, portletModel);
-		collectPortletModes(serviceReference, portletModel);
 		collectPortletInfo(serviceReference, portletModel, displayName);
+		collectPortletModes(serviceReference, portletModel);
 		collectPortletPreferences(serviceReference, portletModel);
 		collectSecurityRoleRefs(serviceReference, portletModel);
 		collectWindowStates(serviceReference, portletModel);
@@ -231,9 +234,8 @@ public class PortletTracker
 
 		BundleWiring bundleWiring = bundle.adapt(BundleWiring.class);
 
-		ClassLoader classLoader = bundleWiring.getClassLoader();
+		portletBagFactory.setClassLoader(bundleWiring.getClassLoader());
 
-		portletBagFactory.setClassLoader(classLoader);
 		portletBagFactory.setServletContext(_servletContext);
 		portletBagFactory.setWARFile(true);
 
@@ -242,26 +244,27 @@ public class PortletTracker
 		List<Company> companies = _companyLocalService.getCompanies();
 
 		deployPortlet(serviceReference, portletModel, companies);
+
 		checkResources(serviceReference, portletModel, companies);
 
 		portletModel.setReady(true);
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Added: " + serviceReference);
+			_log.info("Added " + serviceReference);
 		}
 	}
 
 	protected com.liferay.portal.model.Portlet assembleInitialPortletModel(
 		String portletId) {
 
-		com.liferay.portal.model.Portlet portletModel;
+		com.liferay.portal.model.Portlet portletModel = null;
 
 		try {
 			portletModel = _portletLocalService.getPortletById(
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 		}
-		catch (SystemException e) {
-			throw new RuntimeException(e);
+		catch (SystemException se) {
+			throw new RuntimeException(se);
 		}
 
 		PortletApp portletApp = portletModel.getPortletApp();
