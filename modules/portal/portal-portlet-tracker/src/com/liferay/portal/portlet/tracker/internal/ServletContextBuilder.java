@@ -55,7 +55,7 @@ public class ServletContextBuilder implements InvocationHandler {
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
-		Method mappendMethod = methodsMap.get(method);
+		Method mappendMethod = _methods.get(method);
 
 		if (mappendMethod != null) {
 			return mappendMethod.invoke(this, args);
@@ -140,16 +140,16 @@ public class ServletContextBuilder implements InvocationHandler {
 		return result;
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(
+	private static Log _log = LogFactoryUtil.getLog(
 		ServletContextBuilder.class);
 
-	private final Bundle _bundle;
-	private final ClassLoader _classLoader;
-	private final ServletContext _servletContext;
-	private final static Map<Method, Method> methodsMap;
+	private Bundle _bundle;
+	private ClassLoader _classLoader;
+	private ServletContext _servletContext;
+	private static Map<Method, Method> _methods;
 
 	static {
-		methodsMap = getMethodsMap();
+		_methods = getMethodsMap();
 	}
 
 	private static Map<Method, Method> getMethodsMap() {

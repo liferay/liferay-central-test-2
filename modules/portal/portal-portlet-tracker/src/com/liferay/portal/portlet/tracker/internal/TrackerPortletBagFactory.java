@@ -67,9 +67,9 @@ public class TrackerPortletBagFactory extends PortletBagFactory {
 		return _portletInstance;
 	}
 
-	private final Bundle _bundle;
+	private Bundle _bundle;
 	private ClassLoader _classLoader;
-	private final Portlet _portletInstance;
+	private Portlet _portletInstance;
 	private ServletContext _servletContext;
 
 }
