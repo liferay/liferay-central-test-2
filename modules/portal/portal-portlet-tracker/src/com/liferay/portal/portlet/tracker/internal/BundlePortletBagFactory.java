@@ -15,6 +15,7 @@
 package com.liferay.portal.portlet.tracker.internal;
 
 import com.liferay.portal.kernel.portlet.PortletBag;
+import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portlet.PortletBagFactory;
 
 import javax.portlet.Portlet;
@@ -43,10 +44,11 @@ public class BundlePortletBagFactory extends PortletBagFactory {
 
 		super.setClassLoader(_classLoader);
 
-		ServletContextBuilder servletContextBuilder = new ServletContextBuilder(
-			_servletContext, _bundle, _classLoader);
-
-		ServletContext servletContext = servletContextBuilder.build();
+		ServletContext servletContext =
+			(ServletContext)ProxyUtil.newProxyInstance(
+				_classLoader, new Class<?>[] {ServletContext.class},
+				new BundleServletContextInvocationHandler(
+					_servletContext, _bundle, _classLoader));
 
 		super.setServletContext(servletContext);
 

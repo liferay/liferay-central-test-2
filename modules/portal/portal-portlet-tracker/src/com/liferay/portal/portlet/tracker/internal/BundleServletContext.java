@@ -17,21 +17,15 @@ package com.liferay.portal.portlet.tracker.internal;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.PluginContextListener;
-import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
-
 import java.net.URL;
 
 import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -42,19 +36,14 @@ import org.osgi.framework.Bundle;
 /**
  * @author Raymond Augé
  */
-public class ServletContextBuilder implements InvocationHandler {
+public class BundleServletContext {
 
-	public ServletContextBuilder(
+	public BundleServletContext(
 		ServletContext servletContext, Bundle bundle, ClassLoader classLoader) {
 
 		_servletContext = servletContext;
 		_bundle = bundle;
 		_classLoader = classLoader;
-	}
-
-	public ServletContext build() {
-		return (ServletContext)ProxyUtil.newProxyInstance(
-			_classLoader, new Class<?>[] {ServletContext.class}, this);
 	}
 
 	public Object getAttribute(String name) {
@@ -124,49 +113,7 @@ public class ServletContextBuilder implements InvocationHandler {
 		return paths;
 	}
 
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args)
-		throws Throwable {
-
-		Method servletContextBuilderMethod = _servletContextBuilderMethods.get(
-			method);
-
-		if (servletContextBuilderMethod != null) {
-			return servletContextBuilderMethod.invoke(this, args);
-		}
-
-		return method.invoke(_servletContext, args);
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		ServletContextBuilder.class);
-
-	private static Map<Method, Method> _servletContextBuilderMethods =
-		new HashMap<Method, Method>();
-
-	static {
-		Method[] servletContextBuilderMethods =
-			ServletContextBuilder.class.getDeclaredMethods();
-
-		for (Method servletContextBuilderMethod :
-				servletContextBuilderMethods) {
-
-			String methodName = servletContextBuilderMethod.getName();
-
-			Class<?>[] parameterTypes =
-				servletContextBuilderMethod.getParameterTypes();
-
-			try {
-				Method servletContextMethod = ServletContext.class.getMethod(
-					methodName, parameterTypes);
-
-				_servletContextBuilderMethods.put(
-					servletContextMethod, servletContextBuilderMethod);
-			}
-			catch (NoSuchMethodException nsme) {
-			}
-		}
-	}
+	private static Log _log = LogFactoryUtil.getLog(BundleServletContext.class);
 
 	private Bundle _bundle;
 	private ClassLoader _classLoader;
