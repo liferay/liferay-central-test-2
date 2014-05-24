@@ -282,17 +282,19 @@ public class PortletTracker
 
 	protected void checkResources(
 			ServiceReference<Portlet> serviceReference,
-			com.liferay.portal.model.Portlet portlet, List<Company> companies)
+			com.liferay.portal.model.Portlet portletModel,
+			List<Company> companies)
 		throws PortalException, SystemException {
 
 		List<String> modelNames = _resourceActions.getPortletModelResources(
-			portlet.getPortletId());
+			portletModel.getPortletId());
 
 		List<String> portletActions =
-			_resourceActions.getPortletResourceActions(portlet.getPortletId());
+			_resourceActions.getPortletResourceActions(
+				portletModel.getPortletId());
 
 		_resourceActionLocalService.checkResourceActions(
-			portlet.getPortletId(), portletActions);
+			portletModel.getPortletId(), portletActions);
 
 		for (String modelName : modelNames) {
 			List<String> modelActions =
@@ -303,11 +305,11 @@ public class PortletTracker
 		}
 
 		for (Company company : companies) {
-			com.liferay.portal.model.Portlet curPortlet =
+			com.liferay.portal.model.Portlet companyPortletModel =
 				_portletLocalService.getPortletById(
-					company.getCompanyId(), portlet.getPortletId());
+					company.getCompanyId(), portletModel.getPortletId());
 
-			_portletLocalService.checkPortlet(curPortlet);
+			_portletLocalService.checkPortlet(companyPortletModel);
 		}
 	}
 
