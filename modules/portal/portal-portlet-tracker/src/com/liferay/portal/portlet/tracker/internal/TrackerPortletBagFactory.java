@@ -22,6 +22,10 @@ import javax.portlet.Portlet;
 import javax.servlet.ServletContext;
 
 import org.osgi.framework.Bundle;
+
+/**
+ * @author Raymond Augé
+ */
 public class TrackerPortletBagFactory extends PortletBagFactory {
 
 	public TrackerPortletBagFactory(Bundle bundle, Portlet portletInstance) {
