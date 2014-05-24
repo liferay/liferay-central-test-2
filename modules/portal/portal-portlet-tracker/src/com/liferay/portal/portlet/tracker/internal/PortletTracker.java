@@ -119,9 +119,10 @@ public class PortletTracker
 
 	@Override
 	public void modifiedService(
-		ServiceReference<Portlet> serviceReference, Portlet portletarg1) {
+		ServiceReference<Portlet> serviceReference, Portlet portlet) {
 
-		removedService(serviceReference, portletarg1);
+		removedService(serviceReference, portlet);
+
 		addingService(serviceReference);
 	}
 
