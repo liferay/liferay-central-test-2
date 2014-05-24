@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2013 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -79,8 +79,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * @author Raymond Augé
  */
 @Component(
-	immediate = true,
-	service = PortletTracker.class
+	immediate = true, service = PortletTracker.class
 )
 public class PortletTracker
 	implements ServiceTrackerCustomizer<Portlet, Portlet> {
@@ -182,7 +181,7 @@ public class PortletTracker
 		try {
 			filter = bundleContext.createFilter(
 				"(&(javax.portlet.name=*)(objectClass=" +
-					Portlet.class.getName() +  "))");
+					Portlet.class.getName() + "))");
 		}
 		catch (InvalidSyntaxException ise) {
 			throw new RuntimeException(ise);
@@ -277,11 +276,43 @@ public class PortletTracker
 		return portletModel;
 	}
 
+	protected void checkResources(
+			ServiceReference<Portlet> serviceReference,
+			com.liferay.portal.model.Portlet portlet, List<Company> companies)
+		throws PortalException, SystemException {
+
+		List<String> modelNames = _resourceActions.getPortletModelResources(
+			portlet.getPortletId());
+
+		List<String> portletActions =
+			_resourceActions.getPortletResourceActions(portlet.getPortletId());
+
+		_resourceActionLocalService.checkResourceActions(
+			portlet.getPortletId(), portletActions);
+
+		for (String modelName : modelNames) {
+			List<String> modelActions =
+				_resourceActions.getModelResourceActions(modelName);
+
+			_resourceActionLocalService.checkResourceActions(
+				modelName, modelActions);
+		}
+
+		for (Company company : companies) {
+			com.liferay.portal.model.Portlet curPortlet =
+				_portletLocalService.getPortletById(
+					company.getCompanyId(), portlet.getPortletId());
+
+			_portletLocalService.checkPortlet(curPortlet);
+		}
+	}
+
 	protected void collectCacheScope(
 		ServiceReference<Portlet> serviceReference,
 		com.liferay.portal.model.Portlet portletModel) {
 
 		// Liferay doesn't support this
+
 	}
 
 	protected void collectExpirationCache(
@@ -336,6 +367,47 @@ public class PortletTracker
 			portletDescription);
 
 		portletModel.setPortletInfo(portletInfo);
+	}
+
+	protected void collectPortletModes(
+		ServiceReference<Portlet> serviceReference,
+		com.liferay.portal.model.Portlet portletModel) {
+
+		Map<String, Set<String>> portletModes =
+			new HashMap<String, Set<String>>();
+
+		Set<String> defaultModes = new HashSet<String>();
+
+		defaultModes.add(PortletMode.VIEW.toString().toLowerCase());
+
+		portletModes.put(ContentTypes.TEXT_HTML, defaultModes);
+
+		List<String> portletModeStrings = StringPlus.asList(
+			serviceReference.getProperty("javax.portlet.portletModes"));
+
+		for (String portletModeString : portletModeStrings) {
+			String[] parts = StringUtil.split(portletModeString, ';');
+
+			if (parts.length != 2) {
+				continue;
+			}
+
+			String mimeType = parts[0];
+
+			Set<String> mimeTypePortletModes = new HashSet<String>();
+
+			String[] modes = StringUtil.split(parts[1]);
+
+			mimeTypePortletModes.add(PortletMode.VIEW.toString().toLowerCase());
+
+			for (String mode : modes) {
+				mimeTypePortletModes.add(mode.trim().toLowerCase());
+			}
+
+			portletModes.put(mimeType, mimeTypePortletModes);
+		}
+
+		portletModel.setPortletModes(portletModes);
 	}
 
 	protected void collectPortletPreferences(
@@ -396,48 +468,6 @@ public class PortletTracker
 
 		portletModel.setUnlinkedRoles(unlinkedRoles);
 //		portletModel.linkRoles();
-	}
-
-	protected void collectPortletModes(
-		ServiceReference<Portlet> serviceReference,
-		com.liferay.portal.model.Portlet portletModel) {
-
-		Map<String, Set<String>> portletModes =
-			new HashMap<String, Set<String>>();
-
-		Set<String> defaultModes = new HashSet<String>();
-
-		defaultModes.add(PortletMode.VIEW.toString().toLowerCase());
-
-		portletModes.put(ContentTypes.TEXT_HTML, defaultModes);
-
-		List<String> portletModeStrings = StringPlus.asList(
-			serviceReference.getProperty("javax.portlet.portletModes"));
-
-		for (String portletModeString : portletModeStrings) {
-			String[] parts = StringUtil.split(portletModeString, ';');
-
-			if (parts.length != 2) {
-				continue;
-			}
-
-			String mimeType = parts[0];
-
-			Set<String> mimeTypePortletModes = new HashSet<String>();
-
-			String[] modes = StringUtil.split(parts[1]);
-
-			mimeTypePortletModes.add(
-				PortletMode.VIEW.toString().toLowerCase());
-
-			for (String mode : modes) {
-				mimeTypePortletModes.add(mode.trim().toLowerCase());
-			}
-
-			portletModes.put(mimeType, mimeTypePortletModes);
-		}
-
-		portletModel.setPortletModes(portletModes);
 	}
 
 	protected void collectWindowStates(
@@ -501,38 +531,6 @@ public class PortletTracker
 		}
 
 		portletModel.setWindowStates(windowStates);
-	}
-
-	protected void checkResources(
-			ServiceReference<Portlet> serviceReference,
-			com.liferay.portal.model.Portlet portlet, List<Company> companies)
-		throws PortalException, SystemException {
-
-		List<String> modelNames = _resourceActions.getPortletModelResources(
-			portlet.getPortletId());
-
-		List<String> portletActions =
-			_resourceActions.getPortletResourceActions(
-				portlet.getPortletId());
-
-		_resourceActionLocalService.checkResourceActions(
-			portlet.getPortletId(), portletActions);
-
-		for (String modelName : modelNames) {
-			List<String> modelActions =
-				_resourceActions.getModelResourceActions(modelName);
-
-			_resourceActionLocalService.checkResourceActions(
-				modelName, modelActions);
-		}
-
-		for (Company company : companies) {
-			com.liferay.portal.model.Portlet curPortlet =
-				_portletLocalService.getPortletById(
-					company.getCompanyId(), portlet.getPortletId());
-
-			_portletLocalService.checkPortlet(curPortlet);
-		}
 	}
 
 	@Deactivate
@@ -641,10 +639,10 @@ public class PortletTracker
 		255 - PortletConstants.INSTANCE_SEPARATOR.length() +
 			PortletConstants.USER_SEPARATOR.length() + 39;
 
-	private static final Log _log = LogFactoryUtil.getLog(PortletTracker.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletTracker.class);
 
-	private ComponentContext _componentContext;
 	private CompanyLocalService _companyLocalService;
+	private ComponentContext _componentContext;
 	private PortletInstanceFactory _portletInstanceFactory;
 	private PortletLocalService _portletLocalService;
 	private ResourceActionLocalService _resourceActionLocalService;

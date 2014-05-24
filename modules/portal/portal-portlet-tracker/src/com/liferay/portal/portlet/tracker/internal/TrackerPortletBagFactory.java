@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.portlet.tracker.internal;
 
 import com.liferay.portal.kernel.portlet.PortletBag;
@@ -21,7 +22,6 @@ import javax.portlet.Portlet;
 import javax.servlet.ServletContext;
 
 import org.osgi.framework.Bundle;
-
 public class TrackerPortletBagFactory extends PortletBagFactory {
 
 	public TrackerPortletBagFactory(Bundle bundle, Portlet portletInstance) {
@@ -39,9 +39,8 @@ public class TrackerPortletBagFactory extends PortletBagFactory {
 
 		super.setClassLoader(_classLoader);
 
-		ServletContextBuilder servletContextBuilder =
-			new ServletContextBuilder(
-				_servletContext, _bundle, _classLoader);
+		ServletContextBuilder servletContextBuilder = new ServletContextBuilder(
+			_servletContext, _bundle, _classLoader);
 
 		ServletContext servletContext = servletContextBuilder.build();
 

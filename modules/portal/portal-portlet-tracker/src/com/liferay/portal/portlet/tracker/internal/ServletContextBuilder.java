@@ -11,6 +11,7 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
+
 package com.liferay.portal.portlet.tracker.internal;
 
 import com.liferay.portal.kernel.log.Log;
@@ -49,19 +50,6 @@ public class ServletContextBuilder implements InvocationHandler {
 		_servletContext = servletContext;
 		_bundle = bundle;
 		_classLoader = classLoader;
-	}
-
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args)
-		throws Throwable {
-
-		Method mappendMethod = _methods.get(method);
-
-		if (mappendMethod != null) {
-			return mappendMethod.invoke(this, args);
-		}
-
-		return method.invoke(_servletContext, args);
 	}
 
 	public ServletContext build() {
@@ -140,16 +128,17 @@ public class ServletContextBuilder implements InvocationHandler {
 		return result;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(
-		ServletContextBuilder.class);
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args)
+		throws Throwable {
 
-	private Bundle _bundle;
-	private ClassLoader _classLoader;
-	private ServletContext _servletContext;
-	private static Map<Method, Method> _methods;
+		Method mappendMethod = _methods.get(method);
 
-	static {
-		_methods = getMethodsMap();
+		if (mappendMethod != null) {
+			return mappendMethod.invoke(this, args);
+		}
+
+		return method.invoke(_servletContext, args);
 	}
 
 	private static Map<Method, Method> getMethodsMap() {
@@ -169,11 +158,25 @@ public class ServletContextBuilder implements InvocationHandler {
 				methods.put(method, wrapperMethod);
 			}
 			catch (NoSuchMethodException e) {
+
 				// ignore
+
 			}
 		}
 
 		return methods;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		ServletContextBuilder.class);
+	private static Map<Method, Method> _methods;
+
+	static {
+		_methods = getMethodsMap();
+	}
+
+	private Bundle _bundle;
+	private ClassLoader _classLoader;
+	private ServletContext _servletContext;
 
 }
