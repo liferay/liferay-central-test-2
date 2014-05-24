@@ -96,11 +96,8 @@ public class ServletContextBuilder implements InvocationHandler {
 
 			return url.openStream();
 		}
-		catch (MalformedURLException e) {
-			_log.error(e, e);
-		}
-		catch (IOException e) {
-			_log.error(e, e);
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
 		}
 
 		return null;
