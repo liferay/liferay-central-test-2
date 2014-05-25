@@ -16,6 +16,7 @@ package com.liferay.portal.verify.extender.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -43,19 +44,16 @@ public class VerifyProcessTracker
 	public VerifyProcess addingService(
 		ServiceReference<VerifyProcess> serviceReference) {
 
-		VerifyProcess verifyProcess = null;
+		VerifyProcess verifyProcess = _bundleContext.getService(
+			serviceReference);
 
-		try {
-			verifyProcess = _bundleContext.getService(
-				serviceReference);
-
-			String verifyProcessName = getVerifyProcessName(serviceReference);
-	
-			_verifyProcesses.put(verifyProcessName, verifyProcess);
-		}
-		catch (IllegalArgumentException iae) {
+		String verifyProcessName = getVerifyProcessName(serviceReference);
+		
+		if (Validator.isNull(verifyProcessName)) {
 			return null;
 		}
+
+		_verifyProcesses.put(verifyProcessName, verifyProcess);
 
 		if (_log.isDebugEnabled()) {
 			Bundle bundle = _bundleContext.getBundle();
@@ -126,16 +124,7 @@ public class VerifyProcessTracker
 	public String getVerifyProcessName(
 		ServiceReference<VerifyProcess> serviceReference) {
 
-		String verifyProcessName = (String)serviceReference.getProperty(
-			"verify.process.name");
-
-		if ((verifyProcessName == null) || verifyProcessName.equals("")) {
-			throw new IllegalArgumentException(
-				"Verify processes must specify the property " +
-					"\"verify.process.name\"");
-		}
-
-		return verifyProcessName;
+		return (String)serviceReference.getProperty("verify.process.name");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcessTracker.class);
