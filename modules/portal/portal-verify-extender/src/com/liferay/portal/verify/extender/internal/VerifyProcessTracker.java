@@ -83,11 +83,9 @@ public class VerifyProcessTracker
 		VerifyProcess verifyProcess = _verifyProcesses.get(verifyProcessName);
 
 		if (verifyProcess == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to find a verify process with the name " +
-						verifyProcessName);
-			}
+			System.out.println(
+				"Unable to find a verify process with the name " +
+					verifyProcessName);
 
 			return;
 		}
@@ -99,11 +97,8 @@ public class VerifyProcessTracker
 		for (Map.Entry<String, VerifyProcess> entry :
 				_verifyProcesses.entrySet()) {
 
-			if (_log.isInfoEnabled()) {
-				_log.info(	
-					"Verify process " + entry.getKey() + " has " +
-						entry.getValue());
-			}
+			System.out.println(
+				"Verify process " + entry.getKey() + " has " + entry.getValue());
 		}
 	}
 
