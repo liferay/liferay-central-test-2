@@ -16,7 +16,6 @@ package com.liferay.portal.verify.extender.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -47,13 +46,34 @@ public class VerifyProcessTracker
 		VerifyProcess verifyProcess = null;
 
 		try {
-			_addVerifyProcess(serviceReference);
+			verifyProcess = _bundleContext.getService(
+				serviceReference);
+
+			String verifyProcessName = getVerifyProcessName(serviceReference);
+	
+			_verifyProcesses.put(verifyProcessName, verifyProcess);
 		}
 		catch (IllegalArgumentException iae) {
 			return null;
 		}
 
-		_execute(verifyProcess);
+		if (_log.isDebugEnabled()) {
+			Bundle bundle = _bundleContext.getBundle();
+
+			_log.debug(
+				"Executing verify process " + bundle.getSymbolicName() +
+					" with " + verifyProcess.getClass());
+		}
+
+		try {
+			verifyProcess.verify();
+		}
+		catch (VerifyException ve) {
+			_log.error(
+				"Unexpected error while executing the verify " +
+					verifyProcess.getClass(),
+				ve);
+		}
 
 		return verifyProcess;
 	}
@@ -64,8 +84,7 @@ public class VerifyProcessTracker
 		if (verifyProcess == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"A verify process with name " + verifyProcessName +
-						" has not been found");
+					"Unable to find a verify process " + verifyProcessName);
 			}
 
 			return;
@@ -80,8 +99,8 @@ public class VerifyProcessTracker
 
 			if (_log.isInfoEnabled()) {
 				_log.info(	
-					"Verifier " + entry.getKey() + " of type " +
-						ClassUtil.getClassName(entry.getValue()));
+					"Verify process " + entry.getKey() + " has " +
+						entry.getValue());
 			}
 		}
 	}
@@ -99,44 +118,12 @@ public class VerifyProcessTracker
 		ServiceReference<VerifyProcess> serviceReference,
 		VerifyProcess verifyProcess) {
 
-		_removeVerifyProcess(serviceReference);
+		String verifyProcessName = getVerifyProcessName(serviceReference);
+
+		_verifyProcesses.remove(verifyProcessName);
 	}
 
-	private VerifyProcess _addVerifyProcess(
-		ServiceReference<VerifyProcess> serviceReference) {
-
-		VerifyProcess verifyProcess = _bundleContext.getService(
-			serviceReference);
-
-		String verifyProcessName = _getVerifyProcessName(serviceReference);
-
-		_verifyProcesses.put(verifyProcessName, verifyProcess);
-
-		return verifyProcess;
-	}
-
-	private void _execute(VerifyProcess verifyProcess) {
-		if (_log.isDebugEnabled()) {
-			Bundle bundle = _bundleContext.getBundle();
-
-			_log.debug(
-				"Executing verify process " + verifyProcess.getClass() +
-					" defined by " + bundle.getSymbolicName());
-		}
-
-		try {
-			verifyProcess.verify();
-		}
-		catch (VerifyException ve) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unexpected error while executing the verify " +
-						verifyProcess.getClass(), ve);
-			}
-		}
-	}
-
-	private String _getVerifyProcessName(
+	public String getVerifyProcessName(
 		ServiceReference<VerifyProcess> serviceReference) {
 
 		String verifyProcessName = (String)serviceReference.getProperty(
@@ -144,19 +131,11 @@ public class VerifyProcessTracker
 
 		if ((verifyProcessName == null) || verifyProcessName.equals("")) {
 			throw new IllegalArgumentException(
-				"Verify processes must define the property " +
+				"Verify processes must specify the property " +
 					"\"verify.process.name\"");
 		}
 
 		return verifyProcessName;
-	}
-
-	private void _removeVerifyProcess(
-		ServiceReference<VerifyProcess> serviceReference) {
-
-		String verifyProcessName = _getVerifyProcessName(serviceReference);
-
-		_verifyProcesses.remove(verifyProcessName);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcessTracker.class);
