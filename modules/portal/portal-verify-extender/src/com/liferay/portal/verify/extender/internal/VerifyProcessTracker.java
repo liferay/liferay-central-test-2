@@ -16,6 +16,7 @@ package com.liferay.portal.verify.extender.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
@@ -59,8 +60,9 @@ public class VerifyProcessTracker
 			Bundle bundle = _bundleContext.getBundle();
 
 			_log.debug(
-				"Executing verify process " + bundle.getSymbolicName() +
-					" with " + verifyProcess.getClass());
+				"Executing the verify process " +
+					ClassUtil.getClassName(verifyProcess.getClass()) + " for " +
+						bundle.getSymbolicName());
 		}
 
 		try {
@@ -68,8 +70,9 @@ public class VerifyProcessTracker
 		}
 		catch (VerifyException ve) {
 			_log.error(
-				"Unexpected error while executing the verify " +
-					verifyProcess.getClass(),
+				"A verify exception was thrown while executing the verify " +
+					"process " +
+						ClassUtil.getClassName(verifyProcess.getClass()),
 				ve);
 		}
 
@@ -82,7 +85,8 @@ public class VerifyProcessTracker
 		if (verifyProcess == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"Unable to find a verify process " + verifyProcessName);
+					"Unable to find a verify process with the name " +
+						verifyProcessName);
 			}
 
 			return;
