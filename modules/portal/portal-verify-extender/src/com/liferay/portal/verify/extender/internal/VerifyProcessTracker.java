@@ -24,7 +24,6 @@ import com.liferay.portal.verify.VerifyProcess;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTracker;
@@ -49,7 +48,7 @@ public class VerifyProcessTracker
 			serviceReference);
 
 		String verifyProcessName = getVerifyProcessName(serviceReference);
-		
+
 		if (Validator.isNull(verifyProcessName)) {
 			return null;
 		}
@@ -57,12 +56,9 @@ public class VerifyProcessTracker
 		_verifyProcesses.put(verifyProcessName, verifyProcess);
 
 		if (_log.isDebugEnabled()) {
-			Bundle bundle = _bundleContext.getBundle();
-
 			_log.debug(
 				"Executing the verify process " +
-					ClassUtil.getClassName(verifyProcess.getClass()) + " for " +
-						bundle.getSymbolicName());
+					ClassUtil.getClassName(verifyProcess.getClass()));
 		}
 
 		try {
@@ -93,12 +89,19 @@ public class VerifyProcessTracker
 		verifyProcess.verify();
 	}
 
+	public String getVerifyProcessName(
+		ServiceReference<VerifyProcess> serviceReference) {
+
+		return (String)serviceReference.getProperty("verify.process.name");
+	}
+
 	public void list() {
 		for (Map.Entry<String, VerifyProcess> entry :
 				_verifyProcesses.entrySet()) {
 
 			System.out.println(
-				"Verify process " + entry.getKey() + " has " + entry.getValue());
+				"Verify process " + ClassUtil.getClassName(entry.getValue()) +
+					" is registered with the name " + entry.getKey());
 		}
 	}
 
@@ -118,12 +121,6 @@ public class VerifyProcessTracker
 		String verifyProcessName = getVerifyProcessName(serviceReference);
 
 		_verifyProcesses.remove(verifyProcessName);
-	}
-
-	public String getVerifyProcessName(
-		ServiceReference<VerifyProcess> serviceReference) {
-
-		return (String)serviceReference.getProperty("verify.process.name");
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(VerifyProcessTracker.class);

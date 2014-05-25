@@ -159,7 +159,8 @@ public class HttpServiceBundleActivator
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(HttpServiceBundleActivator.class);
+	private static Log _log = LogFactoryUtil.getLog(
+		HttpServiceBundleActivator.class);
 
 	private BundleContext _bundleContext;
 	private ServiceTracker<ServletContext, ServletContext>
