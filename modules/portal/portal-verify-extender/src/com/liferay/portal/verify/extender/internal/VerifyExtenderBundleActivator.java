@@ -32,35 +32,35 @@ public class VerifyExtenderBundleActivator implements BundleActivator {
 
 		_verifyProcessTracker.open();
 
-		_verifyCommand = _registerConsoleCommand(bundleContext);
+		_serviceRegistration = _registerServiceRegistration(bundleContext);
 	}
 
 	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
+		_serviceRegistration.unregister();
+
+		_serviceRegistration = null;
+
 		_verifyProcessTracker.close();
 
-		_verifyCommand.unregister();
-
-		_verifyCommand = null;
 		_verifyProcessTracker = null;
 	}
 
-	private ServiceRegistration<Object> _registerConsoleCommand(
+	private ServiceRegistration<Object> _registerServiceRegistration(
 		BundleContext bundleContext) {
 
-		Dictionary<String, Object> serviceProperties =
-			new Hashtable<String, Object>();
+		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
-		serviceProperties.put(
+		properties.put(
 			"osgi.command.function",
-			new String[] { "execute", "list" });
-		serviceProperties.put("osgi.command.scope", "verify-extender");
+			new String[] {"execute", "list"});
+		properties.put("osgi.command.scope", "verify-extender");
 
 		return bundleContext.registerService(
-			Object.class, _verifyProcessTracker, serviceProperties);
+			Object.class, _verifyProcessTracker, properties);
 	}
 
-	ServiceRegistration<Object> _verifyCommand;
-	VerifyProcessTracker _verifyProcessTracker;
+	private ServiceRegistration<Object> _serviceRegistration;
+	private VerifyProcessTracker _verifyProcessTracker;
 
 }
