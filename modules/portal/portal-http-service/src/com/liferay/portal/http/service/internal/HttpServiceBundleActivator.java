@@ -38,7 +38,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
  * @author Miguel Pastor
  * @author Raymond Augé
  */
-public class HttpServiceActivator
+public class HttpServiceBundleActivator
 	implements BundleActivator,
 			   ServiceTrackerCustomizer<ServletContext, ServletContext> {
 
@@ -159,7 +159,7 @@ public class HttpServiceActivator
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(HttpServiceActivator.class);
+	private static Log _log = LogFactoryUtil.getLog(HttpServiceBundleActivator.class);
 
 	private BundleContext _bundleContext;
 	private ServiceTracker<ServletContext, ServletContext>

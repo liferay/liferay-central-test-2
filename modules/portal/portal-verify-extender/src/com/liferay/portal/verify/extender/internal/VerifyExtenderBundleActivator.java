@@ -24,7 +24,7 @@ import org.osgi.framework.ServiceRegistration;
 /**
  * @author Miguel Pastor
  */
-public class VerifyExtenderActivator implements BundleActivator {
+public class VerifyExtenderBundleActivator implements BundleActivator {
 
 	@Override
 	public void start(BundleContext bundleContext) throws Exception {
