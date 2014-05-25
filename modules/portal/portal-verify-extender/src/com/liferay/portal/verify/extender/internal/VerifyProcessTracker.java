@@ -16,6 +16,7 @@ package com.liferay.portal.verify.extender.internal;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.verify.VerifyException;
 import com.liferay.portal.verify.VerifyProcess;
 
@@ -61,9 +62,11 @@ public class VerifyProcessTracker
 		VerifyProcess verifyProcess = _verifyProcesses.get(verifyProcessName);
 
 		if (verifyProcess == null) {
-			System.out.println(
-				"A verify process with name " + verifyProcessName +
-					" has not been found");
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"A verify process with name " + verifyProcessName +
+						" has not been found");
+			}
 
 			return;
 		}
@@ -75,9 +78,11 @@ public class VerifyProcessTracker
 		for (Map.Entry<String, VerifyProcess> entry :
 				_verifyProcesses.entrySet()) {
 
-			System.out.println(
-				"Verifier " + entry.getKey() + " of type " +
-					entry.getValue().getClass());
+			if (_log.isInfoEnabled()) {
+				_log.info(	
+					"Verifier " + entry.getKey() + " of type " +
+						ClassUtil.getClassName(entry.getValue()));
+			}
 		}
 	}
 
