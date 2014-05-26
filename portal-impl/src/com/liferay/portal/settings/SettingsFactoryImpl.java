@@ -63,7 +63,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws SystemException {
 
 		return applyFallbackKeys(
-			serviceName, getCompanySettings(companyId, serviceName));
+			getCompanySettings(companyId, serviceName), serviceName);
 	}
 
 	@Override
@@ -72,9 +72,9 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws SystemException {
 
 		return applyFallbackKeys(
-			serviceName,
 			new PortletPreferencesSettings(
-				getCompanyPortletPreferences(companyId, serviceName)));
+				getCompanyPortletPreferences(companyId, serviceName)),
+			serviceName);
 	}
 
 	@Override
@@ -82,7 +82,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws PortalException, SystemException {
 
 		return applyFallbackKeys(
-			serviceName, getGroupSettings(groupId, serviceName));
+			getGroupSettings(groupId, serviceName), serviceName);
 	}
 
 	@Override
@@ -133,9 +133,9 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws SystemException {
 
 		return applyFallbackKeys(
-			PortletConstants.getRootPortletId(portletId),
 			new PortletPreferencesSettings(
-				getCompanyPortletPreferences(companyId, portletId)));
+				getCompanyPortletPreferences(companyId, portletId)),
+			PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
@@ -146,10 +146,10 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		return applyFallbackKeys(
-			PortletConstants.getRootPortletId(portletId),
 			new PortletPreferencesSettings(
 				getGroupPortletPreferences(
-					group.getCompanyId(), groupId, portletId)));
+					group.getCompanyId(), groupId, portletId)),
+				PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
@@ -157,10 +157,10 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		throws PortalException, SystemException {
 
 		return applyFallbackKeys(
-			PortletConstants.getRootPortletId(portletId),
 			new PortletPreferencesSettings(
 				getPortletInstancePortletPreferences(layout, portletId),
-				getGroupSettings(layout.getGroupId(), portletId)));
+				getGroupSettings(layout.getGroupId(), portletId)),
+			PortletConstants.getRootPortletId(portletId));
 	}
 
 	@Override
@@ -170,7 +170,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 		_fallbackKeysMap.put(settingsId, fallbackKeys);
 	}
 
-	protected Settings applyFallbackKeys(String settingsId, Settings settings) {
+	protected Settings applyFallbackKeys(Settings settings, String settingsId) {
 		if (settings instanceof FallbackKeys) {
 			return settings;
 		}
