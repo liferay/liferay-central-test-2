@@ -16,7 +16,7 @@
 
 <#assign jsonArray = jsonFactoryUtil.createJSONArray() />
 
-<#list entries as entry>
+<#list entries as entrey>
 	<#assign assetRenderer = entry.getAssetRenderer() />
 
 	<#assign ddmReader = assetRenderer.getDDMFieldReader() />
