@@ -631,7 +631,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		}
 		catch (NoSuchGroupException nsge) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Remote live group has been already deleted", nsge);
+				_log.warn("Remote live group was already deleted", nsge);
 			}
 		}
 		catch (PrincipalException pe) {
