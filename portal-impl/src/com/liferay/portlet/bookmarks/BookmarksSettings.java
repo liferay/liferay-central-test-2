@@ -26,46 +26,44 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
  */
 public class BookmarksSettings {
 
-	public static FallbackKeys getFallbackKeys() {
-		FallbackKeys fallbackKeys = new FallbackKeys();
+	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
 
-		fallbackKeys.add(
+	static {
+		FALLBACK_KEYS.add(
 			"emailEntryAddedBody", PropsKeys.BOOKMARKS_EMAIL_ENTRY_ADDED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailEntryAddedEnabled",
 			PropsKeys.BOOKMARKS_EMAIL_ENTRY_ADDED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailEntryAddedSubject",
 			PropsKeys.BOOKMARKS_EMAIL_ENTRY_ADDED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailEntryUpdatedBody",
 			PropsKeys.BOOKMARKS_EMAIL_ENTRY_UPDATED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailEntryUpdatedEnabled",
 			PropsKeys.BOOKMARKS_EMAIL_ENTRY_UPDATED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailEntryUpdatedSubject",
 			PropsKeys.BOOKMARKS_EMAIL_ENTRY_UPDATED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromAddress", PropsKeys.BOOKMARKS_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS );
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromName", PropsKeys.BOOKMARKS_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enableRelatedAssets", PropsKeys.BOOKMARKS_RELATED_ASSETS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"entriesPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add("entryColumns", PropsKeys.BOOKMARKS_ENTRY_COLUMNS);
-		fallbackKeys.add("folderColumns", PropsKeys.BOOKMARKS_FOLDER_COLUMNS);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("entryColumns", PropsKeys.BOOKMARKS_ENTRY_COLUMNS);
+		FALLBACK_KEYS.add("folderColumns", PropsKeys.BOOKMARKS_FOLDER_COLUMNS);
+		FALLBACK_KEYS.add(
 			"foldersPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"showFoldersSearch", PropsKeys.BOOKMARKS_FOLDERS_SEARCH_VISIBLE);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"showSubfolders", PropsKeys.BOOKMARKS_SUBFOLDERS_VISIBLE);
-
-		return fallbackKeys;
 	}
 
 	public BookmarksSettings(Settings settings) {

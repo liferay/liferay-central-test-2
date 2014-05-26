@@ -48,39 +48,38 @@ public class SettingsFactoryStartupAction extends SimpleAction {
 			SettingsFactoryUtil.getSettingsFactory();
 
 		settingsFactory.registerFallbackKeys(
-			BlogsConstants.SERVICE_NAME, BlogsSettings.getFallbackKeys());
+			BlogsConstants.SERVICE_NAME, BlogsSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
-			BookmarksConstants.SERVICE_NAME,
-			BookmarksSettings.getFallbackKeys());
+			BookmarksConstants.SERVICE_NAME, BookmarksSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
-			MBConstants.SERVICE_NAME, MBSettings.getFallbackKeys());
+			MBConstants.SERVICE_NAME, MBSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
-			ShoppingConstants.SERVICE_NAME, ShoppingSettings.getFallbackKeys());
+			ShoppingConstants.SERVICE_NAME, ShoppingSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
-			WikiConstants.SERVICE_NAME, WikiSettings.getFallbackKeys());
+			WikiConstants.SERVICE_NAME, WikiSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
-			DLConstants.SERVICE_NAME, DLSettings.getFallbackKeys());
+			DLConstants.SERVICE_NAME, DLSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
 			PortletKeys.DOCUMENT_LIBRARY,
-			DLPortletInstanceSettings.getFallbackKeys());
+			DLPortletInstanceSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
 			PortletKeys.DOCUMENT_LIBRARY_ADMIN,
-			DLPortletInstanceSettings.getFallbackKeys());
+			DLPortletInstanceSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
 			PortletKeys.DOCUMENT_LIBRARY_DISPLAY,
-			DLPortletInstanceSettings.getFallbackKeys());
+			DLPortletInstanceSettings.FALLBACK_KEYS);
 
 		settingsFactory.registerFallbackKeys(
 			PortletKeys.MEDIA_GALLERY_DISPLAY,
-			DLPortletInstanceSettings.getFallbackKeys());
+			DLPortletInstanceSettings.FALLBACK_KEYS);
 	}
 
 }

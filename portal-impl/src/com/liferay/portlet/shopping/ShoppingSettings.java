@@ -81,44 +81,42 @@ public class ShoppingSettings {
 		Double.POSITIVE_INFINITY
 	};
 
-	public static FallbackKeys getFallbackKeys() {
-		FallbackKeys fallbackKeys = new FallbackKeys();
+	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
 
-		fallbackKeys.add("ccTypes", PropsKeys.SHOPPING_CREDIT_CARD_TYPES);
-		fallbackKeys.add("currencyId", PropsKeys.SHOPPING_CURRENCY_ID);
-		fallbackKeys.add(
+	static {
+		FALLBACK_KEYS.add("ccTypes", PropsKeys.SHOPPING_CREDIT_CARD_TYPES);
+		FALLBACK_KEYS.add("currencyId", PropsKeys.SHOPPING_CURRENCY_ID);
+		FALLBACK_KEYS.add(
 			"emailFromAddress", PropsKeys.SHOPPING_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromName", PropsKeys.SHOPPING_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderConfirmationBody",
 			PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderConfirmationEnabled",
 			PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderConfirmationSubject",
 			PropsKeys.SHOPPING_EMAIL_ORDER_CONFIRMATION_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderShippingBody",
 			PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderShippingEnabled",
 			PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailOrderShippingSubject",
 			PropsKeys.SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT);
-		fallbackKeys.add("insurance", PropsKeys.SHOPPING_INSURANCE);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("insurance", PropsKeys.SHOPPING_INSURANCE);
+		FALLBACK_KEYS.add(
 			"insuranceFormula", PropsKeys.SHOPPING_INSURANCE_FORMULA);
-		fallbackKeys.add("shipping", PropsKeys.SHOPPING_SHIPPING);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("shipping", PropsKeys.SHOPPING_SHIPPING);
+		FALLBACK_KEYS.add(
 			"shippingFormula", PropsKeys.SHOPPING_SHIPPING_FORMULA);
-		fallbackKeys.add("taxState", PropsKeys.SHOPPING_TAX_STATE);
-
-		return fallbackKeys;
+		FALLBACK_KEYS.add("taxState", PropsKeys.SHOPPING_TAX_STATE);
 	}
 
 	public ShoppingSettings(Settings settings) {

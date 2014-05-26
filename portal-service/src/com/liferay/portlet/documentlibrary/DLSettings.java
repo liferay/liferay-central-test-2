@@ -27,53 +27,51 @@ public class DLSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
-	public static FallbackKeys getFallbackKeys() {
-		FallbackKeys fallbackKeys = new FallbackKeys();
+	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
 
-		fallbackKeys.add(
+	static {
+		FALLBACK_KEYS.add(
 			"emailFileEntryAddedBody",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_ADDED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFileEntryAddedEnabled",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_ADDED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFileEntryAddedSubject",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_ADDED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFileEntryUpdatedBody",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_UPDATED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFileEntryUpdatedEnabled",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_UPDATED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFileEntryUpdatedSubject",
 			PropsKeys.DL_EMAIL_FILE_ENTRY_UPDATED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromAddress", PropsKeys.DL_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromName", PropsKeys.DL_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enableCommentRatings", PropsKeys.DL_COMMENT_RATINGS_ENABLED);
-		fallbackKeys.add("enableRatings", PropsKeys.DL_RATINGS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("enableRatings", PropsKeys.DL_RATINGS_ENABLED);
+		FALLBACK_KEYS.add(
 			"enableRelatedAssets", PropsKeys.DL_RELATED_ASSETS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"entriesPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add("entryColumns", PropsKeys.DL_ENTRY_COLUMNS);
-		fallbackKeys.add("fileEntryColumns", PropsKeys.DL_FILE_ENTRY_COLUMNS);
-		fallbackKeys.add("folderColumns", PropsKeys.DL_FOLDER_COLUMNS);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("entryColumns", PropsKeys.DL_ENTRY_COLUMNS);
+		FALLBACK_KEYS.add("fileEntryColumns", PropsKeys.DL_FILE_ENTRY_COLUMNS);
+		FALLBACK_KEYS.add("folderColumns", PropsKeys.DL_FOLDER_COLUMNS);
+		FALLBACK_KEYS.add(
 			"foldersPerPage", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"fileEntriesPerPage",
 			PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"showFoldersSearch", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
-		fallbackKeys.add("showSubfolders", PropsKeys.DL_SUBFOLDERS_VISIBLE);
-
-		return fallbackKeys;
+		FALLBACK_KEYS.add("showSubfolders", PropsKeys.DL_SUBFOLDERS_VISIBLE);
 	}
 
 	public DLSettings(Settings settings) {

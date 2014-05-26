@@ -30,45 +30,43 @@ import javax.portlet.ValidatorException;
  */
 public class WikiSettings {
 
-	public static FallbackKeys getFallbackKeys() {
-		FallbackKeys fallbackKeys = new FallbackKeys();
+	public static FallbackKeys FALLBACK_KEYS = new FallbackKeys();
 
-		fallbackKeys.add(
+	static {
+		FALLBACK_KEYS.add(
 			"emailFromAddress", PropsKeys.WIKI_EMAIL_FROM_ADDRESS,
 			PropsKeys.ADMIN_EMAIL_FROM_ADDRESS);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailFromName", PropsKeys.WIKI_EMAIL_FROM_NAME,
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageAddedBody", PropsKeys.WIKI_EMAIL_PAGE_ADDED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageAddedEnabled", PropsKeys.WIKI_EMAIL_PAGE_ADDED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageAddedSubject", PropsKeys.WIKI_EMAIL_PAGE_ADDED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageUpdatedBody", PropsKeys.WIKI_EMAIL_PAGE_UPDATED_BODY);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageUpdatedEnabled",
 			PropsKeys.WIKI_EMAIL_PAGE_UPDATED_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"emailPageUpdatedSubject",
 			PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SUBJECT);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enableComments", PropsKeys.WIKI_PAGE_COMMENTS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enableCommentRatings", PropsKeys.WIKI_COMMENT_RATINGS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enablePageRatings", PropsKeys.WIKI_PAGE_RATINGS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"enableRelatedAssets", PropsKeys.WIKI_RELATED_ASSETS_ENABLED);
-		fallbackKeys.add("enableRss", PropsKeys.WIKI_RSS_ENABLED);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add("enableRss", PropsKeys.WIKI_RSS_ENABLED);
+		FALLBACK_KEYS.add(
 			"rssDelta", PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-		fallbackKeys.add(
+		FALLBACK_KEYS.add(
 			"rssDisplayStyle", PropsKeys.RSS_FEED_DISPLAY_STYLE_DEFAULT);
-		fallbackKeys.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
-
-		return fallbackKeys;
+		FALLBACK_KEYS.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
 	}
 
 	public WikiSettings(Settings settings) {
