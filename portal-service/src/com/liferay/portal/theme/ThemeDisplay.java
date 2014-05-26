@@ -680,12 +680,12 @@ public class ThemeDisplay
 		return getScopeGroupId();
 	}
 
-	public String getProtocol() {
-		return HttpUtil.getProtocol(_secure);
-	}
-
 	public String getPpid() {
 		return _ppid;
+	}
+
+	public String getProtocol() {
+		return HttpUtil.getProtocol(_secure);
 	}
 
 	public String getRealCompanyLogo() {
@@ -1124,7 +1124,7 @@ public class ThemeDisplay
 	public boolean isLifecycleResource() {
 		return _lifecycleResource;
 	}
-	
+
 	public boolean isSecure() {
 		return _secure;
 	}
