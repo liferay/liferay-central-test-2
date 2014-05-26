@@ -146,7 +146,7 @@ public class MathUtil {
 
 		return sum;
 	}
-	
+
 	public static long sum(Long... values) {
 		long sum = 0;
 
