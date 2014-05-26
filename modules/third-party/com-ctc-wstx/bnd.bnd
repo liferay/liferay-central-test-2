@@ -1,3 +1,2 @@
 Bundle-Version: ${plugin.full.version}
-Export-Package: *
 Include-Resource: classes

@@ -1,5 +1,5 @@
 Bundle-Version: ${plugin.full.version}
 Include-Resource: classes
-Private-Package: com.liferay.portal.bootstrap.*
+Private-Package: *
 
 -baseline: *;version="6.2.0"

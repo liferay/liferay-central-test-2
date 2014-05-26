@@ -1,4 +1,4 @@
 Bundle-Activator: ${classes;IMPLEMENTS;org.osgi.framework.BundleActivator}
 Bundle-Version: ${plugin.full.version}
 Include-Resource: classes
-Private-Package: *
+Private-Package: *.internal.*
