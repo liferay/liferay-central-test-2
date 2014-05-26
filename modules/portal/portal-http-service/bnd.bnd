@@ -1,5 +1,5 @@
 Bundle-Activator: com.liferay.portal.http.service.internal.HttpServiceBundleActivator
-Bundle-Name: Http Service
+Bundle-Name: Liferay Portal HTTP Service
 Bundle-Version: ${plugin.full.version}
 Include-Resource: classes
 Private-Package: *.internal.*
