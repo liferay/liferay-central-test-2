@@ -205,8 +205,8 @@ public class PortletTracker
 			String portletName, String portletId)
 		throws Exception {
 
-		com.liferay.portal.model.Portlet portletModel =
-			assembleInitialPortletModel(portletId);
+		com.liferay.portal.model.Portlet portletModel = buildPortletModel(
+			portletId);
 
 		portletModel.setPortletName(portletName);
 
@@ -256,26 +256,24 @@ public class PortletTracker
 		}
 	}
 
-	protected com.liferay.portal.model.Portlet assembleInitialPortletModel(
+	protected com.liferay.portal.model.Portlet buildPortletModel(
 		String portletId) {
 
-		com.liferay.portal.model.Portlet portletModel = null;
+		com.liferay.portal.model.Portlet portalPortletModel = null;
 
 		try {
-			portletModel = _portletLocalService.getPortletById(
+			portalPortletModel = _portletLocalService.getPortletById(
 				CompanyConstants.SYSTEM, PortletKeys.PORTAL);
 		}
 		catch (SystemException se) {
 			throw new RuntimeException(se);
 		}
 
-		PortletApp portletApp = portletModel.getPortletApp();
-		PluginPackage pluginPackage = portletModel.getPluginPackage();
+		com.liferay.portal.model.Portlet portletModel = new PortletImpl(
+			CompanyConstants.SYSTEM, portletId);
 
-		portletModel = new PortletImpl(CompanyConstants.SYSTEM, portletId);
-
-		portletModel.setPluginPackage(pluginPackage);
-		portletModel.setPortletApp(portletApp);
+		portletModel.setPluginPackage(portalPortletModel.getPluginPackage());
+		portletModel.setPortletApp(portalPortletModel.getPortletApp());
 		portletModel.setTimestamp(System.currentTimeMillis());
 
 		return portletModel;
