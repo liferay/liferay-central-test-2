@@ -39,12 +39,12 @@ public class SchedulerEntryRegistry {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		Filter schedulerEntryFilter = registry.getFilter(
+		Filter filter = registry.getFilter(
 			"(&(javax.portlet.name=*)(objectClass=" +
 				SchedulerEntry.class.getName() + "))");
 
 		_serviceTracker = registry.trackServices(
-			schedulerEntryFilter, new SchedulerEntryServiceTrackerCustomizer());
+			filter, new SchedulerEntryServiceTrackerCustomizer());
 
 		_serviceTracker.open();
 	}
