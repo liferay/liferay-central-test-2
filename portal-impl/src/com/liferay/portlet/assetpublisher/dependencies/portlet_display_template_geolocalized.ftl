@@ -14,13 +14,6 @@
 	<#assign mapsAPIProvider = companyPortletPreferences.getValue("mapsAPIProvider", "openStreetMap") />
 </#if>
 
-<#assign images = {
-	"com.liferay.portlet.documentlibrary.model.DLFileEntry": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/green-dot.png",
-	"com.liferay.portlet.dynamicdatalists.model.DDLRecord": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/red-dot.png",
-	"com.liferay.portlet.journal.model.JournalArticle": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-	"default": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
-} />
-
 <#assign jsonArray = jsonFactoryUtil.createJSONArray() />
 
 <#list entries as entry>
@@ -42,6 +35,15 @@
 		<@liferay.silently jsonObject.put("abstract", entryAbstract) />
 
 		<#if mapsAPIProvider = "googleMaps">
+			<#assign
+				images = {
+					"com.liferay.portlet.documentlibrary.model.DLFileEntry": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/green-dot.png",
+					"com.liferay.portlet.dynamicdatalists.model.DDLRecord": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/red-dot.png",
+					"com.liferay.portlet.journal.model.JournalArticle": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+					"default": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+				}
+			/>
+
 			<#if images?keys?seq_contains(entry.getClassName())>
 				<@liferay.silently jsonObject.put("icon", images[entry.getClassName()]) />
 			<#else>
