@@ -29,17 +29,17 @@ import java.util.Locale;
  */
 public class TypedSettings {
 
-	public TypedSettings(Settings settings) {
+	public TypedSettings(Settings decoratedSettings) {
 		this(
-			settings, LocaleUtil.getSiteDefault(),
+			decoratedSettings, LocaleUtil.getSiteDefault(),
 			LanguageUtil.getAvailableLocales());
 	}
 
 	public TypedSettings(
-		Settings settings, Locale defaultLocale,
+		Settings decoratedSettings, Locale defaultLocale,
 		Locale... availableLocales) {
 
-		_settings = settings;
+		_decoratedSettings = decoratedSettings;
 		_defaultLocale = defaultLocale;
 		_availableLocales = availableLocales;
 	}
@@ -54,8 +54,8 @@ public class TypedSettings {
 		return GetterUtil.getBoolean(value, defaultValue);
 	}
 
-	public Settings getWrappedSettings() {
-		return _settings;
+	public Settings getDecoratedSettings() {
+		return _decoratedSettings;
 	}
 
 	public double getDoubleValue(String key) {
@@ -125,7 +125,7 @@ public class TypedSettings {
 	}
 
 	public String getValue(String key, String defaultValue) {
-		return _settings.getValue(key, defaultValue);
+		return _decoratedSettings.getValue(key, defaultValue);
 	}
 
 	public String[] getValues(String key) {
@@ -133,11 +133,11 @@ public class TypedSettings {
 	}
 
 	public String[] getValues(String key, String[] defaultValue) {
-		return _settings.getValues(key, defaultValue);
+		return _decoratedSettings.getValues(key, defaultValue);
 	}
 
 	public void reset(String key) {
-		_settings.reset(key);
+		_decoratedSettings.reset(key);
 	}
 
 	public void setBooleanValue(String key, boolean value) {
@@ -153,15 +153,15 @@ public class TypedSettings {
 	}
 
 	public void setValue(String key, String value) {
-		_settings.setValue(key, value);
+		_decoratedSettings.setValue(key, value);
 	}
 
 	public void setValues(String key, String[] values) {
-		_settings.setValues(key, values);
+		_decoratedSettings.setValues(key, values);
 	}
 
 	private Locale[] _availableLocales;
-	private Settings _settings;
+	private Settings _decoratedSettings;
 	private Locale _defaultLocale;
 
 }
