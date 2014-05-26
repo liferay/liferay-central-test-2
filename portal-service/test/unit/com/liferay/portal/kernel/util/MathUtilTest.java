@@ -31,6 +31,13 @@ public class MathUtilTest {
 	}
 
 	@Test
+	public void testSumWithIntegerValues() {
+		int expected = 1 + 2 + 3 + 5 + 8;
+
+		Assert.assertEquals(expected, MathUtil.sum(1, 2, 3, 5, 8));
+	}
+
+	@Test
 	public void testSumWithLongValues() {
 		long expected = 1 + 2 + 3 + 5 + 8;
 
