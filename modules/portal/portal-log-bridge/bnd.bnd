@@ -2,4 +2,3 @@ Bundle-Activator: ${classes;IMPLEMENTS;org.osgi.framework.BundleActivator}
 Bundle-Version: ${plugin.full.version}
 Bundle-Name: Liferay Portal Log Bridge
 Include-Resource: classes
-Private-Package: *.internal.*
