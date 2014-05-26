@@ -21,8 +21,6 @@
 	"default": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
 } />
 
-<#assign showEditURL = paramUtil.getBoolean(renderRequest, "showEditURL", true) />
-
 <#assign jsonArray = jsonFactoryUtil.createJSONArray() />
 
 <#list entries as entry>
@@ -266,18 +264,20 @@
 </#if>
 
 <#macro getAbstract asset>
-	<#assign assetRenderer = asset.getAssetRenderer() />
-
-	<#assign redirectURL = renderResponse.createLiferayPortletURL(themeDisplay.getPlid(), themeDisplay.getPortletDisplay().getId(), "RENDER_PHASE", false) />
-
-	${redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect")}
-
 	<div class="asset-entry-abstract" id="${renderResponse.getNamespace()}assetEntryAbstract">
-		<#assign editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, windowStateFactory.getWindowState("POP_UP"), redirectURL) />
+		<#assign showEditURL = paramUtil.getBoolean(renderRequest, "showEditURL", true) />
 
-		<#assign taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "editAsset', title: '" + htmlUtil.escapeJS(languageUtil.format(locale, "edit-x", htmlUtil.escape(assetRenderer.getTitle(locale)), false)) + "', uri:'" + htmlUtil.escapeJS(editPortletURL.toString()) + "'});" />
+		<#assign assetRenderer = asset.getAssetRenderer() />
 
 		<#if showEditURL && assetRenderer.hasEditPermission(permissionChecker)>
+			<#assign redirectURL = renderResponse.createLiferayPortletURL(themeDisplay.getPlid(), themeDisplay.getPortletDisplay().getId(), "RENDER_PHASE", false) />
+
+			${redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect")}
+
+			<#assign editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, windowStateFactory.getWindowState("POP_UP"), redirectURL) />
+
+			<#assign taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "editAsset', title: '" + htmlUtil.escapeJS(languageUtil.format(locale, "edit-x", htmlUtil.escape(assetRenderer.getTitle(locale)), false)) + "', uri:'" + htmlUtil.escapeJS(editPortletURL.toString()) + "'});" />
+
 			<@liferay_ui.icon
 				image = "edit"
 				label = true
