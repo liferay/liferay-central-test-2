@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mobile.device.Device;
 import com.liferay.portal.kernel.staging.StagingUtil;
 import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.Mergeable;
 import com.liferay.portal.kernel.util.StringPool;
@@ -679,6 +680,10 @@ public class ThemeDisplay
 		return getScopeGroupId();
 	}
 
+	public String getProtocol() {
+		return HttpUtil.getProtocol(_secure);
+	}
+
 	public String getPpid() {
 		return _ppid;
 	}
@@ -1119,7 +1124,7 @@ public class ThemeDisplay
 	public boolean isLifecycleResource() {
 		return _lifecycleResource;
 	}
-
+	
 	public boolean isSecure() {
 		return _secure;
 	}

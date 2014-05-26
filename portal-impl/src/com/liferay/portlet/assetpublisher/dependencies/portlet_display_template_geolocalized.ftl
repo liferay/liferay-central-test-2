@@ -14,17 +14,11 @@
 	<#assign mapsAPIProvider = companyPortletPreferences.getValue("mapsAPIProvider", "openStreetMap") />
 </#if>
 
-<#if themeDisplay.isSecure()>
-	<#assign uriScheme = "https" />
-<#else>
-	<#assign uriScheme = "http" />
-</#if>
-
 <#assign images = {
-	"com.liferay.portlet.documentlibrary.model.DLFileEntry": "${uriScheme}://maps.google.com/mapfiles/ms/icons/green-dot.png",
-	"com.liferay.portlet.dynamicdatalists.model.DDLRecord": "${uriScheme}://maps.google.com/mapfiles/ms/icons/red-dot.png",
-	"com.liferay.portlet.journal.model.JournalArticle": "${uriScheme}://maps.google.com/mapfiles/ms/icons/blue-dot.png",
-	"default": "${uriScheme}://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
+	"com.liferay.portlet.documentlibrary.model.DLFileEntry": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/green-dot.png",
+	"com.liferay.portlet.dynamicdatalists.model.DDLRecord": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/red-dot.png",
+	"com.liferay.portlet.journal.model.JournalArticle": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+	"default": "${themeDisplay.getProtocol()}://maps.google.com/mapfiles/ms/icons/yellow-dot.png"
 } />
 
 <#assign showEditURL = paramUtil.getBoolean(renderRequest, "showEditURL", true) />
@@ -100,9 +94,9 @@
 	</#if>
 
 	<#if apiKey = "">
-		<script src="${uriScheme}://maps.googleapis.com/maps/api/js?sensor=true" type="text/javascript"></script>
+		<script src="${themeDisplay.getProtocol()}://maps.googleapis.com/maps/api/js?sensor=true" type="text/javascript"></script>
 	<#else>
-		<script src="${uriScheme}://maps.googleapis.com/maps/api/js?key=${apiKey}&sensor=true" type="text/javascript"></script>
+		<script src="${themeDisplay.getProtocol()}://maps.googleapis.com/maps/api/js?key=${apiKey}&sensor=true" type="text/javascript"></script>
 	</#if>
 
 	<@liferay_aui.script>
@@ -212,9 +206,9 @@
 		}
 	</style>
 
-	<link href="${uriScheme}://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" />
+	<link href="${themeDisplay.getProtocol()}://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" rel="stylesheet" />
 
-	<script src="${uriScheme}://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+	<script src="${themeDisplay.getProtocol()}://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
 
 	<@liferay_aui.script>
 		(function() {
@@ -222,7 +216,7 @@
 				var bounds;
 
 				L.tileLayer(
-					'${uriScheme}://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+					'${themeDisplay.getProtocol()}://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
 					{
 						attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					}
