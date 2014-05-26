@@ -36,7 +36,8 @@ public class TypedSettings {
 	}
 
 	public TypedSettings(
-		Settings settings, Locale defaultLocale, Locale... availableLocales) {
+		Settings settings, Locale defaultLocale,
+		Locale... availableLocales) {
 
 		_settings = settings;
 		_defaultLocale = defaultLocale;
@@ -51,6 +52,10 @@ public class TypedSettings {
 		String value = getValue(key, null);
 
 		return GetterUtil.getBoolean(value, defaultValue);
+	}
+
+	public Settings getWrappedSettings() {
+		return _settings;
 	}
 
 	public double getDoubleValue(String key) {
@@ -131,10 +136,6 @@ public class TypedSettings {
 		return _settings.getValues(key, defaultValue);
 	}
 
-	public Settings getWrappedSettings() {
-		return _settings;
-	}
-
 	public void reset(String key) {
 		_settings.reset(key);
 	}
@@ -160,7 +161,7 @@ public class TypedSettings {
 	}
 
 	private Locale[] _availableLocales;
-	private Locale _defaultLocale;
 	private Settings _settings;
+	private Locale _defaultLocale;
 
 }
