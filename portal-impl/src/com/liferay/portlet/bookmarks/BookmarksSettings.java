@@ -14,24 +14,24 @@
 
 package com.liferay.portlet.bookmarks;
 
+import com.liferay.portal.kernel.settings.BaseServiceSettings;
 import com.liferay.portal.kernel.settings.FallbackKeys;
 import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 import com.liferay.portal.kernel.settings.Settings;
-import com.liferay.portal.kernel.settings.TypedSettings;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksFolderConstants;
 
 /**
  * @author Iván Zaera
  */
-public class BookmarksSettings {
+public class BookmarksSettings extends BaseServiceSettings {
 
 	public BookmarksSettings(Settings settings) {
-		_typedSettings = new TypedSettings(settings);
+		super(settings, _fallbackKeys);
 	}
 
 	public LocalizedValuesMap getEmailEntryAddedBody() {
-		return _typedSettings.getLocalizedValuesMap("emailEntryAddedBody");
+		return typedSettings.getLocalizedValuesMap("emailEntryAddedBody");
 	}
 
 	public String getEmailEntryAddedBodyXml() {
@@ -41,11 +41,11 @@ public class BookmarksSettings {
 	}
 
 	public boolean getEmailEntryAddedEnabled() {
-		return _typedSettings.getBooleanValue("emailEntryAddedEnabled");
+		return typedSettings.getBooleanValue("emailEntryAddedEnabled");
 	}
 
 	public LocalizedValuesMap getEmailEntryAddedSubject() {
-		return _typedSettings.getLocalizedValuesMap("emailEntryAddedSubject");
+		return typedSettings.getLocalizedValuesMap("emailEntryAddedSubject");
 	}
 
 	public String getEmailEntryAddedSubjectXml() {
@@ -55,7 +55,7 @@ public class BookmarksSettings {
 	}
 
 	public LocalizedValuesMap getEmailEntryUpdatedBody() {
-		return _typedSettings.getLocalizedValuesMap("emailEntryUpdatedBody");
+		return typedSettings.getLocalizedValuesMap("emailEntryUpdatedBody");
 	}
 
 	public String getEmailEntryUpdatedBodyXml() {
@@ -65,11 +65,11 @@ public class BookmarksSettings {
 	}
 
 	public boolean getEmailEntryUpdatedEnabled() {
-		return _typedSettings.getBooleanValue("emailEntryUpdatedEnabled");
+		return typedSettings.getBooleanValue("emailEntryUpdatedEnabled");
 	}
 
 	public LocalizedValuesMap getEmailEntryUpdatedSubject() {
-		return _typedSettings.getLocalizedValuesMap("emailEntryUpdatedSubject");
+		return typedSettings.getLocalizedValuesMap("emailEntryUpdatedSubject");
 	}
 
 	public String getEmailEntryUpdatedSubjectXml() {
@@ -80,44 +80,44 @@ public class BookmarksSettings {
 	}
 
 	public String getEmailFromAddress() {
-		return _typedSettings.getValue("emailFromAddress");
+		return typedSettings.getValue("emailFromAddress");
 	}
 
 	public String getEmailFromName() {
-		return _typedSettings.getValue("emailFromName");
+		return typedSettings.getValue("emailFromName");
 	}
 
 	public boolean getEnableRelatedAssets() {
-		return _typedSettings.getBooleanValue("enableRelatedAssets");
+		return typedSettings.getBooleanValue("enableRelatedAssets");
 	}
 
 	public int getEntriesPerPage() {
-		return _typedSettings.getIntegerValue("entriesPerPage");
+		return typedSettings.getIntegerValue("entriesPerPage");
 	}
 
 	public String[] getEntryColumns() {
-		return _typedSettings.getValues("entryColumns");
+		return typedSettings.getValues("entryColumns");
 	}
 
 	public String[] getFolderColumns() {
-		return _typedSettings.getValues("folderColumns");
+		return typedSettings.getValues("folderColumns");
 	}
 
 	public int getFoldersPerPage() {
-		return _typedSettings.getIntegerValue("foldersPerPage");
+		return typedSettings.getIntegerValue("foldersPerPage");
 	}
 
 	public long getRootFolderId() {
-		return _typedSettings.getLongValue(
+		return typedSettings.getLongValue(
 			"rootFolderId", BookmarksFolderConstants.DEFAULT_PARENT_FOLDER_ID);
 	}
 
 	public boolean getShowFoldersSearch() {
-		return _typedSettings.getBooleanValue("showFoldersSearch");
+		return typedSettings.getBooleanValue("showFoldersSearch");
 	}
 
 	public boolean getShowSubfolders() {
-		return _typedSettings.getBooleanValue("showSubfolders");
+		return typedSettings.getBooleanValue("showSubfolders");
 	}
 
 	private static FallbackKeys _fallbackKeys = new FallbackKeys();
@@ -159,7 +159,5 @@ public class BookmarksSettings {
 		_fallbackKeys.add(
 			"showSubfolders", PropsKeys.BOOKMARKS_SUBFOLDERS_VISIBLE);
 	}
-
-	private TypedSettings _typedSettings;
 
 }

@@ -14,25 +14,25 @@
 
 package com.liferay.portlet.documentlibrary;
 
+import com.liferay.portal.kernel.settings.BaseServiceSettings;
 import com.liferay.portal.kernel.settings.FallbackKeys;
 import com.liferay.portal.kernel.settings.LocalizedValuesMap;
 import com.liferay.portal.kernel.settings.Settings;
-import com.liferay.portal.kernel.settings.TypedSettings;
 import com.liferay.portal.kernel.util.PropsKeys;
 
 /**
  * @author Adolfo Pérez
  */
-public class DLSettings {
+public class DLSettings extends BaseServiceSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
 	public DLSettings(Settings settings) {
-		_typedSettings = new TypedSettings(settings);
+		super(settings, _fallbackKeys);
 	}
 
 	public LocalizedValuesMap getEmailFileEntryAddedBody() {
-		return _typedSettings.getLocalizedValuesMap("emailFileEntryAddedBody");
+		return typedSettings.getLocalizedValuesMap("emailFileEntryAddedBody");
 	}
 
 	public String getEmailFileEntryAddedBodyXml() {
@@ -43,11 +43,11 @@ public class DLSettings {
 	}
 
 	public boolean getEmailFileEntryAddedEnabled() {
-		return _typedSettings.getBooleanValue("emailFileEntryAddedEnabled");
+		return typedSettings.getBooleanValue("emailFileEntryAddedEnabled");
 	}
 
 	public LocalizedValuesMap getEmailFileEntryAddedSubject() {
-		return _typedSettings.getLocalizedValuesMap(
+		return typedSettings.getLocalizedValuesMap(
 			"emailFileEntryAddedSubject");
 	}
 
@@ -59,8 +59,7 @@ public class DLSettings {
 	}
 
 	public LocalizedValuesMap getEmailFileEntryUpdatedBody() {
-		return _typedSettings.getLocalizedValuesMap(
-			"emailFileEntryUpdatedBody");
+		return typedSettings.getLocalizedValuesMap("emailFileEntryUpdatedBody");
 	}
 
 	public String getEmailFileEntryUpdatedBodyXml() {
@@ -71,11 +70,11 @@ public class DLSettings {
 	}
 
 	public boolean getEmailFileEntryUpdatedEnabled() {
-		return _typedSettings.getBooleanValue("emailFileEntryUpdatedEnabled");
+		return typedSettings.getBooleanValue("emailFileEntryUpdatedEnabled");
 	}
 
 	public LocalizedValuesMap getEmailFileEntryUpdatedSubject() {
-		return _typedSettings.getLocalizedValuesMap(
+		return typedSettings.getLocalizedValuesMap(
 			"emailFileEntryUpdatedSubject");
 	}
 
@@ -87,11 +86,11 @@ public class DLSettings {
 	}
 
 	public String getEmailFromAddress() {
-		return _typedSettings.getValue("emailFromAddress");
+		return typedSettings.getValue("emailFromAddress");
 	}
 
 	public String getEmailFromName() {
-		return _typedSettings.getValue("emailFromName");
+		return typedSettings.getValue("emailFromName");
 	}
 
 	private static FallbackKeys _fallbackKeys = new FallbackKeys();
@@ -140,7 +139,5 @@ public class DLSettings {
 			"showFoldersSearch", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
 		_fallbackKeys.add("showSubfolders", PropsKeys.DL_SUBFOLDERS_VISIBLE);
 	}
-
-	private TypedSettings _typedSettings;
 
 }
