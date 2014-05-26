@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.registry.impl;
+package com.liferay.registry.internal;
 
 import com.liferay.registry.Registry;
 import com.liferay.registry.RegistryUtil;

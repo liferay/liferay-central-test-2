@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.registry.impl;
+package com.liferay.registry.internal;
 
 import java.util.Collections;
 import java.util.Dictionary;

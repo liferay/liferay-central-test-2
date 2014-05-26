@@ -5,4 +5,4 @@ Import-Package:\
 	org.osgi.framework;version='[1.2.0,2.0.0)',\
 	org.osgi.util.tracker;version='[1.5.0,2.0.0)'
 Include-Resource: classes
-Private-Package: *
+Private-Package: *.internal.*

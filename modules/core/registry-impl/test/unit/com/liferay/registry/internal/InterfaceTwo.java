@@ -12,10 +12,10 @@
  * details.
  */
 
-package com.liferay.registry.impl;
+package com.liferay.registry.internal;
 
 /**
  * @author Raymond Augé
  */
-public class TrackedOne {
+public interface InterfaceTwo {
 }
