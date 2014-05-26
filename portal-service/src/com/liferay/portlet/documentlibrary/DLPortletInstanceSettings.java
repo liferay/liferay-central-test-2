@@ -53,7 +53,8 @@ public class DLPortletInstanceSettings {
 			PropsKeys.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
 		fallbackKeys.add(
 			"showFoldersSearch", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
-		fallbackKeys.add("showSubfolders", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
+		fallbackKeys.add(
+			"showSubfolders", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
 
 		return fallbackKeys;
 	}

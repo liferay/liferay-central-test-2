@@ -61,7 +61,8 @@ public class MBSettings {
 		fallbackKeys.add(
 			"emailMessageUpdatedSubject",
 			PropsKeys.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT);
-		fallbackKeys.add("enableFlags", PropsKeys.MESSAGE_BOARDS_FLAGS_ENABLED);
+		fallbackKeys.add(
+			"enableFlags", PropsKeys.MESSAGE_BOARDS_FLAGS_ENABLED);
 		fallbackKeys.add(
 			"enableRatings", PropsKeys.MESSAGE_BOARDS_RATINGS_ENABLED);
 		fallbackKeys.add("enableRss", PropsKeys.MESSAGE_BOARDS_RSS_ENABLED);
