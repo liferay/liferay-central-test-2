@@ -23,8 +23,6 @@
 
 <#assign showEditURL = paramUtil.getBoolean(renderRequest, "showEditURL", true) />
 
-<#assign namespace = renderResponse.getNamespace() />
-
 <#assign jsonArray = jsonFactoryUtil.createJSONArray() />
 
 <#list entries as entry>
@@ -57,32 +55,32 @@
 	</#list>
 </#list>
 
-<div class="map-canvas" id="${namespace}mapCanvas"></div>
+<div class="map-canvas" id="${renderResponse.getNamespace()}mapCanvas"></div>
 
 <#if mapsAPIProvider = "googleMaps" >
 	<style type="text/css">
-		#${namespace}assetEntryAbstract {
+		#${renderResponse.getNamespace()}assetEntryAbstract {
 			min-width: 400px;
 		}
 
-		#${namespace}assetEntryAbstract .asset-entry-abstract-image {
+		#${renderResponse.getNamespace()}assetEntryAbstract .asset-entry-abstract-image {
 			float: left;
 		}
 
-		#${namespace}assetEntryAbstract .asset-entry-abstract-image img {
+		#${renderResponse.getNamespace()}assetEntryAbstract .asset-entry-abstract-image img {
 			display: block;
 			margin-right: 2em;
 		}
 
-		#${namespace}assetEntryAbstract .taglib-icon {
+		#${renderResponse.getNamespace()}assetEntryAbstract .taglib-icon {
 			float: right;
 		}
 
-		#${namespace}mapCanvas {
+		#${renderResponse.getNamespace()}mapCanvas {
 			min-height: 400px;
 		}
 
-		#${namespace}mapCanvas img {
+		#${renderResponse.getNamespace()}mapCanvas img {
 			max-width: none;
 		}
 	</style>
@@ -147,7 +145,7 @@
 			};
 
 			var drawMap = function(mapOptions) {
-				var map = new google.maps.Map(document.getElementById('${namespace}mapCanvas'), mapOptions);
+				var map = new google.maps.Map(document.getElementById('${renderResponse.getNamespace()}mapCanvas'), mapOptions);
 
 				var bounds = putMarkers(map);
 
@@ -183,25 +181,25 @@
 
 <#if mapsAPIProvider = "openStreetMap">
 	<style type="text/css">
-		#${namespace}assetEntryAbstract {
+		#${renderResponse.getNamespace()}assetEntryAbstract {
 			min-width: 400px;
 			overflow: auto;
 		}
 
-		#${namespace}assetEntryAbstract .asset-entry-abstract-image {
+		#${renderResponse.getNamespace()}assetEntryAbstract .asset-entry-abstract-image {
 			float: left;
 			margin-right: 2em;
 		}
 
-		#${namespace}assetEntryAbstract .asset-entry-abstract-image img {
+		#${renderResponse.getNamespace()}assetEntryAbstract .asset-entry-abstract-image img {
 			display: block;
 		}
 
-		#${namespace}assetEntryAbstract .taglib-icon {
+		#${renderResponse.getNamespace()}assetEntryAbstract .taglib-icon {
 			float: right;
 		}
 
-		#${namespace}mapCanvas {
+		#${renderResponse.getNamespace()}mapCanvas {
 			min-height: 400px;
 		}
 	</style>
@@ -249,7 +247,7 @@
 			};
 
 			var drawMap = function(lat, lng) {
-				var map = L.map('${namespace}mapCanvas').setView([lat, lng], 8);
+				var map = L.map('${renderResponse.getNamespace()}mapCanvas').setView([lat, lng], 8);
 
 				var bounds = putMarkers(map);
 
@@ -274,7 +272,7 @@
 
 	${redirectURL.setParameter("struts_action", "/asset_publisher/add_asset_redirect")}
 
-	<div class="asset-entry-abstract" id="${namespace}assetEntryAbstract">
+	<div class="asset-entry-abstract" id="${renderResponse.getNamespace()}assetEntryAbstract">
 		<#assign editPortletURL = assetRenderer.getURLEdit(renderRequest, renderResponse, windowStateFactory.getWindowState("POP_UP"), redirectURL) />
 
 		<#assign taglibEditURL = "javascript:Liferay.Util.openWindow({id: '" + renderResponse.getNamespace() + "editAsset', title: '" + htmlUtil.escapeJS(languageUtil.format(locale, "edit-x", htmlUtil.escape(assetRenderer.getTitle(locale)), false)) + "', uri:'" + htmlUtil.escapeJS(editPortletURL.toString()) + "'});" />
