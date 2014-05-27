@@ -53,12 +53,15 @@ public class ExpressionEvaluationTest {
 		double var1 = 5.5;
 
 		expression.setDoubleVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Double.class, "var1 + 3");
+
 		expression.setExpressionStringVariableValue(
 			"var3", Double.class, "var2 + var1");
 
 		double var2 = var1 + 3;
+
 		double var3 = var1 + var2;
 
 		double expected = var1 + var2 + var3;
@@ -96,12 +99,15 @@ public class ExpressionEvaluationTest {
 		float var1 = 5.5f;
 
 		expression.setFloatVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Float.class, "var1 + 3");
+
 		expression.setExpressionStringVariableValue(
 			"var3", Float.class, "var2 + var1");
 
 		float var2 = var1 + 3;
+
 		float var3 = var1 + var2;
 
 		float expected = var1 + var2 + var3;
@@ -128,12 +134,15 @@ public class ExpressionEvaluationTest {
 		int var1 = 5;
 
 		expression.setIntegerVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Integer.class, "var1 + 3");
+
 		expression.setExpressionStringVariableValue(
 			"var3", Integer.class, "var2 + var1");
 
 		int var2 = var1 + 3;
+
 		int var3 = var1 + var2;
 
 		int actual = expression.evaluate();
@@ -151,12 +160,15 @@ public class ExpressionEvaluationTest {
 		long var1 = 5l;
 
 		expression.setLongVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Long.class, "var1 + 3");
+
 		expression.setExpressionStringVariableValue(
 			"var3", long.class, "var2 + var1");
 
 		long var2 = var1 + 3;
+
 		long var3 = var1 + var2;
 
 		long actual = expression.evaluate();
@@ -197,12 +209,15 @@ public class ExpressionEvaluationTest {
 		double var1 = 5.5;
 
 		expression.setDoubleVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Double.class, "var1 + 3.5");
+
 		expression.setExpressionStringVariableValue(
 			"var3", Double.class, "var2 + var1");
 
 		double var2 = var1 + 3.5;
+
 		double var3 = var1 + var2;
 
 		double actual = expression.evaluate();
@@ -220,12 +235,15 @@ public class ExpressionEvaluationTest {
 		long var1 = 5;
 
 		expression.setLongVariableValue("var1", var1);
+
 		expression.setExpressionStringVariableValue(
 			"var2", Long.class, "var1 + 3");
+
 		expression.setExpressionStringVariableValue(
 			"var3", Long.class, "var2 + var1");
 
 		long var2 = var1 + 3;
+
 		long var3 = var1 + var2;
 
 		long actual = expression.evaluate();
