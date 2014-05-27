@@ -5788,8 +5788,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkStructure(
-			Document contentDocument, Element rootElement)
+	protected void checkStructure(Document contentDocument, Element rootElement)
 		throws PortalException {
 
 		for (Element element : rootElement.elements()) {
@@ -5817,7 +5816,7 @@ public class JournalArticleLocalServiceImpl
 		catch (StructureXsdException sxsde) {
 			if (_log.isWarnEnabled()) {
 				StringBundler sb = new StringBundler(8);
-				
+
 				sb.append("Article {groupId=");
 				sb.append(article.getGroupId());
 				sb.append(", articleId=");
