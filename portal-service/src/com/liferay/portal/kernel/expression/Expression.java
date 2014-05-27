@@ -32,7 +32,7 @@ public interface Expression<T> {
 		String variableName, Double variableValue);
 
 	public void setExpressionStringVariableValue(
-		String variableName, Class<?> variableType, String variableValue);
+		String variableName, String variableValue, Class<?> variableClass);
 
 	public void setFloatVariableValue(String variableName, Float variableValue);
 
@@ -45,6 +45,6 @@ public interface Expression<T> {
 		String variableName, String variableValue);
 
 	public void setVariableValue(
-		String variableName, Class<?> variableType, Object variableValue);
+		String variableName, Object variableValue, Class<?> variableClass);
 
 }

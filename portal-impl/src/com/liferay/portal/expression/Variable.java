@@ -27,8 +27,8 @@ public class Variable {
 		return _name;
 	}
 
-	public Class<?> getType() {
-		return _type;
+	public Class<?> getVariableClass() {
+		return _variableClass;
 	}
 
 	public Object getValue() {
@@ -43,8 +43,8 @@ public class Variable {
 		_name = name;
 	}
 
-	public void setType(Class<?> type) {
-		_type = type;
+	public void setVariableClass(Class<?> variableClass) {
+		_variableClass = variableClass;
 	}
 
 	public void setValue(Object value) {
@@ -56,7 +56,7 @@ public class Variable {
 	}
 
 	private String _name;
-	private Class<?> _type;
+	private Class<?> _variableClass;
 	private Object _value;
 	private String _expressionString;
 

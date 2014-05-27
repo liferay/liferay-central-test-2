@@ -32,9 +32,9 @@ import org.codehaus.janino.ExpressionEvaluator;
  */
 public class ExpressionImpl<T> implements Expression<T> {
 
-	public ExpressionImpl(String expressionString, Class<T> expressionType) {
+	public ExpressionImpl(String expressionString, Class<T> expressionClass) {
 		_expressionString = expressionString;
-		_expressionType = expressionType;
+		_expressionClass = expressionClass;
 
 		List<String> variableNames = _variableNamesExtractor.extract(
 			expressionString);
@@ -51,10 +51,10 @@ public class ExpressionImpl<T> implements Expression<T> {
 		try {
 			ExpressionEvaluator expressionEvaluator = new ExpressionEvaluator();
 
-			expressionEvaluator.setExpressionType(_expressionType);
+			expressionEvaluator.setExpressionType(_expressionClass);
 			expressionEvaluator.setExtendedClass(MathUtil.class);
 			expressionEvaluator.setParameters(
-				getVariableNames(), getVariableTypes());
+				getVariableNames(), getVariableClasses());
 
 			expressionEvaluator.cook(_expressionString);
 
@@ -81,19 +81,19 @@ public class ExpressionImpl<T> implements Expression<T> {
 	public void setBooleanVariableValue(
 		String variableName, Boolean variableValue) {
 
-		setVariableValue(variableName, Boolean.class, variableValue);
+		setVariableValue(variableName, variableValue, Boolean.class);
 	}
 
 	@Override
 	public void setDoubleVariableValue(
 		String variableName, Double variableValue) {
 
-		setVariableValue(variableName, Double.class, variableValue);
+		setVariableValue(variableName, variableValue, Double.class);
 	}
 
 	@Override
 	public void setExpressionStringVariableValue(
-		String variableName, Class<?> variableType, String variableValue) {
+		String variableName, String variableValue, Class<?> variableClass) {
 
 		Variable variable = _variables.get(variableName);
 
@@ -101,39 +101,39 @@ public class ExpressionImpl<T> implements Expression<T> {
 			return;
 		}
 
-		variable.setType(variableType);
 		variable.setExpressionString(variableValue);
+		variable.setVariableClass(variableClass);
 	}
 
 	@Override
 	public void setFloatVariableValue(
 		String variableName, Float variableValue) {
 
-		setVariableValue(variableName, Float.class, variableValue);
+		setVariableValue(variableName, variableValue, Float.class);
 	}
 
 	@Override
 	public void setIntegerVariableValue(
 		String variableName, Integer variableValue) {
 
-		setVariableValue(variableName, Integer.class, variableValue);
+		setVariableValue(variableName, variableValue, Integer.class);
 	}
 
 	@Override
 	public void setLongVariableValue(String variableName, Long variableValue) {
-		setVariableValue(variableName, Long.class, variableValue);
+		setVariableValue(variableName, variableValue, Long.class);
 	}
 
 	@Override
 	public void setStringVariableValue(
 		String variableName, String variableValue) {
 
-		setVariableValue(variableName, String.class, variableValue);
+		setVariableValue(variableName, variableValue, String.class);
 	}
 
 	@Override
 	public void setVariableValue(
-		String variableName, Class<?> variableType, Object variableValue) {
+		String variableName, Object variableValue, Class<?> variableType) {
 
 		Variable variable = _variables.get(variableName);
 
@@ -141,8 +141,8 @@ public class ExpressionImpl<T> implements Expression<T> {
 			return;
 		}
 
-		variable.setType(variableType);
 		variable.setValue(variableValue);
+		variable.setVariableClass(variableType);
 	}
 
 	protected <V> Expression<V> getExpression(
@@ -159,7 +159,8 @@ public class ExpressionImpl<T> implements Expression<T> {
 			Variable variable = _variables.get(variableName);
 
 			expression.setVariableValue(
-				variableName, variable.getType(), getVariableValue(variable));
+				variableName, getVariableValue(variable),
+				variable.getVariableClass());
 		}
 
 		return expression;
@@ -175,14 +176,14 @@ public class ExpressionImpl<T> implements Expression<T> {
 		return variableNames.toArray(new String[variableNames.size()]);
 	}
 
-	protected Class<?>[] getVariableTypes() {
-		List<Class<?>> variableTypes = new ArrayList<Class<?>>();
+	protected Class<?>[] getVariableClasses() {
+		List<Class<?>> variableClasses = new ArrayList<Class<?>>();
 
 		for (Variable variable : _variables.values()) {
-			variableTypes.add(variable.getType());
+			variableClasses.add(variable.getVariableClass());
 		}
 
-		return variableTypes.toArray(new Class<?>[variableTypes.size()]);
+		return variableClasses.toArray(new Class<?>[variableClasses.size()]);
 	}
 
 	protected Object getVariableValue(Variable variable)
@@ -215,7 +216,7 @@ public class ExpressionImpl<T> implements Expression<T> {
 		}
 
 		Expression<?> expression = getExpression(
-			variable.getExpressionString(), variable.getType());
+			variable.getExpressionString(), variable.getVariableClass());
 
 		return expression;
 	}
@@ -272,7 +273,7 @@ public class ExpressionImpl<T> implements Expression<T> {
 	private Map<String, Object> _variableValues =
 		new HashMap<String, Object>();
 	private String _expressionString;
-	private Class<?> _expressionType;
+	private Class<?> _expressionClass;
 	private VariableNamesExtractor _variableNamesExtractor =
 		new VariableNamesExtractor();
 	private Map<String, Variable> _variables =
