@@ -166,14 +166,17 @@ public class ExpressionImpl<T> implements Expression<T> {
 		return expression;
 	}
 
-	protected String[] getVariableNames() {
-		List<String> variableNames = new ArrayList<String>();
+	protected Expression<?> getExpression(Variable variable)
+		throws ExpressionEvaluationException {
 
-		for (Variable variable : _variables.values()) {
-			variableNames.add(variable.getName());
+		if (variable.getExpressionString() == null) {
+			return null;
 		}
 
-		return variableNames.toArray(new String[variableNames.size()]);
+		Expression<?> expression = getExpression(
+			variable.getExpressionString(), variable.getVariableClass());
+
+		return expression;
 	}
 
 	protected Class<?>[] getVariableClasses() {
@@ -184,6 +187,16 @@ public class ExpressionImpl<T> implements Expression<T> {
 		}
 
 		return variableClasses.toArray(new Class<?>[variableClasses.size()]);
+	}
+
+	protected String[] getVariableNames() {
+		List<String> variableNames = new ArrayList<String>();
+
+		for (Variable variable : _variables.values()) {
+			variableNames.add(variable.getName());
+		}
+
+		return variableNames.toArray(new String[variableNames.size()]);
 	}
 
 	protected Object getVariableValue(Variable variable)
@@ -206,19 +219,6 @@ public class ExpressionImpl<T> implements Expression<T> {
 		_variableValues.put(variable.getName(), variableValue);
 
 		return variableValue;
-	}
-
-	protected Expression<?> getExpression(Variable variable)
-		throws ExpressionEvaluationException {
-
-		if (variable.getExpressionString() == null) {
-			return null;
-		}
-
-		Expression<?> expression = getExpression(
-			variable.getExpressionString(), variable.getVariableClass());
-
-		return expression;
 	}
 
 	protected Object[] getVariableValues()
@@ -255,8 +255,7 @@ public class ExpressionImpl<T> implements Expression<T> {
 			for (String variableName : variableNames) {
 				VariableDependencies variableVariableDependencies =
 					populateVariableDependenciesMap(
-						_variables.get(variableName),
-						variableDependenciesMap);
+						_variables.get(variableName), variableDependenciesMap);
 
 				variableVariableDependencies.addAffectedVariable(
 					variableDependencies.getVariableName());
@@ -270,13 +269,11 @@ public class ExpressionImpl<T> implements Expression<T> {
 		return variableDependencies;
 	}
 
-	private Map<String, Object> _variableValues =
-		new HashMap<String, Object>();
-	private String _expressionString;
 	private Class<?> _expressionClass;
+	private String _expressionString;
 	private VariableNamesExtractor _variableNamesExtractor =
 		new VariableNamesExtractor();
-	private Map<String, Variable> _variables =
-		new TreeMap<String, Variable>();
+	private Map<String, Variable> _variables = new TreeMap<String, Variable>();
+	private Map<String, Object> _variableValues = new HashMap<String, Object>();
 
 }

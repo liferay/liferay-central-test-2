@@ -23,41 +23,41 @@ public class Variable {
 		_name = name;
 	}
 
-	public String getName() {
-		return _name;
+	public String getExpressionString() {
+		return _expressionString;
 	}
 
-	public Class<?> getVariableClass() {
-		return _variableClass;
+	public String getName() {
+		return _name;
 	}
 
 	public Object getValue() {
 		return _value;
 	}
 
-	public String getExpressionString() {
-		return _expressionString;
-	}
-
-	public void setName(String name) {
-		_name = name;
-	}
-
-	public void setVariableClass(Class<?> variableClass) {
-		_variableClass = variableClass;
-	}
-
-	public void setValue(Object value) {
-		_value = value;
+	public Class<?> getVariableClass() {
+		return _variableClass;
 	}
 
 	public void setExpressionString(String expressionString) {
 		_expressionString = expressionString;
 	}
 
-	private String _name;
-	private Class<?> _variableClass;
-	private Object _value;
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setValue(Object value) {
+		_value = value;
+	}
+
+	public void setVariableClass(Class<?> variableClass) {
+		_variableClass = variableClass;
+	}
+
 	private String _expressionString;
+	private String _name;
+	private Object _value;
+	private Class<?> _variableClass;
 
 }
