@@ -128,8 +128,7 @@ public class JournalArticleServiceTest {
 			"test-journal-content-html-required-field.xml", requiredFields);
 	}
 
-	@Test(expected = StructureXsdException.class)
-	public void testCheckArticleMatchesStructureFail() throws Exception {
+	public void testCheckArticleWithInvalidStructure() throws Exception {
 		DDMStructure ddmStructure = DDMStructureTestUtil.addStructure(
 			JournalArticle.class.getName());
 
@@ -146,7 +145,7 @@ public class JournalArticleServiceTest {
 	}
 
 	@Test
-	public void testCheckArticleMatchesStructureSuccess() throws Exception {
+	public void testCheckArticleWithValidStructure() throws Exception {
 		Group group = GroupTestUtil.addGroup();
 
 		JournalFolder parentFolder = JournalTestUtil.addFolder(
@@ -155,11 +154,11 @@ public class JournalArticleServiceTest {
 		JournalArticle article = JournalTestUtil.addArticle(
 			group.getGroupId(), parentFolder.getFolderId(), "title", "content");
 
-		long classId = ClassNameServiceUtil.fetchClassNameId(
+		long classNameId = ClassNameServiceUtil.fetchClassNameId(
 			JournalArticle.class);
 
 		DDMStructure ddmStructure = DDMStructureServiceUtil.getStructure(
-			group.getGroupId(), classId, article.getStructureId());
+			group.getGroupId(), classNameId, article.getStructureId());
 
 		checkArticleMatchesStructure(article, ddmStructure);
 	}
