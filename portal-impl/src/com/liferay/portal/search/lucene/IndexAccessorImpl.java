@@ -242,14 +242,12 @@ public class IndexAccessorImpl implements IndexAccessor {
 
 		IndexReader indexReader = IndexReader.open(tempDirectory, false);
 
-		int numDocs = indexReader.numDocs();
-
-		if (numDocs > 0) {
+		if (indexReader.numDocs() > 0) {
 			IndexSearcher indexSearcher = new IndexSearcher(indexReader);
 
 			try {
 				TopDocs topDocs = indexSearcher.search(
-					new MatchAllDocsQuery(), numDocs);
+					new MatchAllDocsQuery(), indexReader.numDocs());
 
 				ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 
