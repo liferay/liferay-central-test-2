@@ -66,7 +66,7 @@ public class ExpressionEvaluationTest {
 
 		double expected = var1 + var2 + var3;
 
-		Assert.assertEquals(expression.evaluate(), expected);
+		Assert.assertEquals(expected, expression.evaluate());
 	}
 
 	@Test
@@ -112,7 +112,7 @@ public class ExpressionEvaluationTest {
 
 		float expected = var1 + var2 + var3;
 
-		Assert.assertEquals(expression.evaluate(), expected);
+		Assert.assertEquals(expected, expression.evaluate());
 	}
 
 	@Test
@@ -149,7 +149,7 @@ public class ExpressionEvaluationTest {
 
 		int expected = var1 + var2 + var3;
 
-		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
@@ -175,7 +175,7 @@ public class ExpressionEvaluationTest {
 
 		long expected = var1 + var2 + var3;
 
-		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test(expected = ExpressionEvaluationException.class)
@@ -197,7 +197,7 @@ public class ExpressionEvaluationTest {
 		expression.setStringVariableValue("var1", "Life");
 		expression.setStringVariableValue("var2", "ray");
 
-		Assert.assertEquals(expression.evaluate(), "Liferay");
+		Assert.assertEquals("Liferay", expression.evaluate());
 	}
 
 	@Test
@@ -224,7 +224,7 @@ public class ExpressionEvaluationTest {
 
 		double expected = MathUtil.sum(var1, var2, var3);
 
-		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(expected, actual);
 	}
 
 	@Test
@@ -250,7 +250,7 @@ public class ExpressionEvaluationTest {
 
 		long expected = MathUtil.sum(var1, var2, var3);
 
-		Assert.assertEquals(actual, expected);
+		Assert.assertEquals(expected, actual);
 	}
 
 	protected void setUpExpressionFactory() {
