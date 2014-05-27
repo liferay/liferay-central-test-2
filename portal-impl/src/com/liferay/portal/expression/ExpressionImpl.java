@@ -248,8 +248,6 @@ public class ExpressionImpl<T> implements Expression<T> {
 
 		variableDependencies = new VariableDependencies(variable.getName());
 
-		variableDependenciesMap.put(variable.getName(), variableDependencies);
-
 		if (variable.getExpressionString() != null) {
 			List<String> variableNames = _variableNamesExtractor.extract(
 				variable.getExpressionString());
@@ -266,6 +264,8 @@ public class ExpressionImpl<T> implements Expression<T> {
 					variableVariableDependencies.getVariableName());
 			}
 		}
+
+		variableDependenciesMap.put(variable.getName(), variableDependencies);
 
 		return variableDependencies;
 	}
