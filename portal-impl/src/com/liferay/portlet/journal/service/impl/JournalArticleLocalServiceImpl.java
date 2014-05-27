@@ -5814,16 +5814,19 @@ public class JournalArticleLocalServiceImpl
 			throw new SystemException(de);
 		}
 		catch (StructureXsdException sxsde) {
-			long groupId = article.getGroupId();
-			String articleId = article.getArticleId();
-			double version = article.getVersion();
-
 			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Article {groupId=" + groupId + ", articleId=" +
-						articleId + ", version=" + version +
-							"} has content that does not match its " +
-								"structure: " + sxsde.getMessage());
+				StringBundler sb = new StringBundler(8);
+				
+				sb.append("Article {groupId=");
+				sb.append(article.getGroupId());
+				sb.append(", articleId=");
+				sb.append(article.getArticleId());
+				sb.append(", version=");
+				sb.append(article.getVersion());
+				sb.append("} has content that does not match its structure: ");
+				sb.append(sxsde.getMessage());
+
+				_log.warn(sb.toString());
 			}
 		}
 	}
