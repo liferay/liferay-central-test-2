@@ -750,6 +750,12 @@ public class PortletTracker
 		}
 	}
 
+	protected Object get(
+		ServiceReference<Portlet> serviceReference, String property) {
+	
+		return serviceReference.getProperty(_NAMESPACE + property);
+	}
+
 	@Reference
 	protected void setCompanyLocalService(
 		CompanyLocalService companyLocalService) {
@@ -830,12 +836,6 @@ public class PortletTracker
 
 	protected void unsetServletContext(ServletContext servletContext) {
 		_servletContext = null;
-	}
-
-	protected Object get(
-		ServiceReference<Portlet> serviceReference, String property) {
-
-		return serviceReference.getProperty(_NAMESPACE + property);
 	}
 
 	private static final String _NAMESPACE = "com.liferay.portal.portlet.";
