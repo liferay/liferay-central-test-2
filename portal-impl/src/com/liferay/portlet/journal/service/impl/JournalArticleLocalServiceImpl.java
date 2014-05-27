@@ -5788,16 +5788,17 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected void checkStructure(Document contentDocument, Element root)
+	protected void checkStructure(
+			Document contentDocument, Element rootElement)
 		throws PortalException {
 
-		for (Element el : root.elements()) {
-			String name = el.getName();
+		for (Element element : rootElement.elements()) {
+			String name = element.getName();
 
 			if (name.equals("dynamic-element")) {
-				checkStructureField(el, contentDocument);
+				checkStructureField(element, contentDocument);
 
-				checkStructure(contentDocument, el);
+				checkStructure(contentDocument, element);
 			}
 		}
 	}
