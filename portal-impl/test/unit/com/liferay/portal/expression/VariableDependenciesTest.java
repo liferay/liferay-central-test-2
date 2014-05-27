@@ -51,14 +51,14 @@ public class VariableDependenciesTest {
 
 		VariableDependencies var1VariableDependencies =
 			variableDependenciesMap.get("var1");
-			
+
 		Assert.assertTrue(
 			hasAffectedVariableName(var1VariableDependencies, "var2"));
 		Assert.assertTrue(
 			hasAffectedVariableName(var1VariableDependencies, "var3"));
 
 		List<String> var1RequiredVariableNames =
-			var1VariableDependencies.getRequiredVariableNames(); 
+			var1VariableDependencies.getRequiredVariableNames();
 
 		Assert.assertTrue(var1RequiredVariableNames.isEmpty());
 

@@ -78,17 +78,6 @@ public class ExpressionEvaluationTest {
 		Assert.assertFalse(expression.evaluate());
 	}
 
-	@Test(expected = ExpressionEvaluationException.class)
-	public void testEvaluateInvalidExpression() throws Exception {
-		Expression<Boolean> expression =
-			ExpressionFactoryUtil.createBooleanExpression("var1 >=+P var2");
-
-		expression.setIntegerVariableValue("var1", 5);
-		expression.setIntegerVariableValue("var2", 6);
-
-		Assert.assertFalse(expression.evaluate());
-	}
-
 	@Test
 	public void testEvaluateFloatExpression() throws Exception {
 		Expression<Float> expression =
@@ -142,6 +131,17 @@ public class ExpressionEvaluationTest {
 		int var3 = var1 + var2;
 
 		Assert.assertEquals(var1 + var2 + var3, (int)expression.evaluate());
+	}
+
+	@Test(expected = ExpressionEvaluationException.class)
+	public void testEvaluateInvalidExpression() throws Exception {
+		Expression<Boolean> expression =
+			ExpressionFactoryUtil.createBooleanExpression("var1 >=+P var2");
+
+		expression.setIntegerVariableValue("var1", 5);
+		expression.setIntegerVariableValue("var2", 6);
+
+		Assert.assertFalse(expression.evaluate());
 	}
 
 	@Test

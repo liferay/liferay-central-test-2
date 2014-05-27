@@ -33,7 +33,7 @@ public class VariableDependencies {
 	public void addRequiredVariable(String variableName) {
 		_requiredVariableNames.add(variableName);
 	}
-	
+
 	public List<String> getAffectedVariableNames() {
 		return _affectedVariableNames;
 	}
