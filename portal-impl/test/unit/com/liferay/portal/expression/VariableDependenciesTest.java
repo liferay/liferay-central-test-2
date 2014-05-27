@@ -32,7 +32,7 @@ public class VariableDependenciesTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setupExpressionFactory();
+		setUpExpressionFactory();
 	}
 
 	@Test
@@ -46,53 +46,55 @@ public class VariableDependenciesTest {
 		expression.setExpressionStringVariableValue(
 			"var3", Long.class, "var2 + var1");
 
-		Map<String, VariableDependencies> dependenciesMap =
+		Map<String, VariableDependencies> variableDependenciesMap =
 			expression.getVariableDependenciesMap();
 
-		VariableDependencies var1Dependencies = dependenciesMap.get("var1");
+		VariableDependencies var1VariableDependencies =
+			variableDependenciesMap.get("var1");
 
 		Assert.assertTrue(
-			var1Dependencies.getRequiredVariableNames().isEmpty());
+			var1VariableDependencies.getRequiredVariableNames().isEmpty());
 
-		Assert.assertTrue(affectedVariablesContains(var1Dependencies, "var2"));
+		Assert.assertTrue(hasAffectedVariableName(var1VariableDependencies, "var2"));
 
-		Assert.assertTrue(affectedVariablesContains(var1Dependencies, "var3"));
+		Assert.assertTrue(hasAffectedVariableName(var1VariableDependencies, "var3"));
 
-		VariableDependencies var2Dependencies = dependenciesMap.get("var2");
+		VariableDependencies var2VariableDependencies = variableDependenciesMap.get("var2");
 
-		Assert.assertTrue(requiredVariablesContains(var2Dependencies, "var1"));
+		Assert.assertTrue(hasRequiredVariableName(var2VariableDependencies, "var1"));
 
-		Assert.assertTrue(affectedVariablesContains(var2Dependencies, "var3"));
+		Assert.assertTrue(hasAffectedVariableName(var2VariableDependencies, "var3"));
 
-		VariableDependencies var3Dependencies = dependenciesMap.get( "var3");
+		VariableDependencies var3VariableDependencies = variableDependenciesMap.get(
+			"var3");
 
-		Assert.assertTrue(requiredVariablesContains(var3Dependencies, "var1"));
+		Assert.assertTrue(hasRequiredVariableName(var3VariableDependencies, "var1"));
 
-		Assert.assertTrue(requiredVariablesContains(var3Dependencies, "var2"));
+		Assert.assertTrue(hasRequiredVariableName(var3VariableDependencies, "var2"));
 
 		Assert.assertTrue(
-			var3Dependencies.getAffectedVariableNames().isEmpty());
+			var3VariableDependencies.getAffectedVariableNames().isEmpty());
 	}
 
-	protected boolean affectedVariablesContains(
-		VariableDependencies varDependencies, String varName) {
+	protected boolean hasAffectedVariableName(
+		VariableDependencies variableDependencies, String variableName) {
 
 		List<String> affectedVariableNames =
-			varDependencies.getAffectedVariableNames();
+			variableDependencies.getAffectedVariableNames();
 
-		return affectedVariableNames.contains(varName);
+		return affectedVariableNames.contains(variableName);
 	}
 
-	protected boolean requiredVariablesContains(
-		VariableDependencies varDependencies, String varName) {
+	protected boolean hasRequiredVariableName(
+		VariableDependencies variableDependencies, String variableName) {
 
 		List<String> requiredVariableNames =
-			varDependencies.getRequiredVariableNames();
+			variableDependencies.getRequiredVariableNames();
 
-		return requiredVariableNames.contains(varName);
+		return requiredVariableNames.contains(variableName);
 	}
 
-	protected void setupExpressionFactory() {
+	protected void setUpExpressionFactory() {
 		ExpressionFactoryUtil expressionFactoryUtil =
 			new ExpressionFactoryUtil();
 
