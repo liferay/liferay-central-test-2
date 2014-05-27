@@ -35,8 +35,8 @@ public class Variable {
 		return _value;
 	}
 
-	public String getValueExpressionString() {
-		return _valueExpressionString;
+	public String getExpressionString() {
+		return _expressionString;
 	}
 
 	public void setName(String name) {
@@ -51,13 +51,13 @@ public class Variable {
 		_value = value;
 	}
 
-	public void setValueExpressionString(String valueExpressionString) {
-		_valueExpressionString = valueExpressionString;
+	public void setExpressionString(String expressionString) {
+		_expressionString = expressionString;
 	}
 
 	private String _name;
 	private Class<?> _type;
 	private Object _value;
-	private String _valueExpressionString;
+	private String _expressionString;
 
 }
