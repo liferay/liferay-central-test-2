@@ -656,6 +656,7 @@ public class PortletTracker
 		Set<String> unlinkedRoles = new HashSet<String>(roleRefs);
 
 		portletModel.setUnlinkedRoles(unlinkedRoles);
+
 		portletModel.linkRoles();
 	}
 
