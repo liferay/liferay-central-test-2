@@ -33,7 +33,6 @@ public class VariableNamesExtractorTest {
 			expressionString);
 
 		Assert.assertEquals(variableNames.size(), 4);
-
 		Assert.assertEquals("a", variableNames.get(0));
 		Assert.assertEquals("b", variableNames.get(1));
 		Assert.assertEquals("variable_3", variableNames.get(2));
