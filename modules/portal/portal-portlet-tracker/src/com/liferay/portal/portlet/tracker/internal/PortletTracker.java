@@ -206,7 +206,7 @@ public class PortletTracker
 			_log.info("Activated");
 		}
 	}
-
+	
 	protected void addingPortlet(
 			ServiceReference<Portlet> serviceReference, Portlet portlet,
 			String portletName, String portletId)
@@ -227,19 +227,7 @@ public class PortletTracker
 
 		portletModel.setPortletClass(portletClazz.getName());
 
-		// javax.portlet features
-
-		collectCacheScope(serviceReference, portletModel);
-		collectExpirationCache(serviceReference, portletModel);
-		collectInitParams(serviceReference, portletModel);
-		collectPortletInfo(serviceReference, portletModel);
-		collectPortletModes(serviceReference, portletModel);
-		collectPortletPreferences(serviceReference, portletModel);
-		collectSecurityRoleRefs(serviceReference, portletModel);
-		collectWindowStates(serviceReference, portletModel);
-
-		// Liferay features
-
+		collectJxPortletFeatures(serviceReference, portletModel);
 		collectLiferayFeatures(serviceReference, portletModel);
 
 		Bundle bundle = serviceReference.getBundle();
@@ -359,6 +347,20 @@ public class PortletTracker
 		}
 
 		portletModel.setInitParams(initParams);
+	}
+
+	protected void collectJxPortletFeatures(
+		ServiceReference<Portlet> serviceReference,
+		com.liferay.portal.model.Portlet portletModel) {
+	
+		collectCacheScope(serviceReference, portletModel);
+		collectExpirationCache(serviceReference, portletModel);
+		collectInitParams(serviceReference, portletModel);
+		collectPortletInfo(serviceReference, portletModel);
+		collectPortletModes(serviceReference, portletModel);
+		collectPortletPreferences(serviceReference, portletModel);
+		collectSecurityRoleRefs(serviceReference, portletModel);
+		collectWindowStates(serviceReference, portletModel);
 	}
 
 	protected void collectLiferayFeatures(
