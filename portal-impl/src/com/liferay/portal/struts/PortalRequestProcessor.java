@@ -69,10 +69,11 @@ import com.liferay.portlet.RenderResponseImpl;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.portlet.PortletConfig;
@@ -845,32 +846,30 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return;
 		}
 
-		// LPS-46552
-
 		boolean hasIgnoredParameter = false;
 
-		Set<Map.Entry<String, String[]>> originalParameters =
-			request.getParameterMap().entrySet();
+		Map<String, String[]> oldParameterMap = request.getParameterMap();
 
-		Map<String, String[]> validParameters = new HashMap<String, String[]>(
-			originalParameters.size());
+		Map<String, String[]> newParameterMap =
+			new LinkedHashMap<String, String[]>(oldParameterMap.size());
 
-		for (Map.Entry<String, String[]> entry : originalParameters) {
-			String parameterName = entry.getKey();
+		for (Map.Entry<String, String[]> entry : oldParameterMap.entrySet()) {
+			String name = entry.getKey();
 
-			if (_STRUTS_PORTLET_IGNORED_PARAMETERS_REGEXP.matcher(
-					parameterName).matches()) {
+			Matcher matcher = _strutsPortletIgnoredParamtersPattern.matcher(
+				name);
 
+			if (matcher.matches()) {
 				hasIgnoredParameter = true;
 			}
 			else {
-				validParameters.put(parameterName, entry.getValue());
+				newParameterMap.put(name, entry.getValue());
 			}
 		}
 
 		if (hasIgnoredParameter) {
 			request = new DynamicServletRequest(
-				request, validParameters, false);
+				request, newParameterMap, false);
 		}
 
 		super.processPopulate(request, response, actionForm, actionMapping);
@@ -1039,11 +1038,11 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static final String _PATH_PORTAL_VERIFY_EMAIL_ADDRESS =
 		"/portal/verify_email_address";
 
-	private static final Pattern _STRUTS_PORTLET_IGNORED_PARAMETERS_REGEXP =
-		Pattern.compile(PropsValues.STRUTS_PORTLET_IGNORED_PARAMETERS_REGEXP);
-
 	private static Log _log = LogFactoryUtil.getLog(
 		PortalRequestProcessor.class);
+
+	private static Pattern _strutsPortletIgnoredParamtersPattern =
+		Pattern.compile(PropsValues.STRUTS_PORTLET_IGNORED_PARAMETERS_REGEXP);
 
 	private Set<String> _lastPaths;
 	private Set<String> _publicPaths;
