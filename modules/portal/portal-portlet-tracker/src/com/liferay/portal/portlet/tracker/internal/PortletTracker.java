@@ -367,31 +367,31 @@ public class PortletTracker
 
 		portletModel.setActionTimeout(
 			GetterUtil.getInteger(
-				_get(serviceReference, "action-timeout"),
+				get(serviceReference, "action-timeout"),
 				portletModel.getActionTimeout()));
 		portletModel.setActionURLRedirect(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "action-url-redirect"),
+				get(serviceReference, "action-url-redirect"),
 				portletModel.getActionURLRedirect()));
 		portletModel.setActive(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "active"), portletModel.isActive()));
+				get(serviceReference, "active"), portletModel.isActive()));
 		portletModel.setAddDefaultResource(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "add-default-resource"),
+				get(serviceReference, "add-default-resource"),
 				portletModel.isAddDefaultResource()));
 		portletModel.setAjaxable(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "ajaxable"), portletModel.isAjaxable()));
+				get(serviceReference, "ajaxable"), portletModel.isAjaxable()));
 
 		Set<String> autopropagatedParameters = SetUtil.fromCollection(
 			StringPlus.asList(
-				_get(serviceReference, "autopropagated-parameters")));
+				get(serviceReference, "autopropagated-parameters")));
 
 		portletModel.setAutopropagatedParameters(autopropagatedParameters);
 
 		String controlPanelEntryCategory = GetterUtil.getString(
-			_get(serviceReference, "control-panel-entry-category"),
+			get(serviceReference, "control-panel-entry-category"),
 			portletModel.getControlPanelEntryCategory());
 
 		if (Validator.equals(controlPanelEntryCategory, "content")) {
@@ -412,105 +412,105 @@ public class PortletTracker
 
 		portletModel.setControlPanelEntryWeight(
 			GetterUtil.getDouble(
-				_get(serviceReference, "control-panel-entry-weight"),
+				get(serviceReference, "control-panel-entry-weight"),
 				portletModel.getControlPanelEntryWeight()));
 		portletModel.setCssClassWrapper(
 			GetterUtil.getString(
-				_get(serviceReference, "css-class-wrapper"),
+				get(serviceReference, "css-class-wrapper"),
 				portletModel.getCssClassWrapper()));
 		portletModel.setFacebookIntegration(
 			GetterUtil.getString(
-				_get(serviceReference, "facebook-integration"),
+				get(serviceReference, "facebook-integration"),
 				portletModel.getFacebookIntegration()));
 		portletModel.setFooterPortalCss(
-			StringPlus.asList(_get(serviceReference, "footer-portal-css")));
+			StringPlus.asList(get(serviceReference, "footer-portal-css")));
 		portletModel.setFooterPortalJavaScript(
 			StringPlus.asList(
-				_get(serviceReference, "footer-portal-javascript")));
+				get(serviceReference, "footer-portal-javascript")));
 		portletModel.setFooterPortletCss(
-			StringPlus.asList(_get(serviceReference, "footer-portlet-css")));
+			StringPlus.asList(get(serviceReference, "footer-portlet-css")));
 		portletModel.setFooterPortletJavaScript(
 			StringPlus.asList(
-				_get(serviceReference, "footer-portlet-javascript")));
+				get(serviceReference, "footer-portlet-javascript")));
 		portletModel.setFriendlyURLMapping(
 			GetterUtil.getString(
-				_get(serviceReference, "friendly-url-mapping"),
+				get(serviceReference, "friendly-url-mapping"),
 				portletModel.getFriendlyURLMapping()));
 		portletModel.setFriendlyURLRoutes(
 			GetterUtil.getString(
-				_get(serviceReference, "friendly-url-routes"),
+				get(serviceReference, "friendly-url-routes"),
 				portletModel.getFriendlyURLRoutes()));
 		portletModel.setHeaderPortalCss(
-			StringPlus.asList(_get(serviceReference, "header-portal-css")));
+			StringPlus.asList(get(serviceReference, "header-portal-css")));
 		portletModel.setHeaderPortalJavaScript(
 			StringPlus.asList(
-				_get(serviceReference, "header-portal-javascript")));
+				get(serviceReference, "header-portal-javascript")));
 		portletModel.setHeaderPortletCss(
-			StringPlus.asList(_get(serviceReference, "header-portlet-css")));
+			StringPlus.asList(get(serviceReference, "header-portlet-css")));
 		portletModel.setHeaderPortletJavaScript(
 			StringPlus.asList(
-				_get(serviceReference, "header-portlet-javascript")));
+				get(serviceReference, "header-portlet-javascript")));
 		portletModel.setIcon(
 			GetterUtil.getString(
-				_get(serviceReference, "icon"), portletModel.getIcon()));
+				get(serviceReference, "icon"), portletModel.getIcon()));
 		portletModel.setInclude(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "include"), portletModel.isInclude()));
+				get(serviceReference, "include"), portletModel.isInclude()));
 		portletModel.setInstanceable(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "instanceable"),
+				get(serviceReference, "instanceable"),
 				portletModel.isInstanceable()));
 		portletModel.setLayoutCacheable(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "layout-cacheable"),
+				get(serviceReference, "layout-cacheable"),
 				portletModel.isLayoutCacheable()));
 		portletModel.setMaximizeEdit(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "maximize-edit"),
+				get(serviceReference, "maximize-edit"),
 				portletModel.isMaximizeEdit()));
 		portletModel.setMaximizeHelp(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "maximize-help"),
+				get(serviceReference, "maximize-help"),
 				portletModel.isMaximizeHelp()));
 		portletModel.setParentStrutsPath(
 			GetterUtil.getString(
-				_get(serviceReference, "parent-struts-path"),
+				get(serviceReference, "parent-struts-path"),
 				portletModel.getParentStrutsPath()));
 		portletModel.setPopUpPrint(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "pop-up-print"),
+				get(serviceReference, "pop-up-print"),
 				portletModel.isPopUpPrint()));
 		portletModel.setPreferencesCompanyWide(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "preferences-company-wide"),
+				get(serviceReference, "preferences-company-wide"),
 				portletModel.isPreferencesCompanyWide()));
 		portletModel.setPreferencesOwnedByGroup(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "preferences-owned-by-group"),
+				get(serviceReference, "preferences-owned-by-group"),
 				portletModel.isPreferencesOwnedByGroup()));
 		portletModel.setPreferencesUniquePerLayout(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "preferences-unique-per-layout"),
+				get(serviceReference, "preferences-unique-per-layout"),
 				portletModel.isPreferencesUniquePerLayout()));
 		portletModel.setPrivateRequestAttributes(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "private-request-attributes"),
+				get(serviceReference, "private-request-attributes"),
 				portletModel.isPrivateRequestAttributes()));
 		portletModel.setPrivateSessionAttributes(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "private-session-attributes"),
+				get(serviceReference, "private-session-attributes"),
 				portletModel.isPrivateSessionAttributes()));
 		portletModel.setRemoteable(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "remoteable"),
+				get(serviceReference, "remoteable"),
 				portletModel.isRemoteable()));
 		portletModel.setRenderTimeout(
 			GetterUtil.getInteger(
-				_get(serviceReference, "render-timeout"),
+				get(serviceReference, "render-timeout"),
 				portletModel.getRenderTimeout()));
 		portletModel.setRenderWeight(
 			GetterUtil.getInteger(
-				_get(serviceReference, "render-weight"),
+				get(serviceReference, "render-weight"),
 				portletModel.getRenderWeight()));
 
 		if (!portletModel.isAjaxable() &&
@@ -521,42 +521,42 @@ public class PortletTracker
 
 		portletModel.setRequiresNamespacedParameters(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "requires-namespaced-parameters"),
+				get(serviceReference, "requires-namespaced-parameters"),
 				portletModel.isRequiresNamespacedParameters()));
 		portletModel.setRestoreCurrentView(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "restore-current-view"),
+				get(serviceReference, "restore-current-view"),
 				portletModel.isRestoreCurrentView()));
 		portletModel.setScopeable(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "scopeable"),
+				get(serviceReference, "scopeable"),
 				portletModel.isScopeable()));
 		portletModel.setShowPortletAccessDenied(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "show-portlet-access-denied"),
+				get(serviceReference, "show-portlet-access-denied"),
 				portletModel.isShowPortletAccessDenied()));
 		portletModel.setShowPortletInactive(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "show-portlet-inactive"),
+				get(serviceReference, "show-portlet-inactive"),
 				portletModel.isShowPortletInactive()));
 		portletModel.setStrutsPath(
 			GetterUtil.getString(
-				_get(serviceReference, "struts-path"),
+				get(serviceReference, "struts-path"),
 				portletModel.getStrutsPath()));
 		portletModel.setSystem(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "system"), portletModel.isSystem()));
+				get(serviceReference, "system"), portletModel.isSystem()));
 		portletModel.setUseDefaultTemplate(
 			GetterUtil.getBoolean(
-				_get(serviceReference, "use-default-template"),
+				get(serviceReference, "use-default-template"),
 				portletModel.isUseDefaultTemplate()));
 		portletModel.setUserPrincipalStrategy(
 			GetterUtil.getString(
-				_get(serviceReference, "user-principal-strategy"),
+				get(serviceReference, "user-principal-strategy"),
 				portletModel.getUserPrincipalStrategy()));
 		portletModel.setVirtualPath(
 			GetterUtil.getString(
-				_get(serviceReference, "virtual-path"),
+				get(serviceReference, "virtual-path"),
 				portletModel.getVirtualPath()));
 	}
 
@@ -832,7 +832,7 @@ public class PortletTracker
 		_servletContext = null;
 	}
 
-	private Object _get(
+	protected Object get(
 		ServiceReference<Portlet> serviceReference, String property) {
 
 		return serviceReference.getProperty(_NAMESPACE + property);
