@@ -51,29 +51,37 @@ public class VariableDependenciesTest {
 
 		VariableDependencies var1VariableDependencies =
 			variableDependenciesMap.get("var1");
+			
+		Assert.assertTrue(
+			hasAffectedVariableName(var1VariableDependencies, "var2"));
+		Assert.assertTrue(
+			hasAffectedVariableName(var1VariableDependencies, "var3"));
+
+		List<String> var1RequiredVariableNames =
+			var1VariableDependencies.getRequiredVariableNames(); 
+
+		Assert.assertTrue(var1RequiredVariableNames.isEmpty());
+
+		VariableDependencies var2VariableDependencies =
+			variableDependenciesMap.get("var2");
 
 		Assert.assertTrue(
-			var1VariableDependencies.getRequiredVariableNames().isEmpty());
+			hasRequiredVariableName(var2VariableDependencies, "var1"));
+		Assert.assertTrue(
+			hasAffectedVariableName(var2VariableDependencies, "var3"));
 
-		Assert.assertTrue(hasAffectedVariableName(var1VariableDependencies, "var2"));
+		VariableDependencies var3VariableDependencies =
+			variableDependenciesMap.get( "var3");
 
-		Assert.assertTrue(hasAffectedVariableName(var1VariableDependencies, "var3"));
+		List<String> var3AffectedVariableNames =
+			var3VariableDependencies.getAffectedVariableNames();
 
-		VariableDependencies var2VariableDependencies = variableDependenciesMap.get("var2");
-
-		Assert.assertTrue(hasRequiredVariableName(var2VariableDependencies, "var1"));
-
-		Assert.assertTrue(hasAffectedVariableName(var2VariableDependencies, "var3"));
-
-		VariableDependencies var3VariableDependencies = variableDependenciesMap.get(
-			"var3");
-
-		Assert.assertTrue(hasRequiredVariableName(var3VariableDependencies, "var1"));
-
-		Assert.assertTrue(hasRequiredVariableName(var3VariableDependencies, "var2"));
+		Assert.assertTrue(var3AffectedVariableNames.isEmpty());
 
 		Assert.assertTrue(
-			var3VariableDependencies.getAffectedVariableNames().isEmpty());
+			hasRequiredVariableName(var3VariableDependencies, "var1"));
+		Assert.assertTrue(
+			hasRequiredVariableName(var3VariableDependencies, "var2"));
 	}
 
 	protected boolean hasAffectedVariableName(
