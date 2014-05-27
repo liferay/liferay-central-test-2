@@ -71,7 +71,7 @@ public class VariableDependenciesTest {
 			hasAffectedVariableName(var2VariableDependencies, "var3"));
 
 		VariableDependencies var3VariableDependencies =
-			variableDependenciesMap.get( "var3");
+			variableDependenciesMap.get("var3");
 
 		List<String> var3AffectedVariableNames =
 			var3VariableDependencies.getAffectedVariableNames();

@@ -133,7 +133,7 @@ public class ExpressionImpl<T> implements Expression<T> {
 
 	@Override
 	public void setVariableValue(
-		String variableName, Object variableValue, Class<?> variableType) {
+		String variableName, Object variableValue, Class<?> variableClass) {
 
 		Variable variable = _variables.get(variableName);
 
@@ -142,7 +142,7 @@ public class ExpressionImpl<T> implements Expression<T> {
 		}
 
 		variable.setValue(variableValue);
-		variable.setVariableClass(variableType);
+		variable.setVariableClass(variableClass);
 	}
 
 	protected <V> Expression<V> getExpression(
