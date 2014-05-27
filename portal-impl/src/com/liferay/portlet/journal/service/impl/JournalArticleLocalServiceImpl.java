@@ -95,7 +95,6 @@ import com.liferay.portal.webserver.WebServerServletTokenUtil;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.model.AssetLink;
 import com.liferay.portlet.asset.model.AssetLinkConstants;
-import com.liferay.portlet.dynamicdatamapping.NoSuchStructureException;
 import com.liferay.portlet.dynamicdatamapping.NoSuchTemplateException;
 import com.liferay.portlet.dynamicdatamapping.StorageFieldNameException;
 import com.liferay.portlet.dynamicdatamapping.StorageFieldRequiredException;
