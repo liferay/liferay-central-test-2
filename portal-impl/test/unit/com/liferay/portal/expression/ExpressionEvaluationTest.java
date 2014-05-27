@@ -78,7 +78,7 @@ public class ExpressionEvaluationTest {
 	}
 
 	@Test(expected = ExpressionEvaluationException.class)
-	public void testEvaluateExpressionWithError() throws Exception {
+	public void testEvaluateInvalidExpression() throws Exception {
 		Expression<Boolean> expression =
 			ExpressionFactoryUtil.createBooleanExpression("var1 >=+P var2");
 
