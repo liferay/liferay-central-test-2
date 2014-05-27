@@ -5805,10 +5805,10 @@ public class JournalArticleLocalServiceImpl
 	protected void checkStructure(JournalArticle article)
 		throws PortalException, SystemException {
 
-		DDMStructure structure = article.getDDMStructure();
+		DDMStructure ddmStructure = article.getDDMStructure();
 
 		try {
-			checkStructure(article, structure);
+			checkStructure(article, ddmStructure);
 		}
 		catch (DocumentException de) {
 			throw new SystemException(de);
