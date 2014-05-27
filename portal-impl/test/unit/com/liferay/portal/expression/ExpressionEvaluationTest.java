@@ -31,7 +31,7 @@ public class ExpressionEvaluationTest {
 
 	@Before
 	public void setUp() throws Exception {
-		setupExpressionFactory();
+		setUpExpressionFactory();
 	}
 
 	@Test(expected = ExpressionEvaluationException.class)
@@ -235,7 +235,7 @@ public class ExpressionEvaluationTest {
 		Assert.assertEquals(actual, expected);
 	}
 
-	protected void setupExpressionFactory() {
+	protected void setUpExpressionFactory() {
 		ExpressionFactoryUtil expressionFactoryUtil =
 			new ExpressionFactoryUtil();
 
