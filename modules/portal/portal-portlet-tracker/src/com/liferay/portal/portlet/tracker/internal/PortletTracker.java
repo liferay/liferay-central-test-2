@@ -206,7 +206,7 @@ public class PortletTracker
 			_log.info("Activated");
 		}
 	}
-	
+
 	protected void addingPortlet(
 			ServiceReference<Portlet> serviceReference, Portlet portlet,
 			String portletName, String portletId)
@@ -352,7 +352,7 @@ public class PortletTracker
 	protected void collectJxPortletFeatures(
 		ServiceReference<Portlet> serviceReference,
 		com.liferay.portal.model.Portlet portletModel) {
-	
+
 		collectCacheScope(serviceReference, portletModel);
 		collectExpirationCache(serviceReference, portletModel);
 		collectInitParams(serviceReference, portletModel);
@@ -755,7 +755,7 @@ public class PortletTracker
 
 	protected Object get(
 		ServiceReference<Portlet> serviceReference, String property) {
-	
+
 		return serviceReference.getProperty(_NAMESPACE + property);
 	}
 
