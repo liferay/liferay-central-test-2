@@ -544,19 +544,19 @@ public class TrashImpl implements Trash {
 
 		title = title.substring(prefix.length());
 
-		long entryId = GetterUtil.getLong(title);
+		long trashEntryId = GetterUtil.getLong(title);
 
-		if (entryId <= 0) {
+		if (trashEntryId <= 0) {
 			return title;
 		}
 
 		try {
 			TrashEntry trashEntry = TrashEntryLocalServiceUtil.fetchEntry(
-				entryId);
+				trashEntryId);
 
 			if (trashEntry == null) {
 				TrashVersion trashVersion =
-					TrashVersionLocalServiceUtil.getTrashVersion(entryId);
+					TrashVersionLocalServiceUtil.getTrashVersion(trashEntryId);
 
 				title = trashVersion.getTypeSettingsProperty("title");
 			}
@@ -568,7 +568,7 @@ public class TrashImpl implements Trash {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"No trash entry or trash version exists with ID " +
-						entryId);
+						trashEntryId);
 			}
 		}
 
