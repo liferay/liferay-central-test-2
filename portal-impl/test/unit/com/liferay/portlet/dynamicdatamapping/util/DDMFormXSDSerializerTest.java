@@ -62,9 +62,9 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 
 	@Test
 	public void testAllFieldsTypesDeserialization() throws Exception {
-		String xsd = readXML("dynamic-data-mapping-all-fields-structure.xml");
+		String xml = readXML("dynamic-data-mapping-all-fields-structure.xml");
 
-		DDMForm ddmForm = DDMFormXSDSerializerUtil.deserialize(xsd);
+		DDMForm ddmForm = DDMFormXSDSerializerUtil.deserialize(xml);
 
 		checkExpectedDefaultLanguage(ddmForm);
 
