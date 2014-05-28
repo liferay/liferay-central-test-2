@@ -399,11 +399,12 @@ public class PingbackMethodImplTest extends PowerMockito {
 	}
 
 	protected void execute(String targetURI) {
-		PingbackMethodImpl method = new PingbackMethodImpl();
+		PingbackMethodImpl pingbackMethodImpl = new PingbackMethodImpl();
 
-		method.setArguments(new Object[]{"__sourceUri__", targetURI});
+		pingbackMethodImpl.setArguments(
+			new Object[]{"__sourceUri__", targetURI});
 
-		method.execute(_COMPANY_ID);
+		pingbackMethodImpl.execute(_COMPANY_ID);
 	}
 
 	protected void setUpBlogsEntry() throws Exception {
