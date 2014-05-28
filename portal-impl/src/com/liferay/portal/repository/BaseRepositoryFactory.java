@@ -220,8 +220,7 @@ public abstract class BaseRepositoryFactory {
 			folderId, fileEntryId, fileVersionId);
 
 		RepositoryEntry repositoryEntry =
-			_repositoryEntryLocalService.getRepositoryEntry(
-				repositoryEntryId);
+			_repositoryEntryLocalService.getRepositoryEntry(repositoryEntryId);
 
 		return repositoryEntry.getRepositoryId();
 	}
