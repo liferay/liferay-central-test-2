@@ -402,7 +402,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 		PingbackMethodImpl pingbackMethodImpl = new PingbackMethodImpl();
 
 		pingbackMethodImpl.setArguments(
-			new Object[]{"__sourceUri__", targetURI});
+			new Object[] {"__sourceUri__", targetURI});
 
 		pingbackMethodImpl.execute(_COMPANY_ID);
 	}
