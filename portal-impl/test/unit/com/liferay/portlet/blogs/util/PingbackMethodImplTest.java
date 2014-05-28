@@ -154,13 +154,13 @@ public class PingbackMethodImplTest extends PowerMockito {
 			groupId
 		);
 
-		whenFriendlyURLMapperPopulateParamsPut(
+		whenFriendlyURLMapperPopulateParams(
 			"/__remainder-of-the-friendly-url__", "urlTitle", "__urlTitle__");
 
 		String friendlyURL =
 			"http://liferay.com/__blogs__/-/__remainder-of-the-friendly-url__";
 
-		whenURLToStringSourceURIThenReturn(
+		whenHttpURLToString(
 			"<body><a href='" + friendlyURL + "'>Liferay</a></body>");
 
 		execute(friendlyURL);
@@ -275,7 +275,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 			PropsValues.class, "BLOGS_LINKBACK_EXCERPT_LENGTH", 4);
 
 		try {
-			whenURLToStringSourceURIThenReturn(
+			whenHttpURLToString(
 				"<body><a href='http://liferay.com'>12345</a></body>");
 
 			execute();
@@ -290,7 +290,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 	@Test
 	public void testGetExcerptWhenAnchorHasParent() throws Exception {
-		whenURLToStringSourceURIThenReturn(
+		whenHttpURLToString(
 			"<body><p>" +
 			"Visit <a href='http://liferay.com'>Liferay</a> to learn more" +
 			"</p></body>");
@@ -308,7 +308,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 			PropsValues.class, "BLOGS_LINKBACK_EXCERPT_LENGTH", 18);
 
 		try {
-			whenURLToStringSourceURIThenReturn(
+			whenHttpURLToString(
 				"<body>_____<p>12345<span>67890" +
 				"<a href='http://liferay.com'>Liferay</a>" +
 				"12345</span>67890</p>_____</body>");
@@ -325,7 +325,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 	@Test
 	public void testGetExcerptWhenAnchorIsMalformed() throws Exception {
-		whenURLToStringSourceURIThenReturn("<a href='MALFORMED' />");
+		whenHttpURLToString("<a href='MALFORMED' />");
 
 		execute("MALFORMED");
 
@@ -335,7 +335,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 	@Test
 	public void testGetExcerptWhenAnchorIsMissing() throws Exception {
-		whenURLToStringSourceURIThenReturn("");
+		whenHttpURLToString("");
 
 		execute();
 
@@ -380,7 +380,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 		long entryId = RandomTestUtil.randomLong();
 
-		whenFriendlyURLMapperPopulateParamsPut(
+		whenFriendlyURLMapperPopulateParams(
 			"", name, String.valueOf(entryId));
 
 		execute();
@@ -450,7 +450,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 	}
 
 	protected void setUpHttp() throws Exception {
-		whenURLToStringSourceURIThenReturn(
+		whenHttpURLToString(
 			"<body><a href='http://liferay.com'>Liferay</a></body>");
 
 		mockStatic(PortalSocketPermission.class, Mockito.RETURNS_DEFAULTS);
@@ -461,8 +461,8 @@ public class PingbackMethodImplTest extends PowerMockito {
 	}
 
 	protected void setUpLanguage() {
-		whenLanguageGetThenReturn("pingback", "__pingbackUserName__");
-		whenLanguageGetThenReturn("read-more", "__read_more__");
+		whenLanguageGet("pingback", "__pingbackUserName__");
+		whenLanguageGet("read-more", "__read_more__");
 
 		LanguageUtil languageUtil = new LanguageUtil();
 
@@ -642,7 +642,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 		);
 	}
 
-	protected void whenFriendlyURLMapperPopulateParamsPut(
+	protected void whenFriendlyURLMapperPopulateParams(
 		String friendlyURL, final String name, final String value) {
 
 		Mockito.doAnswer(
@@ -655,7 +655,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 					Map<String, String[]> params = (Map<String, String[]>)
 						invocationOnMock.getArguments()[1];
 
-					params.put(name, new String[]{value});
+					params.put(name, new String[] {value});
 
 					return null;
 				}
@@ -668,21 +668,21 @@ public class PingbackMethodImplTest extends PowerMockito {
 		);
 	}
 
-	protected void whenLanguageGetThenReturn(String key, String toBeReturned) {
+	protected void whenLanguageGet(String key, String returnValue) {
 		when(
 			_language.get((Locale)Matchers.any(), Matchers.eq(key))
 		).thenReturn(
-			toBeReturned
+			returnValue
 		);
 	}
 
-	protected void whenURLToStringSourceURIThenReturn(String toBeReturned)
+	protected void whenHttpURLToString(String returnValue)
 		throws Exception {
 
 		when(
 			_http.URLtoString("__sourceUri__")
 		).thenReturn(
-			toBeReturned
+			returnValue
 		);
 	}
 
