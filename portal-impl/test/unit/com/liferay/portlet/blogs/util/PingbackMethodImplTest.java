@@ -232,6 +232,18 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 		Mockito.verify(
 			_mbMessageLocalService
+		).addDiscussionMessage(
+			Matchers.eq(_USER_ID), Matchers.eq(StringPool.BLANK),
+			Matchers.eq(_GROUP_ID), Matchers.eq(BlogsEntry.class.getName()),
+			Matchers.eq(_ENTRY_ID), Matchers.eq(_THREAD_ID),
+			Matchers.eq(_PARENT_MESSAGE_ID), Matchers.eq(StringPool.BLANK),
+			Matchers.eq(
+				"[...] Liferay [...] [url=__sourceUri__]__read_more__[/url]"),
+			_serviceContextCaptor.capture()
+		);
+
+		Mockito.verify(
+			_mbMessageLocalService
 		).getDiscussionMessageDisplay(
 			_USER_ID, _GROUP_ID, BlogsEntry.class.getName(), _ENTRY_ID,
 			WorkflowConstants.STATUS_APPROVED
@@ -241,18 +253,6 @@ public class PingbackMethodImplTest extends PowerMockito {
 			_mbMessageLocalService
 		).getThreadMessages(
 			_THREAD_ID, WorkflowConstants.STATUS_APPROVED
-		);
-
-		Mockito.verify(
-			_mbMessageLocalService
-		).addDiscussionMessage(
-			Matchers.eq(_USER_ID), Matchers.eq(StringPool.BLANK),
-			Matchers.eq(_GROUP_ID), Matchers.eq(BlogsEntry.class.getName()),
-			Matchers.eq(_ENTRY_ID), Matchers.eq(_THREAD_ID),
-			Matchers.eq(_PARENT_MESSAGE_ID), Matchers.eq(StringPool.BLANK),
-			Matchers.eq(
-				"[...] Liferay [...] [url=__sourceUri__]__read_more__[/url]"),
-			_serviceContextCaptor.capture()
 		);
 
 		ServiceContext serviceContext = _serviceContextCaptor.getValue();
