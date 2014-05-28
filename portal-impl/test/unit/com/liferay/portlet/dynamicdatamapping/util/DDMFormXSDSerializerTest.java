@@ -66,9 +66,8 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 
 		DDMForm ddmForm = DDMFormXSDSerializerUtil.deserialize(xml);
 
-		checkExpectedDefaultLanguage(ddmForm);
-
-		checkExpectedAvailableLanguages(ddmForm);
+		checkExpectedAvailableLocales(ddmForm);
+		checkExpectedDefaultLocale(ddmForm);
 
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			ddmForm.getDDMFormFieldsMap(true);
@@ -119,7 +118,7 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 		Assert.assertEquals("ddm-documentlibrary", ddmFormField.getType());
 	}
 
-	protected void checkExpectedAvailableLanguages(DDMForm ddmForm) {
+	protected void checkExpectedAvailableLocales(DDMForm ddmForm) {
 		List<Locale> availableLocales = ddmForm.getAvailableLocales();
 
 		Assert.assertEquals(2, availableLocales.size());
@@ -127,7 +126,7 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 		Assert.assertTrue(availableLocales.contains(LocaleUtil.BRAZIL));
 	}
 
-	protected void checkExpectedDefaultLanguage(DDMForm ddmForm) {
+	protected void checkExpectedDefaultLocale(DDMForm ddmForm) {
 		Locale defaultLocale = ddmForm.getDefaultLocale();
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
