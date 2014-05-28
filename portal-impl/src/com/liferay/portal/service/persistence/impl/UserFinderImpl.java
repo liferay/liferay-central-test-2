@@ -738,12 +738,10 @@ public class UserFinderImpl
 
 			String sql = null;
 
-			boolean hasAnyKeyword =
-				!isEmpty(firstNames) || !isEmpty(middleNames) ||
+			if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
 				!isEmpty(lastNames) || !isEmpty(screenNames) ||
-				!isEmpty(emailAddresses);
+				!isEmpty(emailAddresses)) {
 
-			if (hasAnyKeyword) {
 				sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_S);
 
 				sql = CustomSQLUtil.replaceKeywords(
@@ -814,7 +812,10 @@ public class UserFinderImpl
 			qPos.add(companyId);
 			qPos.add(false);
 
-			if (hasAnyKeyword) {
+			if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
+				!isEmpty(lastNames) || !isEmpty(screenNames) ||
+				!isEmpty(emailAddresses)) {
+
 				qPos.add(firstNames, 2);
 				qPos.add(middleNames, 2);
 				qPos.add(lastNames, 2);
@@ -832,7 +833,10 @@ public class UserFinderImpl
 				qPos.add(companyId);
 				qPos.add(false);
 
-				if (hasAnyKeyword) {
+				if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
+					!isEmpty(lastNames) || !isEmpty(screenNames) ||
+					!isEmpty(emailAddresses)) {
+
 					qPos.add(firstNames, 2);
 					qPos.add(middleNames, 2);
 					qPos.add(lastNames, 2);
@@ -851,7 +855,10 @@ public class UserFinderImpl
 				qPos.add(companyId);
 				qPos.add(false);
 
-				if (hasAnyKeyword) {
+				if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
+					!isEmpty(lastNames) || !isEmpty(screenNames) ||
+					!isEmpty(emailAddresses)) {
+
 					qPos.add(firstNames, 2);
 					qPos.add(middleNames, 2);
 					qPos.add(lastNames, 2);
@@ -870,7 +877,10 @@ public class UserFinderImpl
 				qPos.add(companyId);
 				qPos.add(false);
 
-				if (hasAnyKeyword) {
+				if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
+					!isEmpty(lastNames) || !isEmpty(screenNames) ||
+					!isEmpty(emailAddresses)) {
+
 					qPos.add(firstNames, 2);
 					qPos.add(middleNames, 2);
 					qPos.add(lastNames, 2);
@@ -912,12 +922,10 @@ public class UserFinderImpl
 
 		String sql = null;
 
-		boolean hasAnyKeyword =
-			!isEmpty(firstNames) || !isEmpty(middleNames) ||
+		if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
 			!isEmpty(lastNames) || !isEmpty(screenNames) ||
-			!isEmpty(emailAddresses);
+			!isEmpty(emailAddresses)) {
 
-		if (hasAnyKeyword) {
 			sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_SN_EA_S);
 
 			sql = CustomSQLUtil.replaceKeywords(
@@ -958,7 +966,10 @@ public class UserFinderImpl
 		qPos.add(companyId);
 		qPos.add(false);
 
-		if (hasAnyKeyword) {
+		if (!isEmpty(firstNames) || !isEmpty(middleNames) ||
+			!isEmpty(lastNames) || !isEmpty(screenNames) ||
+			!isEmpty(emailAddresses)) {
+
 			qPos.add(firstNames, 2);
 			qPos.add(middleNames, 2);
 			qPos.add(lastNames, 2);
