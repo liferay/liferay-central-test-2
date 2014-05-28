@@ -612,10 +612,8 @@ public class WikiUtil {
 		Settings settings = SettingsFactoryUtil.getPortletInstanceSettings(
 			layout, portletId);
 
-		Settings parameterMapSettings = new ParameterMapSettings(
-			request.getParameterMap(), settings);
-
-		return new WikiPortletInstanceSettings(parameterMapSettings);
+		return new WikiPortletInstanceSettings(
+			new ParameterMapSettings(request.getParameterMap(), settings));
 	}
 
 	public static WikiSettings getWikiSettings(long groupId)
@@ -634,10 +632,8 @@ public class WikiUtil {
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
 			groupId, WikiConstants.SERVICE_NAME);
 
-		ParameterMapSettings parameterMapSettings = new ParameterMapSettings(
-			request.getParameterMap(), settings);
-
-		return new WikiSettings(parameterMapSettings);
+		return new WikiSettings(
+			new ParameterMapSettings(request.getParameterMap(), settings));
 	}
 
 	public static List<WikiNode> orderNodes(

@@ -77,6 +77,7 @@ public class WikiConfigurationDisplayContext {
 
 	private void _populateNodes() throws PortalException, SystemException {
 		_allNodes = WikiNodeServiceUtil.getNodes(_scopeGroupId);
+
 		_allNodeNames = WikiUtil.getNodeNames(_allNodes);
 
 		_visibleNodeNames = _wikiPortletInstanceSettings.getVisibleNodes();

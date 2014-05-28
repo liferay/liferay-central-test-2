@@ -68,8 +68,9 @@ if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	 portletId = ParamUtil.getString(request, "portletResource");
 }
 
-WikiSettings wikiSettings = WikiUtil.getWikiSettings(scopeGroupId);
 WikiPortletInstanceSettings wikiPortletInstanceSettings = WikiUtil.getWikiPortletInstanceSettings(layout, portletId);
+WikiSettings wikiSettings = WikiUtil.getWikiSettings(scopeGroupId);
+
 WikiConfigurationDisplayContext wikiConfigurationDisplayContext = new WikiConfigurationDisplayContext(request, wikiPortletInstanceSettings);
 
 Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);

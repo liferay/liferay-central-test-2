@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
@@ -190,14 +189,11 @@ public class EditNodeAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String portletId = portletDisplay.getId();
-
 		WikiPortletInstanceSettings wikiPortletInstanceSettings =
-			WikiUtil.getWikiPortletInstanceSettings(layout, portletId);
+			WikiUtil.getWikiPortletInstanceSettings(
+				themeDisplay.getLayout(), portletDisplay.getId());
 
 		return wikiPortletInstanceSettings;
 	}
