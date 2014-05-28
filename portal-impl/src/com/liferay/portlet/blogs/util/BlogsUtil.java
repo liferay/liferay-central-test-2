@@ -77,10 +77,8 @@ public class BlogsUtil {
 		Settings settings = SettingsFactoryUtil.getPortletInstanceSettings(
 			layout, portletId);
 
-		Settings parameterMapSettings = new ParameterMapSettings(
-			request.getParameterMap(), settings);
-
-		return new BlogsPortletInstanceSettings(parameterMapSettings);
+		return new BlogsPortletInstanceSettings(
+			new ParameterMapSettings(request.getParameterMap(), settings));
 	}
 
 	public static BlogsSettings getBlogsSettings(long groupId)
@@ -99,10 +97,8 @@ public class BlogsUtil {
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
 			groupId, BlogsConstants.SERVICE_NAME);
 
-		Settings parameterMapSettings = new ParameterMapSettings(
-			request.getParameterMap(), settings);
-
-		return new BlogsSettings(parameterMapSettings);
+		return new BlogsSettings(
+			new ParameterMapSettings(request.getParameterMap(), settings));
 	}
 
 	public static Map<String, String> getEmailDefinitionTerms(
