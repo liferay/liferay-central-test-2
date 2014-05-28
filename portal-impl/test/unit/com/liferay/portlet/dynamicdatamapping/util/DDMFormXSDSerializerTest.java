@@ -81,6 +81,69 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 		testRadioDDMFormField(ddmFormFieldsMap.get("Radio5699"));
 	}
 
+	protected String readXML(String fileName) throws IOException {
+		Class<?> clazz = getClass();
+
+		InputStream inputStream = clazz.getResourceAsStream(
+			"dependencies/" + fileName);
+
+		return StringUtil.read(inputStream);
+	}
+
+	protected void setUpDDMFormXSDSerializer() {
+		spy(DDMFormXSDSerializerUtil.class);
+
+		when(
+			DDMFormXSDSerializerUtil.getDDMFormXSDSerializer()
+		).thenReturn(
+			_ddmFormXSDSerializer
+		);
+	}
+
+	protected void setUpHtml() {
+		spy(HtmlUtil.class);
+
+		when(
+			HtmlUtil.getHtml()
+		).thenReturn(
+			new HtmlImpl()
+		);
+	}
+
+	protected void setUpLocale() {
+		spy(LocaleUtil.class);
+
+		when(
+			LocaleUtil.fromLanguageId("en_US")
+		).thenReturn(
+			LocaleUtil.US
+		);
+
+		when(
+			LocaleUtil.fromLanguageId("pt_BR")
+		).thenReturn(
+			LocaleUtil.BRAZIL
+		);
+	}
+
+	protected void setUpSAXReader() {
+		spy(SAXReaderUtil.class);
+
+		when(
+			SAXReaderUtil.getSAXReader()
+		).thenReturn(
+			new SAXReaderImpl()
+		);
+	}
+
+	protected void testAvailableLocales(DDMForm ddmForm) {
+		List<Locale> availableLocales = ddmForm.getAvailableLocales();
+
+		Assert.assertEquals(2, availableLocales.size());
+		Assert.assertTrue(availableLocales.contains(LocaleUtil.US));
+		Assert.assertTrue(availableLocales.contains(LocaleUtil.BRAZIL));
+	}
+
 	protected void testBooleanDDMFormField(DDMFormField ddmFormField) {
 		Assert.assertNotNull(ddmFormField);
 		Assert.assertEquals("boolean", ddmFormField.getDataType());
@@ -112,26 +175,18 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 		Assert.assertEquals("ddm-decimal", ddmFormField.getType());
 	}
 
-	protected void testDocumentLibraryDDMFormField(DDMFormField ddmFormField) {
-		Assert.assertNotNull(ddmFormField);
-		Assert.assertEquals("document-library", ddmFormField.getDataType());
-		Assert.assertEquals("ddm-documentlibrary", ddmFormField.getType());
-	}
-
-	protected void testAvailableLocales(DDMForm ddmForm) {
-		List<Locale> availableLocales = ddmForm.getAvailableLocales();
-
-		Assert.assertEquals(2, availableLocales.size());
-		Assert.assertTrue(availableLocales.contains(LocaleUtil.US));
-		Assert.assertTrue(availableLocales.contains(LocaleUtil.BRAZIL));
-	}
-
 	protected void testDefaultLocale(DDMForm ddmForm) {
 		Locale defaultLocale = ddmForm.getDefaultLocale();
 
 		String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
 
 		Assert.assertEquals("en_US", defaultLanguageId);
+	}
+
+	protected void testDocumentLibraryDDMFormField(DDMFormField ddmFormField) {
+		Assert.assertNotNull(ddmFormField);
+		Assert.assertEquals("document-library", ddmFormField.getDataType());
+		Assert.assertEquals("ddm-documentlibrary", ddmFormField.getType());
 	}
 
 	protected void testNestedDDMFormFields(DDMFormField ddmFormField) {
@@ -188,61 +243,6 @@ public class DDMFormXSDSerializerTest extends PowerMockito {
 		Assert.assertEquals("option 1", value1Labels.getValue(LocaleUtil.US));
 		Assert.assertEquals(
 			"opcao 1", value1Labels.getValue(LocaleUtil.BRAZIL));
-	}
-
-	protected String readXML(String fileName) throws IOException {
-		Class<?> clazz = getClass();
-
-		InputStream inputStream = clazz.getResourceAsStream(
-			"dependencies/" + fileName);
-
-		return StringUtil.read(inputStream);
-	}
-
-	protected void setUpDDMFormXSDSerializer() {
-		spy(DDMFormXSDSerializerUtil.class);
-
-		when(
-			DDMFormXSDSerializerUtil.getDDMFormXSDSerializer()
-		).thenReturn(
-			_ddmFormXSDSerializer
-		);
-	}
-
-	protected void setUpHtml() {
-		spy(HtmlUtil.class);
-
-		when(
-			HtmlUtil.getHtml()
-		).thenReturn(
-			new HtmlImpl()
-		);
-	}
-
-	protected void setUpLocale() {
-		spy(LocaleUtil.class);
-
-		when(
-			LocaleUtil.fromLanguageId("en_US")
-		).thenReturn(
-			LocaleUtil.US
-		);
-
-		when(
-			LocaleUtil.fromLanguageId("pt_BR")
-		).thenReturn(
-			LocaleUtil.BRAZIL
-		);
-	}
-
-	protected void setUpSAXReader() {
-		spy(SAXReaderUtil.class);
-
-		when(
-			SAXReaderUtil.getSAXReader()
-		).thenReturn(
-			new SAXReaderImpl()
-		);
 	}
 
 	private DDMFormXSDSerializer _ddmFormXSDSerializer =
