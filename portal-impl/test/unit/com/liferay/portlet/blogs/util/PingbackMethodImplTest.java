@@ -260,11 +260,9 @@ public class PingbackMethodImplTest extends PowerMockito {
 		Assert.assertEquals(
 			"__pingbackUserName__",
 			serviceContext.getAttribute("pingbackUserName"));
-
 		Assert.assertEquals(
 			"__LayoutFullURL__/-/__FriendlyURLMapping__/__UrlTitle__",
 			serviceContext.getAttribute("redirect"));
-
 		Assert.assertEquals(
 			"__LayoutFullURL__", serviceContext.getLayoutFullURL());
 	}
