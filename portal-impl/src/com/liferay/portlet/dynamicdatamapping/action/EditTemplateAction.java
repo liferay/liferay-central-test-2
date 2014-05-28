@@ -14,8 +14,6 @@
 
 package com.liferay.portlet.dynamicdatamapping.action;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.template.TemplateConstants;
@@ -337,7 +335,5 @@ public class EditTemplateAction extends PortletAction {
 
 		return template;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(EditTemplateAction.class);
 
 }
