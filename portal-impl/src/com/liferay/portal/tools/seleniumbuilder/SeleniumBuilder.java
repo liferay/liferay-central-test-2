@@ -480,12 +480,14 @@ public class SeleniumBuilder {
 			for (Element rootPropertyElement : rootPropertyElements) {
 				sb = new StringBundler();
 
+				sb.append(testCaseName);
+				sb.append("TestCase.all.");
+
 				String rootPropertyName = rootPropertyElement.attributeValue(
 					"name");
 
-				sb.append(testCaseName);
-				sb.append("TestCase.all.");
 				sb.append(rootPropertyName);
+
 				sb.append("=");
 				sb.append(rootPropertyElement.attributeValue("value"));
 
