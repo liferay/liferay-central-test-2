@@ -359,41 +359,6 @@ public class PingbackMethodImplTest extends PowerMockito {
 			"Error accessing source URI");
 	}
 
-	protected void testAddPingbackWithFriendlyURLParameterEntryId(
-			String namespace)
-		throws Exception {
-
-		when(
-			_blogsEntryLocalService.getEntry(Matchers.anyLong())
-		).thenReturn(
-			_blogsEntry
-		);
-
-		String name;
-
-		if (namespace == null) {
-			name = "entryId";
-		}
-		else {
-			name = namespace + "entryId";
-		}
-
-		long entryId = RandomTestUtil.randomLong();
-
-		whenFriendlyURLMapperPopulateParams(
-			"", name, String.valueOf(entryId));
-
-		execute();
-
-		verifySuccess();
-
-		Mockito.verify(
-			_blogsEntryLocalService
-		).getEntry(
-			entryId
-		);
-	}
-
 	protected void execute() {
 		execute("http://liferay.com");
 	}
@@ -610,6 +575,40 @@ public class PingbackMethodImplTest extends PowerMockito {
 		xmlRpcUtil.setXmlRpc(_xmlRpc);
 	}
 
+	protected void testAddPingbackWithFriendlyURLParameterEntryId(
+			String namespace)
+		throws Exception {
+
+		when(
+			_blogsEntryLocalService.getEntry(Matchers.anyLong())
+		).thenReturn(
+			_blogsEntry
+		);
+
+		String name;
+
+		if (namespace == null) {
+			name = "entryId";
+		}
+		else {
+			name = namespace + "entryId";
+		}
+
+		long entryId = RandomTestUtil.randomLong();
+
+		whenFriendlyURLMapperPopulateParams("", name, String.valueOf(entryId));
+
+		execute();
+
+		verifySuccess();
+
+		Mockito.verify(
+			_blogsEntryLocalService
+		).getEntry(
+			entryId
+		);
+	}
+
 	protected void verifyExcerpt(String excerpt) throws Exception {
 		verifySuccess();
 
@@ -668,19 +667,17 @@ public class PingbackMethodImplTest extends PowerMockito {
 		);
 	}
 
-	protected void whenLanguageGet(String key, String returnValue) {
+	protected void whenHttpURLToString(String returnValue) throws Exception {
 		when(
-			_language.get((Locale)Matchers.any(), Matchers.eq(key))
+			_http.URLtoString("__sourceUri__")
 		).thenReturn(
 			returnValue
 		);
 	}
 
-	protected void whenHttpURLToString(String returnValue)
-		throws Exception {
-
+	protected void whenLanguageGet(String key, String returnValue) {
 		when(
-			_http.URLtoString("__sourceUri__")
+			_language.get((Locale)Matchers.any(), Matchers.eq(key))
 		).thenReturn(
 			returnValue
 		);
