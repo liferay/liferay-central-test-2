@@ -738,7 +738,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		if (!PropsValues.USER_GROUPS_INDEXER_ENABLED ||
 			!PropsValues.USER_GROUPS_SEARCH_WITH_INDEX ||
-			isUseComplexSQL(params)) {
+			isUseCustomSQL(params)) {
 
 			return userGroupFinder.countByKeywords(companyId, keywords, params);
 		}
@@ -800,7 +800,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		if (!PropsValues.USER_GROUPS_INDEXER_ENABLED ||
 			!PropsValues.USER_GROUPS_SEARCH_WITH_INDEX ||
-			isUseComplexSQL(params)) {
+			isUseCustomSQL(params)) {
 
 			return userGroupFinder.countByC_N_D(
 				companyId, name, description, params, andOperator);
@@ -1164,7 +1164,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		}
 	}
 
-	protected boolean isUseComplexSQL(LinkedHashMap<String, Object> params) {
+	protected boolean isUseCustomSQL(LinkedHashMap<String, Object> params) {
 		if (params.isEmpty()) {
 			return false;
 		}

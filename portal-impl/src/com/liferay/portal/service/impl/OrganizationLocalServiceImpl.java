@@ -1448,7 +1448,7 @@ public class OrganizationLocalServiceImpl
 
 		if (!PropsValues.ORGANIZATIONS_INDEXER_ENABLED ||
 			!PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX ||
-			isUseComplexSQL(params)) {
+			isUseCustomSQL(params)) {
 
 			String parentOrganizationIdComparator = StringPool.EQUAL;
 
@@ -1540,7 +1540,7 @@ public class OrganizationLocalServiceImpl
 
 		if (!PropsValues.ORGANIZATIONS_INDEXER_ENABLED ||
 			!PropsValues.ORGANIZATIONS_SEARCH_WITH_INDEX ||
-			isUseComplexSQL(params)) {
+			isUseCustomSQL(params)) {
 
 			String parentOrganizationIdComparator = StringPool.EQUAL;
 
@@ -2157,7 +2157,7 @@ public class OrganizationLocalServiceImpl
 		}
 	}
 
-	protected boolean isUseComplexSQL(LinkedHashMap<String, Object> params) {
+	protected boolean isUseCustomSQL(LinkedHashMap<String, Object> params) {
 		if (params.isEmpty()) {
 			return false;
 		}
