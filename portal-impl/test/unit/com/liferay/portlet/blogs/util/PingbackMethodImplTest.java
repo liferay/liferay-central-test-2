@@ -178,7 +178,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 	public void testAddPingbackWithFriendlyURLParameterEntryId()
 		throws Exception {
 
-		doTestAddPingbackWithFriendlyURLParameterEntryId(null);
+		testAddPingbackWithFriendlyURLParameterEntryId(null);
 	}
 
 	@Test
@@ -193,7 +193,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 			namespace
 		);
 
-		doTestAddPingbackWithFriendlyURLParameterEntryId(namespace);
+		testAddPingbackWithFriendlyURLParameterEntryId(namespace);
 	}
 
 	@Test
@@ -361,7 +361,7 @@ public class PingbackMethodImplTest extends PowerMockito {
 			"Error accessing source URI");
 	}
 
-	protected void doTestAddPingbackWithFriendlyURLParameterEntryId(
+	protected void testAddPingbackWithFriendlyURLParameterEntryId(
 			String namespace)
 		throws Exception {
 
