@@ -2582,6 +2582,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			WikiPage page, long trashEntryId, boolean createTrashVersion)
 		throws PortalException, SystemException {
 
+		// Page
+
 		String title = page.getTitle();
 
 		String trashTitle = title;
@@ -2658,7 +2660,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				WikiPage.class.getName(), page.getResourcePrimKey(), false);
 		}
 
-		// Index
+		// Indexer
 
 		Indexer indexer = IndexerRegistryUtil.nullSafeGetIndexer(
 			WikiPage.class);
