@@ -2542,7 +2542,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	protected void moveDependentChildPagesToTrash(
 			WikiPage page, String title, String trashTitle, long trashEntryId,
-			boolean createTrashEntry)
+			boolean createTrashVersion)
 		throws PortalException, SystemException {
 
 		List<WikiPage> childPages = wikiPagePersistence.findByN_H_P(
@@ -2554,14 +2554,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(curPage);
 
 			if (!curPage.isInTrashExplicitly()) {
-				moveDependentToTrash(curPage, trashEntryId, createTrashEntry);
+				moveDependentToTrash(curPage, trashEntryId, createTrashVersion);
 			}
 		}
 	}
 
 	protected void moveDependentRedirectPagesToTrash(
 			WikiPage page, String title, String trashTitle, long trashEntryId,
-			boolean createTrashEntry)
+			boolean createTrashVersion)
 		throws PortalException, SystemException {
 
 		List<WikiPage> redirectPages = wikiPagePersistence.findByN_H_R(
@@ -2573,20 +2573,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(curPage);
 
 			if (!curPage.isInTrashExplicitly()) {
-				moveDependentToTrash(curPage, trashEntryId, createTrashEntry);
+				moveDependentToTrash(curPage, trashEntryId, createTrashVersion);
 			}
 		}
 	}
 
 	protected void moveDependentToTrash(
-			WikiPage page, long trashEntryId, boolean createTrashEntry)
+			WikiPage page, long trashEntryId, boolean createTrashVersion)
 		throws PortalException, SystemException {
 
 		String title = page.getTitle();
 
 		String trashTitle = title;
 
-		if (createTrashEntry) {
+		if (createTrashVersion) {
 			UnicodeProperties typeSettingsProperties = new UnicodeProperties();
 
 			typeSettingsProperties.put("title", page.getTitle());
@@ -2682,12 +2682,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Child pages
 
 		moveDependentChildPagesToTrash(
-			page, title, trashTitle, trashEntryId, createTrashEntry);
+			page, title, trashTitle, trashEntryId, createTrashVersion);
 
 		// Redirect pages
 
 		moveDependentRedirectPagesToTrash(
-			page, title, trashTitle, trashEntryId, createTrashEntry);
+			page, title, trashTitle, trashEntryId, createTrashVersion);
 	}
 
 	protected void notifySubscribers(
