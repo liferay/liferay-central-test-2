@@ -40,9 +40,9 @@ public class DDMFormXSDSerializerImpl implements DDMFormXSDSerializer {
 
 	@Override
 	public DDMForm deserialize(String serializedDDMForm) throws Exception {
-		DDMForm ddmForm = new DDMForm();
-
 		Document document = SAXReaderUtil.read(serializedDDMForm);
+
+		DDMForm ddmForm = new DDMForm();
 
 		setDDMFormAvailableLocales(document.getRootElement(), ddmForm);
 		setDDMFormDefaultLocale(document.getRootElement(), ddmForm);
@@ -222,20 +222,20 @@ public class DDMFormXSDSerializerImpl implements DDMFormXSDSerializer {
 				currentLocale, predefinedValueElement.getText());
 		}
 
-		Element tipElement = fetchMetadataEntry(metadataElement, "tip");
-
-		if (tipElement != null) {
-			LocalizedValue tip = ddmFormField.getTip();
-
-			tip.addValue(currentLocale, tipElement.getText());
-		}
-
 		Element styleElement = fetchMetadataEntry(metadataElement, "style");
 
 		if (styleElement != null) {
 			LocalizedValue style = ddmFormField.getStyle();
 
 			style.addValue(currentLocale, styleElement.getText());
+		}
+
+		Element tipElement = fetchMetadataEntry(metadataElement, "tip");
+
+		if (tipElement != null) {
+			LocalizedValue tip = ddmFormField.getTip();
+
+			tip.addValue(currentLocale, tipElement.getText());
 		}
 	}
 

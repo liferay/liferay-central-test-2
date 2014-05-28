@@ -38,7 +38,7 @@ public class DDMForm {
 	}
 
 	public Map<String, DDMFormField> getDDMFormFieldsMap(
-		boolean includeNestedFields) {
+		boolean includeNestedDDMFormFields) {
 
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			new HashMap<String, DDMFormField>();
@@ -46,7 +46,7 @@ public class DDMForm {
 		for (DDMFormField ddmFormField : _ddmFormFields) {
 			ddmFormFieldsMap.put(ddmFormField.getName(), ddmFormField);
 
-			if (includeNestedFields) {
+			if (includeNestedDDMFormFields) {
 				ddmFormFieldsMap.putAll(
 					ddmFormField.getNestedDDMFormFieldsMap());
 			}

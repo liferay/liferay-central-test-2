@@ -197,14 +197,14 @@
 		<meta-data locale="en_US">
 			<entry name="label"><![CDATA[Separator]]></entry>
 			<entry name="predefinedValue"><![CDATA[]]></entry>
-			<entry name="tip"><![CDATA[]]></entry>
 			<entry name="style"><![CDATA[]]></entry>
+			<entry name="tip"><![CDATA[]]></entry>
 		</meta-data>
 		<meta-data locale="pt_BR">
 			<entry name="label"><![CDATA[Separator]]></entry>
 			<entry name="predefinedValue"><![CDATA[]]></entry>
-			<entry name="tip"><![CDATA[]]></entry>
 			<entry name="style"><![CDATA[]]></entry>
+			<entry name="tip"><![CDATA[]]></entry>
 		</meta-data>
 	</dynamic-element>
 	<dynamic-element dataType="string" indexType="keyword" localizable="true" name="Text6513" readOnly="false" repeatable="false" required="false" showLabel="true" type="text" width="small">
@@ -272,14 +272,14 @@
 			<meta-data locale="en_US">
 				<entry name="label"><![CDATA[Separator]]></entry>
 				<entry name="predefinedValue"><![CDATA[]]></entry>
-				<entry name="tip"><![CDATA[]]></entry>
 				<entry name="style"><![CDATA[]]></entry>
+				<entry name="tip"><![CDATA[]]></entry>
 			</meta-data>
 			<meta-data locale="pt_BR">
 				<entry name="label"><![CDATA[Separator]]></entry>
 				<entry name="predefinedValue"><![CDATA[]]></entry>
-				<entry name="tip"><![CDATA[]]></entry>
 				<entry name="style"><![CDATA[]]></entry>
+				<entry name="tip"><![CDATA[]]></entry>
 			</meta-data>
 		</dynamic-element>
 		<meta-data locale="en_US">
