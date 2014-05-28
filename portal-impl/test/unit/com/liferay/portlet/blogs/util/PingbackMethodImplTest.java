@@ -643,10 +643,11 @@ public class PingbackMethodImplTest extends PowerMockito {
 	}
 
 	protected void whenFriendlyURLMapperPopulateParamsPut(
-		String friendlyURLPath, final String name, final String value) {
+		String friendlyURL, final String name, final String value) {
 
 		Mockito.doAnswer(
 			new Answer<Void>() {
+
 				@Override
 				public Void answer(InvocationOnMock invocationOnMock)
 					throws Throwable {
@@ -658,11 +659,12 @@ public class PingbackMethodImplTest extends PowerMockito {
 
 					return null;
 				}
+
 			}
 		).when(
 			_friendlyURLMapper
 		).populateParams(
-			Matchers.eq(friendlyURLPath), Matchers.anyMap(), Matchers.anyMap()
+			Matchers.eq(friendlyURL), Matchers.anyMap(), Matchers.anyMap()
 		);
 	}
 
