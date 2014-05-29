@@ -2616,6 +2616,18 @@ public class PortletImpl extends PortletBaseImpl {
 	}
 
 	/**
+	 * Returns <code>true</code> if the portlet uses Social Interactions
+	 * Configuration
+	 *
+	 * @return <code>true</code> if the portlet uses Social Interactions
+	 *         Configuration
+	 */
+	@Override
+	public boolean isSocialInteractionsConfiguration() {
+		return _socialInteractionsConfiguration;
+	}
+
+	/**
 	 * Returns <code>true</code> if the portlet is a static portlet that is
 	 * cannot be moved.
 	 *
