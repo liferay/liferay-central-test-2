@@ -23,9 +23,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author Mika Koivisto
- *
- * @deprecated As of 7.0.0, replaced by {@link com.liferay.portal.repository.util.ExternalRepositoryFactoryUtil}
+ * @author     Mika Koivisto
+ * @deprecated As of 7.0.0, replaced by {@link
+ *             com.liferay.portal.repository.util.ExternalRepositoryFactoryUtil}
  */
 @Deprecated
 public class RepositoryFactoryUtil {
