@@ -71,7 +71,7 @@ public class DLPortletInstanceSettings {
 	}
 
 	public static DLPortletInstanceSettings getDLPortletInstanceSettings(
-			Layout layout, String portletId, Map parameterMap)
+			Layout layout, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getPortletInstanceSettings(

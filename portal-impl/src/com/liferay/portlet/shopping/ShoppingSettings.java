@@ -108,7 +108,7 @@ public class ShoppingSettings {
 	}
 
 	public static ShoppingSettings getShoppingSettings(
-			long groupId, Map parameterMap)
+			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(

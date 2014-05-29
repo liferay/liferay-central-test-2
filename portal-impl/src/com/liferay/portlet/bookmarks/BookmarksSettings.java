@@ -54,7 +54,7 @@ public class BookmarksSettings {
 	}
 
 	public static BookmarksSettings getBookmarksSettings(
-			long groupId, Map parameterMap)
+			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(

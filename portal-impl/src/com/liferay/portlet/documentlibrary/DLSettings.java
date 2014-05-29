@@ -54,7 +54,8 @@ public class DLSettings {
 		return new DLSettings(settings);
 	}
 
-	public static DLSettings getDLSettings(long groupId, Map parameterMap)
+	public static DLSettings getDLSettings(
+			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(

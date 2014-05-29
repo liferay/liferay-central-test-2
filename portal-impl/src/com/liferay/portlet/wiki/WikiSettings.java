@@ -58,7 +58,8 @@ public class WikiSettings {
 		return new WikiSettings(settings);
 	}
 
-	public static WikiSettings getWikiSettings(long groupId, Map parameterMap)
+	public static WikiSettings getWikiSettings(
+			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(

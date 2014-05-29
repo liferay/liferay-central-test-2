@@ -59,7 +59,7 @@ public class BlogsPortletInstanceSettings {
 	}
 
 	public static BlogsPortletInstanceSettings getBlogsPortletInstanceSettings(
-			Layout layout, String portletId, Map parameterMap)
+			Layout layout, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getPortletInstanceSettings(

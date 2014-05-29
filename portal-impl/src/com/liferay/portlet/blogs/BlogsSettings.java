@@ -52,7 +52,8 @@ public class BlogsSettings {
 		return new BlogsSettings(settings);
 	}
 
-	public static BlogsSettings getBlogsSettings(long groupId, Map parameterMap)
+	public static BlogsSettings getBlogsSettings(
+			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
