@@ -864,7 +864,7 @@ public class OrganizationLocalServiceImpl
 			return userPersistence.getOrganizationPrimaryKeys(userId);
 		}
 
-		Set<Long> organizationsIds = SetUtil.fromArray(
+		Set<Long> organizationIds = SetUtil.fromArray(
 			userPersistence.getOrganizationPrimaryKeys(userId));
 
 		List<UserGroupRole> userGroupRoles =
@@ -880,11 +880,11 @@ public class OrganizationLocalServiceImpl
 
 				Group group = userGroupRole.getGroup();
 
-				organizationsIds.add(group.getOrganizationId());
+				organizationIds.add(group.getOrganizationId());
 			}
 		}
 
-		return ArrayUtil.toLongArray(organizationsIds);
+		return ArrayUtil.toLongArray(organizationIds);
 	}
 
 	/**
