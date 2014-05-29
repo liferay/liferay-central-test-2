@@ -778,7 +778,8 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 
 	@Override
 	public FileEntry moveFileEntryFromTrash(
-			long fileEntryId, long newFolderId, ServiceContext serviceContext)
+			long userId, long fileEntryId, long newFolderId,
+			ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		LocalRepository localRepository = getFileEntryLocalRepository(
@@ -793,7 +794,7 @@ public class DLAppLocalServiceImpl extends DLAppLocalServiceBaseImpl {
 		FileEntry fileEntry = localRepository.getFileEntry(fileEntryId);
 
 		return dlAppHelperLocalService.moveFileEntryFromTrash(
-			serviceContext.getUserId(), fileEntry, newFolderId, serviceContext);
+			userId, fileEntry, newFolderId, serviceContext);
 	}
 
 	/**
