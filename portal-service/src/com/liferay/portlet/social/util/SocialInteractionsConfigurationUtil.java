@@ -56,8 +56,8 @@ public class SocialInteractionsConfigurationUtil {
 	}
 
 	public static SocialInteractionsConfiguration
-		getSocialInteractionsConfiguration(
-			long companyId, HttpServletRequest request)
+			getSocialInteractionsConfiguration(
+				long companyId, HttpServletRequest request)
 		throws SystemException {
 
 		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
