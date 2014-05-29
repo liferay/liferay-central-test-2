@@ -2147,6 +2147,8 @@ tck.url=true</echo>
 			</else>
 		</if>
 
+		<antcall target="prepare-test-build-tomcat-dependents" inheritAll="false" />
+
 		<if>
 			<and>
 				<equals arg1="${test.build.bundle.weblogic}" arg2="true" />
@@ -2172,8 +2174,6 @@ tck.url=true</echo>
 				</then>
 			</elseif>
 		</if>
-
-		<antcall target="prepare-test-build-dependent" inheritAll="false" />
 
 		<if>
 			<matches pattern="http" string="${test.build.license.xml.zip.url}" />
@@ -2211,7 +2211,7 @@ tck.url=true</echo>
 		<antcall target="record-test-package-names" inheritAll="false" />
 	</target>
 
-	<target name="prepare-test-build-dependent">
+	<target name="prepare-test-build-tomcat-dependents">
 		<if>
 			<equals arg1="${test.build.bundle.tcat}" arg2="true" />
 			<then>
