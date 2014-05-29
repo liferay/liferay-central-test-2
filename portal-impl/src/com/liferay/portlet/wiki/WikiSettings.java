@@ -39,16 +39,6 @@ public class WikiSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			WikiConstants.SERVICE_NAME, fallbackKeys);
-	}
-
 	public static WikiSettings getWikiSettings(long groupId)
 		throws PortalException, SystemException {
 
@@ -162,6 +152,16 @@ public class WikiSettings {
 			PropsKeys.WIKI_EMAIL_PAGE_UPDATED_SUBJECT);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			WikiConstants.SERVICE_NAME, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

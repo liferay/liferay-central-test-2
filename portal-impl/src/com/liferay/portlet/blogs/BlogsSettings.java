@@ -33,16 +33,6 @@ import java.util.Map;
  */
 public class BlogsSettings {
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			BlogsConstants.SERVICE_NAME, fallbackKeys);
-	}
-
 	public static BlogsSettings getBlogsSettings(long groupId)
 		throws PortalException, SystemException {
 
@@ -153,6 +143,16 @@ public class BlogsSettings {
 			PropsKeys.ADMIN_EMAIL_FROM_NAME);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			BlogsConstants.SERVICE_NAME, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

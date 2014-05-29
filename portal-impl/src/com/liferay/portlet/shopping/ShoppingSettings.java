@@ -41,16 +41,6 @@ import java.util.TreeSet;
  */
 public class ShoppingSettings {
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			ShoppingConstants.SERVICE_NAME, fallbackKeys);
-	}
-
 	public static final String CC_NONE = "none";
 
 	public static final String[] CC_TYPES =
@@ -328,6 +318,16 @@ public class ShoppingSettings {
 		fallbackKeys.add("taxState", PropsKeys.SHOPPING_TAX_STATE);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			ShoppingConstants.SERVICE_NAME, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

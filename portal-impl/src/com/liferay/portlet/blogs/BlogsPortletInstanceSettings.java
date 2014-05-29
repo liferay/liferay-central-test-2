@@ -36,18 +36,6 @@ public class BlogsPortletInstanceSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(PortletKeys.BLOGS, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.BLOGS_ADMIN, fallbackKeys);
-	}
-
 	public static BlogsPortletInstanceSettings getBlogsPortletInstanceSettings(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
@@ -174,6 +162,17 @@ public class BlogsPortletInstanceSettings {
 			"socialBookmarksTypes", PropsKeys.SOCIAL_BOOKMARK_TYPES);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(PortletKeys.BLOGS, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.BLOGS_ADMIN, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

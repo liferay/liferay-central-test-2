@@ -37,16 +37,6 @@ import java.util.Map;
  */
 public class MBSettings {
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			MBConstants.SERVICE_NAME, fallbackKeys);
-	}
-
 	public static MBSettings getMBSettings(long groupId)
 		throws PortalException, SystemException {
 
@@ -258,6 +248,16 @@ public class MBSettings {
 			PropsKeys.MESSAGE_BOARDS_SUBSCRIBE_BY_DEFAULT);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			MBConstants.SERVICE_NAME, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

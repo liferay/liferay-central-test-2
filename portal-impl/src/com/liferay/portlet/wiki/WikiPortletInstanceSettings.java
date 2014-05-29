@@ -42,21 +42,6 @@ public class WikiPortletInstanceSettings {
 		"visibleNodes", "hiddenNodes"
 	};
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(PortletKeys.WIKI, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.WIKI_ADMIN, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.WIKI_DISPLAY, fallbackKeys);
-	}
-
 	public static WikiPortletInstanceSettings getWikiPortletInstanceSettings(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
@@ -166,6 +151,19 @@ public class WikiPortletInstanceSettings {
 		fallbackKeys.add("rssFeedType", PropsKeys.RSS_FEED_TYPE_DEFAULT);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(PortletKeys.WIKI, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.WIKI_ADMIN, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.WIKI_DISPLAY, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

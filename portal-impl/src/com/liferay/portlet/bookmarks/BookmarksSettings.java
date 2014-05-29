@@ -34,16 +34,6 @@ import java.util.Map;
  */
 public class BookmarksSettings {
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			BookmarksConstants.SERVICE_NAME, fallbackKeys);
-	}
-
 	public static BookmarksSettings getBookmarksSettings(long groupId)
 		throws PortalException, SystemException {
 
@@ -200,6 +190,16 @@ public class BookmarksSettings {
 			"showSubfolders", PropsKeys.BOOKMARKS_SUBFOLDERS_VISIBLE);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			BookmarksConstants.SERVICE_NAME, fallbackKeys);
 	}
 
 	private TypedSettings _typedSettings;

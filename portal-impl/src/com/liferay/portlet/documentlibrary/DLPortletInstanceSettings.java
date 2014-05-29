@@ -41,25 +41,6 @@ public class DLPortletInstanceSettings {
 		"mimeTypes"
 	};
 
-	static {
-		FallbackKeys fallbackKeys = _getFallbackKeys();
-
-		SettingsFactory settingsFactory =
-			SettingsFactoryUtil.getSettingsFactory();
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.DOCUMENT_LIBRARY, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.DOCUMENT_LIBRARY_ADMIN, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.DOCUMENT_LIBRARY_DISPLAY, fallbackKeys);
-
-		settingsFactory.registerFallbackKeys(
-			PortletKeys.MEDIA_GALLERY_DISPLAY, fallbackKeys);
-	}
-
 	public static DLPortletInstanceSettings getDLPortletInstanceSettings(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
@@ -185,6 +166,22 @@ public class DLPortletInstanceSettings {
 		fallbackKeys.add("showSubfolders", PropsKeys.DL_FOLDERS_SEARCH_VISIBLE);
 
 		return fallbackKeys;
+	}
+
+	static {
+		FallbackKeys fallbackKeys = _getFallbackKeys();
+
+		SettingsFactory settingsFactory =
+			SettingsFactoryUtil.getSettingsFactory();
+
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.DOCUMENT_LIBRARY, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.DOCUMENT_LIBRARY_ADMIN, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.DOCUMENT_LIBRARY_DISPLAY, fallbackKeys);
+		settingsFactory.registerFallbackKeys(
+			PortletKeys.MEDIA_GALLERY_DISPLAY, fallbackKeys);
 	}
 
 	private static final String[] _MIME_TYPES_DEFAULT = ArrayUtil.toStringArray(
