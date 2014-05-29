@@ -2700,8 +2700,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			return;
 		}
 
-		WikiSettings wikiSettings = WikiSettings.getInstance(
-			page.getGroupId());
+		WikiSettings wikiSettings = WikiSettings.getInstance(page.getGroupId());
 
 		boolean update = false;
 
