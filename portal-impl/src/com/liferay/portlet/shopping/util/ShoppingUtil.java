@@ -134,7 +134,7 @@ public class ShoppingUtil {
 			if (shoppingSettings == null) {
 				ShoppingCategory category = item.getCategory();
 
-				shoppingSettings = ShoppingSettings.getShoppingSettings(
+				shoppingSettings = ShoppingSettings.getInstance(
 					category.getGroupId());
 
 				break;
@@ -320,7 +320,7 @@ public class ShoppingUtil {
 			if (shoppingSettings == null) {
 				ShoppingCategory category = item.getCategory();
 
-				shoppingSettings = ShoppingSettings.getShoppingSettings(
+				shoppingSettings = ShoppingSettings.getInstance(
 					category.getGroupId());
 			}
 
@@ -387,7 +387,7 @@ public class ShoppingUtil {
 			if (shoppingSettings == null) {
 				ShoppingCategory category = item.getCategory();
 
-				shoppingSettings = ShoppingSettings.getShoppingSettings(
+				shoppingSettings = ShoppingSettings.getInstance(
 					category.getGroupId());
 			}
 
@@ -471,7 +471,7 @@ public class ShoppingUtil {
 			if (shoppingSettings == null) {
 				ShoppingCategory category = item.getCategory();
 
-				shoppingSettings = ShoppingSettings.getShoppingSettings(
+				shoppingSettings = ShoppingSettings.getInstance(
 					category.getGroupId());
 
 				break;

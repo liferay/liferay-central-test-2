@@ -191,7 +191,7 @@ public class EditNodeAction extends PortletAction {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		WikiPortletInstanceSettings wikiPortletInstanceSettings =
-			WikiPortletInstanceSettings.getWikiPortletInstanceSettings(
+			WikiPortletInstanceSettings.getInstance(
 				themeDisplay.getLayout(), portletDisplay.getId());
 
 		return wikiPortletInstanceSettings;

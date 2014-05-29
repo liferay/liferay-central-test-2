@@ -2023,7 +2023,7 @@ public class DLAppHelperLocalServiceImpl
 			return;
 		}
 
-		DLSettings dlSettings = DLSettings.getDLSettings(
+		DLSettings dlSettings = DLSettings.getInstance(
 			fileVersion.getGroupId());
 
 		if (serviceContext.isCommandAdd() &&

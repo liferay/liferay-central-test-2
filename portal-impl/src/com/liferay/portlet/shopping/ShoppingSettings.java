@@ -88,7 +88,7 @@ public class ShoppingSettings {
 		Double.POSITIVE_INFINITY
 	};
 
-	public static ShoppingSettings getShoppingSettings(long groupId)
+	public static ShoppingSettings getInstance(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
@@ -97,7 +97,7 @@ public class ShoppingSettings {
 		return new ShoppingSettings(settings);
 	}
 
-	public static ShoppingSettings getShoppingSettings(
+	public static ShoppingSettings getInstance(
 			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

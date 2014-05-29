@@ -42,7 +42,7 @@ public class WikiPortletInstanceSettings {
 		"visibleNodes", "hiddenNodes"
 	};
 
-	public static WikiPortletInstanceSettings getWikiPortletInstanceSettings(
+	public static WikiPortletInstanceSettings getInstance(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
 
@@ -52,7 +52,7 @@ public class WikiPortletInstanceSettings {
 		return new WikiPortletInstanceSettings(settings);
 	}
 
-	public static WikiPortletInstanceSettings getWikiPortletInstanceSettings(
+	public static WikiPortletInstanceSettings getInstance(
 			Layout layout, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

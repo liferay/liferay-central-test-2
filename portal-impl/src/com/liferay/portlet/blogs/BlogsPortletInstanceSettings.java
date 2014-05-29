@@ -36,7 +36,7 @@ public class BlogsPortletInstanceSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
-	public static BlogsPortletInstanceSettings getBlogsPortletInstanceSettings(
+	public static BlogsPortletInstanceSettings getInstance(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
 
@@ -46,7 +46,7 @@ public class BlogsPortletInstanceSettings {
 		return new BlogsPortletInstanceSettings(settings);
 	}
 
-	public static BlogsPortletInstanceSettings getBlogsPortletInstanceSettings(
+	public static BlogsPortletInstanceSettings getInstance(
 			Layout layout, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

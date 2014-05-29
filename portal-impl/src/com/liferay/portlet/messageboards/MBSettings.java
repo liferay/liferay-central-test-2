@@ -37,7 +37,7 @@ import java.util.Map;
  */
 public class MBSettings {
 
-	public static MBSettings getMBSettings(long groupId)
+	public static MBSettings getInstance(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
@@ -46,7 +46,7 @@ public class MBSettings {
 		return new MBSettings(settings);
 	}
 
-	public static MBSettings getMBSettings(
+	public static MBSettings getInstance(
 			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

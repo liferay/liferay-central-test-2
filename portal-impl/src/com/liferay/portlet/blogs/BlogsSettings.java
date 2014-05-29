@@ -33,7 +33,7 @@ import java.util.Map;
  */
 public class BlogsSettings {
 
-	public static BlogsSettings getBlogsSettings(long groupId)
+	public static BlogsSettings getInstance(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
@@ -42,7 +42,7 @@ public class BlogsSettings {
 		return new BlogsSettings(settings);
 	}
 
-	public static BlogsSettings getBlogsSettings(
+	public static BlogsSettings getInstance(
 			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

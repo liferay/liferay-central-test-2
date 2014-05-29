@@ -39,7 +39,7 @@ public class WikiSettings {
 
 	public static final String[] MULTI_VALUED_KEYS = {};
 
-	public static WikiSettings getWikiSettings(long groupId)
+	public static WikiSettings getInstance(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
@@ -48,7 +48,7 @@ public class WikiSettings {
 		return new WikiSettings(settings);
 	}
 
-	public static WikiSettings getWikiSettings(
+	public static WikiSettings getInstance(
 			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

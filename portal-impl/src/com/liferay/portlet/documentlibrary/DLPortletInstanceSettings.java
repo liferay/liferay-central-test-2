@@ -41,7 +41,7 @@ public class DLPortletInstanceSettings {
 		"mimeTypes"
 	};
 
-	public static DLPortletInstanceSettings getDLPortletInstanceSettings(
+	public static DLPortletInstanceSettings getInstance(
 			Layout layout, String portletId)
 		throws PortalException, SystemException {
 
@@ -51,7 +51,7 @@ public class DLPortletInstanceSettings {
 		return new DLPortletInstanceSettings(settings);
 	}
 
-	public static DLPortletInstanceSettings getDLPortletInstanceSettings(
+	public static DLPortletInstanceSettings getInstance(
 			Layout layout, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

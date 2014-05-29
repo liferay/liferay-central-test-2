@@ -180,7 +180,7 @@ public class DLImpl implements DL {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		DLPortletInstanceSettings dlPortletInstanceSettings =
-			DLPortletInstanceSettings.getDLPortletInstanceSettings(
+			DLPortletInstanceSettings.getInstance(
 				themeDisplay.getLayout(), portletDisplay.getId());
 
 		data.put("folder-id", dlPortletInstanceSettings.getDefaultFolderId());
@@ -203,7 +203,7 @@ public class DLImpl implements DL {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		DLPortletInstanceSettings dlPortletInstanceSettings =
-			DLPortletInstanceSettings.getDLPortletInstanceSettings(
+			DLPortletInstanceSettings.getInstance(
 				themeDisplay.getLayout(), portletDisplay.getId());
 
 		long defaultFolderId = dlPortletInstanceSettings.getDefaultFolderId();

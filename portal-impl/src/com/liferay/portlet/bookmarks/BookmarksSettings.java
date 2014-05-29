@@ -34,7 +34,7 @@ import java.util.Map;
  */
 public class BookmarksSettings {
 
-	public static BookmarksSettings getBookmarksSettings(long groupId)
+	public static BookmarksSettings getInstance(long groupId)
 		throws PortalException, SystemException {
 
 		Settings settings = SettingsFactoryUtil.getGroupServiceSettings(
@@ -43,7 +43,7 @@ public class BookmarksSettings {
 		return new BookmarksSettings(settings);
 	}
 
-	public static BookmarksSettings getBookmarksSettings(
+	public static BookmarksSettings getInstance(
 			long groupId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 

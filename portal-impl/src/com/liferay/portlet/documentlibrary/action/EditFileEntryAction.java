@@ -722,7 +722,7 @@ public class EditFileEntryAction extends PortletAction {
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 			DLPortletInstanceSettings dlPortletInstanceSettings =
-				DLPortletInstanceSettings.getDLPortletInstanceSettings(
+				DLPortletInstanceSettings.getInstance(
 					themeDisplay.getLayout(), portletDisplay.getId());
 
 			Set<String> extensions = new HashSet<String>();
@@ -997,7 +997,7 @@ public class EditFileEntryAction extends PortletAction {
 						themeDisplay.getPortletDisplay();
 
 					DLPortletInstanceSettings dlPortletInstanceSettings =
-						DLPortletInstanceSettings.getDLPortletInstanceSettings(
+						DLPortletInstanceSettings.getInstance(
 							themeDisplay.getLayout(), portletDisplay.getId());
 
 					String[] mimeTypes =

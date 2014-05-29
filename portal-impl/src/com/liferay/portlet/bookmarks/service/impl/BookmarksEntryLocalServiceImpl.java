@@ -697,7 +697,7 @@ public class BookmarksEntryLocalServiceImpl
 		}
 
 		BookmarksSettings bookmarksSettings =
-			BookmarksSettings.getBookmarksSettings(entry.getGroupId());
+			BookmarksSettings.getInstance(entry.getGroupId());
 
 		if ((serviceContext.isCommandAdd() &&
 			 !bookmarksSettings.getEmailEntryAddedEnabled()) ||

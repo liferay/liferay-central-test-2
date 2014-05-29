@@ -451,7 +451,7 @@ public class WikiUtil {
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 		WikiPortletInstanceSettings wikiPortletInstanceSettings =
-			WikiPortletInstanceSettings.getWikiPortletInstanceSettings(
+			WikiPortletInstanceSettings.getInstance(
 				themeDisplay.getLayout(), portletDisplay.getId());
 
 		String[] visibleNodeNames =
