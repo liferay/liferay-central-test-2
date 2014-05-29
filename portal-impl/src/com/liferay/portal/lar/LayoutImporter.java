@@ -911,7 +911,7 @@ public class LayoutImporter {
 
 	protected void updateLayoutPriorities(
 			PortletDataContext portletDataContext, List<Element> layoutElements,
-			boolean privateLayouts)
+			boolean privateLayout)
 		throws PortalException, SystemException {
 
 		Map<Long, Layout> layouts =
@@ -927,8 +927,8 @@ public class LayoutImporter {
 
 			if (action.equals(Constants.SKIP)) {
 
-				// We only want to update the priorites if there is no element
-				// with SKIP action
+				// We only want to update priorites if there are no elements
+				// with the SKIP action
 
 				return;
 			}
@@ -951,7 +951,7 @@ public class LayoutImporter {
 		}
 
 		List<Layout> layoutSetLayouts = LayoutLocalServiceUtil.getLayouts(
-			portletDataContext.getGroupId(), privateLayouts);
+			portletDataContext.getGroupId(), privateLayout);
 
 		for (Layout layout : layoutSetLayouts) {
 			if (layoutPriorities.containsKey(layout.getPlid())) {
