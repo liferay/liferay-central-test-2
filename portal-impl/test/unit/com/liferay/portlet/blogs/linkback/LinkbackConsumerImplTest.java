@@ -48,7 +48,9 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 
 		setUpHttp();
 
-		_linkbackConsumer = new LinkbackConsumerImpl(_commentManager);
+		_linkbackConsumerImpl = new LinkbackConsumerImpl();
+
+		_linkbackConsumerImpl.setCommentManager(_commentManager);
 	}
 
 	@Test
@@ -63,9 +65,9 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 
 		long commentId = RandomTestUtil.randomLong();
 
-		_linkbackConsumer.addNewTrackback(commentId, "__url__", "__entryUrl__");
+		_linkbackConsumerImpl.addNewTrackback(commentId, "__url__", "__entryUrl__");
 
-		_linkbackConsumer.verifyNewTrackbacks();
+		_linkbackConsumerImpl.verifyNewTrackbacks();
 
 		Mockito.verify(
 			_commentManager
@@ -92,10 +94,10 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 
 		long commentId = RandomTestUtil.randomLong();
 
-		_linkbackConsumer.addNewTrackback(
+		_linkbackConsumerImpl.addNewTrackback(
 			commentId, "__PROBLEM_URL__", "__entryUrl__");
 
-		_linkbackConsumer.verifyNewTrackbacks();
+		_linkbackConsumerImpl.verifyNewTrackbacks();
 
 		Mockito.verify(
 			_commentManager
@@ -120,10 +122,10 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 			"__URLtoString_containing_**entryUrl**__"
 		);
 
-		_linkbackConsumer.addNewTrackback(
+		_linkbackConsumerImpl.addNewTrackback(
 			RandomTestUtil.randomLong(), "__url__", "**entryUrl**");
 
-		_linkbackConsumer.verifyNewTrackbacks();
+		_linkbackConsumerImpl.verifyNewTrackbacks();
 
 		Mockito.verifyZeroInteractions(_commentManager);
 
@@ -148,6 +150,6 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 	@Mock
 	private Http _http;
 
-	private LinkbackConsumer _linkbackConsumer;
+	private LinkbackConsumerImpl _linkbackConsumerImpl;
 
 }

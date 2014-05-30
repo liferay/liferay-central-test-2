@@ -43,10 +43,6 @@ import java.util.List;
  */
 public class VerifyBlogsTrackbacks extends VerifyProcess {
 
-	public VerifyBlogsTrackbacks() {
-		_linkbackConsumer = LinkbackConsumerUtil.getLinkbackConsumer();
-	}
-
 	@Override
 	protected void doVerify() throws Exception {
 		List<MBDiscussion> mbDiscussions =
@@ -76,7 +72,6 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 	private void _verifyPost(BlogsEntry entry, MBMessage mbMessage)
 		throws PortalException, SystemException {
 
-		long commentId = mbMessage.getMessageId();
 		String entryURL =
 			Portal.FRIENDLY_URL_SEPARATOR + "blogs/" + entry.getUrlTitle();
 		String body = mbMessage.getBody();
@@ -99,7 +94,8 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 				mbMessage.getCompanyId());
 
 			if (mbMessage.getUserId() == defaultUserId) {
-				_linkbackConsumer.verifyTrackback(commentId, url, entryURL);
+				_linkbackConsumer.verifyTrackback(
+					mbMessage.getMessageId(), url, entryURL);
 			}
 		}
 	}
@@ -107,6 +103,7 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 	private static Log _log = LogFactoryUtil.getLog(
 		VerifyBlogsTrackbacks.class);
 
-	private LinkbackConsumer _linkbackConsumer;
+	private LinkbackConsumer _linkbackConsumer =
+		LinkbackConsumerUtil.getLinkbackConsumer();
 
 }

@@ -32,11 +32,7 @@ import java.util.List;
 public class LinkbackConsumerImpl implements LinkbackConsumer {
 
 	public LinkbackConsumerImpl() {
-		_comments = new CommentManagerImpl();
-	}
-
-	public LinkbackConsumerImpl(CommentManager comments) {
-		_comments = comments;
+		_commentManager = new CommentManagerImpl();
 	}
 
 	@Override
@@ -74,7 +70,7 @@ public class LinkbackConsumerImpl implements LinkbackConsumer {
 		}
 
 		try {
-			_comments.deleteComment(commentId);
+			_commentManager.deleteComment(commentId);
 		}
 		catch (Exception e) {
 			_log.error(
@@ -82,9 +78,13 @@ public class LinkbackConsumerImpl implements LinkbackConsumer {
 		}
 	}
 
+	protected void setCommentManager(CommentManager commentManager) {
+		_commentManager = commentManager;
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(LinkbackConsumerImpl.class);
 
-	private CommentManager _comments;
+	private CommentManager _commentManager;
 	private List<Tuple> _trackbacks = Collections.synchronizedList(
 		new ArrayList<Tuple>());
 
