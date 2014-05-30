@@ -158,14 +158,6 @@ public class JournalArticleFinderTest {
 
 	@After
 	public void tearDown() throws Exception {
-		JournalArticleLocalServiceUtil.deleteArticles(_group.getGroupId());
-
-		JournalFolderLocalServiceUtil.deleteFolder(_folder);
-
-		DDMStructureLocalServiceUtil.deleteDDMStructure(
-			_basicWebContentDDMStructure);
-		DDMStructureLocalServiceUtil.deleteDDMStructure(_ddmStructure);
-
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 

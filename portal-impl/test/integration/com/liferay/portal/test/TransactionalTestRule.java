@@ -31,19 +31,6 @@ import org.junit.runners.model.Statement;
  */
 public class TransactionalTestRule implements TestRule {
 
-	public static final TransactionAttribute SUPPORTS_TRANSACTION_ATTRIBUTE;
-
-	static {
-		TransactionAttribute.Builder builder =
-			new TransactionAttribute.Builder();
-
-		builder.propagation(Propagation.SUPPORTS);
-		builder.rollbackForClasses(
-			PortalException.class, SystemException.class);
-
-		SUPPORTS_TRANSACTION_ATTRIBUTE = builder.build();
-	}
-
 	@Override
 	public Statement apply(final Statement statement, Description description) {
 
@@ -72,7 +59,20 @@ public class TransactionalTestRule implements TestRule {
 	}
 
 	public TransactionAttribute getTransactionAttribute() {
-		return SUPPORTS_TRANSACTION_ATTRIBUTE;
+		return _transactionAttribute;
+	}
+
+	private static TransactionAttribute _transactionAttribute;
+
+	static {
+		TransactionAttribute.Builder builder =
+			new TransactionAttribute.Builder();
+
+		builder.propagation(Propagation.SUPPORTS);
+		builder.rollbackForClasses(
+			PortalException.class, SystemException.class);
+
+		_transactionAttribute = builder.build();
 	}
 
 }
