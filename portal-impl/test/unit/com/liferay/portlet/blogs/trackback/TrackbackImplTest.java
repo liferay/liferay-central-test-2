@@ -104,7 +104,7 @@ public class TrackbackImplTest extends PowerMockito {
 		long commentId = RandomTestUtil.randomLong();
 
 		when(
-			_comments.addComment(
+			_commentManager.addComment(
 				Matchers.anyLong(), Matchers.anyLong(), Matchers.anyString(),
 				Matchers.anyLong(), Matchers.anyString(), Matchers.anyString(),
 				Matchers.anyString(),
@@ -116,7 +116,7 @@ public class TrackbackImplTest extends PowerMockito {
 
 		Trackback trackback = new TrackbackImpl();
 		
-		trackback.setCommentManager(_comments);
+		trackback.setCommentManager(_commentManager);
 		trackback.setLinkbackConsumer(_linkbackConsumer);
 
 		trackback.addTrackback(
@@ -125,7 +125,7 @@ public class TrackbackImplTest extends PowerMockito {
 		);
 
 		Mockito.verify(
-			_comments
+			_commentManager
 		).addComment(
 			Matchers.eq(userId), Matchers.eq(groupId),
 			Matchers.eq(BlogsEntry.class.getName()), Matchers.eq(entryId),
@@ -176,7 +176,7 @@ public class TrackbackImplTest extends PowerMockito {
 	private BlogsEntry _blogsEntry;
 
 	@Mock
-	private CommentManager _comments;
+	private CommentManager _commentManager;
 
 	@Mock
 	private LinkbackConsumer _linkbackConsumer;
