@@ -173,6 +173,27 @@ AUI.add(
 				NAME: 'ddm-date',
 
 				prototype: {
+					renderUI: function() {
+						var instance = this;
+
+						DDMDateField.superclass.renderUI.apply(instance, arguments);
+
+						instance.datePicker = new A.DatePicker(
+							{
+								calendar: {
+									locale: Liferay.ThemeDisplay.getLanguageId(),
+									strings: {
+										next: Liferay.Language.get('next'),
+										none: Liferay.Language.get('none'),
+										previous: Liferay.Language.get('previous'),
+										today: Liferay.Language.get('today')
+									}
+								},
+								trigger: instance.get('templateNode')
+							}
+						).render();
+					},
+
 					getPropertyModel: function() {
 						var instance = this;
 
@@ -198,27 +219,6 @@ AUI.add(
 						);
 
 						return model;
-					},
-
-					renderUI: function() {
-						var instance = this;
-
-						DDMDateField.superclass.renderUI.apply(instance, arguments);
-
-						instance.datePicker = new A.DatePicker(
-							{
-								calendar: {
-									locale: Liferay.ThemeDisplay.getLanguageId(),
-									strings: {
-										next: Liferay.Language.get('next'),
-										none: Liferay.Language.get('none'),
-										previous: Liferay.Language.get('previous'),
-										today: Liferay.Language.get('today')
-									}
-								},
-								trigger: instance.get('templateNode')
-							}
-						).render();
 					}
 				}
 			}
@@ -590,9 +590,12 @@ AUI.add(
 			DDMHTMLTextField
 		];
 
-		A.Array.forEach(plugins, function(plugin) {
-			FormBuilderTypes[plugin.NAME] = plugin;
-		});
+		A.Array.each(
+			plugins,
+			function(item, index) {
+				FormBuilderTypes[item.NAME] = item;
+			}
+		);
 	},
 	'',
 	{
