@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.comments;
+package com.liferay.portal.comment;
 
 import com.liferay.portal.comment.CommentManagerImpl;
 import com.liferay.portal.kernel.comment.CommentManager;
@@ -47,7 +47,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
  */
 @PrepareForTest({MBMessageLocalServiceUtil.class})
 @RunWith(PowerMockRunner.class)
-public class CommentsImplTest extends PowerMockito {
+public class CommentManagerImplTest extends PowerMockito {
 
 	@Before
 	public void setUp() throws Exception {
