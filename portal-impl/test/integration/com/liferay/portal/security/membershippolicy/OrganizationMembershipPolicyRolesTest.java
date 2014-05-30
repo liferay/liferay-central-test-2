@@ -50,6 +50,7 @@ public class OrganizationMembershipPolicyRolesTest
 	extends BaseOrganizationMembershipPolicyTestCase {
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 

@@ -46,6 +46,7 @@ public class OrganizationMembershipPolicyMembershipsTest
 	extends BaseOrganizationMembershipPolicyTestCase {
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 
