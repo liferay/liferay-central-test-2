@@ -129,7 +129,7 @@ public class UserFinderImpl
 
 	@Override
 	public int countBySocialUsers(
-			long companyId, long userId, int type,
+			long companyId, long userId, int socialRelationType,
 			String socialRelationTypeComparator, int status)
 		throws SystemException {
 
@@ -143,7 +143,7 @@ public class UserFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$SOCIAL_RELATION_TYPE_COMPARATOR$]",
 				socialRelationTypeComparator.equals(StringPool.EQUAL) ?
-				StringPool.EQUAL : StringPool.NOT_EQUAL);
+					StringPool.EQUAL : StringPool.NOT_EQUAL);
 
 			SQLQuery q = session.createSynchronizedSQLQuery(sql);
 
@@ -151,7 +151,7 @@ public class UserFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(type);
+			qPos.add(socialRelationType);
 			qPos.add(userId);
 			qPos.add(companyId);
 			qPos.add(Boolean.FALSE);
@@ -592,7 +592,7 @@ public class UserFinderImpl
 
 	@Override
 	public List<User> findBySocialUsers(
-			long companyId, long userId, int type,
+			long companyId, long userId, int socialRelationType,
 			String socialRelationTypeComparator, int status, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -607,7 +607,7 @@ public class UserFinderImpl
 			sql = StringUtil.replace(
 				sql, "[$SOCIAL_RELATION_TYPE_COMPARATOR$]",
 				socialRelationTypeComparator.equals(StringPool.EQUAL) ?
-				StringPool.EQUAL : StringPool.NOT_EQUAL);
+					StringPool.EQUAL : StringPool.NOT_EQUAL);
 
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -617,7 +617,7 @@ public class UserFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(type);
+			qPos.add(socialRelationType);
 			qPos.add(userId);
 			qPos.add(companyId);
 			qPos.add(Boolean.FALSE);

@@ -2366,6 +2366,47 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	/**
+	 * Returns an ordered range of all the users with a social relation of the
+	 * type with the user.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end -
+	 * start</code> instances. <code>start</code> and <code>end</code> are not
+	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
+	 * refers to the first result in the set. Setting both <code>start</code>
+	 * and <code>end</code> to {@link
+	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
+	 * result set.
+	 * </p>
+	 *
+	 * @param      userId the primary key of the user
+	 * @param      socialRelationType the type of social relation. The possible
+	 *             types can be found in {@link
+	 *             com.liferay.portlet.social.model.SocialRelationConstants}.
+	 * @param      start the lower bound of the range of users
+	 * @param      end the upper bound of the range of users (not inclusive)
+	 * @param      obc the comparator to order the users by (optionally
+	 *             <code>null</code>)
+	 * @return     the ordered range of users with a social relation of the type
+	 *             with the user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 7.0.0, replaced by {@link #getSocialUsers(long, int,
+	 *             String, int, int, OrderByComparator)}
+	 */
+	@Deprecated
+	@Override
+	public List<User> getSocialUsers(
+			long userId, int socialRelationType, int start, int end,
+			OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return getSocialUsers(
+			userId, socialRelationType, StringPool.EQUAL, start, end, obc);
+	}
+
+	/**
 	 * Returns an ordered range of all the users with a social relation with the
 	 * user.
 	 *
@@ -2379,31 +2420,51 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * result set.
 	 * </p>
 	 *
-	 * @param  userId the primary key of the user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
-	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
-	 * @param  equalType the value of type of social relation equals <code>true
-	 *         </code> or <code>false</code>
-	 * @param  start the lower bound of the range of users
-	 * @param  end the upper bound of the range of users (not inclusive)
-	 * @param  obc the comparator to order the users by (optionally
-	 *         <code>null</code>)
-	 * @return the ordered range of users with a social relation with the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
+	 * @param      userId the primary key of the user
+	 * @param      start the lower bound of the range of users
+	 * @param      end the upper bound of the range of users (not inclusive)
+	 * @param      obc the comparator to order the users by (optionally
+	 *             <code>null</code>)
+	 * @return     the ordered range of users with a social relation with the
+	 *             user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 7.0.0, replaced by {@link #getSocialUsers(long, int,
+	 *             boolean, int, int, OrderByComparator)}
 	 */
+	@Deprecated
 	@Override
 	public List<User> getSocialUsers(
-			long userId, int type, boolean equalType, int start, int end,
+			long userId, int start, int end, OrderByComparator obc)
+		throws PortalException, SystemException {
+
+		return getSocialUsers(
+			userId, SocialRelationConstants.TYPE_UNI_ENEMY,
+			StringPool.NOT_EQUAL, start, end, obc);
+	}
+
+	@Override
+	public List<User> getSocialUsers(
+			long userId, int socialRelationType,
+			String socialRelationTypeComparator, int start, int end,
 			OrderByComparator obc)
 		throws PortalException, SystemException {
 
+		if (!socialRelationTypeComparator.equals(StringPool.EQUAL) &&
+			!socialRelationTypeComparator.equals(StringPool.NOT_EQUAL)) {
+
+			throw new IllegalArgumentException(
+				"Invalid social relation type comparator " +
+					socialRelationTypeComparator);
+		}
+
 		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			List<SocialRelation> socialRelations =
-				socialRelationPersistence.findByU1_T(userId, type);
+				socialRelationPersistence.findByU1_T(
+					userId, socialRelationType);
 
-			if (!equalType) {
+			if (socialRelationTypeComparator.equals(StringPool.NOT_EQUAL)) {
 				socialRelations = ListUtil.remove(
 					socialRelationPersistence.findByUserId1(userId),
 					socialRelations);
@@ -2435,89 +2496,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		String socialRelationTypeComparator = StringPool.EQUAL;
-
-		if (!equalType) {
-			socialRelationTypeComparator = StringPool.NOT_EQUAL;
-		}
-
 		return userFinder.findBySocialUsers(
-			user.getCompanyId(), userId, type, socialRelationTypeComparator,
-			WorkflowConstants.STATUS_APPROVED, start, end, obc);
-	}
-
-	/**
-	 * Returns an ordered range of all the users with a social relation of the
-	 * type with the user.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances. <code>start</code> and <code>end</code> are not
-	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
-	 * refers to the first result in the set. Setting both <code>start</code>
-	 * and <code>end</code> to {@link
-	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
-	 * result set.
-	 * </p>
-	 *
-	 * @param  userId the primary key of the user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
-	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
-	 * @param  start the lower bound of the range of users
-	 * @param  end the upper bound of the range of users (not inclusive)
-	 * @param  obc the comparator to order the users by (optionally
-	 *         <code>null</code>)
-	 * @return the ordered range of users with a social relation of the type
-	 *         with the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 * #getSocialUsers(long, int, boolean, int, int, OrderByComparator)}
-	 */
-	@Deprecated
-	@Override
-	public List<User> getSocialUsers(
-			long userId, int type, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return getSocialUsers(userId, type, true, start, end, obc);
-	}
-
-	/**
-	 * Returns an ordered range of all the users with a social relation with the
-	 * user.
-	 *
-	 * <p>
-	 * Useful when paginating results. Returns a maximum of <code>end -
-	 * start</code> instances. <code>start</code> and <code>end</code> are not
-	 * primary keys, they are indexes in the result set. Thus, <code>0</code>
-	 * refers to the first result in the set. Setting both <code>start</code>
-	 * and <code>end</code> to {@link
-	 * com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full
-	 * result set.
-	 * </p>
-	 *
-	 * @param  userId the primary key of the user
-	 * @param  start the lower bound of the range of users
-	 * @param  end the upper bound of the range of users (not inclusive)
-	 * @param  obc the comparator to order the users by (optionally
-	 *         <code>null</code>)
-	 * @return the ordered range of users with a social relation with the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 * #getSocialUsers(long, int, boolean, int, int, OrderByComparator)}
-	 */
-	@Deprecated
-	@Override
-	public List<User> getSocialUsers(
-			long userId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
-
-		return getSocialUsers(
-			userId, SocialRelationConstants.TYPE_UNI_ENEMY, false, start, end,
-			obc);
+			user.getCompanyId(), userId, socialRelationType,
+			socialRelationTypeComparator, WorkflowConstants.STATUS_APPROVED,
+			start, end, obc);
 	}
 
 	/**
@@ -2536,8 +2518,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *
 	 * @param  userId1 the primary key of the first user
 	 * @param  userId2 the primary key of the second user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
+	 * @param  socialRelationType the type of social relation. The possible
+	 *         types can be found in {@link
 	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
 	 * @param  start the lower bound of the range of users
 	 * @param  end the upper bound of the range of users (not inclusive)
@@ -2550,8 +2532,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 */
 	@Override
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int type, int start, int end,
-			OrderByComparator obc)
+			long userId1, long userId2, int socialRelationType, int start,
+			int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -2561,7 +2543,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {userId1, new Long(type), userId2, new Long(type)});
+			new Long[] {userId1, new Long(socialRelationType), userId2,
+			new Long(socialRelationType)});
 
 		return search(
 			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
@@ -2614,12 +2597,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	/**
 	 * Returns the number of users with a social relation with the user.
 	 *
-	 * @param  userId the primary key of the user
-	 * @return the number of users with a social relation with the user
-	 * @throws PortalException if a user with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 * #getSocialUsersCount(long, int, boolean)}
+	 * @param      userId the primary key of the user
+	 * @return     the number of users with a social relation with the user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 7.0.0, replaced by {@link #getSocialUsersCount(long,
+	 *             int, String)}
 	 */
 	@Deprecated
 	@Override
@@ -2627,59 +2611,64 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return getSocialUsersCount(
-			userId, SocialRelationConstants.TYPE_UNI_ENEMY, false);
+			userId, SocialRelationConstants.TYPE_UNI_ENEMY,
+			StringPool.NOT_EQUAL);
 	}
 
 	/**
 	 * Returns the number of users with a social relation of the type with the
 	 * user.
 	 *
-	 * @param  userId the primary key of the user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
-	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
-	 * @return the number of users with a social relation of the type with the
-	 *         user
-	 * @throws PortalException if a user with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
-	 * @deprecated As of 7.0.0, replaced by {@link
-	 * #getSocialUsersCount(long, int, boolean)}
+	 * @param      userId the primary key of the user
+	 * @param      socialRelationType the type of social relation. The possible
+	 *             types can be found in {@link
+	 *             com.liferay.portlet.social.model.SocialRelationConstants}.
+	 * @return     the number of users with a social relation of the type with
+	 *             the user
+	 * @throws     PortalException if a user with the primary key could not be
+	 *             found
+	 * @throws     SystemException if a system exception occurred
+	 * @deprecated As of 7.0.0, replaced by {@link #getSocialUsersCount(long,
+	 *             int, String)}
 	 */
 	@Deprecated
 	@Override
-	public int getSocialUsersCount(long userId, int type)
+	public int getSocialUsersCount(long userId, int socialRelationType)
 		throws PortalException, SystemException {
 
-		return getSocialUsersCount(userId, type, true);
+		return getSocialUsersCount(
+			userId, socialRelationType, StringPool.EQUAL);
 	}
 
 	/**
 	 * Returns the number of users with a social relation with the user.
 	 *
 	 * @param  userId the primary key of the user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
+	 * @param  socialRelationType the type of social relation. The possible
+	 *         types can be found in {@link
 	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
-	 * @param  equalType the value of type of social relation equals <code>true
-	 *         </code> or <code>false</code>
 	 * @return the number of users with a social relation with the user
 	 * @throws PortalException if a user with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getSocialUsersCount(long userId, int type, boolean equalType)
+	public int getSocialUsersCount(
+			long userId, int socialRelationType,
+			String socialRelationTypeComparator)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		String socialRelationTypeComparator = StringPool.EQUAL;
+		if (!socialRelationTypeComparator.equals(StringPool.EQUAL) &&
+			!socialRelationTypeComparator.equals(StringPool.NOT_EQUAL)) {
 
-		if (!equalType) {
-			socialRelationTypeComparator = StringPool.NOT_EQUAL;
+			throw new IllegalArgumentException(
+				"Invalid social relation type comparator " +
+					socialRelationTypeComparator);
 		}
 
 		return userFinder.countBySocialUsers(
-			user.getCompanyId(), user.getUserId(), type,
+			user.getCompanyId(), user.getUserId(), socialRelationType,
 			socialRelationTypeComparator, WorkflowConstants.STATUS_APPROVED);
 	}
 
@@ -2715,8 +2704,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 *
 	 * @param  userId1 the primary key of the first user
 	 * @param  userId2 the primary key of the second user
-	 * @param  type the type of social relation. The possible types can be found
-	 *         in {@link
+	 * @param  socialRelationType the type of social relation. The possible
+	 *         types can be found in {@link
 	 *         com.liferay.portlet.social.model.SocialRelationConstants}.
 	 * @return the number of users with a mutual social relation of the type
 	 *         with the user
@@ -2724,7 +2713,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int getSocialUsersCount(long userId1, long userId2, int type)
+	public int getSocialUsersCount(
+			long userId1, long userId2, int socialRelationType)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -2734,7 +2724,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {userId1, new Long(type), userId2, new Long(type)});
+			new Long[] {userId1, new Long(socialRelationType), userId2,
+			new Long(socialRelationType)});
 
 		return searchCount(
 			user1.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED,
