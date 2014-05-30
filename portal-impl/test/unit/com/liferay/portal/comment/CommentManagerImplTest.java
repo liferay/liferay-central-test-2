@@ -59,12 +59,12 @@ public class CommentManagerImplTest extends PowerMockito {
 
 	@Test
 	public void testAddComment() throws Exception {
-		long commentId = RandomTestUtil.randomLong();
+		long mbMessageId = RandomTestUtil.randomLong();
 
 		when(
 			_mbMessage.getMessageId()
 		).thenReturn(
-			commentId
+			mbMessageId
 		);
 
 		long parentMessageId = RandomTestUtil.randomLong();
@@ -89,8 +89,8 @@ public class CommentManagerImplTest extends PowerMockito {
 		long classPK = RandomTestUtil.randomLong();
 
 		Assert.assertEquals(
-			commentId,
-			_comments.addComment(
+			mbMessageId,
+			_commentManager.addComment(
 				userId, groupId, className, classPK, "__blogName__",
 				"__title__", "__body__", _serviceContextFunction));
 
@@ -114,14 +114,14 @@ public class CommentManagerImplTest extends PowerMockito {
 
 	@Test
 	public void testDeleteComment() throws Exception {
-		long commentId = RandomTestUtil.randomLong();
+		long mbMessageId = RandomTestUtil.randomLong();
 
-		_comments.deleteComment(commentId);
+		_commentManager.deleteComment(mbMessageId);
 
 		Mockito.verify(
 			_mbMessageLocalService
 		).deleteDiscussionMessage(
-			commentId
+			mbMessageId
 		);
 	}
 
@@ -170,7 +170,7 @@ public class CommentManagerImplTest extends PowerMockito {
 		);
 	}
 
-	private CommentManager _comments = new CommentManagerImpl();
+	private CommentManager _commentManager = new CommentManagerImpl();
 
 	@Mock
 	private MBMessage _mbMessage;

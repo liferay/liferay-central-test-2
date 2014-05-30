@@ -48,12 +48,12 @@ public class CommentManagerImpl implements CommentManager {
 		ServiceContext serviceContext = serviceContextFunction.apply(
 			MBMessage.class.getName());
 
-		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
+		MBMessage mbMessage = MBMessageLocalServiceUtil.addDiscussionMessage(
 			userId, userName, groupId, className, classPK,
 			mbThread.getThreadId(), mbThread.getRootMessageId(), subject, body,
 			serviceContext);
 
-		return message.getMessageId();
+		return mbMessage.getMessageId();
 	}
 
 	@Override

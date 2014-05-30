@@ -26,16 +26,14 @@ import com.liferay.portlet.blogs.util.LinkbackProducerUtil;
  */
 public class LinkbackMessageListener extends BaseMessageListener {
 
-	public LinkbackMessageListener() {
-		_linkbackConsumer = LinkbackConsumerUtil.getLinkbackConsumer();
-	}
-
 	@Override
 	protected void doReceive(Message message) throws Exception {
 		_linkbackConsumer.verifyNewTrackbacks();
+
 		LinkbackProducerUtil.sendQueuedPingbacks();
 	}
 
-	private LinkbackConsumer _linkbackConsumer;
+	private LinkbackConsumer _linkbackConsumer =
+		LinkbackConsumerUtil.getLinkbackConsumer();
 
 }

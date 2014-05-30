@@ -35,11 +35,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
  */
 public class TrackbackImpl implements Trackback {
 
-	public TrackbackImpl() {
-		_comments = new CommentManagerImpl();
-		_linkbackConsumer = LinkbackConsumerUtil.getLinkbackConsumer();
-	}
-
 	@Override
 	public void addTrackback(
 			BlogsEntry entry, ThemeDisplay themeDisplay, String excerpt,
@@ -100,7 +95,8 @@ public class TrackbackImpl implements Trackback {
 		return sb.toString();
 	}
 
-	private CommentManager _comments;
-	private LinkbackConsumer _linkbackConsumer;
+	private CommentManager _comments = new CommentManagerImpl();
+	private LinkbackConsumer _linkbackConsumer =
+		LinkbackConsumerUtil.getLinkbackConsumer();
 
 }
