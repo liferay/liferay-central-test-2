@@ -41,6 +41,11 @@ public class LinkbackConsumerImpl implements LinkbackConsumer {
 	}
 
 	@Override
+	public void setCommentManager(CommentManager commentManager) {
+		_commentManager = commentManager;
+	}
+
+	@Override
 	public void verifyNewTrackbacks() {
 		Tuple tuple = null;
 
@@ -75,10 +80,6 @@ public class LinkbackConsumerImpl implements LinkbackConsumer {
 		catch (Exception e) {
 			_log.error("Unable to delete trackback comment " + commentId, e);
 		}
-	}
-
-	protected void setCommentManager(CommentManager commentManager) {
-		_commentManager = commentManager;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(LinkbackConsumerImpl.class);

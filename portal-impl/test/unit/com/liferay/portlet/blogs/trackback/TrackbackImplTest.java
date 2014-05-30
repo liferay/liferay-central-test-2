@@ -114,7 +114,10 @@ public class TrackbackImplTest extends PowerMockito {
 			commentId
 		);
 
-		Trackback trackback = new TrackbackImpl(_comments, _linkbackConsumer);
+		Trackback trackback = new TrackbackImpl();
+		
+		trackback.setCommentManager(_comments);
+		trackback.setLinkbackConsumer(_linkbackConsumer);
 
 		trackback.addTrackback(
 			_blogsEntry, _themeDisplay, "__excerpt__", "__url__",
