@@ -50,7 +50,7 @@ public class TrackbackImpl implements Trackback {
 
 		String body = buildBody(themeDisplay, excerpt, url);
 
-		long commentId = _comments.addComment(
+		long commentId = _commentManager.addComment(
 			userId, groupId, className, classPK, blogName, title, body,
 			serviceContextFunction);
 
@@ -62,7 +62,7 @@ public class TrackbackImpl implements Trackback {
 	protected TrackbackImpl(
 		CommentManager comments, LinkbackConsumer linkbackConsumer) {
 
-		_comments = comments;
+		_commentManager = comments;
 		_linkbackConsumer = linkbackConsumer;
 	}
 
@@ -95,7 +95,7 @@ public class TrackbackImpl implements Trackback {
 		return sb.toString();
 	}
 
-	private CommentManager _comments = new CommentManagerImpl();
+	private CommentManager _commentManager = new CommentManagerImpl();
 	private LinkbackConsumer _linkbackConsumer =
 		LinkbackConsumerUtil.getLinkbackConsumer();
 
