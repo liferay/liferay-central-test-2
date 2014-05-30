@@ -45,9 +45,9 @@ public class DDMFormXSDSerializerImpl implements DDMFormXSDSerializer {
 		throws PortalException {
 
 		try {
-			DDMForm ddmForm = new DDMForm();
-
 			Document document = SAXReaderUtil.read(serializedDDMForm);
+
+			DDMForm ddmForm = new DDMForm();
 
 			setDDMFormAvailableLocales(document.getRootElement(), ddmForm);
 			setDDMFormDefaultLocale(document.getRootElement(), ddmForm);
