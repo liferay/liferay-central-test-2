@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.blogs.linkback;
 
-import com.liferay.portal.kernel.comments.Comments;
+import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.security.pacl.permission.PortalSocketPermission;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -143,7 +143,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 	}
 
 	@Mock
-	private Comments _comments;
+	private CommentManager _comments;
 
 	@Mock
 	private Http _http;

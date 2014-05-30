@@ -14,7 +14,8 @@
 
 package com.liferay.portal.comments;
 
-import com.liferay.portal.kernel.comments.Comments;
+import com.liferay.portal.comment.CommentManagerImpl;
+import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import com.liferay.portal.service.ServiceContext;
@@ -169,7 +170,7 @@ public class CommentsImplTest extends PowerMockito {
 		);
 	}
 
-	private Comments _comments = new CommentsImpl();
+	private CommentManager _comments = new CommentManagerImpl();
 
 	@Mock
 	private MBMessage _mbMessage;

@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.kernel.comments;
+package com.liferay.portal.kernel.comment;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -22,7 +22,7 @@ import com.liferay.portal.service.ServiceContext;
 /**
  * @author André de Oliveira
  */
-public interface Comments {
+public interface CommentManager {
 
 	public long addComment(
 			long userId, long groupId, String className, long classPK,

@@ -12,9 +12,9 @@
  * details.
  */
 
-package com.liferay.portal.comments;
+package com.liferay.portal.comment;
 
-import com.liferay.portal.kernel.comments.Comments;
+import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.util.Function;
@@ -29,7 +29,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
  * @author André de Oliveira
  * @author Alexander Chow
  */
-public class CommentsImpl implements Comments {
+public class CommentManagerImpl implements CommentManager {
 
 	@Override
 	public long addComment(

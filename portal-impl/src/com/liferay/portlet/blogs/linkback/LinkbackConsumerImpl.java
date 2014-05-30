@@ -14,8 +14,8 @@
 
 package com.liferay.portlet.blogs.linkback;
 
-import com.liferay.portal.comments.CommentsImpl;
-import com.liferay.portal.kernel.comments.Comments;
+import com.liferay.portal.comment.CommentManagerImpl;
+import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -32,10 +32,10 @@ import java.util.List;
 public class LinkbackConsumerImpl implements LinkbackConsumer {
 
 	public LinkbackConsumerImpl() {
-		_comments = new CommentsImpl();
+		_comments = new CommentManagerImpl();
 	}
 
-	public LinkbackConsumerImpl(Comments comments) {
+	public LinkbackConsumerImpl(CommentManager comments) {
 		_comments = comments;
 	}
 
@@ -84,7 +84,7 @@ public class LinkbackConsumerImpl implements LinkbackConsumer {
 
 	private static Log _log = LogFactoryUtil.getLog(LinkbackConsumerImpl.class);
 
-	private Comments _comments;
+	private CommentManager _comments;
 	private List<Tuple> _trackbacks = Collections.synchronizedList(
 		new ArrayList<Tuple>());
 

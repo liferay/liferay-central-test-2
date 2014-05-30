@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.blogs.trackback;
 
-import com.liferay.portal.kernel.comments.Comments;
+import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalService;
@@ -173,7 +173,7 @@ public class TrackbackImplTest extends PowerMockito {
 	private BlogsEntry _blogsEntry;
 
 	@Mock
-	private Comments _comments;
+	private CommentManager _comments;
 
 	@Mock
 	private LinkbackConsumer _linkbackConsumer;
