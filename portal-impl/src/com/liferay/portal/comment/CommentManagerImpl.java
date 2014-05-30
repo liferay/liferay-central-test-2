@@ -38,22 +38,20 @@ public class CommentManagerImpl implements CommentManager {
 			Function<String, ServiceContext> serviceContextFunction)
 		throws PortalException, SystemException {
 
-		MBMessageDisplay messageDisplay =
+		MBMessageDisplay mbMessageDisplay =
 			MBMessageLocalServiceUtil.getDiscussionMessageDisplay(
 				userId, groupId, className, classPK,
 				WorkflowConstants.STATUS_APPROVED);
 
-		MBThread thread = messageDisplay.getThread();
-
-		long threadId = thread.getThreadId();
-		long parentMessageId = thread.getRootMessageId();
+		MBThread mbThread = mbMessageDisplay.getThread();
 
 		ServiceContext serviceContext = serviceContextFunction.apply(
 			MBMessage.class.getName());
 
 		MBMessage message = MBMessageLocalServiceUtil.addDiscussionMessage(
-			userId, userName, groupId, className, classPK, threadId,
-			parentMessageId, subject, body, serviceContext);
+			userId, userName, groupId, className, classPK,
+			mbThread.getThreadId(), mbThread.getRootMessageId(), subject, body,
+			serviceContext);
 
 		return message.getMessageId();
 	}
