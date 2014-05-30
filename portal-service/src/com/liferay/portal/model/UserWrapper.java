@@ -1983,8 +1983,7 @@ public class UserWrapper implements User, ModelWrapper<User> {
 
 	@Override
 	public boolean hasOrganization()
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		throws com.liferay.portal.kernel.exception.SystemException {
 		return _user.hasOrganization();
 	}
 
