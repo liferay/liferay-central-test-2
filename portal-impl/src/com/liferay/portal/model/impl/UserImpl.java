@@ -886,7 +886,7 @@ public class UserImpl extends UserBaseImpl {
 	}
 
 	@Override
-	public boolean hasOrganization() throws PortalException, SystemException {
+	public boolean hasOrganization() throws SystemException {
 		return OrganizationLocalServiceUtil.hasUserOrganizations(getUserId());
 	}
 
