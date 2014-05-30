@@ -2011,29 +2011,15 @@ tck.url=true</echo>
 	</target>
 
 	<target name="prepare-so-plugins">
-		<ant dir="${lp.plugins.dir}" inheritall="false" target="clean" />
+		<property file="${lp.plugins.dir}/portlets/so-portlet/docroot/WEB-INF/liferay-releng.properties" />
 
-		<ant dir="${lp.plugins.dir}" inheritall="false" target="compile" />
+		<property name="plugins.includes" value="so-portlet,${dependent-apps}" />
 
-		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-			<property name="plugin.types" value="hooks" />
-			<property name="plugins.includes" value="deploy-listener-hook,portal-compat-hook,so-activities-hook,so-hook" />
-		</ant>
+		<ant dir="${lp.plugins.dir}" target="clean" />
 
-		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-			<property name="plugin.types" value="portlets" />
-			<property name="plugins.includes" value="calendar-portlet,chat-portlet,contacts-portlet,events-display-portlet,marketplace-portlet,microblogs-portlet,notifications-portlet,private-messaging-portlet,so-announcements-portlet,so-configurations-portlet,so-portlet,tasks-portlet,wysiwyg-portlet" />
-		</ant>
+		<ant dir="${lp.plugins.dir}" target="compile" />
 
-		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-			<property name="plugin.types" value="themes" />
-			<property name="plugins.includes" value="so-theme" />
-		</ant>
-
-		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins">
-			<property name="plugin.types" value="webs" />
-			<property name="plugins.includes" value="resources-importer-web" />
-		</ant>
+		<ant antfile="build-test-plugins.xml" target="deploy-simple-server-plugins" />
 	</target>
 
 	<target name="prepare-test-build">
