@@ -48,7 +48,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 
 		setUpHttp();
 
-		_linkbackConsumer = new LinkbackConsumerImpl(_comments);
+		_linkbackConsumer = new LinkbackConsumerImpl(_commentManager);
 	}
 
 	@Test
@@ -68,7 +68,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 		_linkbackConsumer.verifyNewTrackbacks();
 
 		Mockito.verify(
-			_comments
+			_commentManager
 		).deleteComment(
 			commentId
 		);
@@ -98,7 +98,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 		_linkbackConsumer.verifyNewTrackbacks();
 
 		Mockito.verify(
-			_comments
+			_commentManager
 		).deleteComment(
 			commentId
 		);
@@ -125,7 +125,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 
 		_linkbackConsumer.verifyNewTrackbacks();
 
-		Mockito.verifyZeroInteractions(_comments);
+		Mockito.verifyZeroInteractions(_commentManager);
 
 		Mockito.verify(
 			_http
@@ -143,7 +143,7 @@ public class LinkbackConsumerImplTest extends PowerMockito {
 	}
 
 	@Mock
-	private CommentManager _comments;
+	private CommentManager _commentManager;
 
 	@Mock
 	private Http _http;
