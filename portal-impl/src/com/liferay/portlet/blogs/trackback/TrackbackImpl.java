@@ -58,7 +58,7 @@ public class TrackbackImpl implements Trackback {
 
 		_linkbackConsumer.addNewTrackback(commentId, url, entryURL);
 	}
-	
+
 	@Override
 	public void setCommentManager(CommentManager commentManager) {
 		_commentManager = commentManager;

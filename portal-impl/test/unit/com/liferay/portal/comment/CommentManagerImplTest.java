@@ -14,7 +14,6 @@
 
 package com.liferay.portal.comment;
 
-import com.liferay.portal.comment.CommentManagerImpl;
 import com.liferay.portal.kernel.comment.CommentManager;
 import com.liferay.portal.kernel.util.Function;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
