@@ -78,11 +78,11 @@ public class DDMStructureTestUtil {
 
 		nameMap.put(defaultLocale, "Test Structure");
 
-		serviceContext.setAddGroupPermissions(true);
-		serviceContext.setAddGuestPermissions(true);
-
 		String ddlStorageType = GetterUtil.getString(
 			PropsUtil.get(PropsKeys.DYNAMIC_DATA_LISTS_STORAGE_TYPE));
+
+		serviceContext.setAddGroupPermissions(true);
+		serviceContext.setAddGuestPermissions(true);
 
 		return DDMStructureLocalServiceUtil.addStructure(
 			TestPropsValues.getUserId(), groupId, parentStructureId,

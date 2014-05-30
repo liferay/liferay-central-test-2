@@ -142,9 +142,8 @@ public class TestPropsValues {
 
 		try {
 			if (Validator.isNull(companyWebId)) {
-				companyWebId =
-					GetterUtil.getString(
-						PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
+				companyWebId = GetterUtil.getString(
+					PropsUtil.get(PropsKeys.COMPANY_DEFAULT_WEB_ID));
 
 				TestPropsUtil.set("company.web.id", companyWebId);
 			}
