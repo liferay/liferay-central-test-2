@@ -5818,13 +5818,13 @@ public class JournalArticleLocalServiceImpl
 
 		String fieldName = ddmFormField.getName();
 
-		boolean fieldFound = false;
+		boolean hasField = false;
 
 		for (Element childElement : contentElement.elements()) {
 			if (fieldName.equals(
 					childElement.attributeValue("name", StringPool.BLANK))) {
 
-				fieldFound = true;
+				hasField = true;
 
 				for (DDMFormField childDDMFormField :
 						ddmFormField.getNestedDDMFormFields()) {
@@ -5836,7 +5836,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		if (!fieldFound) {
+		if (!hasField) {
 			String contentElementType = contentElement.attributeValue(
 				"type", StringPool.BLANK);
 
