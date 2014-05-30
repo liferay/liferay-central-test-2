@@ -49,24 +49,22 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 
 	@Override
 	protected void doVerify() throws Exception {
-		List<MBDiscussion> discussions =
+		List<MBDiscussion> mbDiscussions =
 			MBMessageLocalServiceUtil.getDiscussions(
 				BlogsEntry.class.getName());
 
-		for (MBDiscussion discussion : discussions) {
-			long entryId = discussion.getClassPK();
-			long threadId = discussion.getThreadId();
-
+		for (MBDiscussion mbDiscussion : mbDiscussions) {
 			try {
 				BlogsEntry entry = BlogsEntryLocalServiceUtil.getBlogsEntry(
-					entryId);
+					mbDiscussion.getClassPK());
 
-				List<MBMessage> messages =
+				List<MBMessage> mbMessages =
 					MBMessageLocalServiceUtil.getThreadMessages(
-						threadId, WorkflowConstants.STATUS_APPROVED);
+						mbDiscussion.getThreadId(),
+						WorkflowConstants.STATUS_APPROVED);
 
-				for (MBMessage message : messages) {
-					_verifyPost(entry, message);
+				for (MBMessage mbMessage : mbMessages) {
+					_verifyPost(entry, mbMessage);
 				}
 			}
 			catch (Exception e) {
@@ -75,13 +73,13 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 		}
 	}
 
-	private void _verifyPost(BlogsEntry entry, MBMessage message)
+	private void _verifyPost(BlogsEntry entry, MBMessage mbMessage)
 		throws PortalException, SystemException {
 
-		long commentId = message.getMessageId();
+		long commentId = mbMessage.getMessageId();
 		String entryURL =
 			Portal.FRIENDLY_URL_SEPARATOR + "blogs/" + entry.getUrlTitle();
-		String body = message.getBody();
+		String body = mbMessage.getBody();
 		String url = null;
 
 		int start = body.indexOf("[url=");
@@ -97,12 +95,10 @@ public class VerifyBlogsTrackbacks extends VerifyProcess {
 		}
 
 		if (Validator.isNotNull(url)) {
-			long companyId = message.getCompanyId();
-			long userId = message.getUserId();
 			long defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-				companyId);
+				mbMessage.getCompanyId());
 
-			if (userId == defaultUserId) {
+			if (mbMessage.getUserId() == defaultUserId) {
 				_linkbackConsumer.verifyTrackback(commentId, url, entryURL);
 			}
 		}
