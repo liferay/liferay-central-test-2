@@ -428,14 +428,14 @@ public class AuthPipeline {
 					continue;
 				}
 
-				List<Authenticator> authenticatorList = ListUtil.toList(
+				List<Authenticator> authenticatorsList = ListUtil.toList(
 					authenticators);
 
-				if (authenticatorList.remove(authenticator)) {
+				if (authenticatorsList.remove(authenticator)) {
 					_authenticators.put(
 						key,
-						authenticatorList.toArray(
-							new Authenticator[authenticatorList.size()]));
+						authenticatorsList.toArray(
+							new Authenticator[authenticatorsList.size()]));
 				}
 			}
 		}
@@ -506,14 +506,14 @@ public class AuthPipeline {
 					continue;
 				}
 
-				List<AuthFailure> authFailureList = ListUtil.fromArray(
+				List<AuthFailure> authFailuresList = ListUtil.fromArray(
 					authFailures);
 
-				if (authFailureList.remove(authFailure)) {
+				if (authFailuresList.remove(authFailure)) {
 					_authFailures.put(
 						key,
-						authFailureList.toArray(
-							new AuthFailure[authFailureList.size()]));
+						authFailuresList.toArray(
+							new AuthFailure[authFailuresList.size()]));
 				}
 			}
 		}
