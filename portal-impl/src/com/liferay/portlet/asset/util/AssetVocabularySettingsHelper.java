@@ -45,7 +45,7 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getClassNameIds() {
-		String value = _properties.getProperty(_SELECTED_CLASS_NAME_IDS);
+		String value = _properties.getProperty(_KEY_SELECTED_CLASS_NAME_IDS);
 
 		if (Validator.isNull(value)) {
 			return DEFAULT_SELECTED_CLASSNAME_IDS;
@@ -55,7 +55,7 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getRequiredClassNameIds() {
-		String value = _properties.getProperty(_REQUIRED_CLASS_NAME_IDS);
+		String value = _properties.getProperty(_KEY_REQUIRED_CLASS_NAME_IDS);
 
 		if (Validator.isNull(value)) {
 			return new long[0];
@@ -73,7 +73,7 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public boolean isMultiValued() {
-		String value = _properties.getProperty(_MULTI_VALUED);
+		String value = _properties.getProperty(_KEY_MULTI_VALUED);
 
 		return GetterUtil.getBoolean(value, true);
 	}
@@ -109,13 +109,15 @@ public class AssetVocabularySettingsHelper {
 		}
 
 		_properties.setProperty(
-			_REQUIRED_CLASS_NAME_IDS, StringUtil.merge(requiredClassNameIds));
+			_KEY_REQUIRED_CLASS_NAME_IDS,
+			StringUtil.merge(requiredClassNameIds));
 		_properties.setProperty(
-			_SELECTED_CLASS_NAME_IDS, StringUtil.merge(selectedClassNameIds));
+			_KEY_SELECTED_CLASS_NAME_IDS,
+			StringUtil.merge(selectedClassNameIds));
 	}
 
 	public void setMultiValued(boolean multiValued) {
-		_properties.setProperty(_MULTI_VALUED, String.valueOf(multiValued));
+		_properties.setProperty(_KEY_MULTI_VALUED, String.valueOf(multiValued));
 	}
 
 	@Override
@@ -140,12 +142,12 @@ public class AssetVocabularySettingsHelper {
 		return true;
 	}
 
-	private static final String _MULTI_VALUED = "multiValued";
+	private static final String _KEY_MULTI_VALUED = "multiValued";
 
-	private static final String _REQUIRED_CLASS_NAME_IDS =
+	private static final String _KEY_REQUIRED_CLASS_NAME_IDS =
 		"requiredClassNameIds";
 
-	private static final String _SELECTED_CLASS_NAME_IDS =
+	private static final String _KEY_SELECTED_CLASS_NAME_IDS =
 		"selectedClassNameIds";
 
 	private UnicodeProperties _properties;
