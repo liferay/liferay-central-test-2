@@ -26,14 +26,10 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetTagLocalServiceUtil;
 import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
-import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
-import com.liferay.portlet.asset.util.AssetVocabularySettingsHelper;
 
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import org.junit.Assert;
 
 /**
  * @author Mate Thurzo
@@ -94,41 +90,6 @@ public class AssetTestUtil {
 
 		return AssetVocabularyLocalServiceUtil.addVocabulary(
 			userId, RandomTestUtil.randomString(), serviceContext);
-	}
-
-	public static AssetVocabulary addVocabularyAssociatedToAssetRendererFactory(
-			long groupId, boolean multiValued, long[] assetClassNameIds,
-			boolean[] assetRequireds)
-		throws Exception {
-
-		Map<Locale, String> titleMap = new HashMap<Locale, String>();
-
-		Locale locale = LocaleUtil.getSiteDefault();
-
-		titleMap.put(locale, RandomTestUtil.randomString());
-
-		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
-
-		descriptionMap.put(locale, RandomTestUtil.randomString());
-
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(
-				groupId, TestPropsValues.getUserId());
-
-		AssetVocabularySettingsHelper vocabularySettingsHelper =
-			new AssetVocabularySettingsHelper();
-
-		vocabularySettingsHelper.setClassNameIds(
-			assetClassNameIds, assetRequireds);
-		vocabularySettingsHelper.setMultiValued(multiValued);
-
-		AssetVocabulary vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-			RandomTestUtil.randomString(), titleMap, descriptionMap,
-			vocabularySettingsHelper.toString(), serviceContext);
-
-		Assert.assertNotNull(vocabulary);
-
-		return vocabulary;
 	}
 
 }
