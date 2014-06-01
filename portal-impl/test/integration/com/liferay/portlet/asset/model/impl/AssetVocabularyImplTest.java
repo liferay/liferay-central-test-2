@@ -14,10 +14,6 @@
 
 package com.liferay.portlet.asset.model.impl;
 
-import java.util.HashMap;
-import java.util.Locale;
-import java.util.Map;
-
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -36,6 +32,10 @@ import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.asset.service.AssetVocabularyServiceUtil;
 import com.liferay.portlet.asset.util.AssetVocabularySettingsHelper;
 import com.liferay.portlet.asset.util.test.AssetTestUtil;
+
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -61,8 +61,7 @@ public class AssetVocabularyImplTest {
 
 	@Test
 	public void testhasMoreThanOneCategorySelected() throws Exception {
-		AssetVocabulary vocabulary1 =
-			addVocabulary(1, true);
+		AssetVocabulary vocabulary1 = addVocabulary(1, true);
 
 		AssetCategory category11 = AssetTestUtil.addCategory(
 			_group.getGroupId(), vocabulary1.getVocabularyId());
@@ -80,8 +79,7 @@ public class AssetVocabularyImplTest {
 					category11.getCategoryId(), category12.getCategoryId()
 				}));
 
-		AssetVocabulary vocabulary2 =
-			addVocabulary(2, true);
+		AssetVocabulary vocabulary2 = addVocabulary(2, true);
 
 		AssetCategory category21 = AssetTestUtil.addCategory(
 			_group.getGroupId(), vocabulary2.getVocabularyId());
@@ -97,9 +95,8 @@ public class AssetVocabularyImplTest {
 
 	@Test
 	public void testIsAssociatedToAssetRendererFactory() throws Exception {
-		AssetVocabulary vocabulary =
-			addVocabulary(
-				AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
+		AssetVocabulary vocabulary = addVocabulary(
+			AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
 
 		Assert.assertTrue(vocabulary.isAssociatedToAssetRendererFactory(1));
 
@@ -111,8 +108,7 @@ public class AssetVocabularyImplTest {
 
 	@Test
 	public void testIsMissingRequiredCategory() throws Exception {
-		AssetVocabulary vocabulary =
-			addVocabulary(1, false);
+		AssetVocabulary vocabulary = addVocabulary(1, false);
 
 		AssetTestUtil.addCategory(
 			_group.getGroupId(), vocabulary.getVocabularyId());
@@ -139,9 +135,8 @@ public class AssetVocabularyImplTest {
 
 	@Test
 	public void testIsRequired() throws Exception {
-		AssetVocabulary vocabulary =
-			addVocabulary(
-				AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
+		AssetVocabulary vocabulary = addVocabulary(
+			AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
 
 		Assert.assertFalse(vocabulary.isRequired(1));
 		Assert.assertFalse(vocabulary.isRequired(2));
@@ -192,7 +187,7 @@ public class AssetVocabularyImplTest {
 			vocabularySettingsHelper.toString(), serviceContext);
 
 		Assert.assertNotNull(vocabulary);
-		
+
 		return vocabulary;
 	}
 

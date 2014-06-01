@@ -89,7 +89,7 @@ public class AssetVocabularySettingsHelper {
 			if (classNameId == AssetCategoryConstants.ALL_CLASS_NAME_IDS) {
 				if (required) {
 					requiredClassNameIds.clear();
-					
+
 					requiredClassNameIds.add(classNameId);
 				}
 
