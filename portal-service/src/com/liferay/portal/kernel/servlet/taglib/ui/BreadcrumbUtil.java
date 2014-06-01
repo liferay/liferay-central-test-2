@@ -67,41 +67,41 @@ public class BreadcrumbUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<BreadcrumbEntry> entries = new ArrayList<BreadcrumbEntry>();
+		List<BreadcrumbEntry> breadcrumbEntries = new ArrayList<BreadcrumbEntry>();
 
-		BreadcrumbEntry entry;
+		BreadcrumbEntry breadcrumbEntry = null;
 
 		boolean hasAll = ArrayUtil.contains(types, ENTRY_TYPE_ANY);
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_GUEST_GROUP)) {
-			entry = getGuestGroupBreadcrumbEntry(themeDisplay);
+			breadcrumbEntry = getGuestGroupBreadcrumbEntry(themeDisplay);
 
-			if (entry != null) {
-				entries.add(entry);
+			if (breadcrumbEntry != null) {
+				breadcrumbEntries.add(breadcrumbEntry);
 			}
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_PARENT_GROUP)) {
-			entries.addAll(getParentGroupBreadcrumbEntries(themeDisplay));
+			breadcrumbEntries.addAll(getParentGroupBreadcrumbEntries(themeDisplay));
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_CURRENT_GROUP)) {
-			entry = getScopeGroupBreadcrumbEntry(themeDisplay);
+			breadcrumbEntry = getScopeGroupBreadcrumbEntry(themeDisplay);
 
-			if (entry != null) {
-				entries.add(entry);
+			if (breadcrumbEntry != null) {
+				breadcrumbEntries.add(breadcrumbEntry);
 			}
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_LAYOUT)) {
-			entries.addAll(getLayoutBreadcrumbEntries(themeDisplay));
+			breadcrumbEntries.addAll(getLayoutBreadcrumbEntries(themeDisplay));
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_PORTLET)) {
-			entries.addAll(getPortletBreadcrumbEntries(request));
+			breadcrumbEntries.addAll(getPortletBreadcrumbEntries(request));
 		}
 
-		return entries;
+		return breadcrumbEntries;
 	}
 
 	public static BreadcrumbEntry getGuestGroupBreadcrumbEntry(
