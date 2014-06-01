@@ -26,76 +26,76 @@ public class AssetVocabularySettingsHelperTest {
 
 	@Test
 	public void testHasClassNameIdAll() {
-		_settingProperties = getSettingProperties(
+		_vocabularySettingsHelper = getSettingProperties(
 			true, AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
 
-		Assert.assertTrue(_settingProperties.hasClassNameId(1));
-		Assert.assertTrue(_settingProperties.hasClassNameId(2));
+		Assert.assertTrue(_vocabularySettingsHelper.hasClassNameId(1));
+		Assert.assertTrue(_vocabularySettingsHelper.hasClassNameId(2));
 	}
 
 	@Test
 	public void testHasClassNameIdClassName() {
-		_settingProperties = getSettingProperties(true, 1, true);
+		_vocabularySettingsHelper = getSettingProperties(true, 1, true);
 
-		Assert.assertTrue(_settingProperties.hasClassNameId(1));
-		Assert.assertFalse(_settingProperties.hasClassNameId(2));
+		Assert.assertTrue(_vocabularySettingsHelper.hasClassNameId(1));
+		Assert.assertFalse(_vocabularySettingsHelper.hasClassNameId(2));
 	}
 
 	@Test
 	public void testIsClassNameIdRequiredAllIsNotRequired() {
-		_settingProperties = getSettingProperties(
+		_vocabularySettingsHelper = getSettingProperties(
 			true, AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
 
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(1));
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(2));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(1));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(2));
 	}
 
 	@Test
 	public void testIsClassNameIdRequiredAllIsRequired() {
-		_settingProperties = getSettingProperties(
+		_vocabularySettingsHelper = getSettingProperties(
 			true, AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
 
-		Assert.assertTrue(_settingProperties.isClassNameIdRequired(1));
-		Assert.assertTrue(_settingProperties.isClassNameIdRequired(2));
+		Assert.assertTrue(_vocabularySettingsHelper.isClassNameIdRequired(1));
+		Assert.assertTrue(_vocabularySettingsHelper.isClassNameIdRequired(2));
 	}
 
 	@Test
 	public void testIsClassNameIdRequiredClassNameIsNotRequired() {
-		_settingProperties = getSettingProperties(true, 1, false);
+		_vocabularySettingsHelper = getSettingProperties(true, 1, false);
 
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(1));
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(2));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(1));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(2));
 	}
 
 	@Test
 	public void testIsClassNameIdRequiredClassNameIsRequired() {
-		_settingProperties = getSettingProperties(true, 1, true);
+		_vocabularySettingsHelper = getSettingProperties(true, 1, true);
 
-		Assert.assertTrue(_settingProperties.isClassNameIdRequired(1));
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(2));
+		Assert.assertTrue(_vocabularySettingsHelper.isClassNameIdRequired(1));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(2));
 	}
 
 	@Test
 	public void testIsClassNameIdRequiredOnOverwrite() {
-		_settingProperties = getSettingProperties(true, 1, true);
+		_vocabularySettingsHelper = getSettingProperties(true, 1, true);
 
-		_settingProperties.setClassNameIds(new long[]{1}, new boolean[]{false});
+		_vocabularySettingsHelper.setClassNameIds(new long[]{1}, new boolean[]{false});
 
-		Assert.assertFalse(_settingProperties.isClassNameIdRequired(1));
+		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(1));
 	}
 
 	@Test
 	public void testIsMultiValuedFalse() {
-		_settingProperties = getSettingProperties(false, 1, true);
+		_vocabularySettingsHelper = getSettingProperties(false, 1, true);
 
-		Assert.assertFalse(_settingProperties.isMultiValued());
+		Assert.assertFalse(_vocabularySettingsHelper.isMultiValued());
 	}
 
 	@Test
 	public void testIsMultiValuedTrue() {
-		_settingProperties = getSettingProperties(true, 1, true);
+		_vocabularySettingsHelper = getSettingProperties(true, 1, true);
 
-		Assert.assertTrue(_settingProperties.isMultiValued());
+		Assert.assertTrue(_vocabularySettingsHelper.isMultiValued());
 	}
 
 	protected AssetVocabularySettingsHelper getSettingProperties(
@@ -119,6 +119,6 @@ public class AssetVocabularySettingsHelperTest {
 		return settingsProperties;
 	}
 
-	private AssetVocabularySettingsHelper _settingProperties;
+	private AssetVocabularySettingsHelper _vocabularySettingsHelper;
 
 }
