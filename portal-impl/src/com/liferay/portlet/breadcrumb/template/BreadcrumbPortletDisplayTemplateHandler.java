@@ -44,11 +44,12 @@ public class BreadcrumbPortletDisplayTemplateHandler
 
 	@Override
 	public Map<String, Object> getCustomContextObjects() {
-		Map<String, Object> customVariables = new HashMap<String, Object>(1);
+		Map<String, Object> customContextObjects =
+			new HashMap<String, Object>(1);
 
-		customVariables.put("breadcrumbUtil", BreadcrumbUtil.class);
+		customContextObjects.put("breadcrumbUtil", BreadcrumbUtil.class);
 
-		return customVariables;
+		return customContextObjects;
 	}
 
 	@Override
