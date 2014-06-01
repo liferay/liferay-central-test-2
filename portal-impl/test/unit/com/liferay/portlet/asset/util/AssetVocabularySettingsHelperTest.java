@@ -79,7 +79,8 @@ public class AssetVocabularySettingsHelperTest {
 	public void testIsClassNameIdRequiredOnOverwrite() {
 		_vocabularySettingsHelper = getSettingProperties(true, 1, true);
 
-		_vocabularySettingsHelper.setClassNameIds(new long[]{1}, new boolean[]{false});
+		_vocabularySettingsHelper.setClassNameIds(
+			new long[] {1}, new boolean[] {false});
 
 		Assert.assertFalse(_vocabularySettingsHelper.isClassNameIdRequired(1));
 	}
@@ -104,7 +105,8 @@ public class AssetVocabularySettingsHelperTest {
 		long[] classNameIds = new long[] {classNameId};
 		boolean[] requireds = new boolean[] {required};
 
-		return getVocabularySettingsHelper(multiValued, classNameIds, requireds);
+		return getVocabularySettingsHelper(
+			multiValued, classNameIds, requireds);
 	}
 
 	protected AssetVocabularySettingsHelper getVocabularySettingsHelper(
