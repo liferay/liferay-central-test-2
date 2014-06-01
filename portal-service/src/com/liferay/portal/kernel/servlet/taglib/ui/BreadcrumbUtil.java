@@ -69,12 +69,11 @@ public class BreadcrumbUtil {
 
 		List<BreadcrumbEntry> breadcrumbEntries = new ArrayList<BreadcrumbEntry>();
 
-		BreadcrumbEntry breadcrumbEntry = null;
-
 		boolean hasAll = ArrayUtil.contains(types, ENTRY_TYPE_ANY);
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_GUEST_GROUP)) {
-			breadcrumbEntry = getGuestGroupBreadcrumbEntry(themeDisplay);
+			BreadcrumbEntry breadcrumbEntry = getGuestGroupBreadcrumbEntry(
+				themeDisplay);
 
 			if (breadcrumbEntry != null) {
 				breadcrumbEntries.add(breadcrumbEntry);
@@ -82,11 +81,13 @@ public class BreadcrumbUtil {
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_PARENT_GROUP)) {
-			breadcrumbEntries.addAll(getParentGroupBreadcrumbEntries(themeDisplay));
+			breadcrumbEntries.addAll(
+				getParentGroupBreadcrumbEntries(themeDisplay));
 		}
 
 		if (hasAll || ArrayUtil.contains(types, ENTRY_TYPE_CURRENT_GROUP)) {
-			breadcrumbEntry = getScopeGroupBreadcrumbEntry(themeDisplay);
+			BreadcrumbEntry breadcrumbEntry = getScopeGroupBreadcrumbEntry(
+				themeDisplay);
 
 			if (breadcrumbEntry != null) {
 				breadcrumbEntries.add(breadcrumbEntry);
