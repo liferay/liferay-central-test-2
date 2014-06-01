@@ -376,12 +376,12 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 					if (language.equals(TemplateConstants.LANG_TYPE_FTL)) {
 						_addStaticClassSupportFTL(
 							contextObjects, contextObjectKey,
-							(Class)contextObjectValue);
+							(Class<?>)contextObjectValue);
 					}
 					else if (language.equals(TemplateConstants.LANG_TYPE_VM)) {
 						_addStaticClassSupportVM(
 							contextObjects, contextObjectKey,
-							(Class)contextObjectValue);
+							(Class<?>)contextObjectValue);
 					}
 				}
 				else {
@@ -396,7 +396,7 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 
 	private void _addStaticClassSupportFTL(
 		Map<String, Object> contextObjects, String variableName,
-		Class variableClass) {
+		Class<?> variableClass) {
 
 		try {
 			BeansWrapper beansWrapper = BeansWrapper.getDefaultInstance();
@@ -418,7 +418,7 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 
 	private void _addStaticClassSupportVM(
 		Map<String, Object> contextObjects, String variableName,
-		Class variableClass) {
+		Class<?> variableClass) {
 
 		contextObjects.put(variableName, variableClass);
 	}
