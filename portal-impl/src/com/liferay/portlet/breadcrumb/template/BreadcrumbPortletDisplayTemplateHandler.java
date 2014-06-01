@@ -44,8 +44,8 @@ public class BreadcrumbPortletDisplayTemplateHandler
 
 	@Override
 	public Map<String, Object> getCustomContextObjects() {
-		Map<String, Object> customContextObjects =
-			new HashMap<String, Object>(1);
+		Map<String, Object> customContextObjects = new HashMap<String, Object>(
+			1);
 
 		customContextObjects.put("breadcrumbUtil", BreadcrumbUtil.class);
 
