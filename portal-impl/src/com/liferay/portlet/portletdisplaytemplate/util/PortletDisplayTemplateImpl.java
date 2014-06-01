@@ -335,23 +335,12 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		contextObjects.put(
 			PortletDisplayTemplateConstants.THEME_DISPLAY, themeDisplay);
 
-		// Taglibs
+		// Custom context objects
 
 		DDMTemplate ddmTemplate = DDMTemplateLocalServiceUtil.getTemplate(
 			ddmTemplateId);
 
 		String language = ddmTemplate.getLanguage();
-
-		if (language.equals(TemplateConstants.LANG_TYPE_FTL)) {
-			_addTaglibSupportFTL(contextObjects, pageContext);
-		}
-		else if (language.equals(TemplateConstants.LANG_TYPE_VM)) {
-			_addTaglibSupportVM(contextObjects, pageContext);
-		}
-
-		contextObjects.putAll(_getPortletPreferences(renderRequest));
-
-		// Custom context objects
 
 		TemplateHandler templateHandler =
 			TemplateHandlerRegistryUtil.getTemplateHandler(
@@ -389,6 +378,17 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 				}
 			}
 		}
+
+		// Taglibs
+
+		if (language.equals(TemplateConstants.LANG_TYPE_FTL)) {
+			_addTaglibSupportFTL(contextObjects, pageContext);
+		}
+		else if (language.equals(TemplateConstants.LANG_TYPE_VM)) {
+			_addTaglibSupportVM(contextObjects, pageContext);
+		}
+
+		contextObjects.putAll(_getPortletPreferences(renderRequest));
 
 		return _transformer.transform(
 			themeDisplay, contextObjects, ddmTemplate.getScript(), language);
