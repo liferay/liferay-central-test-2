@@ -85,15 +85,15 @@ public class EditVocabularyAction extends PortletAction {
 				renderRequest, "portlet.asset_category_admin.edit_vocabulary"));
 	}
 
-	protected String getSettingsValue(ActionRequest actionRequest) {
-		boolean multiValued = ParamUtil.getBoolean(
-			actionRequest, "multiValued");
+	protected String getSettings(ActionRequest actionRequest) {
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			new AssetVocabularySettingsHelper();
 
 		int[] indexes = StringUtil.split(
 			ParamUtil.getString(actionRequest, "indexes"), 0);
 
 		long[] classNameIds = new long[indexes.length];
-		boolean[] areRequired = new boolean[indexes.length];
+		boolean[] requireds = new boolean[indexes.length];
 
 		for (int i = 0; i < indexes.length; i++) {
 			int index = indexes[i];
@@ -101,17 +101,18 @@ public class EditVocabularyAction extends PortletAction {
 			classNameIds[i] = ParamUtil.getLong(
 				actionRequest, "classNameId" + index);
 
-			areRequired[i] = ParamUtil.getBoolean(
+			requireds[i] = ParamUtil.getBoolean(
 				actionRequest, "required" + index);
 		}
 
-		AssetVocabularySettingsHelper settingsHelper =
-			new AssetVocabularySettingsHelper();
+		vocabularySettingsHelper.setClassNameIds(classNameIds, requireds);
 
-		settingsHelper.setClassNameIds(classNameIds, areRequired);
-		settingsHelper.setMultiValued(multiValued);
+		boolean multiValued = ParamUtil.getBoolean(
+			actionRequest, "multiValued");
 
-		return settingsHelper.toString();
+		vocabularySettingsHelper.setMultiValued(multiValued);
+
+		return vocabularySettingsHelper.toString();
 	}
 
 	protected JSONObject updateVocabulary(ActionRequest actionRequest)
@@ -124,8 +125,6 @@ public class EditVocabularyAction extends PortletAction {
 		Map<Locale, String> descriptionMap =
 			LocalizationUtil.getLocalizationMap(actionRequest, "description");
 
-		String settingsValue = getSettingsValue(actionRequest);
-
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			AssetVocabulary.class.getName(), actionRequest);
 
@@ -136,8 +135,8 @@ public class EditVocabularyAction extends PortletAction {
 			// Add vocabulary
 
 			vocabulary = AssetVocabularyServiceUtil.addVocabulary(
-				StringPool.BLANK, titleMap, descriptionMap, settingsValue,
-				serviceContext);
+				StringPool.BLANK, titleMap, descriptionMap,
+				getSettings(actionRequest), serviceContext);
 		}
 		else {
 
@@ -145,7 +144,7 @@ public class EditVocabularyAction extends PortletAction {
 
 			vocabulary = AssetVocabularyServiceUtil.updateVocabulary(
 				vocabularyId, StringPool.BLANK, titleMap, descriptionMap,
-				settingsValue, serviceContext);
+				getSettings(actionRequest), serviceContext);
 		}
 
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();

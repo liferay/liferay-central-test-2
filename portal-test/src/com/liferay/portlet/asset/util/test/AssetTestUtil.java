@@ -98,31 +98,33 @@ public class AssetTestUtil {
 
 	public static AssetVocabulary addVocabularyAssociatedToAssets(
 			long groupId, boolean multiValued, long[] assetClassNameIds,
-			boolean[] assetsRequired)
+			boolean[] assetRequireds)
 		throws Exception {
+
+		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 
 		Locale locale = LocaleUtil.getSiteDefault();
 
-		Map<Locale, String> titleMap = new HashMap<Locale, String>();
 		titleMap.put(locale, RandomTestUtil.randomString());
 
 		Map<Locale, String> descriptionMap = new HashMap<Locale, String>();
+
 		descriptionMap.put(locale, RandomTestUtil.randomString());
 
-		long userId = TestPropsValues.getUserId();
-
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(groupId, userId);
+			ServiceContextTestUtil.getServiceContext(
+				groupId, TestPropsValues.getUserId());
 
-		AssetVocabularySettingsHelper settingsProperties =
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			new AssetVocabularySettingsHelper();
 
-		settingsProperties.setMultiValued(multiValued);
-		settingsProperties.setClassNameIds(assetClassNameIds, assetsRequired);
+		vocabularySettingsHelper.setClassNameIds(
+			assetClassNameIds, assetRequireds);
+		vocabularySettingsHelper.setMultiValued(multiValued);
 
 		AssetVocabulary vocabulary = AssetVocabularyServiceUtil.addVocabulary(
 			RandomTestUtil.randomString(), titleMap, descriptionMap,
-			settingsProperties.toString(), serviceContext);
+			vocabularySettingsHelper.toString(), serviceContext);
 
 		Assert.assertNotNull(vocabulary);
 

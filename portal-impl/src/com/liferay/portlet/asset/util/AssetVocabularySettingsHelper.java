@@ -25,18 +25,12 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- * <p>
- * This class is intended to handle the settings associated to one asset
- * vocabulary model instead of handling the properties using generic
- * UnicodeProperties class.
- * </p>
- *
  * @author José Manuel Navarro
  */
 public class AssetVocabularySettingsHelper {
 
 	public static final long[] DEFAULT_SELECTED_CLASSNAME_IDS =
-		new long[] {AssetCategoryConstants.ALL_CLASS_NAME_IDS};
+		{AssetCategoryConstants.ALL_CLASS_NAME_IDS};
 
 	public AssetVocabularySettingsHelper() {
 		super();
@@ -44,20 +38,20 @@ public class AssetVocabularySettingsHelper {
 		_properties = new UnicodeProperties(true);
 	}
 
-	public AssetVocabularySettingsHelper(String properties) {
+	public AssetVocabularySettingsHelper(String propertiesString) {
 		this();
 
-		_properties.fastLoad(properties);
+		_properties.fastLoad(propertiesString);
 	}
 
 	public long[] getClassNameIds() {
-		String propertyValue = getProperty(SELECTED_CLASS_NAME_IDS);
+		String value = getProperty(_SELECTED_CLASS_NAME_IDS);
 
-		if (Validator.isNull(propertyValue)) {
+		if (Validator.isNull(value)) {
 			return DEFAULT_SELECTED_CLASSNAME_IDS;
 		}
 
-		return StringUtil.split(propertyValue, 0L);
+		return StringUtil.split(value, 0L);
 	}
 
 	public String getProperty(String key) {
@@ -65,13 +59,13 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getRequiredClassNameIds() {
-		String propertyValue = getProperty(REQUIRED_CLASS_NAME_IDS);
+		String value = getProperty(_REQUIRED_CLASS_NAME_IDS);
 
-		if (Validator.isNull(propertyValue)) {
+		if (Validator.isNull(value)) {
 			return new long[0];
 		}
 
-		return StringUtil.split(propertyValue, 0L);
+		return StringUtil.split(value, 0L);
 	}
 
 	public boolean hasClassNameId(long classNameId) {
@@ -83,48 +77,49 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public boolean isMultiValued() {
-		String propertyValue = getProperty(MULTI_VALUED);
+		String value = getProperty(_MULTI_VALUED);
 
-		return GetterUtil.getBoolean(propertyValue, true);
+		return GetterUtil.getBoolean(value, true);
 	}
 
-	public void setClassNameIds(long[] classNameIds, boolean[] areRequired) {
-
-		Set<Long> selectedClassNameIds = new LinkedHashSet<Long>();
+	public void setClassNameIds(long[] classNameIds, boolean[] requireds) {
 		Set<Long> requiredClassNameIds = new LinkedHashSet<Long>();
+		Set<Long> selectedClassNameIds = new LinkedHashSet<Long>();
 
 		for (int i = 0; i < classNameIds.length; ++i) {
 			long classNameId = classNameIds[i];
-			boolean required = areRequired[i];
+			boolean required = requireds[i];
 
 			if (classNameId == AssetCategoryConstants.ALL_CLASS_NAME_IDS) {
-				selectedClassNameIds.clear();
-				selectedClassNameIds.add(classNameId);
-
 				if (required) {
 					requiredClassNameIds.clear();
+					
 					requiredClassNameIds.add(classNameId);
 				}
+
+				selectedClassNameIds.clear();
+
+				selectedClassNameIds.add(classNameId);
 
 				break;
 			}
 			else {
-				selectedClassNameIds.add(classNameId);
-
 				if (required) {
 					requiredClassNameIds.add(classNameId);
 				}
+
+				selectedClassNameIds.add(classNameId);
 			}
 		}
 
 		setProperty(
-			SELECTED_CLASS_NAME_IDS, StringUtil.merge(selectedClassNameIds));
+			_REQUIRED_CLASS_NAME_IDS, StringUtil.merge(requiredClassNameIds));
 		setProperty(
-			REQUIRED_CLASS_NAME_IDS, StringUtil.merge(requiredClassNameIds));
+			_SELECTED_CLASS_NAME_IDS, StringUtil.merge(selectedClassNameIds));
 	}
 
 	public void setMultiValued(boolean multiValued) {
-		setProperty(MULTI_VALUED, String.valueOf(multiValued));
+		setProperty(_MULTI_VALUED, String.valueOf(multiValued));
 	}
 
 	public void setProperty(String key, Object value) {
@@ -153,12 +148,12 @@ public class AssetVocabularySettingsHelper {
 		return true;
 	}
 
-	private static final String MULTI_VALUED = "multiValued";
+	private static final String _MULTI_VALUED = "multiValued";
 
-	private static final String REQUIRED_CLASS_NAME_IDS =
+	private static final String _REQUIRED_CLASS_NAME_IDS =
 		"requiredClassNameIds";
 
-	private static final String SELECTED_CLASS_NAME_IDS =
+	private static final String _SELECTED_CLASS_NAME_IDS =
 		"selectedClassNameIds";
 
 	private UnicodeProperties _properties;

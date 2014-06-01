@@ -49,40 +49,42 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 	@Override
 	public long[] getRequiredClassNameIds() {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
-		return settingsHelper.getRequiredClassNameIds();
+		return vocabularySettingsHelper.getRequiredClassNameIds();
 	}
 
 	@Override
 	public long[] getSelectedClassNameIds() {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
-		return settingsHelper.getClassNameIds();
+		return vocabularySettingsHelper.getClassNameIds();
 	}
 
 	@Override
 	public String getSettings() {
-		if (_settingsHelper == null) {
+		if (_vocabularySettingsHelper == null) {
 			return super.getSettings();
 		}
 		else {
-			return _settingsHelper.toString();
+			return _vocabularySettingsHelper.toString();
 		}
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement because the settings
-	 * object shouldn't be manipulated outside of the model layer
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override
 	public UnicodeProperties getSettingsProperties() {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
 		UnicodeProperties properties = new UnicodeProperties(true);
 
-		properties.fastLoad(settingsHelper.toString());
+		properties.fastLoad(vocabularySettingsHelper.toString());
 
 		return properties;
 	}
@@ -171,9 +173,10 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 	@Override
 	public boolean isAssociatedToAssetRendererFactory(long classNameId) {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
-		return settingsHelper.hasClassNameId(classNameId);
+		return vocabularySettingsHelper.hasClassNameId(classNameId);
 	}
 
 	@Override
@@ -201,46 +204,47 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 
 	@Override
 	public boolean isMultiValued() {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
-		return settingsHelper.isMultiValued();
+		return vocabularySettingsHelper.isMultiValued();
 	}
 
 	@Override
 	public boolean isRequired(long classNameId) {
-		AssetVocabularySettingsHelper settingsHelper = getSettingsHelper();
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
+			getVocabularySettingsHelper();
 
-		return settingsHelper.isClassNameIdRequired(classNameId);
+		return vocabularySettingsHelper.isClassNameIdRequired(classNameId);
 	}
 
 	@Override
 	public void setSettings(String settings) {
-		_settingsHelper = null;
+		_vocabularySettingsHelper = null;
 
 		super.setSettings(settings);
 	}
 
 	/**
-	 * @deprecated As of 7.0.0, with no direct replacement because the settings
-	 * object shouldn't be manipulated outside of the model layer
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	@Override
 	public void setSettingsProperties(UnicodeProperties settingsProperties) {
 		super.setSettings(settingsProperties.toString());
 
-		_settingsHelper = getSettingsHelper();
+		_vocabularySettingsHelper = getVocabularySettingsHelper();
 	}
 
-	protected AssetVocabularySettingsHelper getSettingsHelper() {
-		if (_settingsHelper == null) {
-			_settingsHelper = new AssetVocabularySettingsHelper(
+	protected AssetVocabularySettingsHelper getVocabularySettingsHelper() {
+		if (_vocabularySettingsHelper == null) {
+			_vocabularySettingsHelper = new AssetVocabularySettingsHelper(
 				super.getSettings());
 		}
 
-		return _settingsHelper;
+		return _vocabularySettingsHelper;
 	}
 
-	private AssetVocabularySettingsHelper _settingsHelper;
+	private AssetVocabularySettingsHelper _vocabularySettingsHelper;
 
 }
