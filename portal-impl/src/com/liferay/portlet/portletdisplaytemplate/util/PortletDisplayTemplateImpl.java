@@ -353,28 +353,25 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			Map<String, Object> customContextObjects =
 				portletDisplayTemplateHandler.getCustomContextObjects();
 
-			for (String contextObjectKey : customContextObjects.keySet()) {
-				if (contextObjects.containsKey(contextObjectKey)) {
+			for (String variableName : customContextObjects.keySet()) {
+				if (contextObjects.containsKey(variableName)) {
 					continue;
 				}
 
-				Object contextObjectValue = customContextObjects.get(
-					contextObjectKey);
+				Object object = customContextObjects.get(variableName);
 
-				if (contextObjectValue instanceof Class) {
+				if (object instanceof Class) {
 					if (language.equals(TemplateConstants.LANG_TYPE_FTL)) {
 						_addStaticClassSupportFTL(
-							contextObjects, contextObjectKey,
-							(Class<?>)contextObjectValue);
+							contextObjects, variableName, (Class<?>)object);
 					}
 					else if (language.equals(TemplateConstants.LANG_TYPE_VM)) {
 						_addStaticClassSupportVM(
-							contextObjects, contextObjectKey,
-							(Class<?>)contextObjectValue);
+							contextObjects, variableName, (Class<?>)object);
 					}
 				}
 				else {
-					contextObjects.put(contextObjectKey, contextObjectValue);
+					contextObjects.put(variableName, object);
 				}
 			}
 		}
