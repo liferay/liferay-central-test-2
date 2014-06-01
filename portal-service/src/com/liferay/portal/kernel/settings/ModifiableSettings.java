@@ -33,7 +33,7 @@ public interface ModifiableSettings extends Settings {
 
 	public ModifiableSettings setValue(String key, String value);
 
-	public ModifiableSettings setValues(ModifiableSettings settings);
+	public ModifiableSettings setValues(ModifiableSettings modifiableSettings);
 
 	public ModifiableSettings setValues(String key, String[] values);
 

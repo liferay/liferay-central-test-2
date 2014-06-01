@@ -37,9 +37,10 @@ public abstract class BaseModifiableSettings
 	}
 
 	@Override
-	public ModifiableSettings setValues(ModifiableSettings settings) {
-		for (String key : settings.getModifiedKeys()) {
-			String[] values = settings.getValues(key, StringPool.EMPTY_ARRAY);
+	public ModifiableSettings setValues(ModifiableSettings modifiableSettings) {
+		for (String key : modifiableSettings.getModifiedKeys()) {
+			String[] values = modifiableSettings.getValues(
+				key, StringPool.EMPTY_ARRAY);
 
 			if (values.length == 1) {
 				setValue(key, values[0]);

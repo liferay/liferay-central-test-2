@@ -45,21 +45,21 @@ public class BaseModifiableSettingsTest extends PowerMockito {
 		_baseModifiableSettings.setValue("key1", "value1");
 		_baseModifiableSettings.setValue("key2", "value2");
 
-		ModifiableSettings sourceSettings = new MemorySettings();
+		ModifiableSettings sourceModifiableSettings = new MemorySettings();
 
-		sourceSettings.setValue("otherKey", "otherValue");
+		sourceModifiableSettings.setValue("otherKey", "otherValue");
 
-		_baseModifiableSettings.setValues(sourceSettings);
+		_baseModifiableSettings.setValues(sourceModifiableSettings);
 
 		Collection<String> keys = _baseModifiableSettings.getModifiedKeys();
 
 		Assert.assertEquals(3, keys.size());
 		Assert.assertEquals(
 			"otherValue", _baseModifiableSettings.getValue("otherKey", null));
-		Assert.assertEquals("value1", _baseModifiableSettings.getValue(
-			"key1", null));
-		Assert.assertEquals("value2", _baseModifiableSettings.getValue(
-			"key2", null));
+		Assert.assertEquals(
+			"value1", _baseModifiableSettings.getValue("key1", null));
+		Assert.assertEquals(
+			"value2", _baseModifiableSettings.getValue("key2", null));
 	}
 
 	private BaseModifiableSettings _baseModifiableSettings =

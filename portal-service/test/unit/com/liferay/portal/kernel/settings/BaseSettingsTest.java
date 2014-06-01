@@ -28,6 +28,7 @@ public class BaseSettingsTest extends PowerMockito {
 
 	public BaseSettingsTest() {
 		_parentSettings = new MemorySettings();
+
 		_baseSettings = new MemorySettings(_parentSettings);
 	}
 
