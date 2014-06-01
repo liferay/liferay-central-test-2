@@ -96,7 +96,7 @@ public class AssetTestUtil {
 			userId, RandomTestUtil.randomString(), serviceContext);
 	}
 
-	public static AssetVocabulary addVocabularyAssociatedToAssets(
+	public static AssetVocabulary addVocabularyAssociatedToAssetRendererFactory(
 			long groupId, boolean multiValued, long[] assetClassNameIds,
 			boolean[] assetRequireds)
 		throws Exception {
