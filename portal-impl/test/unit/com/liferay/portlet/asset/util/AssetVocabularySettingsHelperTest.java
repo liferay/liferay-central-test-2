@@ -93,13 +93,13 @@ public class AssetVocabularySettingsHelperTest {
 	protected AssetVocabularySettingsHelper getVocabularySettingsHelper(
 		boolean multiValued, long[] classNameIds, boolean[] requireds) {
 
-		AssetVocabularySettingsHelper settingsProperties =
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			new AssetVocabularySettingsHelper();
 
-		settingsProperties.setClassNameIds(classNameIds, requireds);
-		settingsProperties.setMultiValued(multiValued);
+		vocabularySettingsHelper.setClassNameIds(classNameIds, requireds);
+		vocabularySettingsHelper.setMultiValued(multiValued);
 
-		return settingsProperties;
+		return vocabularySettingsHelper;
 	}
 
 }
