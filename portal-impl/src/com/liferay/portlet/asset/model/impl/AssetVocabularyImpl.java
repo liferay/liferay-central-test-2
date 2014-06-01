@@ -82,11 +82,11 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper();
 
-		UnicodeProperties properties = new UnicodeProperties(true);
+		UnicodeProperties settingsProperties = new UnicodeProperties(true);
 
-		properties.fastLoad(vocabularySettingsHelper.toString());
+		settingsProperties.fastLoad(vocabularySettingsHelper.toString());
 
-		return properties;
+		return settingsProperties;
 	}
 
 	@Override
