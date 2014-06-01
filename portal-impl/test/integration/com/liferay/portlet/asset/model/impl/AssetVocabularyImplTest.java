@@ -49,207 +49,171 @@ public class AssetVocabularyImplTest {
 	}
 
 	@Test
-	public void testHasMoreThanOneCategorySelectedAll() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+	public void testhasMoreThanOneCategorySelected() throws Exception {
+		AssetVocabulary vocabulary1 =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
-		AssetCategory category1 = AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		AssetCategory category2 = AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds =
-			new long[] {category1.getCategoryId(), category2.getCategoryId()};
+		AssetCategory category11 = AssetTestUtil.addCategory(
+			_group.getGroupId(), vocabulary1.getVocabularyId());
+		AssetCategory category12 = AssetTestUtil.addCategory(
+			_group.getGroupId(), vocabulary1.getVocabularyId());
 
 		Assert.assertTrue(
-			_vocabulary.hasMoreThanOneCategorySelected(selectedCategoryIds));
-	}
-
-	@Test
-	public void testHasMoreThanOneCategorySelectedNone() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
-
-		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds = new long[] {};
-
+			vocabulary1.hasMoreThanOneCategorySelected(
+				new long[] {
+					category11.getCategoryId(), category12.getCategoryId()
+				}));
 		Assert.assertFalse(
-			_vocabulary.hasMoreThanOneCategorySelected(selectedCategoryIds));
-	}
-
-	@Test
-	public void testHasMoreThanOneCategorySelectedOne() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
-
-		AssetCategory category1 = AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds = new long[] {category1.getCategoryId()};
-
+			vocabulary1.hasMoreThanOneCategorySelected(new long[0]));
 		Assert.assertFalse(
-			_vocabulary.hasMoreThanOneCategorySelected(selectedCategoryIds));
-	}
+			vocabulary1.hasMoreThanOneCategorySelected(
+				new long[] {category11.getCategoryId()}));
 
-	@Test
-	public void testHasMoreThanOneCategorySelectedOther() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
-
-		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		AssetVocabulary vocabulary2 = _addVocabularyAssociatedToAssetRendererFactory(2, true);
+		AssetVocabulary vocabulary2 =
+			_addVocabularyAssociatedToAssetRendererFactory(2, true);
 
 		AssetCategory category21 = AssetTestUtil.addCategory(
 			_group.getGroupId(), vocabulary2.getVocabularyId());
-
 		AssetCategory category22 = AssetTestUtil.addCategory(
 			_group.getGroupId(), vocabulary2.getVocabularyId());
 
-		long[] selectedCategoryIds =
-			new long[] {category21.getCategoryId(), category22.getCategoryId()};
-
 		Assert.assertFalse(
-			_vocabulary.hasMoreThanOneCategorySelected(selectedCategoryIds));
+			vocabulary1.hasMoreThanOneCategorySelected(
+				new long[] {
+					category21.getCategoryId(), category22.getCategoryId()
+				}));
 	}
 
 	@Test
 	public void testIsAssociatedToAssetRendererFactoryAll() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(
-			AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
 
-		Assert.assertTrue(_vocabulary.isAssociatedToAssetRendererFactory(1));
+		Assert.assertTrue(vocabulary.isAssociatedToAssetRendererFactory(1));
 	}
 
 	@Test
 	public void testIsAssociatedToAssetRendererFactoryClassName()
 		throws Exception {
 
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
-		Assert.assertTrue(_vocabulary.isAssociatedToAssetRendererFactory(1));
-
-		Assert.assertFalse(_vocabulary.isAssociatedToAssetRendererFactory(2));
+		Assert.assertTrue(vocabulary.isAssociatedToAssetRendererFactory(1));
+		Assert.assertFalse(vocabulary.isAssociatedToAssetRendererFactory(2));
 	}
 
 	@Test
 	public void testIsMissingRequiredCategoryMatches() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
 		AssetCategory category = AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds = new long[] {category.getCategoryId()};
+			_group.getGroupId(), vocabulary.getVocabularyId());
 
 		Assert.assertFalse(
-			_vocabulary.isMissingRequiredCategory(1, selectedCategoryIds));
+			vocabulary.isMissingRequiredCategory(
+				1, new long[] {category.getCategoryId()}));
 	}
 
 	@Test
 	public void testIsMissingRequiredCategoryNoExistingCategories()
 		throws Exception {
 
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
-
-		long[] selectedCategoryIds = new long[] {1};
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
 		Assert.assertTrue(
-			_vocabulary.isMissingRequiredCategory(1, selectedCategoryIds));
+			vocabulary.isMissingRequiredCategory(1, new long[] {1}));
 	}
 
 	@Test
 	public void testIsMissingRequiredCategoryNoMatchesAndNoRequired()
 		throws Exception {
 
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, false);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, false);
 
 		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds = new long[] {1};
+			_group.getGroupId(), vocabulary.getVocabularyId());
 
 		Assert.assertFalse(
-			_vocabulary.isMissingRequiredCategory(1, selectedCategoryIds));
+			vocabulary.isMissingRequiredCategory(1, new long[] {1}));
 	}
 
 	@Test
 	public void testIsMissingRequiredCategoryNoMatchesAndRequired()
 		throws Exception {
 
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
 		AssetTestUtil.addCategory(
-			_group.getGroupId(), _vocabulary.getVocabularyId());
-
-		long[] selectedCategoryIds = new long[] {1};
+			_group.getGroupId(), vocabulary.getVocabularyId());
 
 		Assert.assertTrue(
-			_vocabulary.isMissingRequiredCategory(1, selectedCategoryIds));
+			vocabulary.isMissingRequiredCategory(1, new long[] {1}));
 	}
 
 	@Test
 	public void testIsMissingRequiredCategoryNoRelated() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
 		Assert.assertFalse(
-			_vocabulary.isMissingRequiredCategory(2, new long[] {}));
+			vocabulary.isMissingRequiredCategory(2, new long[0]));
 	}
 
 	@Test
 	public void testIsRequiredAllNotRequired() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(
-			AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
 
-		Assert.assertFalse(_vocabulary.isRequired(1));
-		Assert.assertFalse(_vocabulary.isRequired(2));
+		Assert.assertFalse(vocabulary.isRequired(1));
+		Assert.assertFalse(vocabulary.isRequired(2));
 	}
 
 	@Test
 	public void testIsRequiredAllRequired() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(
-			AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
 
-		Assert.assertTrue(_vocabulary.isRequired(1));
-		Assert.assertTrue(_vocabulary.isRequired(2));
+		Assert.assertTrue(vocabulary.isRequired(1));
+		Assert.assertTrue(vocabulary.isRequired(2));
 	}
 
 	@Test
 	public void testIsRequiredClassNameNotRequired() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, false);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, false);
 
-		Assert.assertFalse(_vocabulary.isRequired(1));
-		Assert.assertFalse(_vocabulary.isRequired(2));
+		Assert.assertFalse(vocabulary.isRequired(1));
+		Assert.assertFalse(vocabulary.isRequired(2));
 	}
 
 	@Test
 	public void testIsRequiredClassNameRequired() throws Exception {
-		_vocabulary = _addVocabularyAssociatedToAssetRendererFactory(1, true);
+		AssetVocabulary vocabulary =
+			_addVocabularyAssociatedToAssetRendererFactory(1, true);
 
-		Assert.assertTrue(_vocabulary.isRequired(1));
-		Assert.assertFalse(_vocabulary.isRequired(2));
+		Assert.assertTrue(vocabulary.isRequired(1));
+		Assert.assertFalse(vocabulary.isRequired(2));
 	}
 
 	private AssetVocabulary _addVocabularyAssociatedToAssetRendererFactory(
-			long classNameId, boolean isRequired)
+			long classNameId, boolean required)
 		throws Exception {
 
 		long[] classNameIds = new long[] {classNameId};
-		boolean[] requireds = new boolean[] {isRequired};
+		boolean[] requireds = new boolean[] {required};
 
 		return AssetTestUtil.addVocabularyAssociatedToAssetRendererFactory(
 			_group.getGroupId(), true, classNameIds, requireds);
 	}
 
 	private Group _group;
-	private AssetVocabulary _vocabulary;
 
 }
