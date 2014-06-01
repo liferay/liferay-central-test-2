@@ -34,24 +34,21 @@ public class BaseSettingsTest extends PowerMockito {
 
 	@Test
 	public void testGetModifiableSettingsForModifiableBaseSettings() {
-		BaseSettings modifiableBaseSettings = new MemorySettings();
+		BaseSettings baseSettings = new MemorySettings();
 
-		Assert.assertTrue(modifiableBaseSettings instanceof ModifiableSettings);
-		Assert.assertSame(
-			modifiableBaseSettings,
-			modifiableBaseSettings.getModifiableSettings());
+		Assert.assertTrue(baseSettings instanceof ModifiableSettings);
+		Assert.assertSame(baseSettings, baseSettings.getModifiableSettings());
 	}
 
 	@Test
 	public void testGetModifiableSettingsForUnmodifiableBaseSettings() {
-		ModifiableSettings parentSettings = new MemorySettings();
-		BaseSettings unmodifiableBaseSettings = new ParameterMapSettings(
-			Collections.<String, String[]> emptyMap(), parentSettings);
+		ModifiableSettings modifiableSettings = new MemorySettings();
+		BaseSettings baseSettings = new ParameterMapSettings(
+			Collections.<String, String[]> emptyMap(), modifiableSettings);
 
-		Assert.assertFalse(
-			unmodifiableBaseSettings instanceof ModifiableSettings);
+		Assert.assertFalse(baseSettings instanceof ModifiableSettings);
 		Assert.assertSame(
-			parentSettings, unmodifiableBaseSettings.getModifiableSettings());
+			modifiableSettings, baseSettings.getModifiableSettings());
 	}
 
 	@Test
@@ -63,24 +60,14 @@ public class BaseSettingsTest extends PowerMockito {
 	public void testGetValueReturnsDefaultWhenValueAndParentNotSet() {
 		Assert.assertEquals(
 			_DEFAULT_VALUE, _baseSettings.getValue(_KEY, _DEFAULT_VALUE));
-	}
+		Assert.assertArrayEquals(
+			_DEFAULT_VALUES, _baseSettings.getValues(_KEY, _DEFAULT_VALUES));
 
-	@Test
-	public void testGetValueReturnsParentValueWhenValueNotSet() {
 		_parentSettings.setValue(_KEY, _VALUE);
 
 		Assert.assertEquals(
 			_VALUE, _baseSettings.getValue(_KEY, _DEFAULT_VALUE));
-	}
 
-	@Test
-	public void testGetValuesReturnsDefaultWhenValuesAndParentNotSet() {
-		Assert.assertArrayEquals(
-			_DEFAULT_VALUES, _baseSettings.getValues(_KEY, _DEFAULT_VALUES));
-	}
-
-	@Test
-	public void testGetValuesReturnsParentValuesWhenValuesNotSet() {
 		_parentSettings.setValues(_KEY, _VALUES);
 
 		Assert.assertArrayEquals(
