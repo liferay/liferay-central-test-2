@@ -54,7 +54,7 @@ public class AssetVocabularySettingsHelper {
 		return StringUtil.split(value, 0L);
 	}
 
-	public String getProperty(String key) {
+	protected String getProperty(String key) {
 		return _properties.getProperty(key);
 	}
 
@@ -122,7 +122,7 @@ public class AssetVocabularySettingsHelper {
 		setProperty(_MULTI_VALUED, String.valueOf(multiValued));
 	}
 
-	public void setProperty(String key, Object value) {
+	protected void setProperty(String key, Object value) {
 		_properties.setProperty(key, value.toString());
 	}
 
