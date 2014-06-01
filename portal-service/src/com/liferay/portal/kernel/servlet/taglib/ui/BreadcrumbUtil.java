@@ -67,7 +67,8 @@ public class BreadcrumbUtil {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		List<BreadcrumbEntry> breadcrumbEntries = new ArrayList<BreadcrumbEntry>();
+		List<BreadcrumbEntry> breadcrumbEntries =
+			new ArrayList<BreadcrumbEntry>();
 
 		boolean hasAll = ArrayUtil.contains(types, ENTRY_TYPE_ANY);
 
