@@ -99,21 +99,21 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	protected AssetVocabularySettingsHelper getSettingProperties(
-		boolean multiValued, long classNameId, boolean isRequired) {
+		boolean multiValued, long classNameId, boolean required) {
 
-		long[] classNameIds = new long[]{classNameId};
-		boolean[] required = new boolean[]{isRequired};
+		long[] classNameIds = new long[] {classNameId};
+		boolean[] requireds = new boolean[] {required};
 
-		return getSettingProperties(multiValued, classNameIds, required);
+		return getVocabularySettingsHelper(multiValued, classNameIds, requireds);
 	}
 
-	protected AssetVocabularySettingsHelper getSettingProperties(
-		boolean multiValued, long[] classNameIds, boolean[] required) {
+	protected AssetVocabularySettingsHelper getVocabularySettingsHelper(
+		boolean multiValued, long[] classNameIds, boolean[] requireds) {
 
 		AssetVocabularySettingsHelper settingsProperties =
 			new AssetVocabularySettingsHelper();
 
-		settingsProperties.setClassNameIds(classNameIds, required);
+		settingsProperties.setClassNameIds(classNameIds, requireds);
 		settingsProperties.setMultiValued(multiValued);
 
 		return settingsProperties;
