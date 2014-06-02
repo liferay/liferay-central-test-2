@@ -56,61 +56,67 @@ public interface UsersAdmin {
 
 	public static final String CUSTOM_QUESTION = "write-my-own-question";
 
-	public static final Accessor<UserGroupGroupRole, String> TITLE_GROUP_ROLE_ACCESSOR =
-		new Accessor<UserGroupGroupRole, String>() {
+	public static final Accessor<UserGroupGroupRole, String>
+		USER_GROUP_GROUP_ROLE_TITLE_ACCESSOR =
+			new Accessor<UserGroupGroupRole, String>() {
 
-		@Override
-		public String get(UserGroupGroupRole userGroupGroupRole) {
-			try {
-				Role role = RoleLocalServiceUtil.fetchRole(
-					userGroupGroupRole.getRoleId());
+				@Override
+				public String get(UserGroupGroupRole userGroupGroupRole) {
+					try {
+						Role role = RoleLocalServiceUtil.fetchRole(
+							userGroupGroupRole.getRoleId());
 
-				return role.getTitle(LocaleThreadLocal.getThemeDisplayLocale());
-			}
-			catch (SystemException se) {
-			}
+						return role.getTitle(
+							LocaleThreadLocal.getThemeDisplayLocale());
+					}
+					catch (SystemException se) {
+					}
 
-			return StringPool.BLANK;
-		}
+					return StringPool.BLANK;
+				}
 
-		@Override
-		public Class<String> getAttributeClass() {
-			return String.class;
-		}
+				@Override
+				public Class<String> getAttributeClass() {
+					return String.class;
+				}
 
-		@Override
-		public Class<UserGroupGroupRole> getTypeClass() {
-			return UserGroupGroupRole.class;
-		}
-	};
+				@Override
+				public Class<UserGroupGroupRole> getTypeClass() {
+					return UserGroupGroupRole.class;
+				}
 
-	public static final Accessor<UserGroupRole, String> TITLE_ROLE_ACCESSOR =
-		new Accessor<UserGroupRole, String>() {
+			};
 
-		@Override
-		public String get(UserGroupRole userGroupRole) {
-			try {
-				Role role = RoleLocalServiceUtil.fetchRole(
-					userGroupRole.getRoleId());
+	public static final Accessor<UserGroupRole, String>
+		USER_GROUP_ROLE_TITLE_ACCESSOR =
+			new Accessor<UserGroupRole, String>() {
 
-				return role.getTitle(LocaleThreadLocal.getThemeDisplayLocale());
-			}
-			catch (SystemException se) {
-			}
+				@Override
+				public String get(UserGroupRole userGroupRole) {
+					try {
+						Role role = RoleLocalServiceUtil.fetchRole(
+							userGroupRole.getRoleId());
 
-			return StringPool.BLANK;
-		}
+						return role.getTitle(
+							LocaleThreadLocal.getThemeDisplayLocale());
+					}
+					catch (SystemException se) {
+					}
 
-		@Override
-		public Class<String> getAttributeClass() {
-			return String.class;
-		}
+					return StringPool.BLANK;
+				}
 
-		@Override
-		public Class<UserGroupRole> getTypeClass() {
-			return UserGroupRole.class;
-		}
-	};
+				@Override
+				public Class<String> getAttributeClass() {
+					return String.class;
+				}
+
+				@Override
+				public Class<UserGroupRole> getTypeClass() {
+					return UserGroupRole.class;
+				}
+
+			};
 
 	public void addPortletBreadcrumbEntries(
 			Organization organization, HttpServletRequest request,

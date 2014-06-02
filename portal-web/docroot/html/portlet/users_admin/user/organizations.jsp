@@ -74,7 +74,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "organi
 
 		<liferay-ui:search-container-column-text
 			name="roles"
-			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.TITLE_ROLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
+			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.USER_GROUP_ROLE_TITLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
 		/>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && ((selUser == null) || !OrganizationMembershipPolicyUtil.isMembershipProtected(permissionChecker, selUser.getUserId(), organization.getOrganizationId())) %>">

@@ -40,7 +40,7 @@
 		<liferay-ui:search-container-column-text
 			href="<%= rowURL %>"
 			name="organization-roles"
-			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.TITLE_ROLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
+			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.USER_GROUP_ROLE_TITLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
 		/>
 	</c:when>
 	<c:otherwise>

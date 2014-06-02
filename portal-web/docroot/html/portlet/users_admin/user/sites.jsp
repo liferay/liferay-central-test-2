@@ -66,7 +66,7 @@ currentURLObj.setParameter("historyKey", renderResponse.getNamespace() + "sites"
 
 		<liferay-ui:search-container-column-text
 			name="roles"
-			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.TITLE_ROLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
+			value="<%= ListUtil.toString(userGroupRoles, UsersAdmin.USER_GROUP_ROLE_TITLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
 		/>
 
 		<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) && !SiteMembershipPolicyUtil.isMembershipRequired(selUser.getUserId(), group.getGroupId()) && !SiteMembershipPolicyUtil.isMembershipProtected(permissionChecker, selUser.getUserId(), group.getGroupId()) %>">

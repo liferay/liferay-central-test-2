@@ -112,7 +112,7 @@ userGroupSearch.setEmptyResultsMessage(emptyResultsMessage);
 
 			<liferay-ui:search-container-column-text
 				name="site-roles"
-				value="<%= ListUtil.toString(userGroupGroupRoles, UsersAdmin.TITLE_GROUP_ROLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
+				value="<%= ListUtil.toString(userGroupGroupRoles, UsersAdmin.USER_GROUP_GROUP_ROLE_TITLE_ACCESSOR, StringPool.COMMA_AND_SPACE) %>"
 			/>
 
 			<liferay-ui:search-container-column-jsp
