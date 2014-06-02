@@ -188,9 +188,9 @@ public class BreadcrumbUtil {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		String name = WebKeys.PORTLET_BREADCRUMBS;
-
 		String portletName = portletDisplay.getPortletName();
+
+		String name = WebKeys.PORTLET_BREADCRUMBS;
 
 		if (Validator.isNotNull(portletDisplay.getId()) &&
 			!portletName.equals(PortletKeys.BREADCRUMB) &&
