@@ -26,8 +26,7 @@ import java.util.List;
 
 /**
  * @author     Alexander Chow
- * @deprecated As of 7.0.0, replaced by {@link
- *             com.liferay.portlet.documentlibrary.util.RepositoryModelUtil}
+ * @deprecated As of 7.0.0, replaced by {@link RepositoryModelUtil}
  */
 @Deprecated
 public abstract class LiferayBase {

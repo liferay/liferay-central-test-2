@@ -64,7 +64,7 @@ public class FolderUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static List<Folder> findByR_P(long repositoryId, long parentFolderId)
@@ -77,7 +77,7 @@ public class FolderUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static List<Folder> findByRepositoryId(long repositoryId)

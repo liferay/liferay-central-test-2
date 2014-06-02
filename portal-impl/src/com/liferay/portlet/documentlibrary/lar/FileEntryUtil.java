@@ -76,7 +76,7 @@ public class FileEntryUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static List<FileEntry> findByR_F(long repositoryId, long folderId)
@@ -89,7 +89,7 @@ public class FileEntryUtil {
 	}
 
 	/**
-	 * @deprecated As of 7.0.0
+	 * @deprecated As of 7.0.0, with no direct replacement
 	 */
 	@Deprecated
 	public static FileEntry findByR_F_T(
