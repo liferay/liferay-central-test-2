@@ -825,7 +825,7 @@ public class JournalTestUtil {
 
 		for (Attribute attribute : dynamicElementElement.attributes()) {
 
-			// Option element shouldn't contain index type atribute
+			// Option element should not contain index type atribute
 
 			if ((Validator.equals(parentType, "list") ||
 				 Validator.equals(parentType, "multi-list")) &&

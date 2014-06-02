@@ -543,64 +543,32 @@ public class JournalConverterUtilTest extends BaseDDMServiceTestCase {
 	protected void assertEquals(
 		DDMFormField expectedDDMFormField, DDMFormField actualDDMFormField) {
 
-		// Data type
-
 		Assert.assertEquals(
 			expectedDDMFormField.getDataType(),
 			actualDDMFormField.getDataType());
-
-		// Index type
-
-		Assert.assertEquals(
-			expectedDDMFormField.getIndexType(),
-			actualDDMFormField.getIndexType());
-
-		// Label
-
-		assertEquals(
-			expectedDDMFormField.getLabel(), actualDDMFormField.getLabel());
-
-		// Multiple
-
-		Assert.assertEquals(
-			expectedDDMFormField.isMultiple(), actualDDMFormField.isMultiple());
-
-		// Name
-
-		Assert.assertEquals(
-			expectedDDMFormField.getName(),  actualDDMFormField.getName());
-
-		// Options
-
 		assertEquals(
 			expectedDDMFormField.getDDMFormFieldOptions(),
 			actualDDMFormField.getDDMFormFieldOptions());
-
-		// Repeatable
-
+		Assert.assertEquals(
+			expectedDDMFormField.getIndexType(),
+			actualDDMFormField.getIndexType());
+		assertEquals(
+			expectedDDMFormField.getLabel(), actualDDMFormField.getLabel());
+		Assert.assertEquals(
+			expectedDDMFormField.getName(),  actualDDMFormField.getName());
+		assertEquals(
+			expectedDDMFormField.getStyle(), actualDDMFormField.getStyle());
+		assertEquals(
+			expectedDDMFormField.getTip(), actualDDMFormField.getTip());
+		Assert.assertEquals(
+			expectedDDMFormField.getType(), actualDDMFormField.getType());
+		Assert.assertEquals(
+			expectedDDMFormField.isMultiple(), actualDDMFormField.isMultiple());
 		Assert.assertEquals(
 			expectedDDMFormField.isRepeatable(),
 			actualDDMFormField.isRepeatable());
-
-		// Required
-
 		Assert.assertEquals(
 			expectedDDMFormField.isRequired(), actualDDMFormField.isRequired());
-
-		// Style
-
-		assertEquals(
-			expectedDDMFormField.getStyle(), actualDDMFormField.getStyle());
-
-		// Tip
-
-		assertEquals(
-			expectedDDMFormField.getTip(), actualDDMFormField.getTip());
-
-		// Type
-
-		Assert.assertEquals(
-			expectedDDMFormField.getType(), actualDDMFormField.getType());
 	}
 
 	protected void assertEquals(
