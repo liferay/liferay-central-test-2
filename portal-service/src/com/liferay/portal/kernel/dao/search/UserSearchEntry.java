@@ -33,11 +33,11 @@ public class UserSearchEntry extends TextSearchEntry {
 
 	@Override
 	public Object clone() {
-		UserSearchEntry jspSearchEntry = new UserSearchEntry();
+		UserSearchEntry userSearchEntry = new UserSearchEntry();
 
-		BeanPropertiesUtil.copyProperties(this, jspSearchEntry);
+		BeanPropertiesUtil.copyProperties(this, userSearchEntry);
 
-		return jspSearchEntry;
+		return userSearchEntry;
 	}
 
 	public Date getDate() {
