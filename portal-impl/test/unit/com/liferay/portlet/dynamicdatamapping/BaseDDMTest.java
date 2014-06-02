@@ -39,10 +39,11 @@ import org.powermock.modules.junit4.PowerMockRunner;
  * @author Pablo Carvalho
  * @author Miguel Angelo Caldas Gallindo
  */
-@PrepareForTest( {
-	HtmlUtil.class, LocaleUtil.class, LocalizationUtil.class, PropsUtil.class,
-	SAXReaderUtil.class
-})
+@PrepareForTest(
+	{
+		HtmlUtil.class, LocaleUtil.class, LocalizationUtil.class,
+		PropsUtil.class, SAXReaderUtil.class
+	})
 @RunWith(PowerMockRunner.class)
 public class BaseDDMTest extends PowerMockito {
 
@@ -50,11 +51,11 @@ public class BaseDDMTest extends PowerMockito {
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
-		setUpHtml();
-		setUpLocale();
+		setUpHtmlUtil();
+		setUpLocaleUtil();
 		setUpLocalizationUtil();
 		setUpPropsUtil();
-		setUpSAXReader();
+		setUpSAXReaderUtil();
 	}
 
 	protected Element addTextElement(
@@ -111,7 +112,7 @@ public class BaseDDMTest extends PowerMockito {
 		return document;
 	}
 
-	protected void setUpHtml() {
+	protected void setUpHtmlUtil() {
 		spy(HtmlUtil.class);
 
 		when(
@@ -121,7 +122,7 @@ public class BaseDDMTest extends PowerMockito {
 		);
 	}
 
-	protected void setUpLocale() {
+	protected void setUpLocaleUtil() {
 		spy(LocaleUtil.class);
 
 		when(
@@ -151,12 +152,6 @@ public class BaseDDMTest extends PowerMockito {
 		mockStatic(PropsUtil.class);
 
 		when(
-			PropsUtil.get(PropsKeys.INDEX_DATE_FORMAT_PATTERN)
-		).thenReturn(
-			"yyyyMMddHHmmss"
-		);
-
-		when(
 			PropsUtil.get(
 				PropsKeys.DYNAMIC_DATA_MAPPING_STRUCTURE_PRIVATE_FIELD_DATATYPE)
 		).thenReturn(
@@ -182,9 +177,15 @@ public class BaseDDMTest extends PowerMockito {
 		).thenReturn(
 			"51200"
 		);
+
+		when(
+			PropsUtil.get(PropsKeys.INDEX_DATE_FORMAT_PATTERN)
+		).thenReturn(
+			"yyyyMMddHHmmss"
+		);
 	}
 
-	protected void setUpSAXReader() {
+	protected void setUpSAXReaderUtil() {
 		spy(SAXReaderUtil.class);
 
 		when(

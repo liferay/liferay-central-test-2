@@ -27,9 +27,10 @@ import org.junit.runners.Suite.SuiteClasses;
  * @author Miguel Angelo Caldas Gallindo
  */
 @RunWith(Suite.class)
-@SuiteClasses( {
-	DDMFormXSDSerializerTest.class, DDMStructureImplTest.class,
-	DDMXMLImplTest.class, DDMXSDImplTest.class
-})
+@SuiteClasses(
+	{
+		DDMFormXSDSerializerTest.class, DDMStructureImplTest.class,
+		DDMXMLImplTest.class, DDMXSDImplTest.class
+	})
 public class DDMTestSuite {
 }
