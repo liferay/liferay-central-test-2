@@ -79,7 +79,7 @@ public class DDMTemplatePermission {
 
 		if (permissionChecker.hasOwnerPermission(
 				template.getCompanyId(), DDMTemplate.class.getName(),
-			template.getTemplateId(), template.getUserId(), actionId)) {
+				template.getTemplateId(), template.getUserId(), actionId)) {
 
 			return true;
 		}

@@ -71,7 +71,7 @@ boolean hasViewPermission = portletName.equals(PortletKeys.DYNAMIC_DATA_LISTS) &
 		<liferay-ui:icon
 			image="edit"
 			url="<%= editRecordSetURL %>"
-			/>
+		/>
 	</c:if>
 
 	<c:if test="<%= hasViewPermission %>">

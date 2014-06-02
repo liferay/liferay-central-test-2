@@ -802,6 +802,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		}
 
 		Map<String, Serializable> attributes = serviceContext.getAttributes();
+
 		Set<String> parameterNames = attributes.keySet();
 
 		for (String parameterName : parameterNames) {
