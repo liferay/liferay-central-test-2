@@ -77,7 +77,7 @@ public class DDMStructureImplTest extends BaseDDMTest {
 
 		structure.setDocument(document);
 
-		_structuresMap.put(structure.getStructureId(), structure);
+		_structures.put(structure.getStructureId(), structure);
 
 		return structure;
 	}
@@ -98,13 +98,14 @@ public class DDMStructureImplTest extends BaseDDMTest {
 
 					Long structureId = (Long)args[0];
 
-					return _structuresMap.get(structureId);
+					return _structures.get(structureId);
 				}
+
 			}
 		);
 	}
 
-	private Map<Long, DDMStructure> _structuresMap =
+	private Map<Long, DDMStructure> _structures =
 		new HashMap<Long, DDMStructure>();
 
 }
