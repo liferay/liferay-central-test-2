@@ -4317,7 +4317,8 @@ public class PortalImpl implements Portal {
 
 	/**
 	 * @deprecated As of 7.0.0, replaced by {@link
-	 *             com.liferay.portal.kernel.servlet.taglib.ui.BreadcrumbUtil#getPortletBreadcrumbEntries(HttpServletRequest)}
+	 *             BreadcrumbUtil#getPortletBreadcrumbEntries(
+	 *             HttpServletRequest)}
 	 */
 	@Deprecated
 	@Override
