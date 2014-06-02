@@ -31,9 +31,6 @@ import java.util.List;
 @Deprecated
 public abstract class LiferayBase {
 
-	/**
-	 * @see com.liferay.portal.portletfilerepository.PortletFileRepositoryImpl#toFileEntries
-	 */
 	public List<FileEntry> toFileEntries(List<DLFileEntry> dlFileEntries) {
 		return RepositoryModelUtil.toFileEntries(dlFileEntries);
 	}
