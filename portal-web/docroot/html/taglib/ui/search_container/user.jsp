@@ -17,8 +17,8 @@
 <%@ include file="/html/taglib/ui/search_container/init.jsp" %>
 
 <%
-long userId = GetterUtil.getLong(request.getAttribute("liferay-ui:search-container-column-user:userId"));
 Date date = GetterUtil.getDate(request.getAttribute("liferay-ui:search-container-column-user:date"), DateFormatFactoryUtil.getDate(locale), null);
+long userId = GetterUtil.getLong(request.getAttribute("liferay-ui:search-container-column-user:userId"));
 
 User user2 = UserLocalServiceUtil.fetchUser(userId);
 %>

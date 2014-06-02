@@ -46,7 +46,7 @@ public class SearchContainerColumnUserTag<R> extends SearchContainerColumnTag {
 
 			ResultRow resultRow = searchContainerRowTag.getRow();
 
-			if ((_userId == -1) && (resultRow.getObject() != null)) {
+			if ((_userId == 0) && (resultRow.getObject() != null)) {
 				if (Validator.isNull(_property)) {
 					_userId = (Long)BeanPropertiesUtil.getObject(
 						resultRow.getObject(), "userId");
@@ -88,7 +88,7 @@ public class SearchContainerColumnUserTag<R> extends SearchContainerColumnTag {
 		finally {
 			index = -1;
 			_date = null;
-			_userId = -1;
+			_userId = 0;
 
 			if (!ServerDetector.isResin()) {
 				align = SearchEntry.DEFAULT_ALIGN;
@@ -206,6 +206,6 @@ public class SearchContainerColumnUserTag<R> extends SearchContainerColumnTag {
 	private boolean _orderable;
 	private String _orderableProperty;
 	private String _property;
-	private long _userId = -1;
+	private long _userId;
 
 }
