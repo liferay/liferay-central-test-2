@@ -36,7 +36,7 @@ public class ViewContentAction
 		throws Exception {
 
 		renderResponse.setProperty(
-			"clear-request-parameters", String.valueOf(Boolean.TRUE));
+			"clear-request-parameters", Boolean.TRUE.toString());
 
 		return super.render(
 			actionMapping, actionForm, portletConfig, renderRequest,
