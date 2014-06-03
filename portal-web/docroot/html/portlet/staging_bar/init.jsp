@@ -68,6 +68,8 @@ if (group != null) {
 		}
 	}
 }
+
+Format dateFormatDateTime = FastDateFormatFactoryUtil.getDateTime(locale, timeZone);
 %>
 
 <%@ include file="/html/portlet/staging_bar/init-ext.jsp" %>
