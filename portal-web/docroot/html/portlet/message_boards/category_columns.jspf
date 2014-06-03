@@ -17,7 +17,6 @@
 <liferay-ui:search-container-column-text
 	name="category[message-board]"
 >
-
 	<a href="<%= rowURL %>">
 		<span class="category-title">
 			<%= curCategory.getName() %>
