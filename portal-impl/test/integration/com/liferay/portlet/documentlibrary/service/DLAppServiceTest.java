@@ -119,7 +119,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 	}
 
 	@Test
-	public void testAddAssetWhenAddingFolder()
+	public void testAddAssetEntryWhenAddingFolder()
 		throws PortalException, SystemException {
 
 		ServiceContext serviceContext =
@@ -401,7 +401,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testFireSyncEventWhenAddingFolder() throws Exception {
-		AtomicInteger counter = registerStubSyncMessageListener(
+		AtomicInteger counter = registerDLSyncEventProcessorMessageListener(
 			DLSyncConstants.EVENT_ADD);
 
 		ServiceContext serviceContext =
@@ -416,7 +416,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 
 	@Test
 	public void testFireSyncEventWhenCopyingFolder() throws Exception {
-		AtomicInteger counter = registerStubSyncMessageListener(
+		AtomicInteger counter = registerDLSyncEventProcessorMessageListener(
 			DLSyncConstants.EVENT_ADD);
 
 		ServiceContext serviceContext =
@@ -483,7 +483,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			group.getGroupId(), folderId, "Title.txt");
 	}
 
-	protected AtomicInteger registerStubSyncMessageListener(
+	protected AtomicInteger registerDLSyncEventProcessorMessageListener(
 		final String targetEvent) {
 
 		final AtomicInteger counter = new AtomicInteger();
@@ -503,8 +503,7 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 					}
 				}
 
-			}
-		);
+			});
 
 		return counter;
 	}

@@ -73,7 +73,7 @@ public class DLAppLocalServiceTest {
 	}
 
 	@Test
-	public void testAddAssetWhenAddingFolder() throws Exception {
+	public void testAddAssetEntryWhenAddingFolder() throws Exception {
 		Folder folder = addFolder(false);
 
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.fetchEntry(
@@ -98,7 +98,7 @@ public class DLAppLocalServiceTest {
 
 	@Test
 	public void testFireSyncEventWhenAddingFolder() throws Exception {
-		AtomicInteger counter = registerStubSyncMessageListener(
+		AtomicInteger counter = registerDLSyncEventProcessorMessageListener(
 			DLSyncConstants.EVENT_ADD);
 
 		addFolder(true);
@@ -108,7 +108,7 @@ public class DLAppLocalServiceTest {
 
 	@Test
 	public void testFireSyncEventWhenUpdatingFileEntry() throws Throwable {
-		AtomicInteger counter = registerStubSyncMessageListener(
+		AtomicInteger counter = registerDLSyncEventProcessorMessageListener(
 			DLSyncConstants.EVENT_UPDATE);
 
 		ServiceContext serviceContext =
@@ -122,7 +122,7 @@ public class DLAppLocalServiceTest {
 	}
 
 	@Test
-	public void testUpdateAssetWhenUpdatingFileEntry() throws Exception {
+	public void testUpdateAssetEntryWhenUpdatingFileEntry() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
@@ -137,7 +137,7 @@ public class DLAppLocalServiceTest {
 	}
 
 	@Test
-	public void testUpdateAssetWhenUpdatingFolder() throws Exception {
+	public void testUpdateAssetEntryWhenUpdatingFolder() throws Exception {
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
@@ -212,7 +212,7 @@ public class DLAppLocalServiceTest {
 			name, StringPool.BLANK, serviceContext);
 	}
 
-	protected AtomicInteger registerStubSyncMessageListener(
+	protected AtomicInteger registerDLSyncEventProcessorMessageListener(
 		final String targetEvent) {
 
 		final AtomicInteger counter = new AtomicInteger();
@@ -232,8 +232,7 @@ public class DLAppLocalServiceTest {
 					}
 				}
 
-			}
-		);
+			});
 
 		return counter;
 	}
