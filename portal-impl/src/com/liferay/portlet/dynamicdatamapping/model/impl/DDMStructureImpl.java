@@ -51,7 +51,6 @@ import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
 import com.liferay.portlet.dynamicdatamapping.service.DDMStructureLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.service.DDMTemplateLocalServiceUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMFormXSDDeserializerUtil;
-import com.liferay.portlet.dynamicdatamapping.util.DDMFormXSDSerializerUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
 
 import java.util.ArrayList;
@@ -608,11 +607,6 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 		_localizedFieldsMap = null;
 		_localizedPersistentFieldsMap = null;
 		_localizedTransientFieldsMap = null;
-	}
-
-	@Override
-	public void updateDDMForm(DDMForm ddmForm) {
-		setXsd(DDMFormXSDSerializerUtil.serialize(ddmForm));
 	}
 
 	private Map<String, String> _getField(Element element, String locale) {

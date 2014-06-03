@@ -193,7 +193,4 @@ public interface DDMStructure extends DDMStructureModel, PersistedModel {
 
 	public void setLocalizedTransientFieldsMap(
 		java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.util.Map<java.lang.String, java.lang.String>>> localizedTransientFieldsMap);
-
-	public void updateDDMForm(
-		com.liferay.portlet.dynamicdatamapping.model.DDMForm ddmForm);
 }
