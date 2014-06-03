@@ -370,9 +370,7 @@ definePermissionsURL.setRefererPlid(plid);
 					>
 
 						<%
-						String actionString = Validator.isNotNull(preselectedMsg) ? ActionUtil.PRESELECTED : ActionUtil.ACTION;
-						String id = FriendlyURLNormalizerUtil.normalize(role.getName()) + actionString + action;
-						String nameInput = renderResponse.getNamespace() + role.getRoleId() + actionString + action;
+						String actionSeparator = Validator.isNotNull(preselectedMsg) ? ActionUtil.PRESELECTED : ActionUtil.ACTION;
 
 						String dataMessage = StringPool.BLANK;
 
@@ -381,7 +379,7 @@ definePermissionsURL.setRefererPlid(plid);
 						}
 						%>
 
-						<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= Validator.isNotNull(preselectedMsg) ? "lfr-checkbox-preselected" : StringPool.BLANK %>" data-message="<%= dataMessage %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= id %>" name="<%= nameInput %>" type="checkbox" />
+						<input <%= checked ? "checked" : StringPool.BLANK %> class="<%= Validator.isNotNull(preselectedMsg) ? "lfr-checkbox-preselected" : StringPool.BLANK %>" data-message="<%= dataMessage %>" <%= disabled ? "disabled" : StringPool.BLANK %> id="<%= FriendlyURLNormalizerUtil.normalize(role.getName()) + actionSeparator + action %>" name="<%= renderResponse.getNamespace() + role.getRoleId() + actionSeparator + action %>" type="checkbox" />
 					</liferay-ui:search-container-column-text>
 
 				<%
