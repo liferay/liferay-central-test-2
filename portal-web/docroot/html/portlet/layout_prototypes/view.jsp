@@ -60,7 +60,7 @@ portletURL.setParameter("struts_action", "/layout_prototypes/view");
 					<portlet:param name="layoutPrototypeId" value="<%= String.valueOf(layoutPrototype.getLayoutPrototypeId()) %>" />
 				</liferay-portlet:renderURL>
 
-				<aui:a href="<%= rowURL %>"><%= layoutPrototype.getName(locale) %></aui:a>
+				<aui:a href="<%= rowURL.toString() %>"><%= layoutPrototype.getName(locale) %></aui:a>
 
 				<%
 				int mergeFailCount = SitesUtil.getMergeFailCount(layoutPrototype);
