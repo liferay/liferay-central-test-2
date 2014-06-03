@@ -39,8 +39,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 /**
  * @author Pablo Carvalho
  */
-@PrepareForTest({DDMFormXSDDeserializerUtil.class})
-public class DDMFormXSDDeserializerTest extends BaseDDMTest {
+@PrepareForTest({DDMFormXSDSerializerUtil.class})
+public class DDMFormXSDSerializerTest extends BaseDDMTest {
 
 	@Before
 	@Override
@@ -54,7 +54,7 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 	public void testAllFieldsTypesDeserialization() throws Exception {
 		String xml = readXML("dynamic-data-mapping-all-fields-structure.xml");
 
-		DDMForm ddmForm = DDMFormXSDDeserializerUtil.deserialize(xml);
+		DDMForm ddmForm = DDMFormXSDSerializerUtil.deserialize(xml);
 
 		testAvailableLocales(ddmForm);
 		testDefaultLocale(ddmForm);
@@ -81,12 +81,12 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 	}
 
 	protected void setUpDDMFormXSDSerializer() {
-		spy(DDMFormXSDDeserializerUtil.class);
+		spy(DDMFormXSDSerializerUtil.class);
 
 		when(
-			DDMFormXSDDeserializerUtil.getDDMFormXSDDeserializer()
+			DDMFormXSDSerializerUtil.getDDMFormXSDSerializer()
 		).thenReturn(
-			_ddmFormXSDDeserializer
+			_ddmFormXSDSerializer
 		);
 	}
 
@@ -199,7 +199,7 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 			"opcao 1", value1Labels.getValue(LocaleUtil.BRAZIL));
 	}
 
-	private DDMFormXSDDeserializer _ddmFormXSDDeserializer =
-		new DDMFormXSDDeserializerImpl();
+	private DDMFormXSDSerializer _ddmFormXSDSerializer =
+		new DDMFormXSDSerializerImpl();
 
 }
