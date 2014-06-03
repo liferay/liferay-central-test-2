@@ -186,13 +186,7 @@ public class TabsTag extends IncludeTag {
 				}
 			}
 
-			boolean match = false;
-
-			if (ArrayUtil.contains(_tabsValues, _value)) {
-				match = true;
-			}
-
-			if (!match) {
+			if (!ArrayUtil.contains(_tabsValues, _value)) {
 				if (_tabsValues.length > 0) {
 					_value = _tabsValues[0];
 				}
