@@ -82,9 +82,13 @@ public class DDMFormXSDDeserializerImpl implements DDMFormXSDDeserializer {
 	protected Element fetchMetadataEntry(
 		Element parentElement, String entryName) {
 
-		XPath xPathSelector = SAXReaderUtil.createXPath(
-			"entry[@name=" + HtmlUtil.escapeXPathAttribute(entryName) +
-				StringPool.CLOSE_BRACKET);
+		StringBundler sb = new StringBundler(3);
+
+		sb.append("entry[@name=");
+		sb.append(HtmlUtil.escapeXPathAttribute(entryName));
+		sb.append(StringPool.CLOSE_BRACKET);
+
+		XPath xPathSelector = SAXReaderUtil.createXPath(sb.toString());
 
 		return (Element)xPathSelector.selectSingleNode(parentElement);
 	}
@@ -219,14 +223,14 @@ public class DDMFormXSDDeserializerImpl implements DDMFormXSDDeserializer {
 
 		String languageId = metadataElement.attributeValue("locale");
 
-		Locale locale = LocaleUtil.fromLanguageId(languageId);
+		Locale currentLocale = LocaleUtil.fromLanguageId(languageId);
 
 		Element labelElement = fetchMetadataEntry(metadataElement, "label");
 
 		if (labelElement != null) {
 			LocalizedValue label = ddmFormField.getLabel();
 
-			label.addValue(locale, labelElement.getText());
+			label.addValue(currentLocale, labelElement.getText());
 		}
 
 		Element predefinedValueElement = fetchMetadataEntry(
@@ -235,7 +239,8 @@ public class DDMFormXSDDeserializerImpl implements DDMFormXSDDeserializer {
 		if (predefinedValueElement != null) {
 			LocalizedValue predefinedValue = ddmFormField.getPredefinedValue();
 
-			predefinedValue.addValue(locale, predefinedValueElement.getText());
+			predefinedValue.addValue(
+				currentLocale, predefinedValueElement.getText());
 		}
 
 		Element styleElement = fetchMetadataEntry(metadataElement, "style");
@@ -243,7 +248,7 @@ public class DDMFormXSDDeserializerImpl implements DDMFormXSDDeserializer {
 		if (styleElement != null) {
 			LocalizedValue style = ddmFormField.getStyle();
 
-			style.addValue(locale, styleElement.getText());
+			style.addValue(currentLocale, styleElement.getText());
 		}
 
 		Element tipElement = fetchMetadataEntry(metadataElement, "tip");
@@ -251,7 +256,7 @@ public class DDMFormXSDDeserializerImpl implements DDMFormXSDDeserializer {
 		if (tipElement != null) {
 			LocalizedValue tip = ddmFormField.getTip();
 
-			tip.addValue(locale, tipElement.getText());
+			tip.addValue(currentLocale, tipElement.getText());
 		}
 	}
 
