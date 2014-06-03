@@ -102,21 +102,28 @@ request.setAttribute("view_layout_branches.jsp-currenttLayoutBranchId", String.v
 			%>
 
 			<liferay-ui:search-container-column-text
+				buffer="buffer"
 				name="name"
 			>
-				<c:if test="<%= layoutRevision.getLayoutBranchId() == currentLayoutRevision.getLayoutBranchId() %>">
-					<strong>
-				</c:if>
 
-				<liferay-ui:message key="<%= HtmlUtil.escape(layoutBranch.getName()) %>" />
+				<%
+				String layoutBranchName = layoutBranch.getName();
 
-				<c:if test="<%= layoutBranch.isMaster() %>">
-					(*)
-				</c:if>
+				if (layoutRevision.getLayoutBranchId() == currentLayoutRevision.getLayoutBranchId()) {
+					buffer.append("<strong>");
+				}
 
-				<c:if test="<%= layoutRevision.getLayoutBranchId() == currentLayoutRevision.getLayoutBranchId() %>">
-					</strong>
-				</c:if>
+				buffer.append(LanguageUtil.get(pageContext, HtmlUtil.escape(layoutBranchName)));
+
+				if (layoutBranch.isMaster()) {
+					buffer.append(" (*)");
+				}
+
+				if (layoutRevision.getLayoutBranchId() == currentLayoutRevision.getLayoutBranchId()) {
+					buffer.append("</strong>");
+				}
+				%>
+
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text

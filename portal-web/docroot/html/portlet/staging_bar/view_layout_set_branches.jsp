@@ -87,21 +87,26 @@ request.setAttribute("view_layout_set_branches.jsp-currentLayoutSetBranchId", St
 		>
 
 			<liferay-ui:search-container-column-text
+				buffer="buffer"
 				name="name"
 			>
-				<c:if test="<%= currentLayoutSetBranch.equals(curLayoutSetBranch) %>">
-					<strong>
-				</c:if>
 
-				<liferay-ui:message key="<%= curLayoutSetBranch.getName() %>" />
+				<%
+				if (currentLayoutSetBranch.equals(curLayoutSetBranch)) {
+					buffer.append("<strong>");
+				}
 
-				<c:if test="<%= curLayoutSetBranch.isMaster() %>">
-					(*)
-				</c:if>
+				buffer.append(LanguageUtil.get(pageContext, curLayoutSetBranch.getName()));
 
-				<c:if test="<%= currentLayoutSetBranch.equals(curLayoutSetBranch) %>">
-					</strong>
-				</c:if>
+				if (curLayoutSetBranch.isMaster()) {
+					buffer.append(" (*)");
+				}
+
+				if (currentLayoutSetBranch.equals(curLayoutSetBranch)) {
+					buffer.append("</strong>");
+				}
+				%>
+
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
