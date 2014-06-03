@@ -18,7 +18,6 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.messaging.MessageListenerException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
@@ -222,9 +221,7 @@ public class DLAppLocalServiceTest {
 			new MessageListener() {
 
 				@Override
-				public void receive(Message message)
-					throws MessageListenerException {
-
+				public void receive(Message message) {
 					Object event = message.get("event");
 
 					if (targetEvent.equals(event)) {
