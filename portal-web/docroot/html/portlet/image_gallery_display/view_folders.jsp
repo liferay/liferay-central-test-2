@@ -61,7 +61,6 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 		<liferay-ui:search-container-column-text
 			name="folder"
 		>
-
 			<a href="<%= rowURL %>">
 				<img alt="<%= LanguageUtil.get(pageContext, "folder") %>" class="label-icon" src="<%= themeDisplay.getPathThemeImages() %>/common/folder.png">
 
