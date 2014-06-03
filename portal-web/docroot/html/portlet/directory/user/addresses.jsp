@@ -48,7 +48,7 @@ for (int i = 0; i < organizations.size(); i++) {
 			<ul class="property-list">
 
 			<%
-			for (Address address: organizationAddresses) {
+			for (Address address : organizationAddresses) {
 			%>
 
 				<li class="<%= address.isPrimary() ? "icon-star" : StringPool.BLANK %>">
@@ -75,7 +75,7 @@ for (int i = 0; i < organizations.size(); i++) {
 				for (Address address : personalAddresses) {
 				%>
 
-					<li class="<%= (address.isPrimary() && (personalAddresses.size() > 0)) ? "icon-star" : StringPool.BLANK %>">
+					<li class="<%= (address.isPrimary() && !personalAddresses.isEmpty()) ? "icon-star" : StringPool.BLANK %>">
 						<%@ include file="/html/portlet/directory/common/addresses_address_init.jspf" %>
 
 						<%@ include file="/html/portlet/directory/common/addresses_address.jspf" %>

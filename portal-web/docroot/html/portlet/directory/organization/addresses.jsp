@@ -36,7 +36,7 @@ if (classPK > 0) {
 		for (Address address : addresses) {
 		%>
 
-			<li class="<%= (address.isPrimary() && addresses.size() > 1) ? "icon-star" : StringPool.BLANK %>">
+			<li class="<%= (address.isPrimary() && !addresses.isEmpty()) ? "icon-star" : StringPool.BLANK %>">
 				<%@ include file="/html/portlet/directory/common/addresses_address_init.jspf" %>
 
 				<%@ include file="/html/portlet/directory/common/addresses_address.jspf" %>

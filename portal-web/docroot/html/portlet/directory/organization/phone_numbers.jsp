@@ -36,7 +36,7 @@ if (classPK > 0) {
 		for (Phone phone : phones) {
 		%>
 
-			<li class="<%= (phone.isPrimary() && (phones.size() > 1)) ? "icon-star" : StringPool.BLANK %>">
+			<li class="<%= (phone.isPrimary() && !phones.isEmpty()) ? "icon-star" : StringPool.BLANK %>">
 				<%= phone.getNumber() %> <%= phone.getExtension() %> <%= LanguageUtil.get(pageContext, phone.getType().getName()) %>
 			</li>
 
