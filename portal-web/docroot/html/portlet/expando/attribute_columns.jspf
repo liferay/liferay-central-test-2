@@ -26,13 +26,13 @@
 	}
 	%>
 
-	<a href="<%= rowURL.toString() %>"><strong><%= HtmlUtil.escape(localizedName) %></strong></a>
+	<a href="<%= rowURL %>"><strong><%= HtmlUtil.escape(localizedName) %></strong></a>
 
 	<br />
 
 	<span class="key"><%= LanguageUtil.get(pageContext, "key") %></span>:
 
-	<a href="<%= rowURL.toString() %>"><%= HtmlUtil.escape(name) %></a>
+	<a href="<%= rowURL %>"><%= HtmlUtil.escape(name) %></a>
 </liferay-ui:search-container-column-text>
 
 <liferay-ui:search-container-column-text
