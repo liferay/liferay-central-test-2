@@ -113,6 +113,7 @@ public class TabsTag extends IncludeTag {
 			_namesJS = JS.toScript(_names);
 
 			request.setAttribute("liferay-ui:tabs:namesJS", _namesJS);
+
 			request.setAttribute(
 				"liferay-ui:tabs:onClick", String.valueOf(_onClick));
 			request.setAttribute("liferay-ui:tabs:param", _param);
@@ -125,6 +126,7 @@ public class TabsTag extends IncludeTag {
 			}
 
 			request.setAttribute("liferay-ui:tabs:values", _tabsValues);
+
 			request.setAttribute("liferay-ui:tabs:type", _type);
 			request.setAttribute("liferay-ui:tabs:url", _url);
 
