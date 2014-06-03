@@ -74,9 +74,9 @@ public abstract class LiferayRepositoryBase {
 		this.dlFolderLocalService = dlFolderLocalService;
 		this.dlFolderService = dlFolderService;
 		this.resourceLocalService = resourceLocalService;
-		this._repositoryId = repositoryId;
-		this._groupId = groupId;
-		this._dlFolderId = dlFolderId;
+		_repositoryId = repositoryId;
+		_groupId = groupId;
+		_dlFolderId = dlFolderId;
 	}
 
 	public long getRepositoryId() {

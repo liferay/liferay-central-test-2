@@ -40,7 +40,7 @@ public class RepositoryUtil {
 
 		if (repositoryEntryId == 0) {
 			throw new InvalidRepositoryIdException(
-				"Missing a valid ID for folder, file entry or file version");
+				"Missing a valid ID for folder, file entry, or file version");
 		}
 
 		return repositoryEntryId;

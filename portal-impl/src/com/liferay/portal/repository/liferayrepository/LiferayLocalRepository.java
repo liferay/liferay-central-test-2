@@ -16,8 +16,6 @@ package com.liferay.portal.repository.liferayrepository;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.LocalRepository;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.FileVersion;
@@ -362,8 +360,5 @@ public class LiferayLocalRepository
 
 		return typeSettingsProperties;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(
-		LiferayLocalRepository.class);
 
 }

@@ -154,7 +154,7 @@ public abstract class BaseRepositoryFactory<T> {
 	}
 
 	protected T createLiferayRepository(long repositoryId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long dlFolderId = 0;
 		long groupId = 0;
@@ -191,19 +191,19 @@ public abstract class BaseRepositoryFactory<T> {
 			}
 			else {
 				throw new InvalidRepositoryIdException(
-					"Missing a valid ID for folder, file entry or file " +
+					"Missing a valid ID for folder, file entry, or file " +
 						"version");
 			}
 
 			return createLiferayRepository(repositoryId);
 		}
-		catch (NoSuchFolderException nsfe) {
-			return null;
-		}
 		catch (NoSuchFileEntryException nsfee) {
 			return null;
 		}
 		catch (NoSuchFileVersionException nsfve) {
+			return null;
+		}
+		catch (NoSuchFolderException nsfe) {
 			return null;
 		}
 	}
@@ -274,7 +274,7 @@ public abstract class BaseRepositoryFactory<T> {
 		throws PortalException, SystemException;
 
 	protected abstract Repository getRepository(long repositoryId)
-		throws PortalException, SystemException;
+		throws SystemException;
 
 	protected long getRepositoryClassNameId(long repositoryId)
 		throws SystemException {
