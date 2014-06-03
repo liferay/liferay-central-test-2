@@ -51,8 +51,6 @@ import com.liferay.portlet.dynamicdatalists.model.DDLRecordModel;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordVersion;
 import com.liferay.portlet.dynamicdatalists.service.DDLRecordLocalServiceUtil;
-import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
-import com.liferay.portlet.dynamicdatamapping.model.DDMFormField;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructureLink;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
@@ -72,8 +70,6 @@ import java.io.Serializable;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import jodd.util.StringUtil;
 
 /**
  * @author Marcellus Tavares
@@ -296,11 +292,14 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		}
 	}
 
-	protected void updateDDMStructure(
-			DDMStructure ddmStructure, DDMForm ddmForm)
+	protected void updateDDMStructure(DDMStructure ddmStructure, String xsd)
 		throws Exception {
 
-		ddmStructure.updateDDMForm(ddmForm);
+		if (xsd.equals(ddmStructure.getXsd())) {
+			return;
+		}
+
+		ddmStructure.setXsd(xsd);
 
 		DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure);
 	}
@@ -369,25 +368,6 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 			serviceContext, workflowContext);
 	}
 
-	protected void updateFileUploadReferences(DDMForm ddmForm)
-		throws Exception {
-
-		List<DDMFormField> fields = ddmForm.getDDMFormFields();
-
-		for (DDMFormField field : fields) {
-			updateFileUploadReferences(field);
-		}
-	}
-
-	protected void updateFileUploadReferences(DDMFormField ddmFormField) {
-		String dataType = ddmFormField.getDataType();
-
-		if (Validator.equals(dataType, "file-upload")) {
-			ddmFormField.setDataType("document-library");
-			ddmFormField.setType("ddm-documentlibrary");
-		}
-	}
-
 	protected void updateFileUploadReferences(DDMStructure ddmStructure)
 		throws Exception {
 
@@ -404,11 +384,9 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 			updateFileUploadReferences(ddmStructureLink);
 		}
 
-		DDMForm ddmForm = ddmStructure.getDDMForm();
+		String xsd = updateFileUploadReferences(ddmStructure.getXsd());
 
-		updateFileUploadReferences(ddmForm);
-
-		updateDDMStructure(ddmStructure, ddmForm);
+		updateDDMStructure(ddmStructure, xsd);
 
 		List<DDMTemplate> ddmTemplates = getFormDDMTemplates(ddmStructure);
 
@@ -499,31 +477,13 @@ public class VerifyDynamicDataMapping extends VerifyProcess {
 		return DDMXMLUtil.formatXML(document.asXML());
 	}
 
-	protected DDMForm verifyDDMForm(DDMForm ddmForm) {
-		List<DDMFormField> ddmFormFields = ddmForm.getDDMFormFields();
-
-		for (DDMFormField ddmFormField : ddmFormFields) {
-			verifyDDMFormField(ddmFormField);
-		}
-
-		return ddmForm;
-	}
-
-	protected void verifyDDMFormField(DDMFormField ddmFormField) {
-		String dataType = ddmFormField.getDataType();
-
-		if (StringUtil.equals(dataType, "image")) {
-			ddmFormField.setNamespace("ddm");
-			ddmFormField.setType("ddm-image");
-		}
-	}
-
 	protected void verifyDDMStructure(DDMStructure ddmStructure)
 		throws Exception {
 
-		DDMForm ddmForm = verifyDDMForm(ddmStructure.getDDMForm());
+		String xsd = verifySchema(
+			ddmStructure.getXsd(), ddmStructure.getDefaultLanguageId());
 
-		updateDDMStructure(ddmStructure, ddmForm);
+		updateDDMStructure(ddmStructure, xsd);
 	}
 
 	protected void verifyDDMTemplate(DDMTemplate ddmTemplate) throws Exception {
