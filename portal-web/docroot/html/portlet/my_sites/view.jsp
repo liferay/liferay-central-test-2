@@ -147,7 +147,7 @@ request.setAttribute("view.jsp-tabs1", tabs1);
 			>
 				<c:choose>
 					<c:when test="<%= rowURL != null %>">
-						<a href="<%= rowURL.toString() %>" target="_blank">
+						<a href="<%= rowURL %>" target="_blank">
 							<strong><%= HtmlUtil.escape(group.getDescriptiveName(locale)) %></strong>
 						</a>
 					</c:when>
