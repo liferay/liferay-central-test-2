@@ -48,7 +48,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 public class BaseDDMTest extends PowerMockito {
 
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 
 		setUpHtmlUtil();

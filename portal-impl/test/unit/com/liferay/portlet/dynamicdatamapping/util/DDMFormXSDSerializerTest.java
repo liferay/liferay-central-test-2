@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
-import com.liferay.portlet.dynamicdatamapping.BaseDDMTest;
+import com.liferay.portal.xml.SAXReaderImpl;
 import com.liferay.portlet.dynamicdatamapping.model.DDMForm;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormField;
 import com.liferay.portlet.dynamicdatamapping.model.DDMFormFieldOptions;
@@ -34,27 +34,33 @@ import java.util.Locale;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 /**
  * @author Pablo Carvalho
  */
-@PrepareForTest({DDMFormXSDSerializerUtil.class, StringUtil.class})
-public class DDMFormXSDSerializerTest extends BaseDDMTest {
+@PrepareForTest( {
+	DDMFormXSDSerializerUtil.class, LocaleUtil.class, SAXReaderUtil.class,
+	StringUtil.class
+})
+@RunWith(PowerMockRunner.class)
+public class DDMFormXSDSerializerTest extends PowerMockito {
 
 	@Before
-	@Override
 	public void setUp() {
-		super.setUp();
-
-		setUpDDMFormToXSDSerializer();
+		setUpFormToXSDConverter();
+		setUpLocale();
+		setUpSAXReader();
 		setUpStringUtil();
 	}
 
 	@Test
 	public void testDDMFormSerialization() throws Exception {
-		DDMForm ddmForm = createDDMForm();
+		DDMForm ddmForm = createTestDDMForm();
 
 		String xsd = DDMFormXSDSerializerUtil.serialize(ddmForm);
 
@@ -68,16 +74,6 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 		availableLocales.add(LocaleUtil.US);
 
 		return availableLocales;
-	}
-
-	protected DDMForm createDDMForm() {
-		DDMForm ddmForm = new DDMForm();
-
-		ddmForm.setAvailableLocales(createAvailableLocales());
-		ddmForm.setDDMFormFields(createDDMFormFields());
-		ddmForm.setDefaultLocale(LocaleUtil.US);
-
-		return ddmForm;
 	}
 
 	protected DDMFormFieldOptions createDDMFormFieldOptions() {
@@ -103,11 +99,11 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 	protected List<DDMFormField> createDDMFormFields() {
 		List<DDMFormField> ddmFormFields = new ArrayList<DDMFormField>();
 
+		ddmFormFields.add(createRadioDDMFormField(BOOLEAN_FIELD_NAME));
 		ddmFormFields.add(
-			createNestedDDMFormFields(_PARENT_FIELD_NAME, _CHILD_FIELD_NAME));
-		ddmFormFields.add(createRadioDDMFormField(_BOOLEAN_FIELD_NAME));
-		ddmFormFields.add(createSelectDDMFormField(_SELECT_FIELD_NAME));
-		ddmFormFields.add(createTextDDMFormField(_TEXT_FIELD_NAME));
+			createNestedDDMFormFields(PARENT_FIELD_NAME, CHILD_FIELD_NAME));
+		ddmFormFields.add(createSelectDDMFormField(SELECT_FIELD_NAME));
+		ddmFormFields.add(createTextDDMFormField(TEXT_FIELD_NAME));
 
 		return ddmFormFields;
 	}
@@ -137,6 +133,7 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 	}
 
 	protected DDMFormField createSelectDDMFormField(String name) {
+
 		DDMFormField selectDDMFormField = new DDMFormField(name, "select");
 
 		selectDDMFormField.setDataType("string");
@@ -148,6 +145,20 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 		selectDDMFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
 
 		return selectDDMFormField;
+	}
+
+	protected DDMForm createTestDDMForm() {
+		List<Locale> availableLocales = createAvailableLocales();
+		List<DDMFormField> ddmFormFields = createDDMFormFields();
+		Locale defaultLocale = LocaleUtil.US;
+
+		DDMForm ddmForm = new DDMForm();
+
+		ddmForm.setAvailableLocales(availableLocales);
+		ddmForm.setDDMFormFields(ddmFormFields);
+		ddmForm.setDefaultLocale(defaultLocale);
+
+		return ddmForm;
 	}
 
 	protected DDMFormField createTextDDMFormField(String name) {
@@ -190,13 +201,39 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 		return StringUtil.read(inputStream);
 	}
 
-	protected void setUpDDMFormToXSDSerializer() {
+	protected void setUpFormToXSDConverter() {
 		spy(DDMFormXSDSerializerUtil.class);
 
 		when(
 			DDMFormXSDSerializerUtil.getDDMFormXSDSerializer()
 		).thenReturn(
 			_ddmFormXSDSerializer
+		);
+	}
+
+	protected void setUpLocale() {
+		spy(LocaleUtil.class);
+
+		when(
+			LocaleUtil.fromLanguageId("en_US")
+		).thenReturn(
+			LocaleUtil.US
+		);
+
+		when(
+			LocaleUtil.fromLanguageId("pt_BR")
+		).thenReturn(
+			LocaleUtil.BRAZIL
+		);
+	}
+
+	protected void setUpSAXReader() {
+		spy(SAXReaderUtil.class);
+
+		when(
+			SAXReaderUtil.getSAXReader()
+		).thenReturn(
+			new SAXReaderImpl()
 		);
 	}
 
@@ -220,15 +257,15 @@ public class DDMFormXSDSerializerTest extends BaseDDMTest {
 		Assert.assertEquals(expectedXSD, actualXSD);
 	}
 
-	private static final String _BOOLEAN_FIELD_NAME = "BooleanField";
+	private static final String BOOLEAN_FIELD_NAME = "BooleanField";
 
-	private static final String _CHILD_FIELD_NAME = "ChildField";
+	private static final String CHILD_FIELD_NAME = "ChildField";
 
-	private static final String _PARENT_FIELD_NAME = "ParentField";
+	private static final String PARENT_FIELD_NAME = "ParentField";
 
-	private static final String _SELECT_FIELD_NAME = "SelectField";
+	private static final String SELECT_FIELD_NAME = "SelectField";
 
-	private static final String _TEXT_FIELD_NAME = "TextField";
+	private static final String TEXT_FIELD_NAME = "TextField";
 
 	private DDMFormXSDSerializer _ddmFormXSDSerializer =
 		new DDMFormXSDSerializerImpl();

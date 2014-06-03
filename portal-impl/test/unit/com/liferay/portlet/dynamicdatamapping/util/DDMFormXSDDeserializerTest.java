@@ -44,10 +44,10 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 
 	@Before
 	@Override
-	public void setUp() {
+	public void setUp() throws Exception {
 		super.setUp();
 
-		setUpDDMFormXSDDeserializer();
+		setUpDDMFormXSDSerializer();
 	}
 
 	@Test
@@ -80,7 +80,7 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 		return StringUtil.read(inputStream);
 	}
 
-	protected void setUpDDMFormXSDDeserializer() {
+	protected void setUpDDMFormXSDSerializer() {
 		spy(DDMFormXSDDeserializerUtil.class);
 
 		when(
