@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.ThemeServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * Provides the HTTP utility for the
@@ -52,8 +51,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class ThemeServiceHttp {
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
-		HttpPrincipal httpPrincipal, long companyId)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		HttpPrincipal httpPrincipal, long companyId) {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class,
 					"getThemes", _getThemesParameterTypes0);
@@ -79,8 +77,7 @@ public class ThemeServiceHttp {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getWARThemes(
-		HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		HttpPrincipal httpPrincipal) {
 		try {
 			MethodKey methodKey = new MethodKey(ThemeServiceUtil.class,
 					"getWARThemes", _getWARThemesParameterTypes1);

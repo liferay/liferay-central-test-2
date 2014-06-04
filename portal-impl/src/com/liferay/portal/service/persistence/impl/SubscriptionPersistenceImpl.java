@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -40,7 +39,6 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.model.impl.SubscriptionModelImpl;
 import com.liferay.portal.service.persistence.SubscriptionPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 
@@ -106,11 +104,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 *
 	 * @param userId the user ID
 	 * @return the matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Subscription> findByUserId(long userId)
-		throws SystemException {
+	public List<Subscription> findByUserId(long userId) {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -125,11 +121,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param start the lower bound of the range of subscriptions
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Subscription> findByUserId(long userId, int start, int end)
-		throws SystemException {
+	public List<Subscription> findByUserId(long userId, int start, int end) {
 		return findByUserId(userId, start, end, null);
 	}
 
@@ -145,11 +139,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByUserId(long userId, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -252,12 +245,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByUserId_First(long userId,
-		OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		OrderByComparator orderByComparator) throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByUserId_First(userId,
 				orderByComparator);
 
@@ -283,11 +274,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByUserId_First(long userId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<Subscription> list = findByUserId(userId, 0, 1, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -304,12 +294,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByUserId_Last(long userId,
-		OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		OrderByComparator orderByComparator) throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByUserId_Last(userId, orderByComparator);
 
 		if (subscription != null) {
@@ -334,11 +322,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param userId the user ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByUserId_Last(long userId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByUserId(userId);
 
 		if (count == 0) {
@@ -363,12 +350,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription[] findByUserId_PrevAndNext(long subscriptionId,
 		long userId, OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
 		Session session = null;
@@ -505,10 +491,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * Removes all the subscriptions where userId = &#63; from the database.
 	 *
 	 * @param userId the user ID
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByUserId(long userId) throws SystemException {
+	public void removeByUserId(long userId) {
 		for (Subscription subscription : findByUserId(userId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(subscription);
@@ -520,10 +505,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 *
 	 * @param userId the user ID
 	 * @return the number of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByUserId(long userId) throws SystemException {
+	public int countByUserId(long userId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
 		Object[] finderArgs = new Object[] { userId };
@@ -595,11 +579,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param userId the user ID
 	 * @param classNameId the class name ID
 	 * @return the matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Subscription> findByU_C(long userId, long classNameId)
-		throws SystemException {
+	public List<Subscription> findByU_C(long userId, long classNameId) {
 		return findByU_C(userId, classNameId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -616,11 +598,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param start the lower bound of the range of subscriptions
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByU_C(long userId, long classNameId,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return findByU_C(userId, classNameId, start, end, null);
 	}
 
@@ -637,12 +618,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByU_C(long userId, long classNameId,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -755,12 +734,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByU_C_First(long userId, long classNameId,
-		OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		OrderByComparator orderByComparator) throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByU_C_First(userId, classNameId,
 				orderByComparator);
 
@@ -790,11 +767,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByU_C_First(long userId, long classNameId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<Subscription> list = findByU_C(userId, classNameId, 0, 1,
 				orderByComparator);
 
@@ -813,12 +789,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByU_C_Last(long userId, long classNameId,
-		OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		OrderByComparator orderByComparator) throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByU_C_Last(userId, classNameId,
 				orderByComparator);
 
@@ -848,11 +822,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByU_C_Last(long userId, long classNameId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByU_C(userId, classNameId);
 
 		if (count == 0) {
@@ -878,12 +851,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription[] findByU_C_PrevAndNext(long subscriptionId,
 		long userId, long classNameId, OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
 		Session session = null;
@@ -1025,11 +997,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 *
 	 * @param userId the user ID
 	 * @param classNameId the class name ID
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByU_C(long userId, long classNameId)
-		throws SystemException {
+	public void removeByU_C(long userId, long classNameId) {
 		for (Subscription subscription : findByU_C(userId, classNameId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(subscription);
@@ -1042,11 +1012,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param userId the user ID
 	 * @param classNameId the class name ID
 	 * @return the number of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByU_C(long userId, long classNameId)
-		throws SystemException {
+	public int countByU_C(long userId, long classNameId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_C;
 
 		Object[] finderArgs = new Object[] { userId, classNameId };
@@ -1129,11 +1097,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
 	 * @return the matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK) throws SystemException {
+		long classPK) {
 		return findByC_C_C(companyId, classNameId, classPK, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -1151,11 +1118,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param start the lower bound of the range of subscriptions
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end) throws SystemException {
+		long classPK, int start, int end) {
 		return findByC_C_C(companyId, classNameId, classPK, start, end, null);
 	}
 
@@ -1173,12 +1139,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_C_C(long companyId, long classNameId,
-		long classPK, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		long classPK, int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -1297,12 +1261,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByC_C_C_First(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByC_C_C_First(companyId, classNameId,
 				classPK, orderByComparator);
 
@@ -1336,12 +1299,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByC_C_C_First(long companyId, long classNameId,
-		long classPK, OrderByComparator orderByComparator)
-		throws SystemException {
+		long classPK, OrderByComparator orderByComparator) {
 		List<Subscription> list = findByC_C_C(companyId, classNameId, classPK,
 				0, 1, orderByComparator);
 
@@ -1361,12 +1322,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByC_C_C_Last(long companyId, long classNameId,
 		long classPK, OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByC_C_C_Last(companyId, classNameId,
 				classPK, orderByComparator);
 
@@ -1400,12 +1360,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classPK the class p k
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByC_C_C_Last(long companyId, long classNameId,
-		long classPK, OrderByComparator orderByComparator)
-		throws SystemException {
+		long classPK, OrderByComparator orderByComparator) {
 		int count = countByC_C_C(companyId, classNameId, classPK);
 
 		if (count == 0) {
@@ -1432,13 +1390,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription[] findByC_C_C_PrevAndNext(long subscriptionId,
 		long companyId, long classNameId, long classPK,
-		OrderByComparator orderByComparator)
-		throws NoSuchSubscriptionException, SystemException {
+		OrderByComparator orderByComparator) throws NoSuchSubscriptionException {
 		Subscription subscription = findByPrimaryKey(subscriptionId);
 
 		Session session = null;
@@ -1585,11 +1541,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param companyId the company ID
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
+	public void removeByC_C_C(long companyId, long classNameId, long classPK) {
 		for (Subscription subscription : findByC_C_C(companyId, classNameId,
 				classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(subscription);
@@ -1603,11 +1557,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
 	 * @return the number of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByC_C_C(long companyId, long classNameId, long classPK)
-		throws SystemException {
+	public int countByC_C_C(long companyId, long classNameId, long classPK) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_C_C;
 
 		Object[] finderArgs = new Object[] { companyId, classNameId, classPK };
@@ -1723,11 +1675,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPKs the class p ks
 	 * @return the matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_U_C_C(long companyId, long userId,
-		long classNameId, long[] classPKs) throws SystemException {
+		long classNameId, long[] classPKs) {
 		return findByC_U_C_C(companyId, userId, classNameId, classPKs,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1746,12 +1697,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param start the lower bound of the range of subscriptions
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_U_C_C(long companyId, long userId,
-		long classNameId, long[] classPKs, int start, int end)
-		throws SystemException {
+		long classNameId, long[] classPKs, int start, int end) {
 		return findByC_U_C_C(companyId, userId, classNameId, classPKs, start,
 			end, null);
 	}
@@ -1771,12 +1720,11 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findByC_U_C_C(long companyId, long userId,
 		long classNameId, long[] classPKs, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		if (classPKs == null) {
 			classPKs = new long[0];
 		}
@@ -1927,12 +1875,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classPK the class p k
 	 * @return the matching subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByC_U_C_C(long companyId, long userId,
-		long classNameId, long classPK)
-		throws NoSuchSubscriptionException, SystemException {
+		long classNameId, long classPK) throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByC_U_C_C(companyId, userId,
 				classNameId, classPK);
 
@@ -1973,11 +1919,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
 	 * @return the matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByC_U_C_C(long companyId, long userId,
-		long classNameId, long classPK) throws SystemException {
+		long classNameId, long classPK) {
 		return fetchByC_U_C_C(companyId, userId, classNameId, classPK, true);
 	}
 
@@ -1990,12 +1935,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classPK the class p k
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching subscription, or <code>null</code> if a matching subscription could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription fetchByC_U_C_C(long companyId, long userId,
-		long classNameId, long classPK, boolean retrieveFromCache)
-		throws SystemException {
+		long classNameId, long classPK, boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] {
 				companyId, userId, classNameId, classPK
 			};
@@ -2099,12 +2042,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
 	 * @return the subscription that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription removeByC_U_C_C(long companyId, long userId,
-		long classNameId, long classPK)
-		throws NoSuchSubscriptionException, SystemException {
+		long classNameId, long classPK) throws NoSuchSubscriptionException {
 		Subscription subscription = findByC_U_C_C(companyId, userId,
 				classNameId, classPK);
 
@@ -2119,11 +2060,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPK the class p k
 	 * @return the number of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int countByC_U_C_C(long companyId, long userId, long classNameId,
-		long classPK) throws SystemException {
+		long classPK) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_U_C_C;
 
 		Object[] finderArgs = new Object[] {
@@ -2190,11 +2130,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param classNameId the class name ID
 	 * @param classPKs the class p ks
 	 * @return the number of matching subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int countByC_U_C_C(long companyId, long userId, long classNameId,
-		long[] classPKs) throws SystemException {
+		long[] classPKs) {
 		if (classPKs == null) {
 			classPKs = new long[0];
 		}
@@ -2447,11 +2386,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription that was removed
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription remove(long subscriptionId)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		return remove((Serializable)subscriptionId);
 	}
 
@@ -2461,11 +2399,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription that was removed
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription remove(Serializable primaryKey)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Session session = null;
 
 		try {
@@ -2497,8 +2434,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	}
 
 	@Override
-	protected Subscription removeImpl(Subscription subscription)
-		throws SystemException {
+	protected Subscription removeImpl(Subscription subscription) {
 		subscription = toUnwrappedModel(subscription);
 
 		Session session = null;
@@ -2531,8 +2467,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 
 	@Override
 	public Subscription updateImpl(
-		com.liferay.portal.model.Subscription subscription)
-		throws SystemException {
+		com.liferay.portal.model.Subscription subscription) {
 		subscription = toUnwrappedModel(subscription);
 
 		boolean isNew = subscription.isNew();
@@ -2696,11 +2631,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		Subscription subscription = fetchByPrimaryKey(primaryKey);
 
 		if (subscription == null) {
@@ -2721,11 +2655,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription
 	 * @throws com.liferay.portal.NoSuchSubscriptionException if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Subscription findByPrimaryKey(long subscriptionId)
-		throws NoSuchSubscriptionException, SystemException {
+		throws NoSuchSubscriptionException {
 		return findByPrimaryKey((Serializable)subscriptionId);
 	}
 
@@ -2734,11 +2667,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 *
 	 * @param primaryKey the primary key of the subscription
 	 * @return the subscription, or <code>null</code> if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Subscription fetchByPrimaryKey(Serializable primaryKey)
-		throws SystemException {
+	public Subscription fetchByPrimaryKey(Serializable primaryKey) {
 		Subscription subscription = (Subscription)EntityCacheUtil.getResult(SubscriptionModelImpl.ENTITY_CACHE_ENABLED,
 				SubscriptionImpl.class, primaryKey);
 
@@ -2782,11 +2713,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 *
 	 * @param subscriptionId the primary key of the subscription
 	 * @return the subscription, or <code>null</code> if a subscription with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Subscription fetchByPrimaryKey(long subscriptionId)
-		throws SystemException {
+	public Subscription fetchByPrimaryKey(long subscriptionId) {
 		return fetchByPrimaryKey((Serializable)subscriptionId);
 	}
 
@@ -2794,10 +2723,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * Returns all the subscriptions.
 	 *
 	 * @return the subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Subscription> findAll() throws SystemException {
+	public List<Subscription> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -2811,11 +2739,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param start the lower bound of the range of subscriptions
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @return the range of subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Subscription> findAll(int start, int end)
-		throws SystemException {
+	public List<Subscription> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
@@ -2830,11 +2756,10 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * @param end the upper bound of the range of subscriptions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Subscription> findAll(int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -2916,10 +2841,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	/**
 	 * Removes all the subscriptions from the database.
 	 *
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeAll() throws SystemException {
+	public void removeAll() {
 		for (Subscription subscription : findAll()) {
 			remove(subscription);
 		}
@@ -2929,10 +2853,9 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl<Subscriptio
 	 * Returns the number of subscriptions.
 	 *
 	 * @return the number of subscriptions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countAll() throws SystemException {
+	public int countAll() {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
 

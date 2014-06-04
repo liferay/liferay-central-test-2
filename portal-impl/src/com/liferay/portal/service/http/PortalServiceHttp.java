@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortalServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * Provides the HTTP utility for the
@@ -83,8 +82,7 @@ public class PortalServiceHttp {
 		}
 	}
 
-	public static int getBuildNumber(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int getBuildNumber(HttpPrincipal httpPrincipal) {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class,
 					"getBuildNumber", _getBuildNumberParameterTypes1);
@@ -313,8 +311,7 @@ public class PortalServiceHttp {
 		}
 	}
 
-	public static int testGetBuildNumber(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static int testGetBuildNumber(HttpPrincipal httpPrincipal) {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class,
 					"testGetBuildNumber", _testGetBuildNumberParameterTypes9);
@@ -339,8 +336,7 @@ public class PortalServiceHttp {
 		}
 	}
 
-	public static void testGetUserId(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.kernel.exception.SystemException {
+	public static void testGetUserId(HttpPrincipal httpPrincipal) {
 		try {
 			MethodKey methodKey = new MethodKey(PortalServiceUtil.class,
 					"testGetUserId", _testGetUserIdParameterTypes10);

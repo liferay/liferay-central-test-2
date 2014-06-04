@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -42,7 +41,6 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.impl.ResourcePermissionImpl;
 import com.liferay.portal.model.impl.ResourcePermissionModelImpl;
 import com.liferay.portal.service.persistence.ResourcePermissionPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 
@@ -115,11 +113,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param scope the scope
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByScope(int scope)
-		throws SystemException {
+	public List<ResourcePermission> findByScope(int scope) {
 		return findByScope(scope, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -134,11 +130,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByScope(int scope, int start, int end)
-		throws SystemException {
+	public List<ResourcePermission> findByScope(int scope, int start, int end) {
 		return findByScope(scope, start, end, null);
 	}
 
@@ -154,11 +148,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByScope(int scope, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -261,12 +254,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByScope_First(int scope,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByScope_First(scope,
 				orderByComparator);
 
@@ -292,11 +284,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByScope_First(int scope,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ResourcePermission> list = findByScope(scope, 0, 1,
 				orderByComparator);
 
@@ -314,12 +305,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByScope_Last(int scope,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByScope_Last(scope,
 				orderByComparator);
 
@@ -345,11 +335,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByScope_Last(int scope,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByScope(scope);
 
 		if (count == 0) {
@@ -374,13 +363,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission[] findByScope_PrevAndNext(
 		long resourcePermissionId, int scope,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
 		Session session = null;
@@ -522,11 +510,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param scopes the scopes
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByScope(int[] scopes)
-		throws SystemException {
+	public List<ResourcePermission> findByScope(int[] scopes) {
 		return findByScope(scopes, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -541,11 +527,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByScope(int[] scopes, int start, int end)
-		throws SystemException {
+	public List<ResourcePermission> findByScope(int[] scopes, int start, int end) {
 		return findByScope(scopes, start, end, null);
 	}
 
@@ -561,11 +545,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByScope(int[] scopes, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+		int end, OrderByComparator orderByComparator) {
 		if (scopes == null) {
 			scopes = new int[0];
 		}
@@ -680,10 +663,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * Removes all the resource permissions where scope = &#63; from the database.
 	 *
 	 * @param scope the scope
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByScope(int scope) throws SystemException {
+	public void removeByScope(int scope) {
 		for (ResourcePermission resourcePermission : findByScope(scope,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
@@ -695,10 +677,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param scope the scope
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByScope(int scope) throws SystemException {
+	public int countByScope(int scope) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_SCOPE;
 
 		Object[] finderArgs = new Object[] { scope };
@@ -748,10 +729,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param scopes the scopes
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByScope(int[] scopes) throws SystemException {
+	public int countByScope(int[] scopes) {
 		if (scopes == null) {
 			scopes = new int[0];
 		}
@@ -841,11 +821,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param roleId the role ID
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByRoleId(long roleId)
-		throws SystemException {
+	public List<ResourcePermission> findByRoleId(long roleId) {
 		return findByRoleId(roleId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -860,11 +838,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByRoleId(long roleId, int start, int end)
-		throws SystemException {
+	public List<ResourcePermission> findByRoleId(long roleId, int start, int end) {
 		return findByRoleId(roleId, start, end, null);
 	}
 
@@ -880,11 +856,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByRoleId(long roleId, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+		int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -987,12 +962,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByRoleId_First(long roleId,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByRoleId_First(roleId,
 				orderByComparator);
 
@@ -1018,11 +992,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param roleId the role ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByRoleId_First(long roleId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ResourcePermission> list = findByRoleId(roleId, 0, 1,
 				orderByComparator);
 
@@ -1040,12 +1013,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByRoleId_Last(long roleId,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByRoleId_Last(roleId,
 				orderByComparator);
 
@@ -1071,11 +1043,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param roleId the role ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByRoleId_Last(long roleId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByRoleId(roleId);
 
 		if (count == 0) {
@@ -1100,13 +1071,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission[] findByRoleId_PrevAndNext(
 		long resourcePermissionId, long roleId,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
 		Session session = null;
@@ -1243,10 +1213,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * Removes all the resource permissions where roleId = &#63; from the database.
 	 *
 	 * @param roleId the role ID
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByRoleId(long roleId) throws SystemException {
+	public void removeByRoleId(long roleId) {
 		for (ResourcePermission resourcePermission : findByRoleId(roleId,
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
@@ -1258,10 +1227,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param roleId the role ID
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByRoleId(long roleId) throws SystemException {
+	public int countByRoleId(long roleId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_ROLEID;
 
 		Object[] finderArgs = new Object[] { roleId };
@@ -1328,11 +1296,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID
 	 * @param primKey the prim key
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findByC_LikeP(long companyId, String primKey)
-		throws SystemException {
+	public List<ResourcePermission> findByC_LikeP(long companyId, String primKey) {
 		return findByC_LikeP(companyId, primKey, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -1349,11 +1315,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_LikeP(long companyId,
-		String primKey, int start, int end) throws SystemException {
+		String primKey, int start, int end) {
 		return findByC_LikeP(companyId, primKey, start, end, null);
 	}
 
@@ -1370,12 +1335,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_LikeP(long companyId,
-		String primKey, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		String primKey, int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -1497,12 +1460,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_LikeP_First(long companyId,
 		String primKey, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_LikeP_First(companyId,
 				primKey, orderByComparator);
 
@@ -1532,12 +1494,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_LikeP_First(long companyId,
-		String primKey, OrderByComparator orderByComparator)
-		throws SystemException {
+		String primKey, OrderByComparator orderByComparator) {
 		List<ResourcePermission> list = findByC_LikeP(companyId, primKey, 0, 1,
 				orderByComparator);
 
@@ -1556,12 +1516,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_LikeP_Last(long companyId,
 		String primKey, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_LikeP_Last(companyId,
 				primKey, orderByComparator);
 
@@ -1591,12 +1550,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_LikeP_Last(long companyId,
-		String primKey, OrderByComparator orderByComparator)
-		throws SystemException {
+		String primKey, OrderByComparator orderByComparator) {
 		int count = countByC_LikeP(companyId, primKey);
 
 		if (count == 0) {
@@ -1622,13 +1579,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission[] findByC_LikeP_PrevAndNext(
 		long resourcePermissionId, long companyId, String primKey,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
 		Session session = null;
@@ -1784,11 +1740,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param companyId the company ID
 	 * @param primKey the prim key
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByC_LikeP(long companyId, String primKey)
-		throws SystemException {
+	public void removeByC_LikeP(long companyId, String primKey) {
 		for (ResourcePermission resourcePermission : findByC_LikeP(companyId,
 				primKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
@@ -1801,11 +1755,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID
 	 * @param primKey the prim key
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByC_LikeP(long companyId, String primKey)
-		throws SystemException {
+	public int countByC_LikeP(long companyId, String primKey) {
 		FinderPath finderPath = FINDER_PATH_WITH_PAGINATION_COUNT_BY_C_LIKEP;
 
 		Object[] finderArgs = new Object[] { companyId, primKey };
@@ -1909,11 +1861,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name
 	 * @param scope the scope
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
-		int scope) throws SystemException {
+		int scope) {
 		return findByC_N_S(companyId, name, scope, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -1931,11 +1882,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
-		int scope, int start, int end) throws SystemException {
+		int scope, int start, int end) {
 		return findByC_N_S(companyId, name, scope, start, end, null);
 	}
 
@@ -1953,12 +1903,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S(long companyId, String name,
-		int scope, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int scope, int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -2091,12 +2039,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_N_S_First(long companyId, String name,
 		int scope, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_N_S_First(companyId,
 				name, scope, orderByComparator);
 
@@ -2130,12 +2077,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_First(long companyId, String name,
-		int scope, OrderByComparator orderByComparator)
-		throws SystemException {
+		int scope, OrderByComparator orderByComparator) {
 		List<ResourcePermission> list = findByC_N_S(companyId, name, scope, 0,
 				1, orderByComparator);
 
@@ -2155,12 +2100,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_N_S_Last(long companyId, String name,
 		int scope, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_N_S_Last(companyId,
 				name, scope, orderByComparator);
 
@@ -2194,12 +2138,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_Last(long companyId, String name,
-		int scope, OrderByComparator orderByComparator)
-		throws SystemException {
+		int scope, OrderByComparator orderByComparator) {
 		int count = countByC_N_S(companyId, name, scope);
 
 		if (count == 0) {
@@ -2226,13 +2168,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission[] findByC_N_S_PrevAndNext(
 		long resourcePermissionId, long companyId, String name, int scope,
 		OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
 		Session session = null;
@@ -2393,11 +2334,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param companyId the company ID
 	 * @param name the name
 	 * @param scope the scope
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByC_N_S(long companyId, String name, int scope)
-		throws SystemException {
+	public void removeByC_N_S(long companyId, String name, int scope) {
 		for (ResourcePermission resourcePermission : findByC_N_S(companyId,
 				name, scope, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
@@ -2411,11 +2350,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name
 	 * @param scope the scope
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByC_N_S(long companyId, String name, int scope)
-		throws SystemException {
+	public int countByC_N_S(long companyId, String name, int scope) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N_S;
 
 		Object[] finderArgs = new Object[] { companyId, name, scope };
@@ -2527,11 +2464,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param primKey the prim key
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
-		int scope, String primKey) throws SystemException {
+		int scope, String primKey) {
 		return findByC_N_S_P(companyId, name, scope, primKey,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -2550,12 +2486,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
-		int scope, String primKey, int start, int end)
-		throws SystemException {
+		int scope, String primKey, int start, int end) {
 		return findByC_N_S_P(companyId, name, scope, primKey, start, end, null);
 	}
 
@@ -2574,12 +2508,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P(long companyId, String name,
 		int scope, String primKey, int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -2733,12 +2666,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_N_S_P_First(long companyId, String name,
 		int scope, String primKey, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_N_S_P_First(companyId,
 				name, scope, primKey, orderByComparator);
 
@@ -2776,12 +2708,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_P_First(long companyId, String name,
-		int scope, String primKey, OrderByComparator orderByComparator)
-		throws SystemException {
+		int scope, String primKey, OrderByComparator orderByComparator) {
 		List<ResourcePermission> list = findByC_N_S_P(companyId, name, scope,
 				primKey, 0, 1, orderByComparator);
 
@@ -2802,12 +2732,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_N_S_P_Last(long companyId, String name,
 		int scope, String primKey, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_N_S_P_Last(companyId,
 				name, scope, primKey, orderByComparator);
 
@@ -2845,12 +2774,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_P_Last(long companyId, String name,
-		int scope, String primKey, OrderByComparator orderByComparator)
-		throws SystemException {
+		int scope, String primKey, OrderByComparator orderByComparator) {
 		int count = countByC_N_S_P(companyId, name, scope, primKey);
 
 		if (count == 0) {
@@ -2878,13 +2805,12 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission[] findByC_N_S_P_PrevAndNext(
 		long resourcePermissionId, long companyId, String name, int scope,
 		String primKey, OrderByComparator orderByComparator)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByPrimaryKey(resourcePermissionId);
 
 		Session session = null;
@@ -3065,11 +2991,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param name the name
 	 * @param scope the scope
 	 * @param primKey the prim key
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public void removeByC_N_S_P(long companyId, String name, int scope,
-		String primKey) throws SystemException {
+		String primKey) {
 		for (ResourcePermission resourcePermission : findByC_N_S_P(companyId,
 				name, scope, primKey, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(resourcePermission);
@@ -3084,11 +3009,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param scope the scope
 	 * @param primKey the prim key
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int countByC_N_S_P(long companyId, String name, int scope,
-		String primKey) throws SystemException {
+		String primKey) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N_S_P;
 
 		Object[] finderArgs = new Object[] { companyId, name, scope, primKey };
@@ -3254,12 +3178,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param roleIds the role IDs
 	 * @return the matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P_R(long companyId,
-		String name, int scope, String primKey, long[] roleIds)
-		throws SystemException {
+		String name, int scope, String primKey, long[] roleIds) {
 		return findByC_N_S_P_R(companyId, name, scope, primKey, roleIds,
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -3279,12 +3201,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P_R(long companyId,
 		String name, int scope, String primKey, long[] roleIds, int start,
-		int end) throws SystemException {
+		int end) {
 		return findByC_N_S_P_R(companyId, name, scope, primKey, roleIds, start,
 			end, null);
 	}
@@ -3305,12 +3226,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findByC_N_S_P_R(long companyId,
 		String name, int scope, String primKey, long[] roleIds, int start,
-		int end, OrderByComparator orderByComparator) throws SystemException {
+		int end, OrderByComparator orderByComparator) {
 		if (roleIds == null) {
 			roleIds = new long[0];
 		}
@@ -3497,12 +3417,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param roleId the role ID
 	 * @return the matching resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByC_N_S_P_R(long companyId, String name,
 		int scope, String primKey, long roleId)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByC_N_S_P_R(companyId,
 				name, scope, primKey, roleId);
 
@@ -3547,11 +3466,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param roleId the role ID
 	 * @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_P_R(long companyId, String name,
-		int scope, String primKey, long roleId) throws SystemException {
+		int scope, String primKey, long roleId) {
 		return fetchByC_N_S_P_R(companyId, name, scope, primKey, roleId, true);
 	}
 
@@ -3565,12 +3483,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param roleId the role ID
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching resource permission, or <code>null</code> if a matching resource permission could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission fetchByC_N_S_P_R(long companyId, String name,
-		int scope, String primKey, long roleId, boolean retrieveFromCache)
-		throws SystemException {
+		int scope, String primKey, long roleId, boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] {
 				companyId, name, scope, primKey, roleId
 			};
@@ -3711,12 +3627,11 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param roleId the role ID
 	 * @return the resource permission that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission removeByC_N_S_P_R(long companyId, String name,
 		int scope, String primKey, long roleId)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = findByC_N_S_P_R(companyId,
 				name, scope, primKey, roleId);
 
@@ -3732,11 +3647,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param roleId the role ID
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int countByC_N_S_P_R(long companyId, String name, int scope,
-		String primKey, long roleId) throws SystemException {
+		String primKey, long roleId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_C_N_S_P_R;
 
 		Object[] finderArgs = new Object[] {
@@ -3836,11 +3750,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primKey the prim key
 	 * @param roleIds the role IDs
 	 * @return the number of matching resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public int countByC_N_S_P_R(long companyId, String name, int scope,
-		String primKey, long[] roleIds) throws SystemException {
+		String primKey, long[] roleIds) {
 		if (roleIds == null) {
 			roleIds = new long[0];
 		}
@@ -4142,11 +4055,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param resourcePermissionId the primary key of the resource permission
 	 * @return the resource permission that was removed
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission remove(long resourcePermissionId)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		return remove((Serializable)resourcePermissionId);
 	}
 
@@ -4156,11 +4068,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primaryKey the primary key of the resource permission
 	 * @return the resource permission that was removed
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission remove(Serializable primaryKey)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		Session session = null;
 
 		try {
@@ -4193,7 +4104,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	@Override
 	protected ResourcePermission removeImpl(
-		ResourcePermission resourcePermission) throws SystemException {
+		ResourcePermission resourcePermission) {
 		resourcePermission = toUnwrappedModel(resourcePermission);
 
 		Session session = null;
@@ -4226,8 +4137,7 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 
 	@Override
 	public ResourcePermission updateImpl(
-		com.liferay.portal.model.ResourcePermission resourcePermission)
-		throws SystemException {
+		com.liferay.portal.model.ResourcePermission resourcePermission) {
 		resourcePermission = toUnwrappedModel(resourcePermission);
 
 		boolean isNew = resourcePermission.isNew();
@@ -4416,11 +4326,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param primaryKey the primary key of the resource permission
 	 * @return the resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		ResourcePermission resourcePermission = fetchByPrimaryKey(primaryKey);
 
 		if (resourcePermission == null) {
@@ -4441,11 +4350,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param resourcePermissionId the primary key of the resource permission
 	 * @return the resource permission
 	 * @throws com.liferay.portal.NoSuchResourcePermissionException if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ResourcePermission findByPrimaryKey(long resourcePermissionId)
-		throws NoSuchResourcePermissionException, SystemException {
+		throws NoSuchResourcePermissionException {
 		return findByPrimaryKey((Serializable)resourcePermissionId);
 	}
 
@@ -4454,11 +4362,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param primaryKey the primary key of the resource permission
 	 * @return the resource permission, or <code>null</code> if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ResourcePermission fetchByPrimaryKey(Serializable primaryKey)
-		throws SystemException {
+	public ResourcePermission fetchByPrimaryKey(Serializable primaryKey) {
 		ResourcePermission resourcePermission = (ResourcePermission)EntityCacheUtil.getResult(ResourcePermissionModelImpl.ENTITY_CACHE_ENABLED,
 				ResourcePermissionImpl.class, primaryKey);
 
@@ -4503,11 +4409,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 *
 	 * @param resourcePermissionId the primary key of the resource permission
 	 * @return the resource permission, or <code>null</code> if a resource permission with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ResourcePermission fetchByPrimaryKey(long resourcePermissionId)
-		throws SystemException {
+	public ResourcePermission fetchByPrimaryKey(long resourcePermissionId) {
 		return fetchByPrimaryKey((Serializable)resourcePermissionId);
 	}
 
@@ -4515,10 +4419,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * Returns all the resource permissions.
 	 *
 	 * @return the resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findAll() throws SystemException {
+	public List<ResourcePermission> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -4532,11 +4435,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param start the lower bound of the range of resource permissions
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @return the range of resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ResourcePermission> findAll(int start, int end)
-		throws SystemException {
+	public List<ResourcePermission> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
@@ -4551,11 +4452,10 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * @param end the upper bound of the range of resource permissions (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ResourcePermission> findAll(int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -4637,10 +4537,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	/**
 	 * Removes all the resource permissions from the database.
 	 *
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeAll() throws SystemException {
+	public void removeAll() {
 		for (ResourcePermission resourcePermission : findAll()) {
 			remove(resourcePermission);
 		}
@@ -4650,10 +4549,9 @@ public class ResourcePermissionPersistenceImpl extends BasePersistenceImpl<Resou
 	 * Returns the number of resource permissions.
 	 *
 	 * @return the number of resource permissions
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countAll() throws SystemException {
+	public int countAll() {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
 

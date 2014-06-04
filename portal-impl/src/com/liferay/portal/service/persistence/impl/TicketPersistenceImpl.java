@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -41,7 +40,6 @@ import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.impl.TicketImpl;
 import com.liferay.portal.model.impl.TicketModelImpl;
 import com.liferay.portal.service.persistence.TicketPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 
@@ -99,11 +97,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param key the key
 	 * @return the matching ticket
 	 * @throws com.liferay.portal.NoSuchTicketException if a matching ticket could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket findByKey(String key)
-		throws NoSuchTicketException, SystemException {
+	public Ticket findByKey(String key) throws NoSuchTicketException {
 		Ticket ticket = fetchByKey(key);
 
 		if (ticket == null) {
@@ -131,10 +127,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 *
 	 * @param key the key
 	 * @return the matching ticket, or <code>null</code> if a matching ticket could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket fetchByKey(String key) throws SystemException {
+	public Ticket fetchByKey(String key) {
 		return fetchByKey(key, true);
 	}
 
@@ -144,11 +139,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param key the key
 	 * @param retrieveFromCache whether to use the finder cache
 	 * @return the matching ticket, or <code>null</code> if a matching ticket could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket fetchByKey(String key, boolean retrieveFromCache)
-		throws SystemException {
+	public Ticket fetchByKey(String key, boolean retrieveFromCache) {
 		Object[] finderArgs = new Object[] { key };
 
 		Object result = null;
@@ -251,11 +244,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 *
 	 * @param key the key
 	 * @return the ticket that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket removeByKey(String key)
-		throws NoSuchTicketException, SystemException {
+	public Ticket removeByKey(String key) throws NoSuchTicketException {
 		Ticket ticket = findByKey(key);
 
 		return remove(ticket);
@@ -266,10 +257,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 *
 	 * @param key the key
 	 * @return the number of matching tickets
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByKey(String key) throws SystemException {
+	public int countByKey(String key) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_KEY;
 
 		Object[] finderArgs = new Object[] { key };
@@ -483,11 +473,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param ticketId the primary key of the ticket
 	 * @return the ticket that was removed
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket remove(long ticketId)
-		throws NoSuchTicketException, SystemException {
+	public Ticket remove(long ticketId) throws NoSuchTicketException {
 		return remove((Serializable)ticketId);
 	}
 
@@ -497,11 +485,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket that was removed
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket remove(Serializable primaryKey)
-		throws NoSuchTicketException, SystemException {
+	public Ticket remove(Serializable primaryKey) throws NoSuchTicketException {
 		Session session = null;
 
 		try {
@@ -532,7 +518,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	@Override
-	protected Ticket removeImpl(Ticket ticket) throws SystemException {
+	protected Ticket removeImpl(Ticket ticket) {
 		ticket = toUnwrappedModel(ticket);
 
 		Session session = null;
@@ -564,8 +550,7 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	}
 
 	@Override
-	public Ticket updateImpl(com.liferay.portal.model.Ticket ticket)
-		throws SystemException {
+	public Ticket updateImpl(com.liferay.portal.model.Ticket ticket) {
 		ticket = toUnwrappedModel(ticket);
 
 		boolean isNew = ticket.isNew();
@@ -638,11 +623,10 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public Ticket findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchTicketException, SystemException {
+		throws NoSuchTicketException {
 		Ticket ticket = fetchByPrimaryKey(primaryKey);
 
 		if (ticket == null) {
@@ -663,11 +647,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param ticketId the primary key of the ticket
 	 * @return the ticket
 	 * @throws com.liferay.portal.NoSuchTicketException if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket findByPrimaryKey(long ticketId)
-		throws NoSuchTicketException, SystemException {
+	public Ticket findByPrimaryKey(long ticketId) throws NoSuchTicketException {
 		return findByPrimaryKey((Serializable)ticketId);
 	}
 
@@ -676,11 +658,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 *
 	 * @param primaryKey the primary key of the ticket
 	 * @return the ticket, or <code>null</code> if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket fetchByPrimaryKey(Serializable primaryKey)
-		throws SystemException {
+	public Ticket fetchByPrimaryKey(Serializable primaryKey) {
 		Ticket ticket = (Ticket)EntityCacheUtil.getResult(TicketModelImpl.ENTITY_CACHE_ENABLED,
 				TicketImpl.class, primaryKey);
 
@@ -723,10 +703,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 *
 	 * @param ticketId the primary key of the ticket
 	 * @return the ticket, or <code>null</code> if a ticket with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public Ticket fetchByPrimaryKey(long ticketId) throws SystemException {
+	public Ticket fetchByPrimaryKey(long ticketId) {
 		return fetchByPrimaryKey((Serializable)ticketId);
 	}
 
@@ -734,10 +713,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * Returns all the tickets.
 	 *
 	 * @return the tickets
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Ticket> findAll() throws SystemException {
+	public List<Ticket> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -751,10 +729,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param start the lower bound of the range of tickets
 	 * @param end the upper bound of the range of tickets (not inclusive)
 	 * @return the range of tickets
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<Ticket> findAll(int start, int end) throws SystemException {
+	public List<Ticket> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
@@ -769,11 +746,10 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * @param end the upper bound of the range of tickets (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of tickets
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<Ticket> findAll(int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -855,10 +831,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	/**
 	 * Removes all the tickets from the database.
 	 *
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeAll() throws SystemException {
+	public void removeAll() {
 		for (Ticket ticket : findAll()) {
 			remove(ticket);
 		}
@@ -868,10 +843,9 @@ public class TicketPersistenceImpl extends BasePersistenceImpl<Ticket>
 	 * Returns the number of tickets.
 	 *
 	 * @return the number of tickets
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countAll() throws SystemException {
+	public int countAll() {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
 

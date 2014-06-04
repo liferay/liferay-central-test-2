@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.dao.orm.Query;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -40,7 +39,6 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ExportImportConfigurationImpl;
 import com.liferay.portal.model.impl.ExportImportConfigurationModelImpl;
 import com.liferay.portal.service.persistence.ExportImportConfigurationPersistence;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.io.Serializable;
 
@@ -114,11 +112,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @return the matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findByGroupId(long groupId)
-		throws SystemException {
+	public List<ExportImportConfiguration> findByGroupId(long groupId) {
 		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -133,11 +129,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByGroupId(long groupId,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return findByGroupId(groupId, start, end, null);
 	}
 
@@ -153,12 +148,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByGroupId(long groupId,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -261,12 +254,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByGroupId_First(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByGroupId_First(groupId,
 				orderByComparator);
 
@@ -292,11 +284,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByGroupId_First(long groupId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ExportImportConfiguration> list = findByGroupId(groupId, 0, 1,
 				orderByComparator);
 
@@ -314,12 +305,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByGroupId_Last(long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByGroupId_Last(groupId,
 				orderByComparator);
 
@@ -345,11 +335,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByGroupId_Last(long groupId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByGroupId(groupId);
 
 		if (count == 0) {
@@ -374,13 +363,12 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration[] findByGroupId_PrevAndNext(
 		long exportImportConfigurationId, long groupId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = findByPrimaryKey(exportImportConfigurationId);
 
 		Session session = null;
@@ -517,10 +505,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * Removes all the export import configurations where groupId = &#63; from the database.
 	 *
 	 * @param groupId the group ID
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByGroupId(long groupId) throws SystemException {
+	public void removeByGroupId(long groupId) {
 		for (ExportImportConfiguration exportImportConfiguration : findByGroupId(
 				groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(exportImportConfiguration);
@@ -532,10 +519,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @return the number of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByGroupId(long groupId) throws SystemException {
+	public int countByGroupId(long groupId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_GROUPID;
 
 		Object[] finderArgs = new Object[] { groupId };
@@ -610,11 +596,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @return the matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findByCompanyId(long companyId)
-		throws SystemException {
+	public List<ExportImportConfiguration> findByCompanyId(long companyId) {
 		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
@@ -630,11 +614,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByCompanyId(long companyId,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return findByCompanyId(companyId, start, end, null);
 	}
 
@@ -650,12 +633,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByCompanyId(long companyId,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -758,12 +739,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByCompanyId_First(long companyId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByCompanyId_First(companyId,
 				orderByComparator);
 
@@ -789,11 +769,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByCompanyId_First(long companyId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ExportImportConfiguration> list = findByCompanyId(companyId, 0, 1,
 				orderByComparator);
 
@@ -811,12 +790,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByCompanyId_Last(long companyId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByCompanyId_Last(companyId,
 				orderByComparator);
 
@@ -842,11 +820,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param companyId the company ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByCompanyId_Last(long companyId,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByCompanyId(companyId);
 
 		if (count == 0) {
@@ -871,13 +848,12 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration[] findByCompanyId_PrevAndNext(
 		long exportImportConfigurationId, long companyId,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = findByPrimaryKey(exportImportConfigurationId);
 
 		Session session = null;
@@ -1016,10 +992,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * Removes all the export import configurations where companyId = &#63; from the database.
 	 *
 	 * @param companyId the company ID
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByCompanyId(long companyId) throws SystemException {
+	public void removeByCompanyId(long companyId) {
 		for (ExportImportConfiguration exportImportConfiguration : findByCompanyId(
 				companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(exportImportConfiguration);
@@ -1031,10 +1006,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param companyId the company ID
 	 * @return the number of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByCompanyId(long companyId) throws SystemException {
+	public int countByCompanyId(long companyId) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_COMPANYID;
 
 		Object[] finderArgs = new Object[] { companyId };
@@ -1110,11 +1084,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param type the type
 	 * @return the matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findByG_T(long groupId, int type)
-		throws SystemException {
+	public List<ExportImportConfiguration> findByG_T(long groupId, int type) {
 		return findByG_T(groupId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
@@ -1131,11 +1103,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_T(long groupId, int type,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return findByG_T(groupId, type, start, end, null);
 	}
 
@@ -1152,12 +1123,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_T(long groupId, int type,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -1270,12 +1239,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_T_First(long groupId, int type,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_T_First(groupId,
 				type, orderByComparator);
 
@@ -1305,11 +1273,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_T_First(long groupId, int type,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ExportImportConfiguration> list = findByG_T(groupId, type, 0, 1,
 				orderByComparator);
 
@@ -1328,12 +1295,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_T_Last(long groupId, int type,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_T_Last(groupId,
 				type, orderByComparator);
 
@@ -1363,11 +1329,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param type the type
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_T_Last(long groupId, int type,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByG_T(groupId, type);
 
 		if (count == 0) {
@@ -1393,13 +1358,12 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration[] findByG_T_PrevAndNext(
 		long exportImportConfigurationId, long groupId, int type,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = findByPrimaryKey(exportImportConfigurationId);
 
 		Session session = null;
@@ -1541,10 +1505,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @param type the type
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByG_T(long groupId, int type) throws SystemException {
+	public void removeByG_T(long groupId, int type) {
 		for (ExportImportConfiguration exportImportConfiguration : findByG_T(
 				groupId, type, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(exportImportConfiguration);
@@ -1557,10 +1520,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param type the type
 	 * @return the number of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByG_T(long groupId, int type) throws SystemException {
+	public int countByG_T(long groupId, int type) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_T;
 
 		Object[] finderArgs = new Object[] { groupId, type };
@@ -1641,11 +1603,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param status the status
 	 * @return the matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findByG_S(long groupId, int status)
-		throws SystemException {
+	public List<ExportImportConfiguration> findByG_S(long groupId, int status) {
 		return findByG_S(groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 			null);
 	}
@@ -1662,11 +1622,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_S(long groupId, int status,
-		int start, int end) throws SystemException {
+		int start, int end) {
 		return findByG_S(groupId, status, start, end, null);
 	}
 
@@ -1683,12 +1642,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_S(long groupId, int status,
-		int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -1801,12 +1758,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_S_First(long groupId, int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_S_First(groupId,
 				status, orderByComparator);
 
@@ -1836,11 +1792,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_S_First(long groupId, int status,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		List<ExportImportConfiguration> list = findByG_S(groupId, status, 0, 1,
 				orderByComparator);
 
@@ -1859,12 +1814,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_S_Last(long groupId, int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_S_Last(groupId,
 				status, orderByComparator);
 
@@ -1894,11 +1848,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_S_Last(long groupId, int status,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		int count = countByG_S(groupId, status);
 
 		if (count == 0) {
@@ -1924,13 +1877,12 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration[] findByG_S_PrevAndNext(
 		long exportImportConfigurationId, long groupId, int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = findByPrimaryKey(exportImportConfigurationId);
 
 		Session session = null;
@@ -2072,10 +2024,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param groupId the group ID
 	 * @param status the status
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByG_S(long groupId, int status) throws SystemException {
+	public void removeByG_S(long groupId, int status) {
 		for (ExportImportConfiguration exportImportConfiguration : findByG_S(
 				groupId, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(exportImportConfiguration);
@@ -2088,10 +2039,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param status the status
 	 * @return the number of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByG_S(long groupId, int status) throws SystemException {
+	public int countByG_S(long groupId, int status) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_S;
 
 		Object[] finderArgs = new Object[] { groupId, status };
@@ -2181,11 +2131,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param type the type
 	 * @param status the status
 	 * @return the matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_T_S(long groupId, int type,
-		int status) throws SystemException {
+		int status) {
 		return findByG_T_S(groupId, type, status, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
@@ -2203,11 +2152,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_T_S(long groupId, int type,
-		int status, int start, int end) throws SystemException {
+		int status, int start, int end) {
 		return findByG_T_S(groupId, type, status, start, end, null);
 	}
 
@@ -2225,12 +2173,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findByG_T_S(long groupId, int type,
-		int status, int start, int end, OrderByComparator orderByComparator)
-		throws SystemException {
+		int status, int start, int end, OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -2349,12 +2295,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_T_S_First(long groupId, int type,
 		int status, OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_T_S_First(groupId,
 				type, status, orderByComparator);
 
@@ -2388,12 +2333,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_T_S_First(long groupId, int type,
-		int status, OrderByComparator orderByComparator)
-		throws SystemException {
+		int status, OrderByComparator orderByComparator) {
 		List<ExportImportConfiguration> list = findByG_T_S(groupId, type,
 				status, 0, 1, orderByComparator);
 
@@ -2413,12 +2356,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByG_T_S_Last(long groupId, int type,
 		int status, OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByG_T_S_Last(groupId,
 				type, status, orderByComparator);
 
@@ -2452,12 +2394,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param status the status
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching export import configuration, or <code>null</code> if a matching export import configuration could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByG_T_S_Last(long groupId, int type,
-		int status, OrderByComparator orderByComparator)
-		throws SystemException {
+		int status, OrderByComparator orderByComparator) {
 		int count = countByG_T_S(groupId, type, status);
 
 		if (count == 0) {
@@ -2484,13 +2424,12 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration[] findByG_T_S_PrevAndNext(
 		long exportImportConfigurationId, long groupId, int type, int status,
 		OrderByComparator orderByComparator)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = findByPrimaryKey(exportImportConfigurationId);
 
 		Session session = null;
@@ -2640,11 +2579,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param groupId the group ID
 	 * @param type the type
 	 * @param status the status
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByG_T_S(long groupId, int type, int status)
-		throws SystemException {
+	public void removeByG_T_S(long groupId, int type, int status) {
 		for (ExportImportConfiguration exportImportConfiguration : findByG_T_S(
 				groupId, type, status, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
 				null)) {
@@ -2659,11 +2596,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param type the type
 	 * @param status the status
 	 * @return the number of matching export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByG_T_S(long groupId, int type, int status)
-		throws SystemException {
+	public int countByG_T_S(long groupId, int type, int status) {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_G_T_S;
 
 		Object[] finderArgs = new Object[] { groupId, type, status };
@@ -2831,11 +2766,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param exportImportConfigurationId the primary key of the export import configuration
 	 * @return the export import configuration that was removed
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration remove(long exportImportConfigurationId)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		return remove((Serializable)exportImportConfigurationId);
 	}
 
@@ -2845,11 +2779,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param primaryKey the primary key of the export import configuration
 	 * @return the export import configuration that was removed
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration remove(Serializable primaryKey)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		Session session = null;
 
 		try {
@@ -2882,8 +2815,7 @@ public class ExportImportConfigurationPersistenceImpl
 
 	@Override
 	protected ExportImportConfiguration removeImpl(
-		ExportImportConfiguration exportImportConfiguration)
-		throws SystemException {
+		ExportImportConfiguration exportImportConfiguration) {
 		exportImportConfiguration = toUnwrappedModel(exportImportConfiguration);
 
 		Session session = null;
@@ -2916,8 +2848,7 @@ public class ExportImportConfigurationPersistenceImpl
 
 	@Override
 	public ExportImportConfiguration updateImpl(
-		com.liferay.portal.model.ExportImportConfiguration exportImportConfiguration)
-		throws SystemException {
+		com.liferay.portal.model.ExportImportConfiguration exportImportConfiguration) {
 		exportImportConfiguration = toUnwrappedModel(exportImportConfiguration);
 
 		boolean isNew = exportImportConfiguration.isNew();
@@ -3106,11 +3037,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param primaryKey the primary key of the export import configuration
 	 * @return the export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByPrimaryKey(Serializable primaryKey)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		ExportImportConfiguration exportImportConfiguration = fetchByPrimaryKey(primaryKey);
 
 		if (exportImportConfiguration == null) {
@@ -3131,12 +3061,11 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param exportImportConfigurationId the primary key of the export import configuration
 	 * @return the export import configuration
 	 * @throws com.liferay.portal.NoSuchExportImportConfigurationException if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration findByPrimaryKey(
 		long exportImportConfigurationId)
-		throws NoSuchExportImportConfigurationException, SystemException {
+		throws NoSuchExportImportConfigurationException {
 		return findByPrimaryKey((Serializable)exportImportConfigurationId);
 	}
 
@@ -3145,11 +3074,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param primaryKey the primary key of the export import configuration
 	 * @return the export import configuration, or <code>null</code> if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public ExportImportConfiguration fetchByPrimaryKey(Serializable primaryKey)
-		throws SystemException {
+	public ExportImportConfiguration fetchByPrimaryKey(Serializable primaryKey) {
 		ExportImportConfiguration exportImportConfiguration = (ExportImportConfiguration)EntityCacheUtil.getResult(ExportImportConfigurationModelImpl.ENTITY_CACHE_ENABLED,
 				ExportImportConfigurationImpl.class, primaryKey);
 
@@ -3194,11 +3121,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 *
 	 * @param exportImportConfigurationId the primary key of the export import configuration
 	 * @return the export import configuration, or <code>null</code> if a export import configuration with the primary key could not be found
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public ExportImportConfiguration fetchByPrimaryKey(
-		long exportImportConfigurationId) throws SystemException {
+		long exportImportConfigurationId) {
 		return fetchByPrimaryKey((Serializable)exportImportConfigurationId);
 	}
 
@@ -3206,10 +3132,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * Returns all the export import configurations.
 	 *
 	 * @return the export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findAll() throws SystemException {
+	public List<ExportImportConfiguration> findAll() {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
 
@@ -3223,11 +3148,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param start the lower bound of the range of export import configurations
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @return the range of export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<ExportImportConfiguration> findAll(int start, int end)
-		throws SystemException {
+	public List<ExportImportConfiguration> findAll(int start, int end) {
 		return findAll(start, end, null);
 	}
 
@@ -3242,11 +3165,10 @@ public class ExportImportConfigurationPersistenceImpl
 	 * @param end the upper bound of the range of export import configurations (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
 	 * @return the ordered range of export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public List<ExportImportConfiguration> findAll(int start, int end,
-		OrderByComparator orderByComparator) throws SystemException {
+		OrderByComparator orderByComparator) {
 		boolean pagination = true;
 		FinderPath finderPath = null;
 		Object[] finderArgs = null;
@@ -3328,10 +3250,9 @@ public class ExportImportConfigurationPersistenceImpl
 	/**
 	 * Removes all the export import configurations from the database.
 	 *
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeAll() throws SystemException {
+	public void removeAll() {
 		for (ExportImportConfiguration exportImportConfiguration : findAll()) {
 			remove(exportImportConfiguration);
 		}
@@ -3341,10 +3262,9 @@ public class ExportImportConfigurationPersistenceImpl
 	 * Returns the number of export import configurations.
 	 *
 	 * @return the number of export import configurations
-	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countAll() throws SystemException {
+	public int countAll() {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
 

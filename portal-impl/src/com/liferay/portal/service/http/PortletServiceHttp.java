@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.util.MethodHandler;
 import com.liferay.portal.kernel.util.MethodKey;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PortletServiceUtil;
-import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * Provides the HTTP utility for the
@@ -52,8 +51,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class PortletServiceHttp {
 	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets(
-		HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.kernel.exception.SystemException {
+		HttpPrincipal httpPrincipal) {
 		try {
 			MethodKey methodKey = new MethodKey(PortletServiceUtil.class,
 					"getWARPortlets", _getWARPortletsParameterTypes0);
