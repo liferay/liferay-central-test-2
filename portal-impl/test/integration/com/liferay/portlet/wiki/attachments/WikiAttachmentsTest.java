@@ -59,9 +59,6 @@ public class WikiAttachmentsTest {
 	@After
 	public void tearDown() throws Exception {
 		GroupLocalServiceUtil.deleteGroup(_group);
-
-		_node = null;
-		_page = null;
 	}
 
 	@Test
