@@ -47,9 +47,24 @@ public class URLCodecTest {
 	}
 
 	@Test
-	public void testDecodingAndEncodingFourBytesUTFWithSurrogates()
-		throws Exception {
-	
+	public void testEncodeURL() throws Exception {
+		for (int i = 0; i < _RAW_URLS.length; i++) {
+			String result = URLCodec.encodeURL(
+				_RAW_URLS[i], StringPool.UTF8, false);
+
+			Assert.assertTrue(
+				StringUtil.equalsIgnoreCase(_ENCODED_URLS[i], result));
+
+			result = URLCodec.encodeURL(_RAW_URLS[i], StringPool.UTF8, true);
+
+			Assert.assertTrue(
+				StringUtil.equalsIgnoreCase(
+					_ESCAPE_SPACES_ENCODED_URLS[i], result));
+		}
+	}
+
+	@Test
+	public void testHandlingFourBytesUTFWithSurrogates() throws Exception {
 		StringBundler sb = new StringBundler(
 			_UNICODE_CATS_AND_DOGS.length * 4 * 2);
 	
@@ -77,23 +92,6 @@ public class URLCodecTest {
 			StringUtil.toLowerCase(escapedAnimalsString),
 			StringUtil.toLowerCase(
 				URLCodec.encodeURL(animalsString, StringPool.UTF8, false)));
-	}
-
-	@Test
-	public void testEncodeURL() throws Exception {
-		for (int i = 0; i < _RAW_URLS.length; i++) {
-			String result = URLCodec.encodeURL(
-				_RAW_URLS[i], StringPool.UTF8, false);
-
-			Assert.assertTrue(
-				StringUtil.equalsIgnoreCase(_ENCODED_URLS[i], result));
-
-			result = URLCodec.encodeURL(_RAW_URLS[i], StringPool.UTF8, true);
-
-			Assert.assertTrue(
-				StringUtil.equalsIgnoreCase(
-					_ESCAPE_SPACES_ENCODED_URLS[i], result));
-		}
 	}
 
 	protected void testDecodeURL(String encodedURLString) {
