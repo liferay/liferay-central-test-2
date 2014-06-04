@@ -481,7 +481,6 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 						new ActionableDynamicQuery.PerformActionMethod() {
 
 							@Override
-							@SuppressWarnings("unused")
 							public void performAction(Object object) throws PortalException {
 								${entity.name} stagedModel = (${entity.name})object;
 
