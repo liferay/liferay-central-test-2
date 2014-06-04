@@ -36,7 +36,7 @@ public class UsersAdminPortletDataHandlerTest
 
 	@Override
 	protected void addStagedModels() throws Exception {
-		organization = OrganizationTestUtil.addOrganization();
+		_organization = OrganizationTestUtil.addOrganization();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class UsersAdminPortletDataHandlerTest
 
 	@Override
 	protected void deleteStagedModels() throws Exception {
-		OrganizationLocalServiceUtil.deleteOrganization(organization);
+		OrganizationLocalServiceUtil.deleteOrganization(_organization);
 	}
 
 	@Override
@@ -54,6 +54,6 @@ public class UsersAdminPortletDataHandlerTest
 		return PortletKeys.USERS_ADMIN;
 	}
 
-	protected Organization organization;
+	private Organization _organization;
 
 }

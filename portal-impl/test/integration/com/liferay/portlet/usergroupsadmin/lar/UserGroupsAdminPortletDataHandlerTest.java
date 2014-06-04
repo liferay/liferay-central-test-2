@@ -36,7 +36,7 @@ public class UserGroupsAdminPortletDataHandlerTest
 
 	@Override
 	protected void addStagedModels() throws Exception {
-		userGroup = UserGroupTestUtil.addUserGroup();
+		_userGroup = UserGroupTestUtil.addUserGroup();
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class UserGroupsAdminPortletDataHandlerTest
 
 	@Override
 	protected void deleteStagedModels() throws Exception {
-		UserGroupLocalServiceUtil.deleteUserGroup(userGroup);
+		UserGroupLocalServiceUtil.deleteUserGroup(_userGroup);
 	}
 
 	@Override
@@ -54,6 +54,6 @@ public class UserGroupsAdminPortletDataHandlerTest
 		return PortletKeys.USER_GROUPS_ADMIN;
 	}
 
-	protected UserGroup userGroup;
+	private UserGroup _userGroup;
 
 }
