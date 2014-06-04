@@ -30,6 +30,8 @@ public class SynchronousMailExecutionTestListener
 		super.runAfterClass(testContext);
 
 		MailServiceTestUtil.stop();
+
+		methodSyncHandler.replaceDestination(DestinationNames.MAIL);
 	}
 
 	@Override
@@ -46,13 +48,6 @@ public class SynchronousMailExecutionTestListener
 		MailServiceTestUtil.start();
 
 		classSyncHandler.replaceDestination(DestinationNames.MAIL);
-	}
-
-	@Override
-	public void runBeforeTest(TestContext testContext) {
-		super.runBeforeTest(testContext);
-
-		methodSyncHandler.replaceDestination(DestinationNames.MAIL);
 	}
 
 }
