@@ -55,8 +55,6 @@ public class PermissionCheckerTest {
 	public void tearDown() throws Exception {
 		GroupLocalServiceUtil.deleteGroup(_group);
 
-		// User needs to be deleted before the organization
-
 		if (_user != null) {
 			UserLocalServiceUtil.deleteUser(_user);
 		}
