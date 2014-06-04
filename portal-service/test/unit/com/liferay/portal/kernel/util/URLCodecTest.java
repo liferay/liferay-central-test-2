@@ -34,16 +34,16 @@ public class URLCodecTest {
 			Assert.assertEquals(_RAW_URLS[i], result);
 		}
 
-		testDecodingFails("%");
-		testDecodingFails("%0");
-		testDecodingFails("%00%");
-		testDecodingFails("%00%0");
-		testDecodingFails("%0" + (char)(CharPool.NUMBER_0 - 1));
-		testDecodingFails("%0" + (char)(CharPool.NUMBER_9 + 1));
-		testDecodingFails("%0" + (char)(CharPool.UPPER_CASE_A - 1));
-		testDecodingFails("%0" + (char)(CharPool.UPPER_CASE_F + 1));
-		testDecodingFails("%0" + (char)(CharPool.LOWER_CASE_A - 1));
-		testDecodingFails("%0" + (char)(CharPool.LOWER_CASE_F + 1));
+		testDecodeURL("%");
+		testDecodeURL("%0");
+		testDecodeURL("%00%");
+		testDecodeURL("%00%0");
+		testDecodeURL("%0" + (char)(CharPool.NUMBER_0 - 1));
+		testDecodeURL("%0" + (char)(CharPool.NUMBER_9 + 1));
+		testDecodeURL("%0" + (char)(CharPool.UPPER_CASE_A - 1));
+		testDecodeURL("%0" + (char)(CharPool.UPPER_CASE_F + 1));
+		testDecodeURL("%0" + (char)(CharPool.LOWER_CASE_A - 1));
+		testDecodeURL("%0" + (char)(CharPool.LOWER_CASE_F + 1));
 	}
 
 	@Test
@@ -65,40 +65,42 @@ public class URLCodecTest {
 
 	@Test
 	public void testFourBytesUTFWithSurrogates() throws Exception {
-		int[] codePoints = new int[UNICODE_CATS_AND_DOGS.length];
-
-		for (int i = 0; i < codePoints.length; i++) {
-			codePoints[i] = Integer.valueOf(UNICODE_CATS_AND_DOGS[i], 16);
-		}
-
-		String animals = new String(codePoints, 0, codePoints.length);
 		StringBundler sb = new StringBundler(
-			UNICODE_CATS_AND_DOGS.length * 4 * 2);
+			_UNICODE_CATS_AND_DOGS.length * 4 * 2);
 
-		byte[] animalBites = animals.getBytes(StringPool.UTF8);
+		int[] animalsInts = new int[_UNICODE_CATS_AND_DOGS.length];
 
-		for (int i = 0; i < animalBites.length; i++) {
-			sb.append(StringPool.PERCENT);
-			sb.append(Integer.toHexString(0xFF & animalBites[i]));
+		for (int i = 0; i < animalsInts.length; i++) {
+			animalsInts[i] = Integer.valueOf(_UNICODE_CATS_AND_DOGS[i], 16);
 		}
 
-		String escapedAnimals = sb.toString();
+		String animalsString = new String(animalsInts, 0, animalsInts.length);
+
+		byte[] animalsBytes = animalsString.getBytes(StringPool.UTF8);
+
+		for (int i = 0; i < animalsBytes.length; i++) {
+			sb.append(StringPool.PERCENT);
+			sb.append(Integer.toHexString(0xFF & animalsBytes[i]));
+		}
+
+		String escapedAnimalsString = sb.toString();
 
 		Assert.assertEquals(
-			StringUtil.toLowerCase(escapedAnimals),
+			StringUtil.toLowerCase(escapedAnimalsString),
 			StringUtil.toLowerCase(
-				URLCodec.encodeURL(animals, StringPool.UTF8, false)));
-
+				URLCodec.encodeURL(animalsString, StringPool.UTF8, false)));
 		Assert.assertEquals(
-			animals, URLCodec.decodeURL(escapedAnimals, StringPool.UTF8));
+			animalsString,
+			URLCodec.decodeURL(escapedAnimalsString, StringPool.UTF8));
 	}
 
-	private void testDecodingFails(String s) {
+	protected void testDecodeURL(String encodedURLString) {
 		try {
-			URLCodec.decodeURL(s, StringPool.UTF8);
-			Assert.fail(s);
+			URLCodec.decodeURL(encodedURLString, StringPool.UTF8);
+
+			Assert.fail(encodedURLString);
 		}
-		catch (IllegalArgumentException e) {
+		catch (IllegalArgumentException iae) {
 		}
 	}
 
@@ -112,7 +114,7 @@ public class URLCodecTest {
 		"/abc/def", "abc <def> ghi"
 	};
 
-	private static final String[] UNICODE_CATS_AND_DOGS =
+	private static final String[] _UNICODE_CATS_AND_DOGS =
 		{"1f408", "1f431", "1f415", "1f436"};
 
 	static {
