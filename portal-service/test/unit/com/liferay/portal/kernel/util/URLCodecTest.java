@@ -86,12 +86,12 @@ public class URLCodecTest {
 		String escapedAnimalsString = sb.toString();
 
 		Assert.assertEquals(
+			animalsString,
+			URLCodec.decodeURL(escapedAnimalsString, StringPool.UTF8));
+		Assert.assertEquals(
 			StringUtil.toLowerCase(escapedAnimalsString),
 			StringUtil.toLowerCase(
 				URLCodec.encodeURL(animalsString, StringPool.UTF8, false)));
-		Assert.assertEquals(
-			animalsString,
-			URLCodec.decodeURL(escapedAnimalsString, StringPool.UTF8));
 	}
 
 	protected void testDecodeURL(String encodedURLString) {
