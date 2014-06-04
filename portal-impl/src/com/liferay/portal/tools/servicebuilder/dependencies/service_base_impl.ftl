@@ -746,14 +746,13 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 				 *
 				 * @param ${entity.PKVarName} the ${entity.PKVarName} of the ${entity.humanName}
 				 * @return long[] the ${tempEntity.PKVarName}s of ${tempEntity.humanNames} associated with the ${entity.humanName}
-				 * @throws SystemException if a system exception occurred
 				 */
 				@Override
 				public long[] get${tempEntity.name}PrimaryKeys(${entity.PKClassName} ${entity.PKVarName}) {
 					return ${entity.varName}Persistence.get${tempEntity.name}PrimaryKeys(${entity.PKVarName});
 				}
 
-				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + tempEntity.name + entity.names, [tempEntity.PKClassName], ["SystemException"])>
+				<#assign serviceBaseExceptions = serviceBuilder.getServiceBaseExceptions(methods, "get" + tempEntity.name + entity.names, [tempEntity.PKClassName], [])>
 
 				/**
 				<#list serviceBaseExceptions as exception>

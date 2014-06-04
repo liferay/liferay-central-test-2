@@ -1296,7 +1296,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					FinderCacheUtil.putResult(FINDER_PATH_WITH_PAGINATION_COUNT_ANCESTORS, finderArgs, count);
 				}
-				catch(SystemException se) {
+				catch (SystemException se) {
 					FinderCacheUtil.removeResult(FINDER_PATH_WITH_PAGINATION_COUNT_ANCESTORS, finderArgs);
 
 					throw se;
@@ -1318,7 +1318,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 
 					FinderCacheUtil.putResult(FINDER_PATH_WITH_PAGINATION_COUNT_DESCENDANTS, finderArgs, count);
 				}
-				catch(SystemException se) {
+				catch (SystemException se) {
 					FinderCacheUtil.removeResult(FINDER_PATH_WITH_PAGINATION_COUNT_DESCENDANTS, finderArgs);
 
 					throw se;
