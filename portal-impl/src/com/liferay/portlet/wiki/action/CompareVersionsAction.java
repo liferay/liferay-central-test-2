@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.wiki.action;
 
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -122,9 +121,6 @@ public class CompareVersionsAction extends PortletAction {
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
-		LiferayPortletResponse liferayPortletResponse =
-			PortalUtil.getLiferayPortletResponse(portletResponse);
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -139,6 +135,9 @@ public class CompareVersionsAction extends PortletAction {
 			nodeId, title, sourceVersion);
 		WikiPage targetPage = WikiPageServiceUtil.getPage(
 			nodeId, title, targetVersion);
+
+		LiferayPortletResponse liferayPortletResponse =
+			PortalUtil.getLiferayPortletResponse(portletResponse);
 
 		PortletURL viewPageURL = liferayPortletResponse.createRenderURL();
 
