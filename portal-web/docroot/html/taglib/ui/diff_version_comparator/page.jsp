@@ -36,7 +36,7 @@ if (Validator.isNotNull(languageId)) {
 
 <div class="diff-version-comparator">
 	<span class="diff-version-title">
-		<liferay-ui:message key="you-are-comparing-these-versions" />:
+		<liferay-ui:message key="you-are-comparing-these-versions" />
 	</span>
 
 	<aui:form action="<%= portletURL %>" method="post" name="diffVersionFm">

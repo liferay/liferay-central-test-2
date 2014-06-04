@@ -89,13 +89,10 @@ public class CompareVersionsAction extends PortletAction {
 
 		long groupId = ParamUtil.getLong(resourceRequest, "groupId");
 		String articleId = ParamUtil.getString(resourceRequest, "articleId");
-
 		double sourceVersion = ParamUtil.getDouble(
 			resourceRequest, "sourceVersion");
-
 		double targetVersion = ParamUtil.getDouble(
 			resourceRequest, "targetVersion");
-
 		String languageId = ParamUtil.getString(resourceRequest, "languageId");
 
 		String diffHtmlResults = JournalUtil.diffHtml(

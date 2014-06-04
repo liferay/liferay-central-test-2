@@ -77,16 +77,14 @@ JournalArticle article = (JournalArticle)row.getObject();
 		/>
 	</c:if>
 
+	<portlet:renderURL var="compareVersionURL" windowState="<%= LiferayWindowState.POP_UP.toString() %>">
+		<portlet:param name="struts_action" value="/journal/select_version" />
+		<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
+		<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
+		<portlet:param name="sourceVersion" value="<%= String.valueOf(article.getVersion()) %>" />
+	</portlet:renderURL>
+
 	<%
-	PortletURL compareVersionURL = renderResponse.createRenderURL();
-
-	compareVersionURL.setWindowState(LiferayWindowState.POP_UP);
-
-	compareVersionURL.setParameter("struts_action", "/journal/select_version");
-	compareVersionURL.setParameter("groupId", String.valueOf(article.getGroupId()));
-	compareVersionURL.setParameter("articleId", article.getArticleId());
-	compareVersionURL.setParameter("sourceVersion", String.valueOf(article.getVersion()));
-
 	Map<String, Object> data = new HashMap<String, Object>();
 
 	data.put("uri", compareVersionURL.toString());
