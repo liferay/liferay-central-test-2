@@ -1021,7 +1021,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			 * @return long[] of the primaryKeys of ${tempEntity.humanNames} associated with the ${entity.humanName}
 			 */
 			@Override
-			public List<Long> get${tempEntity.name}PrimaryKeys(${entity.PKClassName} pk) {
+			public long[] get${tempEntity.name}PrimaryKeys(${entity.PKClassName} pk) {
 				long[] pks = ${entity.varName}To${tempEntity.name}TableMapper.getRightPrimaryKeys(pk);
 
 				return pks.clone();
