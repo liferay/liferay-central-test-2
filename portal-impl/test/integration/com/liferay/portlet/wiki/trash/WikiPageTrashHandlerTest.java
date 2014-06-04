@@ -70,7 +70,6 @@ public class WikiPageTrashHandlerTest extends BaseTrashHandlerTestCase {
 	}
 
 	@Test
-	@Transactional
 	public void testAddPageWithSameTitleAsImplicitlyDeletedPageVersion()
 		throws Exception {
 
