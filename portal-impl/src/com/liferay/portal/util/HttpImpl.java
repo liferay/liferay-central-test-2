@@ -754,7 +754,7 @@ public class HttpImpl implements Http {
 							_log.info(
 								"Skipping parameter with key " + key +
 									" because of invalid value " + kvp[1],
-								e);
+								iae);
 						}
 
 						continue;
@@ -1106,7 +1106,7 @@ public class HttpImpl implements Http {
 				catch (IllegalArgumentException iae) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
-							"Skipping undecodable parameter " + param, e);
+							"Skipping undecodable parameter " + param, iae);
 					}
 
 					continue;
