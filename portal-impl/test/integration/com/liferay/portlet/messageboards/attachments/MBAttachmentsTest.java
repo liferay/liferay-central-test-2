@@ -70,9 +70,6 @@ public class MBAttachmentsTest {
 	@After
 	public void tearDown() throws Exception {
 		GroupLocalServiceUtil.deleteGroup(_group);
-
-		_category = null;
-		_message = null;
 	}
 
 	@Test
