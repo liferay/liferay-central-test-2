@@ -122,22 +122,18 @@ public class CompareVersionsAction extends PortletAction {
 			PortletRequest portletRequest, PortletResponse portletResponse)
 		throws Exception {
 
-		LiferayPortletRequest liferayPortletRequest =
-			PortalUtil.getLiferayPortletRequest(portletRequest);
-
 		LiferayPortletResponse liferayPortletResponse =
 			PortalUtil.getLiferayPortletResponse(portletResponse);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)liferayPortletRequest.getAttribute(
-				WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		long nodeId = ParamUtil.getLong(liferayPortletRequest, "nodeId");
-		String title = ParamUtil.getString(liferayPortletRequest, "title");
+		long nodeId = ParamUtil.getLong(portletRequest, "nodeId");
+		String title = ParamUtil.getString(portletRequest, "title");
 		double sourceVersion = ParamUtil.getDouble(
-			liferayPortletRequest, "sourceVersion");
+			portletRequest, "sourceVersion");
 		double targetVersion = ParamUtil.getDouble(
-			liferayPortletRequest, "targetVersion");
+			portletRequest, "targetVersion");
 
 		WikiPage sourcePage = WikiPageServiceUtil.getPage(
 			nodeId, title, sourceVersion);
