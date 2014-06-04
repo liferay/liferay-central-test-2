@@ -7,14 +7,14 @@
 		revision="working@mbpro.local"
 		conf="default"
 		confs="default"
-		date="20140601143258"/>
+		date="20140603215855"/>
 	<dependencies>
 		<module organisation="org.apache.felix" name="org.apache.felix.scr">
 			<revision name="1.6.2" status="release" pubdate="20121107034855" resolver="liferay-public" artresolver="default" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, master" position="0">
-				<metadata-artifact status="successful" details="" size="18501" time="57" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/ivy-1.6.2.xml" searched="true" original-local-location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/ivy-1.6.2.xml.original" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/org/apache/felix/org.apache.felix.scr/1.6.2/org.apache.felix.scr-1.6.2.pom"/>
+				<metadata-artifact status="successful" details="" size="18501" time="88" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/ivy-1.6.2.xml" searched="true" original-local-location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/ivy-1.6.2.xml.original" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/org/apache/felix/org.apache.felix.scr/1.6.2/org.apache.felix.scr-1.6.2.pom"/>
 				<caller organisation="com.liferay" name="com.liferay.portal.portlet.tracker" conf="default" rev="1.6.2" rev-constraint-default="1.6.2" rev-constraint-dynamic="1.6.2" callerrev="working@mbpro.local"/>
 				<artifacts>
-					<artifact name="org.apache.felix.scr" type="bundle" ext="jar" status="successful" details="" size="199570" time="96" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/bundles/org.apache.felix.scr-1.6.2.jar">
+					<artifact name="org.apache.felix.scr" type="bundle" ext="jar" status="successful" details="" size="199570" time="1061" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/org.apache.felix/org.apache.felix.scr/bundles/org.apache.felix.scr-1.6.2.jar">
 						<origin-location is-local="false" location="http://cdn.repository.liferay.com/nexus/content/groups/public/org/apache/felix/org.apache.felix.scr/1.6.2/org.apache.felix.scr-1.6.2.jar"/>
 					</artifact>
 				</artifacts>

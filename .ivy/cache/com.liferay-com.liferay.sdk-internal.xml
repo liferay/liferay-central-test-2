@@ -6,8 +6,8 @@
 		module="com.liferay.sdk"
 		revision="working@mbpro.local"
 		conf="internal"
-		confs="default, internal, provided"
-		date="20140601142552"/>
+		confs="default, internal, provided, test"
+		date="20140603215354"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>
