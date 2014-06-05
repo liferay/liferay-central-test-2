@@ -38,7 +38,7 @@ public interface ColumnProcessor {
 	public String processPortlet(String portletId) throws Exception;
 
 	public String processPortlet(
-			String portletId, Map<String, ?> defaultSettings)
+			String portletId, Map<String, ?> defaultSettingsMap)
 		throws Exception;
 
 }

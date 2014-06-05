@@ -131,7 +131,7 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 
 	@Override
 	public String processPortlet(
-			String portletId, Map<String, ?> defaultSettings)
+			String portletId, Map<String, ?> defaultSettingsMap)
 		throws Exception {
 
 		return processPortlet(portletId);

@@ -20,6 +20,7 @@ import com.liferay.portal.kernel.servlet.BufferCacheServletResponse;
 import com.liferay.portal.kernel.settings.ModifiableSettings;
 import com.liferay.portal.kernel.settings.Settings;
 import com.liferay.portal.kernel.settings.SettingsFactoryUtil;
+import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
@@ -213,7 +214,7 @@ public class TemplateProcessor implements ColumnProcessor {
 			String portletId, Map<String, ?> defaultSettingsMap)
 		throws Exception {
 
-		ThemeDisplay themeDisplay = (ThemeDisplay) _request.getAttribute(
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Settings settings = SettingsFactoryUtil.getPortletInstanceSettings(
@@ -234,8 +235,8 @@ public class TemplateProcessor implements ColumnProcessor {
 			}
 			else {
 				throw new IllegalArgumentException(
-					"Unsupported type " + value.getClass().getName() +
-					" for key " + key );
+					"Key " + key + " has unsupported value of type " +
+						ClassUtil.getClassName(value.getClass()));
 			}
 		}
 
