@@ -63,7 +63,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		setUpPropsUtil();
 		setUpRegistryUtil();
 		setUpSearchEngineUtil();
-		
+
 		_indexer = new TestIndexer();
 	}
 
@@ -82,21 +82,6 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 	}
 
 	@Test
-	public void testGetFullQueryWithDiscussions() throws Exception {
-		_searchContext.setIncludeDiscussions(true);
-
-		_indexer.getFullQuery(_searchContext);
-
-		assertEntryClassNames(_CLASS_NAME, MBMessage.class.getName());
-
-		Assert.assertEquals(
-			Boolean.TRUE, _searchContext.getAttribute("discussion"));
-		Assert.assertArrayEquals(
-			new String[] {_CLASS_NAME},
-			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
-	}
-
-	@Test
 	public void testGetFullQueryWithAttachmentsAndDiscussions()
 		throws Exception {
 
@@ -108,6 +93,21 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		assertEntryClassNames(
 			_CLASS_NAME, DLFileEntry.class.getName(),
 			MBMessage.class.getName());
+
+		Assert.assertEquals(
+			Boolean.TRUE, _searchContext.getAttribute("discussion"));
+		Assert.assertArrayEquals(
+			new String[] {_CLASS_NAME},
+			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
+	}
+
+	@Test
+	public void testGetFullQueryWithDiscussions() throws Exception {
+		_searchContext.setIncludeDiscussions(true);
+
+		_indexer.getFullQuery(_searchContext);
+
+		assertEntryClassNames(_CLASS_NAME, MBMessage.class.getName());
 
 		Assert.assertEquals(
 			Boolean.TRUE, _searchContext.getAttribute("discussion"));
@@ -216,7 +216,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 	}
 
 	private static final String _CLASS_NAME = RandomTestUtil.randomString();
-	
+
 	private Indexer _indexer;
 	private SearchContext _searchContext = new SearchContext();
 
