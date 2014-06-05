@@ -20,8 +20,6 @@ import freemarker.cache.TemplateLoader;
 
 import freemarker.ext.servlet.FreemarkerServlet;
 
-import java.io.IOException;
-
 import org.osgi.framework.Bundle;
 import org.osgi.framework.FrameworkUtil;
 
@@ -31,9 +29,7 @@ import org.osgi.framework.FrameworkUtil;
 public class FreemarkerOSGiServlet extends FreemarkerServlet {
 
 	@Override
-	protected TemplateLoader createTemplateLoader(String templatePath)
-		throws IOException {
-
+	protected TemplateLoader createTemplateLoader(String templatePath) {
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 
 		return new BundleTemplateLoader(bundle);

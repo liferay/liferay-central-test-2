@@ -32,7 +32,7 @@ public class BundleTemplateLoader implements TemplateLoader {
 
 	public BundleTemplateLoader(Bundle bundle) {
 		if (bundle == null) {
-			throw new IllegalArgumentException("Bundle cannot be null");
+			throw new IllegalArgumentException("Bundle is null");
 		}
 
 		_bundle = bundle;
@@ -50,13 +50,13 @@ public class BundleTemplateLoader implements TemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
-		URL resource = _bundle.getEntry(name);
+		URL url = _bundle.getEntry(name);
 
-		if (resource == null) {
+		if (url == null) {
 			return null;
 		}
 
-		return new BundleTemplateSource(resource);
+		return new BundleTemplateSource(url);
 	}
 
 	@Override
@@ -65,9 +65,7 @@ public class BundleTemplateLoader implements TemplateLoader {
 	}
 
 	@Override
-	public Reader getReader(Object templateSource, String encoding)
-		throws IOException {
-
+	public Reader getReader(Object templateSource, String encoding) {
 		BundleTemplateSource bundleTemplateSource =
 			(BundleTemplateSource)templateSource;
 
@@ -76,7 +74,7 @@ public class BundleTemplateLoader implements TemplateLoader {
 
 	private Bundle _bundle;
 
-	private static class BundleTemplateSource {
+	private class BundleTemplateSource {
 
 		public BundleTemplateSource(URL url) throws IOException {
 			_inputStream = url.openStream();
@@ -86,7 +84,8 @@ public class BundleTemplateLoader implements TemplateLoader {
 			return _inputStream;
 		}
 
-		final private InputStream _inputStream;
+		private InputStream _inputStream;
+
 	}
 
 }
