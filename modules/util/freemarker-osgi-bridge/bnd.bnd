@@ -1,5 +1,2 @@
-Bundle-Name: Freemarker Osgi Bridge
-Export-Package:\
-	com.liferay.freemarker.osgi.servlet
-Private-Package:\
-	com.liferay.freemarker.osgi.internal.*
+Bundle-Name: Liferay Freemarker Osgi Bridge
+Export-Package: com.liferay.freemarker.osgi.servlet
