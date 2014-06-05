@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Props;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.util.test.RandomTestUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.registry.Registry;
@@ -62,6 +63,8 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		setUpProps();
 		setUpRegistries();
 		setUpSearchEngine();
+		
+		_indexer = new TestIndexer();
 	}
 
 	@Test
@@ -70,7 +73,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 
 		_getFullQuery();
 
-		assertEntryClassNames("__getClassNames__", DLFileEntry.class.getName());
+		assertEntryClassNames(_CLASS_NAME, DLFileEntry.class.getName());
 
 		assertDiscussionIsUnset();
 
@@ -83,7 +86,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 
 		_getFullQuery();
 
-		assertEntryClassNames("__getClassNames__", MBMessage.class.getName());
+		assertEntryClassNames(_CLASS_NAME, MBMessage.class.getName());
 
 		assertDiscussionIsSet();
 
@@ -100,7 +103,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		_getFullQuery();
 
 		assertEntryClassNames(
-			"__getClassNames__", DLFileEntry.class.getName(),
+			_CLASS_NAME, DLFileEntry.class.getName(),
 			MBMessage.class.getName());
 
 		assertDiscussionIsSet();
@@ -114,7 +117,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 
 		_getFullQuery();
 
-		assertEntryClassNames("__getClassNames__");
+		assertEntryClassNames(_CLASS_NAME);
 
 		assertDiscussionIsUnset();
 
@@ -141,7 +144,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 
 	protected void assertRelatedEntryClassNamesIsSet() {
 		Assert.assertArrayEquals(
-			new String[] {"__getClassNames__"},
+			new String[] {_CLASS_NAME},
 			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
 	}
 
@@ -229,14 +232,16 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		_indexer.getFullQuery(_searchContext);
 	}
 
-	private Indexer _indexer = new TestIndexer();
+	private static final String _CLASS_NAME = RandomTestUtil.randomString();
+	
+	private Indexer _indexer;
 	private SearchContext _searchContext = new SearchContext();
 
 	private class TestIndexer extends BaseIndexer {
 
 		@Override
 		public String[] getClassNames() {
-			return new String[] {"__getClassNames__"};
+			return new String[] {_CLASS_NAME};
 		}
 
 		@Override
