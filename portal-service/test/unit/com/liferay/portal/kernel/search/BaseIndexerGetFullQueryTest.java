@@ -58,102 +58,89 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 
 	@Before
 	public void setUp() {
-		setUpBooleanQueryFactory();
-		setUpJSONFactory();
-		setUpProps();
-		setUpRegistries();
-		setUpSearchEngine();
+		setUpBooleanQueryFactoryUtil();
+		setUpJSONFactoryUtil();
+		setUpPropsUtil();
+		setUpRegistryUtil();
+		setUpSearchEngineUtil();
 		
 		_indexer = new TestIndexer();
 	}
 
 	@Test
-	public void testGetFullQueryWithIncludeAttachments() throws Exception {
+	public void testGetFullQueryWithAttachments() throws Exception {
 		_searchContext.setIncludeAttachments(true);
 
-		_getFullQuery();
+		_indexer.getFullQuery(_searchContext);
 
 		assertEntryClassNames(_CLASS_NAME, DLFileEntry.class.getName());
 
-		assertDiscussionIsUnset();
-
-		assertRelatedEntryClassNamesIsSet();
-	}
-
-	@Test
-	public void testGetFullQueryWithIncludeDiscussions() throws Exception {
-		_searchContext.setIncludeDiscussions(true);
-
-		_getFullQuery();
-
-		assertEntryClassNames(_CLASS_NAME, MBMessage.class.getName());
-
-		assertDiscussionIsSet();
-
-		assertRelatedEntryClassNamesIsSet();
-	}
-
-	@Test
-	public void testGetFullQueryWithIncludeDiscussionsAndAttachments()
-		throws Exception {
-
-		_searchContext.setIncludeAttachments(true);
-		_searchContext.setIncludeDiscussions(true);
-
-		_getFullQuery();
-
-		assertEntryClassNames(
-			_CLASS_NAME, DLFileEntry.class.getName(),
-			MBMessage.class.getName());
-
-		assertDiscussionIsSet();
-
-		assertRelatedEntryClassNamesIsSet();
-	}
-
-	@Test
-	public void testGetFullQueryWithoutIncludeDiscussionsOrAttachments()
-		throws Exception {
-
-		_getFullQuery();
-
-		assertEntryClassNames(_CLASS_NAME);
-
-		assertDiscussionIsUnset();
-
-		assertRelatedEntryClassNamesIsUnset();
-	}
-
-	protected void assertDiscussionIsSet() {
-		Assert.assertEquals(
-			Boolean.TRUE, _searchContext.getAttribute("discussion"));
-	}
-
-	protected void assertDiscussionIsUnset() {
 		Assert.assertNull(_searchContext.getAttribute("discussion"));
-	}
-
-	protected void assertEntryClassNames(String... expected) {
-		String[] entryClassNames = _searchContext.getEntryClassNames();
-
-		Arrays.sort(entryClassNames);
-		Arrays.sort(expected);
-
-		Assert.assertArrayEquals(expected, entryClassNames);
-	}
-
-	protected void assertRelatedEntryClassNamesIsSet() {
 		Assert.assertArrayEquals(
 			new String[] {_CLASS_NAME},
 			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
 	}
 
-	protected void assertRelatedEntryClassNamesIsUnset() {
+	@Test
+	public void testGetFullQueryWithDiscussions() throws Exception {
+		_searchContext.setIncludeDiscussions(true);
+
+		_indexer.getFullQuery(_searchContext);
+
+		assertEntryClassNames(_CLASS_NAME, MBMessage.class.getName());
+
+		Assert.assertEquals(
+			Boolean.TRUE, _searchContext.getAttribute("discussion"));
+		Assert.assertArrayEquals(
+			new String[] {_CLASS_NAME},
+			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
+	}
+
+	@Test
+	public void testGetFullQueryWithAttachmentsAndDiscussions()
+		throws Exception {
+
+		_searchContext.setIncludeAttachments(true);
+		_searchContext.setIncludeDiscussions(true);
+
+		_indexer.getFullQuery(_searchContext);
+
+		assertEntryClassNames(
+			_CLASS_NAME, DLFileEntry.class.getName(),
+			MBMessage.class.getName());
+
+		Assert.assertEquals(
+			Boolean.TRUE, _searchContext.getAttribute("discussion"));
+		Assert.assertArrayEquals(
+			new String[] {_CLASS_NAME},
+			(String[])_searchContext.getAttribute("relatedEntryClassNames"));
+	}
+
+	@Test
+	public void testGetFullQueryWithoutAttachmentsOrDiscussions()
+		throws Exception {
+
+		_indexer.getFullQuery(_searchContext);
+
+		assertEntryClassNames(_CLASS_NAME);
+
+		Assert.assertNull(_searchContext.getAttribute("discussion"));
 		Assert.assertNull(
 			_searchContext.getAttribute("relatedEntryClassNames"));
 	}
 
-	protected void setUpBooleanQueryFactory() {
+	protected void assertEntryClassNames(String... expectedEntryClassNames) {
+		Arrays.sort(expectedEntryClassNames);
+
+		String[] actualEntryClassNames = _searchContext.getEntryClassNames();
+
+		Arrays.sort(actualEntryClassNames);
+
+		Assert.assertArrayEquals(
+			expectedEntryClassNames, actualEntryClassNames);
+	}
+
+	protected void setUpBooleanQueryFactoryUtil() {
 		mockStatic(BooleanQueryFactoryUtil.class, Mockito.CALLS_REAL_METHODS);
 
 		stub(
@@ -165,7 +152,9 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		);
 	}
 
-	protected void setUpJSONFactory() {
+	protected void setUpJSONFactoryUtil() {
+		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
+
 		JSONFactory jsonFactory = mock(JSONFactory.class);
 
 		when(
@@ -174,18 +163,16 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 			mock(JSONObject.class)
 		);
 
-		JSONFactoryUtil jsonFactoryUtil = new JSONFactoryUtil();
-
 		jsonFactoryUtil.setJSONFactory(jsonFactory);
 	}
 
-	protected void setUpProps() {
+	protected void setUpPropsUtil() {
 		Props props = mock(Props.class);
 
 		PropsUtil.setProps(props);
 	}
 
-	protected void setUpRegistries() {
+	protected void setUpRegistryUtil() {
 		Registry registry = mock(Registry.class);
 
 		when(
@@ -216,7 +203,7 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		mockStatic(IndexerRegistryUtil.class, Mockito.CALLS_REAL_METHODS);
 	}
 
-	protected void setUpSearchEngine() {
+	protected void setUpSearchEngineUtil() {
 		mockStatic(SearchEngineUtil.class, Mockito.CALLS_REAL_METHODS);
 
 		stub(
@@ -226,10 +213,6 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		).toReturn(
 			new String[0]
 		);
-	}
-
-	private void _getFullQuery() throws SearchException {
-		_indexer.getFullQuery(_searchContext);
 	}
 
 	private static final String _CLASS_NAME = RandomTestUtil.randomString();
