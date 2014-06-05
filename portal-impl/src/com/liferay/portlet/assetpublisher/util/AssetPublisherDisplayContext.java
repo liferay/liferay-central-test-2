@@ -83,6 +83,7 @@ public class AssetPublisherDisplayContext {
 		_allAssetCategoryIds = new long[0];
 
 		long assetCategoryId = ParamUtil.getLong(_request, "categoryId");
+
 		String selectionStyle = getSelectionStyle();
 
 		if (selectionStyle.equals("dynamic")) {
@@ -108,6 +109,7 @@ public class AssetPublisherDisplayContext {
 		_allAssetTagNames = new String[0];
 
 		String assetTagName = ParamUtil.getString(_request, "tag");
+
 		String selectionStyle = getSelectionStyle();
 
 		if (selectionStyle.equals("dynamic")) {
