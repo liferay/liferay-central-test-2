@@ -72,8 +72,6 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 	public void tearDown() throws Exception {
 		super.tearDown();
 
-		// Need to delete LayoutSetPrototype first
-
 		_layoutSetPrototype =
 			LayoutSetPrototypeLocalServiceUtil.
 				fetchLayoutSetPrototypeByUuidAndCompanyId(
@@ -89,8 +87,8 @@ public class LayoutSetPrototypeStagedModelDataHandlerTest
 					_layoutPrototype.getUuid(),
 					_layoutPrototype.getCompanyId());
 
-			LayoutPrototypeLocalServiceUtil.deleteLayoutPrototype(
-				_layoutPrototype);
+		LayoutPrototypeLocalServiceUtil.deleteLayoutPrototype(
+			_layoutPrototype);
 	}
 
 	protected void addLayout(Class<?> clazz, Layout layout) throws Exception {
