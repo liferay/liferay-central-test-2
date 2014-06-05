@@ -14,7 +14,7 @@
 
 package com.liferay.freemarker.osgi.servlet;
 
-import com.liferay.freemarker.osgi.internal.loader.BundleTemplateLoader;
+import com.liferay.freemarker.osgi.internal.BundleTemplateLoader;
 
 import freemarker.cache.TemplateLoader;
 

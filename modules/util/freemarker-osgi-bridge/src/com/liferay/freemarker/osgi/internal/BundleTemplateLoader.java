@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.freemarker.osgi.internal.loader;
+package com.liferay.freemarker.osgi.internal;
 
 import freemarker.cache.TemplateLoader;
 
