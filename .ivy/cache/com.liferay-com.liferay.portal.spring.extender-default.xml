@@ -7,7 +7,7 @@
 		revision="working@mbpro.local"
 		conf="default"
 		confs="default"
-		date="20140603220037"/>
+		date="20140605145822"/>
 	<dependencies>
 		<module organisation="org.osgi" name="org.osgi.core">
 			<revision name="5.0.0" status="release" pubdate="20120614043413" resolver="liferay-public" artresolver="default" homepage="     http://www.osgi.org   " downloaded="false" searched="false" default="false" conf="default, compile, runtime, master" position="3">
@@ -22,33 +22,33 @@
 			</revision>
 		</module>
 		<module organisation="com.liferay" name="org.eclipse.gemini.blueprint.io">
-			<revision name="2.0.0.M02" status="release" pubdate="20140521120722" resolver="liferay-public" artresolver="default" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, master" position="2">
-				<metadata-artifact status="successful" details="" size="482" time="150" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.io/ivy-2.0.0.M02.xml" searched="true" original-local-location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.io/ivy-2.0.0.M02.xml.original" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.io/2.0.0.M02/org.eclipse.gemini.blueprint.io-2.0.0.M02.pom"/>
+			<revision name="2.0.0.M02" status="release" pubdate="20140521120722" resolver="liferay-public" artresolver="default" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, master" position="2">
+				<metadata-artifact status="no" details="" size="2289" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.io/ivy-2.0.0.M02.xml" searched="false" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.io/2.0.0.M02/org.eclipse.gemini.blueprint.io-2.0.0.M02.pom"/>
 				<caller organisation="com.liferay" name="com.liferay.portal.spring.extender" conf="default" rev="2.0.0.M02" rev-constraint-default="2.0.0.M02" rev-constraint-dynamic="2.0.0.M02" callerrev="working@mbpro.local"/>
 				<artifacts>
-					<artifact name="org.eclipse.gemini.blueprint.io" type="jar" ext="jar" status="successful" details="" size="32047" time="195" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.io/jars/org.eclipse.gemini.blueprint.io-2.0.0.M02.jar">
+					<artifact name="org.eclipse.gemini.blueprint.io" type="jar" ext="jar" status="no" details="" size="32047" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.io/jars/org.eclipse.gemini.blueprint.io-2.0.0.M02.jar">
 						<origin-location is-local="false" location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.io/2.0.0.M02/org.eclipse.gemini.blueprint.io-2.0.0.M02.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.liferay" name="org.eclipse.gemini.blueprint.extender">
-			<revision name="2.0.0.M02" status="release" pubdate="20140521120654" resolver="liferay-public" artresolver="default" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, master" position="1">
-				<metadata-artifact status="successful" details="" size="488" time="53" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.extender/ivy-2.0.0.M02.xml" searched="true" original-local-location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.extender/ivy-2.0.0.M02.xml.original" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.extender/2.0.0.M02/org.eclipse.gemini.blueprint.extender-2.0.0.M02.pom"/>
+			<revision name="2.0.0.M02" status="release" pubdate="20140521120654" resolver="liferay-public" artresolver="default" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, master" position="1">
+				<metadata-artifact status="no" details="" size="2301" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.extender/ivy-2.0.0.M02.xml" searched="false" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.extender/2.0.0.M02/org.eclipse.gemini.blueprint.extender-2.0.0.M02.pom"/>
 				<caller organisation="com.liferay" name="com.liferay.portal.spring.extender" conf="default" rev="2.0.0.M02" rev-constraint-default="2.0.0.M02" rev-constraint-dynamic="2.0.0.M02" callerrev="working@mbpro.local"/>
 				<artifacts>
-					<artifact name="org.eclipse.gemini.blueprint.extender" type="jar" ext="jar" status="successful" details="" size="178044" time="940" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.extender/jars/org.eclipse.gemini.blueprint.extender-2.0.0.M02.jar">
+					<artifact name="org.eclipse.gemini.blueprint.extender" type="jar" ext="jar" status="no" details="" size="178044" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.extender/jars/org.eclipse.gemini.blueprint.extender-2.0.0.M02.jar">
 						<origin-location is-local="false" location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.extender/2.0.0.M02/org.eclipse.gemini.blueprint.extender-2.0.0.M02.jar"/>
 					</artifact>
 				</artifacts>
 			</revision>
 		</module>
 		<module organisation="com.liferay" name="org.eclipse.gemini.blueprint.core">
-			<revision name="2.0.0.M02" status="release" pubdate="20140521120628" resolver="liferay-public" artresolver="default" homepage="" downloaded="true" searched="true" default="false" conf="default, compile, runtime, master" position="0">
-				<metadata-artifact status="successful" details="" size="484" time="84" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.core/ivy-2.0.0.M02.xml" searched="true" original-local-location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.core/ivy-2.0.0.M02.xml.original" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.core/2.0.0.M02/org.eclipse.gemini.blueprint.core-2.0.0.M02.pom"/>
+			<revision name="2.0.0.M02" status="release" pubdate="20140521120628" resolver="liferay-public" artresolver="default" homepage="" downloaded="false" searched="false" default="false" conf="default, compile, runtime, master" position="0">
+				<metadata-artifact status="no" details="" size="2293" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.core/ivy-2.0.0.M02.xml" searched="false" origin-is-local="false" origin-location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.core/2.0.0.M02/org.eclipse.gemini.blueprint.core-2.0.0.M02.pom"/>
 				<caller organisation="com.liferay" name="com.liferay.portal.spring.extender" conf="default" rev="2.0.0.M02" rev-constraint-default="2.0.0.M02" rev-constraint-dynamic="2.0.0.M02" callerrev="working@mbpro.local"/>
 				<artifacts>
-					<artifact name="org.eclipse.gemini.blueprint.core" type="jar" ext="jar" status="successful" details="" size="580639" time="2416" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.core/jars/org.eclipse.gemini.blueprint.core-2.0.0.M02.jar">
+					<artifact name="org.eclipse.gemini.blueprint.core" type="jar" ext="jar" status="no" details="" size="580639" time="0" location="/Users/brian/dev/projects/github/liferay-portal/.ivy/cache/com.liferay/org.eclipse.gemini.blueprint.core/jars/org.eclipse.gemini.blueprint.core-2.0.0.M02.jar">
 						<origin-location is-local="false" location="http://cdn.repository.liferay.com/nexus/content/groups/public/com/liferay/org.eclipse.gemini.blueprint.core/2.0.0.M02/org.eclipse.gemini.blueprint.core-2.0.0.M02.jar"/>
 					</artifact>
 				</artifacts>
