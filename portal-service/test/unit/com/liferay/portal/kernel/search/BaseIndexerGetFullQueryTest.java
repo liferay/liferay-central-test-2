@@ -62,8 +62,6 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 		setUpProps();
 		setUpRegistries();
 		setUpSearchEngine();
-
-		_baseIndexer = new BaseIndexerTest();
 	}
 
 	@Test
@@ -228,13 +226,13 @@ public class BaseIndexerGetFullQueryTest extends PowerMockito {
 	}
 
 	private void _getFullQuery() throws SearchException {
-		_baseIndexer.getFullQuery(_searchContext);
+		_indexer.getFullQuery(_searchContext);
 	}
 
-	private BaseIndexer _baseIndexer;
+	private Indexer _indexer = new TestIndexer();
 	private SearchContext _searchContext = new SearchContext();
 
-	private class BaseIndexerTest extends BaseIndexer {
+	private class TestIndexer extends BaseIndexer {
 
 		@Override
 		public String[] getClassNames() {
