@@ -44,7 +44,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ page import="com.liferay.counter.service.CounterLocalServiceUtil" %><%@
-page import="com.liferay.portal.LiferayFileItemException" %><%@
 page import="com.liferay.portal.LocaleException" %><%@
 page import="com.liferay.portal.NoSuchLayoutException" %><%@
 page import="com.liferay.portal.NoSuchRoleException" %><%@
@@ -114,6 +113,7 @@ page import="com.liferay.portal.kernel.staging.LayoutStagingUtil" %><%@
 page import="com.liferay.portal.kernel.template.StringTemplateResource" %><%@
 page import="com.liferay.portal.kernel.template.TemplateHandler" %><%@
 page import="com.liferay.portal.kernel.template.TemplateHandlerRegistryUtil" %><%@
+page import="com.liferay.portal.kernel.upload.LiferayFileItemException" %><%@
 page import="com.liferay.portal.kernel.upload.UploadException" %><%@
 page import="com.liferay.portal.kernel.util.ArrayUtil" %><%@
 page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %><%@
