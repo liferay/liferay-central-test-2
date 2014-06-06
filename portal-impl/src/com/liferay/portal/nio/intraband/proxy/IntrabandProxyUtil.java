@@ -804,7 +804,7 @@ public class IntrabandProxyUtil {
 			_intraband.sendDatagram(
 				_registrationReference,
 				Datagram.createRequestDatagram(
-					_proxyType, serializer.toByteBuffer()));
+					_PROXY_TYPE, serializer.toByteBuffer()));
 		}
 
 		@SuppressWarnings("unused")
@@ -813,7 +813,7 @@ public class IntrabandProxyUtil {
 				Datagram responseDatagram = _intraband.sendSyncDatagram(
 					_registrationReference,
 						Datagram.createRequestDatagram(
-							_proxyType, serializer.toByteBuffer()));
+							_PROXY_TYPE, serializer.toByteBuffer()));
 
 				Deserializer deserializer = new Deserializer(
 					responseDatagram.getDataByteBuffer());
@@ -844,13 +844,15 @@ public class IntrabandProxyUtil {
 		public static final String[] PROXY_METHOD_SIGNATURES =
 			_getProxyMethodSignatures();
 
-		private static final byte _proxyType = SystemDataType.PROXY.getValue();
+		private static final byte _PROXY_TYPE = SystemDataType.PROXY.getValue();
+
+		private final ExceptionHandler _exceptionHandler;
 
 		@SuppressWarnings("unused")
 		private final String _id;
+
 		private final Intraband _intraband;
 		private final RegistrationReference _registrationReference;
-		private final ExceptionHandler _exceptionHandler;
 
 	}
 
