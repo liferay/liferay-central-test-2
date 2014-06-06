@@ -148,24 +148,24 @@ public class ReflectionUtil {
 	}
 
 	public static Set<Method> getVisibleMethods(Class<?> clazz) {
-		Set<Method> visiableMethods = new HashSet<Method>(
+		Set<Method> visibleMethods = new HashSet<Method>(
 			Arrays.asList(clazz.getMethods()));
 
-		visiableMethods.addAll(Arrays.asList(clazz.getDeclaredMethods()));
+		visibleMethods.addAll(Arrays.asList(clazz.getDeclaredMethods()));
 
 		while ((clazz = clazz.getSuperclass()) != null) {
-			for (Method declaredMethod : clazz.getDeclaredMethods()) {
-				int modifiers = declaredMethod.getModifiers();
+			for (Method method : clazz.getDeclaredMethods()) {
+				int modifiers = method.getModifiers();
 
-				if (!Modifier.isPublic(modifiers) &&
-					!Modifier.isPrivate(modifiers)) {
+				if (!Modifier.isPrivate(modifiers) &
+					!Modifier.isPublic(modifiers)) {
 
-					visiableMethods.add(declaredMethod);
+					visibleMethods.add(method);
 				}
 			}
 		}
 
-		return visiableMethods;
+		return visibleMethods;
 	}
 
 	public static boolean isAnnotationDeclaredInClass(

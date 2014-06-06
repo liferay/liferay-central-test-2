@@ -629,7 +629,7 @@ public class IntrabandProxyUtil {
 		try {
 			if (PropsValues.INTRABAND_PROXY_DUMP_CLASSES_ENABLED) {
 				File classFile = new File(
-					_DUMP_FOLDER, classNode.name.concat(".class"));
+					_DUMP_DIR, classNode.name.concat(".class"));
 
 				FileUtil.write(classFile, data);
 
@@ -938,9 +938,9 @@ public class IntrabandProxyUtil {
 	private static final Type _DESERIALIZER_TYPE = Type.getType(
 		Deserializer.class);
 
-	private static final File _DUMP_FOLDER = new File(
+	private static final File _DUMP_DIR = new File(
 		SystemProperties.get(SystemProperties.TMP_DIR),
-		PropsValues.INTRABAND_PROXY_DUMP_CLASSES_FOLDER);
+		PropsValues.INTRABAND_PROXY_DUMP_CLASSES_DIR);
 
 	private static final Type _EXCEPTION_HANDLER_TYPE = Type.getType(
 		ExceptionHandler.class);
