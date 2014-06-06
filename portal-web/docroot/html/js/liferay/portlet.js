@@ -125,8 +125,8 @@
 		_mergeOptions: function(portlet, options) {
 			options = options || {};
 
-			options.plid = options.plid || themeDisplay.getPlid();
 			options.doAsUserId = options.doAsUserId || themeDisplay.getDoAsUserIdEncoded();
+			options.plid = options.plid || themeDisplay.getPlid();
 			options.portlet = portlet;
 			options.portletId = portlet.portletId;
 
