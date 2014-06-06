@@ -710,14 +710,14 @@ public class IntrabandProxyUtil {
 			checkField(fields, "_targetLocator", TargetLocator.class, false);
 		}
 		else {
-			checkField(fields, "_proxyType", byte.class, true);
+			checkField(
+				fields, "_exceptionHandler", ExceptionHandler.class, false);
 			checkField(fields, "_id", String.class, false);
 			checkField(fields, "_intraband", Intraband.class, false);
+			checkField(fields, "_proxyType", byte.class, true);
 			checkField(
 				fields, "_registrationReference", RegistrationReference.class,
 				false);
-			checkField(
-				fields, "_exceptionHandler", ExceptionHandler.class, false);
 		}
 	}
 
