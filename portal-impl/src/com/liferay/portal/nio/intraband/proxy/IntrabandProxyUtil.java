@@ -756,7 +756,7 @@ public class IntrabandProxyUtil {
 			this.proxyMethods = proxyMethods;
 			this.emptyMethods = emptyMethods;
 
-			Collections.sort(proxyMethods, _METHOD_COMPARATOR);
+			Collections.sort(proxyMethods, _methodComparator);
 
 			proxyMethodSignatures = new String[proxyMethods.size()];
 
@@ -964,9 +964,6 @@ public class IntrabandProxyUtil {
 	private static final Type _EXCEPTION_HANDLER_TYPE = Type.getType(
 		ExceptionHandler.class);
 
-	private static final Comparator<Method> _METHOD_COMPARATOR =
-		new MethodComparator();
-
 	private static final Type _OBJECT_TYPE = Type.getType(Object.class);
 
 	private static final String _PROXY_METHOD_SIGNATURES_FIELD_NAME =
@@ -993,11 +990,13 @@ public class IntrabandProxyUtil {
 	private static final Type _TARGET_LOCATOR_TYPE = Type.getType(
 		TargetLocator.class);
 
-	private static final Set<String> _annotationDescriptors =
-		new HashSet<String>(
-			Arrays.asList(
-				Type.getDescriptor(Id.class), Type.getDescriptor(Proxy.class)));
-	private static final Method _defineClassMethod;
+	private static Log _log = LogFactoryUtil.getLog(IntrabandProxyUtil.class);
+
+	private static Set<String> _annotationDescriptors = new HashSet<String>(
+		Arrays.asList(
+			Type.getDescriptor(Id.class), Type.getDescriptor(Proxy.class)));
+
+	private static Method _defineClassMethod;
 
 	static {
 		try {
@@ -1010,7 +1009,8 @@ public class IntrabandProxyUtil {
 		}
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(IntrabandProxyUtil.class);
+	private static Comparator<Method> _methodComparator =
+		new MethodComparator();
 
 	private static class SkeletonDispatchTableSwitchGenerator
 		implements TableSwitchGenerator {
@@ -1102,11 +1102,11 @@ public class IntrabandProxyUtil {
 				_owner, "_unknownMethodIndex", Type.VOID_TYPE, Type.INT_TYPE);
 		}
 
-		private final int _indexIndex;
-		private final MethodNodeGenerator _methodNodeGenerator;
-		private final String _owner;
-		private final List<Method> _proxyMethods;
-		private final int _typedTargetIndex;
+		private int _indexIndex;
+		private MethodNodeGenerator _methodNodeGenerator;
+		private String _owner;
+		private List<Method> _proxyMethods;
+		private int _typedTargetIndex;
 
 	}
 
