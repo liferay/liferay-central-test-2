@@ -14,11 +14,10 @@
 
 package com.liferay.osgi.util.service;
 
-import com.liferay.portal.kernel.util.ProxyUtil;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -33,8 +32,9 @@ public class ServiceTrackerUtil {
 
 		ClassLoader classLoader = clazz.getClassLoader();
 
-		Object serviceProxy = ProxyUtil.newProxyInstance(
-			classLoader, new Class[]{clazz},
+		Object serviceProxy = Proxy.newProxyInstance(
+			classLoader,
+			new Class[] {clazz},
 				new InvocationHandler() {
 
 					@Override
