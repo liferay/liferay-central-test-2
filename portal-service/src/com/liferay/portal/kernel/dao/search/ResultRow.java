@@ -14,8 +14,6 @@
 
 package com.liferay.portal.kernel.dao.search;
 
-import com.liferay.portal.kernel.util.StringPool;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -136,7 +134,7 @@ public class ResultRow {
 	public void addJSP(int index, String path) {
 		addJSP(
 			index, SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN,
-			StringPool.BLANK, SearchEntry.DEFAULT_COLSPAN, path);
+			SearchEntry.DEFAULT_COLSPAN, path);
 	}
 
 	public void addJSP(
@@ -150,14 +148,12 @@ public class ResultRow {
 	}
 
 	public void addJSP(
-		int index, String align, String valign, String cssClass, int colspan,
-		String path) {
+		int index, String align, String valign, int colspan, String path) {
 
 		JSPSearchEntry jspSearchEntry = new JSPSearchEntry();
 
 		jspSearchEntry.setAlign(align);
 		jspSearchEntry.setColspan(colspan);
-		jspSearchEntry.setCssClass(cssClass);
 		jspSearchEntry.setPath(path);
 		jspSearchEntry.setValign(valign);
 
@@ -186,13 +182,6 @@ public class ResultRow {
 		addJSP(_searchEntries.size(), path);
 	}
 
-	public void addJSP(String path, String cssClass) {
-		addJSP(
-			_searchEntries.size(), SearchEntry.DEFAULT_ALIGN,
-			SearchEntry.DEFAULT_VALIGN, cssClass, SearchEntry.DEFAULT_COLSPAN,
-			path);
-	}
-
 	public void addJSP(
 		String path, ServletContext servletContext, HttpServletRequest request,
 		HttpServletResponse response) {
@@ -201,9 +190,7 @@ public class ResultRow {
 	}
 
 	public void addJSP(String align, String valign, int colspan, String path) {
-		addJSP(
-			_searchEntries.size(), align, valign, StringPool.BLANK, colspan,
-			path);
+		addJSP(_searchEntries.size(), align, valign, colspan, path);
 	}
 
 	public void addJSP(
@@ -218,8 +205,8 @@ public class ResultRow {
 
 	public void addJSP(String align, String valign, String path) {
 		addJSP(
-			_searchEntries.size(), align, valign, StringPool.BLANK,
-			SearchEntry.DEFAULT_COLSPAN, path);
+			_searchEntries.size(), align, valign, SearchEntry.DEFAULT_COLSPAN,
+			path);
 	}
 
 	public void addJSP(
