@@ -3,7 +3,7 @@
 
 <project>
 	<property name="plugin.full.version" value="1.0.0" />
-	<property name="plugin.name" value="com.liferay.osgi.utils" />
+	<property name="plugin.name" value="com.liferay.osgi.util" />
 
 	<import file="../../../tools/sdk/build-common-osgi-plugin.xml" />
 
