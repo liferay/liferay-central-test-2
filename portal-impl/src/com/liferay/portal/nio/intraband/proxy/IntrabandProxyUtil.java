@@ -908,7 +908,7 @@ public class IntrabandProxyUtil {
 		private void _unknownMethodIndex(int methodIndex) {
 			throw new IllegalArgumentException(
 				"Unknow method index " + methodIndex +
-					", proxy methods mappings are : " + _proxyMethodsMapping);
+					" for proxy methods mappings " + _proxyMethodsMapping);
 		}
 
 		private static String[] _getProxyMethodSignatures() {
@@ -997,6 +997,7 @@ public class IntrabandProxyUtil {
 		new HashSet<String>(
 			Arrays.asList(
 				Type.getDescriptor(Id.class), Type.getDescriptor(Proxy.class)));
+
 	private static final Method _defineClassMethod;
 
 	static {
@@ -1093,15 +1094,17 @@ public class IntrabandProxyUtil {
 		@Override
 		public void generateDefault() {
 			_methodNodeGenerator.loadThis();
+
 			_methodNodeGenerator.loadLocal(_indexIndex);
+
 			_methodNodeGenerator.invokeSpecial(
 				_owner, "_unknownMethodIndex", Type.VOID_TYPE, Type.INT_TYPE);
 		}
 
 		private final int _indexIndex;
 		private final MethodNodeGenerator _methodNodeGenerator;
-		private final List<Method> _proxyMethods;
 		private final String _owner;
+		private final List<Method> _proxyMethods;
 		private final int _typedTargetIndex;
 
 	}
