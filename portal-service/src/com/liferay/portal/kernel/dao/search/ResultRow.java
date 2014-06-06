@@ -157,8 +157,8 @@ public class ResultRow {
 
 		jspSearchEntry.setAlign(align);
 		jspSearchEntry.setColspan(colspan);
-		jspSearchEntry.setPath(path);
 		jspSearchEntry.setCssClass(cssClass);
+		jspSearchEntry.setPath(path);
 		jspSearchEntry.setValign(valign);
 
 		_searchEntries.add(index, jspSearchEntry);
