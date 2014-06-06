@@ -770,14 +770,17 @@ public class IntrabandProxyUtil {
 			}
 		}
 
-		protected final List<Method> emptyMethods;
-		protected final List<Method> idMethods;
-		protected final List<Method> proxyMethods;
-		protected final String[] proxyMethodSignatures;
+		protected List<Method> emptyMethods;
+		protected List<Method> idMethods;
+		protected List<Method> proxyMethods;
+		protected String[] proxyMethodSignatures;
 
 	}
 
 	protected static class TemplateStub {
+
+		public static final String[] PROXY_METHOD_SIGNATURES =
+			_getProxyMethodSignatures();
 
 		public TemplateStub(
 			String id, RegistrationReference registrationReference,
@@ -797,6 +800,10 @@ public class IntrabandProxyUtil {
 			_exceptionHandler = exceptionHandler;
 
 			_intraband = registrationReference.getIntraband();
+		}
+
+		private static String[] _getProxyMethodSignatures() {
+			return new String[0];
 		}
 
 		@SuppressWarnings("unused")
@@ -837,22 +844,15 @@ public class IntrabandProxyUtil {
 			}
 		}
 
-		private static String[] _getProxyMethodSignatures() {
-			return new String[0];
-		}
-
-		public static final String[] PROXY_METHOD_SIGNATURES =
-			_getProxyMethodSignatures();
-
 		private static final byte _PROXY_TYPE = SystemDataType.PROXY.getValue();
 
 		private final ExceptionHandler _exceptionHandler;
 
 		@SuppressWarnings("unused")
-		private final String _id;
+		private String _id;
 
-		private final Intraband _intraband;
-		private final RegistrationReference _registrationReference;
+		private Intraband _intraband;
+		private RegistrationReference _registrationReference;
 
 	}
 
@@ -944,11 +944,11 @@ public class IntrabandProxyUtil {
 
 		private static Log _log = LogFactoryUtil.getLog(TemplateSkeleton.class);
 
-		private static final String _proxyMethodsMapping =
+		private static String _proxyMethodsMapping =
 			_getProxyMethodsMapping(PROXY_METHOD_SIGNATURES);
 
 		@SuppressWarnings("unused")
-		private final TargetLocator _targetLocator;
+		private TargetLocator _targetLocator;
 
 	}
 
