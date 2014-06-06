@@ -1079,11 +1079,11 @@ public class IntrabandProxyUtil {
 				_owner, "_unknownMethodIndex", Type.VOID_TYPE, Type.INT_TYPE);
 		}
 
+		private final int _indexIndex;
 		private final MethodNodeGenerator _methodNodeGenerator;
 		private final List<Method> _proxyMethods;
 		private final String _owner;
 		private final int _typedTargetIndex;
-		private final int _indexIndex;
 
 	}
 
