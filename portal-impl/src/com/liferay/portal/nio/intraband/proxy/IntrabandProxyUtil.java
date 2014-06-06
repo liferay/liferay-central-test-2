@@ -158,7 +158,9 @@ public class IntrabandProxyUtil {
 		// Serializer serializer = new Serializer();
 
 		methodNodeGenerator.newInstance(_SERIALIZER_TYPE);
+
 		methodNodeGenerator.dup();
+
 		methodNodeGenerator.invokeSpecial(
 			_SERIALIZER_TYPE.getInternalName(), "<init>", Type.VOID_TYPE);
 
@@ -169,6 +171,7 @@ public class IntrabandProxyUtil {
 		// serializer.writeString(skeletonId);
 
 		methodNodeGenerator.loadLocal(serializerIndex);
+
 		methodNodeGenerator.push(skeletonId);
 
 		serializerWrite(methodNodeGenerator, _STRING_TYPE);
@@ -176,7 +179,9 @@ public class IntrabandProxyUtil {
 		// serializer.writeString(_id);
 
 		methodNodeGenerator.loadLocal(serializerIndex);
+
 		methodNodeGenerator.loadThis();
+
 		methodNodeGenerator.getField(stubType, "_id", _STRING_TYPE);
 
 		serializerWrite(methodNodeGenerator, _STRING_TYPE);
@@ -184,6 +189,7 @@ public class IntrabandProxyUtil {
 		// serializer.writeInt(index);
 
 		methodNodeGenerator.loadLocal(serializerIndex);
+
 		methodNodeGenerator.push(index);
 
 		serializerWrite(methodNodeGenerator, Type.INT_TYPE);
@@ -194,6 +200,7 @@ public class IntrabandProxyUtil {
 
 		for (int i = 0; i < parameterTypes.length; i++) {
 			methodNodeGenerator.loadLocal(serializerIndex);
+
 			methodNodeGenerator.loadArg(i);
 
 			serializerWrite(
@@ -203,6 +210,7 @@ public class IntrabandProxyUtil {
 		// this._send(Serializer) / return this._syncSend(Serializer)
 
 		methodNodeGenerator.loadThis();
+
 		methodNodeGenerator.loadLocal(serializerIndex);
 
 		Class<?> returnClass = method.getReturnType();
@@ -235,14 +243,19 @@ public class IntrabandProxyUtil {
 					_OBJECT_TYPE);
 
 				methodNodeGenerator.storeLocal(returnValueIndex);
+
 				methodNodeGenerator.loadLocal(returnValueIndex);
 
 				Label nullCheckLabel = new Label();
 
 				methodNodeGenerator.ifNull(nullCheckLabel);
+
 				methodNodeGenerator.loadLocal(returnValueIndex);
+
 				methodNodeGenerator.unbox(returnType);
+
 				methodNodeGenerator.returnValue();
+
 				methodNodeGenerator.visitLabel(nullCheckLabel);
 
 				ASMUtil.addDefaultReturnInsns(methodNodeGenerator, returnType);
