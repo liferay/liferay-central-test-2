@@ -309,7 +309,7 @@ public class IntrabandProxyUtil {
 					(method.getReturnType() != String.class)) {
 
 					throw new IllegalArgumentException(
-						"Id method violation " + method);
+						"Invalid id for method " + method);
 				}
 
 				idMethods.add(method);
@@ -322,8 +322,7 @@ public class IntrabandProxyUtil {
 			if (proxy != null) {
 				if (Modifier.isStatic(method.getModifiers())) {
 					throw new IllegalArgumentException(
-						"Proxy method violation " + method +
-							", can not be static");
+						"Static proxy method violation for " + method);
 				}
 
 				proxyMethods.add(method);
@@ -364,6 +363,7 @@ public class IntrabandProxyUtil {
 		// T target = (T)_targetLocator.getTarget()
 
 		methodNodeGenerator.loadThis();
+
 		methodNodeGenerator.getField(
 			Type.getObjectType(classNode.name), "_targetLocator",
 			_TARGET_LOCATOR_TYPE);
@@ -414,6 +414,7 @@ public class IntrabandProxyUtil {
 			true);
 
 		methodNodeGenerator.returnValue();
+
 		methodNodeGenerator.endMethod();
 
 		rewriteGetProxyMethodSignaturesMethodNode(
@@ -595,12 +596,15 @@ public class IntrabandProxyUtil {
 			methodNode);
 
 		methodNodeGenerator.push(proxyMethodSignatures.length);
+
 		methodNodeGenerator.newArray(_STRING_TYPE);
 
 		for (int i = 0; i < proxyMethodSignatures.length; i++) {
 			methodNodeGenerator.dup();
+
 			methodNodeGenerator.push(i);
 			methodNodeGenerator.push(proxyMethodSignatures[i]);
+
 			methodNodeGenerator.arrayStore(_STRING_TYPE);
 		}
 
@@ -666,19 +670,19 @@ public class IntrabandProxyUtil {
 		ClassLoader classLoader, Class<?> clazz, boolean skeletonOrStub) {
 
 		if (clazz.isAnnotation()) {
-			throw new IllegalArgumentException(clazz + " is annotation");
+			throw new IllegalArgumentException(clazz + " is an annotation");
 		}
 
 		if (clazz.isArray()) {
-			throw new IllegalArgumentException(clazz + " is array");
+			throw new IllegalArgumentException(clazz + " is an array");
 		}
 
 		if (clazz.isEnum()) {
-			throw new IllegalArgumentException(clazz + " is enum");
+			throw new IllegalArgumentException(clazz + " is an enum");
 		}
 
 		if (clazz.isPrimitive()) {
-			throw new IllegalArgumentException(clazz + " is primitive");
+			throw new IllegalArgumentException(clazz + " is a primitive");
 		}
 
 		Class<?> reloadedClass = null;
