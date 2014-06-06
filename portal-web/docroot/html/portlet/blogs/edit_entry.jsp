@@ -33,8 +33,6 @@ boolean smallImage = BeanParamUtil.getBoolean(entry, request, "smallImage");
 
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean showHeader = ParamUtil.getBoolean(request, "showHeader", true);
-
-String portletId = portletDisplay.getRootPortletId();
 %>
 
 <c:if test="<%= showHeader %>">
@@ -459,7 +457,7 @@ String portletId = portletDisplay.getRootPortletId();
 	);
 
 	var clearSaveDraftHandle = function(event) {
-		if (event.portletId === '<%= portletId %>') {
+		if (event.portletId === '<%= portletDisplay.getRootPortletId() %>') {
 			<portlet:namespace />clearSaveDraftIntervalId();
 
 			Liferay.detach('destroyPortlet', clearSaveDraftHandle);
