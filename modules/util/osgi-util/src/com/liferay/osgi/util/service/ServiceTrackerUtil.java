@@ -33,32 +33,32 @@ public class ServiceTrackerUtil {
 		ClassLoader classLoader = clazz.getClassLoader();
 
 		Object serviceProxy = Proxy.newProxyInstance(
-			classLoader,
-			new Class[] {clazz},
-				new InvocationHandler() {
+			classLoader, new Class[] {clazz},
+			new InvocationHandler() {
 
-					@Override
-					public Object invoke(
-							Object object, Method method, Object[] parameters)
-						throws Throwable {
+				@Override
+				public Object invoke(
+						Object object, Method method, Object[] arguments)
+					throws Throwable {
 
-						ServiceReference<T> serviceReference =
-							bundleContext.getServiceReference(clazz);
+					ServiceReference<T> serviceReference =
+						bundleContext.getServiceReference(clazz);
 
-						T service = bundleContext.getService(serviceReference);
+					T service = bundleContext.getService(serviceReference);
 
-						if (service == null) {
-							throw new ServiceUnavailableException(clazz);
-						}
-
-						try {
-							return method.invoke(service, parameters);
-						}
-						catch (InvocationTargetException ite) {
-							throw ite.getTargetException();
-						}
+					if (service == null) {
+						throw new ServiceUnavailableException(clazz);
 					}
-				});
+
+					try {
+						return method.invoke(service, arguments);
+					}
+					catch (InvocationTargetException ite) {
+						throw ite.getTargetException();
+					}
+				}
+
+			});
 
 		return (T)serviceProxy;
 	}
