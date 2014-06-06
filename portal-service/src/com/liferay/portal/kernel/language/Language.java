@@ -35,9 +35,6 @@ import javax.servlet.jsp.PageContext;
 @ProviderType
 public interface Language {
 
-	public String process(
-		ResourceBundle resourceBundle, Locale locale, String content);
-
 	public String format(Locale locale, String pattern, List<Object> arguments);
 
 	public String format(Locale locale, String pattern, Object argument);
@@ -163,6 +160,9 @@ public interface Language {
 
 	public boolean isInheritLocales(long groupId)
 		throws PortalException, SystemException;
+
+	public String process(
+		ResourceBundle resourceBundle, Locale locale, String content);
 
 	public void resetAvailableGroupLocales(long groupId);
 

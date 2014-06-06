@@ -38,12 +38,6 @@ import javax.servlet.jsp.PageContext;
 @ProviderType
 public class LanguageUtil {
 
-	public static String process(
-		ResourceBundle resourceBundle, Locale locale, String content) {
-
-		return getLanguage().process(resourceBundle, locale, content);
-	}
-
 	public static String format(
 		Locale locale, String pattern, List<Object> arguments) {
 
@@ -316,6 +310,12 @@ public class LanguageUtil {
 		String value = getLanguage().get(locale, key, StringPool.BLANK);
 
 		return Validator.isNotNull(value);
+	}
+
+	public static String process(
+		ResourceBundle resourceBundle, Locale locale, String content) {
+
+		return getLanguage().process(resourceBundle, locale, content);
 	}
 
 	public static void resetAvailableGroupLocales(long groupId) {

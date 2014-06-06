@@ -84,37 +84,6 @@ import javax.servlet.jsp.PageContext;
 public class LanguageImpl implements Language, Serializable {
 
 	@Override
-	public String process(
-		ResourceBundle resourceBundle, Locale locale, String content) {
-
-		StringBundler sb = new StringBundler();
-
-		Matcher matcher = _pattern.matcher(content);
-
-		int x = 0;
-
-		while (matcher.find()) {
-			int y = matcher.start(0);
-
-			String key = matcher.group(1);
-
-			sb.append(content.substring(x, y));
-			sb.append(StringPool.APOSTROPHE);
-
-			String value = get(resourceBundle, key);
-
-			sb.append(HtmlUtil.escapeJS(value));
-			sb.append(StringPool.APOSTROPHE);
-
-			x = matcher.end(0);
-		}
-
-		sb.append(content.substring(x));
-
-		return sb.toString();
-	}
-
-	@Override
 	public String format(
 		Locale locale, String pattern, List<Object> arguments) {
 
@@ -762,6 +731,37 @@ public class LanguageImpl implements Language, Serializable {
 
 		return GetterUtil.getBoolean(
 			groupTypeSettings.getProperty("inheritLocales"), true);
+	}
+
+	@Override
+	public String process(
+		ResourceBundle resourceBundle, Locale locale, String content) {
+
+		StringBundler sb = new StringBundler();
+
+		Matcher matcher = _pattern.matcher(content);
+
+		int x = 0;
+
+		while (matcher.find()) {
+			int y = matcher.start(0);
+
+			String key = matcher.group(1);
+
+			sb.append(content.substring(x, y));
+			sb.append(StringPool.APOSTROPHE);
+
+			String value = get(resourceBundle, key);
+
+			sb.append(HtmlUtil.escapeJS(value));
+			sb.append(StringPool.APOSTROPHE);
+
+			x = matcher.end(0);
+		}
+
+		sb.append(content.substring(x));
+
+		return sb.toString();
 	}
 
 	@Override

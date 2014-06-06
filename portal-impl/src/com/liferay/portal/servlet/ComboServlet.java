@@ -410,8 +410,7 @@ public class ComboServlet extends HttpServlet {
 			}
 		}
 
-		return LanguageUtil.process(
-			resourceBundle, locale, stringFileContent);
+		return LanguageUtil.process(resourceBundle, locale, stringFileContent);
 	}
 
 	protected boolean validateModuleExtension(String moduleName)
