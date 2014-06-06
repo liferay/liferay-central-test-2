@@ -859,6 +859,9 @@ public class IntrabandProxyUtil {
 	protected static abstract class TemplateSkeleton
 		implements IntrabandProxySkeleton {
 
+		public static final String[] PROXY_METHOD_SIGNATURES =
+			_getProxyMethodSignatures();
+
 		public TemplateSkeleton(TargetLocator targetLocator) {
 			if (targetLocator == null) {
 				throw new NullPointerException("Target locator is null");
@@ -939,13 +942,10 @@ public class IntrabandProxyUtil {
 			return sb.toString();
 		}
 
-		public static final String[] PROXY_METHOD_SIGNATURES =
-			_getProxyMethodSignatures();
+		private static Log _log = LogFactoryUtil.getLog(TemplateSkeleton.class);
 
 		private static final String _proxyMethodsMapping =
 			_getProxyMethodsMapping(PROXY_METHOD_SIGNATURES);
-
-		private static Log _log = LogFactoryUtil.getLog(TemplateSkeleton.class);
 
 		@SuppressWarnings("unused")
 		private final TargetLocator _targetLocator;
@@ -997,7 +997,6 @@ public class IntrabandProxyUtil {
 		new HashSet<String>(
 			Arrays.asList(
 				Type.getDescriptor(Id.class), Type.getDescriptor(Proxy.class)));
-
 	private static final Method _defineClassMethod;
 
 	static {
@@ -1035,10 +1034,12 @@ public class IntrabandProxyUtil {
 
 			if (returnClass != void.class) {
 				_methodNodeGenerator.loadThis();
+
 				_methodNodeGenerator.loadArg(0);
 				_methodNodeGenerator.loadArg(1);
 
 				_methodNodeGenerator.newInstance(_RPC_RESPONSE_TYPE);
+
 				_methodNodeGenerator.dup();
 			}
 
@@ -1052,8 +1053,8 @@ public class IntrabandProxyUtil {
 				deserializerRead(_methodNodeGenerator, parameterType);
 
 				if (!parameterClass.isPrimitive() &&
-					(parameterClass != String.class) &&
-					(parameterClass != Object.class)) {
+					(parameterClass != Object.class) &&
+					(parameterClass != String.class)) {
 
 					_methodNodeGenerator.checkCast(parameterType);
 				}
