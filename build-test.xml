@@ -3078,9 +3078,13 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<if>
 			<equals arg1="${tcat.enabled}" arg2="true" />
 			<then>
-				<start-app-server app.server.bin.dir="${app.server.tcat.admin.bin.dir}" />
+				<start-app-server
+					app.server.bin.dir="${app.server.tcat.admin.bin.dir}"
+				/>
 
-				<start-app-server app.server.bin.dir="${app.server.tcat.agent.bin.dir}" />
+				<start-app-server
+					app.server.bin.dir="${app.server.tcat.agent.bin.dir}"
+				/>
 			</then>
 			<else>
 				<start-app-server />
@@ -3163,9 +3167,13 @@ custom.sql.function.isnotnull=CONVERT(VARCHAR,?) IS NOT NULL</echo>
 		<if>
 			<equals arg1="${tcat.enabled}" arg2="true" />
 			<then>
-				<stop-app-server app.server.bin.dir="${app.server.tcat.admin.bin.dir}" />
+				<stop-app-server
+					app.server.bin.dir="${app.server.tcat.admin.bin.dir}"
+				/>
 
-				<stop-app-server app.server.bin.dir="${app.server.tcat.agent.bin.dir}" />
+				<stop-app-server
+					app.server.bin.dir="${app.server.tcat.agent.bin.dir}"
+				/>
 			</then>
 			<else>
 				<stop-app-server />
