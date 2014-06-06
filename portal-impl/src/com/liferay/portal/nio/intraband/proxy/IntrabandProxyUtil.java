@@ -507,8 +507,11 @@ public class IntrabandProxyUtil {
 				idMethod);
 
 			methodNodeGenerator.loadThis();
+
 			methodNodeGenerator.getField(stubType, "_id", _STRING_TYPE);
+
 			methodNodeGenerator.returnValue();
+
 			methodNodeGenerator.endMethod();
 
 			methodNodes.add(methodNodeGenerator.getMethodNode());
@@ -609,6 +612,7 @@ public class IntrabandProxyUtil {
 		}
 
 		methodNodeGenerator.returnValue();
+
 		methodNodeGenerator.endMethod();
 	}
 
@@ -725,13 +729,13 @@ public class IntrabandProxyUtil {
 
 		@Override
 		public int compare(Method method1, Method method2) {
-			String methodId1 = getMethodId(method1);
-			String methodId2 = getMethodId(method2);
+			String methodId1 = _getMethodId(method1);
+			String methodId2 = _getMethodId(method2);
 
 			return methodId1.compareTo(methodId2);
 		}
 
-		private static String getMethodId(Method method) {
+		private static String _getMethodId(Method method) {
 			Proxy proxy = method.getAnnotation(Proxy.class);
 
 			String methodName = proxy.name();
