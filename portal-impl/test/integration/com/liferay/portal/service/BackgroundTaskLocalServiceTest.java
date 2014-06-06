@@ -89,6 +89,7 @@ public class BackgroundTaskLocalServiceTest {
 			_group.getGroupId());
 
 		UserLocalServiceUtil.deleteUser(_user);
+
 		GroupLocalServiceUtil.deleteGroup(_group);
 	}
 
