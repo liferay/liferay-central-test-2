@@ -770,10 +770,10 @@ public class IntrabandProxyUtil {
 			}
 		}
 
-		protected final String[] proxyMethodSignatures;
+		protected final List<Method> emptyMethods;
 		protected final List<Method> idMethods;
 		protected final List<Method> proxyMethods;
-		protected final List<Method> emptyMethods;
+		protected final String[] proxyMethodSignatures;
 
 	}
 
