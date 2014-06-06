@@ -4181,18 +4181,19 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout != null) {
-			LayoutSet layoutSet = null;
-
 			long refererPlid = ParamUtil.getLong(
 				themeDisplay.getRequest(), "refererPlid");
 
+			Layout virtualHostLayout = layout;
+
 			if (refererPlid > 0) {
-				layout = LayoutLocalServiceUtil.getLayout(refererPlid);
+				virtualHostLayout = LayoutLocalServiceUtil.getLayout(
+					refererPlid);
 			}
 
-			layoutSet = layout.getLayoutSet();
+			LayoutSet virtualHostLayoutSet = virtualHostLayout.getLayoutSet();
 
-			String virtualHostname = layoutSet.getVirtualHostname();
+			String virtualHostname = virtualHostLayoutSet.getVirtualHostname();
 
 			String domain = HttpUtil.getDomain(themeDisplay.getURLPortal());
 
