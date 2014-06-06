@@ -53,6 +53,7 @@ public class MainServletExecutionTestListener
 	@Override
 	public void runBeforeClass(TestContext testContext) {
 		ServiceTestUtil.initServices();
+
 		ServiceTestUtil.initPermissions();
 
 		if (mainServlet != null) {
