@@ -1019,7 +1019,7 @@ public class IntrabandProxyUtil {
 	private static class SkeletonDispatchTableSwitchGenerator
 		implements TableSwitchGenerator {
 
-		SkeletonDispatchTableSwitchGenerator(
+		public SkeletonDispatchTableSwitchGenerator(
 			MethodNodeGenerator methodNodeGenerator, List<Method> proxyMethods,
 			String owner, int typedTargetIndex, int indexIndex) {
 
