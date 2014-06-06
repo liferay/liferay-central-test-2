@@ -120,11 +120,11 @@
 					getLayoutId: function() {
 						return "<%= layout.getLayoutId() %>";
 					},
-					getLayoutURL: function() {
-						return "<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>";
-					},
 					getLayoutRelativeURL: function() {
 						return "<%= PortalUtil.getLayoutRelativeURL(layout, themeDisplay) %>";
+					},
+					getLayoutURL: function() {
+						return "<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>";
 					},
 					getParentLayoutId: function() {
 						return "<%= layout.getParentLayoutId() %>";
