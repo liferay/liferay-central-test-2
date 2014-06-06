@@ -35,7 +35,7 @@ import javax.servlet.jsp.PageContext;
 @ProviderType
 public interface Language {
 
-	public String expandKeys(
+	public String process(
 		ResourceBundle resourceBundle, Locale locale, String content);
 
 	public String format(Locale locale, String pattern, List<Object> arguments);

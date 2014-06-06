@@ -38,10 +38,10 @@ import javax.servlet.jsp.PageContext;
 @ProviderType
 public class LanguageUtil {
 
-	public static String expandKeys(
+	public static String process(
 		ResourceBundle resourceBundle, Locale locale, String content) {
 
-		return getLanguage().expandKeys(resourceBundle, locale, content);
+		return getLanguage().process(resourceBundle, locale, content);
 	}
 
 	public static String format(

@@ -84,7 +84,7 @@ import javax.servlet.jsp.PageContext;
 public class LanguageImpl implements Language, Serializable {
 
 	@Override
-	public String expandKeys(
+	public String process(
 		ResourceBundle resourceBundle, Locale locale, String content) {
 
 		StringBundler sb = new StringBundler();

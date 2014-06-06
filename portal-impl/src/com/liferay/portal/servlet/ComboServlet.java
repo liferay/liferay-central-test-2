@@ -411,7 +411,7 @@ public class ComboServlet extends HttpServlet {
 			}
 		}
 
-		return LanguageUtil.expandKeys(
+		return LanguageUtil.process(
 			resourceBundle, locale, stringFileContent);
 	}
 
