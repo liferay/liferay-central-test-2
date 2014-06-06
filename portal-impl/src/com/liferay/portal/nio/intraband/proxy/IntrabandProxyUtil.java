@@ -891,29 +891,6 @@ public class IntrabandProxyUtil {
 				Deserializer deserializer)
 			throws Exception;
 
-		private void _sendResponse(
-			RegistrationReference registrationReference, Datagram datagram,
-			RPCResponse rpcResponse) {
-
-			Serializer serializer = new Serializer();
-
-			serializer.writeObject(rpcResponse);
-
-			Intraband intraband = registrationReference.getIntraband();
-
-			intraband.sendDatagram(
-				registrationReference,
-				Datagram.createResponseDatagram(
-					datagram, serializer.toByteBuffer()));
-		}
-
-		@SuppressWarnings("unused")
-		private void _unknownMethodIndex(int methodIndex) {
-			throw new IllegalArgumentException(
-				"Unknow method index " + methodIndex +
-					" for proxy methods mappings " + _proxyMethodsMapping);
-		}
-
 		private static String[] _getProxyMethodSignatures() {
 			return new String[0];
 		}
@@ -940,6 +917,29 @@ public class IntrabandProxyUtil {
 			sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 			return sb.toString();
+		}
+
+		private void _sendResponse(
+			RegistrationReference registrationReference, Datagram datagram,
+			RPCResponse rpcResponse) {
+
+			Serializer serializer = new Serializer();
+
+			serializer.writeObject(rpcResponse);
+
+			Intraband intraband = registrationReference.getIntraband();
+
+			intraband.sendDatagram(
+				registrationReference,
+				Datagram.createResponseDatagram(
+					datagram, serializer.toByteBuffer()));
+		}
+
+		@SuppressWarnings("unused")
+		private void _unknownMethodIndex(int methodIndex) {
+			throw new IllegalArgumentException(
+				"Unknow method index " + methodIndex +
+					" for proxy methods mappings " + _proxyMethodsMapping);
 		}
 
 		private static Log _log = LogFactoryUtil.getLog(TemplateSkeleton.class);
