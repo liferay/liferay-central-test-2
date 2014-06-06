@@ -107,7 +107,7 @@ public class ResetDatabaseExecutionTestListener
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					"/temp-init-dl-file-system-" + System.currentTimeMillis();
 
-			_initDLFileSystemStoreDirName = dlFileSystemStoreDirName;
+			_initializedDLFileSystemStoreDirName = dlFileSystemStoreDirName;
 
 			Runtime runtime = Runtime.getRuntime();
 
@@ -138,7 +138,7 @@ public class ResetDatabaseExecutionTestListener
 				SystemProperties.get(SystemProperties.TMP_DIR) +
 					"/temp-init-dl-jcr-" + System.currentTimeMillis();
 
-			_initDLJCRStoreDirName = dlJCRStoreDirName;
+			_initializedDLJCRStoreDirName = dlJCRStoreDirName;
 
 			Runtime runtime = Runtime.getRuntime();
 
@@ -195,7 +195,7 @@ public class ResetDatabaseExecutionTestListener
 			}
 			finally {
 				if (initialize) {
-					_initLuceneFileNames.put(companyId, fileName);
+					_initializedLuceneFileNames.put(companyId, fileName);
 				}
 				else {
 					_luceneFileNames.put(companyId, fileName);
@@ -207,7 +207,7 @@ public class ResetDatabaseExecutionTestListener
 	protected void restoreDLStores(boolean initialize) {
 		FileUtil.deltree(PropsValues.DL_STORE_FILE_SYSTEM_ROOT_DIR);
 
-		String dlFileSystemStoreDirName = _initDLFileSystemStoreDirName;
+		String dlFileSystemStoreDirName = _initializedDLFileSystemStoreDirName;
 
 		if (!initialize) {
 			dlFileSystemStoreDirName = _dlFileSystemStoreDirName;
@@ -222,7 +222,7 @@ public class ResetDatabaseExecutionTestListener
 		FileUtil.deltree(
 			PropsUtil.get(PropsKeys.JCR_JACKRABBIT_REPOSITORY_ROOT));
 
-		String dlJCRStoreDirName = _initDLJCRStoreDirName;
+		String dlJCRStoreDirName = _initializedDLJCRStoreDirName;
 
 		if (!initialize) {
 			dlJCRStoreDirName = _dlJCRStoreDirName;
@@ -239,7 +239,7 @@ public class ResetDatabaseExecutionTestListener
 		Map<Long, String> luceneFileNames = _luceneFileNames;
 
 		if (initialize) {
-			luceneFileNames = _initLuceneFileNames;
+			luceneFileNames = _initializedLuceneFileNames;
 		}
 
 		for (Map.Entry<Long, String> entry : luceneFileNames.entrySet()) {
@@ -264,9 +264,9 @@ public class ResetDatabaseExecutionTestListener
 		}
 	}
 
-	private static String _initDLFileSystemStoreDirName;
-	private static String _initDLJCRStoreDirName;
-	private static Map<Long, String> _initLuceneFileNames =
+	private static String _initializedDLFileSystemStoreDirName;
+	private static String _initializedDLJCRStoreDirName;
+	private static Map<Long, String> _initializedLuceneFileNames =
 		new HashMap<Long, String>();
 
 	private String _dlFileSystemStoreDirName;
@@ -274,7 +274,7 @@ public class ResetDatabaseExecutionTestListener
 	private Level _level;
 	private Map<Long, String> _luceneFileNames = new HashMap<Long, String>();
 
-	private static class DeleteFileShutdownHook extends Thread {
+	private class DeleteFileShutdownHook extends Thread {
 
 		public DeleteFileShutdownHook(String fileName) {
 			_fileName = fileName;
@@ -284,11 +284,11 @@ public class ResetDatabaseExecutionTestListener
 		public void run() {
 			File file = new File(_fileName);
 
-			Queue<File> fileQueue = new LinkedList<File>();
+			Queue<File> queue = new LinkedList<File>();
 
-			fileQueue.offer(file);
+			queue.offer(file);
 
-			while ((file = fileQueue.poll()) != null) {
+			while ((file = queue.poll()) != null) {
 				if (file.isFile()) {
 					file.delete();
 				}
@@ -299,14 +299,14 @@ public class ResetDatabaseExecutionTestListener
 						file.delete();
 					}
 					else {
-						fileQueue.addAll(Arrays.asList(files));
-						fileQueue.add(file);
+						queue.addAll(Arrays.asList(files));
+						queue.add(file);
 					}
 				}
 			}
 		}
 
-		private final String _fileName;
+		private String _fileName;
 
 	}
 
