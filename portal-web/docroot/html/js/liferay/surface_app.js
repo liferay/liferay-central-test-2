@@ -129,6 +129,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: [ 'liferay-surface' ]
+		requires: ['liferay-surface']
 	}
 );

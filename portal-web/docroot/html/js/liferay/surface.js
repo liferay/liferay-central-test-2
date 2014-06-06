@@ -302,6 +302,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: [ 'aui-surface-app', 'aui-surface-base', 'aui-surface-screen-html', 'liferay-portlet-url', 'json' ]
+		requires: ['aui-surface-app', 'aui-surface-base', 'aui-surface-screen-html', 'liferay-portlet-url', 'json']
 	}
 );
