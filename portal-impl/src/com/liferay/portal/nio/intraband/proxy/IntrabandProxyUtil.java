@@ -139,9 +139,9 @@ public class IntrabandProxyUtil {
 					(Modifier.isStatic(field.getModifiers()) != isStatic)) {
 
 					throw new IllegalArgumentException(
-						"Field violation \"" + field +
-							"\", expected to be type of " + clazz + " and " +
-								(isStatic ? "static" : "non-static"));
+						"Field " + field + " is expected to be of type " +
+							clazz + " and " + (!isStatic ? "not " : " ") +
+								"static");
 				}
 
 				break;
