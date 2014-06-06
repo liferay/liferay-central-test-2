@@ -58,8 +58,6 @@ String historyKey = ParamUtil.getString(request, "historyKey");
 if (Validator.isNotNull(historyKey)) {
 	curSection = historyKey;
 }
-
-String portletId = portletDisplay.getRootPortletId();
 %>
 
 <div class="taglib-form-navigator" id="<portlet:namespace />tabsBoundingBox">
@@ -441,7 +439,7 @@ String portletId = portletDisplay.getRootPortletId();
 					};
 
 					var detachUpdateSection = function(event) {
-						if (event.portletId === '<%= portletId %>') {
+						if (event.portletId === '<%= portletDisplay.getRootPortletId() %>') {
 							Liferay.detach('form:registered', updateSectionOnError);
 
 							Liferay.detach('destroyPortlet', detachUpdateSection);
