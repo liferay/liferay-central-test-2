@@ -314,7 +314,7 @@ public class ComboServlet extends HttpServlet {
 					ModulePathContainer modulePathContainer =
 						new ModulePathContainer(resourcePath);
 
-					stringFileContent = translateResponse(
+					stringFileContent = translate(
 						request, modulePathContainer.getModuleContextPath(),
 						stringFileContent);
 
@@ -376,7 +376,7 @@ public class ComboServlet extends HttpServlet {
 			"Servlet context " + contextName + " does not exist");
 	}
 
-	protected String translateResponse(
+	protected String translate(
 		HttpServletRequest request, String contextPath,
 		String stringFileContent) {
 
