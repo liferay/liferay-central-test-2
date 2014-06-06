@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.osgi.util.service;
+package com.liferay.osgi.util.service;
 
 /**
  * @author Carlos Sierra Andrés
