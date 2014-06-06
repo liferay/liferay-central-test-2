@@ -24,8 +24,6 @@ for (int i = 0; i < availableLanguageIds.length; i++) {
 }
 
 String defaultLanguageId = LocalizationUtil.getDefaultLanguageId(script);
-
-String portletId = portletDisplay.getRootPortletId();
 %>
 
 <div class="separator"><!-- --></div>
@@ -301,7 +299,7 @@ for (Locale availableLocale : LanguageUtil.getAvailableLocales(themeDisplay.getS
 	Liferay.after('showTab', afterShowTab);
 
 	var clearShowTabHandle = function(event) {
-		if (event.portletId === '<%= portletId %>') {
+		if (event.portletId === '<%= portletDisplay.getRootPortletId() %>') {
 			Liferay.detach('showTab', afterShowTab);
 			Liferay.detach('destroyPortlet', clearShowTabHandle);
 		}

@@ -7,7 +7,6 @@ AUI.add(
 			{
 				basePath: Surface.getBasePath(),
 				linkSelector: 'a:not(.portlet-icon-back):not([data-navigation]):not([data-resource-href]):not([target="_blank"])',
-
 				on: {
 					endNavigate: function(event) {
 						var instance = this;

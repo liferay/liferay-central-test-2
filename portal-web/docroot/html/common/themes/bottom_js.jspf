@@ -188,59 +188,58 @@ if (layout != null) {
 <c:if test="<%= PropsValues.JAVASCRIPT_SINGLE_PAGE_APPLICATION_ENABLED %>">
 	<div id="bottomJS">
 		<div id="bottomJS-defaultScreen">
+			<aui:script use="liferay-surface-app">
+				if (Liferay.Surface) {
 
-				<aui:script use="liferay-surface-app">
-					if (Liferay.Surface) {
+					<%
+					List<Portlet> companyPortlets = PortletLocalServiceUtil.getPortlets(themeDisplay.getCompanyId());
 
-						<%
-						List<Portlet> portletsList = PortletLocalServiceUtil.getPortlets(themeDisplay.getCompanyId());
+					for (Portlet portlet : companyPortlets) {
+						if (portlet.isActive() && portlet.isReady() && !portlet.isUndeployedPortlet() && !portlet.isSinglePageApplication()) {
+					%>
 
-						for (Portlet portlet : portletsList) {
-							if (portlet.isActive() && portlet.isReady() && !portlet.isUndeployedPortlet() && !portlet.isSinglePageApplication()) {
-						%>
+							Liferay.Surface.blacklist['<%= portlet.getPortletId() %>'] = true;
 
-								Liferay.Surface.blacklist['<%= portlet.getPortletId() %>'] = true;
-
-						<%
-							}
+					<%
 						}
-						%>
-
 					}
-				</aui:script>
+					%>
 
-				<script type="text/surface-data-channel">
+				}
+			</aui:script>
 
-						<%
-						String portletId = request.getParameter("p_p_id");
+			<script type="text/surface-data-channel">
 
-						String lastPortletIdSession = (String)session.getAttribute(WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID);
-						%>
+				<%
+				String portletId = request.getParameter("p_p_id");
 
-							{
-								"clearScreensCache": <%= (Validator.isNotNull(portletId) && Validator.isNotNull(lastPortletIdSession) && !Validator.equals(portletId, lastPortletIdSession)) %>
-							}
+				String singlePageApplicationLastPortletId = (String)session.getAttribute(WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID);
+				%>
 
-						<%
-						session.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID, portletId);
-						%>
+					{
+						"clearScreensCache": <%= (Validator.isNotNull(portletId) && Validator.isNotNull(singlePageApplicationLastPortletId) && !Validator.equals(portletId, singlePageApplicationLastPortletId)) %>
+					}
 
-				</script>
+				<%
+				session.setAttribute(WebKeys.SINGLE_PAGE_APPLICATION_LAST_PORTLET_ID, portletId);
+				%>
 
-				<script type="text/javascript">
-					// <![CDATA[
+			</script>
 
-						<%
-						String currentURL = PortalUtil.getCurrentURL(request);
-						%>
+			<script type="text/javascript">
+				// <![CDATA[
 
-						Liferay.currentURL = '<%= HtmlUtil.escapeJS(currentURL) %>';
-						Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
+					<%
+					String currentURL = PortalUtil.getCurrentURL(request);
+					%>
 
-					// ]]>
-				</script>
+					Liferay.currentURL = '<%= HtmlUtil.escapeJS(currentURL) %>';
+					Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
-				<div class="lfr-surface-loading-bar"></div>
+				// ]]>
+			</script>
+
+			<div class="lfr-surface-loading-bar"></div>
 </c:if>
 
 <c:if test="<%= layout != null %>">
