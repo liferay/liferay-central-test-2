@@ -17,7 +17,9 @@ package com.liferay.portal.upgrade;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeAsset;
+import com.liferay.portal.upgrade.v7_0_0.UpgradeBookmarksPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeCalEvent;
+import com.liferay.portal.upgrade.v7_0_0.UpgradeDLPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeDynamicDataMapping;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeEmailNotificationPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeExpando;
@@ -46,7 +48,9 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 	protected void doUpgrade() throws Exception {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAsset.class);
+		upgrade(UpgradeBookmarksPreferences.class);
 		upgrade(UpgradeCalEvent.class);
+		upgrade(UpgradeDLPreferences.class);
 		upgrade(UpgradeDynamicDataMapping.class);
 		upgrade(UpgradeEmailNotificationPreferences.class);
 		upgrade(UpgradeExpando.class);
