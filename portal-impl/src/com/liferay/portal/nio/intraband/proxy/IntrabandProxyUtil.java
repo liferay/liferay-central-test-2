@@ -948,8 +948,8 @@ public class IntrabandProxyUtil {
 
 		private static Log _log = LogFactoryUtil.getLog(TemplateSkeleton.class);
 
-		private static String _proxyMethodsMapping =
-			_getProxyMethodsMapping(PROXY_METHOD_SIGNATURES);
+		private static String _proxyMethodsMapping = _getProxyMethodsMapping(
+			PROXY_METHOD_SIGNATURES);
 
 		@SuppressWarnings("unused")
 		private TargetLocator _targetLocator;
