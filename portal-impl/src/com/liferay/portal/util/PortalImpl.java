@@ -4181,10 +4181,10 @@ public class PortalImpl implements Portal {
 		}
 
 		if (layout != null) {
+			Layout virtualHostLayout = layout;
+
 			long refererPlid = ParamUtil.getLong(
 				themeDisplay.getRequest(), "refererPlid");
-
-			Layout virtualHostLayout = layout;
 
 			if (refererPlid > 0) {
 				virtualHostLayout = LayoutLocalServiceUtil.getLayout(
@@ -7984,10 +7984,14 @@ public class PortalImpl implements Portal {
 
 		String portalURL = themeDisplay.getPortalURL();
 
-		boolean useGroupVirtualHostName =
-			canonicalURL ||
+		boolean useGroupVirtualHostName = false;
+
+		if (canonicalURL ||
 			!StringUtil.equalsIgnoreCase(
-				themeDisplay.getServerName(), _LOCALHOST);
+				themeDisplay.getServerName(), _LOCALHOST)) {
+
+			useGroupVirtualHostName = true;
+		}
 
 		long refererPlid = themeDisplay.getRefererPlid();
 
