@@ -7,10 +7,10 @@
 @import url(portal/rich_editor.css);
 @import url(portal/search_combobox.css);
 @import url(portal/separator.css);
+@import url(portal/surface.css);
 @import url(portal/tag_selector.css);
 @import url(portal/toolbar.css);
 @import url(portal/translation_manager.css);
 @import url(portal/tree.css);
 @import url(portal/undo_manager.css);
 @import url(portal/uploader.css);
-@import url(portal/surface.css);
