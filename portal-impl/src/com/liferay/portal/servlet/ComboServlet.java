@@ -316,7 +316,6 @@ public class ComboServlet extends HttpServlet {
 
 					stringFileContent = translateResponse(
 						request, modulePathContainer.getModuleContextPath(),
-						modulePathContainer.getResourcePath(),
 						stringFileContent);
 
 					stringFileContent = MinifierUtil.minifyJavaScript(
@@ -378,12 +377,15 @@ public class ComboServlet extends HttpServlet {
 	}
 
 	protected String translateResponse(
-		HttpServletRequest request, String contextPath, String resourcePath,
+		HttpServletRequest request, String contextPath,
 		String stringFileContent) {
 
 		String languageId = LanguageUtil.getLanguageId(request);
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		ResourceBundle resourceBundle = LanguageResources.getResourceBundle(
+			locale);
 
 		PortletApp portletApp = PortletLocalServiceUtil.getPortletApp(
 			contextPath);
@@ -397,9 +399,6 @@ public class ComboServlet extends HttpServlet {
 				portlet = portlets.get(0);
 			}
 		}
-
-		ResourceBundle resourceBundle = LanguageResources.getResourceBundle(
-			locale);
 
 		if (portlet != null) {
 			PortletConfig portletConfig = PortletConfigFactoryUtil.create(
