@@ -7,7 +7,7 @@
 		revision="working@mbpro.local"
 		conf="provided"
 		confs="default, internal, provided, test"
-		date="20140606153301"/>
+		date="20140607225332"/>
 	<dependencies>
 	</dependencies>
 </ivy-report>
