@@ -83,7 +83,7 @@ public class ResetDatabaseUtil {
 
 			if (table == null) {
 				_log.error(
-					"Unable to get table : " + tableName + " from cache : " +
+					"Unable to get table " + tableName + " from cache " +
 						_cachedTables.keySet());
 
 				continue;
