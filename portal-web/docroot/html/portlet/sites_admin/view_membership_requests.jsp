@@ -70,7 +70,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	iteratorURL="<%= portletURL %>"
 	total="<%= MembershipRequestLocalServiceUtil.searchCount(group.getGroupId(), statusId) %>"
 >
-
 	<liferay-ui:search-container-results
 		results="<%= MembershipRequestLocalServiceUtil.search(group.getGroupId(), statusId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 	/>
@@ -81,9 +80,9 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	>
 
 		<%
-		User user2 = UserLocalServiceUtil.getUserById(membershipRequest.getUserId());
+		User membershipRequestUser = UserLocalServiceUtil.getUserById(membershipRequest.getUserId());
 
-		row.setObject(new Object[] {user2, group, membershipRequest});
+		row.setObject(new Object[] {membershipRequestUser, group, membershipRequest});
 		%>
 
 		<liferay-ui:search-container-column-date
@@ -94,7 +93,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<liferay-ui:search-container-column-text
 			name="user"
 		>
-			<%= HtmlUtil.escape(user2.getFullName()) %> (<%= user2.getEmailAddress() %>)
+			<%= HtmlUtil.escape(membershipRequestUser.getFullName()) %> (<%= membershipRequestUser.getEmailAddress() %>)
 		</liferay-ui:search-container-column-text>
 
 		<liferay-ui:search-container-column-text
@@ -109,30 +108,30 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			/>
 
 			<%
-			User user3 = UserLocalServiceUtil.getUserById(membershipRequest.getReplierUserId());
+			User membershipRequestReplierUser = UserLocalServiceUtil.getUserById(membershipRequest.getReplierUserId());
 			%>
 
 			<liferay-ui:search-container-column-text
 				name="replier"
 			>
 				<c:choose>
-					<c:when test="<%= user3.isDefaultUser() %>">
+					<c:when test="<%= membershipRequestReplierUser.isDefaultUser() %>">
 
 						<%
-						Company user3Company = CompanyLocalServiceUtil.getCompanyById(user3.getCompanyId());
+						Company membershipRequestReplierCompany = CompanyLocalServiceUtil.getCompanyById(membershipRequestReplierUser.getCompanyId());
 						%>
 
-						<%= HtmlUtil.escape(user3Company.getName()) %>
+						<%= HtmlUtil.escape(membershipRequestReplierCompany.getName()) %>
 					</c:when>
 					<c:otherwise>
-						<%= HtmlUtil.escape(user3.getFullName()) %>
+						<%= HtmlUtil.escape(membershipRequestReplierUser.getFullName()) %>
 					</c:otherwise>
 				</c:choose>
 			</liferay-ui:search-container-column-text>
 
 			<liferay-ui:search-container-column-text
 				name="reply-comments"
-				value="<%= HtmlUtil.escape(user3.getFullName()) %>"
+				value="<%= HtmlUtil.escape(membershipRequestReplierUser.getFullName()) %>"
 			/>
 		</c:if>
 
