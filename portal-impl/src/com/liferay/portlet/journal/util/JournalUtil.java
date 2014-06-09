@@ -471,14 +471,16 @@ public class JournalUtil {
 		JournalArticle sourceArticle =
 			JournalArticleLocalServiceUtil.getArticle(
 				groupId, articleId, sourceVersion);
-		JournalArticle targetArticle =
-			JournalArticleLocalServiceUtil.getArticle(
-				groupId, articleId, targetVersion);
 
 		JournalArticleDisplay sourceArticleDisplay =
 			JournalArticleLocalServiceUtil.getArticleDisplay(
 				sourceArticle, null, Constants.VIEW, languageId, 1,
 				portletRequestModel, themeDisplay);
+
+		JournalArticle targetArticle =
+			JournalArticleLocalServiceUtil.getArticle(
+				groupId, articleId, targetVersion);
+
 		JournalArticleDisplay targetArticleDisplay =
 			JournalArticleLocalServiceUtil.getArticleDisplay(
 				targetArticle, null, Constants.VIEW, languageId, 1,
