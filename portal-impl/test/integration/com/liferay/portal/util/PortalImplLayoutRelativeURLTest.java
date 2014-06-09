@@ -68,34 +68,8 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, privateLayout, LOCALHOST);
 
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		Layout layout = LayoutTestUtil.addLayout(group);
-
-		updateThemeDisplay(
-			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
-
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
-
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "1");
-
-		try {
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-	
-			Assert.fail();
-		}
-		catch (NoSuchLayoutException nsle) {
-		}
+		testGetLayoutRelativeURL(
+			themeDisplay, privateLayout, privateLayoutRelativeURL);
 	}
 
 	@Test
@@ -105,71 +79,19 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
 
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		Layout layout = LayoutTestUtil.addLayout(group);
-
-		updateThemeDisplay(
-			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
-
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
-
-		Assert.assertEquals(
-			privateLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "1");
-
-		try {
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-	
-			Assert.fail();
-		}
-		catch (NoSuchLayoutException nsle) {
-		}
+		testGetLayoutRelativeURL(
+			themeDisplay, privateLayout, privateLayoutRelativeURL);
 	}
 
 	@Test
 	public void testPublicLayoutFromCompanyVirtualHost() throws Exception {
 		ThemeDisplay themeDisplay = initThemeDisplay(
 			company, group, publicLayout, LOCALHOST);
-
-		Assert.assertEquals(
-			publicLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-
-		Layout layout = LayoutTestUtil.addLayout(group);
-
-		updateThemeDisplay(
-			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
-
-		Assert.assertEquals(
-			publicLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
-
-		Assert.assertEquals(
-			publicLayoutRelativeURL,
-			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-
-		updateThemeDisplay(themeDisplay, "refererPlid", "1");
-
-		try {
-			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-	
-			Assert.fail();
-		}
-		catch (NoSuchLayoutException nsle) {
-		}
+			
+		testGetLayoutRelativeURL(
+			themeDisplay, publicLayout, publicLayoutRelativeURL);
 	}
-
+	
 	@Test
 	public void testPublicLayoutURLFromPublicLayoutSetVirtualHost()
 		throws Exception {
@@ -184,6 +106,40 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		Assert.assertTrue(
 			publicLayoutFriendlyURL.equals(layoutRelativeURL) ||
 			publicLayoutRelativeURL.equals(layoutRelativeURL));
+	}
+
+	protected void testGetLayoutRelativeURL(
+			ThemeDisplay themeDisplay, Layout layout, String layoutRelativeURL)
+		throws Exception {
+	
+		Assert.assertEquals(
+			layoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
+	
+		Layout childLayout = LayoutTestUtil.addLayout(group);
+	
+		updateThemeDisplay(
+			themeDisplay, "refererPlid", String.valueOf(childLayout.getPlid()));
+	
+		Assert.assertEquals(
+			layoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
+	
+		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
+	
+		Assert.assertEquals(
+			layoutRelativeURL,
+			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
+	
+		updateThemeDisplay(themeDisplay, "refererPlid", "1");
+	
+		try {
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
+	
+			Assert.fail();
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 
 	protected void updateThemeDisplay(
