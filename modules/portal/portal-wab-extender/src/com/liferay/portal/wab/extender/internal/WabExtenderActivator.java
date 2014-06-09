@@ -51,7 +51,8 @@ public class WabExtenderActivator implements BundleActivator {
 
 	protected void registerArtifactUrlTransformer(BundleContext bundleContext) {
 		_serviceRegistration = bundleContext.registerService(
-			ArtifactUrlTransformer.class, new WarArtifactUrlTransformer(), null);
+			ArtifactUrlTransformer.class, new WarArtifactUrlTransformer(),
+			null);
 	}
 
 	protected void registerURLStreamHandlerService(
@@ -63,8 +64,7 @@ public class WabExtenderActivator implements BundleActivator {
 
 		ClassLoader classLoader = clazz.getClassLoader();
 
-		Dictionary<String, Object> properties =
-			new Hashtable<String, Object>();
+		Dictionary<String, Object> properties = new Hashtable<String, Object>();
 
 		properties.put(
 			URLConstants.URL_HANDLER_PROTOCOL, new String[] {"webbundle"});
