@@ -90,31 +90,31 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 	protected void testGetLayoutRelativeURL(
 			ThemeDisplay themeDisplay, Layout layout, String layoutRelativeURL)
 		throws Exception {
-	
+
 		Assert.assertEquals(
 			layoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
-	
+
 		Layout childLayout = LayoutTestUtil.addLayout(group);
-	
+
 		updateThemeDisplay(
 			themeDisplay, "refererPlid", String.valueOf(childLayout.getPlid()));
-	
+
 		Assert.assertEquals(
 			layoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
-	
+
 		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
-	
+
 		Assert.assertEquals(
 			layoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(layout, themeDisplay));
-	
+
 		updateThemeDisplay(themeDisplay, "refererPlid", "1");
-	
+
 		try {
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-	
+
 			Assert.fail();
 		}
 		catch (NoSuchLayoutException nsle) {
