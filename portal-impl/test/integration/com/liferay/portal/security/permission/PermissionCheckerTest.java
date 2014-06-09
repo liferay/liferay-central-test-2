@@ -21,8 +21,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.test.DeleteAfterTestRun;
 import com.liferay.portal.test.LiferayIntegrationJUnitTestRunner;
 import com.liferay.portal.test.MainServletExecutionTestListener;
 import com.liferay.portal.util.test.GroupTestUtil;
@@ -31,6 +33,7 @@ import com.liferay.portal.util.test.RoleTestUtil;
 import com.liferay.portal.util.test.TestPropsValues;
 import com.liferay.portal.util.test.UserTestUtil;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -46,6 +49,23 @@ public class PermissionCheckerTest {
 	@Before
 	public void setUp() throws Exception {
 		_group = GroupTestUtil.addGroup();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		GroupLocalServiceUtil.deleteGroup(_group);
+
+		if (_user != null) {
+			UserLocalServiceUtil.deleteUser(_user);
+		}
+
+		if (_organization != null) {
+			OrganizationLocalServiceUtil.deleteOrganization(_organization);
+		}
+
+		if (_role != null) {
+			RoleLocalServiceUtil.deleteRole(_role);
+		}
 	}
 
 	@Test
@@ -340,16 +360,9 @@ public class PermissionCheckerTest {
 		return PermissionCheckerFactoryUtil.create(user);
 	}
 
-	@DeleteAfterTestRun
 	private Group _group;
-
-	@DeleteAfterTestRun
 	private Organization _organization;
-
-	@DeleteAfterTestRun
 	private Role _role;
-
-	@DeleteAfterTestRun
 	private User _user;
 
 }
