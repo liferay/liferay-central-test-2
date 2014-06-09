@@ -18,6 +18,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
 long groupId = ParamUtil.getLong(request, "groupId");
 String articleId = ParamUtil.getString(request, "articleId");
 
