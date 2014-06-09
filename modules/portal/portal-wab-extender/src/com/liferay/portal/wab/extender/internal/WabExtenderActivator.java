@@ -34,12 +34,14 @@ import org.osgi.service.url.URLStreamHandlerService;
  */
 public class WabExtenderActivator implements BundleActivator {
 
+	@Override
 	public void start(BundleContext bundleContext) throws Exception {
 		_registerStreamHandler(bundleContext);
 
 		_registerArtifactTransformer(bundleContext);
 	}
 
+	@Override
 	public void stop(BundleContext bundleContext) throws Exception {
 		_serviceRegistration.unregister();
 
@@ -54,7 +56,7 @@ public class WabExtenderActivator implements BundleActivator {
 	private void _registerStreamHandler(BundleContext bundleContext) {
 		Bundle bundle = bundleContext.getBundle(0);
 
-		Class clazz = bundle.getClass();
+		Class<?> clazz = bundle.getClass();
 
 		ClassLoader classLoader = clazz.getClassLoader();
 
