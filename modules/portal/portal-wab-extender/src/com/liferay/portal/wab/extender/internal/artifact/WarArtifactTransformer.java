@@ -33,7 +33,7 @@ public class WarArtifactTransformer implements ArtifactUrlTransformer {
 	public boolean canHandle(File artifact) {
 		String name = artifact.getName();
 
-		if (name.endsWith(_WAR_EXTENSION)) {
+		if (name.endsWith(".war")) {
 			return true;
 		}
 
@@ -45,11 +45,11 @@ public class WarArtifactTransformer implements ArtifactUrlTransformer {
 		String path = artifact.getPath();
 
 		int x = path.lastIndexOf("/");
-		int y = path.lastIndexOf(_WAR_EXTENSION);
+		int y = path.lastIndexOf(".war");
 
 		String contextName = path.substring(x + 1, y);
 
-		Matcher matcher = _CONTEXT_NAME_PATTERN.matcher(contextName);
+		Matcher matcher = _pattern.matcher(contextName);
 
 		if (matcher.matches()) {
 			contextName = matcher.group(1);
@@ -58,16 +58,14 @@ public class WarArtifactTransformer implements ArtifactUrlTransformer {
 		String pathWithQueryString =
 			artifact.getPath() + "?Web-ContextPath=/" + contextName;
 
-		URL newURL = new URL("file", null, pathWithQueryString);
+		URL url = new URL("file", null, pathWithQueryString);
 
-		newURL = new URL("webbundle", null, newURL.toString());
+		url = new URL("webbundle", null, url.toString());
 
-		return newURL;
+		return url;
 	}
 
-	private static final Pattern _CONTEXT_NAME_PATTERN = Pattern.compile(
+	private static Pattern _pattern = Pattern.compile(
 		"(.*?)-\\d+\\.\\d+\\.\\d+\\.\\d+");
-
-	private static final String _WAR_EXTENSION = ".war";
 
 }
