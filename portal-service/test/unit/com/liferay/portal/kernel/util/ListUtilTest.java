@@ -126,7 +126,11 @@ public class ListUtilTest {
 
 				@Override
 				public boolean filter(String string) {
-					return string.length() == 2;
+					if (string.length() == 2) {
+						return true;
+					}
+
+					return false;
 				}
 
 			};
