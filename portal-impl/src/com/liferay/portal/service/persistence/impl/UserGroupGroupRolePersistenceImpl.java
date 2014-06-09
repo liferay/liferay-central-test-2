@@ -44,7 +44,10 @@ import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The persistence implementation for the user group group role service.
@@ -3008,6 +3011,26 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 		return fetchByPrimaryKey((Serializable)userGroupGroupRolePK);
 	}
 
+	@Override
+	public Map<Serializable, UserGroupGroupRole> fetchByPrimaryKeys(
+		Set<Serializable> primaryKeys) {
+		if (primaryKeys.isEmpty()) {
+			return Collections.emptyMap();
+		}
+
+		Map<Serializable, UserGroupGroupRole> map = new HashMap<Serializable, UserGroupGroupRole>();
+
+		for (Serializable primaryKey : primaryKeys) {
+			UserGroupGroupRole userGroupGroupRole = fetchByPrimaryKey(primaryKey);
+
+			if (userGroupGroupRole != null) {
+				map.put(primaryKey, userGroupGroupRole);
+			}
+		}
+
+		return map;
+	}
+
 	/**
 	 * Returns all the user group group roles.
 	 *
@@ -3208,6 +3231,7 @@ public class UserGroupGroupRolePersistenceImpl extends BasePersistenceImpl<UserG
 	}
 
 	private static final String _SQL_SELECT_USERGROUPGROUPROLE = "SELECT userGroupGroupRole FROM UserGroupGroupRole userGroupGroupRole";
+	private static final String _SQL_SELECT_USERGROUPGROUPROLE_WHERE_PKS_IN = "SELECT userGroupGroupRole FROM UserGroupGroupRole userGroupGroupRole WHERE userGroupGroupRolePK IN (";
 	private static final String _SQL_SELECT_USERGROUPGROUPROLE_WHERE = "SELECT userGroupGroupRole FROM UserGroupGroupRole userGroupGroupRole WHERE ";
 	private static final String _SQL_COUNT_USERGROUPGROUPROLE = "SELECT COUNT(userGroupGroupRole) FROM UserGroupGroupRole userGroupGroupRole";
 	private static final String _SQL_COUNT_USERGROUPGROUPROLE_WHERE = "SELECT COUNT(userGroupGroupRole) FROM UserGroupGroupRole userGroupGroupRole WHERE ";
