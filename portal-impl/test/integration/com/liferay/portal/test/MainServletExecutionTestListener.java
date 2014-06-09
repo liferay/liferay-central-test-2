@@ -71,38 +71,37 @@ public class MainServletExecutionTestListener
 
 	@Override
 	public void runAfterTest(TestContext testContext) {
-		Map<Class<?>, List<Field>> deleteAfterTestRunFields =
+		Map<Class<?>, List<Field>> autoRemoveFields =
 			new HashMap<Class<?>, List<Field>>();
 
 		Class<?> testClass = testContext.getClazz();
 
 		while (testClass != null) {
 			for (Field field : testClass.getDeclaredFields()) {
-				DeleteAfterTestRun deleteAfterTestRun = field.getAnnotation(
-					DeleteAfterTestRun.class);
+				AutoRemove autoRemove = field.getAnnotation(AutoRemove.class);
 
-				if (deleteAfterTestRun == null) {
+				if (autoRemove == null) {
 					continue;
 				}
 
-				Class<?> fieldClass = field.getType();
+				Class<?> fieldType = field.getType();
 
-				if (!PersistedModel.class.isAssignableFrom(fieldClass)) {
+				if (!PersistedModel.class.isAssignableFrom(fieldType)) {
 					throw new IllegalArgumentException(
-						"Unable to annotate field " + field +
-							" because it is not of type " +
-								PersistedModel.class);
+						AutoRemove.class + " can only be used to " +
+							PersistedModel.class +
+								" type field, found it on field " + field);
 				}
 
-				List<Field> fields = deleteAfterTestRunFields.get(fieldClass);
+				field.setAccessible(true);
+
+				List<Field> fields = autoRemoveFields.get(fieldType);
 
 				if (fields == null) {
 					fields = new ArrayList<Field>();
 
-					deleteAfterTestRunFields.put(fieldClass, fields);
+					autoRemoveFields.put(fieldType, fields);
 				}
-
-				field.setAccessible(true);
 
 				fields.add(field);
 			}
@@ -112,17 +111,18 @@ public class MainServletExecutionTestListener
 
 		Object instance = testContext.getInstance();
 
-		Set<Map.Entry<Class<?>, List<Field>>> set =
-			deleteAfterTestRunFields.entrySet();
+		Set<Map.Entry<Class<?>, List<Field>>> entrySet =
+			autoRemoveFields.entrySet();
 
-		Iterator<Map.Entry<Class<?>, List<Field>>> iterator = set.iterator();
+		Iterator<Map.Entry<Class<?>, List<Field>>> iterator =
+			entrySet.iterator();
 
 		while (iterator.hasNext()) {
 			Map.Entry<Class<?>, List<Field>> entry = iterator.next();
 
 			Class<?> clazz = entry.getKey();
 
-			if (_orderedClasses.contains(clazz)) {
+			if (_ORDERED_CLASSES.contains(clazz)) {
 				continue;
 			}
 
@@ -152,8 +152,8 @@ public class MainServletExecutionTestListener
 			}
 		}
 
-		for (Class<?> clazz : _orderedClasses) {
-			List<Field> fields = deleteAfterTestRunFields.remove(clazz);
+		for (Class<?> clazz : _ORDERED_CLASSES) {
+			List<Field> fields = autoRemoveFields.remove(clazz);
 
 			if (fields == null) {
 				continue;
@@ -238,9 +238,10 @@ public class MainServletExecutionTestListener
 	private static Log _log = LogFactoryUtil.getLog(
 		MainServletExecutionTestListener.class);
 
-	private static Set<Class<?>> _orderedClasses = new LinkedHashSet<Class<?>>(
-		Arrays.asList(
-			User.class, Organization.class, Role.class, UserGroup.class,
-			Group.class));
+	private static Set<Class<?>> _ORDERED_CLASSES =
+		new LinkedHashSet<Class<?>>(
+			Arrays.asList(
+				User.class, Organization.class, Role.class, UserGroup.class,
+				Group.class));
 
 }
