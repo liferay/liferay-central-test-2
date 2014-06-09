@@ -27,7 +27,7 @@ import org.apache.felix.fileinstall.ArtifactUrlTransformer;
  * @author Miguel Pastor
  * @author Raymond Augé
  */
-public class WarArtifactTransformer implements ArtifactUrlTransformer {
+public class WarArtifactUrlTransformer implements ArtifactUrlTransformer {
 
 	@Override
 	public boolean canHandle(File artifact) {

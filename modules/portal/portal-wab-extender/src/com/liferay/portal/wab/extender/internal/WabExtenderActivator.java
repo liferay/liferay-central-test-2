@@ -14,7 +14,7 @@
 
 package com.liferay.portal.wab.extender.internal;
 
-import com.liferay.portal.wab.extender.internal.artifact.WarArtifactTransformer;
+import com.liferay.portal.wab.extender.internal.artifact.WarArtifactUrlTransformer;
 import com.liferay.portal.wab.extender.internal.handler.WabURLStreamHandlerService;
 
 import java.util.Dictionary;
@@ -51,7 +51,7 @@ public class WabExtenderActivator implements BundleActivator {
 
 	protected void registerArtifactUrlTransformer(BundleContext bundleContext) {
 		_serviceRegistration = bundleContext.registerService(
-			ArtifactUrlTransformer.class, new WarArtifactTransformer(), null);
+			ArtifactUrlTransformer.class, new WarArtifactUrlTransformer(), null);
 	}
 
 	protected void registerURLStreamHandlerService(
