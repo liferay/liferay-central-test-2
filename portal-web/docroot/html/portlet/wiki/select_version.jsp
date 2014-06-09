@@ -19,9 +19,8 @@
 <%
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectVersionFm");
-
 double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
+String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectVersionFm");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

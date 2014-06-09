@@ -19,8 +19,8 @@
 <%
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectVersionFm");
 double sourceVersion = ParamUtil.getDouble(request, "sourceVersion");
+String eventName = ParamUtil.getString(request, "eventName", renderResponse.getNamespace() + "selectVersionFm");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
