@@ -79,7 +79,7 @@ public interface ${entity.name}${sessionTypeName}Service
 			, PersistedModelLocalService
 		</#if>
 
-		<#assign overrideMethodNames = overrideMethodNames + ["deletePersistedModel", "getPersistedModel"]>
+		<#assign overrideMethodNames = overrideMethodNames + ["getPersistedModel"]>
 	</#if>
 
 	{
