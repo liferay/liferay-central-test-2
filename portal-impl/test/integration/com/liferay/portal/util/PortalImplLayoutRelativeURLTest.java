@@ -71,51 +71,31 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
-
-	@Test
-	public void testPrivateLayoutFromCompanyVirtualHostRefererPlidExists()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST);
 
 		Layout layout = LayoutTestUtil.addLayout(group);
 
-		addParameterToThemeDisplayRequest(
+		updateThemeDisplay(
 			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
 
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
 
-	@Test
-	public void testPrivateLayoutFromCompanyVirtualHostRefererPlidInvalid()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "foo");
+		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
 
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
 
-	@Test(expected = NoSuchLayoutException.class)
-	public void testPrivateLayoutFromCompanyVirtualHostRefererPlidNotExists()
-		throws Exception {
+		updateThemeDisplay(themeDisplay, "refererPlid", "1");
 
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "1");
-
-		PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-
-		Assert.fail("An exception should have been thrown");
+		try {
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
+	
+			Assert.fail();
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 
 	@Test
@@ -128,52 +108,31 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
-
-	@Test
-	public void testPrivateLayoutURLFromPublicLayoutSetVirtualHostRefererPlidExists()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
 
 		Layout layout = LayoutTestUtil.addLayout(group);
 
-		addParameterToThemeDisplayRequest(
+		updateThemeDisplay(
 			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
 
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
 
-	@Test
-	public void
-			testPrivateLayoutURLFromPublicLayoutSetVirtualHostRefererPlidInvalid()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "foo");
+		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
 
 		Assert.assertEquals(
 			privateLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay));
-	}
 
-	@Test(expected = NoSuchLayoutException.class)
-	public void testPrivateLayoutURLFromPublicLayoutSetVirtualHostRefererPlidNotExists()
-		throws Exception {
+		updateThemeDisplay(themeDisplay, "refererPlid", "1");
 
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "1");
-
-		PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
-
-		Assert.fail("An exception should have been thrown");
+		try {
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
+	
+			Assert.fail();
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 
 	@Test
@@ -184,51 +143,31 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 		Assert.assertEquals(
 			publicLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-	}
-
-	@Test
-	public void testPublicLayoutFromCompanyVirtualHostRefererPlidExists()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, publicLayout, LOCALHOST);
 
 		Layout layout = LayoutTestUtil.addLayout(group);
 
-		addParameterToThemeDisplayRequest(
+		updateThemeDisplay(
 			themeDisplay, "refererPlid", String.valueOf(layout.getPlid()));
 
 		Assert.assertEquals(
 			publicLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-	}
 
-	@Test
-	public void testPublicLayoutFromCompanyVirtualHostRefererPlidInvalid()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, publicLayout, LOCALHOST);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "foo");
+		updateThemeDisplay(themeDisplay, "refererPlid", "foo");
 
 		Assert.assertEquals(
 			publicLayoutRelativeURL,
 			PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay));
-	}
 
-	@Test(expected = NoSuchLayoutException.class)
-	public void testPublicLayoutFromCompanyVirtualHostRefererPlidNotExists()
-		throws Exception {
+		updateThemeDisplay(themeDisplay, "refererPlid", "1");
 
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, publicLayout, LOCALHOST);
-
-		addParameterToThemeDisplayRequest(themeDisplay, "refererPlid", "1");
-
-		PortalUtil.getLayoutRelativeURL(publicLayout, themeDisplay);
-
-		Assert.fail("An exception should have been thrown");
+		try {
+			PortalUtil.getLayoutRelativeURL(privateLayout, themeDisplay);
+	
+			Assert.fail();
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 	}
 
 	@Test
@@ -247,17 +186,15 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 			publicLayoutRelativeURL.equals(layoutRelativeURL));
 	}
 
-	protected void addParameterToThemeDisplayRequest(
+	protected void updateThemeDisplay(
 		ThemeDisplay themeDisplay, String paramName, String paramValue) {
 
-		if (themeDisplay.getRequest() == null) {
-			themeDisplay.setRequest(new MockHttpServletRequest());
-		}
+		MockHttpServletRequest mockHttpServletRequest =
+			new MockHttpServletRequest();
 
-		MockHttpServletRequest request =
-			(MockHttpServletRequest)themeDisplay.getRequest();
+		mockHttpServletRequest.addParameter(paramName, paramValue);
 
-		request.addParameter(paramName, paramValue);
+		themeDisplay.setRequest(mockHttpServletRequest);
 	}
 
 	protected String privateLayoutRelativeURL;
