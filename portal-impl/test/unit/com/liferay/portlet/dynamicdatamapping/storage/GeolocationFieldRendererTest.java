@@ -91,7 +91,6 @@ public class GeolocationFieldRendererTest extends PowerMockito {
 	protected void setUpLanguageUtil() {
 		whenLanguageGet(LocaleUtil.SPAIN, "latitude", "Latitud");
 		whenLanguageGet(LocaleUtil.SPAIN, "longitude", "Longitud");
-
 		whenLanguageGet(LocaleUtil.US, "latitude", "Latitude");
 		whenLanguageGet(LocaleUtil.US, "longitude", "Longitude");
 
