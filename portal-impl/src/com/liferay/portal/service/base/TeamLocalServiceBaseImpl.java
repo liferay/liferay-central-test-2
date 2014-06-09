@@ -247,12 +247,6 @@ public abstract class TeamLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteTeam((Team)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return teamPersistence.findByPrimaryKey(primaryKeyObj);

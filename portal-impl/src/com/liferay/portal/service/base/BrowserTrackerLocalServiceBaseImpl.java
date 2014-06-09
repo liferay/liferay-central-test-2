@@ -242,12 +242,6 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteBrowserTracker((BrowserTracker)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return browserTrackerPersistence.findByPrimaryKey(primaryKeyObj);

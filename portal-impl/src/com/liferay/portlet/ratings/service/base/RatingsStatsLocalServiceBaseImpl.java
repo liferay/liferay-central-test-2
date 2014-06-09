@@ -248,12 +248,6 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteRatingsStats((RatingsStats)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return ratingsStatsPersistence.findByPrimaryKey(primaryKeyObj);

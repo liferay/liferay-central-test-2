@@ -242,12 +242,6 @@ public abstract class ImageLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteImage((Image)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return imagePersistence.findByPrimaryKey(primaryKeyObj);

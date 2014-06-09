@@ -333,12 +333,6 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteMBMailingList((MBMailingList)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return mbMailingListPersistence.findByPrimaryKey(primaryKeyObj);

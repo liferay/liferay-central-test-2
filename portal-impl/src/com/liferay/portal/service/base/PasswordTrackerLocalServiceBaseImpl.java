@@ -247,12 +247,6 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deletePasswordTracker((PasswordTracker)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return passwordTrackerPersistence.findByPrimaryKey(primaryKeyObj);

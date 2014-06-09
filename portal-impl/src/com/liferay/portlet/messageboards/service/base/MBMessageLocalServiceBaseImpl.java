@@ -381,12 +381,6 @@ public abstract class MBMessageLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteMBMessage((MBMessage)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return mbMessagePersistence.findByPrimaryKey(primaryKeyObj);

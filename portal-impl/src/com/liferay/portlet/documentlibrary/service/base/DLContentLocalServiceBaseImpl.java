@@ -242,12 +242,6 @@ public abstract class DLContentLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDLContent((DLContent)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return dlContentPersistence.findByPrimaryKey(primaryKeyObj);

@@ -328,12 +328,6 @@ public abstract class MDRRuleLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteMDRRule((MDRRule)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return mdrRulePersistence.findByPrimaryKey(primaryKeyObj);

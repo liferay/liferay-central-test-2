@@ -249,12 +249,6 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteSCProductVersion((SCProductVersion)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return scProductVersionPersistence.findByPrimaryKey(primaryKeyObj);

@@ -255,12 +255,6 @@ public abstract class SocialActivityAchievementLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteSocialActivityAchievement((SocialActivityAchievement)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return socialActivityAchievementPersistence.findByPrimaryKey(primaryKeyObj);

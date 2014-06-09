@@ -247,12 +247,6 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteAnnouncementsDelivery((AnnouncementsDelivery)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return announcementsDeliveryPersistence.findByPrimaryKey(primaryKeyObj);

@@ -355,12 +355,6 @@ public abstract class DLFolderLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDLFolder((DLFolder)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return dlFolderPersistence.findByPrimaryKey(primaryKeyObj);

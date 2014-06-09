@@ -254,12 +254,6 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteShoppingOrder((ShoppingOrder)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return shoppingOrderPersistence.findByPrimaryKey(primaryKeyObj);

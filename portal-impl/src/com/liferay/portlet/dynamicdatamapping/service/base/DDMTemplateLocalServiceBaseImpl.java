@@ -352,12 +352,6 @@ public abstract class DDMTemplateLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDDMTemplate((DDMTemplate)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return ddmTemplatePersistence.findByPrimaryKey(primaryKeyObj);

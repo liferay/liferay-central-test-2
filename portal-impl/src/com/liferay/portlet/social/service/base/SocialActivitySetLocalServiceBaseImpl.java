@@ -248,12 +248,6 @@ public abstract class SocialActivitySetLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteSocialActivitySet((SocialActivitySet)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return socialActivitySetPersistence.findByPrimaryKey(primaryKeyObj);

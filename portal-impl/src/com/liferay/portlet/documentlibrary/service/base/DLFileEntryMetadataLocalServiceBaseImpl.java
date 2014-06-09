@@ -251,12 +251,6 @@ public abstract class DLFileEntryMetadataLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDLFileEntryMetadata((DLFileEntryMetadata)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return dlFileEntryMetadataPersistence.findByPrimaryKey(primaryKeyObj);

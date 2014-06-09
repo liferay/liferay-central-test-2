@@ -351,12 +351,6 @@ public abstract class MBDiscussionLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteMBDiscussion((MBDiscussion)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return mbDiscussionPersistence.findByPrimaryKey(primaryKeyObj);

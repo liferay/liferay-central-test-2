@@ -264,12 +264,6 @@ public abstract class UserNotificationEventLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteUserNotificationEvent((UserNotificationEvent)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return userNotificationEventPersistence.findByPrimaryKey(primaryKeyObj);

@@ -244,12 +244,6 @@ public abstract class ResourceActionLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteResourceAction((ResourceAction)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return resourceActionPersistence.findByPrimaryKey(primaryKeyObj);

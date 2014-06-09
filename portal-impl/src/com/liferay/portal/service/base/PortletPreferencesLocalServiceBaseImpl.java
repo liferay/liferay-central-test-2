@@ -248,12 +248,6 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deletePortletPreferences((PortletPreferences)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return portletPreferencesPersistence.findByPrimaryKey(primaryKeyObj);

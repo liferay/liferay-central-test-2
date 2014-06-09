@@ -250,12 +250,6 @@ public abstract class AssetTagLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteAssetTag((AssetTag)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return assetTagPersistence.findByPrimaryKey(primaryKeyObj);

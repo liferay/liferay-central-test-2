@@ -246,12 +246,6 @@ public abstract class PluginSettingLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deletePluginSetting((PluginSetting)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return pluginSettingPersistence.findByPrimaryKey(primaryKeyObj);

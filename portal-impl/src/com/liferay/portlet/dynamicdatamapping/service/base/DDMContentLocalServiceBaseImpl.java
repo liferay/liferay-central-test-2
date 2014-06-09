@@ -330,12 +330,6 @@ public abstract class DDMContentLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDDMContent((DDMContent)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return ddmContentPersistence.findByPrimaryKey(primaryKeyObj);

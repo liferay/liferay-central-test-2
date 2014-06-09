@@ -243,12 +243,6 @@ public abstract class DLSyncEventLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteDLSyncEvent((DLSyncEvent)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return dlSyncEventPersistence.findByPrimaryKey(primaryKeyObj);

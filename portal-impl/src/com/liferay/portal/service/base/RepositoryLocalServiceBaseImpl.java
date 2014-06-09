@@ -362,12 +362,6 @@ public abstract class RepositoryLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteRepository((Repository)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return repositoryPersistence.findByPrimaryKey(primaryKeyObj);

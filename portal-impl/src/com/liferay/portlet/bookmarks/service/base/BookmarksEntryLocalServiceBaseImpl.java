@@ -364,12 +364,6 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteBookmarksEntry((BookmarksEntry)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return bookmarksEntryPersistence.findByPrimaryKey(primaryKeyObj);

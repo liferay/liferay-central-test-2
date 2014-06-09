@@ -340,12 +340,6 @@ public abstract class AssetVocabularyLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteAssetVocabulary((AssetVocabulary)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return assetVocabularyPersistence.findByPrimaryKey(primaryKeyObj);

@@ -251,12 +251,6 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	}
 
 	@Override
-	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
-		throws PortalException {
-		return deleteJournalContentSearch((JournalContentSearch)persistedModel);
-	}
-
-	@Override
 	public PersistedModel getPersistedModel(Serializable primaryKeyObj)
 		throws PortalException {
 		return journalContentSearchPersistence.findByPrimaryKey(primaryKeyObj);
