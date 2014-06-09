@@ -64,44 +64,23 @@ public class PortalImplLayoutRelativeURLTest extends PortalImplBaseURLTestCase {
 	}
 
 	@Test
-	public void testPrivateLayoutFromCompanyVirtualHost() throws Exception {
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST);
-
+	public void testGetLayoutRelativeURL() throws Exception {
 		testGetLayoutRelativeURL(
-			themeDisplay, privateLayout, privateLayoutRelativeURL);
-	}
-
-	@Test
-	public void testPrivateLayoutURLFromPublicLayoutSetVirtualHost()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME);
-
+			initThemeDisplay(company, group, privateLayout, LOCALHOST),
+			privateLayout, privateLayoutRelativeURL);
 		testGetLayoutRelativeURL(
-			themeDisplay, privateLayout, privateLayoutRelativeURL);
-	}
-
-	@Test
-	public void testPublicLayoutFromCompanyVirtualHost() throws Exception {
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, publicLayout, LOCALHOST);
-			
+			initThemeDisplay(
+				company, group, privateLayout, LOCALHOST, VIRTUAL_HOSTNAME),
+			privateLayout, privateLayoutRelativeURL);
 		testGetLayoutRelativeURL(
-			themeDisplay, publicLayout, publicLayoutRelativeURL);
-	}
-	
-	@Test
-	public void testPublicLayoutURLFromPublicLayoutSetVirtualHost()
-		throws Exception {
-
-		ThemeDisplay themeDisplay = initThemeDisplay(
-			company, group, publicLayout, LOCALHOST, VIRTUAL_HOSTNAME);
+			initThemeDisplay(company, group, publicLayout, LOCALHOST),
+			publicLayout, publicLayoutRelativeURL);
 
 		String publicLayoutFriendlyURL = publicLayout.getFriendlyURL();
 		String layoutRelativeURL = PortalUtil.getLayoutRelativeURL(
-			publicLayout, themeDisplay);
+			publicLayout,
+			initThemeDisplay(
+				company, group, publicLayout, LOCALHOST, VIRTUAL_HOSTNAME));
 
 		Assert.assertTrue(
 			publicLayoutFriendlyURL.equals(layoutRelativeURL) ||
