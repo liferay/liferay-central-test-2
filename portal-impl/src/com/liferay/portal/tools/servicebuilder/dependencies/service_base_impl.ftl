@@ -496,11 +496,6 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		</#if>
 
 		@Override
-		public PersistedModel deletePersistedModel(PersistedModel persistedModel) throws PortalException {
-			return delete${entity.name}((${entity.name})persistedModel);
-		}
-
-		@Override
 		public PersistedModel getPersistedModel(Serializable primaryKeyObj) throws PortalException {
 			return ${entity.varName}Persistence.findByPrimaryKey(primaryKeyObj);
 		}
