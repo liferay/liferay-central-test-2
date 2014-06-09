@@ -40,8 +40,8 @@ ivydata-*.properties
 /test.*.properties
 /WEB-INF
 
-/.ivy/cache/resolved-*
 /.ivy/cache/*-default.xml
+/.ivy/cache/resolved-*
 
 /benchmarks/*.csv
 /benchmarks/*.sql
