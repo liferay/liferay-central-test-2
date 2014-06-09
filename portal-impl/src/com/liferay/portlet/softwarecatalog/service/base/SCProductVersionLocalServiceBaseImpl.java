@@ -248,9 +248,6 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("productVersionId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

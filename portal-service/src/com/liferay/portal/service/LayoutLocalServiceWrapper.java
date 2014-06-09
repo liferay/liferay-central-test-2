@@ -222,9 +222,6 @@ public class LayoutLocalServiceWrapper implements LayoutLocalService,
 		return _layoutLocalService.getExportActionableDynamicQuery(portletDataContext);
 	}
 
-	/**
-	* @throws PortalException
-	*/
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)

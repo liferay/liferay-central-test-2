@@ -246,9 +246,6 @@ public abstract class SystemEventLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("systemEventId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

@@ -243,9 +243,6 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("serviceComponentId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

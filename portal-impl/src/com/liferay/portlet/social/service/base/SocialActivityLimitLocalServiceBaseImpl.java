@@ -248,9 +248,6 @@ public abstract class SocialActivityLimitLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("activityLimitId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

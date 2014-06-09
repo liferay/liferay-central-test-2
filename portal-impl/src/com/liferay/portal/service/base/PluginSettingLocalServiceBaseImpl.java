@@ -245,9 +245,6 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("pluginSettingId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

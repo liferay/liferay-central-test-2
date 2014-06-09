@@ -335,9 +335,6 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return exportActionableDynamicQuery;
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

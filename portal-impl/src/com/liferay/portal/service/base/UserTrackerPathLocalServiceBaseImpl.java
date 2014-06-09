@@ -242,9 +242,6 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("userTrackerPathId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

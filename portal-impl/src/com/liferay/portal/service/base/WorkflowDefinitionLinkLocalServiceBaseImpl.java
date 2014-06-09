@@ -251,9 +251,6 @@ public abstract class WorkflowDefinitionLinkLocalServiceBaseImpl
 			"workflowDefinitionLinkId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

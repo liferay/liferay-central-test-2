@@ -230,9 +230,6 @@ public class DDMContentLocalServiceWrapper implements DDMContentLocalService,
 		return _ddmContentLocalService.getExportActionableDynamicQuery(portletDataContext);
 	}
 
-	/**
-	* @throws PortalException
-	*/
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)

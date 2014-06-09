@@ -232,9 +232,6 @@ public class BookmarksFolderLocalServiceWrapper
 		return _bookmarksFolderLocalService.getExportActionableDynamicQuery(portletDataContext);
 	}
 
-	/**
-	* @throws PortalException
-	*/
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)

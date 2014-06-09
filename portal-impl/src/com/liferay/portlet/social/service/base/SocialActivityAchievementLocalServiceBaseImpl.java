@@ -254,9 +254,6 @@ public abstract class SocialActivityAchievementLocalServiceBaseImpl
 			"activityAchievementId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

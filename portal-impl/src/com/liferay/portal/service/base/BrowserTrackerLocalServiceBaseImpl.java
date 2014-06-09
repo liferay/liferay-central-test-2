@@ -241,9 +241,6 @@ public abstract class BrowserTrackerLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("browserTrackerId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

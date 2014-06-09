@@ -341,9 +341,6 @@ public abstract class MDRActionLocalServiceBaseImpl extends BaseLocalServiceImpl
 		return exportActionableDynamicQuery;
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

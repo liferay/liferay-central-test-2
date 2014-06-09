@@ -247,9 +247,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("tableId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

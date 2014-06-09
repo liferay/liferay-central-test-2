@@ -195,9 +195,6 @@ public class PluginSettingLocalServiceWrapper
 		return _pluginSettingLocalService.getActionableDynamicQuery();
 	}
 
-	/**
-	* @throws PortalException
-	*/
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)

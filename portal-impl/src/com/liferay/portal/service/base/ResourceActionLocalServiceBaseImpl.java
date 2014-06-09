@@ -243,9 +243,6 @@ public abstract class ResourceActionLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourceActionId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

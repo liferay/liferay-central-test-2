@@ -248,9 +248,6 @@ public abstract class ResourcePermissionLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourcePermissionId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

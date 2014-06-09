@@ -259,9 +259,6 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("resourcePrimKey");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

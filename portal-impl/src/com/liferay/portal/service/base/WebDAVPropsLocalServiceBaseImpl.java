@@ -242,9 +242,6 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("webDavPropsId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

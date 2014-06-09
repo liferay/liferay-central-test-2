@@ -248,9 +248,6 @@ public abstract class AssetTagPropertyLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("tagPropertyId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

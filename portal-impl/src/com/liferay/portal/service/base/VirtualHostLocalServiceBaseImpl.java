@@ -243,9 +243,6 @@ public abstract class VirtualHostLocalServiceBaseImpl
 		actionableDynamicQuery.setPrimaryKeyPropertyName("virtualHostId");
 	}
 
-	/**
-	 * @throws PortalException
-	 */
 	@Override
 	public PersistedModel deletePersistedModel(PersistedModel persistedModel)
 		throws PortalException {

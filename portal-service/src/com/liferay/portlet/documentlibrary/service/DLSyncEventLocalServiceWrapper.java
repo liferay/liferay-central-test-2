@@ -196,9 +196,6 @@ public class DLSyncEventLocalServiceWrapper implements DLSyncEventLocalService,
 		return _dlSyncEventLocalService.getActionableDynamicQuery();
 	}
 
-	/**
-	* @throws PortalException
-	*/
 	@Override
 	public com.liferay.portal.model.PersistedModel deletePersistedModel(
 		com.liferay.portal.model.PersistedModel persistedModel)
