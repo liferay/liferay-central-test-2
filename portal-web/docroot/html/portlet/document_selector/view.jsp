@@ -41,11 +41,6 @@ if (folder != null) {
 	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
 
-int entryStart = ParamUtil.getInteger(request, "entryStart");
-int entryEnd = ParamUtil.getInteger(request, "entryEnd", PropsValues.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
-
-String keywords = ParamUtil.getString(request, "keywords");
-
 String eventName = ParamUtil.getString(request, "eventName");
 
 boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector");
@@ -53,9 +48,9 @@ boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector")
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/document_selector/view");
-portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("folderId", String.valueOf(folderId));
+portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 %>
 
@@ -220,9 +215,9 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 			>
 				<portlet:renderURL var="rowURL">
 					<portlet:param name="struts_action" value="/document_selector/view" />
-					<portlet:param name="eventName" value="<%= eventName %>" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+					<portlet:param name="eventName" value="<%= eventName %>" />
 					<portlet:param name="showGroupsSelector" value="<%= String.valueOf(showGroupsSelector) %>" />
 				</portlet:renderURL>
 
@@ -274,8 +269,8 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 	PortletURL backURL = renderResponse.createRenderURL();
 
 	backURL.setParameter("struts_action", "/document_selector/view");
-	backURL.setParameter("eventName", eventName);
 	backURL.setParameter("groupId", String.valueOf(groupId));
+	backURL.setParameter("eventName", eventName);
 	backURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 	%>
 
@@ -289,9 +284,9 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 	PortletURL iteratorURL = renderResponse.createRenderURL();
 
 	iteratorURL.setParameter("struts_action", "/document_selector/view");
-	iteratorURL.setParameter("eventName", eventName);
 	iteratorURL.setParameter("groupId", String.valueOf(groupId));
 	iteratorURL.setParameter("folderId", String.valueOf(folderId));
+	iteratorURL.setParameter("eventName", eventName);
 	iteratorURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 	%>
 
@@ -305,12 +300,23 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 
 		searchContext.setAttribute("groupId", groupId);
 		searchContext.setAttribute("paginationType", "regular");
+
+		int entryEnd = ParamUtil.getInteger(request, "entryEnd", PropsValues.SEARCH_CONTAINER_PAGE_DEFAULT_DELTA);
+
 		searchContext.setEnd(entryEnd);
+
 		searchContext.setFolderIds(new long[]{folderId});
 		searchContext.setGroupIds(new long[] {groupId});
 		searchContext.setIncludeFolders(false);
+
+		String keywords = ParamUtil.getString(request, "keywords");
+
 		searchContext.setKeywords(keywords);
+
 		searchContext.setScopeStrict(false);
+
+		int entryStart = ParamUtil.getInteger(request, "entryStart");
+
 		searchContext.setStart(entryStart);
 
 		Hits hits = DLAppServiceUtil.search(repositoryId, searchContext);
