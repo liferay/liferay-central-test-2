@@ -121,7 +121,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	}
 
 	@Override
-	@SuppressWarnings("unused")
 	public Map<Serializable, T> fetchByPrimaryKeys(
 			Set<Serializable> primaryKeys)
 		throws SystemException {
