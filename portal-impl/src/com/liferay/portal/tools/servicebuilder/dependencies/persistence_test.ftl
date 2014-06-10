@@ -506,6 +506,56 @@ public class ${entity.name}PersistenceTest {
 	</#if>
 
 	@Test
+	public void testFetchByPrimaryKeyExisting() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		${entity.name} existing${entity.name} = _persistence.fetchByPrimaryKey(new${entity.name}.getPrimaryKey());
+
+		Assert.assertEquals(existing${entity.name}, new${entity.name});
+	}
+
+	@Test
+	public void testFetchByPrimaryKeyMissing() throws Exception {
+		<#if entity.hasCompoundPK()>
+			${entity.PKClassName} pk = new ${entity.PKClassName}(
+
+			<#list entity.PKList as column>
+				<#if column.type == "int">
+					RandomTestUtil.nextInt()
+				<#elseif column.type == "long">
+					RandomTestUtil.nextLong()
+				<#elseif column.type == "String">
+					RandomTestUtil.randomString()
+				</#if>
+
+				<#if column_has_next>
+					,
+				</#if>
+			</#list>
+
+			);
+		<#else>
+			<#assign column = entity.PKList[0]>
+
+			${column.type} pk =
+
+			<#if column.type == "int">
+				RandomTestUtil.nextInt()
+			<#elseif column.type == "long">
+				RandomTestUtil.nextLong()
+			<#elseif column.type == "String">
+				RandomTestUtil.randomString()
+			</#if>
+
+			;
+		</#if>
+
+		${entity.name} missing${entity.name} = _persistence.fetchByPrimaryKey(pk);
+
+		Assert.assertNull(missing${entity.name});
+	}
+
+	@Test
 	public void testFetchByPrimaryKeysEmptyInput() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
@@ -527,7 +577,6 @@ public class ${entity.name}PersistenceTest {
 		Assert.assertEquals(1, ${entity.varNames}.size());
 		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
 	}
-
 
 	@Test
 	public void testFetchByPrimaryKeysNoneExist() throws Exception {
@@ -667,56 +716,6 @@ public class ${entity.name}PersistenceTest {
 		Assert.assertEquals(2, ${entity.varNames}.size());
 		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
 		Assert.assertEquals(new${entity.name}2, ${entity.varNames}.get(new${entity.name}2.getPrimaryKey()));
-	}
-
-	@Test
-	public void testFetchByPrimaryKeyExisting() throws Exception {
-		${entity.name} new${entity.name} = add${entity.name}();
-
-		${entity.name} existing${entity.name} = _persistence.fetchByPrimaryKey(new${entity.name}.getPrimaryKey());
-
-		Assert.assertEquals(existing${entity.name}, new${entity.name});
-	}
-
-	@Test
-	public void testFetchByPrimaryKeyMissing() throws Exception {
-		<#if entity.hasCompoundPK()>
-			${entity.PKClassName} pk = new ${entity.PKClassName}(
-
-			<#list entity.PKList as column>
-				<#if column.type == "int">
-					RandomTestUtil.nextInt()
-				<#elseif column.type == "long">
-					RandomTestUtil.nextLong()
-				<#elseif column.type == "String">
-					RandomTestUtil.randomString()
-				</#if>
-
-				<#if column_has_next>
-					,
-				</#if>
-			</#list>
-
-			);
-		<#else>
-			<#assign column = entity.PKList[0]>
-
-			${column.type} pk =
-
-			<#if column.type == "int">
-				RandomTestUtil.nextInt()
-			<#elseif column.type == "long">
-				RandomTestUtil.nextLong()
-			<#elseif column.type == "String">
-				RandomTestUtil.randomString()
-			</#if>
-
-			;
-		</#if>
-
-		${entity.name} missing${entity.name} = _persistence.fetchByPrimaryKey(pk);
-
-		Assert.assertNull(missing${entity.name});
 	}
 
 	<#if entity.hasActionableDynamicQuery()>
