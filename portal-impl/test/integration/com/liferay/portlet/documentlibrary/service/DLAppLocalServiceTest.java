@@ -159,8 +159,8 @@ public class DLAppLocalServiceTest {
 
 		DLAppLocalServiceUtil.updateFolder(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "foo", StringPool.BLANK,
-			serviceContext);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
 	protected FileEntry addFileEntry(ServiceContext serviceContext)

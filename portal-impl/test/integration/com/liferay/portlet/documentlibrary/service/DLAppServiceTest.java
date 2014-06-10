@@ -473,8 +473,8 @@ public class DLAppServiceTest extends BaseDLAppTestCase {
 			ServiceContextTestUtil.getServiceContext(group.getGroupId());
 
 		DLAppServiceUtil.updateFolder(
-			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "foo", StringPool.BLANK,
-			serviceContext);
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			RandomTestUtil.randomString(), StringPool.BLANK, serviceContext);
 	}
 
 	@Test
