@@ -1080,9 +1080,9 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		Parameters parameters = OSGiHeader.parseHeader(exportPackage);
 
 		for (Map.Entry<String, Attrs> entry : parameters.entrySet()) {
-			Attrs entryValue = entry.getValue();
+			Attrs attrs = entry.getValue();
 
-			if (entryValue.isEmpty()) {
+			if (attrs.isEmpty()) {
 				continue;
 			}
 
