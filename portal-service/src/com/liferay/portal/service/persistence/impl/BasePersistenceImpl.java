@@ -87,8 +87,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	}
 
 	@Override
-	public long countWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public long countWithDynamicQuery(DynamicQuery dynamicQuery) {
 
 		return countWithDynamicQuery(
 			dynamicQuery, ProjectionFactoryUtil.rowCount());
@@ -96,8 +95,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	@Override
 	public long countWithDynamicQuery(
-			DynamicQuery dynamicQuery, Projection projection)
-		throws SystemException {
+			DynamicQuery dynamicQuery, Projection projection) {
 
 		if (projection == null) {
 			projection = ProjectionFactoryUtil.rowCount();
@@ -138,8 +136,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 
 	@Override
 	@SuppressWarnings("rawtypes")
-	public List findWithDynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
+	public List findWithDynamicQuery(DynamicQuery dynamicQuery) {
 
 		Session session = null;
 
@@ -161,8 +158,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	@Override
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
-			DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+			DynamicQuery dynamicQuery, int start, int end) {
 
 		Session session = null;
 
@@ -187,8 +183,7 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	@SuppressWarnings("rawtypes")
 	public List findWithDynamicQuery(
 			DynamicQuery dynamicQuery, int start, int end,
-			OrderByComparator orderByComparator)
-		throws SystemException {
+			OrderByComparator orderByComparator) {
 
 		OrderFactoryUtil.addOrderByComparator(dynamicQuery, orderByComparator);
 
@@ -397,15 +392,13 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 */
 	@Deprecated
 	@Override
-	public T update(T model, boolean merge, ServiceContext serviceContext)
-		throws SystemException {
+	public T update(T model, boolean merge, ServiceContext serviceContext) {
 
 		return update(model, serviceContext);
 	}
 
 	@Override
-	public T update(T model, ServiceContext serviceContext)
-		throws SystemException {
+	public T update(T model, ServiceContext serviceContext) {
 
 		try {
 			ServiceContextThreadLocal.pushServiceContext(serviceContext);
