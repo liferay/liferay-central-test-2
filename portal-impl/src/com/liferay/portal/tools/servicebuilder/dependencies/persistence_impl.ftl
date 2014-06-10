@@ -861,18 +861,18 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 			return Collections.emptyMap();
 		}
 
-		Map<Serializable, ${entity.name}> results = new HashMap<Serializable, ${entity.name}>();
+		Map<Serializable, ${entity.name}> map = new HashMap<Serializable, ${entity.name}>();
 
 		<#if entity.hasCompoundPK()>
 			for (Serializable primaryKey : primaryKeys) {
 				${entity.name} ${entity.varName} = fetchByPrimaryKey(primaryKey);
 
 				if (${entity.varName} != null) {
-					results.put(primaryKey, ${entity.varName});
+					map.put(primaryKey, ${entity.varName});
 				}
 			}
 
-			return results;
+			return map;
 		<#else>
 			if (primaryKeys.size() == 1) {
 				Iterator<Serializable> iterator = primaryKeys.iterator();
@@ -882,42 +882,42 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				${entity.name} ${entity.varName} = fetchByPrimaryKey(primaryKey);
 
 				if (${entity.varName} != null) {
-					results.put(primaryKey, ${entity.varName});
+					map.put(primaryKey, ${entity.varName});
 				}
 
-				return results;
+				return map;
 			}
 
-			Set<Serializable> cacheMissPks = null;
+			Set<Serializable> uncachedPrimaryKeys = null;
 
 			for (Serializable primaryKey : primaryKeys) {
 				${entity.name} ${entity.varName} = (${entity.name})EntityCacheUtil.getResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, primaryKey);
 
 				if (${entity.varName} == null) {
-					if (cacheMissPks == null) {
-						cacheMissPks = new HashSet<Serializable>();
+					if (uncachedPrimaryKeys == null) {
+						uncachedPrimaryKeys = new HashSet<Serializable>();
 					}
 
-					cacheMissPks.add(primaryKey);
+					uncachedPrimaryKeys.add(primaryKey);
 				}
 				else {
-					results.put(primaryKey, ${entity.varName});
+					map.put(primaryKey, ${entity.varName});
 				}
 			}
 
-			if (cacheMissPks == null) {
-				return results;
+			if (uncachedPrimaryKeys == null) {
+				return map;
 			}
 
 			<#if entity.PKClassName == "String">
-				StringBundler query = new StringBundler(cacheMissPks.size() * 4 + 1);
+				StringBundler query = new StringBundler(uncachedPrimaryKeys.size() * 4 + 1);
 			<#else>
-				StringBundler query = new StringBundler(cacheMissPks.size() * 2 + 1);
+				StringBundler query = new StringBundler(uncachedPrimaryKeys.size() * 2 + 1);
 			</#if>
 
 			query.append(_SQL_SELECT_${entity.alias?upper_case}_WHERE_PKS_IN);
 
-			for (Serializable primaryKey : cacheMissPks) {
+			for (Serializable primaryKey : uncachedPrimaryKeys) {
 				<#if entity.PKClassName == "String">
 					query.append(StringPool.QUOTE);
 					query.append((String)primaryKey);
@@ -943,14 +943,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				Query q = session.createQuery(sql);
 
 				for (${entity.name} ${entity.varName} : (List<${entity.name}>)q.list()) {
-					results.put(${entity.varName}.getPrimaryKeyObj(), ${entity.varName});
+					map.put(${entity.varName}.getPrimaryKeyObj(), ${entity.varName});
 
 					cacheResult(${entity.varName});
 
-					cacheMissPks.remove(${entity.varName}.getPrimaryKeyObj());
+					uncachedPrimaryKeys.remove(${entity.varName}.getPrimaryKeyObj());
 				}
 
-				for (Serializable primaryKey : cacheMissPks) {
+				for (Serializable primaryKey : uncachedPrimaryKeys) {
 					EntityCacheUtil.putResult(${entity.name}ModelImpl.ENTITY_CACHE_ENABLED, ${entity.name}Impl.class, primaryKey, _null${entity.name});
 				}
 			}
@@ -961,7 +961,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 				closeSession(session);
 			}
 
-			return results;
+			return map;
 		</#if>
 	}
 
