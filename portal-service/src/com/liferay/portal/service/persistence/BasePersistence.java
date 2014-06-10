@@ -120,13 +120,6 @@ public interface BasePersistence<T extends BaseModel<T>> {
 	 */
 	public T fetchByPrimaryKey(Serializable primaryKey) throws SystemException;
 
-	/**
-	 * Returns a map of model instances with the primary keys provided
-	 *
-	 * @param  primaryKeys the set of keys for the model instances
-	 * @return a map of the model instances
-	 * @throws SystemException if a system exception occurred
-	 */
 	public Map<Serializable, T> fetchByPrimaryKeys(
 			Set<Serializable> primaryKeys)
 		throws SystemException;
