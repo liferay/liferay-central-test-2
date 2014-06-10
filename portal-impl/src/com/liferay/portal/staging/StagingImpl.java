@@ -882,9 +882,7 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
-	public Group getLiveGroup(long groupId)
-		throws PortalException {
-
+	public Group getLiveGroup(long groupId) throws PortalException {
 		if (groupId == 0) {
 			return null;
 		}
@@ -904,9 +902,7 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
-	public long getLiveGroupId(long groupId)
-		throws PortalException {
-
+	public long getLiveGroupId(long groupId) throws PortalException {
 		if (groupId == 0) {
 			return groupId;
 		}
@@ -1270,9 +1266,7 @@ public class StagingImpl implements Staging {
 	}
 
 	@Override
-	public void lockGroup(long userId, long groupId)
-		throws PortalException {
-
+	public void lockGroup(long userId, long groupId) throws PortalException {
 		if (!PropsValues.STAGING_LOCK_ENABLED) {
 			return;
 		}
