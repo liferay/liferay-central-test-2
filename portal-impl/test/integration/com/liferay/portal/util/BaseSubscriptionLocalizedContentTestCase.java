@@ -19,7 +19,6 @@ import com.dumbster.smtp.MailMessage;
 import com.liferay.portal.kernel.util.LocaleThreadLocal;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.LocalizationUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.test.LayoutTestUtil;
@@ -84,9 +83,7 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 	protected abstract void addSubscriptionContainerModel(long containerModelId)
 		throws Exception;
 
-	protected String getPortletId() {
-		return StringPool.BLANK;
-	}
+	protected abstract String getPortletId();
 
 	protected abstract String getSubscriptionBodyPreferenceName()
 		throws Exception;
