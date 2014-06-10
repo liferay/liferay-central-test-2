@@ -292,7 +292,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 
 	protected void addFileEntryTypeAttributes(
 			Document document, DLFileVersion dlFileVersion)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<DLFileEntryMetadata> dlFileEntryMetadatas =
 			DLFileEntryMetadataLocalServiceUtil.
@@ -597,7 +597,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 
 	protected void reindexFileEntries(
 			long companyId, final long groupId, final long dataRepositoryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		final ActionableDynamicQuery actionableDynamicQuery =
 			DLFileEntryLocalServiceUtil.getActionableDynamicQuery();
@@ -641,7 +641,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 	}
 
 	protected void reindexFolders(final long companyId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			DLFolderLocalServiceUtil.getActionableDynamicQuery();
@@ -674,7 +674,7 @@ public class DLFileEntryIndexer extends BaseIndexer {
 	}
 
 	protected void reindexRoot(final long companyId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ActionableDynamicQuery actionableDynamicQuery =
 			GroupLocalServiceUtil.getActionableDynamicQuery();

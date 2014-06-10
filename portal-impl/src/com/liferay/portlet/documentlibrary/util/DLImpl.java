@@ -352,7 +352,7 @@ public class DLImpl implements DL {
 
 	@Override
 	public String getAbsolutePath(PortletRequest portletRequest, long folderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -436,7 +436,7 @@ public class DLImpl implements DL {
 	@Override
 	public String getDLFileEntryControlPanelLink(
 			PortletRequest portletRequest, long fileEntryId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -456,7 +456,7 @@ public class DLImpl implements DL {
 	@Override
 	public String getDLFolderControlPanelLink(
 			PortletRequest portletRequest, long folderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -1001,7 +1001,7 @@ public class DLImpl implements DL {
 	@Override
 	public String getWebDavURL(
 			ThemeDisplay themeDisplay, Folder folder, FileEntry fileEntry)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getWebDavURL(themeDisplay, folder, fileEntry, false);
 	}
@@ -1010,7 +1010,7 @@ public class DLImpl implements DL {
 	public String getWebDavURL(
 			ThemeDisplay themeDisplay, Folder folder, FileEntry fileEntry,
 			boolean manualCheckInRequired)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getWebDavURL(
 			themeDisplay, folder, fileEntry, manualCheckInRequired, false);
@@ -1020,7 +1020,7 @@ public class DLImpl implements DL {
 	public String getWebDavURL(
 			ThemeDisplay themeDisplay, Folder folder, FileEntry fileEntry,
 			boolean manualCheckInRequired, boolean openDocumentUrl)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		StringBundler webDavURL = new StringBundler(8);
 
@@ -1170,7 +1170,7 @@ public class DLImpl implements DL {
 	@Override
 	public boolean isSubscribedToFolder(
 			long companyId, long groupId, long userId, long folderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return isSubscribedToFolder(companyId, groupId, userId, folderId, true);
 	}
@@ -1179,7 +1179,7 @@ public class DLImpl implements DL {
 	public boolean isSubscribedToFolder(
 			long companyId, long groupId, long userId, long folderId,
 			boolean recursive)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		List<Long> ancestorFolderIds = new ArrayList<Long>();
 
@@ -1229,7 +1229,7 @@ public class DLImpl implements DL {
 	public void startWorkflowInstance(
 			long userId, DLFileVersion dlFileVersion, String syncEventType,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		Map<String, Serializable> workflowContext =
 			new HashMap<String, Serializable>();
@@ -1248,7 +1248,7 @@ public class DLImpl implements DL {
 
 	protected String getEntryURL(
 			DLFileVersion dlFileVersion, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		HttpServletRequest request = serviceContext.getRequest();
 
