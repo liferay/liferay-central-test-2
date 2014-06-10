@@ -42,8 +42,6 @@ import org.osgi.framework.BundleContext;
  */
 public class WabURLConnection extends URLConnection {
 
-	public static final String WEB_CONTEXTPATH = "Web-ContextPath";
-
 	public WabURLConnection(
 		BundleContext bundleContext, ClassLoader classLoader, URL url) {
 
@@ -52,7 +50,7 @@ public class WabURLConnection extends URLConnection {
 		_bundleContext = bundleContext;
 		_classLoader = classLoader;
 
-		_wireSpringUtils();
+		wireSpringUtils();
 	}
 
 	@Override
@@ -67,43 +65,41 @@ public class WabURLConnection extends URLConnection {
 
 		Map<String, String[]> parameters = HttpUtil.getParameterMap(query);
 
-		if (!parameters.containsKey(WEB_CONTEXTPATH)) {
+		if (!parameters.containsKey("Web-ContextPath")) {
 			throw new IllegalArgumentException(
-				WEB_CONTEXTPATH + " parameter is required");
+				"The parameter map does not contain the required parameter " +
+					"Web-ContextPath");
 		}
 
-		URL innerURL = new URL(url.getPath());
-
-		File tempFile = _transferToTempFolder(innerURL);
+		File file = transferToTempFile(new URL(url.getPath()));
 
 		try {
 			WabProcessor wabProcessor = new WabProcessor(
-				_bundleContext, _classLoader, tempFile, parameters);
+				_bundleContext, _classLoader, file, parameters);
 
 			wabProcessor.process();
 
 			return wabProcessor.getInputStream();
 		}
 		finally {
-			FileUtil.deltree(tempFile.getParentFile());
+			FileUtil.deltree(file.getParentFile());
 		}
 	}
 
-	private File _transferToTempFolder(URL url) throws IOException {
-		File tempFolder = FileUtil.createTempFolder();
+	protected File transferToTempFile(URL url) throws IOException {
+		String path = url.getPath();
 
-		int start = url.getPath().lastIndexOf(StringPool.SLASH);
+		String fileName = path.substring(
+			path.lastIndexOf(StringPool.SLASH) + 1);
 
-		String fileName = url.getPath().substring(start + 1);
+		File file = new File(FileUtil.createTempFolder(), fileName);
 
-		File tempFile = new File(tempFolder, fileName);
+		StreamUtil.transfer(url.openStream(), new FileOutputStream(file));
 
-		StreamUtil.transfer(url.openStream(), new FileOutputStream(tempFile));
-
-		return tempFile;
+		return file;
 	}
 
-	private void _wireSpringUtils() {
+	protected void wireSpringUtils() {
 		if (FastDateFormatFactoryUtil.getFastDateFormatFactory() == null) {
 			FastDateFormatFactoryUtil instance =
 				new FastDateFormatFactoryUtil();
