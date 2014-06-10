@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 /**
@@ -29,7 +30,7 @@ public interface FinderCache {
 
 	public Object getResult(
 		FinderPath finderPath, Object[] args,
-		BasePersistenceImpl basePersistenceImpl);
+		BasePersistenceImpl<? extends BaseModel<?>> basePersistenceImpl);
 
 	public void invalidate();
 

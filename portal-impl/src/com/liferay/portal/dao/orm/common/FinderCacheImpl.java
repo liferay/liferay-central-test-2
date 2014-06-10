@@ -97,7 +97,7 @@ public class FinderCacheImpl
 	@Override
 	public Object getResult(
 		FinderPath finderPath, Object[] args,
-		BasePersistenceImpl basePersistenceImpl) {
+		BasePersistenceImpl<? extends BaseModel<?>> basePersistenceImpl) {
 
 		if (!PropsValues.VALUE_OBJECT_FINDER_CACHE_ENABLED ||
 			!finderPath.isFinderCacheEnabled() ||
@@ -269,35 +269,37 @@ public class FinderCacheImpl
 	}
 
 	private Serializable _primaryKeyToResult(
-		FinderPath finderPath, BasePersistenceImpl basePersistenceImpl,
+		FinderPath finderPath,
+		BasePersistenceImpl<? extends BaseModel<?>> basePersistenceImpl,
 		Serializable primaryKey) {
 
 		if (primaryKey instanceof List<?>) {
-			List<Serializable> cachedPrimaryKeyList =
+			List<Serializable> primaryKeys =
 				(List<Serializable>)primaryKey;
 
-			if (cachedPrimaryKeyList.isEmpty()) {
+			if (primaryKeys.isEmpty()) {
 				return (Serializable)Collections.emptyList();
 			}
 
-			Set<Serializable> cachedPrimaryKeySet = new HashSet<Serializable>(
-				cachedPrimaryKeyList);
+			Set<Serializable> primaryKeysSet = new HashSet<Serializable>(
+				primaryKeys);
 
-			Map<Serializable, Serializable> resultMap =
-				basePersistenceImpl.fetchByPrimaryKeys(cachedPrimaryKeySet);
+			Map<Serializable, Serializable> map =
+				(Map<Serializable, Serializable>)
+					basePersistenceImpl.fetchByPrimaryKeys(primaryKeysSet);
 
-			if (resultMap.size() < cachedPrimaryKeySet.size()) {
+			if (map.size() < primaryKeysSet.size()) {
 				return null;
 			}
 
-			List<Serializable> resultList = new ArrayList<Serializable>(
-				cachedPrimaryKeyList.size());
+			List<Serializable> list = new ArrayList<Serializable>(
+				primaryKeys.size());
 
-			for (Serializable cachedPrimaryKey : cachedPrimaryKeyList) {
-				resultList.add(resultMap.get(cachedPrimaryKey));
+			for (Serializable curPrimaryKey : primaryKeys) {
+				list.add(map.get(curPrimaryKey));
 			}
 
-			return (Serializable)Collections.unmodifiableList(resultList);
+			return (Serializable)Collections.unmodifiableList(list);
 		}
 		else if (BaseModel.class.isAssignableFrom(
 					finderPath.getResultClass())) {
