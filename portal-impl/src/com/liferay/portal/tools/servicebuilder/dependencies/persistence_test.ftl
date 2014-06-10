@@ -556,7 +556,7 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysEmptyInput() throws Exception {
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
@@ -565,7 +565,7 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysSingleInput() throws Exception {
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
 		${entity.name} new${entity.name} = add${entity.name}();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
@@ -579,9 +579,9 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysNoneExist() throws Exception {
+	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereNoPrimaryKeysExist() throws Exception {
 		<#if entity.hasCompoundPK()>
-			${entity.PKClassName} pk = new ${entity.PKClassName}(
+			${entity.PKClassName} pk1 = new ${entity.PKClassName}(
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
@@ -619,7 +619,7 @@ public class ${entity.name}PersistenceTest {
 		<#else>
 			<#assign column = entity.PKList[0]>
 
-			${column.type} pk =
+			${column.type} pk1 =
 
 			<#if column.type == "int">
 				RandomTestUtil.nextInt()
@@ -646,7 +646,7 @@ public class ${entity.name}PersistenceTest {
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(pk);
+		primaryKeys.add(pk1);
 		primaryKeys.add(pk2);
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
@@ -655,11 +655,11 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysSomeExist() throws Exception {
+	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereSomePrimaryKeysExist() throws Exception {
 		${entity.name} new${entity.name} = add${entity.name}();
 
 		<#if entity.hasCompoundPK()>
-			${entity.PKClassName} pk2 = new ${entity.PKClassName}(
+			${entity.PKClassName} pk = new ${entity.PKClassName}(
 
 			<#list entity.PKList as column>
 				<#if column.type == "int">
@@ -677,7 +677,7 @@ public class ${entity.name}PersistenceTest {
 
 			);
 		<#else>
-			${column.type} pk2 =
+			${column.type} pk =
 
 			<#if column.type == "int">
 				RandomTestUtil.nextInt()
@@ -693,7 +693,7 @@ public class ${entity.name}PersistenceTest {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
 		primaryKeys.add(new${entity.name}.getPrimaryKey());
-		primaryKeys.add(pk2);
+		primaryKeys.add(pk);
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
 
@@ -702,19 +702,19 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysAllExist() throws Exception {
-		${entity.name} new${entity.name} = add${entity.name}();
+	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist() throws Exception {
+		${entity.name} new${entity.name}1 = add${entity.name}();
 		${entity.name} new${entity.name}2 = add${entity.name}();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(new${entity.name}.getPrimaryKey());
+		primaryKeys.add(new${entity.name}1.getPrimaryKey());
 		primaryKeys.add(new${entity.name}2.getPrimaryKey());
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
 
 		Assert.assertEquals(2, ${entity.varNames}.size());
-		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
+		Assert.assertEquals(new${entity.name}1, ${entity.varNames}.get(new${entity.name}1.getPrimaryKey()));
 		Assert.assertEquals(new${entity.name}2, ${entity.varNames}.get(new${entity.name}2.getPrimaryKey()));
 	}
 
