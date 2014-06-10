@@ -855,12 +855,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl<${entity.
 		return fetchByPrimaryKey((Serializable)${entity.PKVarName});
 	}
 
-	/**
-	 * Returns a map of ${entity.humanNames} for the primary keys provided.
-	 *
-	 * @param  primaryKeys the set of primaryKeys for which to fetch the ${entity.humanNames}
-	 * @return map of primaryKeys to ${entity.humanNames}.
-	 */
 	@Override
 	public Map<Serializable, ${entity.name}> fetchByPrimaryKeys(Set<Serializable> primaryKeys) {
 		if (primaryKeys.isEmpty()) {
