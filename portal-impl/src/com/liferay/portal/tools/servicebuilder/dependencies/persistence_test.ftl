@@ -556,26 +556,20 @@ public class ${entity.name}PersistenceTest {
 	}
 
 	@Test
-	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
-		Set<Serializable> primaryKeys = new HashSet<Serializable>();
-
-		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
-
-		Assert.assertTrue(${entity.varNames}.isEmpty());
-	}
-
-	@Test
-	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
-		${entity.name} new${entity.name} = add${entity.name}();
+	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist() throws Exception {
+		${entity.name} new${entity.name}1 = add${entity.name}();
+		${entity.name} new${entity.name}2 = add${entity.name}();
 
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
 
-		primaryKeys.add(new${entity.name}.getPrimaryKey());
+		primaryKeys.add(new${entity.name}1.getPrimaryKey());
+		primaryKeys.add(new${entity.name}2.getPrimaryKey());
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(1, ${entity.varNames}.size());
-		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
+		Assert.assertEquals(2, ${entity.varNames}.size());
+		Assert.assertEquals(new${entity.name}1, ${entity.varNames}.get(new${entity.name}1.getPrimaryKey()));
+		Assert.assertEquals(new${entity.name}2, ${entity.varNames}.get(new${entity.name}2.getPrimaryKey()));
 	}
 
 	@Test
@@ -701,21 +695,28 @@ public class ${entity.name}PersistenceTest {
 		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
 	}
 
+
 	@Test
-	public void testFetchByPrimaryKeysWithMultiplePrimaryKeysWhereAllPrimaryKeysExist() throws Exception {
-		${entity.name} new${entity.name}1 = add${entity.name}();
-		${entity.name} new${entity.name}2 = add${entity.name}();
-
+	public void testFetchByPrimaryKeysWithNoPrimaryKeys() throws Exception {
 		Set<Serializable> primaryKeys = new HashSet<Serializable>();
-
-		primaryKeys.add(new${entity.name}1.getPrimaryKey());
-		primaryKeys.add(new${entity.name}2.getPrimaryKey());
 
 		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
 
-		Assert.assertEquals(2, ${entity.varNames}.size());
-		Assert.assertEquals(new${entity.name}1, ${entity.varNames}.get(new${entity.name}1.getPrimaryKey()));
-		Assert.assertEquals(new${entity.name}2, ${entity.varNames}.get(new${entity.name}2.getPrimaryKey()));
+		Assert.assertTrue(${entity.varNames}.isEmpty());
+	}
+
+	@Test
+	public void testFetchByPrimaryKeysWithOnePrimaryKey() throws Exception {
+		${entity.name} new${entity.name} = add${entity.name}();
+
+		Set<Serializable> primaryKeys = new HashSet<Serializable>();
+
+		primaryKeys.add(new${entity.name}.getPrimaryKey());
+
+		Map<Serializable, ${entity.name}> ${entity.varNames} = _persistence.fetchByPrimaryKeys(primaryKeys);
+
+		Assert.assertEquals(1, ${entity.varNames}.size());
+		Assert.assertEquals(new${entity.name}, ${entity.varNames}.get(new${entity.name}.getPrimaryKey()));
 	}
 
 	<#if entity.hasActionableDynamicQuery()>
