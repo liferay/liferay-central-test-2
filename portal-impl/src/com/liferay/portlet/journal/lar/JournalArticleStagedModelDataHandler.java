@@ -15,7 +15,6 @@
 package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.lar.BaseStagedModelDataHandler;
@@ -139,7 +138,7 @@ public class JournalArticleStagedModelDataHandler
 		}
 		catch (Exception e) {
 			throw new IllegalStateException(
-				"Unable to find article resource for article: " +
+				"Unable to find article resource for article " +
 					article.getArticleId());
 		}
 
@@ -797,8 +796,9 @@ public class JournalArticleStagedModelDataHandler
 	}
 
 	protected JournalArticle fetchExistingArticle(
-		String articleResourceUuid, long groupId, String articleId,
-		String newArticleId, double version, boolean preloaded) {
+			String articleResourceUuid, long groupId, String articleId,
+			String newArticleId, double version, boolean preloaded)
+		throws PortalException {
 
 		JournalArticleResource existingArticleResource = null;
 
@@ -834,12 +834,20 @@ public class JournalArticleStagedModelDataHandler
 				groupId, articleId, version);
 
 			if (existingArticle != null) {
-				throw new PortletDataException(
-					"Article " + articleId + " with version " + version +
-						" already exists with different resource. " +
-						"Resource uuid in LAR: " + articleResourceUuid +
-						" resource uuid in database: " +
-						existingArticle.getArticleResourceUuid());
+				StringBundler sb = new StringBundler(10);
+
+				sb.append("The article in the LAR file with article resource ");
+				sb.append("UUID ");
+				sb.append(articleResourceUuid);
+				sb.append(", article ID ");
+				sb.append(articleId);
+				sb.append(", and version ");
+				sb.append(version);
+				sb.append("conflicts with an article in the database with ");
+				sb.append("article resource UUID ");
+				sb.append(existingArticle.getArticleResourceUuid());
+
+				throw new PortletDataException(sb.toString());
 			}
 		}
 
