@@ -25,8 +25,8 @@ import java.util.Properties;
  */
 public interface ColorScheme extends Comparable<ColorScheme>, Serializable {
 
-	public static final Accessor<ColorScheme, String>
-		COLOR_SCHEME_NAME_ACCESSOR = new Accessor<ColorScheme, String>() {
+	public static final Accessor<ColorScheme, String> NAME_ACCESSOR =
+		new Accessor<ColorScheme, String>() {
 
 			@Override
 			public String get(ColorScheme colorScheme) {

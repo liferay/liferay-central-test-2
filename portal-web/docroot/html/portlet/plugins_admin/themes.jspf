@@ -93,7 +93,7 @@ List themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId());
 
 				<liferay-ui:message key="color-schemes" />:
 
-				<%= ListUtil.toString(colorSchemes, ColorScheme.COLOR_SCHEME_NAME_ACCESSOR, StringPool.COMMA_AND_SPACE) %>
+				<%= ListUtil.toString(colorSchemes, ColorScheme.NAME_ACCESSOR, StringPool.COMMA_AND_SPACE) %>
 			</c:if>
 		</liferay-ui:search-container-column-text>
 
