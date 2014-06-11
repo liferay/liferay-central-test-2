@@ -425,7 +425,7 @@ public class PortalInstances {
 
 			PrincipalThreadLocal.setName(principalName);
 
-			// Search Engine
+			// Search engine
 
 			SearchEngineUtil.initialize(companyId);
 

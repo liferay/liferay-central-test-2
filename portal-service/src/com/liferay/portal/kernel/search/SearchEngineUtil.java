@@ -886,12 +886,12 @@ public class SearchEngineUtil {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Search engine registered, proceeding");
+				_log.debug("Registered search engine");
 			}
 		}
-		catch (InterruptedException e) {
+		catch (InterruptedException ie) {
 			if (_log.isDebugEnabled()) {
-				_log.debug("Service tracker interrupted", e);
+				_log.debug("Interrupted search engine registration", ie);
 			}
 		}
 	}
