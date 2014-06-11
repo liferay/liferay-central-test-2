@@ -982,9 +982,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			newContent = StringUtil.replace(newContent, "$\n */", "$\n *\n */");
 		}
 
-		newContent = fixCopyright(
-			newContent, getCopyright(), getOldCopyright(), absolutePath,
-			fileName);
+		newContent = fixCopyright(newContent, absolutePath, fileName);
 
 		if (newContent.contains(className + ".java.html")) {
 			processErrorMessage(fileName, "Java2HTML: " + fileName);

@@ -395,18 +395,27 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 	}
 
 	protected String fixCopyright(
-			String content, String copyright, String oldCopyright,
-			String absolutePath, String fileName)
+			String content, String absolutePath, String fileName)
 		throws IOException {
+
+		if (_copyright == null) {
+			_copyright = getContent("copyright.txt", 4);
+		}
+
+		String copyright = _copyright;
 
 		if (fileName.endsWith(".vm") || Validator.isNull(copyright)) {
 			return content;
 		}
 
-		if (Validator.isNotNull(oldCopyright) &&
-			content.contains(oldCopyright)) {
+		if (_oldCopyright == null) {
+			_oldCopyright = getContent("old-copyright.txt", 4);
+		}
 
-			content = StringUtil.replace(content, oldCopyright, copyright);
+		if (Validator.isNotNull(_oldCopyright) &&
+			content.contains(_oldCopyright)) {
+
+			content = StringUtil.replace(content, _oldCopyright, copyright);
 
 			processErrorMessage(fileName, "old (c): " + fileName);
 		}
@@ -606,30 +615,18 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		return _compatClassNamesMap;
 	}
 
-	protected String getCopyright() throws IOException {
-		if (_copyright != null) {
-			return _copyright;
+	protected String getContent(String fileName, int level) throws IOException {
+		for (int i = 0; i < level; i++) {
+			String content = fileUtil.read(fileName);
+
+			if (Validator.isNotNull(content)) {
+				return content;
+			}
+
+			fileName = "../" + fileName;
 		}
 
-		_copyright = fileUtil.read("copyright.txt");
-
-		if (Validator.isNull(_copyright)) {
-			_copyright = fileUtil.read("../copyright.txt");
-		}
-
-		if (Validator.isNull(_copyright)) {
-			_copyright = fileUtil.read("../../copyright.txt");
-		}
-
-		if (Validator.isNull(_copyright)) {
-			_copyright = fileUtil.read("../../../copyright.txt");
-		}
-
-		if (Validator.isNull(_copyright)) {
-			_copyright = StringPool.BLANK;
-		}
-
-		return _copyright;
+		return StringPool.BLANK;
 	}
 
 	protected String getCustomCopyright(String absolutePath)
@@ -748,32 +745,6 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		}
 
 		return new String[0];
-	}
-
-	protected String getOldCopyright() throws IOException {
-		if (_oldCopyright != null) {
-			return _oldCopyright;
-		}
-
-		_oldCopyright = fileUtil.read("old-copyright.txt");
-
-		if (Validator.isNull(_oldCopyright)) {
-			_oldCopyright = fileUtil.read("../old-copyright.txt");
-		}
-
-		if (Validator.isNull(_oldCopyright)) {
-			_oldCopyright = fileUtil.read("../../old-copyright.txt");
-		}
-
-		if (Validator.isNull(_oldCopyright)) {
-			_oldCopyright = fileUtil.read("../../../old-copyright.txt");
-		}
-
-		if (Validator.isNull(_oldCopyright)) {
-			_oldCopyright = StringPool.BLANK;
-		}
-
-		return _oldCopyright;
 	}
 
 	protected boolean hasMissingParentheses(String s) {
