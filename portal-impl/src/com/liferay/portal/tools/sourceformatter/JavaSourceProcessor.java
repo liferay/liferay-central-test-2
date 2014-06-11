@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -917,18 +916,14 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			fileNames = getPluginJavaFiles();
 		}
 
-		_hibernateSQLQueryExclusions = getExclusionsProperties(
-			"source_formatter_hibernate_sql_query_exclusions.properties");
-		_javaTermSortExclusions = getExclusionsProperties(
-			"source_formatter_javaterm_sort_exclusions.properties");
-		_lineLengthExclusions = getExclusionsProperties(
-			"source_formatter_line_length_exclusions.properties");
-		_secureRandomExclusions = getExclusionsProperties(
-			"source_formatter_secure_random_exclusions.properties");
-		_staticLogVariableExclusions = getExclusionsProperties(
-			"source_formatter_static_log_exclusions.properties");
-		_upgradeServiceUtilExclusions = getExclusionsProperties(
-			"source_formatter_upgrade_service_util_exclusions.properties");
+		_hibernateSQLQueryExclusions = getExclusions(
+			"hibernate.sql.query.excludes");
+		_javaTermSortExclusions = getExclusions("javaterm.sort.excludes");
+		_lineLengthExclusions = getExclusions("line.length.excludes");
+		_secureRandomExclusions = getExclusions("secure.random.excludes");
+		_staticLogVariableExclusions = getExclusions("static.log.excludes");
+		_upgradeServiceUtilExclusions = getExclusions(
+			"upgrade.service.util.excludes");
 
 		for (String fileName : fileNames) {
 			format(fileName);
@@ -2951,20 +2946,20 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	private Pattern _catchExceptionPattern = Pattern.compile(
 		"\n(\t+)catch \\((.+Exception) (.+)\\) \\{\n");
 	private boolean _checkUnprocessedExceptions;
-	private Properties _hibernateSQLQueryExclusions;
+	private List<String> _hibernateSQLQueryExclusions;
 	private Pattern _incorrectCloseCurlyBracePattern = Pattern.compile(
 		"\n(.+)\n\n(\t+)}\n");
 	private Pattern _incorrectLineBreakPattern = Pattern.compile(
 		"\t(catch |else |finally |for |if |try |while ).*\\{\n\n\t+\\w");
-	private Properties _javaTermSortExclusions;
-	private Properties _lineLengthExclusions;
+	private List<String> _javaTermSortExclusions;
+	private List<String> _lineLengthExclusions;
 	private Pattern _logPattern = Pattern.compile(
 		"\n\tprivate static Log _log = LogFactoryUtil.getLog\\(\n*" +
 			"\t*(.+)\\.class\\)");
-	private Properties _secureRandomExclusions;
+	private List<String> _secureRandomExclusions;
 	private Pattern _stagedModelTypesPattern = Pattern.compile(
 		"StagedModelType\\(([a-zA-Z.]*(class|getClassName[\\(\\)]*))\\)");
-	private Properties _staticLogVariableExclusions;
-	private Properties _upgradeServiceUtilExclusions;
+	private List<String> _staticLogVariableExclusions;
+	private List<String> _upgradeServiceUtilExclusions;
 
 }
