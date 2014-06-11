@@ -12,12 +12,11 @@
  * details.
  */
 
-package com.liferay.portlet.dynamicdatalists.mode.impl;
+package com.liferay.portlet.dynamicdatalists.model.impl;
 
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portlet.dynamicdatalists.model.DDLRecordSet;
-import com.liferay.portlet.dynamicdatalists.model.impl.DDLRecordSetImpl;
 import com.liferay.portlet.dynamicdatamapping.BaseDDMTest;
 import com.liferay.portlet.dynamicdatamapping.model.DDMStructure;
 import com.liferay.portlet.dynamicdatamapping.model.DDMTemplate;
