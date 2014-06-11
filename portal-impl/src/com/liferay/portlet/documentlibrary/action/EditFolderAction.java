@@ -227,10 +227,6 @@ public class EditFolderAction extends PortletAction {
 		InputStream inputStream = null;
 
 		try {
-			ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
-
-			zipFolder(repositoryId, folderId, StringPool.SLASH, zipWriter);
-
 			String zipFileName = LanguageUtil.get(
 				themeDisplay.getLocale(), "documents-and-media");
 
@@ -239,6 +235,10 @@ public class EditFolderAction extends PortletAction {
 
 				zipFileName = folder.getName();
 			}
+
+			ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
+
+			zipFolder(repositoryId, folderId, StringPool.SLASH, zipWriter);
 
 			file = zipWriter.getFile();
 
