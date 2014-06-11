@@ -411,7 +411,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void deleteRecentLayoutRevisionId(
-			HttpServletRequest request, long layoutSetBranchId, long plid) {
+		HttpServletRequest request, long layoutSetBranchId, long plid) {
 
 		PortalPreferences portalPreferences =
 			PortletPreferencesFactoryUtil.getPortalPreferences(request);
@@ -422,7 +422,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void deleteRecentLayoutRevisionId(
-			User user, long layoutSetBranchId, long plid) {
+		User user, long layoutSetBranchId, long plid) {
 
 		PortalPreferences portalPreferences = getPortalPreferences(user);
 
@@ -1522,8 +1522,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutBranchId(
-			HttpServletRequest request, long layoutSetBranchId, long plid,
-			long layoutBranchId) {
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutBranchId) {
 
 		PortalPreferences portalPreferences =
 			PortletPreferencesFactoryUtil.getPortalPreferences(request);
@@ -1534,7 +1534,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutBranchId(
-			User user, long layoutSetBranchId, long plid, long layoutBranchId) {
+		User user, long layoutSetBranchId, long plid, long layoutBranchId) {
 
 		PortalPreferences portalPreferences = getPortalPreferences(user);
 
@@ -1544,8 +1544,8 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutRevisionId(
-			HttpServletRequest request, long layoutSetBranchId, long plid,
-			long layoutRevisionId) {
+		HttpServletRequest request, long layoutSetBranchId, long plid,
+		long layoutRevisionId) {
 
 		PortalPreferences portalPreferences =
 			PortletPreferencesFactoryUtil.getPortalPreferences(request);
@@ -1556,7 +1556,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutRevisionId(
-			User user, long layoutSetBranchId, long plid, long layoutRevisionId) {
+		User user, long layoutSetBranchId, long plid, long layoutRevisionId) {
 
 		PortalPreferences portalPreferences = getPortalPreferences(user);
 
@@ -1576,7 +1576,7 @@ public class StagingImpl implements Staging {
 
 	@Override
 	public void setRecentLayoutSetBranchId(
-			User user, long layoutSetId, long layoutSetBranchId) {
+		User user, long layoutSetId, long layoutSetBranchId) {
 
 		PortalPreferences portalPreferences = getPortalPreferences(user);
 
@@ -2285,8 +2285,8 @@ public class StagingImpl implements Staging {
 	}
 
 	protected void setRecentLayoutRevisionId(
-			PortalPreferences portalPreferences, long layoutSetBranchId,
-			long plid, long layoutRevisionId) {
+		PortalPreferences portalPreferences, long layoutSetBranchId, long plid,
+		long layoutRevisionId) {
 
 		long layoutBranchId = 0;
 
