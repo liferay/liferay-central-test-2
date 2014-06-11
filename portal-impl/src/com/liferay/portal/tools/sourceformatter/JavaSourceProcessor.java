@@ -920,8 +920,10 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			"hibernate.sql.query.excludes");
 		_javaTermSortExclusions = getExclusions("javaterm.sort.excludes");
 		_lineLengthExclusions = getExclusions("line.length.excludes");
+		_proxyExclusions = getExclusions("proxy.excludes");
 		_secureRandomExclusions = getExclusions("secure.random.excludes");
 		_staticLogVariableExclusions = getExclusions("static.log.excludes");
+		_testAnnotationsExclusions = getExclusions("test.annotations.excludes");
 		_upgradeServiceUtilExclusions = getExclusions(
 			"upgrade.service.util.excludes");
 
@@ -1088,8 +1090,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		}
 
 		if (!isRunsOutsidePortal(absolutePath) &&
-			!className.equals("DeepNamedValueScanner") &&
-			!className.equals("ProxyUtil") &&
+			!isExcluded(_proxyExclusions, fileName) &&
 			newContent.contains("import java.lang.reflect.Proxy;")) {
 
 			processErrorMessage(fileName, "Proxy: " + fileName);
@@ -1241,7 +1242,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 			JavaTerm javaTerm = itr.next();
 
 			if (fileName.contains("/test/") &&
-				!fileName.endsWith("TestBean.java") &&
+				!isExcluded(_testAnnotationsExclusions, fileName) &&
 				!fileName.endsWith("TestCase.java")) {
 
 				checkTestAnnotations(javaTerm, fileName);
@@ -2955,10 +2956,12 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 	private Pattern _logPattern = Pattern.compile(
 		"\n\tprivate static Log _log = LogFactoryUtil.getLog\\(\n*" +
 			"\t*(.+)\\.class\\)");
+	private List<String> _proxyExclusions;
 	private List<String> _secureRandomExclusions;
 	private Pattern _stagedModelTypesPattern = Pattern.compile(
 		"StagedModelType\\(([a-zA-Z.]*(class|getClassName[\\(\\)]*))\\)");
 	private List<String> _staticLogVariableExclusions;
+	private List<String> _testAnnotationsExclusions;
 	private List<String> _upgradeServiceUtilExclusions;
 
 }
