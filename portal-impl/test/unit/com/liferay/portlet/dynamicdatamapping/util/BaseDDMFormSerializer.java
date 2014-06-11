@@ -100,40 +100,40 @@ public class BaseDDMFormSerializer extends BaseDDMTest {
 	}
 
 	protected DDMFormField createRadioDDMFormField(String name) {
-		DDMFormField radioDDMFormField = new DDMFormField(name, "radio");
+		DDMFormField ddmFormField = new DDMFormField(name, "radio");
 
-		radioDDMFormField.setDataType("string");
-		radioDDMFormField.setDDMFormFieldOptions(createDDMFormFieldOptions());
-		radioDDMFormField.setRequired(true);
+		ddmFormField.setDataType("string");
+		ddmFormField.setDDMFormFieldOptions(createDDMFormFieldOptions());
+		ddmFormField.setRequired(true);
 
-		return radioDDMFormField;
+		return ddmFormField;
 	}
 
 	protected DDMFormField createSelectDDMFormField(String name) {
-		DDMFormField selectDDMFormField = new DDMFormField(name, "select");
+		DDMFormField ddmFormField = new DDMFormField(name, "select");
 
-		selectDDMFormField.setDataType("string");
-		selectDDMFormField.setIndexType("");
-		selectDDMFormField.setMultiple(true);
+		ddmFormField.setDataType("string");
+		ddmFormField.setIndexType("");
+		ddmFormField.setMultiple(true);
 
 		DDMFormFieldOptions ddmFormFieldOptions = createDDMFormFieldOptions();
 
-		selectDDMFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
+		ddmFormField.setDDMFormFieldOptions(ddmFormFieldOptions);
 
-		return selectDDMFormField;
+		return ddmFormField;
 	}
 
 	protected DDMFormField createTextDDMFormField(String name) {
-		DDMFormField textDDMFormField = new DDMFormField(name, "text");
+		DDMFormField ddmFormField = new DDMFormField(name, "text");
 
-		textDDMFormField.setDataType("string");
-		textDDMFormField.setIndexType("keyword");
-		textDDMFormField.setLabel(createTextDDMFormFieldLabel());
-		textDDMFormField.setPredefinedValue(
+		ddmFormField.setDataType("string");
+		ddmFormField.setIndexType("keyword");
+		ddmFormField.setLabel(createTextDDMFormFieldLabel());
+		ddmFormField.setPredefinedValue(
 			createTextDDMFormFieldPredefinedValue());
-		textDDMFormField.setRepeatable(true);
+		ddmFormField.setRepeatable(true);
 
-		return textDDMFormField;
+		return ddmFormField;
 	}
 
 	protected LocalizedValue createTextDDMFormFieldLabel() {
