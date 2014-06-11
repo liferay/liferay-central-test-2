@@ -106,7 +106,7 @@ public class MailServiceTestUtil {
 		try {
 			ReflectionTestUtil.invoke(
 				SmtpServerFactory.class, "startServerThread",
-				new Class<?>[]{SmtpServer.class}, _smtpServer);
+				new Class<?>[] {SmtpServer.class}, _smtpServer);
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e);
