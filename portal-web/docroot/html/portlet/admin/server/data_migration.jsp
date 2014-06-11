@@ -96,12 +96,7 @@ for (String convertProcessClassName : PropsValues.CONVERT_PROCESSES) {
 					</c:if>
 
 					<aui:button-row>
-
-						<%
-						String cmd = "convertProcess." + convertProcess.getClass().getName();
-						%>
-
-						<aui:button cssClass="save-server-button" data-cmd="<%= cmd %>" value="execute" />
+						<aui:button cssClass="save-server-button" data-cmd='<%= "convertProcess." + convertProcess.getClass().getName() %>' value="execute" />
 					</aui:button-row>
 				</liferay-ui:panel>
 			</liferay-ui:panel-container>

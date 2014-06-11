@@ -40,12 +40,6 @@ page import="org.apache.log4j.LogManager" %><%@
 page import="org.apache.log4j.Logger" %>
 
 <%
-boolean showShardSelector = false;
-
-if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && (ShardUtil.getAvailableShardNames().length > 1)) {
-	showShardSelector = true;
-}
-
 String tabs1 = ParamUtil.getString(request, "tabs1", "server");
 
 boolean showTabs1 = false;
@@ -70,6 +64,12 @@ if (tabs1.equals("plugins")) {
 	if (!tabs2.equals("portlet-plugins") && !tabs2.equals("theme-plugins") && !tabs2.equals("layout-template-plugins") && !tabs2.equals("hook-plugins") && !tabs2.equals("web-plugins")) {
 		tabs2 = "portlet-plugins";
 	}
+}
+
+boolean showShardSelector = false;
+
+if (PropsValues.SHARD_SELECTOR.equals(ManualShardSelector.class.getName()) && (ShardUtil.getAvailableShardNames().length > 1)) {
+	showShardSelector = true;
 }
 
 NumberFormat numberFormat = NumberFormat.getInstance();
