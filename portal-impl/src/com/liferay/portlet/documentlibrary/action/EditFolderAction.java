@@ -16,6 +16,7 @@ package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.portlet.PortletResponseUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.servlet.ServletResponseUtil;
@@ -230,11 +231,6 @@ public class EditFolderAction extends PortletAction {
 
 			zipFolder(repositoryId, folderId, StringPool.SLASH, zipWriter);
 
-			HttpServletRequest request = PortalUtil.getHttpServletRequest(
-				resourceRequest);
-			HttpServletResponse response = PortalUtil.getHttpServletResponse(
-				resourceResponse);
-
 			String zipFileName = LanguageUtil.get(
 				themeDisplay.getLocale(), "documents-and-media");
 
@@ -248,8 +244,8 @@ public class EditFolderAction extends PortletAction {
 
 			inputStream = new FileInputStream(file);
 
-			ServletResponseUtil.sendFile(
-				request, response, zipFileName, inputStream,
+			PortletResponseUtil.sendFile(
+				resourceRequest, resourceResponse, zipFileName, inputStream,
 				ContentTypes.APPLICATION_ZIP);
 		}
 		finally {
