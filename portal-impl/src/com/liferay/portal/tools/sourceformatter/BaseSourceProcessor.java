@@ -35,8 +35,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -690,15 +688,10 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 			ClassLoader classLoader =
 				BaseSourceProcessor.class.getClassLoader();
 
-			String sourceFormatterExclusions = System.getProperty(
-				"source-formatter-exclusions",
+			InputStream inputStream = classLoader.getResourceAsStream(
 				"com/liferay/portal/tools/dependencies/" + fileName);
 
-			URL url = classLoader.getResource(sourceFormatterExclusions);
-
-			if (url != null) {
-				exclusionsTuples.add(new Tuple(url.openStream(), 0));
-			}
+			exclusionsTuples.add(new Tuple(inputStream, 0));
 
 			return exclusionsTuples;
 		}
