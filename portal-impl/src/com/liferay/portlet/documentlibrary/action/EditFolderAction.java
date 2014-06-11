@@ -325,39 +325,31 @@ public class EditFolderAction extends PortletAction {
 			serviceContext);
 	}
 
-	protected void zipFileEntry(
-			FileEntry fileEntry, String path, ZipWriter zipWriter)
-		throws Exception {
-
-		String zipEntryName = HtmlUtil.escapeURL(fileEntry.getTitle());
-
-		zipWriter.addEntry(
-			path.concat(StringPool.SLASH).concat(zipEntryName),
-			fileEntry.getContentStream());
-	}
-
 	protected void zipFolder(
 			long folderId, long repositoryId, String path, ZipWriter zipWriter)
 		throws Exception {
 
-		List<Object> entries =
+		List<Object> foldersAndFileEntriesAndFileShortcuts =
 			DLAppServiceUtil.getFoldersAndFileEntriesAndFileShortcuts(
 				repositoryId, folderId, WorkflowConstants.STATUS_APPROVED,
 				false, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		for (Object entry : entries) {
+		for (Object entry : foldersAndFileEntriesAndFileShortcuts) {
 			if (entry instanceof Folder) {
-				Folder curFolder = (Folder)entry;
+				Folder folder = (Folder)entry;
 
 				zipFolder(
-					curFolder.getFolderId(), curFolder.getRepositoryId(),
-					path.concat(StringPool.SLASH).concat(curFolder.getName()),
+					folder.getFolderId(), folder.getRepositoryId(),
+					path.concat(StringPool.SLASH).concat(folder.getName()),
 					zipWriter);
 			}
 			else if (entry instanceof FileEntry) {
 				FileEntry fileEntry = (FileEntry)entry;
 
-				zipFileEntry(fileEntry, path, zipWriter);
+				zipWriter.addEntry(
+					path + StringPool.SLASH +
+						HtmlUtil.escapeURL(fileEntry.getTitle()),
+					fileEntry.getContentStream());
 			}
 		}
 	}
