@@ -941,9 +941,7 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 
 		String content = fileUtil.read(file);
 
-		if (isGenerated(content) &&
-			!fileName.endsWith("JavadocFormatter.java")) {
-
+		if (isGenerated(content)) {
 			return null;
 		}
 
@@ -2670,7 +2668,8 @@ public class JavaSourceProcessor extends BaseSourceProcessor {
 		fileNames.addAll(getFileNames(excludes, includes));
 
 		excludes = new String[] {
-			"**\\portal-client\\**", "**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+			"**\\JavaDocFormatter.java", "**\\portal-client\\**",
+			"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
 			"**\\*SourceProcessor*.java", "**\\test\\**\\*PersistenceTest.java"
 		};
 		includes = new String[] {
