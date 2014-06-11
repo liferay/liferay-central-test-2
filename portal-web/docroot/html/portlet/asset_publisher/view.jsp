@@ -81,7 +81,7 @@ boolean hasAddPortletURLs = false;
 	%>
 
 	<c:if test="<%= groupIds.length > 0 %>">
-		<aui:nav-bar cssClass='<%= "add-asset-selector lfr-meta-actions " + (groupIds.length == 1 ? "single-item-button" : StringPool.BLANK) %>'>
+		<aui:nav-bar cssClass='<%= "add-asset-selector lfr-meta-actions" + ((groupIds.length == 1) ? " single-item-button" : StringPool.BLANK) %>'>
 
 			<%
 			for (long groupId : groupIds) {
