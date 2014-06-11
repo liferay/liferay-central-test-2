@@ -219,8 +219,8 @@ public class EditFolderAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)resourceRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long folderId = ParamUtil.getLong(resourceRequest, "folderId");
 		long repositoryId = ParamUtil.getLong(resourceRequest, "repositoryId");
+		long folderId = ParamUtil.getLong(resourceRequest, "folderId");
 
 		File file = null;
 		InputStream inputStream = null;
