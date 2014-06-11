@@ -76,10 +76,6 @@ public class MailServiceTestUtil {
 
 		_smtpServer = new SmtpServer();
 
-		_smtpServer.setPort(
-			GetterUtil.getInteger(
-				PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT)));
-		_smtpServer.setThreaded(false);
 		_smtpServer.setMailStore(
 			new RollingMailStore() {
 
@@ -102,6 +98,10 @@ public class MailServiceTestUtil {
 				}
 
 			});
+		_smtpServer.setPort(
+			GetterUtil.getInteger(
+				PropsUtil.get(PropsKeys.MAIL_SESSION_MAIL_SMTP_PORT)));
+		_smtpServer.setThreaded(false);
 
 		try {
 			ReflectionTestUtil.invoke(
