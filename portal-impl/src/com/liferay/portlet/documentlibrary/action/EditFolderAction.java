@@ -228,7 +228,7 @@ public class EditFolderAction extends PortletAction {
 		try {
 			ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
-			zipFolder(folderId, repositoryId, StringPool.SLASH, zipWriter);
+			zipFolder(repositoryId, folderId, StringPool.SLASH, zipWriter);
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				resourceRequest);
@@ -326,7 +326,7 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void zipFolder(
-			long folderId, long repositoryId, String path, ZipWriter zipWriter)
+			long repositoryId, long folderId, String path, ZipWriter zipWriter)
 		throws Exception {
 
 		List<Object> foldersAndFileEntriesAndFileShortcuts =
@@ -339,7 +339,7 @@ public class EditFolderAction extends PortletAction {
 				Folder folder = (Folder)entry;
 
 				zipFolder(
-					folder.getFolderId(), folder.getRepositoryId(),
+					folder.getRepositoryId(), folder.getFolderId(),
 					path.concat(StringPool.SLASH).concat(folder.getName()),
 					zipWriter);
 			}
