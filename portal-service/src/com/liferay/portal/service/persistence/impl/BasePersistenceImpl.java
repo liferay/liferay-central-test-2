@@ -485,7 +485,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 *
 	 * @param  model the model instance to remove
 	 * @return the model instance that was removed
-	 * @throws SystemException if a system exception occurred
 	 */
 	protected T removeImpl(T model) {
 		throw new UnsupportedOperationException();
@@ -502,7 +501,6 @@ public class BasePersistenceImpl<T extends BaseModel<T>>
 	 *
 	 * @param  model the model instance to update
 	 * @return the model instance that was updated
-	 * @throws SystemException if a system exception occurred
 	 */
 	protected T updateImpl(T model) {
 		throw new UnsupportedOperationException();
