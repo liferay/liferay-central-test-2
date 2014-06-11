@@ -228,7 +228,7 @@ public class EditFolderAction extends PortletAction {
 		try {
 			ZipWriter zipWriter = ZipWriterFactoryUtil.getZipWriter();
 
-			_zipFolder(folderId, repositoryId, StringPool.SLASH, zipWriter);
+			zipFolder(folderId, repositoryId, StringPool.SLASH, zipWriter);
 
 			HttpServletRequest request = PortalUtil.getHttpServletRequest(
 				resourceRequest);
@@ -325,7 +325,7 @@ public class EditFolderAction extends PortletAction {
 			serviceContext);
 	}
 
-	private void _zipFileEntry(
+	protected void zipFileEntry(
 			FileEntry fileEntry, String path, ZipWriter zipWriter)
 		throws Exception {
 
@@ -336,7 +336,7 @@ public class EditFolderAction extends PortletAction {
 			fileEntry.getContentStream());
 	}
 
-	private void _zipFolder(
+	protected void zipFolder(
 			long folderId, long repositoryId, String path, ZipWriter zipWriter)
 		throws Exception {
 
@@ -349,7 +349,7 @@ public class EditFolderAction extends PortletAction {
 			if (entry instanceof Folder) {
 				Folder curFolder = (Folder)entry;
 
-				_zipFolder(
+				zipFolder(
 					curFolder.getFolderId(), curFolder.getRepositoryId(),
 					path.concat(StringPool.SLASH).concat(curFolder.getName()),
 					zipWriter);
@@ -357,7 +357,7 @@ public class EditFolderAction extends PortletAction {
 			else if (entry instanceof FileEntry) {
 				FileEntry fileEntry = (FileEntry)entry;
 
-				_zipFileEntry(fileEntry, path, zipWriter);
+				zipFileEntry(fileEntry, path, zipWriter);
 			}
 		}
 	}
