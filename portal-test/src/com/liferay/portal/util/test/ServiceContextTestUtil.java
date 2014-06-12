@@ -41,13 +41,14 @@ public class ServiceContextTestUtil {
 		serviceContext.setAddGroupPermissions(true);
 		serviceContext.setAddGuestPermissions(true);
 		serviceContext.setCompanyId(TestPropsValues.getCompanyId());
-		serviceContext.setScopeGroupId(groupId);
-		serviceContext.setUserId(userId);
 
 		ThemeDisplay themeDisplay = ThemeDisplayTestUtil.getThemeDisplay(
 			serviceContext.getCompanyId());
 
 		serviceContext.setRequest(themeDisplay.getRequest());
+
+		serviceContext.setScopeGroupId(groupId);
+		serviceContext.setUserId(userId);
 
 		return serviceContext;
 	}
