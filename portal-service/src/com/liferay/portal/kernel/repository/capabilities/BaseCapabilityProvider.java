@@ -17,6 +17,9 @@ package com.liferay.portal.kernel.repository.capabilities;
 import java.util.Map;
 import java.util.Set;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+
 /**
  * @author Adolfo Pérez
  */
@@ -34,7 +37,9 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 				String.format(
 					"Unable to export unsupported capability %s. Supported " +
 						"capabilities are %s.",
-					exportedCapabilityClasses, supportedCapabilities.keySet()));
+					exportedCapabilityClasses,
+					StringUtil.merge(
+						supportedCapabilities.keySet(), StringPool.COMMA)));
 		}
 
 		_supportedCapabilities = supportedCapabilities;
