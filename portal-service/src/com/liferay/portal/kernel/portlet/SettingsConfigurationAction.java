@@ -221,7 +221,7 @@ public class SettingsConfigurationAction
 	public void setPreference(
 		PortletRequest portletRequest, String name, String value) {
 
-		setPreference(portletRequest, name, new String[]{value});
+		setPreference(portletRequest, name, new String[] {value});
 	}
 
 	public void setPreference(
@@ -242,7 +242,6 @@ public class SettingsConfigurationAction
 	}
 
 	protected PortletConfig getSelPortletConfig(PortletRequest portletRequest) {
-
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -326,9 +325,7 @@ public class SettingsConfigurationAction
 
 		if (multiValuedKeys == null) {
 			throw new IllegalStateException(
-				"Multi valued keys list for settings id '"+settingsId+"' is " +
-				"null: please register a valid list of multi valued keys " +
-				"with SettingsConfigurationAction");
+				"No multi valued keys found for settings ID " + settingsId);
 		}
 
 		for (String multiValuedKey : multiValuedKeys) {
