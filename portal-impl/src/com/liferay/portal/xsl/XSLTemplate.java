@@ -88,7 +88,8 @@ public class XSLTemplate implements Template {
 
 		_transformerFactory.setURIResolver(xslURIResolver);
 
-		_xmlSource = new StreamSource(_xslTemplateResource.getXMLReader());
+		_xmlStreamSource = new StreamSource(
+			_xslTemplateResource.getXMLReader());
 
 		Transformer transformer = null;
 
@@ -97,7 +98,8 @@ public class XSLTemplate implements Template {
 				transformer = _getTransformer(
 					_transformerFactory, _xslTemplateResource);
 
-				transformer.transform(_xmlSource, new StreamResult(writer));
+				transformer.transform(
+					_xmlStreamSource, new StreamResult(writer));
 
 				return;
 			}
@@ -116,7 +118,8 @@ public class XSLTemplate implements Template {
 
 		transformer.setParameter(TemplateConstants.WRITER, unsyncStringWriter);
 
-		transformer.transform(_xmlSource, new StreamResult(unsyncStringWriter));
+		transformer.transform(
+			_xmlStreamSource, new StreamResult(unsyncStringWriter));
 
 		StringBundler sb = unsyncStringWriter.getStringBundler();
 
@@ -174,7 +177,7 @@ public class XSLTemplate implements Template {
 
 			try {
 				errorTransformer.transform(
-					_xmlSource, new StreamResult(writer));
+					_xmlStreamSource, new StreamResult(writer));
 			}
 			catch (Exception e2) {
 				throw new TemplateException(
@@ -231,7 +234,7 @@ public class XSLTemplate implements Template {
 	private TemplateResource _errorTemplateResource;
 	private TemplateContextHelper _templateContextHelper;
 	private TransformerFactory _transformerFactory;
-	private StreamSource _xmlSource;
+	private StreamSource _xmlStreamSource;
 	private XSLTemplateResource _xslTemplateResource;
 
 	private class TransformerPrivilegedExceptionAction
