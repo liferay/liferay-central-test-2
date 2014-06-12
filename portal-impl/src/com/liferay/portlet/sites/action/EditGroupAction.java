@@ -752,7 +752,7 @@ public class EditGroupAction extends PortletAction {
 		}
 
 		liveGroup = GroupServiceUtil.updateGroup(
-			liveGroup.getGroupId(), typeSettingsProperties.toSortedString());
+			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		// Layout set prototypes
 

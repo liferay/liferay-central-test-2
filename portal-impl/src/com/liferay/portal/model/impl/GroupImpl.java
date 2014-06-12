@@ -544,7 +544,7 @@ public class GroupImpl extends GroupBaseImpl {
 			return super.getTypeSettings();
 		}
 		else {
-			return _typeSettingsProperties.toSortedString();
+			return _typeSettingsProperties.toString();
 		}
 	}
 
@@ -964,7 +964,7 @@ public class GroupImpl extends GroupBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(_typeSettingsProperties.toSortedString());
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	protected long getDefaultPlid(boolean privateLayout) {
