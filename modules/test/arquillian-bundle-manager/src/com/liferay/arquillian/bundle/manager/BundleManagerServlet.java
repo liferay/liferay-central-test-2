@@ -108,7 +108,7 @@ public class BundleManagerServlet extends HttpServlet {
 		ServiceTracker<ServletContext, ServletContext> serviceTracker = null;
 
 		try {
-			InputStream inputStream = _getBundleArchive(request);
+			InputStream inputStream = getBundleArchive(request);
 
 			BundleContext bundleContext = _bundle.getBundleContext();
 
@@ -128,7 +128,7 @@ public class BundleManagerServlet extends HttpServlet {
 			ServletContext servletContext = serviceTracker.waitForService(
 				_timeout);
 
-			Servlet servlet = _waitForServlet(
+			Servlet servlet = waitForServlet(
 				servletContext, "ArquillianServletRunner", _timeout);
 
 			if (servlet == null) {
@@ -143,7 +143,7 @@ public class BundleManagerServlet extends HttpServlet {
 				_contextPathHeader, servletContext.getContextPath());
 		}
 		catch (Exception e) {
-			_sendError(e, response);
+			sendError(e, response);
 		}
 		finally {
 			if (serviceTracker != null) {
@@ -157,7 +157,7 @@ public class BundleManagerServlet extends HttpServlet {
 		}
 	}
 
-	private InputStream _getBundleArchive(HttpServletRequest httpServletRequest)
+	protected InputStream getBundleArchive(HttpServletRequest httpServletRequest)
 		throws FileUploadException, IOException {
 
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -182,7 +182,7 @@ public class BundleManagerServlet extends HttpServlet {
 		return fileItem.getInputStream();
 	}
 
-	private void _sendError(
+	protected void sendError(
 		Throwable throwable, HttpServletResponse httpServletResponse) {
 
 		httpServletResponse.setStatus(
@@ -209,7 +209,7 @@ public class BundleManagerServlet extends HttpServlet {
 		}
 	}
 
-	private Servlet _waitForServlet(
+	protected Servlet waitForServlet(
 		ServletContext servletContext, String servletName, long timeout) {
 
 		long elapsedTime = 0;
