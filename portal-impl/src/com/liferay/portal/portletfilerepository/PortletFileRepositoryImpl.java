@@ -387,7 +387,6 @@ public class PortletFileRepositoryImpl implements PortletFileRepository {
 
 	@Override
 	public int getPortletFileEntriesCount(long groupId, long folderId) {
-
 		return DLFileEntryLocalServiceUtil.getFileEntriesCount(
 			groupId, folderId);
 	}
