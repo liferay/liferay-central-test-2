@@ -32,10 +32,9 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 		if (!supportedCapabilitiesSet.containsAll(exportedCapabilityClasses)) {
 			throw new IllegalArgumentException(
 				String.format(
-					"Exporting capabilities not explicitly supported is not " +
-						"allowed. Provider supports %s, but tried to " +
-						"export %s",
-					supportedCapabilities.keySet(), exportedCapabilityClasses));
+					"Unable to export unsupported capability %s. Supported " +
+						"capabilities are %s.",
+					exportedCapabilityClasses, supportedCapabilities.keySet()));
 		}
 
 		_supportedCapabilities = supportedCapabilities;
@@ -50,7 +49,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 
 		throw new IllegalArgumentException(
 			String.format(
-				"Capability %s not exported by provider %s",
+				"Capability %s is not exported by provider %s",
 				capabilityClass.getName(), getProviderKey()));
 	}
 
@@ -69,7 +68,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 		if (capability == null) {
 			throw new IllegalArgumentException(
 				String.format(
-					"Capability %s not supported by provider %s",
+					"Capability %s is not supported by provider %s",
 					capabilityClass.getName(), getProviderKey()));
 		}
 
@@ -78,8 +77,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 
 	protected abstract String getProviderKey();
 
-	private final Set<Class<? extends Capability>> _exportedCapabilityClasses;
-	private final Map<Class<? extends Capability>, Capability>
-		_supportedCapabilities;
+	private Set<Class<? extends Capability>> _exportedCapabilityClasses;
+	private Map<Class<? extends Capability>, Capability> _supportedCapabilities;
 
 }
