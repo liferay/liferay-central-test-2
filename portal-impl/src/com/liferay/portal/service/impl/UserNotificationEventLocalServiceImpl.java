@@ -156,19 +156,19 @@ public class UserNotificationEventLocalServiceImpl
 
 	@Override
 	public List<UserNotificationEvent> getArchivedUserNotificationEvents(
-		long userId, boolean archived, int start, int end) {
-
-		return userNotificationEventPersistence.findByU_A(
-			userId, archived, start, end);
-	}
-
-	@Override
-	public List<UserNotificationEvent> getArchivedUserNotificationEvents(
 		long userId, boolean actionRequired, boolean archived, int start,
 		int end) {
 
 		return userNotificationEventPersistence.findByU_A_A(
 			userId, actionRequired, archived, start, end);
+	}
+
+	@Override
+	public List<UserNotificationEvent> getArchivedUserNotificationEvents(
+		long userId, boolean archived, int start, int end) {
+
+		return userNotificationEventPersistence.findByU_A(
+			userId, archived, start, end);
 	}
 
 	@Override
@@ -195,10 +195,19 @@ public class UserNotificationEventLocalServiceImpl
 
 	@Override
 	public List<UserNotificationEvent> getDeliveredUserNotificationEvents(
-		long userId, boolean actionRequired, boolean delivered) {
+		long userId, boolean delivered, boolean actionRequired) {
 
 		return userNotificationEventPersistence.findByU_D_A(
 			userId, delivered, actionRequired);
+	}
+
+	@Override
+	public List<UserNotificationEvent> getDeliveredUserNotificationEvents(
+		long userId, boolean delivered, boolean actionRequired, int start,
+		int end) {
+
+		return userNotificationEventPersistence.findByU_D_A(
+			userId, delivered, actionRequired, start, end);
 	}
 
 	@Override
@@ -210,15 +219,6 @@ public class UserNotificationEventLocalServiceImpl
 	}
 
 	@Override
-	public List<UserNotificationEvent> getDeliveredUserNotificationEvents(
-		long userId, boolean actionRequired, boolean delivered, int start,
-		int end) {
-
-		return userNotificationEventPersistence.findByU_D_A(
-			userId, delivered, actionRequired, start, end);
-	}
-
-	@Override
 	public int getDeliveredUserNotificationEventsCount(
 		long userId, boolean delivered) {
 
@@ -227,7 +227,7 @@ public class UserNotificationEventLocalServiceImpl
 
 	@Override
 	public int getDeliveredUserNotificationEventsCount(
-		long userId, boolean actionRequired, boolean delivered) {
+		long userId, boolean delivered, boolean actionRequired) {
 
 		return userNotificationEventPersistence.countByU_D_A(
 			userId, delivered, actionRequired);
