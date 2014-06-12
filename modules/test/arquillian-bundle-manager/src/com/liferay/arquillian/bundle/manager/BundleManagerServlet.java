@@ -157,7 +157,8 @@ public class BundleManagerServlet extends HttpServlet {
 		}
 	}
 
-	protected InputStream getBundleArchive(HttpServletRequest httpServletRequest)
+	protected InputStream getBundleArchive(
+			HttpServletRequest request)
 		throws FileUploadException, IOException {
 
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
@@ -175,7 +176,7 @@ public class BundleManagerServlet extends HttpServlet {
 			diskFileItemFactory);
 
 		List<FileItem> fileItems = servletFileUpload.parseRequest(
-			httpServletRequest);
+			request);
 
 		FileItem fileItem = fileItems.get(0);
 
@@ -183,16 +184,16 @@ public class BundleManagerServlet extends HttpServlet {
 	}
 
 	protected void sendError(
-		Throwable throwable, HttpServletResponse httpServletResponse) {
+		Throwable throwable, HttpServletResponse response) {
 
-		httpServletResponse.setStatus(
+		response.setStatus(
 			HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
 		try {
 			ServletOutputStream outputStream =
-				httpServletResponse.getOutputStream();
+				response.getOutputStream();
 
-			httpServletResponse.setContentType(StringPool.UTF8);
+			response.setContentType(StringPool.UTF8);
 
 			PrintWriter printWriter = new PrintWriter(outputStream);
 
