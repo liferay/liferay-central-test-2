@@ -39,12 +39,12 @@ public class DLTestUtil {
 	public static DLFileEntry addDLFileEntry(long dlFolderId) throws Exception {
 		DLFolder dlFolder = DLFolderLocalServiceUtil.fetchDLFolder(dlFolderId);
 
-		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(dlFolder.getGroupId());
-
 		byte[] bytes = RandomTestUtil.randomBytes();
 
 		InputStream is = new ByteArrayInputStream(bytes);
+
+		ServiceContext serviceContext =
+			ServiceContextTestUtil.getServiceContext(dlFolder.getGroupId());
 
 		return DLFileEntryLocalServiceUtil.addFileEntry(
 			TestPropsValues.getUserId(), dlFolder.getGroupId(),
