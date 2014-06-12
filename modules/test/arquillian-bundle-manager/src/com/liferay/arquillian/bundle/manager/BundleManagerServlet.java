@@ -157,8 +157,7 @@ public class BundleManagerServlet extends HttpServlet {
 		}
 	}
 
-	protected InputStream getBundleArchive(
-			HttpServletRequest request)
+	protected InputStream getBundleArchive(HttpServletRequest request)
 		throws FileUploadException, IOException {
 
 		DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
