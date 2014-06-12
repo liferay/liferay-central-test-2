@@ -1339,8 +1339,6 @@ public class DLFileEntryLocalServiceImpl
 	public boolean hasFileEntryLock(long userId, long fileEntryId)
 		throws PortalException {
 
-		boolean checkedOut = isFileEntryCheckedOut(fileEntryId);
-
 		DLFileEntry dlFileEntry = getFileEntry(fileEntryId);
 
 		long folderId = dlFileEntry.getFolderId();
