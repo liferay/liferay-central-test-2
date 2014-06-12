@@ -39,6 +39,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>INFO_MESSAGE_3</td>
+	<td>xpath=(//div[contains(@class,'alert') and (contains(@class,'alert-block'))])</td>
+	<td></td>
+</tr>
+<tr>
 	<td>SAVE_BUTTON</td>
 	<td>//button[contains(.,'Save')]</td>
 	<td></td>
