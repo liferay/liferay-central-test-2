@@ -358,7 +358,7 @@ public class LayoutSetPrototypeLocalServiceImpl
 			"customJspServletContextName",
 			settingsProperties.getProperty("customJspServletContextName"));
 
-		group.setTypeSettings(typeSettingsProperties.toSortedString());
+		group.setTypeSettings(typeSettingsProperties.toString());
 
 		groupPersistence.update(group);
 

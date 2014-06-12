@@ -33,7 +33,7 @@ public class TrashEntryImpl extends TrashEntryBaseImpl {
 			return super.getTypeSettings();
 		}
 		else {
-			return _typeSettingsProperties.toSortedString();
+			return _typeSettingsProperties.toString();
 		}
 	}
 
@@ -98,7 +98,7 @@ public class TrashEntryImpl extends TrashEntryBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(_typeSettingsProperties.toSortedString());
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	private TrashEntry _rootEntry;

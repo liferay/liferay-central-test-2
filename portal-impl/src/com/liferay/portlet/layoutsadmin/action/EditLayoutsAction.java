@@ -951,8 +951,8 @@ public class EditLayoutsAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId, nameMap, titleMap,
 					descriptionMap, keywordsMap, robotsMap,
 					LayoutConstants.TYPE_PORTLET,
-					typeSettingsProperties.toSortedString(), hidden,
-					friendlyURLMap, serviceContext);
+					typeSettingsProperties.toString(), hidden, friendlyURLMap,
+					serviceContext);
 			}
 			else {
 				long copyLayoutId = ParamUtil.getLong(
@@ -977,8 +977,8 @@ public class EditLayoutsAction extends PortletAction {
 				layout = LayoutServiceUtil.addLayout(
 					groupId, privateLayout, parentLayoutId, nameMap, titleMap,
 					descriptionMap, keywordsMap, robotsMap, type,
-					typeSettingsProperties.toSortedString(), hidden,
-					friendlyURLMap, serviceContext);
+					typeSettingsProperties.toString(), hidden, friendlyURLMap,
+					serviceContext);
 
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
@@ -1229,7 +1229,7 @@ public class EditLayoutsAction extends PortletAction {
 
 			LayoutServiceUtil.updateLayout(
 				groupId, privateLayout, layoutId,
-				typeSettingsProperties.toSortedString());
+				typeSettingsProperties.toString());
 
 			LayoutServiceUtil.updateLookAndFeel(
 				groupId, privateLayout, layoutId, deviceThemeId,

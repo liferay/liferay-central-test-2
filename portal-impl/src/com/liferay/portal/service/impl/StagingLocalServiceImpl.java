@@ -241,7 +241,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 		}
 
 		groupLocalService.updateGroup(
-			liveGroup.getGroupId(), typeSettingsProperties.toSortedString());
+			liveGroup.getGroupId(), typeSettingsProperties.toString());
 	}
 
 	@Override
@@ -269,7 +269,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			liveGroup, typeSettingsProperties, serviceContext);
 
 		groupLocalService.updateGroup(
-			liveGroup.getGroupId(), typeSettingsProperties.toSortedString());
+			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		if (!liveGroup.hasStagingGroup()) {
 			serviceContext.setAttribute("staging", String.valueOf(true));
@@ -367,7 +367,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 			liveGroup, typeSettingsProperties, serviceContext);
 
 		groupLocalService.updateGroup(
-			liveGroup.getGroupId(), typeSettingsProperties.toSortedString());
+			liveGroup.getGroupId(), typeSettingsProperties.toString());
 
 		updateStagedPortlets(remoteURL, remoteGroupId, typeSettingsProperties);
 
@@ -538,7 +538,7 @@ public class StagingLocalServiceImpl extends StagingLocalServiceBaseImpl {
 
 		return groupLocalService.updateGroup(
 			stagingGroup.getGroupId(),
-			stagingTypeSettingsProperties.toSortedString());
+			stagingTypeSettingsProperties.toString());
 	}
 
 	protected void clearLastPublishDate(long groupId, boolean privateLayout)

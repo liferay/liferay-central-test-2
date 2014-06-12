@@ -405,7 +405,7 @@ public class StagingImpl implements Staging {
 
 			LayoutLocalServiceUtil.updateLayout(
 				layout.getGroupId(), layout.getPrivateLayout(),
-				layout.getLayoutId(), typeSettingsProperties.toSortedString());
+				layout.getLayoutId(), typeSettingsProperties.toString());
 		}
 	}
 

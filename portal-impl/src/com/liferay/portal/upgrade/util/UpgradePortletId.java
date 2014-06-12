@@ -127,7 +127,7 @@ public class UpgradePortletId extends UpgradeProcess {
 				column, StringUtil.merge(portletIds).concat(StringPool.COMMA));
 		}
 
-		return typeSettingsProperties.toSortedString();
+		return typeSettingsProperties.toString();
 	}
 
 	protected String[][] getRenamePortletIdsArray() {

@@ -48,7 +48,7 @@ public class MDRRuleImpl extends MDRRuleBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(_typeSettingsProperties.toSortedString());
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	private UnicodeProperties _typeSettingsProperties;

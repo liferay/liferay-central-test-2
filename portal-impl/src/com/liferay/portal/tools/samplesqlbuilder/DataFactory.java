@@ -1668,7 +1668,7 @@ public class DataFactory {
 		typeSettingsProperties.setProperty("column-2", column2);
 
 		String typeSettings = StringUtil.replace(
-			typeSettingsProperties.toSortedString(), "\n", "\\n");
+			typeSettingsProperties.toString(), "\n", "\\n");
 
 		layoutModel.setTypeSettings(typeSettings);
 

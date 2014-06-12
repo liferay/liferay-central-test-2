@@ -2585,7 +2585,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, layoutId);
 
 		layout.setModifiedDate(now);
-		layout.setTypeSettings(typeSettingsProperties.toSortedString());
+		layout.setTypeSettings(typeSettingsProperties.toString());
 
 		layoutPersistence.update(layout);
 

@@ -495,7 +495,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 			return super.getTypeSettings();
 		}
 		else {
-			return _typeSettingsProperties.toSortedString();
+			return _typeSettingsProperties.toString();
 		}
 	}
 
@@ -808,7 +808,7 @@ public class LayoutImpl extends LayoutBaseImpl {
 
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(_typeSettingsProperties.toSortedString());
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	protected Theme getTheme(String device) throws PortalException {

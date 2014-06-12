@@ -247,7 +247,7 @@ public class VerifyGroup extends VerifyProcess {
 				"false-robots.txt", publicLayoutSetRobots);
 
 			GroupLocalServiceUtil.updateGroup(
-				group.getGroupId(), typeSettingsProperties.toSortedString());
+				group.getGroupId(), typeSettingsProperties.toString());
 		}
 	}
 
@@ -290,7 +290,7 @@ public class VerifyGroup extends VerifyProcess {
 				"stagedRemotely", Boolean.FALSE.toString());
 
 			GroupLocalServiceUtil.updateGroup(
-				group.getGroupId(), typeSettingsProperties.toSortedString());
+				group.getGroupId(), typeSettingsProperties.toString());
 
 			Group stagingGroup = group.getStagingGroup();
 

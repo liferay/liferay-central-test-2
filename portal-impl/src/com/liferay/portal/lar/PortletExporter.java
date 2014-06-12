@@ -602,8 +602,7 @@ public class PortletExporter {
 				UnicodeProperties typeSettingsProperties =
 					expandoColumn.getTypeSettingsProperties();
 
-				typeSettingsElement.addCDATA(
-					typeSettingsProperties.toSortedString());
+				typeSettingsElement.addCDATA(typeSettingsProperties.toString());
 			}
 		}
 
