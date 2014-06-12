@@ -177,7 +177,4 @@ public class DDMFormXSDDeserializerTest extends BaseDDMTest {
 			"opcao 1", value1Labels.getValue(LocaleUtil.BRAZIL));
 	}
 
-	private DDMFormXSDDeserializer _ddmFormXSDDeserializer =
-		new DDMFormXSDDeserializerImpl();
-
 }
