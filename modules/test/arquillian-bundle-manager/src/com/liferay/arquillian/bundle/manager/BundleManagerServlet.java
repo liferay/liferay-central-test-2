@@ -108,9 +108,9 @@ public class BundleManagerServlet extends HttpServlet {
 		ServiceTracker<ServletContext, ServletContext> serviceTracker = null;
 
 		try {
-			InputStream inputStream = getBundleArchive(request);
-
 			BundleContext bundleContext = _bundle.getBundleContext();
+
+			InputStream inputStream = getBundleArchive(request);
 
 			Bundle bundle = bundleContext.installBundle(_location, inputStream);
 
@@ -133,8 +133,8 @@ public class BundleManagerServlet extends HttpServlet {
 
 			if (servlet == null) {
 				throw new TimeoutException(
-					"The arquillian servlet runner is taking more than " +
-						_timeout + " to deploy");
+					"The Arquillian servlet runner is taking more than " +
+						_timeout + " ms to deploy");
 			}
 
 			response.setStatus(HttpServletResponse.SC_OK);
