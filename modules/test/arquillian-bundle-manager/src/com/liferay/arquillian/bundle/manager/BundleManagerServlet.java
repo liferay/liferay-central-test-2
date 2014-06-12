@@ -78,7 +78,7 @@ public class BundleManagerServlet extends HttpServlet {
 			servletConfig.getInitParameter("location"), _LOCATION);
 
 		_timeout = GetterUtil.getLong(
-			servletConfig.getInitParameter("timeout"), TIMEOUT);
+			servletConfig.getInitParameter("timeout"), _TIMEOUT);
 	}
 
 	@Override
@@ -245,7 +245,7 @@ public class BundleManagerServlet extends HttpServlet {
 
 	private static final String _LOCATION = "BundleManagerServlet";
 
-	private static final long TIMEOUT = 10 * 1000L;
+	private static final long _TIMEOUT = 10000;
 
 	private static Log _log = LogFactoryUtil.getLog(BundleManagerServlet.class);
 
