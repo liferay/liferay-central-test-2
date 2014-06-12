@@ -97,7 +97,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateLocalRepositoryFromInexistingFileEntryId()
+	public void testCreateLocalRepositoryFromNonexistentFileEntryId()
 		throws Exception {
 
 		long fileEntryId = RandomTestUtil.randomLong();
@@ -106,7 +106,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateLocalRepositoryFromInexistingFileVersionId()
+	public void testCreateLocalRepositoryFromNonexistentFileVersionId()
 		throws Exception {
 
 		long fileVersionId = RandomTestUtil.randomLong();
@@ -115,7 +115,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateLocalRepositoryFromInexistingFolderId()
+	public void testCreateLocalRepositoryFromNonexistentFolderId()
 		throws Exception {
 
 		long folderId = RandomTestUtil.randomLong();
@@ -124,7 +124,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = RepositoryException.class)
-	public void testCreateLocalRepositoryFromInexistingRepositoryId()
+	public void testCreateLocalRepositoryFromNonexistentRepositoryId()
 		throws Exception {
 
 		long repositoryId = RandomTestUtil.randomLong();
@@ -197,7 +197,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateRepositoryFromInexistingFileEntryId()
+	public void testCreateRepositoryFromNonexistentFileEntryId()
 		throws Exception {
 
 		long fileEntryId = RandomTestUtil.randomLong();
@@ -206,7 +206,7 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateRepositoryFromInexistingFileVersionId()
+	public void testCreateRepositoryFromNonexistentFileVersionId()
 		throws Exception {
 
 		long fileVersionId = RandomTestUtil.randomLong();
@@ -215,14 +215,14 @@ public class RepositoryServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateRepositoryFromInexistingFolderId() throws Exception {
+	public void testCreateRepositoryFromNonexistentFolderId() throws Exception {
 		long folderId = RandomTestUtil.randomLong();
 
 		RepositoryServiceUtil.getRepositoryImpl(folderId, 0, 0);
 	}
 
 	@Test(expected = RepositoryException.class)
-	public void testCreateRepositoryFromInexistingRepositoryId()
+	public void testCreateRepositoryFromNonexistentRepositoryId()
 		throws Exception {
 
 		long repositoryId = RandomTestUtil.randomLong();
