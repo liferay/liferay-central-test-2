@@ -17,7 +17,7 @@ package com.liferay.portal.security.permission;
 /**
  * @author Adolfo Pérez
  */
-public class AlwaysAllowingPermissionChecker extends AdvancedPermissionChecker {
+public class AlwaysAllowingPermissionChecker extends SimplePermissionChecker {
 
 	@Override
 	public boolean hasOwnerPermission(
