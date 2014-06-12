@@ -18,5 +18,4 @@ package com.liferay.portal.kernel.repository.capabilities;
  * @author Adolfo Pérez
  */
 public interface Capability {
-
 }
