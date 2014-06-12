@@ -167,9 +167,9 @@ public class BlogsPortletInstanceSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.BLOGS, _getFallbackKeys(), _MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.BLOGS_ADMIN, _getFallbackKeys(), _MULTI_VALUED_KEYS);
 	}
 

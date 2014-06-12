@@ -199,7 +199,7 @@ public class BookmarksSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			BookmarksConstants.SERVICE_NAME, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
 	}

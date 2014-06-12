@@ -177,7 +177,7 @@ public class DLSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.BLOGS, _getFallbackKeys(), _MULTI_VALUED_KEYS);
 	}
 

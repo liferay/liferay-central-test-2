@@ -329,7 +329,7 @@ public class ShoppingSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			ShoppingConstants.SERVICE_NAME, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
 	}

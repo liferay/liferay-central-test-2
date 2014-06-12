@@ -147,7 +147,7 @@ public class WikiSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			WikiConstants.SERVICE_NAME, _getFallbackKeys(), _MULTI_VALUED_KEYS);
 	}
 

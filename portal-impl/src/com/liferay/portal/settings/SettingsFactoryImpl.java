@@ -165,7 +165,7 @@ public class SettingsFactoryImpl implements SettingsFactory {
 	}
 
 	@Override
-	public void registerMetadata(
+	public void registerSettingsMetadata(
 		String settingsId, FallbackKeys fallbackKeys,
 		String[] multiValuedKeysArray) {
 

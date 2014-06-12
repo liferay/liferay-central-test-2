@@ -150,7 +150,7 @@ public class BlogsSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			BlogsConstants.SERVICE_NAME, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
 	}

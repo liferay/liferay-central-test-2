@@ -177,16 +177,16 @@ public class DLPortletInstanceSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY_ADMIN, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.DOCUMENT_LIBRARY_DISPLAY, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.MEDIA_GALLERY_DISPLAY, _getFallbackKeys(),
 			_MULTI_VALUED_KEYS);
 	}

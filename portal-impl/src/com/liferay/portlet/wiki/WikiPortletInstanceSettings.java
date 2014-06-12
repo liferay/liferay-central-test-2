@@ -163,11 +163,11 @@ public class WikiPortletInstanceSettings {
 		SettingsFactory settingsFactory =
 			SettingsFactoryUtil.getSettingsFactory();
 
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI, _getFallbackKeys(), _MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI_ADMIN, _getFallbackKeys(), _MULTI_VALUED_KEYS);
-		settingsFactory.registerMetadata(
+		settingsFactory.registerSettingsMetadata(
 			PortletKeys.WIKI_DISPLAY, _getFallbackKeys(), _MULTI_VALUED_KEYS);
 	}
 
