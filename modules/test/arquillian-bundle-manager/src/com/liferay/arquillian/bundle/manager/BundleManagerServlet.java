@@ -67,16 +67,16 @@ public class BundleManagerServlet extends HttpServlet {
 		ServletContext servletContext = servletConfig.getServletContext();
 
 		if (servletContext instanceof BundleReference) {
-			_bundle = ((BundleReference)servletContext).getBundle();
+			BundleReference bundleReference = (BundleReference)servletContext;
+
+			_bundle = bundleReference.getBundle();
 		}
 
 		_contextPathHeader = GetterUtil.getString(
 			servletConfig.getInitParameter("contextPathHeader"),
 			"Bundle-Context-Path");
-
 		_location = GetterUtil.getString(
 			servletConfig.getInitParameter("location"), _LOCATION);
-
 		_timeout = GetterUtil.getLong(
 			servletConfig.getInitParameter("timeout"), _TIMEOUT);
 	}
