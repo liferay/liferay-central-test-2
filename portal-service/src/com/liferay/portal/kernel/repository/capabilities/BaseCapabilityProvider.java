@@ -14,11 +14,11 @@
 
 package com.liferay.portal.kernel.repository.capabilities;
 
-import java.util.Map;
-import java.util.Set;
-
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Adolfo Pérez
