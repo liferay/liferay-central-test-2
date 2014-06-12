@@ -205,17 +205,18 @@ public class BundleManagerServlet extends HttpServlet {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected Servlet waitForServlet(
 		ServletContext servletContext, String servletName, long timeout) {
 
-		long elapsedTime = 0;
-		long step = 10;
+		long attempts = 10;
+		long time = 0;
 
 		Servlet servlet = null;
 
-		while ((servlet == null) && (elapsedTime < timeout)) {
+		while ((servlet == null) && (time < timeout)) {
 			try {
-				Thread.sleep(step);
+				Thread.sleep(attempts);
 			}
 			catch (InterruptedException ie) {
 				break;
@@ -223,17 +224,16 @@ public class BundleManagerServlet extends HttpServlet {
 
 			try {
 
-				// Our current Http Service implementation returns a valid
-				// servlet so we currently can rely on this method invocation.
-				// The way we discover the servlet will be improved when a
-				// newer version of the Http Service is in place
+				// Our current HTTP service implementation returns a valid
+				// servlet. This will be swapped out for a nondeprecated
+				// implementation in the future.
 
 				servlet = servletContext.getServlet(servletName);
 			}
 			catch (ServletException se) {
 			}
 
-			elapsedTime += step;
+			time += attempts;
 		}
 
 		return servlet;
