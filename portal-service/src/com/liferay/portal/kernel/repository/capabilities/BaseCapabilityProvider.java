@@ -35,8 +35,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 					"Exporting capabilities not explicitly supported is not " +
 						"allowed. Provider supports %s, but tried to " +
 						"export %s",
-					supportedCapabilities.keySet(),
-					exportedCapabilityClasses));
+					supportedCapabilities.keySet(), exportedCapabilityClasses));
 		}
 
 		_supportedCapabilities = supportedCapabilities;

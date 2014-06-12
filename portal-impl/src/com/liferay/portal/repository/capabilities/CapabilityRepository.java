@@ -15,7 +15,6 @@
 package com.liferay.portal.repository.capabilities;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.Repository;
 import com.liferay.portal.kernel.repository.capabilities.Capability;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -55,7 +54,7 @@ public class CapabilityRepository
 			long folderId, String sourceFileName, String mimeType, String title,
 			String description, String changeLog, File file,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().addFileEntry(
 			folderId, sourceFileName, mimeType, title, description, changeLog,
@@ -67,7 +66,7 @@ public class CapabilityRepository
 			long folderId, String sourceFileName, String mimeType, String title,
 			String description, String changeLog, InputStream is, long size,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().addFileEntry(
 			folderId, sourceFileName, mimeType, title, description, changeLog,
@@ -78,16 +77,14 @@ public class CapabilityRepository
 	public Folder addFolder(
 			long parentFolderId, String title, String description,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().addFolder(
 			parentFolderId, title, description, serviceContext);
 	}
 
 	@Override
-	public FileVersion cancelCheckOut(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public FileVersion cancelCheckOut(long fileEntryId) throws PortalException {
 		return getRepository().cancelCheckOut(fileEntryId);
 	}
 
@@ -95,7 +92,7 @@ public class CapabilityRepository
 	public void checkInFileEntry(
 			long fileEntryId, boolean major, String changeLog,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().checkInFileEntry(
 			fileEntryId, major, changeLog, serviceContext);
@@ -104,7 +101,7 @@ public class CapabilityRepository
 	@Deprecated
 	@Override
 	public void checkInFileEntry(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().checkInFileEntry(fileEntryId, lockUuid);
 	}
@@ -112,7 +109,7 @@ public class CapabilityRepository
 	@Override
 	public void checkInFileEntry(
 			long fileEntryId, String lockUuid, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().checkInFileEntry(fileEntryId, lockUuid, serviceContext);
 	}
@@ -120,7 +117,7 @@ public class CapabilityRepository
 	@Override
 	public FileEntry checkOutFileEntry(
 			long fileEntryId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().checkOutFileEntry(fileEntryId, serviceContext);
 	}
@@ -129,7 +126,7 @@ public class CapabilityRepository
 	public FileEntry checkOutFileEntry(
 			long fileEntryId, String owner, long expirationTime,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().checkOutFileEntry(
 			fileEntryId, owner, expirationTime, serviceContext);
@@ -139,43 +136,39 @@ public class CapabilityRepository
 	public FileEntry copyFileEntry(
 			long groupId, long fileEntryId, long destFolderId,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().copyFileEntry(
 			groupId, fileEntryId, destFolderId, serviceContext);
 	}
 
 	@Override
-	public void deleteFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public void deleteFileEntry(long fileEntryId) throws PortalException {
 		getRepository().deleteFileEntry(fileEntryId);
 	}
 
 	@Override
 	public void deleteFileEntry(long folderId, String title)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().deleteFileEntry(folderId, title);
 	}
 
 	@Override
 	public void deleteFileVersion(long fileEntryId, String version)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().deleteFileVersion(fileEntryId, version);
 	}
 
 	@Override
-	public void deleteFolder(long folderId)
-		throws PortalException, SystemException {
-
+	public void deleteFolder(long folderId) throws PortalException {
 		getRepository().deleteFolder(folderId);
 	}
 
 	@Override
 	public void deleteFolder(long parentFolderId, String title)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().deleteFolder(parentFolderId, title);
 	}
@@ -183,7 +176,7 @@ public class CapabilityRepository
 	@Override
 	public List<FileEntry> getFileEntries(
 			long folderId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntries(folderId, start, end, obc);
 	}
@@ -192,7 +185,7 @@ public class CapabilityRepository
 	public List<FileEntry> getFileEntries(
 			long folderId, long fileEntryTypeId, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntries(
 			folderId, fileEntryTypeId, start, end, obc);
@@ -202,7 +195,7 @@ public class CapabilityRepository
 	public List<FileEntry> getFileEntries(
 			long folderId, String[] mimeTypes, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntries(
 			folderId, mimeTypes, start, end, obc);
@@ -211,7 +204,7 @@ public class CapabilityRepository
 	@Override
 	public List<Object> getFileEntriesAndFileShortcuts(
 			long folderId, int status, int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntriesAndFileShortcuts(
 			folderId, status, start, end);
@@ -219,7 +212,7 @@ public class CapabilityRepository
 
 	@Override
 	public int getFileEntriesAndFileShortcutsCount(long folderId, int status)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntriesAndFileShortcutsCount(
 			folderId, status);
@@ -228,71 +221,63 @@ public class CapabilityRepository
 	@Override
 	public int getFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimeTypes)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntriesAndFileShortcutsCount(
 			folderId, status, mimeTypes);
 	}
 
 	@Override
-	public int getFileEntriesCount(long folderId)
-		throws PortalException, SystemException {
-
+	public int getFileEntriesCount(long folderId) throws PortalException {
 		return getRepository().getFileEntriesCount(folderId);
 	}
 
 	@Override
 	public int getFileEntriesCount(long folderId, long fileEntryTypeId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntriesCount(folderId, fileEntryTypeId);
 	}
 
 	@Override
 	public int getFileEntriesCount(long folderId, String[] mimeTypes)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntriesCount(folderId, mimeTypes);
 	}
 
 	@Override
-	public FileEntry getFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public FileEntry getFileEntry(long fileEntryId) throws PortalException {
 		return getRepository().getFileEntry(fileEntryId);
 	}
 
 	@Override
 	public FileEntry getFileEntry(long folderId, String title)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileEntry(folderId, title);
 	}
 
 	@Override
-	public FileEntry getFileEntryByUuid(String uuid)
-		throws PortalException, SystemException {
-
+	public FileEntry getFileEntryByUuid(String uuid) throws PortalException {
 		return getRepository().getFileEntryByUuid(uuid);
 	}
 
 	@Override
 	public FileVersion getFileVersion(long fileVersionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFileVersion(fileVersionId);
 	}
 
 	@Override
-	public Folder getFolder(long folderId)
-		throws PortalException, SystemException {
-
+	public Folder getFolder(long folderId) throws PortalException {
 		return getRepository().getFolder(folderId);
 	}
 
 	@Override
 	public Folder getFolder(long parentFolderId, String title)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFolder(parentFolderId, title);
 	}
@@ -301,7 +286,7 @@ public class CapabilityRepository
 	public List<Folder> getFolders(
 			long parentFolderId, boolean includeMountFolders, int start,
 			int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFolders(
 			parentFolderId, includeMountFolders, start, end, obc);
@@ -311,7 +296,7 @@ public class CapabilityRepository
 	public List<Folder> getFolders(
 			long parentFolderId, int status, boolean includeMountFolders,
 			int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFolders(
 			parentFolderId, status, includeMountFolders, start, end, obc);
@@ -321,7 +306,7 @@ public class CapabilityRepository
 	public List<Object> getFoldersAndFileEntriesAndFileShortcuts(
 			long folderId, int status, boolean includeMountFolders, int start,
 			int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersAndFileEntriesAndFileShortcuts(
 			folderId, status, includeMountFolders, start, end, obc);
@@ -332,7 +317,7 @@ public class CapabilityRepository
 			long folderId, int status, String[] mimetypes,
 			boolean includeMountFolders, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersAndFileEntriesAndFileShortcuts(
 			folderId, status, mimetypes, includeMountFolders, start, end, obc);
@@ -341,7 +326,7 @@ public class CapabilityRepository
 	@Override
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, boolean includeMountFolders)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersAndFileEntriesAndFileShortcutsCount(
 			folderId, status, includeMountFolders);
@@ -351,7 +336,7 @@ public class CapabilityRepository
 	public int getFoldersAndFileEntriesAndFileShortcutsCount(
 			long folderId, int status, String[] mimetypes,
 			boolean includeMountFolders)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersAndFileEntriesAndFileShortcutsCount(
 			folderId, status, mimetypes, includeMountFolders);
@@ -359,7 +344,7 @@ public class CapabilityRepository
 
 	@Override
 	public int getFoldersCount(long parentFolderId, boolean includeMountfolders)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersCount(
 			parentFolderId, includeMountfolders);
@@ -368,7 +353,7 @@ public class CapabilityRepository
 	@Override
 	public int getFoldersCount(
 			long parentFolderId, int status, boolean includeMountfolders)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersCount(
 			parentFolderId, status, includeMountfolders);
@@ -376,7 +361,7 @@ public class CapabilityRepository
 
 	@Override
 	public int getFoldersFileEntriesCount(List<Long> folderIds, int status)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getFoldersFileEntriesCount(folderIds, status);
 	}
@@ -384,14 +369,14 @@ public class CapabilityRepository
 	@Override
 	public List<Folder> getMountFolders(
 			long parentFolderId, int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getMountFolders(parentFolderId, start, end, obc);
 	}
 
 	@Override
 	public int getMountFoldersCount(long parentFolderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getMountFoldersCount(parentFolderId);
 	}
@@ -400,7 +385,7 @@ public class CapabilityRepository
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, long rootFolderId, int start, int end,
 			OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getRepositoryFileEntries(
 			userId, rootFolderId, start, end, obc);
@@ -410,7 +395,7 @@ public class CapabilityRepository
 	public List<FileEntry> getRepositoryFileEntries(
 			long userId, long rootFolderId, String[] mimeTypes, int status,
 			int start, int end, OrderByComparator obc)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getRepositoryFileEntries(
 			userId, rootFolderId, mimeTypes, status, start, end, obc);
@@ -418,7 +403,7 @@ public class CapabilityRepository
 
 	@Override
 	public int getRepositoryFileEntriesCount(long userId, long rootFolderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getRepositoryFileEntriesCount(
 			userId, rootFolderId);
@@ -427,7 +412,7 @@ public class CapabilityRepository
 	@Override
 	public int getRepositoryFileEntriesCount(
 			long userId, long rootFolderId, String[] mimeTypes, int status)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getRepositoryFileEntriesCount(
 			userId, rootFolderId, mimeTypes, status);
@@ -440,23 +425,21 @@ public class CapabilityRepository
 
 	@Override
 	public void getSubfolderIds(List<Long> folderIds, long folderId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().getSubfolderIds(folderIds, folderId);
 	}
 
 	@Override
 	public List<Long> getSubfolderIds(long folderId, boolean recurse)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().getSubfolderIds(folderId, recurse);
 	}
 
 	@Deprecated
 	@Override
-	public Lock lockFileEntry(long fileEntryId)
-		throws PortalException, SystemException {
-
+	public Lock lockFileEntry(long fileEntryId) throws PortalException {
 		return getRepository().lockFileEntry(fileEntryId);
 	}
 
@@ -464,16 +447,14 @@ public class CapabilityRepository
 	@Override
 	public Lock lockFileEntry(
 			long fileEntryId, String owner, long expirationTime)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().lockFileEntry(
 			fileEntryId, owner, expirationTime);
 	}
 
 	@Override
-	public Lock lockFolder(long folderId)
-		throws PortalException, SystemException {
-
+	public Lock lockFolder(long folderId) throws PortalException {
 		return getRepository().lockFolder(folderId);
 	}
 
@@ -481,7 +462,7 @@ public class CapabilityRepository
 	public Lock lockFolder(
 			long folderId, String owner, boolean inheritable,
 			long expirationTime)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().lockFolder(
 			folderId, owner, inheritable, expirationTime);
@@ -490,7 +471,7 @@ public class CapabilityRepository
 	@Override
 	public FileEntry moveFileEntry(
 			long fileEntryId, long newFolderId, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().moveFileEntry(
 			fileEntryId, newFolderId, serviceContext);
@@ -500,7 +481,7 @@ public class CapabilityRepository
 	public Folder moveFolder(
 			long folderId, long newParentFolderId,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().moveFolder(
 			folderId, newParentFolderId, serviceContext);
@@ -509,7 +490,7 @@ public class CapabilityRepository
 	@Override
 	public Lock refreshFileEntryLock(
 			String lockUuid, long companyId, long expirationTime)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().refreshFileEntryLock(
 			lockUuid, companyId, expirationTime);
@@ -518,7 +499,7 @@ public class CapabilityRepository
 	@Override
 	public Lock refreshFolderLock(
 			String lockUuid, long companyId, long expirationTime)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().refreshFolderLock(
 			lockUuid, companyId, expirationTime);
@@ -527,14 +508,14 @@ public class CapabilityRepository
 	@Override
 	public void revertFileEntry(
 			long fileEntryId, String version, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().revertFileEntry(fileEntryId, version, serviceContext);
 	}
 
 	@Override
 	public Hits search(long creatorUserId, int status, int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().search(creatorUserId, status, start, end);
 	}
@@ -543,7 +524,7 @@ public class CapabilityRepository
 	public Hits search(
 			long creatorUserId, long folderId, String[] mimeTypes, int status,
 			int start, int end)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().search(
 			creatorUserId, folderId, mimeTypes, status, start, end);
@@ -563,14 +544,14 @@ public class CapabilityRepository
 
 	@Override
 	public void unlockFolder(long folderId, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().unlockFolder(folderId, lockUuid);
 	}
 
 	@Override
 	public void unlockFolder(long parentFolderId, String title, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		getRepository().unlockFolder(parentFolderId, title, lockUuid);
 	}
@@ -580,7 +561,7 @@ public class CapabilityRepository
 			long fileEntryId, String sourceFileName, String mimeType,
 			String title, String description, String changeLog,
 			boolean majorVersion, File file, ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().updateFileEntry(
 			fileEntryId, sourceFileName, mimeType, title, description,
@@ -593,7 +574,7 @@ public class CapabilityRepository
 			String title, String description, String changeLog,
 			boolean majorVersion, InputStream is, long size,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().updateFileEntry(
 			fileEntryId, sourceFileName, mimeType, title, description,
@@ -604,7 +585,7 @@ public class CapabilityRepository
 	public Folder updateFolder(
 			long folderId, String title, String description,
 			ServiceContext serviceContext)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().updateFolder(
 			folderId, title, description, serviceContext);
@@ -612,21 +593,21 @@ public class CapabilityRepository
 
 	@Override
 	public boolean verifyFileEntryCheckOut(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().verifyFileEntryCheckOut(fileEntryId, lockUuid);
 	}
 
 	@Override
 	public boolean verifyFileEntryLock(long fileEntryId, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().verifyFileEntryLock(fileEntryId, lockUuid);
 	}
 
 	@Override
 	public boolean verifyInheritableLock(long folderId, String lockUuid)
-		throws PortalException, SystemException {
+		throws PortalException {
 
 		return getRepository().verifyInheritableLock(folderId, lockUuid);
 	}
