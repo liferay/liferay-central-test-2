@@ -497,12 +497,12 @@
 
 				var domElement = new CKEDITOR.dom.element(element);
 
-				var width = domElement.getStyle('width').replace('px', '') || 'auto';
 				var height = domElement.getStyle('height').replace('px', '') || 'auto';
+				var width = domElement.getStyle('width').replace('px', '') || 'auto';
 
 				var openTag = '[img]';
 
-				if (width !== 'auto' || height !== 'auto') {
+				if ((height !== 'auto') || (width !== 'auto')) {
 					openTag = tplImageOpenTag.output(
 						{
 							height: height,
