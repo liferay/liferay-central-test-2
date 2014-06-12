@@ -2044,9 +2044,7 @@ public class JournalArticleLocalServiceUtil {
 	public static boolean isRenderable(
 		com.liferay.portlet.journal.model.JournalArticle article,
 		com.liferay.portal.kernel.portlet.PortletRequestModel portletRequestModel,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		return getService()
 				   .isRenderable(article, portletRequestModel, themeDisplay);
 	}

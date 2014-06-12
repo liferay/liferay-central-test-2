@@ -2980,9 +2980,8 @@ public class JournalArticleLocalServiceImpl
 
 	@Override
 	public boolean isRenderable(
-			JournalArticle article, PortletRequestModel portletRequestModel,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
+		JournalArticle article, PortletRequestModel portletRequestModel,
+		ThemeDisplay themeDisplay) {
 
 		try {
 			getArticleDisplay(

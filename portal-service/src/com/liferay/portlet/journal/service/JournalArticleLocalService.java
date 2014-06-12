@@ -1823,9 +1823,7 @@ public interface JournalArticleLocalService extends BaseLocalService,
 	public boolean isRenderable(
 		com.liferay.portlet.journal.model.JournalArticle article,
 		com.liferay.portal.kernel.portlet.PortletRequestModel portletRequestModel,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
 	/**
 	* Moves the web content article matching the group and article ID to a new
