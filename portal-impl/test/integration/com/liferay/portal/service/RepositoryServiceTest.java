@@ -176,7 +176,7 @@ public class RepositoryServiceTest {
 
 		try {
 			PermissionThreadLocal.setPermissionChecker(
-				ALWAYS_DENYING_PERMISSION_CHECKER);
+				new AlwaysDenyingPermissionChecker());
 
 			RepositoryServiceUtil.getRepositoryImpl(
 				dlFolder.getFolderId(), 0, 0);
@@ -229,9 +229,6 @@ public class RepositoryServiceTest {
 
 		RepositoryServiceUtil.getRepositoryImpl(repositoryId);
 	}
-
-	private static final PermissionChecker ALWAYS_DENYING_PERMISSION_CHECKER =
-		new AlwaysDenyingPermissionChecker();
 
 	@DeleteAfterTestRun
 	private Group _group;

@@ -97,7 +97,7 @@ public class RepositoryFactoryTest {
 
 		try {
 			PermissionThreadLocal.setPermissionChecker(
-				ALWAYS_DENYING_PERMISSION_CHECKER);
+				new AlwaysDenyingPermissionChecker());
 
 			RepositoryFactoryUtil.create(dlFolder.getFolderId(), 0, 0);
 		}
@@ -149,9 +149,6 @@ public class RepositoryFactoryTest {
 
 		RepositoryFactoryUtil.create(repositoryId);
 	}
-
-	private static final PermissionChecker ALWAYS_DENYING_PERMISSION_CHECKER =
-		new AlwaysDenyingPermissionChecker();
 
 	@DeleteAfterTestRun
 	private Group _group;
