@@ -117,8 +117,8 @@ public class BundleManagerServlet extends HttpServlet {
 			bundle.start();
 
 			Filter filter = bundleContext.createFilter(
-				"(&(objectClass=javax.servlet.ServletContext)(bundle.id=" +
-					bundle.getBundleId() + "))");
+				"(&(bundle.id=" + bundle.getBundleId() +
+					")(objectClass=javax.servlet.ServletContext))");
 
 			serviceTracker = new ServiceTracker<ServletContext, ServletContext>(
 				bundleContext, filter, null);
