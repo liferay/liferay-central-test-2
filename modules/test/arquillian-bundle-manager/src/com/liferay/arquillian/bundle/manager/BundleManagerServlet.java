@@ -105,7 +105,7 @@ public class BundleManagerServlet extends HttpServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException {
 
-		ServiceTracker serviceTracker = null;
+		ServiceTracker<ServletContext, ServletContext> serviceTracker = null;
 
 		try {
 			InputStream inputStream = _getBundleArchive(request);
@@ -120,12 +120,13 @@ public class BundleManagerServlet extends HttpServlet {
 				"(&(objectClass=javax.servlet.ServletContext)(bundle.id=" +
 					bundle.getBundleId() + "))");
 
-			serviceTracker = new ServiceTracker(bundleContext, filter, null);
+			serviceTracker = new ServiceTracker<ServletContext, ServletContext>(
+				bundleContext, filter, null);
 
 			serviceTracker.open();
 
-			ServletContext servletContext =
-				(ServletContext)serviceTracker.waitForService(_timeout);
+			ServletContext servletContext = serviceTracker.waitForService(
+				_timeout);
 
 			Servlet servlet = _waitForServlet(
 				servletContext, "ArquillianServletRunner", _timeout);
