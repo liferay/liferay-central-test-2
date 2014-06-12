@@ -84,7 +84,7 @@ public class BundleManagerServlet extends HttpServlet {
 	@Override
 	protected void doDelete(
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws ServletException {
 
 		BundleContext bundleContext = _bundle.getBundleContext();
 
@@ -103,7 +103,7 @@ public class BundleManagerServlet extends HttpServlet {
 	@Override
 	protected void doPost(
 			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		throws IOException {
 
 		ServiceTracker serviceTracker = null;
 
