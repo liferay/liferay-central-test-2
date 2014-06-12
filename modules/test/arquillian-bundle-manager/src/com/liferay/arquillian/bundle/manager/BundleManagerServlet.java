@@ -137,10 +137,10 @@ public class BundleManagerServlet extends HttpServlet {
 						_timeout + " ms to deploy");
 			}
 
-			response.setStatus(HttpServletResponse.SC_OK);
 			response.setContentType("text/text");
 			response.setHeader(
 				_contextPathHeader, servletContext.getContextPath());
+			response.setStatus(HttpServletResponse.SC_OK);
 		}
 		catch (Exception e) {
 			sendError(e, response);
