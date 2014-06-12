@@ -1285,7 +1285,7 @@ public abstract class BaseSourceProcessor implements SourceProcessor {
 		"<liferay-ui:error [^>]+>|<liferay-ui:success [^>]+>",
 		Pattern.MULTILINE);
 
-	private String[] _getExcludes() throws IOException {
+	private String[] _getExcludes() {
 		List<String> excludesList = ListUtil.fromString(
 			GetterUtil.getString(
 				System.getProperty("source.formatter.excludes")));
