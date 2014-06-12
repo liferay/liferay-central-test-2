@@ -16,6 +16,7 @@ package com.liferay.portal.repository.capabilities;
 
 import com.liferay.portal.kernel.repository.capabilities.BaseCapabilityProvider;
 import com.liferay.portal.kernel.repository.capabilities.Capability;
+import com.liferay.portal.kernel.util.ClassUtil;
 
 import java.util.Map;
 import java.util.Set;
@@ -39,7 +40,8 @@ public abstract class BaseCapabilityRepository<T>
 	@Override
 	protected String getProviderKey() {
 		return String.format(
-			"%s:%s", getRepository().getClass(), getRepositoryId());
+			"%s:%s", ClassUtil.getClassName(getRepository()),
+			getRepositoryId());
 	}
 
 	protected T getRepository() {
@@ -48,6 +50,6 @@ public abstract class BaseCapabilityRepository<T>
 
 	protected abstract long getRepositoryId();
 
-	private final T _repository;
+	private T _repository;
 
 }
