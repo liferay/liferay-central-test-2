@@ -28,10 +28,10 @@ public abstract class BaseCapabilityRepository<T>
 
 	public BaseCapabilityRepository(
 		T repository,
-		Map<Class<? extends Capability>, Capability> supportedCapabilitiesMap,
+		Map<Class<? extends Capability>, Capability> supportedCapabilities,
 		Set<Class<? extends Capability>> exportedCapabilityClasses) {
 
-		super(supportedCapabilitiesMap, exportedCapabilityClasses);
+		super(supportedCapabilities, exportedCapabilityClasses);
 
 		_repository = repository;
 	}

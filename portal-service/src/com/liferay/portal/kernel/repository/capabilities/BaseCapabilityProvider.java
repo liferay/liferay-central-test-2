@@ -23,23 +23,23 @@ import java.util.Set;
 public abstract class BaseCapabilityProvider implements CapabilityProvider {
 
 	public BaseCapabilityProvider(
-		Map<Class<? extends Capability>, Capability> supportedCapabilitiesMap,
+		Map<Class<? extends Capability>, Capability> supportedCapabilities,
 		Set<Class<? extends Capability>> exportedCapabilityClasses) {
 
-		Set<Class<? extends Capability>> supportedCapabilities =
-			supportedCapabilitiesMap.keySet();
+		Set<Class<? extends Capability>> supportedCapabilitiesSet =
+			supportedCapabilities.keySet();
 
-		if (!supportedCapabilities.containsAll(exportedCapabilityClasses)) {
+		if (!supportedCapabilitiesSet.containsAll(exportedCapabilityClasses)) {
 			throw new IllegalArgumentException(
 				String.format(
 					"Exporting capabilities not explicitly supported is not " +
 						"allowed. Provider supports %s, but tried to " +
 						"export %s",
-					supportedCapabilitiesMap.keySet(),
+					supportedCapabilities.keySet(),
 					exportedCapabilityClasses));
 		}
 
-		_supportedCapabilitiesMap = supportedCapabilitiesMap;
+		_supportedCapabilities = supportedCapabilities;
 		_exportedCapabilityClasses = exportedCapabilityClasses;
 	}
 
@@ -65,7 +65,7 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 	protected <S extends Capability> S getInternalCapability(
 		Class<S> capabilityClass) {
 
-		Capability capability = _supportedCapabilitiesMap.get(capabilityClass);
+		Capability capability = _supportedCapabilities.get(capabilityClass);
 
 		if (capability == null) {
 			throw new IllegalArgumentException(
@@ -81,6 +81,6 @@ public abstract class BaseCapabilityProvider implements CapabilityProvider {
 
 	private final Set<Class<? extends Capability>> _exportedCapabilityClasses;
 	private final Map<Class<? extends Capability>, Capability>
-		_supportedCapabilitiesMap;
+		_supportedCapabilities;
 
 }

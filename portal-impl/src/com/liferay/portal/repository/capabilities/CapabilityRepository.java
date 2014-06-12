@@ -44,10 +44,10 @@ public class CapabilityRepository
 
 	public CapabilityRepository(
 		Repository repository,
-		Map<Class<? extends Capability>, Capability> supportedCapabilitiesMap,
+		Map<Class<? extends Capability>, Capability> supportedCapabilities,
 		Set<Class<? extends Capability>> exportedCapabilityClasses) {
 
-		super(repository, supportedCapabilitiesMap, exportedCapabilityClasses);
+		super(repository, supportedCapabilities, exportedCapabilityClasses);
 	}
 
 	@Override
