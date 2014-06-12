@@ -40,6 +40,8 @@ public class ThemeDisplayTestUtil {
 	public static ThemeDisplay getThemeDisplay(long companyId)
 		throws PortalException, SystemException {
 
+		ThemeDisplay themeDisplay = new ThemeDisplay();
+
 		HttpServletRequest request = new MockHttpServletRequest();
 
 		request.setAttribute(WebKeys.COMPANY_ID, companyId);
@@ -47,9 +49,8 @@ public class ThemeDisplayTestUtil {
 			WebKeys.CURRENT_URL, "http://localhost:80/web/guest/home");
 		request.setAttribute(WebKeys.USER, TestPropsValues.getUser());
 
-		ThemeDisplay themeDisplay = new ThemeDisplay();
-
 		themeDisplay.setRequest(request);
+
 		themeDisplay.setSecure(false);
 		themeDisplay.setServerPort(8080);
 		themeDisplay.setWidget(false);
