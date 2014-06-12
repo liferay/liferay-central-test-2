@@ -93,6 +93,15 @@ public class RepositoryLocalServiceTest {
 	}
 
 	@Test(expected = NoSuchRepositoryEntryException.class)
+	public void testCreateLocalRepositoryFromInvalidFolderId()
+		throws Exception {
+
+		long folderId = RandomTestUtil.randomLong();
+
+		RepositoryLocalServiceUtil.getLocalRepositoryImpl(folderId, 0, 0);
+	}
+
+	@Test(expected = NoSuchRepositoryEntryException.class)
 	public void testCreateLocalRepositoryFromNonexistentFileEntryId()
 		throws Exception {
 
@@ -117,15 +126,6 @@ public class RepositoryLocalServiceTest {
 		long repositoryId = RandomTestUtil.randomLong();
 
 		RepositoryLocalServiceUtil.getLocalRepositoryImpl(repositoryId);
-	}
-
-	@Test(expected = NoSuchRepositoryEntryException.class)
-	public void testCreateLocalRepositoryFromInvalidFolderId()
-		throws Exception {
-
-		long folderId = RandomTestUtil.randomLong();
-
-		RepositoryLocalServiceUtil.getLocalRepositoryImpl(folderId, 0, 0);
 	}
 
 	@Test
