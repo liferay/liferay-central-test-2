@@ -54,10 +54,11 @@ import org.osgi.util.tracker.ServiceTracker;
  * @author Miguel Pastor
  */
 @Component (
-	service = Servlet.class, property = {
+	property = {
 		"servletName=arquillian-bundle-manager",
 		"urlPattern=/arquillian-bundle-manager"
-	})
+	},
+	service = Servlet.class)
 public class BundleManagerServlet extends HttpServlet {
 
 	@Override
@@ -174,8 +175,7 @@ public class BundleManagerServlet extends HttpServlet {
 		ServletFileUpload servletFileUpload = new ServletFileUpload(
 			diskFileItemFactory);
 
-		List<FileItem> fileItems = servletFileUpload.parseRequest(
-			request);
+		List<FileItem> fileItems = servletFileUpload.parseRequest(request);
 
 		FileItem fileItem = fileItems.get(0);
 
@@ -185,12 +185,10 @@ public class BundleManagerServlet extends HttpServlet {
 	protected void sendError(
 		Throwable throwable, HttpServletResponse response) {
 
-		response.setStatus(
-			HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
 
 		try {
-			ServletOutputStream outputStream =
-				response.getOutputStream();
+			ServletOutputStream outputStream = response.getOutputStream();
 
 			response.setContentType(StringPool.UTF8);
 
