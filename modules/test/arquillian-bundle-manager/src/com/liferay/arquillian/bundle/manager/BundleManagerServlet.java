@@ -201,11 +201,9 @@ public class BundleManagerServlet extends HttpServlet {
 			printWriter.flush();
 		}
 		catch (IOException ioe) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Unexpected error while signaling " +
-						throwable.getMessage(), ioe);
-			}
+			_log.error(
+				"Unexpected error while signaling " +
+					throwable.getMessage(), ioe);
 		}
 	}
 
