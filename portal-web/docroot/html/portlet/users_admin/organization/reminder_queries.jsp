@@ -32,8 +32,6 @@ if ((organization != null) && Validator.isNull(reminderQueries)) {
 }
 
 Map<Locale, String> reminderQueriesMap = LocalizationUtil.getLocalizedParameter(renderRequest, "reminderQueries");
-
-String portletId = portletDisplay.getRootPortletId();
 %>
 
 <h3><liferay-ui:message key="reminder-queries" /></h3>
@@ -188,7 +186,7 @@ String portletId = portletDisplay.getRootPortletId();
 	var <portlet:namespace />reminderQueriesHandle = Liferay.on('submitForm', <portlet:namespace />updateReminderQueriesLanguage);
 
 	var <portlet:namespace />clearReminderQueriesHandle = function(event) {
-		if (event.portletId === '<%= portletId %>') {
+		if (event.portletId === '<%= portletDisplay.getRootPortletId() %>') {
 			<portlet:namespace />reminderQueriesHandle.detach();
 
 			Liferay.detach('destroyPortlet', <portlet:namespace />clearReminderQueriesHandle);
