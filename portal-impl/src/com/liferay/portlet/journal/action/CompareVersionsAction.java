@@ -14,7 +14,7 @@
 
 package com.liferay.portlet.journal.action;
 
-import com.liferay.portal.CompareVersionsException;
+import com.liferay.portal.kernel.diff.CompareVersionsException;
 import com.liferay.portal.kernel.portlet.PortletRequestModel;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;

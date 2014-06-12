@@ -14,10 +14,10 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.CompareVersionsException;
 import com.liferay.portal.LocaleException;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.diff.CompareVersionsException;
 import com.liferay.portal.kernel.diff.DiffHtmlUtil;
 import com.liferay.portal.kernel.diff.DiffVersion;
 import com.liferay.portal.kernel.diff.DiffVersionsInfo;
