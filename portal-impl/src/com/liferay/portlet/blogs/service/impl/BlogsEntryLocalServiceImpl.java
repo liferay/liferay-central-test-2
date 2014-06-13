@@ -181,9 +181,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(serviceContext.getCreateDate(now));
 		entry.setModifiedDate(serviceContext.getModifiedDate(now));
 		entry.setTitle(title);
+		entry.setDeckTitle(deckTitle);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, title, null, serviceContext));
-		entry.setDeckTitle(deckTitle);
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
@@ -1066,9 +1066,9 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		entry.setModifiedDate(serviceContext.getModifiedDate(null));
 		entry.setTitle(title);
+		entry.setDeckTitle(deckTitle);
 		entry.setUrlTitle(
 			getUniqueUrlTitle(entryId, title, oldUrlTitle, serviceContext));
-		entry.setDeckTitle(deckTitle);
 		entry.setDescription(description);
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
