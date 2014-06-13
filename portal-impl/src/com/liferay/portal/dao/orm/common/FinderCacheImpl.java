@@ -284,8 +284,7 @@ public class FinderCacheImpl
 				primaryKeys);
 
 			Map<Serializable, ? extends BaseModel<?>> map =
-				(Map<Serializable, ? extends BaseModel<?>>)
-					basePersistenceImpl.fetchByPrimaryKeys(primaryKeysSet);
+				basePersistenceImpl.fetchByPrimaryKeys(primaryKeysSet);
 
 			if (map.size() < primaryKeysSet.size()) {
 				return null;
