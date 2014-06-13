@@ -98,11 +98,11 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 			_log.info("Registering themes for " + servletContextName);
 		}
 
+		FileTimestampUtil.reset();
+
 		List<Theme> themes = ThemeLocalServiceUtil.init(
 			servletContextName, servletContext, null, true, xmls,
 			hotDeployEvent.getPluginPackage());
-
-		FileTimestampUtil.reset();
 
 		_themes.put(servletContextName, themes);
 
