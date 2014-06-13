@@ -62,8 +62,8 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 		attributes.put("createDate", getCreateDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("urlTitle", getUrlTitle());
 		attributes.put("deckTitle", getDeckTitle());
+		attributes.put("urlTitle", getUrlTitle());
 		attributes.put("description", getDescription());
 		attributes.put("content", getContent());
 		attributes.put("displayDate", getDisplayDate());
@@ -137,16 +137,16 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 			setTitle(title);
 		}
 
-		String urlTitle = (String)attributes.get("urlTitle");
-
-		if (urlTitle != null) {
-			setUrlTitle(urlTitle);
-		}
-
 		String deckTitle = (String)attributes.get("deckTitle");
 
 		if (deckTitle != null) {
 			setDeckTitle(deckTitle);
+		}
+
+		String urlTitle = (String)attributes.get("urlTitle");
+
+		if (urlTitle != null) {
+			setUrlTitle(urlTitle);
 		}
 
 		String description = (String)attributes.get("description");
@@ -449,26 +449,6 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 	}
 
 	/**
-	* Returns the url title of this blogs entry.
-	*
-	* @return the url title of this blogs entry
-	*/
-	@Override
-	public java.lang.String getUrlTitle() {
-		return _blogsEntry.getUrlTitle();
-	}
-
-	/**
-	* Sets the url title of this blogs entry.
-	*
-	* @param urlTitle the url title of this blogs entry
-	*/
-	@Override
-	public void setUrlTitle(java.lang.String urlTitle) {
-		_blogsEntry.setUrlTitle(urlTitle);
-	}
-
-	/**
 	* Returns the deck title of this blogs entry.
 	*
 	* @return the deck title of this blogs entry
@@ -486,6 +466,26 @@ public class BlogsEntryWrapper implements BlogsEntry, ModelWrapper<BlogsEntry> {
 	@Override
 	public void setDeckTitle(java.lang.String deckTitle) {
 		_blogsEntry.setDeckTitle(deckTitle);
+	}
+
+	/**
+	* Returns the url title of this blogs entry.
+	*
+	* @return the url title of this blogs entry
+	*/
+	@Override
+	public java.lang.String getUrlTitle() {
+		return _blogsEntry.getUrlTitle();
+	}
+
+	/**
+	* Sets the url title of this blogs entry.
+	*
+	* @param urlTitle the url title of this blogs entry
+	*/
+	@Override
+	public void setUrlTitle(java.lang.String urlTitle) {
+		_blogsEntry.setUrlTitle(urlTitle);
 	}
 
 	/**

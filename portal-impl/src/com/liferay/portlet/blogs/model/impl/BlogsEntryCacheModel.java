@@ -58,10 +58,10 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		sb.append(modifiedDate);
 		sb.append(", title=");
 		sb.append(title);
-		sb.append(", urlTitle=");
-		sb.append(urlTitle);
 		sb.append(", deckTitle=");
 		sb.append(deckTitle);
+		sb.append(", urlTitle=");
+		sb.append(urlTitle);
 		sb.append(", description=");
 		sb.append(description);
 		sb.append(", content=");
@@ -137,18 +137,18 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 			blogsEntryImpl.setTitle(title);
 		}
 
-		if (urlTitle == null) {
-			blogsEntryImpl.setUrlTitle(StringPool.BLANK);
-		}
-		else {
-			blogsEntryImpl.setUrlTitle(urlTitle);
-		}
-
 		if (deckTitle == null) {
 			blogsEntryImpl.setDeckTitle(StringPool.BLANK);
 		}
 		else {
 			blogsEntryImpl.setDeckTitle(deckTitle);
+		}
+
+		if (urlTitle == null) {
+			blogsEntryImpl.setUrlTitle(StringPool.BLANK);
+		}
+		else {
+			blogsEntryImpl.setUrlTitle(urlTitle);
 		}
 
 		if (description == null) {
@@ -225,8 +225,8 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 		createDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		title = objectInput.readUTF();
-		urlTitle = objectInput.readUTF();
 		deckTitle = objectInput.readUTF();
+		urlTitle = objectInput.readUTF();
 		description = objectInput.readUTF();
 		content = objectInput.readUTF();
 		displayDate = objectInput.readLong();
@@ -274,18 +274,18 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 			objectOutput.writeUTF(title);
 		}
 
-		if (urlTitle == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(urlTitle);
-		}
-
 		if (deckTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
 			objectOutput.writeUTF(deckTitle);
+		}
+
+		if (urlTitle == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(urlTitle);
 		}
 
 		if (description == null) {
@@ -345,8 +345,8 @@ public class BlogsEntryCacheModel implements CacheModel<BlogsEntry>,
 	public long createDate;
 	public long modifiedDate;
 	public String title;
-	public String urlTitle;
 	public String deckTitle;
+	public String urlTitle;
 	public String description;
 	public String content;
 	public long displayDate;

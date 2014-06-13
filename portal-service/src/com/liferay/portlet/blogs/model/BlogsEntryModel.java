@@ -229,21 +229,6 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	public void setTitle(String title);
 
 	/**
-	 * Returns the url title of this blogs entry.
-	 *
-	 * @return the url title of this blogs entry
-	 */
-	@AutoEscape
-	public String getUrlTitle();
-
-	/**
-	 * Sets the url title of this blogs entry.
-	 *
-	 * @param urlTitle the url title of this blogs entry
-	 */
-	public void setUrlTitle(String urlTitle);
-
-	/**
 	 * Returns the deck title of this blogs entry.
 	 *
 	 * @return the deck title of this blogs entry
@@ -257,6 +242,21 @@ public interface BlogsEntryModel extends BaseModel<BlogsEntry>,
 	 * @param deckTitle the deck title of this blogs entry
 	 */
 	public void setDeckTitle(String deckTitle);
+
+	/**
+	 * Returns the url title of this blogs entry.
+	 *
+	 * @return the url title of this blogs entry
+	 */
+	@AutoEscape
+	public String getUrlTitle();
+
+	/**
+	 * Sets the url title of this blogs entry.
+	 *
+	 * @param urlTitle the url title of this blogs entry
+	 */
+	public void setUrlTitle(String urlTitle);
 
 	/**
 	 * Returns the description of this blogs entry.
