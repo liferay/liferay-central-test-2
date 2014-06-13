@@ -1,9 +1,9 @@
-CKEDITOR.plugins.add( 'lfrpopup' );
+CKEDITOR.plugins.add('lfrpopup');
 
 AUI().use(
 	'querystring-parse',
 	function(A) {
-		CKEDITOR.editor.prototype.popup = function( url, width, height, options ) {
+		CKEDITOR.editor.prototype.popup = function(url, width, height, options) {
 			options = A.QueryString.parse(options);
 
 			Liferay.Util.openWindow(

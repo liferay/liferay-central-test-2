@@ -41,10 +41,8 @@ if (folder != null) {
 	DLUtil.addPortletBreadcrumbEntries(folder, request, renderResponse);
 }
 
-String eventName = ParamUtil.getString(request, "eventName");
-
 String ckEditorFuncNum = DocumentSelectorUtil.getCKEditorFuncNum(request);
-
+String eventName = ParamUtil.getString(request, "eventName");
 boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector");
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -52,8 +50,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/document_selector/view");
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("folderId", String.valueOf(folderId));
-portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("ckEditorFuncNum", ckEditorFuncNum);
+portletURL.setParameter("eventName", eventName);
 portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 %>
 
@@ -71,8 +69,8 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 		PortletURL selectGroupURL = renderResponse.createRenderURL();
 
 		selectGroupURL.setParameter("struts_action", "/document_selector/view");
-		selectGroupURL.setParameter("eventName", eventName);
 		selectGroupURL.setParameter("ckEditorFuncNum", ckEditorFuncNum);
+		selectGroupURL.setParameter("eventName", eventName);
 		selectGroupURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 
 		for (Group group : PortalUtil.getBrowsableScopeGroups(themeDisplay.getUserId(), themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(), refererPortletName)) {
@@ -221,8 +219,8 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 					<portlet:param name="struts_action" value="/document_selector/view" />
 					<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
-					<portlet:param name="eventName" value="<%= eventName %>" />
 					<portlet:param name="ckEditorFuncNum" value="<%= ckEditorFuncNum %>" />
+					<portlet:param name="eventName" value="<%= eventName %>" />
 					<portlet:param name="showGroupsSelector" value="<%= String.valueOf(showGroupsSelector) %>" />
 				</portlet:renderURL>
 
@@ -275,8 +273,8 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 
 	backURL.setParameter("struts_action", "/document_selector/view");
 	backURL.setParameter("groupId", String.valueOf(groupId));
-	backURL.setParameter("eventName", eventName);
 	backURL.setParameter("ckEditorFuncNum", ckEditorFuncNum);
+	backURL.setParameter("eventName", eventName);
 	backURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 	%>
 
@@ -292,8 +290,8 @@ portletURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector)
 	iteratorURL.setParameter("struts_action", "/document_selector/view");
 	iteratorURL.setParameter("groupId", String.valueOf(groupId));
 	iteratorURL.setParameter("folderId", String.valueOf(folderId));
-	iteratorURL.setParameter("eventName", eventName);
 	iteratorURL.setParameter("ckEditorFuncNum", ckEditorFuncNum);
+	iteratorURL.setParameter("eventName", eventName);
 	iteratorURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 	%>
 
