@@ -42,6 +42,7 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 	extends BaseSubscriptionTestCase {
 
 	@Before
+	@Override
 	public void setUp() throws Exception {
 		super.setUp();
 
@@ -50,6 +51,7 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 	}
 
 	@After
+	@Override
 	public void tearDown() throws Exception {
 		super.tearDown();
 
