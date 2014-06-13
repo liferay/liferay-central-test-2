@@ -45,8 +45,8 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 	public void setUp() throws Exception {
 		super.setUp();
 
-		layout = LayoutTestUtil.addLayout(group);
 		defaultLocale = LocaleThreadLocal.getDefaultLocale();
+		layout = LayoutTestUtil.addLayout(group);
 	}
 
 	@After
@@ -98,7 +98,6 @@ public abstract class BaseSubscriptionLocalizedContentTestCase
 		LocalizationUtil.setPreferencesValue(
 			portletPreferences, getSubscriptionBodyPreferenceName(),
 			LocaleUtil.toLanguageId(LocaleUtil.GERMANY), GERMAN_BODY);
-
 		LocalizationUtil.setPreferencesValue(
 			portletPreferences, getSubscriptionBodyPreferenceName(),
 			LocaleUtil.toLanguageId(LocaleUtil.SPAIN), SPANISH_BODY);
