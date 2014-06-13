@@ -65,7 +65,10 @@ import java.util.List;
 public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	/**
-	 * @deprecated As of 7.0.0, replaced by {@link #addEntry(String, String, String, String, int, int, int, int, int, boolean, boolean, String[], boolean, String, String, InputStream, ServiceContext)}
+	 * @deprecated As of 7.0.0, replaced by {@link #addEntry(String, String,
+	 *             String, String, int, int, int, int, int, boolean, boolean,
+	 *             String[], boolean, String, String, InputStream,
+	 *             ServiceContext)}
 	 */
 	@Deprecated
 	@Override
