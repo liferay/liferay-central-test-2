@@ -107,6 +107,10 @@ import net.htmlparser.jericho.StartTag;
  */
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
+	/**
+	 * @deprecated As of 7.0.0, replaced by {@link #addEntry(long, String, String, String, String, int, int, int, int, int, boolean, boolean, String[], boolean, String, String, InputStream, ServiceContext)}
+	 */
+	@Deprecated
 	@Override
 	public BlogsEntry addEntry(
 			long userId, String title, String description, String content,
