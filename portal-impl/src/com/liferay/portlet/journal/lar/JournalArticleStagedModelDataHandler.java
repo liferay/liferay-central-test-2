@@ -325,8 +325,7 @@ public class JournalArticleStagedModelDataHandler
 				String smallImageURL =
 					ExportImportHelperUtil.replaceExportContentReferences(
 						portletDataContext, article,
-						article.getSmallImageURL().concat(StringPool.SPACE),
-						true);
+						article.getSmallImageURL() + StringPool.SPACE, true);
 
 				article.setSmallImageURL(smallImageURL);
 			}

@@ -83,8 +83,7 @@ public class BlogsEntryStagedModelDataHandler
 				String smallImageURL =
 					ExportImportHelperUtil.replaceExportContentReferences(
 						portletDataContext, entry,
-						entry.getSmallImageURL().concat(StringPool.SPACE),
-						true);
+						entry.getSmallImageURL() + StringPool.SPACE, true);
 
 				entry.setSmallImageURL(smallImageURL);
 			}
@@ -164,10 +163,9 @@ public class BlogsEntryStagedModelDataHandler
 					entry.setSmallImageURL(smallImageURL);
 				}
 				else if (Validator.isNotNull(smallImagePath)) {
-					smallImageFileName = String.valueOf(
-						entry.getSmallImageId()).concat(
-							StringPool.PERIOD).concat(
-								entry.getSmallImageType());
+					smallImageFileName =
+						entry.getSmallImageId() + StringPool.PERIOD +
+							entry.getSmallImageType();
 
 					smallImageInputStream =
 						portletDataContext.getZipEntryAsInputStream(
