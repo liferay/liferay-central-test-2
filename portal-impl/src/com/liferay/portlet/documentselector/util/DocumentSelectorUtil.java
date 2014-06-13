@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portlet.documentselector;
+package com.liferay.portlet.documentselector.util;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
