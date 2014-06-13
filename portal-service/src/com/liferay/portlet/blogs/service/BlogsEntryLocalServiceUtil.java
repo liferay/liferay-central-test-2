@@ -316,6 +316,13 @@ public class BlogsEntryLocalServiceUtil {
 		getService().setBeanIdentifier(beanIdentifier);
 	}
 
+	/**
+	* @deprecated As of 7.0.0, replaced by {@link #addEntry(long, String,
+	String, String, String, int, int, int, int, int, boolean,
+	boolean, String[], boolean, String, String, InputStream,
+	ServiceContext)}
+	*/
+	@Deprecated
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		long userId, java.lang.String title, java.lang.String description,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
