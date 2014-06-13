@@ -382,6 +382,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		DirectServletRegistryUtil.clearServlets();
 		FileTimestampUtil.reset();
+
 		SettingsFactoryUtil.clearCache();
 
 		_portlets.put(servletContextName, portlets);
