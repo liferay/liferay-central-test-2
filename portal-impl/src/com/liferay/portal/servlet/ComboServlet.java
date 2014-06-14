@@ -97,24 +97,24 @@ public class ComboServlet extends HttpServlet {
 		}
 	}
 
-	protected static String getModuleContextPath(String modulePathString) {
-		int index = modulePathString.indexOf(CharPool.COLON);
+	protected static String getModuleContextPath(String modulePath) {
+		int index = modulePath.indexOf(CharPool.COLON);
 
 		if (index > 0) {
-			return modulePathString.substring(0, index);
+			return modulePath.substring(0, index);
 		}
 
 		return StringPool.BLANK;
 	}
 
-	protected static String getResourcePath(String modulePathString) {
-		int index = modulePathString.indexOf(CharPool.COLON);
+	protected static String getResourcePath(String modulePath) {
+		int index = modulePath.indexOf(CharPool.COLON);
 
 		if (index > 0) {
-			return modulePathString.substring(index + 1);
+			return modulePath.substring(index + 1);
 		}
 
-		return modulePathString;
+		return modulePath;
 	}
 
 	protected void doService(
