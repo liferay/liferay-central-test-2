@@ -57,6 +57,7 @@ public class ModulePathContainerTest {
 	@Test
 	public void testModulePathWithPluginContextWithInitialSlash() {
 		String modulePath = "/plugin-context:/js/javascript.js";
+
 		Assert.assertEquals(
 			"/plugin-context", ComboServlet.getModuleContextPath(modulePath));
 		Assert.assertEquals(

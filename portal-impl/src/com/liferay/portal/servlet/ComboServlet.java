@@ -353,9 +353,10 @@ public class ComboServlet extends HttpServlet {
 
 	protected URL getResourceURL(String modulePath) throws Exception {
 		String moduleContextPath = getModuleContextPath(modulePath);
-		String resourcePath = getResourcePath(modulePath);
 
 		ServletContext servletContext = getServletContext(moduleContextPath);
+
+		String resourcePath = getResourcePath(modulePath);
 
 		URL url = servletContext.getResource(resourcePath);
 
