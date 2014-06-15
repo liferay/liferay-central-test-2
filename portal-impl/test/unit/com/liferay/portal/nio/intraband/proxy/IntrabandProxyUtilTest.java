@@ -622,6 +622,7 @@ public class IntrabandProxyUtilTest {
 	public void testRewriteGetProxyMethodSignaturesMethodNode() {
 		class TestClass {
 
+			@SuppressWarnings("unused")
 			public final String[] PROXY_METHOD_SIGNATURES =
 				_getProxyMethodSignatures();
 
@@ -1758,7 +1759,7 @@ public class IntrabandProxyUtilTest {
 			Modifier.PRIVATE | Modifier.STATIC | Modifier.FINAL, String.class);
 
 		Assert.assertEquals(
-			sb.toString(), (String)proxyMethodsMappingField.get(null));
+			sb.toString(), proxyMethodsMappingField.get(null));
 
 		Field logField = _assertDeclaredField(
 			skeletonClass, "_log", Modifier.PRIVATE | Modifier.STATIC,
@@ -2575,6 +2576,7 @@ public class IntrabandProxyUtilTest {
 		public void doStuff2() {
 		}
 
+		@SuppressWarnings("unused")
 		public void doStuff3() {
 		}
 
@@ -2584,6 +2586,7 @@ public class IntrabandProxyUtilTest {
 
 	private static class TestGenerateStubFunction1 {
 
+		@SuppressWarnings("unused")
 		public TestGenerateStubFunction1() {
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -2617,6 +2620,7 @@ public class IntrabandProxyUtilTest {
 			return _clazz.equals(testGenerateTargetLocator._clazz);
 		}
 
+		@SuppressWarnings("unused")
 		public String getId() {
 			return _id;
 		}
@@ -2704,18 +2708,21 @@ public class IntrabandProxyUtilTest {
 		extends TestProxyMethodsClass
 		implements TestEmptyMethodsInterface, TestIdMethodsInterface {
 
+		@SuppressWarnings("unused")
 		public void copyMethod1() {
 			if (_log.isInfoEnabled()) {
 				_log.info("copyMethod1");
 			}
 		}
 
+		@SuppressWarnings("unused")
 		protected void copyMethod2() {
 			if (_log.isInfoEnabled()) {
 				_log.info("copyMethod2");
 			}
 		}
 
+		@SuppressWarnings("unused")
 		void copyMethod3() {
 			if (_log.isInfoEnabled()) {
 				_log.info("copyMethod3");
