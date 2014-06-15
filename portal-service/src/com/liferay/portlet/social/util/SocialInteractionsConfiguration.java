@@ -165,6 +165,7 @@ public class SocialInteractionsConfiguration {
 		}
 
 		private String _value;
+
 	}
 
 	private SocialInteractionsConfiguration
