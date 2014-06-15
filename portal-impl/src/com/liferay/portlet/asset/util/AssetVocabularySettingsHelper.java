@@ -63,10 +63,10 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getRequiredClassNameIds() {
-		String[] classNameIdsAndTypePKs =
+		String[] classNameIdsAndClassTypePKs =
 			getRequiredClassNameIdsAndClassTypePKs();
 
-		return getClassNameIds(classNameIdsAndTypePKs);
+		return getClassNameIds(classNameIdsAndClassTypePKs);
 	}
 
 	public long[] getRequiredClassTypePKs() {
