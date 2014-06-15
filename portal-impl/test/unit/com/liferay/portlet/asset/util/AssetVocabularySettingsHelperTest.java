@@ -99,11 +99,12 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	@Test
-	public void testGetRequiredClassTypePK() {
+	public void testGetRequiredClassTypePKs() {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(1, 2, true);
 
-		long[] classTypePKs = vocabularySettingsHelper.getRequiredClassTypePKs();
+		long[] classTypePKs =
+			vocabularySettingsHelper.getRequiredClassTypePKs();
 
 		Assert.assertNotNull(classTypePKs);
 		Assert.assertEquals(1, classTypePKs.length);
@@ -111,7 +112,7 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	@Test
-	public void testHasClassNameAndTypeId() {
+	public void testHasClassNameIdAndClassTypePK() {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(
 				AssetCategoryConstants.ALL_CLASS_NAME_IDS, true);
@@ -140,7 +141,7 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	@Test
-	public void testIsClassNameAndTypeIdRequired() {
+	public void testIsClassNameIdAndClassTypePKRequired() {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(
 				AssetCategoryConstants.ALL_CLASS_NAME_IDS, false);
