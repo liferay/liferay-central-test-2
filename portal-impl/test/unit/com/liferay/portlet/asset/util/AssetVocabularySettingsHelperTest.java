@@ -56,9 +56,9 @@ public class AssetVocabularySettingsHelperTest {
 		Assert.assertEquals(1, classTypePKs.length);
 		Assert.assertEquals(2, classTypePKs[0]);
 
-		vocabularySettingsHelper =new AssetVocabularySettingsHelper(
+		vocabularySettingsHelper = new AssetVocabularySettingsHelper(
 			"multiValued=false\nselectedClassNameIds=1\n");
-				
+
 		classTypePKs = vocabularySettingsHelper.getClassTypePKs();
 
 		Assert.assertNotNull(classTypePKs);

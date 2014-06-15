@@ -159,21 +159,6 @@ public class AssetVocabularySettingsHelper {
 		return Long.valueOf(parts[0]);
 	}
 
-	protected String[] getClassNameIdsAndClassTypePKs() {
-		String propertyValue = _properties.getProperty(
-			_KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS);
-
-		if (Validator.isNull(propertyValue)) {
-			return new String[] {
-				getClassNameIdAndClassTypePK(
-					AssetCategoryConstants.ALL_CLASS_NAME_ID,
-					AssetCategoryConstants.ALL_CLASS_TYPE_PK)
-			};
-		}
-
-		return StringUtil.split(propertyValue);
-	}
-
 	protected String getClassNameIdAndClassTypePK(
 		long classNameId, long classTypePK) {
 
@@ -191,6 +176,21 @@ public class AssetVocabularySettingsHelper {
 		}
 
 		return classNameIds;
+	}
+
+	protected String[] getClassNameIdsAndClassTypePKs() {
+		String propertyValue = _properties.getProperty(
+			_KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS);
+
+		if (Validator.isNull(propertyValue)) {
+			return new String[] {
+				getClassNameIdAndClassTypePK(
+					AssetCategoryConstants.ALL_CLASS_NAME_ID,
+					AssetCategoryConstants.ALL_CLASS_TYPE_PK)
+			};
+		}
+
+		return StringUtil.split(propertyValue);
 	}
 
 	protected long getClassTypePK(String classNameIdAndClassTypePK) {
