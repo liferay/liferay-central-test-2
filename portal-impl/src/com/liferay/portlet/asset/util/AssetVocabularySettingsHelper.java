@@ -179,10 +179,10 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	protected String[] getClassNameIdsAndClassTypePKs() {
-		String propertyValue = _properties.getProperty(
+		String value = _properties.getProperty(
 			_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS);
 
-		if (Validator.isNull(propertyValue)) {
+		if (Validator.isNull(value)) {
 			return new String[] {
 				getClassNameIdAndClassTypePK(
 					AssetCategoryConstants.ALL_CLASS_NAME_ID,
@@ -190,7 +190,7 @@ public class AssetVocabularySettingsHelper {
 			};
 		}
 
-		return StringUtil.split(propertyValue);
+		return StringUtil.split(value);
 	}
 
 	protected long getClassTypePK(String classNameIdAndClassTypePK) {
@@ -218,14 +218,14 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	protected String[] getRequiredClassNameIdsAndClassTypePKs() {
-		String propertyValue = _properties.getProperty(
+		String value = _properties.getProperty(
 			_KEY_REQUIRED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS);
 
-		if (Validator.isNull(propertyValue)) {
+		if (Validator.isNull(value)) {
 			return new String[0];
 		}
 
-		return StringUtil.split(propertyValue);
+		return StringUtil.split(value);
 	}
 
 	protected boolean isClassNameIdAndClassTypePKSpecified(
