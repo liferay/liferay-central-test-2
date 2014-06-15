@@ -24,57 +24,44 @@ public class UpgradeAssetVocabularyTest {
 
 	@Test
 	public void testUpgradeWithEmptySettings() {
-		String oldSettings = "multiValued=false\nselectedClassNameIds=0\n";
-		String expectedSettings =
-			"multiValued=false\nselectedClassNameIds=0:-1\n";
-
-		_testUpgrade(oldSettings, expectedSettings);
+		testUpgrade(
+			"multiValued=false\nselectedClassNameIds=0\n",
+			"multiValued=false\nselectedClassNameIds=0:-1\n");
 	}
 
 	@Test
 	public void testUpgradeWithMultipleRequiredSettings() {
-		String oldSettings =
+		testUpgrade(
 			"multiValued=true\nrequiredClassNameIds=10005\n" +
-				"selectedClassNameIds=10007,10005,10109\n";
-		String expectedSettings =
+				"selectedClassNameIds=10007,10005,10109\n",
 			"multiValued=true\nrequiredClassNameIds=10005:-1\n" +
-				"selectedClassNameIds=10007:-1,10005:-1,10109:-1\n";
-
-		_testUpgrade(oldSettings, expectedSettings);
+				"selectedClassNameIds=10007:-1,10005:-1,10109:-1\n");
 	}
 
 	@Test
 	public void testUpgradeWithMultiValuedSettings() {
-		String oldSettings =
-			"multiValued=true\nselectedClassNameIds=10007,10005\n";
-		String expectedSettings =
-			"multiValued=true\nselectedClassNameIds=10007:-1,10005:-1\n";
-
-		_testUpgrade(oldSettings, expectedSettings);
+		testUpgrade(
+			"multiValued=true\nselectedClassNameIds=10007,10005\n",
+			"multiValued=true\nselectedClassNameIds=10007:-1,10005:-1\n");
 	}
 
 	@Test
 	public void testUpgradeWithoutRequiredSettings() {
-		String oldSettings = "multiValued=false\nselectedClassNameIds=10007\n";
-		String expectedSettings =
-			"multiValued=false\nselectedClassNameIds=10007:-1\n";
-
-		_testUpgrade(oldSettings, expectedSettings);
+		testUpgrade(
+			"multiValued=false\nselectedClassNameIds=10007\n",
+			"multiValued=false\nselectedClassNameIds=10007:-1\n");
 	}
 
 	@Test
 	public void testUpgradeWithRequiredSettings() {
-		String oldSettings =
+		testUpgrade(
 			"multiValued=false\nrequiredClassNameIds=10007\n" +
-				"selectedClassNameIds=10007\n";
-		String expectedSettings =
+				"selectedClassNameIds=10007\n",
 			"multiValued=false\nrequiredClassNameIds=10007:-1\n" +
-				"selectedClassNameIds=10007:-1\n";
-
-		_testUpgrade(oldSettings, expectedSettings);
+				"selectedClassNameIds=10007:-1\n");
 	}
 
-	private void _testUpgrade(
+	protected void testUpgrade(
 		String oldSettings, String expectedUpgradedSettings) {
 
 		UpgradeAsset upgradeAsset = new UpgradeAsset();
