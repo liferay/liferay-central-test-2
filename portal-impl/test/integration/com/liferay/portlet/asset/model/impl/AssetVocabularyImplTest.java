@@ -148,29 +148,45 @@ public class AssetVocabularyImplTest {
 			_group.getGroupId(), AssetCategoryConstants.ALL_CLASS_NAME_IDS,
 			AssetCategoryConstants.ALL_CLASS_TYPE_PKS, false);
 
-		Assert.assertFalse(vocabulary.isRequired(1));
-		Assert.assertFalse(vocabulary.isRequired(2));
+		Assert.assertFalse(
+			vocabulary.isRequired(
+				1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
+		Assert.assertFalse(
+			vocabulary.isRequired(
+				2, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
 
 		vocabulary = AssetTestUtil.addVocabulary(
 			_group.getGroupId(), AssetCategoryConstants.ALL_CLASS_NAME_IDS,
 			AssetCategoryConstants.ALL_CLASS_TYPE_PKS, true);
 
-		Assert.assertTrue(vocabulary.isRequired(1));
-		Assert.assertTrue(vocabulary.isRequired(2));
+		Assert.assertTrue(
+			vocabulary.isRequired(
+				1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
+		Assert.assertTrue(
+			vocabulary.isRequired(
+				2, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
 
 		vocabulary = AssetTestUtil.addVocabulary(
 			_group.getGroupId(), 1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS,
 			false);
 
-		Assert.assertFalse(vocabulary.isRequired(1));
-		Assert.assertFalse(vocabulary.isRequired(2));
+		Assert.assertFalse(
+			vocabulary.isRequired(
+				1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
+		Assert.assertFalse(
+			vocabulary.isRequired(
+				2, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
 
 		vocabulary = AssetTestUtil.addVocabulary(
 			_group.getGroupId(), 1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS,
 			true);
 
-		Assert.assertTrue(vocabulary.isRequired(1));
-		Assert.assertFalse(vocabulary.isRequired(2));
+		Assert.assertTrue(
+			vocabulary.isRequired(
+				1, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
+		Assert.assertFalse(
+			vocabulary.isRequired(
+				2, AssetCategoryConstants.ALL_CLASS_TYPE_PKS));
 	}
 
 	@DeleteAfterTestRun
