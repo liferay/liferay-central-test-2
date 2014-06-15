@@ -74,13 +74,15 @@ public class UpgradeAssetVocabularyTest {
 		_testUpgrade(oldSettings, expectedSettings);
 	}
 
-	private void _testUpgrade(String oldSettings, String expectedSettings) {
+	private void _testUpgrade(
+		String oldSettings, String expectedUpgradedSettings) {
+
 		UpgradeAsset upgradeAsset = new UpgradeAsset();
 
-		String upgradedSettings = upgradeAsset.upgradeVocabularySettings(
+		String actualUpgradedSettings = upgradeAsset.upgradeVocabularySettings(
 			oldSettings);
 
-		Assert.assertEquals(expectedSettings, upgradedSettings);
+		Assert.assertEquals(expectedUpgradedSettings, actualUpgradedSettings);
 	}
 
 }
