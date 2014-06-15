@@ -57,7 +57,7 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	@Test
-	public void testGetClassTypePK() {
+	public void testGetClassTypePKs() {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(1, 2, true);
 
@@ -69,7 +69,7 @@ public class AssetVocabularySettingsHelperTest {
 	}
 
 	@Test
-	public void testGetRequiredClassNameId() {
+	public void testGetRequiredClassNameIds() {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(1, 2, true);
 
@@ -88,7 +88,7 @@ public class AssetVocabularySettingsHelperTest {
 		Assert.assertEquals(0, classNameIds.length);
 
 		vocabularySettingsHelper = getVocabularySettingsHelper(
-				false, new long[] {1, 2}, new long[] {1, 2},
+			false, new long[] {1, 2}, new long[] {1, 2},
 			new boolean[] {true, false});
 
 		classNameIds = vocabularySettingsHelper.getRequiredClassNameIds();
