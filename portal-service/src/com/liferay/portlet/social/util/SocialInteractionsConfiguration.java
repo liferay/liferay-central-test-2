@@ -134,15 +134,15 @@ public class SocialInteractionsConfiguration {
 
 	public enum SocialInteractionsType {
 
-		INHERIT("inherit"), ALL_USERS("all_users"),
+		ALL_USERS("all_users"), INHERIT("inherit"),
 		SELECT_USERS("select_users");
 
 		public static SocialInteractionsType parse(String value) {
-			if (INHERIT.getValue().equals(value)) {
-				return INHERIT;
-			}
-			else if (ALL_USERS.getValue().equals(value)) {
+			if (ALL_USERS.getValue().equals(value)) {
 				return ALL_USERS;
+			}
+			else if (INHERIT.getValue().equals(value)) {
+				return INHERIT;
 			}
 			else if (SELECT_USERS.getValue().equals(value)) {
 				return SELECT_USERS;
