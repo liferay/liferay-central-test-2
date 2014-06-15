@@ -51,15 +51,15 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getClassNameIds() {
-		String[] classNameIdAndClassTypePK = getClassNameIdAndClassTypePK();
+		String[] classNameIdsAndClassTypePKs = getClassNameIdsAndClassTypePKs();
 
-		return getClassNameIds(classNameIdAndClassTypePK);
+		return getClassNameIds(classNameIdsAndClassTypePKs);
 	}
 
 	public long[] getClassTypePKs() {
-		String[] classNameIdAndClassTypePK = getClassNameIdAndClassTypePK();
+		String[] classNameIdsAndClassTypePKs = getClassNameIdsAndClassTypePKs();
 
-		return getClassTypePKs(classNameIdAndClassTypePK);
+		return getClassTypePKs(classNameIdsAndClassTypePKs);
 	}
 
 	public long[] getRequiredClassNameIds() {
@@ -70,17 +70,17 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getRequiredClassTypePKs() {
-		String[] classNameIdAndClassTypePKs =
+		String[] classNameIdsAndClassTypePKs =
 			getRequiredClassNameIdsAndClassTypePKs();
 
-		return getClassTypePKs(classNameIdAndClassTypePKs);
+		return getClassTypePKs(classNameIdsAndClassTypePKs);
 	}
 
 	public boolean hasClassNameIdAndClassTypePK(
 		long classNameId, long classTypePK) {
 
 		return isClassNameIdAndClassTypePKSpecified(
-			classNameId, classTypePK, getClassNameIdAndClassTypePK());
+			classNameId, classTypePK, getClassNameIdsAndClassTypePKs());
 	}
 
 	public boolean isClassNameIdAndClassTypePKRequired(
@@ -159,7 +159,7 @@ public class AssetVocabularySettingsHelper {
 		return Long.valueOf(parts[0]);
 	}
 
-	protected String[] getClassNameIdAndClassTypePK() {
+	protected String[] getClassNameIdsAndClassTypePKs() {
 		String propertyValue = _properties.getProperty(
 			_KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS);
 
@@ -181,11 +181,11 @@ public class AssetVocabularySettingsHelper {
 			String.valueOf(classTypePK));
 	}
 
-	protected long[] getClassNameIds(String[] classNamesAndTypes) {
-		long[] classNameIds = new long[classNamesAndTypes.length];
+	protected long[] getClassNameIds(String[] classNameIdsAndClassTypePKs) {
+		long[] classNameIds = new long[classNameIdsAndClassTypePKs.length];
 
-		for (int i = 0; i < classNamesAndTypes.length; i++) {
-			long classNameId = getClassNameId(classNamesAndTypes[i]);
+		for (int i = 0; i < classNameIdsAndClassTypePKs.length; i++) {
+			long classNameId = getClassNameId(classNameIdsAndClassTypePKs[i]);
 
 			classNameIds[i] = classNameId;
 		}
@@ -205,11 +205,11 @@ public class AssetVocabularySettingsHelper {
 		}
 	}
 
-	protected long[] getClassTypePKs(String[] classNameIdsAndTypePKs) {
-		long[] classTypePKs = new long[classNameIdsAndTypePKs.length];
+	protected long[] getClassTypePKs(String[] classNameIdsAndClassTypePKs) {
+		long[] classTypePKs = new long[classNameIdsAndClassTypePKs.length];
 
-		for (int i = 0; i < classNameIdsAndTypePKs.length; i++) {
-			long classTypePK = getClassTypePK(classNameIdsAndTypePKs[i]);
+		for (int i = 0; i < classNameIdsAndClassTypePKs.length; i++) {
+			long classTypePK = getClassTypePK(classNameIdsAndClassTypePKs[i]);
 
 			classTypePKs[i] = classTypePK;
 		}
