@@ -274,7 +274,8 @@ public class AssetVocabularySettingsHelper {
 			"requiredClassNameIds";
 
 	private static final String
-		_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS = "selectedClassNameIds";
+		_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS =
+			"selectedClassNameIds";
 
 	private UnicodeProperties _properties;
 

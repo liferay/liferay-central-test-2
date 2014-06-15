@@ -118,8 +118,7 @@ public class UpgradeAsset extends UpgradeProcess {
 			new AssetVocabularySettingsHelper();
 
 		vocabularySettingsHelper.setMultiValued(
-			GetterUtil.getBoolean(
-				properties.getProperty("multiValued"), true));
+			GetterUtil.getBoolean(properties.getProperty("multiValued"), true));
 
 		long[] classNameIds = StringUtil.split(
 			properties.getProperty("selectedClassNameIds"), 0L);
