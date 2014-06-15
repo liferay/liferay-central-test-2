@@ -103,7 +103,7 @@ public class AssetVocabularySettingsHelperTest {
 		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			getVocabularySettingsHelper(1, 2, true);
 
-		long[] classTypePKs = vocabularySettingsHelper.getClassTypePKs();
+		long[] classTypePKs = vocabularySettingsHelper.getRequiredClassTypePKs();
 
 		Assert.assertNotNull(classTypePKs);
 		Assert.assertEquals(1, classTypePKs.length);
