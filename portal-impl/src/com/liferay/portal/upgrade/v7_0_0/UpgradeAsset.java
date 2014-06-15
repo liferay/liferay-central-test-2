@@ -114,10 +114,10 @@ public class UpgradeAsset extends UpgradeProcess {
 
 		oldProperties.fastLoad(settings);
 
-		AssetVocabularySettingsHelper newProperties =
+		AssetVocabularySettingsHelper vocabularySettingsHelper =
 			new AssetVocabularySettingsHelper();
 
-		newProperties.setMultiValued(
+		vocabularySettingsHelper.setMultiValued(
 			GetterUtil.getBoolean(
 				oldProperties.getProperty("multiValued"), true));
 
@@ -138,10 +138,10 @@ public class UpgradeAsset extends UpgradeProcess {
 				requiredClassNameIds, classNameIds[i]);
 		}
 
-		newProperties.setClassNameIdsAndClassTypePKs(
+		vocabularySettingsHelper.setClassNameIdsAndClassTypePKs(
 			classNameIds, classTypePKs, requireds);
 
-		return newProperties.toString();
+		return vocabularySettingsHelper.toString();
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(UpgradeAsset.class);
