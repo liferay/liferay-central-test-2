@@ -138,7 +138,6 @@ public class IntrabandProxyUtilTest {
 
 			@SuppressWarnings("unused")
 			private String _testField;
-
 		}
 
 		Field[] fields = TestClass.class.getDeclaredFields();
@@ -1760,8 +1759,7 @@ public class IntrabandProxyUtilTest {
 			skeletonClass, "_proxyMethodsMapping",
 			Modifier.PRIVATE | Modifier.STATIC | Modifier.FINAL, String.class);
 
-		Assert.assertEquals(
-			sb.toString(), proxyMethodsMappingField.get(null));
+		Assert.assertEquals(sb.toString(), proxyMethodsMappingField.get(null));
 
 		Field logField = _assertDeclaredField(
 			skeletonClass, "_log", Modifier.PRIVATE | Modifier.STATIC,
@@ -2422,12 +2420,13 @@ public class IntrabandProxyUtilTest {
 		return classNode;
 	}
 
-	private static final Map<Class<?>, Class<?>> _autoboxingMap =
+	private static Map<Class<?>, Class<?>> _autoboxingMap =
 		new HashMap<Class<?>, Class<?>>();
-	private static final Map<Class<?>, Object> _defaultValueMap =
+	private static ClassLoader _classLoader =
+		IntrabandProxyUtilTest.class.getClassLoader();
+	private static Map<Class<?>, Object> _defaultValueMap =
 		new HashMap<Class<?>, Object>();
-
-	private static final Map<Class<?>, Object> _sampleValueMap =
+	private static Map<Class<?>, Object> _sampleValueMap =
 		new HashMap<Class<?>, Object>();
 
 	static {
@@ -2467,12 +2466,11 @@ public class IntrabandProxyUtilTest {
 		_sampleValueMap.put(void.class, null);
 	}
 
-	private static ClassLoader _classLoader =
-		IntrabandProxyUtilTest.class.getClassLoader();
-	private static Type[] _types = new Type[] {
+	private static Type[] _types = {
 		Type.BOOLEAN_TYPE, Type.BYTE_TYPE, Type.CHAR_TYPE, Type.DOUBLE_TYPE,
 		Type.FLOAT_TYPE, Type.INT_TYPE, Type.LONG_TYPE, Type.SHORT_TYPE,
-		Type.getType(String.class), Type.getType(Object.class)};
+		Type.getType(String.class), Type.getType(Object.class)
+	};
 
 	private static class AutoReplyMockIntraband extends MockIntraband {
 
@@ -2662,21 +2660,28 @@ public class IntrabandProxyUtilTest {
 
 		@SuppressWarnings("unused")
 		private static String[] PROXY_METHOD_SIGNATURES;
+
 		@SuppressWarnings("unused")
 		private static Log _log;
+
 		@SuppressWarnings("unused")
 		private static String _proxyMethodsMapping;
+
 		@SuppressWarnings("unused")
 		private static byte _proxyType;
 
 		@SuppressWarnings("unused")
 		private ExceptionHandler _exceptionHandler;
+
 		@SuppressWarnings("unused")
 		private String _id;
+
 		@SuppressWarnings("unused")
 		private Intraband _intraband;
+
 		@SuppressWarnings("unused")
 		private RegistrationReference _registrationReference;
+
 		@SuppressWarnings("unused")
 		private TargetLocator _targetLocator;
 
