@@ -152,7 +152,7 @@ public class SocialInteractionsConfigurationUtil {
 			defaultSocialInteractionsConfiguration);
 	}
 
-	public static boolean inheritSocialInteractionsConfiguration(
+	public static boolean isInheritSocialInteractionsConfiguration(
 		long companyId, HttpServletRequest request, String serviceName) {
 
 		PortletPreferences portletPreferences = PrefsPropsUtil.getPreferences(
