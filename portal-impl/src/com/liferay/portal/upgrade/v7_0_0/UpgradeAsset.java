@@ -38,11 +38,6 @@ public class UpgradeAsset extends UpgradeProcess {
 
 	@Override
 	protected void doUpgrade() throws Exception {
-		upgradeAssetEntryTable();
-		upgradeAssetVocabularies();
-	}
-
-	protected void upgradeAssetEntryTable() throws Exception {
 		try {
 			runSQL("alter_column_type AssetEntry description TEXT null");
 			runSQL("alter_column_type AssetEntry summary TEXT null");
@@ -53,9 +48,11 @@ public class UpgradeAsset extends UpgradeProcess {
 				AssetEntryTable.TABLE_SQL_CREATE,
 				AssetEntryTable.TABLE_SQL_ADD_INDEXES);
 		}
+
+		updateAssetVocabularies();
 	}
 
-	protected void upgradeAssetVocabularies() throws Exception {
+	protected void updateAssetVocabularies() throws Exception {
 		Connection connection = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
