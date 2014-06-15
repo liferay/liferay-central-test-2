@@ -86,7 +86,9 @@ if (vocabulary != null) {
 							<aui:option label="all-asset-subtypes" selected="<%= false %>" value="<%= AssetCategoryConstants.ALL_CLASS_TYPE_PKS %>" />
 
 							<%
-							List<ClassType> classTypes = assetRendererFactory.getClassTypeReader().getAvailableClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId}, themeDisplay.getLocale());
+							ClassTypeReader classTypeReader = assetRendererFactory.getClassTypeReader();
+
+							List<ClassType> classTypes = classTypeReader.getAvailableClassTypes(new long[] {themeDisplay.getCompanyGroupId(), scopeGroupId}, themeDisplay.getLocale());
 
 							if (classTypes.isEmpty()) {
 								continue;
