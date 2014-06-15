@@ -870,7 +870,7 @@ public class AssetEntryLocalServiceImpl extends AssetEntryLocalServiceBaseImpl {
 		throws PortalException {
 
 		validate(
-			groupId, className, AssetCategoryConstants.ALL_CLASS_TYPE_PKS,
+			groupId, className, AssetCategoryConstants.ALL_CLASS_TYPE_PK,
 			categoryIds, tagNames);
 	}
 

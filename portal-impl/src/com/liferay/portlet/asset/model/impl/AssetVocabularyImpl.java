@@ -181,7 +181,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 	@Override
 	public boolean isAssociatedToClassNameId(long classNameId) {
 		return isAssociatedToClassNameIdAndClassTypePK(
-			classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
+			classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PK);
 	}
 
 	@Override
@@ -232,7 +232,7 @@ public class AssetVocabularyImpl extends AssetVocabularyBaseImpl {
 	@Override
 	public boolean isRequired(long classNameId) {
 		return isRequired(
-			classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
+			classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PK);
 	}
 
 	@Override

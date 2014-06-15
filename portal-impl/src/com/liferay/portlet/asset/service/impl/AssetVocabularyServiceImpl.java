@@ -180,7 +180,7 @@ public class AssetVocabularyServiceImpl extends AssetVocabularyServiceBaseImpl {
 		long[] groupIds, String className) {
 
 		return getGroupsVocabularies(
-			groupIds, className, AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
+			groupIds, className, AssetCategoryConstants.ALL_CLASS_TYPE_PK);
 	}
 
 	@Override

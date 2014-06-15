@@ -103,7 +103,7 @@ public class UpgradeAsset extends UpgradeProcess {
 
 		long[] classTypePKs = new long[classNameIds.length];
 
-		Arrays.fill(classTypePKs, AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
+		Arrays.fill(classTypePKs, AssetCategoryConstants.ALL_CLASS_TYPE_PK);
 
 		boolean[] requireds = new boolean[classNameIds.length];
 

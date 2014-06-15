@@ -33,10 +33,10 @@ import java.util.Set;
 public class AssetVocabularySettingsHelper {
 
 	public static final long[] DEFAULT_SELECTED_CLASSNAME_IDS =
-		{AssetCategoryConstants.ALL_CLASS_NAME_IDS};
+		{AssetCategoryConstants.ALL_CLASS_NAME_ID};
 
 	public static final long[] DEFAULT_SELECTED_CLASSTYPE_PKS =
-		{AssetCategoryConstants.ALL_CLASS_TYPE_PKS};
+		{AssetCategoryConstants.ALL_CLASS_TYPE_PK};
 
 	public AssetVocabularySettingsHelper() {
 		super();
@@ -166,8 +166,8 @@ public class AssetVocabularySettingsHelper {
 		if (Validator.isNull(propertyValue)) {
 			return new String[] {
 				getClassNameIdAndClassTypePK(
-					AssetCategoryConstants.ALL_CLASS_NAME_IDS,
-					AssetCategoryConstants.ALL_CLASS_TYPE_PKS)
+					AssetCategoryConstants.ALL_CLASS_NAME_ID,
+					AssetCategoryConstants.ALL_CLASS_TYPE_PK)
 			};
 		}
 
@@ -198,7 +198,7 @@ public class AssetVocabularySettingsHelper {
 			classNameIdAndClassTypePK, CharPool.COLON);
 
 		if (parts.length == 1) {
-			return AssetCategoryConstants.ALL_CLASS_TYPE_PKS;
+			return AssetCategoryConstants.ALL_CLASS_TYPE_PK;
 		}
 		else {
 			return Long.valueOf(parts[1]);
@@ -242,7 +242,7 @@ public class AssetVocabularySettingsHelper {
 			return true;
 		}
 
-		if (classTypePK == AssetCategoryConstants.ALL_CLASS_TYPE_PKS) {
+		if (classTypePK == AssetCategoryConstants.ALL_CLASS_TYPE_PK) {
 			PrefixPredicateFilter prefixPredicateFilter =
 				new PrefixPredicateFilter(classNameId + StringPool.COLON, true);
 
@@ -259,11 +259,11 @@ public class AssetVocabularySettingsHelper {
 				return true;
 			}
 
-			String classNameIdAndAllClassTypePKs = getClassNameIdAndClassTypePK(
-				classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
+			String classNameIdAndAllClassTypePK = getClassNameIdAndClassTypePK(
+				classNameId, AssetCategoryConstants.ALL_CLASS_TYPE_PK);
 
 			return ArrayUtil.contains(
-				classNameIdsAndClassTypePKs, classNameIdAndAllClassTypePKs);
+				classNameIdsAndClassTypePKs, classNameIdAndAllClassTypePK);
 		}
 	}
 
