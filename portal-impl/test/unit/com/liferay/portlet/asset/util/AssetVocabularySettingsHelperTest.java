@@ -34,15 +34,11 @@ public class AssetVocabularySettingsHelperTest {
 		Assert.assertNotNull(classNameIds);
 		Assert.assertEquals(1, classNameIds.length);
 		Assert.assertEquals(1, classNameIds[0]);
-	}
 
-	@Test
-	public void testGetClassNameIdWithOldFormat() {
-		AssetVocabularySettingsHelper vocabularySettingsHelper =
-			new AssetVocabularySettingsHelper(
-				"multiValued=false\nselectedClassNameIds=1\n");
+		vocabularySettingsHelper = new AssetVocabularySettingsHelper(
+			"multiValued=false\nselectedClassNameIds=1\n");
 
-		long[] classNameIds = vocabularySettingsHelper.getClassNameIds();
+		classNameIds = vocabularySettingsHelper.getClassNameIds();
 
 		Assert.assertNotNull(classNameIds);
 		Assert.assertEquals(1, classNameIds.length);
