@@ -838,15 +838,15 @@ public class AssetVocabularyWrapper implements AssetVocabulary,
 	}
 
 	@Override
+	public boolean isAssociatedToClassNameId(long classNameId) {
+		return _assetVocabulary.isAssociatedToClassNameId(classNameId);
+	}
+
+	@Override
 	public boolean isAssociatedToClassNameIdAndClassTypePK(long classNameId,
 		long classTypePK) {
 		return _assetVocabulary.isAssociatedToClassNameIdAndClassTypePK(classNameId,
 			classTypePK);
-	}
-
-	@Override
-	public boolean isAssociatedToClassNameId(long classNameId) {
-		return _assetVocabulary.isAssociatedToClassNameId(classNameId);
 	}
 
 	@Override

@@ -825,7 +825,8 @@ public class AssetEntryLocalServiceWrapper implements AssetEntryLocalService,
 	}
 
 	/**
-	* @deprecated As of 7.0.0, replaced by {@link #validate(long, String, long, long[], String[])}
+	* @deprecated As of 7.0.0, replaced by {@link #validate(long, String, long,
+	long[], String[])}
 	*/
 	@Deprecated
 	@Override
