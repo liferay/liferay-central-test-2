@@ -136,10 +136,10 @@ public class AssetVocabularySettingsHelper {
 		}
 
 		_properties.setProperty(
-			_KEY_REQUIRED_CLASS_NAME_AND_TYPE_IDS,
+			_KEY_REQUIRED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS,
 			StringUtil.merge(requiredClassNameIds));
 		_properties.setProperty(
-			_KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS,
+			_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS,
 			StringUtil.merge(selectedClassNameIds));
 	}
 
@@ -180,7 +180,7 @@ public class AssetVocabularySettingsHelper {
 
 	protected String[] getClassNameIdsAndClassTypePKs() {
 		String propertyValue = _properties.getProperty(
-			_KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS);
+			_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS);
 
 		if (Validator.isNull(propertyValue)) {
 			return new String[] {
@@ -219,7 +219,7 @@ public class AssetVocabularySettingsHelper {
 
 	protected String[] getRequiredClassNameIdsAndClassTypePKs() {
 		String propertyValue = _properties.getProperty(
-			_KEY_REQUIRED_CLASS_NAME_AND_TYPE_IDS);
+			_KEY_REQUIRED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS);
 
 		if (Validator.isNull(propertyValue)) {
 			return new String[0];
@@ -269,11 +269,12 @@ public class AssetVocabularySettingsHelper {
 
 	private static final String _KEY_MULTI_VALUED = "multiValued";
 
-	private static final String _KEY_REQUIRED_CLASS_NAME_AND_TYPE_IDS =
-		"requiredClassNameIds";
+	private static final String
+		_KEY_REQUIRED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS =
+			"requiredClassNameIds";
 
-	private static final String _KEY_SELECTED_CLASS_NAME_AND_TYPE_IDS =
-		"selectedClassNameIds";
+	private static final String
+		_KEY_SELECTED_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS = "selectedClassNameIds";
 
 	private UnicodeProperties _properties;
 
