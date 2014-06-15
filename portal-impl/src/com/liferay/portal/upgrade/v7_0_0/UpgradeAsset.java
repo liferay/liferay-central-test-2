@@ -15,6 +15,8 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -69,15 +71,41 @@ public class UpgradeAsset extends UpgradeProcess {
 				long vocabularyId = result.getLong("vocabularyId");
 				String settings = result.getString("settings_");
 
-				String newSettings = upgradeVocabularySettings(settings);
-
-				runSQL(
-					"update AssetVocabulary set settings_ = '" + newSettings +
-						"' where vocabularyId = " + vocabularyId);
+				updateAssetVocabulary(
+					vocabularyId, upgradeVocabularySettings(settings));
 			}
 		}
 		finally {
 			DataAccess.cleanUp(connection, statement, result);
+		}
+	}
+
+	protected void updateAssetVocabulary(long vocabularyId, String settings)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getUpgradeOptimizedConnection();
+
+			ps = con.prepareStatement(
+				"update AssetVocabulary set settings_ = ? where vocabularyId " +
+					"= ?");
+
+			ps.setString(1, settings);
+			ps.setLong(2, vocabularyId);
+
+			ps.executeUpdate();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Unable to update vocabulary " + vocabularyId, e);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
 		}
 	}
 
@@ -115,5 +143,7 @@ public class UpgradeAsset extends UpgradeProcess {
 
 		return newProperties.toString();
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(UpgradeAsset.class);
 
 }
