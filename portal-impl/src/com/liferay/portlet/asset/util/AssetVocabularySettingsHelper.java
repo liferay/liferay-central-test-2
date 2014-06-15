@@ -111,7 +111,7 @@ public class AssetVocabularySettingsHelper {
 				classNameId, classTypePK);
 
 			if (classNameIdAndClassTypePK.equals(
-					AssetCategoryConstants.ALL_CLASS_NAMES_AND_TYPES)) {
+					AssetCategoryConstants.ALL_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS)) {
 
 				if (required) {
 					requiredClassNameIds.clear();
@@ -235,7 +235,7 @@ public class AssetVocabularySettingsHelper {
 		}
 
 		if (classNameIdsAndClassTypePKs[0].equals(
-				AssetCategoryConstants.ALL_CLASS_NAMES_AND_TYPES)) {
+				AssetCategoryConstants.ALL_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS)) {
 
 			return true;
 		}

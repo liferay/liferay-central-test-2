@@ -23,7 +23,7 @@ public class AssetCategoryConstants {
 
 	public static final long ALL_CLASS_NAME_IDS = 0;
 
-	public static final String ALL_CLASS_NAMES_AND_TYPES =
+	public static final String ALL_CLASS_NAME_IDS_AND_CLASS_TYPE_PKS =
 		AssetCategoryConstants.ALL_CLASS_NAME_IDS + StringPool.COLON +
 			AssetCategoryConstants.ALL_CLASS_TYPE_PKS;
 
