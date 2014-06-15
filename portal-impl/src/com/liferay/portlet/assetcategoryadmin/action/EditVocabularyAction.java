@@ -104,8 +104,8 @@ public class EditVocabularyAction extends PortletAction {
 				actionRequest, "classNameId" + index);
 
 			classTypePKs[i] = ParamUtil.getLong(
-				actionRequest, "subtype" + classNameIds[i] +
-				"-classNameId" + index,
+				actionRequest,
+				"subtype" + classNameIds[i] + "-classNameId" + index,
 				AssetCategoryConstants.ALL_CLASS_TYPE_PKS);
 
 			requireds[i] = ParamUtil.getBoolean(
