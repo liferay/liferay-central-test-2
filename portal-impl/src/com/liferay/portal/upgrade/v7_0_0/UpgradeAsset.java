@@ -61,19 +61,19 @@ public class UpgradeAsset extends UpgradeProcess {
 			connection = DataAccess.getUpgradeOptimizedConnection();
 
 			statement = connection.prepareStatement(
-				"SELECT vocabularyId, settings_ FROM AssetVocabulary");
+				"select vocabularyId, settings_ from AssetVocabulary");
 
 			result = statement.executeQuery();
 
 			while (result.next()) {
-				Long key = result.getLong("vocabularyId");
+				long vocabularyId = result.getLong("vocabularyId");
 				String settings = result.getString("settings_");
 
 				String newSettings = upgradeVocabularySettings(settings);
 
 				runSQL(
-					"UPDATE AssetVocabulary SET settings_ = '" + newSettings +
-						"' WHERE vocabularyId = " + key);
+					"update AssetVocabulary set settings_ = '" + newSettings +
+						"' where vocabularyId = " + vocabularyId);
 			}
 		}
 		finally {
@@ -83,6 +83,7 @@ public class UpgradeAsset extends UpgradeProcess {
 
 	protected String upgradeVocabularySettings(String settings) {
 		UnicodeProperties oldProperties = new UnicodeProperties(true);
+
 		oldProperties.fastLoad(settings);
 
 		AssetVocabularySettingsHelper newProperties =
