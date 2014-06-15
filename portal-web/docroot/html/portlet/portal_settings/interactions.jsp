@@ -87,15 +87,15 @@ List<Portlet> socialInteractionsConfigurationPortlets = new ArrayList<Portlet>()
 
 List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId());
 
-String tabsNames = StringPool.BLANK;
+String tabs1Names = StringPool.BLANK;
 
 for (Portlet portlet : portlets) {
 	if (portlet.isSocialInteractionsConfiguration()) {
-		if (Validator.isNotNull(tabsNames)) {
-			tabsNames += (StringPool.COMMA);
+		if (Validator.isNotNull(tabs1Names)) {
+			tabs1Names += (StringPool.COMMA);
 		}
 
-		tabsNames += PortalUtil.getPortletTitle(portlet, themeDisplay.getLocale());
+		tabs1Names += PortalUtil.getPortletTitle(portlet, themeDisplay.getLocale());
 
 		socialInteractionsConfigurationPortlets.add(portlet);
 	}
@@ -106,7 +106,7 @@ for (Portlet portlet : portlets) {
 	<h3><liferay-ui:message key="application-interactions" /></h3>
 
 	<liferay-ui:tabs
-		names="<%= tabsNames %>"
+		names="<%= tabs1Names %>"
 		refresh="<%= false %>"
 	>
 
