@@ -70,10 +70,10 @@ public class AssetVocabularySettingsHelper {
 	}
 
 	public long[] getRequiredClassTypePKs() {
-		String[] classNameIdAndClassTypePK =
+		String[] classNameIdAndClassTypePKs =
 			getRequiredClassNameIdsAndClassTypePKs();
 
-		return getClassTypePKs(classNameIdAndClassTypePK);
+		return getClassTypePKs(classNameIdAndClassTypePKs);
 	}
 
 	public boolean hasClassNameIdAndClassTypePK(
@@ -167,7 +167,8 @@ public class AssetVocabularySettingsHelper {
 			return new String[] {
 				getClassNameIdAndClassTypePK(
 					AssetCategoryConstants.ALL_CLASS_NAME_IDS,
-					AssetCategoryConstants.ALL_CLASS_TYPE_PKS)};
+					AssetCategoryConstants.ALL_CLASS_TYPE_PKS)
+			};
 		}
 
 		return StringUtil.split(propertyValue);
