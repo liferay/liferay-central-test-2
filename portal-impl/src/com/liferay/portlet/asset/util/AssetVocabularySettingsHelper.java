@@ -156,7 +156,7 @@ public class AssetVocabularySettingsHelper {
 		String[] parts = StringUtil.split(
 			classNameIdAndClassTypePK, CharPool.COLON);
 
-		return Long.valueOf(parts[0]);
+		return GetterUtil.getLong(parts[0]);
 	}
 
 	protected String getClassNameIdAndClassTypePK(
@@ -201,7 +201,7 @@ public class AssetVocabularySettingsHelper {
 			return AssetCategoryConstants.ALL_CLASS_TYPE_PK;
 		}
 		else {
-			return Long.valueOf(parts[1]);
+			return GetterUtil.getLong(parts[1]);
 		}
 	}
 
