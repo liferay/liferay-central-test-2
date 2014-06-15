@@ -257,7 +257,7 @@ public class AssetUtil {
 
 		final long classNameId = PortalUtil.getClassNameId(className);
 
-		PredicateFilter<AssetVocabulary> associatedVocabulariesFilter =
+		PredicateFilter<AssetVocabulary> predicateFilter =
 			new PredicateFilter<AssetVocabulary>() {
 
 				@Override
@@ -269,7 +269,7 @@ public class AssetUtil {
 
 			};
 
-		return ListUtil.filter(vocabularies, associatedVocabulariesFilter);
+		return ListUtil.filter(vocabularies, predicateFilter);
 	}
 
 	public static long[] filterVocabularyIds(
