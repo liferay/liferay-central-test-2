@@ -138,6 +138,7 @@ public class IntrabandProxyUtilTest {
 
 			@SuppressWarnings("unused")
 			private String _testField;
+
 		}
 
 		Field[] fields = TestClass.class.getDeclaredFields();
@@ -349,13 +350,14 @@ public class IntrabandProxyUtilTest {
 		// <clinit> and <init> appending
 
 		String skeletonId = "skeletonId";
-		String testId = "testId";
 
 		Class<?> stubClass = IntrabandProxyUtil.generateStubClass(
 			_classLoader, TestGenerateStubFunction1.class, skeletonId);
 
 		Constructor<?> constructor = stubClass.getConstructor(
 			String.class, RegistrationReference.class, ExceptionHandler.class);
+
+		String testId = "testId";
 
 		AutoReplyMockIntraband autoReplyMockIntraband =
 			new AutoReplyMockIntraband(skeletonId, testId);
@@ -832,7 +834,7 @@ public class IntrabandProxyUtilTest {
 			ReflectionTestUtil.invoke(
 				testTemplateSkeleton, "_getProxyMethodsMapping",
 				new Class<?>[] {String[].class},
-				new Object[] {new String[]{"a", "b", "c"}}));
+				new Object[] {new String[] {"a", "b", "c"}}));
 	}
 
 	@Test
@@ -1473,7 +1475,7 @@ public class IntrabandProxyUtilTest {
 
 				_assertTypeInsnNode(
 					iterator.next(), Opcodes.CHECKCAST,
-					_autoBoxingMap.get(returnClass));
+					_autoboxingMap.get(returnClass));
 
 				if (returnClass == boolean.class) {
 
@@ -2420,7 +2422,7 @@ public class IntrabandProxyUtilTest {
 		return classNode;
 	}
 
-	private static final Map<Class<?>, Class<?>> _autoBoxingMap =
+	private static final Map<Class<?>, Class<?>> _autoboxingMap =
 		new HashMap<Class<?>, Class<?>>();
 	private static final Map<Class<?>, Object> _defaultValueMap =
 		new HashMap<Class<?>, Object>();
@@ -2429,14 +2431,14 @@ public class IntrabandProxyUtilTest {
 		new HashMap<Class<?>, Object>();
 
 	static {
-		_autoBoxingMap.put(boolean.class, Boolean.class);
-		_autoBoxingMap.put(byte.class, Number.class);
-		_autoBoxingMap.put(char.class, Character.class);
-		_autoBoxingMap.put(double.class, Number.class);
-		_autoBoxingMap.put(float.class, Number.class);
-		_autoBoxingMap.put(int.class, Number.class);
-		_autoBoxingMap.put(long.class, Number.class);
-		_autoBoxingMap.put(short.class, Number.class);
+		_autoboxingMap.put(boolean.class, Boolean.class);
+		_autoboxingMap.put(byte.class, Number.class);
+		_autoboxingMap.put(char.class, Character.class);
+		_autoboxingMap.put(double.class, Number.class);
+		_autoboxingMap.put(float.class, Number.class);
+		_autoboxingMap.put(int.class, Number.class);
+		_autoboxingMap.put(long.class, Number.class);
+		_autoboxingMap.put(short.class, Number.class);
 
 		_defaultValueMap.put(boolean.class, Boolean.FALSE);
 		_defaultValueMap.put(byte.class, (byte)0);
