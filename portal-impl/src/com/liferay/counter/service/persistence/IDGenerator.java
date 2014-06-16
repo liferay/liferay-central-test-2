@@ -29,7 +29,9 @@ public class IDGenerator implements IdentifierGenerator {
 
 	@Override
 	public Serializable generate(SessionImplementor session, Object object) {
-		String name = object.getClass().getName();
+		Class<?> clazz = object.getClass();
+
+		String name = clazz.getName();
 
 		int currentId = (int)CounterLocalServiceUtil.increment(name);
 
