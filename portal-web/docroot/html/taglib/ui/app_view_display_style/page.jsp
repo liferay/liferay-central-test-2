@@ -38,12 +38,14 @@ Map<String, String> requestParams = (Map<String, String>)request.getAttribute("l
 
 					data.put("displayStyle", dataStyle);
 				%>
+
 					<aui:nav-item
 						anchorData="<%= data %>"
 						href="javascript:;"
 						iconCssClass='<%= "icon-" + _getIcon(dataStyle) %>'
 						label="<%= dataStyle %>"
 					/>
+
 				<%
 				}
 				%>

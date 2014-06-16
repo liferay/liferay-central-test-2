@@ -19,6 +19,7 @@ List<Portlet> portlets = PortalUtil.getControlPanelPortlets(controlPanelCategory
 
 if (portlets.size() > 1) {
 %>
+
 	<div class="control-panel-bar-secondary">
 		<aui:nav cssClass="nav-pills">
 
@@ -57,6 +58,7 @@ if (portlets.size() > 1) {
 
 		</aui:nav>
 	</div>
+
 <%
 }
 %>

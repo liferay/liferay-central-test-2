@@ -55,9 +55,11 @@
 				<div class="col-xs-5">
 					<aui:input cssClass="form-control" inlineField="<%= true %>" label="" name="width" value="400" />
 				</div>
+
 				<div class="col-xs-2">
 					<span> &times; </span>
 				</div>
+
 				<div class="col-xs-5">
 					<aui:input cssClass="form-control" inlineField="<%= true %>" label="" name="height" value="400" />
 				</div>
