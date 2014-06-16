@@ -62,7 +62,7 @@ AUI.add(
 		);
 
 		var TPL_SEARCH_FORM = '<form action="javascript:;" class="form-search lfr-tag-selector-search row">' +
-			'<input class="lfr-tag-selector-input search-query col-md-12" placeholder="{0}" type="text" />' +
+			'<input class="col-md-12 lfr-tag-selector-input search-query" placeholder="{0}" type="text" />' +
 		'</form>';
 
 		var TPL_SUGGESTIONS_QUERY = 'select * from search.termextract where context="{0}"';

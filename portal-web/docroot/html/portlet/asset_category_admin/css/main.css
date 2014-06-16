@@ -2,16 +2,6 @@
 @import "mixins";
 
 .portlet-asset-category-admin {
-	.form-search {
-		float: left;
-
-		.search-query {
-			margin-right: 0;
-			padding-right: 0;
-			width: 200px;
-		}
-	}
-
 	.form-group {
 		float: left;
 		margin-bottom: 0;
@@ -23,6 +13,16 @@
 				margin: 8px 0;
 				width: auto;
 			}
+		}
+	}
+
+	.form-search {
+		float: left;
+
+		.search-query {
+			margin-right: 0;
+			padding-right: 0;
+			width: 200px;
 		}
 	}
 
