@@ -662,7 +662,7 @@ public class StagingImpl implements Staging {
 						PropsKeys.UPLOAD_SERVLET_REQUEST_IMPL_MAX_SIZE);
 				}
 			}
-			catch (Exception ex) {
+			catch (Exception e1) {
 			}
 
 			if (Validator.equals(cmd, Constants.PUBLISH)) {
