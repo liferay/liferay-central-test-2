@@ -86,6 +86,7 @@ public class InputSearchTag extends IncludeTag {
 		}
 
 		String cssClass = _cssClass;
+
 		String name = _name;
 
 		if (Validator.isNull(name)) {
