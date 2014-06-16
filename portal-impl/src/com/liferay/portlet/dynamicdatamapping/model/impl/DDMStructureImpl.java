@@ -113,7 +113,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 				_ddmForm = DDMFormXSDDeserializerUtil.deserialize(getXsd());
 			}
 			catch (Exception e) {
-				_log.error(e);
+				_log.error(e, e);
 			}
 		}
 
