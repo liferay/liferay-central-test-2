@@ -510,7 +510,7 @@ public class PropertiesParamUtil {
 
 	protected static List<String> filterParams(
 		final String prefix, List<String> params,
-		final List<String> excludeParams) {
+		final List<String> excludedParams) {
 
 		PredicateFilter<String> predicateFilter =
 			new PredicateFilter<String>() {
@@ -521,8 +521,8 @@ public class PropertiesParamUtil {
 						return false;
 					}
 
-					if ((excludeParams != null) &&
-						excludeParams.contains(param)) {
+					if ((excludedParams != null) &&
+						excludedParams.contains(param)) {
 
 						return false;
 					}
