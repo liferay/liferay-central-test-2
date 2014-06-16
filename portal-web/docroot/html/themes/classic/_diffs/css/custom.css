@@ -117,7 +117,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 			}
 		}
 
-		.container, .container-fluid { 
+		.container, .container-fluid {
 			> .nav.nav-add-controls ul.dropdown-menu > li > a {
 				&:focus, &:hover {
 					color: #FFF;

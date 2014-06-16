@@ -53,7 +53,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 		margin-bottom: 0;
 	}
 
-	/* ---------- Control Panel Secondary Nav ---------- */
+	/* ---------- Control panel secondary nav ---------- */
 
 	.control-panel-bar-secondary {
 		padding: 15px 10px;
@@ -437,7 +437,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 	}
 
-	/* -------- App View Navigation Entry --------- */
+	/* -------- App view navigation entry --------- */
 
 	.navigation-pane .app-view-navigation-entry {
 		.overlay.entry-action {
@@ -771,7 +771,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 		}
 	}
 
-	/* ---------- Single Site Admin ---------- */
+	/* ---------- Single site admin ---------- */
 
 	.manage-layout-set-branches-link {
 		width: 100%;
