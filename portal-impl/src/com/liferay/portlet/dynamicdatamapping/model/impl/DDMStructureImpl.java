@@ -108,16 +108,16 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@Override
 	public DDMForm getDDMForm() {
-		if (_DDMForm == null) {
+		if (_ddmForm == null) {
 			try {
-				_DDMForm = DDMFormXSDDeserializerUtil.deserialize(getXsd());
+				_ddmForm = DDMFormXSDDeserializerUtil.deserialize(getXsd());
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
 
-		return _DDMForm;
+		return _ddmForm;
 	}
 
 	@Override
@@ -546,7 +546,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 
 	@Override
 	public void setDDMForm(DDMForm ddmForm) {
-		_DDMForm = ddmForm;
+		_ddmForm = ddmForm;
 	}
 
 	@Override
@@ -576,7 +576,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	public void setXsd(String xsd) {
 		super.setXsd(xsd);
 
-		_DDMForm = null;
+		_ddmForm = null;
 		_localizedFieldsMap = null;
 		_localizedPersistentFieldsMap = null;
 		_localizedTransientFieldsMap = null;
@@ -754,7 +754,7 @@ public class DDMStructureImpl extends DDMStructureBaseImpl {
 	private static Log _log = LogFactoryUtil.getLog(DDMStructureImpl.class);
 
 	@CacheField
-	private DDMForm _DDMForm;
+	private DDMForm _ddmForm;
 
 	@CacheField
 	private Map<String, Map<String, Map<String, String>>> _localizedFieldsMap;
