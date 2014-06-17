@@ -4156,7 +4156,7 @@ public class PortalImpl implements Portal {
 		long companyId = getCompanyId(request);
 
 		String domain = getValidPortalDomain(
-			request.getServerName(), companyId);
+			companyId, request.getServerName());
 
 		return getPortalURL(domain, request.getServerPort(), secure);
 	}
@@ -4208,7 +4208,7 @@ public class PortalImpl implements Portal {
 		long companyId = getCompanyId(portletRequest);
 
 		String domain = getValidPortalDomain(
-			portletRequest.getServerName(), companyId);
+			companyId, portletRequest.getServerName());
 
 		return getPortalURL(domain, portletRequest.getServerPort(), secure);
 	}
@@ -8194,7 +8194,7 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	protected String getValidPortalDomain(String domain, long companyId) {
+	protected String getValidPortalDomain(long companyId, String domain) {
 		for (String validVirtualHost : PropsValues.VIRTUAL_HOSTS_VALID_HOSTS) {
 			if (StringUtil.equalsIgnoreCase(domain, validVirtualHost)) {
 				return validVirtualHost;
@@ -8219,9 +8219,9 @@ public class PortalImpl implements Portal {
 
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Portal is not configured to use domain " + domain +
-					". If this domain is valid, please configure " +
-						PropsKeys.VIRTUAL_HOSTS_VALID_HOSTS + " property");
+				"Set the property \"" + PropsKeys.VIRTUAL_HOSTS_VALID_HOSTS +
+					"\" in portal.properties to allow " + domain +
+						" as a domain");
 		}
 
 		try {
