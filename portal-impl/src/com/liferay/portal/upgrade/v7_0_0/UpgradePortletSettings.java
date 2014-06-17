@@ -134,12 +134,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			throw new PortalException(
-				"Unable to create service settings for portlet "+portletId,
+				"Unable to create service settings for portlet "+ portletId,
 				sqle);
 		}
 		catch (RuntimeException re) {
 			throw new SystemException(
-				"Unable to create service settings for portlet "+portletId, re);
+				"Unable to create service settings for portlet "+ portletId,
+				re);
 		}
 	}
 
