@@ -392,7 +392,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		}
 	}
 
-	protected static class PortletPreferencesRow {
+	private class PortletPreferencesRow {
 
 		public long portletPreferencesId;
 		public long ownerId;
@@ -401,6 +401,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		public String portletId;
 		public String preferences;
 		public long mvccVersion;
+
 	}
 
 	private void _logCopyOfServiceSettings(
