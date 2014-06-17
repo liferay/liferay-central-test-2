@@ -72,9 +72,7 @@ public class AuthTokenUtil {
 	}
 
 	@SuppressWarnings("deprecation")
-	private void _check(HttpServletRequest request)
-		throws PortalException {
-
+	private void _check(HttpServletRequest request) throws PortalException {
 		if (_serviceTracker.isEmpty()) {
 			return;
 		}

@@ -2920,9 +2920,9 @@ public class HookHotDeployListener
 		_PROPS_KEYS_SESSION_EVENTS);
 	private Map<String, SanitizerContainer> _sanitizerContainerMap =
 		new HashMap<String, SanitizerContainer>();
-	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Map<String, Map<Object, ServiceRegistration<?>>>
 		_serviceRegistrations = newMap();
+	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
 		new HashMap<String, ServletFiltersContainer>();
