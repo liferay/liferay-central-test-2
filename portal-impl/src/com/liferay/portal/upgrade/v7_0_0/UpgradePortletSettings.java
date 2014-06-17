@@ -395,13 +395,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	private class PortletPreferencesRow {
 
-		public long portletPreferencesId;
-		public long ownerId;
-		public int ownerType;
-		public long plid;
-		public String portletId;
-		public String preferences;
-		public long mvccVersion;
+		private long mvccVersion;
+		private long ownerId;
+		private int ownerType;
+		private long plid;
+		private String portletId;
+		private long portletPreferencesId;
+		private String preferences;
 
 	}
 
