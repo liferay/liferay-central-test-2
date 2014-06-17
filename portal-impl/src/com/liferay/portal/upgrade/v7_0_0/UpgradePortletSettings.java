@@ -59,7 +59,7 @@ import javax.portlet.ReadOnlyException;
  */
 public class UpgradePortletSettings extends UpgradeProcess {
 
-	protected void createPortletPreferences(
+	protected void addPortletPreferences(
 			PortletPreferencesRow portletPreferencesRow)
 		throws SQLException {
 
@@ -127,7 +127,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 								portletId, plid, serviceName, groupId);
 						}
 
-						createPortletPreferences(portletPreferencesRow);
+						addPortletPreferences(portletPreferencesRow);
 					}
 
 				});
