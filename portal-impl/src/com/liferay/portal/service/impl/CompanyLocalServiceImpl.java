@@ -290,7 +290,11 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 
+		// Search engine
+
 		long companyId = company.getCompanyId();
+
+		SearchEngineUtil.initialize(companyId);
 
 		// Key
 
@@ -375,10 +379,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			contactPersistence.update(defaultContact);
 		}
-
-		// Search engine
-
-		SearchEngineUtil.initialize(companyId);
 
 		// System roles
 
