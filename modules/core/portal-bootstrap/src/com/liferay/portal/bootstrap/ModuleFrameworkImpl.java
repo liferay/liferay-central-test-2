@@ -704,7 +704,7 @@ public class ModuleFrameworkImpl implements ModuleFramework {
 		return String.valueOf(level);
 	}
 
-	private String _getHashcode(String[] ... keys) {
+	private String _getHashcode(String[]... keys) {
 		try {
 			CacheKeyGenerator cacheKeyGenerator = new JavaMD5CacheKeyGenerator(
 				128);
