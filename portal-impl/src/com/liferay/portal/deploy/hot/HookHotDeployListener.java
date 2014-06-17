@@ -1010,7 +1010,7 @@ public class HookHotDeployListener
 			_serviceRegistrations.get(servletContextName);
 
 		if (serviceRegistrations == null) {
-			serviceRegistrations = _getMap();
+			serviceRegistrations = newMap();
 
 			_serviceRegistrations.put(servletContextName, serviceRegistrations);
 		}
@@ -2459,6 +2459,10 @@ public class HookHotDeployListener
 		}
 	}
 
+	protected <S, T> Map<S, T> newMap() {
+		return new ConcurrentHashMap<S, T>();
+	}
+
 	protected void resetPortalProperties(
 			String servletContextName, Properties portalProperties,
 			boolean initPhase)
@@ -2767,10 +2771,6 @@ public class HookHotDeployListener
 			release.getReleaseId(), buildNumber, null, true);
 	}
 
-	private static <S,T> Map<S, T> _getMap() {
-		return new ConcurrentHashMap<S, T>();
-	}
-
 	private static final String[] _PROPS_KEYS_EVENTS = {
 		LOGIN_EVENTS_POST, LOGIN_EVENTS_PRE, LOGOUT_EVENTS_POST,
 		LOGOUT_EVENTS_PRE, SERVLET_SERVICE_EVENTS_POST,
@@ -2922,7 +2922,7 @@ public class HookHotDeployListener
 		new HashMap<String, SanitizerContainer>();
 	private ServicesContainer _servicesContainer = new ServicesContainer();
 	private Map<String, Map<Object, ServiceRegistration<?>>>
-		_serviceRegistrations = _getMap();
+		_serviceRegistrations = newMap();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
 		new HashMap<String, ServletFiltersContainer>();
