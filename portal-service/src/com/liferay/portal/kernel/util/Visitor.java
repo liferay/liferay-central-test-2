@@ -12,7 +12,7 @@
  * details.
  */
 
-package com.liferay.portal.tools;
+package com.liferay.portal.kernel.util;
 
 /**
  * @author Iván Zaera
