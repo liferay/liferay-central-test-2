@@ -168,6 +168,9 @@ import com.liferay.portlet.documentlibrary.store.Store;
 import com.liferay.portlet.documentlibrary.store.StoreFactory;
 import com.liferay.portlet.documentlibrary.util.DLProcessor;
 import com.liferay.portlet.documentlibrary.util.DLProcessorRegistryUtil;
+import com.liferay.registry.Registry;
+import com.liferay.registry.RegistryUtil;
+import com.liferay.registry.ServiceRegistration;
 
 import java.io.File;
 import java.io.InputStream;
@@ -186,6 +189,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
@@ -200,6 +204,7 @@ import org.springframework.aop.framework.AdvisedSupport;
  * @author Wesley Gong
  * @author Ryan Park
  * @author Mika Koivisto
+ * @author Raymond Augé
  */
 public class HookHotDeployListener
 	extends BaseHotDeployListener implements PropsKeys {
@@ -989,6 +994,21 @@ public class HookHotDeployListener
 		}
 
 		return new File(filePath);
+	}
+
+	protected Map<Object, ServiceRegistration<?>> getServiceRegistrations(
+		String servletContextName) {
+
+		Map<Object, ServiceRegistration<?>> serviceRegistrations =
+			_serviceRegistrations.get(servletContextName);
+
+		if (serviceRegistrations == null) {
+			serviceRegistrations = _getMap();
+
+			_serviceRegistrations.put(servletContextName, serviceRegistrations);
+		}
+
+		return serviceRegistrations;
 	}
 
 	protected void initAuthenticators(
@@ -2735,6 +2755,10 @@ public class HookHotDeployListener
 			release.getReleaseId(), buildNumber, null, true);
 	}
 
+	private static <S,T> Map<S, T> _getMap() {
+		return new ConcurrentHashMap<S, T>();
+	}
+
 	private static final String[] _PROPS_KEYS_EVENTS = {
 		LOGIN_EVENTS_POST, LOGIN_EVENTS_PRE, LOGOUT_EVENTS_POST,
 		LOGOUT_EVENTS_PRE, SERVLET_SERVICE_EVENTS_POST,
@@ -2885,6 +2909,8 @@ public class HookHotDeployListener
 	private Map<String, SanitizerContainer> _sanitizerContainerMap =
 		new HashMap<String, SanitizerContainer>();
 	private ServicesContainer _servicesContainer = new ServicesContainer();
+	private Map<String, Map<Object, ServiceRegistration<?>>>
+		_serviceRegistrations = _getMap();
 	private Set<String> _servletContextNames = new HashSet<String>();
 	private Map<String, ServletFiltersContainer> _servletFiltersContainerMap =
 		new HashMap<String, ServletFiltersContainer>();
