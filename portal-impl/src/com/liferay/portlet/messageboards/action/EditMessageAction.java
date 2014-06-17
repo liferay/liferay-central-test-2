@@ -365,8 +365,6 @@ public class EditMessageAction extends PortletAction {
 
 		MBSettings mbSettings = MBSettings.getInstance(groupId);
 
-		String format = mbSettings.getMessageFormat();
-
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			new ArrayList<ObjectValuePair<String, InputStream>>(5);
 
@@ -419,9 +417,9 @@ public class EditMessageAction extends PortletAction {
 					// Post new thread
 
 					message = MBMessageServiceUtil.addMessage(
-						groupId, categoryId, subject, body, format,
-						inputStreamOVPs, anonymous, priority, allowPingbacks,
-						serviceContext);
+						groupId, categoryId, subject, body,
+						mbSettings.getMessageFormat(), inputStreamOVPs,
+						anonymous, priority, allowPingbacks, serviceContext);
 
 					if (question) {
 						MBThreadLocalServiceUtil.updateQuestion(
@@ -433,7 +431,8 @@ public class EditMessageAction extends PortletAction {
 					// Post reply
 
 					message = MBMessageServiceUtil.addMessage(
-						parentMessageId, subject, body, format, inputStreamOVPs,
+						parentMessageId, subject, body,
+						mbSettings.getMessageFormat(), inputStreamOVPs,
 						anonymous, priority, allowPingbacks, serviceContext);
 				}
 			}
