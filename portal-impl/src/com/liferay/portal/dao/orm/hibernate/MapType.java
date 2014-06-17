@@ -89,11 +89,10 @@ public class MapType implements CompositeUserType, Serializable {
 			Object owner)
 		throws SQLException {
 
-		String serializedValue =
-			(String)StandardBasicTypes.STRING.nullSafeGet(
-				rs, names, session, owner);
+		String json = (String)StandardBasicTypes.STRING.nullSafeGet(
+			rs, names, session, owner);
 
-		return _jsonFactory.deserialize(serializedValue);
+		return _jsonFactory.deserialize(json);
 	}
 
 	@Override
@@ -102,10 +101,9 @@ public class MapType implements CompositeUserType, Serializable {
 			SessionImplementor session)
 		throws SQLException {
 
-		String serializedTarget = _jsonFactory.serialize(target);
+		String json = _jsonFactory.serialize(target);
 
-		StandardBasicTypes.STRING.nullSafeSet(
-			ps, serializedTarget, index, session);
+		StandardBasicTypes.STRING.nullSafeSet(ps, json, index, session);
 	}
 
 	@Override
