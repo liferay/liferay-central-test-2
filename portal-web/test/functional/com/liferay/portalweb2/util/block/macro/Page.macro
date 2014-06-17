@@ -1,4 +1,11 @@
 <definition>
+	<command name="addFriendlyUrlPG">
+		<var name="key_friendlyUrlLocalized" value="${friendlyUrlLocalized}" />
+
+		<execute action="DockbarEdit#click" locator-key1="DETAILS_FRIENDLY_URL_LOCALIZED" />
+		<execute action="DockbarEdit#type" locator-key1="DETAILS_FRIENDLYURL" value1="${localizedFriendlyURL}" />
+	</command>
+
 	<command name="addPageTypePanelPG">
 		<var name="key_componentName" value="${componentName}" />
 
@@ -92,6 +99,12 @@
 		<execute action="CPSitepages#selectFrameTop" />
 		<execute action="CPSitepages#assertClick" locator-key1="SAVE_BUTTON" value1="Save" />
 		<execute action="CPSitepages#assertTextEquals" locator-key1="SUCCESS_MESSAGE" value1="Your request completed successfully." />
+	</command>
+
+	<command name="deleteFriendlyURLPG">
+		<execute action="DockbarEdit#click" locator-key1="DETAILS_FRIENDLY_URL_ENGLISH_UNITED_STATES" />
+		<execute action="DockbarEdit#type" locator-key1="DETAILS_FRIENDLYURL" value1=" " />
+		<execute action="Dockbar#assertClick" locator-key1="EDIT_SAVE_BUTTON" value1="Save" />
 	</command>
 
 	<command name="deletePG">
@@ -280,6 +293,10 @@
 		<var name="key_portletName" value="${localizedPortletName}" />
 
 		<execute action="Home#assertClick" locator-key1="CONTROL_PANEL_NAVIGATION" />
+	</command>
+
+	<command name="gotoEdit">
+		<execute action="Dockbar#click" locator-key1="EDIT" />
 	</command>
 
 	<command name="gotoMyAccount">
@@ -522,6 +539,15 @@
 		<var name="key_pageName" value="${pageName}" />
 
 		<execute action="Home#assertElementNotPresent" locator-key1="PAGE" value1="${pageName}" />
+	</command>
+
+	<command name="viewPageFriendURLPG">
+		<execute action="Home#assertConsoleTextNotPresent" value1="java.lang.StringIndexOutOfBoundsException: String index out of range: -1" />
+
+		<execute action="Dockbar#click" locator-key1="EDIT" />
+
+		<execute action="DockbarEdit#assertTextNotPresent" locator-key1="DETAILS_FRIENDLYURL" value1="${pageName}" />
+		<execute action="DockbarEdit#assertTextEquals" locator-key1="DETAILS_FRIENDLYURL" value1="/2" />
 	</command>
 
 	<command name="viewPageLayoutColumn">
