@@ -126,6 +126,13 @@ public class InputEditorTag extends IncludeTag {
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
+		if (_contentsLanguageId == null) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			_contentsLanguageId = themeDisplay.getLanguageId();
+		}
+
 		String cssClasses = "portlet ";
 
 		Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
@@ -140,14 +147,6 @@ public class InputEditorTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:input-editor:configParams", _configParams);
-
-		if (_contentsLanguageId == null) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
-			_contentsLanguageId = themeDisplay.getLanguageId();
-		}
-
 		request.setAttribute(
 			"liferay-ui:input-editor:contentsLanguageId", _contentsLanguageId);
 		request.setAttribute("liferay-ui:input-editor:cssClass", _cssClass);
