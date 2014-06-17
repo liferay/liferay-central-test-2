@@ -6554,7 +6554,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void updateDDMStructurePredefinedValues(
-		long ddmStructureId, String content, ServiceContext serviceContext) {
+			long ddmStructureId, String content, ServiceContext serviceContext)
+		throws PortalException {
 
 		try {
 			Document document = SAXReaderUtil.read(content);
