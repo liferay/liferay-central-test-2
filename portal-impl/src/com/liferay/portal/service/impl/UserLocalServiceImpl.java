@@ -879,12 +879,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			User.class.getName(), user.getUserId(), null, null, 0,
 			StringPool.SLASH + screenName, false, true, null);
 
-		// Resources
-
-		resourceLocalService.addResources(
-			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
-			false, false, false);
-
 		// Groups
 
 		if (groupIds != null) {
@@ -936,6 +930,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		addDefaultUserGroups(userId);
+
+		// Resources
+
+		resourceLocalService.addResources(
+			companyId, 0, creatorUserId, User.class.getName(), user.getUserId(),
+			false, false, false);
 
 		// Asset
 
@@ -1893,16 +1893,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			contactLocalService.deleteContact(contact);
 		}
 
+		// Group roles
+
+		userGroupRoleLocalService.deleteUserGroupRolesByUserId(
+			user.getUserId());
+
 		// Resources
 
 		resourceLocalService.deleteResource(
 			user.getCompanyId(), User.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, user.getUserId());
-
-		// Group roles
-
-		userGroupRoleLocalService.deleteUserGroupRolesByUserId(
-			user.getUserId());
 
 		// User
 
