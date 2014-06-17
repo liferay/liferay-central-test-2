@@ -1732,13 +1732,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			userPortraitURL = user.getPortraitURL(
 				serviceContext.getThemeDisplay());
-
 			userURL = user.getDisplayURL(serviceContext.getThemeDisplay());
 		}
 
 		workflowContext.put(
 			WorkflowConstants.CONTEXT_USER_PORTRAIT_URL, userPortraitURL);
-
 		workflowContext.put(WorkflowConstants.CONTEXT_USER_URL, userURL);
 
 		WorkflowHandlerRegistryUtil.startWorkflowInstance(
