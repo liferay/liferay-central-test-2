@@ -6597,6 +6597,8 @@ public class JournalArticleLocalServiceImpl
 	protected void updateDDMStructurePredefinedValues(
 		long ddmStructureId, String content, ServiceContext serviceContext) {
 
+		Map<String, String> fieldsValuesMap = createFieldsValuesMap(content);
+
 		DDMStructure ddmStructure = ddmStructureLocalService.fetchDDMStructure(
 			ddmStructureId);
 
@@ -6604,8 +6606,6 @@ public class JournalArticleLocalServiceImpl
 
 		Map<String, DDMFormField> ddmFormFieldsMap =
 			ddmForm.getDDMFormFieldsMap(true);
-
-		Map<String, String> fieldsValuesMap = createFieldsValuesMap(content);
 
 		for (Map.Entry<String, String> fieldValue :
 				fieldsValuesMap.entrySet()) {
