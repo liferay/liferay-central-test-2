@@ -377,6 +377,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 
 		// Search engine
+
 		SearchEngineUtil.initialize(companyId);
 
 		// System roles

@@ -31,11 +31,6 @@ public class SearchEngineProxyWrapper implements SearchEngine {
 	}
 
 	@Override
-	public void removeCompany(long companyId) {
-		_searchEngine.removeCompany(companyId);
-	}
-
-	@Override
 	public BooleanClauseFactory getBooleanClauseFactory() {
 		return _searchEngine.getBooleanClauseFactory();
 	}
@@ -92,6 +87,11 @@ public class SearchEngineProxyWrapper implements SearchEngine {
 	@Override
 	public boolean isLuceneBased() {
 		return _searchEngine.isLuceneBased();
+	}
+
+	@Override
+	public void removeCompany(long companyId) {
+		_searchEngine.removeCompany(companyId);
 	}
 
 	private IndexSearcher _indexSearcher;

@@ -251,18 +251,6 @@ public class SearchEngineUtil {
 		indexWriter.deletePortletDocuments(searchContext, portletId);
 	}
 
-	public synchronized static void removeCompany(long companyId) {
-		if (!_companyIds.contains(companyId)) {
-			return;
-		}
-
-		for (SearchEngine searchEngine : _searchEngines.values()) {
-			searchEngine.removeCompany(companyId);
-		}
-
-		_companyIds.remove(companyId);
-	}
-
 	public static String getDefaultSearchEngineId() {
 		if (_defaultSearchEngineId == null) {
 			return SYSTEM_ENGINE_ID;
@@ -537,6 +525,18 @@ public class SearchEngineUtil {
 			SearchEngineUtil.class, "indexReadOnly");
 
 		return _indexReadOnly;
+	}
+
+	public synchronized static void removeCompany(long companyId) {
+		if (!_companyIds.contains(companyId)) {
+			return;
+		}
+
+		for (SearchEngine searchEngine : _searchEngines.values()) {
+			searchEngine.removeCompany(companyId);
+		}
+
+		_companyIds.remove(companyId);
 	}
 
 	public static SearchEngine removeSearchEngine(String searchEngineId) {
@@ -933,13 +933,13 @@ public class SearchEngineUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
+	private static Set<Long> _companyIds = new HashSet<Long>();
 	private static String _defaultSearchEngineId;
 	private static Set<String> _excludedEntryClassNames = new HashSet<String>();
 	private static boolean _indexReadOnly = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
 	private static Map<String, SearchEngine> _searchEngines =
 		new ConcurrentHashMap<String, SearchEngine>();
-	private static Set<Long> _companyIds = new HashSet<Long>();
 	private static SearchPermissionChecker _searchPermissionChecker;
 
 	private ServiceTracker<SearchEngineConfigurator, SearchEngineConfigurator>
