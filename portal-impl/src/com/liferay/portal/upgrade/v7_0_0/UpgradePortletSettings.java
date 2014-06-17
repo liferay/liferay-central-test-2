@@ -79,13 +79,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 			ps = con.prepareStatement(sql);
 
-			ps.setLong(1, portletPreferencesRow.portletPreferencesId);
-			ps.setLong(2, portletPreferencesRow.ownerId);
-			ps.setInt(3, portletPreferencesRow.ownerType);
-			ps.setLong(4, portletPreferencesRow.plid);
-			ps.setString(5, portletPreferencesRow.portletId);
-			ps.setString(6, portletPreferencesRow.preferences);
-			ps.setLong(7, portletPreferencesRow.mvccVersion);
+			ps.setLong(1, portletPreferencesRow._portletPreferencesId);
+			ps.setLong(2, portletPreferencesRow._ownerId);
+			ps.setInt(3, portletPreferencesRow._ownerType);
+			ps.setLong(4, portletPreferencesRow._plid);
+			ps.setString(5, portletPreferencesRow._portletId);
+			ps.setString(6, portletPreferencesRow._preferences);
+			ps.setLong(7, portletPreferencesRow._mvccVersion);
 
 			ps.executeUpdate();
 		}
@@ -109,19 +109,19 @@ public class UpgradePortletSettings extends UpgradeProcess {
 							PortletPreferencesRow portletPreferencesRow)
 						throws SQLException {
 
-						portletPreferencesRow.portletPreferencesId =
+						portletPreferencesRow._portletPreferencesId =
 							increment();
-						portletPreferencesRow.ownerType =
+						portletPreferencesRow._ownerType =
 							PortletKeys.PREFS_OWNER_TYPE_GROUP;
-						portletPreferencesRow.portletId = serviceName;
+						portletPreferencesRow._portletId = serviceName;
 
 						if (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) {
-							long plid = portletPreferencesRow.plid;
+							long plid = portletPreferencesRow._plid;
 
 							long groupId = getGroupIdFromPlid(plid);
 
-							portletPreferencesRow.ownerId = groupId;
-							portletPreferencesRow.plid = 0;
+							portletPreferencesRow._ownerId = groupId;
+							portletPreferencesRow._plid = 0;
 
 							_logCopyOfServiceSettings(
 								portletId, plid, serviceName, groupId);
@@ -238,7 +238,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 						javax.portlet.PortletPreferences
 							javaxPortletPreferences =
 								PortletPreferencesFactoryUtil.fromDefaultXML(
-									portletPreferencesRow.preferences);
+									portletPreferencesRow._preferences);
 
 						Enumeration<String> names =
 							javaxPortletPreferences.getNames();
@@ -261,7 +261,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 							javaxPortletPreferences.reset(keyToReset);
 						}
 
-						portletPreferencesRow.preferences =
+						portletPreferencesRow._preferences =
 							PortletPreferencesFactoryUtil.toXML(
 								javaxPortletPreferences);
 
@@ -303,13 +303,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 			ps = con.prepareStatement(sql);
 
-			ps.setLong(1, portletPreferencesRow.ownerId);
-			ps.setInt(2, portletPreferencesRow.ownerType);
-			ps.setLong(3, portletPreferencesRow.plid);
-			ps.setString(4, portletPreferencesRow.portletId);
-			ps.setString(5, portletPreferencesRow.preferences);
-			ps.setLong(6, portletPreferencesRow.mvccVersion);
-			ps.setLong(7, portletPreferencesRow.portletPreferencesId);
+			ps.setLong(1, portletPreferencesRow._ownerId);
+			ps.setInt(2, portletPreferencesRow._ownerType);
+			ps.setLong(3, portletPreferencesRow._plid);
+			ps.setString(4, portletPreferencesRow._portletId);
+			ps.setString(5, portletPreferencesRow._preferences);
+			ps.setLong(6, portletPreferencesRow._mvccVersion);
+			ps.setLong(7, portletPreferencesRow._portletPreferencesId);
 
 			ps.executeUpdate();
 		}
@@ -370,13 +370,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				PortletPreferencesRow portletPreferencesRow =
 					new PortletPreferencesRow();
 
-				portletPreferencesRow.portletPreferencesId = rs.getLong(
+				portletPreferencesRow._portletPreferencesId = rs.getLong(
 					"portletPreferencesId");
-				portletPreferencesRow.ownerId = rs.getLong("ownerId");
-				portletPreferencesRow.ownerType = rs.getInt("ownerType");
-				portletPreferencesRow.plid = rs.getLong("plid");
-				portletPreferencesRow.portletId = rs.getString("portletId");
-				portletPreferencesRow.preferences = GetterUtil.getString(
+				portletPreferencesRow._ownerId = rs.getLong("ownerId");
+				portletPreferencesRow._ownerType = rs.getInt("ownerType");
+				portletPreferencesRow._plid = rs.getLong("plid");
+				portletPreferencesRow._portletId = rs.getString("portletId");
+				portletPreferencesRow._preferences = GetterUtil.getString(
 					rs.getString("preferences"));
 
 				visitor.visit(portletPreferencesRow);
@@ -395,13 +395,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	private class PortletPreferencesRow {
 
-		private long mvccVersion;
-		private long ownerId;
-		private int ownerType;
-		private long plid;
-		private String portletId;
-		private long portletPreferencesId;
-		private String preferences;
+		private long _mvccVersion;
+		private long _ownerId;
+		private int _ownerType;
+		private long _plid;
+		private String _portletId;
+		private long _portletPreferencesId;
+		private String _preferences;
 
 	}
 
