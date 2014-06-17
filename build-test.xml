@@ -147,7 +147,7 @@
 					<equals arg1="${app.server.type}" arg2="tomcat" />
 				</not>
 				<then>
-					<fail>Clustering is only currently supported in Tomcat.</fail>
+					<fail>The public test clustering scripts are only available for Tomcat.</fail>
 				</then>
 			</if>
 
