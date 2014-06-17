@@ -51,9 +51,6 @@ public class MessageTag extends TagSupport {
 				if (!_localizeKey) {
 					value = _key;
 				}
-				else if (_unicode) {
-					value = UnicodeLanguageUtil.get(pageContext, _key);
-				}
 				else if (_escape) {
 					value = HtmlUtil.escape(
 						LanguageUtil.get(pageContext, _key));
@@ -61,6 +58,9 @@ public class MessageTag extends TagSupport {
 				else if (_escapeAttribute) {
 					value = HtmlUtil.escapeAttribute(
 						LanguageUtil.get(pageContext, _key));
+				}
+				else if (_unicode) {
+					value = UnicodeLanguageUtil.get(pageContext, _key);
 				}
 				else {
 					value = LanguageUtil.get(pageContext, _key);
