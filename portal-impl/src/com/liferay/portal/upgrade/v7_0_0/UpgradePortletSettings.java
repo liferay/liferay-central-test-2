@@ -271,13 +271,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		}
 		catch (SQLException sqle) {
 			throw new PortalException(
-				"Unable to clean keys with ownerType "+ ownerType +" for " +
-				"portlet "+portletId, sqle);
+				"Unable to clean keys with ownerType " + ownerType + " for " +
+					"portlet " + portletId, sqle);
 		}
 		catch (RuntimeException re) {
 			throw new SystemException(
-				"Unable to clean keys with ownerType "+ ownerType +" for " +
-				"portlet "+portletId, re);
+				"Unable to clean keys with ownerType " + ownerType + " for " +
+					"portlet " + portletId, re);
 		}
 	}
 
