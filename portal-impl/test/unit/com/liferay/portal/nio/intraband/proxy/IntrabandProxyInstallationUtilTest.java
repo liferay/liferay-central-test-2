@@ -154,9 +154,9 @@ public class IntrabandProxyInstallationUtilTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"Skeleton/stub proxy method signatures mismatch, skeleton : " +
-					"[doStuff-()Ljava/lang/Object;], stub : " +
-						"[doStuffX-()Ljava/lang/Object;]",
+				"Skeleton and stub proxy method signatures do not match. " +
+					"Skeleton is [doStuff-()Ljava/lang/Object;]. Stub is " +
+						"[doStuffX-()Ljava/lang/Object;].",
 				ise.getMessage());
 		}
 	}
@@ -229,9 +229,9 @@ public class IntrabandProxyInstallationUtilTest {
 		}
 		catch (IllegalStateException ise) {
 			Assert.assertEquals(
-				"Skeleton/stub proxy method signatures mismatch, skeleton : " +
-					"[doStuff-()Ljava/lang/Object;], stub : " +
-						"[doStuffX-()Ljava/lang/Object;]",
+				"Skeleton and stub proxy method signatures do not match. " +
+					"Skeleton is [doStuff-()Ljava/lang/Object;]. Stub is " +
+						"[doStuffX-()Ljava/lang/Object;].",
 				ise.getMessage());
 		}
 	}
@@ -275,6 +275,7 @@ public class IntrabandProxyInstallationUtilTest {
 		@Proxy
 		public abstract Object doStuff();
 
+		@SuppressWarnings("unused")
 		public void copyMethod() {
 		}
 

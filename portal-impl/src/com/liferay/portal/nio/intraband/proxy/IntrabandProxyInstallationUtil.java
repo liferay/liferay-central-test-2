@@ -37,16 +37,21 @@ public class IntrabandProxyInstallationUtil {
 		String[] skeletonProxyMethodSignatures,
 		String[] stubProxyMethodSignatures) {
 
-		if (!Arrays.equals(
+		if (Arrays.equals(
 				skeletonProxyMethodSignatures, stubProxyMethodSignatures)) {
 
-			throw new IllegalStateException(
-				"Skeleton/stub proxy method signatures " +
-					"mismatch, skeleton : " +
-						Arrays.toString(skeletonProxyMethodSignatures) +
-							", stub : " +
-								Arrays.toString(stubProxyMethodSignatures));
+			return;
 		}
+
+		String skeletonProxyMethodSignaturesString = Arrays.toString(
+			skeletonProxyMethodSignatures);
+		String stubProxyMethodSignaturesString = Arrays.toString(
+			stubProxyMethodSignatures);
+
+		throw new IllegalStateException(
+			"Skeleton and stub proxy method signatures do not match. " +
+				"Skeleton is " + skeletonProxyMethodSignaturesString +
+					". Stub is " + stubProxyMethodSignaturesString + ".");
 	}
 
 	public static String[] installSkeleton(
