@@ -414,12 +414,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		}
 	}
 
-	private void _logPortletUpgrade(String portletId) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Upgrading portlet " + portletId + " settings");
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(
 		UpgradePortletSettings.class);
 
