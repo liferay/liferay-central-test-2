@@ -343,8 +343,7 @@ public class WorkflowDefinitionLinkLocalServiceWrapper
 
 	@Override
 	public int getWorkflowDefinitionLinksCount(long companyId, long groupId,
-		java.lang.String className)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		java.lang.String className) {
 		return _workflowDefinitionLinkLocalService.getWorkflowDefinitionLinksCount(companyId,
 			groupId, className);
 	}

@@ -273,8 +273,7 @@ public interface WorkflowDefinitionLinkLocalService extends BaseLocalService,
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWorkflowDefinitionLinksCount(long companyId, long groupId,
-		java.lang.String className)
-		throws com.liferay.portal.kernel.exception.PortalException;
+		java.lang.String className);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getWorkflowDefinitionLinksCount(long companyId,
