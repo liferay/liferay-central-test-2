@@ -69,15 +69,10 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(3);
-
-			sb.append("insert into PortletPreferences (portletPreferencesId, ");
-			sb.append("ownerId, ownerType, plid, portletId, preferences, ");
-			sb.append("mvccVersion) values (?, ?, ?, ?, ?, ?, ?)");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"insert into PortletPreferences (portletPreferencesId, " +
+					"ownerId, ownerType, plid, portletId, preferences, " +
+						"mvccVersion) values (?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setLong(1, portletPreferencesRow._portletPreferencesId);
 			ps.setLong(2, portletPreferencesRow._ownerId);
