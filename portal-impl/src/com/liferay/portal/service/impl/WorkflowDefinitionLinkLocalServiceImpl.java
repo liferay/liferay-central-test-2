@@ -198,8 +198,7 @@ public class WorkflowDefinitionLinkLocalServiceImpl
 
 	@Override
 	public int getWorkflowDefinitionLinksCount(
-			long companyId, long groupId, String className)
-		throws PortalException {
+		long companyId, long groupId, String className) {
 
 		return workflowDefinitionLinkPersistence.countByG_C_C(
 			groupId, companyId,
