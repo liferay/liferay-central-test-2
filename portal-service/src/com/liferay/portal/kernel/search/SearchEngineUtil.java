@@ -295,7 +295,7 @@ public class SearchEngineUtil {
 
 				if (searchEngine == null) {
 					throw new IllegalStateException(
-						"No " + SYSTEM_ENGINE_ID + " was found.");
+						"Unable to find search engine " + SYSTEM_ENGINE_ID);
 				}
 
 				return searchEngine;
@@ -910,14 +910,14 @@ public class SearchEngineUtil {
 				   (--count > 0)) {
 
 				if (_log.isDebugEnabled()) {
-					_log.debug("Waiting for a " + SYSTEM_ENGINE_ID);
+					_log.debug("Waiting for search engine " + SYSTEM_ENGINE_ID);
 				}
 
 				Thread.sleep(500);
 			}
 		}
-		catch (InterruptedException e) {
-			_log.error(e, e);
+		catch (InterruptedException ie) {
+			_log.error(ie, ie);
 		}
 	}
 
