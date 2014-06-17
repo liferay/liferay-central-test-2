@@ -103,14 +103,11 @@ public class DDMFormJSONDeserializerImpl implements DDMFormJSONDeserializer {
 
 		setDDMFormFieldLocalizedValue(
 			jsonObject.getJSONObject("label"), ddmFormField.getLabel());
-
 		setDDMFormFieldLocalizedValue(
 			jsonObject.getJSONObject("predefinedValue"),
 			ddmFormField.getPredefinedValue());
-
 		setDDMFormFieldLocalizedValue(
 			jsonObject.getJSONObject("style"), ddmFormField.getStyle());
-
 		setDDMFormFieldLocalizedValue(
 			jsonObject.getJSONObject("tip"), ddmFormField.getTip());
 
