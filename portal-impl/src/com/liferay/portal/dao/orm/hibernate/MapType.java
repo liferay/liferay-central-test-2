@@ -117,6 +117,7 @@ public class MapType implements CompositeUserType, Serializable {
 	}
 
 	@Override
+	@SuppressWarnings("rawtypes")
 	public Class<Map> returnedClass() {
 		return Map.class;
 	}
