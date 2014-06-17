@@ -69,7 +69,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(9);
+			StringBundler sb = new StringBundler(3);
 
 			sb.append("insert into PortletPreferences (portletPreferencesId, ");
 			sb.append("ownerId, ownerType, plid, portletId, preferences, ");
