@@ -1335,7 +1335,7 @@ public class ServiceBuilder {
 		else if (type.equals("Date")) {
 			return "TIMESTAMP";
 		}
-		else if (type.equals("String") || type.equals("Map")) {
+		else if (type.equals("Map") || type.equals("String")) {
 			Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			if (hints != null) {
@@ -3991,7 +3991,9 @@ public class ServiceBuilder {
 				if (col.isPrimary()) {
 					sb.append(" not null");
 				}
-				else if (colType.equals("Date") || colType.equals("String") || colType.equals("Map")) {
+				else if (colType.equals("Date") || colType.equals("Map") ||
+						 colType.equals("String")) {
+
 					sb.append(" null");
 				}
 
@@ -4114,7 +4116,9 @@ public class ServiceBuilder {
 					sb.append(" primary key");
 				}
 			}
-			else if (colType.equals("Date") || colType.equals("String") || colType.equals("Map")) {
+			else if (colType.equals("Date") || colType.equals("Map") ||
+					 colType.equals("String")) {
+
 				sb.append(" null");
 			}
 

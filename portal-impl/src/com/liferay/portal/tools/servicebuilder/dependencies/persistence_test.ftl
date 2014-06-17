@@ -228,10 +228,10 @@ public class ${entity.name}PersistenceTest {
 					RandomTestUtil.nextDate()
 				<#elseif column.type == "Blob">
 					 new${column.methodName}Blob
-				<#elseif column.type == "String">
-					RandomTestUtil.randomString()
 				<#elseif column.type == "Map">
 					new HashMap()
+				<#elseif column.type == "String">
+					RandomTestUtil.randomString()
 				</#if>
 
 				);
@@ -965,10 +965,10 @@ public class ${entity.name}PersistenceTest {
 					${column.name}Blob
 				<#elseif column.type == "Date">
 					RandomTestUtil.nextDate()
-				<#elseif column.type == "String">
-	                RandomTestUtil.randomString()
 				<#elseif column.type == "Map">
 					new HashMap()
+				<#elseif column.type == "String">
+	                RandomTestUtil.randomString()
 				</#if>
 
 				);
