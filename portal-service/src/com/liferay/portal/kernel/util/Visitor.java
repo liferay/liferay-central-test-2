@@ -19,6 +19,6 @@ package com.liferay.portal.kernel.util;
  */
 public interface Visitor<T> {
 
-	public void visit(T item) throws Exception;
+	public void visit(T object) throws Exception;
 
 }
