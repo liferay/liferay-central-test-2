@@ -363,9 +363,9 @@ public class EditMessageAction extends PortletAction {
 		String subject = ParamUtil.getString(actionRequest, "subject");
 		String body = ParamUtil.getString(actionRequest, "body");
 
-		MBSettings settings = MBSettings.getInstance(groupId);
+		MBSettings mbSettings = MBSettings.getInstance(groupId);
 
-		String format = settings.getMessageFormat();
+		String format = mbSettings.getMessageFormat();
 
 		List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
 			new ArrayList<ObjectValuePair<String, InputStream>>(5);
