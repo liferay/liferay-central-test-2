@@ -163,7 +163,7 @@
 		</execute>
 	</command>
 
-	<command name="SiteAdminCanDeletePagesThatWereCreatedBySiteTemplates" priority="3">
+	<command name="SiteAdminCannotDeletePagesThatWereCreatedBySiteTemplates" priority="3">
 		<var name="pageNamelist" value="Home,Wiki" />
 
 		<execute macro="Page#gotoCP">
@@ -176,12 +176,16 @@
 			<var name="userGroupName" value="UG UserGroup Name" />
 		</execute>
 
-		<for list="${pageNamelist}" param="sitePageName">
-			<execute macro="Page#gotoCP">
-				<var name="portletName" value="User Groups" />
-			</execute>
+		<execute macro="Page#gotoCP">
+			<var name="portletName" value="User Groups" />
+		</execute>
 
-			<execute macro="SitePage#deletePagesAssociatedWithSiteTemplateCP">
+		<execute macro="UserGroup#gotoManageSitePages">
+			<var name="userGroupName" value="UG UserGroup Name" />
+		</execute>
+
+		<for list="${pageNamelist}" param="sitePageName">
+			<execute macro="SitePage#viewNoDeletePagesAssociatedWithSiteTemplateCP">
 				<var name="sitePageName" value="${sitePageName}" />
 				<var name="userGroupName" value="UG UserGroup Name" />
 			</execute>

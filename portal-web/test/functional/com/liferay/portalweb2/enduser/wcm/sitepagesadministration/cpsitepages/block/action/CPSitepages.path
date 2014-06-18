@@ -39,7 +39,7 @@
 	<td></td>
 </tr>
 <tr>
-	<td>INFO_MESSAGE_3</td>
+	<td>BLOCK_MESSAGE</td>
 	<td>xpath=(//div[contains(@class,'alert') and (contains(@class,'alert-block'))])</td>
 	<td></td>
 </tr>
