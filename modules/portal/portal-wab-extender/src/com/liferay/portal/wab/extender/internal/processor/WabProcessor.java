@@ -53,10 +53,10 @@ public class WabProcessor {
 	}
 
 	public InputStream getInputStream() throws IOException {
-		_deployedAppFolder = autoDeploy();
+		_pluginDir = autoDeploy();
 
-		if ((_deployedAppFolder == null) || !_deployedAppFolder.exists() ||
-			!_deployedAppFolder.isDirectory()) {
+		if ((_pluginDir == null) || !_pluginDir.exists() ||
+			!_pluginDir.isDirectory()) {
 
 			return null;
 		}
@@ -68,7 +68,7 @@ public class WabProcessor {
 
 	protected File autoDeploy() {
 		String webContextpath = MapUtil.getString(
-			_parameters, WabURLConnection.WEB_CONTEXT_PATH);
+			_parameters, "Web-ContextPath");
 
 		if (!webContextpath.startsWith(StringPool.SLASH)) {
 			webContextpath = StringPool.SLASH.concat(webContextpath);
@@ -155,7 +155,7 @@ public class WabProcessor {
 
 	private BundleContext _bundleContext;
 	private ClassLoader _classLoader;
-	private File _deployedAppFolder;
+	private File _pluginDir;
 	private File _file;
 	private File _manifestFile;
 	private Map<String, String[]> _parameters;
