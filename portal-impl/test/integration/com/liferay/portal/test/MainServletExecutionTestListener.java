@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.test.AbstractExecutionTestListener;
 import com.liferay.portal.kernel.test.TestContext;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PersistedModel;
@@ -75,12 +76,10 @@ public class MainServletExecutionTestListener
 
 	@Override
 	public void runAfterTest(TestContext testContext) {
-		Map<Class<?>, FieldsBag> deleteAfterTestRunFieldBags =
-			new HashMap<Class<?>, FieldsBag>();
+		Map<Class<?>, FieldBag> deleteAfterTestRunFieldBags =
+			new HashMap<Class<?>, FieldBag>();
 
 		Class<?> testClass = testContext.getClazz();
-
-		Object instance = testContext.getInstance();
 
 		while (testClass != null) {
 			for (Field field : testClass.getDeclaredFields()) {
@@ -106,7 +105,7 @@ public class MainServletExecutionTestListener
 						throw new IllegalArgumentException(
 							"Unable to annotate field " + field +
 								" because it is not an array of type " +
-									PersistedModel.class);
+									PersistedModel.class.getName());
 					}
 
 					addField(
@@ -121,20 +120,19 @@ public class MainServletExecutionTestListener
 						field.setAccessible(true);
 
 						Collection<?> collection = (Collection<?>)field.get(
-							instance);
+							testContext.getInstance());
 
 						if ((collection == null) || collection.isEmpty()) {
 							continue;
 						}
 
-						Class<?> collectionType = detectedCollectionType(
-							collection);
+						Class<?> collectionType = getCollectionType(collection);
 
 						if (collectionType == null) {
 							throw new IllegalArgumentException(
 								"Unable to annotate field " + field +
-									" because it is not a Collection " +
-										"of type " + PersistedModel.class);
+									" because it is not a collection of type " +
+										PersistedModel.class.getName());
 						}
 
 						addField(
@@ -142,28 +140,34 @@ public class MainServletExecutionTestListener
 					}
 					catch (Exception e) {
 						_log.error(
-							"Unable to detect Collection element type", e);
+							"Unable to detect collection element type", e);
 					}
 
 					continue;
 				}
 
-				throw new IllegalArgumentException(
-					"Unable to annotate field " + field +
-						" because it is not type of " + PersistedModel.class +
-							", either an array or collect of it");
+				StringBundler sb = new StringBundler(6);
+
+				sb.append("Unable to annotate field ");
+				sb.append(field);
+				sb.append(" because it is not type of ");
+				sb.append(PersistedModel.class.getName());
+				sb.append(" nor an array or collection of ");
+				sb.append(PersistedModel.class.getName());
+
+				throw new IllegalArgumentException(sb.toString());
 			}
 
 			testClass = testClass.getSuperclass();
 		}
 
-		Set<Map.Entry<Class<?>, FieldsBag>> set =
+		Set<Map.Entry<Class<?>, FieldBag>> set =
 			deleteAfterTestRunFieldBags.entrySet();
 
-		Iterator<Map.Entry<Class<?>, FieldsBag>> iterator = set.iterator();
+		Iterator<Map.Entry<Class<?>, FieldBag>> iterator = set.iterator();
 
 		while (iterator.hasNext()) {
-			Map.Entry<Class<?>, FieldsBag> entry = iterator.next();
+			Map.Entry<Class<?>, FieldBag> entry = iterator.next();
 
 			Class<?> clazz = entry.getKey();
 
@@ -173,17 +177,17 @@ public class MainServletExecutionTestListener
 
 			iterator.remove();
 
-			removeField(entry.getValue(), instance);
+			removeField(entry.getValue(), testContext.getInstance());
 		}
 
 		for (Class<?> clazz : _orderedClasses) {
-			FieldsBag fieldsBag = deleteAfterTestRunFieldBags.remove(clazz);
+			FieldBag fieldBag = deleteAfterTestRunFieldBags.remove(clazz);
 
-			if (fieldsBag == null) {
+			if (fieldBag == null) {
 				continue;
 			}
 
-			removeField(fieldsBag, instance);
+			removeField(fieldBag, testContext.getInstance());
 		}
 	}
 
@@ -216,50 +220,50 @@ public class MainServletExecutionTestListener
 	}
 
 	protected void addField(
-		Map<Class<?>, FieldsBag> deleteAfterTestRunFieldBags, Class<?> clazz,
+		Map<Class<?>, FieldBag> deleteAfterTestRunFieldBags, Class<?> clazz,
 		Field field) {
 
-		FieldsBag fieldsBag = deleteAfterTestRunFieldBags.get(clazz);
+		FieldBag fieldBag = deleteAfterTestRunFieldBags.get(clazz);
 
-		if (fieldsBag == null) {
-			fieldsBag = new FieldsBag(clazz);
+		if (fieldBag == null) {
+			fieldBag = new FieldBag(clazz);
 
-			deleteAfterTestRunFieldBags.put(clazz, fieldsBag);
+			deleteAfterTestRunFieldBags.put(clazz, fieldBag);
 		}
 
 		field.setAccessible(true);
 
-		fieldsBag.addField(field);
+		fieldBag.addField(field);
 	}
 
-	protected Class<? extends PersistedModel> detectedCollectionType(
+	protected Class<? extends PersistedModel> getCollectionType(
 		Collection<?> collection) {
 
 		Class<? extends PersistedModel> collectionType = null;
 
-		for (Object obj : collection) {
-			Queue<Class<?>> types = new LinkedList<Class<?>>();
+		for (Object object : collection) {
+			Queue<Class<?>> classes = new LinkedList<Class<?>>();
 
-			types.add(obj.getClass());
+			classes.add(object.getClass());
 
-			Class<?> type = null;
+			Class<?> clazz = null;
 
-			while ((type = types.poll()) != null) {
+			while ((clazz = classes.poll()) != null) {
 				if (ArrayUtil.contains(
-						type.getInterfaces(), PersistedModel.class)) {
+						clazz.getInterfaces(), PersistedModel.class)) {
 
 					if (collectionType == null) {
-						collectionType = (Class<? extends PersistedModel>)type;
+						collectionType = (Class<? extends PersistedModel>)clazz;
 					}
-					else if (collectionType != type) {
+					else if (collectionType != clazz) {
 						return null;
 					}
 
 					break;
 				}
 
-				types.add(type.getSuperclass());
-				types.addAll(Arrays.asList(type.getInterfaces()));
+				classes.add(clazz.getSuperclass());
+				classes.addAll(Arrays.asList(clazz.getInterfaces()));
 			}
 		}
 
@@ -272,26 +276,26 @@ public class MainServletExecutionTestListener
 		return "file:" + file.getAbsolutePath();
 	}
 
-	protected void removeField(FieldsBag fieldsBag, Object instance) {
+	protected void removeField(FieldBag fieldBag, Object instance) {
 		try {
-			Class<?> fieldClass = fieldsBag.getFieldClass();
+			Class<?> fieldClass = fieldBag.getFieldClass();
 
 			PersistedModelLocalService persistedModelLocalService =
 				PersistedModelLocalServiceRegistryUtil.
 					getPersistedModelLocalService(fieldClass.getName());
 
-			for (Field field : fieldsBag.getFields()) {
-				Object obj = field.get(instance);
+			for (Field field : fieldBag.getFields()) {
+				Object object = field.get(instance);
 
-				if (obj == null) {
+				if (object == null) {
 					continue;
 				}
 
-				Class<?> objClass = obj.getClass();
+				Class<?> objectClass = object.getClass();
 
-				if (objClass.isArray()) {
+				if (objectClass.isArray()) {
 					for (PersistedModel persistedModel :
-							(PersistedModel[])obj) {
+							(PersistedModel[])object) {
 
 						if (persistedModel == null) {
 							continue;
@@ -301,9 +305,9 @@ public class MainServletExecutionTestListener
 							persistedModel);
 					}
 				}
-				else if (Collection.class.isAssignableFrom(objClass)) {
+				else if (Collection.class.isAssignableFrom(objectClass)) {
 					Collection<? extends PersistedModel> collection =
-						(Collection<? extends PersistedModel>)obj;
+						(Collection<? extends PersistedModel>)object;
 
 					for (PersistedModel persistedModel : collection) {
 						persistedModelLocalService.deletePersistedModel(
@@ -312,7 +316,7 @@ public class MainServletExecutionTestListener
 				}
 				else {
 					persistedModelLocalService.deletePersistedModel(
-						(PersistedModel)obj);
+						(PersistedModel)object);
 				}
 
 				field.set(instance, null);
@@ -325,9 +329,9 @@ public class MainServletExecutionTestListener
 
 	protected static MainServlet mainServlet;
 
-	protected static class FieldsBag {
+	protected static class FieldBag {
 
-		public FieldsBag(Class<?> fieldClass) {
+		public FieldBag(Class<?> fieldClass) {
 			_fieldClass = fieldClass;
 		}
 
@@ -335,12 +339,12 @@ public class MainServletExecutionTestListener
 			_fields.add(field);
 		}
 
-		public List<Field> getFields() {
-			return _fields;
-		}
-
 		public Class<?> getFieldClass() {
 			return _fieldClass;
+		}
+
+		public List<Field> getFields() {
+			return _fields;
 		}
 
 		private Class<?> _fieldClass;
