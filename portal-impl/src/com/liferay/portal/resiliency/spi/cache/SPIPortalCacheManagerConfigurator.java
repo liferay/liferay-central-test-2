@@ -87,7 +87,7 @@ public class SPIPortalCacheManagerConfigurator {
 
 		portalCacheManager = IntrabandProxyUtil.newStubInstance(
 			stubClass, StringPool.BLANK, registrationReference,
-			_INTRABAND_PROXY_EXCEPTION_HANDLER);
+			_exceptionHandler);
 
 		return portalCacheManager;
 	}
@@ -95,8 +95,8 @@ public class SPIPortalCacheManagerConfigurator {
 	private static final String _BEAN_NAME_MULTI_VM_PORTAL_CACHE_MANAGER =
 		"com.liferay.portal.kernel.cache.MultiVMPortalCacheManager";
 
-	private static final ExceptionHandler
-		_INTRABAND_PROXY_EXCEPTION_HANDLER = new WarnLogExceptionHandler();
+	private static ExceptionHandler _exceptionHandler =
+		new WarnLogExceptionHandler();
 
 	private static class IntrabandPortalCacheTargetLocator
 		implements TargetLocator {
@@ -125,13 +125,12 @@ public class SPIPortalCacheManagerConfigurator {
 
 			if (_portalCacheManager == null) {
 				throw new IllegalStateException(
-					"Unable to locate bean : " +
+					"Unable to locate bean " +
 						_BEAN_NAME_MULTI_VM_PORTAL_CACHE_MANAGER);
 			}
 		}
 
-		private final boolean _manager;
-
+		private boolean _manager;
 		private transient PortalCacheManager<?, ?> _portalCacheManager;
 
 	}

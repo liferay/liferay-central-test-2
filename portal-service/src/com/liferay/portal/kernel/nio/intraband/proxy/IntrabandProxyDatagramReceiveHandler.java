@@ -39,7 +39,7 @@ public class IntrabandProxyDatagramReceiveHandler
 
 		if (intrabandProxySkeleton == null) {
 			throw new IllegalStateException(
-				"Unable to find skeleton with id : " + skeletonId);
+				"Unable to find skeleton with ID " + skeletonId);
 		}
 
 		intrabandProxySkeleton.dispatch(
