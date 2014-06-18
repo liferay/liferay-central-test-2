@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.apache.tools.ant.BuildEvent;
+import org.apache.tools.ant.BuildLogger;
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.Expand;
@@ -46,59 +47,61 @@ public class AntUtil {
 	public static Project getAntProject() {
 		Project project = new Project();
 
-		DefaultLogger logger = new DefaultLogger() {
+		BuildLogger buildLogger = new DefaultLogger() {
 
 			@Override
-			public void messageLogged(BuildEvent event) {
-				int priority = event.getPriority();
+			public void messageLogged(BuildEvent buildEvent) {
+				int priority = buildEvent.getPriority();
 
-				if (priority <= msgOutputLevel) {
-					StringBundler sb = new StringBundler();
-
-					try {
-						UnsyncBufferedReader unsyncBufferedReader =
-							new UnsyncBufferedReader(
-								new UnsyncStringReader(event.getMessage()));
-
-						String line = unsyncBufferedReader.readLine();
-
-						boolean first = true;
-
-						while (line != null) {
-							if (!first) {
-								sb.append(StringUtils.LINE_SEP);
-							}
-
-							first = false;
-
-							sb.append("  ");
-							sb.append(line);
-
-							line = unsyncBufferedReader.readLine();
-						}
-					}
-					catch (IOException ioe) {
-					}
-
-					String msg = sb.toString();
-
-					if (priority != Project.MSG_ERR) {
-						printMessage(msg, out, priority);
-					}
-					else {
-						printMessage(msg, err, priority);
-					}
-
-					log(msg);
+				if (priority > msgOutputLevel) {
+					return;
 				}
+
+				StringBundler sb = new StringBundler();
+
+				try {
+					UnsyncBufferedReader unsyncBufferedReader =
+						new UnsyncBufferedReader(
+							new UnsyncStringReader(buildEvent.getMessage()));
+
+					String line = unsyncBufferedReader.readLine();
+
+					boolean first = true;
+
+					while (line != null) {
+						if (!first) {
+							sb.append(StringUtils.LINE_SEP);
+						}
+
+						first = false;
+
+						sb.append("  ");
+						sb.append(line);
+
+						line = unsyncBufferedReader.readLine();
+					}
+				}
+				catch (IOException ioe) {
+				}
+
+				String msg = sb.toString();
+
+				if (priority != Project.MSG_ERR) {
+					printMessage(msg, out, priority);
+				}
+				else {
+					printMessage(msg, err, priority);
+				}
+
+				log(msg);
 			}
 		};
 
-		logger.setMessageOutputLevel(Project.MSG_INFO);
-		logger.setOutputPrintStream(System.out);
-		logger.setErrorPrintStream(System.err);
+		buildLogger.setErrorPrintStream(System.err);
+		buildLogger.setMessageOutputLevel(Project.MSG_INFO);
+		buildLogger.setOutputPrintStream(System.out);
 
-		project.addBuildListener(logger);
+		project.addBuildListener(buildLogger);
 
 		return project;
 	}
