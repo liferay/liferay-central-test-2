@@ -95,8 +95,7 @@ public class WabProcessor {
 				});
 
 			if ((files == null) || (files.length == 0)) {
-
-				// This should not happen
+				_log.error("Unable to find any WARs in " + parentFile);
 
 				return null;
 			}
