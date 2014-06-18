@@ -23,7 +23,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.wab.extender.internal.connection.WabURLConnection;
 import com.liferay.portal.wab.extender.internal.util.AntUtil;
 
 import java.io.File;
@@ -156,9 +155,9 @@ public class WabProcessor {
 
 	private BundleContext _bundleContext;
 	private ClassLoader _classLoader;
-	private File _pluginDir;
 	private File _file;
 	private File _manifestFile;
 	private Map<String, String[]> _parameters;
+	private File _pluginDir;
 
 }
