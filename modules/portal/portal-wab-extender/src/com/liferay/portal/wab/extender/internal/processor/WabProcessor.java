@@ -111,15 +111,17 @@ public class WabProcessor {
 	}
 
 	protected AutoDeploymentContext buildAutoDeploymentContext(String context) {
-		File file = new File(_file.getParentFile(), "deploy");
-
-		file.mkdirs();
-
 		AutoDeploymentContext autoDeploymentContext =
 			new AutoDeploymentContext();
 
 		autoDeploymentContext.setContext(context);
+
+		File file = new File(_file.getParentFile(), "deploy");
+
+		file.mkdirs();
+
 		autoDeploymentContext.setDestDir(file.getAbsolutePath());
+
 		autoDeploymentContext.setFile(_file);
 
 		return autoDeploymentContext;
