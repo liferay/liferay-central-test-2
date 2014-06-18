@@ -185,11 +185,15 @@
 			<var name="localizedFriendlyURL" value="/german" />
 		</execute>
 
-		<execute macro="Page#deleteFriendlyURLPG" />
+		<execute macro="Page#deleteFriendlyURLPG" >
+			<var name="friendlyUrlLocalized" value="en_US" />
+		</execute>
 
 		<execute macro="Page#gotoPG">
 			<var name="pageName" value="Page Name" />
 		</execute>
+
+		<execute action="Home#assertConsoleTextNotPresent" value1="java.lang.StringIndexOutOfBoundsException: String index out of range: -1" />
 
 		<execute macro="Page#viewPageFriendURLPG">
 			<var name="localizedFriendlyURL" value="/german" />
