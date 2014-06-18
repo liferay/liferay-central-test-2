@@ -141,7 +141,7 @@ public class WabProcessor {
 					autoDeployListener.deploy(autoDeploymentContext);
 				}
 				catch (AutoDeployException ade) {
-					_log.error(ade);
+					_log.error(ade, ade);
 				}
 			}
 		}
