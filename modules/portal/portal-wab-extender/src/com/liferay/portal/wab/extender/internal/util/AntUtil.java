@@ -33,12 +33,12 @@ import org.apache.tools.ant.util.StringUtils;
  */
 public class AntUtil {
 
-	public static void expandFile(File source, File destination) {
+	public static void expandFile(File sourceFile, File destinationDir) {
 		Expand expand = new Expand();
 
+		expand.setDest(destinationDir);
 		expand.setProject(getAntProject());
-		expand.setSrc(source);
-		expand.setDest(destination);
+		expand.setSrc(sourceFile);
 
 		expand.execute();
 	}
