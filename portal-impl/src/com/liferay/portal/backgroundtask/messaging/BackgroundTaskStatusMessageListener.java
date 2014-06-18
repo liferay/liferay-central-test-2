@@ -28,7 +28,8 @@ import com.liferay.portal.kernel.messaging.Message;
 public class BackgroundTaskStatusMessageListener extends BaseMessageListener {
 
 	public BackgroundTaskStatusMessageListener(
-		long backgroundTaskId, BackgroundTaskStatusMessageTranslator
+		long backgroundTaskId,
+		BackgroundTaskStatusMessageTranslator
 			backgroundTaskStatusMessageTranslator) {
 
 		_backgroundTaskId = backgroundTaskId;

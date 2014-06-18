@@ -422,7 +422,6 @@ public abstract class BaseAssetRenderer implements AssetRenderer {
 		new NullDDMFieldReader();
 
 	private AssetRendererFactory _assetRendererFactory;
-
 	private int _assetRendererType = AssetRendererFactory.TYPE_LATEST_APPROVED;
 
 	private static final class NullDDMFieldReader implements DDMFieldReader {
