@@ -33,8 +33,8 @@ public class StubHolder<T> {
 		T originalT, String stubId, RegistrationReference registrationReference,
 		StubCreator<T> stubCreator) {
 
-		_stubId = stubId;
 		_originalT = originalT;
+		_stubId = stubId;
 		_registrationReference = registrationReference;
 		_stubCreator = stubCreator;
 	}
@@ -75,7 +75,7 @@ public class StubHolder<T> {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("Unable to create Stub", e);
+					_log.warn("Unable to create stub", e);
 				}
 
 				return _stubCreator.onCreationFailure(_stubId, _originalT, e);
@@ -104,16 +104,16 @@ public class StubHolder<T> {
 		return _stubCreator.onInvalidation(_stubId, _stub, _originalT);
 	}
 
-	private static final ProcessCallable<Boolean>
-		_startupFinishedProcessCallable = new StartupFinishedProcessCallable();
-
 	private static Log _log = LogFactoryUtil.getLog(StubHolder.class);
 
-	private final T _originalT;
-	private final RegistrationReference _registrationReference;
+	private static ProcessCallable<Boolean> _startupFinishedProcessCallable =
+		new StartupFinishedProcessCallable();
+
+	private T _originalT;
+	private RegistrationReference _registrationReference;
 	private volatile T _stub;
-	private final StubCreator<T> _stubCreator;
-	private final String _stubId;
+	private StubCreator<T> _stubCreator;
+	private String _stubId;
 
 	private static class StartupFinishedProcessCallable
 		implements ProcessCallable<Boolean> {

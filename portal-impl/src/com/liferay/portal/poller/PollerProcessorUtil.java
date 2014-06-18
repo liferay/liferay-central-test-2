@@ -170,8 +170,7 @@ public class PollerProcessorUtil {
 
 			if (pollerProcessor == null) {
 				throw new IllegalStateException(
-					"Unable to locate PollerProcessor for portlet : " +
-						portletId);
+					"Unable to get poller processor for portlet " + portletId);
 			}
 
 			return pollerProcessor;
