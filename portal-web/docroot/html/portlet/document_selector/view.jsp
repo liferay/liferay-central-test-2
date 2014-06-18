@@ -25,12 +25,12 @@ String[] tabs1Names = StringUtil.split(ParamUtil.getString(renderRequest, "tabs1
 		<liferay-ui:tabs names="<%= StringUtil.merge(tabs1Names) %>" param="tabs1" refresh="<%= false %>" type="pills">
 
 			<%
-			for (String tabName : tabs1Names) {
+			for (String tabs1Name : tabs1Names) {
 			%>
 
 				<liferay-ui:section>
 					<div>
-						<liferay-util:include page='<%= "/html/portlet/document_selector/" + tabName + ".jsp" %>'/>
+						<liferay-util:include page='<%= "/html/portlet/document_selector/" + tabs1Name + ".jsp" %>'/>
 					</div>
 				</liferay-ui:section>
 
