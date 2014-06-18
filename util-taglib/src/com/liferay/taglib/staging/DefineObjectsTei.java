@@ -32,19 +32,20 @@ public class DefineObjectsTei extends TagExtraInfo {
 
 	private static VariableInfo[] _variableInfo = new VariableInfo[] {
 		new VariableInfo(
-			"groupId", Long.class.getName(), true, VariableInfo.AT_END),
-		new VariableInfo(
 			"group", Group.class.getName(), true, VariableInfo.AT_END),
+		new VariableInfo(
+			"groupId", Long.class.getName(), true, VariableInfo.AT_END),
 		new VariableInfo(
 			"liveGroup", Group.class.getName(), true, VariableInfo.AT_END),
 		new VariableInfo(
 			"liveGroupId", Long.class.getName(), true, VariableInfo.AT_END),
 		new VariableInfo(
+			"privateLayout", Boolean.class.getName(), true,
+			VariableInfo.AT_END),
+		new VariableInfo(
 			"stagingGroup", Group.class.getName(), true, VariableInfo.AT_END),
 		new VariableInfo(
-			"stagingGroupId", Long.class.getName(), true, VariableInfo.AT_END),
-		new VariableInfo(
-			"privateLayout", Boolean.class.getName(), true, VariableInfo.AT_END)
+			"stagingGroupId", Long.class.getName(), true, VariableInfo.AT_END)
 	};
 
 }
