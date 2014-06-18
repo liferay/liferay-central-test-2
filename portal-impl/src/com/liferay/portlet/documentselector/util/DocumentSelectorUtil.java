@@ -43,28 +43,29 @@ public class DocumentSelectorUtil {
 	}
 
 	public static String[] getMimeTypes(HttpServletRequest request) {
-		HttpServletRequest originalServletRequest =
+		HttpServletRequest originalRequest =
 			PortalUtil.getOriginalServletRequest(request);
 
-		String type = ParamUtil.getString(originalServletRequest, "Type");
+		String type = ParamUtil.getString(originalRequest, "Type");
 
-		Set<String> mimeTypes = null;
-
-		if (StringUtil.equalsIgnoreCase(type, "audio")) {
-			mimeTypes = AudioProcessorUtil.getAudioMimeTypes();
-		}
-		else if (StringUtil.equalsIgnoreCase(type, "image")) {
-			mimeTypes = ImageProcessorUtil.getImageMimeTypes();
-		}
-		else if (StringUtil.equalsIgnoreCase(type, "video")) {
-			mimeTypes = VideoProcessorUtil.getVideoMimeTypes();
-		}
-
-		if (mimeTypes == null) {
-			return null;
-		}
+		Set<String> mimeTypes = _getMimeTypes(type);
 
 		return ArrayUtil.toStringArray(mimeTypes.toArray());
+	}
+
+	private static Set<String> _getMimeTypes(String type) {
+		if (StringUtil.equalsIgnoreCase(type, "audio")) {
+			return AudioProcessorUtil.getAudioMimeTypes();
+		}
+		else if (StringUtil.equalsIgnoreCase(type, "image")) {
+			return ImageProcessorUtil.getImageMimeTypes();
+		}
+		else if (StringUtil.equalsIgnoreCase(type, "video")) {
+			return VideoProcessorUtil.getVideoMimeTypes();
+		}
+		else {
+			return Collections.emptySet();
+		}
 	}
 
 }
