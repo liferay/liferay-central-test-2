@@ -10,7 +10,7 @@
 	<short-name>liferay-staging</short-name>
 	<uri>http://liferay.com/tld/staging</uri>
 	<tag>
-		<name>defineStagingObjects</name>
+		<name>defineObjects</name>
 		<tag-class>com.liferay.taglib.staging.DefineObjectsTag</tag-class>
 		<tei-class>com.liferay.taglib.staging.DefineObjectsTei</tei-class>
 		<body-content>empty</body-content>
