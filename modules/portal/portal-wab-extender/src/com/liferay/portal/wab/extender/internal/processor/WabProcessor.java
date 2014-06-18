@@ -29,6 +29,7 @@ import com.liferay.portal.wab.extender.internal.util.AntUtil;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.io.InputStream;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class WabProcessor {
 		_parameters = parameters;
 	}
 
-	public java.io.InputStream getInputStream() throws IOException {
+	public InputStream getInputStream() throws IOException {
 		_deployedAppFolder = _autoDeploy();
 
 		if ((_deployedAppFolder == null) || !_deployedAppFolder.exists() ||
@@ -60,7 +61,7 @@ public class WabProcessor {
 			return null;
 		}
 
-		// Will be completed with the next pulls
+		// TODO
 
 		return null;
 	}
