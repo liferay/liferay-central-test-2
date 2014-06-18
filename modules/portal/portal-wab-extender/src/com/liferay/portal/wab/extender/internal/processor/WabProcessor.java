@@ -53,7 +53,7 @@ public class WabProcessor {
 	}
 
 	public InputStream getInputStream() throws IOException {
-		_deployedAppFolder = _autoDeploy();
+		_deployedAppFolder = autoDeploy();
 
 		if ((_deployedAppFolder == null) || !_deployedAppFolder.exists() ||
 			!_deployedAppFolder.isDirectory()) {
@@ -66,7 +66,7 @@ public class WabProcessor {
 		return null;
 	}
 
-	private File _autoDeploy() {
+	protected File autoDeploy() {
 		String webContextpath = MapUtil.getString(
 			_parameters, WabURLConnection.WEB_CONTEXT_PATH);
 
@@ -75,21 +75,24 @@ public class WabProcessor {
 		}
 
 		AutoDeploymentContext autoDeploymentContext =
-			_buildAutoDeploymentContext(webContextpath);
+			buildAutoDeploymentContext(webContextpath);
 
-		_executeAutoDeployers(autoDeploymentContext);
+		executeAutoDeployers(autoDeploymentContext);
 
 		File deployDir = autoDeploymentContext.getDeployDir();
 
 		if (!deployDir.exists()) {
-			File[] files = deployDir.getParentFile().listFiles(
+			File parentFile = deployDir.getParentFile();
+
+			File[] files = parentFile.listFiles(
 				new FilenameFilter() {
+
 					@Override
 					public boolean accept(File dir, String name) {
 						return name.endsWith(".war");
 					}
-				}
-			);
+
+				});
 
 			if ((files == null) || (files.length == 0)) {
 
@@ -108,7 +111,7 @@ public class WabProcessor {
 		return deployDir;
 	}
 
-	private AutoDeploymentContext _buildAutoDeploymentContext(String context) {
+	protected AutoDeploymentContext buildAutoDeploymentContext(String context) {
 		File file = new File(_file.getParentFile(), "deploy");
 
 		file.mkdirs();
@@ -123,7 +126,7 @@ public class WabProcessor {
 		return autoDeploymentContext;
 	}
 
-	private void _executeAutoDeployers(
+	protected void executeAutoDeployers(
 		AutoDeploymentContext autoDeploymentContext) {
 
 		boolean enabled = DependencyManagementThreadLocal.isEnabled();
