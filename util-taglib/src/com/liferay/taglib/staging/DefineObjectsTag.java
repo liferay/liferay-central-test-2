@@ -76,10 +76,10 @@ public class DefineObjectsTag extends TagSupport {
 		pageContext.setAttribute("groupId", groupId);
 		pageContext.setAttribute("liveGroup", liveGroup);
 		pageContext.setAttribute("liveGroupId", liveGroupId);
-		pageContext.setAttribute("stagingGroup", stagingGroup);
-		pageContext.setAttribute("stagingGroupId", stagingGroupId);
 		pageContext.setAttribute(
 			"privateLayout", ParamUtil.getBoolean(request, "privateLayout"));
+		pageContext.setAttribute("stagingGroup", stagingGroup);
+		pageContext.setAttribute("stagingGroupId", stagingGroupId);
 
 		return SKIP_BODY;
 	}
