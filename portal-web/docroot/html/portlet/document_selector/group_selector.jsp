@@ -39,13 +39,13 @@ boolean showGroupsSelector = ParamUtil.getBoolean(request, "showGroupsSelector")
 	selectGroupURL.setParameter("eventName", eventName);
 	selectGroupURL.setParameter("showGroupsSelector", String.valueOf(showGroupsSelector));
 
-	for (Group group : PortalUtil.getBrowsableScopeGroups(themeDisplay.getUserId(), themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(), refererPortletName)) {
-		selectGroupURL.setParameter("groupId", String.valueOf(group.getGroupId()));
+	for (Group browsableScopeGroup : PortalUtil.getBrowsableScopeGroups(themeDisplay.getUserId(), themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId(), refererPortletName)) {
+		selectGroupURL.setParameter("groupId", String.valueOf(browsableScopeGroup.getGroupId()));
 	%>
 
 		<liferay-ui:icon
-			iconCssClass="<%= group.getIconCssClass() %>"
-			message="<%= HtmlUtil.escape(group.getDescriptiveName(locale)) %>"
+			iconCssClass="<%= browsableScopeGroup.getIconCssClass() %>"
+			message="<%= HtmlUtil.escape(browsableScopeGroup.getDescriptiveName(locale)) %>"
 			url="<%= selectGroupURL.toString() %>"
 		/>
 
