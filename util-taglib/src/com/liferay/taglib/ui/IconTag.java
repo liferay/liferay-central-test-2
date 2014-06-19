@@ -168,6 +168,29 @@ public class IconTag extends IncludeTag {
 		_useDialog = false;
 	}
 
+	protected Map<String, Object> getData() {
+		Map<String, Object> data = null;
+
+		if (_data != null) {
+			data = new HashMap<String, Object>(_data);
+		}
+		else {
+			data = new HashMap<String, Object>(1);
+		}
+
+		if (_useDialog && Validator.isNull(data.get("title"))) {
+			String message = getProcessedMessage();
+
+			if (_localizeMessage) {
+				message = LanguageUtil.get(pageContext, message);
+			}
+
+			data.put("title", HtmlUtil.stripHtml(message));
+		}
+
+		return data;
+	}
+
 	protected String getDetails() {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -189,7 +212,9 @@ public class IconTag extends IncludeTag {
 
 			if (_toolTip) {
 				sb.append(" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
-				sb.append(UnicodeLanguageUtil.get(pageContext, getProcessedMessage()));
+				sb.append(
+					UnicodeLanguageUtil.get(
+						pageContext, getProcessedMessage()));
 				sb.append("')\"");
 			}
 			else {
@@ -203,7 +228,7 @@ public class IconTag extends IncludeTag {
 
 		if (Validator.isNull(_src) || !themeDisplay.isThemeImagesFastLoad() ||
 			isAUIImage()) {
-			
+
 			return details;
 		}
 
@@ -311,91 +336,6 @@ public class IconTag extends IncludeTag {
 		return details;
 	}
 
-	protected String getImage() {
-		return _image;
-	}
-
-	protected String getMessage() {
-		return _message;
-	}
-
-	@Override
-	protected String getPage() {
-		return _PAGE;
-	}
-	
-	protected boolean isAUIImage() {
-		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
-			return true;
-		}
-		
-		return false;
-	}
-
-	protected String getSrc() {
-		if (Validator.isNotNull(_src)) {
-			return _src;
-		}
-
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-	
-		if (isAUIImage()) {
-			return themeDisplay.getPathThemeImages().concat("/spacer.png");
-		}
-		else if (Validator.isNotNull(_image)) {
-			StringBundler sb = new StringBundler(4);
-	
-			sb.append(themeDisplay.getPathThemeImages());
-			sb.append("/common/");
-			sb.append(_image);
-			sb.append(".png");
-	
-			return StringUtil.replace(sb.toString(), "common/../", "");
-		}
-
-		return StringPool.BLANK;
-	}
-
-	protected String getUrl() {
-		return GetterUtil.getString(_url);
-	}
-
-	@Override
-	protected boolean isCleanUpSetAttributes() {
-		return _CLEAN_UP_SET_ATTRIBUTES;
-	}
-	
-	protected String getMethod() {
-		if (Validator.isNotNull(_method)) {
-			return _method;
-		}
-
-		String url = getUrl();
-
-		if (url.contains("p_p_lifecycle=0")) {
-			return "get";
-		}
-
-		return "post";
-	}
-	
-	protected boolean isForcePost() {
-		String method = getMethod();
-
-		if (method.equals("post")) {
-			String url = getUrl();
-
-			if (url.startsWith(Http.HTTP_WITH_SLASH) ||
-			 	url.startsWith(Http.HTTPS_WITH_SLASH)) {
-
-				return true;
-			 }
-		}
-		
-		return false;
-	}
-	
 	protected String getId() {
 		if (Validator.isNotNull(_id)) {
 			return _id;
@@ -429,10 +369,32 @@ public class IconTag extends IncludeTag {
 		else {
 			id = PortalUtil.generateRandomKey(request, IconTag.class.getName());
 		}
-		
+
 		return id;
 	}
-	
+
+	protected String getImage() {
+		return _image;
+	}
+
+	protected String getMessage() {
+		return _message;
+	}
+
+	protected String getMethod() {
+		if (Validator.isNotNull(_method)) {
+			return _method;
+		}
+
+		String url = getUrl();
+
+		if (url.contains("p_p_lifecycle=0")) {
+			return "get";
+		}
+
+		return "post";
+	}
+
 	protected String getOnClick() {
 		String onClick = StringPool.BLANK;
 
@@ -451,10 +413,55 @@ public class IconTag extends IncludeTag {
 
 			onClick = sb.toString();
 		}
-		
+
 		return onClick;
 	}
-	
+
+	@Override
+	protected String getPage() {
+		return _PAGE;
+	}
+
+	protected String getProcessedMessage() {
+		if (_message != null) {
+			return _message;
+		}
+
+		return StringUtil.replace(
+			_image,
+			new String[] {
+				StringPool.UNDERLINE, _AUI_PATH
+			},
+			new String[] {
+				StringPool.DASH, StringPool.BLANK
+			});
+	}
+
+	protected String getSrc() {
+		if (Validator.isNotNull(_src)) {
+			return _src;
+		}
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (isAUIImage()) {
+			return themeDisplay.getPathThemeImages().concat("/spacer.png");
+		}
+		else if (Validator.isNotNull(_image)) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(themeDisplay.getPathThemeImages());
+			sb.append("/common/");
+			sb.append(_image);
+			sb.append(".png");
+
+			return StringUtil.replace(sb.toString(), "common/../", "");
+		}
+
+		return StringPool.BLANK;
+	}
+
 	protected String getSrcHover() {
 		if (Validator.isNotNull(_srcHover) || Validator.isNull(_imageHover)) {
 			return _srcHover;
@@ -473,43 +480,38 @@ public class IconTag extends IncludeTag {
 
 		return sb.toString();
 	}
-	
-	protected String getProcessedMessage() {
-		if (_message != null) {
-			return _message;
-		}
 
-		return StringUtil.replace(
-			_image,
-			new String[] {
-				StringPool.UNDERLINE, _AUI_PATH				
-			},
-			new String[] {
-				StringPool.DASH, StringPool.BLANK				
-			});
+	protected String getUrl() {
+		return GetterUtil.getString(_url);
 	}
-	
-	protected Map<String, Object> getData() {
-		Map<String, Object> data = null;
 
-		if (_data != null) {
-			data = new HashMap<String, Object>(_data);
-		}
-		else {
-			data = new HashMap<String, Object>(1);
+	protected boolean isAUIImage() {
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			return true;
 		}
 
-		if (_useDialog && Validator.isNull(data.get("title"))) {
-			String message = getProcessedMessage();
+		return false;
+	}
 
-			if (_localizeMessage) {
-				message = LanguageUtil.get(pageContext, message);
+	@Override
+	protected boolean isCleanUpSetAttributes() {
+		return _CLEAN_UP_SET_ATTRIBUTES;
+	}
+
+	protected boolean isForcePost() {
+		String method = getMethod();
+
+		if (method.equals("post")) {
+			String url = getUrl();
+
+			if (url.startsWith(Http.HTTP_WITH_SLASH) ||
+				url.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+				return true;
 			}
-
-			data.put("title", HtmlUtil.stripHtml(message));
 		}
-		
-		return data;
+
+		return false;
 	}
 
 	@Override
