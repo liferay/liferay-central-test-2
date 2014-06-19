@@ -379,18 +379,8 @@ public class IconTag extends IncludeTag {
 
 		return "post";
 	}
-
-	@Override
-	protected void setAttributes(HttpServletRequest request) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		if (_data == null) {
-			_data = new HashMap<String, Object>(1);
-		}
-
-		boolean forcePost = false;
-		
+	
+	protected boolean isForcePost() {
 		String method = getMethod();
 
 		if (method.equals("post")) {
@@ -399,8 +389,20 @@ public class IconTag extends IncludeTag {
 			if (url.startsWith(Http.HTTP_WITH_SLASH) ||
 			 	url.startsWith(Http.HTTPS_WITH_SLASH)) {
 
-				forcePost = true;
+				return true;
 			 }
+		}
+		
+		return false;
+	}
+
+	@Override
+	protected void setAttributes(HttpServletRequest request) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		if (_data == null) {
+			_data = new HashMap<String, Object>(1);
 		}
 
 		String id = _id;
@@ -460,7 +462,7 @@ public class IconTag extends IncludeTag {
 			onClick = _onClick + StringPool.SEMICOLON;
 		}
 
-		if (forcePost) {
+		if (isForcePost()) {
 			StringBundler sb = new StringBundler(8);
 
 			sb.append("event.preventDefault();");
@@ -495,7 +497,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:image", _image);
 		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute(
-			"liferay-ui:icon:forcePost", String.valueOf(forcePost));
+			"liferay-ui:icon:forcePost", String.valueOf(isForcePost()));
 		request.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
 		request.setAttribute("liferay-ui:icon:lang", _lang);
 		request.setAttribute("liferay-ui:icon:linkCssClass", _linkCssClass);
