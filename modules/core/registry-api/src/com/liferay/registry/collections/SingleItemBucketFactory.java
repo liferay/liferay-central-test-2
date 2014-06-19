@@ -36,7 +36,7 @@ public class SingleItemBucketFactory<S>
 		return new SingleBucket();
 	}
 
-	private final Comparator<ServiceReference<S>> _comparator;
+	private Comparator<ServiceReference<S>> _comparator;
 
 	private class SingleBucket implements ServiceTrackerMapImpl.Bucket<S, S> {
 
@@ -56,16 +56,14 @@ public class SingleItemBucketFactory<S>
 
 			_serviceReferences.remove(serviceReference);
 
-			ServiceReference<S> peek = _serviceReferences.peek();
+			ServiceReference<S> peekServiceReference =
+				_serviceReferences.peek();
 
-			if (peek != null) {
+			if (peekServiceReference != null) {
 				try {
-					_service = registry.getService(peek);
+					_service = registry.getService(peekServiceReference);
 				}
 				catch (IllegalStateException ise) {
-
-					// Registry is no longer usable...
-
 					_service = null;
 
 					_serviceReferences.clear();
