@@ -127,7 +127,8 @@ public class InputSearchTag extends IncludeTag {
 			"liferay-ui:input-search:placeholder", placeholder);
 		request.setAttribute("liferay-ui:input-search:showButton", _showButton);
 		request.setAttribute("liferay-ui:input-search:title", title);
-		request.setAttribute("liferay-ui:input-search:useNamespace", _useNamespace);
+		request.setAttribute(
+			"liferay-ui:input-search:useNamespace", _useNamespace);
 	}
 
 	private static final String _PAGE = "/html/taglib/ui/input_search/page.jsp";
