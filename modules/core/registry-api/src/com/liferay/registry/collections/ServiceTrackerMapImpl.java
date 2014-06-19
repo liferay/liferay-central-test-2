@@ -37,11 +37,10 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		filterString =
-			"(&(objectClass=" + clazz.getName() + ")" + filterString + ")";
-
 		_serviceTracker = registry.trackServices(
-			registry.getFilter(filterString), new MapServiceTrackerCustomizer());
+			registry.getFilter(
+				"(&(objectClass=" + clazz.getName() + ")" + filterString + ")"),
+			new MapServiceTrackerCustomizer());
 	}
 
 	@Override
