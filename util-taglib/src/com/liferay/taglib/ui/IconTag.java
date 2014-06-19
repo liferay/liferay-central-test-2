@@ -342,8 +342,39 @@ public class IconTag extends IncludeTag {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		boolean auiImage = false;
+
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			auiImage = true;
+		}
+
+		if (Validator.isNull(_src)) {
+			if (auiImage) {
+				_src = themeDisplay.getPathThemeImages().concat("/spacer.png");
+			}
+			else if (Validator.isNotNull(_image)) {
+				StringBundler sb = new StringBundler(4);
+
+				sb.append(themeDisplay.getPathThemeImages());
+				sb.append("/common/");
+				sb.append(_image);
+				sb.append(".png");
+
+				_src = StringUtil.replace(sb.toString(), "common/../", "");
+			}
+		}
+
 		if (_data == null) {
 			_data = new HashMap<String, Object>(1);
+		}
+
+		boolean forcePost = false;
+
+		if (_method.equals("post") &&
+			(_url.startsWith(Http.HTTP_WITH_SLASH) ||
+			 _url.startsWith(Http.HTTPS_WITH_SLASH))) {
+
+			forcePost = true;
 		}
 
 		String id = _id;
@@ -412,15 +443,6 @@ public class IconTag extends IncludeTag {
 			}
 		}
 
-		boolean forcePost = false;
-
-		if (_method.equals("post") &&
-			(_url.startsWith(Http.HTTP_WITH_SLASH) ||
-			 _url.startsWith(Http.HTTPS_WITH_SLASH))) {
-
-			forcePost = true;
-		}
-
 		String onClick = StringPool.BLANK;
 
 		if (Validator.isNotNull(_onClick)) {
@@ -437,28 +459,6 @@ public class IconTag extends IncludeTag {
 			sb.append("')");
 
 			onClick = sb.toString();
-		}
-
-		boolean auiImage = false;
-
-		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
-			auiImage = true;
-		}
-
-		if (Validator.isNull(_src)) {
-			if (auiImage) {
-				_src = themeDisplay.getPathThemeImages().concat("/spacer.png");
-			}
-			else if (Validator.isNotNull(_image)) {
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(themeDisplay.getPathThemeImages());
-				sb.append("/common/");
-				sb.append(_image);
-				sb.append(".png");
-
-				_src = StringUtil.replace(sb.toString(), "common/../", "");
-			}
 		}
 
 		if (Validator.isNull(_srcHover) && Validator.isNotNull(_imageHover)) {
