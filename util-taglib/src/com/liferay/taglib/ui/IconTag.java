@@ -328,6 +328,37 @@ public class IconTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	protected String getSrc() {
+		if (Validator.isNotNull(_src)) {
+			return _src;
+		}
+
+		boolean auiImage = false;
+	
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			auiImage = true;
+		}
+	
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+	
+		if (auiImage) {
+			return themeDisplay.getPathThemeImages().concat("/spacer.png");
+		}
+		else if (Validator.isNotNull(_image)) {
+			StringBundler sb = new StringBundler(4);
+	
+			sb.append(themeDisplay.getPathThemeImages());
+			sb.append("/common/");
+			sb.append(_image);
+			sb.append(".png");
+	
+			return StringUtil.replace(sb.toString(), "common/../", "");
+		}
+
+		return StringPool.BLANK;
+	}
+
 	protected String getUrl() {
 		return _url;
 	}
@@ -346,22 +377,6 @@ public class IconTag extends IncludeTag {
 
 		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
 			auiImage = true;
-		}
-
-		if (Validator.isNull(_src)) {
-			if (auiImage) {
-				_src = themeDisplay.getPathThemeImages().concat("/spacer.png");
-			}
-			else if (Validator.isNotNull(_image)) {
-				StringBundler sb = new StringBundler(4);
-
-				sb.append(themeDisplay.getPathThemeImages());
-				sb.append("/common/");
-				sb.append(_image);
-				sb.append(".png");
-
-				_src = StringUtil.replace(sb.toString(), "common/../", "");
-			}
 		}
 
 		if (_data == null) {
@@ -494,7 +509,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:message", _message);
 		request.setAttribute("liferay-ui:icon:method", _method);
 		request.setAttribute("liferay-ui:icon:onClick", onClick);
-		request.setAttribute("liferay-ui:icon:src", _src);
+		request.setAttribute("liferay-ui:icon:src", getSrc());
 		request.setAttribute("liferay-ui:icon:srcHover", _srcHover);
 		request.setAttribute("liferay-ui:icon:target", _target);
 		request.setAttribute(
