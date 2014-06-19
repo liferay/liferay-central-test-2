@@ -432,6 +432,28 @@ public class IconTag extends IncludeTag {
 		
 		return id;
 	}
+	
+	protected String getOnClick() {
+		String onClick = StringPool.BLANK;
+
+		if (Validator.isNotNull(_onClick)) {
+			onClick = _onClick + StringPool.SEMICOLON;
+		}
+
+		if (isForcePost()) {
+			StringBundler sb = new StringBundler(8);
+
+			sb.append("event.preventDefault();");
+			sb.append(onClick);
+			sb.append("submitForm(document.hrefFm, '");
+			sb.append(getUrl());
+			sb.append("')");
+
+			onClick = sb.toString();
+		}
+		
+		return onClick;
+	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
@@ -457,24 +479,6 @@ public class IconTag extends IncludeTag {
 			}
 
 			_data.put("title", HtmlUtil.stripHtml(message));
-		}
-
-		String onClick = StringPool.BLANK;
-
-		if (Validator.isNotNull(_onClick)) {
-			onClick = _onClick + StringPool.SEMICOLON;
-		}
-
-		if (isForcePost()) {
-			StringBundler sb = new StringBundler(8);
-
-			sb.append("event.preventDefault();");
-			sb.append(onClick);
-			sb.append("submitForm(document.hrefFm, '");
-			sb.append(getUrl());
-			sb.append("')");
-
-			onClick = sb.toString();
 		}
 
 		if (Validator.isNull(_srcHover) && Validator.isNotNull(_imageHover)) {
@@ -509,7 +513,7 @@ public class IconTag extends IncludeTag {
 			String.valueOf(_localizeMessage));
 		request.setAttribute("liferay-ui:icon:message", _message);
 		request.setAttribute("liferay-ui:icon:method", getMethod());
-		request.setAttribute("liferay-ui:icon:onClick", onClick);
+		request.setAttribute("liferay-ui:icon:onClick", getOnClick());
 		request.setAttribute("liferay-ui:icon:src", getSrc());
 		request.setAttribute("liferay-ui:icon:srcHover", _srcHover);
 		request.setAttribute("liferay-ui:icon:target", _target);
