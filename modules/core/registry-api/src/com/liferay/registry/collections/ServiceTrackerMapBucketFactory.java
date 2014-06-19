@@ -19,6 +19,6 @@ package com.liferay.registry.collections;
  */
 public interface ServiceTrackerMapBucketFactory<S, R> {
 
-	public ServiceTrackerMapImpl.Bucket<S, R> create();
+	public ServiceTrackerMap.Bucket<S, R> create();
 
 }
