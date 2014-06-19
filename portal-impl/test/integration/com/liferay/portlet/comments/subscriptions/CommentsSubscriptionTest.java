@@ -55,54 +55,41 @@ public class CommentsSubscriptionTest {
 	}
 
 	@Test
-	public void testSubscriptionDiscussionMessageWhenAddingDiscussionMessage()
+	public void testSubscriptionMBDiscussionWhenAddingMBMessage()
 		throws Exception {
 
-		BlogsEntry entry = BlogsTestUtil.addEntry(_group, true);
+		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(_group, true);
 
-		subscribeToDiscussionMessage(entry.getEntryId());
+		MBDiscussionLocalServiceUtil.subscribeDiscussion(
+			_user.getUserId(), _group.getGroupId(), BlogsEntry.class.getName(),
+			blogsEntry.getEntryId());
 
-		addDiscussionMessage(entry.getEntryId());
+		MBTestUtil.addDiscussionMessage(
+			_group.getGroupId(), BlogsEntry.class.getName(),
+			blogsEntry.getEntryId());
 
 		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
 	}
 
 	@Test
-	public void testSubscriptionDiscussionMessageWhenUpdatingDiscussionMessage()
+	public void testSubscriptionMBDiscussionWhenUpdatingMBMessage()
 		throws Exception {
 
-		BlogsEntry entry = BlogsTestUtil.addEntry(_group, true);
+		BlogsEntry blogsEntry = BlogsTestUtil.addEntry(_group, true);
 
-		MBMessage discussionMessage = addDiscussionMessage(entry.getEntryId());
-
-		subscribeToDiscussionMessage(entry.getEntryId());
-
-		updateDiscussionMessage(
-			discussionMessage.getMessageId(), entry.getEntryId());
-
-		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
-	}
-
-	protected MBMessage addDiscussionMessage(long entryId) throws Exception {
-		return MBTestUtil.addDiscussionMessage(
-			_group.getGroupId(), BlogsEntry.class.getName(), entryId);
-	}
-
-	protected void subscribeToDiscussionMessage(long entryId)
-		throws Exception {
+		MBMessage mbMessage = MBTestUtil.addDiscussionMessage(
+			_group.getGroupId(), BlogsEntry.class.getName(),
+			blogsEntry.getEntryId());
 
 		MBDiscussionLocalServiceUtil.subscribeDiscussion(
 			_user.getUserId(), _group.getGroupId(), BlogsEntry.class.getName(),
-			entryId);
-	}
-
-	protected void updateDiscussionMessage(
-			long discussionMessageId, long entryId)
-		throws Exception {
+			blogsEntry.getEntryId());
 
 		MBTestUtil.updateDiscussionMessage(
-			_group.getGroupId(), discussionMessageId,
-			BlogsEntry.class.getName(), entryId);
+			_group.getGroupId(), mbMessage.getMessageId(),
+			BlogsEntry.class.getName(), blogsEntry.getEntryId());
+
+		Assert.assertEquals(1, MailServiceTestUtil.getInboxSize());
 	}
 
 	private Group _group;
