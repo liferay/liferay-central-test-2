@@ -200,7 +200,11 @@ public class IconTag extends IncludeTag {
 			details = sb.toString();
 		}
 
-		boolean auiImage = (_image != null) && _image.startsWith(_AUI_PATH);
+		boolean auiImage = false;
+
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			auiImage = true;
+		}
 
 		if (Validator.isNotNull(_src) && themeDisplay.isThemeImagesFastLoad() &&
 			!auiImage) {
@@ -408,10 +412,14 @@ public class IconTag extends IncludeTag {
 			}
 		}
 
-		boolean forcePost =
-			_method.equals("post") &&
+		boolean forcePost = false;
+
+		if (_method.equals("post") &&
 			(_url.startsWith(Http.HTTP_WITH_SLASH) ||
-				_url.startsWith(Http.HTTPS_WITH_SLASH));
+			 _url.startsWith(Http.HTTPS_WITH_SLASH))) {
+
+			forcePost = true;
+		}
 
 		String onClick = StringPool.BLANK;
 
@@ -431,7 +439,11 @@ public class IconTag extends IncludeTag {
 			onClick = sb.toString();
 		}
 
-		boolean auiImage = (_image != null) && _image.startsWith(_AUI_PATH);
+		boolean auiImage = false;
+
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			auiImage = true;
+		}
 
 		if (Validator.isNull(_src)) {
 			if (auiImage) {
