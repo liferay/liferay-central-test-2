@@ -238,8 +238,8 @@ public class CoberturaClassFileTransformer implements ClassFileTransformer {
 			fileWriter = new FileWriter(logFile, true);
 
 			fileWriter.write(
-				"Instrumented " + className + " sourced " + classLoader +
-					", dumped to " + classFile.getAbsolutePath() + "\n");
+				"Instrumented " + className + " from " + classLoader +
+					" and dumped to " + classFile.getAbsolutePath() + "\n");
 		}
 		finally {
 			if (fileWriter != null) {
