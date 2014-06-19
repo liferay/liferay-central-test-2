@@ -58,12 +58,12 @@ public class ObjectServiceTrackerBucketFactory<S>
 
 			_serviceReferences.remove(serviceReference);
 
-			ServiceReference<S> peekServiceReference =
+			ServiceReference<S> headServiceReference =
 				_serviceReferences.peek();
 
-			if (peekServiceReference != null) {
+			if (headServiceReference != null) {
 				try {
-					_service = registry.getService(peekServiceReference);
+					_service = registry.getService(headServiceReference);
 				}
 				catch (IllegalStateException ise) {
 					_service = null;

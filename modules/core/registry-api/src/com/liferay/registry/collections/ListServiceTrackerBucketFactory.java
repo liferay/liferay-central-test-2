@@ -42,7 +42,7 @@ public class ListServiceTrackerBucketFactory<S>
 		return new ListServiceTrackerBucket();
 	}
 
-	private final Comparator<ServiceReference<S>> _comparator;
+	private Comparator<ServiceReference<S>> _comparator;
 
 	private class ListServiceTrackerBucket
 		implements ServiceTrackerBucket<S, List<S>> {
@@ -61,17 +61,17 @@ public class ListServiceTrackerBucketFactory<S>
 		public synchronized void remove(ServiceReference<S> serviceReference) {
 			_serviceReferences.remove(serviceReference);
 
-			rebuildList();
+			rebuild();
 		}
 
 		@Override
 		public synchronized void store(ServiceReference<S> serviceReference) {
 			_serviceReferences.add(serviceReference);
 
-			rebuildList();
+			rebuild();
 		}
 
-		protected void rebuildList() {
+		protected void rebuild() {
 			Registry registry = RegistryUtil.getRegistry();
 
 			try {
