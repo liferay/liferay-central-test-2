@@ -62,8 +62,8 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  * @author Shuyang Zhou
  * @author Tomas Polesovsky
  */
-public class PortalHibernateConfiguration extends LocalSessionFactoryBean
-	implements BeanFactoryAware {
+public class PortalHibernateConfiguration
+	extends LocalSessionFactoryBean implements BeanFactoryAware {
 
 	@Override
 	public SessionFactory buildSessionFactory() throws Exception {
