@@ -40,7 +40,7 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 		_serviceTracker = registry.trackServices(
 			registry.getFilter(
 				"(&(objectClass=" + clazz.getName() + ")" + filterString + ")"),
-			new MapServiceTrackerCustomizer());
+			new ServiceReferenceServiceTrackerCustomizer());
 	}
 
 	@Override
@@ -50,13 +50,14 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 	@Override
 	public R getService(K key) {
-		ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
+		ServiceTrackerBucket<S, R> serviceTrackerBucket =
+			_serviceTrackerBuckets.get(key);
 
-		if (bucket == null) {
+		if (serviceTrackerBucket == null) {
 			return null;
 		}
 
-		return bucket.getContent();
+		return serviceTrackerBucket.getContent();
 	}
 
 	@Override
@@ -64,14 +65,14 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 		_serviceTracker.open();
 	}
 
-	private ConcurrentHashMap<K, ServiceTrackerBucket<S, R>> _indexedServices =
-		new ConcurrentHashMap<K, ServiceTrackerBucket<S, R>>();
+	private ConcurrentHashMap<K, ServiceTrackerBucket<S, R>>
+		_serviceTrackerBuckets =
+			new ConcurrentHashMap<K, ServiceTrackerBucket<S, R>>();
 	private ServiceReferenceMapper<K> _serviceReferenceMapper;
 	private ServiceTracker<S, ServiceReference<S>> _serviceTracker;
-	private ServiceTrackerBucketFactory<S, R>
-		_serviceTrackerMapBucketFactory;
+	private ServiceTrackerBucketFactory<S, R> _serviceTrackerMapBucketFactory;
 
-	private class MapServiceTrackerCustomizer
+	private class ServiceReferenceServiceTrackerCustomizer
 		implements ServiceTrackerCustomizer<S, ServiceReference<S>> {
 
 		@Override
@@ -84,21 +85,23 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 					@Override
 					public void emit(K key) {
-						ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
+						ServiceTrackerBucket<S, R> serviceTrackerBucket =
+							_serviceTrackerBuckets.get(key);
 
-						if (bucket == null) {
-							ServiceTrackerBucket<S, R> newBucket =
+						if (serviceTrackerBucket == null) {
+							ServiceTrackerBucket<S, R> newServiceTrackerBucket =
 								_serviceTrackerMapBucketFactory.create();
 
-							bucket = _indexedServices.putIfAbsent(
-								key, newBucket);
+							serviceTrackerBucket =
+								_serviceTrackerBuckets.putIfAbsent(
+									key, newServiceTrackerBucket);
 
-							if (bucket == null) {
-								bucket = newBucket;
+							if (serviceTrackerBucket == null) {
+								serviceTrackerBucket = newServiceTrackerBucket;
 							}
 						}
 
-						bucket.store(serviceReference);
+						serviceTrackerBucket.store(serviceReference);
 					}
 
 				});
@@ -126,16 +129,17 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 					@Override
 					public void emit(K key) {
-						ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
+						ServiceTrackerBucket<S, R> serviceTrackerBucket =
+							_serviceTrackerBuckets.get(key);
 
-						if (bucket == null) {
+						if (serviceTrackerBucket == null) {
 							return;
 						}
 
-						bucket.remove(serviceReference);
+						serviceTrackerBucket.remove(serviceReference);
 
-						if (bucket.isDisposable()) {
-							_indexedServices.remove(key);
+						if (serviceTrackerBucket.isDisposable()) {
+							_serviceTrackerBuckets.remove(key);
 						}
 					}
 
