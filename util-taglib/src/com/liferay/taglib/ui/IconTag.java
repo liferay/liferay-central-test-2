@@ -200,14 +200,8 @@ public class IconTag extends IncludeTag {
 			details = sb.toString();
 		}
 
-		boolean auiImage = false;
-
-		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
-			auiImage = true;
-		}
-
 		if (Validator.isNotNull(_src) && themeDisplay.isThemeImagesFastLoad() &&
-			!auiImage) {
+			!isAUIImage()) {
 
 			SpriteImage spriteImage = null;
 			String spriteFileName = null;
@@ -327,22 +321,24 @@ public class IconTag extends IncludeTag {
 	protected String getPage() {
 		return _PAGE;
 	}
+	
+	protected boolean isAUIImage() {
+		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
+			return true;
+		}
+		
+		return false;
+	}
 
 	protected String getSrc() {
 		if (Validator.isNotNull(_src)) {
 			return _src;
 		}
 
-		boolean auiImage = false;
-	
-		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
-			auiImage = true;
-		}
-	
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 	
-		if (auiImage) {
+		if (isAUIImage()) {
 			return themeDisplay.getPathThemeImages().concat("/spacer.png");
 		}
 		else if (Validator.isNotNull(_image)) {
@@ -372,12 +368,6 @@ public class IconTag extends IncludeTag {
 	protected void setAttributes(HttpServletRequest request) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
-
-		boolean auiImage = false;
-
-		if ((_image != null) && _image.startsWith(_AUI_PATH)) {
-			auiImage = true;
-		}
 
 		if (_data == null) {
 			_data = new HashMap<String, Object>(1);
@@ -490,7 +480,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:alt", _alt);
 		request.setAttribute("liferay-ui:icon:ariaRole", _ariaRole);
 		request.setAttribute(
-			"liferay-ui:icon:auiImage", String.valueOf(auiImage));
+			"liferay-ui:icon:auiImage", String.valueOf(isAUIImage()));
 		request.setAttribute("liferay-ui:icon:cssClass", _cssClass);
 		request.setAttribute("liferay-ui:icon:data", _data);
 		request.setAttribute("liferay-ui:icon:details", getDetails());
