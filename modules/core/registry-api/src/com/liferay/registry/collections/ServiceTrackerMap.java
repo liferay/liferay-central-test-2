@@ -16,6 +16,8 @@ package com.liferay.registry.collections;
 
 import java.io.Closeable;
 
+import com.liferay.registry.ServiceReference;
+
 /**
  * @author Carlos Sierra Andrés
  */
@@ -27,5 +29,17 @@ public interface ServiceTrackerMap<K, R> extends Closeable {
 	public R getService(K key);
 
 	public void open();
+
+	public interface Bucket<S, R> {
+
+		public R getContent();
+
+		public boolean isDisposable();
+
+		public void store(ServiceReference<S> serviceReference);
+
+		public void remove(ServiceReference<S> serviceReference);
+
+	}
 
 }
