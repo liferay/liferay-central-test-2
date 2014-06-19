@@ -32,13 +32,13 @@ public class SingleItemBucketFactory<S>
 	}
 
 	@Override
-	public ServiceTrackerMapImpl.Bucket<S, S> create() {
+	public ServiceTrackerMap.Bucket<S, S> create() {
 		return new SingleBucket();
 	}
 
 	private Comparator<ServiceReference<S>> _comparator;
 
-	private class SingleBucket implements ServiceTrackerMapImpl.Bucket<S, S> {
+	private class SingleBucket implements ServiceTrackerMap.Bucket<S, S> {
 
 		@Override
 		public S getContent() {
