@@ -38,7 +38,7 @@ public class MultipleItemsBucketFactory<S>
 	}
 
 	@Override
-	public ServiceTrackerMapImpl.Bucket<S, List<S>> create() {
+	public ServiceTrackerMap.Bucket<S, List<S>> create() {
 		return new ListBucket();
 	}
 
@@ -46,11 +46,6 @@ public class MultipleItemsBucketFactory<S>
 
 	private class ListBucket
 		implements ServiceTrackerMapImpl.Bucket<S, List<S>> {
-
-		ListBucket() {
-			_serviceReferences = new TreeSet<ServiceReference<S>>(_comparator);
-			_services = new ArrayList<S>();
-		}
 
 		@Override
 		public List<S> getContent() {
@@ -66,17 +61,17 @@ public class MultipleItemsBucketFactory<S>
 		public synchronized void remove(ServiceReference<S> serviceReference) {
 			_serviceReferences.remove(serviceReference);
 
-			_rebuildList();
+			rebuildList();
 		}
 
 		@Override
 		public synchronized void store(ServiceReference<S> serviceReference) {
 			_serviceReferences.add(serviceReference);
 
-			_rebuildList();
+			rebuildList();
 		}
 
-		private void _rebuildList() {
+		protected void rebuildList() {
 			Registry registry = RegistryUtil.getRegistry();
 
 			try {
@@ -97,8 +92,10 @@ public class MultipleItemsBucketFactory<S>
 			}
 		}
 
-		private Set<ServiceReference<S>> _serviceReferences;
-		private List<S> _services;
+		private Set<ServiceReference<S>> _serviceReferences =
+			new TreeSet<ServiceReference<S>>(_comparator);
+		private List<S> _services = new ArrayList<S>();
+
 	}
 
 }
