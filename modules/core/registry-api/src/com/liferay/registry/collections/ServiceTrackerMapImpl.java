@@ -28,19 +28,20 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 	public ServiceTrackerMapImpl(
-		Class<S> clazz, String filter,
+		Class<S> clazz, String filterString,
 		ServiceReferenceMapper<K> serviceReferenceMapper,
-		ServiceTrackerMapBucketFactory<S, R> bucketFactory) {
+		ServiceTrackerMapBucketFactory<S, R> serviceTrackerMapBucketFactory) {
 
 		_serviceReferenceMapper = serviceReferenceMapper;
-		_bucketFactory = bucketFactory;
+		_bucketFactory = serviceTrackerMapBucketFactory;
 
 		Registry registry = RegistryUtil.getRegistry();
 
-		filter = "(&(objectClass=" + clazz.getName() + ")" + filter + ")";
+		filterString =
+			"(&(objectClass=" + clazz.getName() + ")" + filterString + ")";
 
 		_serviceTracker = registry.trackServices(
-			registry.getFilter(filter), new MapServiceTrackerCustomizer());
+			registry.getFilter(filterString), new MapServiceTrackerCustomizer());
 	}
 
 	@Override
