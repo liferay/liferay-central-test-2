@@ -395,6 +395,43 @@ public class IconTag extends IncludeTag {
 		
 		return false;
 	}
+	
+	protected String getId() {
+		if (Validator.isNotNull(_id)) {
+			return _id;
+		}
+
+		String id = (String)request.getAttribute("liferay-ui:icon-menu:id");
+
+		String message = _message;
+
+		if (Validator.isNull(message)) {
+			message = _image;
+		}
+
+		if (Validator.isNotNull(id) && Validator.isNotNull(message)) {
+			id = id.concat(StringPool.UNDERLINE).concat(
+				FriendlyURLNormalizerUtil.normalize(message));
+
+			PortletResponse portletResponse =
+				(PortletResponse)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+			String namespace = StringPool.BLANK;
+
+			if (portletResponse != null) {
+				namespace = portletResponse.getNamespace();
+			}
+
+			id = PortalUtil.getUniqueElementId(
+				getOriginalServletRequest(), namespace, id);
+		}
+		else {
+			id = PortalUtil.generateRandomKey(request, IconTag.class.getName());
+		}
+		
+		return id;
+	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
@@ -403,40 +440,6 @@ public class IconTag extends IncludeTag {
 
 		if (_data == null) {
 			_data = new HashMap<String, Object>(1);
-		}
-
-		String id = _id;
-
-		if (Validator.isNull(id)) {
-			id = (String)request.getAttribute("liferay-ui:icon-menu:id");
-
-			String message = _message;
-
-			if (Validator.isNull(message)) {
-				message = _image;
-			}
-
-			if (Validator.isNotNull(id) && Validator.isNotNull(message)) {
-				id = id.concat(StringPool.UNDERLINE).concat(
-					FriendlyURLNormalizerUtil.normalize(message));
-
-				PortletResponse portletResponse =
-					(PortletResponse)request.getAttribute(
-						JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-				String namespace = StringPool.BLANK;
-
-				if (portletResponse != null) {
-					namespace = portletResponse.getNamespace();
-				}
-
-				id = PortalUtil.getUniqueElementId(
-					getOriginalServletRequest(), namespace, id);
-			}
-			else {
-				id = PortalUtil.generateRandomKey(
-					request, IconTag.class.getName());
-			}
 		}
 
 		if (_message == null) {
@@ -493,7 +496,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:data", _data);
 		request.setAttribute("liferay-ui:icon:details", getDetails());
 		request.setAttribute("liferay-ui:icon:iconCssClass", _iconCssClass);
-		request.setAttribute("liferay-ui:icon:id", id);
+		request.setAttribute("liferay-ui:icon:id", getId());
 		request.setAttribute("liferay-ui:icon:image", _image);
 		request.setAttribute("liferay-ui:icon:imageHover", _imageHover);
 		request.setAttribute(
