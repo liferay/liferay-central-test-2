@@ -38,13 +38,13 @@ public class ListServiceTrackerMapBucketFactory<S>
 	}
 
 	@Override
-	public ServiceTrackerMap.Bucket<S, List<S>> create() {
+	public ServiceTrackerMapBucket<S, List<S>> create() {
 		return new ListBucket();
 	}
 
 	private final Comparator<ServiceReference<S>> _comparator;
 
-	private class ListBucket implements ServiceTrackerMap.Bucket<S, List<S>> {
+	private class ListBucket implements ServiceTrackerMapBucket<S, List<S>> {
 
 		@Override
 		public List<S> getContent() {

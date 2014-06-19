@@ -30,16 +30,4 @@ public interface ServiceTrackerMap<K, R> extends Closeable {
 
 	public void open();
 
-	public interface Bucket<S, R> {
-
-		public R getContent();
-
-		public boolean isDisposable();
-
-		public void store(ServiceReference<S> serviceReference);
-
-		public void remove(ServiceReference<S> serviceReference);
-
-	}
-
 }

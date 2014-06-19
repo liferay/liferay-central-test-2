@@ -34,13 +34,13 @@ public class ObjectServiceTrackerMapBucketFactory<S>
 	}
 
 	@Override
-	public ServiceTrackerMap.Bucket<S, S> create() {
+	public ServiceTrackerMapBucket<S, S> create() {
 		return new SingleBucket();
 	}
 
 	private Comparator<ServiceReference<S>> _comparator;
 
-	private class SingleBucket implements ServiceTrackerMap.Bucket<S, S> {
+	private class SingleBucket implements ServiceTrackerMapBucket<S, S> {
 
 		@Override
 		public S getContent() {
