@@ -81,26 +81,26 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 			_serviceReferenceMapper.map(
 				serviceReference,
 				new ServiceReferenceMapper.Emitter<K>() {
-	
+
 					@Override
 					public void emit(K key) {
 						ServiceTrackerMapBucket<S, R> bucket = _indexedServices.get(key);
-	
+
 						if (bucket == null) {
 							ServiceTrackerMapBucket<S, R> newBucket =
 								_serviceTrackerMapBucketFactory.create();
-	
+
 							bucket = _indexedServices.putIfAbsent(
 								key, newBucket);
-	
+
 							if (bucket == null) {
 								bucket = newBucket;
 							}
 						}
-	
+
 						bucket.store(serviceReference);
 					}
-	
+
 				});
 
 			return serviceReference;
@@ -123,25 +123,24 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 			_serviceReferenceMapper.map(
 				serviceReference,
 				new ServiceReferenceMapper.Emitter<K>() {
-	
+
 					@Override
 					public void emit(K key) {
 						ServiceTrackerMapBucket<S, R> bucket = _indexedServices.get(key);
-	
+
 						if (bucket == null) {
 							return;
 						}
-	
+
 						bucket.remove(serviceReference);
-	
+
 						if (bucket.isDisposable()) {
 							_indexedServices.remove(key);
 						}
 					}
-	
+
 				});
 		}
-
 	}
 
 }

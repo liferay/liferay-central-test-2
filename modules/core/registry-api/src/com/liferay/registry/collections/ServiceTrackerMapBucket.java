@@ -16,8 +16,6 @@ package com.liferay.registry.collections;
 
 import com.liferay.registry.ServiceReference;
 
-import java.io.Closeable;
-
 /**
  * @author Carlos Sierra Andrés
  */
@@ -27,8 +25,8 @@ public interface ServiceTrackerMapBucket<S, R> {
 
 	public boolean isDisposable();
 
-	public void store(ServiceReference<S> serviceReference);
-
 	public void remove(ServiceReference<S> serviceReference);
+
+	public void store(ServiceReference<S> serviceReference);
 
 }

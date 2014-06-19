@@ -14,8 +14,6 @@
 
 package com.liferay.registry.collections;
 
-import com.liferay.registry.ServiceReference;
-
 import java.io.Closeable;
 
 /**
