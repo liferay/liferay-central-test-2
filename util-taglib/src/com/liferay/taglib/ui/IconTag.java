@@ -184,17 +184,17 @@ public class IconTag extends IncludeTag {
 			StringBundler sb = new StringBundler(6);
 
 			sb.append(" alt=\"");
-			sb.append(LanguageUtil.get(pageContext, _message));
+			sb.append(LanguageUtil.get(pageContext, getProcessedMessage()));
 			sb.append("\"");
 
 			if (_toolTip) {
 				sb.append(" onmouseover=\"Liferay.Portal.ToolTip.show(this, '");
-				sb.append(UnicodeLanguageUtil.get(pageContext, _message));
+				sb.append(UnicodeLanguageUtil.get(pageContext, getProcessedMessage()));
 				sb.append("')\"");
 			}
 			else {
 				sb.append(" title=\"");
-				sb.append(LanguageUtil.get(pageContext, _message));
+				sb.append(LanguageUtil.get(pageContext, getProcessedMessage()));
 				sb.append("\"");
 			}
 
@@ -473,6 +473,21 @@ public class IconTag extends IncludeTag {
 
 		return sb.toString();
 	}
+	
+	protected String getProcessedMessage() {
+		if (_message != null) {
+			return _message;
+		}
+
+		return StringUtil.replace(
+			_image,
+			new String[] {
+				StringPool.UNDERLINE, _AUI_PATH				
+			},
+			new String[] {
+				StringPool.DASH, StringPool.BLANK				
+			});
+	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
@@ -480,18 +495,11 @@ public class IconTag extends IncludeTag {
 			_data = new HashMap<String, Object>(1);
 		}
 
-		if (_message == null) {
-			_message = StringUtil.replace(
-				_image, StringPool.UNDERLINE, StringPool.DASH);
-			_message = StringUtil.replace(
-				_message, _AUI_PATH, StringPool.BLANK);
-		}
-
 		if (_useDialog && Validator.isNull(_data.get("title"))) {
-			String message = _message;
+			String message = getProcessedMessage();
 
 			if (_localizeMessage) {
-				message = LanguageUtil.get(pageContext, _message);
+				message = LanguageUtil.get(pageContext, message);
 			}
 
 			_data.put("title", HtmlUtil.stripHtml(message));
@@ -516,7 +524,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:icon:localizeMessage",
 			String.valueOf(_localizeMessage));
-		request.setAttribute("liferay-ui:icon:message", _message);
+		request.setAttribute("liferay-ui:icon:message", getProcessedMessage());
 		request.setAttribute("liferay-ui:icon:method", getMethod());
 		request.setAttribute("liferay-ui:icon:onClick", getOnClick());
 		request.setAttribute("liferay-ui:icon:src", getSrc());
