@@ -126,6 +126,7 @@ public class DDMXSDImpl implements DDMXSD {
 			(Map<String, Object>)freeMarkerContext.get("fieldStructure");
 
 		int fieldRepetition = 1;
+		int offset = 0;
 
 		DDMFieldsCounter ddmFieldsCounter = getFieldsCounter(
 			pageContext, fields, portletNamespace, namespace);
@@ -136,8 +137,6 @@ public class DDMXSDImpl implements DDMXSD {
 
 		String[] fieldsDisplayValues = getFieldsDisplayValues(
 			fieldDisplayValue);
-
-		int offset = 0;
 
 		boolean fieldDisplayable = ArrayUtil.contains(
 			fieldsDisplayValues, name);
