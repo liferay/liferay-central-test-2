@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
 import com.liferay.portal.kernel.servlet.BrowserSnifferUtil;
 import com.liferay.portal.kernel.util.FriendlyURLNormalizerUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -357,7 +358,7 @@ public class IconTag extends IncludeTag {
 	}
 
 	protected String getUrl() {
-		return _url;
+		return GetterUtil.getString(_url);
 	}
 
 	@Override
@@ -375,11 +376,9 @@ public class IconTag extends IncludeTag {
 		}
 
 		if (Validator.isNull(_method)) {
-			if (_url == null) {
-				_url = StringPool.BLANK;
-			}
+			String url = getUrl();
 
-			int pos = _url.indexOf("p_p_lifecycle=0");
+			int pos = url.indexOf("p_p_lifecycle=0");
 
 			if (pos != -1) {
 				_method = "get";
@@ -391,11 +390,14 @@ public class IconTag extends IncludeTag {
 
 		boolean forcePost = false;
 
-		if (_method.equals("post") &&
-			(_url.startsWith(Http.HTTP_WITH_SLASH) ||
-			 _url.startsWith(Http.HTTPS_WITH_SLASH))) {
+		if (_method.equals("post")) {
+			String url = getUrl();
 
-			forcePost = true;
+			if (url.startsWith(Http.HTTP_WITH_SLASH) ||
+			 	url.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+				forcePost = true;
+			 }
 		}
 
 		String id = _id;
@@ -461,7 +463,7 @@ public class IconTag extends IncludeTag {
 			sb.append("event.preventDefault();");
 			sb.append(onClick);
 			sb.append("submitForm(document.hrefFm, '");
-			sb.append(_url);
+			sb.append(getUrl());
 			sb.append("')");
 
 			onClick = sb.toString();
@@ -505,7 +507,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:target", _target);
 		request.setAttribute(
 			"liferay-ui:icon:toolTip", String.valueOf(_toolTip));
-		request.setAttribute("liferay-ui:icon:url", _url);
+		request.setAttribute("liferay-ui:icon:url", getUrl());
 		request.setAttribute(
 			"liferay-ui:icon:useDialog", String.valueOf(_useDialog));
 	}
