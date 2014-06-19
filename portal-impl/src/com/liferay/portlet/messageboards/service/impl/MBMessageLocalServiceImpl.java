@@ -434,6 +434,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	 * @deprecated As of 7.0.0, replaced by {@link #addMessage(long, String,
 	 *             long, long, String, String, ServiceContext)}
 	 */
+	@Deprecated
 	@Override
 	public MBMessage addMessage(
 			long userId, String userName, long categoryId, String subject,
