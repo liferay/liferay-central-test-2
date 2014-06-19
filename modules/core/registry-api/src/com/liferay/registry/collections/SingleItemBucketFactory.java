@@ -83,6 +83,7 @@ public class SingleItemBucketFactory<S>
 			_service = null;
 		}
 
+		@Override
 		public synchronized void store(ServiceReference<S> serviceReference) {
 			Registry registry = RegistryUtil.getRegistry();
 

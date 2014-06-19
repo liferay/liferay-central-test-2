@@ -22,10 +22,10 @@ import java.io.Closeable;
 public interface ServiceTrackerMap<K, R> extends Closeable {
 
 	@Override
-	void close();
+	public void close();
 
-	R getService(K key);
+	public R getService(K key);
 
-	void open();
+	public void open();
 
 }

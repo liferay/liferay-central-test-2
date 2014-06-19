@@ -24,7 +24,9 @@ public interface ServiceReferenceMapper<K> {
 	public void map(ServiceReference<?> serviceReference, Emitter<K> emitter);
 
 	public interface Emitter<K> {
+
 		public void emit(K key);
+
 	}
 
 }
