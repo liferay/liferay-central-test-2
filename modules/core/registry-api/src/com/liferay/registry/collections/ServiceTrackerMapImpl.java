@@ -30,7 +30,7 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 	public ServiceTrackerMapImpl(
 		Class<S> clazz, String filterString,
 		ServiceReferenceMapper<K> serviceReferenceMapper,
-		ServiceTrackerMapBucketFactory<S, R> serviceTrackerMapBucketFactory) {
+		ServiceTrackerBucketFactory<S, R> serviceTrackerMapBucketFactory) {
 
 		_serviceReferenceMapper = serviceReferenceMapper;
 		_serviceTrackerMapBucketFactory = serviceTrackerMapBucketFactory;
@@ -50,7 +50,7 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 	@Override
 	public R getService(K key) {
-		ServiceTrackerMapBucket<S, R> bucket = _indexedServices.get(key);
+		ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
 
 		if (bucket == null) {
 			return null;
@@ -64,11 +64,11 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 		_serviceTracker.open();
 	}
 
-	private ConcurrentHashMap<K, ServiceTrackerMapBucket<S, R>> _indexedServices =
-		new ConcurrentHashMap<K, ServiceTrackerMapBucket<S, R>>();
+	private ConcurrentHashMap<K, ServiceTrackerBucket<S, R>> _indexedServices =
+		new ConcurrentHashMap<K, ServiceTrackerBucket<S, R>>();
 	private ServiceReferenceMapper<K> _serviceReferenceMapper;
 	private ServiceTracker<S, ServiceReference<S>> _serviceTracker;
-	private ServiceTrackerMapBucketFactory<S, R>
+	private ServiceTrackerBucketFactory<S, R>
 		_serviceTrackerMapBucketFactory;
 
 	private class MapServiceTrackerCustomizer
@@ -84,10 +84,10 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 					@Override
 					public void emit(K key) {
-						ServiceTrackerMapBucket<S, R> bucket = _indexedServices.get(key);
+						ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
 
 						if (bucket == null) {
-							ServiceTrackerMapBucket<S, R> newBucket =
+							ServiceTrackerBucket<S, R> newBucket =
 								_serviceTrackerMapBucketFactory.create();
 
 							bucket = _indexedServices.putIfAbsent(
@@ -126,7 +126,7 @@ public class ServiceTrackerMapImpl<K, S, R> implements ServiceTrackerMap<K, R> {
 
 					@Override
 					public void emit(K key) {
-						ServiceTrackerMapBucket<S, R> bucket = _indexedServices.get(key);
+						ServiceTrackerBucket<S, R> bucket = _indexedServices.get(key);
 
 						if (bucket == null) {
 							return;

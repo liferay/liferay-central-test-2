@@ -14,11 +14,19 @@
 
 package com.liferay.registry.collections;
 
+import com.liferay.registry.ServiceReference;
+
 /**
  * @author Carlos Sierra Andrés
  */
-public interface ServiceTrackerMapBucketFactory<S, R> {
+public interface ServiceTrackerBucket<S, R> {
 
-	public ServiceTrackerMapBucket<S, R> create();
+	public R getContent();
+
+	public boolean isDisposable();
+
+	public void remove(ServiceReference<S> serviceReference);
+
+	public void store(ServiceReference<S> serviceReference);
 
 }

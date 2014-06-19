@@ -24,23 +24,23 @@ import java.util.PriorityQueue;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ObjectServiceTrackerMapBucketFactory<S>
-	implements ServiceTrackerMapBucketFactory<S, S> {
+public class ObjectServiceTrackerBucketFactory<S>
+	implements ServiceTrackerBucketFactory<S, S> {
 
-	public ObjectServiceTrackerMapBucketFactory(
+	public ObjectServiceTrackerBucketFactory(
 		Comparator<ServiceReference<S>> comparator) {
 
 		_comparator = comparator;
 	}
 
 	@Override
-	public ServiceTrackerMapBucket<S, S> create() {
+	public ServiceTrackerBucket<S, S> create() {
 		return new SingleBucket();
 	}
 
 	private Comparator<ServiceReference<S>> _comparator;
 
-	private class SingleBucket implements ServiceTrackerMapBucket<S, S> {
+	private class SingleBucket implements ServiceTrackerBucket<S, S> {
 
 		@Override
 		public S getContent() {

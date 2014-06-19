@@ -28,23 +28,24 @@ import java.util.TreeSet;
 /**
  * @author Carlos Sierra Andrés
  */
-public class ListServiceTrackerMapBucketFactory<S>
-	implements ServiceTrackerMapBucketFactory<S, List<S>> {
+public class ListServiceTrackerBucketFactory<S>
+	implements ServiceTrackerBucketFactory<S, List<S>> {
 
-	public ListServiceTrackerMapBucketFactory(
+	public ListServiceTrackerBucketFactory(
 		Comparator<ServiceReference<S>> comparator) {
 
 		_comparator = comparator;
 	}
 
 	@Override
-	public ServiceTrackerMapBucket<S, List<S>> create() {
-		return new ListBucket();
+	public ServiceTrackerBucket<S, List<S>> create() {
+		return new ListServiceTrackerBucket();
 	}
 
 	private final Comparator<ServiceReference<S>> _comparator;
 
-	private class ListBucket implements ServiceTrackerMapBucket<S, List<S>> {
+	private class ListServiceTrackerBucket
+		implements ServiceTrackerBucket<S, List<S>> {
 
 		@Override
 		public List<S> getContent() {
