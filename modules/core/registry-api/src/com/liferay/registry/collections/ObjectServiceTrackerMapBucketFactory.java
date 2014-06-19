@@ -24,10 +24,12 @@ import java.util.PriorityQueue;
 /**
  * @author Carlos Sierra Andrés
  */
-public class SingleItemBucketFactory<S>
+public class ObjectServiceTrackerMapBucketFactory<S>
 	implements ServiceTrackerMapBucketFactory<S, S> {
 
-	public SingleItemBucketFactory(Comparator<ServiceReference<S>> comparator) {
+	public ObjectServiceTrackerMapBucketFactory(
+		Comparator<ServiceReference<S>> comparator) {
+
 		_comparator = comparator;
 	}
 
