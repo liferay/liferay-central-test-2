@@ -454,12 +454,28 @@ public class IconTag extends IncludeTag {
 		
 		return onClick;
 	}
+	
+	protected String getSrcHover() {
+		if (Validator.isNotNull(_srcHover) || Validator.isNull(_imageHover)) {
+			return _srcHover;
+		}
 
-	@Override
-	protected void setAttributes(HttpServletRequest request) {
+		StringBundler sb = new StringBundler(4);
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		sb.append(themeDisplay.getPathThemeImages());
+
+		sb.append("/common/");
+		sb.append(_imageHover);
+		sb.append(".png");
+
+		return sb.toString();
+	}
+
+	@Override
+	protected void setAttributes(HttpServletRequest request) {
 		if (_data == null) {
 			_data = new HashMap<String, Object>(1);
 		}
@@ -479,17 +495,6 @@ public class IconTag extends IncludeTag {
 			}
 
 			_data.put("title", HtmlUtil.stripHtml(message));
-		}
-
-		if (Validator.isNull(_srcHover) && Validator.isNotNull(_imageHover)) {
-			StringBundler sb = new StringBundler(4);
-
-			sb.append(themeDisplay.getPathThemeImages());
-			sb.append("/common/");
-			sb.append(_imageHover);
-			sb.append(".png");
-
-			_srcHover = sb.toString();
 		}
 
 		request.setAttribute("liferay-ui:icon:alt", _alt);
@@ -515,7 +520,7 @@ public class IconTag extends IncludeTag {
 		request.setAttribute("liferay-ui:icon:method", getMethod());
 		request.setAttribute("liferay-ui:icon:onClick", getOnClick());
 		request.setAttribute("liferay-ui:icon:src", getSrc());
-		request.setAttribute("liferay-ui:icon:srcHover", _srcHover);
+		request.setAttribute("liferay-ui:icon:srcHover", getSrcHover());
 		request.setAttribute("liferay-ui:icon:target", _target);
 		request.setAttribute(
 			"liferay-ui:icon:toolTip", String.valueOf(_toolTip));
