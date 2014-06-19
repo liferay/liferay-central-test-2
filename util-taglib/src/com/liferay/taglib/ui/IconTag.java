@@ -365,6 +365,20 @@ public class IconTag extends IncludeTag {
 	protected boolean isCleanUpSetAttributes() {
 		return _CLEAN_UP_SET_ATTRIBUTES;
 	}
+	
+	protected String getMethod() {
+		if (Validator.isNotNull(_method)) {
+			return _method;
+		}
+
+		String url = getUrl();
+
+		if (url.contains("p_p_lifecycle=0")) {
+			return "get";
+		}
+
+		return "post";
+	}
 
 	@Override
 	protected void setAttributes(HttpServletRequest request) {
@@ -375,22 +389,11 @@ public class IconTag extends IncludeTag {
 			_data = new HashMap<String, Object>(1);
 		}
 
-		if (Validator.isNull(_method)) {
-			String url = getUrl();
-
-			int pos = url.indexOf("p_p_lifecycle=0");
-
-			if (pos != -1) {
-				_method = "get";
-			}
-			else {
-				_method = "post";
-			}
-		}
-
 		boolean forcePost = false;
+		
+		String method = getMethod();
 
-		if (_method.equals("post")) {
+		if (method.equals("post")) {
 			String url = getUrl();
 
 			if (url.startsWith(Http.HTTP_WITH_SLASH) ||
@@ -500,7 +503,7 @@ public class IconTag extends IncludeTag {
 			"liferay-ui:icon:localizeMessage",
 			String.valueOf(_localizeMessage));
 		request.setAttribute("liferay-ui:icon:message", _message);
-		request.setAttribute("liferay-ui:icon:method", _method);
+		request.setAttribute("liferay-ui:icon:method", getMethod());
 		request.setAttribute("liferay-ui:icon:onClick", onClick);
 		request.setAttribute("liferay-ui:icon:src", getSrc());
 		request.setAttribute("liferay-ui:icon:srcHover", _srcHover);
