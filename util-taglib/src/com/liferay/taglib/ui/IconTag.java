@@ -488,29 +488,38 @@ public class IconTag extends IncludeTag {
 				StringPool.DASH, StringPool.BLANK				
 			});
 	}
+	
+	protected Map<String, Object> getData() {
+		Map<String, Object> data = null;
 
-	@Override
-	protected void setAttributes(HttpServletRequest request) {
-		if (_data == null) {
-			_data = new HashMap<String, Object>(1);
+		if (_data != null) {
+			data = new HashMap<String, Object>(_data);
+		}
+		else {
+			data = new HashMap<String, Object>(1);
 		}
 
-		if (_useDialog && Validator.isNull(_data.get("title"))) {
+		if (_useDialog && Validator.isNull(data.get("title"))) {
 			String message = getProcessedMessage();
 
 			if (_localizeMessage) {
 				message = LanguageUtil.get(pageContext, message);
 			}
 
-			_data.put("title", HtmlUtil.stripHtml(message));
+			data.put("title", HtmlUtil.stripHtml(message));
 		}
+		
+		return data;
+	}
 
+	@Override
+	protected void setAttributes(HttpServletRequest request) {
 		request.setAttribute("liferay-ui:icon:alt", _alt);
 		request.setAttribute("liferay-ui:icon:ariaRole", _ariaRole);
 		request.setAttribute(
 			"liferay-ui:icon:auiImage", String.valueOf(isAUIImage()));
 		request.setAttribute("liferay-ui:icon:cssClass", _cssClass);
-		request.setAttribute("liferay-ui:icon:data", _data);
+		request.setAttribute("liferay-ui:icon:data", getData());
 		request.setAttribute("liferay-ui:icon:details", getDetails());
 		request.setAttribute("liferay-ui:icon:iconCssClass", _iconCssClass);
 		request.setAttribute("liferay-ui:icon:id", getId());
