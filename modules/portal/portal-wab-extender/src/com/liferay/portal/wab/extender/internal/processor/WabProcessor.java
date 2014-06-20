@@ -200,17 +200,19 @@ public class WabProcessor {
 	}
 
 	protected File getManifestFile() throws IOException {
-		if (_manifestFile == null) {
-			File manifestFile = new File(_pluginDir, _MANIFEST_PATH);
-
-			if (!manifestFile.exists()) {
-				FileUtil.mkdirs(manifestFile.getParent());
-
-				manifestFile.createNewFile();
-			}
-			
-			_manifestFile = manifestFile;
+		if (_manifestFile != null) {
+			return _manifestFile;
 		}
+		
+		File manifestFile = new File(_pluginDir, _MANIFEST_PATH);
+
+		if (!manifestFile.exists()) {
+			FileUtil.mkdirs(manifestFile.getParent());
+
+			manifestFile.createNewFile();
+		}
+		
+		_manifestFile = manifestFile;
 
 		return _manifestFile;
 	}
