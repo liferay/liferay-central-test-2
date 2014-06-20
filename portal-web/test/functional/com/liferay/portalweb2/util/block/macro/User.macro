@@ -1263,9 +1263,9 @@
 		<description message="Log into Liferay Portal as ${userEmailAddress} using the password ${password}." />
 
 		<if>
-			<isset var="clusterNodePort" />
+			<isset var="nodePort" />
 			<then>
-				<execute action="Home#open" locator1="http://localhost:${clusterNodePort}" />
+				<execute action="Home#open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<else>
 				<execute macro="Page#openURL" />
@@ -1368,9 +1368,9 @@
 		<description message="Log out of Liferay Portal." />
 
 		<if>
-			<isset var="clusterNodePort" />
+			<isset var="nodePort" />
 			<then>
-				<execute action="Home#open" locator1="http://localhost:${clusterNodePort}" />
+				<execute action="Home#open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<else>
 				<execute macro="Page#openURL" />

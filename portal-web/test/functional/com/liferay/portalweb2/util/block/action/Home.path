@@ -155,7 +155,7 @@
 </tr>
 <tr>
 	<td>NODE_NAME</td>
-	<td>//section[@id='content']/div[contains(.,'${key_clusterNodePort}')]</td>
+	<td>//section[@id='content']/div[contains(.,'${key_nodePort}')]</td>
 	<td></td>
 </tr>
 <tr>

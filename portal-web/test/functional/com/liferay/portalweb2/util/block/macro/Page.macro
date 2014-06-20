@@ -23,9 +23,9 @@
 		<description message="Add a page called ${pageName}." />
 
 		<if>
-			<isset var="clusterNodePort" />
+			<isset var="nodePort" />
 			<then>
-				<execute action="Home#open" locator1="http://localhost:${clusterNodePort}" />
+				<execute action="Home#open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<elseif>
 				<not>
@@ -84,16 +84,16 @@
 		<execute macro="Staging#submitForPublicationPageRevision" />
 	</command>
 
-	<command name="assertClusterNodePortPG">
-		<var name="key_clusterNodePort" value="${clusterNodePort}" />
-
-		<execute action="Home#assertTextEquals" locator-key1="NODE_NAME" />
-	</command>
-
 	<command name="assertLocalizedPG">
 		<execute action="PGSignin#assertTextEquals" locator-key1="PORTLET_CONTENT_LOCALIZED" value1="${localizedContent}" />
 
 		<execute action="Dockbar#assertTextEquals" locator-key1="ADMIN" value1="${localizedAdmin}" />
+	</command>
+
+	<command name="assertnodePortPG">
+		<var name="key_nodePort" value="${nodePort}" />
+
+		<execute action="Home#assertTextEquals" locator-key1="NODE_NAME" />
 	</command>
 
 	<command name="changeLogoViaPageCP">
@@ -160,9 +160,9 @@
 
 	<command name="gotoCmdCP">
 		<if>
-			<isset var="clusterNodePort" />
+			<isset var="nodePort" />
 			<then>
-				<execute action="Home#open" locator1="http://localhost:${clusterNodePort}" />
+				<execute action="Home#open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<else>
 				<execute macro="Page#openURL" />
@@ -367,9 +367,9 @@
 		<description message="Navigate to the page named ${pageName}." />
 
 		<if>
-			<isset var="clusterNodePort" />
+			<isset var="nodePort" />
 			<then>
-				<execute action="Home#open" locator1="http://localhost:${clusterNodePort}" />
+				<execute action="Home#open" locator1="http://localhost:${nodePort}" />
 			</then>
 			<elseif>
 				<not>
