@@ -134,9 +134,9 @@ public class EditTagAction extends PortletAction {
 	protected void mergeTag(ActionRequest actionRequest) throws Exception {
 		long[] mergeTagIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "mergeTagIds"), 0L);
+		long targetTagId = ParamUtil.getLong(actionRequest, "targetTagId");
 		boolean overrideTagsProperties = ParamUtil.getBoolean(
 			actionRequest, "overrideTagsProperties");
-		long targetTagId = ParamUtil.getLong(actionRequest, "targetTagId");
 
 		for (long mergeTagId : mergeTagIds) {
 			if (targetTagId == mergeTagId) {
