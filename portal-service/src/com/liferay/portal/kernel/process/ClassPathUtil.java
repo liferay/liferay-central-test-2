@@ -252,20 +252,21 @@ public class ClassPathUtil {
 			return StringPool.BLANK;
 		}
 
-		File[] files = dir.listFiles(new FileFilter() {
+		File[] files = dir.listFiles(
+			new FileFilter() {
 
-			@Override
-			public boolean accept(File file) {
-				if (file.isDirectory()) {
-					return false;
+				@Override
+				public boolean accept(File file) {
+					if (file.isDirectory()) {
+						return false;
+					}
+
+					String name = file.getName();
+
+					return name.endsWith(".jar");
 				}
 
-				String name = file.getName();
-
-				return name.endsWith(".jar");
-			}
-
-		});
+			});
 
 		if (files == null) {
 			return StringPool.BLANK;

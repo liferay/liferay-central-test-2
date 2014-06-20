@@ -272,9 +272,9 @@ public class ProcessLauncher {
 		}
 
 		private volatile boolean _detach;
-		private final long _interval;
-		private final ProcessCallable<String> _pringBackProcessCallable;
-		private final ShutdownHook _shutdownHook;
+		private long _interval;
+		private ProcessCallable<String> _pringBackProcessCallable;
+		private ShutdownHook _shutdownHook;
 
 	}
 
@@ -292,7 +292,7 @@ public class ProcessLauncher {
 
 		private static final long serialVersionUID = 1L;
 
-		private final String _message;
+		private String _message;
 
 	}
 

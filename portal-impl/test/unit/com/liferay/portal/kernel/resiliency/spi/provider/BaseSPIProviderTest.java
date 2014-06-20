@@ -198,10 +198,10 @@ public class BaseSPIProviderTest {
 
 		@Around(
 			"execution(* com.liferay.portal.kernel.process.ProcessExecutor." +
-				"execute(String, String, String, java.util.List, " +
-					"com.liferay.portal.kernel.process.ProcessCallable)) && " +
-						"args(java, bootstrapClassPath, classPath, arguments," +
-							" processCallable)")
+				"execute(String, String, String, java.util.List, com.liferay." +
+					"portal.kernel.process.ProcessCallable)) && args(java, " +
+						"bootstrapClassPath, classPath, arguments, " +
+							"processCallable)")
 		public Object execute(
 				String java, String bootstrapClassPath, String classPath,
 				List<String> arguments,
