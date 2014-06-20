@@ -452,11 +452,9 @@ public class JournalArticleServiceTest {
 
 	@Test
 	public void testUpdateArticle() throws Exception {
-		Date firstVersionDate = _article.getDisplayDate();
+		Date oldDisplayDate = _article.getDisplayDate();
 
-		Date now = new Date();
-
-		_article.setDisplayDate(now);
+		_article.setDisplayDate(new Date());
 
 		_article = JournalTestUtil.updateArticle(_article, "Version 2");
 
@@ -468,7 +466,7 @@ public class JournalArticleServiceTest {
 		AssetEntry assetEntry = AssetEntryLocalServiceUtil.getEntry(
 			_article.getModelClassName(), _article.getResourcePrimKey());
 
-		Assert.assertEquals(firstVersionDate, assetEntry.getPublishDate());
+		Assert.assertEquals(oldDisplayDate, assetEntry.getPublishDate());
 	}
 
 	@Test
@@ -478,9 +476,7 @@ public class JournalArticleServiceTest {
 
 		Assert.assertTrue(_article.isExpired());
 
-		Date now = new Date();
-
-		_article.setDisplayDate(now);
+		_article.setDisplayDate(new Date());
 
 		_article = JournalTestUtil.updateArticle(_article, "Version 2");
 
