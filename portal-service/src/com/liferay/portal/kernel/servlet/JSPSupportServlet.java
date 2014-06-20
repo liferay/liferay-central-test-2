@@ -47,13 +47,8 @@ public class JSPSupportServlet extends HttpServlet {
 	private class JSPSupportServletConfig implements ServletConfig {
 
 		@Override
-		public String getServletName() {
-			return JSPSupportServlet.class.getName();
-		}
-
-		@Override
-		public ServletContext getServletContext() {
-			return _servletContext;
+		public String getInitParameter(String name) {
+			return null;
 		}
 
 		@Override
@@ -62,8 +57,13 @@ public class JSPSupportServlet extends HttpServlet {
 		}
 
 		@Override
-		public String getInitParameter(String arg0) {
-			return null;
+		public ServletContext getServletContext() {
+			return _servletContext;
+		}
+
+		@Override
+		public String getServletName() {
+			return JSPSupportServlet.class.getName();
 		}
 
 	}
