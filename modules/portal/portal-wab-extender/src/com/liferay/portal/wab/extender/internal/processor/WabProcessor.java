@@ -315,9 +315,9 @@ public class WabProcessor {
 					continue;
 				}
 
-				String libName = path.substring("WEB-INF/lib/".length());
+				String jar = path.substring("WEB-INF/lib/".length());
 
-				if (ArrayUtil.contains(portalDependencyJars, libName)) {
+				if (ArrayUtil.contains(portalDependencyJars, jar)) {
 					_ignoredResources.add(path);
 
 					continue;
@@ -326,12 +326,12 @@ public class WabProcessor {
 				classPath.put(path, file);
 			}
 			else if (path.endsWith(".jsp") || path.endsWith(".jspf")) {
-				processJspDepedencies(file);
+				processJSPDepedencies(file);
 			}
 		}
 	}
 
-	protected void processJspDepedencies(File file) throws IOException {
+	protected void processJSPDepedencies(File file) throws IOException {
 
 		// TODO
 
@@ -343,7 +343,7 @@ public class WabProcessor {
 
 			Element rootElement = document.getRootElement();
 
-			_packagePath = rootElement.attributeValue("package-path");
+			_servicePackagePath = rootElement.attributeValue("package-path");
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -367,8 +367,8 @@ public class WabProcessor {
 	private File _file;
 	private Set<String> _ignoredResources = new HashSet<String>();
 	private File _manifestFile;
-	private String _packagePath;
 	private Map<String, String[]> _parameters;
 	private File _pluginDir;
+	private String _servicePackagePath;
 
 }
