@@ -204,7 +204,7 @@ public class WabProcessor {
 		if (_manifestFile != null) {
 			return _manifestFile;
 		}
-		
+
 		File manifestFile = new File(_pluginDir, "META-INF/MANIFEST.MF");
 
 		if (!manifestFile.exists()) {
@@ -212,7 +212,7 @@ public class WabProcessor {
 
 			manifestFile.createNewFile();
 		}
-		
+
 		_manifestFile = manifestFile;
 
 		return _manifestFile;
@@ -275,7 +275,7 @@ public class WabProcessor {
 
 		analyzer.setProperty(
 			Constants.BUNDLE_CLASSPATH, StringUtil.merge(classPath.keySet()));
-	
+
 		Collection<File> files = classPath.values();
 
 		analyzer.setClasspath(files.toArray(new File[classPath.size()]));
@@ -292,7 +292,7 @@ public class WabProcessor {
 
 				continue;
 			}
-			
+
 			uri = uri.relativize(file.toURI());
 
 			String path = uri.getPath();
