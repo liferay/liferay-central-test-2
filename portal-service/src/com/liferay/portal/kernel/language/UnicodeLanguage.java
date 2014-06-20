@@ -35,7 +35,8 @@ public interface UnicodeLanguage {
 		boolean translateArguments);
 
 	public String format(
-		HttpServletRequest request, String pattern, LanguageWrapper[] arguments);
+		HttpServletRequest request, String pattern,
+		LanguageWrapper[] arguments);
 
 	public String format(
 		HttpServletRequest request, String pattern, LanguageWrapper[] arguments,
@@ -83,7 +84,8 @@ public interface UnicodeLanguage {
 
 	public String get(HttpServletRequest request, String key);
 
-	public String get(HttpServletRequest request, String key, String defaultValue);
+	public String get(
+		HttpServletRequest request, String key, String defaultValue);
 
 	public String get(Locale locale, String key);
 

@@ -51,7 +51,8 @@ public class UnicodeLanguageImpl implements UnicodeLanguage {
 
 	@Override
 	public String format(
-		HttpServletRequest request, String pattern, LanguageWrapper[] arguments) {
+		HttpServletRequest request, String pattern,
+		LanguageWrapper[] arguments) {
 
 		return UnicodeFormatter.toString(
 			LanguageUtil.format(request, pattern, arguments));

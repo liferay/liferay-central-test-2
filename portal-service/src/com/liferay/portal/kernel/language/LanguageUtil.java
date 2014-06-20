@@ -51,7 +51,8 @@ public class LanguageUtil {
 	}
 
 	public static String format(
-		HttpServletRequest request, String pattern, LanguageWrapper[] arguments) {
+		HttpServletRequest request, String pattern,
+		LanguageWrapper[] arguments) {
 
 		return getLanguage().format(request, pattern, arguments);
 	}

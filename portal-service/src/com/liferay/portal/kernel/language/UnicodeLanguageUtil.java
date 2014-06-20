@@ -44,7 +44,8 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static String format(
-		HttpServletRequest request, String pattern, LanguageWrapper[] arguments) {
+		HttpServletRequest request, String pattern,
+		LanguageWrapper[] arguments) {
 
 		return getUnicodeLanguage().format(request, pattern, arguments);
 	}
