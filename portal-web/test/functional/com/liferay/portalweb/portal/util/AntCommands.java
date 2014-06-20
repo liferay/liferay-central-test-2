@@ -30,11 +30,12 @@ public class AntCommands extends Thread {
 	public AntCommands(
 		LiferaySelenium liferaySelenium, String fileName, String target) {
 
-		_fileName = fileName;
 		_liferaySelenium = liferaySelenium;
+		_fileName = fileName;
 		_target = target;
 	}
 
+	@Override
 	public void run() {
 		try {
 			Runtime runtime = Runtime.getRuntime();
@@ -51,7 +52,7 @@ public class AntCommands extends Thread {
 				sb.append(_fileName);
 				sb.append(" ");
 				sb.append(_target);
-				sb.append(" -Drun.selenium.ant.command=true");
+				sb.append(" -Dtest.ant.launched.by.selenium=true");
 			}
 			else {
 				runtime.exec(
@@ -61,7 +62,7 @@ public class AntCommands extends Thread {
 				sb.append(_fileName);
 				sb.append(" ");
 				sb.append(_target);
-				sb.append(" -Drun.selenium.ant.command=true");
+				sb.append(" -Dtest.ant.launched.by.selenium=true");
 			}
 
 			Process process = runtime.exec(sb.toString());
@@ -83,7 +84,9 @@ public class AntCommands extends Thread {
 					break;
 				}
 			}
-		} catch (Exception e) {}
+		}
+		catch (Exception e) {
+		}
 	}
 
 	private String _fileName;
