@@ -46,6 +46,7 @@ import java.io.InputStream;
 
 import java.net.URI;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -83,7 +84,7 @@ public class WabProcessor {
 			return null;
 		}
 
-		if (!isValidOsgiBundle()) {
+		if (!isValidOSGiBundle()) {
 			transformToOSGiBundle();
 		}
 
@@ -233,7 +234,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected boolean isValidOsgiBundle() {
+	protected boolean isValidOSGiBundle() {
 		Manifest manifest = null;
 
 		try {
@@ -245,8 +246,7 @@ public class WabProcessor {
 
 		Attributes attributes = manifest.getMainAttributes();
 
-		// The spec states that this is only true when the Manifest
-		// does not contain a BUNDLE_SYMBOLICNAME header.
+		// Valid OSGi bundles must contain the header "Bundle-SymbolicName"
 
 		String bundleSymbolicName = GetterUtil.getString(
 			attributes.getValue(Constants.BUNDLE_SYMBOLICNAME));
@@ -257,13 +257,12 @@ public class WabProcessor {
 	protected void processBundleClasspath(Analyzer analyzer)
 		throws IOException {
 
-		// Do not re-order, insertion order into the classpath is critical.
+		// Class path order is critical
 
 		Map<String, File> classPath = new LinkedHashMap<String, File>();
 
 		classPath.put(
-			"ext/WEB-INF/classes",
-			new File(_pluginDir, "ext/WEB-INF/classes"));
+			"ext/WEB-INF/classes", new File(_pluginDir, "ext/WEB-INF/classes"));
 		classPath.put(
 			"WEB-INF/classes", new File(_pluginDir, "WEB-INF/classes"));
 
@@ -278,16 +277,18 @@ public class WabProcessor {
 
 		analyzer.setProperty(
 			Constants.BUNDLE_CLASSPATH, StringUtil.merge(classPath.keySet()));
-		analyzer.setClasspath(
-			classPath.values().toArray(new File[classPath.size()]));
+	
+		Collection<File> files = classPath.values();
+
+		analyzer.setClasspath(files.toArray(new File[classPath.size()]));
 	}
 
 	protected void processFiles(
-			File directory, URI uri, Map<String, File> classPath,
+			File dir, URI uri, Map<String, File> classPath,
 			String[] portalDependencyJars)
 		throws IOException {
 
-		for (File file : directory.listFiles()) {
+		for (File file : dir.listFiles()) {
 			if (file.isDirectory()) {
 				processFiles(file, uri, classPath, portalDependencyJars);
 
