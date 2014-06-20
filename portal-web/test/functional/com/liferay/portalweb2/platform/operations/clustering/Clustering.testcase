@@ -1,0 +1,204 @@
+<definition component-name="portal-tools">
+	<property name="testray.main.component.name" value="Platform" />
+
+	<var name="portletName" value="Blogs" />
+
+	<set-up>
+		<execute macro="User#firstLoginPG" />
+	</set-up>
+
+	<command name="AddAndDeleteBlogEntriesOnSeparateNodes" priority="5">
+		<var name="assetType" value="Blogs Entry" />
+		<var name="entryContent1" value="Blogs Entry1 Content" />
+		<var name="entryContent2" value="Blogs Entry2 Content" />
+		<var name="entryTitle1" value="Blogs Entry1 Title" />
+		<var name="entryTitle2" value="Blogs Entry2 Title" />
+
+		<execute macro="Page#assertClusterNodePortPG">
+			<var name="clusterNodePort" value="8080" />
+		</execute>
+
+		<execute macro="Page#addPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page1" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page1" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page1" />
+		</execute>
+
+		<execute action="BasePortlet#assertTextEquals" locator-key1="TITLE" value1="Blogs" />
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="User#logoutPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="User#loginPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Page#assertClusterNodePortPG">
+			<var name="clusterNodePort" value="9080" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page1" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="Page#addPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="Portlet#addPG">
+			<var name="portletName" value="${portletName}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute action="BasePortlet#assertTextEquals" locator-key1="TITLE" value1="Blogs" />
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#addPG">
+			<var name="entryContent" value="${entryContent2}" />
+			<var name="entryTitle" value="${entryTitle2}" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent2}" />
+			<var name="entryTitle" value="${entryTitle2}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#moveToRecycleBinPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="Page#gotoContentCP">
+			<var name="clusterNodePort" value="9080" />
+			<var name="portletName" value="Recycle Bin" />
+		</execute>
+
+		<execute action="Home#pause" locator1="3000" />
+
+		<take-screenshot />
+
+		<execute macro="RecycleBin#emptyCP" />
+
+		<take-screenshot />
+
+		<execute macro="User#logoutPG">
+			<var name="clusterNodePort" value="9080" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="User#loginPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="password" value="test" />
+			<var name="userEmailAddress" value="test@liferay.com" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#viewPG">
+			<var name="entryContent" value="${entryContent2}" />
+			<var name="entryTitle" value="${entryTitle2}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#searchNoPG">
+			<var name="entryContent" value="${entryContent1}" />
+			<var name="entrySearchTerm" value="${entryTitle1}" />
+			<var name="entryTitle" value="${entryTitle1}" />
+		</execute>
+
+		<execute macro="Page#gotoPG">
+			<var name="clusterNodePort" value="8080" />
+			<var name="pageName" value="Test Page2" />
+		</execute>
+
+		<execute macro="BlogsEntry#moveToRecycleBinPG">
+			<var name="assetType" value="${assetType}" />
+			<var name="clusterNodePort" value="8080" />
+			<var name="entryContent" value="${entryContent2}" />
+			<var name="entryTitle" value="${entryTitle2}" />
+		</execute>
+	</command>
+
+	<tear-down>
+		<execute macro="Page#tearDownPG" />
+
+		<execute macro="BlogsEntry#tearDownCP" />
+	</tear-down>
+</definition>
