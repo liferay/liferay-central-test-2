@@ -204,7 +204,7 @@ public class WabProcessor {
 			return _manifestFile;
 		}
 		
-		File manifestFile = new File(_pluginDir, _MANIFEST_PATH);
+		File manifestFile = new File(_pluginDir, "META-INF/MANIFEST.MF");
 
 		if (!manifestFile.exists()) {
 			FileUtil.mkdirs(manifestFile.getParent());
@@ -296,7 +296,10 @@ public class WabProcessor {
 
 			String path = uri.relativize(file.toURI()).getPath();
 
-			if (ArrayUtil.contains(_EXCLUDED_PATHS, path)) {
+			if (ArrayUtil.contains(
+					PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_EXCLUDED_PATHS,
+					path)) {
+
 				continue;
 			}
 
@@ -304,14 +307,14 @@ public class WabProcessor {
 				processServicePackagePath(file);
 			}
 
-			if (path.startsWith(_WEB_INF_LIB)) {
+			if (path.startsWith("WEB-INF/lib/")) {
 				if (path.endsWith("-service.jar") &&
 					!path.endsWith(_context.concat("-service.jar"))) {
 
 					continue;
 				}
 
-				String libName = path.substring(_WEB_INF_LIB.length());
+				String libName = path.substring("WEB-INF/lib/".length());
 
 				if (ArrayUtil.contains(portalDependencyJars, libName)) {
 					_ignoredResources.add(path);
@@ -354,13 +357,6 @@ public class WabProcessor {
 
 		processBundleClasspath(analyzer);
 	}
-
-	private static final String[] _EXCLUDED_PATHS =
-		PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_EXCLUDED_PATHS;
-
-	private static final String _MANIFEST_PATH = "META-INF/MANIFEST.MF";
-
-	private static final String _WEB_INF_LIB = "WEB-INF/lib/";
 
 	private static Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
