@@ -45,8 +45,7 @@ public class ClusterRequestReceiverTest
 		adviceClasses = {
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke1() throws Exception {
 		ClusterExecutorImpl clusterExecutorImpl1 = null;
@@ -86,8 +85,7 @@ public class ClusterRequestReceiverTest
 		adviceClasses = {
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke2() throws Exception {
 		ClusterExecutorImpl clusterExecutorImpl1 = null;
@@ -129,8 +127,7 @@ public class ClusterRequestReceiverTest
 		adviceClasses = {
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke3() throws Exception {
 		ClusterExecutorImpl clusterExecutorImpl1 = null;
@@ -170,8 +167,7 @@ public class ClusterRequestReceiverTest
 		adviceClasses = {
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke4() throws Exception {
 		CaptureHandler captureHandler = JDKLoggerTestUtil.configureJDKLogger(
@@ -218,8 +214,7 @@ public class ClusterRequestReceiverTest
 		adviceClasses = {
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke5() throws Exception {
 		ClusterExecutorImpl clusterExecutorImpl1 = null;
@@ -257,8 +252,7 @@ public class ClusterRequestReceiverTest
 			DisableAutodetectedAddressAdvice.class,
 			EnableClusterLinkAdvice.class,
 			SetJGroupsSingleThreadPoolAdvice.class
-		}
-	)
+		})
 	@Test
 	public void testInvoke6() throws Exception {
 		ClusterExecutorImpl clusterExecutorImpl1 = null;

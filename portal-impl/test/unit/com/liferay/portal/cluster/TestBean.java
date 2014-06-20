@@ -64,7 +64,7 @@ public class TestBean {
 
 		if (threadLocalCache.get(_THREAD_LOCAL_CACHE_KEY) != null) {
 			throw new IllegalStateException(
-				"Thread local cache has not been cleared");
+				"Thread local cache was not cleared");
 		}
 
 		return null;
