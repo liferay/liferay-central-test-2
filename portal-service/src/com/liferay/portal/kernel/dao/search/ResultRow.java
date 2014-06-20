@@ -34,13 +34,13 @@ public interface ResultRow {
 		int index, String align, String valign, int colspan, String name,
 		String href);
 
+	public void
+		addButton(String align, String valign, String name, String href);
+
 	public void addButton(String name, String href);
 
 	public void addButton(
 		String align, String valign, int colspan, String name, String href);
-
-	public void
-		addButton(String align, String valign, String name, String href);
 
 	public void addDate(Date date);
 
@@ -82,21 +82,14 @@ public interface ResultRow {
 	public void addJSP(String align, String valign, String path);
 
 	public void addJSP(
-		String align, String valign, String path,
-		ServletContext servletContext, HttpServletRequest request,
-		HttpServletResponse response);
+		String align, String valign, String path, ServletContext servletContext,
+		HttpServletRequest request, HttpServletResponse response);
 
-	public void addSearchEntry(
-		int index, SearchEntry searchEntry);
+	public void addSearchEntry(int index, SearchEntry searchEntry);
 
 	public void addSearchEntry(SearchEntry searchEntry);
 
 	public void addStatus(int status);
-
-	public void
-		addStatus(
-			int index, int status, long statusByUserId, Date statusDate,
-			String href);
 
 	public void addStatus(
 		int index, int status, String href, ServletContext servletContext,
@@ -104,17 +97,22 @@ public interface ResultRow {
 
 	public void addStatus(int status, long statusByUserId, Date statusDate);
 
-	public void
-		addStatus(
-			int status, long statusByUserId, Date statusDate,
-			PortletURL portletURL);
-
 	public void addStatus(
 		int status, long statusByUserId, Date statusDate, String href);
 
 	public void addStatus(int status, PortletURL portletURL);
 
 	public void addStatus(int status, String href);
+
+	public void
+		addStatus(
+			int index, int status, long statusByUserId, Date statusDate,
+			String href);
+
+	public void
+		addStatus(
+			int status, long statusByUserId, Date statusDate,
+			PortletURL portletURL);
 
 	public void addText(int index, String name);
 

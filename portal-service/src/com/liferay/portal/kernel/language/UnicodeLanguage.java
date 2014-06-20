@@ -27,18 +27,6 @@ import javax.servlet.http.HttpServletRequest;
 @ProviderType
 public interface UnicodeLanguage {
 
-	public String format(Locale locale, String pattern, Object argument);
-
-	public String format(
-		Locale locale, String pattern, Object argument,
-		boolean translateArguments);
-
-	public String format(Locale locale, String pattern, Object[] arguments);
-
-	public String format(
-		Locale locale, String pattern, Object[] arguments,
-		boolean translateArguments);
-
 	public String format(
 		HttpServletRequest request, String pattern, LanguageWrapper argument);
 
@@ -67,6 +55,18 @@ public interface UnicodeLanguage {
 		HttpServletRequest request, String pattern, Object[] arguments,
 		boolean translateArguments);
 
+	public String format(Locale locale, String pattern, Object argument);
+
+	public String format(
+		Locale locale, String pattern, Object argument,
+		boolean translateArguments);
+
+	public String format(Locale locale, String pattern, Object[] arguments);
+
+	public String format(
+		Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments);
+
 	public String format(
 		ResourceBundle resourceBundle, String pattern, Object argument);
 
@@ -81,13 +81,13 @@ public interface UnicodeLanguage {
 		ResourceBundle resourceBundle, String pattern, Object[] arguments,
 		boolean translateArguments);
 
-	public String get(Locale locale, String key);
-
-	public String get(Locale locale, String key, String defaultValue);
-
 	public String get(HttpServletRequest request, String key);
 
 	public String get(HttpServletRequest request, String key, String defaultValue);
+
+	public String get(Locale locale, String key);
+
+	public String get(Locale locale, String key, String defaultValue);
 
 	public String get(ResourceBundle resourceBundle, String key);
 

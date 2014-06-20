@@ -15,10 +15,10 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
-import com.liferay.taglib.FileAvailabilityUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringBundler;
+import com.liferay.taglib.FileAvailabilityUtil;
 
 /**
  * @author Brian Wing Shun Chan

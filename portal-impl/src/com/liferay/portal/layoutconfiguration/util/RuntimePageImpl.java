@@ -304,8 +304,7 @@ public class RuntimePageImpl implements RuntimePage {
 
 	protected void doProcessCustomizationSettings(
 			HttpServletRequest request, HttpServletResponse response,
-			TemplateResource templateResource,
-			boolean restricted)
+			TemplateResource templateResource, boolean restricted)
 		throws Exception {
 
 		CustomizationSettingsProcessor processor =

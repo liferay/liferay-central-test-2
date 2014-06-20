@@ -72,9 +72,9 @@ public interface ResourceActions {
 	public void checkAction(String name, String actionId)
 		throws NoSuchResourceActionException;
 
-	public String getAction(Locale locale, String action);
-
 	public String getAction(HttpServletRequest request, String action);
+
+	public String getAction(Locale locale, String action);
 
 	public String getActionNamePrefix();
 
@@ -88,9 +88,9 @@ public interface ResourceActions {
 
 	public List<String> getModelPortletResources(String name);
 
-	public String getModelResource(Locale locale, String name);
-
 	public String getModelResource(HttpServletRequest request, String name);
+
+	public String getModelResource(Locale locale, String name);
 
 	public List<String> getModelResourceActions(String name);
 

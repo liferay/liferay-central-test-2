@@ -16,8 +16,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.taglib.util.PortalIncludeUtil;
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.taglib.util.PortalIncludeUtil;
 
 import java.util.List;
 

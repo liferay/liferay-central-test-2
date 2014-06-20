@@ -33,20 +33,6 @@ import javax.servlet.http.HttpServletResponse;
 @ProviderType
 public interface Language {
 
-	public String format(Locale locale, String pattern, List<Object> arguments);
-
-	public String format(Locale locale, String pattern, Object argument);
-
-	public String format(
-		Locale locale, String pattern, Object argument,
-		boolean translateArguments);
-
-	public String format(Locale locale, String pattern, Object[] arguments);
-
-	public String format(
-		Locale locale, String pattern, Object[] arguments,
-		boolean translateArguments);
-
 	public String format(
 		HttpServletRequest request, String pattern, LanguageWrapper argument);
 
@@ -75,6 +61,20 @@ public interface Language {
 		HttpServletRequest request, String pattern, Object[] arguments,
 		boolean translateArguments);
 
+	public String format(Locale locale, String pattern, List<Object> arguments);
+
+	public String format(Locale locale, String pattern, Object argument);
+
+	public String format(
+		Locale locale, String pattern, Object argument,
+		boolean translateArguments);
+
+	public String format(Locale locale, String pattern, Object[] arguments);
+
+	public String format(
+		Locale locale, String pattern, Object[] arguments,
+		boolean translateArguments);
+
 	public String format(
 		ResourceBundle resourceBundle, String pattern, Object argument);
 
@@ -89,13 +89,13 @@ public interface Language {
 		ResourceBundle resourceBundle, String pattern, Object[] arguments,
 		boolean translateArguments);
 
-	public String get(Locale locale, String key);
-
-	public String get(Locale locale, String key, String defaultValue);
-
 	public String get(HttpServletRequest request, String key);
 
 	public String get(HttpServletRequest request, String key, String defaultValue);
+
+	public String get(Locale locale, String key);
+
+	public String get(Locale locale, String key, String defaultValue);
 
 	public String get(ResourceBundle resourceBundle, String key);
 
@@ -124,13 +124,6 @@ public interface Language {
 
 	public Locale[] getSupportedLocales();
 
-	public String getTimeDescription(Locale locale, long milliseconds);
-
-	public String getTimeDescription(
-		Locale locale, long milliseconds, boolean approximate);
-
-	public String getTimeDescription(Locale locale, Long milliseconds);
-
 	public String getTimeDescription(
 		HttpServletRequest request, long milliseconds);
 
@@ -139,6 +132,13 @@ public interface Language {
 
 	public String getTimeDescription(
 		HttpServletRequest request, Long milliseconds);
+
+	public String getTimeDescription(Locale locale, long milliseconds);
+
+	public String getTimeDescription(
+		Locale locale, long milliseconds, boolean approximate);
+
+	public String getTimeDescription(Locale locale, Long milliseconds);
 
 	public void init();
 

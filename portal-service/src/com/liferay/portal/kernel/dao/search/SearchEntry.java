@@ -21,8 +21,11 @@ import com.liferay.portal.kernel.util.StringPool;
 public interface SearchEntry {
 
 	public static final String DEFAULT_ALIGN = "left";
+
 	public static final int DEFAULT_COLSPAN = 1;
+
 	public static final String DEFAULT_CSS_CLASS = StringPool.BLANK;
+
 	public static final String DEFAULT_VALIGN = "middle";
 
 	public String getAlign();

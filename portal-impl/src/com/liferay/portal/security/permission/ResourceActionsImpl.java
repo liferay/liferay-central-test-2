@@ -135,13 +135,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	@Override
-	public String getAction(Locale locale, String action) {
+	public String getAction(HttpServletRequest request, String action) {
 		String key = getActionNamePrefix() + action;
 
-		String value = LanguageUtil.get(locale, key, null);
+		String value = LanguageUtil.get(request, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = PortletResourceBundles.getString(locale, key);
+			value = PortletResourceBundles.getString(request, key);
 		}
 
 		if (value == null) {
@@ -152,13 +152,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	@Override
-	public String getAction(HttpServletRequest request, String action) {
+	public String getAction(Locale locale, String action) {
 		String key = getActionNamePrefix() + action;
 
-		String value = LanguageUtil.get(request, key, null);
+		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = PortletResourceBundles.getString(request, key);
+			value = PortletResourceBundles.getString(locale, key);
 		}
 
 		if (value == null) {
@@ -231,13 +231,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	@Override
-	public String getModelResource(Locale locale, String name) {
+	public String getModelResource(HttpServletRequest request, String name) {
 		String key = getModelResourceNamePrefix() + name;
 
-		String value = LanguageUtil.get(locale, key, null);
+		String value = LanguageUtil.get(request, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = PortletResourceBundles.getString(locale, key);
+			value = PortletResourceBundles.getString(request, key);
 		}
 
 		if (value == null) {
@@ -248,13 +248,13 @@ public class ResourceActionsImpl implements ResourceActions {
 	}
 
 	@Override
-	public String getModelResource(HttpServletRequest request, String name) {
+	public String getModelResource(Locale locale, String name) {
 		String key = getModelResourceNamePrefix() + name;
 
-		String value = LanguageUtil.get(request, key, null);
+		String value = LanguageUtil.get(locale, key, null);
 
 		if ((value == null) || value.equals(key)) {
-			value = PortletResourceBundles.getString(request, key);
+			value = PortletResourceBundles.getString(locale, key);
 		}
 
 		if (value == null) {
