@@ -129,8 +129,8 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the result of rendering the DDM template with the entries in the
 	 * page context.
 	 *
-	 * @param  request the request under which the template is rendered.
-	 * @param  response the response under which the template is rendered.
+	 * @param  request the request with which the template is rendered.
+	 * @param  response the response with which the template is rendered.
 	 * @param  ddmTemplateId the primary key of the DDM template
 	 * @param  entries the entries that are rendered in the template
 	 * @return the result of rendering the DDM template with the entries in the
@@ -150,8 +150,8 @@ public class PortletDisplayTemplateUtil {
 	 * Returns the result of rendering the DDM template with the entries in the
 	 * page context and template context.
 	 *
-	 * @param  request the request under which the template is rendered.
-	 * @param  response the response under which the template is rendered.
+	 * @param  request the request with which the template is rendered.
+	 * @param  response the response with which the template is rendered.
 	 * @param  ddmTemplateId the primary key of the DDM template
 	 * @param  entries the entries that are rendered in the template
 	 * @param  contextObjects the map of objects defining the context in which
