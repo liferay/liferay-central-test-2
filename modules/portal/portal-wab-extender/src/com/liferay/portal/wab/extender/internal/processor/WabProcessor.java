@@ -246,8 +246,6 @@ public class WabProcessor {
 
 		Attributes attributes = manifest.getMainAttributes();
 
-		// Valid OSGi bundles must contain the header "Bundle-SymbolicName"
-
 		String bundleSymbolicName = GetterUtil.getString(
 			attributes.getValue(Constants.BUNDLE_SYMBOLICNAME));
 
