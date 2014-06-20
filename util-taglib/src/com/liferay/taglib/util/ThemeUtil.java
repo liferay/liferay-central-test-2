@@ -467,9 +467,9 @@ public class ThemeUtil {
 			new PipingServletResponse(response, writer), template);
 
 		template.put(TemplateConstants.WRITER, writer);
+		template.put("pageContext", velocityTaglib.getPageContext());
 		template.put("taglibLiferay", velocityTaglib);
 		template.put("theme", velocityTaglib);
-		template.put("pageContext", velocityTaglib.getPageContext());
 
 		// Merge templates
 
