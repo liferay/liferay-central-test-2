@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.upgrade.UpgradeProcess;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeAsset;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeCalEvent;
+import com.liferay.portal.upgrade.v7_0_0.UpgradeDynamicDataMapping;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeEmailNotificationPreferences;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeExpando;
 import com.liferay.portal.upgrade.v7_0_0.UpgradeJournal;
@@ -46,6 +47,7 @@ public class UpgradeProcess_7_0_0 extends UpgradeProcess {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeAsset.class);
 		upgrade(UpgradeCalEvent.class);
+		upgrade(UpgradeDynamicDataMapping.class);
 		upgrade(UpgradeEmailNotificationPreferences.class);
 		upgrade(UpgradeExpando.class);
 		upgrade(UpgradeLanguagePreferences.class);
