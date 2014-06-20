@@ -171,7 +171,19 @@ public class SocialActivityLocalServiceImpl
 			mirrorActivity.setAssetEntry(assetEntry);
 		}
 
-		addActivityCallback(activity, mirrorActivity);
+		Callable<Void> callable = new Callable<Void>() {
+
+			@Override
+			public Void call() throws Exception {
+				socialActivityLocalService.addActivity(
+					activity, mirrorActivity);
+
+				return null;
+			}
+
+		};
+
+		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
 	}
 
 	/**
@@ -1107,23 +1119,6 @@ public class SocialActivityLocalServiceImpl
 	@Override
 	public int getUserOrganizationsActivitiesCount(long userId) {
 		return socialActivityFinder.countByUserOrganizations(userId);
-	}
-
-	protected void addActivityCallback(
-		final SocialActivity activity, final SocialActivity mirrorActivity) {
-
-		Callable<Void> callable = new Callable<Void>() {
-
-			@Override
-			public Void call() throws Exception {
-				socialActivityLocalService.addActivity(
-					activity, mirrorActivity);
-
-				return null;
-			}
-		};
-
-		TransactionCommitCallbackRegistryUtil.registerCallback(callable);
 	}
 
 	protected boolean isLogActivity(SocialActivity activity) {
