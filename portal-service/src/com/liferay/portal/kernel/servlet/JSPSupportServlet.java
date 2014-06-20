@@ -48,12 +48,12 @@ public class JSPSupportServlet extends HttpServlet {
 
 		@Override
 		public String getServletName() {
-			return JSPSupportServlet.this.getClass().getName();
+			return JSPSupportServlet.class.getName();
 		}
 
 		@Override
 		public ServletContext getServletContext() {
-			return JSPSupportServlet.this._servletContext;
+			return _servletContext;
 		}
 
 		@Override
