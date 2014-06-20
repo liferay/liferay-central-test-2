@@ -54,7 +54,7 @@ public class LiferayIntegrationJUnitTestRunner
 
 	@Override
 	protected Statement classBlock(RunNotifier notifier) {
-		final Statement classBlock = super.classBlock(notifier);
+		final Statement statement = super.classBlock(notifier);
 
 		return new Statement() {
 
@@ -77,7 +77,7 @@ public class LiferayIntegrationJUnitTestRunner
 				_threadLocalsField.set(currentThread, null);
 
 				try {
-					classBlock.evaluate();
+					statement.evaluate();
 				}
 				finally {
 					_inheritableThreadLocalsField.set(
@@ -90,11 +90,11 @@ public class LiferayIntegrationJUnitTestRunner
 	}
 
 	@Override
-	protected Statement methodBlock(FrameworkMethod method) {
-		final Statement methodBlock = super.methodBlock(method);
+	protected Statement methodBlock(FrameworkMethod frameworkMethod) {
+		final Statement statement = super.methodBlock(frameworkMethod);
 
 		if (!TestPropsValues.ASSERT_LOGS) {
-			return methodBlock;
+			return statement;
 		}
 
 		return new Statement() {
@@ -103,7 +103,7 @@ public class LiferayIntegrationJUnitTestRunner
 			public void evaluate() throws Throwable {
 				LogAssertionUtil.enableLogAssertion();
 
-				methodBlock.evaluate();
+				statement.evaluate();
 			}
 
 		};

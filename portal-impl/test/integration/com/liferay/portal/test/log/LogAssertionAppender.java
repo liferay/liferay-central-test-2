@@ -43,7 +43,7 @@ public class LogAssertionAppender extends AppenderSkeleton {
 
 		if (level.equals(Level.ERROR) || level.equals(Level.FATAL)) {
 			Assert.fail(
-				"Method failed due to logged error : " +
+				"Test failed due to logged error: " +
 					loggingEvent.getMessage());
 		}
 	}

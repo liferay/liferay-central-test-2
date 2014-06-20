@@ -32,6 +32,7 @@ public class LogAssertionUtil {
 		Logger logger = Logger.getLogger(StringPool.BLANK);
 
 		logger.removeHandler(LogAssertionHandler.INSTANCE);
+
 		logger.addHandler(LogAssertionHandler.INSTANCE);
 	}
 
@@ -40,6 +41,7 @@ public class LogAssertionUtil {
 			org.apache.log4j.Logger.getRootLogger();
 
 		logger.removeAppender(LogAssertionAppender.INSTANCE);
+
 		logger.addAppender(LogAssertionAppender.INSTANCE);
 	}
 
