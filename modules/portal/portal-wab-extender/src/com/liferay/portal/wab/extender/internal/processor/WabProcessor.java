@@ -187,13 +187,13 @@ public class WabProcessor {
 
 		Manifest manifest = new Manifest();
 
-		FileInputStream fis = new FileInputStream(manifestFile);
+		InputStream inputStream = new FileInputStream(manifestFile);
 
 		try {
-			manifest.read(fis);
+			manifest.read(inputStream);
 		}
 		finally {
-			fis.close();
+			inputStream.close();
 		}
 
 		return manifest;
