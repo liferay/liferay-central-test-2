@@ -28,7 +28,7 @@ public class JSPSupportServlet extends HttpServlet {
 	public JSPSupportServlet(ServletContext servletContext) {
 		_servletContext = servletContext;
 
-		_servletConfig = new InnerServletConfig();
+		_servletConfig = new JSPSupportServletConfig();
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class JSPSupportServlet extends HttpServlet {
 	private ServletConfig _servletConfig;
 	private ServletContext _servletContext;
 
-	private class InnerServletConfig implements ServletConfig {
+	private class JSPSupportServletConfig implements ServletConfig {
 
 		@Override
 		public String getServletName() {
