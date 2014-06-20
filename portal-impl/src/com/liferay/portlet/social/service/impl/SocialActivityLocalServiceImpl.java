@@ -118,7 +118,7 @@ public class SocialActivityLocalServiceImpl
 			}
 		}
 
-		SocialActivity activity = socialActivityPersistence.create(0);
+		final SocialActivity activity = socialActivityPersistence.create(0);
 
 		activity.setGroupId(groupId);
 		activity.setCompanyId(user.getCompanyId());
@@ -171,12 +171,14 @@ public class SocialActivityLocalServiceImpl
 			mirrorActivity.setAssetEntry(assetEntry);
 		}
 
+		final SocialActivity finalMirrorActivity = mirrorActivity;
+
 		Callable<Void> callable = new Callable<Void>() {
 
 			@Override
 			public Void call() throws Exception {
 				socialActivityLocalService.addActivity(
-					activity, mirrorActivity);
+					activity, finalMirrorActivity);
 
 				return null;
 			}
