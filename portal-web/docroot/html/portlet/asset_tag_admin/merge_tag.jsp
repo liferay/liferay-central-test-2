@@ -48,6 +48,7 @@ long[] mergeTagIds = StringUtil.split(ParamUtil.getString(renderRequest, "mergeT
 
 				<div class="merge-tag" data-tag-id="<%= tag.getTagId() %>" data-tag-name="<%= tag.getName() %>">
 					<span class="merge-tag-name"><%= tag.getName() %></span>
+
 					<i class="icon-remove-sign"></i>
 				</div>
 
@@ -60,7 +61,7 @@ long[] mergeTagIds = StringUtil.split(ParamUtil.getString(renderRequest, "mergeT
 
 	<div class="target-tag-container">
 		<span class="target-tag-label">
-			<liferay-ui:message key="with-this-one" />
+			<liferay-ui:message key="into-this-tag" />
 		</span>
 
 		<span class="target-tag-msg">
