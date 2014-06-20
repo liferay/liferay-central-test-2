@@ -424,11 +424,10 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 			HttpServletResponse response)
 		throws Exception {
 
-		ServletContext servletContext = request.getServletContext();
-
 		// FreeMarker servlet application
 
-		GenericServlet genericServlet = new JSPSupportServlet(servletContext);
+		GenericServlet genericServlet = new JSPSupportServlet(
+			request.getServletContext());
 
 		ServletContextHashModel servletContextHashModel =
 			new ServletContextHashModel(
@@ -450,7 +449,8 @@ public class PortletDisplayTemplateImpl implements PortletDisplayTemplate {
 		// Taglib Liferay hash
 
 		TemplateHashModel taglibLiferayHash =
-			FreeMarkerTaglibFactoryUtil.createTaglibFactory(servletContext);
+			FreeMarkerTaglibFactoryUtil.createTaglibFactory(
+				request.getServletContext());
 
 		contextObjects.put(
 			PortletDisplayTemplateConstants.TAGLIB_LIFERAY_HASH,

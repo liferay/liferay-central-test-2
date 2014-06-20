@@ -27,7 +27,6 @@ import java.io.Writer;
 
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspFactory;
@@ -43,13 +42,11 @@ public class CustomizationSettingsProcessor implements ColumnProcessor {
 	public CustomizationSettingsProcessor(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		ServletContext servletContext = request.getServletContext();
-
 		JspFactory jspFactory = JspFactory.getDefaultFactory();
 
 		_pageContext = jspFactory.getPageContext(
-			new JSPSupportServlet(servletContext), request, response, null,
-			false, 0, false);
+			new JSPSupportServlet(request.getServletContext()), request,
+			response, null, false, 0, false);
 
 		_writer = _pageContext.getOut();
 

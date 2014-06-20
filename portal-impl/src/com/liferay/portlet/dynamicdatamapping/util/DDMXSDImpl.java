@@ -75,7 +75,6 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.servlet.GenericServlet;
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -934,16 +933,16 @@ public class DDMXSDImpl implements DDMXSD {
 
 		// Portal JSP tag library factory
 
-		ServletContext servletContext = request.getServletContext();
-
 		TemplateHashModel portalTaglib =
-			FreeMarkerTaglibFactoryUtil.createTaglibFactory(servletContext);
+			FreeMarkerTaglibFactoryUtil.createTaglibFactory(
+				request.getServletContext());
 
 		template.put("PortalJspTagLibs", portalTaglib);
 
 		// FreeMarker JSP tag library support
 
-		GenericServlet genericServlet = new JSPSupportServlet(servletContext);
+		GenericServlet genericServlet = new JSPSupportServlet(
+			request.getServletContext());
 
 		ServletContextHashModel servletContextHashModel =
 			new ServletContextHashModel(
