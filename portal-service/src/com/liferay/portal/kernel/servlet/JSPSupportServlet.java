@@ -53,7 +53,7 @@ public class JSPSupportServlet extends HttpServlet {
 
 		@Override
 		public Enumeration<String> getInitParameterNames() {
-			return Collections.emptyEnumeration();
+			return Collections.enumeration(Collections.<String>emptyList());
 		}
 
 		@Override
