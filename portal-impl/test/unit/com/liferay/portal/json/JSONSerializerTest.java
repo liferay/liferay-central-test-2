@@ -63,7 +63,7 @@ public class JSONSerializerTest {
 
 		String json = jsonSerializer.serialize(ddmStructure);
 
-		Assert.assertTrue(json.contains("\"xsd\":\"value\""));
+		Assert.assertTrue(json.contains("\"definition\":\"value\""));
 	}
 
 	@Test
