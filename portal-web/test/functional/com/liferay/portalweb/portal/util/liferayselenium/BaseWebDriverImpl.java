@@ -148,7 +148,9 @@ public abstract class BaseWebDriverImpl
 			return;
 		}
 
-		if (!getLocation().contains("localhost")) {
+		String location = getLocation();
+
+		if (!location.contains("localhost")) {
 			return;
 		}
 
