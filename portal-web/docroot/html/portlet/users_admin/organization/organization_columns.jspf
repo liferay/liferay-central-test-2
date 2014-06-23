@@ -28,7 +28,7 @@
 	int organizationUserCount = UserLocalServiceUtil.searchCount(company.getCompanyId(), null, 0, userParams);
 	%>
 
-	<aui:a href="<%= (rowURL != null) ? rowURL.toString() : null %>"><strong><%= curOrganization.getName() %></strong></aui:a>
+	<aui:a href="<%= String.valueOf(rowURL) %>"><strong><%= curOrganization.getName() %></strong></aui:a>
 
 	<c:if test="<%= (suborganizationsCount > 0) || (organizationUserCount > 0) %>">
 		<br />
