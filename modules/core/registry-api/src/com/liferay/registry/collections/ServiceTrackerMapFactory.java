@@ -24,9 +24,10 @@ import java.util.List;
  */
 public class ServiceTrackerMapFactory {
 
-	public static <K, S> ServiceTrackerMap<K, List<S>> createListServiceTrackerMap(
-		Class<S> clazz, String filter,
-		ServiceReferenceMapper<K> serviceReferenceMapper) {
+	public static <K, S> ServiceTrackerMap<K, List<S>>
+		createListServiceTrackerMap(
+			Class<S> clazz, String filter,
+			ServiceReferenceMapper<K> serviceReferenceMapper) {
 
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
 			clazz, filter, serviceReferenceMapper,
@@ -34,10 +35,11 @@ public class ServiceTrackerMapFactory {
 				Comparators.<S>fromProperty("service.ranking")));
 	}
 
-	public static <K, S> ServiceTrackerMap<K, List<S>> createListServiceTrackerMap(
-		Class<S> clazz, String filter,
-		ServiceReferenceMapper<K> serviceReferenceMapper,
-		Comparator<ServiceReference<S>> comparator) {
+	public static <K, S> ServiceTrackerMap<K, List<S>>
+		createListServiceTrackerMap(
+			Class<S> clazz, String filter,
+			ServiceReferenceMapper<K> serviceReferenceMapper,
+			Comparator<ServiceReference<S>> comparator) {
 
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
 			clazz, filter, serviceReferenceMapper,
@@ -45,7 +47,8 @@ public class ServiceTrackerMapFactory {
 	}
 
 	public static <S> ServiceTrackerMap<String, List<S>>
-		createServiceTrackerListMapFromProperty(Class<S> clazz, String property) {
+		createServiceTrackerListMapFromProperty(
+			Class<S> clazz, String property) {
 
 		return new ServiceTrackerMapImpl<String, S, List<S>>(
 			clazz,"(" + property + "=*)",
@@ -74,8 +77,9 @@ public class ServiceTrackerMapFactory {
 			new ObjectServiceTrackerBucketFactory<S>(comparator));
 	}
 
-	public static <S> ServiceTrackerMap<String, S> createServiceTrackerObjectMapFromProperty(
-		Class<S> clazz, String property) {
+	public static <S> ServiceTrackerMap<String, S>
+		createServiceTrackerObjectMapFromProperty(
+			Class<S> clazz, String property) {
 
 		return new ServiceTrackerMapImpl<String, S, S>(
 			clazz, "(" + property + "=*)",
