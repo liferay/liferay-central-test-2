@@ -418,48 +418,48 @@ public class WabProcessor {
 
 		String content = FileUtil.read(file);
 
-		int pos = -1;
-		int startPos = content.length();
+		int contentX = -1;
+		int contentY = content.length();
 
-		Set<String> packages = new HashSet<String>();
+		Set<String> packageNames = new HashSet<String>();
 
 		while (true) {
-			pos = content.lastIndexOf("<%@", startPos);
+			contentX = content.lastIndexOf("<%@", contentY);
 
-			if (pos == -1) {
+			if (contentX == -1) {
 				break;
 			}
 
-			startPos = pos;
+			contentY = contentX;
 
-			int x = content.indexOf("import=\"", startPos);
-			int y = -1;
+			int importX = content.indexOf("import=\"", contentY);
+			int importY = -1;
 
-			if (x != -1) {
-				x = x + "import=\"".length();
-				y = content.indexOf("\"", x);
+			if (importX != -1) {
+				importX = importX + "import=\"".length();
+				importY = content.indexOf("\"", importX);
 			}
 
-			if ((x != -1) && (y != -1)) {
-				String s = content.substring(x, y);
+			if ((importX != -1) && (importY != -1)) {
+				String s = content.substring(importX, importY);
 
-				packages.addAll(
+				packageNames.addAll(
 					processClass(
 						dependencyVisitor, s.replace('.', '/') + ".class",
 						source));
 			}
 
-			startPos -= 3;
+			contentY -= 3;
 		}
 
 		Set<String> globals = dependencyVisitor.getGlobals();
 
 		for (String global : globals) {
-			packages.add(
+			packageNames.add(
 				global.replaceAll(StringPool.SLASH, StringPool.PERIOD));
 		}
 
-		return packages;
+		return packageNames;
 	}
 
 	protected Set<String> processReferencedDependencies(
