@@ -26,64 +26,64 @@ public class ServiceTrackerMapFactory {
 
 	public static <K, S> ServiceTrackerMap<K, List<S>>
 		createListServiceTrackerMap(
-			Class<S> clazz, String filter,
+			Class<S> clazz, String filterString,
 			ServiceReferenceMapper<K> serviceReferenceMapper) {
 
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
-			clazz, filter, serviceReferenceMapper,
+			clazz, filterString, serviceReferenceMapper,
 			new ListServiceTrackerBucketFactory<S>(
 				Comparators.<S>fromProperty("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, List<S>>
 		createListServiceTrackerMap(
-			Class<S> clazz, String filter,
+			Class<S> clazz, String filterString,
 			ServiceReferenceMapper<K> serviceReferenceMapper,
 			Comparator<ServiceReference<S>> comparator) {
 
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
-			clazz, filter, serviceReferenceMapper,
+			clazz, filterString, serviceReferenceMapper,
 				new ListServiceTrackerBucketFactory<S>(comparator));
 	}
 
 	public static <S> ServiceTrackerMap<String, List<S>>
 		createServiceTrackerListMapFromProperty(
-			Class<S> clazz, String property) {
+			Class<S> clazz, String propertyKey) {
 
 		return new ServiceTrackerMapImpl<String, S, List<S>>(
-			clazz,"(" + property + "=*)",
-			Mappers.<String>fromProperty(property),
+			clazz,"(" + propertyKey + "=*)",
+			Mappers.<String>fromProperty(propertyKey),
 			new ListServiceTrackerBucketFactory<S>(
 				Comparators.<S>fromProperty("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
-		Class<S> clazz, String filter,
+		Class<S> clazz, String filterString,
 		ServiceReferenceMapper<K> serviceReferenceMapper) {
 
 		return new ServiceTrackerMapImpl<K, S, S>(
-			clazz, filter, serviceReferenceMapper,
+			clazz, filterString, serviceReferenceMapper,
 			new ObjectServiceTrackerBucketFactory<S>(
 				Comparators.<S>fromProperty("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
-		Class<S> clazz, String filter,
+		Class<S> clazz, String filterString,
 		ServiceReferenceMapper<K> serviceReferenceMapper,
 		Comparator<ServiceReference<S>> comparator) {
 
 		return new ServiceTrackerMapImpl<K, S, S>(
-			clazz, filter, serviceReferenceMapper,
+			clazz, filterString, serviceReferenceMapper,
 			new ObjectServiceTrackerBucketFactory<S>(comparator));
 	}
 
 	public static <S> ServiceTrackerMap<String, S>
 		createServiceTrackerObjectMapFromProperty(
-			Class<S> clazz, String property) {
+			Class<S> clazz, String propertyKey) {
 
 		return new ServiceTrackerMapImpl<String, S, S>(
-			clazz, "(" + property + "=*)",
-			Mappers.<String>fromProperty(property),
+			clazz, "(" + propertyKey + "=*)",
+			Mappers.<String>fromProperty(propertyKey),
 			new ObjectServiceTrackerBucketFactory<S>(
 				Comparators.<S>fromProperty("service.ranking")));
 	}
@@ -91,7 +91,7 @@ public class ServiceTrackerMapFactory {
 	public static class Comparators {
 
 		public static <T> Comparator<ServiceReference<T>> fromProperty(
-			final String property) {
+			final String propertyKey) {
 
 			return new Comparator<ServiceReference<T>>() {
 
@@ -113,9 +113,9 @@ public class ServiceTrackerMapFactory {
 
 					try {
 						Comparable property1 = (Comparable)sr1.getProperty(
-							property);
+							propertyKey);
 
-						Object property2 = sr2.getProperty(property);
+						Object property2 = sr2.getProperty(propertyKey);
 
 						if (property1 == null) {
 							if (property2 != null) {
