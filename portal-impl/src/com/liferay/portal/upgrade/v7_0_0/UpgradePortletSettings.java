@@ -112,7 +112,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 						if (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) {
 							long plid = portletPreferencesRow._plid;
 
-							long groupId = getGroupIdFromPlid(plid);
+							long groupId = getGroupId(plid);
 
 							portletPreferencesRow._ownerId = groupId;
 							portletPreferencesRow._plid = 0;
@@ -188,7 +188,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			WikiSettings.ALL_KEYS);
 	}
 
-	protected long getGroupIdFromPlid(long plid) throws SQLException {
+	protected long getGroupId(long plid) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -196,9 +196,8 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			String sql = "select groupId from Layout where plid = ?";
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"select groupId from Layout where plid = ?");
 
 			ps.setLong(1, plid);
 
