@@ -338,15 +338,10 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			StringBundler sb = new StringBundler(4);
-
-			sb.append("select portletPreferencesId, ownerId, ownerType, ");
-			sb.append("plid, portletId, preferences from PortletPreferences ");
-			sb.append("where ownerType = ? and portletId = ?");
-
-			String sql = sb.toString();
-
-			ps = con.prepareStatement(sql);
+			ps = con.prepareStatement(
+				"select portletPreferencesId, ownerId, ownerType, plid, " +
+					"portletId, preferences from PortletPreferences where " +
+						"ownerType = ? and portletId = ?");
 
 			ps.setInt(1, ownerType);
 			ps.setString(2, portletId);
