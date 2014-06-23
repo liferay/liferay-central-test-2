@@ -333,7 +333,11 @@ public class WabProcessor {
 			String[] interfaceNames = classReader.getInterfaces();
 
 			if ((interfaceNames != null) && (interfaceNames.length > 0)) {
-				packageNames.addAll(processInterfaces(source, interfaceNames));
+				for (String interfaceName : interfaceNames) {
+					packageNames.addAll(
+						processReferencedDependencies(
+							source, getFileName(interfaceName)));
+				}
 			}
 		}
 		catch (Exception e) {
@@ -391,20 +395,6 @@ public class WabProcessor {
 				_importPackageNames.addAll(processJSPDependencies(file));
 			}
 		}
-	}
-
-	protected Set<String> processInterfaces(
-		Source source, String[] interfaceNames) {
-
-		Set<String> packageNames = new HashSet<String>();
-
-		for (String interfaceName : interfaceNames) {
-			packageNames.addAll(
-				processReferencedDependencies(
-					source, getFileName(interfaceName)));
-		}
-
-		return packageNames;
 	}
 	
 	protected String getFileName(String className) {
