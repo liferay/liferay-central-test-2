@@ -22,6 +22,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 FileVersion fileVersion = (FileVersion)row.getObject();
+
 FileEntry fileEntry = fileVersion.getFileEntry();
 %>
 

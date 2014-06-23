@@ -506,16 +506,16 @@ DLActionsDisplayContext dlActionsDisplayContext = dlFileEntryActionsDisplayConte
 									status = WorkflowConstants.STATUS_ANY;
 								}
 
-								List fileEntryVersions = fileEntry.getFileVersions(status);
+								List fileVersions = fileEntry.getFileVersions(status);
 								%>
 
 								<liferay-ui:search-container
 									iteratorURL="<%= viewFileEntryURL %>"
 									rowChecker="<%= rowChecker %>"
-									total="<%= fileEntryVersions.size() %>"
+									total="<%= fileVersions.size() %>"
 								>
 									<liferay-ui:search-container-results
-										results="<%= ListUtil.subList(fileEntryVersions, searchContainer.getStart(), searchContainer.getEnd()) %>"
+										results="<%= ListUtil.subList(fileVersions, searchContainer.getStart(), searchContainer.getEnd()) %>"
 									/>
 
 									<liferay-ui:search-container-row
@@ -552,8 +552,8 @@ DLActionsDisplayContext dlActionsDisplayContext = dlFileEntryActionsDisplayConte
 								</liferay-ui:search-container>
 
 								<%
-								if (comparableFileEntry && !fileEntryVersions.isEmpty()) {
-									FileVersion curFileVersion = (FileVersion)fileEntryVersions.get(0);
+								if (comparableFileEntry && !fileVersions.isEmpty()) {
+									FileVersion curFileVersion = (FileVersion)fileVersions.get(0);
 								%>
 
 									<portlet:actionURL var="compareVersionsURL">
