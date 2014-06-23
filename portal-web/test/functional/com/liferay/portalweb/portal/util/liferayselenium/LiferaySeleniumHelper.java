@@ -522,7 +522,7 @@ public class LiferaySeleniumHelper {
 		BufferedReader bufferedReader = new BufferedReader(
 			new InputStreamReader(inputStream));
 
-		String line;
+		String line = null;
 
 		while ((line = bufferedReader.readLine()) != null) {
 			Pattern pattern = Pattern.compile(value);
