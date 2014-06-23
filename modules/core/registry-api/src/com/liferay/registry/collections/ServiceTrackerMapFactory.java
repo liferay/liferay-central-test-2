@@ -52,7 +52,7 @@ public class ServiceTrackerMapFactory {
 
 		return new ServiceTrackerMapImpl<String, S, List<S>>(
 			clazz,"(" + propertyKey + "=*)",
-			Mappers.<String>fromProperty(propertyKey),
+			new PropertyKeyServiceReferenceMapper<String>(propertyKey),
 			new ListServiceTrackerBucketFactory<S>(
 				new ServiceReferenceComparator<S>("service.ranking")));
 	}
@@ -83,7 +83,7 @@ public class ServiceTrackerMapFactory {
 
 		return new ServiceTrackerMapImpl<String, S, S>(
 			clazz, "(" + propertyKey + "=*)",
-			Mappers.<String>fromProperty(propertyKey),
+			new PropertyKeyServiceReferenceMapper<String>(propertyKey),
 			new ObjectServiceTrackerBucketFactory<S>(
 				new ServiceReferenceComparator<S>("service.ranking")));
 	}
@@ -137,26 +137,26 @@ public class ServiceTrackerMapFactory {
 		private String _propertyKey;
 		
 	}
+	
+	private static class PropertyKeyServiceReferenceMapper <T>
+		implements ServiceReferenceMapper<T> {
 
-	public static class Mappers {
-
-		public static <T> ServiceReferenceMapper<T> fromProperty(
-			final String property) {
-
-			return new ServiceReferenceMapper<T>() {
-
-				@Override
-				public void map(
-					ServiceReference<?> serviceReference, Emitter<T> emitter) {
-
-					T value = (T)serviceReference.getProperty(property);
-
-					if (value != null) {
-						emitter.emit(value);
-					}
-				}
-			};
+		public PropertyKeyServiceReferenceMapper(String propertyKey) {
+			_propertyKey = propertyKey;
 		}
+
+		@Override
+		public void map(
+			ServiceReference<?> serviceReference, Emitter<T> emitter) {
+
+			T propertyValue = (T)serviceReference.getProperty(_propertyKey);
+
+			if (propertyValue != null) {
+				emitter.emit(propertyValue);
+			}
+		}
+
+		private String _propertyKey;
 
 	}
 
