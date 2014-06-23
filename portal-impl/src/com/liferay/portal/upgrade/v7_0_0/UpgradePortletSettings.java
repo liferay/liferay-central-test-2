@@ -193,6 +193,8 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
+		long groupId = 0;
+
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
@@ -204,14 +206,14 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				return rs.getLong("groupId");
+				groupId = rs.getLong("groupId");
 			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		return 0;
+		return groupId;
 	}
 
 	protected void resetPortletPreferencesValues(
