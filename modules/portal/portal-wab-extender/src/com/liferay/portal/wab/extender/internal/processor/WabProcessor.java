@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.MapUtil;
@@ -301,44 +302,47 @@ public class WabProcessor {
 			return Collections.emptySet();
 		}
 
-		Set<String> packages = new HashSet<String>();
+		Set<String> packageNames = new HashSet<String>();
 
 		try {
 			ClassReader classReader = new ClassReader(inputStream);
 
 			classReader.accept(dependencyVisitor, 0);
 
-			Set<String> pkgs = dependencyVisitor.getPackages();
+			for (String packageName : dependencyVisitor.getPackages()) {
+				packageName = packageName.replaceAll(
+					StringPool.SLASH, StringPool.PERIOD);
 
-			for (String pkg : pkgs) {
-				pkg = pkg.replaceAll(StringPool.SLASH, StringPool.PERIOD);
+				if (packageName.startsWith("com.sun.") ||
+					packageName.startsWith("sun.")) {
 
-				if (pkg.startsWith("com.sun.") || pkg.startsWith("sun.")) {
 					continue;
 				}
 
-				packages.add(pkg);
+				packageNames.add(packageName);
 			}
 
 			String superName = classReader.getSuperName();
 
 			if (superName != null) {
-				packages.addAll(
+				packageNames.addAll(
 					processReferencedDependencies(
-						superName.replace('.', '/') + ".class", source));
+						superName.replace(CharPool.PERIOD, CharPool.SLASH) +
+							".class",
+						source));
 			}
 
-			String[] interfaces = classReader.getInterfaces();
+			String[] interfaceNames = classReader.getInterfaces();
 
-			if ((interfaces != null) && (interfaces.length > 0)) {
-				packages.addAll(processInterfaces(interfaces, source));
+			if ((interfaceNames != null) && (interfaceNames.length > 0)) {
+				packageNames.addAll(processInterfaces(interfaceNames, source));
 			}
 		}
 		catch (Exception e) {
-			_log.error("Error processing class " + className, e);
+			_log.error("Unable to process class " + className, e);
 		}
 
-		return packages;
+		return packageNames;
 	}
 
 	protected void processFiles(
@@ -386,23 +390,25 @@ public class WabProcessor {
 				classPath.put(path, file);
 			}
 			else if (path.endsWith(".jsp") || path.endsWith(".jspf")) {
-				_importPackages.addAll(processJSPDependencies(file));
+				_importPackageNames.addAll(processJSPDependencies(file));
 			}
 		}
 	}
 
 	protected Set<String> processInterfaces(
-		String[] interfaces, Source source) {
+		String[] interfaceNames, Source source) {
 
-		Set<String> packages = new HashSet<String>();
+		Set<String> packageNames = new HashSet<String>();
 
-		for (String interfaceName : interfaces) {
-			packages.addAll(
+		for (String interfaceName : interfaceNames) {
+			packageNames.addAll(
 				processReferencedDependencies(
-					interfaceName.replace('.', '/') + ".class", source));
+					interfaceName.replace(CharPool.PERIOD, CharPool.SLASH) +
+						".class",
+					source));
 		}
 
-		return packages;
+		return packageNames;
 	}
 
 	protected Set<String> processJSPDependencies(File file) throws IOException {
@@ -461,17 +467,17 @@ public class WabProcessor {
 
 		DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
-		Set<String> packages = processClass(
+		Set<String> packageNames = processClass(
 			dependencyVisitor, className, source);
 
 		Set<String> globals = dependencyVisitor.getGlobals();
 
 		for (String global : globals) {
-			packages.add(
+			packageNames.add(
 				global.replaceAll(StringPool.SLASH, StringPool.PERIOD));
 		}
 
-		return packages;
+		return packageNames;
 	}
 
 	protected void processServicePackagePath(File file) {
@@ -503,7 +509,7 @@ public class WabProcessor {
 	private String _context;
 	private File _file;
 	private Set<String> _ignoredResources = new HashSet<String>();
-	private Set<String> _importPackages = new HashSet<String>();
+	private Set<String> _importPackageNames = new HashSet<String>();
 	private File _manifestFile;
 	private Map<String, String[]> _parameters;
 	private File _pluginDir;
