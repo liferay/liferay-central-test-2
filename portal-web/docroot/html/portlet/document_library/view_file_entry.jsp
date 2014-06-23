@@ -534,9 +534,8 @@ DLActionsDisplayContext dlActionsDisplayContext = dlFileEntryActionsDisplayConte
 
 										<liferay-ui:search-container-column-text
 											name="size"
-										>
-											<%= (TextFormatter.formatStorageSize(curFileVersion.getSize(), locale)) %>
-										</liferay-ui:search-container-column-text>
+											value="<%= (TextFormatter.formatStorageSize(curFileVersion.getSize(), locale)) %>"
+										/>
 
 										<c:if test="<%= showNonApprovedDocuments && !portletId.equals(PortletKeys.TRASH) %>">
 											<liferay-ui:search-container-column-status property="status" />
@@ -547,7 +546,6 @@ DLActionsDisplayContext dlActionsDisplayContext = dlFileEntryActionsDisplayConte
 											cssClass="entry-action"
 											path="/html/portlet/document_library/file_entry_history_action.jsp"
 										/>
-
 									</liferay-ui:search-container-row>
 
 									<liferay-ui:search-iterator />
