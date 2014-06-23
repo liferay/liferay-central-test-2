@@ -32,7 +32,7 @@ public class ServiceTrackerMapFactory {
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
 			clazz, filterString, serviceReferenceMapper,
 			new ListServiceTrackerBucketFactory<S>(
-				new ServiceReferenceComparator<S>("service.ranking")));
+				new PropertyServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, List<S>>
@@ -52,9 +52,9 @@ public class ServiceTrackerMapFactory {
 
 		return new ServiceTrackerMapImpl<String, S, List<S>>(
 			clazz,"(" + propertyKey + "=*)",
-			new PropertyKeyServiceReferenceMapper<String>(propertyKey),
+			new PropertyServiceReferenceMapper<String>(propertyKey),
 			new ListServiceTrackerBucketFactory<S>(
-				new ServiceReferenceComparator<S>("service.ranking")));
+				new PropertyServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
@@ -64,7 +64,7 @@ public class ServiceTrackerMapFactory {
 		return new ServiceTrackerMapImpl<K, S, S>(
 			clazz, filterString, serviceReferenceMapper,
 			new ObjectServiceTrackerBucketFactory<S>(
-				new ServiceReferenceComparator<S>("service.ranking")));
+				new PropertyServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
@@ -83,15 +83,15 @@ public class ServiceTrackerMapFactory {
 
 		return new ServiceTrackerMapImpl<String, S, S>(
 			clazz, "(" + propertyKey + "=*)",
-			new PropertyKeyServiceReferenceMapper<String>(propertyKey),
+			new PropertyServiceReferenceMapper<String>(propertyKey),
 			new ObjectServiceTrackerBucketFactory<S>(
-				new ServiceReferenceComparator<S>("service.ranking")));
+				new PropertyServiceReferenceComparator<S>("service.ranking")));
 	}
 	
-	private static class ServiceReferenceComparator <T>
+	private static class PropertyServiceReferenceComparator <T>
 		implements Comparator<ServiceReference<T>> {
 	
-		public ServiceReferenceComparator(String propertyKey) {
+		public PropertyServiceReferenceComparator(String propertyKey) {
 			_propertyKey = propertyKey;
 		}
 
@@ -138,10 +138,10 @@ public class ServiceTrackerMapFactory {
 		
 	}
 	
-	private static class PropertyKeyServiceReferenceMapper <T>
+	private static class PropertyServiceReferenceMapper <T>
 		implements ServiceReferenceMapper<T> {
 
-		public PropertyKeyServiceReferenceMapper(String propertyKey) {
+		public PropertyServiceReferenceMapper(String propertyKey) {
 			_propertyKey = propertyKey;
 		}
 
