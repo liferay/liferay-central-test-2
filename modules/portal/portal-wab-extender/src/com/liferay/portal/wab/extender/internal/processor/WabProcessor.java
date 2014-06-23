@@ -289,8 +289,7 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processClass(
-		Source source, DependencyVisitor dependencyVisitor,
-		String className) {
+		Source source, DependencyVisitor dependencyVisitor, String className) {
 
 		if (className.startsWith("java/")) {
 			return Collections.emptySet();
@@ -396,7 +395,7 @@ public class WabProcessor {
 			}
 		}
 	}
-	
+
 	protected String getFileName(String className) {
 		return className.replace(CharPool.PERIOD, CharPool.SLASH) + ".class";
 	}
