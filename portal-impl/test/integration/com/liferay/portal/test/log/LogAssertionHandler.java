@@ -39,7 +39,7 @@ public class LogAssertionHandler extends Handler {
 		Level level = logRecord.getLevel();
 
 		if (level.equals(Level.SEVERE)) {
-			ConcurrentAssertUtil.caughtError(
+			ConcurrentAssertUtil.caughtFailure(
 				"Test failed due to logged error: " +
 					logRecord.getMessage());
 		}

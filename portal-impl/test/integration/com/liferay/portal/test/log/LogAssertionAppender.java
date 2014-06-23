@@ -40,7 +40,7 @@ public class LogAssertionAppender extends AppenderSkeleton {
 		Level level = loggingEvent.getLevel();
 
 		if (level.equals(Level.ERROR) || level.equals(Level.FATAL)) {
-			ConcurrentAssertUtil.caughtError(
+			ConcurrentAssertUtil.caughtFailure(
 				"Test failed due to logged error: " +
 					loggingEvent.getMessage());
 		}
