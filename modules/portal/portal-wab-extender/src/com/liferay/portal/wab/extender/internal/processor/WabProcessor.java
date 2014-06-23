@@ -289,8 +289,8 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processClass(
-		DependencyVisitor dependencyVisitor, String className,
-		Source source) {
+		Source source, DependencyVisitor dependencyVisitor,
+		String className) {
 
 		if (className.startsWith("java/")) {
 			return Collections.emptySet();
@@ -327,15 +327,15 @@ public class WabProcessor {
 			if (superName != null) {
 				packageNames.addAll(
 					processReferencedDependencies(
+						source,
 						superName.replace(CharPool.PERIOD, CharPool.SLASH) +
-							".class",
-						source));
+							".class"));
 			}
 
 			String[] interfaceNames = classReader.getInterfaces();
 
 			if ((interfaceNames != null) && (interfaceNames.length > 0)) {
-				packageNames.addAll(processInterfaces(interfaceNames, source));
+				packageNames.addAll(processInterfaces(source, interfaceNames));
 			}
 		}
 		catch (Exception e) {
@@ -396,25 +396,25 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processInterfaces(
-		String[] interfaceNames, Source source) {
+		Source source, String[] interfaceNames) {
 
 		Set<String> packageNames = new HashSet<String>();
 
 		for (String interfaceName : interfaceNames) {
 			packageNames.addAll(
 				processReferencedDependencies(
+					source,
 					interfaceName.replace(CharPool.PERIOD, CharPool.SLASH) +
-						".class",
-					source));
+						".class"));
 		}
 
 		return packageNames;
 	}
 
 	protected Set<String> processJSPDependencies(File file) throws IOException {
-		DependencyVisitor dependencyVisitor = new DependencyVisitor();
-
 		Source source = new ClassLoaderSource(_classLoader);
+
+		DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
 		String content = FileUtil.read(file);
 
@@ -445,8 +445,8 @@ public class WabProcessor {
 
 				packageNames.addAll(
 					processClass(
-						dependencyVisitor, s.replace('.', '/') + ".class",
-						source));
+						source, dependencyVisitor,
+						s.replace(CharPool.PERIOD, CharPool.SLASH) + ".class"));
 			}
 
 			contentY -= 3;
@@ -463,12 +463,12 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processReferencedDependencies(
-		String className, Source source) {
+		Source source, String className) {
 
 		DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
 		Set<String> packageNames = processClass(
-			dependencyVisitor, className, source);
+			source, dependencyVisitor, className);
 
 		Set<String> globals = dependencyVisitor.getGlobals();
 
