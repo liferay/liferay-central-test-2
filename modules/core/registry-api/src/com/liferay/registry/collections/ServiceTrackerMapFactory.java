@@ -97,39 +97,41 @@ public class ServiceTrackerMapFactory {
 
 		@Override
 		public int compare(
-			ServiceReference<T> sr1, ServiceReference<T> sr2) {
+			ServiceReference<T> serviceReference1,
+			ServiceReference<T> serviceReference2) {
 
-			if (sr1 == null) {
-				if (sr2 == null) {
+			if (serviceReference1 == null) {
+				if (serviceReference2 == null) {
 					return 0;
 				}
 				else {
 					return -1;
 				}
 			}
-			else if (sr2 == null) {
+			else if (serviceReference2 == null) {
 				return 1;
 			}
-
-			try {
-				Comparable property1 = (Comparable)sr1.getProperty(
-					_propertyKey);
-
-				Object property2 = sr2.getProperty(_propertyKey);
-
-				if (property1 == null) {
-					if (property2 != null) {
-						return -1;
-					}
-
-					return -(sr1.compareTo(sr2));
-				}
-
-				return -(property1.compareTo(property2));
-			}
-			catch (ClassCastException cce) {
+			
+			Object propertyValue1 = serviceReference1.getProperty(_propertyKey);
+			
+			if (!(propertyValue1 instanceof Comparable)) {
 				return 0;
 			}
+			
+			Comparable<Object> propertyValueComparable1 =
+				(Comparable<Object>)propertyValue1;
+
+			Object propertyValue2 = serviceReference2.getProperty(_propertyKey);
+
+			if (propertyValue1 == null) {
+				if (propertyValue2 != null) {
+					return -1;
+				}
+
+				return -(serviceReference1.compareTo(serviceReference2));
+			}
+
+			return -(propertyValueComparable1.compareTo(propertyValue2));
 		}
 
 		private String _propertyKey;
