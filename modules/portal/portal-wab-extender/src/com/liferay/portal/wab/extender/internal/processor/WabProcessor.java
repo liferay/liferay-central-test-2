@@ -327,9 +327,7 @@ public class WabProcessor {
 			if (superName != null) {
 				packageNames.addAll(
 					processReferencedDependencies(
-						source,
-						superName.replace(CharPool.PERIOD, CharPool.SLASH) +
-							".class"));
+						source, getFileName(superName)));
 			}
 
 			String[] interfaceNames = classReader.getInterfaces();
@@ -403,12 +401,14 @@ public class WabProcessor {
 		for (String interfaceName : interfaceNames) {
 			packageNames.addAll(
 				processReferencedDependencies(
-					source,
-					interfaceName.replace(CharPool.PERIOD, CharPool.SLASH) +
-						".class"));
+					source, getFileName(interfaceName)));
 		}
 
 		return packageNames;
+	}
+	
+	protected String getFileName(String className) {
+		return className.replace(CharPool.PERIOD, CharPool.SLASH) + ".class";
 	}
 
 	protected Set<String> processJSPDependencies(File file) throws IOException {
@@ -444,9 +444,7 @@ public class WabProcessor {
 				String s = content.substring(importX, importY);
 
 				packageNames.addAll(
-					processClass(
-						source, dependencyVisitor,
-						s.replace(CharPool.PERIOD, CharPool.SLASH) + ".class"));
+					processClass(source, dependencyVisitor, getFileName(s)));
 			}
 
 			contentY -= 3;
