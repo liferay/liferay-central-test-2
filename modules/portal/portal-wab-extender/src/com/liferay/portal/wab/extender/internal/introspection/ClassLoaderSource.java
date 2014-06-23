@@ -14,7 +14,6 @@
 
 package com.liferay.portal.wab.extender.internal.introspection;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -28,7 +27,7 @@ public class ClassLoaderSource implements Source {
 	}
 
 	@Override
-	public InputStream getResourceAsStream(String name) throws IOException {
+	public InputStream getResourceAsStream(String name) {
 		return _classLoader.getResourceAsStream(name);
 	}
 

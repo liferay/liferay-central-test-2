@@ -14,7 +14,6 @@
 
 package com.liferay.portal.wab.extender.internal.introspection;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -23,6 +22,6 @@ import java.io.InputStream;
  */
 public interface Source {
 
-	public InputStream getResourceAsStream(String name) throws IOException;
+	public InputStream getResourceAsStream(String name);
 
 }

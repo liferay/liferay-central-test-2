@@ -288,9 +288,8 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processClass(
-			DependencyVisitor dependencyVisitor, String className,
-			Source source)
-		throws IOException {
+		DependencyVisitor dependencyVisitor, String className,
+		Source source) {
 
 		if (className.startsWith("java/")) {
 			return Collections.emptySet();
@@ -392,8 +391,8 @@ public class WabProcessor {
 		}
 	}
 
-	protected Set<String> processInterfaces(String[] interfaces, Source source)
-		throws IOException {
+	protected Set<String> processInterfaces(
+		String[] interfaces, Source source) {
 
 		Set<String> packages = new HashSet<String>();
 
@@ -458,8 +457,7 @@ public class WabProcessor {
 	}
 
 	protected Set<String> processReferencedDependencies(
-			String className, Source source)
-		throws IOException {
+		String className, Source source) {
 
 		DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
