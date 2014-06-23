@@ -32,7 +32,7 @@ public class ServiceTrackerMapFactory {
 		return new ServiceTrackerMapImpl<K, S, List<S>>(
 			clazz, filterString, serviceReferenceMapper,
 			new ListServiceTrackerBucketFactory<S>(
-				Comparators.<S>fromProperty("service.ranking")));
+				new ServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, List<S>>
@@ -54,7 +54,7 @@ public class ServiceTrackerMapFactory {
 			clazz,"(" + propertyKey + "=*)",
 			Mappers.<String>fromProperty(propertyKey),
 			new ListServiceTrackerBucketFactory<S>(
-				Comparators.<S>fromProperty("service.ranking")));
+				new ServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
@@ -64,7 +64,7 @@ public class ServiceTrackerMapFactory {
 		return new ServiceTrackerMapImpl<K, S, S>(
 			clazz, filterString, serviceReferenceMapper,
 			new ObjectServiceTrackerBucketFactory<S>(
-				Comparators.<S>fromProperty("service.ranking")));
+				new ServiceReferenceComparator<S>("service.ranking")));
 	}
 
 	public static <K, S> ServiceTrackerMap<K, S> createServiceTrackerObjectMap(
@@ -85,54 +85,55 @@ public class ServiceTrackerMapFactory {
 			clazz, "(" + propertyKey + "=*)",
 			Mappers.<String>fromProperty(propertyKey),
 			new ObjectServiceTrackerBucketFactory<S>(
-				Comparators.<S>fromProperty("service.ranking")));
+				new ServiceReferenceComparator<S>("service.ranking")));
 	}
-
-	public static class Comparators {
-
-		public static <T> Comparator<ServiceReference<T>> fromProperty(
-			final String propertyKey) {
-
-			return new Comparator<ServiceReference<T>>() {
-
-				@Override
-				public int compare(
-					ServiceReference<T> sr1, ServiceReference<T> sr2) {
-
-					if (sr1 == null) {
-						if (sr2 == null) {
-							return 0;
-						}
-						else {
-							return -1;
-						}
-					}
-					else if (sr2 == null) {
-						return 1;
-					}
-
-					try {
-						Comparable property1 = (Comparable)sr1.getProperty(
-							propertyKey);
-
-						Object property2 = sr2.getProperty(propertyKey);
-
-						if (property1 == null) {
-							if (property2 != null) {
-								return -1;
-							}
-
-							return -(sr1.compareTo(sr2));
-						}
-
-						return -(property1.compareTo(property2));
-					}
-					catch (ClassCastException cce) {
-						return 0;
-					}
-				}
-			};
+	
+	private static class ServiceReferenceComparator <T>
+		implements Comparator<ServiceReference<T>> {
+	
+		public ServiceReferenceComparator(String propertyKey) {
+			_propertyKey = propertyKey;
 		}
+
+		@Override
+		public int compare(
+			ServiceReference<T> sr1, ServiceReference<T> sr2) {
+
+			if (sr1 == null) {
+				if (sr2 == null) {
+					return 0;
+				}
+				else {
+					return -1;
+				}
+			}
+			else if (sr2 == null) {
+				return 1;
+			}
+
+			try {
+				Comparable property1 = (Comparable)sr1.getProperty(
+					_propertyKey);
+
+				Object property2 = sr2.getProperty(_propertyKey);
+
+				if (property1 == null) {
+					if (property2 != null) {
+						return -1;
+					}
+
+					return -(sr1.compareTo(sr2));
+				}
+
+				return -(property1.compareTo(property2));
+			}
+			catch (ClassCastException cce) {
+				return 0;
+			}
+		}
+
+		private String _propertyKey;
+		
 	}
 
 	public static class Mappers {
