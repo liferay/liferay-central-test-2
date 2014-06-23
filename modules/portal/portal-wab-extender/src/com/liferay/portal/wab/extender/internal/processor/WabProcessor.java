@@ -332,7 +332,7 @@ public class WabProcessor {
 
 			String[] interfaceNames = classReader.getInterfaces();
 
-			if ((interfaceNames != null) && (interfaceNames.length > 0)) {
+			if (ArrayUtil.isNotEmpty(interfaceNames)) {
 				for (String interfaceName : interfaceNames) {
 					packageNames.addAll(
 						processReferencedDependencies(
