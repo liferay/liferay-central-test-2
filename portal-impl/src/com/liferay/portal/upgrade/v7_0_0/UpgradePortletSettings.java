@@ -71,8 +71,8 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"insert into PortletPreferences (portletPreferencesId, " +
-					"ownerId, ownerType, plid, portletId, preferences, " +
-						"mvccVersion) values (?, ?, ?, ?, ?, ?, ?)");
+					"ownerId, ownerType, plid, portletId, preferences) " +
+						"values (?, ?, ?, ?, ?, ?)");
 
 			ps.setLong(1, portletPreferencesRow._portletPreferencesId);
 			ps.setLong(2, portletPreferencesRow._ownerId);
@@ -80,7 +80,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			ps.setLong(4, portletPreferencesRow._plid);
 			ps.setString(5, portletPreferencesRow._portletId);
 			ps.setString(6, portletPreferencesRow._preferences);
-			ps.setLong(7, portletPreferencesRow._mvccVersion);
 
 			ps.executeUpdate();
 		}
@@ -291,7 +290,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 			sb.append(
 				"update PortletPreferences set ownerId = ?, ownerType = ?, " +
-				"plid = ?, portletId = ?, preferences = ?, mvccVersion = ? " +
+				"plid = ?, portletId = ?, preferences = ? " +
 				"where portletPreferencesId = ?");
 
 			String sql = sb.toString();
@@ -303,8 +302,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			ps.setLong(3, portletPreferencesRow._plid);
 			ps.setString(4, portletPreferencesRow._portletId);
 			ps.setString(5, portletPreferencesRow._preferences);
-			ps.setLong(6, portletPreferencesRow._mvccVersion);
-			ps.setLong(7, portletPreferencesRow._portletPreferencesId);
+			ps.setLong(6, portletPreferencesRow._portletPreferencesId);
 
 			ps.executeUpdate();
 		}
@@ -390,7 +388,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	private class PortletPreferencesRow {
 
-		private long _mvccVersion;
 		private long _ownerId;
 		private int _ownerType;
 		private long _plid;
