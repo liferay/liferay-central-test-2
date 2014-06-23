@@ -369,7 +369,7 @@ public class WabProcessor {
 			}
 
 			if (path.equals("WEB-INF/service.xml")) {
-				processServicePackagePath(file);
+				processServicePackageName(file);
 			}
 
 			if (path.startsWith("WEB-INF/lib/")) {
@@ -480,13 +480,13 @@ public class WabProcessor {
 		return packageNames;
 	}
 
-	protected void processServicePackagePath(File file) {
+	protected void processServicePackageName(File file) {
 		try {
 			Document document = SAXReaderUtil.read(file);
 
 			Element rootElement = document.getRootElement();
 
-			_servicePackagePath = rootElement.attributeValue("package-path");
+			_servicePackageName = rootElement.attributeValue("package-path");
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -513,6 +513,6 @@ public class WabProcessor {
 	private File _manifestFile;
 	private Map<String, String[]> _parameters;
 	private File _pluginDir;
-	private String _servicePackagePath;
+	private String _servicePackageName;
 
 }
