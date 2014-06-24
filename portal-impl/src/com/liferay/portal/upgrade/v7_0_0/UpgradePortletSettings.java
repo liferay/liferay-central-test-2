@@ -108,7 +108,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT) {
 					long plid = portletPreferencesRow.getPlid();
 
-					long groupId = getLayoutGroupId(plid);
+					long groupId = getGroupId(plid);
 
 					portletPreferencesRow.setOwnerId(groupId);
 					portletPreferencesRow.setPlid(0);
@@ -185,7 +185,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			WikiSettings.ALL_KEYS);
 	}
 
-	protected long getLayoutGroupId(long plid) throws SQLException {
+	protected long getGroupId(long plid) throws SQLException {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
