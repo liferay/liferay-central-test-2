@@ -708,16 +708,16 @@ public class WabProcessor {
 
 	protected boolean processWebXML(Element element, Class<?> clazz) {
 		String elementText = element.getTextTrim();
-	
+
 		if (!elementText.equals(clazz.getName())) {
 			return false;
 		}
-	
+
 		for (Element initParamElement : element.elements("init-param")) {
 			Element paramNameElement = initParamElement.element("param-name");
-	
+
 			String paramNameValue = paramNameElement.getTextTrim();
-	
+
 			if (!paramNameValue.equals(element.getName())) {
 				continue;
 			}
@@ -730,7 +730,7 @@ public class WabProcessor {
 
 			return true;
 		}
-	
+
 		return false;
 	}
 
