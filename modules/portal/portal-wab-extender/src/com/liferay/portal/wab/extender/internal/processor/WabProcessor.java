@@ -719,9 +719,10 @@ public class WabProcessor {
 			String paramNameValue = paramNameElement.getTextTrim();
 	
 			if (paramNameValue.equals(element.getName())) {
-				paramNameElement = initParamElement.element("param-value");
+				Element paramValueElement = initParamElement.element(
+					"param-value");
 	
-				element.setText(paramNameElement.getTextTrim());
+				element.setText(paramValueElement.getTextTrim());
 	
 				initParamElement.detach();
 	
