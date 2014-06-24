@@ -227,22 +227,16 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 				Enumeration<String> names = jxPortletPreferences.getNames();
 
-				List<String> keysToReset = new ArrayList<String>();
-
 				while (names.hasMoreElements()) {
 					String name = names.nextElement();
 
 					for (String key : keys) {
 						if (name.startsWith(key)) {
-							keysToReset.add(name);
+							jxPortletPreferences.reset(key);
 
 							break;
 						}
 					}
-				}
-
-				for (String keyToReset : keysToReset) {
-					jxPortletPreferences.reset(keyToReset);
 				}
 
 				portletPreferencesRow.setPreferences(
