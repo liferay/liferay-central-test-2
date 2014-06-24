@@ -112,15 +112,16 @@ public class UpgradePortletSettings extends UpgradeProcess {
 					portletPreferencesRow.setPlid(0);
 
 					if (_log.isInfoEnabled()) {
-						StringBundler sb = new StringBundler(7);
-						
+						StringBundler sb = new StringBundler(8);
+
 						sb.append("Copying portlet ");
 						sb.append(portletId);
 						sb.append(" settings from layout ");
 						sb.append(plid);
 						sb.append(" to service ");
 						sb.append(serviceName);
-						sb.append(" in group " + groupId);
+						sb.append(" in group ");
+						sb.append(groupId);
 
 						_log.info(sb.toString());
 					}
@@ -133,7 +134,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			DataAccess.deepCleanUp(rs);
 		}
 	}
-
 
 	@Override
 	protected void doUpgrade() throws Exception {
@@ -255,8 +255,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				}
 
 				portletPreferencesRow.setPreferences(
-					PortletPreferencesFactoryUtil.toXML(
-						jxPortletPreferences));
+					PortletPreferencesFactoryUtil.toXML(jxPortletPreferences));
 
 				updatePortletPreferences(portletPreferencesRow);
 			}
