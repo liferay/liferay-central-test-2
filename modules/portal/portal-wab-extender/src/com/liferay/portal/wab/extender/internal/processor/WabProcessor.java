@@ -707,9 +707,9 @@ public class WabProcessor {
 	}
 
 	protected boolean processWebXML(Element element, Class<?> clazz) {
-		String elementValue = element.getTextTrim();
+		String elementText = element.getTextTrim();
 	
-		if (!elementValue.equals(clazz.getName())) {
+		if (!elementText.equals(clazz.getName())) {
 			return false;
 		}
 	
