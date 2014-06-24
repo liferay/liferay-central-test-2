@@ -102,8 +102,8 @@ public class SampleSQLBuilderTest {
 		properties.put("sample.sql.output.merge", "true");
 		properties.put(
 			"sample.sql.script",
-			"com/liferay/portal/tools/samplesqlbuilder/dependencies/" +
-				"sample.ftl");
+			"com/liferay/portal/tools/samplesqlbuilder/dependencies" +
+				"/sample.ftl");
 		properties.put("sample.sql.virtual.hostname", "localhost");
 	}
 
