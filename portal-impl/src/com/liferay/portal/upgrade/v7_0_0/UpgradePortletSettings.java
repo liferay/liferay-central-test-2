@@ -15,8 +15,6 @@
 package com.liferay.portal.upgrade.v7_0_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
@@ -43,7 +41,6 @@ import com.liferay.portlet.wiki.util.WikiConstants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -57,9 +54,9 @@ import javax.portlet.ReadOnlyException;
  */
 public class UpgradePortletSettings extends UpgradeProcess {
 
-	public void addPortletPreferences(
+	protected void addPortletPreferences(
 			PortletPreferencesRow portletPreferencesRow)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -89,7 +86,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	protected void copyPortletSettingsAsServiceSettings(
 			String portletId, int ownerType, String serviceName)
-		throws PortalException {
+		throws Exception {
 
 		ResultSet rs = null;
 
@@ -120,23 +117,13 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				addPortletPreferences(portletPreferencesRow);
 			}
 		}
-		catch (SQLException sqle) {
-			throw new PortalException(
-				"Unable to create service settings for portlet " + portletId,
-				sqle);
-		}
-		catch (RuntimeException re) {
-			throw new SystemException(
-				"Unable to create service settings for portlet " + portletId,
-				re);
-		}
 		finally {
 			DataAccess.deepCleanUp(rs);
 		}
 	}
 
 	@Override
-	protected void doUpgrade() throws PortalException {
+	protected void doUpgrade() throws Exception {
 
 		// Main portlets
 
@@ -185,7 +172,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			WikiSettings.ALL_KEYS);
 	}
 
-	protected long getGroupId(long plid) throws SQLException {
+	protected long getGroupId(long plid) throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -215,7 +202,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	protected ResultSet getPortletPreferencesResultSet(
 			String portletId, int ownerType)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = DataAccess.getUpgradeOptimizedConnection();
 
@@ -232,7 +219,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	protected void resetPortletPreferencesValues(
 			String portletId, int ownerType, String[] keys)
-		throws PortalException {
+		throws Exception {
 
 		ResultSet rs = null;
 
@@ -275,16 +262,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				updatePortletPreferences(portletPreferencesRow);
 			}
 		}
-		catch (SQLException sqle) {
-			throw new PortalException(
-				"Unable to clean keys with ownerType " + ownerType + " for " +
-					"portlet " + portletId, sqle);
-		}
-		catch (ReadOnlyException roe) {
-			throw new PortalException(
-				"Unable to clean keys with ownerType " + ownerType + " for " +
-					"portlet " + portletId, roe);
-		}
 		finally {
 			DataAccess.deepCleanUp(rs);
 		}
@@ -292,7 +269,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	protected void updatePortletPreferences(
 			PortletPreferencesRow portletPreferencesRow)
-		throws SQLException {
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -322,7 +299,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 	protected void upgradeDisplayPortlet(
 			String portletId, int ownerType, String[] serviceKeys)
-		throws PortalException {
+		throws Exception {
 
 		_logPortletUpgrade(portletId);
 
@@ -334,7 +311,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 	protected void upgradeMainPortlet(
 			String portletId, String serviceName, int ownerType,
 			String[] portletInstanceKeys, String[] serviceKeys)
-		throws PortalException {
+		throws Exception {
 
 		_logPortletUpgrade(portletId);
 
@@ -372,7 +349,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 	}
 
 	private PortletPreferencesRow getPortletPreferencesRow(ResultSet rs)
-		throws SQLException {
+		throws Exception {
 
 		return new PortletPreferencesRow(
 			rs.getLong("ownerId"), rs.getInt("ownerType"), rs.getLong("plid"),
