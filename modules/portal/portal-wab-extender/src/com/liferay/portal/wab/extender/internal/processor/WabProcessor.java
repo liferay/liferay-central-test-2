@@ -307,13 +307,14 @@ public class WabProcessor {
 	}
 
 	protected void processBundleVersion(Analyzer analyzer) {
-		_version = MapUtil.getString(_parameters, Constants.BUNDLE_VERSION);
+		_bundleVersion = MapUtil.getString(
+			_parameters, Constants.BUNDLE_VERSION);
 
-		if (Validator.isNull(_version)) {
-			_version = _pluginPackage.getVersion();
+		if (Validator.isNull(_bundleVersion)) {
+			_bundleVersion = _pluginPackage.getVersion();
 		}
 
-		analyzer.setProperty(Constants.BUNDLE_VERSION, _version);
+		analyzer.setProperty(Constants.BUNDLE_VERSION, _bundleVersion);
 	}
 
 	protected Set<String> processClass(
@@ -577,6 +578,7 @@ public class WabProcessor {
 	private static Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
 	private BundleContext _bundleContext;
+	private String _bundleVersion;
 	private ClassLoader _classLoader;
 	private String _context;
 	private Set<String> _exportPackageNames = new HashSet<String>();
@@ -588,6 +590,5 @@ public class WabProcessor {
 	private File _pluginDir;
 	private PluginPackage _pluginPackage;
 	private String _servicePackageName;
-	private String _version;
 
 }
