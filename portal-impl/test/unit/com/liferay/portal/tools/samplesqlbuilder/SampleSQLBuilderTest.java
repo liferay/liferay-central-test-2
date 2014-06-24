@@ -59,7 +59,7 @@ public class SampleSQLBuilderTest {
 	}
 
 	private void _initProperties(
-		Properties properties, String outputDirectory) {
+		Properties properties, String outputDir) {
 	
 		properties.put(
 			"sample.sql.asset.publisher.query.name", "assetCategories");
@@ -98,7 +98,7 @@ public class SampleSQLBuilderTest {
 			"sample.sql.output.csv.file.names",
 			"assetPublisher,blog,company,documentLibrary,dynamicDataList," +
 				"layout,messageBoard,repository,wiki");
-		properties.put("sample.sql.output.dir", outputDirectory);
+		properties.put("sample.sql.output.dir", outputDir);
 		properties.put("sample.sql.output.merge", "true");
 		properties.put(
 			"sample.sql.script",
