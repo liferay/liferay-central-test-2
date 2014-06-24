@@ -585,7 +585,7 @@ public class WabProcessor {
 		XPath xPath = SAXReaderUtil.createXPath(
 			"x:init-param[x:name/text()='com.liferay.portal." +
 				"invokerPortletName']",
-			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
+			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
 		Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
 			element);
@@ -598,8 +598,7 @@ public class WabProcessor {
 			int index = nodes.indexOf(portletClassElement);
 
 			Element initParamElement = SAXReaderUtil.createElement(
-				SAXReaderUtil.createQName(
-					"init-param", qName.getNamespace()));
+				SAXReaderUtil.createQName("init-param", qName.getNamespace()));
 
 			DocUtil.add(
 				initParamElement,"name",
