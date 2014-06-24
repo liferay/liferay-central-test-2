@@ -498,7 +498,6 @@ public class WabProcessor {
 		analyzer.setJar(_pluginDir);
 
 		processBundleClasspath(analyzer);
-
 		processBundleSymbolicName(analyzer);
 	}
 
