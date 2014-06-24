@@ -89,8 +89,9 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 
 		// Portlets
 
-		String[] portletIds = (String[])message.get("portletIds");
 		long portletsNumberTotal = 0;
+
+		String[] portletIds = (String[])message.get("portletIds");
 
 		if (portletIds != null) {
 			portletsNumberTotal = portletIds.length;
@@ -101,8 +102,8 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 
 		// Data
 
-		HashMap<String, LongWrapper> modelAdditionCounters =
-			(HashMap<String, LongWrapper>)message.get("modelAdditionCounters");
+		Map<String, LongWrapper> modelAdditionCounters =
+			(Map<String, LongWrapper>)message.get("modelAdditionCounters");
 
 		backgroundTaskStatus.setAttribute(
 			"allModelAdditionCountersTotal", getTotal(modelAdditionCounters));
@@ -172,7 +173,7 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 
 		// Model statistics
 
-		HashMap<String, Long> allPortletModelAdditionCounters =
+		Map<String, Long> allPortletModelAdditionCounters =
 			(HashMap<String, Long>)backgroundTaskStatus.getAttribute(
 				"allPortletModelAdditionCounters");
 
@@ -211,17 +212,11 @@ public class DefaultExportImportBackgroundTaskStatusMessageTranslator
 
 		// Model attributes
 
-		String stagedModelName = message.getString("stagedModelName");
-
-		backgroundTaskStatus.setAttribute("stagedModelName", stagedModelName);
-
-		String stagedModelType = message.getString("stagedModelType");
-
-		backgroundTaskStatus.setAttribute("stagedModelType", stagedModelType);
-
-		String uuid = message.getString("uuid");
-
-		backgroundTaskStatus.setAttribute("uuid", uuid);
+		backgroundTaskStatus.setAttribute(
+			"stagedModelName", message.getString("stagedModelName"));
+		backgroundTaskStatus.setAttribute(
+			"stagedModelType", message.getString("stagedModelType"));
+		backgroundTaskStatus.setAttribute("uuid", message.getString("uuid"));
 	}
 
 }
