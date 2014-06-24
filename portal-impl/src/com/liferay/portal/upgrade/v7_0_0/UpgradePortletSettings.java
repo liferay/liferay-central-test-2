@@ -84,6 +84,10 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			String portletId, int ownerType, String serviceName)
 		throws Exception {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Copy portlet settings as service settings");
+		}
+
 		ResultSet rs = null;
 
 		try {
@@ -303,10 +307,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Upgrading main portlet " + portletId + " settings");
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Copy portlet settings as service settings");
 		}
 
 		copyPortletSettingsAsServiceSettings(portletId, ownerType, serviceName);
