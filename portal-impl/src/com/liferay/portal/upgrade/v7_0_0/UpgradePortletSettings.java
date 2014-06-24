@@ -42,9 +42,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 /**
  * @author Sergio González
@@ -108,8 +106,10 @@ public class UpgradePortletSettings extends UpgradeProcess {
 					portletPreferencesRow.setOwnerId(groupId);
 					portletPreferencesRow.setPlid(0);
 
-					_logCopyOfPortletInstanceSettings(
-						portletId, plid, serviceName, groupId);
+					if (_log.isInfoEnabled()) {
+						_log.info("Copying settings of portlet " + portletId + " placed in layout " + plid + " to service " + serviceName + " in group " + groupId);
+					}
+
 				}
 
 				addPortletPreferences(portletPreferencesRow);
@@ -285,7 +285,9 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			String portletId, int ownerType, String[] serviceKeys)
 		throws Exception {
 
-		_logPortletUpgrade(portletId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Upgrading display portlet " + portletId + " settings");
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Delete service keys from portlet settings");
@@ -299,11 +301,12 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			String[] portletInstanceKeys, String[] serviceKeys)
 		throws Exception {
 
-		_logPortletUpgrade(portletId);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Upgrading main portlet " + portletId + " settings");
+		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Copy existing portlet settings as service settings");
+			_log.debug("Copy portlet settings as service settings");
 		}
 
 		copyPortletSettingsAsServiceSettings(portletId, ownerType, serviceName);
@@ -321,23 +324,6 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		}
 
 		resetPortletPreferencesValues(portletId, ownerType, serviceKeys);
-	}
-
-	private void _logCopyOfPortletInstanceSettings(
-		String portletId, long plid, String serviceName, long groupId) {
-
-		if (_log.isInfoEnabled()) {
-			_log.info(
-				"Copying settings of portlet " + portletId + " placed in " +
-					"layout " + plid + " to service " + serviceName + " in " +
-						"group " + groupId);
-		}
-	}
-
-	private void _logPortletUpgrade(String portletId) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Upgrading portlet " + portletId + " settings");
-		}
 	}
 
 	private PortletPreferencesRow getPortletPreferencesRow(ResultSet rs)
