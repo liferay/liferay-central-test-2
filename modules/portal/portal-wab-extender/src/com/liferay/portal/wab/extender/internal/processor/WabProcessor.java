@@ -385,35 +385,6 @@ public class WabProcessor {
 		return packageNames;
 	}
 
-	protected boolean processWebXMLClassElement(
-		Element element, Class<?> clazz) {
-
-		String elementValue = element.getTextTrim();
-
-		if (!elementValue.equals(clazz.getName())) {
-			return false;
-		}
-
-		for (Element initParamElement : element.elements("init-param")) {
-			Element initParamNameElement = initParamElement.element(
-				"param-name");
-
-			String initParamNameValue = initParamNameElement.getTextTrim();
-
-			if (initParamNameValue.equals(element.getName())) {
-				initParamNameElement = initParamElement.element("param-value");
-
-				element.setText(initParamNameElement.getTextTrim());
-
-				initParamElement.detach();
-
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	protected void processExtraHeaders(Analyzer analyzer) {
 		String bundleSymbolicName = analyzer.getProperty(
 			Constants.BUNDLE_SYMBOLICNAME);
@@ -708,7 +679,7 @@ public class WabProcessor {
 		for (Element element : rootElement.elements("filter")) {
 			Element filterClassElement = element.element("filter-class");
 
-			if (processWebXMLClassElement(
+			if (processWebXML(
 					filterClassElement, PortalClassLoaderFilter.class)) {
 
 				break;
@@ -718,7 +689,7 @@ public class WabProcessor {
 		for (Element element : rootElement.elements("servlet")) {
 			Element servletClassElement = element.element("servlet-class");
 
-			if (processWebXMLClassElement(
+			if (processWebXML(
 					servletClassElement, PortalClassLoaderServlet.class)) {
 
 				break;
@@ -733,6 +704,33 @@ public class WabProcessor {
 		catch (Exception e) {
 			throw new IOException(e);
 		}
+	}
+
+	protected boolean processWebXML(Element element, Class<?> clazz) {
+		String elementValue = element.getTextTrim();
+	
+		if (!elementValue.equals(clazz.getName())) {
+			return false;
+		}
+	
+		for (Element initParamElement : element.elements("init-param")) {
+			Element initParamNameElement = initParamElement.element(
+				"param-name");
+	
+			String initParamNameValue = initParamNameElement.getTextTrim();
+	
+			if (initParamNameValue.equals(element.getName())) {
+				initParamNameElement = initParamElement.element("param-value");
+	
+				element.setText(initParamNameElement.getTextTrim());
+	
+				initParamElement.detach();
+	
+				return true;
+			}
+		}
+	
+		return false;
 	}
 
 	protected void transformToOSGiBundle() throws IOException {
