@@ -40,22 +40,21 @@ public class SampleSQLBuilderTest {
 	public void testGenerateAndInsertSampleSQL() throws Exception {
 		ToolDependencies.wireBasic();
 
-		File tempDirectory =
-			new File(
-				SystemProperties.get(SystemProperties.TMP_DIR),
-				String.valueOf(System.currentTimeMillis()));
-
 		Properties properties = new SortedProperties();
 
-		_initProperties(properties, tempDirectory.getAbsolutePath());
+		File tempDir = new File(
+			SystemProperties.get(SystemProperties.TMP_DIR),
+			String.valueOf(System.currentTimeMillis()));
+
+		_initProperties(properties, tempDir.getAbsolutePath());
 
 		try {
 			new SampleSQLBuilder(properties, new DataFactory(properties));
 
-			_loadHypersonic("sql", tempDirectory.getAbsolutePath());
+			_loadHypersonic("sql", tempDir.getAbsolutePath());
 		}
 		finally {
-			FileUtil.deltree(tempDirectory);
+			FileUtil.deltree(tempDir);
 		}
 	}
 
