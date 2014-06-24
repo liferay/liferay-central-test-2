@@ -561,57 +561,7 @@ public class WabProcessor {
 		List<Element> elements = rootElement.elements("portlet");
 
 		for (Element element : elements) {
-			String portletName = PortalUtil.getJsSafePortletId(
-				element.elementText("portlet-name"));
-
-			String invokerPortletName =
-				Portal.PATH_MODULE.substring(1) + _context + StringPool.SLASH +
-					portletName;
-
-			XPath xPath = SAXReaderUtil.createXPath(
-				"x:init-param[x:name/text()='com.liferay.portal." +
-					"invokerPortletName']",
-				"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
-
-			Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
-				element);
-
-			if (invokerPortletNameElement == null) {
-				Element portletClassElement = element.element("portlet-class");
-
-				List<Node> nodes = element.content();
-
-				int pos = nodes.indexOf(portletClassElement);
-
-				QName qName = rootElement.getQName();
-
-				Element initParamElement = SAXReaderUtil.createElement(
-					SAXReaderUtil.createQName(
-						"init-param", qName.getNamespace()));
-
-				DocUtil.add(
-					initParamElement,"name",
-					"com.liferay.portal.invokerPortletName");
-				DocUtil.add(initParamElement,"value", invokerPortletName);
-
-				nodes.add(pos + 1, initParamElement);
-			}
-			else {
-				Element valueElement = invokerPortletNameElement.element(
-					"value");
-
-				invokerPortletName = valueElement.getTextTrim();
-
-				if (!invokerPortletName.startsWith(StringPool.SLASH)) {
-					invokerPortletName = StringPool.SLASH + invokerPortletName;
-				}
-
-				invokerPortletName =
-					Portal.PATH_MODULE.substring(1) + _context +
-						invokerPortletName;
-
-				valueElement.setText(invokerPortletName);
-			}
+			processPortletXML(rootElement.getQName(), element);
 		}
 
 		try {
@@ -621,6 +571,56 @@ public class WabProcessor {
 		}
 		catch (Exception e) {
 			throw new IOException(e);
+		}
+	}
+
+	protected void processPortletXML(QName qName, Element element) {
+		String portletName = PortalUtil.getJsSafePortletId(
+			element.elementText("portlet-name"));
+
+		String invokerPortletName =
+			Portal.PATH_MODULE.substring(1) + _context + StringPool.SLASH +
+				portletName;
+
+		XPath xPath = SAXReaderUtil.createXPath(
+			"x:init-param[x:name/text()='com.liferay.portal." +
+				"invokerPortletName']",
+			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
+
+		Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
+			element);
+
+		if (invokerPortletNameElement == null) {
+			Element portletClassElement = element.element("portlet-class");
+
+			List<Node> nodes = element.content();
+
+			int index = nodes.indexOf(portletClassElement);
+
+			Element initParamElement = SAXReaderUtil.createElement(
+				SAXReaderUtil.createQName(
+					"init-param", qName.getNamespace()));
+
+			DocUtil.add(
+				initParamElement,"name",
+				"com.liferay.portal.invokerPortletName");
+			DocUtil.add(initParamElement,"value", invokerPortletName);
+
+			nodes.add(index + 1, initParamElement);
+		}
+		else {
+			Element valueElement = invokerPortletNameElement.element("value");
+
+			invokerPortletName = valueElement.getTextTrim();
+
+			if (!invokerPortletName.startsWith(StringPool.SLASH)) {
+				invokerPortletName = StringPool.SLASH + invokerPortletName;
+			}
+
+			invokerPortletName =
+				Portal.PATH_MODULE.substring(1) + _context + invokerPortletName;
+
+			valueElement.setText(invokerPortletName);
 		}
 	}
 
