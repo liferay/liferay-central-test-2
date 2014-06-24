@@ -397,7 +397,7 @@ public class LayoutExporter {
 				portletDataHandler.prepareManifestSummary(portletDataContext);
 			}
 
-			// Add portlet id to exportable portlets list
+			// Add portlet ID to exportable portlets list
 
 			portletIds.put(
 				PortletPermissionUtil.getPrimaryKey(0, portletId),
@@ -429,8 +429,7 @@ public class LayoutExporter {
 						portlet.getPortletId(), layout.getPlid(),
 						scopeGroup.getGroupId(), StringPool.BLANK,
 						layout.getUuid()
-					}
-				);
+					});
 			}
 		}
 
