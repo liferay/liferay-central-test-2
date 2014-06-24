@@ -287,7 +287,9 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 		_logPortletUpgrade(portletId);
 
-		// Delete service keys from portlet settings
+		if (_log.isDebugEnabled()) {
+			_log.debug("Delete service keys from portlet settings");
+		}
 
 		resetPortletPreferencesValues(portletId, ownerType, serviceKeys);
 	}
@@ -299,18 +301,24 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 		_logPortletUpgrade(portletId);
 
-		// Create new settings for the service from the existing portlet
-		// settings
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"Copy existing portlet settings as service settings");
+		}
 
 		copyPortletSettingsAsServiceSettings(portletId, ownerType, serviceName);
 
-		// Delete Portlet Instance Keys From Service Settings
+		if (_log.isDebugEnabled()) {
+			_log.debug("Delete portlet instance keys from service settings");
+		}
 
 		resetPortletPreferencesValues(
 			serviceName, PortletKeys.PREFS_OWNER_TYPE_GROUP,
 			portletInstanceKeys);
 
-		// Delete Service Keys From Portlet Settings
+		if (_log.isDebugEnabled()) {
+			_log.debug("Delete service keys from portlet settings");
+		}
 
 		resetPortletPreferencesValues(portletId, ownerType, serviceKeys);
 	}
