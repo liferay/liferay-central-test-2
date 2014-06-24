@@ -170,5 +170,4 @@
 			<param name="log" value="${sybase.log}" />
 		</antcall>
 	</target>
-
 </project>
