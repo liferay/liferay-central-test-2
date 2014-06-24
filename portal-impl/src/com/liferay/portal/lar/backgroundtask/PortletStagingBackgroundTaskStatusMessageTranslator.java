@@ -28,6 +28,20 @@ import java.util.HashMap;
  */
 public class PortletStagingBackgroundTaskStatusMessageTranslator
 	extends DefaultExportImportBackgroundTaskStatusMessageTranslator {
+	
+	protected long getAllModelAdditionCountersTotal(
+		BackgroundTaskStatus backgroundTaskStatus) {
+
+		long allModelAdditionCountersTotal = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute(
+				"allModelAdditionCountersTotal"));
+		long currentModelAdditionCountersTotal = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute(
+				"currentModelAdditionCountersTotal"));
+				
+		return allModelAdditionCountersTotal +
+			currentModelAdditionCountersTotal; 
+	}
 
 	@Override
 	protected synchronized void translatePortletMessage(
@@ -56,18 +70,9 @@ public class PortletStagingBackgroundTaskStatusMessageTranslator
 				portletModelAdditionCountersTotal);
 		}
 		else {
-			long allModelAdditionCountersTotal = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute(
-					"allModelAdditionCountersTotal"));
-			long currentModelAdditionCountersTotal = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute(
-					"currentModelAdditionCountersTotal"));
-
 			backgroundTaskStatus.setAttribute(
 				"allModelAdditionCountersTotal",
-				allModelAdditionCountersTotal +
-					currentModelAdditionCountersTotal);
-
+				getAllModelAdditionCountersTotal(backgroundTaskStatus));
 			backgroundTaskStatus.setAttribute(
 				"allPortletModelAdditionCounters",
 				new HashMap<String, LongWrapper>());
@@ -78,5 +83,6 @@ public class PortletStagingBackgroundTaskStatusMessageTranslator
 
 		super.translatePortletMessage(backgroundTaskStatus, message);
 	}
+
 
 }

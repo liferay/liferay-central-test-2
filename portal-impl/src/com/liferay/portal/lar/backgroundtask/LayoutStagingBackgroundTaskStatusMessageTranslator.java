@@ -29,6 +29,32 @@ import java.util.HashMap;
 public class LayoutStagingBackgroundTaskStatusMessageTranslator
 	extends DefaultExportImportBackgroundTaskStatusMessageTranslator {
 
+	protected long getAllModelAdditionCountersTotal(
+		BackgroundTaskStatus backgroundTaskStatus) {
+
+		long allModelAdditionCountersTotal = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute(
+				"allModelAdditionCountersTotal"));
+		long currentModelAdditionCountersTotal = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute(
+				"currentModelAdditionCountersTotal"));
+				
+		return allModelAdditionCountersTotal +
+			currentModelAdditionCountersTotal; 
+	}
+
+	protected long getAllPortletAdditionCounter(
+		BackgroundTaskStatus backgroundTaskStatus) {
+
+		long allPortletAdditionCounter = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute("allPortletAdditionCounter"));
+		long currentPortletAdditionCounter = GetterUtil.getLong(
+			backgroundTaskStatus.getAttribute(
+				"currentPortletAdditionCounter"));
+				
+		return allPortletAdditionCounter + currentPortletAdditionCounter; 
+	}
+	
 	@Override
 	protected synchronized void translateLayoutMessage(
 		BackgroundTaskStatus backgroundTaskStatus, Message message) {
@@ -50,28 +76,12 @@ public class LayoutStagingBackgroundTaskStatusMessageTranslator
 		super.translateLayoutMessage(backgroundTaskStatus, message);
 
 		if (phase.equals(Constants.IMPORT)) {
-			long allModelAdditionCountersTotal = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute(
-					"allModelAdditionCountersTotal"));
-			long currentModelAdditionCountersTotal = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute(
-					"currentModelAdditionCountersTotal"));
-
 			backgroundTaskStatus.setAttribute(
 				"allModelAdditionCountersTotal",
-				allModelAdditionCountersTotal +
-					currentModelAdditionCountersTotal);
-
-			long allPortletAdditionCounter = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute("allPortletAdditionCounter"));
-			long currentPortletAdditionCounter = GetterUtil.getLong(
-				backgroundTaskStatus.getAttribute(
-					"currentPortletAdditionCounter"));
-
+				getAllModelAdditionCountersTotal(backgroundTaskStatus));
 			backgroundTaskStatus.setAttribute(
 				"allPortletAdditionCounter",
-				allPortletAdditionCounter + currentPortletAdditionCounter);
-
+				getAllPortletAdditionCounter(backgroundTaskStatus));
 			backgroundTaskStatus.setAttribute(
 				"allPortletModelAdditionCounters",
 				new HashMap<String, LongWrapper>());
