@@ -49,6 +49,7 @@ import com.liferay.portal.wab.extender.internal.introspection.ClassLoaderSource;
 import com.liferay.portal.wab.extender.internal.introspection.Source;
 import com.liferay.portal.wab.extender.internal.util.AntUtil;
 import com.liferay.portlet.dynamicdatamapping.util.DDMXMLUtil;
+import com.liferay.util.xml.DocUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -570,18 +571,17 @@ public class WabProcessor {
 			XPath xPath = SAXReaderUtil.createXPath(
 				"x:init-param[x:name/text()='com.liferay.portal." +
 					"invokerPortletName']",
-				"x",
-				"http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
+				"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
 
-			Element invokerPortletNameEl = (Element)xPath.selectSingleNode(
+			Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
 				element);
 
-			if (invokerPortletNameEl == null) {
+			if (invokerPortletNameElement == null) {
 				Element portletClassElement = element.element("portlet-class");
 
-				List<Node> children = element.content();
+				List<Node> nodes = element.content();
 
-				int pos = children.indexOf(portletClassElement);
+				int pos = nodes.indexOf(portletClassElement);
 
 				QName qName = rootElement.getQName();
 
@@ -589,15 +589,16 @@ public class WabProcessor {
 					SAXReaderUtil.createQName(
 						"init-param", qName.getNamespace()));
 
-				initParamElement.addElement("name").setText(
+				DocUtil.add(
+					initParamElement,"name",
 					"com.liferay.portal.invokerPortletName");
-				initParamElement.addElement("value").setText(
-					invokerPortletName);
+				DocUtil.add(initParamElement,"value", invokerPortletName);
 
-				children.add(pos + 1, initParamElement);
+				nodes.add(pos + 1, initParamElement);
 			}
 			else {
-				Element valueElement = invokerPortletNameEl.element("value");
+				Element valueElement = invokerPortletNameElement.element(
+					"value");
 
 				invokerPortletName = valueElement.getTextTrim();
 
