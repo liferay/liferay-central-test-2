@@ -61,31 +61,31 @@ public class PortletPreferencesRow {
 	}
 
 	public void setMvccVersion(long mvccVersion) {
-		this._mvccVersion = mvccVersion;
+		_mvccVersion = mvccVersion;
 	}
 
 	public void setOwnerId(long ownerId) {
-		this._ownerId = ownerId;
+		_ownerId = ownerId;
 	}
 
 	public void setOwnerType(int ownerType) {
-		this._ownerType = ownerType;
+		_ownerType = ownerType;
 	}
 
 	public void setPlid(long plid) {
-		this._plid = plid;
+		_plid = plid;
 	}
 
 	public void setPortletId(String portletId) {
-		this._portletId = portletId;
+		_portletId = portletId;
 	}
 
 	public void setPortletPreferencesId(long portletPreferencesId) {
-		this._portletPreferencesId = portletPreferencesId;
+		_portletPreferencesId = portletPreferencesId;
 	}
 
 	public void setPreferences(String preferences) {
-		this._preferences = preferences;
+		_preferences = preferences;
 	}
 
 	private long _mvccVersion;
