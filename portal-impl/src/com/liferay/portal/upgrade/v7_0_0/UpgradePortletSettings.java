@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
-import javax.portlet.ReadOnlyException;
-
 /**
  * @author Sergio González
  * @author Iván Zaera
@@ -131,27 +129,22 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			PortletKeys.BLOGS, BlogsConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_GROUP,
 			BlogsPortletInstanceSettings.ALL_KEYS, BlogsSettings.ALL_KEYS);
-
 		upgradeMainPortlet(
 			PortletKeys.BOOKMARKS, BookmarksConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, StringPool.EMPTY_ARRAY,
 			BookmarksSettings.ALL_KEYS);
-
 		upgradeMainPortlet(
 			PortletKeys.DOCUMENT_LIBRARY, DLConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_GROUP,
 			DLPortletInstanceSettings.ALL_KEYS, DLSettings.ALL_KEYS);
-
 		upgradeMainPortlet(
 			PortletKeys.MESSAGE_BOARDS, MBConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_GROUP, StringPool.EMPTY_ARRAY,
 			MBSettings.ALL_KEYS);
-
 		upgradeMainPortlet(
 			PortletKeys.SHOPPING, ShoppingConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_GROUP, StringPool.EMPTY_ARRAY,
 			ShoppingSettings.ALL_KEYS);
-
 		upgradeMainPortlet(
 			PortletKeys.WIKI, WikiConstants.SERVICE_NAME,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
@@ -162,11 +155,9 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		upgradeDisplayPortlet(
 			PortletKeys.DOCUMENT_LIBRARY_DISPLAY,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, DLSettings.ALL_KEYS);
-
 		upgradeDisplayPortlet(
 			PortletKeys.MEDIA_GALLERY_DISPLAY,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, DLSettings.ALL_KEYS);
-
 		upgradeDisplayPortlet(
 			PortletKeys.WIKI_DISPLAY, PortletKeys.PREFS_OWNER_TYPE_LAYOUT,
 			WikiSettings.ALL_KEYS);
