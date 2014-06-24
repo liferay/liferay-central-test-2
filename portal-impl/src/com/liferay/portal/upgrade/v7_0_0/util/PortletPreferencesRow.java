@@ -23,7 +23,6 @@ public class PortletPreferencesRow {
 		long ownerId, int ownerType, long plid, String portletId,
 		long portletPreferencesId, String preferences) {
 
-		_mvccVersion = 0;
 		_ownerId = ownerId;
 		_ownerType = ownerType;
 		_plid = plid;

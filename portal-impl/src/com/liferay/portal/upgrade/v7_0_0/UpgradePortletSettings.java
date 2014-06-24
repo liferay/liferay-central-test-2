@@ -287,7 +287,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 		_logPortletUpgrade(portletId);
 
-		// Delete Service Keys From Portlet Settings
+		// Delete service keys from portlet settings
 
 		resetPortletPreferencesValues(portletId, ownerType, serviceKeys);
 	}
