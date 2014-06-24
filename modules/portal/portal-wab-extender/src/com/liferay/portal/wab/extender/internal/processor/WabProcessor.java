@@ -656,6 +656,34 @@ public class WabProcessor {
 		}
 	}
 
+	protected boolean processWebXML(Element element, Class<?> clazz) {
+		String elementText = element.getTextTrim();
+
+		if (!elementText.equals(clazz.getName())) {
+			return false;
+		}
+
+		for (Element initParamElement : element.elements("init-param")) {
+			Element paramNameElement = initParamElement.element("param-name");
+
+			String paramNameValue = paramNameElement.getTextTrim();
+
+			if (!paramNameValue.equals(element.getName())) {
+				continue;
+			}
+
+			Element paramValueElement = initParamElement.element("param-value");
+
+			element.setText(paramValueElement.getTextTrim());
+
+			initParamElement.detach();
+
+			return true;
+		}
+
+		return false;
+	}
+
 	protected void processWebXML(String path) throws IOException {
 		File file = new File(_file, path);
 
@@ -704,34 +732,6 @@ public class WabProcessor {
 		catch (Exception e) {
 			throw new IOException(e);
 		}
-	}
-
-	protected boolean processWebXML(Element element, Class<?> clazz) {
-		String elementText = element.getTextTrim();
-
-		if (!elementText.equals(clazz.getName())) {
-			return false;
-		}
-
-		for (Element initParamElement : element.elements("init-param")) {
-			Element paramNameElement = initParamElement.element("param-name");
-
-			String paramNameValue = paramNameElement.getTextTrim();
-
-			if (!paramNameValue.equals(element.getName())) {
-				continue;
-			}
-
-			Element paramValueElement = initParamElement.element("param-value");
-
-			element.setText(paramValueElement.getTextTrim());
-
-			initParamElement.detach();
-
-			return true;
-		}
-
-		return false;
 	}
 
 	protected void transformToOSGiBundle() throws IOException {
