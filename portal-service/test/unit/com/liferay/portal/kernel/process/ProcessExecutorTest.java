@@ -1753,7 +1753,7 @@ public class ProcessExecutorTest {
 		}
 
 		@Override
-		public byte[] call() throws ProcessException {
+		public byte[] call() {
 			return _payload;
 		}
 
@@ -1765,7 +1765,7 @@ public class ProcessExecutorTest {
 		implements ProcessCallable<String> {
 
 		@Override
-		public String call() throws ProcessException {
+		public String call() {
 			Thread currentThread = Thread.currentThread();
 
 			URLClassLoader urlClassLoader =
