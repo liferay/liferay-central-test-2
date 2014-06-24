@@ -63,7 +63,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeBoolean() throws Exception {
+	public void testParamsTypeBoolean() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:true:boolean"});
 
@@ -82,7 +82,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeDouble() throws Exception {
+	public void testParamsTypeDouble() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1.0:double"});
 
@@ -101,7 +101,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeInteger() throws Exception {
+	public void testParamsTypeInteger() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:int"});
 
@@ -120,7 +120,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeLong() throws Exception {
+	public void testParamsTypeLong() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:long"});
 
@@ -139,7 +139,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeComposite() throws Exception {
+	public void testParamsTypeComposite() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:" + Byte.class.getName()});
 
@@ -163,7 +163,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeShort() throws Exception {
+	public void testParamsTypeShort() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:short"});
 
@@ -182,7 +182,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeString() throws Exception {
+	public void testParamsTypeString() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:X:" + String.class.getName()});
 
