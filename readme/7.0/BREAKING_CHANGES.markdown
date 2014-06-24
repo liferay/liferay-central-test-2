@@ -225,41 +225,44 @@ Some content (such as web content) needs the `PortletRequest` and
 
 ---------------------------------------
 
-### Some portlet instances setup may be ignored because they were never meant to be per instance
+### Only One Portlet Instance's Settings is Used Per Portlet
 - **Date:** 2014-Jun-06
 - **JIRA Ticket:** LPS-43134
 
 #### What changed?
-A few portlets allowed providing a separate setup per portlet instance (in the
-same page or in different pages). However for some of the setup fields, it
-didn't make sense to provide different values per instance and that was creating
-confusion among users. To fix this, those fields have been removed from the
-portlet instance set up and have been moved to Site Administration.
+Previously, some portlets allowed separate setups per portlet instance,
+regardless of whether the instances were in the same page or in different pages.
+For some of the portlet setup fields, however, it didn't make sense to allow
+different values in different instances. The flexbility of these fields was
+unnecessary and confused users. As part of this change, these fields have been
+moved from portlet instance setup to Site Administration.
 
-The upgrade process will take care of making the necessary database changes,
-however if several portlet instances had different configurations only one will 
-be preserved. Check the log generated in the console by the migration process
-to get accurate information on which configuration was chosen.
+The upgrade process takes care of making the necessary database changes. In the
+case of several portlet instances having different configurations, however, only
+one configuration is preserved.
 
-For instance: if you have configured three bookmarks portlets where the mail 
-configuration is the same you won't have any problem. But in case the three 
-configurations are different, you will have to choose which one to use.
+For example, if you configured three Bookmarks portlets where the mail
+configuration was the same, upgrade will be the same and you won't have any
+problem. But if you configured the three portlet instances differently, only one
+configuration will be chosen. To find out which configuration is chosen, you can
+check the log generated in the console by the upgrade process.
 
-We think this case is rare and a problematic configuration (i.e. highly
-unrecommended) so we don't expect this change to have a relevant negative
-impact.
+Since configuring instances of the same portlet type differently is highly
+discouraged and notoriously problematic, we expect this change will
+inconvenience only a very low minority of portal users.
 
 #### Who is affected?
-Users who have configured more than one portlet of the same type which stores
-configuration at layout level with different settings.
+Affected users are those who have specified varying configurations for multiple
+portlet instances of a portlet type, that stores configurations at the layout
+level.
 
 #### How should I update my code?
-The upgrade process will choose one of your configurations and will store it at
-the service level. You will have to review it then and modify it if needed.
+The upgrade process chooses one portlet instance's configurations and stores it
+at the service level. After the upgrade, you should review the portlet's
+configuration and make any necessary modifications.
 
 #### Why was this change made?
-To unify the configuration of portlets and services and make its management
-easier.
+Unifying portlet and service configuration facilitates managing them.
 
 ---------------------------------------
 ### DDM Structure Local Service API has no longer the `updateXSDFieldMetadata()` operation
