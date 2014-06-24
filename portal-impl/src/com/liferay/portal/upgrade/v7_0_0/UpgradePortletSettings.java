@@ -220,9 +220,9 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		Connection con = DataAccess.getUpgradeOptimizedConnection();
 
 		PreparedStatement ps = con.prepareStatement(
-			"select portletPreferencesId, ownerId, ownerType, " +
-			"plid, portletId, preferences from PortletPreferences " +
-			"where ownerType = ? and portletId = ?");
+			"select portletPreferencesId, ownerId, ownerType, plid, " +
+				"portletId, preferences from PortletPreferences where " +
+					"ownerType = ? and portletId = ?");
 
 		ps.setInt(1, ownerType);
 		ps.setString(2, portletId);
