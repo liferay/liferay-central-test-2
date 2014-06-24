@@ -25,7 +25,7 @@ import org.junit.Test;
 public class MapUtilLinkedHashMapTest {
 
 	@Test
-	public void testCustomDelimiter() throws Exception {
+	public void testDelimiterCustom() throws Exception {
 		Map<String, String> map = MapUtil.toLinkedHashMap(
 			new String[] {"one,1"}, ",");
 
@@ -35,7 +35,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testDefaultDelimiter() throws Exception {
+	public void testDelimiterDefault() throws Exception {
 		Map<String, String> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1"});
 
@@ -45,7 +45,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testInvalidKVPLength() throws Exception {
+	public void testParamsInvalid() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(new String[] {"one"});
 
 		Assert.assertTrue(map.isEmpty());
@@ -56,7 +56,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testNull() throws Exception {
+	public void testParamsNull() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(null);
 
 		Assert.assertTrue(map.isEmpty());
@@ -139,7 +139,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testTypeNonPrimitive() throws Exception {
+	public void testTypeComposite() throws Exception {
 		Map<String, Object> map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:" + Byte.class.getName()});
 
@@ -155,13 +155,8 @@ public class MapUtilLinkedHashMapTest {
 		Assert.assertTrue(map.containsKey("one"));
 		Assert.assertTrue(map.containsValue((float)1));
 		Assert.assertTrue(map.get("one") instanceof Float);
-	}
 
-	@Test
-	public void testTypeNonPrimitiveWithoutStringBasedConstructor()
-		throws Exception {
-
-		Map<String, Object> map = MapUtil.toLinkedHashMap(
+		map = MapUtil.toLinkedHashMap(
 			new String[] {"one:1:" + Object.class.getName()});
 
 		Assert.assertTrue(map.size() == 0);
@@ -198,7 +193,7 @@ public class MapUtilLinkedHashMapTest {
 	}
 
 	@Test
-	public void testZeroLength() throws Exception {
+	public void testParamsZeroLength() throws Exception {
 		Map<String, String> map = MapUtil.toLinkedHashMap(new String[0]);
 
 		Assert.assertTrue(map.isEmpty());
