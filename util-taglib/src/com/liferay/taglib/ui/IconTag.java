@@ -528,7 +528,7 @@ public class IconTag extends IncludeTag {
 		if ((iconListIconCount != null) || (iconListSingleIcon != null)) {
 			_label = true;
 
-			return true;
+			return _label;
 		}
 
 		IntegerWrapper iconMenuIconCount = (IntegerWrapper)request.getAttribute(
@@ -540,12 +540,12 @@ public class IconTag extends IncludeTag {
 		if ((iconMenuIconCount != null) || (iconMenuSingleIcon != null)) {
 			_label = true;
 
-			return true;
+			return _label;
 		}
 
 		_label = false;
 
-		return false;
+		return _label;
 	}
 
 	@Override
