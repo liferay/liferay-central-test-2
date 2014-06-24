@@ -61,11 +61,11 @@ public class CheckboxParametersPortletFilter
 		DynamicActionRequest dynamicActionRequest = new DynamicActionRequest(
 			actionRequest);
 
-		Set<String> parameters = SetUtil.fromEnumeration(
+		Set<String> parameterNames = SetUtil.fromEnumeration(
 			actionRequest.getParameterNames());
 
 		for (String checkboxName : StringUtil.split(checkboxNames)) {
-			if (!parameters.contains(checkboxName)) {
+			if (!parameterNames.contains(checkboxName)) {
 				dynamicActionRequest.setParameter(
 					checkboxName, Boolean.FALSE.toString());
 			}
@@ -91,11 +91,11 @@ public class CheckboxParametersPortletFilter
 		DynamicResourceRequest dynamicResourceRequest =
 			new DynamicResourceRequest(resourceRequest);
 
-		Set<String> parameters = SetUtil.fromEnumeration(
+		Set<String> parameterNames = SetUtil.fromEnumeration(
 			resourceRequest.getParameterNames());
 
 		for (String checkboxName : StringUtil.split(checkboxNames)) {
-			if (!parameters.contains(checkboxName)) {
+			if (!parameterNames.contains(checkboxName)) {
 				dynamicResourceRequest.setParameter(
 					checkboxName, Boolean.FALSE.toString());
 			}
