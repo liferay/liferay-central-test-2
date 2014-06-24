@@ -563,7 +563,7 @@ public class WabProcessor {
 		List<Element> elements = rootElement.elements("portlet");
 
 		for (Element element : elements) {
-			processPortletXML(rootElement.getQName(), element);
+			processPortletXML(element, rootElement.getQName());
 		}
 
 		try {
@@ -576,7 +576,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected void processPortletXML(QName qName, Element element) {
+	protected void processPortletXML(Element element, QName qName) {
 		String portletName = PortalUtil.getJsSafePortletId(
 			element.elementText("portlet-name"));
 
