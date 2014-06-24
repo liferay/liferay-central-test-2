@@ -564,10 +564,13 @@ public class WabProcessor {
 				element.elementText("portlet-name"));
 
 			String invokerPortletName =
-				_MODULE + _context + StringPool.SLASH + portletName;
+				Portal.PATH_MODULE.substring(1) + _context + StringPool.SLASH +
+					portletName;
 
 			XPath xPath = SAXReaderUtil.createXPath(
-				_INVOKER_PORTLET_NAME_XPATH, "x",
+				"x:init-param[x:name/text()='com.liferay.portal." +
+					"invokerPortletName']",
+				"x",
 				"http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd" );
 
 			Element invokerPortletNameEl = (Element)xPath.selectSingleNode(
@@ -602,7 +605,9 @@ public class WabProcessor {
 					invokerPortletName = StringPool.SLASH + invokerPortletName;
 				}
 
-				invokerPortletName = _MODULE + _context + invokerPortletName;
+				invokerPortletName =
+					Portal.PATH_MODULE.substring(1) + _context +
+						invokerPortletName;
 
 				valueElement.setText(invokerPortletName);
 			}
@@ -665,11 +670,6 @@ public class WabProcessor {
 
 		processPortletXML();
 	}
-
-	private static final String _INVOKER_PORTLET_NAME_XPATH =
-		"x:init-param[x:name/text()='com.liferay.portal.invokerPortletName']";
-
-	private static final String _MODULE = Portal.PATH_MODULE.substring(1);
 
 	private static Log _log = LogFactoryUtil.getLog(WabProcessor.class);
 
