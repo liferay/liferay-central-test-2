@@ -69,16 +69,15 @@ public class UpgradePortletSettings extends UpgradeProcess {
 
 			ps = con.prepareStatement(
 				"insert into PortletPreferences (mvccVersion, " +
-					"ownerId, ownerType, plid, portletId, " +
-					"portletPreferencesId, preferences) " +
-					"values (?, ?, ?, ?, ?, ?, ?)");
+					"portletPreferencesId, ownerId, ownerType, plid, " +
+						"portletId, preferences) values (?, ?, ?, ?, ?, ?, ?)");
 
 			ps.setLong(1, portletPreferencesRow.getMvccVersion());
-			ps.setLong(2, portletPreferencesRow.getOwnerId());
-			ps.setInt(3, portletPreferencesRow.getOwnerType());
-			ps.setLong(4, portletPreferencesRow.getPlid());
-			ps.setString(5, portletPreferencesRow.getPortletId());
-			ps.setLong(6, portletPreferencesRow.getPortletPreferencesId());
+			ps.setLong(2, portletPreferencesRow.getPortletPreferencesId());
+			ps.setLong(3, portletPreferencesRow.getOwnerId());
+			ps.setInt(4, portletPreferencesRow.getOwnerType());
+			ps.setLong(5, portletPreferencesRow.getPlid());
+			ps.setString(6, portletPreferencesRow.getPortletId());
 			ps.setString(7, portletPreferencesRow.getPreferences());
 
 			ps.executeUpdate();
