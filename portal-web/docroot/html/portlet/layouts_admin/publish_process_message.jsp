@@ -46,8 +46,9 @@ BackgroundTask backgroundTask = (BackgroundTask)row.getObject();
 		long currentProgressBarCountersTotal = currentModelAdditionCountersTotal + currentPortletAdditionCounter;
 
 		if (allProgressBarCountersTotal > 0) {
-			String phase = GetterUtil.getString(backgroundTaskStatus.getAttribute("phase"));
 			int base = 100;
+
+			String phase = GetterUtil.getString(backgroundTaskStatus.getAttribute("phase"));
 
 			if (Validator.isNotNull(phase) && phase.equals(Constants.EXPORT)) {
 				base = 50;
