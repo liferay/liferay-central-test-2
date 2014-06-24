@@ -385,7 +385,9 @@ public class WabProcessor {
 		return packageNames;
 	}
 
-	protected boolean processClassElement(Element element, Class<?> clazz) {
+	protected boolean processWebXMLClassElement(
+		Element element, Class<?> clazz) {
+
 		String elementValue = element.getTextTrim();
 
 		if (!elementValue.equals(clazz.getName())) {
@@ -706,7 +708,7 @@ public class WabProcessor {
 		for (Element element : rootElement.elements("filter")) {
 			Element filterClassElement = element.element("filter-class");
 
-			if (processClassElement(
+			if (processWebXMLClassElement(
 					filterClassElement, PortalClassLoaderFilter.class)) {
 
 				break;
@@ -716,7 +718,7 @@ public class WabProcessor {
 		for (Element element : rootElement.elements("servlet")) {
 			Element servletClassElement = element.element("servlet-class");
 
-			if (processClassElement(
+			if (processWebXMLClassElement(
 					servletClassElement, PortalClassLoaderServlet.class)) {
 
 				break;
