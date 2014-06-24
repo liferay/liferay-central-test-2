@@ -50,13 +50,6 @@ public class LayoutStagingBackgroundTaskStatusMessageTranslator
 		super.translateLayoutMessage(backgroundTaskStatus, message);
 
 		if (phase.equals(Constants.IMPORT)) {
-			backgroundTaskStatus.setAttribute(
-				"allPortletModelAdditionCounters",
-				new HashMap<String, LongWrapper>());
-			backgroundTaskStatus.setAttribute(
-				"currentPortletModelAdditionCounters",
-				new HashMap<String, LongWrapper>());
-
 			long allModelAdditionCountersTotal = GetterUtil.getLong(
 				backgroundTaskStatus.getAttribute(
 					"allModelAdditionCountersTotal"));
@@ -78,6 +71,13 @@ public class LayoutStagingBackgroundTaskStatusMessageTranslator
 			backgroundTaskStatus.setAttribute(
 				"allPortletAdditionCounter",
 				allPortletAdditionCounter + currentPortletAdditionCounter);
+
+			backgroundTaskStatus.setAttribute(
+				"allPortletModelAdditionCounters",
+				new HashMap<String, LongWrapper>());
+			backgroundTaskStatus.setAttribute(
+				"currentPortletModelAdditionCounters",
+				new HashMap<String, LongWrapper>());
 		}
 	}
 
