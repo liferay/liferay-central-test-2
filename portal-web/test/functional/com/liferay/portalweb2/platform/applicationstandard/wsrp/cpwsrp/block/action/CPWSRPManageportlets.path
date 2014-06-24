@@ -30,7 +30,7 @@
 </tr>
 <tr>
 	<td>ADD_PORTLET_BUTTON</td>
-	<td>//button[@type='button']</td>
+	<td>//a[@class='btn-default']</td>
 	<td></td>
 </tr>
 <tr>
