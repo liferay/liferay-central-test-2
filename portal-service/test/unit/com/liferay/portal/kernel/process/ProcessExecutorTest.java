@@ -824,20 +824,20 @@ public class ProcessExecutorTest {
 
 	@Test
 	public void testLargeProcessCallable() throws Exception {
-		byte[] reallyLargePayload = new byte[100 * 1024 * 1024];
+		byte[] largePayload = new byte[100 * 1024 * 1024];
 
 		Random random = new Random();
 
-		random.nextBytes(reallyLargePayload);
+		random.nextBytes(largePayload);
 
 		EchoPayloadProcessCallable echoPayloadProcessCallable =
-			new EchoPayloadProcessCallable(reallyLargePayload);
+			new EchoPayloadProcessCallable(largePayload);
 
 		Future<byte[]> future = ProcessExecutor.execute(
 			_classPath, _classPath, _createArguments(_JPDA_OPTIONS1),
 			echoPayloadProcessCallable);
 
-		Assert.assertArrayEquals(reallyLargePayload, future.get());
+		Assert.assertArrayEquals(largePayload, future.get());
 		Assert.assertFalse(future.isCancelled());
 		Assert.assertTrue(future.isDone());
 	}
@@ -848,21 +848,21 @@ public class ProcessExecutorTest {
 			echoRuntimeClassPathProcessCallable =
 				new EchoRuntimeClassPathProcessCallable();
 
-		char[] reallyLongFileNameChars = new char[10 * 1024 * 1024];
+		char[] largeFileNameChars = new char[10 * 1024 * 1024];
 
-		reallyLongFileNameChars[0] = CharPool.SLASH;
+		largeFileNameChars[0] = CharPool.SLASH;
 
-		for (int i = 1; i < reallyLongFileNameChars.length; i++) {
-			reallyLongFileNameChars[i] = (char)('a' + (i % 26));
+		for (int i = 1; i < largeFileNameChars.length; i++) {
+			largeFileNameChars[i] = (char)('a' + (i % 26));
 		}
 
-		String reallyLongFileName = new String(reallyLongFileNameChars);
+		String largeFileName = new String(largeFileNameChars);
 
 		Future<String> future = ProcessExecutor.execute(
-			_classPath, reallyLongFileName, _createArguments(_JPDA_OPTIONS1),
+			_classPath, largeFileName, _createArguments(_JPDA_OPTIONS1),
 			echoRuntimeClassPathProcessCallable);
 
-		Assert.assertEquals(reallyLongFileName, future.get());
+		Assert.assertEquals(largeFileName, future.get());
 		Assert.assertFalse(future.isCancelled());
 		Assert.assertTrue(future.isDone());
 	}
@@ -1757,7 +1757,7 @@ public class ProcessExecutorTest {
 			return _payload;
 		}
 
-		private final byte[] _payload;
+		private byte[] _payload;
 
 	}
 
