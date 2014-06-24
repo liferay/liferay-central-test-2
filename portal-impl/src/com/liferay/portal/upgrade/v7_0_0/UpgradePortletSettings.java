@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.upgrade.UpgradeProcess;
+import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.upgrade.v7_0_0.util.PortletPreferencesRow;
 import com.liferay.portal.util.PortletKeys;
@@ -111,9 +112,18 @@ public class UpgradePortletSettings extends UpgradeProcess {
 					portletPreferencesRow.setPlid(0);
 
 					if (_log.isInfoEnabled()) {
-						_log.info("Copying settings of portlet " + portletId + " placed in layout " + plid + " to service " + serviceName + " in group " + groupId);
-					}
+						StringBundler sb = new StringBundler(7);
+						
+						sb.append("Copying portlet ");
+						sb.append(portletId);
+						sb.append(" settings from layout ");
+						sb.append(plid);
+						sb.append(" to service ");
+						sb.append(serviceName);
+						sb.append(" in group " + groupId);
 
+						_log.info(sb.toString());
+					}
 				}
 
 				addPortletPreferences(portletPreferencesRow);
@@ -123,6 +133,7 @@ public class UpgradePortletSettings extends UpgradeProcess {
 			DataAccess.deepCleanUp(rs);
 		}
 	}
+
 
 	@Override
 	protected void doUpgrade() throws Exception {
