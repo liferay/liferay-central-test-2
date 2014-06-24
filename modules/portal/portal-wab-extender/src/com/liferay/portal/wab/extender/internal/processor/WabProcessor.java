@@ -569,8 +569,6 @@ public class WabProcessor {
 		processBundleSymbolicName(analyzer);
 		processExtraHeaders(analyzer);
 
-		// Order is important
-
 		processBundleVersion(analyzer);
 
 		processManifestVersion(analyzer);
