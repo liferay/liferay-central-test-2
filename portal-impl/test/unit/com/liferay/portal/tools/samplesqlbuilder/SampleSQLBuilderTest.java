@@ -47,7 +47,7 @@ public class SampleSQLBuilderTest {
 
 		Properties properties = new SortedProperties();
 
-		_populateProperties(properties, tempDirectory.getAbsolutePath());
+		_initProperties(properties, tempDirectory.getAbsolutePath());
 
 		try {
 			new SampleSQLBuilder(properties, new DataFactory(properties));
@@ -88,7 +88,7 @@ public class SampleSQLBuilderTest {
 		}
 	}
 
-	private void _populateProperties(
+	private void _initProperties(
 		Properties properties, String outputDirectory) {
 
 		properties.put(
