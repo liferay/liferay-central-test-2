@@ -221,12 +221,11 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				PortletPreferencesRow portletPreferencesRow =
 					getPortletPreferencesRow(rs);
 
-				javax.portlet.PortletPreferences
-					javaxPortletPreferences =
-						PortletPreferencesFactoryUtil.fromDefaultXML(
-							portletPreferencesRow.getPreferences());
+				javax.portlet.PortletPreferences jxPortletPreferences =
+					PortletPreferencesFactoryUtil.fromDefaultXML(
+						portletPreferencesRow.getPreferences());
 
-				Enumeration<String> names = javaxPortletPreferences.getNames();
+				Enumeration<String> names = jxPortletPreferences.getNames();
 
 				List<String> keysToReset = new ArrayList<String>();
 
@@ -243,12 +242,12 @@ public class UpgradePortletSettings extends UpgradeProcess {
 				}
 
 				for (String keyToReset : keysToReset) {
-					javaxPortletPreferences.reset(keyToReset);
+					jxPortletPreferences.reset(keyToReset);
 				}
 
 				portletPreferencesRow.setPreferences(
 					PortletPreferencesFactoryUtil.toXML(
-						javaxPortletPreferences));
+						jxPortletPreferences));
 
 				updatePortletPreferences(portletPreferencesRow);
 			}
