@@ -365,46 +365,46 @@ public class WabProcessor {
 	}
 
 	protected void processExtraHeaders(Analyzer analyzer) {
-		Properties properties = PropsUtil.getProperties(
-			PropsKeys.MODULE_FRAMEWORK_WEB_EXTENDER_HEADERS, true);
-
 		String bundleSymbolicName = analyzer.getProperty(
 			Constants.BUNDLE_SYMBOLICNAME);
+
+		Properties properties = PropsUtil.getProperties(
+			PropsKeys.MODULE_FRAMEWORK_WEB_EXTENDER_HEADERS, true);
 
 		Enumeration<Object> keys = properties.keys();
 
 		while (keys.hasMoreElements()) {
 			String key = (String)keys.nextElement();
-			String originalKey = key;
 
-			if (key.endsWith(StringPool.CLOSE_BRACKET)) {
-				String filter =
+			String value = properties.getProperty(key);
+
+			String processedKey = key;
+
+			if (processedKey.endsWith(StringPool.CLOSE_BRACKET)) {
+				String filterString =
 					StringPool.OPEN_BRACKET + bundleSymbolicName +
 						StringPool.CLOSE_BRACKET;
 
-				if (!key.endsWith(filter)) {
+				if (!processedKey.endsWith(filterString)) {
 					continue;
 				}
 
-				key = key.substring(0, key.indexOf(StringPool.OPEN_BRACKET));
+				processedKey = processedKey.substring(
+					0, processedKey.indexOf(StringPool.OPEN_BRACKET));
 			}
 
-			String value = properties.getProperty(originalKey);
-
-			if (key.equals(Constants.IMPORT_PACKAGE) &&
-				Validator.isNotNull(value)) {
-
-				Collections.addAll(
-					_importPackageNames, StringUtil.split(value));
-			}
-			else if (key.equals(Constants.EXPORT_PACKAGE) &&
-					 Validator.isNotNull(value)) {
-
-				Collections.addAll(
-					_exportPackageNames, StringUtil.split(value));
+			if (Validator.isNotNull(value)) {
+				if (processedKey.equals(Constants.EXPORT_PACKAGE)) {
+					Collections.addAll(
+						_exportPackageNames, StringUtil.split(value));
+				}
+				else if (processedKey.equals(Constants.IMPORT_PACKAGE)) {
+					Collections.addAll(
+						_importPackageNames, StringUtil.split(value));
+				}
 			}
 
-			analyzer.setProperty(key, value);
+			analyzer.setProperty(processedKey, value);
 		}
 	}
 
