@@ -336,8 +336,8 @@ public class UpgradePortletSettings extends UpgradeProcess {
 		throws Exception {
 
 		return new PortletPreferencesRow(
-			rs.getLong("ownerId"), rs.getInt("ownerType"), rs.getLong("plid"),
-			rs.getString("portletId"), rs.getLong("portletPreferencesId"),
+			rs.getLong("portletPreferencesId"), rs.getLong("ownerId"), rs.getInt("ownerType"),
+			rs.getLong("plid"), rs.getString("portletId"),
 			rs.getString("preferences"));
 	}
 
