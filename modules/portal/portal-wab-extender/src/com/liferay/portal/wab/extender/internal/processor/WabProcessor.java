@@ -408,20 +408,20 @@ public class WabProcessor {
 		processDefaultServletPackages();
 		processTLDDependencies();
 
-		processXmlDependencies(
+		processXMLDependencies(
 			"WEB-INF/web.xml",
 			new String[] {
 				"//x:filter-class", "//x:listener-class","//x:servlet-class"
 			}, "x","http://java.sun.com/xml/ns/j2ee");
 
-		processXmlDependencies(
+		processXMLDependencies(
 			"WEB-INF/portlet.xml",
 			new String[] {
 				"//x:filter-class", "//x:listener-class", "//x:portlet-class",
 				"//x:resource-bundle"
 			}, "x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
-		processXmlDependencies(
+		processXMLDependencies(
 			"WEB-INF/liferay-portlet.xml",
 			new String[] {
 				"//configuration-action-class", "//indexer-class",
@@ -438,7 +438,7 @@ public class WabProcessor {
 				"//workflow-handler"
 			}, null, null);
 
-		processXmlDependencies(
+		processXMLDependencies(
 			"WEB-INF/liferay-hook.xml",
 			new String[] {
 				"//indexer-post-processor-impl", "//service-impl",
@@ -842,11 +842,12 @@ public class WabProcessor {
 		formatDocument(file, document);
 	}
 
-	protected void processXmlDependencies(
-			String path, String[] xpaths, String prefix, String namespace)
+	protected void processXMLDependencies(
+			String fileName, String[] xPathExpressions, String prefix,
+			String namespace)
 		throws IOException {
 
-		File file = new File(_file, path);
+		File file = new File(_file, fileName);
 
 		if (!file.exists()) {
 			return;
@@ -858,8 +859,9 @@ public class WabProcessor {
 
 		DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
-		for (String xpath : xpaths) {
-			XPath xPath = SAXReaderUtil.createXPath(xpath, prefix, namespace);
+		for (String xPathExpression : xPathExpressions) {
+			XPath xPath = SAXReaderUtil.createXPath(
+				xPathExpression, prefix, namespace);
 
 			List<Node> nodes = xPath.selectNodes(rootElement);
 
