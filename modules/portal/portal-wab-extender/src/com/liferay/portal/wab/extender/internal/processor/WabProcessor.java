@@ -730,7 +730,9 @@ public class WabProcessor {
 			Matcher matcher = _tldPackagesPattern.matcher(content);
 
 			while (matcher.find()) {
-				String value = matcher.group(1).trim();
+				String value = matcher.group(1);
+
+				value = value.trim();
 
 				processClass(
 					new ClassLoaderSource(_classLoader), dependencyVisitor,
