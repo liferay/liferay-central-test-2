@@ -208,6 +208,17 @@ public class WabProcessor {
 		}
 	}
 
+	protected void formatDocument(File file, Document document)
+		throws IOException {
+
+		try {
+			FileUtil.write(file, DDMXMLUtil.formatXML(document));
+		}
+		catch (Exception e) {
+			throw new IOException(e);
+		}
+	}
+
 	protected String getFileName(String className) {
 		return className.replace(CharPool.PERIOD, CharPool.SLASH) + ".class";
 	}
@@ -540,16 +551,7 @@ public class WabProcessor {
 			return;
 		}
 
-		String content = FileUtil.read(file);
-
-		Document document = null;
-
-		try {
-			document = SAXReaderUtil.read(content);
-		}
-		catch (DocumentException de) {
-			throw new IOException(de);
-		}
+		Document document = readDocument(file);
 
 		Element rootElement = document.getRootElement();
 
@@ -569,14 +571,7 @@ public class WabProcessor {
 			strutsPathElement.setText(_MODULE + _context + strutsPath);
 		}
 
-		try {
-			content = DDMXMLUtil.formatXML(document);
-
-			FileUtil.write(file, content);
-		}
-		catch (Exception e) {
-			throw new IOException(e);
-		}
+		formatDocument(file, document);
 	}
 
 	protected void processManifestVersion(Analyzer analyzer) {
@@ -598,16 +593,7 @@ public class WabProcessor {
 			return;
 		}
 
-		String content = FileUtil.read(file);
-
-		Document document = null;
-
-		try {
-			document = SAXReaderUtil.read(content);
-		}
-		catch (DocumentException de) {
-			throw new IOException(de);
-		}
+		Document document = readDocument(file);
 
 		Element rootElement = document.getRootElement();
 
@@ -617,14 +603,7 @@ public class WabProcessor {
 			processPortletXML(element, rootElement.getQName());
 		}
 
-		try {
-			content = DDMXMLUtil.formatXML(document);
-
-			FileUtil.write(file, content);
-		}
-		catch (Exception e) {
-			throw new IOException(e);
-		}
+		formatDocument(file, document);
 	}
 
 	protected void processPortletXML(Element element, QName qName) {
@@ -635,9 +614,9 @@ public class WabProcessor {
 			_MODULE + _context + StringPool.SLASH + portletName;
 
 		XPath xPath = SAXReaderUtil.createXPath(
-			"x:init-param[x:name/text()='com.liferay.portal." +
-				"invokerPortletName']",
-			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
+				"x:init-param[x:name/text()='com.liferay.portal." +
+						"invokerPortletName']",
+				"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
 		Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
 			element);
@@ -741,16 +720,7 @@ public class WabProcessor {
 			return;
 		}
 
-		String content = FileUtil.read(file);
-
-		Document document = null;
-
-		try {
-			document = SAXReaderUtil.read(content);
-		}
-		catch (DocumentException de) {
-			throw new IOException(de);
-		}
+		Document document = readDocument(file);
 
 		Element rootElement = document.getRootElement();
 
@@ -774,13 +744,17 @@ public class WabProcessor {
 			}
 		}
 
-		try {
-			content = DDMXMLUtil.formatXML(document);
+		formatDocument(file, document);
+	}
 
-			FileUtil.write(file, content);
+	protected Document readDocument(File file) throws IOException {
+		String content = FileUtil.read(file);
+
+		try {
+			return SAXReaderUtil.read(content);
 		}
-		catch (Exception e) {
-			throw new IOException(e);
+		catch (DocumentException de) {
+			throw new IOException(de);
 		}
 	}
 
