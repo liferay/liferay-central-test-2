@@ -419,18 +419,16 @@ public class WabProcessor {
 		processXMLDependencies(
 			"WEB-INF/liferay-portlet.xml",
 			new String[] {
-				"configuration-action-class", "indexer-class",
-				"open-search-class", "portlet-url-class",
-				"friendly-url-mapper-class", "url-encoder-class",
-				"portlet-data-handler-class",
-				"portlet-layout-listener-class", "poller-processor-class",
-				"pop-message-listener-class",
-				"social-activity-interpreter-class",
-				"social-request-interpreter-class", "webdav-storage-class",
-				"xml-rpc-method-class", "control-panel-entry-class",
 				"asset-renderer-factory", "atom-collection-adapter",
-				"custom-attributes-display", "permission-propagator",
-				"workflow-handler"
+				"configuration-action-class", "control-panel-entry-class",
+				"custom-attributes-display", "friendly-url-mapper-class",
+				"indexer-class", "open-search-class", "permission-propagator",
+				"poller-processor-class", "pop-message-listener-class",
+				"portlet-data-handler-class", "portlet-layout-listener-class",
+				"portlet-url-class", "social-activity-interpreter-class",
+				"social-request-interpreter-class", "url-encoder-class",
+				"webdav-storage-class", "workflow-handler",
+				"xml-rpc-method-class"
 			},
 			null, null);
 
