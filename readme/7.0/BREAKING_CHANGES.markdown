@@ -265,21 +265,30 @@ configuration and make any necessary modifications.
 Unifying portlet and service configuration facilitates managing them.
 
 ---------------------------------------
-### DDM Structure Local Service API has no longer the `updateXSDFieldMetadata()` operation
+### DDM Structure Local Service API No Longer Has the `updateXSDFieldMetadata()` operation
 - **Date:** 2014-Jun-11
 - **JIRA Ticket:** LPS-47559
 
 #### What changed?
-DDM Structure Local API users should not make direct reference to its internal representation, any call to modify the its content should be done through DDMForm model.
+The `updateXSDFieldMetadata()` operation was removed from the DDM Structure
+Local Service API.
+
+DDM Structure Local API users should reference a structure's internal
+representation; any call to modify a DDM structure's content should be done
+through DDMForm model.
 
 #### Who is affected?
 Applications that use the DDM Structure Local Service API might be affected.
 
 #### How should I update my code?
-You should always use DDMForm to update the DDM Structure content. You can retrieve it by calling `ddmStructure.getDDMForm()`. Peform any changes to it and then call `DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure)`.
+You should always use DDMForm to update the DDM Structure content. You can
+retrieve it by calling `ddmStructure.getDDMForm()`. Peform any changes to it and
+then call `DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure)`.
 
 #### Why was this change made?
-This change gives users the flexibility to modify the structure content without to worry about the DDM Structure internal content representation of data.
+This change gives users the flexibility to modify the structure content without
+concerning themselves with the DDM Structure's internal content representation
+of data.
 
 ---------------------------------------
 ### aui:input taglib for type checkbox does not create a hidden input anymore
