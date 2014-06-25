@@ -874,9 +874,9 @@ public class WabProcessor {
 			}
 		}
 
-		for (String referencedPackage : dependencyVisitor.getGlobals()) {
+		for (String global : dependencyVisitor.getGlobals()) {
 			_importPackageNames.add(
-				referencedPackage.replaceAll(
+				global.replaceAll(
 					StringPool.SLASH, StringPool.PERIOD));
 		}
 	}
