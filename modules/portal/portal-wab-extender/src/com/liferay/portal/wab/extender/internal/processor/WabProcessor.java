@@ -417,10 +417,10 @@ public class WabProcessor {
 				PropsValues.
 					MODULE_FRAMEWORK_WEB_EXTENDER_DEFAULT_SERVLET_PACKAGES) {
 
-			int pos = value.indexOf(StringPool.SEMICOLON);
+			int index = value.indexOf(StringPool.SEMICOLON);
 
-			if (pos != -1) {
-				value = value.substring(0, pos);
+			if (index != -1) {
+				value = value.substring(0, index);
 			}
 
 			_importPackageNames.add(value.trim());
@@ -642,9 +642,9 @@ public class WabProcessor {
 				portletName;
 
 		XPath xPath = SAXReaderUtil.createXPath(
-				"x:init-param[x:name/text()='com.liferay.portal." +
-						"invokerPortletName']",
-				"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
+			"x:init-param[x:name/text()='com.liferay.portal." +
+				"invokerPortletName']",
+			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
 		Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
 			element);
@@ -714,16 +714,16 @@ public class WabProcessor {
 	}
 
 	protected void processTldDependencies() throws IOException {
-		File file = new File(_file, "WEB-INF/tld");
+		File dir = new File(_file, "WEB-INF/tld");
 
-		if (!file.exists() || !file.isDirectory()) {
+		if (!dir.exists() || !dir.isDirectory()) {
 			return;
 		}
 
-		File[] files = file.listFiles(new FileFilter(".*\\.tld"));
+		File[] files = dir.listFiles(new FileFilter(".*\\.tld"));
 
-		for (File tldFile : files) {
-			String content = FileUtil.read(tldFile);
+		for (File file : files) {
+			String content = FileUtil.read(file);
 
 			DependencyVisitor dependencyVisitor = new DependencyVisitor();
 
