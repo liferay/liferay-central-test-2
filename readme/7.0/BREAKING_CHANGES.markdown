@@ -233,7 +233,7 @@ Some content (such as web content) needs the `PortletRequest` and
 Previously, some portlets allowed separate setups per portlet instance,
 regardless of whether the instances were in the same page or in different pages.
 For some of the portlet setup fields, however, it didn't make sense to allow
-different values in different instances. The flexbility of these fields was
+different values in different instances. The flexibility of these fields was
 unnecessary and confused users. As part of this change, these fields have been
 moved from portlet instance setup to Site Administration.
 
@@ -275,14 +275,14 @@ Local Service API.
 
 DDM Structure Local API users should reference a structure's internal
 representation; any call to modify a DDM structure's content should be done
-through DDMForm model.
+through the DDMForm model.
 
 #### Who is affected?
 Applications that use the DDM Structure Local Service API might be affected.
 
 #### How should I update my code?
 You should always use DDMForm to update the DDM Structure content. You can
-retrieve it by calling `ddmStructure.getDDMForm()`. Peform any changes to it and
+retrieve it by calling `ddmStructure.getDDMForm()`. Perform any changes to it and
 then call `DDMStructureLocalServiceUtil.updateDDMStructure(ddmStructure)`.
 
 #### Why was this change made?
@@ -291,24 +291,48 @@ concerning themselves with the DDM Structure's internal content representation
 of data.
 
 ---------------------------------------
-### aui:input taglib for type checkbox does not create a hidden input anymore
+### The `aui:input` Taglib for Type `checkbox` No Longer Creates a Hidden Input
 - **Date:** 2014-Jun-16
 - **JIRA Ticket:** LPS-44228
 
 #### What changed?
-Whenever the aui:input taglib is used to generate an input of type checkbox, only an input tag will be generated, instead of the checkbox and hidden field it was generating before.
+Whenever the `aui:input` taglib is used to generate an input of type `checkbox`,
+only an input tag is generated; the checkbox and hidden field that the taglib
+was generating previously is no longer generated. For this reason, when a
+checkbox is not checked, no parameter is sent to the server. As a result,
+invoking `request.getParameter("checkboxName")` returns `null` if the checkbox
+is unchecked. In order to help you bypass this situation, a parameter named
+"checkboxNames", that contains a list of all the checkboxes that existed in the
+form, is now sent along with the `aui:form`.
 
 #### Who is affected?
-Anyone trying to grab the previously generated fields. Mostly affects JavaScript code trying to add some additional actions when clicking on the checkboxes.
+Anyone trying to grab the previously generated fields is affected. The change
+mostly affects JavaScript code trying to add some additional actions when
+clicking on the checkboxes. The change also affects Java classes that assume a
+checkbox always sends a parameter with a true/false value on form submit. Now,
+the parameter is only sent when the input is checked.
 
 #### How should I update my code?
-- Remove the `Checkbox` suffix when querying for the node in any of its forms; `A.one(...)`, `$(...)` ...
-- Remove any action trying to set the value of the checkbox on the previously generated hidden field
+In your front-end JavaScript code, follow these steps:
+
+- Remove the `Checkbox` suffix when querying for the node in any of its forms,
+like `A.one(...)`, `$(...)`, etc. 
+- Remove any action that tries to set the value of the checkbox on the
+previously generated hidden field.
+
+In your back-end Java code, follow these steps:
+
+- Use `ParamUtil.getBoolean` to recover a true/false value if the checkbox was
+checked or not checked.
+- Use `PropertiesParamUtil.getProperties` to recover a true/false value for a
+list of checkboxes.
+- Use the parameter called "checkboxNames" to obtain all checkboxes from the
+`aui:form`.
 
 #### Why was this change made?
-This change:
-- Makes generated forms more standard and interoperable since it falls back to the checkboxes default behaviour.
-- Allows the form to be submitted properly even when JavaScript is disabled.
+This change makes generated forms more standard and interoperable since it falls
+back to the checkboxes default behavior. It allows the form to be submitted
+properly even when JavaScript is disabled.
 
 ---------------------------------------
 ### As a developer I'd like to be able to use util-taglib without needing to use the same javax.servlet.jsp impl as portal-service
