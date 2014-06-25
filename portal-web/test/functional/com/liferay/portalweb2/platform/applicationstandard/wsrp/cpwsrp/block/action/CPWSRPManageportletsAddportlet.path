@@ -35,7 +35,7 @@
 </tr>
 <tr>
 	<td>REMOTE_PORTLET_SELECT</td>
-	<td>//select[@class='form-control']</td>
+	<td>//select[@id='_1_WAR_wsrpportlet_portletHandle']</td>
 	<td></td>
 </tr>
 <tr>
@@ -46,7 +46,7 @@
 <tr>
 	<td>CANCEL_BUTTON</td>
 	<td>//a[contains(@class,'btn-cancel')]</td>
-	<td>Cancel</td>
+	<td></td>
 </tr>
 </tbody>
 </table>

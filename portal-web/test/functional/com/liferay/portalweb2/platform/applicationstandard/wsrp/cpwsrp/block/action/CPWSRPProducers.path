@@ -40,7 +40,7 @@
 </tr>
 <tr>
 	<td>ADD_PRODUCER_BUTTON</td>
-	<td>//a[@class='btn btn-default']</td>
+	<td>//a[contains(.,'Add Producer')]</td>
 	<td></td>
 </tr>
 <tr>
