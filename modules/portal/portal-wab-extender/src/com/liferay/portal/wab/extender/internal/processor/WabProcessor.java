@@ -772,11 +772,10 @@ public class WabProcessor {
 
 		processManifestVersion(analyzer);
 
+		processLiferayPortletXML();
 		processPortletXML();
-
 		processWebXML("WEB-INF/web.xml");
 		processWebXML("WEB-INF/liferay-web.xml");
-		processLiferayPortletXML();
 	}
 
 	private static final String _MODULE = Portal.PATH_MODULE.substring(1);
