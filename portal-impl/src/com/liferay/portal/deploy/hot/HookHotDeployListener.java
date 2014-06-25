@@ -813,15 +813,6 @@ public class HookHotDeployListener
 			autoDeployListenersContainer.unregisterAutoDeployListeners();
 		}
 
-		for (AutoLogin autoLogin :_autoLogins) {
-			serviceRegistration = serviceRegistrations
-				.remove(autoLogin.getClass().getName());
-
-			if (serviceRegistration != null) {
-				serviceRegistration.unregister();
-			}
-		}
-
 		CustomJspBag customJspBag = _customJspBagsMap.remove(
 			servletContextName);
 
@@ -1184,10 +1175,10 @@ public class HookHotDeployListener
 			AutoLogin autoLogin = (AutoLogin)newInstance(
 				portletClassLoader, AutoLogin.class, autoLoginClassName);
 
-			serviceRegistration = registry.registerService(
-				AutoLogin.class, autoLogin);
+			ServiceRegistration<AutoLogin> serviceRegistration =
+				registry.registerService(AutoLogin.class, autoLogin);
+
 			serviceRegistrations.put(autoLoginClassName, serviceRegistration);
-			_autoLogins.add(autoLogin);
 		}
 	}
 
@@ -2885,7 +2876,6 @@ public class HookHotDeployListener
 	private Map<String, AutoDeployListenersContainer>
 		_autoDeployListenersContainerMap =
 			new HashMap<String, AutoDeployListenersContainer>();
-	private List<AutoLogin> _autoLogins = new ArrayList<AutoLogin>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
 	private Map<String, DLFileEntryProcessorContainer>
