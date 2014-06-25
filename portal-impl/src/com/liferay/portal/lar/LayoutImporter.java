@@ -443,7 +443,7 @@ public class LayoutImporter {
 		List<Element> portletElements = portletsElement.elements("portlet");
 
 		if (BackgroundTaskThreadLocal.hasBackgroundTask()) {
-			List<String> portletIds = new ArrayList();
+			List<String> portletIds = new ArrayList<String>();
 
 			for (Element portletElement : portletElements) {
 				String portletId = portletElement.attributeValue("portlet-id");

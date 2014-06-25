@@ -33,14 +33,13 @@ public class LayoutStagingBackgroundTaskStatusMessageTranslator
 		BackgroundTaskStatus backgroundTaskStatus) {
 
 		long allModelAdditionCountersTotal = GetterUtil.getLong(
-			backgroundTaskStatus.getAttribute(
-				"allModelAdditionCountersTotal"));
+			backgroundTaskStatus.getAttribute("allModelAdditionCountersTotal"));
 		long currentModelAdditionCountersTotal = GetterUtil.getLong(
 			backgroundTaskStatus.getAttribute(
 				"currentModelAdditionCountersTotal"));
-				
+
 		return allModelAdditionCountersTotal +
-			currentModelAdditionCountersTotal; 
+			currentModelAdditionCountersTotal;
 	}
 
 	protected long getAllPortletAdditionCounter(
@@ -49,12 +48,11 @@ public class LayoutStagingBackgroundTaskStatusMessageTranslator
 		long allPortletAdditionCounter = GetterUtil.getLong(
 			backgroundTaskStatus.getAttribute("allPortletAdditionCounter"));
 		long currentPortletAdditionCounter = GetterUtil.getLong(
-			backgroundTaskStatus.getAttribute(
-				"currentPortletAdditionCounter"));
-				
-		return allPortletAdditionCounter + currentPortletAdditionCounter; 
+			backgroundTaskStatus.getAttribute("currentPortletAdditionCounter"));
+
+		return allPortletAdditionCounter + currentPortletAdditionCounter;
 	}
-	
+
 	@Override
 	protected synchronized void translateLayoutMessage(
 		BackgroundTaskStatus backgroundTaskStatus, Message message) {

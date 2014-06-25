@@ -28,19 +28,18 @@ import java.util.HashMap;
  */
 public class PortletStagingBackgroundTaskStatusMessageTranslator
 	extends DefaultExportImportBackgroundTaskStatusMessageTranslator {
-	
+
 	protected long getAllModelAdditionCountersTotal(
 		BackgroundTaskStatus backgroundTaskStatus) {
 
 		long allModelAdditionCountersTotal = GetterUtil.getLong(
-			backgroundTaskStatus.getAttribute(
-				"allModelAdditionCountersTotal"));
+			backgroundTaskStatus.getAttribute("allModelAdditionCountersTotal"));
 		long currentModelAdditionCountersTotal = GetterUtil.getLong(
 			backgroundTaskStatus.getAttribute(
 				"currentModelAdditionCountersTotal"));
-				
+
 		return allModelAdditionCountersTotal +
-			currentModelAdditionCountersTotal; 
+			currentModelAdditionCountersTotal;
 	}
 
 	@Override
@@ -83,6 +82,5 @@ public class PortletStagingBackgroundTaskStatusMessageTranslator
 
 		super.translatePortletMessage(backgroundTaskStatus, message);
 	}
-
 
 }
