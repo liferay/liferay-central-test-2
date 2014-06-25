@@ -415,7 +415,7 @@ public class WabProcessor {
 				"servlet-filter-impl", "struts-action-impl"
 			},
 			null, null);
-			
+
 		processXMLDependencies(
 			"WEB-INF/liferay-portlet.xml",
 			new String[] {
@@ -880,8 +880,7 @@ public class WabProcessor {
 
 		for (String global : dependencyVisitor.getGlobals()) {
 			_importPackageNames.add(
-				global.replaceAll(
-					StringPool.SLASH, StringPool.PERIOD));
+				global.replaceAll(StringPool.SLASH, StringPool.PERIOD));
 		}
 	}
 
