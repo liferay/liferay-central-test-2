@@ -870,13 +870,13 @@ public class WabProcessor {
 			List<Node> nodes = xPath.selectNodes(rootElement);
 
 			for (Node node : nodes) {
-				String textNode = node.getText();
+				String text = node.getText();
 
-				textNode = textNode.trim();
+				text = text.trim();
 
 				processClass(
 					new ClassLoaderSource(_classLoader), dependencyVisitor,
-					getFileName(textNode));
+					getFileName(text));
 			}
 		}
 
