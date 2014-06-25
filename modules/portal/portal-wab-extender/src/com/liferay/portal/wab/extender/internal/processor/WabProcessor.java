@@ -409,20 +409,13 @@ public class WabProcessor {
 		processTLDDependencies();
 
 		processXMLDependencies(
-			"WEB-INF/web.xml",
+			"WEB-INF/liferay-hook.xml",
 			new String[] {
-				"//x:filter-class", "//x:listener-class","//x:servlet-class"
+				"//indexer-post-processor-impl", "//service-impl",
+				"//servlet-filter-impl", "//struts-action-impl"
 			},
-			"x","http://java.sun.com/xml/ns/j2ee");
-
-		processXMLDependencies(
-			"WEB-INF/portlet.xml",
-			new String[] {
-				"//x:filter-class", "//x:listener-class", "//x:portlet-class",
-				"//x:resource-bundle"
-			},
-			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
-
+			null, null);
+			
 		processXMLDependencies(
 			"WEB-INF/liferay-portlet.xml",
 			new String[] {
@@ -442,12 +435,19 @@ public class WabProcessor {
 			null, null);
 
 		processXMLDependencies(
-			"WEB-INF/liferay-hook.xml",
+			"WEB-INF/portlet.xml",
 			new String[] {
-				"//indexer-post-processor-impl", "//service-impl",
-				"//servlet-filter-impl", "//struts-action-impl"
+				"//x:filter-class", "//x:listener-class", "//x:portlet-class",
+				"//x:resource-bundle"
 			},
-			null, null);
+			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
+
+		processXMLDependencies(
+			"WEB-INF/web.xml",
+			new String[] {
+				"//x:filter-class", "//x:listener-class","//x:servlet-class"
+			},
+			"x","http://java.sun.com/xml/ns/j2ee");
 	}
 
 	protected void processDefaultServletPackages() {
