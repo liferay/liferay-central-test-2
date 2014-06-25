@@ -112,7 +112,7 @@ public class WabProcessor {
 		return null;
 	}
 
-	protected void add(Element element, String name, String text) {
+	protected void addElement(Element element, String name, String text) {
 		Element childElement = element.addElement(name);
 
 		childElement.addText(GetterUtil.getString(text));
@@ -607,11 +607,10 @@ public class WabProcessor {
 			Element initParamElement = SAXReaderUtil.createElement(
 				SAXReaderUtil.createQName("init-param", qName.getNamespace()));
 
-			add(
+			addElement(
 				initParamElement, "name",
 				"com.liferay.portal.invokerPortletName");
-
-			add(initParamElement, "value", invokerPortletName);
+			addElement(initParamElement, "value", invokerPortletName);
 
 			nodes.add(index + 1, initParamElement);
 		}
