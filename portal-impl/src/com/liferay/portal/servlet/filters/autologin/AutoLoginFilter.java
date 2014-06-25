@@ -270,6 +270,7 @@ public class AutoLoginFilter extends BasePortalFilter {
 
 	private static List<AutoLogin> _autoLogins =
 		new CopyOnWriteArrayList<AutoLogin>();
+
 	private ServiceTracker<?, AutoLogin> _serviceTracker;
 
 	private class AutoLoginServiceTrackerCustomizer
