@@ -734,7 +734,7 @@ public class WabProcessor {
 
 				processClass(
 					new ClassLoaderSource(_classLoader), dependencyVisitor,
-					value.replace('.', '/') + ".class");
+					getFileName(value));
 			}
 
 			for (String global : dependencyVisitor.getGlobals()) {
