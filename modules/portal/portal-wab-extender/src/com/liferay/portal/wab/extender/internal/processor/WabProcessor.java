@@ -411,43 +411,43 @@ public class WabProcessor {
 		processXMLDependencies(
 			"WEB-INF/liferay-hook.xml",
 			new String[] {
-				"//indexer-post-processor-impl", "//service-impl",
-				"//servlet-filter-impl", "//struts-action-impl"
+				"indexer-post-processor-impl", "service-impl",
+				"servlet-filter-impl", "struts-action-impl"
 			},
 			null, null);
 			
 		processXMLDependencies(
 			"WEB-INF/liferay-portlet.xml",
 			new String[] {
-				"//configuration-action-class", "//indexer-class",
-				"//open-search-class", "//portlet-url-class",
-				"//friendly-url-mapper-class", "//url-encoder-class",
-				"//portlet-data-handler-class",
-				"//portlet-layout-listener-class", "//poller-processor-class",
-				"//pop-message-listener-class",
-				"//social-activity-interpreter-class",
-				"//social-request-interpreter-class", "//webdav-storage-class",
-				"//xml-rpc-method-class", "//control-panel-entry-class",
-				"//asset-renderer-factory", "//atom-collection-adapter",
-				"//custom-attributes-display", "//permission-propagator",
-				"//workflow-handler"
+				"configuration-action-class", "indexer-class",
+				"open-search-class", "portlet-url-class",
+				"friendly-url-mapper-class", "url-encoder-class",
+				"portlet-data-handler-class",
+				"portlet-layout-listener-class", "poller-processor-class",
+				"pop-message-listener-class",
+				"social-activity-interpreter-class",
+				"social-request-interpreter-class", "webdav-storage-class",
+				"xml-rpc-method-class", "control-panel-entry-class",
+				"asset-renderer-factory", "atom-collection-adapter",
+				"custom-attributes-display", "permission-propagator",
+				"workflow-handler"
 			},
 			null, null);
 
 		processXMLDependencies(
 			"WEB-INF/portlet.xml",
 			new String[] {
-				"//x:filter-class", "//x:listener-class", "//x:portlet-class",
-				"//x:resource-bundle"
+				"x:filter-class", "x:listener-class", "x:portlet-class",
+				"x:resource-bundle"
 			},
-			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
+			"x", "http:java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
 		processXMLDependencies(
 			"WEB-INF/web.xml",
 			new String[] {
-				"//x:filter-class", "//x:listener-class","//x:servlet-class"
+				"x:filter-class", "x:listener-class","x:servlet-class"
 			},
-			"x","http://java.sun.com/xml/ns/j2ee");
+			"x","http:java.sun.com/xml/ns/j2ee");
 	}
 
 	protected void processDefaultServletPackages() {
@@ -865,7 +865,7 @@ public class WabProcessor {
 
 		for (String xPathExpression : xPathExpressions) {
 			XPath xPath = SAXReaderUtil.createXPath(
-				xPathExpression, prefix, namespace);
+				"//" + xPathExpression, prefix, namespace);
 
 			List<Node> nodes = xPath.selectNodes(rootElement);
 
