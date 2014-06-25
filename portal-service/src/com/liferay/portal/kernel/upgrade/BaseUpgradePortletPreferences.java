@@ -48,7 +48,7 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		updatePortletPreferences();
 	}
 
-	protected long getCompanyId(String query, long id) throws Exception {
+	protected long getCompanyId(String sql, long primaryKey) throws Exception {
 		long companyId = 0;
 
 		Connection con = null;
@@ -58,9 +58,9 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(query);
+			ps = con.prepareStatement(sql);
 
-			ps.setLong(1, id);
+			ps.setLong(1, primaryKey);
 
 			rs = ps.executeQuery();
 
