@@ -258,7 +258,8 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
 					companyId = getCompanyId(
-						"select * from PortletItem where portletItemId = ?",
+						"select companyId from PortletItem where " +
+							"portletItemId = ?",
 						ownerId);
 				}
 				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
@@ -282,12 +283,14 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 							PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION) {
 
 					companyId = getCompanyId(
-						"select * from Organization_ where organizationId = ?",
+						"select companyId from Organization_ where " +
+							"organizationId = ?",
 						ownerId);
 				}
 				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
 					companyId = getCompanyId(
-						"select * from User_ where userId = ?", ownerId);
+						"select companyId from User_ where userId = ?",
+						ownerId);
 				}
 				else {
 					throw new UnsupportedOperationException(
