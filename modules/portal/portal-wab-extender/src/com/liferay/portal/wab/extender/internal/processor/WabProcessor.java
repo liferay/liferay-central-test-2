@@ -447,7 +447,7 @@ public class WabProcessor {
 			new String[] {
 				"x:filter-class", "x:listener-class","x:servlet-class"
 			},
-			"x","http:java.sun.com/xml/ns/j2ee");
+			"x", "http:java.sun.com/xml/ns/j2ee");
 	}
 
 	protected void processDefaultServletPackages() {
