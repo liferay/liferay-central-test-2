@@ -296,21 +296,14 @@ of data.
 - **JIRA Ticket:** LPS-44228
 
 #### What changed?
-Whenever the `aui:input` taglib is used to generate an input of type `checkbox`,
-only an input tag is generated; the checkbox and hidden field that the taglib
-was generating previously is no longer generated. For this reason, when a
-checkbox is not checked, no parameter is sent to the server. As a result,
-invoking `request.getParameter("checkboxName")` returns `null` if the checkbox
-is unchecked. In order to help you bypass this situation, a parameter named
-"checkboxNames", that contains a list of all the checkboxes that existed in the
-form, is now sent along with the `aui:form`.
+Whenever the aui:input taglib is used to generate an input of type checkbox,
+only an input tag will be generated, instead of the checkbox and hidden field it
+was generating before.
 
 #### Who is affected?
 Anyone trying to grab the previously generated fields is affected. The change
 mostly affects JavaScript code trying to add some additional actions when
-clicking on the checkboxes. The change also affects Java classes that assume a
-checkbox always sends a parameter with a true/false value on form submit. Now,
-the parameter is only sent when the input is checked.
+clicking on the checkboxes.
 
 #### How should I update my code?
 In your front-end JavaScript code, follow these steps:
@@ -319,15 +312,6 @@ In your front-end JavaScript code, follow these steps:
 like `A.one(...)`, `$(...)`, etc. 
 - Remove any action that tries to set the value of the checkbox on the
 previously generated hidden field.
-
-In your back-end Java code, follow these steps:
-
-- Use `ParamUtil.getBoolean` to recover a true/false value if the checkbox was
-checked or not checked.
-- Use `PropertiesParamUtil.getProperties` to recover a true/false value for a
-list of checkboxes.
-- Use the parameter called "checkboxNames" to obtain all checkboxes from the
-`aui:form`.
 
 #### Why was this change made?
 This change makes generated forms more standard and interoperable since it falls
