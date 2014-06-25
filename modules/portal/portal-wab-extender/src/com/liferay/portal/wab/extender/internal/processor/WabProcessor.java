@@ -406,7 +406,7 @@ public class WabProcessor {
 
 	protected void processDeclarativeReferences() throws IOException {
 		processDefaultServletPackages();
-		processTldDependencies();
+		processTLDDependencies();
 
 		// TODO
 
@@ -713,7 +713,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected void processTldDependencies() throws IOException {
+	protected void processTLDDependencies() throws IOException {
 		File dir = new File(_file, "WEB-INF/tld");
 
 		if (!dir.exists() || !dir.isDirectory()) {
