@@ -876,7 +876,7 @@ public class WabProcessor {
 
 				processClass(
 					new ClassLoaderSource(_classLoader), dependencyVisitor,
-					textNode.replace('.', '/') + ".class");
+					getFileName(textNode));
 			}
 		}
 
