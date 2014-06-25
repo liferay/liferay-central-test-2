@@ -251,7 +251,10 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 
 				long companyId = 0;
 
-				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+					companyId = getCompanyId(_GET_PORTLET_ITEM, ownerId);
+				}
+				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
 					companyId = ownerId;
 				}
 				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) {
@@ -268,16 +271,13 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 						companyId = (Long)layout[1];
 					}
 				}
-				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
-					companyId = getCompanyId(_GET_USER, ownerId);
-				}
-				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-					companyId = getCompanyId(_GET_PORTLET_ITEM, ownerId);
-				}
 				else if (ownerType ==
 							PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION) {
 
 					companyId = getCompanyId(_GET_ORGANIZATION, ownerId);
+				}
+				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
+					companyId = getCompanyId(_GET_USER, ownerId);
 				}
 				else {
 					throw new UnsupportedOperationException(
