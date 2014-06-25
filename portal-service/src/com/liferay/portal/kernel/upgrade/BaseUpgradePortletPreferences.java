@@ -85,7 +85,8 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(_GET_COMPANY_ID);
+			ps = con.prepareStatement(
+				"select companyId from Group_ where groupId = ?");
 
 			ps.setLong(1, groupId);
 
@@ -114,7 +115,9 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(_GET_LAYOUT);
+			ps = con.prepareStatement(
+				"select groupId, companyId, privateLayout, layoutId from " +
+					"Layout where plid = ?");
 
 			ps.setLong(1, plid);
 
@@ -153,7 +156,9 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 		try {
 			con = DataAccess.getUpgradeOptimizedConnection();
 
-			ps = con.prepareStatement(_GET_LAYOUT_UUID);
+			ps = con.prepareStatement(
+				"select uuid_ from Layout where groupId = ? and " +
+					"privateLayout = ? and layoutId = ?");
 
 			long groupId = (Long)layout[0];
 			boolean privateLayout = (Boolean)layout[2];
@@ -252,7 +257,9 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 				long companyId = 0;
 
 				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
-					companyId = getCompanyId(_GET_PORTLET_ITEM, ownerId);
+					companyId = getCompanyId(
+						"select * from PortletItem where portletItemId = ?",
+						ownerId);
 				}
 				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) {
 					companyId = ownerId;
@@ -274,10 +281,13 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 				else if (ownerType ==
 							PortletKeys.PREFS_OWNER_TYPE_ORGANIZATION) {
 
-					companyId = getCompanyId(_GET_ORGANIZATION, ownerId);
+					companyId = getCompanyId(
+						"select * from Organization_ where organizationId = ?",
+						ownerId);
 				}
 				else if (ownerType == PortletKeys.PREFS_OWNER_TYPE_USER) {
-					companyId = getCompanyId(_GET_USER, ownerId);
+					companyId = getCompanyId(
+						"select * from User_ where userId = ?", ownerId);
 				}
 				else {
 					throw new UnsupportedOperationException(
@@ -342,25 +352,5 @@ public abstract class BaseUpgradePortletPreferences extends UpgradeProcess {
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
 		throws Exception;
-
-	private static final String _GET_COMPANY_ID =
-		"select companyId from Group_ where groupId = ?";
-
-	private static final String _GET_LAYOUT =
-		"select groupId, companyId, privateLayout, layoutId from Layout " +
-			"where plid = ?";
-
-	private static final String _GET_LAYOUT_UUID =
-		"select uuid_ from Layout where groupId = ? and privateLayout = ? " +
-			"and layoutId = ?";
-
-	private static final String _GET_ORGANIZATION =
-		"select * from Organization_ where organizationId = ?";
-
-	private static final String _GET_PORTLET_ITEM =
-		"select * from PortletItem where portletItemId = ?";
-
-	private static final String _GET_USER =
-		"select * from User_ where userId = ?";
 
 }
