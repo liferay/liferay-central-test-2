@@ -1684,14 +1684,14 @@ public class DLAppHelperLocalServiceImpl
 		dlFileVersions = ListUtil.sort(
 			dlFileVersions, new FileVersionVersionComparator());
 
-		FileVersion fileVersion = fileEntry.getFileVersion();
-
 		List<ObjectValuePair<Long, Integer>> dlFileVersionStatusOVPs =
 			new ArrayList<ObjectValuePair<Long, Integer>>();
 
 		if ((dlFileVersions != null) && !dlFileVersions.isEmpty()) {
 			dlFileVersionStatusOVPs = getDlFileVersionStatuses(dlFileVersions);
 		}
+
+		FileVersion fileVersion = fileEntry.getFileVersion();
 
 		int oldStatus = fileVersion.getStatus();
 
