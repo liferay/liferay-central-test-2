@@ -39,6 +39,7 @@ public class FullNameGeneratorFactory {
 	private static FullNameGeneratorFactory _instance =
 		new FullNameGeneratorFactory();
 
-	private ServiceTracker<?, FullNameGenerator> _serviceTracker;
+	private ServiceTracker<FullNameGenerator, FullNameGenerator>
+		_serviceTracker;
 
 }

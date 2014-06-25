@@ -2073,11 +2073,11 @@ public class HookHotDeployListener
 					fullNameGeneratorClassName);
 
 			ServiceRegistration<FullNameGenerator> serviceRegistration =
-			registry.registerService(FullNameGenerator.class,
-				fullNameGenerator);
+				registry.registerService(
+					FullNameGenerator.class, fullNameGenerator);
 
-			serviceRegistrations.put(fullNameGeneratorClassName,
-				serviceRegistration);
+			serviceRegistrations.put(
+				fullNameGeneratorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(PropsKeys.USERS_FULL_NAME_VALIDATOR)) {
@@ -2090,11 +2090,11 @@ public class HookHotDeployListener
 					fullNameValidatorClassName);
 
 			ServiceRegistration<FullNameValidator> serviceRegistration =
-			registry.registerService(FullNameValidator.class,
-				fullNameValidator);
+				registry.registerService(
+					FullNameValidator.class, fullNameValidator);
 
-			serviceRegistrations.put(fullNameValidatorClassName,
-				serviceRegistration);
+			serviceRegistrations.put(
+				fullNameValidatorClassName, serviceRegistration);
 		}
 
 		if (portalProperties.containsKey(

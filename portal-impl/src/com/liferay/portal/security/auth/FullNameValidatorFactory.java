@@ -40,6 +40,7 @@ public class FullNameValidatorFactory {
 	private static FullNameValidatorFactory _instance =
 		new FullNameValidatorFactory();
 
-	private ServiceTracker<?, FullNameValidator> _serviceTracker;
+	private ServiceTracker<FullNameValidator, FullNameValidator>
+		_serviceTracker;
 
 }
