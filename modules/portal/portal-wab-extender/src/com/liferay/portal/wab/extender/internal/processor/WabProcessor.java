@@ -335,14 +335,15 @@ public class WabProcessor {
 	}
 
 	protected void processBundleManifestVersion(Analyzer analyzer) {
-		String manifestVersion = MapUtil.getString(
+		String bundleManifestVersion = MapUtil.getString(
 			_parameters, Constants.BUNDLE_MANIFESTVERSION);
 
-		if (Validator.isNull(manifestVersion)) {
-			manifestVersion = "2";
+		if (Validator.isNull(bundleManifestVersion)) {
+			bundleManifestVersion = "2";
 		}
 
-		analyzer.setProperty(Constants.BUNDLE_MANIFESTVERSION, manifestVersion);
+		analyzer.setProperty(
+			Constants.BUNDLE_MANIFESTVERSION, bundleManifestVersion);
 	}
 
 	protected void processBundleSymbolicName(Analyzer analyzer) {
@@ -1008,7 +1009,7 @@ public class WabProcessor {
 		}
 	}
 
-	protected void saveManifest(Manifest manifest) throws IOException {
+	protected void writeManifest(Manifest manifest) throws IOException {
 		File file = getManifestFile();
 
 		OutputStream outputStream = new FileOutputStream(file);
@@ -1052,7 +1053,7 @@ public class WabProcessor {
 			manifest = analyzer.calcManifest();
 		}
 		catch (Exception e) {
-			throw new IOException("Unexpected error calculating Manifest", e);
+			throw new IOException("Unable to calculate the manifest", e);
 		}
 		finally {
 			analyzer.close();
@@ -1061,7 +1062,7 @@ public class WabProcessor {
 		processManifestVersion(manifest);
 		processWebContextPath(manifest);
 
-		saveManifest(manifest);
+		writeManifest(manifest);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(WabProcessor.class);
