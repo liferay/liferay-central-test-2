@@ -493,7 +493,7 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	<S, T> void doTrackers_addingService(
+	private <S, T> void doTrackers_addingService(
 		BasicServiceReference<S> dummyServiceReference, S service) {
 
 		_services.put(dummyServiceReference, service);
@@ -519,7 +519,7 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	<S, T> void doTrackers_modifiedService(
+	private <S, T> void doTrackers_modifiedService(
 		BasicServiceReference<S> dummyServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
@@ -549,7 +549,7 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	<S, T> void doTrackers_removedService(
+	private <S, T> void doTrackers_removedService(
 		BasicServiceReference<S> dummyServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
