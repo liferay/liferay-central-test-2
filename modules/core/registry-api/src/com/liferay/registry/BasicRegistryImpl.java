@@ -177,7 +177,7 @@ public class BasicRegistryImpl implements Registry {
 				clazz.getName(), _serviceIdCounter.incrementAndGet(), 0,
 				new HashMap<String, Object>());
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -197,7 +197,7 @@ public class BasicRegistryImpl implements Registry {
 				clazz.getName(), _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -211,7 +211,7 @@ public class BasicRegistryImpl implements Registry {
 				className, _serviceIdCounter.incrementAndGet(), 0,
 				new HashMap<String, Object>());
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -231,7 +231,7 @@ public class BasicRegistryImpl implements Registry {
 				className, _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -253,7 +253,7 @@ public class BasicRegistryImpl implements Registry {
 				classNames[0], _serviceIdCounter.incrementAndGet(), 0,
 				properties);
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -279,7 +279,7 @@ public class BasicRegistryImpl implements Registry {
 				classNames[0], _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(basicServiceReference, service);
+		_addingService(basicServiceReference, service);
 
 		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
@@ -477,7 +477,7 @@ public class BasicRegistryImpl implements Registry {
 		public void setProperties(Map<String, Object> properties) {
 			_basicServiceReference._properties.putAll(properties);
 
-			BasicRegistryImpl.this.doTrackers_modifiedService(
+			BasicRegistryImpl.this._modifiedService(
 				_basicServiceReference);
 		}
 
@@ -485,7 +485,7 @@ public class BasicRegistryImpl implements Registry {
 		public void unregister() {
 			_services.remove(_basicServiceReference);
 
-			BasicRegistryImpl.this.doTrackers_removedService(
+			BasicRegistryImpl.this._removedService(
 				_basicServiceReference);
 		}
 
@@ -493,7 +493,7 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	private <S, T> void doTrackers_addingService(
+	private <S, T> void _addingService(
 		BasicServiceReference<S> basicServiceReference, S service) {
 
 		_services.put(basicServiceReference, service);
@@ -519,7 +519,7 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	private <S, T> void doTrackers_modifiedService(
+	private <S, T> void _modifiedService(
 		BasicServiceReference<S> basicServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
@@ -549,7 +549,7 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	private <S, T> void doTrackers_removedService(
+	private <S, T> void _removedService(
 		BasicServiceReference<S> basicServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
