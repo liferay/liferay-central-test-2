@@ -25,9 +25,9 @@ import java.util.Set;
 /**
  * @author Raymond Augé
  */
-public class UMDictionaryMap <K, V> implements Map<K, V> {
+public class UnmodifiableDictionaryMap <K, V> implements Map<K, V> {
 
-	public UMDictionaryMap(Dictionary<K, V> dictionary) {
+	public UnmodifiableDictionaryMap(Dictionary<K, V> dictionary) {
 		Map<K, V> map = new HashMap<K, V>();
 
 		if (dictionary != null) {

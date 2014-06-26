@@ -14,7 +14,7 @@
 package com.liferay.registry;
 
 import com.liferay.registry.util.StringPlus;
-import com.liferay.registry.util.UMMapDictionary;
+import com.liferay.registry.util.UnmodifiableMapDictionary;
 
 import java.lang.reflect.Array;
 
@@ -617,8 +617,8 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public boolean matches(Map<String, Object> properties) {
-			UMMapDictionary<String, Object> umMapDictionary =
-				new UMMapDictionary<String, Object>(properties);
+			UnmodifiableMapDictionary<String, Object> umMapDictionary =
+				new UnmodifiableMapDictionary<String, Object>(properties);
 
 			return _filter.match(umMapDictionary);
 		}
@@ -628,8 +628,8 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<?> dummyServiceReference =
 				(BasicServiceReference<?>)serviceReference;
 
-			UMMapDictionary<String, Object> umMapDictionary =
-				new UMMapDictionary<String, Object>(
+			UnmodifiableMapDictionary<String, Object> umMapDictionary =
+				new UnmodifiableMapDictionary<String, Object>(
 					dummyServiceReference._properties);
 
 			return _filter.match(umMapDictionary);

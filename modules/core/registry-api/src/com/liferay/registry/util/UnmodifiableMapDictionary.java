@@ -22,9 +22,9 @@ import java.util.Map;
 /**
  * @author Raymond Augé
  */
-public class UMMapDictionary <K, V> extends Dictionary<K, V> {
+public class UnmodifiableMapDictionary <K, V> extends Dictionary<K, V> {
 
-	public UMMapDictionary(Map<K, V> map) {
+	public UnmodifiableMapDictionary(Map<K, V> map) {
 		if (map == null) {
 			_map = Collections.emptyMap();
 		}
