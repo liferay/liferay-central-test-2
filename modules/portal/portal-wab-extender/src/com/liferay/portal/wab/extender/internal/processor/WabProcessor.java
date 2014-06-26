@@ -586,6 +586,35 @@ public class WabProcessor {
 		}
 	}
 
+	protected void processImportPackageNames(Analyzer analyzer)
+		throws IOException {
+
+		String packageName = MapUtil.getString(
+			_parameters, Constants.IMPORT_PACKAGE);
+
+		if (Validator.isNotNull(packageName)) {
+			analyzer.setProperty(Constants.IMPORT_PACKAGE, packageName);
+		}
+		else {
+			StringBundler sb = new StringBundler(
+				(_importPackageNames.size() * 3) + 1);
+
+			for (String _importPackageName : _importPackageNames) {
+				if (Validator.isNull(_importPackageName)) {
+					continue;
+				}
+
+				sb.append(_importPackageName);
+				sb.append(";resolution:=\"optional\"");
+				sb.append(StringPool.COMMA);
+			}
+
+			sb.append("*;resolution:=\"optional\"");
+
+			analyzer.setProperty(Constants.IMPORT_PACKAGE, sb.toString());
+		}
+	}
+
 	protected Set<String> processJSPDependencies(File file) throws IOException {
 		Source source = new ClassLoaderSource(_classLoader);
 
