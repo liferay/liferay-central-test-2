@@ -17,8 +17,6 @@ package com.liferay.markdown.converter.internal.pegdown;
 import com.liferay.markdown.converter.MarkdownConverter;
 import com.liferay.markdown.converter.internal.pegdown.processor.LiferayPegDownProcessor;
 
-import java.io.IOException;
-
 import org.parboiled.Parboiled;
 
 import org.pegdown.Extensions;
@@ -42,9 +40,8 @@ public class LiferayPegDownConverter implements MarkdownConverter {
 	/* (non-Javadoc)
 	 * @see com.liferay.markdown.converter.MarkdownConverter#convert(java.lang.String)
 	 */
-
 	@Override
-	public String convert(String markdown) throws IOException {
+	public String convert(String markdown) {
 		String html = _liferayPegDownProcessor.markdownToHtml(
 			markdown, new LinkRenderer());
 
