@@ -706,6 +706,11 @@ public class WabProcessor {
 		analyzer.setProperty(Constants.BUNDLE_MANIFESTVERSION, manifestVersion);
 	}
 
+	protected void processPackageNames(Analyzer analyzer) throws IOException {
+		processExportPackageNames(analyzer);
+		processImportPackageNames(analyzer);
+	}
+
 	protected void processPortletXML() throws IOException {
 		File file = new File(
 			_file, "WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
