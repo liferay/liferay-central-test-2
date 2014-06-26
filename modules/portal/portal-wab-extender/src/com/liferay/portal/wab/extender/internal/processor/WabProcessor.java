@@ -1128,17 +1128,17 @@ public class WabProcessor {
 			Set<String> paths)
 		throws IOException {
 
-		for (File f : file.listFiles()) {
-			final URI relativize = uri.relativize(f.toURI());
+		for (File curFile : file.listFiles()) {
+			URI relativize = uri.relativize(curFile.toURI());
 
 			String path = relativize.getPath();
 
-			if (f.isDirectory()) {
+			if (curFile.isDirectory()) {
 				jarOutputStream.putNextEntry(new ZipEntry(path));
 
 				jarOutputStream.closeEntry();
 
-				writeJarPaths(f, uri, jarOutputStream, paths);
+				writeJarPaths(curFile, uri, jarOutputStream, paths);
 
 				continue;
 			}
@@ -1157,7 +1157,7 @@ public class WabProcessor {
 				continue;
 			}
 
-			writeFile(f, jarOutputStream, paths, path);
+			writeFile(curFile, jarOutputStream, paths, path);
 		}
 	}
 
