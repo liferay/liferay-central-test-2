@@ -592,12 +592,12 @@ public class WabProcessor {
 			StringBundler sb = new StringBundler(
 				(_importPackageNames.size() * 3) + 1);
 
-			for (String _importPackageName : _importPackageNames) {
-				if (Validator.isNull(_importPackageName)) {
+			for (String importPackageName : _importPackageNames) {
+				if (Validator.isNull(importPackageName)) {
 					continue;
 				}
 
-				sb.append(_importPackageName);
+				sb.append(importPackageName);
 				sb.append(";resolution:=\"optional\"");
 				sb.append(StringPool.COMMA);
 			}
