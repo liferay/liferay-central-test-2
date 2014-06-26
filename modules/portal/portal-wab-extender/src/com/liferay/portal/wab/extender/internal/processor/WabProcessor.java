@@ -467,16 +467,13 @@ public class WabProcessor {
 	protected void processExportPackageNames(Analyzer analyzer)
 		throws IOException {
 
-		StringBundler sb = new StringBundler(
-			2 * _exportPackageNames.size() + 11);
+		StringBundler sb = new StringBundler(13);
 
-		for (String exportPackageName : _exportPackageNames) {
-			sb.append(exportPackageName);
-			sb.append(StringPool.COMMA);
-		}
+		sb.append(StringUtil.merge(_exportPackageNames.toArray()));
 
 		if (Validator.isNotNull(_servicePackageName)) {
-			sb.append("!");
+			sb.append(StringPool.COMMA);
+			sb.append(StringPool.EXCLAMATION);
 			sb.append(_servicePackageName);
 			sb.append(".model.impl.*,!");
 			sb.append(_servicePackageName);
