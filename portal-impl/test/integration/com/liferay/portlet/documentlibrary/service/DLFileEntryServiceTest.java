@@ -53,7 +53,7 @@ public class DLFileEntryServiceTest {
 
 	@Before
 	public void setUp() throws Exception {
-		group = GroupTestUtil.addGroup();
+		_group = GroupTestUtil.addGroup();
 	}
 
 	@Test
@@ -61,24 +61,26 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFolder folder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntry dlFileEntry = addDLFileEntry(folder.getFolderId(), true);
 
 		DLFolder destFolder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(), destFolder.getFolderId(),
 			serviceContext);
 	}
@@ -88,18 +90,19 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFolder folder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntry dlFileEntry = addDLFileEntry(folder.getFolderId(), true);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 	}
@@ -109,19 +112,20 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, true);
 
 		DLFolder destFolder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(), destFolder.getFolderId(),
 			serviceContext);
 	}
@@ -131,24 +135,26 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFolder folder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntry dlFileEntry = addDLFileEntry(folder.getFolderId(), false);
 
 		DLFolder destFolder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(), destFolder.getFolderId(),
 			serviceContext);
 	}
@@ -158,18 +164,19 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFolder folder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntry dlFileEntry = addDLFileEntry(folder.getFolderId(), false);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(),
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, serviceContext);
 	}
@@ -179,19 +186,20 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		DLFileEntry dlFileEntry = addDLFileEntry(
 			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, false);
 
 		DLFolder destFolder = DLFolderLocalServiceUtil.addFolder(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			false, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), false,
+			DLFolderConstants.DEFAULT_PARENT_FOLDER_ID,
 			RandomTestUtil.randomString(), RandomTestUtil.randomString(), false,
 			serviceContext);
 
 		DLFileEntryServiceUtil.copyFileEntry(
-			group.getGroupId(), group.getGroupId(),
+			_group.getGroupId(), _group.getGroupId(),
 			dlFileEntry.getFileEntryId(), destFolder.getFolderId(),
 			serviceContext);
 	}
@@ -200,7 +208,7 @@ public class DLFileEntryServiceTest {
 		throws PortalException {
 
 		ServiceContext serviceContext =
-			ServiceContextTestUtil.getServiceContext(group.getGroupId());
+			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
 
 		String sourceFileName = RandomTestUtil.randomString();
 
@@ -211,18 +219,18 @@ public class DLFileEntryServiceTest {
 		String fileEntryTitle = RandomTestUtil.randomString();
 
 		return  DLFileEntryLocalServiceUtil.addFileEntry(
-			TestPropsValues.getUserId(), group.getGroupId(), group.getGroupId(),
-			folderId, sourceFileName, null, fileEntryTitle,
+			TestPropsValues.getUserId(), _group.getGroupId(),
+			_group.getGroupId(), folderId, sourceFileName, null, fileEntryTitle,
 			RandomTestUtil.randomString(), StringPool.BLANK,
 			DLFileEntryTypeConstants.FILE_ENTRY_TYPE_ID_BASIC_DOCUMENT, null,
-			null, new ByteArrayInputStream(CONTENT.getBytes()), 0,
+			null, new ByteArrayInputStream(_CONTENT.getBytes()), 0,
 			serviceContext);
 	}
 
-	protected static final String CONTENT =
+	private static final String _CONTENT =
 		"Content: Enterprise. Open Source. For Life.";
 
 	@DeleteAfterTestRun
-	protected Group group;
+	private Group _group;
 
 }
