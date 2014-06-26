@@ -154,21 +154,21 @@ public class ClpSerializer {
 					}
 					else if (oldModelClassName.endsWith("Clp")) {
 						try {
+							ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
 							Method getClpSerializerClassMethod = oldModelClass.getMethod("getClpSerializerClass");
 
 							Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
 
-							ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+							Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+							Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput", BaseModel.class);
 
 							Class<?> oldModelModelClass = (Class<?>)oldModel.getModelClass();
 
 							Method getMethod = oldModelClass.getMethod("get" + oldModelModelClass.getSimpleName() + "RemoteModel");
 
 							Object remoteModel = getMethod.invoke(oldModel);
-
-							Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
-
-							Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput", BaseModel.class);
 
 							BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null, remoteModel);
 
