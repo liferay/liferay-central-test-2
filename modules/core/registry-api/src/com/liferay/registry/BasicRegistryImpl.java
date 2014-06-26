@@ -471,9 +471,9 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	private class BasicLowerCaseKeyTreeMap extends TreeMap<String, Object> {
+	private class LowerCaseKeyTreeMap extends TreeMap<String, Object> {
 
-		public BasicLowerCaseKeyTreeMap() {
+		public LowerCaseKeyTreeMap() {
 			super();
 		}
 
@@ -600,7 +600,7 @@ public class BasicRegistryImpl implements Registry {
 		}
 
 		private NavigableMap<String, Object> _properties =
-			new BasicLowerCaseKeyTreeMap();
+			new LowerCaseKeyTreeMap();
 
 	}
 
