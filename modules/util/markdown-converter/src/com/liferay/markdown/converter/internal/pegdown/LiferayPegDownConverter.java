@@ -29,20 +29,16 @@ import org.pegdown.LinkRenderer;
 public class LiferayPegDownConverter implements MarkdownConverter {
 
 	public LiferayPegDownConverter() {
-		int parserOptions = Extensions.ALL & ~Extensions.HARDWRAPS;
-
 		LiferayParser liferayParser = Parboiled.createParser(
-			LiferayParser.class, parserOptions);
+			LiferayParser.class, Extensions.ALL & ~Extensions.HARDWRAPS);
 
 		_liferayPegDownProcessor = new LiferayPegDownProcessor(liferayParser);
 	}
 
 	@Override
 	public String convert(String markdown) {
-		String html = _liferayPegDownProcessor.markdownToHtml(
+		return _liferayPegDownProcessor.markdownToHtml(
 			markdown, new LinkRenderer());
-
-		return html;
 	}
 
 	private LiferayPegDownProcessor _liferayPegDownProcessor;

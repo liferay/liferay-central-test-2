@@ -50,7 +50,7 @@ public class PicWithCaptionNode extends SuperNode {
 
 	private String _getAlt(Node node) {
 		if (node == null) {
-			return _BLANK;
+			return "";
 		}
 
 		List<Node> nodes = node.getChildren();
@@ -63,10 +63,8 @@ public class PicWithCaptionNode extends SuperNode {
 			return textNode.getText();
 		}
 
-		return _BLANK;
+		return "";
 	}
-
-	private static final String _BLANK = "";
 
 	private final String _alt;
 	private final String _src;
