@@ -348,15 +348,17 @@ public class BasicRegistryImpl implements Registry {
 			String className, long id, int ranking,
 			Map<String, Object> properties) {
 
-			List<String> classes = new ArrayList<String>();
+			List<String> classNames = new ArrayList<String>();
 
-			classes.add(className);
-			classes.addAll(StringPlus.asList(properties.get("objectClass")));
+			classNames.add(className);
+			classNames.addAll(StringPlus.asList(properties.get("objectClass")));
 
 			_properties.put("service.id", id);
 			_properties.put("service.ranking", ranking);
+
 			_properties.putAll(properties);
-			_properties.put("objectClass", classes);
+
+			_properties.put("objectClass", classNames);
 		}
 
 		@Override
