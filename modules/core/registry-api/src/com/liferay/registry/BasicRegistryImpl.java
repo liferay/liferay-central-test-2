@@ -61,7 +61,6 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> T getService(ServiceReference<T> serviceReference) {
 		BasicServiceReference<?> basicServiceReference =
 			(BasicServiceReference<?>)serviceReference;
@@ -78,7 +77,6 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> T getService(String className) {
 		Filter filter = getFilter("(objectClass=" + className + ")");
 
@@ -99,7 +97,6 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> ServiceReference<T> getServiceReference(String className) {
 		Filter filter = getFilter("(objectClass=" + className + ")");
 
@@ -124,15 +121,14 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> ServiceReference<T>[] getServiceReferences(
 			String className, String filterString)
 		throws Exception {
 
-		Filter filter = new BasicFilter(filterString);
-
 		List<ServiceReference<T>> serviceReferences =
 			new ArrayList<ServiceReference<T>>();
+
+		Filter filter = new BasicFilter(filterString);
 
 		for (Entry<ServiceReference<?>, Object> entry :
 				getServices().entrySet()) {
@@ -157,7 +153,6 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	@Override
-	@SuppressWarnings("unchecked")
 	public <T> T[] getServices(String className, String filterString)
 		throws Exception {
 
@@ -508,7 +503,6 @@ public class BasicRegistryImpl implements Registry {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	<S, T> void doTrackers_addingService(
 		BasicServiceReference<S> dummyServiceReference, S service) {
 
@@ -535,7 +529,6 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	<S, T> void doTrackers_modifiedService(
 		BasicServiceReference<S> dummyServiceReference) {
 
@@ -566,7 +559,6 @@ public class BasicRegistryImpl implements Registry {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	<S, T> void doTrackers_removedService(
 		BasicServiceReference<S> dummyServiceReference) {
 
@@ -672,7 +664,6 @@ public class BasicRegistryImpl implements Registry {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public T addingService(ServiceReference<S> serviceReference) {
 			T service = null;
 
@@ -745,7 +736,6 @@ public class BasicRegistryImpl implements Registry {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public ServiceReference<S>[] getServiceReferences() {
 			return _tracked.keySet().toArray(
 				new ServiceReference[_tracked.size()]);
@@ -792,7 +782,6 @@ public class BasicRegistryImpl implements Registry {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public void open() {
 			_serviceTrackers.put(this, _filter);
 
