@@ -383,14 +383,14 @@ public class BasicRegistryImpl implements Registry {
 			ServiceTracker<S, T> serviceTracker =
 				(ServiceTracker<S, T>)entry.getKey();
 
-			T tracked = serviceTracker.getService(basicServiceReference);
+			T service = serviceTracker.getService(basicServiceReference);
 
-			if (tracked == null) {
+			if (service == null) {
 				continue;
 			}
 
 			try {
-				serviceTracker.modifiedService(basicServiceReference, tracked);
+				serviceTracker.modifiedService(basicServiceReference, service);
 			}
 			catch (Throwable t) {
 				t.printStackTrace();
@@ -413,16 +413,16 @@ public class BasicRegistryImpl implements Registry {
 			ServiceTracker<S, T> serviceTracker =
 				(ServiceTracker<S, T>)entry.getKey();
 
-			T tracked = serviceTracker.getService(basicServiceReference);
+			T service = serviceTracker.getService(basicServiceReference);
 
-			if (tracked == null) {
+			if (service == null) {
 				continue;
 			}
 
 			serviceTracker.remove(basicServiceReference);
 
 			try {
-				serviceTracker.removedService(basicServiceReference, tracked);
+				serviceTracker.removedService(basicServiceReference, service);
 			}
 			catch (Throwable t) {
 				t.printStackTrace();
@@ -668,7 +668,7 @@ public class BasicRegistryImpl implements Registry {
 					return null;
 				}
 
-				_tracked.put(serviceReference, service);
+				_trackedServices.put(serviceReference, service);
 
 				return service;
 			}
@@ -685,7 +685,7 @@ public class BasicRegistryImpl implements Registry {
 			_serviceTrackers.remove(this);
 
 			Iterator<Entry<ServiceReference<S>, T>> iterator =
-				_tracked.entrySet().iterator();
+				_trackedServices.entrySet().iterator();
 
 			while (iterator.hasNext()) {
 				Entry<ServiceReference<S>, T> entry = iterator.next();
@@ -695,12 +695,12 @@ public class BasicRegistryImpl implements Registry {
 				removedService(entry.getKey(), entry.getValue());
 			}
 
-			_tracked.clear();
+			_trackedServices.clear();
 		}
 
 		@Override
 		public T getService() {
-			return _tracked.get(_tracked.firstKey());
+			return _trackedServices.get(_trackedServices.firstKey());
 		}
 
 		@Override
@@ -708,9 +708,9 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<S> basicServiceReference =
 				(BasicServiceReference<S>)serviceReference;
 
-			for (ServiceReference<S> curServiceReference : _tracked.keySet()) {
+			for (ServiceReference<S> curServiceReference : _trackedServices.keySet()) {
 				if (basicServiceReference.matches(curServiceReference)) {
-					return _tracked.get(curServiceReference);
+					return _trackedServices.get(curServiceReference);
 				}
 			}
 
@@ -719,28 +719,28 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public ServiceReference<S> getServiceReference() {
-			return _tracked.firstKey();
+			return _trackedServices.firstKey();
 		}
 
 		@Override
 		public ServiceReference<S>[] getServiceReferences() {
-			return _tracked.keySet().toArray(
-				new ServiceReference[_tracked.size()]);
+			return _trackedServices.keySet().toArray(
+				new ServiceReference[_trackedServices.size()]);
 		}
 
 		@Override
 		public Object[] getServices() {
-			return _tracked.values().toArray();
+			return _trackedServices.values().toArray();
 		}
 
 		@Override
 		public T[] getServices(T[] services) {
-			return _tracked.values().toArray(services);
+			return _trackedServices.values().toArray(services);
 		}
 
 		@Override
 		public SortedMap<ServiceReference<S>, T> getTrackedServiceReferences() {
-			return _tracked;
+			return _trackedServices;
 		}
 
 		@Override
@@ -750,7 +750,7 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public boolean isEmpty() {
-			return _tracked.isEmpty();
+			return _trackedServices.isEmpty();
 		}
 
 		@Override
@@ -797,9 +797,9 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public void remove(ServiceReference<S> serviceReference) {
-			T service = _tracked.remove(serviceReference);
+			T service = _trackedServices.remove(serviceReference);
 
-			if (_tracked.isEmpty()) {
+			if (_trackedServices.isEmpty()) {
 				_countDownLatch = new CountDownLatch(1);
 			}
 
@@ -823,7 +823,7 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public int size() {
-			return _tracked.size();
+			return _trackedServices.size();
 		}
 
 		@Override
@@ -837,7 +837,7 @@ public class BasicRegistryImpl implements Registry {
 		private Filter _filter;
 		private ServiceTrackerCustomizer<S, T> _serviceTrackerCustomizer;
 		private AtomicInteger _stateCounter = new AtomicInteger();
-		private ConcurrentNavigableMap<ServiceReference<S>, T> _tracked =
+		private ConcurrentNavigableMap<ServiceReference<S>, T> _trackedServices =
 			new ConcurrentSkipListMap<ServiceReference<S>, T>();
 
 	}
