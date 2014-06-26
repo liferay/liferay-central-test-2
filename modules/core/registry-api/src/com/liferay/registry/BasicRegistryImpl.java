@@ -63,13 +63,13 @@ public class BasicRegistryImpl implements Registry {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getService(ServiceReference<T> serviceReference) {
-		BasicServiceReference<?> dummyServiceReference =
+		BasicServiceReference<?> basicServiceReference =
 			(BasicServiceReference<?>)serviceReference;
 
 		for (Entry<ServiceReference<?>, Object> entry :
 				getServices().entrySet()) {
 
-			if (dummyServiceReference.matches(entry.getKey())) {
+			if (basicServiceReference.matches(entry.getKey())) {
 				return (T)entry.getValue();
 			}
 		}
