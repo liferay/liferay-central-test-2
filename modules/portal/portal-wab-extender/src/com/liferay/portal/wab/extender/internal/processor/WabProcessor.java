@@ -142,7 +142,7 @@ public class WabProcessor {
 		}
 
 		if (PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE) {
-			storeGeneratedWab(outputFile);
+			writeGeneratedWab(outputFile);
 		}
 
 		return new FileInputStream(outputFile);
@@ -785,9 +785,9 @@ public class WabProcessor {
 				portletName;
 
 		XPath xPath = SAXReaderUtil.createXPath(
-				"x:init-param[x:name/text()='com.liferay.portal." +
-						"invokerPortletName']",
-				"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
+			"x:init-param[x:name/text()='com.liferay.portal." +
+				"invokerPortletName']",
+			"x", "http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd");
 
 		Element invokerPortletNameElement = (Element)xPath.selectSingleNode(
 			element);
@@ -1038,33 +1038,29 @@ public class WabProcessor {
 		}
 	}
 
-	protected void storeGeneratedWab(File file) throws IOException {
-		String name = _file.getName();
+	protected void writeGeneratedWab(File file) throws IOException {
+		File dir = new File(
+			PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE_DIR);
 
-		String extension = FileUtil.getExtension(name);
-
-		int index = name.lastIndexOf(StringPool.PERIOD);
+		dir.mkdirs();
 
 		StringBundler sb = new StringBundler(5);
 
-		sb.append(name.substring(0, index));
+		String name = _file.getName();
+
+		sb.append(name.substring(0, name.lastIndexOf(StringPool.PERIOD)));
+
 		sb.append(StringPool.DASH);
 
-		Format simpleDateFormat =
-			FastDateFormatFactoryUtil.getSimpleDateFormat(
-				PropsValues.INDEX_DATE_FORMAT_PATTERN);
+		Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(
+			PropsValues.INDEX_DATE_FORMAT_PATTERN);
 
-		sb.append(simpleDateFormat.format(new Date()));
+		sb.append(format.format(new Date()));
+
 		sb.append(StringPool.PERIOD);
-		sb.append(extension);
+		sb.append(FileUtil.getExtension(name));
 
-		File destination = new File(
-			PropsValues.
-				MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE_DIR);
-
-		destination.mkdirs();
-
-		FileUtil.copyFile(file, new File(destination, sb.toString()));
+		FileUtil.copyFile(file, new File(dir, sb.toString()));
 	}
 
 	protected void transformToOSGiBundle() throws IOException {
