@@ -342,157 +342,6 @@ public class BasicRegistryImpl implements Registry {
 		return true;
 	}
 
-	private class BasicServiceReference<T> implements ServiceReference<T> {
-
-		public BasicServiceReference(
-			String className, long id, int ranking,
-			Map<String, Object> properties) {
-
-			_properties.put("service.id", id);
-			_properties.put("service.ranking", ranking);
-
-			List<String> classNames = new ArrayList<String>();
-
-			classNames.add(className);
-			classNames.addAll(StringPlus.asList(properties.get("objectClass")));
-
-			_properties.putAll(properties);
-
-			_properties.put("objectClass", classNames);
-		}
-
-		@Override
-		public int compareTo(Object serviceReference) {
-			BasicServiceReference<?> otherServiceReference =
-				(BasicServiceReference<?>)serviceReference;
-
-			int thisRanking = (Integer)_properties.get("service.ranking");
-			int otherRanking = (Integer)otherServiceReference._properties.get(
-				"service.ranking");
-
-			if (thisRanking != otherRanking) {
-				if (thisRanking < otherRanking) {
-					return -1;
-				}
-
-				return 1;
-			}
-
-			long thisId = (Long)_properties.get("service.id");
-			long otherId = (Long)otherServiceReference._properties.get(
-				"service.id");
-
-			if (thisId == otherId) {
-				return 0;
-			}
-
-			if (thisId < otherId) {
-				return 1;
-			}
-
-			return -1;
-		}
-
-		@Override
-		public Object getProperty(String key) {
-			return _properties.get(key.toLowerCase());
-		}
-
-		@Override
-		public String[] getPropertyKeys() {
-			NavigableSet<String> navigableKeySet =
-				_properties.navigableKeySet();
-
-			return navigableKeySet.toArray(new String[navigableKeySet.size()]);
-		}
-
-		public boolean matches(ServiceReference<?> serviceReference) {
-			Filter filter = new BasicFilter(toString());
-
-			return filter.matches(serviceReference);
-		}
-
-		@Override
-		public String toString() {
-			StringBuilder stringBuilder = new StringBuilder();
-
-			Set<Entry<String, Object>> entrySet = _properties.entrySet();
-
-			if (entrySet.size() > 1) {
-				stringBuilder.append('(');
-				stringBuilder.append('&');
-			}
-
-			for (Entry<String, Object> entry : entrySet) {
-				String key = entry.getKey();
-				Object value = entry.getValue();
-
-				Object[] array = null;
-
-				if (value.getClass().isArray()) {
-					array = (Object[])value;
-				}
-				else if (Collection.class.isInstance(value)) {
-					array = ((Collection<?>)value).toArray();
-				}
-				else {
-					array = new Object[] {value};
-				}
-
-				if (array.length > 0) {
-					for (Object object : array) {
-						stringBuilder.append('(');
-						stringBuilder.append(key);
-						stringBuilder.append('=');
-						stringBuilder.append(object);
-						stringBuilder.append(')');
-					}
-				}
-			}
-
-			if (entrySet.size() > 1) {
-				stringBuilder.append(')');
-			}
-
-			return stringBuilder.toString();
-		}
-
-		private NavigableMap<String, Object> _properties =
-			new BasicLowerCaseKeyTreeMap();
-
-	}
-
-	private class BasicServiceRegistration<S> implements ServiceRegistration<S> {
-
-		public BasicServiceRegistration(
-			BasicServiceReference<S> basicServiceReference) {
-
-			_basicServiceReference = basicServiceReference;
-		}
-
-		@Override
-		public ServiceReference<S> getServiceReference() {
-			return _basicServiceReference;
-		}
-
-		@Override
-		public void setProperties(Map<String, Object> properties) {
-			_basicServiceReference._properties.putAll(properties);
-
-			BasicRegistryImpl.this._modifiedService(_basicServiceReference);
-		}
-
-		@Override
-		public void unregister() {
-			_services.remove(_basicServiceReference);
-
-			BasicRegistryImpl.this._removedService(_basicServiceReference);
-		}
-
-		private BasicServiceReference<S> _basicServiceReference;
-
-	}
-
 	private <S, T> void _addingService(
 		BasicServiceReference<S> basicServiceReference, S service) {
 
@@ -632,6 +481,158 @@ public class BasicRegistryImpl implements Registry {
 		public Object put(String key, Object value) {
 			return super.put(key.toLowerCase(), value);
 		}
+
+	}
+
+	private class BasicServiceReference<T> implements ServiceReference<T> {
+
+		public BasicServiceReference(
+			String className, long id, int ranking,
+			Map<String, Object> properties) {
+
+			_properties.put("service.id", id);
+			_properties.put("service.ranking", ranking);
+
+			List<String> classNames = new ArrayList<String>();
+
+			classNames.add(className);
+			classNames.addAll(StringPlus.asList(properties.get("objectClass")));
+
+			_properties.putAll(properties);
+
+			_properties.put("objectClass", classNames);
+		}
+
+		@Override
+		public int compareTo(Object serviceReference) {
+			BasicServiceReference<?> otherServiceReference =
+				(BasicServiceReference<?>)serviceReference;
+
+			int thisRanking = (Integer)_properties.get("service.ranking");
+			int otherRanking = (Integer)otherServiceReference._properties.get(
+				"service.ranking");
+
+			if (thisRanking != otherRanking) {
+				if (thisRanking < otherRanking) {
+					return -1;
+				}
+
+				return 1;
+			}
+
+			long thisId = (Long)_properties.get("service.id");
+			long otherId = (Long)otherServiceReference._properties.get(
+				"service.id");
+
+			if (thisId == otherId) {
+				return 0;
+			}
+
+			if (thisId < otherId) {
+				return 1;
+			}
+
+			return -1;
+		}
+
+		@Override
+		public Object getProperty(String key) {
+			return _properties.get(key.toLowerCase());
+		}
+
+		@Override
+		public String[] getPropertyKeys() {
+			NavigableSet<String> navigableKeySet =
+				_properties.navigableKeySet();
+
+			return navigableKeySet.toArray(new String[navigableKeySet.size()]);
+		}
+
+		public boolean matches(ServiceReference<?> serviceReference) {
+			Filter filter = new BasicFilter(toString());
+
+			return filter.matches(serviceReference);
+		}
+
+		@Override
+		public String toString() {
+			StringBuilder stringBuilder = new StringBuilder();
+
+			Set<Entry<String, Object>> entrySet = _properties.entrySet();
+
+			if (entrySet.size() > 1) {
+				stringBuilder.append('(');
+				stringBuilder.append('&');
+			}
+
+			for (Entry<String, Object> entry : entrySet) {
+				String key = entry.getKey();
+				Object value = entry.getValue();
+
+				Object[] array = null;
+
+				if (value.getClass().isArray()) {
+					array = (Object[])value;
+				}
+				else if (Collection.class.isInstance(value)) {
+					array = ((Collection<?>)value).toArray();
+				}
+				else {
+					array = new Object[] {value};
+				}
+
+				if (array.length > 0) {
+					for (Object object : array) {
+						stringBuilder.append('(');
+						stringBuilder.append(key);
+						stringBuilder.append('=');
+						stringBuilder.append(object);
+						stringBuilder.append(')');
+					}
+				}
+			}
+
+			if (entrySet.size() > 1) {
+				stringBuilder.append(')');
+			}
+
+			return stringBuilder.toString();
+		}
+
+		private NavigableMap<String, Object> _properties =
+			new BasicLowerCaseKeyTreeMap();
+
+	}
+
+	private class BasicServiceRegistration<S>
+		implements ServiceRegistration<S> {
+
+		public BasicServiceRegistration(
+			BasicServiceReference<S> basicServiceReference) {
+
+			_basicServiceReference = basicServiceReference;
+		}
+
+		@Override
+		public ServiceReference<S> getServiceReference() {
+			return _basicServiceReference;
+		}
+
+		@Override
+		public void setProperties(Map<String, Object> properties) {
+			_basicServiceReference._properties.putAll(properties);
+
+			BasicRegistryImpl.this._modifiedService(_basicServiceReference);
+		}
+
+		@Override
+		public void unregister() {
+			_services.remove(_basicServiceReference);
+
+			BasicRegistryImpl.this._removedService(_basicServiceReference);
+		}
+
+		private BasicServiceReference<S> _basicServiceReference;
 
 	}
 
