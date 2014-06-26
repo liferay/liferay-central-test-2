@@ -1038,31 +1038,6 @@ public class WabProcessor {
 		}
 	}
 
-	protected void writeGeneratedWab(File file) throws IOException {
-		File dir = new File(
-			PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE_DIR);
-
-		dir.mkdirs();
-
-		StringBundler sb = new StringBundler(5);
-
-		String name = _file.getName();
-
-		sb.append(name.substring(0, name.lastIndexOf(StringPool.PERIOD)));
-
-		sb.append(StringPool.DASH);
-
-		Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(
-			PropsValues.INDEX_DATE_FORMAT_PATTERN);
-
-		sb.append(format.format(new Date()));
-
-		sb.append(StringPool.PERIOD);
-		sb.append(FileUtil.getExtension(name));
-
-		FileUtil.copyFile(file, new File(dir, sb.toString()));
-	}
-
 	protected void transformToOSGiBundle() throws IOException {
 		Analyzer analyzer = new Analyzer();
 
@@ -1121,6 +1096,31 @@ public class WabProcessor {
 		finally {
 			StreamUtil.cleanUp(inputStream);
 		}
+	}
+
+	protected void writeGeneratedWab(File file) throws IOException {
+		File dir = new File(
+			PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE_DIR);
+
+		dir.mkdirs();
+
+		StringBundler sb = new StringBundler(5);
+
+		String name = _file.getName();
+
+		sb.append(name.substring(0, name.lastIndexOf(StringPool.PERIOD)));
+
+		sb.append(StringPool.DASH);
+
+		Format format = FastDateFormatFactoryUtil.getSimpleDateFormat(
+			PropsValues.INDEX_DATE_FORMAT_PATTERN);
+
+		sb.append(format.format(new Date()));
+
+		sb.append(StringPool.PERIOD);
+		sb.append(FileUtil.getExtension(name));
+
+		FileUtil.copyFile(file, new File(dir, sb.toString()));
 	}
 
 	protected void writeJarPaths(
