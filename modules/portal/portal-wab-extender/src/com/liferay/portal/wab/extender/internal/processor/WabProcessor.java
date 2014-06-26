@@ -1080,23 +1080,6 @@ public class WabProcessor {
 		writeManifest(manifest);
 	}
 
-	protected void writeJarPath(
-			File file, JarOutputStream jarOutputStream, Set<String> paths,
-			String path)
-		throws FileNotFoundException {
-
-		InputStream inputStream = null;
-
-		try {
-			inputStream = new FileInputStream(file);
-
-			writeJarPath(inputStream, jarOutputStream, paths, path);
-		}
-		finally {
-			StreamUtil.cleanUp(inputStream);
-		}
-	}
-
 	protected void writeGeneratedWab(File file) throws IOException {
 		File dir = new File(
 			PropsValues.MODULE_FRAMEWORK_WEB_EXTENDER_GENERATED_WABS_STORE_DIR);
@@ -1120,6 +1103,23 @@ public class WabProcessor {
 		sb.append(FileUtil.getExtension(name));
 
 		FileUtil.copyFile(file, new File(dir, sb.toString()));
+	}
+
+	protected void writeJarPath(
+			File file, JarOutputStream jarOutputStream, Set<String> paths,
+			String path)
+		throws FileNotFoundException {
+
+		InputStream inputStream = null;
+
+		try {
+			inputStream = new FileInputStream(file);
+
+			writeJarPath(inputStream, jarOutputStream, paths, path);
+		}
+		finally {
+			StreamUtil.cleanUp(inputStream);
+		}
 	}
 
 	protected void writeJarPath(
