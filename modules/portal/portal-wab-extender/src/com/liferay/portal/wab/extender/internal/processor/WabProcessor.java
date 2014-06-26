@@ -1192,7 +1192,7 @@ public class WabProcessor {
 			zipOutputStream.closeEntry();
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error(ioe, ioe);
 		}
 	}
 
