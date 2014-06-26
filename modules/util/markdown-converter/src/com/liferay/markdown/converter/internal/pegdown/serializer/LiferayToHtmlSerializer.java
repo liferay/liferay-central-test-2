@@ -34,11 +34,11 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 	}
 
 	public void visit(PicWithCaptionNode picWithCaptionNode) {
-		printPicWithCaptionNode(picWithCaptionNode);
+		print(picWithCaptionNode);
 	}
 
 	public void visit(SidebarNode sidebarNode) {
-		printSidebarNode(sidebarNode);
+		print(sidebarNode);
 	}
 
 	@Override
@@ -54,26 +54,26 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 		}
 	}
 
-	protected void printPicWithCaptionNode(PicWithCaptionNode node) {
+	protected void print(PicWithCaptionNode picWithCaptionNode) {
 		printer.print("<p><img src=\"");
-		printer.print(node.getSrc());
+		printer.print(picWithCaptionNode.getSrc());
 		printer.print("\" alt=\"");
-		printer.print(node.getAlt());
+		printer.print(picWithCaptionNode.getAlt());
 		printer.print("\"/><p class=\"caption\">");
 
-		visitChildren(node);
+		visitChildren(picWithCaptionNode);
 
 		printer.print("</p></p>");
 	}
 
-	protected void printSidebarNode(SidebarNode node) {
+	protected void print(SidebarNode sidebarNode) {
 		printer.print("<p><img src=\"");
-		printer.print(node.getSrc());
+		printer.print(sidebarNode.getSrc());
 		printer.print("\" alt=\"");
-		printer.print(node.getAlt());
+		printer.print(sidebarNode.getAlt());
 		printer.print("\"/>");
 
-		visitChildren(node);
+		visitChildren(sidebarNode);
 
 		printer.print("</p>");
 	}
