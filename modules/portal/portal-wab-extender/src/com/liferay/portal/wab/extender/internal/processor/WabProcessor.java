@@ -87,7 +87,6 @@ import java.util.jar.Manifest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.depend.DependencyVisitor;
@@ -1082,7 +1081,7 @@ public class WabProcessor {
 	}
 
 	protected void writeFile(
-			File file, ZipOutputStream zipOutputStream, Set<String> paths,
+			File file, JarOutputStream jarOutputStream, Set<String> paths,
 			String path)
 		throws FileNotFoundException {
 
@@ -1091,7 +1090,7 @@ public class WabProcessor {
 		try {
 			inputStream = new FileInputStream(file);
 
-			writePath(inputStream, zipOutputStream, paths, path);
+			writeJarPath(inputStream, jarOutputStream, paths, path);
 		}
 		finally {
 			StreamUtil.cleanUp(inputStream);
@@ -1174,8 +1173,8 @@ public class WabProcessor {
 		}
 	}
 
-	protected void writePath(
-		InputStream inputStream, ZipOutputStream zipOutputStream,
+	protected void writeJarPath(
+		InputStream inputStream, JarOutputStream jarOutputStream,
 		Set<String> paths, String path) {
 
 		if (paths.contains(path)) {
@@ -1185,11 +1184,11 @@ public class WabProcessor {
 		paths.add(path);
 
 		try {
-			zipOutputStream.putNextEntry(new JarEntry(path));
+			jarOutputStream.putNextEntry(new JarEntry(path));
 
-			StreamUtil.transfer(inputStream, zipOutputStream, false);
+			StreamUtil.transfer(inputStream, jarOutputStream, false);
 
-			zipOutputStream.closeEntry();
+			jarOutputStream.closeEntry();
 		}
 		catch (IOException ioe) {
 			_log.error(ioe, ioe);
