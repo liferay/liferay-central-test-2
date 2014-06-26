@@ -59,7 +59,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 		printer.print(picWithCaptionNode.getSrc());
 		printer.print("\" alt=\"");
 		printer.print(picWithCaptionNode.getAlt());
-		printer.print("\"/><p class=\"caption\">");
+		printer.print("\" /><p class=\"caption\">");
 
 		visitChildren(picWithCaptionNode);
 
@@ -71,7 +71,7 @@ public class LiferayToHtmlSerializer extends ToHtmlSerializer {
 		printer.print(sidebarNode.getSrc());
 		printer.print("\" alt=\"");
 		printer.print(sidebarNode.getAlt());
-		printer.print("\"/>");
+		printer.print("\" />");
 
 		visitChildren(sidebarNode);
 
