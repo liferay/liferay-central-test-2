@@ -802,23 +802,25 @@ public class WabProcessor {
 		}
 
 		StringBundler sb = new StringBundler(
-			6 * requiredDeploymentContexts.size());
+			(6 * requiredDeploymentContexts.size()) - 1);
 
-		for (String requiredDeploymentContext : requiredDeploymentContexts) {
+		for (int i = 0; i < requiredDeploymentContexts.size(); i++) {
+			String requiredDeploymentContext = requiredDeploymentContexts.get(
+				i);
+
 			sb.append(requiredDeploymentContext);
+
 			sb.append(StringPool.SEMICOLON);
 			sb.append(Constants.BUNDLE_VERSION_ATTRIBUTE);
 			sb.append(StringPool.EQUAL);
 			sb.append(_bundleVersion);
-			sb.append(StringPool.COMMA);
+
+			if ((i + 1) < requiredDeploymentContexts.size()) {
+				sb.append(StringPool.COMMA);
+			}
 		}
 
-		String requiredBundles = sb.toString();
-
-		requiredBundles = requiredBundles.substring(
-			0, requiredBundles.length() - 1);
-
-		analyzer.setProperty(Constants.REQUIRE_BUNDLE, requiredBundles);
+		analyzer.setProperty(Constants.REQUIRE_BUNDLE, sb.toString());
 	}
 
 	protected void processServicePackageName(File file) {
