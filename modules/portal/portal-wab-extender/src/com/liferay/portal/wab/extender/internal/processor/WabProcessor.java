@@ -699,7 +699,7 @@ public class WabProcessor {
 		analyzer.setProperty(Constants.BUNDLE_MANIFESTVERSION, manifestVersion);
 	}
 
-	protected void processPackageNames(Analyzer analyzer) throws IOException {
+	protected void processPackageNames(Analyzer analyzer) {
 		processExportPackageNames(analyzer);
 		processImportPackageNames(analyzer);
 	}
