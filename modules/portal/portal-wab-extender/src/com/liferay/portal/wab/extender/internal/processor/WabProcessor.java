@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.MapUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.PropsKeys;
@@ -796,7 +797,7 @@ public class WabProcessor {
 		List<String> requiredDeploymentContexts =
 			_pluginPackage.getRequiredDeploymentContexts();
 
-		if (Validator.isNull(requiredDeploymentContexts)) {
+		if (ListUtil.isEmpty(requiredDeploymentContexts)) {
 			return;
 		}
 
