@@ -176,7 +176,7 @@ public class ClpSerializer {
 						}
 						catch (Throwable t) {
 							if (_log.isInfoEnabled()) {
-								_log.info("Cannot translate " + oldModelClassName);
+								_log.info("Unable to translate " + oldModelClassName, t);
 							}
 						}
 					}
