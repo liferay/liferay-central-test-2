@@ -128,7 +128,7 @@ public class WabProcessor {
 			new FileOutputStream(outputFile));
 
 		try {
-			writeFile(
+			writeJarPath(
 				getManifestFile(), jarOutputStream, _ignoredResources,
 				"META-INF/MANIFEST.MF");
 
@@ -1080,7 +1080,7 @@ public class WabProcessor {
 		writeManifest(manifest);
 	}
 
-	protected void writeFile(
+	protected void writeJarPath(
 			File file, JarOutputStream jarOutputStream, Set<String> paths,
 			String path)
 		throws FileNotFoundException {
@@ -1178,7 +1178,7 @@ public class WabProcessor {
 				continue;
 			}
 
-			writeFile(file, jarOutputStream, paths, path);
+			writeJarPath(file, jarOutputStream, paths, path);
 		}
 	}
 
