@@ -1122,6 +1122,28 @@ public class WabProcessor {
 		FileUtil.copyFile(file, new File(dir, sb.toString()));
 	}
 
+	protected void writeJarPath(
+		InputStream inputStream, JarOutputStream jarOutputStream,
+		Set<String> paths, String path) {
+
+		if (paths.contains(path)) {
+			return;
+		}
+
+		paths.add(path);
+
+		try {
+			jarOutputStream.putNextEntry(new JarEntry(path));
+
+			StreamUtil.transfer(inputStream, jarOutputStream, false);
+
+			jarOutputStream.closeEntry();
+		}
+		catch (IOException ioe) {
+			_log.error(ioe, ioe);
+		}
+	}
+
 	protected void writeJarPaths(
 			File dir, URI uri, JarOutputStream jarOutputStream,
 			Set<String> paths)
@@ -1170,28 +1192,6 @@ public class WabProcessor {
 		}
 		finally {
 			outputStream.close();
-		}
-	}
-
-	protected void writeJarPath(
-		InputStream inputStream, JarOutputStream jarOutputStream,
-		Set<String> paths, String path) {
-
-		if (paths.contains(path)) {
-			return;
-		}
-
-		paths.add(path);
-
-		try {
-			jarOutputStream.putNextEntry(new JarEntry(path));
-
-			StreamUtil.transfer(inputStream, jarOutputStream, false);
-
-			jarOutputStream.closeEntry();
-		}
-		catch (IOException ioe) {
-			_log.error(ioe, ioe);
 		}
 	}
 
