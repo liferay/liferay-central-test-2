@@ -37,9 +37,6 @@ public class LiferayPegDownConverter implements MarkdownConverter {
 		_liferayPegDownProcessor = new LiferayPegDownProcessor(liferayParser);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.liferay.markdown.converter.MarkdownConverter#convert(java.lang.String)
-	 */
 	@Override
 	public String convert(String markdown) {
 		String html = _liferayPegDownProcessor.markdownToHtml(
