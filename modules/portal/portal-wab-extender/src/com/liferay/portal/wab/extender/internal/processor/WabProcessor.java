@@ -129,12 +129,12 @@ public class WabProcessor {
 
 		try {
 			writeJarPath(
-				getManifestFile(), jarOutputStream, _ignoredResources,
-				"META-INF/MANIFEST.MF");
+				jarOutputStream, _ignoredResources, "META-INF/MANIFEST.MF",
+				getManifestFile());
 
 			writeJarPaths(
-				_pluginDir, _pluginDir.toURI(), jarOutputStream,
-				_ignoredResources);
+				jarOutputStream, _ignoredResources, _pluginDir,
+				_pluginDir.toURI());
 		}
 		finally {
 			jarOutputStream.close();
@@ -1106,8 +1106,8 @@ public class WabProcessor {
 	}
 
 	protected void writeJarPath(
-			File file, JarOutputStream jarOutputStream, Set<String> paths,
-			String path)
+			JarOutputStream jarOutputStream, Set<String> paths, String path,
+			File file)
 		throws FileNotFoundException {
 
 		InputStream inputStream = null;
@@ -1115,7 +1115,7 @@ public class WabProcessor {
 		try {
 			inputStream = new FileInputStream(file);
 
-			writeJarPath(inputStream, jarOutputStream, paths, path);
+			writeJarPath(jarOutputStream, paths, path, inputStream);
 		}
 		finally {
 			StreamUtil.cleanUp(inputStream);
@@ -1123,8 +1123,8 @@ public class WabProcessor {
 	}
 
 	protected void writeJarPath(
-		InputStream inputStream, JarOutputStream jarOutputStream,
-		Set<String> paths, String path) {
+		JarOutputStream jarOutputStream, Set<String> paths,
+		String path, InputStream inputStream) {
 
 		if (paths.contains(path)) {
 			return;
@@ -1145,8 +1145,8 @@ public class WabProcessor {
 	}
 
 	protected void writeJarPaths(
-			File dir, URI uri, JarOutputStream jarOutputStream,
-			Set<String> paths)
+			JarOutputStream jarOutputStream, Set<String> paths, File dir,
+			URI uri)
 		throws IOException {
 
 		for (File file : dir.listFiles()) {
@@ -1159,7 +1159,7 @@ public class WabProcessor {
 
 				jarOutputStream.closeEntry();
 
-				writeJarPaths(file, uri, jarOutputStream, paths);
+				writeJarPaths(jarOutputStream, paths, file, uri);
 
 				continue;
 			}
@@ -1178,7 +1178,7 @@ public class WabProcessor {
 				continue;
 			}
 
-			writeJarPath(file, jarOutputStream, paths, path);
+			writeJarPath(jarOutputStream, paths, path, file);
 		}
 	}
 
