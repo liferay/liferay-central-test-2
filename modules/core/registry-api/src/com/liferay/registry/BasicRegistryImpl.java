@@ -148,9 +148,9 @@ public class BasicRegistryImpl implements Registry {
 	public <T> T[] getServices(String className, String filterString)
 		throws Exception {
 
-		Filter filter = new BasicFilter(filterString);
-
 		List<T> services = new ArrayList<T>();
+
+		Filter filter = new BasicFilter(filterString);
 
 		for (Entry<ServiceReference<?>, Object> entry : _services.entrySet()) {
 			if (filter.matches(entry.getKey())) {
@@ -172,14 +172,14 @@ public class BasicRegistryImpl implements Registry {
 	public <T> ServiceRegistration<T> registerService(
 		Class<T> clazz, T service) {
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				clazz.getName(), _serviceIdCounter.incrementAndGet(), 0,
 				new HashMap<String, Object>());
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
@@ -192,28 +192,28 @@ public class BasicRegistryImpl implements Registry {
 			serviceRanking = new Integer(0);
 		}
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				clazz.getName(), _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
 	public <T> ServiceRegistration<T> registerService(
 		String className, T service) {
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				className, _serviceIdCounter.incrementAndGet(), 0,
 				new HashMap<String, Object>());
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
@@ -226,14 +226,14 @@ public class BasicRegistryImpl implements Registry {
 			serviceRanking = new Integer(0);
 		}
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				className, _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
@@ -248,14 +248,14 @@ public class BasicRegistryImpl implements Registry {
 
 		properties.put("objectClass", classNames);
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				classNames[0], _serviceIdCounter.incrementAndGet(), 0,
 				properties);
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
@@ -274,14 +274,14 @@ public class BasicRegistryImpl implements Registry {
 			serviceRanking = new Integer(0);
 		}
 
-		BasicServiceReference<T> dummyServiceReference =
+		BasicServiceReference<T> basicServiceReference =
 			new BasicServiceReference<T>(
 				classNames[0], _serviceIdCounter.incrementAndGet(),
 				serviceRanking.intValue(), properties);
 
-		doTrackers_addingService(dummyServiceReference, service);
+		doTrackers_addingService(basicServiceReference, service);
 
-		return new BasicServiceRegistration<T>(dummyServiceReference);
+		return new BasicServiceRegistration<T>(basicServiceReference);
 	}
 
 	@Override
@@ -463,47 +463,47 @@ public class BasicRegistryImpl implements Registry {
 	public class BasicServiceRegistration<S> implements ServiceRegistration<S> {
 
 		public BasicServiceRegistration(
-			BasicServiceReference<S> dummyServiceReference) {
+			BasicServiceReference<S> basicServiceReference) {
 
-			_dummyServiceReference = dummyServiceReference;
+			_basicServiceReference = basicServiceReference;
 		}
 
 		@Override
 		public ServiceReference<S> getServiceReference() {
-			return _dummyServiceReference;
+			return _basicServiceReference;
 		}
 
 		@Override
 		public void setProperties(Map<String, Object> properties) {
-			_dummyServiceReference._properties.putAll(properties);
+			_basicServiceReference._properties.putAll(properties);
 
 			BasicRegistryImpl.this.doTrackers_modifiedService(
-				_dummyServiceReference);
+				_basicServiceReference);
 		}
 
 		@Override
 		public void unregister() {
-			_services.remove(_dummyServiceReference);
+			_services.remove(_basicServiceReference);
 
 			BasicRegistryImpl.this.doTrackers_removedService(
-				_dummyServiceReference);
+				_basicServiceReference);
 		}
 
-		private BasicServiceReference<S> _dummyServiceReference;
+		private BasicServiceReference<S> _basicServiceReference;
 
 	}
 
 	private <S, T> void doTrackers_addingService(
-		BasicServiceReference<S> dummyServiceReference, S service) {
+		BasicServiceReference<S> basicServiceReference, S service) {
 
-		_services.put(dummyServiceReference, service);
+		_services.put(basicServiceReference, service);
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
 				_serviceTrackers.entrySet()) {
 
 			Filter filter = entry.getValue();
 
-			if (!filter.matches(dummyServiceReference)) {
+			if (!filter.matches(basicServiceReference)) {
 				continue;
 			}
 
@@ -511,7 +511,7 @@ public class BasicRegistryImpl implements Registry {
 				(ServiceTracker<S, T>)entry.getKey();
 
 			try {
-				serviceTracker.addingService(dummyServiceReference);
+				serviceTracker.addingService(basicServiceReference);
 			}
 			catch (Throwable t) {
 				t.printStackTrace();
@@ -520,28 +520,28 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	private <S, T> void doTrackers_modifiedService(
-		BasicServiceReference<S> dummyServiceReference) {
+		BasicServiceReference<S> basicServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
 				_serviceTrackers.entrySet()) {
 
 			Filter filter = entry.getValue();
 
-			if (!filter.matches(dummyServiceReference)) {
+			if (!filter.matches(basicServiceReference)) {
 				continue;
 			}
 
 			ServiceTracker<S, T> serviceTracker =
 				(ServiceTracker<S, T>)entry.getKey();
 
-			T tracked = serviceTracker.getService(dummyServiceReference);
+			T tracked = serviceTracker.getService(basicServiceReference);
 
 			if (tracked == null) {
 				continue;
 			}
 
 			try {
-				serviceTracker.modifiedService(dummyServiceReference, tracked);
+				serviceTracker.modifiedService(basicServiceReference, tracked);
 			}
 			catch (Throwable t) {
 				t.printStackTrace();
@@ -550,30 +550,30 @@ public class BasicRegistryImpl implements Registry {
 	}
 
 	private <S, T> void doTrackers_removedService(
-		BasicServiceReference<S> dummyServiceReference) {
+		BasicServiceReference<S> basicServiceReference) {
 
 		for (Map.Entry<ServiceTracker<?, ?>, Filter> entry :
 				_serviceTrackers.entrySet()) {
 
 			Filter filter = entry.getValue();
 
-			if (!filter.matches(dummyServiceReference)) {
+			if (!filter.matches(basicServiceReference)) {
 				continue;
 			}
 
 			ServiceTracker<S, T> serviceTracker =
 				(ServiceTracker<S, T>)entry.getKey();
 
-			T tracked = serviceTracker.getService(dummyServiceReference);
+			T tracked = serviceTracker.getService(basicServiceReference);
 
 			if (tracked == null) {
 				continue;
 			}
 
-			serviceTracker.remove(dummyServiceReference);
+			serviceTracker.remove(basicServiceReference);
 
 			try {
-				serviceTracker.removedService(dummyServiceReference, tracked);
+				serviceTracker.removedService(basicServiceReference, tracked);
 			}
 			catch (Throwable t) {
 				t.printStackTrace();
@@ -603,12 +603,12 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public boolean matches(ServiceReference<?> serviceReference) {
-			BasicServiceReference<?> dummyServiceReference =
+			BasicServiceReference<?> basicServiceReference =
 				(BasicServiceReference<?>)serviceReference;
 
 			UnmodifiableMapDictionary<String, Object> umMapDictionary =
 				new UnmodifiableMapDictionary<String, Object>(
-					dummyServiceReference._properties);
+					basicServiceReference._properties);
 
 			return _filter.match(umMapDictionary);
 		}
@@ -704,11 +704,11 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public T getService(ServiceReference<S> serviceReference) {
-			BasicServiceReference<S> dummyServiceReference =
+			BasicServiceReference<S> basicServiceReference =
 				(BasicServiceReference<S>)serviceReference;
 
 			for (ServiceReference<S> curServiceReference : _tracked.keySet()) {
-				if (dummyServiceReference.matches(curServiceReference)) {
+				if (basicServiceReference.matches(curServiceReference)) {
 					return _tracked.get(curServiceReference);
 				}
 			}
