@@ -14,7 +14,6 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.test.ExecutionTestListeners;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
@@ -58,7 +57,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithExtensionInFolderToFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -87,7 +86,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithExtensionInFolderToRootFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -109,7 +108,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithExtensionInRootFolderToFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -132,7 +131,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithoutExtensionInFolderToFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -161,7 +160,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithoutExtensionInFolderToRootFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -183,7 +182,7 @@ public class DLFileEntryServiceTest {
 
 	@Test
 	public void testCopyFileEntryWithoutExtensionInRootFolderToFolder()
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
@@ -205,7 +204,7 @@ public class DLFileEntryServiceTest {
 	}
 
 	protected DLFileEntry addDLFileEntry(long folderId, boolean appendExtension)
-		throws PortalException {
+		throws Exception {
 
 		ServiceContext serviceContext =
 			ServiceContextTestUtil.getServiceContext(_group.getGroupId());
