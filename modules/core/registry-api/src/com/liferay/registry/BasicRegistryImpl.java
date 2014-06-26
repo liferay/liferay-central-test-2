@@ -28,8 +28,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.NavigableMap;
-import java.util.NavigableSet;
 import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
@@ -496,27 +494,30 @@ public class BasicRegistryImpl implements Registry {
 			BasicServiceReference<?> otherServiceReference =
 				(BasicServiceReference<?>)serviceReference;
 
-			int thisRanking = (Integer)_properties.get("service.ranking");
-			int otherRanking = (Integer)otherServiceReference._properties.get(
+			int thisServiceRanking = (Integer)_properties.get("service.ranking");
+			
+			Map<String, Object> otherProperties =
+				otherServiceReference._properties;
+
+			int otherServiceRanking = (Integer)otherProperties.get(
 				"service.ranking");
 
-			if (thisRanking != otherRanking) {
-				if (thisRanking < otherRanking) {
+			if (thisServiceRanking != otherServiceRanking) {
+				if (thisServiceRanking < otherServiceRanking) {
 					return -1;
 				}
 
 				return 1;
 			}
 
-			long thisId = (Long)_properties.get("service.id");
-			long otherId = (Long)otherServiceReference._properties.get(
-				"service.id");
+			long thisServiceId = (Long)_properties.get("service.id");
+			long otherServiceId = (Long)otherProperties.get("service.id");
 
-			if (thisId == otherId) {
+			if (thisServiceId == otherServiceId) {
 				return 0;
 			}
 
-			if (thisId < otherId) {
+			if (thisServiceId < otherServiceId) {
 				return 1;
 			}
 
@@ -530,10 +531,9 @@ public class BasicRegistryImpl implements Registry {
 
 		@Override
 		public String[] getPropertyKeys() {
-			NavigableSet<String> navigableKeySet =
-				_properties.navigableKeySet();
+			Set<String> set = _properties.keySet();
 
-			return navigableKeySet.toArray(new String[navigableKeySet.size()]);
+			return set.toArray(new String[set.size()]);
 		}
 
 		public boolean matches(ServiceReference<?> serviceReference) {
@@ -587,8 +587,7 @@ public class BasicRegistryImpl implements Registry {
 			return stringBuilder.toString();
 		}
 
-		private NavigableMap<String, Object> _properties =
-			new LowerCaseKeyTreeMap();
+		private Map<String, Object> _properties = new LowerCaseKeyTreeMap();
 
 	}
 
